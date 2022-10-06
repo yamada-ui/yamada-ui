@@ -16,7 +16,7 @@ import {
   effect,
   border,
   others,
-} from 'configs'
+} from './'
 
 export const styles = {
   ...layout,

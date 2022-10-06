@@ -1,4 +1,4 @@
-import { createContext } from 'utils'
+import { createContext } from '../utils'
 
 export const [StylesProvider, useStyles] = createContext<any>({
   name: 'StylesContext',

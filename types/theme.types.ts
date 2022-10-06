@@ -1,6 +1,6 @@
-import { AnalyzeBreakpointsReturn } from 'functions'
-import { DefaultTheme } from 'themes'
-import { Dict, UIStyle, Union, Path } from 'types'
+import { AnalyzeBreakpointsReturn } from '../functions'
+import { DefaultTheme } from '../themes'
+import { Dict, UIStyle, Union, Path } from './'
 
 export type UITheme = {
   layerStyles: Union<Path<DefaultTheme['styles']['layerStyles']>>

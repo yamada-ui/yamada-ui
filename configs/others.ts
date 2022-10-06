@@ -1,6 +1,6 @@
-import { Configs } from 'configs'
-import { Dict, StringLiteral, Token } from 'types'
-import { getMemoizedObject as get } from 'utils'
+import { Dict, StringLiteral, Token } from '../types'
+import { getMemoizedObject as get } from '../utils'
+import { Configs } from './'
 
 const getPriority = (theme: any, token: any, css: any) => {
   const result: Dict = {}

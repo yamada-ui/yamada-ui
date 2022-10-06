@@ -1,11 +1,11 @@
 import { Global } from '@emotion/react'
 import { FC, ReactNode } from 'react'
-import { css } from 'functions'
-import { useScheme } from 'hooks'
-import { ThemeProvider, SchemeProvider } from 'providers'
-import { defaultTheme, resetStyle } from 'themes'
-import { Dict, StyledTheme } from 'types'
-import { getMemoizedObject as get, runIfFunc } from 'utils'
+import { css } from '../functions'
+import { useScheme } from '../hooks'
+import { defaultTheme, resetStyle } from '../themes'
+import { Dict, StyledTheme } from '../types'
+import { getMemoizedObject as get, runIfFunc } from '../utils'
+import { ThemeProvider, SchemeProvider } from './'
 
 export type UIProviderProps = {
   theme?: Dict

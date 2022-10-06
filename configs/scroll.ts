@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
-import { Configs, configs } from 'configs'
-import { Token } from 'types'
+import { Token } from '../types'
+import { Configs, configs } from './'
 
 export const scroll: Configs = {
   scrollBehavior: true,

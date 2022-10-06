@@ -1,4 +1,4 @@
-import { CSSUIProps } from 'types'
+import { CSSUIProps } from '../types'
 
 export type Pseudos = typeof pseudos
 

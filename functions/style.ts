@@ -1,4 +1,4 @@
-import { styles, pseudos } from 'configs'
+import { styles, pseudos } from '../configs'
 
 const styleProps = { ...styles, ...pseudos }
 

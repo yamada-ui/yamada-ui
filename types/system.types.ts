@@ -1,5 +1,5 @@
 import { CSSObject } from '@emotion/styled'
-import { CSSUIProps, As, UIComponent, StyledTheme, Dict } from 'types'
+import { CSSUIProps, As, UIComponent, StyledTheme, Dict } from './'
 
 export type FunctionCSSInterpolation = { (theme: StyledTheme<Dict>): CSSUIProps }
 

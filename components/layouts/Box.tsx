@@ -1,3 +1,3 @@
-import { ui } from 'system'
+import { ui } from '../../system'
 
 export const Box = ui('div')

@@ -18,6 +18,7 @@
     "import/named": "off",
     "import/no-anonymous-default-export": "off",
     "@next/next/no-img-element": "off",
+    "@next/next/no-title-in-document-head": "off",
     "react-hooks/rules-of-hooks": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/restrict-template-expressions": "off",

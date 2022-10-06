@@ -5,7 +5,7 @@ import {
   ValidationMap,
   WeakValidationMap,
 } from 'react'
-import { DOMElements, CSSUIProps } from 'types'
+import { DOMElements, CSSUIProps } from './'
 
 export type UIProps = CSSUIProps & {
   isTruncated?: boolean

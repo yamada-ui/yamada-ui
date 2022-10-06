@@ -1,6 +1,6 @@
 import { createContext, FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
-import { SchemeManager, localStorageManager, rootManager } from 'providers'
-import { createdDom, noop } from 'utils'
+import { createdDom, noop } from '../../utils'
+import { SchemeManager, localStorageManager, rootManager } from './'
 
 export type Scheme = 'light' | 'dark'
 

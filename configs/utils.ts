@@ -1,7 +1,7 @@
-import { Transform } from 'configs'
-import { ThemeToken } from 'functions'
-import { Dict, StyledTheme, Theme } from 'types'
-import { isArray, isObject, isString } from 'utils'
+import { ThemeToken } from '../functions'
+import { Dict, StyledTheme, Theme } from '../types'
+import { isArray, isObject, isString } from '../utils'
+import { Transform } from './'
 
 const directions: Record<string, string> = {
   'to-t': 'to top',

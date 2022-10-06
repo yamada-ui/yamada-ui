@@ -1,5 +1,5 @@
-import { Dict } from 'types'
-import { isObject, isArray } from 'utils'
+import { Dict } from '../types'
+import { isObject, isArray } from './'
 
 export const omitObject = <T extends Dict, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> => {
   const result: Dict = {}

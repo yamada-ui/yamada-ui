@@ -1,4 +1,4 @@
-import { Scheme } from 'providers'
+import { Scheme } from './'
 
 export const setScript = (initialScheme: Scheme | 'system') => {
   const mql = window.matchMedia('(prefers-color-scheme: dark)')

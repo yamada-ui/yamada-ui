@@ -1,7 +1,7 @@
-import { Dict, ExtendTheme, StyledTheme, Union } from 'types'
-import { analyzeBreakpoints, createVars } from 'functions'
-import { flattenObject, merge, objectFromEntries, pickObject } from 'utils'
-import { defaultTheme } from 'themes'
+import { Dict, ExtendTheme, StyledTheme, Union } from '../types'
+import { analyzeBreakpoints, createVars } from '../functions'
+import { flattenObject, merge, objectFromEntries, pickObject } from '../utils'
+import { defaultTheme } from '../themes'
 
 export type SemanticValue<
   Y extends string,

@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
-import { Configs, configs, transforms } from 'configs'
-import { StringLiteral, Token } from 'types'
+import { StringLiteral, Token } from '../types'
+import { Configs, configs, transforms } from './'
 
 export const typography: Configs = {
   fontFamily: configs.prop('fontFamily', 'fonts'),

@@ -1,5 +1,5 @@
-import { styled } from 'system'
-import { UIFactory, DOMElements, StyledOptions, HTMLUIComponents, UIComponent } from 'types'
+import { UIFactory, DOMElements, StyledOptions, HTMLUIComponents, UIComponent } from '../types'
+import { styled } from './'
 
 const factory = () => {
   const cache = new Map<DOMElements, UIComponent<DOMElements>>()

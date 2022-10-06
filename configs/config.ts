@@ -1,15 +1,9 @@
 import { CSSObject } from '@emotion/react'
 import * as CSS from 'csstype'
-import {
-  analyzeCSSValue,
-  isCSSFunction,
-  tokenToCSSVar,
-  createGradient,
-  globalValues,
-} from 'configs'
-import { ThemeToken } from 'functions'
-import { Union, StyledTheme, Dict } from 'types'
-import { isNumber } from 'utils'
+import { ThemeToken } from '../functions'
+import { Union, StyledTheme, Dict } from '../types'
+import { isNumber } from '../utils'
+import { analyzeCSSValue, isCSSFunction, tokenToCSSVar, createGradient, globalValues } from './'
 
 type CSSProperties = Union<keyof CSS.Properties>
 

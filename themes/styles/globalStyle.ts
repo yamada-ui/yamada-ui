@@ -1,4 +1,4 @@
-import { UIStyle } from 'types'
+import { UIStyle } from '../../types'
 
 export const globalStyle: UIStyle = () => ({
   body: {

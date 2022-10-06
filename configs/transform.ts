@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
-import { Configs } from 'configs'
-import { Token } from 'types'
+import { Token } from '../types'
+import { Configs } from './'
 
 export const transform: Configs = {
   clipPath: true,

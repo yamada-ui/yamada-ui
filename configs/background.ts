@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
-import { Configs, configs, transforms } from 'configs'
-import { Token } from 'types'
+import { Token } from '../types'
+import { Configs, configs, transforms } from './'
 
 export const background: Configs = {
   background: configs.color('background'),

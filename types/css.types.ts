@@ -18,9 +18,9 @@ import {
   BorderProps,
   OthersProps,
   PseudosProps,
-} from 'configs'
-import { Scheme } from 'providers'
-import { Theme, StyledTheme, Dict } from 'types'
+} from '../configs'
+import { Scheme } from '../providers'
+import { Theme, StyledTheme, Dict } from './'
 
 export type SchemeArray<Y> = [Y, Y]
 

@@ -1,7 +1,7 @@
-import { VarTokens, SemanticValue } from 'functions'
-import { escape, isObject, merge, calc } from 'utils'
-import { Pseudos, pseudos } from 'configs'
-import { CSSMap, Dict } from 'types'
+import { VarTokens, SemanticValue } from '../functions'
+import { escape, isObject, merge, calc } from '../utils'
+import { Pseudos, pseudos } from '../configs'
+import { CSSMap, Dict } from '../types'
 
 type Var = {
   variable: string

@@ -54,6 +54,20 @@ const Index: FC = () => {
           aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
           dolorum. Quaerat, totam magni. Atque, unde?
         </Box>
+
+        <Box
+          w='full'
+          p='lg'
+          rounded='lg'
+          bg='warning'
+          cursor='pointer'
+          animation={[state ? fadeIn : null, !state ? fadeOut : null]}
+          onClick={() => setState((prev) => !prev)}
+        >
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, voluptas eum. Saepe neque
+          aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
+          dolorum. Quaerat, totam magni. Atque, unde?
+        </Box>
       </Box>
     </>
   )

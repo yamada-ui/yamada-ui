@@ -4,8 +4,8 @@ import {
   ThemeProviderProps as EmotionThemeProviderProps,
 } from '@emotion/react'
 import { FC, useMemo } from 'react'
-import { transformTheme } from 'functions'
-import { Dict } from 'types'
+import { transformTheme } from '../functions'
+import { Dict } from '../types'
 
 export type ThemeProviderProps = EmotionThemeProviderProps
 

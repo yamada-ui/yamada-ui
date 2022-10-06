@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
-import { useTheme } from 'hooks'
-import { Theme } from 'types'
-import { createdDom } from 'utils'
+import { useTheme } from '../hooks'
+import { Theme } from '../types'
+import { createdDom } from '../utils'
 
 export const useBreakpoint = () => {
   const theme = useTheme()

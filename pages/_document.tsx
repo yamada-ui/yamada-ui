@@ -5,7 +5,9 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html lang='ja'>
-        <Head></Head>
+        <Head>
+          <title>Yamada UI</title>
+        </Head>
 
         <body>
           {/* <SchemeScript /> */}

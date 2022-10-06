@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-// import { SchemeScript } from 'ui'
+// import { SchemeScript } from 'provider'
 
 export default class Document extends NextDocument {
   render() {

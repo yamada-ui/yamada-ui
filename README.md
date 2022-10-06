@@ -2,7 +2,7 @@
 
 ## Branch
 
-`master` This is a product branch.
+`main` This is a product branch.
 `hotfix` This is a branch for urgent fixes.
 `system` This is a branch that fixes the core of yamada-ui.
 `dev` This is a branch that primarily develops.

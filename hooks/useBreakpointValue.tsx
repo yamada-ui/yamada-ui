@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useBreakpoint } from 'hooks'
-import { Theme, Union } from 'types'
+import { useBreakpoint } from '../hooks'
+import { Theme } from '../types'
 
 export const useBreakpointValue = <T extends any>(
   values: Record<'base' | Theme['breakpoints'], T>,

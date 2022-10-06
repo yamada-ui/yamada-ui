@@ -1,8 +1,8 @@
-import emotionStyled, { FunctionInterpolation } from '@emotion/styled'
+import emotionStyled, { CSSObject, FunctionInterpolation } from '@emotion/styled'
 import { ComponentType } from 'react'
-import { css, isPropStyle } from 'functions'
-import { StyledOptions, Dict, UIComponent, StyledResolverProps, As, CSSUIProps } from 'types'
-import { filterObject, isArray, runIfFunc } from 'utils'
+import { css, isPropStyle } from '../functions'
+import { StyledOptions, Dict, UIComponent, StyledResolverProps, As, CSSUIProps } from '../types'
+import { filterObject, isArray, runIfFunc } from '../utils'
 
 export type BaseStyle = CSSUIProps | ((props: StyledResolverProps) => CSSUIProps)
 
@@ -24,7 +24,7 @@ export const toCSSObject: ToCSSObject =
     if (customCSS) result = [...result, customCSS]
 
     if (isArray(animation)) {
-      result = [...result, ...animation]
+      result = [...result, ...(animation.filter(Boolean) as CSSObject[])]
     } else if (animation) {
       result = [...result, animation]
     }

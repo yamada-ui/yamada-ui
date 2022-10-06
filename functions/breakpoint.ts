@@ -1,5 +1,5 @@
-import { Dict } from 'types'
-import { keysFormObject, createdDom } from 'utils'
+import { Dict } from '../types'
+import { keysFormObject, createdDom } from '../utils'
 
 export type BreakpointQuery = {
   breakpoint: string

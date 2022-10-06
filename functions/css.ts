@@ -1,7 +1,7 @@
-import { CSSObjectOrFunc, CSSUIObject, CSSUIProps, Dict, StyledTheme, Theme } from 'types'
-import { isArray, isObject, merge, runIfFunc } from 'utils'
-import { styles, pseudos, ConfigProps } from 'configs'
-import { BreakpointQueries } from 'functions'
+import { CSSObjectOrFunc, CSSUIObject, CSSUIProps, Dict, StyledTheme, Theme } from '../types'
+import { isArray, isObject, merge, runIfFunc } from '../utils'
+import { styles, pseudos, ConfigProps } from '../configs'
+import { BreakpointQueries } from '../functions'
 
 const expandScheme = (key: string, value: any[]): Dict => ({
   [key]: value[0],

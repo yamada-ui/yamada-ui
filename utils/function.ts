@@ -1,4 +1,4 @@
-import { isFunction } from 'utils'
+import { isFunction } from './'
 
 export const noop = () => {}
 

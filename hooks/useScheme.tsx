@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { SchemeContext } from 'providers'
+import { SchemeContext } from '../providers'
 
 export const useScheme = () => {
   const context = useContext(SchemeContext)

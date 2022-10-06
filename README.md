@@ -1,4 +1,4 @@
-# Online Reversi
+# Yamada UI
 
 ## Branch
 

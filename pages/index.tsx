@@ -54,12 +54,6 @@ const Index: FC = () => {
           aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
           dolorum. Quaerat, totam magni. Atque, unde?
         </Box>
-
-        <Box w='full' p='lg' rounded='lg' bg='danger'>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, voluptas eum. Saepe neque
-          aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
-          dolorum. Quaerat, totam magni. Atque, unde?
-        </Box>
       </Box>
     </>
   )

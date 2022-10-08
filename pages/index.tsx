@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Box } from 'components'
+import { Box, Flex } from 'components'
 import { animation } from 'functions'
 import { useScheme, useBreakpoint } from 'hooks'
 
@@ -40,7 +40,7 @@ const Index: FC = () => {
 
   return (
     <>
-      <Box display='flex' justifyContent='stretch' p='lg' gap='lg'>
+      <Flex p='lg' gap='lg'>
         <Box
           w='full'
           p='lg'
@@ -68,7 +68,7 @@ const Index: FC = () => {
           aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
           dolorum. Quaerat, totam magni. Atque, unde?
         </Box>
-      </Box>
+      </Flex>
     </>
   )
 }

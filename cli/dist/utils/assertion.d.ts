@@ -1,0 +1,9 @@
+export declare const isNumber: (value: any) => value is number;
+export declare const isNotNumber: (value: any) => boolean;
+export declare const isNumeric: (value: any) => boolean;
+export declare const isString: (value: any) => value is string;
+export declare const isUndefined: (value: any) => value is undefined;
+export declare const isNull: (value: any) => value is null;
+export declare const isObject: <T extends unknown>(obj: any) => obj is T;
+export declare const isArray: <T>(value: any) => value is T[];
+export declare function isFunction<T extends Function = Function>(value: any): value is T;

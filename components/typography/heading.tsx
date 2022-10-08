@@ -1,0 +1,13 @@
+import { useComponentStyle, omitThemeProps } from '../../functions'
+import { ui, forwordRef } from '../../system'
+import { HTMLUIProps, ThemeProps } from '../../types'
+import { cx } from '../../utils'
+
+export type HeadingProps = HTMLUIProps<'h1'> & ThemeProps<'Heading'>
+
+export const Heading = forwordRef<HeadingProps, 'h1'>((props, ref) => {
+  const css = useComponentStyle('Heading', props)
+  const { className, ...rest } = omitThemeProps(props)
+
+  return <ui.h1 ref={ref} className={cx('ui-heading', className)} __css={css} {...rest} />
+})

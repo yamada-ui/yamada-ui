@@ -1,5 +1,5 @@
 export * from './Box'
-// export * from './Flex'
+export * from './Flex'
 // export * from './VStack'
 // export * from './HStack'
 // export * from './Spacer'

@@ -22,11 +22,11 @@
 
 ## Use
 
-- Next.js
-- TypeScript
-- Fortawesome
-- emotion/react
-- emotion/styled
-- babel
-- ESLint
-- Prettier
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Fortawesome](https://fontawesome.com/)
+- [emotion/react](https://emotion.sh/docs/@emotion/react)
+- [emotion/styled](https://emotion.sh/docs/@emotion/styled)
+- [babel](https://babeljs.io/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)

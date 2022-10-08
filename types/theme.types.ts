@@ -3,21 +3,21 @@ import { DefaultTheme } from '../themes'
 import { Dict, UIStyle, Union, Path } from './'
 
 export type UITheme = {
-  layerStyles: Union<Path<DefaultTheme['styles']['layerStyles']>>
-  textStyles: Union<Path<DefaultTheme['styles']['textStyles']>>
-  borders: Union<Path<DefaultTheme['borders']>>
-  colors: Union<Path<DefaultTheme['colors']>>
-  breakpoints: Union<Path<DefaultTheme['breakpoints']>>
-  fonts: Union<Path<DefaultTheme['fonts']>>
-  fontSizes: Union<Path<DefaultTheme['fontSizes']>>
-  fontWeights: Union<Path<DefaultTheme['fontWeights']>>
-  letterSpacings: Union<Path<DefaultTheme['letterSpacings']>>
-  lineHeights: Union<Path<DefaultTheme['lineHeights']>>
-  radii: Union<Path<DefaultTheme['radii']>>
-  shadows: Union<Path<DefaultTheme['shadows']>>
-  sizes: Union<Path<DefaultTheme['sizes']>>
-  spaces: Union<Path<DefaultTheme['spaces']>>
-  zIndices: Union<Path<DefaultTheme['zIndices']>>
+  layerStyles: Path<DefaultTheme['styles']['layerStyles']>
+  textStyles: Path<DefaultTheme['styles']['textStyles']>
+  borders: Path<DefaultTheme['borders']>
+  colors: Path<DefaultTheme['colors']>
+  breakpoints: Path<DefaultTheme['breakpoints']>
+  fonts: Path<DefaultTheme['fonts']>
+  fontSizes: Path<DefaultTheme['fontSizes']>
+  fontWeights: Path<DefaultTheme['fontWeights']>
+  letterSpacings: Path<DefaultTheme['letterSpacings']>
+  lineHeights: Path<DefaultTheme['lineHeights']>
+  radii: Path<DefaultTheme['radii']>
+  shadows: Path<DefaultTheme['shadows']>
+  sizes: Path<DefaultTheme['sizes']>
+  spaces: Path<DefaultTheme['spaces']>
+  zIndices: Path<DefaultTheme['zIndices']>
   components: {
     [key: string]: {
       sizes: string

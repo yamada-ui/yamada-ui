@@ -1,6 +1,6 @@
-import { Dict, ExtendTheme, StyledTheme, Union } from '../types'
+import { Dict, ExtendTheme, StyledTheme, Union, ThemeProps } from '../types'
 import { analyzeBreakpoints, createVars } from '../functions'
-import { flattenObject, merge, objectFromEntries, pickObject } from '../utils'
+import { flattenObject, merge, objectFromEntries, pickObject, omitObject } from '../utils'
 import { defaultTheme } from '../themes'
 
 export type SemanticValue<
@@ -89,10 +89,10 @@ const createTokens = (theme: Dict): VarTokens => {
   return objectFromEntries<VarTokens>([...defaultTokenEntries, ...semanticTokenEntries])
 }
 
-const omitTheme = (theme: Dict): Dict => {
-  const { __cssMap, __cssVars, __breakpoints, ...rest } = theme
+const omitTheme = (theme: Dict): Dict =>
+  omitObject(theme, ['__cssMap', '__cssVar', '__breakpoints'])
 
-  return rest
-}
+export const omitThemeProps = <T extends ThemeProps>(props: T) =>
+  omitObject(props, ['size', 'variant'])
 
 export const extendTheme = (extendTheme: ExtendTheme): Dict => merge(defaultTheme, extendTheme)

@@ -18,6 +18,7 @@
 
 ```
 1. yarn dev
+2. open http://localhost:4444
 ```
 
 ## Use

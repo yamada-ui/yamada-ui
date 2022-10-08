@@ -4,12 +4,14 @@
   "engines": {
     "node": "16"
   },
+  "license": "MIT",
   "scripts": {
     "dev": "next -p 4444",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "tokens": "node cli"
+    "cli": "node cli",
+    "tokens": "node cli tokens ./themes/index.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",

@@ -92,4 +92,4 @@ export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
 export type CSSUIProps<Y = 'responsive', M = 'scheme'> = StylesProps<Y, M> & PseudosProps<Y, M>
 
-export type UIStyle = CSSUIObject | ((theme: Dict, scheme?: Scheme) => CSSUIObject)
+export type UIStyle = CSSUIObject | ((theme: StyledTheme<Dict>, scheme?: Scheme) => CSSUIObject)

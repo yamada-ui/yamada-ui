@@ -1,13 +1,19 @@
+import { Interpolation } from '@emotion/react'
 import { CSSObject } from '@emotion/styled'
 import * as React from 'react'
-import { DOMElements, CSSUIProps, StylesProps } from './'
+import { DOMElements, CSSUIProps, CSSUIObject, StylesProps, Theme } from './'
+
+export type ThemeProps<Y extends string = any> = {
+  variant?: Y extends keyof Theme['components'] ? Theme['components'][Y]['variants'] : string
+  size?: Y extends keyof Theme['components'] ? Theme['components'][Y]['sizes'] : string
+}
 
 export type UIProps = CSSUIProps & {
   isTruncated?: boolean
-  __css?: CSSUIProps
-  __sx?: CSSUIProps
+  __css?: CSSUIObject
+  __sx?: CSSUIObject
   animation?: CSSObject | null | undefined | (CSSObject | null | undefined)[]
-  css?: CSSObject
+  css?: Interpolation<{}>
 }
 
 export type OmitProps<Y, M extends keyof any = never> = Omit<

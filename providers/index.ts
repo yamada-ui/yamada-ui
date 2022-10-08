@@ -1,3 +1,3 @@
-export * from './ThemeProvider'
+export * from './themeProvider'
 export * from './UIProvider'
-export * from './SchemeProvider'
+export * from './schemeProvider'

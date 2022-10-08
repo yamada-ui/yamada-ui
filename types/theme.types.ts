@@ -1,6 +1,5 @@
 import { AnalyzeBreakpointsReturn } from '../functions'
-import { DefaultTheme } from '../themes'
-import { Dict, UIStyle, Path } from './'
+import { Dict, UIStyle, GeneratedTheme } from './'
 
 export type UITheme = {
   layerStyles: string
@@ -22,30 +21,6 @@ export type UITheme = {
     [key: string]: {
       sizes: string
       variants: string
-    }
-  }
-}
-
-export type BaseTheme = {
-  layerStyles: Path<DefaultTheme['styles']['layerStyles']>
-  textStyles: Path<DefaultTheme['styles']['textStyles']>
-  borders: Path<DefaultTheme['borders']>
-  colors: Path<DefaultTheme['colors']>
-  breakpoints: Path<DefaultTheme['breakpoints']>
-  fonts: Path<DefaultTheme['fonts']>
-  fontSizes: Path<DefaultTheme['fontSizes']>
-  fontWeights: Path<DefaultTheme['fontWeights']>
-  letterSpacings: Path<DefaultTheme['letterSpacings']>
-  lineHeights: Path<DefaultTheme['lineHeights']>
-  radii: Path<DefaultTheme['radii']>
-  shadows: Path<DefaultTheme['shadows']>
-  sizes: Path<DefaultTheme['sizes']>
-  spaces: Path<DefaultTheme['spaces']>
-  zIndices: Path<DefaultTheme['zIndices']>
-  components: {
-    [K in keyof DefaultTheme['components']]: {
-      sizes: keyof DefaultTheme['components'][K]['sizes']
-      variants: keyof DefaultTheme['components'][K]['variants']
     }
   }
 }
@@ -84,7 +59,7 @@ export type CSSMap = Dict<{ value: any; var: string; ref: string }>
 
 export type CustomTheme = {}
 
-export type Theme = CustomTheme extends UITheme ? CustomTheme : BaseTheme
+export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
 export type StyledTheme<T> = T & {
   __cssVars: Dict

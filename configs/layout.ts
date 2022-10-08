@@ -46,7 +46,7 @@ Object.assign(layout, {
 })
 
 export type LayoutProps<Y = 'responsive', M = 'scheme'> = {
-  display?: Token<CSS.Property.Display>
+  display?: Token<CSS.Property.Display, unknown, Y, M>
   width?: Token<CSS.Property.Width | number, 'sizes', Y, M>
   w?: Token<CSS.Property.Width | number, 'sizes', Y, M>
   inlineSize?: Token<CSS.Property.InlineSize | number, 'sizes', Y, M>
@@ -67,20 +67,20 @@ export type LayoutProps<Y = 'responsive', M = 'scheme'> = {
   minH?: Token<CSS.Property.MinHeight | number, 'sizes', Y, M>
   minBlockSize?: Token<CSS.Property.MinBlockSize | number, 'sizes', Y, M>
   verticalAlign?: Token<CSS.Property.VerticalAlign | number, Y, M>
-  overflow?: Token<CSS.Property.Overflow, Y, M>
-  overflowX?: Token<CSS.Property.OverflowX, Y, M>
-  overflowY?: Token<CSS.Property.OverflowY, Y, M>
-  boxSizing?: CSS.Property.BoxSizing
-  boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak, Y, M>
-  float?: Token<CSS.Property.Float, Y, M>
-  objectFit?: Token<CSS.Property.ObjectFit, Y, M>
-  objectPosition?: Token<CSS.Property.ObjectPosition | number, Y, M>
-  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior, Y, M>
-  overscroll?: Token<CSS.Property.OverscrollBehavior, Y, M>
-  overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX, Y, M>
-  overscrollX?: Token<CSS.Property.OverscrollBehaviorX, Y, M>
-  overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY, Y, M>
-  overscrollY?: Token<CSS.Property.OverscrollBehaviorY, Y, M>
-  visibility?: Token<CSS.Property.Visibility, Y, M>
-  isolation?: Token<CSS.Property.Isolation, Y, M>
+  overflow?: Token<CSS.Property.Overflow, unknown, Y, M>
+  overflowX?: Token<CSS.Property.OverflowX, unknown, Y, M>
+  overflowY?: Token<CSS.Property.OverflowY, unknown, Y, M>
+  boxSizing?: Token<CSS.Property.BoxSizing, unknown, Y, M>
+  boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak, unknown, Y, M>
+  float?: Token<CSS.Property.Float, unknown, Y, M>
+  objectFit?: Token<CSS.Property.ObjectFit, unknown, Y, M>
+  objectPosition?: Token<CSS.Property.ObjectPosition | number, unknown, Y, M>
+  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior, unknown, Y, M>
+  overscroll?: Token<CSS.Property.OverscrollBehavior, unknown, Y, M>
+  overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX, unknown, Y, M>
+  overscrollX?: Token<CSS.Property.OverscrollBehaviorX, unknown, Y, M>
+  overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY, unknown, Y, M>
+  overscrollY?: Token<CSS.Property.OverscrollBehaviorY, unknown, Y, M>
+  visibility?: Token<CSS.Property.Visibility, unknown, Y, M>
+  isolation?: Token<CSS.Property.Isolation, unknown, Y, M>
 }

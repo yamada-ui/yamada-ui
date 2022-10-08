@@ -8,7 +8,8 @@
     "dev": "next -p 4444",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tokens": "node cli"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",

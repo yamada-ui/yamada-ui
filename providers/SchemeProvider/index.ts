@@ -1,3 +1,3 @@
-export * from './SchemeProvider'
-export * from './SchemeManager'
-export * from './SchemeScript'
+export * from './schemeProvider'
+export * from './schemeManager'
+export * from './schemeScript'

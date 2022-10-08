@@ -27,6 +27,7 @@
 - [Fortawesome](https://fontawesome.com/)
 - [emotion/react](https://emotion.sh/docs/@emotion/react)
 - [emotion/styled](https://emotion.sh/docs/@emotion/styled)
+- [react-fast-compare](https://www.npmjs.com/package/react-fast-compare)
 - [babel](https://babeljs.io/)
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)

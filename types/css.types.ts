@@ -20,7 +20,7 @@ import {
   PseudosProps,
 } from '../configs'
 import { Scheme } from '../providers'
-import { Theme, StyledTheme, Dict } from './'
+import { Theme, StyledTheme, Dict, Union } from './'
 
 export type SchemeArray<Y> = [Y, Y]
 
@@ -29,9 +29,12 @@ export type ResponsiveObject<Y> = Partial<Record<Theme['breakpoints'], Y>>
 export type Token<Y, M = unknown, D = 'responsive', H = 'scheme'> = M extends keyof Theme
   ? D extends 'responsive'
     ? H extends 'scheme'
-      ? ResponsiveObject<Y | Theme[M]> | SchemeArray<Y | Theme[M]> | Y | Theme[M]
-      : ResponsiveObject<Y | Theme[M]> | Y | Theme[M]
-    : Y | Theme[M]
+      ?
+          | ResponsiveObject<Union<Y | Theme[M]>>
+          | SchemeArray<Union<Y | Theme[M]>>
+          | Union<Y | Theme[M]>
+      : ResponsiveObject<Union<Y | Theme[M]>> | Union<Y | Theme[M]>
+    : Union<Y | Theme[M]>
   : D extends 'responsive'
   ? H extends 'scheme'
     ? ResponsiveObject<Y> | SchemeArray<Y> | Y

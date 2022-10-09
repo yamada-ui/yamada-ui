@@ -23,7 +23,7 @@ export const Flex = forwordRef<FlexProps, 'div'>(
       basis: flexBasis,
       grow: flexGrow,
       shrink: flexShrink,
-      ...props
+      ...rest
     },
     ref,
   ) => {
@@ -38,6 +38,7 @@ export const Flex = forwordRef<FlexProps, 'div'>(
       flexShrink,
     }
 
-    return <ui.div ref={ref} __css={css} {...props} />
+    // @ts-ignore
+    return <ui.div ref={ref} __css={css} {...rest} />
   },
 )

@@ -1,7 +1,7 @@
 import { cloneElement, Fragment, ReactElement, useMemo } from 'react'
-import { ui, forwordRef } from '../../system'
+import { ui, forwardRef } from '../../system'
 import { HTMLUIProps, CSSUIProps } from '../../types'
-import { getValidChildren } from '../../utils'
+import { getValidChildren, cx, replaceObject } from '../../utils'
 
 type StackOptions = {
   direction?: CSSUIProps['flexDirection']
@@ -13,7 +13,7 @@ type StackOptions = {
 
 export type StackProps = HTMLUIProps<'div'> & StackOptions
 
-export const VStack = forwordRef<StackProps, 'div'>(
+export const Stack = forwardRef<StackProps, 'div'>(
   (
     {
       direction: flexDirection = 'column',
@@ -28,50 +28,48 @@ export const VStack = forwordRef<StackProps, 'div'>(
     },
     ref,
   ) => {
-    const dividerCSS = useMemo(() => {
-      switch (flexDirection) {
-        case 'column':
-        case 'column-reverse':
-          return {
-            borderLeftWidth: '0px',
-            borderBottomWidth: '1px',
-          }
+    const isColumn = (value: any) => value === 'column' || value === 'column-reverse'
 
-        default:
-          return {
-            borderLeftWidth: '1px',
-            borderBottomWidth: '0px',
-          }
-      }
-    }, [flexDirection])
+    const dividerCSS = useMemo(
+      () => ({
+        w: replaceObject(flexDirection, (value) => (isColumn(value) ? '100%' : 'fix-content')),
+        h: replaceObject(flexDirection, (value) => (isColumn(value) ? 'fix-content' : '100%')),
+        borderLeftWidth: replaceObject(flexDirection, (value) => (isColumn(value) ? 0 : '1px')),
+        borderBottomWidth: replaceObject(flexDirection, (value) => (isColumn(value) ? '1px' : 0)),
+      }),
+      [flexDirection],
+    )
 
     const validChildren = getValidChildren(children)
 
     const clones = divider
-      ? validChildren.map(({ key, ...child }, index) => {
-          key = typeof key !== 'undefined' ? key : index
+      ? validChildren.map((child, index) => {
+          const key = typeof child.key !== 'undefined' ? child.key : index
 
-          const clonedDivider = cloneElement(divider as React.ReactElement<any>, {
+          const cloneDivider = cloneElement(divider as React.ReactElement<any>, {
             __css: dividerCSS,
           })
 
           return (
             <Fragment key={key}>
-              {!!index ? divider : null}
+              {!!index ? cloneDivider : null}
               {child}
             </Fragment>
           )
         })
       : validChildren
 
-    const css = {
-      display: 'flex',
-      flexDirection,
-      justifyContent,
-      alignItems,
-      flexWrap,
-      gap,
-    }
+    const css = useMemo(
+      () => ({
+        display: 'flex',
+        flexDirection,
+        justifyContent,
+        alignItems,
+        flexWrap,
+        gap,
+      }),
+      [alignItems, flexDirection, flexWrap, gap, justifyContent],
+    )
 
     return (
       // @ts-ignore
@@ -81,3 +79,11 @@ export const VStack = forwordRef<StackProps, 'div'>(
     )
   },
 )
+
+export const HStack = forwardRef<StackProps, 'div'>((props, ref) => (
+  <Stack align='center' {...props} direction='row' ref={ref} />
+))
+
+export const VStack = forwardRef<StackProps, 'div'>((props, ref) => (
+  <Stack align='stretch' {...props} direction='column' ref={ref} />
+))

@@ -1,3 +1,5 @@
+import { Container } from './container'
+import { Divider } from './divider'
 import { Heading } from './heading'
 
-export default { Heading }
+export default { Container, Divider, Heading }

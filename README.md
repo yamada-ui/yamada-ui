@@ -1,37 +1,35 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/public/yamada-ui.png?raw=true" alt="Yamada UI" width="300" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/public/yamada-ui.png?raw=true" alt="Yamada UI" width="480" />
 </p>
 
-# Yamada UI
-
-## Branch
+# Branch
 
 `main` This is a product branch.
 `hotfix` This is a branch for urgent fixes.
 `system` This is a branch that fixes the core of yamada-ui.
 `dev` This is a branch that primarily develops.
 
-### Install
+# Install
 
 ```sh
 $ node -v → v16.**.*
 $ yarn install
 ```
 
-### Run
+# Run
 
 ```sh
 $ yarn dev
 $ open http://localhost:4444
 ```
 
-### Generate Theme Tokens
+# Generate Theme Tokens
 
 ```sh
 $ yarn tokens
 ```
 
-### Usage
+# Usage
 
 1. Wrap your application with the `UIProvider` provided
 
@@ -61,7 +59,7 @@ const Example = () => {
 }
 ```
 
-## Use
+# Use
 
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)

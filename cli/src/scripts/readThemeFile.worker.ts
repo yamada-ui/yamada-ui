@@ -83,7 +83,7 @@ export const run = async (): Promise<void> => {
 
   if (!isObject(theme)) throw new Error('Theme not found in default or named `theme` export')
 
-  theme = createThemeTypings(theme)
+  theme = await createThemeTypings(theme)
 
   if (process.send) {
     process.send(theme)
@@ -93,8 +93,6 @@ export const run = async (): Promise<void> => {
 }
 
 run().catch((e: Error) => {
-  console.log(true)
-
   const error = `${e.toString()}\n${e.stack}`
 
   if (process.send) {

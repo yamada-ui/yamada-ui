@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/chakra-ui/chakra-ui/main/public/yamada-ui.png?raw=true" alt="Yamada UI" width="300" />
+</p>
+
 # Yamada UI
 
 ## Branch
@@ -9,16 +13,52 @@
 
 ### Install
 
-```
-1. node -v → v16.**.*
-2. yarn install
+```sh
+$ node -v → v16.**.*
+$ yarn install
 ```
 
 ### Run
 
+```sh
+$ yarn dev
+$ open http://localhost:4444
 ```
-1. yarn dev
-2. open http://localhost:4444
+
+### Generate Theme Tokens
+
+```sh
+$ yarn tokens
+```
+
+### Usage
+
+1. Wrap your application with the `UIProvider` provided
+
+```tsx
+import { UIProvider } from 'ui'
+
+const App = ({ children }) => {
+  return <UIProvider>{children}</UIProvider>
+}
+
+export default App
+```
+
+Yamada-ui supports light and dark modes by default
+
+2. Now you can start using components like so
+
+```tsx
+import { Box, Text } from 'ui'
+
+const Example = () => {
+  return (
+    <Box>
+      <Text>ギャルのパンティーおくれーーーっ！！！！！</Text>
+    </Box>
+  )
+}
 ```
 
 ## Use

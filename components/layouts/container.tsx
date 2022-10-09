@@ -1,5 +1,6 @@
+import { useMemo } from 'react'
 import { useComponentStyle, omitThemeProps } from '../../functions'
-import { ui, forwordRef } from '../../system'
+import { ui, forwardRef } from '../../system'
 import { HTMLUIProps, ThemeProps } from '../../types'
 import { cx } from '../../utils'
 
@@ -9,15 +10,19 @@ type ContainerOptions = {
 
 export type ContainerProps = HTMLUIProps<'div'> & ThemeProps<'Container'> & ContainerOptions
 
-export const Container = forwordRef<ContainerProps, 'div'>((props, ref) => {
+export const Container = forwardRef<ContainerProps, 'div'>((props, ref) => {
   const css = useComponentStyle('Container', props)
   const { className, centerContent, ...rest } = omitThemeProps(props)
 
-  const containerProps = centerContent
-    ? {
-        alignItems: 'center',
-      }
-    : {}
+  const containerProps = useMemo(
+    () =>
+      centerContent
+        ? {
+            alignItems: 'center',
+          }
+        : {},
+    [centerContent],
+  )
 
   return (
     // @ts-ignore

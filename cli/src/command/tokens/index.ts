@@ -40,11 +40,9 @@ export const generateThemeTypings = async ({ themeFile }: { themeFile: string })
     const theme = await themeWorker({
       themeFile,
     })
-    ;('../../../../types/generated.types.ts')
 
-    // console.log(`\n\n\n${theme}\n\n\n`)
-
-    const outPath = path.join('..', '..', '..', '..', 'types', 'generated.types.ts')
+    const cwd = process.cwd()
+    const outPath = path.join(cwd, 'types', 'generated.types.ts')
 
     spinner.info()
     spinner.text = `Write file "${outPath}"...`

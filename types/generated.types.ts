@@ -292,10 +292,5 @@ export type GeneratedTheme = {
     | 'sonGoku'
     | 'beerus'
     | (string & {})
-  components: {
-    Heading: {
-      sizes: '4xl' | 'xl' | (string & {})
-      variants: string & {}
-    }
-  }
+  components: { Heading: { sizes: '4xl' | 'xl' | (string & {}); variants: string & {} } }
 }

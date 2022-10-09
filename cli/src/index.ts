@@ -31,9 +31,9 @@ export const run = async () => {
         throttledGenerateThemeTypings()
 
         chokidar.watch(watchPath).on('change', throttledGenerateThemeTypings)
+      } else {
+        await generateThemeTypings({ themeFile })
       }
-
-      await generateThemeTypings({ themeFile })
     })
 
   program.parse()

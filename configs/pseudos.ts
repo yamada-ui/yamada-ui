@@ -31,5 +31,7 @@ export const pseudos = {
 }
 
 export type PseudosProps<Y = 'responsive', M = 'scheme'> = {
-  [K in keyof Pseudos]?: CSSUIProps<Y, M>
+  [K in keyof Pseudos]?: K extends '_mediaDark' | '_dark' | '_light'
+    ? CSSUIProps<Y, 'unscheme'>
+    : CSSUIProps<Y, M>
 }

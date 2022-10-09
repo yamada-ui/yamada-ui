@@ -6,7 +6,7 @@ import { generateThemeTypings } from './command/tokens'
 import { initCLI } from './utils'
 
 type Options = {
-  watchFile?: string
+  watch?: string
 }
 
 export const run = async () => {
@@ -15,7 +15,7 @@ export const run = async () => {
   program
     .command('tokens <source>')
     .option('--watch [path]', 'Watch directory for changes and rebuild')
-    .action(async (themeFile: string, { watchFile }: Options) => {
+    .action(async (themeFile: string, { watch: watchFile }: Options) => {
       if (watchFile) {
         const watchPath = typeof watchFile === 'string' ? watchFile : path.dirname(themeFile)
 

@@ -103,7 +103,7 @@ export const replaceObject = <T extends any>(objOrArray: T, callBack: (value: an
       return obj
     }, {} as Dict) as T
   } else {
-    return objOrArray
+    return callBack(objOrArray)
   }
 }
 

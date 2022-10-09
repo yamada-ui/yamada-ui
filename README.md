@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/public/yamada-ui.png?raw=true" alt="Yamada UI" width="300" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/public/yamada-ui.png?raw=true" alt="Yamada UI" width="300" />
 </p>
 
 # Yamada UI

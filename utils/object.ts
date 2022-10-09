@@ -93,6 +93,20 @@ export const objectFromEntries = <T extends Dict>(entries: any[][]): T =>
 
 export const keysFormObject = <T extends Dict>(obj: T): (keyof T)[] => Object.keys(obj)
 
+export const replaceObject = <T extends any>(objOrArray: T, callBack: (value: any) => any): T => {
+  if (isArray(objOrArray)) {
+    return objOrArray.map(callBack) as T
+  } else if (isObject(objOrArray)) {
+    return Object.entries(objOrArray).reduce((obj, [key, value]) => {
+      obj[key] = callBack(value)
+
+      return obj
+    }, {} as Dict) as T
+  } else {
+    return objOrArray
+  }
+}
+
 export const getObject = (obj: Dict, path: string | number, fallback?: any, i?: number) => {
   const k = typeof path === 'string' ? path.split('.') : [path]
 

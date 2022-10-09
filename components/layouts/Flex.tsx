@@ -1,4 +1,4 @@
-import { ui, forwordRef } from '../../system'
+import { ui, forwardRef } from '../../system'
 import { HTMLUIProps, CSSUIProps } from '../../types'
 
 type FlexOptions = {
@@ -13,7 +13,7 @@ type FlexOptions = {
 
 export type FlexProps = HTMLUIProps<'div'> & FlexOptions
 
-export const Flex = forwordRef<FlexProps, 'div'>(
+export const Flex = forwardRef<FlexProps, 'div'>(
   (
     {
       direction: flexDirection,

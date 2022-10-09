@@ -1,4 +1,4 @@
-import { ui, forwordRef } from '../../system'
+import { ui, forwardRef } from '../../system'
 import { HTMLUIProps, CSSUIProps, Token } from '../../types'
 import { replaceObject } from '../../utils'
 
@@ -19,7 +19,7 @@ type GridOptions = {
 
 export type GridProps = HTMLUIProps<'div'> & GridOptions
 
-export const Grid = forwordRef<GridProps, 'div'>(
+export const Grid = forwardRef<GridProps, 'div'>(
   (
     {
       templateColumns: gridTemplateColumns,
@@ -71,7 +71,7 @@ type GridItemOptions = {
 
 export type GridItemProps = HTMLUIProps<'div'> & GridItemOptions
 
-export const GridItem = forwordRef<GridItemProps, 'div'>(
+export const GridItem = forwardRef<GridItemProps, 'div'>(
   (
     {
       area: gridArea,

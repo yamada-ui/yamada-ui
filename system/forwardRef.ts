@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { As, Component, IntersectionProps, PropsOf } from '../types'
 
-export const forwordRef = <Props extends object, Element extends As>(
+export const forwardRef = <Props extends object, Element extends As>(
   component: React.ForwardRefRenderFunction<
     any,
     IntersectionProps<PropsOf<Element>, Props> & { as?: As }

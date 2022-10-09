@@ -9,5 +9,5 @@ export declare const extractComponents: ({ components, }: {
 }) => Record<string, Component>;
 export declare const extractPaths: (target: any, maxDepth?: number) => string[];
 export declare const extractKeys: (theme: any, key: string) => string[];
-export declare const createThemeTypings: (theme: any) => string;
+export declare const createThemeTypings: (theme: any) => Promise<string>;
 export {};

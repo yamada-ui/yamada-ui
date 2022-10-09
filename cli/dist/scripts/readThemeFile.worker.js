@@ -97,7 +97,7 @@ const run = async () => {
     let theme = await readTheme(themeFile);
     if (!(0, utils_1.isObject)(theme))
         throw new Error('Theme not found in default or named `theme` export');
-    theme = (0, createThemeTypings_1.createThemeTypings)(theme);
+    theme = await (0, createThemeTypings_1.createThemeTypings)(theme);
     if (process.send) {
         process.send(theme);
     }
@@ -107,7 +107,6 @@ const run = async () => {
 };
 exports.run = run;
 (0, exports.run)().catch((e) => {
-    console.log(true);
     const error = `${e.toString()}\n${e.stack}`;
     if (process.send) {
         process.send({ error });

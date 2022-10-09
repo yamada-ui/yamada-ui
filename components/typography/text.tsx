@@ -1,13 +1,33 @@
 import { useComponentStyle, omitThemeProps } from '../../functions'
 import { ui, forwordRef } from '../../system'
-import { HTMLUIProps, ThemeProps } from '../../types'
-import { cx } from '../../utils'
+import { CSSUIProps, HTMLUIProps, ThemeProps } from '../../types'
+import { cx, filterUndefined } from '../../utils'
 
-export type TextProps = HTMLUIProps<'h1'> & ThemeProps<'Text'>
+type TextOptions = {
+  align?: CSSUIProps['textAlign']
+  decoration?: CSSUIProps['textDecoration']
+  casing?: CSSUIProps['textTransform']
+}
 
-export const Text = forwordRef<TextProps, 'h1'>((props, ref) => {
+export type TextProps = HTMLUIProps<'p'> & ThemeProps<'Text'> & TextOptions
+
+export const Text = forwordRef<TextProps, 'p'>((props, ref) => {
   const css = useComponentStyle('Text', props)
-  const { className, ...rest } = omitThemeProps(props)
+  const {
+    className,
+    align: textAlign,
+    decoration: textDecoration,
+    casing: textTransform,
+    ...rest
+  } = omitThemeProps(props)
 
-  return <ui.h1 ref={ref} className={cx('ui-text', className)} __css={css} {...rest} />
+  const textProps = filterUndefined({
+    textAlign,
+    textDecoration,
+    textTransform,
+  })
+
+  return (
+    <ui.p ref={ref} className={cx('ui-text', className)} __css={css} {...textProps} {...rest} />
+  )
 })

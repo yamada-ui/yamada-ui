@@ -13,6 +13,6 @@ exports.config = [
     { key: 'radii' },
     { key: 'shadows' },
     { key: 'sizes', maxScanDepth: 2 },
-    { key: 'space', flatMap: (value) => [value, `-${value}`] },
+    { key: 'spaces', flatMap: (value) => [value, `-${value}`] },
     { key: 'zIndices' },
 ];

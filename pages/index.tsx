@@ -250,7 +250,14 @@ const Index: FC = () => {
 const Doc: FC<{ label: string; children: ReactNode }> = ({ label, children }) => {
   return (
     <Container p='0' gap='lg'>
-      <Heading>{label}</Heading>
+      <Heading
+        size='2xl'
+        alignSelf='start'
+        bgGradient='linear(to-r, #59a8e1, #b094e9, #f47adf)'
+        bgClip='text'
+      >
+        {label}
+      </Heading>
 
       {children}
     </Container>

@@ -1,11 +1,11 @@
 import { useComponentStyle, omitThemeProps } from '../../functions'
-import { ui, forwordRef } from '../../system'
+import { ui, forwardRef } from '../../system'
 import { HTMLUIProps, ThemeProps } from '../../types'
 import { cx } from '../../utils'
 
 export type HeadingProps = HTMLUIProps<'h1'> & ThemeProps<'Heading'>
 
-export const Heading = forwordRef<HeadingProps, 'h1'>((props, ref) => {
+export const Heading = forwardRef<HeadingProps, 'h1'>((props, ref) => {
   const css = useComponentStyle('Heading', props)
   const { className, ...rest } = omitThemeProps(props)
 

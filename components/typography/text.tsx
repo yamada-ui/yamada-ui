@@ -1,5 +1,5 @@
 import { useComponentStyle, omitThemeProps } from '../../functions'
-import { ui, forwordRef } from '../../system'
+import { ui, forwardRef } from '../../system'
 import { CSSUIProps, HTMLUIProps, ThemeProps } from '../../types'
 import { cx, filterUndefined } from '../../utils'
 
@@ -11,7 +11,7 @@ type TextOptions = {
 
 export type TextProps = HTMLUIProps<'p'> & ThemeProps<'Text'> & TextOptions
 
-export const Text = forwordRef<TextProps, 'p'>((props, ref) => {
+export const Text = forwardRef<TextProps, 'p'>((props, ref) => {
   const css = useComponentStyle('Text', props)
   const {
     className,

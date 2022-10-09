@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Box, Flex } from 'components'
+import { Box, Flex, Heading, Text } from 'components'
 import { animation } from 'functions'
 import { useScheme, useBreakpoint } from 'hooks'
 
@@ -40,34 +40,42 @@ const Index: FC = () => {
 
   return (
     <>
-      <Flex p='lg' gap='lg'>
-        <Box
-          w='full'
-          p='lg'
-          rounded='lg'
-          bg='warning'
-          cursor='pointer'
-          animation={[state ? fadeIn : null, !state ? fadeOut : null]}
-          onClick={() => setState((prev) => !prev)}
-        >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, voluptas eum. Saepe neque
-          aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
-          dolorum. Quaerat, totam magni. Atque, unde?
-        </Box>
+      <Flex direction='column' gap='lg' p='lg'>
+        <Flex direction='column'>
+          <Heading size='4xl' noOfLines={1} color={['pink.700', 'pink.500']}>
+            ギャルのパンティーおくれーーーっ！！！！！
+          </Heading>
+          <Heading size='3xl' noOfLines={1} color={['pink.500', 'pink.400']}>
+            ギャルのパンティーおくれーーーっ！！！！！
+          </Heading>
+          <Heading size='2xl' noOfLines={1} color={['pink.500', 'pink.300']}>
+            ギャルのパンティーおくれーーーっ！！！！！
+          </Heading>
+          <Heading size='xl' noOfLines={1} color={['pink.400', 'pink.200']}>
+            ギャルのパンティーおくれーーーっ！！！！！
+          </Heading>
+          <Heading size='lg' noOfLines={1} color={['pink.300', 'pink.100']}>
+            ギャルのパンティーおくれーーーっ！！！！！
+          </Heading>
+        </Flex>
 
-        <Box
-          w='full'
-          p='lg'
-          rounded='lg'
-          bg='warning'
-          cursor='pointer'
-          animation={[state ? fadeIn : null, !state ? fadeOut : null]}
-          onClick={() => setState((prev) => !prev)}
-        >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, voluptas eum. Saepe neque
-          aliquam facere quaerat, molestias non vitae blanditiis, cum beatae veniam deserunt
-          dolorum. Quaerat, totam magni. Atque, unde?
-        </Box>
+        <Flex direction='column'>
+          <Text color={['purple.700', 'purple.500']}>
+            私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+          </Text>
+          <Text color={['purple.600', 'purple.400']}>
+            私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+          </Text>
+          <Text color={['purple.500', 'purple.300']}>
+            私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+          </Text>
+          <Text color={['purple.400', 'purple.200']}>
+            私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+          </Text>
+          <Text color={['purple.300', 'purple.100']}>
+            私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+          </Text>
+        </Flex>
       </Flex>
     </>
   )

@@ -20,7 +20,7 @@ import {
   PseudosProps,
 } from '../configs'
 import { Scheme } from '../providers'
-import { Theme, StyledTheme, Dict, Union } from './'
+import { Theme, StyledTheme, Dict } from './'
 
 export type SchemeArray<Y> = [Y, Y]
 

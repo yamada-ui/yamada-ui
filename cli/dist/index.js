@@ -50,7 +50,9 @@ const run = async () => {
             throttledGenerateThemeTypings();
             chokidar_1.default.watch(watchPath).on('change', throttledGenerateThemeTypings);
         }
-        await (0, tokens_1.generateThemeTypings)({ themeFile });
+        else {
+            await (0, tokens_1.generateThemeTypings)({ themeFile });
+        }
     });
     commander_1.program.parse();
 };

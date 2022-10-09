@@ -81,9 +81,9 @@ export const Stack = forwardRef<StackProps, 'div'>(
 )
 
 export const HStack = forwardRef<StackProps, 'div'>((props, ref) => (
-  <Stack align='center' {...props} direction='row' ref={ref} />
+  <Stack ref={ref} direction='row' align='center' {...props} />
 ))
 
 export const VStack = forwardRef<StackProps, 'div'>((props, ref) => (
-  <Stack align='stretch' {...props} direction='column' ref={ref} />
+  <Stack ref={ref} direction='column' align='stretch' {...props} />
 ))

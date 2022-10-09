@@ -42,3 +42,7 @@ export const Flex = forwardRef<FlexProps, 'div'>(
     return <ui.div ref={ref} __css={css} {...rest} />
   },
 )
+
+export const Wrap = forwardRef<FlexProps, 'div'>((props, ref) => (
+  <Flex ref={ref} wrap='wrap' {...props} />
+))

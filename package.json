@@ -6,7 +6,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "next -p 4444 && node cli tokens ./themes/index.ts --watch ./themes",
+    "dev": "next -p 4444",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

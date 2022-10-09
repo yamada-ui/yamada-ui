@@ -1,8 +1,4 @@
-import {
-  isArray,
-  isObject,
-  // prettier
-} from '../../utils'
+import { isArray, isObject, prettier } from '../../utils'
 import { config } from './config'
 
 type Component = {
@@ -10,16 +6,13 @@ type Component = {
   variants: string[]
 }
 
-export const printComponent = (components: Record<string, Component>): string => `components: {
-  ${Object.entries(components)
+export const printComponent = (components: Record<string, Component>): string =>
+  `components: { ${Object.entries(components)
     .map(
       ([key, unions]) =>
-        `${key.match(/^[a-zA-Z0-9\-_]+$/) ? key : `"${key}"`}: {
-           ${print(unions)}
-        }`,
+        `${key.match(/^[a-zA-Z0-9\-_]+$/) ? key : `"${key}"`}: { ${print(unions)}}`,
     )
-    .join(`\n`)}
-}`
+    .join(`\n`)} }`
 
 export const print = (unions: Record<string, string[]>): string =>
   Object.entries(unions)
@@ -67,14 +60,16 @@ export const extractPaths = (target: any, maxDepth = 3): string[] => {
 }
 
 export const extractKeys = (theme: any, key: string): string[] => {
-  const property = theme[key]
+  const keys = key.split('.')
+
+  const property = keys.reduce((obj, key) => obj[key] ?? {}, theme)
 
   if (!isObject<object>(property)) return []
 
   return Object.keys(property)
 }
 
-export const createThemeTypings = (theme: any) => {
+export const createThemeTypings = async (theme: any) => {
   const unions = config.reduce(
     (obj, { key, maxScanDepth, filter = () => true, flatMap = (value) => value }) => {
       const target = theme[key]
@@ -85,12 +80,10 @@ export const createThemeTypings = (theme: any) => {
         obj[key] = extractPaths(target, maxScanDepth).filter(filter).flatMap(flatMap)
       }
 
-      if (isObject(theme.semanticTokens)) {
-        const semanticTokenKeys = extractKeys(theme.semanticTokens, key)
-          .filter(filter)
-          .flatMap(flatMap)
+      if (isObject(theme.semantic)) {
+        const semanticKeys = extractKeys(theme.semantic, key).filter(filter).flatMap(flatMap)
 
-        obj[key].push(...semanticTokenKeys)
+        obj[key].push(...semanticKeys)
       }
 
       return obj
@@ -98,17 +91,15 @@ export const createThemeTypings = (theme: any) => {
     {} as Record<string, string[]>,
   )
 
-  const textStyles = extractKeys(theme, 'textStyles')
-  const layerStyles = extractKeys(theme, 'layerStyles')
+  const textStyles = extractKeys(theme, 'styles.textStyles')
+  const layerStyles = extractKeys(theme, 'styles.layerStyles')
   const componentTypes = extractComponents(theme)
 
-  // return prettier(`export type GeneratedTheme = {
-  //   ${print({ ...unions, textStyles, layerStyles })}
-  //   ${printComponent(componentTypes)}
-  // }`)
-
-  return `export type GeneratedTheme = {
-    ${print({ ...unions, textStyles, layerStyles })}
-    ${printComponent(componentTypes)}
-  }`
+  return prettier(
+    `export type GeneratedTheme = { ${print({
+      ...unions,
+      textStyles,
+      layerStyles,
+    })} ${printComponent(componentTypes)} }`,
+  )
 }

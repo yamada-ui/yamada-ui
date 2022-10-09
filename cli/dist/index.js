@@ -38,7 +38,7 @@ const run = async () => {
     commander_1.program
         .command('tokens <source>')
         .option('--watch [path]', 'Watch directory for changes and rebuild')
-        .action(async (themeFile, { watchFile }) => {
+        .action(async (themeFile, { watch: watchFile }) => {
         if (watchFile) {
             const watchPath = typeof watchFile === 'string' ? watchFile : path.dirname(themeFile);
             const throttledGenerateThemeTypings = (0, lodash_throttle_1.default)(async () => {

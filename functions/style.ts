@@ -12,7 +12,10 @@ export const isPropStyle = (prop: string, value?: any): boolean =>
     ? prop in styleProps
     : prop in styleProps && value !== null && value !== undefined
 
-export const useComponentStyle = (name: string, props: any): CSSUIObject => {
+export const useComponentStyle = (
+  name: string,
+  props: any,
+): CSSUIObject | Record<string, CSSUIObject> => {
   const theme = useTheme()
   const { scheme } = useScheme()
 
@@ -23,7 +26,7 @@ export const useComponentStyle = (name: string, props: any): CSSUIObject => {
     filterUndefined(omitObject(props, ['children'])),
   )
 
-  const ref = useRef<CSSUIObject>({})
+  const ref = useRef<CSSUIObject | Record<string, CSSUIObject>>({})
 
   if (componentStyle) {
     let style = runIfFunc(componentStyle.baseStyle ?? {}, theme, scheme)

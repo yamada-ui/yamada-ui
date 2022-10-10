@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createThemeTypings = exports.extractKeys = exports.extractPaths = exports.extractComponents = exports.print = exports.printComponent = void 0;
+exports.createThemeTypings = exports.extractKeys = exports.extractPaths = exports.extractColorSchemes = exports.extractTransitions = exports.extractComponents = exports.print = exports.printComponent = void 0;
 const utils_1 = require("../../utils");
 const config_1 = require("./config");
+const hueKeys = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
 const printComponent = (components) => `components: { ${Object.entries(components)
     .map(([key, unions]) => `${key.match(/^[a-zA-Z0-9\-_]+$/) ? key : `"${key}"`}: { ${(0, exports.print)(unions)}}`)
     .join(`\n`)} }`;
@@ -25,6 +26,48 @@ const extractComponents = ({ components = {}, }) => Object.entries(components).r
     return obj;
 }, {});
 exports.extractComponents = extractComponents;
+const extractTransitions = (theme) => {
+    let transitionProperty = [];
+    let transitionDuration = [];
+    let transitionEasing = [];
+    const { transitions } = theme;
+    if (!(0, utils_1.isObject)(transitions))
+        return { transitionProperty, transitionDuration, transitionEasing };
+    Object.entries(transitions).forEach(([key, value]) => {
+        switch (key) {
+            case 'property':
+                transitionProperty = (0, exports.extractPaths)(value);
+                break;
+            case 'duration':
+                transitionDuration = (0, exports.extractPaths)(value);
+                break;
+            case 'easing':
+                transitionEasing = (0, exports.extractPaths)(value);
+                break;
+            default:
+                return;
+        }
+    });
+    return { transitionProperty, transitionDuration, transitionEasing };
+};
+exports.extractTransitions = extractTransitions;
+const isHue = (value) => {
+    if (!(0, utils_1.isObject)(value))
+        return false;
+    const keys = Object.keys(value);
+    return hueKeys.every((key) => keys.includes(key));
+};
+const extractColorSchemes = (theme) => {
+    const { colors } = theme;
+    if (!(0, utils_1.isObject)(colors))
+        return [];
+    return Object.entries(colors).reduce((array, [key, value]) => {
+        if (isHue(value))
+            array.push(key);
+        return array;
+    }, []);
+};
+exports.extractColorSchemes = extractColorSchemes;
 const extractPaths = (target, maxDepth = 3) => {
     if ((!(0, utils_1.isObject)(target) && !Array.isArray(target)) || !maxDepth)
         return [];
@@ -62,11 +105,17 @@ const createThemeTypings = async (theme) => {
     }, {});
     const textStyles = (0, exports.extractKeys)(theme, 'styles.textStyles');
     const layerStyles = (0, exports.extractKeys)(theme, 'styles.layerStyles');
+    const colorSchemes = (0, exports.extractColorSchemes)(theme);
+    const { transitionProperty, transitionDuration, transitionEasing } = (0, exports.extractTransitions)(theme);
     const componentTypes = (0, exports.extractComponents)(theme);
     return (0, utils_1.prettier)(`export type GeneratedTheme = { ${(0, exports.print)({
         ...unions,
         textStyles,
         layerStyles,
+        colorSchemes,
+        transitionProperty,
+        transitionDuration,
+        transitionEasing,
     })} ${(0, exports.printComponent)(componentTypes)} }`);
 };
 exports.createThemeTypings = createThemeTypings;

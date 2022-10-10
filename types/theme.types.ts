@@ -4,6 +4,7 @@ import { Dict, UIStyle, GeneratedTheme } from './'
 export type UITheme = {
   layerStyles: string
   textStyles: string
+  colorSchemes: string
   borders: string
   colors: string
   breakpoints: string
@@ -17,6 +18,9 @@ export type UITheme = {
   sizes: string
   spaces: string
   zIndices: string
+  transitionsProperty: string
+  transitionsDuration: string
+  transitionsEasing: string
   components: {
     [key: string]: {
       sizes: string
@@ -44,6 +48,7 @@ export type ExtendTheme = {
   sizes?: Dict
   spaces?: Dict
   zIndices?: Dict
+  transitions?: { property: Dict; duration: Dict; easing: Dict }
   components?: Record<string, ComponentStyle>
   semantic?: Dict
 }
@@ -52,7 +57,7 @@ export type ComponentStyle = {
   baseStyle?: UIStyle
   sizes?: Record<string | number, UIStyle>
   variants?: Record<string | number, UIStyle>
-  defaultProps?: { size?: string | number; variant?: string | number }
+  defaultProps?: { size?: string | number; variant?: string | number; colorScheme?: string }
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

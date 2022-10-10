@@ -10,6 +10,7 @@ import { radii } from './radii'
 import { shadows } from './shadows'
 import { sizes } from './sizes'
 import { spaces } from './spaces'
+import { transitions } from './transitions'
 import { zIndices } from './zIndices'
 
 export default {
@@ -26,4 +27,5 @@ export default {
   sizes,
   spaces,
   zIndices,
+  transitions,
 }

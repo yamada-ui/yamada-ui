@@ -412,10 +412,6 @@ export type GeneratedTheme = {
     | 'beerus'
     | (string & {})
   components: {
-    Button: {
-      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
-      variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
-    }
     Divider: { sizes: string & {}; variants: 'solid' | 'dashed' | 'dotted' | (string & {}) }
     Heading: {
       sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})

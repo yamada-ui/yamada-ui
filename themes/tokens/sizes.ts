@@ -1,6 +1,9 @@
+import { spaces } from './spaces'
+
 export type Sizes = typeof sizes
 
 export const sizes = {
+  ...spaces,
   max: 'max-content',
   min: 'min-content',
   full: '100%',

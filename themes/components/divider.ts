@@ -5,6 +5,7 @@ export const Divider: ComponentStyle = {
     opacity: 0.6,
     borderColor: 'inherit',
   },
+
   variants: {
     solid: {
       borderStyle: 'solid',
@@ -16,5 +17,6 @@ export const Divider: ComponentStyle = {
       borderStyle: 'dotted',
     },
   },
+
   defaultProps: { variant: 'solid' },
 }

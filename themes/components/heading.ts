@@ -5,6 +5,7 @@ export const Heading: ComponentStyle = {
     fontFamily: 'heading',
     fontWeight: 'bold',
   },
+
   sizes: {
     '4xl': {
       fontSize: { base: '7xl', sm: '6xl' },
@@ -25,5 +26,6 @@ export const Heading: ComponentStyle = {
     sm: { fontSize: 'md' },
     xs: { fontSize: 'sm' },
   },
+
   defaultProps: { size: 'xl' },
 }

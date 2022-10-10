@@ -14,6 +14,6 @@ export const initCLI = async () => {
     color: `#FFFFFF`,
     bold: true,
     clear: false,
-    version: '0.1.0',
+    version: '0.1.1',
   })
 }

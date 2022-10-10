@@ -192,6 +192,26 @@ export type GeneratedTheme = {
     | 'telegram.800'
     | 'telegram.900'
     | (string & {})
+  colorSchemes:
+    | 'whiteAlpha'
+    | 'blackAlpha'
+    | 'gray'
+    | 'red'
+    | 'orange'
+    | 'yellow'
+    | 'green'
+    | 'teal'
+    | 'blue'
+    | 'cyan'
+    | 'purple'
+    | 'pink'
+    | 'linkedin'
+    | 'facebook'
+    | 'messenger'
+    | 'whatsapp'
+    | 'twitter'
+    | 'telegram'
+    | (string & {})
   fonts: 'heading' | 'body' | 'mono' | (string & {})
   fontSizes:
     | '3xs'
@@ -402,6 +422,17 @@ export type GeneratedTheme = {
     | '-3.5'
     | (string & {})
   textStyles: string & {}
+  transitionDuration:
+    | 'ultra-fast'
+    | 'faster'
+    | 'fast'
+    | 'normal'
+    | 'slow'
+    | 'slower'
+    | 'ultra-slow'
+    | (string & {})
+  transitionEasing: 'ease-in' | 'ease-out' | 'ease-in-out' | (string & {})
+  transitionProperty: 'common' | 'colors' | 'dimensions' | 'position' | 'background' | (string & {})
   zIndices:
     | 'yamcha'
     | 'kurillin'

@@ -6,6 +6,7 @@ import { DOMElements, CSSUIProps, CSSUIObject, StylesProps, Theme } from './'
 export type ThemeProps<Y extends string = any> = {
   variant?: Y extends keyof Theme['components'] ? Theme['components'][Y]['variants'] : string
   size?: Y extends keyof Theme['components'] ? Theme['components'][Y]['sizes'] : string
+  colorScheme?: Theme['colorSchemes']
 }
 
 export type UIProps = CSSUIProps & {

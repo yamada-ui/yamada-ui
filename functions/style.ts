@@ -29,10 +29,14 @@ export const useComponentStyle = (
   const ref = useRef<CSSUIObject | Record<string, CSSUIObject>>({})
 
   if (componentStyle) {
-    let style = runIfFunc(componentStyle.baseStyle ?? {}, theme, scheme)
+    let style = runIfFunc(componentStyle.baseStyle ?? {}, { theme, scheme, ...props })
 
-    const variant = runIfFunc(componentStyle.variants?.[props.variant] ?? {}, theme, scheme)
-    const size = runIfFunc(componentStyle.sizes?.[props.size] ?? {}, theme, scheme)
+    const variant = runIfFunc(componentStyle.variants?.[props.variant] ?? {}, {
+      theme,
+      scheme,
+      ...props,
+    })
+    const size = runIfFunc(componentStyle.sizes?.[props.size] ?? {}, { theme, scheme, ...props })
 
     style = merge(style, variant)
     style = merge(style, size)

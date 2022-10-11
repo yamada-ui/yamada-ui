@@ -56,10 +56,10 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
           ? { borderBottomRadius: 0, marginBlockEnd: '-1px' }
           : { borderRightRadius: 0, marginInlineEnd: '-1px' },
         '> *:not(:first-of-type):not(:last-of-type)': isColumn
-          ? { borderRadius: 0, marginBlockStart: '-1px' }
+          ? { borderRadius: 0, marginBlockEnd: '-1px' }
           : { borderRadius: 0, marginInlineEnd: '-1px' },
         '> *:not(:first-of-type):last-of-type': isColumn
-          ? { borderTopRadius: 0, marginBlockStart: '-1px' }
+          ? { borderTopRadius: 0 }
           : { borderLeftRadius: 0 },
       })
     } else {

@@ -213,6 +213,11 @@ export type GeneratedTheme = {
     | 'youtube.900'
     | (string & {})
   colorSchemes:
+    | 'primary'
+    | 'secondary'
+    | 'warning'
+    | 'danger'
+    | 'link'
     | 'whiteAlpha'
     | 'blackAlpha'
     | 'gray'

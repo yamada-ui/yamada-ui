@@ -8,7 +8,7 @@ export type Config = {
 
 export const config: Config = {
   initialScheme: 'light',
-  useSystemScheme: true,
+  useSystemScheme: false,
   var: {
     prefix: 'ui',
   },

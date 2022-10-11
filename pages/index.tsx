@@ -341,19 +341,47 @@ const Index: FC = () => {
               </Wrap>
 
               <Wrap gap='md'>
-                <Button colorScheme='danger' size='xs'>
+                <Button isLoading colorScheme='danger' variant='solid'>
                   Button
                 </Button>
 
-                <Button colorScheme='danger' size='sm'>
+                <Button isLoading colorScheme='danger' variant='outline'>
                   Button
                 </Button>
 
-                <Button colorScheme='danger' size='md'>
+                <Button isLoading colorScheme='danger' variant='ghost'>
                   Button
                 </Button>
 
-                <Button colorScheme='danger' size='lg'>
+                <Button isLoading loadingText='Loading...' colorScheme='danger' variant='solid'>
+                  Button
+                </Button>
+
+                <Button
+                  isLoading
+                  loadingText='Loading...'
+                  loadingPlacement='end'
+                  colorScheme='danger'
+                  variant='outline'
+                >
+                  Button
+                </Button>
+              </Wrap>
+
+              <Wrap gap='md'>
+                <Button colorScheme='primary' size='xs'>
+                  Button
+                </Button>
+
+                <Button colorScheme='primary' size='sm'>
+                  Button
+                </Button>
+
+                <Button colorScheme='primary' size='md'>
+                  Button
+                </Button>
+
+                <Button colorScheme='primary' size='lg'>
                   Button
                 </Button>
               </Wrap>

@@ -66,6 +66,7 @@ const Example = () => {
 - [Fortawesome](https://fontawesome.com/)
 - [emotion/react](https://emotion.sh/docs/@emotion/react)
 - [emotion/styled](https://emotion.sh/docs/@emotion/styled)
+- [ctrl/tinycolor](https://tinycolor.vercel.app/)
 - [react-fast-compare](https://www.npmjs.com/package/react-fast-compare)
 - [babel](https://babeljs.io/)
 - [ESLint](https://eslint.org/)

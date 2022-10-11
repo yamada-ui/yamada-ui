@@ -1,5 +1,7 @@
 export type Colors = typeof colors
 
+export const defaultColors = ['primary', 'secondary', 'warning', 'danger', 'link']
+
 export const colors = {
   transparent: 'transparent',
   current: 'currentColor',

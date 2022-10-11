@@ -1,9 +1,10 @@
+import { defaultColors } from '../'
 import { ComponentStyle } from '../../types'
-import { transparentizeColor } from '../../utils'
+import { transparentizeColor, toneColor } from '../../utils'
 
 export const Button: ComponentStyle = {
   baseStyle: {
-    lineHeight: 1,
+    lineHeight: 1.2,
     borderRadius: 'md',
     fontWeight: 'semibold',
     transitionProperty: 'common',
@@ -24,8 +25,20 @@ export const Button: ComponentStyle = {
   },
 
   variants: {
-    solid: ({ colorScheme: c }) => {
-      if (c === 'gray') {
+    solid: ({ theme, colorScheme: c }) => {
+      if (c && defaultColors.includes(c)) {
+        return {
+          bg: [toneColor(c, 500)(theme), toneColor(c, 200)(theme)],
+          color: [`white`, `gray.800`],
+          _hover: {
+            bg: [toneColor(c, 600)(theme), toneColor(c, 300)(theme)],
+            _disabled: {
+              bg: [toneColor(c, 500)(theme), toneColor(c, 200)(theme)],
+            },
+          },
+          _active: { bg: [toneColor(c, 700)(theme), toneColor(c, 400)(theme)] },
+        }
+      } else if (c === 'gray') {
         return {
           bg: [`gray.100`, `whiteAlpha.200`],
           _hover: {
@@ -53,7 +66,26 @@ export const Button: ComponentStyle = {
       }
     },
     outline: ({ theme, colorScheme: c }) => {
-      if (c === 'gray') {
+      if (c && defaultColors.includes(c)) {
+        return {
+          border: '1px solid',
+          borderColor: [toneColor(c, 600)(theme), toneColor(c, 300)(theme)],
+          color: [toneColor(c, 600)(theme), toneColor(c, 200)(theme)],
+          bg: 'transparent',
+          _hover: {
+            bg: [
+              toneColor(c, 50)(theme),
+              transparentizeColor(toneColor(c, 200)(theme), 0.12)(theme),
+            ],
+          },
+          _active: {
+            bg: [
+              toneColor(c, 100)(theme),
+              transparentizeColor(toneColor(c, 200)(theme), 0.24)(theme),
+            ],
+          },
+        }
+      } else if (c === 'gray') {
         return {
           border: '1px solid',
           borderColor: [`gray.200`, `whiteAlpha.300`],
@@ -78,29 +110,68 @@ export const Button: ComponentStyle = {
         }
       }
     },
-    link: ({ colorScheme: c }) => {
-      return {
-        padding: 0,
-        height: 'auto',
-        lineHeight: 'normal',
-        verticalAlign: 'baseline',
-        color: [`${c}.500`, `${c}.200`],
-        _hover: {
-          textDecoration: 'underline',
-          _disabled: {
-            textDecoration: 'none',
+    link: ({ theme, colorScheme: c }) => {
+      if (c && defaultColors.includes(c)) {
+        return {
+          padding: 0,
+          height: 'auto',
+          lineHeight: 'normal',
+          verticalAlign: 'baseline',
+          color: [toneColor(c, 500)(theme), toneColor(c, 200)(theme)],
+          _hover: {
+            textDecoration: 'underline',
+            _disabled: {
+              textDecoration: 'none',
+            },
           },
-        },
-        _active: {
-          color: [`${c}.700`, `${c}.500`],
-          _disabled: {
-            color: [`${c}.500`, `${c}.200`],
+          _active: {
+            color: [toneColor(c, 700)(theme), toneColor(c, 500)(theme)],
+            _disabled: {
+              color: [toneColor(c, 500)(theme), toneColor(c, 200)(theme)],
+            },
           },
-        },
+        }
+      } else {
+        return {
+          padding: 0,
+          height: 'auto',
+          lineHeight: 'normal',
+          verticalAlign: 'baseline',
+          color: [`${c}.500`, `${c}.200`],
+          _hover: {
+            textDecoration: 'underline',
+            _disabled: {
+              textDecoration: 'none',
+            },
+          },
+          _active: {
+            color: [`${c}.700`, `${c}.500`],
+            _disabled: {
+              color: [`${c}.500`, `${c}.200`],
+            },
+          },
+        }
       }
     },
     ghost: ({ theme, colorScheme: c }) => {
-      if (c === 'gray') {
+      if (c && defaultColors.includes(c)) {
+        return {
+          color: [toneColor(c, 600)(theme), toneColor(c, 200)(theme)],
+          bg: 'transparent',
+          _hover: {
+            bg: [
+              toneColor(c, 50)(theme),
+              transparentizeColor(toneColor(c, 200)(theme), 0.12)(theme),
+            ],
+          },
+          _active: {
+            bg: [
+              toneColor(c, 100)(theme),
+              transparentizeColor(toneColor(c, 200)(theme), 0.24)(theme),
+            ],
+          },
+        }
+      } else if (c === 'gray') {
         return {
           color: [`inherit`, `whiteAlpha.900`],
           _hover: {

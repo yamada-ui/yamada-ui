@@ -26,8 +26,9 @@ export const pseudos = {
   _notLast: '&:not(:last-of-type)',
   _mediaDark: '@media (prefers-color-scheme: dark)',
   _mediaReduceMotion: '@media (prefers-reduced-motion: reduce)',
-  _dark: 'html[data-theme="dark"] &',
-  _light: 'html[data-theme="light"] &',
+  _dark: '.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]',
+  _light:
+    '.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]',
 }
 
 export type PseudosProps<Y = 'responsive', M = 'scheme'> = {

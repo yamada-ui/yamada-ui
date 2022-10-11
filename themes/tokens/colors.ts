@@ -2,6 +2,7 @@ export type Colors = typeof colors
 
 export const colors = {
   transparent: 'transparent',
+  current: 'currentColor',
   black: '#1f2123',
   white: '#f6f6f6',
   primary: '#2196f3',

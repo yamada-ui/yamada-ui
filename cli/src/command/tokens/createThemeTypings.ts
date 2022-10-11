@@ -6,6 +6,8 @@ type Component = {
   variants: string[]
 }
 
+const defaultKeys = ['primary', 'secondary', 'warning', 'danger', 'link']
+
 const hueKeys = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
 
 export const printComponent = (components: Record<string, Component>): string =>
@@ -81,6 +83,8 @@ export const extractTransitions = (
   return { transitionProperty, transitionDuration, transitionEasing }
 }
 
+const isDefault = (key: any): boolean => defaultKeys.includes(key)
+
 const isHue = (value: any): boolean => {
   if (!isObject<object>(value)) return false
 
@@ -95,7 +99,7 @@ export const extractColorSchemes = (theme: any): string[] => {
   if (!isObject<object>(colors)) return []
 
   return Object.entries(colors).reduce((array, [key, value]) => {
-    if (isHue(value)) array.push(key)
+    if (isHue(value) || isDefault(key)) array.push(key)
 
     return array
   }, [] as string[])

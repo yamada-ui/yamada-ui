@@ -1,3 +1,10 @@
+import {
+  faPersonDrowning,
+  faPlus,
+  faPoo,
+  faRobot,
+  faSkull,
+} from '@fortawesome/free-solid-svg-icons'
 import { FC, ReactNode } from 'react'
 import {
   Box,
@@ -9,10 +16,16 @@ import {
   Text,
   Container,
   Flex,
+  Wrap,
   Spacer,
   Grid,
   GridItem,
   Image,
+  Button,
+  ButtonGroup,
+  IconButton,
+  FontAwesomeIcon as Icon,
+  Loading,
 } from 'components'
 import { useScheme, useBreakpoint } from 'hooks'
 
@@ -43,7 +56,388 @@ const Index: FC = () => {
           </Text>
         </HStack>
 
+        <Icon icon={faPoo} color='pink.500' size='2xl' />
+
         <VStack gap='lg' divider={<Divider />}>
+          <Doc label='Loading'>
+            <Wrap gap='lg'>
+              <Loading variant='oval' size='7xs' color='red.500' />
+              <Loading variant='oval' size='7xs' color='red.500' />
+              <Loading variant='hearts' size='7xs' color='orange.500' />
+              <Loading variant='radio' size='7xs' color='yellow.500' />
+              <Loading variant='audio' size='7xs' color='green.500' />
+              <Loading variant='balls' size='7xs' color='teal.500' />
+              <Loading variant='bars' size='7xs' color='blue.500' />
+              <Loading variant='comment' size='7xs' color='cyan.500' />
+              <Loading variant='grid' size='7xs' color='purple.500' />
+              <Loading variant='search' size='7xs' color='pink.500' />
+              <Loading variant='rotating' size='7xs' color='linkedin.500' />
+              <Loading variant='circles' size='7xs' color='facebook.500' />
+              <Loading variant='dots' size='7xs' color='messenger.500' />
+              <Loading variant='triangle' size='7xs' color='twitter.500' />
+              <Loading variant='watch' size='7xs' color='line.500' />
+              <Loading variant='progress' size='7xs' color='instagram.500' />
+            </Wrap>
+          </Doc>
+
+          <Doc label='Button'>
+            <HStack gap='lg'>
+              <Button colorScheme='teal' variant='solid'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='outline'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='ghost'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='link'>
+                Button
+              </Button>
+            </HStack>
+
+            <HStack gap='lg'>
+              <Button colorScheme='teal' variant='solid' isDisabled>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='outline' isDisabled>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='ghost' isDisabled>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='link' isDisabled>
+                Button
+              </Button>
+            </HStack>
+
+            <HStack gap='lg'>
+              <Button colorScheme='teal' variant='solid' leftIcon={<Icon icon={faRobot} />}>
+                Button
+              </Button>
+
+              <Button
+                colorScheme='teal'
+                variant='outline'
+                rightIcon={<Icon icon={faPersonDrowning} />}
+              >
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='ghost'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' variant='link'>
+                Button
+              </Button>
+            </HStack>
+
+            <HStack gap='lg'>
+              <Button colorScheme='teal' size='xs'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' size='sm'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' size='sm'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' size='md'>
+                Button
+              </Button>
+
+              <Button colorScheme='teal' size='lg'>
+                Button
+              </Button>
+            </HStack>
+
+            <Wrap gap='lg'>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='gray'
+              >
+                Gray
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='red'
+              >
+                Red
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='orange'
+              >
+                Orange
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='yellow'
+              >
+                Yellow
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='green'
+              >
+                Green
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='teal'
+              >
+                Teal
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='blue'
+              >
+                Blue
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='cyan'
+              >
+                Cyan
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='purple'
+              >
+                Purple
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='pink'
+              >
+                pink
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='linkedin'
+              >
+                Linkedin
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='facebook'
+              >
+                Facebook
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='messenger'
+              >
+                Messenger
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='whatsapp'
+              >
+                Whatsapp
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='twitter'
+              >
+                Twitter
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='line'
+              >
+                Line
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='instagram'
+              >
+                Instagram
+              </Button>
+              <Button
+                isLoading
+                variant='solid'
+                loadingText='loading...'
+                size='lg'
+                colorScheme='youtube'
+              >
+                Youtube
+              </Button>
+            </Wrap>
+
+            <Wrap gap='lg'>
+              <Button colorScheme='gray' isDisabled>
+                Gray
+              </Button>
+              <Button colorScheme='red' isDisabled>
+                Red
+              </Button>
+              <Button colorScheme='orange' isDisabled>
+                Orange
+              </Button>
+              <Button colorScheme='yellow' isDisabled>
+                Yellow
+              </Button>
+              <Button colorScheme='green' isDisabled>
+                Green
+              </Button>
+              <Button colorScheme='teal' isDisabled>
+                Teal
+              </Button>
+              <Button colorScheme='blue' isDisabled>
+                Blue
+              </Button>
+              <Button colorScheme='cyan' isDisabled>
+                Cyan
+              </Button>
+              <Button colorScheme='purple' isDisabled>
+                Purple
+              </Button>
+              <Button colorScheme='pink' isDisabled>
+                pink
+              </Button>
+              <Button colorScheme='linkedin' isDisabled>
+                Linkedin
+              </Button>
+              <Button colorScheme='facebook' isDisabled>
+                Facebook
+              </Button>
+              <Button colorScheme='messenger' isDisabled>
+                Messeger
+              </Button>
+              <Button colorScheme='whatsapp' isDisabled>
+                Whatsapp
+              </Button>
+              <Button colorScheme='twitter' isDisabled>
+                Twitter
+              </Button>
+              <Button colorScheme='line' isDisabled>
+                Line
+              </Button>
+              <Button colorScheme='instagram' isDisabled>
+                Instagram
+              </Button>
+              <Button colorScheme='youtube' isDisabled>
+                Youtube
+              </Button>
+            </Wrap>
+          </Doc>
+
+          <Doc label='IconButton'>
+            <Wrap gap='lg'>
+              <Wrap gap='md'>
+                <IconButton size='sm' colorScheme='teal' icon={<Icon icon={faPoo} />} />
+                <IconButton size='md' colorScheme='teal' icon={<Icon icon={faPoo} />} />
+                <IconButton size='lg' colorScheme='teal' icon={<Icon icon={faPoo} />} />
+              </Wrap>
+
+              <Wrap gap='md'>
+                <IconButton colorScheme='gray' variant='outline' icon={<Icon icon={faSkull} />} />
+                <IconButton colorScheme='gray' variant='outline' icon={<Icon icon={faSkull} />} />
+                <IconButton colorScheme='gray' variant='outline' icon={<Icon icon={faSkull} />} />
+              </Wrap>
+            </Wrap>
+          </Doc>
+
+          <Doc label='ButtonGroup'>
+            <Wrap gap='lg'>
+              <ButtonGroup isAttached variant='outline'>
+                <Button>Button</Button>
+                <IconButton icon={<Icon icon={faPlus} />} />
+              </ButtonGroup>
+
+              <VStack gap='md'>
+                <ButtonGroup gap='sm'>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                </ButtonGroup>
+
+                <ButtonGroup isAttached isDisabled variant='outline'>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                </ButtonGroup>
+              </VStack>
+
+              <Wrap gap='md'>
+                <ButtonGroup direction='column' gap='sm'>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                </ButtonGroup>
+
+                <ButtonGroup direction='column' isAttached variant='outline'>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                  <Button>Button</Button>
+                </ButtonGroup>
+              </Wrap>
+            </Wrap>
+          </Doc>
+
           <Doc label='Heading'>
             <VStack gap='sm'>
               <Heading size='4xl' color={{ base: 'pink.600', md: 'red.600' }} noOfLines={1}>

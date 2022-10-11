@@ -201,6 +201,16 @@ export type GeneratedTheme = {
     | 'instagram.700'
     | 'instagram.800'
     | 'instagram.900'
+    | 'youtube.50'
+    | 'youtube.100'
+    | 'youtube.200'
+    | 'youtube.300'
+    | 'youtube.400'
+    | 'youtube.500'
+    | 'youtube.600'
+    | 'youtube.700'
+    | 'youtube.800'
+    | 'youtube.900'
     | (string & {})
   colorSchemes:
     | 'whiteAlpha'
@@ -222,6 +232,7 @@ export type GeneratedTheme = {
     | 'twitter'
     | 'line'
     | 'instagram'
+    | 'youtube'
     | (string & {})
   fonts: 'heading' | 'body' | 'mono' | (string & {})
   fontSizes:

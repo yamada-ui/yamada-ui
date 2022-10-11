@@ -5,7 +5,9 @@ import { BreakpointQueries } from '../functions'
 
 const expandScheme = (key: string, value: any[]): Dict => ({
   [key]: value[0],
-  'html[data-theme="dark"] &': { [key]: value[1] },
+  [pseudos['_dark']]: {
+    [key]: value[1],
+  },
 })
 
 const expandResponsive = (key: string, value: Dict, queries: BreakpointQueries): Dict =>

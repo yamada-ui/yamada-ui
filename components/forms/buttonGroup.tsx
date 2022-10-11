@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import { ui, forwardRef } from '../../system'
-import { HTMLUIProps, ThemeProps } from '../../types'
+import { CSSUIProps, HTMLUIProps, ThemeProps } from '../../types'
 import { createContext, cx } from '../../utils'
 
 type ButtonGroupOptions = {
+  direction?: CSSUIProps['flexDirection']
   isAttached?: boolean
   isDisabled?: boolean
 }
@@ -22,9 +23,26 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
 export { useButtonGroup }
 
 export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
-  ({ className, size, variant, isAttached, isDisabled, gap, columnGap, ...rest }, ref) => {
+  (
+    {
+      className,
+      size,
+      variant,
+      direction: flexDirection,
+      isAttached,
+      isDisabled,
+      gap,
+      columnGap,
+      rowGap,
+      ...rest
+    },
+    ref,
+  ) => {
+    const isColumn = flexDirection === 'column' || flexDirection === 'column-reverse'
+
     const css = {
       display: 'inline-flex',
+      flexDirection,
     }
 
     const context: ButtonGroupContext = useMemo(
@@ -34,13 +52,21 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
 
     if (isAttached) {
       Object.assign(css, {
-        '> *:first-of-type:not(:last-of-type)': { borderEndRadius: 0 },
-        '> *:not(:first-of-type):not(:last-of-type)': { borderRadius: 0 },
-        '> *:not(:first-of-type):last-of-type': { borderStartRadius: 0 },
+        '> *:first-of-type:not(:last-of-type)': isColumn
+          ? { borderBottomRadius: 0, marginBlockEnd: '-1px' }
+          : { borderRightRadius: 0, marginInlineEnd: '-1px' },
+        '> *:not(:first-of-type):not(:last-of-type)': isColumn
+          ? { borderRadius: 0, marginBlockStart: '-1px' }
+          : { borderRadius: 0, marginInlineEnd: '-1px' },
+        '> *:not(:first-of-type):last-of-type': isColumn
+          ? { borderTopRadius: 0, marginBlockStart: '-1px' }
+          : { borderLeftRadius: 0 },
       })
     } else {
       Object.assign(css, {
-        '& > *:not(style) ~ *:not(style)': { marginStart: gap || columnGap },
+        gap,
+        columnGap,
+        rowGap,
       })
     }
 

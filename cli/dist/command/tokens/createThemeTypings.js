@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createThemeTypings = exports.extractKeys = exports.extractPaths = exports.extractColorSchemes = exports.extractTransitions = exports.extractComponents = exports.print = exports.printComponent = void 0;
 const utils_1 = require("../../utils");
 const config_1 = require("./config");
+const defaultKeys = ['primary', 'secondary', 'warning', 'danger', 'link'];
 const hueKeys = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
 const printComponent = (components) => `components: { ${Object.entries(components)
     .map(([key, unions]) => `${key.match(/^[a-zA-Z0-9\-_]+$/) ? key : `"${key}"`}: { ${(0, exports.print)(unions)}}`)
@@ -51,6 +52,7 @@ const extractTransitions = (theme) => {
     return { transitionProperty, transitionDuration, transitionEasing };
 };
 exports.extractTransitions = extractTransitions;
+const isDefault = (key) => defaultKeys.includes(key);
 const isHue = (value) => {
     if (!(0, utils_1.isObject)(value))
         return false;
@@ -62,7 +64,7 @@ const extractColorSchemes = (theme) => {
     if (!(0, utils_1.isObject)(colors))
         return [];
     return Object.entries(colors).reduce((array, [key, value]) => {
-        if (isHue(value))
+        if (isHue(value) || isDefault(key))
             array.push(key);
         return array;
     }, []);

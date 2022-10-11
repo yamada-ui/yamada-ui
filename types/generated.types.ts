@@ -181,16 +181,26 @@ export type GeneratedTheme = {
     | 'twitter.700'
     | 'twitter.800'
     | 'twitter.900'
-    | 'telegram.50'
-    | 'telegram.100'
-    | 'telegram.200'
-    | 'telegram.300'
-    | 'telegram.400'
-    | 'telegram.500'
-    | 'telegram.600'
-    | 'telegram.700'
-    | 'telegram.800'
-    | 'telegram.900'
+    | 'line.50'
+    | 'line.100'
+    | 'line.200'
+    | 'line.300'
+    | 'line.400'
+    | 'line.500'
+    | 'line.600'
+    | 'line.700'
+    | 'line.800'
+    | 'line.900'
+    | 'instagram.50'
+    | 'instagram.100'
+    | 'instagram.200'
+    | 'instagram.300'
+    | 'instagram.400'
+    | 'instagram.500'
+    | 'instagram.600'
+    | 'instagram.700'
+    | 'instagram.800'
+    | 'instagram.900'
     | (string & {})
   colorSchemes:
     | 'whiteAlpha'
@@ -210,7 +220,8 @@ export type GeneratedTheme = {
     | 'messenger'
     | 'whatsapp'
     | 'twitter'
-    | 'telegram'
+    | 'line'
+    | 'instagram'
     | (string & {})
   fonts: 'heading' | 'body' | 'mono' | (string & {})
   fontSizes:
@@ -443,6 +454,10 @@ export type GeneratedTheme = {
     | 'beerus'
     | (string & {})
   components: {
+    Button: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
+    }
     Divider: { sizes: string & {}; variants: 'solid' | 'dashed' | 'dotted' | (string & {}) }
     Heading: {
       sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})

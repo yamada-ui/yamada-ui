@@ -1,6 +1,6 @@
 import { borders } from './borders'
 import { breakpoints } from './breakpoints'
-import { colors } from './colors'
+import { colors, defaultColors } from './colors'
 import { fontSizes } from './fontSizes'
 import { fontWeights } from './fontWeights'
 import { fonts } from './fonts'
@@ -12,6 +12,8 @@ import { sizes } from './sizes'
 import { spaces } from './spaces'
 import { transitions } from './transitions'
 import { zIndices } from './zIndices'
+
+export { defaultColors }
 
 export default {
   borders,

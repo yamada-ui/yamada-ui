@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
+    "rootDir": "./",
     "outDir": "dist",
     "allowJs": true,
     "skipLibCheck": true,

@@ -3,6 +3,7 @@ export type GeneratedTheme = {
   breakpoints: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {})
   colors:
     | 'transparent'
+    | 'current'
     | 'black'
     | 'white'
     | 'primary'

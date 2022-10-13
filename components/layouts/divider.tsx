@@ -58,6 +58,7 @@ export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
     <ui.hr
       ref={ref}
       className={cx('ui-divider', className)}
+      // @ts-ignore
       __css={{
         ...css,
         ...dividerCSS,

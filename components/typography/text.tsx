@@ -27,8 +27,8 @@ export const Text = forwardRef<TextProps, 'p'>((props, ref) => {
     textTransform,
   })
 
-  // @ts-ignore
   return (
+    // @ts-ignore
     <ui.p ref={ref} className={cx('ui-text', className)} __css={css} {...textProps} {...rest} />
   )
 })

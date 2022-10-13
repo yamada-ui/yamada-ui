@@ -1,6 +1,6 @@
-import { Scheme } from '.'
+import { Scheme } from './'
 
-export const setScript = (initialScheme: Scheme | 'system') => {
+export const setScript = (initialScheme: Scheme | '../../system') => {
   const mql = window.matchMedia('(prefers-color-scheme: dark)')
   const systemScheme = mql.matches ? 'dark' : 'light'
 
@@ -13,7 +13,7 @@ export const setScript = (initialScheme: Scheme | 'system') => {
   if (isInStorage) {
     scheme = localScheme
   } else {
-    scheme = initialScheme === 'system' ? systemScheme : initialScheme
+    scheme = initialScheme === '../../system' ? systemScheme : initialScheme
   }
 
   if (scheme) {
@@ -23,7 +23,7 @@ export const setScript = (initialScheme: Scheme | 'system') => {
 }
 
 type SchemeScriptProps = {
-  initialScheme?: Scheme | 'system'
+  initialScheme?: Scheme | '../../system'
   nonce?: string
 }
 

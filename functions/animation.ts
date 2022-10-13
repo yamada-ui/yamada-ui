@@ -1,9 +1,9 @@
-import * as CSS from 'csstype'
 import { keyframes as emotionKeyframes } from '@emotion/react'
 import { CSSObject } from '@emotion/styled'
+import * as CSS from 'csstype'
 import { useTheme } from '../hooks'
 import { CSSUIProps, Dict, Token } from '../types'
-import { css } from '../functions'
+import { css } from './'
 
 export type AnimationStyle = {
   keyframes: Record<string, CSSUIProps<'unresponsive', 'unscheme'>>

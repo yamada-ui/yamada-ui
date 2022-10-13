@@ -1,6 +1,6 @@
-import { useTheme } from '@emotion/react'
 import { Theme } from '../types'
 import { getMemoizedObject as get } from '../utils'
+import { useTheme } from './'
 
 export const useZIndex = (path: Theme['zIndices']) => {
   const theme = useTheme()

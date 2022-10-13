@@ -1,5 +1,5 @@
 import { createdDom } from '../../utils'
-import { Scheme } from '.'
+import { Scheme } from './'
 
 const hasSupport = () => typeof Storage !== 'undefined'
 

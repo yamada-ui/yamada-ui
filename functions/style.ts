@@ -1,9 +1,9 @@
-import { ComponentStyle, CSSUIObject } from '../types'
-import { styles, pseudos } from '../configs'
 import { useRef } from 'react'
-import { useTheme, useScheme } from '../hooks'
-import { getMemoizedObject as get, runIfFunc, merge, filterUndefined, omitObject } from '../utils'
 import isEqual from 'react-fast-compare'
+import { styles, pseudos } from '../configs'
+import { useTheme, useScheme } from '../hooks'
+import { ComponentStyle, CSSUIObject } from '../types'
+import { getMemoizedObject as get, runIfFunc, merge, filterUndefined, omitObject } from '../utils'
 
 const styleProps = { ...styles, ...pseudos }
 

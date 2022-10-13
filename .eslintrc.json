@@ -1,11 +1,19 @@
 {
   "root": true,
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:import/recommended",
-    "plugin:import/warnings",
-    "prettier"
-  ],
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:import/recommended", "plugin:import/warnings", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
   "rules": {
     "import/order": [
       "error",
@@ -16,11 +24,8 @@
       }
     ],
     "import/named": "off",
+    "import/no-unresolved": "off",
     "import/no-anonymous-default-export": "off",
-    "@next/next/no-img-element": "off",
-    "@next/next/no-title-in-document-head": "off",
-    "@next/next/no-assign-module-variable": "off",
-    "react-hooks/rules-of-hooks": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",

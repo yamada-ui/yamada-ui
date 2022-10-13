@@ -12,7 +12,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "cli": "node cli",
-    "tokens": "node cli tokens ./themes/index.ts"
+    "tokens": "node cli tokens ./themes/index.ts",
+    "next": "yarn --cwd ./examples/next-js dev",
+    "react": "yarn --cwd ./examples/create-react-app start"
   },
   "files": [
     "package.json",

@@ -40,9 +40,7 @@ export const SchemeProvider: FC<SchemeProviderProps> = ({
 }) => {
   const defaultScheme = initialScheme === 'dark' ? 'dark' : 'light'
 
-  const [scheme, setScheme] = useState<Scheme>(
-    schemeManager.type === 'cookie' ? schemeManager.get(defaultScheme) : defaultScheme,
-  )
+  const [scheme, setScheme] = useState<Scheme>(schemeManager.get(defaultScheme) ?? defaultScheme)
 
   const changeScheme = useCallback(
     (value: Scheme, isObserver: boolean = false): void => {
@@ -80,20 +78,14 @@ export const SchemeProvider: FC<SchemeProviderProps> = ({
     if (isBrowser && isLocalStorage) {
       const systemScheme = getScheme(defaultScheme)
 
-      if (useSystemScheme) {
-        return changeScheme(systemScheme)
-      }
+      if (useSystemScheme) return changeScheme(systemScheme)
 
       const rootScheme = rootManager.get()
       const localStorageScheme = schemeManager.get()
 
-      if (rootScheme) {
-        return changeScheme(rootScheme)
-      }
+      if (rootScheme) return changeScheme(rootScheme)
 
-      if (localStorageScheme) {
-        return changeScheme(localStorageScheme)
-      }
+      if (localStorageScheme) return changeScheme(localStorageScheme)
 
       return changeScheme(defaultScheme)
     }

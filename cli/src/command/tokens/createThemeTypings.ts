@@ -58,8 +58,7 @@ export const extractTransitions = (
 
   const { transitions } = theme
 
-  if (!isObject<object>(transitions))
-    return { transitionProperty, transitionDuration, transitionEasing }
+  if (!isObject(transitions)) return { transitionProperty, transitionDuration, transitionEasing }
 
   Object.entries(transitions).forEach(([key, value]) => {
     switch (key) {
@@ -86,7 +85,7 @@ export const extractTransitions = (
 const isDefault = (key: any): boolean => defaultKeys.includes(key)
 
 const isHue = (value: any): boolean => {
-  if (!isObject<object>(value)) return false
+  if (!isObject(value)) return false
 
   const keys = Object.keys(value)
 
@@ -96,7 +95,7 @@ const isHue = (value: any): boolean => {
 export const extractColorSchemes = (theme: any): string[] => {
   const { colors } = theme
 
-  if (!isObject<object>(colors)) return []
+  if (!isObject(colors)) return []
 
   return Object.entries(colors).reduce((array, [key, value]) => {
     if (isHue(value) || isDefault(key)) array.push(key)
@@ -106,7 +105,7 @@ export const extractColorSchemes = (theme: any): string[] => {
 }
 
 export const extractPaths = (target: any, maxDepth = 3): string[] => {
-  if ((!isObject<object>(target) && !Array.isArray(target)) || !maxDepth) return []
+  if ((!isObject(target) && !Array.isArray(target)) || !maxDepth) return []
 
   return Object.entries(target).reduce((array, [key, value]) => {
     if (isObject(value)) {
@@ -124,7 +123,7 @@ export const extractKeys = (theme: any, key: string): string[] => {
 
   const property = keys.reduce((obj, key) => obj[key] ?? {}, theme)
 
-  if (!isObject<object>(property)) return []
+  if (!isObject(property)) return []
 
   return Object.keys(property)
 }

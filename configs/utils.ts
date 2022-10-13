@@ -1,5 +1,5 @@
 import { ThemeToken } from '../functions'
-import { Dict, StyledTheme, Theme } from '../types'
+import { Dict, StyledTheme } from '../types'
 import { isArray, isObject, isString } from '../utils'
 import { Transform } from './'
 

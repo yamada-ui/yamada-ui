@@ -1,6 +1,6 @@
-import { useTheme } from '@emotion/react'
 import { Theme } from '../types'
 import { getMemoizedObject as get } from '../utils'
+import { useTheme } from './'
 
 export const useSpace = (path: Theme['spaces']) => {
   const theme = useTheme()

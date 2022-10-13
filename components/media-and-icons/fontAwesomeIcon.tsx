@@ -1,7 +1,7 @@
 import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { useFontSize, useTheme } from 'hooks'
 import { css as createCSS } from '../../functions'
-import { useFontSize, useTheme } from '../../hooks'
 import { forwardRef } from '../../system'
 import { HTMLUIProps, CSSUIProps } from '../../types'
 import { cx, replaceObject, isUnit } from '../../utils'

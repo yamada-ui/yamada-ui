@@ -1,6 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
+import { Dict, StyledTheme } from '../types'
 import { getMemoizedObject as get } from './'
-import { Dict, StyledTheme } from 'types'
 
 export const getColor = (theme: StyledTheme<Dict>, color: string, fallback?: string) => {
   const hex: string | undefined = get(theme, `colors.${color}`, color)

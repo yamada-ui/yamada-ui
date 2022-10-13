@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
-    "baseUrl": "./",
+    "outDir": "dist",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,8 +15,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
-    "incremental": true
+    "incremental": true,
+    "sourceMap": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/loading/___Loading"],
-  "exclude": ["node_modules", "cli"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "examples", "cli"]
 }

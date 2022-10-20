@@ -1,3 +1,5 @@
-export const App = () => {
-  return <div></div>
+import { FC } from 'react'
+
+export const App: FC = () => {
+  return <></>
 }

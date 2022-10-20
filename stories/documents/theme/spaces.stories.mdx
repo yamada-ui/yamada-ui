@@ -1,0 +1,131 @@
+import { Canvas, Meta } from '@storybook/addon-docs'
+import { Grid, Text, Box, defaultTheme } from '@yamada-ui/react'
+import { Provider } from '../../provider'
+import { Fragment } from 'react'
+
+<Meta title='Documents / Theme / Spaces' />
+
+# Spaces
+
+```ts
+const spaces = {
+  xs: '0.25rem',
+  sm: '0.5rem',
+  md: '1rem',
+  normal: '1.5rem',
+  lg: '2rem',
+  xl: '3rem',
+  '2xl': '4.5rem',
+  '3xl': '6rem',
+  '4xl': '10rem',
+
+  px: '1px',
+  0.5: '0.125rem',
+  1: '0.25rem',
+  1.5: '0.375rem',
+  2: '0.5rem',
+  2.5: '0.625rem',
+  3: '0.75rem',
+  3.5: '0.875rem',
+  4: '1rem',
+  5: '1.25rem',
+  6: '1.5rem',
+  7: '1.75rem',
+  8: '2rem',
+  9: '2.25rem',
+  10: '2.5rem',
+  12: '3rem',
+  14: '3.5rem',
+  16: '4rem',
+  20: '5rem',
+  24: '6rem',
+  28: '7rem',
+  32: '8rem',
+  36: '9rem',
+  40: '10rem',
+  44: '11rem',
+  48: '12rem',
+  52: '13rem',
+  56: '14rem',
+  60: '15rem',
+  64: '16rem',
+  72: '18rem',
+  80: '20rem',
+  96: '24rem',
+}
+```
+
+## Token
+
+<Provider>
+  <Grid templateColumns='5rem 5rem 5rem 1fr' my='md' gap='md'>
+    <Text>Name</Text>
+    <Text>Rem</Text>
+    <Text>Pixel</Text>
+    <Box></Box>
+    <Text>xs</Text>
+    <Text>0.25rem</Text>
+    <Text>4px</Text>
+    <Box maxW='0.25rem' h='9xs' bg='red.500'></Box>
+    <Text>sm</Text>
+    <Text>0.5rem</Text>
+    <Text>8px</Text>
+    <Box maxW='0.5rem' h='9xs' bg='red.500'></Box>
+    <Text>md</Text>
+    <Text>1rem</Text>
+    <Text>16px</Text>
+    <Box maxW='1rem' h='9xs' bg='red.500'></Box>
+    <Text>normal</Text>
+    <Text>1.5rem</Text>
+    <Text>24px</Text>
+    <Box maxW='1.5rem' h='9xs' bg='red.500'></Box>
+    <Text>lg</Text>
+    <Text>2rem</Text>
+    <Text>32px</Text>
+    <Box maxW='2rem' h='9xs' bg='red.500'></Box>
+    <Text>xl</Text>
+    <Text>3rem</Text>
+    <Text>48px</Text>
+    <Box maxW='3rem' h='9xs' bg='red.500'></Box>
+    <Text>2xl</Text>
+    <Text>4.5rem</Text>
+    <Text>72px</Text>
+    <Box maxW='4.5rem' h='9xs' bg='red.500'></Box>
+    <Text>3xl</Text>
+    <Text>6rem</Text>
+    <Text>96px</Text>
+    <Box maxW='6rem' h='9xs' bg='red.500'></Box>
+    <Text>4xl</Text>
+    <Text>10rem</Text>
+    <Text>160px</Text>
+    <Box maxW='10rem' h='9xs' bg='red.500'></Box>
+  </Grid>
+</Provider>
+
+## Default
+
+<Provider>
+  <Grid templateColumns='5rem 5rem 5rem 1fr' my='md' gap='md'>
+    <Text>Name</Text>
+    <Text>Rem</Text>
+    <Text>Pixel</Text>
+    <Box></Box>
+    <Text>px</Text>
+    <Text>0.0625rem</Text>
+    <Text>1px</Text>
+    <Box maxW='1px' h='9xs' bg='green.500'></Box>
+    {Object.entries(defaultTheme.spaces)
+      .filter(([key]) => !isNaN(Number(key)))
+      .sort(([a], [b]) => a - b)
+      .map(([key, value]) => {
+        return (
+          <Fragment key={key}>
+            <Text>{key}</Text>
+            <Text>{value}</Text>
+            <Text>{`${parseFloat(value) * 16}px`}</Text>
+            <Box maxW={value} h='9xs' bg='green.500'></Box>
+          </Fragment>
+        )
+      })}
+  </Grid>
+</Provider>

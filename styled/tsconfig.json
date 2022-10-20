@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [
+    "src",
+    "index.ts",
+    "../hooks/src/useBoolean.tsx",
+    "../hooks/src/index.ts",
+    "../hooks/src/index.ts"
+  ]
+}

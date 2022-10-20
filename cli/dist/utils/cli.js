@@ -1,23 +1,33 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.initCLI = void 0;
-const cli_check_node_1 = __importDefault(require("cli-check-node"));
-const cli_handle_unhandled_1 = __importDefault(require("cli-handle-unhandled"));
-const cli_welcome_1 = __importDefault(require("cli-welcome"));
+
+var _cliCheckNode = _interopRequireDefault(require("cli-check-node"));
+
+var _cliHandleUnhandled = _interopRequireDefault(require("cli-handle-unhandled"));
+
+var _cliWelcome = _interopRequireDefault(require("cli-welcome"));
+
+var _package = _interopRequireDefault(require("../../package.json"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 const initCLI = async () => {
-    (0, cli_check_node_1.default)('12');
-    await (0, cli_handle_unhandled_1.default)();
-    (0, cli_welcome_1.default)({
-        title: 'Yamada UI CLI',
-        tagLine: `by Yamada UI\nGenerate theme tokens for autocomplete`,
-        bgColor: `#49b657`,
-        color: `#FFFFFF`,
-        bold: true,
-        clear: false,
-        version: '0.1.1',
-    });
+  (0, _cliCheckNode.default)("12");
+  await (0, _cliHandleUnhandled.default)();
+  (0, _cliWelcome.default)({
+    title: "Yamada UI CLI",
+    tagLine: `by Yamada UI
+${_package.default.description}`,
+    bgColor: `#49b657`,
+    color: `#FFFFFF`,
+    bold: true,
+    clear: false,
+    version: _package.default.version
+  });
 };
+
 exports.initCLI = initCLI;

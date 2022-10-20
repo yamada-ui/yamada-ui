@@ -1,11 +1,9 @@
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
+import { render } from 'react-dom'
 import { App } from './App'
-import { UIProvider, SchemeScript } from 'yamada-ui'
+import { UIProvider, SchemeScript } from '@yamada-ui/react'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-
-root.render(
+render(
   <StrictMode>
     <SchemeScript />
 
@@ -13,4 +11,5 @@ root.render(
       <App />
     </UIProvider>
   </StrictMode>,
+  document.getElementById('root'),
 )

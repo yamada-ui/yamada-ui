@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@yamada-ui/react": "workspace:*",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "react-fast-compare": "^3.2.0",
+    "@ctrl/tinycolor": "^3.4.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",

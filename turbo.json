@@ -1,0 +1,21 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build"]
+    },
+    "build:fast": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build:fast"]
+    },
+    "dev": {
+      "cache": false
+    },
+    "typecheck": {
+      "cache": false,
+      "dependsOn": ["^typecheck"]
+    }
+  },
+  "globalDependencies": ["tsconfig.json"]
+}

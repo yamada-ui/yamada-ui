@@ -1,0 +1,39 @@
+{
+  "name": "@yamada-ui/providers",
+  "version": "1.0.0",
+  "description": "Yamada UI providers",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "JSX=1 tsup src/index.ts --dts",
+    "build:fast": "JSX=1 tsup src/index.ts",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/styled": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/theme": "workspace:*"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.10.4",
+    "react": "^18.0.0",
+    "clean-package": "2.1.1"
+  },
+  "peerDependencies": {
+    "@yamada-ui/styled": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
+    "@emotion/react": "^11.10.4",
+    "react": ">=18"
+  }
+}

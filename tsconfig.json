@@ -3,22 +3,26 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
-    "rootDir": "./",
-    "outDir": "dist",
-    "allowJs": true,
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "incremental": true,
-    "sourceMap": false
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "examples", "cli"]
+  "include": ["@types", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "examples", "cli"],
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

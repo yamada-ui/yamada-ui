@@ -1,0 +1,53 @@
+{
+  "name": "@yamada-ui/react",
+  "version": "0.1.0",
+  "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "JSX=1 tsup src/index.ts --dts",
+    "build:fast": "JSX=1 tsup src/index.ts",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/layouts": "workspace:*",
+    "@yamada-ui/typography": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*",
+    "@yamada-ui/feedback": "workspace:*",
+    "@yamada-ui/forms": "workspace:*"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "clean-package": "2.1.1"
+  },
+  "peerDependencies": {
+    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/layouts": "workspace:*",
+    "@yamada-ui/typography": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*",
+    "@yamada-ui/feedback": "workspace:*",
+    "@yamada-ui/forms": "workspace:*",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

@@ -1,63 +1,64 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
-const path = __importStar(require("path"));
-const chokidar_1 = __importDefault(require("chokidar"));
-const commander_1 = require("commander");
-const lodash_throttle_1 = __importDefault(require("lodash.throttle"));
-const tokens_1 = require("./command/tokens");
-const utils_1 = require("./utils");
+
+var path = _interopRequireWildcard(require("path"));
+
+var _chokidar = _interopRequireDefault(require("chokidar"));
+
+var _commander = require("commander");
+
+var _lodash = _interopRequireDefault(require("lodash.throttle"));
+
+var _tokens = require("./command/tokens");
+
+var _utils = require("./utils");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 const run = async () => {
-    await (0, utils_1.initCLI)();
-    commander_1.program
-        .command('tokens <source>')
-        .option('--watch [path]', 'Watch directory for changes and rebuild')
-        .action(async (themeFile, { watch: watchFile }) => {
-        if (watchFile) {
-            const watchPath = typeof watchFile === 'string' ? watchFile : path.dirname(themeFile);
-            const throttledGenerateThemeTypings = (0, lodash_throttle_1.default)(async () => {
-                console.time('Generated Theme');
-                await (0, tokens_1.generateThemeTypings)({ themeFile });
-                console.timeEnd('Generated Theme');
-                console.info(new Date().toLocaleString());
-            }, 1000);
-            throttledGenerateThemeTypings();
-            chokidar_1.default.watch(watchPath).on('change', throttledGenerateThemeTypings);
-        }
-        else {
-            await (0, tokens_1.generateThemeTypings)({ themeFile });
-        }
-    });
-    commander_1.program.parse();
+  await (0, _utils.initCLI)();
+
+  _commander.program.command("tokens <source>").option("--out <path>", `output file to ${path.join(..._tokens.themePath)}`).option("--watch [path]", "Watch directory for changes and rebuild").action(async (themeFile, {
+    out: outFile,
+    watch: watchFile
+  }) => {
+    if (watchFile) {
+      const watchPath = typeof watchFile === "string" ? watchFile : path.dirname(themeFile);
+      const throttledGenerateThemeTypings = (0, _lodash.default)(async () => {
+        console.time("Generated Theme");
+        await (0, _tokens.generateThemeTypings)({
+          themeFile,
+          outFile
+        });
+        console.timeEnd("Generated Theme");
+        console.info(new Date().toLocaleString());
+      }, 1e3);
+      throttledGenerateThemeTypings();
+
+      _chokidar.default.watch(watchPath).on("change", throttledGenerateThemeTypings);
+    } else {
+      await (0, _tokens.generateThemeTypings)({
+        themeFile,
+        outFile
+      });
+    }
+  });
+
+  _commander.program.on("--help", () => {
+    console.info(`Example call:
+
+$ yamada-cli tokens theme.ts`);
+  });
+
+  _commander.program.parse();
 };
+
 exports.run = run;
-(0, exports.run)().catch((e) => {
-    console.error(e);
-    process.exit(1);
-});

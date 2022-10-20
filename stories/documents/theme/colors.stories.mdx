@@ -1,0 +1,486 @@
+import { Canvas, Meta } from '@storybook/addon-docs'
+import { Grid, HStack, VStack, Text, Box, defaultTheme } from '@yamada-ui/react'
+import { Provider } from '../../provider'
+
+<Meta title='Documents / Theme / Colors' />
+
+# Colors
+
+## Black & White
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    <HStack>
+      <Box bg='black' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          Black
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.black}</Text>
+      </VStack>
+    </HStack>
+    <HStack>
+      <Box bg='White' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          White
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.white}</Text>
+      </VStack>
+    </HStack>
+  </Grid>
+</Provider>
+
+## Standard
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    <HStack>
+      <Box bg='primary' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          Primary
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.primary}</Text>
+      </VStack>
+    </HStack>
+    <HStack>
+      <Box bg='secondary' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          Secondary
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.secondary}</Text>
+      </VStack>
+    </HStack>
+    <HStack>
+      <Box bg='warning' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          Warning
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.warning}</Text>
+      </VStack>
+    </HStack>
+    <HStack>
+      <Box bg='danger' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          danger
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.danger}</Text>
+      </VStack>
+    </HStack>
+    <HStack>
+      <Box bg='link' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          Link
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.link}</Text>
+      </VStack>
+    </HStack>
+    <HStack>
+      <Box bg='border' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+      <VStack gap='0.5'>
+        <Text fontWeight='semibold' noOfLines={1}>
+          Border
+        </Text>
+        <Text noOfLines={1}>{defaultTheme.colors.border}</Text>
+      </VStack>
+    </HStack>
+  </Grid>
+</Provider>
+
+## Alphas
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`whiteAlpha.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'whiteAlpha'.charAt(0).toUpperCase() + 'whiteAlpha'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+    {Object.entries(defaultTheme.colors.blackAlpha).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`blackAlpha.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'blackAlpha'.charAt(0).toUpperCase() + 'blackAlpha'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Gray
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.gray).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`gray.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'gray'.charAt(0).toUpperCase() + 'gray'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Red
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.red).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`red.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'red'.charAt(0).toUpperCase() + 'red'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Orange
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.orange).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`orange.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'orange'.charAt(0).toUpperCase() + 'orange'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Yellow
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.yellow).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`yellow.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'yellow'.charAt(0).toUpperCase() + 'yellow'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Green
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.green).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`green.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'green'.charAt(0).toUpperCase() + 'green'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Teal
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.teal).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`teal.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'teal'.charAt(0).toUpperCase() + 'teal'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Blue
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.blue).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`blue.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'blue'.charAt(0).toUpperCase() + 'blue'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Cyan
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.cyan).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`cyan.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'cyan'.charAt(0).toUpperCase() + 'cyan'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Purple
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.purple).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`purple.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'purple'.charAt(0).toUpperCase() + 'purple'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Pink
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.pink).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`pink.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'pink'.charAt(0).toUpperCase() + 'pink'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Linkedin
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.linkedin).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`linkedin.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'linkedin'.charAt(0).toUpperCase() + 'linkedin'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Facebook
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.facebook).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`facebook.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'facebook'.charAt(0).toUpperCase() + 'facebook'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Messenger
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.messenger).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`messenger.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'messenger'.charAt(0).toUpperCase() + 'messenger'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Whatsapp
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.whatsapp).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`whatsapp.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'whatsapp'.charAt(0).toUpperCase() + 'whatsapp'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Whatsapp
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.whatsapp).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`whatsapp.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'whatsapp'.charAt(0).toUpperCase() + 'whatsapp'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Line
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.line).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`line.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'line'.charAt(0).toUpperCase() + 'line'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Instagram
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.instagram).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`instagram.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'instagram'.charAt(0).toUpperCase() + 'instagram'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>
+
+## Youtube
+
+<Provider>
+  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
+    {Object.entries(defaultTheme.colors.youtube).map(([key, value]) => {
+      return (
+        <HStack key={key}>
+          <Box bg={`youtube.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <VStack gap='0.5'>
+            <Text fontWeight='semibold' noOfLines={1}>
+              {'youtube'.charAt(0).toUpperCase() + 'youtube'.slice(1)} {key}
+            </Text>
+            <Text noOfLines={1}>{value}</Text>
+          </VStack>
+        </HStack>
+      )
+    })}
+  </Grid>
+</Provider>

@@ -1,0 +1,37 @@
+{
+  "name": "@yamada-ui/media-and-icons",
+  "version": "1.0.0",
+  "description": "Yamada UI media and icons components",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "JSX=1 tsup src/index.ts --dts",
+    "build:fast": "JSX=1 tsup src/index.ts",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "clean-package": "2.1.1",
+    "react": "^18.0.0"
+  },
+  "peerDependencies": {
+    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "react": ">=18"
+  }
+}

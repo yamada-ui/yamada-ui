@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import { SchemeScript } from 'yamada-ui'
+import { SchemeScript } from '@yamada-ui/react'
 
 export default class Document extends NextDocument {
   render() {

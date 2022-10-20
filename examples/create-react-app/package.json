@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@yamada-ui/react": "workspace:*",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "react-fast-compare": "^3.2.0",
+    "@ctrl/tinycolor": "^3.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
@@ -11,6 +21,8 @@
     "@types/node": "^16.11.65",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "eslint": "8.19.0",
+    "eslint-config-react-app": "^7.0.1",
     "typescript": "^4.8.4"
   },
   "scripts": {
@@ -18,10 +30,7 @@
     "build": "react-scripts build"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [

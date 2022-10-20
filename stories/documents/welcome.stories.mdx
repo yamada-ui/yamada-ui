@@ -1,0 +1,40 @@
+import { Canvas, Meta } from '@storybook/addon-docs'
+import { Text, Center, Image } from '@yamada-ui/react'
+import { Provider } from '../provider'
+
+<Meta title='Documents / Welcome' />
+
+<Provider>
+  <Center mb='16'>
+    <Image
+      maxW='xl'
+      src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/public/yamada-ui.png?raw=true'
+    />
+  </Center>
+</Provider>
+
+# Usage
+
+1. Wrap your application with the `UIProvider` provided
+
+```tsx
+import { UIProvider } from '@yamada-ui/react'
+
+const App = ({ children }) => {
+  return <UIProvider>{children}</UIProvider>
+}
+
+export default App
+```
+
+Yamada-ui supports light and dark modes by default
+
+2. Now you can start using components like so
+
+```tsx
+import { Text } from '@yamada-ui/react'
+
+const Example = () => {
+  return <Text>ギャルのパンティーおくれーーーっ！！！！！</Text>
+}
+```

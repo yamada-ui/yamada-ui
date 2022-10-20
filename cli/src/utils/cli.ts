@@ -1,6 +1,7 @@
 import checkNode from 'cli-check-node'
 import unhandledError from 'cli-handle-unhandled'
 import welcome from 'cli-welcome'
+import JSON from '../../package.json'
 
 export const initCLI = async () => {
   checkNode('12')
@@ -9,11 +10,11 @@ export const initCLI = async () => {
 
   welcome({
     title: 'Yamada UI CLI',
-    tagLine: `by Yamada UI\nGenerate theme tokens for autocomplete`,
+    tagLine: `by Yamada UI\n${JSON.description}`,
     bgColor: `#49b657`,
     color: `#FFFFFF`,
     bold: true,
     clear: false,
-    version: '0.1.1',
+    version: JSON.version,
   })
 }

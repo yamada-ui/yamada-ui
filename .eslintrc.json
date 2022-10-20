@@ -1,19 +1,28 @@
 {
   "root": true,
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": ["plugin:import/recommended", "plugin:import/warnings", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "ecmaVersion": 10
   },
-  "plugins": ["react"],
+  "extends": [
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": ["@typescript-eslint/eslint-plugin", "testing-library"],
   "rules": {
     "import/order": [
       "error",

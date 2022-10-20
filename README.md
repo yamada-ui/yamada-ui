@@ -13,20 +13,19 @@
 
 ```sh
 $ node -v → v16.**.*
-$ yarn install
+$ pnpm install
 ```
 
 # Run
 
 ```sh
-$ yarn dev
-$ open http://localhost:4444
+$ pnpm storybook
 ```
 
 # Generate Theme Tokens
 
 ```sh
-$ yarn tokens
+$ pnpm build:tokens
 ```
 
 # Usage
@@ -62,12 +61,19 @@ const Example = () => {
 # Use
 
 - [Next.js](https://nextjs.org/)
+- [Create React App](https://create-react-app.dev/)
+- [Storybook](https://storybook.js.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Fortawesome](https://fontawesome.com/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [react-loader-spinner](https://mhnpd.github.io/react-loader-spinner/)
 - [emotion/react](https://emotion.sh/docs/@emotion/react)
 - [emotion/styled](https://emotion.sh/docs/@emotion/styled)
 - [ctrl/tinycolor](https://tinycolor.vercel.app/)
 - [react-fast-compare](https://www.npmjs.com/package/react-fast-compare)
 - [babel](https://babeljs.io/)
+- [turbo](https://turborepo.org/)
+- [tsup](https://tsup.egoist.dev/)
+- [ts-node](https://typestrong.org/ts-node/)
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)

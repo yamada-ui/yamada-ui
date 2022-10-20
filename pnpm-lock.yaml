@@ -161,6 +161,19 @@ importers:
       typescript: 4.8.4
       unbuild: 0.7.4
 
+  components/data-display:
+    specifiers:
+      '@yamada-ui/system': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/system': link:../../system
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   components/feedback:
     specifiers:
       '@yamada-ui/system': workspace:*
@@ -364,6 +377,7 @@ importers:
     specifiers:
       '@emotion/react': ^11.10.4
       '@emotion/styled': ^11.10.4
+      '@yamada-ui/data-display': workspace:*
       '@yamada-ui/feedback': workspace:*
       '@yamada-ui/forms': workspace:*
       '@yamada-ui/layouts': workspace:*
@@ -376,6 +390,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
+      '@yamada-ui/data-display': link:../components/data-display
       '@yamada-ui/feedback': link:../components/feedback
       '@yamada-ui/forms': link:../components/forms
       '@yamada-ui/layouts': link:../components/layouts
@@ -6796,7 +6811,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
+      styled-components: 5.3.6_tgppsxbwbt7anzz66bgq6kuiw4
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha512-qrPaCSo9c8RHNRHIotaufGbuOBN8rtdC4QrrFFc43vyWCCz7Kl7GL1PGaXtMGQZUXrkCjNEgxDfmAuAabr/rlw==}
@@ -17450,6 +17465,7 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
+    dev: false
 
   /styled-components/5.3.6_tgppsxbwbt7anzz66bgq6kuiw4:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -17472,7 +17488,6 @@ packages:
       react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
-    dev: true
 
   /styled-jsx/5.0.7_react@18.2.0:
     resolution: {integrity: sha512-b3sUzamS086YLRuvnaDigdAewz1/EFYlHpYBP5mZovKEdQQOIIYq8lApylub3HHZ6xFjV051kkGU7cudJmrXEA==}

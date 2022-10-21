@@ -3,7 +3,7 @@ import { Theme } from '@yamada-ui/styled'
 import { useBreakpoint } from '.'
 
 export const useBreakpointValue = <T extends any>(
-  values: Record<'base' | Theme['breakpoints'], T>,
+  values: Partial<Record<'base' | Theme['breakpoints'], T>>,
 ): T | undefined => {
   const breakpoint = useBreakpoint()
   const [value, setValue] = useState<T | undefined>(undefined)

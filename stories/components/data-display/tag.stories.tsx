@@ -294,19 +294,19 @@ export const withIcon: ComponentStory<typeof Tag> = () => {
 export const withCloseButton: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorScheme='primary' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='primary' rounded='full' onCloseClick={() => alert('this click')}>
         Cyan
       </Tag>
 
-      <Tag colorScheme='secondary' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='secondary' rounded='full' onCloseClick={() => alert('this click')}>
         Secondary
       </Tag>
 
-      <Tag colorScheme='warning' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='warning' rounded='full' onCloseClick={() => alert('this click')}>
         Warning
       </Tag>
 
-      <Tag colorScheme='danger' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='danger' rounded='full' onCloseClick={() => alert('this click')}>
         Danger
       </Tag>
     </Wrap>
@@ -319,6 +319,7 @@ export const withDisabled: ComponentStory<typeof Tag> = () => {
       <Tag
         variant='solid'
         colorScheme='primary'
+        rounded='full'
         onCloseClick={() => alert('this click')}
         isDisabled
       >
@@ -328,6 +329,7 @@ export const withDisabled: ComponentStory<typeof Tag> = () => {
       <Tag
         variant='solid'
         colorScheme='secondary'
+        rounded='full'
         onCloseClick={() => alert('this click')}
         isDisabled
       >
@@ -337,13 +339,20 @@ export const withDisabled: ComponentStory<typeof Tag> = () => {
       <Tag
         variant='solid'
         colorScheme='warning'
+        rounded='full'
         onCloseClick={() => alert('this click')}
         isDisabled
       >
         Warning
       </Tag>
 
-      <Tag variant='solid' colorScheme='danger' onCloseClick={() => alert('this click')} isDisabled>
+      <Tag
+        variant='solid'
+        colorScheme='danger'
+        rounded='full'
+        onCloseClick={() => alert('this click')}
+        isDisabled
+      >
         Danger
       </Tag>
     </Wrap>

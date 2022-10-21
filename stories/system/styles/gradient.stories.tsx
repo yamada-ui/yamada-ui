@@ -5,7 +5,9 @@ export default {
 }
 
 export const withToken = () => {
-  return <Box w='full' height='xs' bgGradient='linear(to-r, green.200, pink.500)'></Box>
+  return (
+    <Box w='full' height='xs' bgGradient='linear(to-r, green.200, pink.500)' rounded='lg'></Box>
+  )
 }
 
 export const withColorCode = () => {
@@ -32,6 +34,7 @@ export const withBreakpoint = () => {
         lg: 'linear(to-t, blue.200, teal.500)',
         md: 'linear(to-b, orange.100, purple.300)',
       }}
+      rounded='lg'
     ></Box>
   )
 }

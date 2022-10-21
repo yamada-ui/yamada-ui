@@ -1,15 +1,16 @@
 import { ComponentStyle } from '@yamada-ui/styled'
 
-export const kbd: ComponentStyle = {
+export const Kbd: ComponentStyle = {
   baseStyle: {
     fontFamily: 'mono',
-    bg: ['gray.100', 'whiteAlpha'],
+    bg: ['gray.200', 'whiteAlpha.200'],
     borderRadius: 'md',
-    borderWidth: '1px',
-    borderBottomWidth: '3px',
+    border: '1px solid',
+    borderColor: ['gray.300', 'whiteAlpha.300'],
     fontSize: '0.8em',
     fontWeight: 'bold',
-    lineHeight: 'normal',
+    lineHeight: 'shorter',
+    py: '0.2em',
     px: '0.4em',
     whiteSpace: 'nowrap',
   },

@@ -10,16 +10,7 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> & UIProps
 
 export const Icon = forwardRef<IconProps, 'svg'>(
   (
-    {
-      as: element,
-      viewBox,
-      color = 'currentColor',
-      size: fontSize,
-      children,
-      className,
-      __css,
-      ...rest
-    },
+    { as: element, viewBox, color = 'currentColor', size: fontSize, className, __css, ...rest },
     ref,
   ) => {
     const boxSize = replaceObject(fontSize, (value) =>

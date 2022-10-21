@@ -3,6 +3,7 @@ import { Text, VStack } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Typography / Text',
+  component: Text,
 } as ComponentMeta<typeof Text>
 
 export const basic: ComponentStory<typeof Text> = () => {

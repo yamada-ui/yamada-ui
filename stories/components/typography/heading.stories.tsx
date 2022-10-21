@@ -3,6 +3,7 @@ import { VStack, Heading } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Typography / Heading',
+  component: Heading,
 } as ComponentMeta<typeof Heading>
 
 export const basic: ComponentStory<typeof Heading> = () => {

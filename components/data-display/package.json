@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
   "peerDependencies": {
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*",
     "react": ">=18"
   }
 }

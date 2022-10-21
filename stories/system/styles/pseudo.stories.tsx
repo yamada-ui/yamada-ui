@@ -58,8 +58,8 @@ export const hover = () => {
   return (
     <Box
       bg='primary'
-      p='lg'
-      rounded='lg'
+      p='md'
+      rounded='md'
       color='white'
       cursor='pointer'
       transitionProperty='all'

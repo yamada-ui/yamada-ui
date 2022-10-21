@@ -482,5 +482,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})
       variants: string & {}
     }
+    Badge: { sizes: string & {}; variants: 'solid' | 'subtle' | 'outline' | (string & {}) }
+    Tag: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'solid' | 'subtle' | 'outline' | (string & {})
+    }
   }
 }

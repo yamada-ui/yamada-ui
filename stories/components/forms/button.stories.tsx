@@ -9,6 +9,7 @@ import {
   faPlus,
   faSun,
 } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   title: 'Components / Forms / Button',
   component: Button,

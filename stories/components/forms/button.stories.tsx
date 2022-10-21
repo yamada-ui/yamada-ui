@@ -169,19 +169,19 @@ export const withSize: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary' size='xs'>
-        Button
+        X Small
       </Button>
 
       <Button colorScheme='secondary' size='sm'>
-        Button
+        Small
       </Button>
 
       <Button colorScheme='warning' size='md'>
-        Button
+        Medium
       </Button>
 
       <Button colorScheme='danger' size='lg'>
-        Button
+        Large
       </Button>
     </Wrap>
   )
@@ -191,22 +191,22 @@ export const withVariant: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary' variant='solid'>
-        Button
+        Solid
       </Button>
 
       <Button colorScheme='secondary' variant='outline'>
-        Button
+        Outline
       </Button>
 
       <Button colorScheme='warning' variant='ghost'>
-        Button
+        Ghost
       </Button>
 
       <Button colorScheme='danger' variant='link'>
-        Button
+        Link
       </Button>
 
-      <Button variant='unstyled'>Button</Button>
+      <Button variant='unstyled'>Unstyle</Button>
     </Wrap>
   )
 }
@@ -215,23 +215,23 @@ export const withDisabled: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary' variant='solid' isDisabled>
-        Button
+        Solid
       </Button>
 
       <Button colorScheme='secondary' variant='outline' isDisabled>
-        Button
+        Outline
       </Button>
 
       <Button colorScheme='warning' variant='ghost' isDisabled>
-        Button
+        Ghost
       </Button>
 
       <Button colorScheme='danger' variant='link' isDisabled>
-        Button
+        Link
       </Button>
 
       <Button variant='unstyled' isDisabled>
-        Button
+        Unstyle
       </Button>
     </Wrap>
   )

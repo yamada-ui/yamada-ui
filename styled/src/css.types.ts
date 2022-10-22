@@ -12,7 +12,7 @@ export type ThemeProps<Y extends string = any> = {
 
 export type SchemeArray<Y> = [Y, Y]
 
-export type ResponsiveObject<Y> = Partial<Record<Theme['breakpoints'], Y>>
+export type ResponsiveObject<Y> = Partial<Record<'base' | Theme['breakpoints'], Y>>
 
 export type Token<Y, M = unknown, D = 'responsive', H = 'scheme'> = M extends keyof Theme
   ? D extends 'responsive'

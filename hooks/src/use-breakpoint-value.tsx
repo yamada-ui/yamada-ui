@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Theme } from '@yamada-ui/styled'
+import { Theme, ResponsiveObject } from '@yamada-ui/styled'
 import { useBreakpoint } from '.'
 
-export const useBreakpointValue = <T extends any>(
-  values: Partial<Record<'base' | Theme['breakpoints'], T>>,
-): T | undefined => {
+export const useBreakpointValue = <T extends any>(values: ResponsiveObject<T>) => {
   const breakpoint = useBreakpoint()
   const [value, setValue] = useState<T | undefined>(undefined)
 

@@ -1,7 +1,7 @@
 import { Box, useScheme, useSchemetValue } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Styles / Scheme',
+  title: 'System / Styles / Scheme',
 }
 
 export const basic = () => {

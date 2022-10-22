@@ -1,7 +1,7 @@
 import { Box, Heading } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Styles / Gradient',
+  title: 'System / Styles / Gradient',
 }
 
 export const withToken = () => {

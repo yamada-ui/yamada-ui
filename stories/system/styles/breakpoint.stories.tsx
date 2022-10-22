@@ -1,7 +1,7 @@
 import { Box, useBreakpoint, useBreakpointValue } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Styles / Breakpoint',
+  title: 'System / Styles / Breakpoint',
 }
 
 export const basic = () => {

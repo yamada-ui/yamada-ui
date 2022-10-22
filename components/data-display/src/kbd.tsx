@@ -8,7 +8,7 @@ import {
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 
-export type KbdProps = HTMLUIProps<'kbd'> & ThemeProps<'kbd'>
+export type KbdProps = HTMLUIProps<'kbd'> & ThemeProps<'Kbd'>
 
 export const Kbd = forwardRef<KbdProps, 'kbd'>((props, ref) => {
   const css = useComponentStyle('Kbd', props)

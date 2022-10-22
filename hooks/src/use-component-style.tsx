@@ -10,10 +10,7 @@ import {
 } from '@yamada-ui/utils'
 import { ComponentStyle, CSSUIObject } from '@yamada-ui/styled'
 
-export const useComponentStyle = (
-  name: string,
-  props: any,
-): CSSUIObject | Record<string, CSSUIObject> => {
+const usetStyle = (name: string, props: any): CSSUIObject | Record<string, CSSUIObject> => {
   const theme = useTheme()
   const { scheme } = useScheme()
 
@@ -46,3 +43,7 @@ export const useComponentStyle = (
 
   return ref.current
 }
+
+export const useComponentStyle = (name: string, props: any) => usetStyle(name, props) as CSSUIObject
+export const useMultiComponentStyle = (name: string, props: any) =>
+  usetStyle(name, props) as Record<string, CSSUIObject>

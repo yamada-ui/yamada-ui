@@ -4,9 +4,6 @@ import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
 
 export const Badge: ComponentStyle = {
   baseStyle: {
-    display: 'inline-block',
-    whiteSpace: 'nowrap',
-    verticalAlign: 'middle',
     px: 1,
     textTransform: 'uppercase',
     fontSize: 'xs',

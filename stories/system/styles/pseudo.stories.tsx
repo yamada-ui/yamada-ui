@@ -1,7 +1,7 @@
 import { Box, Center, Wrap } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Styles / Pseudo',
+  title: 'System / Styles / Pseudo',
 }
 
 export const after = () => {

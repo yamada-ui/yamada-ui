@@ -1,5 +1,5 @@
 import { SVGAttributes } from 'react'
-import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps, useFontSize } from '@yamada-ui/system'
+import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps, useToken } from '@yamada-ui/system'
 import { cx, replaceObject, isUnit } from '@yamada-ui/utils'
 
 type IconOptions = {
@@ -14,7 +14,7 @@ export const Icon = forwardRef<IconProps, 'svg'>(
     ref,
   ) => {
     const boxSize = replaceObject(fontSize, (value) =>
-      !isUnit(value) ? useFontSize(value) : value,
+      !isUnit(value) ? useToken('fontSizes', value) : value,
     )
 
     const css: CSSUIObject = {

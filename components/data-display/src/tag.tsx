@@ -3,7 +3,7 @@ import {
   forwardRef,
   HTMLUIProps,
   ThemeProps,
-  useComponentStyle,
+  useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
 } from '@yamada-ui/system'
@@ -21,14 +21,23 @@ type TagnOptions = {
 export type TagProps = HTMLUIProps<'span'> & ThemeProps<'Tag'> & TagnOptions
 
 export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
-  const css = useComponentStyle('Tag', props)
+  const style = useMultiComponentStyle('Tag', props)
   const { className, leftIcon, rightIcon, onCloseClick, isDisabled, children, ...rest } =
     omitThemeProps(props)
+
+  const css: CSSUIObject = {
+    maxW: '100%',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '1',
+    verticalAlign: 'top',
+    ...style.container,
+  }
 
   return (
     <ui.span ref={ref} className={cx('ui-tag', className)} __css={css} {...rest}>
       {leftIcon}
-      {!leftIcon && !rightIcon ? children : <ui.span noOfLines={1}>{children}</ui.span>}
+      <TagLabel>{children}</TagLabel>
       {rightIcon}
       {onCloseClick ? (
         <CloseButton isDisabled={isDisabled} onClick={onCloseClick}>
@@ -39,7 +48,18 @@ export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
   )
 })
 
-const CloseIcon = () => {
+const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
+  const style = useMultiComponentStyle('Tag', props)
+  const css = style.label
+
+  return (
+    <ui.span noOfLines={1} __css={css}>
+      {children}
+    </ui.span>
+  )
+}
+
+const CloseIcon: FC = () => {
   return (
     <Icon verticalAlign='inherit' viewBox='0 0 512 512' fontSize='lg'>
       <path
@@ -54,33 +74,16 @@ const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () =
   isDisabled,
   children,
   onClick,
+  ...props
 }) => {
+  const style = useMultiComponentStyle('Tag', props)
+
   const css: CSSUIObject = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     outline: '0',
-    transitionProperty: 'common',
-    transitionDuration: 'normal',
-    borderRadius: 'full',
-    opacity: 0.5,
-    _disabled: {
-      opacity: 0.4,
-    },
-    _focusVisible: {
-      boxShadow: 'outline',
-      bg: 'rgba(0, 0, 0, 0.14)',
-    },
-    _hover: {
-      opacity: 0.8,
-      _disabled: {
-        opacity: 0.4,
-        cursor: 'not-allowed',
-      },
-    },
-    _active: {
-      opacity: 1,
-    },
+    ...style.closeButton,
   }
 
   return (

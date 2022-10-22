@@ -29,7 +29,7 @@ export type ButtonProps = HTMLUIProps<'button'> & ThemeProps<'Button'> & ButtonO
 
 export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
   const group = useButtonGroup()
-  const style = useComponentStyle('Button', { ...group, ...props })
+  const styles = useComponentStyle('Button', { ...group, ...props })
   const {
     className,
     as,
@@ -50,7 +50,7 @@ export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
   const ref = useMergeRefs(customRef, buttonRef)
 
   const css: CSSUIObject = useMemo(() => {
-    const _focus = '_focus' in style ? merge(style._focus ?? {}, { zIndex: 1 }) : {}
+    const _focus = '_focus' in styles ? merge(styles._focus ?? {}, { zIndex: 1 }) : {}
 
     return {
       display: 'inline-flex',
@@ -63,10 +63,10 @@ export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
       whiteSpace: 'nowrap',
       verticalAlign: 'middle',
       outline: 'none',
-      ...style,
+      ...styles,
       ...(!!group ? { _focus } : {}),
     }
-  }, [style, group])
+  }, [styles, group])
 
   const contentProps = {
     leftIcon,

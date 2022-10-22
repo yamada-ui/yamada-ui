@@ -21,7 +21,7 @@ type TagnOptions = {
 export type TagProps = HTMLUIProps<'span'> & ThemeProps<'Tag'> & TagnOptions
 
 export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
-  const style = useMultiComponentStyle('Tag', props)
+  const styles = useMultiComponentStyle('Tag', props)
   const { className, leftIcon, rightIcon, onCloseClick, isDisabled, children, ...rest } =
     omitThemeProps(props)
 
@@ -31,7 +31,7 @@ export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
     alignItems: 'center',
     gap: '1',
     verticalAlign: 'top',
-    ...style.container,
+    ...styles.container,
   }
 
   return (
@@ -49,8 +49,8 @@ export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
 })
 
 const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
-  const style = useMultiComponentStyle('Tag', props)
-  const css = style.label
+  const styles = useMultiComponentStyle('Tag', props)
+  const css = styles.label
 
   return (
     <ui.span noOfLines={1} __css={css}>
@@ -76,14 +76,14 @@ const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () =
   onClick,
   ...props
 }) => {
-  const style = useMultiComponentStyle('Tag', props)
+  const styles = useMultiComponentStyle('Tag', props)
 
   const css: CSSUIObject = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     outline: '0',
-    ...style.closeButton,
+    ...styles.closeButton,
   }
 
   return (

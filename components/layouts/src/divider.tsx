@@ -25,7 +25,7 @@ export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
     borderWidth,
     borderStyle,
     borderColor,
-    ...style
+    ...styles
   } = useComponentStyle('Divider', props)
   const { className, orientation = 'horizontal', __css, ...rest } = omitThemeProps(props)
 
@@ -57,14 +57,14 @@ export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
     ],
   )
 
-  const dividerStyle = useMemo(
+  const dividerStyles = useMemo(
     () => customStyles[orientation],
     [customStyles, orientation],
   ) as CSSUIObject
 
   const css = {
-    ...style,
-    ...dividerStyle,
+    ...styles,
+    ...dividerStyles,
     ...__css,
   }
 

@@ -28,7 +28,7 @@ export type ExtendTheme = {
 }
 
 export type ComponentStyle = {
-  baseStyle?: UIStyle
+  baseStyle?: UIStyle | Record<string, UIStyle>
   sizes?: Record<string | number, UIStyle>
   variants?: Record<string | number, UIStyle>
   defaultProps?: { size?: string | number; variant?: string | number; colorScheme?: string }

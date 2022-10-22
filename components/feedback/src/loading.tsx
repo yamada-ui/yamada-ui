@@ -16,15 +16,7 @@ import {
   RotatingLines,
   ProgressBar,
 } from 'react-loader-spinner'
-import {
-  ui,
-  forwardRef,
-  HTMLUIProps,
-  CSSUIProps,
-  useValue,
-  useSize,
-  useColor,
-} from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps, useValue, useToken } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 
 type Variant =
@@ -65,13 +57,11 @@ export const Loading = forwardRef<LoadingProps, 'div'>(
     },
     ref,
   ) => {
-    const color = useMemo(() => useColor(useValue(_color) as string) ?? _color, [_color])
-    const secondaryColor = useMemo(
-      () => useColor(useValue(_secondaryColor) as string) ?? _secondaryColor,
-      [_secondaryColor],
-    )
-    const width = useMemo(() => useSize(useValue(_size) as string) ?? _size, [_size])
-    const height = useMemo(() => useSize(useValue(_size) as string) ?? _size, [_size])
+    const color = useToken('colors', useValue(_color)) ?? _color
+    const secondaryColor = useToken('colors', useValue(_secondaryColor)) ?? _secondaryColor
+
+    const width = useToken('sizes', useValue(_size)) ?? _size
+    const height = useToken('sizes', useValue(_size)) ?? _size
 
     const css = { '& > *': { padding: '0 !important' } }
 

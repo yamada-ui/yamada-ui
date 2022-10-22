@@ -3,6 +3,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
+
 type FontAwesomeIconOptions = {
   className?: string
   icon: IconDefinition | IconProp
@@ -12,7 +13,7 @@ type FontAwesomeIconOptions = {
 export type FontAwesomeIconProps = HTMLUIProps<'svg'> & FontAwesomeIconOptions
 
 export const FontAwesomeIcon = forwardRef<FontAwesomeIconProps, 'svg'>(
-  ({ className, icon, size: fontSize, ...rest }, ref) => {
+  ({ className, icon, size: fontSize, __css: styles, ...rest }, ref) => {
     const css = useMemo(
       () => ({
         w: '1em',
@@ -21,8 +22,9 @@ export const FontAwesomeIcon = forwardRef<FontAwesomeIconProps, 'svg'>(
         lineHeight: '1em',
         flexShrink: 0,
         fontSize,
+        ...styles,
       }),
-      [fontSize],
+      [fontSize, styles],
     )
 
     return (

@@ -95,8 +95,6 @@ export const getCSS = (options: {
 
       value = style?.transform?.(value, theme) ?? value
 
-      // console.log(theme)
-
       value = style?.processResult ? createCSS(value, true) : value
 
       if (!nested && style?.static) {

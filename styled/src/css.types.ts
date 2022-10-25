@@ -58,7 +58,7 @@ export type RecursiveCSSUIObject<Y> = Y & (Y | RecursivePseudos<Y> | RecursiveSt
 
 export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
-export type CSSUIProps<Y = 'responsive', M = 'scheme'> = StylesProps<Y, M> & PseudosProps<Y, M>
+export type CSSUIProps<Y = 'responsive', M = 'scheme'> = StylesProps<Y, M> & PseudosProps
 
 export type UIStyle =
   | CSSUIObject

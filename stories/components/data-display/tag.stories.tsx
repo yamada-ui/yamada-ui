@@ -294,19 +294,19 @@ export const withIcon: ComponentStory<typeof Tag> = () => {
 export const withCloseButton: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorScheme='primary' rounded='full' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='primary' rounded='full' onCloseClick={() => {}}>
         Cyan
       </Tag>
 
-      <Tag colorScheme='secondary' rounded='full' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='secondary' rounded='full' onCloseClick={() => {}}>
         Secondary
       </Tag>
 
-      <Tag colorScheme='warning' rounded='full' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='warning' rounded='full' onCloseClick={() => {}}>
         Warning
       </Tag>
 
-      <Tag colorScheme='danger' rounded='full' onCloseClick={() => alert('this click')}>
+      <Tag colorScheme='danger' rounded='full' onCloseClick={() => {}}>
         Danger
       </Tag>
     </Wrap>
@@ -316,13 +316,7 @@ export const withCloseButton: ComponentStory<typeof Tag> = () => {
 export const withDisabled: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag
-        variant='solid'
-        colorScheme='primary'
-        rounded='full'
-        onCloseClick={() => alert('this click')}
-        isDisabled
-      >
+      <Tag variant='solid' colorScheme='primary' rounded='full' onCloseClick={() => {}} isDisabled>
         Cyan
       </Tag>
 
@@ -330,29 +324,17 @@ export const withDisabled: ComponentStory<typeof Tag> = () => {
         variant='solid'
         colorScheme='secondary'
         rounded='full'
-        onCloseClick={() => alert('this click')}
+        onCloseClick={() => {}}
         isDisabled
       >
         Secondary
       </Tag>
 
-      <Tag
-        variant='solid'
-        colorScheme='warning'
-        rounded='full'
-        onCloseClick={() => alert('this click')}
-        isDisabled
-      >
+      <Tag variant='solid' colorScheme='warning' rounded='full' onCloseClick={() => {}} isDisabled>
         Warning
       </Tag>
 
-      <Tag
-        variant='solid'
-        colorScheme='danger'
-        rounded='full'
-        onCloseClick={() => alert('this click')}
-        isDisabled
-      >
+      <Tag variant='solid' colorScheme='danger' rounded='full' onCloseClick={() => {}} isDisabled>
         Danger
       </Tag>
     </Wrap>

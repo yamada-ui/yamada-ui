@@ -1,4 +1,4 @@
-import { CSSObject } from '@emotion/styled'
+import { CSSObject } from '@yamada-ui/styled'
 
 export const resetStyle: CSSObject = {
   '*': {

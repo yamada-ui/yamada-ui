@@ -4,7 +4,6 @@ import {
   StylesProps,
   Token,
   keyframes as emotionKeyframes,
-  CSSObject,
   StyledTheme,
 } from '@yamada-ui/styled'
 import { useTheme } from '@yamada-ui/providers'
@@ -60,13 +59,11 @@ const createAnimation =
     return `${name} ${duration} ${timingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   }
 
-export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): CSSObject => {
+export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): string => {
   const theme = useTheme()
 
-  const css: CSSObject = {}
-
   if (isArray(styles)) {
-    css.animation = styles
+    return styles
       .map((style) => {
         const { keyframes, ...config } = style
 
@@ -75,10 +72,9 @@ export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): CSSObje
       .join(', ')
   } else {
     const { keyframes, ...config } = styles
-    css.animation = createAnimation(keyframes, config)(theme)
-  }
 
-  return css
+    return createAnimation(keyframes, config)(theme)
+  }
 }
 
 export const useDynamicAnimation = <
@@ -87,7 +83,7 @@ export const useDynamicAnimation = <
   arrayOrObj: T,
   init?: keyof T | (keyof T)[],
 ): [
-  CSSObject | undefined,
+  string | undefined,
   (
     key:
       | keyof T
@@ -100,7 +96,7 @@ export const useDynamicAnimation = <
     !isUndefined(init) ? (isArray(init) ? init.map(String) : String(init)) : undefined,
   )
   const cache = useRef<Map<string, string>>(new Map<string, string>())
-  const [animations, setAnimations] = useState<CSSObject | undefined>(() => {
+  const [animations, setAnimations] = useState<string | undefined>(() => {
     for (const [key, styles] of Object.entries(arrayOrObj)) {
       if (cache.current.has(key)) return
 
@@ -118,15 +114,11 @@ export const useDynamicAnimation = <
       }
     }
 
-    const css: CSSObject = {}
-
     if (isArray(keys.current)) {
-      css.animation = keys.current.map((key) => cache.current.get(key)).join(', ')
+      return keys.current.map((key) => cache.current.get(key)).join(', ')
     } else {
-      css.animation = cache.current.get(keys.current ?? '')
+      return cache.current.get(keys.current ?? '')
     }
-
-    return css
   })
 
   const setAnimation = (
@@ -147,15 +139,11 @@ export const useDynamicAnimation = <
 
     keys.current = isArray(keyOrArray) ? keyOrArray.map(String) : String(keyOrArray)
 
-    const css: CSSObject = {}
-
     if (isArray(keys.current)) {
-      css.animation = keys.current.map((key) => cache.current.get(key)).join(', ')
+      setAnimations(keys.current.map((key) => cache.current.get(key)).join(', '))
     } else {
-      css.animation = cache.current.get(keys.current ?? '')
+      setAnimations(cache.current.get(keys.current ?? ''))
     }
-
-    setAnimations(css)
   }
 
   return [animations, setAnimation]

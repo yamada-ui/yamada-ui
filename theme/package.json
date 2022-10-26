@@ -22,7 +22,6 @@
   "dependencies": {},
   "devDependencies": {
     "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@emotion/styled": "^11.10.4"
+    "@yamada-ui/utils": "workspace:*"
   }
 }

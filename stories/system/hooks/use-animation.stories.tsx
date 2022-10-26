@@ -1,11 +1,4 @@
-import {
-  AnimationStyle,
-  Box,
-  Button,
-  keyframes,
-  useAnimation,
-  useDynamicAnimation,
-} from '@yamada-ui/react'
+import { AnimationStyle, Box, Button, useAnimation, useDynamicAnimation } from '@yamada-ui/react'
 
 export default {
   title: 'System / Hooks / useAnimation',
@@ -38,7 +31,59 @@ export const basic = () => {
     timingFunction: 'linear',
   })
 
-  return <Box w='full' height='xs' animation={animation}></Box>
+  return <Box w='full' h='xs' animation={animation}></Box>
+}
+
+export const pseudo = () => {
+  const animation = useAnimation({
+    keyframes: {
+      '0%': {
+        bg: 'red.500',
+      },
+      '20%': {
+        bg: 'green.500',
+      },
+      '40%': {
+        bg: 'purple.500',
+      },
+      '60%': {
+        bg: 'yellow.500',
+      },
+      '80%': {
+        bg: 'blue.500',
+      },
+      '100%': {
+        bg: 'red.500',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  })
+
+  return (
+    <Box
+      pos='relative'
+      bg='primary'
+      m='lg'
+      p='lg'
+      rounded='lg'
+      color='white'
+      _after={{
+        content: "'after'",
+        pos: 'absolute',
+        top: 'lg',
+        left: 'lg',
+        bg: 'secondary',
+        p: 'lg',
+        rounded: 'lg',
+        color: 'white',
+        animation,
+      }}
+    >
+      Box
+    </Box>
+  )
 }
 
 export const withMulti = () => {
@@ -102,7 +147,7 @@ export const withMulti = () => {
     },
   ])
 
-  return <Box w='full' height='xs' animation={animation}></Box>
+  return <Box w='full' h='xs' animation={animation}></Box>
 }
 
 export const withDynamic = () => {

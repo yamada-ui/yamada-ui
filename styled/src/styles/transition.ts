@@ -8,6 +8,7 @@ export const transition: Configs = {
   willChange: true,
   transitionProperty: configs.prop('transitionProperty', 'transitions.property'),
   transitionDuration: configs.prop('transitionDuration', 'transitions.duration'),
+  transitionTimingFunction: configs.prop('transitionTimingFunction', 'transitions.easing'),
   animationDuration: configs.prop('animationDuration', 'transitions.duration'),
   animationTimingFunction: configs.prop('animationTimingFunction', 'transitions.easing'),
 }

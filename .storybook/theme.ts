@@ -3,8 +3,7 @@ import { defaultTheme } from '@yamada-ui/react'
 const baseTheme = {
   brandTitle: 'Yamada UI',
   brandUrl: 'https://github.com/hirotomoyamada/yamada-ui',
-  brandImage:
-    'https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/public/yamada-ui.png?raw=true',
+  brandImage: 'https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/yamada-ui.png',
 
   colorPrimary: defaultTheme.colors.green['500'],
   colorSecondary: defaultTheme.colors.blue['500'],

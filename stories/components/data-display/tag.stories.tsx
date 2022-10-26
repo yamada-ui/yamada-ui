@@ -358,3 +358,14 @@ export const withDisabled: ComponentStory<typeof Tag> = () => {
     </Wrap>
   )
 }
+
+export const hoge: ComponentStory<typeof Tag> = () => {
+  return (
+    <>
+      <Tag colorScheme={"secondary"}>hoge</Tag>
+      <Tag colorScheme={"blue"}>hoge</Tag>
+      <Tag colorScheme={"cyan"}>hoge</Tag>
+      <Tag colorScheme={"facebook"}>hoge</Tag>
+    </>
+  )
+}

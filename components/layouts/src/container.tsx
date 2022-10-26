@@ -14,9 +14,9 @@ type ContainerOptions = {
   centerContent?: boolean
 }
 
-export type ContainerProps = HTMLUIProps<'div'> & ThemeProps<'Container'> & ContainerOptions
+export type ContainerProps = HTMLUIProps<'section'> & ThemeProps<'Container'> & ContainerOptions
 
-export const Container = forwardRef<ContainerProps, 'div'>((props, ref) => {
+export const Container = forwardRef<ContainerProps, 'section'>((props, ref) => {
   const styles = useComponentStyle('Container', props)
   const { className, centerContent, ...rest } = omitThemeProps(props)
 
@@ -28,5 +28,5 @@ export const Container = forwardRef<ContainerProps, 'div'>((props, ref) => {
     [centerContent],
   )
 
-  return <ui.div ref={ref} className={cx('ui-container', className)} __css={css} {...rest} />
+  return <ui.section ref={ref} className={cx('ui-container', className)} __css={css} {...rest} />
 })

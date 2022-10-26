@@ -8,5 +8,11 @@ export const useToken = <T extends keyof Omit<Theme, 'components'>>(
 ) => {
   const theme = useTheme()
 
+  if (name === 'transitionsProperty') name = 'transitions.property' as T
+
+  if (name === 'transitionsDuration') name = 'transitions.duration' as T
+
+  if (name === 'transitionsEasing') name = 'transitions.easing' as T
+
   return get(theme, `${name}.${path}`)
 }

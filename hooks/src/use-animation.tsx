@@ -10,80 +10,152 @@ import {
 import { useTheme } from '@yamada-ui/providers'
 import { Dict, isArray, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { useRef, useState } from 'react'
+import { useToken } from './'
 
 export type AnimationStyle = {
   keyframes: Record<string, StylesProps<'unresponsive', 'unscheme'>>
-  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unresponsive', 'unscheme'>
-  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unresponsive', 'unscheme'>
   duration?: Token<CSS.Property.AnimationDuration, 'transitionDuration', 'unresponsive', 'unscheme'>
-  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unresponsive', 'unscheme'>
-  iterationCount?: Token<CSS.Property.AnimationIterationCount, unknown, 'unresponsive', 'unscheme'>
-  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unresponsive', 'unscheme'>
   timingFunction?: Token<
     CSS.Property.AnimationTimingFunction,
     'transitionEasing',
     'unresponsive',
     'unscheme'
   >
+  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unresponsive', 'unscheme'>
+  iterationCount?: Token<CSS.Property.AnimationIterationCount, unknown, 'unresponsive', 'unscheme'>
+  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unresponsive', 'unscheme'>
+  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unresponsive', 'unscheme'>
+  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unresponsive', 'unscheme'>
 }
 
-const transformConfig = (obj: Omit<AnimationStyle, 'keyframes'>): Dict =>
+const transformConfig = (
+  obj: Omit<AnimationStyle, 'keyframes'>,
+): Omit<AnimationStyle, 'keyframes'> =>
   Object.entries(obj).reduce((obj, [key, value]) => {
-    key = 'animation' + key.slice(0, 1).toUpperCase() + key.slice(1)
+    if (key === 'duration') value = useToken('transitionsDuration', value) ?? value
+    if (key === 'timingFunction') value = useToken('transitionsEasing', value) ?? value
 
     obj[key] = value
 
     return obj
-  }, {} as Dict)
+  }, {} as Dict) as Omit<AnimationStyle, 'keyframes'>
 
-const createCSS =
+const createAnimation =
   (keyframes: AnimationStyle['keyframes'], config: Omit<AnimationStyle, 'keyframes'>) =>
-  (theme: StyledTheme<Dict>): CSSObject => {
+  (theme: StyledTheme<Dict>): string => {
     const generatedKeyframes = css(keyframes)(theme)
 
-    const generatedConfig = css(transformConfig(config))(theme)
+    const {
+      duration = '0s',
+      timingFunction = 'ease',
+      delay = '0s',
+      iterationCount = '1',
+      direction = 'normal',
+      fillMode = 'none',
+      playState = 'running',
+    } = transformConfig(config)
 
-    const animationName = emotionKeyframes(generatedKeyframes)
+    const name = emotionKeyframes(generatedKeyframes)
 
-    return { animationName, ...generatedConfig }
+    return `${name} ${duration} ${timingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   }
 
-export const useAnimation = ({ keyframes, ...config }: AnimationStyle): CSSObject => {
+export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): CSSObject => {
   const theme = useTheme()
 
-  const css = createCSS(keyframes, config)(theme)
+  const css: CSSObject = {}
+
+  if (isArray(styles)) {
+    css.animation = styles
+      .map((style) => {
+        const { keyframes, ...config } = style
+
+        return createAnimation(keyframes, config)(theme)
+      })
+      .join(', ')
+  } else {
+    const { keyframes, ...config } = styles
+    css.animation = createAnimation(keyframes, config)(theme)
+  }
 
   return css
 }
 
 export const useDynamicAnimation = <
-  T extends Array<AnimationStyle> | Record<string, AnimationStyle>,
+  T extends Array<AnimationStyle> | Record<string, AnimationStyle | AnimationStyle[]>,
 >(
-  styles: T,
-  init?: keyof T,
-): [CSSObject | undefined, (key: keyof T | ((key: keyof T | undefined) => keyof T)) => void] => {
+  arrayOrObj: T,
+  init?: keyof T | (keyof T)[],
+): [
+  CSSObject | undefined,
+  (
+    key:
+      | keyof T
+      | (keyof T)[]
+      | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
+  ) => void,
+] => {
   const theme = useTheme()
-  const key = useRef<string | undefined>(!isUndefined(init) ? String(init) : undefined)
-  const cache = useRef<Map<string, CSSObject>>(new Map<string, CSSObject>())
+  const keys = useRef<string | string[] | undefined>(
+    !isUndefined(init) ? (isArray(init) ? init.map(String) : String(init)) : undefined,
+  )
+  const cache = useRef<Map<string, string>>(new Map<string, string>())
   const [animations, setAnimations] = useState<CSSObject | undefined>(() => {
-    for (const [key, { keyframes, ...config }] of Object.entries(styles)) {
-      if (!cache.current.has(key)) cache.current.set(key, createCSS(keyframes, config)(theme))
+    for (const [key, styles] of Object.entries(arrayOrObj)) {
+      if (cache.current.has(key)) return
+
+      if (isArray(styles)) {
+        cache.current.set(
+          key,
+          styles
+            .map(({ keyframes, ...config }) => createAnimation(keyframes, config)(theme))
+            .join(', '),
+        )
+      } else {
+        const { keyframes, ...config } = styles
+
+        cache.current.set(key, createAnimation(keyframes, config)(theme))
+      }
     }
 
-    return cache.current.get(key.current ?? '')
+    const css: CSSObject = {}
+
+    if (isArray(keys.current)) {
+      css.animation = keys.current.map((key) => cache.current.get(key)).join(', ')
+    } else {
+      css.animation = cache.current.get(keys.current ?? '')
+    }
+
+    return css
   })
 
-  const setAnimation = (keysIfFunc: keyof T | ((key: keyof T | undefined) => keyof T)) => {
-    const _key = runIfFunc(
-      keysIfFunc,
-      (!isUndefined(key.current) && isArray(styles) ? Number(key.current) : key.current) as
-        | keyof T
-        | undefined,
-    )
+  const setAnimation = (
+    keysOrFunc:
+      | keyof T
+      | (keyof T)[]
+      | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
+  ) => {
+    const args = (() => {
+      if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
+        return isArray(keys.current) ? keys.current.map(Number) : Number(keys.current)
+      } else {
+        return keys.current
+      }
+    })() as keyof T | (keyof T)[] | undefined
 
-    key.current = String(_key)
+    const keyOrArray = runIfFunc(keysOrFunc, args)
 
-    setAnimations(cache.current.get(key.current))
+    keys.current = isArray(keyOrArray) ? keyOrArray.map(String) : String(keyOrArray)
+
+    const css: CSSObject = {}
+
+    if (isArray(keys.current)) {
+      css.animation = keys.current.map((key) => cache.current.get(key)).join(', ')
+    } else {
+      css.animation = cache.current.get(keys.current ?? '')
+    }
+
+    setAnimations(css)
   }
 
   return [animations, setAnimation]

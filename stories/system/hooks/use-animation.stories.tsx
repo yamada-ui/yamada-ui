@@ -74,7 +74,7 @@ export const dynamicAnimation = () => {
         Please Click
       </Button>
 
-      <Box bg='primary' p='md' rounded='md' animation={animation}>
+      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
         Box
       </Box>
     </>

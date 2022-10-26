@@ -6,14 +6,10 @@ export type UIProps = CSSUIProps & {
   isTruncated?: boolean
   __css?: CSSUIObject
   __sx?: CSSUIObject
-  animation?: CSSObject | null | undefined | (CSSObject | null | undefined)[]
   css?: Interpolation<{}>
 }
 
-export type OmitProps<Y, M extends keyof any = never> = Omit<
-  Y,
-  'transition' | 'as' | 'color' | 'animation' | M
->
+export type OmitProps<Y, M extends keyof any = never> = Omit<Y, 'transition' | 'as' | 'color' | M>
 
 export type IntersectionProps<Y extends object = {}, M extends object = {}> = OmitProps<
   Y,

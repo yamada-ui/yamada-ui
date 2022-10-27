@@ -18,6 +18,6 @@ import {
     const css = useComponentStyle('Link', props)
     const { className, ...rest } = omitThemeProps(props)
   
-    return <ui.a ref={ref} className={cx('ui-Link', className)} __css={css} {...rest} />
+    return <ui.a ref={ref} target='_blank' className={cx('ui-Link', className)} __css={css} {...rest} />
+    
   })
-// <Link href="" >LINK</Link>

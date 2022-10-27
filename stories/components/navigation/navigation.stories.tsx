@@ -9,8 +9,14 @@ export default {
   component: List,
 } as ComponentMeta<typeof List>
 
+export const link: ComponentStory<typeof List> = () => {
+  return (
+    <Link href='/'>LINK</Link>
+  )
+}
+
 export const linkIsExternal: ComponentStory<typeof List> = () => {
   return (
-    <Link isExternal href='/'>LINK</Link>
+    <Link href='/' isExternal>LINK</Link>
   )
 }

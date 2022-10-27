@@ -8,16 +8,20 @@ import {
   } from '@yamada-ui/system'
   import { cx } from '@yamada-ui/utils'
 
-  type LinkOptions<T extends string, K extends boolean | number> = {
-    [key in T]-?: K
+  type LinkOptions = {
+    isExternal?: boolean
   }
   
-  export type LinkProps = HTMLUIProps<'a'> & ThemeProps<'Link'> & LinkOptions<"isExternal", boolean>
+  export type LinkProps = HTMLUIProps<'a'> & ThemeProps<'Link'> & LinkOptions
   
   export const Link = forwardRef<LinkProps, 'a'>((props, ref) => {
     const css = useComponentStyle('Link', props)
-    const { className, ...rest } = omitThemeProps(props)
+    const { className, isExternal, ...rest } = omitThemeProps(props)
   
-    return <ui.a ref={ref} target='_blank' className={cx('ui-Link', className)} __css={css} {...rest} />
+    if(isExternal) {
+      return <ui.a ref={ref} target='_blank' className={cx('ui-Link', className)} __css={css} {...rest} />
+    } else {
+      return <ui.a ref={ref} className={cx('ui-Link', className)} __css={css} {...rest} />
+    }
     
   })

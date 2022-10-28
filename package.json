@@ -7,10 +7,13 @@
   "license": "MIT",
   "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
   "scripts": {
+    "prepare": "husky install",
     "postinstall": "cd cli && pnpm build",
+    "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log",
+    "lint": "eslint --max-warnings 0 .",
+    "format": "prettier --write .",
     "dev": "turbo run dev --filter=!./examples/*",
     "storybook": "pnpm build && start-storybook -p 6006",
-    "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log",
     "prebuild": "pnpm gen:tokens",
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",
@@ -22,7 +25,14 @@
     "react:start": "pnpm --prefix examples/create-react-app start",
     "react:build": "pnpm --prefix examples/create-react-app build"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
   "dependencies": {
+    "husky": "^7.0.4",
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.4",
     "@babel/preset-typescript": "^7.18.6",
@@ -54,6 +64,7 @@
     "@yamada-ui/cli": "workspace:*",
     "@yamada-ui/react": "workspace:*",
     "eslint": "8.23.1",
+    "lint-staged": "11.2.6",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react": "1.1.7",
@@ -70,6 +81,7 @@
     "react-loader-spinner": "^5.3.4",
     "rimraf": "3.0.2",
     "storybook-dark-mode": "^1.1.2",
+    "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
     "tsup": "6.1.3",

@@ -10,7 +10,7 @@ export const link: ComponentStory<typeof Link> = () => {
   return <Link href='/'>LINK</Link>
 }
 
-export const linkIsExternal: ComponentStory<typeof Link> = () => {
+export const withExternal: ComponentStory<typeof Link> = () => {
   return (
     <Link href='/' isExternal>
       LINK

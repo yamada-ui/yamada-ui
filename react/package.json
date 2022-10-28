@@ -28,7 +28,8 @@
     "@yamada-ui/media-and-icons": "workspace:*",
     "@yamada-ui/data-display": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
-    "@yamada-ui/forms": "workspace:*"
+    "@yamada-ui/forms": "workspace:*",
+    "@yamada-ui/navigation": "workspace:*"
   },
   "devDependencies": {
     "@emotion/react": "^11.10.4",
@@ -47,6 +48,7 @@
     "@yamada-ui/data-display": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/forms": "workspace:*",
+    "@yamada-ui/navigation": "workspace:*",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "react": ">=18",

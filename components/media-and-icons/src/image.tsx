@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
 import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/system'
+import { useMemo } from 'react'
 
 type ImageOptions = {
   loading?: 'eager' | 'lazy'

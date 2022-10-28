@@ -1,6 +1,6 @@
-import { SVGAttributes } from 'react'
 import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps, useToken } from '@yamada-ui/system'
 import { cx, replaceObject, isUnit } from '@yamada-ui/utils'
+import { SVGAttributes } from 'react'
 
 type IconOptions = {
   size?: CSSUIProps['fontSize']

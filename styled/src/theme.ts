@@ -1,4 +1,3 @@
-import { StyledTheme, ThemeProps, analyzeBreakpoints, createVars } from './'
 import {
   flattenObject,
   objectFromEntries,
@@ -7,6 +6,7 @@ import {
   Dict,
   Union,
 } from '@yamada-ui/utils'
+import { StyledTheme, ThemeProps, analyzeBreakpoints, createVars } from './'
 
 export type SemanticValue<
   Y extends string,

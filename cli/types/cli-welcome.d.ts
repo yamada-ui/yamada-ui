@@ -1,1 +1,1 @@
-declare module "cli-welcome"
+declare module 'cli-welcome'

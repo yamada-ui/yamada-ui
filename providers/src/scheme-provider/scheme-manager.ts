@@ -1,5 +1,5 @@
-import { createdDom } from '@yamada-ui/utils'
 import { Scheme } from '@yamada-ui/styled'
+import { createdDom } from '@yamada-ui/utils'
 
 const hasSupport = () => typeof Storage !== 'undefined'
 

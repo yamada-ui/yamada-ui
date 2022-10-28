@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/feedback'
 import {
   ui,
   forwardRef,
@@ -10,7 +10,7 @@ import {
   omitThemeProps,
 } from '@yamada-ui/system'
 import { cx, useMergeRefs, merge } from '@yamada-ui/utils'
-import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/feedback'
+import { FC, useMemo } from 'react'
 import { useButtonGroup } from './'
 
 type ButtonOptions = {

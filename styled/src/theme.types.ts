@@ -1,7 +1,7 @@
-import { UIStyle, AnalyzeBreakpointsReturn } from './'
-import { UITheme } from './ui-theme.types'
-import { GeneratedTheme } from './generated-theme.types'
 import { Dict } from '@yamada-ui/utils'
+import { GeneratedTheme } from './generated-theme.types'
+import { UITheme } from './ui-theme.types'
+import { UIStyle, AnalyzeBreakpointsReturn } from './'
 
 export type ExtendTheme = {
   styles?: {

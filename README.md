@@ -1,13 +1,12 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/public/yamada-ui.png?raw=true" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/yamada-ui.png" alt="Yamada UI" width="480" />
 </p>
 
 # Branch
 
 `main` This is a product branch.
 `hotfix` This is a branch for urgent fixes.
-`system` This is a branch that fixes the core of yamada-ui.
-`dev` This is a branch that primarily develops.
+`dev` This is a branch that primarily develops. If you want to create a branch, create it based on this.
 
 # Install
 
@@ -25,7 +24,7 @@ $ pnpm storybook
 # Generate Theme Tokens
 
 ```sh
-$ pnpm build:tokens
+$ pnpm gen:tokens
 ```
 
 # Usage

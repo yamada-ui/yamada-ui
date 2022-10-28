@@ -8,6 +8,6 @@ export * from '@yamada-ui/media-and-icons'
 export * from '@yamada-ui/data-display'
 export * from '@yamada-ui/feedback'
 export * from '@yamada-ui/forms'
-export * from '@yamada-ui/navigation/src' // なぜか/srcいる
+export * from '@yamada-ui/navigation'
 
 export * from './extend-theme'

@@ -1,7 +1,5 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import { FaCheckCircle } from 'react-icons/fa'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { List, DiscList, DecimalList, ListItem, ListIcon, FontAwesomeIcon } from '@yamada-ui/react'
+import { List, } from '@yamada-ui/react'
 import { Link } from '../../../components/navigation/src/link'
 
 export default {

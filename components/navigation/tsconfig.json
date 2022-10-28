@@ -3,7 +3,6 @@
   "include": [
     "src",
     "index.ts",
-    "../../stories/components/typography/text.stories.tsx",
-    "../../stories/components/typography/heading.stories.tsx"
+    "../../stories/components/navigation/link.stories.tsx"
   ]
 }

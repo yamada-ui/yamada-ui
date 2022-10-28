@@ -18,10 +18,6 @@ import {
     const css = useComponentStyle('Link', props)
     const { className, isExternal, ...rest } = omitThemeProps(props)
   
-    if(isExternal) {
-      return <ui.a ref={ref} target='_blank' className={cx('ui-Link', className)} __css={css} {...rest} />
-    } else {
-      return <ui.a ref={ref} className={cx('ui-Link', className)} __css={css} {...rest} />
-    }
+    return <ui.a ref={ref} rel='nofollow' target={isExternal ? '_blank' : '_parent'} className={cx('ui-link', className)} __css={css} {...rest} />
     
   })

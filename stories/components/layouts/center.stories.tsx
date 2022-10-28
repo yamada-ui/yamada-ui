@@ -1,6 +1,6 @@
+import { faSkull } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Center, FontAwesomeIcon } from '@yamada-ui/react'
-import { faSkull } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   title: 'Components / Layout / Center',

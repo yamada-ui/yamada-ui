@@ -20,10 +20,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@yamada-ui/utils": "workspace:*",
     "csstype": "^3.1.1"
   },
   "devDependencies": {
-    "@yamada-ui/utils": "workspace:*",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "clean-package": "2.1.1",

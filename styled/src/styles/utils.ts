@@ -1,5 +1,5 @@
-import { ThemeToken, StyledTheme } from '../'
 import { isArray, isObject, isString, Dict } from '@yamada-ui/utils'
+import { ThemeToken, StyledTheme } from '../'
 import { Transform } from './'
 
 const directions: Record<string, string> = {

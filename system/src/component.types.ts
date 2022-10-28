@@ -1,6 +1,6 @@
+import { CSSUIProps, CSSUIObject, StylesProps, Interpolation } from '@yamada-ui/styled'
 import * as React from 'react'
 import { DOMElements } from './'
-import { CSSUIProps, CSSUIObject, StylesProps, CSSObject, Interpolation } from '@yamada-ui/styled'
 
 export type UIProps = CSSUIProps & {
   isTruncated?: boolean

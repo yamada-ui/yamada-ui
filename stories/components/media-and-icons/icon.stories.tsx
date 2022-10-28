@@ -1,6 +1,6 @@
-import { FaRobot } from 'react-icons/fa'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Icon, HStack } from '@yamada-ui/react'
+import { FaRobot } from 'react-icons/fa'
 
 export default {
   title: 'Components / Media and Icons / Icon',

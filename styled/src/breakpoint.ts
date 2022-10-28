@@ -28,7 +28,7 @@ const createQuery = (min?: number, max?: number): string | undefined => {
 
 const createQueries = (breakpoints: Dict): BreakpointQueries => {
   return Object.entries(breakpoints).map(([breakpoint, maxW], i, entry) => {
-    let [_, minW] = entry[i - 1] ?? []
+    let [, minW] = entry[i - 1] ?? []
 
     maxW = breakpoint !== 'base' ? maxW : undefined
 

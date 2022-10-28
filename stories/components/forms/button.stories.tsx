@@ -1,5 +1,3 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Wrap, Button, IconButton, ButtonGroup, FontAwesomeIcon, VStack } from '@yamada-ui/react'
 import {
   faArrowRight,
   faCheck,
@@ -9,6 +7,8 @@ import {
   faPlus,
   faSun,
 } from '@fortawesome/free-solid-svg-icons'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Wrap, Button, IconButton, ButtonGroup, FontAwesomeIcon } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Forms / Button',

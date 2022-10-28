@@ -1,8 +1,8 @@
 import { Global } from '@emotion/react'
-import { FC, ReactNode } from 'react'
 import { css, StyledTheme } from '@yamada-ui/styled'
 import { defaultTheme, resetStyle } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, runIfFunc } from '@yamada-ui/utils'
+import { FC, ReactNode } from 'react'
 import { ThemeProvider, SchemeProvider, useScheme } from './'
 
 export type UIProviderProps = {

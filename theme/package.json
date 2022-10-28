@@ -19,10 +19,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@emotion/styled": "^11.10.4"
-  }
+    "@yamada-ui/utils": "workspace:*"
+  },
+  "devDependencies": {}
 }

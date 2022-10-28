@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { DocsContainer as _DocsContainer, DocsContainerProps } from '@storybook/addon-docs'
 import { useDarkMode } from 'storybook-dark-mode'
 import { themes } from '@storybook/theming'

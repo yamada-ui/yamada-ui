@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import {
   ui,
   forwardRef,
@@ -9,6 +8,7 @@ import {
   CSSUIObject,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
+import { useMemo } from 'react'
 
 type DividerOptions = {
   orientation?: 'horizontal' | 'vertical'

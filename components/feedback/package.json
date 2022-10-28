@@ -20,11 +20,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "react-loader-spinner": "^5.3.4",
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react-loader-spinner": "^5.3.4",
     "clean-package": "2.1.1",
     "react": "^18.0.0"
   },

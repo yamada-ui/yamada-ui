@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import {
   ui,
   forwardRef,
@@ -9,6 +8,7 @@ import {
   CSSUIObject,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
+import { useMemo } from 'react'
 
 type ContainerOptions = {
   centerContent?: boolean
@@ -25,7 +25,7 @@ export const Container = forwardRef<ContainerProps, 'section'>((props, ref) => {
       alignItems: centerContent ? 'center' : undefined,
       ...styles,
     }),
-    [centerContent],
+    [centerContent, styles],
   )
 
   return <ui.section ref={ref} className={cx('ui-container', className)} __css={css} {...rest} />

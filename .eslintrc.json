@@ -2,7 +2,8 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 10
+    "ecmaVersion": 10,
+    "project": "tsconfig.json"
   },
   "extends": [
     "plugin:import/recommended",
@@ -35,10 +36,27 @@
     "import/named": "off",
     "import/no-unresolved": "off",
     "import/no-anonymous-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/no-unescaped-entities": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/no-empty-function": "off"
-  }
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "@typescript-eslint/no-redeclare": "off",
+    "@typescript-eslint/no-unused-vars": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parserOptions": {
+        "project": ["tsconfig.json"]
+      }
+    }
+  ]
 }

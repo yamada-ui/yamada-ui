@@ -1,8 +1,15 @@
-import * as CSS from 'csstype'
 import { CSSObject } from '@emotion/react'
-import { ThemeToken, StyledTheme } from '../'
 import { isNumber, Union, Dict } from '@yamada-ui/utils'
-import { analyzeCSSValue, isCSSFunction, tokenToCSSVar, createGradient, globalValues } from '../'
+import * as CSS from 'csstype'
+import {
+  ThemeToken,
+  StyledTheme,
+  analyzeCSSValue,
+  isCSSFunction,
+  tokenToCSSVar,
+  createGradient,
+  globalValues,
+} from '../'
 
 type CSSProperties = Union<keyof CSS.Properties>
 

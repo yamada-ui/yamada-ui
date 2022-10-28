@@ -8,7 +8,7 @@ const factory = () => {
       return styled(...argArray)
     },
 
-    get(_, element: DOMElements) {
+    get(target, element: DOMElements) {
       if (!cache.has(element)) cache.set(element, styled(element))
 
       return cache.get(element)

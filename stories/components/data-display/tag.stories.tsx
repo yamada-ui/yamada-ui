@@ -1,6 +1,6 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Wrap, Flex, Tag, FontAwesomeIcon } from '@yamada-ui/react'
+import { Wrap, Tag, FontAwesomeIcon } from '@yamada-ui/react'
 
 export default {
   title: 'Components / DataDisplay / Tag',

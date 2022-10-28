@@ -1,8 +1,8 @@
 import emotionStyled from '@emotion/styled'
+import { CSSUIProps, css, isPropStyle, FunctionInterpolation } from '@yamada-ui/styled'
+import { filterObject, runIfFunc, Dict } from '@yamada-ui/utils'
 import { ComponentType } from 'react'
 import { StyledOptions, UIComponent, StyledResolverProps, As } from './'
-import { filterObject, runIfFunc, Dict } from '@yamada-ui/utils'
-import { CSSUIProps, css, isPropStyle, FunctionInterpolation } from '@yamada-ui/styled'
 
 export type BaseStyle = CSSUIProps | ((props: StyledResolverProps) => CSSUIProps)
 

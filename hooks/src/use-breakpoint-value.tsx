@@ -1,5 +1,5 @@
+import { ResponsiveObject } from '@yamada-ui/styled'
 import { useState, useEffect } from 'react'
-import { Theme, ResponsiveObject } from '@yamada-ui/styled'
 import { useBreakpoint } from '.'
 
 export const useBreakpointValue = <T extends any>(values: ResponsiveObject<T>) => {
@@ -10,7 +10,7 @@ export const useBreakpointValue = <T extends any>(values: ResponsiveObject<T>) =
     if (values[breakpoint]) {
       setValue(values[breakpoint])
     } else if ('base' in values) {
-      setValue(values['base'])
+      setValue(values.base)
     } else {
       setValue(undefined)
     }

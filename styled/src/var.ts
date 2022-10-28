@@ -1,5 +1,5 @@
-import { CSSMap, Pseudos, pseudos, VarTokens, SemanticValue } from './'
 import { escape, isObject, merge, calc, Dict } from '@yamada-ui/utils'
+import { CSSMap, Pseudos, pseudos, VarTokens, SemanticValue } from './'
 
 type Var = {
   variable: string

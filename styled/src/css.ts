@@ -1,3 +1,4 @@
+import { isArray, isObject, merge, runIfFunc, Dict } from '@yamada-ui/utils'
 import {
   CSSObjectOrFunc,
   CSSUIObject,
@@ -8,11 +9,10 @@ import {
   pseudos,
   ConfigProps,
 } from './'
-import { isArray, isObject, merge, runIfFunc, Dict } from '@yamada-ui/utils'
 
 const expandScheme = (key: string, value: any[]): Dict => ({
   [key]: value[0],
-  [pseudos['_dark']]: {
+  [pseudos._dark]: {
     [key]: value[1],
   },
 })

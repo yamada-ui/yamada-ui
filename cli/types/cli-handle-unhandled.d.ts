@@ -1,1 +1,1 @@
-declare module "cli-handle-unhandled"
+declare module 'cli-handle-unhandled'

@@ -1,6 +1,6 @@
-import { defaultColors } from '../'
 import { ComponentStyle } from '@yamada-ui/styled'
 import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
+import { defaultColors } from '../'
 
 export const Badge: ComponentStyle = {
   baseStyle: {

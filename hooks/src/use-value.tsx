@@ -1,6 +1,6 @@
 import { useSchemetValue } from '@yamada-ui/providers'
 import { ResponsiveObject, SchemeArray } from '@yamada-ui/styled'
-import { isObject, isArray, Dict } from '@yamada-ui/utils'
+import { isObject, isArray } from '@yamada-ui/utils'
 import { useBreakpointValue } from '.'
 
 export const useValue = <T extends any>(value: T | ResponsiveObject<T> | SchemeArray<T>) => {

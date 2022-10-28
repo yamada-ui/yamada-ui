@@ -1,3 +1,4 @@
+import { Icon } from '@yamada-ui/media-and-icons'
 import {
   ui,
   forwardRef,
@@ -8,7 +9,6 @@ import {
   CSSUIObject,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
-import { Icon } from '@yamada-ui/media-and-icons'
 import { FC, ReactNode } from 'react'
 
 type TagnOptions = {

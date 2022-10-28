@@ -1,6 +1,5 @@
-import { useRef } from 'react'
-import isEqual from 'react-fast-compare'
 import { useTheme, useScheme } from '@yamada-ui/providers'
+import { ComponentStyle, CSSUIObject } from '@yamada-ui/styled'
 import {
   getMemoizedObject as get,
   runIfFunc,
@@ -8,7 +7,8 @@ import {
   filterUndefined,
   omitObject,
 } from '@yamada-ui/utils'
-import { ComponentStyle, CSSUIObject } from '@yamada-ui/styled'
+import { useRef } from 'react'
+import isEqual from 'react-fast-compare'
 
 const usetStyle = (name: string, props: any): CSSUIObject | Record<string, CSSUIObject> => {
   const theme = useTheme()

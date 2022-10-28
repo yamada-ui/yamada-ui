@@ -78,6 +78,7 @@ export const other = () => {
     <Wrap gap='md'>
       {numbers.map((number) => (
         <Center
+          key={number}
           _odd={{ bg: 'red.500' }}
           _even={{ bg: 'blue.500' }}
           boxSize='5xs'

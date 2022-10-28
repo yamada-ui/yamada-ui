@@ -1,4 +1,4 @@
-import * as CSS from 'csstype'
+import { useTheme } from '@yamada-ui/providers'
 import {
   css,
   StylesProps,
@@ -6,8 +6,8 @@ import {
   keyframes as emotionKeyframes,
   StyledTheme,
 } from '@yamada-ui/styled'
-import { useTheme } from '@yamada-ui/providers'
 import { Dict, isArray, isUndefined, runIfFunc } from '@yamada-ui/utils'
+import * as CSS from 'csstype'
 import { useRef, useState } from 'react'
 import { useToken } from './'
 

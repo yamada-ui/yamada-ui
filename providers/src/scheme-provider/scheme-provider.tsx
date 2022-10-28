@@ -1,3 +1,5 @@
+import { Scheme } from '@yamada-ui/styled'
+import { createdDom, noop } from '@yamada-ui/utils'
 import {
   createContext,
   FC,
@@ -8,9 +10,7 @@ import {
   useState,
   useContext,
 } from 'react'
-import { createdDom, noop } from '@yamada-ui/utils'
 import { SchemeManager, localStorageManager, rootManager } from './'
-import { Scheme } from '@yamada-ui/styled'
 
 export type SchemeOptions = {
   initialScheme?: Scheme

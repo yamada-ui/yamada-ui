@@ -1,7 +1,7 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useTheme } from '@yamada-ui/providers'
 import { Theme } from '@yamada-ui/styled'
 import { createdDom } from '@yamada-ui/utils'
-import { useTheme } from '@yamada-ui/providers'
+import { useState, useMemo, useEffect } from 'react'
 
 export const useBreakpoint = () => {
   const theme = useTheme()

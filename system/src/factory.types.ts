@@ -1,6 +1,6 @@
-import { As, UIComponent } from './'
-import { Dict } from '@yamada-ui/utils'
 import { CSSUIProps, StyledTheme, CSSObject } from '@yamada-ui/styled'
+import { Dict } from '@yamada-ui/utils'
+import { As, UIComponent } from './'
 
 export type StyledOptions = {
   label?: string

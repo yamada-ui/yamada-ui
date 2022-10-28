@@ -1,5 +1,5 @@
-import { styles, pseudos } from './'
 import { keyframes as emotionKeyframes, Keyframes, CSSObject } from '@emotion/react'
+import { styles, pseudos } from './'
 
 const styleProps = { ...styles, ...pseudos }
 

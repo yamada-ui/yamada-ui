@@ -17,3 +17,16 @@ export const withExternal: ComponentStory<typeof Link> = () => {
     </Link>
   )
 }
+
+export const useColor: ComponentStory<typeof Link> = () => {
+  return (
+    <>
+      <Link href='/' color={'blue.200'}>
+        LINK
+      </Link>
+      <Link href='/' color={'teal.500'}>
+        LINK
+      </Link>
+    </>
+  )
+}

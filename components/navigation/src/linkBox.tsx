@@ -5,6 +5,7 @@ import {
   omitThemeProps,
   ThemeProps,
   useComponentStyle,
+  CSSUIObject,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 
@@ -12,43 +13,54 @@ type LinkOverlayOptions = {
   isExternal?: boolean
 }
 
-export type LinkOverlayProps = HTMLUIProps<'a'> & ThemeProps<'Link'> & LinkOverlayOptions
+export type LinkOverlayProps = HTMLUIProps<'a'> & LinkOverlayOptions
 
-export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>((props, ref) => {
-  const { className, isExternal, href, children, ...rest } = omitThemeProps(props)
-
-  return (
-    <ui.a
-      ref={ref}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener' : undefined}
-      className={cx('ui-link-overlay', className)}
-      isExternal={isExternal}
-      href={href}
-      position='static'
-      _before={{
+export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>(
+  ({ className, isExternal, target, rel, href, children, ...rest }, ref) => {
+    const css: CSSUIObject = {
+      position: 'static',
+      _before: {
         content: '""',
         cursor: 'inherit',
         display: 'block',
         position: 'absolute',
-        top: '0px',
-        left: '0px',
-        zIndex: '0',
+        top: 0,
+        left: 0,
+        zIndex: 0,
         width: '100%',
         height: '100%',
-      }}
-      {...rest}
-    >
-      {children}
-    </ui.a>
-  )
-})
+      },
+    }
+    return (
+      <ui.a
+        ref={ref}
+        target={isExternal ? '_blank' : target}
+        rel={isExternal ? 'noopener' : rel}
+        className={cx('ui-link-overlay', className)}
+        isExternal={isExternal}
+        href={href}
+        __css={css}
+        {...rest}
+      >
+        {children}
+      </ui.a>
+    )
+  },
+)
 
-export type LinkBoxProps = HTMLUIProps<'div'> & ThemeProps<'div'> //& LinkBoxOption
+export type LinkBoxProps = HTMLUIProps<'div'> & ThemeProps<'LinkBox'>
 
 export const LinkBox = forwardRef<LinkBoxProps, 'div'>((props, ref) => {
-  const css = useComponentStyle('LinkBox', props)
+  const styles = useComponentStyle('LinkBox', props)
   const { className, children, ...rest } = omitThemeProps(props)
+
+  const css: CSSUIObject = {
+    'a[href]:not(.ui-link-overlay), abbr[title]': {
+      position: 'relative',
+      zIndex: 1,
+    },
+    ...styles,
+  }
 
   return (
     <ui.div

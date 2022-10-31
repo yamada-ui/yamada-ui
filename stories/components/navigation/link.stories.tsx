@@ -6,27 +6,21 @@ export default {
   component: Link,
 } as ComponentMeta<typeof Link>
 
-export const link: ComponentStory<typeof Link> = () => {
-  return <Link href='/'>LINK</Link>
-}
-
-export const withExternal: ComponentStory<typeof Link> = () => {
+export const basic: ComponentStory<typeof Link> = () => {
   return (
-    <Link href='/' isExternal>
-      LINK
+    <Link href='https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB'>
+      ドラゴンボール - wikipedia
     </Link>
   )
 }
 
-export const useColor: ComponentStory<typeof Link> = () => {
+export const useBlank: ComponentStory<typeof Link> = () => {
   return (
-    <>
-      <Link href='/' color='blue.200'>
-        LINK
-      </Link>
-      <Link href='/' color='teal.500'>
-        LINK
-      </Link>
-    </>
+    <Link
+      href='https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB'
+      isExternal
+    >
+      ドラゴンボール - wikipedia
+    </Link>
   )
 }

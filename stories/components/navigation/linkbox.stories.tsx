@@ -8,21 +8,21 @@ export default {
 
 export const linkBox: ComponentStory<typeof LinkBox> = () => {
   return (
-    <Box width={'full'} bgColor={'white'}>
+    <Box width='full' bgColor='white'>
       <LinkBox
-        as={'article'}
-        maxW={'sm'}
-        p={'5'}
-        border={'1px black solid'}
-        rounded={'md'}
-        bgColor={'white'}
-        color={'#000'}
-        margin={'1.5'}
+        as='article'
+        maxW='sm'
+        p='5'
+        border='1px black solid'
+        rounded='md'
+        bgColor='white'
+        color='#000'
+        margin='1.5'
       >
         <Box as='time' dateTime='2021-01-15 15:30:00 +0000 UTC'>
           13 days ago
         </Box>
-        <Heading size={'md'} my={'2'}>
+        <Heading size='md' my='2'>
           <LinkOverlay href='/'>New Year, New Beginnings: Smashing Workshops & Audits</LinkOverlay>
         </Heading>
         <Text>
@@ -36,21 +36,21 @@ export const linkBox: ComponentStory<typeof LinkBox> = () => {
 
 export const linkBoxWithIsExternal: ComponentStory<typeof LinkBox> = () => {
   return (
-    <Box width={'full'} bgColor={'white'}>
+    <Box width='full' bgColor='white'>
       <LinkBox
-        as={'article'}
-        maxW={'sm'}
-        p={'5'}
-        border={'1px black solid'}
-        rounded={'md'}
-        bgColor={'white'}
-        color={'#000'}
-        margin={'1.5'}
+        as='article'
+        maxW='sm'
+        p='5'
+        border='1px black solid'
+        rounded='md'
+        bgColor='white'
+        color='#000'
+        margin='1.5'
       >
         <Box as='time' dateTime='2021-01-15 15:30:00 +0000 UTC'>
           13 days ago
         </Box>
-        <Heading size={'md'} my={'2'}>
+        <Heading size='md' my='2'>
           <LinkOverlay href='/' isExternal>
             New Year, New Beginnings: Smashing Workshops & Audits
           </LinkOverlay>

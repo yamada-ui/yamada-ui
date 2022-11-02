@@ -493,5 +493,6 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'subtle' | 'outline' | (string & {})
     }
+    Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
   }
 }

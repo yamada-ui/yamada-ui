@@ -1,5 +1,5 @@
 import { useTheme, useScheme } from '@yamada-ui/providers'
-import { ComponentStyle, CSSUIObject } from '@yamada-ui/styled'
+import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps } from '@yamada-ui/styled'
 import {
   getMemoizedObject as get,
   runIfFunc,
@@ -10,7 +10,29 @@ import {
 import { useRef } from 'react'
 import isEqual from 'react-fast-compare'
 
-const usetStyle = (name: string, props: any): CSSUIObject | Record<string, CSSUIObject> => {
+const getStyles = (
+  valOrFunc: UIStyle | Record<string, UIStyle>,
+  props: UIStyleProps,
+  isMulti?: boolean,
+): CSSUIObject | Record<string, CSSUIObject> => {
+  let styles = runIfFunc(valOrFunc, props)
+
+  if (isMulti) {
+    for (const [key, valOrFunc] of Object.entries<UIStyle>(styles as Record<string, UIStyle>)) {
+      const value = runIfFunc(valOrFunc, props)
+
+      styles = merge(styles, { [key]: value })
+    }
+  }
+
+  return styles
+}
+
+const usetStyles = (
+  name: string,
+  props: any,
+  isMulti: boolean = false,
+): CSSUIObject | Record<string, CSSUIObject> => {
   const theme = useTheme()
   const { scheme } = useScheme()
 
@@ -24,26 +46,35 @@ const usetStyle = (name: string, props: any): CSSUIObject | Record<string, CSSUI
   const ref = useRef<CSSUIObject | Record<string, CSSUIObject>>({})
 
   if (componentStyle) {
-    let style = runIfFunc(componentStyle.baseStyle ?? {}, { theme, scheme, ...props })
+    let styles = getStyles(componentStyle.baseStyle ?? {}, { theme, scheme, ...props }, isMulti)
 
-    const variant = runIfFunc(componentStyle.variants?.[props.variant] ?? {}, {
-      theme,
-      scheme,
-      ...props,
-    })
-    const size = runIfFunc(componentStyle.sizes?.[props.size] ?? {}, { theme, scheme, ...props })
+    const variant = getStyles(
+      componentStyle.variants?.[props.variant] ?? {},
+      {
+        theme,
+        scheme,
+        ...props,
+      },
+      isMulti,
+    )
+    const size = getStyles(
+      componentStyle.sizes?.[props.size] ?? {},
+      { theme, scheme, ...props },
+      isMulti,
+    )
 
-    style = merge(style, variant)
-    style = merge(style, size)
+    styles = merge(styles, variant)
+    styles = merge(styles, size)
 
-    const isStyleEqual = isEqual(ref.current, style)
+    const isStyleEqual = isEqual(ref.current, styles)
 
-    if (!isStyleEqual) ref.current = style
+    if (!isStyleEqual) ref.current = styles
   }
 
   return ref.current
 }
 
-export const useComponentStyle = (name: string, props: any) => usetStyle(name, props) as CSSUIObject
+export const useComponentStyle = (name: string, props: any) =>
+  usetStyles(name, props) as CSSUIObject
 export const useMultiComponentStyle = (name: string, props: any) =>
-  usetStyle(name, props) as Record<string, CSSUIObject>
+  usetStyles(name, props, true) as Record<string, CSSUIObject>

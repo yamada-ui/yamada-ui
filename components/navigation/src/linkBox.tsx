@@ -8,14 +8,33 @@ import {
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 
+export type LinkBoxProps = HTMLUIProps<'div'> & ThemeProps<'div'>
+
+export const LinkBox = forwardRef<LinkBoxProps, 'div'>((props, ref) => {
+  const css = useComponentStyle('LinkBox', props)
+  const { className, children, ...rest } = omitThemeProps(props)
+
+  return (
+    <ui.div
+      ref={ref}
+      className={cx('ui-link-box', className)}
+      __css={css}
+      position='relative'
+      {...rest}
+    >
+      {children}
+    </ui.div>
+  )
+})
+
 type LinkOverlayOptions = {
   isExternal?: boolean
 }
 
-export type LinkOverlayProps = HTMLUIProps<'a'> & ThemeProps<'Link'> & LinkOverlayOptions
+export type LinkOverlayProps = HTMLUIProps<'a'> & LinkOverlayOptions
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>((props, ref) => {
-  const { className, isExternal, href, children, ...rest } = omitThemeProps(props)
+  const { className, isExternal, href, children, ...rest } = props
 
   return (
     <ui.a
@@ -41,24 +60,5 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>((props, ref) => {
     >
       {children}
     </ui.a>
-  )
-})
-
-export type LinkBoxProps = HTMLUIProps<'div'> & ThemeProps<'div'> //& LinkBoxOption
-
-export const LinkBox = forwardRef<LinkBoxProps, 'div'>((props, ref) => {
-  const css = useComponentStyle('LinkBox', props)
-  const { className, children, ...rest } = omitThemeProps(props)
-
-  return (
-    <ui.div
-      ref={ref}
-      className={cx('ui-link-box', className)}
-      __css={css}
-      position='relative'
-      {...rest}
-    >
-      {children}
-    </ui.div>
   )
 })

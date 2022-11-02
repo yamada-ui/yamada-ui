@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Breadcrumb } from '@yamada-ui/react'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Navigation / Breadcrumb',
@@ -9,11 +9,30 @@ export default {
 export const basic: ComponentStory<typeof Breadcrumb> = () => {
   return (
     <Breadcrumb>
-      <ul>
-        <li>Home/</li>
-        <li>Docs/</li>
-        <li>Breadcrumb</li>
-      </ul>
+      <BreadcrumbItem>
+        <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href='/'>Docs</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem isCurrentPage>
+        <BreadcrumbLink href='/'>Breadcrumb</BreadcrumbLink>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  )
+}
+export const separator: ComponentStory<typeof Breadcrumb> = () => {
+  return (
+    <Breadcrumb separator='-'>
+      <BreadcrumbItem>
+        <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href='/'>Docs</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem isCurrentPage>
+        <BreadcrumbLink href='/'>Breadcrumb</BreadcrumbLink>
+      </BreadcrumbItem>
     </Breadcrumb>
   )
 }

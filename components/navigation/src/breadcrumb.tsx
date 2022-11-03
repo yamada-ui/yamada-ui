@@ -18,7 +18,7 @@ const [BreadcrumbProvider, useBreadcrumb] = createContext<Record<string, CSSUIOb
 
 type BreadcrumbOptions = {
   separator?: string | JSX.Element
-  gap?: CSSUIProps<'mx'>
+  gap?: CSSUIProps['mx']
 }
 
 export type BreadcrumbProps = HTMLUIProps<'nav'> & ThemeProps<'Breadcrumb'> & BreadcrumbOptions
@@ -65,7 +65,7 @@ type BreadcrumbItemOptions = {
   isCurrentPage?: boolean
   isLastChild?: boolean
   separator?: string | JSX.Element
-  gap?: CSSUIProps<'mx'>
+  gap?: CSSUIProps['mx']
 }
 
 export type BreadcrumbItemProps = HTMLUIProps<'li'> & BreadcrumbItemOptions
@@ -102,7 +102,6 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, 'li'>(
     return (
       <ui.li ref={ref} className={cx('ui-breadcrumb-item', className)} __css={css} {...rest}>
         {clones}
-        {/* @ts-ignore */}
         {!isLastChild ? <BreadcrumbSeparator gap={gap}>{separator}</BreadcrumbSeparator> : null}
       </ui.li>
     )
@@ -135,7 +134,7 @@ export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, 'a'>(
 )
 
 type BreadcrumbSeparatorOptions = {
-  gap?: CSSUIProps<'mx'>
+  gap?: CSSUIProps['mx']
 }
 
 export type BreadcrumbSeparatorProps = HTMLUIProps<'span'> & BreadcrumbSeparatorOptions

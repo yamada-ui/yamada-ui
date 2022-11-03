@@ -6,6 +6,7 @@ import { Heading } from './heading'
 import { Kbd } from './kbd'
 import { Link } from './link'
 import { List } from './list'
+import { Progress } from './progress'
 import { Tag } from './tag'
 
-export default { Button, Container, Divider, Heading, Kbd, Badge, Tag, List, Link }
+export default { Button, Container, Divider, Heading, Kbd, Badge, Tag, List, Link, Progress }

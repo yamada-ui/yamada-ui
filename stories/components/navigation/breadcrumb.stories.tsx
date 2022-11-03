@@ -47,7 +47,7 @@ export const withSeparator: ComponentStory<typeof Breadcrumb> = () => {
 
 export const withCustomSeparator: ComponentStory<typeof Breadcrumb> = () => {
   return (
-    <Breadcrumb separator={<FontAwesomeIcon icon={faCaretRight} color='grey.200' />}>
+    <Breadcrumb separator={<FontAwesomeIcon icon={faCaretRight} color='gray.300' />}>
       <BreadcrumbItem>
         <BreadcrumbLink href='/'>サイヤ人編</BreadcrumbLink>
       </BreadcrumbItem>

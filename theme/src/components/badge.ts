@@ -1,4 +1,4 @@
-import { ComponentStyle } from '@yamada-ui/styled'
+import { ComponentStyle, mode } from '@yamada-ui/styled'
 import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
 import { defaultColors } from '../'
 
@@ -43,20 +43,20 @@ export const Badge: ComponentStyle = {
     },
     outline: ({ theme, scheme, colorScheme: c }) => {
       if (c && defaultColors.includes(c)) {
-        const color =
-          scheme === 'light'
-            ? toneColor(c, 500)(theme)
-            : transparentizeColor(toneColor(c, 200)(theme), 0.8)(theme)
+        const color = mode(
+          toneColor(c, 500)(theme),
+          transparentizeColor(toneColor(c, 200)(theme), 0.8)(theme),
+        )(scheme)
 
         return {
           color,
           boxShadow: `inset 0 0 0px 1px ${color}`,
         }
       } else {
-        const color =
-          scheme === 'light'
-            ? getColor(theme, `${c}.500`)
-            : transparentizeColor(`${c}.200`, 0.8)(theme)
+        const color = mode(
+          getColor(theme, `${c}.500`),
+          transparentizeColor(`${c}.200`, 0.8)(theme),
+        )(scheme)
 
         return {
           color,

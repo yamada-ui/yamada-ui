@@ -1,6 +1,5 @@
-import { ComponentStyle, mode } from '@yamada-ui/styled'
+import { ComponentStyle, mode, isDefaultColor } from '@yamada-ui/styled'
 import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
-import { defaultColors } from '../'
 
 export const Tag: ComponentStyle = {
   baseStyle: {
@@ -56,63 +55,36 @@ export const Tag: ComponentStyle = {
 
   variants: {
     solid: {
-      container: ({ theme, colorScheme: c }) => {
-        if (c && defaultColors.includes(c)) {
-          return {
-            bg: [
-              toneColor(c, 500)(theme),
-              transparentizeColor(toneColor(c, 500)(theme), 0.6)(theme),
-            ],
-            color: [`white`, `whiteAlpha.800`],
-          }
-        } else {
-          return {
-            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(theme)],
-            color: [`white`, `whiteAlpha.800`],
-          }
-        }
-      },
+      container: ({ theme: t, colorScheme: c = 'gray' }) => ({
+        bg: isDefaultColor(
+          [toneColor(c, 500)(t), transparentizeColor(toneColor(c, 500)(t), 0.6)(t)],
+          [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t)],
+        )(c),
+        color: [`white`, `whiteAlpha.800`],
+      }),
     },
     subtle: {
-      container: ({ theme, colorScheme: c }) => {
-        if (c && defaultColors.includes(c)) {
-          return {
-            bg: [
-              toneColor(c, 100)(theme),
-              transparentizeColor(toneColor(c, 200)(theme), 0.16)(theme),
-            ],
-            color: [toneColor(c, 800)(theme), toneColor(c, 200)(theme)],
-          }
-        } else {
-          return {
-            bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(theme)],
-            color: [`${c}.800`, `${c}.200`],
-          }
-        }
-      },
+      container: ({ theme: t, colorScheme: c = 'gray' }) => ({
+        bg: isDefaultColor(
+          [toneColor(c, 100)(t), transparentizeColor(toneColor(c, 200)(t), 0.16)(t)],
+          [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t)],
+        )(c),
+        color: isDefaultColor(
+          [toneColor(c, 800)(t), toneColor(c, 200)(t)],
+          [`${c}.800`, `${c}.200`],
+        )(c),
+      }),
     },
     outline: {
-      container: ({ theme, colorScheme: c, scheme }) => {
-        if (c && defaultColors.includes(c)) {
-          const color = mode(
-            toneColor(c, 500)(theme),
-            transparentizeColor(toneColor(c, 200)(theme), 0.8)(theme),
-          )(scheme)
+      container: ({ theme: t, colorScheme: c = 'gray', scheme: s }) => {
+        const color = isDefaultColor(
+          mode(toneColor(c, 500)(t), transparentizeColor(toneColor(c, 200)(t), 0.8)(t))(s),
+          mode(getColor(t, `${c}.500`), transparentizeColor(`${c}.200`, 0.8)(t))(s),
+        )(c)
 
-          return {
-            color,
-            boxShadow: `inset 0 0 0px 1px ${color}`,
-          }
-        } else {
-          const color = mode(
-            getColor(theme, `${c}.500`),
-            transparentizeColor(`${c}.200`, 0.8)(theme),
-          )(scheme)
-
-          return {
-            color,
-            boxShadow: `inset 0 0 0px 1px ${color}`,
-          }
+        return {
+          color,
+          boxShadow: `inset 0 0 0px 1px ${color}`,
         }
       },
     },

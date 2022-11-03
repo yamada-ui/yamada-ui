@@ -83,7 +83,7 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
   )
 })
 
-const valueToPercent = (value: number, min: number, max: number) =>
+const valueToPercent = (value: number, min: number, max: number): number =>
   ((value - min) * 100) / (max - min)
 
 type ProgressInnerProps = HTMLUIProps<'div'> & ProgressProps

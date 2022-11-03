@@ -60,14 +60,14 @@ export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
 export type CSSUIProps<Y = 'responsive', M = 'scheme'> = StylesProps<Y, M> & PseudosProps
 
-export type UIStyle =
-  | CSSUIObject
-  | ((props: {
-      theme: StyledTheme<Dict>
-      scheme?: Scheme
-      colorScheme?: string
-      [key: string]: any
-    }) => CSSUIObject)
+export type UIStyleProps = {
+  theme: StyledTheme<Dict>
+  scheme?: Scheme
+  colorScheme?: string
+  [key: string]: any
+}
+
+export type UIStyle = CSSUIObject | ((props: UIStyleProps) => CSSUIObject)
 
 export type FunctionCSSInterpolation = { (theme: StyledTheme<Dict>): CSSUIProps }
 

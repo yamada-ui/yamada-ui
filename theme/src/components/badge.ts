@@ -28,10 +28,10 @@ export const Badge: ComponentStyle = {
         [`${c}.800`, `${c}.200`],
       )(c),
     }),
-    outline: ({ theme: t, scheme, colorScheme: c = 'gray' }) => {
+    outline: ({ theme: t, scheme: s, colorScheme: c = 'gray' }) => {
       const color = isDefaultColor(
-        mode(toneColor(c, 500)(t), transparentizeColor(toneColor(c, 200)(t), 0.8)(t))(scheme),
-        mode(getColor(t, `${c}.500`), transparentizeColor(`${c}.200`, 0.8)(t))(scheme),
+        mode(toneColor(c, 500)(t), transparentizeColor(toneColor(c, 200)(t), 0.8)(t))(s),
+        mode(getColor(t, `${c}.500`), transparentizeColor(`${c}.200`, 0.8)(t))(s),
       )(c)
 
       return {

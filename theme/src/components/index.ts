@@ -1,6 +1,8 @@
+import { Alert } from './alert'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
+import { CloseButton } from './close-button'
 import { Container } from './container'
 import { Divider } from './divider'
 import { Heading } from './heading'
@@ -22,4 +24,6 @@ export default {
   Link,
   Progress,
   Breadcrumb,
+  Alert,
+  CloseButton,
 }

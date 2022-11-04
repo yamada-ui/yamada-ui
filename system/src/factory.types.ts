@@ -14,7 +14,7 @@ export type UIFactory = {
 export type StyledResolverProps = CSSUIProps & {
   theme: StyledTheme<Dict>
   __css?: CSSUIProps
-  __sx?: CSSUIProps
+  sx?: CSSUIProps
   animation?: CSSObject | null | undefined | (CSSObject | null | undefined)[]
   css?: CSSObject
 }

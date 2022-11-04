@@ -13,11 +13,11 @@ type ToCSSObject = {
 export const toCSSObject: ToCSSObject =
   ({ baseStyle }) =>
   (props) => {
-    const { theme, css: customCSS, __css, __sx, ...rest } = props
+    const { theme, css: customCSS, __css, sx, ...rest } = props
     const propsCSS = filterObject<Dict, CSSUIProps>(rest, (prop, value) => isPropStyle(prop, value))
     const baseCSS = runIfFunc(baseStyle, props)
 
-    const computedCSS = css({ ...__css, ...baseCSS, ...propsCSS, ...__sx })(theme)
+    const computedCSS = css({ ...__css, ...baseCSS, ...propsCSS, ...sx })(theme)
 
     return customCSS ? [computedCSS, customCSS] : computedCSS
   }

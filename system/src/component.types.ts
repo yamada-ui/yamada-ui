@@ -49,10 +49,10 @@ export type HTMLUIComponents = {
   [Y in DOMElements]: UIComponent<Y, {}>
 }
 
-export type UIComponent<T extends As, P = {}> = Component<T, UIProps & P>
+export type UIComponent<Y extends As, M = {}> = Component<Y, UIProps & M>
 
-export type HTMLUIProps<T extends As> = Omit<
-  PropsOf<T>,
-  T extends 'svg' ? 'ref' | 'children' | keyof StylesProps : 'ref' | keyof StylesProps
+export type HTMLUIProps<Y extends As> = Omit<
+  PropsOf<Y>,
+  Y extends 'svg' ? 'ref' | 'children' | keyof StylesProps : 'ref' | keyof StylesProps
 > &
   UIProps & { as?: As }

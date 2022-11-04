@@ -26,7 +26,7 @@ export type Token<Y, M = unknown, D = 'responsive', H = 'scheme'> = M extends ke
     : ResponsiveObject<Y> | Y
   : Y
 
-export type StyledProps<T> = T | ((theme: StyledTheme<Dict>) => T)
+export type StyledProps<Y> = Y | ((theme: StyledTheme<Dict>) => Y)
 
 export type StyleProperties = CSS.Properties & Omit<StylesProps, keyof CSS.Properties>
 

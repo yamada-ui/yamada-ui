@@ -200,12 +200,14 @@ importers:
   components/forms:
     specifiers:
       '@yamada-ui/feedback': workspace:*
+      '@yamada-ui/media-and-icons': workspace:*
       '@yamada-ui/system': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/feedback': link:../feedback
+      '@yamada-ui/media-and-icons': link:../media-and-icons
       '@yamada-ui/system': link:../../system
       '@yamada-ui/utils': link:../../utils
     devDependencies:

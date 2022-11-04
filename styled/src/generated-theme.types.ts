@@ -498,5 +498,6 @@ export interface GeneratedTheme extends UITheme {
       sizes: string & {}
       variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
     }
+    CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
   }
 }

@@ -5,7 +5,7 @@ import { DOMElements } from './'
 export type UIProps = CSSUIProps & {
   isTruncated?: boolean
   __css?: CSSUIObject
-  __sx?: CSSUIObject
+  sx?: CSSUIObject
   css?: Interpolation<{}>
 }
 

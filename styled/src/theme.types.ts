@@ -6,6 +6,7 @@ import { UIStyle, AnalyzeBreakpointsReturn } from './'
 export type ExtendTheme = {
   styles?: {
     globalStyles?: UIStyle
+    resetStyles?: UIStyle
     layoutStyles?: Record<string | number, UIStyle>
     textStyles?: Record<string | number, UIStyle>
   }

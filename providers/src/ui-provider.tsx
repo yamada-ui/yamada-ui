@@ -31,7 +31,23 @@ export const UIProvider: FC<UIProviderProps> = ({
 }
 
 const ResetStyle: FC = () => {
-  return <Global styles={resetStyle} />
+  const { scheme } = useScheme()
+
+  return (
+    <Global
+      styles={(theme) => {
+        let style = get(theme, 'styles.resetStyle') ?? resetStyle
+
+        style = runIfFunc(style, { theme, scheme })
+
+        if (!style) return undefined
+
+        style = css(style)(theme as StyledTheme<Dict>)
+
+        return style
+      }}
+    />
+  )
 }
 
 const GlobalStyle: FC = () => {
@@ -39,16 +55,16 @@ const GlobalStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme: Dict) => {
-        let globalStyle = get(theme, 'styles.globalStyle')
+      styles={(theme) => {
+        let style = get(theme, 'styles.globalStyle')
 
-        globalStyle = runIfFunc(globalStyle, { theme, scheme })
+        style = runIfFunc(style, { theme, scheme })
 
-        if (!globalStyle) return undefined
+        if (!style) return undefined
 
-        globalStyle = css(globalStyle)(theme as StyledTheme<Dict>)
+        style = css(style)(theme as StyledTheme<Dict>)
 
-        return globalStyle
+        return style
       }}
     />
   )

@@ -22,7 +22,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ theme, children }) => {
 }
 
 export const CSSVars: FC = () => {
-  return <Global styles={(theme: Dict) => ({ ':host, :root, [data-theme]': theme.__cssVars })} />
+  return <Global styles={({ __cssVars }: Dict) => ({ ':host, :root, [data-theme]': __cssVars })} />
 }
 
 export const useTheme = <T extends object = StyledTheme<Dict>>() => {

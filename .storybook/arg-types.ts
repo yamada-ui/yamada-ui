@@ -53,7 +53,7 @@ export const createArgTypes = (): ArgTypes => {
 
   const uiArgs: ArgTypes = {
     as: { description: `This changes the rendering of the element` },
-    __sx: { description: `Superset of CSS` },
+    sx: { description: `Superset of CSS` },
     __css: { description: `Yamada-ui set CSS` },
     css: { description: `Developer set CSS` },
     animation: { description: `Set CSS using useAnimation` },

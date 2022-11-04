@@ -8,7 +8,14 @@ import {
   faSun,
 } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Wrap, Button, IconButton, ButtonGroup, FontAwesomeIcon } from '@yamada-ui/react'
+import {
+  Wrap,
+  Button,
+  IconButton,
+  ButtonGroup,
+  CloseButton,
+  FontAwesomeIcon,
+} from '@yamada-ui/react'
 
 export default {
   title: 'Components / Forms / Button',
@@ -277,6 +284,18 @@ export const iconButton: ComponentStory<typeof Button> = () => {
       <IconButton colorScheme='warning' size='lg' icon={<FontAwesomeIcon icon={faSun} />} />
 
       <IconButton colorScheme='danger' size='lg' icon={<FontAwesomeIcon icon={faMoon} />} />
+    </Wrap>
+  )
+}
+
+export const closeButton: ComponentStory<typeof Button> = () => {
+  return (
+    <Wrap gap='md'>
+      <CloseButton size='sm' />
+
+      <CloseButton size='md' />
+
+      <CloseButton size='lg' />
     </Wrap>
   )
 }

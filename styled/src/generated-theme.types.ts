@@ -494,5 +494,9 @@ export interface GeneratedTheme extends UITheme {
       variants: 'solid' | 'subtle' | 'outline' | (string & {})
     }
     Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Alert: {
+      sizes: string & {}
+      variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
+    }
   }
 }

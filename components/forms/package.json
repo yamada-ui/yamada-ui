@@ -22,7 +22,8 @@
   "dependencies": {
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.1.1",
@@ -32,6 +33,7 @@
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*",
     "react": ">=18"
   }
 }

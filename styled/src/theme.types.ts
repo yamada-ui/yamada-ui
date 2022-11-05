@@ -3,8 +3,10 @@ import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
 import { UIStyle, AnalyzeBreakpointsReturn } from './'
 
+export type ThemeScheme = number | (string & {})
+
 export type ThemeConfig = {
-  initialThemeScheme?: string
+  initialThemeScheme?: string | number
   initialColorScheme?: 'light' | 'dark'
   useSystemColorScheme?: boolean
   var?: {

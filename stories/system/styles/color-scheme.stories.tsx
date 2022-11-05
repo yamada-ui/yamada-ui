@@ -13,6 +13,8 @@ export const basic = () => {
       p='md'
       rounded='md'
       color={['whiteAlpha.800', 'blackAlpha.800']}
+      transitionProperty='all'
+      transitionDuration='normal'
     >
       The current colorScheme is "{colorScheme}"
     </Box>
@@ -25,7 +27,14 @@ export const useHook = () => {
   const color = useColorSchemetValue('whiteAlpha.800', 'blackAlpha.800')
 
   return (
-    <Box bg={bg} p='md' rounded='md' color={color}>
+    <Box
+      bg={bg}
+      p='md'
+      rounded='md'
+      color={color}
+      transitionProperty='all'
+      transitionDuration='normal'
+    >
       The current colorScheme is "{colorScheme}"
     </Box>
   )

@@ -22,7 +22,7 @@ export const grid: Configs = {
   gridArea: true,
 }
 
-export type GridProps<Y = 'responsive', M = 'scheme'> = {
+export type GridProps<Y = 'responsive', M = 'colorScheme'> = {
   gridGap?: Token<CSS.Property.GridGap | number, 'spaces', Y, M>
   gridColumnGap?: Token<CSS.Property.GridColumnGap | number, 'spaces', Y, M>
   gridRowGap?: Token<CSS.Property.GridRowGap | number, 'spaces', Y, M>

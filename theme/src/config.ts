@@ -1,14 +1,14 @@
 export type Config = {
-  initialScheme?: 'light' | 'dark'
-  useSystemScheme?: boolean
+  initialColorScheme?: 'light' | 'dark'
+  useSystemColorScheme?: boolean
   var?: {
     prefix?: string
   }
 }
 
 export const config: Config = {
-  initialScheme: 'light',
-  useSystemScheme: false,
+  initialColorScheme: 'light',
+  useSystemColorScheme: false,
   var: {
     prefix: 'ui',
   },

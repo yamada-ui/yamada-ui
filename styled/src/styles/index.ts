@@ -40,7 +40,7 @@ export const styles = {
   ...others,
 }
 
-export type StylesProps<Y = 'responsive', M = 'scheme'> = LayoutProps<Y, M> &
+export type StylesProps<Y = 'responsive', M = 'colorScheme'> = LayoutProps<Y, M> &
   ColorProps<Y, M> &
   GridProps<Y, M> &
   FlexProps<Y, M> &

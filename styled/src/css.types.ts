@@ -2,27 +2,27 @@ import { Dict } from '@yamada-ui/utils'
 import * as CSS from 'csstype'
 import { Theme, StyledTheme, StylesProps, PseudosProps } from './'
 
-export type Scheme = 'light' | 'dark'
+export type ColorScheme = 'light' | 'dark'
 
 export type ThemeProps<Y extends string = any> = {
   variant?: Y extends keyof Theme['components'] ? Theme['components'][Y]['variants'] : string
   size?: Y extends keyof Theme['components'] ? Theme['components'][Y]['sizes'] : string
-  colorScheme?: Theme['colorSchemes']
+  colorStyle?: Theme['colorStyles']
 }
 
-export type SchemeArray<Y> = [Y, Y]
+export type ColorSchemeArray<Y> = [Y, Y]
 
-export type ResponsiveObject<Y> = Partial<Record<'base' | Theme['breakpoints'], Y>>
+export type ResponsiveObject<Y> = Record<'base', Y> & Partial<Record<Theme['breakpoints'], Y>>
 
-export type Token<Y, M = unknown, D = 'responsive', H = 'scheme'> = M extends keyof Theme
+export type Token<Y, M = unknown, D = 'responsive', H = 'colorScheme'> = M extends keyof Theme
   ? D extends 'responsive'
-    ? H extends 'scheme'
-      ? ResponsiveObject<Y | Theme[M]> | SchemeArray<Y | Theme[M]> | Y | Theme[M]
+    ? H extends 'colorScheme'
+      ? ResponsiveObject<Y | Theme[M]> | ColorSchemeArray<Y | Theme[M]> | Y | Theme[M]
       : ResponsiveObject<Y | Theme[M]> | Y | Theme[M]
     : Y | Theme[M]
   : D extends 'responsive'
-  ? H extends 'scheme'
-    ? ResponsiveObject<Y> | SchemeArray<Y> | Y
+  ? H extends 'colorScheme'
+    ? ResponsiveObject<Y> | ColorSchemeArray<Y> | Y
     : ResponsiveObject<Y> | Y
   : Y
 
@@ -32,7 +32,7 @@ export type StyleProperties = CSS.Properties & Omit<StylesProps, keyof CSS.Prope
 
 type StyleValue<Y extends keyof StyleProperties> = StyledProps<
   | ResponsiveObject<boolean | number | string | StyleProperties[Y]>
-  | SchemeArray<boolean | number | string | StyleProperties[Y]>
+  | ColorSchemeArray<boolean | number | string | StyleProperties[Y]>
   | StyleProperties[Y]
 >
 
@@ -58,12 +58,12 @@ export type RecursiveCSSUIObject<Y> = Y & (Y | RecursivePseudos<Y> | RecursiveSt
 
 export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
-export type CSSUIProps<Y = 'responsive', M = 'scheme'> = StylesProps<Y, M> & PseudosProps
+export type CSSUIProps<Y = 'responsive', M = 'colorScheme'> = StylesProps<Y, M> & PseudosProps
 
 export type UIStyleProps = {
   theme: StyledTheme<Dict>
-  scheme?: Scheme
-  colorScheme?: string
+  colorScheme?: ColorScheme
+  colorStyle?: string
   [key: string]: any
 }
 

@@ -29,7 +29,7 @@ export const Alert: ComponentStyle = {
   },
 
   variants: {
-    subtle: ({ theme: t, colorScheme: c = 'blue' }) => {
+    subtle: ({ theme: t, colorStyle: c = 'blue' }) => {
       const color = isDefaultColor(
         [toneColor(c, 500)(t), toneColor(c, 200)(t)],
         [`${c}.500`, `${c}.200`],
@@ -46,7 +46,7 @@ export const Alert: ComponentStyle = {
         loading: { color },
       }
     },
-    solid: ({ theme: t, colorScheme: c = 'blue' }) => ({
+    solid: ({ theme: t, colorStyle: c = 'blue' }) => ({
       container: {
         bg: isDefaultColor(
           [toneColor(c, 500)(t), toneColor(c, 200)(t)],
@@ -55,7 +55,7 @@ export const Alert: ComponentStyle = {
         color: ['white', 'gray.900'],
       },
     }),
-    'left-accent': ({ theme: t, scheme: s, colorScheme: c = 'blue' }) => {
+    'left-accent': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t), toneColor(c, 200)(t))(s),
         mode(getColor(t, `${c}.500`), getColor(t, `${c}.200`))(s),
@@ -74,7 +74,7 @@ export const Alert: ComponentStyle = {
         icon: { color },
       }
     },
-    'top-accent': ({ theme: t, scheme: s, colorScheme: c = 'blue' }) => {
+    'top-accent': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t), toneColor(c, 200)(t))(s),
         mode(getColor(t, `${c}.500`), getColor(t, `${c}.200`))(s),
@@ -97,6 +97,6 @@ export const Alert: ComponentStyle = {
 
   defaultProps: {
     variant: 'subtle',
-    colorScheme: 'blue',
+    colorStyle: 'blue',
   },
 }

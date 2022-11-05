@@ -24,7 +24,7 @@ export const Button: ComponentStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorScheme: c = 'gray' }) => {
+    solid: ({ theme: t, colorStyle: c = 'gray' }) => {
       const isGray = c === 'gray'
       const isAccessible = c === 'yellow' || c === 'cyan'
 
@@ -65,7 +65,7 @@ export const Button: ComponentStyle = {
         },
       }
     },
-    outline: ({ theme: t, colorScheme: c = 'gray' }) => {
+    outline: ({ theme: t, colorStyle: c = 'gray' }) => {
       const isGray = c === 'gray'
 
       return {
@@ -97,7 +97,7 @@ export const Button: ComponentStyle = {
         },
       }
     },
-    link: ({ theme: t, colorScheme: c = 'gray' }) => ({
+    link: ({ theme: t, colorStyle: c = 'gray' }) => ({
       padding: 0,
       height: 'auto',
       lineHeight: 'normal',
@@ -125,7 +125,7 @@ export const Button: ComponentStyle = {
         },
       },
     }),
-    ghost: ({ theme: t, colorScheme: c = 'gray' }) => {
+    ghost: ({ theme: t, colorStyle: c = 'gray' }) => {
       const isGray = c === 'gray'
 
       return {
@@ -194,6 +194,6 @@ export const Button: ComponentStyle = {
   defaultProps: {
     variant: 'solid',
     size: 'md',
-    colorScheme: 'gray',
+    colorStyle: 'gray',
   },
 }

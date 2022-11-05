@@ -6,12 +6,12 @@ export const Progress: ComponentStyle = {
     container: {
       bg: ['gray.100', 'whiteAlpha.300'],
     },
-    inner: ({ theme, scheme, colorScheme: c = 'blue', hasStripe, isAnimation }) => {
+    inner: ({ theme, colorScheme: s, colorStyle: c = 'blue', hasStripe, isAnimation }) => {
       hasStripe = !isAnimation && hasStripe
 
-      const l = mode(500, 300)(scheme)
+      const l = mode(500, 300)(s)
 
-      const color = mode('rgba(255, 255, 255, 0.15)', 'rgba(0,0,0,0.1)')(scheme)
+      const color = mode('rgba(255, 255, 255, 0.15)', 'rgba(0,0,0,0.1)')(s)
 
       const bgColor = isDefaultColor(toneColor(c, l), getColor(theme, `${c}.${l}`))(c)
 
@@ -70,6 +70,6 @@ export const Progress: ComponentStyle = {
 
   defaultProps: {
     size: 'md',
-    colorScheme: 'blue',
+    colorStyle: 'blue',
   },
 }

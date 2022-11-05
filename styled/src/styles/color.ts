@@ -9,7 +9,7 @@ export const color: Configs = {
   stroke: configs.color('stroke'),
 }
 
-export type ColorProps<Y = 'responsive', M = 'scheme'> = {
+export type ColorProps<Y = 'responsive', M = 'colorScheme'> = {
   color?: Token<CSS.Property.Color, 'colors', Y, M>
   textColor?: Token<CSS.Property.Color, 'colors', Y, M>
   fill?: Token<CSS.Property.Color, 'colors', Y, M>

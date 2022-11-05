@@ -26,7 +26,7 @@ Object.assign(position, {
   insetEnd: position.insetInlineEnd,
 })
 
-export type PositionProps<Y = 'responsive', M = 'scheme'> = {
+export type PositionProps<Y = 'responsive', M = 'colorScheme'> = {
   zIndex?: Token<CSS.Property.ZIndex, 'zIndices', Y, M>
   top?: Token<CSS.Property.Top | number, 'spaces', Y, M>
   insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, 'spaces', Y, M>

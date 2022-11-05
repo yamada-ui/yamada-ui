@@ -215,7 +215,7 @@ export interface GeneratedTheme extends UITheme {
     | 'youtube.800'
     | 'youtube.900'
     | (string & {})
-  colorSchemes:
+  colorStyles:
     | 'primary'
     | 'secondary'
     | 'warning'

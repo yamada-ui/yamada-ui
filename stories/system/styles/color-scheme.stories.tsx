@@ -1,11 +1,11 @@
-import { Box, useScheme, useSchemetValue } from '@yamada-ui/react'
+import { Box, useColorScheme, useColorSchemetValue } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Styles / Scheme',
+  title: 'System / Styles / Color Scheme',
 }
 
 export const basic = () => {
-  const { scheme } = useScheme()
+  const { colorScheme } = useColorScheme()
 
   return (
     <Box
@@ -14,19 +14,19 @@ export const basic = () => {
       rounded='md'
       color={['whiteAlpha.800', 'blackAlpha.800']}
     >
-      The current scheme is "{scheme}"
+      The current colorScheme is "{colorScheme}"
     </Box>
   )
 }
 
 export const useHook = () => {
-  const { scheme } = useScheme()
-  const bg = useSchemetValue('blackAlpha.800', 'whiteAlpha.800')
-  const color = useSchemetValue('whiteAlpha.800', 'blackAlpha.800')
+  const { colorScheme } = useColorScheme()
+  const bg = useColorSchemetValue('blackAlpha.800', 'whiteAlpha.800')
+  const color = useColorSchemetValue('whiteAlpha.800', 'blackAlpha.800')
 
   return (
     <Box bg={bg} p='md' rounded='md' color={color}>
-      The current scheme is "{scheme}"
+      The current colorScheme is "{colorScheme}"
     </Box>
   )
 }

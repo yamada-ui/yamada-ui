@@ -3,42 +3,42 @@ import { css, StyledTheme } from '@yamada-ui/styled'
 import { defaultTheme, resetStyle } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, runIfFunc } from '@yamada-ui/utils'
 import { FC, ReactNode } from 'react'
-import { ThemeProvider, SchemeProvider, useScheme } from './'
+import { ThemeProvider, ColorSchemeProvider, useColorScheme } from './'
 
 export type UIProviderProps = {
   theme?: Dict
   reset?: boolean
-  schemeManager?: any
+  colorSchemeManager?: any
   children: ReactNode
 }
 
 export const UIProvider: FC<UIProviderProps> = ({
   theme = defaultTheme,
   reset = true,
-  schemeManager,
+  colorSchemeManager,
   children,
 }) => {
   return (
     <ThemeProvider theme={theme}>
-      <SchemeProvider schemeManager={schemeManager} options={theme.config}>
+      <ColorSchemeProvider colorSchemeManager={colorSchemeManager} options={theme.config}>
         {reset ? <ResetStyle /> : null}
         <GlobalStyle />
 
         {children}
-      </SchemeProvider>
+      </ColorSchemeProvider>
     </ThemeProvider>
   )
 }
 
 const ResetStyle: FC = () => {
-  const { scheme } = useScheme()
+  const { colorScheme } = useColorScheme()
 
   return (
     <Global
       styles={(theme) => {
         let style = get(theme, 'styles.resetStyle') ?? resetStyle
 
-        style = runIfFunc(style, { theme, scheme })
+        style = runIfFunc(style, { theme, colorScheme })
 
         if (!style) return undefined
 
@@ -51,14 +51,14 @@ const ResetStyle: FC = () => {
 }
 
 const GlobalStyle: FC = () => {
-  const { scheme } = useScheme()
+  const { colorScheme } = useColorScheme()
 
   return (
     <Global
       styles={(theme) => {
         let style = get(theme, 'styles.globalStyle')
 
-        style = runIfFunc(style, { theme, scheme })
+        style = runIfFunc(style, { theme, colorScheme })
 
         if (!style) return undefined
 

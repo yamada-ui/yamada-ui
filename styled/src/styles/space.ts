@@ -56,7 +56,7 @@ Object.assign(space, {
   paddingEnd: space.paddingInlineEnd,
 })
 
-export type SpaceProps<Y = 'responsive', M = 'scheme'> = {
+export type SpaceProps<Y = 'responsive', M = 'colorScheme'> = {
   m?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
   margin?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
   mt?: Token<CSS.Property.Margin | number, 'spaces', Y, M>

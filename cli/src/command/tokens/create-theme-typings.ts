@@ -52,30 +52,30 @@ export const extractComponents = ({
 export const extractTransitions = (
   theme: any,
 ): {
-  transitionsProperty: string[]
-  transitionsDuration: string[]
-  transitionsEasing: string[]
+  transitionProperty: string[]
+  transitionDuration: string[]
+  transitionEasing: string[]
 } => {
-  let transitionsProperty: string[] = []
-  let transitionsDuration: string[] = []
-  let transitionsEasing: string[] = []
+  let transitionProperty: string[] = []
+  let transitionDuration: string[] = []
+  let transitionEasing: string[] = []
 
   const { transitions } = theme
 
-  if (!isObject(transitions)) return { transitionsProperty, transitionsDuration, transitionsEasing }
+  if (!isObject(transitions)) return { transitionProperty, transitionDuration, transitionEasing }
 
   Object.entries(transitions).forEach(([key, value]) => {
     switch (key) {
       case 'property':
-        transitionsProperty = extractPaths(value)
+        transitionProperty = extractPaths(value)
         break
 
       case 'duration':
-        transitionsDuration = extractPaths(value)
+        transitionDuration = extractPaths(value)
         break
 
       case 'easing':
-        transitionsEasing = extractPaths(value)
+        transitionEasing = extractPaths(value)
         break
 
       default:
@@ -83,7 +83,7 @@ export const extractTransitions = (
     }
   })
 
-  return { transitionsProperty, transitionsDuration, transitionsEasing }
+  return { transitionProperty, transitionDuration, transitionEasing }
 }
 
 const isHue = (value: any): boolean => {
@@ -157,7 +157,7 @@ export const createThemeTypings = async (theme: any) => {
   const textStyles = extractKeys(theme, 'styles.textStyles')
   const layerStyles = extractKeys(theme, 'styles.layerStyles')
   const colorStyles = extractColorStyles(theme)
-  const { transitionsProperty, transitionsDuration, transitionsEasing } = extractTransitions(theme)
+  const { transitionProperty, transitionDuration, transitionEasing } = extractTransitions(theme)
   const componentTypes = extractComponents(theme)
 
   return prettier(
@@ -167,9 +167,9 @@ export const createThemeTypings = async (theme: any) => {
         textStyles,
         layerStyles,
         colorStyles,
-        transitionsProperty,
-        transitionsDuration,
-        transitionsEasing,
+        transitionProperty,
+        transitionDuration,
+        transitionEasing,
       },
     )} ${printComponent(componentTypes)} }`,
   )

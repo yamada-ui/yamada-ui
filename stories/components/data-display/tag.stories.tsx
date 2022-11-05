@@ -10,7 +10,7 @@ export default {
 export const subtle: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md'>
-      <Tag colorStyle='primary'>Cyan</Tag>
+      <Tag colorStyle='primary'>Primary</Tag>
 
       <Tag colorStyle='secondary'>Secondary</Tag>
 

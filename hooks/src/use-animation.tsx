@@ -70,7 +70,7 @@ const createAnimation =
   }
 
 export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): string => {
-  const theme = useTheme()
+  const { theme } = useTheme()
 
   if (isArray(styles)) {
     return styles
@@ -101,7 +101,7 @@ export const useDynamicAnimation = <
       | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
   ) => void,
 ] => {
-  const theme = useTheme()
+  const { theme } = useTheme()
   const keys = useRef<string | string[] | undefined>(
     !isUndefined(init) ? (isArray(init) ? init.map(String) : String(init)) : undefined,
   )

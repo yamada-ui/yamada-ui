@@ -6,9 +6,9 @@ type Component = {
   variants: string[]
 }
 
-const defaultKeys = ['primary', 'secondary', 'warning', 'danger', 'link']
+const defaultColors = ['primary', 'secondary', 'warning', 'danger', 'link']
 
-const hueKeys = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
+const hues = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
 
 export const printComponent = (components: Record<string, Component>): string =>
   `components: { ${Object.entries(components)
@@ -86,23 +86,23 @@ export const extractTransitions = (
   return { transitionsProperty, transitionsDuration, transitionsEasing }
 }
 
-const isDefault = (key: any): boolean => defaultKeys.includes(key)
-
 const isHue = (value: any): boolean => {
   if (!isObject(value)) return false
 
   const keys = Object.keys(value)
 
-  return hueKeys.every((key) => keys.includes(key))
+  return hues.every((key) => keys.includes(key))
 }
 
-export const extractColorSchemes = (theme: any): string[] => {
+const isDefaultColor = (key: any): boolean => defaultColors.includes(key)
+
+export const extractColorStyles = (theme: any): string[] => {
   const { colors } = theme
 
   if (!isObject(colors)) return []
 
   return Object.entries(colors).reduce((array, [key, value]) => {
-    if (isHue(value) || isDefault(key)) array.push(key)
+    if (isHue(value) || isDefaultColor(key)) array.push(key)
 
     return array
   }, [] as string[])
@@ -156,7 +156,7 @@ export const createThemeTypings = async (theme: any) => {
 
   const textStyles = extractKeys(theme, 'styles.textStyles')
   const layerStyles = extractKeys(theme, 'styles.layerStyles')
-  const colorSchemes = extractColorSchemes(theme)
+  const colorStyles = extractColorStyles(theme)
   const { transitionsProperty, transitionsDuration, transitionsEasing } = extractTransitions(theme)
   const componentTypes = extractComponents(theme)
 
@@ -166,7 +166,7 @@ export const createThemeTypings = async (theme: any) => {
         ...unions,
         textStyles,
         layerStyles,
-        colorSchemes,
+        colorStyles,
         transitionsProperty,
         transitionsDuration,
         transitionsEasing,

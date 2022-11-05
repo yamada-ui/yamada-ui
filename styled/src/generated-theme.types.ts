@@ -452,7 +452,7 @@ export interface GeneratedTheme extends UITheme {
     | '-3.5'
     | (string & {})
   textStyles: string & {}
-  transitionsDuration:
+  transitionDuration:
     | 'ultra-fast'
     | 'faster'
     | 'fast'
@@ -461,14 +461,8 @@ export interface GeneratedTheme extends UITheme {
     | 'slower'
     | 'ultra-slow'
     | (string & {})
-  transitionsEasing: 'ease-in' | 'ease-out' | 'ease-in-out' | (string & {})
-  transitionsProperty:
-    | 'common'
-    | 'colors'
-    | 'dimensions'
-    | 'position'
-    | 'background'
-    | (string & {})
+  transitionEasing: 'ease-in' | 'ease-out' | 'ease-in-out' | (string & {})
+  transitionProperty: 'common' | 'colors' | 'dimensions' | 'position' | 'background' | (string & {})
   zIndices:
     | 'yamcha'
     | 'kurillin'

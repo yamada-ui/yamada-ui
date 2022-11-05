@@ -33,7 +33,7 @@ const usetStyles = (
   props: any,
   isMulti: boolean = false,
 ): CSSUIObject | Record<string, CSSUIObject> => {
-  const theme = useTheme()
+  const { theme } = useTheme()
   const { colorScheme } = useColorScheme()
 
   const componentStyle: ComponentStyle | undefined = get(theme, `components.${name}`)

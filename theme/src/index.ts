@@ -13,4 +13,3 @@ export const defaultTheme = {
 export type DefaultTheme = typeof defaultTheme
 
 export { resetStyle } from './styles'
-export type { Config } from './config'

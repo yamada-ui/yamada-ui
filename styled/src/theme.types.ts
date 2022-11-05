@@ -3,6 +3,15 @@ import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
 import { UIStyle, AnalyzeBreakpointsReturn } from './'
 
+export type ThemeConfig = {
+  initialThemeScheme?: string
+  initialColorScheme?: 'light' | 'dark'
+  useSystemColorScheme?: boolean
+  var?: {
+    prefix?: string
+  }
+}
+
 export type ExtendTheme = {
   styles?: {
     globalStyles?: UIStyle

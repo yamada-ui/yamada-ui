@@ -55,7 +55,7 @@ export const Tag: ComponentStyle = {
 
   variants: {
     solid: {
-      container: ({ theme: t, colorScheme: c = 'gray' }) => ({
+      container: ({ theme: t, colorStyle: c = 'gray' }) => ({
         bg: isDefaultColor(
           [toneColor(c, 500)(t), transparentizeColor(toneColor(c, 500)(t), 0.6)(t)],
           [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t)],
@@ -64,7 +64,7 @@ export const Tag: ComponentStyle = {
       }),
     },
     subtle: {
-      container: ({ theme: t, colorScheme: c = 'gray' }) => ({
+      container: ({ theme: t, colorStyle: c = 'gray' }) => ({
         bg: isDefaultColor(
           [toneColor(c, 100)(t), transparentizeColor(toneColor(c, 200)(t), 0.16)(t)],
           [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t)],
@@ -76,7 +76,7 @@ export const Tag: ComponentStyle = {
       }),
     },
     outline: {
-      container: ({ theme: t, colorScheme: c = 'gray', scheme: s }) => {
+      container: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
         const color = isDefaultColor(
           mode(toneColor(c, 500)(t), transparentizeColor(toneColor(c, 200)(t), 0.8)(t))(s),
           mode(getColor(t, `${c}.500`), transparentizeColor(`${c}.200`, 0.8)(t))(s),
@@ -93,6 +93,6 @@ export const Tag: ComponentStyle = {
   defaultProps: {
     size: 'md',
     variant: 'subtle',
-    colorScheme: 'gray',
+    colorStyle: 'gray',
   },
 }

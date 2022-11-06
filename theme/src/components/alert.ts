@@ -29,27 +29,27 @@ export const Alert: ComponentStyle = {
   },
 
   variants: {
-    subtle: ({ theme: t, colorStyle: c = 'blue' }) => {
+    subtle: ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
       const color = isDefaultColor(
-        [toneColor(c, 500)(t), toneColor(c, 200)(t)],
+        [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
         [`${c}.500`, `${c}.200`],
       )(c)
 
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t), transparentizeColor(toneColor(c, 200)(t), 0.16)(t)],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t)],
+            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
+            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
           )(c),
         },
         icon: { color },
         loading: { color },
       }
     },
-    solid: ({ theme: t, colorStyle: c = 'blue' }) => ({
+    solid: ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({
       container: {
         bg: isDefaultColor(
-          [toneColor(c, 500)(t), toneColor(c, 200)(t)],
+          [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
           [`${c}.500`, `${c}.200`],
         )(c),
         color: ['white', 'gray.900'],
@@ -57,15 +57,15 @@ export const Alert: ComponentStyle = {
     }),
     'left-accent': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
       const color = isDefaultColor(
-        mode(toneColor(c, 500)(t), toneColor(c, 200)(t))(s),
-        mode(getColor(t, `${c}.500`), getColor(t, `${c}.200`))(s),
+        mode(toneColor(c, 500)(t, s), toneColor(c, 200)(t, s))(s),
+        mode(getColor(`${c}.500`)(t, s), getColor(`${c}.200`)(t, s))(s),
       )(c)
 
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t), transparentizeColor(toneColor(c, 200)(t), 0.16)(t)],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t)],
+            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
+            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
           )(c),
           pl: 3,
           borderLeft: `0.25rem solid ${color}`,
@@ -76,15 +76,15 @@ export const Alert: ComponentStyle = {
     },
     'top-accent': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
       const color = isDefaultColor(
-        mode(toneColor(c, 500)(t), toneColor(c, 200)(t))(s),
-        mode(getColor(t, `${c}.500`), getColor(t, `${c}.200`))(s),
+        mode(toneColor(c, 500)(t, s), toneColor(c, 200)(t, s))(s),
+        mode(getColor(`${c}.500`)(t, s), getColor(`${c}.200`)(t, s))(s),
       )(c)
 
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t), transparentizeColor(toneColor(c, 200)(t), 0.16)(t)],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t)],
+            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
+            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
           )(c),
           pt: 3,
           borderTop: `0.25rem solid ${color}`,

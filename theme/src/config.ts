@@ -1,14 +1,8 @@
-export type Config = {
-  initialScheme?: 'light' | 'dark'
-  useSystemScheme?: boolean
-  var?: {
-    prefix?: string
-  }
-}
+import { ThemeConfig } from '@yamada-ui/styled'
 
-export const config: Config = {
-  initialScheme: 'light',
-  useSystemScheme: false,
+export const config: ThemeConfig = {
+  initialColorScheme: 'light',
+  useSystemColorScheme: false,
   var: {
     prefix: 'ui',
   },

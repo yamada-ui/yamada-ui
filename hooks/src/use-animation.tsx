@@ -12,27 +12,37 @@ import { useRef, useState } from 'react'
 import { useToken } from './'
 
 export type AnimationStyle = {
-  keyframes: Record<string, StylesProps<'unresponsive', 'unscheme'>>
-  duration?: Token<CSS.Property.AnimationDuration, 'transitionDuration', 'unresponsive', 'unscheme'>
+  keyframes: Record<string, StylesProps<'unResponsive', 'unColorScheme'>>
+  duration?: Token<
+    CSS.Property.AnimationDuration,
+    'transitionDuration',
+    'unResponsive',
+    'unColorScheme'
+  >
   timingFunction?: Token<
     CSS.Property.AnimationTimingFunction,
     'transitionEasing',
-    'unresponsive',
-    'unscheme'
+    'unResponsive',
+    'unColorScheme'
   >
-  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unresponsive', 'unscheme'>
-  iterationCount?: Token<CSS.Property.AnimationIterationCount, unknown, 'unresponsive', 'unscheme'>
-  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unresponsive', 'unscheme'>
-  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unresponsive', 'unscheme'>
-  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unresponsive', 'unscheme'>
+  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unResponsive', 'unColorScheme'>
+  iterationCount?: Token<
+    CSS.Property.AnimationIterationCount,
+    unknown,
+    'unResponsive',
+    'unColorScheme'
+  >
+  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unResponsive', 'unColorScheme'>
+  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unResponsive', 'unColorScheme'>
+  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unResponsive', 'unColorScheme'>
 }
 
 const transformConfig = (
   obj: Omit<AnimationStyle, 'keyframes'>,
 ): Omit<AnimationStyle, 'keyframes'> =>
   Object.entries(obj).reduce((obj, [key, value]) => {
-    if (key === 'duration') value = useToken('transitionsDuration', value) ?? value
-    if (key === 'timingFunction') value = useToken('transitionsEasing', value) ?? value
+    if (key === 'duration') value = useToken('transitionDuration', value) ?? value
+    if (key === 'timingFunction') value = useToken('transitionEasing', value) ?? value
 
     obj[key] = value
 
@@ -60,7 +70,7 @@ const createAnimation =
   }
 
 export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): string => {
-  const theme = useTheme()
+  const { theme } = useTheme()
 
   if (isArray(styles)) {
     return styles
@@ -91,7 +101,7 @@ export const useDynamicAnimation = <
       | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
   ) => void,
 ] => {
-  const theme = useTheme()
+  const { theme } = useTheme()
   const keys = useRef<string | string[] | undefined>(
     !isUndefined(init) ? (isArray(init) ? init.map(String) : String(init)) : undefined,
   )

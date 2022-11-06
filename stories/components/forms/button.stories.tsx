@@ -25,51 +25,51 @@ export default {
 export const solid: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary'>Primary</Button>
+      <Button colorStyle='primary'>Primary</Button>
 
-      <Button colorScheme='secondary'>Secondary</Button>
+      <Button colorStyle='secondary'>Secondary</Button>
 
-      <Button colorScheme='warning'>Warning</Button>
+      <Button colorStyle='warning'>Warning</Button>
 
-      <Button colorScheme='danger'>Danger</Button>
+      <Button colorStyle='danger'>Danger</Button>
 
-      <Button colorScheme='link'>Link</Button>
+      <Button colorStyle='link'>Link</Button>
 
-      <Button colorScheme='gray'>Gray</Button>
+      <Button colorStyle='gray'>Gray</Button>
 
-      <Button colorScheme='red'>Red</Button>
+      <Button colorStyle='red'>Red</Button>
 
-      <Button colorScheme='orange'>Orange</Button>
+      <Button colorStyle='orange'>Orange</Button>
 
-      <Button colorScheme='yellow'>Yellow</Button>
+      <Button colorStyle='yellow'>Yellow</Button>
 
-      <Button colorScheme='green'>Green</Button>
+      <Button colorStyle='green'>Green</Button>
 
-      <Button colorScheme='teal'>Teal</Button>
+      <Button colorStyle='teal'>Teal</Button>
 
-      <Button colorScheme='blue'>Blue</Button>
+      <Button colorStyle='blue'>Blue</Button>
 
-      <Button colorScheme='cyan'>Cyan</Button>
+      <Button colorStyle='cyan'>Cyan</Button>
 
-      <Button colorScheme='purple'>Purple</Button>
+      <Button colorStyle='purple'>Purple</Button>
 
-      <Button colorScheme='pink'>pink</Button>
+      <Button colorStyle='pink'>pink</Button>
 
-      <Button colorScheme='linkedin'>Linkedin</Button>
+      <Button colorStyle='linkedin'>Linkedin</Button>
 
-      <Button colorScheme='facebook'>Facebook</Button>
+      <Button colorStyle='facebook'>Facebook</Button>
 
-      <Button colorScheme='messenger'>Messenger</Button>
+      <Button colorStyle='messenger'>Messenger</Button>
 
-      <Button colorScheme='whatsapp'>Whatsapp</Button>
+      <Button colorStyle='whatsapp'>Whatsapp</Button>
 
-      <Button colorScheme='twitter'>Twitter</Button>
+      <Button colorStyle='twitter'>Twitter</Button>
 
-      <Button colorScheme='line'>Line</Button>
+      <Button colorStyle='line'>Line</Button>
 
-      <Button colorScheme='instagram'>Instagram</Button>
+      <Button colorStyle='instagram'>Instagram</Button>
 
-      <Button colorScheme='youtube'>Youtube</Button>
+      <Button colorStyle='youtube'>Youtube</Button>
     </Wrap>
   )
 }
@@ -77,95 +77,95 @@ export const solid: ComponentStory<typeof Button> = () => {
 export const outline: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button variant='outline' colorScheme='primary'>
+      <Button variant='outline' colorStyle='primary'>
         Primary
       </Button>
 
-      <Button variant='outline' colorScheme='secondary'>
+      <Button variant='outline' colorStyle='secondary'>
         Secondary
       </Button>
 
-      <Button variant='outline' colorScheme='warning'>
+      <Button variant='outline' colorStyle='warning'>
         Warning
       </Button>
 
-      <Button variant='outline' colorScheme='danger'>
+      <Button variant='outline' colorStyle='danger'>
         Danger
       </Button>
 
-      <Button variant='outline' colorScheme='link'>
+      <Button variant='outline' colorStyle='link'>
         Link
       </Button>
 
-      <Button variant='outline' colorScheme='gray'>
+      <Button variant='outline' colorStyle='gray'>
         Gray
       </Button>
 
-      <Button variant='outline' colorScheme='red'>
+      <Button variant='outline' colorStyle='red'>
         Red
       </Button>
 
-      <Button variant='outline' colorScheme='orange'>
+      <Button variant='outline' colorStyle='orange'>
         Orange
       </Button>
 
-      <Button variant='outline' colorScheme='yellow'>
+      <Button variant='outline' colorStyle='yellow'>
         Yellow
       </Button>
 
-      <Button variant='outline' colorScheme='green'>
+      <Button variant='outline' colorStyle='green'>
         Green
       </Button>
 
-      <Button variant='outline' colorScheme='teal'>
+      <Button variant='outline' colorStyle='teal'>
         Teal
       </Button>
 
-      <Button variant='outline' colorScheme='blue'>
+      <Button variant='outline' colorStyle='blue'>
         Blue
       </Button>
 
-      <Button variant='outline' colorScheme='cyan'>
+      <Button variant='outline' colorStyle='cyan'>
         Cyan
       </Button>
 
-      <Button variant='outline' colorScheme='purple'>
+      <Button variant='outline' colorStyle='purple'>
         Purple
       </Button>
 
-      <Button variant='outline' colorScheme='pink'>
+      <Button variant='outline' colorStyle='pink'>
         pink
       </Button>
 
-      <Button variant='outline' colorScheme='linkedin'>
+      <Button variant='outline' colorStyle='linkedin'>
         Linkedin
       </Button>
 
-      <Button variant='outline' colorScheme='facebook'>
+      <Button variant='outline' colorStyle='facebook'>
         Facebook
       </Button>
 
-      <Button variant='outline' colorScheme='messenger'>
+      <Button variant='outline' colorStyle='messenger'>
         Messenger
       </Button>
 
-      <Button variant='outline' colorScheme='whatsapp'>
+      <Button variant='outline' colorStyle='whatsapp'>
         Whatsapp
       </Button>
 
-      <Button variant='outline' colorScheme='twitter'>
+      <Button variant='outline' colorStyle='twitter'>
         Twitter
       </Button>
 
-      <Button variant='outline' colorScheme='line'>
+      <Button variant='outline' colorStyle='line'>
         Line
       </Button>
 
-      <Button variant='outline' colorScheme='instagram'>
+      <Button variant='outline' colorStyle='instagram'>
         Instagram
       </Button>
 
-      <Button variant='outline' colorScheme='youtube'>
+      <Button variant='outline' colorStyle='youtube'>
         Youtube
       </Button>
     </Wrap>
@@ -175,19 +175,19 @@ export const outline: ComponentStory<typeof Button> = () => {
 export const withSize: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary' size='xs'>
+      <Button colorStyle='primary' size='xs'>
         X Small
       </Button>
 
-      <Button colorScheme='secondary' size='sm'>
+      <Button colorStyle='secondary' size='sm'>
         Small
       </Button>
 
-      <Button colorScheme='warning' size='md'>
+      <Button colorStyle='warning' size='md'>
         Medium
       </Button>
 
-      <Button colorScheme='danger' size='lg'>
+      <Button colorStyle='danger' size='lg'>
         Large
       </Button>
     </Wrap>
@@ -197,19 +197,19 @@ export const withSize: ComponentStory<typeof Button> = () => {
 export const withVariant: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary' variant='solid'>
+      <Button colorStyle='primary' variant='solid'>
         Solid
       </Button>
 
-      <Button colorScheme='secondary' variant='outline'>
+      <Button colorStyle='secondary' variant='outline'>
         Outline
       </Button>
 
-      <Button colorScheme='warning' variant='ghost'>
+      <Button colorStyle='warning' variant='ghost'>
         Ghost
       </Button>
 
-      <Button colorScheme='danger' variant='link'>
+      <Button colorStyle='danger' variant='link'>
         Link
       </Button>
 
@@ -221,19 +221,19 @@ export const withVariant: ComponentStory<typeof Button> = () => {
 export const withDisabled: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary' variant='solid' isDisabled>
+      <Button colorStyle='primary' variant='solid' isDisabled>
         Solid
       </Button>
 
-      <Button colorScheme='secondary' variant='outline' isDisabled>
+      <Button colorStyle='secondary' variant='outline' isDisabled>
         Outline
       </Button>
 
-      <Button colorScheme='warning' variant='ghost' isDisabled>
+      <Button colorStyle='warning' variant='ghost' isDisabled>
         Ghost
       </Button>
 
-      <Button colorScheme='danger' variant='link' isDisabled>
+      <Button colorStyle='danger' variant='link' isDisabled>
         Link
       </Button>
 
@@ -247,27 +247,23 @@ export const withDisabled: ComponentStory<typeof Button> = () => {
 export const withIcon: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary' variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Button colorStyle='primary' variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
         Button
       </Button>
 
       <Button
-        colorScheme='secondary'
+        colorStyle='secondary'
         variant='outline'
         rightIcon={<FontAwesomeIcon icon={faArrowRight} />}
       >
         Button
       </Button>
 
-      <Button
-        colorScheme='warning'
-        variant='ghost'
-        leftIcon={<FontAwesomeIcon icon={faEnvelope} />}
-      >
+      <Button colorStyle='warning' variant='ghost' leftIcon={<FontAwesomeIcon icon={faEnvelope} />}>
         Button
       </Button>
 
-      <Button colorScheme='danger' variant='link' leftIcon={<FontAwesomeIcon icon={faCheck} />}>
+      <Button colorStyle='danger' variant='link' leftIcon={<FontAwesomeIcon icon={faCheck} />}>
         Button
       </Button>
     </Wrap>
@@ -277,13 +273,13 @@ export const withIcon: ComponentStory<typeof Button> = () => {
 export const iconButton: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <IconButton colorScheme='primary' icon={<FontAwesomeIcon icon={faPlus} />} />
+      <IconButton colorStyle='primary' icon={<FontAwesomeIcon icon={faPlus} />} />
 
-      <IconButton colorScheme='secondary' icon={<FontAwesomeIcon icon={faMinus} />} />
+      <IconButton colorStyle='secondary' icon={<FontAwesomeIcon icon={faMinus} />} />
 
-      <IconButton colorScheme='warning' size='lg' icon={<FontAwesomeIcon icon={faSun} />} />
+      <IconButton colorStyle='warning' size='lg' icon={<FontAwesomeIcon icon={faSun} />} />
 
-      <IconButton colorScheme='danger' size='lg' icon={<FontAwesomeIcon icon={faMoon} />} />
+      <IconButton colorStyle='danger' size='lg' icon={<FontAwesomeIcon icon={faMoon} />} />
     </Wrap>
   )
 }
@@ -303,23 +299,23 @@ export const closeButton: ComponentStory<typeof Button> = () => {
 export const withLoading: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button isLoading colorScheme='primary'>
+      <Button isLoading colorStyle='primary'>
         Button
       </Button>
 
-      <Button isLoading colorScheme='secondary' loadingIcon='dots'>
+      <Button isLoading colorStyle='secondary' loadingIcon='dots'>
         Button
       </Button>
 
-      <Button isLoading colorScheme='warning' variant='outline'>
+      <Button isLoading colorStyle='warning' variant='outline'>
         Button
       </Button>
 
-      <Button isLoading colorScheme='danger' variant='ghost'>
+      <Button isLoading colorStyle='danger' variant='ghost'>
         Button
       </Button>
 
-      <Button isLoading loadingText='Loading...' colorScheme='primary'>
+      <Button isLoading loadingText='Loading...' colorStyle='primary'>
         Button
       </Button>
 
@@ -328,7 +324,7 @@ export const withLoading: ComponentStory<typeof Button> = () => {
         loadingText='Loading...'
         loadingPlacement='end'
         loadingIcon='grid'
-        colorScheme='secondary'
+        colorStyle='secondary'
         variant='outline'
       >
         Button

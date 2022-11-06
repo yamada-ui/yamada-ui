@@ -6,11 +6,11 @@ import tokens from './tokens'
 export const defaultTheme = {
   styles: { globalStyle, layerStyles, textStyles },
   components,
-  config,
   ...tokens,
 }
+
+export const defaultConfig = config
 
 export type DefaultTheme = typeof defaultTheme
 
 export { resetStyle } from './styles'
-export type { Config } from './config'

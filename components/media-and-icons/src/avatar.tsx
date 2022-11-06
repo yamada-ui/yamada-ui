@@ -39,27 +39,24 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
   const styles = useMultiComponentStyle('Avatar', props)
   const { name, src, onError, ignoreFallback, ...rest } = omitThemeProps(props)
 
-  const [error, setError] = useState(false)
-
-  const onErrorHandle = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    setError(true)
-  }
+  const [laoded, setLaoded] = useState(false)
 
   const getInitials = (name: string) => {
     const [firstName, lastName] = name?.split(' ') || ''
     return `${firstName.charAt(0)} ${lastName.charAt(0)}`
   }
 
+  const img = new Image()
+  img.src = src || ''
+  img.addEventListener('load', (e) => {
+    console.log('loaded')
+    setLaoded(true)
+  })
+
   return (
     <ui.span ref={ref} __css={{ ...styles.container }} className='ui-avatar' {...rest}>
-      {!error ? (
-        <ui.img
-          src={src}
-          className='ui-avatar-icon'
-          __css={{ ...styles.icon }}
-          alt={name}
-          onError={onErrorHandle}
-        />
+      {laoded ? (
+        <ui.img src={src} className='ui-avatar-icon' __css={{ ...styles.icon }} alt={name} />
       ) : (
         <ui.div
           className='ui-avatar-icon'

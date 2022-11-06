@@ -4,22 +4,25 @@ import {
   Button,
   VStack,
   HStack,
+  Wrap,
+  Heading,
+  Container,
+  Center,
+  Image,
   UIProvider,
   defaultTheme,
   extendTheme,
   extendConfig,
   useTheme,
-  Wrap,
-  Heading,
-  Container,
+  UsageTheme,
 } from '@yamada-ui/react'
 import { FC } from 'react'
 
 export default {
-  title: 'System / Theme',
+  title: 'System / Theme / Theming',
 }
 
-export const dynamicTheme = () => {
+export const dynamicTheming = () => {
   const pinkTheme = extendTheme({
     colors: {
       primary: '#D53F8C',
@@ -111,5 +114,51 @@ export const dynamicTheme = () => {
     <UIProvider theme={theme} config={config}>
       <App />
     </UIProvider>
+  )
+}
+
+export const extendTheming = () => {
+  const theme = extendTheme({
+    /**
+     * Define the theme you want to customize, merging them with the default theme
+     */
+  })
+
+  return (
+    <UIProvider theme={theme}>
+      <App />
+    </UIProvider>
+  )
+}
+
+export const overrideTheming = () => {
+  const theme: UsageTheme = {
+    /**
+     * Define the theme you want to customize
+     */
+    styles: {
+      globalStyle: {
+        fontFamily: 'body',
+        bg: ['white', 'black'],
+        color: ['black', 'white'],
+      },
+    },
+  }
+
+  return (
+    <UIProvider theme={theme}>
+      <App />
+    </UIProvider>
+  )
+}
+
+const App: FC = () => {
+  return (
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+      <Image
+        maxW='32rem'
+        src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/yamada-ui.png'
+      />
+    </Center>
   )
 }

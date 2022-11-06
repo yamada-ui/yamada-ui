@@ -11,27 +11,27 @@ export const Badge: ComponentStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorScheme: c = 'gray' }) => ({
+    solid: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => ({
       bg: isDefaultColor(
-        [toneColor(c, 500)(t), transparentizeColor(toneColor(c, 500)(t), 0.6)(t)],
-        [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t)],
+        [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
+        [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
       )(c),
       color: [`white`, `whiteAlpha.800`],
     }),
-    subtle: ({ theme: t, colorScheme: c = 'gray' }) => ({
+    subtle: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => ({
       bg: isDefaultColor(
-        [toneColor(c, 100)(t), transparentizeColor(toneColor(c, 200)(t), 0.16)(t)],
-        [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t)],
+        [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
+        [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
       )(c),
       color: isDefaultColor(
-        [toneColor(c, 800)(t), toneColor(c, 200)(t)],
+        [toneColor(c, 800)(t, s), toneColor(c, 200)(t, s)],
         [`${c}.800`, `${c}.200`],
       )(c),
     }),
-    outline: ({ theme: t, scheme: s, colorScheme: c = 'gray' }) => {
+    outline: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
       const color = isDefaultColor(
-        mode(toneColor(c, 500)(t), transparentizeColor(toneColor(c, 200)(t), 0.8)(t))(s),
-        mode(getColor(t, `${c}.500`), transparentizeColor(`${c}.200`, 0.8)(t))(s),
+        mode(toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.8)(t, s))(s),
+        mode(getColor(`${c}.500`)(t, s), transparentizeColor(`${c}.200`, 0.8)(t, s))(s),
       )(c)
 
       return {
@@ -43,6 +43,6 @@ export const Badge: ComponentStyle = {
 
   defaultProps: {
     variant: 'subtle',
-    colorScheme: 'gray',
+    colorStyle: 'gray',
   },
 }

@@ -1,4 +1,4 @@
-import { useTheme, useScheme } from '@yamada-ui/providers'
+import { useTheme, useColorScheme } from '@yamada-ui/providers'
 import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps } from '@yamada-ui/styled'
 import {
   getMemoizedObject as get,
@@ -33,8 +33,8 @@ const usetStyles = (
   props: any,
   isMulti: boolean = false,
 ): CSSUIObject | Record<string, CSSUIObject> => {
-  const theme = useTheme()
-  const { scheme } = useScheme()
+  const { theme } = useTheme()
+  const { colorScheme } = useColorScheme()
 
   const componentStyle: ComponentStyle | undefined = get(theme, `components.${name}`)
 
@@ -46,20 +46,24 @@ const usetStyles = (
   const ref = useRef<CSSUIObject | Record<string, CSSUIObject>>({})
 
   if (componentStyle) {
-    let styles = getStyles(componentStyle.baseStyle ?? {}, { theme, scheme, ...props }, isMulti)
+    let styles = getStyles(
+      componentStyle.baseStyle ?? {},
+      { theme, colorScheme, ...props },
+      isMulti,
+    )
 
     const variant = getStyles(
       componentStyle.variants?.[props.variant] ?? {},
       {
         theme,
-        scheme,
+        colorScheme,
         ...props,
       },
       isMulti,
     )
     const size = getStyles(
       componentStyle.sizes?.[props.size] ?? {},
-      { theme, scheme, ...props },
+      { theme, colorScheme, ...props },
       isMulti,
     )
 

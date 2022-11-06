@@ -3,8 +3,10 @@ import { UIStyle } from '@yamada-ui/styled'
 export const globalStyle: UIStyle = () => ({
   body: {
     fontFamily: 'body',
-    background: ['white', 'black'],
+    bg: ['white', 'black'],
     color: ['black', 'white'],
+    transitionProperty: 'background-color',
+    transitionDuration: 'normal',
     lineHeight: 'base',
     overflowX: 'hidden',
   },

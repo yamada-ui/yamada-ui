@@ -19,6 +19,8 @@ export const basic = () => {
       p='md'
       rounded='md'
       color='white'
+      transitionProperty='all'
+      transitionDuration='slower'
     >
       The current breakpoint is "{breakpoint}"
     </Box>
@@ -36,7 +38,14 @@ export const useHook = () => {
   })
 
   return (
-    <Box bg={bg} p='md' rounded='md' color='white'>
+    <Box
+      bg={bg}
+      p='md'
+      rounded='md'
+      color='white'
+      transitionProperty='all'
+      transitionDuration='slower'
+    >
       The current breakpoint is "{breakpoint}"
     </Box>
   )

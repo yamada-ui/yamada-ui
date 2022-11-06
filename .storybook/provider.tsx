@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useEffect } from 'react'
 import { useDarkMode } from 'storybook-dark-mode'
-import { Container, ContainerProps, UIProvider, useScheme } from '@yamada-ui/react'
+import { Container, ContainerProps, UIProvider, useColorScheme } from '@yamada-ui/react'
 
 export const Provider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -11,13 +11,13 @@ export const Provider: FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 const App: FC<ContainerProps> = ({ p, children }) => {
-  const { changeScheme } = useScheme()
+  const { changeColorScheme } = useColorScheme()
 
-  const scheme = useDarkMode() ? 'dark' : 'light'
+  const colorScheme = useDarkMode() ? 'dark' : 'light'
 
   useEffect(() => {
-    changeScheme(scheme)
-  }, [scheme])
+    changeColorScheme(colorScheme)
+  }, [colorScheme])
 
   return (
     <Container p={p} gap='md' alignItems='flex-start'>

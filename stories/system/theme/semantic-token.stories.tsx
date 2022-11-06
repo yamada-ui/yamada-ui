@@ -1,4 +1,4 @@
-import { UIProvider, extendTheme, Box, Semantics, Wrap } from '@yamada-ui/react'
+import { UIProvider, extendTheme, Box, Semantics } from '@yamada-ui/react'
 
 export default {
   title: 'System / Theme / Semantic Token',
@@ -17,19 +17,17 @@ export const useSemanticToken = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Wrap gap='md'>
-        <Box bg='primary' p='4' rounded='md' color='white'>
-          Box
-        </Box>
+      <Box bg='primary' w='full' p='4' rounded='md' color='white'>
+        override primary
+      </Box>
 
-        <Box bg='newPrimary' p='4' rounded='md' color='white'>
-          Box
-        </Box>
+      <Box bg='newPrimary' w='full' p='4' rounded='md' color='white'>
+        new primary
+      </Box>
 
-        <Box bg='extendPrimary' p='4' rounded='md' color='white'>
-          Box
-        </Box>
-      </Wrap>
+      <Box bg='extendPrimary' w='full' p='4' rounded='md' color='white'>
+        extend primary
+      </Box>
     </UIProvider>
   )
 }

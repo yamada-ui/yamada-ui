@@ -1,4 +1,4 @@
-import { Dict } from '@yamada-ui/utils'
+import { Dict, StringLiteral } from '@yamada-ui/utils'
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
 import { UIStyle, AnalyzeBreakpointsReturn } from './'
@@ -10,16 +10,20 @@ export type ThemeConfig = {
   initialColorScheme?: 'light' | 'dark'
   useSystemColorScheme?: boolean
   var?: {
-    prefix?: string
+    prefix?: StringLiteral
   }
 }
 
-export type ExtendTheme = {
+export type LayoutStyles = Record<string | number, UIStyle>
+export type TextStyles = Record<string | number, UIStyle>
+export type Components = Record<string, ComponentStyle>
+
+export type UsageTheme = {
   styles?: {
-    globalStyles?: UIStyle
-    resetStyles?: UIStyle
-    layoutStyles?: Record<string | number, UIStyle>
-    textStyles?: Record<string | number, UIStyle>
+    globalStyle?: UIStyle
+    resetStyle?: UIStyle
+    layoutStyles?: LayoutStyles
+    textStyles?: TextStyles
   }
   borders?: Dict
   colors?: Dict
@@ -35,15 +39,24 @@ export type ExtendTheme = {
   spaces?: Dict
   zIndices?: Dict
   transitions?: { property: Dict; duration: Dict; easing: Dict }
-  components?: Record<string, ComponentStyle>
+  components?: Components
   semantic?: Dict
 }
 
+export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
+export type ComponentSizes = Record<string | number, UIStyle | Record<string, UIStyle>>
+export type ComponentVariants = Record<string | number, UIStyle | Record<string, UIStyle>>
+export type ComponentDefaultProps = {
+  size?: string | number
+  variant?: string | number
+  colorStyle?: string
+}
+
 export type ComponentStyle = {
-  baseStyle?: UIStyle | Record<string, UIStyle>
-  sizes?: Record<string | number, UIStyle | Record<string, UIStyle>>
-  variants?: Record<string | number, UIStyle | Record<string, UIStyle>>
-  defaultProps?: { size?: string | number; variant?: string | number; colorStyle?: string }
+  baseStyle?: ComponentBaseStyle
+  sizes?: ComponentSizes
+  variants?: ComponentVariants
+  defaultProps?: ComponentDefaultProps
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

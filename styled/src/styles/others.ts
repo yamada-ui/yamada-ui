@@ -2,10 +2,10 @@ import { getMemoizedObject as get, Dict, StringLiteral } from '@yamada-ui/utils'
 import { Token } from '../'
 import { Configs } from './'
 
-const getPriority = (theme: any, token: any, css: any) => {
+const getPriority = (theme: any, token: any, css: any = {}) => {
   const result: Dict = {}
 
-  const obj = get(theme, token, {})
+  const obj = get(theme, `styles.${token}`, {})
 
   for (const prop in obj) {
     const done = prop in css && css[prop] != null

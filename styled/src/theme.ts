@@ -57,21 +57,21 @@ const createTokens = (theme: Dict): VarTokens => {
 
   const semanticTokens = theme.semantics ?? {}
 
-  const defaultTokenEntries: [string, VarToken][] = Object.entries(
-    flattenObject(defaultTokens) ?? {},
-  ).map(([token, value]) => {
-    const enhancedToken = { isSemantic: false, value }
+  const defaultTokenEntries = Object.entries(flattenObject(defaultTokens) ?? {}).map(
+    ([token, value]) => {
+      const enhancedToken = { isSemantic: false, value }
 
-    return [token, enhancedToken]
-  })
+      return [token, enhancedToken] as [string, VarToken]
+    },
+  )
 
-  const semanticTokenEntries: [string, VarToken][] = Object.entries(
-    flattenObject(semanticTokens) ?? {},
-  ).map(([token, value]) => {
-    const enhancedToken = { isSemantic: true, value }
+  const semanticTokenEntries = Object.entries(flattenObject(semanticTokens) ?? {}).map(
+    ([token, value]) => {
+      const enhancedToken = { isSemantic: true, value }
 
-    return [token, enhancedToken]
-  })
+      return [token, enhancedToken] as [string, VarToken]
+    },
+  )
 
   return objectFromEntries<VarTokens>([...defaultTokenEntries, ...semanticTokenEntries])
 }

@@ -1,29 +1,10 @@
-import {
-  flattenObject,
-  objectFromEntries,
-  pickObject,
-  omitObject,
-  Dict,
-  Union,
-} from '@yamada-ui/utils'
-import { StyledTheme, ThemeProps, analyzeBreakpoints, createVars } from './'
+import { flattenObject, objectFromEntries, pickObject, omitObject, Dict } from '@yamada-ui/utils'
+import { StyledTheme, ThemeProps, ThemeConfig, analyzeBreakpoints, createVars } from './'
 
-export type SemanticValue<
-  Y extends string,
-  M extends string | number = string | number,
-  D = 'union',
-> = D extends 'union'
-  ? Union<M> | Partial<Record<'default' | Y, Union<M>>>
-  : Partial<Record<'default' | Y, Union<M>>>
-
-export type SemanticVarToken = {
-  isSemantic: true
-  value: string | number | SemanticValue<string>
+export type VarToken = {
+  isSemantic: boolean
+  value: string | number | [string | number, string | number]
 }
-
-export type defaultVarToken = { isSemantic: false; value: string | number }
-
-export type VarToken = defaultVarToken | SemanticVarToken
 
 export type VarTokens = Record<string, VarToken>
 
@@ -49,11 +30,11 @@ export type ThemeToken =
   | 'transition.property'
   | 'transition.easing'
 
-export const transformTheme = <T extends Dict>(_theme: T) => {
+export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig) => {
   const theme = omitTheme(_theme)
 
   const tokens = createTokens(theme)
-  const prefix = theme.config?.var?.prefix
+  const prefix = config?.var?.prefix
   const breakpoints = theme.breakpoints
 
   const { cssMap, cssVars } = createVars(tokens, prefix)
@@ -76,21 +57,21 @@ const createTokens = (theme: Dict): VarTokens => {
 
   const semanticTokens = theme.semantics ?? {}
 
-  const defaultTokenEntries = Object.entries(flattenObject(defaultTokens) ?? {}).map(
-    ([token, value]) => {
-      const enhancedToken = { isSemantic: false, value }
+  const defaultTokenEntries: [string, VarToken][] = Object.entries(
+    flattenObject(defaultTokens) ?? {},
+  ).map(([token, value]) => {
+    const enhancedToken = { isSemantic: false, value }
 
-      return [token, enhancedToken] as [string, defaultVarToken]
-    },
-  )
+    return [token, enhancedToken]
+  })
 
-  const semanticTokenEntries = Object.entries(flattenObject(semanticTokens, 1) ?? {}).map(
-    ([token, value]) => {
-      const enhancedToken = { isSemantic: true, value }
+  const semanticTokenEntries: [string, VarToken][] = Object.entries(
+    flattenObject(semanticTokens) ?? {},
+  ).map(([token, value]) => {
+    const enhancedToken = { isSemantic: true, value }
 
-      return [token, enhancedToken] as [string, SemanticVarToken]
-    },
-  )
+    return [token, enhancedToken]
+  })
 
   return objectFromEntries<VarTokens>([...defaultTokenEntries, ...semanticTokenEntries])
 }

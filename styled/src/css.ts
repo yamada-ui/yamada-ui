@@ -10,7 +10,7 @@ import {
   ConfigProps,
 } from './'
 
-const expandScheme = (key: string, value: any[]): Dict => ({
+const expandColorScheme = (key: string, value: any[]): Dict => ({
   [key]: value[0],
   [pseudos._dark]: {
     [key]: value[1],
@@ -45,7 +45,7 @@ const expandCSS =
       if (value == null) continue
 
       if (isArray(value)) {
-        computedCSS = merge(computedCSS, expandScheme(key, value))
+        computedCSS = merge(computedCSS, expandColorScheme(key, value))
 
         continue
       }

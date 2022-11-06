@@ -7,6 +7,7 @@ import {
 import { transformTheme, StyledTheme } from '@yamada-ui/styled'
 import { Dict } from '@yamada-ui/utils'
 import { FC, useMemo, useContext, Context } from 'react'
+import { UIContext } from './'
 
 export type ThemeProviderProps = EmotionThemeProviderProps
 
@@ -26,6 +27,7 @@ export const CSSVars: FC = () => {
 }
 
 export const useTheme = <T extends object = StyledTheme<Dict>>() => {
+  const { themeScheme, changeThemeScheme } = useContext(UIContext)
   const theme = useContext(ThemeContext as unknown as Context<T | undefined>)
 
   if (!theme)
@@ -33,5 +35,5 @@ export const useTheme = <T extends object = StyledTheme<Dict>>() => {
       'useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`',
     )
 
-  return theme
+  return { theme, themeScheme, changeThemeScheme }
 }

@@ -1,44 +1,87 @@
 import { Global } from '@emotion/react'
-import { css, StyledTheme } from '@yamada-ui/styled'
-import { defaultTheme, resetStyle } from '@yamada-ui/theme'
-import { Dict, getMemoizedObject as get, runIfFunc } from '@yamada-ui/utils'
-import { FC, ReactNode } from 'react'
-import { ThemeProvider, SchemeProvider, useScheme } from './'
+import { css, StyledTheme, ThemeConfig, ThemeScheme } from '@yamada-ui/styled'
+import { defaultTheme, defaultConfig, resetStyle } from '@yamada-ui/theme'
+import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
+import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
+import { ThemeProvider, ColorSchemeProvider, useColorScheme } from './'
+
+type UIContext = {
+  themeScheme: ThemeScheme | undefined
+  changeThemeScheme: (
+    themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme),
+  ) => void
+}
+
+export const UIContext = createContext({} as UIContext)
 
 export type UIProviderProps = {
-  theme?: Dict
+  theme?: Dict | Dict[]
+  config?: ThemeConfig
   reset?: boolean
-  schemeManager?: any
+  colorSchemeManager?: any
   children: ReactNode
 }
 
 export const UIProvider: FC<UIProviderProps> = ({
-  theme = defaultTheme,
+  theme: initialTheme = defaultTheme,
+  config = defaultConfig,
   reset = true,
-  schemeManager,
+  colorSchemeManager,
   children,
 }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <SchemeProvider schemeManager={schemeManager} options={theme.config}>
-        {reset ? <ResetStyle /> : null}
-        <GlobalStyle />
+  const [themeScheme, setThemeScheme] = useState<ThemeScheme | undefined>(
+    config?.initialThemeScheme,
+  )
+  const theme = useMemo(
+    () => (isUndefined(themeScheme) ? initialTheme : initialTheme[themeScheme]),
+    [initialTheme, themeScheme],
+  )
 
-        {children}
-      </SchemeProvider>
-    </ThemeProvider>
+  const changeThemeScheme = useCallback(
+    (themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme)) => {
+      if (isUndefined(themeScheme))
+        throw Error(
+          'changeThemeScheme: `themeScheme` is undefined. Seems you forgot to wrap your config in `initialThemeScheme`',
+        )
+
+      const nextThemeScheme = runIfFunc(themeSchemeOrFunc, themeScheme)
+
+      setThemeScheme(nextThemeScheme)
+    },
+    [themeScheme],
+  )
+
+  const value = useMemo(
+    () => ({
+      themeScheme,
+      changeThemeScheme,
+    }),
+    [themeScheme, changeThemeScheme],
+  )
+
+  return (
+    <UIContext.Provider value={value}>
+      <ThemeProvider theme={theme}>
+        <ColorSchemeProvider colorSchemeManager={colorSchemeManager} config={config}>
+          {reset ? <ResetStyle /> : null}
+          <GlobalStyle />
+
+          {children}
+        </ColorSchemeProvider>
+      </ThemeProvider>
+    </UIContext.Provider>
   )
 }
 
 const ResetStyle: FC = () => {
-  const { scheme } = useScheme()
+  const { colorScheme } = useColorScheme()
 
   return (
     <Global
       styles={(theme) => {
         let style = get(theme, 'styles.resetStyle') ?? resetStyle
 
-        style = runIfFunc(style, { theme, scheme })
+        style = runIfFunc(style, { theme, colorScheme })
 
         if (!style) return undefined
 
@@ -51,14 +94,14 @@ const ResetStyle: FC = () => {
 }
 
 const GlobalStyle: FC = () => {
-  const { scheme } = useScheme()
+  const { colorScheme } = useColorScheme()
 
   return (
     <Global
       styles={(theme) => {
         let style = get(theme, 'styles.globalStyle')
 
-        style = runIfFunc(style, { theme, scheme })
+        style = runIfFunc(style, { theme, colorScheme })
 
         if (!style) return undefined
 

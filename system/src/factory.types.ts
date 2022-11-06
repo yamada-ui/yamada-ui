@@ -15,6 +15,5 @@ export type StyledResolverProps = CSSUIProps & {
   theme: StyledTheme<Dict>
   __css?: CSSUIProps
   sx?: CSSUIProps
-  animation?: CSSObject | null | undefined | (CSSObject | null | undefined)[]
   css?: CSSObject
 }

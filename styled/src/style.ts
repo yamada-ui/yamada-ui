@@ -1,9 +1,9 @@
 import { keyframes as emotionKeyframes, Keyframes, CSSObject } from '@emotion/react'
-import { styles, pseudos, Scheme } from './'
+import { styles, pseudos, ColorScheme } from './'
 
 const styleProps = { ...styles, ...pseudos }
 
-export const defaultColors = ['primary', 'secondary', 'warning', 'danger', 'link']
+export const defaultColorStyles = ['primary', 'secondary', 'warning', 'danger', 'link']
 
 export const isPropStyle = (prop: string, value?: any): boolean =>
   value === undefined
@@ -12,12 +12,12 @@ export const isPropStyle = (prop: string, value?: any): boolean =>
 
 export const mode =
   <L extends any, D extends any>(light: L, dark: D) =>
-  (scheme: Scheme | undefined = 'light'): L | D =>
-    scheme === 'light' ? light : dark
+  (colorScheme: ColorScheme | undefined = 'light'): L | D =>
+    colorScheme === 'light' ? light : dark
 
 export const isDefaultColor =
   (defaultColor: any, otherColor: any) =>
-  (colorScheme: string | undefined): any =>
-    colorScheme && defaultColors.includes(colorScheme) ? defaultColor : otherColor
+  (colorStyle: string | undefined): any =>
+    colorStyle && defaultColorStyles.includes(colorStyle) ? defaultColor : otherColor
 
 export const keyframes = (...arg: CSSObject[]): Keyframes => emotionKeyframes(...arg)

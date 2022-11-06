@@ -6,9 +6,9 @@ type Component = {
   variants: string[]
 }
 
-const defaultKeys = ['primary', 'secondary', 'warning', 'danger', 'link']
+const defaultColors = ['primary', 'secondary', 'warning', 'danger', 'link']
 
-const hueKeys = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
+const hues = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
 
 export const printComponent = (components: Record<string, Component>): string =>
   `components: { ${Object.entries(components)
@@ -52,30 +52,30 @@ export const extractComponents = ({
 export const extractTransitions = (
   theme: any,
 ): {
-  transitionsProperty: string[]
-  transitionsDuration: string[]
-  transitionsEasing: string[]
+  transitionProperty: string[]
+  transitionDuration: string[]
+  transitionEasing: string[]
 } => {
-  let transitionsProperty: string[] = []
-  let transitionsDuration: string[] = []
-  let transitionsEasing: string[] = []
+  let transitionProperty: string[] = []
+  let transitionDuration: string[] = []
+  let transitionEasing: string[] = []
 
   const { transitions } = theme
 
-  if (!isObject(transitions)) return { transitionsProperty, transitionsDuration, transitionsEasing }
+  if (!isObject(transitions)) return { transitionProperty, transitionDuration, transitionEasing }
 
   Object.entries(transitions).forEach(([key, value]) => {
     switch (key) {
       case 'property':
-        transitionsProperty = extractPaths(value)
+        transitionProperty = extractPaths(value)
         break
 
       case 'duration':
-        transitionsDuration = extractPaths(value)
+        transitionDuration = extractPaths(value)
         break
 
       case 'easing':
-        transitionsEasing = extractPaths(value)
+        transitionEasing = extractPaths(value)
         break
 
       default:
@@ -83,26 +83,26 @@ export const extractTransitions = (
     }
   })
 
-  return { transitionsProperty, transitionsDuration, transitionsEasing }
+  return { transitionProperty, transitionDuration, transitionEasing }
 }
-
-const isDefault = (key: any): boolean => defaultKeys.includes(key)
 
 const isHue = (value: any): boolean => {
   if (!isObject(value)) return false
 
   const keys = Object.keys(value)
 
-  return hueKeys.every((key) => keys.includes(key))
+  return hues.every((key) => keys.includes(key))
 }
 
-export const extractColorSchemes = (theme: any): string[] => {
+const isDefaultColor = (key: any): boolean => defaultColors.includes(key)
+
+export const extractColorStyles = (theme: any): string[] => {
   const { colors } = theme
 
   if (!isObject(colors)) return []
 
   return Object.entries(colors).reduce((array, [key, value]) => {
-    if (isHue(value) || isDefault(key)) array.push(key)
+    if (isHue(value) || isDefaultColor(key)) array.push(key)
 
     return array
   }, [] as string[])
@@ -156,8 +156,8 @@ export const createThemeTypings = async (theme: any) => {
 
   const textStyles = extractKeys(theme, 'styles.textStyles')
   const layerStyles = extractKeys(theme, 'styles.layerStyles')
-  const colorSchemes = extractColorSchemes(theme)
-  const { transitionsProperty, transitionsDuration, transitionsEasing } = extractTransitions(theme)
+  const colorStyles = extractColorStyles(theme)
+  const { transitionProperty, transitionDuration, transitionEasing } = extractTransitions(theme)
   const componentTypes = extractComponents(theme)
 
   return prettier(
@@ -166,10 +166,10 @@ export const createThemeTypings = async (theme: any) => {
         ...unions,
         textStyles,
         layerStyles,
-        colorSchemes,
-        transitionsProperty,
-        transitionsDuration,
-        transitionsEasing,
+        colorStyles,
+        transitionProperty,
+        transitionDuration,
+        transitionEasing,
       },
     )} ${printComponent(componentTypes)} }`,
   )

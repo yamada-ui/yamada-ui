@@ -6,7 +6,7 @@ export const useToken = <T extends keyof Omit<Theme, 'components'>>(
   name: T,
   path: Theme[T] | number | undefined,
 ) => {
-  const theme = useTheme()
+  const { theme } = useTheme()
 
   if (name === 'transitionsProperty') name = 'transitions.property' as T
 

@@ -17,6 +17,11 @@ export type ThemeConfig = {
 export type LayerStyles = Record<string | number, UIStyle>
 export type TextStyles = Record<string | number, UIStyle>
 export type Components = Record<string, ComponentStyle>
+export type Semantics = Omit<UsageTheme, 'styles' | 'components' | 'semantics'>
+
+export type ThemeTokens = {
+  [key: string | number]: string | number | [string | number, string | number] | ThemeTokens
+}
 
 export type UsageTheme = {
   styles?: {
@@ -25,22 +30,23 @@ export type UsageTheme = {
     layerStyles?: LayerStyles
     textStyles?: TextStyles
   }
-  borders?: Dict
-  colors?: Dict
-  breakpoints?: Dict
-  fonts?: Dict
-  fontSizes?: Dict
-  fontWeights?: Dict
-  letterSpacings?: Dict
-  lineHeights?: Dict
-  radii?: Dict
-  shadows?: Dict
-  sizes?: Dict
-  spaces?: Dict
-  zIndices?: Dict
-  transitions?: { property: Dict; duration: Dict; easing: Dict }
+  borders?: ThemeTokens
+  colors?: ThemeTokens
+  breakpoints?: ThemeTokens
+  fonts?: ThemeTokens
+  fontSizes?: ThemeTokens
+  fontWeights?: ThemeTokens
+  letterSpacings?: ThemeTokens
+  lineHeights?: ThemeTokens
+  radii?: ThemeTokens
+  shadows?: ThemeTokens
+  sizes?: ThemeTokens
+  spaces?: ThemeTokens
+  zIndices?: ThemeTokens
+  transitions?: { property?: ThemeTokens; duration?: ThemeTokens; easing?: ThemeTokens }
   components?: Components
-  semantic?: Dict
+  semantics?: Semantics
+  [key: string]: any
 }
 
 export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>

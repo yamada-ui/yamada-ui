@@ -4,15 +4,15 @@ import {
   ThemeProvider as EmotionThemeProvider,
   ThemeProviderProps as EmotionThemeProviderProps,
 } from '@emotion/react'
-import { transformTheme, StyledTheme } from '@yamada-ui/styled'
+import { transformTheme, StyledTheme, ThemeConfig } from '@yamada-ui/styled'
 import { Dict } from '@yamada-ui/utils'
 import { FC, useMemo, useContext, Context } from 'react'
 import { UIContext } from './'
 
-export type ThemeProviderProps = EmotionThemeProviderProps
+export type ThemeProviderProps = EmotionThemeProviderProps & { config: ThemeConfig }
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ theme, children }) => {
-  const computedTheme = useMemo(() => transformTheme(theme), [theme])
+export const ThemeProvider: FC<ThemeProviderProps> = ({ theme, config, children }) => {
+  const computedTheme = useMemo(() => transformTheme(theme, config), [theme, config])
 
   return (
     <EmotionThemeProvider theme={computedTheme}>

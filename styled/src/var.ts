@@ -1,5 +1,5 @@
-import { escape, isObject, merge, calc, Dict } from '@yamada-ui/utils'
-import { CSSMap, Pseudos, pseudos, VarTokens, SemanticValue } from './'
+import { escape, merge, calc, Dict, isArray } from '@yamada-ui/utils'
+import { CSSMap, pseudos, VarTokens } from './'
 
 type Var = {
   variable: string
@@ -29,14 +29,16 @@ export const createVars = (
   for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
     const { variable, reference } = tokenToVar(token, prefix)
 
+    let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
+
     if (!isSemantic) {
-      if (token.startsWith('spaces') && !isObject(value)) {
+      if (token.startsWith('spaces')) {
         const keys = token.split('.')
         const [firstKey, ...restKeys] = keys
 
         const negativeToken = `${firstKey}.-${restKeys.join('.')}`
 
-        const negativeValue = calc.negate(value)
+        const negativeValue = calc.negate(lightValue)
         const negativeReference = calc.negate(reference)
 
         cssMap[negativeToken] = {
@@ -46,10 +48,12 @@ export const createVars = (
         }
       }
 
-      cssVars[variable] = value
+      cssVars[variable] = lightValue
+
+      if (darkValue) cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: darkValue } })
 
       cssMap[token] = {
-        value,
+        value: lightValue,
         var: variable,
         ref: reference,
       }
@@ -57,45 +61,32 @@ export const createVars = (
       continue
     }
 
-    value = isObject<SemanticValue<string, string | number, 'ununion'>>(value)
-      ? value
-      : { default: value }
-
-    const fetchParent = (value: string | number = '') => {
+    const fetchParent = (value: string | number = ''): [string | undefined, string | number] => {
       const [parent] = token.split('.')
 
       const _token = [parent, value].join('.')
 
       const tokenValue = tokens[_token]
 
-      if (!tokenValue) return value
+      if (!tokenValue) return [, value]
 
-      const { reference } = tokenToVar(_token, prefix)
+      const { variable, reference } = tokenToVar(_token, prefix)
 
-      return reference
+      return [variable, reference]
     }
 
-    cssVars = merge(
-      cssVars,
-      Object.entries(value).reduce((_cssVar, [semanticToken, semanticValue]) => {
-        const parentRef = fetchParent(semanticValue)
+    const [parentVar, parentRef] = fetchParent(lightValue)
 
-        if (semanticToken === 'default') {
-          _cssVar[variable] = parentRef
+    cssVars = merge(cssVars, { [variable]: parentRef })
 
-          return _cssVar
-        }
+    if (darkValue) {
+      const [, parentRef] = fetchParent(darkValue)
 
-        const pseudo = pseudos[semanticToken as keyof Pseudos] ?? semanticToken
-
-        _cssVar[pseudo] = { [variable]: parentRef }
-
-        return _cssVar
-      }, {} as any),
-    )
+      cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: parentRef } })
+    }
 
     cssMap[token] = {
-      value: reference,
+      value: parentVar ?? lightValue,
       var: variable,
       ref: reference,
     }

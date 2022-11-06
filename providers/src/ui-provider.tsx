@@ -61,7 +61,7 @@ export const UIProvider: FC<UIProviderProps> = ({
 
   return (
     <UIContext.Provider value={value}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} config={config}>
         <ColorSchemeProvider colorSchemeManager={colorSchemeManager} config={config}>
           {reset ? <ResetStyle /> : null}
           <GlobalStyle />

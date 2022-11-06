@@ -1,7 +1,7 @@
 import { UIProvider, extendTheme, TextStyles, Heading } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Theme / Text Layout',
+  title: 'System / Theme / Text Styles',
 }
 
 export const useTextStyle = () => {

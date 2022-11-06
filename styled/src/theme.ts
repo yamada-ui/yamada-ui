@@ -26,9 +26,9 @@ const tokens = [
 
 export type ThemeToken =
   | typeof tokens[number]
-  | 'transition.duration'
-  | 'transition.property'
-  | 'transition.easing'
+  | 'transitions.duration'
+  | 'transitions.property'
+  | 'transitions.easing'
 
 export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig) => {
   const theme = omitTheme(_theme)

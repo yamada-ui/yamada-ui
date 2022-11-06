@@ -57,11 +57,12 @@ export const Loading = forwardRef<LoadingProps, 'div'>(
     },
     ref,
   ) => {
-    const color = useToken('colors', useValue(_color)) ?? _color
-    const secondaryColor = useToken('colors', useValue(_secondaryColor)) ?? _secondaryColor
+    const color = (useToken('colors', useValue(_color)) ?? _color) as string
+    const secondaryColor = (useToken('colors', useValue(_secondaryColor)) ??
+      _secondaryColor) as string
 
-    const width = useToken('sizes', useValue(_size)) ?? _size
-    const height = useToken('sizes', useValue(_size)) ?? _size
+    const width = (useToken('sizes', useValue(_size)) ?? _size) as string | number | undefined
+    const height = (useToken('sizes', useValue(_size)) ?? _size) as string | number | undefined
 
     const css = { '& > *': { padding: '0 !important' } }
 
@@ -106,7 +107,13 @@ export const Loading = forwardRef<LoadingProps, 'div'>(
           return <Grid color={color} width={width} height={height} />
 
         case 'rotating':
-          return <RotatingLines strokeColor={color} animationDuration={'1'} width={width} />
+          return (
+            <RotatingLines
+              strokeColor={color}
+              animationDuration={'1'}
+              width={width ? String(width) : undefined}
+            />
+          )
 
         case 'circles':
           return <ThreeCircles color={color} width={width} height={height} />

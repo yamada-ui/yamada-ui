@@ -41,8 +41,8 @@ const transformConfig = (
   obj: Omit<AnimationStyle, 'keyframes'>,
 ): Omit<AnimationStyle, 'keyframes'> =>
   Object.entries(obj).reduce((obj, [key, value]) => {
-    if (key === 'duration') value = useToken('transitionsDuration', value) ?? value
-    if (key === 'timingFunction') value = useToken('transitionsEasing', value) ?? value
+    if (key === 'duration') value = useToken('transitionDuration', value) ?? value
+    if (key === 'timingFunction') value = useToken('transitionEasing', value) ?? value
 
     obj[key] = value
 

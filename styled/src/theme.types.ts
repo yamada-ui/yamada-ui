@@ -14,7 +14,7 @@ export type ThemeConfig = {
   }
 }
 
-export type LayoutStyles = Record<string | number, UIStyle>
+export type LayerStyles = Record<string | number, UIStyle>
 export type TextStyles = Record<string | number, UIStyle>
 export type Components = Record<string, ComponentStyle>
 
@@ -22,7 +22,7 @@ export type UsageTheme = {
   styles?: {
     globalStyle?: UIStyle
     resetStyle?: UIStyle
-    layoutStyles?: LayoutStyles
+    layerStyles?: LayerStyles
     textStyles?: TextStyles
   }
   borders?: Dict

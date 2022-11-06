@@ -17,6 +17,7 @@ export type ThemeConfig = {
 export type LayerStyles = Record<string | number, UIStyle>
 export type TextStyles = Record<string | number, UIStyle>
 export type Components = Record<string, ComponentStyle>
+export type Semantics = Omit<UsageTheme, 'styles' | 'components'>
 
 export type UsageTheme = {
   styles?: {
@@ -40,7 +41,7 @@ export type UsageTheme = {
   zIndices?: Dict
   transitions?: { property: Dict; duration: Dict; easing: Dict }
   components?: Components
-  semantic?: Dict
+  semantics?: Semantics
 }
 
 export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>

@@ -143,8 +143,8 @@ export const createThemeTypings = async (theme: any) => {
         obj[key] = extractPaths(target, maxScanDepth).filter(filter).flatMap(flatMap)
       }
 
-      if (isObject(theme.semantic)) {
-        const semanticKeys = extractKeys(theme.semantic, key).filter(filter).flatMap(flatMap)
+      if (isObject(theme.semantics)) {
+        const semanticKeys = extractKeys(theme.semantics, key).filter(filter).flatMap(flatMap)
 
         obj[key].push(...semanticKeys)
       }

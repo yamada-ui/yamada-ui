@@ -26,9 +26,9 @@ const tokens = [
 
 export type ThemeToken =
   | typeof tokens[number]
-  | 'transition.duration'
-  | 'transition.property'
-  | 'transition.easing'
+  | 'transitions.duration'
+  | 'transitions.property'
+  | 'transitions.easing'
 
 export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig) => {
   const theme = omitTheme(_theme)
@@ -57,21 +57,21 @@ const createTokens = (theme: Dict): VarTokens => {
 
   const semanticTokens = theme.semantics ?? {}
 
-  const defaultTokenEntries: [string, VarToken][] = Object.entries(
-    flattenObject(defaultTokens) ?? {},
-  ).map(([token, value]) => {
-    const enhancedToken = { isSemantic: false, value }
+  const defaultTokenEntries = Object.entries(flattenObject(defaultTokens) ?? {}).map(
+    ([token, value]) => {
+      const enhancedToken = { isSemantic: false, value }
 
-    return [token, enhancedToken]
-  })
+      return [token, enhancedToken] as [string, VarToken]
+    },
+  )
 
-  const semanticTokenEntries: [string, VarToken][] = Object.entries(
-    flattenObject(semanticTokens) ?? {},
-  ).map(([token, value]) => {
-    const enhancedToken = { isSemantic: true, value }
+  const semanticTokenEntries = Object.entries(flattenObject(semanticTokens) ?? {}).map(
+    ([token, value]) => {
+      const enhancedToken = { isSemantic: true, value }
 
-    return [token, enhancedToken]
-  })
+      return [token, enhancedToken] as [string, VarToken]
+    },
+  )
 
   return objectFromEntries<VarTokens>([...defaultTokenEntries, ...semanticTokenEntries])
 }

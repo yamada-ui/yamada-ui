@@ -1,31 +1,48 @@
 import { TinyColor } from '@ctrl/tinycolor'
-import { getMemoizedObject as get, Dict } from './'
+import { getMemoizedObject as get, Dict, isArray } from './'
 
-export const getColor = (theme: Dict, color: string, fallback?: string) => {
-  const hex: string | undefined = get(theme, `colors.${color}`, color)
-  const { isValid } = new TinyColor(hex)
+export const getColor =
+  (color: string, fallback?: string) =>
+  (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const hex: string | number | [string | number, string | number] | undefined = get(
+      theme,
+      `colors.${color}`,
+      color,
+    )
 
-  return isValid ? hex : fallback
-}
+    if (isArray(hex)) {
+      const [lightHex, darkHex] = hex
 
-export const transparentizeColor = (color: string, opacity: number) => (theme: Dict) => {
-  const raw = getColor(theme, color)
+      const { isValid, originalInput } = new TinyColor(colorScheme !== 'dark' ? lightHex : darkHex)
 
-  return new TinyColor(raw).setAlpha(opacity).toRgbString()
-}
+      return isValid ? originalInput : fallback
+    } else {
+      const { isValid, originalInput } = new TinyColor(hex)
 
-export const toneColor = (color: string, l: number) => (theme: Dict) => {
-  const raw = getColor(theme, color)
+      return isValid ? originalInput : fallback
+    }
+  }
 
-  if (l < 0 || 900 < l) return color
+export const transparentizeColor =
+  (color: string, opacity: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
 
-  let n = (l - 500) / 10
+    return new TinyColor(raw).setAlpha(opacity).toRgbString()
+  }
 
-  const isLighten = n <= 0
+export const toneColor =
+  (color: string, l: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
 
-  if (isLighten) n *= -1
+    if (l < 0 || 900 < l) return color
 
-  if (n !== 0) n = n - 5 * (isLighten ? 1 : -1)
+    let n = (l - 500) / 10
 
-  return new TinyColor(raw)[isLighten ? 'lighten' : 'shade'](n).toString()
-}
+    const isLighten = n <= 0
+
+    if (isLighten) n *= -1
+
+    if (n !== 0) n = n - 5 * (isLighten ? 1 : -1)
+
+    return new TinyColor(raw)[isLighten ? 'lighten' : 'shade'](n).toString()
+  }

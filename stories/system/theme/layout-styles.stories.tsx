@@ -1,7 +1,7 @@
 import { UIProvider, extendTheme, LayerStyles, Center } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Theme / Layer Style',
+  title: 'System / Theme / Layer Styles',
 }
 
 export const useLayerStyle = () => {

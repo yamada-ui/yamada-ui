@@ -71,7 +71,7 @@ export const flattenObject = <T extends Dict>(obj: any, maxDepth: number = Infin
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
   return Object.entries(obj).reduce((result, [key, value]) => {
-    if (isObject(value) || isArray(value)) {
+    if (isObject(value)) {
       Object.entries(flattenObject(value, maxDepth - 1)).forEach(([childKey, childValue]) => {
         result[`${key}.${childKey}`] = childValue
       })

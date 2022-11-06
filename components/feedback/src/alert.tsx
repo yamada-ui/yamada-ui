@@ -12,11 +12,11 @@ import { createContext, cx } from '@yamada-ui/utils'
 import { Loading, LoadingProps } from './'
 
 const statuses = {
-  info: { icon: InfoIcon, colorScheme: 'blue' },
-  success: { icon: CheckIcon, colorScheme: 'green' },
-  warning: { icon: WarningIcon, colorScheme: 'orange' },
-  error: { icon: WarningIcon, colorScheme: 'red' },
-  loading: { icon: Loading, colorScheme: 'blue' },
+  info: { icon: InfoIcon, colorStyle: 'blue' },
+  success: { icon: CheckIcon, colorStyle: 'green' },
+  warning: { icon: WarningIcon, colorStyle: 'orange' },
+  error: { icon: WarningIcon, colorStyle: 'red' },
+  loading: { icon: Loading, colorStyle: 'blue' },
 } as const
 
 type Status = keyof typeof statuses
@@ -33,7 +33,7 @@ const [AlertProvider, useAlert] = createContext<AlertContext>({
 
 export { useAlert }
 
-export const getStatusColorScheme = (status: Status) => statuses[status].colorScheme
+export const getStatusColorStyle = (status: Status) => statuses[status].colorStyle
 
 export const getStatusIcon = (status: Status) => statuses[status].icon
 
@@ -44,11 +44,11 @@ type AlertOptions = {
 export type AlertProps = HTMLUIProps<'div'> & ThemeProps<'Alert'> & AlertOptions
 
 export const Alert = forwardRef<AlertProps, 'div'>(
-  ({ status = 'info', colorScheme, ...props }, ref) => {
-    colorScheme = colorScheme ?? getStatusColorScheme(status)
+  ({ status = 'info', colorStyle, ...props }, ref) => {
+    colorStyle = colorStyle ?? getStatusColorStyle(status)
 
-    const styles = useMultiComponentStyle('Alert', { ...props, colorScheme })
-    const { className, children, ...rest } = omitThemeProps({ ...props, colorScheme })
+    const styles = useMultiComponentStyle('Alert', { ...props, colorStyle })
+    const { className, children, ...rest } = omitThemeProps({ ...props, colorStyle })
 
     const css: CSSUIObject = {
       w: '100%',

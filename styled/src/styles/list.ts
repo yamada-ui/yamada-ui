@@ -10,7 +10,7 @@ export const list: Configs = {
   listStyleImg: configs.prop('listStyleImage'),
 }
 
-export type ListProps<Y = 'responsive', M = 'scheme'> = {
+export type ListProps<Y = 'responsive', M = 'colorScheme'> = {
   listStyleType?: Token<CSS.Property.ListStyleType, unknown, Y, M>
   listStylePosition?: Token<CSS.Property.ListStylePosition, unknown, Y, M>
   listStylePos?: Token<CSS.Property.ListStylePosition, unknown, Y, M>

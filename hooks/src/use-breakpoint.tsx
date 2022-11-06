@@ -4,7 +4,7 @@ import { createdDom } from '@yamada-ui/utils'
 import { useState, useMemo, useEffect } from 'react'
 
 export const useBreakpoint = () => {
-  const theme = useTheme()
+  const { theme } = useTheme()
 
   if (!theme)
     throw Error(

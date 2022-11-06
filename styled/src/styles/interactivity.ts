@@ -13,7 +13,7 @@ export const interactivity: Configs = {
   outlineColor: configs.color('outlineColor'),
 }
 
-export type InteractivityProps<Y = 'responsive', M = 'scheme'> = {
+export type InteractivityProps<Y = 'responsive', M = 'colorScheme'> = {
   appearance?: Token<CSS.Property.Appearance, unknown, Y, M>
   userSelect?: Token<CSS.Property.UserSelect, unknown, Y, M>
   pointerEvents?: Token<CSS.Property.PointerEvents, unknown, Y, M>

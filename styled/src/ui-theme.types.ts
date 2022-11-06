@@ -1,7 +1,7 @@
 export type UITheme = {
   layerStyles: string
   textStyles: string
-  colorSchemes: string
+  colorStyles: string
   borders: string
   colors: string
   breakpoints: string
@@ -15,9 +15,9 @@ export type UITheme = {
   sizes: string
   spaces: string
   zIndices: string
-  transitionsProperty: string
-  transitionsDuration: string
-  transitionsEasing: string
+  transitionProperty: string
+  transitionDuration: string
+  transitionEasing: string
   components: {
     [key: string]: {
       sizes: string

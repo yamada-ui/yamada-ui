@@ -23,7 +23,7 @@ export const scroll: Configs = {
   scrollPaddingY: configs.space(['scrollPaddingTop', 'scrollPaddingBottom']),
 }
 
-export type ScrollProps<Y = 'responsive', M = 'scheme'> = {
+export type ScrollProps<Y = 'responsive', M = 'colorScheme'> = {
   scrollBehavior?: Token<CSS.Property.ScrollBehavior, unknown, Y, M>
   scrollSnapAlign?: Token<CSS.Property.ScrollSnapAlign, unknown, Y, M>
   scrollSnapStop?: Token<CSS.Property.ScrollSnapStop, unknown, Y, M>

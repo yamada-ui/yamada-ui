@@ -1,38 +1,68 @@
-import { Dict } from '@yamada-ui/utils'
+import { Dict, StringLiteral } from '@yamada-ui/utils'
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
 import { UIStyle, AnalyzeBreakpointsReturn } from './'
 
-export type ExtendTheme = {
-  styles?: {
-    globalStyles?: UIStyle
-    resetStyles?: UIStyle
-    layoutStyles?: Record<string | number, UIStyle>
-    textStyles?: Record<string | number, UIStyle>
+export type ThemeScheme = number | (string & {})
+
+export type ThemeConfig = {
+  initialThemeScheme?: string | number
+  initialColorScheme?: 'light' | 'dark'
+  useSystemColorScheme?: boolean
+  var?: {
+    prefix?: StringLiteral
   }
-  borders?: Dict
-  colors?: Dict
-  breakpoints?: Dict
-  fonts?: Dict
-  fontSizes?: Dict
-  fontWeights?: Dict
-  letterSpacings?: Dict
-  lineHeights?: Dict
-  radii?: Dict
-  shadows?: Dict
-  sizes?: Dict
-  spaces?: Dict
-  zIndices?: Dict
-  transitions?: { property: Dict; duration: Dict; easing: Dict }
-  components?: Record<string, ComponentStyle>
-  semantic?: Dict
+}
+
+export type LayerStyles = Record<string | number, UIStyle>
+export type TextStyles = Record<string | number, UIStyle>
+export type Components = Record<string, ComponentStyle>
+export type Semantics = Omit<UsageTheme, 'styles' | 'components' | 'semantics'>
+
+export type ThemeTokens = {
+  [key: string | number]: string | number | [string | number, string | number] | ThemeTokens
+}
+
+export type UsageTheme = {
+  styles?: {
+    globalStyle?: UIStyle
+    resetStyle?: UIStyle
+    layerStyles?: LayerStyles
+    textStyles?: TextStyles
+  }
+  borders?: ThemeTokens
+  colors?: ThemeTokens
+  breakpoints?: ThemeTokens
+  fonts?: ThemeTokens
+  fontSizes?: ThemeTokens
+  fontWeights?: ThemeTokens
+  letterSpacings?: ThemeTokens
+  lineHeights?: ThemeTokens
+  radii?: ThemeTokens
+  shadows?: ThemeTokens
+  sizes?: ThemeTokens
+  spaces?: ThemeTokens
+  zIndices?: ThemeTokens
+  transitions?: { property?: ThemeTokens; duration?: ThemeTokens; easing?: ThemeTokens }
+  components?: Components
+  semantics?: Semantics
+  [key: string]: any
+}
+
+export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
+export type ComponentSizes = Record<string | number, UIStyle | Record<string, UIStyle>>
+export type ComponentVariants = Record<string | number, UIStyle | Record<string, UIStyle>>
+export type ComponentDefaultProps = {
+  size?: string | number
+  variant?: string | number
+  colorStyle?: string
 }
 
 export type ComponentStyle = {
-  baseStyle?: UIStyle | Record<string, UIStyle>
-  sizes?: Record<string | number, UIStyle | Record<string, UIStyle>>
-  variants?: Record<string | number, UIStyle | Record<string, UIStyle>>
-  defaultProps?: { size?: string | number; variant?: string | number; colorScheme?: string }
+  baseStyle?: ComponentBaseStyle
+  sizes?: ComponentSizes
+  variants?: ComponentVariants
+  defaultProps?: ComponentDefaultProps
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

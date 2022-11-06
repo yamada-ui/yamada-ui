@@ -74,7 +74,7 @@ const createTokens = (theme: Dict): VarTokens => {
 
   const defaultTokens = pickObject(theme, keys)
 
-  const semanticTokens = theme.semantic ?? {}
+  const semanticTokens = theme.semantics ?? {}
 
   const defaultTokenEntries = Object.entries(flattenObject(defaultTokens) ?? {}).map(
     ([token, value]) => {

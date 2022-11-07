@@ -1,6 +1,6 @@
 import { UIStyle } from '@yamada-ui/styled'
 
-export const globalStyle: UIStyle = () => ({
+export const globalStyle: UIStyle = {
   body: {
     fontFamily: 'body',
     bg: ['white', 'black'],
@@ -13,4 +13,4 @@ export const globalStyle: UIStyle = () => ({
   '*::placeholder': {
     color: ['gray.400', 'whiteAlpha.400'],
   },
-})
+}

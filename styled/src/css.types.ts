@@ -4,9 +4,19 @@ import { Theme, StyledTheme, StylesProps, PseudosProps } from './'
 
 export type ColorScheme = 'light' | 'dark'
 
-export type ThemeProps<Y extends string = any> = {
-  variant?: Y extends keyof Theme['components'] ? Theme['components'][Y]['variants'] : string
-  size?: Y extends keyof Theme['components'] ? Theme['components'][Y]['sizes'] : string
+export type ThemeProps<Y extends keyof Theme['components'] | unknown = unknown> = {
+  variant?: Y extends keyof Theme['components']
+    ?
+        | ResponsiveObject<Theme['components'][Y]['variants']>
+        | ColorSchemeArray<Theme['components'][Y]['variants']>
+        | Theme['components'][Y]['variants']
+    : ResponsiveObject<string> | ColorSchemeArray<string> | string
+  size?: Y extends keyof Theme['components']
+    ?
+        | ResponsiveObject<Theme['components'][Y]['sizes']>
+        | ColorSchemeArray<Theme['components'][Y]['sizes']>
+        | Theme['components'][Y]['sizes']
+    : ResponsiveObject<string> | ColorSchemeArray<string> | string
   colorStyle?: Theme['colorStyles']
 }
 
@@ -63,7 +73,7 @@ export type CSSUIProps<Y = 'responsive', M = 'colorScheme'> = StylesProps<Y, M> 
 export type UIStyleProps = {
   theme: StyledTheme<Dict>
   colorScheme?: ColorScheme
-  colorStyle?: string
+  colorStyle?: Theme['colorStyles']
   [key: string]: any
 }
 

@@ -21,14 +21,6 @@ $ pnpm install
 $ pnpm storybook
 ```
 
-# Run - Docker
-
-```sh
-$ docker-compose build storybook
-$ docker-compose run --rm storybook pnpm install
-$ docker-compose up -d && docker-compose logs -f
-```
-
 # Generate Theme Tokens
 
 ```sh

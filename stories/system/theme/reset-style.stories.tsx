@@ -11,7 +11,7 @@ export const customResetStyle = () => {
      * Define the style you want to customize
      */
   }
-  const theme = extendTheme({ styles: { resetStyle } })
+  const theme = extendTheme({ styles: { resetStyle } })()
 
   return (
     <UIProvider theme={theme}>

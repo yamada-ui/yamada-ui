@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react'
 import { css, StyledTheme, ThemeConfig, ThemeScheme } from '@yamada-ui/styled'
-import { defaultTheme, defaultConfig, resetStyle } from '@yamada-ui/theme'
+import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
 import { ThemeProvider, ColorSchemeProvider, useColorScheme } from './'
@@ -79,7 +79,7 @@ const ResetStyle: FC = () => {
   return (
     <Global
       styles={(theme) => {
-        let style = get(theme, 'styles.resetStyle') ?? resetStyle
+        let style = get(theme, 'styles.resetStyle', {})
 
         style = runIfFunc(style, { theme, colorScheme })
 
@@ -99,7 +99,7 @@ const GlobalStyle: FC = () => {
   return (
     <Global
       styles={(theme) => {
-        let style = get(theme, 'styles.globalStyle')
+        let style = get(theme, 'styles.globalStyle', {})
 
         style = runIfFunc(style, { theme, colorScheme })
 

@@ -1,10 +1,10 @@
 import components from './components'
 import { config } from './config'
-import { globalStyle, layerStyles, textStyles } from './styles'
+import { globalStyle, resetStyle, layerStyles, textStyles } from './styles'
 import tokens from './tokens'
 
 export const defaultTheme = {
-  styles: { globalStyle, layerStyles, textStyles },
+  styles: { globalStyle, resetStyle, layerStyles, textStyles },
   components,
   ...tokens,
 }
@@ -12,5 +12,3 @@ export const defaultTheme = {
 export const defaultConfig = config
 
 export type DefaultTheme = typeof defaultTheme
-
-export { resetStyle } from './styles'

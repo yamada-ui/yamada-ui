@@ -18,7 +18,7 @@ export const useColorSchemeToken = () => {
     primary: ['#2196F3', '#F44336'],
   }
 
-  const theme = extendTheme({ colors })
+  const theme = extendTheme({ colors })()
 
   return (
     <UIProvider theme={theme}>
@@ -45,7 +45,7 @@ export const useSemanticToken = () => {
     },
   }
 
-  const theme = extendTheme({ semantics })
+  const theme = extendTheme({ semantics })()
 
   return (
     <UIProvider theme={theme}>

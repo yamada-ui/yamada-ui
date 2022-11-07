@@ -1,9 +1,9 @@
-import { Dict, StringLiteral } from '@yamada-ui/utils'
+import { Dict, StringLiteral, Union } from '@yamada-ui/utils'
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
-import { UIStyle, AnalyzeBreakpointsReturn } from './'
+import { UIStyle, ThemeProps, AnalyzeBreakpointsReturn } from './'
 
-export type ThemeScheme = number | (string & {})
+export type ThemeScheme = Union<string | number>
 
 export type ThemeConfig = {
   initialThemeScheme?: string | number
@@ -14,8 +14,8 @@ export type ThemeConfig = {
   }
 }
 
-export type LayerStyles = Record<string | number, UIStyle>
-export type TextStyles = Record<string | number, UIStyle>
+export type LayerStyles = Record<string, UIStyle>
+export type TextStyles = Record<string, UIStyle>
 export type Components = Record<string, ComponentStyle>
 export type Semantics = Omit<UsageTheme, 'styles' | 'components' | 'semantics'>
 
@@ -50,12 +50,12 @@ export type UsageTheme = {
 }
 
 export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
-export type ComponentSizes = Record<string | number, UIStyle | Record<string, UIStyle>>
-export type ComponentVariants = Record<string | number, UIStyle | Record<string, UIStyle>>
-export type ComponentDefaultProps = {
-  size?: string | number
-  variant?: string | number
-  colorStyle?: string
+export type ComponentVariants = Record<string, UIStyle | Record<string, UIStyle>>
+export type ComponentSizes = Record<string, UIStyle | Record<string, UIStyle>>
+export type ComponentDefaultProps<Y extends keyof Theme['components'] | unknown = unknown> = {
+  variant?: ThemeProps<Y>['variant']
+  size?: ThemeProps<Y>['size']
+  colorStyle?: ThemeProps<Y>['colorStyle']
 }
 
 export type ComponentStyle = {

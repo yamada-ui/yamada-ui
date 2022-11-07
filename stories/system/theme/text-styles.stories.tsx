@@ -16,7 +16,7 @@ export const useTextStyle = () => {
 
   const theme = extendTheme({
     styles: { textStyles },
-  })
+  })()
 
   return (
     <UIProvider theme={theme}>

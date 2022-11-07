@@ -11,7 +11,7 @@ export const customGlobalStyle = () => {
      * Define the style you want to customize
      */
   }
-  const theme = extendTheme({ styles: { globalStyle } })
+  const theme = extendTheme({ styles: { globalStyle } })()
 
   return (
     <UIProvider theme={theme}>

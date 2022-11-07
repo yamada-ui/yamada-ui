@@ -11,4 +11,5 @@ export * from '@yamada-ui/forms'
 export * from '@yamada-ui/navigation'
 
 export * from './extend-theme'
+export * from './with-default'
 export * from './extend-config'

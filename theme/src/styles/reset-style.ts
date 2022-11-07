@@ -1,6 +1,6 @@
-import { CSSObject } from '@yamada-ui/styled'
+import { UIStyle } from '@yamada-ui/styled'
 
-export const resetStyle: CSSObject = {
+export const resetStyle: UIStyle = {
   '*': {
     boxSizing: 'border-box',
   },

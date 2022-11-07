@@ -1,0 +1,7 @@
+services:
+  storybook:
+    build: ./docker
+    volumes:
+      - './:/app'
+    ports:
+      - 6006:6006

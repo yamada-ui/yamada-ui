@@ -4,9 +4,9 @@
 
 # Branch
 
-`main` This is a product branch.
-`hotfix` This is a branch for urgent fixes.
-`dev` This is a branch that primarily develops. If you want to create a branch, create it based on this.
+- `main` - This is a product branch.
+- `hotfix` - This is a branch for urgent fixes.
+- `dev` - This is a branch that primarily develops. If you want to create a branch, create it based on this.
 
 # Install
 
@@ -15,10 +15,18 @@ $ node -v → v16.**.*
 $ pnpm install
 ```
 
-# Run
+# Run - pnpm
 
 ```sh
 $ pnpm storybook
+```
+
+# Run - Docker
+
+```sh
+$ docker-compose build storybook
+$ docker-compose run --rm storybook pnpm install
+$ docker-compose up -d && docker-compose logs -f
 ```
 
 # Generate Theme Tokens
@@ -29,7 +37,7 @@ $ pnpm gen:tokens
 
 # Usage
 
-1. Wrap your application with the `UIProvider` provided
+1.Wrap your application with the `UIProvider` provided
 
 ```tsx
 import { UIProvider } from 'ui'
@@ -43,7 +51,7 @@ export default App
 
 Yamada-ui supports light and dark modes by default
 
-2. Now you can start using components like so
+2.Now you can start using components like so
 
 ```tsx
 import { Box, Text } from 'ui'

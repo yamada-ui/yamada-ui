@@ -9,6 +9,7 @@ export * from '@yamada-ui/data-display'
 export * from '@yamada-ui/feedback'
 export * from '@yamada-ui/forms'
 export * from '@yamada-ui/navigation'
+export * from '@yamada-ui/overlay'
 
 export * from './extend-theme'
 export * from './with-default'

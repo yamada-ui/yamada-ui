@@ -20,7 +20,7 @@ export type CloseButtonProps = HTMLUIProps<'button'> &
 
 export const CloseButton = forwardRef<CloseButtonProps, 'button'>((props, ref) => {
   const styles = useComponentStyle('CloseButton', props)
-  const { className, children, isDisabled, ...rest } = omitThemeProps(props)
+  const { className, children, isDisabled, __css, ...rest } = omitThemeProps(props)
 
   const css: CSSUIObject = {
     outline: 0,
@@ -29,6 +29,7 @@ export const CloseButton = forwardRef<CloseButtonProps, 'button'>((props, ref) =
     alignItems: 'center',
     flexShrink: 0,
     ...styles,
+    ...__css,
   }
 
   return (

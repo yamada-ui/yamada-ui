@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@yamada-ui/system": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/forms": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.1.1",
@@ -30,6 +31,7 @@
   "peerDependencies": {
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/forms": "workspace:*",
     "react": ">=18"
   }
 }

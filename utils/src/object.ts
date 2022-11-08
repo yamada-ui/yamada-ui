@@ -1,4 +1,4 @@
-import { isObject, isArray, Dict } from './'
+import { isObject, isArray, Dict, isFunction } from './'
 
 export const omitObject = <T extends Dict, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> => {
   const result: Dict = {}
@@ -56,7 +56,11 @@ export const merge = <T extends Dict>(
 
       if (overrideArray && Array.isArray(sourceValue) && Array.isArray(targetValue)) {
         result[sourceKey] = targetValue.concat(...sourceValue)
-      } else if (isObject(sourceValue) && target.hasOwnProperty(sourceKey)) {
+      } else if (
+        !isFunction(sourceValue) &&
+        isObject(sourceValue) &&
+        target.hasOwnProperty(sourceKey)
+      ) {
         result[sourceKey] = merge(targetValue, sourceValue, overrideArray)
       } else {
         Object.assign(result, { [sourceKey]: sourceValue })

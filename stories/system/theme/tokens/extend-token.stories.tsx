@@ -1,17 +1,14 @@
-import { UIProvider, extendTheme, UIStyle, Center, Image } from '@yamada-ui/react'
+import { UIProvider, extendTheme, ThemeTokens, extendToken, Center, Image } from '@yamada-ui/react'
 import { FC } from 'react'
 
 export default {
-  title: 'System / Theme / Global Style',
+  title: 'System / Theme / Tokens',
 }
 
-export const customGlobalStyle = () => {
-  const globalStyle: UIStyle = {
-    /**
-     * Define the style you want to customize
-     */
-  }
-  const theme = extendTheme({ styles: { globalStyle } })()
+export const useExtendToken = () => {
+  const colors: ThemeTokens = extendToken('colors')
+
+  const theme = extendTheme({ colors })()
 
   return (
     <UIProvider theme={theme}>
@@ -24,7 +21,7 @@ const App: FC = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Image
-        maxW='xl'
+        maxW='32rem'
         src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/yamada-ui.png'
       />
     </Center>

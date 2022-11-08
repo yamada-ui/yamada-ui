@@ -33,7 +33,7 @@ export const useLayerStyle = () => {
 
   const theme = extendTheme({
     styles: { layerStyles },
-  })
+  })()
 
   return (
     <UIProvider theme={theme}>

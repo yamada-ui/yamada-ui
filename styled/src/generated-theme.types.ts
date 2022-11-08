@@ -467,6 +467,13 @@ export interface GeneratedTheme extends UITheme {
     | 'yamcha'
     | 'kurillin'
     | 'nappa'
+    | 'guldo'
+    | 'jeice'
+    | 'burter'
+    | 'recoome'
+    | 'ginyu'
+    | 'zarbon'
+    | 'dodoria'
     | 'freeza'
     | 'vegeta'
     | 'sonGoku'
@@ -493,5 +500,21 @@ export interface GeneratedTheme extends UITheme {
       variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
     }
     CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Modal: {
+      sizes:
+        | 'xs'
+        | 'sm'
+        | 'md'
+        | 'lg'
+        | 'xl'
+        | '2xl'
+        | '3xl'
+        | '4xl'
+        | '5xl'
+        | '6xl'
+        | 'full'
+        | (string & {})
+      variants: string & {}
+    }
   }
 }

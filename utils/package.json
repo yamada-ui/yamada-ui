@@ -20,7 +20,8 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@ctrl/tinycolor": "^3.4.1"
+    "@ctrl/tinycolor": "^3.4.1",
+    "react-focus-lock": "^2.9.1"
   },
   "devDependencies": {
     "react": "^18.0.0",

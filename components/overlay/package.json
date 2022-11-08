@@ -22,7 +22,8 @@
   "dependencies": {
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/forms": "workspace:*"
+    "@yamada-ui/forms": "workspace:*",
+    "react-remove-scroll": "^2.5.4"
   },
   "devDependencies": {
     "clean-package": "2.1.1",

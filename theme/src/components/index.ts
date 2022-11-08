@@ -1,4 +1,5 @@
 import { Alert } from './alert'
+import { Avatar } from './avatar'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
@@ -25,5 +26,6 @@ export default {
   Progress,
   Breadcrumb,
   Alert,
+  Avatar,
   CloseButton,
 }

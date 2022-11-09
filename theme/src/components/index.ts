@@ -9,6 +9,7 @@ import { Heading } from './heading'
 import { Kbd } from './kbd'
 import { Link } from './link'
 import { List } from './list'
+import { Modal } from './modal'
 import { Progress } from './progress'
 import { Tag } from './tag'
 
@@ -26,4 +27,5 @@ export default {
   Breadcrumb,
   Alert,
   CloseButton,
+  Modal,
 }

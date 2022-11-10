@@ -1,4 +1,5 @@
 import { Alert } from './alert'
+import { Avatar } from './avatar'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
@@ -14,6 +15,7 @@ import { Progress } from './progress'
 import { Tag } from './tag'
 
 export default {
+  Avatar,
   Button,
   Container,
   Divider,

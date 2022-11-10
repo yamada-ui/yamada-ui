@@ -8,7 +8,7 @@ import {
 } from '@yamada-ui/styled'
 import { Dict, isArray, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import * as CSS from 'csstype'
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useToken } from './'
 
 export type AnimationStyle = {
@@ -131,30 +131,33 @@ export const useDynamicAnimation = <
     }
   })
 
-  const setAnimation = (
-    keysOrFunc:
-      | keyof T
-      | (keyof T)[]
-      | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
-  ) => {
-    const args = (() => {
-      if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
-        return isArray(keys.current) ? keys.current.map(Number) : Number(keys.current)
+  const setAnimation = useCallback(
+    (
+      keysOrFunc:
+        | keyof T
+        | (keyof T)[]
+        | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
+    ) => {
+      const args = (() => {
+        if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
+          return isArray(keys.current) ? keys.current.map(Number) : Number(keys.current)
+        } else {
+          return keys.current
+        }
+      })() as keyof T | (keyof T)[] | undefined
+
+      const keyOrArray = runIfFunc(keysOrFunc, args)
+
+      keys.current = isArray(keyOrArray) ? keyOrArray.map(String) : String(keyOrArray)
+
+      if (isArray(keys.current)) {
+        setAnimations(keys.current.map((key) => cache.current.get(key)).join(', '))
       } else {
-        return keys.current
+        setAnimations(cache.current.get(keys.current ?? ''))
       }
-    })() as keyof T | (keyof T)[] | undefined
-
-    const keyOrArray = runIfFunc(keysOrFunc, args)
-
-    keys.current = isArray(keyOrArray) ? keyOrArray.map(String) : String(keyOrArray)
-
-    if (isArray(keys.current)) {
-      setAnimations(keys.current.map((key) => cache.current.get(key)).join(', '))
-    } else {
-      setAnimations(cache.current.get(keys.current ?? ''))
-    }
-  }
+    },
+    [arrayOrObj],
+  )
 
   return [animations, setAnimation]
 }

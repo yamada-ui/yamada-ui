@@ -36,7 +36,27 @@ export const createContext = <ContextType extends any = any>({
   return [Context.Provider, useContext, Context] as CreateContextReturn<ContextType>
 }
 
-const useSafeLayoutEffect = Boolean(globalThis?.document) ? React.useLayoutEffect : React.useEffect
+export const useSafeLayoutEffect = Boolean(globalThis?.document)
+  ? React.useLayoutEffect
+  : React.useEffect
+
+export const useUnmountEffect = (callback: () => void) =>
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  React.useEffect(() => () => callback(), [])
+
+export const useIsMounted = () => {
+  const isMounted = React.useRef(false)
+
+  useSafeLayoutEffect(() => {
+    isMounted.current = true
+
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  return isMounted
+}
 
 export const getValidChildren = (children: React.ReactNode): React.ReactElement[] =>
   React.Children.toArray(children).filter((child) =>

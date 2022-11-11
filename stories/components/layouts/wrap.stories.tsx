@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Wrap, Box } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Wrap',
+  title: 'Components / Layouts / Wrap',
   component: Wrap,
 } as ComponentMeta<typeof Wrap>
 

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Box } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Box',
+  title: 'Components / Layouts / Box',
   component: Box,
 } as ComponentMeta<typeof Box>
 

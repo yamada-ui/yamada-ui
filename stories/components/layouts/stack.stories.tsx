@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Stack, VStack, HStack, Box, Divider, Center } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Stack',
+  title: 'Components / Layouts / Stack',
   component: Stack,
 } as ComponentMeta<typeof Stack>
 

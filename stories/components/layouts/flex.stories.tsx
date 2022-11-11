@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Flex, Box, Spacer } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Flex',
+  title: 'Components / Layouts / Flex',
   component: Flex,
 } as ComponentMeta<typeof Flex>
 

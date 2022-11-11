@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Divider, Flex } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Divider',
+  title: 'Components / Layouts / Divider',
   component: Divider,
 } as ComponentMeta<typeof Divider>
 

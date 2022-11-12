@@ -74,8 +74,8 @@ export const transitionEnter =
     duration?: MotionTransitionProperties['duration'],
   ): Transition => ({
     ...(transition ?? MOTION_TRANSITION_DEFAULTS.enter),
+    ...(duration ? { duration: isNumber(duration) ? duration : duration?.enter } : {}),
     delay: isNumber(delay) ? delay : delay?.enter,
-    duration: isNumber(duration) ? duration : duration?.enter,
   })
 
 export const transitionExit =
@@ -85,6 +85,6 @@ export const transitionExit =
     duration?: MotionTransitionProperties['duration'],
   ): Transition => ({
     ...(transition ?? MOTION_TRANSITION_DEFAULTS.exit),
+    ...(duration ? { duration: isNumber(duration) ? duration : duration?.exit } : {}),
     delay: isNumber(delay) ? delay : delay?.exit,
-    duration: isNumber(duration) ? duration : duration?.exit,
   })

@@ -48,8 +48,8 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
     {
       unmountOnExit,
       isOpen,
-      reverse = true,
       scale = 0.95,
+      reverse = true,
       transition,
       transitionEnd,
       delay,

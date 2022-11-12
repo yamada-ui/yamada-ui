@@ -9,7 +9,14 @@ import {
   CSSUIProps,
 } from '@yamada-ui/system'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
-import { cx, createContext, FocusLock, FocusLockProps, Portal } from '@yamada-ui/utils'
+import {
+  cx,
+  createContext,
+  FocusLock,
+  FocusLockProps,
+  Portal,
+  getValidChildren,
+} from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 import { KeyboardEvent, useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
@@ -108,6 +115,14 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     [closeOnEsc, onClose, onEsc],
   )
 
+  const validChildren = getValidChildren(children)
+
+  const [customModalOverlay, ...cloneChildren] = validChildren.find(
+    (child) => child.type === ModalOverlay,
+  )
+    ? validChildren.sort((a, b) => (a.type === ModalOverlay ? -1 : b.type === ModalOverlay ? 1 : 0))
+    : [undefined, ...validChildren]
+
   const css: CSSUIObject = {
     position: 'fixed',
     top: 0,
@@ -160,10 +175,10 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
                 forwardProps
               >
                 <ui.div __css={css}>
-                  {overlay && size !== 'full' ? <ModalOverlay /> : null}
+                  {customModalOverlay ?? (overlay && size !== 'full' ? <ModalOverlay /> : null)}
 
                   <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
-                    {children}
+                    {cloneChildren}
                   </ModalContent>
                 </ui.div>
               </RemoveScroll>
@@ -214,6 +229,16 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
   ({ className, children, ...rest }, ref) => {
     const { styles, scrollBehavior, closeButton, onClose, animation } = useModal()
 
+    const validChildren = getValidChildren(children)
+
+    const [customModalCloseButton, ...cloneChildren] = validChildren.find(
+      (child) => child.type === ModalCloseButton,
+    )
+      ? validChildren.sort((a, b) =>
+          a.type === ModalCloseButton ? -1 : b.type === ModalCloseButton ? 1 : 0,
+        )
+      : [undefined, ...validChildren]
+
     const props = animation !== 'none' ? getModalContentProps(animation) : {}
 
     const css: CSSUIObject = {
@@ -234,9 +259,9 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
         {...props}
         {...rest}
       >
-        {closeButton && onClose ? <ModalCloseButton /> : null}
+        {customModalCloseButton ?? (closeButton && onClose ? <ModalCloseButton /> : null)}
 
-        {children}
+        {cloneChildren}
       </MotionSection>
     )
   },

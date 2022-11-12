@@ -1,4 +1,3 @@
-import { CloseButton, CloseButtonProps } from '@yamada-ui/forms'
 import {
   ui,
   forwardRef,
@@ -8,13 +7,13 @@ import {
   CSSUIObject,
   useMultiComponentStyle,
   CSSUIProps,
-  useDynamicAnimation,
-  AnimationStyle,
-  useLazy,
 } from '@yamada-ui/system'
+import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import { cx, createContext, FocusLock, FocusLockProps, Portal } from '@yamada-ui/utils'
-import { KeyboardEvent, useCallback, useEffect } from 'react'
+import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
+import { KeyboardEvent, useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
+import { ModalOverlay, ModalCloseButton } from './'
 
 type Position =
   | 'center'
@@ -28,6 +27,8 @@ type Position =
   | 'bottom-right'
 
 type ScrollBehavior = 'inside' | 'outside'
+
+type Animation = 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
 
 type ModalContext = ModalOptions & {
   styles: Record<string, CSSUIObject>
@@ -48,6 +49,7 @@ type ModalOptions = Pick<
   onClose?: () => void
   onOverlayClick?: () => void
   onEsc?(): void
+  onCloseComplete?: () => void
   position?: Position
   outside?: CSSUIProps['p']
   closeButton?: boolean
@@ -57,9 +59,11 @@ type ModalOptions = Pick<
   blockScrollOnMount?: boolean
   closeOnOverlayClick?: boolean
   closeOnEsc?: boolean
+  animation?: Animation
 }
 
-export type ModalProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior'> &
+export type ModalProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
+  Omit<HTMLMotionProps<'section'>, 'color' | 'transition'> &
   ThemeProps<'Modal'> &
   ModalOptions
 
@@ -72,6 +76,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     onClose,
     onOverlayClick,
     onEsc,
+    onCloseComplete,
     position = 'center',
     outside = 'md',
     closeButton = true,
@@ -86,10 +91,9 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     closeOnOverlayClick = true,
     closeOnEsc = true,
     lockFocusAcrossFrames = true,
+    animation = 'scale',
     ...rest
   } = omitThemeProps({ size, ...props })
-
-  const [isLazyOpen, { on, lazyOff }] = useLazy(200, isOpen)
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -124,14 +128,6 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
       : 'center',
   }
 
-  useEffect(() => {
-    if (isOpen) {
-      on()
-    } else {
-      lazyOff()
-    }
-  }, [isOpen, on, lazyOff])
-
   return (
     <ModalProvider
       value={{
@@ -144,74 +140,81 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         scrollBehavior,
         closeOnOverlayClick,
         closeOnEsc,
+        animation,
         styles,
       }}
     >
-      {isLazyOpen ? (
-        <Portal>
-          <FocusLock
-            autoFocus={autoFocus}
-            initialFocusRef={initialFocusRef}
-            finalFocusRef={finalFocusRef}
-            restoreFocus={restoreFocus}
-            lockFocusAcrossFrames={lockFocusAcrossFrames}
-          >
-            <RemoveScroll allowPinchZoom={allowPinchZoom} enabled={blockScrollOnMount} forwardProps>
-              <ui.div __css={css}>
-                {overlay ? <ModalOverlay /> : null}
+      <AnimatePresence onExitComplete={onCloseComplete}>
+        {isOpen ? (
+          <Portal>
+            <FocusLock
+              autoFocus={autoFocus}
+              initialFocusRef={initialFocusRef}
+              finalFocusRef={finalFocusRef}
+              restoreFocus={restoreFocus}
+              lockFocusAcrossFrames={lockFocusAcrossFrames}
+            >
+              <RemoveScroll
+                allowPinchZoom={allowPinchZoom}
+                enabled={blockScrollOnMount}
+                forwardProps
+              >
+                <ui.div __css={css}>
+                  {overlay && size !== 'full' ? <ModalOverlay /> : null}
 
-                <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
-                  {children}
-                </ModalContent>
-              </ui.div>
-            </RemoveScroll>
-          </FocusLock>
-        </Portal>
-      ) : null}
+                  <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
+                    {children}
+                  </ModalContent>
+                </ui.div>
+              </RemoveScroll>
+            </FocusLock>
+          </Portal>
+        ) : null}
+      </AnimatePresence>
     </ModalProvider>
   )
 })
 
-type ModalContent = HTMLUIProps<'section'>
+type ModalContentProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
+  Omit<HTMLMotionProps<'section'>, 'color' | 'transition'>
 
-const ModalContent = forwardRef<ModalOverlayProps, 'section'>(
+const MotionSection = ui(motion.section)
+
+const getModalContentProps = (animation: Animation = 'scale') => {
+  switch (animation) {
+    case 'scale':
+      return {
+        ...scaleFadeProps,
+        custom: { scale: 0.95, reverse: true },
+      }
+    case 'top':
+      return {
+        ...slideFadeProps,
+        custom: { offsetY: -16, reverse: true },
+      }
+    case 'right':
+      return {
+        ...slideFadeProps,
+        custom: { offsetX: 16, reverse: true },
+      }
+    case 'left':
+      return {
+        ...slideFadeProps,
+        custom: { offsetX: -16, reverse: true },
+      }
+    case 'bottom':
+      return {
+        ...slideFadeProps,
+        custom: { offsetY: 16, reverse: true },
+      }
+  }
+}
+
+const ModalContent = forwardRef<ModalContentProps, 'section'>(
   ({ className, children, ...rest }, ref) => {
-    const { styles, isOpen, scrollBehavior, closeButton, onClose } = useModal()
+    const { styles, scrollBehavior, closeButton, onClose, animation } = useModal()
 
-    const [animation, setAnimation] = useDynamicAnimation<
-      Record<'fadeIn' | 'fadeOut', AnimationStyle>
-    >({
-      fadeIn: {
-        keyframes: {
-          '0%': {
-            opacity: 0,
-            transform: 'scale(0.9)',
-          },
-          '100%': {
-            opacity: 1,
-            transform: 'scale(1)',
-          },
-        },
-        duration: 'normal',
-        fillMode: 'forwards',
-        timingFunction: 'ease',
-      },
-      fadeOut: {
-        keyframes: {
-          '0%': {
-            opacity: 1,
-            transform: 'scale(1)',
-          },
-          '100%': {
-            opacity: 0,
-            transform: 'scale(0.9)',
-          },
-        },
-        duration: 'normal',
-        fillMode: 'forwards',
-        timingFunction: 'ease',
-      },
-    })
+    const props = animation !== 'none' ? getModalContentProps(animation) : {}
 
     const css: CSSUIObject = {
       position: 'relative',
@@ -219,162 +222,24 @@ const ModalContent = forwardRef<ModalOverlayProps, 'section'>(
       display: 'flex',
       flexDirection: 'column',
       overflow: scrollBehavior === 'inside' ? 'hidden' : 'auto',
-      animation,
       ...styles.container,
     }
 
-    useEffect(() => {
-      setAnimation(isOpen ? 'fadeIn' : 'fadeOut')
-    }, [isOpen, setAnimation])
+    console.log(props)
 
     return (
-      <ui.section
+      <MotionSection
         ref={ref}
         className={cx('ui-modal', className)}
-        __css={css}
         tabIndex={-1}
+        __css={css}
+        {...props}
         {...rest}
       >
         {closeButton && onClose ? <ModalCloseButton /> : null}
 
         {children}
-      </ui.section>
+      </MotionSection>
     )
   },
 )
-
-type ModalOverlayProps = HTMLUIProps<'div'>
-
-const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(({ className, ...rest }, ref) => {
-  const { styles, isOpen, closeOnOverlayClick, onOverlayClick, onClose } = useModal()
-
-  const [animation, setAnimation] = useDynamicAnimation<
-    Record<'fadeIn' | 'fadeOut', AnimationStyle>
-  >({
-    fadeIn: {
-      keyframes: {
-        '0%': {
-          opacity: 0,
-        },
-        '100%': {
-          opacity: 1,
-        },
-      },
-      duration: 'normal',
-      fillMode: 'forwards',
-      timingFunction: 'ease',
-    },
-    fadeOut: {
-      keyframes: {
-        '0%': {
-          opacity: 1,
-        },
-        '100%': {
-          opacity: 0,
-        },
-      },
-      duration: 'normal',
-      fillMode: 'forwards',
-      timingFunction: 'ease',
-    },
-  })
-
-  const css: CSSUIObject = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    w: '100vw',
-    h: '100vh',
-    animation,
-    ...styles.overlay,
-  }
-
-  useEffect(() => {
-    setAnimation(isOpen ? 'fadeIn' : 'fadeOut')
-  }, [isOpen, setAnimation])
-
-  return (
-    <ui.div
-      ref={ref}
-      className={cx('ui-modal-overlay', className)}
-      __css={css}
-      onClick={() => {
-        onOverlayClick?.()
-        if (closeOnOverlayClick) onClose?.()
-      }}
-      {...rest}
-    />
-  )
-})
-
-type ModalCloseButtonProps = CloseButtonProps
-
-const ModalCloseButton = forwardRef<ModalCloseButtonProps, 'button'>(
-  ({ onClick, ...rest }, ref) => {
-    const { styles, onClose } = useModal()
-
-    const css: CSSUIObject = {
-      position: 'absolute',
-      ...styles.closeButton,
-    }
-
-    return (
-      <CloseButton
-        ref={ref}
-        className={cx('ui-modal-close-button')}
-        __css={css}
-        onClick={(event) => {
-          onClick?.(event)
-          onClose?.()
-        }}
-        {...rest}
-      />
-    )
-  },
-)
-
-export type ModalHeaderProps = HTMLUIProps<'header'>
-
-export const ModalHeader = forwardRef<ModalHeaderProps, 'header'>(({ className, ...rest }, ref) => {
-  const { styles } = useModal()
-
-  const css: CSSUIObject = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    ...styles.header,
-  }
-
-  return <ui.header ref={ref} className={cx('ui-modal-header', className)} __css={css} {...rest} />
-})
-
-export type ModalBodyProps = HTMLUIProps<'main'>
-
-export const ModalBody = forwardRef<ModalBodyProps, 'main'>(({ className, ...rest }, ref) => {
-  const { styles, scrollBehavior } = useModal()
-
-  const css: CSSUIObject = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    overflow: scrollBehavior === 'inside' ? 'auto' : undefined,
-    ...styles.body,
-  }
-
-  return <ui.main ref={ref} className={cx('ui-modal-body', className)} __css={css} {...rest} />
-})
-
-export type ModalFooterProps = HTMLUIProps<'footer'>
-
-export const ModalFooter = forwardRef<ModalFooterProps, 'footer'>(({ className, ...rest }, ref) => {
-  const { styles } = useModal()
-
-  const css: CSSUIObject = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    ...styles.footer,
-  }
-
-  return <ui.footer ref={ref} className={cx('ui-modal-footer', className)} __css={css} {...rest} />
-})

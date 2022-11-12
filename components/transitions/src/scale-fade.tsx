@@ -6,6 +6,7 @@ import {
   WithTransitionProps,
   MotionVariants,
   forwardRef,
+  CSSUIObject,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
@@ -64,6 +65,10 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
+    const css: CSSUIObject = {
+      w: '100%',
+    }
+
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
@@ -73,6 +78,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
             custom={custom}
             {...scaleFadeProps}
             animate={animate}
+            __css={css}
             {...rest}
           />
         ) : null}

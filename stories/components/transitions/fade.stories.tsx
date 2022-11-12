@@ -13,7 +13,7 @@ export const basic: ComponentStory<typeof Fade> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade isOpen={isOpen} w='full'>
+      <Fade isOpen={isOpen}>
         <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -33,7 +33,7 @@ export const exitUnmount: ComponentStory<typeof Fade> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade isOpen={isOpen} w='full' unmountOnExit>
+      <Fade isOpen={isOpen} unmountOnExit>
         <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

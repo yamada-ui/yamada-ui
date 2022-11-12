@@ -13,7 +13,7 @@ export const basic: ComponentStory<typeof ScaleFade> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen} w='full'>
+      <ScaleFade isOpen={isOpen}>
         <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -33,7 +33,7 @@ export const withScale: ComponentStory<typeof ScaleFade> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen} w='full' scale={0.75}>
+      <ScaleFade isOpen={isOpen} scale={0.75}>
         <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -53,7 +53,7 @@ export const exitUnmount: ComponentStory<typeof ScaleFade> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen} w='full' unmountOnExit>
+      <ScaleFade isOpen={isOpen} unmountOnExit>
         <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

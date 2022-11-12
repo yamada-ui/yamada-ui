@@ -25,7 +25,7 @@ const variants: MotionVariants = {
     transition: transitionEnter(transition?.enter)(delay),
     transitionEnd: transitionEnd?.enter,
   }),
-  exit: ({ reverse, scale, transition, transitionEnd, delay } = {}) => ({
+  exit: ({ scale, reverse, transition, transitionEnd, delay } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay),
     ...(reverse

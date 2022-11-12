@@ -30,6 +30,7 @@
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/forms": "workspace:*",
     "@yamada-ui/navigation": "workspace:*",
+    "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/overlay": "workspace:*"
   },
   "devDependencies": {
@@ -50,6 +51,7 @@
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/forms": "workspace:*",
     "@yamada-ui/navigation": "workspace:*",
+    "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/overlay": "workspace:*",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",

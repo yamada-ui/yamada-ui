@@ -63,6 +63,7 @@ const Example = () => {
 - [Create React App](https://create-react-app.dev/)
 - [Storybook](https://storybook.js.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Framer Motion](https://www.framer.com/motion/)
 - [Fortawesome](https://fontawesome.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [react-loader-spinner](https://mhnpd.github.io/react-loader-spinner/)

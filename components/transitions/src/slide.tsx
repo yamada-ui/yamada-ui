@@ -14,14 +14,14 @@ import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 
 const MOTION_TRANSITION_DEFAULTS = {
-  exit: {
-    duration: 0.15,
-    ease: MOTION_TRANSITION_EASINGS.easeInOut,
-  },
   enter: {
     type: 'spring',
     damping: 25,
     stiffness: 180,
+  },
+  exit: {
+    duration: 0.15,
+    ease: MOTION_TRANSITION_EASINGS.easeInOut,
   },
 } as const
 

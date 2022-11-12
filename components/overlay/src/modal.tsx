@@ -225,8 +225,6 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
       ...styles.container,
     }
 
-    console.log(props)
-
     return (
       <MotionSection
         ref={ref}

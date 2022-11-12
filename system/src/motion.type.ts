@@ -15,6 +15,7 @@ export type MotionTransitionProperties = {
   transition?: MotionTransitionProps
   transitionEnd?: MotionTransitionEndProps
   delay?: number | MotionDelayProps
+  duration?: number | MotionDurationProps
 }
 
 type WithMotionProps<Y> = Partial<Record<'enter' | 'exit', Y>>
@@ -24,6 +25,8 @@ export type MotionTransitionProps = WithMotionProps<Transition>
 export type MotionTransitionEndProps = WithMotionProps<Target>
 
 export type MotionDelayProps = WithMotionProps<number>
+
+export type MotionDurationProps = WithMotionProps<number>
 
 export type WithTransitionProps<Y extends object> = Omit<Y, 'transition'> &
   MotionTransitionProperties & {

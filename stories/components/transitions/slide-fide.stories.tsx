@@ -26,6 +26,26 @@ export const basic: ComponentStory<typeof SlideFade> = () => {
   )
 }
 
+export const withDuration: ComponentStory<typeof SlideFade> = () => {
+  const [isOpen, { toggle }] = useBoolean()
+
+  return (
+    <>
+      <Button onClick={toggle}>Please Click</Button>
+
+      <SlideFade isOpen={isOpen} duration={0.4}>
+        <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
+          クリリンのことか……クリリンのことかーーーっ！！！！！
+        </Box>
+      </SlideFade>
+
+      <Box w='full' bg='purple.500' rounded='md' p='md' color='white'>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Box>
+    </>
+  )
+}
+
 export const withOffsetX: ComponentStory<typeof SlideFade> = () => {
   const [isOpen, { toggle }] = useBoolean()
 

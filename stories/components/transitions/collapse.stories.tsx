@@ -22,6 +22,22 @@ export const basic: ComponentStory<typeof Collapse> = () => {
   )
 }
 
+export const withDuration: ComponentStory<typeof Collapse> = () => {
+  const [isOpen, { toggle }] = useBoolean()
+
+  return (
+    <VStack gap={0} align='flex-start'>
+      <Button onClick={toggle}>Please Click</Button>
+
+      <Collapse isOpen={isOpen} duration={0.7}>
+        <Box w='full' bg='orange.500' rounded='md' p='md' color='white' mt='md'>
+          クリリンのことか……クリリンのことかーーーっ！！！！！
+        </Box>
+      </Collapse>
+    </VStack>
+  )
+}
+
 export const exitUnmount: ComponentStory<typeof Collapse> = () => {
   const [isOpen, { toggle }] = useBoolean()
 

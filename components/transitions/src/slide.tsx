@@ -101,7 +101,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
         {isOpen ? (
           <MotionDiv
             ref={ref}
-            className={cx('ui-slide-fade', className)}
+            className={cx('ui-slide', className)}
             custom={custom}
             {...slideProps}
             animate={animate}

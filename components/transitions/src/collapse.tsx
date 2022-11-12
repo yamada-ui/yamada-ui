@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react'
 const isNumeric = (value?: string | number) => value != null && parseFloat(value.toString()) > 0
 
 type CollapseOptions = {
-  animateOpacity?: boolean
+  animationOpacity?: boolean
   startingHeight?: number | string
   endingHeight?: number | string
 }
@@ -26,27 +26,27 @@ export type CollapseProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionP
 
 const variants: MotionVariants = {
   enter: ({
-    animateOpacity,
+    animationOpacity,
     endingHeight: height,
     transition,
     transitionEnd,
     delay,
     duration,
   } = {}) => ({
-    ...(animateOpacity ? { opacity: 1 } : {}),
+    ...(animationOpacity ? { opacity: 1 } : {}),
     height,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
   }),
   exit: ({
-    animateOpacity,
+    animationOpacity,
     startingHeight: height,
     transition,
     transitionEnd,
     delay,
     duration,
   } = {}) => ({
-    ...(animateOpacity ? { opacity: isNumeric(height) ? 1 : 0 } : {}),
+    ...(animationOpacity ? { opacity: isNumeric(height) ? 1 : 0 } : {}),
     height,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
@@ -67,7 +67,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
     {
       unmountOnExit,
       isOpen,
-      animateOpacity = true,
+      animationOpacity = true,
       startingHeight = 0,
       endingHeight = 'auto',
       transition,
@@ -114,7 +114,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
       : transitionEnd
 
     const custom = {
-      animateOpacity,
+      animationOpacity,
       startingHeight,
       endingHeight,
       transition,

@@ -65,7 +65,7 @@ export const disabledOpacity: ComponentStory<typeof Collapse> = () => {
     <VStack gap={0} align='flex-start'>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse isOpen={isOpen} animateOpacity={false}>
+      <Collapse isOpen={isOpen} animationOpacity={false}>
         <Box w='full' bg='orange.500' rounded='md' p='md' color='white' mt='md'>
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

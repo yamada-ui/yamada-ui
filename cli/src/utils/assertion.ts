@@ -5,8 +5,8 @@ export const isNumber = (value: any): value is number => typeof value === 'numbe
 export const isNotNumber = (value: any): boolean =>
   typeof value !== 'number' || Number.isNaN(value) || !Number.isFinite(value)
 
-export const isNumeric = (value: any): boolean =>
-  value != null && value - parseFloat(value) + 1 >= 0
+export const isNumeric = (value: string | number): boolean =>
+  value != null && parseFloat(value.toString()) - parseFloat(value.toString()) + 1 >= 0
 
 export const isString = (value: any): value is string =>
   Object.prototype.toString.call(value) === '[object String]'

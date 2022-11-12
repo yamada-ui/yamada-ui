@@ -24,7 +24,7 @@ import {
 import { FC } from 'react'
 
 export default {
-  title: 'System / Theme / Theming / Extend Theming',
+  title: 'System / Theme / Extend Theming',
 }
 
 export const basic = () => {

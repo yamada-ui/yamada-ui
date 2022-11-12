@@ -16,7 +16,7 @@ import {
 import { FC } from 'react'
 
 export default {
-  title: 'System / Theme / Theming / Dynamic Theming',
+  title: 'System / Theme / Dynamic Theming',
 }
 
 export const basic = () => {

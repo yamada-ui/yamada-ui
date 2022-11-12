@@ -2,7 +2,7 @@ import { Center, Image, UIProvider, UsageTheme } from '@yamada-ui/react'
 import { FC } from 'react'
 
 export default {
-  title: 'System / Theme / Theming / Override Theming',
+  title: 'System / Theme / Override Theming',
 }
 
 export const basic = () => {

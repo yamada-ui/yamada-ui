@@ -20,15 +20,15 @@ export type ScaleFadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotion
   ScaleFadeOptions
 
 const variants: MotionVariants = {
-  enter: ({ transition, transitionEnd, delay } = {}) => ({
+  enter: ({ transition, transitionEnd, delay, duration } = {}) => ({
     opacity: 1,
     scale: 1,
-    transition: transitionEnter(transition?.enter)(delay),
+    transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
   }),
-  exit: ({ scale, reverse, transition, transitionEnd, delay } = {}) => ({
+  exit: ({ scale, reverse, transition, transitionEnd, delay, duration } = {}) => ({
     opacity: 0,
-    transition: transitionExit(transition?.exit)(delay),
+    transition: transitionExit(transition?.exit)(delay, duration),
     ...(reverse
       ? { scale, transitionEnd: transitionEnd?.exit }
       : { transitionEnd: { scale, ...transitionEnd?.exit } }),
@@ -54,6 +54,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
       transition,
       transitionEnd,
       delay,
+      duration,
       className,
       ...rest
     },
@@ -61,7 +62,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
 
-    const custom = { scale, reverse, transition, transitionEnd, delay }
+    const custom = { scale, reverse, transition, transitionEnd, delay, duration }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 

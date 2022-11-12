@@ -6,24 +6,11 @@ import {
   WithTransitionProps,
   MotionVariants,
   forwardRef,
-  MOTION_TRANSITION_EASINGS,
   MOTION_TRANSITION_VARIANTS,
   CSSUIObject,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
-
-const MOTION_TRANSITION_DEFAULTS = {
-  enter: {
-    type: 'spring',
-    damping: 25,
-    stiffness: 180,
-  },
-  exit: {
-    duration: 0.15,
-    ease: MOTION_TRANSITION_EASINGS.easeInOut,
-  },
-} as const
 
 export type SlideDirection = 'top' | 'left' | 'bottom' | 'right'
 
@@ -48,14 +35,14 @@ export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProp
   SlideOptions
 
 const variants: MotionVariants = {
-  enter: ({ direction, transition, transitionEnd, delay } = {}) => ({
+  enter: ({ direction, transition, transitionEnd, delay, duration } = {}) => ({
     ...getSlideProps(direction).enter,
-    transition: transitionEnter(transition?.enter ?? MOTION_TRANSITION_DEFAULTS.enter)(delay),
+    transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
   }),
-  exit: ({ direction, transition, transitionEnd, delay } = {}) => ({
+  exit: ({ direction, transition, transitionEnd, delay, duration } = {}) => ({
     ...getSlideProps(direction).exit,
-    transition: transitionExit(transition?.exit ?? MOTION_TRANSITION_DEFAULTS.exit)(delay),
+    transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
   }),
 }
@@ -78,6 +65,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
       transition,
       transitionEnd,
       delay,
+      duration = { enter: 0.4, exit: 0.3 },
       className,
       ...rest
     },
@@ -85,7 +73,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
 
-    const custom = { direction, transition, transitionEnd, delay }
+    const custom = { direction, transition, transitionEnd, delay, duration }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 

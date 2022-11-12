@@ -21,23 +21,23 @@ export type SlideFadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotion
   SlideFadeOptions
 
 const variants: MotionVariants = {
-  initial: ({ offsetX, offsetY, transition, transitionEnd, delay }) => ({
+  initial: ({ offsetX, offsetY, transition, transitionEnd, delay, duration }) => ({
     opacity: 0,
     x: offsetX,
     y: offsetY,
-    transition: transitionExit(transition?.exit)(delay),
+    transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
   }),
-  enter: ({ transition, transitionEnd, delay } = {}) => ({
+  enter: ({ transition, transitionEnd, delay, duration } = {}) => ({
     opacity: 1,
     x: 0,
     y: 0,
-    transition: transitionEnter(transition?.enter)(delay),
+    transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
   }),
-  exit: ({ offsetX, offsetY, reverse, transition, transitionEnd, delay } = {}) => ({
+  exit: ({ offsetX, offsetY, reverse, transition, transitionEnd, delay, duration } = {}) => ({
     opacity: 0,
-    transition: transitionExit(transition?.exit)(delay),
+    transition: transitionExit(transition?.exit)(delay, duration),
     ...(reverse
       ? { x: offsetX, y: offsetY, transitionEnd: transitionEnd?.exit }
       : { transitionEnd: { x: offsetX, y: offsetY, ...transitionEnd?.exit } }),
@@ -64,6 +64,7 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
       transition,
       transitionEnd,
       delay,
+      duration,
       className,
       ...rest
     },
@@ -71,7 +72,7 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
 
-    const custom = { offsetX, offsetY, reverse, transition, transitionEnd, delay }
+    const custom = { offsetX, offsetY, reverse, transition, transitionEnd, delay, duration }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 

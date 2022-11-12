@@ -37,7 +37,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
   const validChildren = getValidChildren(children)
   const count = validChildren.length
 
-  const clones = validChildren.map((child, index) =>
+  const cloneChildren = validChildren.map((child, index) =>
     cloneElement(child, {
       separator,
       gap,
@@ -54,7 +54,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
         {...rest}
       >
         <ui.ol className='ui-breadcrumb-list' __css={css}>
-          {clones}
+          {cloneChildren}
         </ui.ol>
       </ui.nav>
     </BreadcrumbProvider>
@@ -76,7 +76,7 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, 'li'>(
 
     const validChildren = getValidChildren(children)
 
-    const clones = validChildren.map((child) => {
+    const cloneChildren = validChildren.map((child) => {
       if (child.type === BreadcrumbLink) {
         return cloneElement(child, {
           isCurrentPage,
@@ -101,7 +101,7 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, 'li'>(
 
     return (
       <ui.li ref={ref} className={cx('ui-breadcrumb-item', className)} __css={css} {...rest}>
-        {clones}
+        {cloneChildren}
         {!isLastChild ? <BreadcrumbSeparator gap={gap}>{separator}</BreadcrumbSeparator> : null}
       </ui.li>
     )

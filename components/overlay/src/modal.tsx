@@ -16,11 +16,12 @@ import {
   FocusLockProps,
   Portal,
   getValidChildren,
+  findChildren,
 } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 import { KeyboardEvent, useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
-import { ModalOverlay, ModalCloseButton } from './'
+import { ModalOverlay, DialogOverlay, ModalCloseButton, DialogCloseButton } from './'
 
 type Position =
   | 'center'
@@ -117,11 +118,11 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
 
   const validChildren = getValidChildren(children)
 
-  const [customModalOverlay, ...cloneChildren] = validChildren.find(
-    (child) => child.type === ModalOverlay,
+  const [customModalOverlay, ...cloneChildren] = findChildren(
+    validChildren,
+    ModalOverlay,
+    DialogOverlay,
   )
-    ? validChildren.sort((a, b) => (a.type === ModalOverlay ? -1 : b.type === ModalOverlay ? 1 : 0))
-    : [undefined, ...validChildren]
 
   const css: CSSUIObject = {
     position: 'fixed',
@@ -226,18 +227,16 @@ const getModalContentProps = (animation: Animation = 'scale') => {
 }
 
 const ModalContent = forwardRef<ModalContentProps, 'section'>(
-  ({ className, children, ...rest }, ref) => {
+  ({ className, children, __css, ...rest }, ref) => {
     const { styles, scrollBehavior, closeButton, onClose, animation } = useModal()
 
     const validChildren = getValidChildren(children)
 
-    const [customModalCloseButton, ...cloneChildren] = validChildren.find(
-      (child) => child.type === ModalCloseButton,
+    const [customModalCloseButton, ...cloneChildren] = findChildren(
+      validChildren,
+      ModalCloseButton,
+      DialogCloseButton,
     )
-      ? validChildren.sort((a, b) =>
-          a.type === ModalCloseButton ? -1 : b.type === ModalCloseButton ? 1 : 0,
-        )
-      : [undefined, ...validChildren]
 
     const props = animation !== 'none' ? getModalContentProps(animation) : {}
 
@@ -247,7 +246,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
       display: 'flex',
       flexDirection: 'column',
       overflow: scrollBehavior === 'inside' ? 'hidden' : 'auto',
-      ...styles.container,
+      ...(__css ? __css : styles.container),
     }
 
     return (

@@ -6,12 +6,12 @@ import { useModal } from './'
 export type ModalCloseButtonProps = CloseButtonProps
 
 export const ModalCloseButton = forwardRef<ModalCloseButtonProps, 'button'>(
-  ({ onClick, ...rest }, ref) => {
+  ({ onClick, __css, ...rest }, ref) => {
     const { styles, onClose } = useModal()
 
     const css: CSSUIObject = {
       position: 'absolute',
-      ...styles.closeButton,
+      ...(__css ? __css : styles.closeButton),
     }
 
     return (

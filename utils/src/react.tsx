@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import ReactFocusLock from 'react-focus-lock'
-import { getAllFocusable } from './'
+import { getAllFocusable, isNumber, isString } from './'
 
 type Options = {
   strict?: boolean
@@ -62,6 +62,24 @@ export const getValidChildren = (children: React.ReactNode): React.ReactElement[
   React.Children.toArray(children).filter((child) =>
     React.isValidElement(child),
   ) as React.ReactElement[]
+
+export const isValidElement = (child: any): child is React.ReactNode =>
+  React.isValidElement(child) || isString(child) || isNumber(child)
+
+export const findChildren = (
+  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  ...types: React.JSXElementConstructor<any>[]
+): [React.ReactElement | undefined, ...React.ReactElement[]] =>
+  (children.find((child) => types.some((type) => child.type === type))
+    ? children.sort((a, b) =>
+        types.some((type) => a.type === type) ? -1 : types.some((type) => b.type === type) ? 1 : 0,
+      )
+    : [undefined, ...children]) as [React.ReactElement | undefined, ...React.ReactElement[]]
+
+export const filterChildren = (
+  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  ...types: React.JSXElementConstructor<any>[]
+): React.ReactElement[] => children.filter((child) => types.every((type) => child.type !== type))
 
 export const cx = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ')
 

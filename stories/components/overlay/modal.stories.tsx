@@ -388,8 +388,6 @@ export const customOverlay: ComponentStory<typeof Modal> = () => {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalCloseButton color='red.500' />
-
         <ModalOverlay bg='blackAlpha.300' backdropFilter='blur(10px)' />
 
         <ModalHeader>ドラゴンボール</ModalHeader>

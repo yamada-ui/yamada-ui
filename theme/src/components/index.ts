@@ -4,6 +4,7 @@ import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
 import { CloseButton } from './close-button'
 import { Container } from './container'
+import { Dialog } from './dialog'
 import { Divider } from './divider'
 import { Heading } from './heading'
 import { Kbd } from './kbd'
@@ -17,6 +18,7 @@ export default {
   Button,
   Container,
   Divider,
+  Dialog,
   Heading,
   Kbd,
   Badge,

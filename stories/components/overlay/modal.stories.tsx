@@ -3,6 +3,8 @@ import {
   Button,
   useDisclosure,
   Modal,
+  ModalOverlay,
+  ModalCloseButton,
   ModalHeader,
   ModalBody,
   ModalFooter,
@@ -226,6 +228,78 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
   )
 }
 
+export const withAnimation: ComponentStory<typeof Modal> = () => {
+  const [animation, setAnimation] = useState<ModalProps['animation']>('scale')
+  const [isOpen, onOpen, onClose] = useDisclosure()
+
+  return (
+    <>
+      <Wrap gap='md'>
+        <Button
+          onClick={() => {
+            setAnimation('scale')
+            onOpen()
+          }}
+        >
+          Open scale Modal
+        </Button>
+
+        <Button
+          onClick={() => {
+            setAnimation('top')
+            onOpen()
+          }}
+        >
+          Open top Modal
+        </Button>
+
+        <Button
+          onClick={() => {
+            setAnimation('left')
+            onOpen()
+          }}
+        >
+          Open left Modal
+        </Button>
+
+        <Button
+          onClick={() => {
+            setAnimation('bottom')
+            onOpen()
+          }}
+        >
+          Open bottom Modal
+        </Button>
+
+        <Button
+          onClick={() => {
+            setAnimation('right')
+            onOpen()
+          }}
+        >
+          Open right Modal
+        </Button>
+      </Wrap>
+
+      <Modal isOpen={isOpen} onClose={onClose} animation={animation}>
+        <ModalHeader>ドラゴンボール</ModalHeader>
+
+        <ModalBody>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </ModalBody>
+
+        <ModalFooter>
+          <Button variant='ghost' onClick={onClose}>
+            とじる
+          </Button>
+          <Button colorStyle='primary'>Wikipadia</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
 export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
   const [isOpen, onOpen, onClose] = useDisclosure()
 
@@ -252,6 +326,34 @@ export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
   )
 }
 
+export const customCloseButton: ComponentStory<typeof Modal> = () => {
+  const [isOpen, onOpen, onClose] = useDisclosure()
+
+  return (
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalCloseButton color='gray.400' />
+
+        <ModalHeader>ドラゴンボール</ModalHeader>
+
+        <ModalBody>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </ModalBody>
+
+        <ModalFooter>
+          <Button variant='ghost' onClick={onClose}>
+            とじる
+          </Button>
+          <Button colorStyle='primary'>Wikipadia</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
 export const disabledOverlay: ComponentStory<typeof Modal> = () => {
   const [isOpen, onOpen, onClose] = useDisclosure()
 
@@ -260,6 +362,36 @@ export const disabledOverlay: ComponentStory<typeof Modal> = () => {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} overlay={false}>
+        <ModalHeader>ドラゴンボール</ModalHeader>
+
+        <ModalBody>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </ModalBody>
+
+        <ModalFooter>
+          <Button variant='ghost' onClick={onClose}>
+            とじる
+          </Button>
+          <Button colorStyle='primary'>Wikipadia</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
+export const customOverlay: ComponentStory<typeof Modal> = () => {
+  const [isOpen, onOpen, onClose] = useDisclosure()
+
+  return (
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalCloseButton color='red.500' />
+
+        <ModalOverlay bg='blackAlpha.300' backdropFilter='blur(10px)' />
+
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>

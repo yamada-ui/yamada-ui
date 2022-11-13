@@ -41,7 +41,7 @@ export const Stack = forwardRef<StackProps, 'div'>(
 
     const validChildren = getValidChildren(children)
 
-    const clones = divider
+    const cloneChildren = divider
       ? validChildren.map((child, index) => {
           const key = typeof child.key !== 'undefined' ? child.key : index
 
@@ -72,7 +72,7 @@ export const Stack = forwardRef<StackProps, 'div'>(
 
     return (
       <ui.div ref={ref} className={cx('ui-stack', className)} __css={css} {...rest}>
-        {clones}
+        {cloneChildren}
       </ui.div>
     )
   },

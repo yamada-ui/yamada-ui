@@ -1,1 +1,6 @@
 export * from './modal'
+export * from './modal-overlay'
+export * from './modal-close-button'
+export * from './modal-header'
+export * from './modal-body'
+export * from './modal-footer'

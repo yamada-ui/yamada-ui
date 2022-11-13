@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Center, FontAwesomeIcon } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Center',
+  title: 'Components / Layouts / Center',
   component: Center,
 } as ComponentMeta<typeof Center>
 

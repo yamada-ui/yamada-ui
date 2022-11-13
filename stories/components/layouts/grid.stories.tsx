@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Grid, GridItem } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Grid',
+  title: 'Components / Layouts / Grid',
   component: Grid,
 } as ComponentMeta<typeof Grid>
 

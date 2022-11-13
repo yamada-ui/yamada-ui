@@ -1,7 +1,7 @@
 {
-  "name": "@yamada-ui/system",
+  "name": "@yamada-ui/transitions",
   "version": "1.0.0",
-  "description": "Yamada UI core system",
+  "description": "Yamada UI transitions components",
   "keywords": [],
   "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
@@ -20,24 +20,17 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
-    "@yamada-ui/hooks": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "framer-motion": "^6.2.9"
   },
   "devDependencies": {
-    "@emotion/styled": "^11.10.4",
-    "framer-motion": "^6.2.9",
-    "react": "^18.0.0",
-    "clean-package": "2.1.1"
+    "clean-package": "2.1.1",
+    "react": "^18.0.0"
   },
   "peerDependencies": {
-    "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
-    "@yamada-ui/hooks": "workspace:*",
+    "@yamada-ui/system": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@emotion/styled": "^11.10.4",
-    "framer-motion": "^6.2.9",
     "react": ">=18"
   }
 }

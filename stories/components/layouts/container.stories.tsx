@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Container, Heading, Image, Text } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Layout / Container',
+  title: 'Components / Layouts / Container',
   component: Container,
 } as ComponentMeta<typeof Container>
 

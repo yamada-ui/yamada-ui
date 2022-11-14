@@ -42,9 +42,7 @@ type DialogOptions = {
   onSuccess?: (onClose: (() => void) | undefined) => void
 }
 
-export type DialogProps = Omit<ModalProps, 'variant' | 'size' | 'colorStyle'> &
-  ThemeProps<'Dialog'> &
-  DialogOptions
+export type DialogProps = Omit<ModalProps, keyof ThemeProps> & ThemeProps<'Dialog'> & DialogOptions
 
 type DialogContext = Record<string, CSSUIObject>
 

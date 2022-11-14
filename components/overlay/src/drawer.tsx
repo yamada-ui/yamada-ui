@@ -64,6 +64,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
     closeOnOverlayClick,
     closeOnEsc,
     lockFocusAcrossFrames,
+    duration = { enter: 0.4, exit: 0.3 },
     ...rest
   } = omitThemeProps({ size, ...props })
 
@@ -92,9 +93,10 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
           closeOnOverlayClick,
           closeOnEsc,
           lockFocusAcrossFrames,
+          duration,
         }}
       >
-        {customDrawerOverlay ?? (overlay && size !== 'full' ? <DrawerOverlay /> : null)}
+        {customDrawerOverlay ?? (overlay ? <DrawerOverlay /> : null)}
 
         <DrawerContent {...{ direction, closeButton, ...rest }}>{cloneChildren}</DrawerContent>
       </Modal>
@@ -106,7 +108,7 @@ type DrawerContentProps = Omit<DrawerProps, 'color' | 'transition' | 'isOpen' | 
 
 export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
   ({ className, children, direction, closeButton, ...rest }, ref) => {
-    const { isOpen, onClose } = useModal()
+    const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
 
     const validChildren = getValidChildren(children)
@@ -131,7 +133,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
         tabIndex={-1}
         isOpen={isOpen}
         direction={direction}
-        duration={{ enter: 0.25, exit: 0.2 }}
+        duration={duration}
         __css={css}
         {...rest}
       >

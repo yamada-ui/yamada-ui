@@ -7,6 +7,7 @@ import {
   CSSUIObject,
   useMultiComponentStyle,
   CSSUIProps,
+  MotionTransitionProperties,
 } from '@yamada-ui/system'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import {
@@ -75,6 +76,7 @@ type ModalOptions = Pick<
   closeOnOverlayClick?: boolean
   closeOnEsc?: boolean
   animation?: Animation
+  duration?: MotionTransitionProperties['duration']
 }
 
 export type ModalProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
@@ -107,6 +109,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     closeOnEsc = true,
     lockFocusAcrossFrames = true,
     animation = 'scale',
+    duration,
     ...rest
   } = omitThemeProps({ size, ...props })
 
@@ -169,6 +172,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         closeOnOverlayClick,
         closeOnEsc,
         animation,
+        duration,
         styles,
       }}
     >
@@ -210,39 +214,42 @@ type ModalContentProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavi
 
 const MotionSection = ui(motion.section)
 
-const getModalContentProps = (animation: Animation = 'scale') => {
+const getModalContentProps = (
+  animation: Animation = 'scale',
+  duration?: MotionTransitionProperties['duration'],
+) => {
   switch (animation) {
     case 'scale':
       return {
         ...scaleFadeProps,
-        custom: { scale: 0.95, reverse: true },
+        custom: { scale: 0.95, reverse: true, duration },
       }
     case 'top':
       return {
         ...slideFadeProps,
-        custom: { offsetY: -16, reverse: true },
+        custom: { offsetY: -16, reverse: true, duration },
       }
     case 'right':
       return {
         ...slideFadeProps,
-        custom: { offsetX: 16, reverse: true },
+        custom: { offsetX: 16, reverse: true, duration },
       }
     case 'left':
       return {
         ...slideFadeProps,
-        custom: { offsetX: -16, reverse: true },
+        custom: { offsetX: -16, reverse: true, duration },
       }
     case 'bottom':
       return {
         ...slideFadeProps,
-        custom: { offsetY: 16, reverse: true },
+        custom: { offsetY: 16, reverse: true, duration },
       }
   }
 }
 
 const ModalContent = forwardRef<ModalContentProps, 'section'>(
   ({ className, children, __css, ...rest }, ref) => {
-    const { styles, scrollBehavior, closeButton, onClose, animation } = useModal()
+    const { styles, scrollBehavior, closeButton, onClose, animation, duration } = useModal()
 
     const validChildren = getValidChildren(children)
 
@@ -252,7 +259,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
       DialogCloseButton,
     )
 
-    const props = animation !== 'none' ? getModalContentProps(animation) : {}
+    const props = animation !== 'none' ? getModalContentProps(animation, duration) : {}
 
     const css: CSSUIObject = {
       position: 'relative',

@@ -485,6 +485,26 @@ export interface GeneratedTheme extends UITheme {
       variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
     }
     Divider: { sizes: string & {}; variants: 'solid' | 'dashed' | 'dotted' | (string & {}) }
+    Dialog: {
+      sizes:
+        | 'xs'
+        | 'sm'
+        | 'md'
+        | 'lg'
+        | 'xl'
+        | '2xl'
+        | '3xl'
+        | '4xl'
+        | '5xl'
+        | '6xl'
+        | 'full'
+        | (string & {})
+      variants: string & {}
+    }
+    Drawer: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | (string & {})
+      variants: string & {}
+    }
     Heading: {
       sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})
       variants: string & {}

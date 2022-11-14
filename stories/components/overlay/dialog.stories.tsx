@@ -45,6 +45,30 @@ export const basic: ComponentStory<typeof Dialog> = () => {
   )
 }
 
+export const withDuration: ComponentStory<typeof Dialog> = () => {
+  const [isOpen, onOpen, onClose] = useDisclosure()
+
+  return (
+    <>
+      <Button onClick={onOpen}>Open Dialog</Button>
+
+      <Dialog
+        isOpen={isOpen}
+        onClose={onClose}
+        header='孫悟空'
+        cancel='わけない'
+        onCancel={onClose}
+        success='わける'
+        onSuccess={onClose}
+        duration={0.4}
+      >
+        だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+      </Dialog>
+    </>
+  )
+}
+
 export const customDialog: ComponentStory<typeof Dialog> = () => {
   const [isOpen, onOpen, onClose] = useDisclosure()
 

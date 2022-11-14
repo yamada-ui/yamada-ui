@@ -67,6 +67,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
       delay,
       duration = { enter: 0.4, exit: 0.3 },
       className,
+      __css,
       ...rest
     },
     ref,
@@ -81,6 +82,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
 
     const css: CSSUIObject = {
       position: 'fixed',
+      ...__css,
       ...position,
     }
 

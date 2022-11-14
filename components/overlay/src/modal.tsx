@@ -19,9 +19,16 @@ import {
   findChildren,
 } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
-import { KeyboardEvent, useCallback } from 'react'
+import { cloneElement, KeyboardEvent, useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
-import { ModalOverlay, DialogOverlay, ModalCloseButton, DialogCloseButton } from './'
+import {
+  ModalOverlay,
+  DialogOverlay,
+  ModalCloseButton,
+  DialogCloseButton,
+  DrawerContent,
+  DrawerOverlay,
+} from './'
 
 type Position =
   | 'center'
@@ -122,7 +129,12 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     validChildren,
     ModalOverlay,
     DialogOverlay,
+    DrawerOverlay,
   )
+
+  let [drawerContent] = findChildren(validChildren, DrawerContent)
+
+  if (drawerContent) drawerContent = cloneElement(drawerContent, { onKeyDown })
 
   const css: CSSUIObject = {
     position: 'fixed',
@@ -178,9 +190,11 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
                 <ui.div __css={css}>
                   {customModalOverlay ?? (overlay && size !== 'full' ? <ModalOverlay /> : null)}
 
-                  <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
-                    {cloneChildren}
-                  </ModalContent>
+                  {drawerContent ?? (
+                    <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
+                      {cloneChildren}
+                    </ModalContent>
+                  )}
                 </ui.div>
               </RemoveScroll>
             </FocusLock>
@@ -246,6 +260,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
       display: 'flex',
       flexDirection: 'column',
       overflow: scrollBehavior === 'inside' ? 'hidden' : 'auto',
+      outline: 0,
       ...(__css ? __css : styles.container),
     }
 

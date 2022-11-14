@@ -8,6 +8,7 @@ import {
 import { Slide, SlideProps } from '@yamada-ui/transitions'
 import { createContext, getValidChildren, findChildren, cx } from '@yamada-ui/utils'
 import {
+  useModal,
   Modal,
   ModalProps,
   ModalOverlay,
@@ -23,6 +24,7 @@ import {
 } from './'
 
 type DrawerOptions = {
+  direction?: SlideProps['direction']
   isFullHeight?: boolean
 }
 
@@ -30,7 +32,6 @@ export type DrawerProps = Omit<
   ModalProps,
   'scrollBehavior' | 'animation' | 'position' | 'outside' | keyof ThemeProps
 > &
-  SlideProps &
   ThemeProps<'Drawer'> &
   DrawerOptions
 
@@ -95,18 +96,17 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
       >
         {customDrawerOverlay ?? (overlay && size !== 'full' ? <DrawerOverlay /> : null)}
 
-        <DrawerContent {...{ isOpen, direction, closeButton, onClose, ...rest }}>
-          {cloneChildren}
-        </DrawerContent>
+        <DrawerContent {...{ direction, closeButton, ...rest }}>{cloneChildren}</DrawerContent>
       </Modal>
     </DrawerProvider>
   )
 })
 
-type DrawerContentProps = Omit<DrawerProps, keyof ThemeProps>
+type DrawerContentProps = Omit<DrawerProps, 'color' | 'transition' | 'isOpen' | keyof ThemeProps>
 
 export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
-  ({ className, children, isOpen, direction, closeButton, onClose, ...rest }, ref) => {
+  ({ className, children, direction, closeButton, ...rest }, ref) => {
+    const { isOpen, onClose } = useModal()
     const styles = useDrawer()
 
     const validChildren = getValidChildren(children)
@@ -131,6 +131,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
         tabIndex={-1}
         isOpen={isOpen}
         direction={direction}
+        duration={{ enter: 0.25, exit: 0.2 }}
         __css={css}
         {...rest}
       >

@@ -6,6 +6,7 @@ import { CloseButton } from './close-button'
 import { Container } from './container'
 import { Dialog } from './dialog'
 import { Divider } from './divider'
+import { Drawer } from './drawer'
 import { Heading } from './heading'
 import { Kbd } from './kbd'
 import { Link } from './link'
@@ -19,6 +20,7 @@ export default {
   Container,
   Divider,
   Dialog,
+  Drawer,
   Heading,
   Kbd,
   Badge,

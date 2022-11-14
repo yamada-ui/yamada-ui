@@ -3,8 +3,6 @@ import { ComponentStyle } from '@yamada-ui/styled'
 export const Dialog: ComponentStyle = {
   baseStyle: {
     container: {
-      display: 'flex',
-      flexDirection: 'column',
       rounded: 'md',
       bg: ['white', 'black'],
       color: 'inherit',

@@ -3,8 +3,6 @@ import { ComponentStyle } from '@yamada-ui/styled'
 export const Modal: ComponentStyle = {
   baseStyle: {
     container: {
-      display: 'flex',
-      flexDirection: 'column',
       rounded: 'md',
       bg: ['white', 'black'],
       color: 'inherit',

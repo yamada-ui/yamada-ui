@@ -25,6 +25,18 @@ module.exports = function (plop) {
         name: 'packageName',
         message: 'Enter package name:',
       },
+      {
+        type: 'input',
+        name: 'componentName',
+        message: 'Enter first component name:',
+      },
+      {
+        type: 'list',
+        name: 'componentType',
+        message: 'Does this use a provider?',
+        default: 'No',
+        choices: ['Yes', 'No'],
+      },
     ],
 
     actions(answers) {
@@ -32,7 +44,7 @@ module.exports = function (plop) {
 
       if (!answers) return actions
 
-      const { packageName } = answers
+      const { packageName, componentName, componentType } = answers
 
       actions.push({
         type: 'addMany',
@@ -40,6 +52,34 @@ module.exports = function (plop) {
         destination: `./components/{{dashCase packageName}}`,
         base: 'plop/package',
         data: { packageName },
+        abortOnFail: true,
+      })
+
+      actions.push({
+        type: 'addMany',
+        templateFiles:
+          componentType === 'Yes' ? 'plop/component/with-provider/**' : 'plop/component/default/**',
+        destination: `./components/{{dashCase packageName}}/src`,
+        base: componentType === 'Yes' ? 'plop/component/with-provider' : 'plop/component/default',
+        data: { componentName, packageName, componentType },
+        abortOnFail: true,
+      })
+
+      actions.push({
+        type: 'addMany',
+        templateFiles: 'plop/component/storybook/**',
+        destination: `./stories/components/{{dashCase packageName}}`,
+        base: 'plop/component/storybook',
+        data: { componentName, packageName, componentType },
+        abortOnFail: true,
+      })
+
+      actions.push({
+        type: 'addMany',
+        templateFiles: 'plop/component/theme/**',
+        destination: `./theme/src/components`,
+        base: 'plop/component/theme',
+        data: { componentName, packageName, componentType },
         abortOnFail: true,
       })
 
@@ -82,8 +122,26 @@ module.exports = function (plop) {
         type: 'addMany',
         templateFiles:
           componentType === 'Yes' ? 'plop/component/with-provider/**' : 'plop/component/default/**',
-        destination: `./components/{{packageName}}/src`,
+        destination: `./components/{{dashCase packageName}}/src`,
         base: componentType === 'Yes' ? 'plop/component/with-provider' : 'plop/component/default',
+        data: { componentName, packageName, componentType },
+        abortOnFail: true,
+      })
+
+      actions.push({
+        type: 'addMany',
+        templateFiles: 'plop/component/storybook/**',
+        destination: `./stories/components/{{dashCase packageName}}`,
+        base: 'plop/component/storybook',
+        data: { componentName, packageName, componentType },
+        abortOnFail: true,
+      })
+
+      actions.push({
+        type: 'addMany',
+        templateFiles: 'plop/component/theme/**',
+        destination: `./theme/src/components`,
+        base: 'plop/component/theme',
         data: { componentName, packageName, componentType },
         abortOnFail: true,
       })

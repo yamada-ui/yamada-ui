@@ -73,6 +73,7 @@ const Example = () => {
 - [ctrl/tinycolor](https://tinycolor.vercel.app/)
 - [react-fast-compare](https://www.npmjs.com/package/react-fast-compare)
 - [babel](https://babeljs.io/)
+- [plop](https://plopjs.com/)
 - [turbo](https://turborepo.org/)
 - [tsup](https://tsup.egoist.dev/)
 - [ts-node](https://typestrong.org/ts-node/)

@@ -4,3 +4,4 @@ dist
 node_modules
 build
 pnpm-lock.yaml
+plop

@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import { SchemeScript } from '@yamada-ui/react'
+import { ColorSchemeScript } from '@yamada-ui/react'
 
 export default class Document extends NextDocument {
   render() {
@@ -11,7 +11,7 @@ export default class Document extends NextDocument {
         </Head>
 
         <body>
-          <SchemeScript />
+          <ColorSchemeScript />
 
           <Main />
           <NextScript />

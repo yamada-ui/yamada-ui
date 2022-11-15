@@ -20,7 +20,7 @@
     "build:storybook": "pnpm build && build-storybook",
     "gen:tokens": "yamada-cli tokens theme/src --out styled/src/generated-theme.types.ts",
     "gen:pkg": "plop package && pnpm install",
-    "gen:component": "plop component && pnpm install",
+    "gen:component": "plop component",
     "update:dev": "tsx scripts/update-package-dev.ts",
     "update:prod": "tsx scripts/update-package-prod.ts",
     "next:dev": "pnpm --prefix examples/next-js dev",

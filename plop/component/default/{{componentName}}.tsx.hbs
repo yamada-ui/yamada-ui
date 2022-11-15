@@ -1,0 +1,25 @@
+import {
+  ui,
+  forwardRef,
+  omitThemeProps,
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  useComponentStyle,
+} from '@yamada-ui/system'
+import { cx } from '@yamada-ui/utils'
+
+type {{capitalize componentName}}Options = {}
+
+export type {{capitalize componentName}}Props = HTMLUIProps<'div'> & ThemeProps<'{{capitalize componentName}}'> & {{capitalize componentName}}Options
+
+export const {{capitalize componentName}} = forwardRef<{{capitalize componentName}}Props, 'div'>((props, ref) => {
+  const styles = useComponentStyle('{{capitalize componentName}}', props)
+  const { className, ...rest } = omitThemeProps(props)
+
+  const css: CSSUIObject = {
+    ...styles,
+  }
+
+  return <ui.div ref={ref} className={cx('ui-{{dashCase componentName}}', className)} __css={css} {...rest} />
+})

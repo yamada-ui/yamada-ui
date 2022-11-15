@@ -13,6 +13,7 @@
 ```sh
 $ node -v → v16.**.*
 $ pnpm install
+$ pnpm build
 ```
 
 # Run - pnpm

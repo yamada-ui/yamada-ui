@@ -1,0 +1,13 @@
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { {{capitalize componentName}} } from '@yamada-ui/react'
+
+export default {
+  title: 'Components / Layouts / {{capitalize componentName}}',
+  component: {{capitalize componentName}},
+} as ComponentMeta<typeof {{capitalize componentName}}>
+
+export const basic: ComponentStory<typeof {{capitalize componentName}}> = () => {
+  return (
+    <{{capitalize componentName}}></{{capitalize componentName}}>
+  )
+}

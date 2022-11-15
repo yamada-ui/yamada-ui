@@ -30,9 +30,6 @@
     "clean-package": "2.1.1"
   },
   "peerDependencies": {
-    "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/theme": "workspace:*",
     "@emotion/react": "^11.10.4",
     "react": ">=18"
   }

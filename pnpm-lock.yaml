@@ -308,9 +308,6 @@ importers:
 
   examples/create-react-app:
     specifiers:
-      '@ctrl/tinycolor': ^3.4.1
-      '@emotion/react': ^11.10.4
-      '@emotion/styled': ^11.10.4
       '@fortawesome/fontawesome-svg-core': ^6.2.0
       '@fortawesome/free-brands-svg-icons': ^6.2.0
       '@fortawesome/free-regular-svg-icons': ^6.2.0
@@ -324,13 +321,9 @@ importers:
       eslint-config-react-app: ^7.0.1
       react: ^18.2.0
       react-dom: ^18.2.0
-      react-fast-compare: ^3.2.0
       react-scripts: 5.0.1
       typescript: 4.7.4
     dependencies:
-      '@ctrl/tinycolor': 3.4.1
-      '@emotion/react': 11.10.4_iapumuv4e6jcjznwuxpf4tt22e
-      '@emotion/styled': 11.10.4_g3tud4ene45llglqap74b5kkse
       '@fortawesome/fontawesome-svg-core': 6.2.0
       '@fortawesome/free-brands-svg-icons': 6.2.0
       '@fortawesome/free-regular-svg-icons': 6.2.0
@@ -339,7 +332,6 @@ importers:
       '@yamada-ui/react': link:../../react
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-fast-compare: 3.2.0
       react-scripts: 5.0.1_gqi5qmibjkogsznwcpqmzq76tq
     devDependencies:
       '@types/node': 16.11.66
@@ -351,9 +343,6 @@ importers:
 
   examples/next-js:
     specifiers:
-      '@ctrl/tinycolor': ^3.4.1
-      '@emotion/react': ^11.10.4
-      '@emotion/styled': ^11.10.4
       '@fortawesome/fontawesome-svg-core': ^6.2.0
       '@fortawesome/free-brands-svg-icons': ^6.2.0
       '@fortawesome/free-regular-svg-icons': ^6.2.0
@@ -370,12 +359,8 @@ importers:
       prettier: ^2.7.1
       react: ^18.2.0
       react-dom: ^18.2.0
-      react-fast-compare: ^3.2.0
       typescript: 4.7.4
     dependencies:
-      '@ctrl/tinycolor': 3.4.1
-      '@emotion/react': 11.10.4_iapumuv4e6jcjznwuxpf4tt22e
-      '@emotion/styled': 11.10.4_g3tud4ene45llglqap74b5kkse
       '@fortawesome/fontawesome-svg-core': 6.2.0
       '@fortawesome/free-brands-svg-icons': 6.2.0
       '@fortawesome/free-regular-svg-icons': 6.2.0
@@ -385,7 +370,6 @@ importers:
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-fast-compare: 3.2.0
     devDependencies:
       '@types/node': 18.8.5
       '@types/react': 18.0.21
@@ -449,6 +433,7 @@ importers:
       '@yamada-ui/typography': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
+      framer-motion: ^6.2.9
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
@@ -468,6 +453,7 @@ importers:
       '@emotion/react': 11.10.4_react@18.2.0
       '@emotion/styled': 11.10.4_gyryel6m34lsxtsejhafetjriq
       clean-package: 2.1.1
+      framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
 
@@ -1215,6 +1201,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/helper-plugin-utils': 7.19.0
+    dev: true
 
   /@babel/plugin-syntax-jsx/7.18.6_@babel+core@7.19.3:
     resolution: {integrity: sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==}
@@ -2176,6 +2163,7 @@ packages:
       find-root: 1.1.0
       source-map: 0.5.7
       stylis: 4.0.13
+    dev: true
 
   /@emotion/babel-plugin/11.10.2_@babel+core@7.19.3:
     resolution: {integrity: sha512-xNQ57njWTFVfPAc3cjfuaPdsgLp5QOSuRsj9MA6ndEhH/AzuZM86qIQzt6rq+aGBwj3n5/TkLmU5lhAfdRmogA==}
@@ -2253,30 +2241,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@emotion/react/11.10.4_iapumuv4e6jcjznwuxpf4tt22e:
-    resolution: {integrity: sha512-j0AkMpr6BL8gldJZ6XQsQ8DnS9TxEQu1R+OGmDZiWjBAJtCcbt0tS3I/YffoqHXxH6MjgI7KdMbYKw3MEiU9eA==}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      '@types/react': '*'
-      react: '>=16.8.0'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@types/react':
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.19.4
-      '@emotion/babel-plugin': 11.10.2
-      '@emotion/cache': 11.10.3
-      '@emotion/serialize': 1.1.0
-      '@emotion/use-insertion-effect-with-fallbacks': 1.0.0_react@18.2.0
-      '@emotion/utils': 1.2.0
-      '@emotion/weak-memoize': 0.3.0
-      '@types/react': 18.0.21
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
-    dev: false
-
   /@emotion/react/11.10.4_react@18.2.0:
     resolution: {integrity: sha512-j0AkMpr6BL8gldJZ6XQsQ8DnS9TxEQu1R+OGmDZiWjBAJtCcbt0tS3I/YffoqHXxH6MjgI7KdMbYKw3MEiU9eA==}
     peerDependencies:
@@ -2334,30 +2298,6 @@ packages:
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.0_react@18.2.0
       '@emotion/utils': 1.2.0
       '@types/react': 18.0.20
-      react: 18.2.0
-    dev: false
-
-  /@emotion/styled/11.10.4_g3tud4ene45llglqap74b5kkse:
-    resolution: {integrity: sha512-pRl4R8Ez3UXvOPfc2bzIoV8u9P97UedgHS4FPX594ntwEuAMA114wlaHvOK24HB48uqfXiGlYIZYCxVJ1R1ttQ==}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      '@emotion/react': ^11.0.0-rc.0
-      '@types/react': '*'
-      react: '>=16.8.0'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@types/react':
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.19.4
-      '@emotion/babel-plugin': 11.10.2
-      '@emotion/is-prop-valid': 1.2.0
-      '@emotion/react': 11.10.4_iapumuv4e6jcjznwuxpf4tt22e
-      '@emotion/serialize': 1.1.0
-      '@emotion/use-insertion-effect-with-fallbacks': 1.0.0_react@18.2.0
-      '@emotion/utils': 1.2.0
-      '@types/react': 18.0.21
       react: 18.2.0
     dev: false
 
@@ -11041,6 +10981,24 @@ packages:
     dependencies:
       map-cache: 0.2.2
     dev: false
+
+  /framer-motion/6.5.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-o1BGqqposwi7cgDrtg0dNONhkmPsUFDaLcKXigzuTFC5x58mE8iyTazxSudFzmT6MEyJKfjjU8ItoMe3W+3fiw==}
+    peerDependencies:
+      react: '>=16.8 || ^17.0.0 || ^18.0.0'
+      react-dom: '>=16.8 || ^17.0.0 || ^18.0.0'
+    dependencies:
+      '@motionone/dom': 10.12.0
+      framesync: 6.0.1
+      hey-listen: 1.0.8
+      popmotion: 11.0.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      style-value-types: 5.0.0
+      tslib: 2.4.0
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    dev: true
 
   /framer-motion/6.5.1_react@18.2.0:
     resolution: {integrity: sha512-o1BGqqposwi7cgDrtg0dNONhkmPsUFDaLcKXigzuTFC5x58mE8iyTazxSudFzmT6MEyJKfjjU8ItoMe3W+3fiw==}

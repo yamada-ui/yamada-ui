@@ -72,6 +72,7 @@ const Example = () => {
 - [emotion/styled](https://emotion.sh/docs/@emotion/styled)
 - [ctrl/tinycolor](https://tinycolor.vercel.app/)
 - [react-fast-compare](https://www.npmjs.com/package/react-fast-compare)
+- [popperjs](https://popper.js.org/docs/v2/migration-guide/)
 - [babel](https://babeljs.io/)
 - [plop](https://plopjs.com/)
 - [turbo](https://turborepo.org/)

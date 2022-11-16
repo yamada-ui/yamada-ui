@@ -388,6 +388,7 @@ importers:
 
   hooks:
     specifiers:
+      '@popperjs/core': ^2.9.3
       '@yamada-ui/providers': workspace:*
       '@yamada-ui/styled': workspace:*
       '@yamada-ui/utils': workspace:*
@@ -396,6 +397,7 @@ importers:
       react: ^18.2.0
       react-fast-compare: ^3.2.0
     dependencies:
+      '@popperjs/core': 2.11.6
       '@yamada-ui/providers': link:../providers
       '@yamada-ui/styled': link:../styled
       '@yamada-ui/utils': link:../utils
@@ -3241,6 +3243,10 @@ packages:
       json5: 2.2.1
       write-file-atomic: 3.0.3
       write-yaml-file: 4.2.0
+    dev: false
+
+  /@popperjs/core/2.11.6:
+    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
   /@rollup/plugin-alias/3.1.9_rollup@2.79.1:

@@ -3,6 +3,25 @@ import { createPortal } from 'react-dom'
 import ReactFocusLock from 'react-focus-lock'
 import { getAllFocusable, isNumber, isString } from './'
 
+type DOMElement = Element & HTMLOrSVGElement
+
+export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
+  React.DOMAttributes<Y> & {
+    id?: string
+    role?: React.AriaRole
+    tabIndex?: number
+    style?: React.CSSProperties
+  }
+
+type Merge<Y, M> = M extends Record<string, unknown> ? Y : Omit<Y, keyof M> & M
+
+export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+  props?: Merge<DOMAttributes, Y>,
+  ref?: React.Ref<any>,
+) => M & React.RefAttributes<any>
+
+export type MaybeRenderProp<Y> = React.ReactNode | ((props: Y) => React.ReactNode)
+
 type Options = {
   strict?: boolean
   errorMessage?: string
@@ -102,16 +121,16 @@ export const assignRef = <T extends any = any>(ref: ReactRef<T> | undefined, val
   }
 }
 
-export const useMergeRefs = <T,>(...refs: (ReactRef<T> | undefined)[]) =>
-  React.useMemo(() => {
-    if (refs.every((ref) => ref == null)) return null
+export const mergeRefs =
+  <T extends any = any>(...refs: (ReactRef<T> | null | undefined)[]) =>
+  (node: T | null) => {
+    refs.forEach((ref) => {
+      assignRef(ref, node)
+    })
+  }
 
-    return (node: T) => {
-      refs.forEach((ref) => {
-        if (ref) assignRef(ref, node)
-      })
-    }
-  }, [refs])
+export const useMergeRefs = <T extends any = any>(...refs: (ReactRef<T> | undefined)[]) =>
+  React.useMemo(() => mergeRefs(...refs), [refs])
 
 export type FocusableElement = {
   focus(options?: FocusOptions): void

@@ -266,6 +266,7 @@ importers:
   components/overlay:
     specifiers:
       '@yamada-ui/forms': workspace:*
+      '@yamada-ui/hooks': workspace:*
       '@yamada-ui/system': workspace:*
       '@yamada-ui/transitions': workspace:*
       '@yamada-ui/utils': workspace:*
@@ -275,6 +276,7 @@ importers:
       react-remove-scroll: ^2.5.4
     dependencies:
       '@yamada-ui/forms': link:../forms
+      '@yamada-ui/hooks': link:../../hooks
       '@yamada-ui/system': link:../../system
       '@yamada-ui/transitions': link:../transitions
       '@yamada-ui/utils': link:../../utils

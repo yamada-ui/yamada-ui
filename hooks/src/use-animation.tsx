@@ -188,7 +188,7 @@ export const useAnimationObserver = ({ isOpen, ref }: UseAnimationObserverProps)
 
   return {
     present: !hidden,
-    onComplete() {
+    onAnimationComplete() {
       const ownerWindow = getOwnerWindow(ref.current)
       const event = new ownerWindow.CustomEvent('animationend', { bubbles: true })
 

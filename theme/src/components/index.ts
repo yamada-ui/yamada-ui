@@ -12,6 +12,7 @@ import { Kbd } from './kbd'
 import { Link } from './link'
 import { List } from './list'
 import { Modal } from './modal'
+import { Popover } from './popover'
 import { Progress } from './progress'
 import { Tag } from './tag'
 
@@ -28,6 +29,7 @@ export default {
   List,
   Link,
   Progress,
+  Popover,
   Breadcrumb,
   Alert,
   CloseButton,

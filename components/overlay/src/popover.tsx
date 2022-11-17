@@ -47,7 +47,6 @@ type PopoverOptions = {
   closeDelay?: number
   isLazy?: boolean
   lazyBehavior?: LazyMode
-  computePositionOnMount?: boolean
   animation?: Animation
   duration?: MotionTransitionProperties['duration']
 }
@@ -87,7 +86,6 @@ export const Popover: FC<PopoverProps> = (props) => {
     closeDelay = 200,
     isLazy,
     lazyBehavior = 'unmount',
-    computePositionOnMount,
     animation = 'scale',
     duration,
     ...rest
@@ -112,7 +110,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   const { referenceRef, getPopperProps, forceUpdate, transformOrigin } = usePopper({
     ...rest,
-    enabled: isOpen || !!computePositionOnMount,
+    enabled: isOpen,
   })
 
   useEffect(() => {

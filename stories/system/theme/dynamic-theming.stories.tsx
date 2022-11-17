@@ -69,7 +69,7 @@ export const basic = () => {
           gap='md'
           rounded='md'
           border='1px solid'
-          borderColor={['border', 'blackAlpha.200']}
+          borderColor='inherit'
           boxShadow='md'
         >
           <Heading>{themeScheme} Theme</Heading>
@@ -164,7 +164,7 @@ export const useArray = () => {
           gap='md'
           rounded='md'
           border='1px solid'
-          borderColor={['border', 'blackAlpha.200']}
+          borderColor='inherit'
           boxShadow='md'
         >
           <Heading>

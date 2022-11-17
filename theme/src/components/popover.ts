@@ -16,9 +16,10 @@ export const Popover: ComponentStyle = {
       right: '2',
     },
     header: {
-      pt: 'sm',
-      px: 'sm',
+      p: 'sm',
       gap: 'sm',
+      borderBottom: '1px solid',
+      borderColor: 'inherit',
     },
     body: {
       my: 'sm',
@@ -26,9 +27,10 @@ export const Popover: ComponentStyle = {
       gap: 'sm',
     },
     footer: {
-      px: 'sm',
-      pb: 'sm',
+      p: 'sm',
       gap: 'sm',
+      borderTop: '1px solid',
+      borderColor: 'inherit',
     },
   },
 }

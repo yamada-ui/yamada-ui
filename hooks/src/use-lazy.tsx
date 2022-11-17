@@ -33,3 +33,27 @@ export const useLazy: UseLazy = (delay, init = false) => {
 
   return [flg, { on, lazyOn, off, lazyOff, toggle, lazyToggle }]
 }
+
+export type LazyMode = 'unmount' | 'keepMounted'
+
+type LazyDisclosureProps = {
+  enabled?: boolean
+  isSelected?: boolean
+  wasSelected?: boolean
+  mode?: LazyMode
+}
+
+export const uselazyDisclosure = ({
+  wasSelected,
+  enabled,
+  isSelected,
+  mode = 'unmount',
+}: LazyDisclosureProps) => {
+  if (!enabled) return true
+
+  if (isSelected) return true
+
+  if (mode === 'keepMounted' && wasSelected) return true
+
+  return false
+}

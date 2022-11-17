@@ -7,7 +7,6 @@ type DOMElement = Element & HTMLOrSVGElement
 
 export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
   React.DOMAttributes<Y> & {
-    id?: string
     role?: React.AriaRole
     tabIndex?: number
     style?: React.CSSProperties
@@ -131,6 +130,20 @@ export const mergeRefs =
 
 export const useMergeRefs = <T extends any = any>(...refs: (ReactRef<T> | undefined)[]) =>
   React.useMemo(() => mergeRefs(...refs), [refs])
+
+export const useCallbackRef = <T extends (...args: any[]) => any>(
+  callback: T | undefined,
+  deps: React.DependencyList = [],
+) => {
+  const callbackRef = React.useRef(callback)
+
+  React.useEffect(() => {
+    callbackRef.current = callback
+  })
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return React.useCallback(((...args) => callbackRef.current?.(...args)) as T, deps)
+}
 
 export type FocusableElement = {
   focus(options?: FocusOptions): void

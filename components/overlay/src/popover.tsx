@@ -93,7 +93,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     ...rest
   } = omitThemeProps(props)
 
-  const [isOpen, onClose, onOpen, onToggle] = useDisclosure(props)
+  const [isOpen, onOpen, onClose, onToggle] = useDisclosure(props)
 
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)

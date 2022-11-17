@@ -35,15 +35,17 @@ export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProp
   SlideOptions
 
 const variants: MotionVariants = {
-  enter: ({ direction, transition, transitionEnd, delay, duration } = {}) => ({
+  enter: ({ direction, transition, transitionEnd, delay, duration, enter } = {}) => ({
     ...getSlideProps(direction).enter,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    ...enter,
   }),
-  exit: ({ direction, transition, transitionEnd, delay, duration } = {}) => ({
+  exit: ({ direction, transition, transitionEnd, delay, duration, exit } = {}) => ({
     ...getSlideProps(direction).exit,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
+    ...exit,
   }),
 }
 

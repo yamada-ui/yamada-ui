@@ -32,11 +32,13 @@ const variants: MotionVariants = {
     transitionEnd,
     delay,
     duration,
+    enter,
   } = {}) => ({
     ...(animationOpacity ? { opacity: 1 } : {}),
     height,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    ...enter,
   }),
   exit: ({
     animationOpacity,
@@ -45,11 +47,13 @@ const variants: MotionVariants = {
     transitionEnd,
     delay,
     duration,
+    exit,
   } = {}) => ({
     ...(animationOpacity ? { opacity: isNumeric(height) ? 1 : 0 } : {}),
     height,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
+    ...exit,
   }),
 }
 

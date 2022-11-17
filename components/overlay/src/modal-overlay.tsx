@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/system'
 import { fadeProps } from '@yamada-ui/transitions'
-import { cx } from '@yamada-ui/utils'
+import { cx, handlerAll } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps } from 'framer-motion'
 import { useModal } from './'
 
@@ -10,7 +10,7 @@ export type ModalOverlayProps = HTMLUIProps<'div'> &
 const MotionDiv = ui(motion.div)
 
 export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
-  ({ className, __css, ...rest }, ref) => {
+  ({ className, __css, onClick, ...rest }, ref) => {
     const { styles, closeOnOverlayClick, onOverlayClick, onClose, animation, duration } = useModal()
 
     const css: CSSUIObject = {
@@ -30,10 +30,10 @@ export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
         className={cx('ui-modal-overlay', className)}
         custom={{ duration }}
         __css={css}
-        onClick={() => {
-          onOverlayClick?.()
+        onClick={handlerAll(onClick, onOverlayClick, (event) => {
+          event.stopPropagation()
           if (closeOnOverlayClick) onClose?.()
-        }}
+        })}
         {...props}
         {...rest}
       />

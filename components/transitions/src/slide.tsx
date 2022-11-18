@@ -12,10 +12,10 @@ import {
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 
-export type SlideDirection = 'top' | 'left' | 'bottom' | 'right'
+export type SlidePlacement = 'top' | 'left' | 'bottom' | 'right'
 
-export const getSlideProps = (direction: SlideDirection = 'right') => {
-  switch (direction) {
+export const getSlideProps = (placement: SlidePlacement = 'right') => {
+  switch (placement) {
     case 'right':
       return MOTION_TRANSITION_VARIANTS.slideRight
     case 'left':
@@ -28,21 +28,21 @@ export const getSlideProps = (direction: SlideDirection = 'right') => {
 }
 
 type SlideOptions = {
-  direction?: SlideDirection
+  placement?: SlidePlacement
 }
 
 export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
   SlideOptions
 
 const variants: MotionVariants = {
-  enter: ({ direction, transition, transitionEnd, delay, duration, enter } = {}) => ({
-    ...getSlideProps(direction).enter,
+  enter: ({ placement, transition, transitionEnd, delay, duration, enter } = {}) => ({
+    ...getSlideProps(placement).enter,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
     ...enter,
   }),
-  exit: ({ direction, transition, transitionEnd, delay, duration, exit } = {}) => ({
-    ...getSlideProps(direction).exit,
+  exit: ({ placement, transition, transitionEnd, delay, duration, exit } = {}) => ({
+    ...getSlideProps(placement).exit,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
     ...exit,
@@ -63,7 +63,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
     {
       unmountOnExit,
       isOpen,
-      direction = 'right',
+      placement = 'right',
       transition,
       transitionEnd,
       delay,
@@ -76,11 +76,11 @@ export const Slide = forwardRef<SlideProps, 'div'>(
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
 
-    const custom = { direction, transition, transitionEnd, delay, duration }
+    const custom = { placement, transition, transitionEnd, delay, duration }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
-    const { position } = getSlideProps(direction)
+    const { position } = getSlideProps(placement)
 
     const css: CSSUIObject = {
       position: 'fixed',

@@ -73,7 +73,7 @@ type ModalOptions = Pick<
   allowPinchZoom?: boolean
   scrollBehavior?: ScrollBehavior
   blockScrollOnMount?: boolean
-  closeOnOverlayClick?: boolean
+  closeOnOverlay?: boolean
   closeOnEsc?: boolean
   animation?: Animation
   duration?: MotionTransitionProperties['duration']
@@ -105,7 +105,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     initialFocusRef,
     finalFocusRef,
     blockScrollOnMount = true,
-    closeOnOverlayClick = true,
+    closeOnOverlay = true,
     closeOnEsc = true,
     lockFocusAcrossFrames = true,
     animation = 'scale',
@@ -169,7 +169,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         position,
         closeButton,
         scrollBehavior,
-        closeOnOverlayClick,
+        closeOnOverlay,
         closeOnEsc,
         animation,
         duration,

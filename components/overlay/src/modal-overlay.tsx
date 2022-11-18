@@ -11,7 +11,7 @@ const MotionDiv = ui(motion.div)
 
 export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
   ({ className, __css, onClick, ...rest }, ref) => {
-    const { styles, closeOnOverlayClick, onOverlayClick, onClose, animation, duration } = useModal()
+    const { styles, closeOnOverlay, onOverlayClick, onClose, animation, duration } = useModal()
 
     const css: CSSUIObject = {
       position: 'fixed',
@@ -32,7 +32,7 @@ export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
         __css={css}
         onClick={handlerAll(onClick, onOverlayClick, (event) => {
           event.stopPropagation()
-          if (closeOnOverlayClick) onClose?.()
+          if (closeOnOverlay) onClose?.()
         })}
         {...props}
         {...rest}

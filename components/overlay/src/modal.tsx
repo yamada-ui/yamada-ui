@@ -68,7 +68,7 @@ type ModalOptions = Pick<
   onCloseComplete?: () => void
   position?: Position
   outside?: CSSUIProps['p']
-  closeButton?: boolean
+  closeOnButton?: boolean
   overlay?: boolean
   allowPinchZoom?: boolean
   scrollBehavior?: ScrollBehavior
@@ -96,7 +96,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     onCloseComplete,
     position = 'center',
     outside = 'md',
-    closeButton = true,
+    closeOnButton = true,
     overlay = true,
     allowPinchZoom = false,
     scrollBehavior = 'inside',
@@ -167,7 +167,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         onOverlayClick,
         onEsc,
         position,
-        closeButton,
+        closeOnButton,
         scrollBehavior,
         closeOnOverlay,
         closeOnEsc,
@@ -249,7 +249,7 @@ const getModalContentProps = (
 
 const ModalContent = forwardRef<ModalContentProps, 'section'>(
   ({ className, children, __css, ...rest }, ref) => {
-    const { styles, scrollBehavior, closeButton, onClose, animation, duration } = useModal()
+    const { styles, scrollBehavior, closeOnButton, onClose, animation, duration } = useModal()
 
     const validChildren = getValidChildren(children)
 
@@ -280,7 +280,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
         {...props}
         {...rest}
       >
-        {customModalCloseButton ?? (closeButton && onClose ? <ModalCloseButton /> : null)}
+        {customModalCloseButton ?? (closeOnButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
       </MotionSection>

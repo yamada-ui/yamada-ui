@@ -53,7 +53,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
     onOverlayClick,
     onEsc,
     onCloseComplete,
-    closeButton = true,
+    closeOnButton = true,
     overlay = true,
     allowPinchZoom,
     autoFocus,
@@ -82,7 +82,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
           onOverlayClick,
           onEsc,
           onCloseComplete,
-          closeButton: false,
+          closeOnButton: false,
           overlay: false,
           allowPinchZoom,
           autoFocus,
@@ -98,7 +98,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
       >
         {customDrawerOverlay ?? (overlay ? <DrawerOverlay /> : null)}
 
-        <DrawerContent {...{ direction, closeButton, ...rest }}>{cloneChildren}</DrawerContent>
+        <DrawerContent {...{ direction, closeOnButton, ...rest }}>{cloneChildren}</DrawerContent>
       </Modal>
     </DrawerProvider>
   )
@@ -107,7 +107,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
 type DrawerContentProps = Omit<DrawerProps, 'color' | 'transition' | 'isOpen' | keyof ThemeProps>
 
 export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
-  ({ className, children, direction, closeButton, ...rest }, ref) => {
+  ({ className, children, direction, closeOnButton, ...rest }, ref) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
 
@@ -137,7 +137,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
         __css={css}
         {...rest}
       >
-        {customDrawerCloseButton ?? (closeButton && onClose ? <DrawerCloseButton /> : null)}
+        {customDrawerCloseButton ?? (closeOnButton && onClose ? <DrawerCloseButton /> : null)}
 
         {cloneChildren}
       </Slide>

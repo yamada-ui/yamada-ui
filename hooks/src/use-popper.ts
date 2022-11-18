@@ -1,18 +1,20 @@
 import { createPopper, Instance, Modifier, VirtualElement, Placement } from '@popperjs/core'
+import { Token } from '@yamada-ui/styled'
 import { mergeRefs, PropGetter } from '@yamada-ui/utils'
 import { useCallback, useEffect, useRef } from 'react'
+import { useValue } from './'
 
 export type UsePopperProps = {
   enabled?: boolean
-  offset?: [number, number]
-  gutter?: number
+  offset?: Token<[number, number]>
+  gutter?: Token<number>
   preventOverflow?: boolean
   flip?: boolean
   matchWidth?: boolean
   boundary?: 'clippingParents' | 'scrollParent' | HTMLElement
   eventListeners?: boolean | { scroll?: boolean; resize?: boolean }
   strategy?: 'absolute' | 'fixed'
-  placement?: Placement
+  placement?: Token<Placement>
   modifiers?: Array<Partial<Modifier<string, any>>>
 }
 
@@ -43,18 +45,22 @@ export const usePopper = ({
   enabled = true,
   eventListeners = true,
   matchWidth,
-  offset,
-  gutter = 8,
+  offset: _offset,
+  gutter: _gutter = 8,
   flip = true,
   preventOverflow = true,
   boundary = 'clippingParents',
   strategy = 'absolute',
-  placement = 'bottom',
+  placement: _placement = 'bottom',
   modifiers,
 }: UsePopperProps = {}) => {
   const reference = useRef<Element | VirtualElement | null>(null)
   const popper = useRef<HTMLElement | null>(null)
   const instance = useRef<Instance | null>(null)
+
+  const offset = useValue(_offset)
+  const gutter = useValue(_gutter)
+  const placement = useValue(_placement)
 
   const cleanup = useRef(() => {})
 

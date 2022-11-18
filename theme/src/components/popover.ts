@@ -9,7 +9,7 @@ export const Popover: ComponentStyle = {
       borderColor: 'inherit',
       color: 'inherit',
       boxShadow: 'sm',
-      zIndex: 'ginyu',
+      zIndex: 'guldo',
     },
     closeButton: {
       top: '2',

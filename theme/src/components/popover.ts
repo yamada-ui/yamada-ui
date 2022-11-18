@@ -18,6 +18,7 @@ export const Popover: ComponentStyle = {
     header: {
       p: 'sm',
       gap: 'sm',
+      fontWeight: 'semibold',
       borderBottom: '1px solid',
       borderColor: 'inherit',
     },

@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/system'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
-import { cx, findChildren, funcAll, getValidChildren } from '@yamada-ui/utils'
+import { cx, findChildren, funcAll, getValidChildren, omitObject } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps } from 'framer-motion'
 import { PopoverProps, usePopover, PopoverCloseButton } from './'
 
@@ -60,7 +60,7 @@ const getPopoverContentProps = (
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
-  ({ className, children, ...rest }, ref) => {
+  ({ className, children, zIndex: _zIndex, ...rest }, ref) => {
     const {
       isOpen,
       closeOnButton,
@@ -78,18 +78,21 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       PopoverCloseButton,
     )
 
+    const zIndex = _zIndex ?? styles.container.zIndex
+
     const css: CSSUIObject = {
       position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       outline: 0,
-      ...styles.container,
+      ...omitObject(styles.container, ['zIndex']),
     }
 
     return (
       <ui.div
         {...getPopperProps({ style: { visibility: isOpen ? 'visible' : 'hidden' } })}
         className='ui-popover'
+        zIndex={zIndex}
       >
         <MotionSection
           className={cx('ui-popover-content', className)}

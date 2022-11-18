@@ -3,7 +3,7 @@ import { usePopover } from './'
 
 export const PopoverAnchor: FC<PropsWithChildren<{}>> = ({ children }) => {
   const child = Children.only(children) as ReactElement & { ref: RefObject<any> }
-  const { getTriggerProps } = usePopover()
+  const { getAnchorProps } = usePopover()
 
-  return cloneElement(child, getTriggerProps(child.props, child.ref))
+  return cloneElement(child, getAnchorProps(child.props, child.ref))
 }

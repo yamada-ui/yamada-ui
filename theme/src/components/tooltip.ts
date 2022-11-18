@@ -5,6 +5,7 @@ export const Tooltip: ComponentStyle = {
     rounded: 'md',
     bg: ['white', 'black'],
     border: '1px solid',
+    borderColor: 'inherit',
     px: 'sm',
     py: '0.5',
     fontWeight: 'medium',

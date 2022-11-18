@@ -7,13 +7,15 @@ import {
   MotionVariants,
   forwardRef,
   CSSUIObject,
+  Token,
+  useValue,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 
 type SlideFadeOptions = {
-  offsetX?: string | number
-  offsetY?: string | number
+  offsetX?: Token<string | number>
+  offsetY?: Token<string | number>
   reverse?: boolean
 }
 
@@ -61,8 +63,8 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
     {
       unmountOnExit,
       isOpen,
-      offsetX = 0,
-      offsetY = 8,
+      offsetX: _offsetX = 0,
+      offsetY: _offsetY = 8,
       reverse = true,
       transition,
       transitionEnd,
@@ -74,6 +76,9 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
     ref,
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
+
+    const offsetX = useValue(_offsetX)
+    const offsetY = useValue(_offsetY)
 
     const custom = { offsetX, offsetY, reverse, transition, transitionEnd, delay, duration }
 

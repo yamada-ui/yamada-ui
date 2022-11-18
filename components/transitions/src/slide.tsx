@@ -8,6 +8,8 @@ import {
   forwardRef,
   MOTION_TRANSITION_VARIANTS,
   CSSUIObject,
+  Token,
+  useValue,
 } from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
@@ -28,7 +30,7 @@ export const getSlideProps = (placement: Placement = 'right') => {
 }
 
 type SlideOptions = {
-  placement?: Placement
+  placement?: Token<Placement>
 }
 
 export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
@@ -63,7 +65,7 @@ export const Slide = forwardRef<SlideProps, 'div'>(
     {
       unmountOnExit,
       isOpen,
-      placement = 'right',
+      placement: _placement = 'right',
       transition,
       transitionEnd,
       delay,
@@ -75,6 +77,8 @@ export const Slide = forwardRef<SlideProps, 'div'>(
     ref,
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
+
+    const placement = useValue(_placement)
 
     const custom = { placement, transition, transitionEnd, delay, duration }
 

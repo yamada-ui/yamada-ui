@@ -8,6 +8,8 @@ import {
   useMultiComponentStyle,
   CSSUIProps,
   MotionTransitionProperties,
+  Token,
+  useValue,
 } from '@yamada-ui/system'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import {
@@ -31,7 +33,7 @@ import {
   DrawerOverlay,
 } from './'
 
-type Position =
+type Placement =
   | 'center'
   | 'top'
   | 'right'
@@ -66,7 +68,7 @@ type ModalOptions = Pick<
   onOverlayClick?: () => void
   onEsc?(): void
   onCloseComplete?: () => void
-  position?: Position
+  placement?: Token<Placement>
   outside?: CSSUIProps['p']
   closeOnButton?: boolean
   overlay?: boolean
@@ -79,7 +81,7 @@ type ModalOptions = Pick<
   duration?: MotionTransitionProperties['duration']
 }
 
-export type ModalProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
+export type ModalProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animation'> &
   Omit<HTMLMotionProps<'section'>, 'color' | 'transition'> &
   ThemeProps<'Modal'> &
   ModalOptions
@@ -94,7 +96,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     onOverlayClick,
     onEsc,
     onCloseComplete,
-    position = 'center',
+    placement: _placement = 'center',
     outside = 'md',
     closeOnButton = true,
     overlay = true,
@@ -139,6 +141,8 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
 
   if (drawerContent) drawerContent = cloneElement(drawerContent, { onKeyDown })
 
+  const placement = useValue(_placement)
+
   const css: CSSUIObject = {
     position: 'fixed',
     top: 0,
@@ -147,14 +151,14 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     h: '100vh',
     p: size !== 'full' ? outside : undefined,
     display: 'flex',
-    justifyContent: position.includes('right')
+    justifyContent: placement.includes('right')
       ? 'flex-start'
-      : position.includes('left')
+      : placement.includes('left')
       ? 'flex-end'
       : 'center',
-    alignItems: position.includes('top')
+    alignItems: placement.includes('top')
       ? 'flex-start'
-      : position.includes('bottom')
+      : placement.includes('bottom')
       ? 'flex-end'
       : 'center',
   }
@@ -165,12 +169,9 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         isOpen,
         onClose,
         onOverlayClick,
-        onEsc,
-        position,
         closeOnButton,
         scrollBehavior,
         closeOnOverlay,
-        closeOnEsc,
         animation,
         duration,
         styles,
@@ -209,7 +210,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
   )
 })
 
-type ModalContentProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
+type ModalContentProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animation'> &
   Omit<HTMLMotionProps<'section'>, 'color' | 'transition'>
 
 const MotionSection = ui(motion.section)

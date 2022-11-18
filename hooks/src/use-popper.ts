@@ -6,7 +6,7 @@ import { useValue } from './'
 
 export type UsePopperProps = {
   enabled?: boolean
-  offset?: Token<[number, number]>
+  offset?: [number, number]
   gutter?: Token<number>
   preventOverflow?: boolean
   flip?: boolean
@@ -45,7 +45,7 @@ export const usePopper = ({
   enabled = true,
   eventListeners = true,
   matchWidth,
-  offset: _offset,
+  offset,
   gutter: _gutter = 8,
   flip = true,
   preventOverflow = true,
@@ -58,7 +58,6 @@ export const usePopper = ({
   const popper = useRef<HTMLElement | null>(null)
   const instance = useRef<Instance | null>(null)
 
-  const offset = useValue(_offset)
   const gutter = useValue(_gutter)
   const placement = useValue(_placement)
 

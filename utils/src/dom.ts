@@ -114,7 +114,7 @@ export const hasNegativeTabIndex = (el: HTMLElement): boolean =>
 export const isTabbable = (el?: HTMLElement | null): boolean =>
   el ? isHTMLElement(el) && isFocusable(el) && !hasNegativeTabIndex(el) : false
 
-export const getOwnerWindow = (node?: Element | null): typeof globalThis =>
+export const getOwnerWindow = (node?: Element | null): Window & typeof globalThis =>
   getOwnerDocument(node)?.defaultView ?? window
 
 export const getOwnerDocument = (el?: Element | null): Document =>

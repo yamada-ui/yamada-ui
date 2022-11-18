@@ -42,6 +42,7 @@ type PopoverOptions = {
   autoFocus?: boolean
   closeOnBlur?: boolean
   closeOnEsc?: boolean
+  closeOnButton?: boolean
   trigger?: Trigger
   openDelay?: number
   closeDelay?: number
@@ -55,7 +56,10 @@ export type PopoverProps = ThemeProps<'Popover'> &
   Omit<UsePopperProps, 'enabled'> &
   PropsWithChildren<PopoverOptions>
 
-type PopoverContext = Pick<PopoverOptions, 'isOpen' | 'onClose' | 'animation' | 'duration'> & {
+type PopoverContext = Pick<
+  PopoverOptions,
+  'isOpen' | 'onClose' | 'closeOnButton' | 'animation' | 'duration'
+> & {
   onAnimationComplete: () => void
   forceUpdate: () => void | undefined
   getTriggerProps: PropGetter
@@ -81,6 +85,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     autoFocus = true,
     closeOnBlur = true,
     closeOnEsc = true,
+    closeOnButton = true,
     trigger = 'click',
     openDelay = 200,
     closeDelay = 200,
@@ -146,14 +151,14 @@ export const Popover: FC<PopoverProps> = (props) => {
   })
 
   const getPopoverProps: PropGetter = useCallback(
-    (props = {}, _ref = null) => {
+    (props = {}, ref = null) => {
       const popoverProps: DOMAttributes = {
         ...props,
         style: {
           ...props.style,
           transformOrigin,
         },
-        ref: mergeRefs(popoverRef, _ref),
+        ref: mergeRefs(popoverRef, ref),
         children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
         onKeyDown: handlerAll(props.onKeyDown, (event) => {
@@ -166,9 +171,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
           const isValidBlur = !targetIsPopover && !targetIsTrigger
 
-          if (isOpen && closeOnBlur && isValidBlur) {
-            onClose()
-          }
+          if (isOpen && closeOnBlur && isValidBlur) onClose()
         }),
       }
 
@@ -181,7 +184,7 @@ export const Popover: FC<PopoverProps> = (props) => {
           if (event.nativeEvent.relatedTarget === null) return
 
           isHoveringRef.current = false
-          setTimeout(() => onClose(), closeDelay)
+          setTimeout(onClose, closeDelay)
         })
       }
 
@@ -233,7 +236,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
         triggerProps.onMouseEnter = handlerAll(props.onMouseEnter, () => {
           isHoveringRef.current = true
-          openTimeout.current = window.setTimeout(() => onOpen(), openDelay)
+          openTimeout.current = window.setTimeout(onOpen, openDelay)
         })
 
         triggerProps.onMouseLeave = handlerAll(props.onMouseLeave, () => {
@@ -245,9 +248,7 @@ export const Popover: FC<PopoverProps> = (props) => {
           }
 
           closeTimeout.current = window.setTimeout(() => {
-            if (isHoveringRef.current === false) {
-              onClose()
-            }
+            if (isHoveringRef.current === false) onClose()
           }, closeDelay)
         })
       }
@@ -282,6 +283,7 @@ export const Popover: FC<PopoverProps> = (props) => {
       value={{
         isOpen,
         onClose,
+        closeOnButton,
         onAnimationComplete,
         forceUpdate,
         getTriggerProps,

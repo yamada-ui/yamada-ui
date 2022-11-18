@@ -1,8 +1,8 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/system'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
-import { cx, funcAll } from '@yamada-ui/utils'
+import { cx, findChildren, funcAll, getValidChildren } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps } from 'framer-motion'
-import { PopoverProps, usePopover } from './'
+import { PopoverProps, usePopover, PopoverCloseButton } from './'
 
 export type PopoverContentProps = Omit<HTMLUIProps<'section'>, keyof HTMLMotionProps<'section'>> &
   Omit<
@@ -60,9 +60,10 @@ const getPopoverContentProps = (
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
-  ({ className, ...rest }, ref) => {
+  ({ className, children, ...rest }, ref) => {
     const {
       isOpen,
+      closeOnButton,
       getPopperProps,
       getPopoverProps,
       onAnimationComplete,
@@ -70,6 +71,12 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       duration,
       styles,
     } = usePopover()
+
+    const validChildren = getValidChildren(children)
+    const [customPopoverCloseButton, ...cloneChildren] = findChildren(
+      validChildren,
+      PopoverCloseButton,
+    )
 
     const css: CSSUIObject = {
       position: 'relative',
@@ -92,7 +99,11 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
           animate={isOpen ? 'enter' : 'exit'}
           onAnimationComplete={funcAll(onAnimationComplete, rest.onAnimationComplete)}
           __css={css}
-        />
+        >
+          {customPopoverCloseButton ?? (closeOnButton ? <PopoverCloseButton /> : null)}
+
+          {cloneChildren}
+        </MotionSection>
       </ui.div>
     )
   },

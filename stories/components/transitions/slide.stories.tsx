@@ -13,7 +13,7 @@ export const basic: ComponentStory<typeof Slide> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} direction='bottom'>
+      <Slide isOpen={isOpen} placement='bottom'>
         <VStack w='full' bg='orange.500' p='md'>
           <Text color='white'>クリリンのことか……クリリンのことかーーーっ！！！！！</Text>
 
@@ -26,14 +26,14 @@ export const basic: ComponentStory<typeof Slide> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Slide> = () => {
+export const withPlacement: ComponentStory<typeof Slide> = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} direction='bottom' duration={0.7}>
+      <Slide isOpen={isOpen} placement='bottom' duration={0.7}>
         <VStack w='full' bg='orange.500' p='md'>
           <Text color='white'>クリリンのことか……クリリンのことかーーーっ！！！！！</Text>
 
@@ -53,7 +53,7 @@ export const withDirection: ComponentStory<typeof Slide> = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} direction='left'>
+      <Slide isOpen={isOpen} placement='left'>
         <VStack w='full' bg='orange.500' p='md'>
           <Text color='white'>クリリンのことか……クリリンのことかーーーっ！！！！！</Text>
 

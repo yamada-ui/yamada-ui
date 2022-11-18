@@ -12,9 +12,9 @@ import {
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 
-export type SlidePlacement = 'top' | 'left' | 'bottom' | 'right'
+type Placement = 'top' | 'left' | 'bottom' | 'right'
 
-export const getSlideProps = (placement: SlidePlacement = 'right') => {
+export const getSlideProps = (placement: Placement = 'right') => {
   switch (placement) {
     case 'right':
       return MOTION_TRANSITION_VARIANTS.slideRight
@@ -28,7 +28,7 @@ export const getSlideProps = (placement: SlidePlacement = 'right') => {
 }
 
 type SlideOptions = {
-  placement?: SlidePlacement
+  placement?: Placement
 }
 
 export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &

@@ -272,8 +272,8 @@ export const withSize: ComponentStory<typeof Dialog> = () => {
   )
 }
 
-export const withPosition: ComponentStory<typeof Dialog> = () => {
-  const [position, setPosition] = useState<DialogProps['position']>('center')
+export const withPlacement: ComponentStory<typeof Dialog> = () => {
+  const [placement, setPlacement] = useState<DialogProps['placement']>('center')
   const [isOpen, onOpen, onClose] = useDisclosure()
 
   return (
@@ -281,7 +281,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
       <Wrap gap='md'>
         <Button
           onClick={() => {
-            setPosition('center')
+            setPlacement('center')
             onOpen()
           }}
         >
@@ -290,7 +290,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top')
+            setPlacement('top')
             onOpen()
           }}
         >
@@ -299,7 +299,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top-left')
+            setPlacement('top-left')
             onOpen()
           }}
         >
@@ -308,7 +308,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('left')
+            setPlacement('left')
             onOpen()
           }}
         >
@@ -317,7 +317,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom-left')
+            setPlacement('bottom-left')
             onOpen()
           }}
         >
@@ -326,7 +326,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom')
+            setPlacement('bottom')
             onOpen()
           }}
         >
@@ -335,7 +335,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom-right')
+            setPlacement('bottom-right')
             onOpen()
           }}
         >
@@ -344,7 +344,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('right')
+            setPlacement('right')
             onOpen()
           }}
         >
@@ -353,7 +353,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top-right')
+            setPlacement('top-right')
             onOpen()
           }}
         >
@@ -364,7 +364,7 @@ export const withPosition: ComponentStory<typeof Dialog> = () => {
       <Dialog
         isOpen={isOpen}
         onClose={onClose}
-        position={position}
+        placement={placement}
         header='孫悟空'
         cancel='わけない'
         onCancel={onClose}

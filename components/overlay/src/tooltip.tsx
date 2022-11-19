@@ -21,6 +21,7 @@ import {
   Portal,
   getOwnerWindow,
   getOwnerDocument,
+  omitObject,
 } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 import { Children, cloneElement, useCallback, useEffect, useRef } from 'react'
@@ -223,7 +224,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
 
     const css: CSSUIObject = {
       position: 'relative',
-      ...styles,
+      ...omitObject(styles, ['zIndex']),
     }
 
     if (!label) return <>{children}</>

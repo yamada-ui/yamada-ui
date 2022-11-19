@@ -51,7 +51,7 @@ module.exports = function (plop) {
         templateFiles: 'plop/package/**',
         destination: `./components/{{dashCase packageName}}`,
         base: 'plop/package',
-        data: { packageName },
+        data: { packageName, componentName },
         abortOnFail: true,
       })
 

@@ -60,7 +60,7 @@ const getPopoverContentProps = (
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
-  ({ className, children, zIndex: _zIndex, ...rest }, ref) => {
+  ({ className, children, zIndex, ...rest }, ref) => {
     const {
       isOpen,
       closeOnButton,
@@ -78,8 +78,6 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       PopoverCloseButton,
     )
 
-    const zIndex = _zIndex ?? styles.container.zIndex
-
     const css: CSSUIObject = {
       position: 'relative',
       display: 'flex',
@@ -92,7 +90,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       <ui.div
         {...getPopperProps({ style: { visibility: isOpen ? 'visible' : 'hidden' } })}
         className='ui-popover'
-        zIndex={zIndex}
+        zIndex={zIndex ?? styles.container.zIndex}
       >
         <MotionSection
           className={cx('ui-popover-content', className)}

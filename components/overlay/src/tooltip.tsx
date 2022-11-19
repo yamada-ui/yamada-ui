@@ -23,7 +23,7 @@ import {
   getOwnerDocument,
 } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
-import { Children, cloneElement, useCallback, useEffect, useMemo, useRef } from 'react'
+import { Children, cloneElement, useCallback, useEffect, useRef } from 'react'
 
 type Animation = 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
 
@@ -218,12 +218,11 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
       [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
     )
 
-    const getTooltipPositionerProps: PropGetter = useMemo(getPopperProps, [getPopperProps])
-
     const child = Children.only(children) as React.ReactElement & { ref?: React.Ref<any> }
     const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
 
     const css: CSSUIObject = {
+      position: 'relative',
       ...styles,
     }
 
@@ -235,17 +234,11 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
         <AnimatePresence>
           {isOpen ? (
             <Portal>
-              <ui.div
-                {...getTooltipPositionerProps}
-                __css={{
-                  zIndex: zIndex ?? styles.zIndex,
-                  pointerEvents: 'none',
-                }}
-              >
+              <ui.div {...getPopperProps()} zIndex={zIndex ?? styles.zIndex} pointerEvents='none'>
                 <MotionDiv
                   ref={ref}
                   className={cx('ui-tooltip', className)}
-                  style={{ position: 'relative', transformOrigin }}
+                  style={{ transformOrigin }}
                   {...(animation !== 'none' ? getTooltipProps(animation, duration) : {})}
                   initial='exit'
                   animate={isOpen ? 'enter' : 'exit'}

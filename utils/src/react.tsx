@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import ReactFocusLock from 'react-focus-lock'
-import { getAllFocusable, isNumber, isString } from './'
+import { getAllFocusable, isNumber, isString, FocusableElement } from './'
 
 type DOMElement = Element & HTMLOrSVGElement
 
@@ -170,9 +170,6 @@ export const useUpdateEffect = (callback: React.EffectCallback, deps: React.Depe
   }, [])
 }
 
-export type FocusableElement = {
-  focus(options?: FocusOptions): void
-}
 export type FocusLockProps = {
   initialFocusRef?: React.RefObject<FocusableElement>
   finalFocusRef?: React.RefObject<FocusableElement>

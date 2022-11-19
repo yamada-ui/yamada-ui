@@ -39,22 +39,22 @@ const getPopoverContentProps = (
     case 'top':
       return {
         ...slideFadeProps,
-        custom: { ...custom, offsetY: -16 },
+        custom: { ...custom, offsetX: 0, offsetY: -16 },
       }
     case 'right':
       return {
         ...slideFadeProps,
-        custom: { ...custom, offsetX: 16 },
+        custom: { ...custom, offsetX: 16, offsetY: 0 },
       }
     case 'left':
       return {
         ...slideFadeProps,
-        custom: { ...custom, offsetX: -16 },
+        custom: { ...custom, offsetX: -16, offsetY: 0 },
       }
     case 'bottom':
       return {
         ...slideFadeProps,
-        custom: { ...custom, offsetY: 16 },
+        custom: { ...custom, offsetX: 0, offsetY: 16 },
       }
   }
 }
@@ -94,10 +94,11 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       >
         <MotionSection
           className={cx('ui-popover-content', className)}
-          {...getPopoverProps(rest, ref)}
           {...(animation !== 'none' ? getPopoverContentProps(animation, duration) : {})}
-          initial={false}
+          {...getPopoverProps(rest, ref)}
+          initial='exit'
           animate={isOpen ? 'enter' : 'exit'}
+          exit='exit'
           onAnimationComplete={funcAll(onAnimationComplete, rest.onAnimationComplete)}
           __css={css}
         >

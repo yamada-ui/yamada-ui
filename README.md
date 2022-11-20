@@ -22,11 +22,31 @@ $ pnpm build
 $ pnpm storybook
 ```
 
-# Generate Theme Tokens
+# Generate Component Package
 
 ```sh
-$ pnpm gen:tokens
+$ pnpm gen:pkg
+
+$ ? Enter package name: data-display
+$ ? Enter first component name: scroll-area
+$ ? Does this use a provider?: No
 ```
+
+- Please enter package and component names in kebab case
+- If the provider is true, then it is wrapped with a provider that contains the style to be used by the children.
+
+# Generate Component
+
+```sh
+$ pnpm gen:component
+
+$ ? Enter component name: font-awesome-icon
+$ ? Where does this belong?: media-and-icons
+$ ? Does this use a provider?: Yes
+```
+
+- Please enter package and component names in kebab case
+- If the provider is true, then it is wrapped with a provider that contains the style to be used by the children.
 
 # Usage
 

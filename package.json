@@ -4,6 +4,7 @@
   "engines": {
     "node": "16"
   },
+  "type": "module",
   "license": "MIT",
   "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
   "scripts": {

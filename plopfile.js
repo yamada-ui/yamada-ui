@@ -1,6 +1,6 @@
-import { promises as fs } from 'fs'
-import path from 'path'
-import findPkgs from 'find-packages'
+const fs = require('fs').promises
+const path = require('path')
+const findPkgs = require('find-packages').default
 
 const cwd = process.cwd()
 
@@ -22,7 +22,7 @@ const workspaces = [
   'typography',
 ]
 
-export default function (plop) {
+module.exports = function (plop) {
   plop.setHelper('upperCase', (text) => upperCase(camelCase(text)))
   plop.setHelper('titleCase', (text) => upperCase(titleCase(text)))
 
@@ -31,7 +31,7 @@ export default function (plop) {
 
     const { packageName } = answers
 
-    const [project] = await findPkgs.default(path.join(cwd, 'react'))
+    const [project] = await findPkgs(path.join(cwd, 'react'))
 
     const { manifest } = project
 

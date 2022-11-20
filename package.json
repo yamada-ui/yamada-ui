@@ -22,8 +22,6 @@
     "gen:tokens": "yamada-cli tokens theme/src --out styled/src/generated-theme.types.ts",
     "gen:pkg": "plop package && pnpm install",
     "gen:component": "plop component",
-    "update:dev": "tsx scripts/update-package-dev.ts",
-    "update:prod": "tsx scripts/update-package-prod.ts",
     "next:dev": "pnpm --prefix examples/next-js dev",
     "next:build": "pnpm --prefix examples/next-js build",
     "next:start": "pnpm --prefix examples/next-js start",

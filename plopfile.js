@@ -92,7 +92,7 @@ export default function (plop) {
       {
         type: 'list',
         name: 'componentType',
-        message: 'Does this use a provider?',
+        message: 'Does this use a provider?:',
         default: 'No',
         choices: ['Yes', 'No'],
       },
@@ -165,14 +165,14 @@ export default function (plop) {
       {
         type: 'list',
         name: 'packageName',
-        message: 'Where does this belong?',
+        message: 'Where does this belong?:',
         default: 'layouts',
         choices: workspaces,
       },
       {
         type: 'list',
         name: 'componentType',
-        message: 'Does this use a provider?',
+        message: 'Does this use a provider?:',
         default: 'No',
         choices: ['Yes', 'No'],
       },

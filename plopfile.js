@@ -1,6 +1,14 @@
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+import { promises as fs } from 'fs'
+import path from 'path'
+import findPkgs from 'find-packages'
 
-const camelCase = (str) => str.replace(/[-_](\w)/g, (_, c) => c.toUpperCase())
+const cwd = process.cwd()
+
+const upperCase = (t) => t.charAt(0).toUpperCase() + t.slice(1)
+const lowerCase = (t) => t.charAt(0).toLowerCase() + t.slice(1)
+const camelCase = (t) => t.replace(/[-_](\w)/g, (_, c) => c.toUpperCase())
+const dashCase = (t) => t.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase())
+const titleCase = (t) => t.replace(/[-_](\w)/g, (_, c) => ' ' + c.toUpperCase())
 
 const workspaces = [
   'data-display',
@@ -14,8 +22,59 @@ const workspaces = [
   'typography',
 ]
 
-module.exports = function (plop) {
-  plop.setHelper('capitalize', (text) => capitalize(camelCase(text)))
+export default function (plop) {
+  plop.setHelper('upperCase', (text) => upperCase(camelCase(text)))
+  plop.setHelper('titleCase', (text) => upperCase(titleCase(text)))
+
+  plop.setActionType('updateReact', async (answers) => {
+    if (!answers) return
+
+    const { packageName } = answers
+
+    const [project] = await findPkgs.default(path.join(cwd, 'react'))
+
+    const { manifest } = project
+
+    manifest.dependencies = {
+      ...manifest.dependencies,
+      [`@yamada-ui/${dashCase(lowerCase(packageName))}`]: 'workspace:*',
+    }
+
+    project.writeProjectManifest(manifest)
+
+    await fs.appendFile(
+      path.join(cwd, 'react', 'src', 'index.ts'),
+      `export * from '@yamada-ui/${dashCase(lowerCase(packageName))}'`,
+    )
+  })
+
+  plop.setActionType('updateTheme', async (answers) => {
+    if (!answers) return
+
+    const { componentName } = answers
+
+    let data = await fs.readFile(path.join(cwd, 'theme', 'src', 'components', 'index.ts'), 'utf8')
+
+    data = `import { ${upperCase(camelCase(componentName))} } from "./${componentName}"\n` + data
+
+    const keyword = 'export default {'
+    const target = data.indexOf(keyword) + keyword.length
+    data =
+      data.slice(0, target) + `\n  ${upperCase(camelCase(componentName))},` + data.slice(target)
+
+    await fs.writeFile(path.join(cwd, 'theme', 'src', 'components', 'index.ts'), data)
+  })
+
+  plop.setActionType('updateComponent', async (answers) => {
+    if (!answers) return
+
+    const { componentName, packageName } = answers
+
+    await fs.appendFile(
+      path.join(cwd, 'components', packageName, 'src', 'index.ts'),
+      `export * from './${componentName}'`,
+    )
+  })
 
   plop.setGenerator('package', {
     description: 'Generates a package',
@@ -39,7 +98,7 @@ module.exports = function (plop) {
       },
     ],
 
-    actions(answers) {
+    actions: (answers) => {
       const actions = []
 
       if (!answers) return actions
@@ -83,6 +142,14 @@ module.exports = function (plop) {
         abortOnFail: true,
       })
 
+      actions.push({
+        type: 'updateReact',
+      })
+
+      actions.push({
+        type: 'updateTheme',
+      })
+
       return actions
     },
   })
@@ -111,7 +178,7 @@ module.exports = function (plop) {
       },
     ],
 
-    actions(answers) {
+    actions: (answers) => {
       const actions = []
 
       if (!answers) return actions
@@ -144,6 +211,14 @@ module.exports = function (plop) {
         base: 'plop/component/theme',
         data: { componentName, packageName, componentType },
         abortOnFail: true,
+      })
+
+      actions.push({
+        type: 'updateComponent',
+      })
+
+      actions.push({
+        type: 'updateTheme',
       })
 
       return actions

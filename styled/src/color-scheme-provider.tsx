@@ -1,4 +1,3 @@
-import { ColorScheme, ThemeConfig } from '@yamada-ui/styled'
 import { createdDom, noop } from '@yamada-ui/utils'
 import {
   createContext,
@@ -10,7 +9,7 @@ import {
   useState,
   useContext,
 } from 'react'
-import { ColorSchemeManager, localStorageManager, rootManager } from '.'
+import { ColorSchemeManager, localStorageManager, rootManager, ColorScheme, ThemeConfig } from './'
 
 type ColorSchemeContext = {
   colorScheme: ColorScheme

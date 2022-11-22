@@ -1,5 +1,5 @@
-import { ColorScheme } from '@yamada-ui/styled'
 import { createdDom } from '@yamada-ui/utils'
+import { ColorScheme } from './'
 
 const hasSupport = () => typeof Storage !== 'undefined'
 

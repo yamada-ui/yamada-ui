@@ -1,5 +1,5 @@
 import { ResponsiveObject } from '@yamada-ui/styled'
-import { useBreakpoint } from '.'
+import { useBreakpoint } from './'
 
 export const useBreakpointValue = <T extends any>(values: ResponsiveObject<T>): T => {
   const breakpoint = useBreakpoint()

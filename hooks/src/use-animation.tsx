@@ -1,10 +1,10 @@
-import { useTheme } from '@yamada-ui/providers'
 import {
   css,
   StylesProps,
   Token,
   keyframes as emotionKeyframes,
   StyledTheme,
+  useTheme,
 } from '@yamada-ui/styled'
 import { Dict, isArray, isUndefined, runIfFunc, getOwnerWindow } from '@yamada-ui/utils'
 import * as CSS from 'csstype'

@@ -1,5 +1,11 @@
-import { useTheme, useColorScheme } from '@yamada-ui/providers'
-import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps } from '@yamada-ui/styled'
+import {
+  ComponentStyle,
+  CSSUIObject,
+  UIStyle,
+  UIStyleProps,
+  useTheme,
+  useColorScheme,
+} from '@yamada-ui/styled'
 import {
   getMemoizedObject as get,
   runIfFunc,

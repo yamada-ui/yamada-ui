@@ -9,7 +9,7 @@ import {
   isSafari,
 } from '@yamada-ui/utils'
 import { RefObject, useCallback, useRef } from 'react'
-import { useEventListener } from '.'
+import { useEventListener } from './'
 
 export type UseFocusOnHideProps = {
   focusRef: RefObject<FocusableElement>

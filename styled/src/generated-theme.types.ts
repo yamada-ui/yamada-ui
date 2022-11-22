@@ -480,11 +480,16 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
+    Alert: {
+      sizes: string & {}
+      variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
+    }
+    Badge: { sizes: string & {}; variants: 'solid' | 'subtle' | 'outline' | (string & {}) }
     Button: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
     }
-    Divider: { sizes: string & {}; variants: 'solid' | 'dashed' | 'dotted' | (string & {}) }
+    CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Dialog: {
       sizes:
         | 'xs'
@@ -501,6 +506,7 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
+    Divider: { sizes: string & {}; variants: 'solid' | 'dashed' | 'dotted' | (string & {}) }
     Drawer: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | (string & {})
       variants: string & {}
@@ -509,17 +515,6 @@ export interface GeneratedTheme extends UITheme {
       sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})
       variants: string & {}
     }
-    Badge: { sizes: string & {}; variants: 'solid' | 'subtle' | 'outline' | (string & {}) }
-    Tag: {
-      sizes: 'sm' | 'md' | 'lg' | (string & {})
-      variants: 'solid' | 'subtle' | 'outline' | (string & {})
-    }
-    Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
-    Alert: {
-      sizes: string & {}
-      variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
-    }
-    CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Modal: {
       sizes:
         | 'xs'
@@ -535,6 +530,11 @@ export interface GeneratedTheme extends UITheme {
         | 'full'
         | (string & {})
       variants: string & {}
+    }
+    Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Tag: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'solid' | 'subtle' | 'outline' | (string & {})
     }
   }
 }

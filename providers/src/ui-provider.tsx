@@ -1,9 +1,16 @@
 import { Global } from '@emotion/react'
-import { css, StyledTheme, ThemeConfig, ThemeScheme } from '@yamada-ui/styled'
+import {
+  css,
+  StyledTheme,
+  ThemeConfig,
+  ThemeScheme,
+  ThemeProvider,
+  ColorSchemeProvider,
+  useColorScheme,
+} from '@yamada-ui/styled'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
-import { ThemeProvider, ColorSchemeProvider, useColorScheme } from './'
 
 type UIContext = {
   themeScheme: ThemeScheme | undefined

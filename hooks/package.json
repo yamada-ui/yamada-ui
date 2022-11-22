@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "react-fast-compare": "^3.2.0",
     "@popperjs/core": "^2.9.3",

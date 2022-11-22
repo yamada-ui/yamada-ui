@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/hooks": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },

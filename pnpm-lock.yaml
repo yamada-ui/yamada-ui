@@ -389,7 +389,6 @@ importers:
   hooks:
     specifiers:
       '@popperjs/core': ^2.9.3
-      '@yamada-ui/providers': workspace:*
       '@yamada-ui/styled': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
@@ -398,7 +397,6 @@ importers:
       react-fast-compare: ^3.2.0
     dependencies:
       '@popperjs/core': 2.11.6
-      '@yamada-ui/providers': link:../providers
       '@yamada-ui/styled': link:../styled
       '@yamada-ui/utils': link:../utils
       csstype: 3.1.1
@@ -435,6 +433,7 @@ importers:
       '@yamada-ui/media-and-icons': workspace:*
       '@yamada-ui/navigation': workspace:*
       '@yamada-ui/overlay': workspace:*
+      '@yamada-ui/providers': workspace:*
       '@yamada-ui/system': workspace:*
       '@yamada-ui/theme': workspace:*
       '@yamada-ui/transitions': workspace:*
@@ -452,6 +451,7 @@ importers:
       '@yamada-ui/media-and-icons': link:../components/media-and-icons
       '@yamada-ui/navigation': link:../components/navigation
       '@yamada-ui/overlay': link:../components/overlay
+      '@yamada-ui/providers': link:../providers
       '@yamada-ui/system': link:../system
       '@yamada-ui/theme': link:../theme
       '@yamada-ui/transitions': link:../components/transitions
@@ -486,7 +486,6 @@ importers:
     specifiers:
       '@emotion/styled': ^11.10.4
       '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/providers': workspace:*
       '@yamada-ui/styled': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
@@ -494,7 +493,6 @@ importers:
       react: ^18.2.0
     dependencies:
       '@yamada-ui/hooks': link:../hooks
-      '@yamada-ui/providers': link:../providers
       '@yamada-ui/styled': link:../styled
       '@yamada-ui/utils': link:../utils
     devDependencies:

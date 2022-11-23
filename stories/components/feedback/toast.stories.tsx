@@ -164,7 +164,7 @@ export const withLoadingVariant = () => {
               description: 'オッス！オラ悟空！',
               status: 'loading',
               variant: 'subtle',
-              icon: { variant: 'triangle', color: 'purple.300' },
+              icon: { variant: 'triangle', color: 'black' },
             })
           }
         >
@@ -428,7 +428,7 @@ export const costomComponent = () => {
       <Button
         onClick={() =>
           toast({
-            render: () => (
+            component: () => (
               <Box color='white' py={3} px={4} bg='purple.500'>
                 ギャルのパンティーおくれーーーっ！！！！！
               </Box>

@@ -408,15 +408,19 @@ importers:
   providers:
     specifiers:
       '@emotion/react': ^11.10.4
-      '@yamada-ui/styled': workspace:*
+      '@yamada-ui/feedback': workspace:*
+      '@yamada-ui/system': workspace:*
       '@yamada-ui/theme': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
+      framer-motion: ^6.2.9
       react: ^18.2.0
     dependencies:
-      '@yamada-ui/styled': link:../styled
+      '@yamada-ui/feedback': link:../components/feedback
+      '@yamada-ui/system': link:../system
       '@yamada-ui/theme': link:../theme
       '@yamada-ui/utils': link:../utils
+      framer-motion: 6.5.1_react@18.2.0
     devDependencies:
       '@emotion/react': 11.10.4_react@18.2.0
       clean-package: 2.1.1

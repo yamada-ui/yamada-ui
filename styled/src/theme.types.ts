@@ -1,9 +1,43 @@
-import { Dict, StringLiteral, Union } from '@yamada-ui/utils'
+import { Dict, PortalProps, StringLiteral, Union } from '@yamada-ui/utils'
+import { Variants } from 'framer-motion'
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
-import { UIStyle, ThemeProps, AnalyzeBreakpointsReturn } from './'
+import { UIStyle, ThemeProps, AnalyzeBreakpointsReturn, CSSUIProps, CSSUIObject } from './'
 
 export type ThemeScheme = Union<string | number>
+
+type ToastComponentProps = ToastOptions & { onClose: () => void }
+
+type ToastOptions = ThemeProps<'Alert'> & {
+  placement?: 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
+  duration?: number | null
+  status?: 'warning' | 'info' | 'success' | 'error' | 'loading'
+  icon?: {
+    variant?:
+      | 'oval'
+      | 'grid'
+      | 'hearts'
+      | 'radio'
+      | 'audio'
+      | 'balls'
+      | 'bars'
+      | 'rotating'
+      | 'comment'
+      | 'search'
+      | 'circles'
+      | 'dots'
+      | 'triangle'
+      | 'watch'
+      | 'progress'
+    color?: CSSUIProps['color']
+    children?: React.ReactNode
+  }
+  title?: React.ReactNode
+  description?: React.ReactNode
+  component?: (props: ToastComponentProps) => React.ReactNode
+  isClosable?: boolean
+  style?: CSSUIObject
+}
 
 export type ThemeConfig = {
   initialThemeScheme?: string | number
@@ -11,6 +45,13 @@ export type ThemeConfig = {
   useSystemColorScheme?: boolean
   var?: {
     prefix?: StringLiteral
+  }
+  toast?: {
+    options?: ToastOptions
+    variants?: Variants
+    gap?: CSSUIProps['gap']
+    appendToParentPortal?: PortalProps['appendToParentPortal']
+    containerRef?: PortalProps['containerRef']
   }
 }
 
@@ -72,6 +113,7 @@ export type CustomTheme = {}
 export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
 export type StyledTheme<T> = T & {
+  __config: ThemeConfig
   __cssVars: Dict
   __cssMap: CSSMap
   __breakpoints: AnalyzeBreakpointsReturn

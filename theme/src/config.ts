@@ -9,7 +9,6 @@ export const config: ThemeConfig = {
   toast: {
     options: {
       placement: 'top',
-      variant: 'subtle',
       duration: null,
       isClosable: true,
     },

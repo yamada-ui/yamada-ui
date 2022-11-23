@@ -1,11 +1,11 @@
 import { ComponentStyle, isDefaultColor, mode } from '@yamada-ui/styled'
-import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
+import { shadeColor, toneColor, getColor } from '@yamada-ui/utils'
 
 export const Alert: ComponentStyle = {
   baseStyle: {
     container: {
       px: 4,
-      py: 4,
+      py: 3,
       rounded: 'md',
     },
     icon: {
@@ -38,8 +38,8 @@ export const Alert: ComponentStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
+            [toneColor(c, 100)(t, s), shadeColor(toneColor(c, 200)(t, s), 56)(t, s)],
+            [`${c}.100`, shadeColor(`${c}.200`, 56)(t, s)],
           )(c),
         },
         icon: { color },
@@ -64,8 +64,8 @@ export const Alert: ComponentStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
+            [toneColor(c, 100)(t, s), shadeColor(toneColor(c, 200)(t, s), 56)(t, s)],
+            [`${c}.100`, shadeColor(`${c}.200`, 56)(t, s)],
           )(c),
           pl: 3,
           borderLeft: `0.25rem solid ${color}`,
@@ -83,8 +83,8 @@ export const Alert: ComponentStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
+            [toneColor(c, 100)(t, s), shadeColor(toneColor(c, 200)(t, s), 56)(t, s)],
+            [`${c}.100`, shadeColor(`${c}.200`, 56)(t, s)],
           )(c),
           pt: 3,
           borderTop: `0.25rem solid ${color}`,

@@ -42,3 +42,27 @@ export const useDisclosure: UseDisclosure = (props: UseDisclosureProps = {}) => 
 
   return [isOpen, onOpen, onClose, onToggle]
 }
+
+export type LazyMode = 'unmount' | 'keepMounted'
+
+export type UseLazyDisclosureProps = {
+  enabled?: boolean
+  isSelected?: boolean
+  wasSelected?: boolean
+  mode?: LazyMode
+}
+
+export const useLazyDisclosure = ({
+  wasSelected,
+  enabled,
+  isSelected,
+  mode = 'unmount',
+}: UseLazyDisclosureProps) => {
+  if (!enabled) return true
+
+  if (isSelected) return true
+
+  if (mode === 'keepMounted' && wasSelected) return true
+
+  return false
+}

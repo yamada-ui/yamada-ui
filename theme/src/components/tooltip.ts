@@ -13,6 +13,6 @@ export const Tooltip: ComponentStyle = {
     color: 'inherit',
     boxShadow: ['md', 'dark-lg'],
     maxW: 'xs',
-    zIndex: 'dodoria',
+    zIndex: 'zarbon',
   },
 }

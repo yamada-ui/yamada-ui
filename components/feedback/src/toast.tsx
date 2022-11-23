@@ -87,18 +87,14 @@ const createToast = (
   }
 }
 
-type CreateRenderToastOptions = UseToastOptions & {
-  component?: React.FC<ToastProps>
-}
-
-const createRender = (options: CreateRenderToastOptions = {}): FC<RenderProps> => {
-  const { render, component: Component = Toast } = options
+const createRender = (options: UseToastOptions): FC<RenderProps> => {
+  const { render } = options
 
   const Render: FC<RenderProps> = (props) => {
     if (typeof render === 'function') {
       return render({ ...props, ...options }) as JSX.Element
     } else {
-      return <Component {...props} {...options} />
+      return <Toast {...props} {...options} />
     }
   }
 

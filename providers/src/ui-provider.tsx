@@ -11,6 +11,7 @@ import {
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
+import { ToastProvider } from './'
 
 type UIContext = {
   themeScheme: ThemeScheme | undefined
@@ -74,6 +75,8 @@ export const UIProvider: FC<UIProviderProps> = ({
           <GlobalStyle />
 
           {children}
+
+          <ToastProvider {...config.toast} />
         </ColorSchemeProvider>
       </ThemeProvider>
     </UIContext.Provider>

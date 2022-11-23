@@ -23,6 +23,7 @@
     "react-loader-spinner": "^5.3.4",
     "@yamada-ui/system": "workspace:*",
     "@yamada-ui/media-and-icons": "workspace:*",
+    "@yamada-ui/forms": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

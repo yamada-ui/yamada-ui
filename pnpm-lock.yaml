@@ -188,6 +188,7 @@ importers:
 
   components/feedback:
     specifiers:
+      '@yamada-ui/forms': workspace:*
       '@yamada-ui/media-and-icons': workspace:*
       '@yamada-ui/system': workspace:*
       '@yamada-ui/utils': workspace:*
@@ -195,6 +196,7 @@ importers:
       react: ^18.2.0
       react-loader-spinner: ^5.3.4
     dependencies:
+      '@yamada-ui/forms': link:../forms
       '@yamada-ui/media-and-icons': link:../media-and-icons
       '@yamada-ui/system': link:../../system
       '@yamada-ui/utils': link:../../utils

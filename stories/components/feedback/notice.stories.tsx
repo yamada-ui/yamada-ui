@@ -1,57 +1,57 @@
-import { useToast, Button, Wrap, Center, Box } from '@yamada-ui/react'
+import { useNotice, Button, Wrap, Center, Box } from '@yamada-ui/react'
 import { useRef } from 'react'
 
 export default {
-  title: 'Components / Feedback / Toast',
+  title: 'Components / Feedback / Notice',
 }
 
 export const basic = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Button
         onClick={() =>
-          toast({
+          notice({
             title: '孫悟空',
             description: 'オッス！オラ悟空！',
           })
         }
       >
-        Show Toast
+        Show Notice
       </Button>
     </Center>
   )
 }
 
 export const withDuration = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Button
         onClick={() =>
-          toast({
+          notice({
             title: '孫悟空',
             description: 'オッス！オラ悟空！',
             duration: 30000,
           })
         }
       >
-        Show Toast
+        Show Notice
       </Button>
     </Center>
   )
 }
 
 export const keepStay = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Button
         onClick={() =>
-          toast({
+          notice({
             title: '孫悟空',
             description: 'オッス！オラ悟空！',
             duration: null,
@@ -59,64 +59,64 @@ export const keepStay = () => {
           })
         }
       >
-        Show Toast
+        Show Notice
       </Button>
     </Center>
   )
 }
 
 export const withVariant = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               variant: 'solid',
             })
           }
         >
-          Show solid Toast
+          Show solid Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               variant: 'subtle',
             })
           }
         >
-          Show subtle Toast
+          Show subtle Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               variant: 'top-accent',
             })
           }
         >
-          Show top accent Toast
+          Show top accent Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               variant: 'left-accent',
             })
           }
         >
-          Show left accent Toast
+          Show left accent Notice
         </Button>
       </Wrap>
     </Center>
@@ -124,14 +124,14 @@ export const withVariant = () => {
 }
 
 export const withLoadingVariant = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'loading',
@@ -140,12 +140,12 @@ export const withLoadingVariant = () => {
             })
           }
         >
-          Show Toast
+          Show Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'loading',
@@ -154,12 +154,12 @@ export const withLoadingVariant = () => {
             })
           }
         >
-          Show Toast
+          Show Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'loading',
@@ -168,12 +168,12 @@ export const withLoadingVariant = () => {
             })
           }
         >
-          Show Toast
+          Show Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'loading',
@@ -182,7 +182,7 @@ export const withLoadingVariant = () => {
             })
           }
         >
-          Show Toast
+          Show Notice
         </Button>
       </Wrap>
     </Center>
@@ -190,69 +190,69 @@ export const withLoadingVariant = () => {
 }
 
 export const withStatus = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'info',
             })
           }
         >
-          Show info Toast
+          Show info Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'success',
             })
           }
         >
-          Show success Toast
+          Show success Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'warning',
             })
           }
         >
-          Show warning Toast
+          Show warning Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'error',
             })
           }
         >
-          Show danger Toast
+          Show danger Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'loading',
             })
           }
         >
-          Show loading Toast
+          Show loading Notice
         </Button>
       </Wrap>
     </Center>
@@ -260,14 +260,14 @@ export const withStatus = () => {
 }
 
 export const withColorStyle = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'info',
@@ -275,12 +275,12 @@ export const withColorStyle = () => {
             })
           }
         >
-          Show green Toast
+          Show green Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'success',
@@ -288,12 +288,12 @@ export const withColorStyle = () => {
             })
           }
         >
-          Show purple Toast
+          Show purple Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'warning',
@@ -301,12 +301,12 @@ export const withColorStyle = () => {
             })
           }
         >
-          Show gray Toast
+          Show gray Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'error',
@@ -314,7 +314,7 @@ export const withColorStyle = () => {
             })
           }
         >
-          Show pink Toast
+          Show pink Notice
         </Button>
       </Wrap>
     </Center>
@@ -322,77 +322,77 @@ export const withColorStyle = () => {
 }
 
 export const withPlacement = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh' flexDirection='column' gap='md'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               description: 'オッス！オラ悟空！',
               placement: 'top-left',
             })
           }
         >
-          Show top left Toast
+          Show top left Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               description: 'オッス！オラ悟空！',
               placement: 'top',
             })
           }
         >
-          Show top Toast
+          Show top Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               description: 'オッス！オラ悟空！',
               placement: 'top-right',
             })
           }
         >
-          Show top right Toast
+          Show top right Notice
         </Button>
       </Wrap>
 
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               description: 'オッス！オラ悟空！',
               placement: 'bottom-left',
             })
           }
         >
-          Show bottom left Toast
+          Show bottom left Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               description: 'オッス！オラ悟空！',
               placement: 'bottom',
             })
           }
         >
-          Show bottom Toast
+          Show bottom Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               description: 'オッス！オラ悟空！',
               placement: 'bottom-right',
             })
           }
         >
-          Show bottom right Toast
+          Show bottom right Notice
         </Button>
       </Wrap>
     </Center>
@@ -400,13 +400,13 @@ export const withPlacement = () => {
 }
 
 export const withIsClosable = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Button
         onClick={() =>
-          toast({
+          notice({
             title: '孫悟空',
             description: 'オッス！オラ悟空！',
             duration: 30000,
@@ -414,20 +414,20 @@ export const withIsClosable = () => {
           })
         }
       >
-        Show Toast
+        Show Notice
       </Button>
     </Center>
   )
 }
 
 export const costomComponent = () => {
-  const toast = useToast()
+  const notice = useNotice()
 
   return (
     <Center w='100vw' h='100vh'>
       <Button
         onClick={() =>
-          toast({
+          notice({
             component: () => (
               <Box color='white' py={3} px={4} bg='purple.500'>
                 ギャルのパンティーおくれーーーっ！！！！！
@@ -436,18 +436,18 @@ export const costomComponent = () => {
           })
         }
       >
-        Show Toast
+        Show Notice
       </Button>
     </Center>
   )
 }
 
 export const useClose = () => {
-  const toast = useToast()
+  const notice = useNotice()
   const ref = useRef<string | number | undefined>(undefined)
 
   const onOpen = () => {
-    ref.current = toast({
+    ref.current = notice({
       title: '孫悟空',
       description: 'オッス！オラ悟空！',
       duration: 30000,
@@ -456,30 +456,30 @@ export const useClose = () => {
   }
 
   const onClose = () => {
-    if (ref.current) toast.close(ref.current)
+    if (ref.current) notice.close(ref.current)
   }
 
   const onCloseAll = () => {
-    toast.closeAll()
+    notice.closeAll()
   }
 
   return (
     <Center w='100vw' h='100vh'>
       <Wrap gap='md'>
-        <Button onClick={onOpen}>Show Toast</Button>
-        <Button onClick={onClose}>Close last Toast</Button>
-        <Button onClick={onCloseAll}>Close all Toast</Button>
+        <Button onClick={onOpen}>Show Notice</Button>
+        <Button onClick={onClose}>Close last Notice</Button>
+        <Button onClick={onCloseAll}>Close all Notice</Button>
       </Wrap>
     </Center>
   )
 }
 
 export const useUpdate = () => {
-  const toast = useToast()
+  const notice = useNotice()
   const ref = useRef<string | number | undefined>(undefined)
 
   const onOpen = () => {
-    ref.current = toast({
+    ref.current = notice({
       title: '孫悟空',
       description: 'オッス！オラ悟空！',
       colorStyle: 'orange',
@@ -489,7 +489,7 @@ export const useUpdate = () => {
 
   const onUpdate = () => {
     if (ref.current)
-      toast.update(ref.current, {
+      notice.update(ref.current, {
         title: 'ベジータ',
         description: 'よくも…よくも…オレの…ブルマを!!',
         colorStyle: 'blue',
@@ -500,15 +500,15 @@ export const useUpdate = () => {
   return (
     <Center w='100vw' h='100vh'>
       <Wrap gap='md'>
-        <Button onClick={onOpen}>Show Toast</Button>
-        <Button onClick={onUpdate}>Update last Toast</Button>
+        <Button onClick={onOpen}>Show Notice</Button>
+        <Button onClick={onUpdate}>Update last Notice</Button>
       </Wrap>
     </Center>
   )
 }
 
 export const customStyle = () => {
-  const toast = useToast({
+  const notice = useNotice({
     style: {
       maxW: '100%',
       minW: '100%',
@@ -520,19 +520,19 @@ export const customStyle = () => {
       <Wrap gap='md'>
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               isClosable: true,
             })
           }
         >
-          Show Toast
+          Show Notice
         </Button>
 
         <Button
           onClick={() =>
-            toast({
+            notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               isClosable: true,
@@ -542,7 +542,7 @@ export const customStyle = () => {
             })
           }
         >
-          Show individual style Toast
+          Show individual style Notice
         </Button>
       </Wrap>
     </Center>

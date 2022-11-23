@@ -6,9 +6,9 @@ import { UIStyle, ThemeProps, AnalyzeBreakpointsReturn, CSSUIProps, CSSUIObject 
 
 export type ThemeScheme = Union<string | number>
 
-type ToastComponentProps = ToastOptions & { onClose: () => void }
+type NoticetComponentProps = NoticetOptions & { onClose: () => void }
 
-type ToastOptions = ThemeProps<'Alert'> & {
+type NoticetOptions = ThemeProps<'Alert'> & {
   placement?: 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
   duration?: number | null
   status?: 'warning' | 'info' | 'success' | 'error' | 'loading'
@@ -34,7 +34,7 @@ type ToastOptions = ThemeProps<'Alert'> & {
   }
   title?: React.ReactNode
   description?: React.ReactNode
-  component?: (props: ToastComponentProps) => React.ReactNode
+  component?: (props: NoticetComponentProps) => React.ReactNode
   isClosable?: boolean
   style?: CSSUIObject
 }
@@ -46,8 +46,8 @@ export type ThemeConfig = {
   var?: {
     prefix?: StringLiteral
   }
-  toast?: {
-    options?: ToastOptions
+  notice?: {
+    options?: NoticetOptions
     variants?: Variants
     gap?: CSSUIProps['gap']
     appendToParentPortal?: PortalProps['appendToParentPortal']

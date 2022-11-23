@@ -1,29 +1,29 @@
-import { toastStore, ToastOptions } from '@yamada-ui/feedback'
+import { noticeStore, NoticeOptions } from '@yamada-ui/feedback'
 import { ui, CSSUIObject, CSSUIProps, useTimeout } from '@yamada-ui/system'
 import { Portal, PortalProps, runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
 import { AnimatePresence, motion, useIsPresent, Variants } from 'framer-motion'
 import { memo, useEffect, useState, useSyncExternalStore } from 'react'
 
-export type ToastProviderProps = {
+export type NoticeProviderProps = {
   variants?: Variants
   gap?: CSSUIProps['gap']
   appendToParentPortal?: PortalProps['appendToParentPortal']
   containerRef?: PortalProps['containerRef']
 }
 
-export const ToastProvider = ({
+export const NoticeProvider = ({
   variants,
   gap = 'md',
   appendToParentPortal,
   containerRef,
-}: ToastProviderProps) => {
+}: NoticeProviderProps) => {
   const state = useSyncExternalStore(
-    toastStore.subscribe,
-    toastStore.getSnapshot,
-    toastStore.getSnapshot,
+    noticeStore.subscribe,
+    noticeStore.getSnapshot,
+    noticeStore.getSnapshot,
   )
 
-  const components = Object.entries(state).map(([placement, toasts]) => {
+  const components = Object.entries(state).map(([placement, notices]) => {
     const top = placement.includes('top') ? 'env(safe-area-inset-top, 0px)' : undefined
     const bottom = placement.includes('bottom') ? 'env(safe-area-inset-bottom, 0px)' : undefined
     const right = !placement.includes('left') ? 'env(safe-area-inset-right, 0px)' : undefined
@@ -44,10 +44,10 @@ export const ToastProvider = ({
     }
 
     return (
-      <ui.ul key={placement} className='ui-toast-list' __css={css}>
+      <ui.ul key={placement} className='ui-notice-list' __css={css}>
         <AnimatePresence initial={false}>
-          {toasts.map((toast) => (
-            <ToastComponent key={toast.id} variants={variants} {...toast} />
+          {notices.map((notice) => (
+            <NoticeComponent key={notice.id} variants={variants} {...notice} />
           ))}
         </AnimatePresence>
       </ui.ul>
@@ -87,9 +87,9 @@ const defaultVariants: Variants = {
   },
 }
 
-type ToastComponentProps = ToastOptions & { variants?: Variants }
+type NoticeComponentProps = NoticeOptions & { variants?: Variants }
 
-const ToastComponent = memo(
+const NoticeComponent = memo(
   ({
     variants = defaultVariants,
     placement,
@@ -99,7 +99,7 @@ const ToastComponent = memo(
     isDelete = false,
     onDelete,
     style,
-  }: ToastComponentProps) => {
+  }: NoticeComponentProps) => {
     const [delay, setDelay] = useState(duration)
     const isPresent = useIsPresent()
 
@@ -134,7 +134,7 @@ const ToastComponent = memo(
     return (
       <motion.li
         layout
-        className='ui-toast'
+        className='ui-notice'
         variants={variants}
         initial='initial'
         animate='animate'
@@ -151,7 +151,7 @@ const ToastComponent = memo(
             : 'center',
         }}
       >
-        <ui.div className='ui-toast-container' __css={css}>
+        <ui.div className='ui-notice-container' __css={css}>
           {runIfFunc(message, { onClose })}
         </ui.div>
       </motion.li>
@@ -159,4 +159,4 @@ const ToastComponent = memo(
   },
 )
 
-ToastComponent.displayName = 'ToastComponent'
+NoticeComponent.displayName = 'NoticeComponent'

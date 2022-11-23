@@ -6,7 +6,7 @@ export const config: ThemeConfig = {
   var: {
     prefix: 'ui',
   },
-  toast: {
+  notice: {
     options: {
       placement: 'top',
       duration: null,

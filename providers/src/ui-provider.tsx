@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   ColorSchemeProvider,
   useColorScheme,
-} from '@yamada-ui/styled'
+} from '@yamada-ui/system'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'

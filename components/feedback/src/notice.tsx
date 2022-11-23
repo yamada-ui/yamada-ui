@@ -11,6 +11,7 @@ export type NoticeComponentProps = UseNoticeOptions & { onClose: () => void }
 export type UseNoticeOptions = ThemeProps<'Alert'> & {
   placement?: Placement
   duration?: number | null
+  limit?: number
   status?: AlertProps['status']
   icon?: {
     variant?: AlertIconProps['variant']
@@ -68,7 +69,7 @@ let counter = 0
 
 const createNotice = (
   message: (props: NoticeComponentProps) => React.ReactNode,
-  { id, placement = 'top', duration, onCloseComplete, status, style }: CreateNoticeOptions = {},
+  { id, placement = 'top', duration, onCloseComplete, status, style }: CreateNoticeOptions,
 ) => {
   counter += 1
 
@@ -145,7 +146,7 @@ type Store = {
   getSnapshot: () => State
   create: (
     message: (props: NoticeComponentProps) => React.ReactNode,
-    options?: CreateNoticeOptions,
+    options: UseNoticeOptions,
   ) => string | number
   close: (id: string | number) => void
   closeAll: (options?: { placement?: Placement[] }) => void
@@ -192,13 +193,30 @@ const createNoticeStore = (initialState: State): Store => {
     },
 
     create: (message, options) => {
+      const limit = (options.limit ?? 0) - 1
+
       const notice = createNotice(message, options)
       const { placement, id } = notice
 
       setState((prev) => {
+        let prevNotices = prev[placement] ?? []
+
+        if (limit > 0 && prevNotices.length > limit) {
+          const n = prevNotices.length - limit
+          const notices = placement.includes('top')
+            ? prevNotices.slice(n * -1)
+            : prevNotices.slice(0, n)
+
+          const ids = notices.map(({ id }) => id)
+
+          prevNotices = prevNotices.map((notice) =>
+            ids.includes(notice.id) ? { ...notice, isDelete: true } : notice,
+          )
+        }
+
         const notices = placement.includes('top')
-          ? [notice, ...(prev[placement] ?? [])]
-          : [...(prev[placement] ?? []), notice]
+          ? [notice, ...prevNotices]
+          : [...prevNotices, notice]
 
         return { ...prev, [placement]: notices }
       })
@@ -255,11 +273,9 @@ const createNoticeStore = (initialState: State): Store => {
 
         return {
           ...prev,
-          [placement]: prev[placement].map((notice) => {
-            if (notice.id == id) return { ...notice, isDelete: true }
-
-            return notice
-          }),
+          [placement]: prev[placement].map((notice) =>
+            notice.id == id ? { ...notice, isDelete: true } : notice,
+          ),
         }
       })
     },

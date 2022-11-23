@@ -11,6 +11,7 @@ type NoticetComponentProps = NoticetOptions & { onClose: () => void }
 type NoticetOptions = ThemeProps<'Alert'> & {
   placement?: 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
   duration?: number | null
+  limit?: number
   status?: 'warning' | 'info' | 'success' | 'error' | 'loading'
   icon?: {
     variant?:

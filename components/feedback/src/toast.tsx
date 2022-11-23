@@ -1,14 +1,14 @@
 import { CloseButton } from '@yamada-ui/forms'
-import { ui, CSSUIObject, ThemeProps } from '@yamada-ui/system'
+import { ui, useTheme, CSSUIObject, ThemeProps } from '@yamada-ui/system'
+import { merge } from '@yamada-ui/utils'
 import { FC, useMemo } from 'react'
 import { AlertProps, AlertIconProps, Alert, AlertDescription, AlertIcon, AlertTitle } from './'
 
 type Placement = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
 
-type RenderProps = UseToastOptions & { onClose: () => void }
+export type ToastComponentProps = UseToastOptions & { onClose: () => void }
 
 export type UseToastOptions = ThemeProps<'Alert'> & {
-  id?: string | number
   placement?: Placement
   duration?: number | null
   status?: AlertProps['status']
@@ -20,17 +20,17 @@ export type UseToastOptions = ThemeProps<'Alert'> & {
   title?: React.ReactNode
   description?: React.ReactNode
   isClosable?: boolean
-  render?: (props: RenderProps) => React.ReactNode
+  component?: (props: ToastComponentProps) => React.ReactNode
   onCloseComplete?: () => void
   style?: CSSUIObject
 }
 
 export type ToastOptions = {
-  id: UseToastOptions['id']
+  id: string | number
   placement: Placement
   duration: UseToastOptions['duration']
   status: AlertProps['status']
-  message: (props: RenderProps) => React.ReactNode
+  message: (props: ToastComponentProps) => React.ReactNode
   isDelete?: boolean
   onDelete: () => void
   onCloseComplete?: () => void
@@ -67,7 +67,7 @@ type CreateToastOptions = Partial<
 let counter = 0
 
 const createToast = (
-  message: (props: RenderProps) => React.ReactNode,
+  message: (props: ToastComponentProps) => React.ReactNode,
   { id, placement = 'top', duration, onCloseComplete, status, style }: CreateToastOptions = {},
 ) => {
   counter += 1
@@ -87,12 +87,12 @@ const createToast = (
   }
 }
 
-const createRender = (options: UseToastOptions): FC<RenderProps> => {
-  const { render } = options
+const createRender = (options: UseToastOptions): FC<ToastComponentProps> => {
+  const { component } = options
 
-  const Render: FC<RenderProps> = (props) => {
-    if (typeof render === 'function') {
-      return render({ ...props, ...options }) as JSX.Element
+  const Render: FC<ToastComponentProps> = (props) => {
+    if (typeof component === 'function') {
+      return component({ ...props, ...options }) as JSX.Element
     } else {
       return <Toast {...props} {...options} />
     }
@@ -101,9 +101,16 @@ const createRender = (options: UseToastOptions): FC<RenderProps> => {
   return Render
 }
 
-const createToastFunc = (defaultOptions?: UseToastOptions) => {
-  const toast = (options?: UseToastOptions) => {
-    options = { ...defaultOptions, ...options }
+const createToastFunc = (defaultOptions: UseToastOptions) => {
+  const { theme } = useTheme()
+
+  const themeOptions = theme.__config.toast?.options ?? {}
+
+  const computedOptions = (options: UseToastOptions) =>
+    merge(themeOptions, merge(defaultOptions, options))
+
+  const toast = (options: UseToastOptions = {}) => {
+    options = computedOptions(options)
 
     const message = createRender(options)
 
@@ -111,7 +118,7 @@ const createToastFunc = (defaultOptions?: UseToastOptions) => {
   }
 
   toast.update = (id: string | number, options: Omit<UseToastOptions, 'id'>) => {
-    options = { ...defaultOptions, ...options }
+    options = computedOptions(options)
 
     toastStore.update(id, options)
   }
@@ -126,7 +133,7 @@ const createToastFunc = (defaultOptions?: UseToastOptions) => {
 type CreateToastReturn = ReturnType<typeof createToastFunc>
 
 export const useToast = (defaultOptions?: UseToastOptions): CreateToastReturn => {
-  return useMemo(() => createToastFunc(defaultOptions), [defaultOptions])
+  return useMemo(() => createToastFunc(defaultOptions ?? {}), [defaultOptions])
 }
 
 type State = {
@@ -137,7 +144,7 @@ type Store = {
   subscribe: (onStoreChange: () => void) => () => void
   getSnapshot: () => State
   create: (
-    message: (props: RenderProps) => React.ReactNode,
+    message: (props: ToastComponentProps) => React.ReactNode,
     options?: CreateToastOptions,
   ) => string | number
   close: (id: string | number) => void

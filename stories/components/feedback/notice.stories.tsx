@@ -548,3 +548,22 @@ export const customStyle = () => {
     </Center>
   )
 }
+
+export const useLimit = () => {
+  const notice = useNotice({ limit: 3 })
+
+  return (
+    <Center w='100vw' h='100vh'>
+      <Button
+        onClick={() =>
+          notice({
+            title: '孫悟空',
+            description: 'オッス！オラ悟空！',
+          })
+        }
+      >
+        Show Notice
+      </Button>
+    </Center>
+  )
+}

@@ -420,28 +420,6 @@ export const withIsClosable = () => {
   )
 }
 
-export const costomComponent = () => {
-  const notice = useNotice()
-
-  return (
-    <Center w='100vw' h='100vh'>
-      <Button
-        onClick={() =>
-          notice({
-            component: () => (
-              <Box color='white' py={3} px={4} bg='purple.500'>
-                ギャルのパンティーおくれーーーっ！！！！！
-              </Box>
-            ),
-          })
-        }
-      >
-        Show Notice
-      </Button>
-    </Center>
-  )
-}
-
 export const useClose = () => {
   const notice = useNotice()
   const ref = useRef<string | number | undefined>(undefined)
@@ -507,6 +485,47 @@ export const useUpdate = () => {
   )
 }
 
+export const useLimit = () => {
+  const notice = useNotice({ limit: 3 })
+
+  return (
+    <Center w='100vw' h='100vh'>
+      <Button
+        onClick={() =>
+          notice({
+            title: '孫悟空',
+            description: 'オッス！オラ悟空！',
+          })
+        }
+      >
+        Show Notice
+      </Button>
+    </Center>
+  )
+}
+
+export const costomComponent = () => {
+  const notice = useNotice()
+
+  return (
+    <Center w='100vw' h='100vh'>
+      <Button
+        onClick={() =>
+          notice({
+            component: () => (
+              <Box color='white' py={3} px={4} bg='purple.500'>
+                ギャルのパンティーおくれーーーっ！！！！！
+              </Box>
+            ),
+          })
+        }
+      >
+        Show Notice
+      </Button>
+    </Center>
+  )
+}
+
 export const customStyle = () => {
   const notice = useNotice({
     style: {
@@ -545,25 +564,6 @@ export const customStyle = () => {
           Show individual style Notice
         </Button>
       </Wrap>
-    </Center>
-  )
-}
-
-export const useLimit = () => {
-  const notice = useNotice({ limit: 3 })
-
-  return (
-    <Center w='100vw' h='100vh'>
-      <Button
-        onClick={() =>
-          notice({
-            title: '孫悟空',
-            description: 'オッス！オラ悟空！',
-          })
-        }
-      >
-        Show Notice
-      </Button>
     </Center>
   )
 }

@@ -289,14 +289,15 @@ const Toast: FC<ToastProps> = ({
       colorStyle={colorStyle}
       alignItems='start'
       boxShadow='lg'
+      pe={isClosable ? 8 : undefined}
     >
       <AlertIcon variant={icon?.variant} color={icon?.color}>
         {icon?.children}
       </AlertIcon>
 
-      <ui.div>
-        {title ? <AlertTitle>{title}</AlertTitle> : null}
-        {description ? <AlertDescription>{description}</AlertDescription> : null}
+      <ui.div flex='1'>
+        {title ? <AlertTitle noOfLines={1}>{title}</AlertTitle> : null}
+        {description ? <AlertDescription noOfLines={3}>{description}</AlertDescription> : null}
       </ui.div>
 
       {isClosable ? (

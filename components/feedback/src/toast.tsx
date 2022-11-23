@@ -276,7 +276,7 @@ export type ToastProps = Omit<AlertProps, keyof UseToastOptions> &
   }
 
 const Toast: FC<ToastProps> = ({
-  variant = 'solid',
+  variant = 'subtle',
   colorStyle,
   status,
   icon,

@@ -294,7 +294,7 @@ const Toast: FC<ToastProps> = ({
       boxShadow='lg'
       pe={isClosable ? 8 : undefined}
     >
-      <AlertIcon variant={icon?.variant} color={icon?.color}>
+      <AlertIcon variant={icon?.variant} {...(icon?.color ? { color: icon.color } : {})}>
         {icon?.children}
       </AlertIcon>
 

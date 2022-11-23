@@ -7,7 +7,7 @@ import {
   useDisclosure,
   usePopper,
   UsePopperProps,
-  uselazyDisclosure,
+  useLazyDisclosure,
   LazyMode,
   useFocusOnHide,
   useFocusOnShow,
@@ -141,7 +141,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     shouldFocus: autoFocus && trigger === 'click',
   })
 
-  const shouldRenderChildren = uselazyDisclosure({
+  const shouldRenderChildren = useLazyDisclosure({
     wasSelected: hasBeenOpened.current,
     enabled: isLazy,
     mode: lazyBehavior,

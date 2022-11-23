@@ -9,8 +9,6 @@ export const config: ThemeConfig = {
   notice: {
     options: {
       placement: 'top',
-      duration: null,
-      isClosable: true,
     },
   },
 }

@@ -54,7 +54,8 @@ export type NoticeConfigOptions = ThemeProps<'Alert'> & {
 }
 
 export type LoadingComponentProps = {
-  timeout: number | null | undefined
+  variant: LoadingVariant | undefined
+  timeout: number | null
   message: ReactNode | undefined
   onFinish: () => void
 }
@@ -62,7 +63,6 @@ export type LoadingComponentProps = {
 type LoadingConfigOptions = {
   initialState?: boolean
   variant?: LoadingVariant
-  variants?: Variants
   timeout?: number | null
   component?: (props: LoadingComponentProps) => ReactNode
   appendToParentPortal?: PortalProps['appendToParentPortal']

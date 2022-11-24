@@ -333,7 +333,7 @@ const LoadingScreenComponent = memo(
           flexDirection='column'
           justifyContent='center'
           alignItems='center'
-          gap='md'
+          gap='sm'
         >
           <Loading size='6xs' {...icon} />
           {message ? (
@@ -395,7 +395,7 @@ const LoadingPageComponent = memo(
           flexDirection='column'
           justifyContent='center'
           alignItems='center'
-          gap='md'
+          gap='sm'
           rounded='md'
           boxShadow={['lg', 'dark-lg']}
         >

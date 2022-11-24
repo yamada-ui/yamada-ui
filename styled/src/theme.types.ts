@@ -54,7 +54,8 @@ export type NoticeConfigOptions = ThemeProps<'Alert'> & {
 }
 
 export type LoadingComponentProps = {
-  variant: LoadingVariant | undefined
+  icon: LoadingConfigOptions['icon']
+  text: LoadingConfigOptions['text']
   timeout: number | null
   message: ReactNode | undefined
   onFinish: () => void
@@ -62,7 +63,20 @@ export type LoadingComponentProps = {
 
 type LoadingConfigOptions = {
   initialState?: boolean
-  variant?: LoadingVariant
+  icon?: {
+    variant?: LoadingVariant
+    color?: CSSUIProps['color']
+    secondaryColor?: CSSUIProps['color']
+    size?: CSSUIProps['boxSize']
+  }
+  text?: {
+    fontFamily?: CSSUIProps['fontFamily']
+    color?: CSSUIProps['color']
+    fontSize?: CSSUIProps['fontSize']
+    fontWeight?: CSSUIProps['fontWeight']
+    letterSpacing?: CSSUIProps['letterSpacing']
+    lineHeight?: CSSUIProps['letterSpacing']
+  }
   timeout?: number | null
   component?: (props: LoadingComponentProps) => ReactNode
   appendToParentPortal?: PortalProps['appendToParentPortal']
@@ -87,6 +101,7 @@ export type ThemeConfig = {
     screen?: LoadingConfigOptions
     page?: LoadingConfigOptions
     background?: LoadingConfigOptions
+    custom?: LoadingConfigOptions
   }
 }
 

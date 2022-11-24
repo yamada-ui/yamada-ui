@@ -1,7 +1,7 @@
 import { CloseButton } from '@yamada-ui/forms'
 import { ui, useTheme, CSSUIObject, ThemeProps } from '@yamada-ui/system'
 import { merge } from '@yamada-ui/utils'
-import { FC, useMemo } from 'react'
+import { FC, ReactNode, useMemo } from 'react'
 import { AlertProps, AlertIconProps, Alert, AlertDescription, AlertIcon, AlertTitle } from '.'
 
 type Placement = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
@@ -16,12 +16,12 @@ export type UseNoticeOptions = ThemeProps<'Alert'> & {
   icon?: {
     variant?: AlertIconProps['variant']
     color?: AlertIconProps['color']
-    children?: React.ReactNode
+    children?: ReactNode
   }
-  title?: React.ReactNode
-  description?: React.ReactNode
+  title?: ReactNode
+  description?: ReactNode
   isClosable?: boolean
-  component?: (props: NoticeComponentProps) => React.ReactNode
+  component?: (props: NoticeComponentProps) => ReactNode
   onCloseComplete?: () => void
   style?: CSSUIObject
 }
@@ -31,7 +31,7 @@ export type NoticeOptions = {
   placement: Placement
   duration: UseNoticeOptions['duration']
   status: AlertProps['status']
-  message: (props: NoticeComponentProps) => React.ReactNode
+  message: (props: NoticeComponentProps) => ReactNode
   isDelete?: boolean
   onDelete: () => void
   onCloseComplete?: () => void
@@ -68,7 +68,7 @@ type CreateNoticeOptions = Partial<
 let counter = 0
 
 const createNotice = (
-  message: (props: NoticeComponentProps) => React.ReactNode,
+  message: (props: NoticeComponentProps) => ReactNode,
   { id, placement = 'top', duration, onCloseComplete, status, style }: CreateNoticeOptions,
 ) => {
   counter += 1
@@ -145,7 +145,7 @@ type Store = {
   subscribe: (onStoreChange: () => void) => () => void
   getSnapshot: () => State
   create: (
-    message: (props: NoticeComponentProps) => React.ReactNode,
+    message: (props: NoticeComponentProps) => ReactNode,
     options: UseNoticeOptions,
   ) => string | number
   close: (id: string | number) => void

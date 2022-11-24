@@ -14,15 +14,17 @@ import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 export type FadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>>
 
 const variants: MotionVariants = {
-  enter: ({ transition, transitionEnd, delay, duration } = {}) => ({
+  enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    ...enter,
   }),
-  exit: ({ transition, transitionEnd, delay, duration } = {}) => ({
+  exit: ({ transition, transitionEnd, delay, duration, exit } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
+    ...exit,
   }),
 }
 

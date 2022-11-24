@@ -131,9 +131,7 @@ export const Button: ComponentStyle = {
       return {
         color: isDefaultColor(
           [toneColor(c, 600)(t, s), toneColor(c, 200)(t, s)],
-          isGray
-            ? [`inherit`, `whiteAlpha.900`]
-            : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
+          isGray ? [`inherit`, `whiteAlpha.900`] : [`${c}.600`, `${c}.200`],
         )(c),
         bg: isGray ? undefined : 'transparent',
         _hover: {

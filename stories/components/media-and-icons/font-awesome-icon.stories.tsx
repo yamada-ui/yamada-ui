@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { FontAwesomeIcon, HStack } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Media and Icons / FontAwesomeIcon',
+  title: 'Components / Media And Icons / FontAwesomeIcon',
   component: FontAwesomeIcon,
 } as ComponentMeta<typeof FontAwesomeIcon>
 

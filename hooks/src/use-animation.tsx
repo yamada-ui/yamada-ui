@@ -1,15 +1,15 @@
-import { useTheme } from '@yamada-ui/providers'
 import {
   css,
   StylesProps,
   Token,
   keyframes as emotionKeyframes,
   StyledTheme,
+  useTheme,
 } from '@yamada-ui/styled'
-import { Dict, isArray, isUndefined, runIfFunc } from '@yamada-ui/utils'
+import { Dict, isArray, isUndefined, runIfFunc, getOwnerWindow } from '@yamada-ui/utils'
 import * as CSS from 'csstype'
-import { useCallback, useRef, useState } from 'react'
-import { useToken } from './'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useToken, useEventListener, useBoolean } from './'
 
 export type AnimationStyle = {
   keyframes: Record<string, StylesProps<'unResponsive', 'unColorScheme'>>
@@ -160,4 +160,39 @@ export const useDynamicAnimation = <
   )
 
   return [animations, setAnimation]
+}
+
+export type UseAnimationObserverProps = {
+  isOpen: boolean
+  ref: React.RefObject<HTMLElement>
+}
+
+export const useAnimationObserver = ({ isOpen, ref }: UseAnimationObserverProps) => {
+  const [mounted, setMounted] = useState(isOpen)
+  const [flg, { on }] = useBoolean()
+
+  useEffect(() => {
+    if (flg) return
+
+    setMounted(isOpen)
+    on()
+  }, [isOpen, flg, on])
+
+  useEventListener(
+    () => ref.current,
+    'animationend',
+    () => setMounted(isOpen),
+  )
+
+  const hidden = isOpen ? false : !mounted
+
+  return {
+    present: !hidden,
+    onAnimationComplete() {
+      const ownerWindow = getOwnerWindow(ref.current)
+      const event = new ownerWindow.CustomEvent('animationend', { bubbles: true })
+
+      ref.current?.dispatchEvent(event)
+    },
+  }
 }

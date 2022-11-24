@@ -1,4 +1,4 @@
-import { ColorScheme } from '@yamada-ui/styled'
+import { ColorScheme } from './'
 
 export const setScript = (initialColorScheme: ColorScheme | 'system') => {
   const mql = window.matchMedia('(prefers-color-scheme: dark)')

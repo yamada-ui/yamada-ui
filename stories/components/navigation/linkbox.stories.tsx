@@ -14,7 +14,7 @@ export const basic: ComponentStory<typeof LinkBox> = () => {
       p='md'
       rounded='md'
       border='1px solid'
-      borderColor={['border', 'blackAlpha.200']}
+      borderColor='inherit'
       boxShadow='md'
     >
       <Text as='span'>鳥山明</Text>
@@ -44,7 +44,7 @@ export const withNestedLink: ComponentStory<typeof LinkBox> = () => {
       p='md'
       rounded='md'
       border='1px solid'
-      borderColor={['border', 'blackAlpha.200']}
+      borderColor='inherit'
       boxShadow='md'
     >
       <Text as='span'>鳥山明</Text>

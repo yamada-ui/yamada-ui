@@ -7,6 +7,9 @@ import {
   CSSUIObject,
   useMultiComponentStyle,
   CSSUIProps,
+  MotionTransitionProperties,
+  Token,
+  useValue,
 } from '@yamada-ui/system'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import {
@@ -16,13 +19,21 @@ import {
   FocusLockProps,
   Portal,
   getValidChildren,
+  findChildren,
 } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
-import { KeyboardEvent, useCallback } from 'react'
+import { cloneElement, KeyboardEvent, useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
-import { ModalOverlay, ModalCloseButton } from './'
+import {
+  ModalOverlay,
+  DialogOverlay,
+  ModalCloseButton,
+  DialogCloseButton,
+  DrawerContent,
+  DrawerOverlay,
+} from './'
 
-type Position =
+type Placement =
   | 'center'
   | 'top'
   | 'right'
@@ -57,19 +68,20 @@ type ModalOptions = Pick<
   onOverlayClick?: () => void
   onEsc?(): void
   onCloseComplete?: () => void
-  position?: Position
+  placement?: Token<Placement>
   outside?: CSSUIProps['p']
-  closeButton?: boolean
+  closeOnButton?: boolean
   overlay?: boolean
   allowPinchZoom?: boolean
   scrollBehavior?: ScrollBehavior
   blockScrollOnMount?: boolean
-  closeOnOverlayClick?: boolean
+  closeOnOverlay?: boolean
   closeOnEsc?: boolean
   animation?: Animation
+  duration?: MotionTransitionProperties['duration']
 }
 
-export type ModalProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
+export type ModalProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animation'> &
   Omit<HTMLMotionProps<'section'>, 'color' | 'transition'> &
   ThemeProps<'Modal'> &
   ModalOptions
@@ -84,9 +96,9 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     onOverlayClick,
     onEsc,
     onCloseComplete,
-    position = 'center',
+    placement: _placement = 'center',
     outside = 'md',
-    closeButton = true,
+    closeOnButton = true,
     overlay = true,
     allowPinchZoom = false,
     scrollBehavior = 'inside',
@@ -95,10 +107,11 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     initialFocusRef,
     finalFocusRef,
     blockScrollOnMount = true,
-    closeOnOverlayClick = true,
+    closeOnOverlay = true,
     closeOnEsc = true,
     lockFocusAcrossFrames = true,
     animation = 'scale',
+    duration,
     ...rest
   } = omitThemeProps({ size, ...props })
 
@@ -117,11 +130,18 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
 
   const validChildren = getValidChildren(children)
 
-  const [customModalOverlay, ...cloneChildren] = validChildren.find(
-    (child) => child.type === ModalOverlay,
+  const [customModalOverlay, ...cloneChildren] = findChildren(
+    validChildren,
+    ModalOverlay,
+    DialogOverlay,
+    DrawerOverlay,
   )
-    ? validChildren.sort((a, b) => (a.type === ModalOverlay ? -1 : b.type === ModalOverlay ? 1 : 0))
-    : [undefined, ...validChildren]
+
+  let [drawerContent] = findChildren(validChildren, DrawerContent)
+
+  if (drawerContent) drawerContent = cloneElement(drawerContent, { onKeyDown })
+
+  const placement = useValue(_placement)
 
   const css: CSSUIObject = {
     position: 'fixed',
@@ -131,14 +151,14 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     h: '100vh',
     p: size !== 'full' ? outside : undefined,
     display: 'flex',
-    justifyContent: position.includes('right')
+    justifyContent: placement.includes('right')
       ? 'flex-start'
-      : position.includes('left')
+      : placement.includes('left')
       ? 'flex-end'
       : 'center',
-    alignItems: position.includes('top')
+    alignItems: placement.includes('top')
       ? 'flex-start'
-      : position.includes('bottom')
+      : placement.includes('bottom')
       ? 'flex-end'
       : 'center',
   }
@@ -149,13 +169,11 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         isOpen,
         onClose,
         onOverlayClick,
-        onEsc,
-        position,
-        closeButton,
+        closeOnButton,
         scrollBehavior,
-        closeOnOverlayClick,
-        closeOnEsc,
+        closeOnOverlay,
         animation,
+        duration,
         styles,
       }}
     >
@@ -177,9 +195,11 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
                 <ui.div __css={css}>
                   {customModalOverlay ?? (overlay && size !== 'full' ? <ModalOverlay /> : null)}
 
-                  <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
-                    {cloneChildren}
-                  </ModalContent>
+                  {drawerContent ?? (
+                    <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
+                      {cloneChildren}
+                    </ModalContent>
+                  )}
                 </ui.div>
               </RemoveScroll>
             </FocusLock>
@@ -190,56 +210,57 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
   )
 })
 
-type ModalContentProps = Omit<HTMLUIProps<'section'>, 'position' | 'scrollBehavior' | 'animation'> &
+type ModalContentProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animation'> &
   Omit<HTMLMotionProps<'section'>, 'color' | 'transition'>
 
 const MotionSection = ui(motion.section)
 
-const getModalContentProps = (animation: Animation = 'scale') => {
+const getModalContentProps = (
+  animation: Animation = 'scale',
+  duration?: MotionTransitionProperties['duration'],
+) => {
   switch (animation) {
     case 'scale':
       return {
         ...scaleFadeProps,
-        custom: { scale: 0.95, reverse: true },
+        custom: { scale: 0.95, reverse: true, duration },
       }
     case 'top':
       return {
         ...slideFadeProps,
-        custom: { offsetY: -16, reverse: true },
+        custom: { offsetY: -16, reverse: true, duration },
       }
     case 'right':
       return {
         ...slideFadeProps,
-        custom: { offsetX: 16, reverse: true },
+        custom: { offsetX: 16, reverse: true, duration },
       }
     case 'left':
       return {
         ...slideFadeProps,
-        custom: { offsetX: -16, reverse: true },
+        custom: { offsetX: -16, reverse: true, duration },
       }
     case 'bottom':
       return {
         ...slideFadeProps,
-        custom: { offsetY: 16, reverse: true },
+        custom: { offsetY: 16, reverse: true, duration },
       }
   }
 }
 
 const ModalContent = forwardRef<ModalContentProps, 'section'>(
-  ({ className, children, ...rest }, ref) => {
-    const { styles, scrollBehavior, closeButton, onClose, animation } = useModal()
+  ({ className, children, __css, ...rest }, ref) => {
+    const { styles, scrollBehavior, closeOnButton, onClose, animation, duration } = useModal()
 
     const validChildren = getValidChildren(children)
 
-    const [customModalCloseButton, ...cloneChildren] = validChildren.find(
-      (child) => child.type === ModalCloseButton,
+    const [customModalCloseButton, ...cloneChildren] = findChildren(
+      validChildren,
+      ModalCloseButton,
+      DialogCloseButton,
     )
-      ? validChildren.sort((a, b) =>
-          a.type === ModalCloseButton ? -1 : b.type === ModalCloseButton ? 1 : 0,
-        )
-      : [undefined, ...validChildren]
 
-    const props = animation !== 'none' ? getModalContentProps(animation) : {}
+    const props = animation !== 'none' ? getModalContentProps(animation, duration) : {}
 
     const css: CSSUIObject = {
       position: 'relative',
@@ -247,7 +268,8 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
       display: 'flex',
       flexDirection: 'column',
       overflow: scrollBehavior === 'inside' ? 'hidden' : 'auto',
-      ...styles.container,
+      outline: 0,
+      ...(__css ? __css : styles.container),
     }
 
     return (
@@ -259,7 +281,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
         {...props}
         {...rest}
       >
-        {customModalCloseButton ?? (closeButton && onClose ? <ModalCloseButton /> : null)}
+        {customModalCloseButton ?? (closeOnButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
       </MotionSection>

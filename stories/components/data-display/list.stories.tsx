@@ -4,7 +4,7 @@ import { List, DiscList, DecimalList, ListItem, ListIcon } from '@yamada-ui/reac
 import { FaCheckCircle } from 'react-icons/fa'
 
 export default {
-  title: 'Components / DataDisplay / List',
+  title: 'Components / Data Display / List',
   component: List,
 } as ComponentMeta<typeof List>
 

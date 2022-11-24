@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Text, Kbd } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / DataDisplay / Kbd',
+  title: 'Components / Data Display / Kbd',
   component: Kbd,
 } as ComponentMeta<typeof Kbd>
 

@@ -28,8 +28,6 @@
     "react": "^18.0.0"
   },
   "peerDependencies": {
-    "@yamada-ui/system": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "react": ">=18"
   }
 }

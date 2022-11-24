@@ -1,9 +1,17 @@
 import { Global } from '@emotion/react'
-import { css, StyledTheme, ThemeConfig, ThemeScheme } from '@yamada-ui/styled'
+import {
+  css,
+  StyledTheme,
+  ThemeConfig,
+  ThemeScheme,
+  ThemeProvider,
+  ColorSchemeProvider,
+  useColorScheme,
+} from '@yamada-ui/system'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
-import { ThemeProvider, ColorSchemeProvider, useColorScheme } from './'
+import { NoticeProvider } from './'
 
 type UIContext = {
   themeScheme: ThemeScheme | undefined
@@ -67,6 +75,8 @@ export const UIProvider: FC<UIProviderProps> = ({
           <GlobalStyle />
 
           {children}
+
+          <NoticeProvider {...config.notice} />
         </ColorSchemeProvider>
       </ThemeProvider>
     </UIContext.Provider>

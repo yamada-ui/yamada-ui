@@ -20,18 +20,20 @@ export type ScaleFadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotion
   ScaleFadeOptions
 
 const variants: MotionVariants = {
-  enter: ({ transition, transitionEnd, delay, duration } = {}) => ({
+  enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
     scale: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    ...enter,
   }),
-  exit: ({ scale, reverse, transition, transitionEnd, delay, duration } = {}) => ({
+  exit: ({ scale, reverse, transition, transitionEnd, delay, duration, exit } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay, duration),
     ...(reverse
       ? { scale, transitionEnd: transitionEnd?.exit }
       : { transitionEnd: { scale, ...transitionEnd?.exit } }),
+    ...exit,
   }),
 }
 

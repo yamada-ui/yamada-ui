@@ -3,7 +3,7 @@ import { Icon, HStack } from '@yamada-ui/react'
 import { FaRobot } from 'react-icons/fa'
 
 export default {
-  title: 'Components / Media and Icons / Icon',
+  title: 'Components / Media And Icons / Icon',
   component: Icon,
 } as ComponentMeta<typeof Icon>
 

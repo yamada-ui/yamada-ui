@@ -6,4 +6,9 @@ export const config: ThemeConfig = {
   var: {
     prefix: 'ui',
   },
+  notice: {
+    options: {
+      placement: 'top',
+    },
+  },
 }

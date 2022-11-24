@@ -58,11 +58,11 @@ export const MOTION_TRANSITION_VARIANTS = {
 
 export const MOTION_TRANSITION_DEFAULTS = {
   enter: {
-    duration: 0.2,
+    duration: 0.25,
     ease: MOTION_TRANSITION_EASINGS.easeOut,
   },
   exit: {
-    duration: 0.1,
+    duration: 0.2,
     ease: MOTION_TRANSITION_EASINGS.easeIn,
   },
 } as const

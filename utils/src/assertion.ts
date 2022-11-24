@@ -16,10 +16,15 @@ export const isUndefined = (value: any): value is undefined =>
 
 export const isNull = (value: any): value is null => value === null
 
-export const isObject = <T extends Dict>(obj: any): obj is T =>
-  obj !== null && (typeof obj === 'object' || typeof obj === 'function') && !Array.isArray(obj)
+export const isObject = <T extends Dict>(value: any): value is T =>
+  value !== null &&
+  (typeof value === 'object' || typeof value === 'function') &&
+  !Array.isArray(value)
 
 export const isArray = <T extends any[]>(value: any): value is T => Array.isArray(value)
+
+export const isEmpty = (value: any): boolean =>
+  !Array.isArray(value) || !value.length || value.every((v) => v == null)
 
 export const isFunction = <T extends Function = Function>(value: any): value is T => {
   return typeof value === 'function'

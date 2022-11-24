@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Wrap, Badge } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / DataDisplay / Badge',
+  title: 'Components / Data Display / Badge',
   component: Badge,
 } as ComponentMeta<typeof Badge>
 

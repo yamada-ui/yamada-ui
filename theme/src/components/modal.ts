@@ -3,8 +3,6 @@ import { ComponentStyle } from '@yamada-ui/styled'
 export const Modal: ComponentStyle = {
   baseStyle: {
     container: {
-      display: 'flex',
-      flexDirection: 'column',
       rounded: 'md',
       bg: ['white', 'black'],
       color: 'inherit',
@@ -20,18 +18,21 @@ export const Modal: ComponentStyle = {
       zIndex: 'recoome',
     },
     header: {
-      p: 'md',
+      pt: 'md',
+      px: 'md',
       gap: 'md',
       fontSize: 'xl',
       fontWeight: 'semibold',
     },
     body: {
+      my: 'md',
       px: 'md',
       gap: 'md',
       flex: '1',
     },
     footer: {
-      p: 'md',
+      px: 'md',
+      pb: 'md',
       gap: 'md',
     },
   },
@@ -48,7 +49,7 @@ export const Modal: ComponentStyle = {
     '5xl': { container: { maxW: '5xl' } },
     '6xl': { container: { maxW: '6xl' } },
     full: {
-      container: { maxW: '100vw', minH: '100vh', rounded: 0 },
+      container: { minW: '100vw', minH: '100vh', rounded: 0 },
     },
   },
 

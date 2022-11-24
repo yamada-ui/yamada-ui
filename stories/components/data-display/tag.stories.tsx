@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Wrap, Tag, FontAwesomeIcon } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / DataDisplay / Tag',
+  title: 'Components / Data Display / Tag',
   component: Tag,
 } as ComponentMeta<typeof Tag>
 

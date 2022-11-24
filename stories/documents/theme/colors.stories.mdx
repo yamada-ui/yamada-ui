@@ -405,17 +405,17 @@ import { Provider } from '../../provider'
   </Grid>
 </Provider>
 
-## Whatsapp
+## Twitter
 
 <Provider>
   <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.whatsapp).map(([key, value]) => {
+    {Object.entries(defaultTheme.colors.twitter).map(([key, value]) => {
       return (
         <HStack key={key}>
-          <Box bg={`whatsapp.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
+          <Box bg={`twitter.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
           <VStack gap='0.5'>
             <Text fontWeight='semibold' noOfLines={1}>
-              {'whatsapp'.charAt(0).toUpperCase() + 'whatsapp'.slice(1)} {key}
+              {'twitter'.charAt(0).toUpperCase() + 'twitter'.slice(1)} {key}
             </Text>
             <Text noOfLines={1}>{value}</Text>
           </VStack>

@@ -13,4 +13,8 @@ export const globalStyle: UIStyle = {
   '*::placeholder': {
     color: ['gray.400', 'whiteAlpha.400'],
   },
+  '*, *::before, &::after': {
+    borderColor: 'border',
+    wordWrap: 'break-word',
+  },
 }

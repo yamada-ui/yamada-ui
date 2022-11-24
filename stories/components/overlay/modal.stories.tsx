@@ -48,6 +48,32 @@ export const basic: ComponentStory<typeof Modal> = () => {
   )
 }
 
+export const withDuration: ComponentStory<typeof Modal> = () => {
+  const [isOpen, onOpen, onClose] = useDisclosure()
+
+  return (
+    <>
+      <Button onClick={onOpen}>Open Modal</Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} duration={0.4}>
+        <ModalHeader>ドラゴンボール</ModalHeader>
+
+        <ModalBody>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </ModalBody>
+
+        <ModalFooter>
+          <Button variant='ghost' onClick={onClose}>
+            とじる
+          </Button>
+          <Button colorStyle='primary'>Wikipadia</Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
 export const withSize: ComponentStory<typeof Modal> = () => {
   const [size, setSize] = useState<ModalProps['size']>('md')
   const [isOpen, onOpen, onClose] = useDisclosure()
@@ -120,8 +146,8 @@ export const withSize: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const withPosition: ComponentStory<typeof Modal> = () => {
-  const [position, setPosition] = useState<ModalProps['position']>('center')
+export const withPlacement: ComponentStory<typeof Modal> = () => {
+  const [placement, setPlacement] = useState<ModalProps['placement']>('center')
   const [isOpen, onOpen, onClose] = useDisclosure()
 
   return (
@@ -129,7 +155,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
       <Wrap gap='md'>
         <Button
           onClick={() => {
-            setPosition('center')
+            setPlacement('center')
             onOpen()
           }}
         >
@@ -138,7 +164,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top')
+            setPlacement('top')
             onOpen()
           }}
         >
@@ -147,7 +173,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top-left')
+            setPlacement('top-left')
             onOpen()
           }}
         >
@@ -156,7 +182,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('left')
+            setPlacement('left')
             onOpen()
           }}
         >
@@ -165,7 +191,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom-left')
+            setPlacement('bottom-left')
             onOpen()
           }}
         >
@@ -174,7 +200,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom')
+            setPlacement('bottom')
             onOpen()
           }}
         >
@@ -183,7 +209,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom-right')
+            setPlacement('bottom-right')
             onOpen()
           }}
         >
@@ -192,7 +218,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('right')
+            setPlacement('right')
             onOpen()
           }}
         >
@@ -201,7 +227,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top-right')
+            setPlacement('top-right')
             onOpen()
           }}
         >
@@ -209,7 +235,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} onClose={onClose} position={position}>
+      <Modal isOpen={isOpen} onClose={onClose} placement={placement}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -295,6 +321,50 @@ export const withAnimation: ComponentStory<typeof Modal> = () => {
           </Button>
           <Button colorStyle='primary'>Wikipadia</Button>
         </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
+export const nestedModal: ComponentStory<typeof Modal> = () => {
+  const [isFirstOpen, onFirstOpen, onFirstClose] = useDisclosure()
+  const [isSecondOpen, onSecondOpen, onSecondClose] = useDisclosure()
+
+  return (
+    <>
+      <Button onClick={onFirstOpen}>Open Modal</Button>
+
+      <Modal isOpen={isFirstOpen} onClose={onFirstClose}>
+        <ModalHeader>ドラゴンボール</ModalHeader>
+
+        <ModalBody>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </ModalBody>
+
+        <ModalFooter>
+          <Button variant='ghost' onClick={onFirstClose}>
+            とじる
+          </Button>
+          <Button colorStyle='primary' onClick={onSecondOpen}>
+            あらすじ
+          </Button>
+        </ModalFooter>
+
+        <Modal isOpen={isSecondOpen} onClose={onSecondClose} size='sm'>
+          <ModalHeader>あらすじ</ModalHeader>
+
+          <ModalBody>
+            地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。
+          </ModalBody>
+
+          <ModalFooter>
+            <Button variant='ghost' onClick={onSecondClose}>
+              とじる
+            </Button>
+            <Button colorStyle='primary'>Wikipadia</Button>
+          </ModalFooter>
+        </Modal>
       </Modal>
     </>
   )
@@ -388,8 +458,6 @@ export const customOverlay: ComponentStory<typeof Modal> = () => {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalCloseButton color='red.500' />
-
         <ModalOverlay bg='blackAlpha.300' backdropFilter='blur(10px)' />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
@@ -493,7 +561,7 @@ export const scrollOnMount: ComponentStory<typeof Modal> = () => {
         alignItems='center'
         textAlign='center'
         border='1px solid'
-        borderColor={['border', 'blackAlpha.200']}
+        borderColor='inherit'
         boxShadow='md'
       >
         <Image src='https://dragon-ball-official.com/assets/img/intro/intro_2.png' maxW='sm' />

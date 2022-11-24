@@ -15,7 +15,7 @@ export const basic: ComponentStory<typeof Container> = () => {
       alignItems='center'
       textAlign='center'
       border='1px solid'
-      borderColor={['border', 'blackAlpha.200']}
+      borderColor='inherit'
       boxShadow='md'
     >
       <Image src='https://dragon-ball-official.com/assets/img/intro/intro_2.png' maxW='sm' />

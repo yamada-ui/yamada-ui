@@ -11,7 +11,7 @@ import {
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
-import { NoticeProvider } from './'
+import { LoadingProvider, NoticeProvider } from './'
 
 type UIContext = {
   themeScheme: ThemeScheme | undefined
@@ -71,12 +71,14 @@ export const UIProvider: FC<UIProviderProps> = ({
     <UIContext.Provider value={value}>
       <ThemeProvider theme={theme} config={config}>
         <ColorSchemeProvider colorSchemeManager={colorSchemeManager} config={config}>
-          {reset ? <ResetStyle /> : null}
-          <GlobalStyle />
+          <LoadingProvider {...config.loading}>
+            {reset ? <ResetStyle /> : null}
+            <GlobalStyle />
 
-          {children}
+            {children}
 
-          <NoticeProvider {...config.notice} />
+            <NoticeProvider {...config.notice} />
+          </LoadingProvider>
         </ColorSchemeProvider>
       </ThemeProvider>
     </UIContext.Provider>

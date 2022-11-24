@@ -1,43 +1,72 @@
 import { Dict, PortalProps, StringLiteral, Union } from '@yamada-ui/utils'
 import { Variants } from 'framer-motion'
+import { ReactNode } from 'react'
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
 import { UIStyle, ThemeProps, AnalyzeBreakpointsReturn, CSSUIProps, CSSUIObject } from './'
 
 export type ThemeScheme = Union<string | number>
 
-type NoticetComponentProps = NoticetOptions & { onClose: () => void }
+export type LoadingVariant =
+  | 'oval'
+  | 'grid'
+  | 'hearts'
+  | 'radio'
+  | 'audio'
+  | 'balls'
+  | 'bars'
+  | 'rotating'
+  | 'comment'
+  | 'search'
+  | 'circles'
+  | 'dots'
+  | 'triangle'
+  | 'watch'
+  | 'progress'
 
-type NoticetOptions = ThemeProps<'Alert'> & {
-  placement?: 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
+export type NoticePlacement =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+
+export type NoticeStatus = 'warning' | 'info' | 'success' | 'error' | 'loading'
+
+export type NoticeComponentProps = NoticeConfigOptions & { onClose: () => void }
+
+export type NoticeConfigOptions = ThemeProps<'Alert'> & {
+  placement?: NoticePlacement
   duration?: number | null
   limit?: number
-  status?: 'warning' | 'info' | 'success' | 'error' | 'loading'
+  status?: NoticeStatus
   icon?: {
-    variant?:
-      | 'oval'
-      | 'grid'
-      | 'hearts'
-      | 'radio'
-      | 'audio'
-      | 'balls'
-      | 'bars'
-      | 'rotating'
-      | 'comment'
-      | 'search'
-      | 'circles'
-      | 'dots'
-      | 'triangle'
-      | 'watch'
-      | 'progress'
+    variant?: LoadingVariant
     color?: CSSUIProps['color']
-    children?: React.ReactNode
+    children?: ReactNode
   }
-  title?: React.ReactNode
-  description?: React.ReactNode
-  component?: (props: NoticetComponentProps) => React.ReactNode
+  title?: ReactNode
+  description?: ReactNode
+  component?: (props: NoticeComponentProps) => ReactNode
   isClosable?: boolean
   style?: CSSUIObject
+}
+
+export type LoadingComponentProps = {
+  timeout: number | null | undefined
+  message: ReactNode | undefined
+  onFinish: () => void
+}
+
+type LoadingConfigOptions = {
+  initialState?: boolean
+  variant?: LoadingVariant
+  variants?: Variants
+  timeout?: number | null
+  component?: (props: LoadingComponentProps) => ReactNode
+  appendToParentPortal?: PortalProps['appendToParentPortal']
+  containerRef?: PortalProps['containerRef']
 }
 
 export type ThemeConfig = {
@@ -48,11 +77,16 @@ export type ThemeConfig = {
     prefix?: StringLiteral
   }
   notice?: {
-    options?: NoticetOptions
+    options?: NoticeConfigOptions
     variants?: Variants
     gap?: CSSUIProps['gap']
     appendToParentPortal?: PortalProps['appendToParentPortal']
     containerRef?: PortalProps['containerRef']
+  }
+  loading?: {
+    screen?: LoadingConfigOptions
+    page?: LoadingConfigOptions
+    background?: LoadingConfigOptions
   }
 }
 

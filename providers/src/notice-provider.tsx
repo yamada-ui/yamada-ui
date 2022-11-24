@@ -1,15 +1,10 @@
 import { noticeStore, NoticeOptions } from '@yamada-ui/feedback'
-import { ui, CSSUIObject, CSSUIProps, useTimeout } from '@yamada-ui/system'
-import { Portal, PortalProps, runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
+import { ui, CSSUIObject, useTimeout, ThemeConfig } from '@yamada-ui/system'
+import { Portal, runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
 import { AnimatePresence, motion, useIsPresent, Variants } from 'framer-motion'
 import { FC, memo, useEffect, useState, useSyncExternalStore } from 'react'
 
-export type NoticeProviderProps = {
-  variants?: Variants
-  gap?: CSSUIProps['gap']
-  appendToParentPortal?: PortalProps['appendToParentPortal']
-  containerRef?: PortalProps['containerRef']
-}
+export type NoticeProviderProps = Omit<Required<ThemeConfig>['notice'], 'options'>
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
@@ -87,7 +82,7 @@ const defaultVariants: Variants = {
   },
 }
 
-type NoticeComponentProps = NoticeOptions & { variants?: Variants }
+type NoticeComponentProps = NoticeOptions & Pick<NoticeProviderProps, 'variants'>
 
 const NoticeComponent = memo(
   ({

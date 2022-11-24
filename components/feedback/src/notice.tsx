@@ -1,36 +1,23 @@
 import { CloseButton } from '@yamada-ui/forms'
-import { ui, useTheme, CSSUIObject, ThemeProps } from '@yamada-ui/system'
+import {
+  ui,
+  useTheme,
+  CSSUIObject,
+  NoticePlacement,
+  NoticeComponentProps,
+  NoticeConfigOptions,
+} from '@yamada-ui/system'
 import { merge } from '@yamada-ui/utils'
 import { FC, ReactNode, useMemo } from 'react'
-import { AlertProps, AlertIconProps, Alert, AlertDescription, AlertIcon, AlertTitle } from '.'
+import { AlertProps, Alert, AlertDescription, AlertIcon, AlertTitle } from '.'
 
-type Placement = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
-
-export type NoticeComponentProps = UseNoticeOptions & { onClose: () => void }
-
-export type UseNoticeOptions = ThemeProps<'Alert'> & {
-  placement?: Placement
-  duration?: number | null
-  limit?: number
-  status?: AlertProps['status']
-  icon?: {
-    variant?: AlertIconProps['variant']
-    color?: AlertIconProps['color']
-    children?: ReactNode
-  }
-  title?: ReactNode
-  description?: ReactNode
-  isClosable?: boolean
-  component?: (props: NoticeComponentProps) => ReactNode
-  onCloseComplete?: () => void
-  style?: CSSUIObject
-}
+export type UseNoticeOptions = NoticeConfigOptions
 
 export type NoticeOptions = {
   id: string | number
-  placement: Placement
+  placement: NoticePlacement
   duration: UseNoticeOptions['duration']
-  status: AlertProps['status']
+  status: UseNoticeOptions['status']
   message: (props: NoticeComponentProps) => ReactNode
   isDelete?: boolean
   onDelete: () => void
@@ -45,7 +32,7 @@ const findNotice = (
   state: State,
   id: string | number,
 ): {
-  placement: Placement | undefined
+  placement: NoticePlacement | undefined
   index: number
 } => {
   const placement = getNoticePlacement(state, id)
@@ -55,9 +42,9 @@ const findNotice = (
   return { placement, index }
 }
 
-const getNoticePlacement = (state: State, id: string | number): Placement | undefined => {
+const getNoticePlacement = (state: State, id: string | number): NoticePlacement | undefined => {
   for (const [placement, values] of Object.entries(state)) {
-    if (findId(values, id)) return placement as Placement
+    if (findId(values, id)) return placement as NoticePlacement
   }
 }
 
@@ -138,7 +125,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions): CreateNoticeReturn
 }
 
 type State = {
-  [K in Placement]: NoticeOptions[]
+  [K in NoticePlacement]: NoticeOptions[]
 }
 
 type Store = {
@@ -149,9 +136,9 @@ type Store = {
     options: UseNoticeOptions,
   ) => string | number
   close: (id: string | number) => void
-  closeAll: (options?: { placement?: Placement[] }) => void
+  closeAll: (options?: { placement?: NoticePlacement[] }) => void
   update: (id: string | number, options: Omit<UseNoticeOptions, 'id'>) => void
-  remove: (id: string | number, placement: Placement) => void
+  remove: (id: string | number, placement: NoticePlacement) => void
   isActive: (id: string | number) => boolean
 }
 
@@ -243,7 +230,7 @@ const createNoticeStore = (initialState: State): Store => {
 
     closeAll: ({ placement } = {}) => {
       setState((prev) => {
-        let placements: Placement[] = [
+        let placements: NoticePlacement[] = [
           'bottom',
           'bottom-right',
           'bottom-left',

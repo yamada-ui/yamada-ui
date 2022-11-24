@@ -16,8 +16,8 @@ import {
 
 type LoadingContextProps = {
   isLoading: () => boolean
-  startLoading: (props?: Partial<Pick<LoadingState, 'message' | 'timeout'>>) => void
-  finishLoading: () => void
+  start: (props?: Partial<Pick<LoadingState, 'message' | 'timeout'>>) => void
+  finish: () => void
   update: (props: Partial<LoadingState>) => void
 }
 
@@ -69,15 +69,15 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   const screenLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => screenLoading.isLoading,
-      startLoading: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = null } = {}) =>
         setScreenLoading({ isLoading: true, message, timeout }),
-      finishLoading: () =>
+      update: (next) => setScreenLoading((prev) => ({ ...prev, ...next })),
+      finish: () =>
         setScreenLoading({
           isLoading: false,
           message: undefined,
           timeout: screen?.timeout ?? null,
         }),
-      update: (next) => setScreenLoading((prev) => ({ ...prev, ...next })),
     }),
     [screenLoading.isLoading, screen?.timeout],
   )
@@ -85,15 +85,15 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   const pageLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => pageLoading.isLoading,
-      startLoading: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = null } = {}) =>
         setPageLoading({ isLoading: true, message, timeout }),
-      finishLoading: () =>
+      update: (next) => setPageLoading((prev) => ({ ...prev, ...next })),
+      finish: () =>
         setPageLoading({
           isLoading: false,
           message: undefined,
           timeout: page?.timeout ?? null,
         }),
-      update: (next) => setPageLoading((prev) => ({ ...prev, ...next })),
     }),
     [pageLoading.isLoading, page?.timeout],
   )
@@ -101,15 +101,15 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   const backgroundLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => backgroundLoading.isLoading,
-      startLoading: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = null } = {}) =>
         setBackgroundLoading({ isLoading: true, message, timeout }),
-      finishLoading: () =>
+      update: (next) => setBackgroundLoading((prev) => ({ ...prev, ...next })),
+      finish: () =>
         setBackgroundLoading({
           isLoading: false,
           message: undefined,
           timeout: background?.timeout ?? null,
         }),
-      update: (next) => setBackgroundLoading((prev) => ({ ...prev, ...next })),
     }),
     [backgroundLoading.isLoading, background?.timeout],
   )
@@ -117,15 +117,15 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   const customLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => customLoading.isLoading,
-      startLoading: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = null } = {}) =>
         setCustomLoading({ isLoading: true, message, timeout }),
-      finishLoading: () =>
+      update: (next) => setCustomLoading((prev) => ({ ...prev, ...next })),
+      finish: () =>
         setCustomLoading({
           isLoading: false,
           message: undefined,
           timeout: custom?.timeout ?? null,
         }),
-      update: (next) => setCustomLoading((prev) => ({ ...prev, ...next })),
     }),
     [customLoading.isLoading, custom?.timeout],
   )
@@ -156,7 +156,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                 text: screen?.text,
                 message: screenLoading.message,
                 timeout: screenLoading.timeout,
-                onFinish: screenLoadingFunc.finishLoading,
+                onFinish: screenLoadingFunc.finish,
               })
             ) : (
               <LoadingScreenComponent
@@ -165,7 +165,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                   text: screen?.text,
                   message: screenLoading.message,
                   timeout: screenLoading.timeout,
-                  onFinish: screenLoadingFunc.finishLoading,
+                  onFinish: screenLoadingFunc.finish,
                 }}
               />
             )}
@@ -185,7 +185,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                 text: page?.text,
                 message: pageLoading.message,
                 timeout: pageLoading.timeout,
-                onFinish: pageLoadingFunc.finishLoading,
+                onFinish: pageLoadingFunc.finish,
               })
             ) : (
               <LoadingPageComponent
@@ -194,7 +194,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                   text: page?.text,
                   message: pageLoading.message,
                   timeout: pageLoading.timeout,
-                  onFinish: pageLoadingFunc.finishLoading,
+                  onFinish: pageLoadingFunc.finish,
                 }}
               />
             )}
@@ -214,7 +214,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                 text: background?.text,
                 message: backgroundLoading.message,
                 timeout: backgroundLoading.timeout,
-                onFinish: backgroundLoadingFunc.finishLoading,
+                onFinish: backgroundLoadingFunc.finish,
               })
             ) : (
               <LoadingBackgroundComponent
@@ -223,7 +223,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                   text: background?.text,
                   message: backgroundLoading.message,
                   timeout: backgroundLoading.timeout,
-                  onFinish: backgroundLoadingFunc.finishLoading,
+                  onFinish: backgroundLoadingFunc.finish,
                 }}
               />
             )}
@@ -243,7 +243,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                   text: custom?.text,
                   message: customLoading.message,
                   timeout: customLoading.timeout,
-                  onFinish: customLoadingFunc.finishLoading,
+                  onFinish: customLoadingFunc.finish,
                 })
               : null}
           </Portal>

@@ -2,7 +2,7 @@ import { useNotice, Button, Wrap, Center, Box } from '@yamada-ui/react'
 import { useRef } from 'react'
 
 export default {
-  title: 'Components / Feedback / Notice',
+  title: 'System / Hooks / useNotice',
 }
 
 export const basic = () => {

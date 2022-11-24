@@ -23,26 +23,6 @@ export const basic = () => {
   )
 }
 
-export const withMessage = () => {
-  const { screen, page, background } = useLoading()
-
-  return (
-    <Center w='100vw' h='100vh'>
-      <Wrap gap='md'>
-        <Button onClick={() => screen.startLoading({ message: 'Loading' })}>
-          Start screen loading
-        </Button>
-        <Button onClick={() => page.startLoading({ message: 'Loading' })}>
-          Start page loading
-        </Button>
-        <Button onClick={() => background.startLoading({ message: 'Loading' })}>
-          Start background loading
-        </Button>
-      </Wrap>
-    </Center>
-  )
-}
-
 export const withTimeout = () => {
   const { screen, page, background } = useLoading()
 
@@ -52,6 +32,26 @@ export const withTimeout = () => {
         <Button onClick={() => screen.startLoading({ timeout: 5000 })}>Start screen loading</Button>
         <Button onClick={() => page.startLoading({ timeout: 5000 })}>Start page loading</Button>
         <Button onClick={() => background.startLoading({ timeout: 5000 })}>
+          Start background loading
+        </Button>
+      </Wrap>
+    </Center>
+  )
+}
+
+export const withMessage = () => {
+  const { screen, page, background } = useLoading()
+
+  return (
+    <Center w='100vw' h='100vh'>
+      <Wrap gap='md'>
+        <Button onClick={() => screen.startLoading({ message: 'Loading', timeout: 5000 })}>
+          Start screen loading
+        </Button>
+        <Button onClick={() => page.startLoading({ message: 'Loading', timeout: 5000 })}>
+          Start page loading
+        </Button>
+        <Button onClick={() => background.startLoading({ message: 'Loading', timeout: 5000 })}>
           Start background loading
         </Button>
       </Wrap>

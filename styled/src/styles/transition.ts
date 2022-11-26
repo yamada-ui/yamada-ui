@@ -3,7 +3,6 @@ import { Token } from '../'
 import { Configs, configs } from './'
 
 export const transition: Configs = {
-  transition: true,
   transitionDelay: true,
   willChange: true,
   transitionProperty: configs.prop('transitionProperty', 'transitions.property'),
@@ -21,7 +20,6 @@ export const transition: Configs = {
 }
 
 export type TransitionProps<Y = 'responsive', M = 'colorScheme'> = {
-  transition?: Token<CSS.Property.Transition, unknown, Y, M>
   transitionDelay?: Token<CSS.Property.TransitionDelay, unknown, Y, M>
   willChange?: Token<CSS.Property.WillChange, unknown, Y, M>
   transitionProperty?: Token<CSS.Property.TransitionProperty, 'transitionProperty', Y, M>

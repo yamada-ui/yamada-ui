@@ -173,16 +173,26 @@ importers:
 
   components/data-display:
     specifiers:
+      '@types/react-syntax-highlighter': ^15.5.5
       '@yamada-ui/media-and-icons': workspace:*
       '@yamada-ui/system': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
+      react-markdown: ^8.0.3
+      react-syntax-highlighter: ^15.5.0
+      rehype-raw: ^6.1.1
+      remark-gfm: ^3.0.1
     dependencies:
       '@yamada-ui/media-and-icons': link:../media-and-icons
       '@yamada-ui/system': link:../../system
       '@yamada-ui/utils': link:../../utils
+      react-markdown: 8.0.3_react@18.2.0
+      react-syntax-highlighter: 15.5.0_react@18.2.0
+      rehype-raw: 6.1.1
+      remark-gfm: 3.0.1
     devDependencies:
+      '@types/react-syntax-highlighter': 15.5.5
       clean-package: 2.1.1
       react: 18.2.0
 
@@ -303,23 +313,13 @@ importers:
 
   components/typography:
     specifiers:
-      '@types/react-syntax-highlighter': ^15.5.5
       '@yamada-ui/system': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
-      react-markdown: ^8.0.3
-      react-syntax-highlighter: ^15.5.0
-      rehype-raw: ^6.1.1
-      remark-gfm: ^3.0.1
     dependencies:
-      '@types/react-syntax-highlighter': 15.5.5
       '@yamada-ui/system': link:../../system
       '@yamada-ui/utils': link:../../utils
-      react-markdown: 8.0.3_react@18.2.0
-      react-syntax-highlighter: 15.5.0_react@18.2.0
-      rehype-raw: 6.1.1
-      remark-gfm: 3.0.1
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
@@ -5660,7 +5660,7 @@ packages:
     resolution: {integrity: sha512-QH3JZQXa2usAvJvSsdSUJ4Yu4j8ReuZpgRrEW+XP+Rmosbn425YshW9iGEb/pAARm8496axHhHUPRH3UmTiB6A==}
     dependencies:
       '@types/react': 18.0.21
-    dev: false
+    dev: true
 
   /@types/react/18.0.20:
     resolution: {integrity: sha512-MWul1teSPxujEHVwZl4a5HxQ9vVNsjTchVA+xRqv/VYGCuKGAU6UhfrTdF5aBefwD1BHUD8i/zq+O/vyCm/FrA==}

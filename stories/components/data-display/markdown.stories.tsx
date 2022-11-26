@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Heading, Markdown } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Typography / Markdown',
+  title: 'Components / Data Display / Markdown',
   component: Markdown,
 } as ComponentMeta<typeof Markdown>
 

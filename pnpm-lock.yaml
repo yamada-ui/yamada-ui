@@ -58,8 +58,6 @@ importers:
       react-dom: ^18.2.0
       react-icons: ^4.6.0
       react-loader-spinner: ^5.3.4
-      react-markdown: ^8.0.3
-      remark-gfm: ^3.0.1
       rimraf: 3.0.2
       storybook-dark-mode: ^1.1.2
       ts-node: ^10.9.1
@@ -119,8 +117,6 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-icons: 4.6.0_react@18.2.0
       react-loader-spinner: 5.3.4_biqbaboplfbrettd7655fr4n2y
-      react-markdown: 8.0.3_w5j4k42lgipnm43s3brx6h3c34
-      remark-gfm: 3.0.1
       rimraf: 3.0.2
       storybook-dark-mode: 1.1.2_biqbaboplfbrettd7655fr4n2y
       ts-node: 10.9.1_nwm5gnmtj5mpwtqjmit2j7xbtu
@@ -311,9 +307,13 @@ importers:
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
+      react-markdown: ^8.0.3
+      remark-gfm: ^3.0.1
     dependencies:
       '@yamada-ui/system': link:../../system
       '@yamada-ui/utils': link:../../utils
+      react-markdown: 8.0.3_react@18.2.0
+      remark-gfm: 3.0.1
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
@@ -7073,7 +7073,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
+      styled-components: 5.3.6_tgppsxbwbt7anzz66bgq6kuiw4
     dev: false
 
   /babel-plugin-syntax-jsx/6.18.0:
@@ -17248,7 +17248,7 @@ packages:
       styled-tools: 1.7.2
     dev: false
 
-  /react-markdown/8.0.3_w5j4k42lgipnm43s3brx6h3c34:
+  /react-markdown/8.0.3_react@18.2.0:
     resolution: {integrity: sha512-We36SfqaKoVNpN1QqsZwWSv/OZt5J15LNgTLWynwAN5b265hrQrsjMtlRNwUvS+YyR3yDM8HpTNc4pK9H/Gc0A==}
     peerDependencies:
       '@types/react': '>=16'
@@ -17256,7 +17256,6 @@ packages:
     dependencies:
       '@types/hast': 2.3.4
       '@types/prop-types': 15.7.5
-      '@types/react': 18.0.20
       '@types/unist': 2.0.6
       comma-separated-tokens: 2.0.3
       hast-util-whitespace: 2.0.0

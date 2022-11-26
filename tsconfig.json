@@ -11,7 +11,6 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

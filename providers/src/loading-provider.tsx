@@ -12,7 +12,9 @@ import {
   useContext,
   useMemo,
   useState,
+  Fragment,
 } from 'react'
+import { RemoveScroll } from 'react-remove-scroll'
 
 type LoadingContextProps = {
   isLoading: () => boolean
@@ -150,25 +152,33 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
             appendToParentPortal={screen?.appendToParentPortal}
             containerRef={screen?.containerRef}
           >
-            {!isUndefined(screen?.component) ? (
-              runIfFunc(screen?.component, {
-                icon: screen?.icon,
-                text: screen?.text,
-                message: screenLoading.message,
-                timeout: screenLoading.timeout,
-                onFinish: screenLoadingFunc.finish,
-              })
-            ) : (
-              <LoadingScreenComponent
-                {...{
-                  icon: screen?.icon,
-                  text: screen?.text,
-                  message: screenLoading.message,
-                  timeout: screenLoading.timeout,
-                  onFinish: screenLoadingFunc.finish,
-                }}
-              />
-            )}
+            <RemoveScroll
+              allowPinchZoom={screen?.allowPinchZoom ?? false}
+              enabled={screen?.blockScrollOnMount ?? true}
+              forwardProps
+            >
+              <Fragment>
+                {!isUndefined(screen?.component) ? (
+                  runIfFunc(screen?.component, {
+                    icon: screen?.icon,
+                    text: screen?.text,
+                    message: screenLoading.message,
+                    timeout: screenLoading.timeout,
+                    onFinish: screenLoadingFunc.finish,
+                  })
+                ) : (
+                  <LoadingScreenComponent
+                    {...{
+                      icon: screen?.icon,
+                      text: screen?.text,
+                      message: screenLoading.message,
+                      timeout: screenLoading.timeout,
+                      onFinish: screenLoadingFunc.finish,
+                    }}
+                  />
+                )}
+              </Fragment>
+            </RemoveScroll>
           </Portal>
         ) : null}
       </AnimatePresence>
@@ -179,25 +189,33 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
             appendToParentPortal={page?.appendToParentPortal}
             containerRef={page?.containerRef}
           >
-            {!isUndefined(page?.component) ? (
-              runIfFunc(page?.component, {
-                icon: page?.icon,
-                text: page?.text,
-                message: pageLoading.message,
-                timeout: pageLoading.timeout,
-                onFinish: pageLoadingFunc.finish,
-              })
-            ) : (
-              <LoadingPageComponent
-                {...{
-                  icon: page?.icon,
-                  text: page?.text,
-                  message: pageLoading.message,
-                  timeout: pageLoading.timeout,
-                  onFinish: pageLoadingFunc.finish,
-                }}
-              />
-            )}
+            <RemoveScroll
+              allowPinchZoom={page?.allowPinchZoom ?? false}
+              enabled={page?.blockScrollOnMount ?? true}
+              forwardProps
+            >
+              <Fragment>
+                {!isUndefined(page?.component) ? (
+                  runIfFunc(page?.component, {
+                    icon: page?.icon,
+                    text: page?.text,
+                    message: pageLoading.message,
+                    timeout: pageLoading.timeout,
+                    onFinish: pageLoadingFunc.finish,
+                  })
+                ) : (
+                  <LoadingPageComponent
+                    {...{
+                      icon: page?.icon,
+                      text: page?.text,
+                      message: pageLoading.message,
+                      timeout: pageLoading.timeout,
+                      onFinish: pageLoadingFunc.finish,
+                    }}
+                  />
+                )}
+              </Fragment>
+            </RemoveScroll>
           </Portal>
         ) : null}
       </AnimatePresence>
@@ -208,25 +226,33 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
             appendToParentPortal={background?.appendToParentPortal}
             containerRef={background?.containerRef}
           >
-            {!isUndefined(background?.component) ? (
-              runIfFunc(background?.component, {
-                icon: background?.icon,
-                text: background?.text,
-                message: backgroundLoading.message,
-                timeout: backgroundLoading.timeout,
-                onFinish: backgroundLoadingFunc.finish,
-              })
-            ) : (
-              <LoadingBackgroundComponent
-                {...{
-                  icon: background?.icon,
-                  text: background?.text,
-                  message: backgroundLoading.message,
-                  timeout: backgroundLoading.timeout,
-                  onFinish: backgroundLoadingFunc.finish,
-                }}
-              />
-            )}
+            <RemoveScroll
+              allowPinchZoom={page?.allowPinchZoom ?? false}
+              enabled={page?.blockScrollOnMount ?? false}
+              forwardProps
+            >
+              <Fragment>
+                {!isUndefined(background?.component) ? (
+                  runIfFunc(background?.component, {
+                    icon: background?.icon,
+                    text: background?.text,
+                    message: backgroundLoading.message,
+                    timeout: backgroundLoading.timeout,
+                    onFinish: backgroundLoadingFunc.finish,
+                  })
+                ) : (
+                  <LoadingBackgroundComponent
+                    {...{
+                      icon: background?.icon,
+                      text: background?.text,
+                      message: backgroundLoading.message,
+                      timeout: backgroundLoading.timeout,
+                      onFinish: backgroundLoadingFunc.finish,
+                    }}
+                  />
+                )}
+              </Fragment>
+            </RemoveScroll>
           </Portal>
         ) : null}
       </AnimatePresence>

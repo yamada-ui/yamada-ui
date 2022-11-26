@@ -26,7 +26,7 @@ export const basic: ComponentStory<typeof Slide> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof Slide> = () => {
+export const withDuration: ComponentStory<typeof Slide> = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -46,7 +46,7 @@ export const withPlacement: ComponentStory<typeof Slide> = () => {
   )
 }
 
-export const withDirection: ComponentStory<typeof Slide> = () => {
+export const withPlacement: ComponentStory<typeof Slide> = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (

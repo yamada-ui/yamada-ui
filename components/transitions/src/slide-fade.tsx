@@ -56,8 +56,6 @@ export const slideFadeProps = {
   variants,
 }
 
-const MotionDiv = ui(motion.div)
-
 export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
   (
     {
@@ -91,7 +89,8 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-slide-fade', className)}
             custom={custom}

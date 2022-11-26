@@ -44,8 +44,6 @@ export const scaleFadeProps = {
   variants,
 }
 
-const MotionDiv = ui(motion.div)
-
 export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
   (
     {
@@ -75,7 +73,8 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-scale-fade', className)}
             custom={custom}

@@ -213,8 +213,6 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
 type ModalContentProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animation'> &
   Omit<HTMLMotionProps<'section'>, 'color' | 'transition'>
 
-const MotionSection = ui(motion.section)
-
 const getModalContentProps = (
   animation: Animation = 'scale',
   duration?: MotionTransitionProperties['duration'],
@@ -273,7 +271,8 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
     }
 
     return (
-      <MotionSection
+      <ui.section
+        as={motion.section}
         ref={ref}
         className={cx('ui-modal', className)}
         tabIndex={-1}
@@ -284,7 +283,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
         {customModalCloseButton ?? (closeOnButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
-      </MotionSection>
+      </ui.section>
     )
   },
 )

@@ -17,8 +17,6 @@ export type PopoverContentProps = Omit<HTMLUIProps<'section'>, keyof HTMLMotionP
     | 'transition'
   >
 
-const MotionSection = ui(motion.section)
-
 const getPopoverContentProps = (
   animation: PopoverProps['animation'] = 'scale',
   duration?: PopoverProps['duration'],
@@ -92,7 +90,8 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
         className='ui-popover'
         zIndex={zIndex ?? styles.container.zIndex}
       >
-        <MotionSection
+        <ui.section
+          as={motion.section}
           className={cx('ui-popover-content', className)}
           {...(animation !== 'none' ? getPopoverContentProps(animation, duration) : {})}
           {...getPopoverProps(rest, ref)}
@@ -105,7 +104,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
           {customPopoverCloseButton ?? (closeOnButton ? <PopoverCloseButton /> : null)}
 
           {cloneChildren}
-        </MotionSection>
+        </ui.section>
       </ui.div>
     )
   },

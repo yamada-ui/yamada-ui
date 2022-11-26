@@ -58,8 +58,6 @@ export const slideProps = {
   variants,
 }
 
-const MotionDiv = ui(motion.div)
-
 export const Slide = forwardRef<SlideProps, 'div'>(
   (
     {
@@ -95,7 +93,8 @@ export const Slide = forwardRef<SlideProps, 'div'>(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-slide', className)}
             custom={custom}

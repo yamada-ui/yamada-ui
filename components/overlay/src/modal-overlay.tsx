@@ -7,8 +7,6 @@ import { useModal } from './'
 export type ModalOverlayProps = HTMLUIProps<'div'> &
   Omit<HTMLMotionProps<'div'>, 'color' | 'transition'>
 
-const MotionDiv = ui(motion.div)
-
 export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
   ({ className, __css, onClick, ...rest }, ref) => {
     const { styles, closeOnOverlay, onOverlayClick, onClose, animation, duration } = useModal()
@@ -25,7 +23,8 @@ export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
     const props = animation !== 'none' ? fadeProps : {}
 
     return (
-      <MotionDiv
+      <ui.div
+        as={motion.div}
         ref={ref}
         className={cx('ui-modal-overlay', className)}
         custom={{ duration }}

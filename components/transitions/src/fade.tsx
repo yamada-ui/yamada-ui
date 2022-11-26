@@ -35,8 +35,6 @@ export const fadeProps = {
   variants,
 }
 
-const MotionDiv = ui(motion.div)
-
 export const Fade = forwardRef<FadeProps, 'div'>(
   (
     { unmountOnExit, isOpen, transition, transitionEnd, delay, duration, className, ...rest },
@@ -55,7 +53,8 @@ export const Fade = forwardRef<FadeProps, 'div'>(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-fade', className)}
             custom={custom}

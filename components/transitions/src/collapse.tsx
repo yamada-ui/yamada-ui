@@ -64,8 +64,6 @@ export const collapseProps = {
   variants,
 }
 
-const MotionDiv = ui(motion.div)
-
 export const Collapse = forwardRef<CollapseProps, 'div'>(
   (
     {
@@ -136,7 +134,8 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
     return (
       <AnimatePresence initial={false} custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-collapse', className)}
             custom={custom}

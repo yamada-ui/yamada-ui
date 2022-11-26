@@ -92,8 +92,6 @@ const getTooltipProps = (
   }
 }
 
-const MotionDiv = ui(motion.div)
-
 export const Tooltip = forwardRef<TooltipProps, 'div'>(
   ({ closeOnPointerDown, zIndex, ...props }, ref) => {
     const styles = useComponentStyle('Tooltip', props)
@@ -236,7 +234,8 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
           {isOpen ? (
             <Portal>
               <ui.div {...getPopperProps()} zIndex={zIndex ?? styles.zIndex} pointerEvents='none'>
-                <MotionDiv
+                <ui.div
+                  as={motion.div}
                   ref={ref}
                   className={cx('ui-tooltip', className)}
                   style={{ transformOrigin }}
@@ -248,7 +247,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
                   {...rest}
                 >
                   {label}
-                </MotionDiv>
+                </ui.div>
               </ui.div>
             </Portal>
           ) : null}

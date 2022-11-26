@@ -296,8 +296,6 @@ const scaleFadeVariants: Variants = {
   },
 }
 
-const MotionDiv = ui(motion.div)
-
 const LoadingScreenComponent = memo(
   ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
@@ -306,7 +304,7 @@ const LoadingScreenComponent = memo(
       right: 0,
       bottom: 0,
       left: 0,
-      zIndex: 'beerus',
+      zIndex: 9999,
       bg: ['white', 'black'],
       w: '100vw',
       h: '100vh',
@@ -319,7 +317,8 @@ const LoadingScreenComponent = memo(
     useTimeout(onFinish, timeout)
 
     return (
-      <MotionDiv
+      <ui.div
+        as={motion.div}
         className='ui-loading-screen'
         variants={fadeVariants}
         initial='initial'
@@ -346,7 +345,7 @@ const LoadingScreenComponent = memo(
             )
           ) : null}
         </ui.div>
-      </MotionDiv>
+      </ui.div>
     )
   },
 )
@@ -361,7 +360,7 @@ const LoadingPageComponent = memo(
       right: 0,
       bottom: 0,
       left: 0,
-      zIndex: 'beerus',
+      zIndex: 9999,
       bg: 'blackAlpha.600',
       w: '100vw',
       h: '100vh',
@@ -374,7 +373,8 @@ const LoadingPageComponent = memo(
     useTimeout(onFinish, timeout)
 
     return (
-      <MotionDiv
+      <ui.div
+        as={motion.div}
         className='ui-loading-page'
         variants={fadeVariants}
         initial='initial'
@@ -382,7 +382,8 @@ const LoadingPageComponent = memo(
         exit='exit'
         __css={css}
       >
-        <MotionDiv
+        <ui.div
+          as={motion.div}
           className='ui-loading-page-container'
           variants={scaleFadeVariants}
           initial='initial'
@@ -409,8 +410,8 @@ const LoadingPageComponent = memo(
               </ui.p>
             )
           ) : null}
-        </MotionDiv>
-      </MotionDiv>
+        </ui.div>
+      </ui.div>
     )
   },
 )
@@ -422,7 +423,8 @@ const LoadingBackgroundComponent = memo(
     useTimeout(onFinish, timeout)
 
     return (
-      <MotionDiv
+      <ui.div
+        as={motion.div}
         className='ui-loading-page-container'
         variants={scaleFadeVariants}
         initial='initial'
@@ -452,7 +454,7 @@ const LoadingBackgroundComponent = memo(
             </ui.p>
           )
         ) : null}
-      </MotionDiv>
+      </ui.div>
     )
   },
 )

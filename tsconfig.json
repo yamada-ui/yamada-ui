@@ -11,13 +11,12 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true
   },
-  "include": ["@types", "**/*.ts", "**/*.tsx"],
+  "include": ["@types", "**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "examples", "cli"],
   "ts-node": {
     "transpileOnly": true,

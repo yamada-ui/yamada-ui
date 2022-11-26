@@ -24,13 +24,13 @@ import {
 } from './'
 
 type DrawerOptions = {
-  direction?: SlideProps['direction']
+  placement?: SlideProps['placement']
   isFullHeight?: boolean
 }
 
 export type DrawerProps = Omit<
   ModalProps,
-  'scrollBehavior' | 'animation' | 'position' | 'outside' | keyof ThemeProps
+  'scrollBehavior' | 'animation' | 'outside' | keyof ThemeProps
 > &
   ThemeProps<'Drawer'> &
   DrawerOptions
@@ -48,12 +48,12 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
     className,
     children,
     isOpen,
-    direction = 'right',
+    placement = 'right',
     onClose,
     onOverlayClick,
     onEsc,
     onCloseComplete,
-    closeButton = true,
+    closeOnButton = true,
     overlay = true,
     allowPinchZoom,
     autoFocus,
@@ -61,7 +61,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
     initialFocusRef,
     finalFocusRef,
     blockScrollOnMount,
-    closeOnOverlayClick,
+    closeOnOverlay,
     closeOnEsc,
     lockFocusAcrossFrames,
     duration = { enter: 0.4, exit: 0.3 },
@@ -82,7 +82,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
           onOverlayClick,
           onEsc,
           onCloseComplete,
-          closeButton: false,
+          closeOnButton: false,
           overlay: false,
           allowPinchZoom,
           autoFocus,
@@ -90,7 +90,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
           initialFocusRef,
           finalFocusRef,
           blockScrollOnMount,
-          closeOnOverlayClick,
+          closeOnOverlay,
           closeOnEsc,
           lockFocusAcrossFrames,
           duration,
@@ -98,7 +98,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
       >
         {customDrawerOverlay ?? (overlay ? <DrawerOverlay /> : null)}
 
-        <DrawerContent {...{ direction, closeButton, ...rest }}>{cloneChildren}</DrawerContent>
+        <DrawerContent {...{ placement, closeOnButton, ...rest }}>{cloneChildren}</DrawerContent>
       </Modal>
     </DrawerProvider>
   )
@@ -107,7 +107,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
 type DrawerContentProps = Omit<DrawerProps, 'color' | 'transition' | 'isOpen' | keyof ThemeProps>
 
 export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
-  ({ className, children, direction, closeButton, ...rest }, ref) => {
+  ({ className, children, placement, closeOnButton, ...rest }, ref) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
 
@@ -132,12 +132,12 @@ export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
         className={cx('ui-drawer', className)}
         tabIndex={-1}
         isOpen={isOpen}
-        direction={direction}
+        placement={placement}
         duration={duration}
         __css={css}
         {...rest}
       >
-        {customDrawerCloseButton ?? (closeButton && onClose ? <DrawerCloseButton /> : null)}
+        {customDrawerCloseButton ?? (closeOnButton && onClose ? <DrawerCloseButton /> : null)}
 
         {cloneChildren}
       </Slide>

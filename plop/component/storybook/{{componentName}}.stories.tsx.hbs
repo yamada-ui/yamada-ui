@@ -1,0 +1,13 @@
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { {{upperCase componentName}} } from '@yamada-ui/react'
+
+export default {
+  title: 'Components / {{titleCase packageName}} / {{upperCase componentName}}',
+  component: {{upperCase componentName}},
+} as ComponentMeta<typeof {{upperCase componentName}}>
+
+export const basic: ComponentStory<typeof {{upperCase componentName}}> = () => {
+  return (
+    <{{upperCase componentName}}></{{upperCase componentName}}>
+  )
+}

@@ -20,18 +20,20 @@ export type ScaleFadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotion
   ScaleFadeOptions
 
 const variants: MotionVariants = {
-  enter: ({ transition, transitionEnd, delay, duration } = {}) => ({
+  enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
     scale: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    ...enter,
   }),
-  exit: ({ scale, reverse, transition, transitionEnd, delay, duration } = {}) => ({
+  exit: ({ scale, reverse, transition, transitionEnd, delay, duration, exit } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay, duration),
     ...(reverse
       ? { scale, transitionEnd: transitionEnd?.exit }
       : { transitionEnd: { scale, ...transitionEnd?.exit } }),
+    ...exit,
   }),
 }
 
@@ -41,8 +43,6 @@ export const scaleFadeProps = {
   exit: 'exit',
   variants,
 }
-
-const MotionDiv = ui(motion.div)
 
 export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
   (
@@ -73,7 +73,8 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-scale-fade', className)}
             custom={custom}

@@ -23,11 +23,46 @@ export const getColor =
     }
   }
 
-export const transparentizeColor =
-  (color: string, opacity: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+export const lightenColor =
+  (color: string, amount: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorScheme)
 
-    return new TinyColor(raw).setAlpha(opacity).toRgbString()
+    return new TinyColor(raw).lighten(amount).toRgbString()
+  }
+
+export const darkenColor =
+  (color: string, amount: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).darken(amount).toRgbString()
+  }
+
+export const brightenColor =
+  (color: string, amount: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).brighten(amount).toRgbString()
+  }
+
+export const tintColor =
+  (color: string, amount: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).tint(amount).toRgbString()
+  }
+
+export const shadeColor =
+  (color: string, amount: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).shade(amount).toRgbString()
+  }
+
+export const transparentizeColor =
+  (color: string, alpha: number) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).setAlpha(alpha).toRgbString()
   }
 
 export const toneColor =

@@ -1,4 +1,12 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps, useValue, useToken } from '@yamada-ui/system'
+import {
+  ui,
+  forwardRef,
+  HTMLUIProps,
+  CSSUIProps,
+  useValue,
+  useToken,
+  LoadingVariant,
+} from '@yamada-ui/system'
 import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 import {
@@ -19,25 +27,8 @@ import {
   ProgressBar,
 } from 'react-loader-spinner'
 
-type Variant =
-  | 'oval'
-  | 'grid'
-  | 'hearts'
-  | 'radio'
-  | 'audio'
-  | 'balls'
-  | 'bars'
-  | 'rotating'
-  | 'comment'
-  | 'search'
-  | 'circles'
-  | 'dots'
-  | 'triangle'
-  | 'watch'
-  | 'progress'
-
 type LoadingOptions = {
-  variant?: Variant
+  variant?: LoadingVariant
   color?: CSSUIProps['color']
   secondaryColor?: CSSUIProps['color']
   size?: CSSUIProps['boxSize']

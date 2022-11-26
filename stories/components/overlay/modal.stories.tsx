@@ -146,8 +146,8 @@ export const withSize: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const withPosition: ComponentStory<typeof Modal> = () => {
-  const [position, setPosition] = useState<ModalProps['position']>('center')
+export const withPlacement: ComponentStory<typeof Modal> = () => {
+  const [placement, setPlacement] = useState<ModalProps['placement']>('center')
   const [isOpen, onOpen, onClose] = useDisclosure()
 
   return (
@@ -155,7 +155,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
       <Wrap gap='md'>
         <Button
           onClick={() => {
-            setPosition('center')
+            setPlacement('center')
             onOpen()
           }}
         >
@@ -164,7 +164,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top')
+            setPlacement('top')
             onOpen()
           }}
         >
@@ -173,7 +173,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top-left')
+            setPlacement('top-left')
             onOpen()
           }}
         >
@@ -182,7 +182,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('left')
+            setPlacement('left')
             onOpen()
           }}
         >
@@ -191,7 +191,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom-left')
+            setPlacement('bottom-left')
             onOpen()
           }}
         >
@@ -200,7 +200,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom')
+            setPlacement('bottom')
             onOpen()
           }}
         >
@@ -209,7 +209,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('bottom-right')
+            setPlacement('bottom-right')
             onOpen()
           }}
         >
@@ -218,7 +218,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('right')
+            setPlacement('right')
             onOpen()
           }}
         >
@@ -227,7 +227,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
 
         <Button
           onClick={() => {
-            setPosition('top-right')
+            setPlacement('top-right')
             onOpen()
           }}
         >
@@ -235,7 +235,7 @@ export const withPosition: ComponentStory<typeof Modal> = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} onClose={onClose} position={position}>
+      <Modal isOpen={isOpen} onClose={onClose} placement={placement}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -561,7 +561,7 @@ export const scrollOnMount: ComponentStory<typeof Modal> = () => {
         alignItems='center'
         textAlign='center'
         border='1px solid'
-        borderColor={['border', 'blackAlpha.200']}
+        borderColor='inherit'
         boxShadow='md'
       >
         <Image src='https://dragon-ball-official.com/assets/img/intro/intro_2.png' maxW='sm' />

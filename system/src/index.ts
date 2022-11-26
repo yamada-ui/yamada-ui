@@ -1,5 +1,4 @@
 export * from '@yamada-ui/styled'
-export * from '@yamada-ui/providers'
 export * from '@yamada-ui/hooks'
 
 export * from './factory.types'

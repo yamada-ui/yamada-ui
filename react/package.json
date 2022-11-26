@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/layouts": "workspace:*",
@@ -36,25 +37,15 @@
   "devDependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "framer-motion": "^6.2.9",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "clean-package": "2.1.1"
   },
   "peerDependencies": {
-    "@yamada-ui/system": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/theme": "workspace:*",
-    "@yamada-ui/layouts": "workspace:*",
-    "@yamada-ui/typography": "workspace:*",
-    "@yamada-ui/media-and-icons": "workspace:*",
-    "@yamada-ui/data-display": "workspace:*",
-    "@yamada-ui/feedback": "workspace:*",
-    "@yamada-ui/forms": "workspace:*",
-    "@yamada-ui/navigation": "workspace:*",
-    "@yamada-ui/transitions": "workspace:*",
-    "@yamada-ui/overlay": "workspace:*",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "framer-motion": ">=4.0.0",
     "react": ">=18",
     "react-dom": ">=18"
   }

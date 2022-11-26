@@ -12,24 +12,28 @@ import { Kbd } from './kbd'
 import { Link } from './link'
 import { List } from './list'
 import { Modal } from './modal'
+import { Popover } from './popover'
 import { Progress } from './progress'
 import { Tag } from './tag'
+import { Tooltip } from './tooltip'
 
 export default {
+  Alert,
+  Badge,
+  Breadcrumb,
   Button,
+  CloseButton,
   Container,
-  Divider,
   Dialog,
+  Divider,
   Drawer,
   Heading,
   Kbd,
-  Badge,
-  Tag,
-  List,
   Link,
-  Progress,
-  Breadcrumb,
-  Alert,
-  CloseButton,
+  List,
   Modal,
+  Popover,
+  Progress,
+  Tag,
+  Tooltip,
 }

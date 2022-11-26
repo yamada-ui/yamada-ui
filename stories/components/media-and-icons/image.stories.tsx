@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Image } from '@yamada-ui/react'
 
 export default {
-  title: 'Components / Media and Icons / Image',
+  title: 'Components / Media And Icons / Image',
   component: Image,
 } as ComponentMeta<typeof Image>
 

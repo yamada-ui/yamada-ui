@@ -32,11 +32,13 @@ const variants: MotionVariants = {
     transitionEnd,
     delay,
     duration,
+    enter,
   } = {}) => ({
     ...(animationOpacity ? { opacity: 1 } : {}),
     height,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    ...enter,
   }),
   exit: ({
     animationOpacity,
@@ -45,11 +47,13 @@ const variants: MotionVariants = {
     transitionEnd,
     delay,
     duration,
+    exit,
   } = {}) => ({
     ...(animationOpacity ? { opacity: isNumeric(height) ? 1 : 0 } : {}),
     height,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
+    ...exit,
   }),
 }
 
@@ -59,8 +63,6 @@ export const collapseProps = {
   exit: 'exit',
   variants,
 }
-
-const MotionDiv = ui(motion.div)
 
 export const Collapse = forwardRef<CollapseProps, 'div'>(
   (
@@ -132,7 +134,8 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
     return (
       <AnimatePresence initial={false} custom={custom}>
         {isOpen ? (
-          <MotionDiv
+          <ui.div
+            as={motion.div}
             ref={ref}
             className={cx('ui-collapse', className)}
             custom={custom}

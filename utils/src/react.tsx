@@ -1,7 +1,25 @@
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import ReactFocusLock from 'react-focus-lock'
-import { getAllFocusable, isNumber, isString } from './'
+import { getAllFocusable, isNumber, isString, FocusableElement } from './'
+
+type DOMElement = Element & HTMLOrSVGElement
+
+type DataAttributes = {
+  [dataAttr: string]: any
+}
+
+export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
+  React.DOMAttributes<Y> &
+  DataAttributes & {
+    role?: React.AriaRole
+    tabIndex?: number
+    style?: React.CSSProperties
+  }
+
+export type PropGetter = (props?: DOMAttributes, ref?: React.Ref<any>) => any
+
+export type MaybeRenderProp<Y> = React.ReactNode | ((props: Y) => React.ReactNode)
 
 type Options = {
   strict?: boolean
@@ -85,6 +103,8 @@ export const cx = (...classNames: (string | undefined)[]) => classNames.filter(B
 
 type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T>
 
+export const isRefObject = (val: any): val is { current: any } => 'current' in val
+
 export const assignRef = <T extends any = any>(ref: ReactRef<T> | undefined, value: T) => {
   if (ref == null) return
 
@@ -102,20 +122,54 @@ export const assignRef = <T extends any = any>(ref: ReactRef<T> | undefined, val
   }
 }
 
-export const useMergeRefs = <T,>(...refs: (ReactRef<T> | undefined)[]) =>
-  React.useMemo(() => {
-    if (refs.every((ref) => ref == null)) return null
+export const mergeRefs =
+  <T extends any = any>(...refs: (ReactRef<T> | null | undefined)[]) =>
+  (node: T | null) => {
+    refs.forEach((ref) => {
+      assignRef(ref, node)
+    })
+  }
 
-    return (node: T) => {
-      refs.forEach((ref) => {
-        if (ref) assignRef(ref, node)
-      })
-    }
-  }, [refs])
+export const useMergeRefs = <T extends any = any>(...refs: (ReactRef<T> | undefined)[]) =>
+  React.useMemo(() => mergeRefs(...refs), [refs])
 
-export type FocusableElement = {
-  focus(options?: FocusOptions): void
+export const useCallbackRef = <T extends (...args: any[]) => any>(
+  callback: T | undefined,
+  deps: React.DependencyList = [],
+) => {
+  const callbackRef = React.useRef(callback)
+
+  React.useEffect(() => {
+    callbackRef.current = callback
+  })
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return React.useCallback(((...args) => callbackRef.current?.(...args)) as T, deps)
 }
+
+export const useUpdateEffect = (callback: React.EffectCallback, deps: React.DependencyList) => {
+  const renderCycleRef = React.useRef(false)
+  const effectCycleRef = React.useRef(false)
+
+  React.useEffect(() => {
+    const mounted = renderCycleRef.current
+    const run = mounted && effectCycleRef.current
+
+    if (run) return callback()
+
+    effectCycleRef.current = true
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps)
+
+  React.useEffect(() => {
+    renderCycleRef.current = true
+
+    return () => {
+      renderCycleRef.current = false
+    }
+  }, [])
+}
+
 export type FocusLockProps = {
   initialFocusRef?: React.RefObject<FocusableElement>
   finalFocusRef?: React.RefObject<FocusableElement>

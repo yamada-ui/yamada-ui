@@ -22,9 +22,10 @@ export const toCSSObject: ToCSSObject =
     return customCSS ? [computedCSS, customCSS] : computedCSS
   }
 
-export const styled = <T extends As, P = {}>(element: T, options?: StyledOptions) => {
-  const { baseStyle, ...styledOptions } = options ?? {}
-
+export const styled = <T extends As, P = {}>(
+  element: T,
+  { baseStyle, ...styledOptions }: StyledOptions = {},
+) => {
   const CSSObject = toCSSObject({ baseStyle })
 
   return emotionStyled(

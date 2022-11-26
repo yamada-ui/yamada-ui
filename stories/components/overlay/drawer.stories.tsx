@@ -147,7 +147,7 @@ export const withSize: ComponentStory<typeof Drawer> = () => {
 }
 
 export const withPosition: ComponentStory<typeof Drawer> = () => {
-  const [direction, setDirection] = useState<DrawerProps['direction']>('right')
+  const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
   const [isOpen, onOpen, onClose] = useDisclosure()
 
   return (
@@ -155,7 +155,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
       <Wrap gap='md'>
         <Button
           onClick={() => {
-            setDirection('top')
+            setPlacement('top')
             onOpen()
           }}
         >
@@ -164,7 +164,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
 
         <Button
           onClick={() => {
-            setDirection('left')
+            setPlacement('left')
             onOpen()
           }}
         >
@@ -173,7 +173,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
 
         <Button
           onClick={() => {
-            setDirection('bottom')
+            setPlacement('bottom')
             onOpen()
           }}
         >
@@ -182,7 +182,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
 
         <Button
           onClick={() => {
-            setDirection('right')
+            setPlacement('right')
             onOpen()
           }}
         >
@@ -190,7 +190,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
         </Button>
       </Wrap>
 
-      <Drawer isOpen={isOpen} onClose={onClose} direction={direction}>
+      <Drawer isOpen={isOpen} onClose={onClose} placement={placement}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -216,7 +216,7 @@ export const withFullHeight: ComponentStory<typeof Drawer> = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} onClose={onClose} direction='bottom' isFullHeight>
+      <Drawer isOpen={isOpen} onClose={onClose} placement='bottom' isFullHeight>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -357,7 +357,7 @@ export const scrollOnMount: ComponentStory<typeof Drawer> = () => {
         alignItems='center'
         textAlign='center'
         border='1px solid'
-        borderColor={['border', 'blackAlpha.200']}
+        borderColor='inherit'
         boxShadow='md'
       >
         <Image src='https://dragon-ball-official.com/assets/img/intro/intro_2.png' maxW='sm' />

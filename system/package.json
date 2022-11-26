@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/hooks": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
@@ -32,10 +31,6 @@
     "clean-package": "2.1.1"
   },
   "peerDependencies": {
-    "@yamada-ui/styled": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
-    "@yamada-ui/hooks": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@emotion/styled": "^11.10.4",
     "framer-motion": "^6.2.9",
     "react": ">=18"

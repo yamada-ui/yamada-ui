@@ -42,6 +42,7 @@ export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig) =
   const defaultCSSVars: Dict = {}
 
   Object.assign(theme, {
+    __config: config,
     __cssVars: { ...defaultCSSVars, ...cssVars },
     __cssMap: cssMap,
     __breakpoints: analyzeBreakpoints(breakpoints),

@@ -33,6 +33,8 @@ const config: StorybookConfig = {
       }
     }
 
+    config.resolve?.extensions?.push('.ts', '.tsx')
+
     return config
   },
 }

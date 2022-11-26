@@ -253,12 +253,14 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   )
 }
 
-const fadeVariants: Variants = {
+const getVariants = (type: 'fade' | 'scaleFade' = 'fade'): Variants => ({
   initial: {
     opacity: 0,
+    scale: type === 'scaleFade' ? 0.95 : undefined,
   },
   animate: {
     opacity: 1,
+    scale: type === 'scaleFade' ? 1 : undefined,
     transition: {
       duration: 0.4,
       ease: [0.4, 0, 0.2, 1],
@@ -266,52 +268,46 @@ const fadeVariants: Variants = {
   },
   exit: {
     opacity: 0,
+    scale: type === 'scaleFade' ? 0.95 : undefined,
     transition: {
       duration: 0.4,
       ease: [0.4, 0, 1, 1],
     },
   },
-}
+})
 
-const scaleFadeVariants: Variants = {
-  initial: {
-    opacity: 0,
-    scale: 0.95,
-  },
-  animate: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.4,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.95,
-    transition: {
-      duration: 0.4,
-      ease: [0.4, 0, 1, 1],
-    },
-  },
-}
+const getOverlayStyle = (type: 'fill' | 'transparent' = 'fill'): CSSUIObject => ({
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  zIndex: 9999,
+  bg: type === 'fill' ? ['white', 'black'] : 'blackAlpha.600',
+  w: '100vw',
+  h: '100vh',
+  p: 'md',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+})
+
+const getMotionProps = (type: 'fade' | 'scaleFade' = 'fade') => ({
+  initial: 'initial',
+  animate: 'animate',
+  exit: 'exit',
+  variants: getVariants(type),
+})
 
 const LoadingScreenComponent = memo(
   ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-      zIndex: 9999,
-      bg: ['white', 'black'],
-      w: '100vw',
-      h: '100vh',
-      p: 'md',
+      maxW: 'md',
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+      gap: 'sm',
     }
 
     useTimeout(onFinish, timeout)
@@ -320,20 +316,10 @@ const LoadingScreenComponent = memo(
       <ui.div
         as={motion.div}
         className='ui-loading-screen'
-        variants={fadeVariants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        __css={css}
+        {...getMotionProps()}
+        __css={getOverlayStyle()}
       >
-        <ui.div
-          maxW='md'
-          display='flex'
-          flexDirection='column'
-          justifyContent='center'
-          alignItems='center'
-          gap='sm'
-        >
+        <ui.div __css={css}>
           <Loading size='6xs' {...icon} />
           {message ? (
             isValidElement(message) ? (
@@ -355,19 +341,16 @@ LoadingScreenComponent.displayName = 'LoadingScreenComponent'
 const LoadingPageComponent = memo(
   ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-      zIndex: 9999,
-      bg: 'blackAlpha.600',
-      w: '100vw',
-      h: '100vh',
+      bg: ['white', 'black'],
+      maxW: 'md',
       p: 'md',
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+      gap: 'sm',
+      rounded: 'md',
+      boxShadow: ['lg', 'dark-lg'],
     }
 
     useTimeout(onFinish, timeout)
@@ -376,29 +359,14 @@ const LoadingPageComponent = memo(
       <ui.div
         as={motion.div}
         className='ui-loading-page'
-        variants={fadeVariants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        __css={css}
+        {...getMotionProps()}
+        __css={getOverlayStyle('transparent')}
       >
         <ui.div
           as={motion.div}
           className='ui-loading-page-container'
-          variants={scaleFadeVariants}
-          initial='initial'
-          animate='animate'
-          exit='exit'
-          bg={['white', 'black']}
-          maxW='md'
-          p='md'
-          display='flex'
-          flexDirection='column'
-          justifyContent='center'
-          alignItems='center'
-          gap='sm'
-          rounded='md'
-          boxShadow={['lg', 'dark-lg']}
+          {...getMotionProps('scaleFade')}
+          __css={css}
         >
           <Loading size='6xs' {...icon} />
           {message ? (
@@ -420,29 +388,30 @@ LoadingPageComponent.displayName = 'LoadingPageComponent'
 
 const LoadingBackgroundComponent = memo(
   ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+    const css: CSSUIObject = {
+      position: 'fixed',
+      right: 'md',
+      bottom: 'md',
+      zIndex: 'beerus',
+      bg: ['white', 'black'],
+      maxW: 'sm',
+      p: 'sm',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 'sm',
+      rounded: 'md',
+      boxShadow: ['3xl', 'dark-lg'],
+    }
+
     useTimeout(onFinish, timeout)
 
     return (
       <ui.div
         as={motion.div}
         className='ui-loading-page-container'
-        variants={scaleFadeVariants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        position='fixed'
-        right='md'
-        bottom='md'
-        zIndex='beerus'
-        bg={['white', 'black']}
-        maxW='sm'
-        p='sm'
-        display='flex'
-        justifyContent='center'
-        alignItems='center'
-        gap='sm'
-        rounded='md'
-        boxShadow={['3xl', 'dark-lg']}
+        {...getMotionProps('scaleFade')}
+        __css={css}
       >
         <Loading size='1.2rem' {...icon} />
         {message ? (

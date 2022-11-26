@@ -79,6 +79,8 @@ type LoadingConfigOptions = {
   }
   timeout?: number | null
   component?: (props: LoadingComponentProps) => ReactNode
+  allowPinchZoom?: boolean
+  blockScrollOnMount?: boolean
   appendToParentPortal?: PortalProps['appendToParentPortal']
   containerRef?: PortalProps['containerRef']
 }

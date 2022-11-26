@@ -417,12 +417,14 @@ importers:
       clean-package: 2.1.1
       framer-motion: ^6.2.9
       react: ^18.2.0
+      react-remove-scroll: ^2.5.4
     dependencies:
       '@yamada-ui/feedback': link:../components/feedback
       '@yamada-ui/system': link:../system
       '@yamada-ui/theme': link:../theme
       '@yamada-ui/utils': link:../utils
       framer-motion: 6.5.1_react@18.2.0
+      react-remove-scroll: 2.5.5_react@18.2.0
     devDependencies:
       '@emotion/react': 11.10.4_react@18.2.0
       clean-package: 2.1.1

@@ -24,6 +24,7 @@
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
+    "react-remove-scroll": "^2.5.4",
     "framer-motion": "^6.2.9"
   },
   "devDependencies": {

@@ -7,7 +7,9 @@ import { Container } from './container'
 import { Dialog } from './dialog'
 import { Divider } from './divider'
 import { Drawer } from './drawer'
+import { FormControl } from './form-control'
 import { Heading } from './heading'
+import { Input } from './input'
 import { Kbd } from './kbd'
 import { Link } from './link'
 import { List } from './list'
@@ -29,7 +31,9 @@ export default {
   Dialog,
   Divider,
   Drawer,
+  FormControl,
   Heading,
+  Input,
   Kbd,
   Link,
   List,

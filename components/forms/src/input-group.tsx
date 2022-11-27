@@ -65,7 +65,13 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
 
   return (
     <InputGroupProvider value={styles}>
-      <ui.div ref={ref} className={cx('ui-input-group', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-input-group', className)}
+        role='group'
+        __css={css}
+        {...rest}
+      >
         {cloneChildren}
       </ui.div>
     </InputGroupProvider>

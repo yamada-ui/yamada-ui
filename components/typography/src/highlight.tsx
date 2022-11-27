@@ -60,14 +60,14 @@ export const Highlight: FC<HighlightProps> = ({
   const Component: FC = isFragment ? Fragment : Text
 
   return (
-    <Component {...{ lineHeight, ...rest }}>
-      {chunks.map(({ text, match }, index) =>
+    <Component {...(!isFragment ? { lineHeight } : {})} {...rest}>
+      {chunks.map(({ text, match }, i) =>
         match ? (
-          <Mark key={index} {...mark}>
+          <Mark key={i} {...mark}>
             {text}
           </Mark>
         ) : (
-          <Fragment key={index}>{text}</Fragment>
+          <Fragment key={i}>{text}</Fragment>
         ),
       )}
     </Component>

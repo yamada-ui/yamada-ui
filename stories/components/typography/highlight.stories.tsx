@@ -70,12 +70,16 @@ export const customComponent: ComponentStory<typeof Highlight> = () => {
 
   return (
     <Text lineHeight='tall'>
-      {chunks.map(({ match, text }) =>
+      {chunks.map(({ match, text }, i) =>
         match ? (
           text === '鳥山明' ? (
-            <Mark colorStyle='red'>{text}</Mark>
+            <Mark key={i} colorStyle='red'>
+              {text}
+            </Mark>
           ) : (
-            <Mark colorStyle='green'>{text}</Mark>
+            <Mark key={i} colorStyle='green'>
+              {text}
+            </Mark>
           )
         ) : (
           text

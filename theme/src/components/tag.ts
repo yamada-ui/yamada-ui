@@ -7,7 +7,7 @@ export const Tag: ComponentStyle = {
       outline: 0,
       fontWeight: 'medium',
       lineHeight: 1.2,
-      borderRadius: 'md',
+      rounded: 'md',
       _focusVisible: {
         boxShadow: 'outline',
       },
@@ -19,7 +19,7 @@ export const Tag: ComponentStyle = {
     closeButton: {
       transitionProperty: 'common',
       transitionDuration: 'normal',
-      borderRadius: 'full',
+      rounded: 'full',
       opacity: 0.5,
       _disabled: {
         opacity: 0.4,

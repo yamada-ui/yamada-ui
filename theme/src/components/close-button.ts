@@ -2,7 +2,7 @@ import { ComponentStyle } from '@yamada-ui/styled'
 
 export const CloseButton: ComponentStyle = {
   baseStyle: {
-    borderRadius: 'md',
+    rounded: 'md',
     transitionProperty: 'common',
     transitionDuration: 'normal',
     _disabled: {

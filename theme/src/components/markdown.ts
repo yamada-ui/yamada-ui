@@ -62,9 +62,9 @@ export const Markdown: ComponentStyle = {
       fontFamily: 'mono',
       fontSize: '85%',
       bg: ['gray.200', 'whiteAlpha.200'],
-      borderRadius: '6px',
+      rounded: '6px',
     },
-    pre: { mt: '16px', fontSize: '92.5%', lineHeight: 1.45, borderRadius: '6px' },
+    pre: { mt: '16px', fontSize: '92.5%', lineHeight: 1.45, rounded: '6px' },
     hr: { h: '0.25em', p: 0, my: '24px', bg: 'border', border: 0 },
     table: {
       display: 'block',

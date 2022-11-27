@@ -6,7 +6,7 @@ export const Badge: ComponentStyle = {
     px: 1,
     textTransform: 'uppercase',
     fontSize: 'xs',
-    borderRadius: 'sm',
+    rounded: 'sm',
     fontWeight: 'bold',
   },
 

@@ -4,7 +4,7 @@ import { transparentizeColor, toneColor } from '@yamada-ui/utils'
 export const Button: ComponentStyle = {
   baseStyle: {
     lineHeight: 1.2,
-    borderRadius: 'md',
+    rounded: 'md',
     fontWeight: 'semibold',
     transitionProperty: 'common',
     transitionDuration: 'slower',

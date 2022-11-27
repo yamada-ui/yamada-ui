@@ -4,7 +4,7 @@ export const Kbd: ComponentStyle = {
   baseStyle: {
     fontFamily: 'mono',
     bg: ['gray.200', 'whiteAlpha.200'],
-    borderRadius: 'md',
+    rounded: 'md',
     border: '1px solid',
     borderColor: ['gray.300', 'whiteAlpha.300'],
     fontSize: '0.8em',

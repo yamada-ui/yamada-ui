@@ -11,6 +11,7 @@ import { Heading } from './heading'
 import { Kbd } from './kbd'
 import { Link } from './link'
 import { List } from './list'
+import { Mark } from './mark'
 import { Markdown } from './markdown'
 import { Modal } from './modal'
 import { Popover } from './popover'
@@ -32,6 +33,7 @@ export default {
   Kbd,
   Link,
   List,
+  Mark,
   Markdown,
   Modal,
   Popover,

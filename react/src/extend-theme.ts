@@ -55,7 +55,9 @@ export const extendToken = (token: ThemeToken, tokens?: ThemeTokens): ThemeToken
   mergeObject(get(defaultTheme, token, {}), tokens ?? {})
 
 export const extendStyle = (name: 'globalStyle' | 'resetStyle', style: UIStyle): UIStyle => {
-  const props: UIStyleProps = { theme: { __cssMap: {}, __cssVars: {}, __breakpoints: undefined } }
+  const props: UIStyleProps = {
+    theme: { __config: {}, __cssMap: {}, __cssVars: {}, __breakpoints: undefined },
+  }
 
   return mergeObject(
     runIfFunc(get(defaultTheme, `styles.${name}`, {}), props),

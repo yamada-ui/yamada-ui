@@ -7,7 +7,15 @@ import {
   HTMLUIProps,
   ThemeProps,
 } from '@yamada-ui/system'
-import { createContext, cx, findChildren, getValidChildren, handlerAll } from '@yamada-ui/utils'
+import {
+  createContext,
+  cx,
+  findChildren,
+  getValidChildren,
+  handlerAll,
+  dataAttr,
+  ariaAttr,
+} from '@yamada-ui/utils'
 import { useState, useId, ReactNode, FocusEventHandler } from 'react'
 
 export type FormControlOptions = {
@@ -17,7 +25,7 @@ export type FormControlOptions = {
   isReadOnly?: boolean
 }
 
-type FormControlAdditionalOptions = FormLabelOptions & {
+type FormControlAdditionalOptions = LabelOptions & {
   isReplace?: boolean
   label?: ReactNode
   helperMessage?: ReactNode
@@ -77,13 +85,13 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
 
   const validChildren = getValidChildren(children)
 
-  const [customFormLabel] = findChildren(validChildren, FormLabel)
-  const [customFormHelperMessage] = findChildren(validChildren, FormHelperMessage)
-  const [customFormErrorMessage] = findChildren(validChildren, FormErrorMessage)
+  const [customLabel] = findChildren(validChildren, Label)
+  const [customHelperMessage] = findChildren(validChildren, HelperMessage)
+  const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
 
-  const isCustomFormLabel = !!customFormLabel
-  const isCustomFormHelperMessage = !!customFormHelperMessage
-  const isCustomFormErrorMessage = !!customFormErrorMessage
+  const isCustomLabel = !!customLabel
+  const isCustomHelperMessage = !!customHelperMessage
+  const isCustomErrorMessage = !!customErrorMessage
 
   const css: CSSUIObject = {
     ...styles.container,
@@ -111,13 +119,13 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
           __css={css}
           {...rest}
         >
-          {!isCustomFormLabel && label ? <FormLabel>{label}</FormLabel> : null}
+          {!isCustomLabel && label ? <Label>{label}</Label> : null}
           {validChildren}
-          {!isCustomFormHelperMessage && helperMessage ? (
-            <FormHelperMessage>{helperMessage}</FormHelperMessage>
+          {!isCustomHelperMessage && helperMessage ? (
+            <HelperMessage>{helperMessage}</HelperMessage>
           ) : null}
-          {!isCustomFormErrorMessage && errorMessage ? (
-            <FormErrorMessage>{errorMessage}</FormErrorMessage>
+          {!isCustomErrorMessage && errorMessage ? (
+            <ErrorMessage>{errorMessage}</ErrorMessage>
           ) : null}
         </ui.div>
       </FormControlStylesProvider>
@@ -151,27 +159,26 @@ export const useFormControlProps = <T extends HTMLElement>({
 
   return {
     id: id ?? control?.id,
+    required: required ?? isRequired ?? control?.isRequired,
     disabled: disabled ?? isDisabled ?? control?.isDisabled,
     readOnly: readOnly ?? isReadOnly ?? control?.isReadOnly,
-    required: required ?? isRequired ?? control?.isRequired,
-    'data-focus': control?.isFocused,
-    'data-disabled': disabled ?? isDisabled ?? control?.isDisabled,
-    'data-readonly': readOnly ?? isReadOnly ?? control?.isReadOnly,
-    'data-invalid': isInvalid ?? control?.isInvalid,
+    'aria-required': ariaAttr(required ?? isRequired ?? control?.isRequired),
+    'aria-readonly': ariaAttr(readOnly ?? isReadOnly ?? control?.isReadOnly),
+    'aria-invalid': ariaAttr(isInvalid ?? control?.isInvalid),
     onFocus: handlerAll(control?.onFocus, onFocus),
     onBlur: handlerAll(control?.onBlur, onBlur),
     ...rest,
   }
 }
 
-type FormLabelOptions = {
+type LabelOptions = {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
 }
 
-export type FormLabelProps = HTMLUIProps<'label'> & FormLabelOptions
+export type LabelProps = HTMLUIProps<'label'> & LabelOptions
 
-export const FormLabel = forwardRef<FormLabelProps, 'label'>(
+export const Label = forwardRef<LabelProps, 'label'>(
   (
     {
       className,
@@ -186,16 +193,16 @@ export const FormLabel = forwardRef<FormLabelProps, 'label'>(
     const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } = useFormControl()
     const styles = useFormControlStyles()
 
-    const css: CSSUIObject = { ...styles.label }
+    const css: CSSUIObject = { display: 'block', ...styles.label }
 
     return (
       <ui.label
         ref={ref}
         className={cx('ui-form-label', className)}
-        data-focus={isFocused}
-        data-disabled={isDisabled}
-        data-readonly={isReadOnly}
-        data-invalid={isInvalid}
+        data-focus={dataAttr(isFocused)}
+        data-disabled={dataAttr(isDisabled)}
+        data-readonly={dataAttr(isReadOnly)}
+        data-invalid={dataAttr(isInvalid)}
         htmlFor={htmlFor ?? id}
         __css={css}
         {...rest}
@@ -222,6 +229,8 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
       <ui.span
         ref={ref}
         className={cx('ui-form-required-indicator', className)}
+        role='presentation'
+        aria-hidden={true}
         __css={css}
         {...rest}
       >
@@ -233,7 +242,7 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
 
 export type HelpTextProps = HTMLUIProps<'div'>
 
-export const FormHelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...rest }, ref) => {
+export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...rest }, ref) => {
   const { isInvalid, isReplace } = useFormControl()
   const styles = useFormControlStyles()
 
@@ -246,19 +255,23 @@ export const FormHelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, 
   )
 })
 
-export type FormErrorMessageProps = HTMLUIProps<'div'>
+export type ErrorMessageProps = HTMLUIProps<'div'>
 
-export const FormErrorMessage = forwardRef<FormErrorMessageProps, 'div'>(
-  ({ className, ...rest }, ref) => {
-    const { isInvalid } = useFormControl()
-    const styles = useFormControlStyles()
+export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(({ className, ...rest }, ref) => {
+  const { isInvalid } = useFormControl()
+  const styles = useFormControlStyles()
 
-    if (!isInvalid) return null
+  if (!isInvalid) return null
 
-    const css: CSSUIObject = { ...styles.errorMessage }
+  const css: CSSUIObject = { ...styles.errorMessage }
 
-    return (
-      <ui.div ref={ref} className={cx('ui-form-error-message', className)} __css={css} {...rest} />
-    )
-  },
-)
+  return (
+    <ui.div
+      ref={ref}
+      className={cx('ui-form-error-message', className)}
+      aria-live='polite'
+      __css={css}
+      {...rest}
+    />
+  )
+})

@@ -9,7 +9,7 @@ import {
   useComponentStyle,
   omitThemeProps,
 } from '@yamada-ui/system'
-import { cx, useMergeRefs, merge } from '@yamada-ui/utils'
+import { cx, useMergeRefs, merge, dataAttr } from '@yamada-ui/utils'
 import { FC, useMemo } from 'react'
 import { useButtonGroup } from './'
 
@@ -85,8 +85,8 @@ export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
       className={cx('ui-button', className)}
       type={type ?? defaultType}
       disabled={isDisabled || isLoading}
-      data-active={isActive}
-      data-loading={isLoading}
+      data-active={dataAttr(isActive)}
+      data-loading={dataAttr(isLoading)}
       __css={css}
       {...rest}
     >

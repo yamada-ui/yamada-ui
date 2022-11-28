@@ -1,5 +1,5 @@
 import { ui, forwardRef, CSSUIProps, HTMLUIProps, ThemeProps } from '@yamada-ui/system'
-import { createContext, cx } from '@yamada-ui/utils'
+import { createContext, cx, dataAttr } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
 type ButtonGroupOptions = {
@@ -75,6 +75,7 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
           ref={ref}
           role='group'
           className={cx('ui-button-group', className)}
+          data-attached={dataAttr(isAttached)}
           __css={css}
           {...rest}
         />

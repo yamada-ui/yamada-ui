@@ -54,6 +54,13 @@ export const isContains = (
 export const getEventRelatedTarget = (ev: React.FocusEvent) =>
   (ev.relatedTarget ?? ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 
+type Booleanish = boolean | 'true' | 'false'
+
+export const dataAttr = (condition: boolean | undefined) =>
+  (condition ? '' : undefined) as Booleanish
+
+export const ariaAttr = (condition: boolean | undefined) => (condition ? true : undefined)
+
 export type FocusableElement = {
   focus: (options?: FocusOptions) => void
 }

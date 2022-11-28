@@ -3,13 +3,14 @@ import { cx } from '@yamada-ui/utils'
 import { useInputGroup } from './'
 
 type InputElementOptions = {
+  isClick?: boolean
   placement?: 'left' | 'right'
 }
 
 export type InputElementProps = HTMLUIProps<'div'> & InputElementOptions
 
 const InputElement = forwardRef<InputElementProps, 'div'>(
-  ({ className, placement = 'left', ...rest }, ref) => {
+  ({ className, isClick = false, placement = 'left', ...rest }, ref) => {
     const styles = useInputGroup()
 
     const css: CSSUIObject = {
@@ -23,6 +24,7 @@ const InputElement = forwardRef<InputElementProps, 'div'>(
       w: styles.container?.height ?? styles.container?.h,
       h: styles.container?.height ?? styles.container?.h,
       fontSize: styles.container?.fontSize,
+      pointerEvents: isClick ? 'auto' : 'none',
       ...styles.element,
     }
 

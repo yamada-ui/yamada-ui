@@ -15,12 +15,12 @@ const InputAddon = forwardRef<InputAddonProps, 'div'>(
     const placementStyles = {
       left: {
         me: '-1px',
-        borderEndRadius: 0,
+        roundedRight: 0,
         borderEndColor: 'transparent',
       },
       right: {
         ms: '-1px',
-        borderStartRadius: 0,
+        roundedLeft: 0,
         borderStartColor: 'transparent',
       },
     }

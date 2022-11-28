@@ -46,9 +46,9 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
 
     if (height && child.type === InputRightElement) groupProps.paddingEnd = height
 
-    if (child.type === InputLeftAddon) groupProps.borderStartRadius = 0
+    if (child.type === InputLeftAddon) groupProps.roundedLeft = 0
 
-    if (child.type === InputRightAddon) groupProps.borderEndRadius = 0
+    if (child.type === InputRightAddon) groupProps.roundedRight = 0
   })
 
   const cloneChildren = validChildren.map((child) => {

@@ -34,7 +34,8 @@ export const Input: ComponentStyle = {
 
       return {
         container: {
-          border: '1px solid inherit',
+          border: '1px solid',
+          borderColor: 'inherit',
           bg: 'inherit',
           _hover: {
             borderColor: ['gray.300', 'whiteAlpha.400'],
@@ -75,7 +76,8 @@ export const Input: ComponentStyle = {
 
       return {
         container: {
-          border: '2px solid transparent',
+          border: '2px solid',
+          borderColor: 'transparent',
           bg: ['gray.100', 'whiteAlpha.50'],
           _hover: {
             bg: ['gray.200', 'whiteAlpha.100'],
@@ -113,7 +115,8 @@ export const Input: ComponentStyle = {
 
       return {
         container: {
-          borderBottom: '1px solid inherit',
+          borderBottom: '1px solid',
+          borderColor: 'inherit',
           rounded: '0',
           px: '0',
           bg: 'transparent',
@@ -131,7 +134,8 @@ export const Input: ComponentStyle = {
           },
         },
         addon: {
-          borderBottom: '2px solid inherit',
+          border: '2px solid',
+          borderColor: 'inherit',
           bg: 'transparent',
           rounded: '0',
           px: '0',

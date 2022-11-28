@@ -76,6 +76,8 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
     helperMessage,
     errorMessage,
     children,
+    requiredIndicator,
+    optionalIndicator,
     ...rest
   } = omitThemeProps(props)
 
@@ -119,8 +121,12 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
           __css={css}
           {...rest}
         >
-          {!isCustomLabel && label ? <Label>{label}</Label> : null}
-          {validChildren}
+          {!isCustomLabel && label ? (
+            <Label requiredIndicator={requiredIndicator} optionalIndicator={optionalIndicator}>
+              {label}
+            </Label>
+          ) : null}
+          {children}
           {!isCustomHelperMessage && helperMessage ? (
             <HelperMessage>{helperMessage}</HelperMessage>
           ) : null}
@@ -157,16 +163,29 @@ export const useFormControlProps = <T extends HTMLElement>({
 }: UseFormControlProps<T>) => {
   const control = useFormControl()
 
+  required = required ?? isRequired ?? control?.isRequired
+  disabled = disabled ?? isDisabled ?? control?.isDisabled
+  readOnly = readOnly ?? isReadOnly ?? control?.isReadOnly
+
+  isInvalid = isInvalid ?? control?.isInvalid
+
   return {
     id: id ?? control?.id,
-    required: required ?? isRequired ?? control?.isRequired,
-    disabled: disabled ?? isDisabled ?? control?.isDisabled,
-    readOnly: readOnly ?? isReadOnly ?? control?.isReadOnly,
-    'aria-required': ariaAttr(required ?? isRequired ?? control?.isRequired),
-    'aria-readonly': ariaAttr(readOnly ?? isReadOnly ?? control?.isReadOnly),
-    'aria-invalid': ariaAttr(isInvalid ?? control?.isInvalid),
+    required,
+    disabled,
+    readOnly,
+    'aria-required': ariaAttr(required),
+    'aria-readonly': ariaAttr(readOnly),
+    'aria-invalid': ariaAttr(isInvalid),
     onFocus: handlerAll(control?.onFocus, onFocus),
     onBlur: handlerAll(control?.onBlur, onBlur),
+    ...(readOnly
+      ? {
+          _hover: { borderColor: 'inherit' },
+          _focus: { borderColor: 'inherit' },
+          _invalid: { borderColor: 'inherit' },
+        }
+      : {}),
     ...rest,
   }
 }
@@ -193,7 +212,11 @@ export const Label = forwardRef<LabelProps, 'label'>(
     const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } = useFormControl()
     const styles = useFormControlStyles()
 
-    const css: CSSUIObject = { display: 'block', ...styles.label }
+    const css: CSSUIObject = {
+      display: 'block',
+      pointerEvents: isReadOnly ? 'none' : undefined,
+      ...styles.label,
+    }
 
     return (
       <ui.label
@@ -205,6 +228,7 @@ export const Label = forwardRef<LabelProps, 'label'>(
         data-invalid={dataAttr(isInvalid)}
         htmlFor={htmlFor ?? id}
         __css={css}
+        style={{ cursor: isDisabled ? 'not-allowed' : undefined }}
         {...rest}
       >
         {children}

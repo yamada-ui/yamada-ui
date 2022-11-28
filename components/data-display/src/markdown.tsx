@@ -9,7 +9,7 @@ import {
   useValue,
 } from '@yamada-ui/system'
 import { cx, filterEmpty } from '@yamada-ui/utils'
-import { ComponentPropsWithoutRef, CSSProperties, FC } from 'react'
+import { ComponentPropsWithoutRef, FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   CodeProps,
@@ -23,88 +23,11 @@ import {
 import { ReactMarkdownProps } from 'react-markdown/lib/complex-types'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import {
-  coy,
-  dark,
-  funky,
-  okaidia,
-  solarizedlight,
-  tomorrow,
-  twilight,
-  prism,
-  a11yDark,
-  atomDark,
-  base16AteliersulphurpoolLight,
-  cb,
-  coldarkCold,
-  coldarkDark,
-  darcula,
-  dracula,
-  duotoneDark,
-  duotoneEarth,
-  duotoneForest,
-  duotoneLight,
-  duotoneSea,
-  duotoneSpace,
-  ghcolors,
-  gruvboxDark,
-  gruvboxLight,
-  hopscotch,
-  materialDark,
-  materialLight,
-  materialOceanic,
-  nord,
-  oneDark,
-  oneLight,
-  pojoaque,
-  shadesOfPurple,
-  synthwave84,
-  vs,
-  vscDarkPlus,
-  xonokai,
-} from 'react-syntax-highlighter/dist/esm/styles/prism'
+import * as styles from 'react-syntax-highlighter/dist/esm/styles/prism'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 
-type CodeTheme =
-  | 'coy'
-  | 'dark'
-  | 'funky'
-  | 'okaidia'
-  | 'solarizedlight'
-  | 'tomorrow'
-  | 'twilight'
-  | 'prism'
-  | 'a11yDark'
-  | 'atomDark'
-  | 'base16AteliersulphurpoolLight'
-  | 'cb'
-  | 'coldarkCold'
-  | 'coldarkDark'
-  | 'darcula'
-  | 'dracula'
-  | 'duotoneDark'
-  | 'duotoneEarth'
-  | 'duotoneForest'
-  | 'duotoneLight'
-  | 'duotoneSea'
-  | 'duotoneSpace'
-  | 'ghcolors'
-  | 'gruvboxDark'
-  | 'gruvboxLight'
-  | 'hopscotch'
-  | 'materialDark'
-  | 'materialLight'
-  | 'materialOceanic'
-  | 'nord'
-  | 'oneDark'
-  | 'oneLight'
-  | 'pojoaque'
-  | 'shadesOfPurple'
-  | 'synthwave84'
-  | 'vs'
-  | 'vscDarkPlus'
-  | 'xonokai'
+type CodeTheme = keyof typeof styles
 
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
   ComponentPropsWithoutRef<Y> & ReactMarkdownProps
@@ -158,89 +81,6 @@ export const Markdown = forwardRef<MarkdownProps, 'div'>((props, ref) => {
   )
 })
 
-const getTheme = (theme: CodeTheme) => {
-  switch (theme) {
-    case 'coy':
-      return coy
-    case 'dark':
-      return dark
-    case 'funky':
-      return funky
-    case 'okaidia':
-      return okaidia
-    case 'solarizedlight':
-      return solarizedlight
-    case 'tomorrow':
-      return tomorrow
-    case 'twilight':
-      return twilight
-    case 'prism':
-      return prism
-    case 'a11yDark':
-      return a11yDark
-    case 'atomDark':
-      return atomDark
-    case 'base16AteliersulphurpoolLight':
-      return base16AteliersulphurpoolLight
-    case 'cb':
-      return cb
-    case 'coldarkCold':
-      return coldarkCold
-    case 'coldarkDark':
-      return coldarkDark
-    case 'darcula':
-      return darcula
-    case 'dracula':
-      return dracula
-    case 'duotoneDark':
-      return duotoneDark
-    case 'duotoneEarth':
-      return duotoneEarth
-    case 'duotoneForest':
-      return duotoneForest
-    case 'duotoneLight':
-      return duotoneLight
-    case 'duotoneSea':
-      return duotoneSea
-    case 'duotoneSpace':
-      return duotoneSpace
-    case 'ghcolors':
-      return ghcolors
-    case 'gruvboxDark':
-      return gruvboxDark
-    case 'gruvboxLight':
-      return gruvboxLight
-    case 'hopscotch':
-      return hopscotch
-    case 'materialDark':
-      return materialDark
-    case 'materialLight':
-      return materialLight
-    case 'materialOceanic':
-      return materialOceanic
-    case 'nord':
-      return nord
-    case 'oneDark':
-      return oneDark
-    case 'oneLight':
-      return oneLight
-    case 'pojoaque':
-      return pojoaque
-    case 'shadesOfPurple':
-      return shadesOfPurple
-    case 'synthwave84':
-      return synthwave84
-    case 'vs':
-      return vs
-    case 'vscDarkPlus':
-      return vscDarkPlus
-    case 'xonokai':
-      return xonokai
-    default:
-      return undefined
-  }
-}
-
 const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
   inline,
   className,
@@ -251,8 +91,6 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
 
   theme = useValue(theme)
 
-  const style: CSSProperties = { ...getTheme(theme) }
-
   const language = className?.replace(/language-/, '')
 
   return (
@@ -260,7 +98,7 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
       as={SyntaxHighlighter}
       className={cx('ui-markdown-code', className)}
       language={language}
-      style={style}
+      style={(styles as any)[theme]}
     >
       {String(children).replace(/\n$/, '')}
     </ui.pre>

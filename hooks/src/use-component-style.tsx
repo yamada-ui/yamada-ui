@@ -73,8 +73,8 @@ const usetStyles = (
       isMulti,
     )
 
-    styles = merge(styles, variant)
     styles = merge(styles, size)
+    styles = merge(styles, variant)
 
     const isStyleEqual = isEqual(ref.current, styles)
 

@@ -1,7 +1,6 @@
 export * from './button'
 export * from './button-group'
 export * from './icon-button'
-export * from './close-button'
 export * from './form-control'
 export * from './input'
 export * from './input-group'

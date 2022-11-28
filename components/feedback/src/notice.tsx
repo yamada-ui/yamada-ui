@@ -1,4 +1,4 @@
-import { CloseButton } from '@yamada-ui/forms'
+import { CloseButton } from '@yamada-ui/components'
 import {
   ui,
   useTheme,

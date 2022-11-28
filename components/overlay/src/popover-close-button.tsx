@@ -1,4 +1,4 @@
-import { CloseButton, CloseButtonProps } from '@yamada-ui/forms'
+import { CloseButton, CloseButtonProps } from '@yamada-ui/components'
 import { forwardRef, CSSUIObject } from '@yamada-ui/system'
 import { cx, handlerAll } from '@yamada-ui/utils'
 import { usePopover } from './'

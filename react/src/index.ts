@@ -7,6 +7,7 @@ export * from '@yamada-ui/providers'
 export * from '@yamada-ui/utils'
 export * from '@yamada-ui/theme'
 
+export * from '@yamada-ui/components'
 export * from '@yamada-ui/layouts'
 export * from '@yamada-ui/typography'
 export * from '@yamada-ui/media-and-icons'

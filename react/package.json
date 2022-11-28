@@ -24,6 +24,7 @@
     "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/components": "workspace:*",
     "@yamada-ui/layouts": "workspace:*",
     "@yamada-ui/typography": "workspace:*",
     "@yamada-ui/media-and-icons": "workspace:*",

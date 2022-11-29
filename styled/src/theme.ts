@@ -1,5 +1,5 @@
 import { flattenObject, objectFromEntries, pickObject, omitObject, Dict } from '@yamada-ui/utils'
-import { StyledTheme, ThemeProps, ThemeConfig, analyzeBreakpoints, createVars } from './'
+import { ThemeProps, ThemeConfig, analyzeBreakpoints, createVars } from './'
 
 export type VarToken = {
   isSemantic: boolean
@@ -30,7 +30,7 @@ export type ThemeToken =
   | 'transitions.property'
   | 'transitions.easing'
 
-export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig) => {
+export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig): Dict => {
   const theme = omitTheme(_theme)
 
   const tokens = createTokens(theme)
@@ -48,7 +48,7 @@ export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig) =
     __breakpoints: analyzeBreakpoints(breakpoints),
   })
 
-  return theme as StyledTheme<T>
+  return theme
 }
 
 const createTokens = (theme: Dict): VarTokens => {

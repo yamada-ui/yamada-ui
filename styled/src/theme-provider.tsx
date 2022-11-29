@@ -6,16 +6,31 @@ import {
 } from '@emotion/react'
 import { Dict } from '@yamada-ui/utils'
 import { FC, useMemo, useContext, Context } from 'react'
-import { UIContext } from '../../providers/src'
-import { transformTheme, StyledTheme, ThemeConfig } from './'
+import { transformTheme, StyledTheme, ThemeScheme, ThemeConfig } from './'
 
-export type ThemeProviderProps = EmotionThemeProviderProps & { config: ThemeConfig }
+export type ChangeThemeScheme = (
+  themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme),
+) => void
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ theme, config, children }) => {
+type ThemeProviderOptions = {
+  themeScheme: ThemeScheme | undefined
+  changeThemeScheme: ChangeThemeScheme
+  config: ThemeConfig
+}
+
+export type ThemeProviderProps = EmotionThemeProviderProps & ThemeProviderOptions
+
+export const ThemeProvider: FC<ThemeProviderProps> = ({
+  theme,
+  themeScheme,
+  changeThemeScheme,
+  config,
+  children,
+}) => {
   const computedTheme = useMemo(() => transformTheme(theme, config), [theme, config])
 
   return (
-    <EmotionThemeProvider theme={computedTheme}>
+    <EmotionThemeProvider theme={{ themeScheme, changeThemeScheme, ...computedTheme }}>
       <CSSVars />
       {children}
     </EmotionThemeProvider>
@@ -26,14 +41,20 @@ export const CSSVars: FC = () => {
   return <Global styles={({ __cssVars }: Dict) => ({ ':host, :root, [data-theme]': __cssVars })} />
 }
 
-export const useTheme = <T extends object = StyledTheme<Dict>>() => {
-  const { themeScheme, changeThemeScheme } = useContext(UIContext)
-  const theme = useContext(ThemeContext as unknown as Context<T | undefined>)
+export const useTheme = <T extends object = Dict>() => {
+  const { themeScheme, changeThemeScheme, ...theme } = useContext(
+    ThemeContext as unknown as Context<
+      Pick<ThemeProviderOptions, 'themeScheme' | 'changeThemeScheme'> & StyledTheme<T>
+    >,
+  )
 
   if (!theme)
     throw Error(
       'useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`',
     )
 
-  return { theme, themeScheme, changeThemeScheme }
+  return { themeScheme, changeThemeScheme, theme } as Pick<
+    ThemeProviderOptions,
+    'themeScheme' | 'changeThemeScheme'
+  > & { theme: StyledTheme<T> }
 }

@@ -7,3 +7,4 @@ packages:
   - 'components/**'
   - 'react/**'
   - 'cli/**'
+  - 'examples/**'

@@ -53,7 +53,7 @@ $ ? Does this use a provider?: Yes
 1.Wrap your application with the `UIProvider` provided
 
 ```tsx
-import { UIProvider } from 'ui'
+import { UIProvider } from '@yamada-ui/react'
 
 const App = ({ children }) => {
   return <UIProvider>{children}</UIProvider>
@@ -67,7 +67,7 @@ Yamada-ui supports light and dark modes by default
 2.Now you can start using components like so
 
 ```tsx
-import { Box, Text } from 'ui'
+import { Box, Text } from '@yamada-ui/react'
 
 const Example = () => {
   return (

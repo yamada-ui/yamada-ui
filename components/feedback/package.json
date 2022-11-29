@@ -20,16 +20,16 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "react-loader-spinner": "^5.3.4",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/media-and-icons": "workspace:*",
     "@yamada-ui/components": "workspace:*",
     "@yamada-ui/hooks": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "react-loader-spinner": "^5.3.4"
   },
   "devDependencies": {
-    "clean-package": "2.1.1",
-    "react": "^18.0.0"
+    "react": "^18.0.0",
+    "clean-package": "2.1.1"
   },
   "peerDependencies": {
     "react": ">=18"

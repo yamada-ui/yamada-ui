@@ -22,6 +22,5 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
-  },
-  "devDependencies": {}
+  }
 }

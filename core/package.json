@@ -21,19 +21,17 @@
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "framer-motion": "^6.2.9",
     "react-fast-compare": "^3.2.0",
     "csstype": "^3.1.1"
   },
   "devDependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "clean-package": "2.1.1",
-    "react": "^18.0.0"
+    "react": "^18.0.0",
+    "clean-package": "2.1.1"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
     "react": ">=18"
   }
 }

@@ -7,20 +7,12 @@ import {
   ThemeProvider,
   ColorSchemeProvider,
   useColorScheme,
+  ChangeThemeScheme,
 } from '@yamada-ui/system'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
-import { createContext, FC, ReactNode, useCallback, useMemo, useState } from 'react'
+import { FC, ReactNode, useCallback, useMemo, useState } from 'react'
 import { LoadingProvider, NoticeProvider } from './'
-
-type UIContext = {
-  themeScheme: ThemeScheme | undefined
-  changeThemeScheme: (
-    themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme),
-  ) => void
-}
-
-export const UIContext = createContext({} as UIContext)
 
 export type UIProviderProps = {
   theme?: Dict | Dict[]
@@ -45,7 +37,7 @@ export const UIProvider: FC<UIProviderProps> = ({
     [initialTheme, themeScheme],
   )
 
-  const changeThemeScheme = useCallback(
+  const changeThemeScheme: ChangeThemeScheme = useCallback(
     (themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme)) => {
       if (isUndefined(themeScheme))
         throw Error(
@@ -59,29 +51,24 @@ export const UIProvider: FC<UIProviderProps> = ({
     [themeScheme],
   )
 
-  const value = useMemo(
-    () => ({
-      themeScheme,
-      changeThemeScheme,
-    }),
-    [themeScheme, changeThemeScheme],
-  )
-
   return (
-    <UIContext.Provider value={value}>
-      <ThemeProvider theme={theme} config={config}>
-        <ColorSchemeProvider colorSchemeManager={colorSchemeManager} config={config}>
-          <LoadingProvider {...config.loading}>
-            {reset ? <ResetStyle /> : null}
-            <GlobalStyle />
+    <ThemeProvider
+      theme={theme}
+      themeScheme={themeScheme}
+      changeThemeScheme={changeThemeScheme}
+      config={config}
+    >
+      <ColorSchemeProvider colorSchemeManager={colorSchemeManager} config={config}>
+        <LoadingProvider {...config.loading}>
+          {reset ? <ResetStyle /> : null}
+          <GlobalStyle />
 
-            {children}
+          {children}
 
-            <NoticeProvider {...config.notice} />
-          </LoadingProvider>
-        </ColorSchemeProvider>
-      </ThemeProvider>
-    </UIContext.Provider>
+          <NoticeProvider {...config.notice} />
+        </LoadingProvider>
+      </ColorSchemeProvider>
+    </ThemeProvider>
   )
 }
 

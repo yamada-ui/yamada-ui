@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
 
 type FlexOptions = {
   direction?: CSSUIProps['flexDirection']

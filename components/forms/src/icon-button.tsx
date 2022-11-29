@@ -1,4 +1,4 @@
-import { forwardRef } from '@yamada-ui/system'
+import { forwardRef } from '@yamada-ui/core'
 import { ReactElement } from 'react'
 import { Button, ButtonProps } from '.'
 

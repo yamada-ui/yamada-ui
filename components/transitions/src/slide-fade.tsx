@@ -8,8 +8,8 @@ import {
   forwardRef,
   CSSUIObject,
   Token,
-  useValue,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { useValue } from '@yamada-ui/hooks'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 

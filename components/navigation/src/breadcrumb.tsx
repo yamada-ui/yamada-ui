@@ -7,7 +7,7 @@ import {
   CSSUIObject,
   useMultiComponentStyle,
   CSSUIProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx, createContext, getValidChildren } from '@yamada-ui/utils'
 import { cloneElement } from 'react'
 

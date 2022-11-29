@@ -20,7 +20,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/styled": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {}

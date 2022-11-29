@@ -6,7 +6,7 @@ import {
   useComponentStyle,
   CSSUIObject,
   omitThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx, isArray } from '@yamada-ui/utils'
 import { FC, Fragment, ReactNode, useMemo } from 'react'
 import { Text, TextProps } from './'

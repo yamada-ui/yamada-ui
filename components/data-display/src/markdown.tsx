@@ -6,8 +6,8 @@ import {
   ThemeProps,
   useComponentStyle,
   ColorSchemeArray,
-  useValue,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { useValue } from '@yamada-ui/hooks'
 import { cx, filterEmpty } from '@yamada-ui/utils'
 import { ComponentPropsWithoutRef, FC } from 'react'
 import ReactMarkdown from 'react-markdown'

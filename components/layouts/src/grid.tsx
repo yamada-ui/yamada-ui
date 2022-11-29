@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps, Token } from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps, Token } from '@yamada-ui/core'
 import { replaceObject } from '@yamada-ui/utils'
 
 type GridOptions = {

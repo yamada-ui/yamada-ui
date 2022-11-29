@@ -1,4 +1,4 @@
-import { ComponentStyle, isDefaultColor, mode } from '@yamada-ui/styled'
+import { ComponentStyle, isDefaultColor, mode } from '@yamada-ui/core'
 import { shadeColor, toneColor, getColor } from '@yamada-ui/utils'
 
 export const Alert: ComponentStyle = {

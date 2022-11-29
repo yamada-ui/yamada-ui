@@ -20,10 +20,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
+    "@yamada-ui/hooks": "workspace:*",
     "react-remove-scroll": "^2.5.4",
     "framer-motion": "^6.2.9"
   },

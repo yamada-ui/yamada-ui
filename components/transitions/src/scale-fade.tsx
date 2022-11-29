@@ -7,7 +7,7 @@ import {
   MotionVariants,
   forwardRef,
   CSSUIObject,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 

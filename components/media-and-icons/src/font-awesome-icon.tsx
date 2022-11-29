@@ -1,6 +1,6 @@
 import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 

@@ -7,8 +7,8 @@ import {
   omitThemeProps,
   CSSUIObject,
   Interpolation,
-  useAnimation,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { useAnimation } from '@yamada-ui/hooks'
 import { createContext, cx } from '@yamada-ui/utils'
 import { FC } from 'react'
 

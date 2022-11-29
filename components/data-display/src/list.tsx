@@ -1,4 +1,3 @@
-import { Icon, IconProps, FontAwesomeIconProps, FontAwesomeIcon } from '@yamada-ui/media-and-icons'
 import {
   ui,
   forwardRef,
@@ -8,7 +7,8 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { Icon, IconProps, FontAwesomeIconProps, FontAwesomeIcon } from '@yamada-ui/media-and-icons'
 import { createContext, cx, getValidChildren } from '@yamada-ui/utils'
 
 const [ListProvider, useList] = createContext<Record<string, CSSUIObject>>({

@@ -6,7 +6,7 @@ import {
   useComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 
 export type BadgeProps = HTMLUIProps<'span'> & ThemeProps<'Badge'>

@@ -1,4 +1,4 @@
-import { useColorScheme, useTheme, Theme } from '@yamada-ui/styled'
+import { useColorScheme, useTheme, Theme } from '@yamada-ui/core'
 import { getMemoizedObject as get, isArray } from '@yamada-ui/utils'
 
 export const useToken = <

@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
 import { getValidChildren, cx, replaceObject } from '@yamada-ui/utils'
 import { cloneElement, Fragment, ReactElement, useMemo } from 'react'
 

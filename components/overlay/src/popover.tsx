@@ -4,6 +4,8 @@ import {
   CSSUIObject,
   ThemeProps,
   MotionTransitionProperties,
+} from '@yamada-ui/core'
+import {
   useDisclosure,
   usePopper,
   UsePopperProps,
@@ -13,7 +15,7 @@ import {
   useFocusOnShow,
   useFocusOnPointerDown,
   useAnimationObserver,
-} from '@yamada-ui/system'
+} from '@yamada-ui/hooks'
 import {
   createContext,
   DOMAttributes,
@@ -24,7 +26,6 @@ import {
   PropGetter,
   runIfFunc,
 } from '@yamada-ui/utils'
-
 import { FC, PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 
 type Trigger = 'click' | 'hover'

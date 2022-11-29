@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { usePopover } from './'
 

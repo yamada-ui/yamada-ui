@@ -20,9 +20,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/media-and-icons": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/hooks": "workspace:*",
     "react-markdown": "^8.0.3",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^6.1.1",

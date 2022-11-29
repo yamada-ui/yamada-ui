@@ -21,9 +21,10 @@
   },
   "dependencies": {
     "react-loader-spinner": "^5.3.4",
-    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/media-and-icons": "workspace:*",
     "@yamada-ui/components": "workspace:*",
+    "@yamada-ui/hooks": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { ComponentStyle } from '@yamada-ui/styled'
+import { ComponentStyle } from '@yamada-ui/core'
 
 export const List: ComponentStyle = {
   baseStyle: {

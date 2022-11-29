@@ -9,8 +9,8 @@ import {
   CSSUIProps,
   MotionTransitionProperties,
   Token,
-  useValue,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { useValue } from '@yamada-ui/hooks'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import {
   cx,

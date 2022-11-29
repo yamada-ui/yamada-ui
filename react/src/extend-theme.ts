@@ -8,7 +8,7 @@ import {
   ComponentDefaultProps,
   UIStyle,
   UIStyleProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { defaultTheme } from '@yamada-ui/theme'
 import {
   Dict,

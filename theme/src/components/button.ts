@@ -1,4 +1,4 @@
-import { ComponentStyle, isDefaultColor } from '@yamada-ui/styled'
+import { ComponentStyle, isDefaultColor } from '@yamada-ui/core'
 import { transparentizeColor, toneColor } from '@yamada-ui/utils'
 
 export const Button: ComponentStyle = {

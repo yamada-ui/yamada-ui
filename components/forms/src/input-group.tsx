@@ -6,9 +6,9 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  useToken,
   CSSUIProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { useToken } from '@yamada-ui/hooks'
 import { createContext, cx, filterUndefined, getValidChildren } from '@yamada-ui/utils'
 import { cloneElement } from 'react'
 import { Input, InputRightElement, InputLeftElement, InputLeftAddon, InputRightAddon } from './'

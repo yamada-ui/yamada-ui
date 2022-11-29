@@ -18,7 +18,7 @@
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",
     "build:storybook": "pnpm build && build-storybook",
-    "gen:tokens": "yamada-cli tokens theme/src --out styled/src/generated-theme.types.ts",
+    "gen:tokens": "yamada-cli tokens theme/src --out core/src/generated-theme.types.ts",
     "gen:pkg": "plop package && pnpm install",
     "gen:component": "plop component",
     "next:dev": "pnpm --prefix examples/next-js dev",

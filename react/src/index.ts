@@ -2,7 +2,7 @@ export * from './extend-theme'
 export * from './with-default'
 export * from './extend-config'
 
-export * from '@yamada-ui/system'
+export * from '@yamada-ui/core'
 export * from '@yamada-ui/providers'
 export * from '@yamada-ui/utils'
 export * from '@yamada-ui/theme'

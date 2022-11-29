@@ -6,7 +6,7 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import {
   createContext,
   cx,

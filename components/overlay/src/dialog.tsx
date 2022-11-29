@@ -1,11 +1,11 @@
-import { Button, ButtonProps } from '@yamada-ui/forms'
 import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
   ThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { Button, ButtonProps } from '@yamada-ui/forms'
 import {
   createContext,
   getValidChildren,

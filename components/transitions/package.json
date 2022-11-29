@@ -20,8 +20,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/system": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/hooks": "workspace:*",
     "framer-motion": "^6.2.9"
   },
   "devDependencies": {

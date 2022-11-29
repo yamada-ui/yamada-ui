@@ -4,7 +4,7 @@ import {
   omitThemeProps,
   CSSUIObject,
   ThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { Slide, SlideProps } from '@yamada-ui/transitions'
 import { createContext, getValidChildren, findChildren, cx } from '@yamada-ui/utils'
 import {

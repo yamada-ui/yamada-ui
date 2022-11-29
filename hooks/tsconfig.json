@@ -1,4 +1,4 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["src", "index.ts", "../react/src/extend-theme.ts", "../react/src/extend-theme.ts"]
+  "include": ["src", "index.ts"]
 }

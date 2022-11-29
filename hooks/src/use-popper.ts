@@ -1,5 +1,5 @@
 import { createPopper, Instance, Modifier, VirtualElement, Placement } from '@popperjs/core'
-import { Token } from '@yamada-ui/styled'
+import { Token } from '@yamada-ui/core'
 import { mergeRefs, PropGetter } from '@yamada-ui/utils'
 import { useCallback, useEffect, useRef } from 'react'
 import { useValue } from './'

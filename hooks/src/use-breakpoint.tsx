@@ -1,4 +1,4 @@
-import { useTheme, Theme } from '@yamada-ui/styled'
+import { useTheme, Theme } from '@yamada-ui/core'
 import { createdDom } from '@yamada-ui/utils'
 import { useState, useMemo, useEffect } from 'react'
 

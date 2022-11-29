@@ -6,7 +6,7 @@ import {
   NoticePlacement,
   NoticeComponentProps,
   NoticeConfigOptions,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { merge } from '@yamada-ui/utils'
 import { FC, ReactNode, useMemo } from 'react'
 import { AlertProps, Alert, AlertDescription, AlertIcon, AlertTitle } from '.'

@@ -8,7 +8,7 @@ import {
   forwardRef,
   MOTION_TRANSITION_EASINGS,
   CSSUIObject,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { createdDom, cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'

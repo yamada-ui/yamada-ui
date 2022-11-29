@@ -1,4 +1,3 @@
-import { Icon } from '@yamada-ui/media-and-icons'
 import {
   ui,
   forwardRef,
@@ -7,7 +6,8 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { Icon } from '@yamada-ui/media-and-icons'
 import { cx } from '@yamada-ui/utils'
 import { FC, ReactNode } from 'react'
 

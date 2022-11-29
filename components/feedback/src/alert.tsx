@@ -1,4 +1,3 @@
-import { InfoIcon, WarningIcon, CheckIcon } from '@yamada-ui/media-and-icons'
 import {
   ui,
   forwardRef,
@@ -7,7 +6,8 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { InfoIcon, WarningIcon, CheckIcon } from '@yamada-ui/media-and-icons'
 import { createContext, cx } from '@yamada-ui/utils'
 import { Loading, LoadingProps } from './'
 

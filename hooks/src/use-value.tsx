@@ -1,4 +1,4 @@
-import { useColorSchemetValue, ResponsiveObject, ColorSchemeArray } from '@yamada-ui/styled'
+import { useColorSchemetValue, ResponsiveObject, ColorSchemeArray } from '@yamada-ui/core'
 import { isObject, isArray } from '@yamada-ui/utils'
 import { useBreakpointValue } from './'
 

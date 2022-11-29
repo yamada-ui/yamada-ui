@@ -1,4 +1,4 @@
-import { ThemeConfig } from '@yamada-ui/styled'
+import { ThemeConfig } from '@yamada-ui/core'
 
 export const config: ThemeConfig = {
   initialColorScheme: 'light',

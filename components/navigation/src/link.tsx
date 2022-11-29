@@ -5,7 +5,7 @@ import {
   omitThemeProps,
   ThemeProps,
   useComponentStyle,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 
 type LinkOptions = {

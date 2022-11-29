@@ -20,9 +20,8 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/styled": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-fast-compare": "^3.2.0",
     "@popperjs/core": "^2.9.3",
     "csstype": "^3.1.1"
   },
@@ -31,7 +30,6 @@
     "clean-package": "2.1.1"
   },
   "peerDependencies": {
-    "react-fast-compare": "^3.2.0",
     "react": ">=18"
   }
 }

@@ -1,16 +1,15 @@
-import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/feedback'
 import {
   ui,
   forwardRef,
   HTMLUIProps,
   ThemeProps,
   CSSUIObject,
-  useButtonType,
   useComponentStyle,
   omitThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/feedback'
 import { cx, useMergeRefs, merge, dataAttr } from '@yamada-ui/utils'
-import { FC, useMemo } from 'react'
+import { ElementType, FC, useCallback, useMemo, useState } from 'react'
 import { useButtonGroup } from './'
 
 type ButtonOptions = {
@@ -169,4 +168,16 @@ const Icon: FC<HTMLUIProps<'span'>> = ({ children, className, ...rest }) => {
       {children}
     </ui.span>
   )
+}
+
+export const useButtonType = (value?: ElementType) => {
+  const [isButton, setIsButton] = useState(!value)
+
+  const ref = useCallback((node: HTMLElement | null) => {
+    if (node) setIsButton(node.tagName === 'BUTTON')
+  }, [])
+
+  const type = isButton ? 'button' : undefined
+
+  return { ref, type } as const
 }

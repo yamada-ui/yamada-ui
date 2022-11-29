@@ -1,4 +1,4 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/system'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { useInputGroup } from './'
 

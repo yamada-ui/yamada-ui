@@ -1,4 +1,3 @@
-import { CloseIcon } from '@yamada-ui/media-and-icons'
 import {
   ui,
   forwardRef,
@@ -7,7 +6,8 @@ import {
   CSSUIObject,
   useComponentStyle,
   omitThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
+import { CloseIcon } from '@yamada-ui/media-and-icons'
 import { cx } from '@yamada-ui/utils'
 
 type CloseButtonOptions = {

@@ -7,7 +7,7 @@ const exists = promisify(fs.exists)
 export const themePath = [
   'node_modules',
   '@yamada-ui',
-  'styled',
+  'core',
   'dist',
   'generated-theme.types.d.ts',
 ]
@@ -44,7 +44,7 @@ export const resolveOutputPath = async (outPath?: string): Promise<string> => {
 
   if (!themePath)
     throw new Error(
-      'Could not find @yamada-ui/styled in node_modules. Please provide `--out` parameter.',
+      'Could not find @yamada-ui/core in node_modules. Please provide `--out` parameter.',
     )
 
   return themePath

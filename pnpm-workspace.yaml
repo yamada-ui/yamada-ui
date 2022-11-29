@@ -1,11 +1,9 @@
 packages:
   - 'utils/**'
-  - 'styled/**'
+  - 'core/**'
   - 'theme/**'
-  - 'providers/**'
   - 'hooks/**'
-  - 'system/**'
+  - 'providers/**'
   - 'components/**'
   - 'react/**'
   - 'cli/**'
-  - 'examples/**'

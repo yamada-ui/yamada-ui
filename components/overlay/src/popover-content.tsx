@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/system'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import { cx, findChildren, funcAll, getValidChildren, omitObject } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps } from 'framer-motion'

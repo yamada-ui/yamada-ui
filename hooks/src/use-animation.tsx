@@ -5,7 +5,7 @@ import {
   keyframes as emotionKeyframes,
   StyledTheme,
   useTheme,
-} from '@yamada-ui/styled'
+} from '@yamada-ui/core'
 import { Dict, isArray, isUndefined, runIfFunc, getOwnerWindow } from '@yamada-ui/utils'
 import * as CSS from 'csstype'
 import { useCallback, useEffect, useRef, useState } from 'react'

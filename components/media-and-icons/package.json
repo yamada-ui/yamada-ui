@@ -20,10 +20,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/hooks": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@yamada-ui/system": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@fortawesome/react-fontawesome": "^0.2.0"
   },
   "devDependencies": {
     "clean-package": "2.1.1",

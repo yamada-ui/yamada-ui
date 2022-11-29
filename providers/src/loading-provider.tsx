@@ -1,5 +1,6 @@
+import { ui, ThemeConfig, LoadingComponentProps, CSSUIObject } from '@yamada-ui/core'
 import { Loading } from '@yamada-ui/feedback'
-import { ui, ThemeConfig, LoadingComponentProps, CSSUIObject, useTimeout } from '@yamada-ui/system'
+import { useTimeout } from '@yamada-ui/hooks'
 import { Portal, runIfFunc, isUndefined } from '@yamada-ui/utils'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import {

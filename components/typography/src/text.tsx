@@ -6,7 +6,7 @@ import {
   omitThemeProps,
   ThemeProps,
   useComponentStyle,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx, filterUndefined } from '@yamada-ui/utils'
 
 type TextOptions = {

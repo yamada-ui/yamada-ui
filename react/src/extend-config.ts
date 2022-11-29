@@ -1,4 +1,4 @@
-import { ThemeConfig } from '@yamada-ui/system'
+import { ThemeConfig } from '@yamada-ui/core'
 import { defaultConfig } from '@yamada-ui/theme'
 import { merge } from '@yamada-ui/utils'
 

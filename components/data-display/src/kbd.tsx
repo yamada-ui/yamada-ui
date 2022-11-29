@@ -5,7 +5,7 @@ import {
   ThemeProps,
   useComponentStyle,
   omitThemeProps,
-} from '@yamada-ui/system'
+} from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 
 export type KbdProps = HTMLUIProps<'kbd'> & ThemeProps<'Kbd'>

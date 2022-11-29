@@ -1,4 +1,5 @@
-import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps, useToken } from '@yamada-ui/system'
+import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps } from '@yamada-ui/core'
+import { useToken } from '@yamada-ui/hooks'
 import { cx, replaceObject, isUnit } from '@yamada-ui/utils'
 import { SVGAttributes } from 'react'
 

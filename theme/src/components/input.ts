@@ -174,13 +174,13 @@ export const Input: ComponentStyle = {
     sm: {
       container: {
         fontSize: 'sm',
-        px: '3',
+        px: '2',
         h: '8',
         rounded: 'sm',
       },
       addon: {
         fontSize: 'sm',
-        px: '3',
+        px: '2',
         h: '8',
         rounded: 'sm',
       },
@@ -188,13 +188,13 @@ export const Input: ComponentStyle = {
     md: {
       container: {
         fontSize: 'md',
-        px: '4',
+        px: '3',
         h: '10',
         rounded: 'md',
       },
       addon: {
         fontSize: 'md',
-        px: '4',
+        px: '3',
         h: '10',
         rounded: 'md',
       },

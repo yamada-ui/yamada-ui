@@ -179,11 +179,11 @@ export const useFormControlProps = <T extends HTMLElement>({
     'aria-invalid': ariaAttr(isInvalid),
     onFocus: handlerAll(control?.onFocus, onFocus),
     onBlur: handlerAll(control?.onBlur, onBlur),
-    ...(readOnly
+    ...(disabled || readOnly
       ? {
-          _hover: { borderColor: 'inherit' },
-          _focus: { borderColor: 'inherit' },
-          _invalid: { borderColor: 'inherit' },
+          _hover: undefined,
+          _focus: undefined,
+          _invalid: undefined,
         }
       : {}),
     ...rest,

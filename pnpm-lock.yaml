@@ -497,6 +497,7 @@ importers:
       '@yamada-ui/data-display': workspace:*
       '@yamada-ui/feedback': workspace:*
       '@yamada-ui/forms': workspace:*
+      '@yamada-ui/hooks': workspace:*
       '@yamada-ui/layouts': workspace:*
       '@yamada-ui/media-and-icons': workspace:*
       '@yamada-ui/navigation': workspace:*
@@ -514,6 +515,7 @@ importers:
       '@yamada-ui/data-display': link:../components/data-display
       '@yamada-ui/feedback': link:../components/feedback
       '@yamada-ui/forms': link:../components/forms
+      '@yamada-ui/hooks': link:../hooks
       '@yamada-ui/layouts': link:../components/layouts
       '@yamada-ui/media-and-icons': link:../components/media-and-icons
       '@yamada-ui/navigation': link:../components/navigation

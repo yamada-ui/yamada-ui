@@ -4,6 +4,7 @@ export * from './extend-config'
 
 export * from '@yamada-ui/core'
 export * from '@yamada-ui/providers'
+export * from '@yamada-ui/hooks'
 export * from '@yamada-ui/utils'
 export * from '@yamada-ui/theme'
 

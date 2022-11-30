@@ -201,7 +201,6 @@ export const resetStyle: UIStyle = {
 
   textarea: {
     overflow: 'auto',
-    resize: 'none',
   },
 
   "[type='number']::-webkit-inner-spin-button, [type='number']::-webkit-outer-spin-button": {

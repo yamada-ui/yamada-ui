@@ -19,6 +19,7 @@ import { Modal } from './modal'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Tag } from './tag'
+import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
@@ -43,5 +44,6 @@ export default {
   Popover,
   Progress,
   Tag,
+  Textarea,
   Tooltip,
 }

@@ -16,6 +16,7 @@ import { List } from './list'
 import { Mark } from './mark'
 import { Markdown } from './markdown'
 import { Modal } from './modal'
+import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Tag } from './tag'
@@ -41,6 +42,7 @@ export default {
   Mark,
   Markdown,
   Modal,
+  PinInput,
   Popover,
   Progress,
   Tag,

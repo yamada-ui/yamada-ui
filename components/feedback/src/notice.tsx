@@ -6,8 +6,9 @@ import {
   NoticePlacement,
   NoticeComponentProps,
   NoticeConfigOptions,
+  StyledTheme,
 } from '@yamada-ui/core'
-import { merge } from '@yamada-ui/utils'
+import { Dict, merge } from '@yamada-ui/utils'
 import { FC, ReactNode, useMemo } from 'react'
 import { AlertProps, Alert, AlertDescription, AlertIcon, AlertTitle } from '.'
 
@@ -89,9 +90,7 @@ const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
   return Render
 }
 
-const createNoticeFunc = (defaultOptions: UseNoticeOptions) => {
-  const { theme } = useTheme()
-
+const createNoticeFunc = (defaultOptions: UseNoticeOptions, theme: StyledTheme<Dict<any>>) => {
   const themeOptions = theme.__config.notice?.options ?? {}
 
   const computedOptions = (options: UseNoticeOptions) =>
@@ -121,7 +120,9 @@ const createNoticeFunc = (defaultOptions: UseNoticeOptions) => {
 type CreateNoticeReturn = ReturnType<typeof createNoticeFunc>
 
 export const useNotice = (defaultOptions?: UseNoticeOptions): CreateNoticeReturn => {
-  return useMemo(() => createNoticeFunc(defaultOptions ?? {}), [defaultOptions])
+  const { theme } = useTheme()
+
+  return useMemo(() => createNoticeFunc(defaultOptions ?? {}, theme), [defaultOptions, theme])
 }
 
 type State = {

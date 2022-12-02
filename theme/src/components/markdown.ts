@@ -3,7 +3,7 @@ import { ComponentStyle } from '@yamada-ui/core'
 export const Markdown: ComponentStyle = {
   baseStyle: {
     w: 'full',
-    '*:first-child': {
+    '*:first-of-type': {
       mt: '0 !important',
     },
     'h1, h2, h3, h4, h5, h6': {

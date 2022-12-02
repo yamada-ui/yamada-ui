@@ -9,3 +9,9 @@ export const forwardRef = <Props extends object, Element extends As>(
 ) => {
   return React.forwardRef(component) as unknown as Component<Element, Props>
 }
+
+export const motionForwardRef = <Props extends object, Element extends As>(
+  component: React.ForwardRefRenderFunction<any, IntersectionProps<PropsOf<Element>, Props>>,
+) => {
+  return React.forwardRef(component) as unknown as Component<Element, Props>
+}

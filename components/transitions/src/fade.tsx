@@ -4,7 +4,7 @@ import {
   transitionEnter,
   transitionExit,
   WithTransitionProps,
-  MotionVariants,
+  MotionTransitionVariants,
   forwardRef,
   CSSUIObject,
 } from '@yamada-ui/core'
@@ -13,7 +13,7 @@ import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion'
 
 export type FadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>>
 
-const variants: MotionVariants = {
+const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),

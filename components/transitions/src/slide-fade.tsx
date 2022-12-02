@@ -4,7 +4,7 @@ import {
   transitionEnter,
   transitionExit,
   WithTransitionProps,
-  MotionVariants,
+  MotionTransitionVariants,
   forwardRef,
   CSSUIObject,
   Token,
@@ -22,7 +22,7 @@ type SlideFadeOptions = {
 export type SlideFadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
   SlideFadeOptions
 
-const variants: MotionVariants = {
+const variants: MotionTransitionVariants = {
   initial: ({ offsetX, offsetY, transition, transitionEnd, delay, duration, initial }) => ({
     opacity: 0,
     x: offsetX,

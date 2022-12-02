@@ -4,7 +4,7 @@ import {
   transitionEnter,
   transitionExit,
   WithTransitionProps,
-  MotionVariants,
+  MotionTransitionVariants,
   forwardRef,
   MOTION_TRANSITION_EASINGS,
   CSSUIObject,
@@ -24,7 +24,7 @@ type CollapseOptions = {
 export type CollapseProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
   CollapseOptions
 
-const variants: MotionVariants = {
+const variants: MotionTransitionVariants = {
   enter: ({
     animationOpacity,
     endingHeight: height,

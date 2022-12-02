@@ -4,7 +4,7 @@ import {
   transitionEnter,
   transitionExit,
   WithTransitionProps,
-  MotionVariants,
+  MotionTransitionVariants,
   forwardRef,
   CSSUIObject,
 } from '@yamada-ui/core'
@@ -19,7 +19,7 @@ type ScaleFadeOptions = {
 export type ScaleFadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
   ScaleFadeOptions
 
-const variants: MotionVariants = {
+const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
     scale: 1,

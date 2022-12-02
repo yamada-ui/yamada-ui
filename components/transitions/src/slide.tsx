@@ -4,7 +4,7 @@ import {
   transitionEnter,
   transitionExit,
   WithTransitionProps,
-  MotionVariants,
+  MotionTransitionVariants,
   forwardRef,
   MOTION_TRANSITION_VARIANTS,
   CSSUIObject,
@@ -36,7 +36,7 @@ type SlideOptions = {
 export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
   SlideOptions
 
-const variants: MotionVariants = {
+const variants: MotionTransitionVariants = {
   enter: ({ placement, transition, transitionEnd, delay, duration, enter } = {}) => ({
     ...getSlideProps(placement).enter,
     transition: transitionEnter(transition?.enter)(delay, duration),

@@ -5,7 +5,7 @@ type TargetResolver<Y = Dict> = (props: Y & MotionTransitionProperties) => Targe
 
 type Variant<Y = Dict> = TargetAndTransition | TargetResolver<Y>
 
-export type MotionVariants<Y = Dict> = {
+export type MotionTransitionVariants<Y = Dict> = {
   enter: Variant<Y>
   exit: Variant<Y>
   initial?: Variant<Y>

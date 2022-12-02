@@ -60,6 +60,7 @@ export type NoticeConfigOptions = ThemeProps<'Alert'> & {
 }
 
 export type LoadingComponentProps = {
+  initialState?: boolean
   icon: LoadingConfigOptions['icon']
   text: LoadingConfigOptions['text']
   timeout: number | null

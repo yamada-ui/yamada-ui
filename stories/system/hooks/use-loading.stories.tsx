@@ -13,7 +13,7 @@ export const basic = () => {
   const { screen, page, background } = useLoading()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
@@ -27,7 +27,7 @@ export const withTimeout = () => {
   const { screen, page, background } = useLoading()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button onClick={() => screen.start({ timeout: 5000 })}>Start screen loading</Button>
         <Button onClick={() => page.start({ timeout: 5000 })}>Start page loading</Button>
@@ -43,7 +43,7 @@ export const withMessage = () => {
   const { screen, page, background } = useLoading()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button onClick={() => screen.start({ message: 'Loading', timeout: 5000 })}>
           Start screen loading
@@ -63,7 +63,7 @@ export const customMessage = () => {
   const { screen, page, background } = useLoading()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button onClick={() => screen.start({ message: <Text color='primary'>Loading</Text> })}>
           Start screen loading
@@ -83,7 +83,7 @@ export const updateMessage = () => {
   const { screen, page, background } = useLoading()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button
           onClick={() => {
@@ -145,7 +145,7 @@ export const asyncFunction = () => {
   }
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button onClick={getData}>Start page loading</Button>
     </Center>
   )

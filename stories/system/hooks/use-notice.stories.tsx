@@ -9,7 +9,7 @@ export const basic = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button
         onClick={() =>
           notice({
@@ -28,7 +28,7 @@ export const withDuration = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button
         onClick={() =>
           notice({
@@ -48,7 +48,7 @@ export const keepStay = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button
         onClick={() =>
           notice({
@@ -69,7 +69,7 @@ export const withVariant = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
@@ -127,7 +127,7 @@ export const withLoadingVariant = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
@@ -193,7 +193,7 @@ export const withStatus = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
@@ -263,7 +263,7 @@ export const withColorStyle = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
@@ -325,7 +325,7 @@ export const withPlacement = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh' flexDirection='column' gap='md'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
       <Wrap gap='md'>
         <Button
           onClick={() =>
@@ -403,7 +403,7 @@ export const withIsClosable = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button
         onClick={() =>
           notice({
@@ -442,7 +442,7 @@ export const useClose = () => {
   }
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button onClick={onOpen}>Show Notice</Button>
         <Button onClick={onClose}>Close last Notice</Button>
@@ -476,7 +476,7 @@ export const useUpdate = () => {
   }
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button onClick={onOpen}>Show Notice</Button>
         <Button onClick={onUpdate}>Update last Notice</Button>
@@ -489,7 +489,7 @@ export const useLimit = () => {
   const notice = useNotice({ limit: 3 })
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button
         onClick={() =>
           notice({
@@ -508,7 +508,7 @@ export const costomComponent = () => {
   const notice = useNotice()
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Button
         onClick={() =>
           notice({
@@ -535,7 +535,7 @@ export const customStyle = () => {
   })
 
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Button
           onClick={() =>

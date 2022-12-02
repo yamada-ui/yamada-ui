@@ -8,7 +8,7 @@ export default {
 
 export const basic: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ'>
         <Text>Please Hover</Text>
       </Tooltip>
@@ -18,7 +18,7 @@ export const basic: ComponentStory<typeof Tooltip> = () => {
 
 export const withDuration: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' duration={0.7}>
         <Text>Please Hover</Text>
       </Tooltip>
@@ -28,7 +28,7 @@ export const withDuration: ComponentStory<typeof Tooltip> = () => {
 
 export const withOffset: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' offset={[16, 16]}>
         <Text>Please Hover</Text>
       </Tooltip>
@@ -38,7 +38,7 @@ export const withOffset: ComponentStory<typeof Tooltip> = () => {
 
 export const withGutter: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' gutter={32}>
         <Text>Please Hover</Text>
       </Tooltip>
@@ -48,7 +48,7 @@ export const withGutter: ComponentStory<typeof Tooltip> = () => {
 
 export const withAnimation: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh' flexDirection='column' gap='md'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
       <Tooltip label='へっ！きたねぇ花火だ' animation='scale'>
         <Text>Open scale Tooltip</Text>
       </Tooltip>
@@ -74,7 +74,7 @@ export const withAnimation: ComponentStory<typeof Tooltip> = () => {
 
 export const withDelay: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh' flexDirection='column' gap='md'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
       <Tooltip label='へっ！きたねぇ花火だ' placement='top' openDelay={500}>
         <Text>Delay Open 500ms</Text>
       </Tooltip>
@@ -88,7 +88,7 @@ export const withDelay: ComponentStory<typeof Tooltip> = () => {
 
 export const withPlacement: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh' flexDirection='column' gap='md'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
       <Tooltip label='へっ！きたねぇ花火だ' placement='top'>
         <Text>Open top Tooltip</Text>
       </Tooltip>
@@ -142,7 +142,7 @@ export const withPlacement: ComponentStory<typeof Tooltip> = () => {
 
 export const withDisabled: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' isDisabled>
         <Text>Please Hover</Text>
       </Tooltip>
@@ -152,7 +152,7 @@ export const withDisabled: ComponentStory<typeof Tooltip> = () => {
 
 export const alwaysOpen: ComponentStory<typeof Tooltip> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' isOpen>
         <Text>Please Hover</Text>
       </Tooltip>

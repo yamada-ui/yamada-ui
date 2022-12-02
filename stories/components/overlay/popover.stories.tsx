@@ -22,7 +22,7 @@ export default {
 
 export const basic: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -39,7 +39,7 @@ export const basic: ComponentStory<typeof Popover> = () => {
 
 export const withFooter: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -57,7 +57,7 @@ export const withFooter: ComponentStory<typeof Popover> = () => {
 
 export const withAnchor: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh' gap='md'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
       <Popover closeOnBlur={false}>
         <PopoverAnchor>
           <Text>Here display Popover</Text>
@@ -79,7 +79,7 @@ export const withAnchor: ComponentStory<typeof Popover> = () => {
 
 export const withDuration: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover duration={0.7}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -97,7 +97,7 @@ export const withDuration: ComponentStory<typeof Popover> = () => {
 export const controlPopover: ComponentStory<typeof Popover> = () => {
   const [isOpen, , onClose, onToggle] = useDisclosure()
   return (
-    <Center w='100vw' h='100vh' gap='md'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
       <Button onClick={onToggle}>Open Popover</Button>
 
       <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
@@ -116,7 +116,7 @@ export const controlPopover: ComponentStory<typeof Popover> = () => {
 
 export const withOffset: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover offset={[16, 16]}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -133,7 +133,7 @@ export const withOffset: ComponentStory<typeof Popover> = () => {
 
 export const withGutter: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover gutter={32}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -150,7 +150,7 @@ export const withGutter: ComponentStory<typeof Popover> = () => {
 
 export const withAnimation: ComponentStory<typeof Popover> = () => {
   return (
-    <Center h='100vh'>
+    <Center h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Popover animation='scale'>
           <PopoverTrigger>
@@ -213,7 +213,7 @@ export const withAnimation: ComponentStory<typeof Popover> = () => {
 
 export const withPlacement: ComponentStory<typeof Popover> = () => {
   return (
-    <Center h='100vh'>
+    <Center h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
         <Popover placement='top'>
           <PopoverTrigger>
@@ -353,7 +353,7 @@ export const withPlacement: ComponentStory<typeof Popover> = () => {
 
 export const disabledCloseButton: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover closeOnButton={false}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -370,7 +370,7 @@ export const disabledCloseButton: ComponentStory<typeof Popover> = () => {
 
 export const customCloseButton: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -388,7 +388,7 @@ export const customCloseButton: ComponentStory<typeof Popover> = () => {
 
 export const changeTrigger: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover trigger='hover'>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -405,7 +405,7 @@ export const changeTrigger: ComponentStory<typeof Popover> = () => {
 
 export const disabledCloseBlur: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover closeOnBlur={false}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -422,7 +422,7 @@ export const disabledCloseBlur: ComponentStory<typeof Popover> = () => {
 
 export const useLazy: ComponentStory<typeof Popover> = () => {
   return (
-    <Center w='100vw' h='100vh'>
+    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Popover isLazy>
         <PopoverTrigger>
           <Button>Open Popover</Button>

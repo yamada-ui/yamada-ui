@@ -20,25 +20,26 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
-    "@yamada-ui/hooks": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/components": "workspace:*",
-    "@yamada-ui/layouts": "workspace:*",
-    "@yamada-ui/typography": "workspace:*",
-    "@yamada-ui/media-and-icons": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/data-display": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/forms": "workspace:*",
+    "@yamada-ui/hooks": "workspace:*",
+    "@yamada-ui/layouts": "workspace:*",
+    "@yamada-ui/media-and-icons": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/navigation": "workspace:*",
+    "@yamada-ui/overlay": "workspace:*",
+    "@yamada-ui/providers": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/transitions": "workspace:*",
-    "@yamada-ui/overlay": "workspace:*"
+    "@yamada-ui/typography": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.1.1"
+    "clean-package": "2.1.1",
+    "react": "^18.0.0"
   },
   "peerDependencies": {
     "react": ">=18"

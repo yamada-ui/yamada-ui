@@ -285,6 +285,21 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  components/motion:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      framer-motion: ^6.2.9
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+      framer-motion: 6.5.1_react@18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   components/navigation:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -500,6 +515,7 @@ importers:
       '@yamada-ui/hooks': workspace:*
       '@yamada-ui/layouts': workspace:*
       '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/motion': workspace:*
       '@yamada-ui/navigation': workspace:*
       '@yamada-ui/overlay': workspace:*
       '@yamada-ui/providers': workspace:*
@@ -518,6 +534,7 @@ importers:
       '@yamada-ui/hooks': link:../hooks
       '@yamada-ui/layouts': link:../components/layouts
       '@yamada-ui/media-and-icons': link:../components/media-and-icons
+      '@yamada-ui/motion': link:../components/motion
       '@yamada-ui/navigation': link:../components/navigation
       '@yamada-ui/overlay': link:../components/overlay
       '@yamada-ui/providers': link:../providers

@@ -14,6 +14,7 @@ import {
   useMemo,
   useState,
   Fragment,
+  useEffect,
 } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 
@@ -72,7 +73,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   const screenLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => screenLoading.isLoading,
-      start: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = screenLoading.timeout ?? null } = {}) =>
         setScreenLoading({ isLoading: true, message, timeout }),
       update: (next) => setScreenLoading((prev) => ({ ...prev, ...next })),
       finish: () =>
@@ -82,13 +83,13 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
           timeout: screen?.timeout ?? null,
         }),
     }),
-    [screenLoading.isLoading, screen?.timeout],
+    [screenLoading, screen],
   )
 
   const pageLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => pageLoading.isLoading,
-      start: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = pageLoading.timeout ?? null } = {}) =>
         setPageLoading({ isLoading: true, message, timeout }),
       update: (next) => setPageLoading((prev) => ({ ...prev, ...next })),
       finish: () =>
@@ -98,13 +99,13 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
           timeout: page?.timeout ?? null,
         }),
     }),
-    [pageLoading.isLoading, page?.timeout],
+    [pageLoading, page],
   )
 
   const backgroundLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => backgroundLoading.isLoading,
-      start: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = backgroundLoading.timeout ?? null } = {}) =>
         setBackgroundLoading({ isLoading: true, message, timeout }),
       update: (next) => setBackgroundLoading((prev) => ({ ...prev, ...next })),
       finish: () =>
@@ -114,13 +115,13 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
           timeout: background?.timeout ?? null,
         }),
     }),
-    [backgroundLoading.isLoading, background?.timeout],
+    [backgroundLoading, background],
   )
 
   const customLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => customLoading.isLoading,
-      start: ({ message, timeout = null } = {}) =>
+      start: ({ message, timeout = customLoading.timeout ?? null } = {}) =>
         setCustomLoading({ isLoading: true, message, timeout }),
       update: (next) => setCustomLoading((prev) => ({ ...prev, ...next })),
       finish: () =>
@@ -130,8 +131,38 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
           timeout: custom?.timeout ?? null,
         }),
     }),
-    [customLoading.isLoading, custom?.timeout],
+    [customLoading, custom],
   )
+
+  useEffect(() => {
+    if (screen)
+      setScreenLoading({
+        isLoading: screen?.initialState ?? false,
+        message: undefined,
+        timeout: screen?.timeout ?? null,
+      })
+
+    if (page)
+      setPageLoading({
+        isLoading: page?.initialState ?? false,
+        message: undefined,
+        timeout: page?.timeout ?? null,
+      })
+
+    if (background)
+      setBackgroundLoading({
+        isLoading: background?.initialState ?? false,
+        message: undefined,
+        timeout: background?.timeout ?? null,
+      })
+
+    if (custom)
+      setCustomLoading({
+        isLoading: custom?.initialState ?? false,
+        message: undefined,
+        timeout: custom?.timeout ?? null,
+      })
+  }, [screen, page, background, custom])
 
   const value = useMemo(
     () => ({
@@ -161,6 +192,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
               <Fragment>
                 {!isUndefined(screen?.component) ? (
                   runIfFunc(screen?.component, {
+                    initialState: screen?.initialState,
                     icon: screen?.icon,
                     text: screen?.text,
                     message: screenLoading.message,
@@ -170,6 +202,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                 ) : (
                   <LoadingScreenComponent
                     {...{
+                      initialState: screen?.initialState,
                       icon: screen?.icon,
                       text: screen?.text,
                       message: screenLoading.message,
@@ -198,6 +231,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
               <Fragment>
                 {!isUndefined(page?.component) ? (
                   runIfFunc(page?.component, {
+                    initialState: page?.initialState,
                     icon: page?.icon,
                     text: page?.text,
                     message: pageLoading.message,
@@ -207,6 +241,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                 ) : (
                   <LoadingPageComponent
                     {...{
+                      initialState: page?.initialState,
                       icon: page?.icon,
                       text: page?.text,
                       message: pageLoading.message,
@@ -235,6 +270,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
               <Fragment>
                 {!isUndefined(background?.component) ? (
                   runIfFunc(background?.component, {
+                    initialState: background?.initialState,
                     icon: background?.icon,
                     text: background?.text,
                     message: backgroundLoading.message,
@@ -244,6 +280,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
                 ) : (
                   <LoadingBackgroundComponent
                     {...{
+                      initialState: background?.initialState,
                       icon: background?.icon,
                       text: background?.text,
                       message: backgroundLoading.message,
@@ -266,6 +303,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
           >
             {!isUndefined(custom?.component)
               ? runIfFunc(custom?.component, {
+                  initialState: custom?.initialState,
                   icon: custom?.icon,
                   text: custom?.text,
                   message: customLoading.message,
@@ -319,15 +357,18 @@ const getOverlayStyle = (type: 'fill' | 'transparent' = 'fill'): CSSUIObject => 
   alignItems: 'center',
 })
 
-const getMotionProps = (type: 'fade' | 'scaleFade' = 'fade') => ({
-  initial: 'initial',
+const getMotionProps = (
+  initialState: boolean | undefined,
+  type: 'fade' | 'scaleFade' = 'fade',
+) => ({
+  initial: initialState ? false : 'initial',
   animate: 'animate',
   exit: 'exit',
   variants: getVariants(type),
 })
 
 const LoadingScreenComponent = memo(
-  ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+  ({ initialState, icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       maxW: 'md',
       display: 'flex',
@@ -343,7 +384,7 @@ const LoadingScreenComponent = memo(
       <ui.div
         as={motion.div}
         className='ui-loading-screen'
-        {...getMotionProps()}
+        {...getMotionProps(initialState)}
         __css={getOverlayStyle()}
       >
         <ui.div __css={css}>
@@ -366,7 +407,7 @@ const LoadingScreenComponent = memo(
 LoadingScreenComponent.displayName = 'LoadingScreenComponent'
 
 const LoadingPageComponent = memo(
-  ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+  ({ initialState, icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       bg: ['white', 'black'],
       maxW: 'md',
@@ -386,13 +427,13 @@ const LoadingPageComponent = memo(
       <ui.div
         as={motion.div}
         className='ui-loading-page'
-        {...getMotionProps()}
+        {...getMotionProps(initialState)}
         __css={getOverlayStyle('transparent')}
       >
         <ui.div
           as={motion.div}
           className='ui-loading-page-container'
-          {...getMotionProps('scaleFade')}
+          {...getMotionProps(initialState, 'scaleFade')}
           __css={css}
         >
           <Loading size='6xs' {...icon} />
@@ -414,7 +455,7 @@ const LoadingPageComponent = memo(
 LoadingPageComponent.displayName = 'LoadingPageComponent'
 
 const LoadingBackgroundComponent = memo(
-  ({ icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+  ({ initialState, icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: 'fixed',
       right: 'md',
@@ -437,7 +478,7 @@ const LoadingBackgroundComponent = memo(
       <ui.div
         as={motion.div}
         className='ui-loading-page-container'
-        {...getMotionProps('scaleFade')}
+        {...getMotionProps(initialState, 'scaleFade')}
         __css={css}
       >
         <Loading size='1.2rem' {...icon} />

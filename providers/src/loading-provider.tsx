@@ -1,12 +1,11 @@
 import { ui, ThemeConfig, LoadingComponentProps, CSSUIObject } from '@yamada-ui/core'
 import { Loading } from '@yamada-ui/feedback'
 import { useTimeout } from '@yamada-ui/hooks'
-import { Portal, runIfFunc, isUndefined } from '@yamada-ui/utils'
+import { Portal, isValidElement } from '@yamada-ui/utils'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import {
   createContext,
   FC,
-  isValidElement,
   memo,
   PropsWithChildren,
   ReactNode,
@@ -190,15 +189,18 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
               forwardProps
             >
               <Fragment>
-                {!isUndefined(screen?.component) ? (
-                  runIfFunc(screen?.component, {
-                    initialState: screen?.initialState,
-                    icon: screen?.icon,
-                    text: screen?.text,
-                    message: screenLoading.message,
-                    timeout: screenLoading.timeout,
-                    onFinish: screenLoadingFunc.finish,
-                  })
+                {screen?.component ? (
+                  <CustomComponent
+                    component={screen.component}
+                    {...{
+                      initialState: screen?.initialState,
+                      icon: screen?.icon,
+                      text: screen?.text,
+                      message: screenLoading.message,
+                      timeout: screenLoading.timeout,
+                      onFinish: screenLoadingFunc.finish,
+                    }}
+                  />
                 ) : (
                   <LoadingScreenComponent
                     {...{
@@ -229,15 +231,18 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
               forwardProps
             >
               <Fragment>
-                {!isUndefined(page?.component) ? (
-                  runIfFunc(page?.component, {
-                    initialState: page?.initialState,
-                    icon: page?.icon,
-                    text: page?.text,
-                    message: pageLoading.message,
-                    timeout: pageLoading.timeout,
-                    onFinish: pageLoadingFunc.finish,
-                  })
+                {page?.component ? (
+                  <CustomComponent
+                    component={page.component}
+                    {...{
+                      initialState: page?.initialState,
+                      icon: page?.icon,
+                      text: page?.text,
+                      message: pageLoading.message,
+                      timeout: pageLoading.timeout,
+                      onFinish: pageLoadingFunc.finish,
+                    }}
+                  />
                 ) : (
                   <LoadingPageComponent
                     {...{
@@ -268,15 +273,18 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
               forwardProps
             >
               <Fragment>
-                {!isUndefined(background?.component) ? (
-                  runIfFunc(background?.component, {
-                    initialState: background?.initialState,
-                    icon: background?.icon,
-                    text: background?.text,
-                    message: backgroundLoading.message,
-                    timeout: backgroundLoading.timeout,
-                    onFinish: backgroundLoadingFunc.finish,
-                  })
+                {background?.component ? (
+                  <CustomComponent
+                    component={background.component}
+                    {...{
+                      initialState: background?.initialState,
+                      icon: background?.icon,
+                      text: background?.text,
+                      message: backgroundLoading.message,
+                      timeout: backgroundLoading.timeout,
+                      onFinish: backgroundLoadingFunc.finish,
+                    }}
+                  />
                 ) : (
                   <LoadingBackgroundComponent
                     {...{
@@ -301,21 +309,36 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
             appendToParentPortal={custom?.appendToParentPortal}
             containerRef={custom?.containerRef}
           >
-            {!isUndefined(custom?.component)
-              ? runIfFunc(custom?.component, {
+            {custom?.component ? (
+              <CustomComponent
+                component={custom.component}
+                {...{
                   initialState: custom?.initialState,
                   icon: custom?.icon,
                   text: custom?.text,
                   message: customLoading.message,
                   timeout: customLoading.timeout,
                   onFinish: customLoadingFunc.finish,
-                })
-              : null}
+                }}
+              />
+            ) : null}
           </Portal>
         ) : null}
       </AnimatePresence>
     </LoadingContext.Provider>
   )
+}
+
+type CustomComponentProps = {
+  component: (props: LoadingComponentProps) => ReactNode
+} & LoadingComponentProps
+
+const CustomComponent: FC<CustomComponentProps> = ({ component, ...props }) => {
+  if (typeof component === 'function') {
+    return component(props) as JSX.Element
+  } else {
+    return <></>
+  }
 }
 
 const getVariants = (type: 'fade' | 'scaleFade' = 'fade'): Variants => ({

@@ -180,7 +180,7 @@ export const useCustomLoading = () => {
                     )
                   ) : null}
                 </VStack>
-                <Button onClick={onFinish}>Switch to background</Button>
+                <Button onClick={onFinish}>Play to background</Button>
               </Motion>
             </Motion>
           )

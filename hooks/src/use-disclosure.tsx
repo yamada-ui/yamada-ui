@@ -20,8 +20,8 @@ export type UseDisclosure = (props?: UseDisclosureProps) => UseDisclosureReture
 export const useDisclosure: UseDisclosure = (props: UseDisclosureProps = {}) => {
   const [defaultIsOpen, setIsOpen] = useState<boolean>(props.defaultIsOpen ?? false)
 
-  const handleOpen = props.onOpen ? useCallbackRef(props.onOpen) : undefined
-  const handleClose = props.onClose ? useCallbackRef(props.onClose) : undefined
+  const handleOpen = useCallbackRef(props.onOpen)
+  const handleClose = useCallbackRef(props.onClose)
 
   const isControlled = props.isOpen !== undefined
   const isOpen = props.isOpen !== undefined ? props.isOpen : defaultIsOpen

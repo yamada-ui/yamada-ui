@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Textarea } from '@yamada-ui/react'
+import { FormControl, Textarea } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Forms / Textarea',
@@ -60,6 +60,10 @@ export const isDisabled: ComponentStory<typeof Textarea> = () => {
       <Textarea isDisabled variant='filled' placeholder='filled' />
       <Textarea isDisabled variant='flushed' placeholder='flushed' />
       <Textarea isDisabled variant='unstyled' placeholder='unstyled' />
+
+      <FormControl isDisabled label='Feedback' helperMessage='We would like to get your feedback.'>
+        <Textarea variant='outline' placeholder='your feedback' />
+      </FormControl>
     </>
   )
 }
@@ -71,6 +75,10 @@ export const isReadonly: ComponentStory<typeof Textarea> = () => {
       <Textarea isReadOnly variant='filled' placeholder='filled' />
       <Textarea isReadOnly variant='flushed' placeholder='flushed' />
       <Textarea isReadOnly variant='unstyled' placeholder='unstyled' />
+
+      <FormControl isReadOnly label='Feedback' helperMessage='We would like to get your feedback.'>
+        <Textarea variant='outline' placeholder='your feedback' />
+      </FormControl>
     </>
   )
 }
@@ -82,6 +90,10 @@ export const isInvalid: ComponentStory<typeof Textarea> = () => {
       <Textarea isInvalid variant='filled' placeholder='filled' />
       <Textarea isInvalid variant='flushed' placeholder='flushed' />
       <Textarea isInvalid variant='unstyled' placeholder='unstyled' />
+
+      <FormControl isInvalid label='Feedback' errorMessage='Feedback is required.'>
+        <Textarea variant='outline' placeholder='your feedback' />
+      </FormControl>
     </>
   )
 }

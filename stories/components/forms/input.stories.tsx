@@ -11,6 +11,7 @@ import {
   FontAwesomeIcon,
   Button,
   useBoolean,
+  FormControl,
 } from '@yamada-ui/react'
 import { FaPhone } from 'react-icons/fa'
 
@@ -70,6 +71,10 @@ export const isDisabled: ComponentStory<typeof Input> = () => {
       <Input isDisabled variant='filled' placeholder='filled' />
       <Input isDisabled variant='flushed' placeholder='flushed' />
       <Input isDisabled variant='unstyled' placeholder='unstyled' />
+
+      <FormControl isDisabled label='Email address' helperMessage="We'll never share your email.">
+        <Input type='email' placeholder='your email address' />
+      </FormControl>
     </>
   )
 }
@@ -81,6 +86,10 @@ export const isReadonly: ComponentStory<typeof Input> = () => {
       <Input isReadOnly variant='filled' placeholder='filled' />
       <Input isReadOnly variant='flushed' placeholder='flushed' />
       <Input isReadOnly variant='unstyled' placeholder='unstyled' />
+
+      <FormControl isReadOnly label='Email address' helperMessage="We'll never share your email.">
+        <Input type='email' placeholder='your email address' />
+      </FormControl>
     </>
   )
 }
@@ -92,6 +101,10 @@ export const isInvalid: ComponentStory<typeof Input> = () => {
       <Input isInvalid variant='filled' placeholder='filled' />
       <Input isInvalid variant='flushed' placeholder='flushed' />
       <Input isInvalid variant='unstyled' placeholder='unstyled' />
+
+      <FormControl isInvalid label='Email address' errorMessage='Email is required.'>
+        <Input type='email' placeholder='your email address' />
+      </FormControl>
     </>
   )
 }

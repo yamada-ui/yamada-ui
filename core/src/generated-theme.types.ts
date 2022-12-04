@@ -536,10 +536,18 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
+    PinInput: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Tag: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'subtle' | 'outline' | (string & {})
+    }
+    Textarea: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
   }
 }

@@ -31,3 +31,5 @@ export const isFunction = <T extends Function = Function>(value: any): value is 
 }
 
 export const isUnit = (value: any): boolean => /[0-9].*[px|rem|em|%|vw|vh]$/.test(value)
+
+export const cast = <T>(value: any) => value as T

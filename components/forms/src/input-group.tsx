@@ -35,9 +35,9 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
   }
   const groupProps: CSSUIProps = {}
   const height: any =
-    useToken('sizes', (styles.container?.height ?? styles.container?.h) as any) ??
-    styles.container?.height ??
-    styles.container?.h
+    useToken('sizes', (styles.field?.height ?? styles.field?.h) as any) ??
+    styles.field?.height ??
+    styles.field?.h
 
   const validChildren = getValidChildren(children)
 

@@ -3,7 +3,7 @@ import { getColor, isArray } from '@yamada-ui/utils'
 
 export const Input: ComponentStyle = {
   baseStyle: {
-    container: {
+    field: {
       width: '100%',
       minWidth: 0,
       outline: 0,
@@ -33,7 +33,7 @@ export const Input: ComponentStyle = {
         : getColor(ec, ec)(t, s)
 
       return {
-        container: {
+        field: {
           border: '1px solid',
           borderColor: 'inherit',
           bg: 'inherit',
@@ -75,7 +75,7 @@ export const Input: ComponentStyle = {
         : getColor(ec, ec)(t, s)
 
       return {
-        container: {
+        field: {
           border: '2px solid',
           borderColor: 'transparent',
           bg: ['gray.100', 'whiteAlpha.50'],
@@ -114,7 +114,7 @@ export const Input: ComponentStyle = {
         : getColor(ec, ec)(t, s)
 
       return {
-        container: {
+        field: {
           borderBottom: '1px solid',
           borderColor: 'inherit',
           rounded: '0',
@@ -143,7 +143,7 @@ export const Input: ComponentStyle = {
       }
     },
     unstyled: {
-      container: {
+      field: {
         bg: 'transparent',
         h: 'auto',
         px: '0',
@@ -158,7 +158,7 @@ export const Input: ComponentStyle = {
 
   sizes: {
     xs: {
-      container: {
+      field: {
         fontSize: 'xs',
         px: '2',
         h: '6',
@@ -172,7 +172,7 @@ export const Input: ComponentStyle = {
       },
     },
     sm: {
-      container: {
+      field: {
         fontSize: 'sm',
         px: '2',
         h: '8',
@@ -186,7 +186,7 @@ export const Input: ComponentStyle = {
       },
     },
     md: {
-      container: {
+      field: {
         fontSize: 'md',
         px: '3',
         h: '10',
@@ -200,7 +200,7 @@ export const Input: ComponentStyle = {
       },
     },
     lg: {
-      container: {
+      field: {
         fontSize: 'lg',
         px: '4',
         h: '12',

@@ -28,7 +28,7 @@ export const Input = forwardRef<InputProps, 'input'>((props, ref) => {
 
   rest = useFormControlProps(rest)
 
-  const css: CSSUIObject = { ...styles.container }
+  const css: CSSUIObject = { ...styles.field }
 
   return (
     <ui.input

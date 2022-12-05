@@ -21,9 +21,9 @@ const InputElement = forwardRef<InputElementProps, 'div'>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      w: styles.container?.height ?? styles.container?.h,
-      h: styles.container?.height ?? styles.container?.h,
-      fontSize: styles.container?.fontSize,
+      w: styles.field?.height ?? styles.field?.h,
+      h: styles.field?.height ?? styles.field?.h,
+      fontSize: styles.field?.fontSize,
       pointerEvents: isClick ? 'auto' : 'none',
       ...styles.element,
     }

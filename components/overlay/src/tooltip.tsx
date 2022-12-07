@@ -7,6 +7,7 @@ import {
   ThemeProps,
   useComponentStyle,
   MotionTransitionProperties,
+  UIProps,
 } from '@yamada-ui/core'
 import { UsePopperProps, usePopper, useDisclosure, useEventListener } from '@yamada-ui/hooks'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
@@ -230,7 +231,11 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
         <AnimatePresence>
           {isOpen ? (
             <Portal>
-              <ui.div {...getPopperProps()} zIndex={zIndex ?? styles.zIndex} pointerEvents='none'>
+              <ui.div
+                {...getPopperProps()}
+                zIndex={(zIndex ?? styles.zIndex) as UIProps['zIndex']}
+                pointerEvents='none'
+              >
                 <ui.div
                   as={motion.div}
                   ref={ref}

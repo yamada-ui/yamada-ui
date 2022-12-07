@@ -9,7 +9,7 @@ export interface UseCounterProps {
   max?: number
   precision?: number
   keepWithinRange?: boolean
-  onChange?(valueAsString: string, valueAsNumber: number): void
+  onChange?: (valueAsString: string, valueAsNumber: number) => void
 }
 
 export const useCounter = ({

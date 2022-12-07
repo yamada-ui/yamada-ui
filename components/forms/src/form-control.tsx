@@ -15,6 +15,7 @@ import {
   handlerAll,
   dataAttr,
   ariaAttr,
+  Dict,
 } from '@yamada-ui/utils'
 import { useState, useId, ReactNode, FocusEventHandler } from 'react'
 
@@ -139,16 +140,16 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
   )
 })
 
-export type UseFormControlProps<T extends HTMLElement> = FormControlOptions & {
+export type UseFormControlProps<Y extends HTMLElement> = FormControlOptions & {
   id?: string
-  onFocus?: FocusEventHandler<T>
-  onBlur?: FocusEventHandler<T>
+  onFocus?: FocusEventHandler<Y>
+  onBlur?: FocusEventHandler<Y>
   disabled?: boolean
   readOnly?: boolean
   required?: boolean
 }
 
-export const useFormControlProps = <T extends HTMLElement>({
+export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   id,
   disabled,
   readOnly,
@@ -160,7 +161,7 @@ export const useFormControlProps = <T extends HTMLElement>({
   onFocus,
   onBlur,
   ...rest
-}: UseFormControlProps<T>) => {
+}: UseFormControlProps<Y> & M) => {
   const control = useFormControl()
 
   required = required ?? isRequired ?? control?.isRequired

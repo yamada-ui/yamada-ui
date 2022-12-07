@@ -9,7 +9,7 @@ import {
   Interpolation,
 } from '@yamada-ui/core'
 import { useAnimation } from '@yamada-ui/hooks'
-import { createContext, cx } from '@yamada-ui/utils'
+import { createContext, cx, toPercent } from '@yamada-ui/utils'
 import { FC } from 'react'
 
 const [ProgressProvider, useProgress] = createContext<Record<string, CSSUIObject>>({
@@ -83,9 +83,6 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
   )
 })
 
-const valueToPercent = (value: number, min: number, max: number): number =>
-  ((value - min) * 100) / (max - min)
-
 type ProgressInnerProps = HTMLUIProps<'div'> & ProgressProps
 
 const ProgressInner: FC<ProgressInnerProps> = ({
@@ -98,7 +95,7 @@ const ProgressInner: FC<ProgressInnerProps> = ({
   speed = '1.4s',
   ...rest
 }) => {
-  const percent = valueToPercent(value, min, max)
+  const percent = toPercent(value, min, max)
 
   const styles = useProgress()
 

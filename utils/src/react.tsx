@@ -17,7 +17,12 @@ export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
     style?: React.CSSProperties
   }
 
-export type PropGetter = (props?: DOMAttributes, ref?: React.Ref<any>) => any
+type Merge<Y, M> = M extends Record<string, unknown> ? Y : Omit<Y, keyof M> & M
+
+export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+  props?: Merge<DOMAttributes, Y>,
+  ref?: React.Ref<any>,
+) => M & React.RefAttributes<any>
 
 export type MaybeRenderProp<Y> = React.ReactNode | ((props: Y) => React.ReactNode)
 

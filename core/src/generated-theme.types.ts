@@ -480,6 +480,10 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
+    NumberInput: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     Alert: {
       sizes: string & {}
       variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})

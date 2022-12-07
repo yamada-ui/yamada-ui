@@ -49,7 +49,7 @@ type FormControlContext = {
   onBlur: () => void
 }
 
-const [FormControlProvider, useFormControl] = createContext<FormControlContext>({
+const [FormControlProvider, useFormControl] = createContext<FormControlContext | undefined>({
   strict: false,
   name: 'FormControlContext',
 })
@@ -209,7 +209,7 @@ export const Label = forwardRef<LabelProps, 'label'>(
     },
     ref,
   ) => {
-    const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } = useFormControl()
+    const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } = useFormControl() ?? {}
     const styles = useFormControlStyles()
 
     const css: CSSUIObject = {
@@ -242,7 +242,7 @@ type RequiredIndicatorProps = HTMLUIProps<'span'>
 
 const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
   ({ className, ...rest }, ref) => {
-    const { isInvalid, isReplace } = useFormControl()
+    const { isInvalid, isReplace } = useFormControl() ?? {}
     const styles = useFormControlStyles()
 
     if (isReplace && isInvalid) return null
@@ -267,7 +267,7 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
 export type HelpTextProps = HTMLUIProps<'div'>
 
 export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...rest }, ref) => {
-  const { isInvalid, isReplace } = useFormControl()
+  const { isInvalid, isReplace } = useFormControl() ?? {}
   const styles = useFormControlStyles()
 
   if (isReplace && isInvalid) return null
@@ -282,7 +282,7 @@ export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...r
 export type ErrorMessageProps = HTMLUIProps<'div'>
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(({ className, ...rest }, ref) => {
-  const { isInvalid } = useFormControl()
+  const { isInvalid } = useFormControl() ?? {}
   const styles = useFormControlStyles()
 
   if (!isInvalid) return null

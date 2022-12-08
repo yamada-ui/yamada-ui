@@ -16,6 +16,7 @@ import { List } from './list'
 import { Mark } from './mark'
 import { Markdown } from './markdown'
 import { Modal } from './modal'
+import { NumberInput } from './number-input'
 import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
@@ -24,6 +25,7 @@ import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
+  NumberInput,
   Alert,
   Badge,
   Breadcrumb,

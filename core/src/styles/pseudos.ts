@@ -8,6 +8,7 @@ export const pseudos = {
   _focus: '&:focus, &[data-focus]',
   _disabled: '&[disabled], &[aria-disabled=true], &[data-disabled]',
   _readOnly: '&[readonly], &[aria-readonly=true], &[data-readonly]',
+  _indeterminate: '&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]',
   _before: '&::before',
   _after: '&::after',
   _empty: '&:empty',

@@ -50,7 +50,9 @@ type FormControlContext = {
   onBlur: () => void
 }
 
-const [FormControlProvider, useFormControl] = createContext<FormControlContext | undefined>({
+const [FormControlContextProvider, useFormControlContext] = createContext<
+  FormControlContext | undefined
+>({
   strict: false,
   name: 'FormControlContext',
 })
@@ -62,7 +64,7 @@ const [FormControlStylesProvider, useFormControlStyles] = createContext<FormCont
   errorMessage: `useFormControlStyles returned is 'undefined'. Seems you forgot to wrap the components in "<FormControl />" `,
 })
 
-export { useFormControl, useFormControlStyles }
+export { useFormControlContext, useFormControlStyles }
 
 export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }, ref) => {
   const styles = useMultiComponentStyle('FormControl', props)
@@ -101,7 +103,7 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
   }
 
   return (
-    <FormControlProvider
+    <FormControlContextProvider
       value={{
         id,
         isFocused,
@@ -136,9 +138,31 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
           ) : null}
         </ui.div>
       </FormControlStylesProvider>
-    </FormControlProvider>
+    </FormControlContextProvider>
   )
 })
+
+export type UseFormControl = FormControlOptions & {
+  disabled?: boolean
+  readOnly?: boolean
+  required?: boolean
+}
+
+export const useFormControl = (props: UseFormControl) => {
+  const control = useFormControlContext()
+
+  const isRequired = props.required ?? props.isRequired ?? control?.isRequired
+  const isDisabled = props.disabled ?? props.isDisabled ?? control?.isDisabled
+  const isReadOnly = props.readOnly ?? props.isReadOnly ?? control?.isReadOnly
+  const isInvalid = props.isInvalid ?? control?.isInvalid
+
+  return {
+    isRequired,
+    isDisabled,
+    isReadOnly,
+    isInvalid,
+  }
+}
 
 export type UseFormControlProps<Y extends HTMLElement> = FormControlOptions & {
   id?: string
@@ -162,7 +186,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   onBlur,
   ...rest
 }: UseFormControlProps<Y> & M) => {
-  const control = useFormControl()
+  const control = useFormControlContext()
 
   required = required ?? isRequired ?? control?.isRequired
   disabled = disabled ?? isDisabled ?? control?.isDisabled
@@ -212,7 +236,8 @@ export const Label = forwardRef<LabelProps, 'label'>(
     },
     ref,
   ) => {
-    const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } = useFormControl() ?? {}
+    const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } =
+      useFormControlContext() ?? {}
     const styles = useFormControlStyles()
 
     const css: CSSUIObject = {
@@ -245,7 +270,7 @@ type RequiredIndicatorProps = HTMLUIProps<'span'>
 
 const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
   ({ className, ...rest }, ref) => {
-    const { isInvalid, isReplace } = useFormControl() ?? {}
+    const { isInvalid, isReplace } = useFormControlContext() ?? {}
     const styles = useFormControlStyles()
 
     if (isReplace && isInvalid) return null
@@ -270,7 +295,7 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
 export type HelpTextProps = HTMLUIProps<'div'>
 
 export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...rest }, ref) => {
-  const { isInvalid, isReplace } = useFormControl() ?? {}
+  const { isInvalid, isReplace } = useFormControlContext() ?? {}
   const styles = useFormControlStyles()
 
   if (isReplace && isInvalid) return null
@@ -285,7 +310,7 @@ export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...r
 export type ErrorMessageProps = HTMLUIProps<'div'>
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(({ className, ...rest }, ref) => {
-  const { isInvalid } = useFormControl() ?? {}
+  const { isInvalid } = useFormControlContext() ?? {}
   const styles = useFormControlStyles()
 
   if (!isInvalid) return null

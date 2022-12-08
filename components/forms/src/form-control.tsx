@@ -175,6 +175,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
     required,
     disabled,
     readOnly,
+    'aria-disabled': ariaAttr(disabled),
     'aria-required': ariaAttr(required),
     'aria-readonly': ariaAttr(readOnly),
     'aria-invalid': ariaAttr(isInvalid),
@@ -183,6 +184,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
     ...(disabled || readOnly
       ? {
           _hover: undefined,
+          _active: undefined,
           _focus: undefined,
           _invalid: undefined,
         }

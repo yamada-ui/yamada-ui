@@ -23,6 +23,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/hooks": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/layouts": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/media-and-icons": "workspace:*"
   },

@@ -239,6 +239,7 @@ importers:
       '@yamada-ui/core': workspace:*
       '@yamada-ui/feedback': workspace:*
       '@yamada-ui/hooks': workspace:*
+      '@yamada-ui/layouts': workspace:*
       '@yamada-ui/media-and-icons': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
@@ -247,6 +248,7 @@ importers:
       '@yamada-ui/core': link:../../core
       '@yamada-ui/feedback': link:../feedback
       '@yamada-ui/hooks': link:../../hooks
+      '@yamada-ui/layouts': link:../layouts
       '@yamada-ui/media-and-icons': link:../media-and-icons
       '@yamada-ui/utils': link:../../utils
     devDependencies:

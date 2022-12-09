@@ -16,7 +16,7 @@ export type IconButtonProps = Omit<
 export const IconButton = forwardRef<IconButtonProps, 'button'>(
   ({ icon, isRound, children, ...rest }, ref) => {
     return (
-      <Button ref={ref} p={0} rounded={isRound ? 'full' : undefined} {...rest}>
+      <Button ref={ref} p={0} {...(isRound ? { rounded: 'full' } : {})} {...rest}>
         {icon || children}
       </Button>
     )

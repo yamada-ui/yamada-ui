@@ -1,5 +1,6 @@
 export type {
   HTMLMotionProps,
+  SVGMotionProps,
   Variants as MotionVariants,
   AnimatePresenceProps as MotionAnimatePresenceProps,
   LayoutProps as MotionLayoutProps,

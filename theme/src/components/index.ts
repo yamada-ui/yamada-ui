@@ -2,6 +2,7 @@ import { Alert } from './alert'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
+import { Checkbox } from './checkbox'
 import { CloseButton } from './close-button'
 import { Container } from './container'
 import { Dialog } from './dialog'
@@ -25,6 +26,7 @@ import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
+  Checkbox,
   NumberInput,
   Alert,
   Badge,

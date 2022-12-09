@@ -1,7 +1,15 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject, UIProps } from '@yamada-ui/core'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
-import { cx, findChildren, funcAll, getValidChildren, omitObject } from '@yamada-ui/utils'
+import {
+  cx,
+  DOMAttributes,
+  findChildren,
+  funcAll,
+  getValidChildren,
+  omitObject,
+} from '@yamada-ui/utils'
 import { motion, HTMLMotionProps } from 'framer-motion'
+import { RefAttributes } from 'react'
 import { PopoverProps, usePopover, PopoverCloseButton } from './'
 
 export type PopoverContentProps = Omit<HTMLUIProps<'section'>, keyof HTMLMotionProps<'section'>> &
@@ -88,13 +96,13 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       <ui.div
         {...getPopperProps({ style: { visibility: isOpen ? 'visible' : 'hidden' } })}
         className='ui-popover'
-        zIndex={zIndex ?? styles.container.zIndex}
+        zIndex={(zIndex ?? styles.container.zIndex) as UIProps['zIndex']}
       >
         <ui.section
           as={motion.section}
           className={cx('ui-popover-content', className)}
           {...(animation !== 'none' ? getPopoverContentProps(animation, duration) : {})}
-          {...getPopoverProps(rest, ref)}
+          {...(getPopoverProps(rest, ref) as Omit<DOMAttributes & RefAttributes<any>, 'onDrag'>)}
           initial='exit'
           animate={isOpen ? 'enter' : 'exit'}
           exit='exit'

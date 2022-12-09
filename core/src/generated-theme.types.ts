@@ -480,6 +480,7 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
+    Checkbox: { sizes: string & {}; variants: string & {} }
     NumberInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})

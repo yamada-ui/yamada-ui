@@ -12,6 +12,7 @@ type DataAttributes = {
 export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
   React.DOMAttributes<Y> &
   DataAttributes & {
+    id?: string
     role?: React.AriaRole
     tabIndex?: number
     style?: React.CSSProperties

@@ -142,8 +142,16 @@ export const isDisabled: ComponentStory<typeof Checkbox> = () => {
         Yes
       </Checkbox>
 
-      <FormControl isDisabled label='Do you wish to receive email notifications?'>
-        <Checkbox defaultChecked>Yes</Checkbox>
+      <FormControl isDisabled label='Which notifications would you like to receive?'>
+        <Checkbox defaultChecked>All Notifications</Checkbox>
+      </FormControl>
+
+      <FormControl isDisabled label='Which notifications would you like to receive?'>
+        <CheckboxGroup defaultValue={['all']}>
+          <Checkbox value='all'>All Notifications</Checkbox>
+          <Checkbox value='important'>Important Notifications</Checkbox>
+          <Checkbox value='service'>Service Notifications</Checkbox>
+        </CheckboxGroup>
       </FormControl>
     </>
   )
@@ -157,8 +165,16 @@ export const isReadonly: ComponentStory<typeof Checkbox> = () => {
         Yes
       </Checkbox>
 
-      <FormControl isReadOnly label='Do you wish to receive email notifications?'>
-        <Checkbox defaultChecked>Yes</Checkbox>
+      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+        <Checkbox defaultChecked>All Notifications</Checkbox>
+      </FormControl>
+
+      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+        <CheckboxGroup defaultValue={['all']}>
+          <Checkbox value='all'>All Notifications</Checkbox>
+          <Checkbox value='important'>Important Notifications</Checkbox>
+          <Checkbox value='service'>Service Notifications</Checkbox>
+        </CheckboxGroup>
       </FormControl>
     </>
   )
@@ -174,10 +190,22 @@ export const isInvalid: ComponentStory<typeof Checkbox> = () => {
 
       <FormControl
         isInvalid
-        label='Do you wish to receive email notifications?'
+        label='Which notifications would you like to receive?'
         errorMessage='This is required.'
       >
-        <Checkbox>Yes</Checkbox>
+        <Checkbox>All Notifications</Checkbox>
+      </FormControl>
+
+      <FormControl
+        isInvalid
+        label='Which notifications would you like to receive?'
+        errorMessage='This is required.'
+      >
+        <CheckboxGroup defaultValue={['all']}>
+          <Checkbox value='all'>All Notifications</Checkbox>
+          <Checkbox value='important'>Important Notifications</Checkbox>
+          <Checkbox value='service'>Service Notifications</Checkbox>
+        </CheckboxGroup>
       </FormControl>
     </>
   )
@@ -212,7 +240,7 @@ export const indeterminate: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const checkboxGroup: ComponentStory<typeof Checkbox> = () => {
+export const group: ComponentStory<typeof Checkbox> = () => {
   return (
     <CheckboxGroup defaultValue={['孫悟空', 'ベジータ']}>
       <Checkbox value='孫悟空'>孫悟空</Checkbox>
@@ -244,7 +272,7 @@ export const customControlGroup: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const useHook: ComponentStory<typeof Checkbox> = () => {
+export const customHook: ComponentStory<typeof Checkbox> = () => {
   const CustomCheckbox: FC<any> = (props) => {
     const { isChecked, getContainerProps, getInputProps, getLabelProps } = useCheckbox(props)
 

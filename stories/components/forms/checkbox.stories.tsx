@@ -242,11 +242,19 @@ export const indeterminate: ComponentStory<typeof Checkbox> = () => {
 
 export const group: ComponentStory<typeof Checkbox> = () => {
   return (
-    <CheckboxGroup defaultValue={['孫悟空', 'ベジータ']}>
-      <Checkbox value='孫悟空'>孫悟空</Checkbox>
-      <Checkbox value='ベジータ'>ベジータ</Checkbox>
-      <Checkbox value='フリーザ'>フリーザ</Checkbox>
-    </CheckboxGroup>
+    <>
+      <CheckboxGroup defaultValue={['孫悟空', 'ベジータ']}>
+        <Checkbox value='孫悟空'>孫悟空</Checkbox>
+        <Checkbox value='ベジータ'>ベジータ</Checkbox>
+        <Checkbox value='フリーザ'>フリーザ</Checkbox>
+      </CheckboxGroup>
+
+      <CheckboxGroup direction='row' defaultValue={['孫悟空', 'ベジータ']}>
+        <Checkbox value='孫悟空'>孫悟空</Checkbox>
+        <Checkbox value='ベジータ'>ベジータ</Checkbox>
+        <Checkbox value='フリーザ'>フリーザ</Checkbox>
+      </CheckboxGroup>
+    </>
   )
 }
 

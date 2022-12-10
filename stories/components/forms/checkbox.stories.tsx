@@ -11,7 +11,7 @@ import {
   VStack,
   Wrap,
 } from '@yamada-ui/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
 export default {
   title: 'Components / Forms / Checkbox',
@@ -245,7 +245,7 @@ export const customControlGroup: ComponentStory<typeof Checkbox> = () => {
 }
 
 export const useHook: ComponentStory<typeof Checkbox> = () => {
-  function CustomCheckbox(props: any) {
+  const CustomCheckbox: FC<any> = (props) => {
     const { isChecked, getContainerProps, getInputProps, getLabelProps } = useCheckbox(props)
 
     return (

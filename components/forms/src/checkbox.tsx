@@ -21,13 +21,13 @@ import {
   dataAttr,
   mergeRefs,
   funcAll,
+  DOMAttributes,
 } from '@yamada-ui/utils'
 import { AnimatePresence, motion, SVGMotionProps } from 'framer-motion'
 import {
   ChangeEvent,
   cloneElement,
   FC,
-  FocusEvent,
   InputHTMLAttributes,
   KeyboardEvent,
   ReactElement,
@@ -41,7 +41,7 @@ import { FormControlOptions, useFormControl, useFormControlProps, UseFormControl
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
-export type UseCheckboxGroupProps = FormControlOptions & {
+export type UseCheckboxGroupProps = {
   value?: (string | number)[]
   defaultValue?: (string | number)[]
   onChange?: (value: (string | number)[]) => void
@@ -59,8 +59,6 @@ export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) 
 
   const onChange = useCallback(
     (evOrValue: ChangeEvent<HTMLInputElement> | string | number) => {
-      if (!value) return
-
       const isChecked = isEvent(evOrValue) ? evOrValue.target.checked : !value.includes(evOrValue)
 
       const selectedValue = isEvent(evOrValue) ? evOrValue.target.value : evOrValue
@@ -74,9 +72,15 @@ export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) 
     [value, setValue],
   )
 
-  const getCheckboxProps = useCallback(
-    (props: Record<string, any> = {}) => ({
+  const getCheckboxProps: PropGetter<
+    DOMAttributes<HTMLInputElement> & { isChecked?: boolean },
+    Omit<DOMAttributes<HTMLInputElement>, 'onChange'> & {
+      onChange: (ev: ChangeEvent<HTMLInputElement> | string | number) => void
+    }
+  > = useCallback(
+    (props = {}, ref = null) => ({
       ...props,
+      ref,
       [isNative ? 'checked' : 'isChecked']: value.some(
         (val) => String(props.value) === String(val),
       ),
@@ -90,7 +94,8 @@ export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) 
 
 export type CheckboxGroupProps = ThemeProps<'Checkbox'> &
   Omit<FlexProps, 'onChange'> &
-  UseCheckboxGroupProps
+  UseCheckboxGroupProps &
+  FormControlOptions
 
 type CheckboxContext = ThemeProps<'Checkbox'> &
   FormControlOptions & {
@@ -106,7 +111,7 @@ const [CheckboxGroupProvider, useCheckboxGroupContext] = createContext<CheckboxC
 )
 
 export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
-  ({ size, variant, colorStyle, children, ...props }, ref) => {
+  ({ className, size, variant, colorStyle, children, ...props }, ref) => {
     const { value, onChange } = useCheckboxGroup(props)
     const { isRequired, isReadOnly, isDisabled, isInvalid } = useFormControl(props)
 
@@ -126,7 +131,9 @@ export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
       >
         <Flex
           ref={ref}
+          className={cx('ui-checkbox-group', className)}
           direction='column'
+          role='group'
           {...omitObject(props, ['value', 'defaultValue', 'onChange'])}
         >
           {children}
@@ -137,15 +144,12 @@ export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
 )
 
 export type UseCheckboxProps = UseFormControlProps<HTMLInputElement> & {
-  id?: string
   name?: string
   value?: string | number
   defaultChecked?: boolean
   isChecked?: boolean
   isIndeterminate?: boolean
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-  onBlur?: (event: FocusEvent<HTMLInputElement>) => void
-  onFocus?: (event: FocusEvent<HTMLInputElement>) => void
   tabIndex?: number
 }
 
@@ -349,7 +353,7 @@ export type CheckboxProps = Omit<HTMLUIProps<'label'>, keyof UseCheckboxProps | 
   UseCheckboxProps &
   CheckboxOptions
 
-export const Checkbox = forwardRef<CheckboxProps, 'label'>((props, ref) => {
+export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
   const group = useCheckboxGroupContext()
   const control = useFormControl(props)
   const styles = useMultiComponentStyle('Checkbox', { ...group, ...props })
@@ -402,7 +406,6 @@ export const Checkbox = forwardRef<CheckboxProps, 'label'>((props, ref) => {
 
   return (
     <ui.label
-      ref={ref}
       className={cx('ui-checkbox', className)}
       {...getContainerProps()}
       __css={{
@@ -428,6 +431,7 @@ export const Checkbox = forwardRef<CheckboxProps, 'label'>((props, ref) => {
       ])}
     >
       <ui.input className='ui-checkbox-input' {...getInputProps(input, ref)} />
+
       <ui.span
         className='ui-checkbox-icon'
         {...getIconProps(omitObject(icon ?? { children: undefined }, ['children']))}
@@ -437,13 +441,14 @@ export const Checkbox = forwardRef<CheckboxProps, 'label'>((props, ref) => {
           alignItems: 'center',
           justifyContent: 'center',
           verticalAlign: 'top',
-          userSelect: 'none',
           flexShrink: 0,
+          userSelect: 'none',
           ...styles.icon,
         }}
       >
         {cloneIcon}
       </ui.span>
+
       <ui.span className='ui-checkbox-label' {...getLabelProps(label)} __css={{ ...styles.label }}>
         {children}
       </ui.span>

@@ -14,9 +14,9 @@ export const useControllableState = <T extends any>(props: UseControllableStateP
   const onChange = useCallbackRef(props.onChange)
   const onUpdate = useCallbackRef(props.onUpdate)
 
-  const [uncontrolledState, setUncontrolledState] = useState(props.defaultValue as T)
+  const [defaultValue, setDefaultValue] = useState(props.defaultValue as T)
   const controlled = props.value !== undefined
-  const value = controlled ? (props.value as T) : uncontrolledState
+  const value = controlled ? (props.value as T) : defaultValue
 
   const setValue = useCallbackRef(
     (next: SetStateAction<T>) => {
@@ -24,7 +24,7 @@ export const useControllableState = <T extends any>(props: UseControllableStateP
 
       if (!onUpdate(value, nextValue)) return
 
-      if (!controlled) setUncontrolledState(nextValue)
+      if (!controlled) setDefaultValue(nextValue)
 
       onChange(nextValue)
     },

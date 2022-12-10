@@ -111,7 +111,10 @@ const [CheckboxGroupProvider, useCheckboxGroupContext] = createContext<CheckboxC
 )
 
 export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
-  ({ className, size, variant, colorStyle, children, ...props }, ref) => {
+  (
+    { className, size, variant, colorStyle, children, direction = 'column', gap, ...props },
+    ref,
+  ) => {
     const { value, onChange } = useCheckboxGroup(props)
     const { isRequired, isReadOnly, isDisabled, isInvalid } = useFormControl(props)
 
@@ -132,8 +135,9 @@ export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
         <Flex
           ref={ref}
           className={cx('ui-checkbox-group', className)}
-          direction='column'
           role='group'
+          direction={direction}
+          gap={gap ?? (direction === 'row' ? '1rem' : undefined)}
           {...omitObject(props, ['value', 'defaultValue', 'onChange'])}
         >
           {children}

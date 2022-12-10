@@ -137,9 +137,9 @@ export const withColorStyle: ComponentStory<typeof Checkbox> = () => {
 export const isDisabled: ComponentStory<typeof Checkbox> = () => {
   return (
     <>
-      <Checkbox isDisabled>Yes</Checkbox>
+      <Checkbox isDisabled>All Notifications</Checkbox>
       <Checkbox isDisabled defaultChecked>
-        Yes
+        All Notifications
       </Checkbox>
 
       <FormControl isDisabled label='Which notifications would you like to receive?'>
@@ -160,9 +160,9 @@ export const isDisabled: ComponentStory<typeof Checkbox> = () => {
 export const isReadonly: ComponentStory<typeof Checkbox> = () => {
   return (
     <>
-      <Checkbox isReadOnly>Yes</Checkbox>
+      <Checkbox isReadOnly>All Notifications</Checkbox>
       <Checkbox isReadOnly defaultChecked>
-        Yes
+        All Notifications
       </Checkbox>
 
       <FormControl isReadOnly label='Which notifications would you like to receive?'>
@@ -183,9 +183,9 @@ export const isReadonly: ComponentStory<typeof Checkbox> = () => {
 export const isInvalid: ComponentStory<typeof Checkbox> = () => {
   return (
     <>
-      <Checkbox isInvalid>Yes</Checkbox>
+      <Checkbox isInvalid>All Notifications</Checkbox>
       <Checkbox isInvalid defaultChecked>
-        Yes
+        All Notifications
       </Checkbox>
 
       <FormControl

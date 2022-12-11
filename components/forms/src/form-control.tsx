@@ -84,7 +84,7 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
     ...rest
   } = omitThemeProps(props)
 
-  if (!id) id = useId()
+  id = id ?? useId()
 
   const [isFocused, setFocused] = useState<boolean>(false)
 
@@ -143,6 +143,7 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
 })
 
 export type UseFormControl = FormControlOptions & {
+  id?: string
   disabled?: boolean
   readOnly?: boolean
   required?: boolean
@@ -151,12 +152,14 @@ export type UseFormControl = FormControlOptions & {
 export const useFormControl = (props: UseFormControl) => {
   const control = useFormControlContext()
 
+  const id = props.id ?? control?.id
   const isRequired = props.required ?? props.isRequired ?? control?.isRequired
   const isDisabled = props.disabled ?? props.isDisabled ?? control?.isDisabled
   const isReadOnly = props.readOnly ?? props.isReadOnly ?? control?.isReadOnly
   const isInvalid = props.isInvalid ?? control?.isInvalid
 
   return {
+    id,
     isRequired,
     isDisabled,
     isReadOnly,

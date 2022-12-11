@@ -446,11 +446,8 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
         {...getIconProps(omitObject(icon ?? { children: undefined }, ['children']))}
         __css={{
           pointerEvents: isReadOnly ? 'none' : undefined,
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          verticalAlign: 'top',
-          flexShrink: 0,
+          position: 'relative',
+          display: 'inline-block',
           userSelect: 'none',
           ...styles.icon,
         }}
@@ -485,22 +482,30 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
     <AnimatePresence initial={false}>
       {isIndeterminate || isChecked ? (
         <ui.div
-          as={motion.div}
-          variants={{
-            unchecked: { scale: 0.5 },
-            checked: { scale: 1 },
-          }}
-          initial='unchecked'
-          animate='checked'
-          exit='unchecked'
-          style={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+          __css={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
           }}
         >
-          {isIndeterminate ? <IndeterminateIcon {...rest} /> : <CheckIcon {...rest} />}
+          <ui.div
+            as={motion.div}
+            variants={{
+              unchecked: { scale: 0.5 },
+              checked: { scale: 1 },
+            }}
+            initial='unchecked'
+            animate='checked'
+            exit='unchecked'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {isIndeterminate ? <IndeterminateIcon {...rest} /> : <CheckIcon {...rest} />}
+          </ui.div>
         </ui.div>
       ) : null}
     </AnimatePresence>

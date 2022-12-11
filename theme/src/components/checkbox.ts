@@ -50,16 +50,10 @@ export const Checkbox: ComponentStyle = {
         )(c),
         color: ['white', 'gray.900'],
       },
-
       _disabled: {
         bg: ['gray.100', 'whiteAlpha.100'],
         borderColor: ['gray.100', 'transparent'],
       },
-
-      _focusVisible: {
-        boxShadow: 'outline',
-      },
-
       _invalid: {
         borderColor: ['red.500', 'red.300'],
       },

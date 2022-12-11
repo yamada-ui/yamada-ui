@@ -8,9 +8,6 @@ export const Tag: ComponentStyle = {
       fontWeight: 'medium',
       lineHeight: 1.2,
       rounded: 'md',
-      _focusVisible: {
-        boxShadow: 'outline',
-      },
     },
     label: {
       lineHeight: 1.8,
@@ -23,10 +20,6 @@ export const Tag: ComponentStyle = {
       opacity: 0.5,
       _disabled: {
         opacity: 0.4,
-      },
-      _focusVisible: {
-        boxShadow: 'outline',
-        bg: 'rgba(0, 0, 0, 0.14)',
       },
       _hover: {
         opacity: 0.8,

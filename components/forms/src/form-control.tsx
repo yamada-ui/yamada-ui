@@ -59,9 +59,11 @@ const [FormControlContextProvider, useFormControlContext] = createContext<
 
 type FormControlStylesContext = Record<string, CSSUIObject>
 
-const [FormControlStylesProvider, useFormControlStyles] = createContext<FormControlStylesContext>({
+const [FormControlStylesProvider, useFormControlStyles] = createContext<
+  FormControlStylesContext | undefined
+>({
+  strict: false,
   name: 'FormControlStyleContext',
-  errorMessage: `useFormControlStyles returned is 'undefined'. Seems you forgot to wrap the components in "<FormControl />" `,
 })
 
 export { useFormControlContext, useFormControlStyles }
@@ -241,7 +243,7 @@ export const Label = forwardRef<LabelProps, 'label'>(
   ) => {
     const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } =
       useFormControlContext() ?? {}
-    const styles = useFormControlStyles()
+    const styles = useFormControlStyles() ?? {}
 
     const css: CSSUIObject = {
       display: 'block',
@@ -274,7 +276,7 @@ type RequiredIndicatorProps = HTMLUIProps<'span'>
 const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
   ({ className, ...rest }, ref) => {
     const { isInvalid, isReplace } = useFormControlContext() ?? {}
-    const styles = useFormControlStyles()
+    const styles = useFormControlStyles() ?? {}
 
     if (isReplace && isInvalid) return null
 
@@ -299,7 +301,7 @@ export type HelpTextProps = HTMLUIProps<'div'>
 
 export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...rest }, ref) => {
   const { isInvalid, isReplace } = useFormControlContext() ?? {}
-  const styles = useFormControlStyles()
+  const styles = useFormControlStyles() ?? {}
 
   if (isReplace && isInvalid) return null
 
@@ -314,7 +316,7 @@ export type ErrorMessageProps = HTMLUIProps<'div'>
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(({ className, ...rest }, ref) => {
   const { isInvalid } = useFormControlContext() ?? {}
-  const styles = useFormControlStyles()
+  const styles = useFormControlStyles() ?? {}
 
   if (!isInvalid) return null
 

@@ -22,6 +22,7 @@ import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Radio } from './radio'
+import { Switch } from './switch'
 import { Tag } from './tag'
 import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
@@ -51,6 +52,7 @@ export default {
   Popover,
   Progress,
   Radio,
+  Switch,
   Tag,
   Textarea,
   Tooltip,

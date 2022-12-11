@@ -14,6 +14,8 @@ export const globalStyle: UIStyle = {
     color: ['gray.500', 'whiteAlpha.400'],
   },
   '*, *::before, &::after': {
+    borderWidth: '0',
+    borderStyle: 'solid',
     borderColor: 'border',
     wordWrap: 'break-word',
   },

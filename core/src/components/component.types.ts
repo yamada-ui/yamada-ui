@@ -26,7 +26,7 @@ export type UIProps = CSSUIProps & {
   css?: Interpolation<{}>
 }
 
-export type OmitProps<Y, M extends keyof any = never> = Omit<Y, 'transition' | 'as' | 'color' | M>
+export type OmitProps<Y, M extends keyof any = never> = Omit<Y, 'as' | 'color' | M>
 
 export type IntersectionProps<Y extends object = {}, M extends object = {}> = OmitProps<
   Y,

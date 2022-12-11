@@ -26,8 +26,10 @@ import {
 import { AnimatePresence, motion, SVGMotionProps } from 'framer-motion'
 import {
   ChangeEvent,
+  ChangeEventHandler,
   cloneElement,
   FC,
+  FocusEventHandler,
   InputHTMLAttributes,
   KeyboardEvent,
   ReactElement,
@@ -36,7 +38,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { FormControlOptions, useFormControl, useFormControlProps, UseFormControlProps } from './'
+import { FormControlOptions, useFormControl, useFormControlProps } from './'
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
@@ -147,18 +149,21 @@ export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
   },
 )
 
-export type UseCheckboxProps = UseFormControlProps<HTMLInputElement> & {
+export type UseCheckboxProps = FormControlOptions & {
+  id?: string
   name?: string
   value?: string | number
   defaultChecked?: boolean
   isChecked?: boolean
   isIndeterminate?: boolean
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange?: ChangeEventHandler<HTMLInputElement>
+  onFocus?: FocusEventHandler<HTMLInputElement>
+  onBlur?: FocusEventHandler<HTMLInputElement>
   tabIndex?: number
 }
 
 export const useCheckbox = (props: UseCheckboxProps) => {
-  const { id, name, value, tabIndex, required, disabled, readOnly, isIndeterminate, ...rest } =
+  const { id, name, value, tabIndex, disabled, readOnly, isIndeterminate, ...rest } =
     useFormControlProps(props)
 
   const [isFocused, setFocused] = useState(false)
@@ -231,6 +236,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === 'LABEL')
       }),
+      'data-checked': dataAttr(checked),
       onClick: handlerAll(props.onClick, () => {
         if (isLabel) return
 
@@ -238,7 +244,6 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
         requestAnimationFrame(() => inputRef.current?.focus())
       }),
-      'data-checked': dataAttr(checked),
     }),
     [checked, isLabel, rest],
   )
@@ -271,17 +276,11 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       ...props,
       ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref: mergeRefs(inputRef, ref),
+      id,
       type: 'checkbox',
       name,
       value,
-      id,
       tabIndex,
-      onChange: handlerAll(props.onChange, onChange),
-      onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
-      onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-      onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
-      required,
       disabled,
       readOnly,
       checked,
@@ -296,22 +295,26 @@ export const useCheckbox = (props: UseCheckboxProps) => {
         whiteSpace: 'nowrap',
         position: 'absolute',
       },
+      onChange: handlerAll(props.onChange, onChange),
+      onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
+      onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+      onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
-      checked,
-      disabled,
+      rest,
       id,
       name,
-      onBlur,
+      value,
+      tabIndex,
+      disabled,
+      readOnly,
+      checked,
       onChange,
+      onBlur,
       onFocus,
       onKeyDown,
       onKeyUp,
-      readOnly,
-      required,
-      rest,
-      tabIndex,
-      value,
     ],
   )
 
@@ -320,6 +323,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       ...props,
       ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
+      'data-checked': dataAttr(checked),
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
@@ -328,7 +332,6 @@ export const useCheckbox = (props: UseCheckboxProps) => {
         ev.preventDefault()
         ev.stopPropagation()
       }),
-      'data-checked': dataAttr(checked),
     }),
     [checked, rest],
   )
@@ -412,19 +415,12 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
     <ui.label
       className={cx('ui-checkbox', className)}
       {...getContainerProps()}
-      __css={{
-        cursor: 'pointer',
-        display: 'inline-flex',
-        alignItems: 'center',
-        verticalAlign: 'top',
-        gap,
-        ...styles.container,
-      }}
       {...omitObject(rest, [
         'id',
         'name',
         'value',
         'defaultValue',
+        'checked',
         'defaultChecked',
         'isChecked',
         'isIndeterminate',
@@ -433,6 +429,15 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
         'onFocus',
         'tabIndex',
       ])}
+      __css={{
+        cursor: 'pointer',
+        position: 'relative',
+        display: 'inline-flex',
+        alignItems: 'center',
+        verticalAlign: 'top',
+        gap,
+        ...styles.container,
+      }}
     >
       <ui.input className='ui-checkbox-input' {...getInputProps(input, ref)} />
 

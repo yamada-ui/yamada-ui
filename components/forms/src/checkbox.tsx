@@ -415,6 +415,15 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
     <ui.label
       className={cx('ui-checkbox', className)}
       {...getContainerProps()}
+      __css={{
+        cursor: 'pointer',
+        position: 'relative',
+        display: 'inline-flex',
+        alignItems: 'center',
+        verticalAlign: 'top',
+        gap,
+        ...styles.container,
+      }}
       {...omitObject(rest, [
         'id',
         'name',
@@ -429,21 +438,11 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
         'onFocus',
         'tabIndex',
       ])}
-      __css={{
-        cursor: 'pointer',
-        position: 'relative',
-        display: 'inline-flex',
-        alignItems: 'center',
-        verticalAlign: 'top',
-        gap,
-        ...styles.container,
-      }}
     >
       <ui.input className='ui-checkbox-input' {...getInputProps(input, ref)} />
 
       <ui.span
         className='ui-checkbox-icon'
-        {...getIconProps(omitObject(icon ?? { children: undefined }, ['children']))}
         __css={{
           pointerEvents: isReadOnly ? 'none' : undefined,
           position: 'relative',
@@ -451,11 +450,12 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
           userSelect: 'none',
           ...styles.icon,
         }}
+        {...getIconProps(omitObject(icon ?? { children: undefined }, ['children']))}
       >
         {cloneIcon}
       </ui.span>
 
-      <ui.span className='ui-checkbox-label' {...getLabelProps(label)} __css={{ ...styles.label }}>
+      <ui.span className='ui-checkbox-label' __css={{ ...styles.label }} {...getLabelProps(label)}>
         {children}
       </ui.span>
     </ui.label>

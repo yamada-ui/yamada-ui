@@ -1,15 +1,15 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import {
-  ui,
   Checkbox,
   CheckboxGroup,
   FormControl,
-  Text,
   useBoolean,
   useCheckbox,
   useCheckboxGroup,
   VStack,
   Wrap,
+  Box,
+  HStack,
 } from '@yamada-ui/react'
 import { FC, useState } from 'react'
 
@@ -142,6 +142,14 @@ export const isDisabled: ComponentStory<typeof Checkbox> = () => {
         All Notifications
       </Checkbox>
 
+      <CheckboxGroup defaultValue={['all']}>
+        <Checkbox value='all'>All Notifications</Checkbox>
+        <Checkbox value='important' isDisabled>
+          Important Notifications
+        </Checkbox>
+        <Checkbox value='service'>Service Notifications</Checkbox>
+      </CheckboxGroup>
+
       <FormControl isDisabled label='Which notifications would you like to receive?'>
         <Checkbox defaultChecked>All Notifications</Checkbox>
       </FormControl>
@@ -165,6 +173,14 @@ export const isReadonly: ComponentStory<typeof Checkbox> = () => {
         All Notifications
       </Checkbox>
 
+      <CheckboxGroup defaultValue={['all']}>
+        <Checkbox value='all'>All Notifications</Checkbox>
+        <Checkbox value='important' isReadOnly>
+          Important Notifications
+        </Checkbox>
+        <Checkbox value='service'>Service Notifications</Checkbox>
+      </CheckboxGroup>
+
       <FormControl isReadOnly label='Which notifications would you like to receive?'>
         <Checkbox defaultChecked>All Notifications</Checkbox>
       </FormControl>
@@ -187,6 +203,14 @@ export const isInvalid: ComponentStory<typeof Checkbox> = () => {
       <Checkbox isInvalid defaultChecked>
         All Notifications
       </Checkbox>
+
+      <CheckboxGroup defaultValue={['all']}>
+        <Checkbox value='all'>All Notifications</Checkbox>
+        <Checkbox value='important' isInvalid>
+          Important Notifications
+        </Checkbox>
+        <Checkbox value='service'>Service Notifications</Checkbox>
+      </CheckboxGroup>
 
       <FormControl
         isInvalid
@@ -282,37 +306,38 @@ export const customControlGroup: ComponentStory<typeof Checkbox> = () => {
 
 export const customHook: ComponentStory<typeof Checkbox> = () => {
   const CustomCheckbox: FC<any> = (props) => {
-    const { isChecked, getContainerProps, getInputProps, getLabelProps } = useCheckbox(props)
+    const { getInputProps, getIconProps } = useCheckbox(props)
 
     return (
-      <ui.label
-        py='xs'
-        px='sm'
-        rounded='md'
-        maxW='2xs'
-        border='3px solid'
-        borderColor={isChecked ? ['green.500', 'blue.500'] : ['gray.100', 'gray.700']}
-        bg={['gray.100', 'gray.700']}
-        cursor='pointer'
-        {...getContainerProps()}
-      >
-        <ui.input hidden {...getInputProps()} />
+      <Box as='label'>
+        <input {...getInputProps()} />
 
-        <Text {...getLabelProps()}>{props.value}</Text>
-      </ui.label>
+        <Box
+          {...getIconProps()}
+          cursor='pointer'
+          borderWidth='1px'
+          py='xs'
+          px='sm'
+          rounded='md'
+          _checked={{
+            bg: 'blue.500',
+            color: 'white',
+            borderColor: 'blue.500',
+          }}
+        >
+          {props.value}
+        </Box>
+      </Box>
     )
   }
 
-  const { value, getCheckboxProps } = useCheckboxGroup({
-    defaultValue: ['孫悟空'],
-  })
+  const { getCheckboxProps } = useCheckboxGroup({ defaultValue: ['孫悟空'] })
 
   return (
-    <VStack>
-      <Text>Selected character: {value.join(', ')}</Text>
+    <HStack gap='sm'>
       <CustomCheckbox {...getCheckboxProps({ value: '孫悟空' })} />
       <CustomCheckbox {...getCheckboxProps({ value: 'ベジータ' })} />
       <CustomCheckbox {...getCheckboxProps({ value: 'フリーザ' })} />
-    </VStack>
+    </HStack>
   )
 }

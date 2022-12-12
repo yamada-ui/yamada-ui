@@ -14,6 +14,7 @@
     "format": "prettier --write .",
     "dev": "turbo run dev --filter=!./examples/*",
     "sb": "start-storybook -p 6006",
+    "sb:static": "pnpx serve storybook-static",
     "prebuild": "pnpm gen:tokens",
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",

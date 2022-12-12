@@ -4,6 +4,7 @@ node-jiti
 
 # dependencies
 node_modules
+storybook-static
 dist
 .turbo
 

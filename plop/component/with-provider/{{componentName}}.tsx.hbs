@@ -9,10 +9,6 @@ import {
 } from '@yamada-ui/core'
 import { createContext, cx } from '@yamada-ui/utils'
 
-type {{upperCase componentName}}Options = {}
-
-export type {{upperCase componentName}}Props = HTMLUIProps<'div'> & ThemeProps<'{{upperCase componentName}}'> & {{upperCase componentName}}Options
-
 type {{upperCase componentName}}Context = Record<string, CSSUIObject>
 
 const [{{upperCase componentName}}Provider, use{{upperCase componentName}}] = createContext<{{upperCase componentName}}Context>({
@@ -21,6 +17,10 @@ const [{{upperCase componentName}}Provider, use{{upperCase componentName}}] = cr
 })
 
 export { use{{upperCase componentName}} }
+
+type {{upperCase componentName}}Options = {}
+
+export type {{upperCase componentName}}Props = HTMLUIProps<'div'> & ThemeProps<'{{upperCase componentName}}'> & {{upperCase componentName}}Options
 
 export const {{upperCase componentName}} = forwardRef<{{upperCase componentName}}Props, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('{{upperCase componentName}}', props)

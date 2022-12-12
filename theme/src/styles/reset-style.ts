@@ -268,6 +268,6 @@ export const resetStyle: UIStyle = {
   },
 
   '[hidden]': {
-    display: 'none',
+    display: 'none !important',
   },
 }

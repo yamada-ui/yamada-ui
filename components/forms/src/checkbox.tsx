@@ -163,7 +163,7 @@ export type UseCheckboxProps = FormControlOptions & {
 }
 
 export const useCheckbox = (props: UseCheckboxProps) => {
-  const { id, name, value, tabIndex, disabled, readOnly, isIndeterminate, ...rest } =
+  const { id, name, value, tabIndex, required, disabled, readOnly, isIndeterminate, ...rest } =
     useFormControlProps(props)
 
   const [isFocused, setFocused] = useState(false)
@@ -281,6 +281,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       name,
       value,
       tabIndex,
+      required,
       disabled,
       readOnly,
       checked,
@@ -307,6 +308,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       name,
       value,
       tabIndex,
+      required,
       disabled,
       readOnly,
       checked,

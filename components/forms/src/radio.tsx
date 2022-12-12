@@ -188,7 +188,7 @@ export type UseRadioProps = FormControlOptions & {
 }
 
 export const useRadio = (props: UseRadioProps) => {
-  const { id, name, value, disabled, readOnly, ...rest } = useFormControlProps(props)
+  const { id, name, value, required, disabled, readOnly, ...rest } = useFormControlProps(props)
 
   const [isFocused, setFocused] = useState(false)
   const [isHovered, setHovered] = useState(false)
@@ -267,6 +267,7 @@ export const useRadio = (props: UseRadioProps) => {
       type: 'radio',
       name,
       value,
+      required,
       disabled,
       readOnly,
       checked,
@@ -292,6 +293,7 @@ export const useRadio = (props: UseRadioProps) => {
       id,
       name,
       value,
+      required,
       disabled,
       readOnly,
       checked,

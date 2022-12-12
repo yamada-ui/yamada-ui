@@ -9,6 +9,7 @@ import { Container } from './container'
 import { Dialog } from './dialog'
 import { Divider } from './divider'
 import { Drawer } from './drawer'
+import { Editable } from './editable'
 import { FormControl } from './form-control'
 import { Heading } from './heading'
 import { Input } from './input'
@@ -41,6 +42,7 @@ export default {
   Dialog,
   Divider,
   Drawer,
+  Editable,
   FormControl,
   Heading,
   Input,

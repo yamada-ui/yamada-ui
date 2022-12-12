@@ -303,6 +303,7 @@ export interface GeneratedTheme extends UITheme {
     | 'outline'
     | 'inner'
     | 'none'
+    | 'dark-md'
     | 'dark-lg'
     | (string & {})
   sizes:
@@ -480,7 +481,7 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
-    Checkbox: { sizes: string & {}; variants: string & {} }
+    Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     NumberInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
@@ -493,6 +494,10 @@ export interface GeneratedTheme extends UITheme {
     Button: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
+    }
+    Card: {
+      sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
+      variants: 'elevated' | 'outline' | 'solid' | 'subtle' | 'unstyled' | (string & {})
     }
     CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Dialog: {
@@ -546,6 +551,11 @@ export interface GeneratedTheme extends UITheme {
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
     Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Switch: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'thick' | 'thin' | (string & {})
+    }
     Tag: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'subtle' | 'outline' | (string & {})

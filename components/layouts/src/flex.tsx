@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps, CSSUIObject } from '@yamada-ui/core'
 
 type FlexOptions = {
   direction?: CSSUIProps['flexDirection']
@@ -26,7 +26,7 @@ export const Flex = forwardRef<FlexProps, 'div'>(
     },
     ref,
   ) => {
-    const css = {
+    const css: CSSUIObject = {
       display: 'flex',
       flexDirection,
       justifyContent,

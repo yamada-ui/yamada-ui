@@ -9,8 +9,9 @@ jobs:
   deploy-storybook:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: install packages
+        uses: pnpm/action-setup@v2.2.2
         run: pnpm install
       - name: build storybook
         run: pnpm build:sb

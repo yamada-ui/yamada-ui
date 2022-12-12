@@ -21,6 +21,7 @@ const App: FC = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Image
+        w='full'
         maxW='32rem'
         src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/yamada-ui.png'
       />

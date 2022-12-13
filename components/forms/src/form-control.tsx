@@ -153,16 +153,16 @@ export const useFormControl = (props: UseFormControl) => {
   const control = useFormControlContext()
 
   const id = props.id ?? control?.id
-  const isRequired = props.required ?? props.isRequired ?? control?.isRequired
   const isDisabled = props.disabled ?? props.isDisabled ?? control?.isDisabled
   const isReadOnly = props.readOnly ?? props.isReadOnly ?? control?.isReadOnly
+  const isRequired = props.required ?? props.isRequired ?? control?.isRequired
   const isInvalid = props.isInvalid ?? control?.isInvalid
 
   return {
     id,
-    isRequired,
     isDisabled,
     isReadOnly,
+    isRequired,
     isInvalid,
   }
 }
@@ -181,44 +181,60 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   disabled,
   readOnly,
   required,
+  isDisabled,
+  isReadOnly,
   isRequired,
   isInvalid,
-  isReadOnly,
-  isDisabled,
   onFocus,
   onBlur,
   ...rest
 }: UseFormControlProps<Y> & M) => {
   const control = useFormControlContext()
 
-  required = required ?? isRequired ?? control?.isRequired
   disabled = disabled ?? isDisabled ?? control?.isDisabled
+  required = required ?? isRequired ?? control?.isRequired
   readOnly = readOnly ?? isReadOnly ?? control?.isReadOnly
 
   isInvalid = isInvalid ?? control?.isInvalid
 
   return {
     id: id ?? control?.id,
-    required,
     disabled,
+    required,
     readOnly,
     'aria-disabled': ariaAttr(disabled),
-    'aria-required': ariaAttr(required),
     'aria-readonly': ariaAttr(readOnly),
+    'aria-required': ariaAttr(required),
     'aria-invalid': ariaAttr(isInvalid),
     onFocus: handlerAll(control?.onFocus, onFocus),
     onBlur: handlerAll(control?.onBlur, onBlur),
     ...(disabled || readOnly
       ? {
-          _hover: undefined,
-          _active: undefined,
-          _focus: undefined,
-          _invalid: undefined,
+          _hover: {},
+          _active: {},
+          _focus: {},
+          _invalid: {},
         }
       : {}),
     ...rest,
   }
 }
+
+export const returnUseFormControlPropsMap: any[] = [
+  'disabled',
+  'required',
+  'readOnly',
+  'aria-disabled',
+  'aria-readonly',
+  'aria-required',
+  'aria-invalid',
+  'onFocus',
+  'onBlur',
+  '_hover',
+  '_active',
+  '_focus',
+  '_invalid',
+]
 
 type LabelOptions = {
   requiredIndicator?: ReactNode

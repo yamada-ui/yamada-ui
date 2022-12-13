@@ -6,11 +6,11 @@ export const createdDom = (): boolean =>
 export const getPlatform = (): string =>
   (navigator as any).userAgentData?.platform ?? navigator.platform
 
-const vendor = (v: RegExp): boolean => createdDom() && v.test(navigator.vendor)
-const platform = (v: RegExp): boolean => createdDom() && v.test(getPlatform())
+export const vendor = (v: RegExp): boolean => createdDom() && v.test(navigator.vendor)
+export const platform = (v: RegExp): boolean => createdDom() && v.test(getPlatform())
 
+export const isMac = (): boolean => platform(/^mac/)
 export const isApple = (): boolean => platform(/mac|iphone|ipad|ipod/i)
-
 export const isSafari = (): boolean => isApple() && vendor(/apple/i)
 
 export const isElement = (el: any): el is Element =>

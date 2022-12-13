@@ -28,6 +28,9 @@ export const countDecimal = (n: number): number => {
   return p
 }
 
+export const roundNumberToStep = (n: number, from: number, step: number) =>
+  toPrecision(Math.round((n - from) / step) * step + from, countDecimal(step))
+
 export const toPercent = (n: number, min: number, max: number): number =>
   ((n - min) * 100) / (max - min)
 

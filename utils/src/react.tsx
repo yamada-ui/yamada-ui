@@ -25,6 +25,11 @@ export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
+export type RequiredPropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+  props: Merge<DOMAttributes, Y>,
+  ref?: React.Ref<any>,
+) => M & React.RefAttributes<any>
+
 export type MaybeRenderProp<Y> = React.ReactNode | ((props: Y) => React.ReactNode)
 
 type Options = {

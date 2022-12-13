@@ -1,6 +1,7 @@
 const fs = require('fs').promises
 const path = require('path')
 const findPkgs = require('find-packages').default
+const { format, resolveConfig } = require('prettier')
 
 const cwd = process.cwd()
 
@@ -74,6 +75,83 @@ module.exports = function (plop) {
       path.join(cwd, 'components', packageName, 'src', 'index.ts'),
       `export * from './${componentName}'`,
     )
+  })
+
+  plop.setActionType('updateConfig', async (answers) => {
+    if (!answers) return
+
+    const { packageNames, isDocuments, isSystem } = answers
+
+    let data = await fs.readFile(path.join(cwd, '.storybook', 'main.ts'), 'utf8')
+
+    let dir = ''
+
+    if (packageNames.length) {
+      for (let [i, packageName] of Object.entries(packageNames)) {
+        i = Number(i)
+
+        const path = `../stories/components/${packageName}/*.stories.@(js|jsx|ts|tsx|mdx)`
+
+        dir = dir + `${i ? ', ' : ''}\'${path}\'`
+      }
+
+      if (isDocuments === 'Yes')
+        dir = dir + ", '../stories/documents/**/*.stories.@(js|jsx|ts|tsx|mdx)'"
+
+      if (isSystem === 'Yes') dir = dir + ", '../stories/system/**/*.stories.@(js|jsx|ts|tsx|mdx)'"
+    } else {
+      dir = "'../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)'"
+    }
+
+    dir = '[' + dir + ']'
+
+    data = data.replace(/stories:[\s\S]*?\],/, `stories: ${dir},`)
+
+    const config = await resolveConfig(cwd)
+
+    data = format(data, { ...config, parser: 'typescript' })
+
+    await fs.writeFile(path.join(cwd, '.storybook', 'main.ts'), data)
+  })
+
+  plop.setGenerator('storybook', {
+    description: '',
+    prompts: [
+      {
+        type: 'checkbox',
+        name: 'packageNames',
+        message: 'Select a component. If none are selected, all will be selected:',
+        choices: workspaces,
+      },
+      {
+        type: 'list',
+        name: 'isDocuments',
+        message: 'Show documents?:',
+        when: ({ packageNames }) => packageNames.length,
+        default: 'Yes',
+        choices: ['Yes', 'No'],
+      },
+      {
+        type: 'list',
+        name: 'isSystem',
+        message: 'Show system?:',
+        when: ({ packageNames }) => packageNames.length,
+        default: 'Yes',
+        choices: ['Yes', 'No'],
+      },
+    ],
+
+    actions: (answers) => {
+      const actions = []
+
+      if (!answers) return actions
+
+      actions.push({
+        type: 'updateConfig',
+      })
+
+      return actions
+    },
   })
 
   plop.setGenerator('package', {

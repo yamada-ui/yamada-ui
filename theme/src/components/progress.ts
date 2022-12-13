@@ -3,10 +3,10 @@ import { toneColor, getColor } from '@yamada-ui/utils'
 
 export const Progress: ComponentStyle = {
   baseStyle: {
-    container: {
+    track: {
       bg: ['gray.100', 'whiteAlpha.300'],
     },
-    inner: ({ theme: t, colorScheme: s, colorStyle: c = 'blue', hasStripe, isAnimation }) => {
+    filledTrack: ({ theme: t, colorScheme: s, colorStyle: c = 'blue', hasStripe, isAnimation }) => {
       hasStripe = !isAnimation && hasStripe
 
       const l = mode(500, 300)(s)
@@ -47,22 +47,22 @@ export const Progress: ComponentStyle = {
 
   sizes: {
     xs: {
-      container: {
+      track: {
         h: '1',
       },
     },
     sm: {
-      container: {
+      track: {
         h: '2',
       },
     },
     md: {
-      container: {
+      track: {
         h: '3',
       },
     },
     lg: {
-      container: {
+      track: {
         h: '4',
       },
     },

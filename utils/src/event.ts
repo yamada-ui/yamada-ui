@@ -16,9 +16,8 @@ export type MixedEventListener = (e: AnyPointerEvent, info: PointerEventInfo) =>
 export const isMouseEvent = (ev: any): ev is MouseEvent => {
   const win = getEventWindow(ev)
 
-  if (typeof win.PointerEvent !== 'undefined' && ev instanceof win.PointerEvent) {
+  if (typeof win.PointerEvent !== 'undefined' && ev instanceof win.PointerEvent)
     return !!(ev.pointerType === 'mouse')
-  }
 
   return ev instanceof win.MouseEvent
 }

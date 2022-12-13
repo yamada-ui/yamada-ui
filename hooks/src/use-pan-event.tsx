@@ -79,15 +79,15 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
 }
 
 const pipe =
-  <R extends any>(...fns: ((a: R) => R)[]) =>
-  (v: R) =>
+  <Y extends any>(...fns: ((a: Y) => Y)[]) =>
+  (v: Y) =>
     fns.reduce((a, b) => b(a), v)
 
 const distance1D = (a: number, b: number) => Math.abs(a - b)
 
 const isPoint = (point: any): point is { x: number; y: number } => 'x' in point && 'y' in point
 
-export const distance = <P extends Point | number>(a: P, b: P) => {
+const distance = <Y extends Point | number>(a: Y, b: Y) => {
   if (typeof a === 'number' && typeof b === 'number') return distance1D(a, b)
 
   if (isPoint(a) && isPoint(b)) {
@@ -120,6 +120,7 @@ const panEvent = (
 
   ev.stopPropagation()
   ev.preventDefault()
+
   onSessionStart?.(ev, getPanInfo(info, history))
 
   const updatePoint = () => {
@@ -172,12 +173,14 @@ const panEvent = (
     handlers = newHandlers
   }
 
+  let removeListeners = pipe(
+    addPointerEvent(win, 'pointermove', onPointerMove),
+    addPointerEvent(win, 'pointerup', onPointerUp),
+    addPointerEvent(win, 'pointercancel', onPointerUp),
+  )
+
   const end = () => {
-    pipe(
-      addPointerEvent(win, 'pointermove', onPointerMove),
-      addPointerEvent(win, 'pointerup', onPointerUp),
-      addPointerEvent(win, 'pointercancel', onPointerUp),
-    )
+    removeListeners?.()
 
     cancelSync.update(updatePoint)
   }
@@ -208,10 +211,10 @@ export const usePanEvent = (
   const panSession = useRef<ReturnPanEvent | null>(null)
 
   const handlersRef = useLatestRef<Partial<PanEventHandlers>>({
-    onSessionStart: onSessionStart,
-    onSessionEnd: onSessionEnd,
-    onStart: onStart,
-    onMove: onMove,
+    onSessionStart,
+    onSessionEnd,
+    onStart,
+    onMove,
     onEnd: (event, info) => {
       panSession.current = null
 

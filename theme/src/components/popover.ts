@@ -10,6 +10,10 @@ export const Popover: ComponentStyle = {
       color: 'inherit',
       boxShadow: ['md', 'dark-lg'],
       zIndex: 'guldo',
+      _focusVisible: {
+        outline: 0,
+        boxShadow: 'outline',
+      },
     },
     closeButton: {
       top: '2',

@@ -6,7 +6,7 @@ import {
   HTMLUIProps,
   ThemeProps,
 } from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/hooks'
+import { trackFocusVisible, useControllableState } from '@yamada-ui/hooks'
 import { Flex, FlexProps } from '@yamada-ui/layouts'
 import {
   createContext,
@@ -29,6 +29,7 @@ import {
   KeyboardEvent,
   SyntheticEvent,
   useCallback,
+  useEffect,
   useId,
   useRef,
   useState,
@@ -196,14 +197,19 @@ export type UseRadioProps = FormControlOptions & {
 export const useRadio = (props: UseRadioProps) => {
   const { id, name, value, required, disabled, readOnly, ...rest } = useFormControlProps(props)
 
-  const [isFocused, setFocused] = useState(false)
-  const [isHovered, setHovered] = useState(false)
-  const [isActive, setActive] = useState(false)
+  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
+  const [isFocused, setFocused] = useState<boolean>(false)
+  const [isHovered, setHovered] = useState<boolean>(false)
+  const [isActive, setActive] = useState<boolean>(false)
 
-  const [isChecked, setIsChecked] = useState(!!props.defaultChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(!!props.defaultChecked)
 
   const isControlled = props.isChecked !== undefined
   const checked = isControlled ? (props.isChecked as boolean) : isChecked
+
+  useEffect(() => {
+    return trackFocusVisible(setIsFocusVisible)
+  }, [])
 
   const onChange = useCallbackRef(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -255,13 +261,14 @@ export const useRadio = (props: UseRadioProps) => {
       'data-hover': dataAttr(isHovered),
       'data-checked': dataAttr(checked),
       'data-focus': dataAttr(isFocused),
+      'data-focus-visible': dataAttr(isFocused && isFocusVisible),
       'aria-hidden': true,
       onMouseDown: handlerAll(props.onMouseDown, () => setActive(true)),
       onMouseUp: handlerAll(props.onMouseUp, () => setActive(false)),
       onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
     }),
-    [checked, isActive, isFocused, isHovered, rest],
+    [checked, isActive, isFocused, isFocusVisible, isHovered, rest],
   )
 
   const getInputProps: PropGetter = useCallback(
@@ -330,6 +337,7 @@ export const useRadio = (props: UseRadioProps) => {
   )
 
   return {
+    isFocusVisible,
     isFocused,
     isHovered,
     isActive,

@@ -22,6 +22,9 @@ export const CloseButton: ComponentStyle = {
         bg: ['initial', 'initial'],
       },
     },
+    _focusVisible: {
+      boxShadow: 'outline',
+    },
   },
   sizes: {
     sm: {

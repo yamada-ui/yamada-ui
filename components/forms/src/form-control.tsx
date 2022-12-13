@@ -214,6 +214,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
           _active: {},
           _focus: {},
           _invalid: {},
+          _focusVisible: {},
         }
       : {}),
     ...rest,
@@ -234,6 +235,7 @@ export const returnUseFormControlPropsMap: any[] = [
   '_active',
   '_focus',
   '_invalid',
+  '_focusVisible',
 ]
 
 type LabelOptions = {

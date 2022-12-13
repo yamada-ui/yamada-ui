@@ -18,6 +18,9 @@ export const Switch: ComponentStyle = {
       _checked: {
         justifyContent: 'flex-end',
       },
+      _focusVisible: {
+        boxShadow: 'outline',
+      },
     },
     thumb: {
       rounded: 'inherit',

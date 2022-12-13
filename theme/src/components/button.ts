@@ -21,6 +21,9 @@ export const Button: ComponentStyle = {
         bg: ['initial', 'initial'],
       },
     },
+    _focusVisible: {
+      boxShadow: 'outline',
+    },
   },
 
   variants: {

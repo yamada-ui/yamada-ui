@@ -6,7 +6,7 @@ import {
   HTMLUIProps,
   ThemeProps,
 } from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/hooks'
+import { useControllableState, trackFocusVisible } from '@yamada-ui/hooks'
 import { Flex, FlexProps } from '@yamada-ui/layouts'
 import {
   createContext,
@@ -36,6 +36,7 @@ import {
   ReactElement,
   SyntheticEvent,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -172,14 +173,15 @@ export const useCheckbox = (props: UseCheckboxProps) => {
   const { id, name, value, tabIndex, required, disabled, readOnly, isIndeterminate, ...rest } =
     useFormControlProps(props)
 
-  const [isFocused, setFocused] = useState(false)
-  const [isHovered, setHovered] = useState(false)
-  const [isActive, setActive] = useState(false)
+  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
+  const [isFocused, setFocused] = useState<boolean>(false)
+  const [isHovered, setHovered] = useState<boolean>(false)
+  const [isActive, setActive] = useState<boolean>(false)
 
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isLabel, setIsLabel] = useState(true)
+  const [isLabel, setIsLabel] = useState<boolean>(true)
 
-  const [isChecked, setIsChecked] = useState(!!props.defaultChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(!!props.defaultChecked)
 
   const isControlled = props.isChecked !== undefined
   const checked = isControlled ? (props.isChecked as boolean) : isChecked
@@ -214,6 +216,10 @@ export const useCheckbox = (props: UseCheckboxProps) => {
     },
     [setActive],
   )
+
+  useEffect(() => {
+    return trackFocusVisible(setIsFocusVisible)
+  }, [])
 
   useSafeLayoutEffect(() => {
     if (inputRef.current) inputRef.current.indeterminate = Boolean(isIndeterminate)
@@ -263,6 +269,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       'data-hover': dataAttr(isHovered),
       'data-checked': dataAttr(checked),
       'data-focus': dataAttr(isFocused),
+      'data-focus-visible': dataAttr(isFocused && isFocusVisible),
       'data-indeterminate': dataAttr(isIndeterminate),
       'aria-hidden': true,
       onMouseDown: handlerAll(props.onMouseDown, (ev: React.MouseEvent) => {
@@ -274,7 +281,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
       onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
     }),
-    [isActive, checked, isFocused, isHovered, isIndeterminate, rest],
+    [isActive, checked, isFocused, isHovered, isFocusVisible, isIndeterminate, rest],
   )
 
   const getInputProps: PropGetter = useCallback(
@@ -345,6 +352,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
   )
 
   return {
+    isFocusVisible,
     isFocused,
     isHovered,
     isActive,

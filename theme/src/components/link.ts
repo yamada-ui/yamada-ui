@@ -12,5 +12,8 @@ export const Link: ComponentStyle = {
     _hover: {
       textDecoration: 'underline',
     },
+    _focusVisible: {
+      boxShadow: 'outline',
+    },
   },
 }

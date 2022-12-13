@@ -15,6 +15,9 @@ export const Breadcrumb: ComponentStyle = {
       _hover: {
         textDecoration: 'underline',
       },
+      _focusVisible: {
+        boxShadow: 'outline',
+      },
     },
     separator: {},
   },

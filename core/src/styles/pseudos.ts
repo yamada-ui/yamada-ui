@@ -6,6 +6,7 @@ export const pseudos = {
   _hover: '&:hover, &[data-hover]',
   _active: '&:active, &[data-active]',
   _focus: '&:focus, &[data-focus]',
+  _focusVisible: '&:focus-visible, &[data-focus-visible]',
   _disabled: '&[disabled], &[aria-disabled=true], &[data-disabled]',
   _readOnly: '&[readonly], &[aria-readonly=true], &[data-readonly]',
   _indeterminate: '&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]',

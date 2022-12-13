@@ -67,6 +67,11 @@ export const NumberInput: ComponentStyle = {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
+          _focusVisible: {
+            zIndex: 1,
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
         },
       }
     },
@@ -102,6 +107,10 @@ export const NumberInput: ComponentStyle = {
           _invalid: {
             borderColor: errorBorderColor,
           },
+          _focusVisible: {
+            bg: 'transparent',
+            borderColor: focusBorderColor,
+          },
         },
       }
     },
@@ -136,6 +145,10 @@ export const NumberInput: ComponentStyle = {
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
+          },
+          _focusVisible: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
         },
         stepper: {

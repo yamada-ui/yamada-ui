@@ -9,44 +9,18 @@ import {
   CSSUIProps,
 } from '@yamada-ui/core'
 import { createDescendant, useControllableState } from '@yamada-ui/hooks'
-import { createContext, cx, handlerAll, mergeRefs } from '@yamada-ui/utils'
-import { ChangeEvent, KeyboardEvent, useCallback, useEffect, useId, useState } from 'react'
-import { useFormControlProps, FormControlOptions } from './'
-
-type PinInputOptions = {
-  id?: string
-  type?: 'alphanumeric' | 'number'
-  placeholder?: string
-  value?: string
-  defaultValue?: string
-  onChange?: (value: string) => void
-  onComplete?: (value: string) => void
-  autoFocus?: boolean
-  manageFocus?: boolean
-  otp?: boolean
-  mask?: boolean
-  focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
-  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
-}
-
-type PinInputContext = FormControlOptions & {
-  getPinInputFieldProps: (
-    props: PinInputFieldProps & {
-      index: number
-    },
-  ) => PinInputFieldProps
-  styles: Record<string, CSSUIObject>
-}
-
-const [PinInputProvider, usePinInput] = createContext<PinInputContext>({
-  strict: false,
-  name: 'PinInputContext',
-})
-
-export { usePinInput }
-
-const { DescendantsContextProvider, useDescendants, useDescendant } =
-  createDescendant<HTMLInputElement>()
+import {
+  createContext,
+  cx,
+  handlerAll,
+  mergeRefs,
+  omitObject,
+  pickObject,
+  filterUndefined,
+  getValidChildren,
+} from '@yamada-ui/utils'
+import { ChangeEvent, KeyboardEvent, Ref, useCallback, useEffect, useId, useState } from 'react'
+import { useFormControlProps, FormControlOptions, returnUseFormControlPropsMap } from './'
 
 const toArray = (value?: string) => value?.split('')
 
@@ -59,31 +33,35 @@ const validate = (value: string, type: PinInputProps['type']) => {
   return regex.test(value)
 }
 
-export type PinInputProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
-  ThemeProps<'PinInput'> &
-  PinInputOptions &
-  FormControlOptions
+export type UsePinInputProps = FormControlOptions & {
+  id?: string
+  type?: 'alphanumeric' | 'number'
+  placeholder?: string
+  value?: string
+  defaultValue?: string
+  autoFocus?: boolean
+  manageFocus?: boolean
+  otp?: boolean
+  mask?: boolean
+  onChange?: (value: string) => void
+  onComplete?: (value: string) => void
+}
 
-export const PinInput = forwardRef<PinInputProps, 'div'>(({ id, ...props }, ref) => {
-  const styles = useMultiComponentStyle('PinInput', props)
-  const {
-    className,
-    autoFocus,
+export const usePinInput = (props: UsePinInputProps) => {
+  let {
+    id,
+    type = 'number',
+    placeholder = '○',
     value,
     defaultValue,
-    onChange,
-    onComplete,
-    placeholder = '○',
+    autoFocus,
     manageFocus = true,
     otp = false,
-    type = 'number',
     mask,
-    isRequired,
-    isInvalid,
-    isReadOnly,
-    isDisabled,
+    onChange,
+    onComplete,
     ...rest
-  } = omitThemeProps(props)
+  } = useFormControlProps(props)
 
   if (!id) id = useId()
 
@@ -160,8 +138,24 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(({ id, ...props }, ref)
     return nextValue
   }, [])
 
-  const getPinInputFieldProps = useCallback(
-    ({ index, ...rest }: PinInputFieldProps & { index: number }): PinInputFieldProps => {
+  const clear = useCallback(() => {
+    const values: string[] = Array(descendants.count()).fill('')
+
+    setValues(values)
+
+    const first = descendants.firstValue()
+
+    first?.node?.focus()
+  }, [descendants, setValues])
+
+  const getInputProps = useCallback(
+    ({
+      index,
+      ...props
+    }: PinInputFieldProps & {
+      index: number
+      ref?: Ref<HTMLInputElement>
+    }): PinInputFieldProps => {
       const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
         const eventValue = target.value
         const currentValue = values[index]
@@ -214,15 +208,16 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(({ id, ...props }, ref)
       return {
         inputMode: type === 'number' ? 'numeric' : 'text',
         type: mask ? 'password' : type === 'number' ? 'tel' : 'text',
-        ...rest,
+        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...filterUndefined(props),
         id: `${id}-${index}`,
         value: values[index] || '',
-        onChange: handlerAll(rest.onChange, onChange),
-        onKeyDown: handlerAll(rest.onKeyDown, onKeyDown),
-        onFocus: handlerAll(rest.onFocus, onFocus),
-        onBlur: handlerAll(rest.onBlur, onBlur),
+        onChange: handlerAll(props.onChange, onChange),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+        onFocus: handlerAll(props.onFocus, onFocus),
+        onBlur: handlerAll(props.onBlur, onBlur),
         autoComplete: otp ? 'one-time-code' : 'off',
-        placeholder: focusedIndex === index && !rest.readOnly ? '' : placeholder,
+        placeholder: focusedIndex === index && !rest.readOnly && !props.readOnly ? '' : placeholder,
       }
     },
     [
@@ -235,6 +230,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(({ id, ...props }, ref)
       onComplete,
       otp,
       placeholder,
+      rest,
       setValue,
       setValues,
       type,
@@ -242,41 +238,110 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(({ id, ...props }, ref)
     ],
   )
 
-  const css: CSSUIObject = {
-    display: 'flex',
-    alignItems: 'center',
-    ...styles.container,
+  return {
+    id,
+    values,
+    descendants,
+    setValue,
+    setValues,
+    clear,
+    getInputProps,
   }
+}
 
-  return (
-    <DescendantsContextProvider value={descendants}>
-      <PinInputProvider
-        value={{ isRequired, isInvalid, isReadOnly, isDisabled, getPinInputFieldProps, styles }}
-      >
-        <ui.div ref={ref} className={cx('ui-pin-input', className)} __css={css} {...rest} />
-      </PinInputProvider>
-    </DescendantsContextProvider>
-  )
+export type ReturenUsePinInput = ReturnType<typeof usePinInput>
+
+type PinInputContext = Pick<ReturenUsePinInput, 'getInputProps'> & {
+  styles: Record<string, CSSUIObject>
+}
+
+const [PinInputProvider, usePinInputContext] = createContext<PinInputContext>({
+  strict: false,
+  name: 'PinInputContext',
 })
+
+const { DescendantsContextProvider, useDescendants, useDescendant } =
+  createDescendant<HTMLInputElement>()
+
+type PinInputOptions = {
+  fileds?: number
+  focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+}
+
+export type PinInputProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
+  ThemeProps<'PinInput'> &
+  UsePinInputProps &
+  PinInputOptions
+
+export const PinInput = forwardRef<PinInputProps, 'div'>(
+  ({ fileds = 4, focusBorderColor, errorBorderColor, ...props }, ref) => {
+    const styles = useMultiComponentStyle('PinInput', {
+      focusBorderColor,
+      errorBorderColor,
+      ...props,
+    })
+    const { className, children, ...rest } = omitThemeProps(props)
+    const { descendants, getInputProps } = usePinInput(props)
+
+    const css: CSSUIObject = {
+      display: 'flex',
+      alignItems: 'center',
+      ...styles.container,
+    }
+
+    let cloneChildren = getValidChildren(children)
+
+    if (!cloneChildren.length)
+      for (let i = 0; i < fileds; i++) {
+        cloneChildren.push(<PinInputField key={i} />)
+      }
+
+    return (
+      <DescendantsContextProvider value={descendants}>
+        <PinInputProvider value={{ getInputProps, styles }}>
+          <ui.div
+            ref={ref}
+            className={cx('ui-pin-input', className)}
+            {...omitObject(rest, [
+              'id',
+              'type',
+              'placeholder',
+              'value',
+              'defaultValue',
+              'onChange',
+              'onComplete',
+              'autoFocus',
+              'manageFocus',
+              'otp',
+              'mask',
+            ])}
+            __css={css}
+          >
+            {cloneChildren}
+          </ui.div>
+        </PinInputProvider>
+      </DescendantsContextProvider>
+    )
+  },
+)
 
 export type PinInputFieldProps = HTMLUIProps<'input'> & FormControlOptions
 
 export const PinInputField = forwardRef<PinInputFieldProps, 'input'>(
   ({ className, ...rest }, ref) => {
-    const { isRequired, isInvalid, isReadOnly, isDisabled, getPinInputFieldProps, styles } =
-      usePinInput()
+    const { getInputProps, styles } = usePinInputContext()
     const { index, register } = useDescendant()
 
-    rest = useFormControlProps({ isRequired, isInvalid, isReadOnly, isDisabled, ...rest })
+    rest = useFormControlProps(rest)
 
     const css: CSSUIObject = { ...styles.field }
 
     return (
       <ui.input
-        ref={mergeRefs(register, ref)}
         className={cx('ui-pin-input-field', className)}
+        {...getInputProps({ ...rest, ref: mergeRefs(register, ref), index })}
         __css={css}
-        {...getPinInputFieldProps({ index, ...rest })}
       />
     )
   },

@@ -20,6 +20,7 @@ import {
   funcAll,
   handlerAll,
   dataAttr,
+  pickObject,
 } from '@yamada-ui/utils'
 import {
   ChangeEvent,
@@ -32,7 +33,12 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useFormControl, useFormControlProps, FormControlOptions } from './'
+import {
+  useFormControl,
+  useFormControlProps,
+  FormControlOptions,
+  returnUseFormControlPropsMap,
+} from './'
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
@@ -232,8 +238,8 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
       'data-checked': dataAttr(checked),
     }),
@@ -242,8 +248,8 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getIconProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
       'data-active': dataAttr(isActive),
       'data-hover': dataAttr(isHovered),
@@ -260,8 +266,8 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
       id,
       type: 'radio',
@@ -307,8 +313,8 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()

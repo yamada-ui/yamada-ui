@@ -21,6 +21,7 @@ import {
   isContains,
   handlerAll,
   mergeRefs,
+  pickObject,
 } from '@yamada-ui/utils'
 import {
   ChangeEvent,
@@ -32,7 +33,7 @@ import {
   useState,
   KeyboardEvent,
 } from 'react'
-import { FormControlOptions, useFormControlProps } from './'
+import { FormControlOptions, returnUseFormControlPropsMap, useFormControlProps } from './'
 
 export type UseEditableProps = FormControlOptions & {
   placeholder?: string
@@ -193,8 +194,8 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getPreviewProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['value', 'onChange', 'onCancel', 'onSubmit', 'onEdit']),
       ref: mergeRefs(ref, previewRef),
       hidden: isEditing,
       tabIndex: isInteractive && isPreviewFocusable ? 0 : undefined,
@@ -216,8 +217,8 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['onCancel', 'onSubmit', 'onEdit']),
       ref: mergeRefs(ref, inputRef),
       id,
       placeholder,
@@ -249,6 +250,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getTextareaProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
       ref: mergeRefs(ref, inputRef),
       id,
@@ -274,6 +276,7 @@ export const useEditable = (props: UseEditableProps) => {
       placeholder,
       readOnly,
       required,
+      rest,
       value,
     ],
   )

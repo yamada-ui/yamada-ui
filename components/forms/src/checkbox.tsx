@@ -13,6 +13,7 @@ import {
   cx,
   isObject,
   omitObject,
+  pickObject,
   useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
@@ -38,7 +39,12 @@ import {
   useRef,
   useState,
 } from 'react'
-import { FormControlOptions, useFormControl, useFormControlProps } from './'
+import {
+  FormControlOptions,
+  useFormControl,
+  useFormControlProps,
+  returnUseFormControlPropsMap,
+} from './'
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
@@ -231,8 +237,8 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === 'LABEL')
       }),
@@ -250,8 +256,8 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getIconProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
       'data-active': dataAttr(isActive),
       'data-hover': dataAttr(isHovered),
@@ -273,8 +279,8 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref: mergeRefs(inputRef, ref),
       id,
       type: 'checkbox',
@@ -322,8 +328,8 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...props,
-      ...omitObject(rest, ['defaultChecked', 'isChecked', 'onChange']),
       ref,
       'data-checked': dataAttr(checked),
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {

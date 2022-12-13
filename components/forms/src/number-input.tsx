@@ -33,7 +33,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useFormControlProps, UseFormControlProps } from './'
+import { useFormControlProps, UseFormControlProps, returnUseFormControlPropsMap } from './'
 
 const isDefaultValidCharacter = (character: string) => /^[Ee0-9+\-.]$/.test(character)
 
@@ -310,8 +310,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       required,
       disabled,
       readOnly,
+      ...pickObject(rest, returnUseFormControlPropsMap),
       ...omitObject(props, ['defaultValue']),
-      ...omitObject(rest, ['value', 'defaultValue', 'step', 'onChange', 'onInvalid']),
       ref: mergeRefs(inputRef, ref),
       value: format(value),
       'aria-invalid': ariaAttr(isInvalid ?? isOut),
@@ -350,17 +350,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         required,
         readOnly,
         disabled,
-        ...pickObject(omitObject(rest, ['onChange', 'onInvalid']), [
-          'aria-required',
-          'aria-readonly',
-          'aria-disabled',
-          'onBlur',
-          'onFocus',
-          '_hover',
-          '_active',
-          '_focus',
-          '_invalid',
-        ]),
+        ...pickObject(rest, returnUseFormControlPropsMap),
         ...props,
         ref: mergeRefs(ref, incrementRef),
         role: 'button',
@@ -384,17 +374,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         required,
         readOnly,
         disabled,
-        ...pickObject(omitObject(rest, ['onChange', 'onInvalid']), [
-          'aria-required',
-          'aria-readonly',
-          'aria-disabled',
-          'onBlur',
-          'onFocus',
-          '_hover',
-          '_active',
-          '_focus',
-          '_invalid',
-        ]),
+        ...pickObject(rest, returnUseFormControlPropsMap),
         ...props,
         ref: mergeRefs(ref, decrementRef),
         role: 'button',

@@ -28,11 +28,18 @@ export const countDecimal = (n: number): number => {
   return p
 }
 
-export const roundNumberToStep = (n: number, from: number, step: number) =>
-  toPrecision(Math.round((n - from) / step) * step + from, countDecimal(step))
+export const roundNumberToStep = (n: number, from: number, step: number) => {
+  const nextValue = Math.round((n - from) / step) * step + from
 
-export const toPercent = (n: number, min: number, max: number): number =>
+  const precision = countDecimal(step)
+
+  return toPrecision(nextValue, precision)
+}
+
+export const valueToPercent = (n: number, min: number, max: number): number =>
   ((n - min) * 100) / (max - min)
+
+export const percentToValue = (n: number, min: number, max: number) => (max - min) * n + min
 
 export const clampNumber = (n: number, min: number, max: number): number =>
   Math.min(Math.max(n, min), max)

@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject, CSSUIProps, StylesProps } from '@yamada-ui/core'
 import { useToken, useValue, useAnimation } from '@yamada-ui/hooks'
-import { cx, toPercent } from '@yamada-ui/utils'
+import { cx, valueToPercent } from '@yamada-ui/utils'
 
 type CircleProgressOptions = {
   size?: CSSUIProps['boxSize']
@@ -40,7 +40,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
     thickness = (useToken('sizes', useValue(thickness)) ?? thickness) as string | number
 
     const isTransparent = value === 0 && !isAnimation
-    const percent = toPercent(value, min, max)
+    const percent = valueToPercent(value, min, max)
 
     const interval = !isAnimation ? percent * 2.64 : undefined
 

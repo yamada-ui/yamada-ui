@@ -17,8 +17,6 @@ const [ProgressProvider, useProgress] = createContext<Record<string, CSSUIObject
   errorMessage: `useProgress returned is 'undefined'. Seems you forgot to wrap the components in "<Progress />" `,
 })
 
-export { useProgress }
-
 type ProgressOptions = {
   value?: number
   min?: number
@@ -48,14 +46,13 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     ...rest
   } = omitThemeProps(props)
 
-  const borderRadius =
-    _borderRadius ?? rounded ?? (styles.container.borderRadius as string | number)
+  const borderRadius = _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
 
   const css: CSSUIObject = {
     w: '100%',
     overflow: 'hidden',
     pos: 'relative',
-    ...styles.container,
+    ...styles.track,
   }
 
   return (
@@ -67,7 +64,7 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
         borderRadius={borderRadius}
         {...rest}
       >
-        <ProgressInner
+        <ProgressFilledTrack
           min={min}
           max={max}
           value={value}
@@ -83,9 +80,9 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
   )
 })
 
-type ProgressInnerProps = HTMLUIProps<'div'> & ProgressProps
+type ProgressFilledTrackProps = HTMLUIProps<'div'> & ProgressProps
 
-const ProgressInner: FC<ProgressInnerProps> = ({
+const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
   value = 0,
   min = 0,
   max = 100,
@@ -140,7 +137,7 @@ const ProgressInner: FC<ProgressInnerProps> = ({
   const __css: CSSUIObject = {
     w: `${percent}%`,
     h: '100%',
-    ...styles.inner,
+    ...styles.filledTrack,
   }
 
   return <ui.div css={css} __css={__css} {...rest} />

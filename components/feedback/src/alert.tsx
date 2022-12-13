@@ -31,8 +31,6 @@ const [AlertProvider, useAlert] = createContext<AlertContext>({
   errorMessage: `useAlert returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
 })
 
-export { useAlert }
-
 export const getStatusColorStyle = (status: Status) => statuses[status].colorStyle
 
 export const getStatusIcon = (status: Status) => statuses[status].icon

@@ -66,8 +66,6 @@ const [FormControlStylesProvider, useFormControlStyles] = createContext<
   name: 'FormControlStyleContext',
 })
 
-export { useFormControlContext, useFormControlStyles }
-
 export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }, ref) => {
   const styles = useMultiComponentStyle('FormControl', props)
   const {

@@ -103,14 +103,14 @@ export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
 
 type CircleProps = HTMLUIProps<'circle'>
 
-export const Circle = (rest: CircleProps) => (
+const Circle = (rest: CircleProps) => (
   <ui.circle cx={50} cy={50} r={42} fill='transparent' {...rest} />
 )
 
 type ShapeProps = Omit<HTMLUIProps<'svg'>, 'speed'> &
   Pick<Required<CircleProgressProps>, 'children' | 'size' | 'isAnimation' | 'speed'>
 
-export const Shape = ({ size, isAnimation, speed, ...rest }: ShapeProps) => {
+const Shape = ({ size, isAnimation, speed, ...rest }: ShapeProps) => {
   const animation = useAnimation({
     keyframes: {
       '0%': {

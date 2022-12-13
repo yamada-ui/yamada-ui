@@ -16,8 +16,6 @@ const [ListProvider, useList] = createContext<Record<string, CSSUIObject>>({
   errorMessage: `useList returned is 'undefined'. Seems you forgot to wrap the components in "<List />" `,
 })
 
-export { useList }
-
 type ListOptions = {
   styleType?: CSSUIProps['listStyleType']
   stylePosition?: CSSUIProps['listStylePosition']

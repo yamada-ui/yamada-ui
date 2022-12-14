@@ -24,6 +24,7 @@ import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Radio } from './radio'
+import { Slider } from './slider'
 import { Switch } from './switch'
 import { Tag } from './tag'
 import { Textarea } from './textarea'
@@ -56,6 +57,7 @@ export default {
   Popover,
   Progress,
   Radio,
+  Slider,
   Switch,
   Tag,
   Textarea,

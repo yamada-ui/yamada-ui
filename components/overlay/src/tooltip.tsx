@@ -246,7 +246,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
                   animate={isOpen ? 'enter' : 'exit'}
                   exit='exit'
                   __css={css}
-                  {...rest}
+                  {...omitObject(rest, ['isOpen', 'defaultIsOpen', 'onOpen', 'onClose'])}
                 >
                   {label}
                 </ui.div>

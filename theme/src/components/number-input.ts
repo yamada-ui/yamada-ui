@@ -25,6 +25,7 @@ export const NumberInput: ComponentStyle = {
       _active: {
         bg: ['gray.200', 'whiteAlpha.300'],
       },
+      _readOnly: { cursor: 'auto' },
       _disabled: {
         opacity: 0.4,
         cursor: 'not-allowed',

@@ -552,7 +552,7 @@ export interface GeneratedTheme extends UITheme {
     }
     Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
-    Slider: { sizes: string & {}; variants: string & {} }
+    Slider: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Switch: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'thick' | 'thin' | (string & {})

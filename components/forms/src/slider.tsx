@@ -87,8 +87,8 @@ export const useSlider = (props: UseSliderProps) => {
 
   const value = clampNumber(computedValue, min, max)
   const reversedValue = max - value + min
-  const trackValue = isReversed ? reversedValue : value
-  const thumbPercent = valueToPercent(trackValue, min, max)
+  const thumbValue = isReversed ? reversedValue : value
+  const thumbPercent = valueToPercent(thumbValue, min, max)
 
   const isVertical = orientation === 'vertical'
 

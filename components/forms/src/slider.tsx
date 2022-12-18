@@ -386,9 +386,6 @@ export const useSlider = (props: UseSliderProps) => {
         ...props.style,
         position: 'absolute',
         userSelect: 'none',
-        WebkitUserSelect: 'none',
-        MozUserSelect: 'none',
-        msUserSelect: 'none',
         touchAction: 'none',
         ...(isVertical
           ? { bottom: `calc(${n}% - ${h / 2}px)` }

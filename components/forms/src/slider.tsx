@@ -58,7 +58,7 @@ export const useSlider = (props: UseSliderProps) => {
     min = 0,
     max = 100,
     step = 1,
-    defaultValue = 0,
+    defaultValue,
     orientation = 'horizontal',
     isReversed,
     focusThumbOnChange = true,

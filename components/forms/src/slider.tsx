@@ -33,8 +33,6 @@ import {
 import { CSSProperties, KeyboardEvent, useCallback, useRef, useState } from 'react'
 import { FormControlOptions, useFormControlProps, returnUseFormControlPropsMap } from './'
 
-const getDefaultValue = (min: number, max: number) => (max < min ? min : min + (max - min) / 2)
-
 export type UseSliderProps = FormControlOptions & {
   id?: string
   name?: string
@@ -69,12 +67,16 @@ export const useSlider = (props: UseSliderProps) => {
     ...rest
   } = useFormControlProps(props)
 
+  if (max < min) {
+    throw new Error("Do not assign a number less than 'min' to 'max'")
+  }
+
   const onChangeStart = useCallbackRef(rest.onChangeStart)
   const onChangeEnd = useCallbackRef(rest.onChangeEnd)
 
   const [computedValue, setValue] = useControllableState({
     value: rest.value,
-    defaultValue: defaultValue ?? getDefaultValue(min, max),
+    defaultValue: defaultValue ?? min + (max - min) / 2,
     onChange,
   })
 

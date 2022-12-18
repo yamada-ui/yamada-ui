@@ -67,9 +67,7 @@ export const useSlider = (props: UseSliderProps) => {
     ...rest
   } = useFormControlProps(props)
 
-  if (max < min) {
-    throw new Error("Do not assign a number less than 'min' to 'max'")
-  }
+  if (max < min) throw new Error("Do not assign a number less than 'min' to 'max'")
 
   const onChangeStart = useCallbackRef(rest.onChangeStart)
   const onChangeEnd = useCallbackRef(rest.onChangeEnd)

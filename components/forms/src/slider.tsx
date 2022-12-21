@@ -349,15 +349,14 @@ export const useSlider = (props: UseSliderProps) => {
 
   const getMarkProps: RequiredPropGetter<{ value: number }> = useCallback(
     (props = {}, ref = null) => {
-      const n = valueToPercent(props.value, min, max)
+      let n = valueToPercent(props.value, min, max)
+      n = isReversed ? 100 - n : n
 
       const style: CSSProperties = {
         ...props.style,
         position: 'absolute',
         pointerEvents: 'none',
-        ...(isVertical
-          ? { bottom: isReversed ? `${100 - n}%` : `${n}%` }
-          : { left: isReversed ? `${100 - n}%` : `${n}%` }),
+        ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
       }
 
       return {

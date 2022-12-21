@@ -96,14 +96,10 @@ export const useSlider = (props: UseSliderProps) => {
     min,
     max,
     step,
-    disabled,
     value,
     isInteractive,
-    isReversed,
-    isVertical,
     eventSource: null as 'pointer' | 'keyboard' | null,
     focusThumbOnChange,
-    orientation,
   })
 
   const containerRef = useRef<HTMLElement>(null)
@@ -121,7 +117,7 @@ export const useSlider = (props: UseSliderProps) => {
       setDragging(true)
       focusThumb()
       setValueFromPointer(ev)
-      onChangeStart?.(value)
+      onChangeStart(value)
     },
     onSessionEnd: () => {
       const { isInteractive, value } = latestRef.current
@@ -129,7 +125,7 @@ export const useSlider = (props: UseSliderProps) => {
       if (!isInteractive) return
 
       setDragging(false)
-      onChangeEnd?.(value)
+      onChangeEnd(value)
     },
     onMove: (ev) => {
       const { isInteractive } = latestRef.current

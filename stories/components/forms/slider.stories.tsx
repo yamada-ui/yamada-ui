@@ -316,17 +316,6 @@ export const customThumb: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Slider> = () => {
-  const [value, onChange] = useState<number>(50)
-
-  return (
-    <>
-      <Text>Value: {value}</Text>
-      <Slider value={value} onChange={onChange} />
-    </>
-  )
-}
-
 export const customMark: ComponentStory<typeof Slider> = () => {
   const [value, onChange] = useState<number>(50)
 
@@ -355,6 +344,17 @@ export const customMark: ComponentStory<typeof Slider> = () => {
           {value}%
         </SliderMark>
       </Slider>
+    </>
+  )
+}
+
+export const customControl: ComponentStory<typeof Slider> = () => {
+  const [value, onChange] = useState<number>(50)
+
+  return (
+    <>
+      <Text>Value: {value}</Text>
+      <Slider value={value} onChange={onChange} />
     </>
   )
 }

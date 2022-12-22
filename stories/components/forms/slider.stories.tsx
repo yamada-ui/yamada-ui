@@ -43,69 +43,64 @@ export const withSize: ComponentStory<typeof Slider> = () => {
 export const withColorStyle: ComponentStory<typeof Slider> = () => {
   return (
     <>
-      <Slider colorStyle='primary' defaultValue={50} />
+      <Slider colorStyle='primary' />
 
-      <Slider colorStyle='secondary' defaultValue={50} />
+      <Slider colorStyle='secondary' />
 
-      <Slider colorStyle='warning' defaultValue={50} />
+      <Slider colorStyle='warning' />
 
-      <Slider colorStyle='danger' defaultValue={50} />
+      <Slider colorStyle='danger' />
 
-      <Slider colorStyle='link' defaultValue={50} />
+      <Slider colorStyle='link' />
 
-      <Slider colorStyle='gray' defaultValue={50} />
+      <Slider colorStyle='gray' />
 
-      <Slider colorStyle='red' defaultValue={50} />
+      <Slider colorStyle='red' />
 
-      <Slider colorStyle='orange' defaultValue={50} />
+      <Slider colorStyle='orange' />
 
-      <Slider colorStyle='yellow' defaultValue={50} />
+      <Slider colorStyle='yellow' />
 
-      <Slider colorStyle='green' defaultValue={50} />
+      <Slider colorStyle='green' />
 
-      <Slider colorStyle='teal' defaultValue={50} />
+      <Slider colorStyle='teal' />
 
-      <Slider colorStyle='blue' defaultValue={50} />
+      <Slider colorStyle='blue' />
 
-      <Slider colorStyle='cyan' defaultValue={50} />
+      <Slider colorStyle='cyan' />
 
-      <Slider colorStyle='purple' defaultValue={50} />
+      <Slider colorStyle='purple' />
 
-      <Slider colorStyle='pink' defaultValue={50} />
+      <Slider colorStyle='pink' />
 
-      <Slider colorStyle='linkedin' defaultValue={50} />
+      <Slider colorStyle='linkedin' />
 
-      <Slider colorStyle='facebook' defaultValue={50} />
+      <Slider colorStyle='facebook' />
 
-      <Slider colorStyle='messenger' defaultValue={50} />
+      <Slider colorStyle='messenger' />
 
-      <Slider colorStyle='whatsapp' defaultValue={50} />
+      <Slider colorStyle='whatsapp' />
 
-      <Slider colorStyle='twitter' defaultValue={50} />
+      <Slider colorStyle='twitter' />
 
-      <Slider colorStyle='line' defaultValue={50} />
+      <Slider colorStyle='line' />
 
-      <Slider colorStyle='instagram' defaultValue={50} />
+      <Slider colorStyle='instagram' />
 
-      <Slider colorStyle='youtube' defaultValue={50} />
+      <Slider colorStyle='youtube' />
     </>
   )
 }
 
 export const withOrientation: ComponentStory<typeof Slider> = () => {
-  return <Slider orientation='vertical' defaultValue={50} h='calc(100vh - 16px * 2)' />
+  return <Slider orientation='vertical' h='calc(100vh - 16px * 2)' />
 }
 
 export const withReversed: ComponentStory<typeof Slider> = () => {
   return (
     <>
-      <Slider isReversed defaultValue={50} />
-      <Slider
-        isReversed
-        orientation='vertical'
-        defaultValue={50}
-        h='calc(100vh - 16px * 3 - 14px)'
-      />
+      <Slider isReversed />
+      <Slider isReversed orientation='vertical' h='calc(100vh - 16px * 3 - 14px)' />
     </>
   )
 }
@@ -162,7 +157,7 @@ export const withFocusThumbOnChange: ComponentStory<typeof Slider> = () => {
 export const withMark: ComponentStory<typeof Slider> = () => {
   return (
     <VStack gap='lg'>
-      <Slider size='sm' defaultValue={50}>
+      <Slider size='sm'>
         <SliderMark value={25} w='10' ml='-5'>
           25%
         </SliderMark>
@@ -174,7 +169,7 @@ export const withMark: ComponentStory<typeof Slider> = () => {
         </SliderMark>
       </Slider>
 
-      <Slider size='md' defaultValue={50}>
+      <Slider size='md'>
         <SliderMark value={25} w='10' ml='-5'>
           25%
         </SliderMark>
@@ -186,7 +181,7 @@ export const withMark: ComponentStory<typeof Slider> = () => {
         </SliderMark>
       </Slider>
 
-      <Slider size='lg' defaultValue={50}>
+      <Slider size='lg'>
         <SliderMark value={25} w='10' ml='-5'>
           25%
         </SliderMark>
@@ -227,14 +222,14 @@ export const withTooltip: ComponentStory<typeof Slider> = () => {
 export const isDisabled: ComponentStory<typeof Slider> = () => {
   return (
     <>
-      <Slider isDisabled defaultValue={50} />
+      <Slider isDisabled />
 
       <FormControl
         isDisabled
         label='volume (sound)'
         helperMessage='Please select your preferred volume.'
       >
-        <Slider defaultValue={50} />
+        <Slider />
       </FormControl>
     </>
   )
@@ -243,14 +238,14 @@ export const isDisabled: ComponentStory<typeof Slider> = () => {
 export const isReadonly: ComponentStory<typeof Slider> = () => {
   return (
     <>
-      <Slider isReadOnly defaultValue={50} />
+      <Slider isReadOnly />
 
       <FormControl
         isReadOnly
         label='volume (sound)'
         helperMessage='Please select your preferred volume.'
       >
-        <Slider defaultValue={50} />
+        <Slider />
       </FormControl>
     </>
   )
@@ -277,26 +272,20 @@ export const isInvalid: ComponentStory<typeof Slider> = () => {
 export const customColor: ComponentStory<typeof Slider> = () => {
   return (
     <>
-      <Slider
-        defaultValue={50}
-        trackColor='orange.200'
-        filledTrackColor='orange.500'
-        thumbColor='orange.700'
-      />
+      <Slider trackColor='orange.200' filledTrackColor='orange.500' thumbColor='orange.700' />
 
       <Slider
-        defaultValue={50}
         track={{ bg: 'green.200' }}
         filledTrack={{ bg: 'green.500' }}
         thumb={{ bg: 'green.700' }}
       />
 
-      <Slider defaultValue={50}>
+      <Slider>
         <SliderTrack bg='blue.200' filledTrack={{ bg: 'blue.500' }} />
         <SliderThumb bg='blue.700' />
       </Slider>
 
-      <Slider defaultValue={50}>
+      <Slider>
         <SliderTrack bg='red.200'>
           <SliderFilledTrack bg='red.500' />
         </SliderTrack>
@@ -311,7 +300,6 @@ export const customThumb: ComponentStory<typeof Slider> = () => {
   return (
     <>
       <Slider
-        defaultValue={50}
         thumb={{
           color: 'blue.500',
           boxSize: '6',
@@ -319,7 +307,7 @@ export const customThumb: ComponentStory<typeof Slider> = () => {
         }}
       />
 
-      <Slider defaultValue={50}>
+      <Slider>
         <SliderThumb color='blue.500' boxSize='6'>
           <FontAwesomeIcon icon={faWaveSquare} />
         </SliderThumb>

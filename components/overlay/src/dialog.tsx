@@ -10,7 +10,7 @@ import {
   createContext,
   getValidChildren,
   findChildren,
-  filterChildren,
+  omitChildren,
   isValidElement,
   isEmpty,
   cx,
@@ -79,7 +79,7 @@ export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, re
   const [customDialogFooter] = findChildren(validChildren, DialogFooter)
 
   const cloneChildren = !isEmpty(validChildren)
-    ? filterChildren(
+    ? omitChildren(
         validChildren,
         DialogOverlay,
         DialogCloseButton,

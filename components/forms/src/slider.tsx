@@ -28,7 +28,7 @@ import {
   getValidChildren,
   findChildren,
   isEmpty,
-  filterChildren,
+  omitChildren,
 } from '@yamada-ui/utils'
 import { CSSProperties, KeyboardEvent, useCallback, useRef, useState } from 'react'
 import { FormControlOptions, useFormControlProps, returnUseFormControlPropsMap } from './'
@@ -256,14 +256,8 @@ export const useSlider = (props: UseSliderProps) => {
         WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
         outline: 0,
         ...(isVertical
-          ? {
-              paddingLeft: w / 2,
-              paddingRight: w / 2,
-            }
-          : {
-              paddingTop: h / 2,
-              paddingBottom: h / 2,
-            }),
+          ? { paddingLeft: w / 2, paddingRight: w / 2 }
+          : { paddingTop: h / 2, paddingBottom: h / 2 }),
       }
 
       return {
@@ -392,6 +386,7 @@ export const useSlider = (props: UseSliderProps) => {
         ...props,
         ref: mergeRefs(ref, thumbRef),
         tabIndex: isInteractive ? 0 : undefined,
+        role: 'slider',
         'data-active': dataAttr(isDragging),
         'aria-orientation': orientation,
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -485,7 +480,7 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
   const [customSliderThumb] = findChildren(validChildren, SliderThumb)
 
   const cloneChildren = !isEmpty(validChildren)
-    ? filterChildren(validChildren, SliderTrack, SliderThumb)
+    ? omitChildren(validChildren, SliderTrack, SliderThumb)
     : children
 
   return (

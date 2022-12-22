@@ -105,10 +105,15 @@ export const findChildren = (
       )
     : [undefined, ...children]) as [React.ReactElement | undefined, ...React.ReactElement[]]
 
-export const filterChildren = (
+export const omitChildren = (
   children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
   ...types: React.JSXElementConstructor<any>[]
 ): React.ReactElement[] => children.filter((child) => types.every((type) => child.type !== type))
+
+export const pickChildren = (
+  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  ...types: React.JSXElementConstructor<any>[]
+): React.ReactElement[] => children.filter((child) => types.every((type) => child.type === type))
 
 export const cx = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ')
 

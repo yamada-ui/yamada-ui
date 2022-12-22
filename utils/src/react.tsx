@@ -105,6 +105,18 @@ export const findChildren = (
       )
     : [undefined, ...children]) as [React.ReactElement | undefined, ...React.ReactElement[]]
 
+export const includesChildren = (
+  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  ...types: React.JSXElementConstructor<any>[]
+): boolean =>
+  children.some((child) => {
+    if (types.some((type) => child.type === type)) return true
+
+    const children = getValidChildren(child.props.children)
+
+    return children.length ? includesChildren(children, ...types) : false
+  })
+
 export const omitChildren = (
   children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
   ...types: React.JSXElementConstructor<any>[]

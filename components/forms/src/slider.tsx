@@ -29,6 +29,7 @@ import {
   findChildren,
   isEmpty,
   omitChildren,
+  includesChildren,
 } from '@yamada-ui/utils'
 import { CSSProperties, KeyboardEvent, useCallback, useRef, useState } from 'react'
 import { FormControlOptions, useFormControlProps, returnUseFormControlPropsMap } from './'
@@ -479,6 +480,8 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
   const [customSliderTrack] = findChildren(validChildren, SliderTrack)
   const [customSliderThumb] = findChildren(validChildren, SliderThumb)
 
+  const hasSliderThumb = includesChildren(validChildren, SliderThumb)
+
   const cloneChildren = !isEmpty(validChildren)
     ? omitChildren(validChildren, SliderTrack, SliderThumb)
     : children
@@ -509,7 +512,7 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
 
         {cloneChildren}
 
-        {customSliderThumb ?? <SliderThumb />}
+        {customSliderThumb ?? (!hasSliderThumb ? <SliderThumb /> : null)}
       </ui.div>
     </SliderProvider>
   )

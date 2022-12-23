@@ -9,6 +9,7 @@ import {
   CSSUIObject,
   GeneratedTheme,
   UITheme,
+  UIMultiStyle,
 } from './'
 
 export type ThemeScheme = Union<string | number>
@@ -162,6 +163,17 @@ export type ComponentStyle = {
   baseStyle?: ComponentBaseStyle
   sizes?: ComponentSizes
   variants?: ComponentVariants
+  defaultProps?: ComponentDefaultProps
+}
+
+export type ComponentMultiBaseStyle = UIMultiStyle
+export type ComponentMultiVariants = Record<string, UIMultiStyle>
+export type ComponentMultiSizes = Record<string, UIMultiStyle>
+
+export type ComponentMultiStyle = {
+  baseStyle?: ComponentMultiBaseStyle
+  sizes?: ComponentMultiSizes
+  variants?: ComponentMultiVariants
   defaultProps?: ComponentDefaultProps
 }
 

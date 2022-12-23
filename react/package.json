@@ -23,6 +23,7 @@
     "@yamada-ui/components": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/data-display": "workspace:*",
+    "@yamada-ui/disclosure": "workspace:*",
     "@yamada-ui/feedback": "workspace:*",
     "@yamada-ui/forms": "workspace:*",
     "@yamada-ui/hooks": "workspace:*",

@@ -213,6 +213,19 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  components/disclosure:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   components/feedback:
     specifiers:
       '@yamada-ui/components': workspace:*
@@ -516,6 +529,7 @@ importers:
       '@yamada-ui/components': workspace:*
       '@yamada-ui/core': workspace:*
       '@yamada-ui/data-display': workspace:*
+      '@yamada-ui/disclosure': workspace:*
       '@yamada-ui/feedback': workspace:*
       '@yamada-ui/forms': workspace:*
       '@yamada-ui/hooks': workspace:*
@@ -535,6 +549,7 @@ importers:
       '@yamada-ui/components': link:../components/components
       '@yamada-ui/core': link:../core
       '@yamada-ui/data-display': link:../components/data-display
+      '@yamada-ui/disclosure': link:../components/disclosure
       '@yamada-ui/feedback': link:../components/feedback
       '@yamada-ui/forms': link:../components/forms
       '@yamada-ui/hooks': link:../hooks

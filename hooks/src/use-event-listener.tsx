@@ -1,5 +1,5 @@
 import { useCallbackRef } from '@yamada-ui/utils'
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 type Events = keyof DocumentEventMap | keyof WindowEventMap | keyof GlobalEventHandlersEventMap
 type Target = EventTarget | null | (() => EventTarget | null)
@@ -37,4 +37,46 @@ export const useEventListener = <E extends Events>(
 
     el?.removeEventListener(event, listener as EventListenerOrEventListenerObject, options)
   }
+}
+
+export const useEventListeners = () => {
+  const listeners = useRef(new Map())
+  const currentListeners = listeners.current
+
+  const add = useCallback(
+    <E extends Events>(
+      el: EventTarget,
+      event: E,
+      listener: any,
+      options: boolean | AddEventListenerOptions,
+    ) => {
+      listeners.current.set(listener, { event, el, options })
+
+      el.addEventListener(event, listener as EventListenerOrEventListenerObject, options)
+    },
+    [],
+  )
+
+  const remove = useCallback(
+    <E extends Events>(
+      el: EventTarget,
+      event: E,
+      listener: any,
+      options: boolean | EventListenerOptions,
+    ) => {
+      el.removeEventListener(event, listener as EventListenerOrEventListenerObject, options)
+
+      listeners.current.delete(listener)
+    },
+    [],
+  )
+
+  useEffect(
+    () => () => {
+      currentListeners.forEach(({ el, event, options }, key) => remove(el, event, key, options))
+    },
+    [remove, currentListeners],
+  )
+
+  return { add, remove }
 }

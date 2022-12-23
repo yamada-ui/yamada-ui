@@ -1,7 +1,7 @@
-import { ComponentStyle, mode } from '@yamada-ui/core'
+import { ComponentMultiStyle, mode } from '@yamada-ui/core'
 import { getColor, isArray } from '@yamada-ui/utils'
 
-export const Input: ComponentStyle = {
+export const Input: ComponentMultiStyle = {
   baseStyle: {
     field: {
       width: '100%',

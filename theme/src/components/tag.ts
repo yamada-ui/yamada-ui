@@ -1,7 +1,7 @@
-import { ComponentStyle, mode, isDefaultColor } from '@yamada-ui/core'
+import { ComponentMultiStyle, mode, isDefaultColor } from '@yamada-ui/core'
 import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
 
-export const Tag: ComponentStyle = {
+export const Tag: ComponentMultiStyle = {
   baseStyle: {
     container: {
       outline: 0,

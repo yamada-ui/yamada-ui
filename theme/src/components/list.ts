@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const List: ComponentStyle = {
+export const List: ComponentMultiStyle = {
   baseStyle: {
     container: {},
     icon: {

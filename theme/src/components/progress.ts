@@ -1,7 +1,7 @@
-import { ComponentStyle, mode, isDefaultColor } from '@yamada-ui/core'
+import { ComponentMultiStyle, mode, isDefaultColor } from '@yamada-ui/core'
 import { toneColor, getColor } from '@yamada-ui/utils'
 
-export const Progress: ComponentStyle = {
+export const Progress: ComponentMultiStyle = {
   baseStyle: {
     track: {
       bg: ['gray.100', 'whiteAlpha.300'],

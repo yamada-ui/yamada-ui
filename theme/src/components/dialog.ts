@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const Dialog: ComponentStyle = {
+export const Dialog: ComponentMultiStyle = {
   baseStyle: {
     container: {
       rounded: 'md',

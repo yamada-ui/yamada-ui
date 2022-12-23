@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const Popover: ComponentStyle = {
+export const Popover: ComponentMultiStyle = {
   baseStyle: {
     container: {
       rounded: 'md',

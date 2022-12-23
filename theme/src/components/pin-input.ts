@@ -1,7 +1,7 @@
-import { ComponentStyle, mode } from '@yamada-ui/core'
+import { ComponentMultiStyle, mode } from '@yamada-ui/core'
 import { getColor, isArray } from '@yamada-ui/utils'
 
-export const PinInput: ComponentStyle = {
+export const PinInput: ComponentMultiStyle = {
   baseStyle: {
     container: {
       gap: 'sm',

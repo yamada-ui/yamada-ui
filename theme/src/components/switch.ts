@@ -1,7 +1,7 @@
-import { ComponentStyle, isDefaultColor } from '@yamada-ui/core'
+import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
 import { toneColor, transparentizeColor } from '@yamada-ui/utils'
 
-export const Switch: ComponentStyle = {
+export const Switch: ComponentMultiStyle = {
   baseStyle: {
     container: {
       _readOnly: { cursor: 'auto' },

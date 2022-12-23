@@ -1,7 +1,7 @@
-import { ComponentStyle, isDefaultColor, mode } from '@yamada-ui/core'
+import { ComponentMultiStyle, isDefaultColor, mode } from '@yamada-ui/core'
 import { shadeColor, toneColor, getColor } from '@yamada-ui/utils'
 
-export const Alert: ComponentStyle = {
+export const Alert: ComponentMultiStyle = {
   baseStyle: {
     container: {
       px: 4,

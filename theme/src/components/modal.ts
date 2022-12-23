@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const Modal: ComponentStyle = {
+export const Modal: ComponentMultiStyle = {
   baseStyle: {
     container: {
       rounded: 'md',

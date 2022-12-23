@@ -1,7 +1,7 @@
-import { ComponentStyle, isDefaultColor } from '@yamada-ui/core'
+import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
 import { toneColor } from '@yamada-ui/utils'
 
-export const Checkbox: ComponentStyle = {
+export const Checkbox: ComponentMultiStyle = {
   baseStyle: {
     container: {
       _readOnly: { cursor: 'auto' },

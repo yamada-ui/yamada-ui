@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const Drawer: ComponentStyle = {
+export const Drawer: ComponentMultiStyle = {
   baseStyle: {
     container: ({ isFullHeight }) => ({
       ...(isFullHeight && { height: '100vh' }),

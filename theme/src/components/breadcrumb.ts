@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const Breadcrumb: ComponentStyle = {
+export const Breadcrumb: ComponentMultiStyle = {
   baseStyle: {
     container: {},
     item: {},

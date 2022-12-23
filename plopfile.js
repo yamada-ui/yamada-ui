@@ -13,6 +13,7 @@ const titleCase = (t) => t.replace(/[-_](\w)/g, (_, c) => ' ' + c.toUpperCase())
 
 const workspaces = [
   'data-display',
+  'disclosure',
   'feedback',
   'forms',
   'layouts',

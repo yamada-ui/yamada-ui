@@ -2,10 +2,10 @@ import { ComponentStyle, mode, isDefaultColor } from '@yamada-ui/core'
 import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
 
 export const Mark: ComponentStyle = {
-  baseStyle: () => ({
+  baseStyle: {
     px: '1',
     py: '1',
-  }),
+  },
 
   variants: {
     solid: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => ({

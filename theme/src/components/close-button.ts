@@ -26,6 +26,7 @@ export const CloseButton: ComponentStyle = {
       boxShadow: 'outline',
     },
   },
+
   sizes: {
     sm: {
       boxSize: 6,
@@ -40,6 +41,7 @@ export const CloseButton: ComponentStyle = {
       fontSize: 'md',
     },
   },
+
   defaultProps: {
     size: 'md',
   },

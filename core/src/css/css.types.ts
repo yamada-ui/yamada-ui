@@ -82,6 +82,9 @@ export type UIStyleProps = {
 }
 
 export type UIStyle = CSSUIObject | ((props: UIStyleProps) => CSSUIObject)
+export type UIMultiStyle =
+  | Record<string, UIStyle>
+  | ((props: UIStyleProps) => Record<string, UIStyle>)
 
 export type FunctionCSSInterpolation = { (theme: StyledTheme<Dict>): CSSUIProps }
 

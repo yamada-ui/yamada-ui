@@ -77,6 +77,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
       delay,
       duration,
       className,
+      __css,
       ...rest
     },
     ref,
@@ -129,6 +130,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
       display: 'block',
       w: '100%',
       overflow: 'hidden',
+      ...__css,
     }
 
     return (

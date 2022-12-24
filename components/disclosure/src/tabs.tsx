@@ -50,7 +50,7 @@ type TabsContext = Omit<TabsOptions, 'index' | 'defaultIndex' | 'onChange'> & {
 
 const [TabsProvider, useTabsContext] = createContext<TabsContext>({
   name: 'TabsContext',
-  errorMessage: `useTabsContext returned is 'undefined'. Seems you forgot to wrap the components in "<Tabs />" `,
+  errorMessage: `useTabsContext returned is 'undefined'. Seems you forgot to wrap the components in "<Tabs />"`,
 })
 
 const [TabPanelProvider, useTabPanelContext] = createContext<{
@@ -92,7 +92,7 @@ export const Tabs = forwardRef<TabsProps, 'div'>(({ align = 'start', ...props },
     ...rest
   } = omitThemeProps(props)
 
-  const [focusedIndex, setFocusedIndex] = useState(defaultIndex)
+  const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
 
   const [selectedIndex, setSelectedIndex] = useControllableState({
     value: index,

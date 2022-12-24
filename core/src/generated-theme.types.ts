@@ -557,6 +557,19 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'thick' | 'thin' | (string & {})
     }
+    Tabs: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants:
+        | 'line'
+        | 'sticky'
+        | 'sticky-subtle'
+        | 'sticky-solid'
+        | 'rounded'
+        | 'rounded-subtle'
+        | 'rounded-solid'
+        | 'unstyled'
+        | (string & {})
+    }
     Tag: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'subtle' | 'outline' | (string & {})

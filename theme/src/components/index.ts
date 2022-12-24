@@ -26,6 +26,7 @@ import { Progress } from './progress'
 import { Radio } from './radio'
 import { Slider } from './slider'
 import { Switch } from './switch'
+import { Tabs } from './tabs'
 import { Tag } from './tag'
 import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
@@ -59,6 +60,7 @@ export default {
   Radio,
   Slider,
   Switch,
+  Tabs,
   Tag,
   Textarea,
   Tooltip,

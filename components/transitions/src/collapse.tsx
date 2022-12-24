@@ -77,6 +77,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
       delay,
       duration,
       className,
+      style,
       __css,
       ...rest
     },
@@ -107,14 +108,14 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
           },
         }
     transitionEnd = unmountOnExit
-      ? {
+      ? transitionEnd
+      : {
           ...transitionEnd,
           exit: {
             ...transitionEnd?.exit,
             display: hasStartingHeight ? 'block' : 'none',
           },
         }
-      : transitionEnd
 
     const custom = {
       animationOpacity,
@@ -127,9 +128,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
     }
 
     const css: CSSUIObject = {
-      display: 'block',
       w: '100%',
-      overflow: 'hidden',
       ...__css,
     }
 
@@ -140,12 +139,17 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
             as={motion.div}
             ref={ref}
             className={cx('ui-collapse', className)}
-            custom={custom}
-            {...collapseProps}
-            initial={unmountOnExit ? 'exit' : false}
-            animate={animate}
-            __css={css}
             {...rest}
+            {...collapseProps}
+            custom={custom}
+            animate={animate}
+            initial={unmountOnExit ? 'exit' : false}
+            __css={css}
+            style={{
+              overflow: 'hidden',
+              display: 'block',
+              ...style,
+            }}
           />
         ) : null}
       </AnimatePresence>

@@ -13,6 +13,7 @@ export const pseudos = {
   _before: '&::before',
   _after: '&::after',
   _empty: '&:empty',
+  _expanded: '&[aria-expanded=true], &[data-expanded]',
   _checked: '&[data-checked], &[aria-checked=true]',
   _invalid: '&[data-invalid], &[aria-invalid=true]',
   _valid: '&[data-valid], &[data-state=valid]',

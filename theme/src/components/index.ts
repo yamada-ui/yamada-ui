@@ -1,3 +1,4 @@
+import { Accordion } from './accordion'
 import { Alert } from './alert'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
@@ -32,6 +33,7 @@ import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
+  Accordion,
   Checkbox,
   NumberInput,
   Alert,

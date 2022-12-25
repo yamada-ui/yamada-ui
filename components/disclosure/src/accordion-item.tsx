@@ -1,0 +1,167 @@
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
+import {
+  ariaAttr,
+  createContext,
+  cx,
+  findChildren,
+  getValidChildren,
+  handlerAll,
+  isArray,
+  isEmpty,
+  mergeRefs,
+  omitChildren,
+  PropGetter,
+} from '@yamada-ui/utils'
+import { KeyboardEvent, KeyboardEventHandler, ReactNode, useCallback } from 'react'
+import { AccordionLabel, AccordionPanel, useAccordionContext, useAccordionDescendant } from './'
+
+type AccordionItemContext = Omit<AccordionItemOptions, 'children'> & {
+  isOpen: boolean
+  getLabelProps: PropGetter
+  getPanelProps: PropGetter
+}
+
+const [AccordionItemProvider, useAccordionItemContext] = createContext<AccordionItemContext>({
+  name: 'AccordionItemContext',
+  errorMessage: `useAccordionItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<AccordionItem />"`,
+})
+
+export { useAccordionItemContext }
+
+type AccordionItemOptions = {
+  isDisabled?: boolean
+  label?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  children?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+}
+
+export type AccordionItemProps = Omit<HTMLUIProps<'div'>, 'children'> & AccordionItemOptions
+
+export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
+  ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
+    const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } = useAccordionContext()
+
+    const { index: i, register, descendants } = useAccordionDescendant({ disabled: isDisabled })
+
+    const isOpen = i !== -1 ? (isArray(index) ? index.includes(i) : index === i) : false
+
+    if (isOpen && isDisabled) {
+      console.warn(`Cannot open a disabled accordion item`)
+    }
+
+    const onChange = useCallback(
+      (isOpen: boolean) => {
+        if (i === -1) return
+
+        if (isMultiple && isArray(index)) {
+          console.log(isOpen, index, i)
+          setIndex(isOpen ? index.concat(i) : index.filter((v) => v !== i))
+        } else if (isOpen) {
+          setIndex(i)
+        } else if (isToggle) {
+          setIndex(-1)
+        }
+      },
+      [isMultiple, isToggle, i, index, setIndex],
+    )
+
+    const onFocus = useCallback(() => {
+      setFocusedIndex(i)
+    }, [setFocusedIndex, i])
+
+    const onClick = useCallback(() => {
+      onChange(!isOpen)
+      setFocusedIndex(i)
+    }, [i, setFocusedIndex, isOpen, onChange])
+
+    const onKeyDown = useCallback(
+      (ev: KeyboardEvent) => {
+        const actions: Record<string, KeyboardEventHandler> = {
+          ArrowDown: () => {
+            const next = descendants.enabledNextValue(i)
+
+            next?.node.focus()
+          },
+          ArrowUp: () => {
+            const prev = descendants.enabledPrevValue(i)
+
+            prev?.node.focus()
+          },
+          Home: () => {
+            const first = descendants.enabledfirstValue()
+
+            first?.node.focus()
+          },
+          End: () => {
+            const last = descendants.enabledlastValue()
+
+            last?.node.focus()
+          },
+        }
+
+        const action = actions[ev.key]
+
+        if (!action) return
+
+        ev.preventDefault()
+        action(ev)
+      },
+      [descendants, i],
+    )
+
+    const getLabelProps: PropGetter = useCallback(
+      (props = {}, ref = null) => ({
+        ...props,
+        ref: mergeRefs(register, ref),
+        type: 'button',
+        disabled: isDisabled,
+        'aria-expanded': ariaAttr(isOpen),
+        onClick: handlerAll(props.onClick, onClick),
+        onFocus: handlerAll(props.onFocus, onFocus),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+      }),
+      [isDisabled, isOpen, onClick, onFocus, onKeyDown, register],
+    )
+
+    const getPanelProps: PropGetter = useCallback(
+      (props = {}, ref = null) => ({ ...props, ref }),
+      [],
+    )
+
+    const css: CSSUIObject = { ...styles.item, overflowAnchor: 'none' }
+
+    const cloneLabel =
+      typeof label === 'function'
+        ? label({
+            isExpanded: isOpen,
+            isDisabled,
+          })
+        : label
+
+    if (typeof children === 'function') children = children({ isExpanded: isOpen, isDisabled })
+
+    const validChildren = getValidChildren(children)
+
+    const [customAccordionLabel] = findChildren(validChildren, AccordionLabel)
+    const [customAccordionPanel] = findChildren(validChildren, AccordionPanel)
+
+    const cloneChildren = !isEmpty(validChildren)
+      ? omitChildren(validChildren, AccordionLabel, AccordionPanel)
+      : children
+
+    return (
+      <AccordionItemProvider value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}>
+        <ui.div
+          ref={ref}
+          className={cx('ui-accordion-item', className)}
+          aria-expanded={ariaAttr(isOpen)}
+          __css={css}
+          {...rest}
+        >
+          {customAccordionLabel ?? <AccordionLabel>{cloneLabel}</AccordionLabel>}
+          {customAccordionPanel ?? <AccordionPanel>{cloneChildren}</AccordionPanel>}
+        </ui.div>
+      </AccordionItemProvider>
+    )
+  },
+)

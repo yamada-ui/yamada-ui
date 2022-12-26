@@ -230,3 +230,5 @@ export const useAnimationObserver = ({ isOpen, ref }: UseAnimationObserverProps)
     },
   }
 }
+
+export type ReturnUseAnimationObserver = ReturnType<typeof useAnimationObserver>

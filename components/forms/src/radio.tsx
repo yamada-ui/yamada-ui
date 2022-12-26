@@ -241,7 +241,6 @@ export const Radio = forwardRef<RadioProps, 'input'>((props, ref) => {
 
   return (
     <ui.label
-      ref={ref}
       className={cx('ui-radio', className)}
       {...getContainerProps()}
       {...omitObject(rest, [

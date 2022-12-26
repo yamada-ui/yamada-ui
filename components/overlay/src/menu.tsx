@@ -63,13 +63,11 @@ export const Menu: FC<MenuProps> = (props) => {
 
   const onFocusFirstItem = useCallback(() => {
     const id = setTimeout(() => {
-      if (initialFocusRef) {
-        initialFocusRef.current?.focus()
-      } else {
-        const first = descendants.enabledfirstValue()
+      if (initialFocusRef) return
 
-        if (first) setFocusedIndex(first.index)
-      }
+      const first = descendants.enabledfirstValue()
+
+      if (first) setFocusedIndex(first.index)
     })
 
     timeoutIds.current.add(id)
@@ -77,13 +75,15 @@ export const Menu: FC<MenuProps> = (props) => {
 
   const onFocusLastItem = useCallback(() => {
     const id = setTimeout(() => {
+      if (initialFocusRef) return
+
       const last = descendants.enabledlastValue()
 
       if (last) setFocusedIndex(last.index)
     })
 
     timeoutIds.current.add(id)
-  }, [descendants])
+  }, [descendants, initialFocusRef])
 
   const onOpenInternal = useCallback(() => {
     rest.onOpen?.()
@@ -124,7 +124,16 @@ export const Menu: FC<MenuProps> = (props) => {
         }}
       >
         <Popover
-          {...{ ...rest, isOpen, onOpen, onClose, placement, duration, closeOnButton: false }}
+          {...{
+            ...rest,
+            isOpen,
+            onOpen,
+            onClose,
+            placement,
+            duration,
+            initialFocusRef,
+            closeOnButton: false,
+          }}
         />
       </MenuProvider>
     </DescendantsContextProvider>

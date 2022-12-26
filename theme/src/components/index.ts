@@ -19,6 +19,7 @@ import { Link } from './link'
 import { List } from './list'
 import { Mark } from './mark'
 import { Markdown } from './markdown'
+import { Menu } from './menu'
 import { Modal } from './modal'
 import { NumberInput } from './number-input'
 import { PinInput } from './pin-input'
@@ -55,6 +56,7 @@ export default {
   List,
   Mark,
   Markdown,
+  Menu,
   Modal,
   PinInput,
   Popover,

@@ -66,7 +66,7 @@ const getPopoverContentProps = (
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
-  ({ className, children, zIndex, ...rest }, ref) => {
+  ({ className, children, zIndex, __css, ...rest }, ref) => {
     const {
       isOpen,
       closeOnButton,
@@ -89,7 +89,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       display: 'flex',
       flexDirection: 'column',
       outline: 0,
-      ...omitObject(styles.container, ['zIndex']),
+      ...omitObject(__css ?? styles.container, ['zIndex']),
     }
 
     return (

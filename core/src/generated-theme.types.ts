@@ -481,6 +481,7 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
+    Accordion: { sizes: string & {}; variants: 'normal' | 'card' | 'unstyled' | (string & {}) }
     Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     NumberInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})

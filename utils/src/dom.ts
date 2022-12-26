@@ -130,3 +130,7 @@ export const getOwnerDocument = (el?: Element | null): Document =>
 
 export const getActiveElement = (el?: HTMLElement): HTMLElement =>
   getOwnerDocument(el).activeElement as HTMLElement
+
+export const isActiveElement = (el: HTMLElement) => {
+  return getActiveElement(el) === el
+}

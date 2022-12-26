@@ -28,7 +28,7 @@ export const Accordion: ComponentMultiStyle = {
   },
 
   variants: {
-    normal: {
+    basic: {
       item: {
         borderTopWidth: '1px',
         borderColor: 'inherit',
@@ -73,6 +73,6 @@ export const Accordion: ComponentMultiStyle = {
   },
 
   defaultProps: {
-    variant: 'normal',
+    variant: 'basic',
   },
 }

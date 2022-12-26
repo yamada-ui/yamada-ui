@@ -327,6 +327,24 @@ export const isDisabled: ComponentStory<typeof Menu> = () => {
   )
 }
 
+export const isFocusable: ComponentStory<typeof Menu> = () => {
+  return (
+    <Menu>
+      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+        Menu
+      </MenuButton>
+
+      <MenuList>
+        <MenuItem>Set status</MenuItem>
+        <MenuItem isDisabled isFocusable>
+          Edit Profile
+        </MenuItem>
+        <MenuItem>Preferences</MenuItem>
+      </MenuList>
+    </Menu>
+  )
+}
+
 export const useLazy: ComponentStory<typeof Menu> = () => {
   return (
     <Menu isLazy>

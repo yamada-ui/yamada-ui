@@ -41,9 +41,7 @@ export const useClickable = ({
   const trulyDisabled = isDisabled && !isFocusable
 
   const refCb = (node: any) => {
-    if (!node) return
-
-    if (node.tagName !== 'BUTTON') setIsButton(false)
+    if (node?.tagName !== 'BUTTON') setIsButton(false)
   }
 
   const handleClick = useCallback(

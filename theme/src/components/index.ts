@@ -26,6 +26,7 @@ import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Radio } from './radio'
+import { SegmentedControl } from './segmented-control'
 import { Slider } from './slider'
 import { Switch } from './switch'
 import { Tabs } from './tabs'
@@ -62,6 +63,7 @@ export default {
   Popover,
   Progress,
   Radio,
+  SegmentedControl,
   Slider,
   Switch,
   Tabs,

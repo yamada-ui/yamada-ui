@@ -23,12 +23,6 @@ export const NativeSelect: ComponentMultiStyle = {
       '&:invalid': {
         color: ['gray.500', 'whiteAlpha.400'],
       },
-      '> option:first-of-type': {
-        color: ['gray.500', 'whiteAlpha.400'],
-      },
-      '> option, > optgroup': {
-        bg: ['white', 'gray.700'],
-      },
     },
     icon: {
       width: '6',

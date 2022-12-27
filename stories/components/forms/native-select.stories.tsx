@@ -1,6 +1,6 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FontAwesomeIcon, FormControl, NativeSelect } from '@yamada-ui/react'
+import { FontAwesomeIcon, FormControl, NativeSelect, UIOption } from '@yamada-ui/react'
 import { useState } from 'react'
 
 export default {
@@ -9,12 +9,56 @@ export default {
 } as ComponentMeta<typeof NativeSelect>
 
 export const basic: ComponentStory<typeof NativeSelect> = () => {
+  const data: UIOption[] = [
+    { label: 'ベジータ', value: 'ベジータ' },
+    {
+      label: '地球人',
+      value: [
+        { label: '孫悟空', value: '孫悟空' },
+        { label: '孫悟飯', value: '孫悟飯' },
+        { label: 'クリリン', value: 'クリリン' },
+      ],
+    },
+    {
+      label: 'フリーザ軍',
+      value: [
+        { label: 'フリーザ', value: 'フリーザ' },
+        { label: 'ギニュー', value: 'ギニュー' },
+        { label: 'リクーム', value: 'リクーム' },
+        { label: 'バータ', value: 'バータ' },
+        { label: 'ジース', value: 'ジース' },
+        { label: 'グルド', value: 'グルド' },
+      ],
+    },
+  ]
+
   return (
-    <NativeSelect placeholder='キャラクターを選択'>
-      <option value='孫悟空'>孫悟空</option>
-      <option value='ベジータ'>ベジータ</option>
-      <option value='フリーザ'>フリーザ</option>
-    </NativeSelect>
+    <>
+      <NativeSelect placeholder='キャラクターを選択'>
+        <option value='孫悟空'>孫悟空</option>
+        <option value='ベジータ'>ベジータ</option>
+        <option value='フリーザ'>フリーザ</option>
+      </NativeSelect>
+
+      <NativeSelect placeholder='キャラクターを選択'>
+        <optgroup label='地球人'>
+          <option value='孫悟空'>孫悟空</option>
+          <option value='孫悟飯'>孫悟飯</option>
+          <option value='クリリン'>クリリン</option>
+        </optgroup>
+
+        <optgroup label='フリーザ軍'>
+          <option value='フリーザ'>フリーザ</option>
+          <option value='ギニュー'>ギニュー</option>
+          <option value='リクーム'>リクーム</option>
+          <option value='バータ'>バータ</option>
+          <option value='ジース'>ジース</option>
+          <option value='グルド'>グルド</option>
+        </optgroup>
+      </NativeSelect>
+
+      <NativeSelect placeholder='キャラクターを選択' data={data} />
+    </>
   )
 }
 
@@ -47,6 +91,16 @@ export const withBorderColor: ComponentStory<typeof NativeSelect> = () => {
       <NativeSelect focusBorderColor='green.500' placeholder='custom border color' />
       <NativeSelect isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
     </>
+  )
+}
+
+export const disabledPlaceholderHidden: ComponentStory<typeof NativeSelect> = () => {
+  return (
+    <NativeSelect placeholder='キャラクターを選択' isPlaceholderHidden={false}>
+      <option value='孫悟空'>孫悟空</option>
+      <option value='ベジータ'>ベジータ</option>
+      <option value='フリーザ'>フリーザ</option>
+    </NativeSelect>
   )
 }
 

@@ -25,9 +25,24 @@ export const pickObject = <T extends Dict, K extends keyof T>(
   return result
 }
 
+export const splitObject = <T extends Dict, K extends keyof T>(obj: T, keys: K[]) => {
+  const picked: Dict = {}
+  const omitted: Dict = {}
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (keys.includes(key as T[K])) {
+      picked[key] = value
+    } else {
+      omitted[key] = value
+    }
+  }
+
+  return [picked, omitted] as [{ [P in K]: T[P] }, Omit<T, K>]
+}
+
 export const filterObject = <T extends Dict, K extends Dict>(
   obj: T,
-  func: (key: keyof T, value: T[keyof T], object: T) => boolean,
+  func: (key: keyof T, value: T[keyof T], obj: T) => boolean,
 ): K => {
   const result: Dict = {}
 

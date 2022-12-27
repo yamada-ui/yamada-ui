@@ -17,9 +17,24 @@ import {
   omitObject,
   isValidElement,
   isUndefined,
+  isArray,
 } from '@yamada-ui/utils'
-import { cloneElement, FC } from 'react'
+import {
+  cloneElement,
+  DetailedHTMLProps,
+  FC,
+  OptionHTMLAttributes,
+  ReactElement,
+  ReactNode,
+} from 'react'
 import { FormControlOptions, useFormControlProps, formControlProperties } from '.'
+
+type Value = DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>['value']
+
+export type UIOption = Omit<
+  DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
+  'label' | 'children' | 'value'
+> & { label?: ReactNode; value?: Value | UIOption[] }
 
 type NativeSelectContext = Record<string, CSSUIObject>
 
@@ -29,7 +44,9 @@ const [NativeSelectProvider, useNativeSelect] = createContext<NativeSelectContex
 })
 
 type NativeSelectOptions = {
+  data?: UIOption[]
   placeholder?: string
+  isPlaceholderHidden?: boolean
   focusBorderColor?: string
   errorBorderColor?: string
   container?: Omit<HTMLUIProps<'div'>, 'children'>
@@ -46,11 +63,13 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
   let {
     className,
     children,
+    isPlaceholderHidden = true,
     color,
     h,
     height,
     minH,
     minHeight,
+    data = [],
     value,
     placeholder,
     isRequired,
@@ -63,6 +82,32 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
 
   const formControlProps = omitObject(rest, formControlProperties)
   const computedProps = splitObject(rest, layoutStylesProperties)
+
+  let computedChildren: ReactElement[] = []
+
+  if (!children && data.length) {
+    computedChildren = data.map(({ label, value, ...props }, i) => {
+      if (!isArray(value)) {
+        return (
+          <option key={i} value={value} {...props}>
+            {label}
+          </option>
+        )
+      } else {
+        return (
+          <optgroup key={i} label={label as string}>
+            {value.map(({ label, value, ...props }, i) =>
+              !isArray(value) ? (
+                <option key={i} value={value} {...props}>
+                  {label}
+                </option>
+              ) : null,
+            )}
+          </optgroup>
+        )
+      }
+    })
+  }
 
   return (
     <NativeSelectProvider value={styles}>
@@ -81,11 +126,11 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
           {...computedProps[1]}
         >
           {placeholder ? (
-            <option value='' hidden>
+            <option value='' hidden={isPlaceholderHidden}>
               {placeholder}
             </option>
           ) : null}
-          {children}
+          {children ?? computedChildren}
         </ui.select>
 
         <NativeSelectIcon {...icon} {...formControlProps} />

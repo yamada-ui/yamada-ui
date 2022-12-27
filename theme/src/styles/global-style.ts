@@ -10,8 +10,15 @@ export const globalStyle: UIStyle = {
     lineHeight: 'base',
     overflowX: 'hidden',
   },
-  '*::placeholder': {
-    color: ['gray.500', 'whiteAlpha.400'],
+  _light: {
+    '*::placeholder': {
+      color: 'gray.500',
+    },
+  },
+  _dark: {
+    '*::placeholder': {
+      color: 'whiteAlpha.400',
+    },
   },
   '*, *::before, &::after': {
     borderWidth: '0',

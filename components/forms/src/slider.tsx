@@ -32,7 +32,7 @@ import {
   includesChildren,
 } from '@yamada-ui/utils'
 import { CSSProperties, KeyboardEvent, useCallback, useRef, useState } from 'react'
-import { FormControlOptions, useFormControlProps, returnUseFormControlPropsMap } from './'
+import { FormControlOptions, useFormControlProps, formControlProperties } from './'
 
 export type UseSliderProps = FormControlOptions & {
   id?: string
@@ -274,7 +274,7 @@ export const useSlider = (props: UseSliderProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       type: 'hidden',
@@ -306,7 +306,7 @@ export const useSlider = (props: UseSliderProps) => {
       }
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, trackRef),
         style,
@@ -337,7 +337,7 @@ export const useSlider = (props: UseSliderProps) => {
             }),
       }
 
-      return { ...pickObject(rest, returnUseFormControlPropsMap), ...props, ref, style }
+      return { ...pickObject(rest, formControlProperties), ...props, ref, style }
     },
     [isReversed, isVertical, rest, thumbPercent],
   )
@@ -355,7 +355,7 @@ export const useSlider = (props: UseSliderProps) => {
       }
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref,
         'aria-hidden': true,
@@ -383,7 +383,7 @@ export const useSlider = (props: UseSliderProps) => {
       }
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, thumbRef),
         tabIndex: isInteractive ? 0 : undefined,

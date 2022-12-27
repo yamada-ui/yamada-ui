@@ -19,7 +19,7 @@ import {
   getValidChildren,
 } from '@yamada-ui/utils'
 import { ChangeEvent, KeyboardEvent, Ref, useCallback, useEffect, useId, useState } from 'react'
-import { useFormControlProps, FormControlOptions, returnUseFormControlPropsMap } from './'
+import { useFormControlProps, FormControlOptions, formControlProperties } from './'
 
 const toArray = (value?: string) => value?.split('')
 
@@ -232,7 +232,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
         return {
           inputMode: type === 'number' ? 'numeric' : 'text',
           type: mask ? 'password' : type === 'number' ? 'tel' : 'text',
-          ...pickObject(rest, returnUseFormControlPropsMap),
+          ...pickObject(rest, formControlProperties),
           ...filterUndefined(props),
           id: `${id}-${index}`,
           value: values[index] || '',

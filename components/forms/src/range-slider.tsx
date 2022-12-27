@@ -33,7 +33,7 @@ import {
   includesChildren,
 } from '@yamada-ui/utils'
 import { CSSProperties, KeyboardEvent, useCallback, useId, useRef, useState } from 'react'
-import { FormControlOptions, useFormControlProps, returnUseFormControlPropsMap } from './'
+import { FormControlOptions, useFormControlProps, formControlProperties } from './'
 
 export type UseRangeSliderProps = FormControlOptions & {
   id?: string
@@ -350,7 +350,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
 
   const getInputProps: RequiredPropGetter<{ index: number }> = useCallback(
     ({ index: i, ...props } = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       id: getInputId(i),
@@ -383,7 +383,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
       }
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         id: `slider-track-${id}`,
         ref: mergeRefs(ref, trackRef),
@@ -417,7 +417,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
       }
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         id: `slider-filled-track-${id}`,
         ref,
@@ -440,7 +440,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
       }
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref,
         id: getMarkerId(props.value),
@@ -474,7 +474,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
         throw new Error(`Cannot find value at index '${i}'. The 'value' or 'defaultValue'`)
 
       return {
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref,
         id: getThumbId(i),

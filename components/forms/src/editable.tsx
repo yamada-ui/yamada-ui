@@ -33,7 +33,7 @@ import {
   useState,
   KeyboardEvent,
 } from 'react'
-import { FormControlOptions, returnUseFormControlPropsMap, useFormControlProps } from './'
+import { FormControlOptions, formControlProperties, useFormControlProps } from './'
 
 export type UseEditableProps = FormControlOptions & {
   placeholder?: string
@@ -194,7 +194,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getPreviewProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, previewRef),
       hidden: isEditing,
@@ -217,7 +217,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, inputRef),
       id,
@@ -250,7 +250,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getTextareaProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, inputRef),
       id,

@@ -33,7 +33,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useFormControlProps, UseFormControlProps, returnUseFormControlPropsMap } from './'
+import { useFormControlProps, UseFormControlProps, formControlProperties } from './'
 
 const isDefaultValidCharacter = (character: string) => /^[Ee0-9+\-.]$/.test(character)
 
@@ -310,7 +310,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       required,
       disabled,
       readOnly,
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...omitObject(props, ['defaultValue']),
       ref: mergeRefs(inputRef, ref),
       value: format(value),
@@ -350,7 +350,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         required,
         readOnly,
         disabled,
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, incrementRef),
         role: 'button',
@@ -374,7 +374,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         required,
         readOnly,
         disabled,
-        ...pickObject(rest, returnUseFormControlPropsMap),
+        ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, decrementRef),
         role: 'button',

@@ -41,7 +41,7 @@ import {
   FormControlOptions,
   useFormControl,
   useFormControlProps,
-  returnUseFormControlPropsMap,
+  formControlProperties,
 } from './'
 
 export type UseCheckboxProps = FormControlOptions & {
@@ -131,7 +131,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === 'LABEL')
@@ -150,7 +150,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getIconProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       'data-active': dataAttr(isActive),
@@ -174,7 +174,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(inputRef, ref),
       id,
@@ -223,7 +223,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
 
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       'data-checked': dataAttr(checked),

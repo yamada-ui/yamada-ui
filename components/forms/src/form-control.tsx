@@ -221,7 +221,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   }
 }
 
-export const returnUseFormControlPropsMap: any[] = [
+export const formControlProperties: any[] = [
   'disabled',
   'required',
   'readOnly',

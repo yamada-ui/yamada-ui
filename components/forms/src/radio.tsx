@@ -32,7 +32,7 @@ import {
   useFormControl,
   useFormControlProps,
   FormControlOptions,
-  returnUseFormControlPropsMap,
+  formControlProperties,
 } from './'
 
 export type UseRadioProps = FormControlOptions & {
@@ -94,7 +94,7 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       'data-checked': dataAttr(checked),
@@ -104,7 +104,7 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getIconProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       'data-active': dataAttr(isActive),
@@ -123,7 +123,7 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       ...props,
       ref,
       id,
@@ -170,7 +170,7 @@ export const useRadio = (props: UseRadioProps) => {
 
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, returnUseFormControlPropsMap),
+      ...pickObject(rest, formControlProperties),
       props,
       ref,
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {

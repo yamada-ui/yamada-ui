@@ -40,6 +40,18 @@ export const styles = {
   ...others,
 }
 
+export const StylesProperties: any[] = Object.keys(styles)
+
+export const layoutStyle = {
+  ...layout,
+  ...grid,
+  ...flex,
+  ...space,
+  ...position,
+}
+
+export const layoutStylesProperties: any[] = Object.keys(layoutStyle)
+
 export type StylesProps<Y = 'responsive', M = 'colorScheme'> = LayoutProps<Y, M> &
   ColorProps<Y, M> &
   GridProps<Y, M> &

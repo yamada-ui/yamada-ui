@@ -21,6 +21,7 @@ import { Mark } from './mark'
 import { Markdown } from './markdown'
 import { Menu } from './menu'
 import { Modal } from './modal'
+import { NativeSelect } from './native-select'
 import { NumberInput } from './number-input'
 import { PinInput } from './pin-input'
 import { Popover } from './popover'
@@ -37,7 +38,6 @@ import { Tooltip } from './tooltip'
 export default {
   Accordion,
   Checkbox,
-  NumberInput,
   Alert,
   Badge,
   Breadcrumb,
@@ -59,6 +59,8 @@ export default {
   Markdown,
   Menu,
   Modal,
+  NativeSelect,
+  NumberInput,
   PinInput,
   Popover,
   Progress,

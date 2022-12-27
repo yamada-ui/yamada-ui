@@ -1,6 +1,7 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
+import { isUndefined, toneColor, transparentizeColor } from '@yamada-ui/utils'
 
-export const SegmentedControl: ComponentStyle = {
+export const SegmentedControl: ComponentMultiStyle = {
   baseStyle: {
     container: {
       p: '1',
@@ -27,46 +28,52 @@ export const SegmentedControl: ComponentStyle = {
   },
 
   variants: {
-    basic: {
+    basic: ({ theme: t, colorScheme: s, colorStyle: c }) => ({
       container: {
         rounded: 'md',
       },
       active: {
-        bg: ['whiteAlpha.700', 'whiteAlpha.100'],
+        bg: isUndefined(c)
+          ? ['whiteAlpha.700', 'whiteAlpha.100']
+          : isDefaultColor(
+              [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
+              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
+            )(c),
         rounded: 'md',
       },
       button: {
         color: ['blackAlpha.700', 'whiteAlpha.700'],
         _hover: {
-          color: ['black', 'white'],
+          color: [`blackAlpha.800`, `whiteAlpha.800`],
         },
         _checked: {
-          color: ['black', 'white'],
+          color: [isUndefined(c) ? `blackAlpha.800` : `white`, `whiteAlpha.800`],
         },
       },
-    },
-    'basic-subtle': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({}),
-    'basic-solid': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({}),
-    rounded: {
+    }),
+    rounded: ({ theme: t, colorScheme: s, colorStyle: c }) => ({
       container: {
         rounded: 'full',
       },
       active: {
-        bg: ['whiteAlpha.700', 'whiteAlpha.100'],
+        bg: isUndefined(c)
+          ? ['whiteAlpha.700', 'whiteAlpha.100']
+          : isDefaultColor(
+              [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
+              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
+            )(c),
         rounded: 'full',
       },
       button: {
         color: ['blackAlpha.700', 'whiteAlpha.700'],
         _hover: {
-          color: ['black', 'white'],
+          color: [`blackAlpha.800`, `whiteAlpha.800`],
         },
         _checked: {
-          color: ['black', 'white'],
+          color: [isUndefined(c) ? `blackAlpha.800` : `white`, `whiteAlpha.800`],
         },
       },
-    },
-    'rounded-subtle': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({}),
-    'rounded-solid': ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({}),
+    }),
   },
 
   sizes: {

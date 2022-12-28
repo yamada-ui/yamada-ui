@@ -29,9 +29,6 @@ export const Menu: ComponentStyle = {
       _active: {
         bg: ['gray.200', 'whiteAlpha.200'],
       },
-      _expanded: {
-        bg: ['gray.100', 'whiteAlpha.300'],
-      },
       _disabled: {
         opacity: 0.4,
         cursor: 'not-allowed',

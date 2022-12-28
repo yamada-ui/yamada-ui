@@ -1,6 +1,13 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FontAwesomeIcon, FormControl, NativeSelect, UIOption } from '@yamada-ui/react'
+import {
+  FontAwesomeIcon,
+  FormControl,
+  NativeOption,
+  NativeOptionGroup,
+  NativeSelect,
+  UIOption,
+} from '@yamada-ui/react'
 import { useState } from 'react'
 
 export default {
@@ -35,26 +42,26 @@ export const basic: ComponentStory<typeof NativeSelect> = () => {
   return (
     <>
       <NativeSelect placeholder='キャラクターを選択'>
-        <option value='孫悟空'>孫悟空</option>
-        <option value='ベジータ'>ベジータ</option>
-        <option value='フリーザ'>フリーザ</option>
+        <NativeOption value='孫悟空'>孫悟空</NativeOption>
+        <NativeOption value='ベジータ'>ベジータ</NativeOption>
+        <NativeOption value='フリーザ'>フリーザ</NativeOption>
       </NativeSelect>
 
       <NativeSelect placeholder='キャラクターを選択'>
-        <optgroup label='地球人'>
-          <option value='孫悟空'>孫悟空</option>
-          <option value='孫悟飯'>孫悟飯</option>
-          <option value='クリリン'>クリリン</option>
-        </optgroup>
+        <NativeOptionGroup label='地球人'>
+          <NativeOption value='孫悟空'>孫悟空</NativeOption>
+          <NativeOption value='孫悟飯'>孫悟飯</NativeOption>
+          <NativeOption value='クリリン'>クリリン</NativeOption>
+        </NativeOptionGroup>
 
-        <optgroup label='フリーザ軍'>
-          <option value='フリーザ'>フリーザ</option>
-          <option value='ギニュー'>ギニュー</option>
-          <option value='リクーム'>リクーム</option>
-          <option value='バータ'>バータ</option>
-          <option value='ジース'>ジース</option>
-          <option value='グルド'>グルド</option>
-        </optgroup>
+        <NativeOptionGroup label='フリーザ軍'>
+          <NativeOption value='フリーザ'>フリーザ</NativeOption>
+          <NativeOption value='ギニュー'>ギニュー</NativeOption>
+          <NativeOption value='リクーム'>リクーム</NativeOption>
+          <NativeOption value='バータ'>バータ</NativeOption>
+          <NativeOption value='ジース'>ジース</NativeOption>
+          <NativeOption value='グルド'>グルド</NativeOption>
+        </NativeOptionGroup>
       </NativeSelect>
 
       <NativeSelect placeholder='キャラクターを選択' data={data} />
@@ -97,9 +104,9 @@ export const withBorderColor: ComponentStory<typeof NativeSelect> = () => {
 export const disabledPlaceholderHidden: ComponentStory<typeof NativeSelect> = () => {
   return (
     <NativeSelect placeholder='キャラクターを選択' isPlaceholderHidden={false}>
-      <option value='孫悟空'>孫悟空</option>
-      <option value='ベジータ'>ベジータ</option>
-      <option value='フリーザ'>フリーザ</option>
+      <NativeOption value='孫悟空'>孫悟空</NativeOption>
+      <NativeOption value='ベジータ'>ベジータ</NativeOption>
+      <NativeOption value='フリーザ'>フリーザ</NativeOption>
     </NativeSelect>
   )
 }
@@ -157,18 +164,18 @@ export const customIcon: ComponentStory<typeof NativeSelect> = () => {
   return (
     <>
       <NativeSelect placeholder='キャラクターを選択' icon={{ color: 'primary' }}>
-        <option value='孫悟空'>孫悟空</option>
-        <option value='ベジータ'>ベジータ</option>
-        <option value='フリーザ'>フリーザ</option>
+        <NativeOption value='孫悟空'>孫悟空</NativeOption>
+        <NativeOption value='ベジータ'>ベジータ</NativeOption>
+        <NativeOption value='フリーザ'>フリーザ</NativeOption>
       </NativeSelect>
 
       <NativeSelect
         placeholder='キャラクターを選択'
         icon={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
       >
-        <option value='孫悟空'>孫悟空</option>
-        <option value='ベジータ'>ベジータ</option>
-        <option value='フリーザ'>フリーザ</option>
+        <NativeOption value='孫悟空'>孫悟空</NativeOption>
+        <NativeOption value='ベジータ'>ベジータ</NativeOption>
+        <NativeOption value='フリーザ'>フリーザ</NativeOption>
       </NativeSelect>
     </>
   )
@@ -183,9 +190,9 @@ export const customControl: ComponentStory<typeof NativeSelect> = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
     >
-      <option value='孫悟空'>孫悟空</option>
-      <option value='ベジータ'>ベジータ</option>
-      <option value='フリーザ'>フリーザ</option>
+      <NativeOption value='孫悟空'>孫悟空</NativeOption>
+      <NativeOption value='ベジータ'>ベジータ</NativeOption>
+      <NativeOption value='フリーザ'>フリーザ</NativeOption>
     </NativeSelect>
   )
 }

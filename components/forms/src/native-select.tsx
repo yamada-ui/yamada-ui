@@ -89,21 +89,21 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     computedChildren = data.map(({ label, value, ...props }, i) => {
       if (!isArray(value)) {
         return (
-          <option key={i} value={value} {...props}>
+          <NativeOption key={i} value={value} {...props}>
             {label}
-          </option>
+          </NativeOption>
         )
       } else {
         return (
-          <optgroup key={i} label={label as string}>
+          <NativeOptionGroup key={i} label={label as string}>
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
-                <option key={i} value={value} {...props}>
+                <NativeOption key={i} value={value} {...props}>
                   {label}
-                </option>
+                </NativeOption>
               ) : null,
             )}
-          </optgroup>
+          </NativeOptionGroup>
         )
       }
     })
@@ -126,9 +126,9 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
           {...computedProps[1]}
         >
           {placeholder ? (
-            <option value='' hidden={isPlaceholderHidden}>
+            <NativeOption value='' hidden={isPlaceholderHidden}>
               {placeholder}
-            </option>
+            </NativeOption>
           ) : null}
           {children ?? computedChildren}
         </ui.select>
@@ -175,3 +175,15 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({ className, children, ...r
     </ui.div>
   )
 }
+
+export type NativeOptionGroupProps = HTMLUIProps<'optgroup'>
+
+export const NativeOptionGroup = forwardRef<NativeOptionGroupProps, 'optgroup'>((props, ref) => (
+  <ui.optgroup ref={ref} {...props} />
+))
+
+export type NativeOptionProps = HTMLUIProps<'option'>
+
+export const NativeOption = forwardRef<NativeOptionProps, 'option'>((props, ref) => (
+  <ui.option ref={ref} {...props} />
+))

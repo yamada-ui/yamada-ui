@@ -481,12 +481,8 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
-    Accordion: { sizes: string & {}; variants: 'normal' | 'card' | 'unstyled' | (string & {}) }
+    Accordion: { sizes: string & {}; variants: 'basic' | 'card' | 'unstyled' | (string & {}) }
     Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
-    NumberInput: {
-      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
-      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
-    }
     Alert: {
       sizes: string & {}
       variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
@@ -547,12 +543,28 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
+    NativeSelect: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
+    NumberInput: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     PinInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
     Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    SegmentedControl: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'basic' | 'rounded' | (string & {})
+    }
+    Select: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     Slider: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Switch: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})

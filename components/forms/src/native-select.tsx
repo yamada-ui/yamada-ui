@@ -19,14 +19,7 @@ import {
   isUndefined,
   isArray,
 } from '@yamada-ui/utils'
-import {
-  cloneElement,
-  DetailedHTMLProps,
-  FC,
-  OptionHTMLAttributes,
-  ReactElement,
-  ReactNode,
-} from 'react'
+import { cloneElement, DetailedHTMLProps, FC, OptionHTMLAttributes, ReactElement } from 'react'
 import { FormControlOptions, useFormControlProps, formControlProperties } from '.'
 
 type Value = DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>['value']
@@ -34,7 +27,7 @@ type Value = DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOpti
 export type UINativeOption = Omit<
   DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
   'label' | 'children' | 'value'
-> & { label?: ReactNode; value?: Value | UINativeOption[] }
+> & { label?: string; value?: Value | UINativeOption[] }
 
 type NativeSelectContext = Record<string, CSSUIObject>
 
@@ -95,7 +88,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
         )
       } else {
         return (
-          <NativeOptionGroup key={i} label={label as string} {...props}>
+          <NativeOptionGroup key={i} label={label} {...props}>
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
                 <NativeOption key={i} value={value} {...props}>
@@ -182,7 +175,7 @@ export const NativeOptionGroup = forwardRef<NativeOptionGroupProps, 'optgroup'>(
   <ui.optgroup ref={ref} {...props} />
 ))
 
-export type NativeOptionProps = HTMLUIProps<'option'>
+export type NativeOptionProps = Omit<HTMLUIProps<'option'>, 'children'> & { children?: string }
 
 export const NativeOption = forwardRef<NativeOptionProps, 'option'>((props, ref) => (
   <ui.option ref={ref} {...props} />

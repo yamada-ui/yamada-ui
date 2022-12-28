@@ -33,7 +33,6 @@ const [MenuProvider, useMenu] = createContext<MenuContext>({
 export { useMenu }
 
 type MenuOptions = {
-  autoSelect?: boolean
   closeOnSelect?: boolean
 }
 
@@ -43,7 +42,6 @@ export const Menu: FC<MenuProps> = (props) => {
   const styles = useMultiComponentStyle('Menu', props)
   const {
     initialFocusRef,
-    autoSelect = true,
     closeOnSelect = true,
     placement = 'bottom-start',
     duration = 0.2,
@@ -88,12 +86,8 @@ export const Menu: FC<MenuProps> = (props) => {
   const onOpenInternal = useCallback(() => {
     rest.onOpen?.()
 
-    if (autoSelect) {
-      onFocusFirstItem()
-    } else {
-      onFocusMenu()
-    }
-  }, [autoSelect, onFocusFirstItem, onFocusMenu, rest])
+    onFocusMenu()
+  }, [onFocusMenu, rest])
 
   const [isOpen, onOpen, onClose] = useDisclosure({ ...props, onOpen: onOpenInternal })
 
@@ -115,7 +109,6 @@ export const Menu: FC<MenuProps> = (props) => {
           onClose,
           onFocusFirstItem,
           onFocusLastItem,
-          autoSelect,
           closeOnSelect,
           focusedIndex,
           setFocusedIndex,

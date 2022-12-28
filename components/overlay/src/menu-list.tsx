@@ -10,21 +10,39 @@ export const MenuList = forwardRef<MenuListProps, 'section'>(({ className, ...re
 
   const descendants = useMenuDescendantsContext()
 
+  const onNext = useCallback(() => {
+    const next = descendants.enabledNextValue(focusedIndex)
+
+    if (next) setFocusedIndex(next.index)
+  }, [descendants, focusedIndex, setFocusedIndex])
+
+  const onPrev = useCallback(() => {
+    const prev = descendants.enabledPrevValue(focusedIndex)
+
+    if (prev) setFocusedIndex(prev.index)
+  }, [descendants, focusedIndex, setFocusedIndex])
+
+  const onFirst = useCallback(() => {
+    const first = descendants.enabledfirstValue()
+
+    if (first) setFocusedIndex(first.index)
+  }, [descendants, setFocusedIndex])
+
+  const onLast = useCallback(() => {
+    const last = descendants.enabledlastValue()
+
+    if (last) setFocusedIndex(last.index)
+  }, [descendants, setFocusedIndex])
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent) => {
       const actions: Record<string, KeyboardEventHandler> = {
         Tab: (ev) => ev.preventDefault(),
         Escape: onClose,
-        ArrowDown: () => {
-          const next = descendants.enabledNextValue(focusedIndex)
-
-          if (next) setFocusedIndex(next.index)
-        },
-        ArrowUp: () => {
-          const prev = descendants.enabledPrevValue(focusedIndex)
-
-          if (prev) setFocusedIndex(prev.index)
-        },
+        ArrowDown: focusedIndex === -1 ? onFirst : onNext,
+        ArrowUp: focusedIndex === -1 ? onLast : onPrev,
+        Home: onFirst,
+        End: onLast,
       }
 
       const action = actions[ev.key]
@@ -34,7 +52,7 @@ export const MenuList = forwardRef<MenuListProps, 'section'>(({ className, ...re
       ev.preventDefault()
       action(ev)
     },
-    [descendants, focusedIndex, onClose, setFocusedIndex],
+    [focusedIndex, onClose, onFirst, onLast, onNext, onPrev],
   )
 
   const css: CSSUIObject = { ...styles.list }

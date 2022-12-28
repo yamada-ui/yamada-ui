@@ -279,22 +279,6 @@ export const disabledCloseOnSelect: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const disabledAutoSelect: ComponentStory<typeof Menu> = () => {
-  return (
-    <Menu autoSelect={false}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
-        Menu
-      </MenuButton>
-
-      <MenuList>
-        <MenuItem>Set status</MenuItem>
-        <MenuItem>Edit Profile</MenuItem>
-        <MenuItem>Preferences</MenuItem>
-      </MenuList>
-    </Menu>
-  )
-}
-
 export const disabledCloseBlur: ComponentStory<typeof Menu> = () => {
   return (
     <Menu closeOnBlur={false}>

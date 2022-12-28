@@ -58,33 +58,6 @@ export const MenuItem = forwardRef<MenuItemProps, 'button'>(
 
     const isFocused = index === focusedIndex
 
-    const onMouseEnter = useCallback(
-      (ev: any) => {
-        props.onMouseEnter?.(ev)
-
-        if (!isDisabled) setFocusedIndex(index)
-      },
-      [props, isDisabled, setFocusedIndex, index],
-    )
-
-    const onMouseMove = useCallback(
-      (ev: MouseEvent<HTMLButtonElement>) => {
-        props.onMouseMove?.(ev)
-
-        if (buttonRef.current && !isActiveElement(buttonRef.current)) onMouseEnter(ev)
-      },
-      [onMouseEnter, buttonRef, props],
-    )
-
-    const onMouseLeave = useCallback(
-      (ev: MouseEvent<HTMLButtonElement>) => {
-        props.onMouseLeave?.(ev)
-
-        if (!isDisabled) setFocusedIndex(-1)
-      },
-      [props, isDisabled, setFocusedIndex],
-    )
-
     const onClick = useCallback(
       (ev: MouseEvent<HTMLButtonElement>) => {
         props.onClick?.(ev)
@@ -106,9 +79,6 @@ export const MenuItem = forwardRef<MenuItemProps, 'button'>(
     const rest = useClickable({
       onClick,
       onFocus,
-      onMouseEnter,
-      onMouseMove,
-      onMouseLeave,
       ref: mergeRefs(register, buttonRef, ref),
       isDisabled,
       isFocusable,

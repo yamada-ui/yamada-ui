@@ -23,6 +23,9 @@ export const Menu: ComponentStyle = {
       transitionProperty: 'background',
       transitionDuration: 'ultra-fast',
       transitionTimingFunction: 'ease-in',
+      _hover: {
+        bg: ['gray.50', 'whiteAlpha.50'],
+      },
       _focus: {
         bg: ['gray.100', 'whiteAlpha.100'],
       },

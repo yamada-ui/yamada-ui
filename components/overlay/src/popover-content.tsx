@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject, UIProps } from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject, UIProps, CSSUIProps } from '@yamada-ui/core'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import {
   cx,
@@ -66,7 +66,10 @@ const getPopoverContentProps = (
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
-  ({ as = 'section', className, children, zIndex, __css, ...rest }, ref) => {
+  (
+    { as = 'section', className, children, w, width, minW, minWidth, zIndex, __css, ...rest },
+    ref,
+  ) => {
     const {
       isOpen,
       closeOnButton,
@@ -86,17 +89,27 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
 
     const css: CSSUIObject = {
       position: 'relative',
+      w: '100%',
       display: 'flex',
       flexDirection: 'column',
       outline: 0,
       ...omitObject(__css ?? styles.container, ['zIndex']),
     }
 
+    w = w ?? width ?? ((styles.container.w ?? styles.container.width) as CSSUIProps['w'])
+    minW =
+      minW ??
+      minWidth ??
+      ((styles.container.minW ?? styles.container.minWidth) as CSSUIProps['minW'])
+    zIndex = (zIndex ?? styles.container.zIndex) as UIProps['zIndex']
+
     return (
       <ui.div
         {...getPopperProps({ style: { visibility: isOpen ? 'visible' : 'hidden' } })}
         className='ui-popover'
-        zIndex={(zIndex ?? styles.container.zIndex) as UIProps['zIndex']}
+        w={w}
+        minW={minW}
+        zIndex={zIndex}
       >
         <ui.section
           as={motion[as as keyof typeof motion]}

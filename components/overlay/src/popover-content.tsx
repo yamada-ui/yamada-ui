@@ -66,7 +66,7 @@ const getPopoverContentProps = (
 }
 
 export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
-  ({ className, children, zIndex, __css, ...rest }, ref) => {
+  ({ as = 'section', className, children, zIndex, __css, ...rest }, ref) => {
     const {
       isOpen,
       closeOnButton,
@@ -99,7 +99,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
         zIndex={(zIndex ?? styles.container.zIndex) as UIProps['zIndex']}
       >
         <ui.section
-          as={motion.section}
+          as={motion[as as keyof typeof motion]}
           className={cx('ui-popover-content', className)}
           {...(animation !== 'none' ? getPopoverContentProps(animation, duration) : {})}
           {...(getPopoverProps(rest, ref) as Omit<DOMAttributes & RefAttributes<any>, 'onDrag'>)}

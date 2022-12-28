@@ -260,6 +260,7 @@ importers:
       '@yamada-ui/hooks': workspace:*
       '@yamada-ui/layouts': workspace:*
       '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/overlay': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       framer-motion: ^6.2.9
@@ -270,6 +271,7 @@ importers:
       '@yamada-ui/hooks': link:../../hooks
       '@yamada-ui/layouts': link:../layouts
       '@yamada-ui/media-and-icons': link:../media-and-icons
+      '@yamada-ui/overlay': link:../overlay
       '@yamada-ui/utils': link:../../utils
       framer-motion: 6.5.1_react@18.2.0
     devDependencies:

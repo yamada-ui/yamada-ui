@@ -21,13 +21,13 @@ import { Mark } from './mark'
 import { Markdown } from './markdown'
 import { Menu } from './menu'
 import { Modal } from './modal'
-import { NativeSelect } from './native-select'
 import { NumberInput } from './number-input'
 import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Radio } from './radio'
 import { SegmentedControl } from './segmented-control'
+import { Select } from './select'
 import { Slider } from './slider'
 import { Switch } from './switch'
 import { Tabs } from './tabs'
@@ -59,13 +59,13 @@ export default {
   Markdown,
   Menu,
   Modal,
-  NativeSelect,
   NumberInput,
   PinInput,
   Popover,
   Progress,
   Radio,
   SegmentedControl,
+  Select,
   Slider,
   Switch,
   Tabs,

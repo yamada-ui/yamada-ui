@@ -54,12 +54,12 @@ type NativeSelectOptions = {
 }
 
 export type NativeSelectProps = Omit<HTMLUIProps<'select'>, 'size'> &
-  ThemeProps<'NativeSelect'> &
+  ThemeProps<'Select'> &
   NativeSelectOptions &
   FormControlOptions
 
 export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref) => {
-  const styles = useMultiComponentStyle('NativeSelect', props)
+  const styles = useMultiComponentStyle('Select', props)
   let {
     className,
     children,

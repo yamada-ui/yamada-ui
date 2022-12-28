@@ -6,7 +6,7 @@ import {
   NativeOption,
   NativeOptionGroup,
   NativeSelect,
-  UIOption,
+  UINativeOption,
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
@@ -16,7 +16,7 @@ export default {
 } as ComponentMeta<typeof NativeSelect>
 
 export const basic: ComponentStory<typeof NativeSelect> = () => {
-  const data: UIOption[] = [
+  const data: UINativeOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',

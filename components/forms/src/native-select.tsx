@@ -31,10 +31,10 @@ import { FormControlOptions, useFormControlProps, formControlProperties } from '
 
 type Value = DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>['value']
 
-export type UIOption = Omit<
+export type UINativeOption = Omit<
   DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
   'label' | 'children' | 'value'
-> & { label?: ReactNode; value?: Value | UIOption[] }
+> & { label?: ReactNode; value?: Value | UINativeOption[] }
 
 type NativeSelectContext = Record<string, CSSUIObject>
 
@@ -44,7 +44,7 @@ const [NativeSelectProvider, useNativeSelect] = createContext<NativeSelectContex
 })
 
 type NativeSelectOptions = {
-  data?: UIOption[]
+  data?: UINativeOption[]
   placeholder?: string
   isPlaceholderHidden?: boolean
   focusBorderColor?: string
@@ -95,7 +95,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
         )
       } else {
         return (
-          <NativeOptionGroup key={i} label={label as string}>
+          <NativeOptionGroup key={i} label={label as string} {...props}>
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
                 <NativeOption key={i} value={value} {...props}>

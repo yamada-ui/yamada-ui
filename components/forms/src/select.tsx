@@ -6,6 +6,8 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
+  layoutStylesProperties,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import {
   createDescendant,
@@ -13,22 +15,29 @@ import {
   useControllableState,
   useDisclosure,
 } from '@yamada-ui/hooks'
+import { ChevronIcon } from '@yamada-ui/media-and-icons'
 import { Popover, PopoverContent, PopoverProps, PopoverTrigger } from '@yamada-ui/overlay'
 import {
   ariaAttr,
   createContext,
   cx,
   dataAttr,
+  Dict,
   funcAll,
+  getValidChildren,
   handlerAll,
   isActiveElement,
+  isArray,
   isHTMLElement,
+  isValidElement,
   mergeRefs,
   omitObject,
+  splitObject,
   useUnmountEffect,
   useUpdateEffect,
 } from '@yamada-ui/utils'
 import {
+  cloneElement,
   Dispatch,
   FC,
   FocusEvent,
@@ -42,7 +51,14 @@ import {
   useRef,
   useState,
 } from 'react'
-import { FormControlOptions, useFormControlProps } from './'
+import { FormControlOptions, formControlProperties, useFormControlProps } from './'
+
+type Value = string | number
+
+export type UIOption = Omit<OptionProps, 'value'> & {
+  label?: string
+  value?: Value | UIOption[]
+}
 
 const isTargetOption = (target: EventTarget | null) =>
   isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('select-item')
@@ -56,8 +72,11 @@ const {
 
 export { useSelectDescendant }
 
-type SelectContext = SelectOptions & {
-  setValue: Dispatch<SetStateAction<string | number>>
+type SelectContext = Omit<SelectOptions, 'onChange'> & {
+  setValue: Dispatch<SetStateAction<Value>>
+  onChange: (value: Value, displayValue: string) => void
+  placeholder?: string
+  isPlaceholderHidden: boolean
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -77,11 +96,12 @@ const [SelectProvider, useSelect] = createContext<SelectContext>({
 export { useSelect }
 
 type SelectOptions = {
-  value?: string | number
-  defaultValue?: string | number
-  onChange?: (value: string | number) => void
-  autoSelect?: boolean
+  value?: Value
+  defaultValue?: Value
+  onChange?: (value: Value) => void
   closeOnSelect?: boolean
+  isPlaceholderHidden?: boolean
+  data?: UIOption[]
   focusBorderColor?: string
   errorBorderColor?: string
   container?: Omit<HTMLUIProps<'div'>, 'children'>
@@ -90,7 +110,7 @@ type SelectOptions = {
 
 export type SelectProps = Omit<HTMLUIProps<'input'>, 'value' | 'defaultValue' | 'onChange'> &
   ThemeProps<'Select'> &
-  Omit<PopoverProps, 'closeOnButton'> &
+  Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton'> &
   FormControlOptions &
   SelectOptions
 
@@ -98,16 +118,27 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
   const styles = useMultiComponentStyle('Select', props)
   let {
     className,
-    initialFocusRef,
-    autoSelect = true,
     closeOnSelect = true,
+    placeholder,
+    isPlaceholderHidden = true,
+    data = [],
     placement = 'bottom-start',
     duration = 0.2,
+    color,
+    h,
+    height,
+    minH,
+    minHeight,
+    icon,
+    container,
     children,
     ...rest
   } = omitThemeProps(props)
 
   rest = useFormControlProps(rest)
+
+  const formControlProps = omitObject(rest, formControlProperties)
+  const computedProps = splitObject(rest, layoutStylesProperties)
 
   const descendants = useDescendants()
 
@@ -122,37 +153,29 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
 
   const onFocusFirstItem = useCallback(() => {
     const id = setTimeout(() => {
-      if (initialFocusRef) return
-
       const first = descendants.enabledfirstValue()
 
       if (first) setFocusedIndex(first.index)
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, initialFocusRef])
+  }, [descendants])
 
   const onFocusLastItem = useCallback(() => {
     const id = setTimeout(() => {
-      if (initialFocusRef) return
-
       const last = descendants.enabledlastValue()
 
       if (last) setFocusedIndex(last.index)
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, initialFocusRef])
+  }, [descendants])
 
   const onOpenInternal = useCallback(() => {
     rest.onOpen?.()
 
-    if (autoSelect) {
-      onFocusFirstItem()
-    } else {
-      onFocusList()
-    }
-  }, [autoSelect, onFocusFirstItem, onFocusList, rest])
+    onFocusList()
+  }, [onFocusList, rest])
 
   const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
   const [value, setValue] = useControllableState({
@@ -160,6 +183,15 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
     defaultValue: rest.defaultValue ?? '',
     onChange: rest.onChange,
   })
+  const [displayValue, setDisplayValue] = useState<string>('')
+
+  const onChange = useCallback(
+    (value: Value, displayValue: string) => {
+      setValue(value)
+      setDisplayValue(displayValue)
+    },
+    [setValue],
+  )
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
@@ -189,7 +221,34 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
     timeoutIds.current.clear()
   })
 
-  const css: CSSUIObject = { ...styles.field }
+  h = h ?? height
+  minH = minH ?? minHeight
+
+  let computedChildren: ReactElement[] = []
+
+  if (!children && data.length) {
+    computedChildren = data.map(({ label, value, ...props }, i) => {
+      if (!isArray(value)) {
+        return (
+          <Option key={i} value={value} {...props}>
+            {label}
+          </Option>
+        )
+      } else {
+        return (
+          <OptionGroup key={i} label={label as string} {...(props as HTMLUIProps<'ul'>)}>
+            {value.map(({ label, value, ...props }, i) =>
+              !isArray(value) ? (
+                <Option key={i} value={value} {...props}>
+                  {label}
+                </Option>
+              ) : null,
+            )}
+          </OptionGroup>
+        )
+      }
+    })
+  }
 
   return (
     <DescendantsContextProvider value={descendants}>
@@ -197,6 +256,9 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
         value={{
           value,
           setValue,
+          placeholder,
+          isPlaceholderHidden,
+          onChange,
           isOpen,
           onOpen,
           onClose,
@@ -204,7 +266,6 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
           onFocusLastItem,
           focusedIndex,
           setFocusedIndex,
-          autoSelect,
           closeOnSelect,
           listRef,
           styles,
@@ -218,89 +279,208 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
             onClose,
             placement,
             duration,
-            initialFocusRef,
             closeOnButton: false,
           }}
         >
-          <PopoverTrigger>
-            <ui.input
-              ref={ref}
-              className={cx('ui-select', className)}
-              {...omitObject(rest, ['value', 'defaultValue', 'onChange'])}
-              readOnly
-              data-active={dataAttr(isOpen)}
-              aria-expanded={ariaAttr(isOpen)}
-              onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-              __css={css}
-            />
-          </PopoverTrigger>
+          <ui.div
+            className='ui-select-container'
+            __css={{ position: 'relative', w: '100%', h: 'fit-content', color }}
+            {...computedProps[0]}
+            {...container}
+            {...formControlProps}
+          >
+            <PopoverTrigger>
+              <ui.input
+                ref={ref}
+                className={cx('ui-select', className)}
+                {...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange'])}
+                value={displayValue}
+                placeholder={placeholder}
+                readOnly={true}
+                data-active={dataAttr(isOpen)}
+                aria-expanded={ariaAttr(isOpen)}
+                onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
+                __css={{ paddingEnd: '2rem', h, minH, ...styles.field }}
+              />
+            </PopoverTrigger>
 
-          <SelectList>{children}</SelectList>
+            <SelectIcon {...icon} {...formControlProps} />
+
+            <SelectList>
+              {placeholder ? (
+                <Option value='' hidden={isPlaceholderHidden}>
+                  {placeholder}
+                </Option>
+              ) : null}
+              {children ?? computedChildren}
+            </SelectList>
+          </ui.div>
         </Popover>
       </SelectProvider>
     </DescendantsContextProvider>
   )
 })
 
-type SelectListProps = HTMLUIProps<'ul'>
+type SelectIconProps = HTMLUIProps<'div'>
 
-const SelectList = forwardRef<SelectListProps, 'ul'>(({ className, ...rest }, ref) => {
-  const { listRef, focusedIndex, setFocusedIndex, onClose, styles } = useSelect()
+const SelectIcon: FC<SelectIconProps> = ({ className, children, ...rest }) => {
+  const { styles } = useSelect()
 
-  const descendants = useDescendantsContext()
+  const css: CSSUIObject = {
+    position: 'absolute',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    ...styles.icon,
+  }
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent) => {
-      const actions: Record<string, KeyboardEventHandler> = {
-        Tab: (ev) => ev.preventDefault(),
-        Escape: onClose,
-        ArrowDown: () => {
-          const next = descendants.enabledNextValue(focusedIndex)
+  const validChildren = getValidChildren(children)
 
-          if (next) setFocusedIndex(next.index)
-        },
-        ArrowUp: () => {
-          const prev = descendants.enabledPrevValue(focusedIndex)
-
-          if (prev) setFocusedIndex(prev.index)
-        },
-      }
-
-      const action = actions[ev.key]
-
-      if (!action) return
-
-      ev.preventDefault()
-      action(ev)
-    },
-    [descendants, focusedIndex, onClose, setFocusedIndex],
+  const cloneChildren = validChildren.map((child) =>
+    cloneElement(child, {
+      focusable: false,
+      'aria-hidden': true,
+      style: {
+        width: '1em',
+        height: '1em',
+        color: 'currentColor',
+      },
+    }),
   )
-
-  const css: CSSUIObject = { ...styles.list }
 
   return (
-    <PopoverContent
-      as='ul'
-      ref={mergeRefs(listRef, ref)}
-      className={cx('ui-select-list', className)}
-      role='select'
-      tabIndex={-1}
-      __css={css}
-      {...rest}
-      onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-    />
+    <ui.div className={cx('ui-native-select-icon', className)} __css={css} {...rest}>
+      {isValidElement(children) ? cloneChildren : <ChevronIcon />}
+    </ui.div>
   )
-})
+}
+
+type SelectListProps = HTMLUIProps<'ul'>
+
+const SelectList = forwardRef<SelectListProps, 'ul'>(
+  ({ className, w, width, minW, minWidth, ...rest }, ref) => {
+    const { listRef, focusedIndex, setFocusedIndex, onClose, styles } = useSelect()
+
+    const descendants = useDescendantsContext()
+
+    const onNext = useCallback(() => {
+      const next = descendants.enabledNextValue(focusedIndex)
+
+      if (next) setFocusedIndex(next.index)
+    }, [descendants, focusedIndex, setFocusedIndex])
+
+    const onPrev = useCallback(() => {
+      const prev = descendants.enabledPrevValue(focusedIndex)
+
+      if (prev) setFocusedIndex(prev.index)
+    }, [descendants, focusedIndex, setFocusedIndex])
+
+    const onFirst = useCallback(() => {
+      const first = descendants.enabledfirstValue()
+
+      if (first) setFocusedIndex(first.index)
+    }, [descendants, setFocusedIndex])
+
+    const onLast = useCallback(() => {
+      const last = descendants.enabledlastValue()
+
+      if (last) setFocusedIndex(last.index)
+    }, [descendants, setFocusedIndex])
+
+    const onKeyDown = useCallback(
+      (ev: KeyboardEvent) => {
+        const actions: Record<string, KeyboardEventHandler> = {
+          Tab: (ev) => ev.preventDefault(),
+          Escape: onClose,
+          ArrowDown: focusedIndex === -1 ? onFirst : onNext,
+          ArrowUp: focusedIndex === -1 ? onLast : onPrev,
+          Home: onFirst,
+          End: onLast,
+        }
+
+        const action = actions[ev.key]
+
+        if (!action) return
+
+        ev.preventDefault()
+        action(ev)
+      },
+      [focusedIndex, onClose, onFirst, onLast, onNext, onPrev],
+    )
+
+    w = w ?? width ?? ((styles.list?.w ?? styles.list?.width) as CSSUIProps['w'])
+    minW = minW ?? minWidth ?? ((styles.list?.minW ?? styles.list?.minWidth) as CSSUIProps['minW'])
+
+    const css: CSSUIObject = { ...styles.list }
+
+    return (
+      <PopoverContent
+        as='ul'
+        ref={mergeRefs(listRef, ref)}
+        className={cx('ui-select-list', className)}
+        role='select'
+        tabIndex={-1}
+        w={w}
+        minW={minW}
+        {...rest}
+        __css={css}
+        onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
+      />
+    )
+  },
+)
+
+type OptionGroupOptions = {
+  label: string
+}
+
+export type OptionGroupProps = HTMLUIProps<'ul'> & OptionGroupOptions
+
+export const OptionGroup = forwardRef<OptionGroupProps, 'ul'>(
+  ({ className, label, color, h, height, minH, minHeight, children, ...rest }, ref) => {
+    const { styles } = useSelect()
+
+    const computedRest = splitObject(rest, layoutStylesProperties)
+
+    h = h ?? height
+    minH = minH ?? minHeight
+
+    return (
+      <ui.li
+        className='ui-select-group-container'
+        __css={{ w: '100%', h: 'fit-content', color }}
+        {...computedRest[0]}
+      >
+        <ui.span className={cx('ui-select-group-label')} __css={styles.groupLabel} noOfLines={1}>
+          {label}
+        </ui.span>
+
+        <ui.ul
+          ref={ref}
+          className={cx('ui-select-group', className)}
+          __css={{ h, minH, ...styles.group }}
+          {...computedRest[1]}
+        >
+          {children}
+        </ui.ul>
+      </ui.li>
+    )
+  },
+)
 
 type OptionOptions = {
-  value: string | number
+  value?: Value
+  children?: string
   isDisabled?: boolean
   isFocusable?: boolean
   closeOnSelect?: boolean
   icon?: ReactElement
 }
 
-export type OptionProps = Omit<HTMLUIProps<'li'>, 'value'> & OptionOptions
+export type OptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & OptionOptions
 
 export const Option = forwardRef<OptionProps, 'li'>(
   (
@@ -317,7 +497,9 @@ export const Option = forwardRef<OptionProps, 'li'>(
   ) => {
     const {
       value,
-      setValue,
+      placeholder,
+      isPlaceholderHidden,
+      onChange,
       focusedIndex,
       setFocusedIndex,
       isOpen,
@@ -327,52 +509,35 @@ export const Option = forwardRef<OptionProps, 'li'>(
       styles,
     } = useSelect()
 
-    const isSelected = props.value === value
-
     const trulyDisabled = isDisabled && !isFocusable
 
     const itemRef = useRef<HTMLLIElement>(null)
-    const { index, register } = useSelectDescendant({ disabled: trulyDisabled })
+    const { index, register, descendants } = useSelectDescendant({ disabled: trulyDisabled })
 
+    if (!!placeholder && index !== 0 && !isPlaceholderHidden && !props.value) {
+      console.warn(
+        `If placeholders are present, All options must be set value.If want to set an empty value, either don't set the placeholder or set 'isPlaceholderHidden' to true.`,
+      )
+    }
+
+    const values = descendants.values()
+    const frontValues = values.slice(!isPlaceholderHidden ? 0 : -1, index)
+    const isDuplicated = frontValues.some(({ node }) => node.dataset.value === props.value)
+    const isSelected = !isDuplicated && props.value === value
     const isFocused = index === focusedIndex
-
-    const onMouseEnter = useCallback(
-      (ev: any) => {
-        props.onMouseEnter?.(ev)
-
-        if (!isDisabled) setFocusedIndex(index)
-      },
-      [props, isDisabled, setFocusedIndex, index],
-    )
-
-    const onMouseMove = useCallback(
-      (ev: MouseEvent<HTMLLIElement>) => {
-        props.onMouseMove?.(ev)
-
-        if (itemRef.current && !isActiveElement(itemRef.current)) onMouseEnter(ev)
-      },
-      [onMouseEnter, itemRef, props],
-    )
-
-    const onMouseLeave = useCallback(
-      (ev: MouseEvent<HTMLLIElement>) => {
-        props.onMouseLeave?.(ev)
-
-        if (!isDisabled) setFocusedIndex(-1)
-      },
-      [props, isDisabled, setFocusedIndex],
-    )
 
     const onClick = useCallback(
       (ev: MouseEvent<HTMLLIElement>) => {
         props.onClick?.(ev)
         if (!isTargetOption(ev.currentTarget)) return
 
-        setValue(props.value)
+        const displayValue = children === placeholder ? '' : children ?? ' '
+
+        onChange(props.value ?? '', displayValue)
 
         if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
       },
-      [props, setValue, customCloseOnSelect, generalCloseOnSelect, onClose],
+      [props, children, placeholder, onChange, customCloseOnSelect, generalCloseOnSelect, onClose],
     )
 
     const onFocus = useCallback(
@@ -386,9 +551,6 @@ export const Option = forwardRef<OptionProps, 'li'>(
     const rest = useClickable({
       onClick,
       onFocus,
-      onMouseEnter,
-      onMouseMove,
-      onMouseLeave,
       ref: mergeRefs(register, itemRef, ref),
       isDisabled,
       isFocusable,
@@ -423,21 +585,30 @@ export const Option = forwardRef<OptionProps, 'li'>(
         {...omitObject(props, ['value'])}
         {...rest}
         role='select-item'
+        data-value={props.value ?? ''}
         tabInde={isFocused ? 0 : -1}
         aria-checked={ariaAttr(isSelected)}
         className={cx('ui-select-item', className)}
         __css={css}
       >
-        {icon !== null ? <Icon opacity={isSelected ? 1 : 0}>{icon || <CheckIcon />}</Icon> : null}
-        {icon ? <ui.span style={{ pointerEvents: 'none', flex: 1 }}>{children}</ui.span> : children}
+        {icon !== null ? (
+          <OptionIcon opacity={isSelected ? 1 : 0}>{icon || <CheckIcon />}</OptionIcon>
+        ) : null}
+        {icon ? (
+          <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
+            {children}
+          </ui.span>
+        ) : (
+          children
+        )}
       </ui.li>
     )
   },
 )
 
-type IconProps = HTMLUIProps<'span'>
+type OptionIconProps = HTMLUIProps<'span'>
 
-const Icon = forwardRef<IconProps, 'span'>(({ className, ...rest }, ref) => {
+const OptionIcon = forwardRef<OptionIconProps, 'span'>(({ className, ...rest }, ref) => {
   const { styles } = useSelect()
 
   const css: CSSUIObject = {
@@ -446,7 +617,7 @@ const Icon = forwardRef<IconProps, 'span'>(({ className, ...rest }, ref) => {
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '0.85em',
-    ...styles.icon,
+    ...styles.itemIcon,
   }
 
   return <ui.span ref={ref} className={cx('ui-select-icon', className)} __css={css} {...rest} />

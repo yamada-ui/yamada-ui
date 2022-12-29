@@ -104,13 +104,15 @@ type SelectOptions = {
   data?: UIOption[]
   focusBorderColor?: string
   errorBorderColor?: string
+  list?: Omit<SelectListProps, 'children'>
   container?: Omit<HTMLUIProps<'div'>, 'children'>
-  icon?: HTMLUIProps<'div'>
+  icon?: SelectIconProps
+  option?: Omit<OptionProps, 'value' | 'children'>
 }
 
 export type SelectProps = Omit<
   HTMLUIProps<'input'>,
-  'value' | 'defaultValue' | 'onChange' | 'size'
+  'value' | 'defaultValue' | 'onChange' | 'size' | 'list'
 > &
   ThemeProps<'Select'> &
   Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton'> &
@@ -132,8 +134,10 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
     height,
     minH,
     minHeight,
+    list,
     icon,
     container,
+    option,
     children,
     ...rest
   } = omitThemeProps(props)
@@ -270,6 +274,7 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
           focusedIndex,
           setFocusedIndex,
           closeOnSelect,
+          option,
           listRef,
           styles,
         }}
@@ -309,7 +314,7 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
 
             <SelectIcon {...icon} {...formControlProps} />
 
-            <SelectList>
+            <SelectList {...list}>
               {placeholder ? (
                 <Option value='' hidden={isPlaceholderHidden}>
                   {placeholder}
@@ -485,129 +490,136 @@ type OptionOptions = {
 
 export type OptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & OptionOptions
 
-export const Option = forwardRef<OptionProps, 'li'>(
-  (
-    {
-      className,
-      isDisabled,
-      isFocusable,
-      closeOnSelect: customCloseOnSelect,
-      icon,
-      children,
-      ...props
+export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
+  const {
+    value,
+    placeholder,
+    isPlaceholderHidden,
+    onChange,
+    focusedIndex,
+    setFocusedIndex,
+    isOpen,
+    onClose,
+    closeOnSelect: generalCloseOnSelect,
+    option,
+    listRef,
+    styles,
+  } = useSelect()
+
+  const {
+    className,
+    isDisabled,
+    isFocusable,
+    closeOnSelect: customCloseOnSelect,
+    icon,
+    children,
+    ...computedProps
+  } = { ...option, ...props }
+
+  const trulyDisabled = isDisabled && !isFocusable
+
+  const itemRef = useRef<HTMLLIElement>(null)
+  const { index, register, descendants } = useSelectDescendant({ disabled: trulyDisabled })
+
+  if (!!placeholder && index !== 0 && !isPlaceholderHidden && !computedProps.value) {
+    console.warn(
+      `If placeholders are present, All options must be set value.If want to set an empty value, either don't set the placeholder or set 'isPlaceholderHidden' to true.`,
+    )
+  }
+
+  const values = descendants.values()
+  const frontValues = values.slice(!isPlaceholderHidden ? 0 : -1, index)
+  const isDuplicated = frontValues.some(({ node }) => node.dataset.value === computedProps.value)
+  const isSelected = !isDuplicated && computedProps.value === value
+  const isFocused = index === focusedIndex
+
+  const onClick = useCallback(
+    (ev: MouseEvent<HTMLLIElement>) => {
+      computedProps.onClick?.(ev)
+      if (!isTargetOption(ev.currentTarget)) return
+
+      const displayValue = children === placeholder ? '' : children ?? ' '
+
+      onChange(computedProps.value ?? '', displayValue)
+
+      if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
     },
-    ref,
-  ) => {
-    const {
-      value,
+    [
+      computedProps,
+      children,
       placeholder,
-      isPlaceholderHidden,
       onChange,
-      focusedIndex,
-      setFocusedIndex,
-      isOpen,
+      customCloseOnSelect,
+      generalCloseOnSelect,
       onClose,
-      closeOnSelect: generalCloseOnSelect,
-      listRef,
-      styles,
-    } = useSelect()
+    ],
+  )
 
-    const trulyDisabled = isDisabled && !isFocusable
+  const onFocus = useCallback(
+    (ev: FocusEvent<HTMLLIElement>) => {
+      computedProps.onFocus?.(ev)
+      setFocusedIndex(index)
+    },
+    [computedProps, setFocusedIndex, index],
+  )
 
-    const itemRef = useRef<HTMLLIElement>(null)
-    const { index, register, descendants } = useSelectDescendant({ disabled: trulyDisabled })
+  const rest = useClickable({
+    onClick,
+    onFocus,
+    ref: mergeRefs(register, itemRef, ref),
+    isDisabled,
+    isFocusable,
+  })
 
-    if (!!placeholder && index !== 0 && !isPlaceholderHidden && !props.value) {
-      console.warn(
-        `If placeholders are present, All options must be set value.If want to set an empty value, either don't set the placeholder or set 'isPlaceholderHidden' to true.`,
-      )
+  useUpdateEffect(() => {
+    if (!isOpen) return
+
+    if (isFocused && !trulyDisabled && itemRef.current) {
+      requestAnimationFrame(() => itemRef.current?.focus())
+    } else if (listRef.current && !isActiveElement(listRef.current)) {
+      listRef.current.focus()
     }
+  }, [isFocused, trulyDisabled, listRef, isOpen])
 
-    const values = descendants.values()
-    const frontValues = values.slice(!isPlaceholderHidden ? 0 : -1, index)
-    const isDuplicated = frontValues.some(({ node }) => node.dataset.value === props.value)
-    const isSelected = !isDuplicated && props.value === value
-    const isFocused = index === focusedIndex
+  const css: CSSUIObject = {
+    textDecoration: 'none',
+    color: 'inherit',
+    userSelect: 'none',
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    textAlign: 'start',
+    flex: '0 0 auto',
+    outline: 0,
+    gap: '0.75rem',
+    ...styles.item,
+  }
 
-    const onClick = useCallback(
-      (ev: MouseEvent<HTMLLIElement>) => {
-        props.onClick?.(ev)
-        if (!isTargetOption(ev.currentTarget)) return
-
-        const displayValue = children === placeholder ? '' : children ?? ' '
-
-        onChange(props.value ?? '', displayValue)
-
-        if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
-      },
-      [props, children, placeholder, onChange, customCloseOnSelect, generalCloseOnSelect, onClose],
-    )
-
-    const onFocus = useCallback(
-      (ev: FocusEvent<HTMLLIElement>) => {
-        props.onFocus?.(ev)
-        setFocusedIndex(index)
-      },
-      [props, setFocusedIndex, index],
-    )
-
-    const rest = useClickable({
-      onClick,
-      onFocus,
-      ref: mergeRefs(register, itemRef, ref),
-      isDisabled,
-      isFocusable,
-    })
-
-    useUpdateEffect(() => {
-      if (!isOpen) return
-
-      if (isFocused && !trulyDisabled && itemRef.current) {
-        requestAnimationFrame(() => itemRef.current?.focus())
-      } else if (listRef.current && !isActiveElement(listRef.current)) {
-        listRef.current.focus()
-      }
-    }, [isFocused, trulyDisabled, listRef, isOpen])
-
-    const css: CSSUIObject = {
-      textDecoration: 'none',
-      color: 'inherit',
-      userSelect: 'none',
-      display: 'flex',
-      width: '100%',
-      alignItems: 'center',
-      textAlign: 'start',
-      flex: '0 0 auto',
-      outline: 0,
-      gap: '0.75rem',
-      ...styles.item,
-    }
-
-    return (
-      <ui.li
-        {...omitObject(props, ['value'])}
-        {...rest}
-        role='select-item'
-        data-value={props.value ?? ''}
-        tabInde={isFocused ? 0 : -1}
-        aria-checked={ariaAttr(isSelected)}
-        className={cx('ui-select-item', className)}
-        __css={css}
-      >
-        {icon !== null ? (
-          <OptionIcon opacity={isSelected ? 1 : 0}>{icon || <CheckIcon />}</OptionIcon>
-        ) : null}
-        {icon ? (
-          <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
-            {children}
-          </ui.span>
-        ) : (
-          children
-        )}
-      </ui.li>
-    )
-  },
-)
+  return (
+    <ui.li
+      {...option}
+      {...omitObject(computedProps, ['value'])}
+      {...rest}
+      role='select-item'
+      data-value={computedProps.value ?? ''}
+      tabInde={isFocused ? 0 : -1}
+      aria-checked={ariaAttr(isSelected)}
+      className={cx('ui-select-item', className)}
+      __css={css}
+    >
+      {icon !== null ? (
+        <OptionIcon opacity={isSelected ? 1 : 0}>{icon || <CheckIcon />}</OptionIcon>
+      ) : null}
+      {icon ? (
+        <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
+          {children}
+        </ui.span>
+      ) : (
+        children
+      )}
+    </ui.li>
+  )
+})
 
 type OptionIconProps = HTMLUIProps<'span'>
 

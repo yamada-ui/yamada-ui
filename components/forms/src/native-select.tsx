@@ -14,10 +14,10 @@ import {
   cx,
   splitObject,
   getValidChildren,
-  omitObject,
   isValidElement,
   isUndefined,
   isArray,
+  pickObject,
 } from '@yamada-ui/utils'
 import { cloneElement, DetailedHTMLProps, FC, OptionHTMLAttributes, ReactElement } from 'react'
 import { FormControlOptions, useFormControlProps, formControlProperties } from '.'
@@ -73,7 +73,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
 
   rest = useFormControlProps({ ...rest, isRequired: isRequired ?? !isUndefined(placeholder) })
 
-  const formControlProps = omitObject(rest, formControlProperties)
+  const formControlProps = pickObject(rest, formControlProperties)
   const computedProps = splitObject(rest, layoutStylesProperties)
 
   let computedChildren: ReactElement[] = []
@@ -106,7 +106,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     <NativeSelectProvider value={styles}>
       <ui.div
         className='ui-native-select-container'
-        __css={{ position: 'relative', w: '100%', h: 'fit-content', color }}
+        __css={{ position: 'relative', w: '100%', h: 'fit-content', color, ...styles.container }}
         {...computedProps[0]}
         {...container}
         {...formControlProps}

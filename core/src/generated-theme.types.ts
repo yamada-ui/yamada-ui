@@ -543,10 +543,6 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
-    NativeSelect: {
-      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
-      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
-    }
     NumberInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})

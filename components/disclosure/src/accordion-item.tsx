@@ -54,7 +54,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
         if (i === -1) return
 
         if (isMultiple && isArray(index)) {
-          console.log(isOpen, index, i)
           setIndex(isOpen ? index.concat(i) : index.filter((v) => v !== i))
         } else if (isOpen) {
           setIndex(i)

@@ -108,7 +108,10 @@ type SelectOptions = {
   icon?: HTMLUIProps<'div'>
 }
 
-export type SelectProps = Omit<HTMLUIProps<'input'>, 'value' | 'defaultValue' | 'onChange'> &
+export type SelectProps = Omit<
+  HTMLUIProps<'input'>,
+  'value' | 'defaultValue' | 'onChange' | 'size'
+> &
   ThemeProps<'Select'> &
   Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton'> &
   FormControlOptions &

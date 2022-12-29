@@ -49,6 +49,8 @@ import {
   RefObject,
   SetStateAction,
   useCallback,
+  useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -75,6 +77,7 @@ export { useSelectDescendant }
 
 type SelectContext = Omit<SelectOptions, 'onChange'> & {
   setValue: Dispatch<SetStateAction<Value>>
+  setDisplayValue: Dispatch<SetStateAction<string>>
   onChange: (value: Value, displayValue: string) => void
   placeholder?: string
   isPlaceholderHidden: boolean
@@ -267,6 +270,7 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
         value={{
           value,
           setValue,
+          setDisplayValue,
           placeholder,
           isPlaceholderHidden,
           onChange,
@@ -507,6 +511,7 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
     value,
     placeholder,
     isPlaceholderHidden,
+    setDisplayValue,
     onChange,
     focusedIndex,
     setFocusedIndex,
@@ -540,31 +545,27 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
   }
 
   const values = descendants.values()
-  const frontValues = values.slice(!isPlaceholderHidden ? 0 : -1, index)
+  const frontValues = values.slice(0, index)
+
   const isDuplicated = frontValues.some(({ node }) => node.dataset.value === computedProps.value)
   const isSelected = !isDuplicated && computedProps.value === value
   const isFocused = index === focusedIndex
+
+  const displayValue = useMemo(
+    () => (children === placeholder ? '' : children ?? ' '),
+    [children, placeholder],
+  )
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
       computedProps.onClick?.(ev)
       if (!isTargetOption(ev.currentTarget)) return
 
-      const displayValue = children === placeholder ? '' : children ?? ' '
-
       onChange(computedProps.value ?? '', displayValue)
 
       if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
     },
-    [
-      computedProps,
-      children,
-      placeholder,
-      onChange,
-      customCloseOnSelect,
-      generalCloseOnSelect,
-      onClose,
-    ],
+    [computedProps, onChange, displayValue, customCloseOnSelect, generalCloseOnSelect, onClose],
   )
 
   const onFocus = useCallback(
@@ -582,6 +583,12 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
     isDisabled,
     isFocusable,
   })
+
+  useEffect(() => {
+    if (!isSelected) return
+
+    setDisplayValue(displayValue)
+  }, [isSelected, displayValue, setDisplayValue])
 
   useUpdateEffect(() => {
     if (!isOpen) return

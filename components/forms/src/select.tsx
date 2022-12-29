@@ -327,7 +327,7 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
             {internalIsOpen || (!!placeholder && !isPlaceholderHidden) ? (
               <SelectList {...list}>
                 {placeholder ? (
-                  <Option value='' hidden={isPlaceholderHidden}>
+                  <Option value='' hidden={isPlaceholderHidden} isDisabled={isPlaceholderHidden}>
                     {placeholder}
                   </Option>
                 ) : null}

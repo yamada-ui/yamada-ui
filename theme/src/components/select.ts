@@ -115,25 +115,21 @@ export const Select: ComponentMultiStyle = {
           _hover: {
             borderColor: ['gray.300', 'whiteAlpha.400'],
           },
-          _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
-          },
           _focus: {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _active: {
-            borderColor: `${focusBorderColor} !important`,
-            boxShadow: `0 0 0 1px ${focusBorderColor} !important`,
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _invalid: {
-            borderColor: `${errorBorderColor} !important`,
-            boxShadow: `0 0 0 1px ${errorBorderColor} !important`,
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            borderColor: `${focusBorderColor} !important`,
-            boxShadow: `0 0 0 1px ${focusBorderColor} !important`,
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
         },
       }
@@ -158,10 +154,6 @@ export const Select: ComponentMultiStyle = {
           bg: ['gray.100', 'whiteAlpha.50'],
           _hover: {
             bg: ['gray.200', 'whiteAlpha.100'],
-          },
-          _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
           },
           _focus: {
             bg: 'transparent',
@@ -201,25 +193,21 @@ export const Select: ComponentMultiStyle = {
           rounded: '0',
           px: '0',
           bg: 'transparent',
-          _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
-          },
           _focus: {
             borderColor: focusBorderColor,
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
           _active: {
-            borderColor: `${focusBorderColor} !important`,
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor} !important`,
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
           _invalid: {
-            borderColor: `${errorBorderColor} !important`,
-            boxShadow: `0px 1px 0px 0px ${errorBorderColor} !important`,
+            borderColor: errorBorderColor,
+            boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
           },
           _focusVisible: {
-            borderColor: `${focusBorderColor} !important`,
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor} !important`,
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
         },
       }

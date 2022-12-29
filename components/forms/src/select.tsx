@@ -32,6 +32,7 @@ import {
   isValidElement,
   mergeRefs,
   omitObject,
+  pickObject,
   splitObject,
   useUnmountEffect,
   useUpdateEffect,
@@ -144,7 +145,7 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
 
   rest = useFormControlProps(rest)
 
-  const formControlProps = omitObject(rest, formControlProperties)
+  const formControlProps = pickObject(rest, formControlProperties)
   const computedProps = splitObject(rest, layoutStylesProperties)
 
   const descendants = useDescendants()
@@ -231,9 +232,10 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
   h = h ?? height
   minH = minH ?? minHeight
 
+  const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []
 
-  if (!children && data.length) {
+  if (!validChildren.length && data.length) {
     computedChildren = data.map(({ label, value, ...props }, i) => {
       if (!isArray(value)) {
         return (
@@ -256,6 +258,8 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
       }
     })
   }
+
+  const internalIsOpen = !!validChildren.length || !!computedChildren.length
 
   return (
     <DescendantsContextProvider value={descendants}>
@@ -292,7 +296,13 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
         >
           <ui.div
             className='ui-select-container'
-            __css={{ position: 'relative', w: '100%', h: 'fit-content', color }}
+            __css={{
+              position: 'relative',
+              w: '100%',
+              h: 'fit-content',
+              color,
+              ...styles.container,
+            }}
             {...computedProps[0]}
             {...container}
             {...formControlProps}
@@ -305,8 +315,8 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
                 value={displayValue}
                 placeholder={placeholder}
                 readOnly={true}
-                data-active={dataAttr(isOpen)}
-                aria-expanded={ariaAttr(isOpen)}
+                data-active={dataAttr(isOpen && internalIsOpen)}
+                aria-expanded={ariaAttr(isOpen && internalIsOpen)}
                 onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
                 __css={{ paddingEnd: '2rem', h, minH, ...styles.field }}
               />
@@ -314,14 +324,16 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
 
             <SelectIcon {...icon} {...formControlProps} />
 
-            <SelectList {...list}>
-              {placeholder ? (
-                <Option value='' hidden={isPlaceholderHidden}>
-                  {placeholder}
-                </Option>
-              ) : null}
-              {children ?? computedChildren}
-            </SelectList>
+            {internalIsOpen || (!!placeholder && !isPlaceholderHidden) ? (
+              <SelectList {...list}>
+                {placeholder ? (
+                  <Option value='' hidden={isPlaceholderHidden}>
+                    {placeholder}
+                  </Option>
+                ) : null}
+                {children ?? computedChildren}
+              </SelectList>
+            ) : null}
           </ui.div>
         </Popover>
       </SelectProvider>

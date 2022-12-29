@@ -3,7 +3,20 @@ import { getColor, isArray } from '@yamada-ui/utils'
 
 export const Select: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
+    container: {
+      _readOnly: {
+        pointerEvents: 'none',
+        '& > input, select': {
+          cursor: 'default',
+          _placeholder: {
+            color: 'inherit',
+          },
+        },
+      },
+      _placeholder: {
+        color: 'inherit',
+      },
+    },
     field: {
       cursor: 'pointer',
       width: '100%',
@@ -107,23 +120,20 @@ export const Select: ComponentMultiStyle = {
             userSelect: 'all',
           },
           _focus: {
-            zIndex: 1,
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _active: {
-            zIndex: 1,
             borderColor: `${focusBorderColor} !important`,
             boxShadow: `0 0 0 1px ${focusBorderColor} !important`,
           },
           _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+            borderColor: `${errorBorderColor} !important`,
+            boxShadow: `0 0 0 1px ${errorBorderColor} !important`,
           },
           _focusVisible: {
-            zIndex: 1,
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+            borderColor: `${focusBorderColor} !important`,
+            boxShadow: `0 0 0 1px ${focusBorderColor} !important`,
           },
         },
       }
@@ -200,16 +210,16 @@ export const Select: ComponentMultiStyle = {
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
           _active: {
-            borderColor: focusBorderColor,
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+            borderColor: `${focusBorderColor} !important`,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor} !important`,
           },
           _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
+            borderColor: `${errorBorderColor} !important`,
+            boxShadow: `0px 1px 0px 0px ${errorBorderColor} !important`,
           },
           _focusVisible: {
-            borderColor: focusBorderColor,
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+            borderColor: `${focusBorderColor} !important`,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor} !important`,
           },
         },
       }

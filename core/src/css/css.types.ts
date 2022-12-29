@@ -61,7 +61,7 @@ type StyleDefinition<Y> = Y | string | RecursiveStyles<Y | string>
 type PseudoDefinition<Y> = Y | RecursivePseudos<Y>
 
 export type RecursiveStyles<Y> = {
-  [key: string]: StyleDefinition<Y> & Y
+  [key: string]: (StyleDefinition<Y> | PseudoDefinition<Y>) & Y
 }
 
 export type RecursivePseudos<Y> = {

@@ -20,7 +20,7 @@ export const pseudos = {
   _selected: '&[aria-selected=true], &[data-selected]',
   _hidden: '&[hidden], &[data-hidden]',
   _visited: '&:visited',
-  _placeholder: '&::placeholder',
+  _placeholder: '&[data-placeholder], &::placeholder',
   _even: '&:nth-of-type(even)',
   _odd: '&:nth-of-type(odd)',
   _first: '&:first-of-type',

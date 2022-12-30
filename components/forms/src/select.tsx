@@ -49,7 +49,6 @@ import {
   RefObject,
   SetStateAction,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -540,7 +539,7 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
     )
   }
 
-  const values = descendants.enabledValues()
+  const values = descendants.values()
   const frontValues = values.slice(0, index)
 
   const isDuplicated = frontValues.some(({ node }) => node.dataset.value === computedProps.value)
@@ -577,11 +576,11 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
     isFocusable,
   })
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     if (!isSelected) return
 
     setDisplayValue(displayValue)
-  }, [isSelected, displayValue, setDisplayValue])
+  }, [values, isSelected, displayValue, setDisplayValue])
 
   useUpdateEffect(() => {
     if (!isOpen) return

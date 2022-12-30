@@ -3,20 +3,7 @@ import { getColor, isArray } from '@yamada-ui/utils'
 
 export const Select: ComponentMultiStyle = {
   baseStyle: {
-    container: {
-      _readOnly: {
-        pointerEvents: 'none',
-        '& > input, select': {
-          cursor: 'default',
-          _placeholder: {
-            color: 'inherit',
-          },
-        },
-      },
-      _placeholder: {
-        color: 'inherit',
-      },
-    },
+    container: {},
     field: {
       cursor: 'pointer',
       width: '100%',
@@ -46,6 +33,12 @@ export const Select: ComponentMultiStyle = {
       },
       '&:invalid': {
         color: ['gray.500', 'whiteAlpha.400'],
+      },
+      _readOnly: {
+        pointerEvents: 'none',
+        _placeholder: {
+          color: 'inherit !important',
+        },
       },
     },
     icon: {

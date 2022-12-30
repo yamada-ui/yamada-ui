@@ -50,7 +50,6 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -66,19 +65,13 @@ export type UIOption = Omit<OptionProps, 'value'> & {
 const isTargetOption = (target: EventTarget | null) =>
   isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('select-item')
 
-const {
-  DescendantsContextProvider,
-  useDescendantsContext,
-  useDescendants,
-  useDescendant: useSelectDescendant,
-} = createDescendant<HTMLElement>()
-
-export { useSelectDescendant }
+const { DescendantsContextProvider, useDescendantsContext, useDescendants, useDescendant } =
+  createDescendant<HTMLElement>()
 
 type SelectContext = Omit<SelectOptions, 'onChange'> & {
   setValue: Dispatch<SetStateAction<Value>>
-  setDisplayValue: Dispatch<SetStateAction<string>>
-  onChange: (value: Value, displayValue: string) => void
+  setDisplayValue: Dispatch<SetStateAction<string | undefined>>
+  onChange: (value: Value, displayValue?: string) => void
   placeholder?: string
   isPlaceholderHidden: boolean
   isOpen: boolean
@@ -112,16 +105,13 @@ type SelectOptions = {
   option?: Omit<OptionProps, 'value' | 'children'>
 }
 
-export type SelectProps = Omit<
-  HTMLUIProps<'input'>,
-  'value' | 'defaultValue' | 'onChange' | 'size' | 'list'
-> &
+export type SelectProps = Omit<HTMLUIProps<'div'>, 'defaultValue' | 'onChange'> &
   ThemeProps<'Select'> &
   Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton'> &
   FormControlOptions &
   SelectOptions
 
-export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
+export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('Select', props)
   let {
     className,
@@ -189,13 +179,13 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
   const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
   const [value, setValue] = useControllableState({
     value: rest.value,
-    defaultValue: rest.defaultValue ?? '',
+    defaultValue: rest.defaultValue,
     onChange: rest.onChange,
   })
-  const [displayValue, setDisplayValue] = useState<string>('')
+  const [displayValue, setDisplayValue] = useState<string | undefined>(undefined)
 
   const onChange = useCallback(
-    (value: Value, displayValue: string) => {
+    (value: Value, displayValue?: string) => {
       setValue(value)
       setDisplayValue(displayValue)
     },
@@ -260,7 +250,7 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
     })
   }
 
-  const internalIsOpen = !!validChildren.length || !!computedChildren.length
+  const trulyIsOpen = !!validChildren.length || !!computedChildren.length
 
   return (
     <DescendantsContextProvider value={descendants}>
@@ -310,26 +300,34 @@ export const Select = forwardRef<SelectProps, 'input'>((props, ref) => {
             {...formControlProps}
           >
             <PopoverTrigger>
-              <ui.input
+              <ui.div
                 ref={ref}
                 className={cx('ui-select', className)}
                 {...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange'])}
-                value={displayValue}
-                placeholder={placeholder}
-                readOnly={true}
-                data-active={dataAttr(isOpen && internalIsOpen)}
-                aria-expanded={ariaAttr(isOpen && internalIsOpen)}
+                tabIndex={0}
+                data-active={dataAttr(isOpen && trulyIsOpen)}
+                data-placeholder={dataAttr(displayValue === undefined)}
+                aria-expanded={ariaAttr(isOpen && trulyIsOpen)}
                 onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-                __css={{ paddingEnd: '2rem', h, minH, ...styles.field }}
-              />
+                __css={{
+                  paddingEnd: '2rem',
+                  h,
+                  minH,
+                  display: 'flex',
+                  alignItems: 'center',
+                  ...styles.field,
+                }}
+              >
+                <ui.span>{displayValue ?? placeholder}</ui.span>
+              </ui.div>
             </PopoverTrigger>
 
             <SelectIcon {...icon} {...formControlProps} />
 
-            {internalIsOpen || (!!placeholder && !isPlaceholderHidden) ? (
+            {trulyIsOpen || (!!placeholder && !isPlaceholderHidden) ? (
               <SelectList {...list}>
                 {placeholder ? (
-                  <Option value='' hidden={isPlaceholderHidden} isDisabled={isPlaceholderHidden}>
+                  <Option hidden={isPlaceholderHidden} isDisabled={isPlaceholderHidden}>
                     {placeholder}
                   </Option>
                 ) : null}
@@ -534,25 +532,22 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
   const trulyDisabled = isDisabled && !isFocusable
 
   const itemRef = useRef<HTMLLIElement>(null)
-  const { index, register, descendants } = useSelectDescendant({ disabled: trulyDisabled })
+  const { index, register, descendants } = useDescendant({ disabled: trulyDisabled })
 
-  if (!!placeholder && index !== 0 && !isPlaceholderHidden && !computedProps.value) {
+  if (!!placeholder && index > 0 && !isPlaceholderHidden && !computedProps.value) {
     console.warn(
-      `If placeholders are present, All options must be set value.If want to set an empty value, either don't set the placeholder or set 'isPlaceholderHidden' to true.`,
+      `If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'isPlaceholderHidden' to true.`,
     )
   }
 
-  const values = descendants.values()
+  const values = descendants.enabledValues()
   const frontValues = values.slice(0, index)
 
   const isDuplicated = frontValues.some(({ node }) => node.dataset.value === computedProps.value)
   const isSelected = !isDuplicated && computedProps.value === value
   const isFocused = index === focusedIndex
 
-  const displayValue = useMemo(
-    () => (children === placeholder ? '' : children ?? ' '),
-    [children, placeholder],
-  )
+  const displayValue = !placeholder || index !== 0 ? children ?? '' : undefined
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {

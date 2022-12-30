@@ -97,8 +97,6 @@ const [SelectProvider, useSelect] = createContext<SelectContext>({
   name: 'SelectContext',
 })
 
-export { useSelect }
-
 type SelectOptions = {
   value?: Value
   defaultValue?: Value

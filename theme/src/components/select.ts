@@ -36,6 +36,14 @@ export const Select: ComponentMultiStyle = {
         opacity: 0.4,
         cursor: 'not-allowed',
       },
+      _placeholder: {
+        color: 'gray.500',
+      },
+      _dark: {
+        _placeholder: {
+          color: 'whiteAlpha.400',
+        },
+      },
       '&:invalid': {
         color: ['gray.500', 'whiteAlpha.400'],
       },

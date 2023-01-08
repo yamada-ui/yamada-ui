@@ -16,6 +16,9 @@ export const Button: ComponentStyle = {
       cursor: 'not-allowed',
       boxShadow: 'none',
     },
+    _readOnly: {
+      cursor: 'default',
+    },
     _hover: {
       _disabled: {
         bg: ['initial', 'initial'],

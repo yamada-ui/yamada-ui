@@ -2,7 +2,7 @@ import { createPopper, Instance, Modifier, VirtualElement, Placement } from '@po
 import { Token } from '@yamada-ui/core'
 import { mergeRefs, PropGetter } from '@yamada-ui/utils'
 import { useCallback, useEffect, useRef } from 'react'
-import { useValue } from './'
+import { useValue } from '.'
 
 export type UsePopperProps = {
   enabled?: boolean

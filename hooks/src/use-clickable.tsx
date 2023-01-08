@@ -1,6 +1,6 @@
 import { dataAttr, mergeRefs } from '@yamada-ui/utils'
 import { HTMLAttributes, KeyboardEvent, MouseEvent, Ref, useCallback, useState } from 'react'
-import { useEventListeners } from './'
+import { useEventListeners } from '.'
 
 export type UseClickableProps = HTMLAttributes<HTMLElement> & {
   isDisabled?: boolean

@@ -1,5 +1,5 @@
-import { ComponentStyle, isDefaultColor } from '@yamada-ui/core'
-import { transparentizeColor, toneColor } from '@yamada-ui/utils'
+import { ComponentStyle, isDefaultColor, mode } from '@yamada-ui/core'
+import { transparentizeColor, toneColor, isArray, getColor } from '@yamada-ui/utils'
 
 export const Button: ComponentStyle = {
   baseStyle: {
@@ -30,9 +30,17 @@ export const Button: ComponentStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
+    solid: ({
+      theme: t,
+      colorScheme: s,
+      colorStyle: c = 'gray',
+      errorBorderColor: ec = ['red.500', 'red.300'],
+    }) => {
       const isGray = c === 'gray'
       const isAccessible = c === 'yellow' || c === 'cyan'
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
+        : getColor(ec, ec)(t, s)
 
       return {
         bg: isDefaultColor(
@@ -61,6 +69,11 @@ export const Button: ComponentStyle = {
             )(c),
           },
         },
+        _invalid: {
+          border: '1px solid',
+          borderColor: errorBorderColor,
+          boxShadow: `0 0 0 1px ${errorBorderColor}`,
+        },
         _active: {
           bg: isDefaultColor(
             [toneColor(c, 700)(t, s), toneColor(c, 400)(t, s)],
@@ -71,8 +84,16 @@ export const Button: ComponentStyle = {
         },
       }
     },
-    outline: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
+    outline: ({
+      theme: t,
+      colorScheme: s,
+      colorStyle: c = 'gray',
+      errorBorderColor: ec = ['red.500', 'red.300'],
+    }) => {
       const isGray = c === 'gray'
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
+        : getColor(ec, ec)(t, s)
 
       return {
         border: '1px solid',
@@ -92,6 +113,10 @@ export const Button: ComponentStyle = {
               ? [`gray.100`, `whiteAlpha.200`]
               : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
           )(c),
+        },
+        _invalid: {
+          borderColor: errorBorderColor,
+          boxShadow: `0 0 0 1px ${errorBorderColor}`,
         },
         _active: {
           bg: isDefaultColor(
@@ -131,8 +156,16 @@ export const Button: ComponentStyle = {
         },
       },
     }),
-    ghost: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
+    ghost: ({
+      theme: t,
+      colorScheme: s,
+      colorStyle: c = 'gray',
+      errorBorderColor: ec = ['red.500', 'red.300'],
+    }) => {
       const isGray = c === 'gray'
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
+        : getColor(ec, ec)(t, s)
 
       return {
         color: isDefaultColor(
@@ -147,6 +180,11 @@ export const Button: ComponentStyle = {
               ? [`gray.100`, `whiteAlpha.200`]
               : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
           )(c),
+        },
+        _invalid: {
+          border: '1px solid',
+          borderColor: errorBorderColor,
+          boxShadow: `0 0 0 1px ${errorBorderColor}`,
         },
         _active: {
           bg: isDefaultColor(

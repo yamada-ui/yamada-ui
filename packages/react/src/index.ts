@@ -2,13 +2,10 @@ export * from './extend-theme'
 export * from './with-default'
 export * from './extend-config'
 
-// general
 export * from '@yamada-ui/core'
 export * from '@yamada-ui/utils'
 export * from '@yamada-ui/theme'
 export * from '@yamada-ui/providers'
-
-// components
 export * from '@yamada-ui/accordion'
 export * from '@yamada-ui/alert'
 export * from '@yamada-ui/badge'
@@ -52,8 +49,6 @@ export * from '@yamada-ui/textarea'
 export * from '@yamada-ui/tooltip'
 export * from '@yamada-ui/transitions'
 export * from '@yamada-ui/typography'
-
-// hooks
 export * from '@yamada-ui/use-animation'
 export * from '@yamada-ui/use-boolean'
 export * from '@yamada-ui/use-breakpoint'

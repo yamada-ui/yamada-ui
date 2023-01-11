@@ -1,0 +1,39 @@
+{
+  "name": "@yamada-ui/markdown",
+  "version": "1.0.0",
+  "description": "Yamada UI markdown component",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "JSX=1 tsup  src/index.ts --dts",
+    "build:fast": "JSX=1 tsup src/index.ts",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/use-value": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "react-markdown": "^8.0.3",
+    "react-syntax-highlighter": "^15.5.0",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1"
+  },
+  "devDependencies": {
+    "react": "^18.0.0",
+    "clean-package": "2.1.1",
+    "@types/react-syntax-highlighter": "^15.5.6"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

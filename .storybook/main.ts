@@ -1,4 +1,5 @@
 import { StorybookConfig } from '@storybook/core-common'
+import fs from 'fs'
 
 const path = (target: string) => `${process.cwd()}/${target}`
 
@@ -7,7 +8,7 @@ const config: StorybookConfig = {
     builder: '@storybook/builder-webpack5',
     disableTelemetry: true,
   },
-  stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../stories/**/*.stories.@(tsx|mdx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -16,13 +17,7 @@ const config: StorybookConfig = {
   ],
   framework: '@storybook/react',
   typescript: {
-    check: false,
-    checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop: any) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-    },
+    reactDocgen: false,
   },
   webpackFinal: async (config) => {
     if (config.resolve?.alias) {

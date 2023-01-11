@@ -95,8 +95,8 @@ importers:
       '@types/react-dom': 18.0.6
       '@typescript-eslint/eslint-plugin': 5.30.3_zxrs3zaorod2ojwxbylsbla7eq
       '@typescript-eslint/parser': 5.30.3_4brgkhw6cq4me3drk3kxrpb2mm
-      '@yamada-ui/cli': link:cli
-      '@yamada-ui/react': link:react
+      '@yamada-ui/cli': link:packages/cli
+      '@yamada-ui/react': link:packages/react
       eslint: 8.23.1
       eslint-config-airbnb-typescript: 17.0.0_atq3wdnovkwvfi4asbnjyxarly
       eslint-config-prettier: 8.5.0_eslint@8.23.1
@@ -126,7 +126,81 @@ importers:
       turbo: 1.3.4
       typescript: 4.7.4
 
-  cli:
+  examples/create-react-app:
+    specifiers:
+      '@fortawesome/fontawesome-svg-core': ^6.2.0
+      '@fortawesome/free-brands-svg-icons': ^6.2.0
+      '@fortawesome/free-regular-svg-icons': ^6.2.0
+      '@fortawesome/free-solid-svg-icons': ^6.2.0
+      '@fortawesome/react-fontawesome': ^0.2.0
+      '@types/node': ^16.11.65
+      '@types/react': ^18.0.21
+      '@types/react-dom': ^18.0.6
+      '@yamada-ui/react': workspace:*
+      eslint: 8.19.0
+      eslint-config-react-app: ^7.0.1
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-scripts: 5.0.1
+      typescript: 4.7.4
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.2.0
+      '@fortawesome/free-brands-svg-icons': 6.2.0
+      '@fortawesome/free-regular-svg-icons': 6.2.0
+      '@fortawesome/free-solid-svg-icons': 6.2.0
+      '@fortawesome/react-fontawesome': 0.2.0_6j2wdqxompc6mcokhxkpep2gqu
+      '@yamada-ui/react': link:../../packages/react
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-scripts: 5.0.1_gqi5qmibjkogsznwcpqmzq76tq
+    devDependencies:
+      '@types/node': 16.11.66
+      '@types/react': 18.0.21
+      '@types/react-dom': 18.0.6
+      eslint: 8.19.0
+      eslint-config-react-app: 7.0.1_4x5o4skxv6sl53vpwefgt23khm
+      typescript: 4.7.4
+
+  examples/next-js:
+    specifiers:
+      '@fortawesome/fontawesome-svg-core': ^6.2.0
+      '@fortawesome/free-brands-svg-icons': ^6.2.0
+      '@fortawesome/free-regular-svg-icons': ^6.2.0
+      '@fortawesome/free-solid-svg-icons': ^6.2.0
+      '@fortawesome/react-fontawesome': ^0.2.0
+      '@types/node': 18.8.5
+      '@types/react': 18.0.21
+      '@types/react-dom': 18.0.6
+      '@yamada-ui/react': workspace:*
+      eslint: 8.25.0
+      eslint-config-next: 12.3.1
+      eslint-config-prettier: ^8.5.0
+      next: 12.3.1
+      prettier: ^2.7.1
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      typescript: 4.7.4
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.2.0
+      '@fortawesome/free-brands-svg-icons': 6.2.0
+      '@fortawesome/free-regular-svg-icons': 6.2.0
+      '@fortawesome/free-solid-svg-icons': 6.2.0
+      '@fortawesome/react-fontawesome': 0.2.0_6j2wdqxompc6mcokhxkpep2gqu
+      '@yamada-ui/react': link:../../packages/react
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@types/node': 18.8.5
+      '@types/react': 18.0.21
+      '@types/react-dom': 18.0.6
+      eslint: 8.25.0
+      eslint-config-next: 12.3.1_l76llshcx5hpzqzl7lfng4kpb4
+      eslint-config-prettier: 8.5.0_eslint@8.25.0
+      prettier: 2.7.1
+      typescript: 4.7.4
+
+  packages/cli:
     specifiers:
       '@swc/core': ^1.2.177
       '@types/cli-welcome': ^2.2.0
@@ -171,27 +245,340 @@ importers:
       typescript: 4.7.4
       unbuild: 0.7.4
 
-  components/components:
+  packages/components/accordion:
     specifiers:
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/transitions': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
-      '@yamada-ui/media-and-icons': link:../media-and-icons
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/motion': link:../motion
+      '@yamada-ui/transitions': link:../transitions
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/data-display:
+  packages/components/alert:
     specifiers:
-      '@types/react-syntax-highlighter': ^15.5.5
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/loading': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/loading': link:../loading
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/badge:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/breadcrumb:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/button:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/loading': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/loading': link:../loading
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/card:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/checkbox:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/layouts': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-focus-visible': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/layouts': link:../layouts
+      '@yamada-ui/motion': link:../motion
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-focus-visible': link:../../hooks/use-focus-visible
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/close-button:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/editable:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-focus': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-focus': link:../../hooks/use-focus
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/file-button:
+    specifiers:
+      '@yamada-ui/button': workspace:*
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/button': link:../button
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/focus-lock:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+      react-focus-lock: ^2.9.1
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+      react-focus-lock: 2.9.1_react@18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/form-control:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/highlight:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/typography': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/typography': link:../typography
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/icon:
+    specifiers:
+      '@fortawesome/fontawesome-svg-core': ^6.2.0
+      '@fortawesome/react-fontawesome': ^0.2.0
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-token': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.2.0
+      '@fortawesome/react-fontawesome': 0.2.0_6j2wdqxompc6mcokhxkpep2gqu
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-token': link:../../hooks/use-token
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/image:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/input:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/use-token': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/use-token': link:../../hooks/use-token
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/kbd:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/layouts:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/link:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/list:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/loading:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-token': workspace:*
+      '@yamada-ui/use-value': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+      react-loader-spinner: ^5.3.4
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-token': link:../../hooks/use-token
+      '@yamada-ui/use-value': link:../../hooks/use-value
+      '@yamada-ui/utils': link:../../utils
+      react-loader-spinner: 5.3.4_react@18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/markdown:
+    specifiers:
+      '@types/react-syntax-highlighter': ^15.5.6
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-value': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
@@ -201,202 +588,443 @@ importers:
       remark-gfm: ^3.0.1
     dependencies:
       '@yamada-ui/core': link:../../core
-      '@yamada-ui/hooks': link:../../hooks
-      '@yamada-ui/media-and-icons': link:../media-and-icons
+      '@yamada-ui/use-value': link:../../hooks/use-value
       '@yamada-ui/utils': link:../../utils
       react-markdown: 8.0.3_react@18.2.0
       react-syntax-highlighter: 15.5.0_react@18.2.0
       rehype-raw: 6.1.1
       remark-gfm: 3.0.1
     devDependencies:
-      '@types/react-syntax-highlighter': 15.5.5
+      '@types/react-syntax-highlighter': 15.5.6
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/disclosure:
+  packages/components/menu:
     specifiers:
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/popover': workspace:*
       '@yamada-ui/transitions': workspace:*
+      '@yamada-ui/use-clickable': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/use-disclosure': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
-      '@yamada-ui/hooks': link:../../hooks
-      '@yamada-ui/media-and-icons': link:../media-and-icons
+      '@yamada-ui/popover': link:../popover
       '@yamada-ui/transitions': link:../transitions
+      '@yamada-ui/use-clickable': link:../../hooks/use-clickable
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
+      '@yamada-ui/use-disclosure': link:../../hooks/use-disclosure
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/feedback:
+  packages/components/modal:
     specifiers:
-      '@yamada-ui/components': workspace:*
+      '@yamada-ui/button': workspace:*
+      '@yamada-ui/close-button': workspace:*
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/focus-lock': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/portal': workspace:*
+      '@yamada-ui/transitions': workspace:*
+      '@yamada-ui/use-value': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+      react-remove-scroll: ^2.5.4
+    dependencies:
+      '@yamada-ui/button': link:../button
+      '@yamada-ui/close-button': link:../close-button
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/focus-lock': link:../focus-lock
+      '@yamada-ui/motion': link:../motion
+      '@yamada-ui/portal': link:../portal
+      '@yamada-ui/transitions': link:../transitions
+      '@yamada-ui/use-value': link:../../hooks/use-value
+      '@yamada-ui/utils': link:../../utils
+      react-remove-scroll: 2.5.5_react@18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/motion:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      framer-motion: ^6.2.9
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+      framer-motion: 6.5.1_react@18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/native-select:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/notice:
+    specifiers:
+      '@yamada-ui/alert': workspace:*
+      '@yamada-ui/close-button': workspace:*
+      '@yamada-ui/core': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
       react-loader-spinner: ^5.3.4
     dependencies:
-      '@yamada-ui/components': link:../components
+      '@yamada-ui/alert': link:../alert
+      '@yamada-ui/close-button': link:../close-button
       '@yamada-ui/core': link:../../core
-      '@yamada-ui/hooks': link:../../hooks
-      '@yamada-ui/media-and-icons': link:../media-and-icons
       '@yamada-ui/utils': link:../../utils
       react-loader-spinner: 5.3.4_react@18.2.0
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/forms:
+  packages/components/number-input:
     specifiers:
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/feedback': workspace:*
-      '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/layouts': workspace:*
-      '@yamada-ui/media-and-icons': workspace:*
-      '@yamada-ui/overlay': workspace:*
-      '@yamada-ui/utils': workspace:*
-      clean-package: 2.1.1
-      framer-motion: ^6.2.9
-      react: ^18.2.0
-    dependencies:
-      '@yamada-ui/core': link:../../core
-      '@yamada-ui/feedback': link:../feedback
-      '@yamada-ui/hooks': link:../../hooks
-      '@yamada-ui/layouts': link:../layouts
-      '@yamada-ui/media-and-icons': link:../media-and-icons
-      '@yamada-ui/overlay': link:../overlay
-      '@yamada-ui/utils': link:../../utils
-      framer-motion: 6.5.1_react@18.2.0
-    devDependencies:
-      clean-package: 2.1.1
-      react: 18.2.0
-
-  components/layouts:
-    specifiers:
-      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/use-counter': workspace:*
+      '@yamada-ui/use-event-listener': workspace:*
+      '@yamada-ui/use-interval': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/use-counter': link:../../hooks/use-counter
+      '@yamada-ui/use-event-listener': link:../../hooks/use-event-listener
+      '@yamada-ui/use-interval': link:../../hooks/use-interval
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/media-and-icons:
-    specifiers:
-      '@fortawesome/fontawesome-svg-core': ^6.2.0
-      '@fortawesome/react-fontawesome': ^0.2.0
-      '@yamada-ui/core': workspace:*
-      '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/utils': workspace:*
-      clean-package: 2.1.1
-      react: ^18.2.0
-    dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.2.0
-      '@fortawesome/react-fontawesome': 0.2.0_6j2wdqxompc6mcokhxkpep2gqu
-      '@yamada-ui/core': link:../../core
-      '@yamada-ui/hooks': link:../../hooks
-      '@yamada-ui/utils': link:../../utils
-    devDependencies:
-      clean-package: 2.1.1
-      react: 18.2.0
-
-  components/motion:
+  packages/components/pin-input:
     specifiers:
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/utils': workspace:*
-      clean-package: 2.1.1
-      framer-motion: ^6.2.9
-      react: ^18.2.0
-    dependencies:
-      '@yamada-ui/core': link:../../core
-      '@yamada-ui/utils': link:../../utils
-      framer-motion: 6.5.1_react@18.2.0
-    devDependencies:
-      clean-package: 2.1.1
-      react: 18.2.0
-
-  components/navigation:
-    specifiers:
-      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/overlay:
+  packages/components/popover:
     specifiers:
-      '@yamada-ui/components': workspace:*
+      '@yamada-ui/close-button': workspace:*
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/forms': workspace:*
-      '@yamada-ui/hooks': workspace:*
+      '@yamada-ui/motion': workspace:*
       '@yamada-ui/transitions': workspace:*
+      '@yamada-ui/use-animation': workspace:*
+      '@yamada-ui/use-disclosure': workspace:*
+      '@yamada-ui/use-focus': workspace:*
+      '@yamada-ui/use-popper': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
-      framer-motion: ^6.2.9
       react: ^18.2.0
-      react-remove-scroll: ^2.5.4
     dependencies:
-      '@yamada-ui/components': link:../components
+      '@yamada-ui/close-button': link:../close-button
       '@yamada-ui/core': link:../../core
-      '@yamada-ui/forms': link:../forms
-      '@yamada-ui/hooks': link:../../hooks
+      '@yamada-ui/motion': link:../motion
       '@yamada-ui/transitions': link:../transitions
+      '@yamada-ui/use-animation': link:../../hooks/use-animation
+      '@yamada-ui/use-disclosure': link:../../hooks/use-disclosure
+      '@yamada-ui/use-focus': link:../../hooks/use-focus
+      '@yamada-ui/use-popper': link:../../hooks/use-popper
       '@yamada-ui/utils': link:../../utils
-      framer-motion: 6.5.1_react@18.2.0
-      react-remove-scroll: 2.5.5_react@18.2.0
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  components/transitions:
+  packages/components/portal:
     specifiers:
-      '@yamada-ui/core': workspace:*
-      '@yamada-ui/hooks': workspace:*
-      '@yamada-ui/utils': workspace:*
-      clean-package: 2.1.1
-      framer-motion: ^6.2.9
-      react: ^18.2.0
-    dependencies:
-      '@yamada-ui/core': link:../../core
-      '@yamada-ui/hooks': link:../../hooks
-      '@yamada-ui/utils': link:../../utils
-      framer-motion: 6.5.1_react@18.2.0
-    devDependencies:
-      clean-package: 2.1.1
-      react: 18.2.0
-
-  components/typography:
-    specifiers:
-      '@yamada-ui/core': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
-      '@yamada-ui/core': link:../../core
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  core:
+  packages/components/progress:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-animation': workspace:*
+      '@yamada-ui/use-token': workspace:*
+      '@yamada-ui/use-value': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-animation': link:../../hooks/use-animation
+      '@yamada-ui/use-token': link:../../hooks/use-token
+      '@yamada-ui/use-value': link:../../hooks/use-value
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/radio:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/layouts': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-focus-visible': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/layouts': link:../layouts
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-focus-visible': link:../../hooks/use-focus-visible
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/segmented-control:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/use-focus-visible': workspace:*
+      '@yamada-ui/use-resize-observer': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
+      '@yamada-ui/use-focus-visible': link:../../hooks/use-focus-visible
+      '@yamada-ui/use-resize-observer': link:../../hooks/use-resize-observer
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/select:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/popover': workspace:*
+      '@yamada-ui/use-clickable': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/use-disclosure': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/popover': link:../popover
+      '@yamada-ui/use-clickable': link:../../hooks/use-clickable
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
+      '@yamada-ui/use-disclosure': link:../../hooks/use-disclosure
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/slider:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-latest-ref': workspace:*
+      '@yamada-ui/use-pan-event': workspace:*
+      '@yamada-ui/use-size': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-latest-ref': link:../../hooks/use-latest-ref
+      '@yamada-ui/use-pan-event': link:../../hooks/use-pan-event
+      '@yamada-ui/use-size': link:../../hooks/use-size
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/switch:
+    specifiers:
+      '@yamada-ui/checkbox': workspace:*
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/checkbox': link:../checkbox
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/motion': link:../motion
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/tabs:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-clickable': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/use-disclosure': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-clickable': link:../../hooks/use-clickable
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
+      '@yamada-ui/use-disclosure': link:../../hooks/use-disclosure
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/tag:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/icon': link:../icon
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/textarea:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/tooltip:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/portal': workspace:*
+      '@yamada-ui/transitions': workspace:*
+      '@yamada-ui/use-disclosure': workspace:*
+      '@yamada-ui/use-event-listener': workspace:*
+      '@yamada-ui/use-popper': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/motion': link:../motion
+      '@yamada-ui/portal': link:../portal
+      '@yamada-ui/transitions': link:../transitions
+      '@yamada-ui/use-disclosure': link:../../hooks/use-disclosure
+      '@yamada-ui/use-event-listener': link:../../hooks/use-event-listener
+      '@yamada-ui/use-popper': link:../../hooks/use-popper
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/transitions:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/use-value': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/motion': link:../motion
+      '@yamada-ui/use-value': link:../../hooks/use-value
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/components/typography:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/layouts': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      '@yamada-ui/layouts': link:../layouts
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/core:
     specifiers:
       '@emotion/react': ^11.10.4
       '@emotion/styled': ^11.10.4
+      '@yamada-ui/portal': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       csstype: ^3.1.1
@@ -406,176 +1034,445 @@ importers:
     dependencies:
       '@emotion/react': 11.10.4_react@18.2.0
       '@emotion/styled': 11.10.4_gyryel6m34lsxtsejhafetjriq
+      '@yamada-ui/portal': link:../components/portal
       '@yamada-ui/utils': link:../utils
       csstype: 3.1.1
-      framer-motion: 6.5.1_react@18.2.0
       react-fast-compare: 3.2.0
     devDependencies:
       clean-package: 2.1.1
+      framer-motion: 6.5.1_react@18.2.0
       react: 18.2.0
 
-  examples/create-react-app:
+  packages/hooks/use-animation:
     specifiers:
-      '@fortawesome/fontawesome-svg-core': ^6.2.0
-      '@fortawesome/free-brands-svg-icons': ^6.2.0
-      '@fortawesome/free-regular-svg-icons': ^6.2.0
-      '@fortawesome/free-solid-svg-icons': ^6.2.0
-      '@fortawesome/react-fontawesome': ^0.2.0
-      '@types/node': ^16.11.65
-      '@types/react': ^18.0.21
-      '@types/react-dom': ^18.0.6
-      '@yamada-ui/react': workspace:*
-      eslint: 8.19.0
-      eslint-config-react-app: ^7.0.1
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      react-scripts: 5.0.1
-      typescript: 4.7.4
-    dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.2.0
-      '@fortawesome/free-brands-svg-icons': 6.2.0
-      '@fortawesome/free-regular-svg-icons': 6.2.0
-      '@fortawesome/free-solid-svg-icons': 6.2.0
-      '@fortawesome/react-fontawesome': 0.2.0_6j2wdqxompc6mcokhxkpep2gqu
-      '@yamada-ui/react': link:../../react
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-scripts: 5.0.1_gqi5qmibjkogsznwcpqmzq76tq
-    devDependencies:
-      '@types/node': 16.11.66
-      '@types/react': 18.0.21
-      '@types/react-dom': 18.0.6
-      eslint: 8.19.0
-      eslint-config-react-app: 7.0.1_4x5o4skxv6sl53vpwefgt23khm
-      typescript: 4.7.4
-
-  examples/next-js:
-    specifiers:
-      '@fortawesome/fontawesome-svg-core': ^6.2.0
-      '@fortawesome/free-brands-svg-icons': ^6.2.0
-      '@fortawesome/free-regular-svg-icons': ^6.2.0
-      '@fortawesome/free-solid-svg-icons': ^6.2.0
-      '@fortawesome/react-fontawesome': ^0.2.0
-      '@types/node': 18.8.5
-      '@types/react': 18.0.21
-      '@types/react-dom': 18.0.6
-      '@yamada-ui/react': workspace:*
-      eslint: 8.25.0
-      eslint-config-next: 12.3.1
-      eslint-config-prettier: ^8.5.0
-      next: 12.3.1
-      prettier: ^2.7.1
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      typescript: 4.7.4
-    dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.2.0
-      '@fortawesome/free-brands-svg-icons': 6.2.0
-      '@fortawesome/free-regular-svg-icons': 6.2.0
-      '@fortawesome/free-solid-svg-icons': 6.2.0
-      '@fortawesome/react-fontawesome': 0.2.0_6j2wdqxompc6mcokhxkpep2gqu
-      '@yamada-ui/react': link:../../react
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    devDependencies:
-      '@types/node': 18.8.5
-      '@types/react': 18.0.21
-      '@types/react-dom': 18.0.6
-      eslint: 8.25.0
-      eslint-config-next: 12.3.1_l76llshcx5hpzqzl7lfng4kpb4
-      eslint-config-prettier: 8.5.0_eslint@8.25.0
-      prettier: 2.7.1
-      typescript: 4.7.4
-
-  hooks:
-    specifiers:
-      '@popperjs/core': ^2.9.3
       '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-boolean': workspace:*
+      '@yamada-ui/use-event-listener': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       csstype: ^3.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-boolean': link:../use-boolean
+      '@yamada-ui/use-event-listener': link:../use-event-listener
+      '@yamada-ui/utils': link:../../utils
+      csstype: 3.1.1
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-boolean:
+    specifiers:
+      clean-package: 2.1.1
+      react: ^18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-breakpoint:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-clickable:
+    specifiers:
+      '@yamada-ui/use-event-listener': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/use-event-listener': link:../use-event-listener
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-controllable-state:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-counter:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-descendant:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-disclosure:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-event-listener:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-focus:
+    specifiers:
+      '@yamada-ui/use-event-listener': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/use-event-listener': link:../use-event-listener
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-focus-visible:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-interval:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-latest-ref:
+    specifiers:
+      clean-package: 2.1.1
+      react: ^18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-outside-click:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-pan-event:
+    specifiers:
+      '@yamada-ui/use-latest-ref': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
       framesync: 5.3.0
       react: ^18.2.0
     dependencies:
-      '@popperjs/core': 2.11.6
-      '@yamada-ui/core': link:../core
-      '@yamada-ui/utils': link:../utils
-      csstype: 3.1.1
+      '@yamada-ui/use-latest-ref': link:../use-latest-ref
+      '@yamada-ui/utils': link:../../utils
       framesync: 5.3.0
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  providers:
+  packages/hooks/use-popper:
+    specifiers:
+      '@popperjs/core': ^2.9.3
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-value': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@popperjs/core': 2.11.6
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-value': link:../use-value
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-resize-observer:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-size:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-timeout:
+    specifiers:
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-token:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/hooks/use-value:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/use-breakpoint': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/use-breakpoint': link:../use-breakpoint
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
+  packages/providers:
     specifiers:
       '@emotion/react': ^11.10.4
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/feedback': workspace:*
-      '@yamada-ui/hooks': workspace:*
+      '@yamada-ui/loading': workspace:*
+      '@yamada-ui/motion': workspace:*
+      '@yamada-ui/notice': workspace:*
+      '@yamada-ui/portal': workspace:*
       '@yamada-ui/theme': workspace:*
+      '@yamada-ui/use-timeout': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
-      framer-motion: ^6.2.9
       react: ^18.2.0
       react-remove-scroll: ^2.5.4
     dependencies:
       '@emotion/react': 11.10.4_react@18.2.0
       '@yamada-ui/core': link:../core
-      '@yamada-ui/feedback': link:../components/feedback
-      '@yamada-ui/hooks': link:../hooks
+      '@yamada-ui/loading': link:../components/loading
+      '@yamada-ui/motion': link:../components/motion
+      '@yamada-ui/notice': link:../components/notice
+      '@yamada-ui/portal': link:../components/portal
       '@yamada-ui/theme': link:../theme
+      '@yamada-ui/use-timeout': link:../hooks/use-timeout
       '@yamada-ui/utils': link:../utils
-      framer-motion: 6.5.1_react@18.2.0
       react-remove-scroll: 2.5.5_react@18.2.0
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  react:
+  packages/react:
     specifiers:
-      '@yamada-ui/components': workspace:*
+      '@yamada-ui/accordion': workspace:*
+      '@yamada-ui/alert': workspace:*
+      '@yamada-ui/badge': workspace:*
+      '@yamada-ui/breadcrumb': workspace:*
+      '@yamada-ui/button': workspace:*
+      '@yamada-ui/card': workspace:*
+      '@yamada-ui/checkbox': workspace:*
+      '@yamada-ui/close-button': workspace:*
       '@yamada-ui/core': workspace:*
-      '@yamada-ui/data-display': workspace:*
-      '@yamada-ui/disclosure': workspace:*
-      '@yamada-ui/feedback': workspace:*
-      '@yamada-ui/forms': workspace:*
-      '@yamada-ui/hooks': workspace:*
+      '@yamada-ui/editable': workspace:*
+      '@yamada-ui/file-button': workspace:*
+      '@yamada-ui/focus-lock': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/highlight': workspace:*
+      '@yamada-ui/icon': workspace:*
+      '@yamada-ui/image': workspace:*
+      '@yamada-ui/input': workspace:*
+      '@yamada-ui/kbd': workspace:*
       '@yamada-ui/layouts': workspace:*
-      '@yamada-ui/media-and-icons': workspace:*
+      '@yamada-ui/link': workspace:*
+      '@yamada-ui/list': workspace:*
+      '@yamada-ui/loading': workspace:*
+      '@yamada-ui/markdown': workspace:*
+      '@yamada-ui/menu': workspace:*
+      '@yamada-ui/modal': workspace:*
       '@yamada-ui/motion': workspace:*
-      '@yamada-ui/navigation': workspace:*
-      '@yamada-ui/overlay': workspace:*
+      '@yamada-ui/native-select': workspace:*
+      '@yamada-ui/notice': workspace:*
+      '@yamada-ui/number-input': workspace:*
+      '@yamada-ui/pin-input': workspace:*
+      '@yamada-ui/popover': workspace:*
+      '@yamada-ui/portal': workspace:*
+      '@yamada-ui/progress': workspace:*
       '@yamada-ui/providers': workspace:*
+      '@yamada-ui/radio': workspace:*
+      '@yamada-ui/segmented-control': workspace:*
+      '@yamada-ui/select': workspace:*
+      '@yamada-ui/slider': workspace:*
+      '@yamada-ui/switch': workspace:*
+      '@yamada-ui/tabs': workspace:*
+      '@yamada-ui/tag': workspace:*
+      '@yamada-ui/textarea': workspace:*
       '@yamada-ui/theme': workspace:*
+      '@yamada-ui/tooltip': workspace:*
       '@yamada-ui/transitions': workspace:*
       '@yamada-ui/typography': workspace:*
+      '@yamada-ui/use-animation': workspace:*
+      '@yamada-ui/use-boolean': workspace:*
+      '@yamada-ui/use-breakpoint': workspace:*
+      '@yamada-ui/use-clickable': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-counter': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/use-disclosure': workspace:*
+      '@yamada-ui/use-event-listener': workspace:*
+      '@yamada-ui/use-focus': workspace:*
+      '@yamada-ui/use-focus-visible': workspace:*
+      '@yamada-ui/use-interval': workspace:*
+      '@yamada-ui/use-latest-ref': workspace:*
+      '@yamada-ui/use-outside-click': workspace:*
+      '@yamada-ui/use-pan-event': workspace:*
+      '@yamada-ui/use-popper': workspace:*
+      '@yamada-ui/use-resize-observer': workspace:*
+      '@yamada-ui/use-size': workspace:*
+      '@yamada-ui/use-timeout': workspace:*
+      '@yamada-ui/use-token': workspace:*
+      '@yamada-ui/use-value': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
-      '@yamada-ui/components': link:../components/components
+      '@yamada-ui/accordion': link:../components/accordion
+      '@yamada-ui/alert': link:../components/alert
+      '@yamada-ui/badge': link:../components/badge
+      '@yamada-ui/breadcrumb': link:../components/breadcrumb
+      '@yamada-ui/button': link:../components/button
+      '@yamada-ui/card': link:../components/card
+      '@yamada-ui/checkbox': link:../components/checkbox
+      '@yamada-ui/close-button': link:../components/close-button
       '@yamada-ui/core': link:../core
-      '@yamada-ui/data-display': link:../components/data-display
-      '@yamada-ui/disclosure': link:../components/disclosure
-      '@yamada-ui/feedback': link:../components/feedback
-      '@yamada-ui/forms': link:../components/forms
-      '@yamada-ui/hooks': link:../hooks
+      '@yamada-ui/editable': link:../components/editable
+      '@yamada-ui/file-button': link:../components/file-button
+      '@yamada-ui/focus-lock': link:../components/focus-lock
+      '@yamada-ui/form-control': link:../components/form-control
+      '@yamada-ui/highlight': link:../components/highlight
+      '@yamada-ui/icon': link:../components/icon
+      '@yamada-ui/image': link:../components/image
+      '@yamada-ui/input': link:../components/input
+      '@yamada-ui/kbd': link:../components/kbd
       '@yamada-ui/layouts': link:../components/layouts
-      '@yamada-ui/media-and-icons': link:../components/media-and-icons
+      '@yamada-ui/link': link:../components/link
+      '@yamada-ui/list': link:../components/list
+      '@yamada-ui/loading': link:../components/loading
+      '@yamada-ui/markdown': link:../components/markdown
+      '@yamada-ui/menu': link:../components/menu
+      '@yamada-ui/modal': link:../components/modal
       '@yamada-ui/motion': link:../components/motion
-      '@yamada-ui/navigation': link:../components/navigation
-      '@yamada-ui/overlay': link:../components/overlay
+      '@yamada-ui/native-select': link:../components/native-select
+      '@yamada-ui/notice': link:../components/notice
+      '@yamada-ui/number-input': link:../components/number-input
+      '@yamada-ui/pin-input': link:../components/pin-input
+      '@yamada-ui/popover': link:../components/popover
+      '@yamada-ui/portal': link:../components/portal
+      '@yamada-ui/progress': link:../components/progress
       '@yamada-ui/providers': link:../providers
+      '@yamada-ui/radio': link:../components/radio
+      '@yamada-ui/segmented-control': link:../components/segmented-control
+      '@yamada-ui/select': link:../components/select
+      '@yamada-ui/slider': link:../components/slider
+      '@yamada-ui/switch': link:../components/switch
+      '@yamada-ui/tabs': link:../components/tabs
+      '@yamada-ui/tag': link:../components/tag
+      '@yamada-ui/textarea': link:../components/textarea
       '@yamada-ui/theme': link:../theme
+      '@yamada-ui/tooltip': link:../components/tooltip
       '@yamada-ui/transitions': link:../components/transitions
       '@yamada-ui/typography': link:../components/typography
+      '@yamada-ui/use-animation': link:../hooks/use-animation
+      '@yamada-ui/use-boolean': link:../hooks/use-boolean
+      '@yamada-ui/use-breakpoint': link:../hooks/use-breakpoint
+      '@yamada-ui/use-clickable': link:../hooks/use-clickable
+      '@yamada-ui/use-controllable-state': link:../hooks/use-controllable-state
+      '@yamada-ui/use-counter': link:../hooks/use-counter
+      '@yamada-ui/use-descendant': link:../hooks/use-descendant
+      '@yamada-ui/use-disclosure': link:../hooks/use-disclosure
+      '@yamada-ui/use-event-listener': link:../hooks/use-event-listener
+      '@yamada-ui/use-focus': link:../hooks/use-focus
+      '@yamada-ui/use-focus-visible': link:../hooks/use-focus-visible
+      '@yamada-ui/use-interval': link:../hooks/use-interval
+      '@yamada-ui/use-latest-ref': link:../hooks/use-latest-ref
+      '@yamada-ui/use-outside-click': link:../hooks/use-outside-click
+      '@yamada-ui/use-pan-event': link:../hooks/use-pan-event
+      '@yamada-ui/use-popper': link:../hooks/use-popper
+      '@yamada-ui/use-resize-observer': link:../hooks/use-resize-observer
+      '@yamada-ui/use-size': link:../hooks/use-size
+      '@yamada-ui/use-timeout': link:../hooks/use-timeout
+      '@yamada-ui/use-token': link:../hooks/use-token
+      '@yamada-ui/use-value': link:../hooks/use-value
       '@yamada-ui/utils': link:../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
 
-  theme:
+  packages/theme:
     specifiers:
       '@yamada-ui/core': workspace:*
       '@yamada-ui/utils': workspace:*
@@ -583,15 +1480,13 @@ importers:
       '@yamada-ui/core': link:../core
       '@yamada-ui/utils': link:../utils
 
-  utils:
+  packages/utils:
     specifiers:
       '@ctrl/tinycolor': ^3.4.1
       clean-package: 2.1.1
       react: ^18.2.0
-      react-focus-lock: ^2.9.1
     dependencies:
       '@ctrl/tinycolor': 3.4.1
-      react-focus-lock: 2.9.1_react@18.2.0
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
@@ -2288,7 +3183,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@emotion/memoize': 0.7.4
-    dev: false
     optional: true
 
   /@emotion/is-prop-valid/1.2.0:
@@ -2299,7 +3193,6 @@ packages:
 
   /@emotion/memoize/0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
-    dev: false
     optional: true
 
   /@emotion/memoize/0.8.0:
@@ -2968,7 +3861,6 @@ packages:
       '@motionone/types': 10.14.0
       '@motionone/utils': 10.14.0
       tslib: 2.4.0
-    dev: false
 
   /@motionone/dom/10.12.0:
     resolution: {integrity: sha512-UdPTtLMAktHiqV0atOczNYyDd/d8Cf5fFsd1tua03PqTwwCe/6lwhLSQ8a7TbnQ5SN0gm44N1slBfj+ORIhrqw==}
@@ -2979,14 +3871,12 @@ packages:
       '@motionone/utils': 10.14.0
       hey-listen: 1.0.8
       tslib: 2.4.0
-    dev: false
 
   /@motionone/easing/10.14.0:
     resolution: {integrity: sha512-2vUBdH9uWTlRbuErhcsMmt1jvMTTqvGmn9fHq8FleFDXBlHFs5jZzHJT9iw+4kR1h6a4SZQuCf72b9ji92qNYA==}
     dependencies:
       '@motionone/utils': 10.14.0
       tslib: 2.4.0
-    dev: false
 
   /@motionone/generators/10.14.0:
     resolution: {integrity: sha512-6kRHezoFfIjFN7pPpaxmkdZXD36tQNcyJe3nwVqwJ+ZfC0e3rFmszR8kp9DEVFs9QL/akWjuGPSLBI1tvz+Vjg==}
@@ -2994,11 +3884,9 @@ packages:
       '@motionone/types': 10.14.0
       '@motionone/utils': 10.14.0
       tslib: 2.4.0
-    dev: false
 
   /@motionone/types/10.14.0:
     resolution: {integrity: sha512-3bNWyYBHtVd27KncnJLhksMFQ5o2MSdk1cA/IZqsHtA9DnRM1SYgN01CTcJ8Iw8pCXF5Ocp34tyAjY7WRpOJJQ==}
-    dev: false
 
   /@motionone/utils/10.14.0:
     resolution: {integrity: sha512-sLWBLPzRqkxmOTRzSaD3LFQXCPHvDzyHJ1a3VP9PRzBxyVd2pv51/gMOsdAcxQ9n+MIeGJnxzXBYplUHKj4jkw==}
@@ -3006,7 +3894,6 @@ packages:
       '@motionone/types': 10.14.0
       hey-listen: 1.0.8
       tslib: 2.4.0
-    dev: false
 
   /@mrmlnc/readdir-enhanced/2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -5482,7 +6369,7 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.6
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: false
 
   /@types/eslint/8.4.6:
@@ -5710,8 +6597,8 @@ packages:
     dependencies:
       '@types/react': 18.0.21
 
-  /@types/react-syntax-highlighter/15.5.5:
-    resolution: {integrity: sha512-QH3JZQXa2usAvJvSsdSUJ4Yu4j8ReuZpgRrEW+XP+Rmosbn425YshW9iGEb/pAARm8496axHhHUPRH3UmTiB6A==}
+  /@types/react-syntax-highlighter/15.5.6:
+    resolution: {integrity: sha512-i7wFuLbIAFlabTeD2I1cLjEOrG/xdMa/rpx2zwzAoGHuXJDhSqp9BSfDlMHSh9JSuNfxHk9eEmMX6D55GiyjGg==}
     dependencies:
       '@types/react': 18.0.21
     dev: true
@@ -11487,7 +12374,6 @@ packages:
       tslib: 2.4.0
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
-    dev: false
 
   /framesync/5.3.0:
     resolution: {integrity: sha512-oc5m68HDO/tuK2blj7ZcdEBRx3p1PjrgHazL8GYEpvULhrtGIFbQArN6cQS2QhW8mitffaB+VYzMjDqBxxQeoA==}
@@ -11499,7 +12385,6 @@ packages:
     resolution: {integrity: sha512-fUY88kXvGiIItgNC7wcTOl0SNRCVXMKSWW2Yzfmn7EKNc+MpCzcz9DhdHcdjbrtN3c6R4H5dTY2jiCpPdysEjA==}
     dependencies:
       tslib: 2.4.0
-    dev: false
 
   /fresh/0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -12156,7 +13041,6 @@ packages:
 
   /hey-listen/1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
-    dev: false
 
   /highlight.js/10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
@@ -16101,7 +16985,6 @@ packages:
       hey-listen: 1.0.8
       style-value-types: 5.0.0
       tslib: 2.4.0
-    dev: false
 
   /posix-character-classes/0.1.1:
     resolution: {integrity: sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==}
@@ -18848,6 +19731,7 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
 
   /space-separated-tokens/1.1.5:
     resolution: {integrity: sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==}
@@ -19251,7 +20135,6 @@ packages:
     dependencies:
       hey-listen: 1.0.8
       tslib: 2.4.0
-    dev: false
 
   /styled-components/5.3.6_7i5myeigehqah43i5u7wbekgba:
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
@@ -19901,7 +20784,6 @@ packages:
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
-    dev: false
 
   /tsup/6.1.3_6oasmw356qmm23djlsjgkwvrtm:
     resolution: {integrity: sha512-eRpBnbfpDFng+EJNTQ90N7QAf4HAGGC7O3buHIjroKWK7D1ibk9/YnR/3cS8HsMU5T+6Oi+cnF+yU5WmCnB//Q==}

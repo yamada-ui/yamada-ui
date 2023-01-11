@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": [
+    "src",
+    "index.ts",
+    "../button/src/icon-button.tsx",
+    "../button/src/icon-button.tsx",
+    "../button/src/button-group.tsx",
+    "../button/src/button-group.tsx",
+    "../button/src/button.tsx"
+  ]
+}

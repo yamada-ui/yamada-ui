@@ -1,0 +1,34 @@
+{
+  "name": "@yamada-ui/button",
+  "version": "1.0.0",
+  "description": "Yamada UI button components",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "JSX=1 tsup  src/index.ts --dts",
+    "build:fast": "JSX=1 tsup src/index.ts",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/loading": "workspace:*"
+  },
+  "devDependencies": {
+    "react": "^18.0.0",
+    "clean-package": "2.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

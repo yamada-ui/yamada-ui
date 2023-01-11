@@ -1,6 +1,0 @@
-export * from './kbd'
-export * from './badge'
-export * from './tag'
-export * from './list'
-export * from './markdown'
-export * from './card'

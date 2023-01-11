@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Text, VStack } from '@yamada-ui/react'
+import { VStack, Text } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Typography / Text',

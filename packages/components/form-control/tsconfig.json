@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": [
+    "src",
+    "index.ts",
+    "../button/src/icon-button.tsx",
+    "../button/src/icon-button.tsx",
+    "../button/src/button-group.tsx",
+    "../button/src/button-group.tsx",
+    "../button/src/button.tsx",
+    "../input/src/input-addon.tsx",
+    "../input/src/input-addon.tsx",
+    "../input/src/input-element.tsx",
+    "../input/src/input-group.tsx",
+    "../input/src/input.tsx"
+  ]
+}

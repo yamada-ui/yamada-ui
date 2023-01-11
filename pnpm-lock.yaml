@@ -1298,17 +1298,6 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
-  packages/hooks/use-yamada:
-    specifiers:
-      '@yamada-ui/utils': workspace:*
-      clean-package: 2.1.1
-      react: ^18.2.0
-    dependencies:
-      '@yamada-ui/utils': link:../../utils
-    devDependencies:
-      clean-package: 2.1.1
-      react: 18.2.0
-
   packages/providers:
     specifiers:
       '@emotion/react': ^11.10.4
@@ -1407,7 +1396,6 @@ importers:
       '@yamada-ui/use-timeout': workspace:*
       '@yamada-ui/use-token': workspace:*
       '@yamada-ui/use-value': workspace:*
-      '@yamada-ui/use-yamada': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
@@ -1479,7 +1467,6 @@ importers:
       '@yamada-ui/use-timeout': link:../hooks/use-timeout
       '@yamada-ui/use-token': link:../hooks/use-token
       '@yamada-ui/use-value': link:../hooks/use-value
-      '@yamada-ui/use-yamada': link:../hooks/use-yamada
       '@yamada-ui/utils': link:../utils
     devDependencies:
       clean-package: 2.1.1

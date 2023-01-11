@@ -20,18 +20,15 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/theme": "workspace:*",
-    "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/accordion": "workspace:*",
     "@yamada-ui/alert": "workspace:*",
     "@yamada-ui/badge": "workspace:*",
     "@yamada-ui/breadcrumb": "workspace:*",
     "@yamada-ui/button": "workspace:*",
-    "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/card": "workspace:*",
     "@yamada-ui/checkbox": "workspace:*",
+    "@yamada-ui/close-button": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/editable": "workspace:*",
     "@yamada-ui/file-button": "workspace:*",
     "@yamada-ui/focus-lock": "workspace:*",
@@ -56,6 +53,7 @@
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/progress": "workspace:*",
+    "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/radio": "workspace:*",
     "@yamada-ui/segmented-control": "workspace:*",
     "@yamada-ui/select": "workspace:*",
@@ -64,6 +62,7 @@
     "@yamada-ui/tabs": "workspace:*",
     "@yamada-ui/tag": "workspace:*",
     "@yamada-ui/textarea": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/tooltip": "workspace:*",
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/typography": "workspace:*",
@@ -87,7 +86,8 @@
     "@yamada-ui/use-size": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",
     "@yamada-ui/use-token": "workspace:*",
-    "@yamada-ui/use-value": "workspace:*"
+    "@yamada-ui/use-value": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.1.1",

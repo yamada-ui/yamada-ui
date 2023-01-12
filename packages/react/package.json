@@ -31,6 +31,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/editable": "workspace:*",
     "@yamada-ui/file-button": "workspace:*",
+    "@yamada-ui/file-input": "workspace:*",
     "@yamada-ui/focus-lock": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/highlight": "workspace:*",

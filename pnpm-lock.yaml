@@ -413,6 +413,23 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/file-input:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/focus-lock:
     specifiers:
       '@yamada-ui/utils': workspace:*
@@ -487,6 +504,7 @@ importers:
   packages/components/input:
     specifiers:
       '@yamada-ui/core': workspace:*
+      '@yamada-ui/file-input': workspace:*
       '@yamada-ui/form-control': workspace:*
       '@yamada-ui/use-token': workspace:*
       '@yamada-ui/utils': workspace:*
@@ -494,6 +512,7 @@ importers:
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
+      '@yamada-ui/file-input': link:../file-input
       '@yamada-ui/form-control': link:../form-control
       '@yamada-ui/use-token': link:../../hooks/use-token
       '@yamada-ui/utils': link:../../utils
@@ -1340,6 +1359,7 @@ importers:
       '@yamada-ui/core': workspace:*
       '@yamada-ui/editable': workspace:*
       '@yamada-ui/file-button': workspace:*
+      '@yamada-ui/file-input': workspace:*
       '@yamada-ui/focus-lock': workspace:*
       '@yamada-ui/form-control': workspace:*
       '@yamada-ui/highlight': workspace:*
@@ -1411,6 +1431,7 @@ importers:
       '@yamada-ui/core': link:../core
       '@yamada-ui/editable': link:../components/editable
       '@yamada-ui/file-button': link:../components/file-button
+      '@yamada-ui/file-input': link:../components/file-input
       '@yamada-ui/focus-lock': link:../components/focus-lock
       '@yamada-ui/form-control': link:../components/form-control
       '@yamada-ui/highlight': link:../components/highlight

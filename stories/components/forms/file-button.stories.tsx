@@ -244,7 +244,7 @@ export const useReset: ComponentStory<typeof FileButton> = () => {
 
   return (
     <>
-      <Text>files: {files?.length}</Text>
+      <Text>files: {files?.length ?? 0}</Text>
 
       <HStack>
         <FileButton reset={reset} onChange={onChange}>

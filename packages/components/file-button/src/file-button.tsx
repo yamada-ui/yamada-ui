@@ -31,7 +31,7 @@ type FileButtonOptions = {
   reset?: ForwardedRef<() => void>
 }
 
-type InputProps = Partial<Pick<HTMLInputElement, 'accept' | 'multiple' | 'form'>>
+type InputProps = Partial<Pick<HTMLInputElement, 'accept' | 'multiple'>>
 
 export type FileButtonProps = Omit<ButtonProps, 'onChange' | 'children'> &
   InputProps &

@@ -1,6 +1,10 @@
 import { Button, ButtonProps } from '@yamada-ui/button'
 import { ui, forwardRef, CSSUIProps } from '@yamada-ui/core'
-import { FormControlOptions, useFormControlProps } from '@yamada-ui/form-control'
+import {
+  FormControlOptions,
+  formControlProperties,
+  useFormControlProps,
+} from '@yamada-ui/form-control'
 import {
   assignRef,
   cx,
@@ -9,6 +13,7 @@ import {
   isNull,
   mergeRefs,
   omitObject,
+  pickObject,
 } from '@yamada-ui/utils'
 import { ChangeEvent, ForwardedRef, ReactNode, useCallback, useRef } from 'react'
 
@@ -99,6 +104,7 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
             position: 'absolute',
           }}
           onChange={onChange}
+          {...pickObject(rest, formControlProperties)}
         />
 
         {isFunction(children)

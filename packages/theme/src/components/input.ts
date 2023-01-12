@@ -11,6 +11,14 @@ export const Input: ComponentMultiStyle = {
       appearance: 'none',
       transitionProperty: 'common',
       transitionDuration: 'normal',
+      _placeholder: {
+        color: 'gray.500',
+      },
+      _dark: {
+        _placeholder: {
+          color: 'whiteAlpha.400',
+        },
+      },
       _disabled: {
         opacity: 0.4,
         cursor: 'not-allowed',

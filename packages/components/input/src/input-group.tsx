@@ -8,6 +8,7 @@ import {
   ThemeProps,
   CSSUIProps,
 } from '@yamada-ui/core'
+import { FileInput } from '@yamada-ui/file-input'
 import { useToken } from '@yamada-ui/use-token'
 import { createContext, cx, filterUndefined, getValidChildren } from '@yamada-ui/utils'
 import { cloneElement } from 'react'
@@ -58,7 +59,7 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
       ...child.props,
     })
 
-    return child.type !== Input
+    return child.type !== Input && child.type !== FileInput
       ? cloneElement(child, childProps)
       : cloneElement(child, Object.assign(childProps, groupProps))
   })

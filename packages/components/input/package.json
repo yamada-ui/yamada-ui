@@ -22,6 +22,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/file-input": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/use-token": "workspace:*"
   },

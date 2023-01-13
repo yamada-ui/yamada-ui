@@ -87,8 +87,8 @@ type SelectContext = Omit<SelectOptions, 'onChange'> & {
 }
 
 const [SelectProvider, useSelect] = createContext<SelectContext>({
-  strict: false,
   name: 'SelectContext',
+  errorMessage: `useSelect returned is 'undefined'. Seems you forgot to wrap the components in "<Select />"`,
 })
 
 type SelectOptions = {

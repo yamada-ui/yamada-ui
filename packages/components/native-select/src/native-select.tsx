@@ -36,8 +36,8 @@ export type UINativeOption = Omit<
 type NativeSelectContext = Record<string, CSSUIObject>
 
 const [NativeSelectProvider, useNativeSelect] = createContext<NativeSelectContext>({
-  strict: false,
   name: 'NativeSelectContext',
+  errorMessage: `useNativeSelect returned is 'undefined'. Seems you forgot to wrap the components in "<NativeSelect />"`,
 })
 
 type NativeSelectOptions = {

@@ -5,24 +5,50 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
+  useComponentStyle,
 } from '@yamada-ui/core'
-import { cx, handlerAll } from '@yamada-ui/utils'
+import { cx, Dict, handlerAll, merge } from '@yamada-ui/utils'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type ScrollAreaOptions = {
-  type?: 'always' | 'scroll' | 'hover' | 'none'
+  type?: 'always' | 'scroll' | 'hover' | 'never'
   inner?: HTMLUIProps<'div'>
   scrollHideDelay?: number
 }
 
 export type ScrollAreaProps = HTMLUIProps<'div'> & ThemeProps<'ScrollArea'> & ScrollAreaOptions
 
+const neverStyles: CSSUIObject = {
+  scrollbarWidth: 'none',
+  _scrollbar: { display: 'none' },
+  '&::-webkit-scrollbar': { display: 'none' },
+}
+
+const hiddenStyles = (styles: Dict): CSSUIObject => ({
+  _scrollbarTrack: {
+    bg: 'transparent',
+    _nativeHover: { ...styles._scrollbarTrack },
+  },
+  '&::-webkit-scrollbar-track': {
+    bg: 'transparent',
+    _nativeHover: { ...styles['&::-webkit-scrollbar-track'] },
+  },
+  _scrollbarThumb: {
+    bg: 'transparent',
+    _nativeHover: { ...styles._scrollbarThumb },
+  },
+  '&::-webkit-scrollbar-thumb': {
+    bg: 'transparent',
+    _nativeHover: { ...styles['&::-webkit-scrollbar-thumb'] },
+  },
+})
+
 export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('ScrollArea', props)
+  const styles = useComponentStyle('ScrollArea', props)
   const {
     className,
-    type = 'scroll',
+    type = 'hover',
+    overflow = 'overlay',
     scrollHideDelay = 1000,
     children,
     inner,
@@ -31,25 +57,15 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setisScrolling] = useState<boolean>(false)
   const isAlways = type === 'always'
+  const isNever = type === 'never'
 
-  const css: CSSUIObject = useMemo(
-    () => ({
-      overflow: 'overlay',
-      '&::-webkit-scrollbar':
-        isAlways || isHovered || isScrolling
-          ? styles.scrollbar
-          : { display: 'none', scrollbarWidth: 'none' },
-      '&::-webkit-scrollbar-track': styles.track,
-      '&::-webkit-scrollbar-thumb': styles.thumb,
-      '&::-webkit-scrollbar-button': styles.button,
-      '&::-webkit-scrollbar-corner': styles.corner,
-      ...styles.container,
-    }),
-    [isAlways, isHovered, isScrolling, styles],
-  )
+  const hoverTimeout = useRef<NodeJS.Timeout | undefined>(undefined)
+  const scrollTimeout = useRef<NodeJS.Timeout | undefined>(undefined)
 
   const onMouseEnter = useCallback(() => {
     if (type !== 'hover') return
+
+    clearTimeout(hoverTimeout.current)
 
     setIsHovered(true)
   }, [type])
@@ -57,10 +73,8 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
   const onMouseLeave = useCallback(() => {
     if (type !== 'hover') return
 
-    setTimeout(() => setIsHovered(false), scrollHideDelay)
+    hoverTimeout.current = setTimeout(() => setIsHovered(false), scrollHideDelay)
   }, [scrollHideDelay, type])
-
-  const scrollTimeout = useRef<NodeJS.Timeout | undefined>(undefined)
 
   const onScroll = useCallback(() => {
     if (type !== 'scroll') return
@@ -74,9 +88,21 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
 
   useEffect(() => {
     return () => {
+      if (hoverTimeout.current) clearTimeout(hoverTimeout.current)
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current)
     }
   }, [])
+
+  const css: CSSUIObject = useMemo(() => {
+    if (isNever) {
+      return merge({ overflow, ...styles }, neverStyles)
+    } else {
+      return merge(
+        { overflow, ...styles },
+        !isAlways && !isHovered && !isScrolling ? hiddenStyles(styles) : {},
+      )
+    }
+  }, [isAlways, isHovered, isNever, isScrolling, overflow, styles])
 
   return (
     <ui.div
@@ -86,9 +112,15 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
       {...rest}
       onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}
       onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
-      onScroll={onScroll}
+      onScroll={handlerAll(rest.onScroll, onScroll)}
     >
-      <ui.div {...inner}>{children}</ui.div>
+      {inner ? (
+        <ui.div className='ui-scroll-area-inner' {...inner}>
+          {children}
+        </ui.div>
+      ) : (
+        children
+      )}
     </ui.div>
   )
 })

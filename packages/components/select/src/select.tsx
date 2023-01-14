@@ -148,17 +148,6 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   const listRef = useRef<HTMLDivElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
-  const onFocusList = useCallback(() => {
-    requestAnimationFrame(() => listRef.current?.focus({ preventScroll: false }))
-  }, [])
-
-  const onOpenInternal = useCallback(() => {
-    rest.onOpen?.()
-
-    onFocusList()
-  }, [onFocusList, rest])
-
-  const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
   const [value, setValue] = useControllableState({
     value: rest.value,
     defaultValue: rest.defaultValue,
@@ -205,12 +194,26 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     [setValue],
   )
 
+  const onFocusList = useCallback(() => {
+    requestAnimationFrame(() => listRef.current?.focus({ preventScroll: false }))
+  }, [])
+
+  const onOpenInternal = useCallback(() => {
+    rest.onOpen?.()
+
+    onFocusList()
+
+    if (value) onFocusSelectedItem()
+  }, [onFocusList, onFocusSelectedItem, rest, value])
+
+  const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
       const actions: Record<string, Function> = {
-        Enter: funcAll(onOpen, value ? onFocusSelectedItem : onFocusFirstItem),
-        ArrowDown: funcAll(onOpen, value ? onFocusSelectedItem : onFocusFirstItem),
-        ArrowUp: funcAll(onOpen, value ? onFocusSelectedItem : onFocusLastItem),
+        Enter: funcAll(onOpen, !value ? onFocusFirstItem : undefined),
+        ArrowDown: funcAll(onOpen, !value ? onFocusFirstItem : undefined),
+        ArrowUp: funcAll(onOpen, !value ? onFocusLastItem : undefined),
       }
 
       const action = actions[ev.key]
@@ -221,7 +224,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
       ev.stopPropagation()
       action()
     },
-    [onFocusFirstItem, onFocusLastItem, onFocusSelectedItem, onOpen, value],
+    [onFocusFirstItem, onFocusLastItem, onOpen, value],
   )
 
   useUpdateEffect(() => {

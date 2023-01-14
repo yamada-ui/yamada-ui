@@ -143,6 +143,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   const descendants = useDescendants()
 
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
+  const initialFocusRef = useRef<any>(null)
 
   const listRef = useRef<HTMLDivElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
@@ -190,7 +191,10 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
 
     const selected = values.find(({ node }) => node.dataset.value === value)
 
-    if (selected) setFocusedIndex(selected.index)
+    if (selected) {
+      setFocusedIndex(selected.index)
+      initialFocusRef.current = selected.node
+    }
   }, [descendants, value])
 
   const onChange = useCallback(
@@ -292,6 +296,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
             onClose,
             placement,
             duration,
+            initialFocusRef,
             closeOnButton: false,
           }}
         >

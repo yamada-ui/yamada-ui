@@ -83,9 +83,6 @@ export const Select: ComponentMultiStyle = {
       _focus: {
         bg: ['gray.100', 'whiteAlpha.100'],
       },
-      _checked: {
-        bg: ['gray.200', 'whiteAlpha.200'],
-      },
       _active: {
         bg: ['gray.200', 'whiteAlpha.200'],
       },

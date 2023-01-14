@@ -377,6 +377,27 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/dropzone:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/loading': workspace:*
+      '@yamada-ui/transitions': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+      react-dropzone: 14.2.3
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/loading': link:../loading
+      '@yamada-ui/transitions': link:../transitions
+      '@yamada-ui/utils': link:../../utils
+      react-dropzone: 14.2.3_react@18.2.0
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/editable:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1370,6 +1391,7 @@ importers:
       '@yamada-ui/checkbox': workspace:*
       '@yamada-ui/close-button': workspace:*
       '@yamada-ui/core': workspace:*
+      '@yamada-ui/dropzone': workspace:*
       '@yamada-ui/editable': workspace:*
       '@yamada-ui/file-button': workspace:*
       '@yamada-ui/file-input': workspace:*
@@ -1443,6 +1465,7 @@ importers:
       '@yamada-ui/checkbox': link:../components/checkbox
       '@yamada-ui/close-button': link:../components/close-button
       '@yamada-ui/core': link:../core
+      '@yamada-ui/dropzone': link:../components/dropzone
       '@yamada-ui/editable': link:../components/editable
       '@yamada-ui/file-button': link:../components/file-button
       '@yamada-ui/file-input': link:../components/file-input
@@ -7930,6 +7953,11 @@ packages:
     hasBin: true
     dev: false
 
+  /attr-accept/2.2.2:
+    resolution: {integrity: sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==}
+    engines: {node: '>=4'}
+    dev: false
+
   /autoprefixer/10.4.13_postcss@8.4.18:
     resolution: {integrity: sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==}
     engines: {node: ^10 || ^12 || >=14}
@@ -12037,6 +12065,13 @@ packages:
       loader-utils: 2.0.2
       schema-utils: 3.1.1
       webpack: 5.74.0
+    dev: false
+
+  /file-selector/0.6.0:
+    resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
+    engines: {node: '>= 12'}
+    dependencies:
+      tslib: 2.4.0
     dev: false
 
   /file-system-cache/1.1.0:
@@ -18345,6 +18380,18 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-dropzone/14.2.3_react@18.2.0:
+    resolution: {integrity: sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==}
+    engines: {node: '>= 10.13'}
+    peerDependencies:
+      react: '>= 16.8 || 18.0.0'
+    dependencies:
+      attr-accept: 2.2.2
+      file-selector: 0.6.0
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /react-element-to-jsx-string/14.3.4_biqbaboplfbrettd7655fr4n2y:

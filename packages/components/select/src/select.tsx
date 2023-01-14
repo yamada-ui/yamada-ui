@@ -151,6 +151,20 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     requestAnimationFrame(() => listRef.current?.focus({ preventScroll: false }))
   }, [])
 
+  const onOpenInternal = useCallback(() => {
+    rest.onOpen?.()
+
+    onFocusList()
+  }, [onFocusList, rest])
+
+  const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
+  const [value, setValue] = useControllableState({
+    value: rest.value,
+    defaultValue: rest.defaultValue,
+    onChange: rest.onChange,
+  })
+  const [displayValue, setDisplayValue] = useState<string | undefined>(undefined)
+
   const onFocusFirstItem = useCallback(() => {
     const id = setTimeout(() => {
       const first = descendants.enabledfirstValue()
@@ -171,19 +185,13 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     timeoutIds.current.add(id)
   }, [descendants])
 
-  const onOpenInternal = useCallback(() => {
-    rest.onOpen?.()
+  const onFocusSelectedItem = useCallback(() => {
+    const values = descendants.enabledValues()
 
-    onFocusList()
-  }, [onFocusList, rest])
+    const selected = values.find(({ node }) => node.dataset.value === value)
 
-  const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
-  const [value, setValue] = useControllableState({
-    value: rest.value,
-    defaultValue: rest.defaultValue,
-    onChange: rest.onChange,
-  })
-  const [displayValue, setDisplayValue] = useState<string | undefined>(undefined)
+    if (selected) setFocusedIndex(selected.index)
+  }, [descendants, value])
 
   const onChange = useCallback(
     (value: Value, displayValue?: string) => {
@@ -196,9 +204,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
       const actions: Record<string, Function> = {
-        Enter: funcAll(onOpen, onFocusFirstItem),
-        ArrowDown: funcAll(onOpen, onFocusFirstItem),
-        ArrowUp: funcAll(onOpen, onFocusLastItem),
+        Enter: funcAll(onOpen, value ? onFocusSelectedItem : onFocusFirstItem),
+        ArrowDown: funcAll(onOpen, value ? onFocusSelectedItem : onFocusFirstItem),
+        ArrowUp: funcAll(onOpen, value ? onFocusSelectedItem : onFocusLastItem),
       }
 
       const action = actions[ev.key]
@@ -209,7 +217,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
       ev.stopPropagation()
       action()
     },
-    [onFocusFirstItem, onFocusLastItem, onOpen],
+    [onFocusFirstItem, onFocusLastItem, onFocusSelectedItem, onOpen, value],
   )
 
   useUpdateEffect(() => {
@@ -592,7 +600,7 @@ export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
     } else if (listRef.current && !isActiveElement(listRef.current)) {
       listRef.current.focus()
     }
-  }, [isFocused, trulyDisabled, listRef, isOpen])
+  }, [isFocused, trulyDisabled, listRef, itemRef, isOpen])
 
   const css: CSSUIObject = {
     textDecoration: 'none',

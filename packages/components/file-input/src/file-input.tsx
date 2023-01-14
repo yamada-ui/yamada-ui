@@ -38,7 +38,7 @@ type FileInputOptions = {
   format?: Format
   separator?: string
   children?: (files: File[] | null) => ReactNode
-  reset?: ForwardedRef<() => void>
+  resetRef?: ForwardedRef<() => void>
 }
 
 type InputProps = Partial<Pick<HTMLInputElement, 'accept' | 'multiple'>>
@@ -67,7 +67,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
     format = defaultFormat,
     isTruncated = true,
     separator = ', ',
-    reset,
+    resetRef,
     ...rest
   } = useFormControlProps(omitThemeProps(props))
 
@@ -102,7 +102,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
     setValues(null)
   }, [setValues])
 
-  assignRef(reset, onReset)
+  assignRef(resetRef, onReset)
 
   const cloneChildren = useMemo(() => {
     if (!values && placeholder) return <ui.span isTruncated={isTruncated}>{placeholder}</ui.span>

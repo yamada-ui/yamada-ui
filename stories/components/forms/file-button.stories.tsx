@@ -235,11 +235,11 @@ export const isInvalid: ComponentStory<typeof FileButton> = () => {
 
 export const useReset: ComponentStory<typeof FileButton> = () => {
   const [files, onChange] = useState<File[] | null>(null)
-  const reset = useRef<() => void>(null)
+  const resetRef = useRef<() => void>(null)
 
   const onReset = () => {
     onChange(null)
-    reset.current?.()
+    resetRef.current?.()
   }
 
   return (
@@ -247,7 +247,7 @@ export const useReset: ComponentStory<typeof FileButton> = () => {
       <Text>files: {files?.length ?? 0}</Text>
 
       <HStack>
-        <FileButton reset={reset} onChange={onChange}>
+        <FileButton resetRef={resetRef} onChange={onChange}>
           Upload
         </FileButton>
 

@@ -159,11 +159,11 @@ export const useElement: ComponentStory<typeof FileInput> = () => {
 
 export const useReset: ComponentStory<typeof FileInput> = () => {
   const [value, onChange] = useState<File[] | null>(null)
-  const reset = useRef<() => void>(null)
+  const resetRef = useRef<() => void>(null)
 
   const onReset = () => {
     onChange(null)
-    reset.current?.()
+    resetRef.current?.()
   }
 
   return (
@@ -171,7 +171,7 @@ export const useReset: ComponentStory<typeof FileInput> = () => {
       <Text>files: {value?.length ?? 0}</Text>
 
       <InputGroup>
-        <FileInput multiple value={value} onChange={onChange} reset={reset} />
+        <FileInput multiple value={value} onChange={onChange} resetRef={resetRef} />
 
         {value?.length ? (
           <InputRightElement isClick onClick={onReset}>

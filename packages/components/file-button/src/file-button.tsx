@@ -28,7 +28,7 @@ type FileButtonOptions = {
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
   onChange?: (files: File[] | null) => void
   children?: ReactNode | ((props: Props) => ReactNode)
-  reset?: ForwardedRef<() => void>
+  resetRef?: ForwardedRef<() => void>
 }
 
 type InputProps = Partial<Pick<HTMLInputElement, 'accept' | 'multiple'>>
@@ -39,7 +39,7 @@ export type FileButtonProps = Omit<ButtonProps, 'onChange' | 'children'> &
   FormControlOptions
 
 export const FileButton = forwardRef<FileButtonProps, 'input'>(
-  ({ className, reset, as: As, children, ...props }, ref) => {
+  ({ className, resetRef, as: As, children, ...props }, ref) => {
     const { id, name, accept, multiple, form, ...rest } = useFormControlProps(props)
 
     const { disabled, readOnly, required, 'aria-invalid': isInvalid } = rest
@@ -79,7 +79,7 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
       )
     }
 
-    assignRef(reset, onReset)
+    assignRef(resetRef, onReset)
 
     return (
       <>

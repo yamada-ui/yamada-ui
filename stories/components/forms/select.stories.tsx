@@ -38,6 +38,7 @@ export const basic: ComponentStory<typeof Select> = () => {
       ],
     },
   ]
+
   return (
     <>
       <Select placeholder='キャラクターを選択'>

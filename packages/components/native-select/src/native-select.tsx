@@ -43,7 +43,7 @@ const [NativeSelectProvider, useNativeSelect] = createContext<NativeSelectContex
 type NativeSelectOptions = {
   data?: UINativeOption[]
   placeholder?: string
-  isPlaceholderHidden?: boolean
+  placeholderInOptions?: boolean
   focusBorderColor?: string
   errorBorderColor?: string
   container?: Omit<HTMLUIProps<'div'>, 'children'>
@@ -60,7 +60,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
   let {
     className,
     children,
-    isPlaceholderHidden = true,
+    placeholderInOptions = true,
     color,
     h,
     height,
@@ -123,7 +123,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
           {...computedProps[1]}
         >
           {placeholder ? (
-            <NativeOption value='' hidden={isPlaceholderHidden}>
+            <NativeOption value='' hidden={!placeholderInOptions}>
               {placeholder}
             </NativeOption>
           ) : null}

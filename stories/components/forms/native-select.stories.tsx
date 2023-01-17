@@ -101,9 +101,9 @@ export const withBorderColor: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const disabledPlaceholderHidden: ComponentStory<typeof NativeSelect> = () => {
+export const disabledPlaceholderInOptions: ComponentStory<typeof NativeSelect> = () => {
   return (
-    <NativeSelect placeholder='キャラクターを選択' isPlaceholderHidden={false}>
+    <NativeSelect placeholder='キャラクターを選択' placeholderInOptions={false}>
       <NativeOption value='孫悟空'>孫悟空</NativeOption>
       <NativeOption value='ベジータ'>ベジータ</NativeOption>
       <NativeOption value='フリーザ'>フリーザ</NativeOption>

@@ -105,11 +105,9 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
   assignRef(resetRef, onReset)
 
   const cloneChildren = useMemo(() => {
-    if (!values && placeholder) return <ui.span isTruncated={isTruncated}>{placeholder}</ui.span>
+    if (!values?.length) return <ui.span isTruncated={isTruncated}>{placeholder}</ui.span>
 
     if (children) return children(values)
-
-    if (!values) return null
 
     if (tag) {
       return (

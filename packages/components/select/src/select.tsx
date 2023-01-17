@@ -6,122 +6,48 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  layoutStylesProperties,
-  CSSUIProps,
 } from '@yamada-ui/core'
+import { Popover, PopoverTrigger } from '@yamada-ui/popover'
+import { cx, getValidChildren, isArray } from '@yamada-ui/utils'
+import { ReactElement } from 'react'
+import { SelectIcon, SelectIconProps } from './select-icon'
+import { SelectList, SelectListProps } from './select-list'
 import {
-  FormControlOptions,
-  formControlProperties,
-  useFormControlProps,
-} from '@yamada-ui/form-control'
-import { ChevronIcon } from '@yamada-ui/icon'
-import { Popover, PopoverContent, PopoverProps, PopoverTrigger } from '@yamada-ui/popover'
-import { useClickable } from '@yamada-ui/use-clickable'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createDescendant } from '@yamada-ui/use-descendant'
-import { useDisclosure } from '@yamada-ui/use-disclosure'
-import {
-  ariaAttr,
-  createContext,
-  cx,
-  dataAttr,
-  Dict,
-  funcAll,
-  getValidChildren,
-  handlerAll,
-  isActiveElement,
-  isArray,
-  isHTMLElement,
-  isValidElement,
-  mergeRefs,
-  omitObject,
-  pickObject,
-  splitObject,
-  useUnmountEffect,
-  useUpdateEffect,
-} from '@yamada-ui/utils'
-import {
-  cloneElement,
-  Dispatch,
-  FC,
-  FocusEvent,
-  KeyboardEvent,
-  KeyboardEventHandler,
-  MouseEvent,
-  ReactElement,
-  RefObject,
-  SetStateAction,
-  useCallback,
-  useRef,
-  useState,
-} from 'react'
-
-type Value = string | number
+  Value,
+  useSelect,
+  UseSelectProps,
+  SelectDescendantsContextProvider,
+  SelectProvider,
+  useSelectContext,
+} from './use-select'
+import { OptionGroup, Option, OptionProps } from './'
 
 export type UIOption = Omit<OptionProps, 'value'> & {
   label?: string
   value?: Value | UIOption[]
 }
 
-const isTargetOption = (target: EventTarget | null) =>
-  isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('select-item')
-
-const { DescendantsContextProvider, useDescendantsContext, useDescendants, useDescendant } =
-  createDescendant<HTMLElement>()
-
-type SelectContext = Omit<SelectOptions, 'onChange'> & {
-  setValue: Dispatch<SetStateAction<Value>>
-  setDisplayValue: Dispatch<SetStateAction<string | undefined>>
-  onChange: (value: Value, displayValue?: string) => void
-  placeholder?: string
-  isPlaceholderHidden: boolean
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
-  onFocusFirstItem: () => void
-  onFocusLastItem: () => void
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  listRef: RefObject<HTMLDivElement>
-  styles: Record<string, CSSUIObject>
-}
-
-const [SelectProvider, useSelect] = createContext<SelectContext>({
-  name: 'SelectContext',
-  errorMessage: `useSelect returned is 'undefined'. Seems you forgot to wrap the components in "<Select />"`,
-})
-
 type SelectOptions = {
-  value?: Value
-  defaultValue?: Value
-  onChange?: (value: Value) => void
-  closeOnSelect?: boolean
-  isPlaceholderHidden?: boolean
   data?: UIOption[]
   focusBorderColor?: string
   errorBorderColor?: string
   list?: Omit<SelectListProps, 'children'>
-  container?: Omit<HTMLUIProps<'div'>, 'children'>
   icon?: SelectIconProps
-  option?: Omit<OptionProps, 'value' | 'children'>
 }
 
-export type SelectProps = Omit<HTMLUIProps<'div'>, 'defaultValue' | 'onChange'> &
-  ThemeProps<'Select'> &
-  Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton'> &
-  FormControlOptions &
+export type SelectProps = ThemeProps<'Select'> &
+  Omit<UseSelectProps<string | number>, 'isEmpty'> &
   SelectOptions
 
 export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('Select', props)
   let {
     className,
-    closeOnSelect = true,
     placeholder,
-    isPlaceholderHidden = true,
+    defaultValue = '',
+    placeholderInOptions = true,
     data = [],
-    placement = 'bottom-start',
-    duration = 0.2,
+    isTruncated = true,
     color,
     h,
     height,
@@ -129,115 +55,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     minHeight,
     list,
     icon,
-    container,
-    option,
     children,
-    ...rest
+    ...computedProps
   } = omitThemeProps(props)
-
-  rest = useFormControlProps(rest)
-
-  const formControlProps = pickObject(rest, formControlProperties)
-  const computedProps = splitObject(rest, layoutStylesProperties)
-
-  const descendants = useDescendants()
-
-  const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-  const initialFocusRef = useRef<any>(null)
-
-  const listRef = useRef<HTMLDivElement>(null)
-  const timeoutIds = useRef<Set<any>>(new Set([]))
-
-  const [value, setValue] = useControllableState({
-    value: rest.value,
-    defaultValue: rest.defaultValue,
-    onChange: rest.onChange,
-  })
-  const [displayValue, setDisplayValue] = useState<string | undefined>(undefined)
-
-  const onFocusFirstItem = useCallback(() => {
-    const id = setTimeout(() => {
-      const first = descendants.enabledfirstValue()
-
-      if (first) setFocusedIndex(first.index)
-    })
-
-    timeoutIds.current.add(id)
-  }, [descendants])
-
-  const onFocusLastItem = useCallback(() => {
-    const id = setTimeout(() => {
-      const last = descendants.enabledlastValue()
-
-      if (last) setFocusedIndex(last.index)
-    })
-
-    timeoutIds.current.add(id)
-  }, [descendants])
-
-  const onFocusSelectedItem = useCallback(() => {
-    const values = descendants.enabledValues()
-
-    const selected = values.find(({ node }) => node.dataset.value === value)
-
-    if (selected) {
-      setFocusedIndex(selected.index)
-      initialFocusRef.current = selected.node
-    }
-  }, [descendants, value])
-
-  const onChange = useCallback(
-    (value: Value, displayValue?: string) => {
-      setValue(value)
-      setDisplayValue(displayValue)
-    },
-    [setValue],
-  )
-
-  const onFocusList = useCallback(() => {
-    requestAnimationFrame(() => listRef.current?.focus({ preventScroll: false }))
-  }, [])
-
-  const onOpenInternal = useCallback(() => {
-    rest.onOpen?.()
-
-    onFocusList()
-
-    if (value) onFocusSelectedItem()
-  }, [onFocusList, onFocusSelectedItem, rest, value])
-
-  const [isOpen, onOpen, onClose] = useDisclosure({ ...rest, onOpen: onOpenInternal })
-
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLInputElement>) => {
-      const actions: Record<string, Function> = {
-        Enter: funcAll(onOpen, !value ? onFocusFirstItem : undefined),
-        ArrowDown: funcAll(onOpen, !value ? onFocusFirstItem : undefined),
-        ArrowUp: funcAll(onOpen, !value ? onFocusLastItem : undefined),
-      }
-
-      const action = actions[ev.key]
-
-      if (!action) return
-
-      ev.preventDefault()
-      ev.stopPropagation()
-      action()
-    },
-    [onFocusFirstItem, onFocusLastItem, onOpen, value],
-  )
-
-  useUpdateEffect(() => {
-    if (!isOpen) setFocusedIndex(-1)
-  }, [isOpen])
-
-  useUnmountEffect(() => {
-    timeoutIds.current.forEach((id) => clearTimeout(id))
-    timeoutIds.current.clear()
-  })
-
-  h = h ?? height
-  minH = minH ?? minHeight
 
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []
@@ -266,412 +86,78 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     })
   }
 
-  const trulyIsOpen = !!validChildren.length || !!computedChildren.length
+  const isEmpty =
+    !validChildren.length && !computedChildren.length && !(!!placeholder && placeholderInOptions)
+
+  const {
+    descendants,
+    formControlProps,
+    getPopoverProps,
+    getContainerProps,
+    getFieldProps,
+    ...rest
+  } = useSelect({ ...computedProps, placeholder, placeholderInOptions, defaultValue, isEmpty })
+
+  h = h ?? height
+  minH = minH ?? minHeight
+
+  const css: CSSUIObject = {
+    position: 'relative',
+    w: '100%',
+    h: 'fit-content',
+    color,
+    ...styles.container,
+  }
 
   return (
-    <DescendantsContextProvider value={descendants}>
-      <SelectProvider
-        value={{
-          value,
-          setValue,
-          setDisplayValue,
-          placeholder,
-          isPlaceholderHidden,
-          onChange,
-          isOpen,
-          onOpen,
-          onClose,
-          onFocusFirstItem,
-          onFocusLastItem,
-          focusedIndex,
-          setFocusedIndex,
-          closeOnSelect,
-          option,
-          listRef,
-          styles,
-        }}
-      >
-        <Popover
-          {...{
-            ...rest,
-            isOpen,
-            onOpen,
-            onClose,
-            placement,
-            duration,
-            initialFocusRef,
-            closeOnButton: false,
-          }}
-        >
-          <ui.div
-            className='ui-select-container'
-            __css={{
-              position: 'relative',
-              w: '100%',
-              h: 'fit-content',
-              color,
-              ...styles.container,
-            }}
-            {...computedProps[0]}
-            {...container}
-            {...formControlProps}
-          >
+    <SelectDescendantsContextProvider value={descendants}>
+      <SelectProvider value={{ ...rest, placeholder, placeholderInOptions, styles }}>
+        <Popover {...getPopoverProps()}>
+          <ui.div className='ui-select-container' __css={css} {...getContainerProps()}>
             <PopoverTrigger>
-              <ui.div
-                ref={ref}
-                className={cx('ui-select', className)}
-                {...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange'])}
-                tabIndex={0}
-                data-active={dataAttr(isOpen && trulyIsOpen)}
-                data-placeholder={dataAttr(displayValue === undefined)}
-                aria-expanded={ariaAttr(isOpen && trulyIsOpen)}
-                onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-                __css={{
-                  paddingEnd: '2rem',
-                  h,
-                  minH,
-                  display: 'flex',
-                  alignItems: 'center',
-                  ...styles.field,
-                }}
-              >
-                <ui.span>{displayValue ?? placeholder}</ui.span>
-              </ui.div>
+              <SelectField
+                isTruncated={isTruncated}
+                h={h}
+                minH={minH}
+                {...getFieldProps({}, ref)}
+              />
             </PopoverTrigger>
 
             <SelectIcon {...icon} {...formControlProps} />
 
-            {trulyIsOpen || (!!placeholder && !isPlaceholderHidden) ? (
+            {!isEmpty ? (
               <SelectList {...list}>
-                {placeholder ? (
-                  <Option hidden={isPlaceholderHidden} isDisabled={isPlaceholderHidden}>
-                    {placeholder}
-                  </Option>
-                ) : null}
+                {!!placeholder && placeholderInOptions ? <Option>{placeholder}</Option> : null}
+
                 {children ?? computedChildren}
               </SelectList>
             ) : null}
           </ui.div>
         </Popover>
       </SelectProvider>
-    </DescendantsContextProvider>
+    </SelectDescendantsContextProvider>
   )
 })
 
-type SelectIconProps = HTMLUIProps<'div'>
+type SelectFieldProps = HTMLUIProps<'div'>
 
-const SelectIcon: FC<SelectIconProps> = ({ className, children, ...rest }) => {
-  const { styles } = useSelect()
+const SelectField = forwardRef<SelectFieldProps, 'div'>(
+  ({ className, isTruncated, h, minH, ...rest }, ref) => {
+    const { displayValue, placeholder, styles } = useSelectContext()
 
-  const css: CSSUIObject = {
-    position: 'absolute',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    pointerEvents: 'none',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    ...styles.icon,
-  }
-
-  const validChildren = getValidChildren(children)
-
-  const cloneChildren = validChildren.map((child) =>
-    cloneElement(child, {
-      focusable: false,
-      'aria-hidden': true,
-      style: {
-        width: '1em',
-        height: '1em',
-        color: 'currentColor',
-      },
-    }),
-  )
-
-  return (
-    <ui.div className={cx('ui-native-select-icon', className)} __css={css} {...rest}>
-      {isValidElement(children) ? cloneChildren : <ChevronIcon />}
-    </ui.div>
-  )
-}
-
-type SelectListProps = HTMLUIProps<'ul'>
-
-const SelectList = forwardRef<SelectListProps, 'ul'>(
-  ({ className, w, width, minW, minWidth, ...rest }, ref) => {
-    const { listRef, focusedIndex, setFocusedIndex, onClose, styles } = useSelect()
-
-    const descendants = useDescendantsContext()
-
-    const onNext = useCallback(() => {
-      const next = descendants.enabledNextValue(focusedIndex)
-
-      if (next) setFocusedIndex(next.index)
-    }, [descendants, focusedIndex, setFocusedIndex])
-
-    const onPrev = useCallback(() => {
-      const prev = descendants.enabledPrevValue(focusedIndex)
-
-      if (prev) setFocusedIndex(prev.index)
-    }, [descendants, focusedIndex, setFocusedIndex])
-
-    const onFirst = useCallback(() => {
-      const first = descendants.enabledfirstValue()
-
-      if (first) setFocusedIndex(first.index)
-    }, [descendants, setFocusedIndex])
-
-    const onLast = useCallback(() => {
-      const last = descendants.enabledlastValue()
-
-      if (last) setFocusedIndex(last.index)
-    }, [descendants, setFocusedIndex])
-
-    const onKeyDown = useCallback(
-      (ev: KeyboardEvent) => {
-        const actions: Record<string, KeyboardEventHandler> = {
-          Tab: (ev) => ev.preventDefault(),
-          Escape: onClose,
-          ArrowDown: focusedIndex === -1 ? onFirst : onNext,
-          ArrowUp: focusedIndex === -1 ? onLast : onPrev,
-          Home: onFirst,
-          End: onLast,
-        }
-
-        const action = actions[ev.key]
-
-        if (!action) return
-
-        ev.preventDefault()
-        action(ev)
-      },
-      [focusedIndex, onClose, onFirst, onLast, onNext, onPrev],
-    )
-
-    w = w ?? width ?? ((styles.list?.w ?? styles.list?.width) as CSSUIProps['w'])
-    minW = minW ?? minWidth ?? ((styles.list?.minW ?? styles.list?.minWidth) as CSSUIProps['minW'])
-
-    const css: CSSUIObject = { ...styles.list }
-
-    return (
-      <PopoverContent
-        as='ul'
-        ref={mergeRefs(listRef, ref)}
-        className={cx('ui-select-list', className)}
-        role='select'
-        tabIndex={-1}
-        w={w}
-        minW={minW}
-        {...rest}
-        __css={css}
-        onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-      />
-    )
-  },
-)
-
-type OptionGroupOptions = {
-  label: string
-}
-
-export type OptionGroupProps = HTMLUIProps<'ul'> & OptionGroupOptions
-
-export const OptionGroup = forwardRef<OptionGroupProps, 'ul'>(
-  ({ className, label, color, h, height, minH, minHeight, children, ...rest }, ref) => {
-    const { styles } = useSelect()
-
-    const computedRest = splitObject(rest, layoutStylesProperties)
-
-    h = h ?? height
-    minH = minH ?? minHeight
-
-    return (
-      <ui.li
-        className='ui-select-group-container'
-        __css={{ w: '100%', h: 'fit-content', color }}
-        {...computedRest[0]}
-      >
-        <ui.span className={cx('ui-select-group-label')} __css={styles.groupLabel} noOfLines={1}>
-          {label}
-        </ui.span>
-
-        <ui.ul
-          ref={ref}
-          className={cx('ui-select-group', className)}
-          __css={{ h, minH, ...styles.group }}
-          {...computedRest[1]}
-        >
-          {children}
-        </ui.ul>
-      </ui.li>
-    )
-  },
-)
-
-type OptionOptions = {
-  value?: Value
-  children?: string
-  isDisabled?: boolean
-  isFocusable?: boolean
-  closeOnSelect?: boolean
-  icon?: ReactElement
-}
-
-export type OptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & OptionOptions
-
-export const Option = forwardRef<OptionProps, 'li'>((props, ref) => {
-  const {
-    value,
-    placeholder,
-    isPlaceholderHidden,
-    setDisplayValue,
-    onChange,
-    focusedIndex,
-    setFocusedIndex,
-    isOpen,
-    onClose,
-    closeOnSelect: generalCloseOnSelect,
-    option,
-    listRef,
-    styles,
-  } = useSelect()
-
-  const {
-    className,
-    isDisabled,
-    isFocusable,
-    closeOnSelect: customCloseOnSelect,
-    icon,
-    children,
-    ...computedProps
-  } = { ...option, ...props }
-
-  const trulyDisabled = isDisabled && !isFocusable
-
-  const itemRef = useRef<HTMLLIElement>(null)
-  const { index, register, descendants } = useDescendant({ disabled: trulyDisabled })
-
-  if (!!placeholder && index > 0 && !isPlaceholderHidden && !computedProps.value) {
-    console.warn(
-      `If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'isPlaceholderHidden' to true.`,
-    )
-  }
-
-  const values = descendants.values()
-  const frontValues = values.slice(0, index)
-
-  const isDuplicated = frontValues.some(({ node }) => node.dataset.value === computedProps.value)
-  const isSelected = !isDuplicated && computedProps.value === value
-  const isFocused = index === focusedIndex
-
-  const displayValue = !placeholder || index !== 0 ? children ?? '' : undefined
-
-  const onClick = useCallback(
-    (ev: MouseEvent<HTMLLIElement>) => {
-      computedProps.onClick?.(ev)
-      if (!isTargetOption(ev.currentTarget)) return
-
-      onChange(computedProps.value ?? '', displayValue)
-
-      if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
-    },
-    [computedProps, onChange, displayValue, customCloseOnSelect, generalCloseOnSelect, onClose],
-  )
-
-  const onFocus = useCallback(
-    (ev: FocusEvent<HTMLLIElement>) => {
-      computedProps.onFocus?.(ev)
-      setFocusedIndex(index)
-    },
-    [computedProps, setFocusedIndex, index],
-  )
-
-  const rest = useClickable({
-    onClick,
-    onFocus,
-    ref: mergeRefs(register, itemRef, ref),
-    isDisabled,
-    isFocusable,
-  })
-
-  useUpdateEffect(() => {
-    if (!isSelected) return
-
-    setDisplayValue(displayValue)
-  }, [values, isSelected, displayValue, setDisplayValue])
-
-  useUpdateEffect(() => {
-    if (!isOpen) return
-
-    if (isFocused && !trulyDisabled && itemRef.current) {
-      requestAnimationFrame(() => itemRef.current?.focus())
-    } else if (listRef.current && !isActiveElement(listRef.current)) {
-      listRef.current.focus()
+    const css: CSSUIObject = {
+      paddingEnd: '2rem',
+      h,
+      minH,
+      display: 'flex',
+      alignItems: 'center',
+      ...styles.field,
     }
-  }, [isFocused, trulyDisabled, listRef, itemRef, isOpen])
 
-  const css: CSSUIObject = {
-    textDecoration: 'none',
-    color: 'inherit',
-    userSelect: 'none',
-    display: 'flex',
-    width: '100%',
-    alignItems: 'center',
-    textAlign: 'start',
-    flex: '0 0 auto',
-    outline: 0,
-    gap: '0.75rem',
-    ...styles.item,
-  }
-
-  return (
-    <ui.li
-      {...option}
-      {...omitObject(computedProps, ['value'])}
-      {...rest}
-      role='select-item'
-      data-value={computedProps.value ?? ''}
-      tabInde={isFocused ? 0 : -1}
-      aria-checked={ariaAttr(isSelected)}
-      className={cx('ui-select-item', className)}
-      __css={css}
-    >
-      {icon !== null ? (
-        <OptionIcon opacity={isSelected ? 1 : 0}>{icon || <CheckIcon />}</OptionIcon>
-      ) : null}
-      {icon ? (
-        <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
-          {children}
-        </ui.span>
-      ) : (
-        children
-      )}
-    </ui.li>
-  )
-})
-
-type OptionIconProps = HTMLUIProps<'span'>
-
-const OptionIcon = forwardRef<OptionIconProps, 'span'>(({ className, ...rest }, ref) => {
-  const { styles } = useSelect()
-
-  const css: CSSUIObject = {
-    flexShrink: 0,
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '0.85em',
-    ...styles.itemIcon,
-  }
-
-  return <ui.span ref={ref} className={cx('ui-select-icon', className)} __css={css} {...rest} />
-})
-
-const CheckIcon: FC = () => (
-  <svg viewBox='0 0 14 14' width='1em' height='1em'>
-    <polygon
-      fill='currentColor'
-      points='5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039'
-    />
-  </svg>
+    return (
+      <ui.div ref={ref} className={cx('ui-select-field', className)} __css={css} {...rest}>
+        <ui.span isTruncated={isTruncated}>{displayValue ?? placeholder}</ui.span>
+      </ui.div>
+    )
+  },
 )

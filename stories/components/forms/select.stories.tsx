@@ -111,9 +111,9 @@ export const withBorderColor: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const disabledPlaceholderHidden: ComponentStory<typeof Select> = () => {
+export const disabledPlaceholderInOptions: ComponentStory<typeof Select> = () => {
   return (
-    <Select placeholder='キャラクターを選択' isPlaceholderHidden={false}>
+    <Select placeholder='キャラクターを選択' placeholderInOptions={false}>
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>

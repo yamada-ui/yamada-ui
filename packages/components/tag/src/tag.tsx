@@ -90,7 +90,7 @@ const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () =
   const rest = useClickable({ ref, ...props })
 
   return (
-    <ui.span {...rest} aria-label='close' __css={css}>
+    <ui.span aria-label='close' __css={css} {...rest}>
       {children}
     </ui.span>
   )

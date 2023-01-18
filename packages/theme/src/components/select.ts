@@ -234,7 +234,7 @@ export const Select: ComponentMultiStyle = {
     unstyled: {
       field: {
         bg: 'transparent',
-        h: 'auto',
+        minH: 'auto',
         px: '0',
       },
     },

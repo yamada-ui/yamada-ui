@@ -43,9 +43,11 @@ export const Select: ComponentMultiStyle = {
     },
     icon: {
       width: '6',
-      height: '100%',
+      py: '2',
       color: ['blackAlpha.600', 'whiteAlpha.600'],
       fontSize: 'xl',
+      outline: 0,
+      rounded: 'md',
       _disabled: {
         opacity: 0.5,
       },
@@ -60,6 +62,10 @@ export const Select: ComponentMultiStyle = {
       _disabled: {
         pointerEvents: 'none',
         opacity: 0.4,
+      },
+      _focusVisible: {
+        boxShadow: 'outline',
+        bg: 'rgba(0, 0, 0, 0.14)',
       },
     },
     list: {

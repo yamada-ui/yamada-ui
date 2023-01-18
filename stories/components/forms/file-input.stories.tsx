@@ -31,16 +31,12 @@ export const withAccept: ComponentStory<typeof FileInput> = () => {
 }
 
 export const withSeparator: ComponentStory<typeof FileInput> = () => {
-  return <FileInput placeholder='multiple' multiple separator=' | ' />
+  return <FileInput placeholder='multiple' multiple separator=';' />
 }
 
 export const withTag: ComponentStory<typeof FileInput> = () => {
   return (
-    <FileInput
-      placeholder='multiple'
-      multiple
-      tag={({ value: { name }, index }) => <Tag ms={index ? 'sm' : undefined}>{name}</Tag>}
-    />
+    <FileInput placeholder='multiple' multiple tag={({ value: { name } }) => <Tag>{name}</Tag>} />
   )
 }
 

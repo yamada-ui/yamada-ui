@@ -50,6 +50,18 @@ export const Select: ComponentMultiStyle = {
         opacity: 0.5,
       },
     },
+    clearIcon: {
+      transitionProperty: 'common',
+      transitionDuration: 'normal',
+      pointerEvents: 'auto',
+      _hover: {
+        opacity: 0.8,
+      },
+      _disabled: {
+        pointerEvents: 'none',
+        opacity: 0.4,
+      },
+    },
     list: {
       rounded: 'md',
       w: '100%',
@@ -228,7 +240,7 @@ export const Select: ComponentMultiStyle = {
         fontSize: 'xs',
         pl: '2',
         pr: '8',
-        h: '6',
+        minH: '6',
         rounded: 'sm',
       },
       icon: {
@@ -241,7 +253,7 @@ export const Select: ComponentMultiStyle = {
         fontSize: 'sm',
         pl: '2',
         pr: '8',
-        h: '8',
+        minH: '8',
         rounded: 'sm',
       },
       icon: {
@@ -253,7 +265,7 @@ export const Select: ComponentMultiStyle = {
         fontSize: 'md',
         pl: '3',
         pr: '8',
-        h: '10',
+        minH: '10',
         rounded: 'md',
       },
       icon: {
@@ -265,7 +277,7 @@ export const Select: ComponentMultiStyle = {
         fontSize: 'lg',
         pl: '4',
         pr: '8',
-        h: '12',
+        minH: '12',
         rounded: 'md',
       },
       icon: {

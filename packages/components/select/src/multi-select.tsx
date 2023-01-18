@@ -9,7 +9,15 @@ import {
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
 import { cx, getValidChildren, handlerAll, isArray, omitObject } from '@yamada-ui/utils'
-import { cloneElement, FC, ReactElement, useCallback, useMemo } from 'react'
+import {
+  cloneElement,
+  CSSProperties,
+  FC,
+  MouseEventHandler,
+  ReactElement,
+  useCallback,
+  useMemo,
+} from 'react'
 import { SelectIcon, SelectClearIcon, SelectIconProps } from './select-icon'
 import { SelectList, SelectListProps } from './select-list'
 import {
@@ -30,7 +38,7 @@ type MultiSelectOptions = {
     value: string | number
     displayValue: string
     index: number
-    onRemove: () => void
+    onRemove: MouseEventHandler<HTMLElement>
   }>
   format?: Format
   separator?: string
@@ -188,23 +196,21 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
         return (
           <ui.span noOfLines={noOfLines}>
             {(displayValue as string[]).map((displayValue, index) => {
-              const el = tag({
-                value: (value as Value[])[index],
-                displayValue,
-                index,
-                onRemove: () => onChange((value as Value[])[index]),
-              })
+              const onRemove: MouseEventHandler<HTMLElement> = (e) => {
+                e.stopPropagation()
 
-              return el
-                ? cloneElement(el, {
-                    key: index,
-                    style: {
-                      marginBlockStart: '0.125rem',
-                      marginBlockEnd: '0.125rem',
-                      marginInlineEnd: '0.25rem',
-                    },
-                  })
-                : null
+                onChange((value as Value[])[index])
+              }
+
+              const el = tag({ value: (value as Value[])[index], displayValue, index, onRemove })
+
+              const style: CSSProperties = {
+                marginBlockStart: '0.125rem',
+                marginBlockEnd: '0.125rem',
+                marginInlineEnd: '0.25rem',
+              }
+
+              return el ? cloneElement(el, { style }) : null
             })}
           </ui.span>
         )

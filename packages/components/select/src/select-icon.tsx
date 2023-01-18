@@ -52,9 +52,11 @@ export const SelectClearIcon: FC<SelectClearIconProps> = ({ className, children,
   const ref = useRef<HTMLDivElement>(null)
   const { styles } = useSelectContext()
 
+  const isDisabled = props.disabled
+
   const rest = useClickable({
     ref,
-    isDisabled: props.disabled,
+    isDisabled,
     ...(props as HTMLAttributes<HTMLElement>),
   })
 

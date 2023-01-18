@@ -6,12 +6,7 @@ import { useSelectContext } from './use-select'
 
 export type SelectIconProps = HTMLUIProps<'div'>
 
-export const SelectIcon: FC<SelectIconProps> = ({
-  className,
-  pointerEvents = 'none',
-  children,
-  ...rest
-}) => {
+export const SelectIcon: FC<SelectIconProps> = ({ className, children, __css, ...rest }) => {
   const { styles } = useSelectContext()
 
   const css: CSSUIObject = {
@@ -21,9 +16,10 @@ export const SelectIcon: FC<SelectIconProps> = ({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    pointerEvents,
+    pointerEvents: 'none',
     cursor: 'pointer',
     ...styles.icon,
+    ...__css,
   }
 
   const validChildren = getValidChildren(children)
@@ -48,8 +44,14 @@ export const SelectIcon: FC<SelectIconProps> = ({
 }
 
 export const SelectClearIcon: FC<SelectIconProps> = ({ className, children, ...rest }) => {
+  const { styles } = useSelectContext()
+
   return (
-    <SelectIcon className={cx('ui-select-clear-icon', className)} {...rest} pointerEvents='auto'>
+    <SelectIcon
+      className={cx('ui-select-clear-icon', className)}
+      __css={styles.clearIcon}
+      {...rest}
+    >
       {children ?? <CloseIcon w='0.5em' h='0.5em' />}
     </SelectIcon>
   )

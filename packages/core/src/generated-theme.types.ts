@@ -518,6 +518,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | (string & {})
       variants: string & {}
     }
+    Dropzone: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | 'full' | (string & {})
+      variants: 'solid' | 'dashed' | 'unstyled' | (string & {})
+    }
     Heading: {
       sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})
       variants: string & {}

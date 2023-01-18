@@ -34,7 +34,7 @@ type Format = (value: string, index: number) => string
 
 type MultiSelectOptions = {
   data?: UIOption[]
-  tag?: FC<{
+  component?: FC<{
     value: string | number
     displayValue: string
     index: number
@@ -59,7 +59,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
   let {
     className,
     defaultValue = [],
-    tag,
+    component,
     format,
     separator,
     isClearable = true,
@@ -149,7 +149,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
           <ui.div className='ui-multi-select-container' __css={css} {...getContainerProps()}>
             <PopoverTrigger>
               <MultiSelectField
-                tag={tag}
+                component={component}
                 format={format}
                 separator={separator}
                 noOfLines={noOfLines}
@@ -178,13 +178,13 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
 })
 
 type MultiSelectFieldProps = HTMLUIProps<'div'> &
-  Pick<MultiSelectOptions, 'tag' | 'format' | 'separator'>
+  Pick<MultiSelectOptions, 'component' | 'format' | 'separator'>
 
 const defaultFormat: Format = (value) => value
 
 const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
   (
-    { className, tag, format = defaultFormat, separator = ',', noOfLines, h, minH, ...rest },
+    { className, component, format = defaultFormat, separator = ',', noOfLines, h, minH, ...rest },
     ref,
   ) => {
     const { value, displayValue, onChange, placeholder, styles } = useSelectContext()
@@ -192,7 +192,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
     const cloneChildren = useMemo(() => {
       if (!displayValue?.length) return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
 
-      if (tag) {
+      if (component) {
         return (
           <ui.span noOfLines={noOfLines}>
             {(displayValue as string[]).map((displayValue, index) => {
@@ -202,7 +202,12 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
                 onChange((value as Value[])[index])
               }
 
-              const el = tag({ value: (value as Value[])[index], displayValue, index, onRemove })
+              const el = component({
+                value: (value as Value[])[index],
+                displayValue,
+                index,
+                onRemove,
+              })
 
               const style: CSSProperties = {
                 marginBlockStart: '0.125rem',
@@ -230,7 +235,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
           </ui.span>
         )
       }
-    }, [displayValue, format, noOfLines, onChange, placeholder, separator, tag, value])
+    }, [displayValue, format, noOfLines, onChange, placeholder, separator, component, value])
 
     const css: CSSUIObject = {
       paddingEnd: '2rem',
@@ -246,7 +251,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
         ref={ref}
         className={cx('ui-multi-select-field', className)}
         __css={css}
-        py={displayValue?.length && tag ? '0.125rem' : undefined}
+        py={displayValue?.length && component ? '0.125rem' : undefined}
         {...rest}
       >
         {cloneChildren}

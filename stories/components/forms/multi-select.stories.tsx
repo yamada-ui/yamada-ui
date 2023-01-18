@@ -127,7 +127,7 @@ export const withTag: ComponentStory<typeof MultiSelect> = () => {
     <>
       <MultiSelect
         placeholder='キャラクターを選択'
-        tag={({ displayValue }) => <Tag>{displayValue}</Tag>}
+        component={({ displayValue }) => <Tag>{displayValue}</Tag>}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
@@ -136,7 +136,9 @@ export const withTag: ComponentStory<typeof MultiSelect> = () => {
 
       <MultiSelect
         placeholder='キャラクターを選択'
-        tag={({ displayValue, onRemove }) => <Tag onCloseClick={onRemove}>{displayValue}</Tag>}
+        component={({ displayValue, onRemove }) => (
+          <Tag onCloseClick={onRemove}>{displayValue}</Tag>
+        )}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>

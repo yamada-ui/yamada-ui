@@ -36,7 +36,11 @@ export const withSeparator: ComponentStory<typeof FileInput> = () => {
 
 export const withTag: ComponentStory<typeof FileInput> = () => {
   return (
-    <FileInput placeholder='multiple' multiple tag={({ value: { name } }) => <Tag>{name}</Tag>} />
+    <FileInput
+      placeholder='multiple'
+      multiple
+      component={({ value: { name } }) => <Tag>{name}</Tag>}
+    />
   )
 }
 

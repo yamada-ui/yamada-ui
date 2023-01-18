@@ -24,7 +24,17 @@ import {
   omitObject,
   pickObject,
 } from '@yamada-ui/utils'
-import { ChangeEvent, FC, ForwardedRef, ReactNode, useCallback, useMemo, useRef } from 'react'
+import {
+  ChangeEvent,
+  cloneElement,
+  CSSProperties,
+  FC,
+  ForwardedRef,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react'
 
 type Format = (value: File, index: number) => string
 
@@ -34,7 +44,7 @@ type FileInputOptions = {
   value?: File[] | null
   defaultValue?: File[] | null
   onChange?: (files: File[] | null) => void
-  tag?: FC<{ value: File; index: number }>
+  component?: FC<{ value: File; index: number }>
   format?: Format
   separator?: string
   children?: (files: File[] | null) => ReactNode
@@ -63,10 +73,10 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
     placeholder,
     value,
     defaultValue,
-    tag,
+    component,
     format = defaultFormat,
-    isTruncated = true,
-    separator = ', ',
+    noOfLines = 1,
+    separator = ',',
     resetRef,
     ...rest
   } = useFormControlProps(omitThemeProps(props))
@@ -89,7 +99,9 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      const files = !isNull(ev.currentTarget.files) ? Array.from(ev.currentTarget.files) : null
+      let files = !isNull(ev.currentTarget.files) ? Array.from(ev.currentTarget.files) : null
+
+      if (!files?.length) files = null
 
       setValues(files)
     },
@@ -105,20 +117,43 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
   assignRef(resetRef, onReset)
 
   const cloneChildren = useMemo(() => {
-    if (!values?.length) return <ui.span isTruncated={isTruncated}>{placeholder}</ui.span>
+    if (!values?.length) return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
 
     if (children) return children(values)
 
-    if (tag) {
+    if (component) {
       return (
-        <ui.span isTruncated={isTruncated}>
-          {values.map((value, index) => tag({ value, index }))}
+        <ui.span noOfLines={noOfLines}>
+          {values.map((value, index) => {
+            const el = component({ value, index })
+
+            const style: CSSProperties = {
+              marginBlockStart: '0.125rem',
+              marginBlockEnd: '0.125rem',
+              marginInlineEnd: '0.25rem',
+            }
+
+            return el ? cloneElement(el, { style }) : null
+          })}
         </ui.span>
       )
     } else {
-      return <ui.span isTruncated={isTruncated}>{values.map(format).join(separator)}</ui.span>
+      return (
+        <ui.span noOfLines={noOfLines}>
+          {values.map((value, index) => {
+            const isLast = values.length === index + 1
+
+            return (
+              <ui.span key={index} display='inline-block' me='0.25rem'>
+                {format(value, index)}
+                {!isLast ? separator : null}
+              </ui.span>
+            )
+          })}
+        </ui.span>
+      )
     }
-  }, [children, format, isTruncated, placeholder, separator, tag, values])
+  }, [children, format, noOfLines, placeholder, separator, component, values])
 
   const css: CSSUIObject = {
     display: 'flex',
@@ -156,6 +191,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
       <ui.div
         ref={ref}
         className={cx('ui-file-input', className)}
+        py={values?.length && component ? '0.125rem' : undefined}
         {...omitObject(rest, ['onChange'])}
         __css={css}
         tabIndex={0}

@@ -10,12 +10,12 @@ import {
 import { Icon } from '@yamada-ui/icon'
 import { useClickable } from '@yamada-ui/use-clickable'
 import { cx } from '@yamada-ui/utils'
-import { FC, ReactNode, useRef } from 'react'
+import { FC, HTMLAttributes, MouseEventHandler, ReactNode, useRef } from 'react'
 
 type TagnOptions = {
   leftIcon?: React.ReactElement
   rightIcon?: React.ReactElement
-  onCloseClick?: () => void
+  onCloseClick?: MouseEventHandler<HTMLElement>
   isDisabled?: boolean
 }
 
@@ -71,10 +71,9 @@ const CloseIcon: FC = () => {
   )
 }
 
-const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () => void }> = ({
-  children,
-  ...props
-}) => {
+export type CloseButtonProps = HTMLUIProps<'span'> & { isDisabled?: boolean }
+
+const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
 
   const styles = useMultiComponentStyle('Tag', props)
@@ -87,7 +86,7 @@ const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () =
     ...styles.closeButton,
   }
 
-  const rest = useClickable({ ref, ...props })
+  const rest = useClickable({ ref, ...(props as HTMLAttributes<HTMLElement>) })
 
   return (
     <ui.span aria-label='close' __css={css} {...rest}>

@@ -8,8 +8,9 @@ import {
   CSSUIObject,
 } from '@yamada-ui/core'
 import { Icon } from '@yamada-ui/icon'
+import { useClickable } from '@yamada-ui/use-clickable'
 import { cx } from '@yamada-ui/utils'
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useRef } from 'react'
 
 type TagnOptions = {
   leftIcon?: React.ReactElement
@@ -71,11 +72,11 @@ const CloseIcon: FC = () => {
 }
 
 const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () => void }> = ({
-  isDisabled,
   children,
-  onClick,
   ...props
 }) => {
+  const ref = useRef<HTMLSpanElement>(null)
+
   const styles = useMultiComponentStyle('Tag', props)
 
   const css: CSSUIObject = {
@@ -86,9 +87,11 @@ const CloseButton: FC<{ isDisabled?: boolean; children: ReactNode; onClick: () =
     ...styles.closeButton,
   }
 
+  const rest = useClickable({ ref, ...props })
+
   return (
-    <ui.button type='button' aria-label='close' disabled={isDisabled} __css={css} onClick={onClick}>
+    <ui.span {...rest} aria-label='close' __css={css}>
       {children}
-    </ui.button>
+    </ui.span>
   )
 }

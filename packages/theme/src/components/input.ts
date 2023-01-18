@@ -166,12 +166,12 @@ export const Input: ComponentMultiStyle = {
     unstyled: {
       field: {
         bg: 'transparent',
-        h: 'auto',
+        minH: 'auto',
         px: '0',
       },
       addon: {
         bg: 'transparent',
-        h: 'auto',
+        minH: 'auto',
         px: '0',
       },
     },
@@ -182,13 +182,13 @@ export const Input: ComponentMultiStyle = {
       field: {
         fontSize: 'xs',
         px: '2',
-        h: '6',
+        minH: '6',
         rounded: 'sm',
       },
       addon: {
         fontSize: 'xs',
         px: '2',
-        h: '6',
+        minH: '6',
         rounded: 'sm',
       },
     },
@@ -196,13 +196,13 @@ export const Input: ComponentMultiStyle = {
       field: {
         fontSize: 'sm',
         px: '2',
-        h: '8',
+        minH: '8',
         rounded: 'sm',
       },
       addon: {
         fontSize: 'sm',
         px: '2',
-        h: '8',
+        minH: '8',
         rounded: 'sm',
       },
     },
@@ -210,13 +210,13 @@ export const Input: ComponentMultiStyle = {
       field: {
         fontSize: 'md',
         px: '3',
-        h: '10',
+        minH: '10',
         rounded: 'md',
       },
       addon: {
         fontSize: 'md',
         px: '3',
-        h: '10',
+        minH: '10',
         rounded: 'md',
       },
     },
@@ -224,13 +224,13 @@ export const Input: ComponentMultiStyle = {
       field: {
         fontSize: 'lg',
         px: '4',
-        h: '12',
+        minH: '12',
         rounded: 'md',
       },
       addon: {
         fontSize: 'lg',
         px: '4',
-        h: '12',
+        minH: '12',
         rounded: 'md',
       },
     },

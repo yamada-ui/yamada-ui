@@ -124,14 +124,25 @@ export const withSeparator: ComponentStory<typeof MultiSelect> = () => {
 
 export const withTag: ComponentStory<typeof MultiSelect> = () => {
   return (
-    <MultiSelect
-      placeholder='キャラクターを選択'
-      tag={({ value, index }) => <Tag ms={index ? 'sm' : undefined}>{value}</Tag>}
-    >
-      <Option value='孫悟空'>孫悟空</Option>
-      <Option value='ベジータ'>ベジータ</Option>
-      <Option value='フリーザ'>フリーザ</Option>
-    </MultiSelect>
+    <>
+      <MultiSelect
+        placeholder='キャラクターを選択'
+        tag={({ displayValue }) => <Tag>{displayValue}</Tag>}
+      >
+        <Option value='孫悟空'>孫悟空</Option>
+        <Option value='ベジータ'>ベジータ</Option>
+        <Option value='フリーザ'>フリーザ</Option>
+      </MultiSelect>
+
+      <MultiSelect
+        placeholder='キャラクターを選択'
+        tag={({ displayValue, onRemove }) => <Tag onCloseClick={onRemove}>{displayValue}</Tag>}
+      >
+        <Option value='孫悟空'>孫悟空</Option>
+        <Option value='ベジータ'>ベジータ</Option>
+        <Option value='フリーザ'>フリーザ</Option>
+      </MultiSelect>
+    </>
   )
 }
 

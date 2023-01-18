@@ -8,11 +8,12 @@ import {
   ThemeProps,
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
-import { cx, getValidChildren, handlerAll, isArray } from '@yamada-ui/utils'
-import { FC, ReactElement, useCallback, useMemo } from 'react'
+import { cx, getValidChildren, handlerAll, isArray, omitObject } from '@yamada-ui/utils'
+import { cloneElement, FC, ReactElement, useCallback, useMemo } from 'react'
 import { SelectIcon, SelectClearIcon, SelectIconProps } from './select-icon'
 import { SelectList, SelectListProps } from './select-list'
 import {
+  Value,
   useSelect,
   UseSelectProps,
   SelectDescendantsContextProvider,
@@ -25,7 +26,12 @@ type Format = (value: string, index: number) => string
 
 type MultiSelectOptions = {
   data?: UIOption[]
-  tag?: FC<{ value: string; index: number }>
+  tag?: FC<{
+    value: string | number
+    displayValue: string
+    index: number
+    onRemove: () => void
+  }>
   format?: Format
   separator?: string
   isClearable?: boolean
@@ -49,7 +55,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     format,
     separator,
     isClearable = true,
-    isTruncated = true,
+    noOfLines = 1,
     data = [],
     color,
     h,
@@ -138,7 +144,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
                 tag={tag}
                 format={format}
                 separator={separator}
-                isTruncated={isTruncated}
+                noOfLines={noOfLines}
                 h={h}
                 minH={minH}
                 {...getFieldProps({}, ref)}
@@ -149,10 +155,10 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
               <SelectClearIcon
                 {...clearIcon}
                 onClick={handlerAll(clearIcon?.onClick, onClear)}
-                {...formControlProps}
+                {...omitObject(formControlProps, ['id'])}
               />
             ) : (
-              <SelectIcon {...icon} {...formControlProps} />
+              <SelectIcon {...icon} {...omitObject(formControlProps, ['id'])} />
             )}
 
             {!isEmpty ? <SelectList {...list}>{children ?? computedChildren}</SelectList> : null}
@@ -170,28 +176,55 @@ const defaultFormat: Format = (value) => value
 
 const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
   (
-    { className, tag, format = defaultFormat, separator = ', ', isTruncated, h, minH, ...rest },
+    { className, tag, format = defaultFormat, separator = ',', noOfLines, h, minH, ...rest },
     ref,
   ) => {
-    const { displayValue, placeholder, styles } = useSelectContext()
+    const { value, displayValue, onChange, placeholder, styles } = useSelectContext()
 
     const cloneChildren = useMemo(() => {
-      if (!displayValue?.length) return <ui.span isTruncated={isTruncated}>{placeholder}</ui.span>
+      if (!displayValue?.length) return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
 
       if (tag) {
         return (
-          <ui.span isTruncated={isTruncated}>
-            {(displayValue as string[]).map((value, index) => tag({ value, index }))}
+          <ui.span noOfLines={noOfLines}>
+            {(displayValue as string[]).map((displayValue, index) => {
+              const el = tag({
+                value: (value as Value[])[index],
+                displayValue,
+                index,
+                onRemove: () => onChange((value as Value[])[index]),
+              })
+
+              return el
+                ? cloneElement(el, {
+                    key: index,
+                    style: {
+                      marginBlockStart: '0.125rem',
+                      marginBlockEnd: '0.125rem',
+                      marginInlineEnd: '0.25rem',
+                    },
+                  })
+                : null
+            })}
           </ui.span>
         )
       } else {
         return (
-          <ui.span isTruncated={isTruncated}>
-            {(displayValue as string[]).map(format).join(separator)}
+          <ui.span noOfLines={noOfLines}>
+            {(displayValue as string[]).map((value, index) => {
+              const isLast = displayValue.length === index + 1
+
+              return (
+                <ui.span key={index} display='inline-block' me='0.25rem'>
+                  {format(value, index)}
+                  {!isLast ? separator : null}
+                </ui.span>
+              )
+            })}
           </ui.span>
         )
       }
-    }, [displayValue, format, isTruncated, placeholder, separator, tag])
+    }, [displayValue, format, noOfLines, onChange, placeholder, separator, tag, value])
 
     const css: CSSUIObject = {
       paddingEnd: '2rem',
@@ -203,8 +236,14 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-multi-select-field', className)} __css={css} {...rest}>
-        <ui.span>{cloneChildren}</ui.span>
+      <ui.div
+        ref={ref}
+        className={cx('ui-multi-select-field', className)}
+        __css={css}
+        py={displayValue?.length && tag ? '0.125rem' : undefined}
+        {...rest}
+      >
+        {cloneChildren}
       </ui.div>
     )
   },

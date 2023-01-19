@@ -105,7 +105,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     })
   }
 
-  const isEmpty = !validChildren.length && !computedChildren.length
+  let isEmpty = !validChildren.length && !computedChildren.length
 
   const {
     value,
@@ -129,10 +129,15 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
   h = h ?? height
   minH = minH ?? minHeight
 
-  const onClear = useCallback(() => {
-    setValue([])
-    setDisplayValue(undefined)
-  }, [setDisplayValue, setValue])
+  const onClear: MouseEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      e.stopPropagation()
+
+      setValue([])
+      setDisplayValue(undefined)
+    },
+    [setDisplayValue, setValue],
+  )
 
   const css: CSSUIObject = {
     position: 'relative',

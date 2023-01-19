@@ -1,6 +1,6 @@
 import { ui, CSSUIObject, forwardRef, HTMLUIProps } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { FC, ReactElement } from 'react'
+import { CSSProperties, FC, ReactElement } from 'react'
 import { useSelectContext, useSelectOption, UseSelectOptionProps } from './use-select'
 
 type OptionOptions = { icon?: ReactElement }
@@ -8,7 +8,7 @@ type OptionOptions = { icon?: ReactElement }
 export type OptionProps = UseSelectOptionProps & OptionOptions
 
 export const Option = forwardRef<OptionProps, 'li'>(({ className, icon, ...rest }, ref) => {
-  const { styles } = useSelectContext()
+  const { omitSelectedValues, styles } = useSelectContext()
   const { isSelected, customIcon, children, getOptionProps } = useSelectOption(ref, rest)
 
   icon = icon ?? customIcon
@@ -27,8 +27,25 @@ export const Option = forwardRef<OptionProps, 'li'>(({ className, icon, ...rest 
     ...styles.item,
   }
 
+  const style: CSSProperties = {
+    border: '0px',
+    clip: 'rect(0px, 0px, 0px, 0px)',
+    height: '1px',
+    width: '1px',
+    margin: '-1px',
+    padding: '0px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    position: 'absolute',
+  }
+
   return (
-    <ui.li className={cx('ui-select-item', className)} __css={css} {...getOptionProps()}>
+    <ui.li
+      className={cx('ui-select-item', className)}
+      __css={css}
+      style={omitSelectedValues && isSelected ? style : undefined}
+      {...getOptionProps()}
+    >
       {icon !== null ? (
         <OptionIcon opacity={isSelected ? 1 : 0}>{icon || <CheckIcon />}</OptionIcon>
       ) : null}

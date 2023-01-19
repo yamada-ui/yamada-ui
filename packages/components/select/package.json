@@ -27,8 +27,7 @@
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*",
-    "@yamada-ui/use-disclosure": "workspace:*"
+    "@yamada-ui/use-controllable-state": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

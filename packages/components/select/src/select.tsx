@@ -36,7 +36,7 @@ type SelectOptions = {
 }
 
 export type SelectProps = ThemeProps<'Select'> &
-  Omit<UseSelectProps<string | number>, 'isEmpty'> &
+  Omit<UseSelectProps<string | number>, 'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'> &
   SelectOptions
 
 export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {

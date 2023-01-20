@@ -104,9 +104,9 @@ module.exports = function (plop) {
       actions.push({
         type: 'addMany',
         templateFiles:
-          componentType === 'Yes' ? 'plop/component/multi-package/**' : 'plop/component/package/**',
+          componentType === 'Yes' ? 'plop/component/package-multi/**' : 'plop/component/package/**',
         destination: `./packages/components/{{dashCase packageName}}`,
-        base: componentType === 'Yes' ? 'plop/component/multi-package' : 'plop/component/package',
+        base: componentType === 'Yes' ? 'plop/component/package-multi' : 'plop/component/package',
         data: { packageName },
         abortOnFail: true,
       })

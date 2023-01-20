@@ -123,8 +123,6 @@ export const useSelect = <T extends MaybeValue = Value>({
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
 
-  console.log(isAllSelected)
-
   const initialFocusRef = useRef<any>(null)
   const listRef = useRef<HTMLDivElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))

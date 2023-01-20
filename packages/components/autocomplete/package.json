@@ -22,6 +22,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/select": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/popover": "workspace:*",

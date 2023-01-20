@@ -1,18 +1,15 @@
-import { ui, forwardRef, HTMLUIProps, layoutStylesProperties } from '@yamada-ui/core'
-import { splitObject, cx } from '@yamada-ui/utils'
-import { useSelectContext } from './use-select'
+import { ui, forwardRef, HTMLUIProps } from '@yamada-ui/core'
+import { cx } from '@yamada-ui/utils'
+import { useSelectContext, useSelectOptionGroup, UseSelectOptionGroupProps } from './use-select'
 
-type OptionGroupOptions = {
-  label: string
-}
+type OptionGroupOptions = UseSelectOptionGroupProps
 
 export type OptionGroupProps = HTMLUIProps<'ul'> & OptionGroupOptions
 
 export const OptionGroup = forwardRef<OptionGroupProps, 'ul'>(
-  ({ className, label, color, h, height, minH, minHeight, children, ...rest }, ref) => {
+  ({ className, color, h, height, minH, minHeight, children, ...rest }, ref) => {
     const { styles } = useSelectContext()
-
-    const computedRest = splitObject(rest, layoutStylesProperties)
+    const { label, getContainerProps, getGroupProps } = useSelectOptionGroup(rest)
 
     h = h ?? height
     minH = minH ?? minHeight
@@ -21,17 +18,16 @@ export const OptionGroup = forwardRef<OptionGroupProps, 'ul'>(
       <ui.li
         className='ui-select-group-container'
         __css={{ w: '100%', h: 'fit-content', color }}
-        {...computedRest[0]}
+        {...getContainerProps()}
       >
         <ui.span className={cx('ui-select-group-label')} __css={styles.groupLabel} noOfLines={1}>
           {label}
         </ui.span>
 
         <ui.ul
-          ref={ref}
+          {...getGroupProps({}, ref)}
           className={cx('ui-select-group', className)}
           __css={{ h, minH, ...styles.group }}
-          {...computedRest[1]}
         >
           {children}
         </ui.ul>

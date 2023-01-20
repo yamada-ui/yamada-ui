@@ -161,6 +161,48 @@ export const withFormat: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
+export const withOmitSelectedValues: ComponentStory<typeof MultiSelect> = () => {
+  return (
+    <MultiSelect placeholder='キャラクターを選択' omitSelectedValues={true}>
+      <OptionGroup label='地球人'>
+        <Option value='孫悟空'>孫悟空</Option>
+        <Option value='孫悟飯'>孫悟飯</Option>
+        <Option value='クリリン'>クリリン</Option>
+      </OptionGroup>
+
+      <OptionGroup label='フリーザ軍'>
+        <Option value='フリーザ'>フリーザ</Option>
+        <Option value='ギニュー'>ギニュー</Option>
+        <Option value='リクーム'>リクーム</Option>
+        <Option value='バータ'>バータ</Option>
+        <Option value='ジース'>ジース</Option>
+        <Option value='グルド'>グルド</Option>
+      </OptionGroup>
+    </MultiSelect>
+  )
+}
+
+export const withMaxSelectedValues: ComponentStory<typeof MultiSelect> = () => {
+  return (
+    <MultiSelect placeholder='キャラクターを選択' maxSelectedValues={3}>
+      <OptionGroup label='地球人'>
+        <Option value='孫悟空'>孫悟空</Option>
+        <Option value='孫悟飯'>孫悟飯</Option>
+        <Option value='クリリン'>クリリン</Option>
+      </OptionGroup>
+
+      <OptionGroup label='フリーザ軍'>
+        <Option value='フリーザ'>フリーザ</Option>
+        <Option value='ギニュー'>ギニュー</Option>
+        <Option value='リクーム'>リクーム</Option>
+        <Option value='バータ'>バータ</Option>
+        <Option value='ジース'>ジース</Option>
+        <Option value='グルド'>グルド</Option>
+      </OptionGroup>
+    </MultiSelect>
+  )
+}
+
 export const withCloseOnSelect: ComponentStory<typeof MultiSelect> = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' closeOnSelect={true}>

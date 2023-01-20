@@ -25,6 +25,7 @@ import {
   isHTMLElement,
   ariaAttr,
   isArray,
+  isUndefined,
 } from '@yamada-ui/utils'
 import {
   Dispatch,
@@ -376,15 +377,20 @@ export const useSelect = <T extends MaybeValue = Value>({
   )
 
   useEffect(() => {
-    if (!omitSelectedValues || !isMulti) return
+    if (!isMulti) return
 
-    if (value.length > 0 && value.length === descendants.count()) {
+    if (!omitSelectedValues && isUndefined(maxSelectedValues)) return
+
+    const isAll = value.length > 0 && value.length === descendants.count()
+    const isMax = value.length === maxSelectedValues
+
+    if (isAll || isMax) {
       onClose()
       setIsAllSelected(true)
     } else {
       setIsAllSelected(false)
     }
-  }, [omitSelectedValues, value, descendants, isMulti, onClose])
+  }, [omitSelectedValues, value, descendants, isMulti, onClose, maxSelectedValues])
 
   useUpdateEffect(() => {
     if (!isOpen) setFocusedIndex(-1)
@@ -445,7 +451,6 @@ export const useSelect = <T extends MaybeValue = Value>({
     placeholder,
     placeholderInOptions,
     omitSelectedValues,
-    maxSelectedValues,
     onChange,
     isOpen,
     onOpen,
@@ -519,7 +524,7 @@ export type UseSelectOptionGroupProps = HTMLUIProps<'ul'> & {
 }
 
 export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupProps) => {
-  const { value } = useSelectContext()
+  const { value, omitSelectedValues } = useSelectContext()
 
   const isMulti = isArray(value)
 
@@ -527,9 +532,10 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
 
   const values = descendants.values()
   const enabledValues = descendants.enabledValues()
-  const selectedValues = enabledValues.filter(
-    ({ node }) => isMulti && value.includes(node.dataset.value ?? ''),
-  )
+  const selectedValues =
+    isMulti && omitSelectedValues
+      ? enabledValues.filter(({ node }) => value.includes(node.dataset.value ?? ''))
+      : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const childValues = values.filter(
     ({ node, index }) =>

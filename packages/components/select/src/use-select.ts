@@ -353,7 +353,9 @@ export const useSelect = <T extends MaybeValue = Value>({
 
   const onClose = useCallback(() => {
     setIsOpen(false)
-  }, [])
+
+    rest.onClose?.()
+  }, [rest])
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
@@ -435,7 +437,7 @@ export const useSelect = <T extends MaybeValue = Value>({
       'aria-expanded': dataAttr(isOpen),
       onKeyDown: handlerAll(rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, isMulti, displayValue, rest.onKeyDown, onKeyDown],
+    [computedProps, isOpen, isMulti, displayValue, rest, onKeyDown],
   )
 
   return {

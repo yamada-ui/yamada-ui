@@ -39,12 +39,12 @@ import { Tooltip } from './tooltip'
 
 export default {
   Accordion,
-  Checkbox,
   Alert,
   Badge,
   Breadcrumb,
   Button,
   Card,
+  Checkbox,
   CloseButton,
   Container,
   Dialog,

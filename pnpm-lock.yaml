@@ -285,6 +285,31 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/autocomplete:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/form-control': workspace:*
+      '@yamada-ui/popover': workspace:*
+      '@yamada-ui/select': workspace:*
+      '@yamada-ui/use-clickable': workspace:*
+      '@yamada-ui/use-controllable-state': workspace:*
+      '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/form-control': link:../form-control
+      '@yamada-ui/popover': link:../popover
+      '@yamada-ui/select': link:../select
+      '@yamada-ui/use-clickable': link:../../hooks/use-clickable
+      '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
+      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/badge:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1384,6 +1409,7 @@ importers:
     specifiers:
       '@yamada-ui/accordion': workspace:*
       '@yamada-ui/alert': workspace:*
+      '@yamada-ui/autocomplete': workspace:*
       '@yamada-ui/badge': workspace:*
       '@yamada-ui/breadcrumb': workspace:*
       '@yamada-ui/button': workspace:*
@@ -1458,6 +1484,7 @@ importers:
     dependencies:
       '@yamada-ui/accordion': link:../components/accordion
       '@yamada-ui/alert': link:../components/alert
+      '@yamada-ui/autocomplete': link:../components/autocomplete
       '@yamada-ui/badge': link:../components/badge
       '@yamada-ui/breadcrumb': link:../components/breadcrumb
       '@yamada-ui/button': link:../components/button

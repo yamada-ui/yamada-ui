@@ -97,7 +97,6 @@ export type UseSelectProps<T extends MaybeValue = Value> = Omit<
     isEmpty: boolean
     omitSelectedValues?: boolean
     maxSelectedValues?: number
-    container?: Omit<HTMLUIProps<'div'>, 'children'>
     option?: Omit<OptionProps, 'value' | 'children'>
   }
 
@@ -110,7 +109,6 @@ export const useSelect = <T extends MaybeValue = Value>({
   isEmpty,
   placement = 'bottom-start',
   duration = 0.2,
-  container,
   option,
   ...rest
 }: UseSelectProps<T>) => {
@@ -419,20 +417,19 @@ export const useSelect = <T extends MaybeValue = Value>({
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
-      ...props,
       ...computedProps[0],
-      ...container,
+      ...props,
       ...formControlProps,
     }),
-    [computedProps, container, formControlProps],
+    [computedProps, formControlProps],
   )
 
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
-      ...props,
-      ...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange']),
       tabIndex: 0,
+      ...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange']),
+      ...props,
       'data-active': dataAttr(isOpen),
       'data-placeholder': dataAttr(!isMulti ? displayValue === undefined : !displayValue?.length),
       'aria-expanded': dataAttr(isOpen),

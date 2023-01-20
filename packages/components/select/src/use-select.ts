@@ -79,8 +79,8 @@ type SelectContext = Omit<UseSelectProps, 'value' | 'defaultValue' | 'onChange' 
 }
 
 export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
+  strict: false,
   name: 'SelectContext',
-  errorMessage: `useSelectContext returned is 'undefined'. Seems you forgot to wrap the components in "<Select />"`,
 })
 
 export type UseSelectProps<T extends MaybeValue = Value> = Omit<

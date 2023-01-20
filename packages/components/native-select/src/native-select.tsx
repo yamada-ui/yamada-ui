@@ -109,7 +109,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
   return (
     <NativeSelectProvider value={styles}>
       <ui.div
-        className='ui-native-select-container'
+        className='ui-native-select'
         __css={{ position: 'relative', w: '100%', h: 'fit-content', color, ...styles.container }}
         {...computedProps[0]}
         {...container}
@@ -117,7 +117,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
       >
         <ui.select
           ref={ref}
-          className={cx('ui-native-select', className)}
+          className={cx('ui-native-select-field', className)}
           value={value}
           __css={{ paddingEnd: '2rem', h: h ?? height, minH: minH ?? minHeight, ...styles.field }}
           {...computedProps[1]}

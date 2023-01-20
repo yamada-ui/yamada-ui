@@ -115,7 +115,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider value={{ ...rest, placeholder, placeholderInOptions, styles }}>
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-select-container' __css={css} {...getContainerProps(container)}>
+          <ui.div className='ui-select' __css={css} {...getContainerProps(container)}>
             <PopoverTrigger>
               <SelectField
                 isTruncated={isTruncated}

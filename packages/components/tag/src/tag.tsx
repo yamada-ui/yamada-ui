@@ -71,7 +71,7 @@ const CloseIcon: FC = () => {
   )
 }
 
-export type CloseButtonProps = HTMLUIProps<'span'> & { isDisabled?: boolean }
+type CloseButtonProps = HTMLUIProps<'span'> & { isDisabled?: boolean }
 
 const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)

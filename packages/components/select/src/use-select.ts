@@ -193,20 +193,20 @@ export const useSelect = <T extends MaybeValue = Value>({
   }, [descendants, enabledValues, isMulti, omitSelectedValues, selectedIndexes])
 
   const onFocusSelected = useCallback(() => {
-    // const id = setTimeout(() => {
-    const values = descendants.enabledValues()
+    const id = setTimeout(() => {
+      const values = descendants.enabledValues()
 
-    const selected = values.find(({ node }) =>
-      !isMulti ? node.dataset.value === value : value.includes(node.dataset.value ?? ''),
-    )
+      const selected = values.find(({ node }) =>
+        !isMulti ? node.dataset.value === value : value.includes(node.dataset.value ?? ''),
+      )
 
-    if (selected) {
-      setFocusedIndex(selected.index)
-      initialFocusRef.current = selected.node
-    }
-    // })
+      if (selected) {
+        setFocusedIndex(selected.index)
+        initialFocusRef.current = selected.node
+      }
+    })
 
-    // timeoutIds.current.add(id)
+    timeoutIds.current.add(id)
   }, [descendants, isMulti, value])
 
   const onFocusNext = useCallback(() => {

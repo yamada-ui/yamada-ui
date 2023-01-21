@@ -16,7 +16,7 @@ import {
 } from '@yamada-ui/utils'
 import { FC, PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 
-type Trigger = 'click' | 'hover'
+type Trigger = 'click' | 'hover' | 'never'
 type Animation = 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
 
 type PopoverOptions = {

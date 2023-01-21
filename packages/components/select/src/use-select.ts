@@ -358,7 +358,7 @@ export const useSelect = <T extends MaybeValue = Value>({
   }, [rest])
 
   const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLInputElement>) => {
+    (ev: KeyboardEvent<HTMLDivElement>) => {
       const actions: Record<string, Function> = {
         Enter: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusFirst : undefined),
         ArrowDown: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusFirst : undefined),

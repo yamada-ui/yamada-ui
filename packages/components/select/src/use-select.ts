@@ -435,7 +435,7 @@ export const useSelect = <T extends MaybeValue = Value>({
       'data-active': dataAttr(isOpen),
       'data-placeholder': dataAttr(!isMulti ? displayValue === undefined : !displayValue?.length),
       'aria-expanded': dataAttr(isOpen),
-      onKeyDown: handlerAll(rest.onKeyDown, onKeyDown),
+      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
     [computedProps, isOpen, isMulti, displayValue, rest, onKeyDown],
   )

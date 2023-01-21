@@ -8,7 +8,7 @@ export type UseOutsideClickProps = {
 }
 
 export const useOutsideClick = ({ ref, handler, enabled = true }: UseOutsideClickProps) => {
-  const savedHandler = useCallbackRef(handler)
+  const handlerRef = useCallbackRef(handler)
 
   const state = useRef({
     isPointerDown: false,
@@ -32,7 +32,7 @@ export const useOutsideClick = ({ ref, handler, enabled = true }: UseOutsideClic
       if (state.current.isPointerDown && handler && isValidEvent(ev, ref)) {
         state.current.isPointerDown = false
 
-        savedHandler(ev)
+        handlerRef(ev)
       }
     }
 
@@ -42,7 +42,7 @@ export const useOutsideClick = ({ ref, handler, enabled = true }: UseOutsideClic
       if (handler && state.current.isPointerDown && isValidEvent(ev, ref)) {
         state.current.isPointerDown = false
 
-        savedHandler(ev)
+        handlerRef(ev)
       }
     }
 
@@ -59,7 +59,7 @@ export const useOutsideClick = ({ ref, handler, enabled = true }: UseOutsideClic
       doc.removeEventListener('touchstart', onPointerDown, true)
       doc.removeEventListener('touchend', onTouchEnd, true)
     }
-  }, [handler, ref, savedHandler, state, enabled])
+  }, [handler, ref, handlerRef, state, enabled])
 }
 
 const isValidEvent = (ev: MouseEvent | TouchEvent, ref: RefObject<HTMLElement>) => {

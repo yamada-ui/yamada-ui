@@ -101,13 +101,21 @@ const descendantsManager = <T extends HTMLElement, K extends Record<string, any>
   const enabledIndexOf = (node: T | null) =>
     node == null ? -1 : enabledValues().findIndex((i) => i.node.isSameNode(node))
 
-  const values = () => {
+  const values = (
+    filter?: (value: Descendant<T, K>, index: number, array: Descendant<T, K>[]) => boolean,
+  ) => {
     const values = Array.from(descendants.values())
 
-    return values.sort((a, b) => a.index - b.index)
+    if (filter) {
+      return values.filter(filter).sort((a, b) => a.index - b.index)
+    } else {
+      return values.sort((a, b) => a.index - b.index)
+    }
   }
 
-  const enabledValues = () => values().filter((descendant) => !descendant.disabled)
+  const enabledValues = (
+    filter?: (value: Descendant<T, K>, index: number, array: Descendant<T, K>[]) => boolean,
+  ) => values(filter).filter(({ disabled }) => !disabled)
 
   const value = (index: number) => {
     if (count() === 0) return undefined

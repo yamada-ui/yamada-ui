@@ -136,13 +136,12 @@ export const useSelect = <T extends MaybeValue = Value>({
   const isMulti = isArray(value)
   const isEmptyValue = (!isMulti ? !value : !value.length) && !(placeholder && placeholderInOptions)
 
-  const selectedValues = descendants
-    .enabledValues()
-    .filter(({ node }) => isMulti && value.includes(node.dataset.value ?? ''))
+  const selectedValues = descendants.enabledValues(
+    ({ node }) => isMulti && value.includes(node.dataset.value ?? ''),
+  )
+
   const selectedIndexes = selectedValues.map(({ index }) => index)
-  const enabledValues = descendants
-    .enabledValues()
-    .filter(({ index }) => !selectedIndexes.includes(index))
+  const enabledValues = descendants.enabledValues(({ index }) => !selectedIndexes.includes(index))
 
   const onFocusList = useCallback(() => {
     requestAnimationFrame(() => listRef.current?.focus({ preventScroll: false }))
@@ -530,10 +529,9 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
   const descendants = useSelectDescendantsContext()
 
   const values = descendants.values()
-  const enabledValues = descendants.enabledValues()
   const selectedValues =
     isMulti && omitSelectedValues
-      ? enabledValues.filter(({ node }) => value.includes(node.dataset.value ?? ''))
+      ? descendants.enabledValues(({ node }) => value.includes(node.dataset.value ?? ''))
       : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const childValues = values.filter(

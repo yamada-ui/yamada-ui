@@ -37,9 +37,10 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-type DescendantOptions<T = {}> = T & {
+type DescendantOptions<T, K = {}> = K & {
   disabled?: boolean
   id?: string
+  filter?: FilterDescendant<T, K>
 }
 
 type Descendant<T, K> = DescendantOptions<K> & {
@@ -47,7 +48,13 @@ type Descendant<T, K> = DescendantOptions<K> & {
   index: number
 }
 
-const descendantsManager = <T extends HTMLElement, K extends Record<string, any> = {}>() => {
+type FilterDescendant<T, K> = (
+  value: Descendant<T, K>,
+  index: number,
+  array: Descendant<T, K>[],
+) => boolean
+
+const descendantsManager = <T extends HTMLElement, K = {}>() => {
   const descendants = new Map<T, Descendant<T, K>>()
 
   const assignIndex = (newDescendants: Node[]) => {
@@ -59,7 +66,7 @@ const descendantsManager = <T extends HTMLElement, K extends Record<string, any>
     })
   }
 
-  const setDescendants = (node: T | null, options?: DescendantOptions<K>) => {
+  const setDescendants = (node: T | null, options?: DescendantOptions<T, K>) => {
     if (!node || descendants.has(node)) return
 
     const keys = Array.from(descendants.keys()).concat(node)
@@ -74,7 +81,7 @@ const descendantsManager = <T extends HTMLElement, K extends Record<string, any>
     assignIndex(sorted)
   }
 
-  const register = (nodeOrOptions: T | null | DescendantOptions<K>) => {
+  const register = (nodeOrOptions: T | null | DescendantOptions<T, K>) => {
     if (nodeOrOptions == null) return
 
     if (isElement(nodeOrOptions)) return setDescendants(nodeOrOptions)
@@ -92,18 +99,16 @@ const descendantsManager = <T extends HTMLElement, K extends Record<string, any>
 
   const destroy = () => descendants.clear()
 
-  const count = () => descendants.size
+  const count = (filter?: FilterDescendant<T, K>) => values(filter).length
 
-  const enabledCount = () => enabledValues().length
+  const enabledCount = (filter?: FilterDescendant<T, K>) => enabledValues(filter).length
 
   const indexOf = (node: T | null) => (!node ? -1 : descendants.get(node)?.index ?? -1)
 
-  const enabledIndexOf = (node: T | null) =>
-    node == null ? -1 : enabledValues().findIndex((i) => i.node.isSameNode(node))
+  const enabledIndexOf = (node: T | null, filter?: FilterDescendant<T, K>) =>
+    node == null ? -1 : enabledValues(filter).findIndex((i) => i.node.isSameNode(node))
 
-  const values = (
-    filter?: (value: Descendant<T, K>, index: number, array: Descendant<T, K>[]) => boolean,
-  ) => {
+  const values = (filter?: FilterDescendant<T, K>) => {
     const values = Array.from(descendants.values())
 
     if (filter) {
@@ -113,62 +118,62 @@ const descendantsManager = <T extends HTMLElement, K extends Record<string, any>
     }
   }
 
-  const enabledValues = (
-    filter?: (value: Descendant<T, K>, index: number, array: Descendant<T, K>[]) => boolean,
-  ) => values(filter).filter(({ disabled }) => !disabled)
+  const enabledValues = (filter?: FilterDescendant<T, K>) =>
+    values(filter).filter(({ disabled }) => !disabled)
 
-  const value = (index: number) => {
-    if (count() === 0) return undefined
+  const value = (index: number, filter?: FilterDescendant<T, K>) => {
+    if (count(filter) === 0) return undefined
 
-    return values()[index]
+    return values(filter)[index]
   }
 
-  const enabledValue = (index: number) => {
-    if (enabledCount() === 0) return undefined
+  const enabledValue = (index: number, filter?: FilterDescendant<T, K>) => {
+    if (enabledCount(filter) === 0) return undefined
 
-    return enabledValues()[index]
+    return enabledValues(filter)[index]
   }
 
-  const firstValue = () => value(0)
+  const firstValue = (filter?: FilterDescendant<T, K>) => value(0, filter)
 
-  const enabledfirstValue = () => enabledValue(0)
+  const enabledfirstValue = (filter?: FilterDescendant<T, K>) => enabledValue(0, filter)
 
-  const lastValue = () => value(descendants.size - 1)
+  const lastValue = (filter?: FilterDescendant<T, K>) => value(descendants.size - 1, filter)
 
-  const enabledlastValue = () => enabledValue(enabledValues().length - 1)
+  const enabledlastValue = (filter?: FilterDescendant<T, K>) =>
+    enabledValue(enabledValues(filter).length - 1, filter)
 
-  const prevValue = (index: number, loop = true) => {
-    const prev = getPrevIndex(index, count() - 1, loop)
+  const prevValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
+    const prev = getPrevIndex(index, count(filter) - 1, loop)
 
-    return value(prev)
+    return value(prev, filter)
   }
 
-  const enabledPrevValue = (index: number, loop = true) => {
+  const enabledPrevValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
     const target = value(index)
 
     if (!target) return
 
-    const enabledIndex = enabledIndexOf(target.node)
-    const prevEnabledIndex = getPrevIndex(enabledIndex, enabledCount() - 1, loop)
+    const enabledIndex = enabledIndexOf(target.node, filter)
+    const prevEnabledIndex = getPrevIndex(enabledIndex, enabledCount(filter) - 1, loop)
 
-    return enabledValue(prevEnabledIndex)
+    return enabledValue(prevEnabledIndex, filter)
   }
 
-  const nextValue = (index: number, loop = true) => {
-    const next = getNextIndex(index, count(), loop)
+  const nextValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
+    const next = getNextIndex(index, count(filter), loop)
 
-    return value(next)
+    return value(next, filter)
   }
 
-  const enabledNextValue = (index: number, loop = true) => {
+  const enabledNextValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
     const target = value(index)
 
     if (!target) return
 
-    const enabledIndex = enabledIndexOf(target.node)
-    const nextEnabledIndex = getNextIndex(enabledIndex, enabledCount(), loop)
+    const enabledIndex = enabledIndexOf(target.node, filter)
+    const nextEnabledIndex = getNextIndex(enabledIndex, enabledCount(filter), loop)
 
-    return enabledValue(nextEnabledIndex)
+    return enabledValue(nextEnabledIndex, filter)
   }
 
   return {
@@ -220,7 +225,7 @@ const [DescendantsContextProvider, useDescendantsContext] = createContext<UseDes
 })
 
 const useDescendant = <T extends HTMLElement = HTMLElement, K extends Record<string, any> = {}>(
-  options?: DescendantOptions<K>,
+  options?: DescendantOptions<T, K>,
 ) => {
   const descendants = useDescendantsContext()
   const [index, setIndex] = useState<number>(-1)
@@ -249,7 +254,8 @@ const useDescendant = <T extends HTMLElement = HTMLElement, K extends Record<str
   return {
     descendants,
     index,
-    enabledIndex: descendants.enabledIndexOf(ref.current),
+    // @ts-ignore
+    enabledIndex: descendants.enabledIndexOf(ref.current, options?.filter),
     register: mergeRefs(refCallback, ref),
   }
 }
@@ -264,5 +270,5 @@ export const createDescendant = <
     ),
     useDescendantsContext: () => cast<DescendantsManager<T, K>>(useDescendantsContext()),
     useDescendants: () => useDescendants<T, K>(),
-    useDescendant: (options?: DescendantOptions<K>) => useDescendant<T, K>(options),
+    useDescendant: (options?: DescendantOptions<T, K>) => useDescendant<T, K>(options),
   } as const)

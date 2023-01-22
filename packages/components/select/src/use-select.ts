@@ -123,7 +123,7 @@ export const useSelect = <T extends MaybeValue = Value>({
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
 
   const initialFocusRef = useRef<any>(null)
-  const listRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLUListElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const [value, setValue] = useControllableState({
@@ -136,7 +136,7 @@ export const useSelect = <T extends MaybeValue = Value>({
   const isMulti = isArray(value)
   const isEmptyValue = (!isMulti ? !value : !value.length) && !(placeholder && placeholderInOptions)
 
-  const selectedValues = descendants.enabledValues(
+  const selectedValues = descendants.values(
     ({ node }) => isMulti && value.includes(node.dataset.value ?? ''),
   )
 
@@ -272,8 +272,8 @@ export const useSelect = <T extends MaybeValue = Value>({
 
   const onChangeDisplayValue = useCallback(
     (newValue: Value, runOmit: boolean = true) => {
-      const enabledValues = descendants.enabledValues()
-      const selectedValues = enabledValues
+      const values = descendants.values()
+      const selectedValues = values
         .filter(({ node }) => node.dataset.value === newValue)
         .map(({ node, index }) =>
           !(!!placeholder && placeholderInOptions) || index !== 0
@@ -531,7 +531,7 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
   const values = descendants.values()
   const selectedValues =
     isMulti && omitSelectedValues
-      ? descendants.enabledValues(({ node }) => value.includes(node.dataset.value ?? ''))
+      ? descendants.values(({ node }) => value.includes(node.dataset.value ?? ''))
       : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const childValues = values.filter(
@@ -636,7 +636,7 @@ export const useSelectOption = (
     )
   }
 
-  const values = descendants.enabledValues()
+  const values = descendants.values()
   const frontValues = values.slice(0, index)
 
   const isMulti = isArray(value)

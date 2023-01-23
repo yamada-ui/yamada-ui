@@ -358,6 +358,8 @@ export const useSelect = <T extends MaybeValue = Value>({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
+      if (formControlProps.disabled || formControlProps.readOnly) return
+
       const actions: Record<string, Function> = {
         Enter: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusFirst : undefined),
         ArrowDown: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusFirst : undefined),
@@ -372,7 +374,7 @@ export const useSelect = <T extends MaybeValue = Value>({
       ev.stopPropagation()
       action()
     },
-    [isEmptyValue, omitSelectedValues, onFocusFirst, onFocusLast, onOpen],
+    [isEmptyValue, omitSelectedValues, onFocusFirst, onFocusLast, onOpen, formControlProps],
   )
 
   useEffect(() => {
@@ -440,17 +442,22 @@ export const useSelect = <T extends MaybeValue = Value>({
   )
 
   return {
-    selectedValues,
+    descendants,
     value,
-    setValue,
     displayValue,
-    setDisplayValue,
-    onChangeDisplayValue,
+    focusedIndex,
     placeholder,
     placeholderInOptions,
     omitSelectedValues,
-    onChange,
+    closeOnSelect,
     isOpen,
+    listRef,
+    option,
+    formControlProps,
+    setValue,
+    setDisplayValue,
+    onChangeDisplayValue,
+    onChange,
     onOpen,
     onClose,
     onFocusFirst,
@@ -458,13 +465,7 @@ export const useSelect = <T extends MaybeValue = Value>({
     onFocusSelected,
     onFocusNext,
     onFocusPrev,
-    focusedIndex,
     setFocusedIndex,
-    closeOnSelect,
-    option,
-    listRef,
-    descendants,
-    formControlProps,
     getPopoverProps,
     getContainerProps,
     getFieldProps,
@@ -603,16 +604,16 @@ export const useSelectOption = (
     placeholder,
     placeholderInOptions,
     omitSelectedValues,
+    closeOnSelect: generalCloseOnSelect,
+    isOpen,
+    focusedIndex,
+    listRef,
+    option,
     onChange,
     onChangeDisplayValue,
-    focusedIndex,
     setFocusedIndex,
     onFocusNext,
-    isOpen,
     onClose,
-    closeOnSelect: generalCloseOnSelect,
-    option,
-    listRef,
   } = useSelectContext()
 
   let {

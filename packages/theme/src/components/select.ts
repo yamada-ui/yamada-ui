@@ -90,6 +90,7 @@ export const Select: ComponentMultiStyle = {
       color: ['blackAlpha.600', 'whiteAlpha.600'],
     },
     item: {
+      cursor: 'pointer',
       py: '1.5',
       px: '3',
       transitionProperty: 'background',

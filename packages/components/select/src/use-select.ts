@@ -74,7 +74,7 @@ type SelectContext = Omit<UseSelectProps, 'value' | 'defaultValue' | 'onChange' 
   onFocusPrev: () => void
   focusedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
-  listRef: RefObject<HTMLDivElement>
+  listRef: RefObject<HTMLUListElement>
   styles: Record<string, CSSUIObject>
 }
 

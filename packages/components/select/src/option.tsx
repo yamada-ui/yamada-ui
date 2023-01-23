@@ -57,7 +57,9 @@ const OptionIcon = forwardRef<OptionIconProps, 'span'>(({ className, ...rest }, 
     ...styles.itemIcon,
   }
 
-  return <ui.span ref={ref} className={cx('ui-select-icon', className)} __css={css} {...rest} />
+  return (
+    <ui.span ref={ref} className={cx('ui-select-item-icon', className)} __css={css} {...rest} />
+  )
 })
 
 const CheckIcon: FC = () => (

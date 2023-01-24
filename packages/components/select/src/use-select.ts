@@ -44,7 +44,7 @@ import {
 } from 'react'
 import { OptionProps } from './'
 
-const isTargetOption = (target: EventTarget | null) =>
+const isTargetOption = (target: EventTarget | null): boolean =>
   isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('select-item')
 
 export const {

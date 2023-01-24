@@ -22,7 +22,7 @@ import {
 } from './use-select'
 import { OptionGroup, Option, OptionProps } from './'
 
-export type UIOption = Omit<OptionProps, 'value'> & {
+export type UIOption = Omit<OptionProps, 'value' | 'children'> & {
   label?: string
   value?: Value | UIOption[]
 }

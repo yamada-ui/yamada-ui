@@ -8,7 +8,7 @@ import {
   ThemeProps,
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
-import { cx, getValidChildren, handlerAll, isArray, omitObject } from '@yamada-ui/utils'
+import { cx, getValidChildren, handlerAll, isArray } from '@yamada-ui/utils'
 import {
   cloneElement,
   CSSProperties,
@@ -170,10 +170,10 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
               <SelectClearIcon
                 {...clearIcon}
                 onClick={handlerAll(clearIcon?.onClick, onClear)}
-                {...omitObject(formControlProps, ['id'])}
+                {...formControlProps}
               />
             ) : (
-              <SelectIcon {...icon} {...omitObject(formControlProps, ['id'])} />
+              <SelectIcon {...icon} {...formControlProps} />
             )}
 
             {!isEmpty ? <SelectList {...list}>{children ?? computedChildren}</SelectList> : null}

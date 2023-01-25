@@ -12,7 +12,7 @@ import {
 import { useState } from 'react'
 
 export default {
-  title: 'Components / Forms / Multi MultiSelect',
+  title: 'Components / Forms / MultiSelect',
   component: MultiSelect,
 } as ComponentMeta<typeof MultiSelect>
 

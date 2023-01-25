@@ -254,8 +254,7 @@ const useDescendant = <T extends HTMLElement = HTMLElement, K extends Record<str
   return {
     descendants,
     index,
-    // @ts-ignore
-    enabledIndex: descendants.enabledIndexOf(ref.current, options?.filter),
+    enabledIndex: descendants.enabledIndexOf(ref.current, options?.filter as any),
     register: mergeRefs(refCallback, ref),
   }
 }

@@ -482,7 +482,6 @@ export interface GeneratedTheme extends UITheme {
     | (string & {})
   components: {
     Accordion: { sizes: string & {}; variants: 'basic' | 'card' | 'unstyled' | (string & {}) }
-    Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Alert: {
       sizes: string & {}
       variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
@@ -496,6 +495,7 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
       variants: 'elevated' | 'outline' | 'solid' | 'subtle' | 'unstyled' | (string & {})
     }
+    Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Dialog: {
       sizes:

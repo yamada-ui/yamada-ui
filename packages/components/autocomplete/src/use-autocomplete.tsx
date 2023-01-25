@@ -140,7 +140,7 @@ const kanaMap: Record<string, string> = {
   '･': '・',
 }
 
-const defaultFormat = (value: string) => {
+const defaultSearchFormat = (value: string) => {
   value = value.replace(/[！-～]/g, (v) => String.fromCharCode(v.charCodeAt(0) - 0xfee0))
 
   const reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g')
@@ -249,7 +249,7 @@ export type UseAutocompleteProps<T extends MaybeValue = Value> = Omit<
     onChange?: (value: T) => void
     onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
     onCreate?: (newOption: UIOption, newOptions: UIOption[]) => void
-    format?: (value: string) => string
+    searchFormat?: (value: string) => string
     createOrder?: Union<Order>
     createSecondOrder?: Order
     closeOnSelect?: boolean
@@ -271,7 +271,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
   createOrder = 'first',
   createSecondOrder = 'first',
   emptyMessage = 'No results found',
-  format = defaultFormat,
+  searchFormat = defaultSearchFormat,
   placement = 'bottom-start',
   duration = 0.2,
   option,
@@ -493,7 +493,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
       let isFocused = false
 
       values.forEach(({ node, index }) => {
-        if (format(node.textContent ?? '').includes(value)) {
+        if (searchFormat(node.textContent ?? '').includes(value)) {
           isHit = true
 
           const isDisabled = 'disabled' in node.dataset
@@ -511,7 +511,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       setIsHit(isHit)
     },
-    [descendants, format],
+    [descendants, searchFormat],
   )
 
   const rebirthOptions = useCallback(
@@ -602,7 +602,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
       if (!isOpen) onOpen()
 
       const value = ev.target.value
-      const computedValue = format(value)
+      const computedValue = searchFormat(value)
 
       if (computedValue) {
         pickOptions(computedValue)
@@ -614,7 +614,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       rest.onSearch?.(ev)
     },
-    [isOpen, onOpen, format, rest, pickOptions, rebirthOptions],
+    [isOpen, onOpen, searchFormat, rest, pickOptions, rebirthOptions],
   )
 
   const onCompositionStart = useCallback(

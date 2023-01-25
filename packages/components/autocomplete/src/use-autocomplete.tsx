@@ -793,7 +793,10 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
   }, [omitSelectedValues, value, descendants, isMulti, onClose, maxSelectedValues])
 
   useUpdateEffect(() => {
-    if (!isOpen) setFocusedIndex(-1)
+    if (isOpen) return
+
+    setFocusedIndex(-1)
+    setSearchValue('')
   }, [isOpen])
 
   useUpdateEffect(() => {

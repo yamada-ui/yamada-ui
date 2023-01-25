@@ -45,6 +45,7 @@ type MultiSelectOptions = {
   isClearable?: boolean
   focusBorderColor?: string
   errorBorderColor?: string
+  container?: Omit<HTMLUIProps<'div'>, 'children'>
   list?: Omit<SelectListProps, 'children'>
   icon?: SelectIconProps
   clearIcon?: SelectIconProps
@@ -71,6 +72,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     minH,
     minHeight,
     closeOnSelect = false,
+    container,
     list,
     icon,
     clearIcon,
@@ -151,7 +153,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider value={{ ...rest, value, placeholder, styles }}>
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-multi-select-container' __css={css} {...getContainerProps()}>
+          <ui.div className='ui-multi-select' __css={css} {...getContainerProps(container)}>
             <PopoverTrigger>
               <MultiSelectField
                 component={component}

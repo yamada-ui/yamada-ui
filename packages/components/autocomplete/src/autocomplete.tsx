@@ -111,7 +111,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) =>
   )
 })
 
-type AutocompleteFieldProps = HTMLUIProps<'div'> & { input?: HTMLUIProps<'input'> }
+type AutocompleteFieldProps = HTMLUIProps<'div'> & Pick<AutocompleteProps, 'input'>
 
 const AutocompleteField = forwardRef<AutocompleteFieldProps, 'div'>(
   ({ className, isTruncated, h, minH, placeholder, input, ...rest }, ref) => {

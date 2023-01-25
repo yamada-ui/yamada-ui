@@ -129,7 +129,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
       (index: number) => {
         if (!moveFocus || !manageFocus) return
 
-        const next = descendants.nextValue(index, false)
+        const next = descendants.nextValue(index, undefined, false)
 
         if (!next) return
 
@@ -218,7 +218,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
           if (key !== 'Backspace' || !manageFocus) return
 
           if ((target as HTMLInputElement).value === '') {
-            const prevInput = descendants.prevValue(index, false)
+            const prevInput = descendants.prevValue(index, undefined, false)
 
             if (!prevInput) return
 

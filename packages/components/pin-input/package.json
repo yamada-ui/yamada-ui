@@ -12,7 +12,7 @@
   "sideEffects": false,
   "scripts": {
     "dev": "pnpm build:fast -- --watch",
-    "build": "JSX=1 tsup  src/index.ts --dts",
+    "build": "JSX=1 tsup src/index.ts --dts",
     "build:fast": "JSX=1 tsup src/index.ts",
     "clean": "rimraf dist .turbo",
     "typecheck": "tsc --noEmit",

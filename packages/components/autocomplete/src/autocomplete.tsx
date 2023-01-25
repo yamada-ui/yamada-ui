@@ -42,7 +42,6 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) =>
   let {
     className,
     defaultValue = '',
-    data,
     color,
     h,
     height,
@@ -67,7 +66,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) =>
     searchValue,
     computedChildren,
     ...rest
-  } = useAutocomplete({ ...computedProps, defaultValue, data, children })
+  } = useAutocomplete({ ...computedProps, defaultValue, children })
 
   h = h ?? height
   minH = minH ?? minHeight

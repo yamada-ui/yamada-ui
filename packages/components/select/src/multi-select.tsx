@@ -30,8 +30,6 @@ import {
 } from './use-select'
 import { OptionGroup, Option, UIOption } from './'
 
-type Format = (value: string, index: number) => string
-
 type MultiSelectOptions = {
   data?: UIOption[]
   component?: FC<{
@@ -40,7 +38,6 @@ type MultiSelectOptions = {
     index: number
     onRemove: MouseEventHandler<HTMLElement>
   }>
-  format?: Format
   separator?: string
   isClearable?: boolean
   focusBorderColor?: string
@@ -61,7 +58,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     className,
     defaultValue = [],
     component,
-    format,
     separator,
     isClearable = true,
     data = [],
@@ -156,7 +152,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
             <PopoverTrigger>
               <MultiSelectField
                 component={component}
-                format={format}
                 separator={separator}
                 h={h}
                 minH={minH}
@@ -183,23 +178,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
 })
 
 type MultiSelectFieldProps = HTMLUIProps<'div'> &
-  Pick<MultiSelectOptions, 'component' | 'format' | 'separator'>
-
-const defaultFormat: Format = (value) => value
+  Pick<MultiSelectOptions, 'component' | 'separator'>
 
 const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
   (
-    {
-      className,
-      component,
-      format = defaultFormat,
-      separator = ',',
-      isTruncated,
-      noOfLines = 1,
-      h,
-      minH,
-      ...rest
-    },
+    { className, component, separator = ',', isTruncated, noOfLines = 1, h, minH, ...rest },
     ref,
   ) => {
     const { value, displayValue, onChange, placeholder, styles } = useSelectContext()
@@ -242,7 +225,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
 
               return (
                 <ui.span key={index} display='inline-block' me='0.25rem'>
-                  {format(value, index)}
+                  {value}
                   {!isLast ? separator : null}
                 </ui.span>
               )
@@ -250,17 +233,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
           </ui.span>
         )
       }
-    }, [
-      displayValue,
-      format,
-      isTruncated,
-      noOfLines,
-      onChange,
-      placeholder,
-      separator,
-      component,
-      value,
-    ])
+    }, [displayValue, isTruncated, noOfLines, onChange, placeholder, separator, component, value])
 
     const css: CSSUIObject = {
       paddingEnd: '2rem',

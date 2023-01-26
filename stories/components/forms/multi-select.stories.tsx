@@ -148,19 +148,6 @@ export const withTag: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withFormat: ComponentStory<typeof MultiSelect> = () => {
-  return (
-    <MultiSelect
-      placeholder='キャラクターを選択'
-      format={(value, index) => `${index + 1}: ${value}`}
-    >
-      <Option value='孫悟空'>孫悟空</Option>
-      <Option value='ベジータ'>ベジータ</Option>
-      <Option value='フリーザ'>フリーザ</Option>
-    </MultiSelect>
-  )
-}
-
 export const withOmitSelectedValues: ComponentStory<typeof MultiSelect> = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' omitSelectedValues={true}>

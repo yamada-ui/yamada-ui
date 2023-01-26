@@ -325,6 +325,16 @@ export const useSelect = <T extends MaybeValue = Value>({
     [onChangeDisplayValue, setValue],
   )
 
+  const onClear = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.stopPropagation()
+
+      setValue([] as unknown as T)
+      setDisplayValue(undefined)
+    },
+    [setDisplayValue, setValue],
+  )
+
   const [isOpen, setIsOpen] = useState<boolean>(rest.defaultIsOpen ?? false)
 
   const onOpen = useCallback(() => {
@@ -454,10 +464,9 @@ export const useSelect = <T extends MaybeValue = Value>({
     listRef,
     option,
     formControlProps,
-    setValue,
-    setDisplayValue,
     onChangeDisplayValue,
     onChange,
+    onClear,
     onOpen,
     onClose,
     onFocusFirst,

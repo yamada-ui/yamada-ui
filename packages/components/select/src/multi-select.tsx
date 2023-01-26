@@ -9,15 +9,7 @@ import {
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
 import { cx, getValidChildren, handlerAll, isArray } from '@yamada-ui/utils'
-import {
-  cloneElement,
-  CSSProperties,
-  FC,
-  MouseEventHandler,
-  ReactElement,
-  useCallback,
-  useMemo,
-} from 'react'
+import { cloneElement, CSSProperties, FC, MouseEventHandler, ReactElement, useMemo } from 'react'
 import { SelectIcon, SelectClearIcon, SelectIconProps } from './select-icon'
 import { SelectList, SelectListProps } from './select-list'
 import {
@@ -106,14 +98,13 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
 
   const {
     value,
-    setValue,
-    setDisplayValue,
     descendants,
     formControlProps,
     getPopoverProps,
     getContainerProps,
     getFieldProps,
     placeholder,
+    onClear,
     ...rest
   } = useSelect<(string | number)[]>({
     ...computedProps,
@@ -125,16 +116,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
 
   h = h ?? height
   minH = minH ?? minHeight
-
-  const onClear: MouseEventHandler<HTMLDivElement> = useCallback(
-    (e) => {
-      e.stopPropagation()
-
-      setValue([])
-      setDisplayValue(undefined)
-    },
-    [setDisplayValue, setValue],
-  )
 
   const css: CSSUIObject = {
     position: 'relative',

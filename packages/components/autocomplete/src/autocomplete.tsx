@@ -31,10 +31,7 @@ type AutocompleteOptions = {
 }
 
 export type AutocompleteProps = ThemeProps<'Select'> &
-  Omit<
-    UseAutocompleteProps<string | number>,
-    'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'
-  > &
+  Omit<UseAutocompleteProps<string | number>, 'maxSelectedValues' | 'omitSelectedValues'> &
   AutocompleteOptions
 
 export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) => {
@@ -132,8 +129,8 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'div'>(
       <ui.div ref={ref} className={cx('ui-autocomplete-field', className)} __css={css} {...rest}>
         <ui.input
           className='ui-autocomplete-input'
+          display='inline-block'
           w='full'
-          h='full'
           placeholder={placeholder}
           {...getInputProps(input)}
           value={searchValue || displayValue || ''}

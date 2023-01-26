@@ -140,7 +140,7 @@ const kanaMap: Record<string, string> = {
   '･': '・',
 }
 
-const defaultSearchFormat = (value: string) => {
+const defaultFormat = (value: string) => {
   value = value.replace(/[！-～]/g, (v) => String.fromCharCode(v.charCodeAt(0) - 0xfee0))
 
   const reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g')
@@ -203,6 +203,7 @@ type AutocompleteContext = Omit<
   searchValue: string
   isHit: boolean
   isEmpty: boolean
+  isAllSelected: boolean
   onChange: (newValue: Value) => void
   onChangeDisplayValue: (newValue: Value, runOmit?: boolean) => void
   pickOptions: (value: string) => void
@@ -213,8 +214,8 @@ type AutocompleteContext = Omit<
   onCreate: () => void
   onFocusFirst: () => void
   onFocusLast: () => void
-  onFocusNext: () => void
-  onFocusPrev: () => void
+  onFocusNext: (index?: number) => void
+  onFocusPrev: (index?: number) => void
   focusedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
   listRef: RefObject<HTMLUListElement>
@@ -249,7 +250,7 @@ export type UseAutocompleteProps<T extends MaybeValue = Value> = Omit<
     onChange?: (value: T) => void
     onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
     onCreate?: (newOption: UIOption, newOptions: UIOption[]) => void
-    searchFormat?: (value: string) => string
+    format?: (value: string) => string
     createOrder?: Union<Order>
     createSecondOrder?: Order
     closeOnSelect?: boolean
@@ -271,7 +272,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
   createOrder = 'first',
   createSecondOrder = 'first',
   emptyMessage = 'No results found',
-  searchFormat = defaultSearchFormat,
+  format = defaultFormat,
   placement = 'bottom-start',
   duration = 0.2,
   option,
@@ -374,6 +375,8 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
+      if (isEmpty || isAllSelected) return
+
       const first = descendants.enabledfirstValue(({ node }) => 'target' in node.dataset)
 
       if (!first) return
@@ -392,10 +395,20 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, enabledValues, isMulti, omitSelectedValues, selectedIndexes])
+  }, [
+    descendants,
+    enabledValues,
+    isAllSelected,
+    isEmpty,
+    isMulti,
+    omitSelectedValues,
+    selectedIndexes,
+  ])
 
   const onFocusLast = useCallback(() => {
     const id = setTimeout(() => {
+      if (isEmpty || isAllSelected) return
+
       const last = descendants.enabledlastValue(({ node }) => 'target' in node.dataset)
 
       if (!last) return
@@ -414,7 +427,15 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, enabledValues, isMulti, omitSelectedValues, selectedIndexes])
+  }, [
+    descendants,
+    enabledValues,
+    isAllSelected,
+    isEmpty,
+    isMulti,
+    omitSelectedValues,
+    selectedIndexes,
+  ])
 
   const onFocusSelected = useCallback(() => {
     const id = setTimeout(() => {
@@ -430,57 +451,57 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     timeoutIds.current.add(id)
   }, [descendants, isMulti, value])
 
-  const onFocusNext = useCallback(() => {
-    const id = setTimeout(() => {
-      const next = descendants.enabledNextValue(
-        focusedIndex,
-        ({ node }) => 'target' in node.dataset,
-      )
+  const onFocusNext = useCallback(
+    (index: number = focusedIndex) => {
+      const id = setTimeout(() => {
+        const next = descendants.enabledNextValue(index, ({ node }) => 'target' in node.dataset)
 
-      if (!next) return
+        if (!next) return
 
-      if (!isMulti || !omitSelectedValues) {
-        setFocusedIndex(next.index)
-      } else {
-        if (selectedIndexes.includes(next.index)) {
-          const enabledNext =
-            enabledValues.find(({ index }) => next.index < index) ?? enabledValues[0]
-
-          setFocusedIndex(enabledNext.index)
-        } else {
+        if (!isMulti || !omitSelectedValues) {
           setFocusedIndex(next.index)
-        }
-      }
-    })
-
-    timeoutIds.current.add(id)
-  }, [descendants, enabledValues, focusedIndex, isMulti, omitSelectedValues, selectedIndexes])
-
-  const onFocusPrev = useCallback(() => {
-    const id = setTimeout(() => {
-      const prev = descendants.enabledPrevValue(
-        focusedIndex,
-        ({ node }) => 'target' in node.dataset,
-      )
-
-      if (!prev) return
-
-      if (!isMulti || !omitSelectedValues) {
-        setFocusedIndex(prev.index)
-      } else {
-        if (selectedIndexes.includes(prev.index)) {
-          const enabledPrev =
-            enabledValues.reverse().find(({ index }) => index < prev.index) ?? enabledValues[0]
-
-          setFocusedIndex(enabledPrev.index)
         } else {
-          setFocusedIndex(prev.index)
-        }
-      }
-    })
+          if (selectedIndexes.includes(next.index)) {
+            const enabledNext =
+              enabledValues.find(({ index }) => next.index < index) ?? enabledValues[0]
 
-    timeoutIds.current.add(id)
-  }, [descendants, enabledValues, focusedIndex, isMulti, omitSelectedValues, selectedIndexes])
+            setFocusedIndex(enabledNext.index)
+          } else {
+            setFocusedIndex(next.index)
+          }
+        }
+      })
+
+      timeoutIds.current.add(id)
+    },
+    [descendants, enabledValues, focusedIndex, isMulti, omitSelectedValues, selectedIndexes],
+  )
+
+  const onFocusPrev = useCallback(
+    (index: number = focusedIndex) => {
+      const id = setTimeout(() => {
+        const prev = descendants.enabledPrevValue(index, ({ node }) => 'target' in node.dataset)
+
+        if (!prev) return
+
+        if (!isMulti || !omitSelectedValues) {
+          setFocusedIndex(prev.index)
+        } else {
+          if (selectedIndexes.includes(prev.index)) {
+            const enabledPrev =
+              enabledValues.reverse().find(({ index }) => index < prev.index) ?? enabledValues[0]
+
+            setFocusedIndex(enabledPrev.index)
+          } else {
+            setFocusedIndex(prev.index)
+          }
+        }
+      })
+
+      timeoutIds.current.add(id)
+    },
+    [descendants, enabledValues, focusedIndex, isMulti, omitSelectedValues, selectedIndexes],
+  )
 
   const onFocusFirstOrSelected = isEmptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
   const onFocusLastOrSelected = isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
@@ -493,7 +514,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
       let isFocused = false
 
       values.forEach(({ node, index }) => {
-        if (searchFormat(node.textContent ?? '').includes(value)) {
+        if (format(node.textContent ?? '').includes(value)) {
           isHit = true
 
           const isDisabled = 'disabled' in node.dataset
@@ -511,7 +532,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       setIsHit(isHit)
     },
-    [descendants, searchFormat],
+    [descendants, format],
   )
 
   const rebirthOptions = useCallback(
@@ -595,14 +616,16 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     onChange(value)
 
     if (closeOnSelect) onClose()
-  }, [closeOnSelect, descendants, focusedIndex, onChange, onClose])
+
+    if (omitSelectedValues) onFocusNext()
+  }, [closeOnSelect, descendants, focusedIndex, omitSelectedValues, onChange, onClose, onFocusNext])
 
   const onSearch = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (!isOpen) onOpen()
 
       const value = ev.target.value
-      const computedValue = searchFormat(value)
+      const computedValue = format(value)
 
       if (computedValue) {
         pickOptions(computedValue)
@@ -614,7 +637,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       rest.onSearch?.(ev)
     },
-    [isOpen, onOpen, searchFormat, rest, pickOptions, rebirthOptions],
+    [isOpen, onOpen, format, rest, pickOptions, rebirthOptions],
   )
 
   const onCompositionStart = useCallback(
@@ -683,12 +706,28 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     }
   }, [isMulti, onChange, value])
 
+  const onClear = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.stopPropagation()
+
+      setValue([] as unknown as T)
+      setDisplayValue(undefined)
+      setSearchValue('')
+      rebirthOptions()
+
+      if (inputRef.current) inputRef.current.focus()
+    },
+    [setDisplayValue, setSearchValue, setValue, rebirthOptions, inputRef],
+  )
+
   const onClick = useCallback(() => {
-    if (isOpen) return
+    if (isOpen) {
+      if (inputRef.current) inputRef.current.focus()
+    } else {
+      onOpen()
 
-    onOpen()
-
-    onFocusFirstOrSelected()
+      onFocusFirstOrSelected()
+    }
   }, [isOpen, onFocusFirstOrSelected, onOpen])
 
   const onFocus = useCallback(() => {
@@ -723,12 +762,12 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       const actions: Record<string, Function | undefined> = {
         ArrowDown: isFocused
-          ? onFocusNext
+          ? () => onFocusNext()
           : !isOpen
           ? funcAll(onOpen, onFocusFirstOrSelected)
           : undefined,
         ArrowUp: isFocused
-          ? onFocusPrev
+          ? () => onFocusPrev()
           : !isOpen
           ? funcAll(onOpen, onFocusLastOrSelected)
           : undefined,
@@ -835,8 +874,12 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
       ...computedProps[0],
       ...props,
       ...formControlProps,
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
+      onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [computedProps, formControlProps],
+
+    [computedProps, formControlProps, onBlur, onClick, onFocus, rest],
   )
 
   const getFieldProps: PropGetter = useCallback(
@@ -853,12 +896,9 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
       ...props,
       'data-active': dataAttr(isOpen),
       'aria-expanded': dataAttr(isOpen),
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
-      onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, rest, onClick, onBlur, onFocus, onKeyDown],
+    [computedProps, isOpen, rest, onKeyDown],
   )
 
   return {
@@ -876,18 +916,17 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     createOption,
     emptyMessage,
     isOpen,
+    isAllSelected,
     listRef,
     inputRef,
     option,
     formControlProps,
-    setValue,
-    setDisplayValue,
-    setSearchValue,
     setFocusedIndex,
     onChangeDisplayValue,
     onChange,
     onSearch,
     onCreate,
+    onClear,
     onCompositionStart,
     onCompositionEnd,
     pickOptions,
@@ -908,8 +947,19 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 export type UseAutocompleteReturn = ReturnType<typeof useAutocomplete>
 
 export const useAutocompleteInput = () => {
-  const { id, inputRef, onSearch, onCompositionStart, onCompositionEnd, formControlProps } =
-    useAutocompleteContext()
+  const {
+    id,
+    inputRef,
+    onSearch,
+    onCompositionStart,
+    onCompositionEnd,
+    isAllSelected,
+    formControlProps,
+  } = useAutocompleteContext()
+
+  useUpdateEffect(() => {
+    if (isAllSelected && inputRef.current) inputRef.current.blur()
+  }, [isAllSelected])
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
@@ -918,12 +968,13 @@ export const useAutocompleteInput = () => {
       ...formControlProps,
       id,
       cursor: formControlProps.readOnly ? 'default' : 'text',
-      pointerEvents: formControlProps.disabled ? 'none' : 'auto',
+      pointerEvents: formControlProps.disabled || isAllSelected ? 'none' : 'auto',
+      tabIndex: isAllSelected ? -1 : 0,
       onChange: handlerAll(props.onChange, onSearch),
       onCompositionStart: handlerAll(props.onCompositionStart, onCompositionStart),
       onCompositionEnd: handlerAll(props.onCompositionEnd, onCompositionEnd),
     }),
-    [id, inputRef, formControlProps, onCompositionEnd, onCompositionStart, onSearch],
+    [inputRef, formControlProps, id, isAllSelected, onSearch, onCompositionStart, onCompositionEnd],
   )
 
   return {
@@ -1093,6 +1144,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     closeOnSelect: generalCloseOnSelect,
     option,
     inputRef,
+    onFocusNext,
   } = useAutocompleteContext()
 
   let {
@@ -1147,8 +1199,12 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       if (inputRef.current) inputRef.current.focus()
 
       if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
+
+      if (omitSelectedValues) onFocusNext(index)
     },
     [
+      onFocusNext,
+      omitSelectedValues,
       isDisabled,
       computedProps,
       setFocusedIndex,

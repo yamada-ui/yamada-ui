@@ -35,6 +35,10 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
     position: 'relative',
   }
   const groupProps: CSSUIProps = {}
+  const minHeight: any =
+    useToken('sizes', (styles.field?.minHeight ?? styles.field?.minH) as any) ??
+    styles.field?.minHeight ??
+    styles.field?.minH
   const height: any =
     useToken('sizes', (styles.field?.height ?? styles.field?.h) as any) ??
     styles.field?.height ??
@@ -43,9 +47,11 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
   const validChildren = getValidChildren(children)
 
   validChildren.forEach((child: any) => {
-    if (height && child.type === InputLeftElement) groupProps.paddingStart = height
+    if ((minHeight || height) && child.type === InputLeftElement)
+      groupProps.paddingStart = height ?? minHeight
 
-    if (height && child.type === InputRightElement) groupProps.paddingEnd = height
+    if ((minHeight || height) && child.type === InputRightElement)
+      groupProps.paddingEnd = height ?? minHeight
 
     if (child.type === InputLeftAddon) groupProps.roundedLeft = 0
 

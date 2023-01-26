@@ -368,6 +368,19 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/carousel:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/checkbox:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1418,6 +1431,7 @@ importers:
       '@yamada-ui/breadcrumb': workspace:*
       '@yamada-ui/button': workspace:*
       '@yamada-ui/card': workspace:*
+      '@yamada-ui/carousel': workspace:*
       '@yamada-ui/checkbox': workspace:*
       '@yamada-ui/close-button': workspace:*
       '@yamada-ui/core': workspace:*
@@ -1493,6 +1507,7 @@ importers:
       '@yamada-ui/breadcrumb': link:../components/breadcrumb
       '@yamada-ui/button': link:../components/button
       '@yamada-ui/card': link:../components/card
+      '@yamada-ui/carousel': link:../components/carousel
       '@yamada-ui/checkbox': link:../components/checkbox
       '@yamada-ui/close-button': link:../components/close-button
       '@yamada-ui/core': link:../core

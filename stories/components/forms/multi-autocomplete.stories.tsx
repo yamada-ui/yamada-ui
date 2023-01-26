@@ -237,7 +237,7 @@ export const withSeparator: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withTag: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withComponent: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
     <>
       <MultiAutocomplete

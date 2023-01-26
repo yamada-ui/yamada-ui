@@ -122,7 +122,7 @@ export const withSeparator: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withTag: ComponentStory<typeof MultiSelect> = () => {
+export const withComponent: ComponentStory<typeof MultiSelect> = () => {
   return (
     <>
       <MultiSelect

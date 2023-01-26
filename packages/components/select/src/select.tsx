@@ -48,8 +48,6 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     defaultValue = '',
     placeholderInOptions = true,
     data = [],
-    isTruncated = true,
-    noOfLines,
     color,
     h,
     height,
@@ -118,13 +116,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
         <Popover {...getPopoverProps()}>
           <ui.div className='ui-select' __css={css} {...getContainerProps(container)}>
             <PopoverTrigger>
-              <SelectField
-                isTruncated={isTruncated}
-                noOfLines={noOfLines}
-                h={h}
-                minH={minH}
-                {...getFieldProps({}, ref)}
-              />
+              <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
             </PopoverTrigger>
 
             <SelectIcon {...icon} {...formControlProps} />
@@ -146,7 +138,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
 type SelectFieldProps = HTMLUIProps<'div'>
 
 const SelectField = forwardRef<SelectFieldProps, 'div'>(
-  ({ className, isTruncated, noOfLines, h, minH, ...rest }, ref) => {
+  ({ className, isTruncated = true, noOfLines, h, minH, ...rest }, ref) => {
     const { displayValue, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {

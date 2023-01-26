@@ -64,7 +64,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     format,
     separator,
     isClearable = true,
-    noOfLines = 1,
     data = [],
     color,
     h,
@@ -159,7 +158,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
                 component={component}
                 format={format}
                 separator={separator}
-                noOfLines={noOfLines}
                 h={h}
                 minH={minH}
                 {...getFieldProps({}, ref)}
@@ -191,7 +189,17 @@ const defaultFormat: Format = (value) => value
 
 const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
   (
-    { className, component, format = defaultFormat, separator = ',', noOfLines, h, minH, ...rest },
+    {
+      className,
+      component,
+      format = defaultFormat,
+      separator = ',',
+      isTruncated,
+      noOfLines = 1,
+      h,
+      minH,
+      ...rest
+    },
     ref,
   ) => {
     const { value, displayValue, onChange, placeholder, styles } = useSelectContext()
@@ -201,7 +209,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
 
       if (component) {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
             {(displayValue as string[]).map((displayValue, index) => {
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
@@ -228,7 +236,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
         )
       } else {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
             {(displayValue as string[]).map((value, index) => {
               const isLast = displayValue.length === index + 1
 
@@ -242,7 +250,17 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
           </ui.span>
         )
       }
-    }, [displayValue, format, noOfLines, onChange, placeholder, separator, component, value])
+    }, [
+      displayValue,
+      format,
+      isTruncated,
+      noOfLines,
+      onChange,
+      placeholder,
+      separator,
+      component,
+      value,
+    ])
 
     const css: CSSUIObject = {
       paddingEnd: '2rem',

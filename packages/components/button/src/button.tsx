@@ -41,6 +41,7 @@ export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
     loadingIcon,
     loadingText,
     loadingPlacement = 'start',
+    __css,
     children,
     ...rest
   } = omitThemeProps(props)
@@ -63,9 +64,10 @@ export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
       verticalAlign: 'middle',
       outline: 'none',
       ...styles,
+      ...__css,
       ...(!!group ? { _focus } : {}),
     }
-  }, [styles, group])
+  }, [styles, __css, group])
 
   const contentProps = {
     leftIcon,

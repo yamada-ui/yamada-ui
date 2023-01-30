@@ -4,6 +4,7 @@ import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
 import { Card } from './card'
+import { Carousel } from './carousel'
 import { Checkbox } from './checkbox'
 import { CloseButton } from './close-button'
 import { Container } from './container'
@@ -44,6 +45,7 @@ export default {
   Breadcrumb,
   Button,
   Card,
+  Carousel,
   Checkbox,
   CloseButton,
   Container,

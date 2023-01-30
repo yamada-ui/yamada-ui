@@ -376,6 +376,7 @@ importers:
       '@yamada-ui/motion': workspace:*
       '@yamada-ui/use-controllable-state': workspace:*
       '@yamada-ui/use-descendant': workspace:*
+      '@yamada-ui/use-pan-event': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
@@ -386,6 +387,7 @@ importers:
       '@yamada-ui/motion': link:../motion
       '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
       '@yamada-ui/use-descendant': link:../../hooks/use-descendant
+      '@yamada-ui/use-pan-event': link:../../hooks/use-pan-event
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1

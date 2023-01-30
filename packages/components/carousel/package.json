@@ -25,6 +25,7 @@
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/button": "workspace:*",
     "@yamada-ui/motion": "workspace:*",
+    "@yamada-ui/use-pan-event": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*"
   },

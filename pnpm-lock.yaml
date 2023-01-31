@@ -379,6 +379,7 @@ importers:
       '@yamada-ui/use-pan-event': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
+      embla-carousel-react: ^7.0.0
       react: ^18.2.0
     dependencies:
       '@yamada-ui/button': link:../button
@@ -389,6 +390,7 @@ importers:
       '@yamada-ui/use-descendant': link:../../hooks/use-descendant
       '@yamada-ui/use-pan-event': link:../../hooks/use-pan-event
       '@yamada-ui/utils': link:../../utils
+      embla-carousel-react: 7.0.9_react@18.2.0
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0
@@ -10340,6 +10342,19 @@ packages:
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
+    dev: false
+
+  /embla-carousel-react/7.0.9_react@18.2.0:
+    resolution: {integrity: sha512-KGnnZWukN+N2H6VjQf6C9mWmInqtCIiInhkGsJ9ckxri3m3Ks6wRDz+RRlV1kcuPHtRoxyFuBBGNwftWqMO9Pw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      embla-carousel: 7.0.9
+      react: 18.2.0
+    dev: false
+
+  /embla-carousel/7.0.9:
+    resolution: {integrity: sha512-g8pGPd1BxexiZgw8F1aNM1KL3x3eEcz6TGTz20AuqCCynASBV7/h1+aS2rySDc/hHkXqbU8dk7TDhW71LCqVkQ==}
     dev: false
 
   /emittery/0.10.2:

@@ -31,10 +31,7 @@ type CarouselOptions = {
   indicators?: CarouselIndicatorsProps | false
 }
 
-export type CarouselProps = HTMLUIProps<'div'> &
-  ThemeProps<'Carousel'> &
-  UseCarouselProps &
-  CarouselOptions
+export type CarouselProps = ThemeProps<'Carousel'> & UseCarouselProps & CarouselOptions
 
 export const Carousel = forwardRef<CarouselProps, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('Carousel', props)

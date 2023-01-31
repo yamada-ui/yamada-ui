@@ -88,7 +88,7 @@ export const Carousel: ComponentMultiStyle = {
       },
       transitionProperty: 'common',
       transitionDuration: 'slower',
-      ...(o === 'vertical' ? { right: '4' } : { bottom: '4' }),
+      ...(o === 'vertical' ? { h: '8', right: '4' } : { w: '8', bottom: '4' }),
     }),
   },
 
@@ -98,7 +98,7 @@ export const Carousel: ComponentMultiStyle = {
         h: 'sm',
       },
       indicators: ({ orientation: o }) => ({
-        ...(o === 'vertical' ? { maxH: '2xs', w: '1.5' } : { maxW: 'xs', h: '1.5' }),
+        ...(o === 'vertical' ? { w: '1.5' } : { h: '1.5' }),
       }),
     },
     md: {
@@ -106,7 +106,7 @@ export const Carousel: ComponentMultiStyle = {
         h: 'md',
       },
       indicators: ({ orientation: o }) => ({
-        ...(o === 'vertical' ? { maxH: 'xs', w: '1.5' } : { maxW: 'sm', h: '1.5' }),
+        ...(o === 'vertical' ? { w: '1.5' } : { h: '1.5' }),
       }),
     },
     lg: {
@@ -114,7 +114,7 @@ export const Carousel: ComponentMultiStyle = {
         h: 'lg',
       },
       indicators: ({ orientation: o }) => ({
-        ...(o === 'vertical' ? { maxH: 'xs', w: '2' } : { maxW: 'sm', h: '2' }),
+        ...(o === 'vertical' ? { w: '2' } : { h: '2' }),
       }),
     },
     xl: {
@@ -122,7 +122,7 @@ export const Carousel: ComponentMultiStyle = {
         h: 'xl',
       },
       indicators: ({ orientation: o }) => ({
-        ...(o === 'vertical' ? { maxH: 'sm', w: '2' } : { maxW: 'md', h: '2' }),
+        ...(o === 'vertical' ? { w: '2' } : { h: '2' }),
       }),
     },
   },

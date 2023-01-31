@@ -27,15 +27,10 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
     const css: CSSUIObject = {
       position: 'absolute',
       zIndex: 'kurillin',
-      display: 'grid',
+      display: 'flex',
+      justifyContent: 'center',
       ...styles.indicators,
-      ...(orientation === 'vertical'
-        ? {
-            gridTemplateRows: `repeat(${indexes.length}, 1fr)`,
-          }
-        : {
-            gridTemplateColumns: `repeat(${indexes.length}, 1fr)`,
-          }),
+      ...(orientation === 'vertical' ? { flexDirection: 'column' } : { flexDirection: 'row' }),
     }
 
     return (

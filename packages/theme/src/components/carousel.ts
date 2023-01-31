@@ -5,12 +5,7 @@ export const Carousel: ComponentMultiStyle = {
     container: {
       w: '100%',
     },
-    inner: {
-      overflow: 'scroll',
-      _scrollbar: {
-        display: 'none',
-      },
-    },
+    inner: {},
     slide: ({ orientation: o }) => ({
       display: 'flex',
       justifyContent: 'center',

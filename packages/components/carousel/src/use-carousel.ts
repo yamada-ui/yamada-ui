@@ -45,7 +45,7 @@ export const [CarouselProvider, useCarouselContext] = createContext<CarouselCont
   errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
 })
 
-export type UseCarouselProps = HTMLUIProps<'div'> & {
+export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange'> & {
   index?: number
   defaultIndex?: number
   onChange?: (index: number) => void

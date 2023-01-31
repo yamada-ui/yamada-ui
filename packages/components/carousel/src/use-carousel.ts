@@ -63,6 +63,7 @@ export type UseCarouselProps = HTMLUIProps<'div'> & {
   delay?: number
   autoplay?: boolean
   stopMouseEnterAutoplay?: boolean
+  onScrollProgress?: (progress: number) => void
 }
 
 export const useCarousel = ({
@@ -84,6 +85,7 @@ export const useCarousel = ({
   skipSnaps = false,
   containScroll = '',
   slideSize = '100%',
+  onScrollProgress,
   children,
   ...rest
 }: UseCarouselProps) => {
@@ -129,6 +131,22 @@ export const useCarousel = ({
 
     if (next) setSelectedIndex(next.index)
   }, [descendants, selectedIndex, setSelectedIndex])
+
+  const onScroll = useCallback(() => {
+    if (!embla) return
+
+    const progress = Math.round(Math.max(0, Math.min(1, embla.scrollProgress())) * 100)
+
+    onScrollProgress?.(progress)
+  }, [embla, onScrollProgress])
+
+  const onSelect = useCallback(() => {
+    if (!embla) return
+
+    const index = embla.selectedScrollSnap()
+
+    setSelectedIndex(index)
+  }, [embla, setSelectedIndex])
 
   useEffect(() => {
     const last = descendants.enabledlastValue()
@@ -177,6 +195,20 @@ export const useCarousel = ({
 
     setCount(embla.scrollSnapList().length)
   }, [embla])
+
+  useUpdateEffect(() => {
+    if (embla) {
+      embla.on('select', onSelect)
+      embla.on('scroll', onScroll)
+
+      onScroll()
+
+      return () => {
+        embla.off('select', onSelect)
+        embla.off('scroll', onScroll)
+      }
+    }
+  }, [embla, onScroll])
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({

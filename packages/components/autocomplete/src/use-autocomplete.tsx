@@ -790,6 +790,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       ev.preventDefault()
       ev.stopPropagation()
+
       action(ev)
     },
     [

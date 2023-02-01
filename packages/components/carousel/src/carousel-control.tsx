@@ -1,5 +1,5 @@
 import { IconButton, IconButtonProps } from '@yamada-ui/button'
-import { forwardRef, CSSUIObject } from '@yamada-ui/core'
+import { forwardRef, CSSUIObject, useColorSchemetValue } from '@yamada-ui/core'
 import { ChevronIcon } from '@yamada-ui/icon'
 import { cx } from '@yamada-ui/utils'
 import { useCarouselContext, useCarouselControl } from './use-carousel'
@@ -57,6 +57,7 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, 'button'>(
 const CarouselControl = forwardRef<CarouselControlProps & { operation: 'prev' | 'next' }, 'button'>(
   ({ className, operation, ...rest }, ref) => {
     const { styles } = useCarouselContext()
+    const colorStyle = useColorSchemetValue('whiteAlpha', 'blackAlpha')
 
     const css: CSSUIObject = {
       position: 'absolute',
@@ -69,7 +70,8 @@ const CarouselControl = forwardRef<CarouselControlProps & { operation: 'prev' | 
       <IconButton
         ref={ref}
         className={cx('ui-carousel-control', className)}
-        variant='unstyled'
+        colorStyle={colorStyle}
+        isRound
         __css={css}
         {...rest}
       />

@@ -6,45 +6,8 @@ export const Carousel: ComponentMultiStyle = {
       w: '100%',
     },
     inner: {},
-    slide: ({ orientation: o }) => ({
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      ...(o === 'vertical' ? { w: '100%' } : { h: '100%' }),
-    }),
-    control: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      rounded: 'full',
-      bg: ['whiteAlpha.200', 'blackAlpha.200'],
-      color: [`white`, `black`],
-      transitionProperty: 'common',
-      transitionDuration: 'slower',
-      _focus: {
-        outline: 'none',
-      },
-      _disabled: {
-        opacity: 0.4,
-        cursor: 'not-allowed',
-        boxShadow: 'none',
-      },
-      _readOnly: {
-        cursor: 'default',
-      },
-      _hover: {
-        bg: ['whiteAlpha.300', 'blackAlpha.300'],
-        _disabled: {
-          bg: ['whiteAlpha.200', 'blackAlpha.200'],
-        },
-      },
-      _active: {
-        bg: [`whiteAlpha.400`, `blackAlpha.400`],
-      },
-      _focusVisible: {
-        boxShadow: 'outline',
-      },
-    },
+    slide: {},
+    control: {},
     prev: ({ orientation: o }) => ({
       ...(o === 'vertical'
         ? { left: '50%', top: '4', transform: 'translateX(-50%)' }

@@ -1,21 +1,18 @@
 import { IconButtonProps } from '@yamada-ui/button'
 import { CSSUIObject, HTMLUIProps, layoutStylesProperties, UIProps } from '@yamada-ui/core'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createDescendant } from '@yamada-ui/use-descendant'
 import {
   createContext,
   dataAttr,
   handlerAll,
-  mergeRefs,
   PropGetter,
   RequiredPropGetter,
   splitObject,
   useUpdateEffect,
 } from '@yamada-ui/utils'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import {
   Children,
-  CSSProperties,
   Dispatch,
   MouseEvent,
   SetStateAction,
@@ -25,18 +22,11 @@ import {
   useState,
 } from 'react'
 
-export const {
-  DescendantsContextProvider: CarouselDescendantsContextProvider,
-  useDescendantsContext: useCarouselDescendantsContext,
-  useDescendants: useCarouselDescendants,
-  useDescendant: useCarouselDescendant,
-} = createDescendant<HTMLElement>()
-
 type CarouselContext = Omit<UseCarouselProps, 'index' | 'defaultIndex' | 'onChange'> & {
+  carousel: EmblaCarouselType | undefined
+  indexes: number[]
   selectedIndex: number
   setSelectedIndex: Dispatch<SetStateAction<number>>
-  onPrev: () => void
-  onNext: () => void
   styles: Record<string, CSSUIObject>
 }
 
@@ -53,7 +43,7 @@ export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange'> & {
   slideSize?: UIProps['width']
   align?: 'start' | 'center' | 'end' | number
   containScroll?: '' | 'trimSnaps' | 'keepSnaps'
-  slidesToScroll?: 'auto' | number
+  slidesToScroll?: number
   dragFree?: boolean
   draggable?: boolean
   inViewThreshold?: number
@@ -63,6 +53,7 @@ export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange'> & {
   delay?: number
   autoplay?: boolean
   stopMouseEnterAutoplay?: boolean
+  includeGapInSize?: boolean
   onScrollProgress?: (progress: number) => void
 }
 
@@ -85,12 +76,11 @@ export const useCarousel = ({
   skipSnaps = false,
   containScroll = '',
   slideSize = '100%',
+  includeGapInSize = true,
   onScrollProgress,
   children,
   ...rest
 }: UseCarouselProps) => {
-  const descendants = useCarouselDescendants()
-
   const computedProps = splitObject(rest, layoutStylesProperties)
 
   const [selectedIndex, setSelectedIndex] = useControllableState({
@@ -101,7 +91,7 @@ export const useCarousel = ({
 
   const isVertical = orientation === 'vertical'
 
-  const [emblaRef, embla] = useEmblaCarousel({
+  const [carouselRef, carousel] = useEmblaCarousel({
     axis: isVertical ? 'y' : 'x',
     startIndex: defaultIndex,
     loop,
@@ -115,47 +105,33 @@ export const useCarousel = ({
     containScroll,
   })
 
-  const [count, setCount] = useState<number>(0)
+  const [indexes, setIndexes] = useState<number[]>([])
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false)
 
   const timeoutId = useRef<any>(undefined)
 
-  const onPrev = useCallback(() => {
-    const prev = descendants.enabledPrevValue(selectedIndex)
-
-    if (prev) setSelectedIndex(prev.index)
-  }, [descendants, selectedIndex, setSelectedIndex])
-
-  const onNext = useCallback(() => {
-    const next = descendants.enabledNextValue(selectedIndex)
-
-    if (next) setSelectedIndex(next.index)
-  }, [descendants, selectedIndex, setSelectedIndex])
-
   const onScroll = useCallback(() => {
-    if (!embla) return
+    if (!carousel) return
 
-    const progress = Math.round(Math.max(0, Math.min(1, embla.scrollProgress())) * 100)
+    const progress = Math.round(Math.max(0, Math.min(1, carousel.scrollProgress())) * 100)
 
     onScrollProgress?.(progress)
-  }, [embla, onScrollProgress])
+  }, [carousel, onScrollProgress])
 
   const onSelect = useCallback(() => {
-    if (!embla) return
+    if (!carousel) return
 
-    const index = embla.selectedScrollSnap()
+    const index = carousel.selectedScrollSnap()
 
     setSelectedIndex(index)
-  }, [embla, setSelectedIndex])
+  }, [carousel, setSelectedIndex])
 
   useEffect(() => {
-    const last = descendants.enabledlastValue()
-
     const isStop = isMouseEnter && stopMouseEnterAutoplay
-    const isLast = !loop && selectedIndex === last?.index
+    const isLast = !carousel?.canScrollNext()
 
-    if (autoplay && !isStop && !isLast) {
-      timeoutId.current = setInterval(onNext, delay)
+    if (carousel && autoplay && !isStop && !isLast) {
+      timeoutId.current = setInterval(carousel.scrollNext, delay)
     } else {
       if (timeoutId.current) clearInterval(timeoutId.current)
 
@@ -165,50 +141,41 @@ export const useCarousel = ({
     return () => {
       if (timeoutId.current) clearInterval(timeoutId.current)
     }
-  }, [
-    autoplay,
-    onNext,
-    delay,
-    stopMouseEnterAutoplay,
-    isMouseEnter,
-    descendants,
-    loop,
-    selectedIndex,
-  ])
+  }, [autoplay, delay, stopMouseEnterAutoplay, carousel, isMouseEnter, loop, selectedIndex])
 
   useUpdateEffect(() => {
-    if (!embla) return
+    if (!carousel) return
 
-    embla.scrollTo(selectedIndex)
-  }, [selectedIndex])
+    carousel.reInit()
 
-  useUpdateEffect(() => {
-    if (!embla) return
+    const snapList = carousel.scrollSnapList()
+    const indexes = snapList.map((_, i) => i)
 
-    embla.reInit()
-
-    setCount(embla.scrollSnapList().length)
+    setIndexes(indexes)
   }, [Children.toArray(children).length])
 
   useUpdateEffect(() => {
-    if (!embla) return
+    if (!carousel) return
 
-    setCount(embla.scrollSnapList().length)
-  }, [embla])
+    const snapList = carousel.scrollSnapList()
+    const indexes = snapList.map((_, i) => i)
+
+    setIndexes(indexes)
+  }, [carousel])
 
   useUpdateEffect(() => {
-    if (embla) {
-      embla.on('select', onSelect)
-      embla.on('scroll', onScroll)
+    if (carousel) {
+      carousel.on('select', onSelect)
+      carousel.on('scroll', onScroll)
 
       onScroll()
 
       return () => {
-        embla.off('select', onSelect)
-        embla.off('scroll', onScroll)
+        carousel.off('select', onSelect)
+        carousel.off('scroll', onScroll)
       }
     }
-  }, [embla, onScroll])
+  }, [carousel, onScroll])
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
@@ -225,19 +192,19 @@ export const useCarousel = ({
     [computedProps],
   )
 
-  const getInnerProps: PropGetter = useCallback(
+  const getSlidesProps: PropGetter = useCallback(
     (props = {}) => ({
       ...computedProps[1],
       ...props,
-      ref: emblaRef,
+      ref: carouselRef,
     }),
-    [computedProps, emblaRef],
+    [computedProps, carouselRef],
   )
 
   return {
-    descendants,
+    carousel,
     children,
-    count,
+    indexes,
     selectedIndex,
     setSelectedIndex,
     orientation,
@@ -252,50 +219,33 @@ export const useCarousel = ({
     skipSnaps,
     containScroll,
     slideSize,
-    onPrev,
-    onNext,
+    includeGapInSize,
     getContainerProps,
-    getInnerProps,
+    getSlidesProps,
   }
 }
 
 export type UseCarouselReturn = ReturnType<typeof useCarousel>
 
 export type UseCarouselSlideProps = {
-  hidden?: boolean
+  index?: number
 }
 
-export const useCarouselSlide = ({ hidden: disabled }: UseCarouselSlideProps) => {
-  const { selectedIndex } = useCarouselContext()
-  const { index, register } = useCarouselDescendant({ disabled })
+export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
+  const { selectedIndex, slidesToScroll } = useCarouselContext()
+
+  index = Math.floor((index ?? 0) / (slidesToScroll ?? 1))
 
   const isSelected = index === selectedIndex
 
   const getSlideProps: PropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        border: '0px',
-        clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
-        margin: '-1px',
-        padding: '0px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        position: 'absolute',
-        ...props.style,
-      }
-
-      return {
-        ...props,
-        ref: mergeRefs(register, ref),
-        role: 'carousel-slide',
-        'data-hidden': dataAttr(disabled),
-        'data-selected': dataAttr(isSelected),
-        style: disabled ? style : undefined,
-      }
-    },
-    [register, disabled, isSelected],
+    (props = {}) => ({
+      ...props,
+      role: 'carousel-slide',
+      'data-index': index,
+      'data-selected': dataAttr(isSelected),
+    }),
+    [isSelected, index],
   )
 
   return { getSlideProps }
@@ -308,26 +258,24 @@ export type UseCarouselControlProps = IconButtonProps & {
 }
 
 export const useCarouselControl = ({ operation, ...rest }: UseCarouselControlProps) => {
-  const descendants = useCarouselDescendantsContext()
-  const { selectedIndex, onPrev, onNext, loop } = useCarouselContext()
-
-  const [disabled, setDisabled] = useState<boolean>(rest.disabled ?? rest.isDisabled ?? false)
+  const { carousel } = useCarouselContext()
 
   const isPrev = operation === 'prev'
 
-  useEffect(() => {
-    if (loop) return
+  const disabled =
+    rest.disabled ??
+    rest.isDisabled ??
+    (isPrev ? !carousel?.canScrollPrev() : !carousel?.canScrollNext())
+
+  const onClick = useCallback(() => {
+    if (!carousel) return
 
     if (isPrev) {
-      const first = descendants.enabledfirstValue()
-
-      setDisabled(first?.index === selectedIndex)
+      carousel.scrollPrev()
     } else {
-      const last = descendants.enabledlastValue()
-
-      setDisabled(last?.index === selectedIndex)
+      carousel.scrollNext()
     }
-  }, [loop, descendants, isPrev, selectedIndex])
+  }, [carousel, isPrev])
 
   const getControlProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
@@ -335,9 +283,9 @@ export const useCarouselControl = ({ operation, ...rest }: UseCarouselControlPro
       ref,
       disabled,
       role: 'carousel-control',
-      onClick: handlerAll(props.onClick, isPrev ? onPrev : onNext),
+      onClick: handlerAll(props.onClick, onClick),
     }),
-    [disabled, isPrev, onNext, onPrev],
+    [disabled, onClick],
   )
 
   return { getControlProps }
@@ -346,19 +294,17 @@ export const useCarouselControl = ({ operation, ...rest }: UseCarouselControlPro
 export type UseCarouselControlReturn = ReturnType<typeof useCarouselControl>
 
 export const useCarouselIndicators = () => {
-  const descendants = useCarouselDescendantsContext()
-  const { selectedIndex, setSelectedIndex } = useCarouselContext()
-
-  const enabledValues = descendants.enabledValues()
-  const indexes = enabledValues.map(({ index }) => index)
+  const { selectedIndex, carousel, indexes } = useCarouselContext()
 
   const onClick = useCallback(
     (ev: MouseEvent, index: number) => {
+      if (!carousel) return
+
       ev.stopPropagation()
 
-      setSelectedIndex(index)
+      carousel.scrollTo(index)
     },
-    [setSelectedIndex],
+    [carousel],
   )
 
   const getIndicatorProps: RequiredPropGetter<{ index: number }> = useCallback(

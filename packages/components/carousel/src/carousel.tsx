@@ -5,15 +5,11 @@ import {
   omitThemeProps,
   HTMLUIProps,
   ThemeProps,
+  CSSUIObject,
 } from '@yamada-ui/core'
 import { cx, findChildren, getValidChildren, omitChildren, pickChildren } from '@yamada-ui/utils'
-import {
-  CarouselDescendantsContextProvider,
-  CarouselProvider,
-  useCarousel,
-  useCarouselContext,
-  UseCarouselProps,
-} from './use-carousel'
+import { cloneElement, FC } from 'react'
+import { CarouselProvider, useCarousel, useCarouselContext, UseCarouselProps } from './use-carousel'
 import {
   CarouselControlNext,
   CarouselControlPrev,
@@ -38,7 +34,7 @@ export const Carousel = forwardRef<CarouselProps, 'div'>((props, ref) => {
   const { className, inner, control, controlPrev, controlNext, indicators, ...computedProps } =
     omitThemeProps(props)
 
-  const { descendants, getContainerProps, getInnerProps, children, ...rest } = useCarousel({
+  const { getContainerProps, getSlidesProps, children, ...rest } = useCarousel({
     ...computedProps,
   })
 
@@ -56,55 +52,55 @@ export const Carousel = forwardRef<CarouselProps, 'div'>((props, ref) => {
     CarouselSlide,
   )
 
+  const cloneSlideChildren = slideChildren.map((child, index) => cloneElement(child, { index }))
+
   return (
-    <CarouselDescendantsContextProvider value={descendants}>
-      <CarouselProvider value={{ styles, ...rest }}>
-        <ui.div
-          className={cx('ui-carousel', className)}
-          __css={{ position: 'relative', ...styles.container }}
-          {...getContainerProps({}, ref)}
-        >
-          {customCarouselControlPrev ??
-            (control !== false ? <CarouselControlPrev {...control} {...controlPrev} /> : null)}
-          {customCarouselControlNext ??
-            (control !== false ? <CarouselControlNext {...control} {...controlNext} /> : null)}
+    <CarouselProvider value={{ styles, ...rest }}>
+      <ui.div
+        className={cx('ui-carousel', className)}
+        __css={{ position: 'relative', ...styles.container }}
+        {...getContainerProps({}, ref)}
+      >
+        {customCarouselControlPrev ??
+          (control !== false ? <CarouselControlPrev {...control} {...controlPrev} /> : null)}
+        {customCarouselControlNext ??
+          (control !== false ? <CarouselControlNext {...control} {...controlNext} /> : null)}
 
-          <CarouselSliders {...getInnerProps(inner)}>{slideChildren}</CarouselSliders>
+        <CarouselSlides {...getSlidesProps(inner)}>{cloneSlideChildren}</CarouselSlides>
 
-          {customCarouselIndicators ??
-            (indicators !== false ? <CarouselIndicators {...indicators} /> : null)}
+        {customCarouselIndicators ??
+          (indicators !== false ? <CarouselIndicators {...indicators} /> : null)}
 
-          {otherChildren}
-        </ui.div>
-      </CarouselProvider>
-    </CarouselDescendantsContextProvider>
+        {otherChildren}
+      </ui.div>
+    </CarouselProvider>
   )
 })
 
-type CarouselSlidersProps = HTMLUIProps<'div'>
+type CarouselSlidesProps = HTMLUIProps<'div'>
 
-const CarouselSliders = forwardRef<CarouselSlidersProps, 'div'>(({ children, ...rest }, ref) => {
-  const { orientation, styles } = useCarouselContext()
+const CarouselSlides = forwardRef<CarouselSlidesProps, 'div'>(({ ...rest }, ref) => {
+  const css: CSSUIObject = { w: '100%', h: '100%', overflow: 'hidden' }
 
   return (
-    <ui.div
-      ref={ref}
-      className='ui-carousel-sliders'
-      __css={{ w: '100%', h: '100%', overflow: 'hidden' }}
-    >
-      <ui.div
-        className='ui-carousel-sliders-inner'
-        __css={{
-          w: '100%',
-          h: '100%',
-          display: 'flex',
-          flexDirection: orientation === 'vertical' ? 'column' : 'row',
-          ...styles.inner,
-        }}
-        {...rest}
-      >
-        {children}
-      </ui.div>
+    <ui.div ref={ref} className='ui-carousel-sliders' __css={css}>
+      <CarouselSlidesInner {...rest} />
     </ui.div>
   )
 })
+
+type CarouselSlidesInnerProps = HTMLUIProps<'div'>
+
+const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
+  const { orientation, includeGapInSize, gap, styles } = useCarouselContext()
+
+  const css: CSSUIObject = {
+    h: '100%',
+    display: 'flex',
+    flexDirection: orientation === 'vertical' ? 'column' : 'row',
+    ...styles.inner,
+    ...(includeGapInSize ? { [orientation === 'vertical' ? 'mb' : 'mr']: `-${gap}` } : {}),
+  }
+
+  return <ui.div className='ui-carousel-sliders-inner' __css={css} {...rest} />
+}

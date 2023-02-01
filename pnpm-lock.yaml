@@ -373,10 +373,9 @@ importers:
       '@yamada-ui/button': workspace:*
       '@yamada-ui/core': workspace:*
       '@yamada-ui/icon': workspace:*
-      '@yamada-ui/motion': workspace:*
       '@yamada-ui/use-controllable-state': workspace:*
-      '@yamada-ui/use-descendant': workspace:*
-      '@yamada-ui/use-pan-event': workspace:*
+      '@yamada-ui/use-token': workspace:*
+      '@yamada-ui/use-value': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       embla-carousel-react: ^7.0.0
@@ -385,10 +384,9 @@ importers:
       '@yamada-ui/button': link:../button
       '@yamada-ui/core': link:../../core
       '@yamada-ui/icon': link:../icon
-      '@yamada-ui/motion': link:../motion
       '@yamada-ui/use-controllable-state': link:../../hooks/use-controllable-state
-      '@yamada-ui/use-descendant': link:../../hooks/use-descendant
-      '@yamada-ui/use-pan-event': link:../../hooks/use-pan-event
+      '@yamada-ui/use-token': link:../../hooks/use-token
+      '@yamada-ui/use-value': link:../../hooks/use-value
       '@yamada-ui/utils': link:../../utils
       embla-carousel-react: 7.0.9_react@18.2.0
     devDependencies:

@@ -19,7 +19,11 @@ export const Avatar: ComponentMultiStyle = {
       borderColor: ['white', 'black'],
       bg: ['gray.200', 'whiteAlpha.400'],
     },
-    badge: {},
+    badge: {
+      rounded: 'full',
+      borderWidth: '0.2em',
+      borderColor: ['white', 'black'],
+    },
   },
 
   sizes: {

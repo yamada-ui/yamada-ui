@@ -137,3 +137,17 @@ const randomColorFromList = (str: string, list: string[]) => {
 }
 
 const randomFromList = (list: string[]) => list[Math.floor(Math.random() * list.length)]
+
+export const isLight =
+  (color: string) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).isLight()
+  }
+
+export const isDark =
+  (color: string) => (theme: Dict, colorScheme: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorScheme)
+
+    return new TinyColor(raw).isDark()
+  }

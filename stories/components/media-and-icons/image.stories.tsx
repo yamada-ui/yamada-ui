@@ -9,3 +9,13 @@ export default {
 export const basic: ComponentStory<typeof Image> = () => {
   return <Image src='https://dragon-ball-official.com/assets/img/intro/intro_1.png' size='xl' />
 }
+
+export const withFallback: ComponentStory<typeof Image> = () => {
+  return (
+    <Image
+      src='https://not-found.com/not-found.png'
+      fallback='https://via.placeholder.com/512'
+      size='xl'
+    />
+  )
+}

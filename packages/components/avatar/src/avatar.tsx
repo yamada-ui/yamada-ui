@@ -63,7 +63,6 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
     textAlign: 'center',
     textTransform: 'uppercase',
     fontWeight: 'medium',
-    overflow: 'hidden',
     ...styles.container,
   }
 
@@ -81,6 +80,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
           src={src}
           srcSet={srcSet}
           loading={loading}
+          rounded={rounded}
           onLoad={handlerAll(onLoad, () => setIsLoading(false))}
           onError={onError}
           format={format}
@@ -103,6 +103,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   onError,
   onLoad,
   format,
+  rounded,
   name,
   loading,
   icon = <AvatarIcon />,
@@ -133,6 +134,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
       loading={loading}
       onLoad={onLoad}
       referrerPolicy={referrerPolicy}
+      rounded={rounded}
       __css={css}
     />
   )

@@ -314,6 +314,19 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/avatar:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/badge:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1439,6 +1452,7 @@ importers:
       '@yamada-ui/accordion': workspace:*
       '@yamada-ui/alert': workspace:*
       '@yamada-ui/autocomplete': workspace:*
+      '@yamada-ui/avatar': workspace:*
       '@yamada-ui/badge': workspace:*
       '@yamada-ui/breadcrumb': workspace:*
       '@yamada-ui/button': workspace:*
@@ -1515,6 +1529,7 @@ importers:
       '@yamada-ui/accordion': link:../components/accordion
       '@yamada-ui/alert': link:../components/alert
       '@yamada-ui/autocomplete': link:../components/autocomplete
+      '@yamada-ui/avatar': link:../components/avatar
       '@yamada-ui/badge': link:../components/badge
       '@yamada-ui/breadcrumb': link:../components/breadcrumb
       '@yamada-ui/button': link:../components/button

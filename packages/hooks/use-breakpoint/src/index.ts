@@ -63,7 +63,33 @@ export const useBreakpoint = () => {
 }
 
 export const useBreakpointValue = <T extends any>(values: ResponsiveObject<T>): T => {
+  const { theme } = useTheme()
+
+  if (!theme)
+    throw Error(
+      'useBreakpoint: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`',
+    )
+
+  const breakpoints = theme.__breakpoints?.keys
+
+  if (!breakpoints)
+    throw Error(
+      'useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`',
+    )
+
   const breakpoint = useBreakpoint()
 
-  return (values.hasOwnProperty(breakpoint) ? values[breakpoint] : values.base) as T
+  const computedBreakpoint = breakpoints.reduce((prev, current) => {
+    if (prev === breakpoint || current === breakpoint) {
+      if (prev === 'base' || (!values.hasOwnProperty(prev) && values.hasOwnProperty(current))) {
+        return current
+      } else {
+        return prev
+      }
+    } else {
+      return prev
+    }
+  }, 'base')
+
+  return values[computedBreakpoint] as T
 }

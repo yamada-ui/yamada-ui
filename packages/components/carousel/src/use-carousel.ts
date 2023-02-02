@@ -1,5 +1,5 @@
 import { IconButtonProps } from '@yamada-ui/button'
-import { CSSUIObject, HTMLUIProps, layoutStylesProperties, UIProps } from '@yamada-ui/core'
+import { CSSUIObject, HTMLUIProps, layoutStylesProperties } from '@yamada-ui/core'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
 import {
   createContext,
@@ -11,22 +11,23 @@ import {
   useUpdateEffect,
 } from '@yamada-ui/utils'
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
-import {
-  Children,
-  Dispatch,
-  MouseEvent,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { Children, MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
 
-type CarouselContext = Omit<UseCarouselProps, 'index' | 'defaultIndex' | 'onChange'> & {
+export type Orientation = 'vertical' | 'horizontal'
+
+export type Align = 'start' | 'center' | 'end' | number
+
+export type ContainScroll = '' | 'trimSnaps' | 'keepSnaps'
+
+type CarouselContext = {
   carousel: EmblaCarouselType | undefined
   indexes: number[]
   selectedIndex: number
-  setSelectedIndex: Dispatch<SetStateAction<number>>
+  orientation: Orientation
+  includeGapInSize: boolean
+  slidesToScroll: number
+  slideSize: string | number
+  gap: string | number
   styles: Record<string, CSSUIObject>
 }
 
@@ -35,14 +36,13 @@ export const [CarouselProvider, useCarouselContext] = createContext<CarouselCont
   errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
 })
 
-export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange'> & {
+export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'draggable' | 'gap'> & {
   index?: number
   defaultIndex?: number
   onChange?: (index: number) => void
-  orientation?: 'vertical' | 'horizontal'
-  slideSize?: UIProps['width']
-  align?: 'start' | 'center' | 'end' | number
-  containScroll?: '' | 'trimSnaps' | 'keepSnaps'
+  orientation?: Orientation
+  align?: Align
+  containScroll?: ContainScroll
   slidesToScroll?: number
   dragFree?: boolean
   draggable?: boolean
@@ -54,6 +54,8 @@ export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange'> & {
   autoplay?: boolean
   stopMouseEnterAutoplay?: boolean
   includeGapInSize?: boolean
+  gap?: string | number
+  slideSize?: string | number
   onScrollProgress?: (progress: number) => void
 }
 
@@ -152,7 +154,22 @@ export const useCarousel = ({
     const indexes = snapList.map((_, i) => i)
 
     setIndexes(indexes)
-  }, [Children.toArray(children).length])
+  }, [
+    Children.toArray(children).length,
+    align,
+    orientation,
+    loop,
+    speed,
+    gap,
+    slidesToScroll,
+    draggable,
+    dragFree,
+    inViewThreshold,
+    skipSnaps,
+    containScroll,
+    slideSize,
+    includeGapInSize,
+  ])
 
   useUpdateEffect(() => {
     if (!carousel) return
@@ -206,19 +223,10 @@ export const useCarousel = ({
     children,
     indexes,
     selectedIndex,
-    setSelectedIndex,
     orientation,
-    gap,
-    loop,
-    align,
-    slidesToScroll,
-    draggable,
-    dragFree,
-    speed,
-    inViewThreshold,
-    skipSnaps,
-    containScroll,
     slideSize,
+    gap,
+    slidesToScroll,
     includeGapInSize,
     getContainerProps,
     getSlidesProps,

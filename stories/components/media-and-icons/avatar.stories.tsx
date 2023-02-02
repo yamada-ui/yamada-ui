@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Avatar, AvatarBadge, AvatarGroup, Wrap } from '@yamada-ui/react'
+import { Avatar, AvatarBadge, AvatarGroup } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Media And Icons / Avatar',

@@ -57,7 +57,7 @@ export const Carousel: ComponentMultiStyle = {
 
   sizes: {
     sm: {
-      container: {
+      inner: {
         h: 'sm',
       },
       indicators: ({ orientation: o }) => ({
@@ -65,7 +65,7 @@ export const Carousel: ComponentMultiStyle = {
       }),
     },
     md: {
-      container: {
+      inner: {
         h: 'md',
       },
       indicators: ({ orientation: o }) => ({
@@ -73,7 +73,7 @@ export const Carousel: ComponentMultiStyle = {
       }),
     },
     lg: {
-      container: {
+      inner: {
         h: 'lg',
       },
       indicators: ({ orientation: o }) => ({
@@ -81,7 +81,7 @@ export const Carousel: ComponentMultiStyle = {
       }),
     },
     xl: {
-      container: {
+      inner: {
         h: 'xl',
       },
       indicators: ({ orientation: o }) => ({

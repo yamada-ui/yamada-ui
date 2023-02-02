@@ -585,10 +585,12 @@ importers:
   packages/components/image:
     specifiers:
       '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
       react: 18.2.0

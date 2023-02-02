@@ -20,7 +20,8 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/core": "workspace:*"
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

@@ -1,7 +1,7 @@
 import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps } from '@yamada-ui/core'
 import { useToken } from '@yamada-ui/use-token'
 import { cx, replaceObject, isUnit } from '@yamada-ui/utils'
-import { SVGAttributes } from 'react'
+import { FC, SVGAttributes } from 'react'
 
 type IconOptions = {
   size?: CSSUIProps['fontSize']
@@ -45,7 +45,7 @@ export const Icon = forwardRef<IconProps, 'svg'>(
   },
 )
 
-export const CheckIcon = (props: IconProps) => {
+export const CheckIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox='0 0 24 24' {...props}>
       <path
@@ -56,7 +56,7 @@ export const CheckIcon = (props: IconProps) => {
   )
 }
 
-export const InfoIcon = (props: IconProps) => {
+export const InfoIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox='0 0 24 24' {...props}>
       <path
@@ -67,7 +67,7 @@ export const InfoIcon = (props: IconProps) => {
   )
 }
 
-export const WarningIcon = (props: IconProps) => {
+export const WarningIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox='0 0 24 24' {...props}>
       <path
@@ -78,7 +78,7 @@ export const WarningIcon = (props: IconProps) => {
   )
 }
 
-export const CloseIcon = (props: IconProps) => {
+export const CloseIcon: FC<IconProps> = (props) => {
   return (
     <Icon focusable='false' aria-hidden viewBox='0 0 24 24' {...props}>
       <path
@@ -89,7 +89,7 @@ export const CloseIcon = (props: IconProps) => {
   )
 }
 
-export const ChevronIcon = (props: IconProps) => {
+export const ChevronIcon: FC<IconProps> = (props) => {
   return (
     <Icon focusable='false' aria-hidden viewBox='0 0 24 24' {...props}>
       <path fill='currentColor' d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z' />

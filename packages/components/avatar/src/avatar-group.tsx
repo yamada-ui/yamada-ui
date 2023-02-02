@@ -29,11 +29,11 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
 
   let validChildren = getValidChildren(children)
 
+  const excess = !isUndefined(max) ? validChildren.length - max : 0
+
   validChildren = !isUndefined(max) ? validChildren.slice(0, max) : validChildren
 
   validChildren = validChildren.reverse()
-
-  const excess = !isUndefined(max) ? validChildren.length - max : 0
 
   const cloneChildren = validChildren.map((child, i) =>
     cloneElement(
@@ -66,14 +66,15 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
           rounded={rounded}
           ms={gap}
           __css={{
+            position: 'relative',
             display: 'inline-flex',
-            alignItems: 'center',
             justifyContent: 'center',
+            alignItems: 'center',
+            flexShrink: 0,
             textAlign: 'center',
             textTransform: 'uppercase',
             fontWeight: 'medium',
-            position: 'relative',
-            flexShrink: 0,
+            borderWidth: '2px',
             ...styles.excess,
           }}
         >

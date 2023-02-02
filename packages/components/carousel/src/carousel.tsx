@@ -11,7 +11,14 @@ import {
 } from '@yamada-ui/core'
 import { useToken } from '@yamada-ui/use-token'
 import { useValue } from '@yamada-ui/use-value'
-import { cx, findChildren, getValidChildren, omitChildren, pickChildren } from '@yamada-ui/utils'
+import {
+  cx,
+  filterUndefined,
+  findChildren,
+  getValidChildren,
+  omitChildren,
+  pickChildren,
+} from '@yamada-ui/utils'
 import { cloneElement, FC } from 'react'
 import {
   CarouselProvider,
@@ -153,9 +160,7 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
           {customCarouselControlNext ??
             (control !== false ? <CarouselControlNext {...control} {...controlNext} /> : null)}
 
-          <CarouselSlides
-            {...getSlidesProps({ ...(h ? { h } : {}), ...(minH ? { minH } : {}), ...inner })}
-          >
+          <CarouselSlides {...getSlidesProps({ ...filterUndefined({ h, minH }), ...inner })}>
             {cloneSlideChildren}
           </CarouselSlides>
 

@@ -1,5 +1,6 @@
 import { Accordion } from './accordion'
 import { Alert } from './alert'
+import { Avatar } from './avatar'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
@@ -41,6 +42,7 @@ import { Tooltip } from './tooltip'
 export default {
   Accordion,
   Alert,
+  Avatar,
   Badge,
   Breadcrumb,
   Button,

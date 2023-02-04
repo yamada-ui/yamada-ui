@@ -937,6 +937,19 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/reorder:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/scroll-area:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1495,6 +1508,7 @@ importers:
       '@yamada-ui/progress': workspace:*
       '@yamada-ui/providers': workspace:*
       '@yamada-ui/radio': workspace:*
+      '@yamada-ui/reorder': workspace:*
       '@yamada-ui/scroll-area': workspace:*
       '@yamada-ui/segmented-control': workspace:*
       '@yamada-ui/select': workspace:*
@@ -1572,6 +1586,7 @@ importers:
       '@yamada-ui/progress': link:../components/progress
       '@yamada-ui/providers': link:../providers
       '@yamada-ui/radio': link:../components/radio
+      '@yamada-ui/reorder': link:../components/reorder
       '@yamada-ui/scroll-area': link:../components/scroll-area
       '@yamada-ui/segmented-control': link:../components/segmented-control
       '@yamada-ui/select': link:../components/select

@@ -20,18 +20,19 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/button": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/icon": "workspace:*",
+    "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "embla-carousel": "^7.0.9",
     "embla-carousel-react": "^7.0.0"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.1.1"
+    "clean-package": "2.1.1",
+    "react": "^18.0.0"
   },
   "peerDependencies": {
     "react": ">=18"

@@ -395,6 +395,7 @@ importers:
       '@yamada-ui/use-value': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
+      embla-carousel: ^7.0.9
       embla-carousel-react: ^7.0.0
       react: ^18.2.0
     dependencies:
@@ -405,6 +406,7 @@ importers:
       '@yamada-ui/use-token': link:../../hooks/use-token
       '@yamada-ui/use-value': link:../../hooks/use-value
       '@yamada-ui/utils': link:../../utils
+      embla-carousel: 7.0.9
       embla-carousel-react: 7.0.9_react@18.2.0
     devDependencies:
       clean-package: 2.1.1
@@ -940,11 +942,13 @@ importers:
   packages/components/reorder:
     specifiers:
       '@yamada-ui/core': workspace:*
+      '@yamada-ui/motion': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
+      '@yamada-ui/motion': link:../motion
       '@yamada-ui/utils': link:../../utils
     devDependencies:
       clean-package: 2.1.1
@@ -8292,7 +8296,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_tgppsxbwbt7anzz66bgq6kuiw4
+      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
     dev: false
 
   /babel-plugin-syntax-jsx/6.18.0:

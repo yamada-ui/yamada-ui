@@ -133,7 +133,9 @@ export const useCarousel = ({
     const isLast = !carousel?.canScrollNext()
 
     if (carousel && autoplay && !isStop && !isLast) {
-      timeoutId.current = setInterval(carousel.scrollNext, delay)
+      timeoutId.current = setInterval(() => {
+        carousel.scrollNext()
+      }, delay)
     } else {
       if (timeoutId.current) clearInterval(timeoutId.current)
 

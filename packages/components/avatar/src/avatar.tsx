@@ -44,6 +44,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
     loading,
     icon,
     ignoreFallback,
+    borderRadius = 'full',
     rounded = 'full',
     onError,
     onLoad,
@@ -72,6 +73,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
         ref={ref}
         className={cx('ui-avatar', className)}
         data-loading={dataAttr(isLoading)}
+        borderRadius={borderRadius}
         rounded={rounded}
         __css={css}
         {...rest}
@@ -80,6 +82,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
           src={src}
           srcSet={srcSet}
           loading={loading}
+          borderRadius={borderRadius}
           rounded={rounded}
           onLoad={handlerAll(onLoad, () => setIsLoading(false))}
           onError={onError}
@@ -103,6 +106,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   onError,
   onLoad,
   format,
+  borderRadius,
   rounded,
   name,
   loading,
@@ -134,6 +138,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
       loading={loading}
       onLoad={onLoad}
       referrerPolicy={referrerPolicy}
+      borderRadius={borderRadius}
       rounded={rounded}
       __css={css}
     />

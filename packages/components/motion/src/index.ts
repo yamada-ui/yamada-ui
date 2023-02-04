@@ -20,7 +20,7 @@ export {
   LayoutGroup,
   LazyMotion,
   MotionConfig,
-  Reorder,
+  Reorder as MationReorder,
   useMotionTemplate,
   useScroll,
   useSpring,

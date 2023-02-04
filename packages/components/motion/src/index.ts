@@ -13,6 +13,7 @@ export type {
   AnimationLifecycles as MotionAnimationLifecycles,
   AnimationOptions as MotionAnimationOptions,
   AnimationPlaybackControls as MotionAnimationPlaybackControls,
+  MotionValue,
 } from 'framer-motion'
 export {
   motion,
@@ -35,5 +36,6 @@ export {
   useInView,
   useIsPresent,
   useReducedMotion,
+  useMotionValue,
 } from 'framer-motion'
 export * from './motion'

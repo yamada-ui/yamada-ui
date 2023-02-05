@@ -7,6 +7,7 @@ export type {
   LayoutProps as MotionLayoutProps,
   LazyProps as MotionLazyProps,
   MotionConfigProps,
+  DragControls,
   AnimationControls as MotionAnimationControls,
   AnimationProps as MotionAnimationProps,
   AnimationType as MotionAnimationType,

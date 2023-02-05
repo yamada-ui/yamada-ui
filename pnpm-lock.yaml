@@ -942,12 +942,14 @@ importers:
   packages/components/reorder:
     specifiers:
       '@yamada-ui/core': workspace:*
+      '@yamada-ui/icon': workspace:*
       '@yamada-ui/motion': workspace:*
       '@yamada-ui/utils': workspace:*
       clean-package: 2.1.1
       react: ^18.2.0
     dependencies:
       '@yamada-ui/core': link:../../core
+      '@yamada-ui/icon': link:../icon
       '@yamada-ui/motion': link:../motion
       '@yamada-ui/utils': link:../../utils
     devDependencies:
@@ -8296,7 +8298,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
+      styled-components: 5.3.6_tgppsxbwbt7anzz66bgq6kuiw4
     dev: false
 
   /babel-plugin-syntax-jsx/6.18.0:

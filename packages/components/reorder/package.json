@@ -22,7 +22,8 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/motion": "workspace:*"
+    "@yamada-ui/motion": "workspace:*",
+    "@yamada-ui/icon": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

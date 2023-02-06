@@ -59,13 +59,12 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>((props, ref) =
 
     const duplicatedValues = pickDuplicated(values)
 
-    if (duplicatedValues.length) {
+    if (duplicatedValues.length)
       console.warn(
         `Reorder: 'label' of 'ReorderItem' must not be duplicated. duplicate 'label' is '${duplicatedValues.join(
           `', '`,
         )}' `,
       )
-    }
 
     return omitDuplicated(values)
   }, [validChildren])

@@ -46,7 +46,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
     const isOpen = i !== -1 ? (isArray(index) ? index.includes(i) : index === i) : false
 
     if (isOpen && isDisabled) {
-      console.warn(`Cannot open a disabled accordion item`)
+      console.warn(`Accordion: Cannot open a disabled accordion item`)
     }
 
     const onChange = useCallback(

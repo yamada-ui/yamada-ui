@@ -315,7 +315,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
   if (createOption && !isUndefined(children)) {
     console.warn(
-      `${
+      `${!isMulti ? 'Autocomplete' : 'MultiAutocomplete'}: ${
         !isMulti ? 'Autocomplete' : 'MultiAutocomplete'
       } internally prefers 'children'. If 'createOption' is true, it will not be reflected correctly. If want to reflect, please set 'data' in props.`,
     )
@@ -682,7 +682,9 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
         }
       } else {
         console.warn(
-          `'${createOrder}' specified in createOrder does not exist in the option group.`,
+          `${
+            !isMulti ? 'Autocomplete' : 'MultiAutocomplete'
+          }: '${createOrder}' specified in createOrder does not exist in the option group.`,
         )
       }
     }
@@ -696,7 +698,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     setFocusedIndex(index)
 
     rest.onCreate?.(newOption, newData)
-  }, [searchValue, data, createOrder, onChange, rebirthOptions, rest, createSecondOrder])
+  }, [searchValue, data, createOrder, onChange, rebirthOptions, rest, createSecondOrder, isMulti])
 
   const onDelete = useCallback(() => {
     if (!isMulti) {

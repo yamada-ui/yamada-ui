@@ -69,12 +69,14 @@ export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
   } = omitThemeProps(props)
 
   if ((value || defaultValue) != null && !isArray(value || defaultValue) && isMultiple) {
-    console.warn(`If 'isMultiple' is passed, then 'index' or 'defaultIndex' must be an array.`)
+    console.warn(
+      `Accordion: If 'isMultiple' is passed, then 'index' or 'defaultIndex' must be an array.`,
+    )
   }
 
   if (isMultiple && isToggle) {
     console.warn(
-      `If 'isMultiple' is passed, 'isToggle' will be ignored. Either remove 'isToggle' or 'isMultiple' depending on whether you want isMultiple accordions visible or not`,
+      `Accordion: If 'isMultiple' is passed, 'isToggle' will be ignored. Either remove 'isToggle' or 'isMultiple' depending on whether you want isMultiple accordions visible or not`,
     )
   }
 

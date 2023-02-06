@@ -640,12 +640,6 @@ export const useSelectOption = (
 
   const { index, register, descendants } = useSelectDescendant({ disabled: trulyDisabled })
 
-  if (!!placeholder && index > 0 && placeholderInOptions && !computedProps.value) {
-    console.warn(
-      `If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'placeholderInOptions' to false.`,
-    )
-  }
-
   const values = descendants.values()
   const frontValues = values.slice(0, index)
 
@@ -659,6 +653,13 @@ export const useSelectOption = (
     (!isMulti ? (computedProps.value ?? '') === value : value.includes(computedProps.value ?? ''))
   const isFocused = index === focusedIndex
 
+  if (!!placeholder && index > 0 && placeholderInOptions && !computedProps.value) {
+    console.warn(
+      `${
+        !isMulti ? 'Select' : 'MultiSelect'
+      }: If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'placeholderInOptions' to false.`,
+    )
+  }
   const onClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
       computedProps.onClick?.(ev)

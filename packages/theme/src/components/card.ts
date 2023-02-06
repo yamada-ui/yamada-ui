@@ -14,7 +14,7 @@ export const Card: ComponentMultiStyle = {
   variants: {
     elevated: {
       container: {
-        boxShadow: ['base', 'dark-md'],
+        boxShadow: ['md', 'dark-md'],
       },
     },
     outline: {
@@ -40,6 +40,7 @@ export const Card: ComponentMultiStyle = {
       },
     }),
     unstyled: {
+      container: { rounded: 0 },
       header: { p: 0 },
       body: { p: 0 },
       footer: { p: 0 },

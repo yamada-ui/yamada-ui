@@ -54,6 +54,7 @@
     "@yamada-ui/native-select": "workspace:*",
     "@yamada-ui/notice": "workspace:*",
     "@yamada-ui/number-input": "workspace:*",
+    "@yamada-ui/pagination": "workspace:*",
     "@yamada-ui/pin-input": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/portal": "workspace:*",

@@ -842,6 +842,19 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/pagination:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/pin-input:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1508,6 +1521,7 @@ importers:
       '@yamada-ui/native-select': workspace:*
       '@yamada-ui/notice': workspace:*
       '@yamada-ui/number-input': workspace:*
+      '@yamada-ui/pagination': workspace:*
       '@yamada-ui/pin-input': workspace:*
       '@yamada-ui/popover': workspace:*
       '@yamada-ui/portal': workspace:*
@@ -1586,6 +1600,7 @@ importers:
       '@yamada-ui/native-select': link:../components/native-select
       '@yamada-ui/notice': link:../components/notice
       '@yamada-ui/number-input': link:../components/number-input
+      '@yamada-ui/pagination': link:../components/pagination
       '@yamada-ui/pin-input': link:../components/pin-input
       '@yamada-ui/popover': link:../components/popover
       '@yamada-ui/portal': link:../components/portal

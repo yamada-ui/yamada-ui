@@ -1,13 +1,6 @@
 import { useCallback, useState } from 'react'
 
-export type UseBooleanReture = [
-  flg: boolean,
-  setFlg: { on: () => void; off: () => void; toggle: () => void },
-]
-
-export type UseBoolean = (init?: boolean) => UseBooleanReture
-
-export const useBoolean: UseBoolean = (init = false) => {
+export const useBoolean = (init: boolean = false) => {
   const [flg, setFlg] = useState<boolean>(init)
 
   const on = useCallback(() => setFlg(true), [])

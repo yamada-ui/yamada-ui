@@ -8,14 +8,7 @@ export type UseDisclosureProps = {
   onOpen?(): void
 }
 
-export type ReturnUseDisclosure = [
-  isOpen: boolean,
-  onOpen: () => void,
-  onClose: () => void,
-  onToggle: () => void,
-]
-
-export const useDisclosure = (props: UseDisclosureProps = {}): ReturnUseDisclosure => {
+export const useDisclosure = (props: UseDisclosureProps = {}) => {
   const [defaultIsOpen, setIsOpen] = useState<boolean>(props.defaultIsOpen ?? false)
 
   const handleOpen = useCallbackRef(props.onOpen)

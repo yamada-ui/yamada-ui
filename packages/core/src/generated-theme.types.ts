@@ -486,6 +486,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: string & {}
       variants: 'subtle' | 'solid' | 'left-accent' | 'top-accent' | (string & {})
     }
+    Avatar: {
+      sizes: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {})
+      variants: string & {}
+    }
     Badge: { sizes: string & {}; variants: 'solid' | 'subtle' | 'outline' | (string & {}) }
     Button: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
@@ -495,6 +499,7 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
       variants: 'elevated' | 'outline' | 'solid' | 'subtle' | 'unstyled' | (string & {})
     }
+    Carousel: { sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {}); variants: string & {} }
     Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Dialog: {
@@ -557,6 +562,10 @@ export interface GeneratedTheme extends UITheme {
     }
     Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Reorder: {
+      sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
+      variants: 'elevated' | 'outline' | 'solid' | 'subtle' | (string & {})
+    }
     SegmentedControl: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'basic' | 'rounded' | (string & {})

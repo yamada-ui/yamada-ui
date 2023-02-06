@@ -7,7 +7,7 @@ import {
   ThemeProps,
   useComponentStyle,
 } from '@yamada-ui/core'
-import { cx, Dict, handlerAll, merge } from '@yamada-ui/utils'
+import { cx, handlerAll, merge } from '@yamada-ui/utils'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type ScrollAreaOptions = {
@@ -24,24 +24,24 @@ const neverStyles: CSSUIObject = {
   '&::-webkit-scrollbar': { display: 'none' },
 }
 
-const hiddenStyles = (styles: Dict): CSSUIObject => ({
-  _scrollbarTrack: {
-    bg: 'transparent',
-    _nativeHover: { ...styles._scrollbarTrack },
+const hiddenStyles: CSSUIObject = {
+  _scrollbarTrack: { bg: 'transparent' },
+  '&::-webkit-scrollbar-track': { bg: 'transparent' },
+  _scrollbarThumb: { bg: 'transparent' },
+  '&::-webkit-scrollbar-thumb': { bg: 'transparent' },
+  _light: {
+    _scrollbarTrack: { bg: 'transparent' },
+    '&::-webkit-scrollbar-track': { bg: 'transparent' },
+    _scrollbarThumb: { bg: 'transparent' },
+    '&::-webkit-scrollbar-thumb': { bg: 'transparent' },
   },
-  '&::-webkit-scrollbar-track': {
-    bg: 'transparent',
-    _nativeHover: { ...styles['&::-webkit-scrollbar-track'] },
+  _dark: {
+    _scrollbarTrack: { bg: 'transparent' },
+    '&::-webkit-scrollbar-track': { bg: 'transparent' },
+    _scrollbarThumb: { bg: 'transparent' },
+    '&::-webkit-scrollbar-thumb': { bg: 'transparent' },
   },
-  _scrollbarThumb: {
-    bg: 'transparent',
-    _nativeHover: { ...styles._scrollbarThumb },
-  },
-  '&::-webkit-scrollbar-thumb': {
-    bg: 'transparent',
-    _nativeHover: { ...styles['&::-webkit-scrollbar-thumb'] },
-  },
-})
+}
 
 export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
   const styles = useComponentStyle('ScrollArea', props)
@@ -94,13 +94,12 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
   }, [])
 
   const css: CSSUIObject = useMemo(() => {
+    const baseStyle = { overflow, ...styles }
+
     if (isNever) {
-      return merge({ overflow, ...styles }, neverStyles)
+      return merge(baseStyle, neverStyles)
     } else {
-      return merge(
-        { overflow, ...styles },
-        !isAlways && !isHovered && !isScrolling ? hiddenStyles(styles) : {},
-      )
+      return merge(baseStyle, !isAlways && !isHovered && !isScrolling ? hiddenStyles : {})
     }
   }, [isAlways, isHovered, isNever, isScrolling, overflow, styles])
 

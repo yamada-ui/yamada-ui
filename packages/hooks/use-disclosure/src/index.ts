@@ -4,8 +4,8 @@ import { useCallback, useState } from 'react'
 export type UseDisclosureProps = {
   isOpen?: boolean
   defaultIsOpen?: boolean
-  onClose?(): void
-  onOpen?(): void
+  onClose?: () => void
+  onOpen?: () => void
 }
 
 export const useDisclosure = (props: UseDisclosureProps = {}): UseDisclosureReturn => {

@@ -8,7 +8,7 @@ export type UseDisclosureProps = {
   onOpen?(): void
 }
 
-export const useDisclosure = (props: UseDisclosureProps = {}) => {
+export const useDisclosure = (props: UseDisclosureProps = {}): UseDisclosureReturn => {
   const [defaultIsOpen, setIsOpen] = useState<boolean>(props.defaultIsOpen ?? false)
 
   const handleOpen = useCallbackRef(props.onOpen)
@@ -33,6 +33,13 @@ export const useDisclosure = (props: UseDisclosureProps = {}) => {
 
   return [isOpen, onOpen, onClose, onToggle]
 }
+
+export type UseDisclosureReturn = [
+  isOpen: boolean,
+  onOpen: () => void,
+  onClose: () => void,
+  onToggle: () => void,
+]
 
 export type LazyMode = 'unmount' | 'keepMounted'
 

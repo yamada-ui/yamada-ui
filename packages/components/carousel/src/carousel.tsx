@@ -55,10 +55,12 @@ type CarouselOptions = {
   includeGapInSize?: Token<boolean>
   slideSize?: UIProps['width']
   inner?: HTMLUIProps<'div'>
-  control?: CarouselControlProps | false
+  withControls?: Token<boolean>
+  controls?: CarouselControlProps
   controlPrev?: CarouselControlProps
   controlNext?: CarouselControlProps
-  indicators?: CarouselIndicatorsProps | false
+  withIndicators?: Token<boolean>
+  indicators?: CarouselIndicatorsProps
 }
 
 export type CarouselProps = ThemeProps<'Carousel'> &
@@ -104,26 +106,38 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
       gap,
       slideSize,
     })
-    const { className, inner, control, controlPrev, controlNext, indicators, ...computedProps } =
-      omitThemeProps({
-        ...props,
-        orientation,
-        align,
-        autoplay,
-        stopMouseEnterAutoplay,
-        loop,
-        speed,
-        delay,
-        slidesToScroll,
-        draggable,
-        dragFree,
-        inViewThreshold,
-        skipSnaps,
-        containScroll,
-        includeGapInSize,
-        gap,
-        slideSize,
-      })
+    const {
+      className,
+      inner,
+      withControls = true,
+      controls,
+      controlPrev,
+      controlNext,
+      withIndicators = true,
+      indicators,
+      ...computedProps
+    } = omitThemeProps({
+      ...props,
+      orientation,
+      align,
+      autoplay,
+      stopMouseEnterAutoplay,
+      loop,
+      speed,
+      delay,
+      slidesToScroll,
+      draggable,
+      dragFree,
+      inViewThreshold,
+      skipSnaps,
+      containScroll,
+      includeGapInSize,
+      gap,
+      slideSize,
+    })
+
+    const computedWithControls = useValue(withControls)
+    const computedWithIndicators = useValue(withIndicators)
 
     const { getContainerProps, getSlidesProps, children, ...rest } = useCarousel({
       ...computedProps,
@@ -156,16 +170,16 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
           {...getContainerProps({}, ref)}
         >
           {customCarouselControlPrev ??
-            (control !== false ? <CarouselControlPrev {...control} {...controlPrev} /> : null)}
+            (computedWithControls ? <CarouselControlPrev {...controls} {...controlPrev} /> : null)}
           {customCarouselControlNext ??
-            (control !== false ? <CarouselControlNext {...control} {...controlNext} /> : null)}
+            (computedWithControls ? <CarouselControlNext {...controls} {...controlNext} /> : null)}
 
           <CarouselSlides {...getSlidesProps({ ...filterUndefined({ h, minH }), ...inner })}>
             {cloneSlideChildren}
           </CarouselSlides>
 
           {customCarouselIndicators ??
-            (indicators !== false ? <CarouselIndicators {...indicators} /> : null)}
+            (computedWithIndicators ? <CarouselIndicators {...indicators} /> : null)}
 
           {otherChildren}
         </ui.div>

@@ -314,7 +314,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
       align='start'
       slidesToScroll={2}
       h='auto'
-      control={{ colorStyle: 'whiteAlpha', color: 'white' }}
+      controls={{ colorStyle: 'whiteAlpha', color: 'white' }}
     >
       <CarouselSlide as={Card} variant='subtle'>
         <CardHeader justifyContent='center'>
@@ -571,7 +571,7 @@ export const disabledStopMouseEnterAutoplay: ComponentStory<typeof Carousel> = (
 
 export const disabledControlButton: ComponentStory<typeof Carousel> = () => {
   return (
-    <Carousel control={false}>
+    <Carousel withControls={false}>
       <CarouselSlide as={Center} bg='primary'>
         1
       </CarouselSlide>
@@ -590,7 +590,7 @@ export const disabledControlButton: ComponentStory<typeof Carousel> = () => {
 
 export const disabledIndicators: ComponentStory<typeof Carousel> = () => {
   return (
-    <Carousel indicators={false}>
+    <Carousel withIndicators={false}>
       <CarouselSlide as={Center} bg='primary'>
         1
       </CarouselSlide>
@@ -631,7 +631,7 @@ export const customControl: ComponentStory<typeof Carousel> = () => {
 export const customControlButton: ComponentStory<typeof Carousel> = () => {
   return (
     <>
-      <Carousel control={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
+      <Carousel controls={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>

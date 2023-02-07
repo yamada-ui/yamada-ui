@@ -25,6 +25,7 @@ import { Markdown } from './markdown'
 import { Menu } from './menu'
 import { Modal } from './modal'
 import { NumberInput } from './number-input'
+import { Pagination } from './pagination'
 import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
@@ -68,6 +69,7 @@ export default {
   Menu,
   Modal,
   NumberInput,
+  Pagination,
   PinInput,
   Popover,
   Progress,

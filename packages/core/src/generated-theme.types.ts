@@ -556,6 +556,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
+    Pagination: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'solid' | 'outline' | 'ghost' | 'unstyled' | (string & {})
+    }
     PinInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
@@ -564,7 +568,7 @@ export interface GeneratedTheme extends UITheme {
     Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Reorder: {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
-      variants: 'elevated' | 'outline' | 'solid' | 'subtle' | (string & {})
+      variants: 'elevated' | 'outline' | 'unstyled' | (string & {})
     }
     SegmentedControl: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})

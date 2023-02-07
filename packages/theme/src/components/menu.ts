@@ -24,13 +24,13 @@ export const Menu: ComponentStyle = {
       transitionDuration: 'ultra-fast',
       transitionTimingFunction: 'ease-in',
       _hover: {
-        bg: ['gray.50', 'whiteAlpha.50'],
+        bg: ['gray.100', 'whiteAlpha.50'],
       },
       _focus: {
-        bg: ['gray.100', 'whiteAlpha.100'],
+        bg: ['gray.200', 'whiteAlpha.100'],
       },
       _active: {
-        bg: ['gray.200', 'whiteAlpha.200'],
+        bg: ['gray.300', 'whiteAlpha.200'],
       },
       _disabled: {
         opacity: 0.4,

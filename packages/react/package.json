@@ -27,6 +27,7 @@
     "@yamada-ui/badge": "workspace:*",
     "@yamada-ui/breadcrumb": "workspace:*",
     "@yamada-ui/button": "workspace:*",
+    "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/card": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/checkbox": "workspace:*",

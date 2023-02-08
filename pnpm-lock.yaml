@@ -372,6 +372,19 @@ importers:
       clean-package: 2.1.1
       react: 18.2.0
 
+  packages/components/calendar:
+    specifiers:
+      '@yamada-ui/core': workspace:*
+      '@yamada-ui/utils': workspace:*
+      clean-package: 2.1.1
+      react: ^18.2.0
+    dependencies:
+      '@yamada-ui/core': link:../../core
+      '@yamada-ui/utils': link:../../utils
+    devDependencies:
+      clean-package: 2.1.1
+      react: 18.2.0
+
   packages/components/card:
     specifiers:
       '@yamada-ui/core': workspace:*
@@ -1500,6 +1513,7 @@ importers:
       '@yamada-ui/badge': workspace:*
       '@yamada-ui/breadcrumb': workspace:*
       '@yamada-ui/button': workspace:*
+      '@yamada-ui/calendar': workspace:*
       '@yamada-ui/card': workspace:*
       '@yamada-ui/carousel': workspace:*
       '@yamada-ui/checkbox': workspace:*
@@ -1579,6 +1593,7 @@ importers:
       '@yamada-ui/badge': link:../components/badge
       '@yamada-ui/breadcrumb': link:../components/breadcrumb
       '@yamada-ui/button': link:../components/button
+      '@yamada-ui/calendar': link:../components/calendar
       '@yamada-ui/card': link:../components/card
       '@yamada-ui/carousel': link:../components/carousel
       '@yamada-ui/checkbox': link:../components/checkbox

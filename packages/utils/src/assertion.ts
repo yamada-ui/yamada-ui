@@ -26,9 +26,8 @@ export const isArray = <T extends any[]>(value: any): value is T => Array.isArra
 export const isEmpty = (value: any): boolean =>
   !Array.isArray(value) || !value.length || value.every((v) => v == null)
 
-export const isFunction = <T extends Function = Function>(value: any): value is T => {
-  return typeof value === 'function'
-}
+export const isFunction = <T extends Function = Function>(value: any): value is T =>
+  typeof value === 'function'
 
 export const isUnit = (value: any): boolean => /[0-9].*[px|rem|em|%|vw|vh]$/.test(value)
 

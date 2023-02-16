@@ -1,5 +1,11 @@
 import { ui, CSSUIObject, ThemeConfig } from '@yamada-ui/core'
-import { AnimatePresence, motion, useIsPresent, MotionVariants } from '@yamada-ui/motion'
+import {
+  AnimatePresence,
+  motion,
+  useIsPresent,
+  MotionVariants,
+  MotionStyle,
+} from '@yamada-ui/motion'
 import { noticeStore, NoticeOptions } from '@yamada-ui/notice'
 import { Portal } from '@yamada-ui/portal'
 import { useTimeout } from '@yamada-ui/use-timeout'
@@ -139,14 +145,16 @@ const NoticeComponent = memo(
         onHoverStart={onMouseEnter}
         onHoverEnd={onMouseLeave}
         custom={{ placement }}
-        style={{
-          display: 'flex',
-          justifyContent: placement.includes('left')
-            ? 'flex-start'
-            : placement.includes('right')
-            ? 'flex-end'
-            : 'center',
-        }}
+        style={
+          {
+            display: 'flex',
+            justifyContent: placement.includes('left')
+              ? 'flex-start'
+              : placement.includes('right')
+              ? 'flex-end'
+              : 'center',
+          } as MotionStyle
+        }
       >
         <ui.div className='ui-notice-container' __css={css}>
           {runIfFunc(message, { onClose })}

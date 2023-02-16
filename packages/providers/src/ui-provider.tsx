@@ -77,14 +77,14 @@ const ResetStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme) => {
+      styles={(theme: StyledTheme<Dict>) => {
         let style = get(theme, 'styles.resetStyle', {})
 
         style = runIfFunc(style, { theme, colorScheme })
 
         if (!style) return undefined
 
-        style = css(style)(theme as StyledTheme<Dict>)
+        style = css(style)(theme)
 
         return style
       }}
@@ -97,14 +97,14 @@ const GlobalStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme) => {
+      styles={(theme: StyledTheme<Dict>) => {
         let style = get(theme, 'styles.globalStyle', {})
 
         style = runIfFunc(style, { theme, colorScheme })
 
         if (!style) return undefined
 
-        style = css(style)(theme as StyledTheme<Dict>)
+        style = css(style)(theme)
 
         return style
       }}

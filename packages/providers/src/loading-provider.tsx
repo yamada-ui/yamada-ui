@@ -3,7 +3,7 @@ import { Loading } from '@yamada-ui/loading'
 import { AnimatePresence, motion, MotionVariants } from '@yamada-ui/motion'
 import { Portal } from '@yamada-ui/portal'
 import { useTimeout } from '@yamada-ui/use-timeout'
-import { isValidElement } from '@yamada-ui/utils'
+import { isValidElement, assignRef } from '@yamada-ui/utils'
 import {
   createContext,
   FC,
@@ -15,6 +15,8 @@ import {
   useState,
   Fragment,
   useEffect,
+  useRef,
+  MutableRefObject,
 } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 
@@ -49,6 +51,112 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   custom,
   children,
 }) => {
+  const screenLoadingFuncIsLoadingRef = useRef<LoadingContextProps['isLoading']>(() => false)
+  const screenLoadingFuncStartRef = useRef<LoadingContextProps['start']>(() => {})
+  const screenLoadingFuncFinishRef = useRef<LoadingContextProps['finish']>(() => {})
+  const screenLoadingFuncUpdateRef = useRef<LoadingContextProps['update']>(() => {})
+
+  const pageLoadingFuncIsLoadingRef = useRef<LoadingContextProps['isLoading']>(() => false)
+  const pageLoadingFuncStartRef = useRef<LoadingContextProps['start']>(() => {})
+  const pageLoadingFuncFinishRef = useRef<LoadingContextProps['finish']>(() => {})
+  const pageLoadingFuncUpdateRef = useRef<LoadingContextProps['update']>(() => {})
+
+  const backgroundLoadingFuncIsLoadingRef = useRef<LoadingContextProps['isLoading']>(() => false)
+  const backgroundLoadingFuncStartRef = useRef<LoadingContextProps['start']>(() => {})
+  const backgroundLoadingFuncFinishRef = useRef<LoadingContextProps['finish']>(() => {})
+  const backgroundLoadingFuncUpdateRef = useRef<LoadingContextProps['update']>(() => {})
+
+  const customLoadingFuncIsLoadingRef = useRef<LoadingContextProps['isLoading']>(() => false)
+  const customLoadingFuncStartRef = useRef<LoadingContextProps['start']>(() => {})
+  const customLoadingFuncFinishRef = useRef<LoadingContextProps['finish']>(() => {})
+  const customLoadingFuncUpdateRef = useRef<LoadingContextProps['update']>(() => {})
+
+  const screenLoadingFunc: LoadingContextProps = {
+    isLoading: () => screenLoadingFuncIsLoadingRef.current(),
+    start: (props) => screenLoadingFuncStartRef.current(props),
+    finish: () => screenLoadingFuncFinishRef.current(),
+    update: (props) => screenLoadingFuncUpdateRef.current(props),
+  }
+
+  const pageLoadingFunc: LoadingContextProps = {
+    isLoading: () => pageLoadingFuncIsLoadingRef.current(),
+    start: (props) => pageLoadingFuncStartRef.current(props),
+    finish: () => pageLoadingFuncFinishRef.current(),
+    update: (props) => pageLoadingFuncUpdateRef.current(props),
+  }
+
+  const backgroundLoadingFunc: LoadingContextProps = {
+    isLoading: () => backgroundLoadingFuncIsLoadingRef.current(),
+    start: (props) => backgroundLoadingFuncStartRef.current(props),
+    finish: () => backgroundLoadingFuncFinishRef.current(),
+    update: (props) => backgroundLoadingFuncUpdateRef.current(props),
+  }
+
+  const customLoadingFunc: LoadingContextProps = {
+    isLoading: () => customLoadingFuncIsLoadingRef.current(),
+    start: (props) => customLoadingFuncStartRef.current(props),
+    finish: () => customLoadingFuncFinishRef.current(),
+    update: (props) => customLoadingFuncUpdateRef.current(props),
+  }
+
+  const value = {
+    screen: screenLoadingFunc,
+    page: pageLoadingFunc,
+    background: backgroundLoadingFunc,
+    custom: customLoadingFunc,
+  }
+
+  return (
+    <LoadingContext.Provider value={value}>
+      {children}
+      <LoadingControl
+        {...{
+          screen,
+          page,
+          background,
+          custom,
+          screenLoadingFuncIsLoadingRef,
+          screenLoadingFuncStartRef,
+          screenLoadingFuncFinishRef,
+          screenLoadingFuncUpdateRef,
+          pageLoadingFuncIsLoadingRef,
+          pageLoadingFuncStartRef,
+          pageLoadingFuncFinishRef,
+          pageLoadingFuncUpdateRef,
+          backgroundLoadingFuncIsLoadingRef,
+          backgroundLoadingFuncStartRef,
+          backgroundLoadingFuncFinishRef,
+          backgroundLoadingFuncUpdateRef,
+          customLoadingFuncIsLoadingRef,
+          customLoadingFuncStartRef,
+          customLoadingFuncFinishRef,
+          customLoadingFuncUpdateRef,
+        }}
+      />
+    </LoadingContext.Provider>
+  )
+}
+
+type LoadingControlProps = Required<ThemeConfig>['loading'] & {
+  screenLoadingFuncIsLoadingRef: MutableRefObject<LoadingContextProps['isLoading']>
+  screenLoadingFuncStartRef: MutableRefObject<LoadingContextProps['start']>
+  screenLoadingFuncFinishRef: MutableRefObject<LoadingContextProps['finish']>
+  screenLoadingFuncUpdateRef: MutableRefObject<LoadingContextProps['update']>
+  pageLoadingFuncIsLoadingRef: MutableRefObject<LoadingContextProps['isLoading']>
+  pageLoadingFuncStartRef: MutableRefObject<LoadingContextProps['start']>
+  pageLoadingFuncFinishRef: MutableRefObject<LoadingContextProps['finish']>
+  pageLoadingFuncUpdateRef: MutableRefObject<LoadingContextProps['update']>
+  backgroundLoadingFuncIsLoadingRef: MutableRefObject<LoadingContextProps['isLoading']>
+  backgroundLoadingFuncStartRef: MutableRefObject<LoadingContextProps['start']>
+  backgroundLoadingFuncFinishRef: MutableRefObject<LoadingContextProps['finish']>
+  backgroundLoadingFuncUpdateRef: MutableRefObject<LoadingContextProps['update']>
+  customLoadingFuncIsLoadingRef: MutableRefObject<LoadingContextProps['isLoading']>
+  customLoadingFuncStartRef: MutableRefObject<LoadingContextProps['start']>
+  customLoadingFuncFinishRef: MutableRefObject<LoadingContextProps['finish']>
+  customLoadingFuncUpdateRef: MutableRefObject<LoadingContextProps['update']>
+}
+
+const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, custom, ...refs }) => {
   const [screenLoading, setScreenLoading] = useState<LoadingState>({
     isLoading: screen?.initialState ?? false,
     message: undefined,
@@ -134,6 +242,26 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
     [customLoading, custom],
   )
 
+  assignRef(refs.screenLoadingFuncIsLoadingRef, screenLoadingFunc.isLoading)
+  assignRef(refs.screenLoadingFuncStartRef, screenLoadingFunc.start)
+  assignRef(refs.screenLoadingFuncFinishRef, screenLoadingFunc.finish)
+  assignRef(refs.screenLoadingFuncUpdateRef, screenLoadingFunc.update)
+
+  assignRef(refs.pageLoadingFuncIsLoadingRef, pageLoadingFunc.isLoading)
+  assignRef(refs.pageLoadingFuncStartRef, pageLoadingFunc.start)
+  assignRef(refs.pageLoadingFuncFinishRef, pageLoadingFunc.finish)
+  assignRef(refs.pageLoadingFuncUpdateRef, pageLoadingFunc.update)
+
+  assignRef(refs.backgroundLoadingFuncIsLoadingRef, backgroundLoadingFunc.isLoading)
+  assignRef(refs.backgroundLoadingFuncStartRef, backgroundLoadingFunc.start)
+  assignRef(refs.backgroundLoadingFuncFinishRef, backgroundLoadingFunc.finish)
+  assignRef(refs.backgroundLoadingFuncUpdateRef, backgroundLoadingFunc.update)
+
+  assignRef(refs.customLoadingFuncIsLoadingRef, customLoadingFunc.isLoading)
+  assignRef(refs.customLoadingFuncStartRef, customLoadingFunc.start)
+  assignRef(refs.customLoadingFuncFinishRef, customLoadingFunc.finish)
+  assignRef(refs.customLoadingFuncUpdateRef, customLoadingFunc.update)
+
   useEffect(() => {
     if (screen)
       setScreenLoading({
@@ -164,20 +292,8 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
       })
   }, [screen, page, background, custom])
 
-  const value = useMemo(
-    () => ({
-      screen: screenLoadingFunc,
-      page: pageLoadingFunc,
-      background: backgroundLoadingFunc,
-      custom: customLoadingFunc,
-    }),
-    [screenLoadingFunc, pageLoadingFunc, backgroundLoadingFunc, customLoadingFunc],
-  )
-
   return (
-    <LoadingContext.Provider value={value}>
-      {children}
-
+    <>
       <AnimatePresence initial={false}>
         {screenLoading.isLoading ? (
           <Portal
@@ -326,7 +442,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
           </Portal>
         ) : null}
       </AnimatePresence>
-    </LoadingContext.Provider>
+    </>
   )
 }
 

@@ -2,7 +2,7 @@
   "name": "yamada-ui",
   "version": "0.1.0",
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "license": "MIT",
   "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",

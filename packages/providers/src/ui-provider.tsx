@@ -33,7 +33,7 @@ export const UIProvider: FC<UIProviderProps> = ({
     config?.initialThemeScheme,
   )
   const theme = useMemo(
-    () => (isUndefined(themeScheme) ? initialTheme : initialTheme[themeScheme]),
+    () => (isUndefined(themeScheme) ? initialTheme : (initialTheme as Dict)[themeScheme]),
     [initialTheme, themeScheme],
   )
 

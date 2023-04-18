@@ -21,13 +21,14 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*"
+    "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "dayjs": "^1.11.7"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.1.1"
+    "clean-package": "2.1.1",
+    "react": "^18.0.0"
   },
   "peerDependencies": {
     "react": ">=18"

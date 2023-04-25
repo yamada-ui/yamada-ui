@@ -177,7 +177,7 @@ export const Button: ComponentStyle = {
           bg: isDefaultColor(
             [toneColor(c, 50)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.12)(t, s)],
             isGray
-              ? [`gray.100`, `whiteAlpha.200`]
+              ? [`gray.200`, `whiteAlpha.200`]
               : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
           )(c),
         },

@@ -744,7 +744,9 @@ export const customIndicators: ComponentStory<typeof Carousel> = () => {
           sx={{
             '& > *': {
               w: '4',
-              _selected: { w: '12', transitionProperty: 'width', transitionDuration: 'slower' },
+              _selected: { w: '12' },
+              transitionProperty: 'width',
+              transitionDuration: 'slower',
             },
           }}
         />

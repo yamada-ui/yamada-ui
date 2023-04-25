@@ -31,6 +31,8 @@ export const pseudos = {
   _last: '&:last-of-type',
   _notFirst: '&:not(:first-of-type)',
   _notLast: '&:not(:last-of-type)',
+  _outside: '&[data-outside]',
+  _weekend: '&[data-weekend]',
   _accept: '&[data-accept]',
   _reject: '&[data-reject]',
   _idle: '&[data-idle]',

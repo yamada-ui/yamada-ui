@@ -24,13 +24,20 @@ export const Icon = forwardRef<IconProps, 'svg'>(
       display: 'inline-block',
       lineHeight: '1em',
       flexShrink: 0,
-      color,
-      boxSize,
       ...__css,
     }
 
     if (element && typeof element !== 'string')
-      return <ui.svg as={element} className={cx('ui-icon', className)} __css={css} {...rest} />
+      return (
+        <ui.svg
+          as={element}
+          className={cx('ui-icon', className)}
+          color={color}
+          boxSize={boxSize}
+          __css={css}
+          {...rest}
+        />
+      )
 
     return (
       <ui.svg
@@ -38,6 +45,8 @@ export const Icon = forwardRef<IconProps, 'svg'>(
         verticalAlign='middle'
         viewBox={viewBox}
         className={cx('ui-icon', className)}
+        color={color}
+        boxSize={boxSize}
         __css={css}
         {...rest}
       />

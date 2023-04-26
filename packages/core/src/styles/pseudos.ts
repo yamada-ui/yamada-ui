@@ -34,6 +34,7 @@ export const pseudos = {
   _outside: '&[data-outside]',
   _weekend: '&[data-weekend]',
   _holiday: '&[data-holiday]',
+  _today: '&[data-today]',
   _accept: '&[data-accept]',
   _reject: '&[data-reject]',
   _idle: '&[data-idle]',

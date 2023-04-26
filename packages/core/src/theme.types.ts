@@ -98,6 +98,9 @@ export type ThemeConfig = {
   initialThemeScheme?: string | number
   initialColorScheme?: 'light' | 'dark'
   useSystemColorScheme?: boolean
+  date?: {
+    locale?: string
+  }
   var?: {
     prefix?: StringLiteral
   }

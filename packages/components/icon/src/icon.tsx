@@ -10,10 +10,7 @@ type IconOptions = {
 export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> & UIProps & IconOptions
 
 export const Icon = forwardRef<IconProps, 'svg'>(
-  (
-    { as: element, viewBox, color = 'currentColor', size: fontSize, className, __css, ...rest },
-    ref,
-  ) => {
+  ({ as: element, viewBox, size: fontSize, className, __css, ...rest }, ref) => {
     const boxSize = replaceObject(fontSize, (value) =>
       !isUnit(value) ? useToken('fontSizes', value) : value,
     )
@@ -24,6 +21,7 @@ export const Icon = forwardRef<IconProps, 'svg'>(
       display: 'inline-block',
       lineHeight: '1em',
       flexShrink: 0,
+      color: 'currentColor',
       ...__css,
     }
 
@@ -32,10 +30,8 @@ export const Icon = forwardRef<IconProps, 'svg'>(
         <ui.svg
           as={element}
           className={cx('ui-icon', className)}
-          color={color}
-          boxSize={boxSize}
           __css={css}
-          {...rest}
+          {...{ boxSize, ...rest }}
         />
       )
 
@@ -45,10 +41,8 @@ export const Icon = forwardRef<IconProps, 'svg'>(
         verticalAlign='middle'
         viewBox={viewBox}
         className={cx('ui-icon', className)}
-        color={color}
-        boxSize={boxSize}
         __css={css}
-        {...rest}
+        {...{ boxSize, ...rest }}
       />
     )
   },

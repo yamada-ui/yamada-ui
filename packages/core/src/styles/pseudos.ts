@@ -33,6 +33,7 @@ export const pseudos = {
   _notLast: '&:not(:last-of-type)',
   _outside: '&[data-outside]',
   _weekend: '&[data-weekend]',
+  _holiday: '&[data-holiday]',
   _accept: '&[data-accept]',
   _reject: '&[data-reject]',
   _idle: '&[data-idle]',

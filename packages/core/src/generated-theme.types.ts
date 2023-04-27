@@ -332,8 +332,10 @@ export interface GeneratedTheme extends UITheme {
     | '56'
     | '60'
     | '64'
+    | '70'
     | '72'
     | '80'
+    | '84'
     | '96'
     | 'xs'
     | 'sm'
@@ -417,10 +419,14 @@ export interface GeneratedTheme extends UITheme {
     | '-60'
     | '64'
     | '-64'
+    | '70'
+    | '-70'
     | '72'
     | '-72'
     | '80'
     | '-80'
+    | '84'
+    | '-84'
     | '96'
     | '-96'
     | 'xs'
@@ -494,6 +500,10 @@ export interface GeneratedTheme extends UITheme {
     Button: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
+    }
+    Calendar: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'solid' | 'subtle' | 'unstyled' | (string & {})
     }
     Card: {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})

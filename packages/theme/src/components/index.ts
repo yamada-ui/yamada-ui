@@ -4,6 +4,7 @@ import { Avatar } from './avatar'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
 import { Button } from './button'
+import { Calendar } from './calendar'
 import { Card } from './card'
 import { Carousel } from './carousel'
 import { Checkbox } from './checkbox'
@@ -48,6 +49,7 @@ export default {
   Badge,
   Breadcrumb,
   Button,
+  Calendar,
   Card,
   Carousel,
   Checkbox,

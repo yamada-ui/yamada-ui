@@ -119,7 +119,93 @@ export const Calendar: ComponentMultiStyle = {
         },
       }
     },
-    unstyled: {},
+    unstyled: {
+      container: {
+        gap: 'inherit',
+        fontSize: 'inherit',
+      },
+      picker: {
+        w: 'auto',
+      },
+      label: {
+        h: 'auto',
+        pointerEvents: 'inherit',
+        _hover: {
+          bg: 'inherit',
+        },
+        _active: {
+          bg: 'inherit',
+          pointerEvents: 'inherit',
+        },
+      },
+      labelIcon: {
+        color: 'inherit',
+      },
+      control: {
+        fontSize: 'inherit',
+        w: 'auto',
+        h: 'auto',
+        _hover: {
+          bg: 'inherit',
+        },
+        _active: {
+          bg: 'inherit',
+        },
+        _hidden: {
+          opacity: 'inherit',
+          pointerEvents: 'inherit',
+        },
+      },
+      button: {
+        h: 'auto',
+        _hover: {
+          bg: 'inherit',
+        },
+        _active: {
+          bg: 'inherit',
+        },
+        _disabled: {
+          opacity: 'inherit',
+          cursor: 'inherit',
+          boxShadow: 'inherit',
+          _focusVisible: {
+            boxShadow: 'inherit',
+          },
+        },
+      },
+      weekday: {
+        color: 'inherit',
+        w: 'auto',
+        h: 'auto',
+      },
+      day: {
+        w: 'auto',
+        h: 'auto',
+        _hover: {
+          bg: 'inherit',
+        },
+        _active: {
+          bg: 'inherit',
+        },
+        _weekend: {
+          color: 'inherit',
+        },
+        _outside: {
+          color: 'inherit',
+        },
+        _holiday: {
+          color: 'inherit',
+        },
+        _disabled: {
+          opacity: 'inherit',
+          cursor: 'inherit',
+          boxShadow: 'inherit',
+          _focusVisible: {
+            boxShadow: 'inherit',
+          },
+        },
+      },
+    },
   },
 
   sizes: {

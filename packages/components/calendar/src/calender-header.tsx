@@ -1,0 +1,136 @@
+import { IconButton, Button, IconButtonProps, ButtonProps } from '@yamada-ui/button'
+import { ui, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
+import { ChevronIcon, IconProps } from '@yamada-ui/icon'
+import { cx, isValidElement } from '@yamada-ui/utils'
+import { FC, ReactElement } from 'react'
+import { UseCalenderHeaderProps, useCalendarContext, useCalenderHeader } from './use-calendar'
+
+type CalenderHeaderOptions = {
+  prev?: CalenderControlProps
+  next?: CalenderControlProps
+  label?: CalenderLabelProps & { icon?: IconProps | ReactElement }
+  title: string
+}
+
+export type CalenderHeaderProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue' | 'onChange'> &
+  CalenderHeaderOptions &
+  UseCalenderHeaderProps
+
+export const CalenderHeader: FC<CalenderHeaderProps> = ({
+  className,
+  index,
+  title,
+  prev,
+  next,
+  label,
+  ...rest
+}) => {
+  const { type, withHeader, withControls, withLabel, styles } = useCalendarContext()
+  const { getContainerProps, getControlProps, getLabelProps } = useCalenderHeader({ index })
+
+  const css: CSSUIObject = { display: 'flex', alignItems: 'center', w: 'full', ...styles.header }
+  const { icon, ...labelProps } = label ?? {}
+
+  return withHeader ? (
+    <ui.div
+      className={cx('ui-calendar-header', className)}
+      __css={css}
+      {...getContainerProps(rest)}
+    >
+      {withControls ? (
+        <CalenderControlPrev {...getControlProps({ operation: 'prev', ...prev })} />
+      ) : null}
+
+      {withLabel ? (
+        <CalenderLabel {...getLabelProps({ ...labelProps })}>
+          {title}
+          {type !== 'year' ? isValidElement(icon) ? icon : <CalenderLabelIcon {...icon} /> : null}
+        </CalenderLabel>
+      ) : null}
+
+      {withControls ? (
+        <CalenderControlNext {...getControlProps({ operation: 'next', ...next })} />
+      ) : null}
+    </ui.div>
+  ) : null
+}
+
+export type CalenderLabelProps = ButtonProps
+
+const CalenderLabel: FC<CalenderLabelProps> = ({ className, ...rest }) => {
+  const { styles } = useCalendarContext()
+
+  const css: CSSUIObject = {
+    flex: 1,
+    h: 'auto',
+    fontSize: undefined,
+    fontWeight: 'normal',
+    gap: 1,
+    ...styles.label,
+  }
+
+  return (
+    <Button
+      className={cx('ui-calender-header-label', className)}
+      variant='ghost'
+      __css={css}
+      {...rest}
+    />
+  )
+}
+
+export type CalenderLabelIconProps = IconProps
+
+const CalenderLabelIcon: FC<CalenderLabelIconProps> = ({ className, ...rest }) => {
+  const { styles } = useCalendarContext()
+
+  const css: CSSUIObject = {
+    fontSize: '1.25em',
+    ...styles.labelIcon,
+  }
+
+  return <ChevronIcon __css={css} {...rest} />
+}
+
+export type CalenderControlProps = IconButtonProps
+
+const CalenderControlPrev: FC<CalenderControlProps> = ({ className, ...rest }) => {
+  return (
+    <CalenderControl
+      operation='prev'
+      className={cx('ui-calender-header-control-prev', className)}
+      icon={<ChevronIcon __css={{ transform: 'rotate(90deg)' }} />}
+      {...rest}
+    />
+  )
+}
+
+const CalenderControlNext: FC<CalenderControlProps> = ({ className, ...rest }) => {
+  return (
+    <CalenderControl
+      operation='next'
+      className={cx('ui-calender-header-control-next', className)}
+      icon={<ChevronIcon __css={{ transform: 'rotate(-90deg)' }} />}
+      {...rest}
+    />
+  )
+}
+
+const CalenderControl: FC<CalenderControlProps & { operation: 'prev' | 'next' }> = ({
+  className,
+  operation,
+  ...rest
+}) => {
+  const { styles } = useCalendarContext()
+
+  const css: CSSUIObject = { minW: 'auto', h: 'auto', ...styles.control, ...styles[operation] }
+
+  return (
+    <IconButton
+      className={cx('ui-calendar-header-control', className)}
+      variant='ghost'
+      __css={css}
+      {...rest}
+    />
+  )
+}

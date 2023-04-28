@@ -1,4 +1,4 @@
-import { Global } from '@emotion/react'
+import { Global, Theme } from '@emotion/react'
 import {
   css,
   StyledTheme,
@@ -8,6 +8,8 @@ import {
   ColorSchemeProvider,
   useColorScheme,
   ChangeThemeScheme,
+  UIStyle,
+  Interpolation,
 } from '@yamada-ui/core'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
@@ -77,17 +79,17 @@ const ResetStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme: StyledTheme<Dict>) => {
-        let style = get(theme, 'styles.resetStyle', {})
+      styles={
+        ((theme: StyledTheme<Dict>) => {
+          let style = get(theme, 'styles.resetStyle', {})
 
-        style = runIfFunc(style, { theme, colorScheme })
+          const computedStyle = runIfFunc(style, { theme, colorScheme })
 
-        if (!style) return undefined
+          if (!computedStyle) return undefined
 
-        style = css(style)(theme)
-
-        return style
-      }}
+          return css(computedStyle)(theme)
+        }) as Interpolation<Theme>
+      }
     />
   )
 }
@@ -97,17 +99,17 @@ const GlobalStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme: StyledTheme<Dict>) => {
-        let style = get(theme, 'styles.globalStyle', {})
+      styles={
+        ((theme: StyledTheme<Dict>) => {
+          let style: UIStyle = get(theme, 'styles.globalStyle', {})
 
-        style = runIfFunc(style, { theme, colorScheme })
+          const computedStyle = runIfFunc(style, { theme, colorScheme })
 
-        if (!style) return undefined
+          if (!computedStyle) return undefined
 
-        style = css(style)(theme)
-
-        return style
-      }}
+          return css(computedStyle)(theme)
+        }) as Interpolation<Theme>
+      }
     />
   )
 }

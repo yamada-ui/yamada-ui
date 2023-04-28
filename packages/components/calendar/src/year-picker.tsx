@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from '@yamada-ui/button'
-import { ui, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
+import { ui, HTMLUIProps } from '@yamada-ui/core'
+import { cx, filterUndefined } from '@yamada-ui/utils'
 import { FC } from 'react'
 import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useYearPicker } from './use-calendar'
@@ -27,13 +27,18 @@ export const YearPicker: FC<YearPickerProps> = ({
 
   const { component: customYear, ...computedYearProps } = yearProps ?? {}
 
-  const css: CSSUIObject = { display: 'grid', ...styles.picker, ...styles.year }
+  const w = rest.w ?? rest.width
+  const minW = rest.minW ?? rest.minWidth
+  const maxW = rest.maxW ?? rest.maxWidth
+  const h = rest.h ?? rest.height
+  const minH = rest.minH ?? rest.minHeight
+  const maxH = rest.maxH ?? rest.maxHeight
 
   const minYearLabel = getFormattedLabel(rangeYears[0], locale, yearFormat)
   const maxYearLabel = getFormattedLabel(rangeYears[rangeYears.length - 1], locale, yearFormat)
 
   return (
-    <ui.div {...rest}>
+    <ui.div __css={{ ...styles.picker }} {...filterUndefined(rest)}>
       <CalenderHeader
         {...{
           label: `${minYearLabel} - ${maxYearLabel}`,
@@ -46,8 +51,17 @@ export const YearPicker: FC<YearPickerProps> = ({
 
       <ui.div
         className={cx('ui-calendar-year-picker', className)}
-        __css={css}
-        {...getContainerProps()}
+        __css={{
+          w: styles.picker?.w ?? styles.picker?.width,
+          minW: styles.picker?.minW ?? styles.picker?.minWidth,
+          maxW: styles.picker?.maxW ?? styles.picker?.maxWidth,
+          h: styles.picker?.h ?? styles.picker?.height,
+          minH: styles.picker?.minH ?? styles.picker?.minHeight,
+          maxH: styles.picker?.maxH ?? styles.picker?.maxHeight,
+          display: 'grid',
+          ...styles.year,
+        }}
+        {...getContainerProps(filterUndefined({ w, minW, maxW, h, minH, maxH }))}
       >
         {rangeYears.map((year, index) => (
           <Button

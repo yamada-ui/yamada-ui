@@ -57,6 +57,13 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
     ...styles.container,
   }
 
+  const w = computedProps.w ?? computedProps.width
+  const minW = computedProps.minW ?? computedProps.minWidth
+  const maxW = computedProps.maxW ?? computedProps.maxWidth
+  const h = computedProps.h ?? computedProps.height
+  const minH = computedProps.minH ?? computedProps.minHeight
+  const maxH = computedProps.maxH ?? computedProps.maxHeight
+
   return (
     <CalendarProvider value={{ type, styles, ...rest }}>
       <ui.div
@@ -65,14 +72,55 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
         {...getContainerProps(computedProps, ref)}
       >
         {type === 'year' ? (
-          <YearPicker {...{ labelProps, controlProps, prevProps, nextProps, yearProps }} />
+          <YearPicker
+            {...{
+              labelProps,
+              controlProps,
+              prevProps,
+              nextProps,
+              yearProps,
+              w,
+              minW,
+              maxW,
+              h,
+              minH,
+              maxH,
+            }}
+          />
         ) : null}
         {type === 'month' ? (
-          <MonthPicker {...{ labelProps, controlProps, prevProps, nextProps, monthProps }} />
+          <MonthPicker
+            {...{
+              labelProps,
+              controlProps,
+              prevProps,
+              nextProps,
+              monthProps,
+              w,
+              minW,
+              maxW,
+              h,
+              minH,
+              maxH,
+            }}
+          />
         ) : null}
         {type === 'date' ? (
           <DatePicker
-            {...{ labelProps, controlProps, prevProps, nextProps, weekdayProps, dayProps }}
+            {...{
+              labelProps,
+              controlProps,
+              prevProps,
+              nextProps,
+              weekdayProps,
+              dayProps,
+              w,
+              minW,
+              maxW,
+              h,
+              minH,
+              maxH,
+            }}
           />
         ) : null}
       </ui.div>

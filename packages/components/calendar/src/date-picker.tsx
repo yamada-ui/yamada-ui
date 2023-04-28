@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from '@yamada-ui/button'
-import { ui, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
+import { ui, HTMLUIProps } from '@yamada-ui/core'
+import { cx, filterUndefined } from '@yamada-ui/utils'
 import dayjs from 'dayjs'
 import { FC, useMemo } from 'react'
 import { CalenderHeader, CalenderHeaderProps } from './calender-header'
@@ -51,7 +51,12 @@ export const DatePicker: FC<DatePickerProps> = ({
     [firstDayOfWeek, locale, weekdayFormat],
   )
 
-  const css: CSSUIObject = { ...styles.picker, ...styles.date }
+  const w = rest.w ?? rest.width
+  const minW = rest.minW ?? rest.minWidth
+  const maxW = rest.maxW ?? rest.maxWidth
+  const h = rest.h ?? rest.height
+  const minH = rest.minH ?? rest.minHeight
+  const maxH = rest.maxH ?? rest.maxHeight
 
   return (
     <>
@@ -62,7 +67,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           const days = getMonthDays(month, firstDayOfWeek)
 
           return (
-            <ui.div key={index} {...rest}>
+            <ui.div key={index} __css={{ ...styles.picker }} {...filterUndefined(rest)}>
               <CalenderHeader
                 {...{
                   label: getFormattedLabel(month, locale, dateFormat),
@@ -76,8 +81,25 @@ export const DatePicker: FC<DatePickerProps> = ({
 
               <ui.table
                 className={cx('ui-calendar-date-picker', className)}
-                __css={css}
-                {...getContainerProps()}
+                __css={{
+                  w: styles.picker?.w ?? styles.picker?.width,
+                  minW: styles.picker?.minW ?? styles.picker?.minWidth,
+                  maxW: styles.picker?.maxW ?? styles.picker?.maxWidth,
+                  h: styles.picker?.h ?? styles.picker?.height,
+                  minH: styles.picker?.minH ?? styles.picker?.minHeight,
+                  maxH: styles.picker?.maxH ?? styles.picker?.maxHeight,
+                  ...styles.date,
+                }}
+                {...getContainerProps(
+                  filterUndefined({
+                    w,
+                    minW,
+                    maxW,
+                    h,
+                    minH,
+                    maxH,
+                  }),
+                )}
               >
                 {withWeekdays ? (
                   <ui.thead>

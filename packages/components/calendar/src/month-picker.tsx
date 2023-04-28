@@ -16,6 +16,7 @@ export type MonthPickerProps = HTMLUIProps<'div'> &
 export const MonthPicker: FC<MonthPickerProps> = ({
   className,
   labelProps,
+  controlProps,
   prevProps,
   nextProps,
   monthProps,
@@ -34,6 +35,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
         {...{
           label: getFormattedLabel(year, locale, yearFormat),
           labelProps,
+          controlProps,
           prevProps,
           nextProps,
         }}

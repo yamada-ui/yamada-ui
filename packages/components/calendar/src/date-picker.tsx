@@ -24,6 +24,7 @@ export type DatePickerProps = HTMLUIProps<'div'> &
 export const DatePicker: FC<DatePickerProps> = ({
   className,
   labelProps,
+  controlProps,
   prevProps,
   nextProps,
   weekdayProps,
@@ -67,6 +68,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                   label: getFormattedLabel(month, locale, dateFormat),
                   index,
                   labelProps,
+                  controlProps,
                   prevProps,
                   nextProps,
                 }}

@@ -16,6 +16,7 @@ export type YearPickerProps = HTMLUIProps<'div'> &
 export const YearPicker: FC<YearPickerProps> = ({
   className,
   labelProps,
+  controlProps,
   prevProps,
   nextProps,
   yearProps,
@@ -34,7 +35,13 @@ export const YearPicker: FC<YearPickerProps> = ({
   return (
     <ui.div {...rest}>
       <CalenderHeader
-        {...{ label: `${minYearLabel} - ${maxYearLabel}`, labelProps, prevProps, nextProps }}
+        {...{
+          label: `${minYearLabel} - ${maxYearLabel}`,
+          labelProps,
+          controlProps,
+          prevProps,
+          nextProps,
+        }}
       />
 
       <ui.div

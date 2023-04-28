@@ -33,7 +33,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   const {
     month: selectedMonth,
     amountOfMonths,
-    withWeekDays,
+    withWeekdays,
     firstDayOfWeek,
     locale,
     weekdayFormat,
@@ -77,7 +77,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                 __css={css}
                 {...getContainerProps()}
               >
-                {withWeekDays ? (
+                {withWeekdays ? (
                   <ui.thead>
                     <ui.tr>
                       {weekdays.map((weekday, index) => (

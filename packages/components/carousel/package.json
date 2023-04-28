@@ -27,7 +27,6 @@
     "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "embla-carousel": "^7.0.9",
     "embla-carousel-react": "^7.0.0"
   },
   "devDependencies": {

@@ -14,6 +14,7 @@ import {
   isActiveElement,
   useUnmountEffect,
   isDisabled,
+  getEventRelatedTarget,
 } from '@yamada-ui/utils'
 import dayjs from 'dayjs'
 import {
@@ -711,9 +712,9 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
   const getLabelProps: PropGetter = useCallback(
     (props = {}) => {
       return {
+        pointerEvents: type !== 'year' ? 'auto' : 'none',
         ...props,
         onClick: handlerAll(onType, props.onClick),
-        'data-active': dataAttr(type !== 'year'),
         tabIndex: !!index ? -1 : 0,
       }
     },
@@ -1173,7 +1174,9 @@ export const useDatePicker = () => {
 
   const onClick = useCallback(
     (ev: MouseEvent<Element>, newValue: Date) => {
-      if (isDisabled(ev.target as HTMLElement)) return
+      const el = getEventRelatedTarget(ev)
+
+      if (!el || isDisabled(el)) return
 
       setValue((prev) => {
         if (!isArray(prev)) {

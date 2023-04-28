@@ -6,6 +6,7 @@ import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useMonthPicker } from './use-calendar'
 
 type MonthPickerOptions = {
+  headerProps?: HTMLUIProps<'div'>
   monthProps?: ButtonProps & { component?: FC<{ month: string; year: number; index: number }> }
 }
 
@@ -15,6 +16,7 @@ export type MonthPickerProps = HTMLUIProps<'div'> &
 
 export const MonthPicker: FC<MonthPickerProps> = ({
   className,
+  headerProps,
   labelProps,
   controlProps,
   prevProps,
@@ -38,6 +40,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
     <ui.div __css={{ ...styles.picker }} {...filterUndefined(rest)}>
       <CalenderHeader
         {...{
+          ...headerProps,
           label: getFormattedLabel(year, locale, yearFormat),
           labelProps,
           controlProps,

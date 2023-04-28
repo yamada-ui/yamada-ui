@@ -14,7 +14,9 @@ import { MonthPicker, MonthPickerProps } from './month-picker'
 import { CalendarProvider, useCalendar, UseCalendarProps } from './use-calendar'
 import { YearPicker, YearPickerProps } from './year-picker'
 
-type CalendarOptions = {}
+type CalendarOptions = {
+  headerProps?: HTMLUIProps<'div'>
+}
 
 export type CalendarProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue' | 'onChange'> &
   ThemeProps<'Calendar'> &
@@ -23,7 +25,7 @@ export type CalendarProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue' | 
   Omit<CalenderHeaderProps, 'label' | 'index'> &
   Pick<YearPickerProps, 'yearProps'> &
   Pick<MonthPickerProps, 'monthProps'> &
-  Pick<DatePickerProps, 'weekdayProps' | 'dayProps'>
+  Pick<DatePickerProps, 'tableProps' | 'weekdayProps' | 'dayProps'>
 
 export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('Calendar', props)
@@ -32,6 +34,8 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
     value,
     defaultValue,
     onChange,
+    headerProps,
+    tableProps,
     labelProps,
     controlProps,
     prevProps,
@@ -74,6 +78,7 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
         {type === 'year' ? (
           <YearPicker
             {...{
+              headerProps,
               labelProps,
               controlProps,
               prevProps,
@@ -91,6 +96,7 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
         {type === 'month' ? (
           <MonthPicker
             {...{
+              headerProps,
               labelProps,
               controlProps,
               prevProps,
@@ -108,6 +114,8 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
         {type === 'date' ? (
           <DatePicker
             {...{
+              headerProps,
+              tableProps,
               labelProps,
               controlProps,
               prevProps,

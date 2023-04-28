@@ -13,6 +13,14 @@ import {
 } from './use-calendar'
 
 type DatePickerOptions = {
+  headerProps?: HTMLUIProps<'div'>
+  tableProps?: HTMLUIProps<'table'> & {
+    thead?: HTMLUIProps<'thead'>
+    tbody?: HTMLUIProps<'tbody'>
+    tr?: HTMLUIProps<'tr'>
+    th?: HTMLUIProps<'th'>
+    td?: HTMLUIProps<'td'>
+  }
   weekdayProps?: HTMLUIProps<'div'> & { component?: FC<WeekdayProps> }
   dayProps?: ButtonProps & { component?: FC<DayProps> }
 }
@@ -23,6 +31,8 @@ export type DatePickerProps = HTMLUIProps<'div'> &
 
 export const DatePicker: FC<DatePickerProps> = ({
   className,
+  headerProps,
+  tableProps,
   labelProps,
   controlProps,
   prevProps,
@@ -45,6 +55,14 @@ export const DatePicker: FC<DatePickerProps> = ({
 
   const { component: customWeekday = Weekday, ...computedWeekdayProps } = weekdayProps ?? {}
   const { component: customDay = Day, ...computedDayProps } = dayProps ?? {}
+  const {
+    thead: theadProps,
+    tbody: tbodyProps,
+    tr: trProps,
+    th: thProps,
+    td: tdProps,
+    ...computedTableProps
+  } = tableProps ?? {}
 
   const weekdays = useMemo(
     () => getWeekdays(locale, firstDayOfWeek, weekdayFormat),
@@ -70,6 +88,7 @@ export const DatePicker: FC<DatePickerProps> = ({
             <ui.div key={index} __css={{ ...styles.picker }} {...filterUndefined(rest)}>
               <CalenderHeader
                 {...{
+                  ...headerProps,
                   label: getFormattedLabel(month, locale, dateFormat),
                   index,
                   labelProps,
@@ -98,14 +117,21 @@ export const DatePicker: FC<DatePickerProps> = ({
                     h,
                     minH,
                     maxH,
+                    ...computedTableProps,
                   }),
                 )}
               >
                 {withWeekdays ? (
-                  <ui.thead>
-                    <ui.tr>
+                  <ui.thead {...theadProps}>
+                    <ui.tr {...trProps}>
                       {weekdays.map((weekday, index) => (
-                        <ui.th key={index} __css={{ fontWeight: 'normal' }}>
+                        <ui.th
+                          key={index}
+                          __css={{
+                            fontWeight: 'normal',
+                          }}
+                          {...thProps}
+                        >
                           <ui.div
                             className='ui-calendar-date-picker-weekday'
                             __css={{ w: 'full', display: 'flex', ...styles.weekday }}
@@ -119,10 +145,10 @@ export const DatePicker: FC<DatePickerProps> = ({
                   </ui.thead>
                 ) : null}
 
-                <ui.tbody>
+                <ui.tbody {...tbodyProps}>
                   {days.map((cells, row) => {
                     return (
-                      <ui.tr key={row}>
+                      <ui.tr key={row} {...trProps}>
                         {cells.map((date, col) => {
                           const { isSelected, isWeekend, isOutside, ...props } = getButtonProps({
                             ...computedDayProps,
@@ -132,7 +158,7 @@ export const DatePicker: FC<DatePickerProps> = ({
                           })
 
                           return (
-                            <ui.td key={col}>
+                            <ui.td key={col} {...tdProps}>
                               <Button
                                 className='ui-calendar-date-picker-day'
                                 variant='ghost'

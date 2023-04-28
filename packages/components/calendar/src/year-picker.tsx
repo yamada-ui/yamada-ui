@@ -6,6 +6,7 @@ import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useYearPicker } from './use-calendar'
 
 type YearPickerOptions = {
+  headerProps?: HTMLUIProps<'div'>
   yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
 }
 
@@ -15,6 +16,7 @@ export type YearPickerProps = HTMLUIProps<'div'> &
 
 export const YearPicker: FC<YearPickerProps> = ({
   className,
+  headerProps,
   labelProps,
   controlProps,
   prevProps,
@@ -41,6 +43,7 @@ export const YearPicker: FC<YearPickerProps> = ({
     <ui.div __css={{ ...styles.picker }} {...filterUndefined(rest)}>
       <CalenderHeader
         {...{
+          ...headerProps,
           label: `${minYearLabel} - ${maxYearLabel}`,
           labelProps,
           controlProps,

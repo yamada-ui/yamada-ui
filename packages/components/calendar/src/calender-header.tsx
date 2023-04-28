@@ -97,7 +97,6 @@ const CalenderLabelIcon: FC<CalenderLabelIconProps> = ({ className, ...rest }) =
   const { styles } = useCalendarContext()
 
   const css: CSSUIObject = {
-    fontSize: '1.25em',
     ...styles.labelIcon,
   }
 

@@ -7,17 +7,12 @@ export const Calendar: ComponentMultiStyle = {
       gap: 'md',
     },
     header: {},
-    label: {
-      pointerEvents: 'none',
-      _active: {
-        pointerEvents: 'auto',
-      },
-    },
+    label: {},
     labelIcon: {
       color: ['blackAlpha.500', 'whiteAlpha.500'],
     },
     control: {
-      fontSize: '1.5em',
+      fontSize: '1.25em',
       _hidden: {
         opacity: 0,
         pointerEvents: 'none',
@@ -222,7 +217,6 @@ export const Calendar: ComponentMultiStyle = {
         h: 8,
       },
       control: {
-        fontSize: '1.25em',
         w: 8,
         h: 8,
       },
@@ -275,6 +269,7 @@ export const Calendar: ComponentMultiStyle = {
         h: 12,
       },
       control: {
+        fontSize: '1.5em',
         w: 12,
         h: 12,
       },
@@ -302,6 +297,7 @@ export const Calendar: ComponentMultiStyle = {
         h: 12,
       },
       control: {
+        fontSize: '1.5em',
         w: 12,
         h: 12,
       },

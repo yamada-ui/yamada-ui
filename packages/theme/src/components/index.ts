@@ -10,6 +10,7 @@ import { Carousel } from './carousel'
 import { Checkbox } from './checkbox'
 import { CloseButton } from './close-button'
 import { Container } from './container'
+import { DatePicker } from './date-picker'
 import { Dialog } from './dialog'
 import { Divider } from './divider'
 import { Drawer } from './drawer'
@@ -55,6 +56,7 @@ export default {
   Checkbox,
   CloseButton,
   Container,
+  DatePicker,
   Dialog,
   Divider,
   Drawer,

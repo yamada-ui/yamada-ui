@@ -645,6 +645,37 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/date-picker:
+    dependencies:
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../calendar
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/input':
+        specifier: workspace:*
+        version: link:../input
+      '@yamada-ui/popover':
+        specifier: workspace:*
+        version: link:../popover
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/dropzone:
     dependencies:
       '@yamada-ui/core':
@@ -2028,6 +2059,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@yamada-ui/date-picker':
+        specifier: workspace:*
+        version: link:../components/date-picker
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../components/dropzone

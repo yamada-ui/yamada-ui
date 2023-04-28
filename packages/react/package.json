@@ -33,6 +33,7 @@
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/date-picker": "workspace:*",
     "@yamada-ui/dropzone": "workspace:*",
     "@yamada-ui/editable": "workspace:*",
     "@yamada-ui/file-button": "workspace:*",

@@ -44,6 +44,7 @@ export const Calendar: ComponentMultiStyle = {
     },
     date: {},
     weekday: {
+      userSelect: 'none',
       color: ['blackAlpha.700', 'whiteAlpha.700'],
       justifyContent: 'center',
       alignItems: 'center',
@@ -174,6 +175,7 @@ export const Calendar: ComponentMultiStyle = {
         },
       },
       weekday: {
+        userSelect: 'auto',
         color: 'inherit',
         w: 'auto',
         h: 'auto',
@@ -285,6 +287,33 @@ export const Calendar: ComponentMultiStyle = {
       },
       day: {
         w: 12,
+        h: 12,
+      },
+    },
+    full: {
+      container: {
+        w: 'full',
+        fontSize: 'md',
+      },
+      picker: {
+        w: 'full',
+      },
+      label: {
+        h: 12,
+      },
+      control: {
+        w: 12,
+        h: 12,
+      },
+      button: {
+        h: 12,
+      },
+      weekday: {
+        w: 'full',
+        h: 12,
+      },
+      day: {
+        w: 'full',
         h: 12,
       },
     },

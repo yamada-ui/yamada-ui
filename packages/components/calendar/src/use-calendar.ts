@@ -43,11 +43,11 @@ export type CalendarContext = Pick<
   | 'firstDayOfWeek'
   | 'amountOfMonths'
   | 'paginateBy'
-  | 'withWeekDays'
+  | 'withWeekdays'
   | 'withHeader'
   | 'withControls'
   | 'withLabel'
-  | 'disableOutsides'
+  | 'disableOutsideDays'
   | 'locale'
   | 'weekdayFormat'
   | 'yearFormat'
@@ -289,14 +289,14 @@ export const isDisabledDate = ({
   minDate,
   maxDate,
   excludeDate,
-  disableOutsides,
+  disableOutsideDays,
   value,
   isOutside,
 }: {
   minDate?: Date
   maxDate?: Date
   excludeDate?: (date: Date) => boolean
-  disableOutsides: boolean
+  disableOutsideDays: boolean
   value: Date
   isOutside: boolean
 }) => {
@@ -304,7 +304,7 @@ export const isDisabledDate = ({
   const isBeforeMin = minDate instanceof Date && dayjs(minDate).isAfter(value, 'day')
 
   const shouldExclude = typeof excludeDate === 'function' && excludeDate(value)
-  const disabledOutside = !!disableOutsides && !!isOutside
+  const disabledOutside = !!disableOutsideDays && !!isOutside
 
   return isAfterMax || isBeforeMin || shouldExclude || disabledOutside
 }
@@ -322,7 +322,7 @@ export type UseCalendarProps = {
   firstDayOfWeek?: FirstDayOfWeek
   amountOfMonths?: number
   paginateBy?: number
-  disableOutsides?: boolean
+  disableOutsideDays?: boolean
   locale?: string
   weekdayFormat?: string
   yearFormat?: string
@@ -337,7 +337,7 @@ export type UseCalendarProps = {
   typeRef?: ForwardedRef<() => void | undefined>
   prevRef?: ForwardedRef<() => void | undefined>
   nextRef?: ForwardedRef<() => void | undefined>
-  withWeekDays?: boolean
+  withWeekdays?: boolean
   withHeader?: boolean
   withControls?: boolean
   withLabel?: boolean
@@ -347,8 +347,8 @@ export const useCalendar = ({
   firstDayOfWeek = 'monday',
   amountOfMonths = 1,
   paginateBy = amountOfMonths,
-  withWeekDays = true,
-  disableOutsides = false,
+  withWeekdays = true,
+  disableOutsideDays = false,
   minDate,
   maxDate,
   locale,
@@ -466,11 +466,11 @@ export const useCalendar = ({
     firstDayOfWeek,
     amountOfMonths,
     paginateBy,
-    withWeekDays,
+    withWeekdays,
     withHeader,
     withControls,
     withLabel,
-    disableOutsides,
+    disableOutsideDays,
     locale,
     weekdayFormat,
     yearFormat,
@@ -1030,7 +1030,7 @@ export const useDatePicker = () => {
     weekendDays,
     minDate,
     maxDate,
-    disableOutsides,
+    disableOutsideDays,
     holidays,
     today,
     excludeDate,
@@ -1227,12 +1227,12 @@ export const useDatePicker = () => {
         maxDate,
         isOutside,
         excludeDate,
-        disableOutsides,
+        disableOutsideDays,
       })
       const isToday = today && isSameDate(new Date(), value)
 
       const style: CSSProperties = {
-        pointerEvents: isDisabled && isOutside && disableOutsides ? 'none' : undefined,
+        pointerEvents: isDisabled && isOutside && disableOutsideDays ? 'none' : undefined,
         ...props.style,
       }
 
@@ -1271,7 +1271,7 @@ export const useDatePicker = () => {
     },
     [
       dayRefs,
-      disableOutsides,
+      disableOutsideDays,
       excludeDate,
       holidays,
       isMulti,

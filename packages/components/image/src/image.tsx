@@ -39,17 +39,19 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
   const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy)
 
   if (isFallbackImage) {
-    if (isValidElement(fallback)) return fallback
-
-    return (
-      <ui.img
-        ref={ref}
-        className='ui-image-fallback'
-        src={fallback}
-        __css={css}
-        {...(ignoreFallback ? rest : omitObject(rest, ['onError', 'onLoad']))}
-      />
-    )
+    if (isValidElement(fallback)) {
+      return fallback
+    } else {
+      return (
+        <ui.img
+          ref={ref}
+          className='ui-image-fallback'
+          src={fallback as string | undefined}
+          __css={css}
+          {...(ignoreFallback ? rest : omitObject(rest, ['onError', 'onLoad']))}
+        />
+      )
+    }
   }
 
   return (

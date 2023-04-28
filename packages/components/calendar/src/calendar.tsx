@@ -20,10 +20,10 @@ export type CalendarProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue' | 
   ThemeProps<'Calendar'> &
   UseCalendarProps &
   CalendarOptions &
-  Omit<CalenderHeaderProps, 'title' | 'index'> &
-  Pick<YearPickerProps, 'year'> &
-  Pick<MonthPickerProps, 'month'> &
-  Pick<DatePickerProps, 'weekday' | 'day'>
+  Omit<CalenderHeaderProps, 'label' | 'index'> &
+  Pick<YearPickerProps, 'yearProps'> &
+  Pick<MonthPickerProps, 'monthProps'> &
+  Pick<DatePickerProps, 'weekdayProps' | 'dayProps'>
 
 export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('Calendar', props)
@@ -32,13 +32,14 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
     value,
     defaultValue,
     onChange,
-    label,
-    prev,
-    next,
-    year,
-    month,
-    weekday,
-    day,
+    labelProps,
+    controlProps,
+    prevProps,
+    nextProps,
+    yearProps,
+    monthProps,
+    weekdayProps,
+    dayProps,
     ...computedProps
   } = omitThemeProps(props)
 
@@ -63,9 +64,17 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
         __css={css}
         {...getContainerProps(computedProps, ref)}
       >
-        {type === 'year' ? <YearPicker {...{ label, prev, next, year }} /> : null}
-        {type === 'month' ? <MonthPicker {...{ label, prev, next, month }} /> : null}
-        {type === 'date' ? <DatePicker {...{ label, prev, next, weekday, day }} /> : null}
+        {type === 'year' ? (
+          <YearPicker {...{ labelProps, controlProps, prevProps, nextProps, yearProps }} />
+        ) : null}
+        {type === 'month' ? (
+          <MonthPicker {...{ labelProps, controlProps, prevProps, nextProps, monthProps }} />
+        ) : null}
+        {type === 'date' ? (
+          <DatePicker
+            {...{ labelProps, controlProps, prevProps, nextProps, weekdayProps, dayProps }}
+          />
+        ) : null}
       </ui.div>
     </CalendarProvider>
   )

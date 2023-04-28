@@ -6,32 +6,37 @@ import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useMonthPicker } from './use-calendar'
 
 type MonthPickerOptions = {
-  month?: ButtonProps & { component: FC<{ month: string; year: number; index: number }> }
+  monthProps?: ButtonProps & { component: FC<{ month: string; year: number; index: number }> }
 }
 
 export type MonthPickerProps = HTMLUIProps<'div'> &
-  Omit<CalenderHeaderProps, 'title' | 'index'> &
+  Omit<CalenderHeaderProps, 'label' | 'index'> &
   MonthPickerOptions
 
 export const MonthPicker: FC<MonthPickerProps> = ({
   className,
-  label,
-  prev,
-  next,
-  month,
+  labelProps,
+  prevProps,
+  nextProps,
+  monthProps,
   ...rest
 }) => {
   const { year, locale, yearFormat, styles } = useCalendarContext()
   const { rangeMonths, getContainerProps, getButtonProps } = useMonthPicker()
 
-  const { component: customMonth, ...buttonProps } = month ?? {}
+  const { component: customMonth, ...computedMonthProps } = monthProps ?? {}
 
   const css: CSSUIObject = { display: 'grid', ...styles.picker, ...styles.month }
 
   return (
     <ui.div {...rest}>
       <CalenderHeader
-        {...{ title: getFormattedLabel(year, locale, yearFormat), label, prev, next }}
+        {...{
+          label: getFormattedLabel(year, locale, yearFormat),
+          labelProps,
+          prevProps,
+          nextProps,
+        }}
       />
 
       <ui.div
@@ -52,7 +57,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
               fontWeight: 'normal',
               ...styles.button,
             }}
-            {...getButtonProps({ ...buttonProps, value: index })}
+            {...getButtonProps({ ...computedMonthProps, value: index })}
           >
             {customMonth ? customMonth({ month, year, index }) : month}
           </Button>

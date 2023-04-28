@@ -6,10 +6,11 @@ import { FC, ReactElement } from 'react'
 import { UseCalenderHeaderProps, useCalendarContext, useCalenderHeader } from './use-calendar'
 
 type CalenderHeaderOptions = {
-  prev?: CalenderControlProps
-  next?: CalenderControlProps
-  label?: CalenderLabelProps & { icon?: IconProps | ReactElement }
-  title: string
+  controlProps?: CalenderControlProps
+  prevProps?: CalenderControlProps
+  nextProps?: CalenderControlProps
+  labelProps?: CalenderLabelProps & { icon?: IconProps | ReactElement }
+  label: string
 }
 
 export type CalenderHeaderProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue' | 'onChange'> &
@@ -19,17 +20,18 @@ export type CalenderHeaderProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultVal
 export const CalenderHeader: FC<CalenderHeaderProps> = ({
   className,
   index,
-  title,
-  prev,
-  next,
   label,
+  controlProps,
+  prevProps,
+  nextProps,
+  labelProps,
   ...rest
 }) => {
   const { type, withHeader, withControls, withLabel, styles } = useCalendarContext()
   const { getContainerProps, getControlProps, getLabelProps } = useCalenderHeader({ index })
 
   const css: CSSUIObject = { display: 'flex', alignItems: 'center', w: 'full', ...styles.header }
-  const { icon, ...labelProps } = label ?? {}
+  const { icon: iconElOrProps, ...computedLabelProps } = labelProps ?? {}
 
   return withHeader ? (
     <ui.div
@@ -38,18 +40,28 @@ export const CalenderHeader: FC<CalenderHeaderProps> = ({
       {...getContainerProps(rest)}
     >
       {withControls ? (
-        <CalenderControlPrev {...getControlProps({ operation: 'prev', ...prev })} />
+        <CalenderControlPrev
+          {...getControlProps({ operation: 'prev', ...controlProps, ...prevProps })}
+        />
       ) : null}
 
       {withLabel ? (
-        <CalenderLabel {...getLabelProps({ ...labelProps })}>
-          {title}
-          {type !== 'year' ? isValidElement(icon) ? icon : <CalenderLabelIcon {...icon} /> : null}
+        <CalenderLabel {...getLabelProps({ ...computedLabelProps })}>
+          {label}
+          {type !== 'year' ? (
+            isValidElement(iconElOrProps) ? (
+              iconElOrProps
+            ) : (
+              <CalenderLabelIcon {...iconElOrProps} />
+            )
+          ) : null}
         </CalenderLabel>
       ) : null}
 
       {withControls ? (
-        <CalenderControlNext {...getControlProps({ operation: 'next', ...next })} />
+        <CalenderControlNext
+          {...getControlProps({ operation: 'next', ...controlProps, ...nextProps })}
+        />
       ) : null}
     </ui.div>
   ) : null

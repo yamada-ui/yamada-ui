@@ -6,25 +6,25 @@ import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useYearPicker } from './use-calendar'
 
 type YearPickerOptions = {
-  year?: ButtonProps & { component?: FC<{ year: number; index: number }> }
+  yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
 }
 
 export type YearPickerProps = HTMLUIProps<'div'> &
-  Omit<CalenderHeaderProps, 'title' | 'index'> &
+  Omit<CalenderHeaderProps, 'label' | 'index'> &
   YearPickerOptions
 
 export const YearPicker: FC<YearPickerProps> = ({
   className,
-  label,
-  prev,
-  next,
-  year,
+  labelProps,
+  prevProps,
+  nextProps,
+  yearProps,
   ...rest
 }) => {
   const { locale, yearFormat, styles } = useCalendarContext()
   const { rangeYears, getContainerProps, getButtonProps } = useYearPicker()
 
-  const { component: customYear, ...buttonProps } = year ?? {}
+  const { component: customYear, ...computedYearProps } = yearProps ?? {}
 
   const css: CSSUIObject = { display: 'grid', ...styles.picker, ...styles.year }
 
@@ -33,7 +33,9 @@ export const YearPicker: FC<YearPickerProps> = ({
 
   return (
     <ui.div {...rest}>
-      <CalenderHeader {...{ title: `${minYearLabel} - ${maxYearLabel}`, label, prev, next }} />
+      <CalenderHeader
+        {...{ label: `${minYearLabel} - ${maxYearLabel}`, labelProps, prevProps, nextProps }}
+      />
 
       <ui.div
         className={cx('ui-calendar-year-picker', className)}
@@ -53,7 +55,7 @@ export const YearPicker: FC<YearPickerProps> = ({
               fontWeight: 'normal',
               ...styles.button,
             }}
-            {...getButtonProps({ ...buttonProps, value: year, index })}
+            {...getButtonProps({ ...computedYearProps, value: year, index })}
           >
             {customYear ? customYear({ year, index }) : getFormattedLabel(year, locale, yearFormat)}
           </Button>

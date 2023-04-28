@@ -51,7 +51,7 @@ export const isContains = (
   return parent === child || parent?.contains(child)
 }
 
-export const getEventRelatedTarget = (ev: React.FocusEvent) =>
+export const getEventRelatedTarget = (ev: React.FocusEvent | React.MouseEvent) =>
   (ev.relatedTarget ?? ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 
 type Booleanish = boolean | 'true' | 'false'

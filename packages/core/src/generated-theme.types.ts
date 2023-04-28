@@ -502,7 +502,7 @@ export interface GeneratedTheme extends UITheme {
       variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
     }
     Calendar: {
-      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      sizes: 'sm' | 'md' | 'lg' | 'full' | (string & {})
       variants: 'solid' | 'subtle' | 'unstyled' | (string & {})
     }
     Card: {

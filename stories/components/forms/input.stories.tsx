@@ -164,11 +164,18 @@ export const stylingPlaceholder: ComponentStory<typeof Input> = () => {
   return (
     <>
       <Input placeholder='default placeholder' />
-      <Input placeholder='custom placeholder' _placeholder={{ opacity: 1, color: 'gray.500' }} />
+      <Input
+        placeholder='custom placeholder'
+        _placeholder={{ opacity: 1, color: 'blue.500' }}
+        _dark={{ _placeholder: { opacity: 1, color: 'blue.500' } }}
+      />
       <Input
         color='green.500'
         placeholder='custom placeholder'
         _placeholder={{ color: 'inherit' }}
+        _dark={{
+          _placeholder: { color: 'inherit' },
+        }}
       />
     </>
   )

@@ -653,6 +653,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon

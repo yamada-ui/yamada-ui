@@ -26,6 +26,7 @@
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },

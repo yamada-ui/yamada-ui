@@ -668,6 +668,9 @@ importers:
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
+      '@yamada-ui/use-outside-click':
+        specifier: workspace:*
+        version: link:../../hooks/use-outside-click
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

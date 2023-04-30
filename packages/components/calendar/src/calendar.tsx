@@ -31,6 +31,9 @@ export const Calendar = forwardRef<CalendarProps, 'div'>((props, ref) => {
   const styles = useMultiComponentStyle('Calendar', props)
   const {
     className,
+    value,
+    defaultValue,
+    onChange,
     headerProps,
     tableProps,
     labelProps,

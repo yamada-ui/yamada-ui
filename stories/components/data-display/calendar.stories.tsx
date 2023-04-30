@@ -603,7 +603,7 @@ export const customControlMonth: ComponentStory<typeof Calendar> = () => {
 }
 
 export const customControlValue: ComponentStory<typeof Calendar> = () => {
-  const [value, onChange] = useState<Date | Date[]>(new Date())
+  const [value, onChange] = useState<Date>(new Date())
 
   return <Calendar value={value} onChange={onChange} />
 }

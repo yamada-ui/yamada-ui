@@ -36,10 +36,11 @@ export type FirstDayOfWeek = 'sunday' | 'monday'
 
 export type CalendarType = 'year' | 'month' | 'date'
 
+export type MaybeValue = Date | Date[]
+
 export type CalendarContext = Pick<
   Required<UseCalendarProps>,
   | 'type'
-  | 'value'
   | 'month'
   | 'firstDayOfWeek'
   | 'amountOfMonths'
@@ -62,8 +63,9 @@ export type CalendarContext = Pick<
     UseCalendarProps,
     'minDate' | 'maxDate' | 'excludeDate' | 'typeRef' | 'prevRef' | 'nextRef'
   > & {
+    value: MaybeValue
     setType: Dispatch<SetStateAction<CalendarType>>
-    setValue: Dispatch<SetStateAction<Date | Date[]>>
+    setValue: Dispatch<SetStateAction<MaybeValue>>
     setMonth: Dispatch<SetStateAction<Date>>
     setYear: Dispatch<SetStateAction<number>>
     setInternalYear: Dispatch<SetStateAction<number>>
@@ -310,13 +312,13 @@ export const isDisabledDate = ({
   return isAfterMax || isBeforeMin || shouldExclude || disabledOutside
 }
 
-export type UseCalendarProps = {
+export type UseCalendarProps<Y extends MaybeValue = Date> = {
   type?: CalendarType
   defaultType?: CalendarType
   onChangeType?: (type: CalendarType) => void
-  value?: Date | Date[]
-  defaultValue?: Date | Date[]
-  onChange?: (value: Date | Date[]) => void
+  value?: Y
+  defaultValue?: Y
+  onChange?: (value: Y) => void
   month?: Date
   defaultMonth?: Date
   onChangeMonth?: (value: Date) => void
@@ -344,7 +346,7 @@ export type UseCalendarProps = {
   withLabel?: boolean
 }
 
-export const useCalendar = ({
+export const useCalendar = <Y extends MaybeValue = Date>({
   firstDayOfWeek = 'monday',
   amountOfMonths = 1,
   paginateBy = amountOfMonths,
@@ -368,7 +370,7 @@ export const useCalendar = ({
   withControls = true,
   withLabel = true,
   ...rest
-}: UseCalendarProps) => {
+}: UseCalendarProps<Y>) => {
   const { theme } = useTheme()
 
   locale ??= theme.__config.date?.locale ?? 'en'

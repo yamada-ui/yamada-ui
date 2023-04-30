@@ -48,17 +48,19 @@ export type ComponentProps<
     as?: H
   }
 
-export type Component<Y extends As, M extends object = {}> = {
-  <D extends As = Y>(
-    props: ComponentProps<React.ComponentProps<Y>, React.ComponentProps<D>, M, D>,
-  ): JSX.Element
-
+export type ComponentArgs = {
   displayName?: string
   propTypes?: React.WeakValidationMap<any>
   contextTypes?: React.ValidationMap<any>
   defaultProps?: Partial<any>
   id?: string
 }
+
+export type Component<Y extends As, M extends object = {}> = {
+  <D extends As = Y>(
+    props: ComponentProps<React.ComponentProps<Y>, React.ComponentProps<D>, M, D>,
+  ): JSX.Element
+} & ComponentArgs
 
 export type As<Y = any> = React.ElementType<Y>
 

@@ -28,6 +28,7 @@
     "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
+    "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

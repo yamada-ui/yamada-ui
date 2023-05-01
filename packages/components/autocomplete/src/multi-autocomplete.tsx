@@ -115,17 +115,15 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
       >
         <Popover {...getPopoverProps()}>
           <ui.div className='ui-autocomplete' __css={css} {...getContainerProps(container)}>
-            <PopoverTrigger>
-              <MultiAutocompleteField
-                component={component}
-                separator={separator}
-                keepPlaceholder={keepPlaceholder}
-                h={h}
-                minH={minH}
-                input={input}
-                {...getFieldProps({}, ref)}
-              />
-            </PopoverTrigger>
+            <MultiAutocompleteField
+              component={component}
+              separator={separator}
+              keepPlaceholder={keepPlaceholder}
+              h={h}
+              minH={minH}
+              input={input}
+              {...getFieldProps({}, ref)}
+            />
 
             {isClearable && value.length ? (
               <AutocompleteClearIcon
@@ -233,27 +231,28 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
     }
 
     return (
-      <ui.div
-        ref={ref}
-        className={cx('ui-autocomplete-field', className)}
-        __css={css}
-        py={displayValue?.length && component ? '0.125rem' : undefined}
-        {...rest}
-      >
-        {cloneChildren}
+      <PopoverTrigger>
+        <ui.div
+          className={cx('ui-autocomplete-field', className)}
+          __css={css}
+          py={displayValue?.length && component ? '0.125rem' : undefined}
+          {...rest}
+        >
+          {cloneChildren}
 
-        <ui.input
-          className='ui-autocomplete-input'
-          display='inline-block'
-          flex='1'
-          overflow='hidden'
-          marginBlockStart='0.125rem'
-          marginBlockEnd='0.125rem'
-          placeholder={!displayValue || (keepPlaceholder && isOpen) ? placeholder : undefined}
-          {...getInputProps(input)}
-          value={searchValue}
-        />
-      </ui.div>
+          <ui.input
+            className='ui-autocomplete-input'
+            display='inline-block'
+            flex='1'
+            overflow='hidden'
+            marginBlockStart='0.125rem'
+            marginBlockEnd='0.125rem'
+            placeholder={!displayValue || (keepPlaceholder && isOpen) ? placeholder : undefined}
+            {...getInputProps(input, ref)}
+            value={searchValue}
+          />
+        </ui.div>
+      </PopoverTrigger>
     )
   },
 )

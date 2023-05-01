@@ -87,9 +87,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
             __css={css}
             {...getContainerProps(container)}
           >
-            <PopoverTrigger>
-              <AutocompleteField h={h} minH={minH} input={input} {...getFieldProps({}, ref)} />
-            </PopoverTrigger>
+            <AutocompleteField h={h} minH={minH} input={input} {...getFieldProps({}, ref)} />
 
             <AutocompleteIcon {...icon} {...formControlProps} />
 
@@ -130,16 +128,18 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
     }
 
     return (
-      <ui.div className={cx('ui-autocomplete-field', className)} __css={css} {...rest}>
-        <ui.input
-          className='ui-autocomplete-input'
-          display='inline-block'
-          w='full'
-          placeholder={placeholder}
-          {...getInputProps(input, ref)}
-          value={searchValue || displayValue || ''}
-        />
-      </ui.div>
+      <PopoverTrigger>
+        <ui.div className={cx('ui-autocomplete-field', className)} __css={css} {...rest}>
+          <ui.input
+            className='ui-autocomplete-input'
+            display='inline-block'
+            w='full'
+            placeholder={placeholder}
+            {...getInputProps(input, ref)}
+            value={searchValue || displayValue || ''}
+          />
+        </ui.div>
+      </PopoverTrigger>
     )
   },
 )

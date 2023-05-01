@@ -1,10 +1,10 @@
 import {
   ui,
-  forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
   HTMLUIProps,
   ThemeProps,
+  ComponentArgs,
 } from '@yamada-ui/core'
 import {
   useFormControl,
@@ -24,6 +24,9 @@ import {
   pickObject,
 } from '@yamada-ui/utils'
 import {
+  forwardRef,
+  ForwardedRef,
+  Ref,
   ChangeEvent,
   ChangeEventHandler,
   InputHTMLAttributes,
@@ -35,16 +38,16 @@ import {
 } from 'react'
 import { useRadioGroupContenxt } from './'
 
-export type UseRadioProps = FormControlOptions & {
+export type UseRadioProps<Y extends string | number = string> = FormControlOptions & {
   id?: string
   name?: string
-  value?: string | number
+  value?: Y
   defaultChecked?: boolean
   isChecked?: boolean
   onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
-export const useRadio = (props: UseRadioProps) => {
+export const useRadio = <Y extends string | number = string>(props: UseRadioProps<Y>) => {
   const { id, name, value, required, disabled, readOnly, ...rest } = useFormControlProps(props)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
@@ -205,82 +208,95 @@ type RadioOptions = {
   label?: HTMLUIProps<'span'>
 }
 
-export type RadioProps = Omit<HTMLUIProps<'label'>, keyof UseRadioProps> &
+export type RadioProps<Y extends string | number = string> = Omit<
+  HTMLUIProps<'label'>,
+  keyof UseRadioProps
+> &
   ThemeProps<'Radio'> &
-  UseRadioProps &
+  UseRadioProps<Y> &
   RadioOptions
 
-export const Radio = forwardRef<RadioProps, 'input'>((props, ref) => {
-  const group = useRadioGroupContenxt()
-  const control = useFormControl(props)
-  const styles = useMultiComponentStyle('Radio', { ...group, ...props })
-  const {
-    className,
-    gap = '0.5rem',
-    isRequired = group?.isRequired ?? control.isRequired,
-    isReadOnly = group?.isReadOnly ?? control.isReadOnly,
-    isDisabled = group?.isDisabled ?? control.isDisabled,
-    isInvalid = group?.isInvalid ?? control.isInvalid,
-    icon,
-    input,
-    label,
-    children,
-    ...rest
-  } = omitThemeProps(props)
+export const Radio = forwardRef(
+  <Y extends string | number = string>(
+    props: RadioProps<Y>,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    const group = useRadioGroupContenxt()
+    const control = useFormControl(props)
+    const styles = useMultiComponentStyle('Radio', { ...group, ...props })
+    const {
+      className,
+      gap = '0.5rem',
+      isRequired = group?.isRequired ?? control.isRequired,
+      isReadOnly = group?.isReadOnly ?? control.isReadOnly,
+      isDisabled = group?.isDisabled ?? control.isDisabled,
+      isInvalid = group?.isInvalid ?? control.isInvalid,
+      icon,
+      input,
+      label,
+      children,
+      ...rest
+    } = omitThemeProps(props)
 
-  const { getContainerProps, getInputProps, getIconProps, getLabelProps } = useRadio({
-    ...rest,
-    isRequired,
-    isReadOnly,
-    isDisabled,
-    isInvalid,
-    isChecked: group?.value && rest.value ? group.value === rest.value : rest.isChecked,
-    onChange:
-      group?.onChange && rest.value ? funcAll(group.onChange, rest.onChange) : rest.onChange,
-  })
+    const { getContainerProps, getInputProps, getIconProps, getLabelProps } = useRadio({
+      ...rest,
+      isRequired,
+      isReadOnly,
+      isDisabled,
+      isInvalid,
+      isChecked: group?.value && rest.value ? group.value === rest.value : rest.isChecked,
+      onChange:
+        group?.onChange && rest.value ? funcAll(group.onChange, rest.onChange) : rest.onChange,
+    })
 
-  return (
-    <ui.label
-      className={cx('ui-radio', className)}
-      {...getContainerProps()}
-      {...omitObject(rest, [
-        'id',
-        'name',
-        'value',
-        'defaultValue',
-        'checked',
-        'defaultChecked',
-        'isChecked',
-        'onChange',
-        'onBlur',
-        'onFocus',
-      ])}
-      __css={{
-        cursor: 'pointer',
-        position: 'relative',
-        display: 'inline-flex',
-        alignItems: 'center',
-        verticalAlign: 'top',
-        gap,
-        ...styles.container,
-      }}
-    >
-      <ui.input className='ui-radio-input' {...getInputProps(input, ref)} />
-
-      <ui.span
-        className='ui-radio-icon'
-        {...getIconProps(icon)}
+    return (
+      <ui.label
+        className={cx('ui-radio', className)}
+        {...getContainerProps()}
+        {...omitObject(rest, [
+          'id',
+          'name',
+          'value',
+          'defaultValue',
+          'defaultChecked',
+          'isChecked',
+          'onChange',
+          'onBlur',
+          'onFocus',
+        ])}
         __css={{
+          cursor: 'pointer',
           position: 'relative',
-          display: 'inline-block',
-          userSelect: 'none',
-          ...styles.icon,
+          display: 'inline-flex',
+          alignItems: 'center',
+          verticalAlign: 'top',
+          gap,
+          ...styles.container,
         }}
-      />
+      >
+        <ui.input className='ui-radio-input' {...getInputProps(input, ref)} />
 
-      <ui.span className='ui-radio-label' {...getLabelProps(label)} __css={{ ...styles.label }}>
-        {children}
-      </ui.span>
-    </ui.label>
-  )
-})
+        <ui.span
+          className='ui-radio-icon'
+          {...getIconProps(icon)}
+          __css={{
+            position: 'relative',
+            display: 'inline-block',
+            userSelect: 'none',
+            ...styles.icon,
+          }}
+        />
+
+        <ui.span className='ui-radio-label' {...getLabelProps(label)} __css={{ ...styles.label }}>
+          {children}
+        </ui.span>
+      </ui.label>
+    )
+  },
+) as {
+  <Y extends string | number = string>(
+    props: RadioProps<Y> & { ref?: Ref<HTMLInputElement> },
+  ): JSX.Element
+} & ComponentArgs
+
+Radio.displayName = 'Radio'

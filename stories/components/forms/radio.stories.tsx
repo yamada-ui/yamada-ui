@@ -252,7 +252,7 @@ export const group: ComponentStory<typeof Radio> = () => {
 }
 
 export const customControl: ComponentStory<typeof Radio> = () => {
-  const [value, setValue] = useState<string | number>('孫悟空')
+  const [value, setValue] = useState<string>('孫悟空')
 
   return (
     <RadioGroup value={value} onChange={(value) => setValue(value)}>

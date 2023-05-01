@@ -512,6 +512,10 @@ export interface GeneratedTheme extends UITheme {
     Carousel: { sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {}); variants: string & {} }
     Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    DatePicker: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     Dialog: {
       sizes:
         | 'xs'

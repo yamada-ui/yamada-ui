@@ -34,7 +34,7 @@ export type AutocompleteProps = ThemeProps<'Select'> &
   Omit<UseAutocompleteProps<string>, 'maxSelectedValues' | 'omitSelectedValues'> &
   AutocompleteOptions
 
-export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) => {
+export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) => {
   const styles = useMultiComponentStyle('Select', props)
   let {
     className,
@@ -113,7 +113,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) =>
 
 type AutocompleteFieldProps = HTMLUIProps<'div'> & Pick<AutocompleteProps, 'input'>
 
-const AutocompleteField = forwardRef<AutocompleteFieldProps, 'div'>(
+const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
   ({ className, h, minH, placeholder, input, ...rest }, ref) => {
     const { displayValue, searchValue, styles } = useAutocompleteContext()
 
@@ -130,13 +130,13 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'div'>(
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-autocomplete-field', className)} __css={css} {...rest}>
+      <ui.div className={cx('ui-autocomplete-field', className)} __css={css} {...rest}>
         <ui.input
           className='ui-autocomplete-input'
           display='inline-block'
           w='full'
           placeholder={placeholder}
-          {...getInputProps(input)}
+          {...getInputProps(input, ref)}
           value={searchValue || displayValue || ''}
         />
       </ui.div>

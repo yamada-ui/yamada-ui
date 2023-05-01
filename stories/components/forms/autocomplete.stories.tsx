@@ -392,7 +392,7 @@ export const customOption: ComponentStory<typeof Autocomplete> = () => {
 }
 
 export const customControl: ComponentStory<typeof Autocomplete> = () => {
-  const [value, onChange] = useState<string | number>('孫悟空')
+  const [value, onChange] = useState<string>('孫悟空')
 
   return (
     <Autocomplete placeholder='キャラクターを選択' value={value} onChange={onChange}>

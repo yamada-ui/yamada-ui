@@ -13,7 +13,6 @@ import { ReactElement } from 'react'
 import { SelectIcon, SelectIconProps } from './select-icon'
 import { SelectList, SelectListProps } from './select-list'
 import {
-  Value,
   useSelect,
   UseSelectProps,
   SelectDescendantsContextProvider,
@@ -24,7 +23,7 @@ import { OptionGroup, Option, OptionProps } from './'
 
 export type UIOption = Omit<OptionProps, 'value' | 'children'> & {
   label?: string
-  value?: Value | UIOption[]
+  value?: string | UIOption[]
 }
 
 type SelectOptions = {
@@ -37,7 +36,7 @@ type SelectOptions = {
 }
 
 export type SelectProps = ThemeProps<'Select'> &
-  Omit<UseSelectProps<string | number>, 'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'> &
+  Omit<UseSelectProps<string>, 'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'> &
   SelectOptions
 
 export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
@@ -73,7 +72,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
         )
       } else {
         return (
-          <OptionGroup key={i} label={label as string} {...(props as HTMLUIProps<'ul'>)}>
+          <OptionGroup key={i} label={label ?? ''} {...(props as HTMLUIProps<'ul'>)}>
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
                 <Option key={i} value={value} {...props}>

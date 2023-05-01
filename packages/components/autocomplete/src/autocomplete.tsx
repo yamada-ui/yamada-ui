@@ -31,7 +31,7 @@ type AutocompleteOptions = {
 }
 
 export type AutocompleteProps = ThemeProps<'Select'> &
-  Omit<UseAutocompleteProps<string | number>, 'maxSelectedValues' | 'omitSelectedValues'> &
+  Omit<UseAutocompleteProps<string>, 'maxSelectedValues' | 'omitSelectedValues'> &
   AutocompleteOptions
 
 export const Autocomplete = forwardRef<AutocompleteProps, 'div'>((props, ref) => {

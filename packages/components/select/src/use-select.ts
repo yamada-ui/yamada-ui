@@ -54,17 +54,13 @@ export const {
   useDescendant: useSelectDescendant,
 } = createDescendant<HTMLElement>()
 
-export type Value = string | number
-
-export type MaybeValue = Value | Value[]
-
-export type DisplayValue<T> = (T extends Array<Value> ? string[] : string) | undefined
+export type MaybeValue = string | string[]
 
 type SelectContext = Omit<UseSelectProps, 'value' | 'defaultValue' | 'onChange' | 'isEmpty'> & {
-  value: Value | Value[]
-  displayValue: DisplayValue<Value> | DisplayValue<Value[]>
-  onChange: (newValue: Value) => void
-  onChangeDisplayValue: (newValue: Value, runOmit?: boolean) => void
+  value: MaybeValue
+  displayValue: MaybeValue | undefined
+  onChange: (newValue: string) => void
+  onChangeDisplayValue: (newValue: string, runOmit?: boolean) => void
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -83,7 +79,7 @@ export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
   name: 'SelectContext',
 })
 
-export type UseSelectProps<T extends MaybeValue = Value> = Omit<
+export type UseSelectProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<'div'>,
   'defaultValue' | 'onChange'
 > &
@@ -100,7 +96,7 @@ export type UseSelectProps<T extends MaybeValue = Value> = Omit<
     option?: Omit<OptionProps, 'value' | 'children'>
   }
 
-export const useSelect = <T extends MaybeValue = Value>({
+export const useSelect = <T extends MaybeValue = string>({
   placeholder,
   closeOnSelect = true,
   placeholderInOptions = true,
@@ -131,7 +127,7 @@ export const useSelect = <T extends MaybeValue = Value>({
     defaultValue: rest.defaultValue,
     onChange: rest.onChange,
   })
-  const [displayValue, setDisplayValue] = useState<DisplayValue<T>>(undefined)
+  const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
 
   const isMulti = isArray(value)
   const isEmptyValue = (!isMulti ? !value : !value.length) && !(placeholder && placeholderInOptions)
@@ -271,7 +267,7 @@ export const useSelect = <T extends MaybeValue = Value>({
   ])
 
   const onChangeDisplayValue = useCallback(
-    (newValue: Value, runOmit: boolean = true) => {
+    (newValue: string, runOmit: boolean = true) => {
       const values = descendants.values()
       const selectedValues = values
         .filter(({ node }) => node.dataset.value === newValue)
@@ -283,17 +279,17 @@ export const useSelect = <T extends MaybeValue = Value>({
 
       setDisplayValue((prev) => {
         if (!isMulti) {
-          return <DisplayValue<T>>selectedValues[0]
+          return selectedValues[0] as T
         } else {
           selectedValues.forEach((selectedValue) => {
             const isSelected = isArray(prev) && prev.includes(selectedValue ?? '')
 
             if (!isSelected) {
-              prev = <DisplayValue<T>>[...(isArray(prev) ? prev : []), selectedValue]
+              prev = [...(isArray(prev) ? prev : []), selectedValue] as T
             } else if (runOmit) {
-              prev = <DisplayValue<T>>(
-                (isArray(prev) ? prev.filter((value) => value !== selectedValue) : undefined)
-              )
+              prev = (
+                isArray(prev) ? prev.filter((value) => value !== selectedValue) : undefined
+              ) as T
             }
           })
 
@@ -305,17 +301,17 @@ export const useSelect = <T extends MaybeValue = Value>({
   )
 
   const onChange = useCallback(
-    (newValue: Value) => {
+    (newValue: string) => {
       setValue((prev) => {
         if (!isArray(prev)) {
-          return <T>newValue
+          return newValue as T
         } else {
           const isSelected = prev.includes(newValue)
 
           if (!isSelected) {
-            return <T>[...prev, newValue]
+            return [...prev, newValue] as T
           } else {
-            return <T>prev.filter((value) => value !== newValue)
+            return prev.filter((value) => value !== newValue) as T
           }
         }
       })
@@ -597,7 +593,7 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
 export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
 export type UseSelectOptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & {
-  value?: Value
+  value?: string
   children?: string
   isDisabled?: boolean
   isFocusable?: boolean

@@ -504,7 +504,7 @@ export const customOption: ComponentStory<typeof MultiAutocomplete> = () => {
 }
 
 export const customControl: ComponentStory<typeof MultiAutocomplete> = () => {
-  const [value, onChange] = useState<(string | number)[]>(['孫悟空'])
+  const [value, onChange] = useState<string[]>(['孫悟空'])
 
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' value={value} onChange={onChange}>

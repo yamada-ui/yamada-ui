@@ -13,7 +13,6 @@ import { cloneElement, CSSProperties, FC, MouseEventHandler, ReactElement, useMe
 import { SelectIcon, SelectClearIcon, SelectIconProps } from './select-icon'
 import { SelectList, SelectListProps } from './select-list'
 import {
-  Value,
   useSelect,
   UseSelectProps,
   SelectDescendantsContextProvider,
@@ -41,7 +40,7 @@ type MultiSelectOptions = {
 }
 
 export type MultiSelectProps = ThemeProps<'Select'> &
-  Omit<UseSelectProps<(string | number)[]>, 'placeholderInOptions' | 'isEmpty'> &
+  Omit<UseSelectProps<string[]>, 'placeholderInOptions' | 'isEmpty'> &
   MultiSelectOptions
 
 export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
@@ -106,7 +105,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     placeholder,
     onClear,
     ...rest
-  } = useSelect<(string | number)[]>({
+  } = useSelect<string[]>({
     ...computedProps,
     defaultValue,
     placeholderInOptions: false,
@@ -178,11 +177,11 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
 
-                onChange((value as Value[])[index])
+                onChange(value[index])
               }
 
               const el = component({
-                value: (value as Value[])[index],
+                value: value[index],
                 displayValue,
                 index,
                 onRemove,

@@ -19,7 +19,6 @@ import {
   AutocompleteDescendantsContextProvider,
   useAutocompleteContext,
   useAutocompleteInput,
-  Value,
 } from './use-autocomplete'
 import { AutocompleteCreate, AutocompleteEmpty } from './'
 
@@ -43,7 +42,7 @@ type MultiAutocompleteOptions = {
 }
 
 export type MultiAutocompleteProps = ThemeProps<'Select'> &
-  UseAutocompleteProps<(string | number)[]> &
+  UseAutocompleteProps<string[]> &
   MultiAutocompleteOptions
 
 export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((props, ref) => {
@@ -83,7 +82,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
     computedChildren,
     onClear,
     ...rest
-  } = useAutocomplete<(string | number)[]>({
+  } = useAutocomplete<string[]>({
     ...computedProps,
     defaultValue,
     closeOnSelect,
@@ -187,13 +186,13 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
           const onRemove: MouseEventHandler<HTMLElement> = (e) => {
             e.stopPropagation()
 
-            onChange((value as Value[])[index])
+            onChange(value[index])
 
             if (inputRef.current) inputRef.current.focus()
           }
 
           const el = component({
-            value: (value as Value[])[index],
+            value: value[index],
             displayValue,
             index,
             onRemove,

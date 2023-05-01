@@ -186,11 +186,7 @@ export const {
   useDescendant: useAutocompleteDescendant,
 } = createDescendant<HTMLElement>()
 
-export type Value = string | number
-
-export type MaybeValue = Value | Value[]
-
-export type DisplayValue<T> = (T extends Array<Value> ? string[] : string) | undefined
+export type MaybeValue = string | string[]
 
 type Order = 'first' | 'last'
 
@@ -198,14 +194,14 @@ type AutocompleteContext = Omit<
   UseAutocompleteProps,
   'value' | 'defaultValue' | 'onChange' | 'onCreate'
 > & {
-  value: Value | Value[]
-  displayValue: DisplayValue<Value> | DisplayValue<Value[]>
+  value: MaybeValue
+  displayValue: MaybeValue | undefined
   searchValue: string
   isHit: boolean
   isEmpty: boolean
   isAllSelected: boolean
-  onChange: (newValue: Value) => void
-  onChangeDisplayValue: (newValue: Value, runOmit?: boolean) => void
+  onChange: (newValue: string) => void
+  onChangeDisplayValue: (newValue: string, runOmit?: boolean) => void
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
   isOpen: boolean
@@ -229,7 +225,7 @@ export const [AutocompleteProvider, useAutocompleteContext] = createContext<Auto
   name: 'AutocompleteContext',
 })
 
-export type UseAutocompleteProps<T extends MaybeValue = Value> = Omit<
+export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<'div'>,
   'type' | 'list' | 'defaultValue' | 'onChange'
 > &
@@ -262,7 +258,7 @@ export type UseAutocompleteProps<T extends MaybeValue = Value> = Omit<
     data?: UIOption[]
   }
 
-export const useAutocomplete = <T extends MaybeValue = Value>({
+export const useAutocomplete = <T extends MaybeValue = string>({
   closeOnSelect = true,
   omitSelectedValues = false,
   maxSelectedValues,
@@ -300,7 +296,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
     defaultValue: rest.defaultValue,
     onChange: rest.onChange,
   })
-  const [displayValue, setDisplayValue] = useState<DisplayValue<T>>(undefined)
+  const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
   const [searchValue, setSearchValue] = useState<string>('')
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
@@ -551,7 +547,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
   )
 
   const onChangeDisplayValue = useCallback(
-    (newValue: Value, runOmit: boolean = true) => {
+    (newValue: string, runOmit: boolean = true) => {
       const enabledValues = descendants.enabledValues()
       const selectedValues = enabledValues
         .filter(({ node }) => node.dataset.value === newValue)
@@ -559,17 +555,17 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
 
       setDisplayValue((prev) => {
         if (!isMulti) {
-          return selectedValues[0] as DisplayValue<T>
+          return selectedValues[0] as T
         } else {
           selectedValues.forEach((selectedValue) => {
             const isSelected = isArray(prev) && prev.includes(selectedValue ?? '')
 
             if (!isSelected) {
-              prev = [...(isArray(prev) ? prev : []), selectedValue] as DisplayValue<T>
+              prev = [...(isArray(prev) ? prev : []), selectedValue] as T
             } else if (runOmit) {
               prev = (
                 isArray(prev) ? prev.filter((value) => value !== selectedValue) : undefined
-              ) as DisplayValue<T>
+              ) as T
             }
           })
 
@@ -581,7 +577,7 @@ export const useAutocomplete = <T extends MaybeValue = Value>({
   )
 
   const onChange = useCallback(
-    (newValue: Value) => {
+    (newValue: string) => {
       setValue((prev) => {
         if (!isArray(prev)) {
           return newValue as T
@@ -1128,7 +1124,7 @@ export const useAutocompleteOptionGroup = ({ label, ...rest }: UseAutocompleteOp
 export type UseAutocompleteOptionGroupReturn = ReturnType<typeof useAutocompleteOptionGroup>
 
 export type UseAutocompleteOptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & {
-  value?: Value
+  value?: string
   children?: string
   isDisabled?: boolean
   isFocusable?: boolean

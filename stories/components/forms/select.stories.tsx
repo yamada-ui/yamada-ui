@@ -297,7 +297,7 @@ export const customOption: ComponentStory<typeof Select> = () => {
 }
 
 export const customControl: ComponentStory<typeof Select> = () => {
-  const [value, onChange] = useState<string | number>('孫悟空')
+  const [value, onChange] = useState<string>('孫悟空')
 
   return (
     <Select placeholder='キャラクターを選択' value={value} onChange={onChange}>

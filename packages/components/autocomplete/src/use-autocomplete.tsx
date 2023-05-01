@@ -256,7 +256,7 @@ type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
 
 export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<'input'>,
-  keyof UseAutocompleteBaseProps
+  keyof UseAutocompleteBaseProps | 'list'
 > &
   UseAutocompleteBaseProps<T>
 

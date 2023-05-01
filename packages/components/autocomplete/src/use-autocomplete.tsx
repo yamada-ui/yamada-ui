@@ -225,21 +225,17 @@ export const [AutocompleteProvider, useAutocompleteContext] = createContext<Auto
   name: 'AutocompleteContext',
 })
 
-export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
-  HTMLUIProps<'div'>,
-  'type' | 'list' | 'defaultValue' | 'onChange'
+type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
+  PopoverProps,
+  | 'initialFocusRef'
+  | 'closeOnButton'
+  | 'isOpen'
+  | 'trigger'
+  | 'autoFocus'
+  | 'restoreFocus'
+  | 'openDelay'
+  | 'closeDelay'
 > &
-  Omit<
-    PopoverProps,
-    | 'initialFocusRef'
-    | 'closeOnButton'
-    | 'isOpen'
-    | 'trigger'
-    | 'autoFocus'
-    | 'restoreFocus'
-    | 'openDelay'
-    | 'closeDelay'
-  > &
   FormControlOptions & {
     value?: T
     defaultValue?: T
@@ -257,6 +253,12 @@ export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
     option?: Omit<AutocompleteOptionProps, 'value' | 'children'>
     data?: UIOption[]
   }
+
+export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
+  HTMLUIProps<'input'>,
+  keyof UseAutocompleteBaseProps
+> &
+  UseAutocompleteBaseProps<T>
 
 export const useAutocomplete = <T extends MaybeValue = string>({
   closeOnSelect = true,

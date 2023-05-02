@@ -36,7 +36,7 @@ export type FirstDayOfWeek = 'sunday' | 'monday'
 
 export type CalendarType = 'year' | 'month' | 'date'
 
-export type MaybeValue = Date | Date[]
+export type MaybeValue = Date | Date[] | undefined | null
 
 export type CalendarContext = Pick<
   Required<UseCalendarProps>,
@@ -197,10 +197,13 @@ export const getFormattedLabel = (
   }
 }
 
-export const isSameMonth = (date: Date | undefined, comparison: Date | undefined): boolean =>
+export const isSameMonth = (
+  date: Date | undefined | null,
+  comparison: Date | undefined | null,
+): boolean =>
   date?.getFullYear() === comparison?.getFullYear() && date?.getMonth() === comparison?.getMonth()
 
-export const isSameDate = (date: Date | undefined, comparison: Date | undefined) =>
+export const isSameDate = (date: Date | undefined | null, comparison: Date | undefined | null) =>
   isSameMonth(date, comparison) && date?.getDate() === comparison?.getDate()
 
 const onShouldFocus = <T = any>(

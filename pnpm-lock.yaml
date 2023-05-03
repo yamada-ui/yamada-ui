@@ -677,6 +677,9 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
+      dayjs:
+        specifier: ^1.11.7
+        version: 1.11.7
     devDependencies:
       clean-package:
         specifier: 2.1.1

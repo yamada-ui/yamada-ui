@@ -29,7 +29,8 @@
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "dayjs": "^1.11.7"
   },
   "devDependencies": {
     "react": "^18.0.0",

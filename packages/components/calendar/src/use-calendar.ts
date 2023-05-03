@@ -268,6 +268,12 @@ const disableAllTabIndex = <T = any>(
   }
 }
 
+export const isAfterMaxMonth = (value: Date, date: Date | undefined) =>
+  date instanceof Date && dayjs(value).startOf('month').isAfter(date)
+
+export const isBeforeMinMonth = (value: Date, date: Date | undefined) =>
+  date instanceof Date && dayjs(value).startOf('month').isBefore(date)
+
 export const isMonthInRange = ({
   date,
   minDate,
@@ -352,6 +358,8 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
 }
 
 export const useCalendar = <Y extends MaybeValue = Date>({
+  defaultValue,
+  defaultMonth,
   firstDayOfWeek = 'monday',
   amountOfMonths = 1,
   paginateBy = amountOfMonths,
@@ -388,29 +396,29 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   const [value, setValue] = useControllableState({
     value: rest.value,
-    defaultValue: rest.defaultValue,
+    defaultValue,
     onChange: rest.onChange,
   })
 
   const isMulti = isArray(value)
 
   if (!isMulti && value) {
-    rest.defaultMonth ??= new Date(new Date(value).setDate(1))
+    defaultMonth ??= new Date(new Date(value).setDate(1))
   } else if (isMulti && value.length) {
-    rest.defaultMonth ??= new Date(new Date(value[0]).setDate(1))
+    defaultMonth ??= new Date(new Date(value[0]).setDate(1))
   } else {
-    rest.defaultMonth ??= new Date()
+    defaultMonth ??= new Date()
   }
 
   const [month, setMonth] = useControllableState({
     value: rest.month,
-    defaultValue: rest.defaultMonth,
+    defaultValue: defaultMonth,
     onChange: rest.onChangeMonth,
   })
 
   const [year, setYear] = useState<number>(month.getFullYear())
   const [internalYear, setInternalYear] = useState<number>(year)
-  const minYear = minDate instanceof Date ? minDate.getFullYear() : 100
+  const minYear = minDate instanceof Date ? minDate.getFullYear() : 1
   const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : 10000
   const rangeYears = getRangeYears(internalYear)
   const nextMonth = dayjs(month).add(amountOfMonths, 'months').toDate()
@@ -419,6 +427,10 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   const yearRefs = useRef(new Map<number, RefObject<HTMLButtonElement>>())
   const monthRefs = useRef(new Map<number, RefObject<HTMLButtonElement>>())
   const dayRefs = useRef(new Map<string, RefObject<HTMLButtonElement>>())
+
+  useUpdateEffect(() => {
+    setYear(month.getFullYear())
+  }, [month])
 
   useUpdateEffect(() => {
     switch (type) {

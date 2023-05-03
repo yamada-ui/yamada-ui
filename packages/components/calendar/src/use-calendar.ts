@@ -291,6 +291,12 @@ export const isMonthInRange = ({
   return maxInRange && minInRange
 }
 
+export const isAfterMaxDate = (value: Date, date: Date | undefined) =>
+  date instanceof Date && dayjs(date).isBefore(value, 'day')
+
+export const isBeforeMinDate = (value: Date, date: Date | undefined) =>
+  date instanceof Date && dayjs(date).isAfter(value, 'day')
+
 export const isDisabledDate = ({
   minDate,
   maxDate,
@@ -305,15 +311,11 @@ export const isDisabledDate = ({
   disableOutsideDays: boolean
   value: Date
   isOutside: boolean
-}) => {
-  const isAfterMax = maxDate instanceof Date && dayjs(maxDate).isBefore(value, 'day')
-  const isBeforeMin = minDate instanceof Date && dayjs(minDate).isAfter(value, 'day')
-
-  const shouldExclude = typeof excludeDate === 'function' && excludeDate(value)
-  const disabledOutside = !!disableOutsideDays && !!isOutside
-
-  return isAfterMax || isBeforeMin || shouldExclude || disabledOutside
-}
+}) =>
+  isAfterMaxDate(value, maxDate) ||
+  isBeforeMinDate(value, minDate) ||
+  !!excludeDate?.(value) ||
+  (!!disableOutsideDays && !!isOutside)
 
 export type UseCalendarProps<Y extends MaybeValue = Date> = {
   type?: CalendarType

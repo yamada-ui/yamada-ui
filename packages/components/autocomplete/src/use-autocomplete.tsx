@@ -30,10 +30,10 @@ import {
   Union,
   getValidChildren,
   isUndefined,
+  DOMAttributes,
 } from '@yamada-ui/utils'
 import {
   ChangeEvent,
-  CompositionEvent,
   CSSProperties,
   Dispatch,
   FocusEvent,
@@ -43,6 +43,7 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -204,6 +205,7 @@ type AutocompleteContext = Omit<
   onChangeDisplayValue: (newValue: string, runOmit?: boolean) => void
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
+  inputProps: DOMAttributes
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -638,23 +640,13 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     [isOpen, onOpen, format, rest, pickOptions, rebirthOptions],
   )
 
-  const onCompositionStart = useCallback(
-    (ev: CompositionEvent<HTMLInputElement>) => {
-      isComposition.current = true
+  const onCompositionStart = useCallback(() => {
+    isComposition.current = true
+  }, [])
 
-      rest.onCompositionStart?.(ev)
-    },
-    [rest],
-  )
-
-  const onCompositionEnd = useCallback(
-    (ev: CompositionEvent<HTMLInputElement>) => {
-      isComposition.current = false
-
-      rest.onCompositionEnd?.(ev)
-    },
-    [rest],
-  )
+  const onCompositionEnd = useCallback(() => {
+    isComposition.current = false
+  }, [])
 
   const onCreate = useCallback(() => {
     if (!listRef.current) return
@@ -887,19 +879,18 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     (props = {}, ref = null) => ({
       ref,
       tabIndex: -1,
-      ...omitObject(computedProps[1] as Dict, [
-        'id',
-        'value',
-        'defaultValue',
-        'onChange',
-        'onCreate',
-      ]),
       ...props,
       'data-active': dataAttr(isOpen),
       'aria-expanded': dataAttr(isOpen),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, rest, onKeyDown],
+    [isOpen, rest, onKeyDown],
+  )
+
+  const inputProps = useMemo(
+    () =>
+      omitObject(computedProps[1] as Dict, ['id', 'value', 'defaultValue', 'onChange', 'onCreate']),
+    [computedProps],
   )
 
   return {
@@ -942,6 +933,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     getPopoverProps,
     getContainerProps,
     getFieldProps,
+    inputProps,
   }
 }
 
@@ -956,6 +948,7 @@ export const useAutocompleteInput = () => {
     onCompositionEnd,
     isAllSelected,
     formControlProps,
+    inputProps,
   } = useAutocompleteContext()
 
   useUpdateEffect(() => {
@@ -965,17 +958,35 @@ export const useAutocompleteInput = () => {
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(inputRef, ref),
-      ...props,
       ...formControlProps,
+      ...inputProps,
+      ...props,
       id,
       cursor: formControlProps.readOnly ? 'default' : 'text',
       pointerEvents: formControlProps.disabled || isAllSelected ? 'none' : 'auto',
       tabIndex: isAllSelected ? -1 : 0,
       onChange: handlerAll(props.onChange, onSearch),
-      onCompositionStart: handlerAll(props.onCompositionStart, onCompositionStart),
-      onCompositionEnd: handlerAll(props.onCompositionEnd, onCompositionEnd),
+      onCompositionStart: handlerAll(
+        props.onCompositionStart,
+        inputProps.onCompositionStart,
+        onCompositionStart,
+      ),
+      onCompositionEnd: handlerAll(
+        props.onCompositionEnd,
+        inputProps.onCompositionEnd,
+        onCompositionEnd,
+      ),
     }),
-    [inputRef, formControlProps, id, isAllSelected, onSearch, onCompositionStart, onCompositionEnd],
+    [
+      inputProps,
+      inputRef,
+      formControlProps,
+      id,
+      isAllSelected,
+      onSearch,
+      onCompositionStart,
+      onCompositionEnd,
+    ],
   )
 
   return {

@@ -121,6 +121,16 @@ const dateInputFormat = (value: Date | string, defaultFormat: string): string =>
   }
 }
 
+const isPossibility = (value: number, type: CalendarType | undefined) => {
+  if (type === 'month') {
+    return value === 0 || value === 1 || value <= 12
+  } else if (type === 'date') {
+    return value === 0 || value === 1 || value === 2 || value === 3 || value <= 31
+  } else {
+    return true
+  }
+}
+
 const computedDisplayValue = (
   order: CalendarOrder,
   separator: string,
@@ -167,8 +177,10 @@ const computedValues = (
   selections: Selection[],
 ) =>
   beforeValues.map((beforeValue, index) => {
+    const { start, end, type } = selections[index]
     const defaultValue = defaultValues[index]
     const currentValue = values[index]
+    const computedValue = (beforeValue + currentValue).slice(-1 * (end - start))
 
     if (!currentValue) return defaultValue
 
@@ -178,12 +190,10 @@ const computedValues = (
 
     if (isError) return beforeValue
 
-    if (isDefaultValue || isNewValue) {
+    if (isDefaultValue || isNewValue || !isPossibility(parseInt(computedValue), type)) {
       return currentValue
     } else {
-      const { start, end } = selections[index]
-
-      return (beforeValue + currentValue).slice(-1 * (end - start))
+      return computedValue
     }
   })
 
@@ -305,11 +315,19 @@ export const useDatePicker = ({
   const onSelection = useCallback(({ type, start, end, index }: Selection) => {
     selectionRef.current = { type, start, end, index }
 
-    inputRef.current?.setSelectionRange(null, null)
+    if (!inputRef.current) return
 
-    console.log(inputRef.current?.selectionStart, inputRef.current?.selectionEnd, start, end)
+    const isStart = start === 0
 
-    inputRef.current?.setSelectionRange(start, end)
+    if (!isStart) {
+      inputRef.current.setSelectionRange(null, null)
+    } else {
+      const endIndex = inputRef.current.value.length
+
+      inputRef.current.setSelectionRange(endIndex, endIndex)
+    }
+
+    inputRef.current.setSelectionRange(start, end)
   }, [])
 
   const onSelectionTarget = useCallback(
@@ -331,7 +349,7 @@ export const useDatePicker = ({
   const onSelectionNext = useCallback(() => {
     if (!inputRef.current) return
 
-    let { index = 0 } = selectionRef.current ?? {}
+    const { index = 0 } = selectionRef.current ?? {}
 
     if (index === selections.length - 1) return
 
@@ -343,7 +361,7 @@ export const useDatePicker = ({
   const onSelectionPrev = useCallback(() => {
     if (!inputRef.current) return
 
-    let { index = 0 } = selectionRef.current ?? {}
+    const { index = 0 } = selectionRef.current ?? {}
 
     if (index === 0) return
 
@@ -391,8 +409,6 @@ export const useDatePicker = ({
   )
 
   const onClick = useCallback(() => {
-    console.log('container', 'click')
-
     if (isOpen) {
       if (allowFreeInput && inputRef.current) inputRef.current.focus()
     } else {
@@ -401,8 +417,6 @@ export const useDatePicker = ({
   }, [allowFreeInput, isOpen, onOpen])
 
   const onFocus = useCallback(() => {
-    console.log('container', 'focus')
-
     if (!isOpen) onOpen()
   }, [isOpen, onOpen])
 
@@ -411,8 +425,6 @@ export const useDatePicker = ({
       const relatedTarget = getEventRelatedTarget(ev)
 
       if (isContains(containerRef.current, relatedTarget)) return
-
-      console.log('container', 'blur')
 
       if (!closeOnBlur) return
 
@@ -713,16 +725,12 @@ export const useDatePickerInput = () => {
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLInputElement>) => {
-      console.log('input', 'click')
-
       onSelectionTarget((ev.target as HTMLInputElement).selectionStart ?? 0)
     },
     [onSelectionTarget],
   )
 
   const onFocus = useCallback(() => {
-    console.log('input', 'focus')
-
     if (!allowFreeInput || !inputRef.current) return
 
     if (!value) {
@@ -774,14 +782,12 @@ export const useDatePickerInput = () => {
         onShouldSelection(index)(isCompleted)
       } else if (type === 'month') {
         const isCompleted = count === monthPlaceholder.length
-        const isPossibility = value === 0 || value === 1
 
-        onShouldSelection(index)(isCompleted || !isPossibility)
+        onShouldSelection(index)(isCompleted || !isPossibility(value, type))
       } else if (type === 'date') {
         const isCompleted = count === datePlaceholder.length
-        const isPossibility = value === 0 || value === 1 || value === 2 || value === 3
 
-        onShouldSelection(index)(isCompleted || !isPossibility)
+        onShouldSelection(index)(isCompleted || !isPossibility(value, type))
       }
     },
     [selections, onShouldSelection, yearPlaceholder, monthPlaceholder, datePlaceholder],
@@ -832,7 +838,7 @@ export const useDatePickerInput = () => {
           if (isNotIncludeYear) year = new Date().getFullYear()
           if (isSetYear) year = parseInt(values[yearIndex])
 
-          if (typeof year === 'number') {
+          if (typeof year === 'number' && parseInt(values[index]) !== 0) {
             const month = new Date(year, parseInt(values[index]) - 1)
 
             if (isBeforeMinMonth(month, minDate)) error = 'min-date'
@@ -866,7 +872,11 @@ export const useDatePickerInput = () => {
           if (isSetYear) year = parseInt(values[yearIndex])
           if (isSetMonth) month = parseInt(values[monthIndex]) - 1
 
-          if (typeof year === 'number' && typeof month === 'number') {
+          if (
+            typeof year === 'number' &&
+            typeof month === 'number' &&
+            parseInt(values[index]) !== 0
+          ) {
             const date = new Date(year, month, parseInt(values[index]))
 
             if (isBeforeMinDate(date, minDate)) error = 'min-date'
@@ -906,8 +916,6 @@ export const useDatePickerInput = () => {
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      console.log('input', 'change')
-
       const { type, index = 0 } = selectionRef.current ?? {}
 
       let values = ev.target.value.split(separator)

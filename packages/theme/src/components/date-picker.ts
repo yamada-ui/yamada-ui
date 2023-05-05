@@ -1,0 +1,267 @@
+import { ComponentMultiStyle, mode } from '@yamada-ui/core'
+import { getColor, isArray } from '@yamada-ui/utils'
+
+export const DatePicker: ComponentMultiStyle = {
+  baseStyle: {
+    container: {},
+    field: {
+      cursor: 'pointer',
+      width: '100%',
+      minWidth: 0,
+      outline: 0,
+      position: 'relative',
+      appearance: 'none',
+      pb: '1px',
+      lineHeight: 'normal',
+      bg: ['white', 'gray.700'],
+      transitionProperty: 'common',
+      transitionDuration: 'normal',
+      _focus: {
+        zIndex: 'unset',
+      },
+      _disabled: {
+        opacity: 0.4,
+        cursor: 'not-allowed',
+      },
+      _placeholder: {
+        color: 'gray.500',
+      },
+      _dark: {
+        _placeholder: {
+          color: 'whiteAlpha.400',
+        },
+      },
+      '&:invalid': {
+        color: ['gray.500', 'whiteAlpha.400'],
+      },
+      _readOnly: {
+        pointerEvents: 'none',
+        _placeholder: {
+          color: 'inherit !important',
+        },
+      },
+    },
+    icon: {
+      width: '6',
+      py: '2',
+      color: ['blackAlpha.600', 'whiteAlpha.600'],
+      fontSize: 'xl',
+      outline: 0,
+      rounded: 'md',
+      _disabled: {
+        opacity: 0.5,
+      },
+    },
+    clearIcon: {
+      transitionProperty: 'common',
+      transitionDuration: 'normal',
+      pointerEvents: 'auto',
+      _hover: {
+        opacity: 0.8,
+      },
+      _disabled: {
+        pointerEvents: 'none',
+        opacity: 0.4,
+      },
+      _focusVisible: {
+        boxShadow: 'outline',
+        bg: 'rgba(0, 0, 0, 0.14)',
+      },
+    },
+    popover: {
+      rounded: 'md',
+      p: '2',
+      bg: ['white', 'black'],
+      border: '1px solid',
+      borderColor: 'inherit',
+      color: 'inherit',
+      boxShadow: ['sm', 'dark-lg'],
+      zIndex: 1,
+    },
+  },
+
+  variants: {
+    outline: ({
+      theme: t,
+      colorScheme: s,
+      focusBorderColor: fc = ['blue.500', 'blue.300'],
+      errorBorderColor: ec = ['red.500', 'red.300'],
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
+        : getColor(fc, fc)(t, s)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
+        : getColor(ec, ec)(t, s)
+
+      return {
+        field: {
+          border: '1px solid',
+          borderColor: 'inherit',
+          bg: 'inherit',
+          _hover: {
+            borderColor: ['gray.300', 'whiteAlpha.400'],
+          },
+          _focus: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+          _active: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          _focusVisible: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+        },
+      }
+    },
+    filled: ({
+      theme: t,
+      colorScheme: s,
+      focusBorderColor: fc = ['blue.500', 'blue.300'],
+      errorBorderColor: ec = ['red.500', 'red.300'],
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
+        : getColor(fc, fc)(t, s)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
+        : getColor(ec, ec)(t, s)
+
+      return {
+        field: {
+          border: '2px solid',
+          borderColor: 'transparent',
+          bg: ['gray.100', 'whiteAlpha.50'],
+          _hover: {
+            bg: ['gray.200', 'whiteAlpha.100'],
+          },
+          _focus: {
+            bg: 'transparent',
+            borderColor: focusBorderColor,
+          },
+          _active: {
+            bg: 'transparent',
+            borderColor: focusBorderColor,
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+          },
+          _focusVisible: {
+            bg: 'transparent',
+            borderColor: focusBorderColor,
+          },
+        },
+      }
+    },
+    flushed: ({
+      theme: t,
+      colorScheme: s,
+      focusBorderColor: fc = ['blue.500', 'blue.300'],
+      errorBorderColor: ec = ['red.500', 'red.300'],
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
+        : getColor(fc, fc)(t, s)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
+        : getColor(ec, ec)(t, s)
+
+      return {
+        field: {
+          borderBottom: '1px solid',
+          borderColor: 'inherit',
+          rounded: '0',
+          px: '0',
+          bg: 'transparent',
+          _focus: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+          },
+          _active: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
+          },
+          _focusVisible: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+          },
+        },
+      }
+    },
+    unstyled: {
+      field: {
+        bg: 'transparent',
+        minH: 'auto',
+        px: '0',
+      },
+    },
+  },
+
+  sizes: {
+    xs: {
+      field: {
+        fontSize: 'xs',
+        pl: '2',
+        pr: '8',
+        minH: '6',
+        rounded: 'sm',
+      },
+      icon: {
+        pt: '0.5',
+        insetEnd: '1',
+      },
+    },
+    sm: {
+      field: {
+        fontSize: 'sm',
+        pl: '2',
+        pr: '8',
+        minH: '8',
+        rounded: 'sm',
+      },
+      icon: {
+        insetEnd: '2',
+      },
+    },
+    md: {
+      field: {
+        fontSize: 'md',
+        pl: '3',
+        pr: '8',
+        minH: '10',
+        rounded: 'md',
+      },
+      icon: {
+        insetEnd: '2',
+      },
+    },
+    lg: {
+      field: {
+        fontSize: 'lg',
+        pl: '4',
+        pr: '8',
+        minH: '12',
+        rounded: 'md',
+      },
+      icon: {
+        insetEnd: '2',
+      },
+    },
+  },
+
+  defaultProps: {
+    size: 'md',
+    variant: 'outline',
+  },
+}

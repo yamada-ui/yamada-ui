@@ -429,6 +429,13 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   const dayRefs = useRef(new Map<string, RefObject<HTMLButtonElement>>())
 
   useUpdateEffect(() => {
+    if (!defaultMonth) return
+
+    setMonth(defaultMonth)
+    setYear(defaultMonth.getFullYear())
+  }, [value])
+
+  useUpdateEffect(() => {
     setYear(month.getFullYear())
   }, [month])
 

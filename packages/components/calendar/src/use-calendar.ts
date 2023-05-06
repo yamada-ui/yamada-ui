@@ -433,11 +433,13 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
     setMonth(defaultMonth)
     setYear(defaultMonth.getFullYear())
+    setInternalYear(defaultMonth.getFullYear())
   }, [value])
 
   useUpdateEffect(() => {
     setYear(month.getFullYear())
-  }, [month])
+    setInternalYear(month.getFullYear())
+  }, [month.getFullYear()])
 
   useUpdateEffect(() => {
     switch (type) {

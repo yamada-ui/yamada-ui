@@ -197,7 +197,7 @@ type AutocompleteContext = Omit<
 > & {
   value: MaybeValue
   displayValue: MaybeValue | undefined
-  searchValue: string
+  inputValue: string
   isHit: boolean
   isEmpty: boolean
   isAllSelected: boolean
@@ -301,7 +301,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     onChange: rest.onChange,
   })
   const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
-  const [searchValue, setSearchValue] = useState<string>('')
+  const [inputValue, setInputValue] = useState<string>('')
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
   const [isHit, setIsHit] = useState<boolean>(true)
@@ -598,7 +598,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
       onChangeDisplayValue(newValue)
 
-      setSearchValue('')
+      setInputValue('')
       rebirthOptions(false)
     },
     [onChangeDisplayValue, rebirthOptions, setValue],
@@ -624,6 +624,8 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (!isOpen) onOpen()
 
+      rest.onSearch?.(ev)
+
       const value = ev.target.value
       const computedValue = format(value)
 
@@ -633,9 +635,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
         rebirthOptions()
       }
 
-      setSearchValue(value)
-
-      rest.onSearch?.(ev)
+      setInputValue(value)
     },
     [isOpen, onOpen, format, rest, pickOptions, rebirthOptions],
   )
@@ -651,7 +651,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   const onCreate = useCallback(() => {
     if (!listRef.current) return
 
-    const newOption: UIOption = { label: searchValue, value: searchValue }
+    const newOption: UIOption = { label: inputValue, value: inputValue }
 
     let newData: UIOption[] = []
 
@@ -680,15 +680,15 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     }
 
     setData(newData)
-    onChange(searchValue)
+    onChange(inputValue)
     rebirthOptions(false)
 
-    const index = flattenData(newData).findIndex(({ value }) => value === searchValue)
+    const index = flattenData(newData).findIndex(({ value }) => value === inputValue)
 
     setFocusedIndex(index)
 
     rest.onCreate?.(newOption, newData)
-  }, [searchValue, data, createOrder, onChange, rebirthOptions, rest, createSecondOrder, isMulti])
+  }, [inputValue, data, createOrder, onChange, rebirthOptions, rest, createSecondOrder, isMulti])
 
   const onDelete = useCallback(() => {
     if (!isMulti) {
@@ -704,12 +704,12 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
       setValue([] as unknown as T)
       setDisplayValue(undefined)
-      setSearchValue('')
+      setInputValue('')
       rebirthOptions()
 
       if (inputRef.current) inputRef.current.focus()
     },
-    [setDisplayValue, setSearchValue, setValue, rebirthOptions, inputRef],
+    [setDisplayValue, setInputValue, setValue, rebirthOptions, inputRef],
   )
 
   const onClick = useCallback(() => {
@@ -738,7 +738,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
       if (!closeOnBlur && isHit) return
 
-      setSearchValue('')
+      setInputValue('')
 
       if (isOpen) onClose()
     },
@@ -750,7 +750,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       if (formControlProps.disabled || formControlProps.readOnly) return
       if (isComposition.current) return
 
-      const enabledDelete = displayValue === searchValue || !searchValue.length
+      const enabledDelete = displayValue === inputValue || !inputValue.length
 
       const actions: Record<string, Function | undefined> = {
         ArrowDown: isFocused
@@ -788,7 +788,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     [
       formControlProps,
       displayValue,
-      searchValue,
+      inputValue,
       onOpen,
       isFocused,
       onFocusFirstOrSelected,
@@ -828,7 +828,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     if (isOpen) return
 
     setFocusedIndex(-1)
-    setSearchValue('')
+    setInputValue('')
   }, [isOpen])
 
   useUpdateEffect(() => {
@@ -898,7 +898,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     descendants,
     value,
     displayValue,
-    searchValue,
+    inputValue,
     isHit,
     isEmpty,
     computedChildren,

@@ -60,7 +60,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
     getFieldProps,
     createOption,
     isEmpty,
-    searchValue,
+    inputValue,
     computedChildren,
     ...rest
   } = useAutocomplete({ ...computedProps, defaultValue, children })
@@ -79,7 +79,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
   return (
     <AutocompleteDescendantsContextProvider value={descendants}>
       <AutocompleteProvider
-        value={{ ...rest, formControlProps, searchValue, createOption, isEmpty, styles }}
+        value={{ ...rest, formControlProps, inputValue, createOption, isEmpty, styles }}
       >
         <Popover {...getPopoverProps()}>
           <ui.div
@@ -99,7 +99,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
               </AutocompleteList>
             ) : (
               <AutocompleteList {...list}>
-                {createOption && searchValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+                {createOption && inputValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
               </AutocompleteList>
             )}
           </ui.div>
@@ -113,7 +113,7 @@ type AutocompleteFieldProps = HTMLUIProps<'div'> & Pick<AutocompleteProps, 'inpu
 
 const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
   ({ className, h, minH, placeholder, input, ...rest }, ref) => {
-    const { displayValue, searchValue, styles } = useAutocompleteContext()
+    const { displayValue, inputValue, styles } = useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
 
@@ -136,7 +136,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
             w='full'
             placeholder={placeholder}
             {...getInputProps(input, ref)}
-            value={searchValue || displayValue || ''}
+            value={inputValue || displayValue || ''}
           />
         </ui.div>
       </PopoverTrigger>

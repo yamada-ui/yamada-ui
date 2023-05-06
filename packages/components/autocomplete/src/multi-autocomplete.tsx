@@ -78,7 +78,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
     getFieldProps,
     createOption,
     isEmpty,
-    searchValue,
+    inputValue,
     computedChildren,
     onClear,
     ...rest
@@ -107,7 +107,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
           ...rest,
           value,
           formControlProps,
-          searchValue,
+          inputValue,
           createOption,
           isEmpty,
           styles,
@@ -143,7 +143,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
               </AutocompleteList>
             ) : (
               <AutocompleteList {...list}>
-                {createOption && searchValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+                {createOption && inputValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
               </AutocompleteList>
             )}
           </ui.div>
@@ -171,7 +171,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
     },
     ref,
   ) => {
-    const { value, displayValue, searchValue, onChange, isOpen, inputRef, styles } =
+    const { value, displayValue, inputValue, onChange, isOpen, inputRef, styles } =
       useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
@@ -249,7 +249,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
             marginBlockEnd='0.125rem'
             placeholder={!displayValue || (keepPlaceholder && isOpen) ? placeholder : undefined}
             {...getInputProps(input, ref)}
-            value={searchValue}
+            value={inputValue}
           />
         </ui.div>
       </PopoverTrigger>

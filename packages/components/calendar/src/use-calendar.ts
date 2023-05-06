@@ -999,10 +999,10 @@ export const useMonthPicker = () => {
     (ev: MouseEvent<Element>, month: number) => {
       if (isDisabled(ev.target as HTMLElement)) return
 
-      setMonth((prev) => new Date(prev.getFullYear(), month, 1))
+      setMonth(new Date(year, month, 1))
       setType('date')
     },
-    [setMonth, setType],
+    [year, setMonth, setType],
   )
 
   useUpdateEffect(() => {

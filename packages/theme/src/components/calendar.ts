@@ -79,7 +79,7 @@ export const Calendar: ComponentMultiStyle = {
 
       return {
         button: {
-          _selected: { bg, color: [`white`, `whiteAlpha.800`] },
+          _selected: { bg, color: [`white`, `whiteAlpha.800`], _hover: { bg } },
         },
         day: {
           _today: { border: '1px solid', borderColor },
@@ -87,6 +87,7 @@ export const Calendar: ComponentMultiStyle = {
             bg,
             color: [`white`, `whiteAlpha.800`],
             borderColor: ['transparent', 'transparent'],
+            _hover: { bg },
           },
         },
       }

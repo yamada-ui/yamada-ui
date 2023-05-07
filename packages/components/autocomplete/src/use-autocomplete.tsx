@@ -43,7 +43,6 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -285,7 +284,10 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   const { id } = rest
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const computedProps = splitObject(rest, layoutStylesProperties)
+  const [containerProps, inputProps] = splitObject(
+    omitObject(rest as Dict, ['id', 'value', 'onChange', 'month', 'onChangeMonth']),
+    layoutStylesProperties,
+  )
 
   const descendants = useAutocompleteDescendants()
 
@@ -865,7 +867,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
-      ...computedProps[0],
+      ...containerProps,
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
@@ -873,7 +875,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
 
-    [computedProps, formControlProps, onBlur, onClick, onFocus, rest],
+    [containerProps, formControlProps, onBlur, onClick, onFocus, rest],
   )
 
   const getFieldProps: PropGetter = useCallback(
@@ -886,12 +888,6 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
     [isOpen, rest, onKeyDown],
-  )
-
-  const inputProps = useMemo(
-    () =>
-      omitObject(computedProps[1] as Dict, ['id', 'value', 'defaultValue', 'onChange', 'onCreate']),
-    [computedProps],
   )
 
   return {

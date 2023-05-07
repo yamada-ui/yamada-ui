@@ -97,6 +97,7 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
   }
 
 export const useSelect = <T extends MaybeValue = string>({
+  defaultIsOpen,
   placeholder,
   closeOnSelect = true,
   placeholderInOptions = true,
@@ -331,7 +332,7 @@ export const useSelect = <T extends MaybeValue = string>({
     [setDisplayValue, setValue],
   )
 
-  const [isOpen, setIsOpen] = useState<boolean>(rest.defaultIsOpen ?? false)
+  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
 
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return

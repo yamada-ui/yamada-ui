@@ -263,6 +263,7 @@ export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
   UseAutocompleteBaseProps<T>
 
 export const useAutocomplete = <T extends MaybeValue = string>({
+  defaultIsOpen,
   closeOnSelect = true,
   omitSelectedValues = false,
   maxSelectedValues,
@@ -306,7 +307,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
   const [isHit, setIsHit] = useState<boolean>(true)
 
-  const [isOpen, setIsOpen] = useState<boolean>(rest.defaultIsOpen ?? false)
+  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
 
   const isFocused = focusedIndex > -1
   const isCreate = focusedIndex === -2 && createOption

@@ -727,7 +727,7 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
         <Calendar
           dayProps={{
             component: ({ date }) => (
-              <Tooltip label={`No schedule`} gutter={-8}>
+              <Tooltip label={`No schedule`}>
                 <Center as='span' w='full' h='full'>
                   {date.getDate()}
                 </Center>

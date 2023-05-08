@@ -1,13 +1,16 @@
 import {
   CalendarBaseProps,
-  CalendarType,
   UseCalendarProps,
   isAfterMaxDate,
   isBeforeMinDate,
-  isAfterMaxMonth,
-  isBeforeMinMonth,
 } from '@yamada-ui/calendar'
-import { CSSUIObject, HTMLUIProps, layoutStylesProperties } from '@yamada-ui/core'
+import {
+  CSSUIObject,
+  HTMLUIProps,
+  layoutStylesProperties,
+  ThemeProps,
+  useTheme,
+} from '@yamada-ui/core'
 import {
   FormControlOptions,
   formControlProperties,
@@ -17,6 +20,8 @@ import { PopoverProps } from '@yamada-ui/popover'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
 import { useOutsideClick } from '@yamada-ui/use-outside-click'
 import {
+  isActiveElement,
+  useUpdateEffect,
   dataAttr,
   createContext,
   getEventRelatedTarget,
@@ -26,19 +31,16 @@ import {
   pickObject,
   PropGetter,
   splitObject,
-  useUpdateEffect,
   omitObject,
   Dict,
-  DOMAttributes,
-  useUnmountEffect,
 } from '@yamada-ui/utils'
+import dayjs from 'dayjs'
 import {
   ChangeEvent,
   FocusEvent,
   KeyboardEvent,
   MouseEvent,
   useCallback,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -55,19 +57,11 @@ export const [DatePickerProvider, useDatePickerContext] = createContext<DatePick
   name: 'DatePickerContext',
 })
 
-type Selection = { type: CalendarType; start: number; end: number; index: number }
+type Value = Date | null | undefined
 
-type Selections = Selection[]
+type CalendarProps = Omit<UseCalendarProps<Value>, 'prevRef' | 'typeRef' | 'nextRef'>
 
-type CalendarProps = UseCalendarProps<Date | undefined | null>
-
-export type CalendarOrder =
-  | ['year', 'month', 'date']
-  | ['year', 'date', 'month']
-  | ['month', 'year', 'date']
-  | ['month', 'date', 'year'?]
-  | ['date', 'year', 'month']
-  | ['date', 'month', 'year'?]
+type CalendarThemeProps = ThemeProps<'DatePicker'>
 
 type UseDatePickerBaseProps = Omit<
   PopoverProps,
@@ -82,122 +76,28 @@ type UseDatePickerBaseProps = Omit<
 > &
   FormControlOptions &
   CalendarProps & {
+    pattern?: RegExp
+    parseDate?: (value: string) => Value
+    inputFormat?: string
     isClearable?: boolean
     closeOnSelect?: boolean
-    separator?: string
-    order?: CalendarOrder
-    allowFreeInput?: boolean
+    allowInput?: boolean
     calendarProps?: CalendarBaseProps
-    yearPlaceholder?: string
-    monthPlaceholder?: string
-    datePlaceholder?: string
-    onChangeInputYear?: (year: string | null | undefined, error?: string) => void
-    onChangeInputMonth?: (month: string | null | undefined, error?: string) => void
-    onChangeInputDate?: (date: string | null | undefined, error?: string) => void
   }
 
-export type UseDatePickerProps = Omit<HTMLUIProps<'input'>, keyof UseDatePickerBaseProps> &
-  UseDatePickerBaseProps
-
-const yearInputFormat = (value: Date | string, defaultFormat: string): string => {
-  if (typeof value === 'string') {
-    return value.padStart(defaultFormat.length, '0')
-  } else {
-    return value.getFullYear().toString().padStart(defaultFormat.length, '0')
+export type UseDatePickerProps = Omit<
+  HTMLUIProps<'input'>,
+  keyof UseDatePickerBaseProps | 'disabled' | 'required' | 'readOnly' | 'size'
+> &
+  UseDatePickerBaseProps & {
+    calendarVariant?: CalendarThemeProps['variant']
+    calendarSize?: CalendarThemeProps['size']
+    calendarColorStyle?: CalendarThemeProps['colorStyle']
   }
-}
-const monthInputFormat = (value: Date | string, defaultFormat: string): string => {
-  if (typeof value === 'string') {
-    return value.padStart(defaultFormat.length, '0')
-  } else {
-    return (value.getMonth() + 1).toString().padStart(defaultFormat.length, '0')
-  }
-}
-const dateInputFormat = (value: Date | string, defaultFormat: string): string => {
-  if (typeof value === 'string') {
-    return value.padStart(defaultFormat.length, '0')
-  } else {
-    return value.getDate().toString().padStart(defaultFormat.length, '0')
-  }
-}
-
-const isPossibility = (value: number, type: CalendarType | undefined) => {
-  if (type === 'month') {
-    return value === 0 || value === 1 || value <= 12
-  } else if (type === 'date') {
-    return value === 0 || value === 1 || value === 2 || value === 3 || value <= 31
-  } else {
-    return true
-  }
-}
-
-const computedDisplayValue = (
-  order: CalendarOrder,
-  separator: string,
-  yearInputFormat: () => string,
-  monthInputFormat: () => string,
-  dateInputFormat: () => string,
-): [string, Selections] => {
-  let selections: Selections = []
-
-  const displayValue = [...order]
-    .reduce<string[]>((prev, type, index) => {
-      if (type) {
-        let current: string
-
-        if (type === 'year') {
-          current = yearInputFormat()
-        } else if (type === 'month') {
-          current = monthInputFormat()
-        } else {
-          current = dateInputFormat()
-        }
-
-        if (index !== 0) prev = [...prev, separator]
-
-        const start = prev.join('').length
-        const end = start + current.length
-
-        selections = [...selections, { type, start, end, index }]
-
-        prev = [...prev, current]
-      }
-
-      return prev
-    }, [])
-    .join('')
-
-  return [displayValue, selections]
-}
-
-const computedValues = (
-  values: string[],
-  beforeValues: string[],
-  defaultValues: string[],
-  selections: Selection[],
-) =>
-  beforeValues.map((beforeValue, index) => {
-    const { start, end, type } = selections[index]
-    const defaultValue = defaultValues[index]
-    const currentValue = values[index]
-    const computedValue = (beforeValue + currentValue).slice(-1 * (end - start))
-
-    if (!currentValue) return defaultValue
-
-    const isDefaultValue = beforeValue === defaultValue
-    const isNewValue = beforeValue.replace(/^0+/, '').length === defaultValue.length
-    const isError = currentValue !== defaultValue && /[^0-9]/.test(currentValue)
-
-    if (isError) return beforeValue
-
-    if (isDefaultValue || isNewValue || !isPossibility(parseInt(computedValue), type)) {
-      return currentValue
-    } else {
-      return computedValue
-    }
-  })
 
 export const useDatePicker = ({
+  parseDate,
+  defaultIsOpen,
   closeOnBlur = true,
   placement = 'bottom-start',
   duration = 0.2,
@@ -205,7 +105,9 @@ export const useDatePicker = ({
   type,
   defaultType,
   onChangeType,
+  month,
   defaultMonth,
+  onChangeMonth,
   firstDayOfWeek,
   amountOfMonths,
   paginateBy,
@@ -214,6 +116,7 @@ export const useDatePicker = ({
   minDate,
   maxDate,
   locale,
+  inputFormat = 'YYYY/MM/DD',
   yearFormat,
   monthFormat,
   weekdayFormat,
@@ -221,164 +124,82 @@ export const useDatePicker = ({
   weekendDays,
   today,
   excludeDate,
+  calendarVariant,
+  calendarSize,
+  calendarColorStyle,
   holidays,
-  typeRef,
-  prevRef,
-  nextRef,
   withHeader,
   withControls,
   withLabel,
   calendarProps,
   placeholder,
   closeOnSelect = true,
-  order = ['year', 'month', 'date'],
-  separator = '/',
-  allowFreeInput = true,
-  yearPlaceholder = 'YYYY',
-  monthPlaceholder = 'MM',
-  datePlaceholder = 'DD',
-  onChangeInputYear,
-  onChangeInputMonth,
-  onChangeInputDate,
+  allowInput = true,
+  pattern = /[^0-9\-\/]/g,
   ...rest
 }: UseDatePickerProps) => {
+  const { theme } = useTheme()
+
   rest = useFormControlProps(rest)
+
+  locale ??= theme.__config.date?.locale ?? 'en'
 
   const { id } = rest
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const computedProps = splitObject(rest, layoutStylesProperties)
-  const inputProps: DOMAttributes = useMemo(
-    () =>
-      omitObject(computedProps[1] as Dict, ['id', 'value', 'onChange', 'month', 'onChangeMonth']),
-    [computedProps],
+  const [containerProps, inputProps] = splitObject(
+    omitObject(rest as Dict, ['id', 'value', 'onChange']),
+    layoutStylesProperties,
   )
 
-  const [isOpen, setIsOpen] = useState<boolean>(rest.defaultIsOpen ?? false)
+  const stringToDate = useCallback(
+    (value: string): Value => {
+      let date = parseDate ? parseDate(value) : dayjs(value, inputFormat, locale).toDate()
+
+      if (date == null) return date
+
+      if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
+      if (minDate && isBeforeMinDate(date, minDate)) date = minDate
+
+      return date
+    },
+    [inputFormat, locale, maxDate, minDate, parseDate],
+  )
+
+  const dateToString = useCallback(
+    (value: Value): string | undefined => {
+      if (value == null) return undefined
+
+      if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
+      if (minDate && isBeforeMinDate(value, minDate)) value = minDate
+
+      return dayjs(value)
+        .locale(locale ?? 'en')
+        .format(inputFormat)
+    },
+    [inputFormat, locale, maxDate, minDate],
+  )
+
+  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
   const [value, setValue] = useControllableState<Date | undefined | null>({
     value: rest.value,
     defaultValue,
     onChange: rest.onChange,
   })
-  const [month, onChangeMonth] = useControllableState<Date>({
-    value: rest.month,
-    defaultValue: defaultMonth,
-    onChange: rest.onChangeMonth,
-  })
-  const [displayValue, setDisplayValue] = useState<string | undefined>(() => {
-    if (!value) return undefined
-
-    const [displayValue] = computedDisplayValue(
-      order,
-      separator,
-      () => yearInputFormat(value, yearPlaceholder),
-      () => monthInputFormat(value, monthPlaceholder),
-      () => dateInputFormat(value, datePlaceholder),
-    )
-
-    return displayValue
-  })
-  const [defaultDisplayValue, selections] = useMemo(
-    () =>
-      computedDisplayValue(
-        order,
-        separator,
-        () => yearPlaceholder,
-        () => monthPlaceholder,
-        () => datePlaceholder,
-      ),
-    [datePlaceholder, monthPlaceholder, order, separator, yearPlaceholder],
-  )
+  const [inputValue, setInputValue] = useState<string | undefined>(dateToString(value))
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const selectionRef = useRef<Selection | undefined>(undefined)
-  const beforeDisplayValueRef = useRef<string[]>(
-    displayValue?.split(separator) ?? defaultDisplayValue.split(separator),
-  )
-  const timeoutIds = useRef<Set<any>>(new Set([]))
-
-  const minYear = minDate instanceof Date ? minDate.getFullYear() : 1
-  const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : 10000
-
-  const findSelection = useCallback(
-    ({ position, type: targetType }: { position?: number; type?: CalendarType }) => {
-      if (position) {
-        return selections.find(({ start, end }) => start <= position && position <= end)
-      } else if (targetType) {
-        return selections.find(({ type }) => type === targetType)
-      }
-    },
-    [selections],
-  )
-
-  const onSelection = useCallback(({ type, start, end, index }: Selection) => {
-    selectionRef.current = { type, start, end, index }
-
-    if (!inputRef.current) return
-
-    const isStart = start === 0
-
-    if (!isStart) {
-      inputRef.current.setSelectionRange(null, null)
-    } else {
-      const endIndex = inputRef.current.value.length
-
-      inputRef.current.setSelectionRange(endIndex, endIndex)
-    }
-
-    inputRef.current.setSelectionRange(start, end)
-  }, [])
-
-  const onSelectionTarget = useCallback(
-    (position: number) => {
-      const selection = findSelection({ position })
-
-      if (selection) onSelection(selection)
-    },
-    [findSelection, onSelection],
-  )
-
-  const onSelectionStart = useCallback(() => onSelection(selections[0]), [selections, onSelection])
-
-  const onSelectionEnd = useCallback(
-    () => onSelection(selections[selections.length - 1]),
-    [selections, onSelection],
-  )
-
-  const onSelectionNext = useCallback(() => {
-    if (!inputRef.current) return
-
-    const { index = 0 } = selectionRef.current ?? {}
-
-    if (index === selections.length - 1) return
-
-    const selection = selections[index + 1]
-
-    onSelection(selection)
-  }, [selections, onSelection])
-
-  const onSelectionPrev = useCallback(() => {
-    if (!inputRef.current) return
-
-    const { index = 0 } = selectionRef.current ?? {}
-
-    if (index === 0) return
-
-    const selection = selections[index - 1]
-
-    onSelection(selection)
-  }, [selections, onSelection])
 
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return
 
     setIsOpen(true)
 
-    if (allowFreeInput && inputRef.current) inputRef.current.focus()
+    if (allowInput && inputRef.current) inputRef.current.focus()
 
     rest.onOpen?.()
-  }, [allowFreeInput, formControlProps, rest])
+  }, [allowInput, formControlProps, rest])
 
   const onClose = useCallback(() => {
     setIsOpen(false)
@@ -393,65 +214,48 @@ export const useDatePicker = ({
       ev.stopPropagation()
 
       setValue(null)
+      setInputValue(undefined)
 
-      if (allowFreeInput && inputRef.current) {
-        setDisplayValue(defaultDisplayValue)
-
-        inputRef.current.value = defaultDisplayValue
-        inputRef.current.focus()
-
-        onSelectionStart()
-      } else {
-        setDisplayValue(undefined)
-      }
+      if (allowInput && inputRef.current) inputRef.current.focus()
     },
-    [allowFreeInput, defaultDisplayValue, onSelectionStart, setValue],
+    [allowInput, setValue],
   )
 
   const onClick = useCallback(() => {
     if (isOpen) {
-      if (allowFreeInput && inputRef.current) inputRef.current.focus()
+      if (allowInput && inputRef.current) inputRef.current.focus()
     } else {
       onOpen()
     }
-  }, [allowFreeInput, isOpen, onOpen])
+  }, [allowInput, isOpen, onOpen])
 
   const onFocus = useCallback(() => {
     if (!isOpen) onOpen()
   }, [isOpen, onOpen])
 
   const onBlur = useCallback(
-    (ev: FocusEvent<HTMLInputElement>) => {
+    (ev: FocusEvent<HTMLDivElement>) => {
       const relatedTarget = getEventRelatedTarget(ev)
 
       if (isContains(containerRef.current, relatedTarget)) return
 
       if (!closeOnBlur) return
 
-      if (isOpen) {
-        if (!value) {
-          beforeDisplayValueRef.current = defaultDisplayValue.split(separator)
+      const inputValue = dateToString(value)
 
-          setDisplayValue(undefined)
-        }
+      setInputValue(inputValue)
 
-        onClose()
-      }
+      if (isOpen) onClose()
     },
-    [closeOnBlur, defaultDisplayValue, isOpen, onClose, separator, value],
+    [closeOnBlur, dateToString, isOpen, onClose, value],
   )
 
   const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLInputElement>) => {
+    (ev: KeyboardEvent<HTMLDivElement>) => {
       if (formControlProps.disabled || formControlProps.readOnly) return
 
       const actions: Record<string, Function | undefined> = {
-        ArrowDown: () => {},
-        ArrowUp: () => {},
-        ArrowLeft: onSelectionPrev,
-        ArrowRight: onSelectionNext,
-        Home: () => {},
-        End: () => {},
+        Enter: onClose,
       }
 
       const action = actions[ev.key]
@@ -463,17 +267,28 @@ export const useDatePicker = ({
 
       action(ev)
     },
-    [formControlProps, onSelectionNext, onSelectionPrev],
+    [formControlProps, onClose],
   )
 
   const onChange = useCallback(
-    (newValue: Date | undefined | null) => {
-      setValue(newValue)
+    (value: Date | undefined | null) => {
+      const inputValue = dateToString(value)
 
-      if (closeOnSelect && newValue) onClose()
+      setValue(value)
+      setInputValue(inputValue)
+
+      if (closeOnSelect && value) onClose()
     },
-    [closeOnSelect, onClose, setValue],
+    [closeOnSelect, dateToString, onClose, setValue],
   )
+
+  useUpdateEffect(() => {
+    if (inputRef.current && isActiveElement(inputRef.current)) return
+
+    const inputValue = dateToString(value)
+
+    setInputValue(inputValue)
+  }, [value])
 
   useOutsideClick({
     ref: containerRef,
@@ -481,56 +296,17 @@ export const useDatePicker = ({
     enabled: closeOnBlur,
   })
 
-  useUpdateEffect(() => {
-    if (value) {
-      const [displayValue] = computedDisplayValue(
-        order,
-        separator,
-        () => yearInputFormat(value, yearPlaceholder),
-        () => monthInputFormat(value, monthPlaceholder),
-        () => dateInputFormat(value, datePlaceholder),
-      )
-
-      setDisplayValue(displayValue)
-
-      beforeDisplayValueRef.current = displayValue.split(separator)
-
-      if (isOpen) {
-        if (inputRef.current) inputRef.current.value = displayValue
-
-        onSelectionEnd()
-      }
-    } else {
-      beforeDisplayValueRef.current = defaultDisplayValue.split(separator)
-
-      if (isOpen) {
-        setDisplayValue(defaultDisplayValue)
-
-        if (inputRef.current) inputRef.current.value = defaultDisplayValue
-
-        onSelectionStart()
-      } else {
-        setDisplayValue(undefined)
-      }
-    }
-  }, [value])
-
-  useUnmountEffect(() => {
-    timeoutIds.current.forEach((id) => clearTimeout(id))
-    timeoutIds.current.clear()
-  })
-
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
-      ...computedProps[0],
+      ...containerProps,
       ...props,
       ...formControlProps,
-      onClick: handlerAll(props.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, onFocus),
-      onBlur: handlerAll(props.onBlur, onBlur),
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
+      onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [computedProps, formControlProps, onBlur, onClick, onFocus],
+    [containerProps, formControlProps, onBlur, onClick, onFocus, rest],
   )
 
   const getPopoverProps = useCallback(
@@ -553,20 +329,17 @@ export const useDatePicker = ({
       ref,
       tabIndex: -1,
       ...props,
+      ...formControlProps,
       'data-active': dataAttr(isOpen),
       'aria-expanded': dataAttr(isOpen),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [isOpen, onKeyDown],
+    [formControlProps, isOpen, rest, onKeyDown],
   )
 
   const getCalendarProps = useCallback(
     (props?: CalendarProps): CalendarProps => ({
       ...props,
-      ...calendarProps,
-      value,
-      defaultValue,
-      onChange,
       type,
       defaultType,
       onChangeType,
@@ -578,27 +351,34 @@ export const useDatePicker = ({
       paginateBy,
       withWeekdays,
       disableOutsideDays,
-      minDate,
-      maxDate,
-      locale,
       yearFormat,
       monthFormat,
       weekdayFormat,
       dateFormat,
       weekendDays,
       today,
-      excludeDate,
       holidays,
-      typeRef,
-      prevRef,
-      nextRef,
       withHeader,
       withControls,
       withLabel,
+      variant: calendarVariant,
+      size: calendarSize,
+      colorStyle: calendarColorStyle,
+      ...calendarProps,
+      value,
+      defaultValue,
+      onChange,
+      minDate,
+      maxDate,
+      excludeDate,
+      locale,
     }),
     [
       amountOfMonths,
+      calendarColorStyle,
       calendarProps,
+      calendarSize,
+      calendarVariant,
       dateFormat,
       defaultMonth,
       defaultType,
@@ -612,15 +392,12 @@ export const useDatePicker = ({
       minDate,
       month,
       monthFormat,
-      nextRef,
       onChange,
       onChangeMonth,
       onChangeType,
       paginateBy,
-      prevRef,
       today,
       type,
-      typeRef,
       value,
       weekdayFormat,
       weekendDays,
@@ -634,29 +411,17 @@ export const useDatePicker = ({
 
   return {
     inputRef,
-    beforeDisplayValueRef,
-    selectionRef,
     id,
     placeholder,
-    yearPlaceholder,
-    monthPlaceholder,
-    datePlaceholder,
-    allowFreeInput,
+    allowInput,
     closeOnSelect,
-    separator,
     value,
+    pattern,
     setValue,
-    month,
-    defaultMonth,
-    onChangeMonth,
-    displayValue,
-    setDisplayValue,
-    defaultDisplayValue,
-    selections,
-    minYear,
-    maxYear,
-    minDate,
-    maxDate,
+    inputValue,
+    setInputValue,
+    stringToDate,
+    dateToString,
     excludeDate,
     formControlProps,
     inputProps,
@@ -664,16 +429,6 @@ export const useDatePicker = ({
     onOpen,
     onClose,
     onClear,
-    findSelection,
-    onSelection,
-    onSelectionTarget,
-    onSelectionStart,
-    onSelectionEnd,
-    onSelectionPrev,
-    onSelectionNext,
-    onChangeInputYear,
-    onChangeInputMonth,
-    onChangeInputDate,
     getContainerProps,
     getPopoverProps,
     getFieldProps,
@@ -686,266 +441,34 @@ export type UseDatePickerReturn = ReturnType<typeof useDatePicker>
 export const useDatePickerInput = () => {
   const {
     inputRef,
-    beforeDisplayValueRef,
-    selectionRef,
     formControlProps,
     inputProps,
     id,
     placeholder,
-    yearPlaceholder,
-    monthPlaceholder,
-    datePlaceholder,
-    value,
+    pattern,
     setValue,
-    excludeDate,
-    allowFreeInput,
-    separator,
-    minYear,
-    maxYear,
-    minDate,
-    maxDate,
-    onChangeMonth,
-    displayValue,
-    setDisplayValue,
-    defaultDisplayValue,
-    selections,
-    findSelection,
-    onSelection,
-    onSelectionTarget,
-    onSelectionStart,
-    onSelectionEnd,
-    onSelectionNext,
-    onChangeInputYear,
-    onChangeInputMonth,
-    onChangeInputDate,
+    stringToDate,
+    inputValue,
+    setInputValue,
   } = useDatePickerContext()
-
-  const defaultValues = defaultDisplayValue.split(separator)
-  const beforeValues = beforeDisplayValueRef.current
-
-  const onClick = useCallback(
-    (ev: MouseEvent<HTMLInputElement>) => {
-      onSelectionTarget((ev.target as HTMLInputElement).selectionStart ?? 0)
-    },
-    [onSelectionTarget],
-  )
-
-  const onFocus = useCallback(() => {
-    if (!allowFreeInput || !inputRef.current) return
-
-    if (!value) {
-      if (!inputRef.current.value) {
-        setDisplayValue(defaultDisplayValue)
-
-        inputRef.current.value = defaultDisplayValue
-      }
-
-      onSelectionStart()
-    } else {
-      onSelectionEnd()
-    }
-  }, [
-    allowFreeInput,
-    inputRef,
-    value,
-    onSelectionStart,
-    setDisplayValue,
-    defaultDisplayValue,
-    onSelectionEnd,
-  ])
-
-  const onShouldSelection = useCallback(
-    (index: number) => (isNext: boolean) => {
-      const selection = selections[index]
-
-      if (isNext) {
-        onSelectionNext()
-      } else {
-        onSelection(selection)
-      }
-    },
-    [onSelection, onSelectionNext, selections],
-  )
-
-  const onComputedSelection = useCallback(
-    (value: number, type: CalendarType | undefined, index: number) => {
-      const isEnd = selections.length - 1 === index
-      const count = value.toString().length
-
-      if (isEnd) {
-        onShouldSelection(index)(false)
-      }
-
-      if (type === 'year') {
-        const isCompleted = count === yearPlaceholder.length
-
-        onShouldSelection(index)(isCompleted)
-      } else if (type === 'month') {
-        const isCompleted = count === monthPlaceholder.length
-
-        onShouldSelection(index)(isCompleted || !isPossibility(value, type))
-      } else if (type === 'date') {
-        const isCompleted = count === datePlaceholder.length
-
-        onShouldSelection(index)(isCompleted || !isPossibility(value, type))
-      }
-    },
-    [selections, onShouldSelection, yearPlaceholder, monthPlaceholder, datePlaceholder],
-  )
-
-  const runOnChange = useCallback(
-    (values: string[], type: CalendarType | undefined, index: number) => {
-      const isDefaultValue = values[index] === defaultValues[index]
-
-      if (type === 'year') {
-        if (!isDefaultValue) {
-          values[index] = yearInputFormat(values[index], yearPlaceholder)
-
-          const year = parseInt(values[index])
-
-          let error: string | undefined
-          let month = 0
-
-          if (year < minYear) error = 'min-date'
-          if (year > maxYear) error = 'max-date'
-
-          const monthIndex = findSelection({ type: 'month' })?.index
-
-          const isSetMonth =
-            typeof monthIndex === 'number' && values[monthIndex] !== defaultValues[monthIndex]
-
-          if (isSetMonth) month = parseInt(values[monthIndex]) - 1
-
-          if (!error) onChangeMonth(new Date(year, month))
-
-          onChangeInputYear?.(values[index], error)
-        } else {
-          onChangeInputYear?.(undefined)
-        }
-      } else if (type === 'month') {
-        if (!isDefaultValue) {
-          values[index] = monthInputFormat(values[index], monthPlaceholder)
-
-          let error: string | undefined
-          let year: number | undefined
-
-          const yearIndex = findSelection({ type: 'year' })?.index
-
-          const isNotIncludeYear = typeof yearIndex !== 'number'
-          const isSetYear =
-            typeof yearIndex === 'number' && values[yearIndex] !== defaultValues[yearIndex]
-
-          if (isNotIncludeYear) year = new Date().getFullYear()
-          if (isSetYear) year = parseInt(values[yearIndex])
-
-          if (typeof year === 'number' && parseInt(values[index]) !== 0) {
-            const month = new Date(year, parseInt(values[index]) - 1)
-
-            if (isBeforeMinMonth(month, minDate)) error = 'min-date'
-            if (isAfterMaxMonth(month, maxDate)) error = 'max-date'
-
-            if (!error) onChangeMonth(month)
-          }
-
-          onChangeInputMonth?.(values[index], error)
-        } else {
-          onChangeInputMonth?.(undefined)
-        }
-      } else {
-        if (!isDefaultValue) {
-          values[index] = dateInputFormat(values[index], datePlaceholder)
-
-          let error: string | undefined
-          let year: number | undefined
-          let month: number | undefined
-
-          const yearIndex = findSelection({ type: 'year' })?.index
-          const monthIndex = findSelection({ type: 'month' })?.index
-
-          const isNotIncludeYear = typeof yearIndex !== 'number'
-          const isSetYear =
-            typeof yearIndex === 'number' && values[yearIndex] !== defaultValues[yearIndex]
-          const isSetMonth =
-            typeof monthIndex === 'number' && values[monthIndex] !== defaultValues[monthIndex]
-
-          if (isNotIncludeYear) year = new Date().getFullYear()
-          if (isSetYear) year = parseInt(values[yearIndex])
-          if (isSetMonth) month = parseInt(values[monthIndex]) - 1
-
-          if (
-            typeof year === 'number' &&
-            typeof month === 'number' &&
-            parseInt(values[index]) !== 0
-          ) {
-            const date = new Date(year, month, parseInt(values[index]))
-
-            if (isBeforeMinDate(date, minDate)) error = 'min-date'
-            if (isAfterMaxDate(date, maxDate)) error = 'max-date'
-            if (!!excludeDate?.(date)) error = 'exclude-date'
-
-            if (!error) setValue(date)
-          }
-
-          onChangeInputDate?.(values[index], error)
-        } else {
-          onChangeInputDate?.(undefined)
-        }
-      }
-
-      return values
-    },
-    [
-      datePlaceholder,
-      defaultValues,
-      excludeDate,
-      findSelection,
-      maxDate,
-      maxYear,
-      minDate,
-      minYear,
-      monthPlaceholder,
-      onChangeInputDate,
-      onChangeInputMonth,
-      onChangeInputYear,
-      onChangeMonth,
-
-      setValue,
-      yearPlaceholder,
-    ],
-  )
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      const { type, index = 0 } = selectionRef.current ?? {}
+      let inputValue = ev.target.value
 
-      let values = ev.target.value.split(separator)
+      inputValue = inputValue.replace(pattern, '')
 
-      values = computedValues(values, beforeValues, defaultValues, selections)
+      const value = stringToDate(inputValue)
 
-      values = runOnChange(values, type, index)
+      setInputValue(inputValue)
 
-      beforeDisplayValueRef.current = values
-
-      const displayValue = values.join(separator)
-
-      if (inputRef.current) inputRef.current.value = displayValue
-
-      onComputedSelection(parseInt(values[index]), type, index)
-
-      setDisplayValue(displayValue)
+      if (dayjs(value).isValid()) {
+        setValue(value)
+      } else {
+        setValue(null)
+      }
     },
-    [
-      beforeDisplayValueRef,
-      beforeValues,
-      defaultValues,
-      inputRef,
-      onComputedSelection,
-      runOnChange,
-      selectionRef,
-      selections,
-      separator,
-      setDisplayValue,
-    ],
+    [pattern, stringToDate, setInputValue, setValue],
   )
 
   const getInputProps: PropGetter = useCallback(
@@ -956,24 +479,12 @@ export const useDatePickerInput = () => {
       ...inputProps,
       ...props,
       id,
-      value: displayValue ?? '',
+      value: inputValue ?? '',
       cursor: formControlProps.readOnly ? 'default' : 'text',
       pointerEvents: formControlProps.disabled ? 'none' : 'auto',
       onChange: handlerAll(props.onChange, onChange),
-      onFocus: handlerAll(props.onFocus, onFocus),
-      onClick: handlerAll(props.onClick, onClick),
     }),
-    [
-      inputRef,
-      placeholder,
-      formControlProps,
-      inputProps,
-      id,
-      displayValue,
-      onChange,
-      onFocus,
-      onClick,
-    ],
+    [inputRef, placeholder, formControlProps, inputProps, id, inputValue, onChange],
   )
 
   return { getInputProps }

@@ -257,7 +257,7 @@ type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
 
 export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<'input'>,
-  keyof UseAutocompleteBaseProps | 'list'
+  keyof UseAutocompleteBaseProps | 'list' | 'disabled' | 'required' | 'readOnly' | 'size'
 > &
   UseAutocompleteBaseProps<T>
 
@@ -886,12 +886,13 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       ref,
       tabIndex: -1,
       ...props,
+      ...formControlProps,
       placeholder,
       'data-active': dataAttr(isOpen),
       'aria-expanded': dataAttr(isOpen),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [placeholder, isOpen, rest, onKeyDown],
+    [formControlProps, placeholder, isOpen, rest, onKeyDown],
   )
 
   return {

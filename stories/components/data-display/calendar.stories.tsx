@@ -707,6 +707,7 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
 
         <Calendar
           dayProps={{
+            sx: { _outside: { pointerEvents: 'none' } },
             component: ({ isOutside, date }) =>
               !isOutside ? <Text as='span'>{date.getDate()}</Text> : null,
           }}

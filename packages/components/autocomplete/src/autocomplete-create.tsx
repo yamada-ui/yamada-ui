@@ -6,7 +6,7 @@ import { useAutocompleteContext, useAutocompleteCreate } from './use-autocomplet
 
 type AutocompleteCreateOptions = {
   icon?: ReactElement
-  children?: string | ((searchValue: string) => string)
+  children?: string | ((inputValue: string) => string)
 }
 
 export type AutocompleteCreateProps = Omit<HTMLUIProps<'li'>, 'children'> &
@@ -14,10 +14,10 @@ export type AutocompleteCreateProps = Omit<HTMLUIProps<'li'>, 'children'> &
 
 export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, 'li'>(
   ({ className, icon, children, ...rest }, ref) => {
-    const { searchValue, styles } = useAutocompleteContext()
+    const { inputValue, styles } = useAutocompleteContext()
     const { getCreateProps } = useAutocompleteCreate()
 
-    children ??= searchValue
+    children ??= inputValue
 
     const css: CSSUIObject = {
       textDecoration: 'none',
@@ -42,10 +42,10 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, 'li'>(
         {icon !== null ? <AutocompleteItemIcon>{icon || <PlusIcon />}</AutocompleteItemIcon> : null}
         {icon ? (
           <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
-            {runIfFunc(children, searchValue)}
+            {runIfFunc(children, inputValue)}
           </ui.span>
         ) : (
-          runIfFunc(children, searchValue)
+          runIfFunc(children, inputValue)
         )}
       </ui.li>
     )

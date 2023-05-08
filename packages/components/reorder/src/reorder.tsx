@@ -102,6 +102,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>((props, ref) =
 
   return (
     <ReorderProvider value={{ orientation, styles }}>
+      {/* @ts-ignore */}
       <ui.ul
         ref={ref}
         as={MotionReorder.Group}

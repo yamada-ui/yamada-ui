@@ -455,18 +455,6 @@ export const withParseDate: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const disabledCloseOnSelect: ComponentStory<typeof DatePicker> = () => {
-  return <DatePicker placeholder='YYYY/MM/DD' closeOnSelect={false} />
-}
-
-export const disabledCloseOnBlur: ComponentStory<typeof DatePicker> = () => {
-  return <DatePicker placeholder='YYYY/MM/DD' closeOnBlur={false} />
-}
-
-export const disabledIsClearable: ComponentStory<typeof DatePicker> = () => {
-  return <DatePicker placeholder='YYYY/MM/DD' isClearable={false} />
-}
-
 export const withPlacement: ComponentStory<typeof DatePicker> = () => {
   return <DatePicker placeholder='YYYY/MM/DD' placement='bottom-end' />
 }
@@ -654,6 +642,22 @@ export const withPaginateBy: ComponentStory<typeof DatePicker> = () => {
   return (
     <DatePicker placeholder='YYYY/MM/DD' amountOfMonths={3} disableOutsideDays paginateBy={1} />
   )
+}
+
+export const disabledCloseOnSelect: ComponentStory<typeof DatePicker> = () => {
+  return <DatePicker placeholder='YYYY/MM/DD' closeOnSelect={false} />
+}
+
+export const disabledCloseOnBlur: ComponentStory<typeof DatePicker> = () => {
+  return <DatePicker placeholder='YYYY/MM/DD' closeOnBlur={false} />
+}
+
+export const disabledIsClearable: ComponentStory<typeof DatePicker> = () => {
+  return <DatePicker placeholder='YYYY/MM/DD' isClearable={false} />
+}
+
+export const disabledAllowInput: ComponentStory<typeof DatePicker> = () => {
+  return <DatePicker placeholder='YYYY/MM/DD' allowInput={false} />
 }
 
 export const disabledOutsideDays: ComponentStory<typeof DatePicker> = () => {

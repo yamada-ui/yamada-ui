@@ -37,6 +37,7 @@ import {
 import dayjs from 'dayjs'
 import {
   ChangeEvent,
+  CSSProperties,
   FocusEvent,
   KeyboardEvent,
   MouseEvent,
@@ -325,16 +326,24 @@ export const useDatePicker = ({
   )
 
   const getFieldProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      ref,
-      tabIndex: -1,
-      ...props,
-      ...formControlProps,
-      'data-active': dataAttr(isOpen),
-      'aria-expanded': dataAttr(isOpen),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-    }),
-    [formControlProps, isOpen, rest, onKeyDown],
+    (props = {}, ref = null) => {
+      const style: CSSProperties = {
+        ...props.style,
+        ...(!allowInput ? { cursor: 'pointer' } : {}),
+      }
+
+      return {
+        ref,
+        tabIndex: !allowInput ? 0 : -1,
+        ...props,
+        ...formControlProps,
+        style,
+        'data-active': dataAttr(isOpen),
+        'aria-expanded': dataAttr(isOpen),
+        onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+      }
+    },
+    [allowInput, formControlProps, isOpen, rest, onKeyDown],
   )
 
   const getCalendarProps = useCallback(
@@ -444,6 +453,7 @@ export const useDatePickerInput = () => {
     formControlProps,
     inputProps,
     id,
+    allowInput,
     placeholder,
     pattern,
     setValue,
@@ -472,19 +482,29 @@ export const useDatePickerInput = () => {
   )
 
   const getInputProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      ref: mergeRefs(ref, inputRef),
-      placeholder,
-      ...formControlProps,
-      ...inputProps,
-      ...props,
-      id,
-      value: inputValue ?? '',
-      cursor: formControlProps.readOnly ? 'default' : 'text',
-      pointerEvents: formControlProps.disabled ? 'none' : 'auto',
-      onChange: handlerAll(props.onChange, onChange),
-    }),
-    [inputRef, placeholder, formControlProps, inputProps, id, inputValue, onChange],
+    (props = {}, ref = null) => {
+      const style: CSSProperties = {
+        ...props.style,
+        ...(inputProps as { style?: CSSProperties }).style,
+        ...(!allowInput ? { pointerEvents: 'none' } : {}),
+      }
+
+      return {
+        ref: mergeRefs(ref, inputRef),
+        placeholder,
+        ...formControlProps,
+        ...inputProps,
+        ...props,
+        style,
+        id,
+        tabIndex: !allowInput ? -1 : 0,
+        value: inputValue ?? '',
+        cursor: formControlProps.readOnly ? 'default' : 'text',
+        pointerEvents: formControlProps.disabled ? 'none' : 'auto',
+        onChange: handlerAll(props.onChange, onChange),
+      }
+    },
+    [inputProps, allowInput, inputRef, placeholder, formControlProps, id, inputValue, onChange],
   )
 
   return { getInputProps }

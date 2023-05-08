@@ -276,6 +276,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   placement = 'bottom-start',
   duration = 0.2,
   option,
+  placeholder,
   children,
   ...rest
 }: UseAutocompleteProps<T>) => {
@@ -372,6 +373,8 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
   const onClose = useCallback(() => {
     setIsOpen(false)
+
+    if (inputRef.current) inputRef.current.blur()
 
     rest.onClose?.()
   }, [rest])
@@ -883,11 +886,12 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       ref,
       tabIndex: -1,
       ...props,
+      placeholder,
       'data-active': dataAttr(isOpen),
       'aria-expanded': dataAttr(isOpen),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [isOpen, rest, onKeyDown],
+    [placeholder, isOpen, rest, onKeyDown],
   )
 
   return {
@@ -1187,6 +1191,8 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
+      ev.stopPropagation()
+
       if (isDisabled) {
         if (inputRef.current) inputRef.current.focus()
 

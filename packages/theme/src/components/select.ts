@@ -31,9 +31,6 @@ export const Select: ComponentMultiStyle = {
           color: 'whiteAlpha.400',
         },
       },
-      '&:invalid': {
-        color: ['gray.500', 'whiteAlpha.400'],
-      },
       _readOnly: {
         pointerEvents: 'none',
         _placeholder: {
@@ -251,7 +248,8 @@ export const Select: ComponentMultiStyle = {
         rounded: 'sm',
       },
       icon: {
-        pt: '0.5',
+        pt: '2',
+        fontSize: 'lg',
         insetEnd: '1',
       },
     },

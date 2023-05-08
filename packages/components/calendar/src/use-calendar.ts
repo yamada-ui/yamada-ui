@@ -548,7 +548,7 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
     dayRefs,
   } = useCalendarContext()
 
-  const onType = useCallback(() => {
+  const onChangeType = useCallback(() => {
     switch (type) {
       case 'month':
         setType('year')
@@ -605,14 +605,14 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
     }
   }, [dayRefs, paginateBy, setInternalYear, setMonth, setYear, type])
 
-  assignRef(typeRef, onType)
+  assignRef(typeRef, onChangeType)
   assignRef(prevRef, onPrev)
   assignRef(nextRef, onNext)
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
       const actions: Record<string, Function | undefined> = {
-        ArrowDown: onType,
+        ArrowDown: onChangeType,
         ArrowLeft: () => {
           const isDisabled = (() => {
             switch (type) {
@@ -664,7 +664,7 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
       nextMonth,
       onNext,
       onPrev,
-      onType,
+      onChangeType,
       prevMonth,
       rangeYears,
       type,
@@ -742,11 +742,11 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
       return {
         pointerEvents: type !== 'year' ? 'auto' : 'none',
         ...props,
-        onClick: handlerAll(onType, props.onClick),
+        onClick: handlerAll(props.onClick, onChangeType),
         tabIndex: !!index ? -1 : 0,
       }
     },
-    [index, onType, type],
+    [index, onChangeType, type],
   )
 
   return { getContainerProps, getControlProps, getLabelProps }
@@ -895,7 +895,7 @@ export const useYearPicker = () => {
         'data-value': value ?? '',
         'data-disabled': dataAttr(isDisabled),
         'aria-disabled': ariaAttr(isDisabled),
-        onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
+        onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
     [maxYear, minYear, onClick, rangeYears, year, yearRefs],
@@ -1039,7 +1039,7 @@ export const useMonthPicker = () => {
         'data-disabled': dataAttr(isDisabled),
         'data-value': value ?? '',
         'aria-disabled': ariaAttr(isDisabled),
-        onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
+        onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
     [maxDate, minDate, month, monthRefs, onClick, year],
@@ -1202,6 +1202,9 @@ export const useDatePicker = () => {
 
   const onClick = useCallback(
     (ev: MouseEvent<Element>, newValue: Date) => {
+      ev.preventDefault()
+      ev.stopPropagation()
+
       const el = getEventRelatedTarget(ev)
 
       if (!el || isDisabled(el)) return

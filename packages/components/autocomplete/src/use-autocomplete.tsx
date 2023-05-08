@@ -734,7 +734,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   }, [isOpen, onFocusFirstOrSelected, onOpen])
 
   const onBlur = useCallback(
-    (ev: FocusEvent<HTMLInputElement>) => {
+    (ev: FocusEvent<HTMLDivElement>) => {
       const relatedTarget = getEventRelatedTarget(ev)
 
       if (isContains(containerRef.current, relatedTarget)) return
@@ -749,7 +749,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   )
 
   const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLInputElement>) => {
+    (ev: KeyboardEvent<HTMLDivElement>) => {
       if (formControlProps.disabled || formControlProps.readOnly) return
       if (isComposition.current) return
 

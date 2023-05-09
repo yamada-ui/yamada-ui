@@ -62,7 +62,7 @@ type Value = Date | null | undefined
 
 type CalendarProps = Omit<UseCalendarProps<Value>, 'prevRef' | 'typeRef' | 'nextRef'>
 
-type CalendarThemeProps = ThemeProps<'DatePicker'>
+type CalendarThemeProps = ThemeProps<'Calendar'>
 
 type UseDatePickerBaseProps = Omit<
   PopoverProps,

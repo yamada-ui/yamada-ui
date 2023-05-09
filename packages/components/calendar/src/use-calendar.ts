@@ -777,8 +777,11 @@ export const useYearPicker = () => {
     minYear,
     maxYear,
     yearRefs,
+    value: selectedValue,
+    selectMonthWith,
   } = useCalendarContext()
 
+  const isMulti = isArray(selectedValue)
   const containerRef = useRef<HTMLDivElement>(null)
   const beforeInternalYear = useRef<number | null>(null)
 
@@ -890,7 +893,12 @@ export const useYearPicker = () => {
   const getButtonProps: RequiredPropGetter<{ value: number; index: number }> = useCallback(
     ({ value, index, ...props } = {}, ref = null) => {
       const isControlled = typeof beforeInternalYear.current === 'number'
-      const isSelected = year === value
+      const isSelected =
+        (selectMonthWith === 'month'
+          ? year
+          : !isMulti
+          ? selectedValue?.getFullYear()
+          : selectedValue[0]?.getFullYear()) === value
       const isDisabled = value < minYear || value > maxYear
 
       yearRefs.current.set(index, createRef<HTMLButtonElement>())
@@ -912,7 +920,7 @@ export const useYearPicker = () => {
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
-    [maxYear, minYear, onClick, rangeYears, year, yearRefs],
+    [isMulti, maxYear, minYear, onClick, rangeYears, selectMonthWith, selectedValue, year, yearRefs],
   )
 
   return { rangeYears, getContainerProps, getButtonProps }

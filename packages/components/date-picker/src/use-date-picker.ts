@@ -30,6 +30,7 @@ import {
   mergeRefs,
   pickObject,
   PropGetter,
+  RequiredPropGetter,
   splitObject,
   omitObject,
   Dict,
@@ -46,12 +47,7 @@ import {
   useState,
 } from 'react'
 
-type DatePickerContext = Omit<
-  UseDatePickerReturn,
-  'getContainerProps' | 'getPopoverProps' | 'getCalendarProps' | 'onClear'
-> & {
-  styles: Record<string, CSSUIObject>
-}
+type DatePickerContext = Record<string, CSSUIObject>
 
 export const [DatePickerProvider, useDatePickerContext] = createContext<DatePickerContext>({
   strict: false,
@@ -271,7 +267,7 @@ export const useDatePicker = ({
     [formControlProps, onClose],
   )
 
-  const onChange = useCallback(
+  const onCalendarChange = useCallback(
     (value: Date | undefined | null) => {
       const inputValue = dateToString(value)
 
@@ -281,6 +277,25 @@ export const useDatePicker = ({
       if (closeOnSelect && value) onClose()
     },
     [closeOnSelect, dateToString, onClose, setValue],
+  )
+
+  const onInputChange = useCallback(
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      let inputValue = ev.target.value
+
+      inputValue = inputValue.replace(pattern, '')
+
+      const value = stringToDate(inputValue)
+
+      setInputValue(inputValue)
+
+      if (dayjs(value).isValid()) {
+        setValue(value)
+      } else {
+        setValue(null)
+      }
+    },
+    [pattern, stringToDate, setInputValue, setValue],
   )
 
   useUpdateEffect(() => {
@@ -333,7 +348,7 @@ export const useDatePicker = ({
       }
 
       return {
-        ref,
+        ref: mergeRefs(ref, inputRef),
         tabIndex: !allowInput ? 0 : -1,
         ...props,
         ...formControlProps,
@@ -344,6 +359,31 @@ export const useDatePicker = ({
       }
     },
     [allowInput, formControlProps, isOpen, rest, onKeyDown],
+  )
+
+  const getInputProps: PropGetter = useCallback(
+    (props = {}) => {
+      const style: CSSProperties = {
+        ...props.style,
+        ...(inputProps as { style?: CSSProperties }).style,
+        ...(!allowInput ? { pointerEvents: 'none' } : {}),
+      }
+
+      return {
+        placeholder,
+        ...formControlProps,
+        ...inputProps,
+        ...props,
+        style,
+        id,
+        tabIndex: !allowInput ? -1 : 0,
+        value: inputValue ?? '',
+        cursor: formControlProps.readOnly ? 'default' : 'text',
+        pointerEvents: formControlProps.disabled ? 'none' : 'auto',
+        onChange: handlerAll(props.onChange, onInputChange),
+      }
+    },
+    [inputProps, allowInput, placeholder, formControlProps, id, inputValue, onInputChange],
   )
 
   const getCalendarProps = useCallback(
@@ -376,7 +416,7 @@ export const useDatePicker = ({
       ...calendarProps,
       value,
       defaultValue,
-      onChange,
+      onChange: onCalendarChange,
       minDate,
       maxDate,
       excludeDate,
@@ -401,7 +441,7 @@ export const useDatePicker = ({
       minDate,
       month,
       monthFormat,
-      onChange,
+      onCalendarChange,
       onChangeMonth,
       onChangeType,
       paginateBy,
@@ -418,96 +458,24 @@ export const useDatePicker = ({
     ],
   )
 
+  const getIconProps: RequiredPropGetter<{ clear: boolean }> = useCallback(
+    ({ clear, ...props } = {}) => ({
+      ...props,
+      ...formControlProps,
+      onClick: handlerAll(props.onClick, clear ? onClear : undefined),
+    }),
+    [formControlProps, onClear],
+  )
+
   return {
-    inputRef,
-    id,
-    placeholder,
-    allowInput,
-    closeOnSelect,
     value,
-    pattern,
-    setValue,
-    inputValue,
-    setInputValue,
-    stringToDate,
-    dateToString,
-    excludeDate,
-    formControlProps,
-    inputProps,
-    isOpen,
-    onOpen,
-    onClose,
-    onClear,
     getContainerProps,
     getPopoverProps,
     getFieldProps,
+    getInputProps,
+    getIconProps,
     getCalendarProps,
   }
 }
 
 export type UseDatePickerReturn = ReturnType<typeof useDatePicker>
-
-export const useDatePickerInput = () => {
-  const {
-    inputRef,
-    formControlProps,
-    inputProps,
-    id,
-    allowInput,
-    placeholder,
-    pattern,
-    setValue,
-    stringToDate,
-    inputValue,
-    setInputValue,
-  } = useDatePickerContext()
-
-  const onChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
-      let inputValue = ev.target.value
-
-      inputValue = inputValue.replace(pattern, '')
-
-      const value = stringToDate(inputValue)
-
-      setInputValue(inputValue)
-
-      if (dayjs(value).isValid()) {
-        setValue(value)
-      } else {
-        setValue(null)
-      }
-    },
-    [pattern, stringToDate, setInputValue, setValue],
-  )
-
-  const getInputProps: PropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        ...props.style,
-        ...(inputProps as { style?: CSSProperties }).style,
-        ...(!allowInput ? { pointerEvents: 'none' } : {}),
-      }
-
-      return {
-        ref: mergeRefs(ref, inputRef),
-        placeholder,
-        ...formControlProps,
-        ...inputProps,
-        ...props,
-        style,
-        id,
-        tabIndex: !allowInput ? -1 : 0,
-        value: inputValue ?? '',
-        cursor: formControlProps.readOnly ? 'default' : 'text',
-        pointerEvents: formControlProps.disabled ? 'none' : 'auto',
-        onChange: handlerAll(props.onChange, onChange),
-      }
-    },
-    [inputProps, allowInput, inputRef, placeholder, formControlProps, id, inputValue, onChange],
-  )
-
-  return { getInputProps }
-}
-
-export type UseDatePickerInputReturn = ReturnType<typeof useDatePickerInput>

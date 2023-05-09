@@ -1102,6 +1102,49 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/month-picker:
+    dependencies:
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../calendar
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/input':
+        specifier: workspace:*
+        version: link:../input
+      '@yamada-ui/popover':
+        specifier: workspace:*
+        version: link:../popover
+      '@yamada-ui/use-clickable':
+        specifier: workspace:*
+        version: link:../../hooks/use-clickable
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/use-outside-click':
+        specifier: workspace:*
+        version: link:../../hooks/use-outside-click
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+      dayjs:
+        specifier: ^1.11.7
+        version: 1.11.7
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/motion:
     dependencies:
       '@yamada-ui/core':
@@ -2128,6 +2171,9 @@ importers:
       '@yamada-ui/modal':
         specifier: workspace:*
         version: link:../components/modal
+      '@yamada-ui/month-picker':
+        specifier: workspace:*
+        version: link:../components/month-picker
       '@yamada-ui/motion':
         specifier: workspace:*
         version: link:../components/motion

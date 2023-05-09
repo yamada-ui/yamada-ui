@@ -9,7 +9,7 @@ export type DatePickerIconProps = HTMLUIProps<'div'>
 
 export const DatePickerIcon = forwardRef<DatePickerIconProps, 'div'>(
   ({ className, children, __css, ...rest }, ref) => {
-    const { styles } = useDatePickerContext()
+    const styles = useDatePickerContext()
 
     const css: CSSUIObject = {
       position: 'absolute',
@@ -67,7 +67,7 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
   ...props
 }) => {
   const ref = useRef<HTMLDivElement>(null)
-  const { styles } = useDatePickerContext()
+  const styles = useDatePickerContext()
 
   const isDisabled = props.disabled
 

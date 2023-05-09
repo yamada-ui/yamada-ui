@@ -9,7 +9,7 @@ import {
   ThemeProps,
 } from '@yamada-ui/core'
 import { Popover, PopoverContent } from '@yamada-ui/popover'
-import { cx, handlerAll } from '@yamada-ui/utils'
+import { cx } from '@yamada-ui/utils'
 import { DatePickerField, DatePickerFieldProps } from './date-picker-field'
 import { DatePickerClearIcon, DatePickerIcon, DatePickerIconProps } from './date-picker-icon'
 import { DatePickerProvider, useDatePicker, UseDatePickerProps } from './use-date-picker'
@@ -49,10 +49,10 @@ export const DatePicker = forwardRef<DatePickerProps, 'input'>((props, ref) => {
     getPopoverProps,
     getContainerProps,
     getCalendarProps,
-    onClear,
+    getFieldProps,
+    getInputProps,
+    getIconProps,
     value,
-    formControlProps,
-    ...rest
   } = useDatePicker(computedProps)
 
   h = h ?? height
@@ -67,23 +67,22 @@ export const DatePicker = forwardRef<DatePickerProps, 'input'>((props, ref) => {
   }
 
   return (
-    <DatePickerProvider value={{ styles, value, formControlProps, ...rest }}>
+    <DatePickerProvider value={styles}>
       <Popover {...getPopoverProps()}>
         <ui.div
           className={cx('ui-date-picker', className)}
           __css={css}
           {...getContainerProps(containerProps)}
         >
-          <DatePickerField ref={ref} h={h} minH={minH} inputProps={inputProps} />
+          <DatePickerField
+            {...getFieldProps({ h, minH }, ref)}
+            inputProps={getInputProps(inputProps)}
+          />
 
           {isClearable && value ? (
-            <DatePickerClearIcon
-              {...clearIconProps}
-              onClick={handlerAll(clearIconProps?.onClick, onClear)}
-              {...formControlProps}
-            />
+            <DatePickerClearIcon {...getIconProps({ clear: true, ...clearIconProps })} />
           ) : (
-            <DatePickerIcon {...iconProps} {...formControlProps} />
+            <DatePickerIcon {...getIconProps({ clear: false, ...iconProps })} />
           )}
 
           <PopoverContent className='ui-date-picker-popover' __css={{ ...styles.popover }}>

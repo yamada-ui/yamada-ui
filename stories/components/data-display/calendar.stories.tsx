@@ -544,6 +544,10 @@ export const withPaginateBy: ComponentStory<typeof Calendar> = () => {
   return <Calendar amountOfMonths={3} disableOutsideDays paginateBy={1} />
 }
 
+export const withNaxSelectedValues: ComponentStory<typeof Calendar> = () => {
+  return <Calendar defaultValue={[]} maxSelectedValues={3} />
+}
+
 export const disabledOutsideDays: ComponentStory<typeof Calendar> = () => {
   return <Calendar disableOutsideDays />
 }

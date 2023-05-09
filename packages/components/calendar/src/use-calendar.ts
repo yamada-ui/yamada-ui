@@ -63,7 +63,7 @@ export type CalendarContext = Pick<
 > &
   Pick<
     UseCalendarProps,
-    'minDate' | 'maxDate' | 'excludeDate' | 'typeRef' | 'prevRef' | 'nextRef'
+    'minDate' | 'maxDate' | 'excludeDate' | 'typeRef' | 'prevRef' | 'nextRef' | 'maxSelectedValues'
   > & {
     value: MaybeValue
     setType: (type: CalendarType, year?: number, month?: number) => void
@@ -357,6 +357,7 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
   withHeader?: boolean
   withControls?: boolean
   withLabel?: boolean
+  maxSelectedValues?: number
   selectMonthWith?: 'month' | 'value'
 }
 
@@ -385,6 +386,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   withHeader = true,
   withControls = true,
   withLabel = true,
+  maxSelectedValues,
   selectMonthWith = 'month',
   ...rest
 }: UseCalendarProps<Y>) => {
@@ -524,6 +526,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     yearRefs,
     monthRefs,
     dayRefs,
+    maxSelectedValues,
     selectMonthWith,
   }
 }
@@ -920,7 +923,17 @@ export const useYearPicker = () => {
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
-    [isMulti, maxYear, minYear, onClick, rangeYears, selectMonthWith, selectedValue, year, yearRefs],
+    [
+      isMulti,
+      maxYear,
+      minYear,
+      onClick,
+      rangeYears,
+      selectMonthWith,
+      selectedValue,
+      year,
+      yearRefs,
+    ],
   )
 
   return { rangeYears, getContainerProps, getButtonProps }
@@ -1106,6 +1119,7 @@ export const useDatePicker = () => {
     paginateBy,
     prevMonth,
     nextMonth,
+    maxSelectedValues,
   } = useCalendarContext()
 
   const isMulti = isArray(selectedValue)
@@ -1294,15 +1308,17 @@ export const useDatePicker = () => {
       const isSelected = !isMulti
         ? isSameDate(selectedValue, value)
         : selectedValue.some((selectedValue) => isSameDate(selectedValue, value))
-      const isDisabled = isDisabledDate({
-        value,
-        minDate,
-        maxDate,
-        isOutside,
-        excludeDate,
-        disableOutsideDays,
-      })
       const isToday = today && isSameDate(new Date(), value)
+      const isDisabled =
+        isDisabledDate({
+          value,
+          minDate,
+          maxDate,
+          isOutside,
+          excludeDate,
+          disableOutsideDays,
+        }) ||
+        (!isSelected && isMulti && maxSelectedValues === selectedValue.length)
 
       const style: CSSProperties = {
         pointerEvents: isDisabled && isOutside && disableOutsideDays ? 'none' : undefined,
@@ -1349,6 +1365,7 @@ export const useDatePicker = () => {
       holidays,
       isMulti,
       maxDate,
+      maxSelectedValues,
       minDate,
       onClick,
       selectedValue,

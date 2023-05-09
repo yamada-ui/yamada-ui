@@ -45,7 +45,6 @@ import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
-  Skeleton,
   Accordion,
   Alert,
   Avatar,
@@ -84,6 +83,7 @@ export default {
   ScrollArea,
   SegmentedControl,
   Select,
+  Skeleton,
   Slider,
   Switch,
   Tabs,

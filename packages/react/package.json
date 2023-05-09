@@ -67,6 +67,7 @@
     "@yamada-ui/scroll-area": "workspace:*",
     "@yamada-ui/segmented-control": "workspace:*",
     "@yamada-ui/select": "workspace:*",
+    "@yamada-ui/skeleton": "workspace:*",
     "@yamada-ui/slider": "workspace:*",
     "@yamada-ui/switch": "workspace:*",
     "@yamada-ui/tabs": "workspace:*",

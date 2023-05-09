@@ -1452,6 +1452,22 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/skeleton:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/slider:
     dependencies:
       '@yamada-ui/core':
@@ -2173,6 +2189,9 @@ importers:
       '@yamada-ui/select':
         specifier: workspace:*
         version: link:../components/select
+      '@yamada-ui/skeleton':
+        specifier: workspace:*
+        version: link:../components/skeleton
       '@yamada-ui/slider':
         specifier: workspace:*
         version: link:../components/slider

@@ -36,6 +36,7 @@ import { Reorder } from './reorder'
 import { ScrollArea } from './scroll-area'
 import { SegmentedControl } from './segmented-control'
 import { Select } from './select'
+import { Skeleton } from './skeleton'
 import { Slider } from './slider'
 import { Switch } from './switch'
 import { Tabs } from './tabs'
@@ -44,6 +45,7 @@ import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
+  Skeleton,
   Accordion,
   Alert,
   Avatar,

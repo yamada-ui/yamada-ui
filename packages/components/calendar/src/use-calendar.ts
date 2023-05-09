@@ -15,6 +15,7 @@ import {
   useUnmountEffect,
   isDisabled,
   getEventRelatedTarget,
+  useCallbackRef,
 } from '@yamada-ui/utils'
 import dayjs from 'dayjs'
 import {
@@ -58,13 +59,14 @@ export type CalendarContext = Pick<
   | 'weekendDays'
   | 'holidays'
   | 'today'
+  | 'selectMonthWith'
 > &
   Pick<
     UseCalendarProps,
     'minDate' | 'maxDate' | 'excludeDate' | 'typeRef' | 'prevRef' | 'nextRef'
   > & {
     value: MaybeValue
-    setType: Dispatch<SetStateAction<CalendarType>>
+    setType: (type: CalendarType, year?: number, month?: number) => void
     setValue: Dispatch<SetStateAction<MaybeValue>>
     setMonth: Dispatch<SetStateAction<Date>>
     setYear: Dispatch<SetStateAction<number>>
@@ -326,7 +328,7 @@ export const isDisabledDate = ({
 export type UseCalendarProps<Y extends MaybeValue = Date> = {
   type?: CalendarType
   defaultType?: CalendarType
-  onChangeType?: (type: CalendarType) => void
+  onChangeType?: (type: CalendarType, year?: number, month?: number) => void
   value?: Y
   defaultValue?: Y
   onChange?: (value: Y) => void
@@ -355,6 +357,7 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
   withHeader?: boolean
   withControls?: boolean
   withLabel?: boolean
+  selectMonthWith?: 'month' | 'value'
 }
 
 export const useCalendar = <Y extends MaybeValue = Date>({
@@ -382,17 +385,22 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   withHeader = true,
   withControls = true,
   withLabel = true,
+  selectMonthWith = 'month',
   ...rest
 }: UseCalendarProps<Y>) => {
   const { theme } = useTheme()
 
   locale ??= theme.__config.date?.locale ?? 'en'
 
-  const [type, setType] = useControllableState({
+  const [type, onChangeType] = useControllableState({
     value: rest.type,
     defaultValue: rest.defaultType ?? 'date',
-    onChange: rest.onChangeType,
   })
+
+  const setType = useCallbackRef((type: CalendarType, year?: number, month?: number) => {
+    onChangeType(type)
+    rest.onChangeType?.(type, year, month)
+  }, [])
 
   const [value, setValue] = useControllableState({
     value: rest.value,
@@ -516,6 +524,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     yearRefs,
     monthRefs,
     dayRefs,
+    selectMonthWith,
   }
 }
 
@@ -538,6 +547,7 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
     minDate,
     maxDate,
     year,
+    month,
     minYear,
     maxYear,
     rangeYears,
@@ -551,19 +561,19 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
   const onChangeType = useCallback(() => {
     switch (type) {
       case 'month':
-        setType('year')
+        setType('year', year, month.getMonth())
 
         break
 
       case 'date':
-        setType('month')
+        setType('month', year, month.getMonth())
 
         break
 
       default:
         break
     }
-  }, [setType, type])
+  }, [month, setType, type, year])
 
   const onPrev = useCallback(() => {
     switch (type) {
@@ -759,6 +769,7 @@ export const useYearPicker = () => {
     internalYear,
     setYear,
     setInternalYear,
+    month,
     setMonth,
     setType,
     year,
@@ -843,13 +854,16 @@ export const useYearPicker = () => {
 
   const onClick = useCallback(
     (ev: MouseEvent<Element>, year: number) => {
+      ev.preventDefault()
+      ev.stopPropagation()
+
       if (isDisabled(ev.target as HTMLElement)) return
 
       setYear(year)
       setMonth((prev) => new Date(prev.setFullYear(year)))
-      setType('month')
+      setType('month', year, month.getMonth())
     },
-    [setMonth, setType, setYear],
+    [month, setMonth, setType, setYear],
   )
 
   useUpdateEffect(() => {
@@ -910,6 +924,7 @@ export const useMonthPicker = () => {
   const {
     year,
     setYear,
+    value: selectedValue,
     month,
     setMonth,
     setType,
@@ -920,8 +935,10 @@ export const useMonthPicker = () => {
     monthRefs,
     minYear,
     maxYear,
+    selectMonthWith,
   } = useCalendarContext()
 
+  const isMulti = isArray(selectedValue)
   const beforeYear = useRef<number | null>(null)
   const rangeMonths = getRangeMonths(locale, monthFormat)
 
@@ -997,10 +1014,13 @@ export const useMonthPicker = () => {
 
   const onClick = useCallback(
     (ev: MouseEvent<Element>, month: number) => {
+      ev.preventDefault()
+      ev.stopPropagation()
+
       if (isDisabled(ev.target as HTMLElement)) return
 
       setMonth(new Date(year, month, 1))
-      setType('date')
+      setType('date', year, month)
     },
     [year, setMonth, setType],
   )
@@ -1025,8 +1045,19 @@ export const useMonthPicker = () => {
   const getButtonProps: RequiredPropGetter<{ value: number }> = useCallback(
     ({ value, ...props } = {}, ref = null) => {
       const isControlled = typeof beforeYear.current === 'number'
-      const isSelectedYear = month.getFullYear() === year
-      const isSelected = isSelectedYear && month.getMonth() === value
+      const isSelectedYear =
+        (selectMonthWith === 'month'
+          ? month.getFullYear()
+          : !isMulti
+          ? selectedValue?.getFullYear()
+          : selectedValue[0]?.getFullYear()) === year
+      const isSelected =
+        isSelectedYear &&
+        (selectMonthWith === 'month'
+          ? month.getMonth()
+          : !isMulti
+          ? selectedValue?.getMonth()
+          : selectedValue[0]?.getMonth()) === value
       const isDisabled = !isMonthInRange({ date: new Date(year, value), minDate, maxDate })
 
       monthRefs.current.set(value, createRef<HTMLButtonElement>())
@@ -1042,7 +1073,7 @@ export const useMonthPicker = () => {
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
-    [maxDate, minDate, month, monthRefs, onClick, year],
+    [isMulti, maxDate, minDate, month, monthRefs, onClick, selectMonthWith, selectedValue, year],
   )
 
   return { rangeMonths, getContainerProps, getButtonProps }

@@ -75,7 +75,7 @@
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-testing-library": "5.10.3",
-    "find-packages": "10.0.4",
+    "find-packages": "9.0.6",
     "husky": "^8.0.3",
     "lint-staged": "13.2.2",
     "ora": "^5.4.1",

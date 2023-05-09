@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-pan-event",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Yamada UI usePanEvent custom hook",
   "keywords": [],
   "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",

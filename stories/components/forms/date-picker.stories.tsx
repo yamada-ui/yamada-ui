@@ -405,7 +405,7 @@ export const withDefaultType: ComponentStory<typeof DatePicker> = () => {
 }
 
 export const withDefaultMonth: ComponentStory<typeof DatePicker> = () => {
-  return <DatePicker defaultMonth={new Date('1993-08-18')} />
+  return <DatePicker placeholder='YYYY/MM/DD' defaultMonth={new Date('1993-08-18')} />
 }
 
 export const withFirstDayOfWeek: ComponentStory<typeof DatePicker> = () => {

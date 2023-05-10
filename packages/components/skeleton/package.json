@@ -21,6 +21,9 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/use-animation": "workspace:*",
+    "@yamada-ui/use-value": "workspace:*",
+    "@yamada-ui/use-previous": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

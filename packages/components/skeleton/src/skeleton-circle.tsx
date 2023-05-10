@@ -5,7 +5,7 @@ import { Skeleton, SkeletonProps } from './'
 export type SkeletonCircleProps = SkeletonProps
 
 export const SkeletonCircle = forwardRef<SkeletonCircleProps, 'div'>(
-  ({ className, boxSize = '2rem', ...rest }, ref) => {
+  ({ className, boxSize = '12', ...rest }, ref) => {
     return (
       <Skeleton
         ref={ref}

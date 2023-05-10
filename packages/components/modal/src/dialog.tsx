@@ -52,7 +52,7 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
 })
 
 export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, ref) => {
-  const styles = useMultiComponentStyle('Dialog', { size, ...props })
+  const [styles, mergedProps] = useMultiComponentStyle('Dialog', { size, ...props })
   const {
     className,
     children,
@@ -68,7 +68,7 @@ export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, re
     onOther,
     onSuccess,
     ...rest
-  } = omitThemeProps({ size, ...props })
+  } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
 

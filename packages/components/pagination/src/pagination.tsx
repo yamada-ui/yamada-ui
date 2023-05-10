@@ -33,7 +33,7 @@ export type PaginationProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'children'> 
   PaginationOptions
 
 export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Pagination', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Pagination', props)
   const {
     className,
     component: Component = PaginationItem,
@@ -47,7 +47,7 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
     edgeFirst,
     edgeLast,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const computedWithControls = useValue(withControls)
   const computedWithEdges = useValue(withEdges)

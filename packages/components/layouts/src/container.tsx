@@ -17,8 +17,8 @@ type ContainerOptions = {
 export type ContainerProps = HTMLUIProps<'section'> & ThemeProps<'Container'> & ContainerOptions
 
 export const Container = forwardRef<ContainerProps, 'section'>((props, ref) => {
-  const styles = useComponentStyle('Container', props)
-  const { className, centerContent, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useComponentStyle('Container', props)
+  const { className, centerContent, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = useMemo(
     () => ({

@@ -18,14 +18,14 @@ type TextOptions = {
 export type TextProps = HTMLUIProps<'p'> & ThemeProps<'Text'> & TextOptions
 
 export const Text = forwardRef<TextProps, 'p'>((props, ref) => {
-  const css = useComponentStyle('Text', props)
+  const [css, mergedProps] = useComponentStyle('Text', props)
   const {
     className,
     align: textAlign,
     decoration: textDecoration,
     casing: textTransform,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const textProps = filterUndefined({
     textAlign,

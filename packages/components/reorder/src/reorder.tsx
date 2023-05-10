@@ -39,7 +39,7 @@ const pickDuplicated = (values: (string | number)[]): (string | number)[] =>
   )
 
 export const Reorder = forwardRef<HTMLUListElement, ReorderProps>((props, ref) => {
-  const styles = useMultiComponentStyle('Reorder', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Reorder', props)
   const {
     className,
     orientation = 'vertical',
@@ -48,7 +48,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>((props, ref) =
     onCompleteChange,
     children,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const axis = orientation === 'vertical' ? 'y' : 'x'
 

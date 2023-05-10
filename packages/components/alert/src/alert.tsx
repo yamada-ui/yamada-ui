@@ -45,8 +45,8 @@ export const Alert = forwardRef<AlertProps, 'div'>(
   ({ status = 'info', colorStyle, ...props }, ref) => {
     colorStyle = colorStyle ?? getStatusColorStyle(status)
 
-    const styles = useMultiComponentStyle('Alert', { ...props, colorStyle })
-    const { className, children, ...rest } = omitThemeProps({ ...props, colorStyle })
+    const [styles, mergedProps] = useMultiComponentStyle('Alert', { ...props, colorStyle })
+    const { className, children, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = {
       w: '100%',

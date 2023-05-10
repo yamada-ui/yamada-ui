@@ -25,7 +25,7 @@ type ListOptions = {
 export type ListProps = HTMLUIProps<'ul'> & ThemeProps<'List'> & ListOptions
 
 export const List = forwardRef<ListProps, 'ul'>((props, ref) => {
-  const styles = useMultiComponentStyle('List', props)
+  const [styles, mergedProps] = useMultiComponentStyle('List', props)
   const {
     className,
     children,
@@ -33,7 +33,7 @@ export const List = forwardRef<ListProps, 'ul'>((props, ref) => {
     stylePosition: listStylePosition,
     gap = 'sm',
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
 

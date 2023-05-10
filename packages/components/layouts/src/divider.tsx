@@ -17,17 +17,20 @@ type DividerOptions = {
 export type DividerProps = HTMLUIProps<'hr'> & ThemeProps<'Divider'> & DividerOptions
 
 export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
-  const {
-    borderRightWidth,
-    borderLeftWidth,
-    borderTopWidth,
-    borderBottomWidth,
-    borderWidth,
-    borderStyle,
-    borderColor,
-    ...styles
-  } = useComponentStyle('Divider', props)
-  const { className, orientation = 'horizontal', __css, ...rest } = omitThemeProps(props)
+  const [
+    {
+      borderRightWidth,
+      borderLeftWidth,
+      borderTopWidth,
+      borderBottomWidth,
+      borderWidth,
+      borderStyle,
+      borderColor,
+      ...styles
+    },
+    mergedProps,
+  ] = useComponentStyle('Divider', props)
+  const { className, orientation = 'horizontal', __css, ...rest } = omitThemeProps(mergedProps)
 
   const customStyles = useMemo(
     () => ({

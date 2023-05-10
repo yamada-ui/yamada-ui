@@ -67,7 +67,7 @@ const [FormControlStylesProvider, useFormControlStyles] = createContext<
 })
 
 export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }, ref) => {
-  const styles = useMultiComponentStyle('FormControl', props)
+  const [styles, mergedProps] = useMultiComponentStyle('FormControl', props)
   const {
     className,
     isRequired = false,
@@ -82,7 +82,7 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
     requiredIndicator,
     optionalIndicator,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   id = id ?? useId()
 

@@ -30,7 +30,7 @@ type ProgressOptions = {
 export type ProgressProps = HTMLUIProps<'div'> & ThemeProps<'Progress'> & ProgressOptions
 
 export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Progress', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Progress', props)
   const {
     className,
     children,
@@ -44,7 +44,7 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     borderRadius: _borderRadius,
     rounded,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const borderRadius = _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
 

@@ -23,8 +23,8 @@ export type InputProps = Omit<HTMLUIProps<'input'>, 'disabled' | 'required' | 'r
   FormControlOptions
 
 export const Input = forwardRef<InputProps, 'input'>((props, ref) => {
-  const styles = useMultiComponentStyle('Input', props)
-  let { className, htmlSize, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useMultiComponentStyle('Input', props)
+  let { className, htmlSize, ...rest } = omitThemeProps(mergedProps)
 
   rest = useFormControlProps(rest)
 

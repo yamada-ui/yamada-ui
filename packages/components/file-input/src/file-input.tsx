@@ -62,7 +62,7 @@ export type FileInputProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'children'> &
 const defaultFormat: Format = ({ name }) => name
 
 export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...props }, ref) => {
-  const styles = useMultiComponentStyle('Input', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Input', props)
   const {
     className,
     id,
@@ -79,7 +79,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
     separator = ',',
     resetRef,
     ...rest
-  } = useFormControlProps(omitThemeProps(props))
+  } = useFormControlProps(omitThemeProps(mergedProps))
 
   const { disabled, readOnly } = rest
 

@@ -12,8 +12,8 @@ import { cx } from '@yamada-ui/utils'
 export type BadgeProps = HTMLUIProps<'span'> & ThemeProps<'Badge'>
 
 export const Badge = forwardRef<BadgeProps, 'span'>((props, ref) => {
-  const styles = useComponentStyle('Badge', props)
-  const { className, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useComponentStyle('Badge', props)
+  const { className, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     display: 'inline-block',

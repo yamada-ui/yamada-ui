@@ -44,7 +44,7 @@ const hiddenStyles: CSSUIObject = {
 }
 
 export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
-  const styles = useComponentStyle('ScrollArea', props)
+  const [styles, mergedProps] = useComponentStyle('ScrollArea', props)
   const {
     className,
     type = 'hover',
@@ -53,7 +53,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
     children,
     inner,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setisScrolling] = useState<boolean>(false)
   const isAlways = type === 'always'

@@ -55,7 +55,7 @@ export type AccordionProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
   AccordionOptions
 
 export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Accordion', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Accordion', props)
   const {
     className,
     index: value,
@@ -66,7 +66,7 @@ export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
     icon,
     onChange,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   if ((value || defaultValue) != null && !isArray(value || defaultValue) && isMultiple) {
     console.warn(

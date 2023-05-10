@@ -30,7 +30,7 @@ export type MonthPickerProps = Omit<HTMLUIProps<'input'>, keyof UseMonthPickerPr
   UseMonthPickerProps
 
 export const MonthPicker = forwardRef<MonthPickerProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('DatePicker', props)
+  const [styles, mergedProps] = useMultiComponentStyle('DatePicker', props)
   let {
     className,
     isClearable = true,
@@ -44,7 +44,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, 'div'>((props, ref) => {
     iconProps,
     clearIconProps,
     ...computedProps
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const {
     getPopoverProps,

@@ -24,9 +24,9 @@ type BreadcrumbOptions = {
 export type BreadcrumbProps = HTMLUIProps<'nav'> & ThemeProps<'Breadcrumb'> & BreadcrumbOptions
 
 export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
-  const styles = useMultiComponentStyle('Breadcrumb', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Breadcrumb', props)
 
-  const { className, children, separator = '/', gap = 'sm', ...rest } = omitThemeProps(props)
+  const { className, children, separator = '/', gap = 'sm', ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     display: 'flex',

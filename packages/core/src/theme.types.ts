@@ -157,17 +157,20 @@ export type UsageTheme = {
 export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
 export type ComponentVariants = Record<string, UIStyle | Record<string, UIStyle>>
 export type ComponentSizes = Record<string, UIStyle | Record<string, UIStyle>>
-export type ComponentDefaultProps<Y extends keyof Theme['components'] | unknown = unknown> = {
-  variant?: ThemeProps<Y>['variant']
-  size?: ThemeProps<Y>['size']
-  colorStyle?: ThemeProps<Y>['colorStyle']
+export type ComponentDefaultProps<
+  Y extends Dict = Dict,
+  M extends keyof Theme['components'] | unknown = unknown,
+> = Omit<Y, 'variant' | 'size' | 'colorStyle'> & {
+  variant?: ThemeProps<M>['variant']
+  size?: ThemeProps<M>['size']
+  colorStyle?: ThemeProps<M>['colorStyle']
 }
 
-export type ComponentStyle = {
+export type ComponentStyle<Y extends Dict = Dict> = {
   baseStyle?: ComponentBaseStyle
   sizes?: ComponentSizes
   variants?: ComponentVariants
-  defaultProps?: ComponentDefaultProps
+  defaultProps?: ComponentDefaultProps<Y>
 }
 
 export type ComponentMultiBaseStyle = UIMultiStyle

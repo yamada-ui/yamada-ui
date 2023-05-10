@@ -15,8 +15,8 @@ type LinkOptions = {
 export type LinkProps = HTMLUIProps<'a'> & ThemeProps<'Link'> & LinkOptions
 
 export const Link = forwardRef<LinkProps, 'a'>((props, ref) => {
-  const css = useComponentStyle('Link', props)
-  const { className, isExternal, ...rest } = omitThemeProps(props)
+  const [css, mergedProps] = useComponentStyle('Link', props)
+  const { className, isExternal, ...rest } = omitThemeProps(mergedProps)
 
   return (
     <ui.a

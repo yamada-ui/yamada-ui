@@ -19,8 +19,8 @@ export type CloseButtonProps = HTMLUIProps<'button'> &
   CloseButtonOptions
 
 export const CloseButton = forwardRef<CloseButtonProps, 'button'>((props, ref) => {
-  const styles = useComponentStyle('CloseButton', props)
-  const { className, children, isDisabled, __css, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useComponentStyle('CloseButton', props)
+  const { className, children, isDisabled, __css, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     outline: 0,

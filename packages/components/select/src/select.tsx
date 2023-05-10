@@ -40,7 +40,7 @@ export type SelectProps = ThemeProps<'Select'> &
   SelectOptions
 
 export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Select', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
   let {
     className,
     placeholder,
@@ -57,7 +57,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     icon,
     children,
     ...computedProps
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []

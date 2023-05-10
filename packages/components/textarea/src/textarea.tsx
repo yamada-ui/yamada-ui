@@ -22,8 +22,8 @@ export type TextareaProps = Omit<HTMLUIProps<'textarea'>, 'disabled' | 'required
   FormControlOptions
 
 export const Textarea = forwardRef<TextareaProps, 'textarea'>((props, ref) => {
-  const styles = useComponentStyle('Textarea', props)
-  let { className, rows, resize = 'none', ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useComponentStyle('Textarea', props)
+  let { className, rows, resize = 'none', ...rest } = omitThemeProps(mergedProps)
 
   rest = useFormControlProps(rest)
 

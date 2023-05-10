@@ -31,6 +31,7 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   cloneElement,
+  CSSProperties,
   FC,
   FocusEventHandler,
   InputHTMLAttributes,
@@ -267,7 +268,10 @@ export type CheckboxProps = Omit<HTMLUIProps<'label'>, keyof UseCheckboxProps | 
 export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
   const group = useCheckboxGroupContext()
   const control = useFormControl(props)
-  const styles = useMultiComponentStyle('Checkbox', { ...group, ...props })
+  const [styles, mergedProps] = useMultiComponentStyle('Checkbox', {
+    ...(group ? omitObject(group, ['value']) : {}),
+    ...props,
+  })
   const {
     className,
     gap = '0.5rem',
@@ -280,7 +284,7 @@ export const Checkbox = forwardRef<CheckboxProps, 'input'>((props, ref) => {
     label,
     children,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const {
     isChecked,
@@ -402,11 +406,13 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
             initial='unchecked'
             animate='checked'
             exit='unchecked'
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            style={
+              {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              } as CSSProperties
+            }
           >
             {isIndeterminate ? <IndeterminateIcon {...rest} /> : <CheckIcon {...rest} />}
           </ui.div>

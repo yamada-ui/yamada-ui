@@ -32,7 +32,7 @@ export type SwitchProps = Omit<UseCheckboxProps, 'isIndeterminate'> &
   SwitchOptions
 
 export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
-  const styles = useMultiComponentStyle('Switch', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Switch', props)
   const {
     className,
     gap = '0.5rem',
@@ -48,7 +48,7 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
       damping: 40,
     },
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const {
     isChecked,

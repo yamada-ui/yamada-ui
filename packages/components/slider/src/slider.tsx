@@ -455,7 +455,7 @@ export type SliderProps = Omit<HTMLUIProps<'div'>, keyof UseSliderProps> &
   SliderOptions
 
 export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
-  const styles = useMultiComponentStyle('Slider', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Slider', props)
   const {
     className,
     children,
@@ -469,7 +469,7 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
     thumbColor,
     thumbSize,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
   const {
     isVertical,
     getContainerProps,

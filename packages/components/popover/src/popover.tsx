@@ -64,7 +64,7 @@ const [PopoverProvider, usePopover] = createContext<PopoverContext>({
 export { usePopover }
 
 export const Popover: FC<PopoverProps> = (props) => {
-  const styles = useMultiComponentStyle('Popover', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Popover', props)
   const {
     children,
     initialFocusRef,
@@ -81,9 +81,9 @@ export const Popover: FC<PopoverProps> = (props) => {
     animation = 'scale',
     duration,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
-  const [isOpen, onOpen, onClose, onToggle] = useDisclosure(props)
+  const [isOpen, onOpen, onClose, onToggle] = useDisclosure(mergedProps)
 
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)

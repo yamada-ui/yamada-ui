@@ -35,7 +35,7 @@ type AvatarOptions = {
 export type AvatarProps = HTMLUIProps<'span'> & ThemeProps<'Avatar'> & AvatarOptions
 
 export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
-  const styles = useMultiComponentStyle('Avatar', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Avatar', props)
   const {
     className,
     src,
@@ -51,7 +51,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
     format,
     children,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
 

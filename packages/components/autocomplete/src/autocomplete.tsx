@@ -35,7 +35,7 @@ export type AutocompleteProps = ThemeProps<'Select'> &
   AutocompleteOptions
 
 export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) => {
-  const styles = useMultiComponentStyle('Select', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
   let {
     className,
     defaultValue = '',
@@ -50,7 +50,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
     icon,
     children,
     ...computedProps
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const {
     descendants,

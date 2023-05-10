@@ -55,7 +55,7 @@ type TabsOptions = {
 export type TabsProps = Omit<HTMLUIProps<'div'>, 'onChange'> & ThemeProps<'Tabs'> & TabsOptions
 
 export const Tabs = forwardRef<TabsProps, 'div'>(({ align = 'start', ...props }, ref) => {
-  const styles = useMultiComponentStyle('Tabs', { align, ...props })
+  const [styles, mergedProps] = useMultiComponentStyle('Tabs', { align, ...props })
   const {
     className,
     index,
@@ -70,7 +70,7 @@ export const Tabs = forwardRef<TabsProps, 'div'>(({ align = 'start', ...props },
     tabPanels,
     children,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
 

@@ -43,7 +43,7 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
 })
 
 export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) => {
-  const styles = useMultiComponentStyle('Drawer', { size, ...props })
+  const [styles, mergedProps] = useMultiComponentStyle('Drawer', { size, ...props })
   const {
     className,
     children,
@@ -66,7 +66,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
     lockFocusAcrossFrames,
     duration = { enter: 0.4, exit: 0.3 },
     ...rest
-  } = omitThemeProps({ size, ...props })
+  } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
 

@@ -520,7 +520,7 @@ const [NumberInputContextProvider, useNumberInputContext] = createContext<Number
 })
 
 export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) => {
-  const styles = useMultiComponentStyle('NumberInput', props)
+  const [styles, mergedProps] = useMultiComponentStyle('NumberInput', props)
   const {
     className,
     isStepper = true,
@@ -529,7 +529,7 @@ export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) =>
     increment,
     decrement,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
   const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput(rest)
 
   const css: CSSUIObject = {

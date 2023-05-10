@@ -77,8 +77,8 @@ export const Highlight: FC<HighlightProps> = ({
 export type MarkProps = HTMLUIProps<'mark'> & ThemeProps<'Mark'>
 
 export const Mark = forwardRef<MarkProps, 'mark'>((props, ref) => {
-  const styles = useComponentStyle('Mark', props)
-  const { className, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useComponentStyle('Mark', props)
+  const { className, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     bg: 'transparent',

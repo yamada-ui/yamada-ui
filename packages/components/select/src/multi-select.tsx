@@ -44,7 +44,7 @@ export type MultiSelectProps = ThemeProps<'Select'> &
   MultiSelectOptions
 
 export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Select', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
   let {
     className,
     defaultValue = [],
@@ -64,7 +64,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     clearIcon,
     children,
     ...computedProps
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []

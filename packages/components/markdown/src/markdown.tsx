@@ -48,7 +48,7 @@ export type MarkdownProps = Omit<HTMLUIProps<'div'>, 'children'> &
   MarkdownOptions
 
 export const Markdown = forwardRef<MarkdownProps, 'div'>((props, ref) => {
-  const css = useComponentStyle('Markdown', props)
+  const [css, mergedProps] = useComponentStyle('Markdown', props)
   let {
     className,
     remarkPlugins,
@@ -57,7 +57,7 @@ export const Markdown = forwardRef<MarkdownProps, 'div'>((props, ref) => {
     components,
     code,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   remarkPlugins = [remarkGfm, ...filterEmpty(remarkPlugins ?? [])]
   rehypePlugins = [rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]

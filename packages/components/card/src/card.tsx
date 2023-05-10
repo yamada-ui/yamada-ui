@@ -24,14 +24,14 @@ type CardOptions = {
 export type CardProps = HTMLUIProps<'article'> & ThemeProps<'Card'> & CardOptions
 
 export const Card = forwardRef<CardProps, 'article'>((props, ref) => {
-  const styles = useMultiComponentStyle('Card', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Card', props)
   const {
     className,
     direction: flexDirection = 'column',
     justify: justifyContent,
     align: alignItems,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     display: 'flex',

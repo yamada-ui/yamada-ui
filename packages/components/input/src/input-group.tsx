@@ -26,7 +26,7 @@ const [InputGroupProvider, useInputGroup] = createContext<InputGroupContext>({
 export { useInputGroup }
 
 export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Input', props)
+  const [styles] = useMultiComponentStyle('Input', props)
   const { className, children, ...rest } = omitThemeProps(props)
 
   const css: CSSUIObject = {

@@ -51,8 +51,8 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>(
 export type LinkBoxProps = HTMLUIProps<'div'> & ThemeProps<'LinkBox'>
 
 export const LinkBox = forwardRef<LinkBoxProps, 'div'>((props, ref) => {
-  const styles = useComponentStyle('LinkBox', props)
-  const { className, children, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useComponentStyle('LinkBox', props)
+  const { className, children, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     'a[href]:not(.ui-link-overlay), abbr[title]': {

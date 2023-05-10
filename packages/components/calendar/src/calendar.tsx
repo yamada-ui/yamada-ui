@@ -37,7 +37,7 @@ export type CalendarProps<Y extends MaybeValue = Date> = CalendarBaseProps & Use
 
 export const Calendar = forwardRef(
   <T extends MaybeValue = Date>(props: CalendarProps<T>, ref: ForwardedRef<HTMLDivElement>) => {
-    const styles = useMultiComponentStyle('Calendar', props)
+    const [styles, mergedProps] = useMultiComponentStyle('Calendar', props)
     const {
       className,
       value,
@@ -54,7 +54,7 @@ export const Calendar = forwardRef(
       weekdayProps,
       dayProps,
       ...computedProps
-    } = omitThemeProps(props)
+    } = omitThemeProps(mergedProps)
 
     const { type, getContainerProps, ...rest } = useCalendar<T>({
       value,

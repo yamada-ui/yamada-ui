@@ -26,9 +26,9 @@ type ButtonOptions = {
 
 export type ButtonProps = HTMLUIProps<'button'> & ThemeProps<'Button'> & ButtonOptions
 
-export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
+export const Button = forwardRef<ButtonProps, 'button'>(({ children, ...props }, customRef) => {
   const group = useButtonGroup()
-  const styles = useComponentStyle('Button', { ...group, ...props })
+  const [styles, mergedProps] = useComponentStyle('Button', { ...group, ...props })
   const {
     className,
     as,
@@ -42,9 +42,8 @@ export const Button = forwardRef<ButtonProps, 'button'>((props, customRef) => {
     loadingText,
     loadingPlacement = 'start',
     __css,
-    children,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const { ref: buttonRef, type: defaultType } = useButtonType(as)
   const ref = useMergeRefs(customRef, buttonRef)

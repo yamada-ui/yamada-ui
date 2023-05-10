@@ -575,7 +575,7 @@ export type RangeSliderProps = Omit<HTMLUIProps<'div'>, keyof UseRangeSliderProp
   RangeSliderOptions
 
 export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Slider', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Slider', props)
   const {
     className,
     children,
@@ -589,7 +589,7 @@ export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
     thumbColor,
     thumbSize,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
   const {
     isVertical,
     getContainerProps,

@@ -385,12 +385,12 @@ export type EditableProps = Omit<
 
 export const Editable = forwardRef<EditableProps, 'div'>(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
-    const styles = useMultiComponentStyle('Editable', {
+    const [styles, mergedProps] = useMultiComponentStyle('Editable', {
       focusBorderColor,
       errorBorderColor,
       ...props,
     })
-    const { className, children, ...rest } = omitThemeProps(props)
+    const { className, children, ...rest } = omitThemeProps(mergedProps)
     const {
       isEditing,
       getPreviewProps,

@@ -98,7 +98,7 @@ const getTooltipProps = (
 
 export const Tooltip = forwardRef<TooltipProps, 'div'>(
   ({ closeOnPointerDown, zIndex, ...props }, ref) => {
-    const styles = useComponentStyle('Tooltip', props)
+    const [styles, mergedProps] = useComponentStyle('Tooltip', props)
     const {
       className,
       children,
@@ -117,7 +117,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
       animation,
       duration,
       ...rest
-    } = omitThemeProps(props)
+    } = omitThemeProps(mergedProps)
 
     closeOnPointerDown = closeOnMouseDown
 

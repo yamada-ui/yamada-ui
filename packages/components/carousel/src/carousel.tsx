@@ -87,7 +87,7 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
     const gap = useToken('spaces', useValue(props.gap)) ?? useValue(props.gap)
     const slideSize = useToken('sizes', useValue(props.slideSize)) ?? useValue(props.slideSize)
 
-    const styles = useMultiComponentStyle('Carousel', {
+    const [styles, mergedProps] = useMultiComponentStyle('Carousel', {
       ...props,
       orientation,
       align,
@@ -116,25 +116,7 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
       withIndicators = true,
       indicators,
       ...computedProps
-    } = omitThemeProps({
-      ...props,
-      orientation,
-      align,
-      autoplay,
-      stopMouseEnterAutoplay,
-      loop,
-      speed,
-      delay,
-      slidesToScroll,
-      draggable,
-      dragFree,
-      inViewThreshold,
-      skipSnaps,
-      containScroll,
-      includeGapInSize,
-      gap,
-      slideSize,
-    })
+    } = omitThemeProps(mergedProps)
 
     const computedWithControls = useValue(withControls)
     const computedWithIndicators = useValue(withIndicators)

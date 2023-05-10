@@ -79,7 +79,7 @@ export type PinInputProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
 
 export const PinInput = forwardRef<PinInputProps, 'div'>(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
-    const styles = useMultiComponentStyle('PinInput', {
+    const [styles, mergedProps] = useMultiComponentStyle('PinInput', {
       focusBorderColor,
       errorBorderColor,
       ...props,
@@ -100,7 +100,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
       fileds = 4,
       children,
       ...rest
-    } = useFormControlProps(omitThemeProps(props))
+    } = useFormControlProps(omitThemeProps(mergedProps))
 
     id = id ?? useId()
 

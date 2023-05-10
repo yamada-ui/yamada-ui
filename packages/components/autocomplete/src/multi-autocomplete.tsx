@@ -46,7 +46,7 @@ export type MultiAutocompleteProps = ThemeProps<'Select'> &
   MultiAutocompleteOptions
 
 export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Select', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
   let {
     className,
     defaultValue = [],
@@ -67,7 +67,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
     clearIcon,
     children,
     ...computedProps
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const {
     value,

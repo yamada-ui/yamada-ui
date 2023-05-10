@@ -62,8 +62,9 @@ export type SegmentedControlProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
   SegmentedControlOptions
 
 export const SegmentedControl = forwardRef<SegmentedControlProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('SegmentedControl', props)
-  let { className, id, name, isReadOnly, isDisabled, children, ...rest } = omitThemeProps(props)
+  const [styles, mergedProps] = useMultiComponentStyle('SegmentedControl', props)
+  let { className, id, name, isReadOnly, isDisabled, children, ...rest } =
+    omitThemeProps(mergedProps)
 
   id = id ?? useId()
   name = name ?? `segmented-control-${useId()}`

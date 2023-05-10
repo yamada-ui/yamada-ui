@@ -49,7 +49,7 @@ export type DropzoneProps = Omit<HTMLUIProps<'div'>, 'onDrop'> &
   Omit<ReactDropzoneOptions, 'accept'>
 
 export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
-  const styles = useMultiComponentStyle('Dropzone', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Dropzone', props)
   const {
     id,
     name,
@@ -79,7 +79,7 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
     useFsAccessApi,
     children,
     ...rest
-  } = useFormControlProps(omitThemeProps(props))
+  } = useFormControlProps(omitThemeProps(mergedProps))
 
   const disabled = isLoading || rest.disabled || rest.readOnly
 

@@ -40,14 +40,14 @@ type MenuOptions = {
 export type MenuProps = ThemeProps<'Menu'> & Omit<PopoverProps, 'closeOnButton'> & MenuOptions
 
 export const Menu: FC<MenuProps> = (props) => {
-  const styles = useMultiComponentStyle('Menu', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Menu', props)
   const {
     initialFocusRef,
     closeOnSelect = true,
     placement = 'bottom-start',
     duration = 0.2,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   const descendants = useDescendants()
 

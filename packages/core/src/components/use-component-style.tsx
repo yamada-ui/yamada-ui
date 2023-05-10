@@ -4,16 +4,21 @@ import {
   merge,
   filterUndefined,
   omitObject,
+  Dict,
 } from '@yamada-ui/utils'
 import { useRef } from 'react'
 import isEqual from 'react-fast-compare'
 import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps, useTheme, useColorScheme } from '..'
 
-const getStyles = (
+type Styles<isMulti extends boolean = false> = isMulti extends false
+  ? CSSUIObject
+  : Record<string, CSSUIObject>
+
+const getStyles = <IsMulti extends boolean = false>(
   valOrFunc: UIStyle | Record<string, UIStyle>,
   props: UIStyleProps,
   isMulti?: boolean,
-): CSSUIObject | Record<string, CSSUIObject> => {
+): Styles<IsMulti> => {
   let styles = runIfFunc(valOrFunc, props)
 
   if (isMulti) {
@@ -24,60 +29,64 @@ const getStyles = (
     }
   }
 
-  return styles
+  return styles as Styles<IsMulti>
 }
 
-const usetStyles = (
+const usetStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   name: string,
-  props: any,
+  props: Props,
   isMulti: boolean = false,
-): CSSUIObject | Record<string, CSSUIObject> => {
+): [styles: Styles<IsMulti>, props: Props] => {
   const { theme } = useTheme()
   const { colorScheme } = useColorScheme()
 
   const componentStyle: ComponentStyle | undefined = get(theme, `components.${name}`)
 
-  props = merge(
-    componentStyle?.defaultProps ?? {},
-    filterUndefined(omitObject(props, ['children'])),
-  )
+  const propsRef = useRef<Props>({} as Props)
+  const stylesRef = useRef<Styles<IsMulti>>({})
 
-  const ref = useRef<CSSUIObject | Record<string, CSSUIObject>>({})
+  props = merge(componentStyle?.defaultProps ?? {}, filterUndefined(props))
 
   if (componentStyle) {
-    let styles = getStyles(
+    const args = omitObject(props, ['children'])
+
+    let styles = getStyles<IsMulti>(
       componentStyle.baseStyle ?? {},
-      { theme, colorScheme, ...props },
+      { theme, colorScheme, ...args },
       isMulti,
     )
 
-    const variant = getStyles(
+    const variant = getStyles<IsMulti>(
       componentStyle.variants?.[props.variant] ?? {},
       {
         theme,
         colorScheme,
-        ...props,
+        ...args,
       },
       isMulti,
     )
-    const size = getStyles(
+    const size = getStyles<IsMulti>(
       componentStyle.sizes?.[props.size] ?? {},
-      { theme, colorScheme, ...props },
+      { theme, colorScheme, ...args },
       isMulti,
     )
 
     styles = merge(styles, size)
     styles = merge(styles, variant)
 
-    const isStyleEqual = isEqual(ref.current, styles)
+    const isStylesEqual = isEqual(stylesRef.current, styles)
 
-    if (!isStyleEqual) ref.current = styles
+    if (!isStylesEqual) stylesRef.current = styles
   }
 
-  return ref.current
+  const isPropsEqual = isEqual(propsRef.current, props)
+
+  if (!isPropsEqual) propsRef.current = props
+
+  return [stylesRef.current, propsRef.current]
 }
 
-export const useComponentStyle = (name: string, props: any) =>
-  usetStyles(name, props) as CSSUIObject
-export const useMultiComponentStyle = (name: string, props: any) =>
-  usetStyles(name, props, true) as Record<string, CSSUIObject>
+export const useComponentStyle = <Props extends Dict = Dict>(name: string, props: Props) =>
+  usetStyles<Props>(name, props)
+export const useMultiComponentStyle = <Props extends Dict = Dict>(name: string, props: Props) =>
+  usetStyles<Props, true>(name, props, true)

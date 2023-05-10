@@ -85,7 +85,7 @@ export type ModalProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animat
   ModalOptions
 
 export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref) => {
-  const styles = useMultiComponentStyle('Modal', { size, ...props })
+  const [styles, mergedProps] = useMultiComponentStyle('Modal', { size, ...props })
   const {
     className,
     children,
@@ -111,7 +111,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     animation = 'scale',
     duration,
     ...rest
-  } = omitThemeProps({ size, ...props })
+  } = omitThemeProps(mergedProps)
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {

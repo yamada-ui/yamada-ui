@@ -223,7 +223,7 @@ export const Radio = forwardRef(
   ) => {
     const group = useRadioGroupContenxt()
     const control = useFormControl(props)
-    const styles = useMultiComponentStyle('Radio', { ...group, ...props })
+    const [styles, mergedProps] = useMultiComponentStyle('Radio', { ...group, ...props })
     const {
       className,
       gap = '0.5rem',
@@ -236,7 +236,7 @@ export const Radio = forwardRef(
       label,
       children,
       ...rest
-    } = omitThemeProps(props)
+    } = omitThemeProps(mergedProps)
 
     const { getContainerProps, getInputProps, getIconProps, getLabelProps } = useRadio({
       ...rest,

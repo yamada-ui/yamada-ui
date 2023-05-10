@@ -56,7 +56,7 @@ export type NativeSelectProps = Omit<HTMLUIProps<'select'>, 'size'> &
   FormControlOptions
 
 export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref) => {
-  const styles = useMultiComponentStyle('Select', props)
+  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
   let {
     className,
     children,
@@ -73,7 +73,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     container,
     icon,
     ...rest
-  } = omitThemeProps(props)
+  } = omitThemeProps(mergedProps)
 
   rest = useFormControlProps({ ...rest, isRequired: isRequired ?? !isUndefined(placeholder) })
 

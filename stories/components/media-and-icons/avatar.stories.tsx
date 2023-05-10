@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Avatar, AvatarBadge, AvatarGroup } from '@yamada-ui/react'
+import { Avatar, AvatarBadge, AvatarGroup, Wrap } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Media And Icons / Avatar',
@@ -14,7 +14,15 @@ export const basic: ComponentStory<typeof Avatar> = () => {
 
 export const withSize: ComponentStory<typeof Avatar> = () => {
   return (
-    <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
+    <Wrap gap='md'>
+      <Avatar size='2xs' name='Hirotomo Yamada' />
+      <Avatar size='xs' name='Hirotomo Yamada' />
+      <Avatar size='sm' name='Hirotomo Yamada' />
+      <Avatar size='md' name='Hirotomo Yamada' />
+      <Avatar size='lg' name='Hirotomo Yamada' />
+      <Avatar size='xl' name='Hirotomo Yamada' />
+      <Avatar size='2xl' name='Hirotomo Yamada' />
+    </Wrap>
   )
 }
 

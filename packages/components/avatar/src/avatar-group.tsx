@@ -16,7 +16,7 @@ type AvatarGroupOptions = {
 export type AvatarGroupProps = HTMLUIProps<'div'> & ThemeProps<'Avatar'> & AvatarGroupOptions
 
 export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
-  const styles = useMultiComponentStyle('Avatar', props)
+  const [styles] = useMultiComponentStyle('Avatar', props)
   const {
     className,
     max,

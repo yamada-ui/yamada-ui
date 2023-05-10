@@ -86,6 +86,14 @@ export const Button: ComponentStyle = {
               ? [`gray.300`, `whiteAlpha.400`]
               : [isAccessible ? `${c}.600` : `${c}.700`, `${c}.400`],
           )(c),
+          _disabled: {
+            bg: isDefaultColor(
+              [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+              isGray
+                ? [`gray.100`, `whiteAlpha.200`]
+                : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
+            )(c),
+          },
         },
       }
     },

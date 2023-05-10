@@ -71,6 +71,8 @@ export const Skeleton = forwardRef<SkeletonProps, 'div'>((props, ref) => {
   })
 
   const css: CSSUIObject = {
+    w: 'full',
+    h: '4',
     boxShadow: 'none',
     backgroundClip: 'padding-box',
     cursor: 'default',

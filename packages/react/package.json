@@ -93,6 +93,7 @@
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/use-pan-event": "workspace:*",
     "@yamada-ui/use-popper": "workspace:*",
+    "@yamada-ui/use-previous": "workspace:*",
     "@yamada-ui/use-resize-observer": "workspace:*",
     "@yamada-ui/use-size": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",

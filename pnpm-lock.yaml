@@ -1457,6 +1457,15 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/use-animation':
+        specifier: workspace:*
+        version: link:../../hooks/use-animation
+      '@yamada-ui/use-previous':
+        specifier: workspace:*
+        version: link:../../hooks/use-previous
+      '@yamada-ui/use-value':
+        specifier: workspace:*
+        version: link:../../hooks/use-value
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -1932,6 +1941,19 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/hooks/use-previous:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-resize-observer:
     dependencies:
       '@yamada-ui/utils':
@@ -2267,6 +2289,9 @@ importers:
       '@yamada-ui/use-popper':
         specifier: workspace:*
         version: link:../hooks/use-popper
+      '@yamada-ui/use-previous':
+        specifier: workspace:*
+        version: link:../hooks/use-previous
       '@yamada-ui/use-resize-observer':
         specifier: workspace:*
         version: link:../hooks/use-resize-observer

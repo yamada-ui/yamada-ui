@@ -153,7 +153,7 @@ export const withPlacement: ComponentStory<typeof Select> = () => {
 
 export const withOffset: ComponentStory<typeof Select> = () => {
   return (
-    <Select placeholder='キャラクターを選択' offset={[16, 16]} list={{ maxW: 'xs' }}>
+    <Select placeholder='キャラクターを選択' offset={[16, 16]} listProps={{ maxW: 'xs' }}>
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
@@ -257,7 +257,7 @@ export const isOptionFocusable: ComponentStory<typeof Select> = () => {
 export const customIcon: ComponentStory<typeof Select> = () => {
   return (
     <>
-      <Select placeholder='キャラクターを選択' icon={{ color: 'primary' }}>
+      <Select placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -265,7 +265,7 @@ export const customIcon: ComponentStory<typeof Select> = () => {
 
       <Select
         placeholder='キャラクターを選択'
-        icon={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>

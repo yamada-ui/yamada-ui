@@ -6,7 +6,7 @@ import { useTabsContext, useTabsDescendantsContext } from './'
 export type TabListProps = HTMLUIProps<'div'>
 
 export const TabList = forwardRef<TabListProps, 'div'>(({ className, ...rest }, ref) => {
-  const { focusedIndex, orientation, tabList, styles } = useTabsContext()
+  const { focusedIndex, orientation, tabListProps, styles } = useTabsContext()
 
   const descendants = useTabsDescendantsContext()
 
@@ -64,7 +64,7 @@ export const TabList = forwardRef<TabListProps, 'div'>(({ className, ...rest }, 
       ref={ref}
       className={cx('ui-tabs-list', className)}
       __css={css}
-      {...tabList}
+      {...tabListProps}
       {...rest}
       onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
     />

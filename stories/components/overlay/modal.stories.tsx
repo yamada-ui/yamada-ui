@@ -431,7 +431,7 @@ export const disabledOverlay: ComponentStory<typeof Modal> = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} overlay={false}>
+      <Modal isOpen={isOpen} onClose={onClose} withOverlay={false}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>

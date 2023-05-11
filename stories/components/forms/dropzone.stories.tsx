@@ -325,11 +325,11 @@ export const isLoading: ComponentStory<typeof Dropzone> = () => {
 export const customLoading: ComponentStory<typeof Dropzone> = () => {
   return (
     <>
-      <Dropzone isLoading loading={{ variant: 'grid' }}>
+      <Dropzone isLoading loadingProps={{ variant: 'grid' }}>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isLoading loading={{ color: 'secondary' }}>
+      <Dropzone isLoading loadingProps={{ color: 'secondary' }}>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     </>

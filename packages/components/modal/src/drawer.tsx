@@ -53,8 +53,8 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
     onOverlayClick,
     onEsc,
     onCloseComplete,
-    closeOnButton = true,
-    overlay = true,
+    withCloseButton = true,
+    withOverlay = true,
     allowPinchZoom,
     autoFocus,
     restoreFocus,
@@ -82,8 +82,8 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
           onOverlayClick,
           onEsc,
           onCloseComplete,
-          closeOnButton: false,
-          overlay: false,
+          withCloseButton: false,
+          withOverlay: false,
           allowPinchZoom,
           autoFocus,
           restoreFocus,
@@ -96,9 +96,9 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
           duration,
         }}
       >
-        {customDrawerOverlay ?? (overlay ? <DrawerOverlay /> : null)}
+        {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
-        <DrawerContent {...{ placement, closeOnButton, ...rest }}>{cloneChildren}</DrawerContent>
+        <DrawerContent {...{ placement, withCloseButton, ...rest }}>{cloneChildren}</DrawerContent>
       </Modal>
     </DrawerProvider>
   )
@@ -107,7 +107,7 @@ export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) =
 type DrawerContentProps = Omit<DrawerProps, 'color' | 'transition' | 'isOpen' | keyof ThemeProps>
 
 export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
-  ({ className, children, placement, closeOnButton, ...rest }, ref) => {
+  ({ className, children, placement, withCloseButton, ...rest }, ref) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
 
@@ -137,7 +137,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
         __css={css}
         {...rest}
       >
-        {customDrawerCloseButton ?? (closeOnButton && onClose ? <DrawerCloseButton /> : null)}
+        {customDrawerCloseButton ?? (withCloseButton && onClose ? <DrawerCloseButton /> : null)}
 
         {cloneChildren}
       </Slide>

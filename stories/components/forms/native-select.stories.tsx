@@ -163,7 +163,7 @@ export const isInvalid: ComponentStory<typeof NativeSelect> = () => {
 export const customIcon: ComponentStory<typeof NativeSelect> = () => {
   return (
     <>
-      <NativeSelect placeholder='キャラクターを選択' icon={{ color: 'primary' }}>
+      <NativeSelect placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
         <NativeOption value='孫悟空'>孫悟空</NativeOption>
         <NativeOption value='ベジータ'>ベジータ</NativeOption>
         <NativeOption value='フリーザ'>フリーザ</NativeOption>
@@ -171,7 +171,7 @@ export const customIcon: ComponentStory<typeof NativeSelect> = () => {
 
       <NativeSelect
         placeholder='キャラクターを選択'
-        icon={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
       >
         <NativeOption value='孫悟空'>孫悟空</NativeOption>
         <NativeOption value='ベジータ'>ベジータ</NativeOption>

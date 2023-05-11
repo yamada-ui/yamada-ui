@@ -30,9 +30,9 @@ type SelectOptions = {
   data?: UIOption[]
   focusBorderColor?: string
   errorBorderColor?: string
-  container?: Omit<HTMLUIProps<'div'>, 'children'>
-  list?: Omit<SelectListProps, 'children'>
-  icon?: SelectIconProps
+  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  listProps?: Omit<SelectListProps, 'children'>
+  iconProps?: SelectIconProps
 }
 
 export type SelectProps = ThemeProps<'Select'> &
@@ -52,9 +52,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     height,
     minH,
     minHeight,
-    container,
-    list,
-    icon,
+    containerProps,
+    listProps,
+    iconProps,
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -106,22 +106,22 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     w: '100%',
     h: 'fit-content',
     color,
-    ...styles.container,
+    ...styles.containerProps,
   }
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider value={{ ...rest, placeholder, placeholderInOptions, styles }}>
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-select' __css={css} {...getContainerProps(container)}>
+          <ui.div className='ui-select' __css={css} {...getContainerProps(containerProps)}>
             <PopoverTrigger>
               <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
             </PopoverTrigger>
 
-            <SelectIcon {...icon} {...formControlProps} />
+            <SelectIcon {...iconProps} {...formControlProps} />
 
             {!isEmpty ? (
-              <SelectList {...list}>
+              <SelectList {...listProps}>
                 {!!placeholder && placeholderInOptions ? <Option>{placeholder}</Option> : null}
 
                 {children ?? computedChildren}

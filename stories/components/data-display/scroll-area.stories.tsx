@@ -9,7 +9,7 @@ export default {
 
 export const basic: ComponentStory<typeof ScrollArea> = () => {
   return (
-    <ScrollArea h='xs' inner={{ as: VStack, gap: 'md' }}>
+    <ScrollArea h='xs' innerProps={{ as: VStack, gap: 'md' }}>
       <Heading size='sm'>孫悟空少年編</Heading>
 
       <Text>
@@ -57,7 +57,7 @@ export const withType: ComponentStory<typeof ScrollArea> = () => {
     <>
       <Heading size='md'>Always</Heading>
 
-      <ScrollArea type='always' h='xs' inner={{ as: VStack, gap: 'md' }}>
+      <ScrollArea type='always' h='xs' innerProps={{ as: VStack, gap: 'md' }}>
         <Heading size='sm'>孫悟空少年編</Heading>
 
         <Text>
@@ -100,7 +100,7 @@ export const withType: ComponentStory<typeof ScrollArea> = () => {
 
       <Heading size='md'>Hover</Heading>
 
-      <ScrollArea type='hover' h='xs' inner={{ as: VStack, gap: 'md' }}>
+      <ScrollArea type='hover' h='xs' innerProps={{ as: VStack, gap: 'md' }}>
         <Heading size='sm'>孫悟空少年編</Heading>
 
         <Text>
@@ -143,7 +143,7 @@ export const withType: ComponentStory<typeof ScrollArea> = () => {
 
       <Heading size='md'>Scroll</Heading>
 
-      <ScrollArea type='scroll' h='xs' inner={{ as: VStack, gap: 'md' }}>
+      <ScrollArea type='scroll' h='xs' innerProps={{ as: VStack, gap: 'md' }}>
         <Heading size='sm'>孫悟空少年編</Heading>
 
         <Text>
@@ -186,7 +186,7 @@ export const withType: ComponentStory<typeof ScrollArea> = () => {
 
       <Heading size='md'>Never</Heading>
 
-      <ScrollArea type='never' h='xs' inner={{ as: VStack, gap: 'md' }}>
+      <ScrollArea type='never' h='xs' innerProps={{ as: VStack, gap: 'md' }}>
         <Heading size='sm'>孫悟空少年編</Heading>
 
         <Text>
@@ -232,7 +232,7 @@ export const withType: ComponentStory<typeof ScrollArea> = () => {
 
 export const withScrollHideDelay: ComponentStory<typeof ScrollArea> = () => {
   return (
-    <ScrollArea type='scroll' scrollHideDelay={4000} h='xs' inner={{ as: VStack, gap: 'md' }}>
+    <ScrollArea type='scroll' scrollHideDelay={4000} h='xs' innerProps={{ as: VStack, gap: 'md' }}>
       <Heading size='sm'>孫悟空少年編</Heading>
 
       <Text>
@@ -288,7 +288,7 @@ export const useScrollTo: ComponentStory<typeof ScrollArea> = () => {
 
   return (
     <>
-      <ScrollArea ref={ref} h='xs' inner={{ as: VStack, gap: 'md' }}>
+      <ScrollArea ref={ref} h='xs' innerProps={{ as: VStack, gap: 'md' }}>
         <Heading size='sm'>孫悟空少年編</Heading>
 
         <Text>

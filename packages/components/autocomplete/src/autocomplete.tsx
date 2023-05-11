@@ -24,10 +24,10 @@ import { AutocompleteCreate, AutocompleteEmpty } from './'
 type AutocompleteOptions = {
   focusBorderColor?: string
   errorBorderColor?: string
-  container?: Omit<HTMLUIProps<'div'>, 'children'>
-  list?: Omit<AutocompleteListProps, 'children'>
-  input?: HTMLUIProps<'input'>
-  icon?: AutocompleteIconProps
+  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  listProps?: Omit<AutocompleteListProps, 'children'>
+  inputProps?: HTMLUIProps<'input'>
+  iconProps?: AutocompleteIconProps
 }
 
 export type AutocompleteProps = ThemeProps<'Select'> &
@@ -44,10 +44,10 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
     height,
     minH,
     minHeight,
-    container,
-    list,
-    input,
-    icon,
+    containerProps,
+    listProps,
+    inputProps,
+    iconProps,
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -85,20 +85,25 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
           <ui.div
             className={cx('ui-autocomplete', className)}
             __css={css}
-            {...getContainerProps(container)}
+            {...getContainerProps(containerProps)}
           >
-            <AutocompleteField h={h} minH={minH} input={input} {...getFieldProps({}, ref)} />
+            <AutocompleteField
+              h={h}
+              minH={minH}
+              inputProps={inputProps}
+              {...getFieldProps({}, ref)}
+            />
 
-            <AutocompleteIcon {...icon} {...formControlProps} />
+            <AutocompleteIcon {...iconProps} {...formControlProps} />
 
             {!isEmpty ? (
-              <AutocompleteList {...list}>
+              <AutocompleteList {...listProps}>
                 {createOption ? <AutocompleteCreate /> : <AutocompleteEmpty />}
 
                 {children ?? computedChildren}
               </AutocompleteList>
             ) : (
-              <AutocompleteList {...list}>
+              <AutocompleteList {...listProps}>
                 {createOption && inputValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
               </AutocompleteList>
             )}
@@ -109,10 +114,10 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) 
   )
 })
 
-type AutocompleteFieldProps = HTMLUIProps<'div'> & Pick<AutocompleteProps, 'input'>
+type AutocompleteFieldProps = HTMLUIProps<'div'> & Pick<AutocompleteProps, 'inputProps'>
 
 const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
-  ({ className, h, minH, placeholder, input, ...rest }, ref) => {
+  ({ className, h, minH, placeholder, inputProps, ...rest }, ref) => {
     const { displayValue, inputValue, styles } = useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
@@ -135,7 +140,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
             display='inline-block'
             w='full'
             placeholder={placeholder}
-            {...getInputProps(input, ref)}
+            {...getInputProps(inputProps, ref)}
             value={inputValue || displayValue || ''}
           />
         </ui.div>

@@ -507,7 +507,7 @@ export const disabledOverlay: ComponentStory<typeof Dialog> = () => {
       <Dialog
         isOpen={isOpen}
         onClose={onClose}
-        overlay={false}
+        withOverlay={false}
         header='孫悟空'
         cancel='わけない'
         onCancel={onClose}

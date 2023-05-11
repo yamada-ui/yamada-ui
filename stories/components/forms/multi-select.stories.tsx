@@ -232,7 +232,7 @@ export const withPlacement: ComponentStory<typeof MultiSelect> = () => {
 
 export const withOffset: ComponentStory<typeof MultiSelect> = () => {
   return (
-    <MultiSelect placeholder='キャラクターを選択' offset={[16, 16]} list={{ maxW: 'xs' }}>
+    <MultiSelect placeholder='キャラクターを選択' offset={[16, 16]} listProps={{ maxW: 'xs' }}>
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
@@ -336,7 +336,7 @@ export const isOptionFocusable: ComponentStory<typeof MultiSelect> = () => {
 export const customIcon: ComponentStory<typeof MultiSelect> = () => {
   return (
     <>
-      <MultiSelect placeholder='キャラクターを選択' icon={{ color: 'primary' }}>
+      <MultiSelect placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -344,7 +344,7 @@ export const customIcon: ComponentStory<typeof MultiSelect> = () => {
 
       <MultiSelect
         placeholder='キャラクターを選択'
-        icon={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
@@ -358,7 +358,7 @@ export const customClearIcon: ComponentStory<typeof MultiSelect> = () => {
   return (
     <MultiSelect
       placeholder='キャラクターを選択'
-      clearIcon={{ children: <FontAwesomeIcon icon={faTrash} w='0.5em' /> }}
+      clearIconProps={{ children: <FontAwesomeIcon icon={faTrash} w='0.5em' /> }}
     >
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>

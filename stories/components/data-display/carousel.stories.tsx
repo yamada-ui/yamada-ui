@@ -314,7 +314,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
       align='start'
       slidesToScroll={2}
       h='auto'
-      controls={{ colorStyle: 'whiteAlpha', color: 'white' }}
+      controlProps={{ colorStyle: 'whiteAlpha', color: 'white' }}
     >
       <CarouselSlide as={Card} variant='subtle'>
         <CardHeader justifyContent='center'>
@@ -631,7 +631,7 @@ export const customControl: ComponentStory<typeof Carousel> = () => {
 export const customControlButton: ComponentStory<typeof Carousel> = () => {
   return (
     <>
-      <Carousel controls={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
+      <Carousel controlProps={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>
@@ -646,7 +646,7 @@ export const customControlButton: ComponentStory<typeof Carousel> = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlPrev={{ icon: <FontAwesomeIcon icon={faArrowLeft} /> }}>
+      <Carousel controlPrevProps={{ icon: <FontAwesomeIcon icon={faArrowLeft} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>
@@ -661,7 +661,7 @@ export const customControlButton: ComponentStory<typeof Carousel> = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlNext={{ icon: <FontAwesomeIcon icon={faArrowRight} /> }}>
+      <Carousel controlNextProps={{ icon: <FontAwesomeIcon icon={faArrowRight} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>
@@ -701,7 +701,7 @@ export const customIndicators: ComponentStory<typeof Carousel> = () => {
   return (
     <>
       <Carousel
-        indicators={{
+        indicatorsProps={{
           bottom: '8',
           component: ({ isSelected }) => (
             <FontAwesomeIcon

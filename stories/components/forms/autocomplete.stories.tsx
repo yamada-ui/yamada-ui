@@ -248,7 +248,7 @@ export const withPlacement: ComponentStory<typeof Autocomplete> = () => {
 
 export const withOffset: ComponentStory<typeof Autocomplete> = () => {
   return (
-    <Autocomplete placeholder='キャラクターを選択' offset={[16, 16]} list={{ maxW: 'xs' }}>
+    <Autocomplete placeholder='キャラクターを選択' offset={[16, 16]} listProps={{ maxW: 'xs' }}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -352,7 +352,7 @@ export const isOptionFocusable: ComponentStory<typeof Autocomplete> = () => {
 export const customIcon: ComponentStory<typeof Autocomplete> = () => {
   return (
     <>
-      <Autocomplete placeholder='キャラクターを選択' icon={{ color: 'primary' }}>
+      <Autocomplete placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -360,7 +360,7 @@ export const customIcon: ComponentStory<typeof Autocomplete> = () => {
 
       <Autocomplete
         placeholder='キャラクターを選択'
-        icon={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>

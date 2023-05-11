@@ -20,8 +20,8 @@ export type SwitchIconProps = {
 
 type SwitchOptions = {
   icon?: ReactElement<SwitchIconProps>
-  input?: InputHTMLAttributes<HTMLInputElement>
-  label?: HTMLUIProps<'span'>
+  inputProps?: InputHTMLAttributes<HTMLInputElement>
+  labelProps?: HTMLUIProps<'span'>
   reverse?: boolean
   transition?: MotionTransition
 }
@@ -38,8 +38,8 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
     gap = '0.5rem',
     children,
     icon,
-    input,
-    label,
+    inputProps,
+    labelProps,
     reverse,
     flexDirection,
     transition = {
@@ -98,7 +98,7 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
         'onFocus',
       ])}
     >
-      <ui.input className='ui-switch-input' {...getInputProps(input, ref)} />
+      <ui.input className='ui-switch-input' {...getInputProps(inputProps, ref)} />
 
       {cloneIcon ?? (
         <ui.span
@@ -125,7 +125,11 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
       )}
 
       {children ? (
-        <ui.span className='ui-switch-label' __css={{ ...styles.label }} {...getLabelProps(label)}>
+        <ui.span
+          className='ui-switch-label'
+          __css={{ ...styles.label }}
+          {...getLabelProps(labelProps)}
+        >
           {children}
         </ui.span>
       ) : null}

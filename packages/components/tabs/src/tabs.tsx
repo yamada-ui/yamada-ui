@@ -48,8 +48,8 @@ type TabsOptions = {
   lazyBehavior?: LazyMode
   orientation?: 'vertical' | 'horizontal'
   onChange?: (index: number) => void
-  tabList?: TabListProps
-  tabPanels?: TabPanelsProps
+  tabListProps?: TabListProps
+  tabPanelsProps?: TabPanelsProps
 }
 
 export type TabsProps = Omit<HTMLUIProps<'div'>, 'onChange'> & ThemeProps<'Tabs'> & TabsOptions
@@ -66,8 +66,8 @@ export const Tabs = forwardRef<TabsProps, 'div'>(({ align = 'start', ...props },
     isLazy = true,
     lazyBehavior = 'keepMounted',
     orientation = 'horizontal',
-    tabList,
-    tabPanels,
+    tabListProps,
+    tabPanelsProps,
     children,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -109,8 +109,8 @@ export const Tabs = forwardRef<TabsProps, 'div'>(({ align = 'start', ...props },
           isLazy,
           lazyBehavior,
           orientation,
-          tabList,
-          tabPanels,
+          tabListProps,
+          tabPanelsProps,
           styles,
         }}
       >

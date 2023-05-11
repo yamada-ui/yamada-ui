@@ -56,8 +56,8 @@ export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, re
   const {
     className,
     children,
-    overlay = true,
-    closeOnButton = true,
+    withOverlay = true,
+    withCloseButton = true,
     header,
     footer,
     cancel,
@@ -105,10 +105,10 @@ export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, re
       <Modal
         ref={ref}
         __css={css}
-        {...{ size, onClose, overlay: false, closeOnButton: false, ...rest }}
+        {...{ size, onClose, withOverlay: false, withCloseButton: false, ...rest }}
       >
-        {customDialogOverlay ?? (overlay && size !== 'full' ? <DialogOverlay /> : null)}
-        {customDialogCloseButton ?? (closeOnButton && onClose ? <DialogCloseButton /> : null)}
+        {customDialogOverlay ?? (withOverlay && size !== 'full' ? <DialogOverlay /> : null)}
+        {customDialogCloseButton ?? (withCloseButton && onClose ? <DialogCloseButton /> : null)}
         {customDialogHeader ?? (header ? <DialogHeader>{header}</DialogHeader> : null)}
         {customDialogBody ?? (cloneChildren ? <DialogBody>{cloneChildren}</DialogBody> : null)}
         {customDialogFooter ??

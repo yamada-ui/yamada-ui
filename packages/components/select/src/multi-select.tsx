@@ -33,10 +33,10 @@ type MultiSelectOptions = {
   isClearable?: boolean
   focusBorderColor?: string
   errorBorderColor?: string
-  container?: Omit<HTMLUIProps<'div'>, 'children'>
-  list?: Omit<SelectListProps, 'children'>
-  icon?: SelectIconProps
-  clearIcon?: SelectIconProps
+  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  listProps?: Omit<SelectListProps, 'children'>
+  iconProps?: SelectIconProps
+  clearIconProps?: SelectIconProps
 }
 
 export type MultiSelectProps = ThemeProps<'Select'> &
@@ -58,10 +58,10 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     minH,
     minHeight,
     closeOnSelect = false,
-    container,
-    list,
-    icon,
-    clearIcon,
+    containerProps,
+    listProps,
+    iconProps,
+    clearIconProps,
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -128,7 +128,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider value={{ ...rest, value, placeholder, styles }}>
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-multi-select' __css={css} {...getContainerProps(container)}>
+          <ui.div className='ui-multi-select' __css={css} {...getContainerProps(containerProps)}>
             <PopoverTrigger>
               <MultiSelectField
                 component={component}
@@ -141,15 +141,17 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
 
             {isClearable && value.length ? (
               <SelectClearIcon
-                {...clearIcon}
-                onClick={handlerAll(clearIcon?.onClick, onClear)}
+                {...clearIconProps}
+                onClick={handlerAll(clearIconProps?.onClick, onClear)}
                 {...formControlProps}
               />
             ) : (
-              <SelectIcon {...icon} {...formControlProps} />
+              <SelectIcon {...iconProps} {...formControlProps} />
             )}
 
-            {!isEmpty ? <SelectList {...list}>{children ?? computedChildren}</SelectList> : null}
+            {!isEmpty ? (
+              <SelectList {...listProps}>{children ?? computedChildren}</SelectList>
+            ) : null}
           </ui.div>
         </Popover>
       </SelectProvider>

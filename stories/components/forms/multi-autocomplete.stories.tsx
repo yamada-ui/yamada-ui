@@ -347,7 +347,11 @@ export const withPlacement: ComponentStory<typeof MultiAutocomplete> = () => {
 
 export const withOffset: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
-    <MultiAutocomplete placeholder='キャラクターを選択' offset={[16, 16]} list={{ maxW: 'xs' }}>
+    <MultiAutocomplete
+      placeholder='キャラクターを選択'
+      offset={[16, 16]}
+      listProps={{ maxW: 'xs' }}
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -451,7 +455,7 @@ export const isOptionFocusable: ComponentStory<typeof MultiAutocomplete> = () =>
 export const customIcon: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
     <>
-      <MultiAutocomplete placeholder='キャラクターを選択' icon={{ color: 'primary' }}>
+      <MultiAutocomplete placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -459,7 +463,7 @@ export const customIcon: ComponentStory<typeof MultiAutocomplete> = () => {
 
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        icon={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
@@ -473,7 +477,7 @@ export const customClearIcon: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
     <MultiAutocomplete
       placeholder='キャラクターを選択'
-      clearIcon={{ children: <FontAwesomeIcon icon={faTrash} w='0.5em' /> }}
+      clearIconProps={{ children: <FontAwesomeIcon icon={faTrash} w='0.5em' /> }}
     >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>

@@ -42,14 +42,14 @@ export type HighlightProps = TextProps & {
   isFragment?: boolean
   query: string | string[]
   children: string | ((props: Chunk[]) => ReactNode)
-  mark?: MarkProps
+  markProps?: MarkProps
 }
 
 export const Highlight: FC<HighlightProps> = ({
   isFragment = false,
   query,
   children: text,
-  mark,
+  markProps,
   lineHeight = 'tall',
   ...rest
 }) => {
@@ -63,7 +63,7 @@ export const Highlight: FC<HighlightProps> = ({
     <Component {...(!isFragment ? { lineHeight } : {})} {...rest}>
       {chunks.map(({ text, match }, i) =>
         match ? (
-          <Mark key={i} {...mark}>
+          <Mark key={i} {...markProps}>
             {text}
           </Mark>
         ) : (

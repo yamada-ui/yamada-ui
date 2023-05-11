@@ -296,7 +296,7 @@ export const disabledOverlay: ComponentStory<typeof Drawer> = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} onClose={onClose} overlay={false}>
+      <Drawer isOpen={isOpen} onClose={onClose} withOverlay={false}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>

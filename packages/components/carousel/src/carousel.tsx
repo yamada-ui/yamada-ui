@@ -56,11 +56,11 @@ type CarouselOptions = {
   slideSize?: UIProps['width']
   inner?: HTMLUIProps<'div'>
   withControls?: Token<boolean>
-  controls?: CarouselControlProps
-  controlPrev?: CarouselControlProps
-  controlNext?: CarouselControlProps
+  controlProps?: CarouselControlProps
+  controlPrevProps?: CarouselControlProps
+  controlNextProps?: CarouselControlProps
   withIndicators?: Token<boolean>
-  indicators?: CarouselIndicatorsProps
+  indicatorsProps?: CarouselIndicatorsProps
 }
 
 export type CarouselProps = ThemeProps<'Carousel'> &
@@ -110,11 +110,11 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
       className,
       inner,
       withControls = true,
-      controls,
-      controlPrev,
-      controlNext,
+      controlProps,
+      controlPrevProps,
+      controlNextProps,
       withIndicators = true,
-      indicators,
+      indicatorsProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
@@ -152,16 +152,20 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
           {...getContainerProps({}, ref)}
         >
           {customCarouselControlPrev ??
-            (computedWithControls ? <CarouselControlPrev {...controls} {...controlPrev} /> : null)}
+            (computedWithControls ? (
+              <CarouselControlPrev {...controlProps} {...controlPrevProps} />
+            ) : null)}
           {customCarouselControlNext ??
-            (computedWithControls ? <CarouselControlNext {...controls} {...controlNext} /> : null)}
+            (computedWithControls ? (
+              <CarouselControlNext {...controlProps} {...controlNextProps} />
+            ) : null)}
 
           <CarouselSlides {...getSlidesProps({ ...filterUndefined({ h, minH }), ...inner })}>
             {cloneSlideChildren}
           </CarouselSlides>
 
           {customCarouselIndicators ??
-            (computedWithIndicators ? <CarouselIndicators {...indicators} /> : null)}
+            (computedWithIndicators ? <CarouselIndicators {...indicatorsProps} /> : null)}
 
           {otherChildren}
         </ui.div>

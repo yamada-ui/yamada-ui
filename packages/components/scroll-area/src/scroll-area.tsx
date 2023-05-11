@@ -12,7 +12,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type ScrollAreaOptions = {
   type?: 'always' | 'scroll' | 'hover' | 'never'
-  inner?: HTMLUIProps<'div'>
+  innerProps?: HTMLUIProps<'div'>
   scrollHideDelay?: number
 }
 
@@ -51,7 +51,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
     overflow = 'overlay',
     scrollHideDelay = 1000,
     children,
-    inner,
+    innerProps,
     ...rest
   } = omitThemeProps(mergedProps)
   const [isHovered, setIsHovered] = useState<boolean>(false)
@@ -113,8 +113,8 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
       onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
       onScroll={handlerAll(rest.onScroll, onScroll)}
     >
-      {inner ? (
-        <ui.div className='ui-scroll-area-inner' {...inner}>
+      {innerProps ? (
+        <ui.div className='ui-scroll-area-inner' {...innerProps}>
           {children}
         </ui.div>
       ) : (

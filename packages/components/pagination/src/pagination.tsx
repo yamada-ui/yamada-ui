@@ -16,15 +16,15 @@ import { PaginationProvider, usePagination, UsePaginationProps } from './use-pag
 
 type PaginationOptions = {
   component?: FC<PaginationItemProps>
-  item?: HTMLUIProps<'button'>
+  itemProps?: HTMLUIProps<'button'>
   withControls?: Token<boolean>
-  controls?: HTMLUIProps<'button'>
-  controlPrev?: HTMLUIProps<'button'>
-  controlNext?: HTMLUIProps<'button'>
+  controlProps?: HTMLUIProps<'button'>
+  controlPrevProps?: HTMLUIProps<'button'>
+  controlNextProps?: HTMLUIProps<'button'>
   withEdges?: Token<boolean>
-  edges?: HTMLUIProps<'button'>
-  edgeFirst?: HTMLUIProps<'button'>
-  edgeLast?: HTMLUIProps<'button'>
+  edgeProps?: HTMLUIProps<'button'>
+  edgeFirstProps?: HTMLUIProps<'button'>
+  edgeLastProps?: HTMLUIProps<'button'>
 }
 
 export type PaginationProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'children'> &
@@ -37,15 +37,15 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
   const {
     className,
     component: Component = PaginationItem,
-    item,
+    itemProps,
     withControls = true,
     withEdges = false,
-    controls,
-    controlPrev,
-    controlNext,
-    edges,
-    edgeFirst,
-    edgeLast,
+    controlProps,
+    controlPrevProps,
+    controlNextProps,
+    edgeProps,
+    edgeFirstProps,
+    edgeLastProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -63,11 +63,14 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
           page={page}
           isActive={currentPage === page}
           isDisabled={isDisabled}
-          {...(item as ComponentPropsWithoutRef<'button'>)}
-          onClick={handlerAll(item?.onClick, page !== 'dots' ? () => onChange(page) : undefined)}
+          {...(itemProps as ComponentPropsWithoutRef<'button'>)}
+          onClick={handlerAll(
+            itemProps?.onClick,
+            page !== 'dots' ? () => onChange(page) : undefined,
+          )}
         />
       )),
-    [Component, currentPage, isDisabled, onChange, range, item],
+    [Component, currentPage, isDisabled, onChange, range, itemProps],
   )
 
   const css: CSSUIObject = { display: 'flex', alignItems: 'center', ...styles.container }
@@ -87,9 +90,9 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             page='first'
             className='ui-pagination-item-first'
             isDisabled={isDisabled || currentPage === 1}
-            {...(edges as ComponentPropsWithoutRef<'button'>)}
-            {...(edgeFirst as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(edges?.onClick, edgeFirst?.onClick, onFirst)}
+            {...(edgeProps as ComponentPropsWithoutRef<'button'>)}
+            {...(edgeFirstProps as ComponentPropsWithoutRef<'button'>)}
+            onClick={handlerAll(edgeProps?.onClick, edgeFirstProps?.onClick, onFirst)}
           />
         ) : null}
 
@@ -98,9 +101,9 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             page='prev'
             className='ui-pagination-item-prev'
             isDisabled={isDisabled || currentPage === 1}
-            {...(controls as ComponentPropsWithoutRef<'button'>)}
-            {...(controlPrev as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(controls?.onClick, controlPrev?.onClick, onPrev)}
+            {...(controlProps as ComponentPropsWithoutRef<'button'>)}
+            {...(controlPrevProps as ComponentPropsWithoutRef<'button'>)}
+            onClick={handlerAll(controlProps?.onClick, controlPrevProps?.onClick, onPrev)}
           />
         ) : null}
 
@@ -111,9 +114,9 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             page='next'
             className='ui-pagination-item-next'
             isDisabled={isDisabled || currentPage === total}
-            {...(controls as ComponentPropsWithoutRef<'button'>)}
-            {...(controlNext as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(controls?.onClick, controlNext?.onClick, onNext)}
+            {...(controlProps as ComponentPropsWithoutRef<'button'>)}
+            {...(controlNextProps as ComponentPropsWithoutRef<'button'>)}
+            onClick={handlerAll(controlProps?.onClick, controlNextProps?.onClick, onNext)}
           />
         ) : null}
 
@@ -122,9 +125,9 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             page='last'
             className='ui-pagination-item-last'
             isDisabled={isDisabled || currentPage === total}
-            {...(edges as ComponentPropsWithoutRef<'button'>)}
-            {...(edgeLast as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(edges?.onClick, edgeLast?.onClick, onLast)}
+            {...(edgeProps as ComponentPropsWithoutRef<'button'>)}
+            {...(edgeLastProps as ComponentPropsWithoutRef<'button'>)}
+            onClick={handlerAll(edgeProps?.onClick, edgeLastProps?.onClick, onLast)}
           />
         ) : null}
       </ui.div>

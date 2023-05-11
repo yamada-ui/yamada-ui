@@ -46,8 +46,8 @@ type NativeSelectOptions = {
   placeholderInOptions?: boolean
   focusBorderColor?: string
   errorBorderColor?: string
-  container?: Omit<HTMLUIProps<'div'>, 'children'>
-  icon?: HTMLUIProps<'div'>
+  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  iconProps?: HTMLUIProps<'div'>
 }
 
 export type NativeSelectProps = Omit<HTMLUIProps<'select'>, 'size'> &
@@ -70,8 +70,8 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     value,
     placeholder,
     isRequired,
-    container,
-    icon,
+    containerProps,
+    iconProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -110,9 +110,15 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     <NativeSelectProvider value={styles}>
       <ui.div
         className='ui-native-select'
-        __css={{ position: 'relative', w: '100%', h: 'fit-content', color, ...styles.container }}
+        __css={{
+          position: 'relative',
+          w: '100%',
+          h: 'fit-content',
+          color,
+          ...styles.container,
+        }}
         {...computedProps[0]}
-        {...container}
+        {...containerProps}
         {...formControlProps}
       >
         <ui.select
@@ -130,7 +136,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
           {children ?? computedChildren}
         </ui.select>
 
-        <NativeSelectIcon {...icon} {...formControlProps} />
+        <NativeSelectIcon {...iconProps} {...formControlProps} />
       </ui.div>
     </NativeSelectProvider>
   )

@@ -14,7 +14,7 @@ export type TabPanelsProps = HTMLUIProps<'div'>
 
 export const TabPanels = forwardRef<TabPanelsProps, 'div'>(
   ({ className, children, ...rest }, ref) => {
-    const { selectedIndex, tabPanels, styles } = useTabsContext()
+    const { selectedIndex, tabPanelsProps, styles } = useTabsContext()
 
     const validChildren = getValidChildren(children)
 
@@ -38,7 +38,7 @@ export const TabPanels = forwardRef<TabPanelsProps, 'div'>(
         ref={ref}
         className={cx('ui-tabs-panels', className)}
         __css={css}
-        {...tabPanels}
+        {...tabPanelsProps}
         {...rest}
       >
         {cloneChildren}

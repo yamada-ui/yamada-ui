@@ -68,8 +68,8 @@ type ModalOptions = Pick<
   onCloseComplete?: () => void
   placement?: Token<Placement>
   outside?: CSSUIProps['p']
-  closeOnButton?: boolean
-  overlay?: boolean
+  withCloseButton?: boolean
+  withOverlay?: boolean
   allowPinchZoom?: boolean
   scrollBehavior?: ScrollBehavior
   blockScrollOnMount?: boolean
@@ -96,8 +96,8 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     onCloseComplete,
     placement: _placement = 'center',
     outside = 'md',
-    closeOnButton = true,
-    overlay = true,
+    withCloseButton = true,
+    withOverlay = true,
     allowPinchZoom = false,
     scrollBehavior = 'inside',
     autoFocus,
@@ -167,7 +167,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
         isOpen,
         onClose,
         onOverlayClick,
-        closeOnButton,
+        withCloseButton,
         scrollBehavior,
         closeOnOverlay,
         animation,
@@ -191,7 +191,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
                 forwardProps
               >
                 <ui.div __css={css}>
-                  {customModalOverlay ?? (overlay && size !== 'full' ? <ModalOverlay /> : null)}
+                  {customModalOverlay ?? (withOverlay && size !== 'full' ? <ModalOverlay /> : null)}
 
                   {drawerContent ?? (
                     <ModalContent ref={ref} className={className} onKeyDown={onKeyDown} {...rest}>
@@ -246,7 +246,7 @@ const getModalContentProps = (
 
 const ModalContent = forwardRef<ModalContentProps, 'section'>(
   ({ className, children, __css, ...rest }, ref) => {
-    const { styles, scrollBehavior, closeOnButton, onClose, animation, duration } = useModal()
+    const { styles, scrollBehavior, withCloseButton, onClose, animation, duration } = useModal()
 
     const validChildren = getValidChildren(children)
 
@@ -278,7 +278,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
         {...props}
         {...rest}
       >
-        {customModalCloseButton ?? (closeOnButton && onClose ? <ModalCloseButton /> : null)}
+        {customModalCloseButton ?? (withCloseButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
       </ui.section>

@@ -34,11 +34,11 @@ type MultiAutocompleteOptions = {
   isClearable?: boolean
   focusBorderColor?: string
   errorBorderColor?: string
-  container?: Omit<HTMLUIProps<'div'>, 'children'>
-  list?: Omit<AutocompleteListProps, 'children'>
-  input?: HTMLUIProps<'input'>
-  icon?: AutocompleteIconProps
-  clearIcon?: AutocompleteIconProps
+  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  listProps?: Omit<AutocompleteListProps, 'children'>
+  inputProps?: HTMLUIProps<'input'>
+  iconProps?: AutocompleteIconProps
+  clearIconProps?: AutocompleteIconProps
 }
 
 export type MultiAutocompleteProps = ThemeProps<'Select'> &
@@ -60,11 +60,11 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
     minHeight,
     closeOnSelect = false,
     keepPlaceholder = false,
-    container,
-    list,
-    input,
-    icon,
-    clearIcon,
+    containerProps,
+    listProps,
+    inputProps,
+    iconProps,
+    clearIconProps,
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -114,35 +114,35 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
         }}
       >
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-autocomplete' __css={css} {...getContainerProps(container)}>
+          <ui.div className='ui-autocomplete' __css={css} {...getContainerProps(containerProps)}>
             <MultiAutocompleteField
               component={component}
               separator={separator}
               keepPlaceholder={keepPlaceholder}
               h={h}
               minH={minH}
-              input={input}
+              inputProps={inputProps}
               {...getFieldProps({}, ref)}
             />
 
             {isClearable && value.length ? (
               <AutocompleteClearIcon
-                {...clearIcon}
-                onClick={handlerAll(clearIcon?.onClick, onClear)}
+                {...clearIconProps}
+                onClick={handlerAll(clearIconProps?.onClick, onClear)}
                 {...formControlProps}
               />
             ) : (
-              <AutocompleteIcon {...icon} {...formControlProps} />
+              <AutocompleteIcon {...iconProps} {...formControlProps} />
             )}
 
             {!isEmpty ? (
-              <AutocompleteList {...list}>
+              <AutocompleteList {...listProps}>
                 {createOption ? <AutocompleteCreate /> : <AutocompleteEmpty />}
 
                 {children ?? computedChildren}
               </AutocompleteList>
             ) : (
-              <AutocompleteList {...list}>
+              <AutocompleteList {...listProps}>
                 {createOption && inputValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
               </AutocompleteList>
             )}
@@ -154,7 +154,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
 })
 
 type MultiAutocompleteFieldProps = HTMLUIProps<'div'> &
-  Pick<MultiAutocompleteProps, 'component' | 'separator' | 'keepPlaceholder' | 'input'>
+  Pick<MultiAutocompleteProps, 'component' | 'separator' | 'keepPlaceholder' | 'inputProps'>
 
 const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
   (
@@ -166,7 +166,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
       h,
       minH,
       placeholder,
-      input,
+      inputProps,
       ...rest
     },
     ref,
@@ -248,7 +248,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
             marginBlockStart='0.125rem'
             marginBlockEnd='0.125rem'
             placeholder={!displayValue || (keepPlaceholder && isOpen) ? placeholder : undefined}
-            {...getInputProps(input, ref)}
+            {...getInputProps(inputProps, ref)}
             value={inputValue}
           />
         </ui.div>

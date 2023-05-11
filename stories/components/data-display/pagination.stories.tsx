@@ -228,9 +228,9 @@ export const customControl: ComponentStory<typeof Pagination> = () => {
 export const customControlButton: ComponentStory<typeof Pagination> = () => {
   return (
     <>
-      <Pagination total={10} controls={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination total={10} controlPrev={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination total={10} controlNext={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+      <Pagination total={10} controlProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+      <Pagination total={10} controlPrevProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+      <Pagination total={10} controlNextProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
     </>
   )
 }
@@ -238,9 +238,17 @@ export const customControlButton: ComponentStory<typeof Pagination> = () => {
 export const customEdgeButton: ComponentStory<typeof Pagination> = () => {
   return (
     <>
-      <Pagination total={10} withEdges edges={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination total={10} withEdges edgeFirst={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination total={10} withEdges edgeLast={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+      <Pagination total={10} withEdges edgeProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+      <Pagination
+        total={10}
+        withEdges
+        edgeFirstProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+      />
+      <Pagination
+        total={10}
+        withEdges
+        edgeLastProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+      />
     </>
   )
 }

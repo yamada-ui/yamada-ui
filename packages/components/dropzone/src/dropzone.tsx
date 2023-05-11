@@ -36,8 +36,8 @@ type DropzoneOptions = {
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
   isLoading?: boolean
-  overlay?: FadeProps
-  loading?: LoadingProps
+  overlayProps?: FadeProps
+  loadingProps?: LoadingProps
   accept?: Accept | string[]
   openRef?: ForwardedRef<() => void | undefined>
 }
@@ -55,8 +55,8 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
     name,
     className,
     isLoading,
-    overlay,
-    loading,
+    overlayProps,
+    loadingProps,
     openRef,
     accept,
     onDrop,
@@ -134,7 +134,7 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
         data-idle={dataAttr(isDragIdle)}
         data-loading={dataAttr(isLoading)}
       >
-        <LoadingOverlay loading={loading} {...overlay} />
+        <LoadingOverlay loadingProps={loadingProps} {...overlayProps} />
         <ui.input ref={ref} id={id} name={name} {...formControlProps} {...getInputProps()} />
         {children}
       </ui.div>
@@ -142,9 +142,9 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
   )
 })
 
-type LoadingOverlayProps = FadeProps & { loading?: LoadingProps }
+type LoadingOverlayProps = FadeProps & { loadingProps?: LoadingProps }
 
-const LoadingOverlay: FC<LoadingOverlayProps> = ({ loading, ...rest }) => {
+const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   const { isLoading, styles } = useDropzoneContext()
 
   const css: CSSUIObject = {
@@ -161,7 +161,7 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loading, ...rest }) => {
 
   return (
     <Fade isOpen={isLoading} unmountOnExit className='ui-dropzone-overlay' __css={css} {...rest}>
-      <Loading className='ui-dropzone-loading' size='8' {...loading} />
+      <Loading className='ui-dropzone-loading' size='8' {...loadingProps} />
     </Fade>
   )
 }

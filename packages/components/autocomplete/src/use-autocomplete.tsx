@@ -222,8 +222,8 @@ type AutocompleteContext = Omit<
 }
 
 export const [AutocompleteProvider, useAutocompleteContext] = createContext<AutocompleteContext>({
-  strict: false,
   name: 'AutocompleteContext',
+  errorMessage: `useAutocompleteContext returned is 'undefined'. Seems you forgot to wrap the components in "<Autocomplete />" or "<MultiAutocomplete />"`,
 })
 
 type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<

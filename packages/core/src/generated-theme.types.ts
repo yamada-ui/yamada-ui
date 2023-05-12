@@ -593,6 +593,7 @@ export interface GeneratedTheme extends UITheme {
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
     Slider: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Stepper: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Switch: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'thick' | 'thin' | (string & {})

@@ -1,13 +1,10 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useTableStyles } from './'
 
 export type TableContainerProps = HTMLUIProps<'div'>
 
 export const TableContainer = forwardRef<TableContainerProps, 'div'>(
   ({ className, overflow, overflowX, ...rest }, ref) => {
-    const styles = useTableStyles()
-
     const css: CSSUIObject = {
       display: 'block',
       whiteSpace: 'nowrap',
@@ -15,7 +12,6 @@ export const TableContainer = forwardRef<TableContainerProps, 'div'>(
       overflowX: (overflow ?? overflowX ?? 'auto') as CSSUIObject['overflowX'],
       overflowY: 'hidden',
       maxW: '100%',
-      ...styles.container,
     }
 
     return (

@@ -1513,6 +1513,12 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/use-descendant':
+        specifier: workspace:*
+        version: link:../../hooks/use-descendant
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

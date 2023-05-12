@@ -19,7 +19,6 @@ export const Table: ComponentMultiStyle = {
       textAlign: 'start',
     },
     caption: {
-      mt: 4,
       fontFamily: 'heading',
       fontWeight: 'medium',
       textAlign: 'center',
@@ -179,7 +178,7 @@ export const Table: ComponentMultiStyle = {
       th: {
         px: 2,
         py: 1,
-        fontSize: '2xs',
+        fontSize: 'xs',
         lineHeight: 5,
       },
       td: {
@@ -189,6 +188,7 @@ export const Table: ComponentMultiStyle = {
         lineHeight: 5,
       },
       caption: {
+        mt: 1,
         px: 2,
         py: 1,
         fontSize: 'xs',
@@ -198,7 +198,7 @@ export const Table: ComponentMultiStyle = {
       th: {
         px: 3,
         py: 2,
-        fontSize: 'xs',
+        fontSize: 'sm',
         lineHeight: 5,
       },
       td: {
@@ -208,6 +208,7 @@ export const Table: ComponentMultiStyle = {
         lineHeight: 5,
       },
       caption: {
+        mt: 2,
         px: 3,
         py: 2,
         fontSize: 'sm',
@@ -217,7 +218,6 @@ export const Table: ComponentMultiStyle = {
       th: {
         px: 4,
         py: 3,
-        fontSize: 'sm',
         lineHeight: 6,
       },
       td: {
@@ -226,6 +226,7 @@ export const Table: ComponentMultiStyle = {
         lineHeight: 6,
       },
       caption: {
+        mt: 3,
         px: 4,
         py: 3,
       },
@@ -234,7 +235,7 @@ export const Table: ComponentMultiStyle = {
       th: {
         px: 6,
         py: 4,
-        fontSize: 'md',
+        fontSize: 'lg',
         lineHeight: 6,
       },
       td: {
@@ -244,6 +245,7 @@ export const Table: ComponentMultiStyle = {
         lineHeight: 6,
       },
       caption: {
+        mt: 4,
         px: 6,
         py: 4,
         fontSize: 'lg',

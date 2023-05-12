@@ -13,11 +13,14 @@ type TableStyleContext = Record<string, CSSUIObject>
 
 export const [TableStyleProvider, useTableStyles] = createContext<TableStyleContext>({
   name: 'TableStyleContext',
-  errorMessage: `useTableStyles returned is 'undefined'. Seems you forgot to wrap the components in "<Table />" or "<NativeTable />" or "PagingTable"`,
+  errorMessage: `useTableStyles returned is 'undefined'. Seems you forgot to wrap the components in "<Table />" or "<NativeTable />" or "<PagingTable />"`,
 })
 
 type NativeTableOptions = {
   layout?: CSSUIObject['tableLayout']
+  highlightOnHover?: boolean
+  withBorder?: boolean
+  withColumnBorders?: boolean
 }
 
 export type NativeTableProps = HTMLUIProps<'table'> & ThemeProps<'Table'> & NativeTableOptions

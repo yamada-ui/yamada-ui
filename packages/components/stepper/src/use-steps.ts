@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { StepStatus } from './use-stepper'
+import { StepStatusType } from './use-stepper'
 
 export type UseStepsProps = {
   index?: number
@@ -19,7 +19,7 @@ export const useSteps = ({ index = 0, count }: UseStepsProps) => {
   const isIncompleteStep = useCallback((step: number) => step > activeStep, [activeStep])
 
   const getStepStatus = useCallback(
-    (step: number): StepStatus => {
+    (step: number): StepStatusType => {
       if (step < activeStep) return 'complete'
       if (step > activeStep) return 'incomplete'
 

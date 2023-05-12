@@ -38,6 +38,7 @@ import { SegmentedControl } from './segmented-control'
 import { Select } from './select'
 import { Skeleton } from './skeleton'
 import { Slider } from './slider'
+import { Stepper } from './stepper'
 import { Switch } from './switch'
 import { Tabs } from './tabs'
 import { Tag } from './tag'
@@ -85,6 +86,7 @@ export default {
   Select,
   Skeleton,
   Slider,
+  Stepper,
   Switch,
   Tabs,
   Tag,

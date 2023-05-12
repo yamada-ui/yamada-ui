@@ -1508,6 +1508,22 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/stepper:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/switch:
     dependencies:
       '@yamada-ui/checkbox':
@@ -2217,6 +2233,9 @@ importers:
       '@yamada-ui/slider':
         specifier: workspace:*
         version: link:../components/slider
+      '@yamada-ui/stepper':
+        specifier: workspace:*
+        version: link:../components/stepper
       '@yamada-ui/switch':
         specifier: workspace:*
         version: link:../components/switch

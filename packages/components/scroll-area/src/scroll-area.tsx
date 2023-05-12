@@ -8,12 +8,13 @@ import {
   useComponentStyle,
 } from '@yamada-ui/core'
 import { cx, handlerAll, merge } from '@yamada-ui/utils'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type ScrollAreaOptions = {
   type?: 'always' | 'scroll' | 'hover' | 'never'
   innerProps?: HTMLUIProps<'div'>
   scrollHideDelay?: number
+  onScrollPositionChange?: ({ x, y }: { x: number; y: number }) => void
 }
 
 export type ScrollAreaProps = HTMLUIProps<'div'> & ThemeProps<'ScrollArea'> & ScrollAreaOptions
@@ -50,6 +51,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
     type = 'hover',
     overflow = 'overlay',
     scrollHideDelay = 1000,
+    onScrollPositionChange,
     children,
     innerProps,
     ...rest
@@ -76,15 +78,23 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
     hoverTimeout.current = setTimeout(() => setIsHovered(false), scrollHideDelay)
   }, [scrollHideDelay, type])
 
-  const onScroll = useCallback(() => {
-    if (type !== 'scroll') return
+  const onScroll = useCallback(
+    (ev: UIEvent<HTMLDivElement>) => {
+      onScrollPositionChange?.({
+        x: (ev.target as HTMLDivElement).scrollLeft,
+        y: (ev.target as HTMLDivElement).scrollTop,
+      })
 
-    if (!isScrolling) setisScrolling(true)
+      if (type !== 'scroll') return
 
-    clearTimeout(scrollTimeout.current)
+      if (!isScrolling) setisScrolling(true)
 
-    scrollTimeout.current = setTimeout(() => setisScrolling(false), scrollHideDelay)
-  }, [isScrolling, scrollHideDelay, type])
+      clearTimeout(scrollTimeout.current)
+
+      scrollTimeout.current = setTimeout(() => setisScrolling(false), scrollHideDelay)
+    },
+    [isScrolling, onScrollPositionChange, scrollHideDelay, type],
+  )
 
   useEffect(() => {
     return () => {

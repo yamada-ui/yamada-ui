@@ -90,30 +90,6 @@ export const Stepper: ComponentMultiStyle = {
   },
 
   sizes: {
-    xs: ({ theme: t }) => ({
-      title: {
-        fontSize: 'xs',
-      },
-      description: {
-        fontSize: 'xs',
-      },
-      status: {
-        w: 4,
-        h: 4,
-      },
-      icon: {
-        w: 3,
-        h: 3,
-      },
-      number: {
-        fontSize: 'xs',
-      },
-      separator: {
-        maxHeight: `calc(100% - ${get(t, 'sizes.4')} - 8px)`,
-        top: `calc(${get(t, 'sizes.4')} + 4px)`,
-        insetStart: `calc(${get(t, 'sizes.4')} / 2 - 1px)`,
-      },
-    }),
     sm: ({ theme: t }) => ({
       title: {
         fontSize: 'sm',

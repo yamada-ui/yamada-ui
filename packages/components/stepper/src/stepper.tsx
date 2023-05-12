@@ -4,25 +4,98 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
-  HTMLUIProps,
   ThemeProps,
 } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { StepperProvider } from './use-stepper'
+import { ReactNode, useMemo } from 'react'
+import {
+  StepperProvider,
+  UseStepperProps,
+  useStepper,
+  StepperDescendantsContextProvider,
+} from './use-stepper'
+import {
+  Step,
+  StepProps,
+  StepTitle,
+  StepDescription,
+  StepSeparator,
+  StepStatus,
+  StepStatusProps,
+  StepTitleProps,
+  StepDescriptionProps,
+  StepSeparatorProps,
+} from './'
 
-type StepperOptions = {}
+export type Steps = ({
+  title?: ReactNode
+  description?: ReactNode
+  hasSeparator?: boolean
+  statusProps?: StepStatusProps
+  titleProps?: StepTitleProps
+  descriptionProps?: StepDescriptionProps
+  separatorProps?: StepSeparatorProps
+} & StepProps)[]
 
-export type StepperProps = HTMLUIProps<'div'> & ThemeProps<'Stepper'> & StepperOptions
+type StepperOptions = {
+  steps?: Steps
+}
+
+export type StepperProps = ThemeProps<'Stepper'> & UseStepperProps & StepperOptions
 
 export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Stepper', props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
+  const { className, steps, children, ...computedProps } = omitThemeProps(mergedProps)
+
+  const { descendants, getContainerProps, ...rest } = useStepper(computedProps)
+
+  const computedChildren = useMemo(() => {
+    const hasChildren = children != null
+
+    if (hasChildren) {
+      return children
+    } else {
+      // @ts-ignore
+      return steps?.map(
+        (
+          {
+            title,
+            description,
+            hasSeparator = true,
+            statusProps,
+            titleProps,
+            descriptionProps,
+            separatorProps,
+            ...rest
+          },
+          index,
+        ) => (
+          <Step key={index} {...rest}>
+            <StepStatus {...statusProps} />
+
+            <ui.div flexShrink={0}>
+              {title ? <StepTitle {...titleProps}>{title}</StepTitle> : null}
+              {description ? (
+                <StepDescription {...descriptionProps}>{description}</StepDescription>
+              ) : null}
+            </ui.div>
+
+            {hasSeparator ? <StepSeparator {...separatorProps} /> : null}
+          </Step>
+        ),
+      )
+    }
+  }, [children, steps])
 
   const css: CSSUIObject = { ...styles.stepper }
 
   return (
-    <StepperProvider value={styles}>
-      <ui.div ref={ref} className={cx('ui-stepper', className)} __css={css} {...rest}></ui.div>
-    </StepperProvider>
+    <StepperDescendantsContextProvider value={descendants}>
+      <StepperProvider value={{ ...rest, styles }}>
+        <ui.div className={cx('ui-stepper', className)} __css={css} {...getContainerProps({}, ref)}>
+          {computedChildren}
+        </ui.div>
+      </StepperProvider>
+    </StepperDescendantsContextProvider>
   )
 })

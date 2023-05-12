@@ -598,6 +598,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'thick' | 'thin' | (string & {})
     }
+    Table: {
+      sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {})
+      variants: 'simple' | 'striped' | 'unstyled' | (string & {})
+    }
     Tabs: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants:

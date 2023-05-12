@@ -40,6 +40,7 @@ import { Skeleton } from './skeleton'
 import { Slider } from './slider'
 import { Stepper } from './stepper'
 import { Switch } from './switch'
+import { Table } from './table'
 import { Tabs } from './tabs'
 import { Tag } from './tag'
 import { Textarea } from './textarea'
@@ -88,6 +89,7 @@ export default {
   Slider,
   Stepper,
   Switch,
+  Table,
   Tabs,
   Tag,
   Textarea,

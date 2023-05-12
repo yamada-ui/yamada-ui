@@ -1143,6 +1143,22 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/native-table:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/notice:
     dependencies:
       '@yamada-ui/alert':
@@ -2194,6 +2210,9 @@ importers:
       '@yamada-ui/native-select':
         specifier: workspace:*
         version: link:../components/native-select
+      '@yamada-ui/native-table':
+        specifier: workspace:*
+        version: link:../components/native-table
       '@yamada-ui/notice':
         specifier: workspace:*
         version: link:../components/notice

@@ -1573,10 +1573,19 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/native-table':
+        specifier: workspace:*
+        version: link:../native-table
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
+      react-table:
+        specifier: ^7.8.0
+        version: 7.8.0(react@18.2.0)
     devDependencies:
+      '@types/react-table':
+        specifier: ^7.7.14
+        version: 7.7.14
       clean-package:
         specifier: 2.1.1
         version: 2.1.1
@@ -4203,7 +4212,7 @@ packages:
       '@emotion/memoize': 0.8.1
       '@emotion/unitless': 0.8.0
       '@emotion/utils': 1.2.0
-      csstype: 3.1.1
+      csstype: 3.1.2
     dev: false
 
   /@emotion/serialize@1.1.2:
@@ -7912,6 +7921,12 @@ packages:
 
   /@types/react-syntax-highlighter@15.5.6:
     resolution: {integrity: sha512-i7wFuLbIAFlabTeD2I1cLjEOrG/xdMa/rpx2zwzAoGHuXJDhSqp9BSfDlMHSh9JSuNfxHk9eEmMX6D55GiyjGg==}
+    dependencies:
+      '@types/react': 18.2.6
+    dev: true
+
+  /@types/react-table@7.7.14:
+    resolution: {integrity: sha512-TYrv7onCiakaG1uAu/UpQ9FojNEt/4/ht87EgJQaEGFoWV606ZLWUZAcUHzMxgc3v1mywP1cDyz3qB4ho3hWOw==}
     dependencies:
       '@types/react': 18.2.6
     dev: true
@@ -19722,6 +19737,14 @@ packages:
       prismjs: 1.29.0
       react: 18.2.0
       refractor: 3.6.0
+    dev: false
+
+  /react-table@7.8.0(react@18.2.0):
+    resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
+    peerDependencies:
+      react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react@18.2.0:

@@ -72,6 +72,7 @@
     "@yamada-ui/slider": "workspace:*",
     "@yamada-ui/stepper": "workspace:*",
     "@yamada-ui/switch": "workspace:*",
+    "@yamada-ui/table": "workspace:*",
     "@yamada-ui/tabs": "workspace:*",
     "@yamada-ui/tag": "workspace:*",
     "@yamada-ui/textarea": "workspace:*",

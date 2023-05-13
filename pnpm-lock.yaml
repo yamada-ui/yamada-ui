@@ -1570,6 +1570,9 @@ importers:
 
   packages/components/table:
     dependencies:
+      '@yamada-ui/checkbox':
+        specifier: workspace:*
+        version: link:../checkbox
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core

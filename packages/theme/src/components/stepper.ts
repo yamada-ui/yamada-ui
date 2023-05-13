@@ -166,6 +166,6 @@ export const Stepper: ComponentMultiStyle = {
 
   defaultProps: {
     size: 'md',
-    colorScheme: 'blue',
+    colorStyle: 'blue',
   },
 }

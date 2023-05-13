@@ -256,6 +256,6 @@ export const Table: ComponentMultiStyle = {
   defaultProps: {
     variant: 'simple',
     size: 'md',
-    colorScheme: 'gray',
+    colorStyle: 'gray',
   },
 }

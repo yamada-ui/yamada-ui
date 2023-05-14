@@ -5,8 +5,18 @@ export const Table: ComponentMultiStyle = {
   baseStyle: {
     table: {
       w: '100%',
+      h: '100%',
       fontVariantNumeric: 'lining-nums tabular-nums',
       borderCollapse: 'collapse',
+    },
+    tr: {
+      _disabled: {
+        cursor: 'not-allowed',
+        opacity: 0.4,
+        _hover: {
+          bg: ['initial', 'initial'],
+        },
+      },
     },
     th: {
       fontFamily: 'heading',
@@ -32,6 +42,7 @@ export const Table: ComponentMultiStyle = {
       colorStyle: c = 'gray',
       withBorder,
       withColumnBorders,
+      highlightOnSelected,
       highlightOnHover,
     }) => {
       const isGray = c === 'gray'
@@ -62,6 +73,24 @@ export const Table: ComponentMultiStyle = {
         },
         tbody: {
           tr: {
+            ...(highlightOnSelected
+              ? {
+                  _selected: {
+                    bg: isDefaultColor(
+                      [
+                        transparentizeColor(toneColor(c, 50)(t, s), 0.6)(t, s),
+                        transparentizeColor(toneColor(c, 100)(t, s), 0.24)(t, s),
+                      ],
+                      isGray
+                        ? [`gray.100`, `whiteAlpha.200`]
+                        : [
+                            transparentizeColor(`${c}.50`, 0.6)(t, s),
+                            transparentizeColor(`${c}.100`, 0.24)(t, s),
+                          ],
+                    )(c),
+                  },
+                }
+              : {}),
             ...(highlightOnHover
               ? {
                   cursor: 'pointer',

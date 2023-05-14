@@ -86,10 +86,10 @@ export type UseTableProps<Y extends Dict = Dict> = TableProps &
     onChangeSelect?: (selectedRows: string[]) => void
     onClickRow?: (row: Row<Y>) => void
     checkboxProps?: CheckboxProps
-    toggleSortByRef: ForwardedRef<ToggleSortBy>
-    setSortByRef: ForwardedRef<SetSortBy>
-    toggleRowSelectedRef: ForwardedRef<ToggleRowSelected>
-    toggleAllRowsSelectedRef: ForwardedRef<ToggleAllRowsSelected>
+    toggleSortByRef?: ForwardedRef<ToggleSortBy>
+    setSortByRef?: ForwardedRef<SetSortBy>
+    toggleRowSelectedRef?: ForwardedRef<ToggleRowSelected>
+    toggleAllRowsSelectedRef?: ForwardedRef<ToggleAllRowsSelected>
   }
 
 export const useTable = <Y extends Dict = Dict>({

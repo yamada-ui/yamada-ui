@@ -18,6 +18,7 @@ import { Dropzone } from './dropzone'
 import { Editable } from './editable'
 import { FormControl } from './form-control'
 import { Heading } from './heading'
+import { Indicator } from './indicator'
 import { Input } from './input'
 import { Kbd } from './kbd'
 import { Link } from './link'
@@ -47,6 +48,7 @@ import { Textarea } from './textarea'
 import { Tooltip } from './tooltip'
 
 export default {
+  Indicator,
   Accordion,
   Alert,
   Avatar,

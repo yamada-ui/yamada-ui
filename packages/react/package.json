@@ -43,6 +43,7 @@
     "@yamada-ui/highlight": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/image": "workspace:*",
+    "@yamada-ui/indicator": "workspace:*",
     "@yamada-ui/input": "workspace:*",
     "@yamada-ui/kbd": "workspace:*",
     "@yamada-ui/layouts": "workspace:*",

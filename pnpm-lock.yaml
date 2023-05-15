@@ -877,6 +877,22 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/indicator:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.1.1
+        version: 2.1.1
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/input:
     dependencies:
       '@yamada-ui/core':
@@ -2208,6 +2224,9 @@ importers:
       '@yamada-ui/image':
         specifier: workspace:*
         version: link:../components/image
+      '@yamada-ui/indicator':
+        specifier: workspace:*
+        version: link:../components/indicator
       '@yamada-ui/input':
         specifier: workspace:*
         version: link:../components/input

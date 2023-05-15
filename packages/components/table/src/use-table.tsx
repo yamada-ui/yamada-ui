@@ -100,7 +100,7 @@ export type UseTableProps<Y extends object = {}> = TableProps &
     defaultSelectedRowIds?: string[]
     disabledRowIds?: string[]
     rowsClickSelect?: boolean
-    onChangeSelect?: (selectedRows: string[]) => void
+    onChangeSelect?: (selectedIds: string[]) => void
     onClickRow?: (row: Row<Y>) => void
     checkboxProps?: CheckboxProps
     selectColumnProps?: SelectColumn
@@ -234,10 +234,10 @@ export const useTable = <Y extends object = {}>({
       : []),
   ) as TableInstance<Y>
 
-  assignRef(toggleSortByRef, disableSortBy ? toggleSortBy : noop)
-  assignRef(setSortByRef, disableSortBy ? setSortBy : noop)
-  assignRef(toggleRowSelectedRef, disableSelect ? toggleRowSelected : noop)
-  assignRef(toggleAllRowsSelectedRef, disableSelect ? toggleAllRowsSelected : noop)
+  assignRef(toggleSortByRef, !disableSortBy ? toggleSortBy : noop)
+  assignRef(setSortByRef, !disableSortBy ? setSortBy : noop)
+  assignRef(toggleRowSelectedRef, !disableSelect ? toggleRowSelected : noop)
+  assignRef(toggleAllRowsSelectedRef, !disableSelect ? toggleAllRowsSelected : noop)
 
   useUpdateEffect(() => {
     if (disableSortBy) return
@@ -248,9 +248,9 @@ export const useTable = <Y extends object = {}>({
   useUpdateEffect(() => {
     if (disableSelect) return
 
-    const selectedRows = Object.keys(selectedRowIds)
+    const selectedRowIdsMap = Object.keys(selectedRowIds)
 
-    onChangeSelect?.(selectedRows)
+    onChangeSelect?.(selectedRowIdsMap)
   }, [selectedRowIds])
 
   const getTableProps: PropGetter = useCallback(

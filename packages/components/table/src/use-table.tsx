@@ -43,7 +43,7 @@ type ColumnStyles = {
 export type Column<Y extends object = {}> = Omit<TableColumn<Y>, 'columns'> &
   UseSortByColumnOptions<Y> &
   ColumnStyles & {
-    columns: Column<Y>[]
+    columns?: Column<Y>[]
   }
 
 export type SelectColumn<Y extends object = {}> = Pick<

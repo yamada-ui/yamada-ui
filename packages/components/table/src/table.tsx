@@ -45,6 +45,7 @@ export const Table = forwardRef(
       tfootProps,
       checkboxProps,
       layout,
+      children,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
@@ -62,6 +63,7 @@ export const Table = forwardRef(
             <Thead {...theadProps} />
             <Tbody {...tbodyProps} />
             {withFooter ? <Tfoot {...tfootProps} /> : null}
+            {children}
           </ui.table>
         </TableProvider>
       </TableStyleProvider>

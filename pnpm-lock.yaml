@@ -882,6 +882,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/use-value':
+        specifier: workspace:*
+        version: link:../../hooks/use-value
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

@@ -57,7 +57,7 @@ export const Table = forwardRef(
 
     return (
       <TableStyleProvider value={styles}>
-        <TableProvider value={{ ...rest } as TableContext}>
+        <TableProvider value={{ ...rest } as unknown as TableContext}>
           <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
             <Thead {...theadProps} />
             <Tbody {...tbodyProps} />

@@ -1,3 +1,4 @@
+import { CSSUIObject } from '@yamada-ui/core'
 import {
   Thead as NativeThead,
   TableHeadProps as NativeTableHeadProps,
@@ -6,22 +7,24 @@ import {
   TrProps,
   ThProps,
 } from '@yamada-ui/native-table'
-import { Dict } from '@yamada-ui/utils'
+import { CSSProperties } from 'react'
 import { HeaderGroup, UseSortByColumnProps } from 'react-table'
 import { useTableContext } from './use-table'
 
-type Header<Y extends Dict = Dict> = HeaderGroup<Y> & UseSortByColumnProps<Y>
+type Header<Y extends object = {}> = HeaderGroup<Y> &
+  UseSortByColumnProps<Y> & {
+    className?: string
+    style?: CSSProperties
+    sx?: CSSUIObject
+    css?: CSSUIObject
+  }
 
 export type TableHeadProps = NativeTableHeadProps & {
   headerGroupProps?: Omit<TrProps, 'key'>
   headerProps?: Omit<ThProps, 'key'>
 }
 
-export const Thead = <Y extends Dict = Dict>({
-  headerGroupProps,
-  headerProps,
-  ...rest
-}: TableHeadProps) => {
+export const Thead = ({ headerGroupProps, headerProps, ...rest }: TableHeadProps) => {
   const { headerGroups } = useTableContext()
 
   return (
@@ -31,15 +34,26 @@ export const Thead = <Y extends Dict = Dict>({
 
         return (
           <Tr key={key} {...props}>
-            {(headers as Header<Y>[]).map(
-              ({ getHeaderProps, getSortByToggleProps, isSorted, isSortedDesc, render }) => {
+            {(headers as Header[]).map(
+              ({
+                getHeaderProps,
+                getSortByToggleProps,
+                isSorted,
+                isSortedDesc,
+                render,
+                className,
+                style,
+                css,
+                sx,
+              }) => {
                 const { key, ...props } = getHeaderProps({
                   ...headerProps,
+                  className,
                   ...getSortByToggleProps(),
                 })
 
                 return (
-                  <Th key={key} {...props}>
+                  <Th key={key} {...props} sx={sx} style={{ ...props.style, ...style }} __css={css}>
                     {render('Header')}
                     <span>{isSorted ? (isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                   </Th>

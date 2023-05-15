@@ -8,10 +8,10 @@ type ThOptions = {
 
 export type ThProps = HTMLUIProps<'th'> & ThOptions
 
-export const Th = forwardRef<ThProps, 'th'>(({ className, isNumeric, ...rest }, ref) => {
+export const Th = forwardRef<ThProps, 'th'>(({ className, isNumeric, __css, ...rest }, ref) => {
   const styles = useTableStyles()
 
-  const css: CSSUIObject = { ...styles.th }
+  const css: CSSUIObject = { ...styles.th, ...__css }
 
   return (
     <ui.th

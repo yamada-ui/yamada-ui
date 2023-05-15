@@ -2,15 +2,15 @@ import {
   Tfoot as NativeTfoot,
   TableFootProps as NativeTableFootProps,
   Tr,
-  Td,
+  Th,
   TrProps,
-  TdProps,
+  ThProps,
 } from '@yamada-ui/native-table'
 import { useTableContext } from './use-table'
 
 export type TableFootProps = NativeTableFootProps & {
   footerGroupProps?: Omit<TrProps, 'key'>
-  footerProps?: Omit<TdProps, 'key'>
+  footerProps?: Omit<ThProps, 'key'>
 }
 
 export const Tfoot = ({ footerGroupProps, footerProps, ...rest }: TableFootProps) => {
@@ -27,9 +27,9 @@ export const Tfoot = ({ footerGroupProps, footerProps, ...rest }: TableFootProps
               const { key, ...props } = getFooterProps(footerProps)
 
               return (
-                <Td key={key} {...props}>
+                <Th key={key} {...props}>
                   {render('Footer')}
-                </Td>
+                </Th>
               )
             })}
           </Tr>

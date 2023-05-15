@@ -105,6 +105,7 @@ export type UseTableProps<Y extends object = {}> = TableProps &
     checkboxProps?: CheckboxProps
     selectColumnProps?: SelectColumn
     disableSelect?: boolean
+    withFooterSelect?: boolean
     toggleSortByRef?: ForwardedRef<ToggleSortBy>
     setSortByRef?: ForwardedRef<SetSortBy>
     toggleRowSelectedRef?: ForwardedRef<ToggleRowSelected>
@@ -136,6 +137,7 @@ export const useTable = <Y extends object = {}>({
   autoResetSortBy = true,
   onChangeSortBy,
   disableSelect,
+  withFooterSelect,
   defaultSelectedRowIds,
   disabledRowIds,
   rowsClickSelect = false,
@@ -221,7 +223,13 @@ export const useTable = <Y extends object = {}>({
       ? ([
           useRowSelect,
           (hooks) =>
-            useRegisterCheckbox<Y>({ hooks, checkboxProps, disabledRowIds, selectColumnProps }),
+            useRegisterCheckbox<Y>({
+              hooks,
+              checkboxProps,
+              disabledRowIds,
+              selectColumnProps,
+              withFooterSelect,
+            }),
         ] as PluginHook<Y>[])
       : []),
   ) as TableInstance<Y>

@@ -17,6 +17,7 @@ export type UseRegisterCheckboxProps<Y extends Dict = Dict> = {
   checkboxProps?: CheckboxProps
   disabledRowIds?: string[]
   selectColumnProps?: SelectColumn<Y>
+  withFooterSelect?: boolean
 }
 
 const Center = ui('div', {
@@ -34,6 +35,7 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
   checkboxProps,
   disabledRowIds = [],
   selectColumnProps,
+  withFooterSelect,
 }: UseRegisterCheckboxProps<Y>) => {
   hooks.visibleColumns.push(
     (columns) =>
@@ -61,6 +63,31 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
               </Center>
             )
           },
+          ...(withFooterSelect
+            ? {
+                Footer: ({ state, getToggleAllRowsSelectedProps, rowsById }: HeaderProps<Y>) => {
+                  const selectedRowIds = Object.keys(state.selectedRowIds)
+                  const unselectedRowIds = Object.keys(rowsById).filter(
+                    (id) => !selectedRowIds.includes(id),
+                  )
+
+                  const isAllChecked = unselectedRowIds.every((id) => disabledRowIds.includes(id))
+
+                  const { checked, indeterminate, onChange } = getToggleAllRowsSelectedProps()
+
+                  return (
+                    <Center>
+                      <Checkbox
+                        {...{ gap: 0, ...checkboxProps }}
+                        isChecked={isAllChecked || checked}
+                        {...(!isAllChecked ? { isIndeterminate: indeterminate } : {})}
+                        onChange={handlerAll(checkboxProps?.onChange, onChange)}
+                      />
+                    </Center>
+                  )
+                },
+              }
+            : {}),
           Cell: ({ row }: { row: Row<Y> }) => {
             const { checked, indeterminate, onChange } = row.getToggleRowSelectedProps()
 

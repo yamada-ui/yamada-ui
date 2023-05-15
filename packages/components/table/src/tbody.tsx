@@ -6,7 +6,7 @@ import {
   TrProps,
   TdProps,
 } from '@yamada-ui/native-table'
-import { Dict, dataAttr, ariaAttr, handlerAll } from '@yamada-ui/utils'
+import { dataAttr, ariaAttr, handlerAll } from '@yamada-ui/utils'
 import { type Row, useTableContext } from './use-table'
 
 export type TableBodyProps = NativeTableBodyProps & {
@@ -14,7 +14,7 @@ export type TableBodyProps = NativeTableBodyProps & {
   cellProps?: Omit<TdProps, 'key'>
 }
 
-export const Tbody = <Y extends Dict = Dict>({ rowProps, cellProps, ...rest }: TableBodyProps) => {
+export const Tbody = ({ rowProps, cellProps, ...rest }: TableBodyProps) => {
   const { getTableBodyProps, rows, prepareRow, onClickRow, rowsClickSelect, disabledRowIds } =
     useTableContext()
 
@@ -22,7 +22,7 @@ export const Tbody = <Y extends Dict = Dict>({ rowProps, cellProps, ...rest }: T
     <NativeTbody {...getTableBodyProps(rest)}>
       {rows.map((row) => {
         prepareRow(row)
-        const { id, getRowProps, isSelected, toggleRowSelected, cells } = row as Row<Y>
+        const { id, getRowProps, isSelected, toggleRowSelected, cells } = row as Row
 
         const isDisabled = disabledRowIds?.includes(id) ?? false
 

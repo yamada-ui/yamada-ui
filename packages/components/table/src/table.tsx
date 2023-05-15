@@ -6,7 +6,7 @@ import {
   CSSUIObject,
 } from '@yamada-ui/core'
 import { TableStyleProvider } from '@yamada-ui/native-table'
-import { cx, Dict } from '@yamada-ui/utils'
+import { cx } from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
@@ -25,10 +25,10 @@ type TableOptions = {
   tfootProps?: TableFootProps
 }
 
-export type TableProps<Y extends Dict = Dict> = UseTableProps<Y> & TableOptions
+export type TableProps<Y extends object = {}> = UseTableProps<Y> & TableOptions
 
 export const Table = forwardRef(
-  <Y extends Dict = Dict>(
+  <Y extends object = {}>(
     { colorStyle, highlightOnSelected = true, ...props }: TableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
@@ -68,7 +68,7 @@ export const Table = forwardRef(
     )
   },
 ) as {
-  <Y extends Dict = Dict>(props: TableProps<Y> & { ref?: Ref<HTMLDivElement> }): JSX.Element
+  <Y extends object = {}>(props: TableProps<Y> & { ref?: Ref<HTMLDivElement> }): JSX.Element
 } & ComponentArgs
 
 Table.displayName = 'Table'

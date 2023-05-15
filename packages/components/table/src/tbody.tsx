@@ -32,9 +32,11 @@ export const Tbody = ({ rowProps, cellProps, ...rest }: TableBodyProps) => {
             rowProps?.onClick,
             () => onClickRow?.(row as Row),
             (ev) => {
+              if (!rowsClickSelect || isDisabled) return
+
               ev.preventDefault()
 
-              if (rowsClickSelect && !isDisabled) toggleRowSelected(!isSelected)
+              toggleRowSelected(!isSelected)
             },
           ),
         }

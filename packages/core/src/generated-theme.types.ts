@@ -487,6 +487,10 @@ export interface GeneratedTheme extends UITheme {
     | 'beerus'
     | (string & {})
   components: {
+    Indicator: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'solid' | 'subtle' | (string & {})
+    }
     Accordion: { sizes: string & {}; variants: 'basic' | 'card' | 'unstyled' | (string & {}) }
     Alert: {
       sizes: string & {}

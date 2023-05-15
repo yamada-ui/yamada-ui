@@ -7,7 +7,7 @@ import {
   Hooks,
   UseRowSelectInstanceProps,
 } from 'react-table'
-import { Row, TableState } from './use-table'
+import { Row, TableState, SelectColumn } from './use-table'
 
 type HeaderProps<Y extends Dict = Dict> = ReactHeaderProps<Y> &
   UseRowSelectInstanceProps<Y> & { state: TableState<Y> }
@@ -16,6 +16,7 @@ export type UseRegisterCheckboxProps<Y extends Dict = Dict> = {
   hooks: Hooks<Y>
   checkboxProps?: CheckboxProps
   disabledRowIds?: string[]
+  selectColumnProps?: SelectColumn<Y>
 }
 
 const Center = ui('div', {
@@ -32,6 +33,7 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
   hooks,
   checkboxProps,
   disabledRowIds = [],
+  selectColumnProps,
 }: UseRegisterCheckboxProps<Y>) => {
   hooks.visibleColumns.push(
     (columns) =>
@@ -74,6 +76,7 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
               </Center>
             )
           },
+          ...selectColumnProps,
         },
         ...columns,
       ] as ColumnInstance<Y>[],

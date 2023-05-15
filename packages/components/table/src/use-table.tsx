@@ -1,7 +1,7 @@
 import { CheckboxProps } from '@yamada-ui/checkbox'
-import { HTMLUIProps, ThemeProps } from '@yamada-ui/core'
-import { createContext, Dict, PropGetter, useUpdateEffect, assignRef } from '@yamada-ui/utils'
-import { ForwardedRef, useCallback, useMemo } from 'react'
+import { CSSUIObject, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
+import { createContext, PropGetter, useUpdateEffect, assignRef } from '@yamada-ui/utils'
+import { CSSProperties, ForwardedRef, useCallback, useMemo } from 'react'
 import {
   useTable as useReactTable,
   useSortBy,
@@ -22,6 +22,7 @@ import {
   UseRowSelectRowProps,
   ActionType,
   Meta,
+  UseTableColumnOptions,
 } from 'react-table'
 import { useRegisterCheckbox } from './use-register-checkbox'
 
@@ -32,31 +33,46 @@ export const [TableProvider, useTableContext] = createContext<TableContext>({
   name: 'TableContext',
 })
 
-export type Column<Y extends Dict = Dict> = ReadonlyArray<
-  TableColumn<Y> & UseSortByColumnOptions<Y>
->
+type ColumnStyles = {
+  className?: string
+  style?: CSSProperties
+  sx?: CSSUIObject
+  css?: CSSUIObject
+}
 
-export type Row<Y extends Dict = Dict> = ReactTableRow<Y> & UseRowSelectRowProps<Y>
+export type Column<Y extends object = {}> = Omit<TableColumn<Y>, 'columns'> &
+  UseSortByColumnOptions<Y> &
+  ColumnStyles & {
+    columns: Column<Y>[]
+  }
 
-export type SortBy<Y extends Dict = Dict> = UseSortByState<Y>['sortBy']
+export type SelectColumn<Y extends object = {}> = Pick<
+  UseTableColumnOptions<Y>,
+  'width' | 'minWidth' | 'maxWidth'
+> &
+  ColumnStyles
 
-type SelectedRowIds<Y extends Dict = Dict> = UseRowSelectState<Y>['selectedRowIds']
+export type Row<Y extends object = {}> = ReactTableRow<Y> & UseRowSelectRowProps<Y>
 
-export type TableState<Y extends Dict = Dict> = ReactTableState<Y> &
+export type SortBy<Y extends object = {}> = UseSortByState<Y>['sortBy']
+
+type SelectedRowIds<Y extends object = {}> = UseRowSelectState<Y>['selectedRowIds']
+
+export type TableState<Y extends object = {}> = ReactTableState<Y> &
   UseSortByState<Y> &
   UseRowSelectState<Y>
 
-export type TableInstance<Y extends Dict = Dict> = ReactTableInstance<Y> &
+export type TableInstance<Y extends object = {}> = ReactTableInstance<Y> &
   UseTableInstanceProps<Y> &
   UseSortByInstanceProps<Y> &
   UseRowSelectInstanceProps<Y> & { state: TableState<Y> }
 
-export type ToggleSortBy<Y extends Dict = Dict> = TableInstance<Y>['toggleSortBy']
-export type SetSortBy<Y extends Dict = Dict> = TableInstance<Y>['setSortBy']
-export type ToggleRowSelected<Y extends Dict = Dict> = TableInstance<Y>['toggleRowSelected']
-export type ToggleAllRowsSelected<Y extends Dict = Dict> = TableInstance<Y>['toggleAllRowsSelected']
+export type ToggleSortBy<Y extends object = {}> = TableInstance<Y>['toggleSortBy']
+export type SetSortBy<Y extends object = {}> = TableInstance<Y>['setSortBy']
+export type ToggleRowSelected<Y extends object = {}> = TableInstance<Y>['toggleRowSelected']
+export type ToggleAllRowsSelected<Y extends object = {}> = TableInstance<Y>['toggleAllRowsSelected']
 
-type UseTableOptions<Y extends Dict = Dict> = Omit<
+type UseTableOptions<Y extends object = {}> = Omit<
   UseReactTableOptions<Y>,
   'stateReducer' | 'useControlledState'
 > &
@@ -73,9 +89,9 @@ type UseTableOptions<Y extends Dict = Dict> = Omit<
 
 type TableProps = HTMLUIProps<'table'> & ThemeProps<'Table'>
 
-export type UseTableProps<Y extends Dict = Dict> = TableProps &
-  Omit<UseTableOptions<Y>, 'initialState'> & {
-    columns: Column<Y>
+export type UseTableProps<Y extends object = {}> = TableProps &
+  Omit<UseTableOptions<Y>, 'initialState' | 'columns' | 'data'> & {
+    columns: Column<Y>[]
     data: Y[]
     defaultSortBy?: SortBy<Y>
     onChangeSortBy?: (sortBy: SortBy<Y>) => void
@@ -86,13 +102,14 @@ export type UseTableProps<Y extends Dict = Dict> = TableProps &
     onChangeSelect?: (selectedRows: string[]) => void
     onClickRow?: (row: Row<Y>) => void
     checkboxProps?: CheckboxProps
+    selectColumnProps?: SelectColumn
     toggleSortByRef?: ForwardedRef<ToggleSortBy>
     setSortByRef?: ForwardedRef<SetSortBy>
     toggleRowSelectedRef?: ForwardedRef<ToggleRowSelected>
     toggleAllRowsSelectedRef?: ForwardedRef<ToggleAllRowsSelected>
   }
 
-export const useTable = <Y extends Dict = Dict>({
+export const useTable = <Y extends object = {}>({
   columns = [],
   data = [],
   autoResetHiddenColumns,
@@ -101,7 +118,7 @@ export const useTable = <Y extends Dict = Dict>({
   getSubRows,
   generatingRowIdFromAccessor,
   getRowId = generatingRowIdFromAccessor
-    ? (row) => row[generatingRowIdFromAccessor].toString()
+    ? (row) => String(row[generatingRowIdFromAccessor])
     : undefined,
   defaultColumn,
   defaultSortBy = [],
@@ -125,6 +142,7 @@ export const useTable = <Y extends Dict = Dict>({
   onChangeSelect,
   onClickRow,
   checkboxProps,
+  selectColumnProps,
   toggleSortByRef,
   setSortByRef,
   toggleRowSelectedRef,
@@ -193,7 +211,7 @@ export const useTable = <Y extends Dict = Dict>({
     } as Omit<UseTableOptions<Y>, 'stateReducer' | 'useControlledState'>,
     useSortBy,
     useRowSelect,
-    (hooks) => useRegisterCheckbox<Y>({ hooks, checkboxProps, disabledRowIds }),
+    (hooks) => useRegisterCheckbox<Y>({ hooks, checkboxProps, disabledRowIds, selectColumnProps }),
   ) as TableInstance<Y>
 
   assignRef(toggleSortByRef, toggleSortBy)

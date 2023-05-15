@@ -33,6 +33,7 @@ export const Table: ComponentMultiStyle = {
       fontWeight: 'medium',
       textAlign: 'center',
     },
+    sortIcon: {},
   },
 
   variants: {
@@ -222,6 +223,9 @@ export const Table: ComponentMultiStyle = {
         py: 1,
         fontSize: 'xs',
       },
+      sortIcon: {
+        right: 2,
+      },
     },
     md: {
       th: {
@@ -242,6 +246,9 @@ export const Table: ComponentMultiStyle = {
         py: 2,
         fontSize: 'sm',
       },
+      sortIcon: {
+        right: 3,
+      },
     },
     lg: {
       th: {
@@ -258,6 +265,9 @@ export const Table: ComponentMultiStyle = {
         mt: 3,
         px: 4,
         py: 3,
+      },
+      sortIcon: {
+        right: 4,
       },
     },
     xl: {
@@ -278,6 +288,9 @@ export const Table: ComponentMultiStyle = {
         px: 6,
         py: 4,
         fontSize: 'lg',
+      },
+      sortIcon: {
+        right: 6,
       },
     },
   },

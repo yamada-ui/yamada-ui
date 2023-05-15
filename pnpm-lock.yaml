@@ -1576,6 +1576,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
       '@yamada-ui/native-table':
         specifier: workspace:*
         version: link:../native-table

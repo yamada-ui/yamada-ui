@@ -5,6 +5,7 @@ import {
   ComponentArgs,
   CSSUIObject,
 } from '@yamada-ui/core'
+import { IconProps } from '@yamada-ui/icon'
 import { TableStyleProvider } from '@yamada-ui/native-table'
 import { cx } from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, Ref } from 'react'
@@ -20,9 +21,10 @@ type TableOptions = {
   withBorder?: boolean
   withColumnBorders?: boolean
   withFooter?: boolean
-  theadProps?: TableHeadProps
+  theadProps?: Omit<TableHeadProps, 'sortIconProps'>
   tbodyProps?: TableBodyProps
   tfootProps?: TableFootProps
+  sortIconProps?: IconProps
 }
 
 export type TableProps<Y extends object = {}> = UseTableProps<Y> & TableOptions
@@ -44,6 +46,7 @@ export const Table = forwardRef(
       tbodyProps,
       tfootProps,
       checkboxProps,
+      sortIconProps,
       layout,
       children,
       ...computedProps
@@ -60,7 +63,7 @@ export const Table = forwardRef(
       <TableStyleProvider value={styles}>
         <TableProvider value={{ ...rest } as unknown as TableContext}>
           <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
-            <Thead {...theadProps} />
+            <Thead sortIconProps={sortIconProps} {...theadProps} />
             <Tbody {...tbodyProps} />
             {withFooter ? <Tfoot {...tfootProps} /> : null}
             {children}

@@ -1,4 +1,5 @@
 import { CSSUIObject } from '@yamada-ui/core'
+import { Icon, ChevronIcon, IconProps } from '@yamada-ui/icon'
 import {
   Thead as NativeThead,
   TableHeadProps as NativeTableHeadProps,
@@ -6,8 +7,9 @@ import {
   Th,
   TrProps,
   ThProps,
+  useTableStyles,
 } from '@yamada-ui/native-table'
-import { CSSProperties } from 'react'
+import { CSSProperties, FC } from 'react'
 import { HeaderGroup, UseSortByColumnProps } from 'react-table'
 import { useTableContext } from './use-table'
 
@@ -22,9 +24,15 @@ type Header<Y extends object = {}> = HeaderGroup<Y> &
 export type TableHeadProps = NativeTableHeadProps & {
   headerGroupProps?: Omit<TrProps, 'key'>
   headerProps?: Omit<ThProps, 'key'>
+  sortIconProps?: IconProps
 }
 
-export const Thead = ({ headerGroupProps, headerProps, ...rest }: TableHeadProps) => {
+export const Thead = ({
+  headerGroupProps,
+  headerProps,
+  sortIconProps,
+  ...rest
+}: TableHeadProps) => {
   const { headerGroups } = useTableContext()
 
   return (
@@ -45,6 +53,7 @@ export const Thead = ({ headerGroupProps, headerProps, ...rest }: TableHeadProps
                 style,
                 css,
                 sx,
+                canSort,
               }) => {
                 const { key, ...props } = getHeaderProps({
                   ...headerProps,
@@ -53,9 +62,17 @@ export const Thead = ({ headerGroupProps, headerProps, ...rest }: TableHeadProps
                 })
 
                 return (
-                  <Th key={key} {...props} sx={sx} style={{ ...props.style, ...style }} __css={css}>
+                  <Th
+                    key={key}
+                    {...props}
+                    sx={sx}
+                    style={{ ...props.style, ...style }}
+                    __css={{ position: 'relative', ...css }}
+                  >
                     {render('Header')}
-                    <span>{isSorted ? (isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                    {canSort ? (
+                      <SortIcon {...{ isSorted, isSortedDesc, ...sortIconProps }} />
+                    ) : null}
                   </Th>
                 )
               },
@@ -65,4 +82,43 @@ export const Thead = ({ headerGroupProps, headerProps, ...rest }: TableHeadProps
       })}
     </NativeThead>
   )
+}
+
+export type SortIconProps = IconProps & { isSorted: boolean; isSortedDesc?: boolean }
+
+const SortIcon: FC<SortIconProps> = ({ isSorted, isSortedDesc, ...rest }) => {
+  const styles = useTableStyles()
+
+  const css: CSSUIObject = {
+    position: 'absolute',
+    top: '50%',
+    transform: isSortedDesc ? 'translateY(-50%) rotate(180deg)' : 'translateY(-50%)',
+    ...styles.sortIcon,
+  }
+
+  if (!isSorted) {
+    return (
+      <Icon
+        focusable='false'
+        aria-hidden
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='1.5'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        __css={css}
+        {...rest}
+      >
+        <path d='M8 9l4 -4l4 4'></path>
+        <path d='M16 15l-4 4l-4 -4'></path>
+      </Icon>
+    )
+  }
+
+  if (isSortedDesc) {
+    return <ChevronIcon __css={css} {...rest} />
+  } else {
+    return <ChevronIcon __css={css} {...rest} />
+  }
 }

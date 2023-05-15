@@ -1,6 +1,6 @@
 import { CheckboxProps } from '@yamada-ui/checkbox'
 import { CSSUIObject, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
-import { createContext, PropGetter, useUpdateEffect, assignRef } from '@yamada-ui/utils'
+import { createContext, PropGetter, useUpdateEffect, assignRef, noop } from '@yamada-ui/utils'
 import { CSSProperties, ForwardedRef, useCallback, useMemo } from 'react'
 import {
   useTable as useReactTable,
@@ -23,6 +23,7 @@ import {
   ActionType,
   Meta,
   UseTableColumnOptions,
+  PluginHook,
 } from 'react-table'
 import { useRegisterCheckbox } from './use-register-checkbox'
 
@@ -103,6 +104,7 @@ export type UseTableProps<Y extends object = {}> = TableProps &
     onClickRow?: (row: Row<Y>) => void
     checkboxProps?: CheckboxProps
     selectColumnProps?: SelectColumn
+    disableSelect?: boolean
     toggleSortByRef?: ForwardedRef<ToggleSortBy>
     setSortByRef?: ForwardedRef<SetSortBy>
     toggleRowSelectedRef?: ForwardedRef<ToggleRowSelected>
@@ -133,6 +135,7 @@ export const useTable = <Y extends object = {}>({
   orderByFn,
   autoResetSortBy = true,
   onChangeSortBy,
+  disableSelect,
   defaultSelectedRowIds,
   disabledRowIds,
   rowsClickSelect = false,
@@ -149,7 +152,11 @@ export const useTable = <Y extends object = {}>({
   toggleAllRowsSelectedRef,
   ...rest
 }: UseTableProps<Y>) => {
+  if (disableSelect) rowsClickSelect = false
+
   const computedDefaultSelectedRowIds: SelectedRowIds = useMemo(() => {
+    if (disableSelect) return {}
+
     if (defaultSelectedRowIds) {
       return defaultSelectedRowIds.reduce<SelectedRowIds>(
         (prev, id) => ({ ...prev, [id.toString()]: true }),
@@ -158,7 +165,7 @@ export const useTable = <Y extends object = {}>({
     } else {
       return {}
     }
-  }, [defaultSelectedRowIds])
+  }, [defaultSelectedRowIds, disableSelect])
 
   const {
     getTableProps: getReactTableProps,
@@ -210,20 +217,29 @@ export const useTable = <Y extends object = {}>({
       selectSubRows,
     } as Omit<UseTableOptions<Y>, 'stateReducer' | 'useControlledState'>,
     useSortBy,
-    useRowSelect,
-    (hooks) => useRegisterCheckbox<Y>({ hooks, checkboxProps, disabledRowIds, selectColumnProps }),
+    ...(!disableSelect
+      ? ([
+          useRowSelect,
+          (hooks) =>
+            useRegisterCheckbox<Y>({ hooks, checkboxProps, disabledRowIds, selectColumnProps }),
+        ] as PluginHook<Y>[])
+      : []),
   ) as TableInstance<Y>
 
-  assignRef(toggleSortByRef, toggleSortBy)
-  assignRef(setSortByRef, setSortBy)
-  assignRef(toggleRowSelectedRef, toggleRowSelected)
-  assignRef(toggleAllRowsSelectedRef, toggleAllRowsSelected)
+  assignRef(toggleSortByRef, disableSortBy ? toggleSortBy : noop)
+  assignRef(setSortByRef, disableSortBy ? setSortBy : noop)
+  assignRef(toggleRowSelectedRef, disableSelect ? toggleRowSelected : noop)
+  assignRef(toggleAllRowsSelectedRef, disableSelect ? toggleAllRowsSelected : noop)
 
   useUpdateEffect(() => {
+    if (disableSortBy) return
+
     onChangeSortBy?.(sortBy)
   }, [sortBy])
 
   useUpdateEffect(() => {
+    if (disableSelect) return
+
     const selectedRows = Object.keys(selectedRowIds)
 
     onChangeSelect?.(selectedRows)

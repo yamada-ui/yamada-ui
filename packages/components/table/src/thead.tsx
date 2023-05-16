@@ -9,11 +9,12 @@ import {
   ThProps,
   useTableStyles,
 } from '@yamada-ui/native-table'
+import { runIfFunc } from '@yamada-ui/utils'
 import { CSSProperties, FC } from 'react'
-import { HeaderGroup, UseSortByColumnProps } from 'react-table'
+import { HeaderGroup as ReactTableHeaderGroup, UseSortByColumnProps } from 'react-table'
 import { useTableContext } from './use-table'
 
-type Header<Y extends object = {}> = HeaderGroup<Y> &
+export type HeaderGroup<Y extends object = {}> = ReactTableHeaderGroup<Y> &
   UseSortByColumnProps<Y> & {
     className?: string
     style?: CSSProperties
@@ -21,29 +22,33 @@ type Header<Y extends object = {}> = HeaderGroup<Y> &
     css?: CSSUIObject
   }
 
-export type TableHeadProps = NativeTableHeadProps & {
-  headerGroupProps?: Omit<TrProps, 'key'>
-  headerProps?: Omit<ThProps, 'key'>
+export type TableHeadProps<Y extends object = {}> = NativeTableHeadProps & {
+  headerGroupProps?:
+    | Omit<TrProps, 'key'>
+    | ((headers: HeaderGroup<Y>[]) => Omit<TrProps, 'key'> | void)
+  headerProps?: Omit<ThProps, 'key'> | ((header: HeaderGroup<Y>) => Omit<ThProps, 'key'> | void)
   sortIconProps?: IconProps
 }
 
-export const Thead = ({
+export const Thead = <Y extends object = {}>({
   headerGroupProps,
   headerProps,
   sortIconProps,
   ...rest
-}: TableHeadProps) => {
+}: TableHeadProps<Y>) => {
   const { headerGroups } = useTableContext()
 
   return (
     <NativeThead {...rest}>
       {headerGroups.map(({ headers, getHeaderGroupProps }) => {
-        const { key, ...props } = getHeaderGroupProps(headerGroupProps)
+        const computedHeaderGroupProps =
+          runIfFunc(headerGroupProps, headers as unknown as HeaderGroup<Y>[]) ?? {}
+        const { key, ...props } = getHeaderGroupProps(computedHeaderGroupProps)
 
         return (
-          <Tr key={key} {...props}>
-            {(headers as Header[]).map(
-              ({
+          <Tr {...props} key={key}>
+            {(headers as unknown as HeaderGroup<Y>[]).map((header) => {
+              const {
                 getHeaderProps,
                 getSortByToggleProps,
                 isSorted,
@@ -54,29 +59,27 @@ export const Thead = ({
                 css,
                 sx,
                 canSort,
-              }) => {
-                const { key, ...props } = getHeaderProps({
-                  ...headerProps,
-                  className,
-                  ...getSortByToggleProps(),
-                })
+              } = header
+              const computedHeaderProps = runIfFunc(headerProps, header) ?? {}
+              const { key, ...props } = getHeaderProps({
+                className,
+                ...computedHeaderProps,
+                ...getSortByToggleProps(),
+              })
 
-                return (
-                  <Th
-                    key={key}
-                    {...props}
-                    sx={sx}
-                    style={{ ...props.style, ...style }}
-                    __css={{ position: 'relative', ...css }}
-                  >
-                    {render('Header')}
-                    {canSort ? (
-                      <SortIcon {...{ isSorted, isSortedDesc, ...sortIconProps }} />
-                    ) : null}
-                  </Th>
-                )
-              },
-            )}
+              return (
+                <Th
+                  {...props}
+                  key={key}
+                  sx={sx}
+                  style={{ ...props.style, ...style }}
+                  __css={{ position: 'relative', ...css }}
+                >
+                  {render('Header')}
+                  {canSort ? <SortIcon {...{ isSorted, isSortedDesc, ...sortIconProps }} /> : null}
+                </Th>
+              )
+            })}
           </Tr>
         )
       })}

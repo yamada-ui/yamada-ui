@@ -6,15 +6,19 @@ import {
   TrProps,
   TdProps,
 } from '@yamada-ui/native-table'
-import { dataAttr, ariaAttr, handlerAll } from '@yamada-ui/utils'
-import { type Row, useTableContext } from './use-table'
+import { dataAttr, ariaAttr, handlerAll, runIfFunc } from '@yamada-ui/utils'
+import { type Row, type Cell, useTableContext } from './use-table'
 
-export type TableBodyProps = NativeTableBodyProps & {
-  rowProps?: Omit<TrProps, 'key'>
-  cellProps?: Omit<TdProps, 'key'>
+export type TableBodyProps<Y extends object = {}> = NativeTableBodyProps & {
+  rowProps?: Omit<TrProps, 'key'> | ((row: Row<Y>) => Omit<TrProps, 'key'> | void)
+  cellProps?: Omit<TdProps, 'key'> | ((cell: Cell<Y>) => Omit<TdProps, 'key'> | void)
 }
 
-export const Tbody = ({ rowProps, cellProps, ...rest }: TableBodyProps) => {
+export const Tbody = <Y extends object = {}>({
+  rowProps,
+  cellProps,
+  ...rest
+}: TableBodyProps<Y>) => {
   const { getTableBodyProps, rows, prepareRow, onClickRow, rowsClickSelect, disabledRowIds } =
     useTableContext()
 
@@ -22,14 +26,13 @@ export const Tbody = ({ rowProps, cellProps, ...rest }: TableBodyProps) => {
     <NativeTbody {...getTableBodyProps(rest)}>
       {rows.map((row) => {
         prepareRow(row)
+        const computedRowProps = runIfFunc(rowProps, row as unknown as Row<Y>) ?? {}
         const { id, getRowProps, isSelected, toggleRowSelected, cells } = row as Row
-
         const isDisabled = disabledRowIds?.includes(id) ?? false
-
         const mergedRowProps = {
-          ...rowProps,
+          ...computedRowProps,
           onClick: handlerAll(
-            rowProps?.onClick,
+            computedRowProps.onClick,
             () => onClickRow?.(row as Row),
             (ev) => {
               if (!rowsClickSelect || isDisabled) return
@@ -40,7 +43,6 @@ export const Tbody = ({ rowProps, cellProps, ...rest }: TableBodyProps) => {
             },
           ),
         }
-
         const { key, ...props } = getRowProps(mergedRowProps)
 
         return (
@@ -53,8 +55,10 @@ export const Tbody = ({ rowProps, cellProps, ...rest }: TableBodyProps) => {
             aria-checked={ariaAttr(isSelected)}
             aria-disabled={ariaAttr(isDisabled)}
           >
-            {cells.map(({ getCellProps, render }) => {
-              const { key, ...props } = getCellProps(cellProps)
+            {cells.map((cell) => {
+              const { getCellProps, render } = cell
+              const computedCellProps = runIfFunc(cellProps, cell as unknown as Cell<Y>) ?? {}
+              const { key, ...props } = getCellProps(computedCellProps)
 
               return (
                 <Td key={key} {...props}>

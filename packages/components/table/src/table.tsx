@@ -14,20 +14,20 @@ import { Tfoot, TableFootProps } from './tfoot'
 import { Thead, TableHeadProps } from './thead'
 import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
 
-type TableOptions = {
+type TableOptions<Y extends object = {}> = {
   layout?: CSSUIObject['tableLayout']
   highlightOnSelected?: boolean
   highlightOnHover?: boolean
   withBorder?: boolean
   withColumnBorders?: boolean
   withFooter?: boolean
-  theadProps?: Omit<TableHeadProps, 'sortIconProps'>
-  tbodyProps?: TableBodyProps
-  tfootProps?: TableFootProps
+  theadProps?: Omit<TableHeadProps<Y>, 'sortIconProps'>
+  tbodyProps?: TableBodyProps<Y>
+  tfootProps?: TableFootProps<Y>
   sortIconProps?: IconProps
 }
 
-export type TableProps<Y extends object = {}> = UseTableProps<Y> & TableOptions
+export type TableProps<Y extends object = {}> = UseTableProps<Y> & TableOptions<Y>
 
 export const Table = forwardRef(
   <Y extends object = {}>(
@@ -63,9 +63,9 @@ export const Table = forwardRef(
       <TableStyleProvider value={styles}>
         <TableProvider value={{ ...rest } as unknown as TableContext}>
           <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
-            <Thead sortIconProps={sortIconProps} {...theadProps} />
-            <Tbody {...tbodyProps} />
-            {withFooter ? <Tfoot {...tfootProps} /> : null}
+            <Thead<Y> sortIconProps={sortIconProps} {...theadProps} />
+            <Tbody<Y> {...tbodyProps} />
+            {withFooter ? <Tfoot<Y> {...tfootProps} /> : null}
             {children}
           </ui.table>
         </TableProvider>

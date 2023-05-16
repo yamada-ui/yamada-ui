@@ -2,11 +2,12 @@ export * from './table'
 export type {
   Column,
   Row,
+  Cell,
   SortBy,
   TableState,
   TableInstance,
   ToggleSortBy,
   SetSortBy,
-  ToggleRowSelected,
-  ToggleAllRowsSelected,
+  SetSelect,
+  SetAllSelect,
 } from './use-table'

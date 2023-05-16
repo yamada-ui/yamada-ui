@@ -5,8 +5,8 @@ import {
   TableCaption,
   Checkbox,
   Button,
-  ToggleAllRowsSelected,
-  ToggleRowSelected,
+  SetAllSelect,
+  SetSelect,
   SetSortBy,
   ToggleSortBy,
 } from '@yamada-ui/react'
@@ -1475,7 +1475,7 @@ export const withColumnStyles: ComponentStory<typeof Table> = () => {
 }
 
 export const useToggleSortBy: ComponentStory<typeof Table> = () => {
-  const toggleSortByRef = useRef<ToggleSortBy>(null)
+  const toggleSortByRef = useRef<ToggleSortBy<Data>>(null)
 
   const columns: Column<Data>[] = useMemo(
     () => [
@@ -1544,7 +1544,7 @@ export const useToggleSortBy: ComponentStory<typeof Table> = () => {
 }
 
 export const useSetSortBy: ComponentStory<typeof Table> = () => {
-  const setSortByRef = useRef<SetSortBy>(null)
+  const setSortByRef = useRef<SetSortBy<Data>>(null)
 
   const columns: Column<Data>[] = useMemo(
     () => [
@@ -1617,7 +1617,7 @@ export const useSetSortBy: ComponentStory<typeof Table> = () => {
 }
 
 export const useToggleRowsSelected: ComponentStory<typeof Table> = () => {
-  const toggleRowSelectedRef = useRef<ToggleRowSelected>(null)
+  const setSelectRef = useRef<SetSelect<Data>>(null)
 
   const columns: Column<Data>[] = useMemo(
     () => [
@@ -1670,15 +1670,19 @@ export const useToggleRowsSelected: ComponentStory<typeof Table> = () => {
 
   return (
     <>
-      <Button onClick={() => toggleRowSelectedRef.current?.('ドラゴンボール', true)}>
+      <Button onClick={() => setSelectRef.current?.('ドラゴンボール', true)}>
         Select 'ドラゴンボール'
+      </Button>
+
+      <Button onClick={() => setSelectRef.current?.(['ドラゴンボールZ', 'ドラゴンボールGT'])}>
+        Select 'ドラゴンボールZ' and 'ドラゴンボールGT'
       </Button>
 
       <Table
         columns={columns}
         data={data}
         generatingRowIdFromAccessor='name'
-        toggleRowSelectedRef={toggleRowSelectedRef}
+        setSelectRef={setSelectRef}
         onChangeSelect={(selectedIds) => {
           console.log('selectedIds', selectedIds)
         }}
@@ -1687,8 +1691,8 @@ export const useToggleRowsSelected: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const useToggleAllRowsSelected: ComponentStory<typeof Table> = () => {
-  const toggleAllRowsSelectedRef = useRef<ToggleAllRowsSelected>(null)
+export const useSetAllSelect: ComponentStory<typeof Table> = () => {
+  const setAllSelectRef = useRef<SetAllSelect<Data>>(null)
 
   const columns: Column<Data>[] = useMemo(
     () => [
@@ -1741,17 +1745,118 @@ export const useToggleAllRowsSelected: ComponentStory<typeof Table> = () => {
 
   return (
     <>
-      <Checkbox onChange={(e) => toggleAllRowsSelectedRef.current?.(e.target.checked)}>
-        All Select
-      </Checkbox>
+      <Checkbox onChange={(e) => setAllSelectRef.current?.(e.target.checked)}>All Select</Checkbox>
 
       <Table
         columns={columns}
         data={data}
         generatingRowIdFromAccessor='name'
-        toggleAllRowsSelectedRef={toggleAllRowsSelectedRef}
+        setAllSelectRef={setAllSelectRef}
         onChangeSelect={(selectedIds) => {
           console.log('selectedIds', selectedIds)
+        }}
+      />
+    </>
+  )
+}
+
+export const controlProps: ComponentStory<typeof Table> = () => {
+  const columns: Column<Data>[] = useMemo(
+    () => [
+      {
+        Header: '作品名',
+        accessor: 'name',
+        Footer: '作品名',
+      },
+      {
+        Header: '放送期間',
+        accessor: 'broadcastPeriod',
+        Footer: '放送期間',
+      },
+      {
+        Header: '話数',
+        accessor: 'episode',
+        Footer: '話数',
+      },
+    ],
+    [],
+  )
+
+  const data: Data[] = useMemo(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <Table
+        columns={columns}
+        data={data}
+        withFooter
+        theadProps={{ bg: ['red.200', 'red.700'] }}
+        tbodyProps={{ bg: ['green.200', 'green.700'] }}
+        tfootProps={{ bg: ['blue.200', 'blue.700'] }}
+      />
+
+      <Table
+        columns={columns}
+        data={data}
+        withFooter
+        theadProps={{
+          headerGroupProps: { bg: ['red.200', 'red.700'] },
+        }}
+        tbodyProps={{
+          rowProps: { bg: ['green.200', 'green.700'] },
+        }}
+        tfootProps={{
+          footerGroupProps: { bg: ['blue.200', 'blue.700'] },
+        }}
+      />
+
+      <Table
+        columns={columns}
+        data={data}
+        withFooter
+        theadProps={{
+          headerProps: ({ Header }) => {
+            if (Header === '作品名') return { color: ['red.400', 'red.300'] }
+          },
+        }}
+        tbodyProps={{
+          cellProps: ({ column }) => {
+            if (column.Header === '作品名') return { color: ['red.400', 'red.300'] }
+          },
+        }}
+        tfootProps={{
+          footerProps: ({ Header }) => {
+            if (Header === '作品名') return { color: ['red.400', 'red.300'] }
+          },
         }}
       />
     </>

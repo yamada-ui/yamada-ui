@@ -1,6 +1,13 @@
 import { CheckboxProps } from '@yamada-ui/checkbox'
 import { CSSUIObject, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
-import { createContext, PropGetter, useUpdateEffect, assignRef, noop } from '@yamada-ui/utils'
+import {
+  createContext,
+  PropGetter,
+  useUpdateEffect,
+  assignRef,
+  noop,
+  isArray,
+} from '@yamada-ui/utils'
 import { CSSProperties, ForwardedRef, useCallback, useMemo } from 'react'
 import {
   useTable as useReactTable,
@@ -24,6 +31,10 @@ import {
   Meta,
   UseTableColumnOptions,
   PluginHook,
+  ColumnInstance,
+  UseSortByColumnProps,
+  Cell as TableCell,
+  IdType,
 } from 'react-table'
 import { useRegisterCheckbox } from './use-register-checkbox'
 
@@ -55,6 +66,11 @@ export type SelectColumn<Y extends object = {}> = Pick<
 
 export type Row<Y extends object = {}> = ReactTableRow<Y> & UseRowSelectRowProps<Y>
 
+export type Cell<Y extends object = {}> = Omit<TableCell<Y>, 'column' | 'row'> & {
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+  row: Row<Y>
+}
+
 export type SortBy<Y extends object = {}> = UseSortByState<Y>['sortBy']
 
 type SelectedRowIds<Y extends object = {}> = UseRowSelectState<Y>['selectedRowIds']
@@ -70,8 +86,11 @@ export type TableInstance<Y extends object = {}> = ReactTableInstance<Y> &
 
 export type ToggleSortBy<Y extends object = {}> = TableInstance<Y>['toggleSortBy']
 export type SetSortBy<Y extends object = {}> = TableInstance<Y>['setSortBy']
-export type ToggleRowSelected<Y extends object = {}> = TableInstance<Y>['toggleRowSelected']
-export type ToggleAllRowsSelected<Y extends object = {}> = TableInstance<Y>['toggleAllRowsSelected']
+export type SetSelect<Y extends object = {}> = (
+  rowId: IdType<Y> | IdType<Y>[],
+  set?: boolean | undefined,
+) => void
+export type SetAllSelect<Y extends object = {}> = TableInstance<Y>['toggleAllRowsSelected']
 
 type UseTableOptions<Y extends object = {}> = Omit<
   UseReactTableOptions<Y>,
@@ -97,19 +116,19 @@ export type UseTableProps<Y extends object = {}> = TableProps &
     defaultSortBy?: SortBy<Y>
     onChangeSortBy?: (sortBy: SortBy<Y>) => void
     generatingRowIdFromAccessor?: keyof Y
-    defaultSelectedRowIds?: string[]
-    disabledRowIds?: string[]
+    defaultSelectedRowIds?: IdType<Y>[]
+    disabledRowIds?: IdType<Y>[]
     rowsClickSelect?: boolean
-    onChangeSelect?: (selectedIds: string[]) => void
+    onChangeSelect?: (selectedIds: IdType<Y>[]) => void
     onClickRow?: (row: Row<Y>) => void
     checkboxProps?: CheckboxProps
     selectColumnProps?: SelectColumn
     disableSelect?: boolean
     withFooterSelect?: boolean
-    toggleSortByRef?: ForwardedRef<ToggleSortBy>
-    setSortByRef?: ForwardedRef<SetSortBy>
-    toggleRowSelectedRef?: ForwardedRef<ToggleRowSelected>
-    toggleAllRowsSelectedRef?: ForwardedRef<ToggleAllRowsSelected>
+    toggleSortByRef?: ForwardedRef<ToggleSortBy<Y>>
+    setSortByRef?: ForwardedRef<SetSortBy<Y>>
+    setSelectRef?: ForwardedRef<SetSelect<Y>>
+    setAllSelectRef?: ForwardedRef<SetAllSelect<Y>>
   }
 
 export const useTable = <Y extends object = {}>({
@@ -150,8 +169,8 @@ export const useTable = <Y extends object = {}>({
   selectColumnProps,
   toggleSortByRef,
   setSortByRef,
-  toggleRowSelectedRef,
-  toggleAllRowsSelectedRef,
+  setSelectRef,
+  setAllSelectRef,
   ...rest
 }: UseTableProps<Y>) => {
   if (disableSelect) rowsClickSelect = false
@@ -234,10 +253,25 @@ export const useTable = <Y extends object = {}>({
       : []),
   ) as TableInstance<Y>
 
+  const setSelect = useCallback(
+    (rowId: IdType<Y> | IdType<Y>[], set: boolean | undefined = true, reset = true) => {
+      if (isArray(rowId)) {
+        if (reset) toggleAllRowsSelected(false)
+
+        rowId.forEach((id) => {
+          toggleRowSelected(id, set)
+        })
+      } else {
+        toggleRowSelected(rowId, set)
+      }
+    },
+    [toggleAllRowsSelected, toggleRowSelected],
+  )
+
   assignRef(toggleSortByRef, !disableSortBy ? toggleSortBy : noop)
   assignRef(setSortByRef, !disableSortBy ? setSortBy : noop)
-  assignRef(toggleRowSelectedRef, !disableSelect ? toggleRowSelected : noop)
-  assignRef(toggleAllRowsSelectedRef, !disableSelect ? toggleAllRowsSelected : noop)
+  assignRef(setSelectRef, !disableSelect ? setSelect : noop)
+  assignRef(setAllSelectRef, !disableSelect ? toggleAllRowsSelected : noop)
 
   useUpdateEffect(() => {
     if (disableSortBy) return

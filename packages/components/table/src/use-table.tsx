@@ -35,6 +35,8 @@ import {
   UseSortByColumnProps,
   Cell as TableCell,
   IdType,
+  Renderer,
+  CellValue,
 } from 'react-table'
 import { useRegisterCheckbox } from './use-register-checkbox'
 
@@ -52,10 +54,16 @@ type ColumnStyles = {
   css?: CSSUIObject
 }
 
-export type Column<Y extends object = {}> = Omit<TableColumn<Y>, 'columns'> &
+export type Column<Y extends object = {}> = Omit<
+  TableColumn<Y>,
+  'columns' | 'Header' | 'Footer' | 'Cell'
+> &
   UseSortByColumnOptions<Y> &
   ColumnStyles & {
     columns?: Column<Y>[]
+    Header?: Renderer<HeaderProps<Y>>
+    Footer?: Renderer<FooterProps<Y>>
+    Cell?: Renderer<CellProps<Y>>
   }
 
 export type SelectColumn<Y extends object = {}> = Pick<
@@ -63,6 +71,21 @@ export type SelectColumn<Y extends object = {}> = Pick<
   'width' | 'minWidth' | 'maxWidth'
 > &
   ColumnStyles
+
+type HeaderProps<Y extends object = {}> = TableInstance<Y> & {
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+}
+
+type CellProps<Y extends object = {}> = TableInstance<Y> & {
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+  row: Row<Y>
+  cell: Cell<Y>
+  value: CellValue
+}
+
+type FooterProps<Y extends object = {}> = TableInstance<Y> & {
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+}
 
 export type Row<Y extends object = {}> = ReactTableRow<Y> & UseRowSelectRowProps<Y>
 

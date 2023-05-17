@@ -92,7 +92,7 @@ const setupGlobalFocusEvents = () => {
   HTMLElement.prototype.focus = (...args) => {
     hasEventBeforeFocus = true
 
-    focus.apply(this, args)
+    if (this) focus.apply(this, args)
   }
 
   document.addEventListener('keydown', onKeyboard, true)

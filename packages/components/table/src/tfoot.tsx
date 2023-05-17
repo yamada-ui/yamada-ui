@@ -22,10 +22,10 @@ export const Tfoot = <Y extends object = {}>({
   footerProps,
   ...rest
 }: TableFootProps<Y>) => {
-  const { footerGroups } = useTableContext()
+  const { footerGroups, enableBlockLayout } = useTableContext()
 
   return (
-    <NativeTfoot {...rest}>
+    <NativeTfoot {...rest} {...(enableBlockLayout ? { as: 'div' } : {})}>
       {footerGroups.map(({ getFooterGroupProps, headers }) => {
         const computedFooterGroupProps =
           runIfFunc(footerGroupProps, headers as unknown as HeaderGroup<Y>[]) ?? {}
@@ -33,14 +33,14 @@ export const Tfoot = <Y extends object = {}>({
         const { key, ...props } = getFooterGroupProps(computedFooterGroupProps)
 
         return (
-          <Tr key={key} {...props}>
+          <Tr {...props} {...(enableBlockLayout ? { as: 'div' } : {})} key={key}>
             {(headers as unknown as HeaderGroup<Y>[]).map((header) => {
               const { getFooterProps, render } = header
               const computedFooterProps = runIfFunc(footerProps, header) ?? {}
               const { key, ...props } = getFooterProps(computedFooterProps)
 
               return (
-                <Th key={key} {...props}>
+                <Th {...props} {...(enableBlockLayout ? { as: 'div' } : {})} key={key}>
                   {render('Footer')}
                 </Th>
               )

@@ -4,7 +4,6 @@ import { transparentizeColor, toneColor } from '@yamada-ui/utils'
 export const Table: ComponentMultiStyle = {
   baseStyle: {
     table: {
-      w: '100%',
       h: '100%',
       fontVariantNumeric: 'lining-nums tabular-nums',
       borderCollapse: 'collapse',
@@ -34,6 +33,7 @@ export const Table: ComponentMultiStyle = {
       textAlign: 'center',
     },
     sortIcon: {},
+    resizeSeparator: {},
   },
 
   variants: {

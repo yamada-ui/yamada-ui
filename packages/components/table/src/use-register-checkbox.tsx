@@ -103,6 +103,7 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
               </Center>
             )
           },
+          disableResizing: true,
           ...selectColumnProps,
         },
         ...columns,

@@ -4,6 +4,7 @@ import {
   omitThemeProps,
   ComponentArgs,
   CSSUIObject,
+  HTMLUIProps,
 } from '@yamada-ui/core'
 import { IconProps } from '@yamada-ui/icon'
 import { TableStyleProvider } from '@yamada-ui/native-table'
@@ -21,10 +22,11 @@ type TableOptions<Y extends object = {}> = {
   withBorder?: boolean
   withColumnBorders?: boolean
   withFooter?: boolean
-  theadProps?: Omit<TableHeadProps<Y>, 'sortIconProps'>
+  theadProps?: Omit<TableHeadProps<Y>, 'sortIconProps' | 'resizeSeparatorProps'>
   tbodyProps?: TableBodyProps<Y>
   tfootProps?: TableFootProps<Y>
   sortIconProps?: IconProps
+  resizeSeparatorProps?: HTMLUIProps<'div'> | ((isResizing: boolean) => HTMLUIProps<'div'>)
 }
 
 export type TableProps<Y extends object = {}> = UseTableProps<Y> & TableOptions<Y>
@@ -47,23 +49,37 @@ export const Table = forwardRef(
       tfootProps,
       checkboxProps,
       sortIconProps,
+      resizeSeparatorProps,
       layout,
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    const css: CSSUIObject = { tableLayout: layout, ...styles.table }
-
-    const { getTableProps, ...rest } = useTable<Y>({
+    const { getTableProps, enableBlockLayout, ...rest } = useTable<Y>({
       ...computedProps,
       checkboxProps: { colorStyle, ...checkboxProps },
     })
 
+    const css: CSSUIObject = {
+      w: enableBlockLayout ? 'auto' : '100%',
+      tableLayout: layout,
+      ...styles.table,
+    }
+
     return (
       <TableStyleProvider value={styles}>
-        <TableProvider value={{ ...rest } as unknown as TableContext}>
-          <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
-            <Thead<Y> sortIconProps={sortIconProps} {...theadProps} />
+        <TableProvider value={{ enableBlockLayout, ...rest } as unknown as TableContext}>
+          <ui.table
+            className={cx('ui-table', className)}
+            __css={css}
+            {...getTableProps({}, ref)}
+            {...(enableBlockLayout ? { as: 'div' } : {})}
+          >
+            <Thead<Y>
+              sortIconProps={sortIconProps}
+              resizeSeparatorProps={resizeSeparatorProps}
+              {...theadProps}
+            />
             <Tbody<Y> {...tbodyProps} />
             {withFooter ? <Tfoot<Y> {...tfootProps} /> : null}
             {children}

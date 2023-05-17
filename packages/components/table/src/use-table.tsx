@@ -29,7 +29,6 @@ import {
   UseRowSelectRowProps,
   ActionType,
   Meta,
-  UseTableColumnOptions,
   PluginHook,
   ColumnInstance,
   UseSortByColumnProps,
@@ -37,6 +36,11 @@ import {
   IdType,
   Renderer,
   CellValue,
+  useBlockLayout,
+  useResizeColumns,
+  UseResizeColumnsOptions,
+  UseResizeColumnsColumnOptions,
+  UseResizeColumnsColumnProps,
 } from 'react-table'
 import { useRegisterCheckbox } from './use-register-checkbox'
 
@@ -59,6 +63,7 @@ export type Column<Y extends object = {}> = Omit<
   'columns' | 'Header' | 'Footer' | 'Cell'
 > &
   UseSortByColumnOptions<Y> &
+  UseResizeColumnsColumnOptions<Y> &
   ColumnStyles & {
     columns?: Column<Y>[]
     Header?: Renderer<HeaderProps<Y>>
@@ -67,24 +72,24 @@ export type Column<Y extends object = {}> = Omit<
   }
 
 export type SelectColumn<Y extends object = {}> = Pick<
-  UseTableColumnOptions<Y>,
-  'width' | 'minWidth' | 'maxWidth'
+  Column<Y>,
+  'width' | 'minWidth' | 'maxWidth' | 'Header' | 'Footer' | 'Cell' | 'disableResizing'
 > &
   ColumnStyles
 
 type HeaderProps<Y extends object = {}> = TableInstance<Y> & {
-  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y> & UseResizeColumnsColumnProps<Y>
 }
 
 type CellProps<Y extends object = {}> = TableInstance<Y> & {
-  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y> & UseResizeColumnsColumnProps<Y>
   row: Row<Y>
   cell: Cell<Y>
   value: CellValue
 }
 
 type FooterProps<Y extends object = {}> = TableInstance<Y> & {
-  column: ColumnInstance<Y> & UseSortByColumnProps<Y>
+  column: ColumnInstance<Y> & UseSortByColumnProps<Y> & UseResizeColumnsColumnProps<Y>
 }
 
 export type Row<Y extends object = {}> = ReactTableRow<Y> & UseRowSelectRowProps<Y>
@@ -120,7 +125,8 @@ type UseTableOptions<Y extends object = {}> = Omit<
   'stateReducer' | 'useControlledState'
 > &
   UseSortByOptions<Y> &
-  UseRowSelectOptions<Y> & {
+  UseRowSelectOptions<Y> &
+  Pick<UseResizeColumnsOptions<Y>, 'autoResetResize'> & {
     stateReducer?: (
       newState: TableState<Y>,
       action: ActionType,
@@ -145,13 +151,15 @@ export type UseTableProps<Y extends object = {}> = TableProps &
     onChangeSelect?: (selectedIds: IdType<Y>[]) => void
     onClickRow?: (row: Row<Y>) => void
     checkboxProps?: CheckboxProps
-    selectColumnProps?: SelectColumn
+    selectColumnProps?: SelectColumn<Y>
     disableSelect?: boolean
     withFooterSelect?: boolean
     toggleSortByRef?: ForwardedRef<ToggleSortBy<Y>>
     setSortByRef?: ForwardedRef<SetSortBy<Y>>
     setSelectRef?: ForwardedRef<SetSelect<Y>>
     setAllSelectRef?: ForwardedRef<SetAllSelect<Y>>
+    enableBlockLayout?: boolean
+    enableResizeColumns?: boolean
   }
 
 export const useTable = <Y extends object = {}>({
@@ -194,8 +202,12 @@ export const useTable = <Y extends object = {}>({
   setSortByRef,
   setSelectRef,
   setAllSelectRef,
+  enableBlockLayout = false,
+  enableResizeColumns = false,
+  autoResetResize,
   ...rest
 }: UseTableProps<Y>) => {
+  if (enableResizeColumns) enableBlockLayout = true
   if (disableSelect) rowsClickSelect = false
 
   const computedDefaultSelectedRowIds: SelectedRowIds = useMemo(() => {
@@ -259,8 +271,11 @@ export const useTable = <Y extends object = {}>({
       manualRowSelectedKey,
       autoResetSelectedRows,
       selectSubRows,
+      disableResizing: !enableResizeColumns,
+      autoResetResize,
     } as Omit<UseTableOptions<Y>, 'stateReducer' | 'useControlledState'>,
     useSortBy,
+    useResizeColumns,
     ...(!disableSelect
       ? ([
           useRowSelect,
@@ -274,6 +289,7 @@ export const useTable = <Y extends object = {}>({
             }),
         ] as PluginHook<Y>[])
       : []),
+    ...(enableBlockLayout ? [useBlockLayout] : []),
   ) as TableInstance<Y>
 
   const setSelect = useCallback(
@@ -330,6 +346,7 @@ export const useTable = <Y extends object = {}>({
     onClickRow,
     rowsClickSelect,
     disabledRowIds,
+    enableBlockLayout,
   }
 }
 

@@ -19,11 +19,18 @@ export const Tbody = <Y extends object = {}>({
   cellProps,
   ...rest
 }: TableBodyProps<Y>) => {
-  const { getTableBodyProps, rows, prepareRow, onClickRow, rowsClickSelect, disabledRowIds } =
-    useTableContext()
+  const {
+    getTableBodyProps,
+    rows,
+    prepareRow,
+    onClickRow,
+    rowsClickSelect,
+    disabledRowIds,
+    enableBlockLayout,
+  } = useTableContext()
 
   return (
-    <NativeTbody {...getTableBodyProps(rest)}>
+    <NativeTbody {...getTableBodyProps(rest)} {...(enableBlockLayout ? { as: 'div' } : {})}>
       {rows.map((row) => {
         prepareRow(row)
         const computedRowProps = runIfFunc(rowProps, row as unknown as Row<Y>) ?? {}
@@ -47,9 +54,10 @@ export const Tbody = <Y extends object = {}>({
 
         return (
           <Tr
-            key={key}
             {...(rowsClickSelect && !isDisabled ? { cursor: 'pointer' } : {})}
             {...props}
+            {...(enableBlockLayout ? { as: 'div' } : {})}
+            key={key}
             data-selected={dataAttr(isSelected)}
             data-disabled={dataAttr(isDisabled)}
             aria-checked={ariaAttr(isSelected)}
@@ -61,7 +69,7 @@ export const Tbody = <Y extends object = {}>({
               const { key, ...props } = getCellProps(computedCellProps)
 
               return (
-                <Td key={key} {...props}>
+                <Td {...props} {...(enableBlockLayout ? { as: 'div' } : {})} key={key}>
                   {render('Cell')}
                 </Td>
               )

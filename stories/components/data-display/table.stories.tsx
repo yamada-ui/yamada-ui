@@ -1760,6 +1760,279 @@ export const useSetAllSelect: ComponentStory<typeof Table> = () => {
   )
 }
 
+export const enabledBlockLayout: ComponentStory<typeof Table> = () => {
+  const columns: Column<Data>[] = useMemo(
+    () => [
+      {
+        Header: '作品名',
+        accessor: 'name',
+      },
+      {
+        Header: '放送期間',
+        accessor: 'broadcastPeriod',
+      },
+      {
+        Header: '話数',
+        accessor: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data: Data[] = useMemo(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return <Table columns={columns} data={data} enableBlockLayout />
+}
+
+export const enabledResizeColumns: ComponentStory<typeof Table> = () => {
+  const columns: Column<Data>[] = useMemo(
+    () => [
+      {
+        Header: '作品名',
+        accessor: 'name',
+      },
+      {
+        Header: '放送期間',
+        accessor: 'broadcastPeriod',
+      },
+      {
+        Header: '話数',
+        accessor: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data: Data[] = useMemo(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      withBorder
+      withColumnBorders
+      enableResizeColumns
+      selectColumnProps={{ minWidth: 40, width: 40 }}
+      defaultColumn={{
+        minWidth: 120,
+        width: 160,
+        maxWidth: 320,
+      }}
+    />
+  )
+}
+
+export const disabledResizing: ComponentStory<typeof Table> = () => {
+  const columns: Column<Data>[] = useMemo(
+    () => [
+      {
+        Header: '作品名',
+        accessor: 'name',
+        disableResizing: true,
+      },
+      {
+        Header: '放送期間',
+        accessor: 'broadcastPeriod',
+      },
+      {
+        Header: '話数',
+        accessor: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data: Data[] = useMemo(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      withBorder
+      withColumnBorders
+      enableResizeColumns
+      selectColumnProps={{ minWidth: 40, width: 40 }}
+      defaultColumn={{
+        minWidth: 120,
+        width: 160,
+        maxWidth: 320,
+      }}
+    />
+  )
+}
+
+export const custonResizeSeparator: ComponentStory<typeof Table> = () => {
+  const columns: Column<Data>[] = useMemo(
+    () => [
+      {
+        Header: '作品名',
+        accessor: 'name',
+      },
+      {
+        Header: '放送期間',
+        accessor: 'broadcastPeriod',
+      },
+      {
+        Header: '話数',
+        accessor: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data: Data[] = useMemo(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <Table
+        columns={columns}
+        data={data}
+        withBorder
+        withColumnBorders
+        enableResizeColumns
+        selectColumnProps={{ minWidth: 40, width: 40 }}
+        defaultColumn={{
+          minWidth: 120,
+          width: 160,
+          maxWidth: 320,
+        }}
+        resizeSeparatorProps={{ bg: 'blue.500' }}
+      />
+
+      <Table
+        columns={columns}
+        data={data}
+        withBorder
+        withColumnBorders
+        enableResizeColumns
+        selectColumnProps={{ minWidth: 40, width: 40 }}
+        defaultColumn={{
+          minWidth: 120,
+          width: 160,
+          maxWidth: 320,
+        }}
+        resizeSeparatorProps={(isResizing) => ({ bg: isResizing ? 'red.500' : 'blue.500' })}
+      />
+    </>
+  )
+}
+
 export const controlProps: ComponentStory<typeof Table> = () => {
   const columns: Column<Data>[] = useMemo(
     () => [

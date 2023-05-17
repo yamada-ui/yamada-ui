@@ -3,6 +3,7 @@ import { transparentizeColor, toneColor } from '@yamada-ui/utils'
 
 export const Table: ComponentMultiStyle = {
   baseStyle: {
+    container: {},
     table: {
       h: '100%',
       fontVariantNumeric: 'lining-nums tabular-nums',

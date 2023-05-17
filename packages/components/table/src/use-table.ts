@@ -101,7 +101,7 @@ export type Cell<Y extends object = {}> = Omit<TableCell<Y>, 'column' | 'row'> &
 
 export type SortBy<Y extends object = {}> = UseSortByState<Y>['sortBy']
 
-type SelectedRowIds<Y extends object = {}> = UseRowSelectState<Y>['selectedRowIds']
+export type SelectedRowIds<Y extends object = {}> = UseRowSelectState<Y>['selectedRowIds']
 
 export type TableState<Y extends object = {}> = ReactTableState<Y> &
   UseSortByState<Y> &
@@ -120,7 +120,7 @@ export type SetSelect<Y extends object = {}> = (
 ) => void
 export type SetAllSelect<Y extends object = {}> = TableInstance<Y>['toggleAllRowsSelected']
 
-type UseTableOptions<Y extends object = {}> = Omit<
+export type UseTableOptions<Y extends object = {}> = Omit<
   UseReactTableOptions<Y>,
   'stateReducer' | 'useControlledState'
 > &
@@ -162,6 +162,51 @@ export type UseTableProps<Y extends object = {}> = TableProps &
     enableResizeColumns?: boolean
   }
 
+export const generateSelectedRowIds = <Y extends object = {}>(
+  defaultSelectedRowIds: IdType<Y>[],
+  disableSelect: boolean,
+): SelectedRowIds => {
+  if (disableSelect) return {}
+
+  if (defaultSelectedRowIds) {
+    return defaultSelectedRowIds.reduce<SelectedRowIds>(
+      (prev, id) => ({ ...prev, [id.toString()]: true }),
+      {},
+    )
+  } else {
+    return {}
+  }
+}
+
+export const assignHooks = <Y extends object = {}>({
+  disableSelect,
+  enableBlockLayout,
+  useRegisterCheckboxProps,
+}: {
+  disableSelect: boolean
+  enableBlockLayout: boolean
+  useRegisterCheckboxProps: Pick<
+    UseTableProps<Y>,
+    'checkboxProps' | 'disabledRowIds' | 'selectColumnProps' | 'withFooterSelect'
+  >
+}): PluginHook<Y>[] => {
+  const hooks: PluginHook<Y>[] = [useSortBy, useResizeColumns]
+
+  if (!disableSelect) {
+    hooks.push(useRowSelect)
+    hooks.push((hooks) => useRegisterCheckbox<Y>({ hooks, ...useRegisterCheckboxProps }))
+  }
+
+  if (enableBlockLayout) {
+    hooks.push(useBlockLayout)
+  }
+
+  return hooks
+}
+
+export const getDefaultRowId = <Y extends object = {}>(key: keyof Y | undefined) =>
+  key ? (row: Y) => String(row[key]) : undefined
+
 export const useTable = <Y extends object = {}>({
   columns = [],
   data = [],
@@ -170,9 +215,7 @@ export const useTable = <Y extends object = {}>({
   useControlledState,
   getSubRows,
   generatingRowIdFromAccessor,
-  getRowId = generatingRowIdFromAccessor
-    ? (row) => String(row[generatingRowIdFromAccessor])
-    : undefined,
+  getRowId = getDefaultRowId(generatingRowIdFromAccessor),
   defaultColumn,
   defaultSortBy = [],
   manualSortBy,
@@ -186,9 +229,9 @@ export const useTable = <Y extends object = {}>({
   orderByFn,
   autoResetSortBy = true,
   onChangeSortBy,
-  disableSelect,
+  disableSelect = false,
   withFooterSelect,
-  defaultSelectedRowIds,
+  defaultSelectedRowIds = [],
   disabledRowIds,
   rowsClickSelect = false,
   manualRowSelectedKey = 'isSelected',
@@ -210,18 +253,10 @@ export const useTable = <Y extends object = {}>({
   if (enableResizeColumns) enableBlockLayout = true
   if (disableSelect) rowsClickSelect = false
 
-  const computedDefaultSelectedRowIds: SelectedRowIds = useMemo(() => {
-    if (disableSelect) return {}
-
-    if (defaultSelectedRowIds) {
-      return defaultSelectedRowIds.reduce<SelectedRowIds>(
-        (prev, id) => ({ ...prev, [id.toString()]: true }),
-        {},
-      )
-    } else {
-      return {}
-    }
-  }, [defaultSelectedRowIds, disableSelect])
+  const computedDefaultSelectedRowIds: SelectedRowIds = useMemo(
+    () => generateSelectedRowIds(defaultSelectedRowIds, disableSelect),
+    [defaultSelectedRowIds, disableSelect],
+  )
 
   const {
     getTableProps: getReactTableProps,
@@ -274,22 +309,16 @@ export const useTable = <Y extends object = {}>({
       disableResizing: !enableResizeColumns,
       autoResetResize,
     } as Omit<UseTableOptions<Y>, 'stateReducer' | 'useControlledState'>,
-    useSortBy,
-    useResizeColumns,
-    ...(!disableSelect
-      ? ([
-          useRowSelect,
-          (hooks) =>
-            useRegisterCheckbox<Y>({
-              hooks,
-              checkboxProps,
-              disabledRowIds,
-              selectColumnProps,
-              withFooterSelect,
-            }),
-        ] as PluginHook<Y>[])
-      : []),
-    ...(enableBlockLayout ? [useBlockLayout] : []),
+    ...assignHooks({
+      disableSelect,
+      enableBlockLayout,
+      useRegisterCheckboxProps: {
+        checkboxProps,
+        disabledRowIds,
+        selectColumnProps,
+        withFooterSelect,
+      },
+    }),
   ) as TableInstance<Y>
 
   const setSelect = useCallback(

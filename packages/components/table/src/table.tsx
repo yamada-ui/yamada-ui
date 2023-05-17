@@ -7,8 +7,8 @@ import {
   HTMLUIProps,
 } from '@yamada-ui/core'
 import { IconProps } from '@yamada-ui/icon'
-import { TableStyleProvider } from '@yamada-ui/native-table'
-import { cx } from '@yamada-ui/utils'
+import { TableStyleProvider, TableCaption } from '@yamada-ui/native-table'
+import { cx, pickChildren, getValidChildren } from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
@@ -66,6 +66,9 @@ export const Table = forwardRef(
       ...styles.table,
     }
 
+    const validChildren = getValidChildren(children)
+    const tableCaptionChildren = pickChildren(validChildren, TableCaption)
+
     return (
       <TableStyleProvider value={styles}>
         <TableProvider value={{ enableBlockLayout, ...rest } as unknown as TableContext}>
@@ -82,7 +85,7 @@ export const Table = forwardRef(
             />
             <Tbody<Y> {...tbodyProps} />
             {withFooter ? <Tfoot<Y> {...tfootProps} /> : null}
-            {children}
+            {tableCaptionChildren}
           </ui.table>
         </TableProvider>
       </TableStyleProvider>

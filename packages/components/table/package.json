@@ -23,6 +23,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/native-table": "workspace:*",
     "@yamada-ui/checkbox": "workspace:*",
+    "@yamada-ui/select": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/pagination": "workspace:*",
     "@yamada-ui/utils": "workspace:*",

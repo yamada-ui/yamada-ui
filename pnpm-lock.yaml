@@ -1604,6 +1604,9 @@ importers:
       '@yamada-ui/pagination':
         specifier: workspace:*
         version: link:../pagination
+      '@yamada-ui/select':
+        specifier: workspace:*
+        version: link:../select
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

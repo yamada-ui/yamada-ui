@@ -41,6 +41,7 @@ import {
   UseResizeColumnsOptions,
   UseResizeColumnsColumnOptions,
   UseResizeColumnsColumnProps,
+  usePagination,
 } from 'react-table'
 import { useRegisterCheckbox } from './use-register-checkbox'
 
@@ -180,10 +181,12 @@ export const generateSelectedRowIds = <Y extends object = {}>(
 
 export const assignHooks = <Y extends object = {}>({
   disableSelect,
+  enablePagination,
   enableBlockLayout,
   useRegisterCheckboxProps,
 }: {
   disableSelect: boolean
+  enablePagination?: boolean
   enableBlockLayout: boolean
   useRegisterCheckboxProps: Pick<
     UseTableProps<Y>,
@@ -191,6 +194,10 @@ export const assignHooks = <Y extends object = {}>({
   >
 }): PluginHook<Y>[] => {
   const hooks: PluginHook<Y>[] = [useSortBy, useResizeColumns]
+
+  if (enablePagination) {
+    hooks.push(usePagination)
+  }
 
   if (!disableSelect) {
     hooks.push(useRowSelect)

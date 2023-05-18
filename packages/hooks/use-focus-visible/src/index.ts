@@ -13,8 +13,8 @@ let hasBlurredWindowRecently = false
 
 const handlers = new Set<Handler>()
 
-const trigger = (modality: Modality, event: HandlerEvent | null) =>
-  handlers.forEach((handler) => handler(modality, event))
+const trigger = (modality: Modality, ev: HandlerEvent | null) =>
+  handlers.forEach((handler) => handler(modality, ev))
 
 const onValid = (e: KeyboardEvent) => {
   return !(
@@ -27,50 +27,50 @@ const onValid = (e: KeyboardEvent) => {
   )
 }
 
-const onKeyboard = (event: KeyboardEvent) => {
+const onKeyboard = (ev: KeyboardEvent) => {
   hasEventBeforeFocus = true
 
-  if (onValid(event)) {
+  if (onValid(ev)) {
     modality = 'keyboard'
 
-    trigger('keyboard', event)
+    trigger('keyboard', ev)
   }
 }
 
-const onPointer = (event: PointerEvent | MouseEvent) => {
+const onPointer = (ev: PointerEvent | MouseEvent) => {
   modality = 'pointer'
 
-  if (event.type === 'mousedown' || event.type === 'pointerdown') {
+  if (ev.type === 'mousedown' || ev.type === 'pointerdown') {
     hasEventBeforeFocus = true
 
-    const target = event.composedPath ? event.composedPath()[0] : event.target
+    const target = ev.composedPath ? ev.composedPath()[0] : ev.target
 
     if ((target as HTMLElement).matches(':focus-visible')) return
 
-    trigger('pointer', event)
+    trigger('pointer', ev)
   }
 }
 
-const isVirtualClick = (event: MouseEvent | PointerEvent): boolean => {
-  if ((event as any).mozInputSource === 0 && event.isTrusted) return true
+const isVirtualClick = (ev: MouseEvent | PointerEvent): boolean => {
+  if ((ev as any).mozInputSource === 0 && ev.isTrusted) return true
 
-  return event.detail === 0 && !(event as PointerEvent).pointerType
+  return ev.detail === 0 && !(ev as PointerEvent).pointerType
 }
 
-const onClick = (e: MouseEvent) => {
-  if (!isVirtualClick(e)) return
+const onClick = (ev: MouseEvent) => {
+  if (!isVirtualClick(ev)) return
 
   hasEventBeforeFocus = true
 
   modality = 'virtual'
 }
 
-const onFocus = (event: FocusEvent) => {
-  if (event.target === window || event.target === document) return
+const onFocus = (ev: FocusEvent) => {
+  if (ev.target === window || ev.target === document) return
 
   if (!hasEventBeforeFocus && !hasBlurredWindowRecently) {
     modality = 'virtual'
-    trigger('virtual', event)
+    trigger('virtual', ev)
   }
 
   hasEventBeforeFocus = false
@@ -87,12 +87,14 @@ const isFocusVisible = () => modality !== 'pointer'
 const setupGlobalFocusEvents = () => {
   if (typeof window === 'undefined' || hasSetup) return
 
+  console.log(HTMLElement.prototype)
+
   const { focus } = HTMLElement.prototype
 
   HTMLElement.prototype.focus = (...args) => {
     hasEventBeforeFocus = true
 
-    focus.apply(this, args)
+    if (this) focus.apply(this, args)
   }
 
   document.addEventListener('keydown', onKeyboard, true)

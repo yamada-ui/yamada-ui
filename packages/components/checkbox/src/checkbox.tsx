@@ -59,8 +59,18 @@ export type UseCheckboxProps = FormControlOptions & {
 }
 
 export const useCheckbox = (props: UseCheckboxProps) => {
-  const { id, name, value, tabIndex, required, disabled, readOnly, isIndeterminate, ...rest } =
-    useFormControlProps(props)
+  const {
+    id,
+    name,
+    value,
+    defaultChecked,
+    tabIndex,
+    required,
+    disabled,
+    readOnly,
+    isIndeterminate,
+    ...rest
+  } = useFormControlProps(props)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -70,7 +80,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isLabel, setIsLabel] = useState<boolean>(true)
 
-  const [isChecked, setIsChecked] = useState<boolean>(!!props.defaultChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(!!defaultChecked)
 
   const isControlled = props.isChecked !== undefined
   const checked = isControlled ? (props.isChecked as boolean) : isChecked
@@ -121,7 +131,7 @@ export const useCheckbox = (props: UseCheckboxProps) => {
   useSafeLayoutEffect(() => {
     if (!inputRef.current?.form) return
 
-    inputRef.current.form.onreset = () => setIsChecked(!!isChecked)
+    inputRef.current.form.onreset = () => setIsChecked(!!defaultChecked)
   }, [])
 
   useSafeLayoutEffect(() => {

@@ -5,9 +5,9 @@ import {
   useFormControlProps,
 } from '@yamada-ui/form-control'
 import { PopoverProps } from '@yamada-ui/popover'
-import { useClickable } from '@yamada-ui/use-clickable'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
 import { createDescendant } from '@yamada-ui/use-descendant'
+import { useOutsideClick } from '@yamada-ui/use-outside-click'
 import {
   createContext,
   dataAttr,
@@ -21,17 +21,17 @@ import {
   useUnmountEffect,
   useUpdateEffect,
   mergeRefs,
-  isActiveElement,
   isHTMLElement,
   ariaAttr,
   isArray,
   isUndefined,
+  getEventRelatedTarget,
+  isContains,
 } from '@yamada-ui/utils'
 import {
   Dispatch,
   ForwardedRef,
   KeyboardEvent,
-  KeyboardEventHandler,
   RefObject,
   SetStateAction,
   useCallback,
@@ -70,6 +70,8 @@ type SelectContext = Omit<UseSelectProps, 'value' | 'defaultValue' | 'onChange' 
   onFocusPrev: () => void
   focusedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
+  containerRef: RefObject<HTMLDivElement>
+  fieldRef: RefObject<HTMLDivElement>
   listRef: RefObject<HTMLUListElement>
   styles: Record<string, CSSUIObject>
 }
@@ -99,6 +101,8 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
 export const useSelect = <T extends MaybeValue = string>({
   defaultIsOpen,
   placeholder,
+  closeOnBlur = true,
+  closeOnEsc = true,
   closeOnSelect = true,
   placeholderInOptions = true,
   omitSelectedValues = false,
@@ -119,7 +123,8 @@ export const useSelect = <T extends MaybeValue = string>({
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
 
-  const initialFocusRef = useRef<any>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const fieldRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
@@ -130,6 +135,7 @@ export const useSelect = <T extends MaybeValue = string>({
   })
   const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
 
+  const isFocused = focusedIndex > -1
   const isMulti = isArray(value)
   const isEmptyValue = (!isMulti ? !value : !value.length) && !(placeholder && placeholderInOptions)
 
@@ -139,10 +145,6 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const enabledValues = descendants.enabledValues(({ index }) => !selectedIndexes.includes(index))
-
-  const onFocusList = useCallback(() => {
-    requestAnimationFrame(() => listRef.current?.focus({ preventScroll: false }))
-  }, [])
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
@@ -196,10 +198,7 @@ export const useSelect = <T extends MaybeValue = string>({
         !isMulti ? node.dataset.value === value : value.includes(node.dataset.value ?? ''),
       )
 
-      if (selected) {
-        setFocusedIndex(selected.index)
-        initialFocusRef.current = selected.node
-      }
+      if (selected) setFocusedIndex(selected.index)
     })
 
     timeoutIds.current.add(id)
@@ -266,6 +265,9 @@ export const useSelect = <T extends MaybeValue = string>({
     selectedIndexes,
     setFocusedIndex,
   ])
+
+  const onFocusFirstOrSelected = isEmptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
+  const onFocusLastOrSelected = isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
   const onChangeDisplayValue = useCallback(
     (newValue: string, runOmit: boolean = true) => {
@@ -342,20 +344,7 @@ export const useSelect = <T extends MaybeValue = string>({
     setIsOpen(true)
 
     rest.onOpen?.()
-
-    onFocusList()
-
-    if (!isEmptyValue && !omitSelectedValues) onFocusSelected()
-  }, [
-    formControlProps,
-    isEmpty,
-    isAllSelected,
-    rest,
-    onFocusList,
-    isEmptyValue,
-    omitSelectedValues,
-    onFocusSelected,
-  ])
+  }, [formControlProps, isEmpty, isAllSelected, rest])
 
   const onClose = useCallback(() => {
     setIsOpen(false)
@@ -363,14 +352,72 @@ export const useSelect = <T extends MaybeValue = string>({
     rest.onClose?.()
   }, [rest])
 
+  const onSelect = useCallback(() => {
+    let enabledValue = descendants.value(focusedIndex)
+
+    if ('disabled' in (enabledValue?.node.dataset ?? {})) enabledValue = undefined
+
+    if (!enabledValue) return
+
+    const value = enabledValue.node.dataset.value ?? ''
+
+    onChange(value)
+
+    if (closeOnSelect) onClose()
+
+    if (omitSelectedValues) onFocusNext()
+  }, [closeOnSelect, descendants, focusedIndex, omitSelectedValues, onChange, onClose, onFocusNext])
+
+  const onClick = useCallback(() => {
+    if (isOpen) return
+    onOpen()
+
+    onFocusFirstOrSelected()
+  }, [isOpen, onFocusFirstOrSelected, onOpen])
+
+  const onFocus = useCallback(() => {
+    if (isOpen) return
+
+    onOpen()
+
+    onFocusFirstOrSelected()
+  }, [isOpen, onFocusFirstOrSelected, onOpen])
+
+  const onBlur = useCallback(
+    (ev: FocusEvent<HTMLDivElement>) => {
+      const relatedTarget = getEventRelatedTarget(ev)
+
+      if (isContains(containerRef.current, relatedTarget)) return
+
+      if (!closeOnBlur) return
+
+      if (isOpen) onClose()
+    },
+    [closeOnBlur, isOpen, onClose],
+  )
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
+      if (ev.key === ' ') ev.key = ev.code
+
       if (formControlProps.disabled || formControlProps.readOnly) return
 
-      const actions: Record<string, Function> = {
-        Enter: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusFirst : undefined),
-        ArrowDown: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusFirst : undefined),
-        ArrowUp: funcAll(onOpen, isEmptyValue || omitSelectedValues ? onFocusLast : undefined),
+      const actions: Record<string, Function | undefined> = {
+        ArrowDown: isFocused
+          ? () => onFocusNext()
+          : !isOpen
+          ? funcAll(onOpen, onFocusFirstOrSelected)
+          : undefined,
+        ArrowUp: isFocused
+          ? () => onFocusPrev()
+          : !isOpen
+          ? funcAll(onOpen, onFocusLastOrSelected)
+          : undefined,
+        Space: isFocused ? onSelect : !isOpen ? funcAll(onOpen, onFocusFirstOrSelected) : undefined,
+        Enter: isFocused ? onSelect : !isOpen ? funcAll(onOpen, onFocusFirstOrSelected) : undefined,
+        Home: isOpen ? onFocusFirst : undefined,
+        End: isOpen ? onFocusLast : undefined,
+        Escape: closeOnEsc ? onClose : undefined,
       }
 
       const action = actions[ev.key]
@@ -381,8 +428,29 @@ export const useSelect = <T extends MaybeValue = string>({
       ev.stopPropagation()
       action()
     },
-    [isEmptyValue, omitSelectedValues, onFocusFirst, onFocusLast, onOpen, formControlProps],
+    [
+      formControlProps.disabled,
+      formControlProps.readOnly,
+      isFocused,
+      isOpen,
+      onOpen,
+      onFocusFirstOrSelected,
+      onFocusLastOrSelected,
+      onSelect,
+      onFocusFirst,
+      onFocusLast,
+      closeOnEsc,
+      onClose,
+      onFocusNext,
+      onFocusPrev,
+    ],
   )
+
+  useOutsideClick({
+    ref: containerRef,
+    handler: onClose,
+    enabled: closeOnBlur,
+  })
 
   useEffect(() => {
     if (!isMulti) return
@@ -418,7 +486,7 @@ export const useSelect = <T extends MaybeValue = string>({
       onClose,
       placement,
       duration,
-      initialFocusRef,
+      trigger: 'never',
       closeOnButton: false,
     }),
     [duration, onClose, onOpen, placement, rest, isOpen],
@@ -426,17 +494,20 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ref,
+      ref: mergeRefs(containerRef, ref),
       ...computedProps[0],
       ...props,
       ...formControlProps,
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
+      onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [computedProps, formControlProps],
+    [computedProps, formControlProps, onBlur, onClick, onFocus, rest],
   )
 
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ref,
+      ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
       ...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange']),
       ...props,
@@ -458,6 +529,8 @@ export const useSelect = <T extends MaybeValue = string>({
     omitSelectedValues,
     closeOnSelect,
     isOpen,
+    containerRef,
+    fieldRef,
     listRef,
     option,
     formControlProps,
@@ -481,29 +554,45 @@ export const useSelect = <T extends MaybeValue = string>({
 export type UseSelectReturn = ReturnType<typeof useSelect>
 
 export const useSelectList = () => {
-  const { listRef, focusedIndex, onFocusNext, onFocusPrev, onFocusFirst, onFocusLast, onClose } =
-    useSelectContext()
+  const { listRef, focusedIndex } = useSelectContext()
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent) => {
-      const actions: Record<string, KeyboardEventHandler> = {
-        Tab: (ev) => ev.preventDefault(),
-        Escape: onClose,
-        ArrowDown: focusedIndex === -1 ? onFocusFirst : onFocusNext,
-        ArrowUp: focusedIndex === -1 ? onFocusLast : onFocusPrev,
-        Home: onFocusFirst,
-        End: onFocusLast,
+  const descendants = useSelectDescendantsContext()
+
+  const beforeFocusedIndex = useRef<number>(-1)
+  const selectedValue = descendants.value(focusedIndex)
+
+  useEffect(() => {
+    if (!listRef.current || !selectedValue) return
+
+    const parent = listRef.current
+    const child = selectedValue.node
+
+    const parentHeight = parent.clientHeight
+    const viewTop = parent.scrollTop
+    const viewBottom = viewTop + parentHeight
+
+    const childHeight = child.clientHeight
+    const childTop = child.offsetTop
+    const childBottom = childTop + childHeight
+
+    const isInView = viewTop <= childTop && childBottom <= viewBottom
+
+    const isScrollBottom = beforeFocusedIndex.current < selectedValue.index
+
+    if (!isInView) {
+      if (childBottom <= parentHeight) {
+        listRef.current.scrollTo({ top: 0 })
+      } else {
+        if (!isScrollBottom) {
+          listRef.current.scrollTo({ top: childTop + 1 })
+        } else {
+          listRef.current.scrollTo({ top: childBottom - parentHeight })
+        }
       }
+    }
 
-      const action = actions[ev.key]
-
-      if (!action) return
-
-      ev.preventDefault()
-      action(ev)
-    },
-    [focusedIndex, onClose, onFocusFirst, onFocusLast, onFocusNext, onFocusPrev],
-  )
+    beforeFocusedIndex.current = selectedValue.index
+  }, [listRef, selectedValue])
 
   const getListProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
@@ -512,9 +601,8 @@ export const useSelectList = () => {
       role: 'select',
       tabIndex: -1,
       ...props,
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
-    [listRef, onKeyDown],
+    [listRef],
   )
 
   return {
@@ -606,20 +694,19 @@ export const useSelectOption = (
   props: UseSelectOptionProps,
 ) => {
   const {
+    fieldRef,
     value,
     placeholder,
     placeholderInOptions,
     omitSelectedValues,
     closeOnSelect: generalCloseOnSelect,
-    isOpen,
     focusedIndex,
-    listRef,
     option,
     onChange,
     onChangeDisplayValue,
-    setFocusedIndex,
     onFocusNext,
     onClose,
+    setFocusedIndex,
   } = useSelectContext()
 
   let {
@@ -659,18 +746,38 @@ export const useSelectOption = (
   }
   const onClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
-      computedProps.onClick?.(ev)
-      if (!isTargetOption(ev.currentTarget)) return
+      ev.preventDefault()
+      ev.stopPropagation()
+
+      if (isDisabled) {
+        if (fieldRef.current) fieldRef.current.focus()
+
+        return
+      }
+
+      if (!isTargetOption(ev.currentTarget)) {
+        if (fieldRef.current) fieldRef.current.focus()
+
+        return
+      }
+
+      setFocusedIndex(index)
 
       onChange(computedProps.value ?? '')
+
+      if (fieldRef.current) fieldRef.current.focus()
 
       if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
 
       if (omitSelectedValues) onFocusNext()
     },
     [
-      computedProps,
+      isDisabled,
+      setFocusedIndex,
+      index,
       onChange,
+      computedProps.value,
+      fieldRef,
       customCloseOnSelect,
       generalCloseOnSelect,
       onClose,
@@ -679,35 +786,9 @@ export const useSelectOption = (
     ],
   )
 
-  const onFocus = useCallback(
-    (ev: FocusEvent<HTMLLIElement>) => {
-      computedProps.onFocus?.(ev)
-      setFocusedIndex(index)
-    },
-    [computedProps, setFocusedIndex, index],
-  )
-
-  const rest = useClickable({
-    onClick,
-    onFocus,
-    ref: mergeRefs(register, itemRef, ref),
-    isDisabled,
-    isFocusable,
-  })
-
   useEffect(() => {
     if (isSelected) onChangeDisplayValue(computedProps.value ?? '', false)
   }, [computedProps, isSelected, onChangeDisplayValue])
-
-  useUpdateEffect(() => {
-    if (!isOpen) return
-
-    if (isFocused && !trulyDisabled && itemRef.current) {
-      requestAnimationFrame(() => itemRef.current?.focus())
-    } else if (listRef.current && !isActiveElement(listRef.current)) {
-      listRef.current.focus()
-    }
-  }, [isFocused, trulyDisabled, listRef, isOpen])
 
   const getOptionProps: PropGetter = useCallback(
     (props = {}) => {
@@ -724,17 +805,21 @@ export const useSelectOption = (
       }
 
       return {
+        ref: mergeRefs(itemRef, ref, register),
         ...omitObject(computedProps, ['value']),
-        ...rest,
         ...props,
         role: 'select-item',
-        tabIndex: isFocused ? 0 : -1,
+        tabIndex: -1,
         style: omitSelectedValues && isSelected ? style : undefined,
         'data-value': computedProps.value ?? '',
+        'data-focus': dataAttr(isFocused),
+        'data-disabled': dataAttr(isDisabled),
         'aria-checked': ariaAttr(isSelected),
+        'aria-disabled': ariaAttr(isDisabled),
+        onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
-    [computedProps, isFocused, isSelected, omitSelectedValues, rest],
+    [computedProps, isDisabled, isFocused, isSelected, omitSelectedValues, onClick, ref, register],
   )
 
   return {

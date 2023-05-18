@@ -87,8 +87,6 @@ const isFocusVisible = () => modality !== 'pointer'
 const setupGlobalFocusEvents = () => {
   if (typeof window === 'undefined' || hasSetup) return
 
-  console.log(HTMLElement.prototype)
-
   const { focus } = HTMLElement.prototype
 
   HTMLElement.prototype.focus = (...args) => {

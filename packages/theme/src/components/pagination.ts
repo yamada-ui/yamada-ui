@@ -193,6 +193,16 @@ export const Pagination: ComponentMultiStyle = {
         fontSize: 'lg',
       },
     },
+    xl: {
+      container: {
+        gap: 'md',
+      },
+      item: {
+        minW: '12',
+        minH: '12',
+        fontSize: 'xl',
+      },
+    },
   },
 
   defaultProps: {

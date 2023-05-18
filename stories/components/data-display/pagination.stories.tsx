@@ -19,6 +19,7 @@ export const withSize: ComponentStory<typeof Pagination> = () => {
       <Pagination total={10} size='sm' />
       <Pagination total={10} size='md' />
       <Pagination total={10} size='lg' />
+      <Pagination total={10} size='xl' />
     </>
   )
 }

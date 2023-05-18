@@ -96,6 +96,7 @@ export const useDatePicker = ({
   parseDate,
   defaultIsOpen,
   closeOnBlur = true,
+  closeOnEsc = true,
   placement = 'bottom-start',
   duration = 0.2,
   defaultValue,
@@ -201,8 +202,6 @@ export const useDatePicker = ({
   const onClose = useCallback(() => {
     setIsOpen(false)
 
-    inputRef.current?.blur()
-
     rest.onClose?.()
   }, [rest])
 
@@ -249,10 +248,14 @@ export const useDatePicker = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
+      if (ev.key === ' ') ev.key = ev.code
+
       if (formControlProps.disabled || formControlProps.readOnly) return
 
       const actions: Record<string, Function | undefined> = {
-        Enter: onClose,
+        Space: !isOpen ? onClose : onOpen,
+        Enter: !isOpen ? onClose : onOpen,
+        Escape: closeOnEsc ? onClose : undefined,
       }
 
       const action = actions[ev.key]
@@ -264,7 +267,7 @@ export const useDatePicker = ({
 
       action(ev)
     },
-    [formControlProps, onClose],
+    [closeOnEsc, formControlProps, isOpen, onClose, onOpen],
   )
 
   const onCalendarChange = useCallback(

@@ -374,8 +374,6 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   const onClose = useCallback(() => {
     setIsOpen(false)
 
-    if (inputRef.current) inputRef.current.blur()
-
     rest.onClose?.()
   }, [rest])
 
@@ -753,6 +751,8 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
+      if (ev.key === ' ') ev.key = ev.code
+
       if (formControlProps.disabled || formControlProps.readOnly) return
       if (isComposition.current) return
 
@@ -768,6 +768,13 @@ export const useAutocomplete = <T extends MaybeValue = string>({
           ? () => onFocusPrev()
           : !isOpen
           ? funcAll(onOpen, onFocusLastOrSelected)
+          : undefined,
+        Space: isCreate
+          ? onCreate
+          : isFocused
+          ? onSelect
+          : !isOpen
+          ? funcAll(onOpen, onFocusFirstOrSelected)
           : undefined,
         Enter: isCreate
           ? onCreate

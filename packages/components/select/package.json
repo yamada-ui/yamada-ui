@@ -27,6 +27,7 @@
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
+    "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*"
   },
   "devDependencies": {

@@ -1476,6 +1476,9 @@ importers:
       '@yamada-ui/use-descendant':
         specifier: workspace:*
         version: link:../../hooks/use-descendant
+      '@yamada-ui/use-outside-click':
+        specifier: workspace:*
+        version: link:../../hooks/use-outside-click
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

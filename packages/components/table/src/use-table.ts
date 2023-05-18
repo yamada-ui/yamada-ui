@@ -201,7 +201,9 @@ export const assignHooks = <Y extends object = {}>({
 
   if (!disableSelect) {
     hooks.push(useRowSelect)
-    hooks.push((hooks) => useRegisterCheckbox<Y>({ hooks, ...useRegisterCheckboxProps }))
+    hooks.push((hooks) =>
+      useRegisterCheckbox<Y>({ hooks, enablePagination, ...useRegisterCheckboxProps }),
+    )
   }
 
   if (enableBlockLayout) {

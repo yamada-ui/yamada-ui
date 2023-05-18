@@ -5,15 +5,18 @@ import {
   ColumnInstance,
   HeaderProps as ReactHeaderProps,
   Hooks,
+  UsePaginationInstanceProps,
   UseRowSelectInstanceProps,
 } from 'react-table'
 import { Row, TableState, SelectColumn } from './use-table'
 
 type HeaderProps<Y extends Dict = Dict> = ReactHeaderProps<Y> &
-  UseRowSelectInstanceProps<Y> & { state: TableState<Y> }
+  UseRowSelectInstanceProps<Y> &
+  UsePaginationInstanceProps<Y> & { state: TableState<Y> }
 
 export type UseRegisterCheckboxProps<Y extends Dict = Dict> = {
   hooks: Hooks<Y>
+  enablePagination?: boolean
   checkboxProps?: CheckboxProps
   disabledRowIds?: string[]
   selectColumnProps?: SelectColumn<Y>
@@ -32,6 +35,7 @@ const Center = ui('div', {
 
 export const useRegisterCheckbox = <Y extends Dict = Dict>({
   hooks,
+  enablePagination,
   checkboxProps,
   disabledRowIds = [],
   selectColumnProps,
@@ -42,15 +46,27 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
       [
         {
           id: 'selection',
-          Header: ({ state, getToggleAllRowsSelectedProps, rowsById }: HeaderProps<Y>) => {
+          Header: ({
+            state,
+            getToggleAllPageRowsSelectedProps,
+            getToggleAllRowsSelectedProps,
+            rows,
+            page,
+          }: HeaderProps<Y>) => {
+            page ??= rows
+
+            const rowIds = page.map(({ id }) => id)
+
             const selectedRowIds = Object.keys(state.selectedRowIds)
-            const unselectedRowIds = Object.keys(rowsById).filter(
-              (id) => !selectedRowIds.includes(id),
-            )
+            const unselectedRowIds = rowIds.filter((id) => !selectedRowIds.includes(id))
+
+            const getProps = enablePagination
+              ? getToggleAllPageRowsSelectedProps
+              : getToggleAllRowsSelectedProps
 
             const isAllChecked = unselectedRowIds.every((id) => disabledRowIds.includes(id))
 
-            const { checked, indeterminate, onChange } = getToggleAllRowsSelectedProps()
+            const { checked, indeterminate, onChange } = getProps()
 
             return (
               <Center>
@@ -65,15 +81,27 @@ export const useRegisterCheckbox = <Y extends Dict = Dict>({
           },
           ...(withFooterSelect
             ? {
-                Footer: ({ state, getToggleAllRowsSelectedProps, rowsById }: HeaderProps<Y>) => {
+                Footer: ({
+                  state,
+                  getToggleAllPageRowsSelectedProps,
+                  getToggleAllRowsSelectedProps,
+                  rows,
+                  page,
+                }: HeaderProps<Y>) => {
+                  page ??= rows
+
+                  const rowIds = page.map(({ id }) => id)
+
                   const selectedRowIds = Object.keys(state.selectedRowIds)
-                  const unselectedRowIds = Object.keys(rowsById).filter(
-                    (id) => !selectedRowIds.includes(id),
-                  )
+                  const unselectedRowIds = rowIds.filter((id) => !selectedRowIds.includes(id))
+
+                  const getProps = enablePagination
+                    ? getToggleAllPageRowsSelectedProps
+                    : getToggleAllRowsSelectedProps
 
                   const isAllChecked = unselectedRowIds.every((id) => disabledRowIds.includes(id))
 
-                  const { checked, indeterminate, onChange } = getToggleAllRowsSelectedProps()
+                  const { checked, indeterminate, onChange } = getProps()
 
                   return (
                     <Center>

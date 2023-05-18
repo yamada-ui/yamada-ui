@@ -210,15 +210,15 @@ export const NumberInput: ComponentMultiStyle = {
         fontSize: 'sm',
         px: '2',
         h: '8',
-        rounded: 'sm',
+        rounded: 'md',
       },
       stepper: {
         fontSize: 'sm',
         _first: {
-          borderTopEndRadius: 'sm',
+          borderTopEndRadius: 'md',
         },
         _last: {
-          borderBottomEndRadius: 'sm',
+          borderBottomEndRadius: 'md',
           mt: '-1px',
           borderTop: '1px solid',
           borderColor: 'inherit',

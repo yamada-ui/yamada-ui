@@ -189,13 +189,13 @@ export const Input: ComponentMultiStyle = {
         fontSize: 'sm',
         px: '2',
         minH: '8',
-        rounded: 'sm',
+        rounded: 'md',
       },
       addon: {
         fontSize: 'sm',
         px: '2',
         minH: '8',
-        rounded: 'sm',
+        rounded: 'md',
       },
     },
     md: {

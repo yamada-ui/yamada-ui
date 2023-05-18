@@ -30,7 +30,7 @@ export const SegmentedControl: ComponentMultiStyle = {
   variants: {
     basic: ({ theme: t, colorScheme: s, colorStyle: c }) => ({
       container: {
-        rounded: 'md',
+        rounded: 'lg',
       },
       active: {
         bg: isUndefined(c)

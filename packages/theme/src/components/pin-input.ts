@@ -166,7 +166,7 @@ export const PinInput: ComponentMultiStyle = {
         fontSize: 'sm',
         w: '8',
         h: '8',
-        borderRadius: 'sm',
+        borderRadius: 'md',
       },
     },
     md: {

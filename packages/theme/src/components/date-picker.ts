@@ -226,7 +226,7 @@ export const DatePicker: ComponentMultiStyle = {
         pl: '2',
         pr: '8',
         minH: '8',
-        rounded: 'sm',
+        rounded: 'md',
       },
       icon: {
         insetEnd: '2',

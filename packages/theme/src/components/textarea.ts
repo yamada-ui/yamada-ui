@@ -157,7 +157,7 @@ export const Textarea: ComponentStyle = {
       py: '2',
       px: '2',
       h: '8',
-      rounded: 'sm',
+      rounded: 'md',
     },
     md: {
       fontSize: 'md',

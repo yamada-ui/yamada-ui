@@ -35,6 +35,9 @@ export const Table: ComponentMultiStyle = {
     },
     sortIcon: {},
     resizeSeparator: {},
+    pagingControl: {
+      gridTemplateColumns: '1fr 5fr 1fr',
+    },
   },
 
   variants: {
@@ -206,6 +209,9 @@ export const Table: ComponentMultiStyle = {
 
   sizes: {
     sm: {
+      container: {
+        gap: 2,
+      },
       th: {
         px: 2,
         py: 1,
@@ -227,8 +233,14 @@ export const Table: ComponentMultiStyle = {
       sortIcon: {
         right: 2,
       },
+      pagingControl: {
+        gap: 2,
+      },
     },
     md: {
+      container: {
+        gap: 4,
+      },
       th: {
         px: 3,
         py: 2,
@@ -250,8 +262,14 @@ export const Table: ComponentMultiStyle = {
       sortIcon: {
         right: 3,
       },
+      pagingControl: {
+        gap: 4,
+      },
     },
     lg: {
+      container: {
+        gap: 6,
+      },
       th: {
         px: 4,
         py: 3,
@@ -270,8 +288,14 @@ export const Table: ComponentMultiStyle = {
       sortIcon: {
         right: 4,
       },
+      pagingControl: {
+        gap: 6,
+      },
     },
     xl: {
+      container: {
+        gap: 8,
+      },
       th: {
         px: 6,
         py: 4,
@@ -292,6 +316,9 @@ export const Table: ComponentMultiStyle = {
       },
       sortIcon: {
         right: 6,
+      },
+      pagingControl: {
+        gap: 8,
       },
     },
   },

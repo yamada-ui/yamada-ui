@@ -1200,8 +1200,6 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         return
       }
 
-      computedProps.onClick?.(ev)
-
       if (!isTargetOption(ev.currentTarget)) {
         if (inputRef.current) inputRef.current.focus()
 

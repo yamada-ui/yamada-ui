@@ -42,6 +42,7 @@ export const SegmentedControl: ComponentMultiStyle = {
         rounded: 'md',
       },
       button: {
+        rounded: 'md',
         color: ['blackAlpha.700', 'whiteAlpha.700'],
         _hover: {
           color: [`blackAlpha.800`, `whiteAlpha.800`],
@@ -65,6 +66,7 @@ export const SegmentedControl: ComponentMultiStyle = {
         rounded: 'full',
       },
       button: {
+        rounded: 'full',
         color: ['blackAlpha.700', 'whiteAlpha.700'],
         _hover: {
           color: [`blackAlpha.800`, `whiteAlpha.800`],

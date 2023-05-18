@@ -373,7 +373,7 @@ export const customIcon: ComponentStory<typeof Autocomplete> = () => {
 export const customOption: ComponentStory<typeof Autocomplete> = () => {
   return (
     <>
-      <Autocomplete placeholder='キャラクターを選択' option={{ color: 'primary' }}>
+      <Autocomplete placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -381,7 +381,7 @@ export const customOption: ComponentStory<typeof Autocomplete> = () => {
 
       <Autocomplete
         placeholder='キャラクターを選択'
-        option={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>

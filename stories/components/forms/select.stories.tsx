@@ -278,7 +278,7 @@ export const customIcon: ComponentStory<typeof Select> = () => {
 export const customOption: ComponentStory<typeof Select> = () => {
   return (
     <>
-      <Select placeholder='キャラクターを選択' option={{ color: 'primary' }}>
+      <Select placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -286,7 +286,7 @@ export const customOption: ComponentStory<typeof Select> = () => {
 
       <Select
         placeholder='キャラクターを選択'
-        option={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>

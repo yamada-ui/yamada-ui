@@ -251,7 +251,7 @@ type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
     createOption?: boolean
     omitSelectedValues?: boolean
     maxSelectedValues?: number
-    option?: Omit<AutocompleteOptionProps, 'value' | 'children'>
+    optionProps?: Omit<AutocompleteOptionProps, 'value' | 'children'>
     data?: UIOption[]
   }
 
@@ -275,7 +275,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   format = defaultFormat,
   placement = 'bottom-start',
   duration = 0.2,
-  option,
+  optionProps,
   placeholder,
   children,
   ...rest
@@ -920,7 +920,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     isAllSelected,
     listRef,
     inputRef,
-    option,
+    optionProps,
     formControlProps,
     setFocusedIndex,
     onChangeDisplayValue,
@@ -1163,7 +1163,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     setFocusedIndex,
     onClose,
     closeOnSelect: generalCloseOnSelect,
-    option,
+    optionProps,
     inputRef,
     onFocusNext,
   } = useAutocompleteContext()
@@ -1175,7 +1175,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     closeOnSelect: customCloseOnSelect,
     children,
     ...computedProps
-  } = { ...option, ...props }
+  } = { ...optionProps, ...props }
 
   const trulyDisabled = !!isDisabled && !isFocusable
 

@@ -95,7 +95,7 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
     isEmpty: boolean
     omitSelectedValues?: boolean
     maxSelectedValues?: number
-    option?: Omit<OptionProps, 'value' | 'children'>
+    optionProps?: Omit<OptionProps, 'value' | 'children'>
   }
 
 export const useSelect = <T extends MaybeValue = string>({
@@ -110,7 +110,7 @@ export const useSelect = <T extends MaybeValue = string>({
   isEmpty,
   placement = 'bottom-start',
   duration = 0.2,
-  option,
+  optionProps,
   ...rest
 }: UseSelectProps<T>) => {
   rest = useFormControlProps(rest)
@@ -532,7 +532,7 @@ export const useSelect = <T extends MaybeValue = string>({
     containerRef,
     fieldRef,
     listRef,
-    option,
+    optionProps,
     formControlProps,
     onChangeDisplayValue,
     onChange,
@@ -701,7 +701,7 @@ export const useSelectOption = (
     omitSelectedValues,
     closeOnSelect: generalCloseOnSelect,
     focusedIndex,
-    option,
+    optionProps,
     onChange,
     onChangeDisplayValue,
     onFocusNext,
@@ -716,7 +716,7 @@ export const useSelectOption = (
     closeOnSelect: customCloseOnSelect,
     children,
     ...computedProps
-  } = { ...option, ...props }
+  } = { ...optionProps, ...props }
 
   const trulyDisabled = !!isDisabled && !isFocusable
 

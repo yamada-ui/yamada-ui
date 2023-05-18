@@ -489,7 +489,7 @@ export const customClearIcon: ComponentStory<typeof MultiAutocomplete> = () => {
 export const customOption: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
     <>
-      <MultiAutocomplete placeholder='キャラクターを選択' option={{ color: 'primary' }}>
+      <MultiAutocomplete placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -497,7 +497,7 @@ export const customOption: ComponentStory<typeof MultiAutocomplete> = () => {
 
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        option={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>

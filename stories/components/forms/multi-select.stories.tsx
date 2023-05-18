@@ -370,7 +370,7 @@ export const customClearIcon: ComponentStory<typeof MultiSelect> = () => {
 export const customOption: ComponentStory<typeof MultiSelect> = () => {
   return (
     <>
-      <MultiSelect placeholder='キャラクターを選択' option={{ color: 'primary' }}>
+      <MultiSelect placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -378,7 +378,7 @@ export const customOption: ComponentStory<typeof MultiSelect> = () => {
 
       <MultiSelect
         placeholder='キャラクターを選択'
-        option={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>

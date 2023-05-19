@@ -1,4 +1,3 @@
-import { RowData } from '@tanstack/react-table'
 import {
   ui,
   useMultiComponentStyle,
@@ -12,7 +11,7 @@ import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
 import { Thead, TableHeadProps } from './thead'
-import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
+import { TableContext, TableProvider, useTable, UseTableProps, RowData } from './use-table'
 
 type TableOptions = {
   layout?: CSSUIObject['tableLayout']
@@ -45,7 +44,6 @@ export const Table = forwardRef(
       tbodyProps,
       tfootProps,
       checkboxProps,
-      sortIconProps,
       layout,
       children,
       ...computedProps

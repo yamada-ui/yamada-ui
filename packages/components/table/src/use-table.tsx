@@ -24,7 +24,7 @@ import { createContext, PropGetter, handlerAll, runIfFunc } from '@yamada-ui/uti
 import { CSSProperties, useCallback, useMemo } from 'react'
 
 export { flexRender as render, createColumnHelper } from '@tanstack/react-table'
-export type { SortDirection, Row, Cell } from '@tanstack/react-table'
+export type { SortDirection, Row, Cell, RowData } from '@tanstack/react-table'
 
 export type TableContext = Omit<UseTableReturn, 'getTableProps'>
 

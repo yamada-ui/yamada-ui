@@ -1,38 +1,35 @@
+import { RowData } from '@tanstack/react-table'
 import {
   ui,
   useMultiComponentStyle,
   omitThemeProps,
   ComponentArgs,
   CSSUIObject,
-  HTMLUIProps,
 } from '@yamada-ui/core'
-import { IconProps } from '@yamada-ui/icon'
 import { TableStyleProvider, TableCaption } from '@yamada-ui/native-table'
 import { cx, pickChildren, getValidChildren } from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
 import { Thead, TableHeadProps } from './thead'
-import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
+import { TableProvider, useTable, UseTableProps } from './use-table'
 
-type TableOptions<Y extends object = {}> = {
+type TableOptions = {
   layout?: CSSUIObject['tableLayout']
   highlightOnSelected?: boolean
   highlightOnHover?: boolean
   withBorder?: boolean
   withColumnBorders?: boolean
   withFooter?: boolean
-  theadProps?: Omit<TableHeadProps<Y>, 'sortIconProps' | 'resizeSeparatorProps'>
-  tbodyProps?: TableBodyProps<Y>
-  tfootProps?: TableFootProps<Y>
-  sortIconProps?: IconProps
-  resizeSeparatorProps?: HTMLUIProps<'div'> | ((isResizing: boolean) => HTMLUIProps<'div'>)
+  theadProps?: TableHeadProps
+  tbodyProps?: TableBodyProps
+  tfootProps?: TableFootProps
 }
 
-export type TableProps<Y extends object = {}> = UseTableProps<Y> & TableOptions<Y>
+export type TableProps<Y extends RowData> = UseTableProps<Y> & TableOptions
 
 export const Table = forwardRef(
-  <Y extends object = {}>(
+  <Y extends RowData>(
     { colorStyle, highlightOnSelected = true, ...props }: TableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
@@ -49,19 +46,18 @@ export const Table = forwardRef(
       tfootProps,
       checkboxProps,
       sortIconProps,
-      resizeSeparatorProps,
       layout,
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    const { getTableProps, enableBlockLayout, ...rest } = useTable<Y>({
+    const { getTableProps, ...rest } = useTable<Y>({
       ...computedProps,
       checkboxProps: { colorStyle, ...checkboxProps },
     })
 
     const css: CSSUIObject = {
-      w: enableBlockLayout ? 'auto' : '100%',
+      w: '100%',
       tableLayout: layout,
       ...styles.table,
     }
@@ -71,20 +67,11 @@ export const Table = forwardRef(
 
     return (
       <TableStyleProvider value={styles}>
-        <TableProvider value={{ enableBlockLayout, ...rest } as unknown as TableContext}>
-          <ui.table
-            className={cx('ui-table', className)}
-            __css={css}
-            {...getTableProps({}, ref)}
-            {...(enableBlockLayout ? { as: 'div' } : {})}
-          >
-            <Thead<Y>
-              sortIconProps={sortIconProps}
-              resizeSeparatorProps={resizeSeparatorProps}
-              {...theadProps}
-            />
-            <Tbody<Y> {...tbodyProps} />
-            {withFooter ? <Tfoot<Y> {...tfootProps} /> : null}
+        <TableProvider value={{ ...rest }}>
+          <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
+            <Thead {...theadProps} />
+            <Tbody {...tbodyProps} />
+            {withFooter ? <Tfoot {...tfootProps} /> : null}
             {tableCaptionChildren}
           </ui.table>
         </TableProvider>
@@ -92,7 +79,7 @@ export const Table = forwardRef(
     )
   },
 ) as {
-  <Y extends object = {}>(props: TableProps<Y> & { ref?: Ref<HTMLDivElement> }): JSX.Element
+  <Y extends RowData>(props: TableProps<Y> & { ref?: Ref<HTMLDivElement> }): JSX.Element
 } & ComponentArgs
 
 Table.displayName = 'Table'

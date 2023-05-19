@@ -26,6 +26,7 @@
     "@yamada-ui/native-table": "workspace:*",
     "@yamada-ui/pagination": "workspace:*",
     "@yamada-ui/select": "workspace:*",
+    "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@tanstack/react-table": "^8.9.1"
   },

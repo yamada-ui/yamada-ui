@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Yamada UI table component",
   "keywords": [],
   "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
@@ -20,17 +20,16 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/native-table": "workspace:*",
     "@yamada-ui/checkbox": "workspace:*",
-    "@yamada-ui/select": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
+    "@yamada-ui/native-table": "workspace:*",
     "@yamada-ui/pagination": "workspace:*",
+    "@yamada-ui/select": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-table": "^7.8.0"
+    "@tanstack/react-table": "^8.9.1"
   },
   "devDependencies": {
-    "@types/react-table": "^7.7.14",
     "clean-package": "2.1.1",
     "react": "^18.0.0"
   },

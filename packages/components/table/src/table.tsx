@@ -12,7 +12,7 @@ import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
 import { Thead, TableHeadProps } from './thead'
-import { TableProvider, useTable, UseTableProps } from './use-table'
+import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
 
 type TableOptions = {
   layout?: CSSUIObject['tableLayout']
@@ -67,7 +67,7 @@ export const Table = forwardRef(
 
     return (
       <TableStyleProvider value={styles}>
-        <TableProvider value={{ ...rest }}>
+        <TableProvider value={{ ...rest } as TableContext}>
           <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
             <Thead {...theadProps} />
             <Tbody {...tbodyProps} />

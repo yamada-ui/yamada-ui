@@ -42,6 +42,8 @@ export type ColumnStyles = {
 
 export type Column<Y extends RowData, M = unknown> = ColumnDef<Y, M> & ColumnStyles
 
+type SelectColumn<Y extends RowData, M = unknown> = Omit<Column<Y, M>, 'accessorKey' | 'accessorFn'>
+
 export type ColumnSort<Y extends RowData> = {
   id: keyof Y
   desc: boolean
@@ -92,7 +94,7 @@ export type UseTableProps<Y extends RowData> = TableProps &
     sortIconProps?: IconProps
     rowProps?: RowProps<Y>
     cellProps?: CellProps<Y>
-    selectColumn?: Column<Y>
+    selectColumn?: SelectColumn<Y>
   }
 
 const generateRowSelection = <Y extends RowData>(
@@ -283,7 +285,7 @@ export const mergeColumns = <Y extends RowData>({
   columns: Column<Y>[]
   checkboxProps?: CheckboxProps
   withFooterSelect?: boolean
-  selectColumn?: Column<Y>
+  selectColumn?: SelectColumn<Y>
 }): Column<Y>[] => [
   {
     id: 'select',

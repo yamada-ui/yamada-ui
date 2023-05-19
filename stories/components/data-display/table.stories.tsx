@@ -1,16 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import {
-  Table,
-  Column,
-  TableCaption,
-  Checkbox,
-  Button,
-  SetAllSelect,
-  SetSelect,
-  SetSortBy,
-  ToggleSortBy,
-} from '@yamada-ui/react'
-import { useMemo, useRef } from 'react'
+import { Table, Column, TableCaption, Sort, Button } from '@yamada-ui/react'
+import { useMemo, useState } from 'react'
 
 export default {
   title: 'Components / Data Display / Table',
@@ -24,25 +14,25 @@ type Data = {
 }
 
 export const basic: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -77,25 +67,25 @@ export const basic: ComponentStory<typeof Table> = () => {
 }
 
 export const withSize: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -137,25 +127,25 @@ export const withSize: ComponentStory<typeof Table> = () => {
 }
 
 export const withVariant: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -195,25 +185,25 @@ export const withVariant: ComponentStory<typeof Table> = () => {
 }
 
 export const withColorStyle: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -296,25 +286,25 @@ export const withColorStyle: ComponentStory<typeof Table> = () => {
 }
 
 export const withColumnBorders: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -349,25 +339,25 @@ export const withColumnBorders: ComponentStory<typeof Table> = () => {
 }
 
 export const withBorder: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -402,25 +392,25 @@ export const withBorder: ComponentStory<typeof Table> = () => {
 }
 
 export const withHighlightOnHover: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -455,25 +445,25 @@ export const withHighlightOnHover: ComponentStory<typeof Table> = () => {
 }
 
 export const withCaption: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -517,28 +507,28 @@ export const withCaption: ComponentStory<typeof Table> = () => {
 }
 
 export const withFooter: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
-        Footer: '作品名',
+        header: '作品名',
+        accessorKey: 'name',
+        footer: '作品名',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-        Footer: '放送期間',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
+        footer: '放送期間',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
-        Footer: '話数',
+        header: '話数',
+        accessorKey: 'episode',
+        footer: '話数',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -577,79 +567,26 @@ export const withFooter: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withGeneratingRowIdFromAccessor: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+export const withRowId: ComponentStory<typeof Table> = () => {
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return <Table columns={columns} data={data} generatingRowIdFromAccessor='name' />
-}
-
-export const withDefaultSortBy: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -680,39 +617,29 @@ export const withDefaultSortBy: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return (
-    <Table
-      columns={columns}
-      data={data}
-      generatingRowIdFromAccessor='name'
-      defaultSortBy={[{ id: 'name', desc: false }]}
-      onChangeSortBy={(sortBy) => {
-        console.log('sortBy', sortBy)
-      }}
-    />
-  )
+  return <Table columns={columns} data={data} rowId='name' />
 }
 
-export const manualSortBy: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+export const withDefaultSort: ComponentStory<typeof Table> = () => {
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -747,35 +674,35 @@ export const manualSortBy: ComponentStory<typeof Table> = () => {
     <Table
       columns={columns}
       data={data}
-      generatingRowIdFromAccessor='name'
-      manualSortBy
-      onChangeSortBy={(sortBy) => {
-        console.log('sortBy', sortBy)
+      rowId='name'
+      defaultSort={[{ id: 'name', desc: false }]}
+      onChangeSort={(sort) => {
+        console.log('sort', sort)
       }}
     />
   )
 }
 
-export const withMaxMultiSortColCount: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+export const manualSort: ComponentStory<typeof Table> = () => {
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -810,36 +737,37 @@ export const withMaxMultiSortColCount: ComponentStory<typeof Table> = () => {
     <Table
       columns={columns}
       data={data}
-      generatingRowIdFromAccessor='name'
-      maxMultiSortColCount={2}
-      onChangeSortBy={(sortBy) => {
-        console.log('sortBy', sortBy)
+      rowId='name'
+      manualSorting
+      onChangeSort={(sort) => {
+        console.log('sort', sort)
       }}
     />
   )
 }
 
-export const disabledSortBy: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+export const controlSort: ComponentStory<typeof Table> = () => {
+  const [sort, onChangeSort] = useState<Sort<Data>>([])
+
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-        disableSortBy: true,
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -872,13 +800,143 @@ export const disabledSortBy: ComponentStory<typeof Table> = () => {
 
   return (
     <>
-      <Table columns={columns} data={data} disableSortBy />
+      <Button onClick={() => onChangeSort([])}>Reset sort</Button>
 
       <Table
         columns={columns}
         data={data}
-        onChangeSortBy={(sortBy) => {
-          console.log('sortBy', sortBy)
+        rowId='name'
+        manualSorting
+        sort={sort}
+        onChangeSort={onChangeSort}
+      />
+    </>
+  )
+}
+
+export const withMaxMultiSortColCount: ComponentStory<typeof Table> = () => {
+  const columns = useMemo<Column<Data>[]>(
+    () => [
+      {
+        header: '作品名',
+        accessorKey: 'name',
+      },
+      {
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
+      },
+      {
+        header: '話数',
+        accessorKey: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data = useMemo<Data[]>(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      rowId='name'
+      maxMultiSortColCount={2}
+      onChangeSort={(sort) => {
+        console.log('sort', sort)
+      }}
+    />
+  )
+}
+
+export const disabledSort: ComponentStory<typeof Table> = () => {
+  const columns = useMemo<Column<Data>[]>(
+    () => [
+      {
+        header: '作品名',
+        accessorKey: 'name',
+      },
+      {
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
+        enableSorting: false,
+      },
+      {
+        header: '話数',
+        accessorKey: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data = useMemo<Data[]>(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <Table columns={columns} data={data} enableSorting={false} />
+
+      <Table
+        columns={columns}
+        data={data}
+        onChangeSort={(sort) => {
+          console.log('sort', sort)
         }}
       />
     </>
@@ -886,26 +944,26 @@ export const disabledSortBy: ComponentStory<typeof Table> = () => {
 }
 
 export const withSortDescFirst: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
         sortDescFirst: true,
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -937,36 +995,46 @@ export const withSortDescFirst: ComponentStory<typeof Table> = () => {
   )
 
   return (
-    <Table
-      columns={columns}
-      data={data}
-      onChangeSortBy={(sortBy) => {
-        console.log('sortBy', sortBy)
-      }}
-    />
+    <>
+      <Table
+        columns={columns}
+        data={data}
+        sortDescFirst
+        onChangeSort={(sort) => {
+          console.log('sort', sort)
+        }}
+      />
+      <Table
+        columns={columns}
+        data={data}
+        onChangeSort={(sort) => {
+          console.log('sort', sort)
+        }}
+      />
+    </>
   )
 }
 
 export const disabledMultiSort: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1001,34 +1069,34 @@ export const disabledMultiSort: ComponentStory<typeof Table> = () => {
     <Table
       columns={columns}
       data={data}
-      disableMultiSort
-      onChangeSortBy={(sortBy) => {
-        console.log('sortBy', sortBy)
+      enableMultiSort={false}
+      onChangeSort={(sort) => {
+        console.log('sort', sort)
       }}
     />
   )
 }
 
 export const withDefaultSelectedRowIds: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1063,7 +1131,7 @@ export const withDefaultSelectedRowIds: ComponentStory<typeof Table> = () => {
     <Table
       columns={columns}
       data={data}
-      generatingRowIdFromAccessor='name'
+      rowId='name'
       defaultSelectedRowIds={['ドラゴンボール']}
       onChangeSelect={(selectedIds) => {
         console.log('selectedIds', selectedIds)
@@ -1073,25 +1141,25 @@ export const withDefaultSelectedRowIds: ComponentStory<typeof Table> = () => {
 }
 
 export const disabledRowIds: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1126,7 +1194,7 @@ export const disabledRowIds: ComponentStory<typeof Table> = () => {
     <Table
       columns={columns}
       data={data}
-      generatingRowIdFromAccessor='name'
+      rowId='name'
       disabledRowIds={['ドラゴンボールZ']}
       onChangeSelect={(selectedIds) => {
         console.log('selectedIds', selectedIds)
@@ -1136,25 +1204,25 @@ export const disabledRowIds: ComponentStory<typeof Table> = () => {
 }
 
 export const withRowsClickSelect: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1189,7 +1257,7 @@ export const withRowsClickSelect: ComponentStory<typeof Table> = () => {
     <Table
       columns={columns}
       data={data}
-      generatingRowIdFromAccessor='name'
+      rowId='name'
       rowsClickSelect
       onChangeSelect={(selectedIds) => {
         console.log('selectedIds', selectedIds)
@@ -1199,25 +1267,25 @@ export const withRowsClickSelect: ComponentStory<typeof Table> = () => {
 }
 
 export const disabledSelect: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1248,29 +1316,96 @@ export const disabledSelect: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return <Table columns={columns} data={data} disableSelect />
+  return <Table columns={columns} data={data} enableRowSelection={false} />
 }
 
-export const useClickRow: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+export const controlSelect: ComponentStory<typeof Table> = () => {
+  const [selectedRowIds, onChangeSelect] = useState<string[]>([])
+
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <Button onClick={() => onChangeSelect([])}>Reset select</Button>
+
+      <Table
+        columns={columns}
+        data={data}
+        rowId='name'
+        selectedRowIds={selectedRowIds}
+        onChangeSelect={onChangeSelect}
+      />
+    </>
+  )
+}
+
+export const useClickRow: ComponentStory<typeof Table> = () => {
+  const columns = useMemo<Column<Data>[]>(
+    () => [
+      {
+        header: '作品名',
+        accessorKey: 'name',
+      },
+      {
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
+      },
+      {
+        header: '話数',
+        accessorKey: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1313,25 +1448,25 @@ export const useClickRow: ComponentStory<typeof Table> = () => {
 }
 
 export const withCheckboxProps: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1366,25 +1501,25 @@ export const withCheckboxProps: ComponentStory<typeof Table> = () => {
 }
 
 export const withSelectColumnProps: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1415,32 +1550,32 @@ export const withSelectColumnProps: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return <Table columns={columns} data={data} selectColumnProps={{ css: { w: '40px' } }} />
+  return <Table columns={columns} data={data} selectColumn={{ css: { w: '40px' } }} />
 }
 
 export const withColumnStyles: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
+        header: '作品名',
+        accessorKey: 'name',
         css: { color: 'primary' },
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
         sx: { color: 'secondary' },
       },
       {
-        Header: '話数',
-        accessor: 'episode',
+        header: '話数',
+        accessorKey: 'episode',
         style: { color: 'red' },
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -1474,588 +1609,29 @@ export const withColumnStyles: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} />
 }
 
-export const useToggleSortBy: ComponentStory<typeof Table> = () => {
-  const toggleSortByRef = useRef<ToggleSortBy<Data>>(null)
-
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <>
-      <Button onClick={() => toggleSortByRef.current?.('name')}>Toggle sort '作品名'</Button>
-
-      <Table
-        columns={columns}
-        data={data}
-        generatingRowIdFromAccessor='name'
-        toggleSortByRef={toggleSortByRef}
-        onChangeSelect={(selectedIds) => {
-          console.log('selectedIds', selectedIds)
-        }}
-      />
-    </>
-  )
-}
-
-export const useSetSortBy: ComponentStory<typeof Table> = () => {
-  const setSortByRef = useRef<SetSortBy<Data>>(null)
-
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <>
-      <Button onClick={() => setSortByRef.current?.([{ id: 'name', desc: false }])}>
-        Set sort asc '作品名'
-      </Button>
-
-      <Button onClick={() => setSortByRef.current?.([])}>Clear sort</Button>
-
-      <Table
-        columns={columns}
-        data={data}
-        generatingRowIdFromAccessor='name'
-        setSortByRef={setSortByRef}
-        onChangeSelect={(selectedIds) => {
-          console.log('selectedIds', selectedIds)
-        }}
-      />
-    </>
-  )
-}
-
-export const useToggleRowsSelected: ComponentStory<typeof Table> = () => {
-  const setSelectRef = useRef<SetSelect<Data>>(null)
-
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <>
-      <Button onClick={() => setSelectRef.current?.('ドラゴンボール', true)}>
-        Select 'ドラゴンボール'
-      </Button>
-
-      <Button onClick={() => setSelectRef.current?.(['ドラゴンボールZ', 'ドラゴンボールGT'])}>
-        Select 'ドラゴンボールZ' and 'ドラゴンボールGT'
-      </Button>
-
-      <Table
-        columns={columns}
-        data={data}
-        generatingRowIdFromAccessor='name'
-        setSelectRef={setSelectRef}
-        onChangeSelect={(selectedIds) => {
-          console.log('selectedIds', selectedIds)
-        }}
-      />
-    </>
-  )
-}
-
-export const useSetAllSelect: ComponentStory<typeof Table> = () => {
-  const setAllSelectRef = useRef<SetAllSelect<Data>>(null)
-
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <>
-      <Checkbox onChange={(e) => setAllSelectRef.current?.(e.target.checked)}>All Select</Checkbox>
-
-      <Table
-        columns={columns}
-        data={data}
-        generatingRowIdFromAccessor='name'
-        setAllSelectRef={setAllSelectRef}
-        onChangeSelect={(selectedIds) => {
-          console.log('selectedIds', selectedIds)
-        }}
-      />
-    </>
-  )
-}
-
-export const enabledBlockLayout: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return <Table columns={columns} data={data} enableBlockLayout />
-}
-
-export const enabledResizeColumns: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <Table
-      columns={columns}
-      data={data}
-      withBorder
-      withColumnBorders
-      enableResizeColumns
-      selectColumnProps={{ minWidth: 40, width: 40 }}
-      defaultColumn={{
-        minWidth: 120,
-        width: 160,
-        maxWidth: 320,
-      }}
-    />
-  )
-}
-
-export const disabledResizing: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-        disableResizing: true,
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <Table
-      columns={columns}
-      data={data}
-      withBorder
-      withColumnBorders
-      enableResizeColumns
-      selectColumnProps={{ minWidth: 40, width: 40 }}
-      defaultColumn={{
-        minWidth: 120,
-        width: 160,
-        maxWidth: 320,
-      }}
-    />
-  )
-}
-
-export const custonResizeSeparator: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
-    () => [
-      {
-        Header: '作品名',
-        accessor: 'name',
-      },
-      {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-      },
-      {
-        Header: '話数',
-        accessor: 'episode',
-      },
-    ],
-    [],
-  )
-
-  const data: Data[] = useMemo(
-    () => [
-      {
-        name: 'ドラゴンボール',
-        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
-        episode: '全153話',
-      },
-      {
-        name: 'ドラゴンボールZ',
-        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
-        episode: '全291話 + スペシャル2話',
-      },
-      {
-        name: 'ドラゴンボールGT',
-        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
-        episode: '全64話 + 番外編1話',
-      },
-      {
-        name: 'ドラゴンボール改',
-        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
-        episode: '全159話',
-      },
-      {
-        name: 'ドラゴンボール超',
-        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
-        episode: '全131話',
-      },
-    ],
-    [],
-  )
-
-  return (
-    <>
-      <Table
-        columns={columns}
-        data={data}
-        withBorder
-        withColumnBorders
-        enableResizeColumns
-        selectColumnProps={{ minWidth: 40, width: 40 }}
-        defaultColumn={{
-          minWidth: 120,
-          width: 160,
-          maxWidth: 320,
-        }}
-        resizeSeparatorProps={{ bg: 'blue.500' }}
-      />
-
-      <Table
-        columns={columns}
-        data={data}
-        withBorder
-        withColumnBorders
-        enableResizeColumns
-        selectColumnProps={{ minWidth: 40, width: 40 }}
-        defaultColumn={{
-          minWidth: 120,
-          width: 160,
-          maxWidth: 320,
-        }}
-        resizeSeparatorProps={(isResizing) => ({ bg: isResizing ? 'red.500' : 'blue.500' })}
-      />
-    </>
-  )
-}
-
 export const controlProps: ComponentStory<typeof Table> = () => {
-  const columns: Column<Data>[] = useMemo(
+  const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        Header: '作品名',
-        accessor: 'name',
-        Footer: '作品名',
+        header: '作品名',
+        accessorKey: 'name',
+        footer: '作品名',
       },
       {
-        Header: '放送期間',
-        accessor: 'broadcastPeriod',
-        Footer: '放送期間',
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
+        footer: '放送期間',
       },
       {
-        Header: '話数',
-        accessor: 'episode',
-        Footer: '話数',
+        header: '話数',
+        accessorKey: 'episode',
+        footer: '話数',
       },
     ],
     [],
   )
 
-  const data: Data[] = useMemo(
+  const data = useMemo<Data[]>(
     () => [
       {
         name: 'ドラゴンボール',
@@ -2085,7 +1661,6 @@ export const controlProps: ComponentStory<typeof Table> = () => {
     ],
     [],
   )
-
   return (
     <>
       <Table
@@ -2101,35 +1676,23 @@ export const controlProps: ComponentStory<typeof Table> = () => {
         columns={columns}
         data={data}
         withFooter
-        theadProps={{
-          headerGroupProps: { bg: ['red.200', 'red.700'] },
-        }}
-        tbodyProps={{
-          rowProps: { bg: ['green.200', 'green.700'] },
-        }}
-        tfootProps={{
-          footerGroupProps: { bg: ['blue.200', 'blue.700'] },
-        }}
+        headerGroupProps={{ bg: ['red.200', 'red.700'] }}
+        rowProps={{ bg: ['green.200', 'green.700'] }}
+        footerGroupProps={{ bg: ['blue.200', 'blue.700'] }}
       />
 
       <Table
         columns={columns}
         data={data}
         withFooter
-        theadProps={{
-          headerProps: ({ Header }) => {
-            if (Header === '作品名') return { color: ['red.400', 'red.300'] }
-          },
+        headerProps={({ column }) => {
+          if (column.columnDef.header === '作品名') return { color: ['red.400', 'red.300'] }
         }}
-        tbodyProps={{
-          cellProps: ({ column }) => {
-            if (column.Header === '作品名') return { color: ['red.400', 'red.300'] }
-          },
+        cellProps={({ column }) => {
+          if (column.columnDef.header === '作品名') return { color: ['red.400', 'red.300'] }
         }}
-        tfootProps={{
-          footerProps: ({ Header }) => {
-            if (Header === '作品名') return { color: ['red.400', 'red.300'] }
-          },
+        footerProps={({ column }) => {
+          if (column.columnDef.footer === '作品名') return { color: ['red.400', 'red.300'] }
         }}
       />
     </>

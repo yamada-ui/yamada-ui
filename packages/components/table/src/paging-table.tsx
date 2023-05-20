@@ -152,6 +152,7 @@ export const PagingTable = forwardRef(
                 {...pagingControlProps}
               >
                 <Pagination
+                  colorStyle={colorStyle}
                   size={size === 'sm' ? 'xs' : size}
                   page={state.pagination.pageIndex + 1}
                   total={totalPage}

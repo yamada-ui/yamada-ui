@@ -3,7 +3,7 @@ import { Loading } from '@yamada-ui/loading'
 import { AnimatePresence, motion, MotionVariants } from '@yamada-ui/motion'
 import { Portal } from '@yamada-ui/portal'
 import { useTimeout } from '@yamada-ui/use-timeout'
-import { isValidElement, assignRef } from '@yamada-ui/utils'
+import { isValidElement, assignRef, isUndefined } from '@yamada-ui/utils'
 import {
   createContext,
   FC,
@@ -157,21 +157,25 @@ type LoadingControlProps = Required<ThemeConfig>['loading'] & {
 }
 
 const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, custom, ...refs }) => {
+  const isScreenLoadingRef = useRef<boolean>(false)
   const [screenLoading, setScreenLoading] = useState<LoadingState>({
     isLoading: screen?.initialState ?? false,
     message: undefined,
     timeout: screen?.timeout ?? null,
   })
+  const isPageLoadingRef = useRef<boolean>(false)
   const [pageLoading, setPageLoading] = useState<LoadingState>({
     isLoading: page?.initialState ?? false,
     message: undefined,
     timeout: page?.timeout ?? null,
   })
+  const isBackgroundLoadingRef = useRef<boolean>(false)
   const [backgroundLoading, setBackgroundLoading] = useState<LoadingState>({
     isLoading: background?.initialState ?? false,
     message: undefined,
     timeout: background?.timeout ?? null,
   })
+  const isCustomLoadingRef = useRef<boolean>(false)
   const [customLoading, setCustomLoading] = useState<LoadingState>({
     isLoading: custom?.initialState ?? false,
     message: undefined,
@@ -180,64 +184,92 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
 
   const screenLoadingFunc: LoadingContextProps = useMemo(
     () => ({
-      isLoading: () => screenLoading.isLoading,
-      start: ({ message, timeout = screenLoading.timeout ?? null } = {}) =>
-        setScreenLoading({ isLoading: true, message, timeout }),
-      update: (next) => setScreenLoading((prev) => ({ ...prev, ...next })),
-      finish: () =>
+      isLoading: () => isScreenLoadingRef.current,
+      start: ({ message, timeout = screenLoading.timeout ?? null } = {}) => {
+        isScreenLoadingRef.current = true
+        setScreenLoading({ isLoading: true, message, timeout })
+      },
+      update: (next) => {
+        if (!isUndefined(next.isLoading)) isScreenLoadingRef.current = next.isLoading
+        setScreenLoading((prev) => ({ ...prev, ...next }))
+      },
+      finish: () => {
+        isScreenLoadingRef.current = false
         setScreenLoading({
           isLoading: false,
           message: undefined,
           timeout: screen?.timeout ?? null,
-        }),
+        })
+      },
     }),
     [screenLoading, screen],
   )
 
   const pageLoadingFunc: LoadingContextProps = useMemo(
     () => ({
-      isLoading: () => pageLoading.isLoading,
-      start: ({ message, timeout = pageLoading.timeout ?? null } = {}) =>
-        setPageLoading({ isLoading: true, message, timeout }),
-      update: (next) => setPageLoading((prev) => ({ ...prev, ...next })),
-      finish: () =>
+      isLoading: () => isPageLoadingRef.current,
+      start: ({ message, timeout = pageLoading.timeout ?? null } = {}) => {
+        isPageLoadingRef.current = true
+        setPageLoading({ isLoading: true, message, timeout })
+      },
+      update: (next) => {
+        if (!isUndefined(next.isLoading)) isPageLoadingRef.current = next.isLoading
+        setPageLoading((prev) => ({ ...prev, ...next }))
+      },
+      finish: () => {
+        isPageLoadingRef.current = false
         setPageLoading({
           isLoading: false,
           message: undefined,
           timeout: page?.timeout ?? null,
-        }),
+        })
+      },
     }),
     [pageLoading, page],
   )
 
   const backgroundLoadingFunc: LoadingContextProps = useMemo(
     () => ({
-      isLoading: () => backgroundLoading.isLoading,
-      start: ({ message, timeout = backgroundLoading.timeout ?? null } = {}) =>
-        setBackgroundLoading({ isLoading: true, message, timeout }),
-      update: (next) => setBackgroundLoading((prev) => ({ ...prev, ...next })),
-      finish: () =>
+      isLoading: () => isBackgroundLoadingRef.current,
+      start: ({ message, timeout = backgroundLoading.timeout ?? null } = {}) => {
+        isBackgroundLoadingRef.current = true
+        setBackgroundLoading({ isLoading: true, message, timeout })
+      },
+      update: (next) => {
+        if (!isUndefined(next.isLoading)) isBackgroundLoadingRef.current = next.isLoading
+        setBackgroundLoading((prev) => ({ ...prev, ...next }))
+      },
+      finish: () => {
+        isBackgroundLoadingRef.current = false
         setBackgroundLoading({
           isLoading: false,
           message: undefined,
           timeout: background?.timeout ?? null,
-        }),
+        })
+      },
     }),
     [backgroundLoading, background],
   )
 
   const customLoadingFunc: LoadingContextProps = useMemo(
     () => ({
-      isLoading: () => customLoading.isLoading,
-      start: ({ message, timeout = customLoading.timeout ?? null } = {}) =>
-        setCustomLoading({ isLoading: true, message, timeout }),
-      update: (next) => setCustomLoading((prev) => ({ ...prev, ...next })),
-      finish: () =>
+      isLoading: () => isCustomLoadingRef.current,
+      start: ({ message, timeout = customLoading.timeout ?? null } = {}) => {
+        isCustomLoadingRef.current = true
+        setCustomLoading({ isLoading: true, message, timeout })
+      },
+      update: (next) => {
+        if (!isUndefined(next.isLoading)) isCustomLoadingRef.current = next.isLoading
+        setCustomLoading((prev) => ({ ...prev, ...next }))
+      },
+      finish: () => {
+        isCustomLoadingRef.current = false
         setCustomLoading({
           isLoading: false,
           message: undefined,
           timeout: custom?.timeout ?? null,
-        }),
+        })
+      },
     }),
     [customLoading, custom],
   )

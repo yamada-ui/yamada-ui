@@ -14,6 +14,9 @@ import {
   SortingState,
   RowSelectionState,
   OnChangeFn,
+  PaginationOptions,
+  getPaginationRowModel,
+  HeaderContext,
 } from '@tanstack/react-table'
 import { Checkbox, CheckboxProps } from '@yamada-ui/checkbox'
 import { ui, CSSUIObject, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
@@ -52,11 +55,18 @@ export type ColumnSort<Y extends RowData> = {
 export type Sort<Y extends RowData> = ColumnSort<Y>[]
 
 export type UseTableOptions<Y extends RowData> = PartialKeys<
-  Omit<CoreOptions<Y>, 'getCoreRowModel' | 'state' | 'initialState' | 'onStateChange'>,
+  Omit<
+    CoreOptions<Y>,
+    'getCoreRowModel' | 'state' | 'initialState' | 'onStateChange' | 'getSubRows' | 'mergeOptions'
+  >,
   'renderFallbackValue'
 > &
   Omit<SortingOptions<Y>, 'getSortedRowModel' | 'onSortingChange'> &
-  Omit<RowSelectionOptions<Y>, 'onRowSelectionChange'>
+  Omit<
+    RowSelectionOptions<Y>,
+    'enableMultiRowSelection' | 'enableSubRowSelection' | 'onRowSelectionChange'
+  > &
+  Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
 
 type TableProps = HTMLUIProps<'table'> & ThemeProps<'Table'>
 
@@ -82,10 +92,17 @@ export type UseTableProps<Y extends RowData> = TableProps &
     selectedRowIds?: string[]
     defaultSelectedRowIds?: string[]
     onChangeSelect?: (rowSelection: string[]) => void
+    pageIndex?: number
+    defaultPageIndex?: number
+    onChangePageIndex?: (pageIndex: number) => void
+    pageSize?: number
+    defaultPageSize?: number
+    onChangePageSize?: (pageIndex: number) => void
     rowsClickSelect?: boolean
     onClickRow?: (row: Row<Y>) => void
     withFooterSelect?: boolean
     disabledRowIds?: string[]
+    pageSizeList?: number[]
     checkboxProps?: CheckboxProps
     headerGroupProps?: HeaderGroupProps<Y>
     headerProps?: HeaderProps<Y>
@@ -95,6 +112,7 @@ export type UseTableProps<Y extends RowData> = TableProps &
     rowProps?: RowProps<Y>
     cellProps?: CellProps<Y>
     selectColumn?: SelectColumn<Y>
+    enablePagenation?: boolean
   }
 
 const generateRowSelection = <Y extends RowData>(
@@ -128,9 +146,16 @@ export const useTable = <Y extends RowData>({
   selectedRowIds,
   defaultSelectedRowIds,
   onChangeSelect,
+  pageIndex,
+  defaultPageIndex = 0,
+  onChangePageIndex,
+  pageSize,
+  defaultPageSize = 20,
+  onChangePageSize,
   rowsClickSelect,
   onClickRow,
   withFooterSelect,
+  pageSizeList = [20, 50, 100],
   checkboxProps,
   headerGroupProps,
   headerProps,
@@ -150,8 +175,6 @@ export const useTable = <Y extends RowData>({
   debugRows,
   autoResetAll,
   meta,
-  mergeOptions,
-  getSubRows,
   getRowId = generateRowId(rowId),
   renderFallbackValue,
   manualSorting,
@@ -164,8 +187,10 @@ export const useTable = <Y extends RowData>({
   isMultiSortEvent,
   sortingFns,
   enableRowSelection = (row) => computedEnableRowSelection(row, disabledRowIds),
-  enableMultiRowSelection = (row) => computedEnableRowSelection(row, disabledRowIds),
-  enableSubRowSelection = (row) => computedEnableRowSelection(row, disabledRowIds),
+  pageCount,
+  manualPagination,
+  autoResetPageIndex,
+  enablePagenation = false,
   ...rest
 }: UseTableProps<Y>) => {
   const [sorting, onSortingChange] = useControllableState({
@@ -180,6 +205,31 @@ export const useTable = <Y extends RowData>({
     onChange: onChangeSelect,
   })
 
+  const [internalPageIndex, setInternalPageIndex] = useControllableState({
+    value: pageIndex,
+    defaultValue: defaultPageIndex,
+    onChange: onChangePageIndex,
+  })
+
+  const [internalPageSize, setInternalPageSize] = useControllableState({
+    value: pageSize,
+    defaultValue: defaultPageSize,
+    onChange: onChangePageSize,
+  })
+
+  const computedPageSizeList = useMemo(() => {
+    if (!enablePagenation) return []
+
+    let mergedPageSizeList = pageSizeList
+
+    if (internalPageSize && !mergedPageSizeList.includes(internalPageSize))
+      mergedPageSizeList.push(internalPageSize)
+
+    mergedPageSizeList = mergedPageSizeList.sort((a, b) => a - b)
+
+    return mergedPageSizeList
+  }, [enablePagenation, internalPageSize, pageSizeList])
+
   const computedRowSelection = useMemo(
     () => generateRowSelection(rowSelection, enableRowSelection),
     [enableRowSelection, rowSelection],
@@ -188,17 +238,50 @@ export const useTable = <Y extends RowData>({
   const mergedColumns = useMemo(
     () =>
       enableRowSelection
-        ? mergeColumns({ columns, checkboxProps, withFooterSelect, selectColumn })
+        ? mergeColumns<Y>({
+            enablePagenation,
+            columns,
+            checkboxProps,
+            withFooterSelect,
+            selectColumn,
+            disabledRowIds,
+          })
         : columns,
-    [checkboxProps, columns, enableRowSelection, selectColumn, withFooterSelect],
+    [
+      checkboxProps,
+      columns,
+      disabledRowIds,
+      enablePagenation,
+      enableRowSelection,
+      selectColumn,
+      withFooterSelect,
+    ],
   )
 
-  const { getHeaderGroups, getRowModel, getFooterGroups } = useReactTable<Y>({
+  const pagination = useMemo(
+    () => ({ pageIndex: internalPageIndex, pageSize: internalPageSize }),
+    [internalPageIndex, internalPageSize],
+  )
+
+  const {
+    getHeaderGroups,
+    getRowModel,
+    getFooterGroups,
+    getState,
+    setPageIndex,
+    previousPage,
+    nextPage,
+    getCanNextPage,
+    getCanPreviousPage,
+    setPageSize,
+    getPageCount,
+  } = useReactTable<Y>({
     data,
     columns: mergedColumns,
     state: {
       sorting,
       rowSelection: computedRowSelection,
+      ...(enablePagenation ? { pagination } : {}),
     },
     defaultColumn,
     debugAll,
@@ -208,8 +291,6 @@ export const useTable = <Y extends RowData>({
     debugRows,
     autoResetAll,
     meta,
-    mergeOptions,
-    getSubRows,
     getRowId,
     renderFallbackValue,
     manualSorting,
@@ -223,12 +304,24 @@ export const useTable = <Y extends RowData>({
     sortingFns,
     ...(isMultiSortEvent ? { isMultiSortEvent } : {}),
     enableRowSelection,
-    enableMultiRowSelection,
-    enableSubRowSelection,
     onRowSelectionChange: (updaterOrValue) =>
       onRowSelectionChange(Object.keys(runIfFunc(updaterOrValue, computedRowSelection))),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    ...(enablePagenation
+      ? {
+          pageCount,
+          manualPagination,
+          autoResetPageIndex,
+          onPaginationChange: (updaterOrValue) => {
+            const { pageIndex, pageSize } = runIfFunc(updaterOrValue, pagination)
+
+            setInternalPageIndex(pageIndex)
+            setInternalPageSize(pageSize)
+          },
+          getPaginationRowModel: getPaginationRowModel(),
+        }
+      : {}),
   })
 
   const getTableProps: PropGetter = useCallback(
@@ -240,11 +333,14 @@ export const useTable = <Y extends RowData>({
     [rest],
   )
 
+  const state = getState()
   const headerGroups = getHeaderGroups()
   const footerGroups = getFooterGroups()
   const { rows, flatRows, rowsById } = getRowModel()
+  const totalPage = getPageCount()
 
   return {
+    state,
     getTableProps,
     headerGroups,
     footerGroups,
@@ -254,6 +350,14 @@ export const useTable = <Y extends RowData>({
     enableRowSelection,
     rowsClickSelect,
     onClickRow,
+    setPageIndex,
+    previousPage,
+    nextPage,
+    getCanNextPage,
+    getCanPreviousPage,
+    setPageSize,
+    totalPage,
+    pageSizeList: computedPageSizeList,
     headerGroupProps,
     headerProps,
     footerGroupProps,
@@ -276,54 +380,82 @@ const Center = ui('div', {
   },
 })
 
+const TotalCheckbox = <Y extends RowData>({
+  table,
+  checkboxProps,
+  enablePagenation,
+  disabledRowIds = [],
+}: {
+  table: HeaderContext<Y, unknown>['table']
+  checkboxProps: CheckboxProps
+  enablePagenation: boolean
+  disabledRowIds?: string[]
+}) => {
+  const {
+    getState,
+    getRowModel,
+    getIsAllRowsSelected,
+    getIsSomeRowsSelected,
+    getToggleAllRowsSelectedHandler,
+    getIsAllPageRowsSelected,
+    getIsSomePageRowsSelected,
+    getToggleAllPageRowsSelectedHandler,
+  } = table
+
+  const state = getState()
+  const { rows } = getRowModel()
+  const rowIds = rows.map(({ id }) => id)
+  const selectedRowIds = Object.keys(state.rowSelection)
+  const unselectedRowIds = rowIds.filter((id) => !selectedRowIds.includes(id))
+
+  const isAllChecked = unselectedRowIds.every((id) => disabledRowIds.includes(id))
+  const isChecked = !enablePagenation ? getIsAllRowsSelected() : getIsAllPageRowsSelected()
+  const isIndeterminate = !enablePagenation ? getIsSomeRowsSelected() : getIsSomePageRowsSelected()
+  const onChange = !enablePagenation
+    ? getToggleAllRowsSelectedHandler()
+    : getToggleAllPageRowsSelectedHandler()
+
+  return (
+    <Center>
+      <Checkbox
+        {...{ gap: 0, ...checkboxProps }}
+        isChecked={isAllChecked || isChecked}
+        {...(!isAllChecked ? { isIndeterminate } : {})}
+        onChange={handlerAll(checkboxProps.onChange, onChange)}
+      />
+    </Center>
+  )
+}
+
 export const mergeColumns = <Y extends RowData>({
+  enablePagenation,
   columns,
   checkboxProps = {},
   withFooterSelect,
   selectColumn,
+  disabledRowIds,
 }: {
+  enablePagenation: boolean
   columns: Column<Y>[]
   checkboxProps?: CheckboxProps
   withFooterSelect?: boolean
   selectColumn?: SelectColumn<Y>
+  disabledRowIds?: string[]
 }): Column<Y>[] => [
   {
     id: 'select',
-    header: ({ table }) => {
-      const { getIsAllRowsSelected, getIsSomeRowsSelected, getToggleAllRowsSelectedHandler } = table
-
-      return (
-        <Center>
-          <Checkbox
-            {...{ gap: 0, ...checkboxProps }}
-            isChecked={getIsAllRowsSelected()}
-            isIndeterminate={getIsSomeRowsSelected()}
-            onChange={handlerAll(checkboxProps.onChange, getToggleAllRowsSelectedHandler())}
-          />
-        </Center>
-      )
-    },
+    header: ({ table }) => (
+      <TotalCheckbox {...{ table, checkboxProps, enablePagenation, disabledRowIds }} />
+    ),
     ...(withFooterSelect
       ? {
-          footer: ({ table }) => {
-            const { getIsAllRowsSelected, getIsSomeRowsSelected, getToggleAllRowsSelectedHandler } =
-              table
-
-            return (
-              <Center>
-                <Checkbox
-                  {...{ gap: 0, ...checkboxProps }}
-                  isChecked={getIsAllRowsSelected()}
-                  isIndeterminate={getIsSomeRowsSelected()}
-                  onChange={handlerAll(checkboxProps.onChange, getToggleAllRowsSelectedHandler())}
-                />
-              </Center>
-            )
-          },
+          footer: ({ table }) => (
+            <TotalCheckbox {...{ table, checkboxProps, enablePagenation, disabledRowIds }} />
+          ),
         }
       : {}),
     cell: ({ row }) => {
-      const { getIsSelected, getCanSelect, getIsSomeSelected, getToggleSelectedHandler } = row
+      const { getIsSelected, getCanSelect, getToggleSelectedHandler } = row
 
       return (
         <Center>
@@ -331,7 +463,6 @@ export const mergeColumns = <Y extends RowData>({
             {...{ gap: 0, ...checkboxProps }}
             isChecked={getIsSelected()}
             isDisabled={!getCanSelect()}
-            isIndeterminate={getIsSomeSelected()}
             onChange={handlerAll(checkboxProps.onChange, getToggleSelectedHandler())}
           />
         </Center>

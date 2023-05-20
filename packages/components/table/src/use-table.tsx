@@ -111,7 +111,7 @@ export type UseTableProps<Y extends RowData> = TableProps &
     sortIconProps?: IconProps
     rowProps?: RowProps<Y>
     cellProps?: CellProps<Y>
-    selectColumn?: SelectColumn<Y>
+    selectColumn?: SelectColumn<Y> | false
     enablePagenation?: boolean
   }
 
@@ -237,7 +237,7 @@ export const useTable = <Y extends RowData>({
 
   const mergedColumns = useMemo(
     () =>
-      enableRowSelection
+      enableRowSelection && selectColumn !== false
         ? mergeColumns<Y>({
             enablePagenation,
             columns,

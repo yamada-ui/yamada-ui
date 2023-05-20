@@ -575,7 +575,7 @@ export interface GeneratedTheme extends UITheme {
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
     Pagination: {
-      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {})
       variants: 'solid' | 'outline' | 'ghost' | 'unstyled' | (string & {})
     }
     PinInput: {

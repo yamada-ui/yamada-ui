@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Table, Column, TableCaption, Sort, Button } from '@yamada-ui/react'
+import { Table, Column, TableCaption, Sort, Button, Text } from '@yamada-ui/react'
 import { useMemo, useState } from 'react'
 
 export default {
@@ -746,7 +746,7 @@ export const manualSort: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const controlSort: ComponentStory<typeof Table> = () => {
+export const customControlSort: ComponentStory<typeof Table> = () => {
   const [sort, onChangeSort] = useState<Sort<Data>>([])
 
   const columns = useMemo<Column<Data>[]>(
@@ -1319,7 +1319,7 @@ export const disabledSelect: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} enableRowSelection={false} />
 }
 
-export const controlSelect: ComponentStory<typeof Table> = () => {
+export const customControlSelect: ComponentStory<typeof Table> = () => {
   const [selectedRowIds, onChangeSelect] = useState<string[]>([])
 
   const columns = useMemo<Column<Data>[]>(
@@ -1553,6 +1553,74 @@ export const withSelectColumnProps: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} selectColumn={{ css: { w: '40px' } }} />
 }
 
+export const disabledSelectColumn: ComponentStory<typeof Table> = () => {
+  const [selectedRowIds, onChangeSelect] = useState<string[]>([])
+
+  const columns = useMemo<Column<Data>[]>(
+    () => [
+      {
+        header: '作品名',
+        accessorKey: 'name',
+      },
+      {
+        header: '放送期間',
+        accessorKey: 'broadcastPeriod',
+      },
+      {
+        header: '話数',
+        accessorKey: 'episode',
+      },
+    ],
+    [],
+  )
+
+  const data = useMemo<Data[]>(
+    () => [
+      {
+        name: 'ドラゴンボール',
+        broadcastPeriod: '1986年2月26日 - 1989年4月19日',
+        episode: '全153話',
+      },
+      {
+        name: 'ドラゴンボールZ',
+        broadcastPeriod: '1989年4月26日 - 1996年1月31日',
+        episode: '全291話 + スペシャル2話',
+      },
+      {
+        name: 'ドラゴンボールGT',
+        broadcastPeriod: '1996年2月7日 - 1997年11月19日',
+        episode: '全64話 + 番外編1話',
+      },
+      {
+        name: 'ドラゴンボール改',
+        broadcastPeriod: '2009年4月5日 - 2015年6月28日',
+        episode: '全159話',
+      },
+      {
+        name: 'ドラゴンボール超',
+        broadcastPeriod: '2015年7月5日 - 2018年3月25日',
+        episode: '全131話',
+      },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <Text>Select ids {selectedRowIds.join(', ')}</Text>
+
+      <Table
+        columns={columns}
+        data={data}
+        selectColumn={false}
+        rowsClickSelect
+        selectedRowIds={selectedRowIds}
+        onChangeSelect={onChangeSelect}
+      />
+    </>
+  )
+}
+
 export const withColumnStyles: ComponentStory<typeof Table> = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
@@ -1609,7 +1677,7 @@ export const withColumnStyles: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} />
 }
 
-export const controlProps: ComponentStory<typeof Table> = () => {
+export const customProps: ComponentStory<typeof Table> = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {

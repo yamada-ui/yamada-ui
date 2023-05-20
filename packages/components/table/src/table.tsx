@@ -26,7 +26,21 @@ type TableOptions = {
   tfootProps?: TableFootProps
 }
 
-export type TableProps<Y extends RowData> = UseTableProps<Y> & TableOptions
+export type TableProps<Y extends RowData> = Omit<
+  UseTableProps<Y>,
+  | 'enablePagenation'
+  | 'pageIndex'
+  | 'defaultPageIndex'
+  | 'onChangePageIndex'
+  | 'pageSize'
+  | 'defaultPageSize'
+  | 'onChangePageSize'
+  | 'pageSizeList'
+  | 'pageCount'
+  | 'manualPagination'
+  | 'autoResetPageIndex'
+> &
+  TableOptions
 
 export const Table = forwardRef(
   <Y extends RowData>(

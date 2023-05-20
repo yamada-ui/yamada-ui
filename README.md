@@ -79,7 +79,7 @@ const Example = () => {
 - [emotion/styled](https://emotion.sh/docs/@emotion/styled)
 - [ctrl/tinycolor](https://tinycolor.vercel.app/)
 - [dayjs](https://day.js.org/)
-- [react-table](https://react-table-v7.tanstack.com/)
+- [react-table](https://tanstack.com/table/v8)
 - [react-dropzone](https://react-dropzone.js.org/)
 - [react-markdown](https://remarkjs.github.io/react-markdown/)
 - [embla-carousel-react](https://www.embla-carousel.com/)

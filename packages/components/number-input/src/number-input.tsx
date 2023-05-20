@@ -501,7 +501,7 @@ type NumberInputOptions = {
 
 export type NumberInputProps = Omit<
   HTMLUIProps<'input'>,
-  'disabled' | 'required' | 'readOnly' | 'size'
+  'disabled' | 'required' | 'readOnly' | 'size' | 'onChange'
 > &
   ThemeProps<'NumberInput'> &
   Omit<UseNumberInputProps, 'disabled' | 'required' | 'readOnly'> &
@@ -542,8 +542,8 @@ export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) =>
     <NumberInputContextProvider
       value={{ getInputProps, getIncrementProps, getDecrementProps, styles }}
     >
-      <ui.div ref={ref} className={cx('ui-number-input', className)} __css={css} {...container}>
-        <NumberInputField {...rest} />
+      <ui.div className={cx('ui-number-input', className)} __css={css} {...container}>
+        <NumberInputField {...getInputProps(rest, ref)} />
 
         {isStepper ? (
           <NumberInputAddon {...addon}>
@@ -563,7 +563,7 @@ type NumberInputFieldProps = Omit<
 
 const NumberInputField = forwardRef<NumberInputFieldProps, 'input'>(
   ({ className, ...rest }, ref) => {
-    const { getInputProps, styles } = useNumberInputContext()
+    const { styles } = useNumberInputContext()
 
     const css: CSSUIObject = {
       width: '100%',
@@ -572,9 +572,10 @@ const NumberInputField = forwardRef<NumberInputFieldProps, 'input'>(
 
     return (
       <ui.input
+        ref={ref}
         className={cx('ui-number-input-field', className)}
-        {...getInputProps(rest, ref)}
         __css={css}
+        {...rest}
       />
     )
   },

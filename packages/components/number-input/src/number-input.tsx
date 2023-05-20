@@ -528,9 +528,13 @@ export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) =>
     addon,
     increment,
     decrement,
+    onChange,
     ...rest
   } = omitThemeProps(mergedProps)
-  const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput(rest)
+  const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
+    onChange,
+    ...rest,
+  })
 
   const css: CSSUIObject = {
     position: 'relative',

@@ -12,7 +12,10 @@ import {
 import { RefAttributes } from 'react'
 import { PopoverProps, usePopover, PopoverCloseButton } from '.'
 
-export type PopoverContentProps = Omit<HTMLUIProps<'section'>, keyof HTMLMotionProps<'section'>> &
+export type PopoverContentProps = Omit<
+  HTMLUIProps<'section'>,
+  keyof Omit<HTMLMotionProps<'section'>, 'children'>
+> &
   Omit<
     HTMLMotionProps<'section'>,
     | 'color'

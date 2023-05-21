@@ -1,46 +1,32 @@
 {
-  "name": "create-react-app",
+  "name": "next-js-pages",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next -p 4444",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
+    "@yamada-ui/react": "workspace:*",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@yamada-ui/react": "workspace:*",
+    "next": "^13.4.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-config-react-app": "^7.0.1",
     "prettier": "^2.8.8",
     "typescript": "4.9.4"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }

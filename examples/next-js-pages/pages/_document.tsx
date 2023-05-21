@@ -6,7 +6,7 @@ export default class Document extends NextDocument {
     return (
       <Html lang='ja'>
         <Head>
-          <title>Yamada UI</title>
+          <title>Next.js Pages - Yamada UI</title>
           <link rel='icon' href='/favicon.svg' />
         </Head>
 

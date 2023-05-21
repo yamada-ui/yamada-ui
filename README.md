@@ -49,7 +49,7 @@ const App = ({ children }) => {
 export default App
 ```
 
-Yamada-ui supports light and dark modes by default
+Yamada UI supports light and dark modes by default
 
 2.Now you can start using components like so
 

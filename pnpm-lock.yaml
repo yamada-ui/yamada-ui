@@ -443,8 +443,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -465,8 +465,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -505,8 +505,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -527,8 +527,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -543,8 +543,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -559,8 +559,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -578,8 +578,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -606,8 +606,8 @@ importers:
         version: 1.11.7
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -622,8 +622,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -656,8 +656,8 @@ importers:
         version: 7.0.9(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -687,8 +687,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -706,8 +706,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -749,8 +749,8 @@ importers:
         version: 1.11.7
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -777,8 +777,8 @@ importers:
         version: 14.2.3(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -802,8 +802,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -824,8 +824,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -846,8 +846,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -862,8 +862,8 @@ importers:
         version: 2.9.1(@types/react@18.2.6)(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -878,8 +878,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -897,8 +897,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -922,8 +922,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -938,8 +938,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -957,8 +957,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -982,8 +982,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -998,8 +998,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1014,8 +1014,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1030,8 +1030,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1049,8 +1049,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1074,8 +1074,8 @@ importers:
         version: 5.3.4(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1108,8 +1108,8 @@ importers:
         specifier: ^15.5.6
         version: 15.5.6
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1142,8 +1142,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1182,8 +1182,8 @@ importers:
         version: 2.5.5(@types/react@18.2.6)(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1197,12 +1197,12 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       framer-motion:
-        specifier: ^6.2.9
-        version: 6.5.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^10.12.12
+        version: 10.12.12(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1223,8 +1223,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1239,8 +1239,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1264,8 +1264,8 @@ importers:
         version: 5.3.4(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1295,8 +1295,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1320,8 +1320,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1345,8 +1345,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1382,8 +1382,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1395,8 +1395,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1420,8 +1420,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1448,8 +1448,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1470,8 +1470,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1486,8 +1486,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1514,8 +1514,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1551,8 +1551,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1576,8 +1576,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1607,8 +1607,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1629,8 +1629,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1651,8 +1651,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1688,8 +1688,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1716,8 +1716,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1738,8 +1738,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1757,8 +1757,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1791,8 +1791,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1813,8 +1813,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1832,8 +1832,8 @@ importers:
         specifier: workspace:*
         version: link:../layouts
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1854,17 +1854,17 @@ importers:
         version: link:../utils
       csstype:
         specifier: ^3.1.1
-        version: 3.1.1
+        version: 3.1.2
       react-fast-compare:
         specifier: ^3.2.0
-        version: 3.2.0
+        version: 3.2.2
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       framer-motion:
-        specifier: ^6.2.9
-        version: 6.5.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^10.12.12
+        version: 10.12.12(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1885,11 +1885,11 @@ importers:
         version: link:../../utils
       csstype:
         specifier: ^3.1.1
-        version: 3.1.1
+        version: 3.1.2
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1897,8 +1897,8 @@ importers:
   packages/hooks/use-boolean:
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1913,8 +1913,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1929,8 +1929,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1942,8 +1942,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1955,8 +1955,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1968,8 +1968,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1981,8 +1981,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1994,8 +1994,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2010,8 +2010,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2023,8 +2023,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2036,8 +2036,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2045,8 +2045,8 @@ importers:
   packages/hooks/use-latest-ref:
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2058,8 +2058,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2077,8 +2077,8 @@ importers:
         version: 5.3.0
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2099,8 +2099,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2112,8 +2112,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2125,8 +2125,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2138,8 +2138,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2151,8 +2151,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2167,8 +2167,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2186,8 +2186,8 @@ importers:
         version: link:../../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2226,8 +2226,8 @@ importers:
         version: 2.5.5(@types/react@18.2.6)(react@18.2.0)
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2488,8 +2488,8 @@ importers:
         version: link:../utils
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2510,8 +2510,8 @@ importers:
         version: 3.4.1
     devDependencies:
       clean-package:
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -5143,47 +5143,6 @@ packages:
   /@mdx-js/util@1.6.22:
     resolution: {integrity: sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==}
     dev: false
-
-  /@motionone/animation@10.14.0:
-    resolution: {integrity: sha512-h+1sdyBP8vbxEBW5gPFDnj+m2DCqdlAuf2g6Iafb1lcMnqjsRXWlPw1AXgvUMXmreyhqmPbJqoNfIKdytampRQ==}
-    dependencies:
-      '@motionone/easing': 10.14.0
-      '@motionone/types': 10.14.0
-      '@motionone/utils': 10.14.0
-      tslib: 2.5.2
-
-  /@motionone/dom@10.12.0:
-    resolution: {integrity: sha512-UdPTtLMAktHiqV0atOczNYyDd/d8Cf5fFsd1tua03PqTwwCe/6lwhLSQ8a7TbnQ5SN0gm44N1slBfj+ORIhrqw==}
-    dependencies:
-      '@motionone/animation': 10.14.0
-      '@motionone/generators': 10.14.0
-      '@motionone/types': 10.14.0
-      '@motionone/utils': 10.14.0
-      hey-listen: 1.0.8
-      tslib: 2.5.2
-
-  /@motionone/easing@10.14.0:
-    resolution: {integrity: sha512-2vUBdH9uWTlRbuErhcsMmt1jvMTTqvGmn9fHq8FleFDXBlHFs5jZzHJT9iw+4kR1h6a4SZQuCf72b9ji92qNYA==}
-    dependencies:
-      '@motionone/utils': 10.14.0
-      tslib: 2.5.2
-
-  /@motionone/generators@10.14.0:
-    resolution: {integrity: sha512-6kRHezoFfIjFN7pPpaxmkdZXD36tQNcyJe3nwVqwJ+ZfC0e3rFmszR8kp9DEVFs9QL/akWjuGPSLBI1tvz+Vjg==}
-    dependencies:
-      '@motionone/types': 10.14.0
-      '@motionone/utils': 10.14.0
-      tslib: 2.5.2
-
-  /@motionone/types@10.14.0:
-    resolution: {integrity: sha512-3bNWyYBHtVd27KncnJLhksMFQ5o2MSdk1cA/IZqsHtA9DnRM1SYgN01CTcJ8Iw8pCXF5Ocp34tyAjY7WRpOJJQ==}
-
-  /@motionone/utils@10.14.0:
-    resolution: {integrity: sha512-sLWBLPzRqkxmOTRzSaD3LFQXCPHvDzyHJ1a3VP9PRzBxyVd2pv51/gMOsdAcxQ9n+MIeGJnxzXBYplUHKj4jkw==}
-    dependencies:
-      '@motionone/types': 10.14.0
-      hey-listen: 1.0.8
-      tslib: 2.5.2
 
   /@mrmlnc/readdir-enhanced@2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -10334,11 +10293,11 @@ packages:
     dependencies:
       source-map: 0.6.1
 
-  /clean-package@2.1.1:
-    resolution: {integrity: sha512-+svGAs1RfjguW3Yi0uk1F2gu56jt0nkpFW6Gd9BDK0w7xcIokFwrQOWuRn5NO5pfTDkLCVP1ttIjvJwXaSvRsA==}
+  /clean-package@2.2.0:
+    resolution: {integrity: sha512-vLv8kRqvh4smPDpqAYFPLEijTppAd/cfCz4yBcUGoVl/JKu6ZWKhlo+G/cAmwlSa29RudfBeuyiNEzas8bTwEQ==}
     hasBin: true
     dependencies:
-      dot-object: 2.1.4
+      dot-prop: 6.0.1
     dev: true
 
   /clean-stack@2.2.0:
@@ -10550,6 +10509,7 @@ packages:
   /commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
+    dev: false
 
   /commander@6.2.1:
     resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==}
@@ -11104,10 +11064,6 @@ packages:
     dependencies:
       cssom: 0.3.8
 
-  /csstype@3.1.1:
-    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
-    dev: false
-
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
@@ -11560,20 +11516,19 @@ packages:
       no-case: 3.0.4
       tslib: 2.5.2
 
-  /dot-object@2.1.4:
-    resolution: {integrity: sha512-7FXnyyCLFawNYJ+NhkqyP9Wd2yzuo+7n9pGiYpkmXCTYa8Ci2U0eUNDVg5OuO5Pm6aFXI2SWN8/N/w7SJWu1WA==}
-    hasBin: true
-    dependencies:
-      commander: 4.1.1
-      glob: 7.2.3
-    dev: true
-
   /dot-prop@5.3.0:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
     engines: {node: '>=8'}
     dependencies:
       is-obj: 2.0.0
     dev: false
+
+  /dot-prop@6.0.1:
+    resolution: {integrity: sha512-tE7ztYzXHIeyvc7N+hR3oi7FIbf/NIjVP9hmAt3yMXzrQ072/fpjGLx2GxNxGxUl5V73MEqYzioOMoVhGMJ5cA==}
+    engines: {node: '>=10'}
+    dependencies:
+      is-obj: 2.0.0
+    dev: true
 
   /dotenv-expand@5.1.0:
     resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}
@@ -13045,20 +13000,20 @@ packages:
       map-cache: 0.2.2
     dev: false
 
-  /framer-motion@6.5.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-o1BGqqposwi7cgDrtg0dNONhkmPsUFDaLcKXigzuTFC5x58mE8iyTazxSudFzmT6MEyJKfjjU8ItoMe3W+3fiw==}
+  /framer-motion@10.12.12(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DDCqp60U6hR7aUrXj/BXc/t0Sd/U4ep6w/NZQkw898K+u7s+Vv/P8yxq4WTNA86kU9QCsqOgn1Qhz2DpYK0Oag==}
     peerDependencies:
-      react: '>=16.8 || ^17.0.0 || ^18.0.0'
-      react-dom: '>=16.8 || ^17.0.0 || ^18.0.0'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
     dependencies:
-      '@motionone/dom': 10.12.0
-      framesync: 6.0.1
-      hey-listen: 1.0.8
-      popmotion: 11.0.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      style-value-types: 5.0.0
-      tslib: 2.5.0
+      tslib: 2.5.2
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
 
@@ -13067,11 +13022,6 @@ packages:
     dependencies:
       tslib: 2.5.0
     dev: false
-
-  /framesync@6.0.1:
-    resolution: {integrity: sha512-fUY88kXvGiIItgNC7wcTOl0SNRCVXMKSWW2Yzfmn7EKNc+MpCzcz9DhdHcdjbrtN3c6R4H5dTY2jiCpPdysEjA==}
-    dependencies:
-      tslib: 2.5.2
 
   /fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -13759,9 +13709,6 @@ packages:
       capital-case: 1.0.4
       tslib: 2.5.2
     dev: false
-
-  /hey-listen@1.0.8:
-    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
   /highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
@@ -14496,7 +14443,6 @@ packages:
   /is-obj@2.0.0:
     resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
     engines: {node: '>=8'}
-    dev: false
 
   /is-object@1.0.2:
     resolution: {integrity: sha512-2rRIahhZr2UWb45fIOuvZGpFtz0TyOZLf32KxBbSoUCeZR495zCKlWUKKUByk3geS2eAs7ZAABt0Y/Rx0GiQGA==}
@@ -17674,14 +17620,6 @@ packages:
       '@babel/runtime': 7.21.5
     dev: false
 
-  /popmotion@11.0.3:
-    resolution: {integrity: sha512-Y55FLdj3UxkR7Vl3s7Qr4e9m0onSnP8W7d/xQLsoJM40vs6UKHFdygs6SWryasTZYqugMjm3BepCF4CWXDiHgA==}
-    dependencies:
-      framesync: 6.0.1
-      hey-listen: 1.0.8
-      style-value-types: 5.0.0
-      tslib: 2.5.2
-
   /posix-character-classes@0.1.1:
     resolution: {integrity: sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==}
     engines: {node: '>=0.10.0'}
@@ -18957,8 +18895,8 @@ packages:
   /react-error-overlay@6.0.11:
     resolution: {integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==}
 
-  /react-fast-compare@3.2.0:
-    resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+  /react-fast-compare@3.2.2:
+    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
     dev: false
 
   /react-focus-lock@2.9.1(@types/react@18.2.6)(react@18.2.0):
@@ -20754,12 +20692,6 @@ packages:
       inline-style-parser: 0.1.1
     dev: false
 
-  /style-value-types@5.0.0:
-    resolution: {integrity: sha512-08yq36Ikn4kx4YU6RD7jWEv27v4V+PUsOGa4n/as8Et3CuODMJQ00ENeAVXAeydX4Z2j1XHZF1K2sX4mGl18fA==}
-    dependencies:
-      hey-listen: 1.0.8
-      tslib: 2.5.2
-
   /styled-components@5.3.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-3kSzSBN0TiCnGJM04UwO1HklIQQSXW7rCARUk+VyMR7clz8XVlA3jijtf5ypqoDIdNMKx3la4VvaPFR855SFcg==}
     engines: {node: '>=10'}
@@ -20771,7 +20703,7 @@ packages:
     dependencies:
       '@babel/helper-module-imports': 7.21.4
       '@babel/traverse': 7.21.5(supports-color@5.5.0)
-      '@emotion/is-prop-valid': 1.2.0
+      '@emotion/is-prop-valid': 1.2.1
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
       babel-plugin-styled-components: 2.1.1(styled-components@5.3.10)
@@ -21439,6 +21371,7 @@ packages:
 
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
+    dev: false
 
   /tslib@2.5.2:
     resolution: {integrity: sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==}

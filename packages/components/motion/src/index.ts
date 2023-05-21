@@ -13,7 +13,7 @@ export type {
   AnimationProps as MotionAnimationProps,
   AnimationType as MotionAnimationType,
   AnimationLifecycles as MotionAnimationLifecycles,
-  AnimationOptions as MotionAnimationOptions,
+  ValueAnimationOptions as MotionValueAnimationOptions,
   AnimationPlaybackControls as MotionAnimationPlaybackControls,
   MotionValue,
 } from 'framer-motion'

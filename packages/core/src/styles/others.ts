@@ -1,6 +1,6 @@
 import { getMemoizedObject as get, Dict, StringLiteral } from '@yamada-ui/utils'
-import { Token } from '..'
-import { Configs } from '.'
+import { Token } from '../css'
+import { Configs } from './config'
 
 const getPriority = (theme: any, token: any, css: any = {}) => {
   const result: Dict = {}

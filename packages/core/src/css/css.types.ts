@@ -1,6 +1,7 @@
 import { Dict } from '@yamada-ui/utils'
 import * as CSS from 'csstype'
-import { Theme, StyledTheme, StylesProps, PseudosProps } from '..'
+import { StylesProps, PseudosProps } from '../styles'
+import { Theme, StyledTheme } from '../theme.types'
 
 export type ColorScheme = 'light' | 'dark'
 

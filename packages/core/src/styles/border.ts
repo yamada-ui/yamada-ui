@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
-import { Token } from '..'
-import { Configs, configs } from '.'
+import { Token } from '../css'
+import { Configs, configs } from './config'
 
 export const border: Configs = {
   border: configs.border('border'),

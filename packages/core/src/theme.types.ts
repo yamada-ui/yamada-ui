@@ -8,10 +8,10 @@ import {
   AnalyzeBreakpointsReturn,
   CSSUIProps,
   CSSUIObject,
-  GeneratedTheme,
-  UITheme,
   UIMultiStyle,
-} from '.'
+} from './css'
+import { GeneratedTheme } from './generated-theme.types'
+import { UITheme } from './ui-theme.types'
 
 export type ThemeScheme = Union<string | number>
 

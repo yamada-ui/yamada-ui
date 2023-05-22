@@ -54,6 +54,8 @@ export const pseudos = {
     '.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]',
 }
 
+export const pseudosProperties = Object.keys(pseudos) as (keyof typeof pseudos)[]
+
 export type PseudosProps = {
   [K in keyof Pseudos]?: CSSUIObject
 }

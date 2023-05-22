@@ -1,4 +1,5 @@
-import { UIFactory, DOMElements, StyledOptions, HTMLUIComponents, UIComponent, styled } from '.'
+import { UIFactory, DOMElements, StyledOptions, HTMLUIComponents, UIComponent } from './components'
+import { styled } from './styled'
 
 const factory = () => {
   const cache = new Map<DOMElements, UIComponent<DOMElements>>()
@@ -13,7 +14,7 @@ const factory = () => {
 
       return cache.get(el)
     },
-  }) as unknown as UIFactory & HTMLUIComponents
+  }) as UIFactory & HTMLUIComponents
 }
 
 export const ui = factory()

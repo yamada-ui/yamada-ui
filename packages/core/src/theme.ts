@@ -1,5 +1,6 @@
 import { flattenObject, objectFromEntries, pickObject, omitObject, Dict } from '@yamada-ui/utils'
-import { ThemeProps, ThemeConfig, analyzeBreakpoints, createVars } from '.'
+import { ThemeProps, analyzeBreakpoints, createVars } from './css'
+import { ThemeConfig } from './theme.types'
 
 export type VarToken = {
   isSemantic: boolean
@@ -25,7 +26,7 @@ const tokens = [
 ] as const
 
 export type ThemeToken =
-  | typeof tokens[number]
+  | (typeof tokens)[number]
   | 'transitions.duration'
   | 'transitions.property'
   | 'transitions.easing'

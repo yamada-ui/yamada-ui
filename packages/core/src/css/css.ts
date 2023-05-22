@@ -1,14 +1,8 @@
 import { isArray, isObject, merge, runIfFunc, Dict } from '@yamada-ui/utils'
-import {
-  CSSObjectOrFunc,
-  CSSUIObject,
-  CSSUIProps,
-  StyledTheme,
-  BreakpointQueries,
-  styles,
-  pseudos,
-  ConfigProps,
-} from '..'
+import { styles, pseudos, ConfigProps } from '../styles'
+import { StyledTheme } from '../theme.types'
+import { BreakpointQueries } from './breakpoint'
+import { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from './css.types'
 
 const expandColorScheme = (key: string, value: any[]): Dict => ({
   [key]: value[0],

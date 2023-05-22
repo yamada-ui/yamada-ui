@@ -1,7 +1,7 @@
 import { StringLiteral } from '@yamada-ui/utils'
 import * as CSS from 'csstype'
-import { Token } from '..'
-import { Configs, configs, transforms } from '.'
+import { Token } from '../css'
+import { Configs, configs, transforms } from './config'
 
 export const typography: Configs = {
   fontFamily: configs.prop('fontFamily', 'fonts'),

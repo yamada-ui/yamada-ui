@@ -1,5 +1,7 @@
 import { escape, merge, calc, Dict, isArray } from '@yamada-ui/utils'
-import { CSSMap, pseudos, VarTokens } from '..'
+import { pseudos } from '../styles'
+import { VarTokens } from '../theme'
+import { CSSMap } from '../theme.types'
 
 type Var = {
   variable: string

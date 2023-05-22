@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
-import { Token } from '..'
-import { Configs } from '.'
+import { Token } from '../css'
+import { Configs } from './config'
 
 export const filter: Configs = {
   filter: true,

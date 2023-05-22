@@ -36,7 +36,7 @@ export const customComponent: ComponentStory<typeof Markdown> = () => {
 
 const README = `
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/yamada-ui.png" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
 # Branch

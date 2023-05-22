@@ -1,4 +1,4 @@
-import { createdDom, noop } from '@yamada-ui/utils'
+import { noop, useSafeLayoutEffect } from '@yamada-ui/utils'
 import {
   createContext,
   FC,
@@ -9,36 +9,34 @@ import {
   useState,
   useContext,
 } from 'react'
-import { ColorScheme, ThemeConfig } from '..'
-import { ColorSchemeManager, localStorageManager, rootManager } from '.'
+import { ColorScheme } from '../css'
+import { ThemeConfig } from '../theme.types'
+import { ColorSchemeManager, localStorageManager } from './color-scheme-manager'
+import { getColorModeUtils } from './color-scheme-utils'
 
 type ColorSchemeContext = {
+  forced?: boolean
   colorScheme: ColorScheme
-  changeColorScheme: (colorScheme: ColorScheme, isObserver?: boolean) => void
+  changeColorScheme: (colorScheme: ColorScheme | 'system') => void
   toggleScheme: () => void
 }
 
-const classNames = {
-  light: 'ui-light',
-  dark: 'ui-dark',
-}
-
-const queries = {
-  light: '(prefers-color-scheme: light)',
-  dark: '(prefers-color-scheme: dark)',
-}
+const getColorScheme = (manager: ColorSchemeManager, fallback?: ColorScheme) =>
+  manager.type === 'cookie' && manager.ssr ? manager.get(fallback) : fallback
 
 export const ColorSchemeContext = createContext({} as ColorSchemeContext)
 
 export type ColorSchemeProviderProps = {
-  colorSchemeManager?: ColorSchemeManager
+  value?: ColorScheme
   config: ThemeConfig
-  children: ReactNode
+  children?: ReactNode
+  colorSchemeManager?: ColorSchemeManager
 }
 
 export const ColorSchemeProvider: FC<ColorSchemeProviderProps> = ({
+  value,
   colorSchemeManager = localStorageManager,
-  config: { initialColorScheme, useSystemColorScheme } = {
+  config: { initialColorScheme, useSystemColorScheme, disableTransitionOnChange } = {
     initialColorScheme: 'light',
     useSystemColorScheme: true,
   },
@@ -46,119 +44,78 @@ export const ColorSchemeProvider: FC<ColorSchemeProviderProps> = ({
 }) => {
   const defaultColorScheme = initialColorScheme === 'dark' ? 'dark' : 'light'
 
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(
-    colorSchemeManager.get(defaultColorScheme) ?? defaultColorScheme,
+  const [colorScheme, setColorScheme] = useState<ColorScheme | undefined>(() =>
+    getColorScheme(colorSchemeManager, defaultColorScheme),
+  )
+
+  const [resolvedColorScheme, setResolvedColorScheme] = useState<ColorScheme | undefined>(() =>
+    getColorScheme(colorSchemeManager),
+  )
+
+  const resolvedValue =
+    initialColorScheme === 'system' && !colorScheme ? resolvedColorScheme : colorScheme
+
+  const { getSystemColorScheme, setClassName, setDataset, addListener } = useMemo(
+    () => getColorModeUtils({ isPreventTransition: disableTransitionOnChange }),
+    [disableTransitionOnChange],
   )
 
   const changeColorScheme = useCallback(
-    (value: ColorScheme, isObserver: boolean = false): void => {
-      if (!isObserver) {
-        colorSchemeManager.set(value)
-      } else if (colorSchemeManager.get() && !useSystemColorScheme) {
-        return
-      }
+    (value: ColorScheme | 'system'): void => {
+      const resolved = value === 'system' ? getSystemColorScheme() : value
 
-      setColorScheme(value)
+      setColorScheme(resolved)
+      setClassName(resolved === 'dark')
+      setDataset(resolved)
+
+      colorSchemeManager.set(resolved)
     },
-    [colorSchemeManager, useSystemColorScheme],
+    [colorSchemeManager, getSystemColorScheme, setClassName, setDataset],
   )
 
   const toggleScheme = useCallback((): void => {
-    if (useSystemColorScheme) return
+    changeColorScheme(resolvedValue === 'dark' ? 'light' : 'dark')
+  }, [changeColorScheme, resolvedValue])
 
-    setColorScheme((prev) => {
-      if (prev === 'light') {
-        colorSchemeManager.set('dark')
-
-        return 'dark'
-      } else {
-        colorSchemeManager.set('light')
-
-        return 'light'
-      }
-    })
-  }, [colorSchemeManager, useSystemColorScheme])
+  useSafeLayoutEffect(() => {
+    if (initialColorScheme === 'system') setResolvedColorScheme(getSystemColorScheme())
+  }, [])
 
   useEffect(() => {
-    const isBrowser = createdDom()
-    const isLocalStorage = colorSchemeManager.type === 'localStorage'
+    const managerValue = colorSchemeManager.get()
 
-    if (isBrowser && isLocalStorage) {
-      const systemScheme = getColorScheme(defaultColorScheme)
+    if (managerValue) {
+      changeColorScheme(managerValue)
 
-      if (useSystemColorScheme) return changeColorScheme(systemScheme)
-
-      const rootScheme = rootManager.get()
-      const localStorageScheme = colorSchemeManager.get()
-
-      if (rootScheme) return changeColorScheme(rootScheme)
-
-      if (localStorageScheme) return changeColorScheme(localStorageScheme)
-
-      return changeColorScheme(defaultColorScheme)
+      return
     }
-  }, [changeColorScheme, defaultColorScheme, colorSchemeManager, useSystemColorScheme])
 
-  useEffect(() => {
-    addClassName(colorScheme)
-    rootManager.set(colorScheme)
-  }, [colorScheme])
+    if (initialColorScheme === 'system') {
+      changeColorScheme('system')
+
+      return
+    }
+
+    changeColorScheme(defaultColorScheme)
+  }, [changeColorScheme, colorSchemeManager, defaultColorScheme, initialColorScheme])
 
   useEffect(() => {
     if (!useSystemColorScheme) return
 
-    const observer = colorSchemeObserver(changeColorScheme)
+    return addListener(changeColorScheme)
+  }, [useSystemColorScheme, addListener, changeColorScheme])
 
-    return () => {
-      if (!useSystemColorScheme && observer) observer()
-    }
-  }, [changeColorScheme, useSystemColorScheme])
-
-  const value = useMemo(
+  const context = useMemo(
     () => ({
-      colorScheme,
-      changeColorScheme,
-      toggleScheme,
+      colorScheme: value ?? (resolvedValue as ColorScheme),
+      changeColorScheme: value ? noop : changeColorScheme,
+      toggleScheme: value ? noop : toggleScheme,
+      forced: value !== undefined,
     }),
-    [colorScheme, changeColorScheme, toggleScheme],
+    [value, resolvedValue, changeColorScheme, toggleScheme],
   )
 
-  return <ColorSchemeContext.Provider value={value}>{children}</ColorSchemeContext.Provider>
-}
-
-const addClassName = (colorScheme: ColorScheme): void => {
-  const isBrowser = createdDom()
-
-  if (isBrowser) {
-    const isDark = colorScheme === 'dark'
-
-    document.body.classList.add(isDark ? classNames.dark : classNames.light)
-    document.body.classList.remove(isDark ? classNames.light : classNames.dark)
-  }
-}
-
-const getColorScheme = (defaultColorScheme: ColorScheme): ColorScheme => {
-  const mql = window.matchMedia?.(queries.dark)?.matches ?? defaultColorScheme === 'dark'
-
-  return mql ? 'dark' : 'light'
-}
-
-const colorSchemeObserver = (
-  func: (colorScheme: ColorScheme, isObserver: boolean) => void,
-): (() => void) => {
-  if (!('matchMedia' in window)) return noop
-
-  const mql = window.matchMedia(queries.dark)
-
-  const listener = () => {
-    func(mql.matches ? 'dark' : 'light', true)
-  }
-
-  mql.addEventListener('change', listener)
-
-  return () => {
-    mql.removeEventListener('change', listener)
-  }
+  return <ColorSchemeContext.Provider value={context}>{children}</ColorSchemeContext.Provider>
 }
 
 export const useColorScheme = () => {

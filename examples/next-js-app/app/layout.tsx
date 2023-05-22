@@ -14,7 +14,7 @@ export default ({ children }: { children: React.ReactNode }) => {
       <body>
         <ColorSchemeScript type='cookie' nonce='testing' />
 
-        <UIProvider>{children}</UIProvider>
+        <UIProvider colorSchemeManager={cookieStorageManager}>{children}</UIProvider>
       </body>
     </html>
   )

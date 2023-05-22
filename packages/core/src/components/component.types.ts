@@ -4,18 +4,19 @@ import { CSSUIProps, CSSUIObject, StylesProps, StyledTheme, CSSObject, Interpola
 import { DOMElements } from '.'
 
 export type StyledOptions = {
+  shouldForwardProp?: (prop: string) => boolean
   label?: string
   baseStyle?: CSSUIProps | ((props: StyledResolverProps) => CSSUIProps)
 }
 
 export type UIFactory = {
-  <T extends As, P = {}>(component: T, options?: StyledOptions): UIComponent<T, P>
+  <T extends As, P extends object = {}>(component: T, options?: StyledOptions): UIComponent<T, P>
 }
 
-export type StyledResolverProps = CSSUIProps & {
+export type StyledResolverProps = CSSUIObject & {
   theme: StyledTheme<Dict>
-  __css?: CSSUIProps
-  sx?: CSSUIProps
+  __css?: CSSUIObject
+  sx?: CSSUIObject
   css?: CSSObject
 }
 
@@ -43,10 +44,9 @@ export type ComponentProps<
   M extends object,
   D extends object = {},
   H extends As = As,
-> = IntersectionProps<Y, D> &
-  IntersectionProps<M, D> & {
-    as?: H
-  }
+> = (IntersectionProps<Y, D> | IntersectionProps<M, D>) & {
+  as?: H
+}
 
 export type ComponentArgs = {
   displayName?: string
@@ -62,13 +62,15 @@ export type Component<Y extends As, M extends object = {}> = {
   ): JSX.Element
 } & ComponentArgs
 
-export type As<Y = any> = React.ElementType<Y>
+export type As = React.ElementType
 
 export type HTMLUIComponents = {
   [Y in DOMElements]: UIComponent<Y, {}>
 }
 
-export type UIComponent<Y extends As, M = {}> = Component<Y, UIProps & M>
+type Assign<T, U> = Omit<T, keyof U> & U
+
+export type UIComponent<Y extends As, M extends object = {}> = Component<Y, Assign<UIProps, M>>
 
 export type HTMLUIProps<Y extends As> = Omit<
   PropsOf<Y>,

@@ -1,0 +1,39 @@
+{
+  "name": "@yamada-ui/nextjs",
+  "version": "0.1.0",
+  "description": "Yamada UI Integrations for Next.js 13",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "JSX=1 tsup src/index.ts --dts",
+    "build:fast": "JSX=1 tsup src/index.ts",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@emotion/react": "^11.11.0",
+    "@emotion/cache": "^11.11.0"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0",
+    "react": "^18.0.0",
+    "next": ">=13"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "next": ">=13",
+    "@emotion/react": ">=11",
+    "@yamada-ui/react": "workspace:*"
+  }
+}

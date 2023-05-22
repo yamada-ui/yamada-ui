@@ -96,8 +96,9 @@ type LoadingConfigOptions = {
 
 export type ThemeConfig = {
   initialThemeScheme?: string | number
-  initialColorScheme?: 'light' | 'dark'
+  initialColorScheme?: 'light' | 'dark' | 'system'
   useSystemColorScheme?: boolean
+  disableTransitionOnChange?: boolean
   date?: {
     locale?: string
   }

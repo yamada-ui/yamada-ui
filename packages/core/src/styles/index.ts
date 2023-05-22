@@ -40,7 +40,7 @@ export const styles = {
   ...others,
 }
 
-export const StylesProperties: any[] = Object.keys(styles)
+export const stylesProperties = Object.keys(styles) as (keyof typeof styles)[]
 
 export const layoutStyle = {
   ...layout,
@@ -50,7 +50,7 @@ export const layoutStyle = {
   ...position,
 }
 
-export const layoutStylesProperties: any[] = Object.keys(layoutStyle)
+export const layoutStylesProperties = Object.keys(layoutStyle) as (keyof typeof layoutStyle)[]
 
 export type StylesProps<Y = 'responsive', M = 'colorScheme'> = LayoutProps<Y, M> &
   ColorProps<Y, M> &

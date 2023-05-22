@@ -144,15 +144,11 @@ export const memoizeObject = (func: typeof getObject) => {
       return func(obj, path, fallback)
     }
 
-    if (!cache.has(obj)) {
-      cache.set(obj, new Map())
-    }
+    if (!cache.has(obj)) cache.set(obj, new Map())
 
     const map = cache.get(obj)
 
-    if (map.has(path)) {
-      return map.get(path)
-    }
+    if (map.has(path)) return map.get(path)
 
     const value = func(obj, path, fallback, i)
 
@@ -165,3 +161,23 @@ export const memoizeObject = (func: typeof getObject) => {
 }
 
 export const getMemoizedObject = memoizeObject(getObject)
+
+export const assignAfter = (target: Record<string, any>, ...sources: any[]) => {
+  if (target == null) throw new TypeError('Cannot convert undefined or null to object')
+
+  const result: Record<string, unknown> = { ...target }
+
+  for (const nextSource of sources) {
+    if (nextSource == null) continue
+
+    for (const nextKey in nextSource) {
+      if (!Object.prototype.hasOwnProperty.call(nextSource, nextKey)) continue
+
+      if (nextKey in result) delete result[nextKey]
+
+      result[nextKey] = nextSource[nextKey]
+    }
+  }
+
+  return result
+}

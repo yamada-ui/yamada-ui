@@ -29,7 +29,7 @@
     "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/portal": "workspace:*",
     "react-remove-scroll": "^2.5.4",
-    "@emotion/react": "^11.10.4"
+    "@emotion/react": "^11.11.0"
   },
   "devDependencies": {
     "react": "^18.0.0",

@@ -22,8 +22,8 @@
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/portal": "workspace:*",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "react-fast-compare": "^3.2.0",
     "csstype": "^3.1.1"
   },

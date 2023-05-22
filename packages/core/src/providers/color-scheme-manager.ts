@@ -1,70 +1,62 @@
-import { createdDom } from '@yamada-ui/utils'
-import { ColorScheme } from '..'
+import { ColorScheme } from '../css'
+import { STORAGE_KEY } from './color-scheme-script'
 
-const hasSupport = () => typeof Storage !== 'undefined'
-
-export const storageKey = 'ui-scheme'
+const hasSupport = !!globalThis?.document
 
 export type ColorSchemeManager = {
-  get(initColorScheme?: ColorScheme): ColorScheme
-  set(colorScheme: ColorScheme): void
   type: 'cookie' | 'localStorage'
+  ssr?: boolean
+  get: (initColorScheme?: ColorScheme) => ColorScheme | undefined
+  set: (colorScheme: ColorScheme | 'system') => void
 }
 
-export const localStorageManager: ColorSchemeManager = {
-  get(initColorScheme: ColorScheme = 'light') {
-    if (!hasSupport()) return initColorScheme
+export const createLocalStorageManager = (storageKey: string): ColorSchemeManager => ({
+  ssr: false,
+  type: 'localStorage',
+  get(initColorScheme = 'light') {
+    if (!hasSupport) return initColorScheme
 
     try {
-      const colorScheme = localStorage.getItem(storageKey) as ColorScheme
+      const colorScheme = localStorage.getItem(storageKey) as ColorScheme | null
 
-      return colorScheme ?? initColorScheme
+      return colorScheme || initColorScheme
     } catch (e) {
       return initColorScheme
     }
   },
 
-  set(colorShcme: ColorScheme) {
-    if (!hasSupport()) return
-
+  set(colorShcme) {
     try {
       localStorage.setItem(storageKey, colorShcme)
     } catch (e) {}
   },
-
-  type: 'localStorage',
-}
-
-export const cookieStorageManager = (cookies = ''): ColorSchemeManager => ({
-  get(initColorScheme: ColorScheme = 'light') {
-    const match = cookies.match(new RegExp(`(^| )${storageKey}=([^;]+)`))
-
-    return (match?.[2] ?? initColorScheme) as ColorScheme
-  },
-
-  set(colorShcme: ColorScheme) {
-    document.cookie = `${storageKey}=${colorShcme}; max-age=31536000; path=/`
-  },
-
-  type: 'cookie',
 })
 
-export type RootManager = {
-  get(): ColorScheme | undefined
-  set(colorScheme: ColorScheme): void
+export const localStorageManager = createLocalStorageManager(STORAGE_KEY)
+
+const parseCookie = (cookie: string, key: string): ColorScheme | undefined => {
+  const match = cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
+
+  return match?.[2] as ColorScheme | undefined
 }
 
-export const rootManager: RootManager = {
-  get: () =>
-    (document.documentElement.style.getPropertyValue('color-scheme') ||
-      document.documentElement.dataset.theme) as ColorScheme | undefined,
+export const createCookieStorageManager = (key: string, cookie?: string): ColorSchemeManager => ({
+  ssr: !!cookie,
+  type: 'cookie',
+  get(initColorScheme: ColorScheme = 'light') {
+    if (cookie) return parseCookie(cookie, key)
 
-  set: (colorScheme: ColorScheme) => {
-    const isBrowser = createdDom()
+    if (!hasSupport) return initColorScheme
 
-    if (isBrowser) {
-      document.documentElement.style.setProperty('color-scheme', colorScheme)
-      document.documentElement.setAttribute('data-theme', colorScheme)
-    }
+    return parseCookie(document.cookie, key) || initColorScheme
   },
-}
+
+  set(colorShcme: ColorScheme | 'system') {
+    document.cookie = `${key}=${colorShcme}; max-age=31536000; path=/`
+  },
+})
+
+export const cookieStorageManager = createCookieStorageManager(STORAGE_KEY)
+
+export const cookieStorageManagerSSR = (cookie: string) =>
+  createCookieStorageManager(STORAGE_KEY, cookie)

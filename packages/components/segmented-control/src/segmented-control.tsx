@@ -50,9 +50,9 @@ const [SegmentedControlProvider, useSegmentedControl] = createContext<SegmentedC
 
 type SegmentedControlOptions = {
   name?: string
-  value?: string | number
-  defaultValue?: string | number
-  onChange?: (value: string | number) => void
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
   isReadOnly?: boolean
   isDisabled?: boolean
 }

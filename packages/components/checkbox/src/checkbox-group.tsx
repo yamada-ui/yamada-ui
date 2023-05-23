@@ -1,4 +1,4 @@
-import { forwardRef, ThemeProps } from '@yamada-ui/core'
+import { ComponentArgs, ThemeProps } from '@yamada-ui/core'
 import { FormControlOptions, useFormControl } from '@yamada-ui/form-control'
 import { Flex, FlexProps } from '@yamada-ui/layouts'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
@@ -11,19 +11,22 @@ import {
   PropGetter,
   DOMAttributes,
 } from '@yamada-ui/utils'
-import { ChangeEvent, useCallback } from 'react'
+import { ChangeEvent, ForwardedRef, forwardRef, Ref, useCallback } from 'react'
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
-export type UseCheckboxGroupProps = {
-  value?: (string | number)[]
-  defaultValue?: (string | number)[]
-  onChange?: (value: (string | number)[]) => void
+export type UseCheckboxGroupProps<Y extends string | number = string> = {
+  value?: Y[]
+  defaultValue?: Y[]
+  onChange?: (value: Y[]) => void
   isNative?: boolean
 }
 
-export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) => {
+export const useCheckboxGroup = <Y extends string | number = string>({
+  isNative,
+  ...props
+}: UseCheckboxGroupProps<Y>) => {
   props.onChange = useCallbackRef(props.onChange)
 
   const [value, setValue] = useControllableState({
@@ -33,10 +36,10 @@ export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) 
   })
 
   const onChange = useCallback(
-    (evOrValue: ChangeEvent<HTMLInputElement> | string | number) => {
+    (evOrValue: ChangeEvent<HTMLInputElement> | Y) => {
       const isChecked = isEvent(evOrValue) ? evOrValue.target.checked : !value.includes(evOrValue)
 
-      const selectedValue = isEvent(evOrValue) ? evOrValue.target.value : evOrValue
+      const selectedValue = (isEvent(evOrValue) ? evOrValue.target.value : evOrValue) as Y
 
       const nextValue = isChecked
         ? [...value, selectedValue]
@@ -50,7 +53,7 @@ export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) 
   const getCheckboxProps: PropGetter<
     DOMAttributes<HTMLInputElement> & { isChecked?: boolean },
     Omit<DOMAttributes<HTMLInputElement>, 'onChange'> & {
-      onChange: (ev: ChangeEvent<HTMLInputElement> | string | number) => void
+      onChange: (ev: ChangeEvent<HTMLInputElement> | Y) => void
     }
   > = useCallback(
     (props = {}, ref = null) => ({
@@ -67,9 +70,9 @@ export const useCheckboxGroup = ({ isNative, ...props }: UseCheckboxGroupProps) 
   return { value, setValue, onChange, getCheckboxProps }
 }
 
-export type CheckboxGroupProps = ThemeProps<'Checkbox'> &
+export type CheckboxGroupProps<Y extends string | number = string> = ThemeProps<'Checkbox'> &
   Omit<FlexProps, 'onChange'> &
-  UseCheckboxGroupProps &
+  UseCheckboxGroupProps<Y> &
   FormControlOptions
 
 type CheckboxContext = ThemeProps<'Checkbox'> &
@@ -87,27 +90,38 @@ const [CheckboxGroupProvider, useCheckboxGroupContext] = createContext<CheckboxC
 
 export { useCheckboxGroupContext }
 
-export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
-  (
-    { className, size, variant, colorStyle, children, direction = 'column', gap, ...props },
-    ref,
+export const CheckboxGroup = forwardRef(
+  <Y extends string | number = string>(
+    {
+      className,
+      size,
+      variant,
+      colorStyle,
+      children,
+      direction = 'column',
+      gap,
+      ...props
+    }: CheckboxGroupProps<Y>,
+    ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const { value, onChange } = useCheckboxGroup(props)
+    const { value, onChange } = useCheckboxGroup<Y>(props)
     const { isRequired, isReadOnly, isDisabled, isInvalid } = useFormControl(props)
 
     return (
       <CheckboxGroupProvider
-        value={{
-          size,
-          variant,
-          colorStyle,
-          isRequired,
-          isReadOnly,
-          isDisabled,
-          isInvalid,
-          value,
-          onChange,
-        }}
+        value={
+          {
+            size,
+            variant,
+            colorStyle,
+            isRequired,
+            isReadOnly,
+            isDisabled,
+            isInvalid,
+            value,
+            onChange,
+          } as CheckboxContext
+        }
       >
         <Flex
           ref={ref}
@@ -122,4 +136,10 @@ export const CheckboxGroup = forwardRef<CheckboxGroupProps, 'div'>(
       </CheckboxGroupProvider>
     )
   },
-)
+) as {
+  <Y extends string | number = string>(
+    props: CheckboxGroupProps<Y> & { ref?: Ref<HTMLDivElement> },
+  ): JSX.Element
+} & ComponentArgs
+
+CheckboxGroup.displayName = 'CheckboxGroup'

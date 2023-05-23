@@ -293,7 +293,7 @@ export const customControl: ComponentStory<typeof Checkbox> = () => {
 }
 
 export const customControlGroup: ComponentStory<typeof Checkbox> = () => {
-  const [value, setValue] = useState<(string | number)[]>(['孫悟空', 'ベジータ'])
+  const [value, setValue] = useState<string[]>(['孫悟空', 'ベジータ'])
 
   return (
     <CheckboxGroup value={value} onChange={(value) => setValue(value)}>

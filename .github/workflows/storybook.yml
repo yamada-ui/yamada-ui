@@ -14,7 +14,7 @@ jobs:
         with:
           version: 7
       - name: install packages
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
       - name: build storybook
         run: pnpm build:sb
       - name: deploy storybook

@@ -185,7 +185,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, 'div'>((props,
       const checked = props.value === value
 
       return {
-        ...props,
+        ...omitObject(props, ['isDisabled', 'isReadOnly']),
         ref,
         id: `${id}-${index}`,
         type: 'radio',

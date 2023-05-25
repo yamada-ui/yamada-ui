@@ -19,7 +19,7 @@
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",
     "build:sb": "pnpm build && build-storybook",
-    "gen:tokens": "yamada-cli tokens packages/theme/src --out packages/core/src/generated-theme.types.ts",
+    "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts",
     "gen:component": "plop component && pnpm install",
     "gen:hook": "plop hook && pnpm install",
     "react:start": "pnpm --prefix examples/create-react-app start",

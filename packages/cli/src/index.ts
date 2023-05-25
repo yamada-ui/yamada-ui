@@ -1,9 +1,9 @@
 import * as path from 'path'
 import chokidar from 'chokidar'
 import { program } from 'commander'
-import throttle from 'lodash.throttle'
 import { generateThemeTypings, themePath } from './command/tokens'
 import { initCLI } from './utils'
+import { bundleNRequire } from 'bundle-n-require'
 
 type Options = {
   out?: string
@@ -18,23 +18,36 @@ export const run = async () => {
     .option('--out <path>', `output file to ${path.join(...themePath)}`)
     .option('--watch [path]', 'Watch directory for changes and rebuild')
     .action(async (themeFile: string, { out: outFile, watch: watchFile }: Options) => {
+      const readFile = async () => {
+        const filePath = path.resolve(themeFile)
+        const { mod: theme, dependencies } = await bundleNRequire(filePath)
+
+        return { theme, dependencies }
+      }
+
+      let file = await readFile()
+
+      const buildFile = async () => {
+        await generateThemeTypings({ theme: file.theme, outFile })
+
+        if (watchFile) console.log('\n', '⌛️ Watching for changes...')
+      }
+
       if (watchFile) {
-        const watchPath = typeof watchFile === 'string' ? watchFile : path.dirname(themeFile)
+        const watchPath = typeof watchFile === 'string' ? watchFile : file.dependencies
 
-        const throttledGenerateThemeTypings = throttle(async () => {
-          console.time('Generated Theme')
+        chokidar
+          .watch(watchPath)
+          .on('ready', buildFile)
+          .on('change', async (filePath) => {
+            console.log('📦 File changed', filePath)
 
-          await generateThemeTypings({ themeFile, outFile })
+            file = await readFile()
 
-          console.timeEnd('Generated Theme')
-          console.info(new Date().toLocaleString())
-        }, 1000)
-
-        throttledGenerateThemeTypings()
-
-        chokidar.watch(watchPath).on('change', throttledGenerateThemeTypings)
+            return buildFile()
+          })
       } else {
-        await generateThemeTypings({ themeFile, outFile })
+        await buildFile()
       }
     })
 

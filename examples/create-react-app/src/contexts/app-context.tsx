@@ -16,7 +16,7 @@ const [AppContextProvider, useAppContext] = createContext<AppContext>({
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isSystemColorScheme, setIsSystemColorScheme] = useState<boolean>(
-    (localStorage.getItem('ui-system-scheme') ?? 'true') === 'true',
+    (localStorage.getItem('ui-system-scheme') ?? 'false') === 'true',
   )
 
   const config = extendConfig({

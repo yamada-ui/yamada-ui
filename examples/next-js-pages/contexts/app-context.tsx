@@ -22,7 +22,7 @@ const [AppContextProvider, useAppContext] = createContext<AppContext>({
 })
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [isSystemColorScheme, setIsSystemColorScheme] = useState<boolean>(true)
+  const [isSystemColorScheme, setIsSystemColorScheme] = useState<boolean>(false)
 
   const config = extendConfig({
     ...customConfig,

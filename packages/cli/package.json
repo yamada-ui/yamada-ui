@@ -11,37 +11,41 @@
     "bin"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+  },
   "bin": {
     "yamada-cli": "bin/index.js"
   },
   "scripts": {
     "clean": "rimraf dist .turbo",
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "tsup src --format cjs --clean --shims",
+    "dev": "pnpm build --watch",
     "typecheck": " tsc --noEmit"
   },
   "dependencies": {
-    "@swc/core": "^1.3.56",
+    "bundle-n-require": "^1.0.1",
     "chokidar": "^3.5.3",
     "cli-check-node": "^1.3.4",
     "cli-handle-unhandled": "^1.1.1",
     "cli-welcome": "^2.2.2",
     "commander": "^10.0.1",
-    "lodash.throttle": "^4.1.1",
-    "module-alias": "^2.2.2",
-    "ora": "^5.3.0",
-    "prettier": "^2.8.8",
-    "regenerator-runtime": "^0.13.11",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0"
+    "prettier": "^2.8.8"
   },
   "devDependencies": {
+    "ora": "^6.3.0",
+    "update-notifier": "^6.0.2",
+    "@types/ora": "^3.2.0",
+    "@types/update-notifier": "6.0.2",
     "@types/cli-welcome": "^2.2.0",
-    "@types/lodash.throttle": "^4.1.7",
-    "@types/module-alias": "^2.0.1",
-    "@types/prettier": "^2.7.2",
-    "@types/regenerator-runtime": "^0.13.1",
-    "typescript": "4.9.4",
-    "unbuild": "1.2.1"
+    "@types/prettier": "^2.7.2"
   }
 }

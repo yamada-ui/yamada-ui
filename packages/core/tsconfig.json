@@ -1,9 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "include": [
-    "src",
-    "index.ts",
-    "../components/motion/src/utils.ts",
-    "../components/motion/src/utils.ts"
-  ]
+  "include": ["src", "index.ts"]
 }

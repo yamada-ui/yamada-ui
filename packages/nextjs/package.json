@@ -10,10 +10,21 @@
     "dist"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "directory": "packages/nextjs"
+  },
+  "bugs": {
+    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+  },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",
-    "build": "JSX=1 tsup src/index.ts --dts",
-    "build:fast": "JSX=1 tsup src/index.ts",
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
     "clean": "rimraf dist .turbo",
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
@@ -35,5 +46,14 @@
     "next": ">=13",
     "@emotion/react": ">=11",
     "@yamada-ui/react": "workspace:*"
+  },
+  "clean-package": "../../clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": [
+      "cjs",
+      "esm"
+    ]
   }
 }

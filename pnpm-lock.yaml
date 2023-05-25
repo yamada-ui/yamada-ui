@@ -261,6 +261,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: ^0.2.0
         version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.0)(react@18.2.0)
+      '@yamada-ui/nextjs':
+        specifier: workspace:*
+        version: link:../../packages/nextjs
       '@yamada-ui/react':
         specifier: workspace:*
         version: link:../../packages/react

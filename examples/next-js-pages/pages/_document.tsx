@@ -1,7 +1,12 @@
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { ColorSchemeScript } from '@yamada-ui/react'
+import { customConfig } from 'theme'
 
 export default class Document extends NextDocument {
+  static getInitialProps(props: DocumentContext) {
+    return NextDocument.getInitialProps(props)
+  }
+
   render() {
     return (
       <Html lang='ja'>
@@ -11,8 +16,7 @@ export default class Document extends NextDocument {
         </Head>
 
         <body>
-          <ColorSchemeScript />
-
+          <ColorSchemeScript initialColorScheme={customConfig.initialColorScheme} />
           <Main />
           <NextScript />
         </body>

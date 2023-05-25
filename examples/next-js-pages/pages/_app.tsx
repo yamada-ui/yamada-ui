@@ -1,10 +1,10 @@
 import type { AppProps } from 'next/app'
-import { UIProvider } from '@yamada-ui/react'
+import { AppProvider } from 'contexts'
 
 export default ({ Component, pageProps }: AppProps) => {
   return (
-    <UIProvider>
+    <AppProvider>
       <Component {...pageProps} />
-    </UIProvider>
+    </AppProvider>
   )
 }

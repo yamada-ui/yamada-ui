@@ -4,7 +4,6 @@ import {
   extendTheme,
   localStorageManager,
   UIProvider,
-  useSafeLayoutEffect,
 } from '@yamada-ui/react'
 import { FC, PropsWithChildren, useCallback, useState } from 'react'
 import { customTheme, customConfig } from 'theme'
@@ -22,7 +21,11 @@ const [AppContextProvider, useAppContext] = createContext<AppContext>({
 })
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [isSystemColorScheme, setIsSystemColorScheme] = useState<boolean>(false)
+  const [isSystemColorScheme, setIsSystemColorScheme] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return true
+
+    return (localStorage?.getItem('ui-system-scheme') ?? 'true') === 'true'
+  })
 
   const config = extendConfig({
     ...customConfig,
@@ -32,10 +35,6 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   const changeSystemColorScheme = useCallback((flag: boolean) => {
     localStorage.setItem('ui-system-scheme', flag ? 'true' : 'false')
     setIsSystemColorScheme(flag)
-  }, [])
-
-  useSafeLayoutEffect(() => {
-    setIsSystemColorScheme((localStorage.getItem('ui-system-scheme') ?? 'true') === 'true')
   }, [])
 
   return (

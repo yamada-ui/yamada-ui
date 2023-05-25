@@ -12,3 +12,5 @@ export const defaultTheme = {
 export const defaultConfig = config
 
 export type DefaultTheme = typeof defaultTheme
+
+export default defaultTheme

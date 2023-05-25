@@ -4,8 +4,9 @@ import {
   extendTheme,
   localStorageManager,
   UIProvider,
+  useSafeLayoutEffect,
 } from '@yamada-ui/react'
-import { FC, PropsWithChildren, useCallback, useLayoutEffect, useState } from 'react'
+import { FC, PropsWithChildren, useCallback, useState } from 'react'
 import { customTheme, customConfig } from 'theme'
 
 type AppContext = {
@@ -33,7 +34,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
     setIsSystemColorScheme(flag)
   }, [])
 
-  useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     setIsSystemColorScheme((localStorage.getItem('ui-system-scheme') ?? 'true') === 'true')
   }, [])
 

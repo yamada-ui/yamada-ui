@@ -1,0 +1,35 @@
+{
+  "name": "@yamada-ui/test",
+  "version": "0.1.0",
+  "description": "Yamada UI test",
+  "keywords": [],
+  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "directory": "packages/test"
+  },
+  "bugs": {
+    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+  },
+  "dependencies": {
+    "@yamada-ui/providers": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.4.3",
+    "jest-axe": "^6.0.0"
+  },
+  "devDependencies": {
+    "react": "^18.0.0",
+    "@types/jest-axe": "^3.5.5"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

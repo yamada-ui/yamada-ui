@@ -128,7 +128,7 @@ https://www.conventionalcommits.org/ or check out the
    commit type. `scope` is just a short id that describes the scope of work.
 
 3. Make and commit your changes following the
-   [commit convention](https://github.com/chakra-ui/chakra-ui/blob/main/CONTRIBUTING.md#commit-convention).
+   [commit convention](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention).
 
 ## Use
 

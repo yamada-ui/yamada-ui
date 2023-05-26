@@ -23,7 +23,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
-    "jest-axe": "^6.0.0"
+    "jest-axe": "^7.0.1"
   },
   "devDependencies": {
     "react": "^18.0.0",

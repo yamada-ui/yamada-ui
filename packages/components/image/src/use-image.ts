@@ -16,11 +16,11 @@ export type UseImageProps = {
 
 type Status = 'loading' | 'failed' | 'pending' | 'loaded'
 
-export type FallbackStrategy = 'before' | 'after'
+export type FallbackStrategy = 'onError' | 'beforeLoadOrError'
 
 export const shouldShowFallbackImage = (status: Status, fallbackStrategy: FallbackStrategy) =>
-  (status !== 'loaded' && fallbackStrategy === 'before') ||
-  (status === 'failed' && fallbackStrategy === 'after')
+  (status !== 'loaded' && fallbackStrategy === 'beforeLoadOrError') ||
+  (status === 'failed' && fallbackStrategy === 'onError')
 
 export const useImage = ({
   loading,

@@ -23,7 +23,7 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
     loading,
     ignoreFallback,
     crossOrigin,
-    fallbackStrategy = 'before',
+    fallbackStrategy = 'beforeLoadOrError',
     referrerPolicy,
     size: boxSize,
     fit: objectFit,

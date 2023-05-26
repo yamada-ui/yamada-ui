@@ -6,7 +6,7 @@
 
 - `main` - This is a product branch.
 - `hotfix` - This is a branch for urgent fixes.
-- `dev` - This is a branch that primarily develops. If you want to create a branch, create it based on this.
+- `dev` - This is a branch that primarily develops. If you want to create a branch, create it based on this. We follow the convention `[type/scope]`. For example `fix/accordion-hook` or `docs/menu-typo`. `type` can be either `docs`, `fix`, `feat`, `build`, or any other conventional commit type. `scope` is just a short id that describes the scope of work.
 
 # Install
 
@@ -22,6 +22,12 @@ $ pnpm build
 $ pnpm sb
 ```
 
+# Run Test
+
+```sh
+$ pnpm test
+```
+
 # Generate Component Package
 
 ```sh
@@ -34,6 +40,22 @@ $ ? Does this use a provider?: No
 
 - Please enter package and component names in kebab case
 - If the provider is true, then it is wrapped with a provider that contains the style to be used by the children.
+
+# Generate Hook Package
+
+```sh
+$ pnpm gen:hook
+
+$ ? Enter custom hook name: use-yamada
+```
+
+- Please enter package and custom hook names in kebab case
+
+# Generate Theme tokens
+
+```sh
+$ pnpm gen:tokens
+```
 
 # Usage
 

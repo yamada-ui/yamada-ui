@@ -1,6 +1,6 @@
 const fs = require('fs').promises
 const path = require('path')
-const findPkgs = require('find-packages').default
+const { findPackages } = require('find-packages')
 
 const cwd = process.cwd()
 
@@ -34,7 +34,7 @@ module.exports = function (plop) {
 
     const { packageName } = answers
 
-    const [project] = await findPkgs(path.join(cwd, 'packages', 'react'))
+    const [project] = await findPackages(path.join(cwd, 'packages', 'react'))
 
     const { manifest } = project
 

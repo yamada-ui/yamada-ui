@@ -268,9 +268,9 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
 }
 
 type CheckboxOptions = {
-  icon?: Omit<HTMLUIProps<'span'>, 'children'> & { children: ReactElement }
-  input?: InputHTMLAttributes<HTMLInputElement>
-  label?: HTMLUIProps<'span'>
+  iconProps?: Omit<HTMLUIProps<'span'>, 'children'> & { children: ReactElement }
+  inputProps?: InputHTMLAttributes<HTMLInputElement>
+  labelProps?: HTMLUIProps<'span'>
 }
 
 export type CheckboxProps<Y extends string | number = string> = Omit<
@@ -299,9 +299,9 @@ export const Checkbox = forwardRef(
       isReadOnly = group?.isReadOnly ?? control.isReadOnly,
       isDisabled = group?.isDisabled ?? control.isDisabled,
       isInvalid = group?.isInvalid ?? control.isInvalid,
-      icon,
-      input,
-      label,
+      iconProps,
+      inputProps,
+      labelProps,
       children,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -324,7 +324,7 @@ export const Checkbox = forwardRef(
         group?.onChange && rest.value ? funcAll(group.onChange, rest.onChange) : rest.onChange,
     })
 
-    const cloneIcon = cloneElement(icon?.children ?? <CheckboxIcon />, {
+    const cloneIcon = cloneElement(iconProps?.children ?? <CheckboxIcon />, {
       __css: {
         opacity: isChecked || isIndeterminate ? 1 : 0,
         transform: isChecked || isIndeterminate ? 'scale(1)' : 'scale(0.95)',
@@ -366,7 +366,7 @@ export const Checkbox = forwardRef(
           'tabIndex',
         ])}
       >
-        <ui.input className='ui-checkbox-input' {...getInputProps(input, ref)} />
+        <ui.input className='ui-checkbox-input' {...getInputProps(inputProps, ref)} />
 
         <ui.span
           className='ui-checkbox-icon'
@@ -377,7 +377,7 @@ export const Checkbox = forwardRef(
             userSelect: 'none',
             ...styles.icon,
           }}
-          {...getIconProps(omitObject(icon ?? { children: undefined }, ['children']))}
+          {...getIconProps(omitObject(iconProps ?? { children: undefined }, ['children']))}
         >
           {cloneIcon}
         </ui.span>
@@ -385,7 +385,7 @@ export const Checkbox = forwardRef(
         <ui.span
           className='ui-checkbox-label'
           __css={{ ...styles.label }}
-          {...getLabelProps(label)}
+          {...getLabelProps(labelProps)}
         >
           {children}
         </ui.span>

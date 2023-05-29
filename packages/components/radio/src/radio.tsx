@@ -203,9 +203,9 @@ export const useRadio = <Y extends string | number = string>(props: UseRadioProp
 }
 
 type RadioOptions = {
-  icon?: HTMLUIProps<'span'>
-  input?: InputHTMLAttributes<HTMLInputElement>
-  label?: HTMLUIProps<'span'>
+  iconProps?: HTMLUIProps<'span'>
+  inputProps?: InputHTMLAttributes<HTMLInputElement>
+  labelProps?: HTMLUIProps<'span'>
 }
 
 export type RadioProps<Y extends string | number = string> = Omit<
@@ -231,9 +231,9 @@ export const Radio = forwardRef(
       isReadOnly = group?.isReadOnly ?? control.isReadOnly,
       isDisabled = group?.isDisabled ?? control.isDisabled,
       isInvalid = group?.isInvalid ?? control.isInvalid,
-      icon,
-      input,
-      label,
+      iconProps,
+      inputProps,
+      labelProps,
       children,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -274,11 +274,11 @@ export const Radio = forwardRef(
           ...styles.container,
         }}
       >
-        <ui.input className='ui-radio-input' {...getInputProps(input, ref)} />
+        <ui.input className='ui-radio-input' {...getInputProps(inputProps, ref)} />
 
         <ui.span
           className='ui-radio-icon'
-          {...getIconProps(icon)}
+          {...getIconProps(iconProps)}
           __css={{
             position: 'relative',
             display: 'inline-block',
@@ -287,7 +287,11 @@ export const Radio = forwardRef(
           }}
         />
 
-        <ui.span className='ui-radio-label' {...getLabelProps(label)} __css={{ ...styles.label }}>
+        <ui.span
+          className='ui-radio-label'
+          {...getLabelProps(labelProps)}
+          __css={{ ...styles.label }}
+        >
           {children}
         </ui.span>
       </ui.label>

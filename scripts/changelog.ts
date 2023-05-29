@@ -63,7 +63,7 @@ const getPrData = ({
 
 const getPrByNumber = async (pull_number: number): Promise<PullRequest> => {
   const { data } = await octokit.pulls.get({
-    owner: 'yamada-ui',
+    owner: 'hirotomoyamada',
     repo: 'yamada-ui',
     pull_number,
   })
@@ -74,7 +74,7 @@ const getPrByNumber = async (pull_number: number): Promise<PullRequest> => {
 const getLatestPr = async (): Promise<PullRequest> => {
   const { data } = await octokit.pulls.list({
     state: 'closed',
-    owner: 'yamada-ui',
+    owner: 'hirotomoyamada',
     repo: 'yamada-ui',
     base: 'main',
     head: 'yamada-ui:changeset-release/main',
@@ -87,7 +87,7 @@ const getLatestPr = async (): Promise<PullRequest> => {
 const getMergedPrs = async (): Promise<PullRequests> => {
   const { data } = await octokit.pulls.list({
     state: 'all',
-    owner: 'yamada-ui',
+    owner: 'hirotomoyamada',
     repo: 'yamada-ui',
     base: 'main',
     head: 'yamada-ui:changeset-release/main',

@@ -1,4 +1,4 @@
-Thanks for for your interest in contribute to Yamada UI 😎, you are amazing
+## Thanks for for your interest in contribute to Yamada UI 😎, you are amazing
 
 When it comes to open source, there are different ways you can contribute, all of which are valuable. Here are some guidelines that should help you as you prepare your contribution.
 

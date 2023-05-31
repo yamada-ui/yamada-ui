@@ -6,9 +6,6 @@ const main = async () => {
 
   await Promise.allSettled(
     packages.map(async ({ dir, manifest }) => {
-      // const files = await fs.readdir(`${dir}/src`)
-      // const hasTsx = files.some((f) => f.endsWith('.tsx'))
-
       const data = {
         ...manifest,
         // scripts: {

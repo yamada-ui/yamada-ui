@@ -14,11 +14,10 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "preserveSymlinks": true
+    "downlevelIteration": true
   },
   "include": ["@types", "**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "examples"],
+  "exclude": ["**/node_modules", "examples"],
   "ts-node": {
     "transpileOnly": true,
     "compilerOptions": {

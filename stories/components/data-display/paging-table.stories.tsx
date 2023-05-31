@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { ComponentStory } from '@storybook/react'
 import {
   PagingTable,
   Column,
@@ -18,8 +18,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export default {
   title: 'Components / Data Display / PagingTable',
-  component: PagingTable,
-} as ComponentMeta<typeof PagingTable>
+}
 
 type Data = {
   id: string
@@ -603,19 +602,23 @@ export const withManualPagination: ComponentStory<typeof PagingTable> = () => {
 
   const hasData = data.length
 
-  return hasData ? (
-    <PagingTable
-      columns={columns}
-      data={data}
-      manualPagination
-      pageCount={pageCount}
-      rowId='id'
-      pageIndex={pageIndex}
-      onChangePageIndex={onChangePageIndex}
-      pageSize={pageSize}
-      onChangePageSize={onChangePageSize}
-    />
-  ) : null
+  return (
+    <>
+      {hasData ? (
+        <PagingTable
+          columns={columns}
+          data={data}
+          manualPagination
+          pageCount={pageCount}
+          rowId='id'
+          pageIndex={pageIndex}
+          onChangePageIndex={onChangePageIndex}
+          pageSize={pageSize}
+          onChangePageSize={onChangePageSize}
+        />
+      ) : null}
+    </>
+  )
 }
 
 export const withFormatPageSizeLabel: ComponentStory<typeof PagingTable> = () => {

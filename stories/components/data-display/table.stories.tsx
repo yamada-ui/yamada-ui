@@ -1,11 +1,10 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { ComponentStory } from '@storybook/react'
 import { Table, Column, TableCaption, Sort, Button, Text } from '@yamada-ui/react'
 import { useMemo, useState } from 'react'
 
 export default {
   title: 'Components / Data Display / Table',
-  component: Table,
-} as ComponentMeta<typeof Table>
+}
 
 type Data = {
   name: string

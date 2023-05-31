@@ -404,7 +404,7 @@ export const isReadOnly: ComponentStory<typeof SegmentedControl> = () => {
 }
 
 export const customControl: ComponentStory<typeof SegmentedControl> = () => {
-  const [value, onChange] = useState<string | number>('孫悟空')
+  const [value, onChange] = useState<string>('孫悟空')
 
   return (
     <SegmentedControl value={value} onChange={onChange}>

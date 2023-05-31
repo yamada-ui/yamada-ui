@@ -131,4 +131,4 @@ https://www.conventionalcommits.org/ or check out the
 By contributing your code to the yamada-ui GitHub repository, you agree to
 license your contribution under the MIT license.
 
-`Thank you for reading till the end. I love you too. 💖`
+### Thank you for reading till the end. I love you too. 💖

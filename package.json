@@ -1,7 +1,6 @@
 {
   "name": "yamada-ui",
   "private": true,
-  "version": "0.1.0",
   "engines": {
     "node": "18"
   },
@@ -31,6 +30,7 @@
     "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts",
     "gen:component": "plop component && pnpm install",
     "gen:hook": "plop hook && pnpm install",
+    "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
     "changelog": "tsx scripts/changelog.ts",
     "changelog:latest": "tsx scripts/changelog.ts --latest",
     "changelog:commit": "git add . && git commit -am 'docs: add changelog' && git push",

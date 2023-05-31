@@ -15,13 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 8
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install
+        uses: ./.github/composite-actions/install
 
       - name: Build Storybook
         run: pnpm build:sb

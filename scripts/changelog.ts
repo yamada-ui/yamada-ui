@@ -4,7 +4,7 @@ import { Octokit, RestEndpointMethodTypes } from '@octokit/rest'
 type PullRequests = RestEndpointMethodTypes['pulls']['list']['response']['data']
 type PullRequest = PullRequests[number]
 
-export type PrData = {
+export type PullRequestData = {
   id: number
   url: string
   body: string
@@ -14,23 +14,25 @@ export type PrData = {
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-const dateFormatOptions: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-}
-
-const getPrData = ({
-  body: content = '',
+const getPullRequestData = ({
+  body: content,
   merged_at,
   updated_at,
   number: id,
   html_url: url,
-}: Omit<PullRequest, 'body'> & { body: string | undefined }): PrData => {
+}: PullRequest): PullRequestData | undefined => {
+  if (!content) return
+
+  content ??= ''
+
   const parts = content.split('# Releases')
   content = parts[1] || content
 
-  const date = new Date(merged_at ?? updated_at).toLocaleDateString('ja-JP', dateFormatOptions)
+  const date = new Date(merged_at ?? updated_at).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   const match = content.match(/## @yamada-ui\/react\@(?<version>\d.+)/)
   const version = match?.groups?.version
@@ -54,7 +56,6 @@ const getPrData = ({
     `releaseDate: ${date}`,
     `version: ${version}`,
     '---',
-    '\n',
     `${sanitized}`,
   ].join('\n')
 
@@ -77,7 +78,7 @@ const getLatestPr = async (): Promise<PullRequest> => {
     owner: 'hirotomoyamada',
     repo: 'yamada-ui',
     base: 'main',
-    head: 'yamada-ui:changeset-release/main',
+    head: 'hirotomoyamada:changeset-release/main',
     per_page: 1,
   })
 
@@ -90,14 +91,14 @@ const getMergedPrs = async (): Promise<PullRequests> => {
     owner: 'hirotomoyamada',
     repo: 'yamada-ui',
     base: 'main',
-    head: 'yamada-ui:changeset-release/main',
+    head: 'hirotomoyamada:changeset-release/main',
     per_page: 100,
   })
 
-  return (data as PullRequests[]).filter(({ merged_at }) => merged_at)
+  return (data as PullRequests).filter(({ merged_at }) => merged_at)
 }
 
-const writePrFile = async ({ version, body }: PrData): Promise<void> => {
+const writePrFile = async ({ version, body }: PullRequestData): Promise<void> => {
   if (!fs.existsSync('.changelog')) fs.mkdirSync('.changelog')
 
   return fs.promises.writeFile(`.changelog/v${version}.mdx`, body)
@@ -105,19 +106,22 @@ const writePrFile = async ({ version, body }: PrData): Promise<void> => {
 
 export const manifest = {
   path: '.changelog/manifest.json',
-  async write(data: PrData[]) {
+
+  async write(data: PullRequestData[]) {
     data = data.sort((a, b) => b.id - a.id)
 
     return fs.promises.writeFile(this.path, JSON.stringify(data, null, 2))
   },
-  async read(): Promise<PrData[]> {
+
+  async read(): Promise<PullRequestData[]> {
     try {
       return JSON.parse(await fs.promises.readFile(this.path, 'utf8'))
     } catch (error) {
       return []
     }
   },
-  async update(data: PrData) {
+
+  async update(data: PullRequestData) {
     const prevData = await this.read()
 
     return this.write([data, ...prevData])
@@ -129,47 +133,48 @@ const writeReadme = async (): Promise<void> => {
   const sortedData = data.map(
     ({ date, version }) => `### ${date}: [v${version}](/.changelog/v${version}.mdx)`,
   )
-  const [latestRelease, ...otherReleases] = sortedData
+  const [latest, ...others] = sortedData
 
-  const readme = [
-    '# Changelog',
-    '\n',
-    '## Latest Release',
-    latestRelease,
-    '\n',
-    '## Previous Releases',
-    ...otherReleases,
+  const body = [
+    '# Changelog\n',
+    '## Latest Release\n',
+    latest,
+    '\n## Previous Releases\n',
+    ...others,
   ].join('\n')
 
-  await fs.promises.writeFile('CHANGELOG.md', readme)
+  await fs.promises.writeFile('CHANGELOG.md', body)
 }
 
 const sync = async (): Promise<void> => {
   const prs = await getMergedPrs()
-  const data = prs.map(getPrData) as PrData[]
+  const data = prs.map(getPullRequestData) as PullRequestData[]
 
   await Promise.allSettled([...data.map(writePrFile), manifest.write(data)])
 
   await writeReadme()
 }
 
-const updateFiles = async (data: PrData): Promise<void> => {
+const updateFiles = async (data: PullRequestData): Promise<void> => {
   await writePrFile(data)
+
   await manifest.update(data)
+
   await writeReadme()
 }
 
 const syncByNumber = async (prNumber: number): Promise<void> => {
-  const data = getPrData(await getPrByNumber(prNumber))
+  const data = getPullRequestData(await getPrByNumber(prNumber))
 
-  await updateFiles(data)
+  if (data) await updateFiles(data)
 }
 
 const syncLatest = async (): Promise<void> => {
   const pr = await getLatestPr()
-  const data = getPrData(pr)
 
-  await updateFiles(data)
+  const data = getPullRequestData(pr)
+
+  if (data) await updateFiles(data)
 }
 
 const arg = process.argv[2] ?? ''

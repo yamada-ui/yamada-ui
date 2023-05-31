@@ -28,7 +28,8 @@
     "clean": "rimraf dist .turbo",
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "postpack": "clean-package restore",
+    "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
     "@yamada-ui/button": "workspace:*",

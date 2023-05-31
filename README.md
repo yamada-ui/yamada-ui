@@ -2,6 +2,14 @@
   <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
+<p align="center">
+  <img alt="Github Checks" src="https://badgen.net/github/checks/hirotomoyamada/yamada-ui/main"/>
+  <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
+    <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
+  </a>
+  <img alt="Github Stars" src="https://badgen.net/github/stars/hirotomoyamada/yamada-ui" />
+</p>
+
 ## Branch
 
 - `main` - This is a product branch.

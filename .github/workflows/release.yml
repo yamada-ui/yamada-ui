@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  push:
+    paths:
+      - '.changeset/**'
+      - 'packages/**'
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Setup Git User
+        shell: bash
+        run: |
+          git config --global user.email "hirotomo.yamada@avap.co.jp"
+          git config --global user.name "hirotomoyamada"
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Create release PR or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm release
+          commit: 'ci(changesets): version packages'
+          setupGitUser: false
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create @dev release
+        if: steps.changesets.outputs.published != 'true'
+        run: |
+          git checkout main
+          pnpm version:dev
+          pnpm release:dev
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update changelog
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm changelog:latest
+          pnpm changelog:format
+          pnpm changelog:commit

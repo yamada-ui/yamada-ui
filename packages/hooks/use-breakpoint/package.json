@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Yamada UI useBreakpoint custom hook",
   "keywords": [],
-  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",
   "files": [

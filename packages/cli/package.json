@@ -2,8 +2,17 @@
   "name": "@yamada-ui/cli",
   "version": "0.1.0",
   "description": "Generate theme tokens for autocomplete",
-  "keywords": [],
-  "author": "hirotomoyamada <hirotomo.yamada@avap.co.jp>",
+  "keywords": [
+    "theme",
+    "theming",
+    "typings",
+    "generator",
+    "yamada ui",
+    "yamada",
+    "ui mode",
+    "ui"
+  ],
+  "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "dist/index.js",
   "files": [

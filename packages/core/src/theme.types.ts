@@ -122,7 +122,7 @@ export type ThemeConfig = {
 
 export type LayerStyles = Record<string, UIStyle>
 export type TextStyles = Record<string, UIStyle>
-export type Components = Record<string, ComponentStyle>
+export type Components = Record<string, ComponentStyle | ComponentMultiStyle>
 export type Semantics = Omit<UsageTheme, 'styles' | 'components' | 'semantics'>
 
 export type ThemeTokens = {

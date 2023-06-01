@@ -17,7 +17,7 @@ const InputElement = forwardRef<InputElementProps, 'div'>(
       position: 'absolute',
       top: '0',
       [placement === 'left' ? 'insetStart' : 'insetEnd']: '0',
-      zIndex: 1,
+      zIndex: 2,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

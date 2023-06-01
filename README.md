@@ -23,7 +23,7 @@ Yamada UI is a React UI component library that streamlines the development of cu
 
 ## Respect
 
-Yamada UI has drawn a lot of inspiration from Chakra UI, MUI and Mantine UI. This has brought me wonderful experiences in my life. I am deeply grateful to Segun Adebayo and all the gods who have given me such experiences. And I love them.
+Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/chakra-ui/chakra-ui), [MUI](https://github.com/mui/material-ui) and [Mantine UI](https://github.com/mantinedev/mantine). This has brought me wonderful experiences in my life. I am deeply grateful to Segun Adebayo and all the gods who have given me such experiences. And I love them.
 
 ## Documentation
 

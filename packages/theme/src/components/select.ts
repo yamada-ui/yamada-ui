@@ -132,10 +132,6 @@ export const Select: ComponentMultiStyle = {
           _hover: {
             borderColor: ['gray.300', 'whiteAlpha.400'],
           },
-          _focus: {
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
           _active: {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
@@ -172,10 +168,6 @@ export const Select: ComponentMultiStyle = {
           _hover: {
             bg: ['gray.200', 'whiteAlpha.100'],
           },
-          _focus: {
-            bg: 'transparent',
-            borderColor: focusBorderColor,
-          },
           _active: {
             bg: 'transparent',
             borderColor: focusBorderColor,
@@ -210,10 +202,6 @@ export const Select: ComponentMultiStyle = {
           rounded: '0',
           px: '0',
           bg: 'transparent',
-          _focus: {
-            borderColor: focusBorderColor,
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
-          },
           _active: {
             borderColor: focusBorderColor,
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,

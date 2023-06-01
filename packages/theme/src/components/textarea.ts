@@ -45,11 +45,6 @@ export const Textarea: ComponentStyle = {
           boxShadow: 'none !important',
           userSelect: 'all',
         },
-        _focus: {
-          zIndex: 1,
-          borderColor: focusBorderColor,
-          boxShadow: `0 0 0 1px ${focusBorderColor}`,
-        },
         _invalid: {
           borderColor: errorBorderColor,
           boxShadow: `0 0 0 1px ${errorBorderColor}`,
@@ -85,10 +80,6 @@ export const Textarea: ComponentStyle = {
           boxShadow: 'none !important',
           userSelect: 'all',
         },
-        _focus: {
-          bg: 'transparent',
-          borderColor: focusBorderColor,
-        },
         _invalid: {
           borderColor: errorBorderColor,
         },
@@ -121,10 +112,6 @@ export const Textarea: ComponentStyle = {
         _readOnly: {
           boxShadow: 'none !important',
           userSelect: 'all',
-        },
-        _focus: {
-          borderColor: focusBorderColor,
-          boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
         },
         _invalid: {
           borderColor: errorBorderColor,

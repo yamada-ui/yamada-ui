@@ -101,7 +101,7 @@ https://www.conventionalcommits.org/ or check out the
 
 1. Fork of the yamada-ui repository and clone your fork
 
-2. Create a new branch out of the `dev` branch. We follow the convention
+2. Create a new branch out of the `main` branch. We follow the convention
    `[type/scope]`. For example `fix/accordion-hook` or `docs/menu-typo`. `type`
    can be either `docs`, `fix`, `feat`, `build`, or any other conventional
    commit type. `scope` is just a short id that describes the scope of work.

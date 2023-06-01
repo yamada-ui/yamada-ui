@@ -82,6 +82,7 @@ export const Button = forwardRef<ButtonProps, 'button'>(({ children, ...props },
   return (
     <ui.button
       ref={ref}
+      as={as}
       className={cx('ui-button', className)}
       type={type ?? defaultType}
       disabled={isDisabled || isLoading}

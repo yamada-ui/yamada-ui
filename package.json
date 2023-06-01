@@ -91,6 +91,7 @@
     "@typescript-eslint/parser": "5.59.7",
     "@yamada-ui/cli": "workspace:*",
     "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/test": "workspace:*",
     "eslint": "8.41.0",
     "eslint-config-airbnb-typescript": "17.0.0",

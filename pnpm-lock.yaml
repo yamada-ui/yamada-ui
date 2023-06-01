@@ -153,6 +153,9 @@ importers:
       '@yamada-ui/test':
         specifier: workspace:*
         version: link:packages/test
+      '@yamada-ui/theme':
+        specifier: workspace:*
+        version: link:packages/theme
       eslint:
         specifier: 8.41.0
         version: 8.41.0

@@ -23,7 +23,7 @@
     "typecheck": "tsc --noEmit",
     "sb": "start-storybook -p 6006",
     "sb:serve": "pnpx serve storybook-static",
-    "prebuild": "pnpm gen:tokens",
+    "prebuild": "pnpm --prefix packages/cli build && pnpm gen:tokens",
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",
     "build:sb": "pnpm build && build-storybook",

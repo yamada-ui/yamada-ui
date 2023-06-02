@@ -84,7 +84,6 @@ export const GridItem = forwardRef<GridItemProps, 'div'>(
     ref,
   ) => {
     const css = {
-      display: 'grid',
       gridColumn: replaceObject(colSpan, (value) =>
         value != null ? `span ${value}/span ${value}` : undefined,
       ),

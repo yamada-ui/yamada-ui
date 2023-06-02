@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-pan-event",
   "version": "0.1.0",
   "description": "Yamada UI usePanEvent custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-pan-event"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

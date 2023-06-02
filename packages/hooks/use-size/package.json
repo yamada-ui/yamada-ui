@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-size",
   "version": "0.1.0",
   "description": "Yamada UI useSize custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-size"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

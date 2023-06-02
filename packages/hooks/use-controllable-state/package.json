@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-controllable-state",
   "version": "0.1.0",
   "description": "Yamada UI useControllableState custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-controllable-state"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

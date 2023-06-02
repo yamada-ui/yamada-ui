@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-value",
   "version": "0.1.0",
   "description": "Yamada UI useValue custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-value"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-previous",
   "version": "0.1.0",
   "description": "Yamada UI usePrevious custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-previous"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

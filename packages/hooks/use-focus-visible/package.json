@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-focus-visible",
   "version": "0.1.0",
   "description": "Yamada UI useFocusVisible custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-focus-visible"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-token",
   "version": "0.1.0",
   "description": "Yamada UI useToken custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-token"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

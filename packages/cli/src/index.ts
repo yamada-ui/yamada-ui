@@ -52,7 +52,7 @@ export const run = async () => {
     })
 
   program.on('--help', () => {
-    console.info(`Example call:\n\n$ yamada-cli tokens theme.ts`)
+    console.info(`\nExample call:\n  $ yamada-cli tokens theme.ts\n`)
   })
 
   program.parse()

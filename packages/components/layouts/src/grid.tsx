@@ -85,8 +85,12 @@ export const GridItem = forwardRef<GridItemProps, 'div'>(
   ) => {
     const css = {
       display: 'grid',
-      gridColumn: replaceObject(colSpan, (value) => `span ${value}/span ${value}`),
-      gridRow: replaceObject(rowSpan, (value) => `span ${value}/span ${value}`),
+      gridColumn: replaceObject(colSpan, (value) =>
+        value != null ? `span ${value}/span ${value}` : undefined,
+      ),
+      gridRow: replaceObject(rowSpan, (value) =>
+        value != null ? `span ${value}/span ${value}` : undefined,
+      ),
       gridColumnStart,
       gridColumnEnd,
       gridRowStart,

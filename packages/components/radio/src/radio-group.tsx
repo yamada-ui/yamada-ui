@@ -134,7 +134,7 @@ export const RadioGroup = forwardRef(
       className,
       size,
       variant,
-      colorStyle,
+      colorScheme,
       children,
       direction = 'column',
       gap,
@@ -151,7 +151,7 @@ export const RadioGroup = forwardRef(
           {
             size,
             variant,
-            colorStyle,
+            colorScheme,
             isRequired,
             isReadOnly,
             isDisabled,

@@ -1,7 +1,7 @@
 export type UITheme = {
   layerStyles: string
   textStyles: string
-  colorStyles: string
+  colorSchemes: string
   borders: string
   colors: string
   breakpoints: string

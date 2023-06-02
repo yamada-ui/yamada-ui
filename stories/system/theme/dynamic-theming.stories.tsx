@@ -50,16 +50,16 @@ export const basic = () => {
     return (
       <VStack>
         <HStack>
-          <Button colorStyle='gray' onClick={() => changeThemeScheme('Default')}>
+          <Button colorScheme='gray' onClick={() => changeThemeScheme('Default')}>
             Default Theme
           </Button>
-          <Button colorStyle='pink' onClick={() => changeThemeScheme('Pink')}>
+          <Button colorScheme='pink' onClick={() => changeThemeScheme('Pink')}>
             Pink Theme
           </Button>
-          <Button colorStyle='purple' onClick={() => changeThemeScheme('Purple')}>
+          <Button colorScheme='purple' onClick={() => changeThemeScheme('Purple')}>
             Purple Theme
           </Button>
-          <Button colorStyle='green' onClick={() => changeThemeScheme('Green')}>
+          <Button colorScheme='green' onClick={() => changeThemeScheme('Green')}>
             Green Theme
           </Button>
         </HStack>
@@ -75,30 +75,30 @@ export const basic = () => {
           <Heading>{themeScheme} Theme</Heading>
 
           <Wrap gap='md'>
-            <Badge colorStyle='primary'>Primary</Badge>
-            <Badge colorStyle='secondary'>Secondary</Badge>
-            <Badge colorStyle='warning'>Warning</Badge>
-            <Badge colorStyle='danger'>Danger</Badge>
+            <Badge colorScheme='primary'>Primary</Badge>
+            <Badge colorScheme='secondary'>Secondary</Badge>
+            <Badge colorScheme='warning'>Warning</Badge>
+            <Badge colorScheme='danger'>Danger</Badge>
           </Wrap>
 
           <Wrap gap='md'>
-            <Tag colorStyle='primary'>Primary</Tag>
-            <Tag colorStyle='secondary'>Secondary</Tag>
-            <Tag colorStyle='warning'>Warning</Tag>
-            <Tag colorStyle='danger'>Danger</Tag>
+            <Tag colorScheme='primary'>Primary</Tag>
+            <Tag colorScheme='secondary'>Secondary</Tag>
+            <Tag colorScheme='warning'>Warning</Tag>
+            <Tag colorScheme='danger'>Danger</Tag>
           </Wrap>
 
           <Wrap gap='md'>
-            <Button colorStyle='primary' size='sm'>
+            <Button colorScheme='primary' size='sm'>
               Primary
             </Button>
-            <Button colorStyle='secondary' size='sm'>
+            <Button colorScheme='secondary' size='sm'>
               Secondary
             </Button>
-            <Button colorStyle='warning' size='sm'>
+            <Button colorScheme='warning' size='sm'>
               Warning
             </Button>
-            <Button colorStyle='danger' size='sm'>
+            <Button colorScheme='danger' size='sm'>
               Danger
             </Button>
           </Wrap>
@@ -145,16 +145,16 @@ export const useArray = () => {
     return (
       <VStack>
         <HStack>
-          <Button colorStyle='gray' onClick={() => changeThemeScheme(0)}>
+          <Button colorScheme='gray' onClick={() => changeThemeScheme(0)}>
             Default Theme
           </Button>
-          <Button colorStyle='pink' onClick={() => changeThemeScheme(1)}>
+          <Button colorScheme='pink' onClick={() => changeThemeScheme(1)}>
             Pink Theme
           </Button>
-          <Button colorStyle='purple' onClick={() => changeThemeScheme(2)}>
+          <Button colorScheme='purple' onClick={() => changeThemeScheme(2)}>
             Purple Theme
           </Button>
-          <Button colorStyle='green' onClick={() => changeThemeScheme(3)}>
+          <Button colorScheme='green' onClick={() => changeThemeScheme(3)}>
             Green Theme
           </Button>
         </HStack>
@@ -187,30 +187,30 @@ export const useArray = () => {
           </Heading>
 
           <Wrap gap='md'>
-            <Badge colorStyle='primary'>Primary</Badge>
-            <Badge colorStyle='secondary'>Secondary</Badge>
-            <Badge colorStyle='warning'>Warning</Badge>
-            <Badge colorStyle='danger'>Danger</Badge>
+            <Badge colorScheme='primary'>Primary</Badge>
+            <Badge colorScheme='secondary'>Secondary</Badge>
+            <Badge colorScheme='warning'>Warning</Badge>
+            <Badge colorScheme='danger'>Danger</Badge>
           </Wrap>
 
           <Wrap gap='md'>
-            <Tag colorStyle='primary'>Primary</Tag>
-            <Tag colorStyle='secondary'>Secondary</Tag>
-            <Tag colorStyle='warning'>Warning</Tag>
-            <Tag colorStyle='danger'>Danger</Tag>
+            <Tag colorScheme='primary'>Primary</Tag>
+            <Tag colorScheme='secondary'>Secondary</Tag>
+            <Tag colorScheme='warning'>Warning</Tag>
+            <Tag colorScheme='danger'>Danger</Tag>
           </Wrap>
 
           <Wrap gap='md'>
-            <Button colorStyle='primary' size='sm'>
+            <Button colorScheme='primary' size='sm'>
               Primary
             </Button>
-            <Button colorStyle='secondary' size='sm'>
+            <Button colorScheme='secondary' size='sm'>
               Secondary
             </Button>
-            <Button colorStyle='warning' size='sm'>
+            <Button colorScheme='warning' size='sm'>
               Warning
             </Button>
-            <Button colorStyle='danger' size='sm'>
+            <Button colorScheme='danger' size='sm'>
               Danger
             </Button>
           </Wrap>

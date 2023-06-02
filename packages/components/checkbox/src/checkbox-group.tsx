@@ -96,7 +96,7 @@ export const CheckboxGroup = forwardRef(
       className,
       size,
       variant,
-      colorStyle,
+      colorScheme,
       children,
       direction = 'column',
       gap,
@@ -113,7 +113,7 @@ export const CheckboxGroup = forwardRef(
           {
             size,
             variant,
-            colorStyle,
+            colorScheme,
             isRequired,
             isReadOnly,
             isDisabled,

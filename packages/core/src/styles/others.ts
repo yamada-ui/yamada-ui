@@ -27,7 +27,7 @@ export const others: Configs = {
   },
 }
 
-export type OthersProps<Y = 'responsive', M = 'colorScheme'> = {
+export type OthersProps<Y = 'responsive', M = 'colorMode'> = {
   layerStyle?: Token<StringLiteral, 'layerStyles', Y, M>
   textStyle?: Token<StringLiteral, 'textStyles', Y, M>
 }

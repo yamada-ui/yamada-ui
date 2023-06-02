@@ -183,7 +183,7 @@ export const withVariant: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Table> = () => {
+export const withColorScheme: ComponentStory<typeof Table> = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -235,51 +235,51 @@ export const withColorStyle: ComponentStory<typeof Table> = () => {
 
   return (
     <>
-      <Table variant='striped' colorStyle='primary' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='primary' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='secondary' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='secondary' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='warning' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='warning' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='danger' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='danger' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='link' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='link' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='gray' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='gray' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='red' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='red' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='orange' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='orange' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='yellow' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='yellow' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='green' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='green' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='teal' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='teal' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='blue' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='blue' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='cyan' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='cyan' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='purple' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='purple' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='pink' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='pink' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='linkedin' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='linkedin' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='facebook' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='facebook' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='messenger' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='messenger' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='whatsapp' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='whatsapp' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='twitter' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='twitter' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='line' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='line' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='instagram' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='instagram' columns={columns} data={data} />
 
-      <Table variant='striped' colorStyle='youtube' columns={columns} data={data} />
+      <Table variant='striped' colorScheme='youtube' columns={columns} data={data} />
     </>
   )
 }
@@ -1496,7 +1496,7 @@ export const withCheckboxProps: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return <Table columns={columns} data={data} checkboxProps={{ colorStyle: 'red' }} />
+  return <Table columns={columns} data={data} checkboxProps={{ colorScheme: 'red' }} />
 }
 
 export const withSelectColumnProps: ComponentStory<typeof Table> = () => {

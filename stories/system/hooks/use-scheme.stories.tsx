@@ -1,11 +1,11 @@
-import { Box, useColorScheme, useColorSchemetValue } from '@yamada-ui/react'
+import { Box, useColorMode, useColorModetValue } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Hooks / useColorScheme',
+  title: 'System / Hooks / useColorMode',
 }
 
 export const basic = () => {
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   return (
     <Box
@@ -16,15 +16,15 @@ export const basic = () => {
       transitionProperty='all'
       transitionDuration='normal'
     >
-      The current colorScheme is "{colorScheme}"
+      The current colorMode is "{colorMode}"
     </Box>
   )
 }
 
 export const withValue = () => {
-  const { colorScheme } = useColorScheme()
-  const bg = useColorSchemetValue('blackAlpha.800', 'whiteAlpha.800')
-  const color = useColorSchemetValue('whiteAlpha.800', 'blackAlpha.800')
+  const { colorMode } = useColorMode()
+  const bg = useColorModetValue('blackAlpha.800', 'whiteAlpha.800')
+  const color = useColorModetValue('whiteAlpha.800', 'blackAlpha.800')
 
   return (
     <Box
@@ -35,7 +35,7 @@ export const withValue = () => {
       transitionProperty='all'
       transitionDuration='normal'
     >
-      The current colorScheme is "{colorScheme}"
+      The current colorMode is "{colorMode}"
     </Box>
   )
 }

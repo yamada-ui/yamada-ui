@@ -148,7 +148,7 @@ export const withVariant: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
+export const withColorScheme: ComponentStory<typeof PagingTable> = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -177,7 +177,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
     <>
       <PagingTable
         variant='striped'
-        colorStyle='primary'
+        colorScheme='primary'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -185,7 +185,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='secondary'
+        colorScheme='secondary'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -193,7 +193,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='warning'
+        colorScheme='warning'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -201,7 +201,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='danger'
+        colorScheme='danger'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -209,7 +209,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='link'
+        colorScheme='link'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -217,7 +217,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='gray'
+        colorScheme='gray'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -225,7 +225,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='red'
+        colorScheme='red'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -233,7 +233,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='orange'
+        colorScheme='orange'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -241,7 +241,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='yellow'
+        colorScheme='yellow'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -249,7 +249,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='green'
+        colorScheme='green'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -257,7 +257,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='teal'
+        colorScheme='teal'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -265,7 +265,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='blue'
+        colorScheme='blue'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -273,7 +273,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='cyan'
+        colorScheme='cyan'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -281,7 +281,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='purple'
+        colorScheme='purple'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -289,7 +289,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='pink'
+        colorScheme='pink'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -297,7 +297,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='linkedin'
+        colorScheme='linkedin'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -305,7 +305,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='facebook'
+        colorScheme='facebook'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -313,7 +313,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='messenger'
+        colorScheme='messenger'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -321,7 +321,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='whatsapp'
+        colorScheme='whatsapp'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -329,7 +329,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='twitter'
+        colorScheme='twitter'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -337,7 +337,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='line'
+        colorScheme='line'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -345,7 +345,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='instagram'
+        colorScheme='instagram'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -353,7 +353,7 @@ export const withColorStyle: ComponentStory<typeof PagingTable> = () => {
 
       <PagingTable
         variant='striped'
-        colorStyle='youtube'
+        colorScheme='youtube'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -700,7 +700,7 @@ export const customProps: ComponentStory<typeof PagingTable> = () => {
         columns={columns}
         data={data}
         defaultPageSize={5}
-        paginationProps={{ variant: 'outline', colorStyle: 'pink' }}
+        paginationProps={{ variant: 'outline', colorScheme: 'pink' }}
       />
 
       <PagingTable

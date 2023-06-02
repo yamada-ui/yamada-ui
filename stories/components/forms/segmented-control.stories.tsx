@@ -69,7 +69,7 @@ export const withVariant: ComponentStory<typeof SegmentedControl> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof SegmentedControl> = () => {
+export const withColorScheme: ComponentStory<typeof SegmentedControl> = () => {
   return (
     <Grid w='full' templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(1, 1fr)' }} gap='md'>
       <SegmentedControl variant='basic'>
@@ -78,139 +78,139 @@ export const withColorStyle: ComponentStory<typeof SegmentedControl> = () => {
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='primary'>
+      <SegmentedControl variant='basic' colorScheme='primary'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='secondary'>
+      <SegmentedControl variant='basic' colorScheme='secondary'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='warning'>
+      <SegmentedControl variant='basic' colorScheme='warning'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='danger'>
+      <SegmentedControl variant='basic' colorScheme='danger'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='link'>
+      <SegmentedControl variant='basic' colorScheme='link'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='gray'>
+      <SegmentedControl variant='basic' colorScheme='gray'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='red'>
+      <SegmentedControl variant='basic' colorScheme='red'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='orange'>
+      <SegmentedControl variant='basic' colorScheme='orange'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='yellow'>
+      <SegmentedControl variant='basic' colorScheme='yellow'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='green'>
+      <SegmentedControl variant='basic' colorScheme='green'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='teal'>
+      <SegmentedControl variant='basic' colorScheme='teal'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='blue'>
+      <SegmentedControl variant='basic' colorScheme='blue'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='cyan'>
+      <SegmentedControl variant='basic' colorScheme='cyan'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='purple'>
+      <SegmentedControl variant='basic' colorScheme='purple'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='pink'>
+      <SegmentedControl variant='basic' colorScheme='pink'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='linkedin'>
+      <SegmentedControl variant='basic' colorScheme='linkedin'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='facebook'>
+      <SegmentedControl variant='basic' colorScheme='facebook'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='messenger'>
+      <SegmentedControl variant='basic' colorScheme='messenger'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='whatsapp'>
+      <SegmentedControl variant='basic' colorScheme='whatsapp'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='twitter'>
+      <SegmentedControl variant='basic' colorScheme='twitter'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='line'>
+      <SegmentedControl variant='basic' colorScheme='line'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='instagram'>
+      <SegmentedControl variant='basic' colorScheme='instagram'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorStyle='youtube'>
+      <SegmentedControl variant='basic' colorScheme='youtube'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
@@ -222,139 +222,139 @@ export const withColorStyle: ComponentStory<typeof SegmentedControl> = () => {
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='primary'>
+      <SegmentedControl variant='rounded' colorScheme='primary'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='secondary'>
+      <SegmentedControl variant='rounded' colorScheme='secondary'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='warning'>
+      <SegmentedControl variant='rounded' colorScheme='warning'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='danger'>
+      <SegmentedControl variant='rounded' colorScheme='danger'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='link'>
+      <SegmentedControl variant='rounded' colorScheme='link'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='gray'>
+      <SegmentedControl variant='rounded' colorScheme='gray'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='red'>
+      <SegmentedControl variant='rounded' colorScheme='red'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='orange'>
+      <SegmentedControl variant='rounded' colorScheme='orange'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='yellow'>
+      <SegmentedControl variant='rounded' colorScheme='yellow'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='green'>
+      <SegmentedControl variant='rounded' colorScheme='green'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='teal'>
+      <SegmentedControl variant='rounded' colorScheme='teal'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='blue'>
+      <SegmentedControl variant='rounded' colorScheme='blue'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='cyan'>
+      <SegmentedControl variant='rounded' colorScheme='cyan'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='purple'>
+      <SegmentedControl variant='rounded' colorScheme='purple'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='pink'>
+      <SegmentedControl variant='rounded' colorScheme='pink'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='linkedin'>
+      <SegmentedControl variant='rounded' colorScheme='linkedin'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='facebook'>
+      <SegmentedControl variant='rounded' colorScheme='facebook'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='messenger'>
+      <SegmentedControl variant='rounded' colorScheme='messenger'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='whatsapp'>
+      <SegmentedControl variant='rounded' colorScheme='whatsapp'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='twitter'>
+      <SegmentedControl variant='rounded' colorScheme='twitter'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='line'>
+      <SegmentedControl variant='rounded' colorScheme='line'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='instagram'>
+      <SegmentedControl variant='rounded' colorScheme='instagram'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='rounded' colorStyle='youtube'>
+      <SegmentedControl variant='rounded' colorScheme='youtube'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>

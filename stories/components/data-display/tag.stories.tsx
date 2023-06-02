@@ -10,51 +10,51 @@ export default {
 export const subtle: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md'>
-      <Tag colorStyle='primary'>Primary</Tag>
+      <Tag colorScheme='primary'>Primary</Tag>
 
-      <Tag colorStyle='secondary'>Secondary</Tag>
+      <Tag colorScheme='secondary'>Secondary</Tag>
 
-      <Tag colorStyle='warning'>Warning</Tag>
+      <Tag colorScheme='warning'>Warning</Tag>
 
-      <Tag colorStyle='danger'>Danger</Tag>
+      <Tag colorScheme='danger'>Danger</Tag>
 
-      <Tag colorStyle='link'>Link</Tag>
+      <Tag colorScheme='link'>Link</Tag>
 
-      <Tag colorStyle='gray'>Gray</Tag>
+      <Tag colorScheme='gray'>Gray</Tag>
 
-      <Tag colorStyle='red'>Red</Tag>
+      <Tag colorScheme='red'>Red</Tag>
 
-      <Tag colorStyle='orange'>Orange</Tag>
+      <Tag colorScheme='orange'>Orange</Tag>
 
-      <Tag colorStyle='yellow'>Yellow</Tag>
+      <Tag colorScheme='yellow'>Yellow</Tag>
 
-      <Tag colorStyle='green'>Green</Tag>
+      <Tag colorScheme='green'>Green</Tag>
 
-      <Tag colorStyle='teal'>Teal</Tag>
+      <Tag colorScheme='teal'>Teal</Tag>
 
-      <Tag colorStyle='blue'>Blue</Tag>
+      <Tag colorScheme='blue'>Blue</Tag>
 
-      <Tag colorStyle='cyan'>Cyan</Tag>
+      <Tag colorScheme='cyan'>Cyan</Tag>
 
-      <Tag colorStyle='purple'>Purple</Tag>
+      <Tag colorScheme='purple'>Purple</Tag>
 
-      <Tag colorStyle='pink'>pink</Tag>
+      <Tag colorScheme='pink'>pink</Tag>
 
-      <Tag colorStyle='linkedin'>Linkedin</Tag>
+      <Tag colorScheme='linkedin'>Linkedin</Tag>
 
-      <Tag colorStyle='facebook'>Facebook</Tag>
+      <Tag colorScheme='facebook'>Facebook</Tag>
 
-      <Tag colorStyle='messenger'>Messenger</Tag>
+      <Tag colorScheme='messenger'>Messenger</Tag>
 
-      <Tag colorStyle='whatsapp'>Whatsapp</Tag>
+      <Tag colorScheme='whatsapp'>Whatsapp</Tag>
 
-      <Tag colorStyle='twitter'>Twitter</Tag>
+      <Tag colorScheme='twitter'>Twitter</Tag>
 
-      <Tag colorStyle='line'>Line</Tag>
+      <Tag colorScheme='line'>Line</Tag>
 
-      <Tag colorStyle='instagram'>Instagram</Tag>
+      <Tag colorScheme='instagram'>Instagram</Tag>
 
-      <Tag colorStyle='youtube'>Youtube</Tag>
+      <Tag colorScheme='youtube'>Youtube</Tag>
     </Wrap>
   )
 }
@@ -62,95 +62,95 @@ export const subtle: ComponentStory<typeof Tag> = () => {
 export const solid: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md'>
-      <Tag variant='solid' colorStyle='primary'>
+      <Tag variant='solid' colorScheme='primary'>
         Primary
       </Tag>
 
-      <Tag variant='solid' colorStyle='secondary'>
+      <Tag variant='solid' colorScheme='secondary'>
         Secondary
       </Tag>
 
-      <Tag variant='solid' colorStyle='warning'>
+      <Tag variant='solid' colorScheme='warning'>
         Warning
       </Tag>
 
-      <Tag variant='solid' colorStyle='danger'>
+      <Tag variant='solid' colorScheme='danger'>
         Danger
       </Tag>
 
-      <Tag variant='solid' colorStyle='link'>
+      <Tag variant='solid' colorScheme='link'>
         Link
       </Tag>
 
-      <Tag variant='solid' colorStyle='gray'>
+      <Tag variant='solid' colorScheme='gray'>
         Gray
       </Tag>
 
-      <Tag variant='solid' colorStyle='red'>
+      <Tag variant='solid' colorScheme='red'>
         Red
       </Tag>
 
-      <Tag variant='solid' colorStyle='orange'>
+      <Tag variant='solid' colorScheme='orange'>
         Orange
       </Tag>
 
-      <Tag variant='solid' colorStyle='yellow'>
+      <Tag variant='solid' colorScheme='yellow'>
         Yellow
       </Tag>
 
-      <Tag variant='solid' colorStyle='green'>
+      <Tag variant='solid' colorScheme='green'>
         Green
       </Tag>
 
-      <Tag variant='solid' colorStyle='teal'>
+      <Tag variant='solid' colorScheme='teal'>
         Teal
       </Tag>
 
-      <Tag variant='solid' colorStyle='blue'>
+      <Tag variant='solid' colorScheme='blue'>
         Blue
       </Tag>
 
-      <Tag variant='solid' colorStyle='cyan'>
+      <Tag variant='solid' colorScheme='cyan'>
         Cyan
       </Tag>
 
-      <Tag variant='solid' colorStyle='purple'>
+      <Tag variant='solid' colorScheme='purple'>
         Purple
       </Tag>
 
-      <Tag variant='solid' colorStyle='pink'>
+      <Tag variant='solid' colorScheme='pink'>
         pink
       </Tag>
 
-      <Tag variant='solid' colorStyle='linkedin'>
+      <Tag variant='solid' colorScheme='linkedin'>
         Linkedin
       </Tag>
 
-      <Tag variant='solid' colorStyle='facebook'>
+      <Tag variant='solid' colorScheme='facebook'>
         Facebook
       </Tag>
 
-      <Tag variant='solid' colorStyle='messenger'>
+      <Tag variant='solid' colorScheme='messenger'>
         Messenger
       </Tag>
 
-      <Tag variant='solid' colorStyle='whatsapp'>
+      <Tag variant='solid' colorScheme='whatsapp'>
         Whatsapp
       </Tag>
 
-      <Tag variant='solid' colorStyle='twitter'>
+      <Tag variant='solid' colorScheme='twitter'>
         Twitter
       </Tag>
 
-      <Tag variant='solid' colorStyle='line'>
+      <Tag variant='solid' colorScheme='line'>
         Line
       </Tag>
 
-      <Tag variant='solid' colorStyle='instagram'>
+      <Tag variant='solid' colorScheme='instagram'>
         Instagram
       </Tag>
 
-      <Tag variant='solid' colorStyle='youtube'>
+      <Tag variant='solid' colorScheme='youtube'>
         Youtube
       </Tag>
     </Wrap>
@@ -160,95 +160,95 @@ export const solid: ComponentStory<typeof Tag> = () => {
 export const outline: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md'>
-      <Tag variant='outline' colorStyle='primary'>
+      <Tag variant='outline' colorScheme='primary'>
         Primary
       </Tag>
 
-      <Tag variant='outline' colorStyle='secondary'>
+      <Tag variant='outline' colorScheme='secondary'>
         Secondary
       </Tag>
 
-      <Tag variant='outline' colorStyle='warning'>
+      <Tag variant='outline' colorScheme='warning'>
         Warning
       </Tag>
 
-      <Tag variant='outline' colorStyle='danger'>
+      <Tag variant='outline' colorScheme='danger'>
         Danger
       </Tag>
 
-      <Tag variant='outline' colorStyle='link'>
+      <Tag variant='outline' colorScheme='link'>
         Link
       </Tag>
 
-      <Tag variant='outline' colorStyle='gray'>
+      <Tag variant='outline' colorScheme='gray'>
         Gray
       </Tag>
 
-      <Tag variant='outline' colorStyle='red'>
+      <Tag variant='outline' colorScheme='red'>
         Red
       </Tag>
 
-      <Tag variant='outline' colorStyle='orange'>
+      <Tag variant='outline' colorScheme='orange'>
         Orange
       </Tag>
 
-      <Tag variant='outline' colorStyle='yellow'>
+      <Tag variant='outline' colorScheme='yellow'>
         Yellow
       </Tag>
 
-      <Tag variant='outline' colorStyle='green'>
+      <Tag variant='outline' colorScheme='green'>
         Green
       </Tag>
 
-      <Tag variant='outline' colorStyle='teal'>
+      <Tag variant='outline' colorScheme='teal'>
         Teal
       </Tag>
 
-      <Tag variant='outline' colorStyle='blue'>
+      <Tag variant='outline' colorScheme='blue'>
         Blue
       </Tag>
 
-      <Tag variant='outline' colorStyle='cyan'>
+      <Tag variant='outline' colorScheme='cyan'>
         Cyan
       </Tag>
 
-      <Tag variant='outline' colorStyle='purple'>
+      <Tag variant='outline' colorScheme='purple'>
         Purple
       </Tag>
 
-      <Tag variant='outline' colorStyle='pink'>
+      <Tag variant='outline' colorScheme='pink'>
         pink
       </Tag>
 
-      <Tag variant='outline' colorStyle='linkedin'>
+      <Tag variant='outline' colorScheme='linkedin'>
         Linkedin
       </Tag>
 
-      <Tag variant='outline' colorStyle='facebook'>
+      <Tag variant='outline' colorScheme='facebook'>
         Facebook
       </Tag>
 
-      <Tag variant='outline' colorStyle='messenger'>
+      <Tag variant='outline' colorScheme='messenger'>
         Messenger
       </Tag>
 
-      <Tag variant='outline' colorStyle='whatsapp'>
+      <Tag variant='outline' colorScheme='whatsapp'>
         Whatsapp
       </Tag>
 
-      <Tag variant='outline' colorStyle='twitter'>
+      <Tag variant='outline' colorScheme='twitter'>
         Twitter
       </Tag>
 
-      <Tag variant='outline' colorStyle='line'>
+      <Tag variant='outline' colorScheme='line'>
         Line
       </Tag>
 
-      <Tag variant='outline' colorStyle='instagram'>
+      <Tag variant='outline' colorScheme='instagram'>
         Instagram
       </Tag>
 
-      <Tag variant='outline' colorStyle='youtube'>
+      <Tag variant='outline' colorScheme='youtube'>
         Youtube
       </Tag>
     </Wrap>
@@ -258,15 +258,15 @@ export const outline: ComponentStory<typeof Tag> = () => {
 export const withSize: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorStyle='primary' size='sm'>
+      <Tag colorScheme='primary' size='sm'>
         Small
       </Tag>
 
-      <Tag colorStyle='secondary' size='md'>
+      <Tag colorScheme='secondary' size='md'>
         Medium
       </Tag>
 
-      <Tag colorStyle='warning' size='lg'>
+      <Tag colorScheme='warning' size='lg'>
         Large
       </Tag>
     </Wrap>
@@ -276,15 +276,15 @@ export const withSize: ComponentStory<typeof Tag> = () => {
 export const withIcon: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorStyle='primary' size='sm' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Tag colorScheme='primary' size='sm' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
         Small
       </Tag>
 
-      <Tag colorStyle='secondary' size='md' rightIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Tag colorScheme='secondary' size='md' rightIcon={<FontAwesomeIcon icon={faPlus} />}>
         Medium
       </Tag>
 
-      <Tag colorStyle='warning' size='lg' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Tag colorScheme='warning' size='lg' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
         Large
       </Tag>
     </Wrap>
@@ -294,19 +294,19 @@ export const withIcon: ComponentStory<typeof Tag> = () => {
 export const withCloseButton: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorStyle='primary' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme='primary' rounded='full' onCloseClick={() => {}}>
         Cyan
       </Tag>
 
-      <Tag colorStyle='secondary' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme='secondary' rounded='full' onCloseClick={() => {}}>
         Secondary
       </Tag>
 
-      <Tag colorStyle='warning' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme='warning' rounded='full' onCloseClick={() => {}}>
         Warning
       </Tag>
 
-      <Tag colorStyle='danger' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme='danger' rounded='full' onCloseClick={() => {}}>
         Danger
       </Tag>
     </Wrap>
@@ -316,19 +316,25 @@ export const withCloseButton: ComponentStory<typeof Tag> = () => {
 export const withDisabled: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag variant='solid' colorStyle='primary' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag variant='solid' colorScheme='primary' rounded='full' onCloseClick={() => {}} isDisabled>
         Cyan
       </Tag>
 
-      <Tag variant='solid' colorStyle='secondary' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag
+        variant='solid'
+        colorScheme='secondary'
+        rounded='full'
+        onCloseClick={() => {}}
+        isDisabled
+      >
         Secondary
       </Tag>
 
-      <Tag variant='solid' colorStyle='warning' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag variant='solid' colorScheme='warning' rounded='full' onCloseClick={() => {}} isDisabled>
         Warning
       </Tag>
 
-      <Tag variant='solid' colorStyle='danger' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag variant='solid' colorScheme='danger' rounded='full' onCloseClick={() => {}} isDisabled>
         Danger
       </Tag>
     </Wrap>

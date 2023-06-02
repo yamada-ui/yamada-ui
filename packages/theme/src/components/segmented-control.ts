@@ -28,7 +28,7 @@ export const SegmentedControl: ComponentMultiStyle = {
   },
 
   variants: {
-    basic: ({ theme: t, colorScheme: s, colorStyle: c }) => ({
+    basic: ({ theme: t, colorMode: s, colorScheme: c }) => ({
       container: {
         rounded: 'lg',
       },
@@ -52,7 +52,7 @@ export const SegmentedControl: ComponentMultiStyle = {
         },
       },
     }),
-    rounded: ({ theme: t, colorScheme: s, colorStyle: c }) => ({
+    rounded: ({ theme: t, colorMode: s, colorScheme: c }) => ({
       container: {
         rounded: 'full',
       },

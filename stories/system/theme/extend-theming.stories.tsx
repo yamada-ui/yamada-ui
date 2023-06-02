@@ -9,7 +9,7 @@ import {
   extendTheme,
   withDefaultSize,
   withDefaultVariant,
-  withDefaultColorStyle,
+  withDefaultColorScheme,
   extendToken,
   extendStyle,
   extendComponentSize,
@@ -66,8 +66,8 @@ export const rewriteDefaultProps = () => {
       variant: 'solid',
       components: ['Badge', 'Tag', 'Button'], // If empty, rewrite for all components
     }),
-    withDefaultColorStyle({
-      colorStyle: 'primary',
+    withDefaultColorScheme({
+      colorScheme: 'primary',
       components: ['Badge', 'Tag', 'Button'], // If empty, rewrite for all components
     }),
     // or
@@ -75,7 +75,7 @@ export const rewriteDefaultProps = () => {
     //   defaultProps: {
     //     size: 'xl',
     //     variant: 'outline',
-    //     colorStyle: 'primary',
+    //     colorScheme: 'primary',
     //   },
     //   components: ['Badge', 'Tag', 'Button'],
     // }),

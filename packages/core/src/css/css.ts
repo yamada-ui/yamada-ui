@@ -4,7 +4,7 @@ import { StyledTheme } from '../theme.types'
 import { BreakpointQueries } from './breakpoint'
 import { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from './css.types'
 
-const expandColorScheme = (key: string, value: any[]): Dict => ({
+const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],
   [pseudos._dark]: {
     [key]: value[1],
@@ -39,7 +39,7 @@ const expandCSS =
       if (value == null) continue
 
       if (isArray(value)) {
-        computedCSS = merge(computedCSS, expandColorScheme(key, value))
+        computedCSS = merge(computedCSS, expandColorMode(key, value))
 
         continue
       }

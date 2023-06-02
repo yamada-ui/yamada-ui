@@ -41,7 +41,7 @@ export const basic: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -67,7 +67,7 @@ export const withDuration: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -139,7 +139,7 @@ export const withSize: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -247,7 +247,7 @@ export const withPlacement: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -319,7 +319,7 @@ export const withAnimation: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -346,7 +346,7 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onFirstClose}>
             とじる
           </Button>
-          <Button colorStyle='primary' onClick={onSecondOpen}>
+          <Button colorScheme='primary' onClick={onSecondOpen}>
             あらすじ
           </Button>
         </ModalFooter>
@@ -362,7 +362,7 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
             <Button variant='ghost' onClick={onSecondClose}>
               とじる
             </Button>
-            <Button colorStyle='primary'>Wikipadia</Button>
+            <Button colorScheme='primary'>Wikipadia</Button>
           </ModalFooter>
         </Modal>
       </Modal>
@@ -389,7 +389,7 @@ export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -417,7 +417,7 @@ export const customCloseButton: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -443,7 +443,7 @@ export const disabledOverlay: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -471,7 +471,7 @@ export const customOverlay: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -540,7 +540,7 @@ export const scrollBehavior: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -608,7 +608,7 @@ export const scrollOnMount: ComponentStory<typeof Modal> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>

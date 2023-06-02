@@ -32,7 +32,7 @@ export const Switch: ComponentMultiStyle = {
   },
 
   variants: {
-    thick: ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({
+    thick: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => ({
       track: {
         p: '1',
         _checked: {
@@ -43,7 +43,7 @@ export const Switch: ComponentMultiStyle = {
         },
       },
     }),
-    thin: ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => ({
+    thin: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => ({
       track: {
         _checked: {
           bg: isDefaultColor(
@@ -106,6 +106,6 @@ export const Switch: ComponentMultiStyle = {
   defaultProps: {
     size: 'md',
     variant: 'thick',
-    colorStyle: 'blue',
+    colorScheme: 'blue',
   },
 }

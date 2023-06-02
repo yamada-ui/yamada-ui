@@ -5,8 +5,8 @@ import {
   ThemeConfig,
   ThemeScheme,
   ThemeProvider,
-  ColorSchemeProvider,
-  useColorScheme,
+  ColorModeProvider,
+  useColorMode,
   ChangeThemeScheme,
   UIStyle,
   Interpolation,
@@ -20,7 +20,7 @@ export type UIProviderProps = {
   theme?: Dict | Dict[]
   config?: ThemeConfig
   reset?: boolean
-  colorSchemeManager?: any
+  colorModeManager?: any
   children: ReactNode
 }
 
@@ -28,7 +28,7 @@ export const UIProvider: FC<UIProviderProps> = ({
   theme: initialTheme = defaultTheme,
   config = defaultConfig,
   reset = true,
-  colorSchemeManager,
+  colorModeManager,
   children,
 }) => {
   const [themeScheme, setThemeScheme] = useState<ThemeScheme | undefined>(
@@ -60,7 +60,7 @@ export const UIProvider: FC<UIProviderProps> = ({
       changeThemeScheme={changeThemeScheme}
       config={config}
     >
-      <ColorSchemeProvider colorSchemeManager={colorSchemeManager} config={config}>
+      <ColorModeProvider colorModeManager={colorModeManager} config={config}>
         <LoadingProvider {...config.loading}>
           {reset ? <ResetStyle /> : null}
           <GlobalStyle />
@@ -69,13 +69,13 @@ export const UIProvider: FC<UIProviderProps> = ({
 
           <NoticeProvider {...config.notice} />
         </LoadingProvider>
-      </ColorSchemeProvider>
+      </ColorModeProvider>
     </ThemeProvider>
   )
 }
 
 const ResetStyle: FC = () => {
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   return (
     <Global
@@ -83,7 +83,7 @@ const ResetStyle: FC = () => {
         ((theme: StyledTheme<Dict>) => {
           let style = get(theme, 'styles.resetStyle', {})
 
-          const computedStyle = runIfFunc(style, { theme, colorScheme })
+          const computedStyle = runIfFunc(style, { theme, colorMode })
 
           if (!computedStyle) return undefined
 
@@ -95,7 +95,7 @@ const ResetStyle: FC = () => {
 }
 
 const GlobalStyle: FC = () => {
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   return (
     <Global
@@ -103,7 +103,7 @@ const GlobalStyle: FC = () => {
         ((theme: StyledTheme<Dict>) => {
           let style: UIStyle = get(theme, 'styles.globalStyle', {})
 
-          const computedStyle = runIfFunc(style, { theme, colorScheme })
+          const computedStyle = runIfFunc(style, { theme, colorMode })
 
           if (!computedStyle) return undefined
 

@@ -129,7 +129,7 @@ export const customRequiredIndicator: ComponentStory<typeof FormControl> = () =>
         isRequired
         label='Email address'
         requiredIndicator={
-          <Tag colorStyle='red' ms={1}>
+          <Tag colorScheme='red' ms={1}>
             required
           </Tag>
         }
@@ -140,7 +140,7 @@ export const customRequiredIndicator: ComponentStory<typeof FormControl> = () =>
       <FormControl isRequired>
         <Label
           requiredIndicator={
-            <Tag colorStyle='red' ms={1}>
+            <Tag colorScheme='red' ms={1}>
               required
             </Tag>
           }
@@ -159,7 +159,7 @@ export const customOptionalIndicator: ComponentStory<typeof FormControl> = () =>
       <FormControl
         label='Email address'
         optionalIndicator={
-          <Tag colorStyle='primary' ms={1}>
+          <Tag colorScheme='primary' ms={1}>
             optional
           </Tag>
         }
@@ -170,7 +170,7 @@ export const customOptionalIndicator: ComponentStory<typeof FormControl> = () =>
       <FormControl>
         <Label
           optionalIndicator={
-            <Tag colorStyle='primary' ms={1}>
+            <Tag colorScheme='primary' ms={1}>
               optional
             </Tag>
           }

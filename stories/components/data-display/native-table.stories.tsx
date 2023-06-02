@@ -197,7 +197,7 @@ export const withVariant: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof NativeTable> = () => {
+export const withColorScheme: ComponentStory<typeof NativeTable> = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -252,51 +252,51 @@ export const withColorStyle: ComponentStory<typeof NativeTable> = () => {
 
   return (
     <>
-      <Table variant='striped' colorStyle='primary' />
+      <Table variant='striped' colorScheme='primary' />
 
-      <Table variant='striped' colorStyle='secondary' />
+      <Table variant='striped' colorScheme='secondary' />
 
-      <Table variant='striped' colorStyle='warning' />
+      <Table variant='striped' colorScheme='warning' />
 
-      <Table variant='striped' colorStyle='danger' />
+      <Table variant='striped' colorScheme='danger' />
 
-      <Table variant='striped' colorStyle='link' />
+      <Table variant='striped' colorScheme='link' />
 
-      <Table variant='striped' colorStyle='gray' />
+      <Table variant='striped' colorScheme='gray' />
 
-      <Table variant='striped' colorStyle='red' />
+      <Table variant='striped' colorScheme='red' />
 
-      <Table variant='striped' colorStyle='orange' />
+      <Table variant='striped' colorScheme='orange' />
 
-      <Table variant='striped' colorStyle='yellow' />
+      <Table variant='striped' colorScheme='yellow' />
 
-      <Table variant='striped' colorStyle='green' />
+      <Table variant='striped' colorScheme='green' />
 
-      <Table variant='striped' colorStyle='teal' />
+      <Table variant='striped' colorScheme='teal' />
 
-      <Table variant='striped' colorStyle='blue' />
+      <Table variant='striped' colorScheme='blue' />
 
-      <Table variant='striped' colorStyle='cyan' />
+      <Table variant='striped' colorScheme='cyan' />
 
-      <Table variant='striped' colorStyle='purple' />
+      <Table variant='striped' colorScheme='purple' />
 
-      <Table variant='striped' colorStyle='pink' />
+      <Table variant='striped' colorScheme='pink' />
 
-      <Table variant='striped' colorStyle='linkedin' />
+      <Table variant='striped' colorScheme='linkedin' />
 
-      <Table variant='striped' colorStyle='facebook' />
+      <Table variant='striped' colorScheme='facebook' />
 
-      <Table variant='striped' colorStyle='messenger' />
+      <Table variant='striped' colorScheme='messenger' />
 
-      <Table variant='striped' colorStyle='whatsapp' />
+      <Table variant='striped' colorScheme='whatsapp' />
 
-      <Table variant='striped' colorStyle='twitter' />
+      <Table variant='striped' colorScheme='twitter' />
 
-      <Table variant='striped' colorStyle='line' />
+      <Table variant='striped' colorScheme='line' />
 
-      <Table variant='striped' colorStyle='instagram' />
+      <Table variant='striped' colorScheme='instagram' />
 
-      <Table variant='striped' colorStyle='youtube' />
+      <Table variant='striped' colorScheme='youtube' />
     </>
   )
 }

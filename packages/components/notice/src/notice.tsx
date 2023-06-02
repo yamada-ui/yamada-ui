@@ -281,7 +281,7 @@ export type NoticeProps = Omit<AlertProps, keyof UseNoticeOptions> &
 
 const Notice: FC<NoticeProps> = ({
   variant = 'subtle',
-  colorStyle,
+  colorScheme,
   status,
   icon,
   title,
@@ -293,7 +293,7 @@ const Notice: FC<NoticeProps> = ({
     <Alert
       status={status}
       variant={variant}
-      colorStyle={colorStyle}
+      colorScheme={colorScheme}
       alignItems='start'
       boxShadow='lg'
       pe={isClosable ? 8 : undefined}

@@ -96,8 +96,8 @@ type LoadingConfigOptions = {
 
 export type ThemeConfig = {
   initialThemeScheme?: string | number
-  initialColorScheme?: 'light' | 'dark' | 'system'
-  useSystemColorScheme?: boolean
+  initialColorMode?: 'light' | 'dark' | 'system'
+  useSystemColorMode?: boolean
   disableTransitionOnChange?: boolean
   date?: {
     locale?: string
@@ -161,10 +161,10 @@ export type ComponentSizes = Record<string, UIStyle | Record<string, UIStyle>>
 export type ComponentDefaultProps<
   Y extends Dict = Dict,
   M extends keyof Theme['components'] | unknown = unknown,
-> = Omit<Y, 'variant' | 'size' | 'colorStyle'> & {
+> = Omit<Y, 'variant' | 'size' | 'colorScheme'> & {
   variant?: ThemeProps<M>['variant']
   size?: ThemeProps<M>['size']
-  colorStyle?: ThemeProps<M>['colorStyle']
+  colorScheme?: ThemeProps<M>['colorScheme']
 }
 
 export type ComponentStyle<Y extends Dict = Dict> = {

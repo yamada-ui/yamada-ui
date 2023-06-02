@@ -39,7 +39,7 @@ export const typography: Configs = {
   },
 }
 
-export type TypographyProps<Y = 'responsive', M = 'colorScheme'> = {
+export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
   fontWeight?: Token<number | StringLiteral, 'fontWeights', Y, M>
   lineHeight?: Token<CSS.Property.LineHeight | number, 'lineHeights', Y, M>
   letterSpacing?: Token<CSS.Property.LetterSpacing | number, 'letterSpacings', Y, M>

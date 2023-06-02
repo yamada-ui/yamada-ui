@@ -63,11 +63,11 @@ const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
 
 export const PagingTable = forwardRef(
   <Y extends RowData>(
-    { colorStyle, highlightOnSelected = true, ...props }: PagingTableProps<Y>,
+    { colorScheme, highlightOnSelected = true, ...props }: PagingTableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
     const [styles, { size, ...mergedProps }] = useMultiComponentStyle('Table', {
-      colorStyle,
+      colorScheme,
       highlightOnSelected,
       ...props,
     })
@@ -103,7 +103,7 @@ export const PagingTable = forwardRef(
       ...rest
     } = useTable<Y>({
       ...computedProps,
-      checkboxProps: { colorStyle, ...checkboxProps },
+      checkboxProps: { colorScheme, ...checkboxProps },
       enablePagenation: true,
     })
 
@@ -152,7 +152,7 @@ export const PagingTable = forwardRef(
                 {...pagingControlProps}
               >
                 <Pagination
-                  colorStyle={colorStyle}
+                  colorScheme={colorScheme}
                   size={size === 'sm' ? 'xs' : size}
                   page={state.pagination.pageIndex + 1}
                   total={totalPage}

@@ -66,7 +66,7 @@ export const Calendar: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
+    solid: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => {
       const bg = isDefaultColor(
         [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
         [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
@@ -92,7 +92,7 @@ export const Calendar: ComponentMultiStyle = {
         },
       }
     },
-    subtle: ({ theme: t, colorScheme: s, colorStyle: c = 'blue' }) => {
+    subtle: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => {
       const bg = isDefaultColor(
         [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
         [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
@@ -319,6 +319,6 @@ export const Calendar: ComponentMultiStyle = {
   defaultProps: {
     size: 'md',
     variant: 'solid',
-    colorStyle: 'blue',
+    colorScheme: 'blue',
   },
 }

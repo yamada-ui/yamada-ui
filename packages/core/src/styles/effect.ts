@@ -15,7 +15,7 @@ Object.assign(effect, {
   shadow: effect.boxShadow,
 })
 
-export type EffectProps<Y = 'responsive', M = 'colorScheme'> = {
+export type EffectProps<Y = 'responsive', M = 'colorMode'> = {
   boxShadow?: Token<CSS.Property.BoxShadow | number, 'shadows', Y, M>
   shadow?: Token<CSS.Property.BoxShadow | number, 'shadows', Y, M>
   mixBlendMode?: Token<CSS.Property.MixBlendMode, unknown, Y, M>

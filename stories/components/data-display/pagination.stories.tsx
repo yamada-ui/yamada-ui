@@ -35,151 +35,151 @@ export const withVariant: ComponentStory<typeof Pagination> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Pagination> = () => {
+export const withColorScheme: ComponentStory<typeof Pagination> = () => {
   return (
     <Wrap w='full' gap='md'>
       <VStack w='auto'>
-        <Pagination total={10} variant='solid' colorStyle='primary' />
+        <Pagination total={10} variant='solid' colorScheme='primary' />
 
-        <Pagination total={10} variant='solid' colorStyle='secondary' />
+        <Pagination total={10} variant='solid' colorScheme='secondary' />
 
-        <Pagination total={10} variant='solid' colorStyle='warning' />
+        <Pagination total={10} variant='solid' colorScheme='warning' />
 
-        <Pagination total={10} variant='solid' colorStyle='danger' />
+        <Pagination total={10} variant='solid' colorScheme='danger' />
 
-        <Pagination total={10} variant='solid' colorStyle='link' />
+        <Pagination total={10} variant='solid' colorScheme='link' />
 
-        <Pagination total={10} variant='solid' colorStyle='gray' />
+        <Pagination total={10} variant='solid' colorScheme='gray' />
 
-        <Pagination total={10} variant='solid' colorStyle='red' />
+        <Pagination total={10} variant='solid' colorScheme='red' />
 
-        <Pagination total={10} variant='solid' colorStyle='orange' />
+        <Pagination total={10} variant='solid' colorScheme='orange' />
 
-        <Pagination total={10} variant='solid' colorStyle='yellow' />
+        <Pagination total={10} variant='solid' colorScheme='yellow' />
 
-        <Pagination total={10} variant='solid' colorStyle='green' />
+        <Pagination total={10} variant='solid' colorScheme='green' />
 
-        <Pagination total={10} variant='solid' colorStyle='teal' />
+        <Pagination total={10} variant='solid' colorScheme='teal' />
 
-        <Pagination total={10} variant='solid' colorStyle='blue' />
+        <Pagination total={10} variant='solid' colorScheme='blue' />
 
-        <Pagination total={10} variant='solid' colorStyle='cyan' />
+        <Pagination total={10} variant='solid' colorScheme='cyan' />
 
-        <Pagination total={10} variant='solid' colorStyle='purple' />
+        <Pagination total={10} variant='solid' colorScheme='purple' />
 
-        <Pagination total={10} variant='solid' colorStyle='pink' />
+        <Pagination total={10} variant='solid' colorScheme='pink' />
 
-        <Pagination total={10} variant='solid' colorStyle='linkedin' />
+        <Pagination total={10} variant='solid' colorScheme='linkedin' />
 
-        <Pagination total={10} variant='solid' colorStyle='facebook' />
+        <Pagination total={10} variant='solid' colorScheme='facebook' />
 
-        <Pagination total={10} variant='solid' colorStyle='messenger' />
+        <Pagination total={10} variant='solid' colorScheme='messenger' />
 
-        <Pagination total={10} variant='solid' colorStyle='whatsapp' />
+        <Pagination total={10} variant='solid' colorScheme='whatsapp' />
 
-        <Pagination total={10} variant='solid' colorStyle='twitter' />
+        <Pagination total={10} variant='solid' colorScheme='twitter' />
 
-        <Pagination total={10} variant='solid' colorStyle='line' />
+        <Pagination total={10} variant='solid' colorScheme='line' />
 
-        <Pagination total={10} variant='solid' colorStyle='instagram' />
+        <Pagination total={10} variant='solid' colorScheme='instagram' />
 
-        <Pagination total={10} variant='solid' colorStyle='youtube' />
+        <Pagination total={10} variant='solid' colorScheme='youtube' />
       </VStack>
 
       <VStack w='auto'>
-        <Pagination total={10} variant='outline' colorStyle='primary' />
+        <Pagination total={10} variant='outline' colorScheme='primary' />
 
-        <Pagination total={10} variant='outline' colorStyle='secondary' />
+        <Pagination total={10} variant='outline' colorScheme='secondary' />
 
-        <Pagination total={10} variant='outline' colorStyle='warning' />
+        <Pagination total={10} variant='outline' colorScheme='warning' />
 
-        <Pagination total={10} variant='outline' colorStyle='danger' />
+        <Pagination total={10} variant='outline' colorScheme='danger' />
 
-        <Pagination total={10} variant='outline' colorStyle='link' />
+        <Pagination total={10} variant='outline' colorScheme='link' />
 
-        <Pagination total={10} variant='outline' colorStyle='gray' />
+        <Pagination total={10} variant='outline' colorScheme='gray' />
 
-        <Pagination total={10} variant='outline' colorStyle='red' />
+        <Pagination total={10} variant='outline' colorScheme='red' />
 
-        <Pagination total={10} variant='outline' colorStyle='orange' />
+        <Pagination total={10} variant='outline' colorScheme='orange' />
 
-        <Pagination total={10} variant='outline' colorStyle='yellow' />
+        <Pagination total={10} variant='outline' colorScheme='yellow' />
 
-        <Pagination total={10} variant='outline' colorStyle='green' />
+        <Pagination total={10} variant='outline' colorScheme='green' />
 
-        <Pagination total={10} variant='outline' colorStyle='teal' />
+        <Pagination total={10} variant='outline' colorScheme='teal' />
 
-        <Pagination total={10} variant='outline' colorStyle='blue' />
+        <Pagination total={10} variant='outline' colorScheme='blue' />
 
-        <Pagination total={10} variant='outline' colorStyle='cyan' />
+        <Pagination total={10} variant='outline' colorScheme='cyan' />
 
-        <Pagination total={10} variant='outline' colorStyle='purple' />
+        <Pagination total={10} variant='outline' colorScheme='purple' />
 
-        <Pagination total={10} variant='outline' colorStyle='pink' />
+        <Pagination total={10} variant='outline' colorScheme='pink' />
 
-        <Pagination total={10} variant='outline' colorStyle='linkedin' />
+        <Pagination total={10} variant='outline' colorScheme='linkedin' />
 
-        <Pagination total={10} variant='outline' colorStyle='facebook' />
+        <Pagination total={10} variant='outline' colorScheme='facebook' />
 
-        <Pagination total={10} variant='outline' colorStyle='messenger' />
+        <Pagination total={10} variant='outline' colorScheme='messenger' />
 
-        <Pagination total={10} variant='outline' colorStyle='whatsapp' />
+        <Pagination total={10} variant='outline' colorScheme='whatsapp' />
 
-        <Pagination total={10} variant='outline' colorStyle='twitter' />
+        <Pagination total={10} variant='outline' colorScheme='twitter' />
 
-        <Pagination total={10} variant='outline' colorStyle='line' />
+        <Pagination total={10} variant='outline' colorScheme='line' />
 
-        <Pagination total={10} variant='outline' colorStyle='instagram' />
+        <Pagination total={10} variant='outline' colorScheme='instagram' />
 
-        <Pagination total={10} variant='outline' colorStyle='youtube' />
+        <Pagination total={10} variant='outline' colorScheme='youtube' />
       </VStack>
 
       <VStack w='auto'>
-        <Pagination total={10} variant='ghost' colorStyle='primary' />
+        <Pagination total={10} variant='ghost' colorScheme='primary' />
 
-        <Pagination total={10} variant='ghost' colorStyle='secondary' />
+        <Pagination total={10} variant='ghost' colorScheme='secondary' />
 
-        <Pagination total={10} variant='ghost' colorStyle='warning' />
+        <Pagination total={10} variant='ghost' colorScheme='warning' />
 
-        <Pagination total={10} variant='ghost' colorStyle='danger' />
+        <Pagination total={10} variant='ghost' colorScheme='danger' />
 
-        <Pagination total={10} variant='ghost' colorStyle='link' />
+        <Pagination total={10} variant='ghost' colorScheme='link' />
 
-        <Pagination total={10} variant='ghost' colorStyle='gray' />
+        <Pagination total={10} variant='ghost' colorScheme='gray' />
 
-        <Pagination total={10} variant='ghost' colorStyle='red' />
+        <Pagination total={10} variant='ghost' colorScheme='red' />
 
-        <Pagination total={10} variant='ghost' colorStyle='orange' />
+        <Pagination total={10} variant='ghost' colorScheme='orange' />
 
-        <Pagination total={10} variant='ghost' colorStyle='yellow' />
+        <Pagination total={10} variant='ghost' colorScheme='yellow' />
 
-        <Pagination total={10} variant='ghost' colorStyle='green' />
+        <Pagination total={10} variant='ghost' colorScheme='green' />
 
-        <Pagination total={10} variant='ghost' colorStyle='teal' />
+        <Pagination total={10} variant='ghost' colorScheme='teal' />
 
-        <Pagination total={10} variant='ghost' colorStyle='blue' />
+        <Pagination total={10} variant='ghost' colorScheme='blue' />
 
-        <Pagination total={10} variant='ghost' colorStyle='cyan' />
+        <Pagination total={10} variant='ghost' colorScheme='cyan' />
 
-        <Pagination total={10} variant='ghost' colorStyle='purple' />
+        <Pagination total={10} variant='ghost' colorScheme='purple' />
 
-        <Pagination total={10} variant='ghost' colorStyle='pink' />
+        <Pagination total={10} variant='ghost' colorScheme='pink' />
 
-        <Pagination total={10} variant='ghost' colorStyle='linkedin' />
+        <Pagination total={10} variant='ghost' colorScheme='linkedin' />
 
-        <Pagination total={10} variant='ghost' colorStyle='facebook' />
+        <Pagination total={10} variant='ghost' colorScheme='facebook' />
 
-        <Pagination total={10} variant='ghost' colorStyle='messenger' />
+        <Pagination total={10} variant='ghost' colorScheme='messenger' />
 
-        <Pagination total={10} variant='ghost' colorStyle='whatsapp' />
+        <Pagination total={10} variant='ghost' colorScheme='whatsapp' />
 
-        <Pagination total={10} variant='ghost' colorStyle='twitter' />
+        <Pagination total={10} variant='ghost' colorScheme='twitter' />
 
-        <Pagination total={10} variant='ghost' colorStyle='line' />
+        <Pagination total={10} variant='ghost' colorScheme='line' />
 
-        <Pagination total={10} variant='ghost' colorStyle='instagram' />
+        <Pagination total={10} variant='ghost' colorScheme='instagram' />
 
-        <Pagination total={10} variant='ghost' colorStyle='youtube' />
+        <Pagination total={10} variant='ghost' colorScheme='youtube' />
       </VStack>
     </Wrap>
   )

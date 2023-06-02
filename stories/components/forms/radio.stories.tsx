@@ -34,98 +34,98 @@ export const withDefaultChecked: ComponentStory<typeof Radio> = () => {
   return <Radio defaultChecked>孫悟空</Radio>
 }
 
-export const withColorStyle: ComponentStory<typeof Radio> = () => {
+export const withColorScheme: ComponentStory<typeof Radio> = () => {
   return (
     <Wrap gap='md'>
-      <Radio colorStyle='primary' defaultChecked>
+      <Radio colorScheme='primary' defaultChecked>
         Primary
       </Radio>
 
-      <Radio colorStyle='secondary' defaultChecked>
+      <Radio colorScheme='secondary' defaultChecked>
         Secondary
       </Radio>
 
-      <Radio colorStyle='warning' defaultChecked>
+      <Radio colorScheme='warning' defaultChecked>
         Warning
       </Radio>
 
-      <Radio colorStyle='danger' defaultChecked>
+      <Radio colorScheme='danger' defaultChecked>
         Danger
       </Radio>
 
-      <Radio colorStyle='link' defaultChecked>
+      <Radio colorScheme='link' defaultChecked>
         Link
       </Radio>
 
-      <Radio colorStyle='gray' defaultChecked>
+      <Radio colorScheme='gray' defaultChecked>
         Gray
       </Radio>
 
-      <Radio colorStyle='red' defaultChecked>
+      <Radio colorScheme='red' defaultChecked>
         Red
       </Radio>
 
-      <Radio colorStyle='orange' defaultChecked>
+      <Radio colorScheme='orange' defaultChecked>
         Orange
       </Radio>
 
-      <Radio colorStyle='yellow' defaultChecked>
+      <Radio colorScheme='yellow' defaultChecked>
         Yellow
       </Radio>
 
-      <Radio colorStyle='green' defaultChecked>
+      <Radio colorScheme='green' defaultChecked>
         Green
       </Radio>
 
-      <Radio colorStyle='teal' defaultChecked>
+      <Radio colorScheme='teal' defaultChecked>
         Teal
       </Radio>
 
-      <Radio colorStyle='blue' defaultChecked>
+      <Radio colorScheme='blue' defaultChecked>
         Blue
       </Radio>
 
-      <Radio colorStyle='cyan' defaultChecked>
+      <Radio colorScheme='cyan' defaultChecked>
         Cyan
       </Radio>
 
-      <Radio colorStyle='purple' defaultChecked>
+      <Radio colorScheme='purple' defaultChecked>
         Purple
       </Radio>
 
-      <Radio colorStyle='pink' defaultChecked>
+      <Radio colorScheme='pink' defaultChecked>
         pink
       </Radio>
 
-      <Radio colorStyle='linkedin' defaultChecked>
+      <Radio colorScheme='linkedin' defaultChecked>
         Linkedin
       </Radio>
 
-      <Radio colorStyle='facebook' defaultChecked>
+      <Radio colorScheme='facebook' defaultChecked>
         Facebook
       </Radio>
 
-      <Radio colorStyle='messenger' defaultChecked>
+      <Radio colorScheme='messenger' defaultChecked>
         Messenger
       </Radio>
 
-      <Radio colorStyle='whatsapp' defaultChecked>
+      <Radio colorScheme='whatsapp' defaultChecked>
         Whatsapp
       </Radio>
 
-      <Radio colorStyle='twitter' defaultChecked>
+      <Radio colorScheme='twitter' defaultChecked>
         Twitter
       </Radio>
 
-      <Radio colorStyle='line' defaultChecked>
+      <Radio colorScheme='line' defaultChecked>
         Line
       </Radio>
 
-      <Radio colorStyle='instagram' defaultChecked>
+      <Radio colorScheme='instagram' defaultChecked>
         Instagram
       </Radio>
 
-      <Radio colorStyle='youtube' defaultChecked>
+      <Radio colorScheme='youtube' defaultChecked>
         Youtube
       </Radio>
     </Wrap>

@@ -92,7 +92,7 @@ Object.assign(border, {
   borderEndStyle: border.borderInlineEndStyle,
 })
 
-export type BorderProps<Y = 'responsive', M = 'colorScheme'> = {
+export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   border?: Token<CSS.Property.Border | number, 'borders', Y, M>
   borderWidth?: Token<CSS.Property.BorderWidth | number, unknown, Y, M>
   borderStyle?: Token<CSS.Property.BorderStyle, unknown, Y, M>

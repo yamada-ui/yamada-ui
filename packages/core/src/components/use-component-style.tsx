@@ -8,7 +8,7 @@ import {
 } from '@yamada-ui/utils'
 import { useRef } from 'react'
 import isEqual from 'react-fast-compare'
-import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps, useTheme, useColorScheme } from '..'
+import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps, useTheme, useColorMode } from '..'
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject
@@ -38,7 +38,7 @@ const usetStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   isMulti: boolean = false,
 ): [styles: Styles<IsMulti>, props: Props] => {
   const { theme } = useTheme()
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   const componentStyle: ComponentStyle | undefined = get(theme, `components.${name}`)
 
@@ -52,7 +52,7 @@ const usetStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
 
     let styles = getStyles<IsMulti>(
       componentStyle.baseStyle ?? {},
-      { theme, colorScheme, ...args },
+      { theme, colorMode, ...args },
       isMulti,
     )
 
@@ -60,14 +60,14 @@ const usetStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
       componentStyle.variants?.[props.variant] ?? {},
       {
         theme,
-        colorScheme,
+        colorMode,
         ...args,
       },
       isMulti,
     )
     const size = getStyles<IsMulti>(
       componentStyle.sizes?.[props.size] ?? {},
-      { theme, colorScheme, ...args },
+      { theme, colorMode, ...args },
       isMulti,
     )
 

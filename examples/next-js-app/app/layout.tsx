@@ -1,6 +1,6 @@
 'use client'
 
-import { ColorSchemeScript } from '@yamada-ui/react'
+import { ColorModeScript } from '@yamada-ui/react'
 import { CacheProvider } from '@yamada-ui/nextjs'
 import { AppProvider } from 'contexts'
 
@@ -14,7 +14,7 @@ export default ({ children }: { children: React.ReactNode }) => {
       </head>
 
       <body>
-        <ColorSchemeScript type='cookie' nonce='testing' />
+        <ColorModeScript type='cookie' nonce='testing' />
 
         <CacheProvider>
           <AppProvider>{children}</AppProvider>

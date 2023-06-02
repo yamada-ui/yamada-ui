@@ -1,11 +1,11 @@
-import { UIProvider, extendTheme, Box, useColorScheme, ThemeTokens } from '@yamada-ui/react'
+import { UIProvider, extendTheme, Box, useColorMode, ThemeTokens } from '@yamada-ui/react'
 
 export default {
   title: 'System / Theme / Tokens',
 }
 
-export const useColorSchemeToken = () => {
-  const { colorScheme } = useColorScheme()
+export const useColorModeToken = () => {
+  const { colorMode } = useColorMode()
 
   const colors: ThemeTokens = {
     primary: ['#2196F3', '#F44336'],
@@ -23,7 +23,7 @@ export const useColorSchemeToken = () => {
         transitionProperty='all'
         transitionDuration='normal'
       >
-        The current colorScheme is "{colorScheme}"
+        The current colorMode is "{colorMode}"
       </Box>
     </UIProvider>
   )

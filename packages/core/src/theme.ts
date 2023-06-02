@@ -82,4 +82,4 @@ const omitTheme = (theme: Dict): Dict =>
   omitObject(theme, ['__cssMap', '__cssVar', '__breakpoints'])
 
 export const omitThemeProps = <T extends ThemeProps>(props: T) =>
-  omitObject(props, ['size', 'variant', 'colorStyle'])
+  omitObject(props, ['size', 'variant', 'colorScheme'])

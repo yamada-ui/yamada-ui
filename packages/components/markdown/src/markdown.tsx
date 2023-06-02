@@ -5,7 +5,7 @@ import {
   omitThemeProps,
   ThemeProps,
   useComponentStyle,
-  ColorSchemeArray,
+  ColorModeArray,
 } from '@yamada-ui/core'
 import { useValue } from '@yamada-ui/use-value'
 import { cx, filterEmpty } from '@yamada-ui/utils'
@@ -40,7 +40,7 @@ export type MarkdownComponentTableRowProps = TableRowProps
 export type MarkdownComponentUnorderedListProps = UnorderedListProps
 
 type MarkdownOptions = ReactMarkdownOptions & {
-  code?: { theme?: CodeTheme | ColorSchemeArray<CodeTheme> }
+  code?: { theme?: CodeTheme | ColorModeArray<CodeTheme> }
 }
 
 export type MarkdownProps = Omit<HTMLUIProps<'div'>, 'children'> &

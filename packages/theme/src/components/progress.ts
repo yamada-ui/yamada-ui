@@ -6,7 +6,7 @@ export const Progress: ComponentMultiStyle = {
     track: {
       bg: ['gray.100', 'whiteAlpha.300'],
     },
-    filledTrack: ({ theme: t, colorScheme: s, colorStyle: c = 'blue', hasStripe, isAnimation }) => {
+    filledTrack: ({ theme: t, colorMode: s, colorScheme: c = 'blue', hasStripe, isAnimation }) => {
       hasStripe = !isAnimation && hasStripe
 
       const l = mode(500, 300)(s)
@@ -70,6 +70,6 @@ export const Progress: ComponentMultiStyle = {
 
   defaultProps: {
     size: 'md',
-    colorStyle: 'blue',
+    colorScheme: 'blue',
   },
 }

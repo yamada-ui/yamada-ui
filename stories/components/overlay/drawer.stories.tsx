@@ -41,7 +41,7 @@ export const basic: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -67,7 +67,7 @@ export const withDuration: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -139,7 +139,7 @@ export const withSize: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -202,7 +202,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -228,7 +228,7 @@ export const withFullHeight: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -254,7 +254,7 @@ export const disabledCloseButton: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -282,7 +282,7 @@ export const customCloseButton: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -308,7 +308,7 @@ export const disabledOverlay: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -336,7 +336,7 @@ export const customOverlay: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -404,7 +404,7 @@ export const scrollOnMount: ComponentStory<typeof Drawer> = () => {
           <Button variant='ghost' onClick={onClose}>
             とじる
           </Button>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </DrawerFooter>
       </Drawer>
     </>

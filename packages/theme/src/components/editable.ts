@@ -14,7 +14,7 @@ export const Editable: ComponentMultiStyle = {
     },
     input: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => ({
@@ -50,7 +50,7 @@ export const Editable: ComponentMultiStyle = {
     }),
     textarea: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => ({

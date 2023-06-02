@@ -96,7 +96,7 @@ const isHue = (value: any): boolean => {
 
 const isDefaultColor = (key: any): boolean => defaultColors.includes(key)
 
-export const extractColorStyles = (theme: any): string[] => {
+export const extractColorSchemes = (theme: any): string[] => {
   const { colors } = theme
 
   if (!isObject(colors)) return []
@@ -156,7 +156,7 @@ export const createThemeTypings = async (theme: any) => {
 
   const textStyles = extractKeys(theme, 'styles.textStyles')
   const layerStyles = extractKeys(theme, 'styles.layerStyles')
-  const colorStyles = extractColorStyles(theme)
+  const colorSchemes = extractColorSchemes(theme)
   const { transitionProperty, transitionDuration, transitionEasing } = extractTransitions(theme)
   const componentTypes = extractComponents(theme)
 
@@ -166,7 +166,7 @@ export const createThemeTypings = async (theme: any) => {
         ...unions,
         textStyles,
         layerStyles,
-        colorStyles,
+        colorSchemes,
         transitionProperty,
         transitionDuration,
         transitionEasing,

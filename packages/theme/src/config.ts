@@ -1,8 +1,8 @@
 import { ThemeConfig } from '@yamada-ui/core'
 
 export const config: ThemeConfig = {
-  initialColorScheme: 'light',
-  useSystemColorScheme: false,
+  initialColorMode: 'light',
+  useSystemColorMode: false,
   date: {
     locale: 'en',
   },

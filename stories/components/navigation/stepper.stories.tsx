@@ -62,7 +62,7 @@ export const withSize: ComponentStory<typeof Stepper> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Stepper> = () => {
+export const withColorScheme: ComponentStory<typeof Stepper> = () => {
   const steps: Steps = [
     { title: '孫悟空少年編', description: 'レッドリボン軍' },
     { title: 'ピッコロ大魔王編', description: 'ピッコロ大魔王' },
@@ -71,51 +71,51 @@ export const withColorStyle: ComponentStory<typeof Stepper> = () => {
 
   return (
     <>
-      <Stepper colorStyle='primary' index={1} steps={steps} />
+      <Stepper colorScheme='primary' index={1} steps={steps} />
 
-      <Stepper colorStyle='secondary' index={1} steps={steps} />
+      <Stepper colorScheme='secondary' index={1} steps={steps} />
 
-      <Stepper colorStyle='warning' index={1} steps={steps} />
+      <Stepper colorScheme='warning' index={1} steps={steps} />
 
-      <Stepper colorStyle='danger' index={1} steps={steps} />
+      <Stepper colorScheme='danger' index={1} steps={steps} />
 
-      <Stepper colorStyle='link' index={1} steps={steps} />
+      <Stepper colorScheme='link' index={1} steps={steps} />
 
-      <Stepper colorStyle='gray' index={1} steps={steps} />
+      <Stepper colorScheme='gray' index={1} steps={steps} />
 
-      <Stepper colorStyle='red' index={1} steps={steps} />
+      <Stepper colorScheme='red' index={1} steps={steps} />
 
-      <Stepper colorStyle='orange' index={1} steps={steps} />
+      <Stepper colorScheme='orange' index={1} steps={steps} />
 
-      <Stepper colorStyle='yellow' index={1} steps={steps} />
+      <Stepper colorScheme='yellow' index={1} steps={steps} />
 
-      <Stepper colorStyle='green' index={1} steps={steps} />
+      <Stepper colorScheme='green' index={1} steps={steps} />
 
-      <Stepper colorStyle='teal' index={1} steps={steps} />
+      <Stepper colorScheme='teal' index={1} steps={steps} />
 
-      <Stepper colorStyle='blue' index={1} steps={steps} />
+      <Stepper colorScheme='blue' index={1} steps={steps} />
 
-      <Stepper colorStyle='cyan' index={1} steps={steps} />
+      <Stepper colorScheme='cyan' index={1} steps={steps} />
 
-      <Stepper colorStyle='purple' index={1} steps={steps} />
+      <Stepper colorScheme='purple' index={1} steps={steps} />
 
-      <Stepper colorStyle='pink' index={1} steps={steps} />
+      <Stepper colorScheme='pink' index={1} steps={steps} />
 
-      <Stepper colorStyle='linkedin' index={1} steps={steps} />
+      <Stepper colorScheme='linkedin' index={1} steps={steps} />
 
-      <Stepper colorStyle='facebook' index={1} steps={steps} />
+      <Stepper colorScheme='facebook' index={1} steps={steps} />
 
-      <Stepper colorStyle='messenger' index={1} steps={steps} />
+      <Stepper colorScheme='messenger' index={1} steps={steps} />
 
-      <Stepper colorStyle='whatsapp' index={1} steps={steps} />
+      <Stepper colorScheme='whatsapp' index={1} steps={steps} />
 
-      <Stepper colorStyle='twitter' index={1} steps={steps} />
+      <Stepper colorScheme='twitter' index={1} steps={steps} />
 
-      <Stepper colorStyle='line' index={1} steps={steps} />
+      <Stepper colorScheme='line' index={1} steps={steps} />
 
-      <Stepper colorStyle='instagram' index={1} steps={steps} />
+      <Stepper colorScheme='instagram' index={1} steps={steps} />
 
-      <Stepper colorStyle='youtube' index={1} steps={steps} />
+      <Stepper colorScheme='youtube' index={1} steps={steps} />
     </>
   )
 }

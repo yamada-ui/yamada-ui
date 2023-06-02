@@ -27,7 +27,7 @@ Object.assign(background, {
   bgImg: background.backgroundImage,
 })
 
-export type BackgroundProps<Y = 'responsive', M = 'colorScheme'> = {
+export type BackgroundProps<Y = 'responsive', M = 'colorMode'> = {
   bg?: Token<CSS.Property.Color, 'colors', Y, M>
   bgClip?: Token<CSS.Property.BackgroundClip | 'text', Y, M>
   backgroundClip?: Token<CSS.Property.BackgroundClip | 'text', Y, M>

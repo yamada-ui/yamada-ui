@@ -25,7 +25,7 @@ export const Indicator: ComponentStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => ({
+    solid: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => ({
       bg: isDefaultColor(
         [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
         [`${c}.500`, `${c}.200`],
@@ -33,7 +33,7 @@ export const Indicator: ComponentStyle = {
       color: ['white', 'gray.900'],
     }),
 
-    subtle: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => ({
+    subtle: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => ({
       bg: isDefaultColor(
         [toneColor(c, 100)(t, s), shadeColor(toneColor(c, 200)(t, s), 56)(t, s)],
         [`${c}.100`, shadeColor(`${c}.200`, 56)(t, s)],
@@ -48,6 +48,6 @@ export const Indicator: ComponentStyle = {
   defaultProps: {
     size: 'md',
     variant: 'solid',
-    colorStyle: 'blue',
+    colorScheme: 'blue',
   },
 }

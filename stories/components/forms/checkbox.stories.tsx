@@ -36,98 +36,98 @@ export const withDefaultChecked: ComponentStory<typeof Checkbox> = () => {
   return <Checkbox defaultChecked>孫悟空</Checkbox>
 }
 
-export const withColorStyle: ComponentStory<typeof Checkbox> = () => {
+export const withColorScheme: ComponentStory<typeof Checkbox> = () => {
   return (
     <Wrap gap='md'>
-      <Checkbox colorStyle='primary' defaultChecked>
+      <Checkbox colorScheme='primary' defaultChecked>
         Primary
       </Checkbox>
 
-      <Checkbox colorStyle='secondary' defaultChecked>
+      <Checkbox colorScheme='secondary' defaultChecked>
         Secondary
       </Checkbox>
 
-      <Checkbox colorStyle='warning' defaultChecked>
+      <Checkbox colorScheme='warning' defaultChecked>
         Warning
       </Checkbox>
 
-      <Checkbox colorStyle='danger' defaultChecked>
+      <Checkbox colorScheme='danger' defaultChecked>
         Danger
       </Checkbox>
 
-      <Checkbox colorStyle='link' defaultChecked>
+      <Checkbox colorScheme='link' defaultChecked>
         Link
       </Checkbox>
 
-      <Checkbox colorStyle='gray' defaultChecked>
+      <Checkbox colorScheme='gray' defaultChecked>
         Gray
       </Checkbox>
 
-      <Checkbox colorStyle='red' defaultChecked>
+      <Checkbox colorScheme='red' defaultChecked>
         Red
       </Checkbox>
 
-      <Checkbox colorStyle='orange' defaultChecked>
+      <Checkbox colorScheme='orange' defaultChecked>
         Orange
       </Checkbox>
 
-      <Checkbox colorStyle='yellow' defaultChecked>
+      <Checkbox colorScheme='yellow' defaultChecked>
         Yellow
       </Checkbox>
 
-      <Checkbox colorStyle='green' defaultChecked>
+      <Checkbox colorScheme='green' defaultChecked>
         Green
       </Checkbox>
 
-      <Checkbox colorStyle='teal' defaultChecked>
+      <Checkbox colorScheme='teal' defaultChecked>
         Teal
       </Checkbox>
 
-      <Checkbox colorStyle='blue' defaultChecked>
+      <Checkbox colorScheme='blue' defaultChecked>
         Blue
       </Checkbox>
 
-      <Checkbox colorStyle='cyan' defaultChecked>
+      <Checkbox colorScheme='cyan' defaultChecked>
         Cyan
       </Checkbox>
 
-      <Checkbox colorStyle='purple' defaultChecked>
+      <Checkbox colorScheme='purple' defaultChecked>
         Purple
       </Checkbox>
 
-      <Checkbox colorStyle='pink' defaultChecked>
+      <Checkbox colorScheme='pink' defaultChecked>
         pink
       </Checkbox>
 
-      <Checkbox colorStyle='linkedin' defaultChecked>
+      <Checkbox colorScheme='linkedin' defaultChecked>
         Linkedin
       </Checkbox>
 
-      <Checkbox colorStyle='facebook' defaultChecked>
+      <Checkbox colorScheme='facebook' defaultChecked>
         Facebook
       </Checkbox>
 
-      <Checkbox colorStyle='messenger' defaultChecked>
+      <Checkbox colorScheme='messenger' defaultChecked>
         Messenger
       </Checkbox>
 
-      <Checkbox colorStyle='whatsapp' defaultChecked>
+      <Checkbox colorScheme='whatsapp' defaultChecked>
         Whatsapp
       </Checkbox>
 
-      <Checkbox colorStyle='twitter' defaultChecked>
+      <Checkbox colorScheme='twitter' defaultChecked>
         Twitter
       </Checkbox>
 
-      <Checkbox colorStyle='line' defaultChecked>
+      <Checkbox colorScheme='line' defaultChecked>
         Line
       </Checkbox>
 
-      <Checkbox colorStyle='instagram' defaultChecked>
+      <Checkbox colorScheme='instagram' defaultChecked>
         Instagram
       </Checkbox>
 
-      <Checkbox colorStyle='youtube' defaultChecked>
+      <Checkbox colorScheme='youtube' defaultChecked>
         Youtube
       </Checkbox>
     </Wrap>

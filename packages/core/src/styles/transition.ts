@@ -19,7 +19,7 @@ export const transition: Configs = {
   animationPlayState: true,
 }
 
-export type TransitionProps<Y = 'responsive', M = 'colorScheme'> = {
+export type TransitionProps<Y = 'responsive', M = 'colorMode'> = {
   transitionDelay?: Token<CSS.Property.TransitionDelay, unknown, Y, M>
   willChange?: Token<CSS.Property.WillChange, unknown, Y, M>
   transitionProperty?: Token<CSS.Property.TransitionProperty, 'transitionProperty', Y, M>

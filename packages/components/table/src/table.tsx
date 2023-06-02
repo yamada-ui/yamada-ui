@@ -43,11 +43,11 @@ export type TableProps<Y extends RowData> = Omit<UseTableProps<Y>, PagingTablePr
 
 export const Table = forwardRef(
   <Y extends RowData>(
-    { colorStyle, highlightOnSelected = true, ...props }: TableProps<Y>,
+    { colorScheme, highlightOnSelected = true, ...props }: TableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
     const [styles, mergedProps] = useMultiComponentStyle('Table', {
-      colorStyle,
+      colorScheme,
       highlightOnSelected,
       ...props,
     })
@@ -65,7 +65,7 @@ export const Table = forwardRef(
 
     const { getTableProps, ...rest } = useTable<Y>({
       ...computedProps,
-      checkboxProps: { colorStyle, ...checkboxProps },
+      checkboxProps: { colorScheme, ...checkboxProps },
     })
 
     const css: CSSUIObject = {

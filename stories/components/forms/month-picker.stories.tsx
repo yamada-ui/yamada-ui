@@ -52,7 +52,7 @@ export const withVariant: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof MonthPicker> = () => {
+export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
   return (
     <>
       <Heading size='xl'>Solid</Heading>
@@ -60,103 +60,107 @@ export const withColorStyle: ComponentStory<typeof MonthPicker> = () => {
       <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='primary'
+          calendarColorScheme='primary'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='secondary'
+          calendarColorScheme='secondary'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='warning'
+          calendarColorScheme='warning'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='danger'
+          calendarColorScheme='danger'
           defaultValue={new Date()}
         />
 
-        <MonthPicker calendarVariant='solid' calendarColorStyle='link' defaultValue={new Date()} />
+        <MonthPicker calendarVariant='solid' calendarColorScheme='link' defaultValue={new Date()} />
 
-        <MonthPicker calendarVariant='solid' calendarColorStyle='gray' defaultValue={new Date()} />
+        <MonthPicker calendarVariant='solid' calendarColorScheme='gray' defaultValue={new Date()} />
 
-        <MonthPicker calendarVariant='solid' calendarColorStyle='red' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='solid'
-          calendarColorStyle='orange'
-          defaultValue={new Date()}
-        />
+        <MonthPicker calendarVariant='solid' calendarColorScheme='red' defaultValue={new Date()} />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='yellow'
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker calendarVariant='solid' calendarColorStyle='green' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='solid' calendarColorStyle='teal' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='solid' calendarColorStyle='blue' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='solid' calendarColorStyle='cyan' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='solid'
-          calendarColorStyle='purple'
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker calendarVariant='solid' calendarColorStyle='pink' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='solid'
-          calendarColorStyle='linkedin'
+          calendarColorScheme='orange'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='facebook'
+          calendarColorScheme='yellow'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='messenger'
+          calendarColorScheme='green'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker calendarVariant='solid' calendarColorScheme='teal' defaultValue={new Date()} />
+
+        <MonthPicker calendarVariant='solid' calendarColorScheme='blue' defaultValue={new Date()} />
+
+        <MonthPicker calendarVariant='solid' calendarColorScheme='cyan' defaultValue={new Date()} />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='purple'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker calendarVariant='solid' calendarColorScheme='pink' defaultValue={new Date()} />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='linkedin'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='whatsapp'
+          calendarColorScheme='facebook'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='twitter'
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker calendarVariant='solid' calendarColorStyle='line' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='solid'
-          calendarColorStyle='instagram'
+          calendarColorScheme='messenger'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorStyle='youtube'
+          calendarColorScheme='whatsapp'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='twitter'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker calendarVariant='solid' calendarColorScheme='line' defaultValue={new Date()} />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='instagram'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='youtube'
           defaultValue={new Date()}
         />
       </Grid>
@@ -166,107 +170,135 @@ export const withColorStyle: ComponentStory<typeof MonthPicker> = () => {
       <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='primary'
+          calendarColorScheme='primary'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='secondary'
+          calendarColorScheme='secondary'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='warning'
+          calendarColorScheme='warning'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='danger'
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='link' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='gray' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='red' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='subtle'
-          calendarColorStyle='orange'
+          calendarColorScheme='danger'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='yellow'
+          calendarColorScheme='link'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='green'
+          calendarColorScheme='gray'
           defaultValue={new Date()}
         />
 
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='teal' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='blue' defaultValue={new Date()} />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='cyan' defaultValue={new Date()} />
+        <MonthPicker calendarVariant='subtle' calendarColorScheme='red' defaultValue={new Date()} />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='purple'
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='pink' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='subtle'
-          calendarColorStyle='linkedin'
+          calendarColorScheme='orange'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='facebook'
+          calendarColorScheme='yellow'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='messenger'
+          calendarColorScheme='green'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='whatsapp'
+          calendarColorScheme='teal'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='twitter'
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker calendarVariant='subtle' calendarColorStyle='line' defaultValue={new Date()} />
-
-        <MonthPicker
-          calendarVariant='subtle'
-          calendarColorStyle='instagram'
+          calendarColorScheme='blue'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorStyle='youtube'
+          calendarColorScheme='cyan'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='purple'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='pink'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='linkedin'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='facebook'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='messenger'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='whatsapp'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='twitter'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='line'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='instagram'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='youtube'
           defaultValue={new Date()}
         />
       </Grid>

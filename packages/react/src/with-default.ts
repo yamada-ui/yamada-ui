@@ -37,12 +37,12 @@ export const withDefaultVariant =
     })
   }
 
-export const withDefaultColorStyle =
+export const withDefaultColorScheme =
   ({
-    colorStyle,
+    colorScheme,
     components,
   }: {
-    colorStyle: ComponentDefaultProps['colorStyle']
+    colorScheme: ComponentDefaultProps['colorScheme']
     components?: Union<keyof Theme['components']>[]
   }) =>
   (theme: UsageTheme): UsageTheme => {
@@ -51,7 +51,7 @@ export const withDefaultColorStyle =
     if (isArray(components)) keys = components
 
     return merge(theme, {
-      components: Object.fromEntries(keys.map((key) => [key, { defaultProps: { colorStyle } }])),
+      components: Object.fromEntries(keys.map((key) => [key, { defaultProps: { colorScheme } }])),
     })
   }
 

@@ -43,8 +43,8 @@ export const Table: ComponentMultiStyle = {
   variants: {
     simple: (({
       theme: t,
-      colorScheme: s,
-      colorStyle: c = 'gray',
+      colorMode: s,
+      colorScheme: c = 'gray',
       withBorder,
       withColumnBorders,
       highlightOnSelected,
@@ -130,8 +130,8 @@ export const Table: ComponentMultiStyle = {
     }) as UIMultiStyle,
     striped: (({
       theme: t,
-      colorScheme: s,
-      colorStyle: c = 'gray',
+      colorMode: s,
+      colorScheme: c = 'gray',
       withBorder,
       withColumnBorders,
       highlightOnHover,
@@ -326,6 +326,6 @@ export const Table: ComponentMultiStyle = {
   defaultProps: {
     variant: 'simple',
     size: 'md',
-    colorStyle: 'gray',
+    colorScheme: 'gray',
   },
 }

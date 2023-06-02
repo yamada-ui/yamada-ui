@@ -63,73 +63,73 @@ export const withAccept: ComponentStory<typeof FileButton> = () => {
 export const withSize: ComponentStory<typeof FileButton> = () => {
   return (
     <Wrap gap='md'>
-      <FileButton colorStyle='primary' size='xs'>
+      <FileButton colorScheme='primary' size='xs'>
         X Small
       </FileButton>
 
-      <FileButton colorStyle='secondary' size='sm'>
+      <FileButton colorScheme='secondary' size='sm'>
         Small
       </FileButton>
 
-      <FileButton colorStyle='warning' size='md'>
+      <FileButton colorScheme='warning' size='md'>
         Medium
       </FileButton>
 
-      <FileButton colorStyle='danger' size='lg'>
+      <FileButton colorScheme='danger' size='lg'>
         Large
       </FileButton>
     </Wrap>
   )
 }
 
-export const withColorStyle: ComponentStory<typeof FileButton> = () => {
+export const withColorScheme: ComponentStory<typeof FileButton> = () => {
   return (
     <Wrap gap='md'>
-      <FileButton colorStyle='primary'>Primary</FileButton>
+      <FileButton colorScheme='primary'>Primary</FileButton>
 
-      <FileButton colorStyle='secondary'>Secondary</FileButton>
+      <FileButton colorScheme='secondary'>Secondary</FileButton>
 
-      <FileButton colorStyle='warning'>Warning</FileButton>
+      <FileButton colorScheme='warning'>Warning</FileButton>
 
-      <FileButton colorStyle='danger'>Danger</FileButton>
+      <FileButton colorScheme='danger'>Danger</FileButton>
 
-      <FileButton colorStyle='link'>Link</FileButton>
+      <FileButton colorScheme='link'>Link</FileButton>
 
-      <FileButton colorStyle='gray'>Gray</FileButton>
+      <FileButton colorScheme='gray'>Gray</FileButton>
 
-      <FileButton colorStyle='red'>Red</FileButton>
+      <FileButton colorScheme='red'>Red</FileButton>
 
-      <FileButton colorStyle='orange'>Orange</FileButton>
+      <FileButton colorScheme='orange'>Orange</FileButton>
 
-      <FileButton colorStyle='yellow'>Yellow</FileButton>
+      <FileButton colorScheme='yellow'>Yellow</FileButton>
 
-      <FileButton colorStyle='green'>Green</FileButton>
+      <FileButton colorScheme='green'>Green</FileButton>
 
-      <FileButton colorStyle='teal'>Teal</FileButton>
+      <FileButton colorScheme='teal'>Teal</FileButton>
 
-      <FileButton colorStyle='blue'>Blue</FileButton>
+      <FileButton colorScheme='blue'>Blue</FileButton>
 
-      <FileButton colorStyle='cyan'>Cyan</FileButton>
+      <FileButton colorScheme='cyan'>Cyan</FileButton>
 
-      <FileButton colorStyle='purple'>Purple</FileButton>
+      <FileButton colorScheme='purple'>Purple</FileButton>
 
-      <FileButton colorStyle='pink'>pink</FileButton>
+      <FileButton colorScheme='pink'>pink</FileButton>
 
-      <FileButton colorStyle='linkedin'>Linkedin</FileButton>
+      <FileButton colorScheme='linkedin'>Linkedin</FileButton>
 
-      <FileButton colorStyle='facebook'>Facebook</FileButton>
+      <FileButton colorScheme='facebook'>Facebook</FileButton>
 
-      <FileButton colorStyle='messenger'>Messenger</FileButton>
+      <FileButton colorScheme='messenger'>Messenger</FileButton>
 
-      <FileButton colorStyle='whatsapp'>Whatsapp</FileButton>
+      <FileButton colorScheme='whatsapp'>Whatsapp</FileButton>
 
-      <FileButton colorStyle='twitter'>Twitter</FileButton>
+      <FileButton colorScheme='twitter'>Twitter</FileButton>
 
-      <FileButton colorStyle='line'>Line</FileButton>
+      <FileButton colorScheme='line'>Line</FileButton>
 
-      <FileButton colorStyle='instagram'>Instagram</FileButton>
+      <FileButton colorScheme='instagram'>Instagram</FileButton>
 
-      <FileButton colorStyle='youtube'>Youtube</FileButton>
+      <FileButton colorScheme='youtube'>Youtube</FileButton>
     </Wrap>
   )
 }
@@ -137,19 +137,19 @@ export const withColorStyle: ComponentStory<typeof FileButton> = () => {
 export const withVariant: ComponentStory<typeof FileButton> = () => {
   return (
     <Wrap gap='md'>
-      <FileButton colorStyle='primary' variant='solid'>
+      <FileButton colorScheme='primary' variant='solid'>
         Solid
       </FileButton>
 
-      <FileButton colorStyle='secondary' variant='outline'>
+      <FileButton colorScheme='secondary' variant='outline'>
         Outline
       </FileButton>
 
-      <FileButton colorStyle='warning' variant='ghost'>
+      <FileButton colorScheme='warning' variant='ghost'>
         Ghost
       </FileButton>
 
-      <FileButton colorStyle='danger' variant='link'>
+      <FileButton colorScheme='danger' variant='link'>
         Link
       </FileButton>
 

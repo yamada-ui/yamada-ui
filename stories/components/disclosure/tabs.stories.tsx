@@ -261,9 +261,9 @@ export const withVariant: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Tabs> = () => {
+export const withColorScheme: ComponentStory<typeof Tabs> = () => {
   return (
-    <Tabs variant='rounded-solid' colorStyle='red'>
+    <Tabs variant='rounded-solid' colorScheme='red'>
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>

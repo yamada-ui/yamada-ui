@@ -5,8 +5,8 @@ import {
   SegmentedControl,
   SegmentedControlButton,
   Spacer,
-  useColorScheme,
-  ColorScheme,
+  useColorMode,
+  ColorMode,
 } from '@yamada-ui/react'
 import { forwardRef, useCallback } from 'react'
 import { useApp } from 'contexts'
@@ -14,12 +14,12 @@ import { useApp } from 'contexts'
 export type HeaderProps = {}
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
-  const { isSystemColorScheme, changeSystemColorScheme } = useApp()
-  const { colorScheme, changeColorScheme } = useColorScheme()
+  const { isSystemColorMode, changeSystemColorMode } = useApp()
+  const { colorMode, changeColorMode } = useColorMode()
 
-  const onChangeColorScheme = useCallback((value: string) => {
-    changeSystemColorScheme(value === 'system')
-    changeColorScheme(value as ColorScheme)
+  const onChangeColorMode = useCallback((value: string) => {
+    changeSystemColorMode(value === 'system')
+    changeColorMode(value as ColorMode)
   }, [])
 
   return (
@@ -39,8 +39,8 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
         <HStack>
           <SegmentedControl
             size='sm'
-            value={isSystemColorScheme ? 'system' : colorScheme}
-            onChange={onChangeColorScheme}
+            value={isSystemColorMode ? 'system' : colorMode}
+            onChange={onChangeColorMode}
           >
             <SegmentedControlButton value='system'>System</SegmentedControlButton>
             <SegmentedControlButton value='light'>Light</SegmentedControlButton>

@@ -12,11 +12,11 @@ import { Loading, LoadingProps } from '@yamada-ui/loading'
 import { createContext, cx } from '@yamada-ui/utils'
 
 const statuses = {
-  info: { icon: InfoIcon, colorStyle: 'blue' },
-  success: { icon: CheckIcon, colorStyle: 'green' },
-  warning: { icon: WarningIcon, colorStyle: 'orange' },
-  error: { icon: WarningIcon, colorStyle: 'red' },
-  loading: { icon: Loading, colorStyle: 'blue' },
+  info: { icon: InfoIcon, colorScheme: 'blue' },
+  success: { icon: CheckIcon, colorScheme: 'green' },
+  warning: { icon: WarningIcon, colorScheme: 'orange' },
+  error: { icon: WarningIcon, colorScheme: 'red' },
+  loading: { icon: Loading, colorScheme: 'blue' },
 } as const
 
 type Status = keyof typeof statuses
@@ -31,7 +31,7 @@ const [AlertProvider, useAlert] = createContext<AlertContext>({
   errorMessage: `useAlert returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
 })
 
-export const getStatusColorStyle = (status: Status) => statuses[status].colorStyle
+export const getStatusColorScheme = (status: Status) => statuses[status].colorScheme
 
 export const getStatusIcon = (status: Status) => statuses[status].icon
 
@@ -42,10 +42,10 @@ type AlertOptions = {
 export type AlertProps = HTMLUIProps<'div'> & ThemeProps<'Alert'> & AlertOptions
 
 export const Alert = forwardRef<AlertProps, 'div'>(
-  ({ status = 'info', colorStyle, ...props }, ref) => {
-    colorStyle = colorStyle ?? getStatusColorStyle(status)
+  ({ status = 'info', colorScheme, ...props }, ref) => {
+    colorScheme = colorScheme ?? getStatusColorScheme(status)
 
-    const [styles, mergedProps] = useMultiComponentStyle('Alert', { ...props, colorStyle })
+    const [styles, mergedProps] = useMultiComponentStyle('Alert', { ...props, colorScheme })
     const { className, children, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = {

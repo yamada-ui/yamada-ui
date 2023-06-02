@@ -1,4 +1,4 @@
-import { ColorScheme } from '../css'
+import { ColorMode } from '../css'
 
 const classNames = {
   light: 'ui-light',
@@ -15,11 +15,11 @@ type GetColorModeUtilsProps = {
 }
 
 export const getColorModeUtils = ({ isPreventTransition = true }: GetColorModeUtilsProps) => {
-  const setDataset = (colorShcme: ColorScheme) => {
+  const setDataset = (colorShcme: ColorMode) => {
     const cleanup = isPreventTransition ? preventTransition() : undefined
 
     document.documentElement.dataset.theme = colorShcme
-    document.documentElement.style.colorScheme = colorShcme
+    document.documentElement.style.colorMode = colorShcme
 
     cleanup?.()
   }
@@ -31,13 +31,13 @@ export const getColorModeUtils = ({ isPreventTransition = true }: GetColorModeUt
 
   const query = () => window.matchMedia(queries.dark)
 
-  const getSystemColorScheme = (fallback?: ColorScheme) => {
+  const getSystemColorMode = (fallback?: ColorMode) => {
     const dark = query().matches ?? fallback === 'dark'
 
     return dark ? 'dark' : 'light'
   }
 
-  const addListener = (func: (cm: ColorScheme) => unknown) => {
+  const addListener = (func: (cm: ColorMode) => unknown) => {
     const mql = query()
 
     const listener = (e: MediaQueryListEvent) => {
@@ -85,7 +85,7 @@ export const getColorModeUtils = ({ isPreventTransition = true }: GetColorModeUt
     setDataset,
     setClassName,
     query,
-    getSystemColorScheme,
+    getSystemColorMode,
     addListener,
     preventTransition,
   }

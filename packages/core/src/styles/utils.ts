@@ -1,11 +1,11 @@
 import { keyframes as emotionKeyframes, Keyframes, CSSObject } from '@emotion/react'
 import { isArray, isObject, isString, Dict } from '@yamada-ui/utils'
-import { ColorScheme } from '../css'
+import { ColorMode } from '../css'
 import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
 import { Transform } from './config'
 
-export const defaultColorStyles = ['primary', 'secondary', 'warning', 'danger', 'link']
+export const defaultColorSchemes = ['primary', 'secondary', 'warning', 'danger', 'link']
 
 const directions: Record<string, string> = {
   'to-t': 'to top',
@@ -95,12 +95,12 @@ export const createGradient: Transform = (value, theme) => {
 
 export const mode =
   <L extends any, D extends any>(light: L, dark: D) =>
-  (colorScheme: ColorScheme | undefined = 'light'): L | D =>
-    colorScheme === 'light' ? light : dark
+  (colorMode: ColorMode | undefined = 'light'): L | D =>
+    colorMode === 'light' ? light : dark
 
 export const isDefaultColor =
   (defaultColor: any, otherColor: any) =>
-  (colorStyle: string | undefined): any =>
-    colorStyle && defaultColorStyles.includes(colorStyle) ? defaultColor : otherColor
+  (colorScheme: string | undefined): any =>
+    colorScheme && defaultColorSchemes.includes(colorScheme) ? defaultColor : otherColor
 
 export const keyframes = (...arg: CSSObject[]): Keyframes => emotionKeyframes(...arg)

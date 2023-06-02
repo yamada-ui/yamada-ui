@@ -96,9 +96,9 @@ export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, re
   const successButtonProps: ButtonProps = isValidElement(success) ? { children: success } : success
 
   if (cancelButtonProps && !cancelButtonProps.variant) cancelButtonProps.variant = 'ghost'
-  if (otherButtonProps && !otherButtonProps.colorStyle) otherButtonProps.colorStyle = 'secondary'
-  if (successButtonProps && !successButtonProps.colorStyle)
-    successButtonProps.colorStyle = 'primary'
+  if (otherButtonProps && !otherButtonProps.colorScheme) otherButtonProps.colorScheme = 'secondary'
+  if (successButtonProps && !successButtonProps.colorScheme)
+    successButtonProps.colorScheme = 'primary'
 
   return (
     <DialogProvider value={styles}>

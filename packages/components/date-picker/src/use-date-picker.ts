@@ -89,7 +89,7 @@ export type UseDatePickerProps = Omit<
   UseDatePickerBaseProps & {
     calendarVariant?: CalendarThemeProps['variant']
     calendarSize?: CalendarThemeProps['size']
-    calendarColorStyle?: CalendarThemeProps['colorStyle']
+    calendarColorScheme?: CalendarThemeProps['colorScheme']
   }
 
 export const useDatePicker = ({
@@ -124,7 +124,7 @@ export const useDatePicker = ({
   excludeDate,
   calendarVariant,
   calendarSize,
-  calendarColorStyle,
+  calendarColorScheme,
   holidays,
   withHeader,
   withControls,
@@ -415,7 +415,7 @@ export const useDatePicker = ({
       withLabel,
       variant: calendarVariant,
       size: calendarSize,
-      colorStyle: calendarColorStyle,
+      colorScheme: calendarColorScheme,
       ...calendarProps,
       value,
       defaultValue,
@@ -427,7 +427,7 @@ export const useDatePicker = ({
     }),
     [
       amountOfMonths,
-      calendarColorStyle,
+      calendarColorScheme,
       calendarProps,
       calendarSize,
       calendarVariant,

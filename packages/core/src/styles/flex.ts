@@ -29,7 +29,7 @@ Object.assign(flex, {
   flexDir: flex.flexDirection,
 })
 
-export type FlexProps<Y = 'responsive', M = 'colorScheme'> = {
+export type FlexProps<Y = 'responsive', M = 'colorMode'> = {
   alignItems?: Token<CSS.Property.AlignItems, unknown, Y, M>
   alignContent?: Token<CSS.Property.AlignContent, unknown, Y, M>
   justifyItems?: Token<CSS.Property.JustifyItems, unknown, Y, M>

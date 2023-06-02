@@ -22,7 +22,7 @@ export const Dropzone: ComponentMultiStyle = {
   variants: {
     solid: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
@@ -80,7 +80,7 @@ export const Dropzone: ComponentMultiStyle = {
     },
     dashed: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {

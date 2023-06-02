@@ -1,27 +1,27 @@
-import { ColorScheme } from '../css'
+import { ColorMode } from '../css'
 import { STORAGE_KEY } from './color-scheme-script'
 
 const hasSupport = !!globalThis?.document
 
-export type ColorSchemeManager = {
+export type ColorModeManager = {
   type: 'cookie' | 'localStorage'
   ssr?: boolean
-  get: (initColorScheme?: ColorScheme) => ColorScheme | undefined
-  set: (colorScheme: ColorScheme | 'system') => void
+  get: (initColorMode?: ColorMode) => ColorMode | undefined
+  set: (colorMode: ColorMode | 'system') => void
 }
 
-export const createLocalStorageManager = (storageKey: string): ColorSchemeManager => ({
+export const createLocalStorageManager = (storageKey: string): ColorModeManager => ({
   ssr: false,
   type: 'localStorage',
-  get(initColorScheme = 'light') {
-    if (!hasSupport) return initColorScheme
+  get(initColorMode = 'light') {
+    if (!hasSupport) return initColorMode
 
     try {
-      const colorScheme = localStorage.getItem(storageKey) as ColorScheme | null
+      const colorMode = localStorage.getItem(storageKey) as ColorMode | null
 
-      return colorScheme || initColorScheme
+      return colorMode || initColorMode
     } catch (e) {
-      return initColorScheme
+      return initColorMode
     }
   },
 
@@ -34,24 +34,24 @@ export const createLocalStorageManager = (storageKey: string): ColorSchemeManage
 
 export const localStorageManager = createLocalStorageManager(STORAGE_KEY)
 
-const parseCookie = (cookie: string, key: string): ColorScheme | undefined => {
+const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
   const match = cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
-  return match?.[2] as ColorScheme | undefined
+  return match?.[2] as ColorMode | undefined
 }
 
-export const createCookieStorageManager = (key: string, cookie?: string): ColorSchemeManager => ({
+export const createCookieStorageManager = (key: string, cookie?: string): ColorModeManager => ({
   ssr: !!cookie,
   type: 'cookie',
-  get(initColorScheme: ColorScheme = 'light') {
+  get(initColorMode: ColorMode = 'light') {
     if (cookie) return parseCookie(cookie, key)
 
-    if (!hasSupport) return initColorScheme
+    if (!hasSupport) return initColorMode
 
-    return parseCookie(document.cookie, key) || initColorScheme
+    return parseCookie(document.cookie, key) || initColorMode
   },
 
-  set(colorShcme: ColorScheme | 'system') {
+  set(colorShcme: ColorMode | 'system') {
     document.cookie = `${key}=${colorShcme}; max-age=31536000; path=/`
   },
 })

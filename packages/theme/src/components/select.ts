@@ -113,7 +113,7 @@ export const Select: ComponentMultiStyle = {
   variants: {
     outline: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
@@ -149,7 +149,7 @@ export const Select: ComponentMultiStyle = {
     },
     filled: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
@@ -184,7 +184,7 @@ export const Select: ComponentMultiStyle = {
     },
     flushed: ({
       theme: t,
-      colorScheme: s,
+      colorMode: s,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {

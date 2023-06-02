@@ -3,7 +3,7 @@ import { filterObject, runIfFunc, Dict, assignAfter, filterUndefined } from '@ya
 import { ComponentType, createElement, forwardRef } from 'react'
 import { StyledOptions, UIComponent, StyledResolverProps, As } from './components'
 import { CSSUIProps, css, CSSUIObject, shouldForwardProp } from './css'
-import { useColorScheme } from './providers'
+import { useColorMode } from './providers'
 import { styles, pseudos } from './styles'
 
 const emotionStyled = ((createStyled as any).default ?? createStyled) as typeof createStyled
@@ -39,11 +39,11 @@ export const styled = <T extends As, P extends object = {}>(
   const Component = emotionStyled(element as ComponentType<any>, styledOptions)(CSSObject)
 
   const UIComponent = forwardRef((props, ref) => {
-    const { colorScheme, forced } = useColorScheme()
+    const { colorMode, forced } = useColorMode()
 
     return createElement(Component, {
       ref,
-      'data-theme': forced ? colorScheme : undefined,
+      'data-theme': forced ? colorMode : undefined,
       ...props,
     })
   })

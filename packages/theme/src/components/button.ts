@@ -37,8 +37,8 @@ export const Button: ComponentStyle = {
   variants: {
     solid: ({
       theme: t,
-      colorScheme: s,
-      colorStyle: c = 'gray',
+      colorMode: s,
+      colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const isGray = c === 'gray'
@@ -99,8 +99,8 @@ export const Button: ComponentStyle = {
     },
     outline: ({
       theme: t,
-      colorScheme: s,
-      colorStyle: c = 'gray',
+      colorMode: s,
+      colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const isGray = c === 'gray'
@@ -141,7 +141,7 @@ export const Button: ComponentStyle = {
         },
       }
     },
-    link: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => ({
+    link: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => ({
       padding: 0,
       height: 'auto',
       lineHeight: 'normal',
@@ -171,8 +171,8 @@ export const Button: ComponentStyle = {
     }),
     ghost: ({
       theme: t,
-      colorScheme: s,
-      colorStyle: c = 'gray',
+      colorMode: s,
+      colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const isGray = c === 'gray'
@@ -249,6 +249,6 @@ export const Button: ComponentStyle = {
   defaultProps: {
     variant: 'solid',
     size: 'md',
-    colorStyle: 'gray',
+    colorScheme: 'gray',
   },
 }

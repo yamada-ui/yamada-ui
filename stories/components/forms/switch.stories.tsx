@@ -47,98 +47,98 @@ export const withLabel: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Switch> = () => {
+export const withColorScheme: ComponentStory<typeof Switch> = () => {
   return (
     <Wrap gap='md'>
-      <Switch colorStyle='primary' defaultChecked>
+      <Switch colorScheme='primary' defaultChecked>
         Primary
       </Switch>
 
-      <Switch colorStyle='secondary' defaultChecked>
+      <Switch colorScheme='secondary' defaultChecked>
         Secondary
       </Switch>
 
-      <Switch colorStyle='warning' defaultChecked>
+      <Switch colorScheme='warning' defaultChecked>
         Warning
       </Switch>
 
-      <Switch colorStyle='danger' defaultChecked>
+      <Switch colorScheme='danger' defaultChecked>
         Danger
       </Switch>
 
-      <Switch colorStyle='link' defaultChecked>
+      <Switch colorScheme='link' defaultChecked>
         Link
       </Switch>
 
-      <Switch colorStyle='gray' defaultChecked>
+      <Switch colorScheme='gray' defaultChecked>
         Gray
       </Switch>
 
-      <Switch colorStyle='red' defaultChecked>
+      <Switch colorScheme='red' defaultChecked>
         Red
       </Switch>
 
-      <Switch colorStyle='orange' defaultChecked>
+      <Switch colorScheme='orange' defaultChecked>
         Orange
       </Switch>
 
-      <Switch colorStyle='yellow' defaultChecked>
+      <Switch colorScheme='yellow' defaultChecked>
         Yellow
       </Switch>
 
-      <Switch colorStyle='green' defaultChecked>
+      <Switch colorScheme='green' defaultChecked>
         Green
       </Switch>
 
-      <Switch colorStyle='teal' defaultChecked>
+      <Switch colorScheme='teal' defaultChecked>
         Teal
       </Switch>
 
-      <Switch colorStyle='blue' defaultChecked>
+      <Switch colorScheme='blue' defaultChecked>
         Blue
       </Switch>
 
-      <Switch colorStyle='cyan' defaultChecked>
+      <Switch colorScheme='cyan' defaultChecked>
         Cyan
       </Switch>
 
-      <Switch colorStyle='purple' defaultChecked>
+      <Switch colorScheme='purple' defaultChecked>
         Purple
       </Switch>
 
-      <Switch colorStyle='pink' defaultChecked>
+      <Switch colorScheme='pink' defaultChecked>
         pink
       </Switch>
 
-      <Switch colorStyle='linkedin' defaultChecked>
+      <Switch colorScheme='linkedin' defaultChecked>
         Linkedin
       </Switch>
 
-      <Switch colorStyle='facebook' defaultChecked>
+      <Switch colorScheme='facebook' defaultChecked>
         Facebook
       </Switch>
 
-      <Switch colorStyle='messenger' defaultChecked>
+      <Switch colorScheme='messenger' defaultChecked>
         Messenger
       </Switch>
 
-      <Switch colorStyle='whatsapp' defaultChecked>
+      <Switch colorScheme='whatsapp' defaultChecked>
         Whatsapp
       </Switch>
 
-      <Switch colorStyle='twitter' defaultChecked>
+      <Switch colorScheme='twitter' defaultChecked>
         Twitter
       </Switch>
 
-      <Switch colorStyle='line' defaultChecked>
+      <Switch colorScheme='line' defaultChecked>
         Line
       </Switch>
 
-      <Switch colorStyle='instagram' defaultChecked>
+      <Switch colorScheme='instagram' defaultChecked>
         Instagram
       </Switch>
 
-      <Switch colorStyle='youtube' defaultChecked>
+      <Switch colorScheme='youtube' defaultChecked>
         Youtube
       </Switch>
     </Wrap>

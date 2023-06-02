@@ -88,7 +88,7 @@ export const customDialog: ComponentStory<typeof Dialog> = () => {
           <Button variant='ghost' onClick={onClose}>
             わけない
           </Button>
-          <Button colorStyle='primary' onClick={onClose}>
+          <Button colorScheme='primary' onClick={onClose}>
             わける
           </Button>
         </DialogFooter>
@@ -133,13 +133,13 @@ export const customFooter: ComponentStory<typeof Dialog> = () => {
         header='孫悟空'
         footer={
           <>
-            <Button variant='ghost' colorStyle='red' onClick={onClose}>
+            <Button variant='ghost' colorScheme='red' onClick={onClose}>
               わけない
             </Button>
-            <Button variant='ghost' colorStyle='orange' onClick={onClose}>
+            <Button variant='ghost' colorScheme='orange' onClick={onClose}>
               どちらでもよい
             </Button>
-            <Button variant='ghost' colorStyle='blue' onClick={onClose}>
+            <Button variant='ghost' colorScheme='blue' onClick={onClose}>
               わける
             </Button>
           </>
@@ -163,11 +163,11 @@ export const customButton: ComponentStory<typeof Dialog> = () => {
         isOpen={isOpen}
         onClose={onClose}
         header='孫悟空'
-        cancel={{ variant: 'outline', colorStyle: 'red', children: 'わけない' }}
+        cancel={{ variant: 'outline', colorScheme: 'red', children: 'わけない' }}
         onCancel={onClose}
-        other={{ variant: 'outline', colorStyle: 'orange', children: 'どちらでもよい' }}
+        other={{ variant: 'outline', colorScheme: 'orange', children: 'どちらでもよい' }}
         onOther={onClose}
-        success={{ variant: 'outline', colorStyle: 'blue', children: 'わける' }}
+        success={{ variant: 'outline', colorScheme: 'blue', children: 'わける' }}
         onSuccess={onClose}
       >
         だ…大地よ海よ　そして生きているすべての　みんな…

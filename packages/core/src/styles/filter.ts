@@ -7,7 +7,7 @@ export const filter: Configs = {
   backdropFilter: true,
 }
 
-export type FilterProps<Y = 'responsive', M = 'colorScheme'> = {
+export type FilterProps<Y = 'responsive', M = 'colorMode'> = {
   filter?: Token<CSS.Property.Filter, unknown, Y, M>
   backdropFilter?: Token<CSS.Property.BackdropFilter, unknown, Y, M>
 }

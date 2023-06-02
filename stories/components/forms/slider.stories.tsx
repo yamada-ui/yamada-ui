@@ -40,54 +40,54 @@ export const withSize: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Slider> = () => {
+export const withColorScheme: ComponentStory<typeof Slider> = () => {
   return (
     <>
-      <Slider colorStyle='primary' />
+      <Slider colorScheme='primary' />
 
-      <Slider colorStyle='secondary' />
+      <Slider colorScheme='secondary' />
 
-      <Slider colorStyle='warning' />
+      <Slider colorScheme='warning' />
 
-      <Slider colorStyle='danger' />
+      <Slider colorScheme='danger' />
 
-      <Slider colorStyle='link' />
+      <Slider colorScheme='link' />
 
-      <Slider colorStyle='gray' />
+      <Slider colorScheme='gray' />
 
-      <Slider colorStyle='red' />
+      <Slider colorScheme='red' />
 
-      <Slider colorStyle='orange' />
+      <Slider colorScheme='orange' />
 
-      <Slider colorStyle='yellow' />
+      <Slider colorScheme='yellow' />
 
-      <Slider colorStyle='green' />
+      <Slider colorScheme='green' />
 
-      <Slider colorStyle='teal' />
+      <Slider colorScheme='teal' />
 
-      <Slider colorStyle='blue' />
+      <Slider colorScheme='blue' />
 
-      <Slider colorStyle='cyan' />
+      <Slider colorScheme='cyan' />
 
-      <Slider colorStyle='purple' />
+      <Slider colorScheme='purple' />
 
-      <Slider colorStyle='pink' />
+      <Slider colorScheme='pink' />
 
-      <Slider colorStyle='linkedin' />
+      <Slider colorScheme='linkedin' />
 
-      <Slider colorStyle='facebook' />
+      <Slider colorScheme='facebook' />
 
-      <Slider colorStyle='messenger' />
+      <Slider colorScheme='messenger' />
 
-      <Slider colorStyle='whatsapp' />
+      <Slider colorScheme='whatsapp' />
 
-      <Slider colorStyle='twitter' />
+      <Slider colorScheme='twitter' />
 
-      <Slider colorStyle='line' />
+      <Slider colorScheme='line' />
 
-      <Slider colorStyle='instagram' />
+      <Slider colorScheme='instagram' />
 
-      <Slider colorStyle='youtube' />
+      <Slider colorScheme='youtube' />
     </>
   )
 }
@@ -144,7 +144,7 @@ export const withFocusThumbOnChange: ComponentStory<typeof Slider> = () => {
         </Button>
         <Button
           isDisabled={value === 100}
-          colorStyle='blue'
+          colorScheme='blue'
           onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
         >
           +10

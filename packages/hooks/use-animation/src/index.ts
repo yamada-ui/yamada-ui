@@ -5,8 +5,8 @@ import {
   keyframes as emotionKeyframes,
   StyledTheme,
   useTheme,
-  useColorScheme,
-  ColorScheme,
+  useColorMode,
+  ColorMode,
 } from '@yamada-ui/core'
 import { useBoolean } from '@yamada-ui/use-boolean'
 import { useEventListener } from '@yamada-ui/use-event-listener'
@@ -22,29 +22,29 @@ import * as CSS from 'csstype'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 export type AnimationStyle = {
-  keyframes: Record<string, StylesProps<'unResponsive', 'unColorScheme'>>
+  keyframes: Record<string, StylesProps<'unResponsive', 'unColorMode'>>
   duration?: Token<
     CSS.Property.AnimationDuration,
     'transitionDuration',
     'unResponsive',
-    'unColorScheme'
+    'unColorMode'
   >
   timingFunction?: Token<
     CSS.Property.AnimationTimingFunction,
     'transitionEasing',
     'unResponsive',
-    'unColorScheme'
+    'unColorMode'
   >
-  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unResponsive', 'unColorScheme'>
+  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unResponsive', 'unColorMode'>
   iterationCount?: Token<
     CSS.Property.AnimationIterationCount,
     unknown,
     'unResponsive',
-    'unColorScheme'
+    'unColorMode'
   >
-  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unResponsive', 'unColorScheme'>
-  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unResponsive', 'unColorScheme'>
-  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unResponsive', 'unColorScheme'>
+  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unResponsive', 'unColorMode'>
+  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unResponsive', 'unColorMode'>
+  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unResponsive', 'unColorMode'>
 }
 
 const getValue =
@@ -52,13 +52,13 @@ const getValue =
     name: string,
     path: Omit<AnimationStyle, 'keyframes'>[keyof Omit<AnimationStyle, 'keyframes'>],
   ) =>
-  (theme: StyledTheme<Dict>, colorScheme: ColorScheme) => {
+  (theme: StyledTheme<Dict>, colorMode: ColorMode) => {
     const value = get(theme, `${name}.${path}`)
 
     if (isArray(value)) {
       const [lightValue, darkValue] = value
 
-      return colorScheme === 'light' ? lightValue : darkValue
+      return colorMode === 'light' ? lightValue : darkValue
     } else {
       return value
     }
@@ -66,12 +66,12 @@ const getValue =
 
 const transformConfig =
   (obj: Omit<AnimationStyle, 'keyframes'>) =>
-  (theme: StyledTheme<Dict>, colorScheme: ColorScheme): Omit<AnimationStyle, 'keyframes'> =>
+  (theme: StyledTheme<Dict>, colorMode: ColorMode): Omit<AnimationStyle, 'keyframes'> =>
     Object.entries(obj).reduce((obj, [key, value]) => {
       if (key === 'duration')
-        value = getValue('transitions.duration', value)(theme, colorScheme) ?? value
+        value = getValue('transitions.duration', value)(theme, colorMode) ?? value
       if (key === 'timingFunction')
-        value = getValue('transitions.easing', value)(theme, colorScheme) ?? value
+        value = getValue('transitions.easing', value)(theme, colorMode) ?? value
 
       obj[key] = value
 
@@ -80,7 +80,7 @@ const transformConfig =
 
 const createAnimation =
   (keyframes: AnimationStyle['keyframes'], config: Omit<AnimationStyle, 'keyframes'>) =>
-  (theme: StyledTheme<Dict>, colorScheme: ColorScheme): string => {
+  (theme: StyledTheme<Dict>, colorMode: ColorMode): string => {
     const generatedKeyframes = css(keyframes)(theme)
 
     const {
@@ -91,7 +91,7 @@ const createAnimation =
       direction = 'normal',
       fillMode = 'none',
       playState = 'running',
-    } = transformConfig(config)(theme, colorScheme)
+    } = transformConfig(config)(theme, colorMode)
 
     const name = emotionKeyframes(generatedKeyframes)
 
@@ -100,20 +100,20 @@ const createAnimation =
 
 export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): string => {
   const { theme } = useTheme()
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   if (isArray(styles)) {
     return styles
       .map((style) => {
         const { keyframes, ...config } = style
 
-        return createAnimation(keyframes, config)(theme, colorScheme)
+        return createAnimation(keyframes, config)(theme, colorMode)
       })
       .join(', ')
   } else {
     const { keyframes, ...config } = styles
 
-    return createAnimation(keyframes, config)(theme, colorScheme)
+    return createAnimation(keyframes, config)(theme, colorMode)
   }
 }
 
@@ -132,7 +132,7 @@ export const useDynamicAnimation = <
   ) => void,
 ] => {
   const { theme } = useTheme()
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   const keys = useRef<string | string[] | undefined>(
     !isUndefined(init) ? (isArray(init) ? init.map(String) : String(init)) : undefined,
@@ -147,15 +147,13 @@ export const useDynamicAnimation = <
         cache.current.set(
           key,
           styles
-            .map(({ keyframes, ...config }) =>
-              createAnimation(keyframes, config)(theme, colorScheme),
-            )
+            .map(({ keyframes, ...config }) => createAnimation(keyframes, config)(theme, colorMode))
             .join(', '),
         )
       } else {
         const { keyframes, ...config } = styles
 
-        cache.current.set(key, createAnimation(keyframes, config)(theme, colorScheme))
+        cache.current.set(key, createAnimation(keyframes, config)(theme, colorMode))
       }
     }
 

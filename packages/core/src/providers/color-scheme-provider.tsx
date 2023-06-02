@@ -9,126 +9,124 @@ import {
   useState,
   useContext,
 } from 'react'
-import { ColorScheme } from '../css'
+import { ColorMode } from '../css'
 import { ThemeConfig } from '../theme.types'
-import { ColorSchemeManager, localStorageManager } from './color-scheme-manager'
+import { ColorModeManager, localStorageManager } from './color-scheme-manager'
 import { getColorModeUtils } from './color-scheme-utils'
 
-type ColorSchemeContext = {
+type ColorModeContext = {
   forced?: boolean
-  colorScheme: ColorScheme
-  changeColorScheme: (colorScheme: ColorScheme | 'system') => void
+  colorMode: ColorMode
+  changeColorMode: (colorMode: ColorMode | 'system') => void
   toggleScheme: () => void
 }
 
-const getColorScheme = (manager: ColorSchemeManager, fallback?: ColorScheme) =>
+const getColorMode = (manager: ColorModeManager, fallback?: ColorMode) =>
   manager.type === 'cookie' && manager.ssr ? manager.get(fallback) : fallback
 
-export const ColorSchemeContext = createContext({} as ColorSchemeContext)
+export const ColorModeContext = createContext({} as ColorModeContext)
 
-export type ColorSchemeProviderProps = {
-  value?: ColorScheme
+export type ColorModeProviderProps = {
+  value?: ColorMode
   config: ThemeConfig
   children?: ReactNode
-  colorSchemeManager?: ColorSchemeManager
+  colorModeManager?: ColorModeManager
 }
 
-export const ColorSchemeProvider: FC<ColorSchemeProviderProps> = ({
+export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   value,
-  colorSchemeManager = localStorageManager,
-  config: { initialColorScheme, useSystemColorScheme, disableTransitionOnChange } = {
-    initialColorScheme: 'light',
-    useSystemColorScheme: true,
+  colorModeManager = localStorageManager,
+  config: { initialColorMode, useSystemColorMode, disableTransitionOnChange } = {
+    initialColorMode: 'light',
+    useSystemColorMode: true,
   },
   children,
 }) => {
-  const defaultColorScheme = initialColorScheme === 'dark' ? 'dark' : 'light'
+  const defaultColorMode = initialColorMode === 'dark' ? 'dark' : 'light'
 
-  const [colorScheme, setColorScheme] = useState<ColorScheme | undefined>(() =>
-    getColorScheme(colorSchemeManager, defaultColorScheme),
+  const [colorMode, setColorMode] = useState<ColorMode | undefined>(() =>
+    getColorMode(colorModeManager, defaultColorMode),
   )
 
-  const [resolvedColorScheme, setResolvedColorScheme] = useState<ColorScheme | undefined>(() =>
-    getColorScheme(colorSchemeManager),
+  const [resolvedColorMode, setResolvedColorMode] = useState<ColorMode | undefined>(() =>
+    getColorMode(colorModeManager),
   )
 
-  const resolvedValue =
-    initialColorScheme === 'system' && !colorScheme ? resolvedColorScheme : colorScheme
+  const resolvedValue = initialColorMode === 'system' && !colorMode ? resolvedColorMode : colorMode
 
-  const { getSystemColorScheme, setClassName, setDataset, addListener } = useMemo(
+  const { getSystemColorMode, setClassName, setDataset, addListener } = useMemo(
     () => getColorModeUtils({ isPreventTransition: disableTransitionOnChange }),
     [disableTransitionOnChange],
   )
 
-  const changeColorScheme = useCallback(
-    (value: ColorScheme | 'system'): void => {
-      const resolved = value === 'system' ? getSystemColorScheme() : value
+  const changeColorMode = useCallback(
+    (value: ColorMode | 'system'): void => {
+      const resolved = value === 'system' ? getSystemColorMode() : value
 
-      setColorScheme(resolved)
+      setColorMode(resolved)
       setClassName(resolved === 'dark')
       setDataset(resolved)
 
-      colorSchemeManager.set(resolved)
+      colorModeManager.set(resolved)
     },
-    [colorSchemeManager, getSystemColorScheme, setClassName, setDataset],
+    [colorModeManager, getSystemColorMode, setClassName, setDataset],
   )
 
   const toggleScheme = useCallback((): void => {
-    changeColorScheme(resolvedValue === 'dark' ? 'light' : 'dark')
-  }, [changeColorScheme, resolvedValue])
+    changeColorMode(resolvedValue === 'dark' ? 'light' : 'dark')
+  }, [changeColorMode, resolvedValue])
 
   useSafeLayoutEffect(() => {
-    if (initialColorScheme === 'system') setResolvedColorScheme(getSystemColorScheme())
+    if (initialColorMode === 'system') setResolvedColorMode(getSystemColorMode())
   }, [])
 
   useEffect(() => {
-    const managerValue = colorSchemeManager.get()
+    const managerValue = colorModeManager.get()
 
     if (managerValue) {
-      changeColorScheme(managerValue)
+      changeColorMode(managerValue)
 
       return
     }
 
-    if (initialColorScheme === 'system') {
-      changeColorScheme('system')
+    if (initialColorMode === 'system') {
+      changeColorMode('system')
 
       return
     }
 
-    changeColorScheme(defaultColorScheme)
-  }, [changeColorScheme, colorSchemeManager, defaultColorScheme, initialColorScheme])
+    changeColorMode(defaultColorMode)
+  }, [changeColorMode, colorModeManager, defaultColorMode, initialColorMode])
 
   useEffect(() => {
-    if (!useSystemColorScheme) return
+    if (!useSystemColorMode) return
 
-    return addListener(changeColorScheme)
-  }, [useSystemColorScheme, addListener, changeColorScheme])
+    return addListener(changeColorMode)
+  }, [useSystemColorMode, addListener, changeColorMode])
 
   const context = useMemo(
     () => ({
-      colorScheme: value ?? (resolvedValue as ColorScheme),
-      changeColorScheme: value ? noop : changeColorScheme,
+      colorMode: value ?? (resolvedValue as ColorMode),
+      changeColorMode: value ? noop : changeColorMode,
       toggleScheme: value ? noop : toggleScheme,
       forced: value !== undefined,
     }),
-    [value, resolvedValue, changeColorScheme, toggleScheme],
+    [value, resolvedValue, changeColorMode, toggleScheme],
   )
 
-  return <ColorSchemeContext.Provider value={context}>{children}</ColorSchemeContext.Provider>
+  return <ColorModeContext.Provider value={context}>{children}</ColorModeContext.Provider>
 }
 
-export const useColorScheme = () => {
-  const context = useContext(ColorSchemeContext)
+export const useColorMode = () => {
+  const context = useContext(ColorModeContext)
 
-  if (context === undefined)
-    throw new Error('useColorScheme must be used within a ColorSchemeProvider')
+  if (context === undefined) throw new Error('useColorMode must be used within a ColorModeProvider')
 
   return context
 }
 
-export const useColorSchemetValue = <L extends any, D extends any>(light: L, dark: D): L | D => {
-  const { colorScheme } = useColorScheme()
+export const useColorModetValue = <L extends any, D extends any>(light: L, dark: D): L | D => {
+  const { colorMode } = useColorMode()
 
-  return colorScheme === 'light' ? light : dark
+  return colorMode === 'light' ? light : dark
 }

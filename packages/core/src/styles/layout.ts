@@ -45,7 +45,7 @@ Object.assign(layout, {
   overscrollY: layout.overscrollBehaviorY,
 })
 
-export type LayoutProps<Y = 'responsive', M = 'colorScheme'> = {
+export type LayoutProps<Y = 'responsive', M = 'colorMode'> = {
   display?: Token<CSS.Property.Display, unknown, Y, M>
   width?: Token<CSS.Property.Width | number, 'sizes', Y, M>
   w?: Token<CSS.Property.Width | number, 'sizes', Y, M>

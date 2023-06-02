@@ -41,7 +41,7 @@ export const Pagination: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
+    solid: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => {
       const isGray = c === 'gray'
       const isAccessible = c === 'yellow' || c === 'cyan'
 
@@ -82,7 +82,7 @@ export const Pagination: ComponentMultiStyle = {
         },
       }
     },
-    outline: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
+    outline: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => {
       const isGray = c === 'gray'
 
       return {
@@ -115,7 +115,7 @@ export const Pagination: ComponentMultiStyle = {
         },
       }
     },
-    ghost: ({ theme: t, colorScheme: s, colorStyle: c = 'gray' }) => {
+    ghost: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => {
       const isGray = c === 'gray'
 
       return {
@@ -209,6 +209,6 @@ export const Pagination: ComponentMultiStyle = {
   defaultProps: {
     variant: 'solid',
     size: 'md',
-    colorStyle: 'gray',
+    colorScheme: 'gray',
   },
 }

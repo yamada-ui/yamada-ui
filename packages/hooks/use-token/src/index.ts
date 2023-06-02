@@ -1,4 +1,4 @@
-import { useColorScheme, useTheme, Theme } from '@yamada-ui/core'
+import { useColorMode, useTheme, Theme } from '@yamada-ui/core'
 import { getMemoizedObject as get, isArray } from '@yamada-ui/utils'
 
 export const useToken = <
@@ -9,7 +9,7 @@ export const useToken = <
   path: Theme[M] | number | undefined,
 ) => {
   const { theme } = useTheme()
-  const { colorScheme } = useColorScheme()
+  const { colorMode } = useColorMode()
 
   if (name === 'layerStyles') name = 'styles.layerStyles' as M
 
@@ -26,7 +26,7 @@ export const useToken = <
   if (isArray(value)) {
     const [lightValue, darkValue] = value
 
-    return colorScheme === 'light' ? lightValue : darkValue
+    return colorMode === 'light' ? lightValue : darkValue
   } else {
     return value
   }

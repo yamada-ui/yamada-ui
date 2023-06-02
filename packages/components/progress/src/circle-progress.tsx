@@ -60,7 +60,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
           strokeDasharray: '400, 400',
           strokeDashoffset: '-260',
         },
-      } as Record<string, StylesProps<'unResponsive', 'unColorScheme'>>,
+      } as Record<string, StylesProps<'unResponsive', 'unColorMode'>>,
       duration: typeof speed[0] === 'string' ? speed[0] : `${speed[0]}s`,
       iterationCount: 'infinite',
       timingFunction: 'linear',

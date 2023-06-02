@@ -259,7 +259,7 @@ export const withStatus = () => {
   )
 }
 
-export const withColorStyle = () => {
+export const withColorScheme = () => {
   const notice = useNotice()
 
   return (
@@ -271,7 +271,7 @@ export const withColorStyle = () => {
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'info',
-              colorStyle: 'green',
+              colorScheme: 'green',
             })
           }
         >
@@ -284,7 +284,7 @@ export const withColorStyle = () => {
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'success',
-              colorStyle: 'purple',
+              colorScheme: 'purple',
             })
           }
         >
@@ -297,7 +297,7 @@ export const withColorStyle = () => {
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'warning',
-              colorStyle: 'gray',
+              colorScheme: 'gray',
             })
           }
         >
@@ -310,7 +310,7 @@ export const withColorStyle = () => {
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
               status: 'error',
-              colorStyle: 'pink',
+              colorScheme: 'pink',
             })
           }
         >
@@ -460,7 +460,7 @@ export const useUpdate = () => {
     ref.current = notice({
       title: '孫悟空',
       description: 'オッス！オラ悟空！',
-      colorStyle: 'orange',
+      colorScheme: 'orange',
       duration: 30000,
     })
   }
@@ -470,7 +470,7 @@ export const useUpdate = () => {
       notice.update(ref.current, {
         title: 'ベジータ',
         description: 'よくも…よくも…オレの…ブルマを!!',
-        colorStyle: 'blue',
+        colorScheme: 'blue',
         duration: 30000,
       })
   }

@@ -9,51 +9,51 @@ export default {
 export const subtle: ComponentStory<typeof Badge> = () => {
   return (
     <Wrap gap='md'>
-      <Badge colorStyle='primary'>Primary</Badge>
+      <Badge colorScheme='primary'>Primary</Badge>
 
-      <Badge colorStyle='secondary'>Secondary</Badge>
+      <Badge colorScheme='secondary'>Secondary</Badge>
 
-      <Badge colorStyle='warning'>Warning</Badge>
+      <Badge colorScheme='warning'>Warning</Badge>
 
-      <Badge colorStyle='danger'>Danger</Badge>
+      <Badge colorScheme='danger'>Danger</Badge>
 
-      <Badge colorStyle='link'>Link</Badge>
+      <Badge colorScheme='link'>Link</Badge>
 
-      <Badge colorStyle='gray'>Gray</Badge>
+      <Badge colorScheme='gray'>Gray</Badge>
 
-      <Badge colorStyle='red'>Red</Badge>
+      <Badge colorScheme='red'>Red</Badge>
 
-      <Badge colorStyle='orange'>Orange</Badge>
+      <Badge colorScheme='orange'>Orange</Badge>
 
-      <Badge colorStyle='yellow'>Yellow</Badge>
+      <Badge colorScheme='yellow'>Yellow</Badge>
 
-      <Badge colorStyle='green'>Green</Badge>
+      <Badge colorScheme='green'>Green</Badge>
 
-      <Badge colorStyle='teal'>Teal</Badge>
+      <Badge colorScheme='teal'>Teal</Badge>
 
-      <Badge colorStyle='blue'>Blue</Badge>
+      <Badge colorScheme='blue'>Blue</Badge>
 
-      <Badge colorStyle='cyan'>Cyan</Badge>
+      <Badge colorScheme='cyan'>Cyan</Badge>
 
-      <Badge colorStyle='purple'>Purple</Badge>
+      <Badge colorScheme='purple'>Purple</Badge>
 
-      <Badge colorStyle='pink'>pink</Badge>
+      <Badge colorScheme='pink'>pink</Badge>
 
-      <Badge colorStyle='linkedin'>Linkedin</Badge>
+      <Badge colorScheme='linkedin'>Linkedin</Badge>
 
-      <Badge colorStyle='facebook'>Facebook</Badge>
+      <Badge colorScheme='facebook'>Facebook</Badge>
 
-      <Badge colorStyle='messenger'>Messenger</Badge>
+      <Badge colorScheme='messenger'>Messenger</Badge>
 
-      <Badge colorStyle='whatsapp'>Whatsapp</Badge>
+      <Badge colorScheme='whatsapp'>Whatsapp</Badge>
 
-      <Badge colorStyle='twitter'>Twitter</Badge>
+      <Badge colorScheme='twitter'>Twitter</Badge>
 
-      <Badge colorStyle='line'>Line</Badge>
+      <Badge colorScheme='line'>Line</Badge>
 
-      <Badge colorStyle='instagram'>Instagram</Badge>
+      <Badge colorScheme='instagram'>Instagram</Badge>
 
-      <Badge colorStyle='youtube'>Youtube</Badge>
+      <Badge colorScheme='youtube'>Youtube</Badge>
     </Wrap>
   )
 }
@@ -61,95 +61,95 @@ export const subtle: ComponentStory<typeof Badge> = () => {
 export const solid: ComponentStory<typeof Badge> = () => {
   return (
     <Wrap gap='md'>
-      <Badge variant='solid' colorStyle='primary'>
+      <Badge variant='solid' colorScheme='primary'>
         Primary
       </Badge>
 
-      <Badge variant='solid' colorStyle='secondary'>
+      <Badge variant='solid' colorScheme='secondary'>
         Secondary
       </Badge>
 
-      <Badge variant='solid' colorStyle='warning'>
+      <Badge variant='solid' colorScheme='warning'>
         Warning
       </Badge>
 
-      <Badge variant='solid' colorStyle='danger'>
+      <Badge variant='solid' colorScheme='danger'>
         Danger
       </Badge>
 
-      <Badge variant='solid' colorStyle='link'>
+      <Badge variant='solid' colorScheme='link'>
         Link
       </Badge>
 
-      <Badge variant='solid' colorStyle='gray'>
+      <Badge variant='solid' colorScheme='gray'>
         Gray
       </Badge>
 
-      <Badge variant='solid' colorStyle='red'>
+      <Badge variant='solid' colorScheme='red'>
         Red
       </Badge>
 
-      <Badge variant='solid' colorStyle='orange'>
+      <Badge variant='solid' colorScheme='orange'>
         Orange
       </Badge>
 
-      <Badge variant='solid' colorStyle='yellow'>
+      <Badge variant='solid' colorScheme='yellow'>
         Yellow
       </Badge>
 
-      <Badge variant='solid' colorStyle='green'>
+      <Badge variant='solid' colorScheme='green'>
         Green
       </Badge>
 
-      <Badge variant='solid' colorStyle='teal'>
+      <Badge variant='solid' colorScheme='teal'>
         Teal
       </Badge>
 
-      <Badge variant='solid' colorStyle='blue'>
+      <Badge variant='solid' colorScheme='blue'>
         Blue
       </Badge>
 
-      <Badge variant='solid' colorStyle='cyan'>
+      <Badge variant='solid' colorScheme='cyan'>
         Cyan
       </Badge>
 
-      <Badge variant='solid' colorStyle='purple'>
+      <Badge variant='solid' colorScheme='purple'>
         Purple
       </Badge>
 
-      <Badge variant='solid' colorStyle='pink'>
+      <Badge variant='solid' colorScheme='pink'>
         pink
       </Badge>
 
-      <Badge variant='solid' colorStyle='linkedin'>
+      <Badge variant='solid' colorScheme='linkedin'>
         Linkedin
       </Badge>
 
-      <Badge variant='solid' colorStyle='facebook'>
+      <Badge variant='solid' colorScheme='facebook'>
         Facebook
       </Badge>
 
-      <Badge variant='solid' colorStyle='messenger'>
+      <Badge variant='solid' colorScheme='messenger'>
         Messenger
       </Badge>
 
-      <Badge variant='solid' colorStyle='whatsapp'>
+      <Badge variant='solid' colorScheme='whatsapp'>
         Whatsapp
       </Badge>
 
-      <Badge variant='solid' colorStyle='twitter'>
+      <Badge variant='solid' colorScheme='twitter'>
         Twitter
       </Badge>
 
-      <Badge variant='solid' colorStyle='line'>
+      <Badge variant='solid' colorScheme='line'>
         Line
       </Badge>
 
-      <Badge variant='solid' colorStyle='instagram'>
+      <Badge variant='solid' colorScheme='instagram'>
         Instagram
       </Badge>
 
-      <Badge variant='solid' colorStyle='youtube'>
+      <Badge variant='solid' colorScheme='youtube'>
         Youtube
       </Badge>
     </Wrap>
@@ -159,95 +159,95 @@ export const solid: ComponentStory<typeof Badge> = () => {
 export const outline: ComponentStory<typeof Badge> = () => {
   return (
     <Wrap gap='md'>
-      <Badge variant='outline' colorStyle='primary'>
+      <Badge variant='outline' colorScheme='primary'>
         Primary
       </Badge>
 
-      <Badge variant='outline' colorStyle='secondary'>
+      <Badge variant='outline' colorScheme='secondary'>
         Secondary
       </Badge>
 
-      <Badge variant='outline' colorStyle='warning'>
+      <Badge variant='outline' colorScheme='warning'>
         Warning
       </Badge>
 
-      <Badge variant='outline' colorStyle='danger'>
+      <Badge variant='outline' colorScheme='danger'>
         Danger
       </Badge>
 
-      <Badge variant='outline' colorStyle='link'>
+      <Badge variant='outline' colorScheme='link'>
         Link
       </Badge>
 
-      <Badge variant='outline' colorStyle='gray'>
+      <Badge variant='outline' colorScheme='gray'>
         Gray
       </Badge>
 
-      <Badge variant='outline' colorStyle='red'>
+      <Badge variant='outline' colorScheme='red'>
         Red
       </Badge>
 
-      <Badge variant='outline' colorStyle='orange'>
+      <Badge variant='outline' colorScheme='orange'>
         Orange
       </Badge>
 
-      <Badge variant='outline' colorStyle='yellow'>
+      <Badge variant='outline' colorScheme='yellow'>
         Yellow
       </Badge>
 
-      <Badge variant='outline' colorStyle='green'>
+      <Badge variant='outline' colorScheme='green'>
         Green
       </Badge>
 
-      <Badge variant='outline' colorStyle='teal'>
+      <Badge variant='outline' colorScheme='teal'>
         Teal
       </Badge>
 
-      <Badge variant='outline' colorStyle='blue'>
+      <Badge variant='outline' colorScheme='blue'>
         Blue
       </Badge>
 
-      <Badge variant='outline' colorStyle='cyan'>
+      <Badge variant='outline' colorScheme='cyan'>
         Cyan
       </Badge>
 
-      <Badge variant='outline' colorStyle='purple'>
+      <Badge variant='outline' colorScheme='purple'>
         Purple
       </Badge>
 
-      <Badge variant='outline' colorStyle='pink'>
+      <Badge variant='outline' colorScheme='pink'>
         pink
       </Badge>
 
-      <Badge variant='outline' colorStyle='linkedin'>
+      <Badge variant='outline' colorScheme='linkedin'>
         Linkedin
       </Badge>
 
-      <Badge variant='outline' colorStyle='facebook'>
+      <Badge variant='outline' colorScheme='facebook'>
         Facebook
       </Badge>
 
-      <Badge variant='outline' colorStyle='messenger'>
+      <Badge variant='outline' colorScheme='messenger'>
         Messenger
       </Badge>
 
-      <Badge variant='outline' colorStyle='whatsapp'>
+      <Badge variant='outline' colorScheme='whatsapp'>
         Whatsapp
       </Badge>
 
-      <Badge variant='outline' colorStyle='twitter'>
+      <Badge variant='outline' colorScheme='twitter'>
         Twitter
       </Badge>
 
-      <Badge variant='outline' colorStyle='line'>
+      <Badge variant='outline' colorScheme='line'>
         Line
       </Badge>
 
-      <Badge variant='outline' colorStyle='instagram'>
+      <Badge variant='outline' colorScheme='instagram'>
         Instagram
       </Badge>
 
-      <Badge variant='outline' colorStyle='youtube'>
+      <Badge variant='outline' colorScheme='youtube'>
         Youtube
       </Badge>
     </Wrap>

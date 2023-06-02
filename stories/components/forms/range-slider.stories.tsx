@@ -42,54 +42,54 @@ export const withSize: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof RangeSlider> = () => {
+export const withColorScheme: ComponentStory<typeof RangeSlider> = () => {
   return (
     <>
-      <RangeSlider colorStyle='primary' />
+      <RangeSlider colorScheme='primary' />
 
-      <RangeSlider colorStyle='secondary' />
+      <RangeSlider colorScheme='secondary' />
 
-      <RangeSlider colorStyle='warning' />
+      <RangeSlider colorScheme='warning' />
 
-      <RangeSlider colorStyle='danger' />
+      <RangeSlider colorScheme='danger' />
 
-      <RangeSlider colorStyle='link' />
+      <RangeSlider colorScheme='link' />
 
-      <RangeSlider colorStyle='gray' />
+      <RangeSlider colorScheme='gray' />
 
-      <RangeSlider colorStyle='red' />
+      <RangeSlider colorScheme='red' />
 
-      <RangeSlider colorStyle='orange' />
+      <RangeSlider colorScheme='orange' />
 
-      <RangeSlider colorStyle='yellow' />
+      <RangeSlider colorScheme='yellow' />
 
-      <RangeSlider colorStyle='green' />
+      <RangeSlider colorScheme='green' />
 
-      <RangeSlider colorStyle='teal' />
+      <RangeSlider colorScheme='teal' />
 
-      <RangeSlider colorStyle='blue' />
+      <RangeSlider colorScheme='blue' />
 
-      <RangeSlider colorStyle='cyan' />
+      <RangeSlider colorScheme='cyan' />
 
-      <RangeSlider colorStyle='purple' />
+      <RangeSlider colorScheme='purple' />
 
-      <RangeSlider colorStyle='pink' />
+      <RangeSlider colorScheme='pink' />
 
-      <RangeSlider colorStyle='linkedin' />
+      <RangeSlider colorScheme='linkedin' />
 
-      <RangeSlider colorStyle='facebook' />
+      <RangeSlider colorScheme='facebook' />
 
-      <RangeSlider colorStyle='messenger' />
+      <RangeSlider colorScheme='messenger' />
 
-      <RangeSlider colorStyle='whatsapp' />
+      <RangeSlider colorScheme='whatsapp' />
 
-      <RangeSlider colorStyle='twitter' />
+      <RangeSlider colorScheme='twitter' />
 
-      <RangeSlider colorStyle='line' />
+      <RangeSlider colorScheme='line' />
 
-      <RangeSlider colorStyle='instagram' />
+      <RangeSlider colorScheme='instagram' />
 
-      <RangeSlider colorStyle='youtube' />
+      <RangeSlider colorScheme='youtube' />
     </>
   )
 }
@@ -161,7 +161,7 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
 
             <Button
               isDisabled={value[0] === 100 || value[0] === value[1]}
-              colorStyle='blue'
+              colorScheme='blue'
               onClick={() =>
                 setValue((prev) =>
                   prev[0] !== 100 && value[0] !== value[1] ? [prev[0] + 5, prev[1]] : prev,
@@ -190,7 +190,7 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
 
             <Button
               isDisabled={value[1] === 100}
-              colorStyle='blue'
+              colorScheme='blue'
               onClick={() => setValue((prev) => (prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev))}
             >
               +10

@@ -163,216 +163,216 @@ export const withVarint: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Card> = () => {
+export const withColorScheme: ComponentStory<typeof Card> = () => {
   return (
     <>
       <Heading size='xl'>Subtle</Heading>
 
       <Grid w='full' templateColumns='repeat(4, 1fr)' gap='md'>
-        <Card variant='subtle' colorStyle='primary'>
+        <Card variant='subtle' colorScheme='primary'>
           <CardHeader>
             <Heading size='md'>Primary</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Primary</Text>
+            <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='secondary'>
+        <Card variant='subtle' colorScheme='secondary'>
           <CardHeader>
             <Heading size='md'>Secondary</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Secondary</Text>
+            <Text>ColorScheme is Secondary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='warning'>
+        <Card variant='subtle' colorScheme='warning'>
           <CardHeader>
             <Heading size='md'>Warning</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Warning</Text>
+            <Text>ColorScheme is Warning</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='danger'>
+        <Card variant='subtle' colorScheme='danger'>
           <CardHeader>
             <Heading size='md'>Danger</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Danger</Text>
+            <Text>ColorScheme is Danger</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='link'>
+        <Card variant='subtle' colorScheme='link'>
           <CardHeader>
             <Heading size='md'>Link</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Link</Text>
+            <Text>ColorScheme is Link</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='gray'>
+        <Card variant='subtle' colorScheme='gray'>
           <CardHeader>
             <Heading size='md'>Gray</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Gray</Text>
+            <Text>ColorScheme is Gray</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='red'>
+        <Card variant='subtle' colorScheme='red'>
           <CardHeader>
             <Heading size='md'>Red</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Red</Text>
+            <Text>ColorScheme is Red</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='orange'>
+        <Card variant='subtle' colorScheme='orange'>
           <CardHeader>
             <Heading size='md'>Orange</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Orange</Text>
+            <Text>ColorScheme is Orange</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='yellow'>
+        <Card variant='subtle' colorScheme='yellow'>
           <CardHeader>
             <Heading size='md'>Yellow</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Yellow</Text>
+            <Text>ColorScheme is Yellow</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='green'>
+        <Card variant='subtle' colorScheme='green'>
           <CardHeader>
             <Heading size='md'>Green</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Green</Text>
+            <Text>ColorScheme is Green</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='teal'>
+        <Card variant='subtle' colorScheme='teal'>
           <CardHeader>
             <Heading size='md'>Teal</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Teal</Text>
+            <Text>ColorScheme is Teal</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='blue'>
+        <Card variant='subtle' colorScheme='blue'>
           <CardHeader>
             <Heading size='md'>Blue</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Blue</Text>
+            <Text>ColorScheme is Blue</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='cyan'>
+        <Card variant='subtle' colorScheme='cyan'>
           <CardHeader>
             <Heading size='md'>Cyan</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Cyan</Text>
+            <Text>ColorScheme is Cyan</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='purple'>
+        <Card variant='subtle' colorScheme='purple'>
           <CardHeader>
             <Heading size='md'>Purple</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Purple</Text>
+            <Text>ColorScheme is Purple</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='pink'>
+        <Card variant='subtle' colorScheme='pink'>
           <CardHeader>
             <Heading size='md'>pink</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is pink</Text>
+            <Text>ColorScheme is pink</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='linkedin'>
+        <Card variant='subtle' colorScheme='linkedin'>
           <CardHeader>
             <Heading size='md'>Linkedin</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Linkedin</Text>
+            <Text>ColorScheme is Linkedin</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='facebook'>
+        <Card variant='subtle' colorScheme='facebook'>
           <CardHeader>
             <Heading size='md'>Facebook</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Facebook</Text>
+            <Text>ColorScheme is Facebook</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='messenger'>
+        <Card variant='subtle' colorScheme='messenger'>
           <CardHeader>
             <Heading size='md'>Messenger</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Messenger</Text>
+            <Text>ColorScheme is Messenger</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='whatsapp'>
+        <Card variant='subtle' colorScheme='whatsapp'>
           <CardHeader>
             <Heading size='md'>Whatsapp</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Whatsapp</Text>
+            <Text>ColorScheme is Whatsapp</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='twitter'>
+        <Card variant='subtle' colorScheme='twitter'>
           <CardHeader>
             <Heading size='md'>Twitter</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Twitter</Text>
+            <Text>ColorScheme is Twitter</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='line'>
+        <Card variant='subtle' colorScheme='line'>
           <CardHeader>
             <Heading size='md'>Line</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Line</Text>
+            <Text>ColorScheme is Line</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='instagram'>
+        <Card variant='subtle' colorScheme='instagram'>
           <CardHeader>
             <Heading size='md'>Instagram</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Instagram</Text>
+            <Text>ColorScheme is Instagram</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorStyle='youtube'>
+        <Card variant='subtle' colorScheme='youtube'>
           <CardHeader>
             <Heading size='md'>Youtube</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Youtube</Text>
+            <Text>ColorScheme is Youtube</Text>
           </CardBody>
         </Card>
       </Grid>
@@ -380,210 +380,210 @@ export const withColorStyle: ComponentStory<typeof Card> = () => {
       <Heading size='xl'>Solid</Heading>
 
       <Grid w='full' templateColumns='repeat(4, 1fr)' gap='md'>
-        <Card variant='solid' colorStyle='primary'>
+        <Card variant='solid' colorScheme='primary'>
           <CardHeader>
             <Heading size='md'>Primary</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Primary</Text>
+            <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='secondary'>
+        <Card variant='solid' colorScheme='secondary'>
           <CardHeader>
             <Heading size='md'>Secondary</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Secondary</Text>
+            <Text>ColorScheme is Secondary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='warning'>
+        <Card variant='solid' colorScheme='warning'>
           <CardHeader>
             <Heading size='md'>Warning</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Warning</Text>
+            <Text>ColorScheme is Warning</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='danger'>
+        <Card variant='solid' colorScheme='danger'>
           <CardHeader>
             <Heading size='md'>Danger</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Danger</Text>
+            <Text>ColorScheme is Danger</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='link'>
+        <Card variant='solid' colorScheme='link'>
           <CardHeader>
             <Heading size='md'>Link</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Link</Text>
+            <Text>ColorScheme is Link</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='gray'>
+        <Card variant='solid' colorScheme='gray'>
           <CardHeader>
             <Heading size='md'>Gray</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Gray</Text>
+            <Text>ColorScheme is Gray</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='red'>
+        <Card variant='solid' colorScheme='red'>
           <CardHeader>
             <Heading size='md'>Red</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Red</Text>
+            <Text>ColorScheme is Red</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='orange'>
+        <Card variant='solid' colorScheme='orange'>
           <CardHeader>
             <Heading size='md'>Orange</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Orange</Text>
+            <Text>ColorScheme is Orange</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='yellow'>
+        <Card variant='solid' colorScheme='yellow'>
           <CardHeader>
             <Heading size='md'>Yellow</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Yellow</Text>
+            <Text>ColorScheme is Yellow</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='green'>
+        <Card variant='solid' colorScheme='green'>
           <CardHeader>
             <Heading size='md'>Green</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Green</Text>
+            <Text>ColorScheme is Green</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='teal'>
+        <Card variant='solid' colorScheme='teal'>
           <CardHeader>
             <Heading size='md'>Teal</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Teal</Text>
+            <Text>ColorScheme is Teal</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='blue'>
+        <Card variant='solid' colorScheme='blue'>
           <CardHeader>
             <Heading size='md'>Blue</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Blue</Text>
+            <Text>ColorScheme is Blue</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='cyan'>
+        <Card variant='solid' colorScheme='cyan'>
           <CardHeader>
             <Heading size='md'>Cyan</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Cyan</Text>
+            <Text>ColorScheme is Cyan</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='purple'>
+        <Card variant='solid' colorScheme='purple'>
           <CardHeader>
             <Heading size='md'>Purple</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Purple</Text>
+            <Text>ColorScheme is Purple</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='pink'>
+        <Card variant='solid' colorScheme='pink'>
           <CardHeader>
             <Heading size='md'>pink</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is pink</Text>
+            <Text>ColorScheme is pink</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='linkedin'>
+        <Card variant='solid' colorScheme='linkedin'>
           <CardHeader>
             <Heading size='md'>Linkedin</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Linkedin</Text>
+            <Text>ColorScheme is Linkedin</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='facebook'>
+        <Card variant='solid' colorScheme='facebook'>
           <CardHeader>
             <Heading size='md'>Facebook</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Facebook</Text>
+            <Text>ColorScheme is Facebook</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='messenger'>
+        <Card variant='solid' colorScheme='messenger'>
           <CardHeader>
             <Heading size='md'>Messenger</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Messenger</Text>
+            <Text>ColorScheme is Messenger</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='whatsapp'>
+        <Card variant='solid' colorScheme='whatsapp'>
           <CardHeader>
             <Heading size='md'>Whatsapp</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Whatsapp</Text>
+            <Text>ColorScheme is Whatsapp</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='twitter'>
+        <Card variant='solid' colorScheme='twitter'>
           <CardHeader>
             <Heading size='md'>Twitter</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Twitter</Text>
+            <Text>ColorScheme is Twitter</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='line'>
+        <Card variant='solid' colorScheme='line'>
           <CardHeader>
             <Heading size='md'>Line</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Line</Text>
+            <Text>ColorScheme is Line</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='instagram'>
+        <Card variant='solid' colorScheme='instagram'>
           <CardHeader>
             <Heading size='md'>Instagram</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Instagram</Text>
+            <Text>ColorScheme is Instagram</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorStyle='youtube'>
+        <Card variant='solid' colorScheme='youtube'>
           <CardHeader>
             <Heading size='md'>Youtube</Heading>
           </CardHeader>
           <CardBody>
-            <Text>ColorStyle is Youtube</Text>
+            <Text>ColorScheme is Youtube</Text>
           </CardBody>
         </Card>
       </Grid>
@@ -612,7 +612,7 @@ export const withImage: ComponentStory<typeof Card> = () => {
       </CardBody>
 
       <CardFooter>
-        <Button colorStyle='primary'>Wikipadia</Button>
+        <Button colorScheme='primary'>Wikipadia</Button>
       </CardFooter>
     </Card>
   )
@@ -640,7 +640,7 @@ export const horizonCard: ComponentStory<typeof Card> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </VStack>
     </Card>
@@ -663,7 +663,7 @@ export const multiCards: ComponentStory<typeof Card> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </Card>
 
@@ -680,7 +680,7 @@ export const multiCards: ComponentStory<typeof Card> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </Card>
 
@@ -697,7 +697,7 @@ export const multiCards: ComponentStory<typeof Card> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </Card>
     </Grid>

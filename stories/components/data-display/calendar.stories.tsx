@@ -58,7 +58,7 @@ export const withVarint: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withColorStyle: ComponentStory<typeof Calendar> = () => {
+export const withColorScheme: ComponentStory<typeof Calendar> = () => {
   return (
     <>
       <Heading size='xl'>Solid</Heading>
@@ -66,161 +66,161 @@ export const withColorStyle: ComponentStory<typeof Calendar> = () => {
       <Wrap gap='md'>
         <Calendar
           variant='solid'
-          colorStyle='primary'
+          colorScheme='primary'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='secondary'
+          colorScheme='secondary'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='warning'
+          colorScheme='warning'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='danger'
+          colorScheme='danger'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='link'
+          colorScheme='link'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='gray'
+          colorScheme='gray'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='red'
+          colorScheme='red'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='orange'
+          colorScheme='orange'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='yellow'
+          colorScheme='yellow'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='green'
+          colorScheme='green'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='teal'
+          colorScheme='teal'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='blue'
+          colorScheme='blue'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='cyan'
+          colorScheme='cyan'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='purple'
+          colorScheme='purple'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='pink'
+          colorScheme='pink'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='linkedin'
+          colorScheme='linkedin'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='facebook'
+          colorScheme='facebook'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='messenger'
+          colorScheme='messenger'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='whatsapp'
+          colorScheme='whatsapp'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='twitter'
+          colorScheme='twitter'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='line'
+          colorScheme='line'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='instagram'
+          colorScheme='instagram'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorStyle='youtube'
+          colorScheme='youtube'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -231,161 +231,161 @@ export const withColorStyle: ComponentStory<typeof Calendar> = () => {
       <Wrap gap='md'>
         <Calendar
           variant='subtle'
-          colorStyle='primary'
+          colorScheme='primary'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='secondary'
+          colorScheme='secondary'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='warning'
+          colorScheme='warning'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='danger'
+          colorScheme='danger'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='link'
+          colorScheme='link'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='gray'
+          colorScheme='gray'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='red'
+          colorScheme='red'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='orange'
+          colorScheme='orange'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='yellow'
+          colorScheme='yellow'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='green'
+          colorScheme='green'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='teal'
+          colorScheme='teal'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='blue'
+          colorScheme='blue'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='cyan'
+          colorScheme='cyan'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='purple'
+          colorScheme='purple'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='pink'
+          colorScheme='pink'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='linkedin'
+          colorScheme='linkedin'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='facebook'
+          colorScheme='facebook'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='messenger'
+          colorScheme='messenger'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='whatsapp'
+          colorScheme='whatsapp'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='twitter'
+          colorScheme='twitter'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='line'
+          colorScheme='line'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='instagram'
+          colorScheme='instagram'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorStyle='youtube'
+          colorScheme='youtube'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -744,7 +744,7 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
         <Calendar
           dateFormat='YYYY年 MMMM'
           locale='ja'
-          colorStyle='primary'
+          colorScheme='primary'
           dayProps={{
             component: ({ date }) => (
               <Popover>
@@ -761,7 +761,7 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
                     </PopoverHeader>
                     <PopoverBody>
                       <VStack minW='sm' gap='sm'>
-                        <Card variant='solid' colorStyle='secondary' size='sm' fontSize='sm'>
+                        <Card variant='solid' colorScheme='secondary' size='sm' fontSize='sm'>
                           <CardBody>山田の誕生日</CardBody>
                         </Card>
                       </VStack>
@@ -809,7 +809,7 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
               </Center>
 
               <VStack gap='sm'>
-                <Card variant='solid' colorStyle='secondary' size='sm' fontSize='sm'>
+                <Card variant='solid' colorScheme='secondary' size='sm' fontSize='sm'>
                   <CardBody>
                     <Text>山田の誕生日</Text>
                   </CardBody>

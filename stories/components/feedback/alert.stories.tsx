@@ -126,28 +126,28 @@ export const leftAccent: ComponentStory<typeof Alert> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Alert> = () => {
+export const withColorMode: ComponentStory<typeof Alert> = () => {
   return (
     <>
-      <Alert status='info' colorStyle='green'>
+      <Alert status='info' colorScheme='green'>
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
       </Alert>
 
-      <Alert status='success' colorStyle='purple'>
+      <Alert status='success' colorScheme='purple'>
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
       </Alert>
 
-      <Alert status='warning' colorStyle='gray'>
+      <Alert status='warning' colorScheme='gray'>
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
       </Alert>
 
-      <Alert status='error' colorStyle='pink'>
+      <Alert status='error' colorScheme='pink'>
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>

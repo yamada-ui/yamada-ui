@@ -102,7 +102,7 @@ export const controlPopover: ComponentStory<typeof Popover> = () => {
 
       <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
         <PopoverTrigger>
-          <Button colorStyle='primary'>Target Popover</Button>
+          <Button colorScheme='primary'>Target Popover</Button>
         </PopoverTrigger>
 
         <PopoverContent>

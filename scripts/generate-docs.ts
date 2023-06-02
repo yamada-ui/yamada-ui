@@ -35,7 +35,7 @@ type ComponentTypeProperties = {
 type ThemingProps = Partial<{
   variant: string | number
   size: string | number
-  colorStyle: string
+  colorScheme: string
 }>
 
 type PropertyInfo = {
@@ -71,7 +71,7 @@ const isHue = (value: unknown): value is Record<string, string> =>
 
 const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
 
-const extractColorStyle = (colors: Record<string, unknown> | undefined): string => {
+const extractColorScheme = (colors: Record<string, unknown> | undefined): string => {
   if (!colors) return 'string'
 
   const validColors = Object.entries(colors)
@@ -84,12 +84,12 @@ const extractColorStyle = (colors: Record<string, unknown> | undefined): string 
 const extractThemeProps = ({ colors, components = {} }: Theme): Record<string, PropertyInfo> => {
   const result: Record<string, PropertyInfo> = {}
 
-  const colorStyleType = extractColorStyle(colors)
+  const colorSchemeType = extractColorScheme(colors)
 
   for (const [name, { defaultProps, variants, sizes }] of Object.entries(components)) {
     if (!defaultProps) continue
 
-    const { variant, size, colorStyle } = defaultProps
+    const { variant, size, colorScheme } = defaultProps
 
     result[name] = {
       variant: {
@@ -104,9 +104,9 @@ const extractThemeProps = ({ colors, components = {} }: Theme): Record<string, P
         required: false,
         description: `The size of the ${name}`,
       },
-      colorStyle: {
-        defaultValue: colorStyle,
-        type: colorStyleType,
+      colorScheme: {
+        defaultValue: colorScheme,
+        type: colorSchemeType,
         required: false,
         description: 'The visual color appearance of the component',
       },

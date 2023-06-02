@@ -1,26 +1,26 @@
 import { InfoIcon, WarningIcon, CheckIcon } from '@yamada-ui/icon'
 import { Loading } from '@yamada-ui/loading'
-import { getStatusColorStyle, getStatusIcon } from '../src'
+import { getStatusColorScheme, getStatusIcon } from '../src'
 
-describe('getStatusColorStyle', () => {
+describe('getStatusColorScheme', () => {
   test('info', () => {
-    expect(getStatusColorStyle('info')).toBe('blue')
+    expect(getStatusColorScheme('info')).toBe('blue')
   })
 
   test('success', () => {
-    expect(getStatusColorStyle('success')).toBe('green')
+    expect(getStatusColorScheme('success')).toBe('green')
   })
 
   test('warning', () => {
-    expect(getStatusColorStyle('warning')).toBe('orange')
+    expect(getStatusColorScheme('warning')).toBe('orange')
   })
 
   test('error', () => {
-    expect(getStatusColorStyle('error')).toBe('red')
+    expect(getStatusColorScheme('error')).toBe('red')
   })
 
   test('loading', () => {
-    expect(getStatusColorStyle('loading')).toBe('blue')
+    expect(getStatusColorScheme('loading')).toBe('blue')
   })
 })
 

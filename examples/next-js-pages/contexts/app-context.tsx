@@ -9,8 +9,8 @@ import { FC, PropsWithChildren, useCallback, useState } from 'react'
 import { customTheme, customConfig } from 'theme'
 
 type AppContext = {
-  isSystemColorScheme: boolean
-  changeSystemColorScheme: (flag: boolean) => void
+  isSystemColorMode: boolean
+  changeSystemColorMode: (flag: boolean) => void
 }
 
 const theme = extendTheme(customTheme)()
@@ -21,7 +21,7 @@ const [AppContextProvider, useAppContext] = createContext<AppContext>({
 })
 
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [isSystemColorScheme, setIsSystemColorScheme] = useState<boolean>(() => {
+  const [isSystemColorMode, setIsSystemColorMode] = useState<boolean>(() => {
     if (typeof window === 'undefined') return true
 
     return (localStorage?.getItem('ui-system-scheme') ?? 'true') === 'true'
@@ -29,17 +29,17 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const config = extendConfig({
     ...customConfig,
-    useSystemColorScheme: isSystemColorScheme,
+    useSystemColorMode: isSystemColorMode,
   })
 
-  const changeSystemColorScheme = useCallback((flag: boolean) => {
+  const changeSystemColorMode = useCallback((flag: boolean) => {
     localStorage.setItem('ui-system-scheme', flag ? 'true' : 'false')
-    setIsSystemColorScheme(flag)
+    setIsSystemColorMode(flag)
   }, [])
 
   return (
-    <AppContextProvider value={{ isSystemColorScheme, changeSystemColorScheme }}>
-      <UIProvider config={config} theme={theme} colorSchemeManager={localStorageManager}>
+    <AppContextProvider value={{ isSystemColorMode, changeSystemColorMode }}>
+      <UIProvider config={config} theme={theme} colorModeManager={localStorageManager}>
         {children}
       </UIProvider>
     </AppContextProvider>

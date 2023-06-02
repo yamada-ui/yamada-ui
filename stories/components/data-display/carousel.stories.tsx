@@ -314,7 +314,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
       align='start'
       slidesToScroll={2}
       h='auto'
-      controlProps={{ colorStyle: 'whiteAlpha', color: 'white' }}
+      controlProps={{ colorScheme: 'whiteAlpha', color: 'white' }}
     >
       <CarouselSlide as={Card} variant='subtle'>
         <CardHeader justifyContent='center'>
@@ -335,7 +335,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
 
@@ -358,7 +358,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
 
@@ -381,7 +381,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
 
@@ -404,7 +404,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorStyle='primary'>Wikipadia</Button>
+          <Button colorScheme='primary'>Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
     </Carousel>
@@ -488,7 +488,7 @@ export const withScrollProgress: ComponentStory<typeof Carousel> = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Progress value={value} colorStyle='gray' />
+      <Progress value={value} colorScheme='gray' />
     </>
   )
 }

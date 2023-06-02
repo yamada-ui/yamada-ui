@@ -22,16 +22,16 @@ export const Dropzone: ComponentMultiStyle = {
   variants: {
     solid: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
-        : getColor(fc, fc)(t, s)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         container: {
@@ -59,15 +59,15 @@ export const Dropzone: ComponentMultiStyle = {
           },
           _accept: {
             bg: [
-              transparentizeColor('blue.200', 0.48)(t, s),
-              transparentizeColor('blue.400', 0.12)(t, s),
+              transparentizeColor('blue.200', 0.48)(t, m),
+              transparentizeColor('blue.400', 0.12)(t, m),
             ],
             borderColor: ['blue.500', 'blue.300'],
           },
           _reject: {
             bg: [
-              transparentizeColor('red.200', 0.48)(t, s),
-              transparentizeColor('red.400', 0.12)(t, s),
+              transparentizeColor('red.200', 0.48)(t, m),
+              transparentizeColor('red.400', 0.12)(t, m),
             ],
             borderColor: ['red.500', 'red.300'],
           },
@@ -80,16 +80,16 @@ export const Dropzone: ComponentMultiStyle = {
     },
     dashed: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
-        : getColor(fc, fc)(t, s)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         container: {
@@ -117,15 +117,15 @@ export const Dropzone: ComponentMultiStyle = {
           },
           _accept: {
             bg: [
-              transparentizeColor('blue.200', 0.48)(t, s),
-              transparentizeColor('blue.400', 0.12)(t, s),
+              transparentizeColor('blue.200', 0.48)(t, m),
+              transparentizeColor('blue.400', 0.12)(t, m),
             ],
             borderColor: ['blue.500', 'blue.300'],
           },
           _reject: {
             bg: [
-              transparentizeColor('red.200', 0.48)(t, s),
-              transparentizeColor('red.400', 0.12)(t, s),
+              transparentizeColor('red.200', 0.48)(t, m),
+              transparentizeColor('red.400', 0.12)(t, m),
             ],
             borderColor: ['red.500', 'red.300'],
           },

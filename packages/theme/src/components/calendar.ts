@@ -66,15 +66,15 @@ export const Calendar: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => {
+    solid: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
       const bg = isDefaultColor(
-        [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
-        [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
+        [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+        [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
       )(c)
 
       const borderColor = isDefaultColor(
-        [toneColor(c, 200)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.6)(t, s)],
-        [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, s)],
+        [toneColor(c, 200)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.6)(t, m)],
+        [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
       )(c)
 
       return {
@@ -92,19 +92,19 @@ export const Calendar: ComponentMultiStyle = {
         },
       }
     },
-    subtle: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => {
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
       const bg = isDefaultColor(
-        [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
-        [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
+        [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m)],
+        [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
       )(c)
 
       const borderColor = isDefaultColor(
-        [toneColor(c, 200)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.6)(t, s)],
-        [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, s)],
+        [toneColor(c, 200)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.6)(t, m)],
+        [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
       )(c)
 
       const color = isDefaultColor(
-        [toneColor(c, 800)(t, s), toneColor(c, 200)(t, s)],
+        [toneColor(c, 800)(t, m), toneColor(c, 200)(t, m)],
         [`${c}.800`, `${c}.200`],
       )(c)
 

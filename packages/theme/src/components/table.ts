@@ -43,7 +43,7 @@ export const Table: ComponentMultiStyle = {
   variants: {
     simple: (({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       colorScheme: c = 'gray',
       withBorder,
       withColumnBorders,
@@ -83,14 +83,14 @@ export const Table: ComponentMultiStyle = {
                   _selected: {
                     bg: isDefaultColor(
                       [
-                        transparentizeColor(toneColor(c, 50)(t, s), 0.6)(t, s),
-                        transparentizeColor(toneColor(c, 100)(t, s), 0.24)(t, s),
+                        transparentizeColor(toneColor(c, 50)(t, m), 0.6)(t, m),
+                        transparentizeColor(toneColor(c, 100)(t, m), 0.24)(t, m),
                       ],
                       isGray
                         ? [`gray.100`, `whiteAlpha.200`]
                         : [
-                            transparentizeColor(`${c}.50`, 0.6)(t, s),
-                            transparentizeColor(`${c}.100`, 0.24)(t, s),
+                            transparentizeColor(`${c}.50`, 0.6)(t, m),
+                            transparentizeColor(`${c}.100`, 0.24)(t, m),
                           ],
                     )(c),
                   },
@@ -104,14 +104,14 @@ export const Table: ComponentMultiStyle = {
                   _hover: {
                     bg: isDefaultColor(
                       [
-                        transparentizeColor(toneColor(c, 100)(t, s), 0.6)(t, s),
-                        transparentizeColor(toneColor(c, 200)(t, s), 0.24)(t, s),
+                        transparentizeColor(toneColor(c, 100)(t, m), 0.6)(t, m),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
                       ],
                       isGray
                         ? [`gray.200`, `whiteAlpha.300`]
                         : [
-                            transparentizeColor(`${c}.100`, 0.6)(t, s),
-                            transparentizeColor(`${c}.200`, 0.24)(t, s),
+                            transparentizeColor(`${c}.100`, 0.6)(t, m),
+                            transparentizeColor(`${c}.200`, 0.24)(t, m),
                           ],
                     )(c),
                   },
@@ -130,7 +130,7 @@ export const Table: ComponentMultiStyle = {
     }) as UIMultiStyle,
     striped: (({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       colorScheme: c = 'gray',
       withBorder,
       withColumnBorders,
@@ -166,10 +166,10 @@ export const Table: ComponentMultiStyle = {
           tr: {
             _odd: {
               bg: isDefaultColor(
-                [toneColor(c, 50)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.12)(t, s)],
+                [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
                 isGray
                   ? [`gray.100`, `whiteAlpha.200`]
-                  : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
+                  : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
               )(c),
             },
             ...(highlightOnHover
@@ -180,14 +180,14 @@ export const Table: ComponentMultiStyle = {
                   _hover: {
                     bg: isDefaultColor(
                       [
-                        transparentizeColor(toneColor(c, 100)(t, s), 0.6)(t, s),
-                        transparentizeColor(toneColor(c, 200)(t, s), 0.24)(t, s),
+                        transparentizeColor(toneColor(c, 100)(t, m), 0.6)(t, m),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
                       ],
                       isGray
                         ? [`gray.200`, `whiteAlpha.300`]
                         : [
-                            transparentizeColor(`${c}.100`, 0.6)(t, s),
-                            transparentizeColor(`${c}.200`, 0.24)(t, s),
+                            transparentizeColor(`${c}.100`, 0.6)(t, m),
+                            transparentizeColor(`${c}.200`, 0.24)(t, m),
                           ],
                     )(c),
                   },

@@ -22,20 +22,20 @@ export const Card: ComponentMultiStyle = {
         borderWidth: '1px',
       },
     },
-    solid: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => ({
+    solid: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
       container: {
         bg: isDefaultColor(
-          [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
-          [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
+          [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+          [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
         )(c),
         color: [`white`, `whiteAlpha.800`],
       },
     }),
-    subtle: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => ({
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
       container: {
         bg: isDefaultColor(
-          [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.16)(t, s)],
-          [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, s)],
+          [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m)],
+          [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
         )(c),
       },
     }),

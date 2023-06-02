@@ -25,16 +25,16 @@ export const PinInput: ComponentMultiStyle = {
   variants: {
     outline: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
-        : getColor(fc, fc)(t, s)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         field: {
@@ -62,16 +62,16 @@ export const PinInput: ComponentMultiStyle = {
     },
     filled: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
-        : getColor(fc, fc)(t, s)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         field: {
@@ -97,16 +97,16 @@ export const PinInput: ComponentMultiStyle = {
     },
     flushed: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       focusBorderColor: fc = ['blue.500', 'blue.300'],
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, s), getColor(fc[1], fc[1])(t, s))(s)
-        : getColor(fc, fc)(t, s)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         field: {

@@ -32,24 +32,24 @@ export const Switch: ComponentMultiStyle = {
   },
 
   variants: {
-    thick: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => ({
+    thick: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
       track: {
         p: '1',
         _checked: {
           bg: isDefaultColor(
-            [toneColor(c, 500)(t, s), toneColor(c, 400)(t, s)],
+            [toneColor(c, 500)(t, m), toneColor(c, 400)(t, m)],
             [`${c}.500`, `${c}.400`],
           )(c),
         },
       },
     }),
-    thin: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => ({
+    thin: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
       track: {
         _checked: {
           bg: isDefaultColor(
             [
-              transparentizeColor(toneColor(c, 400)(t, s), 0.7),
-              transparentizeColor(toneColor(c, 200)(t, s), 0.6),
+              transparentizeColor(toneColor(c, 400)(t, m), 0.7),
+              transparentizeColor(toneColor(c, 200)(t, m), 0.6),
             ],
             [transparentizeColor(`${c}.400`, 0.7), transparentizeColor(`${c}.200`, 0.6)],
           )(c),
@@ -59,7 +59,7 @@ export const Switch: ComponentMultiStyle = {
         boxShadow: 'dark-md',
         _checked: {
           bg: isDefaultColor(
-            [toneColor(c, 500)(t, s), toneColor(c, 400)(t, s)],
+            [toneColor(c, 500)(t, m), toneColor(c, 400)(t, m)],
             [`${c}.500`, `${c}.400`],
           )(c),
         },

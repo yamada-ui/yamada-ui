@@ -22,11 +22,11 @@ export const Slider: ComponentStyle = {
         bg: ['gray.300', 'whiteAlpha.300'],
       },
     },
-    filledTrack: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => ({
+    filledTrack: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
       w: 'inherit',
       h: 'inherit',
       bg: isDefaultColor(
-        [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+        [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
         [`${c}.500`, `${c}.200`],
       )(c),
     }),

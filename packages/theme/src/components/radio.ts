@@ -7,7 +7,7 @@ export const Radio: ComponentStyle = {
       _readOnly: { cursor: 'auto' },
       _disabled: { cursor: 'not-allowed' },
     },
-    icon: ({ theme: t, colorMode: s, colorScheme: c = 'blue' }) => ({
+    icon: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
       transitionProperty: 'box-shadow',
       transitionDuration: 'normal',
       border: '2px solid',
@@ -26,14 +26,14 @@ export const Radio: ComponentStyle = {
           transform: 'translate(-50%, -50%)',
           rounded: 'full',
           bg: isDefaultColor(
-            [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+            [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
             [`${c}.500`, `${c}.200`],
           )(c),
         },
         _hover: {
           _before: {
             bg: isDefaultColor(
-              [toneColor(c, 600)(t, s), toneColor(c, 300)(t, s)],
+              [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
               [`${c}.600`, `${c}.300`],
             )(c),
           },

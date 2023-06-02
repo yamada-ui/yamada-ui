@@ -37,19 +37,19 @@ export const Button: ComponentStyle = {
   variants: {
     solid: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const isGray = c === 'gray'
       const isAccessible = c === 'yellow' || c === 'cyan'
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         bg: isDefaultColor(
-          [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+          [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
           isGray
             ? [`gray.100`, `whiteAlpha.200`]
             : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
@@ -60,14 +60,14 @@ export const Button: ComponentStyle = {
         )(c),
         _hover: {
           bg: isDefaultColor(
-            [toneColor(c, 600)(t, s), toneColor(c, 300)(t, s)],
+            [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
             isGray
               ? [`gray.200`, `whiteAlpha.300`]
               : [isAccessible ? `${c}.500` : `${c}.600`, `${c}.300`],
           )(c),
           _disabled: {
             bg: isDefaultColor(
-              [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+              [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
               isGray
                 ? [`gray.100`, `whiteAlpha.200`]
                 : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
@@ -81,14 +81,14 @@ export const Button: ComponentStyle = {
         },
         _active: {
           bg: isDefaultColor(
-            [toneColor(c, 700)(t, s), toneColor(c, 400)(t, s)],
+            [toneColor(c, 700)(t, m), toneColor(c, 400)(t, m)],
             isGray
               ? [`gray.300`, `whiteAlpha.400`]
               : [isAccessible ? `${c}.600` : `${c}.700`, `${c}.400`],
           )(c),
           _disabled: {
             bg: isDefaultColor(
-              [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+              [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
               isGray
                 ? [`gray.100`, `whiteAlpha.200`]
                 : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
@@ -99,32 +99,32 @@ export const Button: ComponentStyle = {
     },
     outline: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const isGray = c === 'gray'
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         border: '1px solid',
         borderColor: isDefaultColor(
-          [toneColor(c, 600)(t, s), toneColor(c, 300)(t, s)],
+          [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
           isGray ? [`gray.200`, `whiteAlpha.300`] : [`${c}.600`, `${c}.300`],
         )(c),
         color: isDefaultColor(
-          [toneColor(c, 600)(t, s), toneColor(c, 200)(t, s)],
+          [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
           isGray ? [`inherit`, `whiteAlpha.900`] : [`${c}.600`, `${c}.200`],
         )(c),
         bg: isGray ? undefined : 'transparent',
         _hover: {
           bg: isDefaultColor(
-            [toneColor(c, 50)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.12)(t, s)],
+            [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
             isGray
               ? [`gray.100`, `whiteAlpha.200`]
-              : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
+              : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
           )(c),
         },
         _invalid: {
@@ -133,21 +133,21 @@ export const Button: ComponentStyle = {
         },
         _active: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.24)(t, s)],
+            [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m)],
             isGray
               ? [`gray.200`, `whiteAlpha.300`]
-              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, s)],
+              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
           )(c),
         },
       }
     },
-    link: ({ theme: t, colorMode: s, colorScheme: c = 'gray' }) => ({
+    link: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
       padding: 0,
       height: 'auto',
       lineHeight: 'normal',
       verticalAlign: 'baseline',
       color: isDefaultColor(
-        [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+        [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
         [`${c}.500`, `${c}.200`],
       )(c),
       _hover: {
@@ -158,12 +158,12 @@ export const Button: ComponentStyle = {
       },
       _active: {
         color: isDefaultColor(
-          [toneColor(c, 700)(t, s), toneColor(c, 500)(t, s)],
+          [toneColor(c, 700)(t, m), toneColor(c, 500)(t, m)],
           [`${c}.700`, `${c}.500`],
         )(c),
         _disabled: {
           color: isDefaultColor(
-            [toneColor(c, 500)(t, s), toneColor(c, 200)(t, s)],
+            [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
             [`${c}.500`, `${c}.200`],
           )(c),
         },
@@ -171,27 +171,27 @@ export const Button: ComponentStyle = {
     }),
     ghost: ({
       theme: t,
-      colorMode: s,
+      colorMode: m,
       colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
       const isGray = c === 'gray'
       const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, s), getColor(ec[1], ec[1])(t, s))(s)
-        : getColor(ec, ec)(t, s)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
 
       return {
         color: isDefaultColor(
-          [toneColor(c, 600)(t, s), toneColor(c, 200)(t, s)],
+          [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
           isGray ? [`inherit`, `whiteAlpha.900`] : [`${c}.600`, `${c}.200`],
         )(c),
         bg: isGray ? undefined : 'transparent',
         _hover: {
           bg: isDefaultColor(
-            [toneColor(c, 50)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.12)(t, s)],
+            [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
             isGray
               ? [`gray.200`, `whiteAlpha.200`]
-              : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, s)],
+              : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
           )(c),
         },
         _invalid: {
@@ -201,10 +201,10 @@ export const Button: ComponentStyle = {
         },
         _active: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, s), transparentizeColor(toneColor(c, 200)(t, s), 0.24)(t, s)],
+            [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m)],
             isGray
               ? [`gray.200`, `whiteAlpha.300`]
-              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, s)],
+              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
           )(c),
         },
       }

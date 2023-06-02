@@ -28,7 +28,7 @@ export const SegmentedControl: ComponentMultiStyle = {
   },
 
   variants: {
-    basic: ({ theme: t, colorMode: s, colorScheme: c }) => ({
+    basic: ({ theme: t, colorMode: m, colorScheme: c }) => ({
       container: {
         rounded: 'lg',
       },
@@ -36,8 +36,8 @@ export const SegmentedControl: ComponentMultiStyle = {
         bg: isUndefined(c)
           ? ['whiteAlpha.700', 'whiteAlpha.100']
           : isDefaultColor(
-              [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
-              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
+              [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
             )(c),
         rounded: 'md',
       },
@@ -52,7 +52,7 @@ export const SegmentedControl: ComponentMultiStyle = {
         },
       },
     }),
-    rounded: ({ theme: t, colorMode: s, colorScheme: c }) => ({
+    rounded: ({ theme: t, colorMode: m, colorScheme: c }) => ({
       container: {
         rounded: 'full',
       },
@@ -60,8 +60,8 @@ export const SegmentedControl: ComponentMultiStyle = {
         bg: isUndefined(c)
           ? ['whiteAlpha.700', 'whiteAlpha.100']
           : isDefaultColor(
-              [toneColor(c, 500)(t, s), transparentizeColor(toneColor(c, 500)(t, s), 0.6)(t, s)],
-              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, s)],
+              [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
             )(c),
         rounded: 'full',
       },

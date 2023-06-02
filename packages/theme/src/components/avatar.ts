@@ -4,11 +4,11 @@ import { getMemoizedObject as get, isDark, randomColor } from '@yamada-ui/utils'
 export const Avatar: ComponentMultiStyle = {
   baseStyle: {
     group: {},
-    container: ({ theme: t, colorMode: s, name: string }) => {
+    container: ({ theme: t, colorMode: m, name: string }) => {
       const bg = string ? randomColor({ string }) : 'gray.400'
 
       return {
-        color: isDark(bg)(t, s) ? 'white' : 'black',
+        color: isDark(bg)(t, m) ? 'white' : 'black',
         borderColor: ['white', 'black'],
         verticalAlign: 'top',
         _loading: { bg },

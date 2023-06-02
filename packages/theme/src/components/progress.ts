@@ -6,14 +6,14 @@ export const Progress: ComponentMultiStyle = {
     track: {
       bg: ['gray.100', 'whiteAlpha.300'],
     },
-    filledTrack: ({ theme: t, colorMode: s, colorScheme: c = 'blue', hasStripe, isAnimation }) => {
+    filledTrack: ({ theme: t, colorMode: m, colorScheme: c = 'blue', hasStripe, isAnimation }) => {
       hasStripe = !isAnimation && hasStripe
 
-      const l = mode(500, 300)(s)
+      const l = mode(500, 300)(m)
 
-      const color = mode('rgba(255, 255, 255, 0.15)', 'rgba(0,0,0,0.1)')(s)
+      const color = mode('rgba(255, 255, 255, 0.15)', 'rgba(0,0,0,0.1)')(m)
 
-      const bgColor = isDefaultColor(toneColor(c, l)(t, s), getColor(`${c}.${l}`)(t, s))(c)
+      const bgColor = isDefaultColor(toneColor(c, l)(t, m), getColor(`${c}.${l}`)(t, m))(c)
 
       const bgImage = hasStripe
         ? `linear-gradient(

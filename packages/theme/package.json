@@ -2,7 +2,13 @@
   "name": "@yamada-ui/theme",
   "version": "0.1.0",
   "description": "Yamada UI default theme",
-  "keywords": [],
+  "keywords": [
+    "yamada",
+    "yamada ui",
+    "theme",
+    "theming",
+    "ui"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

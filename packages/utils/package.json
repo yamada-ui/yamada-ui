@@ -2,7 +2,13 @@
   "name": "@yamada-ui/utils",
   "version": "0.1.0",
   "description": "Yamada UI utils",
-  "keywords": [],
+  "keywords": [
+    "utils",
+    "utilities",
+    "yamada",
+    "yamada ui",
+    "react"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

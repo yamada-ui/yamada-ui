@@ -16,7 +16,7 @@ runs:
         registry-url: 'https://registry.npmjs.org'
         cache: 'pnpm'
 
-    - name: Setup Git User
+    - name: Setup Git user
       shell: bash
       run: |
         git config --global user.email "hirotomo.yamada@avap.co.jp"

@@ -3,8 +3,10 @@ name: Release
 on:
   push:
     paths:
+      - '.storybook/**'
       - '.changeset/**'
       - 'packages/**'
+      - 'stories/**'
     branches:
       - main
 
@@ -50,9 +52,18 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update changelog
+      - name: Update Changelog
         if: steps.changesets.outputs.published == 'true'
         run: |
           pnpm changelog:latest
           pnpm changelog:format
           pnpm changelog:commit
+
+      - name: Build Storybook
+        run: pnpm build-storybook
+
+      - name: Update Storybook
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: storybook-static

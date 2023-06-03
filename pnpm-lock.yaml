@@ -2604,6 +2604,10 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
 
   packages/utils:
     dependencies:

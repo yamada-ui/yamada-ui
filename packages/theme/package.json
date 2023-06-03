@@ -36,6 +36,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
+  "devDependencies": {
+    "clean-package": "2.2.0"
+  },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*"

@@ -25,9 +25,9 @@ export const createLocalStorageManager = (storageKey: string): ColorModeManager 
     }
   },
 
-  set(colorShcme) {
+  set(colorMode) {
     try {
-      localStorage.setItem(storageKey, colorShcme)
+      localStorage.setItem(storageKey, colorMode)
     } catch (e) {}
   },
 })
@@ -51,8 +51,8 @@ export const createCookieStorageManager = (key: string, cookie?: string): ColorM
     return parseCookie(document.cookie, key) || initColorMode
   },
 
-  set(colorShcme: ColorMode | 'system') {
-    document.cookie = `${key}=${colorShcme}; max-age=31536000; path=/`
+  set(colorMode: ColorMode | 'system') {
+    document.cookie = `${key}=${colorMode}; max-age=31536000; path=/`
   },
 })
 

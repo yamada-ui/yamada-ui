@@ -2,7 +2,13 @@
   "name": "@yamada-ui/theme",
   "version": "0.1.0",
   "description": "Yamada UI default theme",
-  "keywords": [],
+  "keywords": [
+    "yamada",
+    "yamada ui",
+    "theme",
+    "theming",
+    "ui"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",
@@ -29,6 +35,9 @@
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0"
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",

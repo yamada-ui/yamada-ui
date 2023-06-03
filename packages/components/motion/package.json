@@ -2,7 +2,20 @@
   "name": "@yamada-ui/motion",
   "version": "0.1.0",
   "description": "Yamada UI motion components",
-  "keywords": [],
+  "keywords": [
+    "yamada",
+    "yamada ui",
+    "react",
+    "emotion",
+    "component",
+    "motion",
+    "ui",
+    "uikit",
+    "styled",
+    "style-props",
+    "styled-component",
+    "css-in-js"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",
@@ -34,7 +47,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "framer-motion": "^10.12.12"
+    "framer-motion": "^9.1.7"
   },
   "devDependencies": {
     "react": "^18.0.0",

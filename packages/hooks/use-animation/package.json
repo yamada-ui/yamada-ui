@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-animation",
   "version": "0.1.0",
   "description": "Yamada UI useAnimation custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-animation"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

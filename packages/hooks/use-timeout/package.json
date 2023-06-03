@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-timeout",
   "version": "0.1.0",
   "description": "Yamada UI useTimeout custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-timeout"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

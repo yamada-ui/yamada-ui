@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-counter",
   "version": "0.1.0",
   "description": "Yamada UI useCounter custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-counter"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

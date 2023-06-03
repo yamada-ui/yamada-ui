@@ -2,7 +2,9 @@
   "name": "@yamada-ui/use-clickable",
   "version": "0.1.0",
   "description": "Yamada UI useClickable custom hook",
-  "keywords": [],
+  "keywords": [
+    "use-clickable"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",

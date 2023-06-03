@@ -2,7 +2,23 @@
   "name": "@yamada-ui/core",
   "version": "0.1.0",
   "description": "Yamada UI core",
-  "keywords": [],
+  "keywords": [
+    "yamada",
+    "yamada ui",
+    "theme",
+    "theming",
+    "component",
+    "emotion",
+    "ui",
+    "ui-component",
+    "css-in-js",
+    "style",
+    "styled",
+    "style-props",
+    "styled-component",
+    "system",
+    "design-system"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",
@@ -41,7 +57,7 @@
   "devDependencies": {
     "react": "^18.0.0",
     "clean-package": "2.2.0",
-    "framer-motion": "^10.12.12"
+    "framer-motion": "^9.1.7"
   },
   "peerDependencies": {
     "react": ">=18"

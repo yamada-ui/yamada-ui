@@ -1,5 +1,5 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { ComponentStory } from '@storybook/react'
 import {
   Divider,
   FontAwesomeIcon,
@@ -12,8 +12,7 @@ import {
 
 export default {
   title: 'Components / Data Display / Reorder',
-  component: Reorder,
-} as ComponentMeta<typeof Reorder>
+}
 
 export const basic: ComponentStory<typeof Reorder> = () => {
   return (

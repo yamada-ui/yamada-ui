@@ -59,7 +59,7 @@ export const Alert = forwardRef<AlertProps, 'div'>(
 
     return (
       <AlertProvider value={{ status, styles }}>
-        <ui.div ref={ref} className={cx('ui-alert', className)} __css={css} {...rest}>
+        <ui.div ref={ref} className={cx('ui-alert', className)} role='alert' __css={css} {...rest}>
           {children}
         </ui.div>
       </AlertProvider>

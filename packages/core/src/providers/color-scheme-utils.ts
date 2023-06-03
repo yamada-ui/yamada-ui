@@ -15,11 +15,11 @@ type GetColorModeUtilsProps = {
 }
 
 export const getColorModeUtils = ({ isPreventTransition = true }: GetColorModeUtilsProps) => {
-  const setDataset = (colorShcme: ColorMode) => {
+  const setDataset = (colorMode: ColorMode) => {
     const cleanup = isPreventTransition ? preventTransition() : undefined
 
-    document.documentElement.dataset.theme = colorShcme
-    document.documentElement.style.colorMode = colorShcme
+    document.documentElement.dataset.theme = colorMode
+    document.documentElement.style.colorScheme = colorMode
 
     cleanup?.()
   }

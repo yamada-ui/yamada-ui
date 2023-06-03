@@ -9,20 +9,20 @@ Please read the following before submitting:
 
 Closes # <!-- Github issue # here -->
 
-## 📝 Description
+## Description
 
 > Add a brief description
 
-## ⛳️ Current behavior (updates)
+## Current behavior (updates)
 
 > Please describe the current behavior that you are modifying
 
-## 🚀 New behavior
+## New behavior
 
 > Please describe the behavior or changes this PR adds
 
-## 💣 Is this a breaking change (Yes/No):
+## Is this a breaking change (Yes/No):
 
 <!-- If Yes, please describe the impact and migration path for existing Yamada UI users. -->
 
-## 📝 Additional Information
+## Additional Information

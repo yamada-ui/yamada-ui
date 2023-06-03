@@ -67,8 +67,6 @@ or
 $ npm install @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
 ```
 
-Currently '@yamada-ui/react' is under development and cannot be installed from npm. Please use it in git submodule or subtree.
-
 ## Usage
 
 To get started with using the components, please follow the steps below:

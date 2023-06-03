@@ -117,8 +117,6 @@ https://www.conventionalcommits.org/ or check out the
    live preview by doing the following at the beginning of the snippet:
    ` ```jsx live=false`
 
-> ⚠️ Currently, the package has not been released yet, so you don't need to do 4 and 5 above.
-
 > If you made minor changes like CI config, prettier, etc, you can run
 > `pnpm changeset add --empty` to generate an empty changeset file to document
 > your changes.

@@ -1240,8 +1240,8 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       framer-motion:
-        specifier: ^10.12.12
-        version: 10.12.12(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^9.1.7
+        version: 9.1.7(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -1906,8 +1906,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       framer-motion:
-        specifier: ^10.12.12
-        version: 10.12.12(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^9.1.7
+        version: 9.1.7(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -14055,16 +14055,11 @@ packages:
       map-cache: 0.2.2
     dev: false
 
-  /framer-motion@10.12.12(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-DDCqp60U6hR7aUrXj/BXc/t0Sd/U4ep6w/NZQkw898K+u7s+Vv/P8yxq4WTNA86kU9QCsqOgn1Qhz2DpYK0Oag==}
+  /framer-motion@9.1.7(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-nKxBkIO4IPkMEqcBbbATxsVjwPYShKl051yhBv9628iAH6JLeHD0siBHxkL62oQzMC1+GNX73XtPjgP753ufuw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

@@ -47,7 +47,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "framer-motion": "^10.12.12"
+    "framer-motion": "^9.1.7"
   },
   "devDependencies": {
     "react": "^18.0.0",

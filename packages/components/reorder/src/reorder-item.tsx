@@ -67,7 +67,6 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
 
     return (
       <ReorderItemProvider value={{ register, isDrag, dragControls }}>
-        {/* @ts-ignore */}
         <ui.li
           ref={ref}
           as={MotionReorder.Item}

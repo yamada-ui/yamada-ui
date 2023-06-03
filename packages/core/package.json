@@ -57,7 +57,7 @@
   "devDependencies": {
     "react": "^18.0.0",
     "clean-package": "2.2.0",
-    "framer-motion": "^10.12.12"
+    "framer-motion": "^9.1.7"
   },
   "peerDependencies": {
     "react": ">=18"

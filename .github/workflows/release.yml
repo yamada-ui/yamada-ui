@@ -59,6 +59,15 @@ jobs:
           pnpm changelog:format
           pnpm changelog:commit
 
+      - name: Notification Mattermost and Discord
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm release:mattermost
+          pnpm release:discord
+        env:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
       - name: Build Storybook
         run: pnpm build-storybook
 

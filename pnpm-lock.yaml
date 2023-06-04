@@ -314,7 +314,7 @@ importers:
         specifier: 4.9.4
         version: 4.9.4
 
-  examples/next-js-app:
+  examples/nextjs-app:
     dependencies:
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.4.0
@@ -372,7 +372,7 @@ importers:
         specifier: 4.9.4
         version: 4.9.4
 
-  examples/next-js-pages:
+  examples/nextjs-pages:
     dependencies:
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.4.0

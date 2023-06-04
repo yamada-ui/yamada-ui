@@ -7,7 +7,8 @@ import {
   extendTheme,
   UIProvider,
 } from '@yamada-ui/react'
-import { FC, PropsWithChildren, useCallback, useState } from 'react'
+import { ReactNode } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { customTheme, customConfig } from 'theme'
 
 type AppContext = {
@@ -22,7 +23,7 @@ const [AppContextProvider, useAppContext] = createContext<AppContext>({
   name: 'AppContext',
 })
 
-export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
+export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isSystemColorMode, setIsSystemColorMode] = useState<boolean>(() => {
     if (typeof window === 'undefined') return true
 

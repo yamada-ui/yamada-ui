@@ -43,12 +43,12 @@
     "release:discord": "tsx scripts/discord",
     "react:start": "pnpm --prefix examples/create-react-app start",
     "react:build": "pnpm --prefix examples/create-react-app build",
-    "next-pages:dev": "pnpm --prefix examples/next-js-pages dev",
-    "next-pages:build": "pnpm --prefix examples/next-js-pages build",
-    "next-pages:start": "pnpm --prefix examples/next-js-pages start",
-    "next-app:dev": "pnpm --prefix examples/next-js-app dev",
-    "next-app:build": "pnpm --prefix examples/next-js-app build",
-    "next-app:start": "pnpm --prefix examples/next-js-app start"
+    "next-pages:dev": "pnpm --prefix examples/nextjs-pages dev",
+    "next-pages:build": "pnpm --prefix examples/nextjs-pages build",
+    "next-pages:start": "pnpm --prefix examples/nextjs-pages start",
+    "next-app:dev": "pnpm --prefix examples/nextjs-app dev",
+    "next-app:build": "pnpm --prefix examples/nextjs-app build",
+    "next-app:start": "pnpm --prefix examples/nextjs-app start"
   },
   "dependencies": {
     "@babel/core": "^7.22.1",

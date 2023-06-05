@@ -3,6 +3,8 @@
 </p>
 
 <p align="center">
+  <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
+  <img alt="Github Checks" src="https://badgen.net/github/checks/hirotomoyamada/yamada-ui/main"/>
   <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>

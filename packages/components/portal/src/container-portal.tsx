@@ -1,10 +1,10 @@
 import { useSafeLayoutEffect } from '@yamada-ui/utils'
-import { FC, useMemo, useState } from 'react'
+import { FC, useMemo, useState, PropsWithChildren, RefObject } from 'react'
 import { createPortal } from 'react-dom'
 import { PortalProvider } from './'
 
-type ContainerPortalProps = React.PropsWithChildren & {
-  containerRef: React.RefObject<HTMLElement | null>
+type ContainerPortalProps = PropsWithChildren & {
+  containerRef: RefObject<HTMLElement | null>
   appendToParentPortal?: boolean
 }
 

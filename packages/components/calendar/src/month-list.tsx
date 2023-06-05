@@ -37,7 +37,7 @@ export const MonthList: FC<MonthListProps> = ({
   const maxH = rest.maxH ?? rest.maxHeight
 
   return (
-    <ui.div __css={{ ...styles.picker }} {...filterUndefined(rest)}>
+    <ui.div __css={{ ...styles.content }} {...filterUndefined(rest)}>
       <CalenderHeader
         {...{
           ...headerProps,
@@ -50,14 +50,14 @@ export const MonthList: FC<MonthListProps> = ({
       />
 
       <ui.div
-        className={cx('ui-calendar-month-picker', className)}
+        className={cx('ui-calendar-month-list', className)}
         __css={{
-          w: styles.picker?.w ?? styles.picker?.width,
-          minW: styles.picker?.minW ?? styles.picker?.minWidth,
-          maxW: styles.picker?.maxW ?? styles.picker?.maxWidth,
-          h: styles.picker?.h ?? styles.picker?.height,
-          minH: styles.picker?.minH ?? styles.picker?.minHeight,
-          maxH: styles.picker?.maxH ?? styles.picker?.maxHeight,
+          w: styles.content?.w ?? styles.content?.width,
+          minW: styles.content?.minW ?? styles.content?.minWidth,
+          maxW: styles.content?.maxW ?? styles.content?.maxWidth,
+          h: styles.content?.h ?? styles.content?.height,
+          minH: styles.content?.minH ?? styles.content?.minHeight,
+          maxH: styles.content?.maxH ?? styles.content?.maxHeight,
           display: 'grid',
           ...styles.month,
         }}
@@ -66,7 +66,7 @@ export const MonthList: FC<MonthListProps> = ({
         {rangeMonths.map((month, index) => (
           <Button
             key={index}
-            className='ui-calender-month-picker-button'
+            className='ui-calender-month-list-button'
             variant='ghost'
             __css={{
               minW: 'auto',

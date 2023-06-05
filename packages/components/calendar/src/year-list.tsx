@@ -40,7 +40,7 @@ export const YearList: FC<YearListProps> = ({
   const maxYearLabel = getFormattedLabel(rangeYears[rangeYears.length - 1], locale, yearFormat)
 
   return (
-    <ui.div __css={{ ...styles.picker }} {...filterUndefined(rest)}>
+    <ui.div __css={{ ...styles.content }} {...filterUndefined(rest)}>
       <CalenderHeader
         {...{
           ...headerProps,
@@ -53,14 +53,14 @@ export const YearList: FC<YearListProps> = ({
       />
 
       <ui.div
-        className={cx('ui-calendar-year-picker', className)}
+        className={cx('ui-calendar-year-list', className)}
         __css={{
-          w: styles.picker?.w ?? styles.picker?.width,
-          minW: styles.picker?.minW ?? styles.picker?.minWidth,
-          maxW: styles.picker?.maxW ?? styles.picker?.maxWidth,
-          h: styles.picker?.h ?? styles.picker?.height,
-          minH: styles.picker?.minH ?? styles.picker?.minHeight,
-          maxH: styles.picker?.maxH ?? styles.picker?.maxHeight,
+          w: styles.content?.w ?? styles.content?.width,
+          minW: styles.content?.minW ?? styles.content?.minWidth,
+          maxW: styles.content?.maxW ?? styles.content?.maxWidth,
+          h: styles.content?.h ?? styles.content?.height,
+          minH: styles.content?.minH ?? styles.content?.minHeight,
+          maxH: styles.content?.maxH ?? styles.content?.maxHeight,
           display: 'grid',
           ...styles.year,
         }}
@@ -69,7 +69,7 @@ export const YearList: FC<YearListProps> = ({
         {rangeYears.map((year, index) => (
           <Button
             key={index}
-            className='ui-calender-year-picker-button'
+            className='ui-calender-year-list-button'
             variant='ghost'
             __css={{
               minW: 'auto',

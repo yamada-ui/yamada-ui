@@ -85,7 +85,7 @@ export const Month: FC<MonthProps> = ({
           const days = getMonthDays(month, firstDayOfWeek)
 
           return (
-            <ui.div key={index} __css={{ ...styles.picker }} {...filterUndefined(rest)}>
+            <ui.div key={index} __css={{ ...styles.content }} {...filterUndefined(rest)}>
               <CalenderHeader
                 {...{
                   ...headerProps,
@@ -99,14 +99,14 @@ export const Month: FC<MonthProps> = ({
               />
 
               <ui.table
-                className={cx('ui-calendar-date-picker', className)}
+                className={cx('ui-calendar-month', className)}
                 __css={{
-                  w: styles.picker?.w ?? styles.picker?.width,
-                  minW: styles.picker?.minW ?? styles.picker?.minWidth,
-                  maxW: styles.picker?.maxW ?? styles.picker?.maxWidth,
-                  h: styles.picker?.h ?? styles.picker?.height,
-                  minH: styles.picker?.minH ?? styles.picker?.minHeight,
-                  maxH: styles.picker?.maxH ?? styles.picker?.maxHeight,
+                  w: styles.content?.w ?? styles.content?.width,
+                  minW: styles.content?.minW ?? styles.content?.minWidth,
+                  maxW: styles.content?.maxW ?? styles.content?.maxWidth,
+                  h: styles.content?.h ?? styles.content?.height,
+                  minH: styles.content?.minH ?? styles.content?.minHeight,
+                  maxH: styles.content?.maxH ?? styles.content?.maxHeight,
                   ...styles.date,
                 }}
                 {...getContainerProps(
@@ -133,7 +133,7 @@ export const Month: FC<MonthProps> = ({
                           {...thProps}
                         >
                           <ui.div
-                            className='ui-calendar-date-picker-weekday'
+                            className='ui-calendar-month-weekday'
                             __css={{ w: 'full', display: 'flex', ...styles.weekday }}
                             {...computedWeekdayProps}
                           >
@@ -160,7 +160,7 @@ export const Month: FC<MonthProps> = ({
                           return (
                             <ui.td key={col} {...tdProps}>
                               <Button
-                                className='ui-calendar-date-picker-day'
+                                className='ui-calendar-month-day'
                                 variant='ghost'
                                 __css={{
                                   minW: 'auto',
@@ -200,7 +200,7 @@ export const Month: FC<MonthProps> = ({
 export type WeekdayProps = { weekday: string; index: number }
 
 export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
-  return <ui.span className='ui-calendar-date-picker-weekday-label'>{weekday}</ui.span>
+  return <ui.span className='ui-calendar-month-weekday-label'>{weekday}</ui.span>
 }
 
 export type DayProps = {
@@ -214,5 +214,5 @@ export type DayProps = {
 }
 
 export const Day: FC<DayProps> = ({ date }) => {
-  return <ui.span className='ui-calendar-date-picker-day-label'>{date.getDate()}</ui.span>
+  return <ui.span className='ui-calendar-month-day-label'>{date.getDate()}</ui.span>
 }

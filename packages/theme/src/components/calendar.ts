@@ -20,7 +20,7 @@ export const Calendar: ComponentMultiStyle = {
     },
     prev: {},
     next: {},
-    picker: {},
+    content: {},
     year: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
@@ -121,7 +121,7 @@ export const Calendar: ComponentMultiStyle = {
         gap: 'inherit',
         fontSize: 'inherit',
       },
-      picker: {
+      content: {
         w: 'auto',
       },
       label: {
@@ -211,7 +211,7 @@ export const Calendar: ComponentMultiStyle = {
       container: {
         fontSize: 'xs',
       },
-      picker: {
+      content: {
         w: 56,
       },
       label: {
@@ -237,7 +237,7 @@ export const Calendar: ComponentMultiStyle = {
       container: {
         fontSize: 'sm',
       },
-      picker: {
+      content: {
         w: 70,
       },
       label: {
@@ -263,7 +263,7 @@ export const Calendar: ComponentMultiStyle = {
       container: {
         fontSize: 'md',
       },
-      picker: {
+      content: {
         w: 84,
       },
       label: {
@@ -291,7 +291,7 @@ export const Calendar: ComponentMultiStyle = {
         w: 'full',
         fontSize: 'md',
       },
-      picker: {
+      content: {
         w: 'full',
       },
       label: {

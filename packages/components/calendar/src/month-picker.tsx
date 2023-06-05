@@ -1,87 +1,103 @@
-import { Button, ButtonProps } from '@yamada-ui/button'
-import { ui, HTMLUIProps } from '@yamada-ui/core'
-import { cx, filterUndefined } from '@yamada-ui/utils'
-import { FC } from 'react'
-import { CalenderHeader, CalenderHeaderProps } from './calender-header'
-import { getFormattedLabel, useCalendarContext, useMonthPicker } from './use-calendar'
+import { Calendar } from '@yamada-ui/calendar'
+import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+} from '@yamada-ui/core'
+import { Popover, PopoverContent } from '@yamada-ui/popover'
+import { cx } from '@yamada-ui/utils'
+import { DatePickerField, DatePickerFieldProps } from './date-picker-field'
+import { DatePickerClearIcon, DatePickerIcon, DatePickerIconProps } from './date-picker-icon'
+import { DatePickerProvider } from './use-date-picker'
+import { useMonthPicker, UseMonthPickerProps } from './use-month-picker'
 
 type MonthPickerOptions = {
-  headerProps?: HTMLUIProps<'div'>
-  monthProps?: ButtonProps & { component?: FC<{ month: string; year: number; index: number }> }
+  focusBorderColor?: string
+  errorBorderColor?: string
+  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  inputProps?: DatePickerFieldProps['inputProps']
+  iconProps?: DatePickerIconProps
+  clearIconProps?: DatePickerIconProps
 }
 
-export type MonthPickerProps = HTMLUIProps<'div'> &
-  Omit<CalenderHeaderProps, 'label' | 'index'> &
-  MonthPickerOptions
+export type MonthPickerProps = Omit<HTMLUIProps<'input'>, keyof UseMonthPickerProps> &
+  ThemeProps<'DatePicker'> &
+  MonthPickerOptions &
+  UseMonthPickerProps
 
-export const MonthPicker: FC<MonthPickerProps> = ({
-  className,
-  headerProps,
-  labelProps,
-  controlProps,
-  prevProps,
-  nextProps,
-  monthProps,
-  ...rest
-}) => {
-  const { year, locale, yearFormat, styles } = useCalendarContext()
-  const { rangeMonths, getContainerProps, getButtonProps } = useMonthPicker()
+export const MonthPicker = forwardRef<MonthPickerProps, 'div'>((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle('DatePicker', props)
+  let {
+    className,
+    isClearable = true,
+    color,
+    h,
+    height,
+    minH,
+    minHeight,
+    containerProps,
+    inputProps,
+    iconProps,
+    clearIconProps,
+    ...computedProps
+  } = omitThemeProps(mergedProps)
 
-  const { component: customMonth, ...computedMonthProps } = monthProps ?? {}
+  const {
+    getPopoverProps,
+    getContainerProps,
+    getCalendarProps,
+    getFieldProps,
+    getInputProps,
+    getIconProps,
+    value,
+  } = useMonthPicker(computedProps)
 
-  const w = rest.w ?? rest.width
-  const minW = rest.minW ?? rest.minWidth
-  const maxW = rest.maxW ?? rest.maxWidth
-  const h = rest.h ?? rest.height
-  const minH = rest.minH ?? rest.minHeight
-  const maxH = rest.maxH ?? rest.maxHeight
+  h = h ?? height
+  minH = minH ?? minHeight
+
+  const css: CSSUIObject = {
+    position: 'relative',
+    w: '100%',
+    h: 'fit-content',
+    color,
+    ...styles.container,
+  }
 
   return (
-    <ui.div __css={{ ...styles.picker }} {...filterUndefined(rest)}>
-      <CalenderHeader
-        {...{
-          ...headerProps,
-          label: getFormattedLabel(year, locale, yearFormat),
-          labelProps,
-          controlProps,
-          prevProps,
-          nextProps,
-        }}
-      />
+    <DatePickerProvider value={styles}>
+      <Popover {...getPopoverProps()}>
+        <ui.div
+          className={cx('ui-month-picker', className)}
+          __css={css}
+          {...getContainerProps(containerProps)}
+        >
+          <DatePickerField
+            className='ui-month-picker-field'
+            {...getFieldProps({ h, minH }, ref)}
+            inputProps={getInputProps(inputProps)}
+          />
 
-      <ui.div
-        className={cx('ui-calendar-month-picker', className)}
-        __css={{
-          w: styles.picker?.w ?? styles.picker?.width,
-          minW: styles.picker?.minW ?? styles.picker?.minWidth,
-          maxW: styles.picker?.maxW ?? styles.picker?.maxWidth,
-          h: styles.picker?.h ?? styles.picker?.height,
-          minH: styles.picker?.minH ?? styles.picker?.minHeight,
-          maxH: styles.picker?.maxH ?? styles.picker?.maxHeight,
-          display: 'grid',
-          ...styles.month,
-        }}
-        {...getContainerProps(filterUndefined({ w, minW, maxW, h, minH, maxH }))}
-      >
-        {rangeMonths.map((month, index) => (
-          <Button
-            key={index}
-            className='ui-calender-month-picker-button'
-            variant='ghost'
-            __css={{
-              minW: 'auto',
-              h: 'auto',
-              p: 0,
-              fontSize: undefined,
-              fontWeight: 'normal',
-              ...styles.button,
-            }}
-            {...getButtonProps({ ...computedMonthProps, value: index })}
-          >
-            {customMonth ? customMonth({ month, year, index }) : month}
-          </Button>
-        ))}
-      </ui.div>
-    </ui.div>
+          {isClearable && value ? (
+            <DatePickerClearIcon
+              className='ui-month-picker-clear-icon'
+              {...getIconProps({ clear: true, ...clearIconProps })}
+            />
+          ) : (
+            <DatePickerIcon
+              className='ui-month-picker-icon'
+              {...getIconProps({ clear: false, ...iconProps })}
+            />
+          )}
+
+          <PopoverContent className='ui-month-picker-popover' __css={{ ...styles.popover }}>
+            <Calendar className='ui-month-picker-calender' {...getCalendarProps()} />
+          </PopoverContent>
+        </ui.div>
+      </Popover>
+    </DatePickerProvider>
   )
-}
+})

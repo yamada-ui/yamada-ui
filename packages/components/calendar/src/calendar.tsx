@@ -10,8 +10,8 @@ import {
 import { cx } from '@yamada-ui/utils'
 import { forwardRef, ForwardedRef, Ref } from 'react'
 import { CalenderHeaderProps } from './calender-header'
-import { DatePicker, DatePickerProps } from './date-picker'
-import { MonthPicker, MonthPickerProps } from './month-picker'
+import { Month, MonthProps } from './month'
+import { MonthList, MonthListProps } from './month-list'
 import {
   CalendarProvider,
   useCalendar,
@@ -19,7 +19,7 @@ import {
   CalendarContext,
   MaybeValue,
 } from './use-calendar'
-import { YearPicker, YearPickerProps } from './year-picker'
+import { YearList, YearListProps } from './year-list'
 
 type CalendarOptions = {
   headerProps?: HTMLUIProps<'div'>
@@ -29,9 +29,9 @@ export type CalendarBaseProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue
   ThemeProps<'Calendar'> &
   CalendarOptions &
   Omit<CalenderHeaderProps, 'label' | 'index'> &
-  Pick<YearPickerProps, 'yearProps'> &
-  Pick<MonthPickerProps, 'monthProps'> &
-  Pick<DatePickerProps, 'tableProps' | 'weekdayProps' | 'dayProps'>
+  Pick<YearListProps, 'yearProps'> &
+  Pick<MonthListProps, 'monthProps'> &
+  Pick<MonthProps, 'tableProps' | 'weekdayProps' | 'dayProps'>
 
 export type CalendarProps<Y extends MaybeValue = Date> = CalendarBaseProps & UseCalendarProps<Y>
 
@@ -85,7 +85,7 @@ export const Calendar = forwardRef(
           {...getContainerProps(computedProps, ref)}
         >
           {type === 'year' ? (
-            <YearPicker
+            <YearList
               {...{
                 headerProps,
                 labelProps,
@@ -103,7 +103,7 @@ export const Calendar = forwardRef(
             />
           ) : null}
           {type === 'month' ? (
-            <MonthPicker
+            <MonthList
               {...{
                 headerProps,
                 labelProps,
@@ -121,7 +121,7 @@ export const Calendar = forwardRef(
             />
           ) : null}
           {type === 'date' ? (
-            <DatePicker
+            <Month
               {...{
                 headerProps,
                 tableProps,

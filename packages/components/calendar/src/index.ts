@@ -9,4 +9,7 @@ export {
   isAfterMaxMonth,
   isBeforeMinMonth,
 } from './use-calendar'
-export type { WeekdayProps, DayProps } from './date-picker'
+export type { WeekdayProps, DayProps } from './month'
+export * from './date-picker'
+export * from './month-picker'
+export type { MonthPickerType } from './use-month-picker'

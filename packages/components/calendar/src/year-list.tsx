@@ -3,18 +3,18 @@ import { ui, HTMLUIProps } from '@yamada-ui/core'
 import { cx, filterUndefined } from '@yamada-ui/utils'
 import { FC } from 'react'
 import { CalenderHeader, CalenderHeaderProps } from './calender-header'
-import { getFormattedLabel, useCalendarContext, useYearPicker } from './use-calendar'
+import { getFormattedLabel, useCalendarContext, useYearList } from './use-calendar'
 
-type YearPickerOptions = {
+type YearListOptions = {
   headerProps?: HTMLUIProps<'div'>
   yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
 }
 
-export type YearPickerProps = HTMLUIProps<'div'> &
+export type YearListProps = HTMLUIProps<'div'> &
   Omit<CalenderHeaderProps, 'label' | 'index'> &
-  YearPickerOptions
+  YearListOptions
 
-export const YearPicker: FC<YearPickerProps> = ({
+export const YearList: FC<YearListProps> = ({
   className,
   headerProps,
   labelProps,
@@ -25,7 +25,7 @@ export const YearPicker: FC<YearPickerProps> = ({
   ...rest
 }) => {
   const { locale, yearFormat, styles } = useCalendarContext()
-  const { rangeYears, getContainerProps, getButtonProps } = useYearPicker()
+  const { rangeYears, getContainerProps, getButtonProps } = useYearList()
 
   const { component: customYear, ...computedYearProps } = yearProps ?? {}
 

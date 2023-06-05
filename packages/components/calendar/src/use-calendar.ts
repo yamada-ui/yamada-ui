@@ -767,7 +767,7 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
 
 export type UseCalenderHeaderReturn = ReturnType<typeof useCalenderHeader>
 
-export const useYearPicker = () => {
+export const useYearList = () => {
   const {
     internalYear,
     setYear,
@@ -939,9 +939,9 @@ export const useYearPicker = () => {
   return { rangeYears, getContainerProps, getButtonProps }
 }
 
-export type UseYearPickerReturn = ReturnType<typeof useYearPicker>
+export type UseYearListReturn = ReturnType<typeof useYearList>
 
-export const useMonthPicker = () => {
+export const useMonthList = () => {
   const {
     year,
     setYear,
@@ -1100,9 +1100,9 @@ export const useMonthPicker = () => {
   return { rangeMonths, getContainerProps, getButtonProps }
 }
 
-export type UseMonthPickerReturn = ReturnType<typeof useMonthPicker>
+export type UseMonthListReturn = ReturnType<typeof useMonthList>
 
-export const useDatePicker = () => {
+export const useMonth = () => {
   const {
     value: selectedValue,
     setValue,
@@ -1377,4 +1377,4 @@ export const useDatePicker = () => {
   return { getContainerProps, getButtonProps }
 }
 
-export type UseDatePickerReturn = ReturnType<typeof useDatePicker>
+export type UseMonthReturn = ReturnType<typeof useMonth>

@@ -48,7 +48,11 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/button": "workspace:*",
+    "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/use-outside-click": "workspace:*",
+    "@yamada-ui/form-control": "workspace:*",
+    "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "dayjs": "^1.11.7"
   },

@@ -52,19 +52,19 @@ To use Yamada UI components, all you need to install the
 `@yamada-ui/react` package and its peer dependencies:
 
 ```sh
-$ pnpm add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
+$ pnpm add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
 ```
 
 or
 
 ```sh
-$ yarn add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
+$ yarn add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
 ```
 
 or
 
 ```sh
-$ npm install @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6
+$ npm install @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
 ```
 
 ## Usage

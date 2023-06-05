@@ -4,4 +4,4 @@
 '@yamada-ui/react': patch
 ---
 
-Updated peerDependencies.
+Updated packages peerDependencies.

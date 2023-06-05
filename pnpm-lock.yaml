@@ -1442,6 +1442,9 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
+      react-dom:
+        specifier: '>=18'
+        version: 18.2.0(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -2274,6 +2277,9 @@ importers:
       '@emotion/react':
         specifier: ^11.11.0
         version: 11.11.0(@types/react@18.2.7)(react@18.2.0)
+      '@emotion/styled':
+        specifier: ^11.0.0
+        version: 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.7)(react@18.2.0)
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core
@@ -2298,6 +2304,9 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
+      react-dom:
+        specifier: '>=18'
+        version: 18.2.0(react@18.2.0)
       react-remove-scroll:
         specifier: ^2.5.4
         version: 2.5.4(@types/react@18.2.7)(react@18.2.0)
@@ -2311,6 +2320,12 @@ importers:
 
   packages/react:
     dependencies:
+      '@emotion/react':
+        specifier: ^11.0.0
+        version: 11.11.0(@types/react@18.2.7)(react@18.2.0)
+      '@emotion/styled':
+        specifier: ^11.0.0
+        version: 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.7)(react@18.2.0)
       '@yamada-ui/accordion':
         specifier: workspace:*
         version: link:../components/accordion
@@ -2563,6 +2578,12 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
+      framer-motion:
+        specifier: '>=9.0.0'
+        version: 9.1.7(react-dom@18.2.0)(react@18.2.0)
+      react-dom:
+        specifier: '>=18'
+        version: 18.2.0(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -2765,7 +2786,7 @@ packages:
     resolution: {integrity: sha512-tyzR0OsH88AelgukhL2rbEUCLKBGmy2G9Th/5vpyOt0zf44Be61kvIQXjCwTSX8t+qJ/vMwZfhK6mPdrMLZXRg==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.22.0
+      '@babel/types': 7.22.3
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.18
       jsesc: 2.5.2
@@ -2949,7 +2970,7 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       '@babel/template': 7.21.9
       '@babel/traverse': 7.22.1(supports-color@5.5.0)
-      '@babel/types': 7.22.0
+      '@babel/types': 7.22.3
     transitivePeerDependencies:
       - supports-color
 
@@ -3041,7 +3062,7 @@ packages:
     dependencies:
       '@babel/template': 7.21.9
       '@babel/traverse': 7.22.1(supports-color@5.5.0)
-      '@babel/types': 7.22.0
+      '@babel/types': 7.22.3
     transitivePeerDependencies:
       - supports-color
 
@@ -3058,7 +3079,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.22.0
+      '@babel/types': 7.22.3
 
   /@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@7.18.6(@babel/core@7.22.1):
     resolution: {integrity: sha512-Dgxsyg54Fx1d4Nge8UnvTrED63vrwOdPmyvPzlNN/boaliRP54pm3pGzZD1SJUwrBA+Cs/xdG8kXX6Mn/RfISQ==}
@@ -4341,7 +4362,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.21.4
       '@babel/parser': 7.22.0
-      '@babel/types': 7.22.0
+      '@babel/types': 7.22.3
 
   /@babel/traverse@7.22.1(supports-color@5.5.0):
     resolution: {integrity: sha512-lAWkdCoUFnmwLBhIRLciFntGYsIIoC6vIbN8zrLPqBnJmPu7Z6nzqnKd7FsxQUNAvZfVZ0x6KdNvNp8zWIOHSQ==}

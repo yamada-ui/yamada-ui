@@ -144,12 +144,27 @@ importers:
       '@typescript-eslint/parser':
         specifier: 5.59.7
         version: 5.59.7(eslint@8.41.0)(typescript@4.9.4)
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:packages/components/calendar
+      '@yamada-ui/carousel':
+        specifier: workspace:*
+        version: link:packages/components/carousel
       '@yamada-ui/cli':
         specifier: workspace:*
         version: link:packages/cli
+      '@yamada-ui/dropzone':
+        specifier: workspace:*
+        version: link:packages/components/dropzone
+      '@yamada-ui/markdown':
+        specifier: workspace:*
+        version: link:packages/components/markdown
       '@yamada-ui/react':
         specifier: workspace:*
         version: link:packages/react
+      '@yamada-ui/table':
+        specifier: workspace:*
+        version: link:packages/components/table
       '@yamada-ui/test':
         specifier: workspace:*
         version: link:packages/test
@@ -641,12 +656,24 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon
+      '@yamada-ui/popover':
+        specifier: workspace:*
+        version: link:../popover
+      '@yamada-ui/use-clickable':
+        specifier: workspace:*
+        version: link:../../hooks/use-clickable
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
+      '@yamada-ui/use-outside-click':
+        specifier: workspace:*
+        version: link:../../hooks/use-outside-click
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -753,49 +780,6 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
-    devDependencies:
-      clean-package:
-        specifier: 2.2.0
-        version: 2.2.0
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-
-  packages/components/date-picker:
-    dependencies:
-      '@yamada-ui/calendar':
-        specifier: workspace:*
-        version: link:../calendar
-      '@yamada-ui/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@yamada-ui/form-control':
-        specifier: workspace:*
-        version: link:../form-control
-      '@yamada-ui/icon':
-        specifier: workspace:*
-        version: link:../icon
-      '@yamada-ui/input':
-        specifier: workspace:*
-        version: link:../input
-      '@yamada-ui/popover':
-        specifier: workspace:*
-        version: link:../popover
-      '@yamada-ui/use-clickable':
-        specifier: workspace:*
-        version: link:../../hooks/use-clickable
-      '@yamada-ui/use-controllable-state':
-        specifier: workspace:*
-        version: link:../../hooks/use-controllable-state
-      '@yamada-ui/use-outside-click':
-        specifier: workspace:*
-        version: link:../../hooks/use-outside-click
-      '@yamada-ui/utils':
-        specifier: workspace:*
-        version: link:../../utils
-      dayjs:
-        specifier: ^1.11.7
-        version: 1.11.7
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -2347,15 +2331,9 @@ importers:
       '@yamada-ui/button':
         specifier: workspace:*
         version: link:../components/button
-      '@yamada-ui/calendar':
-        specifier: workspace:*
-        version: link:../components/calendar
       '@yamada-ui/card':
         specifier: workspace:*
         version: link:../components/card
-      '@yamada-ui/carousel':
-        specifier: workspace:*
-        version: link:../components/carousel
       '@yamada-ui/checkbox':
         specifier: workspace:*
         version: link:../components/checkbox
@@ -2365,12 +2343,6 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core
-      '@yamada-ui/date-picker':
-        specifier: workspace:*
-        version: link:../components/date-picker
-      '@yamada-ui/dropzone':
-        specifier: workspace:*
-        version: link:../components/dropzone
       '@yamada-ui/editable':
         specifier: workspace:*
         version: link:../components/editable
@@ -2416,9 +2388,6 @@ importers:
       '@yamada-ui/loading':
         specifier: workspace:*
         version: link:../components/loading
-      '@yamada-ui/markdown':
-        specifier: workspace:*
-        version: link:../components/markdown
       '@yamada-ui/menu':
         specifier: workspace:*
         version: link:../components/menu
@@ -2485,9 +2454,6 @@ importers:
       '@yamada-ui/switch':
         specifier: workspace:*
         version: link:../components/switch
-      '@yamada-ui/table':
-        specifier: workspace:*
-        version: link:../components/table
       '@yamada-ui/tabs':
         specifier: workspace:*
         version: link:../components/tabs

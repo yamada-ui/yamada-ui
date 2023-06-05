@@ -1,5 +1,15 @@
 # @yamada-ui/markdown
 
+## 0.1.2
+
+### Patch Changes
+
+- [`d752a21`](https://github.com/hirotomoyamada/yamada-ui/commit/d752a21498ae135a0d2b97b861a7da319a9830d4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Change the module called from react-syntax-highlighter to esm.
+
+- Updated dependencies []:
+  - @yamada-ui/core@0.1.2
+  - @yamada-ui/use-value@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

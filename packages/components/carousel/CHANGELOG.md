@@ -1,5 +1,16 @@
 # @yamada-ui/carousel
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@0.1.2
+  - @yamada-ui/button@0.1.2
+  - @yamada-ui/icon@0.1.2
+  - @yamada-ui/use-token@0.1.2
+  - @yamada-ui/use-value@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

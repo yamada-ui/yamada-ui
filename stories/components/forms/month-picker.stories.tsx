@@ -1,13 +1,7 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import {
-  FontAwesomeIcon,
-  FormControl,
-  Grid,
-  Heading,
-  MonthPicker,
-  MonthPickerType,
-} from '@yamada-ui/react'
+import { MonthPicker, MonthPickerType } from '@yamada-ui/calendar'
+import { FontAwesomeIcon, FormControl, Grid, Heading } from '@yamada-ui/react'
 import { useState } from 'react'
 import 'dayjs/locale/ja'
 

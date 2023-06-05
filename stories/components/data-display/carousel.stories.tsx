@@ -6,6 +6,8 @@ import {
   CarouselControlNext,
   CarouselControlPrev,
   CarouselIndicators,
+} from '@yamada-ui/carousel'
+import {
   Progress,
   FontAwesomeIcon,
   Center,

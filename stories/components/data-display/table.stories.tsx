@@ -1,5 +1,6 @@
 import { ComponentStory } from '@storybook/react'
-import { Table, Column, TableCaption, Sort, Button, Text } from '@yamada-ui/react'
+import { TableCaption, Button, Text } from '@yamada-ui/react'
+import { Table, Column, Sort } from '@yamada-ui/table'
 import { useMemo, useState } from 'react'
 
 export default {

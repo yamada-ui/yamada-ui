@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Heading, Markdown } from '@yamada-ui/react'
+import { Markdown } from '@yamada-ui/markdown'
+import { Heading } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Data Display / Markdown',

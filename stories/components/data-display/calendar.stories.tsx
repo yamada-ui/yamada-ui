@@ -1,10 +1,9 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { ComponentStory } from '@storybook/react'
+import { Calendar, CalendarType } from '@yamada-ui/calendar'
 import {
-  Calendar,
   Heading,
   Wrap,
-  CalendarType,
   FontAwesomeIcon,
   Tooltip,
   Center,
@@ -25,8 +24,7 @@ import 'dayjs/locale/ja'
 
 export default {
   title: 'Components / Data Display / Calendar',
-  component: Calendar,
-} as ComponentMeta<typeof Calendar>
+}
 
 export const basic: ComponentStory<typeof Calendar> = () => {
   return <Calendar />

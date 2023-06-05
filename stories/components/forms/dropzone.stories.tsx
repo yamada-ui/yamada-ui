@@ -6,13 +6,8 @@ import {
   DropzoneReject,
   DropzoneIdle,
   IMAGE_ACCEPT_TYPE,
-  HStack,
-  VStack,
-  Text,
-  FontAwesomeIcon,
-  FormControl,
-  Button,
-} from '@yamada-ui/react'
+} from '@yamada-ui/dropzone'
+import { HStack, VStack, Text, FontAwesomeIcon, FormControl, Button } from '@yamada-ui/react'
 import { useRef } from 'react'
 
 export default {

@@ -2,8 +2,6 @@ import { faker } from '@faker-js/faker'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory } from '@storybook/react'
 import {
-  PagingTable,
-  Column,
   HStack,
   IconButton,
   FontAwesomeIcon,
@@ -14,6 +12,7 @@ import {
   NumberInput,
   useLoading,
 } from '@yamada-ui/react'
+import { PagingTable, Column } from '@yamada-ui/table'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export default {

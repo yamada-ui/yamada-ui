@@ -61,8 +61,8 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
   const isAlways = type === 'always'
   const isNever = type === 'never'
 
-  const hoverTimeout = useRef<NodeJS.Timeout | undefined>(undefined)
-  const scrollTimeout = useRef<NodeJS.Timeout | undefined>(undefined)
+  const hoverTimeout = useRef<any>(undefined)
+  const scrollTimeout = useRef<any>(undefined)
 
   const onMouseEnter = useCallback(() => {
     if (type !== 'hover') return

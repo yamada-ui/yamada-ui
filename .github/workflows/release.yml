@@ -72,7 +72,7 @@ jobs:
         run: pnpm build-storybook
 
       - name: Update Storybook
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+        uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           branch: gh-pages
           folder: storybook-static

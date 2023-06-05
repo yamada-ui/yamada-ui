@@ -1,5 +1,16 @@
 # @yamada-ui/autocomplete
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@0.1.2
+  - @yamada-ui/form-control@0.1.2
+  - @yamada-ui/icon@0.1.2
+  - @yamada-ui/popover@0.1.2
+  - @yamada-ui/select@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/reorder
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@0.1.2
+  - @yamada-ui/icon@0.1.2
+  - @yamada-ui/motion@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

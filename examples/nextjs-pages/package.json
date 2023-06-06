@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@yamada-ui/react": "workspace:*",
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@yamada-ui/fontawesome": "workspace:*",
+    "@yamada-ui/markdown": "workspace:*",
+    "@yamada-ui/dropzone": "workspace:*",
+    "@yamada-ui/carousel": "workspace:*",
+    "@yamada-ui/table": "workspace:*",
+    "@yamada-ui/calendar": "workspace:*",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "next": "^13.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

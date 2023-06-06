@@ -276,9 +276,6 @@ importers:
 
   examples/create-react-app:
     dependencies:
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.4.0
-        version: 6.4.0
       '@fortawesome/free-brands-svg-icons':
         specifier: ^6.4.0
         version: 6.4.0
@@ -288,12 +285,27 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.4.0
         version: 6.4.0
-      '@fortawesome/react-fontawesome':
-        specifier: ^0.2.0
-        version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.0)(react@18.2.0)
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../../packages/components/calendar
+      '@yamada-ui/carousel':
+        specifier: workspace:*
+        version: link:../../packages/components/carousel
+      '@yamada-ui/dropzone':
+        specifier: workspace:*
+        version: link:../../packages/components/dropzone
+      '@yamada-ui/fontawesome':
+        specifier: workspace:*
+        version: link:../../packages/fontawesome
+      '@yamada-ui/markdown':
+        specifier: workspace:*
+        version: link:../../packages/components/markdown
       '@yamada-ui/react':
         specifier: workspace:*
         version: link:../../packages/react
+      '@yamada-ui/table':
+        specifier: workspace:*
+        version: link:../../packages/components/table
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -334,9 +346,6 @@ importers:
 
   examples/nextjs-app:
     dependencies:
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.4.0
-        version: 6.4.0
       '@fortawesome/free-brands-svg-icons':
         specifier: ^6.4.0
         version: 6.4.0
@@ -346,15 +355,30 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.4.0
         version: 6.4.0
-      '@fortawesome/react-fontawesome':
-        specifier: ^0.2.0
-        version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.0)(react@18.2.0)
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../../packages/components/calendar
+      '@yamada-ui/carousel':
+        specifier: workspace:*
+        version: link:../../packages/components/carousel
+      '@yamada-ui/dropzone':
+        specifier: workspace:*
+        version: link:../../packages/components/dropzone
+      '@yamada-ui/fontawesome':
+        specifier: workspace:*
+        version: link:../../packages/fontawesome
+      '@yamada-ui/markdown':
+        specifier: workspace:*
+        version: link:../../packages/components/markdown
       '@yamada-ui/nextjs':
         specifier: workspace:*
         version: link:../../packages/nextjs
       '@yamada-ui/react':
         specifier: workspace:*
         version: link:../../packages/react
+      '@yamada-ui/table':
+        specifier: workspace:*
+        version: link:../../packages/components/table
       next:
         specifier: 13.4.3
         version: 13.4.3(@babel/core@7.22.1)(react-dom@18.2.0)(react@18.2.0)
@@ -392,9 +416,6 @@ importers:
 
   examples/nextjs-pages:
     dependencies:
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.4.0
-        version: 6.4.0
       '@fortawesome/free-brands-svg-icons':
         specifier: ^6.4.0
         version: 6.4.0
@@ -404,12 +425,27 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.4.0
         version: 6.4.0
-      '@fortawesome/react-fontawesome':
-        specifier: ^0.2.0
-        version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.0)(react@18.2.0)
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../../packages/components/calendar
+      '@yamada-ui/carousel':
+        specifier: workspace:*
+        version: link:../../packages/components/carousel
+      '@yamada-ui/dropzone':
+        specifier: workspace:*
+        version: link:../../packages/components/dropzone
+      '@yamada-ui/fontawesome':
+        specifier: workspace:*
+        version: link:../../packages/fontawesome
+      '@yamada-ui/markdown':
+        specifier: workspace:*
+        version: link:../../packages/components/markdown
       '@yamada-ui/react':
         specifier: workspace:*
         version: link:../../packages/react
+      '@yamada-ui/table':
+        specifier: workspace:*
+        version: link:../../packages/components/table
       next:
         specifier: ^13.4.3
         version: 13.4.3(@babel/core@7.22.1)(react-dom@18.2.0)(react@18.2.0)

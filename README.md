@@ -26,6 +26,7 @@ Yamada UI is a React UI component library that streamlines the development of cu
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [CodeSandbox](#codesandbox)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -57,18 +58,18 @@ Currently, the documentation is only available in [Storybook](https://hirotomoya
 ## Installation
 
 To use Yamada UI components, all you need to install the
-`@yamada-ui/react` package and its peer dependencies:
+`@yamada-ui/react` package.
 
 ```sh
-$ pnpm add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
+$ pnpm add @yamada-ui/react
 
 # or
 
-$ yarn add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
+$ yarn add @yamada-ui/react
 
 # or
 
-$ npm install @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
+$ npm install @yamada-ui/react
 ```
 
 `@yamada-ui/table` and `@yamada-ui/calendar`, among others,
@@ -126,6 +127,13 @@ const Example = () => {
   )
 }
 ```
+
+## CodeSandbox
+
+- [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
+- [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
+- [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
+- [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
 
 ## Contributing
 

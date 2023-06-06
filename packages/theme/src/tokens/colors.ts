@@ -9,7 +9,7 @@ export const colors = {
   secondary: '#49B657',
   warning: '#FF9800',
   danger: '#F44336',
-  link: ' #1D94E0',
+  link: '#1D94E0',
   border: ['rgba(0, 0, 0, 0.08)', 'rgba(255, 255, 255, 0.06)'],
 
   whiteAlpha: {

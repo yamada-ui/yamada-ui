@@ -1,13 +1,14 @@
 {
-  "name": "@yamada-ui/icon",
-  "version": "0.1.4",
-  "description": "Yamada UI icon components",
+  "name": "@yamada-ui/fontawesome",
+  "version": "0.1.0",
+  "description": "Yamada UI fontawesome components",
   "keywords": [
     "yamada",
     "yamada ui",
     "react",
     "emotion",
     "component",
+    "fontawesome",
     "icon",
     "ui",
     "uikit",
@@ -29,7 +30,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
-    "directory": "packages/components/icon"
+    "directory": "packages/fontawesome"
   },
   "bugs": {
     "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
@@ -41,13 +42,14 @@
     "clean": "rimraf dist .turbo",
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
-    "postpack": "clean-package restore",
-    "gen:docs": "tsx ../../../scripts/generate-docs"
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/use-token": "workspace:*"
+    "@yamada-ui/icon": "workspace:*",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0"
   },
   "devDependencies": {
     "react": "^18.0.0",
@@ -56,7 +58,7 @@
   "peerDependencies": {
     "react": ">=18"
   },
-  "clean-package": "../../../clean-package.config.json",
+  "clean-package": "../../clean-package.config.json",
   "tsup": {
     "clean": true,
     "target": "es2019",

@@ -156,6 +156,9 @@ importers:
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:packages/components/dropzone
+      '@yamada-ui/fontawesome':
+        specifier: workspace:*
+        version: link:packages/fontawesome
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:packages/components/markdown
@@ -938,12 +941,6 @@ importers:
 
   packages/components/icon:
     dependencies:
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.2.0
-        version: 6.4.0
-      '@fortawesome/react-fontawesome':
-        specifier: ^0.2.0
-        version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.0)(react@18.2.0)
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
@@ -1901,6 +1898,31 @@ importers:
       framer-motion:
         specifier: ^9.1.7
         version: 9.1.7(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
+  packages/fontawesome:
+    dependencies:
+      '@fortawesome/fontawesome-svg-core':
+        specifier: ^6.2.0
+        version: 6.4.0
+      '@fortawesome/react-fontawesome':
+        specifier: ^0.2.0
+        version: 0.2.0(@fortawesome/fontawesome-svg-core@6.4.0)(react@18.2.0)
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../components/icon
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
       react:
         specifier: ^18.2.0
         version: 18.2.0

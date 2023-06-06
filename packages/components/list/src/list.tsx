@@ -8,7 +8,7 @@ import {
   omitThemeProps,
   CSSUIObject,
 } from '@yamada-ui/core'
-import { Icon, IconProps, FontAwesomeIconProps, FontAwesomeIcon } from '@yamada-ui/icon'
+import { Icon, IconProps } from '@yamada-ui/icon'
 import { createContext, cx, getValidChildren } from '@yamada-ui/utils'
 
 const [ListProvider, useList] = createContext<Record<string, CSSUIObject>>({
@@ -81,16 +81,12 @@ export const ListItem = forwardRef<ListItemProps, 'li'>(({ className, ...rest },
   return <ui.li ref={ref} className={cx('ui-list-item', className)} __css={css} {...rest} />
 })
 
-export type ListIconProps = IconProps & Partial<Pick<FontAwesomeIconProps, 'icon'>>
+export type ListIconProps = IconProps
 
-export const ListIcon = forwardRef<ListIconProps, 'svg'>(({ className, icon, ...rest }, ref) => {
+export const ListIcon = forwardRef<ListIconProps, 'svg'>(({ className, ...rest }, ref) => {
   const styles = useList()
 
   const css = { ...styles.icon }
 
-  if (icon) {
-    return <FontAwesomeIcon role='presentation' icon={icon} __css={css} {...rest} />
-  } else {
-    return <Icon ref={ref} role='presentation' __css={css} {...rest} />
-  }
+  return <Icon ref={ref} role='presentation' __css={css} {...rest} />
 })

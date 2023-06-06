@@ -84,6 +84,9 @@ $ pnpm add @yamada-ui/dropzone
 
 # Provide a convenient Markdown component using `react-markdown` and `react-syntax-highlighter`.
 $ pnpm add @yamada-ui/markdown
+
+# a package for conveniently using `Font Awesome`.
+$ pnpm add @yamada-ui/fontawesome
 ```
 
 ## Usage

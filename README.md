@@ -55,18 +55,35 @@ To use Yamada UI components, all you need to install the
 
 ```sh
 $ pnpm add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
-```
 
-or
+# or
 
-```sh
 $ yarn add @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
+
+# or
+
+$ npm install @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
 ```
 
-or
+`@yamada-ui/table` and `@yamada-ui/calendar`, among others,
+are not included with `@yamada-ui/react`.
+You will need to install them separately.
 
 ```sh
-$ npm install @yamada-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^9
+# Provide a convenient Table component using `@tanstack/react-table`.
+$ pnpm add @yamada-ui/table
+
+# Provide a convenient Calender and datePicker, MonthPicker component
+$ pnpm add @yamada-ui/calendar
+
+# Provide a convenient Carousel component using `embla-carousel-react`.
+$ pnpm add @yamada-ui/carousel
+
+# Provide a convenient Dropzone component using `react-dropzone`.
+$ pnpm add @yamada-ui/dropzone
+
+# Provide a convenient Markdown component using `react-markdown` and `react-syntax-highlighter`.
+$ pnpm add @yamada-ui/markdown
 ```
 
 ## Usage

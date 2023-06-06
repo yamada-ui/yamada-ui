@@ -1,9 +1,9 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Button,
   FileButton,
-  FontAwesomeIcon,
   FormControl,
   HStack,
   IconButton,
@@ -23,7 +23,7 @@ export const basic: ComponentStory<typeof FileButton> = () => {
     <>
       <FileButton>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} />
+      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} />
 
       <FileButton>{({ onClick }) => <Link onClick={onClick}>Upload</Link>}</FileButton>
     </>
@@ -35,7 +35,7 @@ export const withMultiple: ComponentStory<typeof FileButton> = () => {
     <>
       <FileButton multiple>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} multiple />
+      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} multiple />
 
       <FileButton multiple>{({ onClick }) => <Link onClick={onClick}>Upload</Link>}</FileButton>
     </>
@@ -47,11 +47,7 @@ export const withAccept: ComponentStory<typeof FileButton> = () => {
     <>
       <FileButton accept='image/png,image/jpeg'>Upload</FileButton>
 
-      <FileButton
-        as={IconButton}
-        icon={<FontAwesomeIcon icon={faPlus} />}
-        accept='image/png,image/jpeg'
-      />
+      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} accept='image/png,image/jpeg' />
 
       <FileButton accept='image/png,image/jpeg'>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
@@ -155,7 +151,7 @@ export const isDisabled: ComponentStory<typeof FileButton> = () => {
     <>
       <FileButton isDisabled>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} isDisabled />
+      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isDisabled />
 
       <FileButton isDisabled>
         {({ onClick, isDisabled }) => (
@@ -182,7 +178,7 @@ export const isReadonly: ComponentStory<typeof FileButton> = () => {
     <>
       <FileButton isReadOnly>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} isReadOnly />
+      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isReadOnly />
 
       <FileButton isReadOnly>
         {({ onClick, isReadOnly }) => (
@@ -208,7 +204,7 @@ export const isInvalid: ComponentStory<typeof FileButton> = () => {
     <>
       <FileButton isInvalid>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} isInvalid />
+      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isInvalid />
 
       <FormControl isInvalid label='Upload file' errorMessage='File is required.'>
         <FileButton>Upload</FileButton>

@@ -1,12 +1,12 @@
 import { faMinus, faPlus, faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Accordion,
   AccordionLabel,
   AccordionItem,
   AccordionPanel,
   Text,
-  FontAwesomeIcon,
   AccordionProps,
 } from '@yamada-ui/react'
 import { useState } from 'react'
@@ -279,7 +279,7 @@ export const customPanel: ComponentStory<typeof Accordion> = () => {
 export const customIcon: ComponentStory<typeof Accordion> = () => {
   return (
     <>
-      <Accordion icon={<FontAwesomeIcon icon={faPoo} color='orange.700' />}>
+      <Accordion icon={<Icon icon={faPoo} color='orange.700' />}>
         <AccordionItem label='孫悟空少年編'>
           <Text>
             地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
@@ -301,7 +301,7 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
 
       <Accordion
         icon={({ isExpanded }) => (
-          <FontAwesomeIcon icon={!isExpanded ? faPlus : faMinus} color='blackAlpha.800' />
+          <Icon icon={!isExpanded ? faPlus : faMinus} color='blackAlpha.800' />
         )}
       >
         <AccordionItem label='孫悟空少年編'>
@@ -325,7 +325,7 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
 
       <Accordion>
         <AccordionItem>
-          <AccordionLabel icon={<FontAwesomeIcon icon={faPoo} color='orange.700' />}>
+          <AccordionLabel icon={<Icon icon={faPoo} color='orange.700' />}>
             孫悟空少年編
           </AccordionLabel>
 
@@ -337,7 +337,7 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
         <AccordionItem>
           <AccordionLabel
             icon={({ isExpanded }) => (
-              <FontAwesomeIcon icon={!isExpanded ? faPlus : faMinus} color='blackAlpha.800' />
+              <Icon icon={!isExpanded ? faPlus : faMinus} color='blackAlpha.800' />
             )}
           >
             ピッコロ大魔王編
@@ -349,7 +349,7 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
         </AccordionItem>
 
         <AccordionItem>
-          <AccordionLabel icon={<FontAwesomeIcon icon={faPoo} color='orange.700' />}>
+          <AccordionLabel icon={<Icon icon={faPoo} color='orange.700' />}>
             サイヤ人編
           </AccordionLabel>
 

@@ -1,5 +1,6 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import { List, DiscList, DecimalList, ListItem, ListIcon } from '@yamada-ui/react'
 import { FaCheckCircle } from 'react-icons/fa'
 
@@ -76,7 +77,7 @@ export const withIcon: ComponentStory<typeof List> = () => {
         オ…オレたちが勝てるわけはなかったはずだ………
       </ListItem>
       <ListItem>
-        <ListIcon icon={faCheck} color='green.500' />
+        <ListIcon as={Icon} icon={faCheck} color='green.500' />
         オレは試合場のゴミ拾いみたいなもんかよ…
       </ListItem>
     </List>

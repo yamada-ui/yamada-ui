@@ -1,14 +1,7 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory } from '@storybook/react'
-import {
-  Divider,
-  FontAwesomeIcon,
-  HStack,
-  Reorder,
-  ReorderItem,
-  ReorderTrigger,
-  Text,
-} from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { Divider, HStack, Reorder, ReorderItem, ReorderTrigger, Text } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Data Display / Reorder',
@@ -141,7 +134,7 @@ export const withTrigger: ComponentStory<typeof Reorder> = () => {
       <ReorderItem label='ベジータ'>
         <HStack>
           <ReorderTrigger>
-            <FontAwesomeIcon icon={faPoo} />
+            <Icon icon={faPoo} />
           </ReorderTrigger>
           <Text>ベジータ</Text>
         </HStack>

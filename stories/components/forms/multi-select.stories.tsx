@@ -1,14 +1,7 @@
 import { faCaretDown, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import {
-  MultiSelect,
-  OptionGroup,
-  Option,
-  UIOption,
-  FormControl,
-  FontAwesomeIcon,
-  Tag,
-} from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { MultiSelect, OptionGroup, Option, UIOption, FormControl, Tag } from '@yamada-ui/react'
 import { useState } from 'react'
 
 export default {
@@ -344,7 +337,7 @@ export const customIcon: ComponentStory<typeof MultiSelect> = () => {
 
       <MultiSelect
         placeholder='キャラクターを選択'
-        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <Icon icon={faCaretDown} /> }}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
@@ -358,7 +351,7 @@ export const customClearIcon: ComponentStory<typeof MultiSelect> = () => {
   return (
     <MultiSelect
       placeholder='キャラクターを選択'
-      clearIconProps={{ children: <FontAwesomeIcon icon={faTrash} w='0.5em' /> }}
+      clearIconProps={{ children: <Icon icon={faTrash} w='0.5em' /> }}
     >
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
@@ -378,7 +371,7 @@ export const customOption: ComponentStory<typeof MultiSelect> = () => {
 
       <MultiSelect
         placeholder='キャラクターを選択'
-        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <Icon icon={faCheck} color='green.500' /> }}
       >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>

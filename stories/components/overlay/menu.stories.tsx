@@ -6,9 +6,9 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Button,
-  FontAwesomeIcon,
   IconButton,
   Menu,
   MenuButton,
@@ -31,7 +31,7 @@ export default {
 export const basic: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -47,7 +47,7 @@ export const basic: ComponentStory<typeof Menu> = () => {
 export const withCommand: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={IconButton} icon={<FontAwesomeIcon icon={faBars} />} variant='outline' />
+      <MenuButton as={IconButton} icon={<Icon icon={faBars} />} variant='outline' />
 
       <MenuList>
         <MenuItem command='⌘T'>New Tab</MenuItem>
@@ -61,16 +61,16 @@ export const withCommand: ComponentStory<typeof Menu> = () => {
 export const withIcon: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={IconButton} icon={<FontAwesomeIcon icon={faBars} />} variant='outline' />
+      <MenuButton as={IconButton} icon={<Icon icon={faBars} />} variant='outline' />
 
       <MenuList>
-        <MenuItem icon={<FontAwesomeIcon icon={faPlus} />} command='⌘T'>
+        <MenuItem icon={<Icon icon={faPlus} />} command='⌘T'>
           New Tab
         </MenuItem>
-        <MenuItem icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />} command='⌘N'>
+        <MenuItem icon={<Icon icon={faArrowUpRightFromSquare} />} command='⌘N'>
           New Window
         </MenuItem>
-        <MenuItem icon={<FontAwesomeIcon icon={faEdit} />} command='⌘O'>
+        <MenuItem icon={<Icon icon={faEdit} />} command='⌘O'>
           Open File
         </MenuItem>
       </MenuList>
@@ -83,7 +83,7 @@ export const withInitialFocusRef: ComponentStory<typeof Menu> = () => {
 
   return (
     <Menu initialFocusRef={ref}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -99,7 +99,7 @@ export const withInitialFocusRef: ComponentStory<typeof Menu> = () => {
 export const withPlacement: ComponentStory<typeof Menu> = () => {
   return (
     <Menu placement='right-start'>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -115,7 +115,7 @@ export const withPlacement: ComponentStory<typeof Menu> = () => {
 export const withAnimation: ComponentStory<typeof Menu> = () => {
   return (
     <Menu animation='top'>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -131,7 +131,7 @@ export const withAnimation: ComponentStory<typeof Menu> = () => {
 export const withOffset: ComponentStory<typeof Menu> = () => {
   return (
     <Menu offset={[16, 16]}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -147,7 +147,7 @@ export const withOffset: ComponentStory<typeof Menu> = () => {
 export const withGutter: ComponentStory<typeof Menu> = () => {
   return (
     <Menu gutter={32}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -163,7 +163,7 @@ export const withGutter: ComponentStory<typeof Menu> = () => {
 export const withDuration: ComponentStory<typeof Menu> = () => {
   return (
     <Menu duration={0.4}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -179,7 +179,7 @@ export const withDuration: ComponentStory<typeof Menu> = () => {
 export const withDivider: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -199,7 +199,7 @@ export const withDivider: ComponentStory<typeof Menu> = () => {
 export const withGroup: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -223,7 +223,7 @@ export const withGroup: ComponentStory<typeof Menu> = () => {
 export const withOptionGroup: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -248,7 +248,7 @@ export const withOptionGroup: ComponentStory<typeof Menu> = () => {
 export const withPortal: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -266,7 +266,7 @@ export const withPortal: ComponentStory<typeof Menu> = () => {
 export const disabledCloseOnSelect: ComponentStory<typeof Menu> = () => {
   return (
     <Menu closeOnSelect={false}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -282,7 +282,7 @@ export const disabledCloseOnSelect: ComponentStory<typeof Menu> = () => {
 export const disabledCloseBlur: ComponentStory<typeof Menu> = () => {
   return (
     <Menu closeOnBlur={false}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -298,7 +298,7 @@ export const disabledCloseBlur: ComponentStory<typeof Menu> = () => {
 export const isDisabled: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -314,7 +314,7 @@ export const isDisabled: ComponentStory<typeof Menu> = () => {
 export const isFocusable: ComponentStory<typeof Menu> = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -332,7 +332,7 @@ export const isFocusable: ComponentStory<typeof Menu> = () => {
 export const useLazy: ComponentStory<typeof Menu> = () => {
   return (
     <Menu isLazy>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 
@@ -350,7 +350,7 @@ export const customControl: ComponentStory<typeof Menu> = () => {
 
   return (
     <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size='xs' icon={faChevronDown} />}>
+      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
         Menu
       </MenuButton>
 

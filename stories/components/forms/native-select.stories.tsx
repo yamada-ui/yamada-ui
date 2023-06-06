@@ -1,7 +1,7 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
-  FontAwesomeIcon,
   FormControl,
   NativeOption,
   NativeOptionGroup,
@@ -171,7 +171,7 @@ export const customIcon: ComponentStory<typeof NativeSelect> = () => {
 
       <NativeSelect
         placeholder='キャラクターを選択'
-        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <Icon icon={faCaretDown} /> }}
       >
         <NativeOption value='孫悟空'>孫悟空</NativeOption>
         <NativeOption value='ベジータ'>ベジータ</NativeOption>

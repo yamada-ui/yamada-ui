@@ -1,6 +1,7 @@
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, FontAwesomeIcon } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Navigation / Breadcrumb',
@@ -47,7 +48,7 @@ export const withSeparator: ComponentStory<typeof Breadcrumb> = () => {
 
 export const withCustomSeparator: ComponentStory<typeof Breadcrumb> = () => {
   return (
-    <Breadcrumb separator={<FontAwesomeIcon icon={faCaretRight} color='gray.300' />}>
+    <Breadcrumb separator={<Icon icon={faCaretRight} color='gray.300' />}>
       <BreadcrumbItem>
         <BreadcrumbLink href='/'>サイヤ人編</BreadcrumbLink>
       </BreadcrumbItem>

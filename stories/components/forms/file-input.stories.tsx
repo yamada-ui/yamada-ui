@@ -1,8 +1,8 @@
 import { faClose, faFile } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   FileInput,
-  FontAwesomeIcon,
   FormControl,
   InputGroup,
   InputLeftAddon,
@@ -139,7 +139,7 @@ export const useAddon: ComponentStory<typeof FileInput> = () => {
   return (
     <InputGroup>
       <InputLeftAddon>
-        <FontAwesomeIcon icon={faFile} />
+        <Icon icon={faFile} />
       </InputLeftAddon>
       <FileInput type='tel' placeholder='Please upload file' />
     </InputGroup>
@@ -150,7 +150,7 @@ export const useElement: ComponentStory<typeof FileInput> = () => {
   return (
     <InputGroup>
       <InputLeftElement>
-        <FontAwesomeIcon icon={faFile} color='gray.500' />
+        <Icon icon={faFile} color='gray.500' />
       </InputLeftElement>
       <FileInput type='email' placeholder='Please upload file' />
     </InputGroup>
@@ -175,7 +175,7 @@ export const useReset: ComponentStory<typeof FileInput> = () => {
 
         {value?.length ? (
           <InputRightElement isClick onClick={onReset}>
-            <FontAwesomeIcon icon={faClose} color='gray.500' />
+            <Icon icon={faClose} color='gray.500' />
           </InputRightElement>
         ) : null}
       </InputGroup>

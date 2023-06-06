@@ -1,6 +1,7 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FontAwesomeIcon, Pagination, VStack, Wrap } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { Pagination, VStack, Wrap } from '@yamada-ui/react'
 import { useState } from 'react'
 
 export default {
@@ -181,9 +182,9 @@ export const customControl: ComponentStory<typeof Pagination> = () => {
 export const customControlButton: ComponentStory<typeof Pagination> = () => {
   return (
     <>
-      <Pagination total={10} controlProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination total={10} controlPrevProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination total={10} controlNextProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+      <Pagination total={10} controlProps={{ children: <Icon icon={faPoo} /> }} />
+      <Pagination total={10} controlPrevProps={{ children: <Icon icon={faPoo} /> }} />
+      <Pagination total={10} controlNextProps={{ children: <Icon icon={faPoo} /> }} />
     </>
   )
 }
@@ -191,17 +192,9 @@ export const customControlButton: ComponentStory<typeof Pagination> = () => {
 export const customEdgeButton: ComponentStory<typeof Pagination> = () => {
   return (
     <>
-      <Pagination total={10} withEdges edgeProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-      <Pagination
-        total={10}
-        withEdges
-        edgeFirstProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-      />
-      <Pagination
-        total={10}
-        withEdges
-        edgeLastProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-      />
+      <Pagination total={10} withEdges edgeProps={{ children: <Icon icon={faPoo} /> }} />
+      <Pagination total={10} withEdges edgeFirstProps={{ children: <Icon icon={faPoo} /> }} />
+      <Pagination total={10} withEdges edgeLastProps={{ children: <Icon icon={faPoo} /> }} />
     </>
   )
 }

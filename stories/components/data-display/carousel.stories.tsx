@@ -7,9 +7,9 @@ import {
   CarouselControlPrev,
   CarouselIndicators,
 } from '@yamada-ui/carousel'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Progress,
-  FontAwesomeIcon,
   Center,
   Card,
   CardHeader,
@@ -633,7 +633,7 @@ export const customControl: ComponentStory<typeof Carousel> = () => {
 export const customControlButton: ComponentStory<typeof Carousel> = () => {
   return (
     <>
-      <Carousel controlProps={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
+      <Carousel controlProps={{ icon: <Icon icon={faPoo} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>
@@ -648,7 +648,7 @@ export const customControlButton: ComponentStory<typeof Carousel> = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlPrevProps={{ icon: <FontAwesomeIcon icon={faArrowLeft} /> }}>
+      <Carousel controlPrevProps={{ icon: <Icon icon={faArrowLeft} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>
@@ -663,7 +663,7 @@ export const customControlButton: ComponentStory<typeof Carousel> = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlNextProps={{ icon: <FontAwesomeIcon icon={faArrowRight} /> }}>
+      <Carousel controlNextProps={{ icon: <Icon icon={faArrowRight} /> }}>
         <CarouselSlide as={Center} bg='primary'>
           1
         </CarouselSlide>
@@ -679,8 +679,8 @@ export const customControlButton: ComponentStory<typeof Carousel> = () => {
       </Carousel>
 
       <Carousel>
-        <CarouselControlPrev icon={<FontAwesomeIcon icon={faArrowLeft} />} />
-        <CarouselControlNext icon={<FontAwesomeIcon icon={faArrowRight} />} />
+        <CarouselControlPrev icon={<Icon icon={faArrowLeft} />} />
+        <CarouselControlNext icon={<Icon icon={faArrowRight} />} />
 
         <CarouselSlide as={Center} bg='primary'>
           1
@@ -706,7 +706,7 @@ export const customIndicators: ComponentStory<typeof Carousel> = () => {
         indicatorsProps={{
           bottom: '8',
           component: ({ isSelected }) => (
-            <FontAwesomeIcon
+            <Icon
               icon={faPoo}
               color={isSelected ? 'whiteAlpha.700' : 'whiteAlpha.400'}
               cursor='pointer'

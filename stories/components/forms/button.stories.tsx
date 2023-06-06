@@ -8,14 +8,8 @@ import {
   faSun,
 } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import {
-  Wrap,
-  Button,
-  IconButton,
-  ButtonGroup,
-  CloseButton,
-  FontAwesomeIcon,
-} from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { Wrap, Button, IconButton, ButtonGroup, CloseButton } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Forms / Button',
@@ -199,27 +193,19 @@ export const withDisabled: ComponentStory<typeof Button> = () => {
 export const withIcon: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary' variant='solid' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Button colorScheme='primary' variant='solid' leftIcon={<Icon icon={faPlus} />}>
         Button
       </Button>
 
-      <Button
-        colorScheme='secondary'
-        variant='outline'
-        rightIcon={<FontAwesomeIcon icon={faArrowRight} />}
-      >
+      <Button colorScheme='secondary' variant='outline' rightIcon={<Icon icon={faArrowRight} />}>
         Button
       </Button>
 
-      <Button
-        colorScheme='warning'
-        variant='ghost'
-        leftIcon={<FontAwesomeIcon icon={faEnvelope} />}
-      >
+      <Button colorScheme='warning' variant='ghost' leftIcon={<Icon icon={faEnvelope} />}>
         Button
       </Button>
 
-      <Button colorScheme='danger' variant='link' leftIcon={<FontAwesomeIcon icon={faCheck} />}>
+      <Button colorScheme='danger' variant='link' leftIcon={<Icon icon={faCheck} />}>
         Button
       </Button>
     </Wrap>
@@ -229,13 +215,13 @@ export const withIcon: ComponentStory<typeof Button> = () => {
 export const iconButton: ComponentStory<typeof Button> = () => {
   return (
     <Wrap gap='md'>
-      <IconButton colorScheme='primary' icon={<FontAwesomeIcon icon={faPlus} />} />
+      <IconButton colorScheme='primary' icon={<Icon icon={faPlus} />} />
 
-      <IconButton colorScheme='secondary' icon={<FontAwesomeIcon icon={faMinus} />} />
+      <IconButton colorScheme='secondary' icon={<Icon icon={faMinus} />} />
 
-      <IconButton colorScheme='warning' size='lg' icon={<FontAwesomeIcon icon={faSun} />} />
+      <IconButton colorScheme='warning' size='lg' icon={<Icon icon={faSun} />} />
 
-      <IconButton colorScheme='danger' size='lg' icon={<FontAwesomeIcon icon={faMoon} />} />
+      <IconButton colorScheme='danger' size='lg' icon={<Icon icon={faMoon} />} />
     </Wrap>
   )
 }
@@ -294,7 +280,7 @@ export const buttonGroup: ComponentStory<typeof Button> = () => {
     <>
       <ButtonGroup isAttached variant='outline'>
         <Button>Button</Button>
-        <IconButton icon={<FontAwesomeIcon icon={faPlus} />} />
+        <IconButton icon={<Icon icon={faPlus} />} />
       </ButtonGroup>
 
       <ButtonGroup gap='sm'>

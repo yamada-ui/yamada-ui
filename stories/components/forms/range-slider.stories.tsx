@@ -1,5 +1,6 @@
 import { faWaveSquare } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   RangeSlider,
   RangeSliderFilledTrack,
@@ -12,7 +13,6 @@ import {
   VStack,
   useBoolean,
   Tooltip,
-  FontAwesomeIcon,
   Center,
   Button,
   Flex,
@@ -341,17 +341,17 @@ export const customThumb: ComponentStory<typeof RangeSlider> = () => {
         thumb={{
           color: 'blue.500',
           boxSize: '6',
-          children: <FontAwesomeIcon icon={faWaveSquare} />,
+          children: <Icon icon={faWaveSquare} />,
         }}
       />
 
       <RangeSlider>
         <RangeSliderStartThumb color='blue.500' boxSize='6'>
-          <FontAwesomeIcon icon={faWaveSquare} />
+          <Icon icon={faWaveSquare} />
         </RangeSliderStartThumb>
 
         <RangeSliderEndThumb color='blue.500' boxSize='6'>
-          <FontAwesomeIcon icon={faWaveSquare} />
+          <Icon icon={faWaveSquare} />
         </RangeSliderEndThumb>
       </RangeSlider>
     </>

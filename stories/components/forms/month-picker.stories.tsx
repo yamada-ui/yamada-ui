@@ -1,7 +1,8 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { MonthPicker, MonthPickerType } from '@yamada-ui/calendar'
-import { FontAwesomeIcon, FormControl, Grid, Heading } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { FormControl, Grid, Heading } from '@yamada-ui/react'
 import { useState } from 'react'
 import 'dayjs/locale/ja'
 
@@ -373,10 +374,7 @@ export const customIcon: ComponentStory<typeof MonthPicker> = () => {
     <>
       <MonthPicker placeholder='YYYY/MM' iconProps={{ color: 'primary' }} />
 
-      <MonthPicker
-        placeholder='YYYY/MM'
-        iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-      />
+      <MonthPicker placeholder='YYYY/MM' iconProps={{ children: <Icon icon={faPoo} /> }} />
     </>
   )
 }

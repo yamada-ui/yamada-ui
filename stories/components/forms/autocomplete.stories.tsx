@@ -1,12 +1,12 @@
 import { faCaretDown, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Autocomplete,
   AutocompleteOptionGroup,
   AutocompleteOption,
   UIOption,
   FormControl,
-  FontAwesomeIcon,
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
@@ -360,7 +360,7 @@ export const customIcon: ComponentStory<typeof Autocomplete> = () => {
 
       <Autocomplete
         placeholder='キャラクターを選択'
-        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <Icon icon={faCaretDown} /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
@@ -381,7 +381,7 @@ export const customOption: ComponentStory<typeof Autocomplete> = () => {
 
       <Autocomplete
         placeholder='キャラクターを選択'
-        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <Icon icon={faCheck} color='green.500' /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>

@@ -1,5 +1,6 @@
 import { faCaretDown, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   MultiAutocomplete,
   AutocompleteOptionGroup,
@@ -7,7 +8,6 @@ import {
   UIOption,
   Tag,
   FormControl,
-  FontAwesomeIcon,
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
@@ -463,7 +463,7 @@ export const customIcon: ComponentStory<typeof MultiAutocomplete> = () => {
 
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+        iconProps={{ children: <Icon icon={faCaretDown} /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
@@ -477,7 +477,7 @@ export const customClearIcon: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
     <MultiAutocomplete
       placeholder='キャラクターを選択'
-      clearIconProps={{ children: <FontAwesomeIcon icon={faTrash} w='0.5em' /> }}
+      clearIconProps={{ children: <Icon icon={faTrash} w='0.5em' /> }}
     >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
@@ -497,7 +497,7 @@ export const customOption: ComponentStory<typeof MultiAutocomplete> = () => {
 
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color='green.500' /> }}
+        optionProps={{ icon: <Icon icon={faCheck} color='green.500' /> }}
       >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>

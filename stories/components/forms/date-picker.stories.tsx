@@ -1,7 +1,8 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { CalendarType, DatePicker } from '@yamada-ui/calendar'
-import { FontAwesomeIcon, FormControl, Grid, Heading } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { FormControl, Grid, Heading } from '@yamada-ui/react'
 import { useState } from 'react'
 import 'dayjs/locale/ja'
 
@@ -559,10 +560,7 @@ export const customIcon: ComponentStory<typeof DatePicker> = () => {
     <>
       <DatePicker placeholder='YYYY/MM/DD' iconProps={{ color: 'primary' }} />
 
-      <DatePicker
-        placeholder='YYYY/MM/DD'
-        iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-      />
+      <DatePicker placeholder='YYYY/MM/DD' iconProps={{ children: <Icon icon={faPoo} /> }} />
     </>
   )
 }

@@ -1,12 +1,12 @@
 import { faCheck, faPen, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   ButtonGroup,
   Editable,
   EditableInput,
   EditablePreview,
   EditableTextarea,
-  FontAwesomeIcon,
   FormControl,
   IconButton,
   useEditableControl,
@@ -161,12 +161,12 @@ export const customControl: ComponentStory<typeof Editable> = () => {
 
     return isEditing ? (
       <ButtonGroup size='sm' gap='sm'>
-        <IconButton icon={<FontAwesomeIcon icon={faCheck} />} {...getSubmitProps()} />
-        <IconButton icon={<FontAwesomeIcon icon={faXmark} />} {...getCancelProps()} />
+        <IconButton icon={<Icon icon={faCheck} />} {...getSubmitProps()} />
+        <IconButton icon={<Icon icon={faXmark} />} {...getCancelProps()} />
       </ButtonGroup>
     ) : (
       <ButtonGroup size='sm' gap='sm'>
-        <IconButton icon={<FontAwesomeIcon icon={faPen} />} {...getEditProps()} />
+        <IconButton icon={<Icon icon={faPen} />} {...getEditProps()} />
       </ButtonGroup>
     )
   }

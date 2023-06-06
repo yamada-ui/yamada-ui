@@ -1,5 +1,6 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Stepper,
   Step,
@@ -12,7 +13,6 @@ import {
   HStack,
   Box,
   Steps,
-  FontAwesomeIcon,
 } from '@yamada-ui/react'
 
 export default {
@@ -200,7 +200,7 @@ export const customStatus: ComponentStory<typeof Stepper> = () => {
         {/* @ts-ignore */}
         {steps.map(({ title, description }, index) => (
           <Step key={index}>
-            <StepStatus complete={<FontAwesomeIcon icon={faPoo} />} />
+            <StepStatus complete={<Icon icon={faPoo} />} />
 
             <Box flexShrink='0'>
               <StepTitle>{title}</StepTitle>

@@ -1,6 +1,7 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Wrap, Tag, FontAwesomeIcon } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { Wrap, Tag } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Data Display / Tag',
@@ -196,15 +197,15 @@ export const withSize: ComponentStory<typeof Tag> = () => {
 export const withIcon: ComponentStory<typeof Tag> = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorScheme='primary' size='sm' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Tag colorScheme='primary' size='sm' leftIcon={<Icon icon={faPlus} />}>
         Small
       </Tag>
 
-      <Tag colorScheme='secondary' size='md' rightIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Tag colorScheme='secondary' size='md' rightIcon={<Icon icon={faPlus} />}>
         Medium
       </Tag>
 
-      <Tag colorScheme='warning' size='lg' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+      <Tag colorScheme='warning' size='lg' leftIcon={<Icon icon={faPlus} />}>
         Large
       </Tag>
     </Wrap>

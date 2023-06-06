@@ -1,10 +1,10 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory } from '@storybook/react'
 import { Calendar, CalendarType } from '@yamada-ui/calendar'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   Heading,
   Wrap,
-  FontAwesomeIcon,
   Tooltip,
   Center,
   Text,
@@ -503,7 +503,7 @@ export const constomLabelButton: ComponentStory<typeof Calendar> = () => {
     <>
       <Calendar labelProps={{ color: 'gray.500' }} />
 
-      <Calendar labelProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize='0.75em' /> }} />
+      <Calendar labelProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
     </>
   )
 }
@@ -511,11 +511,11 @@ export const constomLabelButton: ComponentStory<typeof Calendar> = () => {
 export const constomControlButton: ComponentStory<typeof Calendar> = () => {
   return (
     <>
-      <Calendar controlProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize='0.75em' /> }} />
+      <Calendar controlProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
 
-      <Calendar prevProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize='0.75em' /> }} />
+      <Calendar prevProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
 
-      <Calendar nextProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize='0.75em' /> }} />
+      <Calendar nextProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
     </>
   )
 }

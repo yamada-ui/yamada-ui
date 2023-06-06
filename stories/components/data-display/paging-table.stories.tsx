@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory } from '@storybook/react'
+import { Icon } from '@yamada-ui/fontawesome'
 import {
   HStack,
   IconButton,
-  FontAwesomeIcon,
   Text,
   SegmentedControl,
   SegmentedControlButton,
@@ -694,7 +694,7 @@ export const customPagination: ComponentStory<typeof PagingTable> = () => {
 
             <IconButton
               size='sm'
-              icon={<FontAwesomeIcon icon={faChevronLeft} />}
+              icon={<Icon icon={faChevronLeft} />}
               isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
             />
@@ -710,7 +710,7 @@ export const customPagination: ComponentStory<typeof PagingTable> = () => {
 
             <IconButton
               size='sm'
-              icon={<FontAwesomeIcon icon={faChevronRight} />}
+              icon={<Icon icon={faChevronRight} />}
               isDisabled={!getCanNextPage()}
               onClick={nextPage}
             />

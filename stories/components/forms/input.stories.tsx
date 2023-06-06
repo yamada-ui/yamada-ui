@@ -1,5 +1,6 @@
 import { faCheck, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Icon as FontAwesomeIcon } from '@yamada-ui/fontawesome'
 import {
   Input,
   InputGroup,
@@ -8,7 +9,6 @@ import {
   InputLeftElement,
   InputRightElement,
   Icon,
-  FontAwesomeIcon,
   Button,
   useBoolean,
   FormControl,

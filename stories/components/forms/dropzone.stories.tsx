@@ -7,7 +7,8 @@ import {
   DropzoneIdle,
   IMAGE_ACCEPT_TYPE,
 } from '@yamada-ui/dropzone'
-import { HStack, VStack, Text, FontAwesomeIcon, FormControl, Button } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { HStack, VStack, Text, FormControl, Button } from '@yamada-ui/react'
 import { useRef } from 'react'
 
 export default {
@@ -112,15 +113,15 @@ export const withStatus: ComponentStory<typeof Dropzone> = () => {
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={['blackAlpha.500', 'whiteAlpha.500']}>
         <DropzoneAccept>
-          <FontAwesomeIcon icon={faArrowUpFromBracket} size='6xl' color='primary' />
+          <Icon icon={faArrowUpFromBracket} size='6xl' color='primary' />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <FontAwesomeIcon icon={faXmark} size='6xl' color='danger' />
+          <Icon icon={faXmark} size='6xl' color='danger' />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <FontAwesomeIcon icon={faImage} size='6xl' />
+          <Icon icon={faImage} size='6xl' />
         </DropzoneIdle>
 
         <VStack gap='2xs'>
@@ -145,15 +146,15 @@ export const useOnDrop: ComponentStory<typeof Dropzone> = () => {
     >
       <HStack color={['blackAlpha.500', 'whiteAlpha.500']}>
         <DropzoneAccept>
-          <FontAwesomeIcon icon={faArrowUpFromBracket} size='6xl' color='primary' />
+          <Icon icon={faArrowUpFromBracket} size='6xl' color='primary' />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <FontAwesomeIcon icon={faXmark} size='6xl' color='danger' />
+          <Icon icon={faXmark} size='6xl' color='danger' />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <FontAwesomeIcon icon={faImage} size='6xl' />
+          <Icon icon={faImage} size='6xl' />
         </DropzoneIdle>
 
         <VStack gap='2xs'>
@@ -176,15 +177,15 @@ export const useOnDropAccepted: ComponentStory<typeof Dropzone> = () => {
     >
       <HStack color={['blackAlpha.500', 'whiteAlpha.500']}>
         <DropzoneAccept>
-          <FontAwesomeIcon icon={faArrowUpFromBracket} size='6xl' color='primary' />
+          <Icon icon={faArrowUpFromBracket} size='6xl' color='primary' />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <FontAwesomeIcon icon={faXmark} size='6xl' color='danger' />
+          <Icon icon={faXmark} size='6xl' color='danger' />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <FontAwesomeIcon icon={faImage} size='6xl' />
+          <Icon icon={faImage} size='6xl' />
         </DropzoneIdle>
 
         <VStack gap='2xs'>
@@ -207,15 +208,15 @@ export const useOnDropRejected: ComponentStory<typeof Dropzone> = () => {
     >
       <HStack color={['blackAlpha.500', 'whiteAlpha.500']}>
         <DropzoneAccept>
-          <FontAwesomeIcon icon={faArrowUpFromBracket} size='6xl' color='primary' />
+          <Icon icon={faArrowUpFromBracket} size='6xl' color='primary' />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <FontAwesomeIcon icon={faXmark} size='6xl' color='danger' />
+          <Icon icon={faXmark} size='6xl' color='danger' />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <FontAwesomeIcon icon={faImage} size='6xl' />
+          <Icon icon={faImage} size='6xl' />
         </DropzoneIdle>
 
         <VStack gap='2xs'>

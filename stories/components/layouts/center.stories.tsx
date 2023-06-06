@@ -1,6 +1,7 @@
 import { faSkull } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Center, FontAwesomeIcon } from '@yamada-ui/react'
+import { Icon } from '@yamada-ui/fontawesome'
+import { Center } from '@yamada-ui/react'
 
 export default {
   title: 'Components / Layouts / Center',
@@ -18,7 +19,7 @@ export const basic: ComponentStory<typeof Center> = () => {
 export const iconWithFrame: ComponentStory<typeof Center> = () => {
   return (
     <Center minW='6xs' minH='6xs' rounded='full' bg='gray.500' color='white'>
-      <FontAwesomeIcon icon={faSkull} size='3xl' />
+      <Icon icon={faSkull} size='3xl' />
     </Center>
   )
 }

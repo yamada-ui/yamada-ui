@@ -96,38 +96,6 @@ export const withColorScheme: ComponentStory<typeof Radio> = () => {
       <Radio colorScheme='pink' defaultChecked>
         pink
       </Radio>
-
-      <Radio colorScheme='linkedin' defaultChecked>
-        Linkedin
-      </Radio>
-
-      <Radio colorScheme='facebook' defaultChecked>
-        Facebook
-      </Radio>
-
-      <Radio colorScheme='messenger' defaultChecked>
-        Messenger
-      </Radio>
-
-      <Radio colorScheme='whatsapp' defaultChecked>
-        Whatsapp
-      </Radio>
-
-      <Radio colorScheme='twitter' defaultChecked>
-        Twitter
-      </Radio>
-
-      <Radio colorScheme='line' defaultChecked>
-        Line
-      </Radio>
-
-      <Radio colorScheme='instagram' defaultChecked>
-        Instagram
-      </Radio>
-
-      <Radio colorScheme='youtube' defaultChecked>
-        Youtube
-      </Radio>
     </Wrap>
   )
 }

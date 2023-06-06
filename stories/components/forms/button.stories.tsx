@@ -54,22 +54,6 @@ export const solid: ComponentStory<typeof Button> = () => {
       <Button colorScheme='purple'>Purple</Button>
 
       <Button colorScheme='pink'>pink</Button>
-
-      <Button colorScheme='linkedin'>Linkedin</Button>
-
-      <Button colorScheme='facebook'>Facebook</Button>
-
-      <Button colorScheme='messenger'>Messenger</Button>
-
-      <Button colorScheme='whatsapp'>Whatsapp</Button>
-
-      <Button colorScheme='twitter'>Twitter</Button>
-
-      <Button colorScheme='line'>Line</Button>
-
-      <Button colorScheme='instagram'>Instagram</Button>
-
-      <Button colorScheme='youtube'>Youtube</Button>
     </Wrap>
   )
 }
@@ -135,38 +119,6 @@ export const outline: ComponentStory<typeof Button> = () => {
 
       <Button variant='outline' colorScheme='pink'>
         pink
-      </Button>
-
-      <Button variant='outline' colorScheme='linkedin'>
-        Linkedin
-      </Button>
-
-      <Button variant='outline' colorScheme='facebook'>
-        Facebook
-      </Button>
-
-      <Button variant='outline' colorScheme='messenger'>
-        Messenger
-      </Button>
-
-      <Button variant='outline' colorScheme='whatsapp'>
-        Whatsapp
-      </Button>
-
-      <Button variant='outline' colorScheme='twitter'>
-        Twitter
-      </Button>
-
-      <Button variant='outline' colorScheme='line'>
-        Line
-      </Button>
-
-      <Button variant='outline' colorScheme='instagram'>
-        Instagram
-      </Button>
-
-      <Button variant='outline' colorScheme='youtube'>
-        Youtube
       </Button>
     </Wrap>
   )

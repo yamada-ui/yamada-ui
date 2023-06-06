@@ -168,54 +168,6 @@ export const withColorScheme: ComponentStory<typeof SegmentedControl> = () => {
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
       </SegmentedControl>
 
-      <SegmentedControl variant='basic' colorScheme='linkedin'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='facebook'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='messenger'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='whatsapp'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='twitter'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='line'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='instagram'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='basic' colorScheme='youtube'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
       <SegmentedControl variant='rounded'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
@@ -307,54 +259,6 @@ export const withColorScheme: ComponentStory<typeof SegmentedControl> = () => {
       </SegmentedControl>
 
       <SegmentedControl variant='rounded' colorScheme='pink'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='linkedin'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='facebook'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='messenger'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='whatsapp'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='twitter'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='line'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='instagram'>
-        <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
-        <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>
-      </SegmentedControl>
-
-      <SegmentedControl variant='rounded' colorScheme='youtube'>
         <SegmentedControlButton value='孫悟空'>孫悟空</SegmentedControlButton>
         <SegmentedControlButton value='ベジータ'>ベジータ</SegmentedControlButton>
         <SegmentedControlButton value='フリーザ'>フリーザ</SegmentedControlButton>

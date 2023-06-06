@@ -38,22 +38,6 @@ export const subtle: ComponentStory<typeof Badge> = () => {
       <Badge colorScheme='purple'>Purple</Badge>
 
       <Badge colorScheme='pink'>pink</Badge>
-
-      <Badge colorScheme='linkedin'>Linkedin</Badge>
-
-      <Badge colorScheme='facebook'>Facebook</Badge>
-
-      <Badge colorScheme='messenger'>Messenger</Badge>
-
-      <Badge colorScheme='whatsapp'>Whatsapp</Badge>
-
-      <Badge colorScheme='twitter'>Twitter</Badge>
-
-      <Badge colorScheme='line'>Line</Badge>
-
-      <Badge colorScheme='instagram'>Instagram</Badge>
-
-      <Badge colorScheme='youtube'>Youtube</Badge>
     </Wrap>
   )
 }
@@ -120,38 +104,6 @@ export const solid: ComponentStory<typeof Badge> = () => {
       <Badge variant='solid' colorScheme='pink'>
         pink
       </Badge>
-
-      <Badge variant='solid' colorScheme='linkedin'>
-        Linkedin
-      </Badge>
-
-      <Badge variant='solid' colorScheme='facebook'>
-        Facebook
-      </Badge>
-
-      <Badge variant='solid' colorScheme='messenger'>
-        Messenger
-      </Badge>
-
-      <Badge variant='solid' colorScheme='whatsapp'>
-        Whatsapp
-      </Badge>
-
-      <Badge variant='solid' colorScheme='twitter'>
-        Twitter
-      </Badge>
-
-      <Badge variant='solid' colorScheme='line'>
-        Line
-      </Badge>
-
-      <Badge variant='solid' colorScheme='instagram'>
-        Instagram
-      </Badge>
-
-      <Badge variant='solid' colorScheme='youtube'>
-        Youtube
-      </Badge>
     </Wrap>
   )
 }
@@ -217,38 +169,6 @@ export const outline: ComponentStory<typeof Badge> = () => {
 
       <Badge variant='outline' colorScheme='pink'>
         pink
-      </Badge>
-
-      <Badge variant='outline' colorScheme='linkedin'>
-        Linkedin
-      </Badge>
-
-      <Badge variant='outline' colorScheme='facebook'>
-        Facebook
-      </Badge>
-
-      <Badge variant='outline' colorScheme='messenger'>
-        Messenger
-      </Badge>
-
-      <Badge variant='outline' colorScheme='whatsapp'>
-        Whatsapp
-      </Badge>
-
-      <Badge variant='outline' colorScheme='twitter'>
-        Twitter
-      </Badge>
-
-      <Badge variant='outline' colorScheme='line'>
-        Line
-      </Badge>
-
-      <Badge variant='outline' colorScheme='instagram'>
-        Instagram
-      </Badge>
-
-      <Badge variant='outline' colorScheme='youtube'>
-        Youtube
       </Badge>
     </Wrap>
   )

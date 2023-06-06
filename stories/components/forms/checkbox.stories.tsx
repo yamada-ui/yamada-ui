@@ -98,38 +98,6 @@ export const withColorScheme: ComponentStory<typeof Checkbox> = () => {
       <Checkbox colorScheme='pink' defaultChecked>
         pink
       </Checkbox>
-
-      <Checkbox colorScheme='linkedin' defaultChecked>
-        Linkedin
-      </Checkbox>
-
-      <Checkbox colorScheme='facebook' defaultChecked>
-        Facebook
-      </Checkbox>
-
-      <Checkbox colorScheme='messenger' defaultChecked>
-        Messenger
-      </Checkbox>
-
-      <Checkbox colorScheme='whatsapp' defaultChecked>
-        Whatsapp
-      </Checkbox>
-
-      <Checkbox colorScheme='twitter' defaultChecked>
-        Twitter
-      </Checkbox>
-
-      <Checkbox colorScheme='line' defaultChecked>
-        Line
-      </Checkbox>
-
-      <Checkbox colorScheme='instagram' defaultChecked>
-        Instagram
-      </Checkbox>
-
-      <Checkbox colorScheme='youtube' defaultChecked>
-        Youtube
-      </Checkbox>
     </Wrap>
   )
 }

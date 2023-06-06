@@ -114,22 +114,6 @@ export const withColorScheme: ComponentStory<typeof FileButton> = () => {
       <FileButton colorScheme='purple'>Purple</FileButton>
 
       <FileButton colorScheme='pink'>pink</FileButton>
-
-      <FileButton colorScheme='linkedin'>Linkedin</FileButton>
-
-      <FileButton colorScheme='facebook'>Facebook</FileButton>
-
-      <FileButton colorScheme='messenger'>Messenger</FileButton>
-
-      <FileButton colorScheme='whatsapp'>Whatsapp</FileButton>
-
-      <FileButton colorScheme='twitter'>Twitter</FileButton>
-
-      <FileButton colorScheme='line'>Line</FileButton>
-
-      <FileButton colorScheme='instagram'>Instagram</FileButton>
-
-      <FileButton colorScheme='youtube'>Youtube</FileButton>
     </Wrap>
   )
 }

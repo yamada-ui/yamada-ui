@@ -68,22 +68,6 @@ export const withColorScheme: ComponentStory<typeof Pagination> = () => {
         <Pagination total={10} variant='solid' colorScheme='purple' />
 
         <Pagination total={10} variant='solid' colorScheme='pink' />
-
-        <Pagination total={10} variant='solid' colorScheme='linkedin' />
-
-        <Pagination total={10} variant='solid' colorScheme='facebook' />
-
-        <Pagination total={10} variant='solid' colorScheme='messenger' />
-
-        <Pagination total={10} variant='solid' colorScheme='whatsapp' />
-
-        <Pagination total={10} variant='solid' colorScheme='twitter' />
-
-        <Pagination total={10} variant='solid' colorScheme='line' />
-
-        <Pagination total={10} variant='solid' colorScheme='instagram' />
-
-        <Pagination total={10} variant='solid' colorScheme='youtube' />
       </VStack>
 
       <VStack w='auto'>
@@ -116,22 +100,6 @@ export const withColorScheme: ComponentStory<typeof Pagination> = () => {
         <Pagination total={10} variant='outline' colorScheme='purple' />
 
         <Pagination total={10} variant='outline' colorScheme='pink' />
-
-        <Pagination total={10} variant='outline' colorScheme='linkedin' />
-
-        <Pagination total={10} variant='outline' colorScheme='facebook' />
-
-        <Pagination total={10} variant='outline' colorScheme='messenger' />
-
-        <Pagination total={10} variant='outline' colorScheme='whatsapp' />
-
-        <Pagination total={10} variant='outline' colorScheme='twitter' />
-
-        <Pagination total={10} variant='outline' colorScheme='line' />
-
-        <Pagination total={10} variant='outline' colorScheme='instagram' />
-
-        <Pagination total={10} variant='outline' colorScheme='youtube' />
       </VStack>
 
       <VStack w='auto'>
@@ -164,22 +132,6 @@ export const withColorScheme: ComponentStory<typeof Pagination> = () => {
         <Pagination total={10} variant='ghost' colorScheme='purple' />
 
         <Pagination total={10} variant='ghost' colorScheme='pink' />
-
-        <Pagination total={10} variant='ghost' colorScheme='linkedin' />
-
-        <Pagination total={10} variant='ghost' colorScheme='facebook' />
-
-        <Pagination total={10} variant='ghost' colorScheme='messenger' />
-
-        <Pagination total={10} variant='ghost' colorScheme='whatsapp' />
-
-        <Pagination total={10} variant='ghost' colorScheme='twitter' />
-
-        <Pagination total={10} variant='ghost' colorScheme='line' />
-
-        <Pagination total={10} variant='ghost' colorScheme='instagram' />
-
-        <Pagination total={10} variant='ghost' colorScheme='youtube' />
       </VStack>
     </Wrap>
   )

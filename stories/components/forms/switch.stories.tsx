@@ -109,38 +109,6 @@ export const withColorScheme: ComponentStory<typeof Switch> = () => {
       <Switch colorScheme='pink' defaultChecked>
         pink
       </Switch>
-
-      <Switch colorScheme='linkedin' defaultChecked>
-        Linkedin
-      </Switch>
-
-      <Switch colorScheme='facebook' defaultChecked>
-        Facebook
-      </Switch>
-
-      <Switch colorScheme='messenger' defaultChecked>
-        Messenger
-      </Switch>
-
-      <Switch colorScheme='whatsapp' defaultChecked>
-        Whatsapp
-      </Switch>
-
-      <Switch colorScheme='twitter' defaultChecked>
-        Twitter
-      </Switch>
-
-      <Switch colorScheme='line' defaultChecked>
-        Line
-      </Switch>
-
-      <Switch colorScheme='instagram' defaultChecked>
-        Instagram
-      </Switch>
-
-      <Switch colorScheme='youtube' defaultChecked>
-        Youtube
-      </Switch>
     </Wrap>
   )
 }

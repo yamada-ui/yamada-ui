@@ -100,22 +100,6 @@ export const withColorScheme: ComponentStory<typeof Stepper> = () => {
       <Stepper colorScheme='purple' index={1} steps={steps} />
 
       <Stepper colorScheme='pink' index={1} steps={steps} />
-
-      <Stepper colorScheme='linkedin' index={1} steps={steps} />
-
-      <Stepper colorScheme='facebook' index={1} steps={steps} />
-
-      <Stepper colorScheme='messenger' index={1} steps={steps} />
-
-      <Stepper colorScheme='whatsapp' index={1} steps={steps} />
-
-      <Stepper colorScheme='twitter' index={1} steps={steps} />
-
-      <Stepper colorScheme='line' index={1} steps={steps} />
-
-      <Stepper colorScheme='instagram' index={1} steps={steps} />
-
-      <Stepper colorScheme='youtube' index={1} steps={steps} />
     </>
   )
 }

@@ -265,22 +265,6 @@ export const withColorScheme: ComponentStory<typeof Table> = () => {
       <Table variant='striped' colorScheme='purple' columns={columns} data={data} />
 
       <Table variant='striped' colorScheme='pink' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='linkedin' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='facebook' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='messenger' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='whatsapp' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='twitter' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='line' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='instagram' columns={columns} data={data} />
-
-      <Table variant='striped' colorScheme='youtube' columns={columns} data={data} />
     </>
   )
 }

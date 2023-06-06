@@ -156,62 +156,6 @@ export const withColorScheme: ComponentStory<typeof DatePicker> = () => {
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='linkedin'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='facebook'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='messenger'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='whatsapp'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='twitter'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='line'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='instagram'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='solid'
-          calendarColorScheme='youtube'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
       </Grid>
 
       <Heading size='xl'>Subtle</Heading>
@@ -318,62 +262,6 @@ export const withColorScheme: ComponentStory<typeof DatePicker> = () => {
         <DatePicker
           calendarVariant='subtle'
           calendarColorScheme='pink'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='linkedin'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='facebook'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='messenger'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='whatsapp'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='twitter'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='line'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='instagram'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant='subtle'
-          calendarColorScheme='youtube'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />

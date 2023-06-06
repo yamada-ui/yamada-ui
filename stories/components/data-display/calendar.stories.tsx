@@ -166,62 +166,6 @@ export const withColorScheme: ComponentStory<typeof Calendar> = () => {
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
-
-        <Calendar
-          variant='solid'
-          colorScheme='linkedin'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='facebook'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='messenger'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='whatsapp'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='twitter'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='line'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='instagram'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='solid'
-          colorScheme='youtube'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
       </Wrap>
 
       <Heading size='xl'>Subtle</Heading>
@@ -328,62 +272,6 @@ export const withColorScheme: ComponentStory<typeof Calendar> = () => {
         <Calendar
           variant='subtle'
           colorScheme='pink'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='linkedin'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='facebook'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='messenger'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='whatsapp'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='twitter'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='line'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='instagram'
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant='subtle'
-          colorScheme='youtube'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />

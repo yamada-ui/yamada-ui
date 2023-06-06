@@ -39,22 +39,6 @@ export const subtle: ComponentStory<typeof Tag> = () => {
       <Tag colorScheme='purple'>Purple</Tag>
 
       <Tag colorScheme='pink'>pink</Tag>
-
-      <Tag colorScheme='linkedin'>Linkedin</Tag>
-
-      <Tag colorScheme='facebook'>Facebook</Tag>
-
-      <Tag colorScheme='messenger'>Messenger</Tag>
-
-      <Tag colorScheme='whatsapp'>Whatsapp</Tag>
-
-      <Tag colorScheme='twitter'>Twitter</Tag>
-
-      <Tag colorScheme='line'>Line</Tag>
-
-      <Tag colorScheme='instagram'>Instagram</Tag>
-
-      <Tag colorScheme='youtube'>Youtube</Tag>
     </Wrap>
   )
 }
@@ -121,38 +105,6 @@ export const solid: ComponentStory<typeof Tag> = () => {
       <Tag variant='solid' colorScheme='pink'>
         pink
       </Tag>
-
-      <Tag variant='solid' colorScheme='linkedin'>
-        Linkedin
-      </Tag>
-
-      <Tag variant='solid' colorScheme='facebook'>
-        Facebook
-      </Tag>
-
-      <Tag variant='solid' colorScheme='messenger'>
-        Messenger
-      </Tag>
-
-      <Tag variant='solid' colorScheme='whatsapp'>
-        Whatsapp
-      </Tag>
-
-      <Tag variant='solid' colorScheme='twitter'>
-        Twitter
-      </Tag>
-
-      <Tag variant='solid' colorScheme='line'>
-        Line
-      </Tag>
-
-      <Tag variant='solid' colorScheme='instagram'>
-        Instagram
-      </Tag>
-
-      <Tag variant='solid' colorScheme='youtube'>
-        Youtube
-      </Tag>
     </Wrap>
   )
 }
@@ -218,38 +170,6 @@ export const outline: ComponentStory<typeof Tag> = () => {
 
       <Tag variant='outline' colorScheme='pink'>
         pink
-      </Tag>
-
-      <Tag variant='outline' colorScheme='linkedin'>
-        Linkedin
-      </Tag>
-
-      <Tag variant='outline' colorScheme='facebook'>
-        Facebook
-      </Tag>
-
-      <Tag variant='outline' colorScheme='messenger'>
-        Messenger
-      </Tag>
-
-      <Tag variant='outline' colorScheme='whatsapp'>
-        Whatsapp
-      </Tag>
-
-      <Tag variant='outline' colorScheme='twitter'>
-        Twitter
-      </Tag>
-
-      <Tag variant='outline' colorScheme='line'>
-        Line
-      </Tag>
-
-      <Tag variant='outline' colorScheme='instagram'>
-        Instagram
-      </Tag>
-
-      <Tag variant='outline' colorScheme='youtube'>
-        Youtube
       </Tag>
     </Wrap>
   )

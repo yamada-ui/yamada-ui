@@ -281,22 +281,6 @@ export const withColorScheme: ComponentStory<typeof NativeTable> = () => {
       <Table variant='striped' colorScheme='purple' />
 
       <Table variant='striped' colorScheme='pink' />
-
-      <Table variant='striped' colorScheme='linkedin' />
-
-      <Table variant='striped' colorScheme='facebook' />
-
-      <Table variant='striped' colorScheme='messenger' />
-
-      <Table variant='striped' colorScheme='whatsapp' />
-
-      <Table variant='striped' colorScheme='twitter' />
-
-      <Table variant='striped' colorScheme='line' />
-
-      <Table variant='striped' colorScheme='instagram' />
-
-      <Table variant='striped' colorScheme='youtube' />
     </>
   )
 }

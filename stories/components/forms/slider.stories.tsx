@@ -72,22 +72,6 @@ export const withColorScheme: ComponentStory<typeof Slider> = () => {
       <Slider colorScheme='purple' />
 
       <Slider colorScheme='pink' />
-
-      <Slider colorScheme='linkedin' />
-
-      <Slider colorScheme='facebook' />
-
-      <Slider colorScheme='messenger' />
-
-      <Slider colorScheme='whatsapp' />
-
-      <Slider colorScheme='twitter' />
-
-      <Slider colorScheme='line' />
-
-      <Slider colorScheme='instagram' />
-
-      <Slider colorScheme='youtube' />
     </>
   )
 }

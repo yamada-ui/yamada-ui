@@ -74,22 +74,6 @@ export const withColorScheme: ComponentStory<typeof RangeSlider> = () => {
       <RangeSlider colorScheme='purple' />
 
       <RangeSlider colorScheme='pink' />
-
-      <RangeSlider colorScheme='linkedin' />
-
-      <RangeSlider colorScheme='facebook' />
-
-      <RangeSlider colorScheme='messenger' />
-
-      <RangeSlider colorScheme='whatsapp' />
-
-      <RangeSlider colorScheme='twitter' />
-
-      <RangeSlider colorScheme='line' />
-
-      <RangeSlider colorScheme='instagram' />
-
-      <RangeSlider colorScheme='youtube' />
     </>
   )
 }

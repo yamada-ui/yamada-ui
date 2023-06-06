@@ -69,9 +69,11 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Build Storybook
+        if: steps.changesets.outputs.published == 'true'
         run: pnpm build-storybook
 
       - name: Update Storybook
+        if: steps.changesets.outputs.published == 'true'
         uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           branch: gh-pages

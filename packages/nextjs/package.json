@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/nextjs",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Yamada UI Integrations for Next.js 13",
   "keywords": [
     "yamada",

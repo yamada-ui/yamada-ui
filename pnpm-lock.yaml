@@ -1093,6 +1093,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
       '@yamada-ui/use-token':
         specifier: workspace:*
         version: link:../../hooks/use-token
@@ -1102,9 +1105,6 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
-      react-loader-spinner:
-        specifier: ^5.3.4
-        version: 5.3.4(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0

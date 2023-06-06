@@ -9,21 +9,13 @@ export default {
 export const basic: ComponentStory<typeof Loading> = () => {
   return (
     <Wrap gap='md'>
-      <Loading variant='oval' size='6xs' color='primary' />
-      <Loading variant='search' size='6xs' color='secondary' />
-      <Loading variant='radio' size='6xs' color='warning' />
-      <Loading variant='audio' size='6xs' color='danger' />
-      <Loading variant='balls' size='6xs' color='primary' />
-      <Loading variant='bars' size='6xs' color='secondary' />
-      <Loading variant='comment' size='6xs' color='warning' />
-      <Loading variant='grid' size='6xs' color='danger' />
-      <Loading variant='hearts' size='6xs' color='primary' />
-      <Loading variant='rotating' size='6xs' color='secondary' />
-      <Loading variant='circles' size='6xs' color='warning' />
-      <Loading variant='dots' size='6xs' color='danger' />
-      <Loading variant='triangle' size='6xs' color='primary' />
-      <Loading variant='watch' size='6xs' color='secondary' />
-      <Loading variant='progress' size='6xs' color='warning' />
+      <Loading variant='oval' size='6xl' color='primary' />
+      <Loading variant='grid' size='6xl' color='secondary' />
+      <Loading variant='audio' size='6xl' color='warning' />
+      <Loading variant='dots' size='6xl' color='danger' />
+      <Loading variant='puff' size='6xl' color='blue.500' />
+      <Loading variant='rings' size='6xl' color='red.500' />
+      <Loading variant='circles' size='6xl' color='green.500' />
     </Wrap>
   )
 }

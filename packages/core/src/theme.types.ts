@@ -15,22 +15,7 @@ import { UITheme } from './ui-theme.types'
 
 export type ThemeScheme = Union<string | number>
 
-export type LoadingVariant =
-  | 'oval'
-  | 'grid'
-  | 'hearts'
-  | 'radio'
-  | 'audio'
-  | 'balls'
-  | 'bars'
-  | 'rotating'
-  | 'comment'
-  | 'search'
-  | 'circles'
-  | 'dots'
-  | 'triangle'
-  | 'watch'
-  | 'progress'
+export type LoadingVariant = 'oval' | 'grid' | 'audio' | 'dots' | 'puff' | 'rings' | 'circles'
 
 export type NoticePlacement =
   | 'top'

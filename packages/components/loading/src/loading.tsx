@@ -1,43 +1,34 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps, LoadingVariant } from '@yamada-ui/core'
+import { forwardRef, CSSUIProps, LoadingVariant } from '@yamada-ui/core'
+import { IconProps } from '@yamada-ui/icon'
 import { useToken } from '@yamada-ui/use-token'
 import { useValue } from '@yamada-ui/use-value'
 import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
-import {
-  Oval,
-  Grid,
-  Hearts,
-  Radio,
-  Audio,
-  BallTriangle,
-  Bars,
-  Comment,
-  MagnifyingGlass,
-  ThreeCircles,
-  ThreeDots,
-  Triangle,
-  Watch,
-  RotatingLines,
-  ProgressBar,
-} from 'react-loader-spinner'
+import { Audio } from './audio'
+import { Circles } from './circles'
+import { Dots } from './dots'
+import { Grid } from './grid'
+import { Oval } from './oval'
+import { Puff } from './puff'
+import { Rings } from './rings'
 
 type LoadingOptions = {
   variant?: LoadingVariant
-  color?: CSSUIProps['color']
   secondaryColor?: CSSUIProps['color']
-  size?: CSSUIProps['boxSize']
+  duration?: IconProps['dur']
 }
 
-export type LoadingProps = HTMLUIProps<'div'> & LoadingOptions
+export type LoadingProps = Omit<IconProps, 'dur'> & LoadingOptions
 
-export const Loading = forwardRef<LoadingProps, 'div'>(
+export const Loading = forwardRef<LoadingProps, 'svg'>(
   (
     {
       className,
       variant = 'oval',
       color: _color = 'primary',
       secondaryColor: _secondaryColor,
-      size: _size = '1em',
+      size = '1em',
+      duration,
       ...rest
     },
     ref,
@@ -46,98 +37,38 @@ export const Loading = forwardRef<LoadingProps, 'div'>(
     const secondaryColor = (useToken('colors', useValue(_secondaryColor)) ??
       _secondaryColor) as string
 
-    const width = (useToken('sizes', useValue(_size)) ?? _size) as string | number | undefined
-    const height = (useToken('sizes', useValue(_size)) ?? _size) as string | number | undefined
-
-    const css = { '& > *': { padding: '0 !important' } }
-
-    const animation = useMemo(() => {
-      switch (variant) {
-        case 'hearts':
-          return <Hearts color={color} width={width} height={height} />
-
-        case 'radio':
-          return <Radio colors={[color, color, color]} width={width} height={height} />
-
-        case 'audio':
-          return <Audio color={color} width={width} height={height} />
-
-        case 'balls':
-          return <BallTriangle color={color} width={width} height={height} />
-
-        case 'bars':
-          return <Bars color={color} width={width} height={height} />
-
-        case 'comment':
-          return (
-            <Comment
-              color={secondaryColor ?? '#f6f6f6'}
-              backgroundColor={color}
-              width={width}
-              height={height}
-            />
-          )
-
-        case 'search':
-          return (
-            <MagnifyingGlass
-              color={color}
-              glassColor={'transparent'}
-              width={width}
-              height={height}
-            />
-          )
-
-        case 'grid':
-          return <Grid color={color} width={width} height={height} />
-
-        case 'rotating':
-          return (
-            <RotatingLines
-              strokeColor={color}
-              animationDuration={'1'}
-              width={width ? String(width) : undefined}
-            />
-          )
-
-        case 'circles':
-          return <ThreeCircles color={color} width={width} height={height} />
-
-        case 'dots':
-          return <ThreeDots color={color} width={width} height={height} />
-
-        case 'triangle':
-          return <Triangle color={color} width={width} height={height} />
-
-        case 'watch':
-          return <Watch color={color} width={width} height={height} />
-
-        case 'progress':
-          return (
-            <ProgressBar
-              barColor={color}
-              borderColor={secondaryColor ?? color}
-              width={width}
-              height={height}
-            />
-          )
-
-        default:
-          return (
-            <Oval
-              color={color}
-              secondaryColor={secondaryColor ?? color}
-              width={width}
-              height={height}
-            />
-          )
-      }
-    }, [color, height, secondaryColor, variant, width])
-
-    return (
-      <ui.div ref={ref} className={cx('ui-loading', className)} __css={css} {...rest}>
-        {animation}
-      </ui.div>
+    const props = useMemo(
+      () => ({
+        className: cx('ui-loading', className),
+        size,
+        color,
+        duration,
+        ...rest,
+      }),
+      [className, color, duration, rest, size],
     )
+
+    switch (variant) {
+      case 'grid':
+        return <Grid ref={ref} {...props} />
+
+      case 'audio':
+        return <Audio ref={ref} {...props} />
+
+      case 'dots':
+        return <Dots ref={ref} {...props} />
+
+      case 'puff':
+        return <Puff ref={ref} {...props} />
+
+      case 'rings':
+        return <Rings ref={ref} {...props} />
+
+      case 'circles':
+        return <Circles ref={ref} {...props} />
+
+      default:
+        return <Oval ref={ref} {...props} secondaryColor={secondaryColor} />
+    }
   },
 )

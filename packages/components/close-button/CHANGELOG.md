@@ -1,5 +1,13 @@
 # @yamada-ui/close-button
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`ae7c66d`](https://github.com/hirotomoyamada/yamada-ui/commit/ae7c66d68e71034b6a3abc211017bf509de406e3)]:
+  - @yamada-ui/core@0.1.3
+  - @yamada-ui/icon@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes

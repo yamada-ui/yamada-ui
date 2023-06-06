@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.1.3
+
+### Patch Changes
+
+- [`ae7c66d`](https://github.com/hirotomoyamada/yamada-ui/commit/ae7c66d68e71034b6a3abc211017bf509de406e3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated the type definition to reduce the `@yamada-ui/loading` icon.
+
 ## 0.1.2
 
 ### Patch Changes

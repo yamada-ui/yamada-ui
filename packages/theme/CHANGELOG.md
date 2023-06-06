@@ -1,5 +1,15 @@
 # @yamada-ui/theme
 
+## 0.1.5
+
+### Patch Changes
+
+- [`27a42db`](https://github.com/hirotomoyamada/yamada-ui/commit/27a42db9e1b194b87b7358440bb1964a643887c2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed module @ctrl/tinycolor to color2k.
+
+- Updated dependencies [[`27a42db`](https://github.com/hirotomoyamada/yamada-ui/commit/27a42db9e1b194b87b7358440bb1964a643887c2)]:
+  - @yamada-ui/utils@0.1.1
+  - @yamada-ui/core@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes

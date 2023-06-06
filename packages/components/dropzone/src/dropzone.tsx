@@ -161,7 +161,7 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
 
   return (
     <Fade isOpen={isLoading} unmountOnExit className='ui-dropzone-overlay' __css={css} {...rest}>
-      <Loading className='ui-dropzone-loading' size='8' {...loadingProps} />
+      <Loading className='ui-dropzone-loading' size='4xl' {...loadingProps} />
     </Fade>
   )
 }

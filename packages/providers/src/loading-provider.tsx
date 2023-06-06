@@ -560,7 +560,7 @@ const LoadingScreenComponent = memo(
         __css={getOverlayStyle()}
       >
         <ui.div __css={css}>
-          <Loading size='6xs' {...icon} />
+          <Loading size='6xl' {...icon} />
           {message ? (
             isValidElement(message) ? (
               message
@@ -608,7 +608,7 @@ const LoadingPageComponent = memo(
           {...getMotionProps(initialState, 'scaleFade')}
           __css={css}
         >
-          <Loading size='6xs' {...icon} />
+          <Loading size='6xl' {...icon} />
           {message ? (
             isValidElement(message) ? (
               message
@@ -653,7 +653,7 @@ const LoadingBackgroundComponent = memo(
         {...getMotionProps(initialState, 'scaleFade')}
         __css={css}
       >
-        <Loading size='1.2rem' {...icon} />
+        <Loading size='xl' {...icon} />
         {message ? (
           isValidElement(message) ? (
             message

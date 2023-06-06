@@ -81,8 +81,7 @@ export const AlertIcon = ({ className, children, variant = 'oval', ...rest }: Al
     <ui.span display='inherit' className={cx('ui-alert-icon', className)} __css={css} {...rest}>
       {children || (
         <Icon
-          boxSize='100%'
-          {...(status === 'loading' ? { variant, color: 'currentcolor' } : {})}
+          {...(status === 'loading' ? { variant, color: 'currentcolor' } : { boxSize: '100%' })}
         />
       )}
     </ui.span>

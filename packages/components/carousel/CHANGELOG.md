@@ -1,5 +1,11 @@
 # @yamada-ui/carousel
 
+## 0.1.6
+
+### Patch Changes
+
+- [`6e5a0f5`](https://github.com/hirotomoyamada/yamada-ui/commit/6e5a0f5da79a0a5b428019f9f3cae5c675af529e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed syntax error in React.
+
 ## 0.1.5
 
 ### Patch Changes

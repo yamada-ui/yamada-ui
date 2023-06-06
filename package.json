@@ -48,7 +48,8 @@
     "next-pages:start": "pnpm --prefix examples/nextjs-pages start",
     "next-app:dev": "pnpm --prefix examples/nextjs-app dev",
     "next-app:build": "pnpm --prefix examples/nextjs-app build",
-    "next-app:start": "pnpm --prefix examples/nextjs-app start"
+    "next-app:start": "pnpm --prefix examples/nextjs-app start",
+    "turbo:{action}": "turbo run {action} --cache-dir=.turbo"
   },
   "dependencies": {
     "@babel/core": "^7.22.1",

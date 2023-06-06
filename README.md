@@ -3,12 +3,18 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/@yamada-ui/react">
+    <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
+  </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
   <img alt="Github Checks" src="https://badgen.net/github/checks/hirotomoyamada/yamada-ui/main"/>
   <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
   <img alt="Github Stars" src="https://badgen.net/github/stars/hirotomoyamada/yamada-ui" />
+  <a href="https://discord.gg/NStNNpjN">
+    <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
+  </a>
 </p>
 
 Yamada UI is a React UI component library that streamlines the development of cutting-edge web applications and websites. This library offers a diverse range of components that can be easily combined to construct complex user interfaces, incorporating various features such as color modes and animations, which are not typically supported by other React UI component libraries.

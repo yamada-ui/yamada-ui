@@ -37,6 +37,8 @@ const getPullRequestData = ({
   const match = content.match(/## @yamada-ui\/react\@(?<version>\d.+)/)
   const version = match?.groups?.version
 
+  if (!version) return
+
   const sanitized = content
     .replace(/<(https?:\/\/.+)>/g, (_, group) => {
       return `[${group}](${group})`
@@ -148,7 +150,7 @@ const writeReadme = async (): Promise<void> => {
 
 const sync = async (): Promise<void> => {
   const prs = await getMergedPrs()
-  const data = prs.map(getPullRequestData) as PullRequestData[]
+  const data = prs.map(getPullRequestData).filter(Boolean) as PullRequestData[]
 
   await Promise.allSettled([...data.map(writePrFile), manifest.write(data)])
 

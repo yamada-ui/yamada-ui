@@ -5,11 +5,11 @@ export type RingsProps = IconProps & {
   duration?: IconProps['dur']
 }
 
-export const Rings = forwardRef<RingsProps, 'svg'>(({ color, duration = '3s', ...rest }) => {
+export const Rings = forwardRef<RingsProps, 'svg'>(({ color, duration = '3s', ...rest }, ref) => {
   const dur = typeof duration === 'string' ? parseFloat(duration) : duration
 
   return (
-    <Icon viewBox='0 0 45 45' stroke={color} {...rest}>
+    <Icon ref={ref} viewBox='0 0 45 45' stroke={color} {...rest}>
       <g fill='none' fillRule='evenodd' transform='translate(1 1)' strokeWidth='2'>
         <circle cx='22' cy='22' r='6' strokeOpacity='0'>
           <animate

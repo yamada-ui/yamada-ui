@@ -5,9 +5,9 @@ export type PuffProps = IconProps & {
   duration?: IconProps['dur']
 }
 
-export const Puff = forwardRef<PuffProps, 'svg'>(({ color, duration = '1.8s', ...rest }) => {
+export const Puff = forwardRef<PuffProps, 'svg'>(({ color, duration = '1.8s', ...rest }, ref) => {
   return (
-    <Icon viewBox='0 0 44 44' stroke={color} {...rest}>
+    <Icon ref={ref} viewBox='0 0 44 44' stroke={color} {...rest}>
       <g fill='none' fillRule='evenodd' strokeWidth='2'>
         <circle cx='22' cy='22' r='1'>
           <animate

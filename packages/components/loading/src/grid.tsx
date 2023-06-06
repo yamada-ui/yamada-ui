@@ -5,9 +5,9 @@ export type GridProps = IconProps & {
   duration?: IconProps['dur']
 }
 
-export const Grid = forwardRef<GridProps, 'svg'>(({ color, duration = '1s', ...rest }) => {
+export const Grid = forwardRef<GridProps, 'svg'>(({ color, duration = '1s', ...rest }, ref) => {
   return (
-    <Icon viewBox='0 0 105 105' fill={color} {...rest}>
+    <Icon ref={ref} viewBox='0 0 105 105' fill={color} {...rest}>
       <circle cx='12.5' cy='12.5' r='12.5'>
         <animate
           attributeName='fill-opacity'

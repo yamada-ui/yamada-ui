@@ -5,9 +5,9 @@ export type DotsProps = IconProps & {
   duration?: IconProps['dur']
 }
 
-export const Dots = forwardRef<DotsProps, 'svg'>(({ color, duration = '1s', ...rest }) => {
+export const Dots = forwardRef<DotsProps, 'svg'>(({ color, duration = '1s', ...rest }, ref) => {
   return (
-    <Icon viewBox='0 0 120 30' fill={color} {...rest}>
+    <Icon ref={ref} viewBox='0 0 120 30' fill={color} {...rest}>
       <circle cx='15' cy='15' r='15'>
         <animate
           attributeName='r'

@@ -7,9 +7,9 @@ export type OvalProps = IconProps & {
 }
 
 export const Oval = forwardRef<OvalProps, 'svg'>(
-  ({ color, secondaryColor, duration = '1s', ...rest }) => {
+  ({ color, secondaryColor, duration = '1s', ...rest }, ref) => {
     return (
-      <Icon viewBox='0 0 38 38' stroke={color} {...rest}>
+      <Icon ref={ref} viewBox='0 0 38 38' stroke={color} {...rest}>
         <g fill='none' fillRule='evenodd'>
           <g transform='translate(1 1)' strokeWidth='2'>
             <circle

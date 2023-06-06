@@ -5,11 +5,11 @@ export type AudioProps = IconProps & {
   duration?: IconProps['dur']
 }
 
-export const Audio = forwardRef<AudioProps, 'svg'>(({ color, duration = '1.4s', ...rest }) => {
+export const Audio = forwardRef<AudioProps, 'svg'>(({ color, duration = '1.4s', ...rest }, ref) => {
   const dur = typeof duration === 'string' ? parseFloat(duration) : duration
 
   return (
-    <Icon viewBox='0 0 55 80' fill={color} {...rest}>
+    <Icon ref={ref} viewBox='0 0 55 80' fill={color} {...rest}>
       <g transform='matrix(1 0 0 -1 0 80)'>
         <rect width='10' height='20' rx='3'>
           <animate

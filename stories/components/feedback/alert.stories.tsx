@@ -202,7 +202,7 @@ export const withLoading: ComponentStory<typeof Alert> = () => {
       </Alert>
 
       <Alert status='loading' variant='subtle'>
-        <AlertIcon variant='triangle' color='blue.500' />
+        <AlertIcon variant='puff' color='blue.500' />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
       </Alert>

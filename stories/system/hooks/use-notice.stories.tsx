@@ -164,7 +164,7 @@ export const withLoadingVariant = () => {
               description: 'オッス！オラ悟空！',
               status: 'loading',
               variant: 'subtle',
-              icon: { variant: 'triangle', color: 'black' },
+              icon: { variant: 'puff' },
             })
           }
         >

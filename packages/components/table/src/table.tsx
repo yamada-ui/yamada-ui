@@ -7,7 +7,7 @@ import {
   CSSUIObject,
 } from '@yamada-ui/core'
 import { TableStyleProvider, TableCaption } from '@yamada-ui/native-table'
-import { cx, pickChildren, getValidChildren } from '@yamada-ui/utils'
+import { cx, pickChildren, getValidChildren, omitObject } from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
@@ -64,7 +64,7 @@ export const Table = forwardRef(
     } = omitThemeProps(mergedProps)
 
     const { getTableProps, ...rest } = useTable<Y>({
-      ...computedProps,
+      ...omitObject(computedProps, ['highlightOnSelected']),
       checkboxProps: { colorScheme, ...checkboxProps },
     })
 

@@ -23,9 +23,7 @@ import {
 import { ReactMarkdownProps } from 'react-markdown/lib/complex-types'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-// @ts-ignore
-// eslint-disable-next-line import/extensions
-import * as styles from 'react-syntax-highlighter/dist/esm/styles/prism/index.js'
+import * as styles from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 

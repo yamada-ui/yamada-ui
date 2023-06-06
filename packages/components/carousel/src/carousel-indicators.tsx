@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { FC, cloneElement, ReactElement } from 'react'
+import { FC, cloneElement } from 'react'
 import { useCarouselContext, useCarouselIndicators } from './use-carousel'
 
 type CarouselIndicatorsOptions = { component?: FC<{ index: number; isSelected: boolean }> }
@@ -9,22 +9,10 @@ export type CarouselIndicatorsProps = Omit<HTMLUIProps<'div'>, 'children'> &
   CarouselIndicatorsOptions
 
 export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
-  ({ className, component = CarouselIndicator, ...rest }, ref) => {
+  ({ className, component, ...rest }, ref) => {
     const { selectedIndex, orientation, styles } = useCarouselContext()
 
     const { indexes, getIndicatorProps } = useCarouselIndicators()
-
-    const cloneChildren: (ReactElement | null)[] = indexes.map((index) => {
-      const isSelected = index === selectedIndex
-
-      const child = component({ index, isSelected })
-
-      if (!child) return null
-
-      const props = getIndicatorProps({ ...child.props, index })
-
-      return cloneElement(child, props)
-    })
 
     const css: CSSUIObject = {
       position: 'absolute',
@@ -37,7 +25,23 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
 
     return (
       <ui.div ref={ref} className={cx('ui-carousel-indicators', className)} __css={css} {...rest}>
-        {cloneChildren}
+        {indexes.map((index) => {
+          const isSelected = index === selectedIndex
+
+          if (typeof component === 'function') {
+            const child = component({ index, isSelected })
+
+            if (!child) return null
+
+            const props = getIndicatorProps({ ...child.props, index })
+
+            return cloneElement(child, props)
+          } else {
+            const { key, ...props } = getIndicatorProps({ index })
+
+            return <CarouselIndicator key={key} {...props} />
+          }
+        })}
       </ui.div>
     )
   },

@@ -2,7 +2,10 @@
   <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
+
+
 <p align="center">
+  <img alt="NPM Minzip" src="https://img.shields.io/bundlephobia/minzip/@yamada-ui/react"/>
   <a href="https://www.npmjs.com/package/@yamada-ui/react">
     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
   </a>
@@ -10,7 +13,7 @@
   <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
-  <img alt="Github Stars" src="https://badgen.net/github/stars/hirotomoyamada/yamada-ui" />
+  <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
   <a href="https://discord.gg/NStNNpjN">
     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
   </a>

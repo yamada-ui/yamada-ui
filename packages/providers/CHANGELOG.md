@@ -1,5 +1,11 @@
 # @yamada-ui/providers
 
+## 0.1.6
+
+### Patch Changes
+
+- [`ec60732`](https://github.com/hirotomoyamada/yamada-ui/commit/ec607329d72740a625e4f63715fd1efd9e84ef00) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Suppressed unnecessary rendering.
+
 ## 0.1.5
 
 ### Patch Changes

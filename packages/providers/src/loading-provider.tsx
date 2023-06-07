@@ -3,7 +3,7 @@ import { Loading } from '@yamada-ui/loading'
 import { AnimatePresence, motion, MotionVariants } from '@yamada-ui/motion'
 import { Portal } from '@yamada-ui/portal'
 import { useTimeout } from '@yamada-ui/use-timeout'
-import { isValidElement, assignRef, isUndefined } from '@yamada-ui/utils'
+import { isValidElement, assignRef, isUndefined, useUpdateEffect } from '@yamada-ui/utils'
 import {
   createContext,
   FC,
@@ -14,7 +14,6 @@ import {
   useMemo,
   useState,
   Fragment,
-  useEffect,
   useRef,
   MutableRefObject,
 } from 'react'
@@ -294,7 +293,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   assignRef(refs.customLoadingFuncFinishRef, customLoadingFunc.finish)
   assignRef(refs.customLoadingFuncUpdateRef, customLoadingFunc.update)
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     if (screen)
       setScreenLoading({
         isLoading: screen?.initialState ?? false,

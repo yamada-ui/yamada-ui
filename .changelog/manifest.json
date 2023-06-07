@@ -1,5 +1,12 @@
 [
   {
+    "id": 95,
+    "url": "https://github.com/hirotomoyamada/yamada-ui/pull/95",
+    "body": "---\ntitle: Version 0.2.4\ndescription: Explore the changelog for Yamada UI version 0.2.4. Learn about the latest features, bug fixes, and improvements.\nreleaseUrl: https://github.com/hirotomoyamada/yamada-ui/pull/95\nreleaseDate: June 8, 2023\nversion: 0.2.4\n---\n\n## @yamada-ui/nextjs@1.0.4\n\n### Patch Changes\n\n- Updated dependencies\n\n## @yamada-ui/providers@0.1.6\n\n### Patch Changes\n\n-   [`ec60732`](https://github.com/hirotomoyamada/yamada-ui/commit/ec607329d72740a625e4f63715fd1efd9e84ef00) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Suppressed unnecessary rendering.\n\n## @yamada-ui/react@0.2.4\n\n### Patch Changes\n\n-   Updated dependencies \\[[`ec60732`](https://github.com/hirotomoyamada/yamada-ui/commit/ec607329d72740a625e4f63715fd1efd9e84ef00)]:\n    -   @yamada-ui/providers@0.1.6\n\n## @yamada-ui/test@0.1.6\n\n### Patch Changes\n\n-   Updated dependencies \\[[`ec60732`](https://github.com/hirotomoyamada/yamada-ui/commit/ec607329d72740a625e4f63715fd1efd9e84ef00)]:\n    -   @yamada-ui/providers@0.1.6\n",
+    "date": "June 8, 2023",
+    "version": "0.2.4"
+  },
+  {
     "id": 94,
     "url": "https://github.com/hirotomoyamada/yamada-ui/pull/94",
     "body": "---\ntitle: Version undefined\ndescription: Explore the changelog for Yamada UI version undefined. Learn about the latest features, bug fixes, and improvements.\nreleaseUrl: https://github.com/hirotomoyamada/yamada-ui/pull/94\nreleaseDate: June 6, 2023\nversion: undefined\n---\n\n## @yamada-ui/carousel@0.1.6\n\n### Patch Changes\n\n-   [`6e5a0f5`](https://github.com/hirotomoyamada/yamada-ui/commit/6e5a0f5da79a0a5b428019f9f3cae5c675af529e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed syntax error in React.\n\n## @yamada-ui/markdown@0.1.6\n\n### Patch Changes\n\n-   [`6e5a0f5`](https://github.com/hirotomoyamada/yamada-ui/commit/6e5a0f5da79a0a5b428019f9f3cae5c675af529e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed import file from esm to cjs.\n\n## @yamada-ui/table@0.1.6\n\n### Patch Changes\n\n-   [`6e5a0f5`](https://github.com/hirotomoyamada/yamada-ui/commit/6e5a0f5da79a0a5b428019f9f3cae5c675af529e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted icon styles.\n",

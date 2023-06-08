@@ -64,7 +64,7 @@ export const Table = forwardRef(
     } = omitThemeProps(mergedProps)
 
     const { getTableProps, ...rest } = useTable<Y>({
-      ...omitObject(computedProps, ['highlightOnSelected']),
+      ...omitObject(computedProps, ['highlightOnSelected', 'withColumnBorders']),
       checkboxProps: { colorScheme, ...checkboxProps },
     })
 

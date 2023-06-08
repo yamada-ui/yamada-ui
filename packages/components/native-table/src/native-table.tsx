@@ -7,7 +7,7 @@ import {
   HTMLUIProps,
   ThemeProps,
 } from '@yamada-ui/core'
-import { createContext, cx } from '@yamada-ui/utils'
+import { createContext, cx, omitObject } from '@yamada-ui/utils'
 
 type TableStyleContext = Record<string, CSSUIObject>
 
@@ -33,7 +33,12 @@ export const NativeTable = forwardRef<NativeTableProps, 'table'>((props, ref) =>
 
   return (
     <TableStyleProvider value={styles}>
-      <ui.table ref={ref} className={cx('ui-native-table', className)} __css={css} {...rest} />
+      <ui.table
+        ref={ref}
+        className={cx('ui-native-table', className)}
+        __css={css}
+        {...omitObject(rest, ['withColumnBorders'])}
+      />
     </TableStyleProvider>
   )
 })

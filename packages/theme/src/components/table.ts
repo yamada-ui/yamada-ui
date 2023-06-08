@@ -63,7 +63,7 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notFirst: { borderLeftWidth: '1px' } } : {}),
+          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
         },
         td: {
           borderBottomWidth: '1px',
@@ -71,7 +71,7 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notFirst: { borderLeftWidth: '1px' } } : {}),
+          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
         },
         caption: {
           color: ['gray.600', 'gray.100'],
@@ -149,7 +149,7 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notFirst: { borderLeftWidth: '1px' } } : {}),
+          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
         },
         td: {
           borderBottomWidth: '1px',
@@ -157,7 +157,7 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notFirst: { borderLeftWidth: '1px' } } : {}),
+          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
         },
         caption: {
           color: ['gray.600', 'gray.100'],

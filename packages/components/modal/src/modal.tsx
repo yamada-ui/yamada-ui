@@ -145,6 +145,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(({ size, ...props }, ref)
     position: 'fixed',
     top: 0,
     left: 0,
+    zIndex: 'beerus',
     w: '100vw',
     h: '100vh',
     p: size !== 'full' ? outside : undefined,

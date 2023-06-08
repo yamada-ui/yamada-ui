@@ -37,7 +37,7 @@ export const NativeTable = forwardRef<NativeTableProps, 'table'>((props, ref) =>
         ref={ref}
         className={cx('ui-native-table', className)}
         __css={css}
-        {...omitObject(rest, ['withColumnBorders'])}
+        {...omitObject(rest, ['withColumnBorders', 'highlightOnHover'])}
       />
     </TableStyleProvider>
   )

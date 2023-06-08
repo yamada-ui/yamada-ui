@@ -10,7 +10,7 @@ import {
 import { TableStyleProvider } from '@yamada-ui/native-table'
 import { Pagination, PaginationProps } from '@yamada-ui/pagination'
 import { Select, SelectProps } from '@yamada-ui/select'
-import { cx, isFunction } from '@yamada-ui/utils'
+import { cx, isFunction, omitObject } from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, ReactNode, Ref } from 'react'
 import { TableBodyProps, Tbody } from './tbody'
 import { TableFootProps, Tfoot } from './tfoot'
@@ -102,7 +102,11 @@ export const PagingTable = forwardRef(
       pageSizeList,
       ...rest
     } = useTable<Y>({
-      ...computedProps,
+      ...omitObject(computedProps, [
+        'highlightOnSelected',
+        'highlightOnHover',
+        'withColumnBorders',
+      ]),
       checkboxProps: { colorScheme, ...checkboxProps },
       enablePagenation: true,
     })

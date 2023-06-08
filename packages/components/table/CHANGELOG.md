@@ -1,5 +1,14 @@
 # @yamada-ui/table
 
+## 0.1.7
+
+### Patch Changes
+
+- [`2e48b47`](https://github.com/hirotomoyamada/yamada-ui/commit/2e48b4743186263a9d8f2f8442575b7a59df9ca8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed table styles.
+
+- Updated dependencies [[`2e48b47`](https://github.com/hirotomoyamada/yamada-ui/commit/2e48b4743186263a9d8f2f8442575b7a59df9ca8)]:
+  - @yamada-ui/native-table@0.1.6
+
 ## 0.1.6
 
 ### Patch Changes

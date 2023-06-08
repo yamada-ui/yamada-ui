@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 0.2.6
+
+### Patch Changes
+
+- Updated dependencies [[`d2078ef`](https://github.com/hirotomoyamada/yamada-ui/commit/d2078efcac8ca73fba013b3453adf4e62cdd763f), [`d2078ef`](https://github.com/hirotomoyamada/yamada-ui/commit/d2078efcac8ca73fba013b3453adf4e62cdd763f)]:
+  - @yamada-ui/modal@0.1.6
+  - @yamada-ui/native-table@0.1.7
+
 ## 0.2.5
 
 ### Patch Changes

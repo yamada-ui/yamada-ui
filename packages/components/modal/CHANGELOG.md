@@ -1,5 +1,11 @@
 # @yamada-ui/modal
 
+## 0.1.6
+
+### Patch Changes
+
+- [`d2078ef`](https://github.com/hirotomoyamada/yamada-ui/commit/d2078efcac8ca73fba013b3453adf4e62cdd763f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that was not displayed correctly due to z-index not being set.
+
 ## 0.1.5
 
 ### Patch Changes

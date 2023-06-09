@@ -76,7 +76,7 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
         >
           {children}
         </Component>
-      )
+      ) as ReactNode
     }
 
     assignRef(resetRef, onReset)

@@ -9,7 +9,7 @@ import {
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
 import { cx, handlerAll } from '@yamada-ui/utils'
-import { cloneElement, CSSProperties, FC, MouseEventHandler, useMemo } from 'react'
+import { cloneElement, CSSProperties, FC, MouseEventHandler, ReactElement, useMemo } from 'react'
 import { AutocompleteClearIcon, AutocompleteIcon, AutocompleteIconProps } from './autocomplete-icon'
 import { AutocompleteList, AutocompleteListProps } from './autocomplete-list'
 import {
@@ -203,7 +203,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
             marginInlineEnd: '0.25rem',
           }
 
-          return el ? cloneElement(el, { style }) : null
+          return el ? cloneElement(el as ReactElement, { style }) : null
         })
       } else {
         return (displayValue as string[]).map((value, index) => {

@@ -95,7 +95,7 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
 
   return (
     <ui.pre
-      as={SyntaxHighlighter}
+      as={SyntaxHighlighter as any}
       className={cx('ui-markdown-code', className)}
       language={language}
       style={(styles as any)[theme]}

@@ -30,6 +30,7 @@ import {
   CSSProperties,
   FC,
   ForwardedRef,
+  ReactElement,
   ReactNode,
   useCallback,
   useMemo,
@@ -133,7 +134,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...pro
               marginInlineEnd: '0.25rem',
             }
 
-            return el ? cloneElement(el, { style }) : null
+            return el ? cloneElement(el as ReactElement, { style }) : null
           })}
         </ui.span>
       )

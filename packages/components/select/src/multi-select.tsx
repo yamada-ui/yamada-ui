@@ -187,7 +187,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
                 displayValue,
                 index,
                 onRemove,
-              })
+              }) as ReactElement
 
               const style: CSSProperties = {
                 marginBlockStart: '0.125rem',
@@ -195,7 +195,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
                 marginInlineEnd: '0.25rem',
               }
 
-              return el ? cloneElement(el, { style }) : null
+              return el ? cloneElement(el as ReactElement, { style }) : null
             })}
           </ui.span>
         )

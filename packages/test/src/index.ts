@@ -4,5 +4,3 @@ export * from './render'
 export * from './accessibility'
 export * from './focus'
 export * from './mocks'
-
-console.log('test')

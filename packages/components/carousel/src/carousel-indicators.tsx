@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { FC, cloneElement } from 'react'
+import { FC, ReactElement, cloneElement } from 'react'
 import { useCarouselContext, useCarouselIndicators } from './use-carousel'
 
 type CarouselIndicatorsOptions = { component?: FC<{ index: number; isSelected: boolean }> }
@@ -29,13 +29,13 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
           const isSelected = index === selectedIndex
 
           if (typeof component === 'function') {
-            const child = component({ index, isSelected })
+            const child = component({ index, isSelected }) as ReactElement | null
 
             if (!child) return null
 
             const props = getIndicatorProps({ ...child.props, index })
 
-            return cloneElement(child, props)
+            return cloneElement(child as ReactElement, props)
           } else {
             const { key, ...props } = getIndicatorProps({ index })
 

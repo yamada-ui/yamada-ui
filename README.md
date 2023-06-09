@@ -2,8 +2,6 @@
   <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
-
-
 <p align="center">
   <img alt="NPM Minzip" src="https://img.shields.io/bundlephobia/minzip/@yamada-ui/react"/>
   <a href="https://www.npmjs.com/package/@yamada-ui/react">

@@ -129,7 +129,15 @@ export const CheckboxGroup = forwardRef(
           role='group'
           direction={direction}
           gap={gap ?? (direction === 'row' ? '1rem' : undefined)}
-          {...omitObject(props, ['value', 'defaultValue', 'onChange'])}
+          {...omitObject(props, [
+            'value',
+            'defaultValue',
+            'onChange',
+            'isInvalid',
+            'isDisabled',
+            'isRequired',
+            'isReadOnly',
+          ])}
         >
           {children}
         </Flex>

@@ -167,7 +167,9 @@ export const RadioGroup = forwardRef(
           className={cx('ui-radio-group', className)}
           direction={direction}
           gap={gap ?? (direction === 'row' ? '1rem' : undefined)}
-          {...getContainerProps(omitObject(props, ['onChange']))}
+          {...getContainerProps(
+            omitObject(props, ['onChange', 'isInvalid', 'isDisabled', 'isRequired', 'isReadOnly']),
+          )}
         >
           {children}
         </Flex>

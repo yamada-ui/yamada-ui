@@ -1,5 +1,11 @@
 # @yamada-ui/radio
 
+## 0.1.6
+
+### Patch Changes
+
+- [`b1581a6`](https://github.com/hirotomoyamada/yamada-ui/commit/b1581a67e3ad0491b4519f62b0510d2e410ba648) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary props passed to DOM.
+
 ## 0.1.5
 
 ### Patch Changes

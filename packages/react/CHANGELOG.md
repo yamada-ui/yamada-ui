@@ -1,5 +1,14 @@
 # @yamada-ui/react
 
+## 0.2.7
+
+### Patch Changes
+
+- Updated dependencies [[`b1581a6`](https://github.com/hirotomoyamada/yamada-ui/commit/b1581a67e3ad0491b4519f62b0510d2e410ba648)]:
+  - @yamada-ui/checkbox@0.1.6
+  - @yamada-ui/radio@0.1.6
+  - @yamada-ui/switch@0.1.6
+
 ## 0.2.6
 
 ### Patch Changes

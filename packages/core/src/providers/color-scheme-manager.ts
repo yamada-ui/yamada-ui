@@ -13,7 +13,7 @@ export type ColorModeManager = {
 export const createLocalStorageManager = (storageKey: string): ColorModeManager => ({
   ssr: false,
   type: 'localStorage',
-  get(initColorMode = 'light') {
+  get: (initColorMode = 'light') => {
     if (!hasSupport) return initColorMode
 
     try {
@@ -25,7 +25,7 @@ export const createLocalStorageManager = (storageKey: string): ColorModeManager 
     }
   },
 
-  set(colorMode) {
+  set: (colorMode) => {
     try {
       localStorage.setItem(storageKey, colorMode)
     } catch (e) {}
@@ -43,7 +43,7 @@ const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
 export const createCookieStorageManager = (key: string, cookie?: string): ColorModeManager => ({
   ssr: !!cookie,
   type: 'cookie',
-  get(initColorMode: ColorMode = 'light') {
+  get: (initColorMode: ColorMode = 'light') => {
     if (cookie) return parseCookie(cookie, key)
 
     if (!hasSupport) return initColorMode
@@ -51,7 +51,7 @@ export const createCookieStorageManager = (key: string, cookie?: string): ColorM
     return parseCookie(document.cookie, key) || initColorMode
   },
 
-  set(colorMode: ColorMode | 'system') {
+  set: (colorMode: ColorMode | 'system') => {
     document.cookie = `${key}=${colorMode}; max-age=31536000; path=/`
   },
 })

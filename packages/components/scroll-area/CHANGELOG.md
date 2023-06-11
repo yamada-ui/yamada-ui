@@ -1,5 +1,12 @@
 # @yamada-ui/scroll-area
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`93741e6`](https://github.com/hirotomoyamada/yamada-ui/commit/93741e682f83d7cf954443f341543632f81696f4)]:
+  - @yamada-ui/core@0.2.0
+
 ## 0.1.6
 
 ### Patch Changes

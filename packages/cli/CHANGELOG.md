@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.2.0
+
+### Minor Changes
+
+- [`93741e6`](https://github.com/hirotomoyamada/yamada-ui/commit/93741e682f83d7cf954443f341543632f81696f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added gradient tokens.
+
 ## 0.1.3
 
 ### Patch Changes

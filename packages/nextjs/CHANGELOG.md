@@ -1,5 +1,13 @@
 # @yamada-ui/nextjs
 
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies [[`93741e6`](https://github.com/hirotomoyamada/yamada-ui/commit/93741e682f83d7cf954443f341543632f81696f4)]:
+  - @yamada-ui/core@0.2.0
+  - @yamada-ui/react@0.2.11
+
 ## 1.0.10
 
 ### Patch Changes

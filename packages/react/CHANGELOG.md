@@ -1,5 +1,69 @@
 # @yamada-ui/react
 
+## 0.2.11
+
+### Patch Changes
+
+- Updated dependencies [[`93741e6`](https://github.com/hirotomoyamada/yamada-ui/commit/93741e682f83d7cf954443f341543632f81696f4)]:
+  - @yamada-ui/theme@0.2.0
+  - @yamada-ui/core@0.2.0
+  - @yamada-ui/providers@0.2.2
+  - @yamada-ui/accordion@0.1.8
+  - @yamada-ui/alert@0.1.7
+  - @yamada-ui/autocomplete@0.1.7
+  - @yamada-ui/avatar@0.1.7
+  - @yamada-ui/badge@0.1.7
+  - @yamada-ui/breadcrumb@0.1.7
+  - @yamada-ui/button@0.1.7
+  - @yamada-ui/card@0.1.7
+  - @yamada-ui/checkbox@0.1.8
+  - @yamada-ui/close-button@0.1.7
+  - @yamada-ui/editable@0.1.7
+  - @yamada-ui/file-button@0.1.7
+  - @yamada-ui/file-input@0.1.7
+  - @yamada-ui/form-control@0.1.7
+  - @yamada-ui/highlight@0.1.7
+  - @yamada-ui/icon@0.1.7
+  - @yamada-ui/image@0.1.7
+  - @yamada-ui/indicator@0.1.7
+  - @yamada-ui/input@0.1.7
+  - @yamada-ui/kbd@0.1.7
+  - @yamada-ui/layouts@0.1.7
+  - @yamada-ui/link@0.1.7
+  - @yamada-ui/list@0.1.7
+  - @yamada-ui/loading@0.2.4
+  - @yamada-ui/menu@0.1.7
+  - @yamada-ui/modal@0.1.8
+  - @yamada-ui/motion@0.1.7
+  - @yamada-ui/native-select@0.1.7
+  - @yamada-ui/native-table@0.1.9
+  - @yamada-ui/notice@0.1.7
+  - @yamada-ui/number-input@0.1.7
+  - @yamada-ui/pagination@0.1.7
+  - @yamada-ui/pin-input@0.1.7
+  - @yamada-ui/popover@0.1.7
+  - @yamada-ui/progress@0.2.2
+  - @yamada-ui/radio@0.1.8
+  - @yamada-ui/reorder@0.1.7
+  - @yamada-ui/scroll-area@0.1.7
+  - @yamada-ui/segmented-control@0.1.7
+  - @yamada-ui/select@0.1.7
+  - @yamada-ui/skeleton@0.1.7
+  - @yamada-ui/slider@0.1.8
+  - @yamada-ui/stepper@0.1.7
+  - @yamada-ui/switch@0.1.8
+  - @yamada-ui/tabs@0.1.7
+  - @yamada-ui/tag@0.1.7
+  - @yamada-ui/textarea@0.1.7
+  - @yamada-ui/tooltip@0.1.7
+  - @yamada-ui/transitions@0.1.7
+  - @yamada-ui/typography@0.1.7
+  - @yamada-ui/use-animation@0.1.7
+  - @yamada-ui/use-breakpoint@0.1.7
+  - @yamada-ui/use-popper@0.1.7
+  - @yamada-ui/use-token@0.1.7
+  - @yamada-ui/use-value@0.1.7
+
 ## 0.2.10
 
 ### Patch Changes

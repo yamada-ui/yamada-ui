@@ -1,5 +1,11 @@
 # @yamada-ui/accordion
 
+## 0.1.6
+
+### Patch Changes
+
+- [`a2e0f90`](https://github.com/hirotomoyamada/yamada-ui/commit/a2e0f90d44bf83191c6bf252faa4976deeee7a91) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Did a refactoring.
+
 ## 0.1.5
 
 ### Patch Changes

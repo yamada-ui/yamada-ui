@@ -1,5 +1,15 @@
 # @yamada-ui/react
 
+## 0.2.8
+
+### Patch Changes
+
+- Updated dependencies [[`a2e0f90`](https://github.com/hirotomoyamada/yamada-ui/commit/a2e0f90d44bf83191c6bf252faa4976deeee7a91), [`0a64e78`](https://github.com/hirotomoyamada/yamada-ui/commit/0a64e7895dc1bbb2cba5230e9e7d16836f5a2f4c)]:
+  - @yamada-ui/accordion@0.1.6
+  - @yamada-ui/progress@0.2.0
+  - @yamada-ui/theme@0.1.7
+  - @yamada-ui/providers@0.1.8
+
 ## 0.2.7
 
 ### Patch Changes

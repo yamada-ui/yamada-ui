@@ -11,6 +11,7 @@ export const typography: Configs = {
   letterSpacing: configs.prop('letterSpacing', 'letterSpacings'),
   textAlign: true,
   fontStyle: true,
+  textIndent: true,
   wordBreak: true,
   overflowWrap: true,
   textOverflow: true,
@@ -47,6 +48,7 @@ export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
   fontFamily?: Token<CSS.Property.FontFamily, 'fonts', Y, M>
   textAlign?: Token<CSS.Property.TextAlign, unknown, Y, M>
   fontStyle?: Token<CSS.Property.FontStyle, unknown, Y, M>
+  textIndent?: Token<CSS.Property.TextIndent, unknown, Y, M>
   wordBreak?: Token<CSS.Property.WordBreak, unknown, Y, M>
   overflowWrap?: Token<CSS.Property.OverflowWrap, unknown, Y, M>
   textOverflow?: Token<CSS.Property.TextOverflow, unknown, Y, M>

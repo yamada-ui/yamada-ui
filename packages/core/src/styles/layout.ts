@@ -23,6 +23,7 @@ export const layout: Configs = {
   overscrollBehaviorX: true,
   overscrollBehaviorY: true,
   display: true,
+  aspectRatio: true,
   verticalAlign: true,
   boxSizing: true,
   boxDecorationBreak: true,
@@ -83,4 +84,5 @@ export type LayoutProps<Y = 'responsive', M = 'colorMode'> = {
   overscrollY?: Token<CSS.Property.OverscrollBehaviorY, unknown, Y, M>
   visibility?: Token<CSS.Property.Visibility, unknown, Y, M>
   isolation?: Token<CSS.Property.Isolation, unknown, Y, M>
+  aspectRatio?: Token<CSS.Property.AspectRatio, unknown, Y, M>
 }

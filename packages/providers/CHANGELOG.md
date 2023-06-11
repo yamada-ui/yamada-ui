@@ -1,5 +1,11 @@
 # @yamada-ui/providers
 
+## 0.2.0
+
+### Minor Changes
+
+- [`3009eda`](https://github.com/hirotomoyamada/yamada-ui/commit/3009eda3ea6b297eaa5db92b7827c71b55b55dcb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the loading animation to end correctly if it runs multiple times.
+
 ## 0.1.8
 
 ### Patch Changes

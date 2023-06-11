@@ -19,4 +19,5 @@ export const config: Config[] = [
   { key: 'sizes', maxScanDepth: 2 },
   { key: 'spaces', flatMap: (value) => [value, `-${value}`] },
   { key: 'zIndices' },
+  { key: 'gradients' },
 ]

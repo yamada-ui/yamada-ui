@@ -134,6 +134,7 @@ export type UsageTheme = {
   sizes?: ThemeTokens
   spaces?: ThemeTokens
   zIndices?: ThemeTokens
+  gradients?: ThemeTokens
   transitions?: { property?: ThemeTokens; duration?: ThemeTokens; easing?: ThemeTokens }
   components?: Components
   semantics?: Semantics

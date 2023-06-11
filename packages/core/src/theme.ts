@@ -10,19 +10,20 @@ export type VarToken = {
 export type VarTokens = Record<string, VarToken>
 
 const tokens = [
+  'borders',
   'colors',
   'fonts',
   'fontSizes',
   'fontWeights',
+  'gradients',
   'letterSpacings',
   'lineHeights',
   'radii',
   'shadows',
-  'borders',
   'sizes',
   'spaces',
-  'zIndices',
   'transitions',
+  'zIndices',
 ] as const
 
 export type ThemeToken =

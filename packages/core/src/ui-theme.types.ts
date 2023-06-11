@@ -7,6 +7,7 @@ export type UITheme = {
   breakpoints: string
   fonts: string
   fontSizes: string
+  gradients: string
   fontWeights: string
   letterSpacings: string
   lineHeights: string

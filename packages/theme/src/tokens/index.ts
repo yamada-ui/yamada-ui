@@ -4,6 +4,7 @@ import { colors } from './colors'
 import { fontSizes } from './fontSizes'
 import { fontWeights } from './fontWeights'
 import { fonts } from './fonts'
+import { gradients } from './gradients'
 import { letterSpacings } from './letterSpacings'
 import { lineHeights } from './lineHeights'
 import { radii } from './radii'
@@ -14,6 +15,7 @@ import { transitions } from './transitions'
 import { zIndices } from './z-indices'
 
 export default {
+  gradients,
   borders,
   breakpoints,
   colors,

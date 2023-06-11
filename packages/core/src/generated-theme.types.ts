@@ -183,6 +183,7 @@ export interface GeneratedTheme extends UITheme {
     | 'extrabold'
     | 'black'
     | (string & {})
+  gradients: string & {}
   layerStyles: string & {}
   letterSpacings: 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest' | (string & {})
   lineHeights:

@@ -64,7 +64,6 @@ export const transforms = {
 
     return isUnitless || isNumber(value) ? `${value}px` : value
   },
-
   fraction: (value: any) => {
     if (isNumber(value) && value <= 1) {
       return `${value * 100}%`
@@ -72,7 +71,6 @@ export const transforms = {
       return value
     }
   },
-
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {
@@ -82,7 +80,6 @@ export const transforms = {
       }
     }
   },
-
   bgClip: (value: any) => {
     if (value === 'text') {
       return { color: 'transparent', backgroundClip: 'text' }
@@ -90,7 +87,6 @@ export const transforms = {
       return { backgroundClip: value }
     }
   },
-
   bgImage: (value: any) => {
     if (value == null) return value
 
@@ -101,24 +97,17 @@ export const transforms = {
     }
   },
 
-  bgGradient: createGradient,
+  gradient: createGradient,
 }
 
 export const configs = {
   color: createConfig('colors'),
-
   space: createConfig('spaces', transforms.px),
-
   radii: createConfig('radii', transforms.px),
-
   shadow: createConfig('shadows'),
-
   border: createConfig('borders'),
-
   size: createConfig('sizes', transforms.px),
-
   sizeTransform: createConfig('sizes', transforms.fraction),
-
   prop: (
     property: ConfigProps['property'],
     token?: ThemeToken,
@@ -134,9 +123,9 @@ export const configs = {
           property,
           token,
         },
-
   propTransform: (property: ConfigProps['property'], transform?: ConfigProps['transform']) => ({
     property,
     transform,
   }),
+  gradient: createConfig('gradients', transforms.gradient),
 }

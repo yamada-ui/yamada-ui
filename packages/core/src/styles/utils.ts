@@ -53,8 +53,11 @@ export const tokenToCSSVar = (token: ThemeToken, value: any) => (theme: StyledTh
 export const createGradient: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
 
-  const regex = /(?<_type>^[a-z-A-Z]+)\((?<_values>(.*))\)/g
-  const { _type, _values } = regex.exec(value)?.groups ?? {}
+  const prevent = isCSSFunction(value)
+  if (!prevent) return `url('${value}')`
+
+  const regex = /(^[a-z-A-Z]+)\((.*)\)/g
+  const [, _type, _values] = regex.exec(value) ?? []
 
   if (!_type || !_values) return value
 

@@ -1,5 +1,11 @@
 # @yamada-ui/progress
 
+## 0.2.0
+
+### Minor Changes
+
+- [`0a64e78`](https://github.com/hirotomoyamada/yamada-ui/commit/0a64e7895dc1bbb2cba5230e9e7d16836f5a2f4c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added props `filledTrackColor`.
+
 ## 0.1.5
 
 ### Patch Changes

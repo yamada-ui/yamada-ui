@@ -1,5 +1,16 @@
 # @yamada-ui/theme
 
+## 0.2.0
+
+### Minor Changes
+
+- [`93741e6`](https://github.com/hirotomoyamada/yamada-ui/commit/93741e682f83d7cf954443f341543632f81696f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added gradient tokens.
+
+### Patch Changes
+
+- Updated dependencies [[`93741e6`](https://github.com/hirotomoyamada/yamada-ui/commit/93741e682f83d7cf954443f341543632f81696f4)]:
+  - @yamada-ui/core@0.2.0
+
 ## 0.1.8
 
 ### Patch Changes

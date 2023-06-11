@@ -7,6 +7,7 @@ import {
   omitThemeProps,
   CSSUIObject,
   Interpolation,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import { useAnimation } from '@yamada-ui/use-animation'
 import { createContext, cx, valueToPercent } from '@yamada-ui/utils'
@@ -25,6 +26,7 @@ type ProgressOptions = {
   isStripeAnimation?: boolean
   isAnimation?: boolean
   speed?: string | number
+  filledTrackColor?: CSSUIProps<'unResponsive'>['color']
 }
 
 export type ProgressProps = HTMLUIProps<'div'> & ThemeProps<'Progress'> & ProgressOptions
@@ -43,6 +45,7 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     speed,
     borderRadius: _borderRadius,
     rounded,
+    filledTrackColor,
     ...rest
   } = omitThemeProps(mergedProps)
 

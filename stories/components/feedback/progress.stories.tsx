@@ -22,6 +22,14 @@ export const withColorMode: ComponentStory<typeof Progress> = () => {
   )
 }
 
+export const withFilledTrackColor: ComponentStory<typeof Progress> = () => {
+  return (
+    <>
+      <Progress filledTrackColor='green.500' value={18} />
+    </>
+  )
+}
+
 export const withStripe: ComponentStory<typeof Progress> = () => {
   return (
     <>

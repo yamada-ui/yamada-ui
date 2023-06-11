@@ -1,5 +1,15 @@
 # @yamada-ui/accordion
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`e8c4cae`](https://github.com/hirotomoyamada/yamada-ui/commit/e8c4cae22de22c1574773fda1d0919ea73decbef), [`9c16c53`](https://github.com/hirotomoyamada/yamada-ui/commit/9c16c53d50a1df576eb3e86a2b2ffc75edb52b6f)]:
+  - @yamada-ui/core@0.1.6
+  - @yamada-ui/icon@0.1.6
+  - @yamada-ui/motion@0.1.6
+  - @yamada-ui/transitions@0.1.6
+
 ## 0.1.6
 
 ### Patch Changes

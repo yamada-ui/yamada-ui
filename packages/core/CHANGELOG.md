@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 0.1.6
+
+### Patch Changes
+
+- [`e8c4cae`](https://github.com/hirotomoyamada/yamada-ui/commit/e8c4cae22de22c1574773fda1d0919ea73decbef) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the code.
+
+- [`9c16c53`](https://github.com/hirotomoyamada/yamada-ui/commit/9c16c53d50a1df576eb3e86a2b2ffc75edb52b6f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aspectRatio, textIndent property.
+
 ## 0.1.5
 
 ### Patch Changes

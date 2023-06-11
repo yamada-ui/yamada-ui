@@ -19,14 +19,14 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@types/node": "20.2.1",
-    "@types/react": "18.2.6",
+    "@types/node": "20.3.0",
+    "@types/react": "18.2.11",
     "@types/react-dom": "18.2.4",
     "eslint": "8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-react-app": "^7.0.1",
     "prettier": "^2.8.8",
-    "typescript": "4.9.4"
+    "typescript": "5.1.3"
   },
   "scripts": {
     "start": "craco start",

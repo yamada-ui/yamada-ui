@@ -2,7 +2,7 @@ import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'nex
 import { ColorModeScript } from '@yamada-ui/react'
 import { customConfig } from 'theme'
 
-export default class Document extends NextDocument {
+class Document extends NextDocument {
   static getInitialProps(props: DocumentContext) {
     return NextDocument.getInitialProps(props)
   }
@@ -24,3 +24,5 @@ export default class Document extends NextDocument {
     )
   }
 }
+
+export default Document

@@ -1,11 +1,16 @@
 import type { AppProps } from 'next/app'
-import { AppProvider } from 'contexts'
+import { extendConfig, extendTheme, localStorageManager, UIProvider } from '@yamada-ui/react'
+import { customTheme, customConfig } from 'theme'
 
-export default ({ Component, pageProps }: AppProps) => {
+const theme = extendTheme(customTheme)()
+const config = extendConfig(customConfig)
+
+const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <AppProvider>
-      {/* @ts-ignore */}
+    <UIProvider config={config} theme={theme} colorModeManager={localStorageManager}>
       <Component {...pageProps} />
-    </AppProvider>
+    </UIProvider>
   )
 }
+
+export default App

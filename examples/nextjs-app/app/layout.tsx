@@ -1,11 +1,20 @@
 'use client'
 
-import { ColorModeScript } from '@yamada-ui/react'
+import {
+  cookieStorageManager,
+  extendConfig,
+  extendTheme,
+  UIProvider,
+  ColorModeScript,
+} from '@yamada-ui/react'
 import { CacheProvider } from '@yamada-ui/nextjs'
-import { AppProvider } from 'contexts'
 import { ReactNode } from 'react'
+import { customTheme, customConfig } from 'theme'
 
-export default ({ children }: { children: ReactNode }) => {
+const theme = extendTheme(customTheme)()
+const config = extendConfig(customConfig)
+
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang='ja' data-theme='light'>
       <head>
@@ -18,9 +27,13 @@ export default ({ children }: { children: ReactNode }) => {
         <ColorModeScript type='cookie' nonce='testing' />
 
         <CacheProvider>
-          <AppProvider>{children}</AppProvider>
+          <UIProvider config={config} theme={theme} colorModeManager={cookieStorageManager}>
+            {children}
+          </UIProvider>
         </CacheProvider>
       </body>
     </html>
   )
 }
+
+export default RootLayout

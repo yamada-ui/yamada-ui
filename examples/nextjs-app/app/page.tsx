@@ -1,11 +1,14 @@
 'use client'
 
 import { Header } from 'components'
+import { FC } from 'react'
 
-export default () => {
+const Page: FC = () => {
   return (
     <>
       <Header />
     </>
   )
 }
+
+export default Page

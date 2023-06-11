@@ -301,7 +301,10 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
 
       <Accordion
         icon={({ isExpanded }) => (
-          <Icon icon={!isExpanded ? faPlus : faMinus} color='blackAlpha.800' />
+          <Icon
+            icon={!isExpanded ? faPlus : faMinus}
+            color={['blackAlpha.800', 'whiteAlpha.700']}
+          />
         )}
       >
         <AccordionItem label='孫悟空少年編'>
@@ -337,7 +340,10 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
         <AccordionItem>
           <AccordionLabel
             icon={({ isExpanded }) => (
-              <Icon icon={!isExpanded ? faPlus : faMinus} color='blackAlpha.800' />
+              <Icon
+                icon={!isExpanded ? faPlus : faMinus}
+                color={['blackAlpha.800', 'whiteAlpha.700']}
+              />
             )}
           >
             ピッコロ大魔王編

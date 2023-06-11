@@ -30,8 +30,8 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
 
     return (
       <Collapse
-        isOpen={isOpen}
         {...{
+          isOpen,
           unmountOnExit,
           animationOpacity,
           startingHeight,

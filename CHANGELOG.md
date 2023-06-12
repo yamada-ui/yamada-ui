@@ -2,9 +2,11 @@
 
 ## Latest Release
 
-### June 12, 2023: [v0.3.2](/.changelog/v0.3.2.mdx)
+### June 12, 2023: [v0.4.0](/.changelog/v0.4.0.mdx)
 
 ## Previous Releases
+
+### June 12, 2023: [v0.3.2](/.changelog/v0.3.2.mdx)
 
 ### June 12, 2023: [v0.3.1](/.changelog/v0.3.1.mdx)
 

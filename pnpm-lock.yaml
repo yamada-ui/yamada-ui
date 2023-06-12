@@ -2187,6 +2187,22 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/hooks/use-media-query:
+    dependencies:
+      '@yamada-ui/providers':
+        specifier: workspace:*
+        version: link:../../providers
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-os:
     dependencies:
       '@yamada-ui/utils':
@@ -2649,6 +2665,9 @@ importers:
       '@yamada-ui/use-local-storage':
         specifier: workspace:*
         version: link:../hooks/use-local-storage
+      '@yamada-ui/use-media-query':
+        specifier: workspace:*
+        version: link:../hooks/use-media-query
       '@yamada-ui/use-os':
         specifier: workspace:*
         version: link:../hooks/use-os

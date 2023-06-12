@@ -7,12 +7,12 @@ export function useTimeout(callback: (...args: any[]) => void, delay: number | n
   useEffect(() => {
     if (delay == null) return undefined
 
-    let id: number | null = null
+    let timeoutId: number | null = null
 
-    id = window.setTimeout(func, delay)
+    timeoutId = window.setTimeout(func, delay)
 
     return () => {
-      if (id) window.clearTimeout(id)
+      if (timeoutId) window.clearTimeout(timeoutId)
     }
   }, [delay, func])
 }

@@ -1,5 +1,12 @@
 [
   {
+    "id": 106,
+    "url": "https://github.com/hirotomoyamada/yamada-ui/pull/106",
+    "body": "---\ntitle: Version 0.3.1\ndescription: Explore the changelog for Yamada UI version 0.3.1. Learn about the latest features, bug fixes, and improvements.\nreleaseUrl: https://github.com/hirotomoyamada/yamada-ui/pull/106\nreleaseDate: June 12, 2023\nversion: 0.3.1\n---\n\n## @yamada-ui/use-local-storage@0.1.1\n\n### Patch Changes\n\n-   [`b346d30`](https://github.com/hirotomoyamada/yamada-ui/commit/b346d305d809e72ff47dca7f8b4898b2597cac10) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that React state was not reset.\n\n## @yamada-ui/nextjs@2.0.1\n\n### Patch Changes\n\n- Updated dependencies\n\n## @yamada-ui/react@0.3.1\n\n### Patch Changes\n\n-   Updated dependencies \\[[`b346d30`](https://github.com/hirotomoyamada/yamada-ui/commit/b346d305d809e72ff47dca7f8b4898b2597cac10)]:\n    -   @yamada-ui/use-local-storage@0.1.1\n",
+    "date": "June 12, 2023",
+    "version": "0.3.1"
+  },
+  {
     "id": 103,
     "url": "https://github.com/hirotomoyamada/yamada-ui/pull/103",
     "body": "---\ntitle: Version 0.3.0\ndescription: Explore the changelog for Yamada UI version 0.3.0. Learn about the latest features, bug fixes, and improvements.\nreleaseUrl: https://github.com/hirotomoyamada/yamada-ui/pull/103\nreleaseDate: June 12, 2023\nversion: 0.3.0\n---\n\n## @yamada-ui/react@0.3.0\n\n### Minor Changes\n\n-   [`557676e`](https://github.com/hirotomoyamada/yamada-ui/commit/557676e5ac3354571de1adeb5a58c75ba0ac1b5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new hook useHover, useIdle, useWindowEvent, useLocalStorage.\n\n## @yamada-ui/nextjs@2.0.0\n\n### Patch Changes\n\n-   Updated dependencies \\[[`557676e`](https://github.com/hirotomoyamada/yamada-ui/commit/557676e5ac3354571de1adeb5a58c75ba0ac1b5c)]:\n    -   @yamada-ui/react@0.3.0\n",

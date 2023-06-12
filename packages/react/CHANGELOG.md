@@ -1,5 +1,17 @@
 # @yamada-ui/react
 
+## 0.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`9dfaed47`](https://github.com/hirotomoyamada/yamada-ui/commit/9dfaed476bf642a62de0d30f5a3f24999858099f), [`1a89b579`](https://github.com/hirotomoyamada/yamada-ui/commit/1a89b579a03d225eceb3ec80d66bcd4135a298b1), [`2be51f0a`](https://github.com/hirotomoyamada/yamada-ui/commit/2be51f0a02196aeda977a7cf3ccc475cee391752), [`9f945f06`](https://github.com/hirotomoyamada/yamada-ui/commit/9f945f06ea1bf7c389053e84fb4d0d45bc3ce6e0), [`9f945f06`](https://github.com/hirotomoyamada/yamada-ui/commit/9f945f06ea1bf7c389053e84fb4d0d45bc3ce6e0)]:
+  - @yamada-ui/use-os@0.1.1
+  - @yamada-ui/use-local-storage@0.1.2
+  - @yamada-ui/providers@0.3.0
+  - @yamada-ui/use-interval@0.1.2
+  - @yamada-ui/use-timeout@0.1.2
+  - @yamada-ui/number-input@0.1.8
+
 ## 0.3.1
 
 ### Patch Changes

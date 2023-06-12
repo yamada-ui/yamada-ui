@@ -2645,6 +2645,9 @@ importers:
       '@yamada-ui/use-clickable':
         specifier: workspace:*
         version: link:../hooks/use-clickable
+      '@yamada-ui/use-clipboard':
+        specifier: workspace:*
+        version: link:../hooks/use-clipboard
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../hooks/use-controllable-state
@@ -2681,6 +2684,9 @@ importers:
       '@yamada-ui/use-local-storage':
         specifier: workspace:*
         version: link:../hooks/use-local-storage
+      '@yamada-ui/use-media-query':
+        specifier: workspace:*
+        version: link:../hooks/use-media-query
       '@yamada-ui/use-os':
         specifier: workspace:*
         version: link:../hooks/use-os

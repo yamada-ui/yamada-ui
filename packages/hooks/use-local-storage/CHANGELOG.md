@@ -1,5 +1,11 @@
 # @yamada-ui/use-local-storage
 
+## 0.1.2
+
+### Patch Changes
+
+- [`1a89b579`](https://github.com/hirotomoyamada/yamada-ui/commit/1a89b579a03d225eceb3ec80d66bcd4135a298b1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the code.
+
 ## 0.1.1
 
 ### Patch Changes

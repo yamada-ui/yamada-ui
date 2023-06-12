@@ -1,5 +1,16 @@
 # @yamada-ui/providers
 
+## 0.3.0
+
+### Minor Changes
+
+- [`2be51f0a`](https://github.com/hirotomoyamada/yamada-ui/commit/2be51f0a02196aeda977a7cf3ccc475cee391752) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added EnvironmentProvider.
+
+### Patch Changes
+
+- Updated dependencies [[`9f945f06`](https://github.com/hirotomoyamada/yamada-ui/commit/9f945f06ea1bf7c389053e84fb4d0d45bc3ce6e0)]:
+  - @yamada-ui/use-timeout@0.1.2
+
 ## 0.2.2
 
 ### Patch Changes

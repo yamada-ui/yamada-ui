@@ -1,5 +1,12 @@
 # @yamada-ui/number-input
 
+## 0.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`9f945f06`](https://github.com/hirotomoyamada/yamada-ui/commit/9f945f06ea1bf7c389053e84fb4d0d45bc3ce6e0)]:
+  - @yamada-ui/use-interval@0.1.2
+
 ## 0.1.7
 
 ### Patch Changes

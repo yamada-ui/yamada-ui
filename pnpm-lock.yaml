@@ -2171,6 +2171,19 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/hooks/use-local-storage:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-os:
     dependencies:
       '@yamada-ui/utils':
@@ -2314,6 +2327,19 @@ importers:
       '@yamada-ui/use-breakpoint':
         specifier: workspace:*
         version: link:../use-breakpoint
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
+  packages/hooks/use-window-event:
+    dependencies:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -2617,6 +2643,9 @@ importers:
       '@yamada-ui/use-latest-ref':
         specifier: workspace:*
         version: link:../hooks/use-latest-ref
+      '@yamada-ui/use-local-storage':
+        specifier: workspace:*
+        version: link:../hooks/use-local-storage
       '@yamada-ui/use-os':
         specifier: workspace:*
         version: link:../hooks/use-os
@@ -2647,6 +2676,9 @@ importers:
       '@yamada-ui/use-value':
         specifier: workspace:*
         version: link:../hooks/use-value
+      '@yamada-ui/use-window-event':
+        specifier: workspace:*
+        version: link:../hooks/use-window-event
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils

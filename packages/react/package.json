@@ -114,6 +114,7 @@
     "@yamada-ui/use-idle": "workspace:*",
     "@yamada-ui/use-interval": "workspace:*",
     "@yamada-ui/use-latest-ref": "workspace:*",
+    "@yamada-ui/use-local-storage": "workspace:*",
     "@yamada-ui/use-os": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/use-pan-event": "workspace:*",
@@ -124,6 +125,7 @@
     "@yamada-ui/use-timeout": "workspace:*",
     "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
+    "@yamada-ui/use-window-event": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

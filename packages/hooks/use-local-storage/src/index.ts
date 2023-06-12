@@ -89,8 +89,6 @@ export const createStorage = <T>(type: StorageType, name: string) => {
     }, [defaultValue, key])
 
     useWindowEvent('storage', (event) => {
-      console.log(event)
-
       if (event.storageArea === window[type] && event.key === key)
         setValue(deserialize(event.newValue ?? undefined))
     })

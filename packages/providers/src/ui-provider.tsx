@@ -14,13 +14,15 @@ import {
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
 import { FC, ReactNode, useCallback, useMemo, useState } from 'react'
-import { LoadingProvider, NoticeProvider } from '.'
+import { EnvironmentProvider, EnvironmentProviderProps, LoadingProvider, NoticeProvider } from '.'
 
 export type UIProviderProps = {
   theme?: Dict | Dict[]
   config?: ThemeConfig
   reset?: boolean
   colorModeManager?: any
+  environment?: EnvironmentProviderProps['environment']
+  disableEnvironment?: boolean
   children: ReactNode
 }
 
@@ -29,6 +31,8 @@ export const UIProvider: FC<UIProviderProps> = ({
   config = defaultConfig,
   reset = true,
   colorModeManager,
+  environment,
+  disableEnvironment,
   children,
 }) => {
   const [themeScheme, setThemeScheme] = useState<ThemeScheme | undefined>(
@@ -61,14 +65,16 @@ export const UIProvider: FC<UIProviderProps> = ({
       config={config}
     >
       <ColorModeProvider colorModeManager={colorModeManager} config={config}>
-        <LoadingProvider {...config.loading}>
-          {reset ? <ResetStyle /> : null}
-          <GlobalStyle />
+        <EnvironmentProvider environment={environment} disabled={disableEnvironment}>
+          <LoadingProvider {...config.loading}>
+            {reset ? <ResetStyle /> : null}
+            <GlobalStyle />
 
-          {children}
+            {children}
 
-          <NoticeProvider {...config.notice} />
-        </LoadingProvider>
+            <NoticeProvider {...config.notice} />
+          </LoadingProvider>
+        </EnvironmentProvider>
       </ColorModeProvider>
     </ThemeProvider>
   )

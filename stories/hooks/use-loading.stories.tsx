@@ -1,7 +1,7 @@
 import { useLoading, Button, Center, Wrap, Text } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Hooks / useLoading',
+  title: 'Hooks / useLoading',
 }
 
 const wait = (ms: number) =>

@@ -14,7 +14,7 @@ export const parameters: Parameters = {
     dark: { ...themes.dark, ...UITheme.dark },
   },
   options: {
-    storySort: { order: ['Documents', ['Welcome', '*'], 'Components', 'System'] },
+    storySort: { order: ['Documents', ['Welcome', '*'], 'Components', 'Hooks', 'System'] },
   },
   backgrounds: { disable: true },
   controls: { expanded: true },

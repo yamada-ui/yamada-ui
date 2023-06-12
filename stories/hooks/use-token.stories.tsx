@@ -1,7 +1,7 @@
 import { Box, useToken } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Hooks / useToken',
+  title: 'Hooks / useToken',
 }
 
 export const basic = () => {

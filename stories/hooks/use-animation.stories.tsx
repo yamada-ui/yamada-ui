@@ -1,7 +1,7 @@
 import { AnimationStyle, Box, Button, useAnimation, useDynamicAnimation } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Hooks / useAnimation',
+  title: 'Hooks / useAnimation',
 }
 
 export const basic = () => {

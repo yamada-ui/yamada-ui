@@ -1,7 +1,7 @@
 import { Box, useBreakpoint, useBreakpointValue } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Hooks / useBreakpoint',
+  title: 'Hooks / useBreakpoint',
 }
 
 export const basic = () => {

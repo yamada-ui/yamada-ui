@@ -2123,6 +2123,19 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/hooks/use-hover:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-interval:
     dependencies:
       '@yamada-ui/utils':
@@ -2566,6 +2579,9 @@ importers:
       '@yamada-ui/use-focus-visible':
         specifier: workspace:*
         version: link:../hooks/use-focus-visible
+      '@yamada-ui/use-hover':
+        specifier: workspace:*
+        version: link:../hooks/use-hover
       '@yamada-ui/use-interval':
         specifier: workspace:*
         version: link:../hooks/use-interval

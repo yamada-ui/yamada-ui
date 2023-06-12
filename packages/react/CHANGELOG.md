@@ -1,5 +1,11 @@
 # @yamada-ui/react
 
+## 0.3.0
+
+### Minor Changes
+
+- [`557676e`](https://github.com/hirotomoyamada/yamada-ui/commit/557676e5ac3354571de1adeb5a58c75ba0ac1b5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new hook useHover, useIdle, useWindowEvent, useLocalStorage.
+
 ## 0.2.11
 
 ### Patch Changes

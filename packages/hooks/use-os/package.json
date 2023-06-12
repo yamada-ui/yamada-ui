@@ -1,0 +1,54 @@
+{
+  "name": "@yamada-ui/use-os",
+  "version": "0.1.0",
+  "description": "Yamada UI useOS custom hook",
+  "keywords": [
+    "use-os"
+  ],
+  "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "directory": "packages/hooks/use-os"
+  },
+  "bugs": {
+    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+  },
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@yamada-ui/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "react": "^18.0.0",
+    "clean-package": "2.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": [
+      "cjs",
+      "esm"
+    ]
+  }
+}

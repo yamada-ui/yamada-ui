@@ -114,6 +114,7 @@
     "@yamada-ui/use-idle": "workspace:*",
     "@yamada-ui/use-interval": "workspace:*",
     "@yamada-ui/use-latest-ref": "workspace:*",
+    "@yamada-ui/use-os": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/use-pan-event": "workspace:*",
     "@yamada-ui/use-popper": "workspace:*",

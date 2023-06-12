@@ -111,6 +111,7 @@
     "@yamada-ui/use-focus": "workspace:*",
     "@yamada-ui/use-focus-visible": "workspace:*",
     "@yamada-ui/use-hover": "workspace:*",
+    "@yamada-ui/use-idle": "workspace:*",
     "@yamada-ui/use-interval": "workspace:*",
     "@yamada-ui/use-latest-ref": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",

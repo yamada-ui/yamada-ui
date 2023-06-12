@@ -30,7 +30,7 @@ const deserializeJSON = (value: string | undefined) => {
   }
 }
 
-export function createStorage<T>(type: StorageType, name: string) {
+export const createStorage = <T>(type: StorageType, name: string) => {
   const eventName = type === 'localStorage' ? 'ui-local-storage' : 'ui-session-storage'
 
   return ({
@@ -83,9 +83,14 @@ export function createStorage<T>(type: StorageType, name: string) {
       [key, serialize],
     )
 
-    const removeStorageValue = useCallback(() => window[type].removeItem(key), [key])
+    const removeStorageValue = useCallback(() => {
+      window[type].removeItem(key)
+      setValue(defaultValue as T)
+    }, [defaultValue, key])
 
     useWindowEvent('storage', (event) => {
+      console.log(event)
+
       if (event.storageArea === window[type] && event.key === key)
         setValue(deserialize(event.newValue ?? undefined))
     })

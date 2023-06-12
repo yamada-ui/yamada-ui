@@ -2173,6 +2173,9 @@ importers:
 
   packages/hooks/use-local-storage:
     dependencies:
+      '@yamada-ui/use-window-event':
+        specifier: workspace:*
+        version: link:../use-window-event
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

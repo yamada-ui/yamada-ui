@@ -1,5 +1,11 @@
 # @yamada-ui/react
 
+## 0.4.0
+
+### Minor Changes
+
+- [`72b5cb4a`](https://github.com/hirotomoyamada/yamada-ui/commit/72b5cb4a514743144336f79df29ce48939b22f2d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new hook useClipboard, useMediaQuery.
+
 ## 0.3.2
 
 ### Patch Changes

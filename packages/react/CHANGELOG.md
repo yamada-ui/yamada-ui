@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`b346d30`](https://github.com/hirotomoyamada/yamada-ui/commit/b346d305d809e72ff47dca7f8b4898b2597cac10)]:
+  - @yamada-ui/use-local-storage@0.1.1
+
 ## 0.3.0
 
 ### Minor Changes

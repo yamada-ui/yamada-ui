@@ -10,8 +10,20 @@ export const color: Configs = {
 }
 
 export type ColorProps<Y = 'responsive', M = 'colorMode'> = {
+  /**
+   * The CSS `color` property
+   */
   color?: Token<CSS.Property.Color, 'colors', Y, M>
+  /**
+   * The CSS `color` property
+   */
   textColor?: Token<CSS.Property.Color, 'colors', Y, M>
+  /**
+   * The CSS `fill` property
+   */
   fill?: Token<CSS.Property.Color, 'colors', Y, M>
+  /**
+   * The CSS `stroke` property
+   */
   stroke?: Token<CSS.Property.Color, 'colors', Y, M>
 }

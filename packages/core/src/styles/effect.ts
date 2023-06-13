@@ -16,11 +16,32 @@ Object.assign(effect, {
 })
 
 export type EffectProps<Y = 'responsive', M = 'colorMode'> = {
+  /**
+   * The `box-shadow` property
+   */
   boxShadow?: Token<CSS.Property.BoxShadow | number, 'shadows', Y, M>
+  /**
+   * The `box-shadow` property
+   */
   shadow?: Token<CSS.Property.BoxShadow | number, 'shadows', Y, M>
+  /**
+   * The `mix-blend-mode` property
+   */
   mixBlendMode?: Token<CSS.Property.MixBlendMode, unknown, Y, M>
+  /**
+   * The `blend-mode` property
+   */
   blendMode?: Token<CSS.Property.MixBlendMode, unknown, Y, M>
+  /**
+   * The CSS `background-blend-mode` property
+   */
   backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode, unknown, Y, M>
+  /**
+   * The CSS `background-blend-mode` property
+   */
   bgBlendMode?: Token<CSS.Property.BackgroundBlendMode, unknown, Y, M>
+  /**
+   * The CSS `opacity` property
+   */
   opacity?: Token<CSS.Property.Opacity, unknown, Y, M>
 }

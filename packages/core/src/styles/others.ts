@@ -28,6 +28,12 @@ export const others: Configs = {
 }
 
 export type OthersProps<Y = 'responsive', M = 'colorMode'> = {
+  /**
+   * Apply text styles defined in `theme.layerStyles`
+   */
   layerStyle?: Token<StringLiteral, 'layerStyles', Y, M>
+  /**
+   * Apply text styles defined in `theme.textStyles`
+   */
   textStyle?: Token<StringLiteral, 'textStyles', Y, M>
 }

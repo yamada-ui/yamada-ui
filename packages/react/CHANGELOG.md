@@ -1,5 +1,70 @@
 # @yamada-ui/react
 
+## 0.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`0ec606a9`](https://github.com/hirotomoyamada/yamada-ui/commit/0ec606a9960924b50b4f9f3e683b4e8d168d25f7)]:
+  - @yamada-ui/core@0.2.1
+  - @yamada-ui/accordion@0.1.9
+  - @yamada-ui/alert@0.1.8
+  - @yamada-ui/autocomplete@0.1.8
+  - @yamada-ui/avatar@0.1.8
+  - @yamada-ui/badge@0.1.8
+  - @yamada-ui/breadcrumb@0.1.8
+  - @yamada-ui/button@0.1.8
+  - @yamada-ui/card@0.1.8
+  - @yamada-ui/checkbox@0.1.9
+  - @yamada-ui/close-button@0.1.8
+  - @yamada-ui/editable@0.1.8
+  - @yamada-ui/file-button@0.1.8
+  - @yamada-ui/file-input@0.1.8
+  - @yamada-ui/form-control@0.1.8
+  - @yamada-ui/highlight@0.1.8
+  - @yamada-ui/icon@0.1.8
+  - @yamada-ui/image@0.1.8
+  - @yamada-ui/indicator@0.1.8
+  - @yamada-ui/input@0.1.8
+  - @yamada-ui/kbd@0.1.8
+  - @yamada-ui/layouts@0.1.8
+  - @yamada-ui/link@0.1.8
+  - @yamada-ui/list@0.1.8
+  - @yamada-ui/loading@0.2.5
+  - @yamada-ui/menu@0.1.8
+  - @yamada-ui/modal@0.1.9
+  - @yamada-ui/motion@0.1.8
+  - @yamada-ui/native-select@0.1.8
+  - @yamada-ui/native-table@0.1.10
+  - @yamada-ui/notice@0.1.8
+  - @yamada-ui/number-input@0.1.9
+  - @yamada-ui/pagination@0.1.8
+  - @yamada-ui/pin-input@0.1.8
+  - @yamada-ui/popover@0.1.8
+  - @yamada-ui/progress@0.2.3
+  - @yamada-ui/radio@0.1.9
+  - @yamada-ui/reorder@0.1.8
+  - @yamada-ui/scroll-area@0.1.8
+  - @yamada-ui/segmented-control@0.1.8
+  - @yamada-ui/select@0.1.8
+  - @yamada-ui/skeleton@0.1.8
+  - @yamada-ui/slider@0.1.9
+  - @yamada-ui/stepper@0.1.8
+  - @yamada-ui/switch@0.1.9
+  - @yamada-ui/tabs@0.1.8
+  - @yamada-ui/tag@0.1.8
+  - @yamada-ui/textarea@0.1.8
+  - @yamada-ui/tooltip@0.1.8
+  - @yamada-ui/transitions@0.1.8
+  - @yamada-ui/typography@0.1.8
+  - @yamada-ui/use-animation@0.1.8
+  - @yamada-ui/use-breakpoint@0.1.8
+  - @yamada-ui/use-popper@0.1.8
+  - @yamada-ui/use-token@0.1.8
+  - @yamada-ui/use-value@0.1.8
+  - @yamada-ui/providers@0.3.1
+  - @yamada-ui/theme@0.2.1
+  - @yamada-ui/use-media-query@0.1.2
+
 ## 0.4.0
 
 ### Minor Changes

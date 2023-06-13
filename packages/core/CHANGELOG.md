@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.2.1
+
+### Patch Changes
+
+- [`0ec606a9`](https://github.com/hirotomoyamada/yamada-ui/commit/0ec606a9960924b50b4f9f3e683b4e8d168d25f7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to CSS property.
+
 ## 0.2.0
 
 ### Minor Changes

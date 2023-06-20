@@ -21,7 +21,7 @@ export const useIdle = (timeout: number, options?: IdleOptions) => {
   const timeoutId = useRef<any>(null)
 
   useEffect(() => {
-    const handleEvents = () => {
+    const handleEvent = () => {
       setIdle(false)
 
       if (timeoutId.current) window.clearTimeout(timeoutId.current)
@@ -31,10 +31,10 @@ export const useIdle = (timeout: number, options?: IdleOptions) => {
       }, timeout)
     }
 
-    events.forEach((event) => document.addEventListener(event, handleEvents))
+    events.forEach((event) => document.addEventListener(event, handleEvent))
 
     return () => {
-      events.forEach((event) => document.removeEventListener(event, handleEvents))
+      events.forEach((event) => document.removeEventListener(event, handleEvent))
     }
   }, [events, timeout])
 

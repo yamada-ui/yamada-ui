@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.2.2
+
+### Patch Changes
+
+- [`bc90e430`](https://github.com/hirotomoyamada/yamada-ui/commit/bc90e4300e10eba6635e5decfdf0e624422a916c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that `_readOnly` and `_invalid` were not controlled correctly
+
 ## 0.2.1
 
 ### Patch Changes

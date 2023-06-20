@@ -1,5 +1,19 @@
 # @yamada-ui/calendar
 
+## 0.2.7
+
+### Patch Changes
+
+- [`bbc5d8a9`](https://github.com/hirotomoyamada/yamada-ui/commit/bbc5d8a9c385c052988d54fbd6456b787189d73d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that `Popover` is displayed when `clearIcon` is clicked.
+
+- Updated dependencies [[`43ceebe2`](https://github.com/hirotomoyamada/yamada-ui/commit/43ceebe2780b82a621ad9b312ce1f01742fbf4c1), [`bc90e430`](https://github.com/hirotomoyamada/yamada-ui/commit/bc90e4300e10eba6635e5decfdf0e624422a916c)]:
+  - @yamada-ui/use-controllable-state@0.1.2
+  - @yamada-ui/core@0.2.2
+  - @yamada-ui/button@0.1.9
+  - @yamada-ui/form-control@0.1.9
+  - @yamada-ui/icon@0.1.9
+  - @yamada-ui/popover@0.1.9
+
 ## 0.2.6
 
 ### Patch Changes

@@ -269,8 +269,6 @@ export const useMonthPicker = ({
 
   const onChangeType = useCallback(
     (type: CalendarType, year?: number, month?: number) => {
-      console.log(type, year, month)
-
       if (type !== 'date') {
         setType(type)
       } else {

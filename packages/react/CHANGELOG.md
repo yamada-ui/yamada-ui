@@ -1,5 +1,16 @@
 # @yamada-ui/react
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`e8c9d0bc`](https://github.com/hirotomoyamada/yamada-ui/commit/e8c9d0bc97ebd8bcb28632809aa9b2dd1699c67f)]:
+  - @yamada-ui/use-clipboard@0.1.1
+  - @yamada-ui/use-hover@0.1.1
+  - @yamada-ui/use-idle@0.1.1
+  - @yamada-ui/use-window-event@0.1.1
+  - @yamada-ui/use-local-storage@0.1.3
+
 ## 0.4.1
 
 ### Patch Changes

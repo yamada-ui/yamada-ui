@@ -248,8 +248,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
             marginBlockStart='0.125rem'
             marginBlockEnd='0.125rem'
             placeholder={!displayValue || (keepPlaceholder && isOpen) ? placeholder : undefined}
-            {...getInputProps(inputProps, ref)}
-            value={inputValue}
+            {...getInputProps({ ...inputProps, value: inputValue ?? '' }, ref)}
           />
         </ui.div>
       </PopoverTrigger>

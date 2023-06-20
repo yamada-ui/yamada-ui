@@ -578,7 +578,7 @@ export const customControlMonth: ComponentStory<typeof DatePicker> = () => {
 }
 
 export const customControlValue: ComponentStory<typeof DatePicker> = () => {
-  const [value, onChange] = useState<Date | null | undefined>(new Date())
+  const [value, onChange] = useState<Date | undefined>(new Date())
 
   return <DatePicker placeholder='YYYY/MM/DD' value={value} onChange={onChange} />
 }

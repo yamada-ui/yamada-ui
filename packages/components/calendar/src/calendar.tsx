@@ -82,7 +82,7 @@ export const Calendar = forwardRef(
         <ui.div
           className={cx('ui-calendar', className)}
           __css={css}
-          {...getContainerProps(computedProps, ref)}
+          {...getContainerProps({}, ref)}
         >
           {type === 'year' ? (
             <YearList

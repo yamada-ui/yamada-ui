@@ -16,6 +16,7 @@ import {
   isDisabled,
   getEventRelatedTarget,
   useCallbackRef,
+  omitObject,
 } from '@yamada-ui/utils'
 import dayjs from 'dayjs'
 import {
@@ -362,6 +363,7 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
 }
 
 export const useCalendar = <Y extends MaybeValue = Date>({
+  defaultType,
   defaultValue,
   defaultMonth,
   firstDayOfWeek = 'monday',
@@ -396,7 +398,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   const [type, onChangeType] = useControllableState({
     value: rest.type,
-    defaultValue: rest.defaultType ?? 'date',
+    defaultValue: defaultType ?? 'date',
   })
 
   const setType = useCallbackRef((type: CalendarType, year?: number, month?: number) => {
@@ -424,6 +426,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     value: rest.month,
     defaultValue: defaultMonth,
     onChange: rest.onChangeMonth,
+    onUpdate: (prev, next) => !isSameDate(prev, next),
   })
 
   const [year, setYear] = useState<number>(month.getFullYear())
@@ -480,8 +483,12 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   }, [type])
 
   const getContainerProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({ ...props, ref }),
-    [],
+    (props = {}, ref = null) => ({
+      ...omitObject(rest, ['value', 'onChange', 'month', 'onChangeMonth', 'type', 'onChangeType']),
+      ...props,
+      ref,
+    }),
+    [rest],
   )
 
   return {

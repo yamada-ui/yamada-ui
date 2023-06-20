@@ -3,6 +3,7 @@ import {
   UseCalendarProps,
   isAfterMaxDate,
   isBeforeMinDate,
+  isSameDate,
 } from '@yamada-ui/calendar'
 import {
   CSSUIObject,
@@ -54,9 +55,7 @@ export const [DatePickerProvider, useDatePickerContext] = createContext<DatePick
   name: 'DatePickerContext',
 })
 
-type Value = Date | null | undefined
-
-type CalendarProps = Omit<UseCalendarProps<Value>, 'prevRef' | 'typeRef' | 'nextRef'>
+type CalendarProps = Omit<UseCalendarProps<Date | undefined>, 'prevRef' | 'typeRef' | 'nextRef'>
 
 type CalendarThemeProps = ThemeProps<'Calendar'>
 
@@ -74,7 +73,7 @@ type UseDatePickerBaseProps = Omit<
   FormControlOptions &
   CalendarProps & {
     pattern?: RegExp
-    parseDate?: (value: string) => Value
+    parseDate?: (value: string) => Date | undefined
     inputFormat?: string
     isClearable?: boolean
     closeOnSelect?: boolean
@@ -151,7 +150,7 @@ export const useDatePicker = ({
   )
 
   const stringToDate = useCallback(
-    (value: string): Value => {
+    (value: string): Date | undefined => {
       let date = parseDate ? parseDate(value) : dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return date
@@ -165,7 +164,7 @@ export const useDatePicker = ({
   )
 
   const dateToString = useCallback(
-    (value: Value): string | undefined => {
+    (value: Date | undefined): string | undefined => {
       if (value == null) return undefined
 
       if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
@@ -179,10 +178,11 @@ export const useDatePicker = ({
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-  const [value, setValue] = useControllableState<Date | undefined | null>({
+  const [value, setValue] = useControllableState<Date | undefined>({
     value: rest.value,
     defaultValue,
     onChange: rest.onChange,
+    onUpdate: (prev, next) => !isSameDate(prev, next),
   })
   const [inputValue, setInputValue] = useState<string | undefined>(dateToString(value))
 
@@ -209,12 +209,10 @@ export const useDatePicker = ({
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
-      setValue(null)
+      setValue(undefined)
       setInputValue(undefined)
-
-      if (allowInput && inputRef.current) inputRef.current.focus()
     },
-    [allowInput, setValue],
+    [setValue],
   )
 
   const onClick = useCallback(() => {
@@ -271,7 +269,7 @@ export const useDatePicker = ({
   )
 
   const onCalendarChange = useCallback(
-    (value: Date | undefined | null) => {
+    (value: Date | undefined) => {
       const inputValue = dateToString(value)
 
       setValue(value)
@@ -295,7 +293,7 @@ export const useDatePicker = ({
       if (dayjs(value).isValid()) {
         setValue(value)
       } else {
-        setValue(null)
+        setValue(undefined)
       }
     },
     [pattern, stringToDate, setInputValue, setValue],
@@ -322,10 +320,9 @@ export const useDatePicker = ({
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [containerProps, formControlProps, onBlur, onClick, onFocus, rest],
+    [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getPopoverProps = useCallback(
@@ -358,10 +355,11 @@ export const useDatePicker = ({
         style,
         'data-active': dataAttr(isOpen),
         'aria-expanded': dataAttr(isOpen),
+        onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
       }
     },
-    [allowInput, formControlProps, isOpen, rest, onKeyDown],
+    [allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
   )
 
   const getInputProps: PropGetter = useCallback(

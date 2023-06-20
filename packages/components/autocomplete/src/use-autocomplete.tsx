@@ -286,7 +286,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
   const formControlProps = pickObject(rest, formControlProperties)
   const [containerProps, inputProps] = splitObject(
-    omitObject(rest as Dict, ['id', 'value', 'onChange', 'month', 'onChangeMonth']),
+    omitObject(rest as Dict, ['id', 'value', 'defaultValue', 'onChange', 'month', 'onChangeMonth']),
     layoutStylesProperties,
   )
 
@@ -710,10 +710,8 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       setDisplayValue(undefined)
       setInputValue('')
       rebirthOptions()
-
-      if (inputRef.current) inputRef.current.focus()
     },
-    [setDisplayValue, setInputValue, setValue, rebirthOptions, inputRef],
+    [setDisplayValue, setInputValue, setValue, rebirthOptions],
   )
 
   const onClick = useCallback(() => {
@@ -881,11 +879,10 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
 
-    [containerProps, formControlProps, onBlur, onClick, onFocus, rest],
+    [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getFieldProps: PropGetter = useCallback(
@@ -897,9 +894,10 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       placeholder,
       'data-active': dataAttr(isOpen),
       'aria-expanded': dataAttr(isOpen),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [formControlProps, placeholder, isOpen, rest, onKeyDown],
+    [formControlProps, placeholder, isOpen, rest, onFocus, onKeyDown],
   )
 
   return {

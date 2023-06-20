@@ -140,8 +140,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
             display='inline-block'
             w='full'
             placeholder={placeholder}
-            {...getInputProps(inputProps, ref)}
-            value={inputValue || displayValue || ''}
+            {...getInputProps({ ...inputProps, value: inputValue || displayValue || '' }, ref)}
           />
         </ui.div>
       </PopoverTrigger>

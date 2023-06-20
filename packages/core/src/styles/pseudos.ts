@@ -42,7 +42,7 @@ export const pseudos = {
   /**
    * The CSS `:read-only` pseudo-class
    */
-  _readOnly: '&:read-only, &[readonly], &[aria-readonly=true], &[data-readonly]',
+  _readOnly: '&[readonly], &[aria-readonly=true], &[data-readonly]',
   /**
    * The CSS `:indeterminate` pseudo-class
    */
@@ -70,7 +70,7 @@ export const pseudos = {
   /**
    * The CSS `:invalid` pseudo-class
    */
-  _invalid: '&:invalid, &[data-invalid], &[aria-invalid=true]',
+  _invalid: '&[data-invalid], &[aria-invalid=true]',
   /**
    * The CSS `:invalid` pseudo-class
    */

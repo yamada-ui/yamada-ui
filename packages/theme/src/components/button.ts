@@ -51,7 +51,7 @@ export const Button: ComponentStyle = {
         bg: isDefaultColor(
           [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
           isGray
-            ? [`gray.100`, `whiteAlpha.200`]
+            ? [`gray.200`, `whiteAlpha.200`]
             : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
         )(c),
         color: isDefaultColor(
@@ -62,14 +62,14 @@ export const Button: ComponentStyle = {
           bg: isDefaultColor(
             [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
             isGray
-              ? [`gray.200`, `whiteAlpha.300`]
+              ? [`gray.300`, `whiteAlpha.300`]
               : [isAccessible ? `${c}.500` : `${c}.600`, `${c}.300`],
           )(c),
           _disabled: {
             bg: isDefaultColor(
               [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
               isGray
-                ? [`gray.100`, `whiteAlpha.200`]
+                ? [`gray.200`, `whiteAlpha.200`]
                 : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
             )(c),
           },
@@ -83,14 +83,14 @@ export const Button: ComponentStyle = {
           bg: isDefaultColor(
             [toneColor(c, 700)(t, m), toneColor(c, 400)(t, m)],
             isGray
-              ? [`gray.300`, `whiteAlpha.400`]
+              ? [`gray.400`, `whiteAlpha.400`]
               : [isAccessible ? `${c}.600` : `${c}.700`, `${c}.400`],
           )(c),
           _disabled: {
             bg: isDefaultColor(
               [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
               isGray
-                ? [`gray.100`, `whiteAlpha.200`]
+                ? [`gray.200`, `whiteAlpha.200`]
                 : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
             )(c),
           },

@@ -3,6 +3,7 @@ import { ComponentMultiStyle } from '@yamada-ui/core'
 export const Dialog: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      w: '100%',
       rounded: 'md',
       bg: ['white', 'black'],
       color: 'inherit',

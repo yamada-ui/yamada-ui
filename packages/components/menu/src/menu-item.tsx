@@ -124,7 +124,7 @@ export const MenuItem = forwardRef<MenuItemProps, 'button'>(
         as={as}
         type={type}
         role='menu-item'
-        tabInde={isFocused ? 0 : -1}
+        tabIndex={isFocused ? 0 : -1}
         className={cx('ui-menu-item', className)}
         __css={css}
       >

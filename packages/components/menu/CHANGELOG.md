@@ -1,5 +1,11 @@
 # @yamada-ui/menu
 
+## 0.1.10
+
+### Patch Changes
+
+- [`fae0b61e`](https://github.com/hirotomoyamada/yamada-ui/commit/fae0b61e8a4ba35fdc02d8a5d58e70ff5aac6aef) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted the code.
+
 ## 0.1.9
 
 ### Patch Changes

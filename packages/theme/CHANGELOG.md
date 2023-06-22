@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.2.3
+
+### Patch Changes
+
+- [`fa90da83`](https://github.com/hirotomoyamada/yamada-ui/commit/fa90da8350abe1ce768e94b7e82108c2b66e869d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the width of the Modal or Dialog was not being correctly reflected.
+
 ## 0.2.2
 
 ### Patch Changes

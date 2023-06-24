@@ -1,5 +1,14 @@
 # @yamada-ui/react
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies [[`6957ff4e`](https://github.com/hirotomoyamada/yamada-ui/commit/6957ff4e1674b0d2b657cfa4d36cdfe063a1b705), [`45d0f3d7`](https://github.com/hirotomoyamada/yamada-ui/commit/45d0f3d76d1e972e9d60da202d3d84f695abcdac), [`dbff77df`](https://github.com/hirotomoyamada/yamada-ui/commit/dbff77df1b1bdcb0f6aec9d59fb0e00391c9eb37), [`48e2dfbf`](https://github.com/hirotomoyamada/yamada-ui/commit/48e2dfbfb64865a2e71c0b836854a1e8229b16da)]:
+  - @yamada-ui/autocomplete@0.1.10
+  - @yamada-ui/select@0.1.10
+  - @yamada-ui/native-select@0.1.10
+
 ## 0.4.4
 
 ### Patch Changes

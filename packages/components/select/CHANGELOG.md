@@ -1,5 +1,15 @@
 # @yamada-ui/select
 
+## 0.1.10
+
+### Patch Changes
+
+- [`6957ff4e`](https://github.com/hirotomoyamada/yamada-ui/commit/6957ff4e1674b0d2b657cfa4d36cdfe063a1b705) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed incorrect control of scrolling in popover.
+
+- [`45d0f3d7`](https://github.com/hirotomoyamada/yamada-ui/commit/45d0f3d76d1e972e9d60da202d3d84f695abcdac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added props name.
+
+- [`48e2dfbf`](https://github.com/hirotomoyamada/yamada-ui/commit/48e2dfbfb64865a2e71c0b836854a1e8229b16da) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed props name data to options.
+
 ## 0.1.9
 
 ### Patch Changes

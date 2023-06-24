@@ -41,10 +41,8 @@ import {
   useState,
 } from 'react'
 
-type Value = Date | null | undefined
-
 type CalendarProps = Pick<
-  UseCalendarProps<Value>,
+  UseCalendarProps<Date | null>,
   | 'value'
   | 'defaultValue'
   | 'onChange'
@@ -82,7 +80,7 @@ type UseMonthPickerBaseProps = Omit<
     defaultType?: MonthPickerType
     onChangeType?: (type: MonthPickerType) => void
     pattern?: RegExp
-    parseDate?: (value: string) => Value
+    parseDate?: (value: string) => Date | null
     inputFormat?: string
     isClearable?: boolean
     closeOnSelect?: boolean
@@ -145,7 +143,7 @@ export const useMonthPicker = ({
   )
 
   const stringToDate = useCallback(
-    (value: string): Value => {
+    (value: string): Date | null => {
       let date = parseDate ? parseDate(value) : dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return date
@@ -159,7 +157,7 @@ export const useMonthPicker = ({
   )
 
   const dateToString = useCallback(
-    (value: Value): string | undefined => {
+    (value: Date | null): string | undefined => {
       if (value == null) return undefined
 
       if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
@@ -173,7 +171,7 @@ export const useMonthPicker = ({
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-  const [value, setValue] = useControllableState<Date | undefined | null>({
+  const [value, setValue] = useControllableState<Date | null>({
     value: rest.value,
     defaultValue,
     onChange: rest.onChange,
@@ -272,7 +270,7 @@ export const useMonthPicker = ({
       if (type !== 'date') {
         setType(type)
       } else {
-        let value: Date | undefined | null
+        let value: Date | null = null
 
         if (typeof year === 'number' && typeof month === 'number') value = new Date(year, month)
 

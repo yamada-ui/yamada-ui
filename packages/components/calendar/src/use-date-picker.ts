@@ -55,7 +55,7 @@ export const [DatePickerProvider, useDatePickerContext] = createContext<DatePick
   name: 'DatePickerContext',
 })
 
-type CalendarProps = Omit<UseCalendarProps<Date | undefined>, 'prevRef' | 'typeRef' | 'nextRef'>
+type CalendarProps = Omit<UseCalendarProps<Date | null>, 'prevRef' | 'typeRef' | 'nextRef'>
 
 type CalendarThemeProps = ThemeProps<'Calendar'>
 
@@ -73,7 +73,7 @@ type UseDatePickerBaseProps = Omit<
   FormControlOptions &
   CalendarProps & {
     pattern?: RegExp
-    parseDate?: (value: string) => Date | undefined
+    parseDate?: (value: string) => Date | null
     inputFormat?: string
     isClearable?: boolean
     closeOnSelect?: boolean
@@ -150,7 +150,7 @@ export const useDatePicker = ({
   )
 
   const stringToDate = useCallback(
-    (value: string): Date | undefined => {
+    (value: string): Date | null => {
       let date = parseDate ? parseDate(value) : dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return date
@@ -164,7 +164,7 @@ export const useDatePicker = ({
   )
 
   const dateToString = useCallback(
-    (value: Date | undefined): string | undefined => {
+    (value: Date | null): string | undefined => {
       if (value == null) return undefined
 
       if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
@@ -178,7 +178,7 @@ export const useDatePicker = ({
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-  const [value, setValue] = useControllableState<Date | undefined>({
+  const [value, setValue] = useControllableState<Date | null>({
     value: rest.value,
     defaultValue,
     onChange: rest.onChange,
@@ -209,7 +209,7 @@ export const useDatePicker = ({
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
-      setValue(undefined)
+      setValue(null)
       setInputValue(undefined)
     },
     [setValue],
@@ -269,7 +269,7 @@ export const useDatePicker = ({
   )
 
   const onCalendarChange = useCallback(
-    (value: Date | undefined) => {
+    (value: Date | null) => {
       const inputValue = dateToString(value)
 
       setValue(value)
@@ -293,7 +293,7 @@ export const useDatePicker = ({
       if (dayjs(value).isValid()) {
         setValue(value)
       } else {
-        setValue(undefined)
+        setValue(null)
       }
     },
     [pattern, stringToDate, setInputValue, setValue],

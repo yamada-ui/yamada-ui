@@ -27,7 +27,7 @@ export type UIOption = Omit<OptionProps, 'value' | 'children'> & {
 }
 
 type SelectOptions = {
-  data?: UIOption[]
+  options?: UIOption[]
   focusBorderColor?: string
   errorBorderColor?: string
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
@@ -46,7 +46,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     placeholder,
     defaultValue = '',
     placeholderInOptions = true,
-    data = [],
+    options = [],
     color,
     h,
     height,
@@ -62,8 +62,8 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []
 
-  if (!validChildren.length && data.length) {
-    computedChildren = data.map(({ label, value, ...props }, i) => {
+  if (!validChildren.length && options.length) {
+    computedChildren = options.map(({ label, value, ...props }, i) => {
       if (!isArray(value)) {
         return (
           <Option key={i} value={value} {...props}>

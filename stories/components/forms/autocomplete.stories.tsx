@@ -19,7 +19,7 @@ export default {
 } as ComponentMeta<typeof Autocomplete>
 
 export const basic: ComponentStory<typeof Autocomplete> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -67,7 +67,7 @@ export const basic: ComponentStory<typeof Autocomplete> = () => {
         </AutocompleteOptionGroup>
       </Autocomplete>
 
-      <Autocomplete placeholder='キャラクターを選択' data={data} />
+      <Autocomplete placeholder='キャラクターを選択' options={options} />
     </>
   )
 }
@@ -115,7 +115,7 @@ export const withEmptyMessage: ComponentStory<typeof Autocomplete> = () => {
 }
 
 export const withCreateOption: ComponentStory<typeof Autocomplete> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -141,7 +141,7 @@ export const withCreateOption: ComponentStory<typeof Autocomplete> = () => {
   return (
     <Autocomplete
       placeholder='キャラクターを選択'
-      data={data}
+      options={options}
       createOption
       onCreate={(newOption, newOptions) =>
         console.log('created option', newOption, 'new options', newOptions)
@@ -151,7 +151,7 @@ export const withCreateOption: ComponentStory<typeof Autocomplete> = () => {
 }
 
 export const withCreateOrder: ComponentStory<typeof Autocomplete> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -176,17 +176,27 @@ export const withCreateOrder: ComponentStory<typeof Autocomplete> = () => {
 
   return (
     <>
-      <Autocomplete placeholder='キャラクターを選択' data={data} createOption createOrder='first' />
-      <Autocomplete placeholder='キャラクターを選択' data={data} createOption createOrder='last' />
       <Autocomplete
         placeholder='キャラクターを選択'
-        data={data}
+        options={options}
+        createOption
+        createOrder='first'
+      />
+      <Autocomplete
+        placeholder='キャラクターを選択'
+        options={options}
+        createOption
+        createOrder='last'
+      />
+      <Autocomplete
+        placeholder='キャラクターを選択'
+        options={options}
         createOption
         createOrder='地球人'
       />
       <Autocomplete
         placeholder='キャラクターを選択'
-        data={data}
+        options={options}
         createOption
         createOrder='フリーザ軍'
         createSecondOrder='last'
@@ -504,7 +514,7 @@ export const reactHookForm: ComponentStory<typeof Autocomplete> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Autocomplete placeholder='キャラクターを選択' {...field} data={options} />
+            <Autocomplete placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>
@@ -620,7 +630,7 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Autocomplete> 
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Autocomplete placeholder='キャラクターを選択' {...field} data={options} />
+            <Autocomplete placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>

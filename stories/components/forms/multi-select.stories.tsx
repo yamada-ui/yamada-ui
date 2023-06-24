@@ -20,7 +20,7 @@ export default {
 } as ComponentMeta<typeof MultiSelect>
 
 export const basic: ComponentStory<typeof MultiSelect> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -68,7 +68,7 @@ export const basic: ComponentStory<typeof MultiSelect> = () => {
         </OptionGroup>
       </MultiSelect>
 
-      <MultiSelect placeholder='キャラクターを選択' data={data} />
+      <MultiSelect placeholder='キャラクターを選択' options={options} />
     </>
   )
 }
@@ -501,7 +501,7 @@ export const reactHookForm: ComponentStory<typeof MultiSelect> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiSelect placeholder='キャラクターを選択' {...field} data={options} />
+            <MultiSelect placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>
@@ -617,7 +617,7 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiSelect> =
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiSelect placeholder='キャラクターを選択' {...field} data={options} />
+            <MultiSelect placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>

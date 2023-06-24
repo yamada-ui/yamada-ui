@@ -155,25 +155,25 @@ const defaultFormat = (value: string) => {
   return value
 }
 
-const flattenData = (data: UIOption[]): UIOption[] => {
-  const filterData = (data: UIOption[]): (UIOption | UIOption[])[] =>
-    data
-      .map((data) => {
-        const { value, isDisabled, isFocusable } = data
+const flattenOptions = (options: UIOption[]): UIOption[] => {
+  const filterOptions = (options: UIOption[]): (UIOption | UIOption[])[] =>
+    options
+      .map((options) => {
+        const { value, isDisabled, isFocusable } = options
         const trulyDisabled = !!isDisabled && !isFocusable
         const isMulti = isArray(value)
 
         if (trulyDisabled) return
 
         if (!isMulti) {
-          return data
+          return options
         } else {
-          return filterData(value)
+          return filterOptions(value)
         }
       })
       .filter(Boolean) as (UIOption | UIOption[])[]
 
-  return filterData(data).flat(Infinity) as UIOption[]
+  return filterOptions(options).flat(Infinity) as UIOption[]
 }
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -252,7 +252,7 @@ type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
     omitSelectedValues?: boolean
     maxSelectedValues?: number
     optionProps?: Omit<AutocompleteOptionProps, 'value' | 'children'>
-    data?: UIOption[]
+    options?: UIOption[]
   }
 
 export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
@@ -298,7 +298,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
   const timeoutIds = useRef<Set<any>>(new Set([]))
   const isComposition = useRef<boolean>(false)
 
-  const [data, setData] = useState<UIOption[] | undefined>(rest.data)
+  const [options, setOptions] = useState<UIOption[] | undefined>(rest.options)
   const [value, setValue] = useControllableState({
     value: rest.value,
     defaultValue: rest.defaultValue,
@@ -321,7 +321,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
     console.warn(
       `${!isMulti ? 'Autocomplete' : 'MultiAutocomplete'}: ${
         !isMulti ? 'Autocomplete' : 'MultiAutocomplete'
-      } internally prefers 'children'. If 'createOption' is true, it will not be reflected correctly. If want to reflect, please set 'data' in props.`,
+      } internally prefers 'children'. If 'createOption' is true, it will not be reflected correctly. If want to reflect, please set 'options' in props.`,
     )
   }
 
@@ -335,7 +335,7 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
   const validChildren = getValidChildren(children)
 
-  const computedChildren = data?.map(({ label, value, ...props }, i) => {
+  const computedChildren = options?.map(({ label, value, ...props }, i) => {
     if (!isArray(value)) {
       return (
         <AutocompleteOption key={i} value={value} {...props}>
@@ -657,22 +657,22 @@ export const useAutocomplete = <T extends MaybeValue = string>({
 
     const newOption: UIOption = { label: inputValue, value: inputValue }
 
-    let newData: UIOption[] = []
+    let newOptions: UIOption[] = []
 
-    if (data) newData = data
+    if (options) newOptions = options
 
     if (createOrder === 'first') {
-      newData = [newOption, ...newData]
+      newOptions = [newOption, ...newOptions]
     } else if (createOrder === 'last') {
-      newData = [...newData, newOption]
+      newOptions = [...newOptions, newOption]
     } else {
-      const i = newData.findIndex(({ label }) => label === createOrder)
+      const i = newOptions.findIndex(({ label }) => label === createOrder)
 
-      if (i !== -1 && isArray(newData[i].value)) {
+      if (i !== -1 && isArray(newOptions[i].value)) {
         if (createSecondOrder === 'first') {
-          newData[i].value = [newOption, ...(newData[i].value as UIOption[])]
+          newOptions[i].value = [newOption, ...(newOptions[i].value as UIOption[])]
         } else {
-          newData[i].value = [...(newData[i].value as UIOption[]), newOption]
+          newOptions[i].value = [...(newOptions[i].value as UIOption[]), newOption]
         }
       } else {
         console.warn(
@@ -683,16 +683,16 @@ export const useAutocomplete = <T extends MaybeValue = string>({
       }
     }
 
-    setData(newData)
+    setOptions(newOptions)
     onChange(inputValue)
     rebirthOptions(false)
 
-    const index = flattenData(newData).findIndex(({ value }) => value === inputValue)
+    const index = flattenOptions(newOptions).findIndex(({ value }) => value === inputValue)
 
     setFocusedIndex(index)
 
-    rest.onCreate?.(newOption, newData)
-  }, [inputValue, data, createOrder, onChange, rebirthOptions, rest, createSecondOrder, isMulti])
+    rest.onCreate?.(newOption, newOptions)
+  }, [inputValue, options, createOrder, onChange, rebirthOptions, rest, createSecondOrder, isMulti])
 
   const onDelete = useCallback(() => {
     if (!isMulti) {

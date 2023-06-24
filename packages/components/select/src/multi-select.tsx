@@ -22,7 +22,7 @@ import {
 import { OptionGroup, Option, UIOption } from './'
 
 type MultiSelectOptions = {
-  data?: UIOption[]
+  options?: UIOption[]
   component?: FC<{
     value: string | number
     displayValue: string
@@ -51,7 +51,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     component,
     separator,
     isClearable = true,
-    data = [],
+    options = [],
     color,
     h,
     height,
@@ -69,8 +69,8 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []
 
-  if (!validChildren.length && data.length) {
-    computedChildren = data.map(({ label, value, ...props }, i) => {
+  if (!validChildren.length && options.length) {
+    computedChildren = options.map(({ label, value, ...props }, i) => {
       if (!isArray(value)) {
         return (
           <Option key={i} value={value} {...props}>

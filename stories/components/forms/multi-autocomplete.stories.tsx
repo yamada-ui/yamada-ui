@@ -20,7 +20,7 @@ export default {
 } as ComponentMeta<typeof MultiAutocomplete>
 
 export const basic: ComponentStory<typeof MultiAutocomplete> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -68,7 +68,7 @@ export const basic: ComponentStory<typeof MultiAutocomplete> = () => {
         </AutocompleteOptionGroup>
       </MultiAutocomplete>
 
-      <MultiAutocomplete placeholder='キャラクターを選択' data={data} />
+      <MultiAutocomplete placeholder='キャラクターを選択' options={options} />
     </>
   )
 }
@@ -116,7 +116,7 @@ export const withEmptyMessage: ComponentStory<typeof MultiAutocomplete> = () => 
 }
 
 export const withCreateOption: ComponentStory<typeof MultiAutocomplete> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -142,7 +142,7 @@ export const withCreateOption: ComponentStory<typeof MultiAutocomplete> = () => 
   return (
     <MultiAutocomplete
       placeholder='キャラクターを選択'
-      data={data}
+      options={options}
       createOption
       onCreate={(newOption, newOptions) =>
         console.log('created option', newOption, 'new options', newOptions)
@@ -152,7 +152,7 @@ export const withCreateOption: ComponentStory<typeof MultiAutocomplete> = () => 
 }
 
 export const withCreateOrder: ComponentStory<typeof MultiAutocomplete> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -179,25 +179,25 @@ export const withCreateOrder: ComponentStory<typeof MultiAutocomplete> = () => {
     <>
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        data={data}
+        options={options}
         createOption
         createOrder='first'
       />
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        data={data}
+        options={options}
         createOption
         createOrder='last'
       />
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        data={data}
+        options={options}
         createOption
         createOrder='地球人'
       />
       <MultiAutocomplete
         placeholder='キャラクターを選択'
-        data={data}
+        options={options}
         createOption
         createOrder='フリーザ軍'
         createSecondOrder='last'
@@ -620,7 +620,7 @@ export const reactHookForm: ComponentStory<typeof MultiAutocomplete> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiAutocomplete placeholder='キャラクターを選択' {...field} data={options} />
+            <MultiAutocomplete placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>
@@ -736,7 +736,7 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiAutocompl
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiAutocomplete placeholder='キャラクターを選択' {...field} data={options} />
+            <MultiAutocomplete placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>

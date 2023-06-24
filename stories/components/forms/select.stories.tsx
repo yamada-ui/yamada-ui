@@ -19,7 +19,7 @@ export default {
 } as ComponentMeta<typeof Select>
 
 export const basic: ComponentStory<typeof Select> = () => {
-  const data: UIOption[] = [
+  const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -67,7 +67,7 @@ export const basic: ComponentStory<typeof Select> = () => {
         </OptionGroup>
       </Select>
 
-      <Select placeholder='キャラクターを選択' data={data} />
+      <Select placeholder='キャラクターを選択' options={options} />
     </>
   )
 }
@@ -409,7 +409,7 @@ export const reactHookForm: ComponentStory<typeof Select> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Select placeholder='キャラクターを選択' {...field} data={options} />
+            <Select placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>
@@ -525,7 +525,7 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Select> = () =
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Select placeholder='キャラクターを選択' {...field} data={options} />
+            <Select placeholder='キャラクターを選択' {...field} options={options} />
           )}
         />
       </FormControl>

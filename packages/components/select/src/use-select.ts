@@ -87,6 +87,7 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
 > &
   Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton' | 'isOpen'> &
   FormControlOptions & {
+    name?: string
     value?: T
     defaultValue?: T
     onChange?: (value: T) => void

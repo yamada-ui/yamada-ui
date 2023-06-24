@@ -20,7 +20,6 @@ import {
   splitObject,
   getValidChildren,
   isValidElement,
-  isUndefined,
   isArray,
   pickObject,
 } from '@yamada-ui/utils'
@@ -75,10 +74,10 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     ...rest
   } = omitThemeProps(mergedProps)
 
-  rest = useFormControlProps({ ...rest, isRequired: isRequired ?? !isUndefined(placeholder) })
+  rest = useFormControlProps(rest)
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const computedProps = splitObject(rest, layoutStylesProperties)
+  const [layoutProps, selectPorps] = splitObject(rest, layoutStylesProperties)
 
   let computedChildren: ReactElement[] = []
 
@@ -117,7 +116,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
           color,
           ...styles.container,
         }}
-        {...computedProps[0]}
+        {...layoutProps}
         {...containerProps}
         {...formControlProps}
       >
@@ -126,7 +125,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
           className={cx('ui-native-select-field', className)}
           value={value}
           __css={{ paddingEnd: '2rem', h: h ?? height, minH: minH ?? minHeight, ...styles.field }}
-          {...computedProps[1]}
+          {...selectPorps}
         >
           {placeholder ? (
             <NativeOption value='' hidden={!placeholderInOptions}>

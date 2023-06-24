@@ -565,6 +565,8 @@ export const useSelectList = () => {
   useEffect(() => {
     if (!listRef.current || !selectedValue) return
 
+    if (beforeFocusedIndex.current === selectedValue.index) return
+
     const parent = listRef.current
     const child = selectedValue.node
 

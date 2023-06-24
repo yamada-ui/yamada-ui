@@ -10,8 +10,11 @@ import {
   InputRightElement,
   Tag,
   Text,
+  Button,
+  VStack,
 } from '@yamada-ui/react'
 import { useRef, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / FileInput',
@@ -192,5 +195,57 @@ export const customControl: ComponentStory<typeof FileInput> = () => {
 
       <FileInput value={value} onChange={onChange} />
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof FileInput> = () => {
+  type Data = { fileInput: File[] | null }
+
+  const resetRef = useRef<() => void>(null)
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onReset = () => {
+    setValue('fileInput', null)
+    resetRef.current?.()
+  }
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.fileInput}
+        label='Files'
+        errorMessage={errors.fileInput?.message}
+      >
+        <Controller
+          name='fileInput'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <InputGroup>
+              <FileInput multiple {...field} resetRef={resetRef} />
+
+              {field.value?.length ? (
+                <InputRightElement isClick onClick={onReset}>
+                  <Icon icon={faClose} color='gray.500' />
+                </InputRightElement>
+              ) : null}
+            </InputGroup>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

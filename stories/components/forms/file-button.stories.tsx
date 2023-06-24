@@ -10,8 +10,10 @@ import {
   Link,
   Text,
   Wrap,
+  VStack,
 } from '@yamada-ui/react'
 import { useRef, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / FileButton',
@@ -234,5 +236,55 @@ export const useReset: ComponentStory<typeof FileButton> = () => {
         <Button onClick={onReset}>Reset</Button>
       </HStack>
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof FileButton> = () => {
+  type Data = { fileButton: File[] | null }
+
+  const resetRef = useRef<() => void>(null)
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onReset = () => {
+    setValue('fileButton', null)
+    resetRef.current?.()
+  }
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.fileButton}
+        label='Files'
+        errorMessage={errors.fileButton?.message}
+      >
+        <Controller
+          name='fileButton'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field: { ref, name, onChange, onBlur } }) => (
+            <HStack>
+              <FileButton {...{ ref, name, onChange, onBlur }} resetRef={resetRef}>
+                Upload
+              </FileButton>
+
+              <Button onClick={onReset}>Reset</Button>
+            </HStack>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

@@ -16,6 +16,7 @@ import {
   VStack,
 } from '@yamada-ui/react'
 import { useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / Slider',
@@ -368,5 +369,41 @@ export const onChangeEnd: ComponentStory<typeof Slider> = () => {
       </Text>
       <Slider value={value} onChange={onChange} onChangeEnd={onChangeEnd} />
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Slider> = () => {
+  type Data = { slider: number }
+
+  const defaultValues: Data = {
+    slider: 50,
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl isInvalid={!!errors.slider} label='Volume' errorMessage={errors.slider?.message}>
+        <Controller
+          name='slider'
+          control={control}
+          rules={{ max: { value: 50, message: 'The maximum value is 50.' } }}
+          render={({ field }) => <Slider {...field} />}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

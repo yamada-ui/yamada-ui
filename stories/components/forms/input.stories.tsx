@@ -12,7 +12,9 @@ import {
   Button,
   useBoolean,
   FormControl,
+  VStack,
 } from '@yamada-ui/react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { FaPhone } from 'react-icons/fa'
 
 export default {
@@ -186,5 +188,127 @@ export const customType: ComponentStory<typeof Input> = () => {
     <>
       <Input placeholder='Select Date and Time' size='md' type='datetime-local' />
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Input> = () => {
+  type Data = { name: string; cellphone: string; email: string }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl isInvalid={!!errors.name} label='Name' errorMessage={errors.name?.message}>
+        <Input
+          placeholder='孫悟空'
+          {...register('name', { required: { value: true, message: 'This is required.' } })}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.cellphone}
+        label='Cellphone'
+        errorMessage={errors.cellphone?.message}
+      >
+        <InputGroup>
+          <InputLeftAddon>+81</InputLeftAddon>
+          <Input
+            type='tel'
+            placeholder='0000-0000'
+            {...register('cellphone', { required: { value: true, message: 'This is required.' } })}
+          />
+        </InputGroup>
+      </FormControl>
+
+      <FormControl isInvalid={!!errors.email} label='Email' errorMessage={errors.email?.message}>
+        <InputGroup>
+          <InputLeftElement>
+            <FontAwesomeIcon icon={faEnvelope} color='gray.500' />
+          </InputLeftElement>
+          <Input
+            type='email'
+            placeholder='your-address@example.com'
+            {...register('email', { required: { value: true, message: 'This is required.' } })}
+          />
+        </InputGroup>
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof Input> = () => {
+  type Data = { name: string; cellphone: string; email: string }
+
+  const defaultValues: Data = {
+    name: '孫悟空',
+    cellphone: '090-1234-5678',
+    email: 'hoge@example.com',
+  }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl isInvalid={!!errors.name} label='Name' errorMessage={errors.name?.message}>
+        <Input
+          placeholder='孫悟空'
+          {...register('name', { required: { value: true, message: 'This is required.' } })}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.cellphone}
+        label='Cellphone'
+        errorMessage={errors.cellphone?.message}
+      >
+        <InputGroup>
+          <InputLeftAddon>+81</InputLeftAddon>
+          <Input
+            type='tel'
+            placeholder='090-0000-0000'
+            {...register('cellphone', { required: { value: true, message: 'This is required.' } })}
+          />
+        </InputGroup>
+      </FormControl>
+
+      <FormControl isInvalid={!!errors.email} label='Email' errorMessage={errors.email?.message}>
+        <InputGroup>
+          <InputLeftElement>
+            <FontAwesomeIcon icon={faEnvelope} color='gray.500' />
+          </InputLeftElement>
+          <Input
+            type='email'
+            placeholder='your-address@example.com'
+            {...register('email', { required: { value: true, message: 'This is required.' } })}
+          />
+        </InputGroup>
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

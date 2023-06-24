@@ -8,8 +8,11 @@ import {
   Wrap,
   HStack,
   Box,
+  VStack,
+  Button,
 } from '@yamada-ui/react'
 import { FC, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / Radio',
@@ -266,5 +269,93 @@ export const customHook: ComponentStory<typeof Radio> = () => {
       <CustomRadio {...getRadioProps({ value: 'ベジータ' })} />
       <CustomRadio {...getRadioProps({ value: 'フリーザ' })} />
     </HStack>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Radio> = () => {
+  type Data = { radio: string }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.radio}
+        label='Who is your favorite character?'
+        errorMessage={errors.radio?.message}
+      >
+        <Controller
+          name='radio'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <RadioGroup {...field}>
+              <Radio value='孫悟空'>孫悟空</Radio>
+              <Radio value='ベジータ'>ベジータ</Radio>
+              <Radio value='フリーザ'>フリーザ</Radio>
+            </RadioGroup>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof Radio> = () => {
+  type Data = { radio: string }
+
+  const defaultValues: Data = {
+    radio: '孫悟空',
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.radio}
+        label='Who is your favorite character?'
+        errorMessage={errors.radio?.message}
+      >
+        <Controller
+          name='radio'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <RadioGroup {...field}>
+              <Radio value='孫悟空'>孫悟空</Radio>
+              <Radio value='ベジータ'>ベジータ</Radio>
+              <Radio value='フリーザ'>フリーザ</Radio>
+            </RadioGroup>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

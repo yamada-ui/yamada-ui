@@ -7,8 +7,11 @@ import {
   AutocompleteOption,
   UIOption,
   FormControl,
+  Button,
+  VStack,
 } from '@yamada-ui/react'
 import { useState } from 'react'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / Autocomplete',
@@ -400,5 +403,231 @@ export const customControl: ComponentStory<typeof Autocomplete> = () => {
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
     </Autocomplete>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Autocomplete> = () => {
+  type Data = { autocomplete1: string; autocomplete2: string; autocomplete3: string }
+
+  const options: UIOption[] = [
+    { label: 'ベジータ', value: 'ベジータ' },
+    {
+      label: '地球人',
+      value: [
+        { label: '孫悟空', value: '孫悟空' },
+        { label: '孫悟飯', value: '孫悟飯' },
+        { label: 'クリリン', value: 'クリリン' },
+      ],
+    },
+    {
+      label: 'フリーザ軍',
+      value: [
+        { label: 'フリーザ', value: 'フリーザ' },
+        { label: 'ギニュー', value: 'ギニュー' },
+        { label: 'リクーム', value: 'リクーム' },
+        { label: 'バータ', value: 'バータ' },
+        { label: 'ジース', value: 'ジース' },
+        { label: 'グルド', value: 'グルド' },
+      ],
+    },
+  ]
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.autocomplete1}
+        label='Who is your favorite character?'
+        errorMessage={errors.autocomplete1?.message}
+      >
+        <Controller
+          name='autocomplete1'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Autocomplete placeholder='キャラクターを選択' {...field}>
+              <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
+              <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
+              <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
+            </Autocomplete>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.autocomplete2}
+        label='Who is your favorite character?'
+        errorMessage={errors.autocomplete2?.message}
+      >
+        <Controller
+          name='autocomplete2'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Autocomplete placeholder='キャラクターを選択' {...field}>
+              <AutocompleteOptionGroup label='地球人'>
+                <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
+                <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
+                <AutocompleteOption value='クリリン'>クリリン</AutocompleteOption>
+              </AutocompleteOptionGroup>
+
+              <AutocompleteOptionGroup label='フリーザ軍'>
+                <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
+                <AutocompleteOption value='ギニュー'>ギニュー</AutocompleteOption>
+                <AutocompleteOption value='リクーム'>リクーム</AutocompleteOption>
+                <AutocompleteOption value='バータ'>バータ</AutocompleteOption>
+                <AutocompleteOption value='ジース'>ジース</AutocompleteOption>
+                <AutocompleteOption value='グルド'>グルド</AutocompleteOption>
+              </AutocompleteOptionGroup>
+            </Autocomplete>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.autocomplete3}
+        label='Who is your favorite character?'
+        errorMessage={errors.autocomplete3?.message}
+      >
+        <Controller
+          name='autocomplete3'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Autocomplete placeholder='キャラクターを選択' {...field} data={options} />
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof Autocomplete> = () => {
+  type Data = { autocomplete1: string; autocomplete2: string; autocomplete3: string }
+
+  const defaultValues: Data = {
+    autocomplete1: '孫悟空',
+    autocomplete2: 'フリーザ',
+    autocomplete3: 'リクーム',
+  }
+
+  const options: UIOption[] = [
+    { label: 'ベジータ', value: 'ベジータ' },
+    {
+      label: '地球人',
+      value: [
+        { label: '孫悟空', value: '孫悟空' },
+        { label: '孫悟飯', value: '孫悟飯' },
+        { label: 'クリリン', value: 'クリリン' },
+      ],
+    },
+    {
+      label: 'フリーザ軍',
+      value: [
+        { label: 'フリーザ', value: 'フリーザ' },
+        { label: 'ギニュー', value: 'ギニュー' },
+        { label: 'リクーム', value: 'リクーム' },
+        { label: 'バータ', value: 'バータ' },
+        { label: 'ジース', value: 'ジース' },
+        { label: 'グルド', value: 'グルド' },
+      ],
+    },
+  ]
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.autocomplete1}
+        label='Who is your favorite character?'
+        errorMessage={errors.autocomplete1?.message}
+      >
+        <Controller
+          name='autocomplete1'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Autocomplete placeholder='キャラクターを選択' {...field}>
+              <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
+              <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
+              <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
+            </Autocomplete>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.autocomplete2}
+        label='Who is your favorite character?'
+        errorMessage={errors.autocomplete2?.message}
+      >
+        <Controller
+          name='autocomplete2'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Autocomplete placeholder='キャラクターを選択' {...field}>
+              <AutocompleteOptionGroup label='地球人'>
+                <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
+                <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
+                <AutocompleteOption value='クリリン'>クリリン</AutocompleteOption>
+              </AutocompleteOptionGroup>
+
+              <AutocompleteOptionGroup label='フリーザ軍'>
+                <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
+                <AutocompleteOption value='ギニュー'>ギニュー</AutocompleteOption>
+                <AutocompleteOption value='リクーム'>リクーム</AutocompleteOption>
+                <AutocompleteOption value='バータ'>バータ</AutocompleteOption>
+                <AutocompleteOption value='ジース'>ジース</AutocompleteOption>
+                <AutocompleteOption value='グルド'>グルド</AutocompleteOption>
+              </AutocompleteOptionGroup>
+            </Autocomplete>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.autocomplete3}
+        label='Who is your favorite character?'
+        errorMessage={errors.autocomplete3?.message}
+      >
+        <Controller
+          name='autocomplete3'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Autocomplete placeholder='キャラクターを選択' {...field} data={options} />
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

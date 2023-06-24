@@ -2,13 +2,16 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
+  Button,
   FormControl,
   NativeOption,
   NativeOptionGroup,
   NativeSelect,
   UINativeOption,
+  VStack,
 } from '@yamada-ui/react'
 import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / NativeSelect',
@@ -194,5 +197,85 @@ export const customControl: ComponentStory<typeof NativeSelect> = () => {
       <NativeOption value='ベジータ'>ベジータ</NativeOption>
       <NativeOption value='フリーザ'>フリーザ</NativeOption>
     </NativeSelect>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof NativeSelect> = () => {
+  type Data = { select: string }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.select}
+        label='Who is your favorite character?'
+        errorMessage={errors.select?.message}
+      >
+        <NativeSelect
+          placeholder='キャラクターを選択'
+          {...register('select', { required: { value: true, message: 'This is required.' } })}
+        >
+          <NativeOption value='孫悟空'>孫悟空</NativeOption>
+          <NativeOption value='ベジータ'>ベジータ</NativeOption>
+          <NativeOption value='フリーザ'>フリーザ</NativeOption>
+        </NativeSelect>
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof NativeSelect> = () => {
+  type Data = { select: string }
+
+  const defaultValues: Data = {
+    select: '孫悟空',
+  }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.select}
+        label='Who is your favorite character?'
+        errorMessage={errors.select?.message}
+      >
+        <NativeSelect
+          placeholder='キャラクターを選択'
+          {...register('select', { required: { value: true, message: 'This is required.' } })}
+        >
+          <NativeOption value='孫悟空'>孫悟空</NativeOption>
+          <NativeOption value='ベジータ'>ベジータ</NativeOption>
+          <NativeOption value='フリーザ'>フリーザ</NativeOption>
+        </NativeSelect>
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

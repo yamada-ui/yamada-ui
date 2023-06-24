@@ -18,6 +18,7 @@ import {
   Flex,
 } from '@yamada-ui/react'
 import { useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / RangeSlider',
@@ -440,5 +441,44 @@ export const onChangeEnd: ComponentStory<typeof RangeSlider> = () => {
       </Text>
       <RangeSlider value={value} onChange={onChange} onChangeEnd={onChangeEnd} />
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof RangeSlider> = () => {
+  type Data = { rangeSlider: [number, number] }
+
+  const defaultValues: Data = {
+    rangeSlider: [25, 75],
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.rangeSlider}
+        label='Volume'
+        errorMessage={errors.rangeSlider?.message}
+      >
+        <Controller
+          name='rangeSlider'
+          control={control}
+          render={({ field }) => <RangeSlider {...field} />}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

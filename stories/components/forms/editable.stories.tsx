@@ -10,8 +10,10 @@ import {
   FormControl,
   IconButton,
   useEditableControl,
+  Button,
+  VStack,
 } from '@yamada-ui/react'
-
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 export default {
   title: 'Components / Forms / Editable',
   component: Editable,
@@ -177,5 +179,65 @@ export const customControl: ComponentStory<typeof Editable> = () => {
       <EditableInput />
       <CustomControls />
     </Editable>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Editable> = () => {
+  type Data = { input: string; textarea: string }
+
+  const defaultValues: Data = {
+    input: '',
+    textarea: '',
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl isInvalid={!!errors.input} label='Name' errorMessage={errors.input?.message}>
+        <Controller
+          name='input'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Editable placeholder='孫悟空' {...field}>
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.textarea}
+        label='Feedback'
+        errorMessage={errors.textarea?.message}
+      >
+        <Controller
+          name='textarea'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <Editable placeholder='オッス！オラ悟空！' {...field}>
+              <EditablePreview />
+              <EditableTextarea />
+            </Editable>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

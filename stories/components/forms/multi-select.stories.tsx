@@ -1,8 +1,18 @@
 import { faCaretDown, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
-import { MultiSelect, OptionGroup, Option, UIOption, FormControl, Tag } from '@yamada-ui/react'
+import {
+  MultiSelect,
+  OptionGroup,
+  Option,
+  UIOption,
+  FormControl,
+  Tag,
+  VStack,
+  Button,
+} from '@yamada-ui/react'
 import { useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / MultiSelect',
@@ -390,5 +400,231 @@ export const customControl: ComponentStory<typeof MultiSelect> = () => {
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
     </MultiSelect>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof MultiSelect> = () => {
+  type Data = { select1: string[]; select2: string[]; select3: string[] }
+
+  const options: UIOption[] = [
+    { label: 'ベジータ', value: 'ベジータ' },
+    {
+      label: '地球人',
+      value: [
+        { label: '孫悟空', value: '孫悟空' },
+        { label: '孫悟飯', value: '孫悟飯' },
+        { label: 'クリリン', value: 'クリリン' },
+      ],
+    },
+    {
+      label: 'フリーザ軍',
+      value: [
+        { label: 'フリーザ', value: 'フリーザ' },
+        { label: 'ギニュー', value: 'ギニュー' },
+        { label: 'リクーム', value: 'リクーム' },
+        { label: 'バータ', value: 'バータ' },
+        { label: 'ジース', value: 'ジース' },
+        { label: 'グルド', value: 'グルド' },
+      ],
+    },
+  ]
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.select1}
+        label='Who is your favorite character?'
+        errorMessage={errors.select1?.message}
+      >
+        <Controller
+          name='select1'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <MultiSelect placeholder='キャラクターを選択' {...field}>
+              <Option value='孫悟空'>孫悟空</Option>
+              <Option value='ベジータ'>ベジータ</Option>
+              <Option value='フリーザ'>フリーザ</Option>
+            </MultiSelect>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.select2}
+        label='Who is your favorite character?'
+        errorMessage={errors.select2?.message}
+      >
+        <Controller
+          name='select2'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <MultiSelect placeholder='キャラクターを選択' {...field}>
+              <OptionGroup label='地球人'>
+                <Option value='孫悟空'>孫悟空</Option>
+                <Option value='孫悟飯'>孫悟飯</Option>
+                <Option value='クリリン'>クリリン</Option>
+              </OptionGroup>
+
+              <OptionGroup label='フリーザ軍'>
+                <Option value='フリーザ'>フリーザ</Option>
+                <Option value='ギニュー'>ギニュー</Option>
+                <Option value='リクーム'>リクーム</Option>
+                <Option value='バータ'>バータ</Option>
+                <Option value='ジース'>ジース</Option>
+                <Option value='グルド'>グルド</Option>
+              </OptionGroup>
+            </MultiSelect>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.select3}
+        label='Who is your favorite character?'
+        errorMessage={errors.select3?.message}
+      >
+        <Controller
+          name='select3'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <MultiSelect placeholder='キャラクターを選択' {...field} data={options} />
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiSelect> = () => {
+  type Data = { select1: string[]; select2: string[]; select3: string[] }
+
+  const defaultValues: Data = {
+    select1: ['孫悟空'],
+    select2: ['フリーザ'],
+    select3: ['リクーム'],
+  }
+
+  const options: UIOption[] = [
+    { label: 'ベジータ', value: 'ベジータ' },
+    {
+      label: '地球人',
+      value: [
+        { label: '孫悟空', value: '孫悟空' },
+        { label: '孫悟飯', value: '孫悟飯' },
+        { label: 'クリリン', value: 'クリリン' },
+      ],
+    },
+    {
+      label: 'フリーザ軍',
+      value: [
+        { label: 'フリーザ', value: 'フリーザ' },
+        { label: 'ギニュー', value: 'ギニュー' },
+        { label: 'リクーム', value: 'リクーム' },
+        { label: 'バータ', value: 'バータ' },
+        { label: 'ジース', value: 'ジース' },
+        { label: 'グルド', value: 'グルド' },
+      ],
+    },
+  ]
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.select1}
+        label='Who is your favorite character?'
+        errorMessage={errors.select1?.message}
+      >
+        <Controller
+          name='select1'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <MultiSelect placeholder='キャラクターを選択' {...field}>
+              <Option value='孫悟空'>孫悟空</Option>
+              <Option value='ベジータ'>ベジータ</Option>
+              <Option value='フリーザ'>フリーザ</Option>
+            </MultiSelect>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.select2}
+        label='Who is your favorite character?'
+        errorMessage={errors.select2?.message}
+      >
+        <Controller
+          name='select2'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <MultiSelect placeholder='キャラクターを選択' {...field}>
+              <OptionGroup label='地球人'>
+                <Option value='孫悟空'>孫悟空</Option>
+                <Option value='孫悟飯'>孫悟飯</Option>
+                <Option value='クリリン'>クリリン</Option>
+              </OptionGroup>
+
+              <OptionGroup label='フリーザ軍'>
+                <Option value='フリーザ'>フリーザ</Option>
+                <Option value='ギニュー'>ギニュー</Option>
+                <Option value='リクーム'>リクーム</Option>
+                <Option value='バータ'>バータ</Option>
+                <Option value='ジース'>ジース</Option>
+                <Option value='グルド'>グルド</Option>
+              </OptionGroup>
+            </MultiSelect>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.select3}
+        label='Who is your favorite character?'
+        errorMessage={errors.select3?.message}
+      >
+        <Controller
+          name='select3'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <MultiSelect placeholder='キャラクターを選択' {...field} data={options} />
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

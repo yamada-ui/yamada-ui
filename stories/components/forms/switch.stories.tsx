@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Label, Switch, Wrap, useBoolean, HStack } from '@yamada-ui/react'
+import { Label, Switch, Wrap, useBoolean, HStack, VStack, Button } from '@yamada-ui/react'
 import { useId } from 'react'
-
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 export default {
   title: 'Components / Forms / Switch',
   component: Switch,
@@ -142,5 +142,65 @@ export const customControl: ComponentStory<typeof Switch> = () => {
     <Switch isChecked={isChecked} onChange={toggle}>
       custom control
     </Switch>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Switch> = () => {
+  type Data = { switch: boolean }
+
+  const { control, handleSubmit, watch } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name='switch'
+        control={control}
+        render={({ field: { value, ...rest } }) => (
+          <Switch isChecked={value} {...rest}>
+            Dark mode
+          </Switch>
+        )}
+      />
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof Switch> = () => {
+  type Data = { switch: boolean }
+
+  const defaultValues: Data = {
+    switch: true,
+  }
+
+  const { control, handleSubmit, watch } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name='switch'
+        control={control}
+        render={({ field: { value, ...rest } }) => (
+          <Switch isChecked={value} {...rest}>
+            Dark mode
+          </Switch>
+        )}
+      />
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

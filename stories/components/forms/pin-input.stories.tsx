@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FormControl, PinInput, PinInputField, useLoading } from '@yamada-ui/react'
+import { Button, FormControl, PinInput, PinInputField, VStack, useLoading } from '@yamada-ui/react'
 import { useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / PinInput',
@@ -196,5 +197,87 @@ export const isInvalid: ComponentStory<typeof PinInput> = () => {
         <PinInput />
       </FormControl>
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof PinInput> = () => {
+  type Data = { pinInput: string }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.pinInput}
+        label='Token'
+        errorMessage={errors.pinInput?.message}
+      >
+        <Controller
+          name='pinInput'
+          control={control}
+          rules={{
+            required: { value: true, message: 'This is required.' },
+            minLength: { value: 4, message: 'This is required.' },
+          }}
+          render={({ field }) => <PinInput {...field} />}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof PinInput> = () => {
+  type Data = { pinInput: string }
+
+  const defaultValues: Data = {
+    pinInput: '5',
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.pinInput}
+        label='Token'
+        errorMessage={errors.pinInput?.message}
+      >
+        <Controller
+          name='pinInput'
+          control={control}
+          rules={{
+            required: { value: true, message: 'This is required.' },
+            minLength: { value: 4, message: 'This is required.' },
+          }}
+          render={({ field }) => <PinInput {...field} />}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

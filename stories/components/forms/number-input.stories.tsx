@@ -1,5 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Button, FormControl, HStack, Input, NumberInput, useNumberInput } from '@yamada-ui/react'
+import {
+  Button,
+  FormControl,
+  HStack,
+  Input,
+  NumberInput,
+  VStack,
+  useNumberInput,
+} from '@yamada-ui/react'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / NumberInput',
@@ -157,5 +166,84 @@ export const stylingPlaceholder: ComponentStory<typeof NumberInput> = () => {
         _placeholder={{ color: 'inherit' }}
       />
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof NumberInput> = () => {
+  type Data = { numberInput: string }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.numberInput}
+        label='Age'
+        errorMessage={errors.numberInput?.message}
+      >
+        <Controller
+          name='numberInput'
+          control={control}
+          rules={{
+            required: { value: true, message: 'This is required.' },
+            max: { value: 5, message: 'The maximum value is 5.' },
+          }}
+          render={({ field }) => <NumberInput {...field} />}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof NumberInput> = () => {
+  type Data = { numberInput: string }
+
+  const defaultValues: Data = {
+    numberInput: '5',
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.numberInput}
+        label='Age'
+        errorMessage={errors.numberInput?.message}
+      >
+        <Controller
+          name='numberInput'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => <NumberInput {...field} />}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

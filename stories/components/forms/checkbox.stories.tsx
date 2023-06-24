@@ -10,8 +10,10 @@ import {
   Wrap,
   Box,
   HStack,
+  Button,
 } from '@yamada-ui/react'
 import { FC, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / Checkbox',
@@ -307,5 +309,128 @@ export const customHook: ComponentStory<typeof Checkbox> = () => {
       <CustomCheckbox {...getCheckboxProps({ value: 'ベジータ' })} />
       <CustomCheckbox {...getCheckboxProps({ value: 'フリーザ' })} />
     </HStack>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Checkbox> = () => {
+  type Data = { checkbox: boolean; checkboxGroup: string[] }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.checkbox}
+        label='Who is your favorite character?'
+        errorMessage={errors.checkbox?.message}
+      >
+        <Controller
+          name='checkbox'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field: { value, ...rest } }) => (
+            <Checkbox isChecked={value} {...rest}>
+              孫悟空
+            </Checkbox>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.checkboxGroup}
+        label='Who is your favorite character?'
+        errorMessage={errors.checkboxGroup?.message}
+      >
+        <Controller
+          name='checkboxGroup'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <CheckboxGroup {...field}>
+              <Checkbox value='孫悟空'>孫悟空</Checkbox>
+              <Checkbox value='ベジータ'>ベジータ</Checkbox>
+              <Checkbox value='フリーザ'>フリーザ</Checkbox>
+            </CheckboxGroup>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof Checkbox> = () => {
+  type Data = { checkbox: boolean; checkboxGroup: string[] }
+
+  const defaultValues: Data = {
+    checkbox: true,
+    checkboxGroup: ['孫悟空'],
+  }
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.checkbox}
+        label='Who is your favorite character?'
+        errorMessage={errors.checkbox?.message}
+      >
+        <Controller
+          name='checkbox'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field: { value, ...rest } }) => (
+            <Checkbox isChecked={value} {...rest}>
+              孫悟空
+            </Checkbox>
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        isInvalid={!!errors.checkboxGroup}
+        label='Who is your favorite character?'
+        errorMessage={errors.checkboxGroup?.message}
+      >
+        <Controller
+          name='checkboxGroup'
+          control={control}
+          rules={{ required: { value: true, message: 'This is required.' } }}
+          render={({ field }) => (
+            <CheckboxGroup {...field}>
+              <Checkbox value='孫悟空'>孫悟空</Checkbox>
+              <Checkbox value='ベジータ'>ベジータ</Checkbox>
+              <Checkbox value='フリーザ'>フリーザ</Checkbox>
+            </CheckboxGroup>
+          )}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

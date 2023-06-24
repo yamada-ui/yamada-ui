@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FormControl, Textarea } from '@yamada-ui/react'
+import { Button, FormControl, Textarea, VStack } from '@yamada-ui/react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 export default {
   title: 'Components / Forms / Textarea',
@@ -109,5 +110,77 @@ export const stylingPlaceholder: ComponentStory<typeof Textarea> = () => {
         _placeholder={{ color: 'inherit' }}
       />
     </>
+  )
+}
+
+export const reactHookForm: ComponentStory<typeof Textarea> = () => {
+  type Data = { textarea: string }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.textarea}
+        label='Feedback'
+        errorMessage={errors.textarea?.message}
+      >
+        <Textarea
+          placeholder='your feedback'
+          {...register('textarea', { required: { value: true, message: 'This is required.' } })}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
+  )
+}
+
+export const reactHookFormWithDefaultValue: ComponentStory<typeof Textarea> = () => {
+  type Data = { textarea: string }
+
+  const defaultValues: Data = {
+    textarea: '孫悟空',
+  }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Data>({ defaultValues })
+
+  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+
+  console.log('watch:', watch())
+
+  return (
+    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+      <FormControl
+        isInvalid={!!errors.textarea}
+        label='Feedback'
+        errorMessage={errors.textarea?.message}
+      >
+        <Textarea
+          placeholder='your feedback'
+          {...register('textarea', { required: { value: true, message: 'This is required.' } })}
+        />
+      </FormControl>
+
+      <Button type='submit' alignSelf='flex-end'>
+        Submit
+      </Button>
+    </VStack>
   )
 }

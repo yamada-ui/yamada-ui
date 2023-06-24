@@ -1,5 +1,11 @@
 # @yamada-ui/calendar
 
+## 0.2.8
+
+### Patch Changes
+
+- [`5f4f1e54`](https://github.com/hirotomoyamada/yamada-ui/commit/5f4f1e54e9bc1b00edcab26af34818d04558fe92) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added null to value type.
+
 ## 0.2.7
 
 ### Patch Changes

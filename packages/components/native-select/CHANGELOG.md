@@ -1,5 +1,11 @@
 # @yamada-ui/native-select
 
+## 0.1.10
+
+### Patch Changes
+
+- [`dbff77df`](https://github.com/hirotomoyamada/yamada-ui/commit/dbff77df1b1bdcb0f6aec9d59fb0e00391c9eb37) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed automatically isRequired.
+
 ## 0.1.9
 
 ### Patch Changes

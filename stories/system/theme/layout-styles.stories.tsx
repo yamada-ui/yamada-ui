@@ -18,7 +18,7 @@ export const useLayerStyle = () => {
       fontSize: '8xl',
       fontWeight: 'bold',
       _after: {
-        content: "''",
+        content: '""',
         position: 'absolute',
         top: '50%',
         left: '50%',

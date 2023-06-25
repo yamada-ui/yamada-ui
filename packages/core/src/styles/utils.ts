@@ -5,7 +5,7 @@ import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
 import { Transform } from './config'
 
-export const defaultColorSchemes = ['primary', 'secondary', 'warning', 'danger', 'link']
+export const defaultColorSchemes = ['brand', 'primary', 'secondary', 'warning', 'danger', 'link']
 
 const directions: Record<string, string> = {
   'to-t': 'to top',

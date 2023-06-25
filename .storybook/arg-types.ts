@@ -63,7 +63,7 @@ export const createArgTypes = (): ArgTypes => {
   return { ...styleArgs, ...pseudoArgs, ...componentArgs, ...uiArgs }
 }
 
-const defaultKeys = ['primary', 'secondary', 'warning', 'danger', 'link']
+const defaultKeys = ['brand', 'primary', 'secondary', 'warning', 'danger', 'link']
 
 const hueKeys = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
 

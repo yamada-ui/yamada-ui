@@ -62,7 +62,7 @@ const isObject = (value: unknown): value is Record<string, unknown> =>
 
 const isString = (value: unknown): value is string => typeof value === 'string'
 
-const defaultColors = ['primary', 'secondary', 'warning', 'danger', 'link']
+const defaultColors = ['brand', 'primary', 'secondary', 'warning', 'danger', 'link']
 
 const hues = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
 

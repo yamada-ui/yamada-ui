@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- [`540682f2`](https://github.com/hirotomoyamada/yamada-ui/commit/540682f27c8d407c93d02342d341a7bf07cf8ec1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `brand` to default colors.
+
 ## 0.2.0
 
 ### Minor Changes

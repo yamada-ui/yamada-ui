@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 0.2.4
+
+### Patch Changes
+
+- [`ddb71320`](https://github.com/hirotomoyamada/yamada-ui/commit/ddb71320c504386e99b9bb76f71d23ae6552547a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added basci alert variant.
+
+- Updated dependencies [[`ddb71320`](https://github.com/hirotomoyamada/yamada-ui/commit/ddb71320c504386e99b9bb76f71d23ae6552547a)]:
+  - @yamada-ui/core@0.2.3
+
 ## 0.2.3
 
 ### Patch Changes

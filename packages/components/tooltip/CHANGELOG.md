@@ -1,5 +1,15 @@
 # @yamada-ui/tooltip
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`ddb71320`](https://github.com/hirotomoyamada/yamada-ui/commit/ddb71320c504386e99b9bb76f71d23ae6552547a)]:
+  - @yamada-ui/core@0.2.3
+  - @yamada-ui/motion@0.1.10
+  - @yamada-ui/transitions@0.1.10
+  - @yamada-ui/use-popper@0.1.10
+
 ## 0.1.9
 
 ### Patch Changes

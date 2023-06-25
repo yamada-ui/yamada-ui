@@ -280,7 +280,7 @@ export type NoticeProps = Omit<AlertProps, keyof UseNoticeOptions> &
   }
 
 const Notice: FC<NoticeProps> = ({
-  variant = 'subtle',
+  variant = 'basic',
   colorScheme,
   status,
   icon,

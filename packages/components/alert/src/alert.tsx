@@ -12,11 +12,11 @@ import { Loading, LoadingProps } from '@yamada-ui/loading'
 import { createContext, cx } from '@yamada-ui/utils'
 
 const statuses = {
-  info: { icon: InfoIcon, colorScheme: 'blue' },
-  success: { icon: CheckIcon, colorScheme: 'green' },
-  warning: { icon: WarningIcon, colorScheme: 'orange' },
-  error: { icon: WarningIcon, colorScheme: 'red' },
-  loading: { icon: Loading, colorScheme: 'blue' },
+  info: { icon: InfoIcon, colorScheme: 'primary' },
+  success: { icon: CheckIcon, colorScheme: 'secondary' },
+  warning: { icon: WarningIcon, colorScheme: 'warning' },
+  error: { icon: WarningIcon, colorScheme: 'danger' },
+  loading: { icon: Loading, colorScheme: 'primary' },
 } as const
 
 type Status = keyof typeof statuses

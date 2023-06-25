@@ -76,6 +76,18 @@ export const withVariant = () => {
             notice({
               title: '孫悟空',
               description: 'オッス！オラ悟空！',
+              variant: 'basic',
+            })
+          }
+        >
+          Show basic Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              title: '孫悟空',
+              description: 'オッス！オラ悟空！',
               variant: 'solid',
             })
           }

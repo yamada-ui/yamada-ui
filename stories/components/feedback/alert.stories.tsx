@@ -6,7 +6,7 @@ export default {
   component: Alert,
 } as ComponentMeta<typeof Alert>
 
-export const subtle: ComponentStory<typeof Alert> = () => {
+export const basic: ComponentStory<typeof Alert> = () => {
   return (
     <>
       <Alert status='info'>
@@ -28,6 +28,36 @@ export const subtle: ComponentStory<typeof Alert> = () => {
       </Alert>
 
       <Alert status='error'>
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+    </>
+  )
+}
+
+export const subtle: ComponentStory<typeof Alert> = () => {
+  return (
+    <>
+      <Alert status='info' variant='subtle'>
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+
+      <Alert status='success' variant='subtle'>
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+
+      <Alert status='warning' variant='subtle'>
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+
+      <Alert status='error' variant='subtle'>
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
@@ -59,6 +89,32 @@ export const solid: ComponentStory<typeof Alert> = () => {
 
       <Alert status='error' variant='solid'>
         <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+    </>
+  )
+}
+
+export const islandAccent: ComponentStory<typeof Alert> = () => {
+  return (
+    <>
+      <Alert status='info' variant='island-accent'>
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+
+      <Alert status='success' variant='island-accent'>
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+
+      <Alert status='warning' variant='island-accent'>
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
+      </Alert>
+
+      <Alert status='error' variant='island-accent'>
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>か…完全体に………完全体になれさえすれば………！！！</AlertDescription>
       </Alert>

@@ -9,7 +9,7 @@ export const Progress: ComponentMultiStyle = {
     filledTrack: ({
       theme: t,
       colorMode: m,
-      colorScheme: c = 'blue',
+      colorScheme: c = 'primary',
       hasStripe,
       isAnimation,
       filledTrackColor: f,
@@ -81,6 +81,6 @@ export const Progress: ComponentMultiStyle = {
 
   defaultProps: {
     size: 'md',
-    colorScheme: 'blue',
+    colorScheme: 'primary',
   },
 }

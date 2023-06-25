@@ -2,7 +2,7 @@ import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
 import { getMemoizedObject as get, toneColor } from '@yamada-ui/utils'
 
 export const Stepper: ComponentMultiStyle = {
-  baseStyle: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+  baseStyle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
     const color = isDefaultColor(
       [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
       [`${c}.500`, `${c}.200`],
@@ -166,6 +166,6 @@ export const Stepper: ComponentMultiStyle = {
 
   defaultProps: {
     size: 'md',
-    colorScheme: 'blue',
+    colorScheme: 'primary',
   },
 }

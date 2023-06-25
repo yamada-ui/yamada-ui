@@ -55,7 +55,7 @@ export const Tag: ComponentMultiStyle = {
 
   variants: {
     solid: {
-      container: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
+      container: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
         bg: isDefaultColor(
           [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
           [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
@@ -64,7 +64,7 @@ export const Tag: ComponentMultiStyle = {
       }),
     },
     subtle: {
-      container: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
+      container: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
         bg: isDefaultColor(
           [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m)],
           [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
@@ -76,7 +76,7 @@ export const Tag: ComponentMultiStyle = {
       }),
     },
     outline: {
-      container: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => {
+      container: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
         const color = isDefaultColor(
           mode(toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.8)(t, m))(m),
           mode(getColor(`${c}.500`)(t, m), transparentizeColor(`${c}.200`, 0.8)(t, m))(m),
@@ -93,6 +93,6 @@ export const Tag: ComponentMultiStyle = {
   defaultProps: {
     size: 'md',
     variant: 'subtle',
-    colorScheme: 'gray',
+    colorScheme: 'primary',
   },
 }

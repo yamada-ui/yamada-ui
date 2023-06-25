@@ -22,7 +22,7 @@ export const Slider: ComponentStyle = {
         bg: ['gray.300', 'whiteAlpha.300'],
       },
     },
-    filledTrack: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
+    filledTrack: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       w: 'inherit',
       h: 'inherit',
       bg: isDefaultColor(
@@ -91,6 +91,6 @@ export const Slider: ComponentStyle = {
 
   defaultProps: {
     size: 'md',
-    colorScheme: 'blue',
+    colorScheme: 'primary',
   },
 }

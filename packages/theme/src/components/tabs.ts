@@ -34,7 +34,7 @@ export const Tabs: ComponentMultiStyle = {
   },
 
   variants: {
-    line: ({ theme: t, colorMode: m, colorScheme: c = 'blue', orientation }) => {
+    line: ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
       const isVertical = orientation === 'vertical'
 
       return {
@@ -63,7 +63,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    sticky: ({ theme: t, colorMode: m, colorScheme: c = 'blue', orientation }) => {
+    sticky: ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
       const isVertical = orientation === 'vertical'
 
       return {
@@ -99,7 +99,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    'sticky-subtle': ({ theme: t, colorMode: m, colorScheme: c = 'blue', orientation }) => {
+    'sticky-subtle': ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
       const isVertical = orientation === 'vertical'
 
       return {
@@ -136,7 +136,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    'sticky-solid': ({ theme: t, colorMode: m, colorScheme: c = 'blue', orientation }) => {
+    'sticky-solid': ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
       const isVertical = orientation === 'vertical'
 
       return {
@@ -170,7 +170,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    rounded: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+    rounded: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.8)(t, m))(m),
         mode(getColor(`${c}.500`)(t, m), transparentizeColor(`${c}.200`, 0.8)(t, m))(m),
@@ -188,7 +188,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    'rounded-subtle': ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
+    'rounded-subtle': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       tabList: { gap: 'sm' },
       tab: {
         borderRadius: 'full',
@@ -206,7 +206,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       },
     }),
-    'rounded-solid': ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
+    'rounded-solid': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       tabList: { gap: 'sm' },
       tab: {
         borderRadius: 'full',
@@ -250,6 +250,6 @@ export const Tabs: ComponentMultiStyle = {
   defaultProps: {
     size: 'md',
     variant: 'line',
-    colorScheme: 'blue',
+    colorScheme: 'primary',
   },
 }

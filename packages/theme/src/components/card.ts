@@ -22,7 +22,7 @@ export const Card: ComponentMultiStyle = {
         borderWidth: '1px',
       },
     },
-    solid: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
+    solid: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       container: {
         bg: isDefaultColor(
           [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
@@ -31,7 +31,7 @@ export const Card: ComponentMultiStyle = {
         color: [`white`, `whiteAlpha.800`],
       },
     }),
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       container: {
         bg: isDefaultColor(
           [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m)],
@@ -76,7 +76,7 @@ export const Card: ComponentMultiStyle = {
 
   defaultProps: {
     variant: 'elevated',
-    colorScheme: 'gray',
+    colorScheme: 'primary',
     size: 'md',
   },
 }

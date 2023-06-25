@@ -7,7 +7,7 @@ export const Checkbox: ComponentMultiStyle = {
       _readOnly: { cursor: 'auto' },
       _disabled: { cursor: 'not-allowed' },
     },
-    icon: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
+    icon: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       transitionProperty: 'box-shadow',
       transitionDuration: 'normal',
       border: '2px solid',
@@ -84,6 +84,6 @@ export const Checkbox: ComponentMultiStyle = {
 
   defaultProps: {
     size: 'md',
-    colorScheme: 'blue',
+    colorScheme: 'primary',
   },
 }

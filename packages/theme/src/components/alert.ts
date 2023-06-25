@@ -29,7 +29,7 @@ export const Alert: ComponentMultiStyle = {
   },
 
   variants: {
-    basic: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+    basic: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t, m), toneColor(c, 200)(t, m))(m),
         mode(getColor(`${c}.500`)(t, m), getColor(`${c}.200`)(t, m))(m),
@@ -44,7 +44,7 @@ export const Alert: ComponentMultiStyle = {
         loading: { color },
       }
     },
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
         [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
         [`${c}.500`, `${c}.200`],
@@ -61,7 +61,7 @@ export const Alert: ComponentMultiStyle = {
         loading: { color },
       }
     },
-    solid: ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => ({
+    solid: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       container: {
         bg: isDefaultColor(
           [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
@@ -70,7 +70,7 @@ export const Alert: ComponentMultiStyle = {
         color: ['white', 'gray.900'],
       },
     }),
-    'island-accent': ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+    'island-accent': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t, m), toneColor(c, 200)(t, m))(m),
         mode(getColor(`${c}.500`)(t, m), getColor(`${c}.200`)(t, m))(m),
@@ -96,7 +96,7 @@ export const Alert: ComponentMultiStyle = {
         icon: { color },
       }
     },
-    'left-accent': ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+    'left-accent': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t, m), toneColor(c, 200)(t, m))(m),
         mode(getColor(`${c}.500`)(t, m), getColor(`${c}.200`)(t, m))(m),
@@ -115,7 +115,7 @@ export const Alert: ComponentMultiStyle = {
         icon: { color },
       }
     },
-    'top-accent': ({ theme: t, colorMode: m, colorScheme: c = 'blue' }) => {
+    'top-accent': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t, m), toneColor(c, 200)(t, m))(m),
         mode(getColor(`${c}.500`)(t, m), getColor(`${c}.200`)(t, m))(m),
@@ -138,6 +138,6 @@ export const Alert: ComponentMultiStyle = {
 
   defaultProps: {
     variant: 'basic',
-    colorScheme: 'blue',
+    colorScheme: 'primary',
   },
 }

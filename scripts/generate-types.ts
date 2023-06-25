@@ -96,19 +96,19 @@ const extractThemeProps = ({ colors, components = {} }: Theme): Record<string, P
         defaultValue: variant?.toString(),
         type: variants ? toLiteralStringType(Object.keys(variants)) : 'string',
         required: false,
-        description: `The variant of the ${name}`,
+        description: `The variant of the ${name}.`,
       },
       size: {
         defaultValue: size?.toString(),
         type: sizes ? toLiteralStringType(Object.keys(sizes)) : 'string',
         required: false,
-        description: `The size of the ${name}`,
+        description: `The size of the ${name}.`,
       },
       colorScheme: {
         defaultValue: colorScheme,
         type: colorSchemeType,
         required: false,
-        description: 'The visual color appearance of the component',
+        description: 'The visual color appearance of the component.',
       },
     }
   }
@@ -206,7 +206,7 @@ const extractPropertiesOfTypeName = (
 
       results[typeName] = sortByRequiredProperties(properties)
     } else {
-      console.log('[types]: ', 'Omitting type', `\`${typeName}\``)
+      console.log('[types]:', 'Omitting type', `\`${typeName}\``)
     }
   }
 
@@ -237,7 +237,7 @@ const extractTypeExports = (code: string) => {
 
   const exportedTypes = Object.keys(exported).filter(Boolean)
 
-  console.log('[types]: ', ...exportedTypes)
+  console.log('[types]:', exportedTypes.join(', '))
 
   return exportedTypes
 }

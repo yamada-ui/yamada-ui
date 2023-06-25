@@ -31,7 +31,7 @@
     "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts",
     "gen:component": "plop component && pnpm install",
     "gen:hook": "plop hook && pnpm install",
-    "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
+    "gen:types": "pnpm --filter=./packages/components/** gen:types",
     "changelog": "tsx scripts/changelog",
     "changelog:latest": "tsx scripts/changelog --latest",
     "changelog:commit": "git add . && git commit -am 'docs: add changelog' && git push",

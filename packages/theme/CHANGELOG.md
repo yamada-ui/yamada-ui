@@ -1,5 +1,16 @@
 # @yamada-ui/theme
 
+## 0.3.0
+
+### Minor Changes
+
+- [`e9aed64e`](https://github.com/hirotomoyamada/yamada-ui/commit/e9aed64e171a3e326b28ed330de0e2dc22a71fbe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed defaultProps colorScheme to `primary`.
+
+### Patch Changes
+
+- Updated dependencies [[`540682f2`](https://github.com/hirotomoyamada/yamada-ui/commit/540682f27c8d407c93d02342d341a7bf07cf8ec1)]:
+  - @yamada-ui/core@0.3.0
+
 ## 0.2.4
 
 ### Patch Changes

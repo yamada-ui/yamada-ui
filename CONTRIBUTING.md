@@ -39,7 +39,7 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 **`pnpm install`**: bootstraps the entire project, symlinks all dependencies for
 cross-component development and builds all components.
 
-**`pnpm sb`**: starts storybook server and loads stories.
+**`pnpm storybook`**: starts storybook server and loads stories.
 
 **`pnpm build`**: run build for all component packages.
 

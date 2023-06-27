@@ -1,0 +1,27 @@
+{
+  "Input": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Input."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Input."
+    }
+  },
+  "InputGroup": {},
+  "InputAddon": { "placement": { "type": "\"right\" | \"left\"", "required": false } },
+  "InputElement": {
+    "isClick": { "type": "boolean", "required": false },
+    "placement": { "type": "\"right\" | \"left\"", "required": false }
+  }
+}

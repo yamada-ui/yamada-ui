@@ -1,0 +1,16 @@
+{
+  "Markdown": {
+    "code": {
+      "type": "{ theme?: \"a11yDark\" | \"atomDark\" | \"base16AteliersulphurpoolLight\" | \"cb\" | \"coldarkCold\" | \"coldarkDark\" | \"coy\" | \"darcula\" | \"dark\" | \"dracula\" | \"duotoneDark\" | \"duotoneEarth\" | ... 27 more ... | undefined; }",
+      "required": false
+    }
+  },
+  "MarkdownComponent": {},
+  "MarkdownComponentCode": {},
+  "MarkdownComponentHeading": {},
+  "MarkdownComponentLi": {},
+  "MarkdownComponentOrderedList": {},
+  "MarkdownComponentUnorderedList": {},
+  "MarkdownComponentTableCell": {},
+  "MarkdownComponentTableRow": {}
+}

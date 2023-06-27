@@ -1,7 +1,7 @@
 import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { cx, handlerAll } from '@yamada-ui/utils'
 import { KeyboardEvent, KeyboardEventHandler, useCallback } from 'react'
-import { useTabsContext, useTabsDescendantsContext } from './'
+import { useTabsContext, useTabsDescendantsContext } from './tabs'
 
 export type TabListProps = HTMLUIProps<'div'>
 

@@ -35,9 +35,9 @@ export type MarkdownComponentCodeProps = CodeProps
 export type MarkdownComponentHeadingProps = HeadingProps
 export type MarkdownComponentLiProps = LiProps
 export type MarkdownComponentOrderedListProps = OrderedListProps
+export type MarkdownComponentUnorderedListProps = UnorderedListProps
 export type MarkdownComponentTableCellProps = TableCellProps
 export type MarkdownComponentTableRowProps = TableRowProps
-export type MarkdownComponentUnorderedListProps = UnorderedListProps
 
 type MarkdownOptions = ReactMarkdownOptions & {
   code?: { theme?: CodeTheme | ColorModeArray<CodeTheme> }

@@ -42,7 +42,7 @@
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
-    "gen:types": "tsx ../../../scripts/generate-types"
+    "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
     "@yamada-ui/button": "workspace:*",

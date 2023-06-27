@@ -1,0 +1,35 @@
+{
+  "Image": {
+    "crossOrigin": { "type": "\"\" | \"anonymous\" | \"use-credentials\"", "required": false },
+    "fallback": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false
+    },
+    "fallbackStrategy": { "type": "FallbackStrategy", "required": false },
+    "fit": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ObjectFit\n  | ResponsiveObject<ObjectFit>\n  | ColorModeArray<ObjectFit>",
+      "required": false
+    },
+    "ignoreFallback": { "type": "boolean", "required": false },
+    "loading": { "type": "\"eager\" | \"lazy\"", "required": false },
+    "onError": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
+    "onLoad": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
+    "size": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "sizes": { "type": "string", "required": false },
+    "src": { "type": "string", "required": false },
+    "srcSet": { "type": "string", "required": false }
+  },
+  "UseImage": {
+    "crossOrigin": { "type": "\"\" | \"anonymous\" | \"use-credentials\"", "required": false },
+    "ignoreFallback": { "type": "boolean", "required": false },
+    "loading": { "type": "\"eager\" | \"lazy\"", "required": false },
+    "onError": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
+    "onLoad": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
+    "sizes": { "type": "string", "required": false },
+    "src": { "type": "string", "required": false },
+    "srcSet": { "type": "string", "required": false }
+  }
+}

@@ -10,7 +10,8 @@ import {
   omitObject,
 } from '@yamada-ui/utils'
 import { RefAttributes } from 'react'
-import { PopoverProps, usePopover, PopoverCloseButton } from '.'
+import { usePopover } from './popover'
+import { PopoverProps, PopoverCloseButton } from '.'
 
 export type PopoverContentProps = Omit<
   HTMLUIProps<'section'>,

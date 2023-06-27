@@ -1,0 +1,8 @@
+{
+  "Icon": {
+    "size": {
+      "type": "number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 17 more ... | ColorModeArray<...>",
+      "required": false
+    }
+  }
+}

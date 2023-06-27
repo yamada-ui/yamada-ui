@@ -1,4 +1,3 @@
-import { Calendar } from '@yamada-ui/calendar'
 import {
   ui,
   forwardRef,
@@ -10,6 +9,7 @@ import {
 } from '@yamada-ui/core'
 import { Popover, PopoverContent } from '@yamada-ui/popover'
 import { cx } from '@yamada-ui/utils'
+import { Calendar } from './calendar'
 import { DatePickerField, DatePickerFieldProps } from './date-picker-field'
 import { DatePickerClearIcon, DatePickerIcon, DatePickerIconProps } from './date-picker-icon'
 import { DatePickerProvider, useDatePicker, UseDatePickerProps } from './use-date-picker'

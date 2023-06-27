@@ -1,0 +1,112 @@
+{
+  "Slider": {
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultValue": { "type": "number", "required": false },
+    "filledTrack": { "type": "SliderFilledTrackProps", "required": false },
+    "filledTrackColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "focusThumbOnChange": { "type": "boolean", "required": false },
+    "id": { "type": "string", "required": false },
+    "input": { "type": "HTMLUIProps<\"input\">", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isInvalid": { "type": "boolean", "required": false },
+    "isReadOnly": { "type": "boolean", "required": false },
+    "isRequired": { "type": "boolean", "required": false },
+    "isReversed": { "type": "boolean", "required": false },
+    "max": { "type": "number", "required": false },
+    "min": { "type": "number", "required": false },
+    "name": { "type": "string", "required": false },
+    "onChange": { "type": "(value: number) => void", "required": false },
+    "onChangeEnd": { "type": "(value: number) => void", "required": false },
+    "onChangeStart": { "type": "(value: number) => void", "required": false },
+    "orientation": { "type": "\"horizontal\" | \"vertical\"", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Slider."
+    },
+    "step": { "type": "number", "required": false },
+    "thumb": { "type": "SliderThumbProps", "required": false },
+    "thumbColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "thumbSize": {
+      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 63 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "track": { "type": "SliderTrackProps", "required": false },
+    "trackColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "trackSize": {
+      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "value": { "type": "number", "required": false },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Slider." }
+  },
+  "SliderTrack": { "filledTrack": { "type": "SliderFilledTrackProps", "required": false } },
+  "SliderFilledTrack": {},
+  "SliderThumb": {},
+  "SliderMark": { "value": { "type": "number", "required": true } },
+  "RangeSlider": {
+    "betweenThumbs": { "type": "number", "required": false },
+    "defaultValue": { "type": "[number, number]", "required": false },
+    "filledTrack": { "type": "RangeSliderFilledTrackProps", "required": false },
+    "filledTrackColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "focusThumbOnChange": { "type": "boolean", "required": false },
+    "id": { "type": "string", "required": false },
+    "input": { "type": "HTMLUIProps<\"input\">", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isInvalid": { "type": "boolean", "required": false },
+    "isReadOnly": { "type": "boolean", "required": false },
+    "isRequired": { "type": "boolean", "required": false },
+    "isReversed": { "type": "boolean", "required": false },
+    "max": { "type": "number", "required": false },
+    "min": { "type": "number", "required": false },
+    "name": { "type": "string | [string, string]", "required": false },
+    "onChange": { "type": "(value: [number, number]) => void", "required": false },
+    "onChangeEnd": { "type": "(value: [number, number]) => void", "required": false },
+    "onChangeStart": { "type": "(value: [number, number]) => void", "required": false },
+    "orientation": { "type": "\"horizontal\" | \"vertical\"", "required": false },
+    "step": { "type": "number", "required": false },
+    "thumb": { "type": "RangeSliderThumbProps", "required": false },
+    "thumbColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "thumbSize": {
+      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 63 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "track": { "type": "RangeSliderTrackProps", "required": false },
+    "trackColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "trackSize": {
+      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "value": { "type": "[number, number]", "required": false }
+  },
+  "RangeSliderTrack": {
+    "filledTrack": { "type": "RangeSliderFilledTrackProps", "required": false }
+  },
+  "RangeSliderFilledTrack": {},
+  "RangeSliderThumb": {},
+  "RangeSliderMark": { "value": { "type": "number", "required": true } }
+}

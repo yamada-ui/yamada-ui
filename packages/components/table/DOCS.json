@@ -1,0 +1,107 @@
+{
+  "Table": {
+    "cellProps": { "type": "CellProps<Y>", "required": false },
+    "checkboxProps": { "type": "CheckboxProps", "required": false },
+    "colorScheme": {
+      "defaultValue": "gray",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultSelectedRowIds": { "type": "string[]", "required": false },
+    "defaultSort": { "type": "Sort<Y>", "required": false },
+    "disabledRowIds": { "type": "string[]", "required": false },
+    "footerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
+    "footerProps": { "type": "HeaderProps<Y>", "required": false },
+    "headerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
+    "headerProps": { "type": "HeaderProps<Y>", "required": false },
+    "highlightOnHover": { "type": "boolean", "required": false },
+    "highlightOnSelected": { "type": "boolean", "required": false },
+    "layout": {
+      "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
+      "required": false
+    },
+    "onChangeSelect": { "type": "(rowSelection: string[]) => void", "required": false },
+    "onChangeSort": { "type": "(sort: Sort<Y>) => void", "required": false },
+    "onClickRow": { "type": "(row: Row<Y>) => void", "required": false },
+    "rowId": { "type": "keyof Y", "required": false },
+    "rowProps": { "type": "RowProps<Y>", "required": false },
+    "rowsClickSelect": { "type": "boolean", "required": false },
+    "selectColumn": { "type": "false | SelectColumn<Y, unknown>", "required": false },
+    "selectedRowIds": { "type": "string[]", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+      "required": false,
+      "description": "The size of the Table."
+    },
+    "sort": { "type": "Sort<Y>", "required": false },
+    "sortIconProps": { "type": "IconProps", "required": false },
+    "tbodyProps": { "type": "TableBodyProps", "required": false },
+    "tfootProps": { "type": "TableFootProps", "required": false },
+    "theadProps": { "type": "TableHeadProps", "required": false },
+    "variant": {
+      "defaultValue": "simple",
+      "type": "\"simple\" | \"striped\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Table."
+    },
+    "withBorder": { "type": "boolean", "required": false },
+    "withColumnBorders": { "type": "boolean", "required": false },
+    "withFooter": { "type": "boolean", "required": false },
+    "withFooterSelect": { "type": "boolean", "required": false }
+  },
+  "PagingTable": {
+    "cellProps": { "type": "CellProps<Y>", "required": false },
+    "checkboxProps": { "type": "CheckboxProps", "required": false },
+    "containerProps": { "type": "HTMLUIProps<\"div\">", "required": false },
+    "defaultPageIndex": { "type": "number", "required": false },
+    "defaultPageSize": { "type": "number", "required": false },
+    "defaultSelectedRowIds": { "type": "string[]", "required": false },
+    "defaultSort": { "type": "Sort<Y>", "required": false },
+    "disabledRowIds": { "type": "string[]", "required": false },
+    "footerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
+    "footerProps": { "type": "HeaderProps<Y>", "required": false },
+    "formatPageSizeLabel": { "type": "(pageSize: number) => string", "required": false },
+    "headerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
+    "headerProps": { "type": "HeaderProps<Y>", "required": false },
+    "highlightOnHover": { "type": "boolean", "required": false },
+    "highlightOnSelected": { "type": "boolean", "required": false },
+    "layout": {
+      "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
+      "required": false
+    },
+    "onChangePageIndex": { "type": "(pageIndex: number) => void", "required": false },
+    "onChangePageSize": { "type": "(pageIndex: number) => void", "required": false },
+    "onChangeSelect": { "type": "(rowSelection: string[]) => void", "required": false },
+    "onChangeSort": { "type": "(sort: Sort<Y>) => void", "required": false },
+    "onClickRow": { "type": "(row: Row<Y>) => void", "required": false },
+    "pageIndex": { "type": "number", "required": false },
+    "pageSize": { "type": "number", "required": false },
+    "pageSizeList": { "type": "number[]", "required": false },
+    "paginationProps": {
+      "type": "Omit<\n  PaginationProps,\n  \"onChange\" | \"page\" | \"defaultPage\" | \"total\"\n>",
+      "required": false
+    },
+    "pagingControlProps": { "type": "HTMLUIProps<\"div\">", "required": false },
+    "rowId": { "type": "keyof Y", "required": false },
+    "rowProps": { "type": "RowProps<Y>", "required": false },
+    "rowsClickSelect": { "type": "boolean", "required": false },
+    "selectColumn": { "type": "false | SelectColumn<Y, unknown>", "required": false },
+    "selectedRowIds": { "type": "string[]", "required": false },
+    "selectProps": {
+      "type": "Omit<\n  SelectProps,\n  | \"data\"\n  | \"defaultValue\"\n  | \"children\"\n  | \"onChange\"\n  | \"value\"\n  | \"placeholderInOptions\"\n>",
+      "required": false
+    },
+    "sort": { "type": "Sort<Y>", "required": false },
+    "sortIconProps": { "type": "IconProps", "required": false },
+    "tbodyProps": { "type": "TableBodyProps", "required": false },
+    "tfootProps": { "type": "TableFootProps", "required": false },
+    "theadProps": { "type": "TableHeadProps", "required": false },
+    "withBorder": { "type": "boolean", "required": false },
+    "withColumnBorders": { "type": "boolean", "required": false },
+    "withFooter": { "type": "boolean", "required": false },
+    "withFooterSelect": { "type": "boolean", "required": false },
+    "withPagingControl": { "type": "boolean", "required": false }
+  }
+}

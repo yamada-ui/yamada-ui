@@ -1,0 +1,12 @@
+{
+  "FocusLock": {
+    "autoFocus": { "type": "boolean", "required": false },
+    "contentRef": { "type": "RefObject<HTMLElement>", "required": false },
+    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
+    "persistentFocus": { "type": "boolean", "required": false },
+    "restoreFocus": { "type": "boolean", "required": false }
+  }
+}

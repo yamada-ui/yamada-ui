@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useMenu } from './'
+import { useMenu } from './menu'
 
 export type MenuDividerProps = HTMLUIProps<'hr'>
 

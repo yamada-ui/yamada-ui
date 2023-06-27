@@ -1,0 +1,6 @@
+{
+  "Portal": {
+    "appendToParentPortal": { "type": "boolean", "required": false },
+    "containerRef": { "type": "RefObject<HTMLElement | null>", "required": false }
+  }
+}

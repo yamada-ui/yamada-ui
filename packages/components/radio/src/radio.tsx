@@ -36,7 +36,7 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { useRadioGroupContenxt } from './'
+import { useRadioGroupContenxt } from './radio-group'
 
 export type UseRadioProps<Y extends string | number = string> = FormControlOptions & {
   id?: string
@@ -201,6 +201,8 @@ export const useRadio = <Y extends string | number = string>(props: UseRadioProp
     getLabelProps,
   }
 }
+
+export type UseRadioReturn = ReturnType<typeof useRadio>
 
 type RadioOptions = {
   iconProps?: HTMLUIProps<'span'>

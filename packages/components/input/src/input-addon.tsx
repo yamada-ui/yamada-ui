@@ -1,6 +1,6 @@
 import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useInputGroup } from './'
+import { useInputGroup } from './input-group'
 
 type InputAddonOptions = {
   placement?: 'left' | 'right'

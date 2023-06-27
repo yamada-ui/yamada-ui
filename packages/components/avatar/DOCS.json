@@ -1,0 +1,26 @@
+{
+  "Avatar": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "format": { "type": "(name: string) => string", "required": false },
+    "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
+    "ignoreFallback": { "type": "boolean", "required": false },
+    "loading": { "type": "\"eager\" | \"lazy\"", "required": false },
+    "name": { "type": "string", "required": false },
+    "referrerPolicy": { "type": "HTMLAttributeReferrerPolicy", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
+      "required": false,
+      "description": "The size of the Avatar."
+    },
+    "src": { "type": "string", "required": false },
+    "srcSet": { "type": "string", "required": false },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Avatar." }
+  },
+  "AvatarGroup": { "max": { "type": "number", "required": false } },
+  "AvatarBadge": { "placement": { "type": "Placement", "required": false } }
+}

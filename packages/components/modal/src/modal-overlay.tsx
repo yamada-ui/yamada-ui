@@ -2,7 +2,7 @@ import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { motion, HTMLMotionProps } from '@yamada-ui/motion'
 import { fadeProps } from '@yamada-ui/transitions'
 import { cx, handlerAll } from '@yamada-ui/utils'
-import { useModal } from './'
+import { useModal } from './modal'
 
 export type ModalOverlayProps = HTMLUIProps<'div'> &
   Omit<HTMLMotionProps<'div'>, 'color' | 'transition'>

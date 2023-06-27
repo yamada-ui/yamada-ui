@@ -14,12 +14,33 @@ export type MotionTransitionVariants<Y = Dict> = {
 }
 
 export type MotionTransitionProperties = {
+  /**
+   * Custom `transition` definition for `enter` and `exit`.
+   */
   transition?: MotionTransitionProps
+  /**
+   * Custom `transitionEnd` definition for `enter` and `exit`.
+   */
   transitionEnd?: MotionTransitionEndProps
+  /**
+   * Custom `delay` definition for `enter` and `exit`.
+   */
   delay?: number | MotionDelayProps
+  /**
+   * Custom `duration` definition for `enter` and `exit`.
+   */
   duration?: number | MotionDurationProps
+  /**
+   * Custom `enter`.
+   */
   enter?: any
+  /**
+   * Custom `exit`.
+   */
   exit?: any
+  /**
+   * Custom `initial`.
+   */
   initial?: any
 }
 
@@ -35,7 +56,13 @@ export type MotionDurationProps = WithMotionProps<number>
 
 export type WithTransitionProps<Y extends object> = Omit<Y, 'transition'> &
   MotionTransitionProperties & {
+    /**
+     * If `true`, the element will unmount when `isOpen={false}` and animation is done.
+     */
     unmountOnExit?: boolean
+    /**
+     * Show the component. triggers when enter or exit states.
+     */
     isOpen?: boolean
   }
 

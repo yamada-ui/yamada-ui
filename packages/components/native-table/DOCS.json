@@ -1,0 +1,19 @@
+{
+  "NativeTable": {
+    "highlightOnHover": { "type": "boolean", "required": false },
+    "layout": {
+      "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
+      "required": false
+    },
+    "withBorder": { "type": "boolean", "required": false },
+    "withColumnBorders": { "type": "boolean", "required": false }
+  },
+  "TableContainer": {},
+  "TableHead": {},
+  "TableBody": {},
+  "TableFoot": {},
+  "Tr": {},
+  "Th": { "isNumeric": { "type": "boolean", "required": false } },
+  "Td": { "isNumeric": { "type": "boolean", "required": false } },
+  "TableCaption": { "placement": { "type": "\"top\" | \"bottom\"", "required": false } }
+}

@@ -109,6 +109,8 @@ export const useRadioGroup = <Y extends string | number = string>({
   }
 }
 
+export type UseRadioGroupReturn = ReturnType<typeof useRadioGroup>
+
 export type RadioGroupProps<Y extends string | number = string> = ThemeProps<'Radio'> &
   Omit<FlexProps, 'onChange'> &
   UseRadioGroupProps<Y> &

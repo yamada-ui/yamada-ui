@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useTableStyles } from '.'
+import { useTableStyles } from './native-table'
 
 export type TableFootProps = HTMLUIProps<'tfoot'>
 

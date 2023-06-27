@@ -649,7 +649,7 @@ export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
   )
 })
 
-type RangeSliderTrackProps = HTMLUIProps<'div'> & Pick<RangeSliderOptions, 'filledTrack'>
+export type RangeSliderTrackProps = HTMLUIProps<'div'> & Pick<RangeSliderOptions, 'filledTrack'>
 
 export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, 'div'>(
   ({ className, children, filledTrack, ...rest }, ref) => {
@@ -678,7 +678,7 @@ export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, 'div'>(
   },
 )
 
-type RangeSliderFilledTrackProps = HTMLUIProps<'div'>
+export type RangeSliderFilledTrackProps = HTMLUIProps<'div'>
 
 export const RangeSliderFilledTrack = forwardRef<RangeSliderFilledTrackProps, 'div'>(
   ({ className, ...rest }, ref) => {

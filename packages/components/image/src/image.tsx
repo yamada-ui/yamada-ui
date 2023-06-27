@@ -1,7 +1,7 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
 import { omitObject } from '@yamada-ui/utils'
 import { isValidElement, ReactElement, useMemo } from 'react'
-import { FallbackStrategy, shouldShowFallbackImage, useImage, UseImageProps } from './'
+import { FallbackStrategy, shouldShowFallbackImage, useImage, UseImageProps } from './use-image'
 
 type ImageOptions = {
   fallback?: string | ReactElement

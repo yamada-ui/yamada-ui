@@ -1,0 +1,30 @@
+{
+  "Heading": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "size": {
+      "defaultValue": "xl",
+      "type": "\"4xl\" | \"3xl\" | \"2xl\" | \"xl\" | \"lg\" | \"md\" | \"sm\" | \"xs\"",
+      "required": false,
+      "description": "The size of the Heading."
+    },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Heading." }
+  },
+  "Text": {
+    "align": {
+      "type": "type ONLY_FOR_FORMAT =\n  | TextAlign\n  | ResponsiveObject<TextAlign>\n  | ColorModeArray<TextAlign>",
+      "required": false
+    },
+    "casing": {
+      "type": "type ONLY_FOR_FORMAT =\n  | TextTransform\n  | ResponsiveObject<TextTransform>\n  | ColorModeArray<TextTransform>",
+      "required": false
+    },
+    "decoration": {
+      "type": "number | \"blink\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"aliceblue\" | \"antiquewhite\" | \"aqua\" | \"aquamarine\" | \"azure\" | ... 187 more ... | ColorModeArray<...>",
+      "required": false
+    }
+  }
+}

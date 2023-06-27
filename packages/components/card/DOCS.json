@@ -1,0 +1,37 @@
+{
+  "Card": {
+    "align": {
+      "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
+      "required": false
+    },
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "direction": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
+      "required": false
+    },
+    "justify": {
+      "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
+      "required": false
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"normal\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Card."
+    },
+    "variant": {
+      "defaultValue": "elevated",
+      "type": "\"elevated\" | \"outline\" | \"solid\" | \"subtle\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Card."
+    }
+  },
+  "CardHeader": {},
+  "CardBody": {},
+  "CardFooter": {}
+}

@@ -1,6 +1,6 @@
 import { ui, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { FC } from 'react'
-import { AvatarProps, useAvatarContext } from './'
+import { AvatarProps, useAvatarContext } from './avatar'
 
 const defaultFormat = (name: string) => {
   const [firstName, lastName] = name.split(' ')

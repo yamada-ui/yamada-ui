@@ -142,14 +142,14 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }
   )
 })
 
-export type UseFormControl = FormControlOptions & {
-  id?: string
-  disabled?: boolean
-  readOnly?: boolean
-  required?: boolean
-}
-
-export const useFormControl = (props: UseFormControl) => {
+export const useFormControl = (
+  props: FormControlOptions & {
+    id?: string
+    disabled?: boolean
+    readOnly?: boolean
+    required?: boolean
+  },
+) => {
   const control = useFormControlContext()
 
   const id = props.id ?? control?.id
@@ -313,20 +313,22 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
   },
 )
 
-export type HelpTextProps = HTMLUIProps<'div'>
+export type HelperMessageProps = HTMLUIProps<'div'>
 
-export const HelperMessage = forwardRef<HelpTextProps, 'div'>(({ className, ...rest }, ref) => {
-  const { isInvalid, isReplace } = useFormControlContext() ?? {}
-  const styles = useFormControlStyles() ?? {}
+export const HelperMessage = forwardRef<HelperMessageProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    const { isInvalid, isReplace } = useFormControlContext() ?? {}
+    const styles = useFormControlStyles() ?? {}
 
-  if (isReplace && isInvalid) return null
+    if (isReplace && isInvalid) return null
 
-  const css: CSSUIObject = { ...styles.helperMessage }
+    const css: CSSUIObject = { ...styles.helperMessage }
 
-  return (
-    <ui.div ref={ref} className={cx('ui-form-helper-message', className)} __css={css} {...rest} />
-  )
-})
+    return (
+      <ui.div ref={ref} className={cx('ui-form-helper-message', className)} __css={css} {...rest} />
+    )
+  },
+)
 
 export type ErrorMessageProps = HTMLUIProps<'div'>
 

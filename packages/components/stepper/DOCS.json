@@ -1,0 +1,50 @@
+{
+  "Stepper": {
+    "index": { "type": "number", "required": true },
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "orientation": { "type": "Orientation", "required": false },
+    "showLastSeparator": { "type": "boolean", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Stepper."
+    },
+    "steps": { "type": "Steps", "required": false },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Stepper." }
+  },
+  "UseSteps": {
+    "count": { "type": "number", "required": false },
+    "index": { "type": "number", "required": false }
+  },
+  "Step": {},
+  "StepTitle": {},
+  "StepDescription": {},
+  "StepSeparator": {},
+  "StepStatus": {
+    "active": {
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: Omit<...>) => ReactNode)",
+      "required": false
+    },
+    "complete": {
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: Omit<...>) => ReactNode)",
+      "required": false
+    },
+    "incomplete": {
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: Omit<...>) => ReactNode)",
+      "required": false
+    }
+  },
+  "StepNumber": {},
+  "StepIcon": {
+    "size": {
+      "type": "number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 17 more ... | ColorModeArray<...>",
+      "required": false
+    }
+  }
+}

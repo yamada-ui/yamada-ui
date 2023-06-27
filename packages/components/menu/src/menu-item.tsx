@@ -9,7 +9,7 @@ import {
   useUpdateEffect,
 } from '@yamada-ui/utils'
 import { FC, FocusEvent, MouseEvent, ReactElement, useCallback, useRef } from 'react'
-import { useMenu, useMenuDescendant } from './'
+import { useMenu, useMenuDescendant } from './menu'
 
 const isTargetMenuItem = (target: EventTarget | null) => {
   return isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('menu-item')

@@ -1,10 +1,3 @@
-import {
-  CalendarBaseProps,
-  UseCalendarProps,
-  isAfterMaxDate,
-  isBeforeMinDate,
-  CalendarType,
-} from '@yamada-ui/calendar'
 import { HTMLUIProps, layoutStylesProperties, ThemeProps, useTheme } from '@yamada-ui/core'
 import {
   FormControlOptions,
@@ -40,6 +33,8 @@ import {
   useRef,
   useState,
 } from 'react'
+import { CalendarBaseProps } from './calendar'
+import { UseCalendarProps, isAfterMaxDate, isBeforeMinDate, CalendarType } from './use-calendar'
 
 type CalendarProps = Pick<
   UseCalendarProps<Date | null>,

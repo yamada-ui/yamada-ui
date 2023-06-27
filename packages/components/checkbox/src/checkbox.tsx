@@ -46,7 +46,7 @@ import {
   ForwardedRef,
   Ref,
 } from 'react'
-import { useCheckboxGroupContext } from './'
+import { useCheckboxGroupContext } from './checkbox-group'
 
 export type UseCheckboxProps<Y extends string | number = string> = FormControlOptions & {
   id?: string
@@ -266,6 +266,8 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
     getLabelProps,
   }
 }
+
+export type UseCheckboxReturn = ReturnType<typeof useCheckbox>
 
 type CheckboxOptions = {
   iconProps?: Omit<HTMLUIProps<'span'>, 'children'> & { children: ReactElement }

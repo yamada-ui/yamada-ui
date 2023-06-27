@@ -1,1 +1,2 @@
-export * from './segmented-control'
+export { SegmentedControl, SegmentedControlButton } from './segmented-control'
+export type { SegmentedControlProps, SegmentedControlButtonProps } from './segmented-control'

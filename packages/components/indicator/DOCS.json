@@ -1,0 +1,42 @@
+{
+  "Indicator": {
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "inline": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "isDisabled": { "type": "boolean", "required": false },
+    "label": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
+      "required": false
+    },
+    "offset": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "overflowCount": { "type": "number", "required": false },
+    "placement": {
+      "type": "type ONLY_FOR_FORMAT =\n  | IndicatorPlacement\n  | ResponsiveObject<IndicatorPlacement>\n  | ColorModeArray<IndicatorPlacement>",
+      "required": false
+    },
+    "showZero": { "type": "boolean", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Indicator."
+    },
+    "variant": {
+      "defaultValue": "solid",
+      "type": "\"solid\" | \"subtle\"",
+      "required": false,
+      "description": "The variant of the Indicator."
+    },
+    "withBorder": { "type": "boolean", "required": false }
+  }
+}

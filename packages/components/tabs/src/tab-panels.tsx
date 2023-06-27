@@ -1,7 +1,7 @@
 import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { createContext, cx, getValidChildren } from '@yamada-ui/utils'
 import { createElement } from 'react'
-import { useTabsContext } from './'
+import { useTabsContext } from './tabs'
 
 const [TabPanelProvider, useTabPanelContext] = createContext<{
   isSelected: boolean

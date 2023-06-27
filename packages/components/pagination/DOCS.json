@@ -1,0 +1,66 @@
+{
+  "Pagination": {
+    "total": { "type": "number", "required": true },
+    "boundaries": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "component": { "type": "FC<PaginationItemProps>", "required": false },
+    "controlNextProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "controlPrevProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "controlProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "defaultPage": { "type": "number", "required": false },
+    "edgeFirstProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "edgeLastProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "edgeProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "itemProps": { "type": "HTMLUIProps<\"button\">", "required": false },
+    "onChange": { "type": "(page: number) => void", "required": false },
+    "page": { "type": "number", "required": false },
+    "siblings": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+      "required": false,
+      "description": "The size of the Pagination."
+    },
+    "variant": {
+      "defaultValue": "solid",
+      "type": "\"solid\" | \"outline\" | \"ghost\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Pagination."
+    },
+    "withControls": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "withEdges": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    }
+  },
+  "UsePagination": {
+    "total": { "type": "number", "required": true },
+    "boundaries": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "defaultPage": { "type": "number", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "onChange": { "type": "(page: number) => void", "required": false },
+    "page": { "type": "number", "required": false },
+    "siblings": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    }
+  }
+}

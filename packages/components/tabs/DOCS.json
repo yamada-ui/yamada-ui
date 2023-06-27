@@ -1,0 +1,42 @@
+{
+  "Tabs": {
+    "align": { "type": "\"center\" | \"start\" | \"end\"", "required": false },
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultIndex": { "type": "number", "required": false },
+    "index": { "type": "number", "required": false },
+    "isFitted": { "type": "boolean", "required": false },
+    "isLazy": { "type": "boolean", "required": false },
+    "isManual": { "type": "boolean", "required": false },
+    "lazyBehavior": { "type": "LazyMode", "required": false },
+    "onChange": { "type": "(index: number) => void", "required": false },
+    "orientation": { "type": "\"vertical\" | \"horizontal\"", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Tabs."
+    },
+    "tabListProps": { "type": "TabListProps", "required": false },
+    "tabPanelsProps": { "type": "TabPanelsProps", "required": false },
+    "variant": {
+      "defaultValue": "line",
+      "type": "\"line\" | \"sticky\" | \"sticky-subtle\" | \"sticky-solid\" | \"rounded\" | \"rounded-subtle\" | \"rounded-solid\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Tabs."
+    }
+  },
+  "TabList": {},
+  "Tab": {
+    "clickOnEnter": { "type": "boolean", "required": false },
+    "clickOnSpace": { "type": "boolean", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isFocusable": { "type": "boolean", "required": false }
+  },
+  "TabPanels": {},
+  "TabPanel": {}
+}

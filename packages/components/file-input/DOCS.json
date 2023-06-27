@@ -1,0 +1,25 @@
+{
+  "FileInput": {
+    "component": { "type": "FC<{ value: File; index: number }>", "required": false },
+    "errorBorderColor": {
+      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "format": { "type": "Format", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isInvalid": { "type": "boolean", "required": false },
+    "isReadOnly": { "type": "boolean", "required": false },
+    "isRequired": { "type": "boolean", "required": false },
+    "onChange": { "type": "(files: File[] | null) => void", "required": false },
+    "resetRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void) | null) => void)\n  | MutableRefObject<(() => void) | null>",
+      "required": false
+    },
+    "separator": { "type": "string", "required": false },
+    "value": { "type": "File[]", "required": false }
+  }
+}

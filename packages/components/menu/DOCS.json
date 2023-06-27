@@ -1,0 +1,70 @@
+{
+  "Menu": {
+    "animation": { "type": "Animation", "required": false },
+    "autoFocus": { "type": "boolean", "required": false },
+    "boundary": {
+      "type": "\"clippingParents\" | \"scrollParent\" | HTMLElement",
+      "required": false
+    },
+    "closeDelay": { "type": "number", "required": false },
+    "closeOnBlur": { "type": "boolean", "required": false },
+    "closeOnEsc": { "type": "boolean", "required": false },
+    "closeOnSelect": { "type": "boolean", "required": false },
+    "defaultIsOpen": { "type": "boolean", "required": false },
+    "duration": {
+      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "required": false
+    },
+    "eventListeners": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { scroll?: boolean | undefined; resize?: boolean | undefined }",
+      "required": false
+    },
+    "flip": { "type": "boolean", "required": false },
+    "gutter": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "initialFocusRef": { "type": "RefObject<{ focus(): void }>", "required": false },
+    "isLazy": { "type": "boolean", "required": false },
+    "isOpen": { "type": "boolean", "required": false },
+    "lazyBehavior": { "type": "LazyMode", "required": false },
+    "matchWidth": { "type": "boolean", "required": false },
+    "modifiers": { "type": "Partial<Modifier<string, any>>[]", "required": false },
+    "offset": { "type": "[number, number]", "required": false },
+    "onClose": { "type": "() => void", "required": false },
+    "onOpen": { "type": "() => void", "required": false },
+    "openDelay": { "type": "number", "required": false },
+    "placement": {
+      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "required": false
+    },
+    "preventOverflow": { "type": "boolean", "required": false },
+    "restoreFocus": { "type": "boolean", "required": false },
+    "strategy": { "type": "\"absolute\" | \"fixed\"", "required": false },
+    "trigger": { "type": "Trigger", "required": false }
+  },
+  "MenuButton": {},
+  "MenuList": {},
+  "MenuItem": {
+    "closeOnSelect": { "type": "boolean", "required": false },
+    "command": { "type": "string", "required": false },
+    "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isFocusable": { "type": "boolean", "required": false }
+  },
+  "MenuOptionItem": {
+    "closeOnSelect": { "type": "boolean", "required": false },
+    "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
+    "isChecked": { "type": "boolean", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isFocusable": { "type": "boolean", "required": false }
+  },
+  "MenuGroup": {},
+  "MenuOptionGroup": {
+    "defaultValue": { "type": "Y", "required": false },
+    "onChange": { "type": "(value: Y) => void", "required": false },
+    "type": { "type": "\"radio\" | \"checkbox\"", "required": false },
+    "value": { "type": "Y", "required": false }
+  },
+  "MenuDivider": {}
+}

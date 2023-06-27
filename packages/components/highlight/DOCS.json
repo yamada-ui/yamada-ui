@@ -1,0 +1,34 @@
+{
+  "Highlight": {
+    "query": { "type": "string | string[]", "required": true },
+    "align": {
+      "type": "type ONLY_FOR_FORMAT =\n  | TextAlign\n  | ResponsiveObject<TextAlign>\n  | ColorModeArray<TextAlign>",
+      "required": false
+    },
+    "casing": {
+      "type": "type ONLY_FOR_FORMAT =\n  | TextTransform\n  | ResponsiveObject<TextTransform>\n  | ColorModeArray<TextTransform>",
+      "required": false
+    },
+    "decoration": {
+      "type": "number | \"blink\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"aliceblue\" | \"antiquewhite\" | \"aqua\" | \"aquamarine\" | \"azure\" | ... 187 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "isFragment": { "type": "boolean", "required": false },
+    "markProps": { "type": "MarkProps", "required": false }
+  },
+  "Mark": {
+    "colorScheme": {
+      "defaultValue": "secondary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "size": { "type": "string", "required": false, "description": "The size of the Mark." },
+    "variant": {
+      "defaultValue": "subtle",
+      "type": "\"solid\" | \"subtle\" | \"outline\"",
+      "required": false,
+      "description": "The variant of the Mark."
+    }
+  }
+}

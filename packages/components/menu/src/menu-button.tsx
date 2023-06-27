@@ -2,7 +2,7 @@ import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { PopoverTrigger } from '@yamada-ui/popover'
 import { ariaAttr, cx, dataAttr, funcAll, handlerAll } from '@yamada-ui/utils'
 import { KeyboardEvent, useCallback } from 'react'
-import { useMenu } from './'
+import { useMenu } from './menu'
 
 export type MenuButtonProps = HTMLUIProps<'button'>
 

@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useAvatarContext } from '.'
+import { useAvatarContext } from './avatar'
 
 type Placement = 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'
 

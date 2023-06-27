@@ -1,0 +1,114 @@
+{
+  "Carousel": {
+    "align": {
+      "type": "Align | ResponsiveObject<Align> | ColorModeArray<Align>",
+      "required": false
+    },
+    "autoplay": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "containScroll": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ContainScroll\n  | ResponsiveObject<ContainScroll>\n  | ColorModeArray<ContainScroll>",
+      "required": false
+    },
+    "controlNextProps": { "type": "IconButtonProps", "required": false },
+    "controlPrevProps": { "type": "IconButtonProps", "required": false },
+    "controlProps": { "type": "IconButtonProps", "required": false },
+    "defaultIndex": { "type": "number", "required": false },
+    "delay": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "dragFree": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "draggable": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "includeGapInSize": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "index": { "type": "number", "required": false },
+    "indicatorsProps": { "type": "CarouselIndicatorsProps", "required": false },
+    "inner": { "type": "HTMLUIProps<\"div\">", "required": false },
+    "inViewThreshold": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "loop": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "onChange": { "type": "(index: number) => void", "required": false },
+    "onScrollProgress": { "type": "(progress: number) => void", "required": false },
+    "orientation": {
+      "type": "type ONLY_FOR_FORMAT =\n  | Orientation\n  | ResponsiveObject<Orientation>\n  | ColorModeArray<Orientation>",
+      "required": false
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+      "required": false,
+      "description": "The size of the Carousel."
+    },
+    "skipSnaps": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "slideSize": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "slidesToScroll": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "speed": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "stopMouseEnterAutoplay": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Carousel."
+    },
+    "withControls": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    },
+    "withIndicators": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "required": false
+    }
+  },
+  "CarouselSlide": {
+    "index": { "type": "number", "required": false },
+    "size": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ColorModeArray<...>",
+      "required": false
+    }
+  },
+  "CarouselControl": {
+    "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
+    "isActive": { "type": "boolean", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isLoading": { "type": "boolean", "required": false },
+    "isRound": { "type": "boolean", "required": false }
+  },
+  "CarouselIndicators": {
+    "component": { "type": "FC<{ index: number; isSelected: boolean }>", "required": false }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "SegmentedControl": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isReadOnly": { "type": "boolean", "required": false },
+    "name": { "type": "string", "required": false },
+    "onChange": { "type": "(value: string) => void", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the SegmentedControl."
+    },
+    "value": { "type": "string", "required": false },
+    "variant": {
+      "defaultValue": "basic",
+      "type": "\"basic\" | \"rounded\"",
+      "required": false,
+      "description": "The variant of the SegmentedControl."
+    }
+  },
+  "SegmentedControlButton": {
+    "value": { "type": "string | number", "required": true },
+    "isDisabled": { "type": "boolean", "required": false },
+    "isReadOnly": { "type": "boolean", "required": false },
+    "onChange": { "type": "ChangeEventHandler<HTMLInputElement>", "required": false }
+  }
+}

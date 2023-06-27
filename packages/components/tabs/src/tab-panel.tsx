@@ -2,7 +2,8 @@ import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { useLazyDisclosure } from '@yamada-ui/use-disclosure'
 import { cx } from '@yamada-ui/utils'
 import { useRef } from 'react'
-import { useTabsContext, useTabPanelContext } from './'
+import { useTabPanelContext } from './tab-panels'
+import { useTabsContext } from './tabs'
 
 export type TabPanelProps = HTMLUIProps<'div'>
 

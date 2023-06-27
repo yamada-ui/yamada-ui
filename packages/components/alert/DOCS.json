@@ -1,0 +1,26 @@
+{
+  "Alert": {
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "size": { "type": "string", "required": false, "description": "The size of the Alert." },
+    "status": {
+      "type": "\"warning\" | \"info\" | \"success\" | \"error\" | \"loading\"",
+      "defaultValue": "'info'",
+      "required": false,
+      "description": "The status of the alert."
+    },
+    "variant": {
+      "defaultValue": "basic",
+      "type": "\"basic\" | \"subtle\" | \"solid\" | \"island-accent\" | \"left-accent\" | \"top-accent\"",
+      "required": false,
+      "description": "The variant of the Alert."
+    }
+  },
+  "AlertIcon": { "variant": { "type": "LoadingVariant", "required": false } },
+  "AlertTitle": {},
+  "AlertDescription": {}
+}

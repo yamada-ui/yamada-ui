@@ -1,0 +1,56 @@
+{
+  "Skeleton": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "endColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "fadeDuration": { "type": "string | number", "required": false },
+    "isLoaded": { "type": "boolean", "required": false },
+    "size": { "type": "string", "required": false, "description": "The size of the Skeleton." },
+    "speed": { "type": "string | number", "required": false },
+    "startColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Skeleton."
+    }
+  },
+  "SkeletonCircle": {
+    "endColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "fadeDuration": { "type": "string | number", "required": false },
+    "isLoaded": { "type": "boolean", "required": false },
+    "speed": { "type": "string | number", "required": false },
+    "startColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    }
+  },
+  "SkeletonText": {
+    "endColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "fadeDuration": { "type": "string | number", "required": false },
+    "isLoaded": { "type": "boolean", "required": false },
+    "speed": { "type": "string | number", "required": false },
+    "startColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "textHeight": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"2\" | \"3\" | \"4\" | ... 57 more ... | ColorModeArray<...>",
+      "required": false
+    }
+  }
+}

@@ -1,1 +1,2 @@
-export * from './loading'
+export { Loading } from './loading'
+export type { LoadingProps } from './loading'

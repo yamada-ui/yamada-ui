@@ -1,0 +1,32 @@
+{
+  "Tag": {
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "isDisabled": { "type": "boolean", "required": false },
+    "leftIcon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false
+    },
+    "onCloseClick": { "type": "MouseEventHandler<HTMLElement>", "required": false },
+    "rightIcon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Tag."
+    },
+    "variant": {
+      "defaultValue": "subtle",
+      "type": "\"solid\" | \"subtle\" | \"outline\"",
+      "required": false,
+      "description": "The variant of the Tag."
+    }
+  }
+}

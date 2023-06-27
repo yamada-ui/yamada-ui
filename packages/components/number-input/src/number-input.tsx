@@ -409,6 +409,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   }
 }
 
+export type UseNumberInputReturn = ReturnType<typeof useNumberInput>
+
 const INTERVAL = 50
 
 const DELAY = 300

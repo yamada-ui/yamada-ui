@@ -22,14 +22,8 @@ import { useValue } from '@yamada-ui/use-value'
 import { cx, createContext, getValidChildren, findChildren } from '@yamada-ui/utils'
 import { cloneElement, KeyboardEvent, useCallback } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
-import {
-  DrawerContent,
-  DrawerOverlay,
-  DialogOverlay,
-  DialogCloseButton,
-  ModalOverlay,
-  ModalCloseButton,
-} from './'
+import { DrawerContent } from './drawer'
+import { DrawerOverlay, DialogOverlay, DialogCloseButton, ModalOverlay, ModalCloseButton } from './'
 
 type Placement =
   | 'center'

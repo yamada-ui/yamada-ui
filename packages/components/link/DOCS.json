@@ -1,0 +1,5 @@
+{
+  "Link": { "isExternal": { "type": "boolean", "required": false } },
+  "LinkBox": {},
+  "LinkOverlay": { "isExternal": { "type": "boolean", "required": false } }
+}

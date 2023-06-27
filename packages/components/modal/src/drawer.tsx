@@ -7,8 +7,8 @@ import {
 } from '@yamada-ui/core'
 import { Slide, SlideProps } from '@yamada-ui/transitions'
 import { createContext, getValidChildren, findChildren, cx } from '@yamada-ui/utils'
+import { useModal } from './modal'
 import {
-  useModal,
   Modal,
   ModalProps,
   ModalOverlay,

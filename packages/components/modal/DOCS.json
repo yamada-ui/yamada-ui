@@ -1,0 +1,164 @@
+{
+  "Modal": {
+    "isOpen": { "type": "boolean", "required": true },
+    "allowPinchZoom": { "type": "boolean", "required": false },
+    "animation": { "type": "Animation", "required": false },
+    "blockScrollOnMount": { "type": "boolean", "required": false },
+    "closeOnEsc": { "type": "boolean", "required": false },
+    "closeOnOverlay": { "type": "boolean", "required": false },
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "duration": {
+      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "required": false
+    },
+    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
+    "onClose": { "type": "() => void", "required": false },
+    "onCloseComplete": { "type": "() => void", "required": false },
+    "onEsc": { "type": "() => void", "required": false },
+    "onOverlayClick": { "type": "() => void", "required": false },
+    "outside": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | \"-3\" | ... 77 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "placement": {
+      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "required": false
+    },
+    "restoreFocus": { "type": "boolean", "required": false },
+    "scrollBehavior": { "type": "ScrollBehavior", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"full\"",
+      "required": false,
+      "description": "The size of the Modal."
+    },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Modal." },
+    "withCloseButton": { "type": "boolean", "required": false },
+    "withOverlay": { "type": "boolean", "required": false }
+  },
+  "ModalOverlay": {},
+  "ModalCloseButton": { "isDisabled": { "type": "boolean", "required": false } },
+  "ModalHeader": {},
+  "ModalBody": {},
+  "ModalFooter": {},
+  "Dialog": {
+    "isOpen": { "type": "boolean", "required": true },
+    "allowPinchZoom": { "type": "boolean", "required": false },
+    "animation": { "type": "Animation", "required": false },
+    "blockScrollOnMount": { "type": "boolean", "required": false },
+    "cancel": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal\n  | ButtonProps",
+      "required": false
+    },
+    "closeOnEsc": { "type": "boolean", "required": false },
+    "closeOnOverlay": { "type": "boolean", "required": false },
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "duration": {
+      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "required": false
+    },
+    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "footer": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
+      "required": false
+    },
+    "header": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
+      "required": false
+    },
+    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
+    "onCancel": { "type": "(onClose: (() => void) | undefined) => void", "required": false },
+    "onClose": { "type": "() => void", "required": false },
+    "onCloseComplete": { "type": "() => void", "required": false },
+    "onEsc": { "type": "() => void", "required": false },
+    "onOther": { "type": "(onClose: (() => void) | undefined) => void", "required": false },
+    "onOverlayClick": { "type": "() => void", "required": false },
+    "onSuccess": { "type": "(onClose: (() => void) | undefined) => void", "required": false },
+    "other": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal\n  | ButtonProps",
+      "required": false
+    },
+    "outside": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | \"-3\" | ... 77 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "placement": {
+      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "required": false
+    },
+    "restoreFocus": { "type": "boolean", "required": false },
+    "scrollBehavior": { "type": "ScrollBehavior", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"full\"",
+      "required": false,
+      "description": "The size of the Dialog."
+    },
+    "success": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal\n  | ButtonProps",
+      "required": false
+    },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Dialog." },
+    "withCloseButton": { "type": "boolean", "required": false },
+    "withOverlay": { "type": "boolean", "required": false }
+  },
+  "DialogOverlay": {},
+  "DialogCloseButton": { "isDisabled": { "type": "boolean", "required": false } },
+  "DialogHeader": {},
+  "DialogBody": {},
+  "DialogFooter": {},
+  "Drawer": {
+    "isOpen": { "type": "boolean", "required": true },
+    "allowPinchZoom": { "type": "boolean", "required": false },
+    "blockScrollOnMount": { "type": "boolean", "required": false },
+    "closeOnEsc": { "type": "boolean", "required": false },
+    "closeOnOverlay": { "type": "boolean", "required": false },
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "duration": {
+      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "required": false
+    },
+    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "isFullHeight": { "type": "boolean", "required": false },
+    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
+    "onClose": { "type": "() => void", "required": false },
+    "onCloseComplete": { "type": "() => void", "required": false },
+    "onEsc": { "type": "() => void", "required": false },
+    "onOverlayClick": { "type": "() => void", "required": false },
+    "placement": {
+      "type": "(Placement | ResponsiveObject<Placement> | ColorModeArray<Placement>) & (\"top\" | \"right\" | \"bottom\" | \"left\" | ResponsiveObject<...> | ColorModeArray<...>)",
+      "required": false
+    },
+    "restoreFocus": { "type": "boolean", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\"",
+      "required": false,
+      "description": "The size of the Drawer."
+    },
+    "variant": { "type": "string", "required": false, "description": "The variant of the Drawer." },
+    "withCloseButton": { "type": "boolean", "required": false },
+    "withOverlay": { "type": "boolean", "required": false }
+  },
+  "DrawerOverlay": {},
+  "DrawerCloseButton": { "isDisabled": { "type": "boolean", "required": false } },
+  "DrawerHeader": {},
+  "DrawerBody": {},
+  "DrawerFooter": {}
+}

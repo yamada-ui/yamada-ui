@@ -1,0 +1,147 @@
+{
+  "Box": {},
+  "Flex": {
+    "align": {
+      "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
+      "required": false
+    },
+    "basis": {
+      "type": "number | \"content\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | ... 6 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "direction": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
+      "required": false
+    },
+    "grow": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexGrow\n  | ResponsiveObject<FlexGrow>\n  | ColorModeArray<FlexGrow>",
+      "required": false
+    },
+    "justify": {
+      "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
+      "required": false
+    },
+    "shrink": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexShrink\n  | ResponsiveObject<FlexShrink>\n  | ColorModeArray<FlexShrink>",
+      "required": false
+    },
+    "wrap": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexWrap\n  | ResponsiveObject<FlexWrap>\n  | ColorModeArray<FlexWrap>",
+      "required": false
+    }
+  },
+  "Center": {},
+  "Grid": {
+    "area": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridArea\n  | ResponsiveObject<GridArea>\n  | ColorModeArray<GridArea>",
+      "required": false
+    },
+    "autoColumns": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridAutoColumns<0 | (string & {})>\n  | ResponsiveObject<GridAutoColumns<0 | (string & {})>>\n  | ColorModeArray<GridAutoColumns<0 | (string & {})>>",
+      "required": false
+    },
+    "autoFlow": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridAutoFlow\n  | ResponsiveObject<GridAutoFlow>\n  | ColorModeArray<GridAutoFlow>",
+      "required": false
+    },
+    "autoRows": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridAutoRows<0 | (string & {})>\n  | ResponsiveObject<GridAutoRows<0 | (string & {})>>\n  | ColorModeArray<GridAutoRows<0 | (string & {})>>",
+      "required": false
+    },
+    "column": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridColumn\n  | ResponsiveObject<GridColumn>\n  | ColorModeArray<GridColumn>",
+      "required": false
+    },
+    "row": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridRow\n  | ResponsiveObject<GridRow>\n  | ColorModeArray<GridRow>",
+      "required": false
+    },
+    "templateAreas": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridTemplateAreas\n  | ResponsiveObject<GridTemplateAreas>\n  | ColorModeArray<GridTemplateAreas>",
+      "required": false
+    },
+    "templateColumns": {
+      "type": "GridTemplateColumns<0 | (string & {})> | ResponsiveObject<GridTemplateColumns<0 | (string & {})>> | ColorModeArray<GridTemplateColumns<...>>",
+      "required": false
+    },
+    "templateRows": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridTemplateRows<0 | (string & {})>\n  | ResponsiveObject<GridTemplateRows<0 | (string & {})>>\n  | ColorModeArray<GridTemplateRows<0 | (string & {})>>",
+      "required": false
+    }
+  },
+  "GridItem": {
+    "area": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridArea\n  | ResponsiveObject<GridArea>\n  | ColorModeArray<GridArea>",
+      "required": false
+    },
+    "colEnd": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridColumnEnd\n  | ResponsiveObject<GridColumnEnd>\n  | ColorModeArray<GridColumnEnd>",
+      "required": false
+    },
+    "colSpan": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "colStart": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridColumnStart\n  | ResponsiveObject<GridColumnStart>\n  | ColorModeArray<GridColumnStart>",
+      "required": false
+    },
+    "rowEnd": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridRowEnd\n  | ResponsiveObject<GridRowEnd>\n  | ColorModeArray<GridRowEnd>",
+      "required": false
+    },
+    "rowSpan": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    },
+    "rowStart": {
+      "type": "type ONLY_FOR_FORMAT =\n  | GridRowStart\n  | ResponsiveObject<GridRowStart>\n  | ColorModeArray<GridRowStart>",
+      "required": false
+    }
+  },
+  "Container": { "centerContent": { "type": "boolean", "required": false } },
+  "Stack": {
+    "align": {
+      "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
+      "required": false
+    },
+    "direction": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
+      "required": false
+    },
+    "divider": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false
+    },
+    "justify": {
+      "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
+      "required": false
+    },
+    "wrap": {
+      "type": "type ONLY_FOR_FORMAT =\n  | FlexWrap\n  | ResponsiveObject<FlexWrap>\n  | ColorModeArray<FlexWrap>",
+      "required": false
+    }
+  },
+  "Spacer": {},
+  "Divider": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "orientation": { "type": "\"horizontal\" | \"vertical\"", "required": false },
+    "size": { "type": "string", "required": false, "description": "The size of the Divider." },
+    "variant": {
+      "defaultValue": "solid",
+      "type": "\"solid\" | \"dashed\" | \"dotted\"",
+      "required": false,
+      "description": "The variant of the Divider."
+    }
+  },
+  "AspectRatio": {
+    "ratio": {
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "Reorder": {
+    "colorScheme": {
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "onChange": { "type": "(labels: (string | number)[]) => void", "required": false },
+    "onCompleteChange": { "type": "(labels: (string | number)[]) => void", "required": false },
+    "orientation": { "type": "Orientation", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"normal\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Reorder."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"elevated\" | \"outline\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Reorder."
+    }
+  },
+  "ReorderItem": { "label": { "type": "string | number", "required": true } },
+  "ReorderTrigger": {}
+}

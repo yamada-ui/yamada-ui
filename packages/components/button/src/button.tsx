@@ -10,7 +10,7 @@ import {
 import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/loading'
 import { cx, useMergeRefs, merge, dataAttr } from '@yamada-ui/utils'
 import { ElementType, FC, useCallback, useMemo, useState } from 'react'
-import { useButtonGroup } from '.'
+import { useButtonGroup } from './button-group'
 
 type ButtonOptions = {
   type?: 'button' | 'reset' | 'submit'

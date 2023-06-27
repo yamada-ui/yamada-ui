@@ -186,16 +186,14 @@ export const {
   useDescendant: useAutocompleteDescendant,
 } = createDescendant<HTMLElement>()
 
-export type MaybeValue = string | string[]
-
 type Order = 'first' | 'last'
 
 type AutocompleteContext = Omit<
   UseAutocompleteProps,
   'value' | 'defaultValue' | 'onChange' | 'onCreate'
 > & {
-  value: MaybeValue
-  displayValue: MaybeValue | undefined
+  value: string | string[]
+  displayValue: string | string[] | undefined
   inputValue: string
   isHit: boolean
   isEmpty: boolean
@@ -226,7 +224,7 @@ export const [AutocompleteProvider, useAutocompleteContext] = createContext<Auto
   errorMessage: `useAutocompleteContext returned is 'undefined'. Seems you forgot to wrap the components in "<Autocomplete />" or "<MultiAutocomplete />"`,
 })
 
-type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
+type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
   PopoverProps,
   | 'initialFocusRef'
   | 'closeOnButton'
@@ -255,13 +253,13 @@ type UseAutocompleteBaseProps<T extends MaybeValue = string> = Omit<
     options?: UIOption[]
   }
 
-export type UseAutocompleteProps<T extends MaybeValue = string> = Omit<
+export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
   HTMLUIProps<'input'>,
   keyof UseAutocompleteBaseProps | 'list' | 'disabled' | 'required' | 'readOnly' | 'size'
 > &
   UseAutocompleteBaseProps<T>
 
-export const useAutocomplete = <T extends MaybeValue = string>({
+export const useAutocomplete = <T extends string | string[] = string>({
   defaultIsOpen,
   closeOnSelect = true,
   omitSelectedValues = false,

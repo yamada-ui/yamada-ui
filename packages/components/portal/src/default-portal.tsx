@@ -1,7 +1,7 @@
 import { useSafeLayoutEffect } from '@yamada-ui/utils'
 import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { PortalProvider, usePortal } from './'
+import { PortalProvider, usePortal } from './portal-provider'
 
 export const DefaultPortal: FC<PropsWithChildren<{ appendToParentPortal: boolean }>> = ({
   appendToParentPortal,

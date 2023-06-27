@@ -525,7 +525,7 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
   )
 })
 
-type SliderTrackProps = HTMLUIProps<'div'> & Pick<SliderOptions, 'filledTrack'>
+export type SliderTrackProps = HTMLUIProps<'div'> & Pick<SliderOptions, 'filledTrack'>
 
 export const SliderTrack = forwardRef<SliderTrackProps, 'div'>(
   ({ className, children, filledTrack, ...rest }, ref) => {
@@ -553,7 +553,7 @@ export const SliderTrack = forwardRef<SliderTrackProps, 'div'>(
   },
 )
 
-type SliderFilledTrackProps = HTMLUIProps<'div'>
+export type SliderFilledTrackProps = HTMLUIProps<'div'>
 
 export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, 'div'>(
   ({ className, ...rest }, ref) => {

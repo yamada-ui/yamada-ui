@@ -1,0 +1,11 @@
+{
+  "ScrollArea": {
+    "innerProps": { "type": "HTMLUIProps<\"div\">", "required": false },
+    "onScrollPositionChange": {
+      "type": "({ x, y }: { x: number; y: number }) => void",
+      "required": false
+    },
+    "scrollHideDelay": { "type": "number", "required": false },
+    "type": { "type": "\"always\" | \"scroll\" | \"hover\" | \"never\"", "required": false }
+  }
+}

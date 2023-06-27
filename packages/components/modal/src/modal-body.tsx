@@ -1,6 +1,6 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useModal } from './'
+import { useModal } from './modal'
 
 export type ModalBodyProps = HTMLUIProps<'main'>
 

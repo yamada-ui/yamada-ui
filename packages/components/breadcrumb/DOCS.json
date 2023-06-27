@@ -1,0 +1,13 @@
+{
+  "Breadcrumb": { "separator": { "type": "string | Element", "required": false } },
+  "BreadcrumbItem": {
+    "isCurrentPage": { "type": "boolean", "required": false },
+    "isLastChild": { "type": "boolean", "required": false },
+    "separator": { "type": "string | Element", "required": false }
+  },
+  "BreadcrumbLink": {
+    "isCurrentPage": { "type": "boolean", "required": false },
+    "separator": { "type": "string | Element", "required": false }
+  },
+  "BreadcrumbSeparator": {}
+}

@@ -1,0 +1,56 @@
+{
+  "Progress": {
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "filledTrackColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 115 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "hasStripe": { "type": "boolean", "required": false },
+    "isAnimation": { "type": "boolean", "required": false },
+    "isStripeAnimation": { "type": "boolean", "required": false },
+    "max": { "type": "number", "required": false },
+    "min": { "type": "number", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Progress."
+    },
+    "speed": { "type": "string | number", "required": false },
+    "value": { "type": "number", "required": false },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Progress."
+    }
+  },
+  "CircleProgress": {
+    "color": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ResponsiveObject<...>",
+      "required": false
+    },
+    "isAnimation": { "type": "boolean", "required": false },
+    "isRounded": { "type": "boolean", "required": false },
+    "max": { "type": "number", "required": false },
+    "min": { "type": "number", "required": false },
+    "size": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ResponsiveObject<...>",
+      "required": false
+    },
+    "speed": { "type": "[string | number, string | number]", "required": false },
+    "thickness": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ResponsiveObject<...>",
+      "required": false
+    },
+    "trackColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ResponsiveObject<...>",
+      "required": false
+    },
+    "value": { "type": "number", "required": false }
+  }
+}

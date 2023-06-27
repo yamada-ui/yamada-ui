@@ -1,6 +1,6 @@
 import { forwardRef } from '@yamada-ui/core'
 import { ReactElement } from 'react'
-import { Button, ButtonProps } from '.'
+import { Button, ButtonProps } from './button'
 
 type IconButtonOptions = {
   icon?: ReactElement

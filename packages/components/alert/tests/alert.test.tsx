@@ -2,14 +2,8 @@ import { InfoIcon, WarningIcon, CheckIcon } from '@yamada-ui/icon'
 import { Loading } from '@yamada-ui/loading'
 import { render, a11y, screen } from '@yamada-ui/test'
 import React from 'react'
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  getStatusColorScheme,
-  getStatusIcon,
-} from '../src'
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from '../src'
+import { getStatusColorScheme, getStatusIcon } from '../src/alert'
 
 test('passes a11y test', async () => {
   await a11y(
@@ -35,23 +29,23 @@ test("should have role='alert'", () => {
 
 describe('getStatusColorScheme', () => {
   test('info', () => {
-    expect(getStatusColorScheme('info')).toBe('blue')
+    expect(getStatusColorScheme('info')).toBe('primary')
   })
 
   test('success', () => {
-    expect(getStatusColorScheme('success')).toBe('green')
+    expect(getStatusColorScheme('success')).toBe('secondary')
   })
 
   test('warning', () => {
-    expect(getStatusColorScheme('warning')).toBe('orange')
+    expect(getStatusColorScheme('warning')).toBe('warning')
   })
 
   test('error', () => {
-    expect(getStatusColorScheme('error')).toBe('red')
+    expect(getStatusColorScheme('error')).toBe('danger')
   })
 
   test('loading', () => {
-    expect(getStatusColorScheme('loading')).toBe('blue')
+    expect(getStatusColorScheme('loading')).toBe('primary')
   })
 })
 

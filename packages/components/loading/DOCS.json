@@ -1,0 +1,14 @@
+{
+  "Loading": {
+    "duration": { "type": "string | number", "required": false },
+    "secondaryColor": {
+      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "size": {
+      "type": "number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 17 more ... | ColorModeArray<...>",
+      "required": false
+    },
+    "variant": { "type": "LoadingVariant", "required": false }
+  }
+}

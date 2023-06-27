@@ -206,7 +206,7 @@ const extractPropertiesOfTypeName = (
 
       results[typeName] = sortByRequiredProperties(properties)
     } else {
-      console.log('[types]:', 'Omitting type', `\`${typeName}\``)
+      console.log('[docs]:', 'Omitting type', `\`${typeName}\``)
     }
   }
 
@@ -237,7 +237,7 @@ const extractTypeExports = (code: string) => {
 
   const exportedTypes = Object.keys(exported).filter(Boolean)
 
-  console.log('[types]:', exportedTypes.join(', '))
+  console.log('[docs]:', exportedTypes.join(', '))
 
   return exportedTypes
 }
@@ -313,7 +313,7 @@ const main = async () => {
     parser: 'json',
   })
 
-  writeFileSync('TYPES.json', data)
+  writeFileSync('DOCS.json', data)
 }
 
 try {

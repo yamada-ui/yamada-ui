@@ -15,35 +15,35 @@ export const interactivity: Configs = {
 
 export type InteractivityProps<Y = 'responsive', M = 'colorMode'> = {
   /**
-   * The CSS `appearance` property
+   * The CSS `appearance` property.
    */
   appearance?: Token<CSS.Property.Appearance, unknown, Y, M>
   /**
-   * The CSS `user-select` property
+   * The CSS `user-select` property.
    */
   userSelect?: Token<CSS.Property.UserSelect, unknown, Y, M>
   /**
-   * The CSS `pointer-events` property
+   * The CSS `pointer-events` property.
    */
   pointerEvents?: Token<CSS.Property.PointerEvents, unknown, Y, M>
   /**
-   * The CSS `resize` property
+   * The CSS `resize` property.
    */
   resize?: Token<CSS.Property.Resize, unknown, Y, M>
   /**
-   * The CSS `cursor` property
+   * The CSS `cursor` property.
    */
   cursor?: Token<CSS.Property.Cursor, unknown, Y, M>
   /**
-   * The CSS `outline` property
+   * The CSS `outline` property.
    */
   outline?: Token<CSS.Property.Outline | number, unknown, Y, M>
   /**
-   * The CSS `outline-offset` property
+   * The CSS `outline-offset` property.
    */
   outlineOffset?: Token<CSS.Property.OutlineOffset | number, unknown, Y, M>
   /**
-   * The CSS `outline-color` property
+   * The CSS `outline-color` property.
    */
   outlineColor?: Token<CSS.Property.Color, 'colors', Y, M>
 }

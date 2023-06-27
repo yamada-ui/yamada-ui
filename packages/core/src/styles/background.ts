@@ -29,79 +29,79 @@ Object.assign(background, {
 
 export type BackgroundProps<Y = 'responsive', M = 'colorMode'> = {
   /**
-   * The CSS `background` property
+   * The CSS `background` property.
    */
   bg?: Token<CSS.Property.Color, 'colors', Y, M>
   /**
-   * The CSS `background-clip` property
+   * The CSS `background-clip` property.
    */
   bgClip?: Token<CSS.Property.BackgroundClip | 'text', Y, M>
   /**
-   * The CSS `background-clip` property
+   * The CSS `background-clip` property.
    */
   backgroundClip?: Token<CSS.Property.BackgroundClip | 'text', Y, M>
   /**
-   * The CSS `background` property
+   * The CSS `background` property.
    */
   background?: Token<CSS.Property.Color, 'colors', Y, M>
   /**
-   * The CSS `background-color` property
+   * The CSS `background-color` property.
    */
   bgColor?: Token<CSS.Property.Color, 'colors', Y, M>
   /**
-   * The CSS `background-color` property
+   * The CSS `background-color` property.
    */
   backgroundColor?: Token<CSS.Property.Color, 'colors', Y, M>
   /**
-   * The CSS `background-image` property
+   * The CSS `background-image` property.
    */
   backgroundImage?: Token<CSS.Property.BackgroundImage, 'gradients', Y, M>
   /**
-   * The CSS `background-image` property
+   * The CSS `background-image` property.
    */
   bgGradient?: Token<CSS.Property.BackgroundImage, 'gradients', Y, M>
   /**
-   * The CSS `background-size` property
+   * The CSS `background-size` property.
    */
   backgroundSize?: Token<CSS.Property.BackgroundSize | number, unknown, Y, M>
   /**
-   * The CSS `background-position` property
+   * The CSS `background-position` property.
    */
   backgroundPosition?: Token<CSS.Property.BackgroundPosition | number, unknown, Y, M>
   /**
-   * The CSS `background-image` property
+   * The CSS `background-image` property.
    */
   bgImage?: Token<CSS.Property.BackgroundImage, 'gradients', Y, M>
   /**
-   * The CSS `background-image` property
+   * The CSS `background-image` property.
    */
   bgImg?: Token<CSS.Property.BackgroundImage, 'gradients', Y, M>
   /**
-   * The CSS `background-repeat` property
+   * The CSS `background-repeat` property.
    */
   bgRepeat?: Token<CSS.Property.BackgroundRepeat, unknown, Y, M>
   /**
-   * The CSS `background-repeat` property
+   * The CSS `background-repeat` property.
    */
   backgroundRepeat?: Token<CSS.Property.BackgroundRepeat, unknown, Y, M>
   /**
-   * The CSS `background-size` property
+   * The CSS `background-size` property.
    */
   bgSize?: Token<CSS.Property.BackgroundSize | number, unknown, Y, M>
   /**
-   * The CSS `background-attachment` property
+   * The CSS `background-attachment` property.
    */
   bgAttachment?: Token<CSS.Property.BackgroundAttachment, unknown, Y, M>
   /**
-   * The CSS `background-attachment` property
+   * The CSS `background-attachment` property.
    */
   backgroundAttachment?: Token<CSS.Property.BackgroundAttachment, unknown, Y, M>
   /**
-   * The CSS `background-position` property
+   * The CSS `background-position` property.
    */
   bgPos?: Token<CSS.Property.BackgroundPosition | number, unknown, Y, M>
   /**
-   * The CSS `background-position` property
+   * The CSS `background-position` property.
    */
   bgPosition?: Token<CSS.Property.BackgroundPosition | number, unknown, Y, M>
 }

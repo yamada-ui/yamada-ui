@@ -10,15 +10,15 @@ export const transform: Configs = {
 
 export type TransformProps<Y = 'responsive', M = 'colorMode'> = {
   /**
-   * The CSS `clip-path` property
+   * The CSS `clip-path` property.
    */
   clipPath?: Token<CSS.Property.ClipPath, unknown, Y, M>
   /**
-   * The CSS `transform` property
+   * The CSS `transform` property.
    */
   transform?: Token<CSS.Property.Transform, unknown, Y, M>
   /**
-   * The CSS `transform-origin` property
+   * The CSS `transform-origin` property.
    */
   transformOrigin?: Token<CSS.Property.TransformOrigin | number, 'sizes', Y, M>
 }

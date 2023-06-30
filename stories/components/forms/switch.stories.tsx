@@ -12,7 +12,7 @@ export const basic: ComponentStory<typeof Switch> = () => {
 }
 
 export const withReverse: ComponentStory<typeof Switch> = () => {
-  return <Switch reverse>basic</Switch>
+  return <Switch isReverse>basic</Switch>
 }
 
 export const withSize: ComponentStory<typeof Switch> = () => {

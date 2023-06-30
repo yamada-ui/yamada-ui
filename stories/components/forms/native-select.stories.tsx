@@ -19,7 +19,7 @@ export default {
 } as ComponentMeta<typeof NativeSelect>
 
 export const basic: ComponentStory<typeof NativeSelect> = () => {
-  const data: UINativeOption[] = [
+  const options: UINativeOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
       label: '地球人',
@@ -67,7 +67,7 @@ export const basic: ComponentStory<typeof NativeSelect> = () => {
         </NativeOptionGroup>
       </NativeSelect>
 
-      <NativeSelect placeholder='キャラクターを選択' data={data} />
+      <NativeSelect placeholder='キャラクターを選択' options={options} />
     </>
   )
 }

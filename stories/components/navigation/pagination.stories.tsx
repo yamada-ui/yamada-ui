@@ -5,7 +5,7 @@ import { Pagination, VStack, Wrap } from '@yamada-ui/react'
 import { useState } from 'react'
 
 export default {
-  title: 'Components / Data Display / Pagination',
+  title: 'Components / Navigation / Pagination',
   component: Pagination,
 } as ComponentMeta<typeof Pagination>
 

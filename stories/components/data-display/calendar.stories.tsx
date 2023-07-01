@@ -1,6 +1,6 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory } from '@storybook/react'
-import { Calendar, CalendarType } from '@yamada-ui/calendar'
+import { Calendar, CalendarProps } from '@yamada-ui/calendar'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Heading,
@@ -481,7 +481,7 @@ export const useControl: ComponentStory<typeof Calendar> = () => {
 }
 
 export const customControlType: ComponentStory<typeof Calendar> = () => {
-  const [type, onChangeType] = useState<CalendarType>('month')
+  const [type, onChangeType] = useState<CalendarProps['type']>('month')
 
   return <Calendar type={type} onChangeType={onChangeType} />
 }

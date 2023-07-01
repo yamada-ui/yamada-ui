@@ -1,6 +1,6 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { MonthPicker, MonthPickerType } from '@yamada-ui/calendar'
+import { MonthPicker, MonthPickerProps } from '@yamada-ui/calendar'
 import { Icon } from '@yamada-ui/fontawesome'
 import { FormControl, Grid, Heading, VStack, Button } from '@yamada-ui/react'
 import { useState } from 'react'
@@ -381,7 +381,7 @@ export const customIcon: ComponentStory<typeof MonthPicker> = () => {
 }
 
 export const customControlType: ComponentStory<typeof MonthPicker> = () => {
-  const [type, onChangeType] = useState<MonthPickerType>('month')
+  const [type, onChangeType] = useState<MonthPickerProps['type']>('month')
 
   return <MonthPicker placeholder='YYYY/MM' type={type} onChangeType={onChangeType} />
 }

@@ -130,7 +130,10 @@ export const isInvalid: ComponentStory<typeof NumberInput> = () => {
 
 export const costomStepper: ComponentStory<typeof NumberInput> = () => {
   return (
-    <NumberInput increment={{ px: 'xs', children: '+' }} decrement={{ px: 'xs', children: '-' }} />
+    <NumberInput
+      incrementProps={{ px: 'xs', children: '+' }}
+      decrementProps={{ px: 'xs', children: '-' }}
+    />
   )
 }
 

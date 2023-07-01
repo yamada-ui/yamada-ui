@@ -1534,7 +1534,7 @@ export const withSelectColumnProps: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return <Table columns={columns} data={data} selectColumn={{ css: { w: '40px' } }} />
+  return <Table columns={columns} data={data} selectColumnProps={{ css: { w: '40px' } }} />
 }
 
 export const disabledSelectColumn: ComponentStory<typeof Table> = () => {
@@ -1596,7 +1596,7 @@ export const disabledSelectColumn: ComponentStory<typeof Table> = () => {
       <Table
         columns={columns}
         data={data}
-        selectColumn={false}
+        selectColumnProps={false}
         rowsClickSelect
         selectedRowIds={selectedRowIds}
         onChangeSelect={onChangeSelect}

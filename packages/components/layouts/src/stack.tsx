@@ -3,10 +3,25 @@ import { getValidChildren, cx, replaceObject } from '@yamada-ui/utils'
 import { cloneElement, Fragment, ReactElement, useMemo } from 'react'
 
 type StackOptions = {
+  /**
+   * The CSS `flex-direction` property.
+   */
   direction?: CSSUIProps['flexDirection']
+  /**
+   * The CSS `justify-content` property.
+   */
   justify?: CSSUIProps['justifyContent']
+  /**
+   * The CSS `align-items` property.
+   */
   align?: CSSUIProps['alignItems']
+  /**
+   * The CSS `flex-wrap` property.
+   */
   wrap?: CSSUIProps['flexWrap']
+  /**
+   * If `true`, each stack item will show a divider.
+   */
   divider?: ReactElement
 }
 

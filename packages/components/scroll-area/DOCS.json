@@ -1,11 +1,26 @@
 {
   "ScrollArea": {
-    "innerProps": { "type": "HTMLUIProps<\"div\">", "required": false },
+    "innerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for inner element."
+    },
     "onScrollPositionChange": {
       "type": "({ x, y }: { x: number; y: number }) => void",
-      "required": false
+      "required": false,
+      "description": "Callback function for when the scroll position changes."
     },
-    "scrollHideDelay": { "type": "number", "required": false },
-    "type": { "type": "\"always\" | \"scroll\" | \"hover\" | \"never\"", "required": false }
+    "scrollHideDelay": {
+      "type": "number",
+      "defaultValue": "1000",
+      "required": false,
+      "description": "Delay in milliseconds before scrollbars are hidden."
+    },
+    "type": {
+      "type": "\"always\" | \"scroll\" | \"hover\" | \"never\"",
+      "defaultValue": "'hover'",
+      "required": false,
+      "description": "Scrollbar visibility type."
+    }
   }
 }

@@ -5,22 +5,64 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "format": { "type": "(name: string) => string", "required": false },
-    "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
-    "ignoreFallback": { "type": "boolean", "required": false },
-    "loading": { "type": "\"eager\" | \"lazy\"", "required": false },
-    "name": { "type": "string", "required": false },
-    "referrerPolicy": { "type": "HTMLAttributeReferrerPolicy", "required": false },
+    "format": {
+      "type": "(name: string) => string",
+      "required": false,
+      "description": "Function to get the initials to display."
+    },
+    "icon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false,
+      "description": "The avatar icon to use."
+    },
+    "ignoreFallback": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times."
+    },
+    "loading": {
+      "type": "\"eager\" | \"lazy\"",
+      "required": false,
+      "description": "Defines loading strategy."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name of the person in the avatar.\n\n- if `src` has loaded, the name will be used as the `alt` attribute of the `img`\n- If `src` is not loaded, the name will be used to create the initials"
+    },
+    "referrerPolicy": {
+      "type": "HTMLAttributeReferrerPolicy",
+      "required": false,
+      "description": "Defining which referrer is sent when fetching the resource."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
       "required": false,
       "description": "The size of the Avatar."
     },
-    "src": { "type": "string", "required": false },
-    "srcSet": { "type": "string", "required": false },
+    "src": { "type": "string", "required": false, "description": "The image url of the avatar." },
+    "srcSet": {
+      "type": "string",
+      "required": false,
+      "description": "List of sources to use for different screen resolutions."
+    },
     "variant": { "type": "string", "required": false, "description": "The variant of the Avatar." }
   },
-  "AvatarGroup": { "max": { "type": "number", "required": false } },
-  "AvatarBadge": { "placement": { "type": "Placement", "required": false } }
+  "AvatarGroup": {
+    "max": {
+      "type": "number",
+      "required": false,
+      "description": "The maximum number of visible avatars."
+    }
+  },
+  "AvatarBadge": {
+    "placement": {
+      "type": "\"top-start\" | \"top-end\" | \"bottom-start\" | \"bottom-end\"",
+      "defaultValue": "'bottom-end'",
+      "required": false,
+      "description": "The placement of the badge."
+    }
+  }
 }

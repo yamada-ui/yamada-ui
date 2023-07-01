@@ -1,40 +1,122 @@
 {
   "NumberInput": {
-    "addon": { "type": "HTMLUIProps<\"div\">", "required": false },
-    "allowMouseWheel": { "type": "boolean", "required": false },
-    "clampValueOnBlur": { "type": "boolean", "required": false },
+    "addonProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for addon component."
+    },
+    "allowMouseWheel": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the input's value will change based on mouse wheel."
+    },
+    "clampValueOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "This controls the value update when you blur out of the input.\n- If `true` and the value is greater than `max`, the value will be reset to `max`.\n- Else, the value remains the same."
+    },
     "colorScheme": {
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "container": { "type": "HTMLUIProps<\"div\">", "required": false },
-    "decrement": { "type": "NumberDecrementStepperProps", "required": false },
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for container element."
+    },
+    "decrementProps": {
+      "type": "NumberDecrementStepperProps",
+      "required": false,
+      "description": "Props for decrement component."
+    },
     "errorBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the input is focused."
     },
-    "focusInputOnChange": { "type": "boolean", "required": false },
-    "format": { "type": "(value: string | number) => string | number", "required": false },
-    "getAriaValueText": { "type": "(value: string | number) => string", "required": false },
-    "increment": { "type": "NumberIncrementStepperProps", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "isStepper": { "type": "boolean", "required": false },
-    "isValidCharacter": { "type": "(value: string) => boolean", "required": false },
-    "keepWithinRange": { "type": "boolean", "required": false },
+    "focusInputOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the input will be focused as you increment or decrement the value with the stepper."
+    },
+    "format": {
+      "type": "(value: string | number) => string | number",
+      "required": false,
+      "description": "If using a custom display format, this converts the default format to the custom format."
+    },
+    "getAriaValueText": {
+      "type": "(value: string | number) => string",
+      "required": false,
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input."
+    },
+    "incrementProps": {
+      "type": "NumberIncrementStepperProps",
+      "required": false,
+      "description": "Props for increment component."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "isStepper": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, display the addon for the number input."
+    },
+    "isValidCharacter": {
+      "type": "(value: string) => boolean",
+      "required": false,
+      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/."
+    },
+    "keepWithinRange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "This controls the value update behavior in general.\n\n- If `true` and you use the stepper or up/down arrow keys,\nthe value will not exceed the `max` or go lower than `min`.\n\n- If `false`, the value will be allowed to go out of range."
+    },
     "onChange": {
       "type": "(valueAsString: string, valueAsNumber: number) => void",
-      "required": false
+      "required": false,
+      "description": "The callback fired when the value changes."
     },
-    "parse": { "type": "(value: string) => string", "required": false },
-    "precision": { "type": "number", "required": false },
+    "parse": {
+      "type": "(value: string) => string",
+      "required": false,
+      "description": "If using a custom display format, this converts the custom format to a format `parseFloat` understands."
+    },
+    "precision": {
+      "type": "number",
+      "required": false,
+      "description": "The number of decimal points used to round the value."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
@@ -49,43 +131,138 @@
     }
   },
   "UseNumberInput": {
-    "allowMouseWheel": { "type": "boolean", "required": false },
-    "clampValueOnBlur": { "type": "boolean", "required": false },
-    "defaultValue": { "type": "string | number", "required": false },
+    "allowMouseWheel": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the input's value will change based on mouse wheel."
+    },
+    "clampValueOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "This controls the value update when you blur out of the input.\n- If `true` and the value is greater than `max`, the value will be reset to `max`.\n- Else, the value remains the same."
+    },
+    "defaultValue": {
+      "type": "string | number",
+      "required": false,
+      "description": "The initial value of the counter.\nShould be less than `max` and greater than `min`."
+    },
     "disabled": { "type": "boolean", "required": false },
-    "focusInputOnChange": { "type": "boolean", "required": false },
-    "format": { "type": "(value: string | number) => string | number", "required": false },
-    "getAriaValueText": { "type": "(value: string | number) => string", "required": false },
+    "focusInputOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the input will be focused as you increment or decrement the value with the stepper."
+    },
+    "format": {
+      "type": "(value: string | number) => string | number",
+      "required": false,
+      "description": "If using a custom display format, this converts the default format to the custom format."
+    },
+    "getAriaValueText": {
+      "type": "(value: string | number) => string",
+      "required": false,
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input."
+    },
     "id": { "type": "string", "required": false },
     "inputMode": {
       "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"search\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
-      "required": false
+      "defaultValue": "'decimal'",
+      "required": false,
+      "description": "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices."
     },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "isValidCharacter": { "type": "(value: string) => boolean", "required": false },
-    "keepWithinRange": { "type": "boolean", "required": false },
-    "max": { "type": "number", "required": false },
-    "min": { "type": "number", "required": false },
-    "name": { "type": "string", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "isValidCharacter": {
+      "type": "(value: string) => boolean",
+      "required": false,
+      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/."
+    },
+    "keepWithinRange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "This controls the value update behavior in general.\n\n- If `true` and you use the stepper or up/down arrow keys,\nthe value will not exceed the `max` or go lower than `min`.\n\n- If `false`, the value will be allowed to go out of range."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "Number.MAX_SAFE_INTEGER",
+      "required": false,
+      "description": "The maximum value of the counter"
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "Number.MIN_SAFE_INTEGER",
+      "required": false,
+      "description": "The minimum value of the counter"
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The HTML `name` attribute used for forms."
+    },
     "onBlur": { "type": "FocusEventHandler<HTMLInputElement>", "required": false },
     "onChange": {
       "type": "(valueAsString: string, valueAsNumber: number) => void",
-      "required": false
+      "required": false,
+      "description": "The callback fired when the value changes."
     },
     "onFocus": { "type": "FocusEventHandler<HTMLInputElement>", "required": false },
     "onInvalid": {
       "type": "(\n  message: ValidityState,\n  value: string,\n  valueAsNumber: number\n) => void",
-      "required": false
+      "required": false,
+      "description": "The callback invoked when invalid number is entered."
     },
-    "parse": { "type": "(value: string) => string", "required": false },
-    "pattern": { "type": "string", "required": false },
-    "precision": { "type": "number", "required": false },
+    "parse": {
+      "type": "(value: string) => string",
+      "required": false,
+      "description": "If using a custom display format, this converts the custom format to a format `parseFloat` understands."
+    },
+    "pattern": {
+      "type": "string",
+      "defaultValue": "'[0-9]*(.[0-9]+)?'",
+      "required": false,
+      "description": "The pattern used to check the <input> element's value against on form submission."
+    },
+    "precision": {
+      "type": "number",
+      "required": false,
+      "description": "The number of decimal points used to round the value."
+    },
     "readOnly": { "type": "boolean", "required": false },
     "required": { "type": "boolean", "required": false },
-    "step": { "type": "number", "required": false },
-    "value": { "type": "string | number", "required": false }
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The step used to increment or decrement the value."
+    },
+    "value": {
+      "type": "string | number",
+      "required": false,
+      "description": "The value of the counter.\nShould be less than `max` and greater than `min`."
+    }
   }
 }

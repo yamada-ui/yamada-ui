@@ -2,6 +2,11 @@ import { forwardRef } from '@yamada-ui/core'
 import { Icon, IconProps } from '@yamada-ui/icon'
 
 export type PuffProps = IconProps & {
+  /**
+   * The CSS `dur` property.
+   *
+   * @default '1.8s'
+   */
   duration?: IconProps['dur']
 }
 

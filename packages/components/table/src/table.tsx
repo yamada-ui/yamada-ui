@@ -15,14 +15,51 @@ import { Thead, TableHeadProps } from './thead'
 import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
 
 type TableOptions = {
+  /**
+   * The CSS `table-layout` property.
+   */
   layout?: CSSUIObject['tableLayout']
+  /**
+   * If `true`, highlight the row when the table row is selected.
+   *
+   * @default false
+   */
   highlightOnSelected?: boolean
+  /**
+   * If `true`, highlight the row when the table row is hovered.
+   *
+   * @default false
+   */
   highlightOnHover?: boolean
+  /**
+   * If `true`, display the outer border of the table.
+   *
+   * @default false
+   */
   withBorder?: boolean
+  /**
+   * If `true`, display line on the columns of the table.
+   *
+   * @default false
+   */
   withColumnBorders?: boolean
+  /**
+   * If `true`, display the table footer.
+   *
+   * @default false
+   */
   withFooter?: boolean
+  /**
+   * Props for the table thead element.
+   */
   theadProps?: TableHeadProps
+  /**
+   * Props for the table tbody element.
+   */
   tbodyProps?: TableBodyProps
+  /**
+   * Props for the table tfoot element.
+   */
   tfootProps?: TableFootProps
 }
 

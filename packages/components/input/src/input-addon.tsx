@@ -3,6 +3,11 @@ import { cx } from '@yamada-ui/utils'
 import { useInputGroup } from './input-group'
 
 type InputAddonOptions = {
+  /**
+   * The placement of the element.
+   *
+   * @default 'left'
+   */
   placement?: 'left' | 'right'
 }
 

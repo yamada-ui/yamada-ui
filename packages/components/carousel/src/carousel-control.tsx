@@ -71,7 +71,7 @@ const CarouselControl = forwardRef<CarouselControlProps & { operation: 'prev' | 
         ref={ref}
         className={cx('ui-carousel-control', className)}
         colorScheme={colorScheme}
-        isRound
+        isRounded
         __css={css}
         {...rest}
       />

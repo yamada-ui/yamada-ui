@@ -22,20 +22,54 @@ import {
 import { OptionGroup, Option, UIOption } from './'
 
 type MultiSelectOptions = {
+  /**
+   * If provided, generate options based on data.
+   */
   options?: UIOption[]
+  /**
+   * The custom display value to use.
+   */
   component?: FC<{
     value: string | number
     displayValue: string
     index: number
     onRemove: MouseEventHandler<HTMLElement>
   }>
+  /**
+   * The visual separator between each value.
+   *
+   * @default ','
+   */
   separator?: string
+  /**
+   * If `true`, display the select clear icon.
+   *
+   * @default true
+   */
   isClearable?: boolean
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for select container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for select list element.
+   */
   listProps?: Omit<SelectListProps, 'children'>
+  /**
+   * Props for select icon element.
+   */
   iconProps?: SelectIconProps
+  /**
+   * Props for select clear icon element.
+   */
   clearIconProps?: SelectIconProps
 }
 

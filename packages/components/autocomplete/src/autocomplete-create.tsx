@@ -5,7 +5,13 @@ import { AutocompleteItemIcon } from './autocomplete-icon'
 import { useAutocompleteContext, useAutocompleteCreate } from './use-autocomplete'
 
 type AutocompleteCreateOptions = {
+  /**
+   * The autocomplete create option icon to use.
+   */
   icon?: ReactElement
+  /**
+   * The label of the autocomplete create option.
+   */
   children?: string | ((inputValue: string) => string)
 }
 

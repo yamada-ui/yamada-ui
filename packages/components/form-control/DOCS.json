@@ -2,20 +2,48 @@
   "FormControl": {
     "errorMessage": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The form control error message to use."
     },
     "helperMessage": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The form control helper message to use."
     },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isReplace": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isReplace": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, switch between helper message and error message using isInvalid."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The form control label to use."
     },
     "optionalIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
@@ -41,10 +69,30 @@
   "UseFormControl": {
     "disabled": { "type": "boolean", "required": false },
     "id": { "type": "string", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
     "onBlur": { "type": "FocusEventHandler<Y>", "required": false },
     "onFocus": { "type": "FocusEventHandler<Y>", "required": false },
     "readOnly": { "type": "boolean", "required": false },

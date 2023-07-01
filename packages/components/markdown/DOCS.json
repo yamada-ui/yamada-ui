@@ -2,7 +2,8 @@
   "Markdown": {
     "code": {
       "type": "{ theme?: \"a11yDark\" | \"atomDark\" | \"base16AteliersulphurpoolLight\" | \"cb\" | \"coldarkCold\" | \"coldarkDark\" | \"coy\" | \"darcula\" | \"dark\" | \"dracula\" | \"duotoneDark\" | \"duotoneEarth\" | ... 27 more ... | undefined; }",
-      "required": false
+      "required": false,
+      "description": "If provided, this will set the theme for the code."
     }
   },
   "MarkdownComponent": {},

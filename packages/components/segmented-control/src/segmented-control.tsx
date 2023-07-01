@@ -49,11 +49,33 @@ const [SegmentedControlProvider, useSegmentedControl] = createContext<SegmentedC
 })
 
 type SegmentedControlOptions = {
+  /**
+   * The HTML `name` attribute used for forms.
+   */
   name?: string
+  /**
+   * The value of the segmented control.
+   */
   value?: string
+  /**
+   * The initial value of the segmented control.
+   */
   defaultValue?: string
+  /**
+   * The callback fired when any children radio is checked or unchecked.
+   */
   onChange?: (value: string) => void
+  /**
+   * If `true`, the segmented control will be readonly.
+   *
+   * @default false
+   */
   isReadOnly?: boolean
+  /**
+   * If `true`, the segmented control will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
 }
 
@@ -289,7 +311,13 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, 'div'>((props,
 })
 
 type SegmentedControlButtonOptions = {
+  /**
+   * The value of the segmented control button.
+   */
   value: string | number
+  /**
+   * The callback fired when any children radio is checked or unchecked.
+   */
   onChange?: ChangeEventHandler<HTMLInputElement>
 }
 

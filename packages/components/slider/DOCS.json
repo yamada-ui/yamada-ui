@@ -6,34 +6,107 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "defaultValue": { "type": "number", "required": false },
+    "defaultValue": {
+      "type": "number",
+      "required": false,
+      "description": "The initial value of the slider."
+    },
     "filledTrack": { "type": "SliderFilledTrackProps", "required": false },
     "filledTrackColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
       "required": false
     },
-    "focusThumbOnChange": { "type": "boolean", "required": false },
-    "id": { "type": "string", "required": false },
+    "focusThumbOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `false`, the slider handle will not capture focus when value changes."
+    },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "The base `id` to use for the slider."
+    },
     "input": { "type": "HTMLUIProps<\"input\">", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "isReversed": { "type": "boolean", "required": false },
-    "max": { "type": "number", "required": false },
-    "min": { "type": "number", "required": false },
-    "name": { "type": "string", "required": false },
-    "onChange": { "type": "(value: number) => void", "required": false },
-    "onChangeEnd": { "type": "(value: number) => void", "required": false },
-    "onChangeStart": { "type": "(value: number) => void", "required": false },
-    "orientation": { "type": "\"horizontal\" | \"vertical\"", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "isReversed": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the value will be incremented or decremented in reverse."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "required": false,
+      "description": "The maximum allowed value of the slider. Cannot be less than min."
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum allowed value of the slider. Cannot be greater than max."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called whenever the slider value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "required": false,
+      "description": "The orientation of the slider."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the Slider."
     },
-    "step": { "type": "number", "required": false },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The step in which increments or decrements have to be made."
+    },
     "thumb": { "type": "SliderThumbProps", "required": false },
     "thumbColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
@@ -52,7 +125,7 @@
       "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
       "required": false
     },
-    "value": { "type": "number", "required": false },
+    "value": { "type": "number", "required": false, "description": "The value of the slider." },
     "variant": { "type": "string", "required": false, "description": "The variant of the Slider." }
   },
   "SliderTrack": { "filledTrack": { "type": "SliderFilledTrackProps", "required": false } },
@@ -60,29 +133,107 @@
   "SliderThumb": {},
   "SliderMark": { "value": { "type": "number", "required": true } },
   "RangeSlider": {
-    "betweenThumbs": { "type": "number", "required": false },
-    "defaultValue": { "type": "[number, number]", "required": false },
+    "betweenThumbs": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together."
+    },
+    "defaultValue": {
+      "type": "[number, number]",
+      "required": false,
+      "description": "The initial value of the slider."
+    },
     "filledTrack": { "type": "RangeSliderFilledTrackProps", "required": false },
     "filledTrackColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
       "required": false
     },
-    "focusThumbOnChange": { "type": "boolean", "required": false },
-    "id": { "type": "string", "required": false },
+    "focusThumbOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `false`, the slider handle will not capture focus when value changes."
+    },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "The base `id` to use for the slider."
+    },
     "input": { "type": "HTMLUIProps<\"input\">", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "isReversed": { "type": "boolean", "required": false },
-    "max": { "type": "number", "required": false },
-    "min": { "type": "number", "required": false },
-    "name": { "type": "string | [string, string]", "required": false },
-    "onChange": { "type": "(value: [number, number]) => void", "required": false },
-    "onChangeEnd": { "type": "(value: [number, number]) => void", "required": false },
-    "onChangeStart": { "type": "(value: [number, number]) => void", "required": false },
-    "orientation": { "type": "\"horizontal\" | \"vertical\"", "required": false },
-    "step": { "type": "number", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "isReversed": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the value will be incremented or decremented in reverse."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "required": false,
+      "description": "The maximum allowed value of the slider. Cannot be less than min."
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum allowed value of the slider. Cannot be greater than max."
+    },
+    "name": {
+      "type": "string | [string, string]",
+      "required": false,
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+    },
+    "onChange": {
+      "type": "(value: [number, number]) => void",
+      "required": false,
+      "description": "Function called whenever the slider value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: [number, number]) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: [number, number]) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "required": false,
+      "description": "The orientation of the slider."
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The step in which increments or decrements have to be made."
+    },
     "thumb": { "type": "RangeSliderThumbProps", "required": false },
     "thumbColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
@@ -101,7 +252,11 @@
       "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
       "required": false
     },
-    "value": { "type": "[number, number]", "required": false }
+    "value": {
+      "type": "[number, number]",
+      "required": false,
+      "description": "The value of the slider."
+    }
   },
   "RangeSliderTrack": {
     "filledTrack": { "type": "RangeSliderFilledTrackProps", "required": false }

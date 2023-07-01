@@ -39,16 +39,64 @@ const [TabsProvider, useTabsContext] = createContext<TabsContext>({
 export { useTabsContext }
 
 type TabsOptions = {
+  /**
+   * The index of the selected tab.
+   */
   index?: number
+  /**
+   * The index of the selected tab.
+   */
   defaultIndex?: number
+  /**
+   * If `true`, tabs will stretch to width of the tablist.
+   *
+   * @default false
+   */
   isFitted?: boolean
+  /**
+   * The alignment of the tabs.
+   */
   align?: 'start' | 'end' | 'center'
+  /**
+   * If `true`, the tabs will be manually activated and　display its panel by pressing Space or Enter.
+   *
+   * If `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.
+   *
+   * @default false
+   */
   isManual?: boolean
+  /**
+   * If `true`, rendering of the tab panel's will be deferred until it is selected.
+   *
+   * @default true
+   */
   isLazy?: boolean
+  /**
+   * The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.
+   *
+   * - `unmount`: The content of inactive tab panels are always unmounted.
+   * - `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected.
+   *
+   * @default 'unmount'
+   */
   lazyBehavior?: LazyMode
+  /**
+   * The orientation of the tab list.
+   *
+   * @default 'horizontal'
+   */
   orientation?: 'vertical' | 'horizontal'
+  /**
+   * The callback invoked when the index changes.
+   */
   onChange?: (index: number) => void
+  /**
+   * Props for tab list component.
+   */
   tabListProps?: TabListProps
+  /**
+   * Props for tab panels components.
+   */
   tabPanelsProps?: TabPanelsProps
 }
 

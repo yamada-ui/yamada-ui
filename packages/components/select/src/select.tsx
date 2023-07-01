@@ -27,11 +27,29 @@ export type UIOption = Omit<OptionProps, 'value' | 'children'> & {
 }
 
 type SelectOptions = {
+  /**
+   * If provided, generate options based on data.
+   */
   options?: UIOption[]
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for select container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for select list element.
+   */
   listProps?: Omit<SelectListProps, 'children'>
+  /**
+   * Props for select icon element.
+   */
   iconProps?: SelectIconProps
 }
 

@@ -1,19 +1,56 @@
 {
   "NativeTable": {
-    "highlightOnHover": { "type": "boolean", "required": false },
+    "highlightOnHover": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, highlight the row when the table row is hovered."
+    },
     "layout": {
       "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
-      "required": false
+      "required": false,
+      "description": "The CSS `table-layout` property."
     },
-    "withBorder": { "type": "boolean", "required": false },
-    "withColumnBorders": { "type": "boolean", "required": false }
+    "withBorder": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the outer border of the table."
+    },
+    "withColumnBorders": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display line on the columns of the table."
+    }
   },
   "TableContainer": {},
   "TableHead": {},
   "TableBody": {},
   "TableFoot": {},
   "Tr": {},
-  "Th": { "isNumeric": { "type": "boolean", "required": false } },
-  "Td": { "isNumeric": { "type": "boolean", "required": false } },
-  "TableCaption": { "placement": { "type": "\"top\" | \"bottom\"", "required": false } }
+  "Th": {
+    "isNumeric": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Aligns the cell content to the right."
+    }
+  },
+  "Td": {
+    "isNumeric": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Aligns the cell content to the right."
+    }
+  },
+  "TableCaption": {
+    "placement": {
+      "type": "\"top\" | \"bottom\"",
+      "defaultValue": "'bottom'",
+      "required": false,
+      "description": "The placement of the table caption."
+    }
+  }
 }

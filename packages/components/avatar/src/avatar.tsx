@@ -21,14 +21,46 @@ export const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
 })
 
 type AvatarOptions = {
+  /**
+   * The name of the person in the avatar.
+   *
+   * - if `src` has loaded, the name will be used as the `alt` attribute of the `img`
+   * - If `src` is not loaded, the name will be used to create the initials
+   */
   name?: string
+  /**
+   * The image url of the avatar.
+   */
   src?: ImageProps['src']
+  /**
+   * List of sources to use for different screen resolutions.
+   */
   srcSet?: ImageProps['srcSet']
+  /**
+   * Defines loading strategy.
+   */
   loading?: ImageProps['loading']
+  /**
+   * If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times.
+   *
+   * @default false
+   */
   ignoreFallback?: ImageProps['ignoreFallback']
+  /**
+   * The avatar icon to use.
+   */
   icon?: ReactElement
+  /**
+   * Function called when image failed to load.
+   */
   onError?: () => void
+  /**
+   * Function to get the initials to display.
+   */
   format?: (name: string) => string
+  /**
+   * Defining which referrer is sent when fetching the resource.
+   */
   referrerPolicy?: HTMLAttributeReferrerPolicy
 }
 
@@ -112,9 +144,10 @@ const AvatarImage: FC<AvatarImageProps> = ({
   loading,
   icon = <AvatarIcon />,
   ignoreFallback,
+  crossOrigin,
   referrerPolicy,
 }) => {
-  const status = useImage({ src, onError, ignoreFallback })
+  const status = useImage({ src, onError, crossOrigin, ignoreFallback })
 
   const isLoaded = status === 'loaded'
 

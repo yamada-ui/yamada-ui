@@ -41,16 +41,57 @@ import {
 } from 'react'
 
 export type UseEditableProps = FormControlOptions & {
+  /**
+   * The placeholder text when the value is empty.
+   */
   placeholder?: string
+  /**
+   * The value of the Editable in both edit & preview mode.
+   */
   value?: string
+  /**
+   * The initial value of the Editable in both edit & preview mode.
+   */
   defaultValue?: string
+  /**
+   * If `true`, the Editable will start with edit mode by default.
+   */
   startWithEditView?: boolean
+  /**
+   * If `true`, the read only view, has a `tabIndex` set to `0`
+   * so it can receive focus via the keyboard or click.
+   *
+   * @default true
+   */
   isPreviewFocusable?: boolean
+  /**
+   * If `true`, it'll update the value onBlur and turn off the edit mode.
+   *
+   * @default true
+   */
   submitOnBlur?: boolean
+  /**
+   * If `true`, the input's text will be highlighted on focus.
+   *
+   * @default true
+   */
   selectAllOnFocus?: boolean
+  /**
+   * A callback invoked when user changes input.
+   */
   onChange?: (value: string) => void
+  /**
+   * Callback invoked when user cancels input with the `Esc` key.
+   * It provides the last confirmed value as argument.
+   */
   onCancel?: (preValue: string) => void
+  /**
+   * A callback invoked when user confirms value with `enter` key or by blurring input.
+   */
   onSubmit?: (value: string) => void
+  /**
+   * A callback invoked once the user enters edit mode.
+   */
   onEdit?: () => void
 }
 
@@ -366,7 +407,13 @@ const [EditableProvider, useEditableContext] = createContext<EditableContext>({
 })
 
 type EditableOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
   children?:
     | ReactNode

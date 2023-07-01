@@ -23,21 +23,60 @@ import {
 import { AutocompleteCreate, AutocompleteEmpty } from './'
 
 type MultiAutocompleteOptions = {
+  /**
+   * The visual separator between each value.
+   *
+   * @default ','
+   */
   separator?: string
+  /**
+   * The custom display value to use.
+   */
   component?: FC<{
     value: string | number
     displayValue: string
     index: number
     onRemove: MouseEventHandler<HTMLElement>
   }>
+  /**
+   * If `true`, keep the placeholder.
+   *
+   * @default false
+   */
   keepPlaceholder?: boolean
+  /**
+   * If `true`, display the select clear icon.
+   *
+   * @default true
+   */
   isClearable?: boolean
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for multi autocomplete container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for multi autocomplete list element.
+   */
   listProps?: Omit<AutocompleteListProps, 'children'>
+  /**
+   * Props for multi autocomplete input element.
+   */
   inputProps?: HTMLUIProps<'input'>
+  /**
+   * Props for multi autocomplete icon element.
+   */
   iconProps?: AutocompleteIconProps
+  /**
+   * Props for multi autocomplete clear icon element.
+   */
   clearIconProps?: AutocompleteIconProps
 }
 

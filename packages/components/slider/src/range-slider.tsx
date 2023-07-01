@@ -43,19 +43,75 @@ import {
 import { CSSProperties, KeyboardEvent, useCallback, useId, useRef, useState } from 'react'
 
 export type UseRangeSliderProps = FormControlOptions & {
+  /**
+   * The base `id` to use for the slider.
+   */
   id?: string
+  /**
+   * The name attribute of the hidden `input` field.
+   * This is particularly useful in forms.
+   */
   name?: string | [string, string]
+  /**
+   * The minimum allowed value of the slider. Cannot be greater than max.
+   *
+   * @default 0
+   */
   min?: number
+  /**
+   * The maximum allowed value of the slider. Cannot be less than min.
+   *
+   * @default 100
+   */
   max?: number
+  /**
+   * The step in which increments or decrements have to be made.
+   *
+   * @default 1
+   */
   step?: number
+  /**
+   * The value of the slider.
+   */
   value?: [number, number]
+  /**
+   * The initial value of the slider.
+   */
   defaultValue?: [number, number]
+  /**
+   * The orientation of the slider.
+   *
+   * @default 'horizontal'
+   */
   orientation?: 'horizontal' | 'vertical'
+  /**
+   * If `true`, the value will be incremented or decremented in reverse.
+   */
   isReversed?: boolean
+  /**
+   * If `false`, the slider handle will not capture focus when value changes.
+   *
+   * @default true
+   */
   focusThumbOnChange?: boolean
+  /**
+   * The minimum distance between slider thumbs.
+   * Useful for preventing the thumbs from being too close together.
+   *
+   * @default 0
+   */
   betweenThumbs?: number
+  /**
+   * Function called when the user starts selecting a new value.
+   */
   onChangeStart?: (value: [number, number]) => void
+  /**
+   * Function called when the user is done selecting a new value.
+   */
   onChangeEnd?: (value: [number, number]) => void
+  /**
+   * Function called whenever the slider value changes.
+   */
   onChange?: (value: [number, number]) => void
 }
 

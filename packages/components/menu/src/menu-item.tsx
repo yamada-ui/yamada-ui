@@ -16,10 +16,31 @@ const isTargetMenuItem = (target: EventTarget | null) => {
 }
 
 type MenuItemOptions = {
+  /**
+   * If `true`, the menu item will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * If `true`, the menu item will be focusable.
+   *
+   * @default false
+   */
   isFocusable?: boolean
+  /**
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
+   */
   closeOnSelect?: boolean
+  /**
+   * The menu item icon to use.
+   */
   icon?: ReactElement
+  /**
+   * Right-aligned label text content, useful for displaying hotkeys.
+   */
   command?: string
 }
 
@@ -137,9 +158,23 @@ export const MenuItem = forwardRef<MenuItemProps, 'button'>(
 )
 
 type MenuOptionItemOptions = {
+  /**
+   * The menu option item icon to use.
+   */
   icon?: ReactElement | null
+  /**
+   * The value of the menu option item.
+   */
   value?: string
+  /**
+   * If `true`, the checkbox or radio will be checked.
+   *
+   * @default false
+   */
   isChecked?: boolean
+  /**
+   * The type of the menu option item.
+   */
   type?: 'radio' | 'checkbox'
 }
 

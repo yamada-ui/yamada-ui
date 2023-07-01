@@ -1,13 +1,50 @@
 {
-  "Breadcrumb": { "separator": { "type": "string | Element", "required": false } },
+  "Breadcrumb": {
+    "gap": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 79 more ... | ColorModeArray<...>",
+      "defaultValue": "'sm'",
+      "required": false,
+      "description": "The left and right margin applied to the separator."
+    },
+    "listProps": {
+      "type": "HTMLUIProps<\"ol\">",
+      "required": false,
+      "description": "Props for ol element."
+    },
+    "separator": {
+      "type": "string | Element",
+      "defaultValue": "'/'",
+      "required": false,
+      "description": "The visual separator between each breadcrumb item."
+    }
+  },
   "BreadcrumbItem": {
-    "isCurrentPage": { "type": "boolean", "required": false },
-    "isLastChild": { "type": "boolean", "required": false },
-    "separator": { "type": "string | Element", "required": false }
+    "isCurrentPage": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, change to span element."
+    },
+    "isLastChild": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, not show separator."
+    },
+    "separator": {
+      "type": "string | Element",
+      "defaultValue": "'/'",
+      "required": false,
+      "description": "The visual separator between each breadcrumb item."
+    }
   },
   "BreadcrumbLink": {
-    "isCurrentPage": { "type": "boolean", "required": false },
-    "separator": { "type": "string | Element", "required": false }
+    "isCurrentPage": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, change to span element."
+    }
   },
   "BreadcrumbSeparator": {}
 }

@@ -39,11 +39,33 @@ import {
 import { useRadioGroupContenxt } from './radio-group'
 
 export type UseRadioProps<Y extends string | number = string> = FormControlOptions & {
+  /**
+   * id assigned to input.
+   */
   id?: string
+  /**
+   * The name of the input field in a radio.
+   */
   name?: string
+  /**
+   * The value to be used in the radio button.
+   */
   value?: Y
+  /**
+   * If `true`, the radio will be initially checked.
+   *
+   * @default false
+   */
   defaultChecked?: boolean
+  /**
+   * If `true`, the radio will be checked.
+   *
+   * @default false
+   */
   isChecked?: boolean
+  /**
+   * The callback invoked when the checked state changes.
+   */
   onChange?: ChangeEventHandler<HTMLInputElement>
 }
 

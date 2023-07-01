@@ -1,107 +1,389 @@
 {
   "Table": {
-    "cellProps": { "type": "CellProps<Y>", "required": false },
-    "checkboxProps": { "type": "CheckboxProps", "required": false },
+    "cellProps": {
+      "type": "CellProps<Y>",
+      "required": false,
+      "description": "Props for the table cell component."
+    },
+    "checkboxProps": {
+      "type": "CheckboxProps",
+      "required": false,
+      "description": "Props for the table checkbox element."
+    },
     "colorScheme": {
       "defaultValue": "gray",
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "defaultSelectedRowIds": { "type": "string[]", "required": false },
-    "defaultSort": { "type": "Sort<Y>", "required": false },
-    "disabledRowIds": { "type": "string[]", "required": false },
-    "footerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
-    "footerProps": { "type": "HeaderProps<Y>", "required": false },
-    "headerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
-    "headerProps": { "type": "HeaderProps<Y>", "required": false },
-    "highlightOnHover": { "type": "boolean", "required": false },
-    "highlightOnSelected": { "type": "boolean", "required": false },
+    "defaultSelectedRowIds": {
+      "type": "string[]",
+      "required": false,
+      "description": "The initial ids of the selected row."
+    },
+    "defaultSort": {
+      "type": "Sort<Y>",
+      "required": false,
+      "description": "The initial sort of the table."
+    },
+    "disabledRowIds": {
+      "type": "string[]",
+      "required": false,
+      "description": "The ids that disabled in selection."
+    },
+    "footerGroupProps": {
+      "type": "HeaderGroupProps<Y>",
+      "required": false,
+      "description": "Props for the table footer group component."
+    },
+    "footerProps": {
+      "type": "HeaderProps<Y>",
+      "required": false,
+      "description": "Props for the table footer component."
+    },
+    "headerGroupProps": {
+      "type": "HeaderGroupProps<Y>",
+      "required": false,
+      "description": "Props for the table header group component."
+    },
+    "headerProps": {
+      "type": "HeaderProps<Y>",
+      "required": false,
+      "description": "Props for the table header component."
+    },
+    "highlightOnHover": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, highlight the row when the table row is hovered."
+    },
+    "highlightOnSelected": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, highlight the row when the table row is selected."
+    },
     "layout": {
       "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
-      "required": false
+      "required": false,
+      "description": "The CSS `table-layout` property."
     },
-    "onChangeSelect": { "type": "(rowSelection: string[]) => void", "required": false },
-    "onChangeSort": { "type": "(sort: Sort<Y>) => void", "required": false },
-    "onClickRow": { "type": "(row: Row<Y>) => void", "required": false },
-    "rowId": { "type": "keyof Y", "required": false },
-    "rowProps": { "type": "RowProps<Y>", "required": false },
-    "rowsClickSelect": { "type": "boolean", "required": false },
-    "selectColumn": { "type": "false | SelectColumn<Y, unknown>", "required": false },
-    "selectedRowIds": { "type": "string[]", "required": false },
+    "onChangeSelect": {
+      "type": "(rowSelection: string[]) => void",
+      "required": false,
+      "description": "The callback invoked when row is selected."
+    },
+    "onChangeSort": {
+      "type": "(sort: Sort<Y>) => void",
+      "required": false,
+      "description": "The callback invoked when table sort is changed."
+    },
+    "onClickRow": {
+      "type": "(row: Row<Y>) => void",
+      "required": false,
+      "description": "The callback invoked when a row is clicked."
+    },
+    "rowId": {
+      "type": "keyof Y",
+      "required": false,
+      "description": "The id used to store the value when selected."
+    },
+    "rowProps": {
+      "type": "RowProps<Y>",
+      "required": false,
+      "description": "Props for the table row component."
+    },
+    "rowsClickSelect": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, allows selection by clicking on a row."
+    },
+    "selectColumnProps": {
+      "type": "false | SelectColumn<Y, unknown>",
+      "required": false,
+      "description": "Props for the table select column component."
+    },
+    "selectedRowIds": {
+      "type": "string[]",
+      "required": false,
+      "description": "The ids of the selected row."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
       "required": false,
       "description": "The size of the Table."
     },
-    "sort": { "type": "Sort<Y>", "required": false },
-    "sortIconProps": { "type": "IconProps", "required": false },
-    "tbodyProps": { "type": "TableBodyProps", "required": false },
-    "tfootProps": { "type": "TableFootProps", "required": false },
-    "theadProps": { "type": "TableHeadProps", "required": false },
+    "sort": { "type": "Sort<Y>", "required": false, "description": "The sort of the table." },
+    "sortIconProps": {
+      "type": "IconProps",
+      "required": false,
+      "description": "Props for the table sort icon element."
+    },
+    "tbodyProps": {
+      "type": "TableBodyProps",
+      "required": false,
+      "description": "Props for the table tbody element."
+    },
+    "tfootProps": {
+      "type": "TableFootProps",
+      "required": false,
+      "description": "Props for the table tfoot element."
+    },
+    "theadProps": {
+      "type": "TableHeadProps",
+      "required": false,
+      "description": "Props for the table thead element."
+    },
     "variant": {
       "defaultValue": "simple",
       "type": "\"simple\" | \"striped\" | \"unstyled\"",
       "required": false,
       "description": "The variant of the Table."
     },
-    "withBorder": { "type": "boolean", "required": false },
-    "withColumnBorders": { "type": "boolean", "required": false },
-    "withFooter": { "type": "boolean", "required": false },
-    "withFooterSelect": { "type": "boolean", "required": false }
+    "withBorder": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the outer border of the table."
+    },
+    "withColumnBorders": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display line on the columns of the table."
+    },
+    "withFooter": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the table footer."
+    },
+    "withFooterSelect": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the checkbox in table footer."
+    }
   },
   "PagingTable": {
-    "cellProps": { "type": "CellProps<Y>", "required": false },
-    "checkboxProps": { "type": "CheckboxProps", "required": false },
-    "containerProps": { "type": "HTMLUIProps<\"div\">", "required": false },
-    "defaultPageIndex": { "type": "number", "required": false },
-    "defaultPageSize": { "type": "number", "required": false },
-    "defaultSelectedRowIds": { "type": "string[]", "required": false },
-    "defaultSort": { "type": "Sort<Y>", "required": false },
-    "disabledRowIds": { "type": "string[]", "required": false },
-    "footerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
-    "footerProps": { "type": "HeaderProps<Y>", "required": false },
-    "formatPageSizeLabel": { "type": "(pageSize: number) => string", "required": false },
-    "headerGroupProps": { "type": "HeaderGroupProps<Y>", "required": false },
-    "headerProps": { "type": "HeaderProps<Y>", "required": false },
-    "highlightOnHover": { "type": "boolean", "required": false },
-    "highlightOnSelected": { "type": "boolean", "required": false },
+    "cellProps": {
+      "type": "CellProps<Y>",
+      "required": false,
+      "description": "Props for the table cell component."
+    },
+    "checkboxProps": {
+      "type": "CheckboxProps",
+      "required": false,
+      "description": "Props for the table checkbox element."
+    },
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for the table container element."
+    },
+    "defaultPageIndex": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The initial page index of the paging table."
+    },
+    "defaultPageSize": {
+      "type": "number",
+      "defaultValue": "20",
+      "required": false,
+      "description": "The initial page size of the paging table."
+    },
+    "defaultSelectedRowIds": {
+      "type": "string[]",
+      "required": false,
+      "description": "The initial ids of the selected row."
+    },
+    "defaultSort": {
+      "type": "Sort<Y>",
+      "required": false,
+      "description": "The initial sort of the table."
+    },
+    "disabledRowIds": {
+      "type": "string[]",
+      "required": false,
+      "description": "The ids that disabled in selection."
+    },
+    "footerGroupProps": {
+      "type": "HeaderGroupProps<Y>",
+      "required": false,
+      "description": "Props for the table footer group component."
+    },
+    "footerProps": {
+      "type": "HeaderProps<Y>",
+      "required": false,
+      "description": "Props for the table footer component."
+    },
+    "formatPageSizeLabel": {
+      "type": "(pageSize: number) => string",
+      "required": false,
+      "description": "Function to format the label used for the options in a select."
+    },
+    "headerGroupProps": {
+      "type": "HeaderGroupProps<Y>",
+      "required": false,
+      "description": "Props for the table header group component."
+    },
+    "headerProps": {
+      "type": "HeaderProps<Y>",
+      "required": false,
+      "description": "Props for the table header component."
+    },
+    "highlightOnHover": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, highlight the row when the table row is hovered."
+    },
+    "highlightOnSelected": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, highlight the row when the table row is selected."
+    },
     "layout": {
       "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
-      "required": false
+      "required": false,
+      "description": "The CSS `table-layout` property."
     },
-    "onChangePageIndex": { "type": "(pageIndex: number) => void", "required": false },
-    "onChangePageSize": { "type": "(pageIndex: number) => void", "required": false },
-    "onChangeSelect": { "type": "(rowSelection: string[]) => void", "required": false },
-    "onChangeSort": { "type": "(sort: Sort<Y>) => void", "required": false },
-    "onClickRow": { "type": "(row: Row<Y>) => void", "required": false },
-    "pageIndex": { "type": "number", "required": false },
-    "pageSize": { "type": "number", "required": false },
-    "pageSizeList": { "type": "number[]", "required": false },
+    "onChangePageIndex": {
+      "type": "(pageIndex: number) => void",
+      "required": false,
+      "description": "The callback invoked when page index is changed."
+    },
+    "onChangePageSize": {
+      "type": "(pageIndex: number) => void",
+      "required": false,
+      "description": "The callback invoked when page size is changed."
+    },
+    "onChangeSelect": {
+      "type": "(rowSelection: string[]) => void",
+      "required": false,
+      "description": "The callback invoked when row is selected."
+    },
+    "onChangeSort": {
+      "type": "(sort: Sort<Y>) => void",
+      "required": false,
+      "description": "The callback invoked when table sort is changed."
+    },
+    "onClickRow": {
+      "type": "(row: Row<Y>) => void",
+      "required": false,
+      "description": "The callback invoked when a row is clicked."
+    },
+    "pageIndex": {
+      "type": "number",
+      "required": false,
+      "description": "The page index of the paging table."
+    },
+    "pageSize": {
+      "type": "number",
+      "required": false,
+      "description": "The page size of the paging table."
+    },
+    "pageSizeList": {
+      "type": "number[]",
+      "defaultValue": "'[20, 50, 100]'",
+      "required": false,
+      "description": "The list of the page size."
+    },
     "paginationProps": {
       "type": "Omit<\n  PaginationProps,\n  \"onChange\" | \"page\" | \"defaultPage\" | \"total\"\n>",
-      "required": false
+      "required": false,
+      "description": "Props for the pagination element."
     },
-    "pagingControlProps": { "type": "HTMLUIProps<\"div\">", "required": false },
-    "rowId": { "type": "keyof Y", "required": false },
-    "rowProps": { "type": "RowProps<Y>", "required": false },
-    "rowsClickSelect": { "type": "boolean", "required": false },
-    "selectColumn": { "type": "false | SelectColumn<Y, unknown>", "required": false },
-    "selectedRowIds": { "type": "string[]", "required": false },
+    "pagingControlProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for the paging control element."
+    },
+    "rowId": {
+      "type": "keyof Y",
+      "required": false,
+      "description": "The id used to store the value when selected."
+    },
+    "rowProps": {
+      "type": "RowProps<Y>",
+      "required": false,
+      "description": "Props for the table row component."
+    },
+    "rowsClickSelect": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, allows selection by clicking on a row."
+    },
+    "selectColumnProps": {
+      "type": "false | SelectColumn<Y, unknown>",
+      "required": false,
+      "description": "Props for the table select column component."
+    },
+    "selectedRowIds": {
+      "type": "string[]",
+      "required": false,
+      "description": "The ids of the selected row."
+    },
     "selectProps": {
       "type": "Omit<\n  SelectProps,\n  | \"data\"\n  | \"defaultValue\"\n  | \"children\"\n  | \"onChange\"\n  | \"value\"\n  | \"placeholderInOptions\"\n>",
-      "required": false
+      "required": false,
+      "description": "Props for the select element."
     },
-    "sort": { "type": "Sort<Y>", "required": false },
-    "sortIconProps": { "type": "IconProps", "required": false },
-    "tbodyProps": { "type": "TableBodyProps", "required": false },
-    "tfootProps": { "type": "TableFootProps", "required": false },
-    "theadProps": { "type": "TableHeadProps", "required": false },
-    "withBorder": { "type": "boolean", "required": false },
-    "withColumnBorders": { "type": "boolean", "required": false },
-    "withFooter": { "type": "boolean", "required": false },
-    "withFooterSelect": { "type": "boolean", "required": false },
-    "withPagingControl": { "type": "boolean", "required": false }
+    "sort": { "type": "Sort<Y>", "required": false, "description": "The sort of the table." },
+    "sortIconProps": {
+      "type": "IconProps",
+      "required": false,
+      "description": "Props for the table sort icon element."
+    },
+    "tbodyProps": {
+      "type": "TableBodyProps",
+      "required": false,
+      "description": "Props for the table tbody element."
+    },
+    "tfootProps": {
+      "type": "TableFootProps",
+      "required": false,
+      "description": "Props for the table tfoot element."
+    },
+    "theadProps": {
+      "type": "TableHeadProps",
+      "required": false,
+      "description": "Props for the table thead element."
+    },
+    "withBorder": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the outer border of the table."
+    },
+    "withColumnBorders": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display line on the columns of the table."
+    },
+    "withFooter": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the table footer."
+    },
+    "withFooterSelect": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the checkbox in table footer."
+    },
+    "withPagingControl": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the paging control."
+    }
   }
 }

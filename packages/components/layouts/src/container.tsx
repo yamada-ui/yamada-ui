@@ -11,6 +11,11 @@ import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
 type ContainerOptions = {
+  /**
+   * If `true`, container will center its children regardless of their width.
+   *
+   * @default false
+   */
   centerContent?: boolean
 }
 

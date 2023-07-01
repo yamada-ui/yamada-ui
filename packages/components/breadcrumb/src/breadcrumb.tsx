@@ -17,16 +17,39 @@ const [BreadcrumbProvider, useBreadcrumb] = createContext<Record<string, CSSUIOb
 })
 
 type BreadcrumbOptions = {
+  /**
+   * The visual separator between each breadcrumb item.
+   *
+   * @default '/'
+   */
   separator?: string | JSX.Element
+  /**
+   * The left and right margin applied to the separator.
+   *
+   * @default 'sm'
+   */
   gap?: CSSUIProps['mx']
+  /**
+   * Props for ol element.
+   */
+  listProps?: HTMLUIProps<'ol'>
 }
 
-export type BreadcrumbProps = HTMLUIProps<'nav'> & ThemeProps<'Breadcrumb'> & BreadcrumbOptions
+export type BreadcrumbProps = Omit<HTMLUIProps<'nav'>, 'gap'> &
+  ThemeProps<'Breadcrumb'> &
+  BreadcrumbOptions
 
 export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Breadcrumb', props)
 
-  const { className, children, separator = '/', gap = 'sm', ...rest } = omitThemeProps(mergedProps)
+  const {
+    className,
+    children,
+    separator = '/',
+    gap = 'sm',
+    listProps,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     display: 'flex',
@@ -53,7 +76,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
         __css={styles.container}
         {...rest}
       >
-        <ui.ol className='ui-breadcrumb-list' __css={css}>
+        <ui.ol className='ui-breadcrumb-list' {...listProps} __css={css}>
           {cloneChildren}
         </ui.ol>
       </ui.nav>
@@ -61,11 +84,19 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
   )
 })
 
-type BreadcrumbItemOptions = {
+type BreadcrumbItemOptions = Pick<BreadcrumbProps, 'separator' | 'gap'> & {
+  /**
+   * If `true`, change to span element.
+   *
+   * @default false
+   */
   isCurrentPage?: boolean
+  /**
+   * If `true`, not show separator.
+   *
+   * @default false
+   */
   isLastChild?: boolean
-  separator?: string | JSX.Element
-  gap?: CSSUIProps['mx']
 }
 
 export type BreadcrumbItemProps = HTMLUIProps<'li'> & BreadcrumbItemOptions
@@ -109,20 +140,25 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, 'li'>(
 )
 
 type BreadcrumbLinkOptions = {
+  /**
+   * If `true`, change to span element.
+   *
+   * @default false
+   */
   isCurrentPage?: boolean
-  separator?: string | JSX.Element
 }
 
 export type BreadcrumbLinkProps = HTMLUIProps<'a'> & BreadcrumbLinkOptions
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, 'a'>(
-  ({ className, children, isCurrentPage, separator, ...rest }, ref) => {
+  ({ className, children, isCurrentPage, ...rest }, ref) => {
     const styles = useBreadcrumb()
 
     return (
       <ui.a
         ref={ref}
         as={!isCurrentPage ? 'a' : 'span'}
+        aria-current={isCurrentPage ? 'page' : undefined}
         className={cx('ui-breadcrumb-link', className)}
         __css={styles.link}
         {...rest}
@@ -134,6 +170,9 @@ export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, 'a'>(
 )
 
 type BreadcrumbSeparatorOptions = {
+  /**
+   * The CSS `margin-inline-start`, and `margin-inline-end` property.
+   */
   gap?: CSSUIProps['mx']
 }
 

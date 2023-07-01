@@ -12,7 +12,13 @@ import { useFormControlProps, FormControlOptions } from '@yamada-ui/form-control
 import { cx, omitObject } from '@yamada-ui/utils'
 
 type TextareaOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
 }
 

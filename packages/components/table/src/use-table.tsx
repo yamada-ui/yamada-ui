@@ -85,33 +85,129 @@ type CellProps<Y extends RowData> =
 
 export type UseTableProps<Y extends RowData> = TableProps &
   UseTableOptions<Y> & {
+    /**
+     * The id used to store the value when selected.
+     */
     rowId?: keyof Y
+    /**
+     * The sort of the table.
+     */
     sort?: Sort<Y>
+    /**
+     * The initial sort of the table.
+     */
     defaultSort?: Sort<Y>
+    /**
+     * The callback invoked when table sort is changed.
+     */
     onChangeSort?: (sort: Sort<Y>) => void
+    /**
+     * The ids of the selected row.
+     */
     selectedRowIds?: string[]
+    /**
+     * The initial ids of the selected row.
+     */
     defaultSelectedRowIds?: string[]
+    /**
+     * The callback invoked when row is selected.
+     */
     onChangeSelect?: (rowSelection: string[]) => void
+    /**
+     * The page index of the paging table.
+     */
     pageIndex?: number
+    /**
+     * The initial page index of the paging table.
+     *
+     * @default 0
+     */
     defaultPageIndex?: number
+    /**
+     * The callback invoked when page index is changed.
+     */
     onChangePageIndex?: (pageIndex: number) => void
+    /**
+     * The page size of the paging table.
+     */
     pageSize?: number
+    /**
+     * The initial page size of the paging table.
+     *
+     * @default 20
+     */
     defaultPageSize?: number
+    /**
+     * The callback invoked when page size is changed.
+     */
     onChangePageSize?: (pageIndex: number) => void
+    /**
+     * If `true`, allows selection by clicking on a row.
+     *
+     * @default false
+     */
     rowsClickSelect?: boolean
+    /**
+     * The callback invoked when a row is clicked.
+     */
     onClickRow?: (row: Row<Y>) => void
+    /**
+     * If `true`, display the checkbox in table footer.
+     *
+     * @default false
+     */
     withFooterSelect?: boolean
+    /**
+     * The ids that disabled in selection.
+     */
     disabledRowIds?: string[]
+    /**
+     * The list of the page size.
+     *
+     * @default '[20, 50, 100]'
+     */
     pageSizeList?: number[]
+    /**
+     * Props for the table checkbox element.
+     */
     checkboxProps?: CheckboxProps
+    /**
+     * Props for the table header group component.
+     */
     headerGroupProps?: HeaderGroupProps<Y>
+    /**
+     * Props for the table header component.
+     */
     headerProps?: HeaderProps<Y>
+    /**
+     * Props for the table footer group component.
+     */
     footerGroupProps?: HeaderGroupProps<Y>
+    /**
+     * Props for the table footer component.
+     */
     footerProps?: HeaderProps<Y>
+    /**
+     * Props for the table sort icon element.
+     */
     sortIconProps?: IconProps
+    /**
+     * Props for the table row component.
+     */
     rowProps?: RowProps<Y>
+    /**
+     * Props for the table cell component.
+     */
     cellProps?: CellProps<Y>
-    selectColumn?: SelectColumn<Y> | false
+    /**
+     * Props for the table select column component.
+     */
+    selectColumnProps?: SelectColumn<Y> | false
+    /**
+     * If `true`, enables pagination.
+     *
+     * @default false
+     */
     enablePagenation?: boolean
   }
 
@@ -164,7 +260,7 @@ export const useTable = <Y extends RowData>({
   sortIconProps,
   rowProps,
   cellProps,
-  selectColumn,
+  selectColumnProps,
   data,
   columns,
   defaultColumn,
@@ -237,13 +333,13 @@ export const useTable = <Y extends RowData>({
 
   const mergedColumns = useMemo(
     () =>
-      enableRowSelection && selectColumn !== false
+      enableRowSelection && selectColumnProps !== false
         ? mergeColumns<Y>({
             enablePagenation,
             columns,
             checkboxProps,
             withFooterSelect,
-            selectColumn,
+            selectColumnProps,
             disabledRowIds,
           })
         : columns,
@@ -253,7 +349,7 @@ export const useTable = <Y extends RowData>({
       disabledRowIds,
       enablePagenation,
       enableRowSelection,
-      selectColumn,
+      selectColumnProps,
       withFooterSelect,
     ],
   )
@@ -432,14 +528,14 @@ export const mergeColumns = <Y extends RowData>({
   columns,
   checkboxProps = {},
   withFooterSelect,
-  selectColumn,
+  selectColumnProps,
   disabledRowIds,
 }: {
   enablePagenation: boolean
   columns: Column<Y>[]
   checkboxProps?: CheckboxProps
   withFooterSelect?: boolean
-  selectColumn?: SelectColumn<Y>
+  selectColumnProps?: SelectColumn<Y>
   disabledRowIds?: string[]
 }): Column<Y>[] => [
   {
@@ -468,7 +564,7 @@ export const mergeColumns = <Y extends RowData>({
         </Center>
       )
     },
-    ...selectColumn,
+    ...selectColumnProps,
   },
   ...columns,
 ]

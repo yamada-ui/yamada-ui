@@ -22,6 +22,9 @@ export const [ReorderItemProvider, useReorderItemContext] = createContext<Reorde
 })
 
 type ReorderItemOptions = {
+  /**
+   * The label of the reorder item.
+   */
   label: string | number
 }
 

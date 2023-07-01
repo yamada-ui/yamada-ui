@@ -1,12 +1,49 @@
 {
   "FocusLock": {
-    "autoFocus": { "type": "boolean", "required": false },
-    "contentRef": { "type": "RefObject<HTMLElement>", "required": false },
-    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
-    "persistentFocus": { "type": "boolean", "required": false },
-    "restoreFocus": { "type": "boolean", "required": false }
+    "autoFocus": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts."
+    },
+    "contentRef": {
+      "type": "RefObject<HTMLElement>",
+      "required": false,
+      "description": "The `ref` of the wrapper for which the focus-lock wraps."
+    },
+    "finalFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to return focus to when `FocusLock` unmounts."
+    },
+    "initialFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to receive focus initially."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, focus trapping will be disabled."
+    },
+    "lockFocusAcrossFrames": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+    },
+    "persistentFocus": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disables text selections inside, and outside focus lock."
+    },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+    }
   }
 }

@@ -11,9 +11,25 @@ import { cx, handlerAll, merge } from '@yamada-ui/utils'
 import { UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type ScrollAreaOptions = {
+  /**
+   * Scrollbar visibility type.
+   *
+   * @default 'hover'
+   */
   type?: 'always' | 'scroll' | 'hover' | 'never'
+  /**
+   * Props for inner element.
+   */
   innerProps?: HTMLUIProps<'div'>
+  /**
+   * Delay in milliseconds before scrollbars are hidden.
+   *
+   * @default 1000
+   */
   scrollHideDelay?: number
+  /**
+   * Callback function for when the scroll position changes.
+   */
   onScrollPositionChange?: ({ x, y }: { x: number; y: number }) => void
 }
 

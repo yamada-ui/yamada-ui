@@ -9,6 +9,11 @@ import {
 import { cx } from '@yamada-ui/utils'
 
 type LinkOptions = {
+  /**
+   * If `true`, the link will open in new tab.
+   *
+   * @default false
+   */
   isExternal?: boolean
 }
 

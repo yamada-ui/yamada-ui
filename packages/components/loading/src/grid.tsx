@@ -2,6 +2,11 @@ import { forwardRef } from '@yamada-ui/core'
 import { Icon, IconProps } from '@yamada-ui/icon'
 
 export type GridProps = IconProps & {
+  /**
+   * The CSS `dur` property.
+   *
+   * @default '1s'
+   */
   duration?: IconProps['dur']
 }
 

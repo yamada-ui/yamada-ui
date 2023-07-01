@@ -1,20 +1,36 @@
 {
   "Highlight": {
-    "query": { "type": "string | string[]", "required": true },
+    "query": {
+      "type": "string | string[]",
+      "required": true,
+      "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text."
+    },
     "align": {
       "type": "type ONLY_FOR_FORMAT =\n  | TextAlign\n  | ResponsiveObject<TextAlign>\n  | ColorModeArray<TextAlign>",
-      "required": false
+      "required": false,
+      "description": "The CSS `text-align` property."
     },
     "casing": {
       "type": "type ONLY_FOR_FORMAT =\n  | TextTransform\n  | ResponsiveObject<TextTransform>\n  | ColorModeArray<TextTransform>",
-      "required": false
+      "required": false,
+      "description": "The CSS `text-transform` property."
     },
     "decoration": {
       "type": "number | \"blink\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"aliceblue\" | \"antiquewhite\" | \"aqua\" | \"aquamarine\" | \"azure\" | ... 187 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `text-decoration` property."
     },
-    "isFragment": { "type": "boolean", "required": false },
-    "markProps": { "type": "MarkProps", "required": false }
+    "isFragment": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, `Fragment` is used for rendering."
+    },
+    "markProps": {
+      "type": "MarkProps",
+      "required": false,
+      "description": "Properties passed to the Mark component which is used to highlight the matched terms."
+    }
   },
   "Mark": {
     "colorScheme": {

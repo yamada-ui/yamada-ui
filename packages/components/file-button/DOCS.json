@@ -2,32 +2,80 @@
   "FileButton": {
     "errorBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the button is invalid."
     },
-    "isActive": { "type": "boolean", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isLoading": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
+    "isActive": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is represented as active."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled.\n\n\nIf `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isLoading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the loading state of the button is represented."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "The icon to display at the left side of the button."
     },
     "loadingIcon": {
-      "type": "type ONLY_FOR_FORMAT =\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | LoadingVariant",
-      "required": false
+      "type": "type ONLY_FOR_FORMAT =\n  | \"audio\"\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"oval\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
+      "required": false,
+      "description": "The icon to display when the button is loading."
     },
-    "loadingPlacement": { "type": "\"end\" | \"start\"", "required": false },
-    "loadingText": { "type": "string", "required": false },
-    "onChange": { "type": "(files: File[] | null) => void", "required": false },
+    "loadingPlacement": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "'start'",
+      "required": false,
+      "description": "The placement of the loading indicator. Accepts `start` or `end`."
+    },
+    "loadingText": {
+      "type": "string",
+      "required": false,
+      "description": "The text to display when the button is loading."
+    },
+    "onChange": {
+      "type": "(files: File[] | null) => void",
+      "required": false,
+      "description": "Function to be called when a file change event occurs."
+    },
     "resetRef": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void) | null) => void)\n  | MutableRefObject<(() => void) | null>",
-      "required": false
+      "required": false,
+      "description": "Ref to a reset function."
     },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "The icon to display at the right side of the button."
     }
   }
 }

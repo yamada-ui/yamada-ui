@@ -8,21 +8,57 @@
     },
     "filledTrackColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 115 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `color` property."
     },
-    "hasStripe": { "type": "boolean", "required": false },
-    "isAnimation": { "type": "boolean", "required": false },
-    "isStripeAnimation": { "type": "boolean", "required": false },
-    "max": { "type": "number", "required": false },
-    "min": { "type": "number", "required": false },
+    "hasStripe": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the progress bar will show stripe."
+    },
+    "isAnimation": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the progress will be indeterminate and the `value` prop will be ignored."
+    },
+    "isStripeAnimation": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, and hasStripe is `true`, the stripes will be animated."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "required": false,
+      "description": "The maximum value of the progress."
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum value of the progress."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the Progress."
     },
-    "speed": { "type": "string | number", "required": false },
-    "value": { "type": "number", "required": false },
+    "speed": {
+      "type": "string | number",
+      "defaultValue": "'1.4s'",
+      "required": false,
+      "description": "The animation speed in seconds."
+    },
+    "value": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The value of the progress."
+    },
     "variant": {
       "type": "string",
       "required": false,
@@ -32,25 +68,63 @@
   "CircleProgress": {
     "color": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ResponsiveObject<...>",
-      "required": false
+      "defaultValue": "'primary'",
+      "required": false,
+      "description": "The CSS `color` property."
     },
-    "isAnimation": { "type": "boolean", "required": false },
-    "isRounded": { "type": "boolean", "required": false },
-    "max": { "type": "number", "required": false },
-    "min": { "type": "number", "required": false },
+    "isAnimation": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the progress will be indeterminate and the `value` prop will be ignored."
+    },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the cap of the progress indicator will be rounded."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "required": false,
+      "description": "The maximum value of the progress."
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum value of the progress."
+    },
     "size": {
       "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ResponsiveObject<...>",
-      "required": false
+      "defaultValue": "'6rem'",
+      "required": false,
+      "description": "The CSS `box-size` property."
     },
-    "speed": { "type": "[string | number, string | number]", "required": false },
+    "speed": {
+      "type": "[string | number, string | number]",
+      "defaultValue": "'[1.4s, 2s]'",
+      "required": false,
+      "description": "The animation speed in seconds."
+    },
     "thickness": {
       "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ResponsiveObject<...>",
-      "required": false
+      "defaultValue": "'0.625ewm'",
+      "required": false,
+      "description": "The CSS `width` property."
     },
     "trackColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ResponsiveObject<...>",
-      "required": false
+      "defaultValue": "'border'",
+      "required": false,
+      "description": "The CSS `color` property."
     },
-    "value": { "type": "number", "required": false }
+    "value": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The value of the progress."
+    }
   }
 }

@@ -3,10 +3,12 @@ import { Icon, IconProps } from '@yamada-ui/icon'
 import { cx, runIfFunc } from '@yamada-ui/utils'
 import { ComponentProps, ReactNode } from 'react'
 import { StepContext, useStepContext } from './step'
-import { useStepperContext, StepStatusType } from './use-stepper'
+import { useStepperContext } from './use-stepper'
 
 export type StepStatusProps = {
-  [key in StepStatusType]?: ReactNode | ((props: Omit<StepContext, 'status'>) => ReactNode)
+  [key in 'complete' | 'active' | 'incomplete']?:
+    | ReactNode
+    | ((props: Omit<StepContext, 'status'>) => ReactNode)
 }
 
 export const StepStatus = forwardRef<StepStatusProps, 'div'>(

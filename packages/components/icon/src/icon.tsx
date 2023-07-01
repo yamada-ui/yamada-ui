@@ -4,6 +4,9 @@ import { cx, replaceObject, isUnit } from '@yamada-ui/utils'
 import { FC, SVGAttributes } from 'react'
 
 type IconOptions = {
+  /**
+   * The CSS `font-size` property.
+   */
   size?: CSSUIProps['fontSize']
 }
 

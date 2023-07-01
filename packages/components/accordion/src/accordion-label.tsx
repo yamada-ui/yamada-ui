@@ -2,9 +2,13 @@ import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { ChevronIcon, IconProps } from '@yamada-ui/icon'
 import { cx } from '@yamada-ui/utils'
 import { FC, PropsWithChildren, ReactNode } from 'react'
-import { useAccordionContext, useAccordionItemContext } from './'
+import { useAccordionContext } from './accordion'
+import { useAccordionItemContext } from './accordion-item'
 
 type AccordionLabelOptions = {
+  /**
+   * The accordion icon to use.
+   */
   icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 

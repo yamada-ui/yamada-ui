@@ -6,15 +6,26 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "isDisabled": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the tag is disabled."
+    },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "Icon to be displayed to the left of the tag."
     },
-    "onCloseClick": { "type": "MouseEventHandler<HTMLElement>", "required": false },
+    "onCloseClick": {
+      "type": "MouseEventHandler<HTMLElement>",
+      "required": false,
+      "description": "Function to be executed when the close button is clicked."
+    },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "Icon to be displayed to the right of the tag."
     },
     "size": {
       "defaultValue": "md",

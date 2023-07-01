@@ -37,18 +37,45 @@ import {
   useRef,
 } from 'react'
 
-type Format = (value: File, index: number) => string
-
 type FileInputOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The value of the file input.
+   */
   value?: File[] | null
+  /**
+   * The initial value of the file input.
+   */
   defaultValue?: File[] | null
+  /**
+   * Function to be called when a file change event occurs.
+   */
   onChange?: (files: File[] | null) => void
+  /**
+   * The component that displays uploaded files.
+   */
   component?: FC<{ value: File; index: number }>
-  format?: Format
+  /**
+   * A callback that formats the name of the uploaded file.
+   */
+  format?: (value: File, index: number) => string
+  /**
+   * The string to separate uploaded files.
+   *
+   * @default ','
+   */
   separator?: string
   children?: (files: File[] | null) => ReactNode
+  /**
+   * Ref to a reset function.
+   */
   resetRef?: ForwardedRef<() => void>
 }
 
@@ -60,7 +87,7 @@ export type FileInputProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'children'> &
   FileInputOptions &
   FormControlOptions
 
-const defaultFormat: Format = ({ name }) => name
+const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
 export const FileInput = forwardRef<FileInputProps, 'input'>(({ children, ...props }, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Input', props)

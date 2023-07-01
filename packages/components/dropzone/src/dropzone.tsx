@@ -33,12 +33,35 @@ const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
 })
 
 type DropzoneOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * If `true`, display the dropzone loading icon.
+   *
+   * @default false
+   */
   isLoading?: boolean
+  /**
+   * Props for dropzone overlay element.
+   */
   overlayProps?: FadeProps
+  /**
+   * Props for dropzone loading icon element.
+   */
   loadingProps?: LoadingProps
+  /**
+   * File types to accept.
+   */
   accept?: Accept | string[]
+  /**
+   * Ref to a open function.
+   */
   openRef?: ForwardedRef<() => void | undefined>
 }
 

@@ -12,9 +12,7 @@ import {
 import { useValue } from '@yamada-ui/use-value'
 import { cx } from '@yamada-ui/utils'
 
-type Placement = 'top' | 'left' | 'bottom' | 'right'
-
-export const getSlideProps = (placement: Placement = 'right') => {
+export const getSlideProps = (placement: 'top' | 'left' | 'bottom' | 'right' = 'right') => {
   switch (placement) {
     case 'right':
       return MOTION_TRANSITION_VARIANTS.slideRight
@@ -28,7 +26,12 @@ export const getSlideProps = (placement: Placement = 'right') => {
 }
 
 type SlideOptions = {
-  placement?: Token<Placement>
+  /**
+   * The placement of the slide.
+   *
+   * @default 'right'
+   */
+  placement?: Token<'top' | 'left' | 'bottom' | 'right'>
 }
 
 export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &

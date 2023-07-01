@@ -22,11 +22,29 @@ import {
 import { AutocompleteCreate, AutocompleteEmpty } from './'
 
 type AutocompleteOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for autocomplete container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for autocomplete list element.
+   */
   listProps?: Omit<AutocompleteListProps, 'children'>
+  /**
+   * Props for autocomplete input element.
+   */
   inputProps?: HTMLUIProps<'input'>
+  /**
+   * Props for autocomplete icon element.
+   */
   iconProps?: AutocompleteIconProps
 }
 

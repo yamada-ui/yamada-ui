@@ -19,9 +19,26 @@
     }
   },
   "InputGroup": {},
-  "InputAddon": { "placement": { "type": "\"right\" | \"left\"", "required": false } },
+  "InputAddon": {
+    "placement": {
+      "type": "\"right\" | \"left\"",
+      "defaultValue": "'left'",
+      "required": false,
+      "description": "The placement of the element."
+    }
+  },
   "InputElement": {
-    "isClick": { "type": "boolean", "required": false },
-    "placement": { "type": "\"right\" | \"left\"", "required": false }
+    "isClick": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the element clickable."
+    },
+    "placement": {
+      "type": "\"right\" | \"left\"",
+      "defaultValue": "'left'",
+      "required": false,
+      "description": "The placement of the element."
+    }
   }
 }

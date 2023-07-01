@@ -1,12 +1,27 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
 import { omitObject } from '@yamada-ui/utils'
 import { isValidElement, ReactElement, useMemo } from 'react'
-import { FallbackStrategy, shouldShowFallbackImage, useImage, UseImageProps } from './use-image'
+import { shouldShowFallbackImage, useImage, UseImageProps } from './use-image'
 
 type ImageOptions = {
+  /**
+   * Fallback image `src` or element to show if image is loading or image fails.
+   */
   fallback?: string | ReactElement
-  fallbackStrategy?: FallbackStrategy
+  /**
+   * - beforeLoadOrError: loads the fallbackImage while loading the src.
+   * - onError: loads the fallbackImage only if there is an error fetching the src.
+   *
+   * @default "beforeLoadOrError"
+   */
+  fallbackStrategy?: 'onError' | 'beforeLoadOrError'
+  /**
+   * The CSS `box-size` property.
+   */
   size?: CSSUIProps['boxSize']
+  /**
+   * The CSS `object-fit` property.
+   */
   fit?: CSSUIProps['objectFit']
 }
 
@@ -32,7 +47,7 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
 
   ignoreFallback = loading != null || ignoreFallback || !fallback
 
-  const status = useImage({ ...props, ignoreFallback })
+  const status = useImage({ ...props, crossOrigin, ignoreFallback })
 
   const css = useMemo(() => ({ boxSize, objectFit }), [boxSize, objectFit])
 

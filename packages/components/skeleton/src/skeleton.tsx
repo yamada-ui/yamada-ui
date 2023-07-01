@@ -14,11 +14,38 @@ import { useValue } from '@yamada-ui/use-value'
 import { cx, useIsMounted } from '@yamada-ui/utils'
 
 type SkeletonOptions = {
+  /**
+   * The color at the animation start.
+   */
   startColor?: CSSUIProps['color']
+  /**
+   * The color at the animation end.
+   */
   endColor?: CSSUIProps['color']
+  /**
+   * If `true`, it'll render its children with a nice fade transition.
+   *
+   * @default false
+   */
   isLoaded?: boolean
+  /**
+   * The animation speed in seconds.
+   *
+   * @default 0.8
+   */
   speed?: string | number
+  /**
+   * The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.
+   *
+   * @default 0.4
+   */
   fadeDuration?: string | number
+  /**
+   * If `true`, the skeleton will take the width of it's children.
+   *
+   * @default false
+   */
+  isFitContent?: boolean
 }
 
 export type SkeletonProps = HTMLUIProps<'div'> & ThemeProps<'Skeleton'> & SkeletonOptions
@@ -32,6 +59,7 @@ export const Skeleton = forwardRef<SkeletonProps, 'div'>((props, ref) => {
     fadeDuration = 0.4,
     speed = 0.8,
     isLoaded,
+    isFitContent,
     ...rest
   } = omitThemeProps(mergedProps)
   const isMounted = useIsMounted()
@@ -71,7 +99,7 @@ export const Skeleton = forwardRef<SkeletonProps, 'div'>((props, ref) => {
   })
 
   const css: CSSUIObject = {
-    w: 'full',
+    w: isFitContent ? 'fit-content' : 'full',
     h: '4',
     boxShadow: 'none',
     backgroundClip: 'padding-box',

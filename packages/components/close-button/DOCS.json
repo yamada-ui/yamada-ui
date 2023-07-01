@@ -5,7 +5,12 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "isDisabled": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",

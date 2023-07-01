@@ -1,4 +1,4 @@
-import { forwardRef, CSSUIProps, LoadingVariant } from '@yamada-ui/core'
+import { forwardRef, CSSUIProps } from '@yamada-ui/core'
 import { IconProps } from '@yamada-ui/icon'
 import { useToken } from '@yamada-ui/use-token'
 import { useValue } from '@yamada-ui/use-value'
@@ -13,8 +13,21 @@ import { Puff } from './puff'
 import { Rings } from './rings'
 
 type LoadingOptions = {
-  variant?: LoadingVariant
+  /**
+   * The variant of the Loading.
+   *
+   * @default 'oval'
+   */
+  variant?: 'oval' | 'grid' | 'audio' | 'dots' | 'puff' | 'rings' | 'circles'
+  /**
+   * The CSS `color` property.
+   *
+   * @default 'primary'
+   */
   secondaryColor?: CSSUIProps['color']
+  /**
+   * The CSS `dur` property.
+   */
   duration?: IconProps['dur']
 }
 

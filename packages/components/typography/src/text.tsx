@@ -10,8 +10,17 @@ import {
 import { cx, filterUndefined } from '@yamada-ui/utils'
 
 type TextOptions = {
+  /**
+   * The CSS `text-align` property.
+   */
   align?: CSSUIProps['textAlign']
+  /**
+   * The CSS `text-decoration` property.
+   */
   decoration?: CSSUIProps['textDecoration']
+  /**
+   * The CSS `text-transform` property.
+   */
   casing?: CSSUIProps['textTransform']
 }
 

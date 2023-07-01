@@ -10,9 +10,10 @@ import { MotionReorder, HTMLMotionProps } from '@yamada-ui/motion'
 import { createContext, cx, getValidChildren, handlerAll, useUpdateEffect } from '@yamada-ui/utils'
 import { forwardRef, useCallback, useMemo, useState } from 'react'
 
-type Orientation = 'vertical' | 'horizontal'
-
-type ReorderContext = { orientation: Orientation; styles: Record<string, CSSUIObject> }
+type ReorderContext = {
+  orientation: 'vertical' | 'horizontal'
+  styles: Record<string, CSSUIObject>
+}
 
 export const [ReorderProvider, useReorderContext] = createContext<ReorderContext>({
   name: 'ReorderContext',
@@ -20,8 +21,19 @@ export const [ReorderProvider, useReorderContext] = createContext<ReorderContext
 })
 
 type ReorderOptions = {
-  orientation?: Orientation
+  /**
+   * The orientation of the reorder.
+   *
+   * @default 'vertical'
+   */
+  orientation?: 'vertical' | 'horizontal'
+  /**
+   * The callback invoked when reorder items are moved.
+   */
   onChange?: (labels: (string | number)[]) => void
+  /**
+   * The callback invoked when the movement of reorder items is completed.
+   */
   onCompleteChange?: (labels: (string | number)[]) => void
 }
 

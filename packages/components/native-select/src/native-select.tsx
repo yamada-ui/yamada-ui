@@ -40,12 +40,37 @@ const [NativeSelectProvider, useNativeSelect] = createContext<NativeSelectContex
 })
 
 type NativeSelectOptions = {
-  data?: UINativeOption[]
+  /**
+   * If provided, generate options based on data.
+   *
+   * @default '[]'
+   */
+  options?: UINativeOption[]
+  /**
+   * The placeholder for select.
+   */
   placeholder?: string
+  /**
+   * If `true`, include placeholders in options.
+   *
+   * @default true
+   */
   placeholderInOptions?: boolean
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for icon element.
+   */
   iconProps?: HTMLUIProps<'div'>
 }
 
@@ -65,7 +90,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     height,
     minH,
     minHeight,
-    data = [],
+    options = [],
     value,
     placeholder,
     isRequired,
@@ -81,8 +106,8 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
 
   let computedChildren: ReactElement[] = []
 
-  if (!children && data.length) {
-    computedChildren = data.map(({ label, value, ...props }, i) => {
+  if (!children && options.length) {
+    computedChildren = options.map(({ label, value, ...props }, i) => {
       if (!isArray(value)) {
         return (
           <NativeOption key={i} value={value} {...props}>

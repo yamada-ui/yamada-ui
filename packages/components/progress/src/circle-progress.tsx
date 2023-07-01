@@ -5,15 +5,65 @@ import { useValue } from '@yamada-ui/use-value'
 import { cx, valueToPercent } from '@yamada-ui/utils'
 
 type CircleProgressOptions = {
+  /**
+   * The CSS `box-size` property.
+   *
+   * @default '6rem'
+   */
   size?: CSSUIProps['boxSize']
+  /**
+   * The CSS `width` property.
+   *
+   * @default '0.625ewm'
+   */
   thickness?: CSSUIProps['width']
+  /**
+   * The CSS `color` property.
+   *
+   * @default 'primary'
+   */
   color?: CSSUIProps['color']
+  /**
+   * The CSS `color` property.
+   *
+   * @default 'border'
+   */
   trackColor?: CSSUIProps['color']
+  /**
+   * The value of the progress.
+   *
+   * @default 0
+   */
   value?: number
+  /**
+   * The minimum value of the progress.
+   *
+   * @default 0
+   */
   min?: number
+  /**
+   * The maximum value of the progress.
+   *
+   * @default 100
+   */
   max?: number
+  /**
+   * If `true`, the cap of the progress indicator will be rounded.
+   *
+   * @default false
+   */
   isRounded?: boolean
+  /**
+   * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
+   *
+   * @default false
+   */
   isAnimation?: boolean
+  /**
+   * The animation speed in seconds.
+   *
+   * @default '[1.4s, 2s]'
+   */
   speed?: [string | number, string | number]
 }
 

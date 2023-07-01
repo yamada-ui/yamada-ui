@@ -40,6 +40,9 @@ export type MarkdownComponentTableCellProps = TableCellProps
 export type MarkdownComponentTableRowProps = TableRowProps
 
 type MarkdownOptions = ReactMarkdownOptions & {
+  /**
+   * If provided, this will set the theme for the code.
+   */
   code?: { theme?: CodeTheme | ColorModeArray<CodeTheme> }
 }
 

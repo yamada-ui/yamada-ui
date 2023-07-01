@@ -5,9 +5,22 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "onChange": { "type": "(labels: (string | number)[]) => void", "required": false },
-    "onCompleteChange": { "type": "(labels: (string | number)[]) => void", "required": false },
-    "orientation": { "type": "Orientation", "required": false },
+    "onChange": {
+      "type": "(labels: (string | number)[]) => void",
+      "required": false,
+      "description": "The callback invoked when reorder items are moved."
+    },
+    "onCompleteChange": {
+      "type": "(labels: (string | number)[]) => void",
+      "required": false,
+      "description": "The callback invoked when the movement of reorder items is completed."
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'vertical'",
+      "required": false,
+      "description": "The orientation of the reorder."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"normal\" | \"lg\"",
@@ -21,6 +34,12 @@
       "description": "The variant of the Reorder."
     }
   },
-  "ReorderItem": { "label": { "type": "string | number", "required": true } },
+  "ReorderItem": {
+    "label": {
+      "type": "string | number",
+      "required": true,
+      "description": "The label of the reorder item."
+    }
+  },
   "ReorderTrigger": {}
 }

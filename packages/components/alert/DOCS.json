@@ -20,7 +20,12 @@
       "description": "The variant of the Alert."
     }
   },
-  "AlertIcon": { "variant": { "type": "LoadingVariant", "required": false } },
+  "AlertIcon": {
+    "variant": {
+      "type": "type ONLY_FOR_FORMAT =\n  | \"audio\"\n  | \"grid\"\n  | \"oval\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
+      "required": false
+    }
+  },
   "AlertTitle": {},
   "AlertDescription": {}
 }

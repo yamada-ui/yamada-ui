@@ -3,6 +3,9 @@ import { cx } from '@yamada-ui/utils'
 import { useCarouselContext, useCarouselSlide, UseCarouselSlideProps } from './use-carousel'
 
 type CarouselSlideOptions = {
+  /**
+   * The CSS `width` property.
+   */
   size?: UIProps['width']
 }
 

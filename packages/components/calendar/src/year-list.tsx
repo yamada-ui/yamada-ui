@@ -6,7 +6,13 @@ import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useYearList } from './use-calendar'
 
 type YearListOptions = {
+  /**
+   * Props for the calendar header element.
+   */
   headerProps?: HTMLUIProps<'div'>
+  /**
+   * Props for the calendar year button element.
+   */
   yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
 }
 

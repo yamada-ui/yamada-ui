@@ -11,7 +11,17 @@ import {
 import { cx } from '@yamada-ui/utils'
 
 type ScaleFadeOptions = {
+  /**
+   * The initial scale of the element.
+   *
+   * @default 0.95
+   */
   scale?: number
+  /**
+   * If `true`, the element will transition back to exit state.
+   *
+   * @default true
+   */
   reverse?: boolean
 }
 

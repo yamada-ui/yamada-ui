@@ -3,7 +3,17 @@ import { cx } from '@yamada-ui/utils'
 import { useInputGroup } from './input-group'
 
 type InputElementOptions = {
+  /**
+   * If `true`, the element clickable.
+   *
+   * @default false
+   */
   isClick?: boolean
+  /**
+   * The placement of the element.
+   *
+   * @default 'left'
+   */
   placement?: 'left' | 'right'
 }
 

@@ -1,35 +1,93 @@
 {
   "Image": {
-    "crossOrigin": { "type": "\"\" | \"anonymous\" | \"use-credentials\"", "required": false },
+    "crossOrigin": {
+      "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+      "required": false,
+      "description": "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
+    },
     "fallback": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "Fallback image `src` or element to show if image is loading or image fails."
     },
-    "fallbackStrategy": { "type": "FallbackStrategy", "required": false },
+    "fallbackStrategy": {
+      "type": "\"onError\" | \"beforeLoadOrError\"",
+      "defaultValue": "beforeLoadOrError",
+      "required": false,
+      "description": "- beforeLoadOrError: loads the fallbackImage while loading the src.\n- onError: loads the fallbackImage only if there is an error fetching the src."
+    },
     "fit": {
       "type": "type ONLY_FOR_FORMAT =\n  | ObjectFit\n  | ResponsiveObject<ObjectFit>\n  | ColorModeArray<ObjectFit>",
-      "required": false
+      "required": false,
+      "description": "The CSS `object-fit` property."
     },
-    "ignoreFallback": { "type": "boolean", "required": false },
-    "loading": { "type": "\"eager\" | \"lazy\"", "required": false },
-    "onError": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
-    "onLoad": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
+    "ignoreFallback": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, opt out of the `fallbackSrc` logic and use as `img`."
+    },
+    "loading": {
+      "type": "\"eager\" | \"lazy\"",
+      "required": false,
+      "description": "The image `loading` attribute."
+    },
+    "onError": {
+      "type": "ReactEventHandler<HTMLImageElement>",
+      "required": false,
+      "description": "A callback for when there was an error loading the image `src`."
+    },
+    "onLoad": {
+      "type": "ReactEventHandler<HTMLImageElement>",
+      "required": false,
+      "description": "A callback for when the image `src` has been loaded."
+    },
     "size": {
       "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `box-size` property."
     },
-    "sizes": { "type": "string", "required": false },
-    "src": { "type": "string", "required": false },
-    "srcSet": { "type": "string", "required": false }
+    "sizes": { "type": "string", "required": false, "description": "The image `sizes` attribute." },
+    "src": { "type": "string", "required": false, "description": "The image `src` attribute." },
+    "srcSet": {
+      "type": "string",
+      "required": false,
+      "description": "The image `srcset` attribute."
+    }
   },
   "UseImage": {
-    "crossOrigin": { "type": "\"\" | \"anonymous\" | \"use-credentials\"", "required": false },
-    "ignoreFallback": { "type": "boolean", "required": false },
-    "loading": { "type": "\"eager\" | \"lazy\"", "required": false },
-    "onError": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
-    "onLoad": { "type": "ReactEventHandler<HTMLImageElement>", "required": false },
-    "sizes": { "type": "string", "required": false },
-    "src": { "type": "string", "required": false },
-    "srcSet": { "type": "string", "required": false }
+    "crossOrigin": {
+      "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+      "required": false,
+      "description": "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
+    },
+    "ignoreFallback": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, opt out of the `fallbackSrc` logic and use as `img`."
+    },
+    "loading": {
+      "type": "\"eager\" | \"lazy\"",
+      "required": false,
+      "description": "The image `loading` attribute."
+    },
+    "onError": {
+      "type": "ReactEventHandler<HTMLImageElement>",
+      "required": false,
+      "description": "A callback for when there was an error loading the image `src`."
+    },
+    "onLoad": {
+      "type": "ReactEventHandler<HTMLImageElement>",
+      "required": false,
+      "description": "A callback for when the image `src` has been loaded."
+    },
+    "sizes": { "type": "string", "required": false, "description": "The image `sizes` attribute." },
+    "src": { "type": "string", "required": false, "description": "The image `src` attribute." },
+    "srcSet": {
+      "type": "string",
+      "required": false,
+      "description": "The image `srcset` attribute."
+    }
   }
 }

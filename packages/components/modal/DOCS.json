@@ -1,11 +1,40 @@
 {
   "Modal": {
-    "isOpen": { "type": "boolean", "required": true },
-    "allowPinchZoom": { "type": "boolean", "required": false },
-    "animation": { "type": "Animation", "required": false },
-    "blockScrollOnMount": { "type": "boolean", "required": false },
-    "closeOnEsc": { "type": "boolean", "required": false },
-    "closeOnOverlay": { "type": "boolean", "required": false },
+    "isOpen": {
+      "type": "boolean",
+      "required": true,
+      "description": "If `true`, the open will be opened."
+    },
+    "allowPinchZoom": {
+      "type": "boolean",
+      "defaultValue": "false.",
+      "required": false,
+      "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
+    },
+    "animation": {
+      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "defaultValue": "'scale'",
+      "required": false,
+      "description": "The animation of the tooltip."
+    },
+    "blockScrollOnMount": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, scrolling will be disabled on the `body` when the modal opens."
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the modal will close when the `Esc` key is pressed."
+    },
+    "closeOnOverlay": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the modal will close when the overlay is clicked."
+    },
     "colorScheme": {
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
@@ -13,25 +42,68 @@
     },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
-      "required": false
+      "required": false,
+      "description": "The animation duration."
     },
-    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
-    "onClose": { "type": "() => void", "required": false },
-    "onCloseComplete": { "type": "() => void", "required": false },
-    "onEsc": { "type": "() => void", "required": false },
-    "onOverlayClick": { "type": "() => void", "required": false },
+    "finalFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to return focus to when `FocusLock` unmounts."
+    },
+    "initialFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to receive focus initially."
+    },
+    "lockFocusAcrossFrames": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback invoked to close the modal."
+    },
+    "onCloseComplete": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback function to run side effects after the modal has closed."
+    },
+    "onEsc": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the escape key is pressed and focus is within modal."
+    },
+    "onOverlayClick": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the overlay is clicked."
+    },
     "outside": {
       "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | \"-3\" | ... 77 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `padding` property."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
-      "required": false
+      "type": "\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>",
+      "defaultValue": "'center'",
+      "required": false,
+      "description": "The placement of the modal."
     },
-    "restoreFocus": { "type": "boolean", "required": false },
-    "scrollBehavior": { "type": "ScrollBehavior", "required": false },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+    },
+    "scrollBehavior": {
+      "type": "\"inside\" | \"outside\"",
+      "defaultValue": "'inside'",
+      "required": false,
+      "description": "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"full\"",
@@ -39,25 +111,72 @@
       "description": "The size of the Modal."
     },
     "variant": { "type": "string", "required": false, "description": "The variant of the Modal." },
-    "withCloseButton": { "type": "boolean", "required": false },
-    "withOverlay": { "type": "boolean", "required": false }
+    "withCloseButton": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the modal close button."
+    },
+    "withOverlay": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the modal overlay."
+    }
   },
   "ModalOverlay": {},
-  "ModalCloseButton": { "isDisabled": { "type": "boolean", "required": false } },
+  "ModalCloseButton": {
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled."
+    }
+  },
   "ModalHeader": {},
   "ModalBody": {},
   "ModalFooter": {},
   "Dialog": {
-    "isOpen": { "type": "boolean", "required": true },
-    "allowPinchZoom": { "type": "boolean", "required": false },
-    "animation": { "type": "Animation", "required": false },
-    "blockScrollOnMount": { "type": "boolean", "required": false },
+    "isOpen": {
+      "type": "boolean",
+      "required": true,
+      "description": "If `true`, the open will be opened."
+    },
+    "allowPinchZoom": {
+      "type": "boolean",
+      "defaultValue": "false.",
+      "required": false,
+      "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
+    },
+    "animation": {
+      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "defaultValue": "'scale'",
+      "required": false,
+      "description": "The animation of the tooltip."
+    },
+    "blockScrollOnMount": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, scrolling will be disabled on the `body` when the modal opens."
+    },
     "cancel": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal\n  | ButtonProps",
-      "required": false
+      "required": false,
+      "description": "The dialog cancel to use."
     },
-    "closeOnEsc": { "type": "boolean", "required": false },
-    "closeOnOverlay": { "type": "boolean", "required": false },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the modal will close when the `Esc` key is pressed."
+    },
+    "closeOnOverlay": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the modal will close when the overlay is clicked."
+    },
     "colorScheme": {
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
@@ -65,40 +184,98 @@
     },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
-      "required": false
+      "required": false,
+      "description": "The animation duration."
     },
-    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
+    "finalFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to return focus to when `FocusLock` unmounts."
+    },
     "footer": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The dialog footer to use."
     },
     "header": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The dialog header to use."
     },
-    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
-    "onCancel": { "type": "(onClose: (() => void) | undefined) => void", "required": false },
-    "onClose": { "type": "() => void", "required": false },
-    "onCloseComplete": { "type": "() => void", "required": false },
-    "onEsc": { "type": "() => void", "required": false },
-    "onOther": { "type": "(onClose: (() => void) | undefined) => void", "required": false },
-    "onOverlayClick": { "type": "() => void", "required": false },
-    "onSuccess": { "type": "(onClose: (() => void) | undefined) => void", "required": false },
+    "initialFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to receive focus initially."
+    },
+    "lockFocusAcrossFrames": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+    },
+    "onCancel": {
+      "type": "(onClose: (() => void) | undefined) => void",
+      "required": false,
+      "description": "The callback invoked when cancel button clicked."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback invoked to close the modal."
+    },
+    "onCloseComplete": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback function to run side effects after the modal has closed."
+    },
+    "onEsc": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the escape key is pressed and focus is within modal."
+    },
+    "onOther": {
+      "type": "(onClose: (() => void) | undefined) => void",
+      "required": false,
+      "description": "The callback invoked when other button clicked."
+    },
+    "onOverlayClick": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the overlay is clicked."
+    },
+    "onSuccess": {
+      "type": "(onClose: (() => void) | undefined) => void",
+      "required": false,
+      "description": "The callback invoked when success button clicked."
+    },
     "other": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal\n  | ButtonProps",
-      "required": false
+      "required": false,
+      "description": "The dialog other to use."
     },
     "outside": {
       "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | \"-3\" | ... 77 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `padding` property."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
-      "required": false
+      "type": "\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>",
+      "defaultValue": "'center'",
+      "required": false,
+      "description": "The placement of the modal."
     },
-    "restoreFocus": { "type": "boolean", "required": false },
-    "scrollBehavior": { "type": "ScrollBehavior", "required": false },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+    },
+    "scrollBehavior": {
+      "type": "\"inside\" | \"outside\"",
+      "defaultValue": "'inside'",
+      "required": false,
+      "description": "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"full\"",
@@ -107,23 +284,65 @@
     },
     "success": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal\n  | ButtonProps",
-      "required": false
+      "required": false,
+      "description": "The dialog success to use."
     },
     "variant": { "type": "string", "required": false, "description": "The variant of the Dialog." },
-    "withCloseButton": { "type": "boolean", "required": false },
-    "withOverlay": { "type": "boolean", "required": false }
+    "withCloseButton": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the modal close button."
+    },
+    "withOverlay": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the modal overlay."
+    }
   },
   "DialogOverlay": {},
-  "DialogCloseButton": { "isDisabled": { "type": "boolean", "required": false } },
+  "DialogCloseButton": {
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled."
+    }
+  },
   "DialogHeader": {},
   "DialogBody": {},
   "DialogFooter": {},
   "Drawer": {
-    "isOpen": { "type": "boolean", "required": true },
-    "allowPinchZoom": { "type": "boolean", "required": false },
-    "blockScrollOnMount": { "type": "boolean", "required": false },
-    "closeOnEsc": { "type": "boolean", "required": false },
-    "closeOnOverlay": { "type": "boolean", "required": false },
+    "isOpen": {
+      "type": "boolean",
+      "required": true,
+      "description": "If `true`, the open will be opened."
+    },
+    "allowPinchZoom": {
+      "type": "boolean",
+      "defaultValue": "false.",
+      "required": false,
+      "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
+    },
+    "blockScrollOnMount": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, scrolling will be disabled on the `body` when the modal opens."
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the modal will close when the `Esc` key is pressed."
+    },
+    "closeOnOverlay": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the modal will close when the overlay is clicked."
+    },
     "colorScheme": {
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
@@ -131,21 +350,62 @@
     },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
-      "required": false
+      "required": false,
+      "description": "The animation duration."
     },
-    "finalFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "initialFocusRef": { "type": "RefObject<FocusableElement>", "required": false },
-    "isFullHeight": { "type": "boolean", "required": false },
-    "lockFocusAcrossFrames": { "type": "boolean", "required": false },
-    "onClose": { "type": "() => void", "required": false },
-    "onCloseComplete": { "type": "() => void", "required": false },
-    "onEsc": { "type": "() => void", "required": false },
-    "onOverlayClick": { "type": "() => void", "required": false },
+    "finalFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to return focus to when `FocusLock` unmounts."
+    },
+    "initialFocusRef": {
+      "type": "RefObject<FocusableElement>",
+      "required": false,
+      "description": "`ref` of the element to receive focus initially."
+    },
+    "isFullHeight": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100vh)."
+    },
+    "lockFocusAcrossFrames": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback invoked to close the modal."
+    },
+    "onCloseComplete": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback function to run side effects after the modal has closed."
+    },
+    "onEsc": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the escape key is pressed and focus is within modal."
+    },
+    "onOverlayClick": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the overlay is clicked."
+    },
     "placement": {
-      "type": "(Placement | ResponsiveObject<Placement> | ColorModeArray<Placement>) & (\"top\" | \"right\" | \"bottom\" | \"left\" | ResponsiveObject<...> | ColorModeArray<...>)",
-      "required": false
+      "type": "(\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>) & (\"top\" | ... 4 more ... | ColorModeArray<...>)",
+      "defaultValue": "'center'",
+      "required": false,
+      "description": "The placement of the modal.\n\n\nThe placement of the drawer."
     },
-    "restoreFocus": { "type": "boolean", "required": false },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\"",
@@ -153,11 +413,28 @@
       "description": "The size of the Drawer."
     },
     "variant": { "type": "string", "required": false, "description": "The variant of the Drawer." },
-    "withCloseButton": { "type": "boolean", "required": false },
-    "withOverlay": { "type": "boolean", "required": false }
+    "withCloseButton": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the modal close button."
+    },
+    "withOverlay": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the modal overlay."
+    }
   },
   "DrawerOverlay": {},
-  "DrawerCloseButton": { "isDisabled": { "type": "boolean", "required": false } },
+  "DrawerCloseButton": {
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled."
+    }
+  },
   "DrawerHeader": {},
   "DrawerBody": {},
   "DrawerFooter": {}

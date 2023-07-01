@@ -18,11 +18,34 @@ const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
 export type UseRadioGroupProps<Y extends string | number = string> = {
+  /**
+   * The top-level id string that will be applied to the radios.
+   * The index of the radio will be appended to this top-level id.
+   */
   id?: string
+  /**
+   * The HTML `name` attribute used for forms.
+   */
   name?: string
+  /**
+   * The value of the radio group.
+   */
   value?: Y
+  /**
+   * The initial value of the radio group.
+   */
   defaultValue?: Y
+  /**
+   * The callback fired when any children radio is checked or unchecked.
+   */
   onChange?: (value: Y) => void
+  /**
+   * If `true`, input elements will receive `checked` attribute instead of `isChecked`.
+   *
+   * This assumes, you're using native radio inputs.
+   *
+   * @default false
+   */
   isNative?: boolean
 }
 

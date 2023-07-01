@@ -4,7 +4,13 @@ import { cx } from '@yamada-ui/utils'
 import { Skeleton, SkeletonProps } from './'
 
 type SkeletonTextOptions = {
+  /**
+   * The CSS `gap` property.
+   */
   gap?: UIProps['gap']
+  /**
+   * The CSS `height` property.
+   */
   textHeight?: UIProps['height']
 }
 

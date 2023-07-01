@@ -25,9 +25,18 @@ type Props = {
 } & FormControlOptions
 
 type FileButtonOptions = {
+  /**
+   * The border color when the button is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * Function to be called when a file change event occurs.
+   */
   onChange?: (files: File[] | null) => void
   children?: ReactNode | ((props: Props) => ReactNode)
+  /**
+   * Ref to a reset function.
+   */
   resetRef?: ForwardedRef<() => void>
 }
 

@@ -1,28 +1,77 @@
 {
   "Tabs": {
-    "align": { "type": "\"center\" | \"start\" | \"end\"", "required": false },
+    "align": {
+      "type": "\"center\" | \"start\" | \"end\"",
+      "required": false,
+      "description": "The alignment of the tabs."
+    },
     "colorScheme": {
       "defaultValue": "primary",
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "defaultIndex": { "type": "number", "required": false },
-    "index": { "type": "number", "required": false },
-    "isFitted": { "type": "boolean", "required": false },
-    "isLazy": { "type": "boolean", "required": false },
-    "isManual": { "type": "boolean", "required": false },
-    "lazyBehavior": { "type": "LazyMode", "required": false },
-    "onChange": { "type": "(index: number) => void", "required": false },
-    "orientation": { "type": "\"vertical\" | \"horizontal\"", "required": false },
+    "defaultIndex": {
+      "type": "number",
+      "required": false,
+      "description": "The index of the selected tab."
+    },
+    "index": {
+      "type": "number",
+      "required": false,
+      "description": "The index of the selected tab."
+    },
+    "isFitted": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, tabs will stretch to width of the tablist."
+    },
+    "isLazy": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, rendering of the tab panel's will be deferred until it is selected."
+    },
+    "isManual": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the tabs will be manually activated and　display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus."
+    },
+    "lazyBehavior": {
+      "type": "LazyMode",
+      "defaultValue": "'unmount'",
+      "required": false,
+      "description": "The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.\n\n- `unmount`: The content of inactive tab panels are always unmounted.\n- `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected."
+    },
+    "onChange": {
+      "type": "(index: number) => void",
+      "required": false,
+      "description": "The callback invoked when the index changes."
+    },
+    "orientation": {
+      "type": "\"vertical\" | \"horizontal\"",
+      "defaultValue": "'horizontal'",
+      "required": false,
+      "description": "The orientation of the tab list."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the Tabs."
     },
-    "tabListProps": { "type": "TabListProps", "required": false },
-    "tabPanelsProps": { "type": "TabPanelsProps", "required": false },
+    "tabListProps": {
+      "type": "TabListProps",
+      "required": false,
+      "description": "Props for tab list component."
+    },
+    "tabPanelsProps": {
+      "type": "TabPanelsProps",
+      "required": false,
+      "description": "Props for tab panels components."
+    },
     "variant": {
       "defaultValue": "line",
       "type": "\"line\" | \"sticky\" | \"sticky-subtle\" | \"sticky-solid\" | \"rounded\" | \"rounded-subtle\" | \"rounded-solid\" | \"unstyled\"",
@@ -32,10 +81,30 @@
   },
   "TabList": {},
   "Tab": {
-    "clickOnEnter": { "type": "boolean", "required": false },
-    "clickOnSpace": { "type": "boolean", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isFocusable": { "type": "boolean", "required": false }
+    "clickOnEnter": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "Whether or not trigger click on pressing `Enter`."
+    },
+    "clickOnSpace": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "Whether or not trigger click on pressing `Space`."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
+    },
+    "isFocusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+    }
   },
   "TabPanels": {},
   "TabPanel": {}

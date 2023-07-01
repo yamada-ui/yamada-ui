@@ -10,6 +10,7 @@ import {
 import { InfoIcon, WarningIcon, CheckIcon } from '@yamada-ui/icon'
 import { Loading, LoadingProps } from '@yamada-ui/loading'
 import { createContext, cx } from '@yamada-ui/utils'
+import { FC } from 'react'
 
 const statuses = {
   info: { icon: InfoIcon, colorScheme: 'primary' },
@@ -36,6 +37,11 @@ export const getStatusColorScheme = (status: Status) => statuses[status].colorSc
 export const getStatusIcon = (status: Status) => statuses[status].icon
 
 type AlertOptions = {
+  /**
+   * The status of the alert.
+   *
+   * @default 'info'
+   */
   status?: Status
 }
 
@@ -69,7 +75,12 @@ export const Alert = forwardRef<AlertProps, 'div'>(
 
 export type AlertIconProps = HTMLUIProps<'span'> & { variant?: LoadingProps['variant'] }
 
-export const AlertIcon = ({ className, children, variant = 'oval', ...rest }: AlertIconProps) => {
+export const AlertIcon: FC<AlertIconProps> = ({
+  className,
+  children,
+  variant = 'oval',
+  ...rest
+}) => {
   const { status, styles } = useAlert()
 
   const Icon = getStatusIcon(status)

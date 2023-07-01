@@ -12,25 +12,55 @@ import { useValue } from '@yamada-ui/use-value'
 import { cx } from '@yamada-ui/utils'
 import { ReactNode, useMemo } from 'react'
 
-type IndicatorPlacement =
-  | 'top'
-  | 'top-left'
-  | 'top-right'
-  | 'left'
-  | 'right'
-  | 'bottom'
-  | 'bottom-left'
-  | 'bottom-right'
-
 type IndicatorOptions = {
   children: ReactNode
+  /**
+   * If `true`, set the indicator as an inline element.
+   *
+   * @default false
+   * */
   inline?: Token<boolean>
-  placement?: Token<IndicatorPlacement>
+  /**
+   * The placement of the indicator.
+   *
+   * @default 'top-right'
+   */
+  placement?: Token<
+    'top' | 'top-left' | 'top-right' | 'left' | 'right' | 'bottom' | 'bottom-left' | 'bottom-right'
+  >
+  /**
+   * Changes position offset, usually used when element has border-radius.
+   *
+   * @default 0
+   */
   offset?: Token<number>
+  /**
+   * The indicator label to use.
+   */
   label?: ReactNode
+  /**
+   * If `label` is of type number, the maximum number displayed.
+   *
+   * @default 99
+   */
   overflowCount?: number
+  /**
+   * If `true`, display 0.
+   *
+   * @default true
+   */
   showZero?: boolean
+  /**
+   * If `true`, the indicator will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * If `true`, display the border of the indicator.
+   *
+   * @default false
+   */
   withBorder?: boolean
 }
 
@@ -38,7 +68,18 @@ export type IndicatorProps = Omit<HTMLUIProps<'div'>, 'children'> &
   ThemeProps<'Indicator'> &
   IndicatorOptions
 
-const getPlacementStyle = (placement: IndicatorPlacement, offset: number): CSSUIObject => {
+const getPlacementStyle = (
+  placement:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'left'
+    | 'right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right',
+  offset: number,
+): CSSUIObject => {
   const styles: CSSUIObject = {}
   let translateX = ''
   let translateY = ''

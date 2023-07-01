@@ -24,7 +24,15 @@ import {
 } from './'
 
 type DrawerOptions = {
+  /**
+   * The placement of the drawer.
+   *
+   * @default 'right'
+   */
   placement?: SlideProps['placement']
+  /**
+   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100vh).
+   */
   isFullHeight?: boolean
 }
 

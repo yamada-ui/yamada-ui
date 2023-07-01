@@ -32,13 +32,37 @@ import {
 } from './'
 
 type DialogOptions = {
+  /**
+   * The dialog header to use.
+   */
   header?: ReactNode
+  /**
+   * The dialog footer to use.
+   */
   footer?: ReactNode
+  /**
+   * The dialog cancel to use.
+   */
   cancel?: ReactNode | ButtonProps
+  /**
+   * The dialog other to use.
+   */
   other?: ReactNode | ButtonProps
+  /**
+   * The dialog success to use.
+   */
   success?: ReactNode | ButtonProps
+  /**
+   * The callback invoked when cancel button clicked.
+   */
   onCancel?: (onClose: (() => void) | undefined) => void
+  /**
+   * The callback invoked when other button clicked.
+   */
   onOther?: (onClose: (() => void) | undefined) => void
+  /**
+   * The callback invoked when success button clicked.
+   */
   onSuccess?: (onClose: (() => void) | undefined) => void
 }
 

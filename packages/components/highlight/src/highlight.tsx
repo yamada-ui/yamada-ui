@@ -39,9 +39,23 @@ export const useHighlight = ({ text, query }: Options): Chunk[] =>
   useMemo(() => highlightWords({ text, query }), [text, query])
 
 export type HighlightProps = TextProps & {
+  /**
+   * If `true`, `Fragment` is used for rendering.
+   *
+   * @default false
+   */
   isFragment?: boolean
+  /**
+   * Can be a single string or an array of strings. These are the terms that are highlighted in the text.
+   */
   query: string | string[]
+  /**
+   * Accepts a string or a function. If it's a function, it should return a `ReactNode` and accept an array of `Chunk` objects as its argument.
+   */
   children: string | ((props: Chunk[]) => ReactNode)
+  /**
+   * Properties passed to the Mark component which is used to highlight the matched terms.
+   */
   markProps?: MarkProps
 }
 

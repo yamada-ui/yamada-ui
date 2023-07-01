@@ -5,16 +5,72 @@ import { mergeRefs, PropGetter } from '@yamada-ui/utils'
 import { useCallback, useEffect, useRef } from 'react'
 
 export type UsePopperProps = {
+  /**
+   * Whether the popper.js should be enabled.
+   *
+   * @default true
+   */
   enabled?: boolean
+  /**
+   * The main and cross-axis offset to displace popper element from its reference element.
+   */
   offset?: [number, number]
+  /**
+   * The distance or margin between the reference and popper.
+   * It is used internally to create an `offset` modifier.
+   *
+   * @default 8
+   */
   gutter?: Token<number>
+  /**
+   * If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.
+   *
+   * @default true
+   */
   preventOverflow?: boolean
+  /**
+   * If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.
+   *
+   * @default true
+   */
   flip?: boolean
+  /**
+   * If `true`, the popper will match the width of the reference at all times.
+   * It's useful for `autocomplete`, `date-picker` and `select` patterns.
+   *
+   * @default false
+   */
   matchWidth?: boolean
+  /**
+   * The boundary area for the popper. Used within the `preventOverflow` modifier.
+   *
+   * @default 'clippingParents'
+   */
   boundary?: 'clippingParents' | 'scrollParent' | HTMLElement
+  /**
+   * If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.
+   *
+   * @default true
+   */
   eventListeners?: boolean | { scroll?: boolean; resize?: boolean }
+  /**
+   * The CSS positioning strategy to use.
+   *
+   * @default 'absolute'
+   */
   strategy?: 'absolute' | 'fixed'
+  /**
+   * The placement of the popper relative to its reference.
+   *
+   * @default 'bottom'
+   */
   placement?: Token<Placement>
+  /**
+   * Array of popper.js modifiers.
+   * Check the docs to see the list of possible modifiers you can pass.
+   *
+   * @see Docs https://popper.js.org/docs/v2/modifiers/
+   */
   modifiers?: Array<Partial<Modifier<string, any>>>
 }
 

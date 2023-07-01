@@ -19,10 +19,27 @@ export type SwitchIconProps = {
 }
 
 type SwitchOptions = {
+  /**
+   * The switch icon to use.
+   */
   icon?: ReactElement<SwitchIconProps>
+  /**
+   * Props for switch input element.
+   */
   inputProps?: InputHTMLAttributes<HTMLInputElement>
+  /**
+   * Props for switch label element.
+   */
   labelProps?: HTMLUIProps<'span'>
-  reverse?: boolean
+  /**
+   * Change switch label from right to left.
+   *
+   * @default false
+   */
+  isReverse?: boolean
+  /**
+   * Motion transition settings.
+   */
   transition?: MotionTransition
 }
 
@@ -40,7 +57,7 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
     icon,
     inputProps,
     labelProps,
-    reverse,
+    isReverse,
     flexDirection,
     transition = {
       type: 'spring',
@@ -78,7 +95,7 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
         cursor: 'pointer',
         position: 'relative',
         display: 'inline-flex',
-        flexDirection: flexDirection ?? (reverse ? 'row-reverse' : 'row'),
+        flexDirection: flexDirection ?? (isReverse ? 'row-reverse' : 'row'),
         alignItems: 'center',
         verticalAlign: 'top',
         gap,

@@ -1,9 +1,15 @@
 {
   "Pagination": {
-    "total": { "type": "number", "required": true },
+    "total": {
+      "type": "number",
+      "required": true,
+      "description": "The total number of pages in pagination."
+    },
     "boundaries": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "1",
+      "required": false,
+      "description": "Number of elements visible on the left/right edges."
     },
     "colorScheme": {
       "defaultValue": "primary",
@@ -11,21 +17,73 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "component": { "type": "FC<PaginationItemProps>", "required": false },
-    "controlNextProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "controlPrevProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "controlProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "defaultPage": { "type": "number", "required": false },
-    "edgeFirstProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "edgeLastProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "edgeProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "itemProps": { "type": "HTMLUIProps<\"button\">", "required": false },
-    "onChange": { "type": "(page: number) => void", "required": false },
-    "page": { "type": "number", "required": false },
+    "component": {
+      "type": "FC<PaginationItemProps>",
+      "required": false,
+      "description": "The pagination button component to use."
+    },
+    "controlNextProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for next of the control button element."
+    },
+    "controlPrevProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for previous of the control button element."
+    },
+    "controlProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for control button element."
+    },
+    "defaultPage": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`."
+    },
+    "edgeFirstProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for first of the edge button element."
+    },
+    "edgeLastProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for last of the edge button element."
+    },
+    "edgeProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for edge button element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the pagination all item will be disabled."
+    },
+    "itemProps": {
+      "type": "HTMLUIProps<\"button\">",
+      "required": false,
+      "description": "Props for button element."
+    },
+    "onChange": {
+      "type": "(page: number) => void",
+      "required": false,
+      "description": "The callback invoked when the page changes."
+    },
+    "page": {
+      "type": "number",
+      "required": false,
+      "description": "The page of the pagination.\nShould be less than `total` and greater than `1`."
+    },
     "siblings": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "1",
+      "required": false,
+      "description": "Number of siblings displayed on the left/right side of selected page."
     },
     "size": {
       "defaultValue": "md",
@@ -41,26 +99,56 @@
     },
     "withControls": {
       "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
-      "required": false
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the control buttons."
     },
     "withEdges": {
       "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
-      "required": false
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the edge buttons."
     }
   },
   "UsePagination": {
-    "total": { "type": "number", "required": true },
+    "total": {
+      "type": "number",
+      "required": true,
+      "description": "The total number of pages in pagination."
+    },
     "boundaries": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "1",
+      "required": false,
+      "description": "Number of elements visible on the left/right edges."
     },
-    "defaultPage": { "type": "number", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "onChange": { "type": "(page: number) => void", "required": false },
-    "page": { "type": "number", "required": false },
+    "defaultPage": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the pagination all item will be disabled."
+    },
+    "onChange": {
+      "type": "(page: number) => void",
+      "required": false,
+      "description": "The callback invoked when the page changes."
+    },
+    "page": {
+      "type": "number",
+      "required": false,
+      "description": "The page of the pagination.\nShould be less than `total` and greater than `1`."
+    },
     "siblings": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "1",
+      "required": false,
+      "description": "Number of siblings displayed on the left/right side of selected page."
     }
   }
 }

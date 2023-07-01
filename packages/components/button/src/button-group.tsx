@@ -3,8 +3,21 @@ import { createContext, cx, dataAttr } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
 type ButtonGroupOptions = {
+  /**
+   * The CSS `flex-direction` property.
+   */
   direction?: CSSUIProps['flexDirection']
+  /**
+   * If `true`, the borderRadius of button that are direct children will be altered to look flushed together.
+   *
+   * @default false
+   */
   isAttached?: boolean
+  /**
+   * If `true`, all wrapped button will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
 }
 

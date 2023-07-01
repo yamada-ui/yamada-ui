@@ -6,22 +6,49 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "isActive": { "type": "boolean", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isLoading": { "type": "boolean", "required": false },
+    "isActive": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is represented as active."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled."
+    },
+    "isLoading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the loading state of the button is represented."
+    },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "The icon to display at the left side of the button."
     },
     "loadingIcon": {
-      "type": "type ONLY_FOR_FORMAT =\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | LoadingVariant",
-      "required": false
+      "type": "type ONLY_FOR_FORMAT =\n  | \"audio\"\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"oval\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
+      "required": false,
+      "description": "The icon to display when the button is loading."
     },
-    "loadingPlacement": { "type": "\"end\" | \"start\"", "required": false },
-    "loadingText": { "type": "string", "required": false },
+    "loadingPlacement": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "'start'",
+      "required": false,
+      "description": "The placement of the loading indicator. Accepts `start` or `end`."
+    },
+    "loadingText": {
+      "type": "string",
+      "required": false,
+      "description": "The text to display when the button is loading."
+    },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "The icon to display at the right side of the button."
     },
     "size": {
       "defaultValue": "md",
@@ -39,16 +66,51 @@
   "ButtonGroup": {
     "direction": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-direction` property."
     },
-    "isAttached": { "type": "boolean", "required": false },
-    "isDisabled": { "type": "boolean", "required": false }
+    "isAttached": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, all wrapped button will be disabled."
+    }
   },
   "IconButton": {
-    "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
-    "isActive": { "type": "boolean", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isLoading": { "type": "boolean", "required": false },
-    "isRound": { "type": "boolean", "required": false }
+    "icon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false,
+      "description": "The icon to be used in the button."
+    },
+    "isActive": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is represented as active."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button is disabled."
+    },
+    "isLoading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the loading state of the button is represented."
+    },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the button will be perfectly round. Else, it'll be slightly round."
+    }
   }
 }

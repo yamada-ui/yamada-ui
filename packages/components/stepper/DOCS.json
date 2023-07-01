@@ -1,21 +1,35 @@
 {
   "Stepper": {
-    "index": { "type": "number", "required": true },
+    "index": { "type": "number", "required": true, "description": "The active step index." },
     "colorScheme": {
       "defaultValue": "primary",
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "orientation": { "type": "Orientation", "required": false },
-    "showLastSeparator": { "type": "boolean", "required": false },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "required": false,
+      "description": "The orientation of the stepper."
+    },
+    "showLastSeparator": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Whether to show or not the last separator while in vertical orientation."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the Stepper."
     },
-    "steps": { "type": "Steps", "required": false },
+    "steps": {
+      "type": "Steps",
+      "required": false,
+      "description": "If provided, generate step components based on steps."
+    },
     "variant": { "type": "string", "required": false, "description": "The variant of the Stepper." }
   },
   "UseSteps": {
@@ -44,7 +58,8 @@
   "StepIcon": {
     "size": {
       "type": "number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 17 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `font-size` property."
     }
   }
 }

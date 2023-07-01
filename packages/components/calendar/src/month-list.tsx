@@ -6,7 +6,13 @@ import { CalenderHeader, CalenderHeaderProps } from './calender-header'
 import { getFormattedLabel, useCalendarContext, useMonthList } from './use-calendar'
 
 type MonthListOptions = {
+  /**
+   * Props for the calendar header element.
+   */
   headerProps?: HTMLUIProps<'div'>
+  /**
+   * Props for the calendar month button element.
+   */
   monthProps?: ButtonProps & { component?: FC<{ month: string; year: number; index: number }> }
 }
 

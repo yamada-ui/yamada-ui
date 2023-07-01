@@ -87,15 +87,48 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
 > &
   Omit<PopoverProps, 'initialFocusRef' | 'closeOnButton' | 'isOpen'> &
   FormControlOptions & {
+    /**
+     * The HTML `name` attribute used for forms.
+     */
     name?: string
+    /**
+     * The value of the select.
+     */
     value?: T
+    /**
+     * The initial value of the select.
+     */
     defaultValue?: T
+    /**
+     * The callback invoked when value state changes.
+     */
     onChange?: (value: T) => void
+    /**
+     * If `true`, the list element will be closed when value is selected.
+     *
+     * @default true
+     */
     closeOnSelect?: boolean
+    /**
+     * If `true`, include placeholders in options.
+     *
+     * @default true
+     */
     placeholderInOptions?: boolean
     isEmpty: boolean
+    /**
+     * If `true`, the selected item(s) will be excluded from the list.
+     *
+     * @default false
+     */
     omitSelectedValues?: boolean
+    /**
+     * The maximum selectable value.
+     */
     maxSelectedValues?: number
+    /**
+     * Props for select option element.
+     */
     optionProps?: Omit<OptionProps, 'value' | 'children'>
   }
 
@@ -616,6 +649,9 @@ export const useSelectList = () => {
 export type UseSelectListReturn = ReturnType<typeof useSelectList>
 
 export type UseSelectOptionGroupProps = HTMLUIProps<'ul'> & {
+  /**
+   * The label of the option group.
+   */
   label: string
 }
 
@@ -685,10 +721,31 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
 export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
 export type UseSelectOptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & {
+  /**
+   * The value of the select option.
+   */
   value?: string
+  /**
+   * The label of the select option.
+   */
   children?: string
+  /**
+   * If `true`, the select option will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * If `true`, the select option will be focusable.
+   *
+   * @default false
+   */
   isFocusable?: boolean
+  /**
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
+   */
   closeOnSelect?: boolean
 }
 

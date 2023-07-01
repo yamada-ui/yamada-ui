@@ -15,15 +15,49 @@ import { PaginationItem, PaginationItemProps } from './pagination-item'
 import { PaginationProvider, usePagination, UsePaginationProps } from './use-pagination'
 
 type PaginationOptions = {
+  /**
+   * The pagination button component to use.
+   */
   component?: FC<PaginationItemProps>
+  /**
+   * Props for button element.
+   */
   itemProps?: HTMLUIProps<'button'>
+  /**
+   * If `true`, display the control buttons.
+   *
+   * @default true
+   */
   withControls?: Token<boolean>
+  /**
+   * Props for control button element.
+   */
   controlProps?: HTMLUIProps<'button'>
+  /**
+   * Props for previous of the control button element.
+   */
   controlPrevProps?: HTMLUIProps<'button'>
+  /**
+   * Props for next of the control button element.
+   */
   controlNextProps?: HTMLUIProps<'button'>
+  /**
+   * If `true`, display the edge buttons.
+   *
+   * @default false
+   */
   withEdges?: Token<boolean>
+  /**
+   * Props for edge button element.
+   */
   edgeProps?: HTMLUIProps<'button'>
+  /**
+   * Props for first of the edge button element.
+   */
   edgeFirstProps?: HTMLUIProps<'button'>
+  /**
+   * Props for last of the edge button element.
+   */
   edgeLastProps?: HTMLUIProps<'button'>
 }
 

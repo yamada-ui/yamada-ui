@@ -7,15 +7,38 @@
     },
     "endColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The color at the animation end."
     },
-    "fadeDuration": { "type": "string | number", "required": false },
-    "isLoaded": { "type": "boolean", "required": false },
+    "fadeDuration": {
+      "type": "string | number",
+      "defaultValue": "0.4",
+      "required": false,
+      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
+    },
+    "isFitContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the skeleton will take the width of it's children."
+    },
+    "isLoaded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, it'll render its children with a nice fade transition."
+    },
     "size": { "type": "string", "required": false, "description": "The size of the Skeleton." },
-    "speed": { "type": "string | number", "required": false },
+    "speed": {
+      "type": "string | number",
+      "defaultValue": "0.8",
+      "required": false,
+      "description": "The animation speed in seconds."
+    },
     "startColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The color at the animation start."
     },
     "variant": {
       "type": "string",
@@ -26,31 +49,78 @@
   "SkeletonCircle": {
     "endColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The color at the animation end."
     },
-    "fadeDuration": { "type": "string | number", "required": false },
-    "isLoaded": { "type": "boolean", "required": false },
-    "speed": { "type": "string | number", "required": false },
+    "fadeDuration": {
+      "type": "string | number",
+      "defaultValue": "0.4",
+      "required": false,
+      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
+    },
+    "isFitContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the skeleton will take the width of it's children."
+    },
+    "isLoaded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, it'll render its children with a nice fade transition."
+    },
+    "speed": {
+      "type": "string | number",
+      "defaultValue": "0.8",
+      "required": false,
+      "description": "The animation speed in seconds."
+    },
     "startColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The color at the animation start."
     }
   },
   "SkeletonText": {
     "endColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The color at the animation end."
     },
-    "fadeDuration": { "type": "string | number", "required": false },
-    "isLoaded": { "type": "boolean", "required": false },
-    "speed": { "type": "string | number", "required": false },
+    "fadeDuration": {
+      "type": "string | number",
+      "defaultValue": "0.4",
+      "required": false,
+      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
+    },
+    "isFitContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the skeleton will take the width of it's children."
+    },
+    "isLoaded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, it'll render its children with a nice fade transition."
+    },
+    "speed": {
+      "type": "string | number",
+      "defaultValue": "0.8",
+      "required": false,
+      "description": "The animation speed in seconds."
+    },
     "startColor": {
       "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The color at the animation start."
     },
     "textHeight": {
       "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"2\" | \"3\" | \"4\" | ... 57 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `height` property."
     }
   }
 }

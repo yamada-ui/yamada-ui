@@ -5,7 +5,13 @@ import { AutocompleteItemIcon } from './autocomplete-icon'
 import { useAutocompleteContext, useAutocompleteEmpty } from './use-autocomplete'
 
 type AutocompleteEmptyOptions = {
+  /**
+   * The autocomplete empty option icon to use.
+   */
   icon?: ReactElement
+  /**
+   * The label of the autocomplete empty option.
+   */
   children?: string
 }
 

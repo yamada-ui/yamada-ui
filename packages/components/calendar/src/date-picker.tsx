@@ -15,11 +15,29 @@ import { DatePickerClearIcon, DatePickerIcon, DatePickerIconProps } from './date
 import { DatePickerProvider, useDatePicker, UseDatePickerProps } from './use-date-picker'
 
 type DatePickerOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for date picker container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for date picker input element.
+   */
   inputProps?: DatePickerFieldProps['inputProps']
+  /**
+   * Props for date picker icon element.
+   */
   iconProps?: DatePickerIconProps
+  /**
+   * Props for date picker clear icon element.
+   */
   clearIconProps?: DatePickerIconProps
 }
 

@@ -8,7 +8,12 @@ import {
   UseAutocompleteOptionProps,
 } from './use-autocomplete'
 
-type AutocompleteOptionOptions = { icon?: ReactElement }
+type AutocompleteOptionOptions = {
+  /**
+   * The autocomplete option icon to use.
+   */
+  icon?: ReactElement
+}
 
 export type AutocompleteOptionProps = UseAutocompleteOptionProps & AutocompleteOptionOptions
 

@@ -15,8 +15,23 @@ import { useEffect, useState } from 'react'
 const isNumeric = (value?: string | number) => value != null && parseFloat(value.toString()) > 0
 
 type CollapseOptions = {
+  /**
+   * If `true`, the opacity of the content will be animated.
+   *
+   * @default true
+   */
   animationOpacity?: boolean
+  /**
+   * The height you want the content in its collapsed state.
+   *
+   * @default 0
+   */
   startingHeight?: number | string
+  /**
+   * The height you want the content in its expanded state.
+   *
+   * @default "auto"
+   */
   endingHeight?: number | string
 }
 

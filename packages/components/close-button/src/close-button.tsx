@@ -11,6 +11,11 @@ import { CloseIcon } from '@yamada-ui/icon'
 import { cx } from '@yamada-ui/utils'
 
 type CloseButtonOptions = {
+  /**
+   * If `true`, the button is disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
 }
 

@@ -4,17 +4,28 @@ import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
 import { DotsIcon, FirstIcon, LastIcon, NextIcon, PrevIcon } from './pagination-icon'
 import { usePaginationContext } from './use-pagination'
 
-type Page = number | 'dots' | 'prev' | 'next' | 'first' | 'last'
-
 type PaginationItemOptions = {
-  page: Page
+  /**
+   * The type of the page or item assigned to the pagination item.
+   */
+  page: number | 'dots' | 'prev' | 'next' | 'first' | 'last'
+  /**
+   * If `true`, the pagination item will be actived.
+   *
+   * @default false
+   */
   isActive?: boolean
+  /**
+   * If `true`, the pagination item will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
 }
 
 export type PaginationItemProps = ComponentPropsWithoutRef<'button'> & PaginationItemOptions
 
-const iconMap: Record<Page, ReactNode> = {
+const iconMap: Record<number | 'dots' | 'prev' | 'next' | 'first' | 'last', ReactNode> = {
   dots: <DotsIcon />,
   next: <NextIcon />,
   prev: <PrevIcon />,

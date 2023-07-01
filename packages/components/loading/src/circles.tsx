@@ -2,7 +2,15 @@ import { forwardRef } from '@yamada-ui/core'
 import { Icon, IconProps } from '@yamada-ui/icon'
 
 export type CirclesProps = Omit<IconProps, 'color'> & {
+  /**
+   * The CSS `stroke` property.
+   */
   color?: string
+  /**
+   * The CSS `dur` property.
+   *
+   * @default '3s'
+   */
   duration?: IconProps['dur']
 }
 

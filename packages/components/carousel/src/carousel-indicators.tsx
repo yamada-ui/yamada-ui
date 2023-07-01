@@ -3,7 +3,12 @@ import { cx } from '@yamada-ui/utils'
 import { FC, ReactElement, cloneElement } from 'react'
 import { useCarouselContext, useCarouselIndicators } from './use-carousel'
 
-type CarouselIndicatorsOptions = { component?: FC<{ index: number; isSelected: boolean }> }
+type CarouselIndicatorsOptions = {
+  /**
+   * The custom curousel indicator to use.
+   */
+  component?: FC<{ index: number; isSelected: boolean }>
+}
 
 export type CarouselIndicatorsProps = Omit<HTMLUIProps<'div'>, 'children'> &
   CarouselIndicatorsOptions

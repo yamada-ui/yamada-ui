@@ -28,16 +28,42 @@ import {
 } from './'
 
 export type Steps = ({
+  /**
+   * The title for step component.
+   */
   title?: ReactNode
+  /**
+   * The description for step component.
+   */
   description?: ReactNode
+  /**
+   * If true, display the step separator.
+   *
+   * @default true
+   */
   hasSeparator?: boolean
+  /**
+   * Props for step status element.
+   */
   statusProps?: StepStatusProps
+  /**
+   * Props for step title element.
+   */
   titleProps?: StepTitleProps
+  /**
+   * Props for step description element.
+   */
   descriptionProps?: StepDescriptionProps
+  /**
+   * Props for step separator element.
+   */
   separatorProps?: StepSeparatorProps
 } & StepProps)[]
 
 type StepperOptions = {
+  /**
+   * If provided, generate step components based on steps.
+   */
   steps?: Steps
 }
 
@@ -55,7 +81,6 @@ export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
     if (hasChildren) {
       return children
     } else {
-      // @ts-ignore
       return steps?.map(
         (
           {

@@ -2,69 +2,228 @@
   "Select": {
     "boundary": {
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
-      "required": false
+      "defaultValue": "'clippingParents'",
+      "required": false,
+      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
-    "closeDelay": { "type": "number", "required": false },
-    "closeOnBlur": { "type": "boolean", "required": false },
-    "closeOnEsc": { "type": "boolean", "required": false },
-    "closeOnSelect": { "type": "boolean", "required": false },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
+    },
+    "closeOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popover will close when you hit the `Esc` key."
+    },
+    "closeOnSelect": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the list element will be closed when value is selected."
+    },
     "colorScheme": {
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "containerProps": { "type": "Omit<HTMLUIProps<\"div\">, \"children\">", "required": false },
-    "defaultIsOpen": { "type": "boolean", "required": false },
-    "defaultValue": { "type": "string", "required": false },
+    "containerProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for select container element."
+    },
+    "defaultIsOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be initially opened."
+    },
+    "defaultValue": {
+      "type": "string",
+      "required": false,
+      "description": "The initial value of the select."
+    },
     "duration": {
       "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
-      "required": false
+      "required": false,
+      "description": "The animation duration."
     },
-    "errorBorderColor": { "type": "string", "required": false },
+    "errorBorderColor": {
+      "type": "string",
+      "required": false,
+      "description": "The border color when the input is invalid."
+    },
     "eventListeners": {
       "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { scroll?: boolean | undefined; resize?: boolean | undefined }",
-      "required": false
+      "defaultValue": true,
+      "required": false,
+      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
     },
-    "flip": { "type": "boolean", "required": false },
-    "focusBorderColor": { "type": "string", "required": false },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+    },
+    "focusBorderColor": {
+      "type": "string",
+      "required": false,
+      "description": "The border color when the input is focused."
+    },
     "gutter": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "8",
+      "required": false,
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
     },
-    "iconProps": { "type": "SelectIconProps", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isLazy": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "lazyBehavior": { "type": "LazyMode", "required": false },
-    "listProps": { "type": "Omit<SelectListProps, \"children\">", "required": false },
-    "matchWidth": { "type": "boolean", "required": false },
-    "modifiers": { "type": "Partial<Modifier<string, any>>[]", "required": false },
-    "name": { "type": "string", "required": false },
-    "offset": { "type": "[number, number]", "required": false },
-    "onChange": { "type": "(value: string) => void", "required": false },
-    "onClose": { "type": "() => void", "required": false },
-    "onOpen": { "type": "() => void", "required": false },
-    "openDelay": { "type": "number", "required": false },
-    "optionProps": { "type": "Omit<OptionProps, \"children\" | \"value\">", "required": false },
-    "options": { "type": "UIOption[]", "required": false },
-    "placeholderInOptions": { "type": "boolean", "required": false },
+    "iconProps": {
+      "type": "SelectIconProps",
+      "required": false,
+      "description": "Props for select icon element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isLazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "lazyBehavior": {
+      "type": "LazyMode",
+      "defaultValue": "'unmount'",
+      "required": false,
+      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    },
+    "listProps": {
+      "type": "Omit<SelectListProps, \"children\">",
+      "required": false,
+      "description": "Props for select list element."
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+    },
+    "modifiers": {
+      "type": "Partial<Modifier<string, any>>[]",
+      "required": false,
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The HTML `name` attribute used for forms."
+    },
+    "offset": {
+      "type": "[number, number]",
+      "required": false,
+      "description": "The main and cross-axis offset to displace popper element from its reference element."
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "The callback invoked when value state changes."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the popover closes."
+    },
+    "onOpen": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the popover opens."
+    },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
+    "optionProps": {
+      "type": "Omit<OptionProps, \"children\" | \"value\">",
+      "required": false,
+      "description": "Props for select option element."
+    },
+    "options": {
+      "type": "UIOption[]",
+      "required": false,
+      "description": "If provided, generate options based on data."
+    },
+    "placeholderInOptions": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, include placeholders in options."
+    },
     "placement": {
       "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
-      "required": false
+      "defaultValue": "'bottom'",
+      "required": false,
+      "description": "The placement of the popper relative to its reference."
     },
-    "preventOverflow": { "type": "boolean", "required": false },
-    "restoreFocus": { "type": "boolean", "required": false },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+    },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the Select."
     },
-    "strategy": { "type": "\"fixed\" | \"absolute\"", "required": false },
-    "trigger": { "type": "Trigger", "required": false },
-    "value": { "type": "string", "required": false },
+    "strategy": {
+      "type": "\"fixed\" | \"absolute\"",
+      "defaultValue": "'absolute'",
+      "required": false,
+      "description": "The CSS positioning strategy to use."
+    },
+    "trigger": {
+      "type": "\"click\" | \"hover\" | \"never\"",
+      "defaultValue": "'click'",
+      "required": false,
+      "description": "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
+    },
+    "value": { "type": "string", "required": false, "description": "The value of the select." },
     "variant": {
       "defaultValue": "outline",
       "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
@@ -75,73 +234,272 @@
   "MultiSelect": {
     "boundary": {
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
-      "required": false
+      "defaultValue": "'clippingParents'",
+      "required": false,
+      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
-    "clearIconProps": { "type": "SelectIconProps", "required": false },
-    "closeDelay": { "type": "number", "required": false },
-    "closeOnBlur": { "type": "boolean", "required": false },
-    "closeOnEsc": { "type": "boolean", "required": false },
-    "closeOnSelect": { "type": "boolean", "required": false },
+    "clearIconProps": {
+      "type": "SelectIconProps",
+      "required": false,
+      "description": "Props for select clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
+    },
+    "closeOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popover will close when you hit the `Esc` key."
+    },
+    "closeOnSelect": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the list element will be closed when value is selected."
+    },
     "component": {
       "type": "FC<{\n  value: string | number\n  displayValue: string\n  index: number\n  onRemove: MouseEventHandler<HTMLElement>\n}>",
-      "required": false
+      "required": false,
+      "description": "The custom display value to use."
     },
-    "containerProps": { "type": "Omit<HTMLUIProps<\"div\">, \"children\">", "required": false },
-    "defaultIsOpen": { "type": "boolean", "required": false },
-    "defaultValue": { "type": "string[]", "required": false },
+    "containerProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for select container element."
+    },
+    "defaultIsOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be initially opened."
+    },
+    "defaultValue": {
+      "type": "string[]",
+      "required": false,
+      "description": "The initial value of the select."
+    },
     "duration": {
       "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
-      "required": false
+      "required": false,
+      "description": "The animation duration."
     },
-    "errorBorderColor": { "type": "string", "required": false },
+    "errorBorderColor": {
+      "type": "string",
+      "required": false,
+      "description": "The border color when the input is invalid."
+    },
     "eventListeners": {
       "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { scroll?: boolean | undefined; resize?: boolean | undefined }",
-      "required": false
+      "defaultValue": true,
+      "required": false,
+      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
     },
-    "flip": { "type": "boolean", "required": false },
-    "focusBorderColor": { "type": "string", "required": false },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+    },
+    "focusBorderColor": {
+      "type": "string",
+      "required": false,
+      "description": "The border color when the input is focused."
+    },
     "gutter": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "8",
+      "required": false,
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
     },
-    "iconProps": { "type": "SelectIconProps", "required": false },
-    "isClearable": { "type": "boolean", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isLazy": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "lazyBehavior": { "type": "LazyMode", "required": false },
-    "listProps": { "type": "Omit<SelectListProps, \"children\">", "required": false },
-    "matchWidth": { "type": "boolean", "required": false },
-    "maxSelectedValues": { "type": "number", "required": false },
-    "modifiers": { "type": "Partial<Modifier<string, any>>[]", "required": false },
-    "name": { "type": "string", "required": false },
-    "offset": { "type": "[number, number]", "required": false },
-    "omitSelectedValues": { "type": "boolean", "required": false },
-    "onChange": { "type": "(value: string[]) => void", "required": false },
-    "onClose": { "type": "() => void", "required": false },
-    "onOpen": { "type": "() => void", "required": false },
-    "openDelay": { "type": "number", "required": false },
-    "optionProps": { "type": "Omit<OptionProps, \"children\" | \"value\">", "required": false },
-    "options": { "type": "UIOption[]", "required": false },
+    "iconProps": {
+      "type": "SelectIconProps",
+      "required": false,
+      "description": "Props for select icon element."
+    },
+    "isClearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the select clear icon."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isLazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "lazyBehavior": {
+      "type": "LazyMode",
+      "defaultValue": "'unmount'",
+      "required": false,
+      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    },
+    "listProps": {
+      "type": "Omit<SelectListProps, \"children\">",
+      "required": false,
+      "description": "Props for select list element."
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+    },
+    "maxSelectedValues": {
+      "type": "number",
+      "required": false,
+      "description": "The maximum selectable value."
+    },
+    "modifiers": {
+      "type": "Partial<Modifier<string, any>>[]",
+      "required": false,
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The HTML `name` attribute used for forms."
+    },
+    "offset": {
+      "type": "[number, number]",
+      "required": false,
+      "description": "The main and cross-axis offset to displace popper element from its reference element."
+    },
+    "omitSelectedValues": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the selected item(s) will be excluded from the list."
+    },
+    "onChange": {
+      "type": "(value: string[]) => void",
+      "required": false,
+      "description": "The callback invoked when value state changes."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the popover closes."
+    },
+    "onOpen": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the popover opens."
+    },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
+    "optionProps": {
+      "type": "Omit<OptionProps, \"children\" | \"value\">",
+      "required": false,
+      "description": "Props for select option element."
+    },
+    "options": {
+      "type": "UIOption[]",
+      "required": false,
+      "description": "If provided, generate options based on data."
+    },
     "placement": {
       "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
-      "required": false
+      "defaultValue": "'bottom'",
+      "required": false,
+      "description": "The placement of the popper relative to its reference."
     },
-    "preventOverflow": { "type": "boolean", "required": false },
-    "restoreFocus": { "type": "boolean", "required": false },
-    "separator": { "type": "string", "required": false },
-    "strategy": { "type": "\"fixed\" | \"absolute\"", "required": false },
-    "trigger": { "type": "Trigger", "required": false },
-    "value": { "type": "string[]", "required": false }
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+    },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
+    },
+    "separator": {
+      "type": "string",
+      "defaultValue": "','",
+      "required": false,
+      "description": "The visual separator between each value."
+    },
+    "strategy": {
+      "type": "\"fixed\" | \"absolute\"",
+      "defaultValue": "'absolute'",
+      "required": false,
+      "description": "The CSS positioning strategy to use."
+    },
+    "trigger": {
+      "type": "\"click\" | \"hover\" | \"never\"",
+      "defaultValue": "'click'",
+      "required": false,
+      "description": "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
+    },
+    "value": { "type": "string[]", "required": false, "description": "The value of the select." }
   },
-  "OptionGroup": { "label": { "type": "string", "required": true } },
+  "OptionGroup": {
+    "label": { "type": "string", "required": true, "description": "The label of the option group." }
+  },
   "Option": {
-    "closeOnSelect": { "type": "boolean", "required": false },
+    "closeOnSelect": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the list element will be closed when selected."
+    },
     "icon": { "type": "ReactElement<any, string | JSXElementConstructor<any>>", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isFocusable": { "type": "boolean", "required": false },
-    "value": { "type": "string", "required": false }
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the select option will be disabled."
+    },
+    "isFocusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the select option will be focusable."
+    },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the select option."
+    }
   }
 }

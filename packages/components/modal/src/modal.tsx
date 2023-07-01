@@ -25,21 +25,6 @@ import { RemoveScroll } from 'react-remove-scroll'
 import { DrawerContent } from './drawer'
 import { DrawerOverlay, DialogOverlay, DialogCloseButton, ModalOverlay, ModalCloseButton } from './'
 
-type Placement =
-  | 'center'
-  | 'top'
-  | 'right'
-  | 'bottom'
-  | 'left'
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-
-type ScrollBehavior = 'inside' | 'outside'
-
-type Animation = 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
-
 type ModalContext = ModalOptions & {
   styles: Record<string, CSSUIObject>
 }
@@ -55,21 +40,100 @@ type ModalOptions = Pick<
   FocusLockProps,
   'autoFocus' | 'initialFocusRef' | 'finalFocusRef' | 'restoreFocus' | 'lockFocusAcrossFrames'
 > & {
+  /**
+   * If `true`, the open will be opened.
+   */
   isOpen: boolean
+  /**
+   * Callback invoked to close the modal.
+   */
   onClose?: () => void
+  /**
+   * Callback fired when the overlay is clicked.
+   */
   onOverlayClick?: () => void
+  /**
+   * Callback fired when the escape key is pressed and focus is within modal.
+   */
   onEsc?(): void
+  /**
+   * Callback function to run side effects after the modal has closed.
+   */
   onCloseComplete?: () => void
-  placement?: Token<Placement>
+  /**
+   * The placement of the modal.
+   *
+   * @default 'center'
+   */
+  placement?: Token<
+    | 'center'
+    | 'top'
+    | 'right'
+    | 'bottom'
+    | 'left'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+  >
+  /**
+   * The CSS `padding` property.
+   */
   outside?: CSSUIProps['p']
+  /**
+   * If `true`, display the modal close button.
+   *
+   * @default true
+   */
   withCloseButton?: boolean
+  /**
+   * If `true`, display the modal overlay.
+   *
+   * @default true
+   */
   withOverlay?: boolean
+  /**
+   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
+   *
+   * @default false.
+   */
   allowPinchZoom?: boolean
-  scrollBehavior?: ScrollBehavior
+  /**
+   * Where scroll behavior should originate.
+   *
+   * - `inside`: scroll only occurs within the `ModalBody`.
+   * - `outside`: the entire `ModalContent` will scroll within the viewport.
+   *
+   * @default 'inside'
+   */
+  scrollBehavior?: 'inside' | 'outside'
+  /**
+   * If `true`, scrolling will be disabled on the `body` when the modal opens.
+   *
+   * @default true
+   */
   blockScrollOnMount?: boolean
+  /**
+   * If `true`, the modal will close when the overlay is clicked.
+   *
+   * @default true
+   */
   closeOnOverlay?: boolean
+  /**
+   * If `true`, the modal will close when the `Esc` key is pressed.
+   *
+   * @default true
+   */
   closeOnEsc?: boolean
-  animation?: Animation
+  /**
+   * The animation of the tooltip.
+   *
+   * @default 'scale'
+   */
+  animation?: 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+  /**
+   * The animation duration.
+   */
   duration?: MotionTransitionProperties['duration']
 }
 
@@ -207,7 +271,7 @@ type ModalContentProps = Omit<HTMLUIProps<'section'>, 'scrollBehavior' | 'animat
   Omit<HTMLMotionProps<'section'>, 'color' | 'transition'>
 
 const getModalContentProps = (
-  animation: Animation = 'scale',
+  animation: ModalProps['animation'] = 'scale',
   duration?: MotionTransitionProperties['duration'],
 ) => {
   switch (animation) {

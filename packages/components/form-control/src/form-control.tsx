@@ -20,16 +20,50 @@ import {
 import { useState, useId, ReactNode, FocusEventHandler } from 'react'
 
 export type FormControlOptions = {
+  /**
+   * If `true`, the form control will be required.
+   *
+   * @default false
+   */
   isRequired?: boolean
+  /**
+   * If `true`, the form control will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * If `true`, the form control will be invalid.
+   *
+   * @default false
+   */
   isInvalid?: boolean
+  /**
+   * If `true`, the form control will be readonly.
+   *
+   * @default false
+   */
   isReadOnly?: boolean
 }
 
 type FormControlAdditionalOptions = LabelOptions & {
+  /**
+   * If `true`, switch between helper message and error message using isInvalid.
+   *
+   * @default true
+   */
   isReplace?: boolean
+  /**
+   * The form control label to use.
+   */
   label?: ReactNode
+  /**
+   * The form control helper message to use.
+   */
   helperMessage?: ReactNode
+  /**
+   * The form control error message to use.
+   */
   errorMessage?: ReactNode
 }
 

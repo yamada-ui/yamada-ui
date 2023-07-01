@@ -56,19 +56,72 @@ const { DescendantsContextProvider, useDescendants, useDescendant } =
   createDescendant<HTMLInputElement>()
 
 type PinInputOptions = {
+  /**
+   * The top-level id string that will be applied to the input fields.
+   * The index of the input will be appended to this top-level id.
+   */
   id?: string
+  /**
+   * The type of values the pin-input should allow.
+   *
+   * @default 'number'
+   */
   type?: 'alphanumeric' | 'number'
+  /**
+   * The placeholder for the pin input.
+   *
+   * @default '○'
+   */
   placeholder?: string
+  /**
+   * The value of the pin input.
+   */
   value?: string
+  /**
+   * The initial value of the pin input.
+   */
   defaultValue?: string
+  /**
+   * If `true`, the pin input receives focus on mount.
+   *
+   * @default false
+   */
   autoFocus?: boolean
+  /**
+   * If `true`, focus will move automatically to the next input once filled.
+   *
+   * @default true
+   */
   manageFocus?: boolean
+  /**
+   * If `true`, the pin input component signals to its fields that they should.
+   */
   otp?: boolean
+  /**
+   * If `true`, the input's value will be masked just like `type=password`.
+   */
   mask?: boolean
+  /**
+   * Function called on input change.
+   */
   onChange?: (value: string) => void
+  /**
+   * Function called when all inputs have valid values.
+   */
   onComplete?: (value: string) => void
+  /**
+   * The number of inputs to display.
+   *
+   * @default 4
+   */
   fileds?: number
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
 }
 

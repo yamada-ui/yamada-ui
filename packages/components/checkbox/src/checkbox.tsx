@@ -49,15 +49,51 @@ import {
 import { useCheckboxGroupContext } from './checkbox-group'
 
 export type UseCheckboxProps<Y extends string | number = string> = FormControlOptions & {
+  /**
+   * id assigned to input.
+   */
   id?: string
+  /**
+   * The HTML `name` attribute used for forms.
+   */
   name?: string
+  /**
+   * The value to be used in the checkbox input.
+   */
   value?: Y
+  /**
+   * If `true`, the checkbox will be initially checked.
+   *
+   * @default false
+   */
   defaultChecked?: boolean
+  /**
+   * If `true`, the checkbox will be checked.
+   *
+   * @default false
+   */
   isChecked?: boolean
+  /**
+   * If `true`, the checkbox will be indeterminate.
+   *
+   * @default false
+   */
   isIndeterminate?: boolean
+  /**
+   * The callback invoked when the checked state changes.
+   */
   onChange?: ChangeEventHandler<HTMLInputElement>
+  /**
+   * The callback invoked when the checkbox is focused.
+   */
   onFocus?: FocusEventHandler<HTMLInputElement>
+  /**
+   * The callback invoked when the checkbox is blurred.
+   */
   onBlur?: FocusEventHandler<HTMLInputElement>
+  /**
+   * The tab-index property of the underlying input element.
+   */
   tabIndex?: number
 }
 
@@ -270,8 +306,17 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
 export type UseCheckboxReturn = ReturnType<typeof useCheckbox>
 
 type CheckboxOptions = {
+  /**
+   * Props for icon component.
+   */
   iconProps?: Omit<HTMLUIProps<'span'>, 'children'> & { children: ReactElement }
+  /**
+   * Props for input element.
+   */
   inputProps?: InputHTMLAttributes<HTMLInputElement>
+  /**
+   * Props for label element.
+   */
   labelProps?: HTMLUIProps<'span'>
 }
 
@@ -405,7 +450,17 @@ Checkbox.displayName = 'Checkbox'
 export type CheckboxIconProps = HTMLUIProps<'svg'> &
   SVGMotionProps<SVGSVGElement> &
   FormControlOptions & {
+    /**
+     * If `true`, the icon will be indeterminate.
+     *
+     * @default false
+     */
     isIndeterminate?: boolean
+    /**
+     * If `true`, the icon will be checked.
+     *
+     * @default false
+     */
     isChecked?: boolean
   }
 

@@ -17,9 +17,25 @@ const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
 export type UseCheckboxGroupProps<Y extends string | number = string> = {
+  /**
+   * The value of the checkbox group.
+   */
   value?: Y[]
+  /**
+   * The initial value of the checkbox group.
+   */
   defaultValue?: Y[]
+  /**
+   * The callback fired when any children checkbox is checked or unchecked.
+   */
   onChange?: (value: Y[]) => void
+  /**
+   * If `true`, input elements will receive `checked` attribute instead of `isChecked`.
+   *
+   * This assumes, you're using native radio inputs.
+   *
+   * @default false
+   */
   isNative?: boolean
 }
 

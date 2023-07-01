@@ -16,11 +16,29 @@ import { DatePickerProvider } from './use-date-picker'
 import { useMonthPicker, UseMonthPickerProps } from './use-month-picker'
 
 type MonthPickerOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: string
+  /**
+   * Props for month picker container element.
+   */
   containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  /**
+   * Props for month picker input element.
+   */
   inputProps?: DatePickerFieldProps['inputProps']
+  /**
+   * Props for month picker icon element.
+   */
   iconProps?: DatePickerIconProps
+  /**
+   * Props for month picker clear icon element.
+   */
   clearIconProps?: DatePickerIconProps
 }
 

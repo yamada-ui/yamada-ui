@@ -3,6 +3,11 @@ import { cx } from '@yamada-ui/utils'
 import { useTableStyles } from './native-table'
 
 type TdOptions = {
+  /**
+   * Aligns the cell content to the right.
+   *
+   * @default false
+   */
   isNumeric?: boolean
 }
 

@@ -34,7 +34,7 @@ import {
   useState,
 } from 'react'
 import { CalendarBaseProps } from './calendar'
-import { UseCalendarProps, isAfterMaxDate, isBeforeMinDate, CalendarType } from './use-calendar'
+import { UseCalendarProps, isAfterMaxDate, isBeforeMinDate } from './use-calendar'
 
 type CalendarProps = Pick<
   UseCalendarProps<Date | null>,
@@ -54,8 +54,6 @@ type CalendarProps = Pick<
   | 'withLabel'
 >
 
-export type MonthPickerType = Exclude<CalendarType, 'date'>
-
 type CalendarThemeProps = ThemeProps<'Calendar'>
 
 type UseMonthPickerBaseProps = Omit<
@@ -71,15 +69,59 @@ type UseMonthPickerBaseProps = Omit<
 > &
   FormControlOptions &
   CalendarProps & {
-    type?: MonthPickerType
-    defaultType?: MonthPickerType
-    onChangeType?: (type: MonthPickerType) => void
+    /**
+     * The type of the month picker.
+     */
+    type?: 'month' | 'year'
+    /**
+     * The initial type of the month picker.
+     *
+     * @default 'month'
+     */
+    defaultType?: 'month' | 'year'
+    /**
+     * The callback invoked when type state changes.
+     */
+    onChangeType?: (type: 'month' | 'year') => void
+    /**
+     * The pattern used to check the <input> element's.
+     *
+     * @default '/[^0-9\-\/]/g'
+     */
     pattern?: RegExp
+    /**
+     * Function that converts the input value to Date type.
+     */
     parseDate?: (value: string) => Date | null
+    /**
+     * The format used for conversion.
+     * Check the docs to see the format of possible modifiers you can pass.
+     *
+     * @see Doc https://day.js.org/docs/en/display/format#list-of-localized-formats
+     * @default 'YYYY/MM'
+     */
     inputFormat?: string
+    /**
+     * If `true`, display the month picker clear icon.
+     *
+     * @default true
+     */
     isClearable?: boolean
+    /**
+     * If `true`, the list element will be closed when value is selected.
+     *
+     * @default true
+     */
     closeOnSelect?: boolean
+    /**
+     * If `true`, allows input.
+     *
+     * @default true
+     */
     allowInput?: boolean
+    /**
+     * Props the calendar component.
+     */
     calendarProps?: CalendarBaseProps
   }
 
@@ -261,7 +303,7 @@ export const useMonthPicker = ({
   )
 
   const onChangeType = useCallback(
-    (type: CalendarType, year?: number, month?: number) => {
+    (type: 'month' | 'year' | 'date', year?: number, month?: number) => {
       if (type !== 'date') {
         setType(type)
       } else {
@@ -391,7 +433,7 @@ export const useMonthPicker = ({
     (
       props?: CalendarProps,
     ): CalendarProps & {
-      type: MonthPickerType
+      type: 'month' | 'year'
       onChangeType: UseCalendarProps['onChangeType']
       selectMonthWith: UseCalendarProps['selectMonthWith']
     } => ({

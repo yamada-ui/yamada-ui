@@ -12,12 +12,42 @@ export const [PaginationProvider, usePaginationContext] = createContext<Paginati
 })
 
 export type UsePaginationProps = {
+  /**
+   * The page of the pagination.
+   * Should be less than `total` and greater than `1`.
+   */
   page?: number
+  /**
+   * The initial page of the pagination.
+   * Should be less than `total` and greater than `1`.
+   *
+   * @default 1
+   */
   defaultPage?: number
+  /**
+   * The total number of pages in pagination.
+   */
   total: number
+  /** Number of siblings displayed on the left/right side of selected page.
+   *
+   * @default 1
+   */
   siblings?: Token<number>
+  /**
+   * Number of elements visible on the left/right edges.
+   *
+   * @default 1
+   */
   boundaries?: Token<number>
+  /**
+   * If `true`, the pagination all item will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * The callback invoked when the page changes.
+   */
   onChange?: (page: number) => void
 }
 

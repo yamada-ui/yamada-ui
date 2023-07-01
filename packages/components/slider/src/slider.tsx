@@ -42,18 +42,68 @@ import {
 import { CSSProperties, KeyboardEvent, useCallback, useRef, useState } from 'react'
 
 export type UseSliderProps = FormControlOptions & {
+  /**
+   * The base `id` to use for the slider.
+   */
   id?: string
+  /**
+   * The name attribute of the hidden `input` field.
+   * This is particularly useful in forms.
+   */
   name?: string
+  /**
+   * The minimum allowed value of the slider. Cannot be greater than max.
+   *
+   * @default 0
+   */
   min?: number
+  /**
+   * The maximum allowed value of the slider. Cannot be less than min.
+   *
+   * @default 100
+   */
   max?: number
+  /**
+   * The step in which increments or decrements have to be made.
+   *
+   * @default 1
+   */
   step?: number
+  /**
+   * The value of the slider.
+   */
   value?: number
+  /**
+   * The initial value of the slider.
+   */
   defaultValue?: number
+  /**
+   * The orientation of the slider.
+   *
+   * @default 'horizontal'
+   */
   orientation?: 'horizontal' | 'vertical'
+  /**
+   * If `true`, the value will be incremented or decremented in reverse.
+   */
   isReversed?: boolean
+  /**
+   * If `false`, the slider handle will not capture focus when value changes.
+   *
+   * @default true
+   */
   focusThumbOnChange?: boolean
+  /**
+   * Function called when the user starts selecting a new value.
+   */
   onChangeStart?: (value: number) => void
+  /**
+   * Function called when the user is done selecting a new value.
+   */
   onChangeEnd?: (value: number) => void
+  /**
+   * Function called whenever the slider value changes.
+   */
   onChange?: (value: number) => void
 }
 

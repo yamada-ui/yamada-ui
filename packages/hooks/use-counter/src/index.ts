@@ -2,13 +2,52 @@ import { clampNumber, countDecimal, toPrecision, useCallbackRef } from '@yamada-
 import { useCallback, useState } from 'react'
 
 export interface UseCounterProps {
+  /**
+   * The value of the counter.
+   * Should be less than `max` and greater than `min`.
+   */
   value?: string | number
+  /**
+   * The initial value of the counter.
+   * Should be less than `max` and greater than `min`.
+   */
   defaultValue?: string | number
+  /**
+   * The step used to increment or decrement the value.
+   *
+   * @default 1
+   */
   step?: number
+  /**
+   * The minimum value of the counter
+   *
+   * @default Number.MIN_SAFE_INTEGER
+   */
   min?: number
+  /**
+   * The maximum value of the counter
+   *
+   * @default Number.MAX_SAFE_INTEGER
+   */
   max?: number
+  /**
+   * The number of decimal points used to round the value.
+   */
   precision?: number
+  /**
+   * This controls the value update behavior in general.
+   *
+   * - If `true` and you use the stepper or up/down arrow keys,
+   * the value will not exceed the `max` or go lower than `min`.
+   *
+   * - If `false`, the value will be allowed to go out of range.
+   *
+   * @default true
+   */
   keepWithinRange?: boolean
+  /**
+   * The callback fired when the value changes.
+   */
   onChange?: (valueAsString: string, valueAsNumber: number) => void
 }
 

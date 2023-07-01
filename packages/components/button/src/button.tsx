@@ -9,18 +9,55 @@ import {
 } from '@yamada-ui/core'
 import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/loading'
 import { cx, useMergeRefs, merge, dataAttr } from '@yamada-ui/utils'
-import { ElementType, FC, useCallback, useMemo, useState } from 'react'
+import { ElementType, FC, ReactElement, useCallback, useMemo, useState } from 'react'
 import { useButtonGroup } from './button-group'
 
 type ButtonOptions = {
+  /**
+   * The type of button. Accepts `button`, `reset`, or `submit`.
+   *
+   * @default 'button'
+   */
   type?: 'button' | 'reset' | 'submit'
+  /**
+   * If `true`, the loading state of the button is represented.
+   *
+   * @default false
+   */
   isLoading?: boolean
+  /**
+   * If `true`, the button is represented as active.
+   *
+   * @default false
+   */
   isActive?: boolean
+  /**
+   * If `true`, the button is disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
-  leftIcon?: React.ReactElement
-  rightIcon?: React.ReactElement
-  loadingIcon?: React.ReactElement | LoadingProps['variant']
+  /**
+   * The icon to display at the left side of the button.
+   */
+  leftIcon?: ReactElement
+  /**
+   * The icon to display at the right side of the button.
+   */
+  rightIcon?: ReactElement
+  /**
+   * The icon to display when the button is loading.
+   */
+  loadingIcon?: ReactElement | LoadingProps['variant']
+  /**
+   * The text to display when the button is loading.
+   */
   loadingText?: string
+  /**
+   * The placement of the loading indicator. Accepts `start` or `end`.
+   *
+   * @default 'start'
+   */
   loadingPlacement?: 'start' | 'end'
 }
 

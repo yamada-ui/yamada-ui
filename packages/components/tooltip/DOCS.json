@@ -1,34 +1,104 @@
 {
   "Tooltip": {
-    "closeDelay": { "type": "number", "required": false },
-    "closeOnClick": { "type": "boolean", "required": false },
-    "closeOnEsc": { "type": "boolean", "required": false },
-    "closeOnMouseDown": { "type": "boolean", "required": false },
-    "closeOnPointerDown": { "type": "boolean", "required": false },
-    "closeOnScroll": { "type": "boolean", "required": false },
-    "defaultIsOpen": { "type": "boolean", "required": false },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The delay before hiding the tooltip."
+    },
+    "closeOnClick": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the tooltip will hide on click."
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the tooltip will hide on pressing Esc key."
+    },
+    "closeOnMouseDown": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the tooltip will hide while the mouse is down."
+    },
+    "closeOnPointerDown": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the tooltip will hide while the pointer is down."
+    },
+    "closeOnScroll": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the tooltip will hide on scroll."
+    },
+    "defaultIsOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the tooltip will be initially shown."
+    },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
-      "required": false
+      "required": false,
+      "description": "The animation duration."
     },
     "gutter": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "8",
+      "required": false,
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
     },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isOpen": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the tooltip will be disabled."
+    },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the tooltip will be shown."
+    },
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The label of the tooltip."
     },
-    "modifiers": { "type": "Partial<Modifier<string, any>>[]", "required": false },
-    "offset": { "type": "[number, number]", "required": false },
-    "onClose": { "type": "() => void", "required": false },
-    "onOpen": { "type": "() => void", "required": false },
-    "openDelay": { "type": "number", "required": false },
+    "modifiers": {
+      "type": "Partial<Modifier<string, any>>[]",
+      "required": false,
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+    },
+    "offset": {
+      "type": "[number, number]",
+      "required": false,
+      "description": "The main and cross-axis offset to displace popper element from its reference element."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback to run when the tooltip hides."
+    },
+    "onOpen": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback to run when the tooltip shows."
+    },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The delay before showing the tooltip."
+    },
     "placement": {
       "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
-      "required": false
+      "defaultValue": "'bottom'",
+      "required": false,
+      "description": "The placement of the popper relative to its reference."
     }
   }
 }

@@ -3,10 +3,6 @@ import { createDescendant } from '@yamada-ui/use-descendant'
 import { createContext, PropGetter, mergeRefs } from '@yamada-ui/utils'
 import { useCallback } from 'react'
 
-export type Orientation = 'horizontal' | 'vertical'
-
-export type StepStatusType = 'complete' | 'active' | 'incomplete'
-
 type StepperContext = Omit<UseStepperReturn, 'descendants' | 'getContainerProps'> & {
   styles: Record<string, CSSUIObject>
 }
@@ -23,8 +19,21 @@ export const [StepperProvider, useStepperContext] = createContext<StepperContext
 })
 
 export type UseStepperProps = HTMLUIProps<'div'> & {
+  /**
+   * The active step index.
+   */
   index: number
-  orientation?: Orientation
+  /**
+   * The orientation of the stepper.
+   *
+   * @default 'horizontal'
+   */
+  orientation?: 'horizontal' | 'vertical'
+  /**
+   * Whether to show or not the last separator while in vertical orientation.
+   *
+   * @default false
+   */
   showLastSeparator?: boolean
 }
 
@@ -37,7 +46,7 @@ export const useStepper = ({
   const descendants = useStepperDescendants()
 
   const getStepStatus = useCallback(
-    (step: number): StepStatusType => {
+    (step: number): 'complete' | 'active' | 'incomplete' => {
       if (step < index) return 'complete'
       if (step > index) return 'incomplete'
 

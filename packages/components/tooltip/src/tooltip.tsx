@@ -28,25 +28,86 @@ import {
   getOwnerDocument,
   omitObject,
 } from '@yamada-ui/utils'
-import { Children, cloneElement, useCallback, useEffect, useRef } from 'react'
-
-type Animation = 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+import { Children, ReactNode, cloneElement, useCallback, useEffect, useRef } from 'react'
 
 type TooltipOptions = {
-  label?: React.ReactNode
+  /**
+   * The label of the tooltip.
+   */
+  label?: ReactNode
+  /**
+   * If `true`, the tooltip will be shown.
+   */
   isOpen?: boolean
+  /**
+   * If `true`, the tooltip will be initially shown.
+   */
   defaultIsOpen?: boolean
+  /**
+   * Callback to run when the tooltip shows.
+   */
   onOpen?(): void
+  /**
+   * Callback to run when the tooltip hides.
+   */
   onClose?(): void
+  /**
+   * If `true`, the tooltip will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * The delay before showing the tooltip.
+   *
+   * @default 0
+   */
   openDelay?: number
+  /**
+   * The delay before hiding the tooltip.
+   *
+   * @default 0
+   */
   closeDelay?: number
+  /**
+   * If `true`, the tooltip will hide on click.
+   *
+   * @default true
+   */
   closeOnClick?: boolean
+  /**
+   * If `true`, the tooltip will hide on scroll.
+   *
+   * @default false
+   */
   closeOnScroll?: boolean
+  /**
+   * If `true`, the tooltip will hide while the mouse is down.
+   *
+   * @default false
+   */
   closeOnMouseDown?: boolean
+  /**
+   * If `true`, the tooltip will hide while the pointer is down.
+   *
+   * @default false
+   */
   closeOnPointerDown?: boolean
+  /**
+   * If `true`, the tooltip will hide on pressing Esc key.
+   *
+   * @default true
+   */
   closeOnEsc?: boolean
-  animation?: Animation
+  /**
+   * The animation of the tooltip.
+   *
+   * @default 'scale'
+   */
+  animation?: 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+  /**
+   * The animation duration.
+   */
   duration?: MotionTransitionProperties['duration']
 }
 

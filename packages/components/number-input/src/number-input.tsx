@@ -71,16 +71,64 @@ type ValidityState = 'rangeUnderflow' | 'rangeOverflow'
 
 export type UseNumberInputProps = UseFormControlProps<HTMLInputElement> &
   UseCounterProps & {
+    /**
+     * The HTML `name` attribute used for forms.
+     */
     name?: string
+    /**
+     * Hints at the type of data that might be entered by the user.
+     * It also determines the type of keyboard shown to the user on mobile devices.
+     *
+     * @default 'decimal'
+     */
     inputMode?: InputHTMLAttributes<any>['inputMode']
+    /**
+     * The pattern used to check the <input> element's value against on form submission.
+     *
+     * @default '[0-9]*(.[0-9]+)?'
+     */
     pattern?: InputHTMLAttributes<any>['pattern']
+    /**
+     * If `true`, the input will be focused as you increment or decrement the value with the stepper.
+     *
+     * @default true
+     */
     focusInputOnChange?: boolean
+    /**
+     * This controls the value update when you blur out of the input.
+     * - If `true` and the value is greater than `max`, the value will be reset to `max`.
+     * - Else, the value remains the same.
+     *
+     * @default true
+     */
     clampValueOnBlur?: boolean
+    /**
+     * If `true`, the input's value will change based on mouse wheel.
+     */
     allowMouseWheel?: boolean
+    /**
+     * The callback invoked when invalid number is entered.
+     */
     onInvalid?: (message: ValidityState, value: string, valueAsNumber: number) => void
+    /**
+     * This is used to format the value so that screen readers
+     * can speak out a more human-friendly value.
+     *
+     * It is used to set the `aria-valuetext` property of the input.
+     */
     getAriaValueText?: (value: string | number) => string
+    /**
+     * Whether the pressed key should be allowed in the input.
+     * The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/.
+     */
     isValidCharacter?: (value: string) => boolean
+    /**
+     * If using a custom display format, this converts the custom format to a format `parseFloat` understands.
+     */
     parse?: (value: string) => string
+    /**
+     * If using a custom display format, this converts the default format to the custom format.
+     */
     format?: (value: string | number) => string | number
   }
 
@@ -492,12 +540,33 @@ const useAttributeObserver = (
 }
 
 type NumberInputOptions = {
+  /**
+   * If `true`, display the addon for the number input.
+   */
   isStepper?: boolean
-  container?: HTMLUIProps<'div'>
-  addon?: HTMLUIProps<'div'>
-  increment?: NumberIncrementStepperProps
-  decrement?: NumberDecrementStepperProps
+  /**
+   * Props for container element.
+   */
+  containerProps?: HTMLUIProps<'div'>
+  /**
+   * Props for addon component.
+   */
+  addonProps?: HTMLUIProps<'div'>
+  /**
+   * Props for increment component.
+   */
+  incrementProps?: NumberIncrementStepperProps
+  /**
+   * Props for decrement component.
+   */
+  decrementProps?: NumberDecrementStepperProps
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
 }
 
@@ -526,10 +595,10 @@ export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) =>
   const {
     className,
     isStepper = true,
-    container,
-    addon,
-    increment,
-    decrement,
+    containerProps,
+    addonProps,
+    incrementProps,
+    decrementProps,
     onChange,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -548,13 +617,13 @@ export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) =>
     <NumberInputContextProvider
       value={{ getInputProps, getIncrementProps, getDecrementProps, styles }}
     >
-      <ui.div className={cx('ui-number-input', className)} __css={css} {...container}>
+      <ui.div className={cx('ui-number-input', className)} __css={css} {...containerProps}>
         <NumberInputField {...getInputProps(rest, ref)} />
 
         {isStepper ? (
-          <NumberInputAddon {...addon}>
-            <NumberIncrementStepper {...increment} />
-            <NumberDecrementStepper {...decrement} />
+          <NumberInputAddon {...addonProps}>
+            <NumberIncrementStepper {...incrementProps} />
+            <NumberDecrementStepper {...decrementProps} />
           </NumberInputAddon>
         ) : null}
       </ui.div>

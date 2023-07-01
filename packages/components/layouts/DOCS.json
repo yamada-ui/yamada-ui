@@ -3,123 +3,158 @@
   "Flex": {
     "align": {
       "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
-      "required": false
+      "required": false,
+      "description": "The CSS `align-items` property."
     },
     "basis": {
       "type": "number | \"content\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | ... 6 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-basis` property."
     },
     "direction": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-direction` property."
     },
     "grow": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexGrow\n  | ResponsiveObject<FlexGrow>\n  | ColorModeArray<FlexGrow>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-grow` property."
     },
     "justify": {
       "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
-      "required": false
+      "required": false,
+      "description": "The CSS `justify-content` property."
     },
     "shrink": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexShrink\n  | ResponsiveObject<FlexShrink>\n  | ColorModeArray<FlexShrink>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-shrink` property."
     },
     "wrap": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexWrap\n  | ResponsiveObject<FlexWrap>\n  | ColorModeArray<FlexWrap>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-wrap` property."
     }
   },
   "Center": {},
   "Grid": {
     "area": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridArea\n  | ResponsiveObject<GridArea>\n  | ColorModeArray<GridArea>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-area` property."
     },
     "autoColumns": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridAutoColumns<0 | (string & {})>\n  | ResponsiveObject<GridAutoColumns<0 | (string & {})>>\n  | ColorModeArray<GridAutoColumns<0 | (string & {})>>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-auto-columns` property."
     },
     "autoFlow": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridAutoFlow\n  | ResponsiveObject<GridAutoFlow>\n  | ColorModeArray<GridAutoFlow>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-auto-flow` property."
     },
     "autoRows": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridAutoRows<0 | (string & {})>\n  | ResponsiveObject<GridAutoRows<0 | (string & {})>>\n  | ColorModeArray<GridAutoRows<0 | (string & {})>>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-auto-rows` property."
     },
     "column": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridColumn\n  | ResponsiveObject<GridColumn>\n  | ColorModeArray<GridColumn>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-column` property."
     },
     "row": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridRow\n  | ResponsiveObject<GridRow>\n  | ColorModeArray<GridRow>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-row` property."
     },
     "templateAreas": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridTemplateAreas\n  | ResponsiveObject<GridTemplateAreas>\n  | ColorModeArray<GridTemplateAreas>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-template-areas` property."
     },
     "templateColumns": {
       "type": "GridTemplateColumns<0 | (string & {})> | ResponsiveObject<GridTemplateColumns<0 | (string & {})>> | ColorModeArray<GridTemplateColumns<...>>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-template-columns` property."
     },
     "templateRows": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridTemplateRows<0 | (string & {})>\n  | ResponsiveObject<GridTemplateRows<0 | (string & {})>>\n  | ColorModeArray<GridTemplateRows<0 | (string & {})>>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-template-rows` property."
     }
   },
   "GridItem": {
     "area": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridArea\n  | ResponsiveObject<GridArea>\n  | ColorModeArray<GridArea>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-area` property."
     },
     "colEnd": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridColumnEnd\n  | ResponsiveObject<GridColumnEnd>\n  | ColorModeArray<GridColumnEnd>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-column-end` property."
     },
     "colSpan": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "required": false,
+      "description": "The number of columns the grid item should `span`."
     },
     "colStart": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridColumnStart\n  | ResponsiveObject<GridColumnStart>\n  | ColorModeArray<GridColumnStart>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-column-start` property."
     },
     "rowEnd": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridRowEnd\n  | ResponsiveObject<GridRowEnd>\n  | ColorModeArray<GridRowEnd>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-row-end` property."
     },
     "rowSpan": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "required": false,
+      "description": "The number of rows the grid item should `span`."
     },
     "rowStart": {
       "type": "type ONLY_FOR_FORMAT =\n  | GridRowStart\n  | ResponsiveObject<GridRowStart>\n  | ColorModeArray<GridRowStart>",
-      "required": false
+      "required": false,
+      "description": "The CSS `grid-row-start` property."
     }
   },
-  "Container": { "centerContent": { "type": "boolean", "required": false } },
+  "Container": {
+    "centerContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, container will center its children regardless of their width."
+    }
+  },
   "Stack": {
     "align": {
       "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
-      "required": false
+      "required": false,
+      "description": "The CSS `align-items` property."
     },
     "direction": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-direction` property."
     },
     "divider": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false
+      "required": false,
+      "description": "If `true`, each stack item will show a divider."
     },
     "justify": {
       "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
-      "required": false
+      "required": false,
+      "description": "The CSS `justify-content` property."
     },
     "wrap": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexWrap\n  | ResponsiveObject<FlexWrap>\n  | ColorModeArray<FlexWrap>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-wrap` property."
     }
   },
   "Spacer": {},
@@ -129,7 +164,12 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "orientation": { "type": "\"horizontal\" | \"vertical\"", "required": false },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "required": false,
+      "description": "The orientation of the divider."
+    },
     "size": { "type": "string", "required": false, "description": "The size of the Divider." },
     "variant": {
       "defaultValue": "solid",
@@ -141,7 +181,9 @@
   "AspectRatio": {
     "ratio": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "'4 / 3'",
+      "required": false,
+      "description": "The aspect ratio of the Box."
     }
   }
 }

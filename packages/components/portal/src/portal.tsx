@@ -1,8 +1,22 @@
+import { ReactNode, RefObject } from 'react'
 import { ContainerPortal, DefaultPortal } from './'
 
 export type PortalProps = {
-  containerRef?: React.RefObject<HTMLElement | null>
-  children: React.ReactNode
+  /**
+   * The `ref` to the component where the portal will be attached to.
+   */
+  containerRef?: RefObject<HTMLElement | null>
+  children: ReactNode
+  /**
+   * If `true`, the portal will check if it is within a parent portal
+   * and append itself to the parent's portal node.
+   * This provides nesting for portals.
+   *
+   * If `false`, the portal will always append to `document.body`
+   * regardless of nesting. It is used to opt out of portal nesting.
+   *
+   * @default true
+   */
   appendToParentPortal?: boolean
 }
 

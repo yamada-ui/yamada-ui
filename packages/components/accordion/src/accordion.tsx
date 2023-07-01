@@ -24,8 +24,8 @@ type AccordionContext = Pick<
   AccordionOptions,
   'isMultiple' | 'isToggle' | 'icon' | 'iconHidden'
 > & {
-  index: ExpandedIndex
-  setIndex: Dispatch<SetStateAction<ExpandedIndex>>
+  index: number | number[]
+  setIndex: Dispatch<SetStateAction<number | number[]>>
   focusedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
   styles: Record<string, CSSUIObject>
@@ -38,16 +38,41 @@ const [AccordionProvider, useAccordionContext] = createContext<AccordionContext>
 
 export { useAccordionContext }
 
-type ExpandedIndex = number | number[]
-
 type AccordionOptions = {
-  index?: ExpandedIndex
-  defaultIndex?: ExpandedIndex
+  /**
+   * The index(es) of the accordion item to expand.
+   */
+  index?: number | number[]
+  /**
+   * The initial index(es) of the accordion item to expand.
+   */
+  defaultIndex?: number | number[]
+  /**
+   * If `true`, multiple accordion items can be expanded at once.
+   *
+   * @default false
+   */
   isMultiple?: boolean
+  /**
+   * If `true`, any expanded accordion item can be collapsed again.
+   *
+   * @default false
+   */
   isToggle?: boolean
+  /**
+   * If `true`, hide the accordion icon for all items.
+   *
+   * @default false
+   */
   iconHidden?: boolean
+  /**
+   * The accordion icon for all items to use.
+   */
   icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
-  onChange?: (index: ExpandedIndex) => void
+  /**
+   * The callback invoked when accordion items are expanded or collapsed.
+   */
+  onChange?: (index: number | number[]) => void
 }
 
 export type AccordionProps = Omit<HTMLUIProps<'div'>, 'onChange'> &

@@ -2,17 +2,21 @@
   "List": {
     "stylePosition": {
       "type": "type ONLY_FOR_FORMAT =\n  | ListStylePosition\n  | ResponsiveObject<ListStylePosition>\n  | ColorModeArray<ListStylePosition>",
-      "required": false
+      "required": false,
+      "description": "The CSS `list-style-position` property."
     },
     "styleType": {
       "type": "type ONLY_FOR_FORMAT =\n  | ListStyleType\n  | ResponsiveObject<ListStyleType>\n  | ColorModeArray<ListStyleType>",
-      "required": false
+      "defaultValue": "'none'",
+      "required": false,
+      "description": "The CSS `list-style-type` property."
     }
   },
   "ListIcon": {
     "size": {
       "type": "number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 16 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The CSS `font-size` property."
     }
   },
   "ListItem": {}

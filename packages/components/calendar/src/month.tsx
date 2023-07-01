@@ -13,7 +13,13 @@ import {
 } from './use-calendar'
 
 type MonthOptions = {
+  /**
+   * Props for the calendar header element.
+   */
   headerProps?: HTMLUIProps<'div'>
+  /**
+   * Props for the calendar month table element.
+   */
   tableProps?: HTMLUIProps<'table'> & {
     thead?: HTMLUIProps<'thead'>
     tbody?: HTMLUIProps<'tbody'>
@@ -21,7 +27,13 @@ type MonthOptions = {
     th?: HTMLUIProps<'th'>
     td?: HTMLUIProps<'td'>
   }
+  /**
+   * Props for the calendar weekday element.
+   */
   weekdayProps?: HTMLUIProps<'div'> & { component?: FC<WeekdayProps> }
+  /**
+   * Props for the calendar day button element.
+   */
   dayProps?: ButtonProps & { component?: FC<DayProps> }
 }
 

@@ -34,6 +34,11 @@ const [MenuProvider, useMenu] = createContext<MenuContext>({
 export { useMenu }
 
 type MenuOptions = {
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default true
+   */
   closeOnSelect?: boolean
 }
 

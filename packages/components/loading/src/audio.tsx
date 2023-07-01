@@ -2,6 +2,11 @@ import { forwardRef } from '@yamada-ui/core'
 import { Icon, IconProps } from '@yamada-ui/icon'
 
 export type AudioProps = IconProps & {
+  /**
+   * The CSS `dur` property.
+   *
+   * @default '1.4s'
+   */
   duration?: IconProps['dur']
 }
 

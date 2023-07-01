@@ -14,28 +14,104 @@ import {
   PropGetter,
   runIfFunc,
 } from '@yamada-ui/utils'
-import { FC, PropsWithChildren, useCallback, useEffect, useRef } from 'react'
-
-type Trigger = 'click' | 'hover' | 'never'
-type Animation = 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+import { FC, PropsWithChildren, RefObject, useCallback, useEffect, useRef } from 'react'
 
 type PopoverOptions = {
+  /**
+   * If `true`, the popover will be opened.
+   */
   isOpen?: boolean
+  /**
+   * If `true`, the popover will be initially opened.
+   */
   defaultIsOpen?: boolean
+  /**
+   * Callback fired when the popover opens.
+   */
   onOpen?: () => void
+  /**
+   * Callback fired when the popover closes.
+   */
   onClose?: () => void
-  initialFocusRef?: React.RefObject<{ focus(): void }>
+  /**
+   * The `ref` of the element that should receive focus when the popover opens.
+   */
+  initialFocusRef?: RefObject<{ focus(): void }>
+  /**
+   * If `true`, focus will be returned to the element that triggers the popover when it closes.
+   *
+   * @default true
+   */
   restoreFocus?: boolean
+  /**
+   * If `true`, focus will be transferred to the first interactive element when the popover opens.
+   *
+   * @default true
+   */
   autoFocus?: boolean
+  /**
+   * If `true`, the popover will close when you blur out it by clicking outside or tabbing out.
+   *
+   * @default true
+   */
   closeOnBlur?: boolean
+  /**
+   * If `true`, the popover will close when you hit the `Esc` key.
+   *
+   * @default true
+   */
   closeOnEsc?: boolean
+  /**
+   * If `true`, display the popover close button.
+   *
+   * @default true
+   */
   closeOnButton?: boolean
-  trigger?: Trigger
+  /**
+   * The interaction that triggers the popover.
+   *
+   * - `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.
+   * - `click`: means the popover will open on click or press `Enter` to `Space` on keyboard.
+   *
+   * @default 'click'
+   */
+  trigger?: 'click' | 'hover' | 'never'
+  /**
+   * The number of delay time to open.
+   *
+   * @default 200
+   */
   openDelay?: number
+  /**
+   * The number of delay time to close.
+   *
+   * @default 200
+   */
   closeDelay?: number
+  /**
+   * If `true`, the PopoverContent rendering will be deferred until the popover is open.
+   *
+   * @default false
+   */
   isLazy?: boolean
+  /**
+   * The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`
+   *
+   * - `unmount`: The popover's content is always unmounted when not open.
+   * - `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.
+   *
+   * @default 'unmount'
+   */
   lazyBehavior?: LazyMode
-  animation?: Animation
+  /**
+   * The animation of the popover.
+   *
+   * @default 'scale'
+   */
+  animation?: 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+  /**
+   * The animation duration.
+   */
   duration?: MotionTransitionProperties['duration']
 }
 

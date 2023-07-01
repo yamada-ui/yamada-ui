@@ -7,30 +7,83 @@
     },
     "errorBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the input is invalid."
     },
-    "fileds": { "type": "number", "required": false },
+    "fileds": {
+      "type": "number",
+      "defaultValue": "4",
+      "required": false,
+      "description": "The number of inputs to display."
+    },
     "focusBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the input is focused."
     },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "manageFocus": { "type": "boolean", "required": false },
-    "mask": { "type": "boolean", "required": false },
-    "onChange": { "type": "(value: string) => void", "required": false },
-    "onComplete": { "type": "(value: string) => void", "required": false },
-    "otp": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "manageFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, focus will move automatically to the next input once filled."
+    },
+    "mask": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the input's value will be masked just like `type=password`."
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called on input change."
+    },
+    "onComplete": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called when all inputs have valid values."
+    },
+    "otp": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the pin input component signals to its fields that they should."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the PinInput."
     },
-    "type": { "type": "\"number\" | \"alphanumeric\"", "required": false },
-    "value": { "type": "string", "required": false },
+    "type": {
+      "type": "\"number\" | \"alphanumeric\"",
+      "defaultValue": "'number'",
+      "required": false,
+      "description": "The type of values the pin-input should allow."
+    },
+    "value": { "type": "string", "required": false, "description": "The value of the pin input." },
     "variant": {
       "defaultValue": "outline",
       "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
@@ -39,9 +92,29 @@
     }
   },
   "PinInputField": {
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false }
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    }
   }
 }

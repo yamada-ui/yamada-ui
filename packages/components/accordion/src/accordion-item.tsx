@@ -13,7 +13,9 @@ import {
   PropGetter,
 } from '@yamada-ui/utils'
 import { KeyboardEvent, KeyboardEventHandler, ReactNode, useCallback } from 'react'
-import { AccordionLabel, AccordionPanel, useAccordionContext, useAccordionDescendant } from './'
+import { useAccordionContext, useAccordionDescendant } from './accordion'
+import { AccordionLabel } from './accordion-label'
+import { AccordionPanel } from './accordion-panel'
 
 type AccordionItemContext = Omit<AccordionItemOptions, 'children'> & {
   isOpen: boolean
@@ -29,8 +31,19 @@ const [AccordionItemProvider, useAccordionItemContext] = createContext<Accordion
 export { useAccordionItemContext }
 
 type AccordionItemOptions = {
+  /**
+   * If `true`, the accordion item will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * The accordion label to use.
+   */
   label?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  /**
+   * The accordion icon to use.
+   */
   icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
   children?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }

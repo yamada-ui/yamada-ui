@@ -16,8 +16,17 @@ const [CardProvider, useCard] = createContext<Record<string, CSSUIObject>>({
 })
 
 type CardOptions = {
+  /**
+   * The CSS `flex-direction` property.
+   */
   direction?: CSSUIProps['flexDirection']
+  /**
+   * The CSS `justify-content` property.
+   */
   justify?: CSSUIProps['justifyContent']
+  /**
+   * The CSS `align-items` property.
+   */
   align?: CSSUIProps['alignItems']
 }
 

@@ -17,8 +17,21 @@ const [ListProvider, useList] = createContext<Record<string, CSSUIObject>>({
 })
 
 type ListOptions = {
+  /**
+   * The CSS `list-style-type` property.
+   *
+   * @default 'none'
+   */
   styleType?: CSSUIProps['listStyleType']
+  /**
+   * The CSS `list-style-position` property.
+   */
   stylePosition?: CSSUIProps['listStylePosition']
+  /**
+   * The CSS `gap` property.
+   *
+   * @default 'sm'
+   */
   gap?: CSSUIProps['gap']
 }
 

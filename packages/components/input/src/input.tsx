@@ -12,8 +12,17 @@ import { useFormControlProps, FormControlOptions } from '@yamada-ui/form-control
 import { cx } from '@yamada-ui/utils'
 
 type InputOptions = {
+  /**
+   * The border color when the input is focused.
+   */
   focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The border color when the input is invalid.
+   */
   errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  /**
+   * The native HTML `size` attribute to be passed to the `input`
+   */
   htmlSize?: number
 }
 

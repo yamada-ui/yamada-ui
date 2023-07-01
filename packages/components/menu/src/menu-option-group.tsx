@@ -6,9 +6,23 @@ import { MenuGroup } from './menu-group'
 import { MenuOptionItem } from './menu-item'
 
 type MenuOptionGroupOptions<Y extends string | string[] = string> = {
+  /**
+   * The value of the menu item group.
+   */
   value?: Y
+  /**
+   * The initial value of the menu item group.
+   */
   defaultValue?: Y
+  /**
+   * The type of the menu option group.
+   *
+   * @default 'checkbox'
+   */
   type?: 'radio' | 'checkbox'
+  /**
+   * The callback fired when any children checkbox is checked or unchecked.
+   */
   onChange?: (value: Y) => void
 }
 

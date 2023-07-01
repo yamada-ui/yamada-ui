@@ -6,10 +6,25 @@ import { FC, ReactElement } from 'react'
 import { UseCalenderHeaderProps, useCalendarContext, useCalenderHeader } from './use-calendar'
 
 type CalenderHeaderOptions = {
+  /**
+   * Props for the calendar control button element.
+   */
   controlProps?: CalenderControlProps
+  /**
+   * Props for the calendar previous control button element.
+   */
   prevProps?: CalenderControlProps
+  /**
+   * Props for the calendar next control button element.
+   */
   nextProps?: CalenderControlProps
+  /**
+   * Props for the calendar label button element.
+   */
   labelProps?: CalenderLabelProps & { icon?: IconProps | ReactElement }
+  /**
+   * The label of the current calendar type.
+   */
   label: string
 }
 

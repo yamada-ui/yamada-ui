@@ -2,7 +2,8 @@ import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
 import { WithTransitionProps } from '@yamada-ui/motion'
 import { Collapse, CollapseProps } from '@yamada-ui/transitions'
 import { cx } from '@yamada-ui/utils'
-import { useAccordionItemContext, useAccordionContext } from './'
+import { useAccordionContext } from './accordion'
+import { useAccordionItemContext } from './accordion-item'
 
 export type AccordionPanelProps = Omit<WithTransitionProps<HTMLUIProps<'div'>>, 'isOpen'> &
   Pick<CollapseProps, 'animationOpacity' | 'startingHeight' | 'endingHeight'>

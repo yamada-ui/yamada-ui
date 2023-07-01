@@ -1,5 +1,19 @@
 {
-  "Link": { "isExternal": { "type": "boolean", "required": false } },
+  "Link": {
+    "isExternal": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the link will open in new tab."
+    }
+  },
   "LinkBox": {},
-  "LinkOverlay": { "isExternal": { "type": "boolean", "required": false } }
+  "LinkOverlay": {
+    "isExternal": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the link will open in new tab."
+    }
+  }
 }

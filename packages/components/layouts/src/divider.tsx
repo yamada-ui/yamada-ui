@@ -11,6 +11,11 @@ import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
 type DividerOptions = {
+  /**
+   * The orientation of the divider.
+   *
+   * @default 'horizontal'
+   */
   orientation?: 'horizontal' | 'vertical'
 }
 

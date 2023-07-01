@@ -2,7 +2,8 @@
   "Card": {
     "align": {
       "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
-      "required": false
+      "required": false,
+      "description": "The CSS `align-items` property."
     },
     "colorScheme": {
       "defaultValue": "primary",
@@ -12,11 +13,13 @@
     },
     "direction": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
-      "required": false
+      "required": false,
+      "description": "The CSS `flex-direction` property."
     },
     "justify": {
       "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
-      "required": false
+      "required": false,
+      "description": "The CSS `justify-content` property."
     },
     "size": {
       "defaultValue": "md",

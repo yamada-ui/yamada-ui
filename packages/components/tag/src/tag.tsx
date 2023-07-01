@@ -10,12 +10,26 @@ import {
 import { Icon } from '@yamada-ui/icon'
 import { useClickable } from '@yamada-ui/use-clickable'
 import { cx } from '@yamada-ui/utils'
-import { FC, HTMLAttributes, MouseEventHandler, ReactNode, useRef } from 'react'
+import { FC, HTMLAttributes, MouseEventHandler, ReactElement, ReactNode, useRef } from 'react'
 
 type TagnOptions = {
-  leftIcon?: React.ReactElement
-  rightIcon?: React.ReactElement
+  /**
+   * Icon to be displayed to the left of the tag.
+   */
+  leftIcon?: ReactElement
+  /**
+   * Icon to be displayed to the right of the tag.
+   */
+  rightIcon?: ReactElement
+  /**
+   * Function to be executed when the close button is clicked.
+   */
   onCloseClick?: MouseEventHandler<HTMLElement>
+  /**
+   * If `true`, the tag is disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
 }
 

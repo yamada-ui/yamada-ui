@@ -10,6 +10,9 @@ import { cx, getValidChildren, isUndefined, filterUndefined } from '@yamada-ui/u
 import { cloneElement } from 'react'
 
 type AvatarGroupOptions = {
+  /**
+   * The maximum number of visible avatars.
+   */
   max?: number
 }
 

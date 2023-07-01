@@ -8,23 +8,45 @@
     },
     "inline": {
       "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
-      "required": false
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, set the indicator as an inline element."
     },
-    "isDisabled": { "type": "boolean", "required": false },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the indicator will be disabled."
+    },
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | ReactFragment\n  | ReactPortal",
-      "required": false
+      "required": false,
+      "description": "The indicator label to use."
     },
     "offset": {
       "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
-      "required": false
+      "defaultValue": "0",
+      "required": false,
+      "description": "Changes position offset, usually used when element has border-radius."
     },
-    "overflowCount": { "type": "number", "required": false },
+    "overflowCount": {
+      "type": "number",
+      "defaultValue": "99",
+      "required": false,
+      "description": "If `label` is of type number, the maximum number displayed."
+    },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | IndicatorPlacement\n  | ResponsiveObject<IndicatorPlacement>\n  | ColorModeArray<IndicatorPlacement>",
-      "required": false
+      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>",
+      "defaultValue": "'top-right'",
+      "required": false,
+      "description": "The placement of the indicator."
     },
-    "showZero": { "type": "boolean", "required": false },
+    "showZero": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display 0."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
@@ -37,6 +59,11 @@
       "required": false,
       "description": "The variant of the Indicator."
     },
-    "withBorder": { "type": "boolean", "required": false }
+    "withBorder": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the border of the indicator."
+    }
   }
 }

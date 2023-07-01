@@ -32,23 +32,80 @@ type PaginationComponentProps<Y extends RowData> = Pick<
 }
 
 type TableOptions<Y extends RowData> = {
+  /**
+   * The CSS `table-layout` property.
+   */
   layout?: CSSUIObject['tableLayout']
+  /**
+   * If `true`, highlight the row when the table row is selected.
+   *
+   * @default false
+   */
   highlightOnSelected?: boolean
+  /**
+   * If `true`, highlight the row when the table row is hovered.
+   *
+   * @default false
+   */
   highlightOnHover?: boolean
+  /**
+   * If `true`, display the outer border of the table.
+   *
+   * @default false
+   */
   withBorder?: boolean
+  /**
+   * If `true`, display line on the columns of the table.
+   *
+   * @default false
+   */
   withColumnBorders?: boolean
+  /**
+   * If `true`, display the table footer.
+   *
+   * @default false
+   */
   withFooter?: boolean
+  /**
+   * Props for the table thead element.
+   */
   theadProps?: TableHeadProps
+  /**
+   * Props for the table tbody element.
+   */
   tbodyProps?: TableBodyProps
+  /**
+   * Props for the table tfoot element.
+   */
   tfootProps?: TableFootProps
+  /**
+   * Props for the table container element.
+   */
   containerProps?: HTMLUIProps<'div'>
+  /**
+   * Props for the paging control element.
+   */
   pagingControlProps?: HTMLUIProps<'div'>
+  /**
+   * Props for the pagination element.
+   */
   paginationProps?: Omit<PaginationProps, 'page' | 'defaultPage' | 'total' | 'onChange'>
+  /**
+   * Props for the select element.
+   */
   selectProps?: Omit<
     SelectProps,
     'value' | 'defaultValue' | 'onChange' | 'placeholderInOptions' | 'data' | 'children'
   >
+  /**
+   * If `true`, display the paging control.
+   *
+   * @default true
+   */
   withPagingControl?: boolean
+  /**
+   * Function to format the label used for the options in a select.
+   */
   formatPageSizeLabel?: (pageSize: number) => string
   children?: ReactNode | ((props: PaginationComponentProps<Y>) => ReactNode)
 }
@@ -172,7 +229,7 @@ export const PagingTable = forwardRef(
                   size={size === 'xl' ? 'lg' : size === 'lg' ? 'md' : size === 'md' ? 'sm' : 'xs'}
                   maxW='3xs'
                   value={String(state.pagination.pageSize)}
-                  data={pageSizeList.map((pageSize) => ({
+                  options={pageSizeList.map((pageSize) => ({
                     label: formatPageSizeLabel(pageSize),
                     value: String(pageSize),
                   }))}

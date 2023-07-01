@@ -19,13 +19,51 @@ const [ProgressProvider, useProgress] = createContext<Record<string, CSSUIObject
 })
 
 type ProgressOptions = {
+  /**
+   * The value of the progress.
+   *
+   * @default 0
+   */
   value?: number
+  /**
+   * The minimum value of the progress.
+   *
+   * @default 0
+   */
   min?: number
+  /**
+   * The maximum value of the progress.
+   *
+   * @default 100
+   */
   max?: number
+  /**
+   * If `true`, the progress bar will show stripe.
+   *
+   * @default false
+   */
   hasStripe?: boolean
+  /**
+   * If `true`, and hasStripe is `true`, the stripes will be animated.
+   *
+   * @default false
+   */
   isStripeAnimation?: boolean
+  /**
+   * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
+   *
+   * @default false
+   */
   isAnimation?: boolean
+  /**
+   * The animation speed in seconds.
+   *
+   * @default '1.4s'
+   */
   speed?: string | number
+  /**
+   * The CSS `color` property.
+   */
   filledTrackColor?: CSSUIProps<'unResponsive'>['color']
 }
 

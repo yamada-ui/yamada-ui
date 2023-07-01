@@ -3,8 +3,16 @@ import { ReactElement } from 'react'
 import { Button, ButtonProps } from './button'
 
 type IconButtonOptions = {
+  /**
+   * The icon to be used in the button.
+   */
   icon?: ReactElement
-  isRound?: boolean
+  /**
+   * If `true`, the button will be perfectly round. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  isRounded?: boolean
 }
 
 export type IconButtonProps = Omit<
@@ -14,9 +22,9 @@ export type IconButtonProps = Omit<
   IconButtonOptions
 
 export const IconButton = forwardRef<IconButtonProps, 'button'>(
-  ({ icon, isRound, children, ...rest }, ref) => {
+  ({ icon, isRounded, children, ...rest }, ref) => {
     return (
-      <Button ref={ref} p={0} {...(isRound ? { rounded: 'full' } : {})} {...rest}>
+      <Button ref={ref} p={0} {...(isRounded ? { rounded: 'full' } : {})} {...rest}>
         {icon || children}
       </Button>
     )

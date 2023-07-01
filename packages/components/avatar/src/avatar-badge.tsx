@@ -2,15 +2,21 @@ import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { useAvatarContext } from './avatar'
 
-type Placement = 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'
-
 type AvatarBadgeOptions = {
-  placement?: Placement
+  /**
+   * The placement of the badge.
+   *
+   * @default 'bottom-end'
+   */
+  placement?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'
 }
 
 export type AvatarBadgeProps = HTMLUIProps<'div'> & AvatarBadgeOptions
 
-const placementStyles: Record<Placement, CSSUIObject> = {
+const placementStyles: Record<
+  'top-start' | 'top-end' | 'bottom-start' | 'bottom-end',
+  CSSUIObject
+> = {
   'top-start': {
     top: '0',
     insetStart: '0',

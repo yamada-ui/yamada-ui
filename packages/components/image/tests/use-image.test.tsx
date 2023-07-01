@@ -1,9 +1,11 @@
-import { FallbackStrategy, shouldShowFallbackImage } from '../src'
-
-type Status = 'loading' | 'failed' | 'pending' | 'loaded'
+import { shouldShowFallbackImage } from '../src/use-image'
 
 describe('useImage', () => {
-  it.each<{ status: Status; strategy: FallbackStrategy; result: boolean }>([
+  it.each<{
+    status: 'loading' | 'failed' | 'pending' | 'loaded'
+    strategy: 'onError' | 'beforeLoadOrError'
+    result: boolean
+  }>([
     { status: 'loading', strategy: 'beforeLoadOrError', result: true },
     { status: 'loaded', strategy: 'beforeLoadOrError', result: false },
     { status: 'failed', strategy: 'beforeLoadOrError', result: true },

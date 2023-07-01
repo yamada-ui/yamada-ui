@@ -1,46 +1,178 @@
 {
   "Editable": {
-    "defaultValue": { "type": "string", "required": false },
+    "defaultValue": {
+      "type": "string",
+      "required": false,
+      "description": "The initial value of the Editable in both edit & preview mode."
+    },
     "errorBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
       "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "required": false,
+      "description": "The border color when the input is focused."
     },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isPreviewFocusable": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "onCancel": { "type": "(preValue: string) => void", "required": false },
-    "onChange": { "type": "(value: string) => void", "required": false },
-    "onEdit": { "type": "() => void", "required": false },
-    "onSubmit": { "type": "(value: string) => void", "required": false },
-    "selectAllOnFocus": { "type": "boolean", "required": false },
-    "startWithEditView": { "type": "boolean", "required": false },
-    "submitOnBlur": { "type": "boolean", "required": false },
-    "value": { "type": "string", "required": false }
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isPreviewFocusable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "onCancel": {
+      "type": "(preValue: string) => void",
+      "required": false,
+      "description": "Callback invoked when user cancels input with the `Esc` key.\nIt provides the last confirmed value as argument."
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "A callback invoked when user changes input."
+    },
+    "onEdit": {
+      "type": "() => void",
+      "required": false,
+      "description": "A callback invoked once the user enters edit mode."
+    },
+    "onSubmit": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "A callback invoked when user confirms value with `enter` key or by blurring input."
+    },
+    "selectAllOnFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the input's text will be highlighted on focus."
+    },
+    "startWithEditView": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the Editable will start with edit mode by default."
+    },
+    "submitOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, it'll update the value onBlur and turn off the edit mode."
+    },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the Editable in both edit & preview mode."
+    }
   },
   "EditableInput": {},
   "EditableTextarea": {},
   "EditablePreview": {},
   "UseEditable": {
-    "defaultValue": { "type": "string", "required": false },
-    "isDisabled": { "type": "boolean", "required": false },
-    "isInvalid": { "type": "boolean", "required": false },
-    "isPreviewFocusable": { "type": "boolean", "required": false },
-    "isReadOnly": { "type": "boolean", "required": false },
-    "isRequired": { "type": "boolean", "required": false },
-    "onCancel": { "type": "(preValue: string) => void", "required": false },
-    "onChange": { "type": "(value: string) => void", "required": false },
-    "onEdit": { "type": "() => void", "required": false },
-    "onSubmit": { "type": "(value: string) => void", "required": false },
-    "placeholder": { "type": "string", "required": false },
-    "selectAllOnFocus": { "type": "boolean", "required": false },
-    "startWithEditView": { "type": "boolean", "required": false },
-    "submitOnBlur": { "type": "boolean", "required": false },
-    "value": { "type": "string", "required": false }
+    "defaultValue": {
+      "type": "string",
+      "required": false,
+      "description": "The initial value of the Editable in both edit & preview mode."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isPreviewFocusable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "onCancel": {
+      "type": "(preValue: string) => void",
+      "required": false,
+      "description": "Callback invoked when user cancels input with the `Esc` key.\nIt provides the last confirmed value as argument."
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "A callback invoked when user changes input."
+    },
+    "onEdit": {
+      "type": "() => void",
+      "required": false,
+      "description": "A callback invoked once the user enters edit mode."
+    },
+    "onSubmit": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "A callback invoked when user confirms value with `enter` key or by blurring input."
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder text when the value is empty."
+    },
+    "selectAllOnFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the input's text will be highlighted on focus."
+    },
+    "startWithEditView": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the Editable will start with edit mode by default."
+    },
+    "submitOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, it'll update the value onBlur and turn off the edit mode."
+    },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the Editable in both edit & preview mode."
+    }
   }
 }

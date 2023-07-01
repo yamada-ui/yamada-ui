@@ -2,6 +2,11 @@ import { forwardRef } from '@yamada-ui/core'
 import { Icon, IconProps } from '@yamada-ui/icon'
 
 export type RingsProps = IconProps & {
+  /**
+   * The CSS `dur` property.
+   *
+   * @default '3s'
+   */
   duration?: IconProps['dur']
 }
 

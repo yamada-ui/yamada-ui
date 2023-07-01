@@ -67,12 +67,45 @@ type UseDatePickerBaseProps = Omit<
 > &
   FormControlOptions &
   CalendarProps & {
+    /**
+     * The pattern used to check the <input> element's.
+     *
+     * @default '/[^0-9\-\/]/g'
+     */
     pattern?: RegExp
+    /**
+     * Function that converts the input value to Date type.
+     */
     parseDate?: (value: string) => Date | null
+    /**
+     * The format used for conversion.
+     * Check the docs to see the format of possible modifiers you can pass.
+     *
+     * @see Doc https://day.js.org/docs/en/display/format#list-of-localized-formats
+     * @default 'YYYY/MM/DD'
+     */
     inputFormat?: string
+    /**
+     * If `true`, display the date picker clear icon.
+     *
+     * @default true
+     */
     isClearable?: boolean
+    /**
+     * If `true`, the list element will be closed when value is selected.
+     *
+     * @default true
+     */
     closeOnSelect?: boolean
+    /**
+     * If `true`, allows input.
+     *
+     * @default true
+     */
     allowInput?: boolean
+    /**
+     * Props the calendar component.
+     */
     calendarProps?: CalendarBaseProps
   }
 

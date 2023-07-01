@@ -3,6 +3,11 @@ import { cx, replaceObject } from '@yamada-ui/utils'
 import { Children } from 'react'
 
 type AspectRatioOptions = {
+  /**
+   * The aspect ratio of the Box.
+   *
+   * @default '4 / 3'
+   */
   ratio?: Token<number>
 }
 

@@ -43,6 +43,7 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -186,8 +187,6 @@ export const {
   useDescendant: useAutocompleteDescendant,
 } = createDescendant<HTMLElement>()
 
-type Order = 'first' | 'last'
-
 type AutocompleteContext = Omit<
   UseAutocompleteProps,
   'value' | 'defaultValue' | 'onChange' | 'onCreate'
@@ -236,20 +235,71 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
   | 'closeDelay'
 > &
   FormControlOptions & {
+    /**
+     * The value of the autocomplete.
+     */
     value?: T
+    /**
+     * The initial value of the autocomplete.
+     */
     defaultValue?: T
+    /**
+     * The callback invoked when value state changes.
+     */
     onChange?: (value: T) => void
+    /**
+     * The callback invoked when search input.
+     */
     onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
+    /**
+     * The callback invoked when autocomlete option created.
+     */
     onCreate?: (newOption: UIOption, newOptions: UIOption[]) => void
+    /**
+     * Function to format text when search input.
+     */
     format?: (value: string) => string
-    createOrder?: Union<Order>
-    createSecondOrder?: Order
+    /**
+     * The position to be inserted when the autocomplete option is created.
+     *
+     * @default 'first'
+     */
+    insertPositionOnCreate?: Union<'first' | 'last'> | [string, 'first' | 'last']
+    /**
+     * If `true`, the list element will be closed when value is selected.
+     *
+     * @default true
+     */
     closeOnSelect?: boolean
+    /**
+     * The message displayed when the search yields no hits.
+     *
+     * @default 'No results found'
+     */
     emptyMessage?: string
+    /**
+     * If `true`, enables the creation of autocomplete options.
+     *
+     * @default false
+     */
     createOption?: boolean
+    /**
+     * If `true`, the selected item(s) will be excluded from the list.
+     *
+     * @default false
+     */
     omitSelectedValues?: boolean
+    /**
+     * The maximum selectable value.
+     */
     maxSelectedValues?: number
+    /**
+     * Props for select option element.
+     */
     optionProps?: Omit<AutocompleteOptionProps, 'value' | 'children'>
+    /**
+     * If provided, generate options based on data.
+     */
     options?: UIOption[]
   }
 
@@ -267,8 +317,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   closeOnBlur = true,
   closeOnEsc = true,
   createOption = false,
-  createOrder = 'first',
-  createSecondOrder = 'first',
+  insertPositionOnCreate = 'first',
   emptyMessage = 'No results found',
   format = defaultFormat,
   placement = 'bottom-start',
@@ -314,6 +363,14 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const isCreate = focusedIndex === -2 && createOption
   const isMulti = isArray(value)
   const isEmptyValue = !isMulti ? !value : !value.length
+
+  const [firstInsertPositionOnCreate, secondInsertPositionOnCreate] = useMemo(() => {
+    if (isArray(insertPositionOnCreate)) {
+      return insertPositionOnCreate
+    } else {
+      return [insertPositionOnCreate, 'first']
+    }
+  }, [insertPositionOnCreate])
 
   if (createOption && !isUndefined(children)) {
     console.warn(
@@ -659,15 +716,15 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     if (options) newOptions = options
 
-    if (createOrder === 'first') {
+    if (firstInsertPositionOnCreate === 'first') {
       newOptions = [newOption, ...newOptions]
-    } else if (createOrder === 'last') {
+    } else if (firstInsertPositionOnCreate === 'last') {
       newOptions = [...newOptions, newOption]
     } else {
-      const i = newOptions.findIndex(({ label }) => label === createOrder)
+      const i = newOptions.findIndex(({ label }) => label === firstInsertPositionOnCreate)
 
       if (i !== -1 && isArray(newOptions[i].value)) {
-        if (createSecondOrder === 'first') {
+        if (secondInsertPositionOnCreate === 'first') {
           newOptions[i].value = [newOption, ...(newOptions[i].value as UIOption[])]
         } else {
           newOptions[i].value = [...(newOptions[i].value as UIOption[]), newOption]
@@ -676,7 +733,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
         console.warn(
           `${
             !isMulti ? 'Autocomplete' : 'MultiAutocomplete'
-          }: '${createOrder}' specified in createOrder does not exist in the option group.`,
+          }: '${firstInsertPositionOnCreate}' specified in insertPositionOnCreate does not exist in the option group.`,
         )
       }
     }
@@ -690,7 +747,16 @@ export const useAutocomplete = <T extends string | string[] = string>({
     setFocusedIndex(index)
 
     rest.onCreate?.(newOption, newOptions)
-  }, [inputValue, options, createOrder, onChange, rebirthOptions, rest, createSecondOrder, isMulti])
+  }, [
+    inputValue,
+    options,
+    firstInsertPositionOnCreate,
+    onChange,
+    rebirthOptions,
+    rest,
+    secondInsertPositionOnCreate,
+    isMulti,
+  ])
 
   const onDelete = useCallback(() => {
     if (!isMulti) {
@@ -1070,6 +1136,9 @@ export const useAutocompleteList = () => {
 }
 
 export type UseAutocompleteOptionGroupProps = HTMLUIProps<'ul'> & {
+  /**
+   * The label of the autocomplete option group.
+   */
   label: string
 }
 
@@ -1144,10 +1213,31 @@ export const useAutocompleteOptionGroup = ({ label, ...rest }: UseAutocompleteOp
 export type UseAutocompleteOptionGroupReturn = ReturnType<typeof useAutocompleteOptionGroup>
 
 export type UseAutocompleteOptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & {
+  /**
+   * The value of the select option.
+   */
   value?: string
+  /**
+   * The label of the select option.
+   */
   children?: string
+  /**
+   * If `true`, the select option will be disabled.
+   *
+   * @default false
+   */
   isDisabled?: boolean
+  /**
+   * If `true`, the select option will be focusable.
+   *
+   * @default false
+   */
   isFocusable?: boolean
+  /**
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
+   */
   closeOnSelect?: boolean
 }
 

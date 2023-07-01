@@ -1,5 +1,11 @@
 # @yamada-ui/use-counter
 
+## 0.2.0
+
+### Minor Changes
+
+- [`b1a01b32`](https://github.com/hirotomoyamada/yamada-ui/commit/b1a01b32ddbb09412cc740bd5cdb4853c8992c8e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to props.
+
 ## 0.1.1
 
 ### Patch Changes

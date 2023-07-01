@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 0.3.1
+
+### Patch Changes
+
+- [`392896a0`](https://github.com/hirotomoyamada/yamada-ui/commit/392896a03c79a2b25fdf5994279fd4edd2e74733) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted the code.
+
+- Updated dependencies [[`76b02283`](https://github.com/hirotomoyamada/yamada-ui/commit/76b022830db92977740e03d44f535d768ffe91f4)]:
+  - @yamada-ui/core@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes

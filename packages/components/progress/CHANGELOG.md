@@ -1,5 +1,19 @@
 # @yamada-ui/progress
 
+## 0.3.0
+
+### Minor Changes
+
+- [`b1a01b32`](https://github.com/hirotomoyamada/yamada-ui/commit/b1a01b32ddbb09412cc740bd5cdb4853c8992c8e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to props.
+
+### Patch Changes
+
+- Updated dependencies [[`76b02283`](https://github.com/hirotomoyamada/yamada-ui/commit/76b022830db92977740e03d44f535d768ffe91f4)]:
+  - @yamada-ui/core@0.3.1
+  - @yamada-ui/use-animation@0.1.12
+  - @yamada-ui/use-token@0.1.12
+  - @yamada-ui/use-value@0.1.12
+
 ## 0.2.6
 
 ### Patch Changes

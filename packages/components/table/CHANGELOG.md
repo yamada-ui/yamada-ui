@@ -1,5 +1,21 @@
 # @yamada-ui/table
 
+## 0.2.0
+
+### Minor Changes
+
+- [`b1a01b32`](https://github.com/hirotomoyamada/yamada-ui/commit/b1a01b32ddbb09412cc740bd5cdb4853c8992c8e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to props.
+
+### Patch Changes
+
+- Updated dependencies [[`b1a01b32`](https://github.com/hirotomoyamada/yamada-ui/commit/b1a01b32ddbb09412cc740bd5cdb4853c8992c8e), [`76b02283`](https://github.com/hirotomoyamada/yamada-ui/commit/76b022830db92977740e03d44f535d768ffe91f4)]:
+  - @yamada-ui/native-table@0.2.0
+  - @yamada-ui/pagination@0.2.0
+  - @yamada-ui/checkbox@0.2.0
+  - @yamada-ui/select@0.2.0
+  - @yamada-ui/icon@0.2.0
+  - @yamada-ui/core@0.3.1
+
 ## 0.1.16
 
 ### Patch Changes

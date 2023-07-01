@@ -1,5 +1,12 @@
 # @yamada-ui/use-animation
 
+## 0.1.12
+
+### Patch Changes
+
+- Updated dependencies [[`76b02283`](https://github.com/hirotomoyamada/yamada-ui/commit/76b022830db92977740e03d44f535d768ffe91f4)]:
+  - @yamada-ui/core@0.3.1
+
 ## 0.1.11
 
 ### Patch Changes

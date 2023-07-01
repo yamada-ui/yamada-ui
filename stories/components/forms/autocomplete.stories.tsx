@@ -180,26 +180,25 @@ export const withCreateOrder: ComponentStory<typeof Autocomplete> = () => {
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='first'
+        insertPositionOnCreate='first'
       />
       <Autocomplete
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='last'
+        insertPositionOnCreate='last'
       />
       <Autocomplete
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='地球人'
+        insertPositionOnCreate='地球人'
       />
       <Autocomplete
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='フリーザ軍'
-        createSecondOrder='last'
+        insertPositionOnCreate={['フリーザ軍', 'last']}
       />
     </>
   )

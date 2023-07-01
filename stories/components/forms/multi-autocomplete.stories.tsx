@@ -181,26 +181,25 @@ export const withCreateOrder: ComponentStory<typeof MultiAutocomplete> = () => {
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='first'
+        insertPositionOnCreate='first'
       />
       <MultiAutocomplete
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='last'
+        insertPositionOnCreate='last'
       />
       <MultiAutocomplete
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='地球人'
+        insertPositionOnCreate='地球人'
       />
       <MultiAutocomplete
         placeholder='キャラクターを選択'
         options={options}
         createOption
-        createOrder='フリーザ軍'
-        createSecondOrder='last'
+        insertPositionOnCreate={['フリーザ軍', 'last']}
       />
     </>
   )
@@ -233,6 +232,16 @@ export const withBorderColor: ComponentStory<typeof MultiAutocomplete> = () => {
 export const withSeparator: ComponentStory<typeof MultiAutocomplete> = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' separator=';'>
+      <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
+      <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
+      <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
+    </MultiAutocomplete>
+  )
+}
+
+export const withKeepPlaceholder: ComponentStory<typeof MultiAutocomplete> = () => {
+  return (
+    <MultiAutocomplete placeholder='キャラクターを選択' keepPlaceholder>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>

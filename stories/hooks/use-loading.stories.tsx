@@ -29,9 +29,9 @@ export const withTimeout = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => screen.start({ timeout: 5000 })}>Start screen loading</Button>
-        <Button onClick={() => page.start({ timeout: 5000 })}>Start page loading</Button>
-        <Button onClick={() => background.start({ timeout: 5000 })}>
+        <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
+        <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
+        <Button onClick={() => background.start({ duration: 5000 })}>
           Start background loading
         </Button>
       </Wrap>
@@ -45,13 +45,13 @@ export const withMessage = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => screen.start({ message: 'Loading', timeout: 5000 })}>
+        <Button onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
           Start screen loading
         </Button>
-        <Button onClick={() => page.start({ message: 'Loading', timeout: 5000 })}>
+        <Button onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
           Start page loading
         </Button>
-        <Button onClick={() => background.start({ message: 'Loading', timeout: 5000 })}>
+        <Button onClick={() => background.start({ message: 'Loading', duration: 5000 })}>
           Start background loading
         </Button>
       </Wrap>
@@ -87,7 +87,7 @@ export const updateMessage = () => {
       <Wrap gap='md'>
         <Button
           onClick={() => {
-            screen.start({ message: 'Loading', timeout: 10000 })
+            screen.start({ message: 'Loading', duration: 10000 })
 
             setTimeout(() => {
               screen.update({ message: 'Please wait' })
@@ -99,7 +99,7 @@ export const updateMessage = () => {
 
         <Button
           onClick={() => {
-            page.start({ message: 'Loading', timeout: 10000 })
+            page.start({ message: 'Loading', duration: 10000 })
 
             setTimeout(() => {
               page.update({ message: 'Please wait' })
@@ -111,7 +111,7 @@ export const updateMessage = () => {
 
         <Button
           onClick={() => {
-            background.start({ message: 'Loading', timeout: 10000 })
+            background.start({ message: 'Loading', duration: 10000 })
 
             setTimeout(() => {
               background.update({ message: 'Please wait' })

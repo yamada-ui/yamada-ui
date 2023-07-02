@@ -67,13 +67,13 @@ type LoadingContext = {
 
 type LoadingProps = {
   message: ReactNode | undefined
-  timeout: number | null
+  duration: number | null
 }
 
 type LoadingState = {
   loadingCount: number
   message: ReactNode | undefined
-  timeout: number | null
+  duration: number | null
 }
 
 export type LoadingProviderProps = PropsWithChildren<ThemeConfig['loading']>
@@ -172,36 +172,36 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   const [screenLoading, setScreenLoading] = useState<LoadingState>({
     loadingCount: screen?.initialState ? 1 : 0,
     message: undefined,
-    timeout: screen?.timeout ?? null,
+    duration: screen?.duration ?? null,
   })
   const isPageLoadingRef = useRef<boolean>(false)
   const [pageLoading, setPageLoading] = useState<LoadingState>({
     loadingCount: page?.initialState ? 1 : 0,
     message: undefined,
-    timeout: page?.timeout ?? null,
+    duration: page?.duration ?? null,
   })
   const isBackgroundLoadingRef = useRef<boolean>(false)
   const [backgroundLoading, setBackgroundLoading] = useState<LoadingState>({
     loadingCount: background?.initialState ? 1 : 0,
     message: undefined,
-    timeout: background?.timeout ?? null,
+    duration: background?.duration ?? null,
   })
   const isCustomLoadingRef = useRef<boolean>(false)
   const [customLoading, setCustomLoading] = useState<LoadingState>({
     loadingCount: custom?.initialState ? 1 : 0,
     message: undefined,
-    timeout: custom?.timeout ?? null,
+    duration: custom?.duration ?? null,
   })
 
   const screenLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => isScreenLoadingRef.current,
-      start: ({ message, timeout = screenLoading.timeout ?? null } = {}) => {
+      start: ({ message, duration = screenLoading.duration ?? null } = {}) => {
         isScreenLoadingRef.current = true
         setScreenLoading(({ loadingCount }) => ({
           loadingCount: incrementCount(loadingCount),
           message,
-          timeout,
+          duration,
         }))
       },
       update: (next) => setScreenLoading((prev) => ({ ...prev, ...next })),
@@ -210,7 +210,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
         setScreenLoading(({ loadingCount }) => ({
           loadingCount: decrementCount(loadingCount),
           message: undefined,
-          timeout: screen?.timeout ?? null,
+          duration: screen?.duration ?? null,
         }))
       },
     }),
@@ -220,12 +220,12 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   const pageLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => isPageLoadingRef.current,
-      start: ({ message, timeout = pageLoading.timeout ?? null } = {}) => {
+      start: ({ message, duration = pageLoading.duration ?? null } = {}) => {
         isPageLoadingRef.current = true
         setPageLoading(({ loadingCount }) => ({
           loadingCount: incrementCount(loadingCount),
           message,
-          timeout,
+          duration,
         }))
       },
       update: (next) => setPageLoading((prev) => ({ ...prev, ...next })),
@@ -234,7 +234,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
         setPageLoading(({ loadingCount }) => ({
           loadingCount: decrementCount(loadingCount),
           message: undefined,
-          timeout: page?.timeout ?? null,
+          duration: page?.duration ?? null,
         }))
       },
     }),
@@ -244,12 +244,12 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   const backgroundLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => isBackgroundLoadingRef.current,
-      start: ({ message, timeout = backgroundLoading.timeout ?? null } = {}) => {
+      start: ({ message, duration = backgroundLoading.duration ?? null } = {}) => {
         isBackgroundLoadingRef.current = true
         setBackgroundLoading(({ loadingCount }) => ({
           loadingCount: incrementCount(loadingCount),
           message,
-          timeout,
+          duration,
         }))
       },
       update: (next) => setBackgroundLoading((prev) => ({ ...prev, ...next })),
@@ -258,7 +258,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
         setBackgroundLoading(({ loadingCount }) => ({
           loadingCount: decrementCount(loadingCount),
           message: undefined,
-          timeout: background?.timeout ?? null,
+          duration: background?.duration ?? null,
         }))
       },
     }),
@@ -268,12 +268,12 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   const customLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => isCustomLoadingRef.current,
-      start: ({ message, timeout = customLoading.timeout ?? null } = {}) => {
+      start: ({ message, duration = customLoading.duration ?? null } = {}) => {
         isCustomLoadingRef.current = true
         setCustomLoading(({ loadingCount }) => ({
           loadingCount: incrementCount(loadingCount),
           message,
-          timeout,
+          duration,
         }))
       },
       update: (next) => setCustomLoading((prev) => ({ ...prev, ...next })),
@@ -282,7 +282,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
         setCustomLoading(({ loadingCount }) => ({
           loadingCount: decrementCount(loadingCount),
           message: undefined,
-          timeout: custom?.timeout ?? null,
+          duration: custom?.duration ?? null,
         }))
       },
     }),
@@ -311,28 +311,28 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
       setScreenLoading({
         loadingCount: screen?.initialState ? 1 : 0,
         message: undefined,
-        timeout: screen?.timeout ?? null,
+        duration: screen?.duration ?? null,
       })
 
     if (page)
       setPageLoading({
         loadingCount: page?.initialState ? 1 : 0,
         message: undefined,
-        timeout: page?.timeout ?? null,
+        duration: page?.duration ?? null,
       })
 
     if (background)
       setBackgroundLoading({
         loadingCount: background?.initialState ? 1 : 0,
         message: undefined,
-        timeout: background?.timeout ?? null,
+        duration: background?.duration ?? null,
       })
 
     if (custom)
       setCustomLoading({
         loadingCount: custom?.initialState ? 1 : 0,
         message: undefined,
-        timeout: custom?.timeout ?? null,
+        duration: custom?.duration ?? null,
       })
   }, [screen, page, background, custom])
 
@@ -358,7 +358,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                       icon: screen?.icon,
                       text: screen?.text,
                       message: screenLoading.message,
-                      timeout: screenLoading.timeout,
+                      duration: screenLoading.duration,
                       onFinish: screenLoadingFunc.finish,
                     }}
                   />
@@ -369,7 +369,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                       icon: screen?.icon,
                       text: screen?.text,
                       message: screenLoading.message,
-                      timeout: screenLoading.timeout,
+                      duration: screenLoading.duration,
                       onFinish: screenLoadingFunc.finish,
                     }}
                   />
@@ -400,7 +400,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                       icon: page?.icon,
                       text: page?.text,
                       message: pageLoading.message,
-                      timeout: pageLoading.timeout,
+                      duration: pageLoading.duration,
                       onFinish: pageLoadingFunc.finish,
                     }}
                   />
@@ -411,7 +411,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                       icon: page?.icon,
                       text: page?.text,
                       message: pageLoading.message,
-                      timeout: pageLoading.timeout,
+                      duration: pageLoading.duration,
                       onFinish: pageLoadingFunc.finish,
                     }}
                   />
@@ -442,7 +442,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                       icon: background?.icon,
                       text: background?.text,
                       message: backgroundLoading.message,
-                      timeout: backgroundLoading.timeout,
+                      duration: backgroundLoading.duration,
                       onFinish: backgroundLoadingFunc.finish,
                     }}
                   />
@@ -453,7 +453,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                       icon: background?.icon,
                       text: background?.text,
                       message: backgroundLoading.message,
-                      timeout: backgroundLoading.timeout,
+                      duration: backgroundLoading.duration,
                       onFinish: backgroundLoadingFunc.finish,
                     }}
                   />
@@ -478,7 +478,7 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
                   icon: custom?.icon,
                   text: custom?.text,
                   message: customLoading.message,
-                  timeout: customLoading.timeout,
+                  duration: customLoading.duration,
                   onFinish: customLoadingFunc.finish,
                 }}
               />
@@ -552,7 +552,7 @@ const getMotionProps = (
 })
 
 const LoadingScreenComponent = memo(
-  ({ initialState, icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+  ({ initialState, icon, text, message, duration, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       maxW: 'md',
       display: 'flex',
@@ -562,7 +562,7 @@ const LoadingScreenComponent = memo(
       gap: 'sm',
     }
 
-    useTimeout(onFinish, timeout)
+    useTimeout(onFinish, duration)
 
     return (
       <ui.div
@@ -591,7 +591,7 @@ const LoadingScreenComponent = memo(
 LoadingScreenComponent.displayName = 'LoadingScreenComponent'
 
 const LoadingPageComponent = memo(
-  ({ initialState, icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+  ({ initialState, icon, text, message, duration, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       bg: ['white', 'black'],
       maxW: 'md',
@@ -605,7 +605,7 @@ const LoadingPageComponent = memo(
       boxShadow: ['lg', 'dark-lg'],
     }
 
-    useTimeout(onFinish, timeout)
+    useTimeout(onFinish, duration)
 
     return (
       <ui.div
@@ -639,7 +639,7 @@ const LoadingPageComponent = memo(
 LoadingPageComponent.displayName = 'LoadingPageComponent'
 
 const LoadingBackgroundComponent = memo(
-  ({ initialState, icon, text, message, timeout, onFinish }: LoadingComponentProps) => {
+  ({ initialState, icon, text, message, duration, onFinish }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: 'fixed',
       right: 'md',
@@ -656,7 +656,7 @@ const LoadingBackgroundComponent = memo(
       boxShadow: ['3xl', 'dark-lg'],
     }
 
-    useTimeout(onFinish, timeout)
+    useTimeout(onFinish, duration)
 
     return (
       <ui.div

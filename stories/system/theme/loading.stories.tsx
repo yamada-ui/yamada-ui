@@ -30,19 +30,19 @@ export const basic = () => {
         icon: {
           variant: 'grid',
         },
-        timeout: 5000,
+        duration: 5000,
       },
       page: {
         icon: {
           variant: 'grid',
         },
-        timeout: 5000,
+        duration: 5000,
       },
       background: {
         icon: {
           variant: 'grid',
         },
-        timeout: 5000,
+        duration: 5000,
       },
     },
   })
@@ -87,8 +87,8 @@ export const useCustomLoading = () => {
   const config = extendConfig({
     loading: {
       custom: {
-        component: ({ initialState, message, timeout, onFinish }) => {
-          useTimeout(onFinish, timeout)
+        component: ({ initialState, message, duration, onFinish }) => {
+          useTimeout(onFinish, duration)
 
           return (
             <Motion
@@ -244,7 +244,7 @@ const CustomApp: FC = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => custom.start({ timeout: 10000 })}>Start custom loading</Button>
+        <Button onClick={() => custom.start({ duration: 10000 })}>Start custom loading</Button>
       </Wrap>
     </Center>
   )

@@ -30,6 +30,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # - name: Generate Docs
+      #   run: pnpm gen:docs
+
       - name: Create release PR or publish to NPM
         id: changesets
         uses: changesets/action@v1

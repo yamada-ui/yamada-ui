@@ -1,5 +1,15 @@
 # @yamada-ui/fontawesome
 
+## 0.1.9
+
+### Patch Changes
+
+- [`58b0b2fe`](https://github.com/hirotomoyamada/yamada-ui/commit/58b0b2fe1d166762261ed127175429f4427490ee) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to props.
+
+- Updated dependencies [[`f79629b2`](https://github.com/hirotomoyamada/yamada-ui/commit/f79629b299618c73601a270bea2f627b8ff6f61f)]:
+  - @yamada-ui/core@0.4.0
+  - @yamada-ui/icon@0.2.1
+
 ## 0.1.8
 
 ### Patch Changes

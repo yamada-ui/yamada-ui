@@ -6,8 +6,16 @@ import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
 type FontAwesomeIconOptions = {
-  className?: string
+  /**
+   * The icon of the font awesome.
+   * Check the docs to see the icon of possible modifiers you can pass.
+   *
+   * @see Doc https://fontawesome.com/v5/docs/web/use-with/react
+   */
   icon: IconDefinition | IconProp
+  /**
+   * The CSS `font-size` property.
+   */
   size?: CSSUIProps['fontSize']
 }
 

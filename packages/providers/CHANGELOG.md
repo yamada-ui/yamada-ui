@@ -1,5 +1,22 @@
 # @yamada-ui/providers
 
+## 0.4.0
+
+### Minor Changes
+
+- [`7b3e3e22`](https://github.com/hirotomoyamada/yamada-ui/commit/7b3e3e225243c5d4e46142ec311d405ddada3ed6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed props name timeout to duration.
+
+- [`742ab341`](https://github.com/hirotomoyamada/yamada-ui/commit/742ab34157e8740178be3e5287b41620c6f1dfff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to props.
+
+### Patch Changes
+
+- Updated dependencies [[`f79629b2`](https://github.com/hirotomoyamada/yamada-ui/commit/f79629b299618c73601a270bea2f627b8ff6f61f)]:
+  - @yamada-ui/core@0.4.0
+  - @yamada-ui/loading@0.3.1
+  - @yamada-ui/motion@0.2.1
+  - @yamada-ui/notice@0.3.1
+  - @yamada-ui/theme@0.3.2
+
 ## 0.3.6
 
 ### Patch Changes

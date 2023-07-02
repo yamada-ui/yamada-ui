@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.4.0
+
+### Minor Changes
+
+- [`f79629b2`](https://github.com/hirotomoyamada/yamada-ui/commit/f79629b299618c73601a270bea2f627b8ff6f61f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added JSDoc to theme.
+
 ## 0.3.1
 
 ### Patch Changes

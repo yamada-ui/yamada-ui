@@ -32,7 +32,7 @@ const getStyles = <IsMulti extends boolean = false>(
   return styles as Styles<IsMulti>
 }
 
-const usetStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
+const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   name: string,
   props: Props,
   isMulti: boolean = false,
@@ -87,6 +87,6 @@ const usetStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
 }
 
 export const useComponentStyle = <Props extends Dict = Dict>(name: string, props: Props) =>
-  usetStyles<Props>(name, props)
+  setStyles<Props>(name, props)
 export const useMultiComponentStyle = <Props extends Dict = Dict>(name: string, props: Props) =>
-  usetStyles<Props, true>(name, props, true)
+  setStyles<Props, true>(name, props, true)

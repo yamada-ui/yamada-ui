@@ -22,16 +22,46 @@ import {
 import { RemoveScroll } from 'react-remove-scroll'
 
 type LoadingContextProps = {
+  /**
+   * Returns a judgement on whether it is currently loading or not.
+   */
   isLoading: () => boolean
+  /**
+   * Function to start loading.
+   *
+   * If you specify a `message` etc. as an argument, the loading will change accordingly.
+   */
   start: (props?: Partial<LoadingProps>) => void
+  /**
+   * Function to finish loading.
+   */
   finish: () => void
+  /**
+   * Function to update loading.
+   *
+   * If you specify a `message` etc. as an argument, the loading will change accordingly.
+   */
   update: (props: Partial<LoadingProps>) => void
 }
 
 type LoadingContext = {
+  /**
+   * The screen loading animation.
+   */
   screen: LoadingContextProps
+  /**
+   * The page loading animation.
+   */
   page: LoadingContextProps
+  /**
+   * The background loading animation.
+   */
   background: LoadingContextProps
+  /**
+   * The custom loading animation.
+   *
+   * This cannot be used unless a component is defined at `config/loading/custom.`
+   */
   custom: LoadingContextProps
 }
 

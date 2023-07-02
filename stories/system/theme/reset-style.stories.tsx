@@ -22,7 +22,7 @@ export const customResetStyle = () => {
 
 export const disabledResetStyle = () => {
   return (
-    <UIProvider reset={false}>
+    <UIProvider disableResetStyle>
       <App />
     </UIProvider>
   )

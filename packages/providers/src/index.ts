@@ -1,4 +1,3 @@
-export * from './ui-provider'
-export * from './loading-provider'
-export * from './notice-provider'
-export * from './environment-provider'
+export { UIProvider } from './ui-provider'
+export type { UIProviderProps } from './ui-provider'
+export { useLoading } from './loading-provider'

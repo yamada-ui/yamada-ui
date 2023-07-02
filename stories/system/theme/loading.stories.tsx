@@ -169,7 +169,8 @@ export const useCustomLoading = () => {
                   boxShadow: ['lg', 'dark-lg'],
                 }}
               >
-                <Loading variant='dots' size='6xs' />
+                <Loading variant='dots' size='6xl' />
+
                 <VStack align='center' mb='md' gap='sm'>
                   <Text>Downloading files…</Text>
                   {message ? (
@@ -180,6 +181,7 @@ export const useCustomLoading = () => {
                     )
                   ) : null}
                 </VStack>
+
                 <Button size='sm' onClick={onFinish}>
                   Play to background
                 </Button>

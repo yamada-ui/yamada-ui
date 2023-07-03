@@ -6,7 +6,9 @@ type MotionOptions = {
   as?: keyof typeof motion
 }
 
-export type MotionProps = Omit<HTMLUIProps<'div'>, 'as'> & HTMLMotionProps<'div'> & MotionOptions
+export type MotionProps = Omit<HTMLUIProps<'div'>, 'as' | 'style'> &
+  HTMLMotionProps<'div'> &
+  MotionOptions
 
 export const Motion = motionForwardRef<MotionProps, 'div'>(
   ({ as = 'div', className, ...rest }, ref) => {

@@ -6,7 +6,10 @@ type MotionOptions = {
   as?: keyof typeof motion
 }
 
-export type MotionProps = Omit<HTMLUIProps<'div'>, 'as' | 'style'> &
+export type MotionProps = Omit<
+  HTMLUIProps<'div'>,
+  'as' | 'style' | 'onDrag' | 'onDragStart' | 'onDragEnd'
+> &
   HTMLMotionProps<'div'> &
   MotionOptions
 

@@ -1,4 +1,5 @@
 export {
+  m,
   motion,
   AnimatePresence,
   LayoutGroup,
@@ -20,6 +21,7 @@ export {
   useIsPresent,
   useReducedMotion,
   useMotionValue,
+  useCycle,
 } from 'framer-motion'
 export { Motion } from './motion'
 export type { MotionProps } from './motion'

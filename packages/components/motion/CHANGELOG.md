@@ -1,5 +1,15 @@
 # @yamada-ui/motion
 
+## 0.2.2
+
+### Patch Changes
+
+- [`faa76b46`](https://github.com/hirotomoyamada/yamada-ui/commit/faa76b46b16bd2e6bceabca758c58a3b4e5468ad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Omitted props onDrag, onDragStart, onDragEnd from HTMLUIProps.
+
+- [`a1e6e583`](https://github.com/hirotomoyamada/yamada-ui/commit/a1e6e583e748daa66113f829fa5f0f8d6bc5303b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [`c64389c9`](https://github.com/hirotomoyamada/yamada-ui/commit/c64389c94e14a618de293c51d3631df1819036ba) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Omitted style from HTMLUIProps.
+
 ## 0.2.1
 
 ### Patch Changes

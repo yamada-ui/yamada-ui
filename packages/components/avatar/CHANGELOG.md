@@ -1,5 +1,11 @@
 # @yamada-ui/avatar
 
+## 0.2.2
+
+### Patch Changes
+
+- [`408c8edd`](https://github.com/hirotomoyamada/yamada-ui/commit/408c8edd5e6d2cf0f4982daeeea85ca2e8fd7465) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
 ## 0.2.1
 
 ### Patch Changes

@@ -23,7 +23,7 @@ import { YearList, YearListProps } from './year-list'
 
 type CalendarOptions = {
   /**
-   * Props for the calendar header element.
+   * Props for calendar header element.
    */
   headerProps?: HTMLUIProps<'div'>
 }

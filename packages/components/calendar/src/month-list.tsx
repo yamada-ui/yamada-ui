@@ -7,11 +7,11 @@ import { getFormattedLabel, useCalendarContext, useMonthList } from './use-calen
 
 type MonthListOptions = {
   /**
-   * Props for the calendar header element.
+   * Props for calendar header element.
    */
   headerProps?: HTMLUIProps<'div'>
   /**
-   * Props for the calendar month button element.
+   * Props for calendar month button element.
    */
   monthProps?: ButtonProps & { component?: FC<{ month: string; year: number; index: number }> }
 }

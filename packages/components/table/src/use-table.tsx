@@ -168,39 +168,39 @@ export type UseTableProps<Y extends RowData> = TableProps &
      */
     pageSizeList?: number[]
     /**
-     * Props for the table checkbox element.
+     * Props for table checkbox element.
      */
     checkboxProps?: CheckboxProps
     /**
-     * Props for the table header group component.
+     * Props for table header group component.
      */
     headerGroupProps?: HeaderGroupProps<Y>
     /**
-     * Props for the table header component.
+     * Props for table header component.
      */
     headerProps?: HeaderProps<Y>
     /**
-     * Props for the table footer group component.
+     * Props for table footer group component.
      */
     footerGroupProps?: HeaderGroupProps<Y>
     /**
-     * Props for the table footer component.
+     * Props for table footer component.
      */
     footerProps?: HeaderProps<Y>
     /**
-     * Props for the table sort icon element.
+     * Props for table sort icon element.
      */
     sortIconProps?: IconProps
     /**
-     * Props for the table row component.
+     * Props for table row component.
      */
     rowProps?: RowProps<Y>
     /**
-     * Props for the table cell component.
+     * Props for table cell component.
      */
     cellProps?: CellProps<Y>
     /**
-     * Props for the table select column component.
+     * Props for table select column component.
      */
     selectColumnProps?: SelectColumn<Y> | false
     /**

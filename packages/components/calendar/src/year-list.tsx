@@ -7,11 +7,11 @@ import { getFormattedLabel, useCalendarContext, useYearList } from './use-calend
 
 type YearListOptions = {
   /**
-   * Props for the calendar header element.
+   * Props for calendar header element.
    */
   headerProps?: HTMLUIProps<'div'>
   /**
-   * Props for the calendar year button element.
+   * Props for calendar year button element.
    */
   yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
 }

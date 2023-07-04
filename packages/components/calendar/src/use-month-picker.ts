@@ -120,7 +120,7 @@ type UseMonthPickerBaseProps = Omit<
      */
     allowInput?: boolean
     /**
-     * Props the calendar component.
+     * Props for calendar component.
      */
     calendarProps?: CalendarBaseProps
   }

@@ -50,15 +50,15 @@ type TableOptions = {
    */
   withFooter?: boolean
   /**
-   * Props for the table thead element.
+   * Props for table thead element.
    */
   theadProps?: TableHeadProps
   /**
-   * Props for the table tbody element.
+   * Props for table tbody element.
    */
   tbodyProps?: TableBodyProps
   /**
-   * Props for the table tfoot element.
+   * Props for table tfoot element.
    */
   tfootProps?: TableFootProps
 }

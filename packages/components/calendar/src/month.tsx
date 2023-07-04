@@ -14,11 +14,11 @@ import {
 
 type MonthOptions = {
   /**
-   * Props for the calendar header element.
+   * Props for calendar header element.
    */
   headerProps?: HTMLUIProps<'div'>
   /**
-   * Props for the calendar month table element.
+   * Props for calendar month table element.
    */
   tableProps?: HTMLUIProps<'table'> & {
     thead?: HTMLUIProps<'thead'>
@@ -28,11 +28,11 @@ type MonthOptions = {
     td?: HTMLUIProps<'td'>
   }
   /**
-   * Props for the calendar weekday element.
+   * Props for calendar weekday element.
    */
   weekdayProps?: HTMLUIProps<'div'> & { component?: FC<WeekdayProps> }
   /**
-   * Props for the calendar day button element.
+   * Props for calendar day button element.
    */
   dayProps?: ButtonProps & { component?: FC<DayProps> }
 }

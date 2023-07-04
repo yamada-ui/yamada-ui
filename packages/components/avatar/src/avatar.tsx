@@ -24,7 +24,7 @@ type AvatarOptions = {
   /**
    * The name of the person in the avatar.
    *
-   * - if `src` has loaded, the name will be used as the `alt` attribute of the `img`
+   * - If `src` has loaded, the name will be used as the `alt` attribute of the `img`
    * - If `src` is not loaded, the name will be used to create the initials
    */
   name?: string

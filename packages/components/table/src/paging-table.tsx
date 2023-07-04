@@ -67,31 +67,31 @@ type TableOptions<Y extends RowData> = {
    */
   withFooter?: boolean
   /**
-   * Props for the table thead element.
+   * Props for table thead element.
    */
   theadProps?: TableHeadProps
   /**
-   * Props for the table tbody element.
+   * Props for table tbody element.
    */
   tbodyProps?: TableBodyProps
   /**
-   * Props for the table tfoot element.
+   * Props for table tfoot element.
    */
   tfootProps?: TableFootProps
   /**
-   * Props for the table container element.
+   * Props for table container element.
    */
   containerProps?: HTMLUIProps<'div'>
   /**
-   * Props for the paging control element.
+   * Props for paging control element.
    */
   pagingControlProps?: HTMLUIProps<'div'>
   /**
-   * Props for the pagination element.
+   * Props for pagination element.
    */
   paginationProps?: Omit<PaginationProps, 'page' | 'defaultPage' | 'total' | 'onChange'>
   /**
-   * Props for the select element.
+   * Props for select element.
    */
   selectProps?: Omit<
     SelectProps,

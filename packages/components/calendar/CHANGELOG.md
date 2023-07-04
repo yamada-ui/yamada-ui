@@ -1,5 +1,14 @@
 # @yamada-ui/calendar
 
+## 0.3.2
+
+### Patch Changes
+
+- [`408c8edd`](https://github.com/hirotomoyamada/yamada-ui/commit/408c8edd5e6d2cf0f4982daeeea85ca2e8fd7465) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- Updated dependencies []:
+  - @yamada-ui/popover@0.2.2
+
 ## 0.3.1
 
 ### Patch Changes

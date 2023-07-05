@@ -11,6 +11,7 @@ export {
   useSpring,
   useTime,
   useTransform,
+  transform,
   useVelocity,
   useViewportScroll,
   useAnimation as useMotionAnimation,
@@ -21,6 +22,7 @@ export {
   useIsPresent,
   useReducedMotion,
   useMotionValue,
+  useMotionValueEvent,
   useCycle,
 } from 'framer-motion'
 export { Motion } from './motion'

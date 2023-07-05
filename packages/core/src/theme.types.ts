@@ -374,7 +374,7 @@ export type ComponentMultiBaseStyle = UIMultiStyle
 export type ComponentMultiVariants = Record<string, UIMultiStyle>
 export type ComponentMultiSizes = Record<string, UIMultiStyle>
 
-export type ComponentMultiStyle = {
+export type ComponentMultiStyle<Y extends Dict = Dict> = {
   /**
    * The base style of the component.
    */
@@ -390,7 +390,7 @@ export type ComponentMultiStyle = {
   /**
    * The default props of the component.
    */
-  defaultProps?: ComponentDefaultProps
+  defaultProps?: ComponentDefaultProps<Y>
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

@@ -1,5 +1,16 @@
 # @yamada-ui/motion
 
+## 0.3.0
+
+### Minor Changes
+
+- [`487ba0d3`](https://github.com/hirotomoyamada/yamada-ui/commit/487ba0d34a72e3b76e5c307bb7e7f907a1b8fc7d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added useMotionValueEvent, transform.
+
+### Patch Changes
+
+- Updated dependencies [[`f5febff5`](https://github.com/hirotomoyamada/yamada-ui/commit/f5febff527dd1f5363d13025776750c9fff5c2b9)]:
+  - @yamada-ui/core@0.4.1
+
 ## 0.2.2
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/reorder
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`f5febff5`](https://github.com/hirotomoyamada/yamada-ui/commit/f5febff527dd1f5363d13025776750c9fff5c2b9), [`487ba0d3`](https://github.com/hirotomoyamada/yamada-ui/commit/487ba0d34a72e3b76e5c307bb7e7f907a1b8fc7d)]:
+  - @yamada-ui/core@0.4.1
+  - @yamada-ui/motion@0.3.0
+  - @yamada-ui/icon@0.2.2
+
 ## 0.2.2
 
 ### Patch Changes

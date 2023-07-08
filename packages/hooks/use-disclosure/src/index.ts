@@ -35,16 +35,19 @@ export const useDisclosure = (props: UseDisclosureProps = {}): UseDisclosureRetu
     [isControlled, handleClose],
   )
 
-  const onToggle = useCallback(() => (!isOpen ? onOpen() : onClose()), [isOpen, onOpen, onClose])
+  const onToggle = useCallback(
+    (...args: any) => (!isOpen ? onOpen(...args) : onClose(...args)),
+    [isOpen, onOpen, onClose],
+  )
 
   return [isOpen, onOpen, onClose, onToggle]
 }
 
 export type UseDisclosureReturn = [
   isOpen: boolean,
-  onOpen: () => void,
-  onClose: () => void,
-  onToggle: () => void,
+  onOpen: (...args: any) => void,
+  onClose: (...args: any) => void,
+  onToggle: (...args: any) => void,
 ]
 
 export type LazyMode = 'unmount' | 'keepMounted'

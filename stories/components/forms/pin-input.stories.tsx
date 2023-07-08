@@ -89,7 +89,7 @@ export const withBorderColor: ComponentStory<typeof PinInput> = () => {
 export const withOnComplete: ComponentStory<typeof PinInput> = () => {
   const { page } = useLoading()
 
-  return <PinInput onComplete={() => page.start({ timeout: 5000 })} />
+  return <PinInput onComplete={() => page.start({ duration: 5000 })} />
 }
 
 export const useOneTimePassword: ComponentStory<typeof PinInput> = () => {
@@ -119,7 +119,7 @@ export const customControl: ComponentStory<typeof PinInput> = () => {
   const { page } = useLoading()
   const [value, onChange] = useState('')
 
-  const onComplete = () => page.start({ timeout: 5000 })
+  const onComplete = () => page.start({ duration: 5000 })
 
   return <PinInput value={value} onChange={onChange} onComplete={onComplete} />
 }

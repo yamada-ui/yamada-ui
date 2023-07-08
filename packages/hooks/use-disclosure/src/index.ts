@@ -4,8 +4,8 @@ import { useCallback, useState } from 'react'
 export type UseDisclosureProps = {
   isOpen?: boolean
   defaultIsOpen?: boolean
-  onClose?: (args?: any) => void
-  onOpen?: (args?: any) => void
+  onClose?: (...args: any) => void
+  onOpen?: (...args: any) => void
 }
 
 export const useDisclosure = (props: UseDisclosureProps = {}): UseDisclosureReturn => {
@@ -18,19 +18,19 @@ export const useDisclosure = (props: UseDisclosureProps = {}): UseDisclosureRetu
   const isOpen = props.isOpen !== undefined ? props.isOpen : defaultIsOpen
 
   const onOpen = useCallback(
-    (args?: any) => {
+    (...args: any) => {
       if (!isControlled) setIsOpen(true)
 
-      handleOpen?.(args)
+      handleOpen?.(...args)
     },
     [isControlled, handleOpen],
   )
 
   const onClose = useCallback(
-    (args?: any) => {
+    (...args: any) => {
       if (!isControlled) setIsOpen(false)
 
-      handleClose?.(args)
+      handleClose?.(...args)
     },
     [isControlled, handleClose],
   )

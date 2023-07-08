@@ -1,5 +1,13 @@
 # @yamada-ui/use-disclosure
 
+## 0.2.1
+
+### Patch Changes
+
+- [`4aaa8d5b`](https://github.com/hirotomoyamada/yamada-ui/commit/4aaa8d5b280485885822abdf94dc347d45eac8b3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed type onOpen, onClose.
+
+- [`65f705d1`](https://github.com/hirotomoyamada/yamada-ui/commit/65f705d1bca8c3d4c66dd06e7f9a28a08ad95516) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed return type onOpen, onClose, onToggle.
+
 ## 0.2.0
 
 ### Minor Changes

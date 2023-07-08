@@ -1,5 +1,12 @@
 # @yamada-ui/tooltip
 
+## 0.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`4aaa8d5b`](https://github.com/hirotomoyamada/yamada-ui/commit/4aaa8d5b280485885822abdf94dc347d45eac8b3), [`65f705d1`](https://github.com/hirotomoyamada/yamada-ui/commit/65f705d1bca8c3d4c66dd06e7f9a28a08ad95516)]:
+  - @yamada-ui/use-disclosure@0.2.1
+
 ## 0.2.3
 
 ### Patch Changes

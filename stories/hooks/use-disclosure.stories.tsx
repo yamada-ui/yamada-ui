@@ -5,7 +5,7 @@ export default {
 }
 
 export const basic = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -28,7 +28,7 @@ export const basic = () => {
 }
 
 export const useToggle = () => {
-  const [isOpen, , , onToggle] = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure()
 
   return (
     <>

@@ -1,5 +1,11 @@
 # @yamada-ui/use-disclosure
 
+## 0.2.2
+
+### Patch Changes
+
+- [`1d29444c`](https://github.com/hirotomoyamada/yamada-ui/commit/1d29444cce34f3ba3bd5bbe8ff17a9b15e183a87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed return type from array to object.
+
 ## 0.2.1
 
 ### Patch Changes

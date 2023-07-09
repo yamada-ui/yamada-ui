@@ -1,5 +1,12 @@
 # @yamada-ui/tabs
 
+## 0.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`1d29444c`](https://github.com/hirotomoyamada/yamada-ui/commit/1d29444cce34f3ba3bd5bbe8ff17a9b15e183a87)]:
+  - @yamada-ui/use-disclosure@0.2.2
+
 ## 0.2.3
 
 ### Patch Changes

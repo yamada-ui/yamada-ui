@@ -95,7 +95,7 @@ export const Menu: FC<MenuProps> = (props) => {
     onFocusMenu()
   }, [onFocusMenu, rest])
 
-  const [isOpen, onOpen, onClose] = useDisclosure({ ...props, onOpen: onOpenInternal })
+  const { isOpen, onOpen, onClose } = useDisclosure({ ...props, onOpen: onOpenInternal })
 
   useUpdateEffect(() => {
     if (!isOpen) setFocusedIndex(-1)

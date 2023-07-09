@@ -23,7 +23,7 @@ export default {
 } as ComponentMeta<typeof Dialog>
 
 export const basic: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -46,7 +46,7 @@ export const basic: ComponentStory<typeof Dialog> = () => {
 }
 
 export const withDuration: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -70,7 +70,7 @@ export const withDuration: ComponentStory<typeof Dialog> = () => {
 }
 
 export const customDialog: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -98,7 +98,7 @@ export const customDialog: ComponentStory<typeof Dialog> = () => {
 }
 
 export const customHeader: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -121,7 +121,7 @@ export const customHeader: ComponentStory<typeof Dialog> = () => {
 }
 
 export const customFooter: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -153,7 +153,7 @@ export const customFooter: ComponentStory<typeof Dialog> = () => {
 }
 
 export const customButton: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -178,7 +178,7 @@ export const customButton: ComponentStory<typeof Dialog> = () => {
 }
 
 export const useOtherButton: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -204,7 +204,7 @@ export const useOtherButton: ComponentStory<typeof Dialog> = () => {
 
 export const withSize: ComponentStory<typeof Dialog> = () => {
   const [size, setSize] = useState<DialogProps['size']>('md')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -274,7 +274,7 @@ export const withSize: ComponentStory<typeof Dialog> = () => {
 
 export const withPlacement: ComponentStory<typeof Dialog> = () => {
   const [placement, setPlacement] = useState<DialogProps['placement']>('center')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -380,7 +380,7 @@ export const withPlacement: ComponentStory<typeof Dialog> = () => {
 
 export const withAnimation: ComponentStory<typeof Dialog> = () => {
   const [animation, setAnimation] = useState<DialogProps['animation']>('scale')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -449,7 +449,7 @@ export const withAnimation: ComponentStory<typeof Dialog> = () => {
 }
 
 export const disabledCloseButton: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -471,7 +471,7 @@ export const disabledCloseButton: ComponentStory<typeof Dialog> = () => {
 }
 
 export const customCloseButton: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -498,7 +498,7 @@ export const customCloseButton: ComponentStory<typeof Dialog> = () => {
 }
 
 export const disabledOverlay: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -522,7 +522,7 @@ export const disabledOverlay: ComponentStory<typeof Dialog> = () => {
 }
 
 export const customOverlay: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -549,7 +549,7 @@ export const customOverlay: ComponentStory<typeof Dialog> = () => {
 }
 
 export const scrollOnMount: ComponentStory<typeof Dialog> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>

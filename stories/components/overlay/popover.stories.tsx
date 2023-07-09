@@ -95,7 +95,8 @@ export const withDuration: ComponentStory<typeof Popover> = () => {
 }
 
 export const controlPopover: ComponentStory<typeof Popover> = () => {
-  const [isOpen, , onClose, onToggle] = useDisclosure()
+  const { isOpen, onClose, onToggle } = useDisclosure()
+
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
       <Button onClick={onToggle}>Open Popover</Button>

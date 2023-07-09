@@ -23,7 +23,7 @@ export default {
 } as ComponentMeta<typeof Drawer>
 
 export const basic: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -49,7 +49,7 @@ export const basic: ComponentStory<typeof Drawer> = () => {
 }
 
 export const withDuration: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -76,7 +76,7 @@ export const withDuration: ComponentStory<typeof Drawer> = () => {
 
 export const withSize: ComponentStory<typeof Drawer> = () => {
   const [size, setSize] = useState<DrawerProps['size']>('md')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -148,7 +148,7 @@ export const withSize: ComponentStory<typeof Drawer> = () => {
 
 export const withPosition: ComponentStory<typeof Drawer> = () => {
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -210,7 +210,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
 }
 
 export const withFullHeight: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -236,7 +236,7 @@ export const withFullHeight: ComponentStory<typeof Drawer> = () => {
 }
 
 export const disabledCloseButton: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -262,7 +262,7 @@ export const disabledCloseButton: ComponentStory<typeof Drawer> = () => {
 }
 
 export const customCloseButton: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -290,7 +290,7 @@ export const customCloseButton: ComponentStory<typeof Drawer> = () => {
 }
 
 export const disabledOverlay: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -316,7 +316,7 @@ export const disabledOverlay: ComponentStory<typeof Drawer> = () => {
 }
 
 export const customOverlay: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -344,7 +344,7 @@ export const customOverlay: ComponentStory<typeof Drawer> = () => {
 }
 
 export const scrollOnMount: ComponentStory<typeof Drawer> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>

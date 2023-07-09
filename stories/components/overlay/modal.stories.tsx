@@ -23,7 +23,7 @@ export default {
 } as ComponentMeta<typeof Modal>
 
 export const basic: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -49,7 +49,7 @@ export const basic: ComponentStory<typeof Modal> = () => {
 }
 
 export const withDuration: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -76,7 +76,7 @@ export const withDuration: ComponentStory<typeof Modal> = () => {
 
 export const withSize: ComponentStory<typeof Modal> = () => {
   const [size, setSize] = useState<ModalProps['size']>('md')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -148,7 +148,7 @@ export const withSize: ComponentStory<typeof Modal> = () => {
 
 export const withPlacement: ComponentStory<typeof Modal> = () => {
   const [placement, setPlacement] = useState<ModalProps['placement']>('center')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -256,7 +256,7 @@ export const withPlacement: ComponentStory<typeof Modal> = () => {
 
 export const withAnimation: ComponentStory<typeof Modal> = () => {
   const [animation, setAnimation] = useState<ModalProps['animation']>('scale')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -327,14 +327,14 @@ export const withAnimation: ComponentStory<typeof Modal> = () => {
 }
 
 export const nestedModal: ComponentStory<typeof Modal> = () => {
-  const [isFirstOpen, onFirstOpen, onFirstClose] = useDisclosure()
-  const [isSecondOpen, onSecondOpen, onSecondClose] = useDisclosure()
+  const firstControls = useDisclosure()
+  const secondControls = useDisclosure()
 
   return (
     <>
-      <Button onClick={onFirstOpen}>Open Modal</Button>
+      <Button onClick={firstControls.onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isFirstOpen} onClose={onFirstClose}>
+      <Modal isOpen={firstControls.isOpen} onClose={firstControls.onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -343,15 +343,15 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onFirstClose}>
+          <Button variant='ghost' onClick={firstControls.onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary' onClick={onSecondOpen}>
+          <Button colorScheme='primary' onClick={secondControls.onOpen}>
             あらすじ
           </Button>
         </ModalFooter>
 
-        <Modal isOpen={isSecondOpen} onClose={onSecondClose} size='sm'>
+        <Modal isOpen={secondControls.isOpen} onClose={secondControls.onClose} size='sm'>
           <ModalHeader>あらすじ</ModalHeader>
 
           <ModalBody>
@@ -359,7 +359,7 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost' onClick={onSecondClose}>
+            <Button variant='ghost' onClick={secondControls.onClose}>
               とじる
             </Button>
             <Button colorScheme='primary'>Wikipadia</Button>
@@ -371,7 +371,7 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
 }
 
 export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -397,7 +397,7 @@ export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
 }
 
 export const customCloseButton: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -425,7 +425,7 @@ export const customCloseButton: ComponentStory<typeof Modal> = () => {
 }
 
 export const disabledOverlay: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -451,7 +451,7 @@ export const disabledOverlay: ComponentStory<typeof Modal> = () => {
 }
 
 export const customOverlay: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -480,7 +480,7 @@ export const customOverlay: ComponentStory<typeof Modal> = () => {
 
 export const scrollBehavior: ComponentStory<typeof Modal> = () => {
   const [scrollBehavior, setScrollBehavior] = useState<ModalProps['scrollBehavior']>('inside')
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -548,7 +548,7 @@ export const scrollBehavior: ComponentStory<typeof Modal> = () => {
 }
 
 export const scrollOnMount: ComponentStory<typeof Modal> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>

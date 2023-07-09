@@ -346,7 +346,7 @@ export const useLazy: ComponentStory<typeof Menu> = () => {
 }
 
 export const customControl: ComponentStory<typeof Menu> = () => {
-  const [isOpen, onOpen, onClose] = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>

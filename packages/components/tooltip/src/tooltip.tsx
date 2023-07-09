@@ -182,7 +182,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
 
     closeOnPointerDown = closeOnMouseDown
 
-    const [isOpen, onOpen, onClose] = useDisclosure(rest)
+    const { isOpen, onOpen, onClose } = useDisclosure(rest)
 
     const triggerRef = useRef<HTMLElement>(null)
 

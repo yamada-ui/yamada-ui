@@ -1,5 +1,12 @@
 # @yamada-ui/nextjs
 
+## 4.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/react@0.5.5
+
 ## 4.0.4
 
 ### Patch Changes

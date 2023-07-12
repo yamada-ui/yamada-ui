@@ -1,5 +1,11 @@
 # @yamada-ui/table
 
+## 0.2.6
+
+### Patch Changes
+
+- [`4b1a7618`](https://github.com/hirotomoyamada/yamada-ui/commit/4b1a7618cff8804951bc2933eb0f917a8c34c8b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added default type to TableProps.
+
 ## 0.2.5
 
 ### Patch Changes

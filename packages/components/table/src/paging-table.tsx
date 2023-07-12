@@ -110,7 +110,7 @@ type TableOptions<Y extends RowData> = {
   children?: ReactNode | ((props: PaginationComponentProps<Y>) => ReactNode)
 }
 
-export type PagingTableProps<Y extends RowData> = Omit<
+export type PagingTableProps<Y extends RowData = unknown> = Omit<
   UseTableProps<Y>,
   'enablePagenation' | 'children'
 > &

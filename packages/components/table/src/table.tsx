@@ -76,7 +76,8 @@ type PagingTableProps =
   | 'manualPagination'
   | 'autoResetPageIndex'
 
-export type TableProps<Y extends RowData> = Omit<UseTableProps<Y>, PagingTableProps> & TableOptions
+export type TableProps<Y extends RowData = unknown> = Omit<UseTableProps<Y>, PagingTableProps> &
+  TableOptions
 
 export const Table = forwardRef(
   <Y extends RowData>(

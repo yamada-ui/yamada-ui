@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-event-listener",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Yamada UI useEventListener custom hook",
   "keywords": [
     "use-event-listener"

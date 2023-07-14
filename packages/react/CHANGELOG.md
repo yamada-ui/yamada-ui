@@ -1,5 +1,70 @@
 # @yamada-ui/react
 
+## 0.5.7
+
+### Patch Changes
+
+- Updated dependencies [[`32b46662`](https://github.com/hirotomoyamada/yamada-ui/commit/32b4666218f378922e6d34bc1502577ef7d1cfe2)]:
+  - @yamada-ui/motion@0.3.2
+  - @yamada-ui/core@0.4.3
+  - @yamada-ui/accordion@0.2.5
+  - @yamada-ui/checkbox@0.2.5
+  - @yamada-ui/modal@0.2.5
+  - @yamada-ui/popover@0.2.7
+  - @yamada-ui/reorder@0.2.5
+  - @yamada-ui/switch@0.2.5
+  - @yamada-ui/tooltip@0.2.7
+  - @yamada-ui/transitions@0.2.5
+  - @yamada-ui/providers@0.4.4
+  - @yamada-ui/alert@0.3.4
+  - @yamada-ui/autocomplete@0.2.7
+  - @yamada-ui/avatar@0.2.5
+  - @yamada-ui/badge@0.2.4
+  - @yamada-ui/breadcrumb@0.2.4
+  - @yamada-ui/button@0.2.4
+  - @yamada-ui/card@0.2.4
+  - @yamada-ui/close-button@0.2.4
+  - @yamada-ui/editable@0.2.4
+  - @yamada-ui/file-button@0.2.4
+  - @yamada-ui/file-input@0.2.4
+  - @yamada-ui/form-control@0.2.4
+  - @yamada-ui/highlight@0.2.4
+  - @yamada-ui/icon@0.2.4
+  - @yamada-ui/image@0.2.4
+  - @yamada-ui/indicator@0.2.4
+  - @yamada-ui/input@0.2.4
+  - @yamada-ui/kbd@0.2.4
+  - @yamada-ui/layouts@0.2.4
+  - @yamada-ui/link@0.2.4
+  - @yamada-ui/list@0.2.4
+  - @yamada-ui/loading@0.3.4
+  - @yamada-ui/menu@0.2.7
+  - @yamada-ui/native-select@0.2.4
+  - @yamada-ui/native-table@0.2.4
+  - @yamada-ui/notice@0.3.4
+  - @yamada-ui/number-input@0.2.4
+  - @yamada-ui/pagination@0.2.4
+  - @yamada-ui/pin-input@0.2.4
+  - @yamada-ui/progress@0.3.4
+  - @yamada-ui/radio@0.2.4
+  - @yamada-ui/scroll-area@0.2.4
+  - @yamada-ui/segmented-control@0.2.4
+  - @yamada-ui/select@0.2.7
+  - @yamada-ui/skeleton@0.2.4
+  - @yamada-ui/slider@0.2.4
+  - @yamada-ui/stepper@0.2.4
+  - @yamada-ui/tabs@0.2.6
+  - @yamada-ui/tag@0.2.4
+  - @yamada-ui/textarea@0.2.4
+  - @yamada-ui/typography@0.2.4
+  - @yamada-ui/use-animation@0.1.16
+  - @yamada-ui/use-breakpoint@0.1.16
+  - @yamada-ui/use-popper@0.2.4
+  - @yamada-ui/use-token@0.1.16
+  - @yamada-ui/use-value@0.1.16
+  - @yamada-ui/theme@0.3.5
+  - @yamada-ui/use-media-query@0.1.12
+
 ## 0.5.6
 
 ### Patch Changes

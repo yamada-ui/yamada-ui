@@ -1,4 +1,4 @@
-import { ui, motionForwardRef, HTMLUIProps } from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { motion, HTMLMotionProps } from 'framer-motion'
 
@@ -13,7 +13,7 @@ export type MotionProps = Omit<
   HTMLMotionProps<'div'> &
   MotionOptions
 
-export const Motion = motionForwardRef<MotionProps, 'div'>(
+export const Motion = forwardRef<MotionProps, 'div', false>(
   ({ as = 'div', className, ...rest }, ref) => {
     return <ui.div as={motion[as]} ref={ref} className={cx('ui-motion', className)} {...rest} />
   },

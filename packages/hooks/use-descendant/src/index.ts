@@ -270,4 +270,4 @@ export const createDescendant = <
     useDescendantsContext: () => cast<DescendantsManager<T, K>>(useDescendantsContext()),
     useDescendants: () => useDescendants<T, K>(),
     useDescendant: (options?: DescendantOptions<T, K>) => useDescendant<T, K>(options),
-  } as const)
+  }) as const

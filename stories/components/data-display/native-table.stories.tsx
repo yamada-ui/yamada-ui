@@ -495,7 +495,9 @@ export const withCaption: ComponentStory<typeof NativeTable> = () => {
       </TableContainer>
       <TableContainer>
         <NativeTable>
-          <TableCaption placement='bottom'>©バードスタジオ/集英社・東映アニメーション</TableCaption>
+          <TableCaption placement='bottom'>
+            ©バードスタジオ/集英社・東映アニメーション
+          </TableCaption>
 
           <Thead>
             <Tr>

@@ -1,17 +1,13 @@
-import { Global, Theme } from '@emotion/react'
 import {
-  css,
-  StyledTheme,
   ThemeConfig,
   ThemeProvider,
   ColorModeProvider,
-  useColorMode,
-  UIStyle,
-  Interpolation,
   ColorModeManager,
+  ResetStyle,
+  GlobalStyle,
 } from '@yamada-ui/core'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
-import { Dict, getMemoizedObject as get, runIfFunc } from '@yamada-ui/utils'
+import { Dict } from '@yamada-ui/utils'
 import { FC, ReactNode } from 'react'
 import { EnvironmentProvider, Environment } from './environment-provider'
 import { LoadingProvider } from './loading-provider'
@@ -95,45 +91,5 @@ export const UIProvider: FC<UIProviderProps> = ({
         </EnvironmentProvider>
       </ColorModeProvider>
     </ThemeProvider>
-  )
-}
-
-const ResetStyle: FC = () => {
-  const { colorMode } = useColorMode()
-
-  return (
-    <Global
-      styles={
-        ((theme: StyledTheme<Dict>) => {
-          let style = get(theme, 'styles.resetStyle', {})
-
-          const computedStyle = runIfFunc(style, { theme, colorMode })
-
-          if (!computedStyle) return undefined
-
-          return css(computedStyle)(theme)
-        }) as Interpolation<Theme>
-      }
-    />
-  )
-}
-
-const GlobalStyle: FC = () => {
-  const { colorMode } = useColorMode()
-
-  return (
-    <Global
-      styles={
-        ((theme: StyledTheme<Dict>) => {
-          let style: UIStyle = get(theme, 'styles.globalStyle', {})
-
-          const computedStyle = runIfFunc(style, { theme, colorMode })
-
-          if (!computedStyle) return undefined
-
-          return css(computedStyle)(theme)
-        }) as Interpolation<Theme>
-      }
-    />
   )
 }

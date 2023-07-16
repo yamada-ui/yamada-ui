@@ -1,5 +1,24 @@
 # @yamada-ui/calendar
 
+## 0.3.8
+
+### Patch Changes
+
+- [`628ef528`](https://github.com/hirotomoyamada/yamada-ui/commit/628ef5285864314d2facc1a095d6d99ef392eb4d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [`735a78de`](https://github.com/hirotomoyamada/yamada-ui/commit/735a78de8fc1cf1ab7b9f2a8a44c9fce320f119f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated docs.
+
+- Updated dependencies [[`d46c94b1`](https://github.com/hirotomoyamada/yamada-ui/commit/d46c94b1732644b269872c033102d501444efe0d), [`45eec70b`](https://github.com/hirotomoyamada/yamada-ui/commit/45eec70b0ec611b245a15be3d6ac5f203f403ebc), [`735a78de`](https://github.com/hirotomoyamada/yamada-ui/commit/735a78de8fc1cf1ab7b9f2a8a44c9fce320f119f)]:
+  - @yamada-ui/core@0.5.0
+  - @yamada-ui/utils@0.1.3
+  - @yamada-ui/form-control@0.2.5
+  - @yamada-ui/popover@0.2.8
+  - @yamada-ui/button@0.2.5
+  - @yamada-ui/icon@0.2.5
+  - @yamada-ui/use-clickable@0.2.2
+  - @yamada-ui/use-controllable-state@0.1.4
+  - @yamada-ui/use-outside-click@0.1.3
+
 ## 0.3.7
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @yamada-ui/breadcrumb
 
+## 0.2.5
+
+### Patch Changes
+
+- [`735a78de`](https://github.com/hirotomoyamada/yamada-ui/commit/735a78de8fc1cf1ab7b9f2a8a44c9fce320f119f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated docs.
+
+- Updated dependencies [[`d46c94b1`](https://github.com/hirotomoyamada/yamada-ui/commit/d46c94b1732644b269872c033102d501444efe0d), [`45eec70b`](https://github.com/hirotomoyamada/yamada-ui/commit/45eec70b0ec611b245a15be3d6ac5f203f403ebc)]:
+  - @yamada-ui/core@0.5.0
+  - @yamada-ui/utils@0.1.3
+
 ## 0.2.4
 
 ### Patch Changes

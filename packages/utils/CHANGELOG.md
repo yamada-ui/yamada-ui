@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 0.1.3
+
+### Patch Changes
+
+- [`45eec70b`](https://github.com/hirotomoyamada/yamada-ui/commit/45eec70b0ec611b245a15be3d6ac5f203f403ebc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
 ## 0.1.2
 
 ### Patch Changes

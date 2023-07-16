@@ -1,5 +1,12 @@
 # @yamada-ui/pin-input
 
+## 0.2.6
+
+### Patch Changes
+
+- Updated dependencies [[`ec3b6db7`](https://github.com/hirotomoyamada/yamada-ui/commit/ec3b6db77d122978d98151ee2b9ba8be175d9d05)]:
+  - @yamada-ui/use-descendant@0.1.4
+
 ## 0.2.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/providers
 
+## 0.5.1
+
+### Patch Changes
+
+- [`64313b93`](https://github.com/hirotomoyamada/yamada-ui/commit/64313b93a046733e8510e58c3ceed69affb00fd3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed ResetStyle, GlobalStyle.
+
 ## 0.5.0
 
 ### Minor Changes

@@ -38,3 +38,33 @@ export const useToggle = () => {
     </>
   )
 }
+
+export const withChain = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure({
+    onOpen: (...args) => {
+      console.log('Args:', args)
+    },
+    onClose: (...args) => {
+      console.log('Args:', args)
+    },
+  })
+
+  return (
+    <>
+      <Button onClick={() => onOpen('This is arg')}>Open Dialog</Button>
+
+      <Dialog
+        isOpen={isOpen}
+        onClose={() => onClose('This is arg')}
+        header='孫悟空'
+        cancel='わけない'
+        onCancel={() => onClose('This is arg')}
+        success='わける'
+        onSuccess={() => onClose('This is arg')}
+      >
+        だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+      </Dialog>
+    </>
+  )
+}

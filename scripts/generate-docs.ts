@@ -116,11 +116,11 @@ const extractThemeProps = ({ colors, components = {} }: Theme): Record<string, P
   return result
 }
 
-const prettier = (typeName: string) => {
+const prettier = async (typeName: string) => {
   try {
     const prefix = 'type ONLY_FOR_FORMAT = '
 
-    const prettyType = format(prefix + typeName, {
+    const prettyType = await format(prefix + typeName, {
       parser: 'typescript',
       semi: false,
     })
@@ -146,7 +146,7 @@ const sortByRequiredProperties = (properties: ComponentTypeProperties) =>
       .sort(([, a], [, b]) => (a.required === b.required ? 0 : a.required ? -1 : 1)),
   )
 
-const extractPropertiesOfTypeName = (
+const extractPropertiesOfTypeName = async (
   searchTerm: string | RegExp,
   sourceFile: SourceFile,
   typeChecker: TypeChecker,
@@ -185,7 +185,7 @@ const extractPropertiesOfTypeName = (
       const typeName = typeChecker.typeToString(nonNullableType)
       const required = nonNullableType === type && typeName !== 'any'
 
-      const prettyType = prettier(typeName)
+      const prettyType = await prettier(typeName)
 
       properties[propertyName] = {
         type: prettyType,
@@ -249,11 +249,11 @@ const createTypeSearch = (configPath: string, { shouldIgnoreProperty }: TypeSear
   const { getSourceFiles, getTypeChecker } = createProgram(fileNames, options)
   const sourceFiles = getSourceFiles()
 
-  return (searchTerm: Parameters<typeof extractPropertiesOfTypeName>[0]) => {
+  return async (searchTerm: Parameters<typeof extractPropertiesOfTypeName>[0]) => {
     const results: Record<string, ComponentTypeProperties> = {}
 
-    for (const sourceFile of sourceFiles) {
-      const typeInfo = extractPropertiesOfTypeName(searchTerm, sourceFile, getTypeChecker(), {
+    for await (const sourceFile of sourceFiles) {
+      const typeInfo = await extractPropertiesOfTypeName(searchTerm, sourceFile, getTypeChecker(), {
         shouldIgnoreProperty,
       })
 
@@ -288,14 +288,15 @@ const main = async () => {
 
   const themeProps = extractThemeProps(defaultTheme)
 
-  const typeExports = extractTypeExports(content)
-    .map(searchType)
+  const typeExports = await Promise.all(extractTypeExports(content).map(searchType))
+
+  const transformTypeExports = typeExports
     .filter((value) => Object.keys(value).length !== 0)
     .reduce((acc, value) => ({ ...acc, ...value }), {})
 
   const typeExportsWithThemeProps: Record<string, unknown> = {}
 
-  for (const [name, values] of Object.entries(typeExports)) {
+  for (const [name, values] of Object.entries(transformTypeExports)) {
     typeExportsWithThemeProps[name] = sortByRequiredProperties({
       ...values,
       ...themeProps[name],
@@ -308,7 +309,7 @@ const main = async () => {
 
   const prettierConfig = await resolveConfig(process.cwd())
 
-  const data = format(JSON.stringify(typeExportsWithThemeProps), {
+  const data = await format(JSON.stringify(typeExportsWithThemeProps), {
     ...prettierConfig,
     parser: 'json',
   })

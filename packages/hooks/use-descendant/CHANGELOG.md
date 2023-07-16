@@ -1,5 +1,14 @@
 # @yamada-ui/use-descendant
 
+## 0.1.3
+
+### Patch Changes
+
+- [`ec3b6db7`](https://github.com/hirotomoyamada/yamada-ui/commit/ec3b6db77d122978d98151ee2b9ba8be175d9d05) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- Updated dependencies [[`45eec70b`](https://github.com/hirotomoyamada/yamada-ui/commit/45eec70b0ec611b245a15be3d6ac5f203f403ebc)]:
+  - @yamada-ui/utils@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes

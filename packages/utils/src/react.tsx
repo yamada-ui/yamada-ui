@@ -256,9 +256,7 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
   const callback = React.useCallback((...args: Parameters<T>): ReturnType<T> => {
     const callId = ++lastCallId.current
 
-    if (!state.loading) {
-      setState((prevState) => ({ ...prevState, loading: true }))
-    }
+    if (!state.loading) setState((prevState) => ({ ...prevState, loading: true }))
 
     return func(...args).then(
       (value) => {

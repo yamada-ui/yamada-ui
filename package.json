@@ -107,7 +107,7 @@
     "@yamada-ui/theme": "workspace:*",
     "dotenv": "^16.1.4",
     "eslint": "8.41.0",
-    "eslint-config-airbnb-typescript": "17.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-react": "1.1.7",
     "eslint-plugin-import": "2.27.5",

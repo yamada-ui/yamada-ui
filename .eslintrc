@@ -10,7 +10,6 @@
     "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "airbnb-typescript",
     "prettier"
   ],
   "env": {
@@ -23,7 +22,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["@typescript-eslint/eslint-plugin", "testing-library"],
+  "plugins": ["@typescript-eslint/eslint-plugin", "testing-library", "unused-imports", "import"],
   "rules": {
     "import/order": [
       "error",
@@ -49,7 +48,8 @@
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/no-redeclare": "off",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "unused-imports/no-unused-imports": "error"
   },
   "overrides": [
     {

@@ -17,6 +17,10 @@
   </a>
 </p>
 
+<p align='center'>
+  English | <a href='./README.ja.md'>日本語</a>
+</p>
+
 Yamada UI is a React UI component library that streamlines the development of cutting-edge web applications and websites. This library offers a diverse range of components that can be easily combined to construct complex user interfaces, incorporating various features such as color modes and animations, which are not typically supported by other React UI component libraries.
 
 ## Contents

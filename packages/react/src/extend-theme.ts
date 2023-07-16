@@ -66,24 +66,24 @@ export const extendStyle = (name: 'globalStyle' | 'resetStyle', style: UIStyle):
 }
 
 export const extendComponent = (
-  name: keyof typeof defaultTheme['components'],
+  name: keyof (typeof defaultTheme)['components'],
   componentStyle?: ComponentStyle,
 ): ComponentStyle => mergeObject(get(defaultTheme, `components.${name}`, {}), componentStyle ?? {})
 
 export const extendComponentSize = (
-  name: keyof typeof defaultTheme['components'],
+  name: keyof (typeof defaultTheme)['components'],
   componentSizes?: ComponentSizes,
 ): ComponentSizes =>
   mergeObject(get(defaultTheme, `components.${name}.sizes`, {}), componentSizes ?? {})
 
 export const extendComponentVariant = (
-  name: keyof typeof defaultTheme['components'],
+  name: keyof (typeof defaultTheme)['components'],
   componentVariants?: ComponentVariants,
 ): ComponentVariants =>
   mergeObject(get(defaultTheme, `components.${name}.variants`, {}), componentVariants ?? {})
 
 export const extendComponentDefaultProps = (
-  name: keyof typeof defaultTheme['components'],
+  name: keyof (typeof defaultTheme)['components'],
   componentDefaultProps?: ComponentDefaultProps,
 ): ComponentDefaultProps =>
   mergeObject(get(defaultTheme, `components.${name}.defaultProps`, {}), componentDefaultProps ?? {})

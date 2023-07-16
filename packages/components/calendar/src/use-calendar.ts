@@ -192,7 +192,9 @@ export const getFormattedLabel = (
   if (dateOrYear instanceof Date) {
     return dayjs(dateOrYear).locale(locale).format(format)
   } else {
-    return dayjs(new Date(dateOrYear, 1, 1)).locale(locale).format(format)
+    return dayjs(new Date(dateOrYear, 1, 1))
+      .locale(locale)
+      .format(format)
   }
 }
 

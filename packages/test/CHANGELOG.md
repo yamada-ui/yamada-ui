@@ -1,5 +1,12 @@
 # @yamada-ui/test
 
+## 0.1.25
+
+### Patch Changes
+
+- Updated dependencies [[`64313b93`](https://github.com/hirotomoyamada/yamada-ui/commit/64313b93a046733e8510e58c3ceed69affb00fd3)]:
+  - @yamada-ui/providers@0.5.1
+
 ## 0.1.24
 
 ### Patch Changes

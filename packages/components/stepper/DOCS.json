@@ -42,15 +42,15 @@
   "StepSeparator": {},
   "StepStatus": {
     "active": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: Omit<...>) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)",
       "required": false
     },
     "complete": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: Omit<...>) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)",
       "required": false
     },
     "incomplete": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: Omit<...>) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)",
       "required": false
     }
   },

@@ -166,7 +166,7 @@
     },
     "id": { "type": "string", "required": false },
     "inputMode": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"search\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"search\"\n  | \"text\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
       "defaultValue": "'decimal'",
       "required": false,
       "description": "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices."
@@ -231,7 +231,7 @@
     },
     "onFocus": { "type": "FocusEventHandler<HTMLInputElement>", "required": false },
     "onInvalid": {
-      "type": "(\n  message: ValidityState,\n  value: string,\n  valueAsNumber: number\n) => void",
+      "type": "(\n  message: ValidityState,\n  value: string,\n  valueAsNumber: number,\n) => void",
       "required": false,
       "description": "The callback invoked when invalid number is entered."
     },

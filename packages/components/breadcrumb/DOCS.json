@@ -1,7 +1,7 @@
 {
   "Breadcrumb": {
     "gap": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 79 more ... | ColorModeArray<...>",
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 79 more ... | ColorModeArray<...>",
       "defaultValue": "'sm'",
       "required": false,
       "description": "The left and right margin applied to the separator."

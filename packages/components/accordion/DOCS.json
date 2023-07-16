@@ -11,7 +11,7 @@
       "description": "The initial index(es) of the accordion item to expand."
     },
     "icon": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: { ...; }) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
       "required": false,
       "description": "The accordion icon for all items to use."
     },
@@ -53,7 +53,7 @@
   },
   "AccordionItem": {
     "icon": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: { ...; }) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
       "required": false,
       "description": "The accordion icon to use."
     },
@@ -64,7 +64,7 @@
       "description": "If `true`, the accordion item will be disabled."
     },
     "label": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: { ...; }) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
       "required": false,
       "description": "The accordion label to use."
     }
@@ -119,7 +119,7 @@
   },
   "AccordionLabel": {
     "icon": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | ((props: { ...; }) => ReactNode)",
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
       "required": false,
       "description": "The accordion icon to use."
     }

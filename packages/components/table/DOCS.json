@@ -3,12 +3,12 @@
     "cellProps": {
       "type": "CellProps<Y>",
       "required": false,
-      "description": "Props for the table cell component."
+      "description": "Props for table cell component."
     },
     "checkboxProps": {
       "type": "CheckboxProps",
       "required": false,
-      "description": "Props for the table checkbox element."
+      "description": "Props for table checkbox element."
     },
     "colorScheme": {
       "defaultValue": "gray",
@@ -34,22 +34,22 @@
     "footerGroupProps": {
       "type": "HeaderGroupProps<Y>",
       "required": false,
-      "description": "Props for the table footer group component."
+      "description": "Props for table footer group component."
     },
     "footerProps": {
       "type": "HeaderProps<Y>",
       "required": false,
-      "description": "Props for the table footer component."
+      "description": "Props for table footer component."
     },
     "headerGroupProps": {
       "type": "HeaderGroupProps<Y>",
       "required": false,
-      "description": "Props for the table header group component."
+      "description": "Props for table header group component."
     },
     "headerProps": {
       "type": "HeaderProps<Y>",
       "required": false,
-      "description": "Props for the table header component."
+      "description": "Props for table header component."
     },
     "highlightOnHover": {
       "type": "boolean",
@@ -91,7 +91,7 @@
     "rowProps": {
       "type": "RowProps<Y>",
       "required": false,
-      "description": "Props for the table row component."
+      "description": "Props for table row component."
     },
     "rowsClickSelect": {
       "type": "boolean",
@@ -102,7 +102,7 @@
     "selectColumnProps": {
       "type": "false | SelectColumn<Y, unknown>",
       "required": false,
-      "description": "Props for the table select column component."
+      "description": "Props for table select column component."
     },
     "selectedRowIds": {
       "type": "string[]",
@@ -119,22 +119,22 @@
     "sortIconProps": {
       "type": "IconProps",
       "required": false,
-      "description": "Props for the table sort icon element."
+      "description": "Props for table sort icon element."
     },
     "tbodyProps": {
       "type": "TableBodyProps",
       "required": false,
-      "description": "Props for the table tbody element."
+      "description": "Props for table tbody element."
     },
     "tfootProps": {
       "type": "TableFootProps",
       "required": false,
-      "description": "Props for the table tfoot element."
+      "description": "Props for table tfoot element."
     },
     "theadProps": {
       "type": "TableHeadProps",
       "required": false,
-      "description": "Props for the table thead element."
+      "description": "Props for table thead element."
     },
     "variant": {
       "defaultValue": "simple",
@@ -171,17 +171,17 @@
     "cellProps": {
       "type": "CellProps<Y>",
       "required": false,
-      "description": "Props for the table cell component."
+      "description": "Props for table cell component."
     },
     "checkboxProps": {
       "type": "CheckboxProps",
       "required": false,
-      "description": "Props for the table checkbox element."
+      "description": "Props for table checkbox element."
     },
     "containerProps": {
       "type": "HTMLUIProps<\"div\">",
       "required": false,
-      "description": "Props for the table container element."
+      "description": "Props for table container element."
     },
     "defaultPageIndex": {
       "type": "number",
@@ -213,12 +213,12 @@
     "footerGroupProps": {
       "type": "HeaderGroupProps<Y>",
       "required": false,
-      "description": "Props for the table footer group component."
+      "description": "Props for table footer group component."
     },
     "footerProps": {
       "type": "HeaderProps<Y>",
       "required": false,
-      "description": "Props for the table footer component."
+      "description": "Props for table footer component."
     },
     "formatPageSizeLabel": {
       "type": "(pageSize: number) => string",
@@ -228,12 +228,12 @@
     "headerGroupProps": {
       "type": "HeaderGroupProps<Y>",
       "required": false,
-      "description": "Props for the table header group component."
+      "description": "Props for table header group component."
     },
     "headerProps": {
       "type": "HeaderProps<Y>",
       "required": false,
-      "description": "Props for the table header component."
+      "description": "Props for table header component."
     },
     "highlightOnHover": {
       "type": "boolean",
@@ -296,12 +296,12 @@
     "paginationProps": {
       "type": "Omit<\n  PaginationProps,\n  \"onChange\" | \"page\" | \"defaultPage\" | \"total\"\n>",
       "required": false,
-      "description": "Props for the pagination element."
+      "description": "Props for pagination element."
     },
     "pagingControlProps": {
       "type": "HTMLUIProps<\"div\">",
       "required": false,
-      "description": "Props for the paging control element."
+      "description": "Props for paging control element."
     },
     "rowId": {
       "type": "keyof Y",
@@ -311,7 +311,7 @@
     "rowProps": {
       "type": "RowProps<Y>",
       "required": false,
-      "description": "Props for the table row component."
+      "description": "Props for table row component."
     },
     "rowsClickSelect": {
       "type": "boolean",
@@ -322,7 +322,7 @@
     "selectColumnProps": {
       "type": "false | SelectColumn<Y, unknown>",
       "required": false,
-      "description": "Props for the table select column component."
+      "description": "Props for table select column component."
     },
     "selectedRowIds": {
       "type": "string[]",
@@ -332,28 +332,28 @@
     "selectProps": {
       "type": "Omit<\n  SelectProps,\n  | \"data\"\n  | \"defaultValue\"\n  | \"children\"\n  | \"onChange\"\n  | \"value\"\n  | \"placeholderInOptions\"\n>",
       "required": false,
-      "description": "Props for the select element."
+      "description": "Props for select element."
     },
     "sort": { "type": "Sort<Y>", "required": false, "description": "The sort of the table." },
     "sortIconProps": {
       "type": "IconProps",
       "required": false,
-      "description": "Props for the table sort icon element."
+      "description": "Props for table sort icon element."
     },
     "tbodyProps": {
       "type": "TableBodyProps",
       "required": false,
-      "description": "Props for the table tbody element."
+      "description": "Props for table tbody element."
     },
     "tfootProps": {
       "type": "TableFootProps",
       "required": false,
-      "description": "Props for the table tfoot element."
+      "description": "Props for table tfoot element."
     },
     "theadProps": {
       "type": "TableHeadProps",
       "required": false,
-      "description": "Props for the table thead element."
+      "description": "Props for table thead element."
     },
     "withBorder": {
       "type": "boolean",

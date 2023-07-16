@@ -1,7 +1,7 @@
 {
   "Popover": {
     "animation": {
-      "type": "\"top\" | \"bottom\" | \"right\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -13,7 +13,7 @@
       "description": "If `true`, focus will be transferred to the first interactive element when the popover opens."
     },
     "boundary": {
-      "type": "\"clippingParents\" | \"scrollParent\" | HTMLElement",
+      "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
       "required": false,
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
@@ -48,7 +48,7 @@
       "description": "If `true`, the popover will be initially opened."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
       "required": false,
       "description": "The animation duration."
     },
@@ -143,7 +143,7 @@
       "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
     },
     "strategy": {
-      "type": "\"absolute\" | \"fixed\"",
+      "type": "\"fixed\" | \"absolute\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
@@ -169,13 +169,16 @@
     "aria-activedescendant": { "type": "string", "required": false },
     "aria-atomic": { "type": "Booleanish", "required": false },
     "aria-autocomplete": {
-      "type": "\"none\" | \"list\" | \"inline\" | \"both\"",
+      "type": "\"list\" | \"none\" | \"inline\" | \"both\"",
       "required": false
     },
+    "aria-braillelabel": { "type": "string", "required": false },
+    "aria-brailleroledescription": { "type": "string", "required": false },
     "aria-busy": { "type": "Booleanish", "required": false },
     "aria-checked": { "type": "boolean | \"true\" | \"false\" | \"mixed\"", "required": false },
     "aria-colcount": { "type": "number", "required": false },
     "aria-colindex": { "type": "number", "required": false },
+    "aria-colindextext": { "type": "string", "required": false },
     "aria-colspan": { "type": "number", "required": false },
     "aria-controls": { "type": "string", "required": false },
     "aria-current": {
@@ -183,10 +186,11 @@
       "required": false
     },
     "aria-describedby": { "type": "string", "required": false },
+    "aria-description": { "type": "string", "required": false },
     "aria-details": { "type": "string", "required": false },
     "aria-disabled": { "type": "Booleanish", "required": false },
     "aria-dropeffect": {
-      "type": "\"none\" | \"link\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
+      "type": "\"link\" | \"none\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
       "required": false
     },
     "aria-errormessage": { "type": "string", "required": false },
@@ -224,6 +228,7 @@
     "aria-roledescription": { "type": "string", "required": false },
     "aria-rowcount": { "type": "number", "required": false },
     "aria-rowindex": { "type": "number", "required": false },
+    "aria-rowindextext": { "type": "string", "required": false },
     "aria-rowspan": { "type": "number", "required": false },
     "aria-selected": { "type": "Booleanish", "required": false },
     "aria-setsize": { "type": "number", "required": false },
@@ -253,7 +258,7 @@
     "id": { "type": "string", "required": false },
     "inlist": { "type": "any", "required": false },
     "inputMode": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"none\"\n  | \"text\"\n  | \"search\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"search\"\n  | \"text\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
       "required": false
     },
     "is": { "type": "string", "required": false },

@@ -1,7 +1,7 @@
 {
   "Menu": {
     "animation": {
-      "type": "\"top\" | \"bottom\" | \"right\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -13,7 +13,7 @@
       "description": "If `true`, focus will be transferred to the first interactive element when the popover opens."
     },
     "boundary": {
-      "type": "\"clippingParents\" | \"scrollParent\" | HTMLElement",
+      "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
       "required": false,
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
@@ -143,7 +143,7 @@
       "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
     },
     "strategy": {
-      "type": "\"absolute\" | \"fixed\"",
+      "type": "\"fixed\" | \"absolute\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."

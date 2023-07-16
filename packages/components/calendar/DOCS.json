@@ -100,7 +100,7 @@
       "description": "The initial month of the calendar."
     },
     "defaultType": {
-      "type": "\"date\" | \"year\" | \"month\"",
+      "type": "\"year\" | \"month\" | \"date\"",
       "required": false,
       "description": "The initial type of the calendar."
     },
@@ -162,7 +162,7 @@
       "description": "The callback invoked when month state changes."
     },
     "onChangeType": {
-      "type": "(\n  type: \"date\" | \"year\" | \"month\",\n  year?: number | undefined,\n  month?: number | undefined\n) => void",
+      "type": "(\n  type: \"year\" | \"month\" | \"date\",\n  year?: number | undefined,\n  month?: number | undefined,\n) => void",
       "required": false,
       "description": "The callback invoked when type state changes."
     },
@@ -177,7 +177,7 @@
       "required": false,
       "description": "Ref to a previous function."
     },
-    "selectMonthWith": { "type": "\"value\" | \"month\"", "required": false },
+    "selectMonthWith": { "type": "\"month\" | \"value\"", "required": false },
     "today": {
       "type": "boolean",
       "defaultValue": false,
@@ -185,7 +185,7 @@
       "description": "If `true`, highlight today."
     },
     "type": {
-      "type": "\"date\" | \"year\" | \"month\"",
+      "type": "\"year\" | \"month\" | \"date\"",
       "required": false,
       "description": "The type of the calendar."
     },
@@ -287,7 +287,7 @@
     "calendarProps": {
       "type": "CalendarBaseProps",
       "required": false,
-      "description": "Props the calendar component."
+      "description": "Props for calendar component."
     },
     "calendarSize": {
       "type": "type ONLY_FOR_FORMAT =\n  | (string & {})\n  | \"sm\"\n  | \"md\"\n  | \"lg\"\n  | \"full\"\n  | ResponsiveObject<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">\n  | ColorModeArray<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
@@ -348,7 +348,7 @@
       "description": "The initial month of the calendar."
     },
     "defaultType": {
-      "type": "\"date\" | \"year\" | \"month\"",
+      "type": "\"year\" | \"month\" | \"date\"",
       "required": false,
       "description": "The initial type of the calendar."
     },
@@ -512,7 +512,7 @@
       "description": "The callback invoked when month state changes."
     },
     "onChangeType": {
-      "type": "(\n  type: \"date\" | \"year\" | \"month\",\n  year?: number | undefined,\n  month?: number | undefined\n) => void",
+      "type": "(\n  type: \"year\" | \"month\" | \"date\",\n  year?: number | undefined,\n  month?: number | undefined,\n) => void",
       "required": false,
       "description": "The callback invoked when type state changes."
     },
@@ -555,7 +555,7 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
-    "selectMonthWith": { "type": "\"value\" | \"month\"", "required": false },
+    "selectMonthWith": { "type": "\"month\" | \"value\"", "required": false },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
@@ -575,7 +575,7 @@
       "description": "If `true`, highlight today."
     },
     "type": {
-      "type": "\"date\" | \"year\" | \"month\"",
+      "type": "\"year\" | \"month\" | \"date\"",
       "required": false,
       "description": "The type of the calendar."
     },
@@ -655,7 +655,7 @@
     "calendarProps": {
       "type": "CalendarBaseProps",
       "required": false,
-      "description": "Props the calendar component."
+      "description": "Props for calendar component."
     },
     "calendarSize": {
       "type": "type ONLY_FOR_FORMAT =\n  | (string & {})\n  | \"sm\"\n  | \"md\"\n  | \"lg\"\n  | \"full\"\n  | ResponsiveObject<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">\n  | ColorModeArray<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",

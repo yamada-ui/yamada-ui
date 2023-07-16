@@ -7,7 +7,7 @@
       "description": "The CSS `align-items` property."
     },
     "basis": {
-      "type": "number | \"content\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | ... 6 more ... | ColorModeArray<...>",
+      "type": "number | \"content\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"-moz-fit-content\" | ... 5 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The CSS `flex-basis` property."
     },

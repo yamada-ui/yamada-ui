@@ -51,7 +51,7 @@
       "description": "The callback invoked when the index changes."
     },
     "orientation": {
-      "type": "\"vertical\" | \"horizontal\"",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'horizontal'",
       "required": false,
       "description": "The orientation of the tab list."

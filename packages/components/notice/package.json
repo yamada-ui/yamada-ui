@@ -48,8 +48,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/alert": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "react-loader-spinner": "^5.3.4"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

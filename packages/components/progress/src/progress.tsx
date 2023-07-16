@@ -10,7 +10,7 @@ import {
   CSSUIProps,
 } from '@yamada-ui/core'
 import { useAnimation } from '@yamada-ui/use-animation'
-import { createContext, cx, valueToPercent } from '@yamada-ui/utils'
+import { createContext, cx, omitObject, valueToPercent } from '@yamada-ui/utils'
 import { FC } from 'react'
 
 const [ProgressProvider, useProgress] = createContext<Record<string, CSSUIObject>>({
@@ -83,7 +83,6 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     speed,
     borderRadius: _borderRadius,
     rounded,
-    filledTrackColor,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -103,7 +102,7 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
         className={cx('ui-progress', className)}
         __css={css}
         borderRadius={borderRadius}
-        {...rest}
+        {...omitObject(rest, ['filledTrackColor'])}
       >
         <ProgressFilledTrack
           min={min}

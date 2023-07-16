@@ -131,7 +131,11 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider value={{ ...rest, placeholder, placeholderInOptions, styles }}>
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-select' __css={css} {...getContainerProps(containerProps)}>
+          <ui.div
+            className={cx('ui-select', className)}
+            __css={css}
+            {...getContainerProps(containerProps)}
+          >
             <PopoverTrigger>
               <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
             </PopoverTrigger>

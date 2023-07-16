@@ -153,7 +153,11 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((prop
         }}
       >
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-autocomplete' __css={css} {...getContainerProps(containerProps)}>
+          <ui.div
+            className={cx('ui-autocomplete', className)}
+            __css={css}
+            {...getContainerProps(containerProps)}
+          >
             <MultiAutocompleteField
               component={component}
               separator={separator}

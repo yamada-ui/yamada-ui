@@ -34,7 +34,6 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
     fallback,
     src,
     srcSet,
-    fit,
     loading,
     ignoreFallback,
     crossOrigin,

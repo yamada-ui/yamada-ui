@@ -93,7 +93,6 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>((props, ref)
     options = [],
     value,
     placeholder,
-    isRequired,
     containerProps,
     iconProps,
     ...rest

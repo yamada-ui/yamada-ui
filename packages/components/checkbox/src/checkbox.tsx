@@ -464,15 +464,9 @@ export type CheckboxIconProps = HTMLUIProps<'svg'> &
     isChecked?: boolean
   }
 
-export const CheckboxIcon: FC<CheckboxIconProps> = ({
-  isIndeterminate,
-  isChecked,
-  isRequired,
-  isReadOnly,
-  isDisabled,
-  isInvalid,
-  ...rest
-}) => {
+export const CheckboxIcon: FC<CheckboxIconProps> = ({ isIndeterminate, isChecked, ...rest }) => {
+  const iconProps = omitObject(rest, ['isRequired', 'isReadOnly', 'isDisabled', 'isInvalid'])
+
   return (
     <AnimatePresence initial={false}>
       {isIndeterminate || isChecked ? (
@@ -501,7 +495,7 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
               } as CSSProperties
             }
           >
-            {isIndeterminate ? <IndeterminateIcon {...rest} /> : <CheckIcon {...rest} />}
+            {isIndeterminate ? <IndeterminateIcon {...iconProps} /> : <CheckIcon {...iconProps} />}
           </ui.div>
         </ui.div>
       ) : null}

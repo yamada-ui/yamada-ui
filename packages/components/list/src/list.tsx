@@ -76,11 +76,11 @@ export const List = forwardRef<ListProps, 'ul'>((props, ref) => {
   )
 })
 
-export const DiscList = forwardRef<ListProps, 'ol'>(({ as, ...rest }, ref) => {
+export const DiscList = forwardRef<ListProps, 'ol'>(({ ...rest }, ref) => {
   return <List ref={ref} as='ul' styleType='disc' {...rest} />
 })
 
-export const DecimalList = forwardRef<ListProps, 'ol'>(({ as, ...rest }, ref) => {
+export const DecimalList = forwardRef<ListProps, 'ol'>(({ ...rest }, ref) => {
   return <List ref={ref} as='ol' styleType='decimal' ms='1.2em' {...rest} />
 })
 
@@ -101,5 +101,13 @@ export const ListIcon = forwardRef<ListIconProps, 'svg'>(({ className, ...rest }
 
   const css = { ...styles.icon }
 
-  return <Icon ref={ref} role='presentation' __css={css} {...rest} />
+  return (
+    <Icon
+      ref={ref}
+      className={cx('ui-list-icon', className)}
+      role='presentation'
+      __css={css}
+      {...rest}
+    />
+  )
 })

@@ -53,7 +53,6 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
 export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Drawer', { size, ...props })
   const {
-    className,
     children,
     isOpen,
     placement = 'right',

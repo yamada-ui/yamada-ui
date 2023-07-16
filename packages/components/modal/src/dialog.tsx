@@ -128,6 +128,7 @@ export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, re
     <DialogProvider value={styles}>
       <Modal
         ref={ref}
+        className={cx('ui-dialog', className)}
         __css={css}
         {...{ size, onClose, withOverlay: false, withCloseButton: false, ...rest }}
       >

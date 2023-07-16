@@ -115,7 +115,9 @@ const CalenderLabelIcon: FC<CalenderLabelIconProps> = ({ className, ...rest }) =
     ...styles.labelIcon,
   }
 
-  return <ChevronIcon __css={css} {...rest} />
+  return (
+    <ChevronIcon className={cx('ui-calender-header-label-icon', className)} __css={css} {...rest} />
+  )
 }
 
 export type CalenderControlProps = IconButtonProps

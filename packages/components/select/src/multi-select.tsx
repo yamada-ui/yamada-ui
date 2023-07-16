@@ -162,7 +162,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider value={{ ...rest, value, placeholder, styles }}>
         <Popover {...getPopoverProps()}>
-          <ui.div className='ui-multi-select' __css={css} {...getContainerProps(containerProps)}>
+          <ui.div
+            className={cx('ui-multi-select', className)}
+            __css={css}
+            {...getContainerProps(containerProps)}
+          >
             <PopoverTrigger>
               <MultiSelectField
                 component={component}

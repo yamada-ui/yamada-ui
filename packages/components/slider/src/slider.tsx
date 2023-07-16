@@ -333,6 +333,7 @@ export const useSlider = (props: UseSliderProps) => {
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
+      id,
       ref,
       type: 'hidden',
       name,
@@ -341,7 +342,7 @@ export const useSlider = (props: UseSliderProps) => {
       disabled,
       readOnly,
     }),
-    [disabled, name, readOnly, required, rest, value],
+    [disabled, id, name, readOnly, required, rest, value],
   )
 
   const getTrackProps: PropGetter = useCallback(

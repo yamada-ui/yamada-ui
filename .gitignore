@@ -4,9 +4,10 @@ node-jiti
 
 # dependencies
 node_modules
+
+# compiled
 storybook-static
 dist
-.turbo
 
 # misc
 .DS_Store
@@ -20,8 +21,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# optional eslint cache
+# cache
 .eslintcache
+.turbo
 
 # dotenv environment variables file
 .env

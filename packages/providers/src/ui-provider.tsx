@@ -3,18 +3,16 @@ import {
   css,
   StyledTheme,
   ThemeConfig,
-  ThemeScheme,
   ThemeProvider,
   ColorModeProvider,
   useColorMode,
-  ChangeThemeScheme,
   UIStyle,
   Interpolation,
   ColorModeManager,
 } from '@yamada-ui/core'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
-import { Dict, getMemoizedObject as get, isUndefined, runIfFunc } from '@yamada-ui/utils'
-import { FC, ReactNode, useCallback, useMemo, useState } from 'react'
+import { Dict, getMemoizedObject as get, runIfFunc } from '@yamada-ui/utils'
+import { FC, ReactNode } from 'react'
 import { EnvironmentProvider, Environment } from './environment-provider'
 import { LoadingProvider } from './loading-provider'
 import { NoticeProvider } from './notice-provider'
@@ -73,7 +71,7 @@ export type UIProviderProps = {
 }
 
 export const UIProvider: FC<UIProviderProps> = ({
-  theme: initialTheme = defaultTheme,
+  theme = defaultTheme,
   config = defaultConfig,
   disableResetStyle,
   disableGlobalStyle,
@@ -82,35 +80,8 @@ export const UIProvider: FC<UIProviderProps> = ({
   disableEnvironment,
   children,
 }) => {
-  const [themeScheme, setThemeScheme] = useState<ThemeScheme | undefined>(
-    config?.initialThemeScheme,
-  )
-  const theme = useMemo(
-    () => (isUndefined(themeScheme) ? initialTheme : (initialTheme as Dict)[themeScheme]),
-    [initialTheme, themeScheme],
-  )
-
-  const changeThemeScheme: ChangeThemeScheme = useCallback(
-    (themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme)) => {
-      if (isUndefined(themeScheme))
-        throw Error(
-          'changeThemeScheme: `themeScheme` is undefined. Seems you forgot to wrap your config in `initialThemeScheme`',
-        )
-
-      const nextThemeScheme = runIfFunc(themeSchemeOrFunc, themeScheme)
-
-      setThemeScheme(nextThemeScheme)
-    },
-    [themeScheme],
-  )
-
   return (
-    <ThemeProvider
-      theme={theme}
-      themeScheme={themeScheme}
-      changeThemeScheme={changeThemeScheme}
-      config={config}
-    >
+    <ThemeProvider theme={theme} config={config}>
       <ColorModeProvider colorModeManager={colorModeManager} config={config}>
         <EnvironmentProvider environment={environment} disabled={disableEnvironment}>
           <LoadingProvider {...config.loading}>

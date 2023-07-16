@@ -28,7 +28,7 @@ export const ColorModeContext = createContext({} as ColorModeContext)
 
 export type ColorModeProviderProps = {
   value?: ColorMode
-  config: ThemeConfig
+  config?: ThemeConfig
   children?: ReactNode
   colorModeManager?: ColorModeManager
 }

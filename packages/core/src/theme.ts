@@ -32,7 +32,7 @@ export type ThemeToken =
   | 'transitions.property'
   | 'transitions.easing'
 
-export const transformTheme = <T extends Dict>(_theme: T, config: ThemeConfig): Dict => {
+export const transformTheme = <T extends Dict>(_theme: T, config?: ThemeConfig): Dict => {
   const theme = omitTheme(_theme)
 
   const tokens = createTokens(theme)

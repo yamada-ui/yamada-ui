@@ -1,5 +1,23 @@
 # @yamada-ui/providers
 
+## 0.5.0
+
+### Minor Changes
+
+- [`d46c94b1`](https://github.com/hirotomoyamada/yamada-ui/commit/d46c94b1732644b269872c033102d501444efe0d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved the definitions of themeScheme and changeThemeScheme.
+
+### Patch Changes
+
+- Updated dependencies [[`d46c94b1`](https://github.com/hirotomoyamada/yamada-ui/commit/d46c94b1732644b269872c033102d501444efe0d), [`45eec70b`](https://github.com/hirotomoyamada/yamada-ui/commit/45eec70b0ec611b245a15be3d6ac5f203f403ebc), [`0ea4db5b`](https://github.com/hirotomoyamada/yamada-ui/commit/0ea4db5b68d8a26e1d533de9d2f30d9916637c39)]:
+  - @yamada-ui/core@0.5.0
+  - @yamada-ui/utils@0.1.3
+  - @yamada-ui/notice@0.3.5
+  - @yamada-ui/loading@0.3.5
+  - @yamada-ui/motion@0.3.3
+  - @yamada-ui/theme@0.3.6
+  - @yamada-ui/portal@0.2.2
+  - @yamada-ui/use-timeout@0.1.4
+
 ## 0.4.4
 
 ### Patch Changes

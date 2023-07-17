@@ -5,6 +5,5 @@
   "singleQuote": true,
   "jsxSingleQuote": true,
   "bracketSpacing": true,
-  "proseWrap": "always",
   "printWidth": 80
 }

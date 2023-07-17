@@ -393,9 +393,7 @@ export const reactHookForm: Story = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<
-  typeof Checkbox
-> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { checkbox: boolean; checkboxGroup: string[] }
 
   const defaultValues: Data = {

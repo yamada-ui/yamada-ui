@@ -5,33 +5,53 @@ const baseTheme = {
   brandUrl: 'https://github.com/hirotomoyamada/yamada-ui',
   brandImage:
     'https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png',
+
+  // Colors
   colorPrimary: defaultTheme.colors.secondary,
   colorSecondary: defaultTheme.colors.primary,
+
+  // UI
   appBorderRadius: 0,
+
+  // Toolbar default and active colors
+  barSelectedColor: defaultTheme.colors.primary,
+
+  // Typography
   fontBase: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
   fontCode: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
-  barSelectedColor: defaultTheme.colors.primary,
 }
 
 export const UITheme = {
   light: {
     ...baseTheme,
     base: 'light',
+
+    // UI
     appBg: defaultTheme.colors.white,
     appContentBg: defaultTheme.colors.white,
+
+    // Toolbar default and active colors
     barBg: defaultTheme.colors.white,
+    barTextColor: defaultTheme.colors.blackAlpha[500],
+
+    // Text colors
     textColor: defaultTheme.colors.black,
     textInverseColor: defaultTheme.colors.black,
-    barTextColor: defaultTheme.colors.blackAlpha[500],
   },
   dark: {
     ...baseTheme,
     base: 'dark',
+
+    // UI
     appContentBg: defaultTheme.colors.black,
     appBg: defaultTheme.colors.black,
+
+    // Toolbar default and active colors
     barBg: defaultTheme.colors.black,
+    barTextColor: defaultTheme.colors.whiteAlpha[500],
+
+    // Text colors
     textColor: defaultTheme.colors.white,
     textInverseColor: defaultTheme.colors.white,
-    barTextColor: defaultTheme.colors.whiteAlpha[500],
   },
 }

@@ -1,0 +1,2 @@
+import{u as n}from"./theme-326cd56d.js";import{g as a,j as u,k as y}from"./factory-07cc9cf0.js";const g=(t,i)=>{const{theme:o}=n(),{colorMode:r}=a();t==="layerStyles"&&(t="styles.layerStyles"),t==="textStyles"&&(t="styles.textStyles"),t==="transitionProperty"&&(t="transitions.property"),t==="transitionDuration"&&(t="transitions.duration"),t==="transitionEasing"&&(t="transitions.easing");const s=u(o,`${t}.${i}`);if(y(s)){const[e,l]=s;return r==="light"?e:l}else return s};export{g as u};
+//# sourceMappingURL=index-ac0f8f33.js.map

@@ -1,0 +1,53 @@
+import{j as s,F as a,a as o}from"./jsx-runtime-4d953e71.js";import{F as d}from"./fade-5cb89899.js";import{u as c}from"./index-f1306a69.js";import{B as p}from"./button-6d999cdb.js";import{B as n}from"./box-d7b7850d.js";import"./index-de62f0e0.js";import"./index-9f37637c.js";import"./motion-d07cf02b.js";import"./forward-ref-396247d7.js";import"./factory-07cc9cf0.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-0bdd66d1.js";import"./utils-e0f638b3.js";import"./theme-326cd56d.js";import"./loading-520f6824.js";import"./index-ac0f8f33.js";import"./index-1532491c.js";import"./index-f989dc93.js";import"./icon-5ed183e8.js";import"./use-component-style-a395c77f.js";const I={title:"Components / Transitions / Fade",component:d},t=()=>{const[e,{toggle:r}]=c();return s(a,{children:[o(p,{onClick:r,children:"Please Click"}),o(d,{isOpen:e,children:o(n,{w:"full",bg:"orange.500",rounded:"md",p:"md",color:"white",children:"クリリンのことか……クリリンのことかーーーっ！！！！！"})}),o(n,{w:"full",bg:"purple.500",rounded:"md",p:"md",color:"white",children:"私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……"})]})},l=()=>{const[e,{toggle:r}]=c();return s(a,{children:[o(p,{onClick:r,children:"Please Click"}),o(d,{isOpen:e,duration:.4,children:o(n,{w:"full",bg:"orange.500",rounded:"md",p:"md",color:"white",children:"クリリンのことか……クリリンのことかーーーっ！！！！！"})}),o(n,{w:"full",bg:"purple.500",rounded:"md",p:"md",color:"white",children:"私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……"})]})},i=()=>{const[e,{toggle:r}]=c();return s(a,{children:[o(p,{onClick:r,children:"Please Click"}),o(d,{isOpen:e,unmountOnExit:!0,children:o(n,{w:"full",bg:"orange.500",rounded:"md",p:"md",color:"white",children:"クリリンのことか……クリリンのことかーーーっ！！！！！"})}),o(n,{w:"full",bg:"purple.500",rounded:"md",p:"md",color:"white",children:"私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……"})]})};var m,u,g;t.parameters={...t.parameters,docs:{...(m=t.parameters)==null?void 0:m.docs,source:{originalSource:`() => {
+  const [isOpen, {
+    toggle
+  }] = useBoolean();
+  return <>
+      <Button onClick={toggle}>Please Click</Button>
+
+      <Fade isOpen={isOpen}>
+        <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
+          クリリンのことか……クリリンのことかーーーっ！！！！！
+        </Box>
+      </Fade>
+
+      <Box w='full' bg='purple.500' rounded='md' p='md' color='white'>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Box>
+    </>;
+}`,...(g=(u=t.parameters)==null?void 0:u.docs)==null?void 0:g.source}}};var h,w,B;l.parameters={...l.parameters,docs:{...(h=l.parameters)==null?void 0:h.docs,source:{originalSource:`() => {
+  const [isOpen, {
+    toggle
+  }] = useBoolean();
+  return <>
+      <Button onClick={toggle}>Please Click</Button>
+
+      <Fade isOpen={isOpen} duration={0.4}>
+        <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
+          クリリンのことか……クリリンのことかーーーっ！！！！！
+        </Box>
+      </Fade>
+
+      <Box w='full' bg='purple.500' rounded='md' p='md' color='white'>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Box>
+    </>;
+}`,...(B=(w=l.parameters)==null?void 0:w.docs)==null?void 0:B.source}}};var x,f,O;i.parameters={...i.parameters,docs:{...(x=i.parameters)==null?void 0:x.docs,source:{originalSource:`() => {
+  const [isOpen, {
+    toggle
+  }] = useBoolean();
+  return <>
+      <Button onClick={toggle}>Please Click</Button>
+
+      <Fade isOpen={isOpen} unmountOnExit>
+        <Box w='full' bg='orange.500' rounded='md' p='md' color='white'>
+          クリリンのことか……クリリンのことかーーーっ！！！！！
+        </Box>
+      </Fade>
+
+      <Box w='full' bg='purple.500' rounded='md' p='md' color='white'>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Box>
+    </>;
+}`,...(O=(f=i.parameters)==null?void 0:f.docs)==null?void 0:O.source}}};const J=["basic","withDuration","exitUnmount"];export{J as __namedExportsOrder,t as basic,I as default,i as exitUnmount,l as withDuration};
+//# sourceMappingURL=fade.stories-33165f32.js.map

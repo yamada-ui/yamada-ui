@@ -1,5 +1,5 @@
 import { faClose, faFile } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   FileInput,
@@ -16,28 +16,34 @@ import {
 import { useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof FileInput>
+
+const meta: Meta<typeof FileInput> = {
   title: 'Components / Forms / FileInput',
   component: FileInput,
-} as ComponentMeta<typeof FileInput>
+}
 
-export const basic: ComponentStory<typeof FileInput> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <FileInput placeholder='basic' />
 }
 
-export const withMultiple: ComponentStory<typeof FileInput> = () => {
+export const withMultiple: Story = () => {
   return <FileInput placeholder='multiple' multiple />
 }
 
-export const withAccept: ComponentStory<typeof FileInput> = () => {
-  return <FileInput placeholder='only png, jpeg' accept='image/png,image/jpeg' />
+export const withAccept: Story = () => {
+  return (
+    <FileInput placeholder='only png, jpeg' accept='image/png,image/jpeg' />
+  )
 }
 
-export const withSeparator: ComponentStory<typeof FileInput> = () => {
+export const withSeparator: Story = () => {
   return <FileInput placeholder='multiple' multiple separator=';' />
 }
 
-export const withTag: ComponentStory<typeof FileInput> = () => {
+export const withTag: Story = () => {
   return (
     <FileInput
       placeholder='multiple'
@@ -47,7 +53,7 @@ export const withTag: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const withFormat: ComponentStory<typeof FileInput> = () => {
+export const withFormat: Story = () => {
   return (
     <FileInput
       placeholder='multiple'
@@ -57,11 +63,15 @@ export const withFormat: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const withChildren: ComponentStory<typeof FileInput> = () => {
-  return <FileInput multiple>{(files) => <Text>Selected: {files?.length ?? 0}</Text>}</FileInput>
+export const withChildren: Story = () => {
+  return (
+    <FileInput multiple>
+      {(files) => <Text>Selected: {files?.length ?? 0}</Text>}
+    </FileInput>
+  )
 }
 
-export const withSize: ComponentStory<typeof FileInput> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <FileInput placeholder='extra small size' size='xs' />
@@ -72,7 +82,7 @@ export const withSize: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof FileInput> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <FileInput variant='outline' placeholder='outline' />
@@ -83,17 +93,24 @@ export const withVariant: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof FileInput> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <FileInput placeholder='default border color' />
-      <FileInput focusBorderColor='green.500' placeholder='custom border color' />
-      <FileInput isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <FileInput
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
+      <FileInput
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const isDisabled: ComponentStory<typeof FileInput> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <FileInput isDisabled variant='outline' placeholder='outline' />
@@ -108,7 +125,7 @@ export const isDisabled: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof FileInput> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <FileInput isReadOnly variant='outline' placeholder='outline' />
@@ -123,7 +140,7 @@ export const isReadonly: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof FileInput> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <FileInput isInvalid variant='outline' placeholder='outline' />
@@ -131,14 +148,18 @@ export const isInvalid: ComponentStory<typeof FileInput> = () => {
       <FileInput isInvalid variant='flushed' placeholder='flushed' />
       <FileInput isInvalid variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isInvalid label='Upload file' errorMessage='File is required.'>
+      <FormControl
+        isInvalid
+        label='Upload file'
+        errorMessage='File is required.'
+      >
         <FileInput type='email' placeholder='your file' />
       </FormControl>
     </>
   )
 }
 
-export const useAddon: ComponentStory<typeof FileInput> = () => {
+export const useAddon: Story = () => {
   return (
     <InputGroup>
       <InputLeftAddon>
@@ -149,7 +170,7 @@ export const useAddon: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const useElement: ComponentStory<typeof FileInput> = () => {
+export const useElement: Story = () => {
   return (
     <InputGroup>
       <InputLeftElement>
@@ -160,7 +181,7 @@ export const useElement: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const useReset: ComponentStory<typeof FileInput> = () => {
+export const useReset: Story = () => {
   const [value, onChange] = useState<File[] | null>(null)
   const resetRef = useRef<() => void>(null)
 
@@ -174,7 +195,12 @@ export const useReset: ComponentStory<typeof FileInput> = () => {
       <Text>files: {value?.length ?? 0}</Text>
 
       <InputGroup>
-        <FileInput multiple value={value} onChange={onChange} resetRef={resetRef} />
+        <FileInput
+          multiple
+          value={value}
+          onChange={onChange}
+          resetRef={resetRef}
+        />
 
         {value?.length ? (
           <InputRightElement isClick onClick={onReset}>
@@ -186,7 +212,7 @@ export const useReset: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof FileInput> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<File[] | null>(null)
 
   return (
@@ -198,7 +224,7 @@ export const customControl: ComponentStory<typeof FileInput> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof FileInput> = () => {
+export const reactHookForm: Story = () => {
   type Data = { fileInput: File[] | null }
 
   const resetRef = useRef<() => void>(null)

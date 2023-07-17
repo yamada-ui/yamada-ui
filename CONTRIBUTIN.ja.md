@@ -91,6 +91,12 @@ cd yamada-ui
 
 3. 変更を行い、[コミット規約](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention)に従ってコミットします。
 
+   - `変更の確認`: コマンドの`pnpm storybook`を実行すると、Storybookが起動します。Storybookのソースは、`./stories`です。
+   - `新しいコンポーネントの作成`: コマンドの`pnpm gen:component`を実行すると、テンプレートからコンポーネントを作成し、依存関係もインストールします。
+   - `既存のコンポーネントに機能を追加`: 追加後は、機能が分かるように対象のコンポーネントのストーリーを追加してください。
+   - `新しいフックの作成`: コマンドの`pnpm gen:hook`を実行すると、テンプレートからフックを作成し、依存関係もインストールします。
+   - `既存のフックに機能を追加`: 追加後は、機能が分かるように対象のフックのストーリーを追加してください。
+
 4. `pnpm changeset`を実行して、変更の詳細な説明を作成します。これは、更新を公開する際にチェンジログを生成するために使用されます。
    [Changesetについてさらに学ぶ](https://github.com/atlassian/changesets/tree/master/packages/cli)
 

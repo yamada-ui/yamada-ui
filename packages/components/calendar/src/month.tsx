@@ -65,7 +65,8 @@ export const Month: FC<MonthProps> = ({
   } = useCalendarContext()
   const { getContainerProps, getButtonProps } = useMonth()
 
-  const { component: customWeekday = Weekday, ...computedWeekdayProps } = weekdayProps ?? {}
+  const { component: customWeekday = Weekday, ...computedWeekdayProps } =
+    weekdayProps ?? {}
   const { component: customDay = Day, ...computedDayProps } = dayProps ?? {}
   const {
     thead: theadProps,
@@ -97,7 +98,11 @@ export const Month: FC<MonthProps> = ({
           const days = getMonthDays(month, firstDayOfWeek)
 
           return (
-            <ui.div key={index} __css={{ ...styles.content }} {...filterUndefined(rest)}>
+            <ui.div
+              key={index}
+              __css={{ ...styles.content }}
+              {...filterUndefined(rest)}
+            >
               <CalenderHeader
                 {...{
                   ...headerProps,
@@ -146,7 +151,11 @@ export const Month: FC<MonthProps> = ({
                         >
                           <ui.div
                             className='ui-calendar-month-weekday'
-                            __css={{ w: 'full', display: 'flex', ...styles.weekday }}
+                            __css={{
+                              w: 'full',
+                              display: 'flex',
+                              ...styles.weekday,
+                            }}
                             {...computedWeekdayProps}
                           >
                             {customWeekday({ weekday, index })}
@@ -162,12 +171,13 @@ export const Month: FC<MonthProps> = ({
                     return (
                       <ui.tr key={row} {...trProps}>
                         {cells.map((date, col) => {
-                          const { isSelected, isWeekend, isOutside, ...props } = getButtonProps({
-                            ...computedDayProps,
-                            month,
-                            value: date,
-                            index,
-                          })
+                          const { isSelected, isWeekend, isOutside, ...props } =
+                            getButtonProps({
+                              ...computedDayProps,
+                              month,
+                              value: date,
+                              index,
+                            })
 
                           return (
                             <ui.td key={col} {...tdProps}>
@@ -212,7 +222,9 @@ export const Month: FC<MonthProps> = ({
 export type WeekdayProps = { weekday: string; index: number }
 
 export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
-  return <ui.span className='ui-calendar-month-weekday-label'>{weekday}</ui.span>
+  return (
+    <ui.span className='ui-calendar-month-weekday-label'>{weekday}</ui.span>
+  )
 }
 
 export type DayProps = {
@@ -226,5 +238,7 @@ export type DayProps = {
 }
 
 export const Day: FC<DayProps> = ({ date }) => {
-  return <ui.span className='ui-calendar-month-day-label'>{date.getDate()}</ui.span>
+  return (
+    <ui.span className='ui-calendar-month-day-label'>{date.getDate()}</ui.span>
+  )
 }

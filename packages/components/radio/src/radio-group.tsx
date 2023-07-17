@@ -12,7 +12,15 @@ import {
   useCallbackRef,
   omitObject,
 } from '@yamada-ui/utils'
-import { ChangeEvent, useCallback, useId, useRef, forwardRef, ForwardedRef, Ref } from 'react'
+import {
+  ChangeEvent,
+  useCallback,
+  useId,
+  useRef,
+  forwardRef,
+  ForwardedRef,
+  Ref,
+} from 'react'
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
@@ -89,7 +97,9 @@ export const useRadioGroup = <Y extends string | number = string>({
 
   const onChange = useCallback(
     (evOrValue: ChangeEvent<HTMLInputElement> | Y) => {
-      const nextValue = (isEvent(evOrValue) ? evOrValue.target.value : evOrValue) as Y
+      const nextValue = (
+        isEvent(evOrValue) ? evOrValue.target.value : evOrValue
+      ) as Y
 
       setValue(nextValue)
     },
@@ -115,7 +125,8 @@ export const useRadioGroup = <Y extends string | number = string>({
       ...props,
       ref,
       name,
-      [isNative ? 'checked' : 'isChecked']: value != null ? props.value === value : undefined,
+      [isNative ? 'checked' : 'isChecked']:
+        value != null ? props.value === value : undefined,
       onChange,
     }),
     [name, value, onChange, isNative],
@@ -134,19 +145,24 @@ export const useRadioGroup = <Y extends string | number = string>({
 
 export type UseRadioGroupReturn = ReturnType<typeof useRadioGroup>
 
-export type RadioGroupProps<Y extends string | number = string> = ThemeProps<'Radio'> &
-  Omit<FlexProps, 'onChange'> &
-  UseRadioGroupProps<Y> &
-  FormControlOptions
+export type RadioGroupProps<Y extends string | number = string> =
+  ThemeProps<'Radio'> &
+    Omit<FlexProps, 'onChange'> &
+    UseRadioGroupProps<Y> &
+    FormControlOptions
 
 type RadioGroupContext = ThemeProps<'Radio'> &
   FormControlOptions & {
     name: string
     value: string | number
-    onChange: (evOrValue: ChangeEvent<HTMLInputElement> | string | number) => void
+    onChange: (
+      evOrValue: ChangeEvent<HTMLInputElement> | string | number,
+    ) => void
   }
 
-const [RadioGroupProvider, useRadioGroupContenxt] = createContext<RadioGroupContext | undefined>({
+const [RadioGroupProvider, useRadioGroupContenxt] = createContext<
+  RadioGroupContext | undefined
+>({
   strict: false,
   name: 'RadioGroupContext',
 })
@@ -168,7 +184,8 @@ export const RadioGroup = forwardRef(
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const { name, value, onChange, getContainerProps } = useRadioGroup(props)
-    const { isRequired, isReadOnly, isDisabled, isInvalid } = useFormControl(props)
+    const { isRequired, isReadOnly, isDisabled, isInvalid } =
+      useFormControl(props)
 
     return (
       <RadioGroupProvider
@@ -193,7 +210,13 @@ export const RadioGroup = forwardRef(
           direction={direction}
           gap={gap ?? (direction === 'row' ? '1rem' : undefined)}
           {...getContainerProps(
-            omitObject(props, ['onChange', 'isInvalid', 'isDisabled', 'isRequired', 'isReadOnly']),
+            omitObject(props, [
+              'onChange',
+              'isInvalid',
+              'isDisabled',
+              'isRequired',
+              'isReadOnly',
+            ]),
           )}
         >
           {children}

@@ -2,7 +2,10 @@ import { ui, CSSUIObject, forwardRef, HTMLUIProps } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { FC, ReactElement } from 'react'
 import { AutocompleteItemIcon } from './autocomplete-icon'
-import { useAutocompleteContext, useAutocompleteEmpty } from './use-autocomplete'
+import {
+  useAutocompleteContext,
+  useAutocompleteEmpty,
+} from './use-autocomplete'
 
 type AutocompleteEmptyOptions = {
   /**
@@ -15,7 +18,8 @@ type AutocompleteEmptyOptions = {
   children?: string
 }
 
-export type AutocompleteEmptyProps = Omit<HTMLUIProps<'li'>, 'children'> & AutocompleteEmptyOptions
+export type AutocompleteEmptyProps = Omit<HTMLUIProps<'li'>, 'children'> &
+  AutocompleteEmptyOptions
 
 export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, 'li'>(
   ({ className, icon, children, ...rest }, ref) => {

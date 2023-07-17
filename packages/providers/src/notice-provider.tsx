@@ -12,7 +12,10 @@ import { useTimeout } from '@yamada-ui/use-timeout'
 import { runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
 import { FC, memo, useEffect, useState, useSyncExternalStore } from 'react'
 
-export type NoticeProviderProps = Omit<Required<ThemeConfig>['notice'], 'options'>
+export type NoticeProviderProps = Omit<
+  Required<ThemeConfig>['notice'],
+  'options'
+>
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
@@ -27,10 +30,18 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   )
 
   const components = Object.entries(state).map(([placement, notices]) => {
-    const top = placement.includes('top') ? 'env(safe-area-inset-top, 0px)' : undefined
-    const bottom = placement.includes('bottom') ? 'env(safe-area-inset-bottom, 0px)' : undefined
-    const right = !placement.includes('left') ? 'env(safe-area-inset-right, 0px)' : undefined
-    const left = !placement.includes('right') ? 'env(safe-area-inset-left, 0px)' : undefined
+    const top = placement.includes('top')
+      ? 'env(safe-area-inset-top, 0px)'
+      : undefined
+    const bottom = placement.includes('bottom')
+      ? 'env(safe-area-inset-bottom, 0px)'
+      : undefined
+    const right = !placement.includes('left')
+      ? 'env(safe-area-inset-right, 0px)'
+      : undefined
+    const left = !placement.includes('right')
+      ? 'env(safe-area-inset-left, 0px)'
+      : undefined
 
     const css: CSSUIObject = {
       position: 'fixed',
@@ -58,7 +69,10 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   })
 
   return (
-    <Portal appendToParentPortal={appendToParentPortal} containerRef={containerRef}>
+    <Portal
+      appendToParentPortal={appendToParentPortal}
+      containerRef={containerRef}
+    >
       {components}
     </Portal>
   )
@@ -90,7 +104,8 @@ const defaultVariants: MotionVariants = {
   },
 }
 
-type NoticeComponentProps = NoticeOptions & Pick<NoticeProviderProps, 'variants'>
+type NoticeComponentProps = NoticeOptions &
+  Pick<NoticeProviderProps, 'variants'>
 
 const NoticeComponent = memo(
   ({

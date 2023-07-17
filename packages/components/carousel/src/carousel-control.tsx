@@ -20,7 +20,8 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, 'button'>(
           <ChevronIcon
             __css={{
               fontSize: '1.5em',
-              transform: orientation === 'vertical' ? 'rotate(180deg)' : 'rotate(90deg)',
+              transform:
+                orientation === 'vertical' ? 'rotate(180deg)' : 'rotate(90deg)',
             }}
           />
         }
@@ -44,7 +45,8 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, 'button'>(
           <ChevronIcon
             __css={{
               fontSize: '1.5em',
-              transform: orientation === 'vertical' ? 'rotate(0deg)' : 'rotate(-90deg)',
+              transform:
+                orientation === 'vertical' ? 'rotate(0deg)' : 'rotate(-90deg)',
             }}
           />
         }
@@ -54,27 +56,28 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, 'button'>(
   },
 )
 
-const CarouselControl = forwardRef<CarouselControlProps & { operation: 'prev' | 'next' }, 'button'>(
-  ({ className, operation, ...rest }, ref) => {
-    const { styles } = useCarouselContext()
-    const colorScheme = useColorModetValue('whiteAlpha', 'blackAlpha')
+const CarouselControl = forwardRef<
+  CarouselControlProps & { operation: 'prev' | 'next' },
+  'button'
+>(({ className, operation, ...rest }, ref) => {
+  const { styles } = useCarouselContext()
+  const colorScheme = useColorModetValue('whiteAlpha', 'blackAlpha')
 
-    const css: CSSUIObject = {
-      position: 'absolute',
-      zIndex: 'kurillin',
-      ...styles.control,
-      ...styles[operation],
-    }
+  const css: CSSUIObject = {
+    position: 'absolute',
+    zIndex: 'kurillin',
+    ...styles.control,
+    ...styles[operation],
+  }
 
-    return (
-      <IconButton
-        ref={ref}
-        className={cx('ui-carousel-control', className)}
-        colorScheme={colorScheme}
-        isRounded
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
+  return (
+    <IconButton
+      ref={ref}
+      className={cx('ui-carousel-control', className)}
+      colorScheme={colorScheme}
+      isRounded
+      __css={css}
+      {...rest}
+    />
+  )
+})

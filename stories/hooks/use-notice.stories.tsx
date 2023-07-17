@@ -1,9 +1,12 @@
+import { Meta } from '@storybook/react'
 import { useNotice, Button, Wrap, Center, Box } from '@yamada-ui/react'
 import { useRef } from 'react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useNotice',
 }
+
+export default meta
 
 export const basic = () => {
   const notice = useNotice()
@@ -337,7 +340,12 @@ export const withPlacement = () => {
   const notice = useNotice()
 
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
+    <Center
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      flexDirection='column'
+      gap='md'
+    >
       <Wrap gap='md'>
         <Button
           onClick={() =>

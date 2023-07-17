@@ -1,5 +1,10 @@
 import { ComponentStyle, isDefaultColor, mode } from '@yamada-ui/core'
-import { transparentizeColor, toneColor, isArray, getColor } from '@yamada-ui/utils'
+import {
+  transparentizeColor,
+  toneColor,
+  isArray,
+  getColor,
+} from '@yamada-ui/utils'
 
 export const Button: ComponentStyle = {
   baseStyle: {
@@ -121,7 +126,10 @@ export const Button: ComponentStyle = {
         bg: isGray ? undefined : 'transparent',
         _hover: {
           bg: isDefaultColor(
-            [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
+            [
+              toneColor(c, 50)(t, m),
+              transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
+            ],
             isGray
               ? [`gray.100`, `whiteAlpha.200`]
               : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
@@ -133,7 +141,10 @@ export const Button: ComponentStyle = {
         },
         _active: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m)],
+            [
+              toneColor(c, 100)(t, m),
+              transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
+            ],
             isGray
               ? [`gray.200`, `whiteAlpha.300`]
               : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
@@ -188,7 +199,10 @@ export const Button: ComponentStyle = {
         bg: isGray ? undefined : 'transparent',
         _hover: {
           bg: isDefaultColor(
-            [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
+            [
+              toneColor(c, 50)(t, m),
+              transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
+            ],
             isGray
               ? [`gray.200`, `whiteAlpha.200`]
               : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
@@ -201,7 +215,10 @@ export const Button: ComponentStyle = {
         },
         _active: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m)],
+            [
+              toneColor(c, 100)(t, m),
+              transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
+            ],
             isGray
               ? [`gray.200`, `whiteAlpha.300`]
               : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],

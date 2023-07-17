@@ -12,7 +12,12 @@ import {
   omitChildren,
   PropGetter,
 } from '@yamada-ui/utils'
-import { KeyboardEvent, KeyboardEventHandler, ReactNode, useCallback } from 'react'
+import {
+  KeyboardEvent,
+  KeyboardEventHandler,
+  ReactNode,
+  useCallback,
+} from 'react'
 import { useAccordionContext, useAccordionDescendant } from './accordion'
 import { AccordionLabel } from './accordion-label'
 import { AccordionPanel } from './accordion-panel'
@@ -23,10 +28,11 @@ type AccordionItemContext = Omit<AccordionItemOptions, 'children'> & {
   getPanelProps: PropGetter
 }
 
-const [AccordionItemProvider, useAccordionItemContext] = createContext<AccordionItemContext>({
-  name: 'AccordionItemContext',
-  errorMessage: `useAccordionItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<AccordionItem />"`,
-})
+const [AccordionItemProvider, useAccordionItemContext] =
+  createContext<AccordionItemContext>({
+    name: 'AccordionItemContext',
+    errorMessage: `useAccordionItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<AccordionItem />"`,
+  })
 
 export { useAccordionItemContext }
 
@@ -40,25 +46,39 @@ type AccordionItemOptions = {
   /**
    * The accordion label to use.
    */
-  label?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  label?:
+    | ReactNode
+    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
   /**
    * The accordion icon to use.
    */
-  icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
-  children?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  icon?:
+    | ReactNode
+    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  children?:
+    | ReactNode
+    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionItemProps = Omit<HTMLUIProps<'div'>, 'children'> & AccordionItemOptions
+export type AccordionItemProps = Omit<HTMLUIProps<'div'>, 'children'> &
+  AccordionItemOptions
 
 export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
   ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
-    const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } = useAccordionContext()
+    const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
+      useAccordionContext()
 
-    const { index: i, register, descendants } = useAccordionDescendant({ disabled: isDisabled })
+    const {
+      index: i,
+      register,
+      descendants,
+    } = useAccordionDescendant({ disabled: isDisabled })
 
-    const isOpen = i !== -1 ? (isArray(index) ? index.includes(i) : index === i) : false
+    const isOpen =
+      i !== -1 ? (isArray(index) ? index.includes(i) : index === i) : false
 
-    if (isOpen && isDisabled) console.warn(`Accordion: Cannot open a disabled accordion item`)
+    if (isOpen && isDisabled)
+      console.warn(`Accordion: Cannot open a disabled accordion item`)
 
     const onChange = useCallback(
       (isOpen: boolean) => {
@@ -148,7 +168,8 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
           })
         : label
 
-    if (typeof children === 'function') children = children({ isExpanded: isOpen, isDisabled })
+    if (typeof children === 'function')
+      children = children({ isExpanded: isOpen, isDisabled })
 
     const validChildren = getValidChildren(children)
 
@@ -160,7 +181,9 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
       : children
 
     return (
-      <AccordionItemProvider value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}>
+      <AccordionItemProvider
+        value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}
+      >
         <ui.div
           ref={ref}
           className={cx('ui-accordion-item', className)}
@@ -168,8 +191,12 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
           __css={css}
           {...rest}
         >
-          {customAccordionLabel ?? <AccordionLabel>{cloneLabel}</AccordionLabel>}
-          {customAccordionPanel ?? <AccordionPanel>{cloneChildren}</AccordionPanel>}
+          {customAccordionLabel ?? (
+            <AccordionLabel>{cloneLabel}</AccordionLabel>
+          )}
+          {customAccordionPanel ?? (
+            <AccordionPanel>{cloneChildren}</AccordionPanel>
+          )}
         </ui.div>
       </AccordionItemProvider>
     )

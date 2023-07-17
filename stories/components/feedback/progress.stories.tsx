@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Progress } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Progress>
+
+const meta: Meta<typeof Progress> = {
   title: 'Components / Feedback / Progress',
   component: Progress,
-} as ComponentMeta<typeof Progress>
+}
 
-export const basic: ComponentStory<typeof Progress> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <>
       <Progress value={88} />
@@ -14,7 +18,7 @@ export const basic: ComponentStory<typeof Progress> = () => {
   )
 }
 
-export const withColorMode: ComponentStory<typeof Progress> = () => {
+export const withColorMode: Story = () => {
   return (
     <>
       <Progress colorScheme='purple' value={18} />
@@ -22,7 +26,7 @@ export const withColorMode: ComponentStory<typeof Progress> = () => {
   )
 }
 
-export const withFilledTrackColor: ComponentStory<typeof Progress> = () => {
+export const withFilledTrackColor: Story = () => {
   return (
     <>
       <Progress filledTrackColor='green.500' value={18} />
@@ -30,7 +34,7 @@ export const withFilledTrackColor: ComponentStory<typeof Progress> = () => {
   )
 }
 
-export const withStripe: ComponentStory<typeof Progress> = () => {
+export const withStripe: Story = () => {
   return (
     <>
       <Progress hasStripe value={19} />
@@ -38,7 +42,7 @@ export const withStripe: ComponentStory<typeof Progress> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Progress> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Progress colorScheme='pink' value={93} size='xs' />
@@ -49,7 +53,7 @@ export const withSize: ComponentStory<typeof Progress> = () => {
   )
 }
 
-export const withBorderRadius: ComponentStory<typeof Progress> = () => {
+export const withBorderRadius: Story = () => {
   return (
     <>
       <Progress colorScheme='orange' value={10} borderRadius='md' />
@@ -58,14 +62,14 @@ export const withBorderRadius: ComponentStory<typeof Progress> = () => {
   )
 }
 
-export const useStripeAnimation: ComponentStory<typeof Progress> = () => {
+export const useStripeAnimation: Story = () => {
   return (
     <>
       <Progress hasStripe isStripeAnimation value={20} />
     </>
   )
 }
-export const useAnimation: ComponentStory<typeof Progress> = () => {
+export const useAnimation: Story = () => {
   return (
     <>
       <Progress colorScheme='green' isAnimation />

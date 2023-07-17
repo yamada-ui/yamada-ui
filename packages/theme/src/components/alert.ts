@@ -53,7 +53,10 @@ export const Alert: ComponentMultiStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, m), shadeColor(toneColor(c, 200)(t, m), 56)(t, m)],
+            [
+              toneColor(c, 100)(t, m),
+              shadeColor(toneColor(c, 200)(t, m), 56)(t, m),
+            ],
             [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
           )(c),
         },
@@ -70,7 +73,11 @@ export const Alert: ComponentMultiStyle = {
         color: ['white', 'gray.900'],
       },
     }),
-    'island-accent': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
+    'island-accent': ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+    }) => {
       const color = isDefaultColor(
         mode(toneColor(c, 500)(t, m), toneColor(c, 200)(t, m))(m),
         mode(getColor(`${c}.500`)(t, m), getColor(`${c}.200`)(t, m))(m),
@@ -105,7 +112,10 @@ export const Alert: ComponentMultiStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, m), shadeColor(toneColor(c, 200)(t, m), 56)(t, m)],
+            [
+              toneColor(c, 100)(t, m),
+              shadeColor(toneColor(c, 200)(t, m), 56)(t, m),
+            ],
             [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
           )(c),
           pl: 3,
@@ -124,7 +134,10 @@ export const Alert: ComponentMultiStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, m), shadeColor(toneColor(c, 200)(t, m), 56)(t, m)],
+            [
+              toneColor(c, 100)(t, m),
+              shadeColor(toneColor(c, 200)(t, m), 56)(t, m),
+            ],
             [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
           )(c),
           pt: 3,

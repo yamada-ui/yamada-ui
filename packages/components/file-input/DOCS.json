@@ -60,6 +60,10 @@
       "required": false,
       "description": "The string to separate uploaded files."
     },
-    "value": { "type": "File[]", "required": false, "description": "The value of the file input." }
+    "value": {
+      "type": "File[]",
+      "required": false,
+      "description": "The value of the file input."
+    }
   }
 }

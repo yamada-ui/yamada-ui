@@ -41,7 +41,9 @@ export const MenuButton = forwardRef<MenuButtonProps, 'button'>(
           aria-expanded={ariaAttr(isOpen)}
           onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
         >
-          <ui.span __css={{ pointerEvents: 'none', flex: '1 1 auto', minW: 0 }}>{children}</ui.span>
+          <ui.span __css={{ pointerEvents: 'none', flex: '1 1 auto', minW: 0 }}>
+            {children}
+          </ui.span>
         </Component>
       </PopoverTrigger>
     )

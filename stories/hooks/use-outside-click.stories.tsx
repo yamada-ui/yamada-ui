@@ -1,9 +1,12 @@
+import { Meta } from '@storybook/react'
 import { Center, Button, useOutsideClick } from '@yamada-ui/react'
 import { useRef, useState } from 'react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useOutsideClick',
 }
+
+export default meta
 
 export const basic = () => {
   const ref = useRef<HTMLDivElement>(null)

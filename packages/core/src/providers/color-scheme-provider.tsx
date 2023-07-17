@@ -36,7 +36,11 @@ export type ColorModeProviderProps = {
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   value,
   colorModeManager = localStorageManager,
-  config: { initialColorMode, useSystemColorMode, disableTransitionOnChange } = {
+  config: {
+    initialColorMode,
+    useSystemColorMode,
+    disableTransitionOnChange,
+  } = {
     initialColorMode: 'light',
     useSystemColorMode: true,
   },
@@ -48,11 +52,12 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     getColorMode(colorModeManager, defaultColorMode),
   )
 
-  const [resolvedColorMode, setResolvedColorMode] = useState<ColorMode | undefined>(() =>
-    getColorMode(colorModeManager),
-  )
+  const [resolvedColorMode, setResolvedColorMode] = useState<
+    ColorMode | undefined
+  >(() => getColorMode(colorModeManager))
 
-  const resolvedValue = initialColorMode === 'system' && !colorMode ? resolvedColorMode : colorMode
+  const resolvedValue =
+    initialColorMode === 'system' && !colorMode ? resolvedColorMode : colorMode
 
   const { getSystemColorMode, setClassName, setDataset, addListener } = useMemo(
     () => getColorModeUtils({ isPreventTransition: disableTransitionOnChange }),
@@ -77,7 +82,8 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   }, [changeColorMode, resolvedValue])
 
   useSafeLayoutEffect(() => {
-    if (initialColorMode === 'system') setResolvedColorMode(getSystemColorMode())
+    if (initialColorMode === 'system')
+      setResolvedColorMode(getSystemColorMode())
   }, [])
 
   useEffect(() => {
@@ -114,18 +120,26 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     [value, resolvedValue, changeColorMode, toggleScheme],
   )
 
-  return <ColorModeContext.Provider value={context}>{children}</ColorModeContext.Provider>
+  return (
+    <ColorModeContext.Provider value={context}>
+      {children}
+    </ColorModeContext.Provider>
+  )
 }
 
 export const useColorMode = () => {
   const context = useContext(ColorModeContext)
 
-  if (context === undefined) throw new Error('useColorMode must be used within a ColorModeProvider')
+  if (context === undefined)
+    throw new Error('useColorMode must be used within a ColorModeProvider')
 
   return context
 }
 
-export const useColorModetValue = <L extends any, D extends any>(light: L, dark: D): L | D => {
+export const useColorModetValue = <L extends any, D extends any>(
+  light: L,
+  dark: D,
+): L | D => {
   const { colorMode } = useColorMode()
 
   return colorMode === 'light' ? light : dark

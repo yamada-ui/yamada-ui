@@ -20,11 +20,18 @@ export type PortalProps = {
   appendToParentPortal?: boolean
 }
 
-export const Portal = ({ containerRef, appendToParentPortal = true, children }: PortalProps) => {
+export const Portal = ({
+  containerRef,
+  appendToParentPortal = true,
+  children,
+}: PortalProps) => {
   return containerRef ? (
     <ContainerPortal containerRef={containerRef} {...{ children }} />
   ) : (
-    <DefaultPortal appendToParentPortal={appendToParentPortal} {...{ children }} />
+    <DefaultPortal
+      appendToParentPortal={appendToParentPortal}
+      {...{ children }}
+    />
   )
 }
 

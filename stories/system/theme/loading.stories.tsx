@@ -208,7 +208,9 @@ const App: FC = () => {
       <Wrap gap='md'>
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
-        <Button onClick={() => background.start()}>Start background loading</Button>
+        <Button onClick={() => background.start()}>
+          Start background loading
+        </Button>
       </Wrap>
     </Center>
   )
@@ -232,7 +234,9 @@ const AsyncApp: FC = () => {
       <Wrap gap='md'>
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
-        <Button onClick={() => background.start()}>Start background loading</Button>
+        <Button onClick={() => background.start()}>
+          Start background loading
+        </Button>
       </Wrap>
     </Center>
   )
@@ -244,7 +248,9 @@ const CustomApp: FC = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => custom.start({ duration: 10000 })}>Start custom loading</Button>
+        <Button onClick={() => custom.start({ duration: 10000 })}>
+          Start custom loading
+        </Button>
       </Wrap>
     </Center>
   )

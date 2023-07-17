@@ -30,7 +30,9 @@ export const ReorderTrigger = forwardRef<ReorderTriggerProps, 'div'>(
         __css={css}
         {...rest}
         data-selected={dataAttr(isDrag)}
-        onPointerDown={handlerAll(rest.onPointerDown, (ev) => dragControls.start(ev))}
+        onPointerDown={handlerAll(rest.onPointerDown, (ev) =>
+          dragControls.start(ev),
+        )}
       >
         {children}
       </ui.div>

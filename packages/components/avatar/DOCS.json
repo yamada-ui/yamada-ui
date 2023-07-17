@@ -42,13 +42,21 @@
       "required": false,
       "description": "The size of the Avatar."
     },
-    "src": { "type": "string", "required": false, "description": "The image url of the avatar." },
+    "src": {
+      "type": "string",
+      "required": false,
+      "description": "The image url of the avatar."
+    },
     "srcSet": {
       "type": "string",
       "required": false,
       "description": "List of sources to use for different screen resolutions."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Avatar." }
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Avatar."
+    }
   },
   "AvatarGroup": {
     "max": {

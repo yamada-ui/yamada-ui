@@ -9,7 +9,9 @@ export type UseDisclosureProps = {
 }
 
 export const useDisclosure = (props: UseDisclosureProps = {}) => {
-  const [defaultIsOpen, setIsOpen] = useState<boolean>(props.defaultIsOpen ?? false)
+  const [defaultIsOpen, setIsOpen] = useState<boolean>(
+    props.defaultIsOpen ?? false,
+  )
 
   const handleOpen = useCallbackRef(props.onOpen)
   const handleClose = useCallbackRef(props.onClose)

@@ -38,39 +38,43 @@ import {
 } from 'react'
 import { useRadioGroupContenxt } from './radio-group'
 
-export type UseRadioProps<Y extends string | number = string> = FormControlOptions & {
-  /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The name of the input field in a radio.
-   */
-  name?: string
-  /**
-   * The value to be used in the radio button.
-   */
-  value?: Y
-  /**
-   * If `true`, the radio will be initially checked.
-   *
-   * @default false
-   */
-  defaultChecked?: boolean
-  /**
-   * If `true`, the radio will be checked.
-   *
-   * @default false
-   */
-  isChecked?: boolean
-  /**
-   * The callback invoked when the checked state changes.
-   */
-  onChange?: ChangeEventHandler<HTMLInputElement>
-}
+export type UseRadioProps<Y extends string | number = string> =
+  FormControlOptions & {
+    /**
+     * id assigned to input.
+     */
+    id?: string
+    /**
+     * The name of the input field in a radio.
+     */
+    name?: string
+    /**
+     * The value to be used in the radio button.
+     */
+    value?: Y
+    /**
+     * If `true`, the radio will be initially checked.
+     *
+     * @default false
+     */
+    defaultChecked?: boolean
+    /**
+     * If `true`, the radio will be checked.
+     *
+     * @default false
+     */
+    isChecked?: boolean
+    /**
+     * The callback invoked when the checked state changes.
+     */
+    onChange?: ChangeEventHandler<HTMLInputElement>
+  }
 
-export const useRadio = <Y extends string | number = string>(props: UseRadioProps<Y>) => {
-  const { id, name, value, required, disabled, readOnly, ...rest } = useFormControlProps(props)
+export const useRadio = <Y extends string | number = string>(
+  props: UseRadioProps<Y>,
+) => {
+  const { id, name, value, required, disabled, readOnly, ...rest } =
+    useFormControlProps(props)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -247,7 +251,10 @@ export const Radio = forwardRef(
   ) => {
     const group = useRadioGroupContenxt()
     const control = useFormControl(props)
-    const [styles, mergedProps] = useMultiComponentStyle('Radio', { ...group, ...props })
+    const [styles, mergedProps] = useMultiComponentStyle('Radio', {
+      ...group,
+      ...props,
+    })
     const {
       className,
       gap = '0.5rem',
@@ -262,16 +269,22 @@ export const Radio = forwardRef(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    const { getContainerProps, getInputProps, getIconProps, getLabelProps } = useRadio({
-      ...rest,
-      isRequired,
-      isReadOnly,
-      isDisabled,
-      isInvalid,
-      isChecked: group?.value && rest.value ? group.value === rest.value : rest.isChecked,
-      onChange:
-        group?.onChange && rest.value ? funcAll(group.onChange, rest.onChange) : rest.onChange,
-    })
+    const { getContainerProps, getInputProps, getIconProps, getLabelProps } =
+      useRadio({
+        ...rest,
+        isRequired,
+        isReadOnly,
+        isDisabled,
+        isInvalid,
+        isChecked:
+          group?.value && rest.value
+            ? group.value === rest.value
+            : rest.isChecked,
+        onChange:
+          group?.onChange && rest.value
+            ? funcAll(group.onChange, rest.onChange)
+            : rest.onChange,
+      })
 
     return (
       <ui.label
@@ -298,7 +311,10 @@ export const Radio = forwardRef(
           ...styles.container,
         }}
       >
-        <ui.input className='ui-radio-input' {...getInputProps(inputProps, ref)} />
+        <ui.input
+          className='ui-radio-input'
+          {...getInputProps(inputProps, ref)}
+        />
 
         <ui.span
           className='ui-radio-icon'

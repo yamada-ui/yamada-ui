@@ -6,15 +6,35 @@ type Component = {
   variants: string[]
 }
 
-const defaultColors = ['brand', 'primary', 'secondary', 'warning', 'danger', 'link']
+const defaultColors = [
+  'brand',
+  'primary',
+  'secondary',
+  'warning',
+  'danger',
+  'link',
+]
 
-const hues = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
+const hues = [
+  '50',
+  '100',
+  '200',
+  '300',
+  '400',
+  '500',
+  '600',
+  '700',
+  '800',
+  '900',
+]
 
 export const printComponent = (components: Record<string, Component>): string =>
   `components: { ${Object.entries(components)
     .map(
       ([key, unions]) =>
-        `${key.match(/^[a-zA-Z0-9\-_]+$/) ? key : `"${key}"`}: { ${print(unions)}}`,
+        `${key.match(/^[a-zA-Z0-9\-_]+$/) ? key : `"${key}"`}: { ${print(
+          unions,
+        )}}`,
     )
     .join(`\n`)} }`
 
@@ -62,7 +82,8 @@ export const extractTransitions = (
 
   const { transitions } = theme
 
-  if (!isObject(transitions)) return { transitionProperty, transitionDuration, transitionEasing }
+  if (!isObject(transitions))
+    return { transitionProperty, transitionDuration, transitionEasing }
 
   Object.entries(transitions).forEach(([key, value]) => {
     switch (key) {
@@ -113,7 +134,9 @@ export const extractPaths = (target: any, maxDepth = 3): string[] => {
 
   return Object.entries(target).reduce((array, [key, value]) => {
     if (isObject(value)) {
-      extractPaths(value, maxDepth - 1).forEach((nestedKey) => array.push(`${key}.${nestedKey}`))
+      extractPaths(value, maxDepth - 1).forEach((nestedKey) =>
+        array.push(`${key}.${nestedKey}`),
+      )
     } else {
       array.push(key)
     }
@@ -134,17 +157,24 @@ export const extractKeys = (theme: any, key: string): string[] => {
 
 export const createThemeTypings = async (theme: any) => {
   const unions = config.reduce(
-    (obj, { key, maxScanDepth, filter = () => true, flatMap = (value) => value }) => {
+    (
+      obj,
+      { key, maxScanDepth, filter = () => true, flatMap = (value) => value },
+    ) => {
       const target = theme[key]
 
       obj[key] = []
 
       if (isObject(target) || isArray(target)) {
-        obj[key] = extractPaths(target, maxScanDepth).filter(filter).flatMap(flatMap)
+        obj[key] = extractPaths(target, maxScanDepth)
+          .filter(filter)
+          .flatMap(flatMap)
       }
 
       if (isObject(theme.semantics)) {
-        const semanticKeys = extractKeys(theme.semantics, key).filter(filter).flatMap(flatMap)
+        const semanticKeys = extractKeys(theme.semantics, key)
+          .filter(filter)
+          .flatMap(flatMap)
 
         obj[key].push(...semanticKeys)
       }
@@ -157,7 +187,8 @@ export const createThemeTypings = async (theme: any) => {
   const textStyles = extractKeys(theme, 'styles.textStyles')
   const layerStyles = extractKeys(theme, 'styles.layerStyles')
   const colorSchemes = extractColorSchemes(theme)
-  const { transitionProperty, transitionDuration, transitionEasing } = extractTransitions(theme)
+  const { transitionProperty, transitionDuration, transitionEasing } =
+    extractTransitions(theme)
   const componentTypes = extractComponents(theme)
 
   return prettier(

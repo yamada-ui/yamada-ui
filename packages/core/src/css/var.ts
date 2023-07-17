@@ -34,8 +34,12 @@ export const createVars = (
     let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
 
     if (token.startsWith('gradients')) {
-      lightValue = createGradient(lightValue, { __cssMap: cssMap } as StyledTheme<Dict>)
-      darkValue = createGradient(darkValue, { __cssMap: cssMap } as StyledTheme<Dict>)
+      lightValue = createGradient(lightValue, {
+        __cssMap: cssMap,
+      } as StyledTheme<Dict>)
+      darkValue = createGradient(darkValue, {
+        __cssMap: cssMap,
+      } as StyledTheme<Dict>)
     }
 
     if (!isSemantic) {
@@ -57,7 +61,8 @@ export const createVars = (
 
       cssVars[variable] = lightValue
 
-      if (darkValue) cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: darkValue } })
+      if (darkValue)
+        cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: darkValue } })
 
       cssMap[token] = {
         value: lightValue,
@@ -68,7 +73,9 @@ export const createVars = (
       continue
     }
 
-    const fetchParent = (value: string | number = ''): [string | undefined, string | number] => {
+    const fetchParent = (
+      value: string | number = '',
+    ): [string | undefined, string | number] => {
       const [parent] = token.split('.')
 
       const _token = [parent, value].join('.')

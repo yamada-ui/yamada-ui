@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Box,
   Heading,
@@ -12,12 +12,16 @@ import {
 } from '@yamada-ui/react'
 import { useMemo, useRef } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Scroll',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const basic: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
@@ -38,7 +42,7 @@ export const basic: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withTransition: ComponentStory<typeof Motion> = () => {
+export const withTransition: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
@@ -60,7 +64,7 @@ export const withTransition: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withOnce: ComponentStory<typeof Motion> = () => {
+export const withOnce: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
@@ -82,13 +86,21 @@ export const withOnce: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useViewport: ComponentStory<typeof Motion> = () => {
+export const useViewport: Story = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   return (
     <>
       <Text>Please scroll</Text>
 
-      <Box ref={scrollRef} overflow='scroll' w='full' h='xs' p='md' borderWidth='1px' rounded='md'>
+      <Box
+        ref={scrollRef}
+        overflow='scroll'
+        w='full'
+        h='xs'
+        p='md'
+        borderWidth='1px'
+        rounded='md'
+      >
         <Motion
           mt='96'
           initial={{ opacity: 0 }}
@@ -107,13 +119,20 @@ export const useViewport: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useHook: ComponentStory<typeof Motion> = () => {
+export const useHook: Story = () => {
   const { scrollYProgress } = useScroll()
   const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 
   return (
     <Box w='full' h='300vh'>
-      <Box w='2xs' h='2xs' position='fixed' top='50%' left='50%' transform='translate(-50%, -50%)'>
+      <Box
+        w='2xs'
+        h='2xs'
+        position='fixed'
+        top='50%'
+        left='50%'
+        transform='translate(-50%, -50%)'
+      >
         <Motion
           style={{ scale }}
           w='full'
@@ -135,7 +154,7 @@ export const useHook: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const customScrollBar: ComponentStory<typeof Motion> = () => {
+export const customScrollBar: Story = () => {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -156,78 +175,90 @@ export const customScrollBar: ComponentStory<typeof Motion> = () => {
         transformOrigin='0%'
       />
 
-      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac rhoncus quam.</Text>
+      <Text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac
+        rhoncus quam.
+      </Text>
 
       <Text>
-        Fringilla quam urna. Cras turpis elit, euismod eget ligula quis, imperdiet sagittis justo.
-        In viverra fermentum ex ac vestibulum. Aliquam eleifend nunc a luctus porta. Mauris laoreet
-        augue ut felis blandit, at iaculis odio ultrices. Nulla facilisi. Vestibulum cursus ipsum
-        tellus, eu tincidunt neque tincidunt a.
+        Fringilla quam urna. Cras turpis elit, euismod eget ligula quis,
+        imperdiet sagittis justo. In viverra fermentum ex ac vestibulum. Aliquam
+        eleifend nunc a luctus porta. Mauris laoreet augue ut felis blandit, at
+        iaculis odio ultrices. Nulla facilisi. Vestibulum cursus ipsum tellus,
+        eu tincidunt neque tincidunt a.
       </Text>
 
       <Heading>Sub-header</Heading>
 
       <Text>
-        In eget sodales arcu, consectetur efficitur metus. Duis efficitur tincidunt odio, sit amet
-        laoreet massa fringilla eu.
+        In eget sodales arcu, consectetur efficitur metus. Duis efficitur
+        tincidunt odio, sit amet laoreet massa fringilla eu.
       </Text>
 
       <Text>
-        Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris id mauris vel arcu
-        commodo venenatis. Aliquam eu risus arcu. Proin sit amet lacus mollis, semper massa ut,
-        rutrum mi.
+        Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris
+        id mauris vel arcu commodo venenatis. Aliquam eu risus arcu. Proin sit
+        amet lacus mollis, semper massa ut, rutrum mi.
       </Text>
 
-      <Text>Sed sem nisi, luctus consequat ligula in, congue sodales nisl.</Text>
+      <Text>
+        Sed sem nisi, luctus consequat ligula in, congue sodales nisl.
+      </Text>
 
       <Text>
-        Vestibulum bibendum at erat sit amet pulvinar. Pellentesque pharetra leo vitae tristique
-        rutrum. Donec ut volutpat ante, ut suscipit leo.
+        Vestibulum bibendum at erat sit amet pulvinar. Pellentesque pharetra leo
+        vitae tristique rutrum. Donec ut volutpat ante, ut suscipit leo.
       </Text>
 
       <Heading>Sub-header</Heading>
 
       <Text>
-        Maecenas quis elementum nulla, in lacinia nisl. Ut rutrum fringilla aliquet. Pellentesque
-        auctor vehicula malesuada. Aliquam id feugiat sem, sit amet tempor nulla. Quisque fermentum
-        felis faucibus, vehicula metus ac, interdum nibh. Curabitur vitae convallis ligula. Integer
-        ac enim vel felis pharetra laoreet. Interdum et malesuada fames ac ante ipsum primis in
-        faucibus. Pellentesque hendrerit ac augue quis pretium.
+        Maecenas quis elementum nulla, in lacinia nisl. Ut rutrum fringilla
+        aliquet. Pellentesque auctor vehicula malesuada. Aliquam id feugiat sem,
+        sit amet tempor nulla. Quisque fermentum felis faucibus, vehicula metus
+        ac, interdum nibh. Curabitur vitae convallis ligula. Integer ac enim vel
+        felis pharetra laoreet. Interdum et malesuada fames ac ante ipsum primis
+        in faucibus. Pellentesque hendrerit ac augue quis pretium.
       </Text>
 
       <Text>
-        Morbi ut scelerisque nibh. Integer auctor, massa non dictum tristique, elit metus efficitur
-        elit, ac pretium sapien nisl nec ante. In et ex ultricies, mollis mi in, euismod dolor.
+        Morbi ut scelerisque nibh. Integer auctor, massa non dictum tristique,
+        elit metus efficitur elit, ac pretium sapien nisl nec ante. In et ex
+        ultricies, mollis mi in, euismod dolor.
       </Text>
 
       <Text>Quisque convallis ligula non magna efficitur tincidunt.</Text>
 
       <Text>
-        Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris id mauris vel arcu
-        commodo venenatis. Aliquam eu risus arcu. Proin sit amet lacus mollis, semper massa ut,
-        rutrum mi.
+        Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris
+        id mauris vel arcu commodo venenatis. Aliquam eu risus arcu. Proin sit
+        amet lacus mollis, semper massa ut, rutrum mi.
       </Text>
 
-      <Text>Sed sem nisi, luctus consequat ligula in, congue sodales nisl.</Text>
+      <Text>
+        Sed sem nisi, luctus consequat ligula in, congue sodales nisl.
+      </Text>
 
       <Text>
-        Vestibulum bibendum at erat sit amet pulvinar. Pellentesque pharetra leo vitae tristique
-        rutrum. Donec ut volutpat ante, ut suscipit leo.
+        Vestibulum bibendum at erat sit amet pulvinar. Pellentesque pharetra leo
+        vitae tristique rutrum. Donec ut volutpat ante, ut suscipit leo.
       </Text>
 
       <Heading>Sub-header</Heading>
 
       <Text>
-        Maecenas quis elementum nulla, in lacinia nisl. Ut rutrum fringilla aliquet. Pellentesque
-        auctor vehicula malesuada. Aliquam id feugiat sem, sit amet tempor nulla. Quisque fermentum
-        felis faucibus, vehicula metus ac, interdum nibh. Curabitur vitae convallis ligula. Integer
-        ac enim vel felis pharetra laoreet. Interdum et malesuada fames ac ante ipsum primis in
-        faucibus. Pellentesque hendrerit ac augue quis pretium.
+        Maecenas quis elementum nulla, in lacinia nisl. Ut rutrum fringilla
+        aliquet. Pellentesque auctor vehicula malesuada. Aliquam id feugiat sem,
+        sit amet tempor nulla. Quisque fermentum felis faucibus, vehicula metus
+        ac, interdum nibh. Curabitur vitae convallis ligula. Integer ac enim vel
+        felis pharetra laoreet. Interdum et malesuada fames ac ante ipsum primis
+        in faucibus. Pellentesque hendrerit ac augue quis pretium.
       </Text>
 
       <Text>
-        Morbi ut scelerisque nibh. Integer auctor, massa non dictum tristique, elit metus efficitur
-        elit, ac pretium sapien nisl nec ante. In et ex ultricies, mollis mi in, euismod dolor.
+        Morbi ut scelerisque nibh. Integer auctor, massa non dictum tristique,
+        elit metus efficitur elit, ac pretium sapien nisl nec ante. In et ex
+        ultricies, mollis mi in, euismod dolor.
       </Text>
 
       <Text>Quisque convallis ligula non magna efficitur tincidunt.</Text>
@@ -235,7 +266,7 @@ export const customScrollBar: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withVariants: ComponentStory<typeof Motion> = () => {
+export const withVariants: Story = () => {
   const card: MotionVariants = useMemo(
     () => ({
       offscreen: {

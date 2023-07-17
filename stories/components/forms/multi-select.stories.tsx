@@ -1,5 +1,9 @@
-import { faCaretDown, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import {
+  faCaretDown,
+  faCheck,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   MultiSelect,
@@ -14,12 +18,16 @@ import {
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof MultiSelect>
+
+const meta: Meta<typeof MultiSelect> = {
   title: 'Components / Forms / MultiSelect',
   component: MultiSelect,
-} as ComponentMeta<typeof MultiSelect>
+}
 
-export const basic: ComponentStory<typeof MultiSelect> = () => {
+export default meta
+
+export const basic: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -73,7 +81,7 @@ export const basic: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof MultiSelect> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <MultiSelect placeholder='extra small size' size='xs' />
@@ -84,7 +92,7 @@ export const withSize: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof MultiSelect> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <MultiSelect variant='outline' placeholder='outline' />
@@ -95,7 +103,7 @@ export const withVariant: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof MultiSelect> = () => {
+export const withDefaultValue: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' defaultValue={['ベジータ']}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -105,17 +113,24 @@ export const withDefaultValue: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof MultiSelect> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <MultiSelect placeholder='default border color' />
-      <MultiSelect focusBorderColor='green.500' placeholder='custom border color' />
-      <MultiSelect isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <MultiSelect
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
+      <MultiSelect
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const withSeparator: ComponentStory<typeof MultiSelect> = () => {
+export const withSeparator: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' separator=';'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -125,7 +140,7 @@ export const withSeparator: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withComponent: ComponentStory<typeof MultiSelect> = () => {
+export const withComponent: Story = () => {
   return (
     <>
       <MultiSelect
@@ -151,7 +166,7 @@ export const withComponent: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withOmitSelectedValues: ComponentStory<typeof MultiSelect> = () => {
+export const withOmitSelectedValues: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' omitSelectedValues={true}>
       <OptionGroup label='地球人'>
@@ -172,7 +187,7 @@ export const withOmitSelectedValues: ComponentStory<typeof MultiSelect> = () => 
   )
 }
 
-export const withMaxSelectedValues: ComponentStory<typeof MultiSelect> = () => {
+export const withMaxSelectedValues: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' maxSelectedValues={3}>
       <OptionGroup label='地球人'>
@@ -193,7 +208,7 @@ export const withMaxSelectedValues: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withCloseOnSelect: ComponentStory<typeof MultiSelect> = () => {
+export const withCloseOnSelect: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' closeOnSelect={true}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -203,7 +218,7 @@ export const withCloseOnSelect: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const disabledIsClearable: ComponentStory<typeof MultiSelect> = () => {
+export const disabledIsClearable: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' isClearable={false}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -213,7 +228,7 @@ export const disabledIsClearable: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const disabledCloseOnBlur: ComponentStory<typeof MultiSelect> = () => {
+export const disabledCloseOnBlur: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' closeOnBlur={false}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -223,9 +238,13 @@ export const disabledCloseOnBlur: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof MultiSelect> = () => {
+export const withPlacement: Story = () => {
   return (
-    <MultiSelect placeholder='キャラクターを選択' placement='right-start' maxW='xs'>
+    <MultiSelect
+      placeholder='キャラクターを選択'
+      placement='right-start'
+      maxW='xs'
+    >
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
@@ -233,9 +252,13 @@ export const withPlacement: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withOffset: ComponentStory<typeof MultiSelect> = () => {
+export const withOffset: Story = () => {
   return (
-    <MultiSelect placeholder='キャラクターを選択' offset={[16, 16]} listProps={{ maxW: 'xs' }}>
+    <MultiSelect
+      placeholder='キャラクターを選択'
+      offset={[16, 16]}
+      listProps={{ maxW: 'xs' }}
+    >
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
@@ -243,7 +266,7 @@ export const withOffset: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withGutter: ComponentStory<typeof MultiSelect> = () => {
+export const withGutter: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' gutter={32}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -253,7 +276,7 @@ export const withGutter: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof MultiSelect> = () => {
+export const withDuration: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択' duration={0.4}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -263,7 +286,7 @@ export const withDuration: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof MultiSelect> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <MultiSelect isDisabled variant='outline' placeholder='outline' />
@@ -271,14 +294,17 @@ export const isDisabled: ComponentStory<typeof MultiSelect> = () => {
       <MultiSelect isDisabled variant='flushed' placeholder='flushed' />
       <MultiSelect isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <MultiSelect placeholder='Select notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof MultiSelect> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <MultiSelect isReadOnly variant='outline' placeholder='outline' />
@@ -286,14 +312,17 @@ export const isReadonly: ComponentStory<typeof MultiSelect> = () => {
       <MultiSelect isReadOnly variant='flushed' placeholder='flushed' />
       <MultiSelect isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <MultiSelect placeholder='Select notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof MultiSelect> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <MultiSelect isInvalid variant='outline' placeholder='outline' />
@@ -312,7 +341,7 @@ export const isInvalid: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const isOptionDisabled: ComponentStory<typeof MultiSelect> = () => {
+export const isOptionDisabled: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -324,7 +353,7 @@ export const isOptionDisabled: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const isOptionFocusable: ComponentStory<typeof MultiSelect> = () => {
+export const isOptionFocusable: Story = () => {
   return (
     <MultiSelect placeholder='キャラクターを選択'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -336,10 +365,13 @@ export const isOptionFocusable: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const customIcon: ComponentStory<typeof MultiSelect> = () => {
+export const customIcon: Story = () => {
   return (
     <>
-      <MultiSelect placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
+      <MultiSelect
+        placeholder='キャラクターを選択'
+        iconProps={{ color: 'primary' }}
+      >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -357,7 +389,7 @@ export const customIcon: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const customClearIcon: ComponentStory<typeof MultiSelect> = () => {
+export const customClearIcon: Story = () => {
   return (
     <MultiSelect
       placeholder='キャラクターを選択'
@@ -370,10 +402,13 @@ export const customClearIcon: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const customOption: ComponentStory<typeof MultiSelect> = () => {
+export const customOption: Story = () => {
   return (
     <>
-      <MultiSelect placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
+      <MultiSelect
+        placeholder='キャラクターを選択'
+        optionProps={{ color: 'primary' }}
+      >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -391,11 +426,15 @@ export const customOption: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof MultiSelect> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<string[]>(['孫悟空'])
 
   return (
-    <MultiSelect placeholder='キャラクターを選択' value={value} onChange={onChange}>
+    <MultiSelect
+      placeholder='キャラクターを選択'
+      value={value}
+      onChange={onChange}
+    >
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
@@ -403,7 +442,7 @@ export const customControl: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof MultiSelect> = () => {
+export const reactHookForm: Story = () => {
   type Data = { select1: string[]; select2: string[]; select3: string[] }
 
   const options: UIOption[] = [
@@ -501,7 +540,11 @@ export const reactHookForm: ComponentStory<typeof MultiSelect> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiSelect placeholder='キャラクターを選択' {...field} options={options} />
+            <MultiSelect
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>
@@ -513,7 +556,7 @@ export const reactHookForm: ComponentStory<typeof MultiSelect> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiSelect> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { select1: string[]; select2: string[]; select3: string[] }
 
   const defaultValues: Data = {
@@ -617,7 +660,11 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiSelect> =
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiSelect placeholder='キャラクターを選択' {...field} options={options} />
+            <MultiSelect
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>

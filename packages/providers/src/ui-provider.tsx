@@ -79,7 +79,10 @@ export const UIProvider: FC<UIProviderProps> = ({
   return (
     <ThemeProvider theme={theme} config={config}>
       <ColorModeProvider colorModeManager={colorModeManager} config={config}>
-        <EnvironmentProvider environment={environment} disabled={disableEnvironment}>
+        <EnvironmentProvider
+          environment={environment}
+          disabled={disableEnvironment}
+        >
           <LoadingProvider {...config.loading}>
             {!disableResetStyle ? <ResetStyle /> : null}
             {!disableGlobalStyle ? <GlobalStyle /> : null}

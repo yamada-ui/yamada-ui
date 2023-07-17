@@ -15,9 +15,20 @@ import {
 } from '@yamada-ui/form-control'
 import { Loading, LoadingProps } from '@yamada-ui/loading'
 import { Fade, FadeProps } from '@yamada-ui/transitions'
-import { assignRef, createContext, cx, dataAttr, isArray, pickObject } from '@yamada-ui/utils'
+import {
+  assignRef,
+  createContext,
+  cx,
+  dataAttr,
+  isArray,
+  pickObject,
+} from '@yamada-ui/utils'
 import { FC, ForwardedRef, Fragment, PropsWithChildren } from 'react'
-import { useDropzone, Accept, DropzoneOptions as ReactDropzoneOptions } from 'react-dropzone'
+import {
+  useDropzone,
+  Accept,
+  DropzoneOptions as ReactDropzoneOptions,
+} from 'react-dropzone'
 
 type DropzoneContext = {
   isLoading?: boolean
@@ -108,30 +119,31 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
 
   const formControlProps = pickObject(rest, formControlProperties)
 
-  const { getRootProps, getInputProps, isDragAccept, isDragReject, open } = useDropzone({
-    disabled,
-    accept: isArray(accept)
-      ? accept.reduce((prev, current) => ({ ...prev, [current]: [] }), {})
-      : accept,
-    onDrop,
-    onDropAccepted,
-    onDropRejected,
-    multiple,
-    maxSize,
-    maxFiles,
-    autoFocus,
-    noClick,
-    noDrag,
-    noDragEventsBubbling,
-    noKeyboard,
-    onDragEnter,
-    onDragLeave,
-    onDragOver,
-    onFileDialogCancel,
-    onFileDialogOpen,
-    preventDropOnDocument,
-    useFsAccessApi,
-  })
+  const { getRootProps, getInputProps, isDragAccept, isDragReject, open } =
+    useDropzone({
+      disabled,
+      accept: isArray(accept)
+        ? accept.reduce((prev, current) => ({ ...prev, [current]: [] }), {})
+        : accept,
+      onDrop,
+      onDropAccepted,
+      onDropRejected,
+      multiple,
+      maxSize,
+      maxFiles,
+      autoFocus,
+      noClick,
+      noDrag,
+      noDragEventsBubbling,
+      noKeyboard,
+      onDragEnter,
+      onDragLeave,
+      onDragOver,
+      onFileDialogCancel,
+      onFileDialogOpen,
+      preventDropOnDocument,
+      useFsAccessApi,
+    })
 
   assignRef(openRef, open)
 
@@ -146,7 +158,9 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
   }
 
   return (
-    <DropzoneProvider value={{ isLoading, isDragAccept, isDragReject, isDragIdle, styles }}>
+    <DropzoneProvider
+      value={{ isLoading, isDragAccept, isDragReject, isDragIdle, styles }}
+    >
       <ui.div
         className={cx('ui-dropzone', className)}
         __css={css}
@@ -158,7 +172,13 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
         data-loading={dataAttr(isLoading)}
       >
         <LoadingOverlay loadingProps={loadingProps} {...overlayProps} />
-        <ui.input ref={ref} id={id} name={name} {...formControlProps} {...getInputProps()} />
+        <ui.input
+          ref={ref}
+          id={id}
+          name={name}
+          {...formControlProps}
+          {...getInputProps()}
+        />
         {children}
       </ui.div>
     </DropzoneProvider>
@@ -183,7 +203,13 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   }
 
   return (
-    <Fade isOpen={isLoading} unmountOnExit className='ui-dropzone-overlay' __css={css} {...rest}>
+    <Fade
+      isOpen={isLoading}
+      unmountOnExit
+      className='ui-dropzone-overlay'
+      __css={css}
+      {...rest}
+    >
       <Loading className='ui-dropzone-loading' size='4xl' {...loadingProps} />
     </Fade>
   )

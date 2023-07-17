@@ -9,7 +9,9 @@ describe('<Tag />', () => {
   })
 
   test('Tag with icon renders correctly', () => {
-    const { getByTestId } = render(<Tag leftIcon={<CheckIcon data-testid='icon' />}>Tag</Tag>)
+    const { getByTestId } = render(
+      <Tag leftIcon={<CheckIcon data-testid='icon' />}>Tag</Tag>,
+    )
 
     expect(getByTestId('icon')).toBeInTheDocument()
   })

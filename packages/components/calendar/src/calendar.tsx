@@ -28,7 +28,10 @@ type CalendarOptions = {
   headerProps?: HTMLUIProps<'div'>
 }
 
-export type CalendarBaseProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue' | 'onChange'> &
+export type CalendarBaseProps = Omit<
+  HTMLUIProps<'div'>,
+  'value' | 'defaultValue' | 'onChange'
+> &
   ThemeProps<'Calendar'> &
   CalendarOptions &
   Omit<CalenderHeaderProps, 'label' | 'index'> &
@@ -36,10 +39,14 @@ export type CalendarBaseProps = Omit<HTMLUIProps<'div'>, 'value' | 'defaultValue
   Pick<MonthListProps, 'monthProps'> &
   Pick<MonthProps, 'tableProps' | 'weekdayProps' | 'dayProps'>
 
-export type CalendarProps<Y extends MaybeValue = Date> = CalendarBaseProps & UseCalendarProps<Y>
+export type CalendarProps<Y extends MaybeValue = Date> = CalendarBaseProps &
+  UseCalendarProps<Y>
 
 export const Calendar = forwardRef(
-  <T extends MaybeValue = Date>(props: CalendarProps<T>, ref: ForwardedRef<HTMLDivElement>) => {
+  <T extends MaybeValue = Date>(
+    props: CalendarProps<T>,
+    ref: ForwardedRef<HTMLDivElement>,
+  ) => {
     const [styles, mergedProps] = useMultiComponentStyle('Calendar', props)
     const {
       className,
@@ -81,7 +88,9 @@ export const Calendar = forwardRef(
     const maxH = computedProps.maxH ?? computedProps.maxHeight
 
     return (
-      <CalendarProvider value={{ type, styles, ...rest } as unknown as CalendarContext}>
+      <CalendarProvider
+        value={{ type, styles, ...rest } as unknown as CalendarContext}
+      >
         <ui.div
           className={cx('ui-calendar', className)}
           __css={css}

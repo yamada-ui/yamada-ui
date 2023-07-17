@@ -1,4 +1,10 @@
-import { UIProvider, extendConfig, Center, useNotice, Button } from '@yamada-ui/react'
+import {
+  UIProvider,
+  extendConfig,
+  Center,
+  useNotice,
+  Button,
+} from '@yamada-ui/react'
 import { FC } from 'react'
 
 export default {

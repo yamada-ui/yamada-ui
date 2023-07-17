@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Flex, Box, Spacer } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Flex>
+
+const meta: Meta<typeof Flex> = {
   title: 'Components / Layouts / Flex',
   component: Flex,
-} as ComponentMeta<typeof Flex>
+}
 
-export const horizontal: ComponentStory<typeof Flex> = () => {
+export default meta
+
+export const horizontal: Story = () => {
   return (
     <Flex gap='md'>
       <Box p='md' rounded='4' bg='primary' color='white'>
@@ -28,7 +32,7 @@ export const horizontal: ComponentStory<typeof Flex> = () => {
   )
 }
 
-export const vertical: ComponentStory<typeof Flex> = () => {
+export const vertical: Story = () => {
   return (
     <Flex direction='column' gap='md'>
       <Box p='md' rounded='4' bg='primary' color='white'>
@@ -50,7 +54,7 @@ export const vertical: ComponentStory<typeof Flex> = () => {
   )
 }
 
-export const spacer: ComponentStory<typeof Flex> = () => {
+export const spacer: Story = () => {
   return (
     <Flex w='full' gap='md'>
       <Box p='md' rounded='4' bg='primary' color='white'>

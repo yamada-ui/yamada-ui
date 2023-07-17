@@ -1,13 +1,21 @@
-import { toHex, parseToRgba, transparentize, mix, darken, lighten } from 'color2k'
+import {
+  toHex,
+  parseToRgba,
+  transparentize,
+  mix,
+  darken,
+  lighten,
+} from 'color2k'
 import { getMemoizedObject as get, Dict, isArray } from '.'
 
 export const getColor =
-  (color: string, fallback?: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const hex: string | number | [string | number, string | number] | undefined = get(
-      theme,
-      `colors.${color}`,
-      color,
-    )
+  (color: string, fallback?: string) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+    const hex:
+      | string
+      | number
+      | [string | number, string | number]
+      | undefined = get(theme, `colors.${color}`, color)
 
     try {
       if (isArray(hex)) {
@@ -23,42 +31,48 @@ export const getColor =
   }
 
 export const lightenColor =
-  (color: string, amount: number) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (color: string, amount: number) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorMode)
 
     return toHex(lighten(raw, amount / 100))
   }
 
 export const darkenColor =
-  (color: string, amount: number) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (color: string, amount: number) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorMode)
 
     return toHex(darken(raw, amount / 100))
   }
 
 export const tintColor =
-  (color: string, amount: number) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (color: string, amount: number) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorMode)
 
     return toHex(mix(raw, '#fff', amount))
   }
 
 export const shadeColor =
-  (color: string, amount: number) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (color: string, amount: number) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorMode)
 
     return toHex(mix(raw, '#000', amount / 100))
   }
 
 export const transparentizeColor =
-  (color: string, alpha: number) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (color: string, alpha: number) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorMode)
 
     return transparentize(raw, 1 - alpha)
   }
 
 export const toneColor =
-  (color: string, l: number) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (color: string, l: number) =>
+  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
     const raw = getColor(color)(theme, colorMode)
 
     if (l < 0 || 900 < l) return color
@@ -74,7 +88,10 @@ export const toneColor =
     return toHex(isLighten ? lighten(raw, n / 100) : mix(raw, '#000', n / 100))
   }
 
-export const randomColor = ({ string, colors }: { string?: string; colors?: string[] } = {}) => {
+export const randomColor = ({
+  string,
+  colors,
+}: { string?: string; colors?: string[] } = {}) => {
   const fallback = randomHex()
 
   if (string && colors) return randomColorFromList(string, colors)
@@ -128,7 +145,8 @@ const randomColorFromList = (str: string, list: string[]) => {
   return list[index]
 }
 
-const randomFromList = (list: string[]) => list[Math.floor(Math.random() * list.length)]
+const randomFromList = (list: string[]) =>
+  list[Math.floor(Math.random() * list.length)]
 
 const getBrightness = (color: string) => {
   const [r, g, b] = parseToRgba(color)
@@ -136,18 +154,21 @@ const getBrightness = (color: string) => {
   return (r * 299 + g * 587 + b * 114) / 1000
 }
 
-export const isTone = (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-  const raw = getColor(color)(theme, colorMode)
+export const isTone =
+  (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+    const raw = getColor(color)(theme, colorMode)
 
-  const brightness = getBrightness(raw)
+    const brightness = getBrightness(raw)
 
-  const isDark = brightness < 128
+    const isDark = brightness < 128
 
-  return isDark ? 'dark' : 'light'
-}
+    return isDark ? 'dark' : 'light'
+  }
 
-export const isLight = (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) =>
-  isTone(color)(theme, colorMode) === 'dark'
+export const isLight =
+  (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) =>
+    isTone(color)(theme, colorMode) === 'dark'
 
-export const isDark = (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) =>
-  isTone(color)(theme, colorMode) === 'light'
+export const isDark =
+  (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) =>
+    isTone(color)(theme, colorMode) === 'light'

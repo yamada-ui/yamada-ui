@@ -21,7 +21,8 @@ const main = async () => {
 
     const data = {
       username: 'GitHub',
-      icon_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+      icon_url:
+        'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
       text,
     }
 

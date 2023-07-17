@@ -1,13 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Center, Motion, MotionVariants } from '@yamada-ui/react'
 import { useMemo } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Variants',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const basic: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const basic: Story = () => {
   const variants: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -32,7 +36,7 @@ export const basic: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const usePropagation: ComponentStory<typeof Motion> = () => {
+export const usePropagation: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -75,7 +79,7 @@ export const usePropagation: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useOrchestration: ComponentStory<typeof Motion> = () => {
+export const useOrchestration: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: {
@@ -123,7 +127,7 @@ export const useOrchestration: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useDynamicVariants: ComponentStory<typeof Motion> = () => {
+export const useDynamicVariants: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -160,16 +164,44 @@ export const useDynamicVariants: ComponentStory<typeof Motion> = () => {
         flexDirection='column'
         gap='md'
       >
-        <Motion variants={item} custom={1} bg='white' w='full' h='4' rounded='md' />
-        <Motion variants={item} custom={2} bg='white' w='full' h='4' rounded='md' />
-        <Motion variants={item} custom={3} bg='white' w='full' h='4' rounded='md' />
-        <Motion variants={item} custom={4} bg='white' w='full' h='4' rounded='md' />
+        <Motion
+          variants={item}
+          custom={1}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
+        <Motion
+          variants={item}
+          custom={2}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
+        <Motion
+          variants={item}
+          custom={3}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
+        <Motion
+          variants={item}
+          custom={4}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
       </Motion>
     </Center>
   )
 }
 
-export const useValueSpecific: ComponentStory<typeof Motion> = () => {
+export const useValueSpecific: Story = () => {
   const variants: MotionVariants = useMemo(
     () => ({
       hidden: { pathLength: 0, opacity: 0 },
@@ -191,7 +223,14 @@ export const useValueSpecific: ComponentStory<typeof Motion> = () => {
 
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
-      <Motion as='svg' w='800px' h='200px' viewBox='0 0 800 200' initial='hidden' animate='visible'>
+      <Motion
+        as='svg'
+        w='800px'
+        h='200px'
+        viewBox='0 0 800 200'
+        initial='hidden'
+        animate='visible'
+      >
         <Motion
           as='circle'
           cx='100'

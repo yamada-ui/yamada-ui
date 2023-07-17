@@ -73,7 +73,7 @@ jobs:
 
       - name: Build Storybook
         if: steps.changesets.outputs.published == 'true'
-        run: pnpm build-storybook
+        run: pnpm storybook build
 
       - name: Update Storybook
         if: steps.changesets.outputs.published == 'true'

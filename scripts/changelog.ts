@@ -100,7 +100,10 @@ const getMergedPrs = async (): Promise<PullRequests> => {
   return (data as PullRequests).filter(({ merged_at }) => merged_at)
 }
 
-const writePrFile = async ({ version, body }: PullRequestData): Promise<void> => {
+const writePrFile = async ({
+  version,
+  body,
+}: PullRequestData): Promise<void> => {
   if (!fs.existsSync('.changelog')) fs.mkdirSync('.changelog')
 
   return fs.promises.writeFile(`.changelog/v${version}.mdx`, body)
@@ -133,7 +136,8 @@ export const manifest = {
 const writeReadme = async (): Promise<void> => {
   const data = await manifest.read()
   const sortedData = data.map(
-    ({ date, version }) => `### ${date}: [v${version}](/.changelog/v${version}.mdx)`,
+    ({ date, version }) =>
+      `### ${date}: [v${version}](/.changelog/v${version}.mdx)`,
   )
   const [latest, ...others] = sortedData
 

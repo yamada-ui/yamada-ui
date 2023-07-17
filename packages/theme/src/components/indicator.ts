@@ -35,7 +35,10 @@ export const Indicator: ComponentStyle = {
 
     subtle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       bg: isDefaultColor(
-        [toneColor(c, 100)(t, m), shadeColor(toneColor(c, 200)(t, m), 56)(t, m)],
+        [
+          toneColor(c, 100)(t, m),
+          shadeColor(toneColor(c, 200)(t, m), 56)(t, m),
+        ],
         [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
       )(c),
       color: isDefaultColor(

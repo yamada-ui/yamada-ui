@@ -7,12 +7,22 @@ import {
   CSSUIObject,
 } from '@yamada-ui/core'
 import { TableStyleProvider, TableCaption } from '@yamada-ui/native-table'
-import { cx, pickChildren, getValidChildren, omitObject } from '@yamada-ui/utils'
+import {
+  cx,
+  pickChildren,
+  getValidChildren,
+  omitObject,
+} from '@yamada-ui/utils'
 import { ForwardedRef, forwardRef, Ref } from 'react'
 import { Tbody, TableBodyProps } from './tbody'
 import { Tfoot, TableFootProps } from './tfoot'
 import { Thead, TableHeadProps } from './thead'
-import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
+import {
+  TableContext,
+  TableProvider,
+  useTable,
+  UseTableProps,
+} from './use-table'
 
 type TableOptions = {
   /**
@@ -76,7 +86,10 @@ type PagingTableProps =
   | 'manualPagination'
   | 'autoResetPageIndex'
 
-export type TableProps<Y extends RowData = unknown> = Omit<UseTableProps<Y>, PagingTableProps> &
+export type TableProps<Y extends RowData = unknown> = Omit<
+  UseTableProps<Y>,
+  PagingTableProps
+> &
   TableOptions
 
 export const Table = forwardRef(
@@ -122,7 +135,11 @@ export const Table = forwardRef(
     return (
       <TableStyleProvider value={styles}>
         <TableProvider value={{ ...rest } as TableContext}>
-          <ui.table className={cx('ui-table', className)} __css={css} {...getTableProps({}, ref)}>
+          <ui.table
+            className={cx('ui-table', className)}
+            __css={css}
+            {...getTableProps({}, ref)}
+          >
             <Thead {...theadProps} />
             <Tbody {...tbodyProps} />
             {withFooter ? <Tfoot {...tfootProps} /> : null}
@@ -133,7 +150,9 @@ export const Table = forwardRef(
     )
   },
 ) as {
-  <Y extends RowData>(props: TableProps<Y> & { ref?: Ref<HTMLDivElement> }): JSX.Element
+  <Y extends RowData>(
+    props: TableProps<Y> & { ref?: Ref<HTMLDivElement> },
+  ): JSX.Element
 } & ComponentArgs
 
 Table.displayName = 'Table'

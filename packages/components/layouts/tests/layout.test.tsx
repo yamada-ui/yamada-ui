@@ -1,6 +1,15 @@
 import { render, a11y, screen, fireEvent, waitFor } from '@yamada-ui/test'
 import React, { useState, useEffect, FC } from 'react'
-import { Box, Container, Flex, Divider, Stack, HStack, VStack, Grid } from '../src'
+import {
+  Box,
+  Container,
+  Flex,
+  Divider,
+  Stack,
+  HStack,
+  VStack,
+  Grid,
+} from '../src'
 
 describe('<Box />', () => {
   test('passes a11y test', async () => {
@@ -68,15 +77,22 @@ describe('<Divider />', () => {
   })
 
   test('overrides the theming props', () => {
-    const { getByTestId } = render(<Divider data-testid='divider' variant='dashed' />)
+    const { getByTestId } = render(
+      <Divider data-testid='divider' variant='dashed' />,
+    )
 
     expect(getByTestId('divider')).toHaveStyle({ borderStyle: 'dashed' })
   })
 
   test('renders vertically correctly', () => {
-    const { getByTestId } = render(<Divider data-testid='divider' orientation='vertical' />)
+    const { getByTestId } = render(
+      <Divider data-testid='divider' orientation='vertical' />,
+    )
 
-    expect(getByTestId('divider')).toHaveStyle({ borderLeftWidth: '1px', height: '100%' })
+    expect(getByTestId('divider')).toHaveStyle({
+      borderLeftWidth: '1px',
+      height: '100%',
+    })
   })
 })
 
@@ -86,20 +102,30 @@ describe('<Stack />', () => {
   })
 
   test('renders h-stack correctly', () => {
-    const { getByTestId } = render(<HStack data-testid='h-stack'>HStack</HStack>)
+    const { getByTestId } = render(
+      <HStack data-testid='h-stack'>HStack</HStack>,
+    )
 
     expect(getByTestId('h-stack')).toHaveStyle({ flexDirection: 'row' })
   })
 
   test('renders v-stack correctly', () => {
-    const { getByTestId } = render(<VStack data-testid='v-stack'>VStack</VStack>)
+    const { getByTestId } = render(
+      <VStack data-testid='v-stack'>VStack</VStack>,
+    )
 
     expect(getByTestId('v-stack')).toHaveStyle({ flexDirection: 'column' })
   })
 
   test('renders all the allowed shorthand style props', () => {
     const { getByTestId } = render(
-      <Stack data-testid='stack' direction='row' justify='start' align='stretch' wrap='nowrap'>
+      <Stack
+        data-testid='stack'
+        direction='row'
+        justify='start'
+        align='stretch'
+        wrap='nowrap'
+      >
         Stack
       </Stack>,
     )
@@ -159,7 +185,10 @@ describe('<Stack />', () => {
 
       return (
         <>
-          <Box data-testid='delete-button' onClick={() => setCharacters((prev) => prev.slice(1))}>
+          <Box
+            data-testid='delete-button'
+            onClick={() => setCharacters((prev) => prev.slice(1))}
+          >
             delete character
           </Box>
 
@@ -198,7 +227,11 @@ describe('<Grid />', () => {
 
   test('renders all the allowed shorthand style props', () => {
     const { getByTestId } = render(
-      <Grid data-testid='grid' templateColumns='repeat(2, 1fr)' templateRows='repeat(2, 1fr)'>
+      <Grid
+        data-testid='grid'
+        templateColumns='repeat(2, 1fr)'
+        templateRows='repeat(2, 1fr)'
+      >
         Grid
       </Grid>,
     )

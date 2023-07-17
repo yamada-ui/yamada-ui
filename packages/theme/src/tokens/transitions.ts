@@ -2,7 +2,8 @@ export type Transitions = typeof transitions
 
 export const transitions = {
   property: {
-    common: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+    common:
+      'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
     colors: 'background-color, border-color, color, fill, stroke',
     dimensions: 'width, height',
     position: 'left, right, top, bottom',

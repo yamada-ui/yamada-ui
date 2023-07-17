@@ -1,19 +1,23 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import { Pagination, VStack, Wrap } from '@yamada-ui/react'
 import { useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Pagination>
+
+const meta: Meta<typeof Pagination> = {
   title: 'Components / Navigation / Pagination',
   component: Pagination,
-} as ComponentMeta<typeof Pagination>
+}
 
-export const basic: ComponentStory<typeof Pagination> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Pagination total={10} />
 }
 
-export const withSize: ComponentStory<typeof Pagination> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Pagination total={10} size='xs' />
@@ -25,7 +29,7 @@ export const withSize: ComponentStory<typeof Pagination> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Pagination> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Pagination total={10} variant='solid' />
@@ -36,7 +40,7 @@ export const withVariant: ComponentStory<typeof Pagination> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Pagination> = () => {
+export const withColorScheme: Story = () => {
   return (
     <Wrap w='full' gap='md'>
       <VStack w='auto'>
@@ -138,27 +142,27 @@ export const withColorScheme: ComponentStory<typeof Pagination> = () => {
   )
 }
 
-export const withDefaultPage: ComponentStory<typeof Pagination> = () => {
+export const withDefaultPage: Story = () => {
   return <Pagination defaultPage={3} total={10} />
 }
 
-export const withTotal: ComponentStory<typeof Pagination> = () => {
+export const withTotal: Story = () => {
   return <Pagination total={77} />
 }
 
-export const withEdge: ComponentStory<typeof Pagination> = () => {
+export const withEdge: Story = () => {
   return <Pagination total={10} withEdges />
 }
 
-export const withSiblings: ComponentStory<typeof Pagination> = () => {
+export const withSiblings: Story = () => {
   return <Pagination total={77} siblings={3} />
 }
 
-export const withBoundaries: ComponentStory<typeof Pagination> = () => {
+export const withBoundaries: Story = () => {
   return <Pagination total={77} boundaries={3} />
 }
 
-export const withDisabled: ComponentStory<typeof Pagination> = () => {
+export const withDisabled: Story = () => {
   return (
     <>
       <Pagination total={10} variant='solid' isDisabled />
@@ -169,32 +173,53 @@ export const withDisabled: ComponentStory<typeof Pagination> = () => {
   )
 }
 
-export const disabledControlButton: ComponentStory<typeof Pagination> = () => {
+export const disabledControlButton: Story = () => {
   return <Pagination total={10} withControls={false} />
 }
 
-export const customControl: ComponentStory<typeof Pagination> = () => {
+export const customControl: Story = () => {
   const [page, onChange] = useState<number>(1)
 
   return <Pagination page={page} total={10} onChange={onChange} />
 }
 
-export const customControlButton: ComponentStory<typeof Pagination> = () => {
+export const customControlButton: Story = () => {
   return (
     <>
-      <Pagination total={10} controlProps={{ children: <Icon icon={faPoo} /> }} />
-      <Pagination total={10} controlPrevProps={{ children: <Icon icon={faPoo} /> }} />
-      <Pagination total={10} controlNextProps={{ children: <Icon icon={faPoo} /> }} />
+      <Pagination
+        total={10}
+        controlProps={{ children: <Icon icon={faPoo} /> }}
+      />
+      <Pagination
+        total={10}
+        controlPrevProps={{ children: <Icon icon={faPoo} /> }}
+      />
+      <Pagination
+        total={10}
+        controlNextProps={{ children: <Icon icon={faPoo} /> }}
+      />
     </>
   )
 }
 
-export const customEdgeButton: ComponentStory<typeof Pagination> = () => {
+export const customEdgeButton: Story = () => {
   return (
     <>
-      <Pagination total={10} withEdges edgeProps={{ children: <Icon icon={faPoo} /> }} />
-      <Pagination total={10} withEdges edgeFirstProps={{ children: <Icon icon={faPoo} /> }} />
-      <Pagination total={10} withEdges edgeLastProps={{ children: <Icon icon={faPoo} /> }} />
+      <Pagination
+        total={10}
+        withEdges
+        edgeProps={{ children: <Icon icon={faPoo} /> }}
+      />
+      <Pagination
+        total={10}
+        withEdges
+        edgeFirstProps={{ children: <Icon icon={faPoo} /> }}
+      />
+      <Pagination
+        total={10}
+        withEdges
+        edgeLastProps={{ children: <Icon icon={faPoo} /> }}
+      />
     </>
   )
 }

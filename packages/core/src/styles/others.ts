@@ -19,11 +19,13 @@ const getPriority = (theme: any, token: any, css: any = {}) => {
 export const others: Configs = {
   layerStyle: {
     processResult: true,
-    transform: (value, theme, css) => getPriority(theme, `layerStyles.${value}`, css),
+    transform: (value, theme, css) =>
+      getPriority(theme, `layerStyles.${value}`, css),
   },
   textStyle: {
     processResult: true,
-    transform: (value, theme, css) => getPriority(theme, `textStyles.${value}`, css),
+    transform: (value, theme, css) =>
+      getPriority(theme, `textStyles.${value}`, css),
   },
 }
 

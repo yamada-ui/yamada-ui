@@ -1,5 +1,5 @@
 import { faCheck, faPen, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   ButtonGroup,
@@ -14,12 +14,17 @@ import {
   VStack,
 } from '@yamada-ui/react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-export default {
+
+type Story = StoryFn<typeof Editable>
+
+const meta: Meta<typeof Editable> = {
   title: 'Components / Forms / Editable',
   component: Editable,
-} as ComponentMeta<typeof Editable>
+}
 
-export const basic: ComponentStory<typeof Editable> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Editable defaultValue='オッス！オラ悟空！'>
       <EditablePreview />
@@ -28,7 +33,7 @@ export const basic: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withTextarea: ComponentStory<typeof Editable> = () => {
+export const withTextarea: Story = () => {
   return (
     <Editable defaultValue='オッス！オラ悟空！'>
       <EditablePreview />
@@ -37,7 +42,7 @@ export const withTextarea: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withStartWithEditView: ComponentStory<typeof Editable> = () => {
+export const withStartWithEditView: Story = () => {
   return (
     <Editable startWithEditView defaultValue='オッス！オラ悟空！'>
       <EditablePreview />
@@ -46,7 +51,7 @@ export const withStartWithEditView: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withIsPreviewFocusable: ComponentStory<typeof Editable> = () => {
+export const withIsPreviewFocusable: Story = () => {
   return (
     <Editable isPreviewFocusable={false} defaultValue='オッス！オラ悟空！'>
       <EditablePreview />
@@ -55,7 +60,7 @@ export const withIsPreviewFocusable: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withSubmitOnBlur: ComponentStory<typeof Editable> = () => {
+export const withSubmitOnBlur: Story = () => {
   return (
     <Editable submitOnBlur={false} defaultValue='オッス！オラ悟空！'>
       <EditablePreview />
@@ -64,7 +69,7 @@ export const withSubmitOnBlur: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withSelectAllOnFocus: ComponentStory<typeof Editable> = () => {
+export const withSelectAllOnFocus: Story = () => {
   return (
     <Editable selectAllOnFocus={false} defaultValue='オッス！オラ悟空！'>
       <EditablePreview />
@@ -73,7 +78,7 @@ export const withSelectAllOnFocus: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withPlaceholder: ComponentStory<typeof Editable> = () => {
+export const withPlaceholder: Story = () => {
   return (
     <Editable placeholder='オッス！オラ悟空！'>
       <EditablePreview />
@@ -82,7 +87,7 @@ export const withPlaceholder: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof Editable> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <Editable defaultValue='default border color'>
@@ -95,7 +100,11 @@ export const withBorderColor: ComponentStory<typeof Editable> = () => {
         <EditableInput />
       </Editable>
 
-      <Editable isInvalid errorBorderColor='orange.500' defaultValue='custom border color'>
+      <Editable
+        isInvalid
+        errorBorderColor='orange.500'
+        defaultValue='custom border color'
+      >
         <EditablePreview />
         <EditableInput />
       </Editable>
@@ -103,7 +112,7 @@ export const withBorderColor: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Editable> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Editable isDisabled defaultValue='your email address'>
@@ -111,7 +120,11 @@ export const isDisabled: ComponentStory<typeof Editable> = () => {
         <EditableInput />
       </Editable>
 
-      <FormControl isDisabled label='Email address' helperMessage="We'll never share your email.">
+      <FormControl
+        isDisabled
+        label='Email address'
+        helperMessage="We'll never share your email."
+      >
         <Editable defaultValue='your email address'>
           <EditablePreview />
           <EditableInput />
@@ -121,7 +134,7 @@ export const isDisabled: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof Editable> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Editable isReadOnly defaultValue='your email address'>
@@ -129,7 +142,11 @@ export const isReadonly: ComponentStory<typeof Editable> = () => {
         <EditableInput />
       </Editable>
 
-      <FormControl isReadOnly label='Email address' helperMessage="We'll never share your email.">
+      <FormControl
+        isReadOnly
+        label='Email address'
+        helperMessage="We'll never share your email."
+      >
         <Editable defaultValue='your email address'>
           <EditablePreview />
           <EditableInput />
@@ -139,7 +156,7 @@ export const isReadonly: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof Editable> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Editable isInvalid defaultValue='your email address'>
@@ -147,7 +164,11 @@ export const isInvalid: ComponentStory<typeof Editable> = () => {
         <EditableInput />
       </Editable>
 
-      <FormControl isInvalid label='Email address' errorMessage='Email is required.'>
+      <FormControl
+        isInvalid
+        label='Email address'
+        errorMessage='Email is required.'
+      >
         <Editable defaultValue='your email address'>
           <EditablePreview />
           <EditableInput />
@@ -157,9 +178,10 @@ export const isInvalid: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Editable> = () => {
+export const customControl: Story = () => {
   const CustomControls = () => {
-    const { isEditing, getSubmitProps, getCancelProps, getEditProps } = useEditableControl()
+    const { isEditing, getSubmitProps, getCancelProps, getEditProps } =
+      useEditableControl()
 
     return isEditing ? (
       <ButtonGroup size='sm' gap='sm'>
@@ -174,7 +196,12 @@ export const customControl: ComponentStory<typeof Editable> = () => {
   }
 
   return (
-    <Editable display='flex' gap='sm' isPreviewFocusable={false} defaultValue='オッス！オラ悟空！'>
+    <Editable
+      display='flex'
+      gap='sm'
+      isPreviewFocusable={false}
+      defaultValue='オッス！オラ悟空！'
+    >
       <EditablePreview w='full' />
       <EditableInput />
       <CustomControls />
@@ -182,7 +209,7 @@ export const customControl: ComponentStory<typeof Editable> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Editable> = () => {
+export const reactHookForm: Story = () => {
   type Data = { input: string; textarea: string }
 
   const defaultValues: Data = {
@@ -203,7 +230,11 @@ export const reactHookForm: ComponentStory<typeof Editable> = () => {
 
   return (
     <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={!!errors.input} label='Name' errorMessage={errors.input?.message}>
+      <FormControl
+        isInvalid={!!errors.input}
+        label='Name'
+        errorMessage={errors.input?.message}
+      >
         <Controller
           name='input'
           control={control}

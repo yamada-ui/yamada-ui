@@ -1,6 +1,13 @@
 import { Dict } from '@yamada-ui/utils'
 import * as React from 'react'
-import { CSSUIProps, CSSUIObject, StylesProps, StyledTheme, CSSObject, Interpolation } from '..'
+import {
+  CSSUIProps,
+  CSSUIObject,
+  StylesProps,
+  StyledTheme,
+  CSSObject,
+  Interpolation,
+} from '..'
 import { DOMElements } from '.'
 
 export type StyledOptions = {
@@ -10,7 +17,10 @@ export type StyledOptions = {
 }
 
 export type UIFactory = {
-  <T extends As, P extends object = {}>(component: T, options?: StyledOptions): UIComponent<T, P>
+  <T extends As, P extends object = {}>(
+    component: T,
+    options?: StyledOptions,
+  ): UIComponent<T, P>
 }
 
 export type StyledResolverProps = CSSUIObject & {
@@ -27,13 +37,15 @@ export type UIProps = CSSUIProps & {
   css?: Interpolation<{}>
 }
 
-export type OmitProps<Y, M extends keyof any = never> = Omit<Y, 'as' | 'color' | M>
-
-export type IntersectionProps<Y extends object = {}, M extends object = {}> = OmitProps<
+export type OmitProps<Y, M extends keyof any = never> = Omit<
   Y,
-  keyof M
-> &
-  M
+  'as' | 'color' | M
+>
+
+export type IntersectionProps<
+  Y extends object = {},
+  M extends object = {},
+> = OmitProps<Y, keyof M> & M
 
 export type PropsOf<T extends As> = React.ComponentPropsWithoutRef<T> & {
   as?: As
@@ -58,7 +70,12 @@ export type ComponentArgs = {
 
 export type Component<Y extends As, M extends object = {}> = {
   <D extends As = Y>(
-    props: ComponentProps<React.ComponentProps<Y>, React.ComponentProps<D>, M, D>,
+    props: ComponentProps<
+      React.ComponentProps<Y>,
+      React.ComponentProps<D>,
+      M,
+      D
+    >,
   ): JSX.Element
 } & ComponentArgs
 
@@ -70,10 +87,15 @@ export type HTMLUIComponents = {
 
 type Assign<T, U> = Omit<T, keyof U> & U
 
-export type UIComponent<Y extends As, M extends object = {}> = Component<Y, Assign<UIProps, M>>
+export type UIComponent<Y extends As, M extends object = {}> = Component<
+  Y,
+  Assign<UIProps, M>
+>
 
 export type HTMLUIProps<Y extends As> = Omit<
   PropsOf<Y>,
-  Y extends 'svg' ? 'ref' | 'children' | keyof StylesProps : 'ref' | keyof StylesProps
+  Y extends 'svg'
+    ? 'ref' | 'children' | keyof StylesProps
+    : 'ref' | keyof StylesProps
 > &
   UIProps & { as?: As }

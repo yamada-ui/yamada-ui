@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Box } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Box>
+
+const meta: Meta<typeof Box> = {
   title: 'Components / Layouts / Box',
   component: Box,
-} as ComponentMeta<typeof Box>
+}
 
-export const basic: ComponentStory<typeof Box> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Box p='md' rounded='md' bg='primary' color='white'>
       Box

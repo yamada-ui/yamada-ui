@@ -8,11 +8,21 @@ import {
   mergeRefs,
   useUpdateEffect,
 } from '@yamada-ui/utils'
-import { FC, FocusEvent, MouseEvent, ReactElement, useCallback, useRef } from 'react'
+import {
+  FC,
+  FocusEvent,
+  MouseEvent,
+  ReactElement,
+  useCallback,
+  useRef,
+} from 'react'
 import { useMenu, useMenuDescendant } from './menu'
 
 const isTargetMenuItem = (target: EventTarget | null) => {
-  return isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('menu-item')
+  return (
+    isHTMLElement(target) &&
+    !!target?.getAttribute('role')?.startsWith('menu-item')
+  )
 }
 
 type MenuItemOptions = {
@@ -178,10 +188,14 @@ type MenuOptionItemOptions = {
   type?: 'radio' | 'checkbox'
 }
 
-export type MenuOptionItemProps = Omit<MenuItemProps, 'icon' | 'command'> & MenuOptionItemOptions
+export type MenuOptionItemProps = Omit<MenuItemProps, 'icon' | 'command'> &
+  MenuOptionItemOptions
 
 export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
-  ({ className, icon, isChecked, closeOnSelect = false, children, ...rest }, ref) => {
+  (
+    { className, icon, isChecked, closeOnSelect = false, children, ...rest },
+    ref,
+  ) => {
     return (
       <MenuItem
         ref={ref}
@@ -191,7 +205,9 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
         {...rest}
       >
         {icon !== null ? (
-          <MenuIcon opacity={isChecked ? 1 : 0}>{icon || <CheckIcon />}</MenuIcon>
+          <MenuIcon opacity={isChecked ? 1 : 0}>
+            {icon || <CheckIcon />}
+          </MenuIcon>
         ) : null}
         {children}
       </MenuItem>
@@ -201,30 +217,48 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
 
 type MenuIconProps = HTMLUIProps<'span'>
 
-const MenuIcon = forwardRef<MenuIconProps, 'span'>(({ className, ...rest }, ref) => {
-  const { styles } = useMenu()
+const MenuIcon = forwardRef<MenuIconProps, 'span'>(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useMenu()
 
-  const css: CSSUIObject = {
-    flexShrink: 0,
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '0.85em',
-    ...styles.icon,
-  }
+    const css: CSSUIObject = {
+      flexShrink: 0,
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '0.85em',
+      ...styles.icon,
+    }
 
-  return <ui.span ref={ref} className={cx('ui-menu-icon', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.span
+        ref={ref}
+        className={cx('ui-menu-icon', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 type MenuCommandProps = HTMLUIProps<'span'>
 
-const MenuCommand = forwardRef<MenuCommandProps, 'span'>(({ className, ...rest }, ref) => {
-  const { styles } = useMenu()
+const MenuCommand = forwardRef<MenuCommandProps, 'span'>(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useMenu()
 
-  const css: CSSUIObject = { ...styles.command }
+    const css: CSSUIObject = { ...styles.command }
 
-  return <ui.span ref={ref} className={cx('ui-menu-command', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.span
+        ref={ref}
+        className={cx('ui-menu-command', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 const CheckIcon: FC = () => (
   <svg viewBox='0 0 14 14' width='1em' height='1em'>

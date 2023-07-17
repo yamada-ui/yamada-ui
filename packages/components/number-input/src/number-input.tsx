@@ -41,7 +41,8 @@ import {
   useState,
 } from 'react'
 
-const isDefaultValidCharacter = (character: string) => /^[Ee0-9+\-.]$/.test(character)
+const isDefaultValidCharacter = (character: string) =>
+  /^[Ee0-9+\-.]$/.test(character)
 
 const isValidNumericKeyboardEvent = (
   { key, ctrlKey, altKey, metaKey }: KeyboardEvent,
@@ -57,7 +58,11 @@ const isValidNumericKeyboardEvent = (
   return isValid(key)
 }
 
-const getStep = <Y extends KeyboardEvent | WheelEvent>({ ctrlKey, shiftKey, metaKey }: Y) => {
+const getStep = <Y extends KeyboardEvent | WheelEvent>({
+  ctrlKey,
+  shiftKey,
+  metaKey,
+}: Y) => {
   let ratio = 1
 
   if (metaKey || ctrlKey) ratio = 0.1
@@ -109,7 +114,11 @@ export type UseNumberInputProps = UseFormControlProps<HTMLInputElement> &
     /**
      * The callback invoked when invalid number is entered.
      */
-    onInvalid?: (message: ValidityState, value: string, valueAsNumber: number) => void
+    onInvalid?: (
+      message: ValidityState,
+      value: string,
+      valueAsNumber: number,
+    ) => void
     /**
      * This is used to format the value so that screen readers
      * can speak out a more human-friendly value.
@@ -160,7 +169,10 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const isInteractive = !(readOnly || disabled)
 
   const inputRef = useRef<HTMLInputElement>(null)
-  const inputSelectionRef = useRef<{ start: number | null; end: number | null } | null>(null)
+  const inputSelectionRef = useRef<{
+    start: number | null
+    end: number | null
+  } | null>(null)
   const incrementRef = useRef<HTMLButtonElement>(null)
   const decrementRef = useRef<HTMLButtonElement>(null)
 
@@ -170,7 +182,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
       if (!inputSelectionRef.current) return
 
-      ev.target.selectionStart = inputSelectionRef.current.start ?? ev.currentTarget.value?.length
+      ev.target.selectionStart =
+        inputSelectionRef.current.start ?? ev.currentTarget.value?.length
       ev.currentTarget.selectionEnd =
         inputSelectionRef.current.end ?? ev.currentTarget.selectionStart
     }),
@@ -183,23 +196,37 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     }),
   )
   const onInvalid = useCallbackRef(rest.onInvalid)
-  const isValidCharacter = useCallbackRef(rest.isValidCharacter ?? isDefaultValidCharacter)
+  const isValidCharacter = useCallbackRef(
+    rest.isValidCharacter ?? isDefaultValidCharacter,
+  )
 
-  const { isMin, isMax, isOut, value, valueAsNumber, setValue, update, cast, ...counter } =
-    useCounter({
-      min,
-      max,
-      precision,
-      keepWithinRange,
-      ...rest,
-    })
+  const {
+    isMin,
+    isMax,
+    isOut,
+    value,
+    valueAsNumber,
+    setValue,
+    update,
+    cast,
+    ...counter
+  } = useCounter({
+    min,
+    max,
+    precision,
+    keepWithinRange,
+    ...rest,
+  })
 
   const sanitize = useCallback(
     (value: string) => value.split('').filter(isValidCharacter).join(''),
     [isValidCharacter],
   )
 
-  const parse = useCallback((value: string) => rest.parse?.(value) ?? value, [rest])
+  const parse = useCallback(
+    (value: string) => rest.parse?.(value) ?? value,
+    [rest],
+  )
 
   const format = useCallback(
     (value: string | number) => (rest.format?.(value) ?? value).toString(),
@@ -260,7 +287,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     (ev: KeyboardEvent) => {
       if (ev.nativeEvent.isComposing) return
 
-      if (!isValidNumericKeyboardEvent(ev, isValidCharacter)) ev.preventDefault()
+      if (!isValidNumericKeyboardEvent(ev, isValidCharacter))
+        ev.preventDefault()
 
       const step = getStep(ev) * (rest.step ?? 1)
 
@@ -528,7 +556,11 @@ const useAttributeObserver = (
 
     const observer = new ownerDocument.MutationObserver((changes) => {
       for (const { type, attributeName } of changes) {
-        if (type === 'attributes' && attributeName && attributeFilter.includes(attributeName))
+        if (
+          type === 'attributes' &&
+          attributeName &&
+          attributeFilter.includes(attributeName)
+        )
           func()
       }
     })
@@ -585,51 +617,59 @@ type NumberInputContext = {
   styles: Record<string, CSSUIObject>
 }
 
-const [NumberInputContextProvider, useNumberInputContext] = createContext<NumberInputContext>({
-  strict: false,
-  name: 'NumberInputContext',
-})
-
-export const NumberInput = forwardRef<NumberInputProps, 'input'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('NumberInput', props)
-  const {
-    className,
-    isStepper = true,
-    containerProps,
-    addonProps,
-    incrementProps,
-    decrementProps,
-    onChange,
-    ...rest
-  } = omitThemeProps(mergedProps)
-  const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
-    onChange,
-    ...rest,
+const [NumberInputContextProvider, useNumberInputContext] =
+  createContext<NumberInputContext>({
+    strict: false,
+    name: 'NumberInputContext',
   })
 
-  const css: CSSUIObject = {
-    position: 'relative',
-    zIndex: 0,
-    ...styles.container,
-  }
+export const NumberInput = forwardRef<NumberInputProps, 'input'>(
+  (props, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('NumberInput', props)
+    const {
+      className,
+      isStepper = true,
+      containerProps,
+      addonProps,
+      incrementProps,
+      decrementProps,
+      onChange,
+      ...rest
+    } = omitThemeProps(mergedProps)
+    const { getInputProps, getIncrementProps, getDecrementProps } =
+      useNumberInput({
+        onChange,
+        ...rest,
+      })
 
-  return (
-    <NumberInputContextProvider
-      value={{ getInputProps, getIncrementProps, getDecrementProps, styles }}
-    >
-      <ui.div className={cx('ui-number-input', className)} __css={css} {...containerProps}>
-        <NumberInputField {...getInputProps(rest, ref)} />
+    const css: CSSUIObject = {
+      position: 'relative',
+      zIndex: 0,
+      ...styles.container,
+    }
 
-        {isStepper ? (
-          <NumberInputAddon {...addonProps}>
-            <NumberIncrementStepper {...incrementProps} />
-            <NumberDecrementStepper {...decrementProps} />
-          </NumberInputAddon>
-        ) : null}
-      </ui.div>
-    </NumberInputContextProvider>
-  )
-})
+    return (
+      <NumberInputContextProvider
+        value={{ getInputProps, getIncrementProps, getDecrementProps, styles }}
+      >
+        <ui.div
+          className={cx('ui-number-input', className)}
+          __css={css}
+          {...containerProps}
+        >
+          <NumberInputField {...getInputProps(rest, ref)} />
+
+          {isStepper ? (
+            <NumberInputAddon {...addonProps}>
+              <NumberIncrementStepper {...incrementProps} />
+              <NumberDecrementStepper {...decrementProps} />
+            </NumberInputAddon>
+          ) : null}
+        </ui.div>
+      </NumberInputContextProvider>
+    )
+  },
+)
 
 type NumberInputFieldProps = Omit<
   HTMLUIProps<'input'>,
@@ -658,31 +698,33 @@ const NumberInputField = forwardRef<NumberInputFieldProps, 'input'>(
 
 type NumberInputAddonProps = HTMLUIProps<'div'>
 
-const NumberInputAddon = forwardRef<NumberInputAddonProps, 'div'>(({ className, ...rest }, ref) => {
-  const { styles } = useNumberInputContext()
+const NumberInputAddon = forwardRef<NumberInputAddonProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useNumberInputContext()
 
-  const css: CSSUIObject = {
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'absolute',
-    top: '0',
-    insetEnd: '0px',
-    margin: '1px',
-    height: 'calc(100% - 2px)',
-    zIndex: 1,
-    ...styles.addon,
-  }
+    const css: CSSUIObject = {
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'absolute',
+      top: '0',
+      insetEnd: '0px',
+      margin: '1px',
+      height: 'calc(100% - 2px)',
+      zIndex: 1,
+      ...styles.addon,
+    }
 
-  return (
-    <ui.div
-      ref={ref}
-      className={cx('ui-number-input-addon', className)}
-      aria-hidden
-      __css={css}
-      {...rest}
-    />
-  )
-})
+    return (
+      <ui.div
+        ref={ref}
+        className={cx('ui-number-input-addon', className)}
+        aria-hidden
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 const Stepper = ui('div', {
   baseStyle: {

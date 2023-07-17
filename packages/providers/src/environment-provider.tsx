@@ -1,5 +1,13 @@
 import { useSafeLayoutEffect } from '@yamada-ui/utils'
-import { FC, ReactNode, createContext, useContext, useMemo, useReducer, useRef } from 'react'
+import {
+  FC,
+  ReactNode,
+  createContext,
+  useContext,
+  useMemo,
+  useReducer,
+  useRef,
+} from 'react'
 
 export type Environment = {
   getWindow: () => Window

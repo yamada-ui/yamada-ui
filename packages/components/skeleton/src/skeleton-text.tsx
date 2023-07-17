@@ -40,7 +40,12 @@ export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-skeleton-text', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-skeleton-text', className)}
+        __css={css}
+        {...rest}
+      >
         {Array(computedNoOfLines)
           .fill(0)
           .map((_, index) => {
@@ -51,7 +56,8 @@ export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
             const props: SkeletonProps = !isLoaded
               ? {
                   mb: !isLast ? gap : undefined,
-                  w: computedNoOfLines > 1 ? (!isLast ? '100%' : '80%') : '100%',
+                  w:
+                    computedNoOfLines > 1 ? (!isLast ? '100%' : '80%') : '100%',
                   h: textHeight,
                 }
               : {}
@@ -59,7 +65,14 @@ export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
             return (
               <Skeleton
                 key={index}
-                {...{ startColor, endColor, fadeDuration, speed, isLoaded, ...props }}
+                {...{
+                  startColor,
+                  endColor,
+                  fadeDuration,
+                  speed,
+                  isLoaded,
+                  ...props,
+                }}
               >
                 {index === 0 ? children : undefined}
               </Skeleton>

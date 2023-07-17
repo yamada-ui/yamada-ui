@@ -10,13 +10,25 @@ import { useTableContext, render } from './use-table'
 export type TableBodyProps = NativeTableBodyProps
 
 export const Tbody = ({ ...rest }: TableBodyProps) => {
-  const { rows, rowProps, cellProps, enableRowSelection, rowsClickSelect, onClickRow } =
-    useTableContext()
+  const {
+    rows,
+    rowProps,
+    cellProps,
+    enableRowSelection,
+    rowsClickSelect,
+    onClickRow,
+  } = useTableContext()
 
   return (
     <NativeTbody {...rest}>
       {rows.map((row) => {
-        const { id, getVisibleCells, getIsSelected, getCanSelect, toggleSelected } = row
+        const {
+          id,
+          getVisibleCells,
+          getIsSelected,
+          getCanSelect,
+          toggleSelected,
+        } = row
 
         const cells = getVisibleCells()
 

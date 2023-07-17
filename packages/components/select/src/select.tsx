@@ -54,7 +54,10 @@ type SelectOptions = {
 }
 
 export type SelectProps = ThemeProps<'Select'> &
-  Omit<UseSelectProps<string>, 'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'> &
+  Omit<
+    UseSelectProps<string>,
+    'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'
+  > &
   SelectOptions
 
 export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
@@ -90,7 +93,11 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
         )
       } else {
         return (
-          <OptionGroup key={i} label={label ?? ''} {...(props as HTMLUIProps<'ul'>)}>
+          <OptionGroup
+            key={i}
+            label={label ?? ''}
+            {...(props as HTMLUIProps<'ul'>)}
+          >
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
                 <Option key={i} value={value} {...props}>
@@ -105,7 +112,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   }
 
   const isEmpty =
-    !validChildren.length && !computedChildren.length && !(!!placeholder && placeholderInOptions)
+    !validChildren.length &&
+    !computedChildren.length &&
+    !(!!placeholder && placeholderInOptions)
 
   const {
     descendants,
@@ -114,7 +123,13 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     getContainerProps,
     getFieldProps,
     ...rest
-  } = useSelect({ ...computedProps, placeholder, placeholderInOptions, defaultValue, isEmpty })
+  } = useSelect({
+    ...computedProps,
+    placeholder,
+    placeholderInOptions,
+    defaultValue,
+    isEmpty,
+  })
 
   h = h ?? height
   minH = minH ?? minHeight
@@ -129,7 +144,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
-      <SelectProvider value={{ ...rest, placeholder, placeholderInOptions, styles }}>
+      <SelectProvider
+        value={{ ...rest, placeholder, placeholderInOptions, styles }}
+      >
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx('ui-select', className)}
@@ -144,7 +161,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
 
             {!isEmpty ? (
               <SelectList {...listProps}>
-                {!!placeholder && placeholderInOptions ? <Option>{placeholder}</Option> : null}
+                {!!placeholder && placeholderInOptions ? (
+                  <Option>{placeholder}</Option>
+                ) : null}
 
                 {children ?? computedChildren}
               </SelectList>
@@ -172,7 +191,12 @@ const SelectField = forwardRef<SelectFieldProps, 'div'>(
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-select-field', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-select-field', className)}
+        __css={css}
+        {...rest}
+      >
         <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
           {displayValue ?? placeholder}
         </ui.span>

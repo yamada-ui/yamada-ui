@@ -1,16 +1,25 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Image } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Image>
+
+const meta: Meta<typeof Image> = {
   title: 'Components / Media And Icons / Image',
   component: Image,
-} as ComponentMeta<typeof Image>
-
-export const basic: ComponentStory<typeof Image> = () => {
-  return <Image src='https://dragon-ball-official.com/assets/img/intro/intro_1.png' size='xl' />
 }
 
-export const withFallback: ComponentStory<typeof Image> = () => {
+export default meta
+
+export const basic: Story = () => {
+  return (
+    <Image
+      src='https://dragon-ball-official.com/assets/img/intro/intro_1.png'
+      size='xl'
+    />
+  )
+}
+
+export const withFallback: Story = () => {
   return (
     <Image
       src='https://not-found.com/not-found.png'

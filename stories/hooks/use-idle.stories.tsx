@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Box, useIdle } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useIdle',
 }
+
+export default meta
 
 export const basic = () => {
   const idle = useIdle(2000)

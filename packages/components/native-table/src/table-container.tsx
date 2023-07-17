@@ -15,7 +15,12 @@ export const TableContainer = forwardRef<TableContainerProps, 'div'>(
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-table-container', className)} __css={css} {...rest} />
+      <ui.div
+        ref={ref}
+        className={cx('ui-table-container', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )

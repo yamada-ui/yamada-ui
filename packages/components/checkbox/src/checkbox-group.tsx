@@ -53,9 +53,13 @@ export const useCheckboxGroup = <Y extends string | number = string>({
 
   const onChange = useCallback(
     (evOrValue: ChangeEvent<HTMLInputElement> | Y) => {
-      const isChecked = isEvent(evOrValue) ? evOrValue.target.checked : !value.includes(evOrValue)
+      const isChecked = isEvent(evOrValue)
+        ? evOrValue.target.checked
+        : !value.includes(evOrValue)
 
-      const selectedValue = (isEvent(evOrValue) ? evOrValue.target.value : evOrValue) as Y
+      const selectedValue = (
+        isEvent(evOrValue) ? evOrValue.target.value : evOrValue
+      ) as Y
 
       const nextValue = isChecked
         ? [...value, selectedValue]
@@ -88,23 +92,26 @@ export const useCheckboxGroup = <Y extends string | number = string>({
 
 export type UseCheckboxGroupReturn = ReturnType<typeof useCheckboxGroup>
 
-export type CheckboxGroupProps<Y extends string | number = string> = ThemeProps<'Checkbox'> &
-  Omit<FlexProps, 'onChange'> &
-  UseCheckboxGroupProps<Y> &
-  FormControlOptions
+export type CheckboxGroupProps<Y extends string | number = string> =
+  ThemeProps<'Checkbox'> &
+    Omit<FlexProps, 'onChange'> &
+    UseCheckboxGroupProps<Y> &
+    FormControlOptions
 
 type CheckboxContext = ThemeProps<'Checkbox'> &
   FormControlOptions & {
     value: (string | number)[]
-    onChange: (evOrValue: ChangeEvent<HTMLInputElement> | string | number) => void
+    onChange: (
+      evOrValue: ChangeEvent<HTMLInputElement> | string | number,
+    ) => void
   }
 
-const [CheckboxGroupProvider, useCheckboxGroupContext] = createContext<CheckboxContext | undefined>(
-  {
-    strict: false,
-    name: 'CheckboxGroupContext',
-  },
-)
+const [CheckboxGroupProvider, useCheckboxGroupContext] = createContext<
+  CheckboxContext | undefined
+>({
+  strict: false,
+  name: 'CheckboxGroupContext',
+})
 
 export { useCheckboxGroupContext }
 
@@ -123,7 +130,8 @@ export const CheckboxGroup = forwardRef(
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const { value, onChange } = useCheckboxGroup<Y>(props)
-    const { isRequired, isReadOnly, isDisabled, isInvalid } = useFormControl(props)
+    const { isRequired, isReadOnly, isDisabled, isInvalid } =
+      useFormControl(props)
 
     return (
       <CheckboxGroupProvider

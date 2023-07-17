@@ -1,27 +1,27 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   AnimatePresence,
   Box,
   Button,
   Center,
-  HStack,
   Motion,
   MotionConfig,
   Text,
-  transform,
   useBoolean,
-  useMotionValue,
   useScroll,
   useTransform,
 } from '@yamada-ui/react'
-import { useEffect } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Utils',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const animatePresence: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const animatePresence: Story = () => {
   const [isVisible, { toggle }] = useBoolean()
 
   return (
@@ -47,11 +47,17 @@ export const animatePresence: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const motionConfig: ComponentStory<typeof Motion> = () => {
+export const motionConfig: Story = () => {
   return (
     <MotionConfig transition={{ duration: 2 }}>
       <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
-        <Motion animate={{ x: 100 }} bg='primary' color='white' p='md' rounded='md'>
+        <Motion
+          animate={{ x: 100 }}
+          bg='primary'
+          color='white'
+          p='md'
+          rounded='md'
+        >
           Motion
         </Motion>
       </Center>
@@ -59,7 +65,7 @@ export const motionConfig: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useScrollAndTransform: ComponentStory<typeof Motion> = () => {
+export const useScrollAndTransform: Story = () => {
   const { scrollYProgress } = useScroll()
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 400])
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -400])

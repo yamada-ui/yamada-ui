@@ -52,7 +52,12 @@ export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `letter-spacing` property.
    */
-  letterSpacing?: Token<CSS.Property.LetterSpacing | number, 'letterSpacings', Y, M>
+  letterSpacing?: Token<
+    CSS.Property.LetterSpacing | number,
+    'letterSpacings',
+    Y,
+    M
+  >
   /**
    * The CSS `font-size` property.
    */
@@ -108,7 +113,12 @@ export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `text-decoration-thickness` property.
    */
-  textDecorationThickness?: Token<CSS.Property.TextDecorationThickness, unknown, Y, M>
+  textDecorationThickness?: Token<
+    CSS.Property.TextDecorationThickness,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `text-decoration-style` property.
    */
@@ -120,7 +130,12 @@ export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `text-underline-offset` property.
    */
-  textUnderlineOffset?: Token<CSS.Property.TextUnderlineOffset | number, unknown, Y, M>
+  textUnderlineOffset?: Token<
+    CSS.Property.TextUnderlineOffset | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The `text-shadow` property.
    */

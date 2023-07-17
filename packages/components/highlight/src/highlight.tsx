@@ -67,7 +67,8 @@ export const Highlight: FC<HighlightProps> = ({
   lineHeight = 'tall',
   ...rest
 }) => {
-  if (typeof text !== 'string') throw new Error('The children prop of Highlight must be a string')
+  if (typeof text !== 'string')
+    throw new Error('The children prop of Highlight must be a string')
 
   const chunks = useHighlight({ query, text })
 
@@ -100,5 +101,12 @@ export const Mark = forwardRef<MarkProps, 'mark'>((props, ref) => {
     ...styles,
   }
 
-  return <ui.mark ref={ref} className={cx('ui-mark', className)} __css={css} {...rest} />
+  return (
+    <ui.mark
+      ref={ref}
+      className={cx('ui-mark', className)}
+      __css={css}
+      {...rest}
+    />
+  )
 })

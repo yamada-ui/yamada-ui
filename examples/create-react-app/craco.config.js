@@ -6,7 +6,10 @@ const absolutePath = path.join(__dirname, '../../packages/react')
 module.exports = {
   webpack: {
     configure: (webpackConfig) => {
-      const { isFound, match } = getLoader(webpackConfig, loaderByName('babel-loader'))
+      const { isFound, match } = getLoader(
+        webpackConfig,
+        loaderByName('babel-loader'),
+      )
 
       if (isFound) {
         let include

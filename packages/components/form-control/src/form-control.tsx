@@ -100,81 +100,86 @@ const [FormControlStylesProvider, useFormControlStyles] = createContext<
   name: 'FormControlStyleContext',
 })
 
-export const FormControl = forwardRef<FormControlProps, 'div'>(({ id, ...props }, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('FormControl', props)
-  const {
-    className,
-    isRequired = false,
-    isDisabled = false,
-    isInvalid = false,
-    isReadOnly = false,
-    isReplace = true,
-    label,
-    helperMessage,
-    errorMessage,
-    children,
-    requiredIndicator,
-    optionalIndicator,
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const FormControl = forwardRef<FormControlProps, 'div'>(
+  ({ id, ...props }, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('FormControl', props)
+    const {
+      className,
+      isRequired = false,
+      isDisabled = false,
+      isInvalid = false,
+      isReadOnly = false,
+      isReplace = true,
+      label,
+      helperMessage,
+      errorMessage,
+      children,
+      requiredIndicator,
+      optionalIndicator,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  id = id ?? useId()
+    id = id ?? useId()
 
-  const [isFocused, setFocused] = useState<boolean>(false)
+    const [isFocused, setFocused] = useState<boolean>(false)
 
-  const validChildren = getValidChildren(children)
+    const validChildren = getValidChildren(children)
 
-  const [customLabel] = findChildren(validChildren, Label)
-  const [customHelperMessage] = findChildren(validChildren, HelperMessage)
-  const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
+    const [customLabel] = findChildren(validChildren, Label)
+    const [customHelperMessage] = findChildren(validChildren, HelperMessage)
+    const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
 
-  const isCustomLabel = !!customLabel
-  const isCustomHelperMessage = !!customHelperMessage
-  const isCustomErrorMessage = !!customErrorMessage
+    const isCustomLabel = !!customLabel
+    const isCustomHelperMessage = !!customHelperMessage
+    const isCustomErrorMessage = !!customErrorMessage
 
-  const css: CSSUIObject = {
-    ...styles.container,
-  }
+    const css: CSSUIObject = {
+      ...styles.container,
+    }
 
-  return (
-    <FormControlContextProvider
-      value={{
-        id,
-        isFocused,
-        isRequired,
-        isDisabled,
-        isInvalid,
-        isReadOnly,
-        isReplace,
-        onFocus: () => setFocused(true),
-        onBlur: () => setFocused(false),
-      }}
-    >
-      <FormControlStylesProvider value={styles}>
-        <ui.div
-          ref={ref}
-          className={cx('ui-form-control', className)}
-          role='group'
-          __css={css}
-          {...rest}
-        >
-          {!isCustomLabel && label ? (
-            <Label requiredIndicator={requiredIndicator} optionalIndicator={optionalIndicator}>
-              {label}
-            </Label>
-          ) : null}
-          {children}
-          {!isCustomHelperMessage && helperMessage ? (
-            <HelperMessage>{helperMessage}</HelperMessage>
-          ) : null}
-          {!isCustomErrorMessage && errorMessage ? (
-            <ErrorMessage>{errorMessage}</ErrorMessage>
-          ) : null}
-        </ui.div>
-      </FormControlStylesProvider>
-    </FormControlContextProvider>
-  )
-})
+    return (
+      <FormControlContextProvider
+        value={{
+          id,
+          isFocused,
+          isRequired,
+          isDisabled,
+          isInvalid,
+          isReadOnly,
+          isReplace,
+          onFocus: () => setFocused(true),
+          onBlur: () => setFocused(false),
+        }}
+      >
+        <FormControlStylesProvider value={styles}>
+          <ui.div
+            ref={ref}
+            className={cx('ui-form-control', className)}
+            role='group'
+            __css={css}
+            {...rest}
+          >
+            {!isCustomLabel && label ? (
+              <Label
+                requiredIndicator={requiredIndicator}
+                optionalIndicator={optionalIndicator}
+              >
+                {label}
+              </Label>
+            ) : null}
+            {children}
+            {!isCustomHelperMessage && helperMessage ? (
+              <HelperMessage>{helperMessage}</HelperMessage>
+            ) : null}
+            {!isCustomErrorMessage && errorMessage ? (
+              <ErrorMessage>{errorMessage}</ErrorMessage>
+            ) : null}
+          </ui.div>
+        </FormControlStylesProvider>
+      </FormControlContextProvider>
+    )
+  },
+)
 
 export const useFormControl = (
   props: FormControlOptions & {
@@ -359,28 +364,35 @@ export const HelperMessage = forwardRef<HelperMessageProps, 'div'>(
     const css: CSSUIObject = { ...styles.helperMessage }
 
     return (
-      <ui.div ref={ref} className={cx('ui-form-helper-message', className)} __css={css} {...rest} />
+      <ui.div
+        ref={ref}
+        className={cx('ui-form-helper-message', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )
 
 export type ErrorMessageProps = HTMLUIProps<'div'>
 
-export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(({ className, ...rest }, ref) => {
-  const { isInvalid } = useFormControlContext() ?? {}
-  const styles = useFormControlStyles() ?? {}
+export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    const { isInvalid } = useFormControlContext() ?? {}
+    const styles = useFormControlStyles() ?? {}
 
-  if (!isInvalid) return null
+    if (!isInvalid) return null
 
-  const css: CSSUIObject = { ...styles.errorMessage }
+    const css: CSSUIObject = { ...styles.errorMessage }
 
-  return (
-    <ui.div
-      ref={ref}
-      className={cx('ui-form-error-message', className)}
-      aria-live='polite'
-      __css={css}
-      {...rest}
-    />
-  )
-})
+    return (
+      <ui.div
+        ref={ref}
+        className={cx('ui-form-error-message', className)}
+        aria-live='polite'
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)

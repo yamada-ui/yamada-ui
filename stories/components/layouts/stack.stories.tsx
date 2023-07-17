@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Stack, VStack, HStack, Box, Divider, Center } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Stack>
+
+const meta: Meta<typeof Stack> = {
   title: 'Components / Layouts / Stack',
   component: Stack,
-} as ComponentMeta<typeof Stack>
+}
 
-export const vertical: ComponentStory<typeof Stack> = () => {
+export default meta
+
+export const vertical: Story = () => {
   return (
     <VStack>
       <Box p='md' rounded='4' bg='primary' color='white'>
@@ -28,7 +32,7 @@ export const vertical: ComponentStory<typeof Stack> = () => {
   )
 }
 
-export const horizontal: ComponentStory<typeof Stack> = () => {
+export const horizontal: Story = () => {
   return (
     <HStack>
       <Box p='md' rounded='4' bg='primary' color='white'>
@@ -50,7 +54,7 @@ export const horizontal: ComponentStory<typeof Stack> = () => {
   )
 }
 
-export const withBorder: ComponentStory<typeof Stack> = () => {
+export const withBorder: Story = () => {
   return (
     <>
       <VStack divider={<Divider />}>

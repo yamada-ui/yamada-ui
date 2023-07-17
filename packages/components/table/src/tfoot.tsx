@@ -21,7 +21,11 @@ export const Tfoot = ({ ...rest }: TableFootProps) => {
               const { id, colSpan, isPlaceholder, column, getContext } = header
 
               return !isPlaceholder ? (
-                <Th key={id} {...runIfFunc(footerProps, header)} colSpan={colSpan}>
+                <Th
+                  key={id}
+                  {...runIfFunc(footerProps, header)}
+                  colSpan={colSpan}
+                >
                   {render(column.columnDef.footer, getContext())}
                 </Th>
               ) : null

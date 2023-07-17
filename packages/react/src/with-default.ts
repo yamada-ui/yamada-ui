@@ -15,7 +15,9 @@ export const withDefaultSize =
     if (isArray(components)) keys = components
 
     return merge(theme, {
-      components: Object.fromEntries(keys.map((key) => [key, { defaultProps: { size } }])),
+      components: Object.fromEntries(
+        keys.map((key) => [key, { defaultProps: { size } }]),
+      ),
     })
   }
 
@@ -33,7 +35,9 @@ export const withDefaultVariant =
     if (isArray(components)) keys = components
 
     return merge(theme, {
-      components: Object.fromEntries(keys.map((key) => [key, { defaultProps: { variant } }])),
+      components: Object.fromEntries(
+        keys.map((key) => [key, { defaultProps: { variant } }]),
+      ),
     })
   }
 
@@ -51,7 +55,9 @@ export const withDefaultColorScheme =
     if (isArray(components)) keys = components
 
     return merge(theme, {
-      components: Object.fromEntries(keys.map((key) => [key, { defaultProps: { colorScheme } }])),
+      components: Object.fromEntries(
+        keys.map((key) => [key, { defaultProps: { colorScheme } }]),
+      ),
     })
   }
 
@@ -69,6 +75,8 @@ export const withDefaultProps =
     if (isArray(components)) keys = components
 
     return merge(theme, {
-      components: Object.fromEntries(keys.map((key) => [key, { defaultProps }])),
+      components: Object.fromEntries(
+        keys.map((key) => [key, { defaultProps }]),
+      ),
     })
   }

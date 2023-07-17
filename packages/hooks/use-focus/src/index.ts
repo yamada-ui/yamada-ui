@@ -73,7 +73,8 @@ export const useFocusOnShow = <T extends HTMLElement>(
   const lastVisibleRef = useRef(visible)
 
   useSafeLayoutEffect(() => {
-    if (!lastVisibleRef.current && visible) autoFocusRef.current = autoFocusValue
+    if (!lastVisibleRef.current && visible)
+      autoFocusRef.current = autoFocusValue
 
     lastVisibleRef.current = visible
   }, [visible, autoFocusValue])
@@ -112,7 +113,11 @@ export type UseFocusOnMouseDownProps = {
   elements?: Array<React.RefObject<HTMLElement> | HTMLElement | null>
 }
 
-export const useFocusOnPointerDown = ({ ref, elements, enabled }: UseFocusOnMouseDownProps) => {
+export const useFocusOnPointerDown = ({
+  ref,
+  elements,
+  enabled,
+}: UseFocusOnMouseDownProps) => {
   const doc = () => ref.current?.ownerDocument ?? document
 
   useEventListener(doc, 'pointerdown', (event) => {

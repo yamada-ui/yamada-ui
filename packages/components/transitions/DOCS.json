@@ -22,7 +22,11 @@
       "required": false,
       "description": "The height you want the content in its expanded state."
     },
-    "enter": { "type": "any", "required": false, "description": "Custom `enter`." },
+    "enter": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `enter`."
+    },
     "isOpen": {
       "type": "boolean",
       "required": false,
@@ -61,7 +65,11 @@
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
-    "enter": { "type": "any", "required": false, "description": "Custom `enter`." },
+    "enter": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `enter`."
+    },
     "isOpen": {
       "type": "boolean",
       "required": false,
@@ -94,7 +102,11 @@
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
-    "enter": { "type": "any", "required": false, "description": "Custom `enter`." },
+    "enter": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `enter`."
+    },
     "isOpen": {
       "type": "boolean",
       "required": false,
@@ -139,7 +151,11 @@
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
-    "enter": { "type": "any", "required": false, "description": "Custom `enter`." },
+    "enter": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `enter`."
+    },
     "isOpen": {
       "type": "boolean",
       "required": false,
@@ -178,7 +194,11 @@
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
-    "enter": { "type": "any", "required": false, "description": "Custom `enter`." },
+    "enter": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `enter`."
+    },
     "isOpen": {
       "type": "boolean",
       "required": false,

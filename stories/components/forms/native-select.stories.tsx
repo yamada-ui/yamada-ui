@@ -1,5 +1,5 @@
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Button,
@@ -13,12 +13,16 @@ import {
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof NativeSelect>
+
+const meta: Meta<typeof NativeSelect> = {
   title: 'Components / Forms / NativeSelect',
   component: NativeSelect,
-} as ComponentMeta<typeof NativeSelect>
+}
 
-export const basic: ComponentStory<typeof NativeSelect> = () => {
+export default meta
+
+export const basic: Story = () => {
   const options: UINativeOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -72,7 +76,7 @@ export const basic: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof NativeSelect> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <NativeSelect placeholder='extra small size' size='xs' />
@@ -83,7 +87,7 @@ export const withSize: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof NativeSelect> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <NativeSelect variant='outline' placeholder='outline' />
@@ -94,17 +98,24 @@ export const withVariant: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof NativeSelect> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <NativeSelect placeholder='default border color' />
-      <NativeSelect focusBorderColor='green.500' placeholder='custom border color' />
-      <NativeSelect isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <NativeSelect
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
+      <NativeSelect
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const disabledPlaceholderInOptions: ComponentStory<typeof NativeSelect> = () => {
+export const disabledPlaceholderInOptions: Story = () => {
   return (
     <NativeSelect placeholder='キャラクターを選択' placeholderInOptions={false}>
       <NativeOption value='孫悟空'>孫悟空</NativeOption>
@@ -114,7 +125,7 @@ export const disabledPlaceholderInOptions: ComponentStory<typeof NativeSelect> =
   )
 }
 
-export const isDisabled: ComponentStory<typeof NativeSelect> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <NativeSelect isDisabled variant='outline' placeholder='outline' />
@@ -122,14 +133,17 @@ export const isDisabled: ComponentStory<typeof NativeSelect> = () => {
       <NativeSelect isDisabled variant='flushed' placeholder='flushed' />
       <NativeSelect isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <NativeSelect placeholder='Select notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof NativeSelect> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <NativeSelect isReadOnly variant='outline' placeholder='outline' />
@@ -137,14 +151,17 @@ export const isReadonly: ComponentStory<typeof NativeSelect> = () => {
       <NativeSelect isReadOnly variant='flushed' placeholder='flushed' />
       <NativeSelect isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <NativeSelect placeholder='Select notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof NativeSelect> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <NativeSelect isInvalid variant='outline' placeholder='outline' />
@@ -163,10 +180,13 @@ export const isInvalid: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const customIcon: ComponentStory<typeof NativeSelect> = () => {
+export const customIcon: Story = () => {
   return (
     <>
-      <NativeSelect placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
+      <NativeSelect
+        placeholder='キャラクターを選択'
+        iconProps={{ color: 'primary' }}
+      >
         <NativeOption value='孫悟空'>孫悟空</NativeOption>
         <NativeOption value='ベジータ'>ベジータ</NativeOption>
         <NativeOption value='フリーザ'>フリーザ</NativeOption>
@@ -184,7 +204,7 @@ export const customIcon: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof NativeSelect> = () => {
+export const customControl: Story = () => {
   const [value, setValue] = useState<string>('孫悟空')
 
   return (
@@ -200,7 +220,7 @@ export const customControl: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof NativeSelect> = () => {
+export const reactHookForm: Story = () => {
   type Data = { select: string }
 
   const {
@@ -223,7 +243,9 @@ export const reactHookForm: ComponentStory<typeof NativeSelect> = () => {
       >
         <NativeSelect
           placeholder='キャラクターを選択'
-          {...register('select', { required: { value: true, message: 'This is required.' } })}
+          {...register('select', {
+            required: { value: true, message: 'This is required.' },
+          })}
         >
           <NativeOption value='孫悟空'>孫悟空</NativeOption>
           <NativeOption value='ベジータ'>ベジータ</NativeOption>
@@ -238,7 +260,7 @@ export const reactHookForm: ComponentStory<typeof NativeSelect> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof NativeSelect> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { select: string }
 
   const defaultValues: Data = {
@@ -265,7 +287,9 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof NativeSelect> 
       >
         <NativeSelect
           placeholder='キャラクターを選択'
-          {...register('select', { required: { value: true, message: 'This is required.' } })}
+          {...register('select', {
+            required: { value: true, message: 'This is required.' },
+          })}
         >
           <NativeOption value='孫悟空'>孫悟空</NativeOption>
           <NativeOption value='ベジータ'>ベジータ</NativeOption>

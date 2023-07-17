@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Box, useBreakpoint, useColorMode, useValue } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useValue',
 }
+
+export default meta
 
 export const basic = () => {
   const { colorMode } = useColorMode()

@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { VStack, Text } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Text>
+
+const meta: Meta<typeof Text> = {
   title: 'Components / Typography / Text',
   component: Text,
-} as ComponentMeta<typeof Text>
+}
 
-export const basic: ComponentStory<typeof Text> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <VStack gap='md'>
       <Text fontSize='6xl' isTruncated>
@@ -52,7 +56,7 @@ export const basic: ComponentStory<typeof Text> = () => {
   )
 }
 
-export const gradient: ComponentStory<typeof Text> = () => {
+export const gradient: Story = () => {
   return (
     <Text
       w='full'
@@ -66,7 +70,7 @@ export const gradient: ComponentStory<typeof Text> = () => {
   )
 }
 
-export const Override: ComponentStory<typeof Text> = () => {
+export const Override: Story = () => {
   return (
     <>
       <Text as='b'>へっ！きたねぇ花火だ</Text>
@@ -96,7 +100,7 @@ export const Override: ComponentStory<typeof Text> = () => {
   )
 }
 
-export const NoOfLines: ComponentStory<typeof Text> = () => {
+export const NoOfLines: Story = () => {
   return (
     <>
       <Text fontSize='2xl' noOfLines={3}>

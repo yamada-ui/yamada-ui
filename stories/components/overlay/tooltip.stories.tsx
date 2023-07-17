@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Tooltip, Text, Center } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Tooltip>
+
+const meta: Meta<typeof Tooltip> = {
   title: 'Components / Overlay / Tooltip',
   component: Tooltip,
-} as ComponentMeta<typeof Tooltip>
+}
 
-export const basic: ComponentStory<typeof Tooltip> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ'>
@@ -16,7 +20,7 @@ export const basic: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Tooltip> = () => {
+export const withDuration: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' duration={0.7}>
@@ -26,7 +30,7 @@ export const withDuration: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withOffset: ComponentStory<typeof Tooltip> = () => {
+export const withOffset: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' offset={[16, 16]}>
@@ -36,7 +40,7 @@ export const withOffset: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withGutter: ComponentStory<typeof Tooltip> = () => {
+export const withGutter: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' gutter={32}>
@@ -46,9 +50,14 @@ export const withGutter: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withAnimation: ComponentStory<typeof Tooltip> = () => {
+export const withAnimation: Story = () => {
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
+    <Center
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      flexDirection='column'
+      gap='md'
+    >
       <Tooltip label='へっ！きたねぇ花火だ' animation='scale'>
         <Text>Open scale Tooltip</Text>
       </Tooltip>
@@ -72,9 +81,14 @@ export const withAnimation: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withDelay: ComponentStory<typeof Tooltip> = () => {
+export const withDelay: Story = () => {
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
+    <Center
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      flexDirection='column'
+      gap='md'
+    >
       <Tooltip label='へっ！きたねぇ花火だ' placement='top' openDelay={500}>
         <Text>Delay Open 500ms</Text>
       </Tooltip>
@@ -86,9 +100,14 @@ export const withDelay: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof Tooltip> = () => {
+export const withPlacement: Story = () => {
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' flexDirection='column' gap='md'>
+    <Center
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      flexDirection='column'
+      gap='md'
+    >
       <Tooltip label='へっ！きたねぇ花火だ' placement='top'>
         <Text>Open top Tooltip</Text>
       </Tooltip>
@@ -140,7 +159,7 @@ export const withPlacement: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const withDisabled: ComponentStory<typeof Tooltip> = () => {
+export const withDisabled: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' isDisabled>
@@ -150,7 +169,7 @@ export const withDisabled: ComponentStory<typeof Tooltip> = () => {
   )
 }
 
-export const alwaysOpen: ComponentStory<typeof Tooltip> = () => {
+export const alwaysOpen: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Tooltip label='へっ！きたねぇ花火だ' isOpen>

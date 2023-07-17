@@ -1,5 +1,9 @@
-import { faCaretDown, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import {
+  faCaretDown,
+  faCheck,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   MultiAutocomplete,
@@ -14,12 +18,16 @@ import {
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof MultiAutocomplete>
+
+const meta: Meta<typeof MultiAutocomplete> = {
   title: 'Components / Forms / MultiAutocomplete',
   component: MultiAutocomplete,
-} as ComponentMeta<typeof MultiAutocomplete>
+}
 
-export const basic: ComponentStory<typeof MultiAutocomplete> = () => {
+export default meta
+
+export const basic: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -73,7 +81,7 @@ export const basic: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <MultiAutocomplete placeholder='extra small size' size='xs' />
@@ -84,7 +92,7 @@ export const withSize: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <MultiAutocomplete variant='outline' placeholder='outline' />
@@ -95,9 +103,12 @@ export const withVariant: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withDefaultValue: Story = () => {
   return (
-    <MultiAutocomplete placeholder='キャラクターを選択' defaultValue={['ベジータ']}>
+    <MultiAutocomplete
+      placeholder='キャラクターを選択'
+      defaultValue={['ベジータ']}
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -105,9 +116,12 @@ export const withDefaultValue: ComponentStory<typeof MultiAutocomplete> = () => 
   )
 }
 
-export const withEmptyMessage: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withEmptyMessage: Story = () => {
   return (
-    <MultiAutocomplete placeholder='キャラクターを選択' emptyMessage='キャラクターが存在しません'>
+    <MultiAutocomplete
+      placeholder='キャラクターを選択'
+      emptyMessage='キャラクターが存在しません'
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -115,7 +129,7 @@ export const withEmptyMessage: ComponentStory<typeof MultiAutocomplete> = () => 
   )
 }
 
-export const withCreateOption: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withCreateOption: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -151,7 +165,7 @@ export const withCreateOption: ComponentStory<typeof MultiAutocomplete> = () => 
   )
 }
 
-export const withCreateOrder: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withCreateOrder: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -205,7 +219,7 @@ export const withCreateOrder: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <MultiAutocomplete placeholder='default border color'>
@@ -214,13 +228,20 @@ export const withBorderColor: ComponentStory<typeof MultiAutocomplete> = () => {
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
       </MultiAutocomplete>
 
-      <MultiAutocomplete focusBorderColor='green.500' placeholder='custom border color'>
+      <MultiAutocomplete
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
       </MultiAutocomplete>
 
-      <MultiAutocomplete isInvalid errorBorderColor='orange.500' placeholder='custom border color'>
+      <MultiAutocomplete
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -229,7 +250,7 @@ export const withBorderColor: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withSeparator: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withSeparator: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' separator=';'>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -239,7 +260,7 @@ export const withSeparator: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withKeepPlaceholder: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withKeepPlaceholder: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' keepPlaceholder>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -249,7 +270,7 @@ export const withKeepPlaceholder: ComponentStory<typeof MultiAutocomplete> = () 
   )
 }
 
-export const withComponent: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withComponent: Story = () => {
   return (
     <>
       <MultiAutocomplete
@@ -275,9 +296,12 @@ export const withComponent: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withOmitSelectedValues: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withOmitSelectedValues: Story = () => {
   return (
-    <MultiAutocomplete placeholder='キャラクターを選択' omitSelectedValues={true}>
+    <MultiAutocomplete
+      placeholder='キャラクターを選択'
+      omitSelectedValues={true}
+    >
       <AutocompleteOptionGroup label='地球人'>
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
@@ -296,7 +320,7 @@ export const withOmitSelectedValues: ComponentStory<typeof MultiAutocomplete> = 
   )
 }
 
-export const withMaxSelectedValues: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withMaxSelectedValues: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' maxSelectedValues={3}>
       <AutocompleteOptionGroup label='地球人'>
@@ -317,7 +341,7 @@ export const withMaxSelectedValues: ComponentStory<typeof MultiAutocomplete> = (
   )
 }
 
-export const withCloseOnSelect: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withCloseOnSelect: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' closeOnSelect={true}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -327,7 +351,7 @@ export const withCloseOnSelect: ComponentStory<typeof MultiAutocomplete> = () =>
   )
 }
 
-export const disabledIsClearable: ComponentStory<typeof MultiAutocomplete> = () => {
+export const disabledIsClearable: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' isClearable={false}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -337,7 +361,7 @@ export const disabledIsClearable: ComponentStory<typeof MultiAutocomplete> = () 
   )
 }
 
-export const disabledCloseOnBlur: ComponentStory<typeof MultiAutocomplete> = () => {
+export const disabledCloseOnBlur: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' closeOnBlur={false}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -347,9 +371,13 @@ export const disabledCloseOnBlur: ComponentStory<typeof MultiAutocomplete> = () 
   )
 }
 
-export const withPlacement: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withPlacement: Story = () => {
   return (
-    <MultiAutocomplete placeholder='キャラクターを選択' placement='right-start' maxW='xs'>
+    <MultiAutocomplete
+      placeholder='キャラクターを選択'
+      placement='right-start'
+      maxW='xs'
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -357,7 +385,7 @@ export const withPlacement: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withOffset: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withOffset: Story = () => {
   return (
     <MultiAutocomplete
       placeholder='キャラクターを選択'
@@ -371,7 +399,7 @@ export const withOffset: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withGutter: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withGutter: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' gutter={32}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -381,7 +409,7 @@ export const withGutter: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof MultiAutocomplete> = () => {
+export const withDuration: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択' duration={0.4}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -391,7 +419,7 @@ export const withDuration: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof MultiAutocomplete> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <MultiAutocomplete isDisabled variant='outline' placeholder='outline' />
@@ -399,14 +427,17 @@ export const isDisabled: ComponentStory<typeof MultiAutocomplete> = () => {
       <MultiAutocomplete isDisabled variant='flushed' placeholder='flushed' />
       <MultiAutocomplete isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <MultiAutocomplete placeholder='Autocomplete notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof MultiAutocomplete> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <MultiAutocomplete isReadOnly variant='outline' placeholder='outline' />
@@ -414,14 +445,17 @@ export const isReadonly: ComponentStory<typeof MultiAutocomplete> = () => {
       <MultiAutocomplete isReadOnly variant='flushed' placeholder='flushed' />
       <MultiAutocomplete isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <MultiAutocomplete placeholder='Autocomplete notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof MultiAutocomplete> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <MultiAutocomplete isInvalid variant='outline' placeholder='outline' />
@@ -440,7 +474,7 @@ export const isInvalid: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const isOptionDisabled: ComponentStory<typeof MultiAutocomplete> = () => {
+export const isOptionDisabled: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択'>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -452,7 +486,7 @@ export const isOptionDisabled: ComponentStory<typeof MultiAutocomplete> = () => 
   )
 }
 
-export const isOptionFocusable: ComponentStory<typeof MultiAutocomplete> = () => {
+export const isOptionFocusable: Story = () => {
   return (
     <MultiAutocomplete placeholder='キャラクターを選択'>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -464,10 +498,13 @@ export const isOptionFocusable: ComponentStory<typeof MultiAutocomplete> = () =>
   )
 }
 
-export const customIcon: ComponentStory<typeof MultiAutocomplete> = () => {
+export const customIcon: Story = () => {
   return (
     <>
-      <MultiAutocomplete placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
+      <MultiAutocomplete
+        placeholder='キャラクターを選択'
+        iconProps={{ color: 'primary' }}
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -485,7 +522,7 @@ export const customIcon: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const customClearIcon: ComponentStory<typeof MultiAutocomplete> = () => {
+export const customClearIcon: Story = () => {
   return (
     <MultiAutocomplete
       placeholder='キャラクターを選択'
@@ -498,10 +535,13 @@ export const customClearIcon: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const customOption: ComponentStory<typeof MultiAutocomplete> = () => {
+export const customOption: Story = () => {
   return (
     <>
-      <MultiAutocomplete placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
+      <MultiAutocomplete
+        placeholder='キャラクターを選択'
+        optionProps={{ color: 'primary' }}
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -519,11 +559,15 @@ export const customOption: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof MultiAutocomplete> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<string[]>(['孫悟空'])
 
   return (
-    <MultiAutocomplete placeholder='キャラクターを選択' value={value} onChange={onChange}>
+    <MultiAutocomplete
+      placeholder='キャラクターを選択'
+      value={value}
+      onChange={onChange}
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -531,8 +575,12 @@ export const customControl: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof MultiAutocomplete> = () => {
-  type Data = { autocomplete1: string[]; autocomplete2: string[]; autocomplete3: string[] }
+export const reactHookForm: Story = () => {
+  type Data = {
+    autocomplete1: string[]
+    autocomplete2: string[]
+    autocomplete3: string[]
+  }
 
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
@@ -603,13 +651,21 @@ export const reactHookForm: ComponentStory<typeof MultiAutocomplete> = () => {
               <AutocompleteOptionGroup label='地球人'>
                 <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
                 <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
-                <AutocompleteOption value='クリリン'>クリリン</AutocompleteOption>
+                <AutocompleteOption value='クリリン'>
+                  クリリン
+                </AutocompleteOption>
               </AutocompleteOptionGroup>
 
               <AutocompleteOptionGroup label='フリーザ軍'>
-                <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
-                <AutocompleteOption value='ギニュー'>ギニュー</AutocompleteOption>
-                <AutocompleteOption value='リクーム'>リクーム</AutocompleteOption>
+                <AutocompleteOption value='フリーザ'>
+                  フリーザ
+                </AutocompleteOption>
+                <AutocompleteOption value='ギニュー'>
+                  ギニュー
+                </AutocompleteOption>
+                <AutocompleteOption value='リクーム'>
+                  リクーム
+                </AutocompleteOption>
                 <AutocompleteOption value='バータ'>バータ</AutocompleteOption>
                 <AutocompleteOption value='ジース'>ジース</AutocompleteOption>
                 <AutocompleteOption value='グルド'>グルド</AutocompleteOption>
@@ -629,7 +685,11 @@ export const reactHookForm: ComponentStory<typeof MultiAutocomplete> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiAutocomplete placeholder='キャラクターを選択' {...field} options={options} />
+            <MultiAutocomplete
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>
@@ -641,8 +701,12 @@ export const reactHookForm: ComponentStory<typeof MultiAutocomplete> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiAutocomplete> = () => {
-  type Data = { autocomplete1: string[]; autocomplete2: string[]; autocomplete3: string[] }
+export const reactHookFormWithDefaultValue: Story = () => {
+  type Data = {
+    autocomplete1: string[]
+    autocomplete2: string[]
+    autocomplete3: string[]
+  }
 
   const defaultValues: Data = {
     autocomplete1: ['孫悟空'],
@@ -719,13 +783,21 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiAutocompl
               <AutocompleteOptionGroup label='地球人'>
                 <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
                 <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
-                <AutocompleteOption value='クリリン'>クリリン</AutocompleteOption>
+                <AutocompleteOption value='クリリン'>
+                  クリリン
+                </AutocompleteOption>
               </AutocompleteOptionGroup>
 
               <AutocompleteOptionGroup label='フリーザ軍'>
-                <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
-                <AutocompleteOption value='ギニュー'>ギニュー</AutocompleteOption>
-                <AutocompleteOption value='リクーム'>リクーム</AutocompleteOption>
+                <AutocompleteOption value='フリーザ'>
+                  フリーザ
+                </AutocompleteOption>
+                <AutocompleteOption value='ギニュー'>
+                  ギニュー
+                </AutocompleteOption>
+                <AutocompleteOption value='リクーム'>
+                  リクーム
+                </AutocompleteOption>
                 <AutocompleteOption value='バータ'>バータ</AutocompleteOption>
                 <AutocompleteOption value='ジース'>ジース</AutocompleteOption>
                 <AutocompleteOption value='グルド'>グルド</AutocompleteOption>
@@ -745,7 +817,11 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof MultiAutocompl
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <MultiAutocomplete placeholder='キャラクターを選択' {...field} options={options} />
+            <MultiAutocomplete
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>

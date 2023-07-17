@@ -67,7 +67,9 @@ const transformBreakpoints = (breakpoints: Dict): Dict => {
   )
 }
 
-export const analyzeBreakpoints = (breakpoints: Dict): Breakpoints | undefined => {
+export const analyzeBreakpoints = (
+  breakpoints: Dict,
+): Breakpoints | undefined => {
   if (!breakpoints) return
 
   breakpoints.base = '9999px'

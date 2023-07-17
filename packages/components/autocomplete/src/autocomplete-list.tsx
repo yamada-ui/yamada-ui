@@ -1,4 +1,9 @@
-import { CSSUIObject, CSSUIProps, forwardRef, HTMLUIProps } from '@yamada-ui/core'
+import {
+  CSSUIObject,
+  CSSUIProps,
+  forwardRef,
+  HTMLUIProps,
+} from '@yamada-ui/core'
 import { PopoverContent } from '@yamada-ui/popover'
 import { cx } from '@yamada-ui/utils'
 import { useAutocompleteContext, useAutocompleteList } from './use-autocomplete'
@@ -11,8 +16,12 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, 'ul'>(
 
     const { getListProps } = useAutocompleteList()
 
-    w = w ?? width ?? ((styles.list?.w ?? styles.list?.width) as CSSUIProps['w'])
-    minW = minW ?? minWidth ?? ((styles.list?.minW ?? styles.list?.minWidth) as CSSUIProps['minW'])
+    w =
+      w ?? width ?? ((styles.list?.w ?? styles.list?.width) as CSSUIProps['w'])
+    minW =
+      minW ??
+      minWidth ??
+      ((styles.list?.minW ?? styles.list?.minWidth) as CSSUIProps['minW'])
 
     const css: CSSUIObject = { ...styles.list }
 

@@ -1,7 +1,13 @@
 import { ui, CSSUIObject } from '@yamada-ui/core'
 import { cx, dataAttr } from '@yamada-ui/utils'
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
-import { DotsIcon, FirstIcon, LastIcon, NextIcon, PrevIcon } from './pagination-icon'
+import {
+  DotsIcon,
+  FirstIcon,
+  LastIcon,
+  NextIcon,
+  PrevIcon,
+} from './pagination-icon'
 import { usePaginationContext } from './use-pagination'
 
 type PaginationItemOptions = {
@@ -23,9 +29,13 @@ type PaginationItemOptions = {
   isDisabled?: boolean
 }
 
-export type PaginationItemProps = ComponentPropsWithoutRef<'button'> & PaginationItemOptions
+export type PaginationItemProps = ComponentPropsWithoutRef<'button'> &
+  PaginationItemOptions
 
-const iconMap: Record<number | 'dots' | 'prev' | 'next' | 'first' | 'last', ReactNode> = {
+const iconMap: Record<
+  number | 'dots' | 'prev' | 'next' | 'first' | 'last',
+  ReactNode
+> = {
   dots: <DotsIcon />,
   next: <NextIcon />,
   prev: <PrevIcon />,

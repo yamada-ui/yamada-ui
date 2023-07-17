@@ -1,7 +1,10 @@
 import { useCallbackRef } from '@yamada-ui/utils'
 import { useEffect } from 'react'
 
-export function useTimeout(callback: (...args: any[]) => void, delay: number | null) {
+export function useTimeout(
+  callback: (...args: any[]) => void,
+  delay: number | null,
+) {
   const func = useCallbackRef(callback)
 
   useEffect(() => {

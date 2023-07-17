@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Card,
   CardHeader,
@@ -12,12 +12,16 @@ import {
   VStack,
 } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Card>
+
+const meta: Meta<typeof Card> = {
   title: 'Components / Data Display / Card',
   component: Card,
-} as ComponentMeta<typeof Card>
+}
 
-export const basic: ComponentStory<typeof Card> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Card>
       <CardHeader>
@@ -34,7 +38,7 @@ export const basic: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Card> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Card size='sm'>
@@ -92,7 +96,7 @@ export const withSize: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const withVarint: ComponentStory<typeof Card> = () => {
+export const withVarint: Story = () => {
   return (
     <>
       <Card variant='elevated'>
@@ -163,7 +167,7 @@ export const withVarint: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Card> = () => {
+export const withColorScheme: Story = () => {
   return (
     <>
       <Heading size='xl'>Subtle</Heading>
@@ -447,7 +451,7 @@ export const withColorScheme: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const withImage: ComponentStory<typeof Card> = () => {
+export const withImage: Story = () => {
   return (
     <Card maxW='md'>
       <CardHeader justifyContent='center'>
@@ -474,9 +478,13 @@ export const withImage: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const horizonCard: ComponentStory<typeof Card> = () => {
+export const horizonCard: Story = () => {
   return (
-    <Card direction={{ base: 'row', md: 'column' }} overflow='hidden' variant='outline'>
+    <Card
+      direction={{ base: 'row', md: 'column' }}
+      overflow='hidden'
+      variant='outline'
+    >
       <Image
         src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
         objectFit='cover'
@@ -503,7 +511,7 @@ export const horizonCard: ComponentStory<typeof Card> = () => {
   )
 }
 
-export const multiCards: ComponentStory<typeof Card> = () => {
+export const multiCards: Story = () => {
   return (
     <Grid templateColumns='repeat(auto-fill, minmax(320px, 1fr))' gap='md'>
       <Card>

@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Button, Text, useBoolean, usePrevious } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / usePrevious',
 }
+
+export default meta
 
 export const basic = () => {
   const [flg, { toggle }] = useBoolean()

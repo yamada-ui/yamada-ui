@@ -17,7 +17,11 @@
       "required": false,
       "description": "Props for icon component."
     },
-    "id": { "type": "string", "required": false, "description": "id assigned to input." },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to input."
+    },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
       "required": false,
@@ -151,7 +155,11 @@
       "required": false,
       "description": "If `true`, the checkbox will be initially checked."
     },
-    "id": { "type": "string", "required": false, "description": "id assigned to input." },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to input."
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -313,6 +321,10 @@
       "required": false,
       "description": "The callback fired when any children checkbox is checked or unchecked."
     },
-    "value": { "type": "Y[]", "required": false, "description": "The value of the checkbox group." }
+    "value": {
+      "type": "Y[]",
+      "required": false,
+      "description": "The value of the checkbox group."
+    }
   }
 }

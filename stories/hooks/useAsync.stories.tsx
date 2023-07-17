@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Text, useAsync } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useAsync',
 }
+
+export default meta
 
 export const basic = () => {
   const { loading, error, value } = useAsync(

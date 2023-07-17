@@ -42,14 +42,23 @@ export const Stack = forwardRef<StackProps, 'div'>(
     },
     ref,
   ) => {
-    const isColumn = (value: any) => value === 'column' || value === 'column-reverse'
+    const isColumn = (value: any) =>
+      value === 'column' || value === 'column-reverse'
 
     const dividerCSS = useMemo(
       () => ({
-        w: replaceObject(flexDirection, (value) => (isColumn(value) ? '100%' : 'fix-content')),
-        h: replaceObject(flexDirection, (value) => (isColumn(value) ? 'fix-content' : '100%')),
-        borderLeftWidth: replaceObject(flexDirection, (value) => (isColumn(value) ? 0 : '1px')),
-        borderBottomWidth: replaceObject(flexDirection, (value) => (isColumn(value) ? '1px' : 0)),
+        w: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? '100%' : 'fix-content',
+        ),
+        h: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? 'fix-content' : '100%',
+        ),
+        borderLeftWidth: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? 0 : '1px',
+        ),
+        borderBottomWidth: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? '1px' : 0,
+        ),
       }),
       [flexDirection],
     )
@@ -60,9 +69,12 @@ export const Stack = forwardRef<StackProps, 'div'>(
       ? validChildren.map((child, index) => {
           const key = typeof child.key !== 'undefined' ? child.key : index
 
-          const cloneDivider = cloneElement(divider as React.ReactElement<any>, {
-            __css: dividerCSS,
-          })
+          const cloneDivider = cloneElement(
+            divider as React.ReactElement<any>,
+            {
+              __css: dividerCSS,
+            },
+          )
 
           return (
             <Fragment key={key}>
@@ -86,7 +98,12 @@ export const Stack = forwardRef<StackProps, 'div'>(
     )
 
     return (
-      <ui.div ref={ref} className={cx('ui-stack', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-stack', className)}
+        __css={css}
+        {...rest}
+      >
         {cloneChildren}
       </ui.div>
     )

@@ -1,5 +1,5 @@
 import { faCaretDown, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Autocomplete,
@@ -13,12 +13,16 @@ import {
 import { useState } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof Autocomplete>
+
+const meta: Meta<typeof Autocomplete> = {
   title: 'Components / Forms / Autocomplete',
   component: Autocomplete,
-} as ComponentMeta<typeof Autocomplete>
+}
 
-export const basic: ComponentStory<typeof Autocomplete> = () => {
+export default meta
+
+export const basic: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -72,7 +76,7 @@ export const basic: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Autocomplete> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Autocomplete placeholder='extra small size' size='xs' />
@@ -83,7 +87,7 @@ export const withSize: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Autocomplete> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Autocomplete variant='outline' placeholder='outline' />
@@ -94,7 +98,7 @@ export const withVariant: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof Autocomplete> = () => {
+export const withDefaultValue: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択' defaultValue='ベジータ'>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -104,9 +108,12 @@ export const withDefaultValue: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withEmptyMessage: ComponentStory<typeof Autocomplete> = () => {
+export const withEmptyMessage: Story = () => {
   return (
-    <Autocomplete placeholder='キャラクターを選択' emptyMessage='キャラクターが存在しません'>
+    <Autocomplete
+      placeholder='キャラクターを選択'
+      emptyMessage='キャラクターが存在しません'
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -114,7 +121,7 @@ export const withEmptyMessage: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withCreateOption: ComponentStory<typeof Autocomplete> = () => {
+export const withCreateOption: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -150,7 +157,7 @@ export const withCreateOption: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withCreateOrder: ComponentStory<typeof Autocomplete> = () => {
+export const withCreateOrder: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -204,7 +211,7 @@ export const withCreateOrder: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof Autocomplete> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <Autocomplete placeholder='default border color'>
@@ -213,13 +220,20 @@ export const withBorderColor: ComponentStory<typeof Autocomplete> = () => {
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
       </Autocomplete>
 
-      <Autocomplete focusBorderColor='green.500' placeholder='custom border color'>
+      <Autocomplete
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
       </Autocomplete>
 
-      <Autocomplete isInvalid errorBorderColor='orange.500' placeholder='custom border color'>
+      <Autocomplete
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -228,7 +242,7 @@ export const withBorderColor: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const disabledCloseOnSelect: ComponentStory<typeof Autocomplete> = () => {
+export const disabledCloseOnSelect: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択' closeOnSelect={false}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -238,7 +252,7 @@ export const disabledCloseOnSelect: ComponentStory<typeof Autocomplete> = () => 
   )
 }
 
-export const disabledCloseOnBlur: ComponentStory<typeof Autocomplete> = () => {
+export const disabledCloseOnBlur: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択' closeOnBlur={false}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -248,9 +262,13 @@ export const disabledCloseOnBlur: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof Autocomplete> = () => {
+export const withPlacement: Story = () => {
   return (
-    <Autocomplete placeholder='キャラクターを選択' placement='right-start' maxW='xs'>
+    <Autocomplete
+      placeholder='キャラクターを選択'
+      placement='right-start'
+      maxW='xs'
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -258,9 +276,13 @@ export const withPlacement: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withOffset: ComponentStory<typeof Autocomplete> = () => {
+export const withOffset: Story = () => {
   return (
-    <Autocomplete placeholder='キャラクターを選択' offset={[16, 16]} listProps={{ maxW: 'xs' }}>
+    <Autocomplete
+      placeholder='キャラクターを選択'
+      offset={[16, 16]}
+      listProps={{ maxW: 'xs' }}
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -268,7 +290,7 @@ export const withOffset: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withGutter: ComponentStory<typeof Autocomplete> = () => {
+export const withGutter: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択' gutter={32}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -278,7 +300,7 @@ export const withGutter: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Autocomplete> = () => {
+export const withDuration: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択' duration={0.4}>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -288,7 +310,7 @@ export const withDuration: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Autocomplete> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Autocomplete isDisabled variant='outline' placeholder='outline' />
@@ -296,14 +318,17 @@ export const isDisabled: ComponentStory<typeof Autocomplete> = () => {
       <Autocomplete isDisabled variant='flushed' placeholder='flushed' />
       <Autocomplete isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <Autocomplete placeholder='Autocomplete notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof Autocomplete> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Autocomplete isReadOnly variant='outline' placeholder='outline' />
@@ -311,14 +336,17 @@ export const isReadonly: ComponentStory<typeof Autocomplete> = () => {
       <Autocomplete isReadOnly variant='flushed' placeholder='flushed' />
       <Autocomplete isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <Autocomplete placeholder='Autocomplete notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof Autocomplete> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Autocomplete isInvalid variant='outline' placeholder='outline' />
@@ -337,7 +365,7 @@ export const isInvalid: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const isOptionDisabled: ComponentStory<typeof Autocomplete> = () => {
+export const isOptionDisabled: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択'>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -349,7 +377,7 @@ export const isOptionDisabled: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const isOptionFocusable: ComponentStory<typeof Autocomplete> = () => {
+export const isOptionFocusable: Story = () => {
   return (
     <Autocomplete placeholder='キャラクターを選択'>
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
@@ -361,10 +389,13 @@ export const isOptionFocusable: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const customIcon: ComponentStory<typeof Autocomplete> = () => {
+export const customIcon: Story = () => {
   return (
     <>
-      <Autocomplete placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
+      <Autocomplete
+        placeholder='キャラクターを選択'
+        iconProps={{ color: 'primary' }}
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -382,10 +413,13 @@ export const customIcon: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const customOption: ComponentStory<typeof Autocomplete> = () => {
+export const customOption: Story = () => {
   return (
     <>
-      <Autocomplete placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
+      <Autocomplete
+        placeholder='キャラクターを選択'
+        optionProps={{ color: 'primary' }}
+      >
         <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
         <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
         <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -403,11 +437,15 @@ export const customOption: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Autocomplete> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<string>('孫悟空')
 
   return (
-    <Autocomplete placeholder='キャラクターを選択' value={value} onChange={onChange}>
+    <Autocomplete
+      placeholder='キャラクターを選択'
+      value={value}
+      onChange={onChange}
+    >
       <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
       <AutocompleteOption value='ベジータ'>ベジータ</AutocompleteOption>
       <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
@@ -415,8 +453,12 @@ export const customControl: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Autocomplete> = () => {
-  type Data = { autocomplete1: string; autocomplete2: string; autocomplete3: string }
+export const reactHookForm: Story = () => {
+  type Data = {
+    autocomplete1: string
+    autocomplete2: string
+    autocomplete3: string
+  }
 
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
@@ -487,13 +529,21 @@ export const reactHookForm: ComponentStory<typeof Autocomplete> = () => {
               <AutocompleteOptionGroup label='地球人'>
                 <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
                 <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
-                <AutocompleteOption value='クリリン'>クリリン</AutocompleteOption>
+                <AutocompleteOption value='クリリン'>
+                  クリリン
+                </AutocompleteOption>
               </AutocompleteOptionGroup>
 
               <AutocompleteOptionGroup label='フリーザ軍'>
-                <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
-                <AutocompleteOption value='ギニュー'>ギニュー</AutocompleteOption>
-                <AutocompleteOption value='リクーム'>リクーム</AutocompleteOption>
+                <AutocompleteOption value='フリーザ'>
+                  フリーザ
+                </AutocompleteOption>
+                <AutocompleteOption value='ギニュー'>
+                  ギニュー
+                </AutocompleteOption>
+                <AutocompleteOption value='リクーム'>
+                  リクーム
+                </AutocompleteOption>
                 <AutocompleteOption value='バータ'>バータ</AutocompleteOption>
                 <AutocompleteOption value='ジース'>ジース</AutocompleteOption>
                 <AutocompleteOption value='グルド'>グルド</AutocompleteOption>
@@ -513,7 +563,11 @@ export const reactHookForm: ComponentStory<typeof Autocomplete> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Autocomplete placeholder='キャラクターを選択' {...field} options={options} />
+            <Autocomplete
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>
@@ -525,8 +579,12 @@ export const reactHookForm: ComponentStory<typeof Autocomplete> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Autocomplete> = () => {
-  type Data = { autocomplete1: string; autocomplete2: string; autocomplete3: string }
+export const reactHookFormWithDefaultValue: Story = () => {
+  type Data = {
+    autocomplete1: string
+    autocomplete2: string
+    autocomplete3: string
+  }
 
   const defaultValues: Data = {
     autocomplete1: '孫悟空',
@@ -603,13 +661,21 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Autocomplete> 
               <AutocompleteOptionGroup label='地球人'>
                 <AutocompleteOption value='孫悟空'>孫悟空</AutocompleteOption>
                 <AutocompleteOption value='孫悟飯'>孫悟飯</AutocompleteOption>
-                <AutocompleteOption value='クリリン'>クリリン</AutocompleteOption>
+                <AutocompleteOption value='クリリン'>
+                  クリリン
+                </AutocompleteOption>
               </AutocompleteOptionGroup>
 
               <AutocompleteOptionGroup label='フリーザ軍'>
-                <AutocompleteOption value='フリーザ'>フリーザ</AutocompleteOption>
-                <AutocompleteOption value='ギニュー'>ギニュー</AutocompleteOption>
-                <AutocompleteOption value='リクーム'>リクーム</AutocompleteOption>
+                <AutocompleteOption value='フリーザ'>
+                  フリーザ
+                </AutocompleteOption>
+                <AutocompleteOption value='ギニュー'>
+                  ギニュー
+                </AutocompleteOption>
+                <AutocompleteOption value='リクーム'>
+                  リクーム
+                </AutocompleteOption>
                 <AutocompleteOption value='バータ'>バータ</AutocompleteOption>
                 <AutocompleteOption value='ジース'>ジース</AutocompleteOption>
                 <AutocompleteOption value='グルド'>グルド</AutocompleteOption>
@@ -629,7 +695,11 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Autocomplete> 
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Autocomplete placeholder='キャラクターを選択' {...field} options={options} />
+            <Autocomplete
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>

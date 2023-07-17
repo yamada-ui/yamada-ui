@@ -22,7 +22,12 @@
       "version": "detect"
     }
   },
-  "plugins": ["@typescript-eslint/eslint-plugin", "testing-library", "unused-imports", "import"],
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "testing-library",
+    "unused-imports",
+    "import"
+  ],
   "rules": {
     "import/order": [
       "error",
@@ -34,6 +39,7 @@
     ],
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "off",
+    "react/no-unescaped-entities": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "unused-imports/no-unused-imports": "error"
   },

@@ -1,12 +1,8 @@
 import React from 'react'
-import { ArgTypes, DecoratorFn, Parameters } from '@storybook/react'
+import { Decorator, Parameters } from '@storybook/react'
 import { themes } from '@storybook/theming'
 import { UITheme } from './theme'
-import { createArgTypes } from './arg-types'
-import { Docs } from './docs'
-import { Provider } from './provider'
-
-export const argTypes: ArgTypes = createArgTypes()
+import { StoryProvider, DocsContainer } from './components'
 
 export const parameters: Parameters = {
   darkMode: {
@@ -14,22 +10,22 @@ export const parameters: Parameters = {
     dark: { ...themes.dark, ...UITheme.dark },
   },
   options: {
-    storySort: { order: ['Documents', ['Welcome', '*'], 'Components', 'Hooks', 'System'] },
+    storySort: {
+      order: ['Documents', ['Welcome', '*'], 'Components', 'Hooks', 'System'],
+    },
   },
   backgrounds: { disable: true },
   controls: { expanded: true },
-  docs: {
-    container: Docs,
-  },
+  docs: { container: DocsContainer },
   layout: 'fullscreen',
 }
 
-export const decorators: DecoratorFn[] = [
+export const decorators: Decorator[] = [
   (Story) => {
     return (
-      <Provider>
+      <StoryProvider>
         <Story />
-      </Provider>
+      </StoryProvider>
     )
   },
 ]

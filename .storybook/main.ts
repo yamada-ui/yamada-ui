@@ -1,36 +1,48 @@
-import { StorybookConfig } from '@storybook/core-common'
-import fs from 'fs'
-
-const path = (target: string) => `${process.cwd()}/${target}`
+import type { StorybookConfig } from '@storybook/react-vite'
+import { mergeConfig } from 'vite'
+import path from 'path'
 
 const config: StorybookConfig = {
+  framework: '@storybook/react-vite',
+  features: {
+    buildStoriesJson: true,
+  },
   core: {
-    builder: '@storybook/builder-webpack5',
     disableTelemetry: true,
   },
   stories: ['../stories/**/*.stories.@(tsx|mdx)'],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
+    '@storybook/addon-viewport',
+    '@storybook/addon-docs',
+    '@storybook/addon-backgrounds',
+    '@storybook/addon-measure',
     '@storybook/addon-storysource',
     'storybook-dark-mode',
   ],
-  framework: '@storybook/react',
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      resolve: {
+        alias: [
+          {
+            find: /\@yanada-ui\/react$/,
+            replacement: path.resolve(
+              __dirname,
+              '../packages/components/react/src',
+            ),
+          },
+          {
+            find: /\@yanada-ui\/theme$/,
+            replacement: path.resolve(
+              __dirname,
+              '../packages/components/theme/src',
+            ),
+          },
+        ],
+      },
+    })
+  },
   typescript: {
     reactDocgen: false,
-  },
-  webpackFinal: async (config) => {
-    if (config.resolve?.alias) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@emotion/styled': path('node_modules/@emotion/styled'),
-        '@emotion/react': path('node_modules/@emotion/react'),
-      }
-    }
-
-    config.resolve?.extensions?.push('.ts', '.tsx')
-
-    return config
   },
 }
 

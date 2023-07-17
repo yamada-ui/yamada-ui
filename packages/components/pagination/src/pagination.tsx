@@ -12,7 +12,11 @@ import { useValue } from '@yamada-ui/use-value'
 import { cx, omitObject, dataAttr, handlerAll } from '@yamada-ui/utils'
 import { ComponentPropsWithoutRef, FC, useMemo } from 'react'
 import { PaginationItem, PaginationItemProps } from './pagination-item'
-import { PaginationProvider, usePagination, UsePaginationProps } from './use-pagination'
+import {
+  PaginationProvider,
+  usePagination,
+  UsePaginationProps,
+} from './use-pagination'
 
 type PaginationOptions = {
   /**
@@ -61,7 +65,10 @@ type PaginationOptions = {
   edgeLastProps?: HTMLUIProps<'button'>
 }
 
-export type PaginationProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'children'> &
+export type PaginationProps = Omit<
+  HTMLUIProps<'div'>,
+  'onChange' | 'children'
+> &
   ThemeProps<'Pagination'> &
   UsePaginationProps &
   PaginationOptions
@@ -86,8 +93,17 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
   const computedWithControls = useValue(withControls)
   const computedWithEdges = useValue(withEdges)
 
-  const { currentPage, total, isDisabled, onFirst, onLast, onPrev, onNext, onChange, range } =
-    usePagination(rest)
+  const {
+    currentPage,
+    total,
+    isDisabled,
+    onFirst,
+    onLast,
+    onPrev,
+    onNext,
+    onChange,
+    range,
+  } = usePagination(rest)
 
   const children = useMemo(
     () =>
@@ -107,7 +123,11 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
     [Component, currentPage, isDisabled, onChange, range, itemProps],
   )
 
-  const css: CSSUIObject = { display: 'flex', alignItems: 'center', ...styles.container }
+  const css: CSSUIObject = {
+    display: 'flex',
+    alignItems: 'center',
+    ...styles.container,
+  }
 
   return (
     <PaginationProvider value={styles}>
@@ -126,7 +146,11 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             isDisabled={isDisabled || currentPage === 1}
             {...(edgeProps as ComponentPropsWithoutRef<'button'>)}
             {...(edgeFirstProps as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(edgeProps?.onClick, edgeFirstProps?.onClick, onFirst)}
+            onClick={handlerAll(
+              edgeProps?.onClick,
+              edgeFirstProps?.onClick,
+              onFirst,
+            )}
           />
         ) : null}
 
@@ -137,7 +161,11 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             isDisabled={isDisabled || currentPage === 1}
             {...(controlProps as ComponentPropsWithoutRef<'button'>)}
             {...(controlPrevProps as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(controlProps?.onClick, controlPrevProps?.onClick, onPrev)}
+            onClick={handlerAll(
+              controlProps?.onClick,
+              controlPrevProps?.onClick,
+              onPrev,
+            )}
           />
         ) : null}
 
@@ -150,7 +178,11 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             isDisabled={isDisabled || currentPage === total}
             {...(controlProps as ComponentPropsWithoutRef<'button'>)}
             {...(controlNextProps as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(controlProps?.onClick, controlNextProps?.onClick, onNext)}
+            onClick={handlerAll(
+              controlProps?.onClick,
+              controlNextProps?.onClick,
+              onNext,
+            )}
           />
         ) : null}
 
@@ -161,7 +193,11 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
             isDisabled={isDisabled || currentPage === total}
             {...(edgeProps as ComponentPropsWithoutRef<'button'>)}
             {...(edgeLastProps as ComponentPropsWithoutRef<'button'>)}
-            onClick={handlerAll(edgeProps?.onClick, edgeLastProps?.onClick, onLast)}
+            onClick={handlerAll(
+              edgeProps?.onClick,
+              edgeLastProps?.onClick,
+              onLast,
+            )}
           />
         ) : null}
       </ui.div>

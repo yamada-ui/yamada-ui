@@ -8,7 +8,14 @@ import {
 } from '@yamada-ui/utils'
 import { useRef } from 'react'
 import isEqual from 'react-fast-compare'
-import { ComponentStyle, CSSUIObject, UIStyle, UIStyleProps, useTheme, useColorMode } from '..'
+import {
+  ComponentStyle,
+  CSSUIObject,
+  UIStyle,
+  UIStyleProps,
+  useTheme,
+  useColorMode,
+} from '..'
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject
@@ -22,7 +29,9 @@ const getStyles = <IsMulti extends boolean = false>(
   let styles = runIfFunc(valOrFunc, props)
 
   if (isMulti) {
-    for (const [key, valOrFunc] of Object.entries<UIStyle>(styles as Record<string, UIStyle>)) {
+    for (const [key, valOrFunc] of Object.entries<UIStyle>(
+      styles as Record<string, UIStyle>,
+    )) {
       const value = runIfFunc(valOrFunc, props)
 
       styles = merge(styles, { [key]: value })
@@ -40,7 +49,10 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
-  const componentStyle: ComponentStyle | undefined = get(theme, `components.${name}`)
+  const componentStyle: ComponentStyle | undefined = get(
+    theme,
+    `components.${name}`,
+  )
 
   const propsRef = useRef<Props>({} as Props)
   const stylesRef = useRef<Styles<IsMulti>>({})
@@ -86,7 +98,11 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   return [stylesRef.current, propsRef.current]
 }
 
-export const useComponentStyle = <Props extends Dict = Dict>(name: string, props: Props) =>
-  setStyles<Props>(name, props)
-export const useMultiComponentStyle = <Props extends Dict = Dict>(name: string, props: Props) =>
-  setStyles<Props, true>(name, props, true)
+export const useComponentStyle = <Props extends Dict = Dict>(
+  name: string,
+  props: Props,
+) => setStyles<Props>(name, props)
+export const useMultiComponentStyle = <Props extends Dict = Dict>(
+  name: string,
+  props: Props,
+) => setStyles<Props, true>(name, props, true)

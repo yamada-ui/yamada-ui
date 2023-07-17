@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Button, Dialog, useDisclosure, Text } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useDiclosure',
 }
+
+export default meta
 
 export const basic = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

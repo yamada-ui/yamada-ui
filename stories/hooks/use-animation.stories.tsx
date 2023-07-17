@@ -1,8 +1,17 @@
-import { AnimationStyle, Box, Button, useAnimation, useDynamicAnimation } from '@yamada-ui/react'
+import { Meta } from '@storybook/react'
+import {
+  AnimationStyle,
+  Box,
+  Button,
+  useAnimation,
+  useDynamicAnimation,
+} from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useAnimation',
 }
+
+export default meta
 
 export const basic = () => {
   const animation = useAnimation({
@@ -185,7 +194,11 @@ export const withDynamic = () => {
   return (
     <>
       <Button
-        onClick={() => setAnimation((key) => (key === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+        onClick={() =>
+          setAnimation((key) =>
+            key === 'moveRight' ? 'moveLeft' : 'moveRight',
+          )
+        }
       >
         Please Click
       </Button>
@@ -262,7 +275,11 @@ export const withDynamicAndMulti = () => {
   return (
     <>
       <Button
-        onClick={() => setAnimation((key) => (key === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+        onClick={() =>
+          setAnimation((key) =>
+            key === 'moveRight' ? 'moveLeft' : 'moveRight',
+          )
+        }
       >
         Please Click
       </Button>

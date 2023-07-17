@@ -115,7 +115,10 @@ export const Switch = forwardRef<SwitchProps, 'input'>((props, ref) => {
         'onFocus',
       ])}
     >
-      <ui.input className='ui-switch-input' {...getInputProps(inputProps, ref)} />
+      <ui.input
+        className='ui-switch-input'
+        {...getInputProps(inputProps, ref)}
+      />
 
       {cloneIcon ?? (
         <ui.span

@@ -42,5 +42,11 @@ export const getScript = ({
 export const ColorModeScript = ({ nonce, ...rest }: ColorModeScriptProps) => {
   const html = getScript(rest)
 
-  return <script id='ui-script' nonce={nonce} dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <script
+      id='ui-script'
+      nonce={nonce}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
 }

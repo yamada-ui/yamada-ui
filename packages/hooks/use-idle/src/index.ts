@@ -13,7 +13,10 @@ const DEFAULT_OPTIONS = {
   initialState: true,
 }
 
-export type IdleOptions = Partial<{ events: (keyof DocumentEventMap)[]; initialState: boolean }>
+export type IdleOptions = Partial<{
+  events: (keyof DocumentEventMap)[]
+  initialState: boolean
+}>
 
 export const useIdle = (timeout: number, options?: IdleOptions) => {
   const { events, initialState } = { ...DEFAULT_OPTIONS, ...options }
@@ -34,7 +37,9 @@ export const useIdle = (timeout: number, options?: IdleOptions) => {
     events.forEach((event) => document.addEventListener(event, handleEvent))
 
     return () => {
-      events.forEach((event) => document.removeEventListener(event, handleEvent))
+      events.forEach((event) =>
+        document.removeEventListener(event, handleEvent),
+      )
     }
   }, [events, timeout])
 

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   NativeTable,
   Thead,
@@ -16,12 +16,16 @@ import {
 } from '@yamada-ui/react'
 import { FC, useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof NativeTable>
+
+const meta: Meta<typeof NativeTable> = {
   title: 'Components / Data Display / NativeTable',
   component: NativeTable,
-} as ComponentMeta<typeof NativeTable>
+}
 
-export const basic: ComponentStory<typeof NativeTable> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <TableContainer>
       <NativeTable>
@@ -73,7 +77,7 @@ export const basic: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof NativeTable> = () => {
+export const withSize: Story = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -136,7 +140,7 @@ export const withSize: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof NativeTable> = () => {
+export const withVariant: Story = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -197,7 +201,7 @@ export const withVariant: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof NativeTable> = () => {
+export const withColorScheme: Story = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -285,7 +289,7 @@ export const withColorScheme: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withColumnBorders: ComponentStory<typeof NativeTable> = () => {
+export const withColumnBorders: Story = () => {
   return (
     <TableContainer>
       <NativeTable withColumnBorders>
@@ -337,7 +341,7 @@ export const withColumnBorders: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withBorder: ComponentStory<typeof NativeTable> = () => {
+export const withBorder: Story = () => {
   return (
     <TableContainer>
       <NativeTable withBorder>
@@ -389,7 +393,7 @@ export const withBorder: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withHighlightOnHover: ComponentStory<typeof NativeTable> = () => {
+export const withHighlightOnHover: Story = () => {
   return (
     <TableContainer>
       <NativeTable highlightOnHover>
@@ -441,12 +445,14 @@ export const withHighlightOnHover: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withCaption: ComponentStory<typeof NativeTable> = () => {
+export const withCaption: Story = () => {
   return (
     <>
       <TableContainer>
         <NativeTable>
-          <TableCaption placement='top'>©バードスタジオ/集英社・東映アニメーション</TableCaption>
+          <TableCaption placement='top'>
+            ©バードスタジオ/集英社・東映アニメーション
+          </TableCaption>
 
           <Thead>
             <Tr>
@@ -548,12 +554,16 @@ export const withCaption: ComponentStory<typeof NativeTable> = () => {
   )
 }
 
-export const withStickyHeader: ComponentStory<typeof NativeTable> = () => {
+export const withStickyHeader: Story = () => {
   const [isScrolled, setIsScrolled] = useState(false)
 
   return (
     <TableContainer w='full'>
-      <ScrollArea w='full' h='xs' onScrollPositionChange={({ y }) => setIsScrolled(y !== 0)}>
+      <ScrollArea
+        w='full'
+        h='xs'
+        onScrollPositionChange={({ y }) => setIsScrolled(y !== 0)}
+      >
         <NativeTable>
           <Thead
             position='sticky'

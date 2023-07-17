@@ -1,4 +1,9 @@
-import { clampNumber, countDecimal, toPrecision, useCallbackRef } from '@yamada-ui/utils'
+import {
+  clampNumber,
+  countDecimal,
+  toPrecision,
+  useCallbackRef,
+} from '@yamada-ui/utils'
 import { useCallback, useState } from 'react'
 
 export interface UseCounterProps {
@@ -180,7 +185,11 @@ const parse = (value: string | number): number =>
 const getCountDecimal = (value: number, step: number): number =>
   Math.max(countDecimal(step), countDecimal(value))
 
-const casting = (value: string | number, step: number, precision?: number): string | undefined => {
+const casting = (
+  value: string | number,
+  step: number,
+  precision?: number,
+): string | undefined => {
   value = parse(value)
 
   return !Number.isNaN(value)

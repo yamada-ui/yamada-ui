@@ -1,4 +1,10 @@
-export type OS = 'undetermined' | 'macos' | 'ios' | 'windows' | 'android' | 'linux'
+export type OS =
+  | 'undetermined'
+  | 'macos'
+  | 'ios'
+  | 'windows'
+  | 'android'
+  | 'linux'
 
 const getOS = (): OS => {
   const { userAgent } = window.navigator

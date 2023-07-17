@@ -15,6 +15,13 @@ export type MotionProps = Omit<
 
 export const Motion = forwardRef<MotionProps, 'div', false>(
   ({ as = 'div', className, ...rest }, ref) => {
-    return <ui.div as={motion[as]} ref={ref} className={cx('ui-motion', className)} {...rest} />
+    return (
+      <ui.div
+        as={motion[as]}
+        ref={ref}
+        className={cx('ui-motion', className)}
+        {...rest}
+      />
+    )
   },
 )

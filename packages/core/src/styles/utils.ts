@@ -1,11 +1,22 @@
-import { keyframes as emotionKeyframes, Keyframes, CSSObject } from '@emotion/react'
+import {
+  keyframes as emotionKeyframes,
+  Keyframes,
+  CSSObject,
+} from '@emotion/react'
 import { isArray, isObject, isString, Dict } from '@yamada-ui/utils'
 import { ColorMode } from '../css'
 import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
 import { Transform } from './config'
 
-export const defaultColorSchemes = ['brand', 'primary', 'secondary', 'warning', 'danger', 'link']
+export const defaultColorSchemes = [
+  'brand',
+  'primary',
+  'secondary',
+  'warning',
+  'danger',
+  'link',
+]
 
 const directions: Record<string, string> = {
   'to-t': 'to top',
@@ -40,15 +51,16 @@ export const analyzeCSSValue = (value: any) => {
   return { isUnitless: !unit, value, unit }
 }
 
-export const tokenToCSSVar = (token: ThemeToken, value: any) => (theme: StyledTheme<Dict>) => {
-  token = `${token}.${value}` as ThemeToken
+export const tokenToCSSVar =
+  (token: ThemeToken, value: any) => (theme: StyledTheme<Dict>) => {
+    token = `${token}.${value}` as ThemeToken
 
-  if (isObject(theme.__cssMap) && token in theme.__cssMap) {
-    return theme.__cssMap[token].ref
-  } else {
-    return value
+    if (isObject(theme.__cssMap) && token in theme.__cssMap) {
+      return theme.__cssMap[token].ref
+    } else {
+      return value
+    }
   }
-}
 
 export const createGradient: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
@@ -70,7 +82,8 @@ export const createGradient: Transform = (value, theme) => {
 
   if (!colors.length) return value
 
-  const direction = maybeDirection in directions ? directions[maybeDirection] : maybeDirection
+  const direction =
+    maybeDirection in directions ? directions[maybeDirection] : maybeDirection
 
   colors.unshift(direction)
 
@@ -79,7 +92,8 @@ export const createGradient: Transform = (value, theme) => {
 
     const i = _color.indexOf(' ')
 
-    let [color, _ratio] = i !== -1 ? [_color.slice(0, i), _color.slice(i + 1)] : [_color]
+    let [color, _ratio] =
+      i !== -1 ? [_color.slice(0, i), _color.slice(i + 1)] : [_color]
 
     const ratio = isCSSFunction(_ratio) ? _ratio : _ratio && _ratio.split(' ')
 
@@ -104,6 +118,9 @@ export const mode =
 export const isDefaultColor =
   (defaultColor: any, otherColor: any) =>
   (colorScheme: string | undefined): any =>
-    colorScheme && defaultColorSchemes.includes(colorScheme) ? defaultColor : otherColor
+    colorScheme && defaultColorSchemes.includes(colorScheme)
+      ? defaultColor
+      : otherColor
 
-export const keyframes = (...arg: CSSObject[]): Keyframes => emotionKeyframes(...arg)
+export const keyframes = (...arg: CSSObject[]): Keyframes =>
+  emotionKeyframes(...arg)

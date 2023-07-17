@@ -1,5 +1,9 @@
-import { faArrowLeft, faArrowRight, faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import {
+  faArrowLeft,
+  faArrowRight,
+  faPoo,
+} from '@fortawesome/free-solid-svg-icons'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Carousel,
   CarouselSlide,
@@ -22,12 +26,16 @@ import {
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Carousel>
+
+const meta: Meta<typeof Carousel> = {
   title: 'Components / Data Display / Carousel',
   component: Carousel,
-} as ComponentMeta<typeof Carousel>
+}
 
-export const basic: ComponentStory<typeof Carousel> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Carousel>
       <CarouselSlide as={Center} bg='primary'>
@@ -46,7 +54,7 @@ export const basic: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Carousel> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Carousel size='sm'>
@@ -112,7 +120,7 @@ export const withSize: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withOrientation: ComponentStory<typeof Carousel> = () => {
+export const withOrientation: Story = () => {
   return (
     <>
       <Carousel orientation='horizontal'>
@@ -148,7 +156,7 @@ export const withOrientation: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withDefaultIndex: ComponentStory<typeof Carousel> = () => {
+export const withDefaultIndex: Story = () => {
   return (
     <Carousel defaultIndex={1}>
       <CarouselSlide as={Center} bg='primary'>
@@ -167,7 +175,7 @@ export const withDefaultIndex: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withGap: ComponentStory<typeof Carousel> = () => {
+export const withGap: Story = () => {
   return (
     <Carousel gap={0}>
       <CarouselSlide as={Center} bg='primary'>
@@ -186,7 +194,7 @@ export const withGap: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withSpeed: ComponentStory<typeof Carousel> = () => {
+export const withSpeed: Story = () => {
   return (
     <Carousel speed={50}>
       <CarouselSlide as={Center} bg='primary'>
@@ -205,7 +213,7 @@ export const withSpeed: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withSlideSize: ComponentStory<typeof Carousel> = () => {
+export const withSlideSize: Story = () => {
   return (
     <Carousel slideSize='50%'>
       <CarouselSlide as={Center} bg='primary'>
@@ -224,7 +232,7 @@ export const withSlideSize: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withAlign: ComponentStory<typeof Carousel> = () => {
+export const withAlign: Story = () => {
   return (
     <>
       <Carousel slideSize='50%' align='center'>
@@ -275,7 +283,7 @@ export const withAlign: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withSlidesToScroll: ComponentStory<typeof Carousel> = () => {
+export const withSlidesToScroll: Story = () => {
   return (
     <Carousel slideSize='33.3%' slidesToScroll={3} loop={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -309,7 +317,7 @@ export const withSlidesToScroll: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withCard: ComponentStory<typeof Carousel> = () => {
+export const withCard: Story = () => {
   return (
     <Carousel
       slideSize='50%'
@@ -413,7 +421,7 @@ export const withCard: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withAutoplay: ComponentStory<typeof Carousel> = () => {
+export const withAutoplay: Story = () => {
   return (
     <Carousel autoplay loop={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -432,7 +440,7 @@ export const withAutoplay: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withDelay: ComponentStory<typeof Carousel> = () => {
+export const withDelay: Story = () => {
   return (
     <Carousel autoplay delay={1000}>
       <CarouselSlide as={Center} bg='primary'>
@@ -451,7 +459,7 @@ export const withDelay: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withDragFree: ComponentStory<typeof Carousel> = () => {
+export const withDragFree: Story = () => {
   return (
     <Carousel dragFree>
       <CarouselSlide as={Center} bg='primary'>
@@ -470,7 +478,7 @@ export const withDragFree: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const withScrollProgress: ComponentStory<typeof Carousel> = () => {
+export const withScrollProgress: Story = () => {
   const [value, onScrollProgress] = useState<number>(0)
 
   return (
@@ -495,7 +503,7 @@ export const withScrollProgress: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const disabledIncludeGapInSize: ComponentStory<typeof Carousel> = () => {
+export const disabledIncludeGapInSize: Story = () => {
   return (
     <Carousel slideSize='50%' includeGapInSize={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -514,7 +522,7 @@ export const disabledIncludeGapInSize: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const disabledLoop: ComponentStory<typeof Carousel> = () => {
+export const disabledLoop: Story = () => {
   return (
     <Carousel loop={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -533,7 +541,7 @@ export const disabledLoop: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const disabledDraggable: ComponentStory<typeof Carousel> = () => {
+export const disabledDraggable: Story = () => {
   return (
     <Carousel draggable={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -552,7 +560,7 @@ export const disabledDraggable: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const disabledStopMouseEnterAutoplay: ComponentStory<typeof Carousel> = () => {
+export const disabledStopMouseEnterAutoplay: Story = () => {
   return (
     <Carousel autoplay stopMouseEnterAutoplay={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -571,7 +579,7 @@ export const disabledStopMouseEnterAutoplay: ComponentStory<typeof Carousel> = (
   )
 }
 
-export const disabledControlButton: ComponentStory<typeof Carousel> = () => {
+export const disabledControlButton: Story = () => {
   return (
     <Carousel withControls={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -590,7 +598,7 @@ export const disabledControlButton: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const disabledIndicators: ComponentStory<typeof Carousel> = () => {
+export const disabledIndicators: Story = () => {
   return (
     <Carousel withIndicators={false}>
       <CarouselSlide as={Center} bg='primary'>
@@ -609,7 +617,7 @@ export const disabledIndicators: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Carousel> = () => {
+export const customControl: Story = () => {
   const [index, onChange] = useState<number>(0)
 
   return (
@@ -630,7 +638,7 @@ export const customControl: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const customControlButton: ComponentStory<typeof Carousel> = () => {
+export const customControlButton: Story = () => {
   return (
     <>
       <Carousel controlProps={{ icon: <Icon icon={faPoo} /> }}>
@@ -699,7 +707,7 @@ export const customControlButton: ComponentStory<typeof Carousel> = () => {
   )
 }
 
-export const customIndicators: ComponentStory<typeof Carousel> = () => {
+export const customIndicators: Story = () => {
   return (
     <>
       <Carousel

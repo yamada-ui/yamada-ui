@@ -1,4 +1,10 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps, CSSUIObject } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  HTMLUIProps,
+  CSSUIProps,
+  CSSUIObject,
+} from '@yamada-ui/core'
 
 type FlexOptions = {
   /**

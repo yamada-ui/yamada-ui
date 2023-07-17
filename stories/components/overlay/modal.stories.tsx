@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Button,
   useDisclosure,
@@ -17,12 +17,16 @@ import {
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Modal>
+
+const meta: Meta<typeof Modal> = {
   title: 'Components / Overlay / Modal',
   component: Modal,
-} as ComponentMeta<typeof Modal>
+}
 
-export const basic: ComponentStory<typeof Modal> = () => {
+export default meta
+
+export const basic: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -48,7 +52,7 @@ export const basic: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Modal> = () => {
+export const withDuration: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -74,7 +78,7 @@ export const withDuration: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Modal> = () => {
+export const withSize: Story = () => {
   const [size, setSize] = useState<ModalProps['size']>('md')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -146,7 +150,7 @@ export const withSize: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof Modal> = () => {
+export const withPlacement: Story = () => {
   const [placement, setPlacement] = useState<ModalProps['placement']>('center')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -254,7 +258,7 @@ export const withPlacement: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const withAnimation: ComponentStory<typeof Modal> = () => {
+export const withAnimation: Story = () => {
   const [animation, setAnimation] = useState<ModalProps['animation']>('scale')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -326,7 +330,7 @@ export const withAnimation: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const nestedModal: ComponentStory<typeof Modal> = () => {
+export const nestedModal: Story = () => {
   const firstControls = useDisclosure()
   const secondControls = useDisclosure()
 
@@ -351,7 +355,11 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
           </Button>
         </ModalFooter>
 
-        <Modal isOpen={secondControls.isOpen} onClose={secondControls.onClose} size='sm'>
+        <Modal
+          isOpen={secondControls.isOpen}
+          onClose={secondControls.onClose}
+          size='sm'
+        >
           <ModalHeader>あらすじ</ModalHeader>
 
           <ModalBody>
@@ -370,7 +378,7 @@ export const nestedModal: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
+export const disabledCloseButton: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -396,7 +404,7 @@ export const disabledCloseButton: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const customCloseButton: ComponentStory<typeof Modal> = () => {
+export const customCloseButton: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -424,7 +432,7 @@ export const customCloseButton: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const disabledOverlay: ComponentStory<typeof Modal> = () => {
+export const disabledOverlay: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -450,7 +458,7 @@ export const disabledOverlay: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const customOverlay: ComponentStory<typeof Modal> = () => {
+export const customOverlay: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -478,8 +486,9 @@ export const customOverlay: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const scrollBehavior: ComponentStory<typeof Modal> = () => {
-  const [scrollBehavior, setScrollBehavior] = useState<ModalProps['scrollBehavior']>('inside')
+export const scrollBehavior: Story = () => {
+  const [scrollBehavior, setScrollBehavior] =
+    useState<ModalProps['scrollBehavior']>('inside')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -547,7 +556,7 @@ export const scrollBehavior: ComponentStory<typeof Modal> = () => {
   )
 }
 
-export const scrollOnMount: ComponentStory<typeof Modal> = () => {
+export const scrollOnMount: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -564,7 +573,10 @@ export const scrollOnMount: ComponentStory<typeof Modal> = () => {
         borderColor='inherit'
         boxShadow='md'
       >
-        <Image src='https://dragon-ball-official.com/assets/img/intro/intro_2.png' maxW='sm' />
+        <Image
+          src='https://dragon-ball-official.com/assets/img/intro/intro_2.png'
+          maxW='sm'
+        />
 
         <Heading size='xl'>『ドラゴンボール』（DRAGON BALL）</Heading>
 

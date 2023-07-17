@@ -20,7 +20,12 @@ import {
   pickChildren,
 } from '@yamada-ui/utils'
 import { cloneElement, FC } from 'react'
-import { CarouselProvider, useCarousel, useCarouselContext, UseCarouselProps } from './use-carousel'
+import {
+  CarouselProvider,
+  useCarousel,
+  useCarouselContext,
+  UseCarouselProps,
+} from './use-carousel'
 import {
   CarouselControlNext,
   CarouselControlPrev,
@@ -159,7 +164,10 @@ type CarouselOptions = {
 
 export type CarouselProps = ThemeProps<'Carousel'> &
   Omit<HTMLUIProps<'div'>, 'onChange' | 'draggable'> &
-  Pick<UseCarouselProps, 'index' | 'defaultIndex' | 'onChange' | 'onScrollProgress'> &
+  Pick<
+    UseCarouselProps,
+    'index' | 'defaultIndex' | 'onChange' | 'onScrollProgress'
+  > &
   CarouselOptions
 
 export const Carousel = forwardRef<CarouselProps, 'div'>(
@@ -179,7 +187,8 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
     const containScroll = useValue(props.containScroll)
     const includeGapInSize = useValue(props.includeGapInSize)
     const gap = useToken('spaces', useValue(props.gap)) ?? useValue(props.gap)
-    const slideSize = useToken('sizes', useValue(props.slideSize)) ?? useValue(props.slideSize)
+    const slideSize =
+      useToken('sizes', useValue(props.slideSize)) ?? useValue(props.slideSize)
 
     const [styles, mergedProps] = useMultiComponentStyle('Carousel', {
       ...props,
@@ -215,15 +224,25 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
     const computedWithControls = useValue(withControls)
     const computedWithIndicators = useValue(withIndicators)
 
-    const { getContainerProps, getSlidesProps, children, ...rest } = useCarousel({
-      ...computedProps,
-    })
+    const { getContainerProps, getSlidesProps, children, ...rest } =
+      useCarousel({
+        ...computedProps,
+      })
 
     const validChildren = getValidChildren(children)
 
-    const [customCarouselControlPrev] = findChildren(validChildren, CarouselControlPrev)
-    const [customCarouselControlNext] = findChildren(validChildren, CarouselControlNext)
-    const [customCarouselIndicators] = findChildren(validChildren, CarouselIndicators)
+    const [customCarouselControlPrev] = findChildren(
+      validChildren,
+      CarouselControlPrev,
+    )
+    const [customCarouselControlNext] = findChildren(
+      validChildren,
+      CarouselControlNext,
+    )
+    const [customCarouselIndicators] = findChildren(
+      validChildren,
+      CarouselIndicators,
+    )
     const slideChildren = pickChildren(validChildren, CarouselSlide)
     const otherChildren = omitChildren(
       validChildren,
@@ -233,7 +252,9 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
       CarouselSlide,
     )
 
-    const cloneSlideChildren = slideChildren.map((child, index) => cloneElement(child, { index }))
+    const cloneSlideChildren = slideChildren.map((child, index) =>
+      cloneElement(child, { index }),
+    )
 
     h ??= height
     minH ??= minHeight
@@ -242,7 +263,11 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
       <CarouselProvider value={{ styles, ...rest }}>
         <ui.div
           className={cx('ui-carousel', className)}
-          __css={{ position: 'relative', h: 'fit-content', ...styles.container }}
+          __css={{
+            position: 'relative',
+            h: 'fit-content',
+            ...styles.container,
+          }}
           {...getContainerProps({}, ref)}
         >
           {customCarouselControlPrev ??
@@ -254,12 +279,19 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
               <CarouselControlNext {...controlProps} {...controlNextProps} />
             ) : null)}
 
-          <CarouselSlides {...getSlidesProps({ ...filterUndefined({ h, minH }), ...innerProps })}>
+          <CarouselSlides
+            {...getSlidesProps({
+              ...filterUndefined({ h, minH }),
+              ...innerProps,
+            })}
+          >
             {cloneSlideChildren}
           </CarouselSlides>
 
           {customCarouselIndicators ??
-            (computedWithIndicators ? <CarouselIndicators {...indicatorsProps} /> : null)}
+            (computedWithIndicators ? (
+              <CarouselIndicators {...indicatorsProps} />
+            ) : null)}
 
           {otherChildren}
         </ui.div>
@@ -270,15 +302,17 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
 
 type CarouselSlidesProps = HTMLUIProps<'div'>
 
-const CarouselSlides = forwardRef<CarouselSlidesProps, 'div'>(({ ...rest }, ref) => {
-  const css: CSSUIObject = { w: '100%', h: 'fit-content', overflow: 'hidden' }
+const CarouselSlides = forwardRef<CarouselSlidesProps, 'div'>(
+  ({ ...rest }, ref) => {
+    const css: CSSUIObject = { w: '100%', h: 'fit-content', overflow: 'hidden' }
 
-  return (
-    <ui.div ref={ref} className='ui-carousel-sliders' __css={css}>
-      <CarouselSlidesInner {...rest} />
-    </ui.div>
-  )
-})
+    return (
+      <ui.div ref={ref} className='ui-carousel-sliders' __css={css}>
+        <CarouselSlidesInner {...rest} />
+      </ui.div>
+    )
+  },
+)
 
 type CarouselSlidesInnerProps = HTMLUIProps<'div'>
 
@@ -289,7 +323,9 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     display: 'flex',
     flexDirection: orientation === 'vertical' ? 'column' : 'row',
     ...styles.inner,
-    ...(includeGapInSize ? { [orientation === 'vertical' ? 'mb' : 'mr']: `-${gap}` } : {}),
+    ...(includeGapInSize
+      ? { [orientation === 'vertical' ? 'mb' : 'mr']: `-${gap}` }
+      : {}),
   }
 
   return <ui.div className='ui-carousel-sliders-inner' __css={css} {...rest} />

@@ -86,28 +86,39 @@ export const DecimalList = forwardRef<ListProps, 'ol'>(({ ...rest }, ref) => {
 
 export type ListItemProps = HTMLUIProps<'li'>
 
-export const ListItem = forwardRef<ListItemProps, 'li'>(({ className, ...rest }, ref) => {
-  const styles = useList()
+export const ListItem = forwardRef<ListItemProps, 'li'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useList()
 
-  const css = { ...styles.item }
+    const css = { ...styles.item }
 
-  return <ui.li ref={ref} className={cx('ui-list-item', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.li
+        ref={ref}
+        className={cx('ui-list-item', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 export type ListIconProps = IconProps
 
-export const ListIcon = forwardRef<ListIconProps, 'svg'>(({ className, ...rest }, ref) => {
-  const styles = useList()
+export const ListIcon = forwardRef<ListIconProps, 'svg'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useList()
 
-  const css = { ...styles.icon }
+    const css = { ...styles.icon }
 
-  return (
-    <Icon
-      ref={ref}
-      className={cx('ui-list-icon', className)}
-      role='presentation'
-      __css={css}
-      {...rest}
-    />
-  )
-})
+    return (
+      <Icon
+        ref={ref}
+        className={cx('ui-list-icon', className)}
+        role='presentation'
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)

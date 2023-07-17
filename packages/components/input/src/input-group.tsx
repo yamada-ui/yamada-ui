@@ -10,9 +10,20 @@ import {
 } from '@yamada-ui/core'
 import { FileInput } from '@yamada-ui/file-input'
 import { useToken } from '@yamada-ui/use-token'
-import { createContext, cx, filterUndefined, getValidChildren } from '@yamada-ui/utils'
+import {
+  createContext,
+  cx,
+  filterUndefined,
+  getValidChildren,
+} from '@yamada-ui/utils'
 import { cloneElement } from 'react'
-import { Input, InputRightElement, InputLeftElement, InputLeftAddon, InputRightAddon } from './'
+import {
+  Input,
+  InputRightElement,
+  InputLeftElement,
+  InputLeftAddon,
+  InputRightAddon,
+} from './'
 
 export type InputGroupProps = HTMLUIProps<'div'> & ThemeProps<'Input'>
 

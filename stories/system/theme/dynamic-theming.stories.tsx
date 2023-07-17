@@ -41,7 +41,12 @@ export const basic = () => {
     },
   })()
 
-  const theme = { Default: defaultTheme, Pink: pinkTheme, Purple: purpleTheme, Green: greenTheme }
+  const theme = {
+    Default: defaultTheme,
+    Pink: pinkTheme,
+    Purple: purpleTheme,
+    Green: greenTheme,
+  }
   const config = extendConfig({ initialThemeScheme: 'Default' })
 
   const App: FC = () => {
@@ -50,16 +55,25 @@ export const basic = () => {
     return (
       <VStack>
         <HStack>
-          <Button colorScheme='gray' onClick={() => changeThemeScheme('Default')}>
+          <Button
+            colorScheme='gray'
+            onClick={() => changeThemeScheme('Default')}
+          >
             Default Theme
           </Button>
           <Button colorScheme='pink' onClick={() => changeThemeScheme('Pink')}>
             Pink Theme
           </Button>
-          <Button colorScheme='purple' onClick={() => changeThemeScheme('Purple')}>
+          <Button
+            colorScheme='purple'
+            onClick={() => changeThemeScheme('Purple')}
+          >
             Purple Theme
           </Button>
-          <Button colorScheme='green' onClick={() => changeThemeScheme('Green')}>
+          <Button
+            colorScheme='green'
+            onClick={() => changeThemeScheme('Green')}
+          >
             Green Theme
           </Button>
         </HStack>

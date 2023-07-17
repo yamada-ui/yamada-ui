@@ -1,23 +1,45 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Grid, GridItem } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Grid>
+
+const meta: Meta<typeof Grid> = {
   title: 'Components / Layouts / Grid',
   component: Grid,
-} as ComponentMeta<typeof Grid>
+}
 
-export const templateColimns: ComponentStory<typeof Grid> = () => {
+export default meta
+
+export const templateColimns: Story = () => {
   return (
     <Grid w='full' templateColumns='repeat(4, 1fr)' gap='md'>
-      <GridItem p='md' rounded='4' bg='primary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='primary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='secondary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='secondary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='warning' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='warning'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
@@ -28,18 +50,36 @@ export const templateColimns: ComponentStory<typeof Grid> = () => {
   )
 }
 
-export const templateRows: ComponentStory<typeof Grid> = () => {
+export const templateRows: Story = () => {
   return (
     <Grid w='full' templateRows='repeat(4, 1fr)' gap='md'>
-      <GridItem p='md' rounded='4' bg='primary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='primary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='secondary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='secondary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='warning' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='warning'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
@@ -50,18 +90,41 @@ export const templateRows: ComponentStory<typeof Grid> = () => {
   )
 }
 
-export const templateColumnsAndRows: ComponentStory<typeof Grid> = () => {
+export const templateColumnsAndRows: Story = () => {
   return (
-    <Grid w='full' templateColumns='repeat(3, 1fr)' templateRows='repeat(4, 1fr)' gap='md'>
-      <GridItem p='md' rounded='4' bg='primary' color='white' textAlign='center'>
+    <Grid
+      w='full'
+      templateColumns='repeat(3, 1fr)'
+      templateRows='repeat(4, 1fr)'
+      gap='md'
+    >
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='primary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='secondary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='secondary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='warning' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='warning'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
@@ -69,15 +132,33 @@ export const templateColumnsAndRows: ComponentStory<typeof Grid> = () => {
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='primary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='primary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='secondary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='secondary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='warning' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='warning'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
@@ -85,15 +166,33 @@ export const templateColumnsAndRows: ComponentStory<typeof Grid> = () => {
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='primary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='primary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='secondary' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='secondary'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
-      <GridItem p='md' rounded='4' bg='warning' color='white' textAlign='center'>
+      <GridItem
+        p='md'
+        rounded='4'
+        bg='warning'
+        color='white'
+        textAlign='center'
+      >
         GridItem
       </GridItem>
 
@@ -104,7 +203,7 @@ export const templateColumnsAndRows: ComponentStory<typeof Grid> = () => {
   )
 }
 
-export const templateAreas: ComponentStory<typeof Grid> = () => {
+export const templateAreas: Story = () => {
   return (
     <Grid
       w='full'
@@ -214,9 +313,14 @@ export const templateAreas: ComponentStory<typeof Grid> = () => {
   )
 }
 
-export const customStartAndEnd: ComponentStory<typeof Grid> = () => {
+export const customStartAndEnd: Story = () => {
   return (
-    <Grid w='full' templateColumns='repeat(4, 1fr)' templateRows='repeat(3, 1fr)' gap='md'>
+    <Grid
+      w='full'
+      templateColumns='repeat(4, 1fr)'
+      templateRows='repeat(3, 1fr)'
+      gap='md'
+    >
       <GridItem
         colSpan={2}
         p='md'

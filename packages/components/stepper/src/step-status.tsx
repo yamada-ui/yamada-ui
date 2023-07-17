@@ -83,25 +83,27 @@ export const StepNumber = forwardRef<StepNumberProps, 'div'>(
 
 export type StepIconProps = IconProps
 
-export const StepIcon = forwardRef<StepIconProps, 'svg'>(({ className, ...rest }, ref) => {
-  const { styles } = useStepperContext()
-  const { status } = useStepContext()
+export const StepIcon = forwardRef<StepIconProps, 'svg'>(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useStepperContext()
+    const { status } = useStepContext()
 
-  const as = status === 'complete' ? CheckIcon : undefined
+    const as = status === 'complete' ? CheckIcon : undefined
 
-  const css: CSSUIObject = { ...styles.icon }
+    const css: CSSUIObject = { ...styles.icon }
 
-  return (
-    <Icon
-      ref={ref}
-      as={as}
-      className={cx('ui-step-icon', className)}
-      data-status={status}
-      __css={css}
-      {...rest}
-    />
-  )
-})
+    return (
+      <Icon
+        ref={ref}
+        as={as}
+        className={cx('ui-step-icon', className)}
+        data-status={status}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 const CheckIcon = (props: ComponentProps<'svg'>) => {
   return (

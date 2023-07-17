@@ -10,9 +10,22 @@ import {
 import { useControllableState } from '@yamada-ui/use-controllable-state'
 import { createDescendant } from '@yamada-ui/use-descendant'
 import { LazyMode } from '@yamada-ui/use-disclosure'
-import { createContext, cx, findChildren, pickChildren, getValidChildren } from '@yamada-ui/utils'
+import {
+  createContext,
+  cx,
+  findChildren,
+  pickChildren,
+  getValidChildren,
+} from '@yamada-ui/utils'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { TabList, TabListProps, TabPanels, TabPanelsProps, Tab, TabPanel } from './'
+import {
+  TabList,
+  TabListProps,
+  TabPanels,
+  TabPanelsProps,
+  Tab,
+  TabPanel,
+} from './'
 
 const {
   DescendantsContextProvider,
@@ -100,73 +113,85 @@ type TabsOptions = {
   tabPanelsProps?: TabPanelsProps
 }
 
-export type TabsProps = Omit<HTMLUIProps<'div'>, 'onChange'> & ThemeProps<'Tabs'> & TabsOptions
+export type TabsProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
+  ThemeProps<'Tabs'> &
+  TabsOptions
 
-export const Tabs = forwardRef<TabsProps, 'div'>(({ align = 'start', ...props }, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Tabs', { align, ...props })
-  const {
-    className,
-    index,
-    defaultIndex = 0,
-    onChange,
-    isFitted,
-    isManual,
-    isLazy = true,
-    lazyBehavior = 'keepMounted',
-    orientation = 'horizontal',
-    tabListProps,
-    tabPanelsProps,
-    children,
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const Tabs = forwardRef<TabsProps, 'div'>(
+  ({ align = 'start', ...props }, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('Tabs', {
+      align,
+      ...props,
+    })
+    const {
+      className,
+      index,
+      defaultIndex = 0,
+      onChange,
+      isFitted,
+      isManual,
+      isLazy = true,
+      lazyBehavior = 'keepMounted',
+      orientation = 'horizontal',
+      tabListProps,
+      tabPanelsProps,
+      children,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
+    const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
 
-  const [selectedIndex, setSelectedIndex] = useControllableState({
-    value: index,
-    defaultValue: defaultIndex,
-    onChange,
-  })
+    const [selectedIndex, setSelectedIndex] = useControllableState({
+      value: index,
+      defaultValue: defaultIndex,
+      onChange,
+    })
 
-  const descendants = useDescendants()
+    const descendants = useDescendants()
 
-  const validChildren = getValidChildren(children)
+    const validChildren = getValidChildren(children)
 
-  const [customTabList] = findChildren(validChildren, TabList)
-  const [customTabPanels] = findChildren(validChildren, TabPanels)
-  const cloneTabs = pickChildren(validChildren, Tab)
-  const cloneTabPanels = pickChildren(validChildren, TabPanel)
+    const [customTabList] = findChildren(validChildren, TabList)
+    const [customTabPanels] = findChildren(validChildren, TabPanels)
+    const cloneTabs = pickChildren(validChildren, Tab)
+    const cloneTabPanels = pickChildren(validChildren, TabPanel)
 
-  useEffect(() => {
-    if (index != null) setFocusedIndex(index)
-  }, [index])
+    useEffect(() => {
+      if (index != null) setFocusedIndex(index)
+    }, [index])
 
-  const css: CSSUIObject = { w: '100%', ...styles.container }
+    const css: CSSUIObject = { w: '100%', ...styles.container }
 
-  return (
-    <DescendantsContextProvider value={descendants}>
-      <TabsProvider
-        value={{
-          focusedIndex,
-          setFocusedIndex,
-          selectedIndex,
-          setSelectedIndex,
-          isFitted,
-          align,
-          isManual,
-          isLazy,
-          lazyBehavior,
-          orientation,
-          tabListProps,
-          tabPanelsProps,
-          styles,
-        }}
-      >
-        <ui.div ref={ref} className={cx('ui-tabs', className)} __css={css} {...rest}>
-          {customTabList ?? <TabList>{cloneTabs}</TabList>}
-          {customTabPanels ?? <TabPanels>{cloneTabPanels}</TabPanels>}
-        </ui.div>
-      </TabsProvider>
-    </DescendantsContextProvider>
-  )
-})
+    return (
+      <DescendantsContextProvider value={descendants}>
+        <TabsProvider
+          value={{
+            focusedIndex,
+            setFocusedIndex,
+            selectedIndex,
+            setSelectedIndex,
+            isFitted,
+            align,
+            isManual,
+            isLazy,
+            lazyBehavior,
+            orientation,
+            tabListProps,
+            tabPanelsProps,
+            styles,
+          }}
+        >
+          <ui.div
+            ref={ref}
+            className={cx('ui-tabs', className)}
+            __css={css}
+            {...rest}
+          >
+            {customTabList ?? <TabList>{cloneTabs}</TabList>}
+            {customTabPanels ?? <TabPanels>{cloneTabPanels}</TabPanels>}
+          </ui.div>
+        </TabsProvider>
+      </DescendantsContextProvider>
+    )
+  },
+)

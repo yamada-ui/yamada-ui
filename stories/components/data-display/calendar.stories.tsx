@@ -1,5 +1,5 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Calendar, CalendarProps } from '@yamada-ui/calendar'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
@@ -22,15 +22,20 @@ import {
 import { useRef, useState } from 'react'
 import 'dayjs/locale/ja'
 
-export default {
+type Story = StoryFn<typeof Calendar>
+
+const meta: Meta<typeof Calendar> = {
   title: 'Components / Data Display / Calendar',
+  component: Calendar,
 }
 
-export const basic: ComponentStory<typeof Calendar> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Calendar />
 }
 
-export const withSize: ComponentStory<typeof Calendar> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Calendar size='sm' />
@@ -44,19 +49,31 @@ export const withSize: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withVarint: ComponentStory<typeof Calendar> = () => {
+export const withVarint: Story = () => {
   return (
     <>
-      <Calendar variant='solid' today defaultValue={new Date(new Date().setDate(1))} />
+      <Calendar
+        variant='solid'
+        today
+        defaultValue={new Date(new Date().setDate(1))}
+      />
 
-      <Calendar variant='subtle' today defaultValue={new Date(new Date().setDate(1))} />
+      <Calendar
+        variant='subtle'
+        today
+        defaultValue={new Date(new Date().setDate(1))}
+      />
 
-      <Calendar variant='unstyled' today defaultValue={new Date(new Date().setDate(1))} />
+      <Calendar
+        variant='unstyled'
+        today
+        defaultValue={new Date(new Date().setDate(1))}
+      />
     </>
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Calendar> = () => {
+export const withColorScheme: Story = () => {
   return (
     <>
       <Heading size='xl'>Solid</Heading>
@@ -280,7 +297,7 @@ export const withColorScheme: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withDefaultType: ComponentStory<typeof Calendar> = () => {
+export const withDefaultType: Story = () => {
   return (
     <>
       <Calendar defaultType='date' />
@@ -292,15 +309,15 @@ export const withDefaultType: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof Calendar> = () => {
+export const withDefaultValue: Story = () => {
   return <Calendar defaultValue={new Date()} />
 }
 
-export const withDefaultMonth: ComponentStory<typeof Calendar> = () => {
+export const withDefaultMonth: Story = () => {
   return <Calendar defaultMonth={new Date('1993-08-18')} />
 }
 
-export const withFirstDayOfWeek: ComponentStory<typeof Calendar> = () => {
+export const withFirstDayOfWeek: Story = () => {
   return (
     <>
       <Calendar firstDayOfWeek='monday' />
@@ -310,7 +327,7 @@ export const withFirstDayOfWeek: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withMinMaxDate: ComponentStory<typeof Calendar> = () => {
+export const withMinMaxDate: Story = () => {
   return (
     <Calendar
       minDate={new Date(new Date().setDate(1))}
@@ -319,15 +336,15 @@ export const withMinMaxDate: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withToday: ComponentStory<typeof Calendar> = () => {
+export const withToday: Story = () => {
   return <Calendar today />
 }
 
-export const withWeekendDays: ComponentStory<typeof Calendar> = () => {
+export const withWeekendDays: Story = () => {
   return <Calendar weekendDays={[0, 1]} />
 }
 
-export const withHolidays: ComponentStory<typeof Calendar> = () => {
+export const withHolidays: Story = () => {
   const holidays = [
     new Date('2022-01-01'),
     new Date('2022-01-10'),
@@ -388,17 +405,21 @@ export const withHolidays: ComponentStory<typeof Calendar> = () => {
   return <Calendar holidays={holidays} />
 }
 
-export const withExcludeDate: ComponentStory<typeof Calendar> = () => {
-  return <Calendar excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6} />
+export const withExcludeDate: Story = () => {
+  return (
+    <Calendar
+      excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6}
+    />
+  )
 }
 
-export const withLocale: ComponentStory<typeof Calendar> = () => {
+export const withLocale: Story = () => {
   // import 'dayjs/locale/ja'
 
   return <Calendar locale='ja' />
 }
 
-export const withFormat: ComponentStory<typeof Calendar> = () => {
+export const withFormat: Story = () => {
   return (
     <Wrap gap='md'>
       <Calendar locale='ja' dateFormat='YYYY年 MMMM' />
@@ -414,7 +435,7 @@ export const withFormat: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withAmountOfMonths: ComponentStory<typeof Calendar> = () => {
+export const withAmountOfMonths: Story = () => {
   return (
     <>
       <Calendar amountOfMonths={1} disableOutsideDays />
@@ -426,39 +447,39 @@ export const withAmountOfMonths: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const withPaginateBy: ComponentStory<typeof Calendar> = () => {
+export const withPaginateBy: Story = () => {
   return <Calendar amountOfMonths={3} disableOutsideDays paginateBy={1} />
 }
 
-export const withNaxSelectedValues: ComponentStory<typeof Calendar> = () => {
+export const withNaxSelectedValues: Story = () => {
   return <Calendar defaultValue={[]} maxSelectedValues={3} />
 }
 
-export const disabledOutsideDays: ComponentStory<typeof Calendar> = () => {
+export const disabledOutsideDays: Story = () => {
   return <Calendar disableOutsideDays />
 }
 
-export const disabledHeader: ComponentStory<typeof Calendar> = () => {
+export const disabledHeader: Story = () => {
   return <Calendar withHeader={false} />
 }
 
-export const disabledControls: ComponentStory<typeof Calendar> = () => {
+export const disabledControls: Story = () => {
   return <Calendar withControls={false} />
 }
 
-export const disabledLabel: ComponentStory<typeof Calendar> = () => {
+export const disabledLabel: Story = () => {
   return <Calendar withLabel={false} />
 }
 
-export const disabledWeekdays: ComponentStory<typeof Calendar> = () => {
+export const disabledWeekdays: Story = () => {
   return <Calendar withWeekdays={false} />
 }
 
-export const useMultiValue: ComponentStory<typeof Calendar> = () => {
+export const useMultiValue: Story = () => {
   return <Calendar defaultValue={[]} />
 }
 
-export const useControl: ComponentStory<typeof Calendar> = () => {
+export const useControl: Story = () => {
   const typeRef = useRef<() => void>(null)
   const prevRef = useRef<() => void>(null)
   const nextRef = useRef<() => void>(null)
@@ -475,43 +496,52 @@ export const useControl: ComponentStory<typeof Calendar> = () => {
         <Button onClick={onNext}>Next</Button>
       </Wrap>
 
-      <Calendar withHeader={false} typeRef={typeRef} prevRef={prevRef} nextRef={nextRef} />
+      <Calendar
+        withHeader={false}
+        typeRef={typeRef}
+        prevRef={prevRef}
+        nextRef={nextRef}
+      />
     </>
   )
 }
 
-export const customControlType: ComponentStory<typeof Calendar> = () => {
+export const customControlType: Story = () => {
   const [type, onChangeType] = useState<CalendarProps['type']>('month')
 
   return <Calendar type={type} onChangeType={onChangeType} />
 }
 
-export const customControlMonth: ComponentStory<typeof Calendar> = () => {
+export const customControlMonth: Story = () => {
   const [month, onChangeMonth] = useState<Date>(new Date('1993-08-18'))
 
   return <Calendar month={month} onChangeMonth={onChangeMonth} />
 }
 
-export const customControlValue: ComponentStory<typeof Calendar> = () => {
+export const customControlValue: Story = () => {
   const [value, onChange] = useState<Date>(new Date())
 
   return <Calendar value={value} onChange={onChange} />
 }
 
-export const constomLabelButton: ComponentStory<typeof Calendar> = () => {
+export const constomLabelButton: Story = () => {
   return (
     <>
       <Calendar labelProps={{ color: 'gray.500' }} />
 
-      <Calendar labelProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
+      <Calendar
+        labelProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }}
+      />
     </>
   )
 }
 
-export const constomControlButton: ComponentStory<typeof Calendar> = () => {
+export const constomControlButton: Story = () => {
   return (
     <>
-      <Calendar controlProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
+      <Calendar
+        controlProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }}
+      />
 
       <Calendar prevProps={{ icon: <Icon icon={faPoo} fontSize='0.75em' /> }} />
 
@@ -520,7 +550,7 @@ export const constomControlButton: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const constomYearButton: ComponentStory<typeof Calendar> = () => {
+export const constomYearButton: Story = () => {
   return (
     <>
       <Calendar defaultType='year' yearProps={{ color: 'gray.500' }} />
@@ -541,7 +571,7 @@ export const constomYearButton: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const constomMonthButton: ComponentStory<typeof Calendar> = () => {
+export const constomMonthButton: Story = () => {
   return (
     <>
       <Calendar defaultType='month' monthProps={{ color: 'gray.500' }} />
@@ -562,7 +592,7 @@ export const constomMonthButton: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const constomWeekday: ComponentStory<typeof Calendar> = () => {
+export const constomWeekday: Story = () => {
   return (
     <>
       <Calendar locale='ja' weekdayProps={{ color: 'orange.500' }} />
@@ -583,7 +613,7 @@ export const constomWeekday: ComponentStory<typeof Calendar> = () => {
   )
 }
 
-export const constomDayButton: ComponentStory<typeof Calendar> = () => {
+export const constomDayButton: Story = () => {
   return (
     <>
       <Wrap gap='md'>
@@ -606,7 +636,10 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
         <Calendar
           dayProps={{
             component: ({ col, row, date }) => (
-              <Text as='span' color={col === 3 || row === 3 ? 'blue.500' : undefined}>
+              <Text
+                as='span'
+                color={col === 3 || row === 3 ? 'blue.500' : undefined}
+              >
                 {date.getDate()}
               </Text>
             ),
@@ -647,7 +680,12 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
                     </PopoverHeader>
                     <PopoverBody>
                       <VStack minW='sm' gap='sm'>
-                        <Card variant='solid' colorScheme='secondary' size='sm' fontSize='sm'>
+                        <Card
+                          variant='solid'
+                          colorScheme='secondary'
+                          size='sm'
+                          fontSize='sm'
+                        >
                           <CardBody>山田の誕生日</CardBody>
                         </Card>
                       </VStack>
@@ -695,7 +733,12 @@ export const constomDayButton: ComponentStory<typeof Calendar> = () => {
               </Center>
 
               <VStack gap='sm'>
-                <Card variant='solid' colorScheme='secondary' size='sm' fontSize='sm'>
+                <Card
+                  variant='solid'
+                  colorScheme='secondary'
+                  size='sm'
+                  fontSize='sm'
+                >
                   <CardBody>
                     <Text>山田の誕生日</Text>
                   </CardBody>

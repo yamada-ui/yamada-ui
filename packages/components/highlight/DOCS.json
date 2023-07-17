@@ -39,7 +39,11 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "size": { "type": "string", "required": false, "description": "The size of the Mark." },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Mark."
+    },
     "variant": {
       "defaultValue": "subtle",
       "type": "\"solid\" | \"subtle\" | \"outline\"",

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Checkbox,
   CheckboxGroup,
@@ -15,16 +15,20 @@ import {
 import { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof Checkbox>
+
+const meta: Meta<typeof Checkbox> = {
   title: 'Components / Forms / Checkbox',
   component: Checkbox,
-} as ComponentMeta<typeof Checkbox>
+}
 
-export const basic: ComponentStory<typeof Checkbox> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Checkbox>孫悟空</Checkbox>
 }
 
-export const withSize: ComponentStory<typeof Checkbox> = () => {
+export const withSize: Story = () => {
   return (
     <Wrap gap='md'>
       <Checkbox size='sm'>孫悟空</Checkbox>
@@ -34,11 +38,11 @@ export const withSize: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const withDefaultChecked: ComponentStory<typeof Checkbox> = () => {
+export const withDefaultChecked: Story = () => {
   return <Checkbox defaultChecked>孫悟空</Checkbox>
 }
 
-export const withColorScheme: ComponentStory<typeof Checkbox> = () => {
+export const withColorScheme: Story = () => {
   return (
     <Wrap gap='md'>
       <Checkbox colorScheme='primary' defaultChecked>
@@ -104,7 +108,7 @@ export const withColorScheme: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Checkbox> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Checkbox isDisabled>All Notifications</Checkbox>
@@ -120,11 +124,17 @@ export const isDisabled: ComponentStory<typeof Checkbox> = () => {
         <Checkbox value='service'>Service Notifications</Checkbox>
       </CheckboxGroup>
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <Checkbox defaultChecked>All Notifications</Checkbox>
       </FormControl>
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <CheckboxGroup defaultValue={['all']}>
           <Checkbox value='all'>All Notifications</Checkbox>
           <Checkbox value='important'>Important Notifications</Checkbox>
@@ -135,7 +145,7 @@ export const isDisabled: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof Checkbox> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Checkbox isReadOnly>All Notifications</Checkbox>
@@ -151,11 +161,17 @@ export const isReadonly: ComponentStory<typeof Checkbox> = () => {
         <Checkbox value='service'>Service Notifications</Checkbox>
       </CheckboxGroup>
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <Checkbox defaultChecked>All Notifications</Checkbox>
       </FormControl>
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <CheckboxGroup defaultValue={['all']}>
           <Checkbox value='all'>All Notifications</Checkbox>
           <Checkbox value='important'>Important Notifications</Checkbox>
@@ -166,7 +182,7 @@ export const isReadonly: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof Checkbox> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Checkbox isInvalid>All Notifications</Checkbox>
@@ -205,7 +221,7 @@ export const isInvalid: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const indeterminate: ComponentStory<typeof Checkbox> = () => {
+export const indeterminate: Story = () => {
   const [values, setValues] = useState([false, false])
 
   const allChecked = values.every(Boolean)
@@ -222,11 +238,17 @@ export const indeterminate: ComponentStory<typeof Checkbox> = () => {
       </Checkbox>
 
       <VStack pl='md' gap='sm'>
-        <Checkbox isChecked={values[0]} onChange={(e) => setValues([e.target.checked, values[1]])}>
+        <Checkbox
+          isChecked={values[0]}
+          onChange={(e) => setValues([e.target.checked, values[1]])}
+        >
           孫悟空
         </Checkbox>
 
-        <Checkbox isChecked={values[1]} onChange={(e) => setValues([values[0], e.target.checked])}>
+        <Checkbox
+          isChecked={values[1]}
+          onChange={(e) => setValues([values[0], e.target.checked])}
+        >
           孫悟飯
         </Checkbox>
       </VStack>
@@ -234,7 +256,7 @@ export const indeterminate: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const group: ComponentStory<typeof Checkbox> = () => {
+export const group: Story = () => {
   return (
     <>
       <CheckboxGroup defaultValue={['孫悟空', 'ベジータ']}>
@@ -252,7 +274,7 @@ export const group: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Checkbox> = () => {
+export const customControl: Story = () => {
   const [isChecked, { toggle }] = useBoolean(false)
 
   return (
@@ -262,7 +284,7 @@ export const customControl: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const customControlGroup: ComponentStory<typeof Checkbox> = () => {
+export const customControlGroup: Story = () => {
   const [value, setValue] = useState<string[]>(['孫悟空', 'ベジータ'])
 
   return (
@@ -274,7 +296,7 @@ export const customControlGroup: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const customHook: ComponentStory<typeof Checkbox> = () => {
+export const customHook: Story = () => {
   const CustomCheckbox: FC<any> = (props) => {
     const { getInputProps, getIconProps } = useCheckbox(props)
 
@@ -312,7 +334,7 @@ export const customHook: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Checkbox> = () => {
+export const reactHookForm: Story = () => {
   type Data = { checkbox: boolean; checkboxGroup: string[] }
 
   const {
@@ -371,7 +393,7 @@ export const reactHookForm: ComponentStory<typeof Checkbox> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Checkbox> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { checkbox: boolean; checkboxGroup: string[] }
 
   const defaultValues: Data = {

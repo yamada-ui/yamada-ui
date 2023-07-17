@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Box, useBreakpoint, useBreakpointValue } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useBreakpoint',
 }
+
+export default meta
 
 export const basic = () => {
   const breakpoint = useBreakpoint()

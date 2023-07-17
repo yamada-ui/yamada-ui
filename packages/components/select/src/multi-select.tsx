@@ -9,7 +9,14 @@ import {
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
 import { cx, getValidChildren, handlerAll, isArray } from '@yamada-ui/utils'
-import { cloneElement, CSSProperties, FC, MouseEventHandler, ReactElement, useMemo } from 'react'
+import {
+  cloneElement,
+  CSSProperties,
+  FC,
+  MouseEventHandler,
+  ReactElement,
+  useMemo,
+} from 'react'
 import { SelectIcon, SelectClearIcon, SelectIconProps } from './select-icon'
 import { SelectList, SelectListProps } from './select-list'
 import {
@@ -113,7 +120,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
         )
       } else {
         return (
-          <OptionGroup key={i} label={label as string} {...(props as HTMLUIProps<'ul'>)}>
+          <OptionGroup
+            key={i}
+            label={label as string}
+            {...(props as HTMLUIProps<'ul'>)}
+          >
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
                 <Option key={i} value={value} {...props}>
@@ -188,7 +199,9 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
             )}
 
             {!isEmpty ? (
-              <SelectList {...listProps}>{children ?? computedChildren}</SelectList>
+              <SelectList {...listProps}>
+                {children ?? computedChildren}
+              </SelectList>
             ) : null}
           </ui.div>
         </Popover>
@@ -202,13 +215,24 @@ type MultiSelectFieldProps = HTMLUIProps<'div'> &
 
 const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
   (
-    { className, component, separator = ',', isTruncated, noOfLines = 1, h, minH, ...rest },
+    {
+      className,
+      component,
+      separator = ',',
+      isTruncated,
+      noOfLines = 1,
+      h,
+      minH,
+      ...rest
+    },
     ref,
   ) => {
-    const { value, displayValue, onChange, placeholder, styles } = useSelectContext()
+    const { value, displayValue, onChange, placeholder, styles } =
+      useSelectContext()
 
     const cloneChildren = useMemo(() => {
-      if (!displayValue?.length) return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
+      if (!displayValue?.length)
+        return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
 
       if (component) {
         return (
@@ -253,7 +277,16 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
           </ui.span>
         )
       }
-    }, [displayValue, isTruncated, noOfLines, onChange, placeholder, separator, component, value])
+    }, [
+      displayValue,
+      isTruncated,
+      noOfLines,
+      onChange,
+      placeholder,
+      separator,
+      component,
+      value,
+    ])
 
     const css: CSSUIObject = {
       paddingEnd: '2rem',

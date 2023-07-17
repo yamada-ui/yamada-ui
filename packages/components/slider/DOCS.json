@@ -125,10 +125,20 @@
       "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
       "required": false
     },
-    "value": { "type": "number", "required": false, "description": "The value of the slider." },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Slider." }
+    "value": {
+      "type": "number",
+      "required": false,
+      "description": "The value of the slider."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Slider."
+    }
   },
-  "SliderTrack": { "filledTrack": { "type": "SliderFilledTrackProps", "required": false } },
+  "SliderTrack": {
+    "filledTrack": { "type": "SliderFilledTrackProps", "required": false }
+  },
   "SliderFilledTrack": {},
   "SliderThumb": {},
   "SliderMark": { "value": { "type": "number", "required": true } },

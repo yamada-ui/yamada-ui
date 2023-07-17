@@ -10,7 +10,9 @@ import {
 } from '@yamada-ui/motion'
 import { cx } from '@yamada-ui/utils'
 
-export type FadeProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>>
+export type FadeProps = WithTransitionProps<
+  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+>
 
 const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
@@ -36,7 +38,16 @@ export const fadeProps = {
 
 export const Fade = forwardRef<FadeProps, 'div'>(
   (
-    { unmountOnExit, isOpen, transition, transitionEnd, delay, duration, className, ...rest },
+    {
+      unmountOnExit,
+      isOpen,
+      transition,
+      transitionEnd,
+      delay,
+      duration,
+      className,
+      ...rest
+    },
     ref,
   ) => {
     const animate = isOpen || unmountOnExit ? 'enter' : 'exit'

@@ -8,12 +8,20 @@ import {
 
 type AutocompleteOptionGroupOptions = UseAutocompleteOptionGroupProps
 
-export type AutocompleteOptionGroupProps = HTMLUIProps<'ul'> & AutocompleteOptionGroupOptions
+export type AutocompleteOptionGroupProps = HTMLUIProps<'ul'> &
+  AutocompleteOptionGroupOptions
 
-export const AutocompleteOptionGroup = forwardRef<AutocompleteOptionGroupProps, 'ul'>(
-  ({ className, color, h, height, minH, minHeight, children, ...rest }, ref) => {
+export const AutocompleteOptionGroup = forwardRef<
+  AutocompleteOptionGroupProps,
+  'ul'
+>(
+  (
+    { className, color, h, height, minH, minHeight, children, ...rest },
+    ref,
+  ) => {
     const { styles } = useAutocompleteContext()
-    const { label, getContainerProps, getGroupProps } = useAutocompleteOptionGroup(rest)
+    const { label, getContainerProps, getGroupProps } =
+      useAutocompleteOptionGroup(rest)
 
     h = h ?? height
     minH = minH ?? minHeight

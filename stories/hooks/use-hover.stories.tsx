@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Box, useHover } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useHover',
 }
+
+export default meta
 
 export const basic = () => {
   const { hovered, ref } = useHover()

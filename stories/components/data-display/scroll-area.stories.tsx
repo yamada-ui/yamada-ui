@@ -1,13 +1,24 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Button, Heading, ScrollArea, Text, VStack, Wrap } from '@yamada-ui/react'
+import { Meta, StoryFn } from '@storybook/react'
+import {
+  Button,
+  Heading,
+  ScrollArea,
+  Text,
+  VStack,
+  Wrap,
+} from '@yamada-ui/react'
 import { useRef } from 'react'
 
-export default {
+type Story = StoryFn<typeof ScrollArea>
+
+const meta: Meta<typeof ScrollArea> = {
   title: 'Components / Data Display / ScrollArea',
   component: ScrollArea,
-} as ComponentMeta<typeof ScrollArea>
+}
 
-export const basic: ComponentStory<typeof ScrollArea> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <ScrollArea h='xs' innerProps={{ as: VStack, gap: 'md' }}>
       <Heading size='sm'>孫悟空少年編</Heading>
@@ -52,7 +63,7 @@ export const basic: ComponentStory<typeof ScrollArea> = () => {
   )
 }
 
-export const withType: ComponentStory<typeof ScrollArea> = () => {
+export const withType: Story = () => {
   return (
     <>
       <Heading size='md'>Always</Heading>
@@ -230,9 +241,14 @@ export const withType: ComponentStory<typeof ScrollArea> = () => {
   )
 }
 
-export const withScrollHideDelay: ComponentStory<typeof ScrollArea> = () => {
+export const withScrollHideDelay: Story = () => {
   return (
-    <ScrollArea type='scroll' scrollHideDelay={4000} h='xs' innerProps={{ as: VStack, gap: 'md' }}>
+    <ScrollArea
+      type='scroll'
+      scrollHideDelay={4000}
+      h='xs'
+      innerProps={{ as: VStack, gap: 'md' }}
+    >
       <Heading size='sm'>孫悟空少年編</Heading>
 
       <Text>
@@ -275,13 +291,17 @@ export const withScrollHideDelay: ComponentStory<typeof ScrollArea> = () => {
   )
 }
 
-export const useScrollTo: ComponentStory<typeof ScrollArea> = () => {
+export const useScrollTo: Story = () => {
   const ref = useRef<HTMLDivElement>(null)
 
-  const scrollToTop = () => ref.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  const scrollToTop = () =>
+    ref.current?.scrollTo({ top: 0, behavior: 'smooth' })
 
   const scrollToCenter = () =>
-    ref.current?.scrollTo({ top: ref.current.scrollHeight / 2, behavior: 'smooth' })
+    ref.current?.scrollTo({
+      top: ref.current.scrollHeight / 2,
+      behavior: 'smooth',
+    })
 
   const scrollToBottom = () =>
     ref.current?.scrollTo({ top: ref.current.scrollHeight, behavior: 'smooth' })

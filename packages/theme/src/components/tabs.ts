@@ -34,13 +34,20 @@ export const Tabs: ComponentMultiStyle = {
   },
 
   variants: {
-    line: ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
+    line: ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+      orientation,
+    }) => {
       const isVertical = orientation === 'vertical'
 
       return {
         tabList: {
           borderColor: 'inherit',
-          ...(isVertical ? { borderEndWidth: '1px' } : { borderBottomWidth: '1px' }),
+          ...(isVertical
+            ? { borderEndWidth: '1px' }
+            : { borderBottomWidth: '1px' }),
         },
         tab: {
           borderColor: 'transparent',
@@ -58,18 +65,33 @@ export const Tabs: ComponentMultiStyle = {
             _active: { bg: 'none' },
           },
           ...(isVertical
-            ? { borderEndWidth: '1px', borderEndStyle: 'solid', marginEnd: '-1px' }
-            : { borderBottomWidth: '1px', borderBottomStyle: 'solid', marginBottom: '-1px' }),
+            ? {
+                borderEndWidth: '1px',
+                borderEndStyle: 'solid',
+                marginEnd: '-1px',
+              }
+            : {
+                borderBottomWidth: '1px',
+                borderBottomStyle: 'solid',
+                marginBottom: '-1px',
+              }),
         },
       }
     },
-    sticky: ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
+    sticky: ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+      orientation,
+    }) => {
       const isVertical = orientation === 'vertical'
 
       return {
         tabList: {
           borderColor: 'inherit',
-          ...(isVertical ? { borderEndWidth: '1px' } : { borderBottomWidth: '1px' }),
+          ...(isVertical
+            ? { borderEndWidth: '1px' }
+            : { borderBottomWidth: '1px' }),
         },
         tab: {
           borderColor: 'transparent',
@@ -99,13 +121,20 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    'sticky-subtle': ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
+    'sticky-subtle': ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+      orientation,
+    }) => {
       const isVertical = orientation === 'vertical'
 
       return {
         tabList: {
           borderColor: 'inherit',
-          ...(isVertical ? { borderEndWidth: '1px' } : { borderBottomWidth: '1px' }),
+          ...(isVertical
+            ? { borderEndWidth: '1px' }
+            : { borderBottomWidth: '1px' }),
         },
         tab: {
           borderColor: 'inherit',
@@ -114,7 +143,10 @@ export const Tabs: ComponentMultiStyle = {
           },
           _selected: {
             bg: isDefaultColor(
-              [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m)],
+              [
+                toneColor(c, 100)(t, m),
+                transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m),
+              ],
               [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
             )(c),
             color: isDefaultColor(
@@ -136,13 +168,20 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    'sticky-solid': ({ theme: t, colorMode: m, colorScheme: c = 'primary', orientation }) => {
+    'sticky-solid': ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+      orientation,
+    }) => {
       const isVertical = orientation === 'vertical'
 
       return {
         tabList: {
           borderColor: 'inherit',
-          ...(isVertical ? { borderEndWidth: '1px' } : { borderBottomWidth: '1px' }),
+          ...(isVertical
+            ? { borderEndWidth: '1px' }
+            : { borderBottomWidth: '1px' }),
         },
         tab: {
           borderColor: 'inherit',
@@ -151,7 +190,10 @@ export const Tabs: ComponentMultiStyle = {
           },
           _selected: {
             bg: isDefaultColor(
-              [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+              [
+                toneColor(c, 500)(t, m),
+                transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
+              ],
               [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
             )(c),
             color: [`white`, `whiteAlpha.800`],
@@ -172,8 +214,14 @@ export const Tabs: ComponentMultiStyle = {
     },
     rounded: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
       const color = isDefaultColor(
-        mode(toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.8)(t, m))(m),
-        mode(getColor(`${c}.500`)(t, m), transparentizeColor(`${c}.200`, 0.8)(t, m))(m),
+        mode(
+          toneColor(c, 500)(t, m),
+          transparentizeColor(toneColor(c, 200)(t, m), 0.8)(t, m),
+        )(m),
+        mode(
+          getColor(`${c}.500`)(t, m),
+          transparentizeColor(`${c}.200`, 0.8)(t, m),
+        )(m),
       )(c)
 
       return {
@@ -188,7 +236,11 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    'rounded-subtle': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    'rounded-subtle': ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+    }) => ({
       tabList: { gap: 'sm' },
       tab: {
         borderRadius: 'full',
@@ -196,7 +248,10 @@ export const Tabs: ComponentMultiStyle = {
         color: 'gray.600',
         _selected: {
           bg: isDefaultColor(
-            [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m)],
+            [
+              toneColor(c, 100)(t, m),
+              transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m),
+            ],
             [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
           )(c),
           color: isDefaultColor(
@@ -206,14 +261,21 @@ export const Tabs: ComponentMultiStyle = {
         },
       },
     }),
-    'rounded-solid': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    'rounded-solid': ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = 'primary',
+    }) => ({
       tabList: { gap: 'sm' },
       tab: {
         borderRadius: 'full',
         fontWeight: 'semibold',
         _selected: {
           bg: isDefaultColor(
-            [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+            [
+              toneColor(c, 500)(t, m),
+              transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
+            ],
             [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
           )(c),
           color: [`white`, `whiteAlpha.800`],

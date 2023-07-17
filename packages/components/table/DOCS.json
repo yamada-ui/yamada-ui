@@ -115,7 +115,11 @@
       "required": false,
       "description": "The size of the Table."
     },
-    "sort": { "type": "Sort<Y>", "required": false, "description": "The sort of the table." },
+    "sort": {
+      "type": "Sort<Y>",
+      "required": false,
+      "description": "The sort of the table."
+    },
     "sortIconProps": {
       "type": "IconProps",
       "required": false,
@@ -334,7 +338,11 @@
       "required": false,
       "description": "Props for select element."
     },
-    "sort": { "type": "Sort<Y>", "required": false, "description": "The sort of the table." },
+    "sort": {
+      "type": "Sort<Y>",
+      "required": false,
+      "description": "The sort of the table."
+    },
     "sortIconProps": {
       "type": "IconProps",
       "required": false,

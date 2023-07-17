@@ -1,18 +1,29 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Avatar, Heading, Skeleton, SkeletonCircle, SkeletonText, Text } from '@yamada-ui/react'
+import { Meta, StoryFn } from '@storybook/react'
+import {
+  Avatar,
+  Heading,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Text,
+} from '@yamada-ui/react'
 import { useEffect, useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Skeleton>
+
+const meta: Meta<typeof Skeleton> = {
   title: 'Components / Feedback / Skeleton',
   component: Skeleton,
-} as ComponentMeta<typeof Skeleton>
+}
+
+export default meta
 
 const wait = (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
 
-export const basic: ComponentStory<typeof Skeleton> = () => {
+export const basic: Story = () => {
   return (
     <>
       <Skeleton />
@@ -24,7 +35,7 @@ export const basic: ComponentStory<typeof Skeleton> = () => {
   )
 }
 
-export const withColor: ComponentStory<typeof Skeleton> = () => {
+export const withColor: Story = () => {
   return (
     <>
       <Skeleton startColor='pink.500' endColor='orange.500' />
@@ -36,7 +47,7 @@ export const withColor: ComponentStory<typeof Skeleton> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Skeleton> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Skeleton h={16} />
@@ -48,7 +59,7 @@ export const withSize: ComponentStory<typeof Skeleton> = () => {
   )
 }
 
-export const withSpeed: ComponentStory<typeof Skeleton> = () => {
+export const withSpeed: Story = () => {
   return (
     <>
       <Skeleton speed={2} />
@@ -60,15 +71,15 @@ export const withSpeed: ComponentStory<typeof Skeleton> = () => {
   )
 }
 
-export const withGap: ComponentStory<typeof Skeleton> = () => {
+export const withGap: Story = () => {
   return <SkeletonText gap={8} />
 }
 
-export const withNoOfLines: ComponentStory<typeof Skeleton> = () => {
+export const withNoOfLines: Story = () => {
   return <SkeletonText noOfLines={5} />
 }
 
-export const withIsLoaded: ComponentStory<typeof Skeleton> = () => {
+export const withIsLoaded: Story = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   useEffect(() => {
@@ -88,7 +99,7 @@ export const withIsLoaded: ComponentStory<typeof Skeleton> = () => {
   )
 }
 
-export const withFadeDuration: ComponentStory<typeof Skeleton> = () => {
+export const withFadeDuration: Story = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   useEffect(() => {
@@ -100,7 +111,9 @@ export const withFadeDuration: ComponentStory<typeof Skeleton> = () => {
   return (
     <>
       <Skeleton h={12} isLoaded={isLoaded} fadeDuration={2}>
-        <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
+        <Heading isTruncated>
+          ギャルのパンティーおくれーーーっ！！！！！
+        </Heading>
       </Skeleton>
 
       <SkeletonCircle isLoaded={isLoaded} fadeDuration={2}>

@@ -28,14 +28,20 @@ export const Editable: ComponentMultiStyle = {
         zIndex: 1,
         boxShadow: `0 0 0 1px ${
           isArray(fc)
-            ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+            ? mode(
+                getColor(fc[0], fc[0])(t, m),
+                getColor(fc[1], fc[1])(t, m),
+              )(m)
             : getColor(fc, fc)(t, m)
         }`,
       },
       _invalid: {
         boxShadow: `0 0 0 1px ${
           isArray(ec)
-            ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+            ? mode(
+                getColor(ec[0], ec[0])(t, m),
+                getColor(ec[1], ec[1])(t, m),
+              )(m)
             : getColor(ec, ec)(t, m)
         }`,
       },
@@ -43,7 +49,10 @@ export const Editable: ComponentMultiStyle = {
         zIndex: 1,
         boxShadow: `0 0 0 1px ${
           isArray(fc)
-            ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+            ? mode(
+                getColor(fc[0], fc[0])(t, m),
+                getColor(fc[1], fc[1])(t, m),
+              )(m)
             : getColor(fc, fc)(t, m)
         }`,
       },
@@ -66,14 +75,20 @@ export const Editable: ComponentMultiStyle = {
         zIndex: 1,
         boxShadow: `0 0 0 1px ${
           isArray(fc)
-            ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+            ? mode(
+                getColor(fc[0], fc[0])(t, m),
+                getColor(fc[1], fc[1])(t, m),
+              )(m)
             : getColor(fc, fc)(t, m)
         }`,
       },
       _invalid: {
         boxShadow: `0 0 0 1px ${
           isArray(ec)
-            ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+            ? mode(
+                getColor(ec[0], ec[0])(t, m),
+                getColor(ec[1], ec[1])(t, m),
+              )(m)
             : getColor(ec, ec)(t, m)
         }`,
       },
@@ -81,7 +96,10 @@ export const Editable: ComponentMultiStyle = {
         zIndex: 1,
         boxShadow: `0 0 0 1px ${
           isArray(fc)
-            ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+            ? mode(
+                getColor(fc[0], fc[0])(t, m),
+                getColor(fc[1], fc[1])(t, m),
+              )(m)
             : getColor(fc, fc)(t, m)
         }`,
       },

@@ -46,7 +46,10 @@ export const basic = () => {
 }
 
 export const useMultiObject = () => {
-  const theme = extendTheme({ colors: { black: '#1F2123' } }, { colors: { white: '#F6F6F6' } })()
+  const theme = extendTheme(
+    { colors: { black: '#1F2123' } },
+    { colors: { white: '#F6F6F6' } },
+  )()
 
   return (
     <UIProvider theme={theme}>

@@ -24,7 +24,8 @@ export const render = (
 ): RenderReturn => {
   const user = userEvent.setup()
 
-  if (withProvider) rest.wrapper = (props: any) => <UIProvider {...props} theme={theme} />
+  if (withProvider)
+    rest.wrapper = (props: any) => <UIProvider {...props} theme={theme} />
 
   const result = reactRender(ui, rest)
 

@@ -1,6 +1,16 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject, UIProps } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  HTMLUIProps,
+  CSSUIObject,
+  UIProps,
+} from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
-import { useCarouselContext, useCarouselSlide, UseCarouselSlideProps } from './use-carousel'
+import {
+  useCarouselContext,
+  useCarouselSlide,
+  UseCarouselSlideProps,
+} from './use-carousel'
 
 type CarouselSlideOptions = {
   /**
@@ -9,11 +19,14 @@ type CarouselSlideOptions = {
   size?: UIProps['width']
 }
 
-export type CarouselSlideProps = HTMLUIProps<'div'> & UseCarouselSlideProps & CarouselSlideOptions
+export type CarouselSlideProps = HTMLUIProps<'div'> &
+  UseCarouselSlideProps &
+  CarouselSlideOptions
 
 export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
   ({ className, size, ...rest }, ref) => {
-    const { slideSize, includeGapInSize, orientation, gap } = useCarouselContext()
+    const { slideSize, includeGapInSize, orientation, gap } =
+      useCarouselContext()
 
     const { getSlideProps } = useCarouselSlide(rest)
 
@@ -28,7 +41,11 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
     }
 
     return (
-      <ui.div className={cx('ui-carousel-slide', className)} __css={css} {...getSlideProps({})}>
+      <ui.div
+        className={cx('ui-carousel-slide', className)}
+        __css={css}
+        {...getSlideProps({})}
+      >
         <CarouselSlideInner ref={ref} {...rest} />
       </ui.div>
     )
@@ -37,6 +54,16 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
 
 type CarouselSlideInnerProps = HTMLUIProps<'div'>
 
-const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, 'div'>(({ ...rest }, ref) => {
-  return <ui.div ref={ref} className='ui-carousel-slide-inner' w='100%' h='100%' {...rest} />
-})
+const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, 'div'>(
+  ({ ...rest }, ref) => {
+    return (
+      <ui.div
+        ref={ref}
+        className='ui-carousel-slide-inner'
+        w='100%'
+        h='100%'
+        {...rest}
+      />
+    )
+  },
+)

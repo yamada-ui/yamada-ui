@@ -1,4 +1,10 @@
-import { ui, HTMLUIProps, forwardRef, CSSUIObject, Token } from '@yamada-ui/core'
+import {
+  ui,
+  HTMLUIProps,
+  forwardRef,
+  CSSUIObject,
+  Token,
+} from '@yamada-ui/core'
 import {
   motion,
   HTMLMotionProps,
@@ -12,7 +18,9 @@ import {
 import { useValue } from '@yamada-ui/use-value'
 import { cx } from '@yamada-ui/utils'
 
-export const getSlideProps = (placement: 'top' | 'left' | 'bottom' | 'right' = 'right') => {
+export const getSlideProps = (
+  placement: 'top' | 'left' | 'bottom' | 'right' = 'right',
+) => {
   switch (placement) {
     case 'right':
       return MOTION_TRANSITION_VARIANTS.slideRight
@@ -34,17 +42,33 @@ type SlideOptions = {
   placement?: Token<'top' | 'left' | 'bottom' | 'right'>
 }
 
-export type SlideProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
+export type SlideProps = WithTransitionProps<
+  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+> &
   SlideOptions
 
 const variants: MotionTransitionVariants = {
-  enter: ({ placement, transition, transitionEnd, delay, duration, enter } = {}) => ({
+  enter: ({
+    placement,
+    transition,
+    transitionEnd,
+    delay,
+    duration,
+    enter,
+  } = {}) => ({
     ...getSlideProps(placement).enter,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
     ...enter,
   }),
-  exit: ({ placement, transition, transitionEnd, delay, duration, exit } = {}) => ({
+  exit: ({
+    placement,
+    transition,
+    transitionEnd,
+    delay,
+    duration,
+    exit,
+  } = {}) => ({
     ...getSlideProps(placement).exit,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,

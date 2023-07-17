@@ -1,4 +1,8 @@
-import { ComponentMultiStyle, isDefaultColor, UIMultiStyle } from '@yamada-ui/core'
+import {
+  ComponentMultiStyle,
+  isDefaultColor,
+  UIMultiStyle,
+} from '@yamada-ui/core'
 import { transparentizeColor, toneColor } from '@yamada-ui/utils'
 
 export const Table: ComponentMultiStyle = {
@@ -63,7 +67,9 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
+          ...(withColumnBorders
+            ? { _notLast: { borderRightWidth: '1px' } }
+            : {}),
         },
         td: {
           borderBottomWidth: '1px',
@@ -71,7 +77,9 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
+          ...(withColumnBorders
+            ? { _notLast: { borderRightWidth: '1px' } }
+            : {}),
         },
         caption: {
           color: ['gray.600', 'gray.100'],
@@ -84,7 +92,10 @@ export const Table: ComponentMultiStyle = {
                     bg: isDefaultColor(
                       [
                         transparentizeColor(toneColor(c, 50)(t, m), 0.6)(t, m),
-                        transparentizeColor(toneColor(c, 100)(t, m), 0.24)(t, m),
+                        transparentizeColor(toneColor(c, 100)(t, m), 0.24)(
+                          t,
+                          m,
+                        ),
                       ],
                       isGray
                         ? [`gray.100`, `whiteAlpha.200`]
@@ -105,7 +116,10 @@ export const Table: ComponentMultiStyle = {
                     bg: isDefaultColor(
                       [
                         transparentizeColor(toneColor(c, 100)(t, m), 0.6)(t, m),
-                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(
+                          t,
+                          m,
+                        ),
                       ],
                       isGray
                         ? [`gray.200`, `whiteAlpha.300`]
@@ -149,7 +163,9 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
+          ...(withColumnBorders
+            ? { _notLast: { borderRightWidth: '1px' } }
+            : {}),
         },
         td: {
           borderBottomWidth: '1px',
@@ -157,7 +173,9 @@ export const Table: ComponentMultiStyle = {
           '&[data-is-numeric=true]': {
             textAlign: 'end',
           },
-          ...(withColumnBorders ? { _notLast: { borderRightWidth: '1px' } } : {}),
+          ...(withColumnBorders
+            ? { _notLast: { borderRightWidth: '1px' } }
+            : {}),
         },
         caption: {
           color: ['gray.600', 'gray.100'],
@@ -166,7 +184,10 @@ export const Table: ComponentMultiStyle = {
           tr: {
             _odd: {
               bg: isDefaultColor(
-                [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
+                [
+                  toneColor(c, 50)(t, m),
+                  transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
+                ],
                 isGray
                   ? [`gray.100`, `whiteAlpha.200`]
                   : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
@@ -181,7 +202,10 @@ export const Table: ComponentMultiStyle = {
                     bg: isDefaultColor(
                       [
                         transparentizeColor(toneColor(c, 100)(t, m), 0.6)(t, m),
-                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(
+                          t,
+                          m,
+                        ),
                       ],
                       isGray
                         ? [`gray.200`, `whiteAlpha.300`]

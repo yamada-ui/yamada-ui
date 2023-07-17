@@ -1,5 +1,9 @@
-import { faArrowUpFromBracket, faImage, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import {
+  faArrowUpFromBracket,
+  faImage,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Dropzone,
   DropzoneAccept,
@@ -11,12 +15,16 @@ import { Icon } from '@yamada-ui/fontawesome'
 import { HStack, VStack, Text, FormControl, Button } from '@yamada-ui/react'
 import { useRef } from 'react'
 
-export default {
+type Story = StoryFn<typeof Dropzone>
+
+const meta: Meta<typeof Dropzone> = {
   title: 'Components / Forms / Dropzone',
   component: Dropzone,
-} as ComponentMeta<typeof Dropzone>
+}
 
-export const basic: ComponentStory<typeof Dropzone> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
@@ -24,7 +32,7 @@ export const basic: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Dropzone> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Dropzone size='xs'>
@@ -46,7 +54,7 @@ export const withSize: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Dropzone> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Dropzone variant='dashed'>
@@ -64,7 +72,7 @@ export const withVariant: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const withMultiple: ComponentStory<typeof Dropzone> = () => {
+export const withMultiple: Story = () => {
   return (
     <Dropzone multiple>
       <Text>Drag files here or click to select files</Text>
@@ -72,7 +80,7 @@ export const withMultiple: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const withAccept: ComponentStory<typeof Dropzone> = () => {
+export const withAccept: Story = () => {
   return (
     <>
       <Dropzone accept={IMAGE_ACCEPT_TYPE}>
@@ -86,29 +94,33 @@ export const withAccept: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const withMaxSize: ComponentStory<typeof Dropzone> = () => {
+export const withMaxSize: Story = () => {
   return (
     <Dropzone maxSize={3 * 1024 ** 2}>
       <VStack w='auto' gap='2xs'>
         <Text fontSize='xl'>Drag file here or click to select file</Text>
-        <Text fontSize='sm'>Attach as many files as you like, each file should not exceed 5mb</Text>
+        <Text fontSize='sm'>
+          Attach as many files as you like, each file should not exceed 5mb
+        </Text>
       </VStack>
     </Dropzone>
   )
 }
 
-export const withMaxFiles: ComponentStory<typeof Dropzone> = () => {
+export const withMaxFiles: Story = () => {
   return (
     <Dropzone multiple maxFiles={3}>
       <VStack w='auto' gap='2xs'>
         <Text fontSize='xl'>Drag file here or click to select file</Text>
-        <Text fontSize='sm'>Attach as many files as you like, can upload up to 3 files</Text>
+        <Text fontSize='sm'>
+          Attach as many files as you like, can upload up to 3 files
+        </Text>
       </VStack>
     </Dropzone>
   )
 }
 
-export const withStatus: ComponentStory<typeof Dropzone> = () => {
+export const withStatus: Story = () => {
   return (
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={['blackAlpha.500', 'whiteAlpha.500']}>
@@ -135,13 +147,18 @@ export const withStatus: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const useOnDrop: ComponentStory<typeof Dropzone> = () => {
+export const useOnDrop: Story = () => {
   return (
     <Dropzone
       accept={IMAGE_ACCEPT_TYPE}
       maxSize={3 * 1024 ** 2}
       onDrop={(acceptedFiles, fileRejections) =>
-        console.log('accepted files', acceptedFiles, 'rejected files', fileRejections)
+        console.log(
+          'accepted files',
+          acceptedFiles,
+          'rejected files',
+          fileRejections,
+        )
       }
     >
       <HStack color={['blackAlpha.500', 'whiteAlpha.500']}>
@@ -168,7 +185,7 @@ export const useOnDrop: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const useOnDropAccepted: ComponentStory<typeof Dropzone> = () => {
+export const useOnDropAccepted: Story = () => {
   return (
     <Dropzone
       accept={IMAGE_ACCEPT_TYPE}
@@ -199,7 +216,7 @@ export const useOnDropAccepted: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const useOnDropRejected: ComponentStory<typeof Dropzone> = () => {
+export const useOnDropRejected: Story = () => {
   return (
     <Dropzone
       accept={IMAGE_ACCEPT_TYPE}
@@ -230,7 +247,7 @@ export const useOnDropRejected: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof Dropzone> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <Dropzone focusBorderColor='green.500'>
@@ -244,7 +261,7 @@ export const withBorderColor: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Dropzone> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Dropzone isDisabled variant='dashed'>
@@ -264,7 +281,7 @@ export const isDisabled: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof Dropzone> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Dropzone isReadOnly variant='dashed'>
@@ -284,7 +301,7 @@ export const isReadonly: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof Dropzone> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Dropzone isInvalid variant='dashed'>
@@ -295,7 +312,11 @@ export const isInvalid: ComponentStory<typeof Dropzone> = () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <FormControl label='Upload file' isInvalid errorMessage='File is required.'>
+      <FormControl
+        label='Upload file'
+        isInvalid
+        errorMessage='File is required.'
+      >
         <Dropzone>
           <Text>Drag file here or click to select file</Text>
         </Dropzone>
@@ -304,7 +325,7 @@ export const isInvalid: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const isLoading: ComponentStory<typeof Dropzone> = () => {
+export const isLoading: Story = () => {
   return (
     <>
       <Dropzone isLoading variant='dashed'>
@@ -318,7 +339,7 @@ export const isLoading: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const customLoading: ComponentStory<typeof Dropzone> = () => {
+export const customLoading: Story = () => {
   return (
     <>
       <Dropzone isLoading loadingProps={{ variant: 'grid' }}>
@@ -332,7 +353,7 @@ export const customLoading: ComponentStory<typeof Dropzone> = () => {
   )
 }
 
-export const useOpen: ComponentStory<typeof Dropzone> = () => {
+export const useOpen: Story = () => {
   const openRef = useRef<() => void>(null)
 
   const onOpen = () => openRef.current?.()

@@ -8,7 +8,9 @@ export type UseControllableStateProps<T extends any> = {
   onUpdate?: (prev: T, next: T) => boolean
 }
 
-export const useControllableState = <T extends any>(props: UseControllableStateProps<T>) => {
+export const useControllableState = <T extends any>(
+  props: UseControllableStateProps<T>,
+) => {
   props.onUpdate = props.onUpdate ?? ((prev, next) => prev !== next)
 
   const onChange = useCallbackRef(props.onChange)

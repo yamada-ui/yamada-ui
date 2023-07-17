@@ -1,8 +1,21 @@
-import { useMultiComponentStyle, omitThemeProps, CSSUIObject, ThemeProps } from '@yamada-ui/core'
+import {
+  useMultiComponentStyle,
+  omitThemeProps,
+  CSSUIObject,
+  ThemeProps,
+} from '@yamada-ui/core'
 import { MotionTransitionProperties } from '@yamada-ui/motion'
 import { useAnimationObserver } from '@yamada-ui/use-animation'
-import { useDisclosure, useLazyDisclosure, LazyMode } from '@yamada-ui/use-disclosure'
-import { useFocusOnHide, useFocusOnShow, useFocusOnPointerDown } from '@yamada-ui/use-focus'
+import {
+  useDisclosure,
+  useLazyDisclosure,
+  LazyMode,
+} from '@yamada-ui/use-disclosure'
+import {
+  useFocusOnHide,
+  useFocusOnShow,
+  useFocusOnPointerDown,
+} from '@yamada-ui/use-focus'
 import { usePopper, UsePopperProps } from '@yamada-ui/use-popper'
 import {
   createContext,
@@ -14,7 +27,14 @@ import {
   PropGetter,
   runIfFunc,
 } from '@yamada-ui/utils'
-import { FC, PropsWithChildren, RefObject, useCallback, useEffect, useRef } from 'react'
+import {
+  FC,
+  PropsWithChildren,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react'
 
 type PopoverOptions = {
   /**
@@ -165,7 +185,10 @@ export const Popover: FC<PopoverProps> = (props) => {
   const triggerRef = useRef<HTMLElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
 
-  const { present, onAnimationComplete } = useAnimationObserver({ isOpen, ref: popoverRef })
+  const { present, onAnimationComplete } = useAnimationObserver({
+    isOpen,
+    ref: popoverRef,
+  })
 
   const openTimeout = useRef<number | undefined>(undefined)
   const closeTimeout = useRef<number | undefined>(undefined)
@@ -176,10 +199,11 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   if (isOpen) hasBeenOpened.current = true
 
-  const { referenceRef, getPopperProps, forceUpdate, transformOrigin } = usePopper({
-    ...rest,
-    enabled: isOpen,
-  })
+  const { referenceRef, getPopperProps, forceUpdate, transformOrigin } =
+    usePopper({
+      ...rest,
+      enabled: isOpen,
+    })
 
   useEffect(() => {
     return () => {
@@ -279,7 +303,8 @@ export const Popover: FC<PopoverProps> = (props) => {
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
       }
 
-      if (trigger === 'click') triggerProps.onClick = handlerAll(props.onClick, onToggle)
+      if (trigger === 'click')
+        triggerProps.onClick = handlerAll(props.onClick, onToggle)
 
       if (trigger === 'hover') {
         triggerProps.onFocus = handlerAll(props.onFocus, () => {

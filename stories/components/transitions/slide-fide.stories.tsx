@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Box, Button, SlideFade, useBoolean } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof SlideFade>
+
+const meta: Meta<typeof SlideFade> = {
   title: 'Components / Transitions / SlideFade',
   component: SlideFade,
-} as ComponentMeta<typeof SlideFade>
+}
 
-export const basic: ComponentStory<typeof SlideFade> = () => {
+export default meta
+
+export const basic: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -26,7 +30,7 @@ export const basic: ComponentStory<typeof SlideFade> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof SlideFade> = () => {
+export const withDuration: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -46,7 +50,7 @@ export const withDuration: ComponentStory<typeof SlideFade> = () => {
   )
 }
 
-export const withOffsetX: ComponentStory<typeof SlideFade> = () => {
+export const withOffsetX: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -66,7 +70,7 @@ export const withOffsetX: ComponentStory<typeof SlideFade> = () => {
   )
 }
 
-export const withOffsetY: ComponentStory<typeof SlideFade> = () => {
+export const withOffsetY: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -86,7 +90,7 @@ export const withOffsetY: ComponentStory<typeof SlideFade> = () => {
   )
 }
 
-export const exitUnmount: ComponentStory<typeof SlideFade> = () => {
+export const exitUnmount: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (

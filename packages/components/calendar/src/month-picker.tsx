@@ -11,7 +11,11 @@ import { Popover, PopoverContent } from '@yamada-ui/popover'
 import { cx } from '@yamada-ui/utils'
 import { Calendar } from './calendar'
 import { DatePickerField, DatePickerFieldProps } from './date-picker-field'
-import { DatePickerClearIcon, DatePickerIcon, DatePickerIconProps } from './date-picker-icon'
+import {
+  DatePickerClearIcon,
+  DatePickerIcon,
+  DatePickerIconProps,
+} from './date-picker-icon'
 import { DatePickerProvider } from './use-date-picker'
 import { useMonthPicker, UseMonthPickerProps } from './use-month-picker'
 
@@ -42,7 +46,10 @@ type MonthPickerOptions = {
   clearIconProps?: DatePickerIconProps
 }
 
-export type MonthPickerProps = Omit<HTMLUIProps<'input'>, keyof UseMonthPickerProps> &
+export type MonthPickerProps = Omit<
+  HTMLUIProps<'input'>,
+  keyof UseMonthPickerProps
+> &
   ThemeProps<'DatePicker'> &
   MonthPickerOptions &
   UseMonthPickerProps
@@ -111,8 +118,14 @@ export const MonthPicker = forwardRef<MonthPickerProps, 'div'>((props, ref) => {
             />
           )}
 
-          <PopoverContent className='ui-month-picker-popover' __css={{ ...styles.popover }}>
-            <Calendar className='ui-month-picker-calender' {...getCalendarProps()} />
+          <PopoverContent
+            className='ui-month-picker-popover'
+            __css={{ ...styles.popover }}
+          >
+            <Calendar
+              className='ui-month-picker-calender'
+              {...getCalendarProps()}
+            />
           </PopoverContent>
         </ui.div>
       </Popover>

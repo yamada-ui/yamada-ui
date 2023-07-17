@@ -1,13 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Center, Motion, MotionVariants } from '@yamada-ui/react'
 import { useMemo } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Gestures',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const basic: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -28,7 +32,7 @@ export const basic: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withTransition: ComponentStory<typeof Motion> = () => {
+export const withTransition: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -44,7 +48,7 @@ export const withTransition: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withVariants: ComponentStory<typeof Motion> = () => {
+export const withVariants: Story = () => {
   const variants: MotionVariants = useMemo(
     () => ({
       enlarge: { scale: 1.2 },
@@ -69,7 +73,7 @@ export const withVariants: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useStopPropagation: ComponentStory<typeof Motion> = () => {
+export const useStopPropagation: Story = () => {
   const variants: MotionVariants = useMemo(
     () => ({
       enlarge: { scale: 1.2 },

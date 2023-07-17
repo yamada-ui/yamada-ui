@@ -1,5 +1,5 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Button,
@@ -15,41 +15,53 @@ import {
 import { useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof FileButton>
+
+const meta: Meta<typeof FileButton> = {
   title: 'Components / Forms / FileButton',
   component: FileButton,
-} as ComponentMeta<typeof FileButton>
+}
 
-export const basic: ComponentStory<typeof FileButton> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <>
       <FileButton>Upload</FileButton>
 
       <FileButton as={IconButton} icon={<Icon icon={faPlus} />} />
 
-      <FileButton>{({ onClick }) => <Link onClick={onClick}>Upload</Link>}</FileButton>
+      <FileButton>
+        {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
+      </FileButton>
     </>
   )
 }
 
-export const withMultiple: ComponentStory<typeof FileButton> = () => {
+export const withMultiple: Story = () => {
   return (
     <>
       <FileButton multiple>Upload</FileButton>
 
       <FileButton as={IconButton} icon={<Icon icon={faPlus} />} multiple />
 
-      <FileButton multiple>{({ onClick }) => <Link onClick={onClick}>Upload</Link>}</FileButton>
+      <FileButton multiple>
+        {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
+      </FileButton>
     </>
   )
 }
 
-export const withAccept: ComponentStory<typeof FileButton> = () => {
+export const withAccept: Story = () => {
   return (
     <>
       <FileButton accept='image/png,image/jpeg'>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} accept='image/png,image/jpeg' />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        accept='image/png,image/jpeg'
+      />
 
       <FileButton accept='image/png,image/jpeg'>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
@@ -58,7 +70,7 @@ export const withAccept: ComponentStory<typeof FileButton> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof FileButton> = () => {
+export const withSize: Story = () => {
   return (
     <Wrap gap='md'>
       <FileButton colorScheme='primary' size='xs'>
@@ -80,7 +92,7 @@ export const withSize: ComponentStory<typeof FileButton> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof FileButton> = () => {
+export const withColorScheme: Story = () => {
   return (
     <Wrap gap='md'>
       <FileButton colorScheme='primary'>Primary</FileButton>
@@ -116,7 +128,7 @@ export const withColorScheme: ComponentStory<typeof FileButton> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof FileButton> = () => {
+export const withVariant: Story = () => {
   return (
     <Wrap gap='md'>
       <FileButton colorScheme='primary' variant='solid'>
@@ -140,7 +152,7 @@ export const withVariant: ComponentStory<typeof FileButton> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof FileButton> = () => {
+export const withBorderColor: Story = () => {
   return (
     <FileButton isInvalid errorBorderColor='orange.500'>
       Upload
@@ -148,7 +160,7 @@ export const withBorderColor: ComponentStory<typeof FileButton> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof FileButton> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <FileButton isDisabled>Upload</FileButton>
@@ -168,14 +180,18 @@ export const isDisabled: ComponentStory<typeof FileButton> = () => {
         )}
       </FileButton>
 
-      <FormControl isDisabled label='Upload file' helperMessage='Please select a file to upload.'>
+      <FormControl
+        isDisabled
+        label='Upload file'
+        helperMessage='Please select a file to upload.'
+      >
         <FileButton>Upload</FileButton>
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof FileButton> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <FileButton isReadOnly>Upload</FileButton>
@@ -194,28 +210,36 @@ export const isReadonly: ComponentStory<typeof FileButton> = () => {
         )}
       </FileButton>
 
-      <FormControl isReadOnly label='Upload file' helperMessage='Please select a file to upload.'>
+      <FormControl
+        isReadOnly
+        label='Upload file'
+        helperMessage='Please select a file to upload.'
+      >
         <FileButton>Upload</FileButton>
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof FileButton> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <FileButton isInvalid>Upload</FileButton>
 
       <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isInvalid />
 
-      <FormControl isInvalid label='Upload file' errorMessage='File is required.'>
+      <FormControl
+        isInvalid
+        label='Upload file'
+        errorMessage='File is required.'
+      >
         <FileButton>Upload</FileButton>
       </FormControl>
     </>
   )
 }
 
-export const useReset: ComponentStory<typeof FileButton> = () => {
+export const useReset: Story = () => {
   const [files, onChange] = useState<File[] | null>(null)
   const resetRef = useRef<() => void>(null)
 
@@ -239,7 +263,7 @@ export const useReset: ComponentStory<typeof FileButton> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof FileButton> = () => {
+export const reactHookForm: Story = () => {
   type Data = { fileButton: File[] | null }
 
   const resetRef = useRef<() => void>(null)
@@ -272,7 +296,10 @@ export const reactHookForm: ComponentStory<typeof FileButton> = () => {
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field: { ref, name, onChange, onBlur } }) => (
             <HStack>
-              <FileButton {...{ ref, name, onChange, onBlur }} resetRef={resetRef}>
+              <FileButton
+                {...{ ref, name, onChange, onBlur }}
+                resetRef={resetRef}
+              >
                 Upload
               </FileButton>
 

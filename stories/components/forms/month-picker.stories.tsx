@@ -1,5 +1,5 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { MonthPicker, MonthPickerProps } from '@yamada-ui/calendar'
 import { Icon } from '@yamada-ui/fontawesome'
 import { FormControl, Grid, Heading, VStack, Button } from '@yamada-ui/react'
@@ -7,16 +7,20 @@ import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import 'dayjs/locale/ja'
 
-export default {
+type Story = StoryFn<typeof MonthPicker>
+
+const meta: Meta<typeof MonthPicker> = {
   title: 'Components / Forms / MonthPicker',
   component: MonthPicker,
-} as ComponentMeta<typeof MonthPicker>
+}
 
-export const basic: ComponentStory<typeof MonthPicker> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <MonthPicker placeholder='basic' />
 }
 
-export const withSize: ComponentStory<typeof MonthPicker> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <MonthPicker placeholder='extra small size' size='xs' />
@@ -27,7 +31,7 @@ export const withSize: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withCalendarSize: ComponentStory<typeof MonthPicker> = () => {
+export const withCalendarSize: Story = () => {
   return (
     <>
       <MonthPicker placeholder='small size' calendarSize='sm' />
@@ -37,7 +41,7 @@ export const withCalendarSize: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof MonthPicker> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <MonthPicker variant='outline' placeholder='outline' />
@@ -48,7 +52,7 @@ export const withVariant: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
+export const withColorScheme: Story = () => {
   return (
     <>
       <Heading size='xl'>Solid</Heading>
@@ -78,11 +82,23 @@ export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
           defaultValue={new Date()}
         />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='link' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='link'
+          defaultValue={new Date()}
+        />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='gray' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='gray'
+          defaultValue={new Date()}
+        />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='red' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='red'
+          defaultValue={new Date()}
+        />
 
         <MonthPicker
           calendarVariant='solid'
@@ -102,11 +118,23 @@ export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
           defaultValue={new Date()}
         />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='teal' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='teal'
+          defaultValue={new Date()}
+        />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='blue' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='blue'
+          defaultValue={new Date()}
+        />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='cyan' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='cyan'
+          defaultValue={new Date()}
+        />
 
         <MonthPicker
           calendarVariant='solid'
@@ -114,7 +142,11 @@ export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
           defaultValue={new Date()}
         />
 
-        <MonthPicker calendarVariant='solid' calendarColorScheme='pink' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='pink'
+          defaultValue={new Date()}
+        />
       </Grid>
 
       <Heading size='xl'>Subtle</Heading>
@@ -156,7 +188,11 @@ export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
           defaultValue={new Date()}
         />
 
-        <MonthPicker calendarVariant='subtle' calendarColorScheme='red' defaultValue={new Date()} />
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='red'
+          defaultValue={new Date()}
+        />
 
         <MonthPicker
           calendarVariant='subtle'
@@ -210,11 +246,11 @@ export const withColorScheme: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof MonthPicker> = () => {
+export const withDefaultValue: Story = () => {
   return <MonthPicker defaultValue={new Date()} />
 }
 
-export const withDefaultType: ComponentStory<typeof MonthPicker> = () => {
+export const withDefaultType: Story = () => {
   return (
     <>
       <MonthPicker placeholder='month' defaultType='month' />
@@ -224,23 +260,32 @@ export const withDefaultType: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withDefaultMonth: ComponentStory<typeof MonthPicker> = () => {
-  return <MonthPicker placeholder='YYYY/MM' defaultMonth={new Date('1993-08')} />
+export const withDefaultMonth: Story = () => {
+  return (
+    <MonthPicker placeholder='YYYY/MM' defaultMonth={new Date('1993-08')} />
+  )
 }
 
-export const withBorderColor: ComponentStory<typeof MonthPicker> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <MonthPicker placeholder='default border color' />
 
-      <MonthPicker focusBorderColor='green.500' placeholder='custom border color' />
+      <MonthPicker
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
 
-      <MonthPicker isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <MonthPicker
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const withPattern: ComponentStory<typeof MonthPicker> = () => {
+export const withPattern: Story = () => {
   return (
     <MonthPicker
       placeholder='MMM YYYY'
@@ -251,11 +296,11 @@ export const withPattern: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withInputFormat: ComponentStory<typeof MonthPicker> = () => {
+export const withInputFormat: Story = () => {
   return <MonthPicker placeholder='YYYY-MM' inputFormat='YYYY-MM' />
 }
 
-export const withParseDate: ComponentStory<typeof MonthPicker> = () => {
+export const withParseDate: Story = () => {
   return (
     <MonthPicker
       placeholder='YYYY/MM'
@@ -265,23 +310,23 @@ export const withParseDate: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof MonthPicker> = () => {
+export const withPlacement: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' placement='bottom-end' />
 }
 
-export const withOffset: ComponentStory<typeof MonthPicker> = () => {
+export const withOffset: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' offset={[16, 16]} />
 }
 
-export const withGutter: ComponentStory<typeof MonthPicker> = () => {
+export const withGutter: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' gutter={32} />
 }
 
-export const withDuration: ComponentStory<typeof MonthPicker> = () => {
+export const withDuration: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' duration={0.4} />
 }
 
-export const isDisabled: ComponentStory<typeof MonthPicker> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <MonthPicker isDisabled variant='outline' placeholder='outline' />
@@ -296,7 +341,7 @@ export const isDisabled: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof MonthPicker> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <MonthPicker isReadOnly variant='outline' placeholder='outline' />
@@ -311,7 +356,7 @@ export const isReadonly: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof MonthPicker> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <MonthPicker isInvalid variant='outline' placeholder='outline' />
@@ -319,86 +364,124 @@ export const isInvalid: ComponentStory<typeof MonthPicker> = () => {
       <MonthPicker isInvalid variant='flushed' placeholder='flushed' />
       <MonthPicker isInvalid variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isInvalid label='What is your birthday?' errorMessage='This is required.'>
+      <FormControl
+        isInvalid
+        label='What is your birthday?'
+        errorMessage='This is required.'
+      >
         <MonthPicker placeholder='YYYY/MM' />
       </FormControl>
     </>
   )
 }
 
-export const withMinMaxDate: ComponentStory<typeof MonthPicker> = () => {
+export const withMinMaxDate: Story = () => {
   return (
-    <MonthPicker placeholder='YYYY/MM' minDate={new Date(1993, 8)} maxDate={new Date(2000, 10)} />
+    <MonthPicker
+      placeholder='YYYY/MM'
+      minDate={new Date(1993, 8)}
+      maxDate={new Date(2000, 10)}
+    />
   )
 }
 
-export const withLocale: ComponentStory<typeof MonthPicker> = () => {
+export const withLocale: Story = () => {
   // import 'dayjs/locale/ja'
 
   return <MonthPicker locale='ja' />
 }
 
-export const withFormat: ComponentStory<typeof MonthPicker> = () => {
+export const withFormat: Story = () => {
   return (
     <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
-      <MonthPicker placeholder='YYYY/MM' locale='ja' defaultType='month' yearFormat='YYYY年' />
+      <MonthPicker
+        placeholder='YYYY/MM'
+        locale='ja'
+        defaultType='month'
+        yearFormat='YYYY年'
+      />
 
-      <MonthPicker placeholder='YYYY/MM' locale='ja' defaultType='month' monthFormat='MM' />
+      <MonthPicker
+        placeholder='YYYY/MM'
+        locale='ja'
+        defaultType='month'
+        monthFormat='MM'
+      />
 
-      <MonthPicker placeholder='YYYY/MM' locale='ja' defaultType='year' yearFormat='YY' />
+      <MonthPicker
+        placeholder='YYYY/MM'
+        locale='ja'
+        defaultType='year'
+        yearFormat='YY'
+      />
     </Grid>
   )
 }
 
-export const disabledCloseOnSelect: ComponentStory<typeof MonthPicker> = () => {
+export const disabledCloseOnSelect: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' closeOnSelect={false} />
 }
 
-export const disabledCloseOnBlur: ComponentStory<typeof MonthPicker> = () => {
+export const disabledCloseOnBlur: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' closeOnBlur={false} />
 }
 
-export const disabledIsClearable: ComponentStory<typeof MonthPicker> = () => {
+export const disabledIsClearable: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' isClearable={false} />
 }
 
-export const disabledAllowInput: ComponentStory<typeof MonthPicker> = () => {
+export const disabledAllowInput: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' allowInput={false} />
 }
 
-export const disabledControls: ComponentStory<typeof MonthPicker> = () => {
+export const disabledControls: Story = () => {
   return <MonthPicker placeholder='YYYY/MM' withControls={false} />
 }
 
-export const customIcon: ComponentStory<typeof MonthPicker> = () => {
+export const customIcon: Story = () => {
   return (
     <>
       <MonthPicker placeholder='YYYY/MM' iconProps={{ color: 'primary' }} />
 
-      <MonthPicker placeholder='YYYY/MM' iconProps={{ children: <Icon icon={faPoo} /> }} />
+      <MonthPicker
+        placeholder='YYYY/MM'
+        iconProps={{ children: <Icon icon={faPoo} /> }}
+      />
     </>
   )
 }
 
-export const customControlType: ComponentStory<typeof MonthPicker> = () => {
+export const customControlType: Story = () => {
   const [type, onChangeType] = useState<MonthPickerProps['type']>('month')
 
-  return <MonthPicker placeholder='YYYY/MM' type={type} onChangeType={onChangeType} />
+  return (
+    <MonthPicker
+      placeholder='YYYY/MM'
+      type={type}
+      onChangeType={onChangeType}
+    />
+  )
 }
 
-export const customControlMonth: ComponentStory<typeof MonthPicker> = () => {
+export const customControlMonth: Story = () => {
   const [month, onChangeMonth] = useState<Date>(new Date('1993-08-18'))
 
-  return <MonthPicker placeholder='YYYY/MM' month={month} onChangeMonth={onChangeMonth} />
+  return (
+    <MonthPicker
+      placeholder='YYYY/MM'
+      month={month}
+      onChangeMonth={onChangeMonth}
+    />
+  )
 }
 
-export const customControlValue: ComponentStory<typeof MonthPicker> = () => {
+export const customControlValue: Story = () => {
   const [value, onChange] = useState<Date | null>(new Date())
 
   return <MonthPicker placeholder='YYYY/MM' value={value} onChange={onChange} />
 }
 
-export const reactHookForm: ComponentStory<typeof MonthPicker> = () => {
+export const reactHookForm: Story = () => {
   type Data = { datePicker: Date | null }
 
   const {
@@ -423,7 +506,9 @@ export const reactHookForm: ComponentStory<typeof MonthPicker> = () => {
           name='datePicker'
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
-          render={({ field }) => <MonthPicker placeholder='YYYY/MM' {...field} />}
+          render={({ field }) => (
+            <MonthPicker placeholder='YYYY/MM' {...field} />
+          )}
         />
       </FormControl>
 
@@ -434,7 +519,7 @@ export const reactHookForm: ComponentStory<typeof MonthPicker> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof MonthPicker> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { datePicker: Date | null }
 
   const defaultValues: Data = {
@@ -463,7 +548,9 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof MonthPicker> =
           name='datePicker'
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
-          render={({ field }) => <MonthPicker placeholder='YYYY/MM' {...field} />}
+          render={({ field }) => (
+            <MonthPicker placeholder='YYYY/MM' {...field} />
+          )}
         />
       </FormControl>
 

@@ -13,8 +13,15 @@
       "description": "If `true`, the radio will be initially checked."
     },
     "iconProps": { "type": "HTMLUIProps<\"span\">", "required": false },
-    "id": { "type": "string", "required": false, "description": "id assigned to input." },
-    "inputProps": { "type": "InputHTMLAttributes<HTMLInputElement>", "required": false },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to input."
+    },
+    "inputProps": {
+      "type": "InputHTMLAttributes<HTMLInputElement>",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -67,7 +74,11 @@
       "required": false,
       "description": "The value to be used in the radio button."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Radio." }
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Radio."
+    }
   },
   "UseRadio": {
     "defaultChecked": {
@@ -76,7 +87,11 @@
       "required": false,
       "description": "If `true`, the radio will be initially checked."
     },
-    "id": { "type": "string", "required": false, "description": "id assigned to input." },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to input."
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -194,7 +209,11 @@
       "required": false,
       "description": "The CSS `flex-shrink` property."
     },
-    "value": { "type": "Y", "required": false, "description": "The value of the radio group." },
+    "value": {
+      "type": "Y",
+      "required": false,
+      "description": "The value of the radio group."
+    },
     "wrap": {
       "type": "type ONLY_FOR_FORMAT =\n  | FlexWrap\n  | ResponsiveObject<FlexWrap>\n  | ColorModeArray<FlexWrap>",
       "required": false,
@@ -228,6 +247,10 @@
       "required": false,
       "description": "The callback fired when any children radio is checked or unchecked."
     },
-    "value": { "type": "Y", "required": false, "description": "The value of the radio group." }
+    "value": {
+      "type": "Y",
+      "required": false,
+      "description": "The value of the radio group."
+    }
   }
 }

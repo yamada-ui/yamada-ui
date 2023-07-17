@@ -14,7 +14,9 @@ type GetColorModeUtilsProps = {
   isPreventTransition?: boolean
 }
 
-export const getColorModeUtils = ({ isPreventTransition = true }: GetColorModeUtilsProps) => {
+export const getColorModeUtils = ({
+  isPreventTransition = true,
+}: GetColorModeUtilsProps) => {
   const setDataset = (colorMode: ColorMode) => {
     const cleanup = isPreventTransition ? preventTransition() : undefined
 

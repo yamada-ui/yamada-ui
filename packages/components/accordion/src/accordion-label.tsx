@@ -9,7 +9,9 @@ type AccordionLabelOptions = {
   /**
    * The accordion icon to use.
    */
-  icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  icon?:
+    | ReactNode
+    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
 export type AccordionLabelProps = HTMLUIProps<'button'> & AccordionLabelOptions
@@ -73,7 +75,11 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
   },
 )
 
-const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({ className, children, ...rest }) => {
+const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
+  className,
+  children,
+  ...rest
+}) => {
   const { isOpen, isDisabled } = useAccordionItemContext()
   const { styles } = useAccordionContext()
 
@@ -100,5 +106,11 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({ className, children, 
       </ui.span>
     )
 
-  return <ChevronIcon className={cx('ui-accordion-icon', className)} __css={css} {...rest} />
+  return (
+    <ChevronIcon
+      className={cx('ui-accordion-icon', className)}
+      __css={css}
+      {...rest}
+    />
+  )
 }

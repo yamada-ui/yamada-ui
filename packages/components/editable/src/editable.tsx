@@ -111,7 +111,9 @@ export const useEditable = (props: UseEditableProps) => {
   } = useFormControlProps(props)
   rest.onEdit = useCallbackRef(rest.onEdit)
 
-  const [isEditing, setIsEditing] = useState<boolean>(!!startWithEditView && !disabled)
+  const [isEditing, setIsEditing] = useState<boolean>(
+    !!startWithEditView && !disabled,
+  )
 
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue || '',
@@ -168,7 +170,8 @@ export const useEditable = (props: UseEditableProps) => {
   }, [isEditing])
 
   const onChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setValue(ev.currentTarget.value),
+    (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setValue(ev.currentTarget.value),
     [setValue],
   )
 
@@ -222,7 +225,8 @@ export const useEditable = (props: UseEditableProps) => {
       if (!isEditing) return
 
       const ownerDocument = ev.currentTarget.ownerDocument
-      const relatedTarget = (ev.relatedTarget ?? ownerDocument.activeElement) as HTMLElement
+      const relatedTarget = (ev.relatedTarget ??
+        ownerDocument.activeElement) as HTMLElement
       const targetIsCancel = isContains(cancelRef.current, relatedTarget)
       const targetIsSubmit = isContains(submitRef.current, relatedTarget)
       const isValidBlur = !targetIsCancel && !targetIsSubmit
@@ -330,7 +334,13 @@ export const useEditable = (props: UseEditableProps) => {
   const getEditProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
-      ...omitObject(rest, ['value', 'onChange', 'onCancel', 'onSubmit', 'onEdit']),
+      ...omitObject(rest, [
+        'value',
+        'onChange',
+        'onCancel',
+        'onSubmit',
+        'onEdit',
+      ]),
       ref: mergeRefs(ref, editRef),
       type: 'button',
       disabled,
@@ -343,7 +353,13 @@ export const useEditable = (props: UseEditableProps) => {
   const getSubmitProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
-      ...omitObject(rest, ['value', 'onChange', 'onCancel', 'onSubmit', 'onEdit']),
+      ...omitObject(rest, [
+        'value',
+        'onChange',
+        'onCancel',
+        'onSubmit',
+        'onEdit',
+      ]),
       ref: mergeRefs(submitRef, ref),
       type: 'button',
       disabled,
@@ -356,7 +372,13 @@ export const useEditable = (props: UseEditableProps) => {
   const getCancelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
-      ...omitObject(rest, ['value', 'onChange', 'onCancel', 'onSubmit', 'onEdit']),
+      ...omitObject(rest, [
+        'value',
+        'onChange',
+        'onCancel',
+        'onSubmit',
+        'onEdit',
+      ]),
       ref: mergeRefs(cancelRef, ref),
       type: 'button',
       disabled,
@@ -384,7 +406,8 @@ export const useEditable = (props: UseEditableProps) => {
 export type UseEditableReturn = ReturnType<typeof useEditable>
 
 export const useEditableControl = () => {
-  const { isEditing, getEditProps, getCancelProps, getSubmitProps } = useEditableContext()
+  const { isEditing, getEditProps, getCancelProps, getSubmitProps } =
+    useEditableContext()
 
   return { isEditing, getEditProps, getCancelProps, getSubmitProps }
 }
@@ -418,7 +441,10 @@ type EditableOptions = {
   children?:
     | ReactNode
     | ((
-        props: Pick<UseEditableReturn, 'isEditing' | 'onSubmit' | 'onCancel' | 'onEdit'>,
+        props: Pick<
+          UseEditableReturn,
+          'isEditing' | 'onSubmit' | 'onCancel' | 'onEdit'
+        >,
       ) => ReactNode)
 }
 

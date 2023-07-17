@@ -1,14 +1,18 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import { Wrap, Tag } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Tag>
+
+const meta: Meta<typeof Tag> = {
   title: 'Components / Data Display / Tag',
   component: Tag,
-} as ComponentMeta<typeof Tag>
+}
 
-export const subtle: ComponentStory<typeof Tag> = () => {
+export default meta
+
+export const subtle: Story = () => {
   return (
     <Wrap gap='md'>
       <Tag colorScheme='primary'>Primary</Tag>
@@ -44,7 +48,7 @@ export const subtle: ComponentStory<typeof Tag> = () => {
   )
 }
 
-export const solid: ComponentStory<typeof Tag> = () => {
+export const solid: Story = () => {
   return (
     <Wrap gap='md'>
       <Tag variant='solid' colorScheme='primary'>
@@ -110,7 +114,7 @@ export const solid: ComponentStory<typeof Tag> = () => {
   )
 }
 
-export const outline: ComponentStory<typeof Tag> = () => {
+export const outline: Story = () => {
   return (
     <Wrap gap='md'>
       <Tag variant='outline' colorScheme='primary'>
@@ -176,7 +180,7 @@ export const outline: ComponentStory<typeof Tag> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Tag> = () => {
+export const withSize: Story = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
       <Tag colorScheme='primary' size='sm'>
@@ -194,7 +198,7 @@ export const withSize: ComponentStory<typeof Tag> = () => {
   )
 }
 
-export const withIcon: ComponentStory<typeof Tag> = () => {
+export const withIcon: Story = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
       <Tag colorScheme='primary' size='sm' leftIcon={<Icon icon={faPlus} />}>
@@ -212,7 +216,7 @@ export const withIcon: ComponentStory<typeof Tag> = () => {
   )
 }
 
-export const withCloseButton: ComponentStory<typeof Tag> = () => {
+export const withCloseButton: Story = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
       <Tag colorScheme='primary' rounded='full' onCloseClick={() => {}}>
@@ -234,10 +238,16 @@ export const withCloseButton: ComponentStory<typeof Tag> = () => {
   )
 }
 
-export const withDisabled: ComponentStory<typeof Tag> = () => {
+export const withDisabled: Story = () => {
   return (
     <Wrap gap='md' alignItems='flex-start'>
-      <Tag variant='solid' colorScheme='primary' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag
+        variant='solid'
+        colorScheme='primary'
+        rounded='full'
+        onCloseClick={() => {}}
+        isDisabled
+      >
         Cyan
       </Tag>
 
@@ -251,11 +261,23 @@ export const withDisabled: ComponentStory<typeof Tag> = () => {
         Secondary
       </Tag>
 
-      <Tag variant='solid' colorScheme='warning' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag
+        variant='solid'
+        colorScheme='warning'
+        rounded='full'
+        onCloseClick={() => {}}
+        isDisabled
+      >
         Warning
       </Tag>
 
-      <Tag variant='solid' colorScheme='danger' rounded='full' onCloseClick={() => {}} isDisabled>
+      <Tag
+        variant='solid'
+        colorScheme='danger'
+        rounded='full'
+        onCloseClick={() => {}}
+        isDisabled
+      >
         Danger
       </Tag>
     </Wrap>

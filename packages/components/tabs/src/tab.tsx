@@ -3,11 +3,28 @@ import { useClickable, UseClickableProps } from '@yamada-ui/use-clickable'
 import { ariaAttr, cx, handlerAll, mergeRefs } from '@yamada-ui/utils'
 import { useTabsContext, useTabsDescendant } from './tabs'
 
-export type TabProps = HTMLUIProps<'button'> & Omit<UseClickableProps, 'ref' | 'color'>
+export type TabProps = HTMLUIProps<'button'> &
+  Omit<UseClickableProps, 'ref' | 'color'>
 
 export const Tab = forwardRef<TabProps, 'button'>(
-  ({ className, isDisabled, isFocusable, clickOnEnter, clickOnSpace, ...props }, ref) => {
-    const { selectedIndex, isManual, setSelectedIndex, setFocusedIndex, styles } = useTabsContext()
+  (
+    {
+      className,
+      isDisabled,
+      isFocusable,
+      clickOnEnter,
+      clickOnSpace,
+      ...props
+    },
+    ref,
+  ) => {
+    const {
+      selectedIndex,
+      isManual,
+      setSelectedIndex,
+      setFocusedIndex,
+      styles,
+    } = useTabsContext()
 
     const { index, register } = useTabsDescendant({
       disabled: isDisabled && !isFocusable,

@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Loading, Wrap } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Loading>
+
+const meta: Meta<typeof Loading> = {
   title: 'Components / Feedback / Loading',
   component: Loading,
-} as ComponentMeta<typeof Loading>
+}
 
-export const basic: ComponentStory<typeof Loading> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Wrap gap='md'>
       <Loading variant='oval' size='6xl' color='red.500' />

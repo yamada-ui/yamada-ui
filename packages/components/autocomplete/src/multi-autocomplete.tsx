@@ -9,8 +9,19 @@ import {
 } from '@yamada-ui/core'
 import { Popover, PopoverTrigger } from '@yamada-ui/popover'
 import { cx, handlerAll } from '@yamada-ui/utils'
-import { cloneElement, CSSProperties, FC, MouseEventHandler, ReactElement, useMemo } from 'react'
-import { AutocompleteClearIcon, AutocompleteIcon, AutocompleteIconProps } from './autocomplete-icon'
+import {
+  cloneElement,
+  CSSProperties,
+  FC,
+  MouseEventHandler,
+  ReactElement,
+  useMemo,
+} from 'react'
+import {
+  AutocompleteClearIcon,
+  AutocompleteIcon,
+  AutocompleteIconProps,
+} from './autocomplete-icon'
 import { AutocompleteList, AutocompleteListProps } from './autocomplete-list'
 import {
   AutocompleteProvider,
@@ -84,120 +95,133 @@ export type MultiAutocompleteProps = ThemeProps<'Select'> &
   UseAutocompleteProps<string[]> &
   MultiAutocompleteOptions
 
-export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
-  let {
-    className,
-    defaultValue = [],
-    component,
-    separator,
-    isClearable = true,
-    color,
-    h,
-    height,
-    minH,
-    minHeight,
-    closeOnSelect = false,
-    keepPlaceholder = false,
-    containerProps,
-    listProps,
-    inputProps,
-    iconProps,
-    clearIconProps,
-    children,
-    ...computedProps
-  } = omitThemeProps(mergedProps)
+export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>(
+  (props, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('Select', props)
+    let {
+      className,
+      defaultValue = [],
+      component,
+      separator,
+      isClearable = true,
+      color,
+      h,
+      height,
+      minH,
+      minHeight,
+      closeOnSelect = false,
+      keepPlaceholder = false,
+      containerProps,
+      listProps,
+      inputProps,
+      iconProps,
+      clearIconProps,
+      children,
+      ...computedProps
+    } = omitThemeProps(mergedProps)
 
-  const {
-    value,
-    descendants,
-    formControlProps,
-    getPopoverProps,
-    getContainerProps,
-    getFieldProps,
-    createOption,
-    isEmpty,
-    inputValue,
-    computedChildren,
-    onClear,
-    ...rest
-  } = useAutocomplete<string[]>({
-    ...computedProps,
-    defaultValue,
-    closeOnSelect,
-    children,
-  })
+    const {
+      value,
+      descendants,
+      formControlProps,
+      getPopoverProps,
+      getContainerProps,
+      getFieldProps,
+      createOption,
+      isEmpty,
+      inputValue,
+      computedChildren,
+      onClear,
+      ...rest
+    } = useAutocomplete<string[]>({
+      ...computedProps,
+      defaultValue,
+      closeOnSelect,
+      children,
+    })
 
-  h = h ?? height
-  minH = minH ?? minHeight
+    h = h ?? height
+    minH = minH ?? minHeight
 
-  const css: CSSUIObject = {
-    position: 'relative',
-    w: '100%',
-    h: 'fit-content',
-    color,
-    ...styles.container,
-  }
+    const css: CSSUIObject = {
+      position: 'relative',
+      w: '100%',
+      h: 'fit-content',
+      color,
+      ...styles.container,
+    }
 
-  return (
-    <AutocompleteDescendantsContextProvider value={descendants}>
-      <AutocompleteProvider
-        value={{
-          ...rest,
-          value,
-          formControlProps,
-          inputValue,
-          createOption,
-          isEmpty,
-          styles,
-        }}
-      >
-        <Popover {...getPopoverProps()}>
-          <ui.div
-            className={cx('ui-autocomplete', className)}
-            __css={css}
-            {...getContainerProps(containerProps)}
-          >
-            <MultiAutocompleteField
-              component={component}
-              separator={separator}
-              keepPlaceholder={keepPlaceholder}
-              h={h}
-              minH={minH}
-              inputProps={inputProps}
-              {...getFieldProps({}, ref)}
-            />
-
-            {isClearable && value.length ? (
-              <AutocompleteClearIcon
-                {...clearIconProps}
-                onClick={handlerAll(clearIconProps?.onClick, onClear)}
-                {...formControlProps}
+    return (
+      <AutocompleteDescendantsContextProvider value={descendants}>
+        <AutocompleteProvider
+          value={{
+            ...rest,
+            value,
+            formControlProps,
+            inputValue,
+            createOption,
+            isEmpty,
+            styles,
+          }}
+        >
+          <Popover {...getPopoverProps()}>
+            <ui.div
+              className={cx('ui-autocomplete', className)}
+              __css={css}
+              {...getContainerProps(containerProps)}
+            >
+              <MultiAutocompleteField
+                component={component}
+                separator={separator}
+                keepPlaceholder={keepPlaceholder}
+                h={h}
+                minH={minH}
+                inputProps={inputProps}
+                {...getFieldProps({}, ref)}
               />
-            ) : (
-              <AutocompleteIcon {...iconProps} {...formControlProps} />
-            )}
 
-            {!isEmpty ? (
-              <AutocompleteList {...listProps}>
-                {createOption ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+              {isClearable && value.length ? (
+                <AutocompleteClearIcon
+                  {...clearIconProps}
+                  onClick={handlerAll(clearIconProps?.onClick, onClear)}
+                  {...formControlProps}
+                />
+              ) : (
+                <AutocompleteIcon {...iconProps} {...formControlProps} />
+              )}
 
-                {children ?? computedChildren}
-              </AutocompleteList>
-            ) : (
-              <AutocompleteList {...listProps}>
-                {createOption && inputValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
-              </AutocompleteList>
-            )}
-          </ui.div>
-        </Popover>
-      </AutocompleteProvider>
-    </AutocompleteDescendantsContextProvider>
-  )
-})
+              {!isEmpty ? (
+                <AutocompleteList {...listProps}>
+                  {createOption ? (
+                    <AutocompleteCreate />
+                  ) : (
+                    <AutocompleteEmpty />
+                  )}
+
+                  {children ?? computedChildren}
+                </AutocompleteList>
+              ) : (
+                <AutocompleteList {...listProps}>
+                  {createOption && inputValue ? (
+                    <AutocompleteCreate />
+                  ) : (
+                    <AutocompleteEmpty />
+                  )}
+                </AutocompleteList>
+              )}
+            </ui.div>
+          </Popover>
+        </AutocompleteProvider>
+      </AutocompleteDescendantsContextProvider>
+    )
+  },
+)
 
 type MultiAutocompleteFieldProps = HTMLUIProps<'div'> &
-  Pick<MultiAutocompleteProps, 'component' | 'separator' | 'keepPlaceholder' | 'inputProps'>
+  Pick<
+    MultiAutocompleteProps,
+    'component' | 'separator' | 'keepPlaceholder' | 'inputProps'
+  >
 
 const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
   (
@@ -214,8 +238,15 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
     },
     ref,
   ) => {
-    const { value, displayValue, inputValue, onChange, isOpen, inputRef, styles } =
-      useAutocompleteContext()
+    const {
+      value,
+      displayValue,
+      inputValue,
+      onChange,
+      isOpen,
+      inputRef,
+      styles,
+    } = useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
 
@@ -290,7 +321,11 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
             overflow='hidden'
             marginBlockStart='0.125rem'
             marginBlockEnd='0.125rem'
-            placeholder={!displayValue || (keepPlaceholder && isOpen) ? placeholder : undefined}
+            placeholder={
+              !displayValue || (keepPlaceholder && isOpen)
+                ? placeholder
+                : undefined
+            }
             {...getInputProps({ ...inputProps, value: inputValue ?? '' }, ref)}
           />
         </ui.div>

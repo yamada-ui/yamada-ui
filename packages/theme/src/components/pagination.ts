@@ -93,7 +93,9 @@ export const Pagination: ComponentMultiStyle = {
             bg: isGray ? undefined : 'transparent',
             borderColor: isDefaultColor(
               [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-              isGray ? [`gray.600`, `whiteAlpha.600`] : [`${c}.600`, `${c}.300`],
+              isGray
+                ? [`gray.600`, `whiteAlpha.600`]
+                : [`${c}.600`, `${c}.300`],
             )(c),
             color: isDefaultColor(
               [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
@@ -130,7 +132,10 @@ export const Pagination: ComponentMultiStyle = {
           },
           _hover: {
             bg: isDefaultColor(
-              [toneColor(c, 50)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m)],
+              [
+                toneColor(c, 50)(t, m),
+                transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
+              ],
               isGray
                 ? [`gray.100`, `whiteAlpha.200`]
                 : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
@@ -138,7 +143,10 @@ export const Pagination: ComponentMultiStyle = {
           },
           _active: {
             bg: isDefaultColor(
-              [toneColor(c, 100)(t, m), transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m)],
+              [
+                toneColor(c, 100)(t, m),
+                transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
+              ],
               isGray
                 ? [`gray.200`, `whiteAlpha.300`]
                 : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],

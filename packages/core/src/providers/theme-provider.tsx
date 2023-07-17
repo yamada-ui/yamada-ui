@@ -6,7 +6,12 @@ import {
   Interpolation,
   Theme,
 } from '@emotion/react'
-import { Dict, isUndefined, runIfFunc, getMemoizedObject as get } from '@yamada-ui/utils'
+import {
+  Dict,
+  isUndefined,
+  runIfFunc,
+  getMemoizedObject as get,
+} from '@yamada-ui/utils'
 import { FC, useMemo, useContext, Context, useState, useCallback } from 'react'
 import {
   transformTheme,
@@ -37,7 +42,8 @@ type ThemeProviderOptions = {
   config?: ThemeConfig
 }
 
-export type ThemeProviderProps = Omit<EmotionThemeProviderProps, 'theme'> & ThemeProviderOptions
+export type ThemeProviderProps = Omit<EmotionThemeProviderProps, 'theme'> &
+  ThemeProviderOptions
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme: initialTheme,
@@ -48,12 +54,19 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
     config?.initialThemeScheme,
   )
   const theme = useMemo(
-    () => (isUndefined(themeScheme) ? initialTheme : (initialTheme as Dict)[themeScheme]),
+    () =>
+      isUndefined(themeScheme)
+        ? initialTheme
+        : (initialTheme as Dict)[themeScheme],
     [initialTheme, themeScheme],
   )
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
-    (themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme)) => {
+    (
+      themeSchemeOrFunc:
+        | ThemeScheme
+        | ((themeScheme: ThemeScheme) => ThemeScheme),
+    ) => {
       if (isUndefined(themeScheme))
         throw Error(
           'changeThemeScheme: `themeScheme` is undefined. Seems you forgot to wrap your config in `initialThemeScheme`',
@@ -66,10 +79,15 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
     [themeScheme],
   )
 
-  const computedTheme = useMemo(() => transformTheme(theme, config), [theme, config])
+  const computedTheme = useMemo(
+    () => transformTheme(theme, config),
+    [theme, config],
+  )
 
   return (
-    <EmotionThemeProvider theme={{ themeScheme, changeThemeScheme, ...computedTheme }}>
+    <EmotionThemeProvider
+      theme={{ themeScheme, changeThemeScheme, ...computedTheme }}
+    >
       <CSSVars />
       {children}
     </EmotionThemeProvider>
@@ -77,7 +95,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 }
 
 export const CSSVars: FC = () => {
-  return <Global styles={({ __cssVars }: Dict) => ({ ':host, :root, [data-theme]': __cssVars })} />
+  return (
+    <Global
+      styles={({ __cssVars }: Dict) => ({
+        ':host, :root, [data-theme]': __cssVars,
+      })}
+    />
+  )
 }
 
 export const ResetStyle: FC = () => {

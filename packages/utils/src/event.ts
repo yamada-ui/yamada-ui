@@ -11,7 +11,10 @@ export type PointerEventInfo = {
   point: Point
 }
 
-export type MixedEventListener = (e: AnyPointerEvent, info: PointerEventInfo) => void
+export type MixedEventListener = (
+  e: AnyPointerEvent,
+  info: PointerEventInfo,
+) => void
 
 export const isMouseEvent = (ev: any): ev is MouseEvent => {
   const win = getEventWindow(ev)
@@ -22,9 +25,11 @@ export const isMouseEvent = (ev: any): ev is MouseEvent => {
   return ev instanceof win.MouseEvent
 }
 
-export const isTouchEvent = (ev: AnyPointerEvent): ev is TouchEvent => !!(ev as TouchEvent).touches
+export const isTouchEvent = (ev: AnyPointerEvent): ev is TouchEvent =>
+  !!(ev as TouchEvent).touches
 
-export const isMultiTouchEvent = (ev: AnyPointerEvent) => isTouchEvent(ev) && ev.touches.length > 1
+export const isMultiTouchEvent = (ev: AnyPointerEvent) =>
+  isTouchEvent(ev) && ev.touches.length > 1
 
 export const getEventWindow = (ev: Event): typeof globalThis =>
   ((ev as UIEvent).view ?? window) as unknown as typeof globalThis
@@ -35,7 +40,10 @@ export const pointFromTouch = (e: TouchEvent, type: PointType = 'page') => {
   return { x: point[`${type}X`], y: point[`${type}Y`] }
 }
 
-export const pointFromMouse = (point: MouseEvent | PointerEvent, type: PointType = 'page') => ({
+export const pointFromMouse = (
+  point: MouseEvent | PointerEvent,
+  type: PointType = 'page',
+) => ({
   x: point[`${type}X`],
   y: point[`${type}Y`],
 })

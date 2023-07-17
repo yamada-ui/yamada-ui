@@ -32,7 +32,8 @@ const [AlertProvider, useAlert] = createContext<AlertContext>({
   errorMessage: `useAlert returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
 })
 
-export const getStatusColorScheme = (status: Status) => statuses[status].colorScheme
+export const getStatusColorScheme = (status: Status) =>
+  statuses[status].colorScheme
 
 export const getStatusIcon = (status: Status) => statuses[status].icon
 
@@ -51,7 +52,10 @@ export const Alert = forwardRef<AlertProps, 'div'>(
   ({ status = 'info', colorScheme, ...props }, ref) => {
     colorScheme = colorScheme ?? getStatusColorScheme(status)
 
-    const [styles, mergedProps] = useMultiComponentStyle('Alert', { ...props, colorScheme })
+    const [styles, mergedProps] = useMultiComponentStyle('Alert', {
+      ...props,
+      colorScheme,
+    })
     const { className, children, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = {
@@ -65,7 +69,13 @@ export const Alert = forwardRef<AlertProps, 'div'>(
 
     return (
       <AlertProvider value={{ status, styles }}>
-        <ui.div ref={ref} className={cx('ui-alert', className)} role='alert' __css={css} {...rest}>
+        <ui.div
+          ref={ref}
+          className={cx('ui-alert', className)}
+          role='alert'
+          __css={css}
+          {...rest}
+        >
           {children}
         </ui.div>
       </AlertProvider>
@@ -73,7 +83,9 @@ export const Alert = forwardRef<AlertProps, 'div'>(
   },
 )
 
-export type AlertIconProps = HTMLUIProps<'span'> & { variant?: LoadingProps['variant'] }
+export type AlertIconProps = HTMLUIProps<'span'> & {
+  variant?: LoadingProps['variant']
+}
 
 export const AlertIcon: FC<AlertIconProps> = ({
   className,
@@ -89,10 +101,17 @@ export const AlertIcon: FC<AlertIconProps> = ({
   }
 
   return (
-    <ui.span display='inherit' className={cx('ui-alert-icon', className)} __css={css} {...rest}>
+    <ui.span
+      display='inherit'
+      className={cx('ui-alert-icon', className)}
+      __css={css}
+      {...rest}
+    >
       {children || (
         <Icon
-          {...(status === 'loading' ? { variant, color: 'currentcolor' } : { boxSize: '100%' })}
+          {...(status === 'loading'
+            ? { variant, color: 'currentcolor' }
+            : { boxSize: '100%' })}
         />
       )}
     </ui.span>
@@ -101,16 +120,25 @@ export const AlertIcon: FC<AlertIconProps> = ({
 
 export type AlertTitleProps = HTMLUIProps<'p'>
 
-export const AlertTitle = forwardRef<AlertTitleProps, 'p'>(({ className, ...rest }, ref) => {
-  const { styles } = useAlert()
+export const AlertTitle = forwardRef<AlertTitleProps, 'p'>(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useAlert()
 
-  const css: CSSUIObject = {
-    display: 'block',
-    ...styles.title,
-  }
+    const css: CSSUIObject = {
+      display: 'block',
+      ...styles.title,
+    }
 
-  return <ui.p ref={ref} className={cx('ui-alert-title', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.p
+        ref={ref}
+        className={cx('ui-alert-title', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 export type AlertDescriptionProps = HTMLUIProps<'span'>
 
@@ -122,6 +150,13 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, 'span'>(
       ...styles.description,
     }
 
-    return <ui.span ref={ref} className={cx('ui-alert-desc', className)} __css={css} {...rest} />
+    return (
+      <ui.span
+        ref={ref}
+        className={cx('ui-alert-desc', className)}
+        __css={css}
+        {...rest}
+      />
+    )
   },
 )

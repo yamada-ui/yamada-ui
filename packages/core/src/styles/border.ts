@@ -24,8 +24,14 @@ export const border: Configs = {
   borderBottomRightRadius: configs.radii('borderBottomRightRadius'),
   borderLeft: configs.border('borderLeft'),
   borderInlineStart: configs.border('borderInlineStart'),
-  borderInlineStartRadius: configs.radii(['borderStartStartRadius', 'borderStartEndRadius']),
-  borderInlineEndRadius: configs.radii(['borderEndStartRadius', 'borderEndEndRadius']),
+  borderInlineStartRadius: configs.radii([
+    'borderStartStartRadius',
+    'borderStartEndRadius',
+  ]),
+  borderInlineEndRadius: configs.radii([
+    'borderEndStartRadius',
+    'borderEndEndRadius',
+  ]),
   borderX: configs.border(['borderLeft', 'borderRight']),
   borderInline: configs.border('borderInline'),
   borderY: configs.border(['borderTop', 'borderBottom']),
@@ -54,10 +60,22 @@ export const border: Configs = {
   borderInlineEndColor: configs.color('borderInlineEndColor'),
   borderRightStyle: true,
   borderInlineEndStyle: configs.prop('borderInlineEndStyle'),
-  borderTopRadius: configs.radii(['borderTopLeftRadius', 'borderTopRightRadius']),
-  borderBottomRadius: configs.radii(['borderBottomLeftRadius', 'borderBottomRightRadius']),
-  borderLeftRadius: configs.radii(['borderTopLeftRadius', 'borderBottomLeftRadius']),
-  borderRightRadius: configs.radii(['borderTopRightRadius', 'borderBottomRightRadius']),
+  borderTopRadius: configs.radii([
+    'borderTopLeftRadius',
+    'borderTopRightRadius',
+  ]),
+  borderBottomRadius: configs.radii([
+    'borderBottomLeftRadius',
+    'borderBottomRightRadius',
+  ]),
+  borderLeftRadius: configs.radii([
+    'borderTopLeftRadius',
+    'borderBottomLeftRadius',
+  ]),
+  borderRightRadius: configs.radii([
+    'borderTopRightRadius',
+    'borderBottomRightRadius',
+  ]),
 }
 
 Object.assign(border, {
@@ -124,7 +142,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-block-start` property.
    */
-  borderBlockStart?: Token<CSS.Property.BorderBlockStart | number, unknown, Y, M>
+  borderBlockStart?: Token<
+    CSS.Property.BorderBlockStart | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-top-width` property.
    */
@@ -132,7 +155,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-block-start-width` property.
    */
-  borderBlockStartWidth?: Token<CSS.Property.BorderBlockStartWidth | number, unknown, Y, M>
+  borderBlockStartWidth?: Token<
+    CSS.Property.BorderBlockStartWidth | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-bottom-width` property.
    */
@@ -140,7 +168,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-block-end-width` property.
    */
-  borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number, unknown, Y, M>
+  borderBlockEndWidth?: Token<
+    CSS.Property.BorderBlockEndWidth | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-left-width` property.
    */
@@ -148,11 +181,21 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-inline-start-width` property.
    */
-  borderStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number, unknown, Y, M>
+  borderStartWidth?: Token<
+    CSS.Property.BorderInlineStartWidth | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-inline-start-width` property.
    */
-  borderInlineStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number, unknown, Y, M>
+  borderInlineStartWidth?: Token<
+    CSS.Property.BorderInlineStartWidth | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-right-width` property.
    */
@@ -160,11 +203,21 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-inline-end-width` property.
    */
-  borderEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number, unknown, Y, M>
+  borderEndWidth?: Token<
+    CSS.Property.BorderInlineEndWidth | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-inline-end-width` property.
    */
-  borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number, unknown, Y, M>
+  borderInlineEndWidth?: Token<
+    CSS.Property.BorderInlineEndWidth | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-top-style` property.
    */
@@ -172,7 +225,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-block-start-style` property.
    */
-  borderBlockStartStyle?: Token<CSS.Property.BorderBlockStartStyle, unknown, Y, M>
+  borderBlockStartStyle?: Token<
+    CSS.Property.BorderBlockStartStyle,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-bottom-style` property.
    */
@@ -192,7 +250,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-inline-start-style` property.
    */
-  borderInlineStartStyle?: Token<CSS.Property.BorderInlineStartStyle, unknown, Y, M>
+  borderInlineStartStyle?: Token<
+    CSS.Property.BorderInlineStartStyle,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-right-style` property.
    */
@@ -212,7 +275,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-block-start-color` property.
    */
-  borderBlockStartColor?: Token<CSS.Property.BorderBlockStartColor, 'colors', Y, M>
+  borderBlockStartColor?: Token<
+    CSS.Property.BorderBlockStartColor,
+    'colors',
+    Y,
+    M
+  >
   /**
    * The CSS `border-bottom-color` property.
    */
@@ -232,7 +300,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-inline-start-color` property.
    */
-  borderInlineStartColor?: Token<CSS.Property.BorderInlineStartColor, 'colors', Y, M>
+  borderInlineStartColor?: Token<
+    CSS.Property.BorderInlineStartColor,
+    'colors',
+    Y,
+    M
+  >
   /**
    * The CSS `border-right-color` property.
    */
@@ -244,7 +317,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-inline-end-color` property.
    */
-  borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, 'colors', Y, M>
+  borderInlineEndColor?: Token<
+    CSS.Property.BorderInlineEndColor,
+    'colors',
+    Y,
+    M
+  >
   /**
    * The CSS `border-right` property.
    */
@@ -276,7 +354,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-inline-start` property.
    */
-  borderInlineStart?: Token<CSS.Property.BorderInlineStart | number, unknown, Y, M>
+  borderInlineStart?: Token<
+    CSS.Property.BorderInlineStart | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `border-top-left-radius`, and `border-top-right-radius` property.
    */
@@ -300,7 +383,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-end-start-radius`, and `border-end-end-radius` property.
    */
-  borderInlineEndRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderInlineEndRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-end-start-radius`, and `border-end-end-radius` property.
    */
@@ -328,7 +416,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-start-start-radius`, and `border-start-end-radius` property.
    */
-  borderInlineStartRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderInlineStartRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-start-start-radius`, and `border-start-end-radius` property.
    */
@@ -340,11 +433,21 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-start-start-radius` property.
    */
-  borderTopStartRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderTopStartRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-start-start-radius` property.
    */
-  borderStartStartRadius?: Token<CSS.Property.BorderStartStartRadius | number, 'radii', Y, M>
+  borderStartStartRadius?: Token<
+    CSS.Property.BorderStartStartRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-top-left-radius` property.
    */
@@ -352,11 +455,21 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-start-start-radius` property.
    */
-  roundedTopStart?: Token<CSS.Property.BorderStartStartRadius | number, 'radii', Y, M>
+  roundedTopStart?: Token<
+    CSS.Property.BorderStartStartRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-top-right-radius` property.
    */
-  borderTopRightRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderTopRightRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-start-end-radius` property.
    */
@@ -364,7 +477,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-start-end-radius` property.
    */
-  borderStartEndRadius?: Token<CSS.Property.BorderStartEndRadius | number, 'radii', Y, M>
+  borderStartEndRadius?: Token<
+    CSS.Property.BorderStartEndRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-top-right-radius` property.
    */
@@ -376,15 +494,30 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-bottom-left-radius` property.
    */
-  borderBottomLeftRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderBottomLeftRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-end-start-radius` property.
    */
-  borderBottomStartRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderBottomStartRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-end-start-radius` property.
    */
-  borderEndStartRadius?: Token<CSS.Property.BorderEndStartRadius | number, 'radii', Y, M>
+  borderEndStartRadius?: Token<
+    CSS.Property.BorderEndStartRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-bottom-left-radius` property.
    */
@@ -396,15 +529,30 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-bottom-right-radius` property.
    */
-  borderBottomRightRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderBottomRightRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-end-end-radius` property.
    */
-  borderBottomEndRadius?: Token<CSS.Property.BorderRadius | number, 'radii', Y, M>
+  borderBottomEndRadius?: Token<
+    CSS.Property.BorderRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-end-end-radius` property.
    */
-  borderEndEndRadius?: Token<CSS.Property.BorderEndEndRadius | number, 'radii', Y, M>
+  borderEndEndRadius?: Token<
+    CSS.Property.BorderEndEndRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-bottom-right-radius` property.
    */
@@ -412,7 +560,12 @@ export type BorderProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `border-end-end-radius` property.
    */
-  roundedBottomEnd?: Token<CSS.Property.BorderEndEndRadius | number, 'radii', Y, M>
+  roundedBottomEnd?: Token<
+    CSS.Property.BorderEndEndRadius | number,
+    'radii',
+    Y,
+    M
+  >
   /**
    * The CSS `border-left`, and `border-right` property.
    */

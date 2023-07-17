@@ -21,7 +21,9 @@ export type {
   MotionValue,
 } from 'framer-motion'
 
-type TargetResolver<Y = Dict> = (props: Y & MotionTransitionProperties) => TargetAndTransition
+type TargetResolver<Y = Dict> = (
+  props: Y & MotionTransitionProperties,
+) => TargetAndTransition
 
 type Variant<Y = Dict> = TargetAndTransition | TargetResolver<Y>
 

@@ -13,18 +13,20 @@ type ThOptions = {
 
 export type ThProps = HTMLUIProps<'th'> & ThOptions
 
-export const Th = forwardRef<ThProps, 'th'>(({ className, isNumeric, __css, ...rest }, ref) => {
-  const styles = useTableStyles()
+export const Th = forwardRef<ThProps, 'th'>(
+  ({ className, isNumeric, __css, ...rest }, ref) => {
+    const styles = useTableStyles()
 
-  const css: CSSUIObject = { ...styles.th, ...__css }
+    const css: CSSUIObject = { ...styles.th, ...__css }
 
-  return (
-    <ui.th
-      ref={ref}
-      className={cx('ui-table-th', className)}
-      __css={css}
-      data-is-numeric={isNumeric}
-      {...rest}
-    />
-  )
-})
+    return (
+      <ui.th
+        ref={ref}
+        className={cx('ui-table-th', className)}
+        __css={css}
+        data-is-numeric={isNumeric}
+        {...rest}
+      />
+    )
+  },
+)

@@ -1,4 +1,10 @@
-import { UIProvider, extendTheme, UIStyle, Center, Image } from '@yamada-ui/react'
+import {
+  UIProvider,
+  extendTheme,
+  UIStyle,
+  Center,
+  Image,
+} from '@yamada-ui/react'
 import { FC } from 'react'
 
 export default {

@@ -3,7 +3,10 @@ import { createDescendant } from '@yamada-ui/use-descendant'
 import { createContext, PropGetter, mergeRefs } from '@yamada-ui/utils'
 import { useCallback } from 'react'
 
-type StepperContext = Omit<UseStepperReturn, 'descendants' | 'getContainerProps'> & {
+type StepperContext = Omit<
+  UseStepperReturn,
+  'descendants' | 'getContainerProps'
+> & {
   styles: Record<string, CSSUIObject>
 }
 
@@ -13,10 +16,11 @@ export const {
   useDescendant: useStepperDescendant,
 } = createDescendant<HTMLDivElement>()
 
-export const [StepperProvider, useStepperContext] = createContext<StepperContext>({
-  name: 'StepperContext',
-  errorMessage: `useStepperContext returned is 'undefined'. Seems you forgot to wrap the components in "<Stepper />"`,
-})
+export const [StepperProvider, useStepperContext] =
+  createContext<StepperContext>({
+    name: 'StepperContext',
+    errorMessage: `useStepperContext returned is 'undefined'. Seems you forgot to wrap the components in "<Stepper />"`,
+  })
 
 export type UseStepperProps = HTMLUIProps<'div'> & {
   /**
@@ -65,7 +69,14 @@ export const useStepper = ({
     [orientation, rest],
   )
 
-  return { descendants, index, orientation, showLastSeparator, getStepStatus, getContainerProps }
+  return {
+    descendants,
+    index,
+    orientation,
+    showLastSeparator,
+    getStepStatus,
+    getContainerProps,
+  }
 }
 
 export type UseStepperReturn = ReturnType<typeof useStepper>

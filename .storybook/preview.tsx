@@ -4,6 +4,8 @@ import { themes } from '@storybook/theming'
 import { UITheme } from './theme'
 import { StoryProvider, DocsContainer } from './components'
 
+console.log(themes)
+
 export const parameters: Parameters = {
   darkMode: {
     light: { ...themes.light, ...UITheme.light },

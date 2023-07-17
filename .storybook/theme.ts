@@ -5,15 +5,11 @@ const baseTheme = {
   brandUrl: 'https://github.com/hirotomoyamada/yamada-ui',
   brandImage:
     'https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png',
-
   colorPrimary: defaultTheme.colors.secondary,
   colorSecondary: defaultTheme.colors.primary,
-
   appBorderRadius: 0,
-
   fontBase: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
   fontCode: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
-
   barSelectedColor: defaultTheme.colors.primary,
 }
 

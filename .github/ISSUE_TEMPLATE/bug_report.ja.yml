@@ -1,4 +1,4 @@
-name: 'バグ報告'
+name: 'Bug Report (日本語)'
 description: 'バグ報告を作成します'
 body:
   - type: 'markdown'
@@ -64,4 +64,4 @@ body:
     id: 'additional-information'
     attributes:
       label: '追加情報'
-      description: スクリーンショット、ノート、アイデアへのリンクなど、持っている追加情報を提供してください。
+      description: スクリーンショット、ノート、アイデアへのリンクなどがある場合は、追加情報を提供してください。

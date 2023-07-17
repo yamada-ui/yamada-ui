@@ -1,5 +1,12 @@
 # @yamada-ui/layouts
 
+## 0.2.6
+
+### Patch Changes
+
+- Updated dependencies [[`3b8dc0a7`](https://github.com/hirotomoyamada/yamada-ui/commit/3b8dc0a7b67b2c6728cb98b485959d3635e72ffd)]:
+  - @yamada-ui/core@0.5.1
+
 ## 0.2.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.5.1
+
+### Patch Changes
+
+- [`3b8dc0a7`](https://github.com/hirotomoyamada/yamada-ui/commit/3b8dc0a7b67b2c6728cb98b485959d3635e72ffd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
 ## 0.5.0
 
 ### Minor Changes

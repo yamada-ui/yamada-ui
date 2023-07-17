@@ -1,5 +1,70 @@
 # @yamada-ui/react
 
+## 0.5.10
+
+### Patch Changes
+
+- Updated dependencies [[`3b8dc0a7`](https://github.com/hirotomoyamada/yamada-ui/commit/3b8dc0a7b67b2c6728cb98b485959d3635e72ffd)]:
+  - @yamada-ui/use-animation@0.1.18
+  - @yamada-ui/core@0.5.1
+  - @yamada-ui/popover@0.2.9
+  - @yamada-ui/progress@0.3.6
+  - @yamada-ui/skeleton@0.2.6
+  - @yamada-ui/accordion@0.2.8
+  - @yamada-ui/alert@0.3.6
+  - @yamada-ui/autocomplete@0.2.10
+  - @yamada-ui/avatar@0.2.7
+  - @yamada-ui/badge@0.2.6
+  - @yamada-ui/breadcrumb@0.2.6
+  - @yamada-ui/button@0.2.6
+  - @yamada-ui/card@0.2.6
+  - @yamada-ui/checkbox@0.2.7
+  - @yamada-ui/close-button@0.2.6
+  - @yamada-ui/editable@0.2.6
+  - @yamada-ui/file-button@0.2.6
+  - @yamada-ui/file-input@0.2.6
+  - @yamada-ui/form-control@0.2.6
+  - @yamada-ui/highlight@0.2.6
+  - @yamada-ui/icon@0.2.6
+  - @yamada-ui/image@0.2.6
+  - @yamada-ui/indicator@0.2.6
+  - @yamada-ui/input@0.2.6
+  - @yamada-ui/kbd@0.2.6
+  - @yamada-ui/layouts@0.2.6
+  - @yamada-ui/link@0.2.6
+  - @yamada-ui/list@0.2.6
+  - @yamada-ui/loading@0.3.6
+  - @yamada-ui/menu@0.2.10
+  - @yamada-ui/modal@0.2.7
+  - @yamada-ui/motion@0.3.4
+  - @yamada-ui/native-select@0.2.6
+  - @yamada-ui/native-table@0.2.6
+  - @yamada-ui/notice@0.3.6
+  - @yamada-ui/number-input@0.2.6
+  - @yamada-ui/pagination@0.2.6
+  - @yamada-ui/pin-input@0.2.7
+  - @yamada-ui/radio@0.2.6
+  - @yamada-ui/reorder@0.2.7
+  - @yamada-ui/scroll-area@0.2.6
+  - @yamada-ui/segmented-control@0.2.7
+  - @yamada-ui/select@0.2.10
+  - @yamada-ui/slider@0.2.6
+  - @yamada-ui/stepper@0.2.7
+  - @yamada-ui/switch@0.2.7
+  - @yamada-ui/tabs@0.2.9
+  - @yamada-ui/tag@0.2.6
+  - @yamada-ui/textarea@0.2.6
+  - @yamada-ui/tooltip@0.2.9
+  - @yamada-ui/transitions@0.2.7
+  - @yamada-ui/typography@0.2.6
+  - @yamada-ui/use-breakpoint@0.1.18
+  - @yamada-ui/use-popper@0.2.6
+  - @yamada-ui/use-token@0.1.18
+  - @yamada-ui/use-value@0.1.18
+  - @yamada-ui/providers@0.5.2
+  - @yamada-ui/theme@0.3.7
+  - @yamada-ui/use-media-query@0.1.15
+
 ## 0.5.9
 
 ### Patch Changes

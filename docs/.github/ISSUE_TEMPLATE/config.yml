@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/hirotomoyamada/yamada-ui/discussions
+    about: Ask questions and discuss topics with other community members
+  - name: Chat with Discord
+    url: https://discord.gg/NStNNpjN
+    about: The official Yamada UI Discord community

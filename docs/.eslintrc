@@ -1,0 +1,25 @@
+{
+  "parserOptions": {
+    "project": "tsconfig.json"
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint/eslint-plugin", "unused-imports", "import"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "unused-imports/no-unused-imports": "error",
+    "@next/next/no-title-in-document-head": "off"
+  }
+}

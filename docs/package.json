@@ -1,0 +1,50 @@
+{
+  "name": "yamada-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format:check": "prettier --check src/**/** scripts/**/** --cache",
+    "format:write": "prettier --write src/**/** scripts/**/** --cache",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@yamada-ui/calendar": "^0.3.10",
+    "@yamada-ui/carousel": "^0.2.6",
+    "@yamada-ui/cli": "^0.3.0",
+    "@yamada-ui/dropzone": "^0.2.7",
+    "@yamada-ui/fontawesome": "^0.1.14",
+    "@yamada-ui/markdown": "^0.2.6",
+    "@yamada-ui/nextjs": "^4.0.10",
+    "@yamada-ui/react": "^0.5.10",
+    "@yamada-ui/table": "^0.2.11",
+    "next": "^13.4.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.4.2",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
+    "@commitlint/cli": "17.6.6",
+    "@commitlint/config-conventional": "17.6.6",
+    "@typescript-eslint/eslint-plugin": "6.1.0",
+    "eslint": "8.45.0",
+    "eslint-config-next": "13.4.10",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "13.2.3",
+    "plop": "3.1.2",
+    "prettier": "^3.0.0",
+    "tsx": "^3.12.7",
+    "typescript": "5.1.6"
+  }
+}

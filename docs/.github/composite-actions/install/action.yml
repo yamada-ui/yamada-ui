@@ -1,0 +1,30 @@
+name: 'Install'
+description: 'Sets up Node.js and runs install'
+
+runs:
+  using: composite
+  steps:
+    - name: Launch Turbo remote cache server
+      uses: dtinth/setup-github-actions-caching-for-turbo@v1.1.0
+
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 8
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+        registry-url: 'https://registry.npmjs.org'
+        cache: 'pnpm'
+
+    - name: Setup Git user
+      shell: bash
+      run: |
+        git config --global user.email "hirotomo.yamada@avap.co.jp"
+        git config --global user.name "hirotomoyamada"
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install

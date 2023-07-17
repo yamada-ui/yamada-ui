@@ -1,5 +1,15 @@
 # @yamada-ui/select
 
+## 0.2.10
+
+### Patch Changes
+
+- Updated dependencies [[`3b8dc0a7`](https://github.com/hirotomoyamada/yamada-ui/commit/3b8dc0a7b67b2c6728cb98b485959d3635e72ffd)]:
+  - @yamada-ui/core@0.5.1
+  - @yamada-ui/popover@0.2.9
+  - @yamada-ui/form-control@0.2.6
+  - @yamada-ui/icon@0.2.6
+
 ## 0.2.9
 
 ### Patch Changes

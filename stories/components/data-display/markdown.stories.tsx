@@ -1,21 +1,25 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Markdown } from '@yamada-ui/markdown'
 import { Heading } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Markdown>
+
+const meta: Meta<typeof Markdown> = {
   title: 'Components / Data Display / Markdown',
   component: Markdown,
-} as ComponentMeta<typeof Markdown>
+}
 
-export const basic: ComponentStory<typeof Markdown> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Markdown>{README}</Markdown>
 }
 
-export const withCodeTheme: ComponentStory<typeof Markdown> = () => {
+export const withCodeTheme: Story = () => {
   return <Markdown code={{ theme: 'materialDark' }}>{README}</Markdown>
 }
 
-export const customComponent: ComponentStory<typeof Markdown> = () => {
+export const customComponent: Story = () => {
   return (
     <Markdown
       components={{

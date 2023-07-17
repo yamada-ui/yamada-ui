@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Wrap, Badge } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Badge>
+
+const meta: Meta<typeof Badge> = {
   title: 'Components / Data Display / Badge',
   component: Badge,
-} as ComponentMeta<typeof Badge>
+}
 
-export const subtle: ComponentStory<typeof Badge> = () => {
+export default meta
+
+export const subtle: Story = () => {
   return (
     <Wrap gap='md'>
       <Badge colorScheme='primary'>Primary</Badge>
@@ -42,7 +46,7 @@ export const subtle: ComponentStory<typeof Badge> = () => {
   )
 }
 
-export const solid: ComponentStory<typeof Badge> = () => {
+export const solid: Story = () => {
   return (
     <Wrap gap='md'>
       <Badge variant='solid' colorScheme='primary'>
@@ -108,7 +112,7 @@ export const solid: ComponentStory<typeof Badge> = () => {
   )
 }
 
-export const outline: ComponentStory<typeof Badge> = () => {
+export const outline: Story = () => {
   return (
     <Wrap gap='md'>
       <Badge variant='outline' colorScheme='primary'>

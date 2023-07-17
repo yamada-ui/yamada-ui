@@ -1,9 +1,12 @@
+import { Meta } from '@storybook/react'
 import { Input, Kbd, Text, useWindowEvent } from '@yamada-ui/react'
 import { useRef } from 'react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useWindowEvent',
 }
+
+export default meta
 
 export const basic = () => {
   const inputRef = useRef<HTMLInputElement>(null)

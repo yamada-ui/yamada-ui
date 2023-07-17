@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Box, Button, Collapse, useBoolean, VStack } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Collapse>
+
+const meta: Meta<typeof Collapse> = {
   title: 'Components / Transitions / Collapse',
   component: Collapse,
-} as ComponentMeta<typeof Collapse>
+}
 
-export const basic: ComponentStory<typeof Collapse> = () => {
+export default meta
+
+export const basic: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -22,7 +26,7 @@ export const basic: ComponentStory<typeof Collapse> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Collapse> = () => {
+export const withDuration: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -38,7 +42,7 @@ export const withDuration: ComponentStory<typeof Collapse> = () => {
   )
 }
 
-export const exitUnmount: ComponentStory<typeof Collapse> = () => {
+export const exitUnmount: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -58,7 +62,7 @@ export const exitUnmount: ComponentStory<typeof Collapse> = () => {
   )
 }
 
-export const disabledOpacity: ComponentStory<typeof Collapse> = () => {
+export const disabledOpacity: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -78,7 +82,7 @@ export const disabledOpacity: ComponentStory<typeof Collapse> = () => {
   )
 }
 
-export const startingHeight: ComponentStory<typeof Collapse> = () => {
+export const startingHeight: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (

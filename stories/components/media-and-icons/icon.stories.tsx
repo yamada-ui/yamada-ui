@@ -1,13 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon, HStack } from '@yamada-ui/react'
 import { FaRobot } from 'react-icons/fa'
 
-export default {
+type Story = StoryFn<typeof Icon>
+
+const meta: Meta<typeof Icon> = {
   title: 'Components / Media And Icons / Icon',
   component: Icon,
-} as ComponentMeta<typeof Icon>
+}
 
-export const basic: ComponentStory<typeof Icon> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <HStack alignItems='flex-end'>
       <Icon as={FaRobot} size='6xl' color='gray.400' />

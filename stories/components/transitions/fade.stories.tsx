@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Box, Button, Fade, useBoolean } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Fade>
+
+const meta: Meta<typeof Fade> = {
   title: 'Components / Transitions / Fade',
   component: Fade,
-} as ComponentMeta<typeof Fade>
+}
 
-export const basic: ComponentStory<typeof Fade> = () => {
+export default meta
+
+export const basic: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -26,7 +30,7 @@ export const basic: ComponentStory<typeof Fade> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Fade> = () => {
+export const withDuration: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (
@@ -46,7 +50,7 @@ export const withDuration: ComponentStory<typeof Fade> = () => {
   )
 }
 
-export const exitUnmount: ComponentStory<typeof Fade> = () => {
+export const exitUnmount: Story = () => {
   const [isOpen, { toggle }] = useBoolean()
 
   return (

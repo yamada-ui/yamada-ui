@@ -1,5 +1,5 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { DatePicker, DatePickerProps } from '@yamada-ui/calendar'
 import { Icon } from '@yamada-ui/fontawesome'
 import { FormControl, Grid, Heading, VStack, Button } from '@yamada-ui/react'
@@ -7,16 +7,20 @@ import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import 'dayjs/locale/ja'
 
-export default {
+type Story = StoryFn<typeof DatePicker>
+
+const meta: Meta<typeof DatePicker> = {
   title: 'Components / Forms / DatePicker',
   component: DatePicker,
-} as ComponentMeta<typeof DatePicker>
+}
 
-export const basic: ComponentStory<typeof DatePicker> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <DatePicker placeholder='basic' />
 }
 
-export const withSize: ComponentStory<typeof DatePicker> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <DatePicker placeholder='extra small size' size='xs' />
@@ -27,7 +31,7 @@ export const withSize: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withCalendarSize: ComponentStory<typeof DatePicker> = () => {
+export const withCalendarSize: Story = () => {
   return (
     <>
       <DatePicker placeholder='small size' calendarSize='sm' />
@@ -37,7 +41,7 @@ export const withCalendarSize: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof DatePicker> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <DatePicker variant='outline' placeholder='outline' />
@@ -48,7 +52,7 @@ export const withVariant: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof DatePicker> = () => {
+export const withColorScheme: Story = () => {
   return (
     <>
       <Heading size='xl'>Solid</Heading>
@@ -272,11 +276,11 @@ export const withColorScheme: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof DatePicker> = () => {
+export const withDefaultValue: Story = () => {
   return <DatePicker defaultValue={new Date()} />
 }
 
-export const withDefaultType: ComponentStory<typeof DatePicker> = () => {
+export const withDefaultType: Story = () => {
   return (
     <>
       <DatePicker placeholder='date' defaultType='date' />
@@ -288,11 +292,16 @@ export const withDefaultType: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withDefaultMonth: ComponentStory<typeof DatePicker> = () => {
-  return <DatePicker placeholder='YYYY/MM/DD' defaultMonth={new Date('1993-08-18')} />
+export const withDefaultMonth: Story = () => {
+  return (
+    <DatePicker
+      placeholder='YYYY/MM/DD'
+      defaultMonth={new Date('1993-08-18')}
+    />
+  )
 }
 
-export const withFirstDayOfWeek: ComponentStory<typeof DatePicker> = () => {
+export const withFirstDayOfWeek: Story = () => {
   return (
     <>
       <DatePicker placeholder='monday' firstDayOfWeek='monday' />
@@ -302,19 +311,26 @@ export const withFirstDayOfWeek: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof DatePicker> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <DatePicker placeholder='default border color' />
 
-      <DatePicker focusBorderColor='green.500' placeholder='custom border color' />
+      <DatePicker
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
 
-      <DatePicker isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <DatePicker
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const withPattern: ComponentStory<typeof DatePicker> = () => {
+export const withPattern: Story = () => {
   return (
     <DatePicker
       placeholder='MMMM D, YYYY'
@@ -325,11 +341,11 @@ export const withPattern: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withInputFormat: ComponentStory<typeof DatePicker> = () => {
+export const withInputFormat: Story = () => {
   return <DatePicker placeholder='YYYY-MM-DD' inputFormat='YYYY-MM-DD' />
 }
 
-export const withParseDate: ComponentStory<typeof DatePicker> = () => {
+export const withParseDate: Story = () => {
   return (
     <DatePicker
       placeholder='YYYY/MM/DD'
@@ -339,23 +355,23 @@ export const withParseDate: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof DatePicker> = () => {
+export const withPlacement: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' placement='bottom-end' />
 }
 
-export const withOffset: ComponentStory<typeof DatePicker> = () => {
+export const withOffset: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' offset={[16, 16]} />
 }
 
-export const withGutter: ComponentStory<typeof DatePicker> = () => {
+export const withGutter: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' gutter={32} />
 }
 
-export const withDuration: ComponentStory<typeof DatePicker> = () => {
+export const withDuration: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' duration={0.4} />
 }
 
-export const isDisabled: ComponentStory<typeof DatePicker> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <DatePicker isDisabled variant='outline' placeholder='outline' />
@@ -370,7 +386,7 @@ export const isDisabled: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof DatePicker> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <DatePicker isReadOnly variant='outline' placeholder='outline' />
@@ -385,7 +401,7 @@ export const isReadonly: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof DatePicker> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <DatePicker isInvalid variant='outline' placeholder='outline' />
@@ -393,14 +409,18 @@ export const isInvalid: ComponentStory<typeof DatePicker> = () => {
       <DatePicker isInvalid variant='flushed' placeholder='flushed' />
       <DatePicker isInvalid variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isInvalid label='What is your birthday?' errorMessage='This is required.'>
+      <FormControl
+        isInvalid
+        label='What is your birthday?'
+        errorMessage='This is required.'
+      >
         <DatePicker placeholder='YYYY/MM/DD' />
       </FormControl>
     </>
   )
 }
 
-export const withMinMaxDate: ComponentStory<typeof DatePicker> = () => {
+export const withMinMaxDate: Story = () => {
   return (
     <DatePicker
       placeholder='YYYY/MM/DD'
@@ -410,15 +430,15 @@ export const withMinMaxDate: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withToday: ComponentStory<typeof DatePicker> = () => {
+export const withToday: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' today />
 }
 
-export const withWeekendDays: ComponentStory<typeof DatePicker> = () => {
+export const withWeekendDays: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' weekendDays={[0, 1]} />
 }
 
-export const withHolidays: ComponentStory<typeof DatePicker> = () => {
+export const withHolidays: Story = () => {
   const holidays = [
     new Date('2022-01-01'),
     new Date('2022-01-10'),
@@ -479,7 +499,7 @@ export const withHolidays: ComponentStory<typeof DatePicker> = () => {
   return <DatePicker placeholder='YYYY/MM/DD' holidays={holidays} />
 }
 
-export const withExcludeDate: ComponentStory<typeof DatePicker> = () => {
+export const withExcludeDate: Story = () => {
   return (
     <DatePicker
       placeholder='YYYY/MM/DD'
@@ -488,103 +508,156 @@ export const withExcludeDate: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const withLocale: ComponentStory<typeof DatePicker> = () => {
+export const withLocale: Story = () => {
   // import 'dayjs/locale/ja'
 
   return <DatePicker locale='ja' />
 }
 
-export const withFormat: ComponentStory<typeof DatePicker> = () => {
+export const withFormat: Story = () => {
   return (
     <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
-      <DatePicker placeholder='YYYY/MM/DD' locale='ja' dateFormat='YYYY年 MMMM' />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        locale='ja'
+        dateFormat='YYYY年 MMMM'
+      />
 
-      <DatePicker placeholder='YYYY/MM/DD' locale='ja' defaultType='month' yearFormat='YYYY年' />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        locale='ja'
+        defaultType='month'
+        yearFormat='YYYY年'
+      />
 
-      <DatePicker placeholder='YYYY/MM/DD' locale='ja' defaultType='month' monthFormat='MM' />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        locale='ja'
+        defaultType='month'
+        monthFormat='MM'
+      />
 
-      <DatePicker placeholder='YYYY/MM/DD' locale='ja' defaultType='year' yearFormat='YY' />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        locale='ja'
+        defaultType='year'
+        yearFormat='YY'
+      />
 
       <DatePicker placeholder='YYYY/MM/DD' locale='ja' weekdayFormat='dd曜' />
     </Grid>
   )
 }
 
-export const withAmountOfMonths: ComponentStory<typeof DatePicker> = () => {
+export const withAmountOfMonths: Story = () => {
   return (
     <>
-      <DatePicker placeholder='YYYY/MM/DD' amountOfMonths={1} disableOutsideDays />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        amountOfMonths={1}
+        disableOutsideDays
+      />
 
-      <DatePicker placeholder='YYYY/MM/DD' amountOfMonths={2} disableOutsideDays />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        amountOfMonths={2}
+        disableOutsideDays
+      />
 
-      <DatePicker placeholder='YYYY/MM/DD' amountOfMonths={3} disableOutsideDays />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        amountOfMonths={3}
+        disableOutsideDays
+      />
     </>
   )
 }
 
-export const withPaginateBy: ComponentStory<typeof DatePicker> = () => {
+export const withPaginateBy: Story = () => {
   return (
-    <DatePicker placeholder='YYYY/MM/DD' amountOfMonths={3} disableOutsideDays paginateBy={1} />
+    <DatePicker
+      placeholder='YYYY/MM/DD'
+      amountOfMonths={3}
+      disableOutsideDays
+      paginateBy={1}
+    />
   )
 }
 
-export const disabledCloseOnSelect: ComponentStory<typeof DatePicker> = () => {
+export const disabledCloseOnSelect: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' closeOnSelect={false} />
 }
 
-export const disabledCloseOnBlur: ComponentStory<typeof DatePicker> = () => {
+export const disabledCloseOnBlur: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' closeOnBlur={false} />
 }
 
-export const disabledIsClearable: ComponentStory<typeof DatePicker> = () => {
+export const disabledIsClearable: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' isClearable={false} />
 }
 
-export const disabledAllowInput: ComponentStory<typeof DatePicker> = () => {
+export const disabledAllowInput: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' allowInput={false} />
 }
 
-export const disabledOutsideDays: ComponentStory<typeof DatePicker> = () => {
+export const disabledOutsideDays: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' disableOutsideDays />
 }
 
-export const disabledControls: ComponentStory<typeof DatePicker> = () => {
+export const disabledControls: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' withControls={false} />
 }
 
-export const disabledWeekdays: ComponentStory<typeof DatePicker> = () => {
+export const disabledWeekdays: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' withWeekdays={false} />
 }
 
-export const customIcon: ComponentStory<typeof DatePicker> = () => {
+export const customIcon: Story = () => {
   return (
     <>
       <DatePicker placeholder='YYYY/MM/DD' iconProps={{ color: 'primary' }} />
 
-      <DatePicker placeholder='YYYY/MM/DD' iconProps={{ children: <Icon icon={faPoo} /> }} />
+      <DatePicker
+        placeholder='YYYY/MM/DD'
+        iconProps={{ children: <Icon icon={faPoo} /> }}
+      />
     </>
   )
 }
 
-export const customControlType: ComponentStory<typeof DatePicker> = () => {
+export const customControlType: Story = () => {
   const [type, onChangeType] = useState<DatePickerProps['type']>('month')
 
-  return <DatePicker placeholder='YYYY/MM/DD' type={type} onChangeType={onChangeType} />
+  return (
+    <DatePicker
+      placeholder='YYYY/MM/DD'
+      type={type}
+      onChangeType={onChangeType}
+    />
+  )
 }
 
-export const customControlMonth: ComponentStory<typeof DatePicker> = () => {
+export const customControlMonth: Story = () => {
   const [month, onChangeMonth] = useState<Date>(new Date('1993-08-18'))
 
-  return <DatePicker placeholder='YYYY/MM/DD' month={month} onChangeMonth={onChangeMonth} />
+  return (
+    <DatePicker
+      placeholder='YYYY/MM/DD'
+      month={month}
+      onChangeMonth={onChangeMonth}
+    />
+  )
 }
 
-export const customControlValue: ComponentStory<typeof DatePicker> = () => {
+export const customControlValue: Story = () => {
   const [value, onChange] = useState<Date | null>(new Date())
 
-  return <DatePicker placeholder='YYYY/MM/DD' value={value} onChange={onChange} />
+  return (
+    <DatePicker placeholder='YYYY/MM/DD' value={value} onChange={onChange} />
+  )
 }
 
-export const reactHookForm: ComponentStory<typeof DatePicker> = () => {
+export const reactHookForm: Story = () => {
   type Data = { datePicker: Date | null }
 
   const {
@@ -609,7 +682,9 @@ export const reactHookForm: ComponentStory<typeof DatePicker> = () => {
           name='datePicker'
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
-          render={({ field }) => <DatePicker placeholder='YYYY/MM/DD' {...field} />}
+          render={({ field }) => (
+            <DatePicker placeholder='YYYY/MM/DD' {...field} />
+          )}
         />
       </FormControl>
 
@@ -620,7 +695,7 @@ export const reactHookForm: ComponentStory<typeof DatePicker> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof DatePicker> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { datePicker: Date | null }
 
   const defaultValues: Data = {
@@ -649,7 +724,9 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof DatePicker> = 
           name='datePicker'
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
-          render={({ field }) => <DatePicker placeholder='YYYY/MM/DD' {...field} />}
+          render={({ field }) => (
+            <DatePicker placeholder='YYYY/MM/DD' {...field} />
+          )}
         />
       </FormControl>
 

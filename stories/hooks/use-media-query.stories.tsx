@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Text, useMediaQuery } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useMediaQuery',
 }
+
+export default meta
 
 export const basic = () => {
   const [flg] = useMediaQuery('(min-width: 1280px)')
@@ -11,7 +14,10 @@ export const basic = () => {
 }
 
 export const useMulti = () => {
-  const [isLarge, isDark] = useMediaQuery(['(min-width: 1280px)', '(prefers-color-scheme: dark)'])
+  const [isLarge, isDark] = useMediaQuery([
+    '(min-width: 1280px)',
+    '(prefers-color-scheme: dark)',
+  ])
 
   return (
     <>

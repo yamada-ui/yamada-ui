@@ -1,18 +1,25 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Avatar, AvatarBadge, AvatarGroup, Wrap } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Avatar>
+
+const meta: Meta<typeof Avatar> = {
   title: 'Components / Media And Icons / Avatar',
   component: Avatar,
-} as ComponentMeta<typeof Avatar>
+}
 
-export const basic: ComponentStory<typeof Avatar> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
-    <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
+    <Avatar
+      name='Hirotomo Yamada'
+      src='https://avatars.githubusercontent.com/u/84060430?v=4'
+    />
   )
 }
 
-export const withSize: ComponentStory<typeof Avatar> = () => {
+export const withSize: Story = () => {
   return (
     <Wrap gap='md'>
       <Avatar size='2xs' name='Hirotomo Yamada' />
@@ -26,42 +33,75 @@ export const withSize: ComponentStory<typeof Avatar> = () => {
   )
 }
 
-export const withName: ComponentStory<typeof Avatar> = () => {
+export const withName: Story = () => {
   return <Avatar name='Hirotomo Yamada' />
 }
 
-export const withImage: ComponentStory<typeof Avatar> = () => {
+export const withImage: Story = () => {
   return <Avatar src='https://avatars.githubusercontent.com/u/84060430?v=4' />
 }
 
-export const withBarge: ComponentStory<typeof Avatar> = () => {
+export const withBarge: Story = () => {
   return (
-    <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4'>
+    <Avatar
+      name='Hirotomo Yamada'
+      src='https://avatars.githubusercontent.com/u/84060430?v=4'
+    >
       <AvatarBadge bg='primary' />
     </Avatar>
   )
 }
 
-export const useGroup: ComponentStory<typeof Avatar> = () => {
+export const useGroup: Story = () => {
   return (
     <AvatarGroup>
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
     </AvatarGroup>
   )
 }
 
-export const withGroupMax: ComponentStory<typeof Avatar> = () => {
+export const withGroupMax: Story = () => {
   return (
     <AvatarGroup max={3}>
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
-      <Avatar name='Hirotomo Yamada' src='https://avatars.githubusercontent.com/u/84060430?v=4' />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
+      <Avatar
+        name='Hirotomo Yamada'
+        src='https://avatars.githubusercontent.com/u/84060430?v=4'
+      />
     </AvatarGroup>
   )
 }

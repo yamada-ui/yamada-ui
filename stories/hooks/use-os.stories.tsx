@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Tag, Text, useOS } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useOS',
 }
+
+export default meta
 
 export const basic = () => {
   const os = useOS()

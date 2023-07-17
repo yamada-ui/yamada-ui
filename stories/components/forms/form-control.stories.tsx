@@ -1,12 +1,23 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FormControl, Label, HelperMessage, ErrorMessage, Input, Tag } from '@yamada-ui/react'
+import { Meta, StoryFn } from '@storybook/react'
+import {
+  FormControl,
+  Label,
+  HelperMessage,
+  ErrorMessage,
+  Input,
+  Tag,
+} from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof FormControl>
+
+const meta: Meta<typeof FormControl> = {
   title: 'Components / Forms / FormControl',
   component: FormControl,
-} as ComponentMeta<typeof FormControl>
+}
 
-export const basic: ComponentStory<typeof FormControl> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <FormControl label='Email address'>
       <Input type='email' placeholder='your email address' />
@@ -14,23 +25,30 @@ export const basic: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const withHelperMessage: ComponentStory<typeof FormControl> = () => {
+export const withHelperMessage: Story = () => {
   return (
-    <FormControl label='Email address' helperMessage="We'll never share your email.">
+    <FormControl
+      label='Email address'
+      helperMessage="We'll never share your email."
+    >
       <Input type='email' placeholder='your email address' />
     </FormControl>
   )
 }
 
-export const withErrorMessage: ComponentStory<typeof FormControl> = () => {
+export const withErrorMessage: Story = () => {
   return (
-    <FormControl isInvalid label='Email address' errorMessage='Email is required.'>
+    <FormControl
+      isInvalid
+      label='Email address'
+      errorMessage='Email is required.'
+    >
       <Input type='email' placeholder='your email address' />
     </FormControl>
   )
 }
 
-export const isReplace: ComponentStory<typeof FormControl> = () => {
+export const isReplace: Story = () => {
   return (
     <>
       <FormControl
@@ -56,7 +74,7 @@ export const isReplace: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const isRequired: ComponentStory<typeof FormControl> = () => {
+export const isRequired: Story = () => {
   return (
     <FormControl
       isRequired
@@ -69,7 +87,7 @@ export const isRequired: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof FormControl> = () => {
+export const isDisabled: Story = () => {
   return (
     <FormControl
       isDisabled
@@ -82,7 +100,7 @@ export const isDisabled: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof FormControl> = () => {
+export const isReadonly: Story = () => {
   return (
     <FormControl
       isReadOnly
@@ -95,7 +113,7 @@ export const isReadonly: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const customLabel: ComponentStory<typeof FormControl> = () => {
+export const customLabel: Story = () => {
   return (
     <FormControl helperMessage="We'll never share your email.">
       <Label color='primary'>Email address</Label>
@@ -104,16 +122,18 @@ export const customLabel: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const customHelperMessage: ComponentStory<typeof FormControl> = () => {
+export const customHelperMessage: Story = () => {
   return (
     <FormControl label='Email address'>
       <Input type='email' placeholder='your email address' />
-      <HelperMessage color='gray.300'>We'll never share your email.</HelperMessage>
+      <HelperMessage color='gray.300'>
+        We'll never share your email.
+      </HelperMessage>
     </FormControl>
   )
 }
 
-export const customErrorMessage: ComponentStory<typeof FormControl> = () => {
+export const customErrorMessage: Story = () => {
   return (
     <FormControl isInvalid label='Email address'>
       <Input type='email' placeholder='your email address' />
@@ -122,7 +142,7 @@ export const customErrorMessage: ComponentStory<typeof FormControl> = () => {
   )
 }
 
-export const customRequiredIndicator: ComponentStory<typeof FormControl> = () => {
+export const customRequiredIndicator: Story = () => {
   return (
     <>
       <FormControl
@@ -153,7 +173,7 @@ export const customRequiredIndicator: ComponentStory<typeof FormControl> = () =>
   )
 }
 
-export const customOptionalIndicator: ComponentStory<typeof FormControl> = () => {
+export const customOptionalIndicator: Story = () => {
   return (
     <>
       <FormControl

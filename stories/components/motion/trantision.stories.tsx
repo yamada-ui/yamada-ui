@@ -1,13 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Center, Motion, MotionVariants } from '@yamada-ui/react'
 import { useMemo } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Transition',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const basic: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -24,7 +28,7 @@ export const basic: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withType: ComponentStory<typeof Motion> = () => {
+export const withType: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -41,13 +45,18 @@ export const withType: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useValueSpecific: ComponentStory<typeof Motion> = () => {
+export const useValueSpecific: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, x: 100 }}
-        transition={{ ease: 'easeOut', delay: 1, x: { duration: 2 }, opacity: { duration: 1 } }}
+        transition={{
+          ease: 'easeOut',
+          delay: 1,
+          x: { duration: 2 },
+          opacity: { duration: 1 },
+        }}
         bg='primary'
         color='white'
         p='md'
@@ -59,7 +68,7 @@ export const useValueSpecific: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withDelayChildren: ComponentStory<typeof Motion> = () => {
+export const withDelayChildren: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -92,16 +101,44 @@ export const withDelayChildren: ComponentStory<typeof Motion> = () => {
         flexDirection='column'
         gap='md'
       >
-        <Motion variants={item} custom={1} bg='white' w='full' h='4' rounded='md' />
-        <Motion variants={item} custom={2} bg='white' w='full' h='4' rounded='md' />
-        <Motion variants={item} custom={3} bg='white' w='full' h='4' rounded='md' />
-        <Motion variants={item} custom={4} bg='white' w='full' h='4' rounded='md' />
+        <Motion
+          variants={item}
+          custom={1}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
+        <Motion
+          variants={item}
+          custom={2}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
+        <Motion
+          variants={item}
+          custom={3}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
+        <Motion
+          variants={item}
+          custom={4}
+          bg='white'
+          w='full'
+          h='4'
+          rounded='md'
+        />
       </Motion>
     </Center>
   )
 }
 
-export const withStaggerChildren: ComponentStory<typeof Motion> = () => {
+export const withStaggerChildren: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -143,11 +180,14 @@ export const withStaggerChildren: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withStaggerDirection: ComponentStory<typeof Motion> = () => {
+export const withStaggerDirection: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { staggerChildren: 1, staggerDirection: -1 } },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: 1, staggerDirection: -1 },
+      },
     }),
     [],
   )
@@ -185,7 +225,7 @@ export const withStaggerDirection: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withAfterChildren: ComponentStory<typeof Motion> = () => {
+export const withAfterChildren: Story = () => {
   const list: MotionVariants = useMemo(
     () => ({
       hidden: { opacity: 0, transition: { when: 'afterChildren' } },
@@ -224,7 +264,7 @@ export const withAfterChildren: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withRepeat: ComponentStory<typeof Motion> = () => {
+export const withRepeat: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -241,7 +281,7 @@ export const withRepeat: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withRepeatType: ComponentStory<typeof Motion> = () => {
+export const withRepeatType: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -258,7 +298,7 @@ export const withRepeatType: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withRepeatDelay: ComponentStory<typeof Motion> = () => {
+export const withRepeatDelay: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -275,7 +315,7 @@ export const withRepeatDelay: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withEasing: ComponentStory<typeof Motion> = () => {
+export const withEasing: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion

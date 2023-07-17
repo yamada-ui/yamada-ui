@@ -1,5 +1,5 @@
 import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Stepper,
@@ -15,12 +15,16 @@ import {
   Steps,
 } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Stepper>
+
+const meta: Meta<typeof Stepper> = {
   title: 'Components / Navigation / Stepper',
   component: Stepper,
-} as ComponentMeta<typeof Stepper>
+}
 
-export const basic: ComponentStory<typeof Stepper> = () => {
+export default meta
+
+export const basic: Story = () => {
   const steps: Steps = [
     { title: '孫悟空少年編', description: 'レッドリボン軍' },
     { title: 'ピッコロ大魔王編', description: 'ピッコロ大魔王' },
@@ -44,7 +48,7 @@ export const basic: ComponentStory<typeof Stepper> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Stepper> = () => {
+export const withSize: Story = () => {
   const steps: Steps = [
     { title: '孫悟空少年編', description: 'レッドリボン軍' },
     { title: 'ピッコロ大魔王編', description: 'ピッコロ大魔王' },
@@ -62,7 +66,7 @@ export const withSize: ComponentStory<typeof Stepper> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Stepper> = () => {
+export const withColorScheme: Story = () => {
   const steps: Steps = [
     { title: '孫悟空少年編', description: 'レッドリボン軍' },
     { title: 'ピッコロ大魔王編', description: 'ピッコロ大魔王' },
@@ -104,7 +108,7 @@ export const withColorScheme: ComponentStory<typeof Stepper> = () => {
   )
 }
 
-export const withOrientation: ComponentStory<typeof Stepper> = () => {
+export const withOrientation: Story = () => {
   const steps: Steps = [
     { title: '孫悟空少年編', description: 'レッドリボン軍' },
     { title: 'ピッコロ大魔王編', description: 'ピッコロ大魔王' },
@@ -130,7 +134,7 @@ export const withOrientation: ComponentStory<typeof Stepper> = () => {
   )
 }
 
-export const customStep: ComponentStory<typeof Stepper> = () => {
+export const customStep: Story = () => {
   const steps: Steps = [
     { title: '孫悟空少年編', description: 'レッドリボン軍' },
     { title: 'ピッコロ大魔王編', description: 'ピッコロ大魔王' },
@@ -168,7 +172,7 @@ export const customStep: ComponentStory<typeof Stepper> = () => {
   )
 }
 
-export const customStatus: ComponentStory<typeof Stepper> = () => {
+export const customStatus: Story = () => {
   const steps: Steps = [
     {
       title: '孫悟空少年編',

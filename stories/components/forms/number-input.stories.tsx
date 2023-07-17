@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Button,
   FormControl,
@@ -10,16 +10,20 @@ import {
 } from '@yamada-ui/react'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof NumberInput>
+
+const meta: Meta<typeof NumberInput> = {
   title: 'Components / Forms / NumberInput',
   component: NumberInput,
-} as ComponentMeta<typeof NumberInput>
+}
 
-export const basic: ComponentStory<typeof NumberInput> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <NumberInput placeholder='basic' />
 }
 
-export const withSize: ComponentStory<typeof NumberInput> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <NumberInput placeholder='extra small size' size='xs' />
@@ -30,7 +34,7 @@ export const withSize: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof NumberInput> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <NumberInput variant='outline' placeholder='outline' />
@@ -41,41 +45,55 @@ export const withVariant: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof NumberInput> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <NumberInput disabled placeholder='default border color' />
-      <NumberInput focusBorderColor='green.500' placeholder='custom border color' />
-      <NumberInput isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <NumberInput
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
+      <NumberInput
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof NumberInput> = () => {
+export const withDefaultValue: Story = () => {
   return <NumberInput defaultValue={18} />
 }
 
-export const withMinMax: ComponentStory<typeof NumberInput> = () => {
+export const withMinMax: Story = () => {
   return <NumberInput defaultValue={18} min={8} max={31} />
 }
 
-export const withStep: ComponentStory<typeof NumberInput> = () => {
+export const withStep: Story = () => {
   return <NumberInput defaultValue={15} step={5} min={5} max={30} />
 }
 
-export const withPrecision: ComponentStory<typeof NumberInput> = () => {
+export const withPrecision: Story = () => {
   return <NumberInput defaultValue={15} precision={2} step={0.2} />
 }
 
-export const disabledClampValueOnBlur: ComponentStory<typeof NumberInput> = () => {
+export const disabledClampValueOnBlur: Story = () => {
   return <NumberInput defaultValue={15} max={30} clampValueOnBlur={false} />
 }
 
-export const disabledKeepWithinRange: ComponentStory<typeof NumberInput> = () => {
-  return <NumberInput defaultValue={15} max={30} keepWithinRange={false} clampValueOnBlur={false} />
+export const disabledKeepWithinRange: Story = () => {
+  return (
+    <NumberInput
+      defaultValue={15}
+      max={30}
+      keepWithinRange={false}
+      clampValueOnBlur={false}
+    />
+  )
 }
 
-export const isDisabled: ComponentStory<typeof NumberInput> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <NumberInput isDisabled variant='outline' placeholder='outline' />
@@ -94,7 +112,7 @@ export const isDisabled: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof NumberInput> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <NumberInput isReadOnly variant='outline' placeholder='outline' />
@@ -113,7 +131,7 @@ export const isReadonly: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof NumberInput> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <NumberInput isInvalid variant='outline' placeholder='outline' />
@@ -121,14 +139,18 @@ export const isInvalid: ComponentStory<typeof NumberInput> = () => {
       <NumberInput isInvalid variant='flushed' placeholder='flushed' />
       <NumberInput isInvalid variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isInvalid label='Order quantity' errorMessage='Order quantity is required.'>
+      <FormControl
+        isInvalid
+        label='Order quantity'
+        errorMessage='Order quantity is required.'
+      >
         <NumberInput />
       </FormControl>
     </>
   )
 }
 
-export const costomStepper: ComponentStory<typeof NumberInput> = () => {
+export const costomStepper: Story = () => {
   return (
     <NumberInput
       incrementProps={{ px: 'xs', children: '+' }}
@@ -137,14 +159,15 @@ export const costomStepper: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const costomComponent: ComponentStory<typeof NumberInput> = () => {
-  const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
-    step: 0.01,
-    defaultValue: 3.14,
-    min: 3,
-    max: 4,
-    precision: 2,
-  })
+export const costomComponent: Story = () => {
+  const { getInputProps, getIncrementProps, getDecrementProps } =
+    useNumberInput({
+      step: 0.01,
+      defaultValue: 3.14,
+      min: 3,
+      max: 4,
+      precision: 2,
+    })
 
   return (
     <HStack maxW='xs' gap='sm'>
@@ -155,7 +178,7 @@ export const costomComponent: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const stylingPlaceholder: ComponentStory<typeof NumberInput> = () => {
+export const stylingPlaceholder: Story = () => {
   return (
     <>
       <NumberInput placeholder='default placeholder' />
@@ -172,7 +195,7 @@ export const stylingPlaceholder: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof NumberInput> = () => {
+export const reactHookForm: Story = () => {
   type Data = { numberInput: string }
 
   const {
@@ -211,7 +234,7 @@ export const reactHookForm: ComponentStory<typeof NumberInput> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof NumberInput> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { numberInput: string }
 
   const defaultValues: Data = {

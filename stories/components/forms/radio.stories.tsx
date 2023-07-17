@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   FormControl,
   Radio,
@@ -14,16 +14,20 @@ import {
 import { FC, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof Radio>
+
+const meta: Meta<typeof Radio> = {
   title: 'Components / Forms / Radio',
   component: Radio,
-} as ComponentMeta<typeof Radio>
+}
 
-export const basic: ComponentStory<typeof Radio> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Radio>孫悟空</Radio>
 }
 
-export const withSize: ComponentStory<typeof Radio> = () => {
+export const withSize: Story = () => {
   return (
     <Wrap gap='md'>
       <Radio size='sm'>孫悟空</Radio>
@@ -33,11 +37,11 @@ export const withSize: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const withDefaultChecked: ComponentStory<typeof Radio> = () => {
+export const withDefaultChecked: Story = () => {
   return <Radio defaultChecked>孫悟空</Radio>
 }
 
-export const withColorScheme: ComponentStory<typeof Radio> = () => {
+export const withColorScheme: Story = () => {
   return (
     <Wrap gap='md'>
       <Radio colorScheme='primary' defaultChecked>
@@ -103,7 +107,7 @@ export const withColorScheme: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Radio> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Radio isDisabled>All Notifications</Radio>
@@ -119,11 +123,17 @@ export const isDisabled: ComponentStory<typeof Radio> = () => {
         <Radio value='service'>Service Notifications</Radio>
       </RadioGroup>
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <Radio defaultChecked>All Notifications</Radio>
       </FormControl>
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <RadioGroup defaultValue='all'>
           <Radio value='all'>All Notifications</Radio>
           <Radio value='important'>Important Notifications</Radio>
@@ -134,7 +144,7 @@ export const isDisabled: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof Radio> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Radio isReadOnly>All Notifications</Radio>
@@ -150,11 +160,17 @@ export const isReadonly: ComponentStory<typeof Radio> = () => {
         <Radio value='service'>Service Notifications</Radio>
       </RadioGroup>
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <Radio defaultChecked>All Notifications</Radio>
       </FormControl>
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <RadioGroup defaultValue='all'>
           <Radio value='all'>All Notifications</Radio>
           <Radio value='important'>Important Notifications</Radio>
@@ -165,7 +181,7 @@ export const isReadonly: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof Radio> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Radio isInvalid>All Notifications</Radio>
@@ -204,7 +220,7 @@ export const isInvalid: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const group: ComponentStory<typeof Radio> = () => {
+export const group: Story = () => {
   return (
     <>
       <RadioGroup defaultValue='孫悟空'>
@@ -222,7 +238,7 @@ export const group: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Radio> = () => {
+export const customControl: Story = () => {
   const [value, setValue] = useState<string>('孫悟空')
 
   return (
@@ -234,7 +250,7 @@ export const customControl: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const customHook: ComponentStory<typeof Radio> = () => {
+export const customHook: Story = () => {
   const CustomRadio: FC<any> = (props) => {
     const { getInputProps, getIconProps } = useRadio(props)
 
@@ -261,7 +277,9 @@ export const customHook: ComponentStory<typeof Radio> = () => {
     )
   }
 
-  const { getContainerProps, getRadioProps } = useRadioGroup({ defaultValue: '孫悟空' })
+  const { getContainerProps, getRadioProps } = useRadioGroup({
+    defaultValue: '孫悟空',
+  })
 
   return (
     <HStack gap='sm' {...getContainerProps()}>
@@ -272,7 +290,7 @@ export const customHook: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Radio> = () => {
+export const reactHookForm: Story = () => {
   type Data = { radio: string }
 
   const {
@@ -314,7 +332,7 @@ export const reactHookForm: ComponentStory<typeof Radio> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Radio> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { radio: string }
 
   const defaultValues: Data = {

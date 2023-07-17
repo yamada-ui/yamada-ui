@@ -1,13 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Box, Center, Motion, useDragControls } from '@yamada-ui/react'
 import { useRef } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Drag',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const basic: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -26,7 +30,7 @@ export const basic: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withConstraints: ComponentStory<typeof Motion> = () => {
+export const withConstraints: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
       <Motion
@@ -53,11 +57,16 @@ export const withConstraints: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withConstraintsRef: ComponentStory<typeof Motion> = () => {
+export const withConstraintsRef: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Center ref={constraintsRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
+    <Center
+      ref={constraintsRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      gap='md'
+    >
       <Motion
         drag
         dragConstraints={constraintsRef}
@@ -72,11 +81,16 @@ export const withConstraintsRef: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withElastic: ComponentStory<typeof Motion> = () => {
+export const withElastic: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Center ref={constraintsRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
+    <Center
+      ref={constraintsRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      gap='md'
+    >
       <Motion
         drag
         dragConstraints={constraintsRef}
@@ -92,11 +106,16 @@ export const withElastic: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withMomentum: ComponentStory<typeof Motion> = () => {
+export const withMomentum: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Center ref={constraintsRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
+    <Center
+      ref={constraintsRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      gap='md'
+    >
       <Motion
         drag
         dragConstraints={constraintsRef}
@@ -112,11 +131,16 @@ export const withMomentum: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withTransition: ComponentStory<typeof Motion> = () => {
+export const withTransition: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Center ref={constraintsRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
+    <Center
+      ref={constraintsRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      gap='md'
+    >
       <Motion
         drag
         dragConstraints={constraintsRef}
@@ -132,12 +156,16 @@ export const withTransition: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useStopPropagation: ComponentStory<typeof Motion> = () => {
+export const useStopPropagation: Story = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Center ref={containerRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+    <Center
+      ref={containerRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+    >
       <Motion
         ref={itemRef}
         drag
@@ -166,12 +194,17 @@ export const useStopPropagation: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useControls: ComponentStory<typeof Motion> = () => {
+export const useControls: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls()
 
   return (
-    <Center ref={constraintsRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
+    <Center
+      ref={constraintsRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      gap='md'
+    >
       <Box
         w='2xs'
         h='2xs'
@@ -196,12 +229,17 @@ export const useControls: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const disabledListener: ComponentStory<typeof Motion> = () => {
+export const disabledListener: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls()
 
   return (
-    <Center ref={constraintsRef} w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)' gap='md'>
+    <Center
+      ref={constraintsRef}
+      w='calc(100vw - 16px * 2)'
+      h='calc(100vh - 16px * 2)'
+      gap='md'
+    >
       <Box
         w='2xs'
         h='2xs'

@@ -7,16 +7,26 @@ import {
   faPlus,
   faSun,
 } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
-import { Wrap, Button, IconButton, ButtonGroup, CloseButton } from '@yamada-ui/react'
+import {
+  Wrap,
+  Button,
+  IconButton,
+  ButtonGroup,
+  CloseButton,
+} from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Button>
+
+const meta: Meta<typeof Button> = {
   title: 'Components / Forms / Button',
   component: Button,
-} as ComponentMeta<typeof Button>
+}
 
-export const solid: ComponentStory<typeof Button> = () => {
+export default meta
+
+export const solid: Story = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary'>Primary</Button>
@@ -52,7 +62,7 @@ export const solid: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const outline: ComponentStory<typeof Button> = () => {
+export const outline: Story = () => {
   return (
     <Wrap gap='md'>
       <Button variant='outline' colorScheme='primary'>
@@ -118,7 +128,7 @@ export const outline: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Button> = () => {
+export const withSize: Story = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary' size='xs'>
@@ -140,7 +150,7 @@ export const withSize: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Button> = () => {
+export const withVariant: Story = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary' variant='solid'>
@@ -164,7 +174,7 @@ export const withVariant: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const withDisabled: ComponentStory<typeof Button> = () => {
+export const withDisabled: Story = () => {
   return (
     <Wrap gap='md'>
       <Button colorScheme='primary' variant='solid' isDisabled>
@@ -190,43 +200,67 @@ export const withDisabled: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const withIcon: ComponentStory<typeof Button> = () => {
+export const withIcon: Story = () => {
   return (
     <Wrap gap='md'>
-      <Button colorScheme='primary' variant='solid' leftIcon={<Icon icon={faPlus} />}>
+      <Button
+        colorScheme='primary'
+        variant='solid'
+        leftIcon={<Icon icon={faPlus} />}
+      >
         Button
       </Button>
 
-      <Button colorScheme='secondary' variant='outline' rightIcon={<Icon icon={faArrowRight} />}>
+      <Button
+        colorScheme='secondary'
+        variant='outline'
+        rightIcon={<Icon icon={faArrowRight} />}
+      >
         Button
       </Button>
 
-      <Button colorScheme='warning' variant='ghost' leftIcon={<Icon icon={faEnvelope} />}>
+      <Button
+        colorScheme='warning'
+        variant='ghost'
+        leftIcon={<Icon icon={faEnvelope} />}
+      >
         Button
       </Button>
 
-      <Button colorScheme='danger' variant='link' leftIcon={<Icon icon={faCheck} />}>
+      <Button
+        colorScheme='danger'
+        variant='link'
+        leftIcon={<Icon icon={faCheck} />}
+      >
         Button
       </Button>
     </Wrap>
   )
 }
 
-export const iconButton: ComponentStory<typeof Button> = () => {
+export const iconButton: Story = () => {
   return (
     <Wrap gap='md'>
       <IconButton colorScheme='primary' icon={<Icon icon={faPlus} />} />
 
       <IconButton colorScheme='secondary' icon={<Icon icon={faMinus} />} />
 
-      <IconButton colorScheme='warning' size='lg' icon={<Icon icon={faSun} />} />
+      <IconButton
+        colorScheme='warning'
+        size='lg'
+        icon={<Icon icon={faSun} />}
+      />
 
-      <IconButton colorScheme='danger' size='lg' icon={<Icon icon={faMoon} />} />
+      <IconButton
+        colorScheme='danger'
+        size='lg'
+        icon={<Icon icon={faMoon} />}
+      />
     </Wrap>
   )
 }
 
-export const closeButton: ComponentStory<typeof Button> = () => {
+export const closeButton: Story = () => {
   return (
     <Wrap gap='md'>
       <CloseButton size='sm' />
@@ -238,7 +272,7 @@ export const closeButton: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const withLoading: ComponentStory<typeof Button> = () => {
+export const withLoading: Story = () => {
   return (
     <Wrap gap='md'>
       <Button isLoading colorScheme='primary'>
@@ -275,7 +309,7 @@ export const withLoading: ComponentStory<typeof Button> = () => {
   )
 }
 
-export const buttonGroup: ComponentStory<typeof Button> = () => {
+export const buttonGroup: Story = () => {
   return (
     <>
       <ButtonGroup isAttached variant='outline'>

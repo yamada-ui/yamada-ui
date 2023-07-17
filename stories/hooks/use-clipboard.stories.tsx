@@ -1,3 +1,4 @@
+import { Meta } from '@storybook/react'
 import {
   Button,
   Editable,
@@ -8,9 +9,11 @@ import {
   useClipboard,
 } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useClipboard',
 }
+
+export default meta
 
 export const basic = () => {
   const { onCopy, value, setValue, hasCopied } = useClipboard()
@@ -64,7 +67,9 @@ export const directCopy = () => {
   return (
     <HStack gap='md'>
       <Input value={value} isReadOnly />
-      <Button onClick={() => onCopy(value)}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+      <Button onClick={() => onCopy(value)}>
+        {hasCopied ? 'Copied!' : 'Copy'}
+      </Button>
     </HStack>
   )
 }

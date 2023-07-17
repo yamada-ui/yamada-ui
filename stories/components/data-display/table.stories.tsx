@@ -1,11 +1,16 @@
-import { ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { TableCaption, Button, Text } from '@yamada-ui/react'
 import { Table, Column, Sort } from '@yamada-ui/table'
 import { useMemo, useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Table>
+
+const meta: Meta<typeof Table> = {
   title: 'Components / Data Display / Table',
+  component: Table,
 }
+
+export default meta
 
 type Data = {
   name: string
@@ -13,7 +18,7 @@ type Data = {
   episode: string
 }
 
-export const basic: ComponentStory<typeof Table> = () => {
+export const basic: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -66,7 +71,7 @@ export const basic: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} />
 }
 
-export const withSize: ComponentStory<typeof Table> = () => {
+export const withSize: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -126,7 +131,7 @@ export const withSize: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Table> = () => {
+export const withVariant: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -184,7 +189,7 @@ export const withVariant: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Table> = () => {
+export const withColorScheme: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -236,40 +241,115 @@ export const withColorScheme: ComponentStory<typeof Table> = () => {
 
   return (
     <>
-      <Table variant='striped' colorScheme='primary' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='primary'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='secondary' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='secondary'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='warning' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='warning'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='danger' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='danger'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='link' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='link'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='gray' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='gray'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='red' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='red'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='orange' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='orange'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='yellow' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='yellow'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='green' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='green'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='teal' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='teal'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='blue' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='blue'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='cyan' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='cyan'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='purple' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='purple'
+        columns={columns}
+        data={data}
+      />
 
-      <Table variant='striped' colorScheme='pink' columns={columns} data={data} />
+      <Table
+        variant='striped'
+        colorScheme='pink'
+        columns={columns}
+        data={data}
+      />
     </>
   )
 }
 
-export const withColumnBorders: ComponentStory<typeof Table> = () => {
+export const withColumnBorders: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -322,7 +402,7 @@ export const withColumnBorders: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} withColumnBorders />
 }
 
-export const withBorder: ComponentStory<typeof Table> = () => {
+export const withBorder: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -375,7 +455,7 @@ export const withBorder: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} withBorder />
 }
 
-export const withHighlightOnHover: ComponentStory<typeof Table> = () => {
+export const withHighlightOnHover: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -428,7 +508,7 @@ export const withHighlightOnHover: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} highlightOnHover />
 }
 
-export const withCaption: ComponentStory<typeof Table> = () => {
+export const withCaption: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -481,16 +561,20 @@ export const withCaption: ComponentStory<typeof Table> = () => {
   return (
     <>
       <Table variant='simple' columns={columns} data={data}>
-        <TableCaption placement='top'>©バードスタジオ/集英社・東映アニメーション</TableCaption>
+        <TableCaption placement='top'>
+          ©バードスタジオ/集英社・東映アニメーション
+        </TableCaption>
       </Table>
       <Table variant='striped' columns={columns} data={data}>
-        <TableCaption placement='bottom'>©バードスタジオ/集英社・東映アニメーション</TableCaption>
+        <TableCaption placement='bottom'>
+          ©バードスタジオ/集英社・東映アニメーション
+        </TableCaption>
       </Table>
     </>
   )
 }
 
-export const withFooter: ComponentStory<typeof Table> = () => {
+export const withFooter: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -551,7 +635,7 @@ export const withFooter: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withRowId: ComponentStory<typeof Table> = () => {
+export const withRowId: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -604,7 +688,7 @@ export const withRowId: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} rowId='name' />
 }
 
-export const withDefaultSort: ComponentStory<typeof Table> = () => {
+export const withDefaultSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -667,7 +751,7 @@ export const withDefaultSort: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const manualSort: ComponentStory<typeof Table> = () => {
+export const manualSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -730,7 +814,7 @@ export const manualSort: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const customControlSort: ComponentStory<typeof Table> = () => {
+export const customControlSort: Story = () => {
   const [sort, onChangeSort] = useState<Sort<Data>>([])
 
   const columns = useMemo<Column<Data>[]>(
@@ -798,7 +882,7 @@ export const customControlSort: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withMaxMultiSortColCount: ComponentStory<typeof Table> = () => {
+export const withMaxMultiSortColCount: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -861,7 +945,7 @@ export const withMaxMultiSortColCount: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const disabledSort: ComponentStory<typeof Table> = () => {
+export const disabledSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -927,7 +1011,7 @@ export const disabledSort: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withSortDescFirst: ComponentStory<typeof Table> = () => {
+export const withSortDescFirst: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -999,7 +1083,7 @@ export const withSortDescFirst: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const disabledMultiSort: ComponentStory<typeof Table> = () => {
+export const disabledMultiSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1061,7 +1145,7 @@ export const disabledMultiSort: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withDefaultSelectedRowIds: ComponentStory<typeof Table> = () => {
+export const withDefaultSelectedRowIds: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1124,7 +1208,7 @@ export const withDefaultSelectedRowIds: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const disabledRowIds: ComponentStory<typeof Table> = () => {
+export const disabledRowIds: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1187,7 +1271,7 @@ export const disabledRowIds: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withRowsClickSelect: ComponentStory<typeof Table> = () => {
+export const withRowsClickSelect: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1250,7 +1334,7 @@ export const withRowsClickSelect: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const disabledSelect: ComponentStory<typeof Table> = () => {
+export const disabledSelect: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1303,7 +1387,7 @@ export const disabledSelect: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} enableRowSelection={false} />
 }
 
-export const customControlSelect: ComponentStory<typeof Table> = () => {
+export const customControlSelect: Story = () => {
   const [selectedRowIds, onChangeSelect] = useState<string[]>([])
 
   const columns = useMemo<Column<Data>[]>(
@@ -1370,7 +1454,7 @@ export const customControlSelect: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const useClickRow: ComponentStory<typeof Table> = () => {
+export const useClickRow: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1431,7 +1515,7 @@ export const useClickRow: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withCheckboxProps: ComponentStory<typeof Table> = () => {
+export const withCheckboxProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1481,10 +1565,16 @@ export const withCheckboxProps: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return <Table columns={columns} data={data} checkboxProps={{ colorScheme: 'red' }} />
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      checkboxProps={{ colorScheme: 'red' }}
+    />
+  )
 }
 
-export const withSelectColumnProps: ComponentStory<typeof Table> = () => {
+export const withSelectColumnProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1534,10 +1624,16 @@ export const withSelectColumnProps: ComponentStory<typeof Table> = () => {
     [],
   )
 
-  return <Table columns={columns} data={data} selectColumnProps={{ css: { w: '40px' } }} />
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      selectColumnProps={{ css: { w: '40px' } }}
+    />
+  )
 }
 
-export const disabledSelectColumn: ComponentStory<typeof Table> = () => {
+export const disabledSelectColumn: Story = () => {
   const [selectedRowIds, onChangeSelect] = useState<string[]>([])
 
   const columns = useMemo<Column<Data>[]>(
@@ -1605,7 +1701,7 @@ export const disabledSelectColumn: ComponentStory<typeof Table> = () => {
   )
 }
 
-export const withColumnStyles: ComponentStory<typeof Table> = () => {
+export const withColumnStyles: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1661,7 +1757,7 @@ export const withColumnStyles: ComponentStory<typeof Table> = () => {
   return <Table columns={columns} data={data} />
 }
 
-export const customProps: ComponentStory<typeof Table> = () => {
+export const customProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -1738,13 +1834,16 @@ export const customProps: ComponentStory<typeof Table> = () => {
         data={data}
         withFooter
         headerProps={({ column }) => {
-          if (column.columnDef.header === '作品名') return { color: ['red.400', 'red.300'] }
+          if (column.columnDef.header === '作品名')
+            return { color: ['red.400', 'red.300'] }
         }}
         cellProps={({ column }) => {
-          if (column.columnDef.header === '作品名') return { color: ['red.400', 'red.300'] }
+          if (column.columnDef.header === '作品名')
+            return { color: ['red.400', 'red.300'] }
         }}
         footerProps={({ column }) => {
-          if (column.columnDef.footer === '作品名') return { color: ['red.400', 'red.300'] }
+          if (column.columnDef.footer === '作品名')
+            return { color: ['red.400', 'red.300'] }
         }}
       />
     </>

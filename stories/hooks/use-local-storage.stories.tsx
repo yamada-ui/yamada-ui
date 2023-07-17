@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { Button, Wrap, useLocalStorage } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useLocalStorage',
 }
+
+export default meta
 
 export const basic = () => {
   const [value, setValue, resetValue] = useLocalStorage<number>({

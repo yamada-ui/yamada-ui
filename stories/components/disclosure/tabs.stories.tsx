@@ -1,13 +1,17 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@yamada-ui/react'
 import { useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Tabs>
+
+const meta: Meta<typeof Tabs> = {
   title: 'Components / Disclosure / Tabs',
   component: Tabs,
-} as ComponentMeta<typeof Tabs>
+}
 
-export const basic: ComponentStory<typeof Tabs> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Tabs>
       <Tab>孫悟空</Tab>
@@ -29,7 +33,7 @@ export const basic: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withDefaultIndex: ComponentStory<typeof Tabs> = () => {
+export const withDefaultIndex: Story = () => {
   return (
     <Tabs defaultIndex={1}>
       <Tab>孫悟空</Tab>
@@ -51,7 +55,7 @@ export const withDefaultIndex: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Tabs> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Tabs size='sm'>
@@ -111,7 +115,7 @@ export const withSize: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Tabs> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Tabs variant='line'>
@@ -261,7 +265,7 @@ export const withVariant: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Tabs> = () => {
+export const withColorScheme: Story = () => {
   return (
     <Tabs variant='rounded-solid' colorScheme='red'>
       <Tab>孫悟空</Tab>
@@ -283,7 +287,7 @@ export const withColorScheme: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withAlign: ComponentStory<typeof Tabs> = () => {
+export const withAlign: Story = () => {
   return (
     <>
       <Tabs align='start'>
@@ -343,7 +347,7 @@ export const withAlign: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withOrientation: ComponentStory<typeof Tabs> = () => {
+export const withOrientation: Story = () => {
   return (
     <>
       <Tabs orientation='horizontal'>
@@ -385,7 +389,7 @@ export const withOrientation: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const withFitted: ComponentStory<typeof Tabs> = () => {
+export const withFitted: Story = () => {
   return (
     <>
       <Tabs variant='line' isFitted>
@@ -427,7 +431,7 @@ export const withFitted: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Tabs> = () => {
+export const isDisabled: Story = () => {
   return (
     <Tabs>
       <Tab>孫悟空</Tab>
@@ -449,7 +453,7 @@ export const isDisabled: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const isFocusable: ComponentStory<typeof Tabs> = () => {
+export const isFocusable: Story = () => {
   return (
     <Tabs>
       <Tab>孫悟空</Tab>
@@ -471,7 +475,7 @@ export const isFocusable: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const isManual: ComponentStory<typeof Tabs> = () => {
+export const isManual: Story = () => {
   return (
     <Tabs isManual>
       <Tab>孫悟空</Tab>
@@ -493,7 +497,7 @@ export const isManual: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const isLazy: ComponentStory<typeof Tabs> = () => {
+export const isLazy: Story = () => {
   return (
     <Tabs isLazy lazyBehavior='unmount'>
       <Tab>孫悟空</Tab>
@@ -515,7 +519,7 @@ export const isLazy: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const customTabList: ComponentStory<typeof Tabs> = () => {
+export const customTabList: Story = () => {
   return (
     <Tabs>
       <TabList borderWidth={1}>
@@ -539,7 +543,7 @@ export const customTabList: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const customTabPanels: ComponentStory<typeof Tabs> = () => {
+export const customTabPanels: Story = () => {
   return (
     <Tabs variant='sticky'>
       <Tab>孫悟空</Tab>
@@ -563,7 +567,7 @@ export const customTabPanels: ComponentStory<typeof Tabs> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Tabs> = () => {
+export const customControl: Story = () => {
   const [index, onChange] = useState<number>(0)
 
   return (

@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Link, Heading, LinkBox, LinkOverlay, Text } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof LinkBox>
+
+const meta: Meta<typeof LinkBox> = {
   title: 'Components / Navigation / LinkBox',
   component: LinkBox,
-} as ComponentMeta<typeof LinkBox>
+}
 
-export const basic: ComponentStory<typeof LinkBox> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <LinkBox
       as='article'
@@ -36,7 +40,7 @@ export const basic: ComponentStory<typeof LinkBox> = () => {
   )
 }
 
-export const withNestedLink: ComponentStory<typeof LinkBox> = () => {
+export const withNestedLink: Story = () => {
   return (
     <LinkBox
       as='article'
@@ -63,7 +67,12 @@ export const withNestedLink: ComponentStory<typeof LinkBox> = () => {
         BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。略称は『DB』。
       </Text>
 
-      <Link href='https://dragon-ball-official.com/' isExternal fontWeight='bold' color='link'>
+      <Link
+        href='https://dragon-ball-official.com/'
+        isExternal
+        fontWeight='bold'
+        color='link'
+      >
         オフィシャルサイト
       </Link>
     </LinkBox>

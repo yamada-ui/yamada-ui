@@ -1,8 +1,11 @@
+import { Meta } from '@storybook/react'
 import { useLoading, Button, Center, Wrap, Text } from '@yamada-ui/react'
 
-export default {
+const meta: Meta = {
   title: 'Hooks / useLoading',
 }
+
+export default meta
 
 const wait = (ms: number) =>
   new Promise((resolve) => {
@@ -17,7 +20,9 @@ export const basic = () => {
       <Wrap gap='md'>
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
-        <Button onClick={() => background.start()}>Start background loading</Button>
+        <Button onClick={() => background.start()}>
+          Start background loading
+        </Button>
       </Wrap>
     </Center>
   )
@@ -29,8 +34,12 @@ export const withTimeout = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
-        <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
+        <Button onClick={() => screen.start({ duration: 5000 })}>
+          Start screen loading
+        </Button>
+        <Button onClick={() => page.start({ duration: 5000 })}>
+          Start page loading
+        </Button>
         <Button onClick={() => background.start({ duration: 5000 })}>
           Start background loading
         </Button>
@@ -45,13 +54,21 @@ export const withMessage = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
+        <Button
+          onClick={() => screen.start({ message: 'Loading', duration: 5000 })}
+        >
           Start screen loading
         </Button>
-        <Button onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
+        <Button
+          onClick={() => page.start({ message: 'Loading', duration: 5000 })}
+        >
           Start page loading
         </Button>
-        <Button onClick={() => background.start({ message: 'Loading', duration: 5000 })}>
+        <Button
+          onClick={() =>
+            background.start({ message: 'Loading', duration: 5000 })
+          }
+        >
           Start background loading
         </Button>
       </Wrap>
@@ -65,13 +82,25 @@ export const customMessage = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Wrap gap='md'>
-        <Button onClick={() => screen.start({ message: <Text color='primary'>Loading</Text> })}>
+        <Button
+          onClick={() =>
+            screen.start({ message: <Text color='primary'>Loading</Text> })
+          }
+        >
           Start screen loading
         </Button>
-        <Button onClick={() => page.start({ message: <Text color='primary'>Loading</Text> })}>
+        <Button
+          onClick={() =>
+            page.start({ message: <Text color='primary'>Loading</Text> })
+          }
+        >
           Start page loading
         </Button>
-        <Button onClick={() => background.start({ message: <Text color='primary'>Loading</Text> })}>
+        <Button
+          onClick={() =>
+            background.start({ message: <Text color='primary'>Loading</Text> })
+          }
+        >
           Start background loading
         </Button>
       </Wrap>

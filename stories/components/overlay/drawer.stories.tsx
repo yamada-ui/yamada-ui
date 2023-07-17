@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   Button,
   useDisclosure,
@@ -17,12 +17,16 @@ import {
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Drawer>
+
+const meta: Meta<typeof Drawer> = {
   title: 'Components / Overlay / Drawer',
   component: Drawer,
-} as ComponentMeta<typeof Drawer>
+}
 
-export const basic: ComponentStory<typeof Drawer> = () => {
+export default meta
+
+export const basic: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -48,7 +52,7 @@ export const basic: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Drawer> = () => {
+export const withDuration: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -74,7 +78,7 @@ export const withDuration: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Drawer> = () => {
+export const withSize: Story = () => {
   const [size, setSize] = useState<DrawerProps['size']>('md')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -146,7 +150,7 @@ export const withSize: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const withPosition: ComponentStory<typeof Drawer> = () => {
+export const withPosition: Story = () => {
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -209,7 +213,7 @@ export const withPosition: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const withFullHeight: ComponentStory<typeof Drawer> = () => {
+export const withFullHeight: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -235,7 +239,7 @@ export const withFullHeight: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const disabledCloseButton: ComponentStory<typeof Drawer> = () => {
+export const disabledCloseButton: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -261,7 +265,7 @@ export const disabledCloseButton: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const customCloseButton: ComponentStory<typeof Drawer> = () => {
+export const customCloseButton: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -289,7 +293,7 @@ export const customCloseButton: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const disabledOverlay: ComponentStory<typeof Drawer> = () => {
+export const disabledOverlay: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -315,7 +319,7 @@ export const disabledOverlay: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const customOverlay: ComponentStory<typeof Drawer> = () => {
+export const customOverlay: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -343,7 +347,7 @@ export const customOverlay: ComponentStory<typeof Drawer> = () => {
   )
 }
 
-export const scrollOnMount: ComponentStory<typeof Drawer> = () => {
+export const scrollOnMount: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -360,7 +364,10 @@ export const scrollOnMount: ComponentStory<typeof Drawer> = () => {
         borderColor='inherit'
         boxShadow='md'
       >
-        <Image src='https://dragon-ball-official.com/assets/img/intro/intro_2.png' maxW='sm' />
+        <Image
+          src='https://dragon-ball-official.com/assets/img/intro/intro_2.png'
+          maxW='sm'
+        />
 
         <Heading size='xl'>『ドラゴンボール』（DRAGON BALL）</Heading>
 

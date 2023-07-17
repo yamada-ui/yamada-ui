@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import {
   AnimatePresence,
   Box,
@@ -13,22 +13,32 @@ import {
 } from '@yamada-ui/react'
 import { FC } from 'react'
 
-export default {
+type Story = StoryFn<typeof Motion>
+
+const meta: Meta<typeof Motion> = {
   title: 'Components / Motion / Animation',
   component: Motion,
-} as ComponentMeta<typeof Motion>
+}
 
-export const basic: ComponentStory<typeof Motion> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
-      <Motion animate={{ x: 100 }} bg='primary' color='white' p='md' rounded='md'>
+      <Motion
+        animate={{ x: 100 }}
+        bg='primary'
+        color='white'
+        p='md'
+        rounded='md'
+      >
         Motion
       </Motion>
     </Center>
   )
 }
 
-export const withTransition: ComponentStory<typeof Motion> = () => {
+export const withTransition: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -45,7 +55,7 @@ export const withTransition: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withTransitionType: ComponentStory<typeof Motion> = () => {
+export const withTransitionType: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -67,7 +77,7 @@ export const withTransitionType: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withInitial: ComponentStory<typeof Motion> = () => {
+export const withInitial: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -84,7 +94,7 @@ export const withInitial: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withExit: ComponentStory<typeof Motion> = () => {
+export const withExit: Story = () => {
   const [isVisible, { toggle }] = useBoolean()
 
   return (
@@ -110,17 +120,23 @@ export const withExit: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useKeyframes: ComponentStory<typeof Motion> = () => {
+export const useKeyframes: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
-      <Motion animate={{ x: [0, 100, 0] }} bg='primary' color='white' p='md' rounded='md'>
+      <Motion
+        animate={{ x: [0, 100, 0] }}
+        bg='primary'
+        color='white'
+        p='md'
+        rounded='md'
+      >
         Motion
       </Motion>
     </Center>
   )
 }
 
-export const withTimes: ComponentStory<typeof Motion> = () => {
+export const withTimes: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -137,7 +153,7 @@ export const withTimes: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withRepeat: ComponentStory<typeof Motion> = () => {
+export const withRepeat: Story = () => {
   return (
     <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
       <Motion
@@ -161,7 +177,7 @@ export const withRepeat: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const withLayout: ComponentStory<typeof Motion> = () => {
+export const withLayout: Story = () => {
   const [flg, { toggle }] = useBoolean()
 
   return (
@@ -190,7 +206,7 @@ export const withLayout: ComponentStory<typeof Motion> = () => {
   )
 }
 
-export const useLayoutGroup: ComponentStory<typeof Motion> = () => {
+export const useLayoutGroup: Story = () => {
   const Accordion: FC = () => {
     const [isOpen, { toggle }] = useBoolean(false)
 

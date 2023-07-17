@@ -5,7 +5,7 @@ import {
   faEdit,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Button,
@@ -23,15 +23,22 @@ import {
 } from '@yamada-ui/react'
 import { useRef } from 'react'
 
-export default {
+type Story = StoryFn<typeof Menu>
+
+const meta: Meta<typeof Menu> = {
   title: 'Components / Overlay / Menu',
   component: Menu,
-} as ComponentMeta<typeof Menu>
+}
 
-export const basic: ComponentStory<typeof Menu> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -44,10 +51,14 @@ export const basic: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withCommand: ComponentStory<typeof Menu> = () => {
+export const withCommand: Story = () => {
   return (
     <Menu>
-      <MenuButton as={IconButton} icon={<Icon icon={faBars} />} variant='outline' />
+      <MenuButton
+        as={IconButton}
+        icon={<Icon icon={faBars} />}
+        variant='outline'
+      />
 
       <MenuList>
         <MenuItem command='⌘T'>New Tab</MenuItem>
@@ -58,10 +69,14 @@ export const withCommand: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withIcon: ComponentStory<typeof Menu> = () => {
+export const withIcon: Story = () => {
   return (
     <Menu>
-      <MenuButton as={IconButton} icon={<Icon icon={faBars} />} variant='outline' />
+      <MenuButton
+        as={IconButton}
+        icon={<Icon icon={faBars} />}
+        variant='outline'
+      />
 
       <MenuList>
         <MenuItem icon={<Icon icon={faPlus} />} command='⌘T'>
@@ -78,12 +93,15 @@ export const withIcon: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withInitialFocusRef: ComponentStory<typeof Menu> = () => {
+export const withInitialFocusRef: Story = () => {
   const ref = useRef<HTMLButtonElement>(null)
 
   return (
     <Menu initialFocusRef={ref}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -96,10 +114,13 @@ export const withInitialFocusRef: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof Menu> = () => {
+export const withPlacement: Story = () => {
   return (
     <Menu placement='right-start'>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -112,10 +133,13 @@ export const withPlacement: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withAnimation: ComponentStory<typeof Menu> = () => {
+export const withAnimation: Story = () => {
   return (
     <Menu animation='top'>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -128,10 +152,13 @@ export const withAnimation: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withOffset: ComponentStory<typeof Menu> = () => {
+export const withOffset: Story = () => {
   return (
     <Menu offset={[16, 16]}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -144,10 +171,13 @@ export const withOffset: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withGutter: ComponentStory<typeof Menu> = () => {
+export const withGutter: Story = () => {
   return (
     <Menu gutter={32}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -160,10 +190,13 @@ export const withGutter: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Menu> = () => {
+export const withDuration: Story = () => {
   return (
     <Menu duration={0.4}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -176,10 +209,13 @@ export const withDuration: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withDivider: ComponentStory<typeof Menu> = () => {
+export const withDivider: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -196,10 +232,13 @@ export const withDivider: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withGroup: ComponentStory<typeof Menu> = () => {
+export const withGroup: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -220,10 +259,13 @@ export const withGroup: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withOptionGroup: ComponentStory<typeof Menu> = () => {
+export const withOptionGroup: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -245,10 +287,13 @@ export const withOptionGroup: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const withPortal: ComponentStory<typeof Menu> = () => {
+export const withPortal: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -263,10 +308,13 @@ export const withPortal: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const disabledCloseOnSelect: ComponentStory<typeof Menu> = () => {
+export const disabledCloseOnSelect: Story = () => {
   return (
     <Menu closeOnSelect={false}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -279,10 +327,13 @@ export const disabledCloseOnSelect: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const disabledCloseBlur: ComponentStory<typeof Menu> = () => {
+export const disabledCloseBlur: Story = () => {
   return (
     <Menu closeOnBlur={false}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -295,10 +346,13 @@ export const disabledCloseBlur: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Menu> = () => {
+export const isDisabled: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -311,10 +365,13 @@ export const isDisabled: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const isFocusable: ComponentStory<typeof Menu> = () => {
+export const isFocusable: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -329,10 +386,13 @@ export const isFocusable: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const useLazy: ComponentStory<typeof Menu> = () => {
+export const useLazy: Story = () => {
   return (
     <Menu isLazy>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 
@@ -345,12 +405,15 @@ export const useLazy: ComponentStory<typeof Menu> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Menu> = () => {
+export const customControl: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <MenuButton as={Button} rightIcon={<Icon size='xs' icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size='xs' icon={faChevronDown} />}
+      >
         Menu
       </MenuButton>
 

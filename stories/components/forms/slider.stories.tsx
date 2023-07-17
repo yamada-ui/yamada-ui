@@ -1,5 +1,5 @@
 import { faWaveSquare } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Slider,
@@ -18,20 +18,24 @@ import {
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof Slider>
+
+const meta: Meta<typeof Slider> = {
   title: 'Components / Forms / Slider',
   component: Slider,
-} as ComponentMeta<typeof Slider>
+}
 
-export const basic: ComponentStory<typeof Slider> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Slider />
 }
 
-export const withDefaultValue: ComponentStory<typeof Slider> = () => {
+export const withDefaultValue: Story = () => {
   return <Slider defaultValue={50} />
 }
 
-export const withSize: ComponentStory<typeof Slider> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Slider size='sm' defaultValue={25} />
@@ -41,7 +45,7 @@ export const withSize: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Slider> = () => {
+export const withColorScheme: Story = () => {
   return (
     <>
       <Slider colorScheme='primary' />
@@ -77,20 +81,24 @@ export const withColorScheme: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withOrientation: ComponentStory<typeof Slider> = () => {
+export const withOrientation: Story = () => {
   return <Slider orientation='vertical' h='calc(100vh - 16px * 2)' />
 }
 
-export const withReversed: ComponentStory<typeof Slider> = () => {
+export const withReversed: Story = () => {
   return (
     <>
       <Slider isReversed />
-      <Slider isReversed orientation='vertical' h='calc(100vh - 16px * 3 - 14px)' />
+      <Slider
+        isReversed
+        orientation='vertical'
+        h='calc(100vh - 16px * 3 - 14px)'
+      />
     </>
   )
 }
 
-export const withMinMax: ComponentStory<typeof Slider> = () => {
+export const withMinMax: Story = () => {
   const [value, onChange] = useState<number>(50)
 
   return (
@@ -101,7 +109,7 @@ export const withMinMax: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withStep: ComponentStory<typeof Slider> = () => {
+export const withStep: Story = () => {
   const [value, onChange] = useState<number>(50)
 
   return (
@@ -112,7 +120,7 @@ export const withStep: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withFocusThumbOnChange: ComponentStory<typeof Slider> = () => {
+export const withFocusThumbOnChange: Story = () => {
   const [value, setValue] = useState<number>(50)
 
   return (
@@ -139,7 +147,7 @@ export const withFocusThumbOnChange: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withMark: ComponentStory<typeof Slider> = () => {
+export const withMark: Story = () => {
   return (
     <VStack gap='lg'>
       <Slider size='sm'>
@@ -181,12 +189,18 @@ export const withMark: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const withTooltip: ComponentStory<typeof Slider> = () => {
+export const withTooltip: Story = () => {
   const [value, onChange] = useState<number>(50)
   const [isOpen, { on, off }] = useBoolean(false)
 
   return (
-    <Slider value={value} onChange={onChange} mt='10' onMouseEnter={on} onMouseLeave={off}>
+    <Slider
+      value={value}
+      onChange={onChange}
+      mt='10'
+      onMouseEnter={on}
+      onMouseLeave={off}
+    >
       <SliderMark value={25} w='10' ml='-5'>
         25%
       </SliderMark>
@@ -204,7 +218,7 @@ export const withTooltip: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Slider> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Slider isDisabled />
@@ -220,7 +234,7 @@ export const isDisabled: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof Slider> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Slider isReadOnly />
@@ -236,7 +250,7 @@ export const isReadonly: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof Slider> = () => {
+export const isInvalid: Story = () => {
   const [value, onChange] = useState<number>(15)
 
   return (
@@ -254,10 +268,14 @@ export const isInvalid: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const customColor: ComponentStory<typeof Slider> = () => {
+export const customColor: Story = () => {
   return (
     <>
-      <Slider trackColor='orange.200' filledTrackColor='orange.500' thumbColor='orange.700' />
+      <Slider
+        trackColor='orange.200'
+        filledTrackColor='orange.500'
+        thumbColor='orange.700'
+      />
 
       <Slider
         track={{ bg: 'green.200' }}
@@ -281,7 +299,7 @@ export const customColor: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const customThumb: ComponentStory<typeof Slider> = () => {
+export const customThumb: Story = () => {
   return (
     <>
       <Slider
@@ -301,7 +319,7 @@ export const customThumb: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const customMark: ComponentStory<typeof Slider> = () => {
+export const customMark: Story = () => {
   const [value, onChange] = useState<number>(50)
 
   return (
@@ -333,7 +351,7 @@ export const customMark: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Slider> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<number>(50)
 
   return (
@@ -344,7 +362,7 @@ export const customControl: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const onChangeStart: ComponentStory<typeof Slider> = () => {
+export const onChangeStart: Story = () => {
   const [value, onChange] = useState<number>(50)
   const [startValue, onChangeStart] = useState<number>(50)
 
@@ -358,7 +376,7 @@ export const onChangeStart: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const onChangeEnd: ComponentStory<typeof Slider> = () => {
+export const onChangeEnd: Story = () => {
   const [value, onChange] = useState<number>(50)
   const [endValue, onChangeEnd] = useState<number>(50)
 
@@ -372,7 +390,7 @@ export const onChangeEnd: ComponentStory<typeof Slider> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Slider> = () => {
+export const reactHookForm: Story = () => {
   type Data = { slider: number }
 
   const defaultValues: Data = {
@@ -392,7 +410,11 @@ export const reactHookForm: ComponentStory<typeof Slider> = () => {
 
   return (
     <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={!!errors.slider} label='Volume' errorMessage={errors.slider?.message}>
+      <FormControl
+        isInvalid={!!errors.slider}
+        label='Volume'
+        errorMessage={errors.slider?.message}
+      >
         <Controller
           name='slider'
           control={control}

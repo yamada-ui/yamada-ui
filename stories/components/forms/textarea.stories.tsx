@@ -1,17 +1,21 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Button, FormControl, Textarea, VStack } from '@yamada-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof Textarea>
+
+const meta: Meta<typeof Textarea> = {
   title: 'Components / Forms / Textarea',
   component: Textarea,
-} as ComponentMeta<typeof Textarea>
+}
 
-export const basic: ComponentStory<typeof Textarea> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Textarea placeholder='basic'></Textarea>
 }
 
-export const withSize: ComponentStory<typeof Textarea> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Textarea placeholder='extra small size' size='xs' />
@@ -22,7 +26,7 @@ export const withSize: ComponentStory<typeof Textarea> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Textarea> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Textarea variant='outline' placeholder='outline' />
@@ -33,7 +37,7 @@ export const withVariant: ComponentStory<typeof Textarea> = () => {
   )
 }
 
-export const withResize: ComponentStory<typeof Textarea> = () => {
+export const withResize: Story = () => {
   return (
     <>
       <Textarea resize='block' placeholder='block' />
@@ -44,17 +48,24 @@ export const withResize: ComponentStory<typeof Textarea> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof Textarea> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <Textarea placeholder='default border color' />
-      <Textarea focusBorderColor='green.500' placeholder='custom border color' />
-      <Textarea isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <Textarea
+        focusBorderColor='green.500'
+        placeholder='custom border color'
+      />
+      <Textarea
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const isDisabled: ComponentStory<typeof Textarea> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Textarea isDisabled variant='outline' placeholder='outline' />
@@ -62,14 +73,18 @@ export const isDisabled: ComponentStory<typeof Textarea> = () => {
       <Textarea isDisabled variant='flushed' placeholder='flushed' />
       <Textarea isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Feedback' helperMessage='We would like to get your feedback.'>
+      <FormControl
+        isDisabled
+        label='Feedback'
+        helperMessage='We would like to get your feedback.'
+      >
         <Textarea variant='outline' placeholder='your feedback' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof Textarea> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Textarea isReadOnly variant='outline' placeholder='outline' />
@@ -77,14 +92,18 @@ export const isReadonly: ComponentStory<typeof Textarea> = () => {
       <Textarea isReadOnly variant='flushed' placeholder='flushed' />
       <Textarea isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Feedback' helperMessage='We would like to get your feedback.'>
+      <FormControl
+        isReadOnly
+        label='Feedback'
+        helperMessage='We would like to get your feedback.'
+      >
         <Textarea variant='outline' placeholder='your feedback' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof Textarea> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Textarea isInvalid variant='outline' placeholder='outline' />
@@ -92,18 +111,25 @@ export const isInvalid: ComponentStory<typeof Textarea> = () => {
       <Textarea isInvalid variant='flushed' placeholder='flushed' />
       <Textarea isInvalid variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isInvalid label='Feedback' errorMessage='Feedback is required.'>
+      <FormControl
+        isInvalid
+        label='Feedback'
+        errorMessage='Feedback is required.'
+      >
         <Textarea variant='outline' placeholder='your feedback' />
       </FormControl>
     </>
   )
 }
 
-export const stylingPlaceholder: ComponentStory<typeof Textarea> = () => {
+export const stylingPlaceholder: Story = () => {
   return (
     <>
       <Textarea placeholder='default placeholder' />
-      <Textarea placeholder='custom placeholder' _placeholder={{ opacity: 1, color: 'gray.500' }} />
+      <Textarea
+        placeholder='custom placeholder'
+        _placeholder={{ opacity: 1, color: 'gray.500' }}
+      />
       <Textarea
         color='green.500'
         placeholder='custom placeholder'
@@ -113,7 +139,7 @@ export const stylingPlaceholder: ComponentStory<typeof Textarea> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Textarea> = () => {
+export const reactHookForm: Story = () => {
   type Data = { textarea: string }
 
   const {
@@ -136,7 +162,9 @@ export const reactHookForm: ComponentStory<typeof Textarea> = () => {
       >
         <Textarea
           placeholder='your feedback'
-          {...register('textarea', { required: { value: true, message: 'This is required.' } })}
+          {...register('textarea', {
+            required: { value: true, message: 'This is required.' },
+          })}
         />
       </FormControl>
 
@@ -147,7 +175,7 @@ export const reactHookForm: ComponentStory<typeof Textarea> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Textarea> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { textarea: string }
 
   const defaultValues: Data = {
@@ -174,7 +202,9 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Textarea> = ()
       >
         <Textarea
           placeholder='your feedback'
-          {...register('textarea', { required: { value: true, message: 'This is required.' } })}
+          {...register('textarea', {
+            required: { value: true, message: 'This is required.' },
+          })}
         />
       </FormControl>
 

@@ -1,6 +1,6 @@
-import { Canvas, Meta } from '@storybook/addon-docs'
+import { Canvas, Meta } from '@storybook/blocks'
 import { Grid, HStack, VStack, Text, Box, defaultTheme } from '@yamada-ui/react'
-import { Provider } from '../../provider'
+import { JSX, ColorPallets, ColorPallet } from '../../components'
 
 <Meta title='Documents / Theme / Colors' />
 
@@ -8,319 +8,111 @@ import { Provider } from '../../provider'
 
 ## Black & White
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    <HStack>
-      <Box bg='black' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          Black
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.black}</Text>
-      </VStack>
-    </HStack>
-    <HStack>
-      <Box bg='White' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          White
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.white}</Text>
-      </VStack>
-    </HStack>
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallet name='white' value={defaultTheme.colors.white} />
+    <ColorPallet name='black' value={defaultTheme.colors.black} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Standard
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    <HStack>
-      <Box bg='primary' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          Primary
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.primary}</Text>
-      </VStack>
-    </HStack>
-    <HStack>
-      <Box bg='secondary' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          Secondary
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.secondary}</Text>
-      </VStack>
-    </HStack>
-    <HStack>
-      <Box bg='warning' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          Warning
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.warning}</Text>
-      </VStack>
-    </HStack>
-    <HStack>
-      <Box bg='danger' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          danger
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.danger}</Text>
-      </VStack>
-    </HStack>
-    <HStack>
-      <Box bg='link' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          Link
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.link}</Text>
-      </VStack>
-    </HStack>
-    <HStack>
-      <Box bg='border' minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-      <VStack gap='0.5'>
-        <Text fontWeight='semibold' noOfLines={1}>
-          Border
-        </Text>
-        <Text noOfLines={1}>{defaultTheme.colors.border}</Text>
-      </VStack>
-    </HStack>
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallet name='primary' value={defaultTheme.colors.primary} />
+    <ColorPallet name='secondary' value={defaultTheme.colors.secondary} />
+    <ColorPallet name='warning' value={defaultTheme.colors.warning} />
+    <ColorPallet name='danger' value={defaultTheme.colors.danger} />
+    <ColorPallet name='link' value={defaultTheme.colors.link} />
+    <ColorPallet name='border' value={defaultTheme.colors.border} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Alphas
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`whiteAlpha.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'whiteAlpha'.charAt(0).toUpperCase() + 'whiteAlpha'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
-    {Object.entries(defaultTheme.colors.blackAlpha).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`blackAlpha.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'blackAlpha'.charAt(0).toUpperCase() + 'blackAlpha'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='whiteAlpha' colors={defaultTheme.colors} />
+    <ColorPallets name='blackAlpha' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Gray
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.gray).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`gray.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'gray'.charAt(0).toUpperCase() + 'gray'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='gray' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Red
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.red).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`red.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'red'.charAt(0).toUpperCase() + 'red'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='red' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Orange
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.orange).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`orange.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'orange'.charAt(0).toUpperCase() + 'orange'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='orange' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Yellow
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.yellow).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`yellow.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'yellow'.charAt(0).toUpperCase() + 'yellow'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='yellow' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Green
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.green).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`green.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'green'.charAt(0).toUpperCase() + 'green'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='green' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Teal
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.teal).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`teal.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'teal'.charAt(0).toUpperCase() + 'teal'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='teal' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Blue
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.blue).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`blue.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'blue'.charAt(0).toUpperCase() + 'blue'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='blue' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Cyan
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.cyan).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`cyan.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'cyan'.charAt(0).toUpperCase() + 'cyan'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='cyan' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Purple
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.purple).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`purple.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'purple'.charAt(0).toUpperCase() + 'purple'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='purple' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>
 
 ## Pink
 
-<Provider>
-  <Grid templateColumns='repeat(3, 1fr)' my='md' gap='md'>
-    {Object.entries(defaultTheme.colors.pink).map(([key, value]) => {
-      return (
-        <HStack key={key}>
-          <Box bg={`pink.${key}`} minW='12' minH='12' rounded='md' boxShadow='inner'></Box>
-          <VStack gap='0.5'>
-            <Text fontWeight='semibold' noOfLines={1}>
-              {'pink'.charAt(0).toUpperCase() + 'pink'.slice(1)} {key}
-            </Text>
-            <Text noOfLines={1}>{value}</Text>
-          </VStack>
-        </HStack>
-      )
-    })}
+<JSX>
+  <Grid templateColumns='repeat(3, 1fr)' gap='md'>
+    <ColorPallets name='pink' colors={defaultTheme.colors} />
   </Grid>
-</Provider>
+</JSX>

@@ -1,5 +1,5 @@
 import { faMinus, faPlus, faPoo } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Accordion,
@@ -11,12 +11,16 @@ import {
 } from '@yamada-ui/react'
 import { useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof Accordion>
+
+const meta: Meta<typeof Accordion> = {
   title: 'Components / Disclosure / Accordion',
   component: Accordion,
-} as ComponentMeta<typeof Accordion>
+}
 
-export const basic: ComponentStory<typeof Accordion> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <Accordion>
       <AccordionItem label='孫悟空少年編'>
@@ -40,7 +44,7 @@ export const basic: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Accordion> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Accordion variant='basic'>
@@ -86,7 +90,7 @@ export const withVariant: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const withDefaultIndex: ComponentStory<typeof Accordion> = () => {
+export const withDefaultIndex: Story = () => {
   return (
     <Accordion defaultIndex={1}>
       <AccordionItem label='孫悟空少年編'>
@@ -110,7 +114,7 @@ export const withDefaultIndex: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const withIsToggle: ComponentStory<typeof Accordion> = () => {
+export const withIsToggle: Story = () => {
   return (
     <Accordion isToggle>
       <AccordionItem label='孫悟空少年編'>
@@ -134,7 +138,7 @@ export const withIsToggle: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const withIsMultiple: ComponentStory<typeof Accordion> = () => {
+export const withIsMultiple: Story = () => {
   return (
     <Accordion defaultIndex={[1, 2]} isMultiple>
       <AccordionItem label='孫悟空少年編'>
@@ -158,7 +162,7 @@ export const withIsMultiple: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const withIconHidden: ComponentStory<typeof Accordion> = () => {
+export const withIconHidden: Story = () => {
   return (
     <Accordion iconHidden>
       <AccordionItem label='孫悟空少年編'>
@@ -182,7 +186,7 @@ export const withIconHidden: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Accordion> = () => {
+export const isDisabled: Story = () => {
   return (
     <Accordion>
       <AccordionItem label='孫悟空少年編'>
@@ -206,7 +210,7 @@ export const isDisabled: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const customLabel: ComponentStory<typeof Accordion> = () => {
+export const customLabel: Story = () => {
   return (
     <Accordion>
       <AccordionItem>
@@ -234,7 +238,9 @@ export const customLabel: ComponentStory<typeof Accordion> = () => {
       </AccordionItem>
 
       <AccordionItem>
-        <AccordionLabel _expanded={{ bg: 'orange.500', color: 'white' }}>サイヤ人編</AccordionLabel>
+        <AccordionLabel _expanded={{ bg: 'orange.500', color: 'white' }}>
+          サイヤ人編
+        </AccordionLabel>
 
         <AccordionPanel pt={3}>
           <Text>
@@ -246,7 +252,7 @@ export const customLabel: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const customPanel: ComponentStory<typeof Accordion> = () => {
+export const customPanel: Story = () => {
   return (
     <Accordion>
       <AccordionItem label='孫悟空少年編'>
@@ -276,7 +282,7 @@ export const customPanel: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const customIcon: ComponentStory<typeof Accordion> = () => {
+export const customIcon: Story = () => {
   return (
     <>
       <Accordion icon={<Icon icon={faPoo} color='orange.700' />}>
@@ -368,8 +374,10 @@ export const customIcon: ComponentStory<typeof Accordion> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Accordion> = () => {
-  const [index, onChange] = useState<AccordionProps['index'] | undefined>(undefined)
+export const customControl: Story = () => {
+  const [index, onChange] = useState<AccordionProps['index'] | undefined>(
+    undefined,
+  )
 
   return (
     <Accordion index={index} onChange={onChange}>

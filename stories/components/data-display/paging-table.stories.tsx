@@ -1,6 +1,9 @@
 import { faker } from '@faker-js/faker'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory } from '@storybook/react'
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons'
+import { ComponentStory, Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   HStack,
@@ -15,9 +18,14 @@ import {
 import { PagingTable, Column } from '@yamada-ui/table'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export default {
+type Story = StoryFn<typeof PagingTable>
+
+const meta: Meta<typeof PagingTable> = {
   title: 'Components / Data Display / PagingTable',
+  component: PagingTable,
 }
+
+export default meta
 
 type Data = {
   id: string
@@ -51,7 +59,7 @@ const createData = (n: number = 100): Data[] => {
   return mergedData
 }
 
-export const basic: ComponentStory<typeof PagingTable> = () => {
+export const basic: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -79,7 +87,7 @@ export const basic: ComponentStory<typeof PagingTable> = () => {
   return <PagingTable columns={columns} data={data} />
 }
 
-export const withSize: ComponentStory<typeof PagingTable> = () => {
+export const withSize: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -106,15 +114,35 @@ export const withSize: ComponentStory<typeof PagingTable> = () => {
 
   return (
     <>
-      <PagingTable size='sm' columns={columns} data={data} defaultPageSize={5} />
-      <PagingTable size='md' columns={columns} data={data} defaultPageSize={5} />
-      <PagingTable size='lg' columns={columns} data={data} defaultPageSize={5} />
-      <PagingTable size='xl' columns={columns} data={data} defaultPageSize={5} />
+      <PagingTable
+        size='sm'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+      <PagingTable
+        size='md'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+      <PagingTable
+        size='lg'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+      <PagingTable
+        size='xl'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
     </>
   )
 }
 
-export const withVariant: ComponentStory<typeof PagingTable> = () => {
+export const withVariant: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -141,13 +169,23 @@ export const withVariant: ComponentStory<typeof PagingTable> = () => {
 
   return (
     <>
-      <PagingTable variant='simple' columns={columns} data={data} defaultPageSize={5} />
-      <PagingTable variant='striped' columns={columns} data={data} defaultPageSize={5} />
+      <PagingTable
+        variant='simple'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+      <PagingTable
+        variant='striped'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
     </>
   )
 }
 
-export const withColorScheme: ComponentStory<typeof PagingTable> = () => {
+export const withColorScheme: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -297,7 +335,7 @@ export const withColorScheme: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const withDefaultPageSize: ComponentStory<typeof PagingTable> = () => {
+export const withDefaultPageSize: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -334,7 +372,7 @@ export const withDefaultPageSize: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const withPageSizeList: ComponentStory<typeof PagingTable> = () => {
+export const withPageSizeList: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -372,7 +410,7 @@ export const withPageSizeList: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const customControlPageSize: ComponentStory<typeof PagingTable> = () => {
+export const customControlPageSize: Story = () => {
   const [pageSize, onChangePageSize] = useState<number>(20)
 
   const columns = useMemo<Column<Data>[]>(
@@ -409,7 +447,7 @@ export const customControlPageSize: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const withDefaultPageIndex: ComponentStory<typeof PagingTable> = () => {
+export const withDefaultPageIndex: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -446,7 +484,9 @@ export const withDefaultPageIndex: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const customControlPageIndex: ComponentStory<typeof PagingTable> = () => {
+export const customControlPageIndex: ComponentStory<
+  typeof PagingTable
+> = () => {
   const [pageIndex, onChangePageIndex] = useState<number>(0)
 
   const columns = useMemo<Column<Data>[]>(
@@ -483,7 +523,7 @@ export const customControlPageIndex: ComponentStory<typeof PagingTable> = () => 
   )
 }
 
-export const withManualPagination: ComponentStory<typeof PagingTable> = () => {
+export const withManualPagination: Story = () => {
   const [pageIndex, onChangePageIndex] = useState<number>(0)
   const [pageSize, onChangePageSize] = useState<number>(20)
   const [data, setData] = useState<Data[]>([])
@@ -496,7 +536,10 @@ export const withManualPagination: ComponentStory<typeof PagingTable> = () => {
     async (pageIndex: number, pageSize: number) => {
       page.start()
 
-      const data = initData.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
+      const data = initData.slice(
+        pageIndex * pageSize,
+        (pageIndex + 1) * pageSize,
+      )
       const pageCount = maxPageCount / pageSize
 
       await wait(1000)
@@ -556,7 +599,9 @@ export const withManualPagination: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const withFormatPageSizeLabel: ComponentStory<typeof PagingTable> = () => {
+export const withFormatPageSizeLabel: ComponentStory<
+  typeof PagingTable
+> = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -590,7 +635,7 @@ export const withFormatPageSizeLabel: ComponentStory<typeof PagingTable> = () =>
   )
 }
 
-export const customProps: ComponentStory<typeof PagingTable> = () => {
+export const customProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
@@ -648,7 +693,7 @@ export const customProps: ComponentStory<typeof PagingTable> = () => {
   )
 }
 
-export const customPagination: ComponentStory<typeof PagingTable> = () => {
+export const customPagination: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {

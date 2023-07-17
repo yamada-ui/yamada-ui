@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { CircleProgress, CircleProgressLabel } from '@yamada-ui/react'
 
-export default {
-  title: 'Components / Feedback / Circle Progress',
-  component: CircleProgress,
-} as ComponentMeta<typeof CircleProgress>
+type Story = StoryFn<typeof CircleProgress>
 
-export const basic: ComponentStory<typeof CircleProgress> = () => {
+const meta: Meta<typeof CircleProgress> = {
+  title: 'Components / Feedback / CircleProgress',
+  component: CircleProgress,
+}
+
+export default meta
+
+export const basic: Story = () => {
   return (
     <>
       <CircleProgress value={19} />
@@ -14,7 +18,7 @@ export const basic: ComponentStory<typeof CircleProgress> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof CircleProgress> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <CircleProgress value={18} size={32} />
@@ -22,7 +26,7 @@ export const withSize: ComponentStory<typeof CircleProgress> = () => {
   )
 }
 
-export const withThickness: ComponentStory<typeof CircleProgress> = () => {
+export const withThickness: Story = () => {
   return (
     <>
       <CircleProgress value={31} thickness={1} />
@@ -30,7 +34,7 @@ export const withThickness: ComponentStory<typeof CircleProgress> = () => {
   )
 }
 
-export const withLabel: ComponentStory<typeof CircleProgress> = () => {
+export const withLabel: Story = () => {
   return (
     <>
       <CircleProgress
@@ -47,7 +51,7 @@ export const withLabel: ComponentStory<typeof CircleProgress> = () => {
   )
 }
 
-export const withRounded: ComponentStory<typeof CircleProgress> = () => {
+export const withRounded: Story = () => {
   return (
     <>
       <CircleProgress value={18} isRounded />
@@ -55,7 +59,7 @@ export const withRounded: ComponentStory<typeof CircleProgress> = () => {
   )
 }
 
-export const useAnimation: ComponentStory<typeof CircleProgress> = () => {
+export const useAnimation: Story = () => {
   return (
     <>
       <CircleProgress value={18} isAnimation />

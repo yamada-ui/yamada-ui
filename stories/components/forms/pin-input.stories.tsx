@@ -1,18 +1,29 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Button, FormControl, PinInput, PinInputField, VStack, useLoading } from '@yamada-ui/react'
+import { Meta, StoryFn } from '@storybook/react'
+import {
+  Button,
+  FormControl,
+  PinInput,
+  PinInputField,
+  VStack,
+  useLoading,
+} from '@yamada-ui/react'
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof PinInput>
+
+const meta: Meta<typeof PinInput> = {
   title: 'Components / Forms / PinInput',
   component: PinInput,
-} as ComponentMeta<typeof PinInput>
+}
 
-export const basic: ComponentStory<typeof PinInput> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <PinInput />
 }
 
-export const withSize: ComponentStory<typeof PinInput> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <PinInput size='xs' />
@@ -26,7 +37,7 @@ export const withSize: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof PinInput> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <PinInput variant='outline' />
@@ -40,7 +51,7 @@ export const withVariant: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const withFields: ComponentStory<typeof PinInput> = () => {
+export const withFields: Story = () => {
   return (
     <>
       <PinInput fileds={3} />
@@ -54,7 +65,7 @@ export const withFields: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const withType: ComponentStory<typeof PinInput> = () => {
+export const withType: Story = () => {
   return (
     <>
       <PinInput />
@@ -64,7 +75,7 @@ export const withType: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof PinInput> = () => {
+export const withDefaultValue: Story = () => {
   return (
     <>
       <PinInput defaultValue='1234' />
@@ -74,7 +85,7 @@ export const withDefaultValue: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof PinInput> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <PinInput />
@@ -86,21 +97,21 @@ export const withBorderColor: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const withOnComplete: ComponentStory<typeof PinInput> = () => {
+export const withOnComplete: Story = () => {
   const { page } = useLoading()
 
   return <PinInput onComplete={() => page.start({ duration: 5000 })} />
 }
 
-export const useOneTimePassword: ComponentStory<typeof PinInput> = () => {
+export const useOneTimePassword: Story = () => {
   return <PinInput otp />
 }
 
-export const maskingValue: ComponentStory<typeof PinInput> = () => {
+export const maskingValue: Story = () => {
   return <PinInput mask />
 }
 
-export const customFields: ComponentStory<typeof PinInput> = () => {
+export const customFields: Story = () => {
   return (
     <PinInput>
       <PinInputField />
@@ -111,11 +122,11 @@ export const customFields: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const costomPlaceholder: ComponentStory<typeof PinInput> = () => {
+export const costomPlaceholder: Story = () => {
   return <PinInput placeholder='💩' />
 }
 
-export const customControl: ComponentStory<typeof PinInput> = () => {
+export const customControl: Story = () => {
   const { page } = useLoading()
   const [value, onChange] = useState('')
 
@@ -124,11 +135,11 @@ export const customControl: ComponentStory<typeof PinInput> = () => {
   return <PinInput value={value} onChange={onChange} onComplete={onComplete} />
 }
 
-export const disabledFocusManagement: ComponentStory<typeof PinInput> = () => {
+export const disabledFocusManagement: Story = () => {
   return <PinInput manageFocus={false} />
 }
 
-export const isDisabled: ComponentStory<typeof PinInput> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <PinInput isDisabled />
@@ -152,7 +163,7 @@ export const isDisabled: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof PinInput> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <PinInput isReadOnly />
@@ -176,7 +187,7 @@ export const isReadonly: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof PinInput> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <PinInput isInvalid />
@@ -200,7 +211,7 @@ export const isInvalid: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof PinInput> = () => {
+export const reactHookForm: Story = () => {
   type Data = { pinInput: string }
 
   const {
@@ -239,7 +250,7 @@ export const reactHookForm: ComponentStory<typeof PinInput> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof PinInput> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { pinInput: string }
 
   const defaultValues: Data = {

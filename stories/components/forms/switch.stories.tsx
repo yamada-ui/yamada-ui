@@ -1,21 +1,30 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Label, Switch, Wrap, useBoolean, HStack, VStack, Button } from '@yamada-ui/react'
+import { Meta, StoryFn } from '@storybook/react'
+import {
+  Label,
+  Switch,
+  Wrap,
+  useBoolean,
+  HStack,
+  VStack,
+  Button,
+} from '@yamada-ui/react'
 import { useId } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-export default {
+
+type Story = StoryFn<typeof Switch>
+
+const meta: Meta<typeof Switch> = {
   title: 'Components / Forms / Switch',
   component: Switch,
-} as ComponentMeta<typeof Switch>
-
-export const basic: ComponentStory<typeof Switch> = () => {
-  return <Switch>basic</Switch>
 }
 
-export const withReverse: ComponentStory<typeof Switch> = () => {
+export default meta
+
+export const withReverse: Story = () => {
   return <Switch isReverse>basic</Switch>
 }
 
-export const withSize: ComponentStory<typeof Switch> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Switch size='sm'>small size</Switch>
@@ -25,7 +34,7 @@ export const withSize: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Switch> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Switch variant='thick'>thick</Switch>
@@ -34,7 +43,7 @@ export const withVariant: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const withLabel: ComponentStory<typeof Switch> = () => {
+export const withLabel: Story = () => {
   const id = useId()
 
   return (
@@ -47,7 +56,7 @@ export const withLabel: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof Switch> = () => {
+export const withColorScheme: Story = () => {
   return (
     <Wrap gap='md'>
       <Switch colorScheme='primary' defaultChecked>
@@ -113,7 +122,7 @@ export const withColorScheme: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Switch> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Switch isDisabled>disabled</Switch>
@@ -124,7 +133,7 @@ export const isDisabled: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof Switch> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Switch isReadOnly>read only</Switch>
@@ -135,7 +144,7 @@ export const isReadonly: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Switch> = () => {
+export const customControl: Story = () => {
   const [isChecked, { toggle }] = useBoolean(false)
 
   return (
@@ -145,7 +154,7 @@ export const customControl: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Switch> = () => {
+export const reactHookForm: Story = () => {
   type Data = { switch: boolean }
 
   const { control, handleSubmit, watch } = useForm<Data>()
@@ -173,7 +182,7 @@ export const reactHookForm: ComponentStory<typeof Switch> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Switch> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { switch: boolean }
 
   const defaultValues: Data = {

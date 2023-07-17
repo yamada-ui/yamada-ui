@@ -1,5 +1,5 @@
 import { faCheck, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon as FontAwesomeIcon } from '@yamada-ui/fontawesome'
 import {
   Input,
@@ -17,16 +17,20 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { FaPhone } from 'react-icons/fa'
 
-export default {
+type Story = StoryFn<typeof Input>
+
+const meta: Meta<typeof Input> = {
   title: 'Components / Forms / Input',
   component: Input,
-} as ComponentMeta<typeof Input>
+}
 
-export const basic: ComponentStory<typeof Input> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <Input placeholder='basic' />
 }
 
-export const withSize: ComponentStory<typeof Input> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Input placeholder='extra small size' size='xs' />
@@ -37,7 +41,7 @@ export const withSize: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Input> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Input variant='outline' placeholder='outline' />
@@ -48,7 +52,7 @@ export const withVariant: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const withHTMLSize: ComponentStory<typeof Input> = () => {
+export const withHTMLSize: Story = () => {
   return (
     <>
       <Input htmlSize={4} width='auto' />
@@ -56,17 +60,21 @@ export const withHTMLSize: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof Input> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <Input placeholder='default border color' />
       <Input focusBorderColor='green.500' placeholder='custom border color' />
-      <Input isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <Input
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const isDisabled: ComponentStory<typeof Input> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Input isDisabled variant='outline' placeholder='outline' />
@@ -74,14 +82,18 @@ export const isDisabled: ComponentStory<typeof Input> = () => {
       <Input isDisabled variant='flushed' placeholder='flushed' />
       <Input isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Email address' helperMessage="We'll never share your email.">
+      <FormControl
+        isDisabled
+        label='Email address'
+        helperMessage="We'll never share your email."
+      >
         <Input type='email' placeholder='your email address' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof Input> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Input isReadOnly variant='outline' placeholder='outline' />
@@ -89,14 +101,18 @@ export const isReadonly: ComponentStory<typeof Input> = () => {
       <Input isReadOnly variant='flushed' placeholder='flushed' />
       <Input isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Email address' helperMessage="We'll never share your email.">
+      <FormControl
+        isReadOnly
+        label='Email address'
+        helperMessage="We'll never share your email."
+      >
         <Input type='email' placeholder='your email address' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof Input> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Input isInvalid variant='outline' placeholder='outline' />
@@ -104,14 +120,18 @@ export const isInvalid: ComponentStory<typeof Input> = () => {
       <Input isInvalid variant='flushed' placeholder='flushed' />
       <Input isInvalid variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isInvalid label='Email address' errorMessage='Email is required.'>
+      <FormControl
+        isInvalid
+        label='Email address'
+        errorMessage='Email is required.'
+      >
         <Input type='email' placeholder='your email address' />
       </FormControl>
     </>
   )
 }
 
-export const useAddon: ComponentStory<typeof Input> = () => {
+export const useAddon: Story = () => {
   return (
     <>
       <InputGroup>
@@ -128,7 +148,7 @@ export const useAddon: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const useElement: ComponentStory<typeof Input> = () => {
+export const useElement: Story = () => {
   const [show, { toggle }] = useBoolean()
 
   return (
@@ -151,7 +171,11 @@ export const useElement: ComponentStory<typeof Input> = () => {
       </InputGroup>
 
       <InputGroup size='md'>
-        <Input pr='4.5rem' type={show ? 'text' : 'password'} placeholder='your password' />
+        <Input
+          pr='4.5rem'
+          type={show ? 'text' : 'password'}
+          placeholder='your password'
+        />
         <InputRightElement w='4.5rem' isClick>
           <Button h='1.75rem' size='sm' onClick={toggle}>
             {show ? 'Hide' : 'Show'}
@@ -162,7 +186,7 @@ export const useElement: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const stylingPlaceholder: ComponentStory<typeof Input> = () => {
+export const stylingPlaceholder: Story = () => {
   return (
     <>
       <Input placeholder='default placeholder' />
@@ -183,15 +207,19 @@ export const stylingPlaceholder: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const customType: ComponentStory<typeof Input> = () => {
+export const customType: Story = () => {
   return (
     <>
-      <Input placeholder='Select Date and Time' size='md' type='datetime-local' />
+      <Input
+        placeholder='Select Date and Time'
+        size='md'
+        type='datetime-local'
+      />
     </>
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Input> = () => {
+export const reactHookForm: Story = () => {
   type Data = { name: string; cellphone: string; email: string }
 
   const {
@@ -207,10 +235,16 @@ export const reactHookForm: ComponentStory<typeof Input> = () => {
 
   return (
     <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={!!errors.name} label='Name' errorMessage={errors.name?.message}>
+      <FormControl
+        isInvalid={!!errors.name}
+        label='Name'
+        errorMessage={errors.name?.message}
+      >
         <Input
           placeholder='孫悟空'
-          {...register('name', { required: { value: true, message: 'This is required.' } })}
+          {...register('name', {
+            required: { value: true, message: 'This is required.' },
+          })}
         />
       </FormControl>
 
@@ -224,12 +258,18 @@ export const reactHookForm: ComponentStory<typeof Input> = () => {
           <Input
             type='tel'
             placeholder='0000-0000'
-            {...register('cellphone', { required: { value: true, message: 'This is required.' } })}
+            {...register('cellphone', {
+              required: { value: true, message: 'This is required.' },
+            })}
           />
         </InputGroup>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.email} label='Email' errorMessage={errors.email?.message}>
+      <FormControl
+        isInvalid={!!errors.email}
+        label='Email'
+        errorMessage={errors.email?.message}
+      >
         <InputGroup>
           <InputLeftElement>
             <FontAwesomeIcon icon={faEnvelope} color='gray.500' />
@@ -237,7 +277,9 @@ export const reactHookForm: ComponentStory<typeof Input> = () => {
           <Input
             type='email'
             placeholder='your-address@example.com'
-            {...register('email', { required: { value: true, message: 'This is required.' } })}
+            {...register('email', {
+              required: { value: true, message: 'This is required.' },
+            })}
           />
         </InputGroup>
       </FormControl>
@@ -249,7 +291,7 @@ export const reactHookForm: ComponentStory<typeof Input> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Input> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { name: string; cellphone: string; email: string }
 
   const defaultValues: Data = {
@@ -271,10 +313,16 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Input> = () =>
 
   return (
     <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={!!errors.name} label='Name' errorMessage={errors.name?.message}>
+      <FormControl
+        isInvalid={!!errors.name}
+        label='Name'
+        errorMessage={errors.name?.message}
+      >
         <Input
           placeholder='孫悟空'
-          {...register('name', { required: { value: true, message: 'This is required.' } })}
+          {...register('name', {
+            required: { value: true, message: 'This is required.' },
+          })}
         />
       </FormControl>
 
@@ -288,12 +336,18 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Input> = () =>
           <Input
             type='tel'
             placeholder='090-0000-0000'
-            {...register('cellphone', { required: { value: true, message: 'This is required.' } })}
+            {...register('cellphone', {
+              required: { value: true, message: 'This is required.' },
+            })}
           />
         </InputGroup>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.email} label='Email' errorMessage={errors.email?.message}>
+      <FormControl
+        isInvalid={!!errors.email}
+        label='Email'
+        errorMessage={errors.email?.message}
+      >
         <InputGroup>
           <InputLeftElement>
             <FontAwesomeIcon icon={faEnvelope} color='gray.500' />
@@ -301,7 +355,9 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Input> = () =>
           <Input
             type='email'
             placeholder='your-address@example.com'
-            {...register('email', { required: { value: true, message: 'This is required.' } })}
+            {...register('email', {
+              required: { value: true, message: 'This is required.' },
+            })}
           />
         </InputGroup>
       </FormControl>

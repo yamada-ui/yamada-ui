@@ -1,5 +1,5 @@
 import { faCaretDown, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   Select,
@@ -13,12 +13,16 @@ import {
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof Select>
+
+const meta: Meta<typeof Select> = {
   title: 'Components / Forms / Select',
   component: Select,
-} as ComponentMeta<typeof Select>
+}
 
-export const basic: ComponentStory<typeof Select> = () => {
+export default meta
+
+export const basic: Story = () => {
   const options: UIOption[] = [
     { label: 'ベジータ', value: 'ベジータ' },
     {
@@ -72,7 +76,7 @@ export const basic: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withSize: ComponentStory<typeof Select> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <Select placeholder='extra small size' size='xs' />
@@ -83,7 +87,7 @@ export const withSize: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withVariant: ComponentStory<typeof Select> = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Select variant='outline' placeholder='outline' />
@@ -94,7 +98,7 @@ export const withVariant: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withDefaultValue: ComponentStory<typeof Select> = () => {
+export const withDefaultValue: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' defaultValue='ベジータ'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -104,17 +108,21 @@ export const withDefaultValue: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withBorderColor: ComponentStory<typeof Select> = () => {
+export const withBorderColor: Story = () => {
   return (
     <>
       <Select placeholder='default border color' />
       <Select focusBorderColor='green.500' placeholder='custom border color' />
-      <Select isInvalid errorBorderColor='orange.500' placeholder='custom border color' />
+      <Select
+        isInvalid
+        errorBorderColor='orange.500'
+        placeholder='custom border color'
+      />
     </>
   )
 }
 
-export const disabledPlaceholderInOptions: ComponentStory<typeof Select> = () => {
+export const disabledPlaceholderInOptions: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' placeholderInOptions={false}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -124,7 +132,7 @@ export const disabledPlaceholderInOptions: ComponentStory<typeof Select> = () =>
   )
 }
 
-export const disabledCloseOnSelect: ComponentStory<typeof Select> = () => {
+export const disabledCloseOnSelect: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' closeOnSelect={false}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -134,7 +142,7 @@ export const disabledCloseOnSelect: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const disabledCloseOnBlur: ComponentStory<typeof Select> = () => {
+export const disabledCloseOnBlur: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' closeOnBlur={false}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -144,7 +152,7 @@ export const disabledCloseOnBlur: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withPlacement: ComponentStory<typeof Select> = () => {
+export const withPlacement: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' placement='right-start' maxW='xs'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -154,9 +162,13 @@ export const withPlacement: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withOffset: ComponentStory<typeof Select> = () => {
+export const withOffset: Story = () => {
   return (
-    <Select placeholder='キャラクターを選択' offset={[16, 16]} listProps={{ maxW: 'xs' }}>
+    <Select
+      placeholder='キャラクターを選択'
+      offset={[16, 16]}
+      listProps={{ maxW: 'xs' }}
+    >
       <Option value='孫悟空'>孫悟空</Option>
       <Option value='ベジータ'>ベジータ</Option>
       <Option value='フリーザ'>フリーザ</Option>
@@ -164,7 +176,7 @@ export const withOffset: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withGutter: ComponentStory<typeof Select> = () => {
+export const withGutter: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' gutter={32}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -174,7 +186,7 @@ export const withGutter: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const withDuration: ComponentStory<typeof Select> = () => {
+export const withDuration: Story = () => {
   return (
     <Select placeholder='キャラクターを選択' duration={0.4}>
       <Option value='孫悟空'>孫悟空</Option>
@@ -184,7 +196,7 @@ export const withDuration: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof Select> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <Select isDisabled variant='outline' placeholder='outline' />
@@ -192,14 +204,17 @@ export const isDisabled: ComponentStory<typeof Select> = () => {
       <Select isDisabled variant='flushed' placeholder='flushed' />
       <Select isDisabled variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isDisabled label='Which notifications would you like to receive?'>
+      <FormControl
+        isDisabled
+        label='Which notifications would you like to receive?'
+      >
         <Select placeholder='Select notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: ComponentStory<typeof Select> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <Select isReadOnly variant='outline' placeholder='outline' />
@@ -207,14 +222,17 @@ export const isReadonly: ComponentStory<typeof Select> = () => {
       <Select isReadOnly variant='flushed' placeholder='flushed' />
       <Select isReadOnly variant='unstyled' placeholder='unstyled' />
 
-      <FormControl isReadOnly label='Which notifications would you like to receive?'>
+      <FormControl
+        isReadOnly
+        label='Which notifications would you like to receive?'
+      >
         <Select placeholder='Select notifications' />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: ComponentStory<typeof Select> = () => {
+export const isInvalid: Story = () => {
   return (
     <>
       <Select isInvalid variant='outline' placeholder='outline' />
@@ -233,7 +251,7 @@ export const isInvalid: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const isOptionDisabled: ComponentStory<typeof Select> = () => {
+export const isOptionDisabled: Story = () => {
   return (
     <Select placeholder='キャラクターを選択'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -245,7 +263,7 @@ export const isOptionDisabled: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const isOptionFocusable: ComponentStory<typeof Select> = () => {
+export const isOptionFocusable: Story = () => {
   return (
     <Select placeholder='キャラクターを選択'>
       <Option value='孫悟空'>孫悟空</Option>
@@ -257,7 +275,7 @@ export const isOptionFocusable: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const customIcon: ComponentStory<typeof Select> = () => {
+export const customIcon: Story = () => {
   return (
     <>
       <Select placeholder='キャラクターを選択' iconProps={{ color: 'primary' }}>
@@ -278,10 +296,13 @@ export const customIcon: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const customOption: ComponentStory<typeof Select> = () => {
+export const customOption: Story = () => {
   return (
     <>
-      <Select placeholder='キャラクターを選択' optionProps={{ color: 'primary' }}>
+      <Select
+        placeholder='キャラクターを選択'
+        optionProps={{ color: 'primary' }}
+      >
         <Option value='孫悟空'>孫悟空</Option>
         <Option value='ベジータ'>ベジータ</Option>
         <Option value='フリーザ'>フリーザ</Option>
@@ -299,7 +320,7 @@ export const customOption: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof Select> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<string>('孫悟空')
 
   return (
@@ -311,7 +332,7 @@ export const customControl: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const reactHookForm: ComponentStory<typeof Select> = () => {
+export const reactHookForm: Story = () => {
   type Data = { select1: string; select2: string; select3: string }
 
   const options: UIOption[] = [
@@ -409,7 +430,11 @@ export const reactHookForm: ComponentStory<typeof Select> = () => {
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Select placeholder='キャラクターを選択' {...field} options={options} />
+            <Select
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>
@@ -421,7 +446,7 @@ export const reactHookForm: ComponentStory<typeof Select> = () => {
   )
 }
 
-export const reactHookFormWithDefaultValue: ComponentStory<typeof Select> = () => {
+export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { select1: string; select2: string; select3: string }
 
   const defaultValues: Data = {
@@ -525,7 +550,11 @@ export const reactHookFormWithDefaultValue: ComponentStory<typeof Select> = () =
           control={control}
           rules={{ required: { value: true, message: 'This is required.' } }}
           render={({ field }) => (
-            <Select placeholder='キャラクターを選択' {...field} options={options} />
+            <Select
+              placeholder='キャラクターを選択'
+              {...field}
+              options={options}
+            />
           )}
         />
       </FormControl>

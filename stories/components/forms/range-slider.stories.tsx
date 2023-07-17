@@ -1,5 +1,5 @@
 import { faWaveSquare } from '@fortawesome/free-solid-svg-icons'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
   RangeSlider,
@@ -20,20 +20,24 @@ import {
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
-export default {
+type Story = StoryFn<typeof RangeSlider>
+
+const meta: Meta<typeof RangeSlider> = {
   title: 'Components / Forms / RangeSlider',
   component: RangeSlider,
-} as ComponentMeta<typeof RangeSlider>
+}
 
-export const basic: ComponentStory<typeof RangeSlider> = () => {
+export default meta
+
+export const basic: Story = () => {
   return <RangeSlider />
 }
 
-export const withDefaultValue: ComponentStory<typeof RangeSlider> = () => {
+export const withDefaultValue: Story = () => {
   return <RangeSlider defaultValue={[10, 90]} />
 }
 
-export const withSize: ComponentStory<typeof RangeSlider> = () => {
+export const withSize: Story = () => {
   return (
     <>
       <RangeSlider size='sm' defaultValue={[0, 25]} />
@@ -43,7 +47,7 @@ export const withSize: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const withColorScheme: ComponentStory<typeof RangeSlider> = () => {
+export const withColorScheme: Story = () => {
   return (
     <>
       <RangeSlider colorScheme='primary' />
@@ -79,20 +83,24 @@ export const withColorScheme: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const withOrientation: ComponentStory<typeof RangeSlider> = () => {
+export const withOrientation: Story = () => {
   return <RangeSlider orientation='vertical' h='calc(100vh - 16px * 2)' />
 }
 
-export const withReversed: ComponentStory<typeof RangeSlider> = () => {
+export const withReversed: Story = () => {
   return (
     <>
       <RangeSlider isReversed />
-      <RangeSlider isReversed orientation='vertical' h='calc(100vh - 16px * 3 - 14px)' />
+      <RangeSlider
+        isReversed
+        orientation='vertical'
+        h='calc(100vh - 16px * 3 - 14px)'
+      />
     </>
   )
 }
 
-export const withMinMax: ComponentStory<typeof RangeSlider> = () => {
+export const withMinMax: Story = () => {
   const [value, onChange] = useState<[number, number]>([50, 150])
 
   return (
@@ -105,7 +113,7 @@ export const withMinMax: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const withStep: ComponentStory<typeof RangeSlider> = () => {
+export const withStep: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
 
   return (
@@ -118,11 +126,11 @@ export const withStep: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const withBetweenThumbs: ComponentStory<typeof RangeSlider> = () => {
+export const withBetweenThumbs: Story = () => {
   return <RangeSlider betweenThumbs={10} />
 }
 
-export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => {
+export const withFocusThumbOnChange: Story = () => {
   const [value, setValue] = useState<[number, number]>([25, 75])
 
   return (
@@ -139,7 +147,11 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
           <Center gap='md'>
             <Button
               isDisabled={value[0] === 0}
-              onClick={() => setValue((prev) => (prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev))}
+              onClick={() =>
+                setValue((prev) =>
+                  prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev,
+                )
+              }
             >
               -5
             </Button>
@@ -149,7 +161,9 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
               colorScheme='blue'
               onClick={() =>
                 setValue((prev) =>
-                  prev[0] !== 100 && value[0] !== value[1] ? [prev[0] + 5, prev[1]] : prev,
+                  prev[0] !== 100 && value[0] !== value[1]
+                    ? [prev[0] + 5, prev[1]]
+                    : prev,
                 )
               }
             >
@@ -166,7 +180,9 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
               isDisabled={value[1] === 0 || value[0] === value[1]}
               onClick={() =>
                 setValue((prev) =>
-                  prev[1] !== 0 && value[0] !== value[1] ? [prev[0], prev[1] - 5] : prev,
+                  prev[1] !== 0 && value[0] !== value[1]
+                    ? [prev[0], prev[1] - 5]
+                    : prev,
                 )
               }
             >
@@ -176,7 +192,11 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
             <Button
               isDisabled={value[1] === 100}
               colorScheme='blue'
-              onClick={() => setValue((prev) => (prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev))}
+              onClick={() =>
+                setValue((prev) =>
+                  prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev,
+                )
+              }
             >
               +10
             </Button>
@@ -187,7 +207,7 @@ export const withFocusThumbOnChange: ComponentStory<typeof RangeSlider> = () => 
   )
 }
 
-export const withMark: ComponentStory<typeof RangeSlider> = () => {
+export const withMark: Story = () => {
   return (
     <VStack gap='lg'>
       <RangeSlider size='sm'>
@@ -229,12 +249,18 @@ export const withMark: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const withTooltip: ComponentStory<typeof RangeSlider> = () => {
+export const withTooltip: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
   const [isOpen, { on, off }] = useBoolean(false)
 
   return (
-    <RangeSlider value={value} onChange={onChange} mt='10' onMouseEnter={on} onMouseLeave={off}>
+    <RangeSlider
+      value={value}
+      onChange={onChange}
+      mt='10'
+      onMouseEnter={on}
+      onMouseLeave={off}
+    >
       <RangeSliderMark value={25} w='10' ml='-5'>
         25%
       </RangeSliderMark>
@@ -256,7 +282,7 @@ export const withTooltip: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const isDisabled: ComponentStory<typeof RangeSlider> = () => {
+export const isDisabled: Story = () => {
   return (
     <>
       <RangeSlider isDisabled />
@@ -272,7 +298,7 @@ export const isDisabled: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const isReadonly: ComponentStory<typeof RangeSlider> = () => {
+export const isReadonly: Story = () => {
   return (
     <>
       <RangeSlider isReadOnly />
@@ -288,12 +314,16 @@ export const isReadonly: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const isInvalid: ComponentStory<typeof RangeSlider> = () => {
+export const isInvalid: Story = () => {
   const [value, onChange] = useState<[number, number]>([15, 45])
 
   return (
     <>
-      <RangeSlider isInvalid={value[0] < 20} value={value} onChange={onChange} />
+      <RangeSlider
+        isInvalid={value[0] < 20}
+        value={value}
+        onChange={onChange}
+      />
 
       <FormControl
         isInvalid={value[0] < 20}
@@ -306,10 +336,14 @@ export const isInvalid: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const customColor: ComponentStory<typeof RangeSlider> = () => {
+export const customColor: Story = () => {
   return (
     <>
-      <RangeSlider trackColor='orange.200' filledTrackColor='orange.500' thumbColor='orange.700' />
+      <RangeSlider
+        trackColor='orange.200'
+        filledTrackColor='orange.500'
+        thumbColor='orange.700'
+      />
 
       <RangeSlider
         track={{ bg: 'green.200' }}
@@ -335,7 +369,7 @@ export const customColor: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const customThumb: ComponentStory<typeof RangeSlider> = () => {
+export const customThumb: Story = () => {
   return (
     <>
       <RangeSlider
@@ -359,7 +393,7 @@ export const customThumb: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const customMark: ComponentStory<typeof RangeSlider> = () => {
+export const customMark: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
 
   return (
@@ -403,7 +437,7 @@ export const customMark: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const customControl: ComponentStory<typeof RangeSlider> = () => {
+export const customControl: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
 
   return (
@@ -416,35 +450,45 @@ export const customControl: ComponentStory<typeof RangeSlider> = () => {
   )
 }
 
-export const onChangeStart: ComponentStory<typeof RangeSlider> = () => {
+export const onChangeStart: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
   const [startValue, onChangeStart] = useState<[number, number]>([25, 75])
 
   return (
     <>
       <Text>
-        Min: {value[0]}, Max: {value[1]}, Start Min: {startValue[0]}, Start Max: {startValue[0]}
+        Min: {value[0]}, Max: {value[1]}, Start Min: {startValue[0]}, Start Max:{' '}
+        {startValue[0]}
       </Text>
-      <RangeSlider value={value} onChange={onChange} onChangeStart={onChangeStart} />
+      <RangeSlider
+        value={value}
+        onChange={onChange}
+        onChangeStart={onChangeStart}
+      />
     </>
   )
 }
 
-export const onChangeEnd: ComponentStory<typeof RangeSlider> = () => {
+export const onChangeEnd: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
   const [endValue, onChangeEnd] = useState<[number, number]>([25, 75])
 
   return (
     <>
       <Text>
-        Min: {value[0]}, Max: {value[1]}, End Min: {endValue[0]}, End Max: {endValue[0]}
+        Min: {value[0]}, Max: {value[1]}, End Min: {endValue[0]}, End Max:{' '}
+        {endValue[0]}
       </Text>
-      <RangeSlider value={value} onChange={onChange} onChangeEnd={onChangeEnd} />
+      <RangeSlider
+        value={value}
+        onChange={onChange}
+        onChangeEnd={onChangeEnd}
+      />
     </>
   )
 }
 
-export const reactHookForm: ComponentStory<typeof RangeSlider> = () => {
+export const reactHookForm: Story = () => {
   type Data = { rangeSlider: [number, number] }
 
   const defaultValues: Data = {

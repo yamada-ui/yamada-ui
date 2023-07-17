@@ -1,12 +1,16 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { VStack, Heading } from '@yamada-ui/react'
 
-export default {
+type Story = StoryFn<typeof Heading>
+
+const meta: Meta<typeof Heading> = {
   title: 'Components / Typography / Heading',
   component: Heading,
-} as ComponentMeta<typeof Heading>
+}
 
-export const basic: ComponentStory<typeof Heading> = () => {
+export default meta
+
+export const basic: Story = () => {
   return (
     <VStack gap='md'>
       <Heading as='h1' size='4xl' isTruncated>
@@ -44,7 +48,7 @@ export const basic: ComponentStory<typeof Heading> = () => {
   )
 }
 
-export const gradient: ComponentStory<typeof Heading> = () => {
+export const gradient: Story = () => {
   return (
     <Heading
       w='full'

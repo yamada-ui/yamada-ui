@@ -1,0 +1,45 @@
+name: '機能リクエスト'
+description: '機能や強化をリクエストします'
+labels: ['enhancement']
+body:
+  - type: 'markdown'
+    attributes:
+      value: |
+        ご報告ありがとうございます！ 😎
+
+        提出する前に、オープン/クローズされた問題を検索してください。
+        以前に、誰かが同じことを尋ねているかもしれません！ 😎
+  - type: 'textarea'
+    id: 'description'
+    attributes:
+      label: '概要'
+      description: 'このリクエストを1,2行で説明してください。'
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'justification'
+    attributes:
+      label: '問題の主張/正当化'
+      description: |
+        なぜ、これがYamada UIに追加されるべきか、理由を提供してください。
+
+        この機能が問題に関連している場合は、それも言及してください。
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'proposed-solution'
+    attributes:
+      label: '提案する解決策やAPI'
+      description: 理想的な設計やAPIへのコードスニペット、またはリンクを提供してください。
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'alternatives'
+    attributes:
+      label: '代替案'
+      description: このリクエストをする前に考慮した代替解決策は何ですか？
+  - type: 'textarea'
+    id: 'additional-information'
+    attributes:
+      label: '追加情報'
+      description: スクリーンショット、ノート、アイデアへのリンクなど、持っている追加情報を提供してください。

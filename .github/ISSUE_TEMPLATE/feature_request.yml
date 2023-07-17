@@ -5,10 +5,10 @@ body:
   - type: 'markdown'
     attributes:
       value: |
-        Thanks for filing an issue 😄!
+        Thanks for filing an issue 😎!
 
-        Please search open/closed issues before submitting. Someone
-        might have asked the same thing before 😉!
+        Please search open/closed issues before submitting.
+        Someone　might have asked the same thing before 😎!
   - type: 'textarea'
     id: 'description'
     attributes:

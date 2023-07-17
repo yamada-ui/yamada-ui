@@ -1,0 +1,67 @@
+name: 'バグ報告'
+description: 'バグ報告を作成します'
+body:
+  - type: 'markdown'
+    attributes:
+      value: |
+        問題を作成していただきありがとうございます！ 😎
+
+        提出する前に、オープン/クローズされた問題を検索してください。
+        以前に、誰かが同じことを尋ねているかもしれません！ 😎
+
+        山田たちは、全てボランティアです。このテンプレートを正確に記入することで、山田たちの手助けになります。💖
+  - type: 'textarea'
+    id: 'description'
+    attributes:
+      label: '概要'
+      description: '問題の簡単な説明。'
+      placeholder: |
+        ____ したとき、____ が起こると予想していましたが、代わりに ____ が起こりました。
+    validations:
+      required: true
+  - type: 'input'
+    id: 'reproduction'
+    attributes:
+      label: '再現へのリンク'
+      description: |
+        バグを再現するCodeSandboxへのリンク（テンプレートについては https://github.com/hirotomoyamada/yamada-ui#codesandbox を参照）
+      placeholder: 'https://codesandbox.io/'
+  - type: 'textarea'
+    id: 'steps'
+    attributes:
+      label: '再現手順'
+      description: |
+        どのように問題を引き起こすか説明してください。
+      value: |
+        1. '...'に行きます。
+        2. '...'をクリックします。
+        3. '...'までスクロールします。
+        4. エラーを確認します。
+  - type: 'input'
+    id: 'version'
+    attributes:
+      label: 'Yamada UIバージョン'
+      description: '使用しているYamada UIのバージョン。'
+      placeholder: '0.1.0'
+    validations:
+      required: true
+  - type: 'input'
+    id: 'browser'
+    attributes:
+      label: 'ブラウザ'
+      description: 'この問題が発生したブラウザ。'
+      placeholder: 'Google Chrome 114'
+  - type: 'checkboxes'
+    id: 'operating-system'
+    attributes:
+      label: 'OS'
+      description: 'この問題が発生したOS。'
+      options:
+        - label: 'macOS'
+        - label: 'Windows'
+        - label: 'Linux'
+  - type: 'textarea'
+    id: 'additional-information'
+    attributes:
+      label: '追加情報'
+      description: スクリーンショット、ノート、アイデアへのリンクなど、持っている追加情報を提供してください。

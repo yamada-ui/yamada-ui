@@ -4,13 +4,11 @@ body:
   - type: 'markdown'
     attributes:
       value: |
-        Thanks for creating an issue 😄!
+        Thanks for creating an issue 😎!
 
-        Please search open/closed issues before submitting. Someone
-        might have asked the same thing before 😉!
+        Please search open/closed issues before submitting. Someone　might have asked the same thing before 😎!
 
-        We're all volunteers here, so help us help you by taking the time to
-        accurately fill out this template. ❤️
+        We're all volunteers here, so help us help you by taking the time to accurately fill out this template. 💖
   - type: 'textarea'
     id: 'description'
     attributes:

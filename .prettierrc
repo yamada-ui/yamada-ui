@@ -4,5 +4,7 @@
   "semi": false,
   "singleQuote": true,
   "jsxSingleQuote": true,
-  "printWidth": 100
+  "bracketSpacing": true,
+  "proseWrap": "always",
+  "printWidth": 80
 }

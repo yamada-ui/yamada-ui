@@ -18,7 +18,7 @@ import {
   getOwnerWindow,
   getMemoizedObject as get,
 } from '@yamada-ui/utils'
-import * as CSS from 'csstype'
+import type * as CSS from 'csstype'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 export type AnimationStyle = {

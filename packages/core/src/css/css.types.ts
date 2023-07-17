@@ -1,5 +1,5 @@
 import { Dict } from '@yamada-ui/utils'
-import * as CSS from 'csstype'
+import type * as CSS from 'csstype'
 import { StylesProps, PseudosProps } from '../styles'
 import { Theme, StyledTheme } from '../theme.types'
 

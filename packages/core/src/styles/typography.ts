@@ -1,5 +1,5 @@
 import { StringLiteral } from '@yamada-ui/utils'
-import * as CSS from 'csstype'
+import type * as CSS from 'csstype'
 import { Token } from '../css'
 import { Configs, configs, transforms } from './config'
 

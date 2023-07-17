@@ -106,6 +106,12 @@ https://www.conventionalcommits.org or check out the
 3. Make and commit your changes following the
    [commit convention](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention).
 
+   - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
+   - `Creating a new component`: When you run the pnpm `gen:component` command, a component is created from a template and dependencies are installed.
+   - `Adding functionality to an existing component`: After adding, please add a story for the target component so that the functionality can be understood.
+   - `Creating a new hook`: When you run the `pnpm gen:hook` command, a hook is created from a template and dependencies are installed.
+   - `Adding functionality to an existing hook`: After adding, please add a story for the target hook so that the functionality can be understood.
+
 4. Run `pnpm changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).

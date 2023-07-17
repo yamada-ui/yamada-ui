@@ -5,7 +5,10 @@ import { cx } from '@yamada-ui/utils'
 import { useAccordionContext } from './accordion'
 import { useAccordionItemContext } from './accordion-item'
 
-export type AccordionPanelProps = Omit<WithTransitionProps<HTMLUIProps<'div'>>, 'isOpen'> &
+export type AccordionPanelProps = Omit<
+  WithTransitionProps<HTMLUIProps<'div'>>,
+  'isOpen'
+> &
   Pick<CollapseProps, 'animationOpacity' | 'startingHeight' | 'endingHeight'>
 
 export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(

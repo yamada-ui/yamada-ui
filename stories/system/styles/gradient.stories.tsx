@@ -6,7 +6,12 @@ export default {
 
 export const withToken = () => {
   return (
-    <Box w='full' height='xs' bgGradient='linear(to-r, green.200, pink.500)' rounded='lg'></Box>
+    <Box
+      w='full'
+      height='xs'
+      bgGradient='linear(to-r, green.200, pink.500)'
+      rounded='lg'
+    ></Box>
   )
 }
 

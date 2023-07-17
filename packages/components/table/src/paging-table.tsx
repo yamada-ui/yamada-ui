@@ -15,7 +15,12 @@ import { ForwardedRef, forwardRef, ReactNode, Ref } from 'react'
 import { TableBodyProps, Tbody } from './tbody'
 import { TableFootProps, Tfoot } from './tfoot'
 import { TableHeadProps, Thead } from './thead'
-import { TableContext, TableProvider, useTable, UseTableProps } from './use-table'
+import {
+  TableContext,
+  TableProvider,
+  useTable,
+  UseTableProps,
+} from './use-table'
 
 type PaginationComponentProps<Y extends RowData> = Pick<
   PaginationInstance<Y>,
@@ -89,13 +94,21 @@ type TableOptions<Y extends RowData> = {
   /**
    * Props for pagination element.
    */
-  paginationProps?: Omit<PaginationProps, 'page' | 'defaultPage' | 'total' | 'onChange'>
+  paginationProps?: Omit<
+    PaginationProps,
+    'page' | 'defaultPage' | 'total' | 'onChange'
+  >
   /**
    * Props for select element.
    */
   selectProps?: Omit<
     SelectProps,
-    'value' | 'defaultValue' | 'onChange' | 'placeholderInOptions' | 'data' | 'children'
+    | 'value'
+    | 'defaultValue'
+    | 'onChange'
+    | 'placeholderInOptions'
+    | 'data'
+    | 'children'
   >
   /**
    * If `true`, display the paging control.
@@ -181,10 +194,19 @@ export const PagingTable = forwardRef(
         <TableProvider value={{ ...rest } as TableContext}>
           <ui.div
             className={cx('ui-paging-table-container', className)}
-            __css={{ w: '100%', display: 'flex', flexDirection: 'column', ...styles.container }}
+            __css={{
+              w: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              ...styles.container,
+            }}
             {...containerProps}
           >
-            <ui.table className='ui-paging-table' __css={css} {...getTableProps({}, ref)}>
+            <ui.table
+              className='ui-paging-table'
+              __css={css}
+              {...getTableProps({}, ref)}
+            >
               <Thead {...theadProps} />
               <Tbody {...tbodyProps} />
               {withFooter ? <Tfoot {...tfootProps} /> : null}
@@ -226,7 +248,15 @@ export const PagingTable = forwardRef(
                 />
 
                 <Select
-                  size={size === 'xl' ? 'lg' : size === 'lg' ? 'md' : size === 'md' ? 'sm' : 'xs'}
+                  size={
+                    size === 'xl'
+                      ? 'lg'
+                      : size === 'lg'
+                      ? 'md'
+                      : size === 'md'
+                      ? 'sm'
+                      : 'xs'
+                  }
                   maxW='3xs'
                   value={String(state.pagination.pageSize)}
                   options={pageSizeList.map((pageSize) => ({
@@ -247,7 +277,9 @@ export const PagingTable = forwardRef(
     )
   },
 ) as {
-  <Y extends RowData>(props: PagingTableProps<Y> & { ref?: Ref<HTMLDivElement> }): JSX.Element
+  <Y extends RowData>(
+    props: PagingTableProps<Y> & { ref?: Ref<HTMLDivElement> },
+  ): JSX.Element
 } & ComponentArgs
 
 PagingTable.displayName = 'PagingTable'

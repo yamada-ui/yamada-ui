@@ -19,7 +19,10 @@ export const MenuGroup = forwardRef<MenuGroupProps, 'div'>(
         {...rest}
       >
         {title ? (
-          <ui.span className={cx('ui-menu-group-title')} __css={styles.groupTitle}>
+          <ui.span
+            className={cx('ui-menu-group-title')}
+            __css={styles.groupTitle}
+          >
             {title}
           </ui.span>
         ) : null}

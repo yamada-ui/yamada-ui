@@ -7,7 +7,13 @@ import {
   ThemeProps,
 } from '@yamada-ui/core'
 import { MotionReorder, HTMLMotionProps } from '@yamada-ui/motion'
-import { createContext, cx, getValidChildren, handlerAll, useUpdateEffect } from '@yamada-ui/utils'
+import {
+  createContext,
+  cx,
+  getValidChildren,
+  handlerAll,
+  useUpdateEffect,
+} from '@yamada-ui/utils'
 import { forwardRef, useCallback, useMemo, useState } from 'react'
 
 type ReorderContext = {
@@ -15,10 +21,11 @@ type ReorderContext = {
   styles: Record<string, CSSUIObject>
 }
 
-export const [ReorderProvider, useReorderContext] = createContext<ReorderContext>({
-  name: 'ReorderContext',
-  errorMessage: `useReorderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Reorder />"`,
-})
+export const [ReorderProvider, useReorderContext] =
+  createContext<ReorderContext>({
+    name: 'ReorderContext',
+    errorMessage: `useReorderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Reorder />"`,
+  })
 
 type ReorderOptions = {
   /**
@@ -47,89 +54,103 @@ const omitDuplicated = (values: (string | number)[]): (string | number)[] =>
 
 const pickDuplicated = (values: (string | number)[]): (string | number)[] =>
   values.filter(
-    (value, index, self) => self.indexOf(value) === index && index !== self.lastIndexOf(value),
+    (value, index, self) =>
+      self.indexOf(value) === index && index !== self.lastIndexOf(value),
   )
 
-export const Reorder = forwardRef<HTMLUListElement, ReorderProps>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Reorder', props)
-  const {
-    className,
-    orientation = 'vertical',
-    gap = 'md',
-    onChange,
-    onCompleteChange,
-    children,
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
+  (props, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('Reorder', props)
+    const {
+      className,
+      orientation = 'vertical',
+      gap = 'md',
+      onChange,
+      onCompleteChange,
+      children,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  const axis = orientation === 'vertical' ? 'y' : 'x'
+    const axis = orientation === 'vertical' ? 'y' : 'x'
 
-  const validChildren = getValidChildren(children)
+    const validChildren = getValidChildren(children)
 
-  const defaultValues = useMemo(() => {
-    const values = validChildren.map(({ props }) => props.label)
+    const defaultValues = useMemo(() => {
+      const values = validChildren.map(({ props }) => props.label)
 
-    const duplicatedValues = pickDuplicated(values)
+      const duplicatedValues = pickDuplicated(values)
 
-    if (duplicatedValues.length)
-      console.warn(
-        `Reorder: 'label' of 'ReorderItem' must not be duplicated. duplicate 'label' is '${duplicatedValues.join(
-          `', '`,
-        )}' `,
+      if (duplicatedValues.length)
+        console.warn(
+          `Reorder: 'label' of 'ReorderItem' must not be duplicated. duplicate 'label' is '${duplicatedValues.join(
+            `', '`,
+          )}' `,
+        )
+
+      return omitDuplicated(values)
+    }, [validChildren])
+
+    const [values, setValues] = useState<(string | number)[]>(defaultValues)
+
+    const onReorder = useCallback(
+      (newValues: (string | number)[]) => {
+        setValues(newValues)
+
+        onChange?.(newValues)
+      },
+      [onChange],
+    )
+
+    useUpdateEffect(() => {
+      const isDone = defaultValues.every((defaultValue) =>
+        values.includes(defaultValue),
       )
 
-    return omitDuplicated(values)
-  }, [validChildren])
+      if (isDone) return
 
-  const [values, setValues] = useState<(string | number)[]>(defaultValues)
+      setValues(defaultValues)
+    }, [defaultValues])
 
-  const onReorder = useCallback(
-    (newValues: (string | number)[]) => {
-      setValues(newValues)
+    const cloneChildren = useMemo(
+      () =>
+        values.map((value) =>
+          validChildren.find(({ props }) => props.label === value),
+        ),
+      [values, validChildren],
+    )
 
-      onChange?.(newValues)
-    },
-    [onChange],
-  )
+    const css: CSSUIObject = {
+      display: 'flex',
+      flexDirection: orientation === 'vertical' ? 'column' : 'row',
+      gap,
+      ...styles.container,
+    }
 
-  useUpdateEffect(() => {
-    const isDone = defaultValues.every((defaultValue) => values.includes(defaultValue))
-
-    if (isDone) return
-
-    setValues(defaultValues)
-  }, [defaultValues])
-
-  const cloneChildren = useMemo(
-    () => values.map((value) => validChildren.find(({ props }) => props.label === value)),
-    [values, validChildren],
-  )
-
-  const css: CSSUIObject = {
-    display: 'flex',
-    flexDirection: orientation === 'vertical' ? 'column' : 'row',
-    gap,
-    ...styles.container,
-  }
-
-  return (
-    <ReorderProvider value={{ orientation, styles }}>
-      <ui.ul
-        ref={ref}
-        as={MotionReorder.Group}
-        className={cx('ui-reorder', className)}
-        axis={axis}
-        values={values}
-        onReorder={onReorder}
-        __css={css}
-        {...rest}
-        onMouseUp={handlerAll(rest.onMouseUp, () => onCompleteChange?.(values))}
-        onTouchEnd={handlerAll(rest.onTouchEnd, () => onCompleteChange?.(values))}
-      >
-        {cloneChildren}
-      </ui.ul>
-    </ReorderProvider>
-  )
-})
+    return (
+      <ReorderProvider value={{ orientation, styles }}>
+        <ui.ul
+          ref={ref}
+          as={MotionReorder.Group}
+          className={cx('ui-reorder', className)}
+          axis={axis}
+          values={values}
+          onReorder={onReorder}
+          __css={css}
+          {...rest}
+          onMouseUp={handlerAll(
+            rest.onMouseUp,
+            () => onCompleteChange?.(values),
+          )}
+          onTouchEnd={handlerAll(
+            rest.onTouchEnd,
+            () => onCompleteChange?.(values),
+          )}
+        >
+          {cloneChildren}
+        </ui.ul>
+      </ReorderProvider>
+    )
+  },
+)
 
 Reorder.displayName = 'Reorder'

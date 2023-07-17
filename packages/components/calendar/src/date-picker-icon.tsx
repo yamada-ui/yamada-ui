@@ -39,7 +39,12 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, 'div'>(
     )
 
     return (
-      <ui.div ref={ref} className={cx('ui-date-picker-icon', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-date-picker-icon', className)}
+        __css={css}
+        {...rest}
+      >
         {isValidElement(children) ? cloneChildren : <DatePickerCalendarIcon />}
       </ui.div>
     )
@@ -48,9 +53,16 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, 'div'>(
 
 export type DatePickerCalendarIconProps = IconProps
 
-export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({ className, ...rest }) => {
+export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
+  className,
+  ...rest
+}) => {
   return (
-    <Icon className={cx('ui-date-picker-calendar-icon', className)} viewBox='0 0 24 24' {...rest}>
+    <Icon
+      className={cx('ui-date-picker-calendar-icon', className)}
+      viewBox='0 0 24 24'
+      {...rest}
+    >
       <path
         fill='currentColor'
         d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z'
@@ -59,7 +71,9 @@ export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({ classN
   )
 }
 
-export type DatePickerClearIconProps = DatePickerIconProps & { disabled?: boolean }
+export type DatePickerClearIconProps = DatePickerIconProps & {
+  disabled?: boolean
+}
 
 export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
   className,

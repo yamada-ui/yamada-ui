@@ -1,14 +1,26 @@
-import { cast, createContext, isElement, mergeRefs, useSafeLayoutEffect } from '@yamada-ui/utils'
+import {
+  cast,
+  createContext,
+  isElement,
+  mergeRefs,
+  useSafeLayoutEffect,
+} from '@yamada-ui/utils'
 import { Provider, RefCallback, useRef, useState } from 'react'
 
 const sortNodes = (nodes: Node[]) =>
   nodes.sort((a, b) => {
     const compare = a.compareDocumentPosition(b)
 
-    if (compare & Node.DOCUMENT_POSITION_FOLLOWING || compare & Node.DOCUMENT_POSITION_CONTAINED_BY)
+    if (
+      compare & Node.DOCUMENT_POSITION_FOLLOWING ||
+      compare & Node.DOCUMENT_POSITION_CONTAINED_BY
+    )
       return -1
 
-    if (compare & Node.DOCUMENT_POSITION_PRECEDING || compare & Node.DOCUMENT_POSITION_CONTAINS)
+    if (
+      compare & Node.DOCUMENT_POSITION_PRECEDING ||
+      compare & Node.DOCUMENT_POSITION_CONTAINS
+    )
       return 1
 
     if (
@@ -66,7 +78,10 @@ const descendantsManager = <T extends HTMLElement, K = {}>() => {
     })
   }
 
-  const setDescendants = (node: T | null, options?: DescendantOptions<T, K>) => {
+  const setDescendants = (
+    node: T | null,
+    options?: DescendantOptions<T, K>,
+  ) => {
     if (!node || descendants.has(node)) return
 
     const keys = Array.from(descendants.keys()).concat(node)
@@ -101,12 +116,16 @@ const descendantsManager = <T extends HTMLElement, K = {}>() => {
 
   const count = (filter?: FilterDescendant<T, K>) => values(filter).length
 
-  const enabledCount = (filter?: FilterDescendant<T, K>) => enabledValues(filter).length
+  const enabledCount = (filter?: FilterDescendant<T, K>) =>
+    enabledValues(filter).length
 
-  const indexOf = (node: T | null) => (!node ? -1 : descendants.get(node)?.index ?? -1)
+  const indexOf = (node: T | null) =>
+    !node ? -1 : descendants.get(node)?.index ?? -1
 
   const enabledIndexOf = (node: T | null, filter?: FilterDescendant<T, K>) =>
-    node == null ? -1 : enabledValues(filter).findIndex((i) => i.node.isSameNode(node))
+    node == null
+      ? -1
+      : enabledValues(filter).findIndex((i) => i.node.isSameNode(node))
 
   const values = (filter?: FilterDescendant<T, K>) => {
     const values = Array.from(descendants.values())
@@ -135,43 +154,69 @@ const descendantsManager = <T extends HTMLElement, K = {}>() => {
 
   const firstValue = (filter?: FilterDescendant<T, K>) => value(0, filter)
 
-  const enabledfirstValue = (filter?: FilterDescendant<T, K>) => enabledValue(0, filter)
+  const enabledfirstValue = (filter?: FilterDescendant<T, K>) =>
+    enabledValue(0, filter)
 
-  const lastValue = (filter?: FilterDescendant<T, K>) => value(descendants.size - 1, filter)
+  const lastValue = (filter?: FilterDescendant<T, K>) =>
+    value(descendants.size - 1, filter)
 
   const enabledlastValue = (filter?: FilterDescendant<T, K>) =>
     enabledValue(enabledValues(filter).length - 1, filter)
 
-  const prevValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
+  const prevValue = (
+    index: number,
+    filter?: FilterDescendant<T, K>,
+    loop = true,
+  ) => {
     const prev = getPrevIndex(index, count(filter) - 1, loop)
 
     return value(prev, filter)
   }
 
-  const enabledPrevValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
+  const enabledPrevValue = (
+    index: number,
+    filter?: FilterDescendant<T, K>,
+    loop = true,
+  ) => {
     const target = value(index)
 
     if (!target) return
 
     const enabledIndex = enabledIndexOf(target.node, filter)
-    const prevEnabledIndex = getPrevIndex(enabledIndex, enabledCount(filter) - 1, loop)
+    const prevEnabledIndex = getPrevIndex(
+      enabledIndex,
+      enabledCount(filter) - 1,
+      loop,
+    )
 
     return enabledValue(prevEnabledIndex, filter)
   }
 
-  const nextValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
+  const nextValue = (
+    index: number,
+    filter?: FilterDescendant<T, K>,
+    loop = true,
+  ) => {
     const next = getNextIndex(index, count(filter), loop)
 
     return value(next, filter)
   }
 
-  const enabledNextValue = (index: number, filter?: FilterDescendant<T, K>, loop = true) => {
+  const enabledNextValue = (
+    index: number,
+    filter?: FilterDescendant<T, K>,
+    loop = true,
+  ) => {
     const target = value(index)
 
     if (!target) return
 
     const enabledIndex = enabledIndexOf(target.node, filter)
-    const nextEnabledIndex = getNextIndex(enabledIndex, enabledCount(filter), loop)
+    const nextEnabledIndex = getNextIndex(
+      enabledIndex,
+      enabledCount(filter),
+      loop,
+    )
 
     return enabledValue(nextEnabledIndex, filter)
   }
@@ -219,12 +264,17 @@ const useDescendants = <
 
 type UseDescendantsReturn = ReturnType<typeof useDescendants>
 
-const [DescendantsContextProvider, useDescendantsContext] = createContext<UseDescendantsReturn>({
-  name: 'DescendantsProvider',
-  errorMessage: 'useDescendantsContext must be used within DescendantsContextProvider',
-})
+const [DescendantsContextProvider, useDescendantsContext] =
+  createContext<UseDescendantsReturn>({
+    name: 'DescendantsProvider',
+    errorMessage:
+      'useDescendantsContext must be used within DescendantsContextProvider',
+  })
 
-const useDescendant = <T extends HTMLElement = HTMLElement, K extends Record<string, any> = {}>(
+const useDescendant = <
+  T extends HTMLElement = HTMLElement,
+  K extends Record<string, any> = {},
+>(
   options?: DescendantOptions<T, K>,
 ) => {
   const descendants = useDescendantsContext()
@@ -254,7 +304,10 @@ const useDescendant = <T extends HTMLElement = HTMLElement, K extends Record<str
   return {
     descendants,
     index,
-    enabledIndex: descendants.enabledIndexOf(ref.current, options?.filter as any),
+    enabledIndex: descendants.enabledIndexOf(
+      ref.current,
+      options?.filter as any,
+    ),
     register: mergeRefs(refCallback, ref),
   }
 }
@@ -267,7 +320,9 @@ export const createDescendant = <
     DescendantsContextProvider: cast<Provider<DescendantsManager<T, K>>>(
       DescendantsContextProvider,
     ),
-    useDescendantsContext: () => cast<DescendantsManager<T, K>>(useDescendantsContext()),
+    useDescendantsContext: () =>
+      cast<DescendantsManager<T, K>>(useDescendantsContext()),
     useDescendants: () => useDescendants<T, K>(),
-    useDescendant: (options?: DescendantOptions<T, K>) => useDescendant<T, K>(options),
+    useDescendant: (options?: DescendantOptions<T, K>) =>
+      useDescendant<T, K>(options),
   }) as const

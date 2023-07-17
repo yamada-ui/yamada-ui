@@ -53,7 +53,10 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
   while (i >= 0) {
     timestampedPoint = history[i]
 
-    if (lastPoint.timestamp - timestampedPoint.timestamp > toMilliseconds(timeDelta)) {
+    if (
+      lastPoint.timestamp - timestampedPoint.timestamp >
+      toMilliseconds(timeDelta)
+    ) {
       break
     }
 
@@ -85,7 +88,8 @@ const pipe =
 
 const distance1D = (a: number, b: number) => Math.abs(a - b)
 
-const isPoint = (point: any): point is { x: number; y: number } => 'x' in point && 'y' in point
+const isPoint = (point: any): point is { x: number; y: number } =>
+  'x' in point && 'y' in point
 
 const distance = <Y extends Point | number>(a: Y, b: Y) => {
   if (typeof a === 'number' && typeof b === 'number') return distance1D(a, b)
@@ -130,7 +134,8 @@ const panEvent = (
 
     const isPanStarted = startEvent !== null
 
-    const isDistancePastThreshold = distance(info.offset, { x: 0, y: 0 }) >= threshold
+    const isDistancePastThreshold =
+      distance(info.offset, { x: 0, y: 0 }) >= threshold
 
     if (!isPanStarted && !isDistancePastThreshold) return
 
@@ -204,9 +209,17 @@ export type UsePanEventProps = {
 
 export const usePanEvent = (
   ref: RefObject<HTMLElement>,
-  { onMove, onStart, onEnd, onSessionStart, onSessionEnd, threshold }: UsePanEventProps,
+  {
+    onMove,
+    onStart,
+    onEnd,
+    onSessionStart,
+    onSessionEnd,
+    threshold,
+  }: UsePanEventProps,
 ) => {
-  const hasPanEvents = !!onMove || !!onStart || !!onEnd || !!onSessionStart || !!onSessionEnd
+  const hasPanEvents =
+    !!onMove || !!onStart || !!onEnd || !!onSessionStart || !!onSessionEnd
 
   const panSession = useRef<ReturnPanEvent | null>(null)
 

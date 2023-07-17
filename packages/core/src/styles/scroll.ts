@@ -51,15 +51,30 @@ export type ScrollProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `scroll-margin-bottom` property.
    */
-  scrollMarginBottom?: Token<CSS.Property.ScrollMarginBottom | number, 'spaces', Y, M>
+  scrollMarginBottom?: Token<
+    CSS.Property.ScrollMarginBottom | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-margin-left` property.
    */
-  scrollMarginLeft?: Token<CSS.Property.ScrollMarginLeft | number, 'spaces', Y, M>
+  scrollMarginLeft?: Token<
+    CSS.Property.ScrollMarginLeft | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-margin-right` property.
    */
-  scrollMarginRight?: Token<CSS.Property.ScrollMarginRight | number, 'spaces', Y, M>
+  scrollMarginRight?: Token<
+    CSS.Property.ScrollMarginRight | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-margin-left`, and `scroll-margin-right` property.
    */
@@ -75,19 +90,39 @@ export type ScrollProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `scroll-padding-top` property.
    */
-  scrollPaddingTop?: Token<CSS.Property.ScrollPaddingTop | number, 'spaces', Y, M>
+  scrollPaddingTop?: Token<
+    CSS.Property.ScrollPaddingTop | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-padding-bottom` property.
    */
-  scrollPaddingBottom?: Token<CSS.Property.ScrollPaddingBottom | number, 'spaces', Y, M>
+  scrollPaddingBottom?: Token<
+    CSS.Property.ScrollPaddingBottom | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-padding-left` property.
    */
-  scrollPaddingLeft?: Token<CSS.Property.ScrollPaddingLeft | number, 'spaces', Y, M>
+  scrollPaddingLeft?: Token<
+    CSS.Property.ScrollPaddingLeft | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-padding-right` property.
    */
-  scrollPaddingRight?: Token<CSS.Property.ScrollPaddingRight | number, 'spaces', Y, M>
+  scrollPaddingRight?: Token<
+    CSS.Property.ScrollPaddingRight | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `scroll-padding-left`, and `scroll-padding-right` property.
    */

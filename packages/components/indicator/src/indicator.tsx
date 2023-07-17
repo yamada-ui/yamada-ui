@@ -26,7 +26,14 @@ type IndicatorOptions = {
    * @default 'top-right'
    */
   placement?: Token<
-    'top' | 'top-left' | 'top-right' | 'left' | 'right' | 'bottom' | 'bottom-left' | 'bottom-right'
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'left'
+    | 'right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
   >
   /**
    * Changes position offset, usually used when element has border-radius.
@@ -162,10 +169,18 @@ export const Indicator = forwardRef<IndicatorProps, 'div'>((props, ref) => {
     <ui.div
       ref={ref}
       className={cx('ui-indicator-container', className)}
-      __css={{ position: 'relative', display: computedInline ? 'inline-block' : 'block' }}
+      __css={{
+        position: 'relative',
+        display: computedInline ? 'inline-block' : 'block',
+      }}
     >
       {!isDisabled ? (
-        <ui.div ref={ref} className={cx('ui-indicator', className)} __css={css} {...rest}>
+        <ui.div
+          ref={ref}
+          className={cx('ui-indicator', className)}
+          __css={css}
+          {...rest}
+        >
           {renderLabel}
         </ui.div>
       ) : null}

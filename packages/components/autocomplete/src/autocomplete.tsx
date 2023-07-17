@@ -49,90 +49,111 @@ type AutocompleteOptions = {
 }
 
 export type AutocompleteProps = ThemeProps<'Select'> &
-  Omit<UseAutocompleteProps<string>, 'maxSelectedValues' | 'omitSelectedValues'> &
+  Omit<
+    UseAutocompleteProps<string>,
+    'maxSelectedValues' | 'omitSelectedValues'
+  > &
   AutocompleteOptions
 
-export const Autocomplete = forwardRef<AutocompleteProps, 'input'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
-  let {
-    className,
-    defaultValue = '',
-    color,
-    h,
-    height,
-    minH,
-    minHeight,
-    containerProps,
-    listProps,
-    inputProps,
-    iconProps,
-    children,
-    ...computedProps
-  } = omitThemeProps(mergedProps)
+export const Autocomplete = forwardRef<AutocompleteProps, 'input'>(
+  (props, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('Select', props)
+    let {
+      className,
+      defaultValue = '',
+      color,
+      h,
+      height,
+      minH,
+      minHeight,
+      containerProps,
+      listProps,
+      inputProps,
+      iconProps,
+      children,
+      ...computedProps
+    } = omitThemeProps(mergedProps)
 
-  const {
-    descendants,
-    formControlProps,
-    getPopoverProps,
-    getContainerProps,
-    getFieldProps,
-    createOption,
-    isEmpty,
-    inputValue,
-    computedChildren,
-    ...rest
-  } = useAutocomplete({ ...computedProps, defaultValue, children })
+    const {
+      descendants,
+      formControlProps,
+      getPopoverProps,
+      getContainerProps,
+      getFieldProps,
+      createOption,
+      isEmpty,
+      inputValue,
+      computedChildren,
+      ...rest
+    } = useAutocomplete({ ...computedProps, defaultValue, children })
 
-  h = h ?? height
-  minH = minH ?? minHeight
+    h = h ?? height
+    minH = minH ?? minHeight
 
-  const css: CSSUIObject = {
-    position: 'relative',
-    w: '100%',
-    h: 'fit-content',
-    color,
-    ...styles.container,
-  }
+    const css: CSSUIObject = {
+      position: 'relative',
+      w: '100%',
+      h: 'fit-content',
+      color,
+      ...styles.container,
+    }
 
-  return (
-    <AutocompleteDescendantsContextProvider value={descendants}>
-      <AutocompleteProvider
-        value={{ ...rest, formControlProps, inputValue, createOption, isEmpty, styles }}
-      >
-        <Popover {...getPopoverProps()}>
-          <ui.div
-            className={cx('ui-autocomplete', className)}
-            __css={css}
-            {...getContainerProps(containerProps)}
-          >
-            <AutocompleteField
-              h={h}
-              minH={minH}
-              inputProps={inputProps}
-              {...getFieldProps({}, ref)}
-            />
+    return (
+      <AutocompleteDescendantsContextProvider value={descendants}>
+        <AutocompleteProvider
+          value={{
+            ...rest,
+            formControlProps,
+            inputValue,
+            createOption,
+            isEmpty,
+            styles,
+          }}
+        >
+          <Popover {...getPopoverProps()}>
+            <ui.div
+              className={cx('ui-autocomplete', className)}
+              __css={css}
+              {...getContainerProps(containerProps)}
+            >
+              <AutocompleteField
+                h={h}
+                minH={minH}
+                inputProps={inputProps}
+                {...getFieldProps({}, ref)}
+              />
 
-            <AutocompleteIcon {...iconProps} {...formControlProps} />
+              <AutocompleteIcon {...iconProps} {...formControlProps} />
 
-            {!isEmpty ? (
-              <AutocompleteList {...listProps}>
-                {createOption ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+              {!isEmpty ? (
+                <AutocompleteList {...listProps}>
+                  {createOption ? (
+                    <AutocompleteCreate />
+                  ) : (
+                    <AutocompleteEmpty />
+                  )}
 
-                {children ?? computedChildren}
-              </AutocompleteList>
-            ) : (
-              <AutocompleteList {...listProps}>
-                {createOption && inputValue ? <AutocompleteCreate /> : <AutocompleteEmpty />}
-              </AutocompleteList>
-            )}
-          </ui.div>
-        </Popover>
-      </AutocompleteProvider>
-    </AutocompleteDescendantsContextProvider>
-  )
-})
+                  {children ?? computedChildren}
+                </AutocompleteList>
+              ) : (
+                <AutocompleteList {...listProps}>
+                  {createOption && inputValue ? (
+                    <AutocompleteCreate />
+                  ) : (
+                    <AutocompleteEmpty />
+                  )}
+                </AutocompleteList>
+              )}
+            </ui.div>
+          </Popover>
+        </AutocompleteProvider>
+      </AutocompleteDescendantsContextProvider>
+    )
+  },
+)
 
-type AutocompleteFieldProps = HTMLUIProps<'div'> & Pick<AutocompleteProps, 'inputProps'>
+type AutocompleteFieldProps = HTMLUIProps<'div'> &
+  Pick<AutocompleteProps, 'inputProps'>
 
 const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
   ({ className, h, minH, placeholder, inputProps, ...rest }, ref) => {
@@ -152,13 +173,20 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
 
     return (
       <PopoverTrigger>
-        <ui.div className={cx('ui-autocomplete-field', className)} __css={css} {...rest}>
+        <ui.div
+          className={cx('ui-autocomplete-field', className)}
+          __css={css}
+          {...rest}
+        >
           <ui.input
             className='ui-autocomplete-input'
             display='inline-block'
             w='full'
             placeholder={placeholder}
-            {...getInputProps({ ...inputProps, value: inputValue || displayValue || '' }, ref)}
+            {...getInputProps(
+              { ...inputProps, value: inputValue || displayValue || '' },
+              ref,
+            )}
           />
         </ui.div>
       </PopoverTrigger>

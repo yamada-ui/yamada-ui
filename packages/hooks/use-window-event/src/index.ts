@@ -11,7 +11,9 @@ export const useWindowEvent = <E extends string>(
   handler: Handler<E>,
   options?: Options,
 ) => {
-  const listener = useCallbackRef(handler) as unknown as EventListenerOrEventListenerObject
+  const listener = useCallbackRef(
+    handler,
+  ) as unknown as EventListenerOrEventListenerObject
 
   useEffect(() => {
     window.addEventListener(event, listener, options)

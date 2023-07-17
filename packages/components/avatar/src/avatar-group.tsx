@@ -6,7 +6,12 @@ import {
   omitThemeProps,
   ThemeProps,
 } from '@yamada-ui/core'
-import { cx, getValidChildren, isUndefined, filterUndefined } from '@yamada-ui/utils'
+import {
+  cx,
+  getValidChildren,
+  isUndefined,
+  filterUndefined,
+} from '@yamada-ui/utils'
 import { cloneElement } from 'react'
 
 type AvatarGroupOptions = {
@@ -16,7 +21,9 @@ type AvatarGroupOptions = {
   max?: number
 }
 
-export type AvatarGroupProps = HTMLUIProps<'div'> & ThemeProps<'Avatar'> & AvatarGroupOptions
+export type AvatarGroupProps = HTMLUIProps<'div'> &
+  ThemeProps<'Avatar'> &
+  AvatarGroupOptions
 
 export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
   const [styles] = useMultiComponentStyle('Avatar', props)
@@ -35,7 +42,9 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
 
   const excess = !isUndefined(max) ? validChildren.length - max : 0
 
-  validChildren = !isUndefined(max) ? validChildren.slice(0, max) : validChildren
+  validChildren = !isUndefined(max)
+    ? validChildren.slice(0, max)
+    : validChildren
 
   validChildren = validChildren.reverse()
 

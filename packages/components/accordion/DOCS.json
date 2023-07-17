@@ -43,7 +43,11 @@
       "required": false,
       "description": "The callback invoked when accordion items are expanded or collapsed."
     },
-    "size": { "type": "string", "required": false, "description": "The size of the Accordion." },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Accordion."
+    },
     "variant": {
       "defaultValue": "basic",
       "type": "\"basic\" | \"card\" | \"unstyled\"",
@@ -92,9 +96,21 @@
       "required": false,
       "description": "The height you want the content in its expanded state."
     },
-    "enter": { "type": "any", "required": false, "description": "Custom `enter`." },
-    "exit": { "type": "any", "required": false, "description": "Custom `exit`." },
-    "initial": { "type": "any", "required": false, "description": "Custom `initial`." },
+    "enter": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `enter`."
+    },
+    "exit": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `exit`."
+    },
+    "initial": {
+      "type": "any",
+      "required": false,
+      "description": "Custom `initial`."
+    },
     "startingHeight": {
       "type": "string | number",
       "defaultValue": "0",

@@ -36,7 +36,10 @@ export const SegmentedControl: ComponentMultiStyle = {
         bg: isUndefined(c)
           ? ['whiteAlpha.700', 'whiteAlpha.100']
           : isDefaultColor(
-              [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+              [
+                toneColor(c, 500)(t, m),
+                transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
+              ],
               [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
             )(c),
         rounded: 'md',
@@ -48,7 +51,10 @@ export const SegmentedControl: ComponentMultiStyle = {
           color: [`blackAlpha.800`, `whiteAlpha.800`],
         },
         _checked: {
-          color: [isUndefined(c) ? `blackAlpha.800` : `white`, `whiteAlpha.800`],
+          color: [
+            isUndefined(c) ? `blackAlpha.800` : `white`,
+            `whiteAlpha.800`,
+          ],
         },
       },
     }),
@@ -60,7 +66,10 @@ export const SegmentedControl: ComponentMultiStyle = {
         bg: isUndefined(c)
           ? ['whiteAlpha.700', 'whiteAlpha.100']
           : isDefaultColor(
-              [toneColor(c, 500)(t, m), transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m)],
+              [
+                toneColor(c, 500)(t, m),
+                transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
+              ],
               [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
             )(c),
         rounded: 'full',
@@ -72,7 +81,10 @@ export const SegmentedControl: ComponentMultiStyle = {
           color: [`blackAlpha.800`, `whiteAlpha.800`],
         },
         _checked: {
-          color: [isUndefined(c) ? `blackAlpha.800` : `white`, `whiteAlpha.800`],
+          color: [
+            isUndefined(c) ? `blackAlpha.800` : `white`,
+            `whiteAlpha.800`,
+          ],
         },
       },
     }),

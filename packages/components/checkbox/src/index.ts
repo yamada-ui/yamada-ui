@@ -6,4 +6,7 @@ export type {
   UseCheckboxReturn,
 } from './checkbox'
 export { CheckboxGroup, useCheckboxGroup } from './checkbox-group'
-export type { CheckboxGroupProps, UseCheckboxGroupProps } from './checkbox-group'
+export type {
+  CheckboxGroupProps,
+  UseCheckboxGroupProps,
+} from './checkbox-group'

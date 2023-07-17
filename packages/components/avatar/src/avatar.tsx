@@ -9,7 +9,13 @@ import {
 } from '@yamada-ui/core'
 import { ImageProps, useImage } from '@yamada-ui/image'
 import { createContext, cx, dataAttr, handlerAll } from '@yamada-ui/utils'
-import { cloneElement, FC, HTMLAttributeReferrerPolicy, ReactElement, useState } from 'react'
+import {
+  cloneElement,
+  FC,
+  HTMLAttributeReferrerPolicy,
+  ReactElement,
+  useState,
+} from 'react'
 import { AvatarIcon } from './avatar-icon'
 import { AvatarName } from './avatar-name'
 
@@ -64,7 +70,9 @@ type AvatarOptions = {
   referrerPolicy?: HTMLAttributeReferrerPolicy
 }
 
-export type AvatarProps = HTMLUIProps<'span'> & ThemeProps<'Avatar'> & AvatarOptions
+export type AvatarProps = HTMLUIProps<'span'> &
+  ThemeProps<'Avatar'> &
+  AvatarOptions
 
 export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Avatar', props)
@@ -154,7 +162,11 @@ const AvatarImage: FC<AvatarImageProps> = ({
   const isFallback = !src || !isLoaded
 
   if (isFallback)
-    return name ? <AvatarName name={name} format={format} /> : cloneElement(icon, { role: 'img' })
+    return name ? (
+      <AvatarName name={name} format={format} />
+    ) : (
+      cloneElement(icon, { role: 'img' })
+    )
 
   const css: CSSUIObject = {
     width: '100%',

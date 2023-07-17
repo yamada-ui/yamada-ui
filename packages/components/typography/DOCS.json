@@ -11,7 +11,11 @@
       "required": false,
       "description": "The size of the Heading."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Heading." }
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Heading."
+    }
   },
   "Text": {
     "align": {

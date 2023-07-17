@@ -170,7 +170,11 @@
       "required": false,
       "description": "The orientation of the divider."
     },
-    "size": { "type": "string", "required": false, "description": "The size of the Divider." },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Divider."
+    },
     "variant": {
       "defaultValue": "solid",
       "type": "\"solid\" | \"dashed\" | \"dotted\"",

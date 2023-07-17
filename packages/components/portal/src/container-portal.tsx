@@ -14,7 +14,8 @@ export const ContainerPortal: FC<ContainerPortalProps> = ({
   appendToParentPortal,
 }) => {
   const parent = containerRef.current
-  const host = parent ?? (typeof window !== 'undefined' ? document.body : undefined)
+  const host =
+    parent ?? (typeof window !== 'undefined' ? document.body : undefined)
 
   const portal = useMemo(() => {
     if (!parent) return
@@ -44,7 +45,9 @@ export const ContainerPortal: FC<ContainerPortalProps> = ({
 
   return host && portal
     ? createPortal(
-        <PortalProvider value={appendToParentPortal ? portal : null}>{children}</PortalProvider>,
+        <PortalProvider value={appendToParentPortal ? portal : null}>
+          {children}
+        </PortalProvider>,
         portal,
       )
     : null

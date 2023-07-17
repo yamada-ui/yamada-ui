@@ -19,5 +19,7 @@ export type Union<T> = T | StringLiteral
 export type Length = string | 0 | number
 
 export type DynamicRecord<T> = {
-  [K in keyof T]-?: T[K] extends Primitive ? string | number : DynamicRecord<T[K]>
+  [K in keyof T]-?: T[K] extends Primitive
+    ? string | number
+    : DynamicRecord<T[K]>
 }

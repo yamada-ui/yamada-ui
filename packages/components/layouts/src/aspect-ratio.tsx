@@ -1,4 +1,10 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject, Token } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  HTMLUIProps,
+  CSSUIObject,
+  Token,
+} from '@yamada-ui/core'
 import { cx, replaceObject } from '@yamada-ui/utils'
 import { Children } from 'react'
 
@@ -44,7 +50,12 @@ export const AspectRatio = forwardRef<AspectRatioProps, 'div'>(
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-aspect-ratio', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-aspect-ratio', className)}
+        __css={css}
+        {...rest}
+      >
         {child}
       </ui.div>
     )

@@ -39,7 +39,12 @@ export const SelectIcon = forwardRef<SelectIconProps, 'div'>(
     )
 
     return (
-      <ui.div ref={ref} className={cx('ui-select-icon', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-select-icon', className)}
+        __css={css}
+        {...rest}
+      >
         {isValidElement(children) ? cloneChildren : <ChevronIcon />}
       </ui.div>
     )
@@ -48,7 +53,11 @@ export const SelectIcon = forwardRef<SelectIconProps, 'div'>(
 
 export type SelectClearIconProps = SelectIconProps & { disabled?: boolean }
 
-export const SelectClearIcon: FC<SelectClearIconProps> = ({ className, children, ...props }) => {
+export const SelectClearIcon: FC<SelectClearIconProps> = ({
+  className,
+  children,
+  ...props
+}) => {
   const ref = useRef<HTMLDivElement>(null)
   const { styles } = useSelectContext()
 

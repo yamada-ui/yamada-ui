@@ -1,6 +1,13 @@
 import { useEventListeners } from '@yamada-ui/use-event-listener'
 import { dataAttr, mergeRefs } from '@yamada-ui/utils'
-import { HTMLAttributes, KeyboardEvent, MouseEvent, Ref, useCallback, useState } from 'react'
+import {
+  HTMLAttributes,
+  KeyboardEvent,
+  MouseEvent,
+  Ref,
+  useCallback,
+  useState,
+} from 'react'
 
 export type UseClickableProps = HTMLAttributes<HTMLElement> & {
   /**
@@ -33,10 +40,14 @@ export type UseClickableProps = HTMLAttributes<HTMLElement> & {
   ref?: Ref<HTMLElement>
 }
 
-const isValidElement = (ev: KeyboardEvent | KeyboardEvent['nativeEvent']): boolean => {
+const isValidElement = (
+  ev: KeyboardEvent | KeyboardEvent['nativeEvent'],
+): boolean => {
   const { tagName, isContentEditable } = ev.target as HTMLElement
 
-  return tagName !== 'INPUT' && tagName !== 'TEXTAREA' && isContentEditable !== true
+  return (
+    tagName !== 'INPUT' && tagName !== 'TEXTAREA' && isContentEditable !== true
+  )
 }
 
 export const useClickable = ({
@@ -116,7 +127,15 @@ export const useClickable = ({
 
       listeners.add(document, 'keyup', onDocumentKeyUp, false)
     },
-    [isDisabled, isButton, onKeyDown, clickOnEnter, clickOnSpace, listeners, onDocumentKeyUp],
+    [
+      isDisabled,
+      isButton,
+      onKeyDown,
+      clickOnEnter,
+      clickOnSpace,
+      listeners,
+      onDocumentKeyUp,
+    ],
   )
 
   const handleKeyUp = useCallback(

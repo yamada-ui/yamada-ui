@@ -35,22 +35,45 @@ export type AnimationStyle = {
     'unResponsive',
     'unColorMode'
   >
-  delay?: Token<CSS.Property.AnimationDelay, unknown, 'unResponsive', 'unColorMode'>
+  delay?: Token<
+    CSS.Property.AnimationDelay,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
   iterationCount?: Token<
     CSS.Property.AnimationIterationCount,
     unknown,
     'unResponsive',
     'unColorMode'
   >
-  direction?: Token<CSS.Property.AnimationDirection, unknown, 'unResponsive', 'unColorMode'>
-  fillMode?: Token<CSS.Property.AnimationFillMode, unknown, 'unResponsive', 'unColorMode'>
-  playState?: Token<CSS.Property.AnimationPlayState, unknown, 'unResponsive', 'unColorMode'>
+  direction?: Token<
+    CSS.Property.AnimationDirection,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+  fillMode?: Token<
+    CSS.Property.AnimationFillMode,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+  playState?: Token<
+    CSS.Property.AnimationPlayState,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
 }
 
 const getValue =
   (
     name: string,
-    path: Omit<AnimationStyle, 'keyframes'>[keyof Omit<AnimationStyle, 'keyframes'>],
+    path: Omit<AnimationStyle, 'keyframes'>[keyof Omit<
+      AnimationStyle,
+      'keyframes'
+    >],
   ) =>
   (theme: StyledTheme<Dict>, colorMode: ColorMode) => {
     const value = get(theme, `${name}.${path}`)
@@ -66,10 +89,14 @@ const getValue =
 
 const transformConfig =
   (obj: Omit<AnimationStyle, 'keyframes'>) =>
-  (theme: StyledTheme<Dict>, colorMode: ColorMode): Omit<AnimationStyle, 'keyframes'> =>
+  (
+    theme: StyledTheme<Dict>,
+    colorMode: ColorMode,
+  ): Omit<AnimationStyle, 'keyframes'> =>
     Object.entries(obj).reduce((obj, [key, value]) => {
       if (key === 'duration')
-        value = getValue('transitions.duration', value)(theme, colorMode) ?? value
+        value =
+          getValue('transitions.duration', value)(theme, colorMode) ?? value
       if (key === 'timingFunction')
         value = getValue('transitions.easing', value)(theme, colorMode) ?? value
 
@@ -79,7 +106,10 @@ const transformConfig =
     }, {} as Dict) as Omit<AnimationStyle, 'keyframes'>
 
 const createAnimation =
-  (keyframes: AnimationStyle['keyframes'], config: Omit<AnimationStyle, 'keyframes'>) =>
+  (
+    keyframes: AnimationStyle['keyframes'],
+    config: Omit<AnimationStyle, 'keyframes'>,
+  ) =>
   (theme: StyledTheme<Dict>, colorMode: ColorMode): string => {
     const generatedKeyframes = css(keyframes)(theme)
 
@@ -98,7 +128,9 @@ const createAnimation =
     return `${name} ${duration} ${timingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   }
 
-export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): string => {
+export const useAnimation = (
+  styles: AnimationStyle | AnimationStyle[],
+): string => {
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
@@ -118,7 +150,9 @@ export const useAnimation = (styles: AnimationStyle | AnimationStyle[]): string 
 }
 
 export const useDynamicAnimation = <
-  T extends Array<AnimationStyle> | Record<string, AnimationStyle | AnimationStyle[]>,
+  T extends
+    | Array<AnimationStyle>
+    | Record<string, AnimationStyle | AnimationStyle[]>,
 >(
   arrayOrObj: T,
   init?: keyof T | (keyof T)[],
@@ -135,7 +169,11 @@ export const useDynamicAnimation = <
   const { colorMode } = useColorMode()
 
   const keys = useRef<string | string[] | undefined>(
-    !isUndefined(init) ? (isArray(init) ? init.map(String) : String(init)) : undefined,
+    !isUndefined(init)
+      ? isArray(init)
+        ? init.map(String)
+        : String(init)
+      : undefined,
   )
   const cache = useRef<Map<string, string>>(new Map<string, string>())
 
@@ -147,13 +185,18 @@ export const useDynamicAnimation = <
         cache.current.set(
           key,
           styles
-            .map(({ keyframes, ...config }) => createAnimation(keyframes, config)(theme, colorMode))
+            .map(({ keyframes, ...config }) =>
+              createAnimation(keyframes, config)(theme, colorMode),
+            )
             .join(', '),
         )
       } else {
         const { keyframes, ...config } = styles
 
-        cache.current.set(key, createAnimation(keyframes, config)(theme, colorMode))
+        cache.current.set(
+          key,
+          createAnimation(keyframes, config)(theme, colorMode),
+        )
       }
     }
 
@@ -173,7 +216,9 @@ export const useDynamicAnimation = <
     ) => {
       const args = (() => {
         if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
-          return isArray(keys.current) ? keys.current.map(Number) : Number(keys.current)
+          return isArray(keys.current)
+            ? keys.current.map(Number)
+            : Number(keys.current)
         } else {
           return keys.current
         }
@@ -181,10 +226,14 @@ export const useDynamicAnimation = <
 
       const keyOrArray = runIfFunc(keysOrFunc, args)
 
-      keys.current = isArray(keyOrArray) ? keyOrArray.map(String) : String(keyOrArray)
+      keys.current = isArray(keyOrArray)
+        ? keyOrArray.map(String)
+        : String(keyOrArray)
 
       if (isArray(keys.current)) {
-        setAnimations(keys.current.map((key) => cache.current.get(key)).join(', '))
+        setAnimations(
+          keys.current.map((key) => cache.current.get(key)).join(', '),
+        )
       } else {
         setAnimations(cache.current.get(keys.current ?? ''))
       }
@@ -200,7 +249,10 @@ export type UseAnimationObserverProps = {
   ref: React.RefObject<HTMLElement>
 }
 
-export const useAnimationObserver = ({ isOpen, ref }: UseAnimationObserverProps) => {
+export const useAnimationObserver = ({
+  isOpen,
+  ref,
+}: UseAnimationObserverProps) => {
   const [mounted, setMounted] = useState(isOpen)
   const [flg, { on }] = useBoolean()
 
@@ -223,7 +275,9 @@ export const useAnimationObserver = ({ isOpen, ref }: UseAnimationObserverProps)
     present: !hidden,
     onAnimationComplete() {
       const ownerWindow = getOwnerWindow(ref.current)
-      const event = new ownerWindow.CustomEvent('animationend', { bubbles: true })
+      const event = new ownerWindow.CustomEvent('animationend', {
+        bubbles: true,
+      })
 
       ref.current?.dispatchEvent(event)
     },

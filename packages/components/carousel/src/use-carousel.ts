@@ -1,5 +1,10 @@
 import { IconButtonProps } from '@yamada-ui/button'
-import { CSSUIObject, HTMLUIProps, UIProps, layoutStylesProperties } from '@yamada-ui/core'
+import {
+  CSSUIObject,
+  HTMLUIProps,
+  UIProps,
+  layoutStylesProperties,
+} from '@yamada-ui/core'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
 import {
   createContext,
@@ -11,7 +16,14 @@ import {
   useUpdateEffect,
 } from '@yamada-ui/utils'
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
-import { Children, MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
+import {
+  Children,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 type CarouselContext = {
   carousel: EmblaCarouselType | undefined
@@ -25,12 +37,16 @@ type CarouselContext = {
   styles: Record<string, CSSUIObject>
 }
 
-export const [CarouselProvider, useCarouselContext] = createContext<CarouselContext>({
-  name: 'CarouselContext',
-  errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
-})
+export const [CarouselProvider, useCarouselContext] =
+  createContext<CarouselContext>({
+    name: 'CarouselContext',
+    errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
+  })
 
-export type UseCarouselProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'draggable' | 'gap'> & {
+export type UseCarouselProps = Omit<
+  HTMLUIProps<'div'>,
+  'onChange' | 'draggable' | 'gap'
+> & {
   /**
    * The index of the carousel slide.
    */
@@ -207,7 +223,9 @@ export const useCarousel = ({
   const onScroll = useCallback(() => {
     if (!carousel) return
 
-    const progress = Math.round(Math.max(0, Math.min(1, carousel.scrollProgress())) * 100)
+    const progress = Math.round(
+      Math.max(0, Math.min(1, carousel.scrollProgress())) * 100,
+    )
 
     onScrollProgress?.(progress)
   }, [carousel, onScrollProgress])
@@ -237,7 +255,15 @@ export const useCarousel = ({
     return () => {
       if (timeoutId.current) clearInterval(timeoutId.current)
     }
-  }, [autoplay, delay, stopMouseEnterAutoplay, carousel, isMouseEnter, loop, selectedIndex])
+  }, [
+    autoplay,
+    delay,
+    stopMouseEnterAutoplay,
+    carousel,
+    isMouseEnter,
+    loop,
+    selectedIndex,
+  ])
 
   useUpdateEffect(() => {
     if (!carousel) return
@@ -359,7 +385,10 @@ export type UseCarouselControlProps = IconButtonProps & {
   operation: 'prev' | 'next'
 }
 
-export const useCarouselControl = ({ operation, ...rest }: UseCarouselControlProps) => {
+export const useCarouselControl = ({
+  operation,
+  ...rest
+}: UseCarouselControlProps) => {
   const { carousel } = useCarouselContext()
 
   const isPrev = operation === 'prev'
@@ -428,4 +457,6 @@ export const useCarouselIndicators = () => {
   return { indexes, getIndicatorProps }
 }
 
-export type UseCarouselIndicatorsReturn = ReturnType<typeof useCarouselIndicators>
+export type UseCarouselIndicatorsReturn = ReturnType<
+  typeof useCarouselIndicators
+>

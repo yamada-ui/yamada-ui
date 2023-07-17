@@ -15,7 +15,14 @@ import { UITheme } from './ui-theme.types'
 
 export type ThemeScheme = Union<string | number>
 
-export type LoadingVariant = 'oval' | 'grid' | 'audio' | 'dots' | 'puff' | 'rings' | 'circles'
+export type LoadingVariant =
+  | 'oval'
+  | 'grid'
+  | 'audio'
+  | 'dots'
+  | 'puff'
+  | 'rings'
+  | 'circles'
 
 export type NoticePlacement =
   | 'top'
@@ -309,7 +316,11 @@ export type Components = Record<string, ComponentStyle | ComponentMultiStyle>
 export type Semantics = Omit<UsageTheme, 'styles' | 'components' | 'semantics'>
 
 export type ThemeTokens = {
-  [key: string | number]: string | number | [string | number, string | number] | ThemeTokens
+  [key: string | number]:
+    | string
+    | number
+    | [string | number, string | number]
+    | ThemeTokens
 }
 
 export type UsageTheme = {
@@ -333,14 +344,21 @@ export type UsageTheme = {
   spaces?: ThemeTokens
   zIndices?: ThemeTokens
   gradients?: ThemeTokens
-  transitions?: { property?: ThemeTokens; duration?: ThemeTokens; easing?: ThemeTokens }
+  transitions?: {
+    property?: ThemeTokens
+    duration?: ThemeTokens
+    easing?: ThemeTokens
+  }
   components?: Components
   semantics?: Semantics
   [key: string]: any
 }
 
 export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
-export type ComponentVariants = Record<string, UIStyle | Record<string, UIStyle>>
+export type ComponentVariants = Record<
+  string,
+  UIStyle | Record<string, UIStyle>
+>
 export type ComponentSizes = Record<string, UIStyle | Record<string, UIStyle>>
 export type ComponentDefaultProps<
   Y extends Dict = Dict,

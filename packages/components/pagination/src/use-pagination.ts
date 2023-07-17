@@ -6,10 +6,11 @@ import { useCallback, useMemo } from 'react'
 
 type PaginationContext = Record<string, CSSUIObject>
 
-export const [PaginationProvider, usePaginationContext] = createContext<PaginationContext>({
-  strict: false,
-  name: 'PaginationContext',
-})
+export const [PaginationProvider, usePaginationContext] =
+  createContext<PaginationContext>({
+    strict: false,
+    name: 'PaginationContext',
+  })
 
 export type UsePaginationProps = {
   /**
@@ -74,7 +75,10 @@ export const usePagination = ({
 
   const onFirst = useCallback(() => setCurrentPage(1), [setCurrentPage])
 
-  const onLast = useCallback(() => setCurrentPage(total), [setCurrentPage, total])
+  const onLast = useCallback(
+    () => setCurrentPage(total),
+    [setCurrentPage, total],
+  )
 
   const onPrev = useCallback(
     () => setCurrentPage((prev) => (prev === 1 ? prev : prev - 1)),
@@ -86,15 +90,24 @@ export const usePagination = ({
     [setCurrentPage, total],
   )
 
-  const onChange = useCallback((page: number) => setCurrentPage(page), [setCurrentPage])
+  const onChange = useCallback(
+    (page: number) => setCurrentPage(page),
+    [setCurrentPage],
+  )
 
   const range = useMemo((): (number | 'dots')[] => {
     const minimumTotal = computedSiblings * 2 + 3 + computedBoundaries * 2
 
     if (minimumTotal >= total) return computedRange(1, total)
 
-    const prevSiblings = Math.max(currentPage - computedSiblings, computedBoundaries)
-    const nextSiblings = Math.min(currentPage + computedSiblings, total - computedBoundaries)
+    const prevSiblings = Math.max(
+      currentPage - computedSiblings,
+      computedBoundaries,
+    )
+    const nextSiblings = Math.min(
+      currentPage + computedSiblings,
+      total - computedBoundaries,
+    )
 
     const prevDots = prevSiblings > computedBoundaries + 2
     const nextDots = nextSiblings < total - (computedBoundaries + 1)

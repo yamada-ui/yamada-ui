@@ -12,7 +12,8 @@ import {
 import { createdDom, cx } from '@yamada-ui/utils'
 import { useEffect, useState } from 'react'
 
-const isNumeric = (value?: string | number) => value != null && parseFloat(value.toString()) > 0
+const isNumeric = (value?: string | number) =>
+  value != null && parseFloat(value.toString()) > 0
 
 type CollapseOptions = {
   /**
@@ -35,7 +36,9 @@ type CollapseOptions = {
   endingHeight?: number | string
 }
 
-export type CollapseProps = WithTransitionProps<HTMLUIProps<'div'> & HTMLMotionProps<'div'>> &
+export type CollapseProps = WithTransitionProps<
+  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+> &
   CollapseOptions
 
 const variants: MotionTransitionVariants = {
@@ -113,12 +116,24 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
       ? { enter: { duration: 0 } }
       : transition ?? {
           enter: {
-            height: { duration: duration ?? 0.3, ease: MOTION_TRANSITION_EASINGS.ease },
-            opacity: { duration: duration ?? 0.4, ease: MOTION_TRANSITION_EASINGS.ease },
+            height: {
+              duration: duration ?? 0.3,
+              ease: MOTION_TRANSITION_EASINGS.ease,
+            },
+            opacity: {
+              duration: duration ?? 0.4,
+              ease: MOTION_TRANSITION_EASINGS.ease,
+            },
           },
           exit: {
-            height: { duration: duration ?? 0.2, ease: MOTION_TRANSITION_EASINGS.ease },
-            opacity: { duration: duration ?? 0.3, ease: MOTION_TRANSITION_EASINGS.ease },
+            height: {
+              duration: duration ?? 0.2,
+              ease: MOTION_TRANSITION_EASINGS.ease,
+            },
+            opacity: {
+              duration: duration ?? 0.3,
+              ease: MOTION_TRANSITION_EASINGS.ease,
+            },
           },
         }
     transitionEnd = unmountOnExit

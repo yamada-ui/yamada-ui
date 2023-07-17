@@ -15,7 +15,12 @@ const UIProps = new Set([
   'sx',
 ])
 
-const HTMLProps = new Set(['htmlWidth', 'htmlHeight', 'htmlSize', 'htmlTranslate'])
+const HTMLProps = new Set([
+  'htmlWidth',
+  'htmlHeight',
+  'htmlSize',
+  'htmlTranslate',
+])
 
 export const shouldForwardProp = (prop: string): boolean =>
   HTMLProps.has(prop) || !UIProps.has(prop)

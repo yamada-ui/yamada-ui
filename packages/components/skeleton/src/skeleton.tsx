@@ -48,7 +48,9 @@ type SkeletonOptions = {
   isFitContent?: boolean
 }
 
-export type SkeletonProps = HTMLUIProps<'div'> & ThemeProps<'Skeleton'> & SkeletonOptions
+export type SkeletonProps = HTMLUIProps<'div'> &
+  ThemeProps<'Skeleton'> &
+  SkeletonOptions
 
 export const Skeleton = forwardRef<SkeletonProps, 'div'>((props, ref) => {
   let [styles, mergedProps] = useComponentStyle('Skeleton', props)
@@ -78,7 +80,8 @@ export const Skeleton = forwardRef<SkeletonProps, 'div'>((props, ref) => {
         opacity: 1,
       },
     },
-    duration: typeof fadeDuration === 'string' ? fadeDuration : `${fadeDuration}s`,
+    duration:
+      typeof fadeDuration === 'string' ? fadeDuration : `${fadeDuration}s`,
   })
 
   const animation = useAnimation({
@@ -117,7 +120,12 @@ export const Skeleton = forwardRef<SkeletonProps, 'div'>((props, ref) => {
     const animation = !isMounted.current || prevIsLoaded ? 'none' : fadeIn
 
     return (
-      <ui.div ref={ref} className={cx('ui-skeleton', className)} {...rest} animation={animation} />
+      <ui.div
+        ref={ref}
+        className={cx('ui-skeleton', className)}
+        {...rest}
+        animation={animation}
+      />
     )
   } else {
     return (

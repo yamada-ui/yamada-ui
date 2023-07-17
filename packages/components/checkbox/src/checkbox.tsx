@@ -48,56 +48,59 @@ import {
 } from 'react'
 import { useCheckboxGroupContext } from './checkbox-group'
 
-export type UseCheckboxProps<Y extends string | number = string> = FormControlOptions & {
-  /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
-  /**
-   * The value to be used in the checkbox input.
-   */
-  value?: Y
-  /**
-   * If `true`, the checkbox will be initially checked.
-   *
-   * @default false
-   */
-  defaultChecked?: boolean
-  /**
-   * If `true`, the checkbox will be checked.
-   *
-   * @default false
-   */
-  isChecked?: boolean
-  /**
-   * If `true`, the checkbox will be indeterminate.
-   *
-   * @default false
-   */
-  isIndeterminate?: boolean
-  /**
-   * The callback invoked when the checked state changes.
-   */
-  onChange?: ChangeEventHandler<HTMLInputElement>
-  /**
-   * The callback invoked when the checkbox is focused.
-   */
-  onFocus?: FocusEventHandler<HTMLInputElement>
-  /**
-   * The callback invoked when the checkbox is blurred.
-   */
-  onBlur?: FocusEventHandler<HTMLInputElement>
-  /**
-   * The tab-index property of the underlying input element.
-   */
-  tabIndex?: number
-}
+export type UseCheckboxProps<Y extends string | number = string> =
+  FormControlOptions & {
+    /**
+     * id assigned to input.
+     */
+    id?: string
+    /**
+     * The HTML `name` attribute used for forms.
+     */
+    name?: string
+    /**
+     * The value to be used in the checkbox input.
+     */
+    value?: Y
+    /**
+     * If `true`, the checkbox will be initially checked.
+     *
+     * @default false
+     */
+    defaultChecked?: boolean
+    /**
+     * If `true`, the checkbox will be checked.
+     *
+     * @default false
+     */
+    isChecked?: boolean
+    /**
+     * If `true`, the checkbox will be indeterminate.
+     *
+     * @default false
+     */
+    isIndeterminate?: boolean
+    /**
+     * The callback invoked when the checked state changes.
+     */
+    onChange?: ChangeEventHandler<HTMLInputElement>
+    /**
+     * The callback invoked when the checkbox is focused.
+     */
+    onFocus?: FocusEventHandler<HTMLInputElement>
+    /**
+     * The callback invoked when the checkbox is blurred.
+     */
+    onBlur?: FocusEventHandler<HTMLInputElement>
+    /**
+     * The tab-index property of the underlying input element.
+     */
+    tabIndex?: number
+  }
 
-export const useCheckbox = <Y extends string | number = string>(props: UseCheckboxProps<Y>) => {
+export const useCheckbox = <Y extends string | number = string>(
+  props: UseCheckboxProps<Y>,
+) => {
   const {
     id,
     name,
@@ -132,7 +135,8 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
         return
       }
 
-      if (!isControlled) setIsChecked(!checked || isIndeterminate ? true : ev.target.checked)
+      if (!isControlled)
+        setIsChecked(!checked || isIndeterminate ? true : ev.target.checked)
 
       rest.onChange?.(ev)
     },
@@ -160,7 +164,8 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
   }, [])
 
   useSafeLayoutEffect(() => {
-    if (inputRef.current) inputRef.current.indeterminate = Boolean(isIndeterminate)
+    if (inputRef.current)
+      inputRef.current.indeterminate = Boolean(isIndeterminate)
   }, [isIndeterminate])
 
   useUpdateEffect(() => {
@@ -176,7 +181,8 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
   useSafeLayoutEffect(() => {
     if (!inputRef.current) return
 
-    if (inputRef.current.checked !== checked) setIsChecked(inputRef.current.checked)
+    if (inputRef.current.checked !== checked)
+      setIsChecked(inputRef.current.checked)
   }, [inputRef.current])
 
   const getContainerProps: PropGetter = useCallback(
@@ -219,7 +225,15 @@ export const useCheckbox = <Y extends string | number = string>(props: UseCheckb
       onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
     }),
-    [isActive, checked, isFocused, isHovered, isFocusVisible, isIndeterminate, rest],
+    [
+      isActive,
+      checked,
+      isFocused,
+      isHovered,
+      isFocusVisible,
+      isIndeterminate,
+      rest,
+    ],
   )
 
   const getInputProps: PropGetter = useCallback(
@@ -366,9 +380,14 @@ export const Checkbox = forwardRef(
       isReadOnly,
       isDisabled,
       isInvalid,
-      isChecked: group?.value && rest.value ? group.value.includes(rest.value) : rest.isChecked,
+      isChecked:
+        group?.value && rest.value
+          ? group.value.includes(rest.value)
+          : rest.isChecked,
       onChange:
-        group?.onChange && rest.value ? funcAll(group.onChange, rest.onChange) : rest.onChange,
+        group?.onChange && rest.value
+          ? funcAll(group.onChange, rest.onChange)
+          : rest.onChange,
     })
 
     const cloneIcon = cloneElement(iconProps?.children ?? <CheckboxIcon />, {
@@ -413,7 +432,10 @@ export const Checkbox = forwardRef(
           'tabIndex',
         ])}
       >
-        <ui.input className='ui-checkbox-input' {...getInputProps(inputProps, ref)} />
+        <ui.input
+          className='ui-checkbox-input'
+          {...getInputProps(inputProps, ref)}
+        />
 
         <ui.span
           className='ui-checkbox-icon'
@@ -424,7 +446,9 @@ export const Checkbox = forwardRef(
             userSelect: 'none',
             ...styles.icon,
           }}
-          {...getIconProps(omitObject(iconProps ?? { children: undefined }, ['children']))}
+          {...getIconProps(
+            omitObject(iconProps ?? { children: undefined }, ['children']),
+          )}
         >
           {cloneIcon}
         </ui.span>
@@ -464,8 +488,17 @@ export type CheckboxIconProps = HTMLUIProps<'svg'> &
     isChecked?: boolean
   }
 
-export const CheckboxIcon: FC<CheckboxIconProps> = ({ isIndeterminate, isChecked, ...rest }) => {
-  const iconProps = omitObject(rest, ['isRequired', 'isReadOnly', 'isDisabled', 'isInvalid'])
+export const CheckboxIcon: FC<CheckboxIconProps> = ({
+  isIndeterminate,
+  isChecked,
+  ...rest
+}) => {
+  const iconProps = omitObject(rest, [
+    'isRequired',
+    'isReadOnly',
+    'isDisabled',
+    'isInvalid',
+  ])
 
   return (
     <AnimatePresence initial={false}>
@@ -495,7 +528,11 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({ isIndeterminate, isChecked
               } as CSSProperties
             }
           >
-            {isIndeterminate ? <IndeterminateIcon {...iconProps} /> : <CheckIcon {...iconProps} />}
+            {isIndeterminate ? (
+              <IndeterminateIcon {...iconProps} />
+            ) : (
+              <CheckIcon {...iconProps} />
+            )}
           </ui.div>
         </ui.div>
       ) : null}
@@ -503,7 +540,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({ isIndeterminate, isChecked
   )
 }
 
-const CheckIcon: FC<HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>> = (props) => {
+const CheckIcon: FC<HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>> = (
+  props,
+) => {
   return (
     <ui.svg
       as={motion.svg}
@@ -533,7 +572,9 @@ const CheckIcon: FC<HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>> = (props
   )
 }
 
-const IndeterminateIcon: FC<HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>> = (props) => {
+const IndeterminateIcon: FC<
+  HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>
+> = (props) => {
   return (
     <ui.svg
       as={motion.svg}

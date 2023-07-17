@@ -8,7 +8,10 @@ import {
   useMultiComponentStyle,
   CSSUIProps,
 } from '@yamada-ui/core'
-import { useFormControlProps, FormControlOptions } from '@yamada-ui/form-control'
+import {
+  useFormControlProps,
+  FormControlOptions,
+} from '@yamada-ui/form-control'
 import { cx } from '@yamada-ui/utils'
 
 type InputOptions = {
@@ -26,7 +29,10 @@ type InputOptions = {
   htmlSize?: number
 }
 
-export type InputProps = Omit<HTMLUIProps<'input'>, 'disabled' | 'required' | 'readOnly' | 'size'> &
+export type InputProps = Omit<
+  HTMLUIProps<'input'>,
+  'disabled' | 'required' | 'readOnly' | 'size'
+> &
   ThemeProps<'Input'> &
   InputOptions &
   FormControlOptions

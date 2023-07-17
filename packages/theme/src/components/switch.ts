@@ -51,7 +51,10 @@ export const Switch: ComponentMultiStyle = {
               transparentizeColor(toneColor(c, 400)(t, m), 0.7),
               transparentizeColor(toneColor(c, 200)(t, m), 0.6),
             ],
-            [transparentizeColor(`${c}.400`, 0.7), transparentizeColor(`${c}.200`, 0.6)],
+            [
+              transparentizeColor(`${c}.400`, 0.7),
+              transparentizeColor(`${c}.200`, 0.6),
+            ],
           )(c),
         },
       },

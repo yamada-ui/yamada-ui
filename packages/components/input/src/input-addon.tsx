@@ -40,28 +40,39 @@ const InputAddon = forwardRef<InputAddonProps, 'div'>(
       ...placementStyles[placement],
     }
 
-    return <ui.div ref={ref} className={cx('ui-input-addon', className)} __css={css} {...rest} />
+    return (
+      <ui.div
+        ref={ref}
+        className={cx('ui-input-addon', className)}
+        __css={css}
+        {...rest}
+      />
+    )
   },
 )
 
-export const InputLeftAddon = forwardRef<InputAddonProps, 'div'>(({ className, ...rest }, ref) => {
-  return (
-    <InputAddon
-      ref={ref}
-      className={cx('ui-input-addon-left', className)}
-      placement='left'
-      {...rest}
-    />
-  )
-})
+export const InputLeftAddon = forwardRef<InputAddonProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    return (
+      <InputAddon
+        ref={ref}
+        className={cx('ui-input-addon-left', className)}
+        placement='left'
+        {...rest}
+      />
+    )
+  },
+)
 
-export const InputRightAddon = forwardRef<InputAddonProps, 'div'>(({ className, ...rest }, ref) => {
-  return (
-    <InputAddon
-      ref={ref}
-      className={cx('ui-input-addon-right', className)}
-      placement='right'
-      {...rest}
-    />
-  )
-})
+export const InputRightAddon = forwardRef<InputAddonProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    return (
+      <InputAddon
+        ref={ref}
+        className={cx('ui-input-addon-right', className)}
+        placement='right'
+        {...rest}
+      />
+    )
+  },
+)

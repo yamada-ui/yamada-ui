@@ -13,7 +13,9 @@ import { useAnimation } from '@yamada-ui/use-animation'
 import { createContext, cx, omitObject, valueToPercent } from '@yamada-ui/utils'
 import { FC } from 'react'
 
-const [ProgressProvider, useProgress] = createContext<Record<string, CSSUIObject>>({
+const [ProgressProvider, useProgress] = createContext<
+  Record<string, CSSUIObject>
+>({
   name: `ProgressStylesContext`,
   errorMessage: `useProgress returned is 'undefined'. Seems you forgot to wrap the components in "<Progress />" `,
 })
@@ -67,7 +69,9 @@ type ProgressOptions = {
   filledTrackColor?: CSSUIProps<'unResponsive'>['color']
 }
 
-export type ProgressProps = HTMLUIProps<'div'> & ThemeProps<'Progress'> & ProgressOptions
+export type ProgressProps = HTMLUIProps<'div'> &
+  ThemeProps<'Progress'> &
+  ProgressOptions
 
 export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Progress', props)
@@ -86,7 +90,8 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const borderRadius = _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
+  const borderRadius =
+    _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
 
   const css: CSSUIObject = {
     w: '100%',

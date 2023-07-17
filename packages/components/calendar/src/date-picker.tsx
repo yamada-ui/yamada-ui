@@ -11,8 +11,16 @@ import { Popover, PopoverContent } from '@yamada-ui/popover'
 import { cx } from '@yamada-ui/utils'
 import { Calendar } from './calendar'
 import { DatePickerField, DatePickerFieldProps } from './date-picker-field'
-import { DatePickerClearIcon, DatePickerIcon, DatePickerIconProps } from './date-picker-icon'
-import { DatePickerProvider, useDatePicker, UseDatePickerProps } from './use-date-picker'
+import {
+  DatePickerClearIcon,
+  DatePickerIcon,
+  DatePickerIconProps,
+} from './date-picker-icon'
+import {
+  DatePickerProvider,
+  useDatePicker,
+  UseDatePickerProps,
+} from './use-date-picker'
 
 type DatePickerOptions = {
   /**
@@ -41,7 +49,10 @@ type DatePickerOptions = {
   clearIconProps?: DatePickerIconProps
 }
 
-export type DatePickerProps = Omit<HTMLUIProps<'input'>, keyof UseDatePickerProps> &
+export type DatePickerProps = Omit<
+  HTMLUIProps<'input'>,
+  keyof UseDatePickerProps
+> &
   ThemeProps<'DatePicker'> &
   DatePickerOptions &
   UseDatePickerProps
@@ -98,13 +109,21 @@ export const DatePicker = forwardRef<DatePickerProps, 'input'>((props, ref) => {
           />
 
           {isClearable && value ? (
-            <DatePickerClearIcon {...getIconProps({ clear: true, ...clearIconProps })} />
+            <DatePickerClearIcon
+              {...getIconProps({ clear: true, ...clearIconProps })}
+            />
           ) : (
             <DatePickerIcon {...getIconProps({ clear: false, ...iconProps })} />
           )}
 
-          <PopoverContent className='ui-date-picker-popover' __css={{ ...styles.popover }}>
-            <Calendar className='ui-date-picker-calender' {...getCalendarProps()} />
+          <PopoverContent
+            className='ui-date-picker-popover'
+            __css={{ ...styles.popover }}
+          >
+            <Calendar
+              className='ui-date-picker-calender'
+              {...getCalendarProps()}
+            />
           </PopoverContent>
         </ui.div>
       </Popover>

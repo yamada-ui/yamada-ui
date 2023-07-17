@@ -16,10 +16,11 @@ type ReorderItemContext = {
   dragControls: DragControls
 }
 
-export const [ReorderItemProvider, useReorderItemContext] = createContext<ReorderItemContext>({
-  name: 'ReorderContext',
-  errorMessage: `useReorderItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<ReorderItem />"`,
-})
+export const [ReorderItemProvider, useReorderItemContext] =
+  createContext<ReorderItemContext>({
+    name: 'ReorderContext',
+    errorMessage: `useReorderItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<ReorderItem />"`,
+  })
 
 type ReorderItemOptions = {
   /**
@@ -44,7 +45,10 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
     const x = useMotionValue(0)
     const y = useMotionValue(0)
 
-    const register = useCallback((node: HTMLElement | null) => setHasTrigger(!!node), [])
+    const register = useCallback(
+      (node: HTMLElement | null) => setHasTrigger(!!node),
+      [],
+    )
 
     useEffect(() => {
       x.onChange((subscription) => {
@@ -64,7 +68,12 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
       ...(!hasTrigger ? { cursor: 'grab' } : { userSelect: 'none' }),
       ...styles.item,
       ...(!hasTrigger
-        ? { _selected: { ...(styles.item as any)?._selected, cursor: 'grabbing' } }
+        ? {
+            _selected: {
+              ...(styles.item as any)?._selected,
+              cursor: 'grabbing',
+            },
+          }
         : {}),
     }
 

@@ -5,68 +5,70 @@ import { useTabsContext, useTabsDescendantsContext } from './tabs'
 
 export type TabListProps = HTMLUIProps<'div'>
 
-export const TabList = forwardRef<TabListProps, 'div'>(({ className, ...rest }, ref) => {
-  const { focusedIndex, orientation, tabListProps, styles } = useTabsContext()
+export const TabList = forwardRef<TabListProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    const { focusedIndex, orientation, tabListProps, styles } = useTabsContext()
 
-  const descendants = useTabsDescendantsContext()
+    const descendants = useTabsDescendantsContext()
 
-  const isVertical = orientation === 'vertical'
+    const isVertical = orientation === 'vertical'
 
-  const onNext = useCallback(() => {
-    const next = descendants.enabledNextValue(focusedIndex)
+    const onNext = useCallback(() => {
+      const next = descendants.enabledNextValue(focusedIndex)
 
-    if (next) next.node?.focus()
-  }, [descendants, focusedIndex])
+      if (next) next.node?.focus()
+    }, [descendants, focusedIndex])
 
-  const onPrev = useCallback(() => {
-    const prev = descendants.enabledPrevValue(focusedIndex)
+    const onPrev = useCallback(() => {
+      const prev = descendants.enabledPrevValue(focusedIndex)
 
-    if (prev) prev.node?.focus()
-  }, [descendants, focusedIndex])
+      if (prev) prev.node?.focus()
+    }, [descendants, focusedIndex])
 
-  const onFirst = useCallback(() => {
-    const first = descendants.enabledfirstValue()
+    const onFirst = useCallback(() => {
+      const first = descendants.enabledfirstValue()
 
-    if (first) first.node?.focus()
-  }, [descendants])
+      if (first) first.node?.focus()
+    }, [descendants])
 
-  const onLast = useCallback(() => {
-    const last = descendants.enabledlastValue()
+    const onLast = useCallback(() => {
+      const last = descendants.enabledlastValue()
 
-    if (last) last.node?.focus()
-  }, [descendants])
+      if (last) last.node?.focus()
+    }, [descendants])
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent) => {
-      const actions: Record<string, KeyboardEventHandler> = {
-        ArrowLeft: () => (!isVertical ? onPrev() : {}),
-        ArrowRight: () => (!isVertical ? onNext() : {}),
-        ArrowDown: () => (isVertical ? onNext() : {}),
-        ArrowUp: () => (isVertical ? onPrev() : {}),
-        Home: onFirst,
-        End: onLast,
-      }
+    const onKeyDown = useCallback(
+      (ev: KeyboardEvent) => {
+        const actions: Record<string, KeyboardEventHandler> = {
+          ArrowLeft: () => (!isVertical ? onPrev() : {}),
+          ArrowRight: () => (!isVertical ? onNext() : {}),
+          ArrowDown: () => (isVertical ? onNext() : {}),
+          ArrowUp: () => (isVertical ? onPrev() : {}),
+          Home: onFirst,
+          End: onLast,
+        }
 
-      const action = actions[ev.key]
+        const action = actions[ev.key]
 
-      if (!action) return
+        if (!action) return
 
-      ev.preventDefault()
-      action(ev)
-    },
-    [onFirst, onLast, isVertical, onPrev, onNext],
-  )
+        ev.preventDefault()
+        action(ev)
+      },
+      [onFirst, onLast, isVertical, onPrev, onNext],
+    )
 
-  const css: CSSUIObject = { display: 'flex', ...styles.tabList }
+    const css: CSSUIObject = { display: 'flex', ...styles.tabList }
 
-  return (
-    <ui.div
-      ref={ref}
-      className={cx('ui-tabs-list', className)}
-      __css={css}
-      {...tabListProps}
-      {...rest}
-      onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-    />
-  )
-})
+    return (
+      <ui.div
+        ref={ref}
+        className={cx('ui-tabs-list', className)}
+        __css={css}
+        {...tabListProps}
+        {...rest}
+        onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
+      />
+    )
+  },
+)

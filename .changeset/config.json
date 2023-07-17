@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "hirotomoyamada/yamada-ui" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "hirotomoyamada/yamada-ui" }
+  ],
   "commit": false,
   "linked": [],
   "access": "public",

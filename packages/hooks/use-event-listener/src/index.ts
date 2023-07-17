@@ -1,7 +1,10 @@
 import { useCallbackRef } from '@yamada-ui/utils'
 import { useCallback, useEffect, useRef } from 'react'
 
-type Events = keyof DocumentEventMap | keyof WindowEventMap | keyof GlobalEventHandlersEventMap
+type Events =
+  | keyof DocumentEventMap
+  | keyof WindowEventMap
+  | keyof GlobalEventHandlersEventMap
 type Target = EventTarget | null | (() => EventTarget | null)
 type Options = boolean | AddEventListenerOptions
 type Handler<E extends Events> = E extends keyof DocumentEventMap
@@ -25,17 +28,29 @@ export const useEventListener = <E extends Events>(
 
     if (!handler || !el) return
 
-    el.addEventListener(event, listener as EventListenerOrEventListenerObject, options)
+    el.addEventListener(
+      event,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    )
 
     return () => {
-      el.removeEventListener(event, listener as EventListenerOrEventListenerObject, options)
+      el.removeEventListener(
+        event,
+        listener as EventListenerOrEventListenerObject,
+        options,
+      )
     }
   }, [event, target, options, listener, handler])
 
   return () => {
     const el = typeof target === 'function' ? target() : target ?? document
 
-    el?.removeEventListener(event, listener as EventListenerOrEventListenerObject, options)
+    el?.removeEventListener(
+      event,
+      listener as EventListenerOrEventListenerObject,
+      options,
+    )
   }
 }
 
@@ -52,7 +67,11 @@ export const useEventListeners = () => {
     ) => {
       listeners.current.set(listener, { event, el, options })
 
-      el.addEventListener(event, listener as EventListenerOrEventListenerObject, options)
+      el.addEventListener(
+        event,
+        listener as EventListenerOrEventListenerObject,
+        options,
+      )
     },
     [],
   )
@@ -64,7 +83,11 @@ export const useEventListeners = () => {
       listener: any,
       options: boolean | EventListenerOptions,
     ) => {
-      el.removeEventListener(event, listener as EventListenerOrEventListenerObject, options)
+      el.removeEventListener(
+        event,
+        listener as EventListenerOrEventListenerObject,
+        options,
+      )
 
       listeners.current.delete(listener)
     },
@@ -73,7 +96,9 @@ export const useEventListeners = () => {
 
   useEffect(
     () => () => {
-      currentListeners.forEach(({ el, event, options }, key) => remove(el, event, key, options))
+      currentListeners.forEach(({ el, event, options }, key) =>
+        remove(el, event, key, options),
+      )
     },
     [remove, currentListeners],
   )

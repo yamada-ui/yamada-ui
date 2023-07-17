@@ -5,13 +5,25 @@ import { Configs, configs } from './config'
 export const transition: Configs = {
   transitionDelay: true,
   willChange: true,
-  transitionProperty: configs.prop('transitionProperty', 'transitions.property'),
-  transitionDuration: configs.prop('transitionDuration', 'transitions.duration'),
-  transitionTimingFunction: configs.prop('transitionTimingFunction', 'transitions.easing'),
+  transitionProperty: configs.prop(
+    'transitionProperty',
+    'transitions.property',
+  ),
+  transitionDuration: configs.prop(
+    'transitionDuration',
+    'transitions.duration',
+  ),
+  transitionTimingFunction: configs.prop(
+    'transitionTimingFunction',
+    'transitions.easing',
+  ),
   animation: true,
   animationName: true,
   animationDuration: configs.prop('animationDuration', 'transitions.duration'),
-  animationTimingFunction: configs.prop('animationTimingFunction', 'transitions.easing'),
+  animationTimingFunction: configs.prop(
+    'animationTimingFunction',
+    'transitions.easing',
+  ),
   animationDelay: true,
   animationIterationCount: true,
   animationDirection: true,
@@ -31,15 +43,30 @@ export type TransitionProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `transition-property` property.
    */
-  transitionProperty?: Token<CSS.Property.TransitionProperty, 'transitionProperty', Y, M>
+  transitionProperty?: Token<
+    CSS.Property.TransitionProperty,
+    'transitionProperty',
+    Y,
+    M
+  >
   /**
    * The CSS `transition-duration` property.
    */
-  transitionDuration?: Token<CSS.Property.TransitionDuration, 'transitionDuration', Y, M>
+  transitionDuration?: Token<
+    CSS.Property.TransitionDuration,
+    'transitionDuration',
+    Y,
+    M
+  >
   /**
    * The CSS `transition-timing-function` property.
    */
-  transitionTimingFunction?: Token<CSS.Property.TransitionTimingFunction, 'transitionEasing', Y, M>
+  transitionTimingFunction?: Token<
+    CSS.Property.TransitionTimingFunction,
+    'transitionEasing',
+    Y,
+    M
+  >
   /**
    * The CSS `animation` property.
    */
@@ -51,11 +78,21 @@ export type TransitionProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `animation-duration` property.
    */
-  animationDuration?: Token<CSS.Property.AnimationDuration, 'transitionDuration', Y, M>
+  animationDuration?: Token<
+    CSS.Property.AnimationDuration,
+    'transitionDuration',
+    Y,
+    M
+  >
   /**
    * The CSS `animation-timing-function` property.
    */
-  animationTimingFunction?: Token<CSS.Property.AnimationTimingFunction, 'transitionEasing', Y, M>
+  animationTimingFunction?: Token<
+    CSS.Property.AnimationTimingFunction,
+    'transitionEasing',
+    Y,
+    M
+  >
   /**
    * The CSS `animation-delay` property.
    */
@@ -63,7 +100,12 @@ export type TransitionProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `animation-iteration-count` property.
    */
-  animationIterationCount?: Token<CSS.Property.AnimationIterationCount, unknown, Y, M>
+  animationIterationCount?: Token<
+    CSS.Property.AnimationIterationCount,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `animation-direction` property.
    */

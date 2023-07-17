@@ -23,12 +23,17 @@ export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
-export type RequiredPropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+export type RequiredPropGetter<
+  Y = Record<string, unknown>,
+  M = DOMAttributes,
+> = (
   props: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
-export type MaybeRenderProp<Y> = React.ReactNode | ((props: Y) => React.ReactNode)
+export type MaybeRenderProp<Y> =
+  | React.ReactNode
+  | ((props: Y) => React.ReactNode)
 
 type Options = {
   strict?: boolean
@@ -60,7 +65,11 @@ export const createContext = <ContextType extends any = any>({
     return context
   }
 
-  return [Context.Provider, useContext, Context] as CreateContextReturn<ContextType>
+  return [
+    Context.Provider,
+    useContext,
+    Context,
+  ] as CreateContextReturn<ContextType>
 }
 
 export const useSafeLayoutEffect = Boolean(globalThis?.document)
@@ -85,7 +94,9 @@ export const useIsMounted = () => {
   return isMounted
 }
 
-export const getValidChildren = (children: React.ReactNode): React.ReactElement[] =>
+export const getValidChildren = (
+  children: React.ReactNode,
+): React.ReactElement[] =>
   React.Children.toArray(children).filter((child) =>
     React.isValidElement(child),
   ) as React.ReactElement[]
@@ -94,17 +105,30 @@ export const isValidElement = (child: any): child is React.ReactNode =>
   React.isValidElement(child) || isString(child) || isNumber(child)
 
 export const findChildren = (
-  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  children: React.ReactElement<
+    any,
+    string | React.JSXElementConstructor<any>
+  >[],
   ...types: React.JSXElementConstructor<any>[]
 ): [React.ReactElement | undefined, ...React.ReactElement[]] =>
   (children.find((child) => types.some((type) => child.type === type))
     ? children.sort((a, b) =>
-        types.some((type) => a.type === type) ? -1 : types.some((type) => b.type === type) ? 1 : 0,
+        types.some((type) => a.type === type)
+          ? -1
+          : types.some((type) => b.type === type)
+          ? 1
+          : 0,
       )
-    : [undefined, ...children]) as [React.ReactElement | undefined, ...React.ReactElement[]]
+    : [undefined, ...children]) as [
+    React.ReactElement | undefined,
+    ...React.ReactElement[],
+  ]
 
 export const includesChildren = (
-  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  children: React.ReactElement<
+    any,
+    string | React.JSXElementConstructor<any>
+  >[],
   ...types: React.JSXElementConstructor<any>[]
 ): boolean =>
   children.some((child) => {
@@ -116,22 +140,35 @@ export const includesChildren = (
   })
 
 export const omitChildren = (
-  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  children: React.ReactElement<
+    any,
+    string | React.JSXElementConstructor<any>
+  >[],
   ...types: React.JSXElementConstructor<any>[]
-): React.ReactElement[] => children.filter((child) => types.every((type) => child.type !== type))
+): React.ReactElement[] =>
+  children.filter((child) => types.every((type) => child.type !== type))
 
 export const pickChildren = (
-  children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[],
+  children: React.ReactElement<
+    any,
+    string | React.JSXElementConstructor<any>
+  >[],
   ...types: React.JSXElementConstructor<any>[]
-): React.ReactElement[] => children.filter((child) => types.every((type) => child.type === type))
+): React.ReactElement[] =>
+  children.filter((child) => types.every((type) => child.type === type))
 
-export const cx = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ')
+export const cx = (...classNames: (string | undefined)[]) =>
+  classNames.filter(Boolean).join(' ')
 
 type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T>
 
-export const isRefObject = (val: any): val is { current: any } => 'current' in val
+export const isRefObject = (val: any): val is { current: any } =>
+  'current' in val
 
-export const assignRef = <T extends any = any>(ref: ReactRef<T> | undefined, value: T) => {
+export const assignRef = <T extends any = any>(
+  ref: ReactRef<T> | undefined,
+  value: T,
+) => {
   if (ref == null) return
 
   if (typeof ref === 'function') {
@@ -156,8 +193,9 @@ export const mergeRefs =
     })
   }
 
-export const useMergeRefs = <T extends any = any>(...refs: (ReactRef<T> | undefined)[]) =>
-  React.useMemo(() => mergeRefs(...refs), [refs])
+export const useMergeRefs = <T extends any = any>(
+  ...refs: (ReactRef<T> | undefined)[]
+) => React.useMemo(() => mergeRefs(...refs), [refs])
 
 export const useCallbackRef = <T extends (...args: any[]) => any>(
   callback: T | undefined,
@@ -170,10 +208,16 @@ export const useCallbackRef = <T extends (...args: any[]) => any>(
   })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  return React.useCallback(((...args) => callbackRef.current?.(...args)) as T, deps)
+  return React.useCallback(
+    ((...args) => callbackRef.current?.(...args)) as T,
+    deps,
+  )
 }
 
-export const useUpdateEffect = (callback: React.EffectCallback, deps: React.DependencyList) => {
+export const useUpdateEffect = (
+  callback: React.EffectCallback,
+  deps: React.DependencyList,
+) => {
   const renderCycleRef = React.useRef(false)
   const effectCycleRef = React.useRef(false)
 
@@ -233,16 +277,16 @@ export type AsyncState<T> =
       value: T
     }
 
-export type PromiseType<P extends Promise<any>> = P extends Promise<infer T> ? T : never
+export type PromiseType<P extends Promise<any>> = P extends Promise<infer T>
+  ? T
+  : never
 
-type StateFromFunctionReturningPromise<T extends FunctionReturningPromise> = AsyncState<
-  PromiseType<ReturnType<T>>
->
+type StateFromFunctionReturningPromise<T extends FunctionReturningPromise> =
+  AsyncState<PromiseType<ReturnType<T>>>
 
-export type AsyncFnReturn<T extends FunctionReturningPromise = FunctionReturningPromise> = [
-  StateFromFunctionReturningPromise<T>,
-  T,
-]
+export type AsyncFnReturn<
+  T extends FunctionReturningPromise = FunctionReturningPromise,
+> = [StateFromFunctionReturningPromise<T>, T]
 
 export const useAsyncFunc = <T extends FunctionReturningPromise>(
   func: T,
@@ -251,27 +295,34 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
 ): AsyncFnReturn<T> => {
   const lastCallId = React.useRef(0)
   const isMounted = useIsMounted()
-  const [state, setState] = React.useState<StateFromFunctionReturningPromise<T>>(initialState)
+  const [state, setState] =
+    React.useState<StateFromFunctionReturningPromise<T>>(initialState)
 
-  const callback = React.useCallback((...args: Parameters<T>): ReturnType<T> => {
-    const callId = ++lastCallId.current
+  const callback = React.useCallback(
+    (...args: Parameters<T>): ReturnType<T> => {
+      const callId = ++lastCallId.current
 
-    if (!state.loading) setState((prevState) => ({ ...prevState, loading: true }))
+      if (!state.loading)
+        setState((prevState) => ({ ...prevState, loading: true }))
 
-    return func(...args).then(
-      (value) => {
-        if (isMounted.current && callId === lastCallId.current) setState({ value, loading: false })
+      return func(...args).then(
+        (value) => {
+          if (isMounted.current && callId === lastCallId.current)
+            setState({ value, loading: false })
 
-        return value
-      },
-      (error) => {
-        if (isMounted.current && callId === lastCallId.current) setState({ error, loading: false })
+          return value
+        },
+        (error) => {
+          if (isMounted.current && callId === lastCallId.current)
+            setState({ error, loading: false })
 
-        return error
-      },
-    ) as ReturnType<T>
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps)
+          return error
+        },
+      ) as ReturnType<T>
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    deps,
+  )
 
   return [state, callback as unknown as T]
 }
@@ -280,7 +331,10 @@ export type AsyncStateRetry<T> = AsyncState<T> & {
   retry(): void
 }
 
-export const useAsyncRetry = <T,>(func: () => Promise<T>, deps: React.DependencyList = []) => {
+export const useAsyncRetry = <T,>(
+  func: () => Promise<T>,
+  deps: React.DependencyList = [],
+) => {
   const [attempt, setAttempt] = React.useState<number>(0)
   const state = useAsync(func, [...deps, attempt])
 

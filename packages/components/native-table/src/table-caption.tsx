@@ -20,7 +20,12 @@ export const TableCaption = forwardRef<TableCaptionProps, 'caption'>(
     const css: CSSUIObject = { captionSide: placement, ...styles.caption }
 
     return (
-      <ui.caption ref={ref} className={cx('ui-table-caption', className)} __css={css} {...rest} />
+      <ui.caption
+        ref={ref}
+        className={cx('ui-table-caption', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )

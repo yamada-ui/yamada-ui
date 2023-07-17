@@ -223,13 +223,19 @@
       "required": false,
       "description": "The HTML `name` attribute used for forms."
     },
-    "onBlur": { "type": "FocusEventHandler<HTMLInputElement>", "required": false },
+    "onBlur": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "required": false
+    },
     "onChange": {
       "type": "(valueAsString: string, valueAsNumber: number) => void",
       "required": false,
       "description": "The callback fired when the value changes."
     },
-    "onFocus": { "type": "FocusEventHandler<HTMLInputElement>", "required": false },
+    "onFocus": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "required": false
+    },
     "onInvalid": {
       "type": "(\n  message: ValidityState,\n  value: string,\n  valueAsNumber: number,\n) => void",
       "required": false,

@@ -66,7 +66,9 @@ type DialogOptions = {
   onSuccess?: (onClose: (() => void) | undefined) => void
 }
 
-export type DialogProps = Omit<ModalProps, keyof ThemeProps> & ThemeProps<'Dialog'> & DialogOptions
+export type DialogProps = Omit<ModalProps, keyof ThemeProps> &
+  ThemeProps<'Dialog'> &
+  DialogOptions
 
 type DialogContext = Record<string, CSSUIObject>
 
@@ -75,89 +77,127 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
   errorMessage: `useDialog returned is 'undefined'. Seems you forgot to wrap the components in "<Dialog />" `,
 })
 
-export const Dialog = forwardRef<DialogProps, 'section'>(({ size, ...props }, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Dialog', { size, ...props })
-  const {
-    className,
-    children,
-    withOverlay = true,
-    withCloseButton = true,
-    header,
-    footer,
-    cancel,
-    other,
-    success,
-    onClose,
-    onCancel,
-    onOther,
-    onSuccess,
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const Dialog = forwardRef<DialogProps, 'section'>(
+  ({ size, ...props }, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('Dialog', {
+      size,
+      ...props,
+    })
+    const {
+      className,
+      children,
+      withOverlay = true,
+      withCloseButton = true,
+      header,
+      footer,
+      cancel,
+      other,
+      success,
+      onClose,
+      onCancel,
+      onOther,
+      onSuccess,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  const validChildren = getValidChildren(children)
+    const validChildren = getValidChildren(children)
 
-  const [customDialogOverlay] = findChildren(validChildren, DialogOverlay)
-  const [customDialogCloseButton] = findChildren(validChildren, DialogCloseButton)
-  const [customDialogHeader] = findChildren(validChildren, DialogHeader)
-  const [customDialogBody] = findChildren(validChildren, DialogBody)
-  const [customDialogFooter] = findChildren(validChildren, DialogFooter)
+    const [customDialogOverlay] = findChildren(validChildren, DialogOverlay)
+    const [customDialogCloseButton] = findChildren(
+      validChildren,
+      DialogCloseButton,
+    )
+    const [customDialogHeader] = findChildren(validChildren, DialogHeader)
+    const [customDialogBody] = findChildren(validChildren, DialogBody)
+    const [customDialogFooter] = findChildren(validChildren, DialogFooter)
 
-  const cloneChildren = !isEmpty(validChildren)
-    ? omitChildren(
-        validChildren,
-        DialogOverlay,
-        DialogCloseButton,
-        DialogHeader,
-        DialogBody,
-        DialogFooter,
-      )
-    : children
+    const cloneChildren = !isEmpty(validChildren)
+      ? omitChildren(
+          validChildren,
+          DialogOverlay,
+          DialogCloseButton,
+          DialogHeader,
+          DialogBody,
+          DialogFooter,
+        )
+      : children
 
-  const css: CSSUIObject = { ...styles.container }
+    const css: CSSUIObject = { ...styles.container }
 
-  const cancelButtonProps: ButtonProps = isValidElement(cancel) ? { children: cancel } : cancel
-  const otherButtonProps: ButtonProps = isValidElement(other) ? { children: other } : other
-  const successButtonProps: ButtonProps = isValidElement(success) ? { children: success } : success
+    const cancelButtonProps: ButtonProps = isValidElement(cancel)
+      ? { children: cancel }
+      : cancel
+    const otherButtonProps: ButtonProps = isValidElement(other)
+      ? { children: other }
+      : other
+    const successButtonProps: ButtonProps = isValidElement(success)
+      ? { children: success }
+      : success
 
-  if (cancelButtonProps && !cancelButtonProps.variant) cancelButtonProps.variant = 'ghost'
-  if (otherButtonProps && !otherButtonProps.colorScheme) otherButtonProps.colorScheme = 'secondary'
-  if (successButtonProps && !successButtonProps.colorScheme)
-    successButtonProps.colorScheme = 'primary'
+    if (cancelButtonProps && !cancelButtonProps.variant)
+      cancelButtonProps.variant = 'ghost'
+    if (otherButtonProps && !otherButtonProps.colorScheme)
+      otherButtonProps.colorScheme = 'secondary'
+    if (successButtonProps && !successButtonProps.colorScheme)
+      successButtonProps.colorScheme = 'primary'
 
-  return (
-    <DialogProvider value={styles}>
-      <Modal
-        ref={ref}
-        className={cx('ui-dialog', className)}
-        __css={css}
-        {...{ size, onClose, withOverlay: false, withCloseButton: false, ...rest }}
-      >
-        {customDialogOverlay ?? (withOverlay && size !== 'full' ? <DialogOverlay /> : null)}
-        {customDialogCloseButton ?? (withCloseButton && onClose ? <DialogCloseButton /> : null)}
-        {customDialogHeader ?? (header ? <DialogHeader>{header}</DialogHeader> : null)}
-        {customDialogBody ?? (cloneChildren ? <DialogBody>{cloneChildren}</DialogBody> : null)}
-        {customDialogFooter ??
-          (footer || cancelButtonProps || otherButtonProps || successButtonProps ? (
-            <DialogFooter>
-              {footer ?? (
-                <>
-                  {cancelButtonProps ? (
-                    <Button onClick={() => onCancel?.(onClose)} {...cancelButtonProps} />
-                  ) : null}
-                  {otherButtonProps ? (
-                    <Button onClick={() => onOther?.(onClose)} {...otherButtonProps} />
-                  ) : null}
-                  {successButtonProps ? (
-                    <Button onClick={() => onSuccess?.(onClose)} {...successButtonProps} />
-                  ) : null}
-                </>
-              )}
-            </DialogFooter>
-          ) : null)}
-      </Modal>
-    </DialogProvider>
-  )
-})
+    return (
+      <DialogProvider value={styles}>
+        <Modal
+          ref={ref}
+          className={cx('ui-dialog', className)}
+          __css={css}
+          {...{
+            size,
+            onClose,
+            withOverlay: false,
+            withCloseButton: false,
+            ...rest,
+          }}
+        >
+          {customDialogOverlay ??
+            (withOverlay && size !== 'full' ? <DialogOverlay /> : null)}
+          {customDialogCloseButton ??
+            (withCloseButton && onClose ? <DialogCloseButton /> : null)}
+          {customDialogHeader ??
+            (header ? <DialogHeader>{header}</DialogHeader> : null)}
+          {customDialogBody ??
+            (cloneChildren ? <DialogBody>{cloneChildren}</DialogBody> : null)}
+          {customDialogFooter ??
+            (footer ||
+            cancelButtonProps ||
+            otherButtonProps ||
+            successButtonProps ? (
+              <DialogFooter>
+                {footer ?? (
+                  <>
+                    {cancelButtonProps ? (
+                      <Button
+                        onClick={() => onCancel?.(onClose)}
+                        {...cancelButtonProps}
+                      />
+                    ) : null}
+                    {otherButtonProps ? (
+                      <Button
+                        onClick={() => onOther?.(onClose)}
+                        {...otherButtonProps}
+                      />
+                    ) : null}
+                    {successButtonProps ? (
+                      <Button
+                        onClick={() => onSuccess?.(onClose)}
+                        {...successButtonProps}
+                      />
+                    ) : null}
+                  </>
+                )}
+              </DialogFooter>
+            ) : null)}
+        </Modal>
+      </DialogProvider>
+    )
+  },
+)
 
 export type DialogOverlayProps = ModalOverlayProps
 
@@ -206,20 +246,34 @@ export const DialogHeader = forwardRef<DialogHeaderProps, 'header'>(
     const css: CSSUIObject = { ...styles.header }
 
     return (
-      <ModalHeader ref={ref} className={cx('ui-dialog-header', className)} __css={css} {...rest} />
+      <ModalHeader
+        ref={ref}
+        className={cx('ui-dialog-header', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )
 
 export type DialogBodyProps = ModalBodyProps
 
-export const DialogBody = forwardRef<DialogBodyProps, 'main'>(({ className, ...rest }, ref) => {
-  const styles = useDialog()
+export const DialogBody = forwardRef<DialogBodyProps, 'main'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useDialog()
 
-  const css: CSSUIObject = { ...styles.body }
+    const css: CSSUIObject = { ...styles.body }
 
-  return <ModalBody ref={ref} className={cx('ui-dialog-body', className)} __css={css} {...rest} />
-})
+    return (
+      <ModalBody
+        ref={ref}
+        className={cx('ui-dialog-body', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 export type DialogFooterProps = ModalFooterProps
 
@@ -230,7 +284,12 @@ export const DialogFooter = forwardRef<DialogFooterProps, 'footer'>(
     const css: CSSUIObject = { ...styles.footer }
 
     return (
-      <ModalFooter ref={ref} className={cx('ui-dialog-footer', className)} __css={css} {...rest} />
+      <ModalFooter
+        ref={ref}
+        className={cx('ui-dialog-footer', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )

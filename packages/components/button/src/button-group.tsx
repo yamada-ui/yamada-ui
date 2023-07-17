@@ -1,4 +1,10 @@
-import { ui, forwardRef, CSSUIProps, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  CSSUIProps,
+  HTMLUIProps,
+  ThemeProps,
+} from '@yamada-ui/core'
 import { createContext, cx, dataAttr } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
@@ -21,16 +27,20 @@ type ButtonGroupOptions = {
   isDisabled?: boolean
 }
 
-export type ButtonGroupProps = HTMLUIProps<'div'> & ThemeProps<'Button'> & ButtonGroupOptions
+export type ButtonGroupProps = HTMLUIProps<'div'> &
+  ThemeProps<'Button'> &
+  ButtonGroupOptions
 
 type ButtonGroupContext = ThemeProps<'Button'> & {
   isDisabled?: boolean
 }
 
-const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>({
-  strict: false,
-  name: 'ButtonGroupContext',
-})
+const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
+  {
+    strict: false,
+    name: 'ButtonGroupContext',
+  },
+)
 
 export { useButtonGroup }
 
@@ -50,7 +60,8 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
     },
     ref,
   ) => {
-    const isColumn = flexDirection === 'column' || flexDirection === 'column-reverse'
+    const isColumn =
+      flexDirection === 'column' || flexDirection === 'column-reverse'
 
     const css = {
       display: 'inline-flex',

@@ -61,13 +61,22 @@ module.exports = function (plop) {
       'utf8',
     )
 
-    data = `import { ${upperCase(camelCase(packageName))} } from "./${packageName}"\n` + data
+    data =
+      `import { ${upperCase(
+        camelCase(packageName),
+      )} } from "./${packageName}"\n` + data
 
     const keyword = 'export default {'
     const target = data.indexOf(keyword) + keyword.length
-    data = data.slice(0, target) + `\n  ${upperCase(camelCase(packageName))},` + data.slice(target)
+    data =
+      data.slice(0, target) +
+      `\n  ${upperCase(camelCase(packageName))},` +
+      data.slice(target)
 
-    await fs.writeFile(path.join(cwd, 'packages', 'theme', 'src', 'components', 'index.ts'), data)
+    await fs.writeFile(
+      path.join(cwd, 'packages', 'theme', 'src', 'components', 'index.ts'),
+      data,
+    )
   })
 
   plop.setGenerator('component', {
@@ -104,9 +113,14 @@ module.exports = function (plop) {
       actions.push({
         type: 'addMany',
         templateFiles:
-          componentType === 'Yes' ? 'plop/component/package-multi/**' : 'plop/component/package/**',
+          componentType === 'Yes'
+            ? 'plop/component/package-multi/**'
+            : 'plop/component/package/**',
         destination: `./packages/components/{{dashCase packageName}}`,
-        base: componentType === 'Yes' ? 'plop/component/package-multi' : 'plop/component/package',
+        base:
+          componentType === 'Yes'
+            ? 'plop/component/package-multi'
+            : 'plop/component/package',
         data: { packageName },
         abortOnFail: true,
       })
@@ -123,9 +137,14 @@ module.exports = function (plop) {
       actions.push({
         type: 'addMany',
         templateFiles:
-          componentType === 'Yes' ? 'plop/component/theme-multi/**' : 'plop/component/theme/**',
+          componentType === 'Yes'
+            ? 'plop/component/theme-multi/**'
+            : 'plop/component/theme/**',
         destination: `./packages/theme/src/components`,
-        base: componentType === 'Yes' ? 'plop/component/theme-multi' : 'plop/component/theme',
+        base:
+          componentType === 'Yes'
+            ? 'plop/component/theme-multi'
+            : 'plop/component/theme',
         data: { packageName },
         abortOnFail: true,
       })

@@ -185,7 +185,14 @@ export interface GeneratedTheme extends UITheme {
     | (string & {})
   gradients: string & {}
   layerStyles: string & {}
-  letterSpacings: 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest' | (string & {})
+  letterSpacings:
+    | 'tighter'
+    | 'tight'
+    | 'normal'
+    | 'wide'
+    | 'wider'
+    | 'widest'
+    | (string & {})
   lineHeights:
     | '3'
     | '4'
@@ -203,7 +210,17 @@ export interface GeneratedTheme extends UITheme {
     | 'tall'
     | 'taller'
     | (string & {})
-  radii: 'none' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | (string & {})
+  radii:
+    | 'none'
+    | 'sm'
+    | 'base'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | 'full'
+    | (string & {})
   shadows:
     | 'xs'
     | 'sm'
@@ -382,7 +399,13 @@ export interface GeneratedTheme extends UITheme {
     | 'ultra-slow'
     | (string & {})
   transitionEasing: 'ease-in' | 'ease-out' | 'ease-in-out' | (string & {})
-  transitionProperty: 'common' | 'colors' | 'dimensions' | 'position' | 'background' | (string & {})
+  transitionProperty:
+    | 'common'
+    | 'colors'
+    | 'dimensions'
+    | 'position'
+    | 'background'
+    | (string & {})
   zIndices:
     | 'yamcha'
     | 'kurillin'
@@ -404,7 +427,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'solid' | 'subtle' | (string & {})
     }
-    Accordion: { sizes: string & {}; variants: 'basic' | 'card' | 'unstyled' | (string & {}) }
+    Accordion: {
+      sizes: string & {}
+      variants: 'basic' | 'card' | 'unstyled' | (string & {})
+    }
     Alert: {
       sizes: string & {}
       variants:
@@ -420,10 +446,19 @@ export interface GeneratedTheme extends UITheme {
       sizes: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {})
       variants: string & {}
     }
-    Badge: { sizes: string & {}; variants: 'solid' | 'subtle' | 'outline' | (string & {}) }
+    Badge: {
+      sizes: string & {}
+      variants: 'solid' | 'subtle' | 'outline' | (string & {})
+    }
     Button: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
-      variants: 'solid' | 'outline' | 'link' | 'ghost' | 'unstyled' | (string & {})
+      variants:
+        | 'solid'
+        | 'outline'
+        | 'link'
+        | 'ghost'
+        | 'unstyled'
+        | (string & {})
     }
     Calendar: {
       sizes: 'sm' | 'md' | 'lg' | 'full' | (string & {})
@@ -431,11 +466,26 @@ export interface GeneratedTheme extends UITheme {
     }
     Card: {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
-      variants: 'elevated' | 'outline' | 'solid' | 'subtle' | 'unstyled' | (string & {})
+      variants:
+        | 'elevated'
+        | 'outline'
+        | 'solid'
+        | 'subtle'
+        | 'unstyled'
+        | (string & {})
     }
-    Carousel: { sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {}); variants: string & {} }
-    Checkbox: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
-    CloseButton: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Carousel: {
+      sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {})
+      variants: string & {}
+    }
+    Checkbox: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: string & {}
+    }
+    CloseButton: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: string & {}
+    }
     DatePicker: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
@@ -456,7 +506,10 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
-    Divider: { sizes: string & {}; variants: 'solid' | 'dashed' | 'dotted' | (string & {}) }
+    Divider: {
+      sizes: string & {}
+      variants: 'solid' | 'dashed' | 'dotted' | (string & {})
+    }
     Drawer: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full' | (string & {})
       variants: string & {}
@@ -466,14 +519,26 @@ export interface GeneratedTheme extends UITheme {
       variants: 'solid' | 'dashed' | 'unstyled' | (string & {})
     }
     Heading: {
-      sizes: '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | (string & {})
+      sizes:
+        | '4xl'
+        | '3xl'
+        | '2xl'
+        | 'xl'
+        | 'lg'
+        | 'md'
+        | 'sm'
+        | 'xs'
+        | (string & {})
       variants: string & {}
     }
     Input: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
-    Mark: { sizes: string & {}; variants: 'solid' | 'subtle' | 'outline' | (string & {}) }
+    Mark: {
+      sizes: string & {}
+      variants: 'solid' | 'subtle' | 'outline' | (string & {})
+    }
     Modal: {
       sizes:
         | 'xs'
@@ -502,7 +567,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
-    Progress: { sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Progress: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: string & {}
+    }
     Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Reorder: {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
@@ -517,7 +585,10 @@ export interface GeneratedTheme extends UITheme {
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
     }
     Slider: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
-    Stepper: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    Stepper: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: string & {}
+    }
     Switch: {
       sizes: 'sm' | 'md' | 'lg' | (string & {})
       variants: 'thick' | 'thin' | (string & {})

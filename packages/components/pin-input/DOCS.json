@@ -83,7 +83,11 @@
       "required": false,
       "description": "The type of values the pin-input should allow."
     },
-    "value": { "type": "string", "required": false, "description": "The value of the pin input." },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the pin input."
+    },
     "variant": {
       "defaultValue": "outline",
       "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",

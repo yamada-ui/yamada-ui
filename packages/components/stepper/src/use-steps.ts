@@ -11,11 +11,20 @@ export const useSteps = ({ index = 0, count }: UseStepsProps) => {
   const maxStep = typeof count === 'number' ? count - 1 : 0
   const activeStepPercent = activeStep / maxStep
 
-  const isActiveStep = useCallback((step: number) => step === activeStep, [activeStep])
+  const isActiveStep = useCallback(
+    (step: number) => step === activeStep,
+    [activeStep],
+  )
 
-  const isCompleteStep = useCallback((step: number) => step < activeStep, [activeStep])
+  const isCompleteStep = useCallback(
+    (step: number) => step < activeStep,
+    [activeStep],
+  )
 
-  const isIncompleteStep = useCallback((step: number) => step > activeStep, [activeStep])
+  const isIncompleteStep = useCallback(
+    (step: number) => step > activeStep,
+    [activeStep],
+  )
 
   const getStepStatus = useCallback(
     (step: number): 'complete' | 'active' | 'incomplete' => {
@@ -29,11 +38,16 @@ export const useSteps = ({ index = 0, count }: UseStepsProps) => {
 
   const onStepNext = useCallback(
     () =>
-      setActiveStep((step) => (typeof count === 'number' ? Math.min(count, step + 1) : step + 1)),
+      setActiveStep((step) =>
+        typeof count === 'number' ? Math.min(count, step + 1) : step + 1,
+      ),
     [count],
   )
 
-  const onStepPrev = useCallback(() => setActiveStep((step) => Math.max(0, step - 1)), [])
+  const onStepPrev = useCallback(
+    () => setActiveStep((step) => Math.max(0, step - 1)),
+    [],
+  )
 
   return {
     activeStep,

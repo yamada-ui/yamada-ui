@@ -1,4 +1,8 @@
-import { CSSUIObject, HTMLUIProps, layoutStylesProperties } from '@yamada-ui/core'
+import {
+  CSSUIObject,
+  HTMLUIProps,
+  layoutStylesProperties,
+} from '@yamada-ui/core'
 import {
   FormControlOptions,
   formControlProperties,
@@ -45,7 +49,8 @@ import {
 import { OptionProps } from './'
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) && !!target?.getAttribute('role')?.startsWith('select-item')
+  isHTMLElement(target) &&
+  !!target?.getAttribute('role')?.startsWith('select-item')
 
 export const {
   DescendantsContextProvider: SelectDescendantsContextProvider,
@@ -56,7 +61,10 @@ export const {
 
 export type MaybeValue = string | string[]
 
-type SelectContext = Omit<UseSelectProps, 'value' | 'defaultValue' | 'onChange' | 'isEmpty'> & {
+type SelectContext = Omit<
+  UseSelectProps,
+  'value' | 'defaultValue' | 'onChange' | 'isEmpty'
+> & {
   value: MaybeValue
   displayValue: MaybeValue | undefined
   onChange: (newValue: string) => void
@@ -171,14 +179,18 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const isFocused = focusedIndex > -1
   const isMulti = isArray(value)
-  const isEmptyValue = (!isMulti ? !value : !value.length) && !(placeholder && placeholderInOptions)
+  const isEmptyValue =
+    (!isMulti ? !value : !value.length) &&
+    !(placeholder && placeholderInOptions)
 
   const selectedValues = descendants.values(
     ({ node }) => isMulti && value.includes(node.dataset.value ?? ''),
   )
 
   const selectedIndexes = selectedValues.map(({ index }) => index)
-  const enabledValues = descendants.enabledValues(({ index }) => !selectedIndexes.includes(index))
+  const enabledValues = descendants.enabledValues(
+    ({ index }) => !selectedIndexes.includes(index),
+  )
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
@@ -229,7 +241,9 @@ export const useSelect = <T extends MaybeValue = string>({
       const values = descendants.enabledValues()
 
       const selected = values.find(({ node }) =>
-        !isMulti ? node.dataset.value === value : value.includes(node.dataset.value ?? ''),
+        !isMulti
+          ? node.dataset.value === value
+          : value.includes(node.dataset.value ?? ''),
       )
 
       if (selected) setFocusedIndex(selected.index)
@@ -249,7 +263,8 @@ export const useSelect = <T extends MaybeValue = string>({
       } else {
         if (selectedIndexes.includes(next.index)) {
           const enabledNext =
-            enabledValues.find(({ index }) => next.index < index) ?? enabledValues[0]
+            enabledValues.find(({ index }) => next.index < index) ??
+            enabledValues[0]
 
           setFocusedIndex(enabledNext.index)
         } else {
@@ -280,7 +295,8 @@ export const useSelect = <T extends MaybeValue = string>({
       } else {
         if (selectedIndexes.includes(prev.index)) {
           const enabledPrev =
-            enabledValues.reverse().find(({ index }) => index < prev.index) ?? enabledValues[0]
+            enabledValues.reverse().find(({ index }) => index < prev.index) ??
+            enabledValues[0]
 
           setFocusedIndex(enabledPrev.index)
         } else {
@@ -300,8 +316,10 @@ export const useSelect = <T extends MaybeValue = string>({
     setFocusedIndex,
   ])
 
-  const onFocusFirstOrSelected = isEmptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
-  const onFocusLastOrSelected = isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
+  const onFocusFirstOrSelected =
+    isEmptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
+  const onFocusLastOrSelected =
+    isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
   const onChangeDisplayValue = useCallback(
     (newValue: string, runOmit: boolean = true) => {
@@ -319,13 +337,16 @@ export const useSelect = <T extends MaybeValue = string>({
           return selectedValues[0] as T
         } else {
           selectedValues.forEach((selectedValue) => {
-            const isSelected = isArray(prev) && prev.includes(selectedValue ?? '')
+            const isSelected =
+              isArray(prev) && prev.includes(selectedValue ?? '')
 
             if (!isSelected) {
               prev = [...(isArray(prev) ? prev : []), selectedValue] as T
             } else if (runOmit) {
               prev = (
-                isArray(prev) ? prev.filter((value) => value !== selectedValue) : undefined
+                isArray(prev)
+                  ? prev.filter((value) => value !== selectedValue)
+                  : undefined
               ) as T
             }
           })
@@ -389,7 +410,8 @@ export const useSelect = <T extends MaybeValue = string>({
   const onSelect = useCallback(() => {
     let enabledValue = descendants.value(focusedIndex)
 
-    if ('disabled' in (enabledValue?.node.dataset ?? {})) enabledValue = undefined
+    if ('disabled' in (enabledValue?.node.dataset ?? {}))
+      enabledValue = undefined
 
     if (!enabledValue) return
 
@@ -400,7 +422,15 @@ export const useSelect = <T extends MaybeValue = string>({
     if (closeOnSelect) onClose()
 
     if (omitSelectedValues) onFocusNext()
-  }, [closeOnSelect, descendants, focusedIndex, omitSelectedValues, onChange, onClose, onFocusNext])
+  }, [
+    closeOnSelect,
+    descendants,
+    focusedIndex,
+    omitSelectedValues,
+    onChange,
+    onClose,
+    onFocusNext,
+  ])
 
   const onClick = useCallback(() => {
     if (isOpen) return
@@ -447,8 +477,16 @@ export const useSelect = <T extends MaybeValue = string>({
           : !isOpen
           ? funcAll(onOpen, onFocusLastOrSelected)
           : undefined,
-        Space: isFocused ? onSelect : !isOpen ? funcAll(onOpen, onFocusFirstOrSelected) : undefined,
-        Enter: isFocused ? onSelect : !isOpen ? funcAll(onOpen, onFocusFirstOrSelected) : undefined,
+        Space: isFocused
+          ? onSelect
+          : !isOpen
+          ? funcAll(onOpen, onFocusFirstOrSelected)
+          : undefined,
+        Enter: isFocused
+          ? onSelect
+          : !isOpen
+          ? funcAll(onOpen, onFocusFirstOrSelected)
+          : undefined,
         Home: isOpen ? onFocusFirst : undefined,
         End: isOpen ? onFocusLast : undefined,
         Escape: closeOnEsc ? onClose : undefined,
@@ -500,7 +538,14 @@ export const useSelect = <T extends MaybeValue = string>({
     } else {
       setIsAllSelected(false)
     }
-  }, [omitSelectedValues, value, descendants, isMulti, onClose, maxSelectedValues])
+  }, [
+    omitSelectedValues,
+    value,
+    descendants,
+    isMulti,
+    onClose,
+    maxSelectedValues,
+  ])
 
   useUpdateEffect(() => {
     if (!isOpen) setFocusedIndex(-1)
@@ -543,10 +588,16 @@ export const useSelect = <T extends MaybeValue = string>({
     (props = {}, ref = null) => ({
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
-      ...omitObject(computedProps[1] as Dict, ['value', 'defaultValue', 'onChange']),
+      ...omitObject(computedProps[1] as Dict, [
+        'value',
+        'defaultValue',
+        'onChange',
+      ]),
       ...props,
       'data-active': dataAttr(isOpen),
-      'data-placeholder': dataAttr(!isMulti ? displayValue === undefined : !displayValue?.length),
+      'data-placeholder': dataAttr(
+        !isMulti ? displayValue === undefined : !displayValue?.length,
+      ),
       'aria-expanded': dataAttr(isOpen),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
@@ -655,7 +706,10 @@ export type UseSelectOptionGroupProps = HTMLUIProps<'ul'> & {
   label: string
 }
 
-export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupProps) => {
+export const useSelectOptionGroup = ({
+  label,
+  ...rest
+}: UseSelectOptionGroupProps) => {
   const { value, omitSelectedValues } = useSelectContext()
 
   const isMulti = isArray(value)
@@ -665,12 +719,15 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
   const values = descendants.values()
   const selectedValues =
     isMulti && omitSelectedValues
-      ? descendants.values(({ node }) => value.includes(node.dataset.value ?? ''))
+      ? descendants.values(({ node }) =>
+          value.includes(node.dataset.value ?? ''),
+        )
       : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const childValues = values.filter(
     ({ node, index }) =>
-      node.parentElement?.dataset.label === label && !selectedIndexes.includes(index),
+      node.parentElement?.dataset.label === label &&
+      !selectedIndexes.includes(index),
   )
 
   const isEmpty = !childValues.length
@@ -720,7 +777,10 @@ export const useSelectOptionGroup = ({ label, ...rest }: UseSelectOptionGroupPro
 
 export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
-export type UseSelectOptionProps = Omit<HTMLUIProps<'li'>, 'value' | 'children'> & {
+export type UseSelectOptionProps = Omit<
+  HTMLUIProps<'li'>,
+  'value' | 'children'
+> & {
   /**
    * The value of the select option.
    */
@@ -782,22 +842,33 @@ export const useSelectOption = (
 
   const itemRef = useRef<HTMLLIElement>(null)
 
-  const { index, register, descendants } = useSelectDescendant({ disabled: trulyDisabled })
+  const { index, register, descendants } = useSelectDescendant({
+    disabled: trulyDisabled,
+  })
 
   const values = descendants.values()
   const frontValues = values.slice(0, index)
 
   const isMulti = isArray(value)
   const isDuplicated = !isMulti
-    ? frontValues.some(({ node }) => node.dataset.value === (computedProps.value ?? ''))
+    ? frontValues.some(
+        ({ node }) => node.dataset.value === (computedProps.value ?? ''),
+      )
     : false
 
   const isSelected =
     !isDuplicated &&
-    (!isMulti ? (computedProps.value ?? '') === value : value.includes(computedProps.value ?? ''))
+    (!isMulti
+      ? (computedProps.value ?? '') === value
+      : value.includes(computedProps.value ?? ''))
   const isFocused = index === focusedIndex
 
-  if (!!placeholder && index > 0 && placeholderInOptions && !computedProps.value) {
+  if (
+    !!placeholder &&
+    index > 0 &&
+    placeholderInOptions &&
+    !computedProps.value
+  ) {
     console.warn(
       `${
         !isMulti ? 'Select' : 'MultiSelect'
@@ -879,7 +950,16 @@ export const useSelectOption = (
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
-    [computedProps, isDisabled, isFocused, isSelected, omitSelectedValues, onClick, ref, register],
+    [
+      computedProps,
+      isDisabled,
+      isFocused,
+      isSelected,
+      omitSelectedValues,
+      onClick,
+      ref,
+      register,
+    ],
   )
 
   return {

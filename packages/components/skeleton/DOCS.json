@@ -28,7 +28,11 @@
       "required": false,
       "description": "If `true`, it'll render its children with a nice fade transition."
     },
-    "size": { "type": "string", "required": false, "description": "The size of the Skeleton." },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Skeleton."
+    },
     "speed": {
       "type": "string | number",
       "defaultValue": "0.8",

@@ -2,7 +2,10 @@ import { ui, CSSUIObject, forwardRef, HTMLUIProps } from '@yamada-ui/core'
 import { cx, runIfFunc } from '@yamada-ui/utils'
 import { FC, ReactElement } from 'react'
 import { AutocompleteItemIcon } from './autocomplete-icon'
-import { useAutocompleteContext, useAutocompleteCreate } from './use-autocomplete'
+import {
+  useAutocompleteContext,
+  useAutocompleteCreate,
+} from './use-autocomplete'
 
 type AutocompleteCreateOptions = {
   /**
@@ -45,7 +48,9 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, 'li'>(
         __css={css}
         {...getCreateProps(rest, ref)}
       >
-        {icon !== null ? <AutocompleteItemIcon>{icon || <PlusIcon />}</AutocompleteItemIcon> : null}
+        {icon !== null ? (
+          <AutocompleteItemIcon>{icon || <PlusIcon />}</AutocompleteItemIcon>
+        ) : null}
         {icon ? (
           <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
             {runIfFunc(children, inputValue)}

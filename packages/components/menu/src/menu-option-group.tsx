@@ -34,7 +34,13 @@ export type MenuOptionGroupProps<Y extends string | string[] = string> = Omit<
 
 export const MenuOptionGroup = forwardRef(
   <Y extends string | string[] = string>(
-    { className, defaultValue, type, children, ...rest }: MenuOptionGroupProps<Y>,
+    {
+      className,
+      defaultValue,
+      type,
+      children,
+      ...rest
+    }: MenuOptionGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const isRadio = type === 'radio'
@@ -72,7 +78,9 @@ export const MenuOptionGroup = forwardRef(
       }
 
       const isChecked =
-        !isRadio && isArray(value) ? value.includes(child.props.value) : child.props.value === value
+        !isRadio && isArray(value)
+          ? value.includes(child.props.value)
+          : child.props.value === value
 
       return cloneElement(child, { type, onClick, isChecked })
     })

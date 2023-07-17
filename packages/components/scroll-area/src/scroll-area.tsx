@@ -8,7 +8,14 @@ import {
   useComponentStyle,
 } from '@yamada-ui/core'
 import { cx, handlerAll, merge } from '@yamada-ui/utils'
-import { UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  UIEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 type ScrollAreaOptions = {
   /**
@@ -33,7 +40,9 @@ type ScrollAreaOptions = {
   onScrollPositionChange?: ({ x, y }: { x: number; y: number }) => void
 }
 
-export type ScrollAreaProps = HTMLUIProps<'div'> & ThemeProps<'ScrollArea'> & ScrollAreaOptions
+export type ScrollAreaProps = HTMLUIProps<'div'> &
+  ThemeProps<'ScrollArea'> &
+  ScrollAreaOptions
 
 const neverStyles: CSSUIObject = {
   scrollbarWidth: 'none',
@@ -91,7 +100,10 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
   const onMouseLeave = useCallback(() => {
     if (type !== 'hover') return
 
-    hoverTimeout.current = setTimeout(() => setIsHovered(false), scrollHideDelay)
+    hoverTimeout.current = setTimeout(
+      () => setIsHovered(false),
+      scrollHideDelay,
+    )
   }, [scrollHideDelay, type])
 
   const onScroll = useCallback(
@@ -107,7 +119,10 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
 
       clearTimeout(scrollTimeout.current)
 
-      scrollTimeout.current = setTimeout(() => setisScrolling(false), scrollHideDelay)
+      scrollTimeout.current = setTimeout(
+        () => setisScrolling(false),
+        scrollHideDelay,
+      )
     },
     [isScrolling, onScrollPositionChange, scrollHideDelay, type],
   )
@@ -125,7 +140,10 @@ export const ScrollArea = forwardRef<ScrollAreaProps, 'div'>((props, ref) => {
     if (isNever) {
       return merge(baseStyle, neverStyles)
     } else {
-      return merge(baseStyle, !isAlways && !isHovered && !isScrolling ? hiddenStyles : {})
+      return merge(
+        baseStyle,
+        !isAlways && !isHovered && !isScrolling ? hiddenStyles : {},
+      )
     }
   }, [isAlways, isHovered, isNever, isScrolling, overflow, styles])
 

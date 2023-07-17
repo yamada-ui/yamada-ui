@@ -110,7 +110,11 @@
       "required": false,
       "description": "The size of the Modal."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Modal." },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Modal."
+    },
     "withCloseButton": {
       "type": "boolean",
       "defaultValue": true,
@@ -287,7 +291,11 @@
       "required": false,
       "description": "The dialog success to use."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Dialog." },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Dialog."
+    },
     "withCloseButton": {
       "type": "boolean",
       "defaultValue": true,
@@ -412,7 +420,11 @@
       "required": false,
       "description": "The size of the Drawer."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Drawer." },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Drawer."
+    },
     "withCloseButton": {
       "type": "boolean",
       "defaultValue": true,

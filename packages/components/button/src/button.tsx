@@ -9,7 +9,14 @@ import {
 } from '@yamada-ui/core'
 import { Loading as LoadingIcon, LoadingProps } from '@yamada-ui/loading'
 import { cx, useMergeRefs, merge, dataAttr } from '@yamada-ui/utils'
-import { ElementType, FC, ReactElement, useCallback, useMemo, useState } from 'react'
+import {
+  ElementType,
+  FC,
+  ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 import { useButtonGroup } from './button-group'
 
 type ButtonOptions = {
@@ -61,99 +68,105 @@ type ButtonOptions = {
   loadingPlacement?: 'start' | 'end'
 }
 
-export type ButtonProps = HTMLUIProps<'button'> & ThemeProps<'Button'> & ButtonOptions
+export type ButtonProps = HTMLUIProps<'button'> &
+  ThemeProps<'Button'> &
+  ButtonOptions
 
-export const Button = forwardRef<ButtonProps, 'button'>(({ children, ...props }, customRef) => {
-  const group = useButtonGroup()
-  const [styles, mergedProps] = useComponentStyle('Button', { ...group, ...props })
-  const {
-    className,
-    as,
-    type,
-    isLoading,
-    isActive,
-    isDisabled = group?.isDisabled,
-    leftIcon,
-    rightIcon,
-    loadingIcon,
-    loadingText,
-    loadingPlacement = 'start',
-    __css,
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const Button = forwardRef<ButtonProps, 'button'>(
+  ({ children, ...props }, customRef) => {
+    const group = useButtonGroup()
+    const [styles, mergedProps] = useComponentStyle('Button', {
+      ...group,
+      ...props,
+    })
+    const {
+      className,
+      as,
+      type,
+      isLoading,
+      isActive,
+      isDisabled = group?.isDisabled,
+      leftIcon,
+      rightIcon,
+      loadingIcon,
+      loadingText,
+      loadingPlacement = 'start',
+      __css,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  const { ref: buttonRef, type: defaultType } = useButtonType(as)
-  const ref = useMergeRefs(customRef, buttonRef)
+    const { ref: buttonRef, type: defaultType } = useButtonType(as)
+    const ref = useMergeRefs(customRef, buttonRef)
 
-  const css: CSSUIObject = useMemo(() => {
-    const _focus = '_focus' in styles ? merge(styles._focus ?? {}, { zIndex: 1 }) : {}
+    const css: CSSUIObject = useMemo(() => {
+      const _focus =
+        '_focus' in styles ? merge(styles._focus ?? {}, { zIndex: 1 }) : {}
 
-    return {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '2',
-      appearance: 'none',
-      userSelect: 'none',
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      verticalAlign: 'middle',
-      outline: 'none',
-      ...styles,
-      ...__css,
-      ...(!!group ? { _focus } : {}),
+      return {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '2',
+        appearance: 'none',
+        userSelect: 'none',
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        verticalAlign: 'middle',
+        outline: 'none',
+        ...styles,
+        ...__css,
+        ...(!!group ? { _focus } : {}),
+      }
+    }, [styles, __css, group])
+
+    const contentProps = {
+      leftIcon,
+      rightIcon,
+      children,
     }
-  }, [styles, __css, group])
 
-  const contentProps = {
-    leftIcon,
-    rightIcon,
-    children,
-  }
+    const loadingProps = {
+      loadingIcon,
+      loadingText,
+    }
 
-  const loadingProps = {
-    loadingIcon,
-    loadingText,
-  }
+    return (
+      <ui.button
+        ref={ref}
+        as={as}
+        className={cx('ui-button', className)}
+        type={type ?? defaultType}
+        disabled={isDisabled || isLoading}
+        data-active={dataAttr(isActive)}
+        data-loading={dataAttr(isLoading)}
+        __css={css}
+        {...rest}
+      >
+        {isLoading && loadingPlacement === 'start' ? (
+          <Loading className='ui-button-loading--start' {...loadingProps} />
+        ) : null}
 
-  return (
-    <ui.button
-      ref={ref}
-      as={as}
-      className={cx('ui-button', className)}
-      type={type ?? defaultType}
-      disabled={isDisabled || isLoading}
-      data-active={dataAttr(isActive)}
-      data-loading={dataAttr(isLoading)}
-      __css={css}
-      {...rest}
-    >
-      {isLoading && loadingPlacement === 'start' ? (
-        <Loading className='ui-button-loading--start' {...loadingProps} />
-      ) : null}
+        {isLoading ? (
+          loadingText || (
+            <ui.span opacity={0}>
+              <Content {...contentProps} />
+            </ui.span>
+          )
+        ) : (
+          <Content {...contentProps} />
+        )}
 
-      {isLoading ? (
-        loadingText || (
-          <ui.span opacity={0}>
-            <Content {...contentProps} />
-          </ui.span>
-        )
-      ) : (
-        <Content {...contentProps} />
-      )}
+        {isLoading && loadingPlacement === 'end' ? (
+          <Loading className='ui-button-loading--end' {...loadingProps} />
+        ) : null}
+      </ui.button>
+    )
+  },
+)
 
-      {isLoading && loadingPlacement === 'end' ? (
-        <Loading className='ui-button-loading--end' {...loadingProps} />
-      ) : null}
-    </ui.button>
-  )
-})
-
-const Loading: FC<Pick<ButtonProps, 'className' | 'loadingIcon' | 'loadingText'>> = ({
-  className,
-  loadingIcon,
-  loadingText,
-}) => {
+const Loading: FC<
+  Pick<ButtonProps, 'className' | 'loadingIcon' | 'loadingText'>
+> = ({ className, loadingIcon, loadingText }) => {
   const css = useMemo(
     (): CSSUIObject => ({
       display: 'flex',

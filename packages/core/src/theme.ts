@@ -1,4 +1,10 @@
-import { flattenObject, objectFromEntries, pickObject, omitObject, Dict } from '@yamada-ui/utils'
+import {
+  flattenObject,
+  objectFromEntries,
+  pickObject,
+  omitObject,
+  Dict,
+} from '@yamada-ui/utils'
 import { ThemeProps, analyzeBreakpoints, createVars } from './css'
 import { ThemeConfig } from './theme.types'
 
@@ -32,7 +38,10 @@ export type ThemeToken =
   | 'transitions.property'
   | 'transitions.easing'
 
-export const transformTheme = <T extends Dict>(_theme: T, config?: ThemeConfig): Dict => {
+export const transformTheme = <T extends Dict>(
+  _theme: T,
+  config?: ThemeConfig,
+): Dict => {
   const theme = omitTheme(_theme)
 
   const tokens = createTokens(theme)
@@ -60,23 +69,26 @@ const createTokens = (theme: Dict): VarTokens => {
 
   const semanticTokens = theme.semantics ?? {}
 
-  const defaultTokenEntries = Object.entries(flattenObject(defaultTokens) ?? {}).map(
-    ([token, value]) => {
-      const enhancedToken = { isSemantic: false, value }
+  const defaultTokenEntries = Object.entries(
+    flattenObject(defaultTokens) ?? {},
+  ).map(([token, value]) => {
+    const enhancedToken = { isSemantic: false, value }
 
-      return [token, enhancedToken] as [string, VarToken]
-    },
-  )
+    return [token, enhancedToken] as [string, VarToken]
+  })
 
-  const semanticTokenEntries = Object.entries(flattenObject(semanticTokens) ?? {}).map(
-    ([token, value]) => {
-      const enhancedToken = { isSemantic: true, value }
+  const semanticTokenEntries = Object.entries(
+    flattenObject(semanticTokens) ?? {},
+  ).map(([token, value]) => {
+    const enhancedToken = { isSemantic: true, value }
 
-      return [token, enhancedToken] as [string, VarToken]
-    },
-  )
+    return [token, enhancedToken] as [string, VarToken]
+  })
 
-  return objectFromEntries<VarTokens>([...defaultTokenEntries, ...semanticTokenEntries])
+  return objectFromEntries<VarTokens>([
+    ...defaultTokenEntries,
+    ...semanticTokenEntries,
+  ])
 }
 
 const omitTheme = (theme: Dict): Dict =>

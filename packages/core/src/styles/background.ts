@@ -67,7 +67,12 @@ export type BackgroundProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `background-position` property.
    */
-  backgroundPosition?: Token<CSS.Property.BackgroundPosition | number, unknown, Y, M>
+  backgroundPosition?: Token<
+    CSS.Property.BackgroundPosition | number,
+    unknown,
+    Y,
+    M
+  >
   /**
    * The CSS `background-image` property.
    */

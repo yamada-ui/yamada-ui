@@ -31,10 +31,11 @@ type AccordionContext = Pick<
   styles: Record<string, CSSUIObject>
 }
 
-const [AccordionProvider, useAccordionContext] = createContext<AccordionContext>({
-  name: 'AccordionContext',
-  errorMessage: `useAccordionContext returned is 'undefined'. Seems you forgot to wrap the components in "<Accordion />"`,
-})
+const [AccordionProvider, useAccordionContext] =
+  createContext<AccordionContext>({
+    name: 'AccordionContext',
+    errorMessage: `useAccordionContext returned is 'undefined'. Seems you forgot to wrap the components in "<Accordion />"`,
+  })
 
 export { useAccordionContext }
 
@@ -68,7 +69,9 @@ type AccordionOptions = {
   /**
    * The accordion icon for all items to use.
    */
-  icon?: ReactNode | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
+  icon?:
+    | ReactNode
+    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
   /**
    * The callback invoked when accordion items are expanded or collapsed.
    */
@@ -93,7 +96,11 @@ export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  if ((value || defaultValue) != null && !isArray(value || defaultValue) && isMultiple) {
+  if (
+    (value || defaultValue) != null &&
+    !isArray(value || defaultValue) &&
+    isMultiple
+  ) {
     console.warn(
       `Accordion: If 'isMultiple' is passed, then 'index' or 'defaultIndex' must be an array.`,
     )
@@ -136,7 +143,12 @@ export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
           styles,
         }}
       >
-        <ui.div ref={ref} className={cx('ui-accordion', className)} __css={css} {...rest} />
+        <ui.div
+          ref={ref}
+          className={cx('ui-accordion', className)}
+          __css={css}
+          {...rest}
+        />
       </AccordionProvider>
     </DescendantsContextProvider>
   )

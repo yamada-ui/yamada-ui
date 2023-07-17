@@ -236,7 +236,11 @@
       "required": false,
       "description": "The type of the menu option group."
     },
-    "value": { "type": "Y", "required": false, "description": "The value of the menu item group." }
+    "value": {
+      "type": "Y",
+      "required": false,
+      "description": "The value of the menu item group."
+    }
   },
   "MenuDivider": {}
 }

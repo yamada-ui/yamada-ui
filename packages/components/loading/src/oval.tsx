@@ -21,7 +21,9 @@ export const Oval = forwardRef<OvalProps, 'svg'>(
         <g fill='none' fillRule='evenodd'>
           <g transform='translate(1 1)' strokeWidth='2'>
             <circle
-              {...(secondaryColor ? { stroke: secondaryColor } : { strokeOpacity: '.5' })}
+              {...(secondaryColor
+                ? { stroke: secondaryColor }
+                : { strokeOpacity: '.5' })}
               cx='18'
               cy='18'
               r='18'

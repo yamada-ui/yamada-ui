@@ -1,4 +1,10 @@
-import { ui, forwardRef, CSSUIObject, UIProps, CSSUIProps } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  CSSUIObject,
+  UIProps,
+  CSSUIProps,
+} from '@yamada-ui/core'
 import { useToken } from '@yamada-ui/use-token'
 import { cx, replaceObject, isUnit } from '@yamada-ui/utils'
 import { FC, SVGAttributes } from 'react'
@@ -10,10 +16,15 @@ type IconOptions = {
   size?: CSSUIProps['fontSize']
 }
 
-export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> & UIProps & IconOptions
+export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
+  UIProps &
+  IconOptions
 
 export const Icon = forwardRef<IconProps, 'svg'>(
-  ({ as: element, viewBox, size: fontSize, className, __css, ...rest }, ref) => {
+  (
+    { as: element, viewBox, size: fontSize, className, __css, ...rest },
+    ref,
+  ) => {
     const boxSize = replaceObject(fontSize, (value) =>
       !isUnit(value) ? useToken('fontSizes', value) : value,
     )
@@ -98,7 +109,10 @@ export const CloseIcon: FC<IconProps> = (props) => {
 export const ChevronIcon: FC<IconProps> = (props) => {
   return (
     <Icon focusable='false' aria-hidden viewBox='0 0 24 24' {...props}>
-      <path fill='currentColor' d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z' />
+      <path
+        fill='currentColor'
+        d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'
+      />
     </Icon>
   )
 }

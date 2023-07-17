@@ -3,7 +3,11 @@ import { ui, HTMLUIProps } from '@yamada-ui/core'
 import { cx, filterUndefined } from '@yamada-ui/utils'
 import { FC } from 'react'
 import { CalenderHeader, CalenderHeaderProps } from './calender-header'
-import { getFormattedLabel, useCalendarContext, useMonthList } from './use-calendar'
+import {
+  getFormattedLabel,
+  useCalendarContext,
+  useMonthList,
+} from './use-calendar'
 
 type MonthListOptions = {
   /**
@@ -13,7 +17,9 @@ type MonthListOptions = {
   /**
    * Props for calendar month button element.
    */
-  monthProps?: ButtonProps & { component?: FC<{ month: string; year: number; index: number }> }
+  monthProps?: ButtonProps & {
+    component?: FC<{ month: string; year: number; index: number }>
+  }
 }
 
 export type MonthListProps = HTMLUIProps<'div'> &
@@ -67,7 +73,9 @@ export const MonthList: FC<MonthListProps> = ({
           display: 'grid',
           ...styles.month,
         }}
-        {...getContainerProps(filterUndefined({ w, minW, maxW, h, minH, maxH }))}
+        {...getContainerProps(
+          filterUndefined({ w, minW, maxW, h, minH, maxH }),
+        )}
       >
         {rangeMonths.map((month, index) => (
           <Button

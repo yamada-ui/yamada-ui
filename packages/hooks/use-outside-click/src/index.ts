@@ -7,7 +7,11 @@ export type UseOutsideClickProps = {
   handler?: (ev: Event) => void
 }
 
-export const useOutsideClick = ({ ref, handler, enabled = true }: UseOutsideClickProps) => {
+export const useOutsideClick = ({
+  ref,
+  handler,
+  enabled = true,
+}: UseOutsideClickProps) => {
   const handlerRef = useCallbackRef(handler)
 
   const state = useRef({
@@ -62,7 +66,10 @@ export const useOutsideClick = ({ ref, handler, enabled = true }: UseOutsideClic
   }, [handler, ref, handlerRef, state, enabled])
 }
 
-const isValidEvent = (ev: MouseEvent | TouchEvent, ref: RefObject<HTMLElement>) => {
+const isValidEvent = (
+  ev: MouseEvent | TouchEvent,
+  ref: RefObject<HTMLElement>,
+) => {
   const target = ev.target as HTMLElement
 
   if ('button' in ev && ev.button > 0) return false

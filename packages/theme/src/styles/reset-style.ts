@@ -203,9 +203,10 @@ export const resetStyle: UIStyle = {
     overflow: 'auto',
   },
 
-  "[type='number']::-webkit-inner-spin-button, [type='number']::-webkit-outer-spin-button": {
-    display: 'none',
-  },
+  "[type='number']::-webkit-inner-spin-button, [type='number']::-webkit-outer-spin-button":
+    {
+      display: 'none',
+    },
 
   "[type='search']": {
     outlineOffset: '-2px',

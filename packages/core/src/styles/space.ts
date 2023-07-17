@@ -72,7 +72,12 @@ export type SpaceProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `margin-block-start` property.
    */
-  marginBlockStart?: Token<CSS.Property.MarginBlockStart | number, 'spaces', Y, M>
+  marginBlockStart?: Token<
+    CSS.Property.MarginBlockStart | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `margin-top` property.
    */
@@ -116,7 +121,12 @@ export type SpaceProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `margin-inline-start` property.
    */
-  marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, 'spaces', Y, M>
+  marginInlineStart?: Token<
+    CSS.Property.MarginInlineStart | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `margin-inline-start` property.
    */
@@ -168,7 +178,12 @@ export type SpaceProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `padding-block-start` property.
    */
-  paddingBlockStart?: Token<CSS.Property.PaddingBlockStart | number, 'spaces', Y, M>
+  paddingBlockStart?: Token<
+    CSS.Property.PaddingBlockStart | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `padding-top` property.
    */
@@ -180,7 +195,12 @@ export type SpaceProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `padding-inline-end` property.
    */
-  paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, 'spaces', Y, M>
+  paddingInlineEnd?: Token<
+    CSS.Property.PaddingInlineEnd | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `padding-inline-end` property.
    */
@@ -212,7 +232,12 @@ export type SpaceProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `padding-inline-start` property.
    */
-  paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, 'spaces', Y, M>
+  paddingInlineStart?: Token<
+    CSS.Property.PaddingInlineStart | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `padding-inline-start` property.
    */

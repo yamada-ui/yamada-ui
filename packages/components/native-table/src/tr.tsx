@@ -9,5 +9,12 @@ export const Tr = forwardRef<TrProps, 'tr'>(({ className, ...rest }, ref) => {
 
   const css: CSSUIObject = { ...styles.tr }
 
-  return <ui.tr ref={ref} className={cx('ui-table-tr', className)} __css={css} {...rest} />
+  return (
+    <ui.tr
+      ref={ref}
+      className={cx('ui-table-tr', className)}
+      __css={css}
+      {...rest}
+    />
+  )
 })

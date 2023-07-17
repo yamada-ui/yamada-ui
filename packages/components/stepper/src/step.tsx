@@ -11,21 +11,23 @@ export const [StepProvider, useStepContext] = createContext<StepContext>({
 
 export type StepProps = HTMLUIProps<'div'>
 
-export const Step = forwardRef<StepProps, 'div'>(({ className, ...rest }, ref) => {
-  const { orientation, showLastSeparator, styles } = useStepperContext()
-  const { index, status, isFirst, isLast, getStepProps } = useStep()
+export const Step = forwardRef<StepProps, 'div'>(
+  ({ className, ...rest }, ref) => {
+    const { orientation, showLastSeparator, styles } = useStepperContext()
+    const { index, status, isFirst, isLast, getStepProps } = useStep()
 
-  const css: CSSUIObject = { ...styles.step }
+    const css: CSSUIObject = { ...styles.step }
 
-  return (
-    <StepProvider value={{ index, status, isFirst, isLast }}>
-      <ui.div
-        className={cx('ui-step', className)}
-        __css={css}
-        data-orientation={orientation}
-        data-stretch={dataAttr(showLastSeparator)}
-        {...getStepProps(rest, ref)}
-      />
-    </StepProvider>
-  )
-})
+    return (
+      <StepProvider value={{ index, status, isFirst, isLast }}>
+        <ui.div
+          className={cx('ui-step', className)}
+          __css={css}
+          data-orientation={orientation}
+          data-stretch={dataAttr(showLastSeparator)}
+          {...getStepProps(rest, ref)}
+        />
+      </StepProvider>
+    )
+  },
+)

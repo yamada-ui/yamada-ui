@@ -1,4 +1,10 @@
-import { UIProvider, extendTheme, Box, useColorMode, ThemeTokens } from '@yamada-ui/react'
+import {
+  UIProvider,
+  extendTheme,
+  Box,
+  useColorMode,
+  ThemeTokens,
+} from '@yamada-ui/react'
 
 export default {
   title: 'System / Theme / Tokens',

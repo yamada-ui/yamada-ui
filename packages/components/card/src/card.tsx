@@ -30,7 +30,9 @@ type CardOptions = {
   align?: CSSUIProps['alignItems']
 }
 
-export type CardProps = HTMLUIProps<'article'> & ThemeProps<'Card'> & CardOptions
+export type CardProps = HTMLUIProps<'article'> &
+  ThemeProps<'Card'> &
+  CardOptions
 
 export const Card = forwardRef<CardProps, 'article'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Card', props)
@@ -53,52 +55,84 @@ export const Card = forwardRef<CardProps, 'article'>((props, ref) => {
 
   return (
     <CardProvider value={styles}>
-      <ui.article ref={ref} className={cx('ui-card', className)} __css={css} {...rest} />
+      <ui.article
+        ref={ref}
+        className={cx('ui-card', className)}
+        __css={css}
+        {...rest}
+      />
     </CardProvider>
   )
 })
 
 export type CardHeaderProps = HTMLUIProps<'header'>
 
-export const CardHeader = forwardRef<CardHeaderProps, 'header'>(({ className, ...rest }, ref) => {
-  const styles = useCard()
+export const CardHeader = forwardRef<CardHeaderProps, 'header'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useCard()
 
-  const css: CSSUIObject = {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    ...styles.header,
-  }
+    const css: CSSUIObject = {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      ...styles.header,
+    }
 
-  return <ui.header ref={ref} className={cx('ui-card-header', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.header
+        ref={ref}
+        className={cx('ui-card-header', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 export type CardBodyProps = HTMLUIProps<'main'>
 
-export const CardBody = forwardRef<CardBodyProps, 'main'>(({ className, ...rest }, ref) => {
-  const styles = useCard()
+export const CardBody = forwardRef<CardBodyProps, 'main'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useCard()
 
-  const css: CSSUIObject = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    ...styles.body,
-  }
+    const css: CSSUIObject = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      ...styles.body,
+    }
 
-  return <ui.main ref={ref} className={cx('ui-card-body', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.main
+        ref={ref}
+        className={cx('ui-card-body', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 export type CardFooterProps = HTMLUIProps<'footer'>
 
-export const CardFooter = forwardRef<CardFooterProps, 'footer'>(({ className, ...rest }, ref) => {
-  const styles = useCard()
+export const CardFooter = forwardRef<CardFooterProps, 'footer'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useCard()
 
-  const css: CSSUIObject = {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    ...styles.footer,
-  }
+    const css: CSSUIObject = {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      ...styles.footer,
+    }
 
-  return <ui.footer ref={ref} className={cx('ui-card-footer', className)} __css={css} {...rest} />
-})
+    return (
+      <ui.footer
+        ref={ref}
+        className={cx('ui-card-footer', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)

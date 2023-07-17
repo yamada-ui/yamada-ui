@@ -1,4 +1,10 @@
-import { UIFactory, DOMElements, StyledOptions, HTMLUIComponents, UIComponent } from './components'
+import {
+  UIFactory,
+  DOMElements,
+  StyledOptions,
+  HTMLUIComponents,
+  UIComponent,
+} from './components'
 import { styled } from './styled'
 
 const factory = () => {

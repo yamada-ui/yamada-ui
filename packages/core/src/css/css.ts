@@ -11,12 +11,18 @@ const expandColorMode = (key: string, value: any[]): Dict => ({
   },
 })
 
-const expandResponsive = (key: string, value: Dict, queries: BreakpointQueries): Dict =>
+const expandResponsive = (
+  key: string,
+  value: Dict,
+  queries: BreakpointQueries,
+): Dict =>
   Object.entries(value).reduce((css, [breakpointKey, breakpointValue]) => {
     if (breakpointKey === 'base') {
       css[key] = breakpointValue
     } else {
-      const query = queries.find(({ breakpoint }) => breakpoint === breakpointKey)?.maxWQuery
+      const query = queries.find(
+        ({ breakpoint }) => breakpoint === breakpointKey,
+      )?.maxWQuery
 
       if (query) css[query] = { [key]: breakpointValue }
     }
@@ -63,7 +69,10 @@ export const getCSS = (options: {
 }): ((cssOrFunc: CSSObjectOrFunc | CSSUIObject, nested?: boolean) => Dict) => {
   const { theme, styles = {}, pseudos = {} } = options
 
-  const createCSS = (cssOrFunc: CSSObjectOrFunc | CSSUIObject, nested: boolean = false): Dict => {
+  const createCSS = (
+    cssOrFunc: CSSObjectOrFunc | CSSUIObject,
+    nested: boolean = false,
+  ): Dict => {
     const _css = runIfFunc(cssOrFunc, theme)
     const css = expandCSS(_css)(theme)
 

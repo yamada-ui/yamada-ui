@@ -1,4 +1,11 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject, CSSUIProps, StylesProps } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  HTMLUIProps,
+  CSSUIObject,
+  CSSUIProps,
+  StylesProps,
+} from '@yamada-ui/core'
 import { useAnimation } from '@yamada-ui/use-animation'
 import { useToken } from '@yamada-ui/use-token'
 import { useValue } from '@yamada-ui/use-value'
@@ -67,7 +74,8 @@ type CircleProgressOptions = {
   speed?: [string | number, string | number]
 }
 
-export type CircleProgressProps = Omit<HTMLUIProps<'div'>, 'color'> & CircleProgressOptions
+export type CircleProgressProps = Omit<HTMLUIProps<'div'>, 'color'> &
+  CircleProgressOptions
 
 export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
   (
@@ -89,7 +97,9 @@ export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
     ref,
   ) => {
     size = (useToken('sizes', useValue(size)) ?? size) as string | number
-    thickness = (useToken('sizes', useValue(thickness)) ?? thickness) as string | number
+    thickness = (useToken('sizes', useValue(thickness)) ?? thickness) as
+      | string
+      | number
 
     const isTransparent = value === 0 && !isAnimation
     const percent = valueToPercent(value, min, max)
@@ -129,14 +139,20 @@ export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
         }
       : {
           strokeDashoffset: 66,
-          strokeDasharray: interval == null ? undefined : `${interval} ${264 - interval}`,
+          strokeDasharray:
+            interval == null ? undefined : `${interval} ${264 - interval}`,
           transitionProperty: 'stroke-dasharray, stroke',
           transitionDuration: '0.6s',
           transitionTimingFunction: 'ease',
         }
 
     return (
-      <ui.div ref={ref} className={cx('ui-circle-progress', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-circle-progress', className)}
+        __css={css}
+        {...rest}
+      >
         <Shape size={size} isAnimation={isAnimation} speed={speed}>
           <Circle stroke={trackColor} strokeWidth={thickness} />
           <Circle
@@ -160,7 +176,10 @@ const Circle = (rest: CircleProps) => (
 )
 
 type ShapeProps = Omit<HTMLUIProps<'svg'>, 'speed'> &
-  Pick<Required<CircleProgressProps>, 'children' | 'size' | 'isAnimation' | 'speed'>
+  Pick<
+    Required<CircleProgressProps>,
+    'children' | 'size' | 'isAnimation' | 'speed'
+  >
 
 const Shape = ({ size, isAnimation, speed, ...rest }: ShapeProps) => {
   const animation = useAnimation({

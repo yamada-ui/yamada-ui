@@ -31,7 +31,11 @@ const InputElement = forwardRef<InputElementProps, 'div'>(
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      w: styles.field?.height ?? styles.field?.h ?? styles.field?.minHeight ?? styles.field?.minH,
+      w:
+        styles.field?.height ??
+        styles.field?.h ??
+        styles.field?.minHeight ??
+        styles.field?.minH,
       h: 'full',
       fontSize: styles.field?.fontSize,
       pointerEvents: isClick ? 'auto' : 'none',
@@ -39,7 +43,14 @@ const InputElement = forwardRef<InputElementProps, 'div'>(
       ...styles.element,
     }
 
-    return <ui.div ref={ref} className={cx('ui-input-element', className)} __css={css} {...rest} />
+    return (
+      <ui.div
+        ref={ref}
+        className={cx('ui-input-element', className)}
+        __css={css}
+        {...rest}
+      />
+    )
   },
 )
 

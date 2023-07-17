@@ -39,14 +39,21 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, 'div'>(
     )
 
     return (
-      <ui.div ref={ref} className={cx('ui-autocomplete-icon', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-autocomplete-icon', className)}
+        __css={css}
+        {...rest}
+      >
         {isValidElement(children) ? cloneChildren : <ChevronIcon />}
       </ui.div>
     )
   },
 )
 
-export type AutocompleteClearIconProps = AutocompleteIconProps & { disabled?: boolean }
+export type AutocompleteClearIconProps = AutocompleteIconProps & {
+  disabled?: boolean
+}
 
 export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
   className,
@@ -77,26 +84,27 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
 
 export type AutocompleteItemIconProps = HTMLUIProps<'span'>
 
-export const AutocompleteItemIcon = forwardRef<AutocompleteItemIconProps, 'span'>(
-  ({ className, ...rest }, ref) => {
-    const { styles } = useAutocompleteContext()
+export const AutocompleteItemIcon = forwardRef<
+  AutocompleteItemIconProps,
+  'span'
+>(({ className, ...rest }, ref) => {
+  const { styles } = useAutocompleteContext()
 
-    const css: CSSUIObject = {
-      flexShrink: 0,
-      display: 'inline-flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: '0.85em',
-      ...styles.itemIcon,
-    }
+  const css: CSSUIObject = {
+    flexShrink: 0,
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '0.85em',
+    ...styles.itemIcon,
+  }
 
-    return (
-      <ui.span
-        ref={ref}
-        className={cx('ui-autocomplete-item-icon', className)}
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
+  return (
+    <ui.span
+      ref={ref}
+      className={cx('ui-autocomplete-item-icon', className)}
+      __css={css}
+      {...rest}
+    />
+  )
+})

@@ -6,7 +6,11 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "size": { "type": "string", "required": false, "description": "The size of the Alert." },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Alert."
+    },
     "status": {
       "type": "\"warning\" | \"info\" | \"success\" | \"error\" | \"loading\"",
       "defaultValue": "'info'",

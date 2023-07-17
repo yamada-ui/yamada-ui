@@ -66,7 +66,12 @@ export type PositionProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `inset-inline-start` property.
    */
-  insetInlineStart?: Token<CSS.Property.InsetInlineStart | number, 'spaces', Y, M>
+  insetInlineStart?: Token<
+    CSS.Property.InsetInlineStart | number,
+    'spaces',
+    Y,
+    M
+  >
   /**
    * The CSS `inset-start` property.
    */

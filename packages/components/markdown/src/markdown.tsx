@@ -90,7 +90,12 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
   children,
   theme = 'oneDark',
 }) => {
-  if (inline) return <ui.code className={cx('ui-markdown-code', className)}>{children}</ui.code>
+  if (inline)
+    return (
+      <ui.code className={cx('ui-markdown-code', className)}>
+        {children}
+      </ui.code>
+    )
 
   theme = useValue(theme)
 

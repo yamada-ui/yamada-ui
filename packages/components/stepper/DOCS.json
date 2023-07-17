@@ -1,6 +1,10 @@
 {
   "Stepper": {
-    "index": { "type": "number", "required": true, "description": "The active step index." },
+    "index": {
+      "type": "number",
+      "required": true,
+      "description": "The active step index."
+    },
     "colorScheme": {
       "defaultValue": "primary",
       "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
@@ -30,7 +34,11 @@
       "required": false,
       "description": "If provided, generate step components based on steps."
     },
-    "variant": { "type": "string", "required": false, "description": "The variant of the Stepper." }
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Stepper."
+    }
   },
   "UseSteps": {
     "count": { "type": "number", "required": false },

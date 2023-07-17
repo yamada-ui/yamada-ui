@@ -23,9 +23,21 @@
       "required": false,
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
     },
-    "maxDate": { "type": "Date", "required": false, "description": "The maximum possible date." },
-    "minDate": { "type": "Date", "required": false, "description": "The minimum possible date." },
-    "month": { "type": "Date", "required": false, "description": "The month of the calendar." },
+    "maxDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The maximum possible date."
+    },
+    "minDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The minimum possible date."
+    },
+    "month": {
+      "type": "Date",
+      "required": false,
+      "description": "The month of the calendar."
+    },
     "monthFormat": {
       "type": "string",
       "defaultValue": "'MM'",
@@ -48,7 +60,11 @@
       "required": false,
       "description": "The size of the Calendar."
     },
-    "value": { "type": "Date", "required": false, "description": "The value of the calendar." },
+    "value": {
+      "type": "Date",
+      "required": false,
+      "description": "The value of the calendar."
+    },
     "variant": {
       "defaultValue": "solid",
       "type": "\"solid\" | \"subtle\" | \"unstyled\"",
@@ -125,21 +141,37 @@
       "required": false,
       "description": "Define the first day of the week."
     },
-    "holidays": { "type": "Date[]", "required": false, "description": "Define holidays." },
+    "holidays": {
+      "type": "Date[]",
+      "required": false,
+      "description": "Define holidays."
+    },
     "locale": {
       "type": "string",
       "defaultValue": "'en'",
       "required": false,
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
     },
-    "maxDate": { "type": "Date", "required": false, "description": "The maximum possible date." },
+    "maxDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The maximum possible date."
+    },
     "maxSelectedValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
     },
-    "minDate": { "type": "Date", "required": false, "description": "The minimum possible date." },
-    "month": { "type": "Date", "required": false, "description": "The month of the calendar." },
+    "minDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The minimum possible date."
+    },
+    "month": {
+      "type": "Date",
+      "required": false,
+      "description": "The month of the calendar."
+    },
     "monthFormat": {
       "type": "string",
       "defaultValue": "'MM'",
@@ -406,7 +438,11 @@
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
     },
-    "holidays": { "type": "Date[]", "required": false, "description": "Define holidays." },
+    "holidays": {
+      "type": "Date[]",
+      "required": false,
+      "description": "Define holidays."
+    },
     "iconProps": {
       "type": "DatePickerIconProps",
       "required": false,
@@ -477,19 +513,31 @@
       "required": false,
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
     },
-    "maxDate": { "type": "Date", "required": false, "description": "The maximum possible date." },
+    "maxDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The maximum possible date."
+    },
     "maxSelectedValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
     },
-    "minDate": { "type": "Date", "required": false, "description": "The minimum possible date." },
+    "minDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The minimum possible date."
+    },
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
       "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
     },
-    "month": { "type": "Date", "required": false, "description": "The month of the calendar." },
+    "month": {
+      "type": "Date",
+      "required": false,
+      "description": "The month of the calendar."
+    },
     "monthFormat": {
       "type": "string",
       "defaultValue": "'MM'",
@@ -579,7 +627,11 @@
       "required": false,
       "description": "The type of the calendar."
     },
-    "value": { "type": "Date", "required": false, "description": "The value of the calendar." },
+    "value": {
+      "type": "Date",
+      "required": false,
+      "description": "The value of the calendar."
+    },
     "variant": {
       "defaultValue": "outline",
       "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
@@ -818,14 +870,26 @@
       "required": false,
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
     },
-    "maxDate": { "type": "Date", "required": false, "description": "The maximum possible date." },
-    "minDate": { "type": "Date", "required": false, "description": "The minimum possible date." },
+    "maxDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The maximum possible date."
+    },
+    "minDate": {
+      "type": "Date",
+      "required": false,
+      "description": "The minimum possible date."
+    },
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
       "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
     },
-    "month": { "type": "Date", "required": false, "description": "The month of the calendar." },
+    "month": {
+      "type": "Date",
+      "required": false,
+      "description": "The month of the calendar."
+    },
     "monthFormat": {
       "type": "string",
       "defaultValue": "'MM'",
@@ -896,7 +960,11 @@
       "required": false,
       "description": "The type of the month picker."
     },
-    "value": { "type": "Date", "required": false, "description": "The value of the calendar." },
+    "value": {
+      "type": "Date",
+      "required": false,
+      "description": "The value of the calendar."
+    },
     "withControls": {
       "type": "boolean",
       "defaultValue": true,

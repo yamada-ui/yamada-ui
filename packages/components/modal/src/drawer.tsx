@@ -6,7 +6,12 @@ import {
   ThemeProps,
 } from '@yamada-ui/core'
 import { Slide, SlideProps } from '@yamada-ui/transitions'
-import { createContext, getValidChildren, findChildren, cx } from '@yamada-ui/utils'
+import {
+  createContext,
+  getValidChildren,
+  findChildren,
+  cx,
+} from '@yamada-ui/utils'
 import { useModal } from './modal'
 import {
   Modal,
@@ -50,68 +55,81 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
   errorMessage: `useDrawer returned is 'undefined'. Seems you forgot to wrap the components in "<Drawer />" `,
 })
 
-export const Drawer = forwardRef<DrawerProps, 'div'>(({ size, ...props }, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Drawer', { size, ...props })
-  const {
-    children,
-    isOpen,
-    placement = 'right',
-    onClose,
-    onOverlayClick,
-    onEsc,
-    onCloseComplete,
-    withCloseButton = true,
-    withOverlay = true,
-    allowPinchZoom,
-    autoFocus,
-    restoreFocus,
-    initialFocusRef,
-    finalFocusRef,
-    blockScrollOnMount,
-    closeOnOverlay,
-    closeOnEsc,
-    lockFocusAcrossFrames,
-    duration = { enter: 0.4, exit: 0.3 },
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const Drawer = forwardRef<DrawerProps, 'div'>(
+  ({ size, ...props }, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle('Drawer', {
+      size,
+      ...props,
+    })
+    const {
+      children,
+      isOpen,
+      placement = 'right',
+      onClose,
+      onOverlayClick,
+      onEsc,
+      onCloseComplete,
+      withCloseButton = true,
+      withOverlay = true,
+      allowPinchZoom,
+      autoFocus,
+      restoreFocus,
+      initialFocusRef,
+      finalFocusRef,
+      blockScrollOnMount,
+      closeOnOverlay,
+      closeOnEsc,
+      lockFocusAcrossFrames,
+      duration = { enter: 0.4, exit: 0.3 },
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  const validChildren = getValidChildren(children)
+    const validChildren = getValidChildren(children)
 
-  const [customDrawerOverlay, ...cloneChildren] = findChildren(validChildren, DrawerOverlay)
+    const [customDrawerOverlay, ...cloneChildren] = findChildren(
+      validChildren,
+      DrawerOverlay,
+    )
 
-  return (
-    <DrawerProvider value={styles}>
-      <Modal
-        ref={ref}
-        {...{
-          isOpen,
-          onClose,
-          onOverlayClick,
-          onEsc,
-          onCloseComplete,
-          withCloseButton: false,
-          withOverlay: false,
-          allowPinchZoom,
-          autoFocus,
-          restoreFocus,
-          initialFocusRef,
-          finalFocusRef,
-          blockScrollOnMount,
-          closeOnOverlay,
-          closeOnEsc,
-          lockFocusAcrossFrames,
-          duration,
-        }}
-      >
-        {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
+    return (
+      <DrawerProvider value={styles}>
+        <Modal
+          ref={ref}
+          {...{
+            isOpen,
+            onClose,
+            onOverlayClick,
+            onEsc,
+            onCloseComplete,
+            withCloseButton: false,
+            withOverlay: false,
+            allowPinchZoom,
+            autoFocus,
+            restoreFocus,
+            initialFocusRef,
+            finalFocusRef,
+            blockScrollOnMount,
+            closeOnOverlay,
+            closeOnEsc,
+            lockFocusAcrossFrames,
+            duration,
+          }}
+        >
+          {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
-        <DrawerContent {...{ placement, withCloseButton, ...rest }}>{cloneChildren}</DrawerContent>
-      </Modal>
-    </DrawerProvider>
-  )
-})
+          <DrawerContent {...{ placement, withCloseButton, ...rest }}>
+            {cloneChildren}
+          </DrawerContent>
+        </Modal>
+      </DrawerProvider>
+    )
+  },
+)
 
-type DrawerContentProps = Omit<DrawerProps, 'color' | 'transition' | 'isOpen' | keyof ThemeProps>
+type DrawerContentProps = Omit<
+  DrawerProps,
+  'color' | 'transition' | 'isOpen' | keyof ThemeProps
+>
 
 export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
   ({ className, children, placement, withCloseButton, ...rest }, ref) => {
@@ -144,7 +162,8 @@ export const DrawerContent = forwardRef<DrawerContentProps, 'div'>(
         __css={css}
         {...rest}
       >
-        {customDrawerCloseButton ?? (withCloseButton && onClose ? <DrawerCloseButton /> : null)}
+        {customDrawerCloseButton ??
+          (withCloseButton && onClose ? <DrawerCloseButton /> : null)}
 
         {cloneChildren}
       </Slide>
@@ -199,20 +218,34 @@ export const DrawerHeader = forwardRef<DrawerHeaderProps, 'header'>(
     const css: CSSUIObject = { ...styles.header }
 
     return (
-      <ModalHeader ref={ref} className={cx('ui-drawer-header', className)} __css={css} {...rest} />
+      <ModalHeader
+        ref={ref}
+        className={cx('ui-drawer-header', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )
 
 export type DrawerBodyProps = ModalBodyProps
 
-export const DrawerBody = forwardRef<DrawerBodyProps, 'main'>(({ className, ...rest }, ref) => {
-  const styles = useDrawer()
+export const DrawerBody = forwardRef<DrawerBodyProps, 'main'>(
+  ({ className, ...rest }, ref) => {
+    const styles = useDrawer()
 
-  const css: CSSUIObject = { ...styles.body }
+    const css: CSSUIObject = { ...styles.body }
 
-  return <ModalBody ref={ref} className={cx('ui-drawer-body', className)} __css={css} {...rest} />
-})
+    return (
+      <ModalBody
+        ref={ref}
+        className={cx('ui-drawer-body', className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 export type DrawerFooterProps = ModalFooterProps
 
@@ -223,7 +256,12 @@ export const DrawerFooter = forwardRef<DrawerFooterProps, 'footer'>(
     const css: CSSUIObject = { ...styles.footer }
 
     return (
-      <ModalFooter ref={ref} className={cx('ui-drawer-footer', className)} __css={css} {...rest} />
+      <ModalFooter
+        ref={ref}
+        className={cx('ui-drawer-footer', className)}
+        __css={css}
+        {...rest}
+      />
     )
   },
 )

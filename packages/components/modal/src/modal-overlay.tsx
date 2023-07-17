@@ -9,7 +9,14 @@ export type ModalOverlayProps = HTMLUIProps<'div'> &
 
 export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
   ({ className, __css, onClick, ...rest }, ref) => {
-    const { styles, closeOnOverlay, onOverlayClick, onClose, animation, duration } = useModal()
+    const {
+      styles,
+      closeOnOverlay,
+      onOverlayClick,
+      onClose,
+      animation,
+      duration,
+    } = useModal()
 
     const css: CSSUIObject = {
       position: 'fixed',

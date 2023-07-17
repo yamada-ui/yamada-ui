@@ -25,16 +25,26 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
       display: 'flex',
       justifyContent: 'center',
       ...styles.indicators,
-      ...(orientation === 'vertical' ? { flexDirection: 'column' } : { flexDirection: 'row' }),
+      ...(orientation === 'vertical'
+        ? { flexDirection: 'column' }
+        : { flexDirection: 'row' }),
     }
 
     return (
-      <ui.div ref={ref} className={cx('ui-carousel-indicators', className)} __css={css} {...rest}>
+      <ui.div
+        ref={ref}
+        className={cx('ui-carousel-indicators', className)}
+        __css={css}
+        {...rest}
+      >
         {indexes.map((index) => {
           const isSelected = index === selectedIndex
 
           if (typeof component === 'function') {
-            const child = component({ index, isSelected }) as ReactElement | null
+            const child = component({
+              index,
+              isSelected,
+            }) as ReactElement | null
 
             if (!child) return null
 
@@ -54,7 +64,10 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
 
 type CarouselIndicatorProps = HTMLUIProps<'button'>
 
-const CarouselIndicator: FC<CarouselIndicatorProps> = ({ className, ...rest }) => {
+const CarouselIndicator: FC<CarouselIndicatorProps> = ({
+  className,
+  ...rest
+}) => {
   const { styles } = useCarouselContext()
 
   const css: CSSUIObject = { ...styles.indicator }

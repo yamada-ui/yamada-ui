@@ -41,16 +41,25 @@ import {
   useState,
 } from 'react'
 import { CalendarBaseProps } from './calendar'
-import { UseCalendarProps, isAfterMaxDate, isBeforeMinDate, isSameDate } from './use-calendar'
+import {
+  UseCalendarProps,
+  isAfterMaxDate,
+  isBeforeMinDate,
+  isSameDate,
+} from './use-calendar'
 
 type DatePickerContext = Record<string, CSSUIObject>
 
-export const [DatePickerProvider, useDatePickerContext] = createContext<DatePickerContext>({
-  strict: false,
-  name: 'DatePickerContext',
-})
+export const [DatePickerProvider, useDatePickerContext] =
+  createContext<DatePickerContext>({
+    strict: false,
+    name: 'DatePickerContext',
+  })
 
-type CalendarProps = Omit<UseCalendarProps<Date | null>, 'prevRef' | 'typeRef' | 'nextRef'>
+type CalendarProps = Omit<
+  UseCalendarProps<Date | null>,
+  'prevRef' | 'typeRef' | 'nextRef'
+>
 
 type CalendarThemeProps = ThemeProps<'Calendar'>
 
@@ -179,7 +188,9 @@ export const useDatePicker = ({
 
   const stringToDate = useCallback(
     (value: string): Date | null => {
-      let date = parseDate ? parseDate(value) : dayjs(value, inputFormat, locale).toDate()
+      let date = parseDate
+        ? parseDate(value)
+        : dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return date
 
@@ -212,7 +223,9 @@ export const useDatePicker = ({
     onChange: rest.onChange,
     onUpdate: (prev, next) => !isSameDate(prev, next),
   })
-  const [inputValue, setInputValue] = useState<string | undefined>(dateToString(value))
+  const [inputValue, setInputValue] = useState<string | undefined>(
+    dateToString(value),
+  )
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -412,7 +425,15 @@ export const useDatePicker = ({
         onChange: handlerAll(props.onChange, onInputChange),
       }
     },
-    [inputProps, allowInput, placeholder, formControlProps, id, inputValue, onInputChange],
+    [
+      inputProps,
+      allowInput,
+      placeholder,
+      formControlProps,
+      id,
+      inputValue,
+      onInputChange,
+    ],
   )
 
   const getCalendarProps = useCallback(

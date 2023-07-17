@@ -28,7 +28,14 @@ import {
   getOwnerDocument,
   omitObject,
 } from '@yamada-ui/utils'
-import { Children, ReactNode, cloneElement, useCallback, useEffect, useRef } from 'react'
+import {
+  Children,
+  ReactNode,
+  cloneElement,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react'
 
 type TooltipOptions = {
   /**
@@ -240,7 +247,8 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
     )
 
     const onKeyDown = useCallback(
-      (event: KeyboardEvent) => (isOpen && event.key === 'Escape' ? closeWithDelay() : undefined),
+      (event: KeyboardEvent) =>
+        isOpen && event.key === 'Escape' ? closeWithDelay() : undefined,
       [isOpen, closeWithDelay],
     )
 
@@ -282,7 +290,9 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
       [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
     )
 
-    const child = Children.only(children) as React.ReactElement & { ref?: React.Ref<any> }
+    const child = Children.only(children) as React.ReactElement & {
+      ref?: React.Ref<any>
+    }
     const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
 
     const css: CSSUIObject = {
@@ -308,12 +318,19 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
                   ref={ref}
                   className={cx('ui-tooltip', className)}
                   style={{ transformOrigin }}
-                  {...(animation !== 'none' ? getTooltipProps(animation, duration) : {})}
+                  {...(animation !== 'none'
+                    ? getTooltipProps(animation, duration)
+                    : {})}
                   initial='exit'
                   animate={isOpen ? 'enter' : 'exit'}
                   exit='exit'
                   __css={css}
-                  {...omitObject(rest, ['isOpen', 'defaultIsOpen', 'onOpen', 'onClose'])}
+                  {...omitObject(rest, [
+                    'isOpen',
+                    'defaultIsOpen',
+                    'onOpen',
+                    'onClose',
+                  ])}
                 >
                   {label}
                 </ui.div>

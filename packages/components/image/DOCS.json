@@ -47,8 +47,16 @@
       "required": false,
       "description": "The CSS `box-size` property."
     },
-    "sizes": { "type": "string", "required": false, "description": "The image `sizes` attribute." },
-    "src": { "type": "string", "required": false, "description": "The image `src` attribute." },
+    "sizes": {
+      "type": "string",
+      "required": false,
+      "description": "The image `sizes` attribute."
+    },
+    "src": {
+      "type": "string",
+      "required": false,
+      "description": "The image `src` attribute."
+    },
     "srcSet": {
       "type": "string",
       "required": false,
@@ -82,8 +90,16 @@
       "required": false,
       "description": "A callback for when the image `src` has been loaded."
     },
-    "sizes": { "type": "string", "required": false, "description": "The image `sizes` attribute." },
-    "src": { "type": "string", "required": false, "description": "The image `src` attribute." },
+    "sizes": {
+      "type": "string",
+      "required": false,
+      "description": "The image `sizes` attribute."
+    },
+    "src": {
+      "type": "string",
+      "required": false,
+      "description": "The image `src` attribute."
+    },
     "srcSet": {
       "type": "string",
       "required": false,

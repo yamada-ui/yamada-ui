@@ -22,7 +22,9 @@ export const useMediaQuery = (
   const [value, setValue] = useState(() => {
     return queries.map((media, index) => ({
       media,
-      matches: ssr ? !!fallbackValues[index] : getWindow().matchMedia(media).matches,
+      matches: ssr
+        ? !!fallbackValues[index]
+        : getWindow().matchMedia(media).matches,
     }))
   })
 

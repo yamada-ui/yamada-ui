@@ -46,7 +46,8 @@ export const pseudos = {
   /**
    * The CSS `:indeterminate` pseudo-class
    */
-  _indeterminate: '&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]',
+  _indeterminate:
+    '&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]',
   /**
    * The CSS `:before` pseudo-element
    */
@@ -183,7 +184,8 @@ export const pseudos = {
    * Styles for when `data-theme` is applied to any parent of
    * this component or element.
    */
-  _dark: '.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]',
+  _dark:
+    '.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]',
   /**
    * Styles for when `data-theme` is applied to any parent of
    * this component or element.
@@ -192,7 +194,9 @@ export const pseudos = {
     '.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]',
 }
 
-export const pseudosProperties = Object.keys(pseudos) as (keyof typeof pseudos)[]
+export const pseudosProperties = Object.keys(
+  pseudos,
+) as (keyof typeof pseudos)[]
 
 export type PseudosProps = {
   [K in keyof Pseudos]?: CSSUIObject

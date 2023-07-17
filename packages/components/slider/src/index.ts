@@ -1,4 +1,10 @@
-export { Slider, SliderTrack, SliderFilledTrack, SliderThumb, SliderMark } from './slider'
+export {
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+} from './slider'
 export type {
   SliderProps,
   SliderTrackProps,

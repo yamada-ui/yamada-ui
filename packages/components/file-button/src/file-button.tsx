@@ -15,7 +15,13 @@ import {
   omitObject,
   pickObject,
 } from '@yamada-ui/utils'
-import { ChangeEvent, ForwardedRef, ReactNode, useCallback, useRef } from 'react'
+import {
+  ChangeEvent,
+  ForwardedRef,
+  ReactNode,
+  useCallback,
+  useRef,
+} from 'react'
 
 type Props = {
   onClick: () => void
@@ -49,7 +55,8 @@ export type FileButtonProps = Omit<ButtonProps, 'onChange' | 'children'> &
 
 export const FileButton = forwardRef<FileButtonProps, 'input'>(
   ({ className, resetRef, as: As, children, ...props }, ref) => {
-    const { id, name, accept, multiple, form, ...rest } = useFormControlProps(props)
+    const { id, name, accept, multiple, form, ...rest } =
+      useFormControlProps(props)
 
     const { disabled, readOnly, required, 'aria-invalid': isInvalid } = rest
 
@@ -63,7 +70,9 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
 
     const onChange = useCallback(
       (ev: ChangeEvent<HTMLInputElement>) => {
-        const files = !isNull(ev.currentTarget.files) ? Array.from(ev.currentTarget.files) : null
+        const files = !isNull(ev.currentTarget.files)
+          ? Array.from(ev.currentTarget.files)
+          : null
 
         rest.onChange?.(files)
       },

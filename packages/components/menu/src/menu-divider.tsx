@@ -9,5 +9,12 @@ export const MenuDivider = forwardRef(({ className, ...rest }, ref) => {
 
   const css: CSSUIObject = { ...styles.divider }
 
-  return <ui.hr ref={ref} className={cx('ui-menu-divider', className)} __css={css} {...rest} />
+  return (
+    <ui.hr
+      ref={ref}
+      className={cx('ui-menu-divider', className)}
+      __css={css}
+      {...rest}
+    />
+  )
 })

@@ -10,7 +10,14 @@ import {
 import { Icon } from '@yamada-ui/icon'
 import { useClickable } from '@yamada-ui/use-clickable'
 import { cx } from '@yamada-ui/utils'
-import { FC, HTMLAttributes, MouseEventHandler, ReactElement, ReactNode, useRef } from 'react'
+import {
+  FC,
+  HTMLAttributes,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+  useRef,
+} from 'react'
 
 type TagnOptions = {
   /**
@@ -37,8 +44,15 @@ export type TagProps = HTMLUIProps<'span'> & ThemeProps<'Tag'> & TagnOptions
 
 export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Tag', props)
-  const { className, leftIcon, rightIcon, onCloseClick, isDisabled, children, ...rest } =
-    omitThemeProps(mergedProps)
+  const {
+    className,
+    leftIcon,
+    rightIcon,
+    onCloseClick,
+    isDisabled,
+    children,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     maxW: '100%',
@@ -50,7 +64,12 @@ export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
   }
 
   return (
-    <ui.span ref={ref} className={cx('ui-tag', className)} __css={css} {...rest}>
+    <ui.span
+      ref={ref}
+      className={cx('ui-tag', className)}
+      __css={css}
+      {...rest}
+    >
       {leftIcon}
       <TagLabel>{children}</TagLabel>
       {rightIcon}

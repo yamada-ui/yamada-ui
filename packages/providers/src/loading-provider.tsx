@@ -1,4 +1,9 @@
-import { ui, ThemeConfig, LoadingComponentProps, CSSUIObject } from '@yamada-ui/core'
+import {
+  ui,
+  ThemeConfig,
+  LoadingComponentProps,
+  CSSUIObject,
+} from '@yamada-ui/core'
 import { Loading } from '@yamada-ui/loading'
 import { AnimatePresence, motion, MotionVariants } from '@yamada-ui/motion'
 import { Portal } from '@yamada-ui/portal'
@@ -167,7 +172,13 @@ type LoadingControlProps = Required<ThemeConfig>['loading'] & {
   customLoadingRef: LoadingRef
 }
 
-const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, custom, ...refs }) => {
+const LoadingControl: FC<LoadingControlProps> = ({
+  screen,
+  page,
+  background,
+  custom,
+  ...refs
+}) => {
   const isScreenLoadingRef = useRef<boolean>(false)
   const [screenLoading, setScreenLoading] = useState<LoadingState>({
     loadingCount: screen?.initialState ? 1 : 0,
@@ -244,7 +255,10 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   const backgroundLoadingFunc: LoadingContextProps = useMemo(
     () => ({
       isLoading: () => isBackgroundLoadingRef.current,
-      start: ({ message, duration = backgroundLoading.duration ?? null } = {}) => {
+      start: ({
+        message,
+        duration = backgroundLoading.duration ?? null,
+      } = {}) => {
         isBackgroundLoadingRef.current = true
         setBackgroundLoading(({ loadingCount }) => ({
           loadingCount: incrementCount(loadingCount),
@@ -289,7 +303,10 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
     [customLoading, custom],
   )
 
-  assignRef(refs.screenLoadingRef.current.isLoading, screenLoadingFunc.isLoading)
+  assignRef(
+    refs.screenLoadingRef.current.isLoading,
+    screenLoadingFunc.isLoading,
+  )
   assignRef(refs.screenLoadingRef.current.start, screenLoadingFunc.start)
   assignRef(refs.screenLoadingRef.current.finish, screenLoadingFunc.finish)
   assignRef(refs.screenLoadingRef.current.update, screenLoadingFunc.update)
@@ -297,11 +314,26 @@ const LoadingControl: FC<LoadingControlProps> = ({ screen, page, background, cus
   assignRef(refs.pageLoadingRef.current.start, pageLoadingFunc.start)
   assignRef(refs.pageLoadingRef.current.finish, pageLoadingFunc.finish)
   assignRef(refs.pageLoadingRef.current.update, pageLoadingFunc.update)
-  assignRef(refs.backgroundLoadingRef.current.isLoading, backgroundLoadingFunc.isLoading)
-  assignRef(refs.backgroundLoadingRef.current.start, backgroundLoadingFunc.start)
-  assignRef(refs.backgroundLoadingRef.current.finish, backgroundLoadingFunc.finish)
-  assignRef(refs.backgroundLoadingRef.current.update, backgroundLoadingFunc.update)
-  assignRef(refs.customLoadingRef.current.isLoading, customLoadingFunc.isLoading)
+  assignRef(
+    refs.backgroundLoadingRef.current.isLoading,
+    backgroundLoadingFunc.isLoading,
+  )
+  assignRef(
+    refs.backgroundLoadingRef.current.start,
+    backgroundLoadingFunc.start,
+  )
+  assignRef(
+    refs.backgroundLoadingRef.current.finish,
+    backgroundLoadingFunc.finish,
+  )
+  assignRef(
+    refs.backgroundLoadingRef.current.update,
+    backgroundLoadingFunc.update,
+  )
+  assignRef(
+    refs.customLoadingRef.current.isLoading,
+    customLoadingFunc.isLoading,
+  )
   assignRef(refs.customLoadingRef.current.start, customLoadingFunc.start)
   assignRef(refs.customLoadingRef.current.finish, customLoadingFunc.finish)
   assignRef(refs.customLoadingRef.current.update, customLoadingFunc.update)
@@ -525,7 +557,9 @@ const getVariants = (type: 'fade' | 'scaleFade' = 'fade'): MotionVariants => ({
   },
 })
 
-const getOverlayStyle = (type: 'fill' | 'transparent' = 'fill'): CSSUIObject => ({
+const getOverlayStyle = (
+  type: 'fill' | 'transparent' = 'fill',
+): CSSUIObject => ({
   position: 'fixed',
   top: 0,
   right: 0,
@@ -552,7 +586,14 @@ const getMotionProps = (
 })
 
 const LoadingScreenComponent = memo(
-  ({ initialState, icon, text, message, duration, onFinish }: LoadingComponentProps) => {
+  ({
+    initialState,
+    icon,
+    text,
+    message,
+    duration,
+    onFinish,
+  }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       maxW: 'md',
       display: 'flex',
@@ -591,7 +632,14 @@ const LoadingScreenComponent = memo(
 LoadingScreenComponent.displayName = 'LoadingScreenComponent'
 
 const LoadingPageComponent = memo(
-  ({ initialState, icon, text, message, duration, onFinish }: LoadingComponentProps) => {
+  ({
+    initialState,
+    icon,
+    text,
+    message,
+    duration,
+    onFinish,
+  }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       bg: ['white', 'black'],
       maxW: 'md',
@@ -639,7 +687,14 @@ const LoadingPageComponent = memo(
 LoadingPageComponent.displayName = 'LoadingPageComponent'
 
 const LoadingBackgroundComponent = memo(
-  ({ initialState, icon, text, message, duration, onFinish }: LoadingComponentProps) => {
+  ({
+    initialState,
+    icon,
+    text,
+    message,
+    duration,
+    onFinish,
+  }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: 'fixed',
       right: 'md',

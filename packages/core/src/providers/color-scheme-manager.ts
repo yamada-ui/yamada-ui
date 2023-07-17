@@ -10,7 +10,9 @@ export type ColorModeManager = {
   set: (colorMode: ColorMode | 'system') => void
 }
 
-export const createLocalStorageManager = (storageKey: string): ColorModeManager => ({
+export const createLocalStorageManager = (
+  storageKey: string,
+): ColorModeManager => ({
   ssr: false,
   type: 'localStorage',
   get: (initColorMode = 'light') => {
@@ -40,7 +42,10 @@ const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
   return match?.[2] as ColorMode | undefined
 }
 
-export const createCookieStorageManager = (key: string, cookie?: string): ColorModeManager => ({
+export const createCookieStorageManager = (
+  key: string,
+  cookie?: string,
+): ColorModeManager => ({
   ssr: !!cookie,
   type: 'cookie',
   get: (initColorMode: ColorMode = 'light') => {

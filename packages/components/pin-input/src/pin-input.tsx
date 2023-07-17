@@ -24,7 +24,15 @@ import {
   filterUndefined,
   getValidChildren,
 } from '@yamada-ui/utils'
-import { ChangeEvent, KeyboardEvent, Ref, useCallback, useEffect, useId, useState } from 'react'
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  Ref,
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+} from 'react'
 
 const toArray = (value?: string) => value?.split('')
 
@@ -216,19 +224,22 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
       [values, setValues, descendants, onComplete, focusNext],
     )
 
-    const getNextValue = useCallback((value: string | undefined, eventValue: string) => {
-      let nextValue = eventValue
+    const getNextValue = useCallback(
+      (value: string | undefined, eventValue: string) => {
+        let nextValue = eventValue
 
-      if (!value?.length) return nextValue
+        if (!value?.length) return nextValue
 
-      if (value[0] === eventValue.charAt(0)) {
-        nextValue = eventValue.charAt(1)
-      } else if (value[0] === eventValue.charAt(1)) {
-        nextValue = eventValue.charAt(0)
-      }
+        if (value[0] === eventValue.charAt(0)) {
+          nextValue = eventValue.charAt(1)
+        } else if (value[0] === eventValue.charAt(1)) {
+          nextValue = eventValue.charAt(0)
+        }
 
-      return nextValue
-    }, [])
+        return nextValue
+      },
+      [],
+    )
 
     const getInputProps = useCallback(
       ({
@@ -252,7 +263,9 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
           if (eventValue.length > 2) {
             if (!validate(eventValue, type)) return
 
-            const nextValue = eventValue.split('').filter((_, index) => index < descendants.count())
+            const nextValue = eventValue
+              .split('')
+              .filter((_, index) => index < descendants.count())
 
             setValues(nextValue)
 
@@ -267,7 +280,10 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
           }
         }
 
-        const onKeyDown = ({ key, target }: KeyboardEvent<HTMLInputElement>) => {
+        const onKeyDown = ({
+          key,
+          target,
+        }: KeyboardEvent<HTMLInputElement>) => {
           if (key !== 'Backspace' || !manageFocus) return
 
           if ((target as HTMLInputElement).value === '') {
@@ -300,7 +316,9 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
           onBlur: handlerAll(props.onBlur, onBlur),
           autoComplete: otp ? 'one-time-code' : 'off',
           placeholder:
-            focusedIndex === index && !rest.readOnly && !props.readOnly ? '' : placeholder,
+            focusedIndex === index && !rest.readOnly && !props.readOnly
+              ? ''
+              : placeholder,
         }
       },
       [
@@ -337,7 +355,12 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
     return (
       <DescendantsContextProvider value={descendants}>
         <PinInputProvider value={{ getInputProps, styles }}>
-          <ui.div ref={ref} className={cx('ui-pin-input', className)} {...rest} __css={css}>
+          <ui.div
+            ref={ref}
+            className={cx('ui-pin-input', className)}
+            {...rest}
+            __css={css}
+          >
             {cloneChildren}
           </ui.div>
         </PinInputProvider>

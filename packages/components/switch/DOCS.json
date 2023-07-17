@@ -17,7 +17,11 @@
       "required": false,
       "description": "The switch icon to use."
     },
-    "id": { "type": "string", "required": false, "description": "id assigned to input." },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to input."
+    },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
       "required": false,

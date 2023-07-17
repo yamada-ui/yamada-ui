@@ -22,5 +22,12 @@ export const Badge = forwardRef<BadgeProps, 'span'>((props, ref) => {
     ...styles,
   }
 
-  return <ui.span ref={ref} className={cx('ui-badge', className)} __css={css} {...rest} />
+  return (
+    <ui.span
+      ref={ref}
+      className={cx('ui-badge', className)}
+      __css={css}
+      {...rest}
+    />
+  )
 })

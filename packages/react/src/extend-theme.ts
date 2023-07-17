@@ -51,12 +51,22 @@ export const extendTheme =
     )
   }
 
-export const extendToken = (token: ThemeToken, tokens?: ThemeTokens): ThemeTokens =>
-  mergeObject(get(defaultTheme, token, {}), tokens ?? {})
+export const extendToken = (
+  token: ThemeToken,
+  tokens?: ThemeTokens,
+): ThemeTokens => mergeObject(get(defaultTheme, token, {}), tokens ?? {})
 
-export const extendStyle = (name: 'globalStyle' | 'resetStyle', style: UIStyle): UIStyle => {
+export const extendStyle = (
+  name: 'globalStyle' | 'resetStyle',
+  style: UIStyle,
+): UIStyle => {
   const props: UIStyleProps = {
-    theme: { __config: {}, __cssMap: {}, __cssVars: {}, __breakpoints: undefined },
+    theme: {
+      __config: {},
+      __cssMap: {},
+      __cssVars: {},
+      __breakpoints: undefined,
+    },
   }
 
   return mergeObject(
@@ -68,22 +78,32 @@ export const extendStyle = (name: 'globalStyle' | 'resetStyle', style: UIStyle):
 export const extendComponent = (
   name: keyof (typeof defaultTheme)['components'],
   componentStyle?: ComponentStyle,
-): ComponentStyle => mergeObject(get(defaultTheme, `components.${name}`, {}), componentStyle ?? {})
+): ComponentStyle =>
+  mergeObject(get(defaultTheme, `components.${name}`, {}), componentStyle ?? {})
 
 export const extendComponentSize = (
   name: keyof (typeof defaultTheme)['components'],
   componentSizes?: ComponentSizes,
 ): ComponentSizes =>
-  mergeObject(get(defaultTheme, `components.${name}.sizes`, {}), componentSizes ?? {})
+  mergeObject(
+    get(defaultTheme, `components.${name}.sizes`, {}),
+    componentSizes ?? {},
+  )
 
 export const extendComponentVariant = (
   name: keyof (typeof defaultTheme)['components'],
   componentVariants?: ComponentVariants,
 ): ComponentVariants =>
-  mergeObject(get(defaultTheme, `components.${name}.variants`, {}), componentVariants ?? {})
+  mergeObject(
+    get(defaultTheme, `components.${name}.variants`, {}),
+    componentVariants ?? {},
+  )
 
 export const extendComponentDefaultProps = (
   name: keyof (typeof defaultTheme)['components'],
   componentDefaultProps?: ComponentDefaultProps,
 ): ComponentDefaultProps =>
-  mergeObject(get(defaultTheme, `components.${name}.defaultProps`, {}), componentDefaultProps ?? {})
+  mergeObject(
+    get(defaultTheme, `components.${name}.defaultProps`, {}),
+    componentDefaultProps ?? {},
+  )

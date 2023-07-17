@@ -23,7 +23,12 @@ import { ui, CSSUIObject, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
 import { IconProps } from '@yamada-ui/icon'
 import { ThProps, TrProps, TdProps } from '@yamada-ui/native-table'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createContext, PropGetter, handlerAll, runIfFunc } from '@yamada-ui/utils'
+import {
+  createContext,
+  PropGetter,
+  handlerAll,
+  runIfFunc,
+} from '@yamada-ui/utils'
 import { CSSProperties, useCallback, useMemo } from 'react'
 
 export { flexRender as render, createColumnHelper } from '@tanstack/react-table'
@@ -43,9 +48,13 @@ export type ColumnStyles = {
   css?: CSSUIObject
 }
 
-export type Column<Y extends RowData, M = unknown> = ColumnDef<Y, M> & ColumnStyles
+export type Column<Y extends RowData, M = unknown> = ColumnDef<Y, M> &
+  ColumnStyles
 
-type SelectColumn<Y extends RowData, M = unknown> = Omit<Column<Y, M>, 'accessorKey' | 'accessorFn'>
+type SelectColumn<Y extends RowData, M = unknown> = Omit<
+  Column<Y, M>,
+  'accessorKey' | 'accessorFn'
+>
 
 export type ColumnSort<Y extends RowData> = {
   id: keyof Y
@@ -57,7 +66,12 @@ export type Sort<Y extends RowData> = ColumnSort<Y>[]
 export type UseTableOptions<Y extends RowData> = PartialKeys<
   Omit<
     CoreOptions<Y>,
-    'getCoreRowModel' | 'state' | 'initialState' | 'onStateChange' | 'getSubRows' | 'mergeOptions'
+    | 'getCoreRowModel'
+    | 'state'
+    | 'initialState'
+    | 'onStateChange'
+    | 'getSubRows'
+    | 'mergeOptions'
   >,
   'renderFallbackValue'
 > &
@@ -230,8 +244,10 @@ const generateRowSelection = <Y extends RowData>(
 const generateRowId = <Y extends RowData>(key: keyof Y | undefined) =>
   key ? (row: Y) => String(row[key]) : undefined
 
-const computedEnableRowSelection = <Y extends RowData>({ id }: Row<Y>, disabledRowIds?: string[]) =>
-  !disabledRowIds?.includes(id)
+const computedEnableRowSelection = <Y extends RowData>(
+  { id }: Row<Y>,
+  disabledRowIds?: string[],
+) => !disabledRowIds?.includes(id)
 
 export const useTable = <Y extends RowData>({
   rowId,
@@ -401,7 +417,9 @@ export const useTable = <Y extends RowData>({
     ...(isMultiSortEvent ? { isMultiSortEvent } : {}),
     enableRowSelection,
     onRowSelectionChange: (updaterOrValue) =>
-      onRowSelectionChange(Object.keys(runIfFunc(updaterOrValue, computedRowSelection))),
+      onRowSelectionChange(
+        Object.keys(runIfFunc(updaterOrValue, computedRowSelection)),
+      ),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     ...(enablePagenation
@@ -410,7 +428,10 @@ export const useTable = <Y extends RowData>({
           manualPagination,
           autoResetPageIndex,
           onPaginationChange: (updaterOrValue) => {
-            const { pageIndex, pageSize } = runIfFunc(updaterOrValue, pagination)
+            const { pageIndex, pageSize } = runIfFunc(
+              updaterOrValue,
+              pagination,
+            )
 
             setInternalPageIndex(pageIndex)
             setInternalPageSize(pageSize)
@@ -504,9 +525,15 @@ const TotalCheckbox = <Y extends RowData>({
   const selectedRowIds = Object.keys(state.rowSelection)
   const unselectedRowIds = rowIds.filter((id) => !selectedRowIds.includes(id))
 
-  const isAllChecked = unselectedRowIds.every((id) => disabledRowIds.includes(id))
-  const isChecked = !enablePagenation ? getIsAllRowsSelected() : getIsAllPageRowsSelected()
-  const isIndeterminate = !enablePagenation ? getIsSomeRowsSelected() : getIsSomePageRowsSelected()
+  const isAllChecked = unselectedRowIds.every((id) =>
+    disabledRowIds.includes(id),
+  )
+  const isChecked = !enablePagenation
+    ? getIsAllRowsSelected()
+    : getIsAllPageRowsSelected()
+  const isIndeterminate = !enablePagenation
+    ? getIsSomeRowsSelected()
+    : getIsSomePageRowsSelected()
   const onChange = !enablePagenation
     ? getToggleAllRowsSelectedHandler()
     : getToggleAllPageRowsSelectedHandler()
@@ -541,12 +568,16 @@ export const mergeColumns = <Y extends RowData>({
   {
     id: 'select',
     header: ({ table }) => (
-      <TotalCheckbox {...{ table, checkboxProps, enablePagenation, disabledRowIds }} />
+      <TotalCheckbox
+        {...{ table, checkboxProps, enablePagenation, disabledRowIds }}
+      />
     ),
     ...(withFooterSelect
       ? {
           footer: ({ table }) => (
-            <TotalCheckbox {...{ table, checkboxProps, enablePagenation, disabledRowIds }} />
+            <TotalCheckbox
+              {...{ table, checkboxProps, enablePagenation, disabledRowIds }}
+            />
           ),
         }
       : {}),
@@ -559,7 +590,10 @@ export const mergeColumns = <Y extends RowData>({
             {...{ gap: 0, ...checkboxProps }}
             isChecked={getIsSelected()}
             isDisabled={!getCanSelect()}
-            onChange={handlerAll(checkboxProps.onChange, getToggleSelectedHandler())}
+            onChange={handlerAll(
+              checkboxProps.onChange,
+              getToggleSelectedHandler(),
+            )}
           />
         </Center>
       )

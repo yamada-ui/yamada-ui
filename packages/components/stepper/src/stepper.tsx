@@ -67,11 +67,14 @@ type StepperOptions = {
   steps?: Steps
 }
 
-export type StepperProps = ThemeProps<'Stepper'> & UseStepperProps & StepperOptions
+export type StepperProps = ThemeProps<'Stepper'> &
+  UseStepperProps &
+  StepperOptions
 
 export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle('Stepper', props)
-  const { className, steps, children, ...computedProps } = omitThemeProps(mergedProps)
+  const { className, steps, children, ...computedProps } =
+    omitThemeProps(mergedProps)
 
   const { descendants, getContainerProps, ...rest } = useStepper(computedProps)
 
@@ -101,7 +104,9 @@ export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
             <ui.div flexShrink={0}>
               {title ? <StepTitle {...titleProps}>{title}</StepTitle> : null}
               {description ? (
-                <StepDescription {...descriptionProps}>{description}</StepDescription>
+                <StepDescription {...descriptionProps}>
+                  {description}
+                </StepDescription>
               ) : null}
             </ui.div>
 
@@ -117,7 +122,11 @@ export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
   return (
     <StepperDescendantsContextProvider value={descendants}>
       <StepperProvider value={{ ...rest, styles }}>
-        <ui.div className={cx('ui-stepper', className)} __css={css} {...getContainerProps({}, ref)}>
+        <ui.div
+          className={cx('ui-stepper', className)}
+          __css={css}
+          {...getContainerProps({}, ref)}
+        >
           {computedChildren}
         </ui.div>
       </StepperProvider>

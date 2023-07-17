@@ -62,16 +62,36 @@ const isObject = (value: unknown): value is Record<string, unknown> =>
 
 const isString = (value: unknown): value is string => typeof value === 'string'
 
-const defaultColors = ['brand', 'primary', 'secondary', 'warning', 'danger', 'link']
+const defaultColors = [
+  'brand',
+  'primary',
+  'secondary',
+  'warning',
+  'danger',
+  'link',
+]
 
-const hues = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
+const hues = [
+  '50',
+  '100',
+  '200',
+  '300',
+  '400',
+  '500',
+  '600',
+  '700',
+  '800',
+  '900',
+]
 
 const isHue = (value: unknown): value is Record<string, string> =>
   isObject(value) && hues.every((k) => isString(value[k]))
 
 const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
 
-const extractColorScheme = (colors: Record<string, unknown> | undefined): string => {
+const extractColorScheme = (
+  colors: Record<string, unknown> | undefined,
+): string => {
   if (!colors) return 'string'
 
   const validColors = Object.entries(colors)
@@ -81,12 +101,17 @@ const extractColorScheme = (colors: Record<string, unknown> | undefined): string
   return toLiteralStringType(validColors)
 }
 
-const extractThemeProps = ({ colors, components = {} }: Theme): Record<string, PropertyInfo> => {
+const extractThemeProps = ({
+  colors,
+  components = {},
+}: Theme): Record<string, PropertyInfo> => {
   const result: Record<string, PropertyInfo> = {}
 
   const colorSchemeType = extractColorScheme(colors)
 
-  for (const [name, { defaultProps, variants, sizes }] of Object.entries(components)) {
+  for (const [name, { defaultProps, variants, sizes }] of Object.entries(
+    components,
+  )) {
     if (!defaultProps) continue
 
     const { variant, size, colorScheme } = defaultProps
@@ -143,7 +168,9 @@ const sortByRequiredProperties = (properties: ComponentTypeProperties) =>
   Object.fromEntries(
     Object.entries(properties)
       .sort(([a], [b]) => a.localeCompare(b))
-      .sort(([, a], [, b]) => (a.required === b.required ? 0 : a.required ? -1 : 1)),
+      .sort(([, a], [, b]) =>
+        a.required === b.required ? 0 : a.required ? -1 : 1,
+      ),
   )
 
 const extractPropertiesOfTypeName = async (
@@ -152,11 +179,13 @@ const extractPropertiesOfTypeName = async (
   typeChecker: TypeChecker,
   { shouldIgnoreProperty = () => false }: TypeSearchOptions = {},
 ) => {
-  const regexSearchTerm = typeof searchTerm === 'string' ? `^${searchTerm}$` : searchTerm
+  const regexSearchTerm =
+    typeof searchTerm === 'string' ? `^${searchTerm}$` : searchTerm
 
   const typeStatements = sourceFile.statements.filter(
     (statement) =>
-      (isInterfaceDeclaration(statement) || isTypeAliasDeclaration(statement)) &&
+      (isInterfaceDeclaration(statement) ||
+        isTypeAliasDeclaration(statement)) &&
       new RegExp(regexSearchTerm).test(statement.name.getText()),
   )
 
@@ -242,20 +271,34 @@ const extractTypeExports = (code: string) => {
   return exportedTypes
 }
 
-const createTypeSearch = (configPath: string, { shouldIgnoreProperty }: TypeSearchOptions = {}) => {
+const createTypeSearch = (
+  configPath: string,
+  { shouldIgnoreProperty }: TypeSearchOptions = {},
+) => {
   const { config } = readConfigFile(configPath, sys.readFile)
-  const { fileNames, options } = parseJsonConfigFileContent(config, sys, path.dirname(configPath))
+  const { fileNames, options } = parseJsonConfigFileContent(
+    config,
+    sys,
+    path.dirname(configPath),
+  )
 
   const { getSourceFiles, getTypeChecker } = createProgram(fileNames, options)
   const sourceFiles = getSourceFiles()
 
-  return async (searchTerm: Parameters<typeof extractPropertiesOfTypeName>[0]) => {
+  return async (
+    searchTerm: Parameters<typeof extractPropertiesOfTypeName>[0],
+  ) => {
     const results: Record<string, ComponentTypeProperties> = {}
 
     for await (const sourceFile of sourceFiles) {
-      const typeInfo = await extractPropertiesOfTypeName(searchTerm, sourceFile, getTypeChecker(), {
-        shouldIgnoreProperty,
-      })
+      const typeInfo = await extractPropertiesOfTypeName(
+        searchTerm,
+        sourceFile,
+        getTypeChecker(),
+        {
+          shouldIgnoreProperty,
+        },
+      )
 
       Object.assign(results, typeInfo)
     }
@@ -288,7 +331,9 @@ const main = async () => {
 
   const themeProps = extractThemeProps(defaultTheme)
 
-  const typeExports = await Promise.all(extractTypeExports(content).map(searchType))
+  const typeExports = await Promise.all(
+    extractTypeExports(content).map(searchType),
+  )
 
   const transformTypeExports = typeExports
     .filter((value) => Object.keys(value).length !== 0)

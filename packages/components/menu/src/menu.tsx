@@ -1,9 +1,26 @@
-import { useMultiComponentStyle, omitThemeProps, CSSUIObject, ThemeProps } from '@yamada-ui/core'
+import {
+  useMultiComponentStyle,
+  omitThemeProps,
+  CSSUIObject,
+  ThemeProps,
+} from '@yamada-ui/core'
 import { Popover, PopoverProps } from '@yamada-ui/popover'
 import { createDescendant } from '@yamada-ui/use-descendant'
 import { useDisclosure } from '@yamada-ui/use-disclosure'
-import { createContext, useUnmountEffect, useUpdateEffect } from '@yamada-ui/utils'
-import { Dispatch, FC, RefObject, SetStateAction, useCallback, useRef, useState } from 'react'
+import {
+  createContext,
+  useUnmountEffect,
+  useUpdateEffect,
+} from '@yamada-ui/utils'
+import {
+  Dispatch,
+  FC,
+  RefObject,
+  SetStateAction,
+  useCallback,
+  useRef,
+  useState,
+} from 'react'
 
 const {
   DescendantsContextProvider,
@@ -42,7 +59,9 @@ type MenuOptions = {
   closeOnSelect?: boolean
 }
 
-export type MenuProps = ThemeProps<'Menu'> & Omit<PopoverProps, 'closeOnButton'> & MenuOptions
+export type MenuProps = ThemeProps<'Menu'> &
+  Omit<PopoverProps, 'closeOnButton'> &
+  MenuOptions
 
 export const Menu: FC<MenuProps> = (props) => {
   const [styles, mergedProps] = useMultiComponentStyle('Menu', props)
@@ -62,7 +81,9 @@ export const Menu: FC<MenuProps> = (props) => {
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const onFocusMenu = useCallback(() => {
-    requestAnimationFrame(() => menuRef.current?.focus({ preventScroll: false }))
+    requestAnimationFrame(
+      () => menuRef.current?.focus({ preventScroll: false }),
+    )
   }, [])
 
   const onFocusFirstItem = useCallback(() => {
@@ -95,7 +116,10 @@ export const Menu: FC<MenuProps> = (props) => {
     onFocusMenu()
   }, [onFocusMenu, rest])
 
-  const { isOpen, onOpen, onClose } = useDisclosure({ ...props, onOpen: onOpenInternal })
+  const { isOpen, onOpen, onClose } = useDisclosure({
+    ...props,
+    onOpen: onOpenInternal,
+  })
 
   useUpdateEffect(() => {
     if (!isOpen) setFocusedIndex(-1)

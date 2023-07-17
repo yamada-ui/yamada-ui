@@ -15,12 +15,14 @@ type AutocompleteOptionOptions = {
   icon?: ReactElement
 }
 
-export type AutocompleteOptionProps = UseAutocompleteOptionProps & AutocompleteOptionOptions
+export type AutocompleteOptionProps = UseAutocompleteOptionProps &
+  AutocompleteOptionOptions
 
 export const AutocompleteOption = forwardRef<AutocompleteOptionProps, 'li'>(
   ({ className, icon, ...rest }, ref) => {
     const { styles } = useAutocompleteContext()
-    const { isSelected, customIcon, children, getOptionProps } = useAutocompleteOption(rest)
+    const { isSelected, customIcon, children, getOptionProps } =
+      useAutocompleteOption(rest)
 
     icon = icon ?? customIcon
 

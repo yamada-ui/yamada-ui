@@ -43,6 +43,12 @@ export const Text = forwardRef<TextProps, 'p'>((props, ref) => {
   })
 
   return (
-    <ui.p ref={ref} className={cx('ui-text', className)} __css={css} {...textProps} {...rest} />
+    <ui.p
+      ref={ref}
+      className={cx('ui-text', className)}
+      __css={css}
+      {...textProps}
+      {...rest}
+    />
   )
 })

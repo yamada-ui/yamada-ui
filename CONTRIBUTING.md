@@ -1,5 +1,5 @@
 <p align='center'>
-  English | <a href='./README.ja.md'>日本語</a>
+  English | <a href='./CONTRIBUTING.ja.md'>日本語</a>
 </p>
 
 ## Thanks for for your interest in contribute to Yamada UI 😎, you are amazing!!!

@@ -1,5 +1,20 @@
 # @yamada-ui/select
 
+## 0.2.11
+
+### Patch Changes
+
+- Updated dependencies [[`b5cbe265`](https://github.com/hirotomoyamada/yamada-ui/commit/b5cbe26510fa7f437538a2ddd36daa6c918b0f35)]:
+  - @yamada-ui/utils@0.1.4
+  - @yamada-ui/core@0.5.2
+  - @yamada-ui/icon@0.2.7
+  - @yamada-ui/form-control@0.2.7
+  - @yamada-ui/popover@0.2.10
+  - @yamada-ui/use-clickable@0.2.3
+  - @yamada-ui/use-controllable-state@0.1.5
+  - @yamada-ui/use-descendant@0.1.5
+  - @yamada-ui/use-outside-click@0.1.4
+
 ## 0.2.10
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @yamada-ui/loading
 
+## 0.3.7
+
+### Patch Changes
+
+- Updated dependencies [[`b5cbe265`](https://github.com/hirotomoyamada/yamada-ui/commit/b5cbe26510fa7f437538a2ddd36daa6c918b0f35)]:
+  - @yamada-ui/use-token@0.1.19
+  - @yamada-ui/utils@0.1.4
+  - @yamada-ui/core@0.5.2
+  - @yamada-ui/icon@0.2.7
+  - @yamada-ui/use-value@0.1.19
+
 ## 0.3.6
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @yamada-ui/core
 
+## 0.5.2
+
+### Patch Changes
+
+- [`b5cbe265`](https://github.com/hirotomoyamada/yamada-ui/commit/b5cbe26510fa7f437538a2ddd36daa6c918b0f35) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted type.
+
+- Updated dependencies [[`b5cbe265`](https://github.com/hirotomoyamada/yamada-ui/commit/b5cbe26510fa7f437538a2ddd36daa6c918b0f35)]:
+  - @yamada-ui/utils@0.1.4
+  - @yamada-ui/portal@0.2.3
+
 ## 0.5.1
 
 ### Patch Changes

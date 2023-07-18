@@ -1,9 +1,12 @@
 import { localStorageManager, UIProvider } from '@yamada-ui/react'
-import type { AppProps } from 'next/app'
+import type { AppPropsWithLayout } from 'next/app'
 import Head from 'next/head'
 import { FC } from 'react'
+import { I18nProvider } from '@/contexts'
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
+const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
+  const getLayout = Component.getLayout ?? ((page) => page)
+
   return (
     <>
       <Head>
@@ -12,7 +15,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
 
       <UIProvider colorModeManager={localStorageManager}>
-        <Component {...pageProps} />
+        <I18nProvider>{getLayout(<Component {...pageProps} />)}</I18nProvider>
       </UIProvider>
     </>
   )

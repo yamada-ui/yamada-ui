@@ -111,7 +111,7 @@ export const ResetStyle: FC = () => {
     <Global
       styles={
         ((theme: StyledTheme<Dict>) => {
-          let style = get(theme, 'styles.resetStyle', {})
+          let style = get<UIStyle>(theme, 'styles.resetStyle', {})
 
           const computedStyle = runIfFunc(style, { theme, colorMode })
 
@@ -131,7 +131,7 @@ export const GlobalStyle: FC = () => {
     <Global
       styles={
         ((theme: StyledTheme<Dict>) => {
-          let style: UIStyle = get(theme, 'styles.globalStyle', {})
+          let style = get<UIStyle>(theme, 'styles.globalStyle', {})
 
           const computedStyle = runIfFunc(style, { theme, colorMode })
 

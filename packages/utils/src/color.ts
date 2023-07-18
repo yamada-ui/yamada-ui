@@ -11,11 +11,9 @@ import { getMemoizedObject as get, Dict, isArray } from '.'
 export const getColor =
   (color: string, fallback?: string) =>
   (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const hex:
-      | string
-      | number
-      | [string | number, string | number]
-      | undefined = get(theme, `colors.${color}`, color)
+    const hex = get<
+      string | number | [string | number, string | number] | undefined
+    >(theme, `colors.${color}`, color)
 
     try {
       if (isArray(hex)) {

@@ -54,7 +54,8 @@ export const extendTheme =
 export const extendToken = (
   token: ThemeToken,
   tokens?: ThemeTokens,
-): ThemeTokens => mergeObject(get(defaultTheme, token, {}), tokens ?? {})
+): ThemeTokens =>
+  mergeObject(get<ThemeTokens>(defaultTheme, token, {}), tokens ?? {})
 
 export const extendStyle = (
   name: 'globalStyle' | 'resetStyle',
@@ -70,7 +71,7 @@ export const extendStyle = (
   }
 
   return mergeObject(
-    runIfFunc(get(defaultTheme, `styles.${name}`, {}), props),
+    runIfFunc(get<UIStyle>(defaultTheme, `styles.${name}`, {}), props),
     runIfFunc(style, props) ?? {},
   )
 }
@@ -79,14 +80,17 @@ export const extendComponent = (
   name: keyof (typeof defaultTheme)['components'],
   componentStyle?: ComponentStyle,
 ): ComponentStyle =>
-  mergeObject(get(defaultTheme, `components.${name}`, {}), componentStyle ?? {})
+  mergeObject(
+    get<ComponentStyle>(defaultTheme, `components.${name}`, {}),
+    componentStyle ?? {},
+  )
 
 export const extendComponentSize = (
   name: keyof (typeof defaultTheme)['components'],
   componentSizes?: ComponentSizes,
 ): ComponentSizes =>
   mergeObject(
-    get(defaultTheme, `components.${name}.sizes`, {}),
+    get<ComponentSizes>(defaultTheme, `components.${name}.sizes`, {}),
     componentSizes ?? {},
   )
 
@@ -95,7 +99,7 @@ export const extendComponentVariant = (
   componentVariants?: ComponentVariants,
 ): ComponentVariants =>
   mergeObject(
-    get(defaultTheme, `components.${name}.variants`, {}),
+    get<ComponentVariants>(defaultTheme, `components.${name}.variants`, {}),
     componentVariants ?? {},
   )
 
@@ -104,6 +108,10 @@ export const extendComponentDefaultProps = (
   componentDefaultProps?: ComponentDefaultProps,
 ): ComponentDefaultProps =>
   mergeObject(
-    get(defaultTheme, `components.${name}.defaultProps`, {}),
+    get<ComponentDefaultProps>(
+      defaultTheme,
+      `components.${name}.defaultProps`,
+      {},
+    ),
     componentDefaultProps ?? {},
   )

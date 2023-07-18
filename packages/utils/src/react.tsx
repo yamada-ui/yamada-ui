@@ -319,8 +319,8 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
           return error
         },
       ) as ReturnType<T>
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     deps,
   )
 

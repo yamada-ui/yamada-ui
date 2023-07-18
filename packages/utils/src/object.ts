@@ -163,7 +163,12 @@ export const getObject = (
 export const memoizeObject = (func: typeof getObject) => {
   const cache = new WeakMap()
 
-  const memoizedFunc: typeof getObject = (obj, path, fallback, i) => {
+  const memoizedFunc = <T extends unknown = any>(
+    obj: Dict,
+    path: string | number,
+    fallback?: any,
+    i?: number,
+  ): T => {
     if (typeof obj === 'undefined') {
       return func(obj, path, fallback)
     }
@@ -178,7 +183,7 @@ export const memoizeObject = (func: typeof getObject) => {
 
     map.set(path, value)
 
-    return value
+    return value as T
   }
 
   return memoizedFunc

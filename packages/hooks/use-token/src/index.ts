@@ -21,7 +21,7 @@ export const useToken = <
 
   if (name === 'transitionEasing') name = 'transitions.easing' as M
 
-  const value: Y | [Y, Y] | undefined = get(theme, `${name}.${path}`)
+  const value = get<Y | [Y, Y] | undefined>(theme, `${name}.${path}`)
 
   if (isArray(value)) {
     const [lightValue, darkValue] = value

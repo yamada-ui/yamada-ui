@@ -49,7 +49,7 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
-  const componentStyle: ComponentStyle | undefined = get(
+  const componentStyle = get<ComponentStyle | undefined>(
     theme,
     `components.${name}`,
   )

@@ -5,7 +5,7 @@ import { Configs } from './config'
 const getPriority = (theme: any, token: any, css: any = {}) => {
   const result: Dict = {}
 
-  const obj = get(theme, `styles.${token}`, {})
+  const obj = get<Dict>(theme, `styles.${token}`, {})
 
   for (const prop in obj) {
     const done = prop in css && css[prop] != null

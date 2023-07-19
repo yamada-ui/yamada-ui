@@ -34,8 +34,6 @@ body:
       description: |
         Please provide code snippets, gists, or links to the ideal
         design or API.
-    validations:
-      required: true
   - type: 'textarea'
     id: 'alternatives'
     attributes:

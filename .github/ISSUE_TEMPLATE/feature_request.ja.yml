@@ -31,8 +31,6 @@ body:
     attributes:
       label: '提案する解決策やAPI'
       description: 理想的な設計やAPIへのコードスニペット、またはリンクを提供してください。
-    validations:
-      required: true
   - type: 'textarea'
     id: 'alternatives'
     attributes:

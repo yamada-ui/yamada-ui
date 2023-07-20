@@ -16,7 +16,7 @@ import {
   HeadingProps,
   LiProps,
   OrderedListProps,
-  TableCellProps,
+  TableDataCellProps,
   TableRowProps,
   UnorderedListProps,
 } from 'react-markdown/lib/ast-to-react'
@@ -36,7 +36,7 @@ export type MarkdownComponentHeadingProps = HeadingProps
 export type MarkdownComponentLiProps = LiProps
 export type MarkdownComponentOrderedListProps = OrderedListProps
 export type MarkdownComponentUnorderedListProps = UnorderedListProps
-export type MarkdownComponentTableCellProps = TableCellProps
+export type MarkdownComponentTableCellProps = TableDataCellProps
 export type MarkdownComponentTableRowProps = TableRowProps
 
 type MarkdownOptions = ReactMarkdownOptions & {

@@ -23,7 +23,7 @@ export const customComponent: Story = () => {
   return (
     <Markdown
       components={{
-        h1: (props) => (
+        h2: (props) => (
           <Heading
             size='2xl'
             bgGradient='linear(to-l, #f37bdf, #59a9e1)'

@@ -19,8 +19,8 @@ const config: StorybookConfig = {
     '@storybook/addon-storysource',
     'storybook-dark-mode',
   ],
-  async viteFinal(config) {
-    return mergeConfig(config, {
+  viteFinal: async (config) =>
+    mergeConfig(config, {
       resolve: {
         alias: [
           {
@@ -39,8 +39,7 @@ const config: StorybookConfig = {
           },
         ],
       },
-    })
-  },
+    }),
   typescript: {
     reactDocgen: false,
   },

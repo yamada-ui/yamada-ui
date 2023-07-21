@@ -106,7 +106,7 @@ export type LoadingComponentProps = {
   onFinish: () => void
 }
 
-type LoadingConfigOptions = {
+export type LoadingConfigOptions = {
   /**
    * If `true`, loaded from the initial rendering.
    *

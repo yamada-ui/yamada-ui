@@ -1,5 +1,15 @@
 # @yamada-ui/markdown
 
+## 0.2.8
+
+### Patch Changes
+
+- [#135](https://github.com/hirotomoyamada/yamada-ui/pull/135) [`7893b9da`](https://github.com/hirotomoyamada/yamada-ui/commit/7893b9da75a699ededb34fee1dc416d4a30bca74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`c941721c`](https://github.com/hirotomoyamada/yamada-ui/commit/c941721cc830edd4c4c07c102fb871450ecfa832)]:
+  - @yamada-ui/core@0.5.3
+  - @yamada-ui/use-value@0.1.20
+
 ## 0.2.7
 
 ### Patch Changes

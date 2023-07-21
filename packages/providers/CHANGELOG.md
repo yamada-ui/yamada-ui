@@ -1,5 +1,20 @@
 # @yamada-ui/providers
 
+## 0.6.0
+
+### Minor Changes
+
+- [`1884d6db`](https://github.com/hirotomoyamada/yamada-ui/commit/1884d6db6557c4e3379a4ffb2f8e6227f96fc36b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added force function to useLoading.
+
+### Patch Changes
+
+- Updated dependencies [[`70551ea7`](https://github.com/hirotomoyamada/yamada-ui/commit/70551ea7c6887aa9f93a4f122f8ab46901c88b60), [`c941721c`](https://github.com/hirotomoyamada/yamada-ui/commit/c941721cc830edd4c4c07c102fb871450ecfa832)]:
+  - @yamada-ui/notice@0.3.8
+  - @yamada-ui/core@0.5.3
+  - @yamada-ui/loading@0.3.8
+  - @yamada-ui/motion@0.3.6
+  - @yamada-ui/theme@0.3.9
+
 ## 0.5.3
 
 ### Patch Changes

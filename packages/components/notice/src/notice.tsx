@@ -188,22 +188,22 @@ const initialState = {
 
 const createNoticeStore = (initialState: State): Store => {
   let state = initialState
-  const listeners = new Set<() => void>()
+  const storeChangeCache = new Set<() => void>()
 
-  const setState = (setStateFn: (values: State) => State) => {
-    state = setStateFn(state)
-    listeners.forEach((l) => l())
+  const setState = (setStateFunc: (values: State) => State) => {
+    state = setStateFunc(state)
+    storeChangeCache.forEach((onStoreChange) => onStoreChange())
   }
 
   return {
     getSnapshot: () => state,
 
-    subscribe: (listener) => {
-      listeners.add(listener)
+    subscribe: (onStoreChange) => {
+      storeChangeCache.add(onStoreChange)
 
       return () => {
         setState(() => initialState)
-        listeners.delete(listener)
+        storeChangeCache.delete(onStoreChange)
       }
     },
 

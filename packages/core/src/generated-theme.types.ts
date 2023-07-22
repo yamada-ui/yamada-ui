@@ -233,6 +233,7 @@ export interface GeneratedTheme extends UITheme {
     | 'outline'
     | 'inner'
     | 'none'
+    | 'dark-sm'
     | 'dark-md'
     | 'dark-lg'
     | (string & {})

@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.4.0
+
+### Minor Changes
+
+- [`66b08100`](https://github.com/hirotomoyamada/yamada-ui/commit/66b081004f7ce5d47173bbd5d1a967a3f8d16241) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added token dark-sm to shadows.
+
 ## 0.3.9
 
 ### Patch Changes

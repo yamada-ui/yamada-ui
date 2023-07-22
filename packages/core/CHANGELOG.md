@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.5.3
+
+### Patch Changes
+
+- [`c941721c`](https://github.com/hirotomoyamada/yamada-ui/commit/c941721cc830edd4c4c07c102fb871450ecfa832) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Export type LoadingConfigOptions.
+
 ## 0.5.2
 
 ### Patch Changes

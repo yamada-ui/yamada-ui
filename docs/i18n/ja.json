@@ -1,0 +1,27 @@
+{
+  "top": {
+    "hero": {
+      "title": "Reactアプリのスタイリング、アニメーション、そして柔軟性の力を解き放つ",
+      "description": "Yamada UIは、多機能なReactコンポーネントライブラリです。アプリのデザインとアニメーションの力を解き放ちます。そして、高度なスタイリングをあなたのアプリケーションに統合するための直感的かつ効率的な方法を提供し、あなたのアイデアを現実のものにします。",
+      "started": "はじめる",
+      "github": "GitHub"
+    }
+  },
+  "not-found": {},
+  "menu": {},
+  "component": {
+    "feedback": {
+      "ad-banner": {
+        "message": "Yamada UIにスターをあげる",
+        "button": "スター"
+      }
+    },
+    "forms": {
+      "search": {
+        "message": "ドキュメントを検索する",
+        "command": "/",
+        "placeholder": "ドキュメントを検索する"
+      }
+    }
+  }
+}

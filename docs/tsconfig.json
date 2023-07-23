@@ -16,11 +16,6 @@
     "incremental": true,
     "importHelpers": true,
     "removeComments": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "paths": {
       "@/*": ["./*"]
     }

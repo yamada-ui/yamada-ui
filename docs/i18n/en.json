@@ -1,7 +1,7 @@
 {
   "top": {
     "hero": {
-      "title": "Unleash the Power of Styling, Animation, and Flexibility in React Apps",
+      "title": ["`Unleash the Power` of", "Styling, Animation, and Flexibility", "in React Apps"],
       "description": "Yamada UI is a versatile React component library, unleashing the power of your application's design and animation. It provides an intuitive and efficient way to integrate advanced styling into your application, bringing your ideas to life.",
       "started": "Get Started",
       "github": "GitHub"
@@ -22,6 +22,9 @@
         "command": "/",
         "placeholder": "Search the docs"
       }
+    },
+    "footer": {
+      "description": "Built by `Hirotomo Yamada` and `these awesome people`"
     }
   }
 }

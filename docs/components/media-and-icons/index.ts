@@ -5,4 +5,6 @@ export * from './logo'
 export * from './discord'
 export * from './magnifying-glass'
 export * from './arrow'
-export * from "./star"
+export * from './star'
+export * from './translate'
+export * from './twitter'

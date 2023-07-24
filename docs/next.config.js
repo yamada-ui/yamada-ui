@@ -5,6 +5,14 @@ const nextConfig = {
   experimental: {
     esmExternals: false,
   },
+  rewrites: async () => {
+    return [
+      {
+        source: '/',
+        destination: '/top',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

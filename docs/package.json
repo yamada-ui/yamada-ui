@@ -26,6 +26,7 @@
     "@yamada-ui/react": "^0.5.14",
     "@yamada-ui/table": "^0.2.14",
     "next": "13.4.3",
+    "next-seo": "^6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

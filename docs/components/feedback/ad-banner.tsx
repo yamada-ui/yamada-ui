@@ -1,22 +1,23 @@
 import { Button, Center, CenterProps, HStack, Text, forwardRef } from '@yamada-ui/react'
 import { memo } from 'react'
 import { Star } from '../media-and-icons'
+import { CONSTANT } from '@/constant'
 import { useI18n } from '@/contexts'
 
 export type AdBannerProps = CenterProps & {}
 
 export const AdBanner = memo(
   forwardRef<AdBannerProps, 'div'>(({ ...rest }, ref) => {
-    const { t } = useI18n()
+    const { tc } = useI18n()
 
     return (
       <Center ref={ref} py='sm' px='md' bgGradient='ultra' color='white' {...rest}>
         <HStack>
-          <Text>{t('component.feedback.ad-banner.message')}</Text>
+          <Text>{tc('component.feedback.ad-banner.message')}</Text>
 
           <Button
             as='a'
-            href='https://github.com/hirotomoyamada/yamada-ui'
+            href={CONSTANT.SNS.GITHUB.YAMADA_UI}
             target='_blank'
             size='sm'
             bg='blackAlpha.300'
@@ -30,7 +31,7 @@ export const AdBanner = memo(
             }}
           >
             <Star />
-            {t('component.feedback.ad-banner.button')}
+            {tc('component.feedback.ad-banner.button')}
           </Button>
         </HStack>
       </Center>

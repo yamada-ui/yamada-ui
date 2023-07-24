@@ -19,7 +19,8 @@ export type I18n = 'en' | 'ja'
 
 type I18nContext = {
   i18n: I18n
-  t: (
+  t: (path: Path<Data>) => string
+  tc: (
     path: Path<Data>,
     callback?: (str: string, index: number) => JSX.Element,
   ) => string | JSX.Element[]
@@ -29,6 +30,7 @@ type I18nContext = {
 const I18nContext = createContext<I18nContext>({
   i18n: 'en',
   t: () => '',
+  tc: () => '',
   changeI18n: () => {},
 })
 
@@ -40,24 +42,32 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     defaultValue: 'en',
   })
 
-  const t = useCallback(
+  const t = useCallback((path: Path<Data>) => get<string>(i18nData[i18n], path, ''), [i18n])
+
+  const tc = useCallback(
     (path: Path<Data>, callback?: (str: string, index: number) => JSX.Element) => {
       const strOrArray = get<string | string[]>(i18nData[i18n], path, '')
 
       if (isString(strOrArray)) {
-        const array = strOrArray.split(/(`[^`]+`)/)
+        const match = strOrArray.match(/`([^`]+)`/)
 
-        return array.map((str, index) => {
-          if (str.startsWith('`') && str.endsWith('`')) {
-            return (
-              <Fragment key={index}>
-                {callback ? callback(str.replace(/`/g, ''), index) : str}
-              </Fragment>
-            )
-          } else {
-            return <Fragment key={index}>{str}</Fragment>
-          }
-        })
+        if (!match) {
+          return strOrArray
+        } else {
+          const array = strOrArray.split(/(`[^`]+`)/)
+
+          return array.map((str, index) => {
+            if (str.startsWith('`') && str.endsWith('`')) {
+              return (
+                <Fragment key={index}>
+                  {callback ? callback(str.replace(/`/g, ''), index) : str}
+                </Fragment>
+              )
+            } else {
+              return <Fragment key={index}>{str}</Fragment>
+            }
+          })
+        }
       } else {
         return strOrArray.map((str, index) => {
           const array = str.split(/(`[^`]+`)/)
@@ -83,7 +93,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     [i18n],
   )
 
-  const value = useMemo(() => ({ i18n, t, changeI18n }), [changeI18n, t, i18n])
+  const value = useMemo(() => ({ i18n, t, tc, changeI18n }), [changeI18n, t, tc, i18n])
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }

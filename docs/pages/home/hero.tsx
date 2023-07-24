@@ -2,10 +2,11 @@ import { Button, HStack, Text, VStack } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC } from 'react'
 import { Arrow, Github, Section } from '@/components'
+import { CONSTANT } from '@/constant'
 import { useI18n } from '@/contexts'
 
 export const Hero: FC = () => {
-  const { t } = useI18n()
+  const { tc } = useI18n()
 
   return (
     <Section>
@@ -17,7 +18,7 @@ export const Hero: FC = () => {
           fontWeight='extrabold'
           textAlign='center'
         >
-          {t('top.hero.title', (str) => (
+          {tc('home.hero.heading', (str) => (
             <Text as='span' color='brand'>
               {str}
             </Text>
@@ -31,7 +32,7 @@ export const Hero: FC = () => {
           color={['blackAlpha.600', 'whiteAlpha.600']}
           textAlign='center'
         >
-          {t('top.hero.description')}
+          {tc('home.hero.message')}
         </Text>
       </VStack>
 
@@ -44,7 +45,7 @@ export const Hero: FC = () => {
           rightIcon={<Arrow />}
           href='/getting-started'
         >
-          {t('top.hero.started')}
+          {tc('home.hero.started')}
         </Button>
 
         <Button
@@ -52,10 +53,10 @@ export const Hero: FC = () => {
           size='xl'
           w={{ base: 'auto', md: 'full' }}
           leftIcon={<Github />}
-          href='https://github.com/hirotomoyamada/yamada-ui'
+          href={CONSTANT.SNS.GITHUB.YAMADA_UI}
           target='_blank'
         >
-          {t('top.hero.github')}
+          {tc('home.hero.github')}
         </Button>
       </HStack>
     </Section>

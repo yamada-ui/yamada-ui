@@ -1,14 +1,14 @@
-import { Box, BoxProps, forwardRef } from '@yamada-ui/react'
-import { memo } from 'react'
+import { FC, PropsWithChildren } from 'react'
+import { AdBanner, Header } from '@/components'
 
-export type DocsLayoutProps = BoxProps & {}
+export const DocsLayout: FC<PropsWithChildren> = ({ children }) => {
+  return (
+    <>
+      <AdBanner />
 
-export const DocsLayout = memo(
-  forwardRef<DocsLayoutProps, 'div'>(({ children, ...rest }, ref) => {
-    return (
-      <Box ref={ref} {...rest}>
-        {children}
-      </Box>
-    )
-  }),
-)
+      <Header />
+
+      {children}
+    </>
+  )
+}

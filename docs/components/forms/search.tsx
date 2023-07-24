@@ -18,8 +18,10 @@ export type SearchProps = StackProps & {}
 
 export const Search = memo(
   forwardRef<SearchProps, 'button'>(({ ...rest }, ref) => {
-    const { t } = useI18n()
+    const { t, tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    console.log(t('component.forms.search.placeholder'))
 
     return (
       <>
@@ -45,9 +47,9 @@ export const Search = memo(
         >
           <MagnifyingGlass />
 
-          <Text flex='1'>{t('component.forms.search.message')}</Text>
+          <Text flex='1'>{tc('component.forms.search.message')}</Text>
 
-          <Kbd>{t('component.forms.search.command')}</Kbd>
+          <Kbd>{tc('component.forms.search.command')}</Kbd>
         </HStack>
 
         <Modal size='3xl' isOpen={isOpen} onClose={onClose} withCloseButton={false} placement='top'>

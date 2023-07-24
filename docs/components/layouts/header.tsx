@@ -21,6 +21,7 @@ import Link from 'next/link'
 import { memo, useRef, useState } from 'react'
 import { Search } from '../forms'
 import { Discord, Github, Moon, Sun, Translate } from '../media-and-icons'
+import { CONSTANT } from '@/constant'
 import { I18n, useI18n } from '@/contexts'
 
 export type HeaderProps = CenterProps & {}
@@ -74,7 +75,7 @@ export const Header = memo(
           <HStack gap='sm'>
             <IconButton
               as='a'
-              href='https://discord.gg/NStNNpjN'
+              href={CONSTANT.SNS.DISCORD}
               display={{ base: 'inline-flex', md: 'none' }}
               bg='discord.basic'
               _hover={{ bg: 'discord.hover' }}
@@ -86,7 +87,7 @@ export const Header = memo(
 
             <IconButton
               as='a'
-              href='https://github.com/hirotomoyamada/yamada-ui'
+              href={CONSTANT.SNS.GITHUB.YAMADA_UI}
               target='_blank'
               display={{ base: 'inline-flex', md: 'none' }}
               variant='outline'

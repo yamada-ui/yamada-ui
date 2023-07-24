@@ -1,5 +1,12 @@
 # @yamada-ui/use-media-query
 
+## 0.1.19
+
+### Patch Changes
+
+- Updated dependencies [[`cc989018`](https://github.com/hirotomoyamada/yamada-ui/commit/cc989018c3269a223f5a3c06613f062f5e0edb6a)]:
+  - @yamada-ui/providers@0.6.2
+
 ## 0.1.18
 
 ### Patch Changes

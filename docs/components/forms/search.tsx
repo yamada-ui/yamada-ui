@@ -55,7 +55,7 @@ export const Search = memo(
             <ui.input
               w='full'
               pl='lg'
-              placeholder={t('component.forms.search.placeholder')}
+              placeholder={t('component.forms.search.placeholder') as string}
               maxLength={64}
               autoComplete='off'
               autoCorrect='off'

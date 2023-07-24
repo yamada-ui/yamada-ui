@@ -1,16 +1,15 @@
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { Icon } from '@yamada-ui/fontawesome'
 import {
-  Button,
   Center,
   CenterProps,
   HStack,
   IconButton,
   Menu,
   MenuButton,
-  MenuItem,
   MenuList,
+  MenuOptionGroup,
+  MenuOptionItem,
   Spacer,
+  Tag,
   Text,
   forwardRef,
   mergeRefs,
@@ -21,12 +20,14 @@ import {
 import Link from 'next/link'
 import { memo, useRef, useState } from 'react'
 import { Search } from '../forms'
-import { Discord, Github, Moon, Sun } from '../media-and-icons'
+import { Discord, Github, Moon, Sun, Translate } from '../media-and-icons'
+import { I18n, useI18n } from '@/contexts'
 
 export type HeaderProps = CenterProps & {}
 
 export const Header = memo(
   forwardRef<HeaderProps, 'div'>(({ ...rest }, ref) => {
+    const { i18n, changeI18n } = useI18n()
     const headerRef = useRef<HTMLHeadingElement>()
     const { colorMode, toggleScheme } = useColorMode()
     const { scrollY } = useScroll()
@@ -40,6 +41,7 @@ export const Header = memo(
         ref={mergeRefs(ref, headerRef)}
         as='header'
         w='full'
+        bg={['white', 'black']}
         shadow={y > height ? ['base', 'dark-sm'] : undefined}
         transitionProperty='common'
         transitionDuration='slower'
@@ -49,61 +51,72 @@ export const Header = memo(
         right='0'
         {...rest}
       >
-        <HStack w='full' maxW='9xl' py='sm' px='md'>
+        <HStack w='full' maxW='9xl' py='3' px='md'>
           <Link href='/'>
-            <Text as='h1' fontSize='2xl' fontWeight='semibold'>
+            <Text as='h1' fontSize='2xl' fontWeight='semibold' whiteSpace='nowrap'>
               Yamada UI
             </Text>
           </Link>
 
-          <Menu closeOnSelect>
-            <MenuButton as={Button} size='sm' h='6' minH='6' px='2' colorScheme='gray'>
-              <HStack gap='sm'>
-                <Text fontWeight='semibold' letterSpacing='1px'>
-                  v0.5.10
-                </Text>
-                <Icon icon={faChevronDown} fontSize='0.75em' />
-              </HStack>
-            </MenuButton>
-
-            <MenuList>
-              <MenuItem value='v0.5.13'>
-                <HStack gap='sm' letterSpacing='1px'>
-                  <Text as='span' fontWeight='semibold'>
-                    v0
-                  </Text>
-                  <Text fontSize='sm' color={['gray.500', 'whiteAlpha.500']}>
-                    (0.5.13)
-                  </Text>
-                </HStack>
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          <Tag
+            display={{ base: 'inline-flex', md: 'none' }}
+            colorScheme='gray'
+            letterSpacing='1px'
+            minW='auto'
+          >
+            v0.5.14
+          </Tag>
 
           <Spacer />
 
-          <Search />
+          <Search display={{ base: 'flex', sm: 'none' }} />
 
           <HStack gap='sm'>
             <IconButton
               as='a'
               href='https://discord.gg/NStNNpjN'
+              display={{ base: 'inline-flex', md: 'none' }}
               bg='discord.basic'
               _hover={{ bg: 'discord.hover' }}
               _active={{ bg: 'discord.active' }}
               color='white'
               target='_blank'
-              cursor='pointer'
               icon={<Discord />}
             />
+
             <IconButton
               as='a'
               href='https://github.com/hirotomoyamada/yamada-ui'
               target='_blank'
-              cursor='pointer'
+              display={{ base: 'inline-flex', md: 'none' }}
               variant='outline'
               icon={<Github />}
             />
+
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                display={{ base: 'inline-flex', md: 'none' }}
+                variant='outline'
+                icon={<Translate />}
+              />
+
+              <MenuList>
+                <MenuOptionGroup<string>
+                  value={i18n}
+                  onChange={(value) => changeI18n(value as I18n)}
+                  type='radio'
+                >
+                  <MenuOptionItem value='en' closeOnSelect>
+                    English
+                  </MenuOptionItem>
+                  <MenuOptionItem value='ja' closeOnSelect>
+                    日本語
+                  </MenuOptionItem>
+                </MenuOptionGroup>
+              </MenuList>
+            </Menu>
+
             <IconButton
               variant='outline'
               onClick={toggleScheme}

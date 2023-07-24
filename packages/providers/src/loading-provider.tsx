@@ -6,7 +6,7 @@ import {
   LoadingConfigOptions,
   HTMLUIProps,
 } from '@yamada-ui/core'
-import { Loading } from '@yamada-ui/loading/src/loading'
+import { Loading } from '@yamada-ui/loading'
 import {
   AnimatePresence,
   Motion,

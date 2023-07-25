@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.4.2
+
+### Patch Changes
+
+- [`d7875d58`](https://github.com/hirotomoyamada/yamada-ui/commit/d7875d585317e3f05ed97268a9d4227c3fbb310d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed background color in the `gray` color scheme.
+
 ## 0.4.1
 
 ### Patch Changes

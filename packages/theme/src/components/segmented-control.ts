@@ -5,7 +5,7 @@ export const SegmentedControl: ComponentMultiStyle = {
   baseStyle: {
     container: {
       p: '1',
-      bg: ['blackAlpha.200', 'whiteAlpha.50'],
+      bg: [`gray.200`, `whiteAlpha.200`],
       _readOnly: { cursor: 'auto' },
       _disabled: { cursor: 'not-allowed' },
     },

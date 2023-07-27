@@ -12,14 +12,6 @@ const nextConfig = {
     locales: ['en', 'ja'],
     localeDetection: false,
   },
-  rewrites: async () => {
-    return [
-      {
-        source: '/',
-        destination: '/home',
-      },
-    ]
-  },
 }
 
 module.exports = withContentlayer(nextConfig)

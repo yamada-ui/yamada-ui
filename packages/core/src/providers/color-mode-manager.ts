@@ -1,5 +1,5 @@
 import { ColorMode } from '../css'
-import { STORAGE_KEY } from './color-scheme-script'
+import { STORAGE_KEY } from './color-mode-script'
 
 const hasSupport = !!globalThis?.document
 

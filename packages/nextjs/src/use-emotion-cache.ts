@@ -1,11 +1,11 @@
-import emotion_createCache, { Options } from '@emotion/cache'
+import createEmotionCache, { Options } from '@emotion/cache'
 import { useServerInsertedHTML } from 'next/navigation'
 import { createElement, useMemo } from 'react'
 
 export type UseEmotionCacheProps = Partial<Options>
 
-const createCache = ((emotion_createCache as any).default ??
-  emotion_createCache) as typeof emotion_createCache
+const createCache = ((createEmotionCache as any).default ??
+  createEmotionCache) as typeof createEmotionCache
 
 export const useEmotionCache = (options?: UseEmotionCacheProps) => {
   const cache = useMemo(() => {

@@ -1,4 +1,4 @@
 export * from './theme-provider'
-export * from './color-scheme-provider'
-export * from './color-scheme-manager'
-export * from './color-scheme-script'
+export * from './color-mode-provider'
+export * from './color-mode-manager'
+export * from './color-mode-script'

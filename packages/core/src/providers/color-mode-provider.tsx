@@ -11,14 +11,14 @@ import {
 } from 'react'
 import { ColorMode } from '../css'
 import { ThemeConfig } from '../theme.types'
-import { ColorModeManager, localStorageManager } from './color-scheme-manager'
-import { getColorModeUtils } from './color-scheme-utils'
+import { ColorModeManager, localStorageManager } from './color-mode-manager'
+import { getColorModeUtils } from './color-mode-utils'
 
 type ColorModeContext = {
   forced?: boolean
   colorMode: ColorMode
   changeColorMode: (colorMode: ColorMode | 'system') => void
-  toggleScheme: () => void
+  toggleColorMode: () => void
 }
 
 const getColorMode = (manager: ColorModeManager, fallback?: ColorMode) =>
@@ -77,7 +77,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     [colorModeManager, getSystemColorMode, setClassName, setDataset],
   )
 
-  const toggleScheme = useCallback((): void => {
+  const toggleColorMode = useCallback((): void => {
     changeColorMode(resolvedValue === 'dark' ? 'light' : 'dark')
   }, [changeColorMode, resolvedValue])
 
@@ -114,10 +114,10 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     () => ({
       colorMode: value ?? (resolvedValue as ColorMode),
       changeColorMode: value ? noop : changeColorMode,
-      toggleScheme: value ? noop : toggleScheme,
+      toggleColorMode: value ? noop : toggleColorMode,
       forced: value !== undefined,
     }),
-    [value, resolvedValue, changeColorMode, toggleScheme],
+    [value, resolvedValue, changeColorMode, toggleColorMode],
   )
 
   return (

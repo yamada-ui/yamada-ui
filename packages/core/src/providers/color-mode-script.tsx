@@ -7,14 +7,14 @@ type ColorModeScriptProps = {
   nonce?: string
 }
 
-export const STORAGE_KEY = 'ui-scheme'
+export const STORAGE_KEY = 'ui-color-mode'
 
-const SCHEME_MAP = new Set(['dark', 'light', 'system'])
+const COLOR_MODE_MAP = new Set(['dark', 'light', 'system'])
 
-const normalizeScheme = (initialColorMode: 'light' | 'dark' | 'system') => {
+const normalizeColorMode = (initialColorMode: 'light' | 'dark' | 'system') => {
   let value = initialColorMode
 
-  if (!SCHEME_MAP.has(value)) value = 'light'
+  if (!COLOR_MODE_MAP.has(value)) value = 'light'
 
   return value
 }
@@ -24,7 +24,7 @@ export const getScript = ({
   type = 'localStorage',
   storageKey = STORAGE_KEY,
 }: Omit<ColorModeScriptProps, 'nonce'>) => {
-  const init = normalizeScheme(initialColorMode)
+  const init = normalizeColorMode(initialColorMode)
 
   const isCookie = type === 'cookie'
 

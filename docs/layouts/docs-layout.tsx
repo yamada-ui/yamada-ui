@@ -1,10 +1,10 @@
 import { FC, PropsWithChildren } from 'react'
-import { AdBanner, Header } from 'components'
+import { StarBanner, Header } from 'components'
 
 export const DocsLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <AdBanner />
+      <StarBanner />
 
       <Header />
 

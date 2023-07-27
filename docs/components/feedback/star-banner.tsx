@@ -4,10 +4,10 @@ import { Star } from '../media-and-icons'
 import { CONSTANT } from 'constant'
 import { useI18n } from 'contexts'
 
-export type AdBannerProps = CenterProps & {}
+export type StarBannerProps = CenterProps & {}
 
-export const AdBanner = memo(
-  forwardRef<AdBannerProps, 'div'>(({ ...rest }, ref) => {
+export const StarBanner = memo(
+  forwardRef<StarBannerProps, 'div'>(({ ...rest }, ref) => {
     const { tc } = useI18n()
 
     return (

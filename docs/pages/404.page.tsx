@@ -2,9 +2,9 @@ import { Button, Text, VStack } from '@yamada-ui/react'
 import { NextPageWithLayout } from 'next'
 
 import Link from 'next/link'
-import { SEO, Section } from '@/components'
-import { useI18n } from '@/contexts'
-import { TopLayout } from '@/layouts'
+import { SEO, Section } from 'components'
+import { useI18n } from 'contexts'
+import { TopLayout } from 'layouts'
 
 type NotFoundPageProps = {}
 

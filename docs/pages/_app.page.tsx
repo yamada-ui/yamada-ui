@@ -1,9 +1,9 @@
-import { localStorageManager, UIProvider } from '@yamada-ui/react'
+import { UIProvider } from '@yamada-ui/react'
 import type { AppPropsWithLayout } from 'next/app'
 import Head from 'next/head'
 import { FC } from 'react'
-import { I18nProvider } from '@/contexts'
-import { theme, config } from '@/theme'
+import { I18nProvider } from 'contexts'
+import { theme, config } from 'theme'
 
 const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout ?? ((page) => page)
@@ -15,7 +15,7 @@ const App: FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
         <link rel='icon' href='/favicon.svg' />
       </Head>
 
-      <UIProvider theme={theme} config={config} colorModeManager={localStorageManager}>
+      <UIProvider theme={theme} config={config}>
         <I18nProvider>{getLayout(<Component {...pageProps} />)}</I18nProvider>
       </UIProvider>
     </>

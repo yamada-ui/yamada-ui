@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from 'next'
-import { DocsLayout } from '@/layouts'
+import { DocsLayout } from 'layouts'
 
 type PageProps = {}
 

@@ -12,7 +12,7 @@ import {
 } from '@yamada-ui/react'
 import { memo } from 'react'
 import { MagnifyingGlass } from '../media-and-icons'
-import { useI18n } from '@/contexts'
+import { useI18n } from 'contexts'
 
 export type SearchProps = StackProps & {}
 
@@ -20,8 +20,6 @@ export const Search = memo(
   forwardRef<SearchProps, 'button'>(({ ...rest }, ref) => {
     const { t, tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
-
-    console.log(t('component.forms.search.placeholder'))
 
     return (
       <>

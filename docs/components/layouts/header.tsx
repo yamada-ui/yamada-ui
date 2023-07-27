@@ -21,14 +21,14 @@ import Link from 'next/link'
 import { memo, useRef, useState } from 'react'
 import { Search } from '../forms'
 import { Discord, Github, Moon, Sun, Translate } from '../media-and-icons'
-import { CONSTANT } from '@/constant'
-import { I18n, useI18n } from '@/contexts'
+import { CONSTANT } from 'constant'
+import { useI18n } from 'contexts'
 
 export type HeaderProps = CenterProps & {}
 
 export const Header = memo(
   forwardRef<HeaderProps, 'div'>(({ ...rest }, ref) => {
-    const { i18n, changeI18n } = useI18n()
+    const { locale, changeLocale } = useI18n()
     const headerRef = useRef<HTMLHeadingElement>()
     const { colorMode, toggleScheme } = useColorMode()
     const { scrollY } = useScroll()
@@ -103,11 +103,7 @@ export const Header = memo(
               />
 
               <MenuList>
-                <MenuOptionGroup<string>
-                  value={i18n}
-                  onChange={(value) => changeI18n(value as I18n)}
-                  type='radio'
-                >
+                <MenuOptionGroup<string> value={locale} onChange={changeLocale} type='radio'>
                   <MenuOptionItem value='en' closeOnSelect>
                     English
                   </MenuOptionItem>

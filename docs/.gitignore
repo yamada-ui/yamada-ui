@@ -8,6 +8,7 @@ node_modules
 # compiled
 build
 .vercel
+.contentlayer
 
 # misc
 .DS_Store

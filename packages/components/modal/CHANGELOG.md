@@ -1,5 +1,11 @@
 # @yamada-ui/modal
 
+## 0.3.0
+
+### Minor Changes
+
+- [`a9bf078d`](https://github.com/hirotomoyamada/yamada-ui/commit/a9bf078dd1db1053a9b0e80292f9b471ad00ddff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed bug being displayed on the left when set to right and on the right when set to left.
+
 ## 0.2.10
 
 ### Patch Changes

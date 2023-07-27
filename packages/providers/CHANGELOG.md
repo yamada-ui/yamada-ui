@@ -1,5 +1,11 @@
 # @yamada-ui/providers
 
+## 0.6.4
+
+### Patch Changes
+
+- [`a9bf078d`](https://github.com/hirotomoyamada/yamada-ui/commit/a9bf078dd1db1053a9b0e80292f9b471ad00ddff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
 ## 0.6.3
 
 ### Patch Changes

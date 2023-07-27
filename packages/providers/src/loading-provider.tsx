@@ -111,7 +111,7 @@ type Refs = {
   force: RefObject<LoadingContextProps['force']>
 }
 
-type FuncRefs = MutableRefObject<Refs>
+type ControlRefs = MutableRefObject<Refs>
 
 const createLoadingRefs = (): Refs => ({
   isLoading: createRef<LoadingContextProps['isLoading']>(),
@@ -121,7 +121,7 @@ const createLoadingRefs = (): Refs => ({
   force: createRef<LoadingContextProps['force']>(),
 })
 
-const createLoadingFunc = (refs: FuncRefs): LoadingContextProps => ({
+const createLoadingFunc = (refs: ControlRefs): LoadingContextProps => ({
   isLoading: () => refs.current.isLoading.current?.() ?? false,
   start: (props) => refs.current.start.current?.(props),
   finish: () => refs.current.finish.current?.(),
@@ -161,7 +161,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
       {children}
 
       <Controller
-        funcRefs={screenRefs}
+        controlRefs={screenRefs}
         {...screen}
         component={
           screen?.component ?? ((props) => <ScreenComponent {...props} />)
@@ -169,13 +169,13 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
       />
 
       <Controller
-        funcRefs={pageRefs}
+        controlRefs={pageRefs}
         {...page}
         component={page?.component ?? ((props) => <PageComponent {...props} />)}
       />
 
       <Controller
-        funcRefs={backgroundRefs}
+        controlRefs={backgroundRefs}
         {...background}
         blockScrollOnMount={background?.blockScrollOnMount ?? false}
         component={
@@ -185,7 +185,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
       />
 
       <Controller
-        funcRefs={customRefs}
+        controlRefs={customRefs}
         blockScrollOnMount={background?.blockScrollOnMount ?? false}
         {...custom}
         component={custom?.component}
@@ -195,12 +195,12 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
 }
 
 type ControllerProps = {
-  funcRefs: FuncRefs
+  controlRefs: ControlRefs
   render?: (props: LoadingComponentProps) => JSX.Element
 } & LoadingConfigOptions
 
 const Controller: FC<ControllerProps> = ({
-  funcRefs,
+  controlRefs,
   appendToParentPortal,
   containerRef,
   allowPinchZoom = false,
@@ -259,11 +259,11 @@ const Controller: FC<ControllerProps> = ({
       [durationProps],
     )
 
-  assignRef(funcRefs.current.isLoading, isLoading)
-  assignRef(funcRefs.current.start, start)
-  assignRef(funcRefs.current.finish, finish)
-  assignRef(funcRefs.current.update, update)
-  assignRef(funcRefs.current.force, force)
+  assignRef(controlRefs.current.isLoading, isLoading)
+  assignRef(controlRefs.current.start, start)
+  assignRef(controlRefs.current.finish, finish)
+  assignRef(controlRefs.current.update, update)
+  assignRef(controlRefs.current.force, force)
 
   const props: LoadingComponentProps = {
     initialState,

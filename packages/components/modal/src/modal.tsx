@@ -231,9 +231,9 @@ export const Modal = forwardRef<ModalProps, 'section'>(
       h: '100vh',
       p: size !== 'full' ? outside : undefined,
       display: 'flex',
-      justifyContent: placement.includes('right')
+      justifyContent: placement.includes('left')
         ? 'flex-start'
-        : placement.includes('left')
+        : placement.includes('right')
         ? 'flex-end'
         : 'center',
       alignItems: placement.includes('top')

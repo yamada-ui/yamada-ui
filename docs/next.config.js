@@ -1,9 +1,16 @@
+const { withContentlayer } = require('next-contentlayer')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
   pageExtensions: ['page.jsx', 'page.tsx'],
   experimental: {
     esmExternals: false,
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ja'],
+    localeDetection: false,
   },
   rewrites: async () => {
     return [
@@ -15,4 +22,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)

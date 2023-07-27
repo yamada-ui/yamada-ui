@@ -1,4 +1,12 @@
-import { useLocalStorage, getMemoizedObject as get, Path, isString, Text } from '@yamada-ui/react'
+import {
+  getMemoizedObject as get,
+  Path,
+  isString,
+  Text,
+  StringLiteral,
+  noop,
+} from '@yamada-ui/react'
+import { useRouter } from 'next/router'
 import {
   PropsWithChildren,
   createContext,
@@ -8,45 +16,53 @@ import {
   useCallback,
   Fragment,
 } from 'react'
-import en from '@/i18n/en.json'
-import ja from '@/i18n/ja.json'
+import en from 'i18n/en.json'
+import ja from 'i18n/ja.json'
 
-type Data = typeof en
+type LocaleData = typeof en
 
-const i18nData = { ja, en }
+const localeData = { ja, en }
 
-export type I18n = 'en' | 'ja'
+export type Locale = 'en' | 'ja'
 
 type I18nContext = {
-  i18n: I18n
-  t: (path: Path<Data>) => string
+  locale: Locale
+  t: (path: Path<LocaleData>) => string
   tc: (
-    path: Path<Data>,
+    path: Path<LocaleData>,
     callback?: (str: string, index: number) => JSX.Element,
   ) => string | JSX.Element[]
-  changeI18n: (valOrFunc: I18n | ((prevState: I18n) => I18n)) => void
+  changeLocale: (locale: Locale & StringLiteral) => void
 }
 
 const I18nContext = createContext<I18nContext>({
-  i18n: 'en',
+  locale: 'en',
   t: () => '',
   tc: () => '',
-  changeI18n: () => {},
+  changeLocale: noop,
 })
 
-export type I18nProviderProps = PropsWithChildren<{}>
+export type I18nProviderProps = PropsWithChildren
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
-  const [i18n, changeI18n] = useLocalStorage<I18n>({
-    key: 'i18n',
-    defaultValue: 'en',
-  })
+  const router = useRouter()
+  const locale = router.locale as Locale
 
-  const t = useCallback((path: Path<Data>) => get<string>(i18nData[i18n], path, ''), [i18n])
+  const changeLocale = useCallback(
+    (locale: Locale & StringLiteral) => {
+      router.push(router.pathname, router.asPath, { locale })
+    },
+    [router],
+  )
+
+  const t = useCallback(
+    (path: Path<LocaleData>) => get<string>(localeData[locale], path, ''),
+    [locale],
+  )
 
   const tc = useCallback(
-    (path: Path<Data>, callback?: (str: string, index: number) => JSX.Element) => {
-      const strOrArray = get<string | string[]>(i18nData[i18n], path, '')
+    (path: Path<LocaleData>, callback?: (str: string, index: number) => JSX.Element) => {
+      const strOrArray = get<string | string[]>(localeData[locale], path, '')
 
       if (isString(strOrArray)) {
         const match = strOrArray.match(/`([^`]+)`/)
@@ -54,48 +70,36 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
         if (!match) {
           return strOrArray
         } else {
-          const array = strOrArray.split(/(`[^`]+`)/)
-
-          return array.map((str, index) => {
-            if (str.startsWith('`') && str.endsWith('`')) {
-              return (
-                <Fragment key={index}>
-                  {callback ? callback(str.replace(/`/g, ''), index) : str}
-                </Fragment>
-              )
-            } else {
-              return <Fragment key={index}>{str}</Fragment>
-            }
-          })
+          return renderElement(strOrArray, callback)
         }
       } else {
-        return strOrArray.map((str, index) => {
-          const array = str.split(/(`[^`]+`)/)
-
-          return (
-            <Text key={index} as='span' display='block'>
-              {array.map((str, index) => {
-                if (str.startsWith('`') && str.endsWith('`')) {
-                  return (
-                    <Fragment key={index}>
-                      {callback ? callback(str.replace(/`/g, ''), index) : str}
-                    </Fragment>
-                  )
-                } else {
-                  return <Fragment key={index}>{str}</Fragment>
-                }
-              })}
-            </Text>
-          )
-        })
+        return strOrArray.map((str, index) => (
+          <Text key={index} as='span' display='block'>
+            {renderElement(str, callback)}
+          </Text>
+        ))
       }
     },
-    [i18n],
+    [locale],
   )
 
-  const value = useMemo(() => ({ i18n, t, tc, changeI18n }), [changeI18n, t, tc, i18n])
+  const value = useMemo(() => ({ locale, t, tc, changeLocale }), [changeLocale, locale, t, tc])
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
+}
+
+const renderElement = (str: string, callback?: (str: string, index: number) => JSX.Element) => {
+  const array = str.split(/(`[^`]+`)/)
+
+  return array.map((str, index) => {
+    if (str.startsWith('`') && str.endsWith('`')) {
+      return (
+        <Fragment key={index}>{callback ? callback(str.replace(/`/g, ''), index) : str}</Fragment>
+      )
+    } else {
+      return <Fragment key={index}>{str}</Fragment>
+    }
+  })
 }
 
 export const useI18n = () => {

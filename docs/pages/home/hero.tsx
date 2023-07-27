@@ -1,9 +1,9 @@
 import { Button, HStack, Text, VStack } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { Arrow, Github, Section } from '@/components'
-import { CONSTANT } from '@/constant'
-import { useI18n } from '@/contexts'
+import { Arrow, Github, Section } from 'components'
+import { CONSTANT } from 'constant'
+import { useI18n } from 'contexts'
 
 export const Hero: FC = () => {
   const { tc } = useI18n()

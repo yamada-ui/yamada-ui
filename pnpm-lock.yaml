@@ -2380,7 +2380,7 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@yamada-ui/react':
-        specifier: workspace:*
+        specifier: '>=0.5.0'
         version: link:../react
       '@yamada-ui/utils':
         specifier: workspace:*
@@ -5046,6 +5046,7 @@ packages:
 
   /@emotion/memoize@0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
     optional: true
 
   /@emotion/memoize@0.8.1:

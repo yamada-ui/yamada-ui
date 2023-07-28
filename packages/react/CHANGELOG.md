@@ -1,5 +1,17 @@
 # @yamada-ui/react
 
+## 0.5.18
+
+### Patch Changes
+
+- Updated dependencies [[`5566113b`](https://github.com/hirotomoyamada/yamada-ui/commit/5566113b8f4bc6d9a988ea8442cfbd659f263066), [`5566113b`](https://github.com/hirotomoyamada/yamada-ui/commit/5566113b8f4bc6d9a988ea8442cfbd659f263066)]:
+  - @yamada-ui/use-popper@0.3.0
+  - @yamada-ui/popover@0.2.14
+  - @yamada-ui/tooltip@0.2.14
+  - @yamada-ui/autocomplete@0.2.15
+  - @yamada-ui/menu@0.2.15
+  - @yamada-ui/select@0.2.15
+
 ## 0.5.17
 
 ### Patch Changes

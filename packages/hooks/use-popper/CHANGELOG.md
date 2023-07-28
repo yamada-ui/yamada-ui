@@ -1,5 +1,11 @@
 # @yamada-ui/use-popper
 
+## 0.3.0
+
+### Minor Changes
+
+- [`5566113b`](https://github.com/hirotomoyamada/yamada-ui/commit/5566113b8f4bc6d9a988ea8442cfbd659f263066) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
 ## 0.2.10
 
 ### Patch Changes

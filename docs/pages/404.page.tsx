@@ -1,5 +1,5 @@
 import { Button, Text, VStack } from '@yamada-ui/react'
-import { NextPageWithLayout } from 'next'
+import { NextPage } from 'next'
 
 import Link from 'next/link'
 import { SEO, Section } from 'components'
@@ -8,11 +8,11 @@ import { TopLayout } from 'layouts'
 
 type NotFoundPageProps = {}
 
-const NotFoundPage: NextPageWithLayout<NotFoundPageProps> = ({}) => {
+const NotFoundPage: NextPage<NotFoundPageProps> = ({}) => {
   const { tc } = useI18n()
 
   return (
-    <>
+    <TopLayout>
       <SEO
         title={tc('not-found.title') as string}
         description={tc('not-found.description') as string}
@@ -39,10 +39,8 @@ const NotFoundPage: NextPageWithLayout<NotFoundPageProps> = ({}) => {
           {tc('not-found.back-to-home')}
         </Button>
       </Section>
-    </>
+    </TopLayout>
   )
 }
-
-NotFoundPage.getLayout = (page) => <TopLayout>{page}</TopLayout>
 
 export default NotFoundPage

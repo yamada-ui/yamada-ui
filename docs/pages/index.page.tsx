@@ -1,5 +1,5 @@
 import { Button, HStack, Text, VStack } from '@yamada-ui/react'
-import { NextPageWithLayout } from 'next'
+import { NextPage } from 'next'
 import Link from 'next/link'
 import { SEO, Arrow, Github, Section } from 'components'
 import { CONSTANT } from 'constant'
@@ -8,11 +8,11 @@ import { TopLayout } from 'layouts'
 
 type PageProps = {}
 
-const Page: NextPageWithLayout<PageProps> = ({}) => {
+const Page: NextPage<PageProps> = ({}) => {
   const { t, tc } = useI18n()
 
   return (
-    <>
+    <TopLayout>
       <SEO title={t('home.title')} description={t('home.description')} />
 
       <Section>
@@ -66,10 +66,8 @@ const Page: NextPageWithLayout<PageProps> = ({}) => {
           </Button>
         </HStack>
       </Section>
-    </>
+    </TopLayout>
   )
 }
-
-Page.getLayout = (page) => <TopLayout>{page}</TopLayout>
 
 export default Page

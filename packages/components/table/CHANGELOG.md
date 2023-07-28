@@ -1,5 +1,21 @@
 # @yamada-ui/table
 
+## 0.2.15
+
+### Patch Changes
+
+- [`b2577425`](https://github.com/hirotomoyamada/yamada-ui/commit/b25774256a68ba4ba23aee82a3085b99a59c23a0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [`09d887fa`](https://github.com/hirotomoyamada/yamada-ui/commit/09d887fafea4a8dc78250c9bcf16b8069a73a76d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added export CellContext, RowData.
+
+- Updated dependencies [[`2fe9c1a1`](https://github.com/hirotomoyamada/yamada-ui/commit/2fe9c1a128418f555b0bce492bdcf1b6f3598621), [`9b5f4f9f`](https://github.com/hirotomoyamada/yamada-ui/commit/9b5f4f9ffb7a946cee70c69635e85c6e23f17eb7)]:
+  - @yamada-ui/core@0.6.0
+  - @yamada-ui/checkbox@0.2.11
+  - @yamada-ui/icon@0.2.10
+  - @yamada-ui/native-table@0.2.10
+  - @yamada-ui/pagination@0.2.10
+  - @yamada-ui/select@0.2.14
+
 ## 0.2.14
 
 ### Patch Changes

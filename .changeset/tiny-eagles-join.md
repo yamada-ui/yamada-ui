@@ -2,4 +2,4 @@
 '@yamada-ui/table': patch
 ---
 
-Added export CellContext.
+Added export CellContext, RowData.

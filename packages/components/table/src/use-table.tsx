@@ -32,7 +32,13 @@ import {
 import { CSSProperties, useCallback, useMemo } from 'react'
 
 export { flexRender as render, createColumnHelper } from '@tanstack/react-table'
-export type { SortDirection, Row, Cell, RowData } from '@tanstack/react-table'
+export type {
+  SortDirection,
+  Row,
+  Cell,
+  CellContext,
+  RowData,
+} from '@tanstack/react-table'
 
 export type TableContext = Omit<UseTableReturn, 'getTableProps'>
 
@@ -66,6 +72,8 @@ export type Sort<Y extends RowData> = ColumnSort<Y>[]
 export type UseTableOptions<Y extends RowData> = PartialKeys<
   Omit<
     CoreOptions<Y>,
+    | 'columns'
+    | 'defaultColumn'
     | 'getCoreRowModel'
     | 'state'
     | 'initialState'
@@ -99,6 +107,14 @@ type CellProps<Y extends RowData> =
 
 export type UseTableProps<Y extends RowData> = TableProps &
   UseTableOptions<Y> & {
+    /**
+     * The array of column defs to use for the table.
+     */
+    columns: Column<Y, unknown>[]
+    /**
+     * Default column options to use for all column defs supplied to the table.
+     */
+    defaultColumn?: Partial<Column<Y, unknown>>
     /**
      * The id used to store the value when selected.
      */

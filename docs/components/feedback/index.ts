@@ -1,1 +1,1 @@
-export * from './ad-banner'
+export * from './star-banner'

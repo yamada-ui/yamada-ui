@@ -248,11 +248,11 @@ export const Popover: FC<PopoverProps> = (props) => {
         ref: mergeRefs(popoverRef, ref),
         children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
-        onKeyDown: handlerAll(props.onKeyDown, (event) => {
-          if (closeOnEsc && event.key === 'Escape') onClose()
+        onKeyDown: handlerAll(props.onKeyDown, (ev) => {
+          if (closeOnEsc && ev.key === 'Escape') onClose()
         }),
-        onBlur: handlerAll(props.onBlur, (event) => {
-          const relatedTarget = getEventRelatedTarget(event)
+        onBlur: handlerAll(props.onBlur, (ev) => {
+          const relatedTarget = getEventRelatedTarget(ev)
           const targetIsPopover = isContains(popoverRef.current, relatedTarget)
           const targetIsTrigger = isContains(triggerRef.current, relatedTarget)
 
@@ -267,8 +267,8 @@ export const Popover: FC<PopoverProps> = (props) => {
           isHoveringRef.current = true
         })
 
-        popoverProps.onMouseLeave = handlerAll(props.onMouseLeave, (event) => {
-          if (event.nativeEvent.relatedTarget === null) return
+        popoverProps.onMouseLeave = handlerAll(props.onMouseLeave, (ev) => {
+          if (ev.nativeEvent.relatedTarget === null) return
 
           isHoveringRef.current = false
           setTimeout(onClose, closeDelay)
@@ -303,23 +303,30 @@ export const Popover: FC<PopoverProps> = (props) => {
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
       }
 
-      if (trigger === 'click')
+      if (trigger === 'click') {
         triggerProps.onClick = handlerAll(props.onClick, onToggle)
+        triggerProps.onBlur = handlerAll(props.onBlur, (ev) => {
+          const relatedTarget = getEventRelatedTarget(ev)
+          const isValidBlur = !isContains(popoverRef.current, relatedTarget)
+
+          if (isOpen && closeOnBlur && isValidBlur) onClose()
+        })
+      }
 
       if (trigger === 'hover') {
         triggerProps.onFocus = handlerAll(props.onFocus, () => {
           if (openTimeout.current === undefined) onOpen()
         })
 
-        triggerProps.onBlur = handlerAll(props.onBlur, (event) => {
-          const relatedTarget = getEventRelatedTarget(event)
+        triggerProps.onBlur = handlerAll(props.onBlur, (ev) => {
+          const relatedTarget = getEventRelatedTarget(ev)
           const isValidBlur = !isContains(popoverRef.current, relatedTarget)
 
           if (isOpen && closeOnBlur && isValidBlur) onClose()
         })
 
-        triggerProps.onKeyDown = handlerAll(props.onKeyDown, (event) => {
-          if (event.key === 'Escape') onClose()
+        triggerProps.onKeyDown = handlerAll(props.onKeyDown, (ev) => {
+          if (ev.key === 'Escape') onClose()
         })
 
         triggerProps.onMouseEnter = handlerAll(props.onMouseEnter, () => {

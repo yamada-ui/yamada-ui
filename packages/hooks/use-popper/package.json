@@ -36,7 +36,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
-    "@popperjs/core": "^2.9.3"
+    "@popperjs/core": "^2.11.8"
   },
   "devDependencies": {
     "react": "^18.0.0",

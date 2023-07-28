@@ -2249,8 +2249,8 @@ importers:
   packages/hooks/use-popper:
     dependencies:
       '@popperjs/core':
-        specifier: ^2.9.3
-        version: 2.9.3
+        specifier: ^2.11.8
+        version: 2.11.8
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
@@ -6770,8 +6770,8 @@ packages:
       write-yaml-file: 4.2.0
     dev: false
 
-  /@popperjs/core@2.9.3:
-    resolution: {integrity: sha512-xDu17cEfh7Kid/d95kB6tZsLOmSWKCZKtprnhVepjsSaCij+lM3mItSJDuuHDMbCWTh8Ejmebwb+KONcCJ0eXQ==}
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
   /@rollup/plugin-babel@5.3.1(@babel/core@7.22.9)(rollup@2.79.1):

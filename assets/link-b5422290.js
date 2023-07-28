@@ -1,2 +1,0 @@
-import{j as i}from"./jsx-runtime-276775ef.js";import{f as n}from"./forward-ref-86842115.js";import{u as p}from"./use-component-style-9ee8741d.js";import{o as c}from"./theme-8f32df8a.js";import{d as f,e as l}from"./factory-75cc801c.js";const _=n((s,r)=>{const[e,t]=p("Link",s),{className:a,isExternal:o,...m}=c(t);return i(f.a,{ref:r,target:o?"_blank":void 0,rel:o?"noopener":void 0,className:l("ui-link",a),__css:e,...m})});export{_ as L};
-//# sourceMappingURL=link-b5422290.js.map

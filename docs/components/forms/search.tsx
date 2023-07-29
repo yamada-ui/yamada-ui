@@ -10,16 +10,35 @@ import {
   handlerAll,
   useDisclosure,
 } from '@yamada-ui/react'
-import { memo } from 'react'
+import { useRouter } from 'next/router'
+import { memo, useEffect } from 'react'
 import { MagnifyingGlass } from '../media-and-icons'
 import { useI18n } from 'contexts'
+import { useEventListener } from 'hooks'
 
 export type SearchProps = StackProps & {}
 
 export const Search = memo(
   forwardRef<SearchProps, 'button'>(({ ...rest }, ref) => {
+    const router = useRouter()
     const { t, tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    useEffect(() => {
+      router.events.on('routeChangeComplete', onClose)
+
+      return () => {
+        router.events.off('routeChangeComplete', onClose)
+      }
+    }, [onClose, router])
+
+    useEventListener('keydown', (ev) => {
+      if (ev.key !== '/' || isOpen) return
+
+      ev.preventDefault()
+
+      onOpen()
+    })
 
     return (
       <>

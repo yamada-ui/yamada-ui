@@ -8,6 +8,11 @@ export const customTheme = {
   styles: { globalStyle, resetStyle, layerStyles, textStyles },
   components,
   ...tokens,
+  semantics: {
+    colors: {
+      muted: ['blackAlpha.700', 'whiteAlpha.700'],
+    },
+  },
 }
 
 export const theme = extendTheme(customTheme)()

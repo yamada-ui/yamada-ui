@@ -3,12 +3,12 @@ import remarkEmoji from 'remark-emoji'
 import remarkGfm from 'remark-gfm'
 import remarkSlug from 'remark-slug'
 import { CONSTANT } from './constant'
-import { getTableOfContents, rehypeMdxCodeMeta } from './utils'
+import { omitLocaleSlug, getTableOfContents, rehypeMdxCodeMeta, getLocale } from './utils'
 
 const computedFields: ComputedFields = {
   slug: {
     type: 'string',
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: ({ _raw }) => `/${omitLocaleSlug(_raw.flattenedPath)}`,
   },
 }
 
@@ -20,7 +20,9 @@ const GettingStarted = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     description: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' } },
-    author: { type: 'string' },
+    name: { type: 'string' },
+    dir: { type: 'string' },
+    hidden: { type: 'boolean', default: false },
     category: { type: 'string' },
   },
   computedFields: {
@@ -29,7 +31,33 @@ const GettingStarted = defineDocumentType(() => ({
       type: 'json',
       resolve: ({ _id, _raw, body, ...rest }) => ({
         ...rest,
-        slug: `/${_raw.flattenedPath}`,
+        locale: getLocale(_raw.flattenedPath),
+        slug: omitLocaleSlug(_raw.flattenedPath),
+        editUrl: `${CONSTANT.SNS.GITHUB.EDIT_URL}/${_id}`,
+        headings: getTableOfContents(body.raw),
+      }),
+    },
+  },
+}))
+
+const StyledSystem = defineDocumentType(() => ({
+  name: 'StyledSystem',
+  filePathPattern: 'styled-system/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    description: { type: 'string', required: true },
+    tags: { type: 'list', of: { type: 'string' } },
+    category: { type: 'string' },
+  },
+  computedFields: {
+    ...computedFields,
+    frontMatter: {
+      type: 'json',
+      resolve: ({ _id, _raw, body, ...rest }) => ({
+        ...rest,
+        locale: getLocale(_raw.flattenedPath),
+        slug: omitLocaleSlug(_raw.flattenedPath),
         editUrl: `${CONSTANT.SNS.GITHUB.EDIT_URL}/${_id}`,
         headings: getTableOfContents(body.raw),
       }),
@@ -39,7 +67,7 @@ const GettingStarted = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'contents',
-  documentTypes: [GettingStarted],
+  documentTypes: [GettingStarted, StyledSystem],
   mdx: {
     rehypePlugins: [rehypeMdxCodeMeta],
     remarkPlugins: [remarkSlug, remarkGfm, remarkEmoji],

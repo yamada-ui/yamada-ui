@@ -1,28 +1,11 @@
+import { Center, HStack } from '@yamada-ui/react'
 import { FC, PropsWithChildren } from 'react'
-import { StarBanner, Header, SEO } from 'components'
-
-export type FrontmatterHeading = {
-  level: string | number
-  text: string
-  id: string
-}
-
-export type Frontmatter = {
-  slug?: string
-  title: string
-  description?: string
-  editUrl?: string
-  version?: string
-  headings?: FrontmatterHeading[]
-  publishedDate?: Date
-  authorData?: any
-}
+import { StarBanner, Header, SEO, Sidebar } from 'components'
+import { Frontmatter } from 'contentlayer/generated'
 
 export type DocLayoutProps = PropsWithChildren<Frontmatter>
 
-export const DocLayout: FC<DocLayoutProps> = ({ title, description, children, ...rest }) => {
-  console.log(rest)
-
+export const DocLayout: FC<DocLayoutProps> = ({ title, description, children }) => {
   return (
     <>
       <SEO title={title} description={description} />
@@ -31,7 +14,13 @@ export const DocLayout: FC<DocLayoutProps> = ({ title, description, children, ..
 
       <Header />
 
-      {children}
+      <Center as='main'>
+        <HStack w='full' maxW='9xl' gap='md' px='md'>
+          <Sidebar />
+
+          {children}
+        </HStack>
+      </Center>
     </>
   )
 }

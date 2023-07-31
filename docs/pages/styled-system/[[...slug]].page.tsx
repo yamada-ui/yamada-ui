@@ -1,12 +1,12 @@
 import { GetStaticPaths, NextPage, InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { GettingStarted, allGettingStarteds } from 'contentlayer/generated'
+import { StyledSystem, allStyledSystems } from 'contentlayer/generated'
 import { DocLayout } from 'layouts'
 import { otherLocales, toArray } from 'utils'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const ROOT = 'getting-started'
+const ROOT = 'styled-system'
 const EXT = 'mdx'
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
@@ -24,7 +24,7 @@ export default Page
 
 export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales }) => {
   const paths = locales.flatMap((locale) =>
-    allGettingStarteds
+    allStyledSystems
       .filter(({ _id }) => {
         if (locale === defaultLocale) {
           const isContains = new RegExp(`\.${OTHER_LOCALES}\.${EXT}$`).test(_id)
@@ -50,7 +50,7 @@ export const getStaticProps = async ({ params, locale, defaultLocale }: GetStati
   const paths = toArray(params.slug)
   const computedExt = `${locale !== defaultLocale ? `${locale}.` : ''}${EXT}`
 
-  const doc: GettingStarted = allGettingStarteds.find(({ _id }) => {
+  const doc: StyledSystem = allStyledSystems.find(({ _id }) => {
     if (paths.length === 0) {
       return _id === ROOT + `/index.${computedExt}`
     } else {

@@ -20,17 +20,17 @@ export type SearchProps = StackProps & {}
 
 export const Search = memo(
   forwardRef<SearchProps, 'button'>(({ ...rest }, ref) => {
-    const router = useRouter()
+    const { events } = useRouter()
     const { t, tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     useEffect(() => {
-      router.events.on('routeChangeComplete', onClose)
+      events.on('routeChangeComplete', onClose)
 
       return () => {
-        router.events.off('routeChangeComplete', onClose)
+        events.off('routeChangeComplete', onClose)
       }
-    }, [onClose, router])
+    }, [onClose, events])
 
     useEventListener('keydown', (ev) => {
       if (ev.key !== '/' || isOpen) return

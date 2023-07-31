@@ -45,14 +45,13 @@ const I18nContext = createContext<I18nContext>({
 export type I18nProviderProps = PropsWithChildren
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
-  const router = useRouter()
-  const locale = router.locale as Locale
+  const { locale, pathname, asPath, push } = useRouter()
 
   const changeLocale = useCallback(
     (locale: Locale & StringLiteral) => {
-      router.push(router.pathname, router.asPath, { locale })
+      push(pathname, asPath, { locale })
     },
-    [router],
+    [push, pathname, asPath],
   )
 
   const t = useCallback(
@@ -83,7 +82,10 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     [locale],
   )
 
-  const value = useMemo(() => ({ locale, t, tc, changeLocale }), [changeLocale, locale, t, tc])
+  const value = useMemo(
+    () => ({ locale: locale as Locale, t, tc, changeLocale }),
+    [changeLocale, locale, t, tc],
+  )
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }

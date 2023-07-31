@@ -1,6 +1,9 @@
 import GithubSlugger from 'github-slugger'
 import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
+import { otherLocales } from './i18n'
+
+const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
 export const rehypeMdxCodeMeta: Plugin = () => (tree) => {
   visit(tree, 'element', (node: any) => {
@@ -37,4 +40,20 @@ export const getTableOfContents = (raw: string) => {
   }
 
   return tableOfContents
+}
+
+export const omitLocaleSlug = (path: string): string => {
+  const reg = new RegExp(`\(/index\)?.${OTHER_LOCALES}$`)
+
+  path = path.replace(reg, '')
+
+  return path
+}
+
+export const getLocale = (path: string): string => {
+  let locale = path.match(/(\.[^\.]*)$/)?.[1]
+
+  locale = locale?.replace(/\./, '')
+
+  return locale ?? 'en'
 }

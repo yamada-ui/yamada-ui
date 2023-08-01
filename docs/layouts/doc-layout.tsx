@@ -8,6 +8,7 @@ import {
   Center,
   ChevronIcon,
   HStack,
+  Heading,
   Text,
   VStack,
 } from '@yamada-ui/react'
@@ -53,7 +54,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
         <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px='md'>
           <Sidebar tree={tree} />
 
-          <VStack>
+          <VStack gap='0'>
             {breadcrumbs.length ? (
               <Breadcrumb
                 separator={<ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />}
@@ -77,6 +78,8 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 ))}
               </Breadcrumb>
             ) : null}
+
+            <Heading as='h1'>{title}</Heading>
 
             {children}
 

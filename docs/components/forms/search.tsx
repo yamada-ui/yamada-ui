@@ -53,6 +53,7 @@ export const Search = memo(
           outline='0'
           border='1px solid'
           borderColor={[`gray.200`, `whiteAlpha.300`]}
+          bg={['white', 'black']}
           rounded='md'
           gap='sm'
           color={['gray.500', 'whiteAlpha.500']}

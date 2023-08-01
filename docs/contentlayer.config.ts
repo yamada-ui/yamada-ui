@@ -89,6 +89,7 @@ const Doc = defineDocumentType(() => ({
       default: 'usage',
     },
     version: { type: 'string' },
+    package: { type: 'string' },
   },
   computedFields: {
     ...computedFields,

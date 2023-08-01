@@ -35,6 +35,13 @@
         "placeholder": "ドキュメントを検索する"
       }
     },
+    "pagination": { "prev": "前", "next": "次" },
+    "table-of-contents": {
+      "title": "このページでは"
+    },
+    "edit-page": {
+      "label": "GitHubでこのページを編集する"
+    },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"
     }

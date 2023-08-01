@@ -31,6 +31,13 @@
         "placeholder": "Search the docs"
       }
     },
+    "pagination": { "prev": "Previous", "next": "Next" },
+    "table-of-contents": {
+      "title": "On this page"
+    },
+    "edit-page": {
+      "label": "Edit this page on GitHub"
+    },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"
     }

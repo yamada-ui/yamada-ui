@@ -3,6 +3,8 @@ import type { Doc } from 'contentlayer/generated'
 declare module 'contentlayer/generated' {
   type Content = { id: string; lv: 1 | 2 | 3; title: string }
 
+  type DocPagination = { prev?: Doc | null; next?: Doc | null }
+
   type Data = {
     title: string
     locale: string
@@ -12,8 +14,6 @@ declare module 'contentlayer/generated' {
     editUrl?: string
     version?: string
     contents?: Content[]
-    publishedDate?: Date
-    authorData?: any
   }
 
   type DocWithChildren = Doc & { children: DocWithChildren[] }

@@ -6,14 +6,24 @@ import remarkSlug from 'remark-slug'
 import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { CONSTANT } from './constant'
-import { omitLocaleSlug, getLocale } from './utils'
-import { Doc } from 'contentlayer/generated'
+import { otherLocales } from './utils/i18n'
 
-const computedFields: ComputedFields = {
-  slug: {
-    type: 'string',
-    resolve: ({ _raw }) => `/docs/${omitLocaleSlug(_raw.flattenedPath)}`,
-  },
+const OTHER_LOCALES = `(${otherLocales.join('|')})`
+
+const omitLocaleSlug = (path: string): string => {
+  const reg = new RegExp(`\(/index\)?.${OTHER_LOCALES}$`)
+
+  path = path.replace(reg, '')
+
+  return path
+}
+
+const getLocale = (path: string): string => {
+  let locale = path.match(/(\.[^\.]*)$/)?.[1]
+
+  locale = locale?.replace(/\./, '')
+
+  return locale ?? 'en'
 }
 
 const rehypeMdxCodeMeta: Plugin = () => (tree) => {
@@ -50,29 +60,46 @@ export const getTableOfContents = (raw: string) => {
   })
 }
 
+const computedFields: ComputedFields = {
+  slug: {
+    type: 'string',
+    resolve: ({ _raw }) => `/docs/${omitLocaleSlug(_raw.flattenedPath)}`,
+  },
+}
+
 const Doc = defineDocumentType(() => ({
   name: 'Doc',
   filePathPattern: '**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    menu: { type: 'string' },
     description: { type: 'string', required: true },
+    order: { type: 'number', default: 530000 },
+    label: {
+      type: 'enum',
+      options: ['New', 'Considering', 'Planned', 'Experimental'],
+    },
     tags: { type: 'list', of: { type: 'string' } },
-    name: { type: 'string' },
-    dir: { type: 'string' },
-    hidden: { type: 'boolean', default: false },
-    category: { type: 'string' },
+    is_active: { type: 'boolean', default: true },
+    with_children: { type: 'boolean', default: false },
+    scope: {
+      type: 'enum',
+      options: ['usage', 'theming', 'props'],
+      default: 'usage',
+    },
+    version: { type: 'string' },
   },
   computedFields: {
     ...computedFields,
     data: {
       type: 'json',
       resolve: async ({ _id, _raw, title, body, ...rest }) => ({
-        title,
         ...rest,
+        title,
         locale: getLocale(_raw.flattenedPath),
         paths: omitLocaleSlug(_raw.flattenedPath).split('/'),
-        editUrl: `docs/${CONSTANT.SNS.GITHUB.EDIT_URL}/${_id}`,
+        editUrl: `${CONSTANT.SNS.GITHUB.EDIT_URL}/${_id}`,
         contents: getTableOfContents(body.raw),
       }),
     },

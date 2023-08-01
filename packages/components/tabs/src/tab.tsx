@@ -35,11 +35,9 @@ export const Tab = forwardRef<TabProps, 'button'>(
     const onClick = () => setSelectedIndex(index)
 
     const onFocus = () => {
-      if (isDisabled) return
-
       setFocusedIndex(index)
 
-      if (!isManual && !isFocusable) setSelectedIndex(index)
+      if (!isManual && !(isDisabled && isFocusable)) setSelectedIndex(index)
     }
 
     const rest = useClickable({
@@ -63,12 +61,13 @@ export const Tab = forwardRef<TabProps, 'button'>(
       <ui.button
         className={cx('ui-tabs-tab', className)}
         __css={css}
+        role='tab'
         {...props}
         {...rest}
         type='button'
         tabIndex={isSelected ? 0 : -1}
         aria-selected={ariaAttr(isSelected)}
-        onFocus={handlerAll(props.onFocus, onFocus)}
+        onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}
       />
     )
   },

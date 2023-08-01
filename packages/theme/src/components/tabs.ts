@@ -58,12 +58,6 @@ export const Tabs: ComponentMultiStyle = {
             )(c),
             borderColor: 'currentColor',
           },
-          _active: {
-            bg: ['gray.200', 'whiteAlpha.300'],
-          },
-          _disabled: {
-            _active: { bg: 'none' },
-          },
           ...(isVertical
             ? {
                 borderEndWidth: '1px',

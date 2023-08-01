@@ -29,6 +29,7 @@ export const TabPanel = forwardRef<TabPanelProps, 'div'>(
       <ui.div
         ref={ref}
         className={cx('ui-tabs-panel', className)}
+        role='tabpanel'
         __css={css}
         {...rest}
         hidden={!isSelected}

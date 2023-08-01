@@ -13,7 +13,7 @@ import {
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC, memo } from 'react'
-import { Doc } from 'contentlayer/generated'
+import { Doc, DocPagination } from 'contentlayer/generated'
 import { useI18n } from 'contexts'
 
 type PaginationItemProps = GridItemProps & { doc?: Doc; isPrev?: boolean }
@@ -65,7 +65,7 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
       >
         {isPrev ? <ChevronIcon transform='rotate(90deg)' fontSize='1.3em' /> : null}
 
-        {doc.title}
+        {doc.menu ?? doc.title}
 
         {!isPrev ? <ChevronIcon transform='rotate(-90deg)' fontSize='1.3em' /> : null}
       </Text>
@@ -75,7 +75,7 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
   )
 }
 
-export type PaginationProps = GridProps & { prev?: Doc; next?: Doc }
+export type PaginationProps = GridProps & DocPagination
 
 export const Pagination = memo(
   forwardRef<PaginationProps, 'div'>(({ prev, next, ...rest }, ref) => {

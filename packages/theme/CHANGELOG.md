@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.4.4
+
+### Patch Changes
+
+- [`28172dc8`](https://github.com/hirotomoyamada/yamada-ui/commit/28172dc8075152ff4f02d5e6740bd5e967650a84) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove unused tab styles.
+
 ## 0.4.3
 
 ### Patch Changes

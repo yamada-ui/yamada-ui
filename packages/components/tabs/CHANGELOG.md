@@ -1,5 +1,11 @@
 # @yamada-ui/tabs
 
+## 0.2.14
+
+### Patch Changes
+
+- [`28172dc8`](https://github.com/hirotomoyamada/yamada-ui/commit/28172dc8075152ff4f02d5e6740bd5e967650a84) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated roles and focus handling.
+
 ## 0.2.13
 
 ### Patch Changes

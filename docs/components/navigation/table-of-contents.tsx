@@ -85,6 +85,7 @@ export const TableOfContents = memo(
                   }}
                   transitionProperty='colors'
                   transitionDuration='normal'
+                  noOfLines={1}
                 >
                   <ListIcon as={ChevronIcon} transform='rotate(-90deg)' fontSize='1.3em' />
                   {title}

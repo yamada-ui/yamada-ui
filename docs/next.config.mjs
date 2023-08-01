@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: false,
   pageExtensions: ['page.jsx', 'page.tsx'],
   experimental: {
-    esmExternals: false,
+    esmExternals: true,
   },
   i18n: {
     defaultLocale: 'en',

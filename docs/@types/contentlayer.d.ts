@@ -1,22 +1,20 @@
-export type * from 'contentlayer/generated'
+import type { Doc } from 'contentlayer/generated'
 
 declare module 'contentlayer/generated' {
-  type FrontmatterHeading = {
-    level: string | number
-    text: string
-    id: string
-  }
+  type Content = { id: string; lv: 1 | 2 | 3; title: string }
 
-  type Frontmatter = {
+  type Data = {
     title: string
     locale: string
-    slug?: string
+    paths: string[]
     description?: string
     category?: string
     editUrl?: string
     version?: string
-    headings?: FrontmatterHeading[]
+    contents?: Content[]
     publishedDate?: Date
     authorData?: any
   }
+
+  type DocWithChildren = Doc & { children: DocWithChildren[] }
 }

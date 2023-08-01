@@ -20,7 +20,7 @@ import {
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, memo } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { DocWithChildren } from 'contentlayer/generated'
 
 type ListItemLinkProps = Pick<
@@ -144,11 +144,21 @@ type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
   ({ title, menu, label, slug, children, isNested }) => {
-    const { asPath } = useRouter()
-
-    const [isOpen, { toggle }] = useBoolean(asPath.startsWith(slug))
-
     if (menu) title = menu
+
+    const { asPath, events } = useRouter()
+
+    const [isOpen, { on, off, toggle }] = useBoolean(asPath.startsWith(slug))
+
+    useEffect(() => {
+      events.on('routeChangeComplete', () => {
+        if (asPath.startsWith(slug)) on()
+      })
+
+      return () => {
+        events.off('routeChangeComplete', off)
+      }
+    }, [asPath, events, off, on, slug])
 
     return (
       <ListItem key={slug}>

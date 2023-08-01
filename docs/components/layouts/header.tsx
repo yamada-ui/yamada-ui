@@ -37,19 +37,22 @@ export const Header = memo(
 
     useMotionValueEvent(scrollY, 'change', setY)
 
+    const isScroll = y > height
+
     return (
       <Center
         ref={mergeRefs(ref, headerRef)}
         as='header'
         w='full'
-        bg={['white', 'black']}
-        shadow={y > height ? ['base', 'dark-sm'] : undefined}
+        backdropFilter='saturate(180%) blur(10px)'
+        shadow={isScroll ? ['base', 'dark-sm'] : undefined}
         transitionProperty='common'
         transitionDuration='slower'
         position='sticky'
         top='0'
         left='0'
         right='0'
+        zIndex='sonGoku'
         {...rest}
       >
         <HStack w='full' maxW='9xl' py='3' px='md'>
@@ -70,18 +73,19 @@ export const Header = memo(
 
           <Spacer />
 
-          <Search display={{ base: 'flex', sm: 'none' }} />
+          <Search
+            display={{ base: 'flex', sm: 'none' }}
+            borderColor={isScroll ? ['white', 'black'] : [`gray.200`, `whiteAlpha.300`]}
+          />
 
           <HStack gap='sm'>
             <IconButton
               as='a'
               href={CONSTANT.SNS.DISCORD}
-              display={{ base: 'inline-flex', md: 'none' }}
-              bg='discord.basic'
-              _hover={{ bg: 'discord.hover' }}
-              _active={{ bg: 'discord.active' }}
-              color='white'
               target='_blank'
+              variant='ghost'
+              display={{ base: 'inline-flex', md: 'none' }}
+              color='muted'
               icon={<Discord />}
             />
 
@@ -89,33 +93,37 @@ export const Header = memo(
               as='a'
               href={CONSTANT.SNS.GITHUB.YAMADA_UI}
               target='_blank'
+              variant='ghost'
               display={{ base: 'inline-flex', md: 'none' }}
-              variant='outline'
+              color='muted'
               icon={<Github />}
             />
 
-            <Menu>
-              <MenuButton
-                as={IconButton}
-                display={{ base: 'inline-flex', md: 'none' }}
-                variant='outline'
-                icon={<Translate />}
-              />
+            {CONSTANT.I18N.LOCALES.length > 1 ? (
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  variant='ghost'
+                  display={{ base: 'inline-flex', md: 'none' }}
+                  color='muted'
+                  icon={<Translate />}
+                />
 
-              <MenuList>
-                <MenuOptionGroup<string> value={locale} onChange={changeLocale} type='radio'>
-                  <MenuOptionItem value='en' closeOnSelect>
-                    English
-                  </MenuOptionItem>
-                  <MenuOptionItem value='ja' closeOnSelect>
-                    日本語
-                  </MenuOptionItem>
-                </MenuOptionGroup>
-              </MenuList>
-            </Menu>
+                <MenuList>
+                  <MenuOptionGroup<string> value={locale} onChange={changeLocale} type='radio'>
+                    {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
+                      <MenuOptionItem key={value} value={value} closeOnSelect>
+                        {label}
+                      </MenuOptionItem>
+                    ))}
+                  </MenuOptionGroup>
+                </MenuList>
+              </Menu>
+            ) : null}
 
             <IconButton
-              variant='outline'
+              variant='ghost'
+              color='muted'
               onClick={toggleScheme}
               icon={colorMode === 'dark' ? <Sun /> : <Moon />}
             />

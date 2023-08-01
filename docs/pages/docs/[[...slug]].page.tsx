@@ -1,20 +1,19 @@
 import { GetStaticPaths, NextPage, InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { StyledSystem, allStyledSystems } from 'contentlayer/generated'
+import { Doc, allDocs } from 'contentlayer/generated'
 import { DocLayout } from 'layouts'
-import { otherLocales, toArray } from 'utils'
+import { getTree, otherLocales, toArray } from 'utils'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const ROOT = 'styled-system'
 const EXT = 'mdx'
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
-const Page: NextPage<PageProps> = ({ body, frontMatter }) => {
+const Page: NextPage<PageProps> = ({ body, data, breadcrumbs, tree, childrenTree }) => {
   const Component = useMDXComponent(body.code)
 
   return (
-    <DocLayout {...frontMatter}>
+    <DocLayout {...{ ...data, breadcrumbs, tree, childrenTree }}>
       <Component />
     </DocLayout>
   )
@@ -24,7 +23,7 @@ export default Page
 
 export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales }) => {
   const paths = locales.flatMap((locale) =>
-    allStyledSystems
+    allDocs
       .filter(({ _id }) => {
         if (locale === defaultLocale) {
           const isContains = new RegExp(`\.${OTHER_LOCALES}\.${EXT}$`).test(_id)
@@ -35,9 +34,9 @@ export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales })
         }
       })
       .map(({ _id }) => {
-        const reg = new RegExp(ROOT + '\\/|' + `\(.${OTHER_LOCALES})?\.` + EXT, 'g')
+        const reg = new RegExp(`\(.${OTHER_LOCALES})?\.` + EXT, 'g')
         const path = _id.replace(reg, '')
-        const params = { slug: path === 'index' ? [] : path.split('/') }
+        const params = { slug: path.split('/').filter((str) => str !== 'index') }
 
         return { params, locale }
       }),
@@ -50,13 +49,30 @@ export const getStaticProps = async ({ params, locale, defaultLocale }: GetStati
   const paths = toArray(params.slug)
   const computedExt = `${locale !== defaultLocale ? `${locale}.` : ''}${EXT}`
 
-  const doc: StyledSystem = allStyledSystems.find(({ _id }) => {
-    if (paths.length === 0) {
-      return _id === ROOT + `/index.${computedExt}`
-    } else {
-      return _id.endsWith(`${paths.join('/')}.${computedExt}`)
-    }
-  })
+  const getDoc = (paths: string[]) =>
+    allDocs.find(({ _id }) => {
+      if (paths.length === 0) {
+        return _id === `index.${computedExt}`
+      } else {
+        return (
+          _id.endsWith(`${paths.join('/')}/index.${computedExt}`) ||
+          _id.endsWith(`${paths.join('/')}.${computedExt}`)
+        )
+      }
+    })
 
-  return { props: { ...doc } }
+  const doc: Doc = getDoc(paths)
+
+  let breadcrumbs: Doc[] = []
+
+  for (let i = 0; i <= paths.length - 1; i++) {
+    breadcrumbs = [...breadcrumbs, getDoc(paths.slice(0, i))]
+  }
+
+  breadcrumbs = breadcrumbs.filter(Boolean)
+
+  const tree = getTree(allDocs)(locale)
+  const childrenTree = getTree(allDocs, paths)(locale)
+
+  return { props: { ...doc, breadcrumbs, tree, childrenTree } }
 }

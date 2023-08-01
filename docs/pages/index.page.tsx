@@ -49,7 +49,7 @@ const Page: NextPage<PageProps> = ({}) => {
             w={{ base: 'auto', md: 'full' }}
             colorScheme='brand'
             rightIcon={<Arrow />}
-            href='/getting-started'
+            href='/docs/getting-started'
           >
             {tc('home.hero.started')}
           </Button>

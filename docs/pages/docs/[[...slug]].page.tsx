@@ -1,5 +1,6 @@
 import { GetStaticPaths, NextPage, InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+import { MDXComponents } from 'components'
 import { Doc, allDocs } from 'contentlayer/generated'
 import { DocLayout } from 'layouts'
 import { flattenArray, getTree, otherLocales, toArray } from 'utils'
@@ -22,7 +23,7 @@ const Page: NextPage<PageProps> = ({
 
   return (
     <DocLayout {...{ ...data, ...rest, breadcrumbs, tree, childrenTree, pagination }}>
-      <Component />
+      <Component components={MDXComponents as any} />
     </DocLayout>
   )
 }

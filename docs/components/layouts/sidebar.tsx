@@ -23,19 +23,16 @@ import { useRouter } from 'next/router'
 import { FC, memo, useEffect } from 'react'
 import { DocWithChildren } from 'contentlayer/generated'
 
-type ListItemLinkProps = Pick<
-  RecursiveListItemProps,
-  'title' | 'label' | 'slug' | 'isNested' | 'children'
-> & { isOpen?: boolean; onToggle?: () => void }
+type ListItemLinkProps = RecursiveListItemProps & { isOpen?: boolean; onToggle?: () => void }
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
-  ({ title, label, slug, isNested, isOpen, onToggle, children }) => {
+  ({ title, label, slug, isNested, isOpen, is_tabs, onToggle, children }) => {
     const { theme } = useTheme()
     const { colorMode } = useColorMode()
     const { asPath } = useRouter()
     const outline = useToken('shadows', 'outline')
 
-    const isActive = asPath === slug
+    const isActive = !is_tabs ? asPath === slug : new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(asPath)
 
     return (
       <HStack
@@ -143,7 +140,7 @@ ListItemLink.displayName = 'ListItemLink'
 type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ title, menu, label, slug, children, isNested }) => {
+  ({ title, menu, slug, children, isNested, ...rest }) => {
     if (menu) title = menu
 
     const { asPath, events } = useRouter()
@@ -162,7 +159,7 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
 
     return (
       <ListItem key={slug}>
-        <ListItemLink {...{ title, slug, label, isNested, isOpen, onToggle: toggle, children }} />
+        <ListItemLink {...{ title, slug, isNested, isOpen, onToggle: toggle, children, ...rest }} />
 
         {children.length ? (
           <Collapse isOpen={!isNested || isOpen}>

@@ -1,13 +1,21 @@
 import { GetStaticPaths, NextPage, InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { MDXComponents } from 'components'
-import { Doc, allDocs } from 'contentlayer/generated'
+import { Data, Doc, allDocs } from 'contentlayer/generated'
 import { DocLayout } from 'layouts'
-import { flattenArray, getTree, otherLocales, toArray } from 'utils'
+import {
+  filterTabDocs,
+  getBreadcrumbs,
+  getDoc,
+  getPagination,
+  getTabs,
+  getTree,
+  otherLocales,
+  toArray,
+} from 'utils'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const EXT = 'mdx'
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
 const Page: NextPage<PageProps> = ({
@@ -15,6 +23,7 @@ const Page: NextPage<PageProps> = ({
   data,
   breadcrumbs,
   tree,
+  tabs,
   childrenTree,
   pagination,
   ...rest
@@ -22,7 +31,7 @@ const Page: NextPage<PageProps> = ({
   const Component = useMDXComponent(body.code)
 
   return (
-    <DocLayout {...{ ...data, ...rest, breadcrumbs, tree, childrenTree, pagination }}>
+    <DocLayout {...{ ...data, ...rest, breadcrumbs, tree, tabs, childrenTree, pagination }}>
       <Component components={MDXComponents as any} />
     </DocLayout>
   )
@@ -31,71 +40,48 @@ const Page: NextPage<PageProps> = ({
 export default Page
 
 export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales }) => {
-  const paths = locales.flatMap((locale) =>
-    allDocs
-      .filter(({ is_active, _id }) => {
-        if (!is_active) return false
+  const docs = locales.flatMap((locale) =>
+    allDocs.filter(({ is_active, _id }) => {
+      if (!is_active) return false
 
-        if (locale === defaultLocale) {
-          const isContains = new RegExp(`\.${OTHER_LOCALES}\.${EXT}$`).test(_id)
+      if (locale === defaultLocale) {
+        const isContains = new RegExp(`\.${OTHER_LOCALES}\.mdx$`).test(_id)
 
-          return !isContains && _id.endsWith(`.${EXT}`)
-        } else {
-          return _id.endsWith(`.${locale}.${EXT}`)
-        }
-      })
-      .map(({ _id }) => {
-        const reg = new RegExp(`\(.${OTHER_LOCALES})?\.` + EXT, 'g')
-        const path = _id.replace(reg, '')
-        const params = { slug: path.split('/').filter((str) => str !== 'index') }
-
-        return { params, locale }
-      }),
+        return !isContains && _id.endsWith('.mdx')
+      } else {
+        return _id.endsWith(`.${locale}.mdx`)
+      }
+    }),
   )
+
+  const paths = docs.map(({ _id, data }) => {
+    const { locale } = data as Data
+    const reg = new RegExp(`\(.${OTHER_LOCALES})?\.mdx$`)
+    const path = _id.replace(reg, '')
+    const params = { slug: path.split('/').filter((str) => str !== 'index') }
+
+    return { params, locale }
+  })
 
   return { paths, fallback: false }
 }
 
-export const getStaticProps = async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
+export const getStaticProps = async ({ params, locale }: GetStaticPropsContext) => {
   const paths = toArray(params.slug)
-  const computedExt = `${locale !== defaultLocale ? `${locale}.` : ''}${EXT}`
 
-  const computedAllDocs = allDocs
+  let docs = allDocs
     .filter(({ is_active, data }) => is_active && data.locale === locale)
-    .sort((a, b) => a.order - b.order)
+    .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
 
-  const getDoc = (paths: string[]) =>
-    computedAllDocs.find(({ _id }) => {
-      if (paths.length === 0) {
-        return _id === `index.${computedExt}`
-      } else {
-        return (
-          _id.endsWith(`${paths.join('/')}/index.${computedExt}`) ||
-          _id.endsWith(`${paths.join('/')}.${computedExt}`)
-        )
-      }
-    })
+  const doc: Doc = getDoc(docs, paths, locale)
+  const [tabs, parentDoc, parentPaths] = getTabs(docs, doc, locale)
 
-  const doc: Doc = getDoc(paths)
+  docs = filterTabDocs(docs)
 
-  let breadcrumbs: Doc[] = []
-  let pagination: { prev?: Doc | null; next?: Doc | null } = {}
+  const tree = getTree(docs)
+  const childrenTree = getTree(docs, paths)
+  const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale)
+  const pagination = getPagination(tree, parentDoc ?? doc)
 
-  const tree = getTree(computedAllDocs)
-  const childrenTree = getTree(computedAllDocs, paths)
-  const flattenTree = flattenArray(tree, 'children')
-
-  for (let i = 0; i <= paths.length - 1; i++) {
-    breadcrumbs = [...breadcrumbs, getDoc(paths.slice(0, i))]
-  }
-
-  for (let i = 0; i < flattenTree.length; i++) {
-    if (flattenTree[i].slug !== doc.slug) continue
-
-    pagination = { prev: flattenTree[i - 1] ?? null, next: flattenTree[i + 1] ?? null }
-  }
-
-  breadcrumbs = breadcrumbs.filter(Boolean)
-
-  return { props: { ...doc, breadcrumbs, tree, childrenTree, pagination } }
+  return { props: { ...doc, breadcrumbs, tree, childrenTree, tabs, pagination } }
 }

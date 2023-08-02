@@ -9,10 +9,13 @@ import {
   ChevronIcon,
   HStack,
   Heading,
+  Tab,
+  Tabs,
   Text,
   VStack,
 } from '@yamada-ui/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FC, PropsWithChildren } from 'react'
 import { StarBanner, Header, SEO, Sidebar, Footer, TableOfContents, Pagination } from 'components'
 import { Data, Doc, DocWithChildren, DocPagination } from 'contentlayer/generated'
@@ -22,6 +25,7 @@ export type DocLayoutProps = PropsWithChildren<
   Doc &
     Data & {
       breadcrumbs: Doc[]
+      tabs: Doc[]
       tree: DocWithChildren[]
       childrenTree: DocWithChildren[]
       pagination: DocPagination
@@ -32,14 +36,18 @@ export const DocLayout: FC<DocLayoutProps> = ({
   title,
   description,
   editUrl,
+  tab,
+  with_description,
   with_children,
   contents,
   tree,
   childrenTree,
+  tabs,
   breadcrumbs,
   pagination,
   children,
 }) => {
+  const { push } = useRouter()
   const { t } = useI18n()
 
   return (
@@ -80,6 +88,22 @@ export const DocLayout: FC<DocLayoutProps> = ({
             ) : null}
 
             <Heading as='h1'>{title}</Heading>
+
+            {with_description ? <Text>{description}</Text> : null}
+
+            {tabs.length ? (
+              <Tabs
+                colorScheme='brand'
+                index={tabs.findIndex((child) => child.tab === tab)}
+                mt='lg'
+              >
+                {tabs.map(({ tab, menu, title, slug }) => (
+                  <Tab key='slug' onClick={() => push(slug)}>
+                    {tab ?? menu ?? title}
+                  </Tab>
+                ))}
+              </Tabs>
+            ) : null}
 
             {children}
 

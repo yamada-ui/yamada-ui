@@ -74,6 +74,7 @@ const Doc = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     menu: { type: 'string' },
+    tab: { type: 'string' },
     description: { type: 'string', required: true },
     order: { type: 'number', default: 530000 },
     label: {
@@ -82,12 +83,9 @@ const Doc = defineDocumentType(() => ({
     },
     tags: { type: 'list', of: { type: 'string' } },
     is_active: { type: 'boolean', default: true },
+    is_tabs: { type: 'boolean', default: false },
     with_children: { type: 'boolean', default: false },
-    scope: {
-      type: 'enum',
-      options: ['usage', 'theming', 'props'],
-      default: 'usage',
-    },
+    with_description: { type: 'boolean', default: false },
     version: { type: 'string' },
     package: { type: 'string' },
   },

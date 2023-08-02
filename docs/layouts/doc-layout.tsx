@@ -73,7 +73,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
               >
                 {breadcrumbs.map(({ title, menu, slug }, index) => (
                   <BreadcrumbItem key={slug}>
-                    <BreadcrumbLink as={Link} href={slug} rounded='md'>
+                    <BreadcrumbLink as={Link} href={slug}>
                       {menu ?? title}
                     </BreadcrumbLink>
 
@@ -118,7 +118,6 @@ export const DocLayout: FC<DocLayoutProps> = ({
               gap='sm'
               fontSize='sm'
               color='muted'
-              rounded='md'
               _focus={{ outline: 'none' }}
               _focusVisible={{ boxShadow: 'outline' }}
               _hover={{ color: ['black', 'white'] }}

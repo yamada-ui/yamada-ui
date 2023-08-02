@@ -1,4 +1,5 @@
 import {
+  Box,
   Center,
   CenterProps,
   HStack,
@@ -56,11 +57,17 @@ export const Header = memo(
         {...rest}
       >
         <HStack w='full' maxW='9xl' py='3' px='md'>
-          <Link href='/'>
+          <Box
+            as={Link}
+            href='/'
+            _focus={{ outline: 'none' }}
+            _focusVisible={{ boxShadow: 'outline' }}
+            rounded='md'
+          >
             <Text as='h1' fontSize='2xl' fontWeight='semibold' whiteSpace='nowrap'>
               Yamada UI
             </Text>
-          </Link>
+          </Box>
 
           <Tag
             display={{ base: 'inline-flex', md: 'none' }}

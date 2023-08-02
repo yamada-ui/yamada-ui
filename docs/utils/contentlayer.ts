@@ -1,4 +1,6 @@
-import { Data, DocWithChildren, Doc } from 'contentlayer/generated'
+import { flattenArray } from './array'
+import { CONSTANT } from 'constant'
+import { Data, DocWithChildren, Doc, DocPagination } from 'contentlayer/generated'
 
 export const getTree = (docs: Doc[], parentPaths: string[] = []): DocWithChildren[] => {
   const lv = parentPaths.length
@@ -19,3 +21,81 @@ export const getTree = (docs: Doc[], parentPaths: string[] = []): DocWithChildre
       children: getTree(docs, doc.data.paths),
     }))
 }
+
+export const getPagination = (tree: DocWithChildren[], target: Doc): DocPagination => {
+  const flattenTree = flattenArray(tree, 'children')
+
+  let pagination: DocPagination = {}
+
+  for (let i = 0; i < flattenTree.length; i++) {
+    if (flattenTree[i].slug !== target.slug) continue
+
+    pagination = { prev: flattenTree[i - 1] ?? null, next: flattenTree[i + 1] ?? null }
+  }
+
+  return pagination
+}
+
+export const getBreadcrumbs = (docs: Doc[], paths: string[], locale: string): Doc[] => {
+  let breadcrumbs: Doc[] = []
+
+  for (let i = 0; i <= paths.length - 1; i++) {
+    breadcrumbs = [...breadcrumbs, getDoc(docs, paths.slice(0, i), locale)]
+  }
+
+  breadcrumbs = breadcrumbs.filter(Boolean)
+
+  return breadcrumbs
+}
+
+export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
+  const ext = `${locale !== CONSTANT.I18N.DEFAULT_LOCALE ? `${locale}.` : ''}mdx`
+
+  return docs.find(({ _id }) => {
+    if (paths.length === 0) {
+      return _id === `index.${ext}`
+    } else {
+      return (
+        _id.endsWith(`${paths.join('/')}/index.${ext}`) || _id.endsWith(`${paths.join('/')}.${ext}`)
+      )
+    }
+  })
+}
+
+const isTabsMap = new Set<string>()
+
+export const getTabs = (
+  docs: Doc[],
+  doc: Doc,
+  locale: string,
+): [Doc[], Doc | undefined, string[] | undefined] => {
+  const { is_tabs, slug } = doc
+
+  let tabs: Doc[] = []
+  let parentDoc: Doc | undefined
+  let parentPaths: string[] | undefined
+
+  if (is_tabs) {
+    isTabsMap.add(slug)
+
+    tabs = docs.filter((doc) => new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(doc.slug))
+  } else {
+    const parentSlug = Array.from(isTabsMap).find((parentSlug) => slug.startsWith(parentSlug))
+
+    if (parentSlug) {
+      parentPaths = parentSlug.split('/').slice(2)
+      parentDoc = getDoc(docs, parentPaths, locale)
+      tabs = docs.filter(({ slug }) => new RegExp(`^${parentSlug}($|\\/[^\\/]+$)`).test(slug))
+    }
+  }
+
+  return [tabs, parentDoc, parentPaths]
+}
+
+export const filterTabDocs = (docs: Doc[]): Doc[] =>
+  docs.filter(
+    ({ slug }) =>
+      !Array.from(isTabsMap).some((parentSlug) =>
+        new RegExp(`^${parentSlug}\\/[^\\/]+$`).test(slug),
+      ),
+  )

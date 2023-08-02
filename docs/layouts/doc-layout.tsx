@@ -110,8 +110,9 @@ export const DocLayout: FC<DocLayoutProps> = ({
             {with_children && childrenTree.length ? <></> : null}
 
             <HStack
-              as={Link}
+              as='a'
               href={editUrl}
+              target='_blank'
               mt='lg'
               alignSelf='flex-start'
               gap='sm'

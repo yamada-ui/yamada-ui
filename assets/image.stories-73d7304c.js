@@ -1,0 +1,6 @@
+import{j as m}from"./jsx-runtime-37f7df21.js";import{I as t}from"./image-63a1cd33.js";import"./index-f1f2c4b1.js";import"./use-image-ae86c285.js";import"./factory-81c6291d.js";import"./extends-3d932e16.js";import"./forward-ref-92ccee95.js";const b={title:"Components / Media And Icons / Image",component:t},o=()=>m(t,{src:"https://dragon-ball-official.com/assets/img/intro/intro_1.png",size:"xl"}),r=()=>m(t,{src:"https://not-found.com/not-found.png",fallback:"https://via.placeholder.com/512",size:"xl"});var a,s,e;o.parameters={...o.parameters,docs:{...(a=o.parameters)==null?void 0:a.docs,source:{originalSource:`() => {
+  return <Image src='https://dragon-ball-official.com/assets/img/intro/intro_1.png' size='xl' />;
+}`,...(e=(s=o.parameters)==null?void 0:s.docs)==null?void 0:e.source}}};var n,c,i;r.parameters={...r.parameters,docs:{...(n=r.parameters)==null?void 0:n.docs,source:{originalSource:`() => {
+  return <Image src='https://not-found.com/not-found.png' fallback='https://via.placeholder.com/512' size='xl' />;
+}`,...(i=(c=r.parameters)==null?void 0:c.docs)==null?void 0:i.source}}};const x=["basic","withFallback"];export{x as __namedExportsOrder,o as basic,b as default,r as withFallback};
+//# sourceMappingURL=image.stories-73d7304c.js.map

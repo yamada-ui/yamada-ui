@@ -5,12 +5,19 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
+  Card,
+  CardBody,
+  CardHeader,
   Center,
   ChevronIcon,
+  Divider,
+  Grid,
+  GridItem,
   HStack,
   Heading,
   Tab,
   Tabs,
+  Tag,
   Text,
   VStack,
 } from '@yamada-ui/react'
@@ -62,14 +69,15 @@ export const DocLayout: FC<DocLayoutProps> = ({
         <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px='md'>
           <Sidebar tree={tree} />
 
-          <VStack gap='0'>
+          <VStack gap='0' py='md'>
             {breadcrumbs.length ? (
               <Breadcrumb
                 separator={<ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />}
-                pt='md'
+                mb='sm'
+                gap='1'
                 fontSize='sm'
                 color='muted'
-                gap='1'
+                listProps={{ h: 6 }}
               >
                 {breadcrumbs.map(({ title, menu, slug }, index) => (
                   <BreadcrumbItem key={slug}>
@@ -89,7 +97,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
 
             <Heading as='h1'>{title}</Heading>
 
-            {with_description ? <Text>{description}</Text> : null}
+            {with_description ? <Text mt='normal'>{description}</Text> : null}
 
             {tabs.length ? (
               <Tabs
@@ -107,7 +115,58 @@ export const DocLayout: FC<DocLayoutProps> = ({
 
             {children}
 
-            {with_children && childrenTree.length ? <></> : null}
+            {with_children && childrenTree.length ? (
+              <>
+                <Divider mt='lg' />
+
+                <Grid templateColumns={{ base: 'repeat(2, 1fr)' }} gap='md' mt='lg'>
+                  {childrenTree.map(({ title, menu, description, label, slug }) => (
+                    <GridItem key={slug}>
+                      <Card
+                        as={Link}
+                        href={slug}
+                        variant='outline'
+                        h='32'
+                        _focus={{ outline: 'none' }}
+                        _focusVisible={{ boxShadow: 'outline' }}
+                        _hover={{ bg: ['blackAlpha.50', 'whiteAlpha.50'] }}
+                        transitionProperty='colors'
+                        transitionDuration='normal'
+                      >
+                        <CardHeader gap='sm'>
+                          <Heading size='md'>{menu ?? title}</Heading>
+
+                          {label ? (
+                            <Tag
+                              size='sm'
+                              colorScheme={
+                                label === 'New'
+                                  ? 'blue'
+                                  : label === 'Experimental'
+                                  ? 'purple'
+                                  : label === 'Planned'
+                                  ? 'orange'
+                                  : 'gray'
+                              }
+                            >
+                              {label}
+                            </Tag>
+                          ) : null}
+                        </CardHeader>
+
+                        <CardBody>
+                          <Text color='muted' noOfLines={2}>
+                            {description}
+                          </Text>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  ))}
+                </Grid>
+
+                <Divider mt='lg' />
+              </>
+            ) : null}
 
             <HStack
               as='a'

@@ -107,7 +107,7 @@ export const Header = memo(
             />
 
             {CONSTANT.I18N.LOCALES.length > 1 ? (
-              <Menu>
+              <Menu placement='bottom-end'>
                 <MenuButton
                   as={IconButton}
                   variant='ghost'

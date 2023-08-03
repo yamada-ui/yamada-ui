@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.6.1
+
+### Patch Changes
+
+- [`4a776fae`](https://github.com/hirotomoyamada/yamada-ui/commit/4a776fae148d66f6b35759f2d83884003891a03a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added apply property.
+
 ## 0.6.0
 
 ### Minor Changes

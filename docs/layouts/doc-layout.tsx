@@ -98,7 +98,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 mt='lg'
               >
                 {tabs.map(({ tab, menu, title, slug }) => (
-                  <Tab key='slug' onClick={() => push(slug)}>
+                  <Tab key={slug} onClick={() => push(slug)}>
                     {tab ?? menu ?? title}
                   </Tab>
                 ))}

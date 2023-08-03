@@ -31,7 +31,7 @@ export const Header = memo(
   forwardRef<HeaderProps, 'div'>(({ ...rest }, ref) => {
     const { locale, changeLocale } = useI18n()
     const headerRef = useRef<HTMLHeadingElement>()
-    const { colorMode, toggleScheme } = useColorMode()
+    const { colorMode, toggleColorMode } = useColorMode()
     const { scrollY } = useScroll()
     const [y, setY] = useState<number>(0)
     const { height = 0 } = headerRef.current?.getBoundingClientRect() ?? {}
@@ -131,7 +131,7 @@ export const Header = memo(
             <IconButton
               variant='ghost'
               color='muted'
-              onClick={toggleScheme}
+              onClick={toggleColorMode}
               icon={colorMode === 'dark' ? <Sun /> : <Moon />}
             />
           </HStack>

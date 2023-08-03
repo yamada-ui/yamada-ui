@@ -329,6 +329,7 @@ export type UsageTheme = {
     resetStyle?: UIStyle
     layerStyles?: LayerStyles
     textStyles?: TextStyles
+    [key: string]: any
   }
   borders?: ThemeTokens
   colors?: ThemeTokens

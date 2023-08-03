@@ -25,15 +25,36 @@ export type UIFactory = {
 
 export type StyledResolverProps = CSSUIObject & {
   theme: StyledTheme<Dict>
+  /**
+   * Used for internal css management.
+   *
+   * @private
+   */
   __css?: CSSUIObject
+  /**
+   * The CSS object that depends on the theme.
+   */
   sx?: CSSUIObject
+  /**
+   * The emotion's css object.
+   */
   css?: CSSObject
 }
 
 export type UIProps = CSSUIProps & {
-  isTruncated?: boolean
+  /**
+   * Used for internal css management.
+   *
+   * @private
+   */
   __css?: CSSUIObject
+  /**
+   * The CSS object that depends on the theme.
+   */
   sx?: CSSUIObject
+  /**
+   * The emotion's css object.
+   */
   css?: Interpolation<{}>
 }
 

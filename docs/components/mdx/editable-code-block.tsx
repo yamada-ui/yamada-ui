@@ -8,6 +8,7 @@ import * as TableComponents from '@yamada-ui/table'
 import { PrismTheme } from 'prism-react-renderer'
 import { FC, useState } from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
+import { CopyButton } from 'components'
 import { useI18n } from 'contexts'
 
 const scope = {
@@ -68,7 +69,7 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, ...rest })
 
         <Box position='absolute' top='2' left='0' right='0' w='full'>
           <Text
-            color='muted'
+            color='whiteAlpha.700'
             fontSize='xs'
             fontWeight='semibold'
             textAlign='center'
@@ -79,6 +80,8 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, ...rest })
             {t('component.editable-code-block.label')}
           </Text>
         </Box>
+
+        <CopyButton value={code} position='absolute' top='1.125rem' right='4' />
       </Box>
 
       <Box

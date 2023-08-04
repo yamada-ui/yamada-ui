@@ -123,14 +123,15 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 <>
                   <Divider mt='xl' />
 
-                  <Grid templateColumns={{ base: 'repeat(2, 1fr)' }} gap='md' mt='xl'>
+                  <Grid templateColumns={{ base: 'repeat(2, 1fr)' }} gap='normal' mt='xl'>
                     {childrenTree.map(({ title, menu, description, label, slug }) => (
                       <GridItem key={slug}>
                         <Card
                           as={Link}
                           href={slug}
                           variant='outline'
-                          h='32'
+                          h='44'
+                          size='normal'
                           _focus={{ outline: 'none' }}
                           _focusVisible={{ boxShadow: 'outline' }}
                           _hover={{ bg: ['blackAlpha.50', 'whiteAlpha.50'] }}
@@ -138,7 +139,9 @@ export const DocLayout: FC<DocLayoutProps> = ({
                           transitionDuration='normal'
                         >
                           <CardHeader gap='sm'>
-                            <Heading size='md'>{menu ?? title}</Heading>
+                            <Heading size='md' noOfLines={1}>
+                              {menu ?? title}
+                            </Heading>
 
                             {label ? (
                               <Tag
@@ -159,7 +162,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                           </CardHeader>
 
                           <CardBody>
-                            <Text color='muted' noOfLines={2}>
+                            <Text color='muted' noOfLines={3}>
                               {description}
                             </Text>
                           </CardBody>

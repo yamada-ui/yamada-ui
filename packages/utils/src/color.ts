@@ -8,6 +8,12 @@ import {
 } from 'color2k'
 import { getMemoizedObject as get, Dict, isArray } from '.'
 
+export const isGray = (colorScheme: string) =>
+  colorScheme === 'gray' ||
+  colorScheme === 'zinc' ||
+  colorScheme === 'neutral' ||
+  colorScheme === 'stone'
+
 export const getColor =
   (color: string, fallback?: string) =>
   (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {

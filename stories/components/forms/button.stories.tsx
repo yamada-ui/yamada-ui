@@ -41,23 +41,45 @@ export const solid: Story = () => {
 
       <Button colorScheme='gray'>Gray</Button>
 
+      <Button colorScheme='zinc'>Zinc</Button>
+
+      <Button colorScheme='neutral'>Neutral</Button>
+
+      <Button colorScheme='stone'>Stone</Button>
+
       <Button colorScheme='red'>Red</Button>
+
+      <Button colorScheme='rose'>Rose</Button>
+
+      <Button colorScheme='pink'>Pink</Button>
 
       <Button colorScheme='orange'>Orange</Button>
 
+      <Button colorScheme='amber'>Amber</Button>
+
       <Button colorScheme='yellow'>Yellow</Button>
+
+      <Button colorScheme='lime'>Lime</Button>
 
       <Button colorScheme='green'>Green</Button>
 
-      <Button colorScheme='teal'>Teal</Button>
+      <Button colorScheme='emerald'>Emerald</Button>
 
-      <Button colorScheme='blue'>Blue</Button>
+      <Button colorScheme='teal'>Teal</Button>
 
       <Button colorScheme='cyan'>Cyan</Button>
 
+      <Button colorScheme='sky'>Sky</Button>
+
+      <Button colorScheme='blue'>Blue</Button>
+
+      <Button colorScheme='indigo'>Indigo</Button>
+
+      <Button colorScheme='violet'>Violet</Button>
+
       <Button colorScheme='purple'>Purple</Button>
 
-      <Button colorScheme='pink'>pink</Button>
+      <Button colorScheme='fuchsia'>Fuchsia</Button>
     </Wrap>
   )
 }
@@ -89,40 +111,194 @@ export const outline: Story = () => {
         Gray
       </Button>
 
+      <Button variant='outline' colorScheme='zinc'>
+        Zinc
+      </Button>
+
+      <Button variant='outline' colorScheme='neutral'>
+        Neutral
+      </Button>
+
+      <Button variant='outline' colorScheme='stone'>
+        Stone
+      </Button>
+
       <Button variant='outline' colorScheme='red'>
         Red
+      </Button>
+
+      <Button variant='outline' colorScheme='rose'>
+        Rose
+      </Button>
+
+      <Button variant='outline' colorScheme='pink'>
+        Pink
       </Button>
 
       <Button variant='outline' colorScheme='orange'>
         Orange
       </Button>
 
+      <Button variant='outline' colorScheme='amber'>
+        Amber
+      </Button>
+
       <Button variant='outline' colorScheme='yellow'>
         Yellow
+      </Button>
+
+      <Button variant='outline' colorScheme='lime'>
+        Lime
       </Button>
 
       <Button variant='outline' colorScheme='green'>
         Green
       </Button>
 
-      <Button variant='outline' colorScheme='teal'>
-        Teal
+      <Button variant='outline' colorScheme='emerald'>
+        Emerald
       </Button>
 
-      <Button variant='outline' colorScheme='blue'>
-        Blue
+      <Button variant='outline' colorScheme='teal'>
+        Teal
       </Button>
 
       <Button variant='outline' colorScheme='cyan'>
         Cyan
       </Button>
 
+      <Button variant='outline' colorScheme='sky'>
+        Sky
+      </Button>
+
+      <Button variant='outline' colorScheme='blue'>
+        Blue
+      </Button>
+
+      <Button variant='outline' colorScheme='indigo'>
+        Indigo
+      </Button>
+
+      <Button variant='outline' colorScheme='violet'>
+        Violet
+      </Button>
+
       <Button variant='outline' colorScheme='purple'>
         Purple
       </Button>
 
-      <Button variant='outline' colorScheme='pink'>
-        pink
+      <Button variant='outline' colorScheme='fuchsia'>
+        Fuchsia
+      </Button>
+    </Wrap>
+  )
+}
+
+export const ghost: Story = () => {
+  return (
+    <Wrap gap='md'>
+      <Button variant='ghost' colorScheme='primary'>
+        Primary
+      </Button>
+
+      <Button variant='ghost' colorScheme='secondary'>
+        Secondary
+      </Button>
+
+      <Button variant='ghost' colorScheme='warning'>
+        Warning
+      </Button>
+
+      <Button variant='ghost' colorScheme='danger'>
+        Danger
+      </Button>
+
+      <Button variant='ghost' colorScheme='link'>
+        Link
+      </Button>
+
+      <Button variant='ghost' colorScheme='gray'>
+        Gray
+      </Button>
+
+      <Button variant='ghost' colorScheme='zinc'>
+        Zinc
+      </Button>
+
+      <Button variant='ghost' colorScheme='neutral'>
+        Neutral
+      </Button>
+
+      <Button variant='ghost' colorScheme='stone'>
+        Stone
+      </Button>
+
+      <Button variant='ghost' colorScheme='red'>
+        Red
+      </Button>
+
+      <Button variant='ghost' colorScheme='rose'>
+        Rose
+      </Button>
+
+      <Button variant='ghost' colorScheme='pink'>
+        Pink
+      </Button>
+
+      <Button variant='ghost' colorScheme='orange'>
+        Orange
+      </Button>
+
+      <Button variant='ghost' colorScheme='amber'>
+        Amber
+      </Button>
+
+      <Button variant='ghost' colorScheme='yellow'>
+        Yellow
+      </Button>
+
+      <Button variant='ghost' colorScheme='lime'>
+        Lime
+      </Button>
+
+      <Button variant='ghost' colorScheme='green'>
+        Green
+      </Button>
+
+      <Button variant='ghost' colorScheme='emerald'>
+        Emerald
+      </Button>
+
+      <Button variant='ghost' colorScheme='teal'>
+        Teal
+      </Button>
+
+      <Button variant='ghost' colorScheme='cyan'>
+        Cyan
+      </Button>
+
+      <Button variant='ghost' colorScheme='sky'>
+        Sky
+      </Button>
+
+      <Button variant='ghost' colorScheme='blue'>
+        Blue
+      </Button>
+
+      <Button variant='ghost' colorScheme='indigo'>
+        Indigo
+      </Button>
+
+      <Button variant='ghost' colorScheme='violet'>
+        Violet
+      </Button>
+
+      <Button variant='ghost' colorScheme='purple'>
+        Purple
+      </Button>
+
+      <Button variant='ghost' colorScheme='fuchsia'>
+        Fuchsia
       </Button>
     </Wrap>
   )

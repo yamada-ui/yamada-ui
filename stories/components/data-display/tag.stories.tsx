@@ -27,23 +27,45 @@ export const subtle: Story = () => {
 
       <Tag colorScheme='gray'>Gray</Tag>
 
+      <Tag colorScheme='zinc'>Zinc</Tag>
+
+      <Tag colorScheme='neutral'>Neutral</Tag>
+
+      <Tag colorScheme='stone'>Stone</Tag>
+
       <Tag colorScheme='red'>Red</Tag>
+
+      <Tag colorScheme='rose'>Rose</Tag>
+
+      <Tag colorScheme='pink'>Pink</Tag>
 
       <Tag colorScheme='orange'>Orange</Tag>
 
+      <Tag colorScheme='amber'>Amber</Tag>
+
       <Tag colorScheme='yellow'>Yellow</Tag>
+
+      <Tag colorScheme='lime'>Lime</Tag>
 
       <Tag colorScheme='green'>Green</Tag>
 
-      <Tag colorScheme='teal'>Teal</Tag>
+      <Tag colorScheme='emerald'>Emerald</Tag>
 
-      <Tag colorScheme='blue'>Blue</Tag>
+      <Tag colorScheme='teal'>Teal</Tag>
 
       <Tag colorScheme='cyan'>Cyan</Tag>
 
+      <Tag colorScheme='sky'>Sky</Tag>
+
+      <Tag colorScheme='blue'>Blue</Tag>
+
+      <Tag colorScheme='indigo'>Indigo</Tag>
+
+      <Tag colorScheme='violet'>Violet</Tag>
+
       <Tag colorScheme='purple'>Purple</Tag>
 
-      <Tag colorScheme='pink'>pink</Tag>
+      <Tag colorScheme='fuchsia'>Fuchsia</Tag>
     </Wrap>
   )
 }
@@ -75,40 +97,84 @@ export const solid: Story = () => {
         Gray
       </Tag>
 
+      <Tag variant='solid' colorScheme='zinc'>
+        Zinc
+      </Tag>
+
+      <Tag variant='solid' colorScheme='neutral'>
+        Neutral
+      </Tag>
+
+      <Tag variant='solid' colorScheme='stone'>
+        Stone
+      </Tag>
+
       <Tag variant='solid' colorScheme='red'>
         Red
+      </Tag>
+
+      <Tag variant='solid' colorScheme='rose'>
+        Rose
+      </Tag>
+
+      <Tag variant='solid' colorScheme='pink'>
+        Pink
       </Tag>
 
       <Tag variant='solid' colorScheme='orange'>
         Orange
       </Tag>
 
+      <Tag variant='solid' colorScheme='amber'>
+        Amber
+      </Tag>
+
       <Tag variant='solid' colorScheme='yellow'>
         Yellow
+      </Tag>
+
+      <Tag variant='solid' colorScheme='lime'>
+        Lime
       </Tag>
 
       <Tag variant='solid' colorScheme='green'>
         Green
       </Tag>
 
-      <Tag variant='solid' colorScheme='teal'>
-        Teal
+      <Tag variant='solid' colorScheme='emerald'>
+        Emerald
       </Tag>
 
-      <Tag variant='solid' colorScheme='blue'>
-        Blue
+      <Tag variant='solid' colorScheme='teal'>
+        Teal
       </Tag>
 
       <Tag variant='solid' colorScheme='cyan'>
         Cyan
       </Tag>
 
+      <Tag variant='solid' colorScheme='sky'>
+        Sky
+      </Tag>
+
+      <Tag variant='solid' colorScheme='blue'>
+        Blue
+      </Tag>
+
+      <Tag variant='solid' colorScheme='indigo'>
+        Indigo
+      </Tag>
+
+      <Tag variant='solid' colorScheme='violet'>
+        Violet
+      </Tag>
+
       <Tag variant='solid' colorScheme='purple'>
         Purple
       </Tag>
 
-      <Tag variant='solid' colorScheme='pink'>
-        pink
+      <Tag variant='solid' colorScheme='fuchsia'>
+        Fuchsia
       </Tag>
     </Wrap>
   )
@@ -141,40 +207,84 @@ export const outline: Story = () => {
         Gray
       </Tag>
 
+      <Tag variant='outline' colorScheme='zinc'>
+        Zinc
+      </Tag>
+
+      <Tag variant='outline' colorScheme='neutral'>
+        Neutral
+      </Tag>
+
+      <Tag variant='outline' colorScheme='stone'>
+        Stone
+      </Tag>
+
       <Tag variant='outline' colorScheme='red'>
         Red
+      </Tag>
+
+      <Tag variant='outline' colorScheme='rose'>
+        Rose
+      </Tag>
+
+      <Tag variant='outline' colorScheme='pink'>
+        Pink
       </Tag>
 
       <Tag variant='outline' colorScheme='orange'>
         Orange
       </Tag>
 
+      <Tag variant='outline' colorScheme='amber'>
+        Amber
+      </Tag>
+
       <Tag variant='outline' colorScheme='yellow'>
         Yellow
+      </Tag>
+
+      <Tag variant='outline' colorScheme='lime'>
+        Lime
       </Tag>
 
       <Tag variant='outline' colorScheme='green'>
         Green
       </Tag>
 
-      <Tag variant='outline' colorScheme='teal'>
-        Teal
+      <Tag variant='outline' colorScheme='emerald'>
+        Emerald
       </Tag>
 
-      <Tag variant='outline' colorScheme='blue'>
-        Blue
+      <Tag variant='outline' colorScheme='teal'>
+        Teal
       </Tag>
 
       <Tag variant='outline' colorScheme='cyan'>
         Cyan
       </Tag>
 
+      <Tag variant='outline' colorScheme='sky'>
+        Sky
+      </Tag>
+
+      <Tag variant='outline' colorScheme='blue'>
+        Blue
+      </Tag>
+
+      <Tag variant='outline' colorScheme='indigo'>
+        Indigo
+      </Tag>
+
+      <Tag variant='outline' colorScheme='violet'>
+        Violet
+      </Tag>
+
       <Tag variant='outline' colorScheme='purple'>
         Purple
       </Tag>
 
-      <Tag variant='outline' colorScheme='pink'>
-        pink
+      <Tag variant='outline' colorScheme='fuchsia'>
+        Fuchsia
       </Tag>
     </Wrap>
   )

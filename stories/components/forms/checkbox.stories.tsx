@@ -69,40 +69,84 @@ export const withColorScheme: Story = () => {
         Gray
       </Checkbox>
 
+      <Checkbox colorScheme='zinc' defaultChecked>
+        Zinc
+      </Checkbox>
+
+      <Checkbox colorScheme='neutral' defaultChecked>
+        Neutral
+      </Checkbox>
+
+      <Checkbox colorScheme='stone' defaultChecked>
+        Stone
+      </Checkbox>
+
       <Checkbox colorScheme='red' defaultChecked>
         Red
+      </Checkbox>
+
+      <Checkbox colorScheme='rose' defaultChecked>
+        Rose
+      </Checkbox>
+
+      <Checkbox colorScheme='pink' defaultChecked>
+        Pink
       </Checkbox>
 
       <Checkbox colorScheme='orange' defaultChecked>
         Orange
       </Checkbox>
 
+      <Checkbox colorScheme='amber' defaultChecked>
+        Amber
+      </Checkbox>
+
       <Checkbox colorScheme='yellow' defaultChecked>
         Yellow
+      </Checkbox>
+
+      <Checkbox colorScheme='lime' defaultChecked>
+        Lime
       </Checkbox>
 
       <Checkbox colorScheme='green' defaultChecked>
         Green
       </Checkbox>
 
-      <Checkbox colorScheme='teal' defaultChecked>
-        Teal
+      <Checkbox colorScheme='emerald' defaultChecked>
+        Emerald
       </Checkbox>
 
-      <Checkbox colorScheme='blue' defaultChecked>
-        Blue
+      <Checkbox colorScheme='teal' defaultChecked>
+        Teal
       </Checkbox>
 
       <Checkbox colorScheme='cyan' defaultChecked>
         Cyan
       </Checkbox>
 
+      <Checkbox colorScheme='sky' defaultChecked>
+        Sky
+      </Checkbox>
+
+      <Checkbox colorScheme='blue' defaultChecked>
+        Blue
+      </Checkbox>
+
+      <Checkbox colorScheme='indigo' defaultChecked>
+        Indigo
+      </Checkbox>
+
+      <Checkbox colorScheme='violet' defaultChecked>
+        Violet
+      </Checkbox>
+
       <Checkbox colorScheme='purple' defaultChecked>
         Purple
       </Checkbox>
 
-      <Checkbox colorScheme='pink' defaultChecked>
-        pink
+      <Checkbox colorScheme='fuchsia' defaultChecked>
+        Fuchsia
       </Checkbox>
     </Wrap>
   )

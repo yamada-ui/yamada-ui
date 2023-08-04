@@ -285,7 +285,42 @@ export const withColorScheme: Story = () => {
 
       <Table
         variant='striped'
+        colorScheme='zinc'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='neutral'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='stone'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
         colorScheme='red'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='rose'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='pink'
         columns={columns}
         data={data}
       />
@@ -299,7 +334,21 @@ export const withColorScheme: Story = () => {
 
       <Table
         variant='striped'
+        colorScheme='amber'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
         colorScheme='yellow'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='lime'
         columns={columns}
         data={data}
       />
@@ -313,14 +362,14 @@ export const withColorScheme: Story = () => {
 
       <Table
         variant='striped'
-        colorScheme='teal'
+        colorScheme='emerald'
         columns={columns}
         data={data}
       />
 
       <Table
         variant='striped'
-        colorScheme='blue'
+        colorScheme='teal'
         columns={columns}
         data={data}
       />
@@ -334,6 +383,34 @@ export const withColorScheme: Story = () => {
 
       <Table
         variant='striped'
+        colorScheme='sky'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='blue'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='indigo'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
+        colorScheme='violet'
+        columns={columns}
+        data={data}
+      />
+
+      <Table
+        variant='striped'
         colorScheme='purple'
         columns={columns}
         data={data}
@@ -341,7 +418,7 @@ export const withColorScheme: Story = () => {
 
       <Table
         variant='striped'
-        colorScheme='pink'
+        colorScheme='fuchsia'
         columns={columns}
         data={data}
       />

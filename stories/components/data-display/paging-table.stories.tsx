@@ -262,7 +262,47 @@ export const withColorScheme: Story = () => {
 
       <PagingTable
         variant='striped'
+        colorScheme='zinc'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='neutral'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='stone'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
         colorScheme='red'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='rose'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='pink'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -278,7 +318,23 @@ export const withColorScheme: Story = () => {
 
       <PagingTable
         variant='striped'
+        colorScheme='amber'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
         colorScheme='yellow'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='lime'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -294,7 +350,7 @@ export const withColorScheme: Story = () => {
 
       <PagingTable
         variant='striped'
-        colorScheme='teal'
+        colorScheme='emerald'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -302,7 +358,7 @@ export const withColorScheme: Story = () => {
 
       <PagingTable
         variant='striped'
-        colorScheme='blue'
+        colorScheme='teal'
         columns={columns}
         data={data}
         defaultPageSize={5}
@@ -318,6 +374,38 @@ export const withColorScheme: Story = () => {
 
       <PagingTable
         variant='striped'
+        colorScheme='sky'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='blue'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='indigo'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
+        colorScheme='violet'
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
+      />
+
+      <PagingTable
+        variant='striped'
         colorScheme='purple'
         columns={columns}
         data={data}
@@ -326,7 +414,7 @@ export const withColorScheme: Story = () => {
 
       <PagingTable
         variant='striped'
-        colorScheme='pink'
+        colorScheme='fuchsia'
         columns={columns}
         data={data}
         defaultPageSize={5}

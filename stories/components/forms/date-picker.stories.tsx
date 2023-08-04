@@ -102,7 +102,42 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='solid'
+          calendarColorScheme='zinc'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='neutral'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='stone'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
           calendarColorScheme='red'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='rose'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='pink'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -116,7 +151,21 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='solid'
+          calendarColorScheme='amber'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
           calendarColorScheme='yellow'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='lime'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -130,14 +179,14 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='solid'
-          calendarColorScheme='teal'
+          calendarColorScheme='emerald'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <DatePicker
           calendarVariant='solid'
-          calendarColorScheme='blue'
+          calendarColorScheme='teal'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -151,6 +200,34 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='solid'
+          calendarColorScheme='sky'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='blue'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='indigo'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
+          calendarColorScheme='violet'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='solid'
           calendarColorScheme='purple'
           today
           defaultValue={new Date(new Date().setDate(1))}
@@ -158,7 +235,7 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='solid'
-          calendarColorScheme='pink'
+          calendarColorScheme='fuchsia'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -211,7 +288,42 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='subtle'
+          calendarColorScheme='zinc'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='neutral'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='stone'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
           calendarColorScheme='red'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='rose'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='pink'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -225,7 +337,21 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='subtle'
+          calendarColorScheme='amber'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
           calendarColorScheme='yellow'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='lime'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -239,14 +365,14 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='subtle'
-          calendarColorScheme='teal'
+          calendarColorScheme='emerald'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <DatePicker
           calendarVariant='subtle'
-          calendarColorScheme='blue'
+          calendarColorScheme='teal'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -260,6 +386,34 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='subtle'
+          calendarColorScheme='sky'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='blue'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='indigo'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
+          calendarColorScheme='violet'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <DatePicker
+          calendarVariant='subtle'
           calendarColorScheme='purple'
           today
           defaultValue={new Date(new Date().setDate(1))}
@@ -267,7 +421,7 @@ export const withColorScheme: Story = () => {
 
         <DatePicker
           calendarVariant='subtle'
-          calendarColorScheme='pink'
+          calendarColorScheme='fuchsia'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />

@@ -83,40 +83,84 @@ export const withColorScheme: Story = () => {
         Gray
       </Switch>
 
+      <Switch colorScheme='zinc' defaultChecked>
+        Zinc
+      </Switch>
+
+      <Switch colorScheme='neutral' defaultChecked>
+        Neutral
+      </Switch>
+
+      <Switch colorScheme='stone' defaultChecked>
+        Stone
+      </Switch>
+
       <Switch colorScheme='red' defaultChecked>
         Red
+      </Switch>
+
+      <Switch colorScheme='rose' defaultChecked>
+        Rose
+      </Switch>
+
+      <Switch colorScheme='pink' defaultChecked>
+        Pink
       </Switch>
 
       <Switch colorScheme='orange' defaultChecked>
         Orange
       </Switch>
 
+      <Switch colorScheme='amber' defaultChecked>
+        Amber
+      </Switch>
+
       <Switch colorScheme='yellow' defaultChecked>
         Yellow
+      </Switch>
+
+      <Switch colorScheme='lime' defaultChecked>
+        Lime
       </Switch>
 
       <Switch colorScheme='green' defaultChecked>
         Green
       </Switch>
 
-      <Switch colorScheme='teal' defaultChecked>
-        Teal
+      <Switch colorScheme='emerald' defaultChecked>
+        Emerald
       </Switch>
 
-      <Switch colorScheme='blue' defaultChecked>
-        Blue
+      <Switch colorScheme='teal' defaultChecked>
+        Teal
       </Switch>
 
       <Switch colorScheme='cyan' defaultChecked>
         Cyan
       </Switch>
 
+      <Switch colorScheme='sky' defaultChecked>
+        Sky
+      </Switch>
+
+      <Switch colorScheme='blue' defaultChecked>
+        Blue
+      </Switch>
+
+      <Switch colorScheme='indigo' defaultChecked>
+        Indigo
+      </Switch>
+
+      <Switch colorScheme='violet' defaultChecked>
+        Violet
+      </Switch>
+
       <Switch colorScheme='purple' defaultChecked>
         Purple
       </Switch>
 
-      <Switch colorScheme='pink' defaultChecked>
-        pink
+      <Switch colorScheme='fuchsia' defaultChecked>
+        Fuchsia
       </Switch>
     </Wrap>
   )

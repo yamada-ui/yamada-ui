@@ -1,8 +1,38 @@
 ---
-title: Installation
+title: Getting Started
 description: How to install and set up Yamada UI in your project.
-menu: Getting Started
 order: 1
+with_children: true
 ---
 
-This is English.
+```sh
+pnpm add @yamada-ui/react
+```
+
+```sh
+pnpm add @yamada-ui/react
+
+# or
+
+yarn add @yamada-ui/react
+
+# or
+
+npm install @yamada-ui/react
+```
+
+```tsx live=false highlight={3,4}
+import { UIProvider } from '@yamada-ui/react'
+
+const App = ({ children }) => {
+  return <UIProvider>{children}</UIProvider>
+}
+
+export default App
+```
+
+```tsx
+<Box>
+  <Text>ギャルのパンティーおくれーーーっ！！！！！</Text>
+</Box>
+```

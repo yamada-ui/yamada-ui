@@ -33,8 +33,6 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const children = props.children as Children
   let { className, title, live = true, noInline, children: raw, highlight } = children.props
 
-  console.log(title)
-
   live = toBoolean(live)
   noInline = toBoolean(noInline)
 

@@ -1,4 +1,4 @@
-import { Button, HStack, Text, VStack } from '@yamada-ui/react'
+import { Button, HStack, Heading, Text, VStack } from '@yamada-ui/react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { SEO, Arrow, Github, Section } from 'components'
@@ -17,7 +17,7 @@ const Page: NextPage<PageProps> = ({}) => {
 
       <Section>
         <VStack alignItems='center'>
-          <Text
+          <Heading
             as='h1'
             fontSize={{ base: '7xl', lg: '6xl', md: '5xl', sm: '4xl' }}
             fontFamily='heading'
@@ -29,7 +29,7 @@ const Page: NextPage<PageProps> = ({}) => {
                 {str}
               </Text>
             ))}
-          </Text>
+          </Heading>
 
           <Text
             w='full'

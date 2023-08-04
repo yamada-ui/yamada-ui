@@ -10,7 +10,7 @@ export const TopLayout: FC<PropsWithChildren> = ({ children }) => {
       <Header />
 
       <Center as='main'>
-        <VStack w='full' maxW='9xl' gap='0' px='md'>
+        <VStack w='full' maxW='9xl' gap='0' py='lg' px='lg'>
           {children}
         </VStack>
       </Center>

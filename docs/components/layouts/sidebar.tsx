@@ -187,12 +187,12 @@ export const Sidebar = memo(
         as='aside'
         position='sticky'
         top='4rem'
-        maxW='sm'
+        w='sm'
         maxH='calc(100dvh - 4rem)'
         {...rest}
       >
         <VStack as='nav' overflowY='scroll' overscrollBehavior='contain'>
-          <List pt='md' pb='16' pr='md' gap='sm' fontSize='sm'>
+          <List pt='lg' pb='16' pr='lg' gap='sm' fontSize='sm'>
             {tree.map((doc) => (
               <RecursiveListItem key={doc.slug} {...doc} />
             ))}

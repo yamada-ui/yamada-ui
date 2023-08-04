@@ -32,7 +32,7 @@ const Page: NextPage<PageProps> = ({
 
   return (
     <DocLayout {...{ ...data, ...rest, breadcrumbs, tree, tabs, childrenTree, pagination }}>
-      <Component components={MDXComponents as any} />
+      <Component components={MDXComponents} />
     </DocLayout>
   )
 }

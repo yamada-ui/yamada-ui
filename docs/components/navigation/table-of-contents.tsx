@@ -53,13 +53,13 @@ export const TableOfContents = memo(
         as='nav'
         position='sticky'
         top='4rem'
-        maxW='sm'
+        w='sm'
         maxH='calc(100dvh - 4rem)'
         overflowY='scroll'
         overscrollBehavior='contain'
         {...rest}
       >
-        <VStack pt='md' pb='16' pl='md'>
+        <VStack pt='lg' pb='16' pl='lg'>
           <Text>{t('component.table-of-contents.title')}</Text>
 
           <List gap='sm' fontSize='sm' color='muted'>

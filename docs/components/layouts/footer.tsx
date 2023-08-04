@@ -12,7 +12,7 @@ export const Footer = memo(
 
     return (
       <Center ref={ref} as='footer' position='sticky' top='100vh' w='full' {...rest}>
-        <VStack alignItems='center' w='full' maxW='9xl' py='xl' px='md'>
+        <VStack alignItems='center' w='full' maxW='9xl' py='xl' px='lg'>
           <Text color={['blackAlpha.600', 'whiteAlpha.600']}>
             {tc('component.footer.description', (str, index) => (
               <Link

@@ -56,7 +56,7 @@ export const Header = memo(
         zIndex='sonGoku'
         {...rest}
       >
-        <HStack w='full' maxW='9xl' py='3' px='md'>
+        <HStack w='full' maxW='9xl' py='3' px='lg'>
           <Box
             as={Link}
             href='/'

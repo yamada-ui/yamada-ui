@@ -82,7 +82,7 @@ export const Pagination = memo(
     if (!prev && !next) return
 
     return (
-      <Grid ref={ref} templateColumns='repeat(2, 1fr)' gap='3xl' mt='lg' {...rest}>
+      <Grid ref={ref} templateColumns='repeat(2, 1fr)' gap='3xl' mt='xl' {...rest}>
         <PaginationItem doc={prev} isPrev />
 
         <PaginationItem doc={next} alignItems='flex-end' />

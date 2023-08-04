@@ -1,6 +1,7 @@
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Icon } from '@yamada-ui/fontawesome'
 import {
+  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -66,10 +67,10 @@ export const DocLayout: FC<DocLayoutProps> = ({
       <Header />
 
       <Center as='main'>
-        <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px='md'>
+        <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px='lg'>
           <Sidebar tree={tree} />
 
-          <VStack gap='0' py='md'>
+          <VStack flex='1' minW='0' gap='0' py='lg'>
             {breadcrumbs.length ? (
               <Breadcrumb
                 separator={<ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />}
@@ -95,7 +96,9 @@ export const DocLayout: FC<DocLayoutProps> = ({
               </Breadcrumb>
             ) : null}
 
-            <Heading as='h1'>{title}</Heading>
+            <Heading as='h1' size='2xl'>
+              {title}
+            </Heading>
 
             {with_description ? <Text mt='normal'>{description}</Text> : null}
 
@@ -113,66 +116,68 @@ export const DocLayout: FC<DocLayoutProps> = ({
               </Tabs>
             ) : null}
 
-            {children}
+            <Box>
+              {children}
 
-            {with_children && childrenTree.length ? (
-              <>
-                <Divider mt='lg' />
+              {with_children && childrenTree.length ? (
+                <>
+                  <Divider mt='xl' />
 
-                <Grid templateColumns={{ base: 'repeat(2, 1fr)' }} gap='md' mt='lg'>
-                  {childrenTree.map(({ title, menu, description, label, slug }) => (
-                    <GridItem key={slug}>
-                      <Card
-                        as={Link}
-                        href={slug}
-                        variant='outline'
-                        h='32'
-                        _focus={{ outline: 'none' }}
-                        _focusVisible={{ boxShadow: 'outline' }}
-                        _hover={{ bg: ['blackAlpha.50', 'whiteAlpha.50'] }}
-                        transitionProperty='colors'
-                        transitionDuration='normal'
-                      >
-                        <CardHeader gap='sm'>
-                          <Heading size='md'>{menu ?? title}</Heading>
+                  <Grid templateColumns={{ base: 'repeat(2, 1fr)' }} gap='md' mt='xl'>
+                    {childrenTree.map(({ title, menu, description, label, slug }) => (
+                      <GridItem key={slug}>
+                        <Card
+                          as={Link}
+                          href={slug}
+                          variant='outline'
+                          h='32'
+                          _focus={{ outline: 'none' }}
+                          _focusVisible={{ boxShadow: 'outline' }}
+                          _hover={{ bg: ['blackAlpha.50', 'whiteAlpha.50'] }}
+                          transitionProperty='colors'
+                          transitionDuration='normal'
+                        >
+                          <CardHeader gap='sm'>
+                            <Heading size='md'>{menu ?? title}</Heading>
 
-                          {label ? (
-                            <Tag
-                              size='sm'
-                              colorScheme={
-                                label === 'New'
-                                  ? 'blue'
-                                  : label === 'Experimental'
-                                  ? 'purple'
-                                  : label === 'Planned'
-                                  ? 'orange'
-                                  : 'gray'
-                              }
-                            >
-                              {label}
-                            </Tag>
-                          ) : null}
-                        </CardHeader>
+                            {label ? (
+                              <Tag
+                                size='sm'
+                                colorScheme={
+                                  label === 'New'
+                                    ? 'blue'
+                                    : label === 'Experimental'
+                                    ? 'purple'
+                                    : label === 'Planned'
+                                    ? 'orange'
+                                    : 'gray'
+                                }
+                              >
+                                {label}
+                              </Tag>
+                            ) : null}
+                          </CardHeader>
 
-                        <CardBody>
-                          <Text color='muted' noOfLines={2}>
-                            {description}
-                          </Text>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                  ))}
-                </Grid>
+                          <CardBody>
+                            <Text color='muted' noOfLines={2}>
+                              {description}
+                            </Text>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    ))}
+                  </Grid>
 
-                <Divider mt='lg' />
-              </>
-            ) : null}
+                  <Divider mt='xl' />
+                </>
+              ) : null}
+            </Box>
 
             <HStack
               as='a'
               href={editUrl}
               target='_blank'
-              mt='lg'
+              mt='xl'
               alignSelf='flex-start'
               gap='sm'
               fontSize='sm'

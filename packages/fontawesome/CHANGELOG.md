@@ -1,5 +1,18 @@
 # @yamada-ui/fontawesome
 
+## 0.2.0
+
+### Minor Changes
+
+- [#145](https://github.com/hirotomoyamada/yamada-ui/pull/145) [`dc945dd0`](https://github.com/hirotomoyamada/yamada-ui/commit/dc945dd0c82e111bf80553cc6457c9b839c819cf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated package fontawesome.
+
+### Patch Changes
+
+- Updated dependencies [[`0d07b946`](https://github.com/hirotomoyamada/yamada-ui/commit/0d07b9460b217c3d8c6b7e667eee114f6f9acf3e), [`0d07b946`](https://github.com/hirotomoyamada/yamada-ui/commit/0d07b9460b217c3d8c6b7e667eee114f6f9acf3e)]:
+  - @yamada-ui/core@0.6.2
+  - @yamada-ui/utils@0.1.5
+  - @yamada-ui/icon@0.2.12
+
 ## 0.1.19
 
 ### Patch Changes

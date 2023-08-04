@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-previous",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Yamada UI usePrevious custom hook",
   "keywords": [
     "use-previous"

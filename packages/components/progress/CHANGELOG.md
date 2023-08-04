@@ -1,5 +1,16 @@
 # @yamada-ui/progress
 
+## 0.3.12
+
+### Patch Changes
+
+- Updated dependencies [[`0d07b946`](https://github.com/hirotomoyamada/yamada-ui/commit/0d07b9460b217c3d8c6b7e667eee114f6f9acf3e), [`0d07b946`](https://github.com/hirotomoyamada/yamada-ui/commit/0d07b9460b217c3d8c6b7e667eee114f6f9acf3e)]:
+  - @yamada-ui/core@0.6.2
+  - @yamada-ui/utils@0.1.5
+  - @yamada-ui/use-animation@0.1.24
+  - @yamada-ui/use-token@0.1.24
+  - @yamada-ui/use-value@0.1.24
+
 ## 0.3.11
 
 ### Patch Changes

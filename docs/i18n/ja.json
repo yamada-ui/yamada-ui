@@ -42,6 +42,9 @@
     "edit-page": {
       "label": "GitHubでこのページを編集する"
     },
+    "editable-code-block": {
+      "label": "編集可能な例"
+    },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"
     }

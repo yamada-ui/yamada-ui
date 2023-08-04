@@ -38,6 +38,9 @@
     "edit-page": {
       "label": "Edit this page on GitHub"
     },
+    "editable-code-block": {
+      "label": "Editable example"
+    },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"
     }

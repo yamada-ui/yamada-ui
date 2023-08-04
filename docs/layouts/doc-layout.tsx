@@ -107,6 +107,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 colorScheme='brand'
                 index={tabs.findIndex((child) => child.tab === tab)}
                 mt='lg'
+                overflowX='auto'
               >
                 {tabs.map(({ tab, menu, title, slug }) => (
                   <Tab key={slug} onClick={() => push(slug)}>
@@ -130,7 +131,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                           as={Link}
                           href={slug}
                           variant='outline'
-                          h='44'
+                          h='40'
                           size='normal'
                           _focus={{ outline: 'none' }}
                           _focusVisible={{ boxShadow: 'outline' }}
@@ -138,7 +139,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                           transitionProperty='colors'
                           transitionDuration='normal'
                         >
-                          <CardHeader gap='sm'>
+                          <CardHeader pt='md' gap='sm'>
                             <Heading size='md' noOfLines={1}>
                               {menu ?? title}
                             </Heading>
@@ -161,7 +162,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                             ) : null}
                           </CardHeader>
 
-                          <CardBody>
+                          <CardBody pt='md'>
                             <Text color='muted' noOfLines={3}>
                               {description}
                             </Text>

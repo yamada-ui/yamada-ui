@@ -62,13 +62,7 @@ export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
   })
 }
 
-const isTabsMap = new Set<string>()
-
-export const getTabs = (
-  docs: Doc[],
-  doc: Doc,
-  locale: string,
-): [Doc[], Doc | undefined, string[] | undefined] => {
+export const getTabs = (docs: Doc[], doc: Doc): [Doc[], Doc | undefined, string[] | undefined] => {
   const { is_tabs, slug } = doc
 
   let tabs: Doc[] = []
@@ -76,16 +70,15 @@ export const getTabs = (
   let parentPaths: string[] | undefined
 
   if (is_tabs) {
-    isTabsMap.add(slug)
-
     tabs = docs.filter((doc) => new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(doc.slug))
   } else {
-    const parentSlug = Array.from(isTabsMap).find((parentSlug) => slug.startsWith(parentSlug))
+    parentDoc = docs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
 
-    if (parentSlug) {
-      parentPaths = parentSlug.split('/').slice(2)
-      parentDoc = getDoc(docs, parentPaths, locale)
-      tabs = docs.filter(({ slug }) => new RegExp(`^${parentSlug}($|\\/[^\\/]+$)`).test(slug))
+    if (!parentDoc?.is_tabs) parentDoc = undefined
+
+    if (parentDoc) {
+      parentPaths = parentDoc.slug.split('/').slice(2)
+      tabs = docs.filter(({ slug }) => new RegExp(`^${parentDoc.slug}($|\\/[^\\/]+$)`).test(slug))
     }
   }
 
@@ -93,9 +86,8 @@ export const getTabs = (
 }
 
 export const filterTabDocs = (docs: Doc[]): Doc[] =>
-  docs.filter(
-    ({ slug }) =>
-      !Array.from(isTabsMap).some((parentSlug) =>
-        new RegExp(`^${parentSlug}\\/[^\\/]+$`).test(slug),
-      ),
-  )
+  docs.filter(({ slug }) => {
+    const parentDoc = docs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
+
+    return !(parentDoc?.is_tabs ?? false)
+  })

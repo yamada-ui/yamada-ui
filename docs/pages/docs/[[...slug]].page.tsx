@@ -74,7 +74,7 @@ export const getStaticProps = async ({ params, locale }: GetStaticPropsContext) 
     .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
 
   const doc: Doc = getDoc(docs, paths, locale)
-  const [tabs, parentDoc, parentPaths] = getTabs(docs, doc, locale)
+  const [tabs, parentDoc, parentPaths] = getTabs(docs, doc)
 
   docs = filterTabDocs(docs)
 

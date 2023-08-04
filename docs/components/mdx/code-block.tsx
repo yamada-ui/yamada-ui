@@ -15,6 +15,7 @@ const EditableCodeBlock = dynamic(() => import('./editable-code-block'))
 type Children = {
   props: {
     className?: string
+    title?: string
     live?: string | boolean
     noInline?: string | boolean
     children?: string
@@ -30,7 +31,9 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   useEffect(on, [on])
 
   const children = props.children as Children
-  let { className, live = true, noInline, children: raw, highlight } = children.props
+  let { className, title, live = true, noInline, children: raw, highlight } = children.props
+
+  console.log(title)
 
   live = toBoolean(live)
   noInline = toBoolean(noInline)
@@ -51,11 +54,27 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
         my='6'
         bg={['black', 'blackAlpha.400']}
         sx={{ '& > div': { py: 'normal' } }}
+        overflow='hidden'
       >
+        {title ? (
+          <Text
+            display='block'
+            py='sm'
+            px='md'
+            borderBottomWidth='1px'
+            bg='whiteAlpha.100'
+            fontSize='xs'
+            color='whiteAlpha.700'
+            isTruncated
+          >
+            {title}
+          </Text>
+        ) : null}
+
         <Highlight {...{ code, language, theme, highlight }} />
       </Box>
 
-      <CopyButton value={code} position='absolute' top='1.125rem' right='4' />
+      <CopyButton value={code} position='absolute' top={title ? '3.3rem' : '1.125rem'} right='4' />
     </Box>
   )
 }

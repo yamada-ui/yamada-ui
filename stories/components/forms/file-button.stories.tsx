@@ -107,23 +107,45 @@ export const withColorScheme: Story = () => {
 
       <FileButton colorScheme='gray'>Gray</FileButton>
 
+      <FileButton colorScheme='zinc'>Zinc</FileButton>
+
+      <FileButton colorScheme='neutral'>Neutral</FileButton>
+
+      <FileButton colorScheme='stone'>Stone</FileButton>
+
       <FileButton colorScheme='red'>Red</FileButton>
+
+      <FileButton colorScheme='rose'>Rose</FileButton>
+
+      <FileButton colorScheme='pink'>Pink</FileButton>
 
       <FileButton colorScheme='orange'>Orange</FileButton>
 
+      <FileButton colorScheme='amber'>Amber</FileButton>
+
       <FileButton colorScheme='yellow'>Yellow</FileButton>
+
+      <FileButton colorScheme='lime'>Lime</FileButton>
 
       <FileButton colorScheme='green'>Green</FileButton>
 
-      <FileButton colorScheme='teal'>Teal</FileButton>
+      <FileButton colorScheme='emerald'>Emerald</FileButton>
 
-      <FileButton colorScheme='blue'>Blue</FileButton>
+      <FileButton colorScheme='teal'>Teal</FileButton>
 
       <FileButton colorScheme='cyan'>Cyan</FileButton>
 
+      <FileButton colorScheme='sky'>Sky</FileButton>
+
+      <FileButton colorScheme='blue'>Blue</FileButton>
+
+      <FileButton colorScheme='indigo'>Indigo</FileButton>
+
+      <FileButton colorScheme='violet'>Violet</FileButton>
+
       <FileButton colorScheme='purple'>Purple</FileButton>
 
-      <FileButton colorScheme='pink'>pink</FileButton>
+      <FileButton colorScheme='fuchsia'>Fuchsia</FileButton>
     </Wrap>
   )
 }

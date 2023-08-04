@@ -62,23 +62,45 @@ export const withColorScheme: Story = () => {
 
       <RangeSlider colorScheme='gray' />
 
+      <RangeSlider colorScheme='zinc' />
+
+      <RangeSlider colorScheme='neutral' />
+
+      <RangeSlider colorScheme='stone' />
+
       <RangeSlider colorScheme='red' />
+
+      <RangeSlider colorScheme='rose' />
+
+      <RangeSlider colorScheme='pink' />
 
       <RangeSlider colorScheme='orange' />
 
+      <RangeSlider colorScheme='amber' />
+
       <RangeSlider colorScheme='yellow' />
+
+      <RangeSlider colorScheme='lime' />
 
       <RangeSlider colorScheme='green' />
 
-      <RangeSlider colorScheme='teal' />
+      <RangeSlider colorScheme='emerald' />
 
-      <RangeSlider colorScheme='blue' />
+      <RangeSlider colorScheme='teal' />
 
       <RangeSlider colorScheme='cyan' />
 
+      <RangeSlider colorScheme='sky' />
+
+      <RangeSlider colorScheme='blue' />
+
+      <RangeSlider colorScheme='indigo' />
+
+      <RangeSlider colorScheme='violet' />
+
       <RangeSlider colorScheme='purple' />
 
-      <RangeSlider colorScheme='pink' />
+      <RangeSlider colorScheme='fuchsia' />
     </>
   )
 }

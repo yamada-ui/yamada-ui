@@ -123,7 +123,42 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='solid'
+          colorScheme='zinc'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='neutral'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='stone'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
           colorScheme='red'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='rose'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='pink'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -137,7 +172,21 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='solid'
+          colorScheme='amber'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
           colorScheme='yellow'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='lime'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -151,14 +200,14 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='solid'
-          colorScheme='teal'
+          colorScheme='emerald'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='solid'
-          colorScheme='blue'
+          colorScheme='teal'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -172,6 +221,34 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='solid'
+          colorScheme='sky'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='blue'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='indigo'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='violet'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
           colorScheme='purple'
           today
           defaultValue={new Date(new Date().setDate(1))}
@@ -179,7 +256,7 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='solid'
-          colorScheme='pink'
+          colorScheme='fuchsia'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -189,64 +266,113 @@ export const withColorScheme: Story = () => {
 
       <Wrap gap='md'>
         <Calendar
-          variant='subtle'
+          variant='solid'
           colorScheme='primary'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
           colorScheme='secondary'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
           colorScheme='warning'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
           colorScheme='danger'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
           colorScheme='link'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
           colorScheme='gray'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
+          colorScheme='zinc'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='neutral'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='stone'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
           colorScheme='red'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
+          colorScheme='rose'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
+          colorScheme='pink'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
           colorScheme='orange'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
-          variant='subtle'
+          variant='solid'
+          colorScheme='amber'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='solid'
           colorScheme='yellow'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='subtle'
+          colorScheme='lime'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -260,14 +386,14 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='subtle'
-          colorScheme='teal'
+          colorScheme='emerald'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
 
         <Calendar
           variant='subtle'
-          colorScheme='blue'
+          colorScheme='teal'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />
@@ -281,6 +407,34 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='subtle'
+          colorScheme='sky'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='subtle'
+          colorScheme='blue'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='subtle'
+          colorScheme='indigo'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='subtle'
+          colorScheme='violet'
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />
+
+        <Calendar
+          variant='subtle'
           colorScheme='purple'
           today
           defaultValue={new Date(new Date().setDate(1))}
@@ -288,7 +442,7 @@ export const withColorScheme: Story = () => {
 
         <Calendar
           variant='subtle'
-          colorScheme='pink'
+          colorScheme='fuchsia'
           today
           defaultValue={new Date(new Date().setDate(1))}
         />

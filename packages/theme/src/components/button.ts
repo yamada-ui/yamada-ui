@@ -4,6 +4,7 @@ import {
   toneColor,
   isArray,
   getColor,
+  isGray,
 } from '@yamada-ui/utils'
 
 export const Button: ComponentStyle = {
@@ -46,8 +47,7 @@ export const Button: ComponentStyle = {
       colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
-      const isGray = c === 'gray'
-      const isAccessible = c === 'yellow' || c === 'cyan'
+      const isAccessible = c === 'yellow' || c === 'cyan' || c === 'lime'
       const errorBorderColor = isArray(ec)
         ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
         : getColor(ec, ec)(t, m)
@@ -55,26 +55,28 @@ export const Button: ComponentStyle = {
       return {
         bg: isDefaultColor(
           [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-          isGray
-            ? [`gray.200`, `whiteAlpha.200`]
+          isGray(c)
+            ? [`${c}.200`, `${c}.700`]
             : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
         )(c),
         color: isDefaultColor(
           [`white`, `gray.800`],
-          isGray ? undefined : [isAccessible ? `black` : `white`, `gray.800`],
+          isGray(c)
+            ? undefined
+            : [isAccessible ? `black` : `white`, `gray.800`],
         )(c),
         _hover: {
           bg: isDefaultColor(
             [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-            isGray
-              ? [`gray.300`, `whiteAlpha.300`]
+            isGray(c)
+              ? [`${c}.300`, `${c}.600`]
               : [isAccessible ? `${c}.500` : `${c}.600`, `${c}.300`],
           )(c),
           _disabled: {
             bg: isDefaultColor(
               [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-              isGray
-                ? [`gray.200`, `whiteAlpha.200`]
+              isGray(c)
+                ? [`${c}.200`, `${c}.200`]
                 : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
             )(c),
           },
@@ -87,15 +89,15 @@ export const Button: ComponentStyle = {
         _active: {
           bg: isDefaultColor(
             [toneColor(c, 700)(t, m), toneColor(c, 400)(t, m)],
-            isGray
-              ? [`gray.400`, `whiteAlpha.400`]
+            isGray(c)
+              ? [`${c}.400`, `${c}.500`]
               : [isAccessible ? `${c}.600` : `${c}.700`, `${c}.400`],
           )(c),
           _disabled: {
             bg: isDefaultColor(
               [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-              isGray
-                ? [`gray.200`, `whiteAlpha.200`]
+              isGray(c)
+                ? [`${c}.200`, `${c}.200`]
                 : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
             )(c),
           },
@@ -108,7 +110,6 @@ export const Button: ComponentStyle = {
       colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
-      const isGray = c === 'gray'
       const errorBorderColor = isArray(ec)
         ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
         : getColor(ec, ec)(t, m)
@@ -117,21 +118,21 @@ export const Button: ComponentStyle = {
         border: '1px solid',
         borderColor: isDefaultColor(
           [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-          isGray ? [`gray.200`, `whiteAlpha.300`] : [`${c}.600`, `${c}.300`],
+          isGray(c) ? [`${c}.200`, `${c}.400`] : [`${c}.600`, `${c}.300`],
         )(c),
         color: isDefaultColor(
           [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
-          isGray ? [`inherit`, `whiteAlpha.900`] : [`${c}.600`, `${c}.200`],
+          isGray(c) ? [`inherit`, `${c}.400`] : [`${c}.600`, `${c}.200`],
         )(c),
-        bg: isGray ? undefined : 'transparent',
+        bg: isGray(c) ? undefined : 'transparent',
         _hover: {
           bg: isDefaultColor(
             [
               toneColor(c, 50)(t, m),
               transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
             ],
-            isGray
-              ? [`gray.100`, `whiteAlpha.200`]
+            isGray(c)
+              ? [`${c}.100`, `whiteAlpha.200`]
               : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
           )(c),
         },
@@ -145,8 +146,8 @@ export const Button: ComponentStyle = {
               toneColor(c, 100)(t, m),
               transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
             ],
-            isGray
-              ? [`gray.200`, `whiteAlpha.300`]
+            isGray(c)
+              ? [`${c}.200`, `whiteAlpha.300`]
               : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
           )(c),
         },
@@ -186,7 +187,6 @@ export const Button: ComponentStyle = {
       colorScheme: c = 'gray',
       errorBorderColor: ec = ['red.500', 'red.300'],
     }) => {
-      const isGray = c === 'gray'
       const errorBorderColor = isArray(ec)
         ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
         : getColor(ec, ec)(t, m)
@@ -194,18 +194,18 @@ export const Button: ComponentStyle = {
       return {
         color: isDefaultColor(
           [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
-          isGray ? [`inherit`, `whiteAlpha.900`] : [`${c}.600`, `${c}.200`],
+          isGray(c) ? [`inherit`, `${c}.200`] : [`${c}.600`, `${c}.200`],
         )(c),
-        bg: isGray ? undefined : 'transparent',
+        bg: isGray(c) ? undefined : 'transparent',
         _hover: {
           bg: isDefaultColor(
             [
-              toneColor(c, 50)(t, m),
+              toneColor(c, 100)(t, m),
               transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
             ],
-            isGray
-              ? [`gray.200`, `whiteAlpha.200`]
-              : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
+            isGray(c)
+              ? [`${c}.200`, `whiteAlpha.200`]
+              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
           )(c),
         },
         _invalid: {
@@ -216,12 +216,12 @@ export const Button: ComponentStyle = {
         _active: {
           bg: isDefaultColor(
             [
-              toneColor(c, 100)(t, m),
+              toneColor(c, 200)(t, m),
               transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
             ],
-            isGray
-              ? [`gray.200`, `whiteAlpha.300`]
-              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
+            isGray(c)
+              ? [`${c}.300`, `whiteAlpha.300`]
+              : [`${c}.200`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
           )(c),
         },
       }

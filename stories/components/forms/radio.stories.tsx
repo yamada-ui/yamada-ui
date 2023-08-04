@@ -68,40 +68,84 @@ export const withColorScheme: Story = () => {
         Gray
       </Radio>
 
+      <Radio colorScheme='zinc' defaultChecked>
+        Zinc
+      </Radio>
+
+      <Radio colorScheme='neutral' defaultChecked>
+        Neutral
+      </Radio>
+
+      <Radio colorScheme='stone' defaultChecked>
+        Stone
+      </Radio>
+
       <Radio colorScheme='red' defaultChecked>
         Red
+      </Radio>
+
+      <Radio colorScheme='rose' defaultChecked>
+        Rose
+      </Radio>
+
+      <Radio colorScheme='pink' defaultChecked>
+        Pink
       </Radio>
 
       <Radio colorScheme='orange' defaultChecked>
         Orange
       </Radio>
 
+      <Radio colorScheme='amber' defaultChecked>
+        Amber
+      </Radio>
+
       <Radio colorScheme='yellow' defaultChecked>
         Yellow
+      </Radio>
+
+      <Radio colorScheme='lime' defaultChecked>
+        Lime
       </Radio>
 
       <Radio colorScheme='green' defaultChecked>
         Green
       </Radio>
 
-      <Radio colorScheme='teal' defaultChecked>
-        Teal
+      <Radio colorScheme='emerald' defaultChecked>
+        Emerald
       </Radio>
 
-      <Radio colorScheme='blue' defaultChecked>
-        Blue
+      <Radio colorScheme='teal' defaultChecked>
+        Teal
       </Radio>
 
       <Radio colorScheme='cyan' defaultChecked>
         Cyan
       </Radio>
 
+      <Radio colorScheme='sky' defaultChecked>
+        Sky
+      </Radio>
+
+      <Radio colorScheme='blue' defaultChecked>
+        Blue
+      </Radio>
+
+      <Radio colorScheme='indigo' defaultChecked>
+        Indigo
+      </Radio>
+
+      <Radio colorScheme='violet' defaultChecked>
+        Violet
+      </Radio>
+
       <Radio colorScheme='purple' defaultChecked>
         Purple
       </Radio>
 
-      <Radio colorScheme='pink' defaultChecked>
-        pink
+      <Radio colorScheme='fuchsia' defaultChecked>
+        Fuchsia
       </Radio>
     </Wrap>
   )

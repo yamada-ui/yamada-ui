@@ -96,7 +96,37 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='solid'
+          calendarColorScheme='zinc'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='neutral'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='stone'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
           calendarColorScheme='red'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='rose'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='pink'
           defaultValue={new Date()}
         />
 
@@ -108,7 +138,19 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='solid'
+          calendarColorScheme='amber'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
           calendarColorScheme='yellow'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='lime'
           defaultValue={new Date()}
         />
 
@@ -120,13 +162,13 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorScheme='teal'
+          calendarColorScheme='emerald'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorScheme='blue'
+          calendarColorScheme='teal'
           defaultValue={new Date()}
         />
 
@@ -138,13 +180,37 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='solid'
+          calendarColorScheme='sky'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='blue'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='indigo'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
+          calendarColorScheme='violet'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='solid'
           calendarColorScheme='purple'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='solid'
-          calendarColorScheme='pink'
+          calendarColorScheme='fuchsia'
           defaultValue={new Date()}
         />
       </Grid>
@@ -190,7 +256,37 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='subtle'
+          calendarColorScheme='zinc'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='neutral'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='stone'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
           calendarColorScheme='red'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='rose'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='pink'
           defaultValue={new Date()}
         />
 
@@ -202,7 +298,19 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='subtle'
+          calendarColorScheme='amber'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
           calendarColorScheme='yellow'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='lime'
           defaultValue={new Date()}
         />
 
@@ -214,13 +322,13 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorScheme='teal'
+          calendarColorScheme='emerald'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorScheme='blue'
+          calendarColorScheme='teal'
           defaultValue={new Date()}
         />
 
@@ -232,13 +340,37 @@ export const withColorScheme: Story = () => {
 
         <MonthPicker
           calendarVariant='subtle'
+          calendarColorScheme='sky'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='blue'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='indigo'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
+          calendarColorScheme='violet'
+          defaultValue={new Date()}
+        />
+
+        <MonthPicker
+          calendarVariant='subtle'
           calendarColorScheme='purple'
           defaultValue={new Date()}
         />
 
         <MonthPicker
           calendarVariant='subtle'
-          calendarColorScheme='pink'
+          calendarColorScheme='fuchsia'
           defaultValue={new Date()}
         />
       </Grid>

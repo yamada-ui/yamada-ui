@@ -3,7 +3,7 @@ import {
   isDefaultColor,
   UIMultiStyle,
 } from '@yamada-ui/core'
-import { transparentizeColor, toneColor } from '@yamada-ui/utils'
+import { transparentizeColor, toneColor, isGray } from '@yamada-ui/utils'
 
 export const Table: ComponentMultiStyle = {
   baseStyle: {
@@ -54,8 +54,6 @@ export const Table: ComponentMultiStyle = {
       highlightOnSelected,
       highlightOnHover,
     }) => {
-      const isGray = c === 'gray'
-
       return {
         table: {
           ...(withBorder ? { borderWidth: '1px' } : {}),
@@ -97,8 +95,8 @@ export const Table: ComponentMultiStyle = {
                           m,
                         ),
                       ],
-                      isGray
-                        ? [`gray.100`, `whiteAlpha.200`]
+                      isGray(c)
+                        ? [`${c}.100`, `${c}.200`]
                         : [
                             transparentizeColor(`${c}.50`, 0.6)(t, m),
                             transparentizeColor(`${c}.100`, 0.24)(t, m),
@@ -121,8 +119,8 @@ export const Table: ComponentMultiStyle = {
                           m,
                         ),
                       ],
-                      isGray
-                        ? [`gray.200`, `whiteAlpha.300`]
+                      isGray(c)
+                        ? [`${c}.200`, `${c}.300`]
                         : [
                             transparentizeColor(`${c}.100`, 0.6)(t, m),
                             transparentizeColor(`${c}.200`, 0.24)(t, m),

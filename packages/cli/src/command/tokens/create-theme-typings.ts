@@ -26,6 +26,7 @@ const hues = [
   '700',
   '800',
   '900',
+  '950',
 ]
 
 export const printComponent = (components: Record<string, Component>): string =>

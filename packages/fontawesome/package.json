@@ -46,15 +46,15 @@
     "gen:docs": "tsx ../../scripts/generate-docs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/react-fontawesome": "^0.2.0"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.2.0"
   },
   "peerDependencies": {
     "react": ">=18"

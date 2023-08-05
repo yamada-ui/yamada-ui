@@ -1,5 +1,10 @@
 import { ComponentStyle, mode, isDefaultColor } from '@yamada-ui/core'
-import { transparentizeColor, toneColor, getColor } from '@yamada-ui/utils'
+import {
+  transparentizeColor,
+  toneColor,
+  getColor,
+  isGray,
+} from '@yamada-ui/utils'
 
 export const Badge: ComponentStyle = {
   baseStyle: {
@@ -27,7 +32,10 @@ export const Badge: ComponentStyle = {
           toneColor(c, 100)(t, m),
           transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m),
         ],
-        [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+        [
+          isGray(c) ? `${c}.200` : `${c}.100`,
+          transparentizeColor(`${c}.200`, 0.16)(t, m),
+        ],
       )(c),
       color: isDefaultColor(
         [toneColor(c, 800)(t, m), toneColor(c, 200)(t, m)],

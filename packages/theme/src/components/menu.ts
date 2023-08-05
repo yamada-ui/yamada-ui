@@ -1,7 +1,8 @@
 import { ComponentStyle } from '@yamada-ui/core'
+import { transparentizeColor } from '@yamada-ui/utils'
 
 export const Menu: ComponentStyle = {
-  baseStyle: {
+  baseStyle: ({ theme: t, colorMode: m }) => ({
     button: {
       transitionProperty: 'common',
       transitionDuration: 'normal',
@@ -23,14 +24,14 @@ export const Menu: ComponentStyle = {
       transitionProperty: 'background',
       transitionDuration: 'ultra-fast',
       transitionTimingFunction: 'ease-in',
-      _hover: {
-        bg: ['gray.100', 'whiteAlpha.50'],
-      },
       _focus: {
-        bg: ['gray.200', 'whiteAlpha.100'],
+        bg: [transparentizeColor(`gray.200`, 0.56)(t, m), 'whiteAlpha.100'],
+      },
+      _hover: {
+        bg: ['gray.200', 'whiteAlpha.50'],
       },
       _active: {
-        bg: ['gray.300', 'whiteAlpha.200'],
+        bg: [transparentizeColor(`gray.300`, 0.64)(t, m), 'whiteAlpha.200'],
       },
       _disabled: {
         opacity: 0.4,
@@ -54,5 +55,5 @@ export const Menu: ComponentStyle = {
       fontWeight: 'semibold',
       color: ['blackAlpha.600', 'whiteAlpha.600'],
     },
-  },
+  }),
 }

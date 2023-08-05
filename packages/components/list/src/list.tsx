@@ -76,7 +76,7 @@ export const List = forwardRef<ListProps, 'ul'>((props, ref) => {
   )
 })
 
-export const DiscList = forwardRef<ListProps, 'ol'>(({ ...rest }, ref) => {
+export const DiscList = forwardRef<ListProps, 'ul'>(({ ...rest }, ref) => {
   return <List ref={ref} as='ul' styleType='disc' {...rest} />
 })
 

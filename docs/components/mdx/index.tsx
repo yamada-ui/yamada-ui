@@ -8,6 +8,7 @@ import type { MDXComponents as MDXComponentsType } from 'mdx/types'
 import { CodeBlock } from './code-block'
 import { Link } from './link'
 import { LinkedHeading } from './linked-heading'
+import { PackageManagers } from './package-managers'
 
 const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem } = UIComponents
 
@@ -37,6 +38,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   li: (props) => <ListItem apply='mdx.li' {...props} />,
   hr: (props) => <Divider apply='mdx.hr' {...props} />,
   kbd: Kbd,
+  PackageManagers,
 }
 
 export const MDXComponents = {

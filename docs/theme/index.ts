@@ -3,7 +3,9 @@ import { components } from './components'
 import { customConfig } from './config'
 import { globalStyle, resetStyle, layerStyles, textStyles, mdx } from './styles'
 import { tokens } from './tokens'
-import { colorScheme } from 'configs/site.json'
+import configs from 'configs/site.json'
+
+const { colorScheme } = configs
 
 export const customTheme = {
   styles: { globalStyle, resetStyle, layerStyles, textStyles, mdx },

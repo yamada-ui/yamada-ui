@@ -169,6 +169,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
               boxShadow: `${outline} inset`,
             }}
             onClick={onToggle}
+            aria-label='Toggle children'
           >
             <ChevronIcon
               transform={isOpen ? undefined : 'rotate(-90deg)'}

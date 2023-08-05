@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.5.2
+
+### Patch Changes
+
+- [`12484635`](https://github.com/hirotomoyamada/yamada-ui/commit/124846353c25a4e8324b091e667273e3f4c6a033) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed tag, badge styles.
+
 ## 0.5.1
 
 ### Patch Changes

@@ -10,16 +10,17 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({ id, children, ...rest })
       id={id}
       position='relative'
       css={{ scrollMarginBlock: '5rem' }}
-      _hover={{ '& > a': { opacity: 1 } }}
+      _hover={{ base: { '& > a': { opacity: 1 } }, md: { '& > a': { opacity: 0 } } }}
       {...rest}
     >
       {id ? (
         <Link
           href={`#${id}`}
-          pe='2'
+          display={{ base: 'inline-block', md: 'none' }}
           position='absolute'
           top='0'
           left='-1em'
+          pe='2'
           color='link'
           opacity='0'
           _hover={{ opacity: 1 }}

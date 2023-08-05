@@ -18,7 +18,7 @@ export type CardsProps = GridProps
 
 export const Cards = memo(
   forwardRef<CardsProps, 'div'>(({ ...rest }, ref) => {
-    const { childrenTree = [] } = usePage()
+    const { childrenTree } = usePage()
 
     return (
       <Grid

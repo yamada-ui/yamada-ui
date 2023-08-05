@@ -133,9 +133,11 @@ export const DocLayout: FC<DocLayoutProps> = ({
                           variant='outline'
                           h='40'
                           size='normal'
+                          bg={['gray.100', 'whiteAlpha.50']}
                           _focus={{ outline: 'none' }}
                           _focusVisible={{ boxShadow: 'outline' }}
-                          _hover={{ bg: ['blackAlpha.50', 'whiteAlpha.50'] }}
+                          _hover={{ bg: ['gray.200', 'whiteAlpha.100'] }}
+                          _active={{ bg: ['gray.300', 'whiteAlpha.200'] }}
                           transitionProperty='colors'
                           transitionDuration='normal'
                         >

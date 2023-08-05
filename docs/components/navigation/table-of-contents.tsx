@@ -1,19 +1,20 @@
 import {
   Box,
-  ChevronIcon,
+  HStack,
   List,
-  ListIcon,
   ListItem,
   StackProps,
   Text,
   VStack,
   forwardRef,
   toneColor,
+  transparentizeColor,
   useColorMode,
   useTheme,
   useToken,
 } from '@yamada-ui/react'
 import { memo, useState } from 'react'
+import { List as ListIcon } from 'components/media-and-icons'
 import { Content } from 'contentlayer/generated'
 import { useI18n } from 'contexts'
 import { useEventListener } from 'hooks'
@@ -23,7 +24,7 @@ export type TableOfContentsProps = StackProps & { contents: Content[] }
 export const TableOfContents = memo(
   forwardRef<TableOfContentsProps, 'div'>(({ contents, ...rest }, ref) => {
     const [activeId, setActiveId] = useState<string>('')
-    const pl = useToken('spaces', '5')
+    const pl = useToken('spaces', '4')
     const { theme } = useTheme()
     const { colorMode } = useColorMode()
     const { t } = useI18n()
@@ -55,14 +56,15 @@ export const TableOfContents = memo(
         top='4rem'
         w='sm'
         maxH='calc(100dvh - 4rem)'
-        overflowY='scroll'
-        overscrollBehavior='contain'
         {...rest}
       >
-        <VStack pt='lg' pb='16' pl='lg'>
-          <Text>{t('component.table-of-contents.title')}</Text>
+        <VStack pt='lg' pb='16' pl='lg' overflowY='scroll' overscrollBehavior='contain'>
+          <HStack gap='sm'>
+            <ListIcon />
+            <Text>{t('component.table-of-contents.title')}</Text>
+          </HStack>
 
-          <List gap='sm' fontSize='sm' color='muted'>
+          <List gap='0' fontSize='sm' color='muted' ml='sm'>
             {contents.map(({ lv, title, id }) => {
               const isActive = activeId == id
 
@@ -71,12 +73,28 @@ export const TableOfContents = memo(
                   key={id}
                   as='a'
                   href={`#${id}`}
-                  pl={`calc(${lv - 2} * ${pl})`}
-                  color={
+                  pl={`calc(${lv - 1} * ${pl})`}
+                  py='sm'
+                  borderLeftWidth='1px'
+                  borderLeftColor={
                     isActive
                       ? [
-                          toneColor('brand', 500)(theme, colorMode),
-                          toneColor('brand', 400)(theme, colorMode),
+                          toneColor('brand', 300)(theme, colorMode),
+                          toneColor('brand', 200)(theme, colorMode),
+                        ]
+                      : 'border'
+                  }
+                  bg={
+                    isActive
+                      ? [
+                          transparentizeColor(toneColor('brand', 400)(theme, colorMode), 0.08)(
+                            theme,
+                            colorMode,
+                          ),
+                          transparentizeColor(toneColor('brand', 200)(theme, colorMode), 0.12)(
+                            theme,
+                            colorMode,
+                          ),
                         ]
                       : undefined
                   }
@@ -85,9 +103,8 @@ export const TableOfContents = memo(
                   }}
                   transitionProperty='colors'
                   transitionDuration='normal'
-                  noOfLines={1}
+                  isTruncated
                 >
-                  <ListIcon as={ChevronIcon} transform='rotate(-90deg)' fontSize='1.3em' />
                   {title}
                 </ListItem>
               )

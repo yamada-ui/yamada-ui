@@ -75,7 +75,10 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         }
         _hover={{
           color: isActive ? undefined : ['black', 'white'],
-          bg: isActive ? undefined : ['blackAlpha.50', 'whiteAlpha.50'],
+          bg: isActive ? undefined : ['gray.100', 'whiteAlpha.50'],
+        }}
+        _active={{
+          bg: isActive ? undefined : ['gray.200', 'whiteAlpha.100'],
         }}
         transitionProperty='colors'
         transitionDuration='normal'

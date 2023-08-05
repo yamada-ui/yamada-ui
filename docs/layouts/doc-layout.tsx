@@ -65,11 +65,11 @@ export const DocLayout: FC<DocLayoutProps> = ({
                   <Divider mt='xl' />
                 </>
               ) : null}
+
+              <EditPageLink href={editUrl} />
+
+              <Pagination />
             </Box>
-
-            <EditPageLink href={editUrl} />
-
-            <Pagination />
           </VStack>
 
           <TableOfContents display={{ base: 'flex', xl: 'none' }} contents={contents} />

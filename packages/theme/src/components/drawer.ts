@@ -3,8 +3,8 @@ import { ComponentMultiStyle } from '@yamada-ui/core'
 export const Drawer: ComponentMultiStyle = {
   baseStyle: {
     container: ({ isFullHeight }) => ({
-      ...(isFullHeight ? { height: '100vh' } : {}),
-      maxH: '100vh',
+      ...(isFullHeight ? { height: '100dvh' } : {}),
+      maxH: '100dvh',
       bg: ['white', 'black'],
       color: 'inherit',
       boxShadow: ['lg', 'dark-lg'],

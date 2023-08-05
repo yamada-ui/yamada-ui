@@ -36,7 +36,7 @@ type DrawerOptions = {
    */
   placement?: SlideProps['placement']
   /**
-   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100vh).
+   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
    */
   isFullHeight?: boolean
 }

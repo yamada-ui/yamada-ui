@@ -50,7 +50,7 @@ export const Modal: ComponentMultiStyle = {
     '5xl': { container: { maxW: '5xl' } },
     '6xl': { container: { maxW: '6xl' } },
     full: {
-      container: { minW: '100vw', minH: '100vh', rounded: 0 },
+      container: { minW: '100vw', minH: '100dvh', rounded: 0 },
     },
   },
 

@@ -228,7 +228,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(
       left: 0,
       zIndex: 'beerus',
       w: '100vw',
-      h: '100vh',
+      h: '100dvh',
       p: size !== 'full' ? outside : undefined,
       display: 'flex',
       justifyContent: placement.includes('left')

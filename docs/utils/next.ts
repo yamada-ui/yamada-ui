@@ -1,11 +1,19 @@
 import { ParsedUrlQuery } from 'querystring'
 import { toArray } from './array'
-import { getBreadcrumbs, getDoc, getDocs, getPagination, getTabs, getTree } from './contentlayer'
+import {
+  getBreadcrumbs,
+  getDoc,
+  getDocs,
+  getPagination,
+  getTabs,
+  getTree,
+  omitTabDocs,
+} from './contentlayer'
 import { Doc, DocWithChildren } from 'contentlayer/generated'
 
 export const getStaticCommonProps = ({ locale }: { locale: string }) => {
   const docs = getDocs(locale)
-  const tree = getTree(docs)
+  const tree = getTree(omitTabDocs(docs))
 
   return { props: { docs, tree } }
 }

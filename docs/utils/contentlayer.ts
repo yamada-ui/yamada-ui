@@ -50,11 +50,7 @@ export const getBreadcrumbs = (docs: Doc[], paths: string[], locale: string): Do
 
 export const getDocs = (locale: string): Doc[] =>
   allDocs
-    .filter(({ is_active, data, slug }) => {
-      const parentDoc = allDocs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
-
-      return is_active && data.locale === locale && !(parentDoc?.is_tabs ?? false)
-    })
+    .filter(({ is_active, data }) => is_active && data.locale === locale)
     .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
 
 export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
@@ -93,3 +89,10 @@ export const getTabs = (docs: Doc[], doc: Doc) => {
 
   return { tabs, parentDoc, parentPaths }
 }
+
+export const omitTabDocs = (docs: Doc[]): Doc[] =>
+  docs.filter(({ slug }) => {
+    const parentDoc = docs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
+
+    return !(parentDoc?.is_tabs ?? false)
+  })

@@ -1,5 +1,6 @@
 import { CSSUIObject } from '@yamada-ui/react'
 import { colorScheme } from 'configs/site.json'
+
 export const mdx: Record<string, CSSUIObject> = {
   h1: {
     mt: '6',

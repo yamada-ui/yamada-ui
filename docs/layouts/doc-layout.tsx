@@ -1,44 +1,22 @@
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
-import { Icon } from '@yamada-ui/fontawesome'
-import {
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  Card,
-  CardBody,
-  CardHeader,
-  Center,
-  ChevronIcon,
-  Divider,
-  Grid,
-  GridItem,
-  HStack,
-  Heading,
-  Tab,
-  Tabs,
-  Tag,
-  Text,
-  VStack,
-} from '@yamada-ui/react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { Box, Center, Divider, HStack, Heading, Text, VStack } from '@yamada-ui/react'
 import { FC, PropsWithChildren } from 'react'
-import { StarBanner, Header, SEO, Sidebar, Footer, TableOfContents, Pagination } from 'components'
-import { Data, Doc, DocWithChildren, DocPagination } from 'contentlayer/generated'
-import { useI18n } from 'contexts'
+import {
+  StarBanner,
+  Header,
+  SEO,
+  Sidebar,
+  Footer,
+  TableOfContents,
+  Pagination,
+  Breadcrumb,
+  Tabs,
+  Cards,
+  EditPageLink,
+} from 'components'
+import { Data, Doc } from 'contentlayer/generated'
+import { usePage } from 'contexts'
 
-export type DocLayoutProps = PropsWithChildren<
-  Doc &
-    Data & {
-      breadcrumbs: Doc[]
-      tabs: Doc[]
-      tree: DocWithChildren[]
-      childrenTree: DocWithChildren[]
-      pagination: DocPagination
-    }
->
+export type DocLayoutProps = PropsWithChildren<Doc & Data>
 
 export const DocLayout: FC<DocLayoutProps> = ({
   title,
@@ -48,15 +26,9 @@ export const DocLayout: FC<DocLayoutProps> = ({
   with_description,
   with_children,
   contents,
-  tree,
-  childrenTree,
-  tabs,
-  breadcrumbs,
-  pagination,
   children,
 }) => {
-  const { push } = useRouter()
-  const { t } = useI18n()
+  const { childrenTree } = usePage()
 
   return (
     <>
@@ -68,33 +40,10 @@ export const DocLayout: FC<DocLayoutProps> = ({
 
       <Center as='main'>
         <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px={{ base: 'lg', md: 'md' }}>
-          <Sidebar tree={tree} display={{ base: 'flex', lg: 'none' }} />
+          <Sidebar display={{ base: 'flex', lg: 'none' }} />
 
           <VStack flex='1' minW='0' gap='0' py={{ base: 'lg', md: 'normal' }}>
-            {breadcrumbs.length ? (
-              <Breadcrumb
-                separator={<ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />}
-                mb='sm'
-                gap='1'
-                fontSize='sm'
-                color='muted'
-                listProps={{ h: 6 }}
-              >
-                {breadcrumbs.map(({ title, menu, slug }, index) => (
-                  <BreadcrumbItem key={slug}>
-                    <BreadcrumbLink as={Link} href={slug}>
-                      {menu ?? title}
-                    </BreadcrumbLink>
-
-                    {breadcrumbs.length === index + 1 ? (
-                      <BreadcrumbSeparator ms='1'>
-                        <ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />
-                      </BreadcrumbSeparator>
-                    ) : null}
-                  </BreadcrumbItem>
-                ))}
-              </Breadcrumb>
-            ) : null}
+            <Breadcrumb />
 
             <Heading as='h1' size='2xl'>
               {title}
@@ -102,20 +51,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
 
             {with_description ? <Text mt='normal'>{description}</Text> : null}
 
-            {tabs.length ? (
-              <Tabs
-                colorScheme='brand'
-                index={tabs.findIndex((child) => child.tab === tab)}
-                mt='lg'
-                overflowX='auto'
-              >
-                {tabs.map(({ tab, menu, title, slug }) => (
-                  <Tab key={slug} onClick={() => push(slug)}>
-                    {tab ?? menu ?? title}
-                  </Tab>
-                ))}
-              </Tabs>
-            ) : null}
+            <Tabs tab={tab} />
 
             <Box>
               {children}
@@ -124,86 +60,16 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 <>
                   <Divider mt='xl' />
 
-                  <Grid
-                    templateColumns={{ base: 'repeat(2, 1fr)', md: '1fr' }}
-                    gap='normal'
-                    mt='xl'
-                  >
-                    {childrenTree.map(({ title, menu, description, label, slug }) => (
-                      <GridItem key={slug}>
-                        <Card
-                          as={Link}
-                          href={slug}
-                          variant='outline'
-                          h={{ base: '40', md: 'auto' }}
-                          size='normal'
-                          bg={['gray.100', 'whiteAlpha.50']}
-                          _focus={{ outline: 'none' }}
-                          _focusVisible={{ boxShadow: 'outline' }}
-                          _hover={{ bg: ['gray.200', 'whiteAlpha.100'] }}
-                          _active={{ bg: ['gray.300', 'whiteAlpha.200'] }}
-                          transitionProperty='colors'
-                          transitionDuration='normal'
-                        >
-                          <CardHeader pt='md' gap='sm'>
-                            <Heading size='md' noOfLines={1}>
-                              {menu ?? title}
-                            </Heading>
-
-                            {label ? (
-                              <Tag
-                                size='sm'
-                                colorScheme={
-                                  label === 'New'
-                                    ? 'blue'
-                                    : label === 'Experimental'
-                                    ? 'purple'
-                                    : label === 'Planned'
-                                    ? 'orange'
-                                    : 'gray'
-                                }
-                              >
-                                {label}
-                              </Tag>
-                            ) : null}
-                          </CardHeader>
-
-                          <CardBody pt='md'>
-                            <Text color='muted' noOfLines={3}>
-                              {description}
-                            </Text>
-                          </CardBody>
-                        </Card>
-                      </GridItem>
-                    ))}
-                  </Grid>
+                  <Cards />
 
                   <Divider mt='xl' />
                 </>
               ) : null}
             </Box>
 
-            <HStack
-              as='a'
-              href={editUrl}
-              target='_blank'
-              mt='xl'
-              alignSelf='flex-start'
-              gap='sm'
-              fontSize='sm'
-              color='muted'
-              _focus={{ outline: 'none' }}
-              _focusVisible={{ boxShadow: 'outline' }}
-              _hover={{ color: ['black', 'white'] }}
-              transitionProperty='colors'
-              transitionDuration='normal'
-            >
-              <Icon icon={faPencilAlt} fontSize='0.8em' />
+            <EditPageLink href={editUrl} />
 
-              <Text>{t('component.edit-page.label')}</Text>
-            </HStack>
-
-            <Pagination {...pagination} />
+            <Pagination />
           </VStack>
 
           <TableOfContents display={{ base: 'flex', xl: 'none' }} contents={contents} />

@@ -1,18 +1,10 @@
 import { GetStaticPaths, NextPage, InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { MDXComponents } from 'components'
-import { Data, Doc, allDocs } from 'contentlayer/generated'
+import { Data, allDocs } from 'contentlayer/generated'
+import { PageProvider } from 'contexts'
 import { DocLayout } from 'layouts'
-import {
-  filterTabDocs,
-  getBreadcrumbs,
-  getDoc,
-  getPagination,
-  getTabs,
-  getTree,
-  otherLocales,
-  toArray,
-} from 'utils'
+import { getStaticCommonProps, getStaticDocProps, otherLocales } from 'utils'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -21,6 +13,7 @@ const OTHER_LOCALES = `(${otherLocales.join('|')})`
 const Page: NextPage<PageProps> = ({
   body,
   data,
+  docs,
   breadcrumbs,
   tree,
   tabs,
@@ -31,9 +24,11 @@ const Page: NextPage<PageProps> = ({
   const Component = useMDXComponent(body.code)
 
   return (
-    <DocLayout {...{ ...data, ...rest, breadcrumbs, tree, tabs, childrenTree, pagination }}>
-      <Component components={MDXComponents} />
-    </DocLayout>
+    <PageProvider value={{ docs, breadcrumbs, tree, tabs, childrenTree, pagination }}>
+      <DocLayout {...{ ...data, ...rest }}>
+        <Component components={MDXComponents} />
+      </DocLayout>
+    </PageProvider>
   )
 }
 
@@ -67,21 +62,11 @@ export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales })
 }
 
 export const getStaticProps = async ({ params, locale }: GetStaticPropsContext) => {
-  const paths = toArray(params.slug)
+  const { props } = getStaticCommonProps({ locale })
 
-  let docs = allDocs
-    .filter(({ is_active, data }) => is_active && data.locale === locale)
-    .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
+  const { docs, tree } = props
 
-  const doc: Doc = getDoc(docs, paths, locale)
-  const [tabs, parentDoc, parentPaths] = getTabs(docs, doc)
+  const { doc, ...rest } = getStaticDocProps({ docs, tree, params, locale })
 
-  docs = filterTabDocs(docs)
-
-  const tree = getTree(docs)
-  const childrenTree = getTree(docs, paths)
-  const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale)
-  const pagination = getPagination(tree, parentDoc ?? doc)
-
-  return { props: { ...doc, breadcrumbs, tree, childrenTree, tabs, pagination } }
+  return { props: { ...props, ...doc, ...rest } }
 }

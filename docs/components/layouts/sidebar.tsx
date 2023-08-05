@@ -1,12 +1,11 @@
 import { Box, StackProps, VStack, forwardRef } from '@yamada-ui/react'
 import { memo } from 'react'
-import { DocTree } from 'components/navigation'
-import { DocWithChildren } from 'contentlayer/generated'
+import { Tree } from 'components/navigation'
 
-export type SidebarProps = StackProps & { tree: DocWithChildren[] }
+export type SidebarProps = StackProps
 
 export const Sidebar = memo(
-  forwardRef<SidebarProps, 'aside'>(({ tree, ...rest }, ref) => {
+  forwardRef<SidebarProps, 'aside'>(({ ...rest }, ref) => {
     return (
       <VStack
         ref={ref}
@@ -18,7 +17,7 @@ export const Sidebar = memo(
         {...rest}
       >
         <VStack as='nav' overflowY='scroll' overscrollBehavior='contain'>
-          <DocTree pt='lg' pb='16' pr='lg' tree={tree} />
+          <Tree pt='lg' pb='16' pr='lg' />
         </VStack>
 
         <Box

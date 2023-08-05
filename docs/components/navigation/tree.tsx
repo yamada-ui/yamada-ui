@@ -20,11 +20,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, memo, useEffect } from 'react'
 import { DocWithChildren } from 'contentlayer/generated'
+import { usePage } from 'contexts'
 
-export type DocTreeProps = ListProps & { tree: DocWithChildren[] }
+export type TreeProps = ListProps
 
-export const DocTree = memo(
-  forwardRef<DocTreeProps, 'div'>(({ tree = [], ...rest }, ref) => {
+export const Tree = memo(
+  forwardRef<TreeProps, 'div'>(({ ...rest }, ref) => {
+    const { tree } = usePage()
+
     return (
       <List ref={ref} gap='sm' fontSize='sm' {...rest}>
         {tree.map((doc) => (

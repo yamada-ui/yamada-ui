@@ -13,8 +13,8 @@ import {
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC, memo } from 'react'
-import { Doc, DocPagination } from 'contentlayer/generated'
-import { useI18n } from 'contexts'
+import { Doc } from 'contentlayer/generated'
+import { useI18n, usePage } from 'contexts'
 
 type PaginationItemProps = GridItemProps & { doc?: Doc; isPrev?: boolean }
 
@@ -80,10 +80,13 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
   )
 }
 
-export type PaginationProps = GridProps & DocPagination
+export type PaginationProps = GridProps
 
 export const Pagination = memo(
-  forwardRef<PaginationProps, 'div'>(({ prev, next, ...rest }, ref) => {
+  forwardRef<PaginationProps, 'div'>(({ ...rest }, ref) => {
+    const { pagination } = usePage()
+    const { prev, next } = pagination
+
     if (!prev && !next) return
 
     return (

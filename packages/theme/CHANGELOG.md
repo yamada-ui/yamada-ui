@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.5.3
+
+### Patch Changes
+
+- [`558f3dc4`](https://github.com/hirotomoyamada/yamada-ui/commit/558f3dc4d793cc47ab931f44a4e2cc88fb99041f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed menu styles.
+
 ## 0.5.2
 
 ### Patch Changes

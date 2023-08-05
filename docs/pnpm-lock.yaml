@@ -28,16 +28,16 @@ dependencies:
     version: 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/nextjs':
     specifier: ^4.0.19
-    version: 4.0.19(@emotion/react@11.11.1)(@types/react@18.2.18)(@yamada-ui/react@0.5.21)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.0.19(@emotion/react@11.11.1)(@types/react@18.2.18)(@yamada-ui/react@0.5.24)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
-    specifier: ^0.5.21
-    version: 0.5.21(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(framer-motion@10.15.0)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.5.24
+    version: 0.5.24(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(framer-motion@10.15.0)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
     specifier: ^0.2.18
     version: 0.2.18(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
   contentlayer:
     specifier: ^0.3.4
-    version: 0.3.4(esbuild@0.18.17)
+    version: 0.3.4(esbuild@0.18.18)
   github-slugger:
     specifier: ^2.0.0
     version: 2.0.0
@@ -46,7 +46,7 @@ dependencies:
     version: 13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
   next-contentlayer:
     specifier: ^0.3.4
-    version: 0.3.4(contentlayer@0.3.4)(esbuild@0.18.17)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0)
+    version: 0.3.4(contentlayer@0.3.4)(esbuild@0.18.18)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0)
   next-seo:
     specifier: ^6.1.0
     version: 6.1.0(next@13.4.12)(react-dom@18.2.0)(react@18.2.0)
@@ -360,10 +360,10 @@ packages:
       chalk: 4.1.2
     dev: true
 
-  /@contentlayer/cli@0.3.4(esbuild@0.18.17):
+  /@contentlayer/cli@0.3.4(esbuild@0.18.18):
     resolution: {integrity: sha512-vNDwgLuhYNu+m70NZ3XK9kexKNguuxPXg7Yvzj3B34cEilQjjzSrcTY/i+AIQm9V7uT5GGshx9ukzPf+SmoszQ==}
     dependencies:
-      '@contentlayer/core': 0.3.4(esbuild@0.18.17)
+      '@contentlayer/core': 0.3.4(esbuild@0.18.18)
       '@contentlayer/utils': 0.3.4
       clipanion: 3.2.1(typanion@3.13.0)
       typanion: 3.13.0
@@ -374,10 +374,10 @@ packages:
       - supports-color
     dev: false
 
-  /@contentlayer/client@0.3.4(esbuild@0.18.17):
+  /@contentlayer/client@0.3.4(esbuild@0.18.18):
     resolution: {integrity: sha512-QSlLyc3y4PtdC5lFw0L4wTZUH8BQnv2nk37hNCsPAqGf+dRO7TLAzdc+2/mVIRgK+vSH+pSOzjLsQpFxxXRTZA==}
     dependencies:
-      '@contentlayer/core': 0.3.4(esbuild@0.18.17)
+      '@contentlayer/core': 0.3.4(esbuild@0.18.18)
     transitivePeerDependencies:
       - '@effect-ts/otel-node'
       - esbuild
@@ -385,7 +385,7 @@ packages:
       - supports-color
     dev: false
 
-  /@contentlayer/core@0.3.4(esbuild@0.18.17):
+  /@contentlayer/core@0.3.4(esbuild@0.18.18):
     resolution: {integrity: sha512-o68oBLwfYZ+2vtgfk1lgHxOl3LoxvRNiUfeQ8IWFWy/L4wnIkKIqLZX01zlRE5IzYM+ZMMN5V0cKQlO7DsyR9g==}
     peerDependencies:
       esbuild: 0.17.x || 0.18.x
@@ -399,9 +399,9 @@ packages:
       '@contentlayer/utils': 0.3.4
       camel-case: 4.1.2
       comment-json: 4.2.3
-      esbuild: 0.18.17
+      esbuild: 0.18.18
       gray-matter: 4.0.3
-      mdx-bundler: 9.2.1(esbuild@0.18.17)
+      mdx-bundler: 9.2.1(esbuild@0.18.18)
       rehype-stringify: 9.0.3
       remark-frontmatter: 4.0.1
       remark-parse: 10.0.2
@@ -414,10 +414,10 @@ packages:
       - supports-color
     dev: false
 
-  /@contentlayer/source-files@0.3.4(esbuild@0.18.17):
+  /@contentlayer/source-files@0.3.4(esbuild@0.18.18):
     resolution: {integrity: sha512-4njyn0OFPu7WY4tAjMxiJgWOKeiHuBOGdQ36EYE03iij/pPPRbiWbL+cmLccYXUFEW58mDwpqROZZm6pnxjRDQ==}
     dependencies:
-      '@contentlayer/core': 0.3.4(esbuild@0.18.17)
+      '@contentlayer/core': 0.3.4(esbuild@0.18.18)
       '@contentlayer/utils': 0.3.4
       chokidar: 3.5.3
       fast-glob: 3.3.1
@@ -435,11 +435,11 @@ packages:
       - supports-color
     dev: false
 
-  /@contentlayer/source-remote-files@0.3.4(esbuild@0.18.17):
+  /@contentlayer/source-remote-files@0.3.4(esbuild@0.18.18):
     resolution: {integrity: sha512-cyiv4sNUySZvR0uAKlM+kSAELzNd2h2QT1R2e41dRKbwOUVxeLfmGiLugr0aVac6Q3xYcD99dbHyR1xWPV+w9w==}
     dependencies:
-      '@contentlayer/core': 0.3.4(esbuild@0.18.17)
-      '@contentlayer/source-files': 0.3.4(esbuild@0.18.17)
+      '@contentlayer/core': 0.3.4(esbuild@0.18.18)
+      '@contentlayer/source-files': 0.3.4(esbuild@0.18.18)
       '@contentlayer/utils': 0.3.4
     transitivePeerDependencies:
       - '@effect-ts/otel-node'
@@ -697,14 +697,14 @@ packages:
       get-tsconfig: 4.6.2
     dev: true
 
-  /@esbuild-plugins/node-resolve@0.1.4(esbuild@0.18.17):
+  /@esbuild-plugins/node-resolve@0.1.4(esbuild@0.18.18):
     resolution: {integrity: sha512-haFQ0qhxEpqtWWY0kx1Y5oE3sMyO1PcoSiWEPrAw6tm/ZOOLXjSs6Q+v1v9eyuVF0nNt50YEvrcrvENmyoMv5g==}
     peerDependencies:
       esbuild: '*'
     dependencies:
       '@types/resolve': 1.20.2
       debug: 4.3.4
-      esbuild: 0.18.17
+      esbuild: 0.18.18
       escape-string-regexp: 4.0.0
       resolve: 1.22.4
     transitivePeerDependencies:
@@ -720,8 +720,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/android-arm64@0.18.17:
-    resolution: {integrity: sha512-9np+YYdNDed5+Jgr1TdWBsozZ85U1Oa3xW0c7TWqH0y2aGghXtZsuT8nYRbzOMcl0bXZXjOGbksoTtVOlWrRZg==}
+  /@esbuild/android-arm64@0.18.18:
+    resolution: {integrity: sha512-dkAPYzRHq3dNXIzOyAknYOzsx8o3KWaNiuu56B2rP9IFPmFWMS58WQcTlUQi6iloku8ZyHHMluCe5sTWhKq/Yw==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [android]
@@ -738,8 +738,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/android-arm@0.18.17:
-    resolution: {integrity: sha512-wHsmJG/dnL3OkpAcwbgoBTTMHVi4Uyou3F5mf58ZtmUyIKfcdA7TROav/6tCzET4A3QW2Q2FC+eFneMU+iyOxg==}
+  /@esbuild/android-arm@0.18.18:
+    resolution: {integrity: sha512-oBymf7ZwplAawSxmiSlBCf+FMcY0f4bs5QP2jn43JKUf0M9DnrUTjqa5RvFPl1elw+sMfcpfBRPK+rb+E1q7zg==}
     engines: {node: '>=12'}
     cpu: [arm]
     os: [android]
@@ -756,8 +756,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/android-x64@0.18.17:
-    resolution: {integrity: sha512-O+FeWB/+xya0aLg23hHEM2E3hbfwZzjqumKMSIqcHbNvDa+dza2D0yLuymRBQQnC34CWrsJUXyH2MG5VnLd6uw==}
+  /@esbuild/android-x64@0.18.18:
+    resolution: {integrity: sha512-r7/pVcrUQMYkjvtE/1/n6BxhWM+/9tvLxDG1ev1ce4z3YsqoxMK9bbOM6bFcj0BowMeGQvOZWcBV182lFFKmrw==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [android]
@@ -774,8 +774,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/darwin-arm64@0.18.17:
-    resolution: {integrity: sha512-M9uJ9VSB1oli2BE/dJs3zVr9kcCBBsE883prage1NWz6pBS++1oNn/7soPNS3+1DGj0FrkSvnED4Bmlu1VAE9g==}
+  /@esbuild/darwin-arm64@0.18.18:
+    resolution: {integrity: sha512-MSe2iV9MAH3wfP0g+vzN9bp36rtPPuCSk+bT5E2vv/d8krvW5uB/Pi/Q5+txUZuxsG3GcO8dhygjnFq0wJU9hQ==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [darwin]
@@ -792,8 +792,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/darwin-x64@0.18.17:
-    resolution: {integrity: sha512-XDre+J5YeIJDMfp3n0279DFNrGCXlxOuGsWIkRb1NThMZ0BsrWXoTg23Jer7fEXQ9Ye5QjrvXpxnhzl3bHtk0g==}
+  /@esbuild/darwin-x64@0.18.18:
+    resolution: {integrity: sha512-ARFYISOWkaifjcr48YtO70gcDNeOf1H2RnmOj6ip3xHIj66f3dAbhcd5Nph5np6oHI7DhHIcr9MWO18RvUL1bw==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [darwin]
@@ -810,8 +810,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/freebsd-arm64@0.18.17:
-    resolution: {integrity: sha512-cjTzGa3QlNfERa0+ptykyxs5A6FEUQQF0MuilYXYBGdBxD3vxJcKnzDlhDCa1VAJCmAxed6mYhA2KaJIbtiNuQ==}
+  /@esbuild/freebsd-arm64@0.18.18:
+    resolution: {integrity: sha512-BHnXmexzEWRU2ZySJosU0Ts0NRnJnNrMB6t4EiIaOSel73I8iLsNiTPLH0rJulAh19cYZutsB5XHK6N8fi5eMg==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [freebsd]
@@ -828,8 +828,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/freebsd-x64@0.18.17:
-    resolution: {integrity: sha512-sOxEvR8d7V7Kw8QqzxWc7bFfnWnGdaFBut1dRUYtu+EIRXefBc/eIsiUiShnW0hM3FmQ5Zf27suDuHsKgZ5QrA==}
+  /@esbuild/freebsd-x64@0.18.18:
+    resolution: {integrity: sha512-n823w35wm0ZOobbuE//0sJjuz1Qj619+AwjgOcAJMN2pomZhH9BONCtn+KlfrmM/NWZ+27yB/eGVFzUIWLeh3w==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [freebsd]
@@ -846,8 +846,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-arm64@0.18.17:
-    resolution: {integrity: sha512-c9w3tE7qA3CYWjT+M3BMbwMt+0JYOp3vCMKgVBrCl1nwjAlOMYzEo+gG7QaZ9AtqZFj5MbUc885wuBBmu6aADQ==}
+  /@esbuild/linux-arm64@0.18.18:
+    resolution: {integrity: sha512-zANxnwF0sCinDcAqoMohGoWBK9QaFJ65Vgh0ZE+RXtURaMwx+RfmfLElqtnn7X8OYNckMoIXSg7u+tZ3tqTlrA==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [linux]
@@ -864,8 +864,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-arm@0.18.17:
-    resolution: {integrity: sha512-2d3Lw6wkwgSLC2fIvXKoMNGVaeY8qdN0IC3rfuVxJp89CRfA3e3VqWifGDfuakPmp90+ZirmTfye1n4ncjv2lg==}
+  /@esbuild/linux-arm@0.18.18:
+    resolution: {integrity: sha512-Kck3jxPLQU4VeAGwe8Q4NU+IWIx+suULYOFUI9T0C2J1+UQlOHJ08ITN+MaJJ+2youzJOmKmcphH/t3SJxQ1Tw==}
     engines: {node: '>=12'}
     cpu: [arm]
     os: [linux]
@@ -882,8 +882,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-ia32@0.18.17:
-    resolution: {integrity: sha512-1DS9F966pn5pPnqXYz16dQqWIB0dmDfAQZd6jSSpiT9eX1NzKh07J6VKR3AoXXXEk6CqZMojiVDSZi1SlmKVdg==}
+  /@esbuild/linux-ia32@0.18.18:
+    resolution: {integrity: sha512-+VHz2sIRlY5u8IlaLJpdf5TL2kM76yx186pW7bpTB+vLWpzcFQVP04L842ZB2Ty13A1VXUvy3DbU1jV65P2skg==}
     engines: {node: '>=12'}
     cpu: [ia32]
     os: [linux]
@@ -900,8 +900,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-loong64@0.18.17:
-    resolution: {integrity: sha512-EvLsxCk6ZF0fpCB6w6eOI2Fc8KW5N6sHlIovNe8uOFObL2O+Mr0bflPHyHwLT6rwMg9r77WOAWb2FqCQrVnwFg==}
+  /@esbuild/linux-loong64@0.18.18:
+    resolution: {integrity: sha512-fXPEPdeGBvguo/1+Na8OIWz3667BN1cwbGtTEZWTd0qdyTsk5gGf9jVX8MblElbDb/Cpw6y5JiaQuL96YmvBwQ==}
     engines: {node: '>=12'}
     cpu: [loong64]
     os: [linux]
@@ -918,8 +918,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-mips64el@0.18.17:
-    resolution: {integrity: sha512-e0bIdHA5p6l+lwqTE36NAW5hHtw2tNRmHlGBygZC14QObsA3bD4C6sXLJjvnDIjSKhW1/0S3eDy+QmX/uZWEYQ==}
+  /@esbuild/linux-mips64el@0.18.18:
+    resolution: {integrity: sha512-dLvRB87pIBIRnEIC32LIcgwK1JzlIuADIRjLKdUIpxauKwMuS/xMpN+cFl+0nN4RHNYOZ57DmXFFmQAcdlFOmw==}
     engines: {node: '>=12'}
     cpu: [mips64el]
     os: [linux]
@@ -936,8 +936,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-ppc64@0.18.17:
-    resolution: {integrity: sha512-BAAilJ0M5O2uMxHYGjFKn4nJKF6fNCdP1E0o5t5fvMYYzeIqy2JdAP88Az5LHt9qBoUa4tDaRpfWt21ep5/WqQ==}
+  /@esbuild/linux-ppc64@0.18.18:
+    resolution: {integrity: sha512-fRChqIJZ7hLkXSKfBLYgsX9Ssb5OGCjk3dzCETF5QSS1qjTgayLv0ALUdJDB9QOh/nbWwp+qfLZU6md4XcjL7w==}
     engines: {node: '>=12'}
     cpu: [ppc64]
     os: [linux]
@@ -954,8 +954,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-riscv64@0.18.17:
-    resolution: {integrity: sha512-Wh/HW2MPnC3b8BqRSIme/9Zhab36PPH+3zam5pqGRH4pE+4xTrVLx2+XdGp6fVS3L2x+DrsIcsbMleex8fbE6g==}
+  /@esbuild/linux-riscv64@0.18.18:
+    resolution: {integrity: sha512-ALK/BT3u7Hoa/vHjow6W6+MKF0ohYcVcVA1EpskI4bkBPVuDLrUDqt2YFifg5UcZc8qup0CwQqWmFUd6VMNgaA==}
     engines: {node: '>=12'}
     cpu: [riscv64]
     os: [linux]
@@ -972,8 +972,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-s390x@0.18.17:
-    resolution: {integrity: sha512-j/34jAl3ul3PNcK3pfI0NSlBANduT2UO5kZ7FCaK33XFv3chDhICLY8wJJWIhiQ+YNdQ9dxqQctRg2bvrMlYgg==}
+  /@esbuild/linux-s390x@0.18.18:
+    resolution: {integrity: sha512-crT7jtOXd9iirY65B+mJQ6W0HWdNy8dtkZqKGWNcBnunpLcTCfne5y5bKic9bhyYzKpQEsO+C/VBPD8iF0RhRw==}
     engines: {node: '>=12'}
     cpu: [s390x]
     os: [linux]
@@ -990,8 +990,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-x64@0.18.17:
-    resolution: {integrity: sha512-QM50vJ/y+8I60qEmFxMoxIx4de03pGo2HwxdBeFd4nMh364X6TIBZ6VQ5UQmPbQWUVWHWws5MmJXlHAXvJEmpQ==}
+  /@esbuild/linux-x64@0.18.18:
+    resolution: {integrity: sha512-/NSgghjBOW9ELqjXDYxOCCIsvQUZpvua1/6NdnA9Vnrp9UzEydyDdFXljUjMMS9p5KxMzbMO9frjHYGVHBfCHg==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [linux]
@@ -1008,8 +1008,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/netbsd-x64@0.18.17:
-    resolution: {integrity: sha512-/jGlhWR7Sj9JPZHzXyyMZ1RFMkNPjC6QIAan0sDOtIo2TYk3tZn5UDrkE0XgsTQCxWTTOcMPf9p6Rh2hXtl5TQ==}
+  /@esbuild/netbsd-x64@0.18.18:
+    resolution: {integrity: sha512-8Otf05Vx5sZjLLDulgr5QS5lsWXMplKZEyHMArH9/S4olLlhzmdhQBPhzhJTNwaL2FJNdWcUPNGAcoD5zDTfUA==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [netbsd]
@@ -1026,8 +1026,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/openbsd-x64@0.18.17:
-    resolution: {integrity: sha512-rSEeYaGgyGGf4qZM2NonMhMOP/5EHp4u9ehFiBrg7stH6BYEEjlkVREuDEcQ0LfIl53OXLxNbfuIj7mr5m29TA==}
+  /@esbuild/openbsd-x64@0.18.18:
+    resolution: {integrity: sha512-tFiFF4kT5L5qhVrWJUNxEXWvvX8nK/UX9ZrB7apuTwY3f6+Xy4aFMBPwAVrBYtBd5MOUuyOVHK6HBZCAHkwUlw==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [openbsd]
@@ -1044,8 +1044,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/sunos-x64@0.18.17:
-    resolution: {integrity: sha512-Y7ZBbkLqlSgn4+zot4KUNYst0bFoO68tRgI6mY2FIM+b7ZbyNVtNbDP5y8qlu4/knZZ73fgJDlXID+ohY5zt5g==}
+  /@esbuild/sunos-x64@0.18.18:
+    resolution: {integrity: sha512-MPogVV8Bzh8os4OM+YDGGsSzCzmNRiyKGtHoJyZLtI4BMmd6EcxmGlcEGK1uM46h1BiOyi7Z7teUtzzQhvkC+w==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [sunos]
@@ -1062,8 +1062,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/win32-arm64@0.18.17:
-    resolution: {integrity: sha512-bwPmTJsEQcbZk26oYpc4c/8PvTY3J5/QK8jM19DVlEsAB41M39aWovWoHtNm78sd6ip6prilxeHosPADXtEJFw==}
+  /@esbuild/win32-arm64@0.18.18:
+    resolution: {integrity: sha512-YKD6LF/XXY9REu+ZL5RAsusiG48n602qxsMVh/E8FFD9hp4OyTQaL9fpE1ovxwQXqFio+tT0ITUGjDSSSPN13w==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [win32]
@@ -1080,8 +1080,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/win32-ia32@0.18.17:
-    resolution: {integrity: sha512-H/XaPtPKli2MhW+3CQueo6Ni3Avggi6hP/YvgkEe1aSaxw+AeO8MFjq8DlgfTd9Iz4Yih3QCZI6YLMoyccnPRg==}
+  /@esbuild/win32-ia32@0.18.18:
+    resolution: {integrity: sha512-NjSBmBsyZBTsZB6ga6rA6PfG/RHnwruUz/9YEVXcm4STGauFWvhYhOMhEyw1yU5NVgYYm8CH5AltCm77TS21/Q==}
     engines: {node: '>=12'}
     cpu: [ia32]
     os: [win32]
@@ -1098,8 +1098,8 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/win32-x64@0.18.17:
-    resolution: {integrity: sha512-fGEb8f2BSA3CW7riJVurug65ACLuQAzKq0SSqkY2b2yHHH0MzDfbLyKIGzHwOI/gkHcxM/leuSW6D5w/LMNitA==}
+  /@esbuild/win32-x64@0.18.18:
+    resolution: {integrity: sha512-eTSg/gC3p3tdjj4roDhe5xu94l1s2jMazP8u2FsYO8SEKvSpPOO71EucprDn/IuErDPvTFUhV9lTw5z5WJCRKQ==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
@@ -1282,13 +1282,13 @@ packages:
       tslib: 2.6.1
     dev: false
 
-  /@mdx-js/esbuild@2.3.0(esbuild@0.18.17):
+  /@mdx-js/esbuild@2.3.0(esbuild@0.18.18):
     resolution: {integrity: sha512-r/vsqsM0E+U4Wr0DK+0EfmABE/eg+8ITW4DjvYdh3ve/tK2safaqHArNnaqbOk1DjYGrhxtoXoGaM3BY8fGBTA==}
     peerDependencies:
       esbuild: '>=0.11.0'
     dependencies:
       '@mdx-js/mdx': 2.3.0
-      esbuild: 0.18.17
+      esbuild: 0.18.18
       node-fetch: 3.3.2
       vfile: 5.3.7
     transitivePeerDependencies:
@@ -2506,8 +2506,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/list@0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-hdIuX7jCMeCttb7im3N/Oyzko5qI8BeUSPmu3Wr8oCmfztiJ3h3LEUHWLXNnK+ESlT3tmcvtFdCzZu5kIhc0Ew==}
+  /@yamada-ui/list@0.2.13(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Q1e+1YhD7/92VYUWFoJDpwWmAwQhaFkNpHcIYY+JMuiImfeto6AhDCuoWUKs++1e9iPTJaJWVsGM+g77O91OUQ==}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2574,8 +2574,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/modal@0.3.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-AyU7jL+0cjeZE72ZOxuvsKTL2v6R/MYiM7x9ifmJS9vEjQS2zVy67y00AMB8rNs9KgQbbks0KozYY3QWzWEBrg==}
+  /@yamada-ui/modal@0.3.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ZnoVVyYF6gbB7Js+hHkxbHbMHUq8NRdDmPJBfBy0Zk/8R6nkkWE3vmuD1qoB0FRJvplFtoc1STJ0tpDISSdopg==}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2637,7 +2637,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/nextjs@4.0.19(@emotion/react@11.11.1)(@types/react@18.2.18)(@yamada-ui/react@0.5.21)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/nextjs@4.0.19(@emotion/react@11.11.1)(@types/react@18.2.18)(@yamada-ui/react@0.5.24)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-g1FWK41CzKTCXq1gWZZv5V3MCUegTlJf1We9DVb8PMu226AAYQ2XLLX97IggTmwMB2ASwGB2ZfRlSQrS+9fxIg==}
     peerDependencies:
       '@emotion/react': '>=11'
@@ -2648,7 +2648,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.1(@types/react@18.2.18)(react@18.2.0)
       '@yamada-ui/core': 0.6.2(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 0.5.21(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(framer-motion@10.15.0)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 0.5.24(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(framer-motion@10.15.0)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 0.1.5(react@18.2.0)
       next: 13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -2769,8 +2769,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/providers@0.6.8(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-AMi2XPFCWii/cu4eQvWRqunXzxL8Yy76rPB3w2P6Tx3yKAvW1wIzmq7ldSbS8VVBkXT72i72mVn0Z4/3YmJVqg==}
+  /@yamada-ui/providers@0.6.11(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BV8WzlmZYhM+BZtFEi5MFsV8dmTDIcpuuuziHc6cgjj0MJMsXGyulG7RkxsDCLoM4VgedUYLEasw4IkPEkS4Iw==}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -2784,7 +2784,7 @@ packages:
       '@yamada-ui/motion': 0.3.10(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/notice': 0.3.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 0.2.4(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/theme': 0.5.0(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/theme': 0.5.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-timeout': 0.1.6(react@18.2.0)
       '@yamada-ui/utils': 0.1.5(react@18.2.0)
       react: 18.2.0
@@ -2811,8 +2811,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@0.5.21(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(framer-motion@10.15.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Q0n8KZUpf3UVUYOfFL/2VCutNt+4I4eZ8M2gYfH/5bMTzRhT+wYh73IMDSAgXayeSTgNnA/Lt41KqzMk8CZJKw==}
+  /@yamada-ui/react@0.5.24(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(framer-motion@10.15.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ft8mCCRxms4Dy5xLvSVmS7pgzwoIjn/SN9g1pXMZHpQF+5sW0S3QbzNth795fuMuyQdygRp3941ywTX/WqnT8Q==}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -2846,10 +2846,10 @@ packages:
       '@yamada-ui/kbd': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/layouts': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/link': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/list': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/list': 0.2.13(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/loading': 0.3.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/menu': 0.2.17(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/modal': 0.3.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/modal': 0.3.4(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/motion': 0.3.10(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/native-select': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/native-table': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
@@ -2860,7 +2860,7 @@ packages:
       '@yamada-ui/popover': 0.2.16(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 0.2.4(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/progress': 0.3.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/providers': 0.6.8(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/providers': 0.6.11(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/radio': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/reorder': 0.2.13(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/scroll-area': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
@@ -2873,7 +2873,7 @@ packages:
       '@yamada-ui/tabs': 0.2.16(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/tag': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/textarea': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/theme': 0.5.0(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/theme': 0.5.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/tooltip': 0.2.16(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/transitions': 0.2.13(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/typography': 0.2.12(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
@@ -2894,7 +2894,7 @@ packages:
       '@yamada-ui/use-interval': 0.1.6(react@18.2.0)
       '@yamada-ui/use-latest-ref': 0.1.0(react@18.2.0)
       '@yamada-ui/use-local-storage': 0.1.7(react@18.2.0)
-      '@yamada-ui/use-media-query': 0.1.25(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-media-query': 0.1.28(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-os': 0.1.5(react@18.2.0)
       '@yamada-ui/use-outside-click': 0.1.5(react@18.2.0)
       '@yamada-ui/use-pan-event': 0.1.6(react@18.2.0)
@@ -3109,8 +3109,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/theme@0.5.0(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Go6Eb8v1USK+vosyXAMx6IlKpqDTL93DaWvbed0C1yXGoeKuRq2wcusEincKeL2SjgHb9lehkWROs6xtw4n5Bg==}
+  /@yamada-ui/theme@0.5.3(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OTSGElqWTHc1IyQUdoj37WNo3EIbJx0OMNthSBJEZsup2auIeW4EHK+tpOFocz+unyThtLT3ikRr3N/HYf6idw==}
     dependencies:
       '@yamada-ui/core': 0.6.2(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 0.1.5(react@18.2.0)
@@ -3333,12 +3333,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@yamada-ui/use-media-query@0.1.25(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-eKJDm15eq7DZlU5p8qQzbJJ11aVQax+kde4oq44prWiBS/HOD1A97iXU7EvpB+KZZ5cr/lAiozG6XWd2nbXCVw==}
+  /@yamada-ui/use-media-query@0.1.28(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-b0xOLqpWKGRPt1QN7Gk7n80v4aDmsDwvX6VpRebyfx0/wocNLITYM4skx7STFmpvH2iswmqe5O3a2BJjB/nTbQ==}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/providers': 0.6.8(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/providers': 0.6.11(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 0.1.5(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -4150,17 +4150,17 @@ packages:
       upper-case: 2.0.2
     dev: true
 
-  /contentlayer@0.3.4(esbuild@0.18.17):
+  /contentlayer@0.3.4(esbuild@0.18.18):
     resolution: {integrity: sha512-FYDdTUFaN4yqep0waswrhcXjmMJnPD5iXDTtxcUCGdklfuIrXM2xLx51xl748cHmGA6IsC+27YZFxU6Ym13QIA==}
     engines: {node: '>=14.18'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@contentlayer/cli': 0.3.4(esbuild@0.18.17)
-      '@contentlayer/client': 0.3.4(esbuild@0.18.17)
-      '@contentlayer/core': 0.3.4(esbuild@0.18.17)
-      '@contentlayer/source-files': 0.3.4(esbuild@0.18.17)
-      '@contentlayer/source-remote-files': 0.3.4(esbuild@0.18.17)
+      '@contentlayer/cli': 0.3.4(esbuild@0.18.18)
+      '@contentlayer/client': 0.3.4(esbuild@0.18.18)
+      '@contentlayer/core': 0.3.4(esbuild@0.18.18)
+      '@contentlayer/source-files': 0.3.4(esbuild@0.18.18)
+      '@contentlayer/source-remote-files': 0.3.4(esbuild@0.18.18)
       '@contentlayer/utils': 0.3.4
     transitivePeerDependencies:
       - '@effect-ts/otel-node'
@@ -4577,34 +4577,34 @@ packages:
       '@esbuild/win32-x64': 0.17.19
     dev: true
 
-  /esbuild@0.18.17:
-    resolution: {integrity: sha512-1GJtYnUxsJreHYA0Y+iQz2UEykonY66HNWOb0yXYZi9/kNrORUEHVg87eQsCtqh59PEJ5YVZJO98JHznMJSWjg==}
+  /esbuild@0.18.18:
+    resolution: {integrity: sha512-UckDPWvdVJLNT0npk5AMTpVwGRQhS76rWFLmHwEtgNvWlR9sgVV1eyc/oeBtM86q9s8ABBLMmm0CwNxhVemOiw==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      '@esbuild/android-arm': 0.18.17
-      '@esbuild/android-arm64': 0.18.17
-      '@esbuild/android-x64': 0.18.17
-      '@esbuild/darwin-arm64': 0.18.17
-      '@esbuild/darwin-x64': 0.18.17
-      '@esbuild/freebsd-arm64': 0.18.17
-      '@esbuild/freebsd-x64': 0.18.17
-      '@esbuild/linux-arm': 0.18.17
-      '@esbuild/linux-arm64': 0.18.17
-      '@esbuild/linux-ia32': 0.18.17
-      '@esbuild/linux-loong64': 0.18.17
-      '@esbuild/linux-mips64el': 0.18.17
-      '@esbuild/linux-ppc64': 0.18.17
-      '@esbuild/linux-riscv64': 0.18.17
-      '@esbuild/linux-s390x': 0.18.17
-      '@esbuild/linux-x64': 0.18.17
-      '@esbuild/netbsd-x64': 0.18.17
-      '@esbuild/openbsd-x64': 0.18.17
-      '@esbuild/sunos-x64': 0.18.17
-      '@esbuild/win32-arm64': 0.18.17
-      '@esbuild/win32-ia32': 0.18.17
-      '@esbuild/win32-x64': 0.18.17
+      '@esbuild/android-arm': 0.18.18
+      '@esbuild/android-arm64': 0.18.18
+      '@esbuild/android-x64': 0.18.18
+      '@esbuild/darwin-arm64': 0.18.18
+      '@esbuild/darwin-x64': 0.18.18
+      '@esbuild/freebsd-arm64': 0.18.18
+      '@esbuild/freebsd-x64': 0.18.18
+      '@esbuild/linux-arm': 0.18.18
+      '@esbuild/linux-arm64': 0.18.18
+      '@esbuild/linux-ia32': 0.18.18
+      '@esbuild/linux-loong64': 0.18.18
+      '@esbuild/linux-mips64el': 0.18.18
+      '@esbuild/linux-ppc64': 0.18.18
+      '@esbuild/linux-riscv64': 0.18.18
+      '@esbuild/linux-s390x': 0.18.18
+      '@esbuild/linux-x64': 0.18.18
+      '@esbuild/netbsd-x64': 0.18.18
+      '@esbuild/openbsd-x64': 0.18.18
+      '@esbuild/sunos-x64': 0.18.18
+      '@esbuild/win32-arm64': 0.18.18
+      '@esbuild/win32-ia32': 0.18.18
+      '@esbuild/win32-x64': 0.18.18
     dev: false
 
   /escalade@3.1.1:
@@ -6740,17 +6740,17 @@ packages:
       '@types/mdast': 3.0.12
     dev: false
 
-  /mdx-bundler@9.2.1(esbuild@0.18.17):
+  /mdx-bundler@9.2.1(esbuild@0.18.18):
     resolution: {integrity: sha512-hWEEip1KU9MCNqeH2rqwzAZ1pdqPPbfkx9OTJjADqGPQz4t9BO85fhI7AP9gVYrpmfArf9/xJZUN0yBErg/G/Q==}
     engines: {node: '>=14', npm: '>=6'}
     peerDependencies:
       esbuild: 0.*
     dependencies:
       '@babel/runtime': 7.22.6
-      '@esbuild-plugins/node-resolve': 0.1.4(esbuild@0.18.17)
+      '@esbuild-plugins/node-resolve': 0.1.4(esbuild@0.18.18)
       '@fal-works/esbuild-plugin-global-externals': 2.1.2
-      '@mdx-js/esbuild': 2.3.0(esbuild@0.18.17)
-      esbuild: 0.18.17
+      '@mdx-js/esbuild': 2.3.0(esbuild@0.18.18)
+      esbuild: 0.18.18
       gray-matter: 4.0.3
       remark-frontmatter: 4.0.1
       remark-mdx-frontmatter: 1.1.1
@@ -7223,7 +7223,7 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /next-contentlayer@0.3.4(contentlayer@0.3.4)(esbuild@0.18.17)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0):
+  /next-contentlayer@0.3.4(contentlayer@0.3.4)(esbuild@0.18.18)(next@13.4.12)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-UtUCwgAl159KwfhNaOwyiI7Lg6sdioyKMeh+E7jxx0CJ29JuXGxBEYmCI6+72NxFGIFZKx8lvttbbQhbnYWYSw==}
     peerDependencies:
       contentlayer: 0.3.4
@@ -7231,9 +7231,9 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      '@contentlayer/core': 0.3.4(esbuild@0.18.17)
+      '@contentlayer/core': 0.3.4(esbuild@0.18.18)
       '@contentlayer/utils': 0.3.4
-      contentlayer: 0.3.4(esbuild@0.18.17)
+      contentlayer: 0.3.4(esbuild@0.18.18)
       next: 13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)

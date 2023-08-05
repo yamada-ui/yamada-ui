@@ -23,7 +23,7 @@
     "@yamada-ui/fontawesome": "^0.2.0",
     "@yamada-ui/markdown": "^0.2.12",
     "@yamada-ui/nextjs": "^4.0.19",
-    "@yamada-ui/react": "^0.5.21",
+    "@yamada-ui/react": "^0.5.24",
     "@yamada-ui/table": "^0.2.18",
     "contentlayer": "^0.3.4",
     "github-slugger": "^2.0.0",

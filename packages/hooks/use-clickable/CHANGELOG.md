@@ -1,5 +1,11 @@
 # @yamada-ui/use-clickable
 
+## 0.2.5
+
+### Patch Changes
+
+- [`03d462e0`](https://github.com/hirotomoyamada/yamada-ui/commit/03d462e09c1618843d9016509aacc3a35f4dfdce) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated refcb condition checks.
+
 ## 0.2.4
 
 ### Patch Changes

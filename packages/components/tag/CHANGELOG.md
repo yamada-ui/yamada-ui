@@ -1,5 +1,12 @@
 # @yamada-ui/tag
 
+## 0.2.13
+
+### Patch Changes
+
+- Updated dependencies [[`03d462e0`](https://github.com/hirotomoyamada/yamada-ui/commit/03d462e09c1618843d9016509aacc3a35f4dfdce)]:
+  - @yamada-ui/use-clickable@0.2.5
+
 ## 0.2.12
 
 ### Patch Changes

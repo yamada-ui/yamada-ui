@@ -1,5 +1,11 @@
 # @yamada-ui/list
 
+## 0.2.13
+
+### Patch Changes
+
+- [`496bde48`](https://github.com/hirotomoyamada/yamada-ui/commit/496bde48a56f96746b229c54da81d1aef1073020) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed type DiscList.
+
 ## 0.2.12
 
 ### Patch Changes

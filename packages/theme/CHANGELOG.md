@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.5.1
+
+### Patch Changes
+
+- [`e224b53a`](https://github.com/hirotomoyamada/yamada-ui/commit/e224b53a3437db1139b70a6a06944a1f71d80ed6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed 100vh to 100dvh.
+
 ## 0.5.0
 
 ### Minor Changes

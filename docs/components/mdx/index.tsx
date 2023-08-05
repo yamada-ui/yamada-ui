@@ -9,7 +9,7 @@ import { CodeBlock } from './code-block'
 import { Link } from './link'
 import { LinkedHeading } from './linked-heading'
 
-const { Heading, Text, Kbd, Divider } = UIComponents
+const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem } = UIComponents
 
 export const MDXUIComponents = {
   ...UIComponents,
@@ -32,6 +32,9 @@ export const MDXBaseComponents: MDXComponentsType = {
   code: (props) => <Text as='code' apply='mdx.code' {...props} />,
   pre: (props) => <CodeBlock {...props} />,
   a: (props) => <Link apply='mdx.a' {...props} />,
+  ul: (props) => <DiscList apply='mdx.ul' {...props} />,
+  ol: (props) => <DecimalList apply='mdx.ol' {...props} />,
+  li: (props) => <ListItem apply='mdx.li' {...props} />,
   hr: (props) => <Divider apply='mdx.hr' {...props} />,
   kbd: Kbd,
 }

@@ -1,6 +1,6 @@
 import { flattenArray } from './array'
 import { CONSTANT } from 'constant'
-import { Data, DocWithChildren, Doc, DocPagination } from 'contentlayer/generated'
+import { Data, DocWithChildren, Doc, DocPagination, allDocs } from 'contentlayer/generated'
 
 export const getTree = (docs: Doc[], parentPaths: string[] = []): DocWithChildren[] => {
   const lv = parentPaths.length
@@ -48,6 +48,15 @@ export const getBreadcrumbs = (docs: Doc[], paths: string[], locale: string): Do
   return breadcrumbs
 }
 
+export const getDocs = (locale: string): Doc[] =>
+  allDocs
+    .filter(({ is_active, data, slug }) => {
+      const parentDoc = allDocs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
+
+      return is_active && data.locale === locale && !(parentDoc?.is_tabs ?? false)
+    })
+    .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
+
 export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
   const ext = `${locale !== CONSTANT.I18N.DEFAULT_LOCALE ? `${locale}.` : ''}mdx`
 
@@ -62,7 +71,7 @@ export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
   })
 }
 
-export const getTabs = (docs: Doc[], doc: Doc): [Doc[], Doc | undefined, string[] | undefined] => {
+export const getTabs = (docs: Doc[], doc: Doc) => {
   const { is_tabs, slug } = doc
 
   let tabs: Doc[] = []
@@ -82,12 +91,5 @@ export const getTabs = (docs: Doc[], doc: Doc): [Doc[], Doc | undefined, string[
     }
   }
 
-  return [tabs, parentDoc, parentPaths]
+  return { tabs, parentDoc, parentPaths }
 }
-
-export const filterTabDocs = (docs: Doc[]): Doc[] =>
-  docs.filter(({ slug }) => {
-    const parentDoc = docs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
-
-    return !(parentDoc?.is_tabs ?? false)
-  })

@@ -119,6 +119,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         href={CONSTANT.SNS.DISCORD}
         target='_blank'
         variant='ghost'
+        colorScheme='gray'
         display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }}
         color='muted'
         icon={<Discord />}
@@ -129,6 +130,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         href={CONSTANT.SNS.GITHUB.YAMADA_UI}
         target='_blank'
         variant='ghost'
+        colorScheme='gray'
         display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }}
         color='muted'
         icon={<Github />}
@@ -139,6 +141,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
           <MenuButton
             as={IconButton}
             variant='ghost'
+            colorScheme='gray'
             display={{ base: 'inline-flex', md: !isMobile ? 'none' : undefined }}
             color='muted'
             icon={<Translate />}
@@ -158,6 +161,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
 
       <IconButton
         variant='ghost'
+        colorScheme='gray'
         color='muted'
         onClick={toggleColorMode}
         icon={colorMode === 'dark' ? <Sun /> : <Moon />}
@@ -166,6 +170,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       {!isOpen ? (
         <IconButton
           variant='ghost'
+          colorScheme='gray'
           display={{ base: 'none', lg: 'inline-flex' }}
           color='muted'
           onClick={onOpen}

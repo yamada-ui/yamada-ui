@@ -7,14 +7,12 @@ import {
   GridProps,
   Text,
   forwardRef,
-  toneColor,
-  useColorMode,
-  useTheme,
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC, memo } from 'react'
 import { Doc } from 'contentlayer/generated'
 import { useI18n, usePage } from 'contexts'
+import { useConfigs } from 'contexts/configs-context'
 
 export type PaginationProps = GridProps
 
@@ -44,9 +42,8 @@ export const Pagination = memo(
 type PaginationItemProps = GridItemProps & { doc?: Doc; isPrev?: boolean }
 
 const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
+  const { colorScheme } = useConfigs()
   const { t } = useI18n()
-  const { theme } = useTheme()
-  const { colorMode } = useColorMode()
 
   return doc ? (
     <GridItem
@@ -76,21 +73,12 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
         gap='xs'
         fontSize={{ base: 'lg', sm: 'md' }}
         fontWeight='semibold'
-        color={[
-          toneColor('brand', 500)(theme, colorMode),
-          toneColor('brand', 400)(theme, colorMode),
-        ]}
+        color={[`${colorScheme}.500`, `${colorScheme}.400`]}
         _hover={{
-          color: [
-            toneColor('brand', 400)(theme, colorMode),
-            toneColor('brand', 300)(theme, colorMode),
-          ],
+          color: [`${colorScheme}.400`, `${colorScheme}.300`],
         }}
         _active={{
-          color: [
-            toneColor('brand', 600)(theme, colorMode),
-            toneColor('brand', 500)(theme, colorMode),
-          ],
+          color: [`${colorScheme}.600`, `${colorScheme}.500`],
         }}
       >
         {isPrev ? <ChevronIcon transform='rotate(90deg)' fontSize='1.3em' /> : null}

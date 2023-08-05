@@ -9,7 +9,6 @@ import {
   Tag,
   Text,
   forwardRef,
-  toneColor,
   transparentizeColor,
   useBoolean,
   useColorMode,
@@ -21,6 +20,7 @@ import { useRouter } from 'next/router'
 import { FC, memo, useEffect } from 'react'
 import { DocWithChildren } from 'contentlayer/generated'
 import { usePage } from 'contexts'
+import { useConfigs } from 'contexts/configs-context'
 
 export type TreeProps = ListProps
 
@@ -85,6 +85,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
     const { theme } = useTheme()
     const { colorMode } = useColorMode()
     const { asPath } = useRouter()
+    const { colorScheme } = useConfigs()
     const outline = useToken('shadows', 'outline')
 
     const isActive = !is_tabs ? asPath === slug : new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(asPath)
@@ -95,24 +96,12 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         userSelect='none'
         rounded='md'
         gap='0'
-        color={
-          isActive
-            ? [toneColor('brand', 600)(theme, colorMode), 'white']
-            : isNested
-            ? 'muted'
-            : undefined
-        }
+        color={isActive ? [`${colorScheme}.700`, 'white'] : isNested ? 'muted' : undefined}
         bg={
           isActive
             ? [
-                transparentizeColor(toneColor('brand', 400)(theme, colorMode), 0.08)(
-                  theme,
-                  colorMode,
-                ),
-                transparentizeColor(toneColor('brand', 200)(theme, colorMode), 0.12)(
-                  theme,
-                  colorMode,
-                ),
+                transparentizeColor(`${colorScheme}.200`, 0.32)(theme, colorMode),
+                transparentizeColor(`${colorScheme}.400`, 0.16)(theme, colorMode),
               ]
             : undefined
         }

@@ -7,7 +7,6 @@ import {
   Text,
   VStack,
   forwardRef,
-  toneColor,
   transparentizeColor,
   useColorMode,
   useTheme,
@@ -17,6 +16,7 @@ import { memo, useState } from 'react'
 import { List as ListIcon } from 'components/media-and-icons'
 import { Content } from 'contentlayer/generated'
 import { useI18n } from 'contexts'
+import { useConfigs } from 'contexts/configs-context'
 import { useEventListener } from 'hooks'
 
 export type TableOfContentsProps = StackProps & { contents: Content[] }
@@ -28,6 +28,7 @@ export const TableOfContents = memo(
     const { theme } = useTheme()
     const { colorMode } = useColorMode()
     const { t } = useI18n()
+    const { colorScheme } = useConfigs()
 
     useEventListener(
       'scroll',
@@ -76,25 +77,12 @@ export const TableOfContents = memo(
                   pl={`calc(${lv - 1} * ${pl})`}
                   py='sm'
                   borderLeftWidth='1px'
-                  borderLeftColor={
-                    isActive
-                      ? [
-                          toneColor('brand', 300)(theme, colorMode),
-                          toneColor('brand', 200)(theme, colorMode),
-                        ]
-                      : 'border'
-                  }
+                  borderLeftColor={isActive ? `${colorScheme}.400` : 'border'}
                   bg={
                     isActive
                       ? [
-                          transparentizeColor(toneColor('brand', 400)(theme, colorMode), 0.08)(
-                            theme,
-                            colorMode,
-                          ),
-                          transparentizeColor(toneColor('brand', 200)(theme, colorMode), 0.12)(
-                            theme,
-                            colorMode,
-                          ),
+                          transparentizeColor(`${colorScheme}.200`, 0.32)(theme, colorMode),
+                          transparentizeColor(`${colorScheme}.400`, 0.16)(theme, colorMode),
                         ]
                       : undefined
                   }

@@ -1,5 +1,5 @@
 import { CSSUIObject } from '@yamada-ui/react'
-
+import { colorScheme } from 'configs/site.json'
 export const mdx: Record<string, CSSUIObject> = {
   h1: {
     mt: '6',
@@ -41,7 +41,8 @@ export const mdx: Record<string, CSSUIObject> = {
     fontWeight: 'semibold',
   },
   code: {
-    color: ['red.500', 'red.300'],
+    fontFamily: 'body',
+    color: [`${colorScheme}.500`, `${colorScheme}.400`],
   },
   a: {
     color: 'link',

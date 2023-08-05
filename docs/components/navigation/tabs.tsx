@@ -7,13 +7,12 @@ export type TabsProps = UITabsProps & { tab?: string }
 
 export const Tabs = memo(
   forwardRef<TabsProps, 'div'>(({ tab, ...rest }, ref) => {
-    const { tabs = [] } = usePage()
+    const { tabs } = usePage()
     const { push } = useRouter()
 
     return tabs.length ? (
       <UITabs
         ref={ref}
-        colorScheme='brand'
         index={tabs.findIndex((child) => child.tab === tab)}
         mt='lg'
         overflowX='auto'

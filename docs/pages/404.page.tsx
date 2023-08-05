@@ -1,5 +1,6 @@
 import { Button, Text, VStack } from '@yamada-ui/react'
 import { InferGetStaticPropsType, NextPage } from 'next'
+
 import Link from 'next/link'
 import { SEO, Section } from 'components'
 import { PageProvider, useI18n } from 'contexts'
@@ -36,7 +37,7 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
             </Text>
           </VStack>
 
-          <Button as={Link} href='/' colorScheme='brand' size='lg'>
+          <Button as={Link} href='/' size='lg'>
             {tc('not-found.back-to-home')}
           </Button>
         </Section>

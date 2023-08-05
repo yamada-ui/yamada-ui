@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { SEO, Arrow, Github, Section } from 'components'
 import { CONSTANT } from 'constant'
 import { PageProvider, useI18n } from 'contexts'
+import { useConfigs } from 'contexts/configs-context'
 import { TopLayout } from 'layouts'
 import { getStaticCommonProps } from 'utils'
 
@@ -11,6 +12,7 @@ type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
 const Page: NextPage<PageProps> = ({ docs, tree }) => {
   const { t, tc } = useI18n()
+  const { colorScheme } = useConfigs()
 
   return (
     <PageProvider value={{ docs, tree }}>
@@ -27,7 +29,7 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
               textAlign='center'
             >
               {tc('home.hero.heading', (str) => (
-                <Text as='span' color='brand'>
+                <Text as='span' color={`${colorScheme}.600`}>
                   {str}
                 </Text>
               ))}
@@ -49,7 +51,6 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
               as={Link}
               size='xl'
               w={{ base: 'auto', md: 'full' }}
-              colorScheme='brand'
               rightIcon={<Arrow />}
               href='/docs/getting-started'
             >
@@ -59,6 +60,7 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
             <Button
               as='a'
               size='xl'
+              colorScheme='gray'
               w={{ base: 'auto', md: 'full' }}
               leftIcon={<Github />}
               href={CONSTANT.SNS.GITHUB.YAMADA_UI}

@@ -16,6 +16,31 @@ import { FC, memo } from 'react'
 import { Doc } from 'contentlayer/generated'
 import { useI18n, usePage } from 'contexts'
 
+export type PaginationProps = GridProps
+
+export const Pagination = memo(
+  forwardRef<PaginationProps, 'div'>(({ ...rest }, ref) => {
+    const { pagination } = usePage()
+    const { prev, next } = pagination
+
+    if (!prev && !next) return
+
+    return (
+      <Grid
+        ref={ref}
+        templateColumns='repeat(2, 1fr)'
+        gap={{ base: 'lg', sm: 'md' }}
+        mt='xl'
+        {...rest}
+      >
+        <PaginationItem doc={prev} isPrev />
+
+        <PaginationItem doc={next} alignItems='flex-end' />
+      </Grid>
+    )
+  }),
+)
+
 type PaginationItemProps = GridItemProps & { doc?: Doc; isPrev?: boolean }
 
 const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
@@ -79,28 +104,3 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
     <Box />
   )
 }
-
-export type PaginationProps = GridProps
-
-export const Pagination = memo(
-  forwardRef<PaginationProps, 'div'>(({ ...rest }, ref) => {
-    const { pagination } = usePage()
-    const { prev, next } = pagination
-
-    if (!prev && !next) return
-
-    return (
-      <Grid
-        ref={ref}
-        templateColumns='repeat(2, 1fr)'
-        gap={{ base: 'lg', sm: 'md' }}
-        mt='xl'
-        {...rest}
-      >
-        <PaginationItem doc={prev} isPrev />
-
-        <PaginationItem doc={next} alignItems='flex-end' />
-      </Grid>
-    )
-  }),
-)

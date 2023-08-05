@@ -38,6 +38,46 @@ export const Tree = memo(
   }),
 )
 
+type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
+
+const RecursiveListItem: FC<RecursiveListItemProps> = memo(
+  ({ title, menu, slug, children, isNested, ...rest }) => {
+    if (menu) title = menu
+
+    const { asPath, events } = useRouter()
+
+    const [isOpen, { on, off, toggle }] = useBoolean(asPath.startsWith(slug))
+
+    useEffect(() => {
+      events.on('routeChangeComplete', () => {
+        if (asPath.startsWith(slug)) on()
+      })
+
+      return () => {
+        events.off('routeChangeComplete', off)
+      }
+    }, [asPath, events, off, on, slug])
+
+    return (
+      <ListItem key={slug}>
+        <ListItemLink {...{ title, slug, isNested, isOpen, onToggle: toggle, children, ...rest }} />
+
+        {children.length ? (
+          <Collapse isOpen={!isNested || isOpen}>
+            <List mt='sm' gap='sm' borderLeftWidth='1px' ml='3' pl='3'>
+              {children.map((doc) => (
+                <RecursiveListItem key={doc.slug} {...doc} isNested />
+              ))}
+            </List>
+          </Collapse>
+        ) : null}
+      </ListItem>
+    )
+  },
+)
+
+RecursiveListItem.displayName = 'RecursiveListItem'
+
 type ListItemLinkProps = RecursiveListItemProps & { isOpen?: boolean; onToggle?: () => void }
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
@@ -154,43 +194,3 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
 )
 
 ListItemLink.displayName = 'ListItemLink'
-
-type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
-
-const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ title, menu, slug, children, isNested, ...rest }) => {
-    if (menu) title = menu
-
-    const { asPath, events } = useRouter()
-
-    const [isOpen, { on, off, toggle }] = useBoolean(asPath.startsWith(slug))
-
-    useEffect(() => {
-      events.on('routeChangeComplete', () => {
-        if (asPath.startsWith(slug)) on()
-      })
-
-      return () => {
-        events.off('routeChangeComplete', off)
-      }
-    }, [asPath, events, off, on, slug])
-
-    return (
-      <ListItem key={slug}>
-        <ListItemLink {...{ title, slug, isNested, isOpen, onToggle: toggle, children, ...rest }} />
-
-        {children.length ? (
-          <Collapse isOpen={!isNested || isOpen}>
-            <List mt='sm' gap='sm' borderLeftWidth='1px' ml='3' pl='3'>
-              {children.map((doc) => (
-                <RecursiveListItem key={doc.slug} {...doc} isNested />
-              ))}
-            </List>
-          </Collapse>
-        ) : null}
-      </ListItem>
-    )
-  },
-)
-
-RecursiveListItem.displayName = 'RecursiveListItem'

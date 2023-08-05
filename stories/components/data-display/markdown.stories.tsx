@@ -54,7 +54,7 @@ const README = `
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
   <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
-  <a href="https://discord.gg/NStNNpjN">
+  <a href="https://discord.gg/ubYvRAxFEB">
     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
   </a>
 </p>

@@ -9,7 +9,7 @@ export const List = forwardRef<SVGSVGElement, IconProps>(({ boxSize = '1.3em', .
         viewBox='0 0 24 24'
         fill='none'
         stroke='currentColor'
-        stroke-width='1.5'
+        strokeWidth='1.5'
         strokeLinecap='round'
         strokeLinejoin='round'
       >

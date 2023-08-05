@@ -26,7 +26,7 @@ export const CopyButton = memo(
             color={hasCopied ? 'secondary' : 'whiteAlpha.600'}
             border='1px solid'
             borderColor={hasCopied ? 'secondary' : 'whiteAlpha.600'}
-            bg={['black', 'blackAlpha.400']}
+            bg={['zinc.800', 'zinc.900']}
             _hover={{
               color: hasCopied ? 'secondary' : 'whiteAlpha.800',
               borderColor: hasCopied ? 'secondaru' : 'whiteAlpha.800',

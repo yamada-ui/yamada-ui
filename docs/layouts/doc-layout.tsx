@@ -67,10 +67,10 @@ export const DocLayout: FC<DocLayoutProps> = ({
       <Header />
 
       <Center as='main'>
-        <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px='lg'>
-          <Sidebar tree={tree} />
+        <HStack alignItems='flex-start' w='full' maxW='9xl' gap='0' px={{ base: 'lg', md: 'md' }}>
+          <Sidebar tree={tree} display={{ base: 'flex', lg: 'none' }} />
 
-          <VStack flex='1' minW='0' gap='0' py='lg'>
+          <VStack flex='1' minW='0' gap='0' py={{ base: 'lg', md: 'normal' }}>
             {breadcrumbs.length ? (
               <Breadcrumb
                 separator={<ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />}
@@ -124,14 +124,18 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 <>
                   <Divider mt='xl' />
 
-                  <Grid templateColumns={{ base: 'repeat(2, 1fr)' }} gap='normal' mt='xl'>
+                  <Grid
+                    templateColumns={{ base: 'repeat(2, 1fr)', md: '1fr' }}
+                    gap='normal'
+                    mt='xl'
+                  >
                     {childrenTree.map(({ title, menu, description, label, slug }) => (
                       <GridItem key={slug}>
                         <Card
                           as={Link}
                           href={slug}
                           variant='outline'
-                          h='40'
+                          h={{ base: '40', md: 'auto' }}
                           size='normal'
                           bg={['gray.100', 'whiteAlpha.50']}
                           _focus={{ outline: 'none' }}

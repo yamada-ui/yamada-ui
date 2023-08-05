@@ -54,7 +54,7 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, ...rest })
         <Box
           rounded='md'
           my='6'
-          bg={['black', 'blackAlpha.400']}
+          bg={['zinc.800', 'zinc.900']}
           sx={{ '& > div': { pt: 'lg', pb: 'normal' } }}
         >
           <Box

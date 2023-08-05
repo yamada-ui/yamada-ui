@@ -50,7 +50,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       <Box
         rounded='md'
         my='6'
-        bg={['black', 'blackAlpha.400']}
+        bg={['zinc.800', 'zinc.900']}
         sx={{ '& > div': { py: 'normal' } }}
         overflow='hidden'
       >

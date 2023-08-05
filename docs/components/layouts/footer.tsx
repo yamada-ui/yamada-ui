@@ -12,8 +12,8 @@ export const Footer = memo(
 
     return (
       <Center ref={ref} as='footer' position='sticky' top='100vh' w='full' {...rest}>
-        <VStack alignItems='center' w='full' maxW='9xl' py='xl' px='lg'>
-          <Text color={['blackAlpha.600', 'whiteAlpha.600']}>
+        <VStack alignItems='center' w='full' maxW='9xl' py='xl' px={{ base: 'lg', md: 'md' }}>
+          <Text color={['blackAlpha.600', 'whiteAlpha.600']} fontSize={{ base: 'md', sm: 'xs' }}>
             {tc('component.footer.description', (str, index) => (
               <Link
                 href={

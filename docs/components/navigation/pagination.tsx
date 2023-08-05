@@ -35,7 +35,12 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
       _focusVisible={{ boxShadow: 'outline' }}
       {...rest}
     >
-      <Text as='span' fontSize='sm' color='muted' {...(isPrev ? { ms: '1' } : { me: '1' })}>
+      <Text
+        as='span'
+        fontSize={{ base: 'sm', sm: 'xs' }}
+        color='muted'
+        {...(isPrev ? { ms: '1' } : { me: '1' })}
+      >
         {t(`component.pagination.${isPrev ? 'prev' : 'next'}`)}
       </Text>
 
@@ -44,7 +49,7 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
         display='flex'
         alignItems='center'
         gap='xs'
-        fontSize='lg'
+        fontSize={{ base: 'lg', sm: 'md' }}
         fontWeight='semibold'
         color={[
           toneColor('brand', 500)(theme, colorMode),
@@ -82,7 +87,13 @@ export const Pagination = memo(
     if (!prev && !next) return
 
     return (
-      <Grid ref={ref} templateColumns='repeat(2, 1fr)' gap='3xl' mt='xl' {...rest}>
+      <Grid
+        ref={ref}
+        templateColumns='repeat(2, 1fr)'
+        gap={{ base: 'lg', sm: 'md' }}
+        mt='xl'
+        {...rest}
+      >
         <PaginationItem doc={prev} isPrev />
 
         <PaginationItem doc={next} alignItems='flex-end' />

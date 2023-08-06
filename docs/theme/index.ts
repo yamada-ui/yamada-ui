@@ -1,4 +1,9 @@
-import { extendConfig, extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
+import {
+  extendConfig,
+  extendTheme,
+  withDefaultColorScheme,
+  withDefaultVariant,
+} from '@yamada-ui/react'
 import { components } from './components'
 import { customConfig } from './config'
 import { globalStyle, resetStyle, layerStyles, textStyles, mdx } from './styles'
@@ -18,7 +23,11 @@ export const customTheme = {
   },
 }
 
-export const theme = extendTheme(customTheme, withDefaultColorScheme({ colorScheme }))()
+export const theme = extendTheme(
+  customTheme,
+  withDefaultColorScheme({ colorScheme }),
+  withDefaultVariant({ variant: 'subtle', components: ['Alert'] }),
+)()
 export const config = extendConfig(customConfig)
 
 export default theme

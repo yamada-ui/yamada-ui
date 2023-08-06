@@ -62,4 +62,8 @@ export const mdx: Record<string, CSSUIObject> = {
   li: {
     '& > p': { my: '0' },
   },
+  alert: {
+    my: '6',
+    '& p': { my: '0' },
+  },
 }

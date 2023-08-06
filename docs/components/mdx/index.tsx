@@ -11,7 +11,7 @@ import { LinkedHeading } from './linked-heading'
 import { PackageManagers } from './package-managers'
 import { SelectPackageManagers } from './select-package-managers'
 
-const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem } = UIComponents
+const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem, Alert } = UIComponents
 
 export const MDXUIComponents = {
   ...UIComponents,
@@ -39,6 +39,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   li: (props) => <ListItem apply='mdx.li' {...props} />,
   hr: (props) => <Divider apply='mdx.hr' {...props} />,
   kbd: Kbd,
+  Alert: (props) => <Alert apply='mdx.alert' {...props} />,
   PackageManagers,
   SelectPackageManagers,
 }

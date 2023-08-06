@@ -1,4 +1,4 @@
-import { Box, Center, Divider, HStack, Heading, Text, VStack } from '@yamada-ui/react'
+import { Box, Center, Divider, HStack, Heading, VStack } from '@yamada-ui/react'
 import { FC, PropsWithChildren } from 'react'
 import { StarBanner } from 'components/feedback'
 import { Footer, Header, Sidebar } from 'components/layouts'
@@ -11,6 +11,7 @@ import {
   Cards,
   EditPageLink,
 } from 'components/navigation'
+import { TextWithCode } from 'components/typography'
 import { Data, Doc } from 'contentlayer/generated'
 import { usePage } from 'contexts/page-context'
 
@@ -46,19 +47,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
               {title}
             </Heading>
 
-            {with_description ? (
-              <Text mt='md'>
-                {description.split(/`([^`]+)`/).map((value, index) =>
-                  index % 2 === 1 ? (
-                    <Text key={index} as='code' apply='mdx.code'>
-                      {value}
-                    </Text>
-                  ) : (
-                    value
-                  ),
-                )}
-              </Text>
-            ) : null}
+            {with_description ? <TextWithCode mt='md'>{description}</TextWithCode> : null}
 
             <Tabs />
 

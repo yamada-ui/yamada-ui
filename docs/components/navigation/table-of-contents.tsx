@@ -14,6 +14,7 @@ import {
 } from '@yamada-ui/react'
 import { memo, useState } from 'react'
 import { List as ListIcon } from 'components/media-and-icons'
+import { TextWithCode } from 'components/typography'
 import { Content } from 'contentlayer/generated'
 import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
@@ -93,7 +94,7 @@ export const TableOfContents = memo(
                   transitionDuration='normal'
                   isTruncated
                 >
-                  {title}
+                  <TextWithCode>{title}</TextWithCode>
                 </ListItem>
               )
             })}

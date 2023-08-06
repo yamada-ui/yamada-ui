@@ -10,6 +10,7 @@ import { Link } from './link'
 import { LinkedHeading } from './linked-heading'
 import { PackageManagers } from './package-managers'
 import { SelectPackageManagers } from './select-package-managers'
+import { LinkCard, CardContainer } from 'components/navigation'
 
 const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem, Alert } = UIComponents
 
@@ -42,6 +43,8 @@ export const MDXBaseComponents: MDXComponentsType = {
   Alert: (props) => <Alert apply='mdx.alert' {...props} />,
   PackageManagers,
   SelectPackageManagers,
+  CardContainer: (props) => <CardContainer {...props} />,
+  LinkCard: (props) => <LinkCard {...props} />,
 }
 
 export const MDXComponents = {

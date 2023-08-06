@@ -8,7 +8,7 @@ import {
   Pagination,
   Breadcrumb,
   Tabs,
-  Cards,
+  LinkCards,
   EditPageLink,
 } from 'components/navigation'
 import { TextWithCode } from 'components/typography'
@@ -58,7 +58,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 <>
                   <Divider mt='xl' />
 
-                  <Cards />
+                  <LinkCards />
 
                   <Divider mt='xl' />
                 </>

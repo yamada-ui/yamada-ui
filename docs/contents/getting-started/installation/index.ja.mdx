@@ -6,6 +6,13 @@ is_tabs: true
 tab: すべて
 ---
 
+<Alert status='info'>
+  <AlertIcon />
+  アプリではなく、サイトやランディングページを作成する場合は、[最小限](/docs/getting-started/installation/minimal)をオススメします。
+</Alert>
+
+## パッケージをインストールする
+
 Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
 
 ターミナルで次のコマンドのいずれかを実行します。
@@ -45,3 +52,25 @@ Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほと�
     },
   ]}
 />
+
+<Alert status='warning'>
+  <AlertIcon />
+  Yamada UIは、React 18のみ互換性があります。React 17以前を使用している場合は、React 18までアップグレードしてください。
+</Alert>
+
+## `UIProvider`を追加する
+
+Yamada UIをインストール後、アプリケーションのルートに`UIProvider`を追加します。
+
+```tsx live=false
+import * as React from 'react'
+import { UIProvider } from '@yamada-ui/react'
+
+const App = () => {
+  return (
+    <UIProvider>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```

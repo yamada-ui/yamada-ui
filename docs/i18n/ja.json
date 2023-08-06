@@ -45,6 +45,10 @@
     "editable-code-block": {
       "label": "編集可能な例"
     },
+    "select-package-managers": {
+      "name": "パッケージ",
+      "description": "説明"
+    },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"
     }

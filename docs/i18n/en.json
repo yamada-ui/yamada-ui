@@ -41,6 +41,10 @@
     "editable-code-block": {
       "label": "Editable example"
     },
+    "select-package-managers": {
+      "name": "Package",
+      "description": "Description"
+    },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"
     }

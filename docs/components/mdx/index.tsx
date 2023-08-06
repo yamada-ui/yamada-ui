@@ -9,6 +9,7 @@ import { CodeBlock } from './code-block'
 import { Link } from './link'
 import { LinkedHeading } from './linked-heading'
 import { PackageManagers } from './package-managers'
+import { SelectPackageManagers } from './select-package-managers'
 
 const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem } = UIComponents
 
@@ -39,6 +40,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   hr: (props) => <Divider apply='mdx.hr' {...props} />,
   kbd: Kbd,
   PackageManagers,
+  SelectPackageManagers,
 }
 
 export const MDXComponents = {

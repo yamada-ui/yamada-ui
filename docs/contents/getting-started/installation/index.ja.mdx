@@ -1,0 +1,47 @@
+---
+title: インストール
+description: プロジェクトに、Yamada UIをインストールして使用する方法。
+order: 1
+is_tabs: true
+tab: すべて
+---
+
+Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
+
+ターミナルで次のコマンドのいずれかを実行します。
+
+<PackageManagers packageName='@yamada-ui/react' />
+
+テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールする必要があります。
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: '@yamada-ui/table',
+      description: '`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。',
+      isDefaultCheck: true,
+    },
+    {
+      name: '@yamada-ui/calendar',
+      description:
+        '`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/carousel',
+      description: '`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/dropzone',
+      description: '`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/markdown',
+      description:
+        '`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/fontawesome',
+      description: '`Font Awesome`を便利に使用するためのコンポーネントを提供します。',
+    },
+  ]}
+/>

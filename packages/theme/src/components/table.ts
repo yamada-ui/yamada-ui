@@ -89,17 +89,20 @@ export const Table: ComponentMultiStyle = {
                   _selected: {
                     bg: isDefaultColor(
                       [
-                        transparentizeColor(toneColor(c, 50)(t, m), 0.6)(t, m),
-                        transparentizeColor(toneColor(c, 100)(t, m), 0.24)(
+                        transparentizeColor(toneColor(c, 400)(t, m), 0.08)(
+                          t,
+                          m,
+                        ),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.04)(
                           t,
                           m,
                         ),
                       ],
                       isGray(c)
-                        ? [`${c}.100`, `${c}.200`]
+                        ? [`${c}.100`, `whiteAlpha.50`]
                         : [
-                            transparentizeColor(`${c}.50`, 0.6)(t, m),
-                            transparentizeColor(`${c}.100`, 0.24)(t, m),
+                            transparentizeColor(`${c}.400`, 0.08)(t, m),
+                            transparentizeColor(`${c}.200`, 0.04)(t, m),
                           ],
                     )(c),
                   },
@@ -113,17 +116,23 @@ export const Table: ComponentMultiStyle = {
                   _hover: {
                     bg: isDefaultColor(
                       [
-                        transparentizeColor(toneColor(c, 100)(t, m), 0.6)(t, m),
-                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(
+                        transparentizeColor(toneColor(c, 300)(t, m), 0.24)(
+                          t,
+                          m,
+                        ),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.16)(
                           t,
                           m,
                         ),
                       ],
                       isGray(c)
-                        ? [`${c}.200`, `${c}.300`]
+                        ? [
+                            transparentizeColor(`${c}.200`, 0.8)(t, m),
+                            `whiteAlpha.200`,
+                          ]
                         : [
-                            transparentizeColor(`${c}.100`, 0.6)(t, m),
-                            transparentizeColor(`${c}.200`, 0.24)(t, m),
+                            transparentizeColor(`${c}.300`, 0.24)(t, m),
+                            transparentizeColor(`${c}.200`, 0.16)(t, m),
                           ],
                     )(c),
                   },
@@ -148,8 +157,6 @@ export const Table: ComponentMultiStyle = {
       withColumnBorders,
       highlightOnHover,
     }) => {
-      const isGray = c === 'gray'
-
       return {
         table: {
           ...(withBorder ? { borderWidth: '1px' } : {}),
@@ -183,12 +190,15 @@ export const Table: ComponentMultiStyle = {
             _odd: {
               bg: isDefaultColor(
                 [
-                  toneColor(c, 50)(t, m),
-                  transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
+                  transparentizeColor(toneColor(c, 400)(t, m), 0.08)(t, m),
+                  transparentizeColor(toneColor(c, 200)(t, m), 0.04)(t, m),
                 ],
-                isGray
-                  ? [`gray.100`, `whiteAlpha.200`]
-                  : [`${c}.50`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
+                isGray(c)
+                  ? [`${c}.100`, `whiteAlpha.50`]
+                  : [
+                      transparentizeColor(`${c}.400`, 0.08)(t, m),
+                      transparentizeColor(`${c}.200`, 0.04)(t, m),
+                    ],
               )(c),
             },
             ...(highlightOnHover
@@ -199,17 +209,23 @@ export const Table: ComponentMultiStyle = {
                   _hover: {
                     bg: isDefaultColor(
                       [
-                        transparentizeColor(toneColor(c, 100)(t, m), 0.6)(t, m),
-                        transparentizeColor(toneColor(c, 200)(t, m), 0.24)(
+                        transparentizeColor(toneColor(c, 300)(t, m), 0.24)(
+                          t,
+                          m,
+                        ),
+                        transparentizeColor(toneColor(c, 200)(t, m), 0.16)(
                           t,
                           m,
                         ),
                       ],
-                      isGray
-                        ? [`gray.200`, `whiteAlpha.300`]
+                      isGray(c)
+                        ? [
+                            transparentizeColor(`${c}.200`, 0.8)(t, m),
+                            `whiteAlpha.200`,
+                          ]
                         : [
-                            transparentizeColor(`${c}.100`, 0.6)(t, m),
-                            transparentizeColor(`${c}.200`, 0.24)(t, m),
+                            transparentizeColor(`${c}.300`, 0.24)(t, m),
+                            transparentizeColor(`${c}.200`, 0.16)(t, m),
                           ],
                     )(c),
                   },

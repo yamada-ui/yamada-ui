@@ -46,7 +46,19 @@ export const DocLayout: FC<DocLayoutProps> = ({
               {title}
             </Heading>
 
-            {with_description ? <Text mt='md'>{description}</Text> : null}
+            {with_description ? (
+              <Text mt='md'>
+                {description.split(/`([^`]+)`/).map((value, index) =>
+                  index % 2 === 1 ? (
+                    <Text key={index} as='code' apply='mdx.code'>
+                      {value}
+                    </Text>
+                  ) : (
+                    value
+                  ),
+                )}
+              </Text>
+            ) : null}
 
             <Tabs />
 

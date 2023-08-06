@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.5.4
+
+### Patch Changes
+
+- [`02683304`](https://github.com/hirotomoyamada/yamada-ui/commit/026833049efc405664606cdb225d83123413c986) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed table stripe and hover styles.
+
 ## 0.5.3
 
 ### Patch Changes

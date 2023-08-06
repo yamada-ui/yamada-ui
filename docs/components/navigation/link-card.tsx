@@ -11,6 +11,7 @@ import {
 import Link from 'next/link'
 import { memo, ReactNode } from 'react'
 import { Label } from 'components/data-display'
+import { usePage } from 'contexts/page-context'
 
 export type LinkCardProps = CardProps & {
   href: string
@@ -20,11 +21,24 @@ export type LinkCardProps = CardProps & {
 }
 
 export const LinkCard = memo(
-  forwardRef<LinkCardProps, 'div'>(({ title, label, description, ...rest }, ref) => {
+  forwardRef<LinkCardProps, 'div'>(({ title, label, description, href, ...rest }, ref) => {
+    const { docs } = usePage()
+
+    if (href.startsWith('/')) {
+      const doc = docs.find(({ slug }) => slug === href)
+
+      if (doc) {
+        title ??= doc.menu ?? doc.title
+        label ??= doc.label
+        description ??= doc.description
+      }
+    }
+
     return (
       <Card
         as={Link}
         ref={ref}
+        href={href}
         variant='outline'
         h={{ base: '40', md: 'auto' }}
         size='normal'

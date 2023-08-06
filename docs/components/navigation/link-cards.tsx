@@ -26,9 +26,9 @@ export const CardContainer = memo(
     return (
       <Grid
         ref={ref}
+        my='xl'
         templateColumns={{ base: 'repeat(2, 1fr)', md: '1fr' }}
         gap='normal'
-        mt='xl'
         {...rest}
       />
     )

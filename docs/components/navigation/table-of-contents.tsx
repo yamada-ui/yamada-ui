@@ -17,7 +17,7 @@ import { List as ListIcon } from 'components/media-and-icons'
 import { Content } from 'contentlayer/generated'
 import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
-import { useEventListener } from 'hooks'
+import { useEventListener } from 'hooks/use-event-listener'
 
 export type TableOfContentsProps = StackProps & { contents: Content[] }
 

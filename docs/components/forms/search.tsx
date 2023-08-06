@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
 import { memo, useEffect } from 'react'
 import { MagnifyingGlass } from 'components/media-and-icons'
 import { useI18n } from 'contexts/i18n-context'
-import { useEventListener } from 'hooks'
+import { useEventListener } from 'hooks/use-event-listener'
 
 export type SearchProps = StackProps & {}
 

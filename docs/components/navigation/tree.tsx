@@ -6,7 +6,6 @@ import {
   List,
   ListItem,
   ListProps,
-  Tag,
   Text,
   forwardRef,
   transparentizeColor,
@@ -18,6 +17,7 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, memo, useEffect } from 'react'
+import { Label } from 'components/data-display'
 import { DocWithChildren } from 'contentlayer/generated'
 import { useConfigs } from 'contexts/configs-context'
 import { usePage } from 'contexts/page-context'
@@ -135,23 +135,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             {title}
           </Text>
 
-          {label ? (
-            <Tag
-              size='sm'
-              ms='sm'
-              colorScheme={
-                label === 'New'
-                  ? 'blue'
-                  : label === 'Experimental'
-                  ? 'purple'
-                  : label === 'Planned'
-                  ? 'orange'
-                  : 'gray'
-              }
-            >
-              {label}
-            </Tag>
-          ) : null}
+          <Label ms='sm'>{label}</Label>
         </Text>
 
         {isNested && children.length ? (

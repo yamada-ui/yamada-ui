@@ -1,19 +1,21 @@
 import { Tabs as UITabs, TabsProps as UITabsProps, Tab, forwardRef } from '@yamada-ui/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { memo } from 'react'
 import { usePage } from 'contexts/page-context'
 
-export type TabsProps = UITabsProps & { tab?: string }
+export type TabsProps = UITabsProps
 
 export const Tabs = memo(
-  forwardRef<TabsProps, 'div'>(({ tab, ...rest }, ref) => {
+  forwardRef<TabsProps, 'div'>(({ ...rest }, ref) => {
     const { tabs } = usePage()
+    const { asPath } = useRouter()
 
     return tabs.length ? (
       <UITabs
         ref={ref}
         as='nav'
-        index={tabs.findIndex((child) => child.tab === tab)}
+        index={tabs.findIndex(({ slug }) => slug === asPath)}
         mt='normal'
         overflowX='auto'
         {...rest}

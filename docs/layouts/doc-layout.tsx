@@ -20,7 +20,6 @@ export const DocLayout: FC<DocLayoutProps> = ({
   title,
   description,
   editUrl,
-  tab,
   with_description,
   with_children,
   contents,
@@ -49,7 +48,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
 
             {with_description ? <Text mt='md'>{description}</Text> : null}
 
-            <Tabs tab={tab} />
+            <Tabs />
 
             <Box>
               {children}

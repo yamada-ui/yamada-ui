@@ -47,7 +47,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
               {title}
             </Heading>
 
-            {with_description ? <Text mt='normal'>{description}</Text> : null}
+            {with_description ? <Text mt='md'>{description}</Text> : null}
 
             <Tabs tab={tab} />
 

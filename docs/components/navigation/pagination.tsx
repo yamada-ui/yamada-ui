@@ -58,12 +58,7 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
       _focusVisible={{ boxShadow: 'outline' }}
       {...rest}
     >
-      <Text
-        as='span'
-        fontSize={{ base: 'sm', sm: 'xs' }}
-        color='muted'
-        {...(isPrev ? { ms: '1' } : { me: '1' })}
-      >
+      <Text as='span' fontSize='sm' color='muted' {...(isPrev ? { ms: '1' } : { me: '1' })}>
         {t(`component.pagination.${isPrev ? 'prev' : 'next'}`)}
       </Text>
 
@@ -71,7 +66,7 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
         as='span'
         display='flex'
         alignItems='center'
-        gap='xs'
+        gap='0'
         fontSize={{ base: 'lg', sm: 'md' }}
         fontWeight='semibold'
         color={[`${colorScheme}.500`, `${colorScheme}.400`]}
@@ -84,7 +79,9 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
       >
         {isPrev ? <ChevronIcon transform='rotate(90deg)' fontSize='1.3em' /> : null}
 
-        {doc.menu ?? doc.title}
+        <Text as='span' noOfLines={1}>
+          {doc.menu ?? doc.title}
+        </Text>
 
         {!isPrev ? <ChevronIcon transform='rotate(-90deg)' fontSize='1.3em' /> : null}
       </Text>

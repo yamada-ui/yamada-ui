@@ -1,5 +1,17 @@
 # @yamada-ui/react
 
+## 0.5.25
+
+### Patch Changes
+
+- Updated dependencies [[`03d462e0`](https://github.com/hirotomoyamada/yamada-ui/commit/03d462e09c1618843d9016509aacc3a35f4dfdce)]:
+  - @yamada-ui/use-clickable@0.2.5
+  - @yamada-ui/autocomplete@0.2.18
+  - @yamada-ui/menu@0.2.18
+  - @yamada-ui/select@0.2.18
+  - @yamada-ui/tabs@0.2.17
+  - @yamada-ui/tag@0.2.13
+
 ## 0.5.24
 
 ### Patch Changes

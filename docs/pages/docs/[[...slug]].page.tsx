@@ -1,10 +1,11 @@
 import { GetStaticPaths, NextPage, InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { MDXComponents } from 'components'
+import { MDXComponents } from 'components/mdx'
 import { Data, allDocs } from 'contentlayer/generated'
-import { PageProvider } from 'contexts'
-import { DocLayout } from 'layouts'
-import { getStaticCommonProps, getStaticDocProps, otherLocales } from 'utils'
+import { PageProvider } from 'contexts/page-context'
+import { DocLayout } from 'layouts/doc-layout'
+import { otherLocales } from 'utils/i18n'
+import { getStaticCommonProps, getStaticDocProps } from 'utils/next'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 

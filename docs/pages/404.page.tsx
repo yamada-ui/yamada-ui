@@ -1,11 +1,12 @@
 import { Button, Text, VStack } from '@yamada-ui/react'
 import { InferGetStaticPropsType, NextPage } from 'next'
-
 import Link from 'next/link'
-import { SEO, Section } from 'components'
-import { PageProvider, useI18n } from 'contexts'
-import { TopLayout } from 'layouts'
-import { getStaticCommonProps } from 'utils'
+import { Section } from 'components/layouts'
+import { SEO } from 'components/media-and-icons'
+import { useI18n } from 'contexts/i18n-context'
+import { PageProvider } from 'contexts/page-context'
+import { TopLayout } from 'layouts/top-layout'
+import { getStaticCommonProps } from 'utils/next'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 

@@ -1,6 +1,6 @@
-import { flattenArray } from './array'
 import { CONSTANT } from 'constant'
 import { Data, DocWithChildren, Doc, DocPagination, allDocs } from 'contentlayer/generated'
+import { flattenArray } from 'utils/array'
 
 export const getTree = (docs: Doc[], parentPaths: string[] = []): DocWithChildren[] => {
   const lv = parentPaths.length

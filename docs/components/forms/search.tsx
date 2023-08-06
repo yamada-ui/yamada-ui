@@ -12,8 +12,8 @@ import {
 } from '@yamada-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useEffect } from 'react'
-import { MagnifyingGlass } from '../media-and-icons'
-import { useI18n } from 'contexts'
+import { MagnifyingGlass } from 'components/media-and-icons'
+import { useI18n } from 'contexts/i18n-context'
 import { useEventListener } from 'hooks'
 
 export type SearchProps = StackProps & {}

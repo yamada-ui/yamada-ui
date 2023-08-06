@@ -1,7 +1,7 @@
 import { Tabs as UITabs, TabsProps as UITabsProps, Tab, forwardRef } from '@yamada-ui/react'
 import Link from 'next/link'
 import { memo } from 'react'
-import { usePage } from 'contexts'
+import { usePage } from 'contexts/page-context'
 
 export type TabsProps = UITabsProps & { tab?: string }
 

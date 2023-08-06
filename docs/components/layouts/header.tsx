@@ -34,7 +34,7 @@ import { Search } from 'components/forms'
 import { Discord, Github, Hamburger, Moon, Sun, Translate } from 'components/media-and-icons'
 import { Tree } from 'components/navigation'
 import { CONSTANT } from 'constant'
-import { useI18n } from 'contexts'
+import { useI18n } from 'contexts/i18n-context'
 
 export type HeaderProps = CenterProps & {}
 

@@ -8,7 +8,7 @@ import {
 } from 'prism-react-renderer'
 import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react'
 import { CopyButton } from 'components/forms'
-import { toBoolean } from 'utils'
+import { toBoolean } from 'utils/assertion'
 
 const EditableCodeBlock = dynamic(() => import('./editable-code-block'))
 

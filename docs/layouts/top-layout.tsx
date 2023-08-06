@@ -1,6 +1,7 @@
 import { Center, VStack } from '@yamada-ui/react'
 import { FC, PropsWithChildren } from 'react'
-import { StarBanner, Footer, Header } from 'components'
+import { StarBanner } from 'components/feedback'
+import { Footer, Header } from 'components/layouts'
 
 export const TopLayout: FC<PropsWithChildren> = ({ children }) => {
   return (

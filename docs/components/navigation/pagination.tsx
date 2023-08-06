@@ -11,8 +11,9 @@ import {
 import Link from 'next/link'
 import { FC, memo } from 'react'
 import { Doc } from 'contentlayer/generated'
-import { useI18n, usePage } from 'contexts'
 import { useConfigs } from 'contexts/configs-context'
+import { useI18n } from 'contexts/i18n-context'
+import { usePage } from 'contexts/page-context'
 
 export type PaginationProps = GridProps
 

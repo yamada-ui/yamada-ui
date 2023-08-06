@@ -1,20 +1,18 @@
 import { Box, Center, Divider, HStack, Heading, Text, VStack } from '@yamada-ui/react'
 import { FC, PropsWithChildren } from 'react'
+import { StarBanner } from 'components/feedback'
+import { Footer, Header, Sidebar } from 'components/layouts'
+import { SEO } from 'components/media-and-icons'
 import {
-  StarBanner,
-  Header,
-  SEO,
-  Sidebar,
-  Footer,
   TableOfContents,
   Pagination,
   Breadcrumb,
   Tabs,
   Cards,
   EditPageLink,
-} from 'components'
+} from 'components/navigation'
 import { Data, Doc } from 'contentlayer/generated'
-import { usePage } from 'contexts'
+import { usePage } from 'contexts/page-context'
 
 export type DocLayoutProps = PropsWithChildren<Doc & Data>
 

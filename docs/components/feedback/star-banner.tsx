@@ -1,8 +1,8 @@
 import { Button, Center, CenterProps, HStack, Text, forwardRef } from '@yamada-ui/react'
 import { memo } from 'react'
-import { Star } from '../media-and-icons'
+import { Star } from 'components/media-and-icons'
 import { CONSTANT } from 'constant'
-import { useI18n } from 'contexts'
+import { useI18n } from 'contexts/i18n-context'
 
 export type StarBannerProps = CenterProps & {}
 

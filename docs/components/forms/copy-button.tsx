@@ -1,6 +1,6 @@
 import { forwardRef, ButtonProps, IconButton, useClipboard, Tooltip } from '@yamada-ui/react'
 import { memo } from 'react'
-import { Check, Copy } from 'components'
+import { Check, Copy } from 'components/media-and-icons'
 
 export type CopyButtonProps = Omit<ButtonProps, 'value'> & { value: string }
 

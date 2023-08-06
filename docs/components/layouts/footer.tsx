@@ -1,8 +1,8 @@
 import { Center, CenterProps, HStack, Link, Text, VStack, forwardRef } from '@yamada-ui/react'
 import { memo } from 'react'
-import { Github, Twitter } from '../media-and-icons'
+import { Github, Twitter } from 'components/media-and-icons'
 import { CONSTANT } from 'constant'
-import { useI18n } from 'contexts'
+import { useI18n } from 'contexts/i18n-context'
 
 export type FooterProps = CenterProps & {}
 

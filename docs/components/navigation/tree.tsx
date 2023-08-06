@@ -19,8 +19,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, memo, useEffect } from 'react'
 import { DocWithChildren } from 'contentlayer/generated'
-import { usePage } from 'contexts'
 import { useConfigs } from 'contexts/configs-context'
+import { usePage } from 'contexts/page-context'
 
 export type TreeProps = ListProps
 

@@ -56,6 +56,7 @@ export const Header = memo(
           ref={mergeRefs(ref, headerRef)}
           as='header'
           w='full'
+          bg={isScroll ? ['whiteAlpha.500', 'blackAlpha.200'] : undefined}
           backdropFilter='saturate(180%) blur(10px)'
           shadow={isScroll ? ['base', 'dark-sm'] : undefined}
           transitionProperty='common'

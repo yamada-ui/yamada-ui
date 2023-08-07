@@ -2,22 +2,22 @@ import { CSSUIObject } from '@yamada-ui/react'
 
 export const mdx: Record<string, CSSUIObject> = {
   h1: {
-    mt: '6',
+    mt: '12',
     mb: '4',
     fontSize: { base: '4xl' },
   },
   h2: {
-    mt: '6',
+    mt: '12',
     mb: '4',
     fontSize: { base: '2xl' },
   },
   h3: {
-    mt: '6',
+    mt: '8',
     mb: '4',
-    fontSize: { base: 'xl' },
+    fontSize: { base: 'lg' },
   },
   h4: {
-    mt: '6',
+    mt: '8',
     mb: '4',
     fontSize: { base: 'md' },
   },
@@ -42,7 +42,7 @@ export const mdx: Record<string, CSSUIObject> = {
   },
   code: {
     fontFamily: 'body',
-    color: ['violet.500', 'violet.400'],
+    color: ['violet.500', 'purple.400'],
   },
   a: {
     color: 'link',

@@ -28,9 +28,9 @@ export const PackageManagers: Component<PackageManagersProps> = ({ packageName }
     <Box position='relative'>
       <Box
         rounded='md'
-        my='6'
+        my='8'
         bg={['zinc.800', 'zinc.900']}
-        sx={{ '& > div:last-child': { py: 'normal' } }}
+        sx={{ '& > div:last-child': { py: '6' } }}
         overflow='hidden'
       >
         <Tabs bg={['whiteAlpha.200', 'whiteAlpha.100']}>

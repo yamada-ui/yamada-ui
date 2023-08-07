@@ -40,59 +40,61 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, ...rest })
 
   return (
     <LiveProvider {...{ code: editorCode, enableTypeScript: true, scope }} {...rest}>
-      <Box
-        as={LivePreview}
-        mt='6'
-        p='md'
-        borderWidth='1px'
-        rounded='md'
-        overflowX='auto'
-        zIndex='1'
-      />
-
-      <Box position='relative' zIndex='0'>
+      <Box my='8'>
         <Box
+          as={LivePreview}
+          mt='8'
+          p='md'
+          borderWidth='1px'
           rounded='md'
-          my='6'
-          bg={['zinc.800', 'zinc.900']}
-          sx={{ '& > div': { pt: 'lg', pb: 'normal' } }}
-        >
+          overflowX='auto'
+          zIndex='1'
+        />
+
+        <Box position='relative' zIndex='0'>
           <Box
-            as={LiveEditor}
-            onChange={onChange}
-            px='md'
-            fontSize='sm'
-            overflowX='auto'
-            sx={{ '& > pre': { p: '0px !important', bg: 'none !important' } }}
-          />
-        </Box>
-
-        <Box position='absolute' top='2' left='0' right='0' w='full'>
-          <Text
-            color='whiteAlpha.700'
-            fontSize='xs'
-            fontWeight='semibold'
-            textAlign='center'
-            textTransform='uppercase'
-            userSelect='none'
-            pointerEvents='none'
+            rounded='md'
+            my='4'
+            bg={['zinc.800', 'zinc.900']}
+            sx={{ '& > div': { pt: '8', pb: '6' } }}
           >
-            {t('component.editable-code-block.label')}
-          </Text>
+            <Box
+              as={LiveEditor}
+              onChange={onChange}
+              px='md'
+              fontSize='sm'
+              overflowX='auto'
+              sx={{ '& > pre': { p: '0px !important', bg: 'none !important' } }}
+            />
+          </Box>
+
+          <Box position='absolute' top='2' left='0' right='0' w='full'>
+            <Text
+              color='whiteAlpha.700'
+              fontSize='xs'
+              fontWeight='semibold'
+              textAlign='center'
+              textTransform='uppercase'
+              userSelect='none'
+              pointerEvents='none'
+            >
+              {t('component.editable-code-block.label')}
+            </Text>
+          </Box>
+
+          <CopyButton value={code} position='absolute' top='1.125rem' right='4' />
         </Box>
 
-        <CopyButton value={code} position='absolute' top='1.125rem' right='4' />
+        <Box
+          as={LiveError}
+          bg='danger'
+          overflowX='auto'
+          rounded='md'
+          p='md'
+          fontSize='sm'
+          color='white'
+        />
       </Box>
-
-      <Box
-        as={LiveError}
-        bg='danger'
-        overflowX='auto'
-        rounded='md'
-        p='md'
-        fontSize='sm'
-        color='white'
-      />
     </LiveProvider>
   )
 }

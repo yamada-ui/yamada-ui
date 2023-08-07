@@ -49,9 +49,9 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     <Box position='relative'>
       <Box
         rounded='md'
-        my='6'
+        my='8'
         bg={['zinc.800', 'zinc.900']}
-        sx={{ '& > div': { py: 'normal' } }}
+        sx={{ '& > div': { py: '6' } }}
         overflow='hidden'
       >
         {title ? (

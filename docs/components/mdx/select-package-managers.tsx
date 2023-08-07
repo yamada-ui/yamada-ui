@@ -57,7 +57,7 @@ export const SelectPackageManagers: Component<SelectPackageManagersProps> = ({ p
       <PackageManagers packageName={selectedPackageNames} />
 
       <Table
-        mt='normal'
+        mt='6'
         colorScheme={colorScheme}
         columns={columns}
         data={packages}

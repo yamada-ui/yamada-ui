@@ -1,5 +1,15 @@
 # @yamada-ui/use-value
 
+## 0.1.25
+
+### Patch Changes
+
+- [`bec572a4`](https://github.com/hirotomoyamada/yamada-ui/commit/bec572a4a043fa9f816c10bdcc445b4b6478face) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- Updated dependencies [[`bec572a4`](https://github.com/hirotomoyamada/yamada-ui/commit/bec572a4a043fa9f816c10bdcc445b4b6478face)]:
+  - @yamada-ui/core@0.6.3
+  - @yamada-ui/use-breakpoint@0.1.25
+
 ## 0.1.24
 
 ### Patch Changes

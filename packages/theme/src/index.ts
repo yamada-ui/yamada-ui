@@ -9,6 +9,11 @@ export const defaultTheme = {
   ...tokens,
 }
 
+export const baseTheme = {
+  styles: { globalStyle, resetStyle, layerStyles, textStyles },
+  ...tokens,
+}
+
 export const defaultConfig = config
 
 export type DefaultTheme = typeof defaultTheme

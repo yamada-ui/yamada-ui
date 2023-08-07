@@ -94,7 +94,7 @@ export const TableOfContents = memo(
                   transitionDuration='normal'
                   isTruncated
                 >
-                  <TextWithCode>{title}</TextWithCode>
+                  <TextWithCode isTruncated>{title}</TextWithCode>
                 </ListItem>
               )
             })}

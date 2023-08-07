@@ -1,6 +1,112 @@
 ---
 title: 個別のインストール
-description:
+description: プロジェクトに、Yamada UIをインストールして使用する方法。
 menu: 個別
 order: 2
 ---
+
+## パッケージをインストールする
+
+Yamada UIのコアやユーティリティをインストールします。
+
+ターミナルで次のコマンドのいずれかを実行します。
+
+<PackageManagers packageName={['@yamada-ui/core', '@yamada-ui/theme', '@yamada-ui/utils']} />
+
+次に、プロジェクトに使用したいコンポーネントやフックをインストールしていきます。
+
+ここでは、`Box`などを含んでいる`@yamada-ui/layouts`をインストールしてみましょう。
+
+<PackageManagers packageName='@yamada-ui/layouts' />
+
+<Alert status='info'>
+  <AlertIcon />
+  コンポーネントやフックのパッケージ名は、各ドキュメントページに記載されています。
+</Alert>
+
+## `ThemeProvider`を追加する
+
+コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`からデフォルトのテーマやコンフィグを渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
+
+```tsx live=false
+import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
+import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+
+const App = () => {
+  return (
+    <ThemeProvider theme={defaultTheme} config={defaultConfig}>
+      <ResetStyle />
+      <GlobalStyle />
+
+      <YourApplication />
+    </ThemeProvider>
+  )
+}
+```
+
+ダークモードを対応させたい場合は、`ColorModeProvider`も追加します。
+
+```tsx live=false
+import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
+import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+
+const App = () => {
+  return (
+    <ThemeProvider theme={defaultTheme} config={defaultConfig}>
+      <ColorModeProvider config={defaultConfig}>
+        <ResetStyle />
+        <GlobalStyle />
+
+        <YourApplication />
+      </ColorModeProvider>
+    </ThemeProvider>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create)をご覧ください。
+</Alert>
+
+<Alert status='warning'>
+  <AlertIcon />
+  `theme`や`config`を`ThemeProvider`に渡さない場合、コンポーネントのスタイルは反映されません。
+</Alert>
+
+## コンポーネントを使用する
+
+アプリケーション内でコンポーネントを呼び出します。
+
+```tsx live=false
+import { Box } from '@yamada-ui/layouts'
+
+const Demo = () => {
+  return <Box>This is Box</Box>
+}
+```
+
+これで、Yamada UIのセットアップは完了です！
+
+## 学習を開始する
+
+Yamada UIを知るために、基本やテーマを学んでみませんか？😎
+
+<CardContainer>
+  <LinkCard href='/docs/getting-started/basics' />
+  <LinkCard
+    href='/docs/styled-system/theming'
+    title='テーマについて学ぶ'
+    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+  />
+  <LinkCard
+    href='/docs/components'
+    title='コンポーネントを探索する'
+    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+  />
+  <LinkCard
+    href='https://github.com/hirotomoyamada/yamada-ui'
+    title='ソースコードを探索する'
+    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+  />
+</CardContainer>

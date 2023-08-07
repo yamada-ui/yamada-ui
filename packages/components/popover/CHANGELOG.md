@@ -1,5 +1,17 @@
 # @yamada-ui/popover
 
+## 0.2.17
+
+### Patch Changes
+
+- Updated dependencies [[`bec572a4`](https://github.com/hirotomoyamada/yamada-ui/commit/bec572a4a043fa9f816c10bdcc445b4b6478face)]:
+  - @yamada-ui/core@0.6.3
+  - @yamada-ui/transitions@0.2.14
+  - @yamada-ui/use-popper@0.3.3
+  - @yamada-ui/close-button@0.2.13
+  - @yamada-ui/motion@0.3.11
+  - @yamada-ui/use-animation@0.1.25
+
 ## 0.2.16
 
 ### Patch Changes

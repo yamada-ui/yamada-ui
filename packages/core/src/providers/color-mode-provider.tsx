@@ -136,7 +136,7 @@ export const useColorMode = () => {
   return context
 }
 
-export const useColorModetValue = <L extends any, D extends any>(
+export const useColorModeValue = <L extends any, D extends any>(
   light: L,
   dark: D,
 ): L | D => {

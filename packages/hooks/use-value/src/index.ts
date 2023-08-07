@@ -1,5 +1,5 @@
 import {
-  useColorModetValue,
+  useColorModeValue,
   ResponsiveObject,
   ColorModeArray,
 } from '@yamada-ui/core'
@@ -12,7 +12,7 @@ export const useValue = <T extends any>(
   if (isObject<ResponsiveObject<T>>(value)) {
     return useBreakpointValue(value)
   } else if (isArray<ColorModeArray<T>>(value)) {
-    return useColorModetValue(...value)
+    return useColorModeValue(...value)
   } else {
     return value
   }

@@ -1,4 +1,4 @@
-import { Box, useColorMode, useColorModetValue } from '@yamada-ui/react'
+import { Box, useColorMode, useColorModeValue } from '@yamada-ui/react'
 
 export default {
   title: 'System / Styles / Color Scheme',
@@ -23,8 +23,8 @@ export const basic = () => {
 
 export const useHook = () => {
   const { colorMode } = useColorMode()
-  const bg = useColorModetValue('blackAlpha.800', 'whiteAlpha.800')
-  const color = useColorModetValue('whiteAlpha.800', 'blackAlpha.800')
+  const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
+  const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
 
   return (
     <Box

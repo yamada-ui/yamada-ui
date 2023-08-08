@@ -118,6 +118,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       <IconButton
         as='a'
         href={CONSTANT.SNS.DISCORD}
+        aria-label='GitHub repository'
         target='_blank'
         variant='ghost'
         colorScheme='gray'
@@ -129,6 +130,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       <IconButton
         as='a'
         href={CONSTANT.SNS.GITHUB.YAMADA_UI}
+        aria-label='Discord server'
         target='_blank'
         variant='ghost'
         colorScheme='gray'
@@ -141,6 +143,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         <Menu placement={!isMobile ? 'bottom-end' : 'bottom'}>
           <MenuButton
             as={IconButton}
+            aria-label='Open language switching menu'
             variant='ghost'
             colorScheme='gray'
             display={{ base: 'inline-flex', md: !isMobile ? 'none' : undefined }}
@@ -163,6 +166,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       <IconButton
         variant='ghost'
         colorScheme='gray'
+        aria-label={`Switch to ${colorMode === 'light' ? 'dark' : 'light'} mode`}
         color='muted'
         onClick={toggleColorMode}
         icon={colorMode === 'dark' ? <Sun /> : <Moon />}
@@ -172,6 +176,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         <IconButton
           variant='ghost'
           colorScheme='gray'
+          aria-label='Open navigation menu'
           display={{ base: 'none', lg: 'inline-flex' }}
           color='muted'
           onClick={onOpen}
@@ -180,6 +185,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       ) : (
         <CloseButton
           size='lg'
+          aria-label='Close navigation menu'
           display={{ base: 'none', lg: 'inline-flex' }}
           color='muted'
           onClick={onClose}

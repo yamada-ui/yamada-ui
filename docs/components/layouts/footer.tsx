@@ -34,11 +34,19 @@ export const Footer = memo(
           </Text>
 
           <HStack color={['blackAlpha.700', 'whiteAlpha.700']}>
-            <Link href={CONSTANT.SNS.GITHUB.HIROTOMO_YAMADA} target='_blank'>
+            <Link
+              href={CONSTANT.SNS.GITHUB.HIROTOMO_YAMADA}
+              target='_blank'
+              aria-label='GitHub profile of Hirotomo Yamada'
+            >
               <Github />
             </Link>
 
-            <Link href={CONSTANT.SNS.TWITTER.HIROTOMO_YAMADA} target='_blank'>
+            <Link
+              href={CONSTANT.SNS.TWITTER.HIROTOMO_YAMADA}
+              target='_blank'
+              aria-label='Twitter Hirotomo Yamada'
+            >
               <Twitter />
             </Link>
           </HStack>

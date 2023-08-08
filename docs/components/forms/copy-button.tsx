@@ -22,6 +22,7 @@ export const CopyButton = memo(
           <IconButton
             ref={ref}
             size='sm'
+            aria-label='Copy the code'
             variant='unstyled'
             color={hasCopied ? 'secondary' : 'whiteAlpha.600'}
             border='1px solid'

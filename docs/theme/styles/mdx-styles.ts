@@ -42,7 +42,7 @@ export const mdx: Record<string, CSSUIObject> = {
   },
   code: {
     fontFamily: 'body',
-    color: ['violet.500', 'purple.400'],
+    color: ['violet.600', 'purple.400'],
   },
   a: {
     color: 'link',

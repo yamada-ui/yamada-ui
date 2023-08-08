@@ -16,6 +16,7 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({ id, children, ...rest })
       {id ? (
         <Link
           href={`#${id}`}
+          aria-label='anchor'
           display={{ base: 'inline-block', md: 'none' }}
           position='absolute'
           top='0'

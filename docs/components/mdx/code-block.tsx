@@ -60,9 +60,9 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
             py='sm'
             px='md'
             borderBottomWidth='1px'
-            bg='whiteAlpha.100'
+            bg={['whiteAlpha.200', 'whiteAlpha.100']}
             fontSize='xs'
-            color='whiteAlpha.700'
+            color={['whiteAlpha.700', 'whiteAlpha.600']}
             isTruncated
           >
             {title}

@@ -38,7 +38,7 @@ export const PackageManagers: Component<PackageManagersProps> = ({ packageName }
             <Tab
               key={name}
               fontSize='xs'
-              color={['whiteAlpha.600', 'whiteAlpha.500']}
+              color={['whiteAlpha.700', 'whiteAlpha.600']}
               _selected={{
                 color: ['white', 'white'],
                 borderColor: [`${colorScheme}.400`, `${colorScheme}.300`],

@@ -1,5 +1,6 @@
 export const colors = {
   brand: '#eb3335',
+  link: ['#1D94E0', '#4aaae6'],
   discord: {
     basic: '#5865f2',
     hover: '#6974f3',

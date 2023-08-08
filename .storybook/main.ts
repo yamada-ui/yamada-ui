@@ -14,6 +14,7 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-viewport',
     '@storybook/addon-docs',
+    '@storybook/addon-a11y',
     '@storybook/addon-backgrounds',
     '@storybook/addon-measure',
     '@storybook/addon-storysource',

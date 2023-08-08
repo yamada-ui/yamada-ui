@@ -6,6 +6,7 @@ import * as UIComponents from '@yamada-ui/react'
 import * as TableComponents from '@yamada-ui/table'
 import type { MDXComponents as MDXComponentsType } from 'mdx/types'
 import { CodeBlock } from './code-block'
+import { ColorModeButton } from './color-mode-button'
 import { Link } from './link'
 import { LinkedHeading } from './linked-heading'
 import { PackageManagers } from './package-managers'
@@ -39,10 +40,11 @@ export const MDXBaseComponents: MDXComponentsType = {
   ol: (props) => <DecimalList apply='mdx.ol' {...props} />,
   li: (props) => <ListItem apply='mdx.li' {...props} />,
   hr: (props) => <Divider apply='mdx.hr' {...props} />,
-  kbd: Kbd,
+  kbd: (props) => <Kbd apply='mdx.kbd' {...props} />,
   Alert: (props) => <Alert apply='mdx.alert' {...props} />,
   PackageManagers,
   SelectPackageManagers,
+  ColorModeButton,
   CardContainer: (props) => <CardContainer {...props} />,
   LinkCard: (props) => <LinkCard {...props} />,
 }

@@ -45,6 +45,10 @@
       "name": "Package",
       "description": "Description"
     },
+    "color-mode-button": {
+      "light": "Toggle Dark",
+      "dark": "Toggle Light"
+    },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"
     }

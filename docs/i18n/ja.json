@@ -49,6 +49,10 @@
       "name": "パッケージ",
       "description": "説明"
     },
+    "color-mode-button": {
+      "light": "ダークモードに切り替える",
+      "dark": "ライトモードに切り替える"
+    },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"
     }

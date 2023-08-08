@@ -1,2 +1,0 @@
-import{j as i}from"./jsx-runtime-37f7df21.js";import{f as p}from"./forward-ref-92ccee95.js";import{u as c}from"./use-component-style-f03a93f0.js";import{o as n}from"./theme-2b4f2a73.js";import{d as l,e as d}from"./factory-81c6291d.js";const y=p((s,o)=>{const[e,r]=c("Badge",s),{className:a,...t}=n(r),m={display:"inline-block",whiteSpace:"nowrap",verticalAlign:"middle",...e};return i(l.span,{ref:o,className:d("ui-badge",a),__css:m,...t})});export{y as B};
-//# sourceMappingURL=badge-d62556a7.js.map

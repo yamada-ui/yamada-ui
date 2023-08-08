@@ -1,0 +1,2 @@
+import{j as f}from"./jsx-runtime-e6a661ac.js";import{f as p}from"./forward-ref-c496b87d.js";import{u as x}from"./use-component-style-b3c7bc86.js";import{o as d}from"./theme-00f66a43.js";import{q as l,d as u,e as T}from"./factory-3c20bca9.js";const h=p((t,o)=>{const[s,e]=x("Text",t),{className:r,align:a,decoration:m,casing:i,...n}=d(e),c=l({textAlign:a,textDecoration:m,textTransform:i});return f(u.p,{ref:o,className:T("ui-text",r),__css:s,...c,...n})});export{h as T};
+//# sourceMappingURL=text-db0e2e1e.js.map

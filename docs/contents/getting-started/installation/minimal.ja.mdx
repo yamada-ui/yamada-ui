@@ -181,11 +181,11 @@ Yamada UIのデフォルトのテーマを使用したい場合は、`@yamada-ui
 
 ```tsx live=false
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+import { baseTheme, defaultConfig } from '@yamada-ui/theme'
 
 const App = () => {
   return (
-    <ThemeProvider theme={defaultTheme} config={defaultConfig}>
+    <ThemeProvider theme={baseTheme} config={defaultConfig}>
       <ResetStyle />
       <GlobalStyle />
 
@@ -199,11 +199,11 @@ const App = () => {
 
 ```tsx live=false
 import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+import { baseTheme, defaultConfig } from '@yamada-ui/theme'
 
 const App = () => {
   return (
-    <ThemeProvider theme={defaultTheme} config={defaultConfig}>
+    <ThemeProvider theme={baseTheme} config={defaultConfig}>
       <ColorModeProvider config={defaultConfig}>
         <ResetStyle />
         <GlobalStyle />
@@ -222,7 +222,7 @@ const App = () => {
 
 <Alert status='warning'>
   <AlertIcon />
-  `theme`や`config`を`ThemeProvider`に渡さない場合、コンポーネントのスタイルは反映されません。
+  `theme`や`config`を`ThemeProvider`に渡さない場合、トークンは反映されません。
 </Alert>
 
 ## 学習を開始する

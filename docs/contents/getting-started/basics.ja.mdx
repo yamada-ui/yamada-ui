@@ -6,6 +6,11 @@ order: 2
 
 このガイドは、Yamada UIの概念を理解するのに役立ちます。開発を開始する前に、このガイドを読んでYamada UIを理解することをオススメします。
 
+<Alert status='warning'>
+  <AlertIcon />
+  このガイドは基本であり、Yamada UIで開発する`面白さ`を感じてもらうことが目的です。なので、各概念や機能を深く説明していません。もっと知りたくなった場合は、ページ内の各リンクをご覧ください。
+</Alert>
+
 ## テーマについて
 
 Yamada UIは、他のUIライブラリと同様にテーマという概念が存在します。
@@ -269,8 +274,8 @@ export const config: ThemeConfig = {
 
 - `initialColorMode`: カラーモードの初期値です。3つ値を受け入れます。
 
-  - `light`: ライトモード
-  - `dark`: ダークモード
+  - `light`: ライトモード。
+  - `dark`: ダークモード。
   - `system`: `mathMedia`を用いて計算します。
 
 - `useSystemColorMode`: オペレーションシステム(OS)からカラーモードの変更をサブスクライブします。
@@ -317,7 +322,7 @@ function Demo() {
 
 <Alert status='info'>
   <AlertIcon />
-  カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードについてもっと学びたい場合は、[こちら](/docs/styled-system/theming/dark-mode)をご覧ください。
+  カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードについてもっと学びたい場合は、[こちら](/docs/styled-system/dark-mode)をご覧ください。
 </Alert>
 
 ## アニメーションについて
@@ -328,9 +333,22 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 
 コンポーネント内で`useAnimation`を呼び出します。
 
-引数に`keyframes`と[CSSアニメーション](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を設定します。
+引数に`keyframes`などを設定し、生成された`animation`を`props`に渡します。
 
-フックから生成された`animation`を`props`に渡します。
+- `keyframes`: アニメーションの流れに沿ったキーフレーム(または中間地点)のスタイルを設定します。各スタイルの値は、Yamada UIのスタイルシステムやテーマのトークンが使用できます。
+- `duration`: 1回のアニメーションサイクルに要する時間の長さを設定します。
+- `timingFunction`: アニメーションの進め方を設定します。これは加速曲線を定義することで、キーフレーム間のアニメーションをどのように進めていくかを設定します。
+- `delay`: 要素が読み込まれてからアニメーションを始めるまでの遅延時間を設定します。
+- `iterationCount`: アニメーションを繰り返す回数を設定します。アニメーションを無限に繰り返すには`infinite`を指定してください。
+- `direction`: アニメーションのシーケンス完了時に、逆方向にアニメーションして繰り返すか、始めの状態にリセットしてアニメーションを繰り返すかを設定します。
+- `fillMode`: アニメーションの実行前後に、指定したスタイルを適用するかを設定します。
+- `playState`: アニメーションを一時停止したり、再開したりするかを設定します。
+
+<Alert status='info'>
+  <AlertIcon />
+  アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSS
+  アニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
+</Alert>
 
 ```tsx live=false
 import { useAnimation } from '@yamada-ui/react'
@@ -419,6 +437,16 @@ function Demo() {
   <AlertIcon />
   アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
 </Alert>
+
+## Congratulations!
+
+おめでとうございます🎉
+
+これで、あなたは`普通の山田`になることができました🥳
+
+`普通の山田`になったアナタへ、山田からこの言葉を贈ります。
+
+「次は、[応用で学ぶ](/docs/getting-started/advanced)で待ってるねっ///」😘
 
 ## もっと学習をする
 

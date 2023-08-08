@@ -1,9 +1,444 @@
 ---
 title: 基本を学ぶ
-description: 3分間のチュートリアルを読んで、Yamada UIのスタイル・アニメーション・レスポンシブ・ダークモード・テーマの基本を学ぶ。
+description: 3分間のチュートリアルを読んで、Yamada UIのテーマ・スタイル・レスポンシブ・ダークモード・アニメーションの基本を学ぶ。
 order: 2
 ---
 
-現在ページ作成中です。😘
+このガイドは、Yamada UIの概念を理解するのに役立ちます。開発を開始する前に、このガイドを読んでYamada UIを理解することをオススメします。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+## テーマについて
+
+Yamada UIは、他のUIライブラリと同様にテーマという概念が存在します。
+
+テーマは、コンポーネントのスタイルやカラー・スペース・フォントサイズ・その他多くのプロパティのトークンが定義されている変更可能なオブジェクトです。
+
+プロジェクトに[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を設定するには、アプリケーションのルートに`UIProvider`を追加する必要があります。
+
+```tsx live=false
+import { UIProvider } from '@yamada-ui/react'
+
+const App = () => {
+  return (
+    <UIProvider>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  [デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに内包されています。
+</Alert>
+
+<Alert status='warning'>
+  <AlertIcon />
+  [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`ThemeProvider`を使用してください。`ThemeProvider`は、テーマを内包していないので個別で挿入する必要があります。
+</Alert>
+
+### テーマをカスタマイズしたいですか？
+
+テーマをカスタマイズしたい場合は、`UIProvider`に`theme`を渡しましょう。
+
+```tsx live=false
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const customTheme = extendTheme({
+  spaces: { xs: '1rem', sm: '1.25rem', md: '1.5rem', normal: '2rem', lg: '2.5rem', xl: '3rem' },
+})()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+これで、アプリケーション全体の余白が変更されました。
+
+<Alert status='warning'>
+  <AlertIcon />
+  `extendTheme`は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承しないので、全く新しいテーマになります。
+</Alert>
+
+<Alert status='info'>
+  <AlertIcon />
+  テーマや`extendTheme`をもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+</Alert>
+
+## スタイルについて
+
+Yamada UIは、コンポーネントに`props`を渡すだけでスタイルを簡単に変更できます。また、多くの便利なショートハンドを提供しており、開発効率を向上させています。
+
+例えば、`padding`であれば、`p`と記述することもでき、`margin-left`と`margin-right`の両方を設定したい場合は、`mx`と記述することができます。
+
+```tsx
+<Box w='full' p='md' bg='warning' color='white'>
+  This is Box
+</Box>
+```
+
+### 擬似要素
+
+```tsx
+<Box
+  pos='relative'
+  boxSize='2xs'
+  bg='primary'
+  p='md'
+  color='white'
+  _after={{
+    content: "'after'",
+    pos: 'absolute',
+    top: '0',
+    right: '0',
+    bg: 'secondary',
+    p: 'md',
+    color: 'white',
+  }}
+>
+  Box
+</Box>
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  `Style props`やショートコードをもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
+</Alert>
+
+### コンポーネント
+
+Yamada UIが提供しているコンポーネントの多くは、`variant`・`size`・`colorScheme`を設定することでスタイルが変更されます。
+
+```tsx
+<Wrap gap='md'>
+  <Button>Basic</Button>
+
+  <Button variant='solid' colorScheme='green'>
+    Solid
+  </Button>
+
+  <Button variant='outline' colorScheme='orange'>
+    Outline
+  </Button>
+
+  <Button variant='ghost' colorScheme='red'>
+    Ghost
+  </Button>
+
+  <Button variant='link' colorScheme='sky'>
+    Link
+  </Button>
+
+  <Button variant='unstyled'>Unstyle</Button>
+</Wrap>
+```
+
+```tsx
+<Wrap gap='md'>
+  <Button colorScheme='primary' size='xs'>
+    X Small
+  </Button>
+
+  <Button colorScheme='secondary' size='sm'>
+    Small
+  </Button>
+
+  <Button colorScheme='warning' size='md'>
+    Medium
+  </Button>
+
+  <Button colorScheme='danger' size='lg'>
+    Large
+  </Button>
+</Wrap>
+```
+
+## レスポンシブについて
+
+Yamada UIは、すぐに使えるレスポンシブスタイルをサポートしています。スタイルの`props`にオブジェクトを渡すだけでPCファーストのレスポンシブスタイルを追加できます。
+
+すべてのスタイルの`props`は、オブジェクトを受け入れます。まずは、背景色を変えてみましょう。
+
+- オブジェクトのキーは、[ブレイクポイント](/docs/getting-started/basics#ブレイクポイントについて)で設定されているキーを定義します。
+- オブジェクトの値は、キーで設定するスタイルの値を定義します。
+
+```tsx
+<Box
+  w='full'
+  p='md'
+  bg={{ base: 'primary', '2xl': 'secondary', xl: 'warning', lg: 'danger' }}
+  color='white'
+>
+  This is Box
+</Box>
+```
+
+実際に、画面幅を変更して確認してください。
+
+上記のコードを、`CSS`で記述すると下記のようになります。
+
+```css
+.demo {
+  background: var(--ui-colors-primary);
+
+  @media screen and (max-width: 1440px) {
+    background: var(--ui-colors-secondary);
+  }
+
+  @media screen and (max-width: 1280px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 976px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 480px) {
+    background: var(--ui-colors-danger);
+  }
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  `レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+</Alert>
+
+<Alert status='warning'>
+  <AlertIcon />
+  Yamada UIは、レスポンシブデザインに`@media(max-width)`のメディアクエリを使用しています。
+</Alert>
+
+### ブレイクポイントについて
+
+ブレイクポイントは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)に定義されています。
+
+実際に定義されている値はこちらです。
+
+```ts title=breakpoints.ts
+export const breakpoints = {
+  sm: '30em', // 480px
+  md: '48em', // 768px
+  lg: '61em', // 976px
+  xl: '80em', // 1280px
+  '2xl': '90em', // 1440px
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  ブレイクポイントを変更したい場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
+</Alert>
+
+## ダークモードについて
+
+Yamada UIには、アプリケーションのカラーモードを管理するためのサポートが組み込まれています。
+
+Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。また、個別にカラーモードのスタイルを設定する場合は、スタイルの`props`に配列を渡すだけでカラーモードに対応します。
+
+すべてのスタイルの`props`は、配列を受け入れます。まずは、背景色を変えてみましょう。
+
+- 第一引数にライトモードに設定したいスタイルの値を定義します。
+- 第二引数にダークモードに設定したいスタイルの値を定義します。
+
+```tsx
+<Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
+  This is Box
+</Box>
+```
+
+実際に、下のボタンでカラーモードを変更して確認してください。
+
+<ColorModeButton />
+
+### カラーモードを切り替える
+
+カラーモードは、デフォルトのコンフィグに定義されています。
+
+実際に定義されている値はこちらです。
+
+```ts title=config.ts
+export const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
+}
+```
+
+- `initialColorMode`: カラーモードの初期値です。3つ値を受け入れます。
+
+  - `light`: ライトモード
+  - `dark`: ダークモード
+  - `system`: `mathMedia`を用いて計算します。
+
+- `useSystemColorMode`: オペレーションシステム(OS)からカラーモードの変更をサブスクライブします。
+  - `true`: サブスクライブを有効にします。
+  - `false`: サブスクライブを無効にします。
+
+<Alert status='warning'>
+  <AlertIcon />
+  <List>
+    <ListItem>`initialColorMode`が定義されていない場合は、内部的に`light`になります。</ListItem>
+    <ListItem>`useSystemColorMode`が定義されていない場合は、内部的に`true`になります。</ListItem>
+  </List>
+</Alert>
+
+<Alert status='info'>
+  <AlertIcon />
+  コンフィグを変更したい場合は、[こちら](/docs/styled-system/theming/customize-theme#コンフィグを変更する)ををご覧ください。
+</Alert>
+
+アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。
+
+- `changeColorMode`: 引数に変更したいカラーモードを設定します。
+- `toggleColorMode`: ライトモードならダークモードへ、ダークモードならライトモードへ切り替えます。
+
+```tsx
+function Demo() {
+  const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+
+  return (
+    <Wrap gap='md'>
+      <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
+        ライトモード
+      </Button>
+      <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
+        ダークモード
+      </Button>
+      <Button colorScheme='gray' onClick={toggleColorMode}>
+        {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードについてもっと学びたい場合は、[こちら](/docs/styled-system/theming/dark-mode)をご覧ください。
+</Alert>
+
+## アニメーションについて
+
+Yamada UIは、アニメーションに特化したコンポーネントの`Motion`やCSSの`keyframes`のように記述できる`useAnimation`など、多くのユーティリティを提供しています。
+
+### `useAnimation`を使ってみましょう
+
+コンポーネント内で`useAnimation`を呼び出します。
+
+引数に`keyframes`と[CSSアニメーション](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を設定します。
+
+フックから生成された`animation`を`props`に渡します。
+
+```tsx live=false
+import { useAnimation } from '@yamada-ui/react'
+```
+
+```tsx
+function Demo() {
+  const animation = useAnimation({
+    keyframes: {
+      from: {
+        transform: 'rotate(0)',
+      },
+      to: {
+        transform: 'rotate(359deg)',
+      },
+    },
+    duration: '0.8s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  })
+
+  return (
+    <Center p='lg'>
+      <Center
+        w='150px'
+        h='150px'
+        p='1'
+        rounded='50%'
+        bgGradient={[
+          'linear(blackAlpha.50, blackAlpha.500)',
+          'linear(whiteAlpha.50, whiteAlpha.500)',
+        ]}
+        animation={animation}
+      >
+        <Box w='full' h='full' rounded='50%' bg={['white', 'black']} />
+      </Center>
+    </Center>
+  )
+}
+```
+
+### `Motion`を使ってみましょう
+
+コンポーネント内で`Motion`を呼び出します。
+
+`Motion`の`props`は、数多く存在します。今回は、`whileHover`・`whileTap`・`whileFocus`について軽く紹介します。
+
+- `whileHover`: 要素がホバーされたときに発火するアニメーションです。
+- `whileTap`: 要素がクリック・タップされたときに発火するアニメーションです。
+- `whileHover`: 要素がフォーカスされたときに発火するアニメーションです。
+
+今回は、拡大・縮小させるために`scale: 1.1`や`scale: 0.9`を設定しています。
+
+```tsx live=false
+import { Motion } from '@yamada-ui/react'
+```
+
+```tsx
+function Demo() {
+  return (
+    <Center p='lg'>
+      <Motion
+        as='button'
+        whileHover={{
+          scale: 1.1,
+        }}
+        whileTap={{
+          scale: 0.9,
+        }}
+        whileFocus={{
+          scale: 1.1,
+        }}
+        p='md'
+        rounded='md'
+        bg='primary'
+        color='white'
+      >
+        Click me!
+      </Motion>
+    </Center>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
+</Alert>
+
+## もっと学習をする
+
+Yamada UIをもっと知るために、応用やテーマを学んでみませんか？😎
+
+<CardContainer>
+  <LinkCard href='/docs/getting-started/advanced' />
+  <LinkCard
+    href='/docs/styled-system/theming'
+    title='テーマについて学ぶ'
+    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+  />
+  <LinkCard
+    href='/docs/components'
+    title='コンポーネントを探索する'
+    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+  />
+  <LinkCard
+    href='https://github.com/hirotomoyamada/yamada-ui'
+    title='ソースコードを探索する'
+    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+  />
+</CardContainer>

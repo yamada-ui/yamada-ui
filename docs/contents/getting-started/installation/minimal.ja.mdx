@@ -33,7 +33,7 @@ const Demo = () => {
 }
 ```
 
-スタイルを適応するには、`props`を渡します。
+スタイルを設定するには、`props`を渡します。
 
 今回は、`button`でやってみましょう。
 
@@ -51,7 +51,7 @@ const Demo = () => {
 
 <Alert status='info'>
   <AlertIcon />
-  Yamada UIの`Style props`を学ぶ場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
+  `Style props`をもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
 </Alert>
 
 ## コンポーネントを作る
@@ -70,7 +70,7 @@ const Demo = () => {
 }
 ```
 
-デフォルトのスタイルを定義することもできます。
+デフォルトのスタイルを設定することもできます。
 
 ```tsx live=false
 import { ui } from '@yamada-ui/core'
@@ -168,16 +168,16 @@ function Demo() {
 
 <Alert status='info'>
   <AlertIcon />
-  もっとアニメーションを学ぶ場合は、[こちら](/docs/styled-system/animation)をご覧ください。
+  アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
 </Alert>
 
 ## 色やスペースなどのトークンを使用したい場合
 
-Yamada UIのデフォルトのテーマを使用したい場合は、`@yamada-ui/theme`をインストールします。
+Yamada UIの[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を使用したい場合は、`@yamada-ui/theme`をインストールします。
 
 <PackageManagers packageName='@yamada-ui/theme' />
 
-テーマをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`からデフォルトのテーマやコンフィグを渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
+テーマをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマとコンフィグ](/docs/styled-system/theming/default-theme)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
 ```tsx live=false
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
@@ -217,7 +217,7 @@ const App = () => {
 
 <Alert status='info'>
   <AlertIcon />
-  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create)をご覧ください。
+  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create-theme)をご覧ください。
 </Alert>
 
 <Alert status='warning'>

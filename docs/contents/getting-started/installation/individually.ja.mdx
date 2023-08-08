@@ -26,7 +26,7 @@ Yamada UIのコアやユーティリティをインストールします。
 
 ## `ThemeProvider`を追加する
 
-コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`からデフォルトのテーマやコンフィグを渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
+コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマとコンフィグ](/docs/styled-system/theming/default-theme)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
 ```tsx live=false
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
@@ -66,7 +66,7 @@ const App = () => {
 
 <Alert status='info'>
   <AlertIcon />
-  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create)をご覧ください。
+  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create-theme)をご覧ください。
 </Alert>
 
 <Alert status='warning'>

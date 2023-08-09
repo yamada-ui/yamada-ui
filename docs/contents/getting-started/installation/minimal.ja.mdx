@@ -76,11 +76,13 @@ const Demo = () => {
 import { ui } from '@yamada-ui/core'
 
 const Button = ui('button', {
-  background: '#ef4444',
-  color: '#ffffff',
-  padding: '1rem',
-  borderRadius: '.5rem',
-  _hover: { background: '#dc2626' },
+  baseStyle: {
+    background: '#ef4444',
+    color: '#ffffff',
+    padding: '1rem',
+    borderRadius: '.5rem',
+    _hover: { background: '#dc2626' },
+  },
 })
 
 const Demo = () => {
@@ -97,8 +99,6 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 `@yamada-ui/use-animation`をインストールします。
 
 <PackageManagers packageName='@yamada-ui/use-animation' />
-
-インストール後、コンポーネント内で`useAnimation`を呼び出します。
 
 ```tsx
 function Demo() {
@@ -137,8 +137,6 @@ function Demo() {
 `@yamada-ui/motion`をインストールします。
 
 <PackageManagers packageName='@yamada-ui/motion' />
-
-インストール後、コンポーネント内で`Motion`を呼び出します。
 
 ```tsx
 function Demo() {

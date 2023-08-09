@@ -41,7 +41,7 @@ const App = () => {
   [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`ThemeProvider`を使用してください。`ThemeProvider`は、テーマを内包していないので個別で挿入する必要があります。
 </Alert>
 
-### テーマをカスタマイズしたいですか？
+### テーマをカスタマイズする
 
 テーマをカスタマイズしたい場合は、`UIProvider`に`theme`を渡しましょう。
 
@@ -61,7 +61,7 @@ const App = () => {
 }
 ```
 
-これで、アプリケーション全体の余白が変更されました。
+これでアプリケーション全体の余白が変更されました。
 
 <Alert status='warning'>
   <AlertIcon />
@@ -70,7 +70,129 @@ const App = () => {
 
 <Alert status='info'>
   <AlertIcon />
-  テーマや`extendTheme`をもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+  テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+</Alert>
+
+### ローディングを使う
+
+Yamada UIは、アプリケーションにおいて**必須不可欠**である`ローディングアニメーション`のユーティリティも豊富です。
+
+ローディングを表示するには、`useLoading`を使用します。`useLoading`は、`screen`・`page`・`background`・`custom`のインスタンスを返します。インスタンスには、いくつかのメソッドが含まれています。
+
+- `isLoading`: ローディングアニメーション中かどうかを取得します。
+- `start`: ローディングアニメーションを開始します。
+- `update`: ローディングアニメーションの情報を更新します。
+- `finish`: ローディングアニメーションを終了します。
+
+<Alert status='warning'>
+  <AlertIcon />
+  [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`useLoading`が含まれていません。ローディングを使用したい場合は、[こちら](/docs/styled-system/loading#個別や最小限でインストールしている場合)をご覧ください。
+</Alert>
+
+<Alert status='warning'>
+  <AlertIcon />
+  `custom`は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)で設定されていません。カスタムローディングを設定したい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
+</Alert>
+
+```tsx
+function Demo() {
+  const { screen, page, background } = useLoading()
+
+  const demoScreen = async () => {
+    try {
+      screen.start()
+
+      await wait(5000)
+    } finally {
+      screen.finish()
+    }
+  }
+
+  const demoPage = async () => {
+    try {
+      page.start()
+
+      await wait(5000)
+    } finally {
+      page.finish()
+    }
+  }
+
+  const demoBackground = async () => {
+    try {
+      background.start()
+
+      await wait(5000)
+    } finally {
+      background.finish()
+    }
+  }
+
+  return (
+    <Wrap gap='md'>
+      <Button colorScheme='gray' onClick={demoScreen}>
+        Start screen loading
+      </Button>
+      <Button colorScheme='gray' onClick={demoPage}>
+        Start page loading
+      </Button>
+      <Button colorScheme='gray' onClick={demoBackground}>
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  ローディングのアイコンやスタイルは、`useLoading`の引数や`UIProvider`に渡せる`コンフィグ`で設定できます。
+</Alert>
+
+<Alert status='info'>
+  <AlertIcon />
+  ローディングをもっと知りたい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
+</Alert>
+
+### 通知を使う
+
+Yamada UIは、アプリケーションにおいて**必須不可欠**である`通知`のユーティリティも豊富です。
+
+通知を表示するには、`useNotice`を使用します。`useNotice`は、通知を表示する関数を返します。
+
+<Alert status='warning'>
+  <AlertIcon />
+  [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`useNotice`が含まれていません。通知を使用したい場合は、[こちら](/docs/styled-system/notification#個別や最小限でインストールしている場合)をご覧ください。
+</Alert>
+
+```tsx
+function Demo() {
+  const notice = useNotice()
+
+  return (
+    <Button
+      colorScheme='gray'
+      onClick={() =>
+        notice({
+          title: 'Notification',
+          description: 'This is description.',
+        })
+      }
+    >
+      Show Notification
+    </Button>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  通知のバリアントや表示位置の変更は、`useNotice`の引数や`UIProvider`に渡せる`コンフィグ`で設定できます。
+</Alert>
+
+<Alert status='info'>
+  <AlertIcon />
+  通知をもっと知りたい場合は、[こちら](/docs/styled-system/notification)をご覧ください。
 </Alert>
 
 ## スタイルについて
@@ -165,7 +287,7 @@ Yamada UIが提供しているコンポーネントの多くは、`variant`・`s
 
 Yamada UIは、すぐに使えるレスポンシブスタイルをサポートしています。スタイルの`props`にオブジェクトを渡すだけでPCファーストのレスポンシブスタイルを追加できます。
 
-すべてのスタイルの`props`は、オブジェクトを受け入れます。まずは、背景色を変えてみましょう。
+すべてのスタイルの`props`は、オブジェクトも受け入れます。まずは、背景色を変えてみましょう。
 
 - オブジェクトのキーは、[ブレイクポイント](/docs/getting-started/basics#ブレイクポイントについて)で設定されているキーを定義します。
 - オブジェクトの値は、キーで設定するスタイルの値を定義します。
@@ -181,7 +303,7 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 </Box>
 ```
 
-実際に、画面幅を変更して確認してください。
+画面幅を変更して実際に確認してください。
 
 上記のコードを、`CSS`で記述すると下記のようになります。
 
@@ -244,10 +366,10 @@ Yamada UIには、アプリケーションのカラーモードを管理する�
 
 Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。また、個別にカラーモードのスタイルを設定する場合は、スタイルの`props`に配列を渡すだけでカラーモードに対応します。
 
-すべてのスタイルの`props`は、配列を受け入れます。まずは、背景色を変えてみましょう。
+すべてのスタイルの`props`は、配列も受け入れます。まずは、背景色を変えてみましょう。
 
-- 第一引数にライトモードに設定したいスタイルの値を定義します。
-- 第二引数にダークモードに設定したいスタイルの値を定義します。
+- 第1引数にライトモードに設定したいスタイルの値を定義します。
+- 第2引数にダークモードに設定したいスタイルの値を定義します。
 
 ```tsx
 <Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
@@ -255,7 +377,7 @@ Yamada UIのすべてのコンポーネントは、ダークモードをサポ�
 </Box>
 ```
 
-実際に、下のボタンでカラーモードを変更して確認してください。
+下のボタンでカラーモードを変更して実際に確認してください。
 
 <ColorModeButton />
 
@@ -331,9 +453,7 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 
 ### `useAnimation`を使ってみましょう
 
-コンポーネント内で`useAnimation`を呼び出します。
-
-引数に`keyframes`などを設定し、生成された`animation`を`props`に渡します。
+`useAnimation`は、引数に`keyframes`などを設定し、生成された`animation`を`props`に渡します。
 
 - `keyframes`: アニメーションの流れに沿ったキーフレーム(または中間地点)のスタイルを設定します。各スタイルの値は、Yamada UIのスタイルシステムやテーマのトークンが使用できます。
 - `duration`: 1回のアニメーションサイクルに要する時間の長さを設定します。
@@ -349,10 +469,6 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
   アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSS
   アニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
 </Alert>
-
-```tsx live=false
-import { useAnimation } from '@yamada-ui/react'
-```
 
 ```tsx
 function Demo() {
@@ -392,19 +508,13 @@ function Demo() {
 
 ### `Motion`を使ってみましょう
 
-コンポーネント内で`Motion`を呼び出します。
-
-`Motion`の`props`は、数多く存在します。今回は、`whileHover`・`whileTap`・`whileFocus`について軽く紹介します。
+`Motion`コンポーネントの`props`は、数多く存在します。今回は、`whileHover`・`whileTap`・`whileFocus`について軽く紹介します。
 
 - `whileHover`: 要素がホバーされたときに発火するアニメーションです。
 - `whileTap`: 要素がクリック・タップされたときに発火するアニメーションです。
 - `whileHover`: 要素がフォーカスされたときに発火するアニメーションです。
 
 今回は、拡大・縮小させるために`scale: 1.1`や`scale: 0.9`を設定しています。
-
-```tsx live=false
-import { Motion } from '@yamada-ui/react'
-```
 
 ```tsx
 function Demo() {

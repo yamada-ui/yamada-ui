@@ -4,6 +4,478 @@ description: Yamada UIのテーマ・スタイル・レスポンシブ・ダー�
 order: 3
 ---
 
-現在ページ作成中です。😘
+このガイドでは、[基本を学ぶ](/docs/getting-started/basics)で説明した概念や機能の応用を説明します。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+## テーマの応用
+
+Yamada UIは、テーマのユーティリティが他のUIライブラリよりも豊富です。
+
+[基本を学ぶ](/docs/getting-started/basics#テーマについて)では、テーマの継承に`extendTheme`を使用することを学びました。ここでは、各コンポーネントで設定されている`colorScheme`を変更する方法やテーマに定義されているトークンの値を取得する方法を学びます。
+
+各コンポーネントで設定されている`colorScheme`を変更するには、`withDefaultColorScheme`を使用します。
+
+<Alert status='info'>
+  <AlertIcon />
+  他にも、サイズを変更する`withDefaultSize`、バリアントを変更する`withDefaultVariant`も提供しています。
+</Alert>
+
+### `withDefaultColorScheme`を使ってみましょう
+
+Yamada UIが提供しているほとんどのコンポーネントは、デフォルトの`colorScheme`に`primary`が設定されています。`withDefaultColorScheme`を使用して、`secondary`に変更します。
+
+```tsx live=false
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const customTheme = extendTheme(
+  withDefaultColorScheme({
+    colorScheme: 'primary',
+    components: ['Badge', 'Tag', 'Button'], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
+  }),
+)()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### `useToken`を使ってみましょう
+
+コンポーネント内でテーマに定義されているトークンの値を取得する場合には、`useToken`を使用します。
+
+```tsx
+function Demo() {
+  const bg = useToken('colors', 'primary')
+
+  return (
+    <Box bg={bg} p='md' color='white'>
+      Primary for color tokens is "{bg}"
+    </Box>
+  )
+}
+```
+
+これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
+
+<Alert status='info'>
+  <AlertIcon />
+  テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+</Alert>
+
+## スタイルの応用
+
+[基本を学ぶ](/docs/getting-started/basics#スタイルについて)では、`Style props`やショートハンドを学びました。ここでは、要素のレンダリングを変更する方法やYamada UIのスタイルシステムの重要度を学びます。
+
+### `as`について
+
+Yamada UIのすべてのコンポーネントは、`アサーション`することができます。
+
+`アサーション`とは、コンポーネントにHTMLタグや別のコンポーネントを渡すことで、元のコンポーネントのスタイルや挙動を保持しつつ、異なる要素やコンポーネントとしてレンダリングする機能です。
+
+例えば、`Button`のスタイルや挙動を保持しつつ、HTMLタグの`a`に変更する必要があるとします。
+
+```tsx
+<Button
+  as='a'
+  href='https://github.com/hirotomoyamada/yamada-ui'
+  target='_blank'
+  colorScheme='gray'
+>
+  GitHub
+</Button>
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  Yamada UIは、開発者が各コンポーネントに`as`を設定することを`推奨`しています。なぜなら、多くのコンポーネントは`div`であり、適切に`header`や`footer`を設定しなければ、文章を論理的なセクションに構成しているとは言えません。積極的に`as`を設定していきましょう。
+</Alert>
+
+### `sx`や`css`について
+
+Yamada UIは、スタイルを設定するために`Style props`以外にも`sx`や`css`を提供しています。
+
+- `sx`: `Style props`と同様にテーマのトークンが使用でき、`CSS`のセレクターなども記述できるオブジェクトを受け入れます。
+- `css`: [Emotion](https://emotion.sh/)の`CSS`のオブジェクトを受け入れます。
+
+<Alert status='warning'>
+  <AlertIcon />
+  しかし、`sx`と`css`が必要になるケースは、ほとんどありません。次のセクションで説明する[順序について](/docs/getting-started/advanced#順序について)において、`sx`と`css`の存在を理解していれば問題ありません。
+</Alert>
+
+```tsx
+<Box
+  p='md'
+  display='flex'
+  gap='sm'
+  sx={{
+    '&:hover > p': {
+      color: 'danger',
+    },
+  }}
+>
+  <Text as='span'>Hover me!</Text>
+  <Text>This is Text</Text>
+</Box>
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `css`は、Yamada UIの`Style props`を使用できません。
+</Alert>
+
+### 順序について
+
+Yamada UIのコンポーネントは、いくつかの`CSS`のオブジェクトを受け入れ、設定される順序があります。
+
+順序は以下の通りで、同じプロパティの値は上書きされます。
+
+1. `baseStyle`: テーマの`baseStyle`のオブジェクト
+2. `size`: テーマの`size`のオブジェクト
+3. `variant`: テーマの`variant`のオブジェクト
+4. `props`: コンポーネントのスタイルの`props`
+5. `sx`: コンポーネントの`sx`の`props`
+6. `css`: コンポーネントの`css`の`props`
+
+<Alert status='info'>
+  <AlertIcon />
+  `Style props`やショートコードをもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
+</Alert>
+
+## レスポンシブの応用
+
+[基本を学ぶ](/docs/getting-started/basics#レスポンシブについて)では、レスポンシブスタイルの設定を学びました。ここでは、現在のブレイクポイントを取得する方法や便利なユーティリティを学びます。
+
+### `useBreakpoint`を使ってみましょう
+
+コンポーネント内で現在のブレイクポイントを取得する場合には、`useBreakpoint`を使用します。
+
+```tsx
+function Demo() {
+  const breakpoint = useBreakpoint()
+
+  return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
+}
+```
+
+### `useBreakpointValue`を使ってみましょう
+
+`useBreakpointValue`は、引数で渡されたオブジェクトから現在のブレイクポイントの値を返すカスタムフックです。
+
+```tsx
+function Demo() {
+  const breakpoint = useBreakpoint()
+  const bg = useBreakpointValue({
+    base: 'red.500',
+    xl: 'blue.500',
+    lg: 'green.500',
+    md: 'yellow.500',
+    sm: 'purple.500',
+  })
+
+  return (
+    <Box bg={bg} p='md' color='white'>
+      The current breakpoint is "{breakpoint}"
+    </Box>
+  )
+}
+```
+
+これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
+
+<Alert status='info'>
+  <AlertIcon />
+  `レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+</Alert>
+
+## ダークモードの応用
+
+[基本を学ぶ](/docs/getting-started/basics#ダークモードについて)では、カラーモードのスタイルの設定を学びました。ここでは、現在のカラーモードを取得する方法や便利なユーティリティを学びます。
+
+### `useColorMode`を使ってみましょう
+
+コンポーネント内で現在のカラーモードを取得する場合には、`useColorMode`を使用します。
+
+```tsx
+function Demo() {
+  const { colorMode } = useColorMode()
+
+  return <Box p='md'> The current colorMode is "{colorMode}"</Box>
+}
+```
+
+### `useColorModeValue`を使ってみましょう
+
+`useColorModeValue`は、第1引数にライトモードの値、第2引数にダークモードの値を渡し、現在のカラーモードの値を返すカスタムフックです。
+
+```tsx
+function Demo() {
+  const { colorMode } = useColorMode()
+  const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
+  const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+
+  return (
+    <Box p='md' bg={bg} color={color}>
+      The current colorMode is "{colorMode}"
+    </Box>
+  )
+}
+```
+
+これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
+
+<Alert status='info'>
+  <AlertIcon />
+  カラーモードについてもっと学びたい場合は、[こちら](/docs/styled-system/dark-mode)をご覧ください。
+</Alert>
+
+## アニメーションの応用
+
+[基本を学ぶ](/docs/getting-started/basics#アニメーションについて)では、`useAnimation`と`Motion`コンポーネントを学びました。ここでは、`useAnimation`で複数のアニメーションの設定や新しく動的なアニメーションを設定する`useDynamicAnimation`を学びます。
+
+### `useAnimation`で複数のアニメーションを使ってみましょう
+
+`useAnimation`の引数は、配列も受け入れます。
+
+```tsx
+function Demo() {
+  const animation = useAnimation([
+    {
+      keyframes: {
+        '0%': {
+          bg: 'red.500',
+        },
+        '20%': {
+          bg: 'green.500',
+        },
+        '40%': {
+          bg: 'purple.500',
+        },
+        '60%': {
+          bg: 'yellow.500',
+        },
+        '80%': {
+          bg: 'blue.500',
+        },
+        '100%': {
+          bg: 'red.500',
+        },
+      },
+      duration: '10s',
+      iterationCount: 'infinite',
+      timingFunction: 'linear',
+    },
+    {
+      keyframes: {
+        '0%': {
+          h: 'xs',
+        },
+        '50%': {
+          h: 'md',
+        },
+        '100%': {
+          h: 'xs',
+        },
+      },
+      duration: '10s',
+      iterationCount: 'infinite',
+      timingFunction: 'linear',
+    },
+    {
+      keyframes: {
+        '0%': {
+          w: 'full',
+        },
+        '50%': {
+          w: '50%',
+        },
+        '100%': {
+          w: 'full',
+        },
+      },
+      duration: '10s',
+      iterationCount: 'infinite',
+      timingFunction: 'linear',
+    },
+  ])
+
+  return (
+    <Box h='md'>
+      <Box w='full' h='xs' animation={animation} />
+    </Box>
+  )
+}
+```
+
+### `useDynamicAnimation`を使ってみましょう
+
+`useDynamicAnimation`は、引数にオブジェクトを渡します。オブジェクトのキーはアニメーションのキーになり、`setState`の引数にキーを渡すことでアニメーションが変更されます。
+
+```tsx
+function Demo() {
+  const [animation, setAnimation] = useDynamicAnimation({
+    moveLeft: {
+      keyframes: {
+        '0%': {
+          transform: 'translateX(400%)',
+        },
+        '100%': {
+          transform: 'translateX(0%)',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+    moveRight: {
+      keyframes: {
+        '0%': {
+          transform: 'translateX(0%)',
+        },
+        '100%': {
+          transform: 'translateX(400%)',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+  })
+
+  return (
+    <VStack alignItems='flex-start'>
+      <Button
+        colorScheme='gray'
+        onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      >
+        Click me!
+      </Button>
+
+      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+        Box
+      </Box>
+    </VStack>
+  )
+}
+```
+
+動的なアニメーションと複数のアニメーションを組み合わせることも可能です。
+
+```tsx
+function Demo() {
+  const [animation, setAnimation] = useDynamicAnimation<
+    Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+  >({
+    moveLeft: [
+      {
+        keyframes: {
+          '0%': {
+            transform: 'translateX(400%)',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
+          },
+        },
+        duration: 'slower',
+        fillMode: 'forwards',
+        timingFunction: 'ease-in-out',
+      },
+      {
+        keyframes: {
+          '0%': {
+            bg: 'secondary',
+          },
+          '100%': {
+            bg: 'primary',
+          },
+        },
+        duration: 'slower',
+        fillMode: 'forwards',
+        timingFunction: 'ease-in-out',
+      },
+    ],
+    moveRight: [
+      {
+        keyframes: {
+          '0%': {
+            transform: 'translateX(0%)',
+          },
+          '100%': {
+            transform: 'translateX(400%)',
+          },
+        },
+        duration: 'slower',
+        fillMode: 'forwards',
+        timingFunction: 'ease-in-out',
+      },
+      {
+        keyframes: {
+          '0%': {
+            bg: 'primary',
+          },
+          '100%': {
+            bg: 'secondary',
+          },
+        },
+        duration: 'slower',
+        fillMode: 'forwards',
+        timingFunction: 'ease-in-out',
+      },
+    ],
+  })
+
+  return (
+    <VStack alignItems='flex-start'>
+      <Button
+        colorScheme='gray'
+        onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      >
+        Click me!
+      </Button>
+
+      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+        Box
+      </Box>
+    </VStack>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
+</Alert>
+
+## Congratulations!
+
+おめでとうございます🎉
+
+これで、あなたは`素敵の山田`になることができました🥳
+
+`素敵の山田`になったアナタへ、山田からこの言葉を贈ります。
+
+「次は、`極 Yamada UI`を一生懸命作ってるから待っててねっ///」😘
+
+## もっと学習をする
+
+Yamada UIをもっと知るために、テーマやコンポーネントを学んでみませんか？😎
+
+<CardContainer>
+  <LinkCard
+    href='/docs/styled-system/theming'
+    title='テーマについて学ぶ'
+    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+  />
+  <LinkCard
+    href='/docs/components'
+    title='コンポーネントを探索する'
+    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+  />
+  <LinkCard
+    href='https://github.com/hirotomoyamada/yamada-ui'
+    title='ソースコードを探索する'
+    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+  />
+</CardContainer>

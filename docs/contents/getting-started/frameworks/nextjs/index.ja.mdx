@@ -8,4 +8,131 @@ tab: Pages Router
 
 ## パッケージをインストールする
 
+まず、アプリケーションを作成します。
+
+ターミナルで次のコマンドのいずれかを実行します。
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm create next-app my-app --typescript',
+    npm: 'npx create-next-app my-app --typescript',
+    yarn: 'yarn create next-app my-app --typescript',
+  }}
+/>
+
+Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
+
 <PackageManagers packageNameOrCommand='@yamada-ui/react' />
+
+テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールをする必要があります。
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: '@yamada-ui/table',
+      description: '`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。',
+      isDefaultCheck: true,
+    },
+    {
+      name: '@yamada-ui/calendar',
+      description:
+        '`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/carousel',
+      description: '`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/dropzone',
+      description: '`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/markdown',
+      description:
+        '`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/fontawesome',
+      description: '`Font Awesome`を便利に使用するためのコンポーネントを提供します。',
+    },
+  ]}
+/>
+
+<Alert status='info'>
+  <AlertIcon />
+  <List>
+    <ListItem>
+      個別でコンポーネントやフックをインストールしてパフォーマンスを向上させるには、[こちら](/docs/getting-started/installation/individually)。
+    </ListItem>
+    <ListItem>
+      Yamada
+      UIのスタイルシステムのみを使用したい場合は、[こちら](/docs/getting-started/installation/minimal)。
+    </ListItem>
+  </List>
+</Alert>
+
+## `UIProvider`を追加する
+
+Yamada UIをインストール後、`UIProvider`を追加します。
+
+```tsx live=false title=_app.tsx
+import type { AppProps } from 'next/app'
+import { UIProvider } from '@yamada-ui/react'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  [デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに含まれています。
+</Alert>
+
+<Alert status='info'>
+  <AlertIcon />
+  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create-theme)をご覧ください。
+</Alert>
+
+## `ColorModeScript`を追加する
+
+カラーモードを正常に動作させるために、`body`内に`ColorModeScript`を追加する必要があります。
+
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+```tsx live=false title=_document.tsx
+import { Html, Head, Main, NextScript } from 'next/document'
+import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+
+export default function Document() {
+  return (
+    <Html lang='en'>
+      <Head />
+
+      <body>
+        {/** ここに追加します */}
+        <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
+</Alert>
+
+## コンポーネントを使用する
+
+`UIProvider`を追加したら、アプリケーション内でコンポーネントを呼び出します。
+
+```tsx live=false title=index.tsx
+import { Button } from '@yamada-ui/react'
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```

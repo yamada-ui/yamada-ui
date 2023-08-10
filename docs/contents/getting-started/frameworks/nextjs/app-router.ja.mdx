@@ -4,6 +4,120 @@ description: Nextjsのプロジェクトへ、Yamada UIをインストールし�
 tab: App Router
 ---
 
-現在ページ作成中です。😘
+## パッケージをインストールする
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+まず、アプリケーションを作成します。
+
+ターミナルで次のコマンドのいずれかを実行します。
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm create next-app my-app --typescript',
+    npm: 'npx create-next-app my-app --typescript',
+    yarn: 'yarn create next-app my-app --typescript',
+  }}
+/>
+
+Yamada UIは、`@yamada-ui/react`と`@yamada-ui/nextjs`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
+
+<PackageManagers packageNameOrCommand={['@yamada-ui/react', '@yamada-ui/nextjs']} />
+
+テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールをする必要があります。
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: '@yamada-ui/table',
+      description: '`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。',
+      isDefaultCheck: true,
+    },
+    {
+      name: '@yamada-ui/calendar',
+      description:
+        '`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/carousel',
+      description: '`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/dropzone',
+      description: '`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/markdown',
+      description:
+        '`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。',
+    },
+    {
+      name: '@yamada-ui/fontawesome',
+      description: '`Font Awesome`を便利に使用するためのコンポーネントを提供します。',
+    },
+  ]}
+/>
+
+<Alert status='info'>
+  <AlertIcon />
+  <List>
+    <ListItem>
+      個別でコンポーネントやフックをインストールしてパフォーマンスを向上させるには、[こちら](/docs/getting-started/installation/individually)。
+    </ListItem>
+    <ListItem>
+      Yamada
+      UIのスタイルシステムのみを使用したい場合は、[こちら](/docs/getting-started/installation/minimal)。
+    </ListItem>
+  </List>
+</Alert>
+
+## `UIProvider`・`CacheProvider`・`ColorModeScript`を追加する
+
+Next.js 13では、デフォルトで`サーバーコンポーネント`を使用しています。しかし、**Yamada UIは、`クライアントコンポーネント`です**。
+
+Yamada UIのコンポーネントを使用するページやコンポーネントは、`'use client'`を追加して、`クライアントコンポーネント`に変換する必要があります。
+
+Yamada UIをインストール後、`UIProvider`と`CacheProvider`と`ColorModeScript`を追加します。
+
+```tsx live=false title=layout.tsx
+'use client'
+
+import { cookieStorageManager, UIProvider, ColorModeScript } from '@yamada-ui/react'
+import { CacheProvider } from '@yamada-ui/nextjs'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang='en'>
+      <body>
+        <ColorModeScript type='cookie' nonce='testing' />
+
+        <CacheProvider>
+          <UIProvider colorModeManager={cookieStorageManager}>{children}</UIProvider>
+        </CacheProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `'use client'`を、ページの先頭に追加する必要があります。
+</Alert>
+
+## コンポーネントを使用する
+
+`UIProvider`を追加したら、アプリケーション内でコンポーネントを呼び出します。
+
+```tsx live=false title=page.tsx
+'use client'
+
+import { Button } from '@yamada-ui/react'
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `'use client'`を、ページの先頭に追加する必要があります。
+</Alert>

@@ -1,4 +1,6 @@
-export const colors = {
+import { ThemeTokens } from '@yamada-ui/react'
+
+export const colors: ThemeTokens = {
   brand: '#eb3335',
   link: ['#1D94E0', '#4aaae6'],
   discord: {

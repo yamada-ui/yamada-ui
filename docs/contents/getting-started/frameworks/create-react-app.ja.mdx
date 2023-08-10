@@ -4,6 +4,33 @@ description: Create React AppのプロジェクトにYamada UIをインストー
 menu: Create React App
 ---
 
-現在ページ作成中です。😘
+## パッケージをインストールする
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+まず、アプリケーションを作成します。
+
+ターミナルで次のコマンドのいずれかを実行します。
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm create react-app my-app --template typescript',
+    npm: 'npx create-react-app my-app --template typescript',
+    yarn: 'yarn create react-app my-app --template typescript',
+  }}
+/>
+
+Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
+
+<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+
+<Alert status='info'>
+  <AlertIcon />
+  <List>
+    <ListItem>
+      個別でコンポーネントやフックをインストールしてパフォーマンスを向上させるには、[こちら](/docs/getting-started/installation/individually)。
+    </ListItem>
+    <ListItem>
+      Yamada
+      UIのスタイルシステムのみを使用したい場合は、[こちら](/docs/getting-started/installation/minimal)。
+    </ListItem>
+  </List>
+</Alert>

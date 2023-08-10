@@ -36,11 +36,6 @@ const App = () => {
   [デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに内包されています。
 </Alert>
 
-<Alert status='warning'>
-  <AlertIcon />
-  [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`ThemeProvider`を使用してください。`ThemeProvider`は、テーマを内包していないので個別で挿入する必要があります。
-</Alert>
-
 ### テーマをカスタマイズする
 
 テーマをカスタマイズしたい場合は、`UIProvider`に`theme`を渡しましょう。
@@ -83,11 +78,6 @@ Yamada UIは、アプリケーションにおいて**必須不可欠**である`
 - `start`: ローディングアニメーションを開始します。
 - `update`: ローディングアニメーションの情報を更新します。
 - `finish`: ローディングアニメーションを終了します。
-
-<Alert status='warning'>
-  <AlertIcon />
-  [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`useLoading`が含まれていません。ローディングを使用したい場合は、[こちら](/docs/styled-system/loading#個別や最小限でインストールしている場合)をご覧ください。
-</Alert>
 
 <Alert status='warning'>
   <AlertIcon />
@@ -159,11 +149,6 @@ function Demo() {
 Yamada UIは、アプリケーションにおいて**必須不可欠**である`通知`のユーティリティも豊富です。
 
 通知を表示するには、`useNotice`を使用します。`useNotice`は、通知を表示する関数を返します。
-
-<Alert status='warning'>
-  <AlertIcon />
-  [個別](/docs/getting-started/installation/individually)や[最小限](/docs/getting-started/installation/minimal)でインストールした場合は、`useNotice`が含まれていません。通知を使用したい場合は、[こちら](/docs/styled-system/notification#個別や最小限でインストールしている場合)をご覧ください。
-</Alert>
 
 ```tsx
 function Demo() {

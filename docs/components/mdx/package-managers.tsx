@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, isArray } from '@yamada-ui/react'
+import { Box, Tab, Tabs, isArray, isObject } from '@yamada-ui/react'
 import { Component } from 'mdx/types'
 import { themes } from 'prism-react-renderer'
 import { useState } from 'react'
@@ -6,22 +6,39 @@ import { Highlight } from './code-block'
 import { CopyButton } from 'components/forms'
 import { useConfigs } from 'contexts/configs-context'
 
-const PACKAGE_COMMANDS = {
+type PackageMangerNames = 'pnpm' | 'npm' | 'yarn'
+
+const PACKAGE_MANAGER_COMMANDS: Record<PackageMangerNames, string> = {
   pnpm: 'pnpm add',
-  npm: 'npm installl',
+  npm: 'npm install',
   yarn: 'yarn add',
 }
 
-export type PackageManagersProps = { packageName: string | string[] }
+const getCode = (
+  selectedPackageName: string,
+  packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>,
+): string => {
+  if (isObject(packageNameOrCommand) && !isArray(packageNameOrCommand)) {
+    return packageNameOrCommand[selectedPackageName]
+  } else {
+    const command = PACKAGE_MANAGER_COMMANDS[selectedPackageName] + ' '
 
-export const PackageManagers: Component<PackageManagersProps> = ({ packageName }) => {
+    return (
+      command +
+      (isArray(packageNameOrCommand) ? packageNameOrCommand.join(' ') : packageNameOrCommand)
+    )
+  }
+}
+
+export type PackageManagersProps = {
+  packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>
+}
+
+export const PackageManagers: Component<PackageManagersProps> = ({ packageNameOrCommand }) => {
   const { colorScheme } = useConfigs()
   const [selectedPackageName, setSelectedPackageName] = useState<string>('pnpm')
   const language = 'bash'
-  const code =
-    PACKAGE_COMMANDS[selectedPackageName] +
-    ' ' +
-    (isArray(packageName) ? packageName.join(' ') : packageName)
+  const code = getCode(selectedPackageName, packageNameOrCommand)
   const theme = themes.nightOwl
 
   return (
@@ -34,7 +51,7 @@ export const PackageManagers: Component<PackageManagersProps> = ({ packageName }
         overflow='hidden'
       >
         <Tabs bg={['whiteAlpha.200', 'whiteAlpha.100']}>
-          {Object.keys(PACKAGE_COMMANDS).map((name) => (
+          {Object.keys(PACKAGE_MANAGER_COMMANDS).map((name) => (
             <Tab
               key={name}
               fontSize='xs'

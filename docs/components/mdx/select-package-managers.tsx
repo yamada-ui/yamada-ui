@@ -54,7 +54,7 @@ export const SelectPackageManagers: Component<SelectPackageManagersProps> = ({ p
 
   return (
     <>
-      <PackageManagers packageName={selectedPackageNames} />
+      <PackageManagers packageNameOrCommand={selectedPackageNames} />
 
       <Table
         mt='6'

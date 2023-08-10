@@ -26,7 +26,7 @@ Yamada UIのコアやユーティリティをインストールします。
 
 もし、`div`の要素を作成したい場合は、`<ui.div />`と記述します。
 
-```tsx live=false title=demo.tsx
+```tsx live=false
 import { ui } from '@yamada-ui/core'
 
 const Demo = () => {
@@ -65,7 +65,7 @@ const Demo = () => {
 
 関数は、簡単なコンポーネントを作成するのに適しています。
 
-```tsx live=false title=demo.tsx
+```tsx live=false
 import { ui } from '@yamada-ui/core'
 
 const Button = ui('button')
@@ -77,7 +77,7 @@ const Demo = () => {
 
 デフォルトのスタイルを設定することもできます。
 
-```tsx live=false title=demo.tsx
+```tsx live=false
 import { ui } from '@yamada-ui/core'
 
 const Button = ui('button', {
@@ -182,7 +182,7 @@ Yamada UIの[デフォルトのテーマ](/docs/styled-system/theming/default-th
 
 テーマをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマとコンフィグ](/docs/styled-system/theming/default-theme)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
-```tsx live=false title=app.tsx
+```tsx live=false
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
 import { baseTheme, defaultConfig } from '@yamada-ui/theme'
 
@@ -200,7 +200,7 @@ const App = () => {
 
 ダークモードを対応させたい場合は、`ColorModeProvider`も追加します。
 
-```tsx live=false title=app.tsx
+```tsx live=false
 import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
 import { baseTheme, defaultConfig } from '@yamada-ui/theme'
 

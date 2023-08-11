@@ -1,0 +1,38 @@
+---
+title: カラーとバックグラウンド
+description: Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。
+order: 3
+---
+
+```tsx live=false
+// When to use theme token value.
+<Box color='primary' />
+
+// When to use custom value.
+<Box bg='#FFF' />
+
+// When to use responsive styles.
+<Box color={{ base: 'primary', md: 'danger' }} />
+
+// When to use color mode styles.
+<Box bg={['white', 'black']} />
+```
+
+| Prop                                                | CSS Property            | Theme Key                                                        |
+| --------------------------------------------------- | ----------------------- | ---------------------------------------------------------------- |
+| `color`                                             | `color`                 | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `textColor`                                         | `color`                 | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `fill`                                              | `fill`                  | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `stroke`                                            | `stroke`                | none                                                             |
+| `bg`, `background`                                  | `background`            | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `bgColor`, `backgroundColor`                        | `background-color`      | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `bgImage`, `bgImg`, `bgGradient`, `backgroundImage` | `background-image`      | [gradients](/docs/styled-system/theming/default-theme/gradients) |
+| `backgroundSize`                                    | `background-size`       | none                                                             |
+| `backgroundPosition`                                | `background-position`   | none                                                             |
+| `backgroundRepeat`                                  | `background-repeat`     | none                                                             |
+| `backgroundAttachment`                              | `background-attachment` | none                                                             |
+| `bgClip`, `backgroundClip`                          | `background-clip`       | none                                                             |
+| `bgSize`                                            | `background-size`       | none                                                             |
+| `bgPos`, `bgPosition`                               | `background-position`   | none                                                             |
+| `bgRepeat`                                          | `background-repeat`     | none                                                             |
+| `bgAttachment`                                      | `background-attachment` | none                                                             |

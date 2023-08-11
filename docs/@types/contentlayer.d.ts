@@ -14,6 +14,7 @@ declare module 'contentlayer/generated' {
     tags: string[]
     is_active: boolean
     is_tabs: boolean
+    with_table_of_contents: boolean
     with_children: boolean
     with_description: boolean
     with_children_description: boolean

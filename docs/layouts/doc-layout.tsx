@@ -21,6 +21,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
   title,
   description,
   editUrl,
+  with_table_of_contents,
   with_description,
   with_children,
   with_children_description,
@@ -71,7 +72,9 @@ export const DocLayout: FC<DocLayoutProps> = ({
             </Box>
           </VStack>
 
-          <TableOfContents display={{ base: 'flex', xl: 'none' }} contents={contents} />
+          {with_table_of_contents ? (
+            <TableOfContents display={{ base: 'flex', xl: 'none' }} contents={contents} />
+          ) : null}
         </HStack>
       </Center>
 

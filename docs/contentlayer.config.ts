@@ -84,6 +84,7 @@ const Doc = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' } },
     is_active: { type: 'boolean', default: true },
     is_tabs: { type: 'boolean', default: false },
+    with_table_of_contents: { type: 'boolean', default: true },
     with_children: { type: 'boolean', default: false },
     with_children_description: { type: 'boolean', default: true },
     with_description: { type: 'boolean', default: false },

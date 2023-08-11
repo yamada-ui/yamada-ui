@@ -11,21 +11,11 @@ type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
-const Page: NextPage<PageProps> = ({
-  body,
-  data,
-  docs,
-  breadcrumbs,
-  tree,
-  tabs,
-  childrenTree,
-  pagination,
-  ...rest
-}) => {
+const Page: NextPage<PageProps> = ({ body, data, docs, ...rest }) => {
   const Component = useMDXComponent(body.code)
 
   return (
-    <PageProvider value={{ docs, breadcrumbs, tree, tabs, childrenTree, pagination }}>
+    <PageProvider value={{ docs, ...rest }}>
       <DocLayout {...{ ...data, ...rest }}>
         <Component components={MDXComponents} />
       </DocLayout>

@@ -1,0 +1,43 @@
+---
+title: タイポグラフィ
+description: Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。
+order: 3
+---
+
+```tsx live=false
+// When to use theme token value.
+<Box fontSize='md' />
+
+// When to use custom value.
+<Box fontSize='1rem' />
+
+// When to use responsive styles.
+<Box fontSize={{ base: 'lg', md: '1rem' }} />
+
+// When to use color mode styles.
+<Box fontSize={['md', 'sm']} />
+```
+
+| Prop                      | CSS Property                | Theme Key                                                                              |
+| ------------------------- | --------------------------- | -------------------------------------------------------------------------------------- |
+| `fontFamily`              | `font-family`               | [fonts](/docs/styled-system/theming/default-theme/typography#fonts)                    |
+| `fontSize`                | `font-size`                 | [fontSizes](/docs/styled-system/theming/default-theme/typography#font-sizes)           |
+| `fontWeight`              | `font-weight`               | [fontWeights](/docs/styled-system/theming/default-theme/typography#font-weights)       |
+| `lineHeight`              | `line-height`               | [lineHeights](/docs/styled-system/theming/default-theme/typography#line-heights)       |
+| `letterSpacing`           | `letter-spacing`            | [letterSpacings](/docs/styled-system/theming/default-theme/typography#letter-spacings) |
+| `textAlign`               | `text-align`                | none                                                                                   |
+| `fontStyle`               | `font-style`                | none                                                                                   |
+| `textIndent`              | `text-indent`               | none                                                                                   |
+| `wordBreak`               | `word-break`                | none                                                                                   |
+| `overflowWrap`            | `overflow-wrap`             | none                                                                                   |
+| `textOverflow`            | `text-overflow`             | none                                                                                   |
+| `textTransform`           | `text-transform`            | none                                                                                   |
+| `whiteSpace`              | `white-space`               | none                                                                                   |
+| `textDecor`               | `text-decoration`           | none                                                                                   |
+| `textDecoration`          | `text-decoration`           | none                                                                                   |
+| `textDecorationColor`     | `text-decoration-color`     | [colors](/docs/styled-system/theming/default-theme/colors)                             |
+| `textDecorationLine`      | `text-decoration-line`      | none                                                                                   |
+| `textDecorationStyle`     | `text-decoration-style`     | none                                                                                   |
+| `textDecorationThickness` | `text-decoration-thickness` | none                                                                                   |
+| `textUnderlineOffset`     | `text-underline-offset`     | none                                                                                   |
+| `textShadow`              | `text-shadow`               | [shadows](/docs/styled-system/theming/default-theme/shadows)                           |

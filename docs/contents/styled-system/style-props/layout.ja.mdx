@@ -1,0 +1,88 @@
+---
+title: レイアウト
+description: Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。
+order: 4
+---
+
+```tsx live=false
+// When to use theme token value.
+<Box w='md' />
+
+// When to use custom value.
+<Box w='1rem' />
+
+// When to use responsive styles.
+<Box w={{ base: 'lg', md: '1rem' }} />
+
+// When to use color mode styles.
+<Box w={['md', 'sm']} />
+```
+
+| Prop                                 | CSS Property            | Theme Key                                                  |
+| ------------------------------------ | ----------------------- | ---------------------------------------------------------- |
+| `w`, `width`                         | `width`                 | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minW`, `minWidth`                   | `min-width`             | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxW`, `maxWidth`                   | `max-width`             | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `h`, `height`                        | `height`                | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minH`, `minHeight`                  | `min-height`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxH`, `maxHeight`                  | `max-height`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `inlineSize`                         | `inline-size`           | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minInlineSize`                      | `min-inline-size`       | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxInlineSize`                      | `max-inline-size`       | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `blockSize`                          | `block-size`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minBlockSize`                       | `min-block-size`        | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxBlockSize`                       | `max-block-size`        | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `boxSize`                            | `width` + `height`      | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `display`                            | `display`               | none                                                       |
+| `float`                              | `float`                 | none                                                       |
+| `visibility`                         | `visibility`            | none                                                       |
+| `verticalAlign`                      | `vertical-align`        | none                                                       |
+| `aspectRatio`                        | `aspect-ratio`          | none                                                       |
+| `boxSizing`                          | `box-sizing`            | none                                                       |
+| `boxDecorationBreak`                 | `box-decoration-break`  | none                                                       |
+| `objectFit`                          | `object-fit`            | none                                                       |
+| `objectPosition`                     | `object-position`       | none                                                       |
+| `overflow`                           | `overflow`              | none                                                       |
+| `overflowX`                          | `overflow-x`            | none                                                       |
+| `overflowY`                          | `overflow-y`            | none                                                       |
+| `overscroll`, `overscrollBehavior`   | `overscroll-behavior`   | none                                                       |
+| `overscrollX`, `overscrollBehaviorX` | `overscroll-behavior-x` | none                                                       |
+| `overscrollY`, `overscrollBehaviorY` | `overscroll-behavior-y` | none                                                       |
+| `isolation`                          | `isolation`             | none                                                       |
+| `alignItems`                         | `align-items`           | none                                                       |
+| `alignContent`                       | `align-content`         | none                                                       |
+| `justifyItems`                       | `justify-items`         | none                                                       |
+| `justifyContent`                     | `justify-content`       | none                                                       |
+| `flexWrap`                           | `flex-wrap`             | none                                                       |
+| `flexDir`, `flexDirection`           | `flex-direction`        | none                                                       |
+| `flex`                               | `flex`                  | none                                                       |
+| `flexFlow`                           | `flex-flow`             | none                                                       |
+| `flexGrow`                           | `flex-grow`             | none                                                       |
+| `flexShrink`                         | `flex-shrink`           | none                                                       |
+| `flexBasis`                          | `flex-basis`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `justifySelf`                        | `justify-self`          | none                                                       |
+| `alignSelf`                          | `align-self`            | none                                                       |
+| `order`                              | `order`                 | none                                                       |
+| `placeItems`                         | `place-items`           | none                                                       |
+| `placeContent`                       | `place-content`         | none                                                       |
+| `placeSelf`                          | `place-self`            | none                                                       |
+| `gap`                                | `gap`                   | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `rowGap`                             | `row-gap`               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `columnGap`                          | `column-gap`            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridGap`                            | `grid-gap`              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridColumnGap`                      | `grid-column-gap`       | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridRowGap`                         | `grid-row-gap`          | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridColumn`                         | `grid-column`           | none                                                       |
+| `gridRow`                            | `grid-row`              | none                                                       |
+| `gridAutoFlow`                       | `grid-auto-flow`        | none                                                       |
+| `gridAutoColumns`                    | `grid-auto-columns`     | none                                                       |
+| `gridColumnStart`                    | `grid-column-start`     | none                                                       |
+| `gridColumnEnd`                      | `grid-column-end`       | none                                                       |
+| `gridRowStart`                       | `grid-row-start`        | none                                                       |
+| `gridRowEnd`                         | `grid-row-end`          | none                                                       |
+| `gridAutoRows`                       | `grid-auto-rows`        | none                                                       |
+| `gridTemplate`                       | `grid-template`         | none                                                       |
+| `gridTemplateColumns`                | `grid-template-columns` | none                                                       |
+| `gridTemplateRows`                   | `grid-template-rows`    | none                                                       |
+| `gridTemplateAreas`                  | `grid-template-areas`   | none                                                       |
+| `gridArea`                           | `grid-area`             | none                                                       |

@@ -1,0 +1,48 @@
+---
+title: マージンとパディング
+description: Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。
+order: 2
+---
+
+```tsx live=false
+// When to use theme token value.
+<Box m='md' />
+
+// When to use custom value.
+<Box mx='2rem' />
+
+// When to use responsive styles.
+<Box m={{ base: 'md', md: '8px' }} />
+
+// When to use color mode styles.
+<Box m={['md', 'sm']} />
+```
+
+| Prop                                       | CSS Property                              | Theme Key                                                  |
+| ------------------------------------------ | ----------------------------------------- | ---------------------------------------------------------- |
+| `m`, `margin`                              | `margin`                                  | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mt`, `marginTop`                          | `marginTop`                               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `ml`, `marginLeft`                         | `marginLeft`                              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mb`, `marginBottom`                       | `marginBottom`                            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mr`, `marginRight`                        | `marginRight`                             | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `my`, `marginY`                            | `marginTop` + `marginBottom`              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mx`, `marginX`                            | `marginInlineStart` + `marginInlineEnd`   | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginInline`                             | `marginInline`                            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `ms`, `marginStart`, `marginInlineStart`   | `marginInlineStart`                       | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `me`, `marginEnd`, `marginInlineEnd`       | `marginInlineEnd`                         | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginBlock`                              | `marginBlock`                             | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginBlockStart`                         | `marginBlockStart`                        | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginBlockEnd`                           | `marginBlockEnd`                          | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `p`, `padding`                             | `padding`                                 | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pt`, `paddingTop`                         | `paddingTop`                              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pl`, `paddingLeft`                        | `paddingLeft`                             | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pr`, `paddingRight`                       | `paddingRight`                            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pb`, `paddingBottom`                      | `paddingBottom`                           | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `py`, `paddingY`                           | `paddingTop` + `paddingBottom`            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `px`, `paddingX`                           | `paddingInlineStart` + `paddingInlineEnd` | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingInline`                            | `paddingInline`                           | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `ps`, `paddingStart`, `paddingInlineStart` | `paddingInlineStart`                      | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pe`, `paddingEnd`, `paddingInlineEnd`     | `paddingInlineEnd`                        | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingBlockStart`                        | `paddingBlockStart`                       | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingBlock`                             | `paddingBlock`                            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingBlockEnd`                          | `paddingBlockEnd`                         | [spaces](/docs/styled-system/theming/default-theme/spaces) |

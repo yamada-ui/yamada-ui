@@ -70,7 +70,9 @@ export const mdx: Record<string, CSSUIObject> = {
       textTransform: 'none',
       letterSpacing: 'normal',
     },
-    td: {},
+    td: {
+      whiteSpace: 'normal',
+    },
   },
   table: {
     w: 'full',

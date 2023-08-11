@@ -62,6 +62,19 @@ export const mdx: Record<string, CSSUIObject> = {
   li: {
     '& > p': { my: '0' },
   },
+  'table-container': {
+    my: '6',
+    th: {
+      fontFamily: 'body',
+      fontWeight: 'semibold',
+      textTransform: 'none',
+      letterSpacing: 'normal',
+    },
+    td: {},
+  },
+  table: {
+    w: 'full',
+  },
   alert: {
     my: '6',
     '& p': { my: '0' },

@@ -3,3 +3,75 @@ title: ボーダー
 description: Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。
 order: 7
 ---
+
+```tsx live=false
+// When to use theme token value.
+<Box borderRadius='md' />
+
+// When to use custom value.
+<Box borderRadius='2rem' />
+
+// When to use responsive styles.
+<Box borderRadius={{ base: 'md', md: '8px' }} />
+
+// When to use color mode styles.
+<Box borderRadius={['md', 'sm']} />
+```
+
+| Prop                                                                    | CSS Property                                               | Theme Key                                                    |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| `border`                                                                | `border`                                                   | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderWidth`                                                           | `border-width`                                             |                                                              |
+| `borderStyle`                                                           | `border-style`                                             |                                                              |
+| `borderColor`                                                           | `border-color`                                             |                                                              |
+| `rounded`, `borderRadius`                                               | `border-radius`                                            |                                                              |
+| `borderTop`                                                             | `border-top`                                               |                                                              |
+| `borderBlockStart`                                                      | `border-block-start`                                       |                                                              |
+| `roundedTopLeft`, `borderTopLeftRadius`                                 | `border-top-left-radius`                                   |                                                              |
+| `roundedTopStart`, `borderTopStartRadius`, `borderStartStartRadius`     | `border-start-start-radius`                                |                                                              |
+| `roundedBottomStart`, `borderBottomStartRadius`, `borderEndStartRadius` | `border-end-start-radius`                                  |                                                              |
+| `roundedTopRight`, `borderTopRightRadius`                               | `border-top-right-radius`                                  |                                                              |
+| `roundedTopEnd`, `borderTopEndRadius`, `borderStartEndRadius`           | `border-start-end-radius`                                  |                                                              |
+| `roundedBottomEnd`, `borderBottomEndRadius`, `borderEndEndRadius`       | `border-end-end-radius`                                    |                                                              |
+| `borderRight`                                                           | `border-right`                                             |                                                              |
+| `borderEnd`, `borderInlineEnd`                                          | `border-inline-end`                                        |                                                              |
+| `borderBottom`                                                          | `border-bottom`                                            |                                                              |
+| `borderBlockEnd`                                                        | `border-block-end`                                         |                                                              |
+| `roundedBottomLeft`, `borderBottomLeftRadius`                           | `border-bottom-left-radius`                                |                                                              |
+| `roundedBottomRight`, `borderBottomRightRadius`                         | `border-bottom-right-radius`                               |                                                              |
+| `borderLeft`                                                            | `border-left`                                              |                                                              |
+| `borderStart`, `borderInlineStart`                                      | `border-inline-start`                                      |                                                              |
+| `roundedStart`, `borderStartRadius`, `borderInlineStartRadius`          | `border-start-start-radius` + `border-start-end-radius`    |                                                              |
+| `roundedEnd`, `borderEndRadius`, `borderInlineEndRadius`                | `border-end-start-radius` + `border-end-end-radius`        |                                                              |
+| `borderX`                                                               | `border-left` + `border-right`                             |                                                              |
+| `borderInline`                                                          | `border-inline`                                            |                                                              |
+| `borderY`                                                               | `border-top` + `border-bottom`                             |                                                              |
+| `borderBlock`                                                           | `border-block`                                             |                                                              |
+| `borderTopWidth`                                                        | `border-top-width`                                         |                                                              |
+| `borderBlockStartWidth`                                                 | `border-block-start-width`                                 |                                                              |
+| `borderTopColor`                                                        | `border-top-color`                                         |                                                              |
+| `borderBlockStartColor`                                                 | `border-block-start-color`                                 |                                                              |
+| `borderTopStyle`                                                        | `border-top-style`                                         |                                                              |
+| `borderBlockStartStyle`                                                 | `border-block-start-style`                                 |                                                              |
+| `borderBottomWidth`                                                     | `border-bottom-width`                                      |                                                              |
+| `borderBlockEndWidth`                                                   | `border-block-end-width`                                   |                                                              |
+| `borderBottomColor`                                                     | `border-bottom-color`                                      |                                                              |
+| `borderBlockEndColor`                                                   | `border-block-end-color`                                   |                                                              |
+| `borderBottomStyle`                                                     | `border-bottom-style`                                      |                                                              |
+| `borderBlockEndStyle`                                                   | `border-block-end-style`                                   |                                                              |
+| `borderLeftWidth`                                                       | `border-left-width`                                        |                                                              |
+| `borderStartWidth`, `borderInlineStartWidth`                            | `border-inline-start-width`                                |                                                              |
+| `borderLeftColor`                                                       | `border-left-color`                                        |                                                              |
+| `borderStartColor`, `borderInlineStartColor`                            | `border-inline-start-color`                                |                                                              |
+| `borderLeftStyle`                                                       | `border-left-style`                                        |                                                              |
+| `borderStartStyle`, `borderInlineStartStyle`                            | `border-inline-start-style`                                |                                                              |
+| `borderRightWidth`                                                      | `border-right-width`                                       |                                                              |
+| `borderEndWidth`, `borderInlineEndWidth`                                | `border-inline-end-width`                                  |                                                              |
+| `borderRightColor`                                                      | `border-right-color`                                       |                                                              |
+| `borderEndColor`, `borderInlineEndColor`                                | `border-inline-end-color`                                  |                                                              |
+| `borderRightStyle`                                                      | `border-right-style`                                       |                                                              |
+| `borderEndStyle`, `borderInlineEndStyle`                                | `border-inline-end-style`                                  |                                                              |
+| `roundedTop`, `borderTopRadius`                                         | `border-top-left-radius` + `border-top-right-radius`       |                                                              |
+| `roundedBottom`, `borderBottomRadius`                                   | `border-bottom-left-radius` + `border-bottom-right-radius` |                                                              |
+| `roundedLeft`, `borderLeftRadius`                                       | `border-top-left-radius` + `border-bottom-left-radius`     |                                                              |
+| `roundedRight`, `borderRightRadius`                                     | `border-top-right-radius` + `border-bottom-right-radius`   |                                                              |

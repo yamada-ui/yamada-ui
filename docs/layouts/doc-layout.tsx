@@ -23,6 +23,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
   editUrl,
   with_description,
   with_children,
+  with_children_description,
   contents,
   children,
 }) => {
@@ -58,7 +59,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
                 <>
                   <Divider mt='xl' />
 
-                  <LinkCards />
+                  <LinkCards with_description={with_children_description} />
 
                   <Divider mt='xl' />
                 </>

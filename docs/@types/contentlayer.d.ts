@@ -7,6 +7,17 @@ declare module 'contentlayer/generated' {
 
   type Data = {
     title: string
+    menu: string
+    tab: string
+    order: number
+    label: string
+    tags: string[]
+    is_active: boolean
+    is_tabs: boolean
+    with_children: boolean
+    with_description: boolean
+    with_children_description: boolean
+    package: string
     locale: string
     paths: string[]
     description?: string

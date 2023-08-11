@@ -85,6 +85,7 @@ const Doc = defineDocumentType(() => ({
     is_active: { type: 'boolean', default: true },
     is_tabs: { type: 'boolean', default: false },
     with_children: { type: 'boolean', default: false },
+    with_children_description: { type: 'boolean', default: true },
     with_description: { type: 'boolean', default: false },
     version: { type: 'string' },
     package: { type: 'string' },

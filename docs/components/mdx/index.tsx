@@ -13,7 +13,20 @@ import { PackageManagers } from './package-managers'
 import { SelectPackageManagers } from './select-package-managers'
 import { LinkCard, CardContainer } from 'components/navigation'
 
-const { Heading, Text, Kbd, Divider, DiscList, DecimalList, ListItem, Alert } = UIComponents
+const {
+  Heading,
+  Text,
+  Kbd,
+  Divider,
+  DiscList,
+  DecimalList,
+  ListItem,
+  Alert,
+  TableContainer,
+  NativeTable,
+  Th,
+  Td,
+} = UIComponents
 
 export const MDXUIComponents = {
   ...UIComponents,
@@ -40,6 +53,13 @@ export const MDXBaseComponents: MDXComponentsType = {
   ol: (props) => <DecimalList apply='mdx.ol' {...props} />,
   li: (props) => <ListItem apply='mdx.li' {...props} />,
   hr: (props) => <Divider apply='mdx.hr' {...props} />,
+  table: (props) => (
+    <TableContainer apply='mdx.table-container'>
+      <NativeTable apply='mdx.table' {...props} />
+    </TableContainer>
+  ),
+  th: (props) => <Th {...props} />,
+  td: (props) => <Td {...props} />,
   kbd: (props) => <Kbd apply='mdx.kbd' {...props} />,
   Alert: (props) => <Alert apply='mdx.alert' {...props} />,
   PackageManagers,

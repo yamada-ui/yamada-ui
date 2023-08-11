@@ -72,7 +72,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
             </Box>
           </VStack>
 
-          {with_table_of_contents ? (
+          {with_table_of_contents && contents.length ? (
             <TableOfContents display={{ base: 'flex', xl: 'none' }} contents={contents} />
           ) : null}
         </HStack>

@@ -3,17 +3,19 @@ import { memo } from 'react'
 import { LinkCard } from './link-card'
 import { usePage } from 'contexts/page-context'
 
-export type LinkCardsProps = GridProps
+export type LinkCardsProps = GridProps & { with_description?: boolean }
 
 export const LinkCards = memo(
-  forwardRef<LinkCardsProps, 'div'>(({ ...rest }, ref) => {
+  forwardRef<LinkCardsProps, 'div'>(({ with_description = true, ...rest }, ref) => {
     const { childrenTree } = usePage()
 
     return (
       <CardContainer ref={ref} {...rest}>
         {childrenTree.map(({ title, menu, description, label, slug }) => (
           <GridItem key={slug}>
-            <LinkCard {...{ href: slug, title: menu ?? title, description, label }} />
+            <LinkCard
+              {...{ href: slug, title: menu ?? title, description, label, with_description }}
+            />
           </GridItem>
         ))}
       </CardContainer>

@@ -180,7 +180,7 @@ Yamada UIの[デフォルトのテーマ](/docs/styled-system/theming/default-th
 
 <PackageManagers packageNameOrCommand='@yamada-ui/theme' />
 
-テーマをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマとコンフィグ](/docs/styled-system/theming/default-theme)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
+テーマをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマ](/docs/styled-system/theming/default-theme)と[コンフィグ](/docs/styled-system/config/default-config)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
 ```tsx live=false
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
@@ -220,7 +220,7 @@ const App = () => {
 
 <Alert status='info'>
   <AlertIcon />
-  独自のテーマやコンフィグの作成は、[こちら](/docs/styled-system/theming/create-theme)をご覧ください。
+  テーマやコンフィグをカスタマイズしたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)と[コンフィグをカスタマイズする](/docs/styled-system/config/customize-config)をご覧ください。
 </Alert>
 
 <Alert status='warning'>

@@ -31,7 +31,7 @@ const App = () => {
 }
 ```
 
-<Alert status='warning'>
+<Alert status='info'>
   <AlertIcon />
   [デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに含まれています。
 </Alert>
@@ -345,7 +345,7 @@ export const breakpoints = {
   ブレイクポイントを変更したい場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
 </Alert>
 
-## ダークモードについて
+## カラーモードについて
 
 Yamada UIには、アプリケーションのカラーモードを管理するためのサポートが組み込まれています。
 
@@ -368,7 +368,7 @@ Yamada UIのすべてのコンポーネントは、ダークモードをサポ�
 
 ### カラーモードを切り替える
 
-カラーモードは、デフォルトのコンフィグに定義されています。
+カラーモードは、[デフォルトのコンフィグ](/docs/styled-system/config/default-config)に定義されています。
 
 実際に定義されている値はこちらです。
 
@@ -399,7 +399,7 @@ export const config: ThemeConfig = {
 
 <Alert status='info'>
   <AlertIcon />
-  コンフィグを変更したい場合は、[こちら](/docs/styled-system/theming/customize-theme#コンフィグを変更する)ををご覧ください。
+  コンフィグを変更したい場合は、[こちら](/docs/styled-system/config/customize-config)ををご覧ください。
 </Alert>
 
 アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。

@@ -1,0 +1,465 @@
+---
+title: Style props
+description: Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。
+order: 1
+with_children: true
+with_children_description: false
+---
+
+`Style props`は、コンポーネントに`props`を渡すだけでコンポーネントのスタイルを変更する方法です。また、多くの便利なショートハンドを提供しており、開発効率を向上させています。
+
+```tsx
+<Box w='full' p='md' bg='warning' color='white'>
+  This is Box
+</Box>
+```
+
+## マージンとパディング
+
+```tsx live=false
+// When to use theme token value.
+<Box m='md' />
+
+// When to use custom value.
+<Box mx='2rem' />
+
+// When to use responsive styles.
+<Box m={{ base: 'md', md: '8px' }} />
+
+// When to use color mode styles.
+<Box m={['md', 'sm']} />
+```
+
+| Prop                                       | CSS Property                                  | Theme Key                                                  |
+| ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------- |
+| `m`, `margin`                              | `margin`                                      | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mt`, `marginTop`                          | `margin-top`                                  | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `ml`, `marginLeft`                         | `margin-left`                                 | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mb`, `marginBottom`                       | `margin-bottom`                               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mr`, `marginRight`                        | `margin-right`                                | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `my`, `marginY`                            | `margin-top` + `margin-bottom`                | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `mx`, `marginX`                            | `margin-inline-start` + `margin-inline-end`   | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginInline`                             | `margin-inline`                               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `ms`, `marginStart`, `marginInlineStart`   | `margin-inline-start`                         | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `me`, `marginEnd`, `marginInlineEnd`       | `margin-inline-end`                           | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginBlock`                              | `margin-block`                                | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginBlockStart`                         | `margin-block-start`                          | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `marginBlockEnd`                           | `margin-block-end`                            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `p`, `padding`                             | `padding`                                     | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pt`, `paddingTop`                         | `padding-top`                                 | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pl`, `paddingLeft`                        | `padding-left`                                | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pb`, `paddingBottom`                      | `padding-bottom`                              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pr`, `paddingRight`                       | `padding-right`                               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `py`, `paddingY`                           | `padding-top` + `padding-bottom`              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `px`, `paddingX`                           | `padding-inline-start` + `padding-inline-end` | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingInline`                            | `padding-inline`                              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `ps`, `paddingStart`, `paddingInlineStart` | `padding-inline-start`                        | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `pe`, `paddingEnd`, `paddingInlineEnd`     | `padding-inline-end`                          | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingBlock`                             | `padding-block`                               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingBlockStart`                        | `padding-block-start`                         | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `paddingBlockEnd`                          | `padding-block-end`                           | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+
+## カラーとバックグラウンド
+
+```tsx live=false
+// When to use theme token value.
+<Box color='primary' />
+
+// When to use custom value.
+<Box bg='#FFF' />
+
+// When to use responsive styles.
+<Box color={{ base: 'primary', md: 'danger' }} />
+
+// When to use color mode styles.
+<Box bg={['white', 'black']} />
+```
+
+| Prop                                                | CSS Property            | Theme Key                                                        |
+| --------------------------------------------------- | ----------------------- | ---------------------------------------------------------------- |
+| `color`                                             | `color`                 | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `textColor`                                         | `color`                 | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `fill`                                              | `fill`                  | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `stroke`                                            | `stroke`                | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `bg`, `background`                                  | `background`            | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `bgColor`, `backgroundColor`                        | `background-color`      | [colors](/docs/styled-system/theming/default-theme/colors)       |
+| `bgImg`, `bgImage`, `backgroundImage`, `bgGradient` | `background-image`      | [gradients](/docs/styled-system/theming/default-theme/gradients) |
+| `backgroundSize`                                    | `background-size`       | none                                                             |
+| `backgroundPosition`                                | `background-position`   | none                                                             |
+| `backgroundRepeat`                                  | `background-repeat`     | none                                                             |
+| `backgroundAttachment`                              | `background-attachment` | none                                                             |
+| `bgClip`, `backgroundClip`                          | `background-clip`       | none                                                             |
+| `bgSize`                                            | `background-size`       | none                                                             |
+| `bgPos`, `bgPosition`                               | `background-position`   | none                                                             |
+| `bgRepeat`                                          | `background-repeat`     | none                                                             |
+| `bgAttachment`                                      | `background-attachment` | none                                                             |
+
+## タイポグラフィ
+
+```tsx live=false
+// When to use theme token value.
+<Box fontSize='md' />
+
+// When to use custom value.
+<Box fontSize='1rem' />
+
+// When to use responsive styles.
+<Box fontSize={{ base: 'lg', md: '1rem' }} />
+
+// When to use color mode styles.
+<Box fontSize={['md', 'sm']} />
+```
+
+| Prop                          | CSS Property                | Theme Key                                                                              |
+| ----------------------------- | --------------------------- | -------------------------------------------------------------------------------------- |
+| `fontFamily`                  | `font-family`               | [fonts](/docs/styled-system/theming/default-theme/typography#fonts)                    |
+| `fontSize`                    | `font-size`                 | [fontSizes](/docs/styled-system/theming/default-theme/typography#font-sizes)           |
+| `fontWeight`                  | `font-weight`               | [fontWeights](/docs/styled-system/theming/default-theme/typography#font-weights)       |
+| `lineHeight`                  | `line-height`               | [lineHeights](/docs/styled-system/theming/default-theme/typography#line-heights)       |
+| `letterSpacing`               | `letter-spacing`            | [letterSpacings](/docs/styled-system/theming/default-theme/typography#letter-spacings) |
+| `textAlign`                   | `text-align`                | none                                                                                   |
+| `fontStyle`                   | `font-style`                | none                                                                                   |
+| `textIndent`                  | `text-indent`               | none                                                                                   |
+| `wordBreak`                   | `word-break`                | none                                                                                   |
+| `overflowWrap`                | `overflow-wrap`             | none                                                                                   |
+| `textOverflow`                | `text-overflow`             | none                                                                                   |
+| `textTransform`               | `text-transform`            | none                                                                                   |
+| `whiteSpace`                  | `white-space`               | none                                                                                   |
+| `textDecor`, `textDecoration` | `text-decoration`           | none                                                                                   |
+| `textDecorationColor`         | `text-decoration-color`     | [colors](/docs/styled-system/theming/default-theme/colors)                             |
+| `textDecorationLine`          | `text-decoration-line`      | none                                                                                   |
+| `textDecorationStyle`         | `text-decoration-style`     | none                                                                                   |
+| `textDecorationThickness`     | `text-decoration-thickness` | none                                                                                   |
+| `textUnderlineOffset`         | `text-underline-offset`     | none                                                                                   |
+
+## レイアウト
+
+```tsx live=false
+// When to use theme token value.
+<Box w='md' />
+
+// When to use custom value.
+<Box w='1rem' />
+
+// When to use responsive styles.
+<Box w={{ base: 'lg', md: '1rem' }} />
+
+// When to use color mode styles.
+<Box w={['md', 'sm']} />
+```
+
+| Prop                                 | CSS Property            | Theme Key                                                  |
+| ------------------------------------ | ----------------------- | ---------------------------------------------------------- |
+| `w`, `width`                         | `width`                 | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minW`, `minWidth`                   | `min-width`             | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxW`, `maxWidth`                   | `max-width`             | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `h`, `height`                        | `height`                | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minH`, `minHeight`                  | `min-height`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxH`, `maxHeight`                  | `max-height`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `inlineSize`                         | `inline-size`           | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minInlineSize`                      | `min-inline-size`       | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxInlineSize`                      | `max-inline-size`       | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `blockSize`                          | `block-size`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `minBlockSize`                       | `min-block-size`        | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `maxBlockSize`                       | `max-block-size`        | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `boxSize`                            | `width` + `height`      | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `display`                            | `display`               | none                                                       |
+| `float`                              | `float`                 | none                                                       |
+| `visibility`                         | `visibility`            | none                                                       |
+| `verticalAlign`                      | `vertical-align`        | none                                                       |
+| `aspectRatio`                        | `aspect-ratio`          | none                                                       |
+| `boxSizing`                          | `box-sizing`            | none                                                       |
+| `boxDecorationBreak`                 | `box-decoration-break`  | none                                                       |
+| `objectFit`                          | `object-fit`            | none                                                       |
+| `objectPosition`                     | `object-position`       | none                                                       |
+| `overflow`                           | `overflow`              | none                                                       |
+| `overflowY`                          | `overflow-y`            | none                                                       |
+| `overflowX`                          | `overflow-x`            | none                                                       |
+| `overscroll`, `overscrollBehavior`   | `overscroll-behavior`   | none                                                       |
+| `overscrollY`, `overscrollBehaviorY` | `overscroll-behavior-y` | none                                                       |
+| `overscrollX`, `overscrollBehaviorX` | `overscroll-behavior-x` | none                                                       |
+| `flexDir`, `flexDirection`           | `flex-direction`        | none                                                       |
+| `flexWrap`                           | `flex-wrap`             | none                                                       |
+| `alignItems`                         | `align-items`           | none                                                       |
+| `alignContent`                       | `align-content`         | none                                                       |
+| `alignSelf`                          | `align-self`            | none                                                       |
+| `justifyItems`                       | `justify-items`         | none                                                       |
+| `justifyContent`                     | `justify-content`       | none                                                       |
+| `justifySelf`                        | `justify-self`          | none                                                       |
+| `flex`                               | `flex`                  | none                                                       |
+| `flexGrow`                           | `flex-grow`             | none                                                       |
+| `flexShrink`                         | `flex-shrink`           | none                                                       |
+| `flexBasis`                          | `flex-basis`            | [sizes](/docs/styled-system/theming/default-theme/sizes)   |
+| `flexFlow`                           | `flex-flow`             | none                                                       |
+| `order`                              | `order`                 | none                                                       |
+| `placeItems`                         | `place-items`           | none                                                       |
+| `placeContent`                       | `place-content`         | none                                                       |
+| `placeSelf`                          | `place-self`            | none                                                       |
+| `gap`                                | `gap`                   | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `rowGap`                             | `row-gap`               | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `columnGap`                          | `column-gap`            | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridColumn`                         | `grid-column`           | none                                                       |
+| `gridRow`                            | `grid-row`              | none                                                       |
+| `gridAutoColumns`                    | `grid-auto-columns`     | none                                                       |
+| `gridColumnStart`                    | `grid-column-start`     | none                                                       |
+| `gridColumnEnd`                      | `grid-column-end`       | none                                                       |
+| `gridAutoRows`                       | `grid-auto-rows`        | none                                                       |
+| `gridRowStart`                       | `grid-row-start`        | none                                                       |
+| `gridRowEnd`                         | `grid-row-end`          | none                                                       |
+| `gridAutoFlow`                       | `grid-auto-flow`        | none                                                       |
+| `gridTemplate`                       | `grid-template`         | none                                                       |
+| `gridTemplateColumns`                | `grid-template-columns` | none                                                       |
+| `gridTemplateRows`                   | `grid-template-rows`    | none                                                       |
+| `gridTemplateAreas`                  | `grid-template-areas`   | none                                                       |
+| `gridArea`                           | `grid-area`             | none                                                       |
+| `gridGap`                            | `grid-gap`              | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridColumnGap`                      | `grid-column-gap`       | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+| `gridRowGap`                         | `grid-row-gap`          | [spaces](/docs/styled-system/theming/default-theme/spaces) |
+
+## ポジション
+
+```tsx live=false
+// When to use theme token value.
+<Box pos="absolute" top='md' />
+
+// When to use custom value.
+<Box pos="absolute" top='2rem' />
+
+// When to use responsive styles.
+<Box pos="absolute" top={{ base: 'md', md: '8px' }} />
+
+// When to use color mode styles.
+<Box pos="absolute" top={['md', 'sm']} />
+```
+
+| Prop                             | CSS Property         | Theme Key                                                       |
+| -------------------------------- | -------------------- | --------------------------------------------------------------- |
+| `pos`, `position`                | `position`           | none                                                            |
+| `zIndex`                         | `z-index`            | [zIndices](/docs/styled-system/theming/default-theme/z-indices) |
+| `inset`                          | `inset`              | none                                                            |
+| `top`                            | `top`                | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `left`                           | `left`               | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `bottom`                         | `bottom`             | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `right`                          | `right`              | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetY`                         | `top` + `bottom`     | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetX`                         | `left` + `right`     | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetInline`                    | `inset-inline`       | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetStart`, `insetInlineStart` | `inset-inline-start` | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetEnd`, `insetInlineEnd`     | `inset-inline-end`   | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetBlock`                     | `inset-block`        | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetBlockStart`                | `inset-block-start`  | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+| `insetBlockEnd`                  | `inset-block-end`    | [spaces](/docs/styled-system/theming/default-theme/spaces)      |
+
+## リスト
+
+| Prop                                | CSS Property          | Theme Key |
+| ----------------------------------- | --------------------- | --------- |
+| `listStyleType`                     | `list-style-type`     | none      |
+| `listStylePos`, `listStylePosition` | `list-style-position` | none      |
+| `listStyleImg`, `listStyleImage`    | `list-style-image`    | none      |
+
+## ボーダー
+
+```tsx live=false
+// When to use theme token value.
+<Box borderRadius='md' />
+
+// When to use custom value.
+<Box borderRadius='2rem' />
+
+// When to use responsive styles.
+<Box borderRadius={{ base: 'md', md: '8px' }} />
+
+// When to use color mode styles.
+<Box borderRadius={['md', 'sm']} />
+```
+
+| Prop                                                                    | CSS Property                                               | Theme Key                                                    |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| `border`                                                                | `border`                                                   | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderWidth`                                                           | `border-width`                                             | none                                                         |
+| `borderStyle`                                                           | `border-style`                                             | none                                                         |
+| `borderColor`                                                           | `border-color`                                             | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderTop`                                                             | `border-top`                                               | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderTopWidth`                                                        | `border-top-width`                                         | none                                                         |
+| `borderTopStyle`                                                        | `border-top-style`                                         | none                                                         |
+| `borderTopColor`                                                        | `border-top-color`                                         | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderLeft`                                                            | `border-left`                                              | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderLeftColor`                                                       | `border-left-color`                                        | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderLeftStyle`                                                       | `border-left-style`                                        | none                                                         |
+| `borderLeftWidth`                                                       | `border-left-width`                                        | none                                                         |
+| `borderBottom`                                                          | `border-bottom`                                            | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderBottomWidth`                                                     | `border-bottom-width`                                      | none                                                         |
+| `borderBottomStyle`                                                     | `border-bottom-style`                                      | none                                                         |
+| `borderBottomColor`                                                     | `border-bottom-color`                                      | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderRight`                                                           | `border-right`                                             | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderRightWidth`                                                      | `border-right-width`                                       | none                                                         |
+| `borderRightStyle`                                                      | `border-right-style`                                       | none                                                         |
+| `borderRightColor`                                                      | `border-right-color`                                       | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderY`                                                               | `border-top` + `border-bottom`                             | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderX`                                                               | `border-left` + `border-right`                             | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderInline`                                                          | `border-inline`                                            | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderStart`, `borderInlineStart`                                      | `border-inline-start`                                      | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderStartWidth`, `borderInlineStartWidth`                            | `border-inline-start-width`                                | none                                                         |
+| `borderStartStyle`, `borderInlineStartStyle`                            | `border-inline-start-style`                                | none                                                         |
+| `borderStartColor`, `borderInlineStartColor`                            | `border-inline-start-color`                                | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderEnd`, `borderInlineEnd`                                          | `border-inline-end`                                        | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderEndWidth`, `borderInlineEndWidth`                                | `border-inline-end-width`                                  | none                                                         |
+| `borderEndStyle`, `borderInlineEndStyle`                                | `border-inline-end-style`                                  | none                                                         |
+| `borderEndColor`, `borderInlineEndColor`                                | `border-inline-end-color`                                  | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderBlock`                                                           | `border-block`                                             | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderBlockStart`                                                      | `border-block-start`                                       | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderBlockStartWidth`                                                 | `border-block-start-width`                                 | none                                                         |
+| `borderBlockStartStyle`                                                 | `border-block-start-style`                                 | none                                                         |
+| `borderBlockStartColor`                                                 | `border-block-start-color`                                 | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `borderBlockEnd`                                                        | `border-block-end`                                         | [borders](/docs/styled-system/theming/default-theme/borders) |
+| `borderBlockEndWidth`                                                   | `border-block-end-width`                                   | none                                                         |
+| `borderBlockEndStyle`                                                   | `border-block-end-style`                                   | none                                                         |
+| `borderBlockEndColor`                                                   | `border-block-end-color`                                   | [colors](/docs/styled-system/theming/default-theme/colors)   |
+| `rounded`, `borderRadius`                                               | `border-radius`                                            | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedTopRight`, `borderTopRightRadius`                               | `border-top-right-radius`                                  | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedTopLeft`, `borderTopLeftRadius`                                 | `border-top-left-radius`                                   | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedBottomLeft`, `borderBottomLeftRadius`                           | `border-bottom-left-radius`                                | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedBottomRight`, `borderBottomRightRadius`                         | `border-bottom-right-radius`                               | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedTop`, `borderTopRadius`                                         | `border-top-left-radius` + `border-top-right-radius`       | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedBottom`, `borderBottomRadius`                                   | `border-bottom-left-radius` + `border-bottom-right-radius` | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedTopStart`, `borderTopStartRadius`, `borderStartStartRadius`     | `border-start-start-radius`                                | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedTopEnd`, `borderTopEndRadius`, `borderStartEndRadius`           | `border-start-end-radius`                                  | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedBottomStart`, `borderBottomStartRadius`, `borderEndStartRadius` | `border-end-start-radius`                                  | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedBottomEnd`, `borderBottomEndRadius`, `borderEndEndRadius`       | `border-end-end-radius`                                    | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedRight`, `borderRightRadius`                                     | `border-top-right-radius` + `border-bottom-right-radius`   | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedLeft`, `borderLeftRadius`                                       | `border-top-left-radius` + `border-bottom-left-radius`     | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedStart`, `borderStartRadius`, `borderInlineStartRadius`          | `border-start-start-radius` + `border-start-end-radius`    | [radii](/docs/styled-system/theming/default-theme/radii)     |
+| `roundedEnd`, `borderEndRadius`, `borderInlineEndRadius`                | `border-end-start-radius` + `border-end-end-radius`        | [radii](/docs/styled-system/theming/default-theme/radii)     |
+
+## エフェクト
+
+```tsx live=false
+// When to use theme token value.
+<Box shadow='md' />
+
+// When to use custom value.
+<Box shadow='0 0 0 1px rgba(0, 0, 0, 0.05)' />
+
+// When to use responsive styles.
+<Box shadow={{ base: 'lg', md: 'md' }} />
+
+// When to use color mode styles.
+<Box shadow={['md', 'dark-md']} />
+```
+
+| Prop                                 | CSS Property            | Theme Key                                                    |
+| ------------------------------------ | ----------------------- | ------------------------------------------------------------ |
+| `shadow`, `boxShadow`                | `box-shadow`            | [shadows](/docs/styled-system/theming/default-theme/shadows) |
+| `textShadow`                         | `text-shadow`           | [shadows](/docs/styled-system/theming/default-theme/shadows) |
+| `blendMode`, `mixBlendMode`          | `mix-blend-mode`        | none                                                         |
+| `bgBlendMode`, `backgroundBlendMode` | `background-blend-mode` | none                                                         |
+| `isolation`                          | `isolation`             | none                                                         |
+| `opacity`                            | `opacity`               | none                                                         |
+| `filter`                             | `filter`                | none                                                         |
+| `backdropFilter`                     | `backdrop-filter`       | none                                                         |
+
+## 擬似要素とセレクター
+
+| Prop                   | CSS Property                                                                                 | Theme Key |
+| ---------------------- | -------------------------------------------------------------------------------------------- | --------- |
+| `_hover`               | `&:hover, &[data-hover]`                                                                     | none      |
+| `_nativeHover`         | `&:hover`                                                                                    | none      |
+| `_active`              | `&:active, &[data-active]`                                                                   | none      |
+| `_nativeActive`        | `&:active`                                                                                   | none      |
+| `_focus`               | `&:focus, &[data-focus]`                                                                     | none      |
+| `_nativeFocus`         | `&:focus`                                                                                    | none      |
+| `_focusVisible`        | `&:focus-visible, &[data-focus-visible]`                                                     | none      |
+| `_nativeFocusVisible`  | `&:focus-visible`                                                                            | none      |
+| `_disabled`            | `&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]`                           | none      |
+| `_readOnly`            | `&[readonly], &[aria-readonly=true], &[data-readonly]`                                       | none      |
+| `_indeterminate`       | `&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]`                              | none      |
+| `_before`              | `&::before`                                                                                  | none      |
+| `_after`               | `&::after`                                                                                   | none      |
+| `_empty`               | `&:empty`                                                                                    | none      |
+| `_expanded`            | `&[aria-expanded=true], &[data-expanded]`                                                    | none      |
+| `_checked`             | `&:checked, &[data-checked], &[aria-checked=true]`                                           | none      |
+| `_invalid`             | `&[data-invalid], &[aria-invalid=true]`                                                      | none      |
+| `_valid`               | `&:valid, &[data-valid], &[data-state=valid]`                                                | none      |
+| `_selected`            | `&[aria-selected=true], &[data-selected]`                                                    | none      |
+| `_hidden`              | `&[hidden], &[data-hidden]`                                                                  | none      |
+| `_visited`             | `&:visited`                                                                                  | none      |
+| `_placeholder`         | `&[data-placeholder], &::placeholder`                                                        | none      |
+| `_placeholderShown`    | `&:placeholder-shown`                                                                        | none      |
+| `_fullScreen`          | `&:fullscreen`                                                                               | none      |
+| `_selection`           | `&::selection`                                                                               | none      |
+| `_even`                | `&:nth-of-type(even)`                                                                        | none      |
+| `_odd`                 | `&:nth-of-type(odd)`                                                                         | none      |
+| `_first`               | `&:first-of-type`                                                                            | none      |
+| `_last`                | `&:last-of-type`                                                                             | none      |
+| `_notFirst`            | `&:not(:first-of-type)`                                                                      | none      |
+| `_notLast`             | `&:not(:last-of-type)`                                                                       | none      |
+| `_autofill`            | `&:-webkit-autofill`                                                                         | none      |
+| `_outside`             | `&[data-outside]`                                                                            | none      |
+| `_weekend`             | `&[data-weekend]`                                                                            | none      |
+| `_holiday`             | `&[data-holiday]`                                                                            | none      |
+| `_today`               | `&[data-today]`                                                                              | none      |
+| `_accept`              | `&[data-accept]`                                                                             | none      |
+| `_reject`              | `&[data-reject]`                                                                             | none      |
+| `_idle`                | `&[data-idle]`                                                                               | none      |
+| `_loading`             | `&[data-loading]`                                                                            | none      |
+| `_vertical`            | `&:vertical, &[data-orientation=vertical]`                                                   | none      |
+| `_horizontal`          | `&:horizontal, &[data-orientation=horizontal]`                                               | none      |
+| `_scrollbar`           | `&::-webkit-scrollbar`                                                                       | none      |
+| `_scrollbarTrack`      | `&::-webkit-scrollbar-track`                                                                 | none      |
+| `_scrollbarTrackPiece` | `&::-webkit-scrollbar-track-piece`                                                           | none      |
+| `_scrollbarThumb`      | `&::-webkit-scrollbar-thumb`                                                                 | none      |
+| `_scrollbarButton`     | `&::-webkit-scrollbar-button`                                                                | none      |
+| `_scrollbarCorner`     | `&::-webkit-scrollbar-corner`                                                                | none      |
+| `_mediaDark`           | `@media (prefers-color-scheme: dark)`                                                        | none      |
+| `_mediaReduceMotion`   | `@media (prefers-reduced-motion: reduce)`                                                    | none      |
+| `_dark`                | `.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]`    | none      |
+| `_light`               | `.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]` | none      |
+
+## その他
+
+| Prop                       | CSS Property                                   | Theme Key                                                                     |
+| -------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| `appearance`               | `appearance`                                   | none                                                                          |
+| `cursor`                   | `cursor`                                       | none                                                                          |
+| `resize`                   | `resize`                                       | none                                                                          |
+| `userSelect`               | `user-select`                                  | none                                                                          |
+| `pointerEvents`            | `pointer-events`                               | none                                                                          |
+| `outline`                  | `outline`                                      | none                                                                          |
+| `outlineOffset`            | `outline-offset`                               | none                                                                          |
+| `outlineColor`             | `outline-color`                                | [colors](/docs/styled-system/theming/default-theme/colors)                    |
+| `clipPath`                 | `clip-path`                                    | none                                                                          |
+| `transform`                | `transform`                                    | none                                                                          |
+| `transformOrigin`          | `transform-origin`                             | none                                                                          |
+| `transitionProperty`       | `transition-property`                          | [transitions.property](/docs/styled-system/theming/default-theme/transitions) |
+| `transitionDuration`       | `transition-duration`                          | [transitions.duration](/docs/styled-system/theming/default-theme/transitions) |
+| `transitionTimingFunction` | `transition-timing-function`                   | [transitions.easing](/docs/styled-system/theming/default-theme/transitions)   |
+| `transitionDelay`          | `transition-delay`                             | none                                                                          |
+| `willChange`               | `will-change`                                  | none                                                                          |
+| `animation`                | `animation`                                    | none                                                                          |
+| `animationName`            | `animation-name`                               | none                                                                          |
+| `animationDuration`        | `animation-duration`                           | [transitions.duration](/docs/styled-system/theming/default-theme/transitions) |
+| `animationTimingFunction`  | `animation-timing-function`                    | [transitions.easing](/docs/styled-system/theming/default-theme/transitions)   |
+| `animationDelay`           | `animation-delay`                              | none                                                                          |
+| `animationIterationCount`  | `animation-iteration-count`                    | none                                                                          |
+| `animationDirection`       | `animation-direction`                          | none                                                                          |
+| `animationFillMode`        | `animation-fill-mode`                          | none                                                                          |
+| `animationPlayState`       | `animation-play-state`                         | none                                                                          |
+| `scrollBehavior`           | `scroll-behavior`                              | none                                                                          |
+| `scrollSnapAlign`          | `scroll-snap-align`                            | none                                                                          |
+| `scrollSnapStop`           | `scroll-snap-stop`                             | none                                                                          |
+| `scrollSnapType`           | `scroll-snap-type`                             | none                                                                          |
+| `scrollMargin`             | `scroll-margin`                                | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollMarginTop`          | `scroll-margin-top`                            | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollMarginLeft`         | `scroll-margin-left`                           | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollMarginBottom`       | `scroll-margin-bottom`                         | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollMarginRight`        | `scroll-margin-right`                          | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollMarginY`            | `scroll-margin-top` + `scroll-margin-bottom`   | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollMarginX`            | `scroll-margin-left` + `scroll-margin-right`   | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPadding`            | `scroll-padding`                               | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPaddingTop`         | `scroll-padding-top`                           | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPaddingLeft`        | `scroll-padding-left`                          | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPaddingBottom`      | `scroll-padding-bottom`                        | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPaddingRight`       | `scroll-padding-right`                         | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPaddingY`           | `scroll-padding-top` + `scroll-padding-bottom` | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |
+| `scrollPaddingX`           | `scroll-padding-left` + `scroll-padding-right` | [spaces](/docs/styled-system/theming/default-theme/spaces)                    |

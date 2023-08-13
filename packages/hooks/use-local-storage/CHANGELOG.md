@@ -1,5 +1,13 @@
 # @yamada-ui/use-local-storage
 
+## 0.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`df49eca7`](https://github.com/hirotomoyamada/yamada-ui/commit/df49eca7b61acc637fa9eb9ba5e3665e769ed3a8)]:
+  - @yamada-ui/utils@0.2.0
+  - @yamada-ui/use-window-event@0.1.6
+
 ## 0.1.7
 
 ### Patch Changes

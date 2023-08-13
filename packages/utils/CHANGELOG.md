@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 0.2.0
+
+### Minor Changes
+
+- [`df49eca7`](https://github.com/hirotomoyamada/yamada-ui/commit/df49eca7b61acc637fa9eb9ba5e3665e769ed3a8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated color util functions.
+
 ## 0.1.5
 
 ### Patch Changes

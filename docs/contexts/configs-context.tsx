@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, createContext, useContext } from 'react'
+import { FC, PropsWithChildren, createContext, useContext, useMemo } from 'react'
 import configs from 'configs/site.json'
 
 type ConfigsContext = typeof configs
@@ -10,7 +10,9 @@ const ConfigsContext = createContext<ConfigsContext>({
 export type ConfigsProviderProps = PropsWithChildren
 
 export const ConfigsProvider: FC<ConfigsProviderProps> = ({ children }) => {
-  return <ConfigsContext.Provider value={{ ...configs }}>{children}</ConfigsContext.Provider>
+  const value = useMemo(() => ({ ...configs }), [])
+
+  return <ConfigsContext.Provider value={value}>{children}</ConfigsContext.Provider>
 }
 
 export const useConfigs = () => {

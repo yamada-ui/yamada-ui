@@ -250,7 +250,7 @@ export const Calendar: ComponentMultiStyle = {
         fontSize: 'sm',
       },
       content: {
-        w: 70,
+        w: '17.5rem',
       },
       label: {
         h: 10,
@@ -276,7 +276,7 @@ export const Calendar: ComponentMultiStyle = {
         fontSize: 'md',
       },
       content: {
-        w: 84,
+        w: '21rem',
       },
       label: {
         h: 12,

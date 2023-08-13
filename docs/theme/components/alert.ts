@@ -3,6 +3,7 @@ import {
   isDefaultColor,
   mode,
   shadeColor,
+  tintColor,
   toneColor,
   getColor,
 } from '@yamada-ui/react'
@@ -59,7 +60,10 @@ export const Alert: ComponentMultiStyle = {
       return {
         container: {
           bg: isDefaultColor(
-            [toneColor(c, 50)(t, m), shadeColor(toneColor(c, 100)(t, m), 78)(t, m)],
+            [
+              tintColor(toneColor(c, 100)(t, m), 0.48)(t, m),
+              shadeColor(toneColor(c, 100)(t, m), 78)(t, m),
+            ],
             [`${c}.100`, shadeColor(`${c}.100`, 78)(t, m)],
           )(c),
         },

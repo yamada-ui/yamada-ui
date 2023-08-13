@@ -53,10 +53,11 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages
 
   return (
     <>
-      <PackageManagers packageNameOrCommand={selectedPackageNames} />
+      <PackageManagers packageNameOrCommand={selectedPackageNames} mb='4' />
 
       <Table
-        mt='6'
+        mt='4'
+        mb='6'
         colorScheme={colorScheme}
         columns={columns}
         data={packages}

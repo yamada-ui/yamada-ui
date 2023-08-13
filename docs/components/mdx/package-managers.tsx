@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, isArray, isObject } from '@yamada-ui/react'
+import { Box, BoxProps, Tab, Tabs, isArray, isObject } from '@yamada-ui/react'
 import { themes } from 'prism-react-renderer'
 import { FC, useState } from 'react'
 import { Highlight } from './code-block'
@@ -29,11 +29,11 @@ const getCode = (
   }
 }
 
-export type PackageManagersProps = {
+export type PackageManagersProps = BoxProps & {
   packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>
 }
 
-export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand }) => {
+export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand, ...rest }) => {
   const { colorScheme } = useConfigs()
   const [selectedPackageName, setSelectedPackageName] = useState<string>('pnpm')
   const language = 'bash'
@@ -41,10 +41,9 @@ export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand
   const theme = themes.nightOwl
 
   return (
-    <Box position='relative'>
+    <Box position='relative' my='6' {...rest}>
       <Box
         rounded='md'
-        my='8'
         bg={['zinc.800', 'zinc.900']}
         sx={{ '& > div:last-child': { py: '6' } }}
         overflow='hidden'

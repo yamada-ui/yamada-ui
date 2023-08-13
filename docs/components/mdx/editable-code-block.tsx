@@ -46,16 +46,8 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, ...rest })
 
   return (
     <LiveProvider {...{ code: editorCode, enableTypeScript: true, scope }} {...rest}>
-      <Box my='8'>
-        <Box
-          as={LivePreview}
-          mt='8'
-          p='md'
-          borderWidth='1px'
-          rounded='md'
-          overflowX='auto'
-          zIndex='1'
-        />
+      <Box my='6'>
+        <Box as={LivePreview} p='md' borderWidth='1px' rounded='md' overflowX='auto' zIndex='1' />
 
         <Box position='relative' zIndex='0'>
           <Box

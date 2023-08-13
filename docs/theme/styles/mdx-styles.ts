@@ -3,36 +3,37 @@ import { CSSUIObject } from '@yamada-ui/react'
 export const mdx: Record<string, CSSUIObject> = {
   h1: {
     mt: '12',
-    mb: '4',
+    mb: '6',
     fontSize: { base: '4xl' },
   },
   h2: {
     mt: '12',
-    mb: '4',
+    mb: '6',
     fontSize: { base: '2xl' },
   },
   h3: {
-    mt: '8',
-    mb: '4',
-    fontSize: { base: 'lg' },
+    mt: '12',
+    mb: '6',
+    fontSize: { base: 'xl' },
   },
   h4: {
     mt: '8',
-    mb: '4',
-    fontSize: { base: 'md' },
+    mb: '6',
+    fontSize: { base: 'lg' },
   },
   h5: {
-    mt: '6',
-    mb: '4',
-    fontSize: { base: 'sm' },
+    mt: '8',
+    mb: '6',
+    fontSize: { base: 'md' },
   },
   h6: {
-    mt: '6',
-    mb: '4',
-    fontSize: { base: 'xs' },
+    mt: '8',
+    mb: '6',
+    fontSize: { base: 'sm' },
   },
   p: {
-    my: '4',
+    my: '6',
+    lineHeight: 'tall',
     'blockquote &': {
       mt: '0',
     },
@@ -49,7 +50,7 @@ export const mdx: Record<string, CSSUIObject> = {
     textDecoration: 'underline',
   },
   hr: {
-    my: '6',
+    my: '8',
   },
   ul: {
     my: '6',

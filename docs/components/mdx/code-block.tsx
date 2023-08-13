@@ -46,10 +46,9 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   }
 
   return (
-    <Box position='relative'>
+    <Box position='relative' my='6'>
       <Box
         rounded='md'
-        my='8'
         bg={['zinc.800', 'zinc.900']}
         sx={{ '& > div': { py: '6' } }}
         overflow='hidden'
@@ -107,7 +106,7 @@ export const Highlight: FC<HighlightProps> = ({ language, highlight, ...rest }) 
               <Box
                 key={index}
                 minW='0'
-                px='md'
+                px='4'
                 bg={shouldHighlight(index) ? 'whiteAlpha.200' : undefined}
                 {...getLineProps({ line, key: index })}
               >

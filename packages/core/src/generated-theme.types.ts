@@ -300,7 +300,6 @@ export interface GeneratedTheme extends UITheme {
     | (string & {})
   fonts: 'heading' | 'body' | 'mono' | (string & {})
   fontSizes:
-    | '3xs'
     | '2xs'
     | 'xs'
     | 'sm'
@@ -407,7 +406,6 @@ export interface GeneratedTheme extends UITheme {
     | '56'
     | '60'
     | '64'
-    | '70'
     | '72'
     | '80'
     | '84'
@@ -494,8 +492,6 @@ export interface GeneratedTheme extends UITheme {
     | '-60'
     | '64'
     | '-64'
-    | '70'
-    | '-70'
     | '72'
     | '-72'
     | '80'

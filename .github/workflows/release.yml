@@ -87,3 +87,5 @@ jobs:
         with:
           branch: gh-pages
           folder: storybook-static
+          clean: true
+          clean-exclude: .nojekyll

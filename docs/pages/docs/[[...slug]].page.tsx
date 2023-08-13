@@ -53,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales })
 }
 
 export const getStaticProps = async ({ params, locale }: GetStaticPropsContext) => {
-  const { props } = getStaticCommonProps({ locale })
+  const { props } = getStaticCommonProps({ params, locale })
 
   const { docs, tree } = props
 

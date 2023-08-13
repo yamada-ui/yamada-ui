@@ -1,15 +1,4 @@
-import {
-  forwardRef,
-  StackProps,
-  HStack,
-  dataAttr,
-  isDefaultColor,
-  toneColor,
-  useTheme,
-  useColorMode,
-  Box,
-  Center,
-} from '@yamada-ui/react'
+import { forwardRef, StackProps, HStack, dataAttr, Box, Center } from '@yamada-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { memo } from 'react'
@@ -22,8 +11,6 @@ export const Tabs = memo(
   forwardRef<TabsProps, 'div'>(({ ...rest }, ref) => {
     const { tabs } = usePage()
     const { asPath } = useRouter()
-    const { theme } = useTheme()
-    const { colorMode } = useColorMode()
     const { colorScheme } = useConfigs()
 
     return tabs.length ? (
@@ -56,13 +43,8 @@ export const Tabs = memo(
                 _focus={{ outline: 'none' }}
                 _focusVisible={{ zIndex: 1, boxShadow: 'outline' }}
                 _selected={{
-                  color: isDefaultColor(
-                    [
-                      toneColor(colorScheme, 600)(theme, colorMode),
-                      toneColor(colorScheme, 300)(theme, colorMode),
-                    ],
-                    [`${colorScheme}.600`, `${colorScheme}.300`],
-                  )(colorScheme),
+                  color: [`${colorScheme}.600`, `${colorScheme}.300`],
+
                   borderColor: 'currentColor',
                   _hover: { opacity: 1 },
                 }}

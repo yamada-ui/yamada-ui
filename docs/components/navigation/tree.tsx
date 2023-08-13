@@ -8,14 +8,12 @@ import {
   ListProps,
   Text,
   forwardRef,
-  transparentizeColor,
   useBoolean,
-  useColorMode,
   useTheme,
-  useToken,
+  useColorMode,
+  transparentizeColor,
 } from '@yamada-ui/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { FC, memo } from 'react'
 import { Label } from 'components/data-display'
 import { DocWithChildren } from 'contentlayer/generated'
@@ -41,19 +39,32 @@ export const Tree = memo(
 type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ title, menu, slug, children, isNested, ...rest }) => {
+  ({ title, menu, slug, label, children, isNested, is_expand }) => {
     if (menu) title = menu
 
-    const { asPath } = useRouter()
+    const [isOpen, { toggle }] = useBoolean(is_expand)
 
-    const [isOpen, { toggle }] = useBoolean(asPath.startsWith(slug))
+    const isChildActive = children.some(({ is_expand }) => is_expand)
+    const isActive = !isChildActive && is_expand
+    const withToggleButton = !!children.length
 
     return (
-      <ListItem key={slug}>
-        <ListItemLink {...{ title, slug, isNested, isOpen, onToggle: toggle, children, ...rest }} />
+      <ListItem>
+        <ListItemLink
+          {...{
+            title,
+            label,
+            slug,
+            isNested,
+            isActive,
+            isOpen,
+            withToggleButton,
+            onToggle: toggle,
+          }}
+        />
 
         {children.length ? (
-          <Collapse isOpen={!isNested || isOpen}>
+          <Collapse isOpen={isOpen} unmountOnExit>
             <List mt='sm' gap='sm' borderLeftWidth='1px' ml='3' pl='3'>
               {children.map((doc) => (
                 <RecursiveListItem key={doc.slug} {...doc} isNested />
@@ -64,21 +75,23 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
       </ListItem>
     )
   },
+  () => false,
 )
 
 RecursiveListItem.displayName = 'RecursiveListItem'
 
-type ListItemLinkProps = RecursiveListItemProps & { isOpen?: boolean; onToggle?: () => void }
+type ListItemLinkProps = Pick<RecursiveListItemProps, 'title' | 'label' | 'slug' | 'isNested'> & {
+  isActive?: boolean
+  isOpen?: boolean
+  withToggleButton?: boolean
+  onToggle?: () => void
+}
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
-  ({ title, label, slug, isNested, isOpen, is_tabs, onToggle, children }) => {
+  ({ title, label, slug, isNested, isOpen, isActive, withToggleButton, onToggle }) => {
     const { theme } = useTheme()
     const { colorMode } = useColorMode()
-    const { asPath } = useRouter()
     const { colorScheme } = useConfigs()
-    const outline = useToken('shadows', 'outline')
-
-    const isActive = !is_tabs ? asPath === slug : new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(asPath)
 
     return (
       <HStack
@@ -113,12 +126,8 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           py='sm'
           flex='1'
           rounded='md'
-          _focus={{
-            outline: 'none',
-          }}
-          _focusVisible={{
-            boxShadow: `${outline} inset`,
-          }}
+          _focus={{ outline: 'none' }}
+          _focusVisible={{ boxShadow: 'inner-outline' }}
           onClick={!isOpen ? onToggle : undefined}
         >
           <Text as='span' noOfLines={1}>
@@ -128,7 +137,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           <Label ms='sm'>{label}</Label>
         </Text>
 
-        {isNested && children.length ? (
+        {withToggleButton ? (
           <Center
             as='button'
             px='3'
@@ -136,12 +145,8 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             fontSize='1.5em'
             rounded='md'
             boxSizing='content-box'
-            _focus={{
-              outline: 'none',
-            }}
-            _focusVisible={{
-              boxShadow: `${outline} inset`,
-            }}
+            _focus={{ outline: 'none' }}
+            _focusVisible={{ boxShadow: 'inner-outline' }}
             onClick={onToggle}
             aria-label='Toggle children'
           >

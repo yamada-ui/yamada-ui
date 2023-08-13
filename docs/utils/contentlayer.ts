@@ -2,25 +2,30 @@ import { CONSTANT } from 'constant'
 import { Data, DocWithChildren, Doc, DocPagination, allDocs } from 'contentlayer/generated'
 import { flattenArray } from 'utils/array'
 
-export const getTree = (docs: Doc[], parentPaths: string[] = []): DocWithChildren[] => {
-  const lv = parentPaths.length
+export const getTree =
+  (docs: Doc[], parentPaths: string[] = []) =>
+  (paths?: string[]): DocWithChildren[] => {
+    const lv = parentPaths.length
 
-  return docs
-    .filter(({ is_active, data }) => {
-      if (!is_active) return false
+    return docs
+      .filter(({ is_active, data }) => {
+        if (!is_active) return false
 
-      let { paths } = data as Data
+        let { paths } = data as Data
 
-      paths = paths.filter(Boolean)
+        paths = paths.filter(Boolean)
 
-      return paths.length === lv + 1 && paths.join('/').startsWith(parentPaths.join('/'))
-    })
-    .sort((a, b) => a.order - b.order)
-    .map((doc) => ({
-      ...doc,
-      children: getTree(docs, doc.data.paths),
-    }))
-}
+        return paths.length === lv + 1 && paths.join('/').startsWith(parentPaths.join('/'))
+      })
+      .sort((a, b) => a.order - b.order)
+      .map(({ is_expand, ...doc }) => {
+        return {
+          ...doc,
+          is_expand: is_expand || paths.join('/').startsWith(doc.data.paths.join('/')),
+          children: getTree(docs, doc.data.paths)(paths),
+        }
+      })
+  }
 
 export const getPagination = (tree: DocWithChildren[], target: Doc): DocPagination => {
   const flattenTree = flattenArray(tree, 'children')

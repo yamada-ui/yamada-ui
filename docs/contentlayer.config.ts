@@ -82,6 +82,7 @@ const Doc = defineDocumentType(() => ({
       options: ['New', 'Considering', 'Planned', 'Experimental'],
     },
     tags: { type: 'list', of: { type: 'string' } },
+    is_expand: { type: 'boolean', default: false },
     is_active: { type: 'boolean', default: true },
     is_tabs: { type: 'boolean', default: false },
     with_table_of_contents: { type: 'boolean', default: true },

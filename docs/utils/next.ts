@@ -1,4 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
+import { GetStaticPropsContext } from 'next'
 import { Doc, DocWithChildren } from 'contentlayer/generated'
 import { toArray } from 'utils/array'
 import {
@@ -11,9 +12,11 @@ import {
   omitTabDocs,
 } from 'utils/contentlayer'
 
-export const getStaticCommonProps = ({ locale }: { locale: string }) => {
+export const getStaticCommonProps = ({ params, locale }: GetStaticPropsContext) => {
+  const paths = toArray(params?.slug ?? [])
+
   const docs = getDocs(locale)
-  const tree = getTree(omitTabDocs(docs))
+  const tree = getTree(omitTabDocs(docs))(paths)
 
   return { props: { docs, tree } }
 }
@@ -33,7 +36,7 @@ export const getStaticDocProps = ({
   const doc = getDoc(docs, paths, locale)
 
   const { tabs, parentDoc, parentPaths } = getTabs(docs, doc)
-  const childrenTree = getTree(docs, paths)
+  const childrenTree = getTree(docs, paths)(paths)
   const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale)
   const pagination = getPagination(tree, parentDoc ?? doc)
 

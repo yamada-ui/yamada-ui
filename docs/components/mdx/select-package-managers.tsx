@@ -1,7 +1,6 @@
 import { Text, useBreakpoint } from '@yamada-ui/react'
 import { Column, Table } from '@yamada-ui/table'
-import { Component } from 'mdx/types'
-import { useMemo, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { PackageManagers } from './package-managers'
 import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
@@ -10,7 +9,7 @@ type Package = { name: string; description: string; isDefaultCheck?: boolean }
 
 export type SelectPackageManagersProps = { packages: Package[] }
 
-export const SelectPackageManagers: Component<SelectPackageManagersProps> = ({ packages }) => {
+export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages }) => {
   const { colorScheme } = useConfigs()
   const breakpoint = useBreakpoint()
   const { t } = useI18n()

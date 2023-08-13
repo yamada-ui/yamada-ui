@@ -1,7 +1,6 @@
 import { Box, Tab, Tabs, isArray, isObject } from '@yamada-ui/react'
-import { Component } from 'mdx/types'
 import { themes } from 'prism-react-renderer'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { Highlight } from './code-block'
 import { CopyButton } from 'components/forms'
 import { useConfigs } from 'contexts/configs-context'
@@ -34,7 +33,7 @@ export type PackageManagersProps = {
   packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>
 }
 
-export const PackageManagers: Component<PackageManagersProps> = ({ packageNameOrCommand }) => {
+export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand }) => {
   const { colorScheme } = useConfigs()
   const [selectedPackageName, setSelectedPackageName] = useState<string>('pnpm')
   const language = 'bash'

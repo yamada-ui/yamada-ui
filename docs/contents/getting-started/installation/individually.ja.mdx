@@ -35,7 +35,7 @@ Yamada UIのコアやユーティリティをインストールします。
 
 コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマ](/docs/styled-system/theming/default-theme)と[コンフィグ](/docs/styled-system/config/default-config)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
-```tsx live=false
+```tsx live=false highlight={6,7,8,11}
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 
@@ -53,7 +53,7 @@ const App = () => {
 
 ダークモードを対応させたい場合は、`ColorModeProvider`も追加します。
 
-```tsx live=false
+```tsx live=false highlight={7,12}
 import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 

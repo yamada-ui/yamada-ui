@@ -19,7 +19,7 @@ Yamada UIは、他のUIライブラリと同様にテーマという概念が存
 
 プロジェクトに[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を設定するには、アプリケーションのルートに`UIProvider`を追加する必要があります。
 
-```tsx live=false
+```tsx live=false highlight={5,7}
 import { UIProvider } from '@yamada-ui/react'
 
 const App = () => {
@@ -40,7 +40,7 @@ const App = () => {
 
 テーマをカスタマイズしたい場合は、`UIProvider`に`theme`を渡しましょう。
 
-```tsx live=false
+```tsx live=false highlight={3,4,5,9}
 import { UIProvider, extendTheme } from '@yamada-ui/react'
 
 const customTheme = extendTheme({

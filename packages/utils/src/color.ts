@@ -16,7 +16,7 @@ export const isGray = (colorScheme: string) =>
 
 export const getColor =
   (color: string, fallback?: string) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
+  (theme: Dict, colorMode?: 'light' | 'dark') => {
     const hex = get<
       string | number | [string | number, string | number] | undefined
     >(theme, `colors.${color}`, color)
@@ -36,48 +36,48 @@ export const getColor =
 
 export const lightenColor =
   (color: string, amount: number) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     return toHex(lighten(raw, amount / 100))
   }
 
 export const darkenColor =
   (color: string, amount: number) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     return toHex(darken(raw, amount / 100))
   }
 
 export const tintColor =
   (color: string, amount: number) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     return toHex(mix(raw, '#fff', amount))
   }
 
 export const shadeColor =
   (color: string, amount: number) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     return toHex(mix(raw, '#000', amount / 100))
   }
 
 export const transparentizeColor =
   (color: string, alpha: number) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     return transparentize(raw, 1 - alpha)
   }
 
 export const toneColor =
   (color: string, l: number) =>
-  (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     if (l < 0 || 900 < l) return color
 
@@ -159,8 +159,8 @@ const getBrightness = (color: string) => {
 }
 
 export const isTone =
-  (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) => {
-    const raw = getColor(color)(theme, colorMode)
+  (color: string) => (theme?: Dict, colorMode?: 'light' | 'dark') => {
+    const raw = theme ? getColor(color)(theme, colorMode) : color
 
     const brightness = getBrightness(raw)
 
@@ -170,9 +170,9 @@ export const isTone =
   }
 
 export const isLight =
-  (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) =>
+  (color: string) => (theme?: Dict, colorMode?: 'light' | 'dark') =>
     isTone(color)(theme, colorMode) === 'dark'
 
 export const isDark =
-  (color: string) => (theme: Dict, colorMode: 'light' | 'dark' | undefined) =>
+  (color: string) => (theme?: Dict, colorMode?: 'light' | 'dark') =>
     isTone(color)(theme, colorMode) === 'light'

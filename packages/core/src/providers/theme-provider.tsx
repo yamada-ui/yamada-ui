@@ -166,9 +166,15 @@ export const useTheme = <T extends object = Dict>() => {
       'useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`',
     )
 
-  return { themeScheme, changeThemeScheme, theme } as {
-    themeScheme: ThemeScheme
-    changeThemeScheme: ChangeThemeScheme
-    theme: StyledTheme<T>
-  }
+  const value = useMemo(
+    () =>
+      ({ themeScheme, changeThemeScheme, theme }) as {
+        themeScheme: ThemeScheme
+        changeThemeScheme: ChangeThemeScheme
+        theme: StyledTheme<T>
+      },
+    [changeThemeScheme, theme, themeScheme],
+  )
+
+  return value
 }

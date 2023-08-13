@@ -1,5 +1,19 @@
 # @yamada-ui/theme
 
+## 0.6.0
+
+### Minor Changes
+
+- [`fc45f164`](https://github.com/hirotomoyamada/yamada-ui/commit/fc45f16413e7548e92e0fb3000ac3ac55e7570e0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted token.
+
+### Patch Changes
+
+- [`b634e312`](https://github.com/hirotomoyamada/yamada-ui/commit/b634e312d7072a8b914e4c9d1a48f8622881bcfc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Memoize the value of useTheme.
+
+- Updated dependencies [[`df49eca7`](https://github.com/hirotomoyamada/yamada-ui/commit/df49eca7b61acc637fa9eb9ba5e3665e769ed3a8)]:
+  - @yamada-ui/utils@0.2.0
+  - @yamada-ui/core@0.6.4
+
 ## 0.5.5
 
 ### Patch Changes

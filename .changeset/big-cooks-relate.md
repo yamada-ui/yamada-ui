@@ -2,4 +2,4 @@
 '@yamada-ui/utils': minor
 ---
 
-Update color util functions.
+Updated color util functions.

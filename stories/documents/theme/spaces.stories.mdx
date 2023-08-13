@@ -15,9 +15,9 @@ const spaces = {
   normal: '1.5rem',
   lg: '2rem',
   xl: '3rem',
-  '2xl': '4.5rem',
+  '2xl': '4rem',
   '3xl': '6rem',
-  '4xl': '10rem',
+  '4xl': '8rem',
 
   px: '1px',
   0.5: '0.125rem',
@@ -59,46 +59,46 @@ const spaces = {
 
 <JSX>
   <Grid templateColumns='5rem 5rem 5rem 1fr' my='md' gap='md'>
-    <Text>Name</Text>
-    <Text>Rem</Text>
-    <Text>Pixel</Text>
+    <Text m='0'>Name</Text>
+    <Text m='0'>Rem</Text>
+    <Text m='0'>Pixel</Text>
     <Box></Box>
-    <Text>xs</Text>
-    <Text>0.25rem</Text>
-    <Text>4px</Text>
-    <Box maxW='0.25rem' h='9xs' bg='red.500'></Box>
-    <Text>sm</Text>
-    <Text>0.5rem</Text>
-    <Text>8px</Text>
-    <Box maxW='0.5rem' h='9xs' bg='red.500'></Box>
-    <Text>md</Text>
-    <Text>1rem</Text>
-    <Text>16px</Text>
-    <Box maxW='1rem' h='9xs' bg='red.500'></Box>
-    <Text>normal</Text>
-    <Text>1.5rem</Text>
-    <Text>24px</Text>
-    <Box maxW='1.5rem' h='9xs' bg='red.500'></Box>
-    <Text>lg</Text>
-    <Text>2rem</Text>
-    <Text>32px</Text>
-    <Box maxW='2rem' h='9xs' bg='red.500'></Box>
-    <Text>xl</Text>
-    <Text>3rem</Text>
-    <Text>48px</Text>
-    <Box maxW='3rem' h='9xs' bg='red.500'></Box>
-    <Text>2xl</Text>
-    <Text>4.5rem</Text>
-    <Text>72px</Text>
-    <Box maxW='4.5rem' h='9xs' bg='red.500'></Box>
-    <Text>3xl</Text>
-    <Text>6rem</Text>
-    <Text>96px</Text>
-    <Box maxW='6rem' h='9xs' bg='red.500'></Box>
-    <Text>4xl</Text>
-    <Text>10rem</Text>
-    <Text>160px</Text>
-    <Box maxW='10rem' h='9xs' bg='red.500'></Box>
+    <Text m='0'>xs</Text>
+    <Text m='0'>0.25rem</Text>
+    <Text m='0'>4px</Text>
+    <Box maxW='0.25rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>sm</Text>
+    <Text m='0'>0.5rem</Text>
+    <Text m='0'>8px</Text>
+    <Box maxW='0.5rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>md</Text>
+    <Text m='0'>1rem</Text>
+    <Text m='0'>16px</Text>
+    <Box maxW='1rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>normal</Text>
+    <Text m='0'>1.5rem</Text>
+    <Text m='0'>24px</Text>
+    <Box maxW='1.5rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>lg</Text>
+    <Text m='0'>2rem</Text>
+    <Text m='0'>32px</Text>
+    <Box maxW='2rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>xl</Text>
+    <Text m='0'>3rem</Text>
+    <Text m='0'>48px</Text>
+    <Box maxW='3rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>2xl</Text>
+    <Text m='0'>4rem</Text>
+    <Text m='0'>64px</Text>
+    <Box maxW='4rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>3xl</Text>
+    <Text m='0'>6rem</Text>
+    <Text m='0'>96px</Text>
+    <Box maxW='6rem' h='8xs' bg='red.500'></Box>
+    <Text m='0'>4xl</Text>
+    <Text m='0'>8rem</Text>
+    <Text m='0'>128px</Text>
+    <Box maxW='8rem' h='8xs' bg='red.500'></Box>
   </Grid>
 </JSX>
 
@@ -106,24 +106,24 @@ const spaces = {
 
 <JSX>
   <Grid templateColumns='5rem 5rem 5rem 1fr' my='md' gap='md'>
-    <Text>Name</Text>
-    <Text>Rem</Text>
-    <Text>Pixel</Text>
+    <Text m='0'>Name</Text>
+    <Text m='0'>Rem</Text>
+    <Text m='0'>Pixel</Text>
     <Box></Box>
-    <Text>px</Text>
-    <Text>0.0625rem</Text>
-    <Text>1px</Text>
-    <Box maxW='1px' h='9xs' bg='green.500'></Box>
+    <Text m='0'>px</Text>
+    <Text m='0'>0.0625rem</Text>
+    <Text m='0'>1px</Text>
+    <Box maxW='1px' h='8xs' bg='green.500'></Box>
     {Object.entries(defaultTheme.spaces)
       .filter(([key]) => !isNaN(Number(key)))
       .sort(([a], [b]) => a - b)
       .map(([key, value]) => {
         return (
           <Fragment key={key}>
-            <Text>{key}</Text>
-            <Text>{value}</Text>
-            <Text>{`${parseFloat(value) * 16}px`}</Text>
-            <Box maxW={value} h='9xs' bg='green.500'></Box>
+            <Text m='0'>{key}</Text>
+            <Text m='0'>{value}</Text>
+            <Text m='0'>{`${parseFloat(value) * 16}px`}</Text>
+            <Box maxW={value} h='8xs' bg='green.500'></Box>
           </Fragment>
         )
       })}

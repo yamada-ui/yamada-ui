@@ -1,0 +1,31 @@
+---
+title: デフォルトのコンフィグ
+description: Yamada UIのデフォルトのコンフィグ。
+order: 1
+---
+
+デフォルトのコンフィグは、[カラーモード](/docs/styled-system/color-mode)で使用される`initialColorMode`と`useSystemColorMode`などが設定されています。
+
+実際に設定されている値はこちらです。
+
+```ts
+const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
+  disableTransitionOnChange: false,
+  var: {
+    prefix: 'ui',
+  },
+}
+```
+
+| プロパティ                  | 説明                                                                                                                       | デフォルト         |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `initialThemeScheme`        | [動的にテーマを切り替える](/docs/styled-system/theming/dynamic-theme)で使用されるテーマの初期値です。                      | `undefined`        |
+| `initialColorMode`          | カラーモードの初期値です。`light`, `dark`, `system`を受け入れます。                                                        | `light`            |
+| `useSystemColorMode`        | オペレーションシステム(OS)からカラーモードの変更をサブスクライブします。                                                   | `false`            |
+| `disableTransitionOnChange` | カラーモードの切り替え時のトランジションなどによる不要な動きを避けるための設定です。                                       | `false`            |
+| `var`                       | CSSカスタムプロパティに使用される設定です。                                                                                | `{ prefix: 'ui' }` |
+| `date`                      | [Calendar](/docs/components/data-display/calendar)や[DatePicker](/docs/components/forms/date-picker)で使用される設定です。 | `undefined`        |
+| `loading`                   | [ローディング](/docs/styled-system/loading)で使用される設定です。                                                          | `undefined`        |
+| `notice`                    | [通知](/docs/styled-system/notification)で使用される設定です。                                                             | `undefined`        |

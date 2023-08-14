@@ -30,7 +30,7 @@ with_children_description: false
 <Box bg={['white', 'black']} />
 ```
 
-| Prop                                                | CSS Property            | Theme Key                                                        |
+| Prop                                                | CSSプロパティ           | テーマのトークン                                                 |
 | --------------------------------------------------- | ----------------------- | ---------------------------------------------------------------- |
 | `color`                                             | `color`                 | [colors](/docs/styled-system/theming/default-theme#colors)       |
 | `textColor`                                         | `color`                 | [colors](/docs/styled-system/theming/default-theme#colors)       |
@@ -65,7 +65,7 @@ with_children_description: false
 <Box m={['md', 'sm']} />
 ```
 
-| Prop                                       | CSS Property                                  | Theme Key                                                  |
+| Prop                                       | CSSプロパティ                                 | テーマのトークン                                           |
 | ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------- |
 | `m`, `margin`                              | `margin`                                      | [spaces](/docs/styled-system/theming/default-theme#spaces) |
 | `mt`, `marginTop`                          | `margin-top`                                  | [spaces](/docs/styled-system/theming/default-theme#spaces) |
@@ -110,7 +110,7 @@ with_children_description: false
 <Box fontSize={['md', 'sm']} />
 ```
 
-| Prop                          | CSS Property                | Theme Key                                                                              |
+| Prop                          | CSSプロパティ               | テーマのトークン                                                                       |
 | ----------------------------- | --------------------------- | -------------------------------------------------------------------------------------- |
 | `fontFamily`                  | `font-family`               | [fonts](/docs/styled-system/theming/default-theme#typography#fonts)                    |
 | `fontSize`                    | `font-size`                 | [fontSizes](/docs/styled-system/theming/default-theme#typography#font-sizes)           |
@@ -148,7 +148,7 @@ with_children_description: false
 <Box w={['md', 'sm']} />
 ```
 
-| Prop                                 | CSS Property            | Theme Key                                                  |
+| Prop                                 | CSSプロパティ           | テーマのトークン                                           |
 | ------------------------------------ | ----------------------- | ---------------------------------------------------------- |
 | `w`, `width`                         | `width`                 | [sizes](/docs/styled-system/theming/default-theme#sizes)   |
 | `minW`, `minWidth`                   | `min-width`             | [sizes](/docs/styled-system/theming/default-theme#sizes)   |
@@ -232,7 +232,7 @@ with_children_description: false
 <Box pos="absolute" top={['md', 'sm']} />
 ```
 
-| Prop                             | CSS Property         | Theme Key                                                       |
+| Prop                             | CSSプロパティ        | テーマのトークン                                                |
 | -------------------------------- | -------------------- | --------------------------------------------------------------- |
 | `pos`, `position`                | `position`           | none                                                            |
 | `zIndex`                         | `z-index`            | [zIndices](/docs/styled-system/theming/default-theme#z-indices) |
@@ -252,11 +252,11 @@ with_children_description: false
 
 ## リスト
 
-| Prop                                | CSS Property          | Theme Key |
-| ----------------------------------- | --------------------- | --------- |
-| `listStyleType`                     | `list-style-type`     | none      |
-| `listStylePos`, `listStylePosition` | `list-style-position` | none      |
-| `listStyleImg`, `listStyleImage`    | `list-style-image`    | none      |
+| Prop                                | CSSプロパティ         | テーマのトークン |
+| ----------------------------------- | --------------------- | ---------------- |
+| `listStyleType`                     | `list-style-type`     | none             |
+| `listStylePos`, `listStylePosition` | `list-style-position` | none             |
+| `listStyleImg`, `listStyleImage`    | `list-style-image`    | none             |
 
 ## ボーダー
 
@@ -274,7 +274,7 @@ with_children_description: false
 <Box borderRadius={['md', 'sm']} />
 ```
 
-| Prop                                                                    | CSS Property                                               | Theme Key                                                    |
+| Prop                                                                    | CSSプロパティ                                              | テーマのトークン                                             |
 | ----------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
 | `border`                                                                | `border`                                                   | [borders](/docs/styled-system/theming/default-theme#borders) |
 | `borderWidth`                                                           | `border-width`                                             | none                                                         |
@@ -348,7 +348,7 @@ with_children_description: false
 <Box shadow={['md', 'dark-md']} />
 ```
 
-| Prop                                 | CSS Property            | Theme Key                                                    |
+| Prop                                 | CSSプロパティ           | テーマのトークン                                             |
 | ------------------------------------ | ----------------------- | ------------------------------------------------------------ |
 | `shadow`, `boxShadow`                | `box-shadow`            | [shadows](/docs/styled-system/theming/default-theme#shadows) |
 | `textShadow`                         | `text-shadow`           | [shadows](/docs/styled-system/theming/default-theme#shadows) |
@@ -361,64 +361,64 @@ with_children_description: false
 
 ## 擬似要素とセレクター
 
-| Prop                   | CSS Property                                                                                 | Theme Key |
-| ---------------------- | -------------------------------------------------------------------------------------------- | --------- |
-| `_hover`               | `&:hover, &[data-hover]`                                                                     | none      |
-| `_nativeHover`         | `&:hover`                                                                                    | none      |
-| `_active`              | `&:active, &[data-active]`                                                                   | none      |
-| `_nativeActive`        | `&:active`                                                                                   | none      |
-| `_focus`               | `&:focus, &[data-focus]`                                                                     | none      |
-| `_nativeFocus`         | `&:focus`                                                                                    | none      |
-| `_focusVisible`        | `&:focus-visible, &[data-focus-visible]`                                                     | none      |
-| `_nativeFocusVisible`  | `&:focus-visible`                                                                            | none      |
-| `_disabled`            | `&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]`                           | none      |
-| `_readOnly`            | `&[readonly], &[aria-readonly=true], &[data-readonly]`                                       | none      |
-| `_indeterminate`       | `&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]`                              | none      |
-| `_before`              | `&::before`                                                                                  | none      |
-| `_after`               | `&::after`                                                                                   | none      |
-| `_empty`               | `&:empty`                                                                                    | none      |
-| `_expanded`            | `&[aria-expanded=true], &[data-expanded]`                                                    | none      |
-| `_checked`             | `&:checked, &[data-checked], &[aria-checked=true]`                                           | none      |
-| `_invalid`             | `&[data-invalid], &[aria-invalid=true]`                                                      | none      |
-| `_valid`               | `&:valid, &[data-valid], &[data-state=valid]`                                                | none      |
-| `_selected`            | `&[aria-selected=true], &[data-selected]`                                                    | none      |
-| `_hidden`              | `&[hidden], &[data-hidden]`                                                                  | none      |
-| `_visited`             | `&:visited`                                                                                  | none      |
-| `_placeholder`         | `&[data-placeholder], &::placeholder`                                                        | none      |
-| `_placeholderShown`    | `&:placeholder-shown`                                                                        | none      |
-| `_fullScreen`          | `&:fullscreen`                                                                               | none      |
-| `_selection`           | `&::selection`                                                                               | none      |
-| `_even`                | `&:nth-of-type(even)`                                                                        | none      |
-| `_odd`                 | `&:nth-of-type(odd)`                                                                         | none      |
-| `_first`               | `&:first-of-type`                                                                            | none      |
-| `_last`                | `&:last-of-type`                                                                             | none      |
-| `_notFirst`            | `&:not(:first-of-type)`                                                                      | none      |
-| `_notLast`             | `&:not(:last-of-type)`                                                                       | none      |
-| `_autofill`            | `&:-webkit-autofill`                                                                         | none      |
-| `_outside`             | `&[data-outside]`                                                                            | none      |
-| `_weekend`             | `&[data-weekend]`                                                                            | none      |
-| `_holiday`             | `&[data-holiday]`                                                                            | none      |
-| `_today`               | `&[data-today]`                                                                              | none      |
-| `_accept`              | `&[data-accept]`                                                                             | none      |
-| `_reject`              | `&[data-reject]`                                                                             | none      |
-| `_idle`                | `&[data-idle]`                                                                               | none      |
-| `_loading`             | `&[data-loading]`                                                                            | none      |
-| `_vertical`            | `&:vertical, &[data-orientation=vertical]`                                                   | none      |
-| `_horizontal`          | `&:horizontal, &[data-orientation=horizontal]`                                               | none      |
-| `_scrollbar`           | `&::-webkit-scrollbar`                                                                       | none      |
-| `_scrollbarTrack`      | `&::-webkit-scrollbar-track`                                                                 | none      |
-| `_scrollbarTrackPiece` | `&::-webkit-scrollbar-track-piece`                                                           | none      |
-| `_scrollbarThumb`      | `&::-webkit-scrollbar-thumb`                                                                 | none      |
-| `_scrollbarButton`     | `&::-webkit-scrollbar-button`                                                                | none      |
-| `_scrollbarCorner`     | `&::-webkit-scrollbar-corner`                                                                | none      |
-| `_mediaDark`           | `@media (prefers-color-scheme: dark)`                                                        | none      |
-| `_mediaReduceMotion`   | `@media (prefers-reduced-motion: reduce)`                                                    | none      |
-| `_dark`                | `.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]`    | none      |
-| `_light`               | `.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]` | none      |
+| Prop                   | CSSプロパティ                                                                                | テーマのトークン |
+| ---------------------- | -------------------------------------------------------------------------------------------- | ---------------- |
+| `_hover`               | `&:hover, &[data-hover]`                                                                     | none             |
+| `_nativeHover`         | `&:hover`                                                                                    | none             |
+| `_active`              | `&:active, &[data-active]`                                                                   | none             |
+| `_nativeActive`        | `&:active`                                                                                   | none             |
+| `_focus`               | `&:focus, &[data-focus]`                                                                     | none             |
+| `_nativeFocus`         | `&:focus`                                                                                    | none             |
+| `_focusVisible`        | `&:focus-visible, &[data-focus-visible]`                                                     | none             |
+| `_nativeFocusVisible`  | `&:focus-visible`                                                                            | none             |
+| `_disabled`            | `&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]`                           | none             |
+| `_readOnly`            | `&[readonly], &[aria-readonly=true], &[data-readonly]`                                       | none             |
+| `_indeterminate`       | `&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]`                              | none             |
+| `_before`              | `&::before`                                                                                  | none             |
+| `_after`               | `&::after`                                                                                   | none             |
+| `_empty`               | `&:empty`                                                                                    | none             |
+| `_expanded`            | `&[aria-expanded=true], &[data-expanded]`                                                    | none             |
+| `_checked`             | `&:checked, &[data-checked], &[aria-checked=true]`                                           | none             |
+| `_invalid`             | `&[data-invalid], &[aria-invalid=true]`                                                      | none             |
+| `_valid`               | `&:valid, &[data-valid], &[data-state=valid]`                                                | none             |
+| `_selected`            | `&[aria-selected=true], &[data-selected]`                                                    | none             |
+| `_hidden`              | `&[hidden], &[data-hidden]`                                                                  | none             |
+| `_visited`             | `&:visited`                                                                                  | none             |
+| `_placeholder`         | `&[data-placeholder], &::placeholder`                                                        | none             |
+| `_placeholderShown`    | `&:placeholder-shown`                                                                        | none             |
+| `_fullScreen`          | `&:fullscreen`                                                                               | none             |
+| `_selection`           | `&::selection`                                                                               | none             |
+| `_even`                | `&:nth-of-type(even)`                                                                        | none             |
+| `_odd`                 | `&:nth-of-type(odd)`                                                                         | none             |
+| `_first`               | `&:first-of-type`                                                                            | none             |
+| `_last`                | `&:last-of-type`                                                                             | none             |
+| `_notFirst`            | `&:not(:first-of-type)`                                                                      | none             |
+| `_notLast`             | `&:not(:last-of-type)`                                                                       | none             |
+| `_autofill`            | `&:-webkit-autofill`                                                                         | none             |
+| `_outside`             | `&[data-outside]`                                                                            | none             |
+| `_weekend`             | `&[data-weekend]`                                                                            | none             |
+| `_holiday`             | `&[data-holiday]`                                                                            | none             |
+| `_today`               | `&[data-today]`                                                                              | none             |
+| `_accept`              | `&[data-accept]`                                                                             | none             |
+| `_reject`              | `&[data-reject]`                                                                             | none             |
+| `_idle`                | `&[data-idle]`                                                                               | none             |
+| `_loading`             | `&[data-loading]`                                                                            | none             |
+| `_vertical`            | `&:vertical, &[data-orientation=vertical]`                                                   | none             |
+| `_horizontal`          | `&:horizontal, &[data-orientation=horizontal]`                                               | none             |
+| `_scrollbar`           | `&::-webkit-scrollbar`                                                                       | none             |
+| `_scrollbarTrack`      | `&::-webkit-scrollbar-track`                                                                 | none             |
+| `_scrollbarTrackPiece` | `&::-webkit-scrollbar-track-piece`                                                           | none             |
+| `_scrollbarThumb`      | `&::-webkit-scrollbar-thumb`                                                                 | none             |
+| `_scrollbarButton`     | `&::-webkit-scrollbar-button`                                                                | none             |
+| `_scrollbarCorner`     | `&::-webkit-scrollbar-corner`                                                                | none             |
+| `_mediaDark`           | `@media (prefers-color-scheme: dark)`                                                        | none             |
+| `_mediaReduceMotion`   | `@media (prefers-reduced-motion: reduce)`                                                    | none             |
+| `_dark`                | `.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]`    | none             |
+| `_light`               | `.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]` | none             |
 
 ## その他
 
-| Prop                       | CSS Property                                   | Theme Key                                                                     |
+| Prop                       | CSSプロパティ                                  | テーマのトークン                                                              |
 | -------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------- |
 | `appearance`               | `appearance`                                   | none                                                                          |
 | `cursor`                   | `cursor`                                       | none                                                                          |

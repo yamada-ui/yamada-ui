@@ -1,0 +1,48 @@
+---
+title: コンフィグをカスタマイズする
+description: Yamada UIのデフォルトのコンフィグをカスタマイズする方法。
+order: 2
+---
+
+コンフィグをカスタマイズすることで、[カラーモード](/docs/styled-system/color-mode)や`CSS`カスタムプロパティのプレフィックスを変更することができます。
+
+<Alert status='warning'>
+  <AlertIcon />
+  コンフィグをカスタマイズする場合は、`extendConfig`を使用することをオススメします。これは、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)を継承したコンフィグを作成します。`extendConfig`を使用しない場合は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)を継承しないので、全く新しいコンフィグになります。
+</Alert>
+
+## カラーモードを変更する
+
+`extendConfig`を使用して、生成されたコンフィグを`UIProvider`の`config`に渡します。
+
+```tsx live=false highlight={3,7,9}
+import { UIProvider, extendConfig } from '@yamada-ui/react'
+
+const customConfig = extendConfig({ initialColorMode: 'system', useSystemColorMode: true })
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+## `CSS`カスタムプロパティをプレフィックスを変更する
+
+`extendConfig`を使用して、生成されたコンフィグを`UIProvider`の`config`に渡します。
+
+```tsx live=false highlight={3,7,9}
+import { UIProvider, extendConfig } from '@yamada-ui/react'
+
+const customConfig = extendConfig({ var: { prefix: 'hoge' } })
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```

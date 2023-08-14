@@ -4,6 +4,234 @@ description: このページは現在作成中です。
 order: 5
 ---
 
-現在ページ作成中です。😘
+Yamada UIには、アプリケーションのカラーモードを管理するためのサポートが組み込まれています。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。シナリオによっては、コンポーネントをカラーモードに対応させる必要がある場合があります。
+
+## セットアップ
+
+ダークモードを正しく動作させるには、次の2つのことを行う必要があります。
+
+1. コンフィグに`initialColorMode`と`useSystemColorMode`を設定する。
+2. `ColorModeScript`をアプリケーションに追加する。
+
+### コンフィグをカスタマイズする
+
+カラーモードは、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)に設定されています。
+
+実際に定義されている値はこちらです。
+
+```ts title=config.ts
+export const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
+}
+```
+
+- `initialColorMode`: ユーザーが初めてアプリケーションにアクセスしたとき(またはストレージがリセットされた後)のカラーモードの初期値です。3つ値を受け入れます。
+
+  - `light`: ライトモード。
+  - `dark`: ダークモード。
+  - `system`: `mathMedia`を用いて計算します。
+
+- `useSystemColorMode`: オペレーションシステム(OS)からカラーモードの変更をサブスクライブします。
+
+  - `true`: サブスクライブを有効にします。
+  - `false`: サブスクライブを無効にします。
+
+```tsx live=false
+import { UIProvider, extendConfig } from '@yamada-ui/react'
+
+export const config: ThemeConfig = {
+  initialColorMode: 'system',
+  useSystemColorMode: true,
+}
+
+const customConfig = extendConfig(config)
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### `ColorModeScript`を追加する
+
+カラーモードを正常に動作させるために、`body`内に`ColorModeScript`を追加する必要があります。
+
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+#### Create React Appの場合
+
+```tsx live=false title=index.tsx highlight={10,12}
+import { createRoot } from 'react-dom/client'
+import { App } from './app'
+import { UIProvider, ColorModeScript, defaultConfig } from '@yamada-ui/react'
+
+const container = document.getElementById('app')
+
+const root = createRoot(container!)
+
+root.render(
+  <>
+    <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
+
+    <UIProvider>
+      <App />
+    </UIProvider>
+  </>,
+)
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
+</Alert>
+
+#### Next.jsの場合
+
+```tsx live=false title=_document.tsx highlight={10}
+import { Html, Head, Main, NextScript } from 'next/document'
+import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+
+export default function Document() {
+  return (
+    <Html lang='en'>
+      <Head />
+
+      <body>
+        <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+プロジェクトによっては、`cookies`から値を取得する場合があるかもしれません。その場合は、`cookieStorageManager`を使用します。
+
+```tsx live=false title=_document.tsx highlight={11,12}
+import { Html, Head, Main, NextScript } from 'next/document'
+import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+
+export default function Document() {
+  return (
+    <Html lang='en'>
+      <Head />
+
+      <body>
+        <ColorModeScript
+          type='cookie'
+          nonce='testing'
+          initialColorMode={defaultConfig.initialColorMode}
+        />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+```tsx live=false title=_app.tsx highlight={6}
+import type { AppProps } from 'next/app'
+import { UIProvider, cookieStorageManager } from '@yamada-ui/react'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <UIProvider colorModeManager={cookieStorageManager}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
+</Alert>
+
+<Alert status='info'>
+  <AlertIcon />
+  App Routerの場合は、[こちら](/docs/getting-started/frameworks/nextjs/app-router#uiprovidercacheprovidercolormodescriptを追加する)をご覧ください。
+</Alert>
+
+## カラーモードの構文
+
+カラーモードのスタイルを設定する場合は、スタイルの`props`に配列を渡すだけでカラーモードに対応します。
+
+- 第1引数にライトモードに設定したいスタイルの値を定義します。
+- 第2引数にダークモードに設定したいスタイルの値を定義します。
+
+```tsx
+<Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
+  This is Box
+</Box>
+```
+
+## カラーモードを切り替える
+
+アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。
+
+- `changeColorMode`: 引数に変更したいカラーモードを設定します。
+- `toggleColorMode`: ライトモードならダークモードへ、ダークモードならライトモードへ切り替えます。
+
+```tsx
+function Demo() {
+  const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+
+  return (
+    <Wrap gap='md'>
+      <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
+        ライトモード
+      </Button>
+      <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
+        ダークモード
+      </Button>
+      <Button colorScheme='gray' onClick={toggleColorMode}>
+        {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+## カラーモードのユーティリティ
+
+Yamada UIには、カラーモードの便利なカスタムフックを提供しています。
+
+### `useColorMode`を使う
+
+コンポーネント内で現在のカラーモードを取得する場合には、`useColorMode`を使用します。
+
+```tsx
+function Demo() {
+  const { colorMode } = useColorMode()
+
+  return <Box p='md'> The current colorMode is "{colorMode}"</Box>
+}
+```
+
+### `useColorModeValue`を使う
+
+`useColorModeValue`は、第1引数にライトモードの値、第2引数にダークモードの値を渡し、現在のカラーモードの値を返すカスタムフックです。
+
+```tsx
+function Demo() {
+  const { colorMode } = useColorMode()
+  const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
+  const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+
+  return (
+    <Box p='md' bg={bg} color={color}>
+      The current colorMode is "{colorMode}"
+    </Box>
+  )
+}
+```
+
+これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。

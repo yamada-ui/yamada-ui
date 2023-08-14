@@ -274,7 +274,7 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 
 すべてのスタイルの`props`は、オブジェクトも受け入れます。まずは、背景色を変えてみましょう。
 
-- オブジェクトのキーは、[ブレイクポイント](/docs/getting-started/basics#ブレイクポイントについて)で設定されているキーを定義します。
+- オブジェクトのキーは、テーマの[ブレイクポイント](/docs/getting-started/basics#ブレイクポイントについて)で設定されているキーを定義します。
 - オブジェクトの値は、キーで設定するスタイルの値を定義します。
 
 ```tsx
@@ -290,10 +290,10 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 
 画面幅を変更して実際に確認してください。
 
-上記のコードを、`CSS`で記述すると下記のようになります。
+上記のコードは、次のような`CSS`が生成されます。
 
 ```css
-.demo {
+.Box {
   background: var(--ui-colors-primary);
 
   @media screen and (max-width: 1440px) {
@@ -326,7 +326,7 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 
 ### ブレイクポイントについて
 
-ブレイクポイントは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)に定義されています。
+レスポンシブスタイルは、テーマで定義されたブレイクポイントを参照します。Yamada UIには、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)があり、ブレイクポイントが定義されています。
 
 実際に定義されている値はこちらです。
 
@@ -342,7 +342,7 @@ export const breakpoints = {
 
 <Alert status='info'>
   <AlertIcon />
-  ブレイクポイントを変更したい場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
+  ブレイクポイントを変更したい場合は、[こちら](/docs/styled-system/responsice-styles#ブレイクポイントをカスタマイズする)をご覧ください。
 </Alert>
 
 ## カラーモードについて
@@ -386,6 +386,7 @@ export const config: ThemeConfig = {
   - `system`: `mathMedia`を用いて計算します。
 
 - `useSystemColorMode`: オペレーションシステム(OS)からカラーモードの変更をサブスクライブします。
+
   - `true`: サブスクライブを有効にします。
   - `false`: サブスクライブを無効にします。
 

@@ -4,6 +4,146 @@ description: このページは現在作成中です。
 order: 4
 ---
 
-現在ページ作成中です。😘
+Yamada UIは、すぐに使えるレスポンシブスタイルをサポートしています。スタイルの`props`にオブジェクトを渡すだけでPCファーストのレスポンシブスタイルを追加できます。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+<Alert status='warning'>
+  <AlertIcon />
+  Yamada UIは、レスポンシブデザインに`@media(max-width)`のメディアクエリを使用しています。
+</Alert>
+
+## ブレイクポイントについて
+
+レスポンシブスタイルは、テーマで定義されたブレイクポイントを参照します。Yamada UIには、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)があり、ブレイクポイントが定義されています。
+
+実際に定義されている値はこちらです。
+
+```ts title=breakpoints.ts
+export const breakpoints = {
+  sm: '30em', // 480px
+  md: '48em', // 768px
+  lg: '61em', // 976px
+  xl: '80em', // 1280px
+  '2xl': '90em', // 1440px
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  ブレイクポイントを変更したい場合は、[こちら](#ブレイクポイントをカスタマイズする)をご覧ください。
+</Alert>
+
+## レスポンシブスタイルの構文
+
+レスポンシブスタイルを設定する場合は、スタイルの`props`にオブジェクトを渡すだけでPCファーストのレスポンシブスタイルに対応します。
+
+- オブジェクトのキーは、テーマの[ブレイクポイント](#ブレイクポイントについて)で設定されているキーを定義します。
+- オブジェクトの値は、キーで設定するスタイルの値を定義します。
+
+```tsx
+<Box
+  w='full'
+  p='md'
+  bg={{ base: 'primary', '2xl': 'secondary', xl: 'warning', lg: 'danger' }}
+  color='white'
+>
+  This is Box
+</Box>
+```
+
+上記のコードは、次のような`CSS`が生成されます。
+
+```css
+.Box {
+  background: var(--ui-colors-primary);
+
+  @media screen and (max-width: 1440px) {
+    background: var(--ui-colors-secondary);
+  }
+
+  @media screen and (max-width: 1280px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 976px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 480px) {
+    background: var(--ui-colors-danger);
+  }
+}
+```
+
+## レスポンシブのユーティリティ
+
+Yamada UIには、レスポンシブなレイアウトを構築するために便利なカスタムフックを提供しています。
+
+### `useBreakpoint`を使う
+
+コンポーネント内で現在のブレイクポイントを取得する場合には、`useBreakpoint`を使用します。
+
+```tsx
+function Demo() {
+  const breakpoint = useBreakpoint()
+
+  return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
+}
+```
+
+### `useBreakpointValue`を使う
+
+`useBreakpointValue`は、引数で渡されたオブジェクトから現在のブレイクポイントの値を返すカスタムフックです。
+
+```tsx
+function Demo() {
+  const breakpoint = useBreakpoint()
+  const bg = useBreakpointValue({
+    base: 'red.500',
+    xl: 'blue.500',
+    lg: 'green.500',
+    md: 'yellow.500',
+    sm: 'purple.500',
+  })
+
+  return (
+    <Box bg={bg} p='md' color='white'>
+      The current breakpoint is "{breakpoint}"
+    </Box>
+  )
+}
+```
+
+これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
+
+## ブレイクポイントをカスタマイズする
+
+シナリオによっては、アプリケーションのブレークポイントの定義が必要になる場合があります。
+
+`sm`・`md`・`lg`・`xl`などの一般的なエイリアスを使用することをオススメします。
+
+```tsx live=false
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const breakpoints = {
+  sm: '376px',
+  MD: '768px',
+  lg: '960px',
+  xl: '1200px',
+  '2xl': '1440px',
+}
+
+const customTheme = extendTheme({ breakpoints })({ omit: 'breakpoints' })
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+</Alert>

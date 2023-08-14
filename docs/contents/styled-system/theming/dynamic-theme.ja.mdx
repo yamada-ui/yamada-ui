@@ -4,6 +4,164 @@ description: このページは現在作成中です。
 order: 5
 ---
 
-現在ページ作成中です。😘
+Yamada UIは、ユーザーが動的にテーマを切り替え可能にする機能があります。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+<Alert status='info'>
+  <AlertIcon />
+  この機能を有効にするには、複数のテーマを用意する必要があります。
+</Alert>
+
+## 複数のテーマを用意する
+
+今回は、複数のテーマを新しく用意するのはコストが掛かるためデフォルトのテーマからカラーを変更したテーマを複数用意します。
+
+<Alert status='info'>
+  <AlertIcon />
+  テーマのカスタマイズの仕方が分からない場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
+</Alert>
+
+`extendTheme`を使って複数のテーマを作成し、コンフィグの`initialThemeScheme`に初期値を設定します。
+
+```tsx live=false
+import { defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
+
+const pinkTheme = extendTheme({
+  colors: {
+    primary: '#ec4899',
+  },
+})()
+
+const purpleTheme = extendTheme({
+  colors: {
+    primary: '#a855f7',
+  },
+})()
+
+const greenTheme = extendTheme({
+  colors: {
+    primary: '#22c55e',
+  },
+})()
+
+const theme = {
+  default: defaultTheme,
+  pink: pinkTheme,
+  purple: purpleTheme,
+  green: greenTheme,
+}
+
+const config = extendConfig({
+  initialThemeScheme: 'default',
+})
+```
+
+また、配列にすることも可能です。その場合は、`initialThemeScheme`の初期値にインデックスを指定します。
+
+```tsx live=false
+import { defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
+
+const pinkTheme = extendTheme({
+  colors: {
+    primary: '#ec4899',
+  },
+})()
+
+const purpleTheme = extendTheme({
+  colors: {
+    primary: '#a855f7',
+  },
+})()
+
+const greenTheme = extendTheme({
+  colors: {
+    primary: '#22c55e',
+  },
+})()
+
+const theme = [defaultTheme, pinkTheme, purpleTheme, greenTheme]
+
+const config = extendConfig({
+  initialThemeScheme: 0,
+})
+```
+
+## `UIProvider`にテーマを追加する
+
+作成したテーマとコンフィグを`UIProvider`に渡します。
+
+```tsx live=false
+import { UIProvider, defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
+
+const pinkTheme = extendTheme({
+  colors: {
+    primary: '#ec4899',
+  },
+})()
+
+const purpleTheme = extendTheme({
+  colors: {
+    primary: '#a855f7',
+  },
+})()
+
+const greenTheme = extendTheme({
+  colors: {
+    primary: '#22c55e',
+  },
+})()
+
+const theme = {
+  default: defaultTheme,
+  pink: pinkTheme,
+  purple: purpleTheme,
+  green: greenTheme,
+}
+
+const config = extendConfig({
+  initialThemeScheme: 'default',
+})
+
+const App = () => {
+  return (
+    <UIProvider theme={theme} config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+## テーマを切り替える
+
+テーマの切り替えには、`changeThemeScheme`を使います。
+
+```tsx live=false
+import { useTheme } from '@yamada-ui/react'
+
+const Demo = () => {
+  const { themeScheme, changeThemeScheme } = useTheme()
+
+  return (
+    <>
+      <Text>現在のテーマ：{themeScheme}</Text>
+
+      <HStack>
+        <Button colorScheme='gray' onClick={() => changeThemeScheme('default')}>
+          Default Theme
+        </Button>
+
+        <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
+          Pink Theme
+        </Button>
+
+        <Button colorScheme='purple' onClick={() => changeThemeScheme('purple')}>
+          Purple Theme
+        </Button>
+
+        <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
+          Green Theme
+        </Button>
+      </HStack>
+    </>
+  )
+}
+```

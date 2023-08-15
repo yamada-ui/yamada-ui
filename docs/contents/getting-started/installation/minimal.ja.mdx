@@ -24,7 +24,8 @@ Yamada UIのコアやユーティリティをインストールします。
 
 `ui`は、Yamada UIのスタイルシステムを有効にしたJSX要素のオブジェクトであり、カスタムコンポーネントがYamada UIのスタイルシステムを受け取るための関数としても使用できます。
 
-もし、`div`の要素を作成したい場合は、`<ui.div />`と記述します。
+`ui.<element>`の記法を使用して、スタイルシステムを備えた基本のHTML要素を生成します。
+例えば、スタイルシステムを備えたプレーンなHTMLの`div`を生成する場合は、`<ui.div />`と記述します。
 
 ```tsx live=false
 import { ui } from '@yamada-ui/core'
@@ -61,9 +62,9 @@ const Demo = () => {
 
 ## コンポーネントを作る
 
-`ui`は、JSX要素の`<ui.div />`と関数の`ui('div')`と2つの使い方ができます。
+`ui`は、JSX要素の`<ui.div />`とJSX要素を返す関数の`ui('div')`と2つの使い方ができます。
 
-関数は、簡単なコンポーネントを作成するのに適しています。
+関数は、簡単なコンポーネントを生成するのに適しています。
 
 ```tsx live=false
 import { ui } from '@yamada-ui/core'
@@ -144,29 +145,25 @@ function Demo() {
 <PackageManagers packageNameOrCommand='@yamada-ui/motion' />
 
 ```tsx
-function Demo() {
-  return (
-    <ui.div display='flex' placeContent='center' placeItems='center' w='100%' h='20rem'>
-      <Motion
-        animate={{
-          scale: [1, 2, 2, 1, 1],
-          rotate: [0, 0, 180, 180, 0],
-          borderRadius: ['0%', '0%', '50%', '50%', '0%'],
-        }}
-        transition={{
-          duration: 2,
-          ease: 'easeInOut',
-          times: [0, 0.2, 0.5, 0.8, 1],
-          repeat: Infinity,
-          repeatDelay: 1,
-        }}
-        w='7rem'
-        h='7rem'
-        bg='primary'
-      />
-    </ui.div>
-  )
-}
+<ui.div display='flex' placeContent='center' placeItems='center' w='100%' h='20rem'>
+  <Motion
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ['0%', '0%', '50%', '50%', '0%'],
+    }}
+    transition={{
+      duration: 2,
+      ease: 'easeInOut',
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+    w='7rem'
+    h='7rem'
+    bg='primary'
+  />
+</ui.div>
 ```
 
 <Alert status='info'>

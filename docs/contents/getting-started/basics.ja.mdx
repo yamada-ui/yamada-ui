@@ -503,30 +503,26 @@ function Demo() {
 今回は、拡大・縮小させるために`scale: 1.1`や`scale: 0.9`を設定しています。
 
 ```tsx
-function Demo() {
-  return (
-    <Center p='lg'>
-      <Motion
-        as='button'
-        whileHover={{
-          scale: 1.1,
-        }}
-        whileTap={{
-          scale: 0.9,
-        }}
-        whileFocus={{
-          scale: 1.1,
-        }}
-        p='md'
-        rounded='md'
-        bg='primary'
-        color='white'
-      >
-        Click me!
-      </Motion>
-    </Center>
-  )
-}
+<Center p='lg'>
+  <Motion
+    as='button'
+    whileHover={{
+      scale: 1.1,
+    }}
+    whileTap={{
+      scale: 0.9,
+    }}
+    whileFocus={{
+      scale: 1.1,
+    }}
+    p='md'
+    rounded='md'
+    bg='primary'
+    color='white'
+  >
+    Click me!
+  </Motion>
+</Center>
 ```
 
 <Alert status='info'>

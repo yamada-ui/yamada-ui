@@ -1,9 +1,43 @@
 ---
-title: セマンティックなトークン
-description: このページは現在作成中です。
+title: セマンティックトークン
+description: Yamada UIは、セマンティックトークンをサポートしています。
 order: 8
 ---
 
-現在ページ作成中です。😘
+Yamada UIは、あらゆるスケール(色やフォントサイズなど)のセマンティックトークンをサポートしています。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+<Alert status='info'>
+  <AlertIcon />
+  セマンティックトークンとは、デザインシステムなどで使用される用語で、色やフォントサイズのデザインの属性を抽象化した変数やトークンを指します。これらのトークンは、その名前から直感的にその機能や意味を理解できるように名付けられます。
+</Alert>
+
+セマンティックトークンは、テーマで定義することができます。
+
+```tsx live=false
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const semantics = {
+  error: 'red.500',
+}
+
+const customTheme = extendTheme({ semantics })()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+```tsx live=false
+<Text color='error'>This is Error</Text>
+```
+
+これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)で定義されている`colors.red.500`を`error`というセマンティックトークンを生成します。
+
+<Alert status='info'>
+  <AlertIcon />
+  テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+</Alert>

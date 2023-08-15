@@ -1,10 +1,7 @@
-export * from './extend-theme'
-export * from './with-default'
-export * from './extend-config'
-
 export * from '@yamada-ui/core'
 export * from '@yamada-ui/utils'
 export * from '@yamada-ui/theme'
+export * from '@yamada-ui/theme-tools'
 export * from '@yamada-ui/providers'
 export * from '@yamada-ui/accordion'
 export * from '@yamada-ui/alert'

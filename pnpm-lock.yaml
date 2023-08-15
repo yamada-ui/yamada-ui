@@ -2609,6 +2609,9 @@ importers:
       '@yamada-ui/theme':
         specifier: workspace:*
         version: link:../theme
+      '@yamada-ui/theme-tools':
+        specifier: workspace:*
+        version: link:../theme-tools
       '@yamada-ui/tooltip':
         specifier: workspace:*
         version: link:../components/tooltip
@@ -2758,6 +2761,22 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+
+  packages/theme-tools:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../core
+      '@yamada-ui/theme':
+        specifier: workspace:*
+        version: link:../theme
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils

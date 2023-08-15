@@ -1,6 +1,6 @@
 # @yamada-ui/theme
 
-The default theme package for Yamada UI's components.
+The default theme package for Yamada UI components.
 
 ## Installation
 

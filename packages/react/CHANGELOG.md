@@ -1,5 +1,19 @@
 # @yamada-ui/react
 
+## 0.6.0
+
+### Minor Changes
+
+- [`bb39a88e`](https://github.com/hirotomoyamada/yamada-ui/commit/bb39a88e33860b345d538a40fdf126f8ec1fa5ea) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved the extendTheme and extendConfig to a different package.
+
+### Patch Changes
+
+- Updated dependencies [[`9ba848bf`](https://github.com/hirotomoyamada/yamada-ui/commit/9ba848bf18b9f8d5463828f37cc26e463954e44b), [`97312d7f`](https://github.com/hirotomoyamada/yamada-ui/commit/97312d7fc64496e70c1e2cf6763072cbca2c1f00)]:
+  - @yamada-ui/theme@0.6.1
+  - @yamada-ui/providers@0.6.15
+  - @yamada-ui/theme-tools@0.1.1
+  - @yamada-ui/use-media-query@0.1.32
+
 ## 0.5.28
 
 ### Patch Changes

@@ -6,11 +6,11 @@ import {
   forwardRef,
   Heading,
   StringLiteral,
-  Text,
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { memo, ReactNode } from 'react'
 import { Label } from 'components/data-display'
+import { TextWithCode } from 'components/typography'
 import { usePage } from 'contexts/page-context'
 
 export type LinkCardProps = CardProps & {
@@ -63,9 +63,9 @@ export const LinkCard = memo(
 
           {with_description ? (
             <CardBody as='div' pt='md'>
-              <Text color='muted' noOfLines={3}>
+              <TextWithCode color='muted' noOfLines={3}>
                 {description}
-              </Text>
+              </TextWithCode>
             </CardBody>
           ) : null}
         </Card>

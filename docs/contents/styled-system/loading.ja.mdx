@@ -1,9 +1,457 @@
 ---
 title: ローディング
-description: このページは現在作成中です。
+description: Yamada UIは、アプリケーションで必要なローディングアニメーションをサポートしています。
 order: 10
 ---
 
-現在ページ作成中です。😘
+Yamada UIは、アプリケーションで必要な`ローディングアニメーション`をサポートしています。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+## 使い方
+
+ローディングを表示するには、`useLoading`を使用します。`useLoading`は、`screen`・`page`・`background`・`custom`のインスタンスを返します。インスタンスには、いくつかのメソッドが含まれています。
+
+- `isLoading`: ローディングアニメーション中かどうかを取得します。
+- `start`: ローディングアニメーションを開始します。
+- `update`: ローディングアニメーションの情報を更新します。
+- `finish`: ローディングアニメーションを終了します。
+
+<Alert status='warning'>
+  <AlertIcon />
+  `custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](#カスタムコンポーネントを使う)をご覧ください。
+</Alert>
+
+```tsx
+function Demo() {
+  const { screen, page, background } = useLoading()
+
+  const demoScreen = async () => {
+    try {
+      screen.start()
+
+      await wait(5000)
+    } finally {
+      screen.finish()
+    }
+  }
+
+  const demoPage = async () => {
+    try {
+      page.start()
+
+      await wait(5000)
+    } finally {
+      page.finish()
+    }
+  }
+
+  const demoBackground = async () => {
+    try {
+      background.start()
+
+      await wait(5000)
+    } finally {
+      background.finish()
+    }
+  }
+
+  return (
+    <Wrap gap='md'>
+      <Button colorScheme='gray' onClick={demoScreen}>
+        Start screen loading
+      </Button>
+      <Button colorScheme='gray' onClick={demoPage}>
+        Start page loading
+      </Button>
+      <Button colorScheme='gray' onClick={demoBackground}>
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+## ローディングをカスタマイズする
+
+メソッドにオプションを渡すと、ローディングをカスタマイズできます。
+
+### タイムアウトを付与する
+
+通信などのケースでは、タイムアウトを付与する必要があります。その場合は、`duration`を使います。
+
+```tsx
+function Demo() {
+  const { screen, page, background } = useLoading()
+
+  return (
+    <Wrap gap='md'>
+      <Button colorScheme='gray' onClick={() => screen.start({ duration: 5000 })}>
+        Start screen loading
+      </Button>
+      <Button colorScheme='gray' onClick={() => page.start({ duration: 5000 })}>
+        Start page loading
+      </Button>
+      <Button colorScheme='gray' onClick={() => background.start({ duration: 5000 })}>
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+### メッセージを付与する
+
+ローディングにメッセージを付与する場合は、`message`を使います。
+
+```tsx
+function Demo() {
+  const { screen, page, background } = useLoading()
+
+  return (
+    <Wrap gap='md'>
+      <Button
+        colorScheme='gray'
+        onClick={() => screen.start({ message: 'Loading', duration: 5000 })}
+      >
+        Start screen loading
+      </Button>
+      <Button colorScheme='gray' onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
+        Start page loading
+      </Button>
+      <Button
+        colorScheme='gray'
+        onClick={() => background.start({ message: 'Loading', duration: 5000 })}
+      >
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+`message`は、`JSXエレメント`を渡せます。
+
+```tsx
+function Demo() {
+  const { screen, page, background } = useLoading()
+
+  return (
+    <Wrap gap='md'>
+      <Button
+        colorScheme='gray'
+        onClick={() =>
+          screen.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        }
+      >
+        Start screen loading
+      </Button>
+      <Button
+        colorScheme='gray'
+        onClick={() =>
+          page.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        }
+      >
+        Start page loading
+      </Button>
+      <Button
+        colorScheme='gray'
+        onClick={() =>
+          background.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        }
+      >
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+### メッセージを更新する
+
+メッセージを更新する場合は、メソッドの`update`を使用してオプションを渡します。
+
+```tsx
+function Demo() {
+  const { screen, page, background } = useLoading()
+
+  const demoScreen = async () => {
+    try {
+      screen.start({ message: 'Loading' })
+
+      await wait(3000)
+
+      screen.update({ message: 'Please wait' })
+
+      await wait(3000)
+    } finally {
+      screen.finish()
+    }
+  }
+
+  const demoPage = async () => {
+    try {
+      page.start({ message: 'Loading' })
+
+      await wait(3000)
+
+      page.update({ message: 'Please wait' })
+
+      await wait(3000)
+    } finally {
+      page.finish()
+    }
+  }
+
+  const demoBackground = async () => {
+    try {
+      background.start({ message: 'Loading' })
+
+      await wait(3000)
+
+      background.update({ message: 'Please wait' })
+
+      await wait(3000)
+    } finally {
+      background.finish()
+    }
+  }
+
+  return (
+    <Wrap gap='md'>
+      <Button colorScheme='gray' onClick={demoScreen}>
+        Start screen loading
+      </Button>
+      <Button colorScheme='gray' onClick={demoPage}>
+        Start page loading
+      </Button>
+      <Button colorScheme='gray' onClick={demoBackground}>
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+```
+
+## コンフィグからカスタマイズする
+
+アプリケーション全体のローディングの設定をしたい場合は、コンフィグをカスタマイズします。
+
+例えば、アプリケーション全体でローディングのアイコンを変更したい場合は、`loading`にオプションを渡します。
+
+```tsx
+function Demo() {
+  const customConfig = extendConfig({
+    loading: {
+      screen: {
+        icon: {
+          variant: 'grid',
+        },
+      },
+      page: {
+        icon: {
+          variant: 'grid',
+        },
+      },
+      background: {
+        icon: {
+          variant: 'grid',
+        },
+      },
+    },
+  })
+
+  function App() {
+    const { screen, page, background } = useLoading()
+
+    return (
+      <Wrap gap='md'>
+        <Button colorScheme='gray' onClick={() => screen.start({ duration: 5000 })}>
+          Start screen loading
+        </Button>
+        <Button colorScheme='gray' onClick={() => page.start({ duration: 5000 })}>
+          Start page loading
+        </Button>
+        <Button colorScheme='gray' onClick={() => background.start({ duration: 5000 })}>
+          Start background loading
+        </Button>
+      </Wrap>
+    )
+  }
+
+  return (
+    <UIProvider config={customConfig}>
+      <App />
+    </UIProvider>
+  )
+}
+```
+
+### `initialState`を使う
+
+`initialState`を使うことで、アプリケーションのロード時にローディングを表示します。
+
+これは、ロード時の通信(ユーザー情報の取得など)に適しています。
+
+```tsx live=false highlight={6}
+import { UIProvider, extendConfig } from '@yamada-ui/react'
+
+const customConfig = extendConfig({
+  loading: {
+    screen: {
+      initialState: true,
+    },
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `initialState`を`true`にした場合、アプリケーション内の関数(通信を行っている関数)の終わりに、`useLoading`のインスタンスの`finish`を呼び出す必要があります。そうしなければ、ローディングは終了しません。
+</Alert>
+
+### カスタムコンポーネントを使う
+
+シナリオによっては、プロジェクトに合わせたローディングアニメーションを実装する必要がある場合があります。
+
+その場合は、`custom`を活用します。
+
+```tsx
+function Demo() {
+  const customConfig = extendConfig({
+    loading: {
+      custom: {
+        component: ({ initialState, message, duration, onFinish }) => {
+          useTimeout(onFinish, duration)
+
+          return (
+            <Motion
+              initial={!initialState ? 'initial' : false}
+              animate='animate'
+              exit='exit'
+              variants={{
+                initial: {
+                  opacity: 0,
+                },
+                animate: {
+                  opacity: 1,
+                  transition: {
+                    duration: 0.4,
+                    ease: [0.4, 0, 0.2, 1],
+                  },
+                },
+                exit: {
+                  opacity: 0,
+                  transition: {
+                    duration: 0.4,
+                    ease: [0.4, 0, 1, 1],
+                  },
+                },
+              }}
+              sx={{
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: 9999,
+                bg: 'blackAlpha.600',
+                w: '100vw',
+                h: '100vh',
+                p: 'md',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Motion
+                initial={!initialState ? 'initial' : false}
+                animate='animate'
+                exit='exit'
+                variants={{
+                  initial: {
+                    opacity: 0,
+                    scale: 0.95,
+                  },
+                  animate: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      duration: 0.4,
+                      ease: [0.4, 0, 0.2, 1],
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    scale: 0.95,
+                    transition: {
+                      duration: 0.4,
+                      ease: [0.4, 0, 1, 1],
+                    },
+                  },
+                }}
+                sx={{
+                  bg: ['white', 'black'],
+                  maxW: 'md',
+                  p: 'md',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: 'sm',
+                  rounded: 'md',
+                  boxShadow: ['lg', 'dark-lg'],
+                }}
+              >
+                <Loading variant='dots' size='6xl' />
+
+                <VStack align='center' mb='md' gap='sm'>
+                  <Text>Downloading files…</Text>
+                  {message ? (
+                    isValidElement(message) ? (
+                      message
+                    ) : (
+                      <Text noOfLines={3}>{message}</Text>
+                    )
+                  ) : null}
+                </VStack>
+
+                <Button size='sm' onClick={onFinish}>
+                  Play to background
+                </Button>
+              </Motion>
+            </Motion>
+          )
+        },
+      },
+    },
+  })
+
+  function App() {
+    const { custom } = useLoading()
+
+    return (
+      <Button colorScheme='gray' onClick={() => custom.start({ duration: 5000 })}>
+        Start custom loading
+      </Button>
+    )
+  }
+
+  return (
+    <UIProvider config={customConfig}>
+      <App />
+    </UIProvider>
+  )
+}
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  コンフィグをもっと学びたい場合は、[コンフィグをカスタマイズする](/docs/styled-system/configure/customize-config)をご覧ください。
+</Alert>

@@ -6,7 +6,7 @@ import { Box, Text } from '@yamada-ui/react'
 import * as UIComponents from '@yamada-ui/react'
 import * as TableComponents from '@yamada-ui/table'
 import { PrismTheme } from 'prism-react-renderer'
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 import { CopyButton } from 'components/forms'
 import { useI18n } from 'contexts/i18n-context'
@@ -17,6 +17,8 @@ const wait = (ms: number) =>
   })
 
 const scope = {
+  React,
+  ...React,
   ...UIComponents,
   ...CarouselComponents,
   // ...DropzoneComponents,

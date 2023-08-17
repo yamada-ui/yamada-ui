@@ -70,7 +70,7 @@ const App = () => {
 
 ### ローディングを使う
 
-Yamada UIは、アプリケーションにおいて**必須不可欠**である`ローディングアニメーション`のユーティリティも豊富です。
+Yamada UIは、アプリケーションで必要な`ローディングアニメーション`をサポートしています。
 
 ローディングを表示するには、`useLoading`を使用します。`useLoading`は、`screen`・`page`・`background`・`custom`のインスタンスを返します。インスタンスには、いくつかのメソッドが含まれています。
 
@@ -146,9 +146,9 @@ function Demo() {
 
 ### 通知を使う
 
-Yamada UIは、アプリケーションにおいて**必須不可欠**である`通知`のユーティリティも豊富です。
+Yamada UIは、アプリケーションで必要な`通知`をサポートしています。
 
-通知を表示するには、`useNotice`を使用します。`useNotice`は、通知を表示する関数を返します。
+通知を表示するには、`useNotice`を使用します。`useNotice`は、通知を表示・制御するインスタンスを返します。
 
 ```tsx
 function Demo() {
@@ -164,7 +164,7 @@ function Demo() {
         })
       }
     >
-      Show Notification
+      Show notification
     </Button>
   )
 }

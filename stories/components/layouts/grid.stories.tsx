@@ -10,7 +10,7 @@ const meta: Meta<typeof Grid> = {
 
 export default meta
 
-export const templateColimns: Story = () => {
+export const templateColumns: Story = () => {
   return (
     <Grid w='full' templateColumns='repeat(4, 1fr)' gap='md'>
       <GridItem

@@ -1,5 +1,5 @@
 import { ColorMode } from '../css'
-import { STORAGE_KEY } from './color-mode-script'
+import { COLOR_MODE_STORAGE_KEY } from './color-mode-script'
 
 const hasSupport = !!globalThis?.document
 
@@ -10,9 +10,7 @@ export type ColorModeManager = {
   set: (colorMode: ColorMode | 'system') => void
 }
 
-export const createLocalStorageManager = (
-  storageKey: string,
-): ColorModeManager => ({
+const createLocalStorage = (storageKey: string): ColorModeManager => ({
   ssr: false,
   type: 'localStorage',
   get: (initColorMode = 'light') => {
@@ -34,15 +32,13 @@ export const createLocalStorageManager = (
   },
 })
 
-export const localStorageManager = createLocalStorageManager(STORAGE_KEY)
-
 const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
   const match = cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
   return match?.[2] as ColorMode | undefined
 }
 
-export const createCookieStorageManager = (
+const createCookieStorage = (
   key: string,
   cookie?: string,
 ): ColorModeManager => ({
@@ -61,7 +57,13 @@ export const createCookieStorageManager = (
   },
 })
 
-export const cookieStorageManager = createCookieStorageManager(STORAGE_KEY)
+const cookieStorageSSR = (cookie: string) =>
+  createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie)
 
-export const cookieStorageManagerSSR = (cookie: string) =>
-  createCookieStorageManager(STORAGE_KEY, cookie)
+export const colorModeManager = {
+  localStorage: createLocalStorage(COLOR_MODE_STORAGE_KEY),
+  cookieStorage: createCookieStorage(COLOR_MODE_STORAGE_KEY),
+  createLocalStorage,
+  cookieStorageSSR,
+  createCookieStorage,
+}

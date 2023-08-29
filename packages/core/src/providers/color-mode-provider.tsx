@@ -11,8 +11,10 @@ import {
 } from 'react'
 import { ColorMode } from '../css'
 import { ThemeConfig } from '../theme.types'
-import { ColorModeManager, localStorageManager } from './color-mode-manager'
+import { colorModeManager, ColorModeManager } from './color-mode-manager'
 import { getColorModeUtils } from './color-mode-utils'
+
+const { localStorage } = colorModeManager
 
 type ColorModeContext = {
   forced?: boolean
@@ -35,7 +37,7 @@ export type ColorModeProviderProps = {
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   value,
-  colorModeManager = localStorageManager,
+  colorModeManager = localStorage,
   config: {
     initialColorMode,
     useSystemColorMode,

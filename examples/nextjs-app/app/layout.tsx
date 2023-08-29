@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  cookieStorageManager,
+  colorModeManager,
   extendConfig,
   extendTheme,
   UIProvider,
@@ -16,7 +16,7 @@ const config = extendConfig(customConfig)
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <html lang='ja' data-theme='light'>
+    <html lang='ja' data-mode='light'>
       <head>
         <title>Next.js App - Yamada UI</title>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -27,7 +27,11 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <ColorModeScript type='cookie' nonce='testing' />
 
         <CacheProvider>
-          <UIProvider config={config} theme={theme} colorModeManager={cookieStorageManager}>
+          <UIProvider
+            config={config}
+            theme={theme}
+            colorModeManager={colorModeManager.cookieStorage}
+          >
             {children}
           </UIProvider>
         </CacheProvider>

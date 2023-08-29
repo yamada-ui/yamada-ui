@@ -68,7 +68,7 @@ export const styled = <T extends As, P extends object = {}>(
 
     return createElement(Component, {
       ref,
-      'data-theme': forced ? colorMode : undefined,
+      'data-mode': forced ? colorMode : undefined,
       ...props,
     })
   })

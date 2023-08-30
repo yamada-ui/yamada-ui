@@ -11,7 +11,7 @@ const container = document.getElementById('app')
 const root = createRoot(container!)
 
 root.render(
-  <UIProvider config={config} theme={theme}>
+  <UIProvider theme={theme} config={config}>
     <App />
   </UIProvider>,
 )

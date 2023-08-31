@@ -44,7 +44,7 @@ const createCookieStorage = (
 ): ColorModeManager => ({
   ssr: !!cookie,
   type: 'cookie',
-  get: (initColorMode: ColorMode = 'light') => {
+  get: (initColorMode = 'light') => {
     if (cookie) return parseCookie(cookie, key)
 
     if (!hasSupport) return initColorMode
@@ -52,7 +52,7 @@ const createCookieStorage = (
     return parseCookie(document.cookie, key) || initColorMode
   },
 
-  set: (colorMode: ColorMode | 'system') => {
+  set: (colorMode) => {
     document.cookie = `${key}=${colorMode}; max-age=31536000; path=/`
   },
 })

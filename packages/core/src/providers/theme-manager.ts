@@ -44,7 +44,7 @@ const createCookieStorage = (
 ): ThemeSchemeManager => ({
   ssr: !!cookie,
   type: 'cookie',
-  get: (initThemeScheme?: ThemeScheme) => {
+  get: (initThemeScheme) => {
     if (cookie) return parseCookie(cookie, key)
 
     if (!hasSupport) return initThemeScheme
@@ -52,7 +52,7 @@ const createCookieStorage = (
     return parseCookie(document.cookie, key) || initThemeScheme
   },
 
-  set: (themeScheme: ThemeScheme) => {
+  set: (themeScheme) => {
     document.cookie = `${key}=${themeScheme}; max-age=31536000; path=/`
   },
 })

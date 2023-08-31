@@ -1,4 +1,5 @@
 import { Header } from 'components'
+import { GetServerSidePropsContext } from 'next'
 
 export default () => {
   return (
@@ -6,4 +7,12 @@ export default () => {
       <Header />
     </>
   )
+}
+
+export const getServerSideProps = ({ req }: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? '',
+    },
+  }
 }

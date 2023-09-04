@@ -11,20 +11,20 @@ export const background: Configs = {
   backgroundRepeat: true,
   backgroundAttachment: true,
   backgroundClip: { transform: transforms.bgClip },
-  bgSize: configs.prop('backgroundSize'),
-  bgPosition: configs.prop('backgroundPosition'),
-  bg: configs.color('background'),
-  bgColor: configs.color('backgroundColor'),
-  bgPos: configs.prop('backgroundPosition'),
-  bgRepeat: configs.prop('backgroundRepeat'),
-  bgAttachment: configs.prop('backgroundAttachment'),
-  bgGradient: configs.gradient('backgroundImage'),
-  bgClip: { transform: transforms.bgClip },
 }
 
 Object.assign(background, {
+  bg: background.background,
+  bgColor: background.backgroundColor,
   bgImage: background.backgroundImage,
   bgImg: background.backgroundImage,
+  bgGradient: background.backgroundImage,
+  bgPos: background.bgPosition,
+  bgClip: background.backgroundClip,
+  bgSize: background.backgroundSize,
+  bgPosition: background.backgroundPosition,
+  bgRepeat: background.backgroundRepeat,
+  bgAttachment: background.backgroundAttachment,
 })
 
 export type BackgroundProps<Y = 'responsive', M = 'colorMode'> = {

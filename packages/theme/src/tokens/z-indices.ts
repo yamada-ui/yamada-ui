@@ -10,8 +10,8 @@ export const zIndices = {
   burter: 120,
   recoome: 130,
   ginyu: 140,
-  zarbon: 150,
-  dodoria: 160,
+  dodoria: 150,
+  zarbon: 160,
 
   freeza: 9996,
   vegeta: 9997,

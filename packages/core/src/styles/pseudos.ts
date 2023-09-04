@@ -181,17 +181,17 @@ export const pseudos = {
    */
   _mediaReduceMotion: '@media (prefers-reduced-motion: reduce)',
   /**
-   * Styles for when `data-theme` is applied to any parent of
+   * Styles for when `data-mode` is applied to any parent of
    * this component or element.
    */
   _dark:
-    '.ui-dark &:not([data-theme]), [data-theme=dark] &:not([data-theme]), &[data-theme=dark]',
+    '.ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]',
   /**
-   * Styles for when `data-theme` is applied to any parent of
+   * Styles for when `data-mode` is applied to any parent of
    * this component or element.
    */
   _light:
-    '.ui-light &:not([data-theme]), [data-theme=light] &:not([data-theme]), &[data-theme=light]',
+    '.ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]',
 }
 
 export const pseudosProperties = Object.keys(

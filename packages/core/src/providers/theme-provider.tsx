@@ -12,7 +12,15 @@ import {
   runIfFunc,
   getMemoizedObject as get,
 } from '@yamada-ui/utils'
-import { FC, useMemo, useContext, Context, useState, useCallback } from 'react'
+import {
+  FC,
+  useMemo,
+  useContext,
+  Context,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react'
 import {
   transformTheme,
   StyledTheme,
@@ -22,10 +30,11 @@ import {
   css,
   UIStyle,
 } from '..'
+import { themeSchemeManager, ThemeSchemeManager } from './theme-manager'
 
-export type ChangeThemeScheme = (
-  themeSchemeOrFunc: ThemeScheme | ((themeScheme: ThemeScheme) => ThemeScheme),
-) => void
+const { localStorage } = themeSchemeManager
+
+export type ChangeThemeScheme = (themeScheme: ThemeScheme) => void
 
 type ThemeProviderOptions = {
   /**
@@ -33,13 +42,22 @@ type ThemeProviderOptions = {
    *
    * If omitted, uses the default theme provided by yamada ui.
    */
-  theme: Dict | Dict[]
+  theme: Dict
   /**
    * The config of the yamada ui.
    *
    * If omitted, uses the default config provided by yamada ui.
    */
   config?: ThemeConfig
+  /**
+   * Manager to persist a user's theme scheme preference.
+   *
+   * Omit if you don't render server-side.
+   * For SSR, choose `cookieStorageManager`.
+   *
+   * @default 'localStorageManager'
+   */
+  themeSchemeManager?: ThemeSchemeManager
 }
 
 export type ThemeProviderProps = Omit<EmotionThemeProviderProps, 'theme'> &
@@ -48,41 +66,45 @@ export type ThemeProviderProps = Omit<EmotionThemeProviderProps, 'theme'> &
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme: initialTheme,
   config,
+  themeSchemeManager = localStorage,
   children,
 }) => {
   const [themeScheme, setThemeScheme] = useState<ThemeScheme | undefined>(
-    config?.initialThemeScheme,
+    themeSchemeManager.get(config?.initialThemeScheme),
   )
+
   const theme = useMemo(
-    () =>
-      isUndefined(themeScheme)
-        ? initialTheme
-        : (initialTheme as Dict)[themeScheme],
+    () => (isUndefined(themeScheme) ? initialTheme : initialTheme[themeScheme]),
     [initialTheme, themeScheme],
   )
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
-    (
-      themeSchemeOrFunc:
-        | ThemeScheme
-        | ((themeScheme: ThemeScheme) => ThemeScheme),
-    ) => {
-      if (isUndefined(themeScheme))
-        throw Error(
-          'changeThemeScheme: `themeScheme` is undefined. Seems you forgot to wrap your config in `initialThemeScheme`',
-        )
+    (themeScheme: ThemeScheme) => {
+      const cleanup = config?.disableTransitionOnChange
+        ? preventTransition()
+        : undefined
 
-      const nextThemeScheme = runIfFunc(themeSchemeOrFunc, themeScheme)
+      document.documentElement.dataset.theme = themeScheme
 
-      setThemeScheme(nextThemeScheme)
+      cleanup?.()
+
+      setThemeScheme(themeScheme)
+
+      themeSchemeManager.set(themeScheme)
     },
-    [themeScheme],
+    [config, themeSchemeManager],
   )
 
   const computedTheme = useMemo(
     () => transformTheme(theme, config),
     [theme, config],
   )
+
+  useEffect(() => {
+    const managerValue = themeSchemeManager.get()
+
+    if (managerValue) changeThemeScheme(managerValue)
+  }, [changeThemeScheme, themeSchemeManager])
 
   return (
     <EmotionThemeProvider
@@ -98,7 +120,7 @@ export const CSSVars: FC = () => {
   return (
     <Global
       styles={({ __cssVars }: Dict) => ({
-        ':host, :root, [data-theme]': __cssVars,
+        ':host, :root, [data-mode]': __cssVars,
       })}
     />
   )
@@ -177,4 +199,26 @@ export const useTheme = <T extends object = Dict>() => {
   )
 
   return value
+}
+
+const preventTransition = () => {
+  const css = document.createElement('style')
+
+  const node = document.createTextNode(
+    `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
+  )
+
+  css.appendChild(node)
+
+  document.head.appendChild(css)
+
+  return () => {
+    ;(() => window.getComputedStyle(document.body))()
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.head.removeChild(css)
+      })
+    })
+  }
 }

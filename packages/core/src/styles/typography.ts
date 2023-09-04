@@ -19,7 +19,6 @@ export const typography: Configs = {
   whiteSpace: true,
   textDecorationColor: configs.color('textDecorationColor'),
   textDecoration: true,
-  textDecor: { property: 'textDecoration' },
   textDecorationLine: true,
   textDecorationStyle: true,
   textDecorationThickness: true,
@@ -39,6 +38,10 @@ export const typography: Configs = {
     transform: transforms.isTruncated,
   },
 }
+
+Object.assign(typography, {
+  textDecor: typography.textDecoration,
+})
 
 export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
   /**

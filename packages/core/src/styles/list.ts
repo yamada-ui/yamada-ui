@@ -1,14 +1,17 @@
 import type * as CSS from 'csstype'
 import { Token } from '../css'
-import { Configs, configs } from './config'
+import { Configs } from './config'
 
 export const list: Configs = {
   listStyleType: true,
   listStylePosition: true,
-  listStylePos: configs.prop('listStylePosition'),
   listStyleImage: true,
-  listStyleImg: configs.prop('listStyleImage'),
 }
+
+Object.assign(list, {
+  listStylePos: list.listStylePosition,
+  listStyleImg: list.listStyleImage,
+})
 
 export type ListProps<Y = 'responsive', M = 'colorMode'> = {
   /**

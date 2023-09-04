@@ -20,7 +20,7 @@ export const getColorModeUtils = ({
   const setDataset = (colorMode: ColorMode) => {
     const cleanup = isPreventTransition ? preventTransition() : undefined
 
-    document.documentElement.dataset.theme = colorMode
+    document.documentElement.dataset.mode = colorMode
     document.documentElement.style.colorScheme = colorMode
 
     cleanup?.()

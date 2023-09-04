@@ -5,6 +5,7 @@ import {
   ColorModeManager,
   ResetStyle,
   GlobalStyle,
+  ThemeSchemeManager,
 } from '@yamada-ui/core'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict } from '@yamada-ui/utils'
@@ -48,6 +49,15 @@ export type UIProviderProps = {
    */
   colorModeManager?: ColorModeManager
   /**
+   * Manager to persist a user's theme scheme preference.
+   *
+   * Omit if you don't render server-side.
+   * For SSR, choose `cookieStorageManager`.
+   *
+   * @default 'localStorageManager'
+   */
+  themeSchemeManager?: ThemeSchemeManager
+  /**
    * The environment `window` and `document` to be used by all components and hooks.
    *
    * By default, we smartly determine the ownerDocument and defaultView
@@ -72,12 +82,17 @@ export const UIProvider: FC<UIProviderProps> = ({
   disableResetStyle,
   disableGlobalStyle,
   colorModeManager,
+  themeSchemeManager,
   environment,
   disableEnvironment,
   children,
 }) => {
   return (
-    <ThemeProvider theme={theme} config={config}>
+    <ThemeProvider
+      theme={theme}
+      config={config}
+      themeSchemeManager={themeSchemeManager}
+    >
       <ColorModeProvider colorModeManager={colorModeManager} config={config}>
         <EnvironmentProvider
           environment={environment}

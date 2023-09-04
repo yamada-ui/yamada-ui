@@ -13,7 +13,7 @@ import {
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
 
-export type ThemeScheme = Union<string | number>
+export type ThemeScheme = Union<string>
 
 export type LoadingVariant =
   | 'oval'
@@ -206,7 +206,7 @@ export type ThemeConfig = {
    * The initial theme scheme.
    * This is only applicable if multiple themes are provided.
    */
-  initialThemeScheme?: string | number
+  initialThemeScheme?: ThemeScheme
   /**
    * The initial color mode.
    *

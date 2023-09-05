@@ -1,5 +1,20 @@
 # @yamada-ui/providers
 
+## 0.7.0
+
+### Minor Changes
+
+- [`58f48456`](https://github.com/hirotomoyamada/yamada-ui/commit/58f48456efcfbde0f28fdbc7a64ec2b4f69da6e8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added props themeSchemeManager.
+
+### Patch Changes
+
+- Updated dependencies [[`e786239e`](https://github.com/hirotomoyamada/yamada-ui/commit/e786239e3af06c75e405eb37fae0a75fbc4d6d66), [`7b0bed20`](https://github.com/hirotomoyamada/yamada-ui/commit/7b0bed2044736fe545b9a222af6788ca7005989e), [`ca826e1f`](https://github.com/hirotomoyamada/yamada-ui/commit/ca826e1fc52638af5780d94a908edde9da1ff6a1)]:
+  - @yamada-ui/core@0.6.5
+  - @yamada-ui/theme@0.6.2
+  - @yamada-ui/loading@0.3.15
+  - @yamada-ui/motion@0.3.13
+  - @yamada-ui/notice@0.3.15
+
 ## 0.6.15
 
 ### Patch Changes

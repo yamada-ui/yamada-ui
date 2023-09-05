@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 0.6.5
+
+### Patch Changes
+
+- [`e786239e`](https://github.com/hirotomoyamada/yamada-ui/commit/e786239e3af06c75e405eb37fae0a75fbc4d6d66) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [`7b0bed20`](https://github.com/hirotomoyamada/yamada-ui/commit/7b0bed2044736fe545b9a222af6788ca7005989e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that themeScheme was not saved in local storage or cookies.
+
 ## 0.6.4
 
 ### Patch Changes

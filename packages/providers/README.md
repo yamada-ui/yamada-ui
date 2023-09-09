@@ -45,10 +45,7 @@ const theme = {
 
 const config = {
   initialColorMode: "light",
-  useSystemColorMode: false,
-  var: {
-    prefix: "ui"
-  },
+  var: { prefix: "ui" },
 }
 
 // 3. Use at the root of your app

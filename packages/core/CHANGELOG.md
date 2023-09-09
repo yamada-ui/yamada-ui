@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.7.0
+
+### Minor Changes
+
+- [`8345c45b`](https://github.com/hirotomoyamada/yamada-ui/commit/8345c45b9248b8ba1acf4d258782b7c952934899) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improve system color mode handling.
+
 ## 0.6.5
 
 ### Patch Changes

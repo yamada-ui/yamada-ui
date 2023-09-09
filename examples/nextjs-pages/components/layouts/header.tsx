@@ -13,7 +13,7 @@ import { forwardRef } from 'react'
 export type HeaderProps = {}
 
 export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
-  const { colorMode, changeColorMode } = useColorMode()
+  const { internalColorMode, changeColorMode } = useColorMode()
 
   return (
     <Flex
@@ -32,11 +32,12 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
         <HStack>
           <SegmentedControl
             size='sm'
-            value={colorMode}
-            onChange={(value) => changeColorMode(value as ColorMode)}
+            value={internalColorMode}
+            onChange={(value) => changeColorMode(value as ColorMode | 'system')}
           >
             <SegmentedControlButton value='light'>Light</SegmentedControlButton>
             <SegmentedControlButton value='dark'>Dark</SegmentedControlButton>
+            <SegmentedControlButton value='system'>System</SegmentedControlButton>
           </SegmentedControl>
         </HStack>
       </HStack>

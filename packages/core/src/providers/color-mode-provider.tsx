@@ -19,47 +19,47 @@ const { localStorage } = colorModeManager
 type ColorModeContext = {
   forced?: boolean
   colorMode: ColorMode
+  internalColorMode: ColorMode | 'system'
   changeColorMode: (colorMode: ColorMode | 'system') => void
   toggleColorMode: () => void
 }
 
-const getColorMode = (manager: ColorModeManager, fallback?: ColorMode) =>
+const getColorMode = (
+  manager: ColorModeManager,
+  fallback?: ColorMode | 'system',
+) =>
   manager.type === 'cookie' && manager.ssr ? manager.get(fallback) : fallback
 
 export const ColorModeContext = createContext({} as ColorModeContext)
 
 export type ColorModeProviderProps = {
-  value?: ColorMode
+  colorMode?: ColorMode
   config?: ThemeConfig
   children?: ReactNode
   colorModeManager?: ColorModeManager
 }
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
-  value,
+  colorMode: defaultColorMode,
   colorModeManager = localStorage,
-  config: {
-    initialColorMode,
-    useSystemColorMode,
-    disableTransitionOnChange,
-  } = {
-    initialColorMode: 'light',
-    useSystemColorMode: true,
-  },
+  config: { initialColorMode = 'light', disableTransitionOnChange = true } = {},
   children,
 }) => {
-  const defaultColorMode = initialColorMode === 'dark' ? 'dark' : 'light'
-
-  const [colorMode, setColorMode] = useState<ColorMode | undefined>(() =>
-    getColorMode(colorModeManager, defaultColorMode),
+  const [colorMode, setColorMode] = useState<ColorMode | 'system' | undefined>(
+    () => getColorMode(colorModeManager, initialColorMode),
+  )
+  const [systemColorMode, setSystemColorMode] = useState<ColorMode | undefined>(
+    undefined,
   )
 
-  const [resolvedColorMode, setResolvedColorMode] = useState<
-    ColorMode | undefined
-  >(() => getColorMode(colorModeManager))
-
-  const resolvedValue =
-    initialColorMode === 'system' && !colorMode ? resolvedColorMode : colorMode
+  const defaultResolvedColorMode =
+    initialColorMode === 'dark' ? 'dark' : 'light'
+  const resolvedColorMode =
+    colorMode === 'system'
+      ? systemColorMode
+        ? systemColorMode
+        : defaultResolvedColorMode
+      : colorMode
 
   const { getSystemColorMode, setClassName, setDataset, addListener } = useMemo(
     () => getColorModeUtils({ isPreventTransition: disableTransitionOnChange }),
@@ -67,59 +67,63 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 
   const changeColorMode = useCallback(
-    (value: ColorMode | 'system'): void => {
-      const resolved = value === 'system' ? getSystemColorMode() : value
+    (colorMode: ColorMode | 'system'): void => {
+      const resolved = colorMode === 'system' ? getSystemColorMode() : colorMode
 
-      setColorMode(resolved)
+      setColorMode(colorMode)
       setClassName(resolved === 'dark')
       setDataset(resolved)
 
-      colorModeManager.set(resolved)
+      colorModeManager.set(colorMode)
     },
     [colorModeManager, getSystemColorMode, setClassName, setDataset],
   )
 
+  const changeSystemColorMode = useCallback(
+    (systemColorMode: ColorMode): void => {
+      setSystemColorMode(systemColorMode)
+
+      if (colorMode !== 'system') return
+
+      setClassName(systemColorMode === 'dark')
+      setDataset(systemColorMode)
+    },
+    [colorMode, setClassName, setDataset],
+  )
+
   const toggleColorMode = useCallback((): void => {
-    changeColorMode(resolvedValue === 'dark' ? 'light' : 'dark')
-  }, [changeColorMode, resolvedValue])
+    changeColorMode(resolvedColorMode === 'dark' ? 'light' : 'dark')
+  }, [changeColorMode, resolvedColorMode])
 
   useSafeLayoutEffect(() => {
-    if (initialColorMode === 'system')
-      setResolvedColorMode(getSystemColorMode())
-  }, [])
+    setSystemColorMode(getSystemColorMode())
+  }, [initialColorMode, addListener, changeColorMode])
 
   useEffect(() => {
     const managerValue = colorModeManager.get()
 
-    if (managerValue) {
-      changeColorMode(managerValue)
-
-      return
-    }
-
-    if (initialColorMode === 'system') {
-      changeColorMode('system')
-
-      return
-    }
-
-    changeColorMode(defaultColorMode)
-  }, [changeColorMode, colorModeManager, defaultColorMode, initialColorMode])
+    if (managerValue) changeColorMode(managerValue)
+  }, [changeColorMode, colorModeManager])
 
   useEffect(() => {
-    if (!useSystemColorMode) return
-
-    return addListener(changeColorMode)
-  }, [useSystemColorMode, addListener, changeColorMode])
+    return addListener(changeSystemColorMode)
+  }, [addListener, changeSystemColorMode])
 
   const context = useMemo(
     () => ({
-      colorMode: value ?? (resolvedValue as ColorMode),
-      changeColorMode: value ? noop : changeColorMode,
-      toggleColorMode: value ? noop : toggleColorMode,
-      forced: value !== undefined,
+      colorMode: defaultColorMode ?? (resolvedColorMode as ColorMode),
+      internalColorMode: colorMode as ColorMode | 'system',
+      changeColorMode: defaultColorMode ? noop : changeColorMode,
+      toggleColorMode: defaultColorMode ? noop : toggleColorMode,
+      forced: defaultColorMode !== undefined,
     }),
-    [value, resolvedValue, changeColorMode, toggleColorMode],
+    [
+      defaultColorMode,
+      resolvedColorMode,
+      colorMode,
+      changeColorMode,
+      toggleColorMode,
+    ],
   )
 
   return (

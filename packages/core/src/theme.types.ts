@@ -209,16 +209,11 @@ export type ThemeConfig = {
   initialThemeScheme?: ThemeScheme
   /**
    * The initial color mode.
+   * If `system`, the system will apply the color mode.
    *
    * @default 'light'
    */
   initialColorMode?: 'light' | 'dark' | 'system'
-  /**
-   * If `true`, the system will apply the color mode.
-   *
-   * @default false
-   */
-  useSystemColorMode?: boolean
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.

@@ -29,7 +29,7 @@ const hues = [
   '950',
 ]
 
-export const printComponent = (components: Record<string, Component>): string =>
+export const printComponent = (components: Record<string, Component>) =>
   `components: { ${Object.entries(components)
     .map(
       ([key, unions]) =>
@@ -39,7 +39,7 @@ export const printComponent = (components: Record<string, Component>): string =>
     )
     .join(`\n`)} }`
 
-export const print = (unions: Record<string, string[]>): string =>
+export const print = (unions: Record<string, string[]>) =>
   Object.entries(unions)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
@@ -51,11 +51,7 @@ export const print = (unions: Record<string, string[]>): string =>
     )
     .join('\n')
 
-export const extractComponents = ({
-  components = {},
-}: {
-  components: any
-}): Record<string, Component> =>
+export const extractComponents = ({ components = {} }: { components: any }) =>
   Object.entries<{ sizes?: object; variants?: object }>(components).reduce(
     (obj, [key, { sizes, variants }]) => {
       if (sizes || variants) {
@@ -70,13 +66,7 @@ export const extractComponents = ({
     {} as Record<string, Component>,
   )
 
-export const extractTransitions = (
-  theme: any,
-): {
-  transitionProperty: string[]
-  transitionDuration: string[]
-  transitionEasing: string[]
-} => {
+export const extractTransitions = (theme: any) => {
   let transitionProperty: string[] = []
   let transitionDuration: string[] = []
   let transitionEasing: string[] = []
@@ -108,7 +98,7 @@ export const extractTransitions = (
   return { transitionProperty, transitionDuration, transitionEasing }
 }
 
-const isHue = (value: any): boolean => {
+const isHue = (value: any) => {
   if (!isObject(value)) return false
 
   const keys = Object.keys(value)
@@ -116,9 +106,9 @@ const isHue = (value: any): boolean => {
   return hues.every((key) => keys.includes(key))
 }
 
-const isDefaultColor = (key: any): boolean => defaultColors.includes(key)
+const isDefaultColor = (key: any) => defaultColors.includes(key)
 
-export const extractColorSchemes = (theme: any): string[] => {
+export const extractColorSchemes = (theme: any) => {
   const { colors } = theme
 
   if (!isObject(colors)) return []
@@ -130,12 +120,19 @@ export const extractColorSchemes = (theme: any): string[] => {
   }, [] as string[])
 }
 
-export const extractPaths = (target: any, maxDepth = 3): string[] => {
-  if ((!isObject(target) && !Array.isArray(target)) || !maxDepth) return []
+export const extractPaths = (
+  target: any,
+  maxDepth = 3,
+  omitKeys: string[] = [],
+) => {
+  if ((!isObject(target) && !isArray(target)) || !maxDepth) return []
 
   return Object.entries(target).reduce((array, [key, value]) => {
-    if (isObject(value)) {
-      extractPaths(value, maxDepth - 1).forEach((nestedKey) =>
+    if (
+      isObject(value) &&
+      !Object.keys(value).some((key) => omitKeys.includes(key))
+    ) {
+      extractPaths(value, maxDepth - 1, omitKeys).forEach((nestedKey) =>
         array.push(`${key}.${nestedKey}`),
       )
     } else {
@@ -146,7 +143,7 @@ export const extractPaths = (target: any, maxDepth = 3): string[] => {
   }, [] as string[])
 }
 
-export const extractKeys = (theme: any, key: string): string[] => {
+export const extractKeys = (theme: any, key: string) => {
   const keys = key.split('.')
 
   const property = keys.reduce((obj, key) => obj[key] ?? {}, theme)
@@ -160,14 +157,20 @@ export const createThemeTypings = async (theme: any) => {
   const unions = config.reduce(
     (
       obj,
-      { key, maxScanDepth, filter = () => true, flatMap = (value) => value },
+      {
+        key,
+        maxScanDepth,
+        omitScanKeys,
+        filter = () => true,
+        flatMap = (value) => value,
+      },
     ) => {
       const target = theme[key]
 
       obj[key] = []
 
       if (isObject(target) || isArray(target)) {
-        obj[key] = extractPaths(target, maxScanDepth)
+        obj[key] = extractPaths(target, maxScanDepth, omitScanKeys)
           .filter(filter)
           .flatMap(flatMap)
       }

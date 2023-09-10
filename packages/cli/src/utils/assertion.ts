@@ -25,8 +25,6 @@ export const isObject = <T extends Dict>(obj: any): obj is T =>
 
 export const isArray = <T>(value: any): value is T[] => Array.isArray(value)
 
-export function isFunction<T extends Function = Function>(
+export const isFunction = <T extends Function = Function>(
   value: any,
-): value is T {
-  return typeof value === 'function'
-}
+): value is T => typeof value === 'function'

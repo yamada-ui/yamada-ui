@@ -1,6 +1,7 @@
 export type Config = {
   key: string
   maxScanDepth?: number
+  omitScanKeys?: string[]
   filter?: (value: string) => boolean
   flatMap?: (value: string) => string | string[]
 }
@@ -19,5 +20,6 @@ export const config: Config[] = [
   { key: 'sizes', maxScanDepth: 2 },
   { key: 'spaces', flatMap: (value) => [value, `-${value}`] },
   { key: 'zIndices' },
+  { key: 'animations', omitScanKeys: ['keyframes'] },
   { key: 'gradients' },
 ]

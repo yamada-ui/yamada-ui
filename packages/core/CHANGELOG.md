@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.8.0
+
+### Minor Changes
+
+- [`37369a9e`](https://github.com/hirotomoyamada/yamada-ui/commit/37369a9e34a9ab38390271a9f8f02ff2ae1b3462) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added animations in theme.
+
 ## 0.7.0
 
 ### Minor Changes

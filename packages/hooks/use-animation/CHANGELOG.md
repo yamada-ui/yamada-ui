@@ -1,5 +1,16 @@
 # @yamada-ui/use-animation
 
+## 0.2.0
+
+### Minor Changes
+
+- [`19ce0e61`](https://github.com/hirotomoyamada/yamada-ui/commit/19ce0e61987c3ae97a9baa65eca47543cd5ea19f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Animation can now be referenced from theme.
+
+### Patch Changes
+
+- Updated dependencies [[`37369a9e`](https://github.com/hirotomoyamada/yamada-ui/commit/37369a9e34a9ab38390271a9f8f02ff2ae1b3462)]:
+  - @yamada-ui/core@0.8.0
+
 ## 0.1.28
 
 ### Patch Changes

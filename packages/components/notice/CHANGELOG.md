@@ -1,5 +1,14 @@
 # @yamada-ui/notice
 
+## 0.3.17
+
+### Patch Changes
+
+- Updated dependencies [[`37369a9e`](https://github.com/hirotomoyamada/yamada-ui/commit/37369a9e34a9ab38390271a9f8f02ff2ae1b3462)]:
+  - @yamada-ui/core@0.8.0
+  - @yamada-ui/alert@0.3.17
+  - @yamada-ui/close-button@0.2.17
+
 ## 0.3.16
 
 ### Patch Changes

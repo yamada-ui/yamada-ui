@@ -11,7 +11,7 @@ export const withToken = () => {
       height='xs'
       bgGradient='linear(to-r, green.200, pink.500)'
       rounded='lg'
-    ></Box>
+    />
   )
 }
 
@@ -40,6 +40,6 @@ export const withBreakpoint = () => {
         md: 'linear(to-b, orange.100, purple.300)',
       }}
       rounded='lg'
-    ></Box>
+    />
   )
 }

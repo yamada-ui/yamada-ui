@@ -609,7 +609,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>0.25rem</Td>
               <Td isNumeric>4px</Td>
               <Td>
-                <Box maxW='0.25rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='0.25rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -617,7 +617,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>0.5rem</Td>
               <Td isNumeric>8px</Td>
               <Td>
-                <Box maxW='0.5rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='0.5rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -625,7 +625,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>1rem</Td>
               <Td isNumeric>16px</Td>
               <Td>
-                <Box maxW='1rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='1rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -633,7 +633,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>1.5rem</Td>
               <Td isNumeric>24px</Td>
               <Td>
-                <Box maxW='1.5rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='1.5rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -641,7 +641,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>2rem</Td>
               <Td isNumeric>32px</Td>
               <Td>
-                <Box maxW='2rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='2rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -649,7 +649,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>3rem</Td>
               <Td isNumeric>48px</Td>
               <Td>
-                <Box maxW='3rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='3rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -657,7 +657,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>4.5rem</Td>
               <Td isNumeric>72px</Td>
               <Td>
-                <Box maxW='4.5rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='4.5rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -665,7 +665,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>6rem</Td>
               <Td isNumeric>96px</Td>
               <Td>
-                <Box maxW='6rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='6rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             <Tr>
@@ -673,7 +673,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>10rem</Td>
               <Td isNumeric>160px</Td>
               <Td>
-                <Box maxW='10rem' h='9xs' bg='red.500'></Box>
+                <Box maxW='10rem' h='9xs' bg='red.500' />
               </Td>
             </Tr>
             {Object.entries(defaultTheme.spaces)
@@ -686,7 +686,7 @@ export const withStickyHeader: Story = () => {
                     <Td isNumeric>{value}</Td>
                     <Td isNumeric>{`${parseFloat(value) * 16}px`}</Td>
                     <Td>
-                      <Box maxW={value} h='9xs' bg='green.500'></Box>
+                      <Box maxW={value} h='9xs' bg='green.500' />
                     </Td>
                   </Tr>
                 )

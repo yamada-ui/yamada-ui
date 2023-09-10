@@ -101,7 +101,7 @@ export const withPlacement: Story = () => {
           src='https://avatars.githubusercontent.com/u/84060430?v=4'
         />
       </Indicator>
-      <Box></Box>
+      <Box />
       <Indicator placement='right' label={99}>
         <Avatar
           name='Hirotomo Yamada'

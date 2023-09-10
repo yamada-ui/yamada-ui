@@ -320,7 +320,10 @@ export type ThemeTokens = {
 }
 
 export type ThemeAnimationTokens = {
-  [key: string | number]: AnimationStyle | ThemeAnimationTokens
+  [key: string | number]:
+    | AnimationStyle
+    | AnimationStyle[]
+    | ThemeAnimationTokens
 }
 
 export type ThemeTransitionTokens = {

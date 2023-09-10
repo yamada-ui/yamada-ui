@@ -7,9 +7,24 @@ import { globalValues } from './utils'
 export const transform: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
 
-  const style = get<AnimationStyle | undefined>(theme, `animations.${value}`)
+  if (value.includes(',')) {
+    const values = value.split(',')
 
-  return style ?? value
+    return values.map((value: string) => {
+      value = value.trim()
+
+      const style = get<AnimationStyle | undefined>(
+        theme,
+        `animations.${value}`,
+      )
+
+      return style ?? value
+    })
+  } else {
+    const style = get<AnimationStyle | undefined>(theme, `animations.${value}`)
+
+    return style ?? value
+  }
 }
 
 export const transition: Configs = {

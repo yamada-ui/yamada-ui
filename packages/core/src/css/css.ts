@@ -118,8 +118,21 @@ export const getCSS = (options: {
 
       value = style?.transform?.(value, theme) ?? value
 
-      if (style?.isAnimation && isObject(value)) {
-        value = expandAnimation(createCSS(value, true))
+      if (style?.isAnimation) {
+        if (isObject(value)) {
+          value = expandAnimation(createCSS(value, true))
+        }
+
+        if (isArray(value)) {
+          value = value
+            .flat()
+            .map((nestedValue) =>
+              isObject(nestedValue)
+                ? expandAnimation(createCSS(nestedValue, true))
+                : nestedValue,
+            )
+            .join(', ')
+        }
       }
 
       if (style?.isProcessResult) {

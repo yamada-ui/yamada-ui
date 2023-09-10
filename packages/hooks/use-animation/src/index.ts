@@ -1,12 +1,12 @@
 import {
   css,
-  StylesProps,
-  Token,
   keyframes as emotionKeyframes,
   StyledTheme,
   useTheme,
   useColorMode,
   ColorMode,
+  AnimationStyle,
+  Theme,
 } from '@yamada-ui/core'
 import { useBoolean } from '@yamada-ui/use-boolean'
 import { useEventListener } from '@yamada-ui/use-event-listener'
@@ -17,55 +17,9 @@ import {
   runIfFunc,
   getOwnerWindow,
   getMemoizedObject as get,
+  isString,
 } from '@yamada-ui/utils'
-import type * as CSS from 'csstype'
 import { useCallback, useEffect, useRef, useState } from 'react'
-
-export type AnimationStyle = {
-  keyframes: Record<string, StylesProps<'unResponsive', 'unColorMode'>>
-  duration?: Token<
-    CSS.Property.AnimationDuration,
-    'transitionDuration',
-    'unResponsive',
-    'unColorMode'
-  >
-  timingFunction?: Token<
-    CSS.Property.AnimationTimingFunction,
-    'transitionEasing',
-    'unResponsive',
-    'unColorMode'
-  >
-  delay?: Token<
-    CSS.Property.AnimationDelay,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  iterationCount?: Token<
-    CSS.Property.AnimationIterationCount,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  direction?: Token<
-    CSS.Property.AnimationDirection,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  fillMode?: Token<
-    CSS.Property.AnimationFillMode,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  playState?: Token<
-    CSS.Property.AnimationPlayState,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-}
 
 const getValue =
   (
@@ -105,7 +59,7 @@ const transformConfig =
       return obj
     }, {} as Dict) as Omit<AnimationStyle, 'keyframes'>
 
-const createAnimation =
+const createKeyframes =
   (
     keyframes: AnimationStyle['keyframes'],
     config: Omit<AnimationStyle, 'keyframes'>,
@@ -128,31 +82,42 @@ const createAnimation =
     return `${name} ${duration} ${timingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   }
 
-export const useAnimation = (
-  styles: AnimationStyle | AnimationStyle[],
-): string => {
+const createAnimation =
+  (tokenOrObj: AnimationStyle | Theme['animations']) =>
+  (theme: StyledTheme<Dict>, colorMode: ColorMode) => {
+    let resolvedStyle: AnimationStyle | undefined
+
+    if (isString(tokenOrObj)) {
+      resolvedStyle = get(theme, `animations.${tokenOrObj}`, {})
+    } else {
+      resolvedStyle = tokenOrObj
+    }
+
+    const { keyframes = {}, ...config } = resolvedStyle ?? {}
+
+    return createKeyframes(keyframes, config)(theme, colorMode)
+  }
+
+type Styles =
+  | AnimationStyle
+  | Theme['animations']
+  | (AnimationStyle | Theme['animations'])[]
+
+export const useAnimation = (styles: Styles): string => {
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
   if (isArray(styles)) {
     return styles
-      .map((style) => {
-        const { keyframes, ...config } = style
-
-        return createAnimation(keyframes, config)(theme, colorMode)
-      })
+      .map((style) => createAnimation(style)(theme, colorMode))
       .join(', ')
   } else {
-    const { keyframes, ...config } = styles
-
-    return createAnimation(keyframes, config)(theme, colorMode)
+    return createAnimation(styles)(theme, colorMode)
   }
 }
 
 export const useDynamicAnimation = <
-  T extends
-    | Array<AnimationStyle>
-    | Record<string, AnimationStyle | AnimationStyle[]>,
+  T extends (AnimationStyle | Theme['animations'])[] | Record<string, Styles>,
 >(
   arrayOrObj: T,
   init?: keyof T | (keyof T)[],
@@ -181,22 +146,17 @@ export const useDynamicAnimation = <
     for (const [key, styles] of Object.entries(arrayOrObj)) {
       if (cache.current.has(key)) return
 
+      console.log(styles)
+
       if (isArray(styles)) {
         cache.current.set(
           key,
           styles
-            .map(({ keyframes, ...config }) =>
-              createAnimation(keyframes, config)(theme, colorMode),
-            )
+            .map((style) => createAnimation(style)(theme, colorMode))
             .join(', '),
         )
       } else {
-        const { keyframes, ...config } = styles
-
-        cache.current.set(
-          key,
-          createAnimation(keyframes, config)(theme, colorMode),
-        )
+        cache.current.set(key, createAnimation(styles)(theme, colorMode))
       }
     }
 

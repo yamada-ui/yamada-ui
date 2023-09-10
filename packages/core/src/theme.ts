@@ -17,10 +17,11 @@ export type VarTokens = Record<string, VarToken>
 
 const tokens = [
   'borders',
+  'breakpoints',
   'colors',
-  'fonts',
   'fontSizes',
   'fontWeights',
+  'fonts',
   'gradients',
   'letterSpacings',
   'lineHeights',
@@ -34,6 +35,7 @@ const tokens = [
 
 export type ThemeToken =
   | (typeof tokens)[number]
+  | 'animations'
   | 'transitions.duration'
   | 'transitions.property'
   | 'transitions.easing'
@@ -63,9 +65,7 @@ export const transformTheme = <T extends Dict>(
 }
 
 const createTokens = (theme: Dict): VarTokens => {
-  const keys = tokens as unknown as string[]
-
-  const defaultTokens = pickObject(theme, keys)
+  const defaultTokens = pickObject(theme, tokens as unknown as string[])
 
   const semanticTokens = theme.semantics ?? {}
 

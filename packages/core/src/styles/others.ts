@@ -1,35 +1,33 @@
 import { getMemoizedObject as get, Dict, StringLiteral } from '@yamada-ui/utils'
 import { Token } from '../css'
-import { Configs } from './config'
+import { Configs, Transform } from './config'
 
-const getPriority = (theme: any, token: any, css: any = {}) => {
-  const result: Dict = {}
+const transform: Transform = (value, theme, css = {}) => {
+  const resolvedCSS: Dict = {}
 
-  const obj = get<Dict>(theme, `styles.${token}`, {})
+  const style = get<Dict>(theme, `styles.${value}`, {})
 
-  for (const prop in obj) {
+  for (const prop in style) {
     const done = prop in css && css[prop] != null
 
-    if (!done) result[prop] = obj[prop]
+    if (!done) resolvedCSS[prop] = style[prop]
   }
 
-  return result
+  return resolvedCSS
 }
 
 export const others: Configs = {
   layerStyle: {
-    processResult: true,
-    transform: (value, theme, css) =>
-      getPriority(theme, `layerStyles.${value}`, css),
+    isProcessResult: true,
+    transform: (value, ...rest) => transform(`layerStyles.${value}`, ...rest),
   },
   textStyle: {
-    processResult: true,
-    transform: (value, theme, css) =>
-      getPriority(theme, `textStyles.${value}`, css),
+    isProcessResult: true,
+    transform: (value, ...rest) => transform(`textStyles.${value}`, ...rest),
   },
   apply: {
-    processResult: true,
-    transform: (value, theme, css) => getPriority(theme, value, css),
+    isProcessResult: true,
+    transform,
   },
 }
 

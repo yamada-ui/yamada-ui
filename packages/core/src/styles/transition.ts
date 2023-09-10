@@ -1,6 +1,16 @@
+import { getMemoizedObject as get } from '@yamada-ui/utils'
 import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import { AnimationStyle, Token } from '../css'
+import { Configs, Transform, configs } from './config'
+import { globalValues } from './utils'
+
+export const transform: Transform = (value, theme) => {
+  if (value == null || globalValues.has(value)) return value
+
+  const style = get<AnimationStyle | undefined>(theme, `animations.${value}`)
+
+  return style ?? value
+}
 
 export const transition: Configs = {
   transitionDelay: true,
@@ -17,7 +27,7 @@ export const transition: Configs = {
     'transitionTimingFunction',
     'transitions.easing',
   ),
-  animation: true,
+  animation: { isAnimation: true, transform },
   animationName: true,
   animationDuration: configs.prop('animationDuration', 'transitions.duration'),
   animationTimingFunction: configs.prop(
@@ -70,7 +80,7 @@ export type TransitionProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `animation` property.
    */
-  animation?: Token<CSS.Property.Animation, unknown, Y, M>
+  animation?: Token<CSS.Property.Animation, 'animations', Y, M>
   /**
    * The CSS `animation-name` property.
    */

@@ -53,10 +53,10 @@ export const analyzeCSSValue = (value: any) => {
 
 export const tokenToCSSVar =
   (token: ThemeToken, value: any) => (theme: StyledTheme<Dict>) => {
-    token = `${token}.${value}` as ThemeToken
+    const resolvedToken = `${token}.${value}`
 
-    if (isObject(theme.__cssMap) && token in theme.__cssMap) {
-      return theme.__cssMap[token].ref
+    if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
+      return theme.__cssMap[resolvedToken].ref
     } else {
       return value
     }

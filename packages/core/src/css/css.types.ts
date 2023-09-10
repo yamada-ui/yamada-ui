@@ -102,6 +102,52 @@ export type UIMultiStyle =
   | Record<string, UIStyle>
   | ((props: UIStyleProps) => Record<string, UIStyle>)
 
+export type AnimationStyle = {
+  keyframes: Record<string, StylesProps<'unResponsive', 'unColorMode'>>
+  duration?: Token<
+    CSS.Property.AnimationDuration,
+    'transitionDuration',
+    'unResponsive',
+    'unColorMode'
+  >
+  timingFunction?: Token<
+    CSS.Property.AnimationTimingFunction,
+    'transitionEasing',
+    'unResponsive',
+    'unColorMode'
+  >
+  delay?: Token<
+    CSS.Property.AnimationDelay,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+  iterationCount?: Token<
+    CSS.Property.AnimationIterationCount,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+  direction?: Token<
+    CSS.Property.AnimationDirection,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+  fillMode?: Token<
+    CSS.Property.AnimationFillMode,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+  playState?: Token<
+    CSS.Property.AnimationPlayState,
+    unknown,
+    'unResponsive',
+    'unColorMode'
+  >
+}
+
 export type FunctionCSSInterpolation = {
   (theme: StyledTheme<Dict>): CSSUIProps
 }

@@ -4,6 +4,7 @@ import type { Variants } from 'framer-motion'
 import { ReactNode } from 'react'
 import {
   UIStyle,
+  AnimationStyle,
   ThemeProps,
   AnalyzeBreakpointsReturn,
   CSSUIProps,
@@ -318,6 +319,16 @@ export type ThemeTokens = {
     | ThemeTokens
 }
 
+export type ThemeAnimationTokens = {
+  [key: string | number]: AnimationStyle | ThemeAnimationTokens
+}
+
+export type ThemeTransitionTokens = {
+  property?: ThemeTokens
+  duration?: ThemeTokens
+  easing?: ThemeTokens
+}
+
 export type UsageTheme = {
   styles?: {
     globalStyle?: UIStyle
@@ -340,11 +351,8 @@ export type UsageTheme = {
   spaces?: ThemeTokens
   zIndices?: ThemeTokens
   gradients?: ThemeTokens
-  transitions?: {
-    property?: ThemeTokens
-    duration?: ThemeTokens
-    easing?: ThemeTokens
-  }
+  animations?: ThemeAnimationTokens
+  transitions?: ThemeTransitionTokens
   components?: Components
   semantics?: Semantics
   [key: string]: any

@@ -1,3 +1,4 @@
+import { animations } from './animations'
 import { borders } from './borders'
 import { breakpoints } from './breakpoints'
 import { colors } from './colors'
@@ -15,19 +16,20 @@ import { transitions } from './transitions'
 import { zIndices } from './z-indices'
 
 export default {
-  gradients,
+  animations,
   borders,
   breakpoints,
   colors,
   fontSizes,
   fontWeights,
   fonts,
+  gradients,
   letterSpacings,
   lineHeights,
   radii,
   shadows,
   sizes,
   spaces,
-  zIndices,
   transitions,
+  zIndices,
 }

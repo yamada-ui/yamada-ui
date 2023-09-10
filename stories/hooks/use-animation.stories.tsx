@@ -40,7 +40,7 @@ export const basic = () => {
     timingFunction: 'linear',
   })
 
-  return <Box w='full' h='xs' animation={animation}></Box>
+  return <Box w='full' h='xs' animation={animation} />
 }
 
 export const pseudo = () => {
@@ -156,7 +156,7 @@ export const withMulti = () => {
     },
   ])
 
-  return <Box w='full' h='xs' animation={animation}></Box>
+  return <Box w='full' h='xs' animation={animation} />
 }
 
 export const withDynamic = () => {

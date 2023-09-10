@@ -21,8 +21,9 @@ export type Transform = (
 
 export type ConfigProps = {
   static?: CSSObject
-  processResult?: boolean
-  property?:
+  isProcessResult?: boolean
+  isAnimation?: boolean
+  properties?:
     | CSSProperties
     | CSSProperties[]
     | ((theme: StyledTheme<Dict>) => CSSProperties)
@@ -54,9 +55,9 @@ export const createTransform =
 
 export const createConfig =
   (token: ThemeToken, transform?: Transform) =>
-  <T extends CSSProperties>(property: T | T[]): ConfigProps => ({
+  <T extends CSSProperties>(properties: T | T[]): ConfigProps => ({
     token,
-    property,
+    properties,
     transform: createTransform({
       token,
       transform,
@@ -103,7 +104,6 @@ export const transforms = {
       return value
     }
   },
-
   gradient: createGradient,
 }
 
@@ -116,25 +116,25 @@ export const configs = {
   size: createConfig('sizes', transforms.px),
   sizeTransform: createConfig('sizes', transforms.fraction),
   prop: (
-    property: ConfigProps['property'],
+    properties: ConfigProps['properties'],
     token?: ThemeToken,
     transform?: ConfigProps['transform'],
   ) =>
     token
       ? {
-          property,
+          properties,
           token,
           transform: createTransform({ token, transform }),
         }
       : {
-          property,
+          properties,
           token,
         },
   propTransform: (
-    property: ConfigProps['property'],
+    properties: ConfigProps['properties'],
     transform?: ConfigProps['transform'],
   ) => ({
-    property,
+    properties,
     transform,
   }),
   gradient: createConfig('gradients', transforms.gradient),

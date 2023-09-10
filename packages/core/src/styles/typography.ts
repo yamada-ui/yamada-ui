@@ -32,7 +32,7 @@ export const typography: Configs = {
       WebkitBoxOrient: 'vertical',
       WebkitLineClamp: 'var(--ui-line-clamp)',
     },
-    property: '--ui-line-clamp',
+    properties: '--ui-line-clamp',
   },
   isTruncated: {
     transform: transforms.isTruncated,

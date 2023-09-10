@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.4.0
+
+### Minor Changes
+
+- [`15076c8b`](https://github.com/hirotomoyamada/yamada-ui/commit/15076c8b0c99cfe7743ec5d3ea5bbf556bd782cd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added animations.
+
 ## 0.3.2
 
 ### Patch Changes

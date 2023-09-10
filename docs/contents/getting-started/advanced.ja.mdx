@@ -200,11 +200,23 @@ function Demo() {
 
 ```tsx
 function Demo() {
-  const { colorMode } = useColorMode()
+  const { colorMode, internalColorMode } = useColorMode()
 
-  return <Box p='md'> The current colorMode is "{colorMode}"</Box>
+  return (
+    <Box p='md'>
+      The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+    </Box>
+  )
 }
 ```
+
+<Alert status='info'>
+  <AlertIcon />
+  <List>
+    <ListItem> `colorMode`は、現在の`light`と`dark`を返します。</ListItem>
+    <ListItem> `internalColorMode`は、現在の`light`と`dark`または`system`を返します。</ListItem>
+  </List>
+</Alert>
 
 ### `useColorModeValue`を使ってみましょう
 

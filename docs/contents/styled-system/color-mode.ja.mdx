@@ -12,7 +12,7 @@ Yamada UIのすべてのコンポーネントは、ダークモードをサポ�
 
 ダークモードを正しく動作させるには、次の2つのことを行う必要があります。
 
-1. コンフィグに`initialColorMode`と`useSystemColorMode`を設定する。
+1. コンフィグに`initialColorMode`を設定する。
 2. `ColorModeScript`をアプリケーションに追加する。
 
 ### コンフィグをカスタマイズする
@@ -24,7 +24,6 @@ Yamada UIのすべてのコンポーネントは、ダークモードをサポ�
 ```ts title=config.ts
 export const config: ThemeConfig = {
   initialColorMode: 'light',
-  useSystemColorMode: false,
 }
 ```
 
@@ -32,19 +31,13 @@ export const config: ThemeConfig = {
 
   - `light`: ライトモード。
   - `dark`: ダークモード。
-  - `system`: `mathMedia`を用いて計算します。
-
-- `useSystemColorMode`: オペレーションシステム(OS)からカラーモードの変更をサブスクライブします。
-
-  - `true`: サブスクライブを有効にします。
-  - `false`: サブスクライブを無効にします。
+  - `system`: オペレーションシステム(OS)からカラーモードを取得します。
 
 ```tsx live=false
 import { UIProvider, extendConfig } from '@yamada-ui/react'
 
 export const config: ThemeConfig = {
   initialColorMode: 'system',
-  useSystemColorMode: true,
 }
 
 const customConfig = extendConfig(config)
@@ -192,6 +185,9 @@ function Demo() {
       <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
         ダークモード
       </Button>
+      <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
+        システム
+      </Button>
       <Button colorScheme='gray' onClick={toggleColorMode}>
         {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
       </Button>
@@ -210,11 +206,23 @@ Yamada UIには、カラーモードの便利なカスタムフックを提供�
 
 ```tsx
 function Demo() {
-  const { colorMode } = useColorMode()
+  const { colorMode, internalColorMode } = useColorMode()
 
-  return <Box p='md'> The current colorMode is "{colorMode}"</Box>
+  return (
+    <Box p='md'>
+      The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+    </Box>
+  )
 }
 ```
+
+<Alert status='info'>
+  <AlertIcon />
+  <List>
+    <ListItem> `colorMode`は、現在の`light`と`dark`を返します。</ListItem>
+    <ListItem> `internalColorMode`は、現在の`light`と`dark`または`system`を返します。</ListItem>
+  </List>
+</Alert>
 
 ### `useColorModeValue`を使う
 

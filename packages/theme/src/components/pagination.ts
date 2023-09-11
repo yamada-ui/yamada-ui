@@ -8,6 +8,9 @@ export const Pagination: ComponentMultiStyle = {
         cursor: 'not-allowed',
       },
     },
+    inner: {
+      flex: 1,
+    },
     item: {
       px: 1,
       userSelect: 'none',
@@ -152,6 +155,7 @@ export const Pagination: ComponentMultiStyle = {
     },
     unstyled: {
       container: { gap: 0 },
+      inner: { gap: 0 },
       item: { bg: 'none', color: 'inherit', minW: 'auto', minH: 'auto' },
     },
   },
@@ -159,6 +163,9 @@ export const Pagination: ComponentMultiStyle = {
   sizes: {
     xs: {
       container: {
+        gap: 'xs',
+      },
+      inner: {
         gap: 'xs',
       },
       item: {
@@ -171,6 +178,9 @@ export const Pagination: ComponentMultiStyle = {
       container: {
         gap: 'xs',
       },
+      inner: {
+        gap: 'xs',
+      },
       item: {
         minW: 7,
         minH: 7,
@@ -179,6 +189,9 @@ export const Pagination: ComponentMultiStyle = {
     },
     md: {
       container: {
+        gap: 'sm',
+      },
+      inner: {
         gap: 'sm',
       },
       item: {
@@ -191,6 +204,9 @@ export const Pagination: ComponentMultiStyle = {
       container: {
         gap: 'sm',
       },
+      inner: {
+        gap: 'sm',
+      },
       item: {
         minW: 10,
         minH: 10,
@@ -199,6 +215,9 @@ export const Pagination: ComponentMultiStyle = {
     },
     xl: {
       container: {
+        gap: 'md',
+      },
+      inner: {
         gap: 'md',
       },
       item: {

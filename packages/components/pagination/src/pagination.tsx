@@ -34,6 +34,10 @@ type PaginationOptions = {
    */
   withControls?: Token<boolean>
   /**
+   * Props for inner element.
+   */
+  innerProps?: HTMLUIProps<'div'>
+  /**
    * Props for control button element.
    */
   controlProps?: HTMLUIProps<'button'>
@@ -81,6 +85,7 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
     itemProps,
     withControls = true,
     withEdges = false,
+    innerProps,
     controlProps,
     controlPrevProps,
     controlNextProps,
@@ -136,7 +141,15 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
         className={cx('ui-pagination', className)}
         role='navigation'
         __css={css}
-        {...omitObject(rest, ['onChange'])}
+        {...omitObject(rest, [
+          'page',
+          'defaultPage',
+          'total',
+          'siblings',
+          'boundaries',
+          'isDisabled',
+          'onChange',
+        ])}
         data-disabled={dataAttr(isDisabled)}
       >
         {computedWithEdges ? (
@@ -169,7 +182,18 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
           />
         ) : null}
 
-        {children}
+        <ui.div
+          className='ui-pagination-inner'
+          __css={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            ...styles.inner,
+          }}
+          {...innerProps}
+        >
+          {children}
+        </ui.div>
 
         {computedWithControls ? (
           <Component

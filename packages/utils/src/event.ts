@@ -66,14 +66,14 @@ export const addDomEvent = (
 
 const filter =
   (cb: EventListener): EventListener =>
-  (event: Event) => {
-    const isMouse = isMouseEvent(event)
+  (ev: Event) => {
+    const isMouse = isMouseEvent(ev)
 
-    if (!isMouse || (isMouse && event.button === 0)) cb(event)
+    if (!isMouse || (isMouse && ev.button === 0)) cb(ev)
   }
 
 const wrap = (cb: MixedEventListener, filterPrimary = false): EventListener => {
-  const listener = (event: any) => cb(event, { point: getEventPoint(event) })
+  const listener = (ev: any) => cb(ev, { point: getEventPoint(ev) })
 
   const fn = filterPrimary ? filter(listener) : listener
 

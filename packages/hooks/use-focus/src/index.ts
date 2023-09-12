@@ -120,9 +120,9 @@ export const useFocusOnPointerDown = ({
 }: UseFocusOnMouseDownProps) => {
   const doc = () => ref.current?.ownerDocument ?? document
 
-  useEventListener(doc, 'pointerdown', (event) => {
+  useEventListener(doc, 'pointerdown', (ev) => {
     if (!isSafari() || !enabled) return
-    const target = event.target as HTMLElement
+    const target = ev.target as HTMLElement
 
     const els = elements ?? [ref]
 
@@ -132,7 +132,7 @@ export const useFocusOnPointerDown = ({
     })
 
     if (doc().activeElement !== target && isValidTarget) {
-      event.preventDefault()
+      ev.preventDefault()
 
       target.focus()
     }

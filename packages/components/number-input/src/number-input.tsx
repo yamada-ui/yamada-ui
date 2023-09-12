@@ -109,6 +109,8 @@ export type UseNumberInputProps = UseFormControlProps<HTMLInputElement> &
     clampValueOnBlur?: boolean
     /**
      * If `true`, the input's value will change based on mouse wheel.
+     *
+     * @default false
      */
     allowMouseWheel?: boolean
     /**
@@ -179,6 +181,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const onFocus = useCallbackRef(
     handlerAll(rest.onFocus, (ev) => {
       setFocused(true)
+
+      console.log(inputSelectionRef)
 
       if (!inputSelectionRef.current) return
 
@@ -266,18 +270,16 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   }, [cast, max, min, setValue, value, valueAsNumber])
 
   const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const evt = event.nativeEvent as InputEvent
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      if ((ev.nativeEvent as InputEvent).isComposing) return
 
-      if (evt.isComposing) return
-
-      const parsedInput = parse(event.currentTarget.value)
+      const parsedInput = parse(ev.currentTarget.value)
 
       update(sanitize(parsedInput))
 
       inputSelectionRef.current = {
-        start: event.currentTarget.selectionStart,
-        end: event.currentTarget.selectionEnd,
+        start: ev.currentTarget.selectionStart,
+        end: ev.currentTarget.selectionEnd,
       }
     },
     [parse, update, sanitize],

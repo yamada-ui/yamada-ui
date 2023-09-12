@@ -159,8 +159,8 @@ export const useClickable = ({
   )
 
   const onDocumentMouseUp = useCallback(
-    (event: MouseEvent) => {
-      if (event.button !== 0) return
+    (ev: MouseEvent) => {
+      if (ev.button !== 0) return
 
       setIsPressed(false)
 

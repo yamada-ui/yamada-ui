@@ -19,8 +19,8 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, 'button'>(
         ref={ref}
         className={cx('ui-popover-close-button')}
         __css={css}
-        onClick={handlerAll(onClick, (event) => {
-          event.stopPropagation()
+        onClick={handlerAll(onClick, (ev) => {
+          ev.stopPropagation()
           onClose?.()
         })}
         size='sm'

@@ -247,8 +247,8 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
     )
 
     const onKeyDown = useCallback(
-      (event: KeyboardEvent) =>
-        isOpen && event.key === 'Escape' ? closeWithDelay() : undefined,
+      (ev: KeyboardEvent) =>
+        isOpen && ev.key === 'Escape' ? closeWithDelay() : undefined,
       [isOpen, closeWithDelay],
     )
 

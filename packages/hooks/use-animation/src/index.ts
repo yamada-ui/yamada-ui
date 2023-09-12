@@ -235,11 +235,11 @@ export const useAnimationObserver = ({
     present: !hidden,
     onAnimationComplete() {
       const ownerWindow = getOwnerWindow(ref.current)
-      const event = new ownerWindow.CustomEvent('animationend', {
+      const ev = new ownerWindow.CustomEvent('animationend', {
         bubbles: true,
       })
 
-      ref.current?.dispatchEvent(event)
+      ref.current?.dispatchEvent(ev)
     },
   }
 }

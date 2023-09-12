@@ -97,13 +97,13 @@ export const createStorage = <T>(type: StorageType, name: string) => {
       setValue(defaultValue as T)
     }, [defaultValue, key])
 
-    useWindowEvent('storage', (event) => {
-      if (event.storageArea === window[type] && event.key === key)
-        setValue(deserialize(event.newValue ?? undefined))
+    useWindowEvent('storage', (ev) => {
+      if (ev.storageArea === window[type] && ev.key === key)
+        setValue(deserialize(ev.newValue ?? undefined))
     })
 
-    useWindowEvent(eventName, (event) => {
-      if (event.detail.key === key) setValue(event.detail.value)
+    useWindowEvent(eventName, (ev) => {
+      if (ev.detail.key === key) setValue(ev.detail.value)
     })
 
     useEffect(() => {

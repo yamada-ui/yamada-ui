@@ -36,8 +36,8 @@ export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
         className={cx('ui-modal-overlay', className)}
         custom={{ duration }}
         __css={css}
-        onClick={handlerAll(onClick, onOverlayClick, (event) => {
-          event.stopPropagation()
+        onClick={handlerAll(onClick, onOverlayClick, (ev) => {
+          ev.stopPropagation()
           if (closeOnOverlay) onClose?.()
         })}
         {...props}

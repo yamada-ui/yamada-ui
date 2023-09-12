@@ -89,12 +89,12 @@ export const useImage = ({
     if (sizes) img.sizes = sizes
     if (loading) img.loading = loading
 
-    img.onload = (event) => {
+    img.onload = (ev) => {
       flush()
 
       setStatus('loaded')
 
-      onLoad?.(event as unknown as SyntheticEvent<HTMLImageElement, Event>)
+      onLoad?.(ev as unknown as SyntheticEvent<HTMLImageElement, Event>)
     }
 
     img.onerror = (error) => {

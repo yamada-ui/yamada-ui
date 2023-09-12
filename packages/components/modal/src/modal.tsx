@@ -194,10 +194,10 @@ export const Modal = forwardRef<ModalProps, 'section'>(
     } = omitThemeProps(mergedProps)
 
     const onKeyDown = useCallback(
-      (event: KeyboardEvent) => {
-        if (event.key !== 'Escape') return
+      (ev: KeyboardEvent) => {
+        if (ev.key !== 'Escape') return
 
-        event.stopPropagation()
+        ev.stopPropagation()
 
         if (closeOnEsc) onClose?.()
 

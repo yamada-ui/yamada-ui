@@ -19,8 +19,8 @@ export const ModalCloseButton = forwardRef<ModalCloseButtonProps, 'button'>(
         ref={ref}
         className={cx('ui-modal-close-button')}
         __css={css}
-        onClick={handlerAll(onClick, (event) => {
-          event.stopPropagation()
+        onClick={handlerAll(onClick, (ev) => {
+          ev.stopPropagation()
           onClose?.()
         })}
         {...rest}

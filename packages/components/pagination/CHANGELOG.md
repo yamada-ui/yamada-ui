@@ -1,5 +1,11 @@
 # @yamada-ui/pagination
 
+## 0.3.0
+
+### Minor Changes
+
+- [`0ca89b7f`](https://github.com/hirotomoyamada/yamada-ui/commit/0ca89b7f7d0921846b67235e0cb4907c6abc9c3c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added innerProps for custom styling.
+
 ## 0.2.17
 
 ### Patch Changes

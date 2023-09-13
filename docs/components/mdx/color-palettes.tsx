@@ -64,6 +64,11 @@ export type ColorPaletterContainerProps = GridProps
 
 export const ColorPaletterContainer: FC<ColorPaletterContainerProps> = ({ ...rest }) => {
   return (
-    <Grid my='6' templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap='4' {...rest}></Grid>
+    <Grid
+      my='6'
+      templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(2, 1fr)', sm: 'repeat(1, 1fr)' }}
+      gap='4'
+      {...rest}
+    ></Grid>
   )
 }

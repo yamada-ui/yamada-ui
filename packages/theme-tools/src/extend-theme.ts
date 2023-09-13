@@ -9,7 +9,7 @@ import {
   UIStyle,
   UIStyleProps,
 } from '@yamada-ui/core'
-import { defaultTheme } from '@yamada-ui/theme'
+import { baseTheme, defaultTheme } from '@yamada-ui/theme'
 import {
   Dict,
   merge as mergeObject,
@@ -26,23 +26,22 @@ type Options = {
   pick?: (keyof typeof defaultTheme)[]
 }
 
-export const extendTheme =
+const createExtendTheme =
+  (initialTheme: Dict = defaultTheme) =>
   (...extensions: (UsageTheme | ((theme: UsageTheme) => UsageTheme))[]) =>
   ({ merge = true, pick = [], omit = [] }: Options = {}): Dict => {
     let overrides = [...extensions]
     let theme = extensions[extensions.length - 1]
 
-    let computedTheme: Dict = defaultTheme
-
-    if (omit.length) computedTheme = omitObject(computedTheme, omit)
-    if (pick.length) computedTheme = pickObject(computedTheme, pick)
+    if (omit.length) initialTheme = omitObject(initialTheme, omit)
+    if (pick.length) initialTheme = pickObject(initialTheme, pick)
 
     if (!isFunction(theme) && overrides.length > 1) {
       overrides = overrides.slice(0, overrides.length - 1)
 
-      if (merge) theme = mergeObject(computedTheme, theme)
+      if (merge) theme = mergeObject(initialTheme, theme)
     } else {
-      theme = merge ? computedTheme : {}
+      theme = merge ? initialTheme : {}
     }
 
     return overrides.reduce(
@@ -50,6 +49,9 @@ export const extendTheme =
       theme as Dict,
     )
   }
+
+export const extendTheme = createExtendTheme(defaultTheme)
+export const extendBaseTheme = createExtendTheme(baseTheme)
 
 export const extendToken = (
   token: ThemeToken,

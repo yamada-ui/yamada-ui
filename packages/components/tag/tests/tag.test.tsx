@@ -24,6 +24,7 @@ describe('<Tag />', () => {
     )
 
     expect(getByTestId('tag').lastChild).toBeInTheDocument()
+
     expect(getByTestId('tag').lastChild).toHaveAttribute('aria-label')
   })
 })

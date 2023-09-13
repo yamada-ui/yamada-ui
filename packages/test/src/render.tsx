@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/extend-expect'
 import { render as reactRender, RenderOptions } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { UIProvider } from '@yamada-ui/providers'

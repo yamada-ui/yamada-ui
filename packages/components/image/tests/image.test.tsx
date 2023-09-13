@@ -1,6 +1,7 @@
 import { render, act, screen, a11y } from '@yamada-ui/test'
 import React from 'react'
 import { Image } from '../src'
+import '@testing-library/jest-dom'
 
 const src = 'https://image.xyz/source'
 const fallback = 'https://image.xyz/placeholder'

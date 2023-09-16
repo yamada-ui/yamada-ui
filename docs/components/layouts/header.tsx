@@ -65,7 +65,7 @@ export const Header = memo(
           top='0'
           left='0'
           right='0'
-          zIndex='zarbon'
+          zIndex='ginyu'
           {...rest}
         >
           <HStack w='full' maxW='9xl' py='3' px={{ base: 'lg', md: 'md' }}>

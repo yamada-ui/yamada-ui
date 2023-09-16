@@ -59,7 +59,7 @@ const App = () => {
 
 #### Create React Appの場合
 
-```tsx live=false title=index.tsx highlight={10,12}
+```tsx live=false title=index.tsx highlight={3,11}
 import { createRoot } from 'react-dom/client'
 import { App } from './app'
 import { UIProvider, ColorModeScript, defaultConfig } from '@yamada-ui/react'
@@ -86,7 +86,7 @@ root.render(
 
 #### Next.jsの場合
 
-```tsx live=false title=_document.tsx highlight={10}
+```tsx live=false title=_document.tsx highlight={2,10}
 import { Html, Head, Main, NextScript } from 'next/document'
 import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
 
@@ -107,7 +107,7 @@ export default function Document() {
 
 プロジェクトによっては、`cookies`から値を取得する場合があるかもしれません。その場合は、`cookieStorageManager`を使用します。
 
-```tsx live=false title=_document.tsx highlight={11,12}
+```tsx live=false title=_document.tsx highlight={2,11,12}
 import { Html, Head, Main, NextScript } from 'next/document'
 import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
 
@@ -130,7 +130,7 @@ export default function Document() {
 }
 ```
 
-```tsx live=false title=_app.tsx highlight={6}
+```tsx live=false title=_app.tsx highlight={2,4,8}
 import type { AppProps } from 'next/app'
 import { UIProvider, colorModeManager } from '@yamada-ui/react'
 
@@ -184,7 +184,7 @@ export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => 
 
 `UIProvider`の`colorModeManager`に`cookieStorageSSR`を渡します。
 
-```tsx live=false title=_app.tsx
+```tsx live=false title=_app.tsx highlight={2,4,7,8,11}
 import type { AppProps } from 'next/app'
 import { UIProvider, colorModeManager } from '@yamada-ui/react'
 

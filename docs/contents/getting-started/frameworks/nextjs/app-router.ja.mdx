@@ -80,8 +80,10 @@ Yamada UIをインストール後、`UIProvider`と`CacheProvider`と`ColorModeS
 ```tsx live=false title=layout.tsx highlight={10,12,13,14}
 'use client'
 
-import { cookieStorageManager, UIProvider, ColorModeScript } from '@yamada-ui/react'
+import { colorModeManager, UIProvider, ColorModeScript } from '@yamada-ui/react'
 import { CacheProvider } from '@yamada-ui/nextjs'
+
+const { cookieStorageManager } = colorModeManager
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

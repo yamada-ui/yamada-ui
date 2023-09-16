@@ -132,7 +132,9 @@ export default function Document() {
 
 ```tsx live=false title=_app.tsx highlight={6}
 import type { AppProps } from 'next/app'
-import { UIProvider, cookieStorageManager } from '@yamada-ui/react'
+import { UIProvider, colorModeManager } from '@yamada-ui/react'
+
+const { cookieStorageManager } = colorModeManager
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -152,6 +154,68 @@ export default function App({ Component, pageProps }: AppProps) {
   <AlertIcon />
   App Routerの場合は、[こちら](/docs/getting-started/frameworks/nextjs/app-router#uiprovidercacheprovidercolormodescriptを追加する)をご覧ください。
 </Alert>
+
+## `colorModeManager`を追加する
+
+Next.jsなどのサーバー側でレンダリングされるサイトの場合は、カラーモードがハイドレーション中に変更することを避けるために、リクエストにカラーモードを含めたい場合があります。
+
+<Alert status='info'>
+  <AlertIcon />
+  サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
+</Alert>
+
+### `getServerSideProps`を用意する
+
+複数のページで`getServerSideProps`を共通化するために、`getServerSideCommonProps`を定義します。
+
+```ts live=false
+import { GetServerSidePropsContext } from 'next'
+
+export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? '',
+    },
+  }
+}
+```
+
+### `cookieStorageSSR`を渡す
+
+`UIProvider`の`colorModeManager`に`cookieStorageSSR`を渡します。
+
+```tsx live=false title=_app.tsx
+import type { AppProps } from 'next/app'
+import { UIProvider, colorModeManager } from '@yamada-ui/react'
+
+const { cookieStorageSSR, localStorage } = colorModeManager
+
+export default function App({ Component, pageProps }: AppProps) {
+  const { cookies } = pageProps
+  const colorModeManager = typeof cookies === 'string' ? cookieStorageSSR(cookies) : localStorage
+
+  return (
+    <UIProvider colorModeManager={colorModeManager}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+### `getServerSideProps`を追加する
+
+先ほど作成した`getServerSideCommonProps`を各ページに追加します。
+
+```tsx live=false title=index.tsx highlight={1,8}
+import { getServerSideCommonProps } from '../get-server-side-props.ts'
+import { Button } from '@yamada-ui/react'
+
+export default function Index() {
+  return <Button>Click me!</Button>
+}
+
+export const getServerSideProps = getServerSideCommonProps
+```
 
 ## カラーモードの構文
 

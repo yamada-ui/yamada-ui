@@ -8,7 +8,7 @@ order: 2
 
 <Alert status='warning'>
   <AlertIcon />
-  テーマをカスタマイズする場合は、`extendTheme`を使用することをオススメします。これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したコンフィグを作成します。`extendTheme`を使用しない場合は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承しないので、全く新しいコンフィグになります。
+  テーマをカスタマイズする場合は、`extendTheme`を使用することをオススメします。これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
 </Alert>
 
 <Alert status='info'>
@@ -344,6 +344,28 @@ const customTheme: UsageTheme = {}
 
 export default extendTheme(customTheme)({ pick: ['spaces'] })
 ```
+
+### `extendBaseTheme`を使う
+
+デフォルトのテーマのグローバルスタイルやカラーなどのトークンのみを継承して、新しいテーマを作成します。複数のオブジェクトを渡すことも可能です。また、オプションを指定することも可能です。
+
+```ts title=./theme/index.ts highlight={12}
+import { extendBaseTheme, UsageTheme } from '@yamada-ui/react'
+import styles from './styles'
+import tokens from './tokens'
+
+const customTheme: UsageTheme = {
+  styles,
+  ...tokens,
+}
+
+export default extendBaseTheme(customTheme)()
+```
+
+<Alert status='info'>
+  <AlertIcon />
+  `extendBaseTheme`は、内部的に`baseTheme`を使用しています。`baseTheme`は、グローバルスタイルやカラーなどのトークンは定義されていますが、コンポーネントのスタイルが定義されていません。
+</Alert>
 
 ### `extendStyle`を使う
 

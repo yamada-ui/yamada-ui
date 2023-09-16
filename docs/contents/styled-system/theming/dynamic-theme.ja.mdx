@@ -1,17 +1,25 @@
 ---
-title: 動的にテーマを切り替える
-description: ユーザーが動的にテーマを切り替える方法。
+title: テーマを切り替える
+description: ユーザーがテーマを切り替える方法。
 order: 5
 ---
 
-Yamada UIは、ユーザーが動的にテーマを切り替え可能にする機能があります。
+Yamada UIは、ユーザーがテーマを切り替え可能にする機能があります。
 
 <Alert status='info'>
   <AlertIcon />
   この機能を有効にするには、複数のテーマを用意する必要があります。
 </Alert>
 
-## 複数のテーマを用意する
+## セットアップ
+
+ユーザーがテーマを切り替えるには、次の2つのことを行う必要があります。
+
+1. 複数のテーマを用意する
+2. コンフィグに`initialThemeScheme`を設定する。
+3. `ThemeSchemeScript`をアプリケーションに追加する。
+
+### 複数のテーマを用意する
 
 今回は、複数のテーマを新しく用意するのはコストが掛かるためデフォルトのテーマからカラーを変更したテーマを複数用意します。
 
@@ -20,9 +28,40 @@ Yamada UIは、ユーザーが動的にテーマを切り替え可能にする�
   テーマのカスタマイズの仕方が分からない場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
 </Alert>
 
-`extendTheme`を使って複数のテーマを作成し、コンフィグの`initialThemeScheme`に初期値を設定します。
-
 ```tsx live=false
+import { defaultTheme, extendTheme } from '@yamada-ui/react'
+
+const pinkTheme = extendTheme({
+  colors: {
+    primary: '#ec4899',
+  },
+})()
+
+const purpleTheme = extendTheme({
+  colors: {
+    primary: '#a855f7',
+  },
+})()
+
+const greenTheme = extendTheme({
+  colors: {
+    primary: '#22c55e',
+  },
+})()
+
+export const theme = {
+  default: defaultTheme,
+  pink: pinkTheme,
+  purple: purpleTheme,
+  green: greenTheme,
+}
+```
+
+### コンフィグをカスタマイズする
+
+コンフィグの`initialThemeScheme`に初期値を設定します。
+
+```tsx live=false highlight={1,28,29,30,34}
 import { defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
 
 const pinkTheme = extendTheme({
@@ -43,91 +82,181 @@ const greenTheme = extendTheme({
   },
 })()
 
-const theme = {
+export const theme = {
   default: defaultTheme,
   pink: pinkTheme,
   purple: purpleTheme,
   green: greenTheme,
 }
 
-const config = extendConfig({
+export const config = extendConfig({
   initialThemeScheme: 'default',
 })
 ```
 
-また、配列にすることも可能です。その場合は、`initialThemeScheme`の初期値にインデックスを指定します。
+### `ThemeSchemeScript`を追加する
 
-```tsx live=false
-import { defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
+テーマを正常に切り替えるには、`body`内に`ThemeSchemeScript`を追加する必要があります。
 
-const pinkTheme = extendTheme({
-  colors: {
-    primary: '#ec4899',
-  },
-})()
+理由は、テーマの切り替えが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
-const purpleTheme = extendTheme({
-  colors: {
-    primary: '#a855f7',
-  },
-})()
+#### Create React Appの場合
 
-const greenTheme = extendTheme({
-  colors: {
-    primary: '#22c55e',
-  },
-})()
+```tsx live=false title=index.tsx highlight={3,4,12,14}
+import { createRoot } from 'react-dom/client'
+import { App } from './app'
+import { UIProvider, ThemeSchemeScript } from '@yamada-ui/react'
+import { theme, config } from './theme'
 
-const theme = [defaultTheme, pinkTheme, purpleTheme, greenTheme]
+const container = document.getElementById('app')
 
-const config = extendConfig({
-  initialThemeScheme: 0,
-})
-```
+const root = createRoot(container!)
 
-## `UIProvider`にテーマを追加する
+root.render(
+  <>
+    <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
 
-作成したテーマとコンフィグを`UIProvider`に渡します。
-
-```tsx live=false
-import { UIProvider, defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
-
-const pinkTheme = extendTheme({
-  colors: {
-    primary: '#ec4899',
-  },
-})()
-
-const purpleTheme = extendTheme({
-  colors: {
-    primary: '#a855f7',
-  },
-})()
-
-const greenTheme = extendTheme({
-  colors: {
-    primary: '#22c55e',
-  },
-})()
-
-const theme = {
-  default: defaultTheme,
-  pink: pinkTheme,
-  purple: purpleTheme,
-  green: greenTheme,
-}
-
-const config = extendConfig({
-  initialThemeScheme: 'default',
-})
-
-const App = () => {
-  return (
     <UIProvider theme={theme} config={config}>
-      <YourApplication />
+      <App />
+    </UIProvider>
+  </>,
+)
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `props`の`initialThemeScheme`は、コンフィグと同じ`initialThemeScheme`を渡してください。
+</Alert>
+
+#### Next.jsの場合
+
+```tsx live=false title=_document.tsx highlight={2,3,11}
+import { Html, Head, Main, NextScript } from 'next/document'
+import { ThemeSchemeScript } from '@yamada-ui/react'
+import { config } from '../theme'
+
+export default function Document() {
+  return (
+    <Html lang='en'>
+      <Head />
+
+      <body>
+        <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+プロジェクトによっては、`cookies`から値を取得する場合があるかもしれません。その場合は、`cookieStorageManager`を使用します。
+
+```tsx live=false title=_document.tsx highlight={2,3,12,13}
+import { Html, Head, Main, NextScript } from 'next/document'
+import { ThemeSchemeScript } from '@yamada-ui/react'
+import { config } from '../theme'
+
+export default function Document() {
+  return (
+    <Html lang='en'>
+      <Head />
+
+      <body>
+        <ThemeSchemeScript
+          type='cookie'
+          nonce='testing'
+          initialThemeScheme={config.initialThemeScheme}
+        />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+```tsx live=false title=_app.tsx highlight={8}
+import type { AppProps } from 'next/app'
+import { UIProvider, colorModeManager } from '@yamada-ui/react'
+import { config } from '../theme'
+
+const { cookieStorageManager } = colorModeManager
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <UIProvider theme={theme} config={config} colorModeManager={cookieStorageManager}>
+      <Component {...pageProps} />
     </UIProvider>
   )
 }
+```
+
+<Alert status='warning'>
+  <AlertIcon />
+  `props`の`initialThemeScheme`は、コンフィグと同じ`initialThemeScheme`を渡してください。
+</Alert>
+
+## `themeSchemeManager`を追加する
+
+Next.jsなどのサーバー側でレンダリングされるサイトの場合は、テーマがハイドレーション中に変更することを避けるために、リクエストにテーマのスキーマを含めたい場合があります。
+
+<Alert status='info'>
+  <AlertIcon />
+  サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
+</Alert>
+
+### `getServerSideProps`を用意する
+
+複数のページで`getServerSideProps`を共通化するために、`getServerSideCommonProps`を定義します。
+
+```ts live=false
+import { GetServerSidePropsContext } from 'next'
+
+export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? '',
+    },
+  }
+}
+```
+
+### `cookieStorageSSR`を渡す
+
+`UIProvider`の`themeSchemeManager`に`cookieStorageSSR`を渡します。
+
+```tsx live=false title=_app.tsx highlight={2,4,7,8,11}
+import type { AppProps } from 'next/app'
+import { UIProvider, themeSchemeManager } from '@yamada-ui/react'
+
+const { cookieStorageSSR, localStorage } = themeSchemeManager
+
+export default function App({ Component, pageProps }: AppProps) {
+  const { cookies } = pageProps
+  const themeSchemeManager = typeof cookies === 'string' ? cookieStorageSSR(cookies) : localStorage
+
+  return (
+    <UIProvider themeSchemeManager={themeSchemeManager}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+### `getServerSideProps`を追加する
+
+先ほど作成した`getServerSideCommonProps`を各ページに追加します。
+
+```tsx live=false title=index.tsx highlight={1,8}
+import { getServerSideCommonProps } from '../get-server-side-props.ts'
+import { Button } from '@yamada-ui/react'
+
+export default function Index() {
+  return <Button>Click me!</Button>
+}
+
+export const getServerSideProps = getServerSideCommonProps
 ```
 
 ## テーマを切り替える

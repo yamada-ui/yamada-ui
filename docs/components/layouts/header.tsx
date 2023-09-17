@@ -35,6 +35,9 @@ import { Discord, Github, Hamburger, Moon, Sun, Translate } from 'components/med
 import { Tree } from 'components/navigation'
 import { CONSTANT } from 'constant'
 import { useI18n } from 'contexts/i18n-context'
+import packageJSON from 'package.json'
+
+const version = `v${packageJSON.dependencies['@yamada-ui/react']}`
 
 export type HeaderProps = CenterProps & {}
 
@@ -87,7 +90,7 @@ export const Header = memo(
               letterSpacing='1px'
               minW='auto'
             >
-              v0.5.14
+              {version}
             </Tag>
 
             <Spacer />

@@ -1,0 +1,5 @@
+yamada-ui/yamada-docs:
+  - source: .changelog/
+    dest: contents/changelog/
+    exclude: |
+      manifest.json

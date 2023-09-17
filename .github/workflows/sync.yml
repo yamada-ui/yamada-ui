@@ -17,5 +17,5 @@ jobs:
         uses: Redocly/repo-file-sync-action@master
         with:
           GH_PAT: ${{ secrets.GITHUB_TOKEN }}
-          GIT_EMAIL: hirotomo.yamada@avap.co.jp
-          GIT_USERNAME: hirotomoyamada
+          # GIT_EMAIL: hirotomo.yamada@avap.co.jp
+          # GIT_USERNAME: hirotomoyamada

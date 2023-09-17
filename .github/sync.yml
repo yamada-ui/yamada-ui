@@ -3,5 +3,3 @@ hirotomoyamada/yamada-docs:
     dest: contents/changelog/
     exclude: |
       manifest.json
-      index.mdx
-      index.ja.mdx

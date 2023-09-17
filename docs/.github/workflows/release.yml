@@ -1,83 +1,41 @@
 name: Release
 
-on:
-  push:
-    paths:
-      - '.storybook/**'
-      - '.changeset/**'
-      - 'packages/**'
-      - 'stories/**'
-    branches:
-      - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+on: [workflow_dispatch]
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: Get PNPM
+        id: pnpm-cache
+        run: echo "::set-output name=dir::$(pnpm cache dir)"
+
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
         with:
-          fetch-depth: 0
-          token: ${{ secrets.PAT_TOKEN }}
+          ref: main
 
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Build
-        run: pnpm build
+      - name: Setup Git user
+        shell: bash
+        run: |
+          git config --global user.email "hirotomo.yamada@avap.co.jp"
+          git config --global user.name "hirotomoyamada"
 
-      # - name: Generate Docs
-      #   run: pnpm gen:docs
+      - name: Update Yamada UI
+        run: pnpm up '@yamada-ui/*' --latest
 
-      - name: Create release PR or publish to NPM
-        id: changesets
-        uses: changesets/action@v1
+      - name: Commit package.json
+        run: |
+          git add package.json
+          git diff --staged --quiet || git commit -m "ci(changesets): $GITHUB_SHA"
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v3
         with:
-          publish: pnpm release
-          commit: 'ci(changesets): version packages'
-          setupGitUser: false
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create @dev release
-        if: steps.changesets.outputs.published != 'true'
-        run: |
-          git checkout main
-          pnpm version:dev
-          pnpm release:dev
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update Changelog
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm changelog:latest
-          pnpm changelog:format
-          pnpm changelog:commit
-
-      - name: Notification Mattermost and Discord
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm release:mattermost
-          pnpm release:discord
-        env:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-      - name: Build Storybook
-        if: steps.changesets.outputs.published == 'true'
-        run: pnpm build-storybook
-
-      - name: Update Storybook
-        if: steps.changesets.outputs.published == 'true'
-        uses: JamesIves/github-pages-deploy-action@v4.4.2
-        with:
-          branch: gh-pages
-          folder: storybook-static
+          delete-branch: true
+          title: 'Version Packages'
+          branch: changeset-release/main

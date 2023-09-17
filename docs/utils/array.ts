@@ -16,3 +16,8 @@ export const flattenArray = <T extends any = any>(array: T[], target: keyof T) =
 
   return result
 }
+
+export const includes = <T extends ReadonlyArray<unknown>>(
+  array: T,
+  searchElement: unknown,
+): searchElement is T[number] => array.includes(searchElement)

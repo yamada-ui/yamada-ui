@@ -4,6 +4,7 @@ import { MDXComponents } from 'components/mdx'
 import { Data, allDocs } from 'contentlayer/generated'
 import { PageProvider } from 'contexts/page-context'
 import { DocLayout } from 'layouts/doc-layout'
+import { getPath } from 'utils/contentlayer'
 import { otherLocales } from 'utils/i18n'
 import { getStaticCommonProps, getStaticDocProps } from 'utils/next'
 
@@ -40,24 +41,42 @@ export const getStaticPaths: GetStaticPaths = async ({ defaultLocale, locales })
     }),
   )
 
-  const paths = docs.map(({ _id, data }) => {
-    const { locale } = data as Data
-    const reg = new RegExp(`\(.${OTHER_LOCALES})?\.mdx$`)
-    const path = _id.replace(reg, '')
-    const params = { slug: path.split('/').filter((str) => str !== 'index') }
+  const paths = docs
+    .map(({ _id, data }) => {
+      const { locale } = data as Data
+      const path = getPath(_id)
+      const params = { slug: path.split('/').filter((str) => str !== 'index') }
 
-    return { params, locale }
-  })
+      const notExistLocales = otherLocales.filter((otherLocale) => {
+        const otherLocaleDoc = docs.find(({ _id, data }) => {
+          const { locale } = data as Data
+          const otherLocalePath = getPath(_id)
+
+          return path === otherLocalePath && locale === otherLocale
+        })
+
+        return !otherLocaleDoc
+      })
+
+      if (notExistLocales.length) {
+        const otherPaths = notExistLocales.map((locale) => ({ params, locale }))
+
+        return [{ params, locale }, ...otherPaths]
+      } else {
+        return { params, locale }
+      }
+    })
+    .flat()
 
   return { paths, fallback: false }
 }
 
-export const getStaticProps = async ({ params, locale }: GetStaticPropsContext) => {
+export const getStaticProps = async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
   const { props } = getStaticCommonProps({ params, locale })
 
   const { docs, tree } = props
 
-  const { doc, ...rest } = getStaticDocProps({ docs, tree, params, locale })
+  const { doc, ...rest } = getStaticDocProps({ docs, tree, params, locale, defaultLocale })
 
   return { props: { ...props, ...doc, ...rest } }
 }

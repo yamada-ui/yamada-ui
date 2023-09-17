@@ -26,18 +26,20 @@ export const getStaticDocProps = ({
   tree,
   params,
   locale,
+  defaultLocale,
 }: {
   docs: Doc[]
   tree: DocWithChildren[]
   params: ParsedUrlQuery
   locale: string
+  defaultLocale: string
 }) => {
   const paths = toArray(params.slug)
-  const doc = getDoc(docs, paths, locale)
+  const doc = getDoc(docs, paths, locale) ?? getDoc(docs, paths, defaultLocale)
 
   const { tabs, parentDoc, parentPaths } = getTabs(docs, doc)
   const childrenTree = getTree(docs, paths)(paths)
-  const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale)
+  const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale, defaultLocale)
   const pagination = getPagination(tree, parentDoc ?? doc)
 
   return { doc, breadcrumbs, childrenTree, tabs, pagination }

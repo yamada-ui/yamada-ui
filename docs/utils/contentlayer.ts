@@ -1,6 +1,9 @@
 import { CONSTANT } from 'constant'
 import { Data, DocWithChildren, Doc, DocPagination, allDocs } from 'contentlayer/generated'
 import { flattenArray } from 'utils/array'
+import { otherLocales } from 'utils/i18n'
+
+const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
 export const getTree =
   (docs: Doc[], parentPaths: string[] = []) =>
@@ -41,11 +44,19 @@ export const getPagination = (tree: DocWithChildren[], target: Doc): DocPaginati
   return pagination
 }
 
-export const getBreadcrumbs = (docs: Doc[], paths: string[], locale: string): Doc[] => {
+export const getBreadcrumbs = (
+  docs: Doc[],
+  paths: string[],
+  locale: string,
+  defaultLocale: string,
+): Doc[] => {
   let breadcrumbs: Doc[] = []
 
   for (let i = 0; i <= paths.length - 1; i++) {
-    breadcrumbs = [...breadcrumbs, getDoc(docs, paths.slice(0, i), locale)]
+    breadcrumbs = [
+      ...breadcrumbs,
+      getDoc(docs, paths.slice(0, i), locale) ?? getDoc(docs, paths.slice(0, i), defaultLocale),
+    ]
   }
 
   breadcrumbs = breadcrumbs.filter(Boolean)
@@ -55,7 +66,23 @@ export const getBreadcrumbs = (docs: Doc[], paths: string[], locale: string): Do
 
 export const getDocs = (locale: string): Doc[] =>
   allDocs
-    .filter(({ is_active, data }) => is_active && data.locale === locale)
+    .filter(({ _id, is_active, data }) => {
+      if (!is_active) return false
+
+      if (data.locale === locale) return true
+
+      if (data.locale !== CONSTANT.I18N.DEFAULT_LOCALE) return false
+
+      const defaultLocalePath = getPath(_id)
+
+      const currentLocaleDoc = allDocs.find(({ _id, data }) => {
+        const path = getPath(_id)
+
+        return path === defaultLocalePath && data.locale === locale
+      })
+
+      return !currentLocaleDoc
+    })
     .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
 
 export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
@@ -101,3 +128,5 @@ export const omitTabDocs = (docs: Doc[]): Doc[] =>
 
     return !(parentDoc?.is_tabs ?? false)
   })
+
+export const getPath = (id: string) => id.replace(new RegExp(`\(.${OTHER_LOCALES})?\.mdx$`), '')

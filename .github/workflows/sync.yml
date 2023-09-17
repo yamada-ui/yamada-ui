@@ -19,4 +19,3 @@ jobs:
           GH_PAT: ${{ secrets.PAT_TOKEN }}
           GIT_EMAIL: hirotomo.yamada@avap.co.jp
           GIT_USERNAME: hirotomoyamada
-          COMMIT_PREFIX: ''

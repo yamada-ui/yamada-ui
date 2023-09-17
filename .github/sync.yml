@@ -1,4 +1,4 @@
-yamada-ui/yamada-docs:
+hirotomoyamada/yamada-docs:
   - source: .changelog/
     dest: contents/changelog/
     exclude: |

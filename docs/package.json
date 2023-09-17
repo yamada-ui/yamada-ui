@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:profile": "next build --profile",
+    "build:changelog": "tsx scripts/changelog",
     "build:content": "contentlayer build --clearCache",
     "start": "next start",
     "lint": "next lint",

@@ -39,3 +39,4 @@ jobs:
           delete-branch: true
           title: 'Version Packages'
           branch: changeset-release/main
+          assignees: hirotomoyamada

@@ -48,6 +48,9 @@ export const mdx: Record<string, CSSUIObject> = {
   a: {
     color: 'link',
     textDecoration: 'underline',
+    code: {
+      color: 'inherit !important',
+    },
   },
   hr: {
     my: '8',

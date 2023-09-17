@@ -1,5 +1,6 @@
 hirotomoyamada/yamada-docs:
   - source: .changelog/
     dest: contents/changelog/
+    replace: false
     exclude: |
       manifest.json

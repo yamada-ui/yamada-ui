@@ -60,7 +60,7 @@
     "prettier": "^3.0.3",
     "tsx": "^3.12.10",
     "typescript": "5.2.2",
-    "unified": "^11.0.3",
+    "unified": "^10.1.2",
     "unist-util-visit": "^5.0.0"
   }
 }

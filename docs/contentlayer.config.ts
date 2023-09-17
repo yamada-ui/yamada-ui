@@ -6,7 +6,8 @@ import remarkSlug from 'remark-slug'
 import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { CONSTANT } from './constant'
-import { otherLocales } from './utils/i18n'
+import { includes } from './utils/array'
+import { locales, otherLocales } from './utils/i18n'
 
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
@@ -23,7 +24,7 @@ const getLocale = (path: string): string => {
 
   locale = locale?.replace(/\./, '')
 
-  return locale ?? 'en'
+  return includes(locales, locale) ? locale : CONSTANT.I18N.DEFAULT_LOCALE
 }
 
 const rehypeMdxCodeMeta: Plugin = () => (tree) => {

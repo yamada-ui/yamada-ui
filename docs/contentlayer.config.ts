@@ -43,7 +43,7 @@ const rehypeMdxCodeMeta: Plugin = () => (tree) => {
   })
 }
 
-export const getTableOfContents = (raw: string) => {
+export const getTableOfContents = (raw: string, maxLv = Infinity) => {
   const slugger = new GithubSlugger()
 
   const regexp = new RegExp(/^(## |### |#### )(.*)\n/, 'gm')
@@ -51,14 +51,16 @@ export const getTableOfContents = (raw: string) => {
 
   if (!contents.length) return []
 
-  return contents.map(([, lv, title]) => {
-    title = title.trim()
-    lv = lv.trim()
+  return contents
+    .map(([, lv, title]) => {
+      title = title.trim()
+      lv = lv.trim()
 
-    const id = slugger.slug(title, false)
+      const id = slugger.slug(title, false)
 
-    return { id, title, lv: lv.split('#').length - 1 }
-  })
+      return { id, title, lv: lv.split('#').length - 1 }
+    })
+    .filter(({ lv }) => maxLv >= lv)
 }
 
 const computedFields: ComputedFields = {
@@ -78,6 +80,7 @@ const Doc = defineDocumentType(() => ({
     tab: { type: 'string' },
     description: { type: 'string', required: true },
     order: { type: 'number', default: 530000 },
+    table_of_contents_max_lv: { type: 'number', default: Infinity },
     label: {
       type: 'enum',
       options: ['New', 'Considering', 'Planned', 'Experimental'],
@@ -92,18 +95,20 @@ const Doc = defineDocumentType(() => ({
     with_description: { type: 'boolean', default: false },
     version: { type: 'string' },
     package: { type: 'string' },
+    release_url: { type: 'string' },
+    release_date: { type: 'string' },
   },
   computedFields: {
     ...computedFields,
     data: {
       type: 'json',
-      resolve: async ({ _id, _raw, title, body, ...rest }) => ({
+      resolve: async ({ _id, _raw, title, body, table_of_contents_max_lv, ...rest }) => ({
         ...rest,
         title,
         locale: getLocale(_raw.flattenedPath),
         paths: omitLocaleSlug(_raw.flattenedPath).split('/'),
         editUrl: `${CONSTANT.SNS.GITHUB.EDIT_URL}/${_id}`,
-        contents: getTableOfContents(body.raw),
+        contents: getTableOfContents(body.raw, table_of_contents_max_lv),
       }),
     },
   },

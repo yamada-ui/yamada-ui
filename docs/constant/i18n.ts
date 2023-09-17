@@ -4,4 +4,4 @@ export const I18N = {
     { label: 'English', value: 'en' },
     { label: '日本語', value: 'ja' },
   ],
-}
+} as const

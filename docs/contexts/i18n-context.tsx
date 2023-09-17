@@ -16,14 +16,14 @@ import {
   useCallback,
   Fragment,
 } from 'react'
+import { CONSTANT } from 'constant'
 import en from 'i18n/en.json'
 import ja from 'i18n/ja.json'
+import { Locale } from 'utils/i18n'
 
 type LocaleData = typeof en
 
 const localeData = { ja, en }
-
-export type Locale = 'en' | 'ja'
 
 type I18nContext = {
   locale: Locale
@@ -36,7 +36,7 @@ type I18nContext = {
 }
 
 const I18nContext = createContext<I18nContext>({
-  locale: 'en',
+  locale: CONSTANT.I18N.DEFAULT_LOCALE as Locale,
   t: () => '',
   tc: () => '',
   changeLocale: noop,

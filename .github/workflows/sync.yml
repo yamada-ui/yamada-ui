@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: hirotomoyamada/yamada-docs
+          ref: repo-sync/yamada-ui/default
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Install

@@ -42,6 +42,8 @@ const main = async () => {
 
     await writeFile(path.join(DIR_PATH, fileName), file)
 
+    console.log(`[changelog]: formatted ${fileName}`)
+
     if (index !== 1) return
 
     data.menu = 'Changelog'

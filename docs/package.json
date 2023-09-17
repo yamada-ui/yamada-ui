@@ -11,8 +11,8 @@
     "start": "next start",
     "lint": "next lint",
     "gen:tokens": "yamada-cli tokens theme/index.ts --out node_modules/.pnpm/@yamada-ui+core@0.5.1_@types+react@18.2.15_react-dom@18.2.0_react@18.2.0/node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts",
-    "format:check": "prettier --check src/**/** scripts/**/** --cache",
-    "format:write": "prettier --write src/**/** scripts/**/** --cache",
+    "format:check": "prettier --check --cache .",
+    "format:write": "prettier --write --cache .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },

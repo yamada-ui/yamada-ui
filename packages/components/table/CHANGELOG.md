@@ -1,5 +1,12 @@
 # @yamada-ui/table
 
+## 0.2.25
+
+### Patch Changes
+
+- Updated dependencies [[`0ca89b7f`](https://github.com/hirotomoyamada/yamada-ui/commit/0ca89b7f7d0921846b67235e0cb4907c6abc9c3c)]:
+  - @yamada-ui/pagination@0.3.0
+
 ## 0.2.24
 
 ### Patch Changes

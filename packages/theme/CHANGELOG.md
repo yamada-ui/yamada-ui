@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.8.1
+
+### Patch Changes
+
+- [`f9bc4b99`](https://github.com/hirotomoyamada/yamada-ui/commit/f9bc4b99d95fd6669700a742f935e31848c82e57) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added inner style properties in Pagination.
+
 ## 0.8.0
 
 ### Minor Changes

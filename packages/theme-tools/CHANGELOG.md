@@ -1,5 +1,16 @@
 # @yamada-ui/theme-tools
 
+## 0.2.0
+
+### Minor Changes
+
+- [`40d5a7ba`](https://github.com/hirotomoyamada/yamada-ui/commit/40d5a7ba1a574fbf83f17fcf4583c4df3d8202eb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added extendBaseTheme.
+
+### Patch Changes
+
+- Updated dependencies [[`f9bc4b99`](https://github.com/hirotomoyamada/yamada-ui/commit/f9bc4b99d95fd6669700a742f935e31848c82e57)]:
+  - @yamada-ui/theme@0.8.1
+
 ## 0.1.4
 
 ### Patch Changes

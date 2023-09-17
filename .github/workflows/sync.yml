@@ -19,3 +19,21 @@ jobs:
           GH_PAT: ${{ secrets.PAT_TOKEN }}
           GIT_EMAIL: hirotomo.yamada@avap.co.jp
           GIT_USERNAME: hirotomoyamada
+
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          repository: hirotomoyamada/yamada-docs
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Build
+        run: pnpm build:changelog
+
+      - name: Commit changelog
+        run: |
+          git add .
+          git commit -m 'ci(changelog): version packages'
+          git push

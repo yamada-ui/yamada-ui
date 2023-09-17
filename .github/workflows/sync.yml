@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
 
       - name: Sync Files
         uses: Redocly/repo-file-sync-action@master
         with:
           GH_PAT: ${{ secrets.GITHUB_TOKEN }}
-          # GIT_EMAIL: hirotomo.yamada@avap.co.jp
-          # GIT_USERNAME: hirotomoyamada
+          GIT_EMAIL: hirotomo.yamada@avap.co.jp
+          GIT_USERNAME: hirotomoyamada

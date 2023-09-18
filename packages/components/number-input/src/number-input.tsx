@@ -182,8 +182,6 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     handlerAll(rest.onFocus, (ev) => {
       setFocused(true)
 
-      console.log(inputSelectionRef)
-
       if (!inputSelectionRef.current) return
 
       ev.target.selectionStart =

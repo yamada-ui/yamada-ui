@@ -146,8 +146,6 @@ export const useDynamicAnimation = <
     for (const [key, styles] of Object.entries(arrayOrObj)) {
       if (cache.current.has(key)) return
 
-      console.log(styles)
-
       if (isArray(styles)) {
         cache.current.set(
           key,

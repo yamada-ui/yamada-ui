@@ -14,7 +14,7 @@ import {
   transparentizeColor,
 } from '@yamada-ui/react'
 import Link from 'next/link'
-import { FC, memo } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { Label } from 'components/data-display'
 import { DocWithChildren } from 'contentlayer/generated'
 import { useConfigs } from 'contexts/configs-context'
@@ -42,7 +42,11 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
   ({ title, menu, slug, label, children, isNested, is_expand }) => {
     if (menu) title = menu
 
-    const [isOpen, { toggle }] = useBoolean(is_expand)
+    const [isOpen, { on, toggle }] = useBoolean(is_expand)
+
+    useEffect(() => {
+      if (is_expand) on()
+    }, [is_expand, on])
 
     const isChildActive = children.some(({ is_expand }) => is_expand)
     const isActive = !isChildActive && is_expand

@@ -9,7 +9,7 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({ id, children, ...rest })
     <Heading
       id={id}
       position='relative'
-      css={{ scrollMarginBlock: '5rem' }}
+      css={{ scrollMarginBlock: '6rem' }}
       _hover={{ base: { '& > a': { opacity: 1 } }, md: { '& > a': { opacity: 0 } } }}
       {...rest}
     >

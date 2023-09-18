@@ -67,7 +67,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   Alert: (props) => <Alert apply='mdx.alert' {...props} />,
   Note: ({ children, ...rest }) => (
     <Alert apply='mdx.alert' alignItems='flex-start' {...rest}>
-      <AlertIcon mt='0.3em' />
+      <AlertIcon mt='0.2em' />
       <AlertDescription as='p' apply='mdx.p'>
         {children}
       </AlertDescription>

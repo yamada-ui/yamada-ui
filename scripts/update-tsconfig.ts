@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs'
+import { writeFile } from 'fs/promises'
 import { findPackages } from 'find-packages'
 
 const main = async () => {
@@ -11,7 +11,7 @@ const main = async () => {
         include: ['src', 'index.ts'],
       }
 
-      await fs.writeFile(`${dir}/tsconfig.json`, JSON.stringify(data, null, 2))
+      await writeFile(`${dir}/tsconfig.json`, JSON.stringify(data, null, 2))
     }),
   )
 }

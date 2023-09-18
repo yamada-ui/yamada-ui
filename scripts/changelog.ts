@@ -1,4 +1,5 @@
-import fs from 'fs'
+import { existsSync, mkdirSync } from 'fs'
+import { readFile, writeFile } from 'fs/promises'
 import { Octokit, RestEndpointMethodTypes } from '@octokit/rest'
 
 type PullRequests = RestEndpointMethodTypes['pulls']['list']['response']['data']
@@ -104,9 +105,9 @@ const writePrFile = async ({
   version,
   body,
 }: PullRequestData): Promise<void> => {
-  if (!fs.existsSync('.changelog')) fs.mkdirSync('.changelog')
+  if (!existsSync('.changelog')) mkdirSync('.changelog')
 
-  return fs.promises.writeFile(`.changelog/v${version}.mdx`, body)
+  return writeFile(`.changelog/v${version}.mdx`, body)
 }
 
 export const manifest = {
@@ -115,12 +116,12 @@ export const manifest = {
   async write(data: PullRequestData[]) {
     data = data.sort((a, b) => b.id - a.id)
 
-    return fs.promises.writeFile(this.path, JSON.stringify(data, null, 2))
+    return writeFile(this.path, JSON.stringify(data, null, 2))
   },
 
   async read(): Promise<PullRequestData[]> {
     try {
-      return JSON.parse(await fs.promises.readFile(this.path, 'utf8'))
+      return JSON.parse(await readFile(this.path, 'utf8'))
     } catch (error) {
       return []
     }
@@ -149,7 +150,7 @@ const writeReadme = async (): Promise<void> => {
     ...others,
   ].join('\n')
 
-  await fs.promises.writeFile('CHANGELOG.md', body)
+  await writeFile('CHANGELOG.md', body)
 }
 
 const sync = async (): Promise<void> => {

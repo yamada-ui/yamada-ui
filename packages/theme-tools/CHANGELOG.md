@@ -1,5 +1,13 @@
 # @yamada-ui/theme-tools
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`9bc5dacc`](https://github.com/hirotomoyamada/yamada-ui/commit/9bc5dacc3d10be62a8593b6cea89e97924f34c50)]:
+  - @yamada-ui/core@0.9.0
+  - @yamada-ui/theme@0.8.2
+
 ## 0.2.0
 
 ### Minor Changes

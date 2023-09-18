@@ -1,5 +1,20 @@
 # @yamada-ui/segmented-control
 
+## 0.3.0
+
+### Minor Changes
+
+- [`9bc5dacc`](https://github.com/hirotomoyamada/yamada-ui/commit/9bc5dacc3d10be62a8593b6cea89e97924f34c50) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - To improve support for the App Router, all components and hooks are exported with the `"use client"` directive.
+
+### Patch Changes
+
+- Updated dependencies [[`9bc5dacc`](https://github.com/hirotomoyamada/yamada-ui/commit/9bc5dacc3d10be62a8593b6cea89e97924f34c50)]:
+  - @yamada-ui/use-controllable-state@0.2.0
+  - @yamada-ui/use-resize-observer@0.2.0
+  - @yamada-ui/use-focus-visible@0.2.0
+  - @yamada-ui/use-descendant@0.2.0
+  - @yamada-ui/core@0.9.0
+
 ## 0.2.18
 
 ### Patch Changes

@@ -61,6 +61,7 @@
     "lint-staged": "14.0.1",
     "plop": "4.0.0",
     "prettier": "^3.0.3",
+    "remark-breaks": "^3.0.3",
     "tsx": "^3.12.10",
     "typescript": "5.2.2",
     "unified": "^10.1.2",

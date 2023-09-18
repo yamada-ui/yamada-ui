@@ -23,6 +23,8 @@ const {
   DecimalList,
   ListItem,
   Alert,
+  AlertIcon,
+  AlertDescription,
   TableContainer,
   NativeTable,
   Th,
@@ -63,6 +65,14 @@ export const MDXBaseComponents: MDXComponentsType = {
   td: (props) => <Td {...props} />,
   kbd: (props) => <Kbd apply='mdx.kbd' {...props} />,
   Alert: (props) => <Alert apply='mdx.alert' {...props} />,
+  Note: ({ children, ...rest }) => (
+    <Alert apply='mdx.alert' alignItems='flex-start' {...rest}>
+      <AlertIcon mt='0.3em' />
+      <AlertDescription as='p' apply='mdx.p'>
+        {children}
+      </AlertDescription>
+    </Alert>
+  ),
   PackageManagers,
   SelectPackageManagers,
   ColorModeButton,

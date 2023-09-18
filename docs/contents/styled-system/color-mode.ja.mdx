@@ -79,10 +79,9 @@ root.render(
 )
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  `props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
-</Alert>
+:::note status=warning
+`props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
+:::
 
 #### Next.jsの場合
 
@@ -145,24 +144,21 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  `props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
-</Alert>
+:::note status=warning
+`props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  App Routerの場合は、[こちら](/docs/getting-started/frameworks/nextjs/app-router#uiprovidercacheprovidercolormodescriptを追加する)をご覧ください。
-</Alert>
+:::note
+App Routerの場合は、[こちら](/docs/getting-started/frameworks/nextjs/app-router#uiprovidercacheprovidercolormodescriptを追加する)をご覧ください。
+:::
 
 ## `colorModeManager`を追加する
 
 Next.jsなどのサーバー側でレンダリングされるサイトの場合は、カラーモードがハイドレーション中に変更することを避けるために、リクエストにカラーモードを含めたい場合があります。
 
-<Alert status='info'>
-  <AlertIcon />
-  サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
-</Alert>
+:::note
+サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
+:::
 
 ### `getServerSideProps`を用意する
 
@@ -280,13 +276,10 @@ function Demo() {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  <List>
-    <ListItem> `colorMode`は、現在の`light`と`dark`を返します。</ListItem>
-    <ListItem> `internalColorMode`は、現在の`light`と`dark`または`system`を返します。</ListItem>
-  </List>
-</Alert>
+:::note
+`colorMode`は、現在の`light`と`dark`を返します。
+`internalColorMode`は、現在の`light`と`dark`または`system`を返します。
+:::
 
 ### `useColorModeValue`を使う
 

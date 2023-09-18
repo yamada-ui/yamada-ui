@@ -6,10 +6,9 @@ order: 13
 
 グローバルスタイルは、テーマの`styles.globalStyle`で定義されているスタイルを反映するコンポーネントです。
 
-<Alert status='info'>
-  <AlertIcon />
-  グローバルスタイルのコンポーネントは、`UIProvider`のなかに含まれています。
-</Alert>
+:::note
+グローバルスタイルのコンポーネントは、`UIProvider`のなかに含まれています。
+:::
 
 実際に定義されている値はこちらです。
 
@@ -91,10 +90,9 @@ const App = () => {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
-</Alert>
+:::note
+テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+:::
 
 ## グローバルスタイルを追加する
 
@@ -147,14 +145,7 @@ const App = () => {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  <List>
-    <ListItem>
-      `defaultTheme`は、コンポーネントのスタイルなど、すべてのトークンが定義されています。
-    </ListItem>
-    <ListItem>
-      `baseTheme`は、グローバルスタイルやカラーなどのトークンは定義されていますが、コンポーネントのスタイルが定義されていません。
-    </ListItem>
-  </List>
-</Alert>
+:::note
+`defaultTheme`は、コンポーネントのスタイルなど、すべてのトークンが定義されています。
+`baseTheme`は、グローバルスタイルやカラーなどのトークンは定義されていますが、コンポーネントのスタイルが定義されていません。
+:::

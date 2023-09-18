@@ -8,26 +8,18 @@ with_children_description: false
 
 テーマのトークンは、カテゴリ化されています。
 
-<Alert status='info'>
-  <AlertIcon />
-  <List>
-    <ListItem>
-      テーマをカスタマイズしたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)をご覧ください。
-    </ListItem>
-    <ListItem>
-      テーマを作成したい場合は、[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
-    </ListItem>
-  </List>
-</Alert>
+:::note
+テーマをカスタマイズしたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)をご覧ください。
+テーマを作成したい場合は、[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+:::
 
 ## Colors
 
 `color`・`borderColor`・`backgroundColor`・`fill`・`stroke`などは、このトークンを参照されます。
 
-<Alert status='warning'>
-  <AlertIcon />
-  各コンポーネントは、`colorScheme`という概念があります。`colorScheme`は、このトークンを元に生成されます。生成には条件があり、キーが`brand`・`primary`・`secondary`・`warning`・`danger`・`link`か、`Hue(50から950)`が定義されている場合に生成されます。
-</Alert>
+:::note status=warning
+各コンポーネントは、`colorScheme`という概念があります。`colorScheme`は、このトークンを元に生成されます。生成には条件があり、キーが`brand`・`primary`・`secondary`・`warning`・`danger`・`link`か、`Hue(50から950)`が定義されている場合に生成されます。
+:::
 
 ### Black & White
 
@@ -623,10 +615,9 @@ const sizes = {
 const theme = extendTheme({ sizes })
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  デフォルトのテーマの`sizes`は、`spaces`を継承しています。
-</Alert>
+:::note status=warning
+デフォルトのテーマの`sizes`は、`spaces`を継承しています。
+:::
 
 ## Typography
 
@@ -889,10 +880,9 @@ const theme = extendTheme({ zIndices })
 
 [Style props](/docs/styled-system/style-props)・[useBreakpoint](/docs/hooks/use-breakpoint)・[useBreakpointValue](/docs/hooks/use-breakpoint-value)の内部で使用されるブレイクポイントです。
 
-<Alert status='info'>
-  <AlertIcon />
-  `レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
-</Alert>
+:::note
+`レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+:::
 
 ```ts live=false
 import { extendTheme } from '@yamada-ui/react'

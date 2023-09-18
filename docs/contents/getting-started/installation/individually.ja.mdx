@@ -5,10 +5,9 @@ tab: 個別
 order: 2
 ---
 
-<Alert status='warning'>
-  <AlertIcon />
-  [基本を学ぶ](/docs/getting-started/installation/basic)や[応用を学ぶ](/docs/getting-started/installation/advanced)など多くのページは、[すべて](/docs/getting-started/installation)でインストールしている想定で説明されています。
-</Alert>
+:::note status=warning
+[基本を学ぶ](/docs/getting-started/installation/basic)や[応用を学ぶ](/docs/getting-started/installation/advanced)など多くのページは、[すべて](/docs/getting-started/installation)でインストールしている想定で説明されています。
+:::
 
 ## パッケージをインストールする
 
@@ -26,10 +25,9 @@ Yamada UIのコアやユーティリティをインストールします。
 
 <PackageManagers packageNameOrCommand='@yamada-ui/layouts' />
 
-<Alert status='info'>
-  <AlertIcon />
-  コンポーネントやフックのパッケージ名は、各ドキュメントページに記載されています。
-</Alert>
+:::note
+コンポーネントやフックのパッケージ名は、各ドキュメントページに記載されています。
+:::
 
 ## `ThemeProvider`を追加する
 
@@ -71,15 +69,13 @@ const App = () => {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  テーマやコンフィグをカスタマイズしたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)と[コンフィグをカスタマイズする](/docs/styled-system/configure/customize-config)をご覧ください。
-</Alert>
+:::note
+テーマやコンフィグをカスタマイズしたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)と[コンフィグをカスタマイズする](/docs/styled-system/configure/customize-config)をご覧ください。
+:::
 
-<Alert status='warning'>
-  <AlertIcon />
-  `theme`や`config`を`ThemeProvider`に渡さない場合、コンポーネントのスタイルやトークンは反映されません。
-</Alert>
+:::note status=warning
+`theme`や`config`を`ThemeProvider`に渡さない場合、コンポーネントのスタイルやトークンは反映されません。
+:::
 
 ## コンポーネントを使用する
 

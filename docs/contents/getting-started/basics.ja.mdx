@@ -6,10 +6,9 @@ order: 2
 
 このガイドは、Yamada UIの概念を理解するのに役立ちます。開発を開始する前に、このガイドを読んでYamada UIを理解することをオススメします。
 
-<Alert status='warning'>
-  <AlertIcon />
-  このガイドは基本であり、Yamada UIで開発する`面白さ`を感じてもらうことが目的です。なので、各概念や機能を深く説明していません。もっと知りたくなった場合は、ページ内の各リンクをご覧ください。
-</Alert>
+:::note status=warning
+このガイドは基本であり、Yamada UIで開発する`面白さ`を感じてもらうことが目的です。なので、各概念や機能を深く説明していません。もっと知りたくなった場合は、ページ内の各リンクをご覧ください。
+:::
 
 ## テーマについて
 
@@ -31,10 +30,9 @@ const App = () => {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  [デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに含まれています。
-</Alert>
+:::note
+[デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに含まれています。
+:::
 
 ### テーマをカスタマイズする
 
@@ -58,15 +56,13 @@ const App = () => {
 
 これでアプリケーション全体の余白が変更されました。
 
-<Alert status='warning'>
-  <AlertIcon />
-  `extendTheme`は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
-</Alert>
+:::note status=warning
+`extendTheme`は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
-</Alert>
+:::note
+テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+:::
 
 ### ローディングを使う
 
@@ -79,10 +75,9 @@ Yamada UIは、アプリケーションで必要な`ローディングアニメ�
 - `update`: ローディングアニメーションの情報を更新します。
 - `finish`: ローディングアニメーションを終了します。
 
-<Alert status='warning'>
-  <AlertIcon />
-  `custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
-</Alert>
+:::note status=warning
+`custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
+:::
 
 ```tsx
 function Demo() {
@@ -134,15 +129,13 @@ function Demo() {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  ローディングのアイコンやスタイルは、`useLoading`の引数や`UIProvider`に渡せる`コンフィグ`で設定できます。
-</Alert>
+:::note
+ローディングのアイコンやスタイルは、`useLoading`の引数や`UIProvider`に渡せる`コンフィグ`で設定できます。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  ローディングをもっと知りたい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
-</Alert>
+:::note
+ローディングをもっと知りたい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
+:::
 
 ### 通知を使う
 
@@ -170,15 +163,13 @@ function Demo() {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  通知のバリアントや表示位置の変更は、`useNotice`の引数や`UIProvider`に渡せる`コンフィグ`で設定できます。
-</Alert>
+:::note
+通知のバリアントや表示位置の変更は、`useNotice`の引数や`UIProvider`に渡せる`コンフィグ`で設定できます。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  通知をもっと知りたい場合は、[こちら](/docs/styled-system/notification)をご覧ください。
-</Alert>
+:::note
+通知をもっと知りたい場合は、[こちら](/docs/styled-system/notification)をご覧ください。
+:::
 
 ## スタイルについて
 
@@ -215,10 +206,9 @@ Yamada UIは、コンポーネントに`props`を渡すだけでスタイルを�
 </Box>
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  `Style props`やショートコードをもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
-</Alert>
+:::note
+`Style props`やショートコードをもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
+:::
 
 ### コンポーネント
 
@@ -314,15 +304,13 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  `レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
-</Alert>
+:::note
+`レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+:::
 
-<Alert status='warning'>
-  <AlertIcon />
-  Yamada UIは、レスポンシブデザインに`@media(max-width)`のメディアクエリを使用しています。
-</Alert>
+:::note status=warning
+Yamada UIは、レスポンシブデザインに`@media(max-width)`のメディアクエリを使用しています。
+:::
 
 ### ブレイクポイントについて
 
@@ -340,10 +328,9 @@ export const breakpoints = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  ブレイクポイントを変更したい場合は、[こちら](/docs/styled-system/responsice-styles#ブレイクポイントをカスタマイズする)をご覧ください。
-</Alert>
+:::note
+ブレイクポイントを変更したい場合は、[こちら](/docs/styled-system/responsice-styles#ブレイクポイントをカスタマイズする)をご覧ください。
+:::
 
 ## カラーモードについて
 
@@ -384,15 +371,13 @@ export const config: ThemeConfig = {
   - `dark`: ダークモード。
   - `system`: オペレーションシステム(OS)からカラーモードを取得します。
 
-<Alert status='warning'>
-  <AlertIcon />
-  `initialColorMode`が設定されていない場合は、内部的に`light`になります。
-</Alert>
+:::note status=warning
+`initialColorMode`が設定されていない場合は、内部的に`light`になります。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  コンフィグを変更したい場合は、[こちら](/docs/styled-system/configure/customize-config)ををご覧ください。
-</Alert>
+:::note
+コンフィグを変更したい場合は、[こちら](/docs/styled-system/configure/customize-config)ををご覧ください。
+:::
 
 アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。
 
@@ -422,10 +407,9 @@ function Demo() {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードについてもっと学びたい場合は、[こちら](/docs/styled-system/dark-mode)をご覧ください。
-</Alert>
+:::note
+カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードについてもっと学びたい場合は、[こちら](/docs/styled-system/dark-mode)をご覧ください。
+:::
 
 ## アニメーションについて
 
@@ -444,11 +428,9 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 - `fillMode`: アニメーションの実行前後に、指定したスタイルを適用するかを設定します。
 - `playState`: アニメーションを一時停止したり、再開したりするかを設定します。
 
-<Alert status='info'>
-  <AlertIcon />
-  アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSS
-  アニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
-</Alert>
+:::note
+アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
+:::
 
 ```tsx
 function Demo() {
@@ -519,10 +501,9 @@ function Demo() {
 </Center>
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
-</Alert>
+:::note
+アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
+:::
 
 ## Congratulations!
 

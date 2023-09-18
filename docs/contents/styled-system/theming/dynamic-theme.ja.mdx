@@ -6,10 +6,9 @@ order: 5
 
 Yamada UIは、ユーザーがテーマを切り替え可能にする機能があります。
 
-<Alert status='info'>
-  <AlertIcon />
-  この機能を有効にするには、複数のテーマを用意する必要があります。
-</Alert>
+:::note
+この機能を有効にするには、複数のテーマを用意する必要があります。
+:::
 
 ## セットアップ
 
@@ -23,10 +22,9 @@ Yamada UIは、ユーザーがテーマを切り替え可能にする機能が�
 
 今回は、複数のテーマを新しく用意するのはコストが掛かるためデフォルトのテーマからカラーを変更したテーマを複数用意します。
 
-<Alert status='info'>
-  <AlertIcon />
-  テーマのカスタマイズの仕方が分からない場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
-</Alert>
+:::note
+テーマのカスタマイズの仕方が分からない場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
+:::
 
 ```tsx live=false
 import { defaultTheme, extendTheme } from '@yamada-ui/react'
@@ -123,10 +121,9 @@ root.render(
 )
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  `props`の`initialThemeScheme`は、コンフィグと同じ`initialThemeScheme`を渡してください。
-</Alert>
+:::note status=warning
+`props`の`initialThemeScheme`は、コンフィグと同じ`initialThemeScheme`を渡してください。
+:::
 
 #### Next.jsの場合
 
@@ -192,19 +189,17 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  `props`の`initialThemeScheme`は、コンフィグと同じ`initialThemeScheme`を渡してください。
-</Alert>
+:::note status=warning
+`props`の`initialThemeScheme`は、コンフィグと同じ`initialThemeScheme`を渡してください。
+:::
 
 ## `themeSchemeManager`を追加する
 
 Next.jsなどのサーバー側でレンダリングされるサイトの場合は、テーマがハイドレーション中に変更することを避けるために、リクエストにテーマのスキーマを含めたい場合があります。
 
-<Alert status='info'>
-  <AlertIcon />
-  サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
-</Alert>
+:::note
+サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
+:::
 
 ### `getServerSideProps`を用意する
 

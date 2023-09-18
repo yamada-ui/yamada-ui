@@ -6,24 +6,21 @@ order: 2
 
 すべてのYamada UIのコンポーネントは、テーマからスタイルやトークンを継承します。シナリオによっては、プロジェクトに合わせた`カラー`などをカスタマイズする必要がある場合があります。
 
-<Alert status='warning'>
-  <AlertIcon />
-  テーマをカスタマイズする場合は、`extendTheme`を使用することをオススメします。これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
-</Alert>
+:::note status=warning
+テーマをカスタマイズする場合は、`extendTheme`を使用することをオススメします。これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  テーマを作成したい場合は、[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
-</Alert>
+:::note
+テーマを作成したい場合は、[テーマを作成する](/docs/styled-system/theming/create-theme)をご覧ください。
+:::
 
 ## テーマの運用
 
 テーマをカスタマイズした場合、型補完をすることをオススメします。型補完は、[CLI](/docs/styled-system/cli)を使用します。
 
-<Alert status='warning'>
-  <AlertIcon />
-  `CLI`を使用する場合は、ファイルのデフォルトでエクスポートされているテーマを参照するので、テーマのファイルを作成する必要があります。
-</Alert>
+:::note status=warning
+`CLI`を使用する場合は、ファイルのデフォルトでエクスポートされているテーマを参照するので、テーマのファイルを作成する必要があります。
+:::
 
 開発中にテーマのトークンやスタイルが追加・変更することを考えて、テーマをフォルダにしておくことをオススメします。
 
@@ -51,10 +48,9 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)()
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  `extendTheme`を使用して、テーマをデフォルトでエクスポートしています。
-</Alert>
+:::note
+`extendTheme`を使用して、テーマをデフォルトでエクスポートしています。
+:::
 
 ## トークンを変更する
 
@@ -71,10 +67,9 @@ export const colors: ThemeTokens = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  `colors`に新しく`brand`を追加し、`primary`を変更しています。また、配列を定義することで、カラーモードに対応できます。
-</Alert>
+:::note
+`colors`に新しく`brand`を追加し、`primary`を変更しています。また、配列を定義することで、カラーモードに対応できます。
+:::
 
 `index.ts`を作成し、先ほど作成した`colors`をエクスポートします。
 
@@ -136,10 +131,9 @@ export const globalStyle: UIStyle = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  `body`の背景を変更しています。また、配列を定義することで、カラーモードに対応できます。
-</Alert>
+:::note
+`body`の背景を変更しています。また、配列を定義することで、カラーモードに対応できます。
+:::
 
 `index.ts`を作成し、先ほど作成した`globalStyle`をエクスポートします。
 
@@ -183,10 +177,9 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ['styles'] })
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  テキストとレイヤースタイルを学びたい場合は、[こちら](/docs/styled-system/text-and-layer-styles)をご覧ください。
-</Alert>
+:::note
+テキストとレイヤースタイルを学びたい場合は、[こちら](/docs/styled-system/text-and-layer-styles)をご覧ください。
+:::
 
 ## コンポーネントのスタイルを変更する
 
@@ -194,15 +187,13 @@ export default extendTheme(customTheme)({ omit: ['styles'] })
 
 コンポーネントのスタイルは、コンポーネントの基本スタイル(`baseStyle`)、さまざまなサイズのスタイル(`sizes`)、さまざまな視覚的バリアントのスタイル(`variants`)、デフォルトの`props`(`defaultProps`)で構成されています。
 
-<Alert status='info'>
-  <AlertIcon />
-  すべてのコンポーネントは、`size`や`variant`があるわけではありません。どのコンポーネントが対応しているかを確認するには、コンポーネントのページの`props`を参照してください。
-</Alert>
+:::note
+すべてのコンポーネントは、`size`や`variant`があるわけではありません。どのコンポーネントが対応しているかを確認するには、コンポーネントのページの`props`を参照してください。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  Yamada UIは、コンポーネントにスタイルの`props`を設定することでスタイリングすることができます。しかし、大規模なプロジェクトは開発者が多く、個々でスタイルを設定するとデザインの一貫性を担保できなくなります。その場合、共通しているスタイルをテーマのコンポーネントのスタイルに設定することで回避することができます。
-</Alert>
+:::note
+Yamada UIは、コンポーネントにスタイルの`props`を設定することでスタイリングすることができます。しかし、大規模なプロジェクトは開発者が多く、個々でスタイルを設定するとデザインの一貫性を担保できなくなります。その場合、共通しているスタイルをテーマのコンポーネントのスタイルに設定することで回避することができます。
+:::
 
 今回は、コンポーネントの`Container`を変更してみましょう。
 
@@ -236,10 +227,9 @@ export const Container: ComponentStyle = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  背景色を変更し、`sizes`で各サイズを、`variants`で各バリアントを定義しています。`defaultProps`は、初期値を設定しています。
-</Alert>
+:::note
+背景色を変更し、`sizes`で各サイズを、`variants`で各バリアントを定義しています。`defaultProps`は、初期値を設定しています。
+:::
 
 `index.ts`を作成し、先ほど作成した`Container`をエクスポートします。
 
@@ -280,20 +270,17 @@ const Demo = () => {
 }
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  今回変更した`Container`は、単一コンポーネントです。単一コンポーネントとは、一つの要素から構成されるコンポーネントのことです。また、複数の要素から構成されるコンポーネントのことを複数コンポーネント(`Accordion`などが該当します)と呼びます。複数コンポーネントを変更する場合、型定義は`ComponentMultiStyle`になります。
-</Alert>
+:::note status=warning
+今回変更した`Container`は、単一コンポーネントです。単一コンポーネントとは、一つの要素から構成されるコンポーネントのことです。また、複数の要素から構成されるコンポーネントのことを複数コンポーネント(`Accordion`などが該当します)と呼びます。複数コンポーネントを変更する場合、型定義は`ComponentMultiStyle`になります。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  各コンポーネントのテーマのスタイルを確認するには、コンポーネントのページの`テーマ`を参照してください。
-</Alert>
+:::note
+各コンポーネントのテーマのスタイルを確認するには、コンポーネントのページの`テーマ`を参照してください。
+:::
 
-<Alert status='info'>
-  <AlertIcon />
-  Yamada UIが提供するコンポーネントに限らず、独自のカスタムコンポーネントのスタイルを作成することができます。詳しくは、[こちら](/docs/styles-system/component-style)をご覧ください。
-</Alert>
+:::note
+Yamada UIが提供するコンポーネントに限らず、独自のカスタムコンポーネントのスタイルを作成することができます。詳しくは、[こちら](/docs/styles-system/component-style)をご覧ください。
+:::
 
 ## ユーティリティ
 
@@ -362,10 +349,9 @@ const customTheme: UsageTheme = {
 export default extendBaseTheme(customTheme)()
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  `extendBaseTheme`は、内部的に`baseTheme`を使用しています。`baseTheme`は、グローバルスタイルやカラーなどのトークンは定義されていますが、コンポーネントのスタイルが定義されていません。
-</Alert>
+:::note
+`extendBaseTheme`は、内部的に`baseTheme`を使用しています。`baseTheme`は、グローバルスタイルやカラーなどのトークンは定義されていますが、コンポーネントのスタイルが定義されていません。
+:::
 
 ### `extendStyle`を使う
 
@@ -430,10 +416,9 @@ const Tag: ComponentStyle = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  この関数は、`baseStyle`や`variants`は継承したくないが、`sizes`だけ継承したいケースに使えます。
-</Alert>
+:::note
+この関数は、`baseStyle`や`variants`は継承したくないが、`sizes`だけ継承したいケースに使えます。
+:::
 
 ### `extendComponentVariant`を使う
 
@@ -456,10 +441,9 @@ const Tag: ComponentStyle = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  この関数は、`baseStyle`や`sizes`は継承したくないが、`variants`だけ継承したいケースに使えます。
-</Alert>
+:::note
+この関数は、`baseStyle`や`sizes`は継承したくないが、`variants`だけ継承したいケースに使えます。
+:::
 
 ### `extendComponentDefaultProps`を使う
 
@@ -482,10 +466,9 @@ const Tag: ComponentStyle = {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  この関数は、`baseStyle`や`sizes`は継承したくないが、`defaultProps`だけ継承したいケースに使えます。
-</Alert>
+:::note
+この関数は、`baseStyle`や`sizes`は継承したくないが、`defaultProps`だけ継承したいケースに使えます。
+:::
 
 ### `withDefaultSize`を使う
 

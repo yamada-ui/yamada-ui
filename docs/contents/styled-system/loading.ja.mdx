@@ -15,10 +15,9 @@ Yamada UIは、アプリケーションで必要な`ローディングアニメ�
 - `update`: ローディングアニメーションの情報を更新します。
 - `finish`: ローディングアニメーションを終了します。
 
-<Alert status='warning'>
-  <AlertIcon />
-  `custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](#カスタムコンポーネントを使う)をご覧ください。
-</Alert>
+:::note status=warning
+`custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](#カスタムコンポーネントを使う)をご覧ください。
+:::
 
 ```tsx
 function Demo() {
@@ -311,10 +310,9 @@ const App = () => {
 }
 ```
 
-<Alert status='warning'>
-  <AlertIcon />
-  `initialState`を`true`にした場合、アプリケーション内の関数(通信を行っている関数)の終わりに、`useLoading`のインスタンスの`finish`を呼び出す必要があります。そうしなければ、ローディングは終了しません。
-</Alert>
+:::note status=warning
+`initialState`を`true`にした場合、アプリケーション内の関数(通信を行っている関数)の終わりに、`useLoading`のインスタンスの`finish`を呼び出す必要があります。そうしなければ、ローディングは終了しません。
+:::
 
 ### カスタムコンポーネントを使う
 
@@ -451,7 +449,6 @@ function Demo() {
 }
 ```
 
-<Alert status='info'>
-  <AlertIcon />
-  コンフィグをもっと学びたい場合は、[コンフィグをカスタマイズする](/docs/styled-system/configure/customize-config)をご覧ください。
-</Alert>
+:::note
+コンフィグをもっと学びたい場合は、[コンフィグをカスタマイズする](/docs/styled-system/configure/customize-config)をご覧ください。
+:::

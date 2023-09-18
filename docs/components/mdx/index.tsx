@@ -10,6 +10,7 @@ import { ColorModeButton } from './color-mode-button'
 import { ColorPaletters, ColorPaletter, ColorPaletterContainer } from './color-palettes'
 import { Link } from './link'
 import { LinkedHeading } from './linked-heading'
+import { Member, MemberContainer } from './members'
 import { PackageManagers } from './package-managers'
 import { SelectPackageManagers } from './select-package-managers'
 import { LinkCard, CardContainer } from 'components/navigation'
@@ -76,6 +77,8 @@ export const MDXBaseComponents: MDXComponentsType = {
   PackageManagers,
   SelectPackageManagers,
   ColorModeButton,
+  Member: (props) => <Member {...props} />,
+  MemberContainer: (props) => <MemberContainer {...props} />,
   ColorPaletterContainer: (props) => <ColorPaletterContainer {...props} />,
   ColorPaletters: (props) => <ColorPaletters {...props} />,
   ColorPaletter: (props) => <ColorPaletter {...props} />,

@@ -69,6 +69,6 @@ export const ColorPaletterContainer: FC<ColorPaletterContainerProps> = ({ ...res
       templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(2, 1fr)', sm: 'repeat(1, 1fr)' }}
       gap='4'
       {...rest}
-    ></Grid>
+    />
   )
 }

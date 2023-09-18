@@ -1,5 +1,18 @@
 # @yamada-ui/file-button
 
+## 0.3.0
+
+### Minor Changes
+
+- [`9bc5dacc`](https://github.com/hirotomoyamada/yamada-ui/commit/9bc5dacc3d10be62a8593b6cea89e97924f34c50) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - To improve support for the App Router, all components and hooks are exported with the `"use client"` directive.
+
+### Patch Changes
+
+- Updated dependencies [[`9bc5dacc`](https://github.com/hirotomoyamada/yamada-ui/commit/9bc5dacc3d10be62a8593b6cea89e97924f34c50)]:
+  - @yamada-ui/form-control@0.3.0
+  - @yamada-ui/button@0.3.0
+  - @yamada-ui/core@0.9.0
+
 ## 0.2.17
 
 ### Patch Changes

@@ -30,8 +30,9 @@ jobs:
 
       - name: Commit package.json
         run: |
-          git add package.json
+          git add package.json pnpm-lock.yaml
           git diff --staged --quiet || git commit -m "ci(changesets): $GITHUB_SHA"
+          git push
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v3

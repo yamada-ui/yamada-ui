@@ -1,9 +1,93 @@
 ---
 title: グラデーション
-description: このページは現在作成中です。
+description: Yamada UIでグラデーションを使用する方法。
 order: 7
 ---
 
-現在ページ作成中です。😘
+Yamada UIは、簡単にグラデーションを作成するAPIを提供しています。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+## 使い方
+
+グラデーションを追加するには、`bgGradient`のAPIに従って、値を設定します。
+
+- `linear(<direction>, <from>, <to>)`
+- `radial(<from>, <to>)`
+
+`repeating-linear`や`conic`など、他のCSSのグラデーション関数も使用することもできます。
+
+`<direction>`には、ショートハンドも用意されています。
+
+```ts
+{
+  'to-t': 'to top',
+  'to-tr': 'to top right',
+  'to-r': 'to right',
+  'to-br': 'to bottom right',
+  'to-b': 'to bottom',
+  'to-bl': 'to bottom left',
+  'to-l': 'to left',
+  'to-tl': 'to top left',
+}
+```
+
+```tsx
+<Box w='full' h='xs' bgGradient='linear(to-r, purple.500, blue.400)' />
+```
+
+### 色のカスタマイズ
+
+APIは、[色のトークン](/docs/styled-system/theming/default-theme#colors)や[CSSの色の値](https://developer.mozilla.org/ja/docs/Web/CSS/color)の両方を使用できます。
+
+```tsx
+<Box w='full' h='xs' bgGradient='linear(to-r, #59a9e1, #f37bdf)' />
+```
+
+### グラデーションのトークン
+
+グラデーションのトークンは、テーマに定義することができます。
+
+```ts
+import { ThemeTokens } from '@yamada-ui/react'
+
+export const gradients: ThemeTokens = {
+  blue: 'linear(to-r, #132293, #2375b4)',
+}
+```
+
+```tsx
+<Box w='full' h='xs' bgGradient='blue' />
+```
+
+:::note status=warning
+[デフォルトのテーマ](/docs/styled-system/theming/default-theme)には、グラデーションのトークンは定義されていません。グラデーションのトークンを使用する場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)をご覧ください。
+:::
+
+## テキストのグラデーション
+
+テキストのグラデーションを追加するには、`bgGradient`と`bgClip`に`text`を設定します。
+
+```tsx
+<Heading size='2xl' bgGradient='linear(to-r, orange.400, red.500)' bgClip='text' isTruncated>
+  クリリンのことか……クリリンのことかーーーっ！！！！！
+</Heading>
+```
+
+## レスポンシブなグラデーション
+
+`bgGradient`にオブジェクトを渡すことでレスポンシブスタイルを追加できます。
+
+```tsx
+<Box
+  w='full'
+  h='xs'
+  bgGradient={{
+    base: 'linear(to-tr, teal.300, yellow.400)',
+    lg: 'linear(to-t, blue.200, teal.500)',
+    md: 'linear(to-b, orange.100, purple.300)',
+  }}
+/>
+```
+
+:::note
+`レスポンシブスタイル`をもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+:::

@@ -10,6 +10,7 @@ declare module 'contentlayer/generated' {
     menu: string
     tab: string
     order: number
+    table_of_contents_max_lv: number
     label: string
     tags: string[]
     is_active: boolean
@@ -22,7 +23,6 @@ declare module 'contentlayer/generated' {
     locale: string
     paths: string[]
     description?: string
-    category?: string
     editUrl?: string
     version?: string
     contents?: Content[]

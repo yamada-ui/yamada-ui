@@ -34,7 +34,7 @@ export const getStaticDocProps = ({
   locale: string
   defaultLocale: string
 }) => {
-  const paths = toArray(params.slug)
+  const paths = toArray(params?.slug ?? [])
   const doc = getDoc(docs, paths, locale) ?? getDoc(docs, paths, defaultLocale)
 
   const { tabs, parentDoc, parentPaths } = getTabs(docs, doc)

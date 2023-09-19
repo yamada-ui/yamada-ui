@@ -25,22 +25,15 @@ jobs:
           git config --global user.email "hirotomo.yamada@avap.co.jp"
           git config --global user.name "hirotomoyamada"
 
-      - name: Create branch
-        run: |
-          git checkout -b changeset-release/main
-
       - name: Update Yamada UI
         run: pnpm up '@yamada-ui/*' --latest
 
-      - name: Commit package.json
-        run: |
-          git add package.json pnpm-lock.yaml
-          git diff --staged --quiet || git commit -m "ci(changesets): $GITHUB_SHA"
-          git push origin changeset-release/main
-
       - name: Create PR
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.PAT_TOKEN }}
+          base: main
           delete-branch: true
+          commit-message: 'ci(changesets): ${{ github.sha }}'
           title: 'Version Packages'
           branch: changeset-release/main

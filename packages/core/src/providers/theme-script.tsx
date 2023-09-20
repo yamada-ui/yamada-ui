@@ -10,7 +10,7 @@ type ThemeSchemeScriptProps = {
 export const THEME_SCHEME_STORAGE_KEY = 'ui-theme-scheme'
 
 export const getThemeSchemeScript = ({
-  initialThemeScheme: init = 'light',
+  initialThemeScheme: init = '',
   type = 'localStorage',
   storageKey = THEME_SCHEME_STORAGE_KEY,
 }: Omit<ThemeSchemeScriptProps, 'nonce'>) => {

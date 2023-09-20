@@ -71,25 +71,25 @@ export const merge = <T extends Dict>(
 ): T => {
   let result = Object.assign({}, target)
 
-  if (isObject(target) && isObject(source)) {
-    for (const [sourceKey, sourceValue] of Object.entries(source)) {
-      const targetValue = target[sourceKey]
+  if (isObject(source)) {
+    if (isObject(target)) {
+      for (const [sourceKey, sourceValue] of Object.entries(source)) {
+        const targetValue = target[sourceKey]
 
-      if (
-        overrideArray &&
-        Array.isArray(sourceValue) &&
-        Array.isArray(targetValue)
-      ) {
-        result[sourceKey] = targetValue.concat(...sourceValue)
-      } else if (
-        !isFunction(sourceValue) &&
-        isObject(sourceValue) &&
-        target.hasOwnProperty(sourceKey)
-      ) {
-        result[sourceKey] = merge(targetValue, sourceValue, overrideArray)
-      } else {
-        Object.assign(result, { [sourceKey]: sourceValue })
+        if (overrideArray && isArray(sourceValue) && isArray(targetValue)) {
+          result[sourceKey] = targetValue.concat(...sourceValue)
+        } else if (
+          !isFunction(sourceValue) &&
+          isObject(sourceValue) &&
+          target.hasOwnProperty(sourceKey)
+        ) {
+          result[sourceKey] = merge(targetValue, sourceValue, overrideArray)
+        } else {
+          Object.assign(result, { [sourceKey]: sourceValue })
+        }
       }
+    } else {
+      result = source
     }
   }
 

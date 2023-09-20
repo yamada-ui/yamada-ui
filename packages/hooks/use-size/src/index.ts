@@ -1,4 +1,4 @@
-import { useSafeLayoutEffect, isRefObject } from '@yamada-ui/utils'
+import { useSafeLayoutEffect, isRefObject, isArray } from '@yamada-ui/utils'
 import { useState } from 'react'
 
 type Size = {
@@ -21,7 +21,7 @@ export const trackElementSize = (
   const win = el.ownerDocument.defaultView ?? window
 
   const observer = new win.ResizeObserver((entries) => {
-    if (!Array.isArray(entries) || !entries.length) return
+    if (!isArray(entries) || !entries.length) return
 
     const [entry] = entries
     let width: number
@@ -29,7 +29,7 @@ export const trackElementSize = (
 
     if ('borderBoxSize' in entry) {
       const borderSizeEntry = entry.borderBoxSize
-      const borderSize = Array.isArray(borderSizeEntry)
+      const borderSize = isArray(borderSizeEntry)
         ? borderSizeEntry[0]
         : borderSizeEntry
 

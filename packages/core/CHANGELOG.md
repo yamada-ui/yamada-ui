@@ -1,5 +1,15 @@
 # @yamada-ui/core
 
+## 0.9.1
+
+### Patch Changes
+
+- [`c7eda37b`](https://github.com/hirotomoyamada/yamada-ui/commit/c7eda37bcae2b4ea0eddc8fa9f168a85ab8b8cc0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed ThemeSchemeScript default themeScheme to none.
+
+- Updated dependencies [[`bbad918b`](https://github.com/hirotomoyamada/yamada-ui/commit/bbad918b75312ad4656448c9e9e37bdce5d1c14d)]:
+  - @yamada-ui/utils@0.2.1
+  - @yamada-ui/portal@0.3.1
+
 ## 0.9.0
 
 ### Minor Changes

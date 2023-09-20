@@ -1,5 +1,12 @@
 # @yamada-ui/use-pan-event
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`bbad918b`](https://github.com/hirotomoyamada/yamada-ui/commit/bbad918b75312ad4656448c9e9e37bdce5d1c14d)]:
+  - @yamada-ui/utils@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

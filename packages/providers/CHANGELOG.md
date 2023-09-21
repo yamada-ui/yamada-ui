@@ -1,5 +1,19 @@
 # @yamada-ui/providers
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`c7eda37b`](https://github.com/hirotomoyamada/yamada-ui/commit/c7eda37bcae2b4ea0eddc8fa9f168a85ab8b8cc0), [`bbad918b`](https://github.com/hirotomoyamada/yamada-ui/commit/bbad918b75312ad4656448c9e9e37bdce5d1c14d)]:
+  - @yamada-ui/core@0.9.1
+  - @yamada-ui/utils@0.2.1
+  - @yamada-ui/loading@0.4.1
+  - @yamada-ui/motion@0.4.1
+  - @yamada-ui/notice@0.4.1
+  - @yamada-ui/theme@0.8.3
+  - @yamada-ui/portal@0.3.1
+  - @yamada-ui/use-timeout@0.2.1
+
 ## 0.8.0
 
 ### Minor Changes

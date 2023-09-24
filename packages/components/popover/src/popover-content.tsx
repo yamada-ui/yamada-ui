@@ -121,13 +121,13 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
     w =
       w ??
       width ??
-      ((styles.container.w ?? styles.container.width) as CSSUIProps['w'])
+      ((styles.container?.w ?? styles.container?.width) as CSSUIProps['w'])
     minW =
       minW ??
       minWidth ??
-      ((styles.container.minW ??
-        styles.container.minWidth) as CSSUIProps['minW'])
-    zIndex = (zIndex ?? styles.container.zIndex) as UIProps['zIndex']
+      ((styles.container?.minW ??
+        styles.container?.minWidth) as CSSUIProps['minW'])
+    zIndex = (zIndex ?? styles.container?.zIndex) as UIProps['zIndex']
 
     return (
       <ui.div

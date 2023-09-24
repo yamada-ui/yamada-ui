@@ -1,193 +1,187 @@
-const meta = {
+import { Meta, StoryFn } from '@storybook/react'
+import { Markdown } from '@yamada-ui/markdown'
+import { Heading } from '@yamada-ui/react'
+
+type Story = StoryFn<typeof Markdown>
+
+const meta: Meta<typeof Markdown> = {
   title: 'Components / Data Display / Markdown',
+  component: Markdown,
 }
 
 export default meta
 
-// import { Meta, StoryFn } from '@storybook/react'
-// import { Markdown } from '@yamada-ui/markdown'
-// import { Heading } from '@yamada-ui/react'
+export const basic: Story = () => {
+  return <Markdown>{README}</Markdown>
+}
 
-// type Story = StoryFn<typeof Markdown>
+export const withCodeTheme: Story = () => {
+  return <Markdown code={{ theme: 'materialDark' }}>{README}</Markdown>
+}
 
-// const meta: Meta<typeof Markdown> = {
-//   title: 'Components / Data Display / Markdown',
-//   component: Markdown,
-// }
+export const customComponent: Story = () => {
+  return (
+    <Markdown
+      components={{
+        h2: (props) => (
+          <Heading
+            size='2xl'
+            bgGradient='linear(to-l, #f37bdf, #59a9e1)'
+            bgClip='text'
+            isTruncated
+            {...props}
+          />
+        ),
+      }}
+    >
+      {README}
+    </Markdown>
+  )
+}
 
-// export default meta
+const README = `
+<p align="center">
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
+</p>
 
-// export const basic: Story = () => {
-//   return <Markdown>{README}</Markdown>
-// }
+<p align="center">
+  <img alt="NPM Minzip" src="https://img.shields.io/bundlephobia/minzip/@yamada-ui/react"/>
+  <a href="https://www.npmjs.com/package/@yamada-ui/react">
+    <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
+  </a>
+  <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
+  <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
+    <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
+  </a>
+  <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
+  <a href="https://discord.gg/ubYvRAxFEB">
+    <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
+  </a>
+</p>
 
-// export const withCodeTheme: Story = () => {
-//   return <Markdown code={{ theme: 'materialDark' }}>{README}</Markdown>
-// }
+Yamada UI is a React UI component library that streamlines the development of cutting-edge web applications and websites. This library offers a diverse range of components that can be easily combined to construct complex user interfaces, incorporating various features such as color modes and animations, which are not typically supported by other React UI component libraries.
 
-// export const customComponent: Story = () => {
-//   return (
-//     <Markdown
-//       components={{
-//         h2: (props) => (
-//           <Heading
-//             size='2xl'
-//             bgGradient='linear(to-l, #f37bdf, #59a9e1)'
-//             bgClip='text'
-//             isTruncated
-//             {...props}
-//           />
-//         ),
-//       }}
-//     >
-//       {README}
-//     </Markdown>
-//   )
-// }
+## Contents
 
-// const README = `
-// <p align="center">
-//   <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
-// </p>
+- [Respect](#respect)
+- [Documentation](#documentation)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [CodeSandbox](#codesandbox)
+- [Contributing](#contributing)
+- [License](#license)
 
-// <p align="center">
-//   <img alt="NPM Minzip" src="https://img.shields.io/bundlephobia/minzip/@yamada-ui/react"/>
-//   <a href="https://www.npmjs.com/package/@yamada-ui/react">
-//     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
-//   </a>
-//   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
-//   <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
-//     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
-//   </a>
-//   <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
-//   <a href="https://discord.gg/ubYvRAxFEB">
-//     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
-//   </a>
-// </p>
+## Respect
 
-// Yamada UI is a React UI component library that streamlines the development of cutting-edge web applications and websites. This library offers a diverse range of components that can be easily combined to construct complex user interfaces, incorporating various features such as color modes and animations, which are not typically supported by other React UI component libraries.
+Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/chakra-ui/chakra-ui), [MUI](https://github.com/mui/material-ui) and [Mantine UI](https://github.com/mantinedev/mantine). This has brought me wonderful experiences in my life. I am deeply grateful to Segun Adebayo and all the gods who have given me such experiences. And I love them.
 
-// ## Contents
+## Documentation
 
-// - [Respect](#respect)
-// - [Documentation](#documentation)
-// - [Features](#features)
-// - [Installation](#installation)
-// - [Usage](#usage)
-// - [CodeSandbox](#codesandbox)
-// - [Contributing](#contributing)
-// - [License](#license)
+Currently, the documentation is only available in [Storybook](https://hirotomoyamada.github.io/yamada-ui/). However, Storybook contains usage instructions for each prop of all the components.
 
-// ## Respect
+## Features
 
-// Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/chakra-ui/chakra-ui), [MUI](https://github.com/mui/material-ui) and [Mantine UI](https://github.com/mantinedev/mantine). This has brought me wonderful experiences in my life. I am deeply grateful to Segun Adebayo and all the gods who have given me such experiences. And I love them.
+- Ease of Styling: Yamada UI contains a set of layout components like \`Box\` and
+  \`Stack\` that make it easy to style your components by passing props.
+- Flexible & composable: Yamada UI components are built on top of a React UI
+  Primitive for endless composability.
+- Animation: Yamada UI provides hooks that allow for easy declaration of animations.
+  These hooks can be written similar to CSS animations and are supported by all components.
+- Color mode: Yamada UI makes it easy to set values for each color mode in the props of all components.
+  This is not currently implemented in any other React UI component library.
+- Theme switching: Yamada UI allows users to switch themes.
+  Users can adapt their own themes and use web applications and websites.
+  This is not currently implemented in any other React UI component library.
+- Other features:
+  Yamada UI comes with essential loading and notification features that are considered crucial for modern web applications and websites.
+  This means you don't have to define them individually yourself.
 
-// ## Documentation
+## Installation
 
-// Currently, the documentation is only available in [Storybook](https://hirotomoyamada.github.io/yamada-ui/). However, Storybook contains usage instructions for each prop of all the components.
+To use Yamada UI components, all you need to install the
+\`@yamada-ui/react\` package.
 
-// ## Features
+\`\`\`sh
+$ pnpm add @yamada-ui/react
 
-// - Ease of Styling: Yamada UI contains a set of layout components like \`Box\` and
-//   \`Stack\` that make it easy to style your components by passing props.
-// - Flexible & composable: Yamada UI components are built on top of a React UI
-//   Primitive for endless composability.
-// - Animation: Yamada UI provides hooks that allow for easy declaration of animations.
-//   These hooks can be written similar to CSS animations and are supported by all components.
-// - Color mode: Yamada UI makes it easy to set values for each color mode in the props of all components.
-//   This is not currently implemented in any other React UI component library.
-// - Theme switching: Yamada UI allows users to switch themes.
-//   Users can adapt their own themes and use web applications and websites.
-//   This is not currently implemented in any other React UI component library.
-// - Other features:
-//   Yamada UI comes with essential loading and notification features that are considered crucial for modern web applications and websites.
-//   This means you don't have to define them individually yourself.
+# or
 
-// ## Installation
+$ yarn add @yamada-ui/react
 
-// To use Yamada UI components, all you need to install the
-// \`@yamada-ui/react\` package.
+# or
 
-// \`\`\`sh
-// $ pnpm add @yamada-ui/react
+$ npm install @yamada-ui/react
+\`\`\`
 
-// # or
+\`@yamada-ui/table\` and \`@yamada-ui/calendar\`, among others,
+are not included with \`@yamada-ui/react\`.
+You will need to install them separately.
 
-// $ yarn add @yamada-ui/react
+\`\`\`sh
+# Provide a convenient Table component using \`@tanstack/react-table\`.
+$ pnpm add @yamada-ui/table
 
-// # or
+# Provide a convenient Calender and datePicker, MonthPicker component
+$ pnpm add @yamada-ui/calendar
 
-// $ npm install @yamada-ui/react
-// \`\`\`
+# Provide a convenient Carousel component using \`embla-carousel-react\`.
+$ pnpm add @yamada-ui/carousel
 
-// \`@yamada-ui/table\` and \`@yamada-ui/calendar\`, among others,
-// are not included with \`@yamada-ui/react\`.
-// You will need to install them separately.
+# Provide a convenient Dropzone component using \`react-dropzone\`.
+$ pnpm add @yamada-ui/dropzone
 
-// \`\`\`sh
-// # Provide a convenient Table component using \`@tanstack/react-table\`.
-// $ pnpm add @yamada-ui/table
+# Provide a convenient Markdown component using \`react-markdown\` and \`react-syntax-highlighter\`.
+$ pnpm add @yamada-ui/markdown
 
-// # Provide a convenient Calender and datePicker, MonthPicker component
-// $ pnpm add @yamada-ui/calendar
+# a package for conveniently using \`Font Awesome\`.
+$ pnpm add @yamada-ui/fontawesome
+\`\`\`
 
-// # Provide a convenient Carousel component using \`embla-carousel-react\`.
-// $ pnpm add @yamada-ui/carousel
+## Usage
 
-// # Provide a convenient Dropzone component using \`react-dropzone\`.
-// $ pnpm add @yamada-ui/dropzone
+To get started with using the components, please follow the steps below:
 
-// # Provide a convenient Markdown component using \`react-markdown\` and \`react-syntax-highlighter\`.
-// $ pnpm add @yamada-ui/markdown
+1. Wrap your application with the \`UIProvider\` provided
 
-// # a package for conveniently using \`Font Awesome\`.
-// $ pnpm add @yamada-ui/fontawesome
-// \`\`\`
+\`\`\`tsx
+import { UIProvider } from '@yamada-ui/react'
 
-// ## Usage
+const App = ({ children }) => {
+  return <UIProvider>{children}</UIProvider>
+}
 
-// To get started with using the components, please follow the steps below:
+export default App
+\`\`\`
 
-// 1. Wrap your application with the \`UIProvider\` provided
+Yamada UI supports light and dark modes by default
 
-// \`\`\`tsx
-// import { UIProvider } from '@yamada-ui/react'
+2. Now you can start using components like so
 
-// const App = ({ children }) => {
-//   return <UIProvider>{children}</UIProvider>
-// }
+\`\`\`tsx
+import { Box, Text } from '@yamada-ui/react'
 
-// export default App
-// \`\`\`
+const Example = () => {
+  return (
+    <Box>
+      <Text>ギャルのパンティーおくれーーーっ！！！！！</Text>
+    </Box>
+  )
+}
+\`\`\`
 
-// Yamada UI supports light and dark modes by default
+## CodeSandbox
 
-// 2. Now you can start using components like so
+- [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
+- [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
+- [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
+- [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
 
-// \`\`\`tsx
-// import { Box, Text } from '@yamada-ui/react'
+## Contributing
 
-// const Example = () => {
-//   return (
-//     <Box>
-//       <Text>ギャルのパンティーおくれーーーっ！！！！！</Text>
-//     </Box>
-//   )
-// }
-// \`\`\`
+Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
 
-// ## CodeSandbox
+## License
 
-// - [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
-// - [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
-// - [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
-// - [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
-
-// ## Contributing
-
-// Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
-
-// ## License
-
-// MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)
-// `
+MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)
+`

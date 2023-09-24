@@ -32,6 +32,8 @@ const createQueries = (breakpoints: Dict): BreakpointQueries => {
 
     maxW = breakpoint !== 'base' ? maxW : undefined
 
+    if (minW) minW += 1
+
     return {
       breakpoint,
       minW,

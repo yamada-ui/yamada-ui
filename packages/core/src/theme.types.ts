@@ -362,11 +362,8 @@ export type UsageTheme = {
 }
 
 export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
-export type ComponentVariants = Record<
-  string,
-  UIStyle | Record<string, UIStyle>
->
-export type ComponentSizes = Record<string, UIStyle | Record<string, UIStyle>>
+export type ComponentVariants = Record<string, UIStyle>
+export type ComponentSizes = Record<string, UIStyle>
 export type ComponentDefaultProps<
   Y extends Dict = Dict,
   M extends keyof Theme['components'] | unknown = unknown,

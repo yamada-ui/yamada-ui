@@ -1,8 +1,8 @@
-import { Button, HStack, Heading, Text, VStack } from '@yamada-ui/react'
+import { HStack, Heading, Text, VStack } from '@yamada-ui/react'
 import { InferGetStaticPropsType, NextPage } from 'next'
-import Link from 'next/link'
 import { Section } from 'components/layouts'
 import { SEO, Arrow, Github } from 'components/media-and-icons'
+import { NextLinkButton } from 'components/navigation'
 import { CONSTANT } from 'constant'
 import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
@@ -49,27 +49,25 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
           </VStack>
 
           <HStack flexDirection={{ base: 'row', md: 'column' }} justifyContent='center'>
-            <Button
-              as={Link}
+            <NextLinkButton
               size='xl'
               w={{ base: 'auto', md: 'full' }}
               rightIcon={<Arrow />}
               href='/docs/getting-started'
             >
               {tc('home.hero.started')}
-            </Button>
+            </NextLinkButton>
 
-            <Button
-              as='a'
+            <NextLinkButton
               size='xl'
               colorScheme='gray'
               w={{ base: 'auto', md: 'full' }}
               leftIcon={<Github />}
               href={CONSTANT.SNS.GITHUB.YAMADA_UI}
-              target='_blank'
+              isExternal
             >
               {tc('home.hero.github')}
-            </Button>
+            </NextLinkButton>
           </HStack>
         </Section>
       </TopLayout>

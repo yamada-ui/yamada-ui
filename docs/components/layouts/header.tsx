@@ -32,7 +32,7 @@ import { useRouter } from 'next/router'
 import { FC, memo, useEffect, useRef, useState } from 'react'
 import { Search } from 'components/forms'
 import { Discord, Github, Hamburger, Moon, Sun, Translate } from 'components/media-and-icons'
-import { Tree } from 'components/navigation'
+import { NextLinkIconButton, Tree } from 'components/navigation'
 import { CONSTANT } from 'constant'
 import { useI18n } from 'contexts/i18n-context'
 import packageJSON from 'package.json'
@@ -118,11 +118,10 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
 
   return (
     <HStack gap='sm'>
-      <IconButton
-        as='a'
+      <NextLinkIconButton
         href={CONSTANT.SNS.DISCORD}
+        isExternal
         aria-label='GitHub repository'
-        target='_blank'
         variant='ghost'
         colorScheme='gray'
         display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }}
@@ -130,11 +129,10 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         icon={<Discord />}
       />
 
-      <IconButton
-        as='a'
+      <NextLinkIconButton
         href={CONSTANT.SNS.GITHUB.YAMADA_UI}
+        isExternal
         aria-label='Discord server'
-        target='_blank'
         variant='ghost'
         colorScheme='gray'
         display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }}

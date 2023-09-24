@@ -1,8 +1,8 @@
-import { Button, Text, VStack } from '@yamada-ui/react'
+import { Text, VStack } from '@yamada-ui/react'
 import { InferGetStaticPropsType, NextPage } from 'next'
-import Link from 'next/link'
 import { Section } from 'components/layouts'
 import { SEO } from 'components/media-and-icons'
+import { NextLinkButton } from 'components/navigation'
 import { useI18n } from 'contexts/i18n-context'
 import { PageProvider } from 'contexts/page-context'
 import { TopLayout } from 'layouts/top-layout'
@@ -38,9 +38,9 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
             </Text>
           </VStack>
 
-          <Button as={Link} href='/' size='lg'>
+          <NextLinkButton href='/' size='lg'>
             {tc('not-found.back-to-home')}
-          </Button>
+          </NextLinkButton>
         </Section>
       </TopLayout>
     </PageProvider>

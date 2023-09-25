@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 0.9.2
+
+### Patch Changes
+
+- [`135e8e03`](https://github.com/hirotomoyamada/yamada-ui/commit/135e8e030c3056922bcdd3bc017d7264bdd31cda) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted minW calculation.
+  Fixed types of componentVariants and componentSizes.
+  Fixed did't support variant and size responsiveness and color mode.
+
 ## 0.9.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.9.3
+
+### Patch Changes
+
+- [`d829df88`](https://github.com/hirotomoyamada/yamada-ui/commit/d829df8807eae773b08aac5423a3a7ce5ffd9b31) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Handle null styles in getStyles function.
+
 ## 0.9.2
 
 ### Patch Changes

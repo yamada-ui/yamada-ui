@@ -138,8 +138,8 @@ const getStyles =
     let styles = runIfFunc(stylesOrFunc, props)
 
     if (isMulti) {
-      for (const [key, styleOrFunc] of Object.entries<UIStyle>(
-        styles as Record<string, UIStyle>,
+      for (const [key, styleOrFunc] of Object.entries(
+        (styles ?? {}) as Record<string, UIStyle>,
       )) {
         const style = runIfFunc(styleOrFunc, props)
 

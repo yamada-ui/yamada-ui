@@ -16,7 +16,7 @@ export const Sidebar = memo(
         maxH='calc(100dvh - 4rem)'
         {...rest}
       >
-        <VStack as='nav' overflowY='scroll' overscrollBehavior='contain'>
+        <VStack as='nav' overflowY='auto' overscrollBehavior='contain'>
           <Tree pt='lg' pb='16' pr='lg' />
         </VStack>
 

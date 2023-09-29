@@ -69,7 +69,7 @@ export const Select: ComponentMultiStyle = {
       rounded: 'md',
       w: '100%',
       maxH: { base: 'xs' },
-      overflowY: 'scroll',
+      overflowY: 'auto',
       py: '2',
       bg: ['white', 'black'],
       border: '1px solid',

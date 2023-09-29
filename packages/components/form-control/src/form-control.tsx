@@ -330,10 +330,7 @@ type RequiredIndicatorProps = HTMLUIProps<'span'>
 
 const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
   ({ className, ...rest }, ref) => {
-    const { isInvalid, isReplace } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
-
-    if (isReplace && isInvalid) return null
 
     const css: CSSUIObject = { ...styles.requiredIndicator }
 

@@ -7,11 +7,11 @@
     "dev": "next dev",
     "build": "next build",
     "build:profile": "next build --profile",
-    "build:changelog": "tsx scripts/changelog",
-    "build:content": "contentlayer build --clearCache",
+    "build:changelogs": "tsx scripts/changelog",
+    "build:contents": "contentlayer build --clearCache",
     "start": "next start",
     "lint": "next lint",
-    "gen:token": "yamada-cli tokens theme/index.ts --out node_modules/.pnpm/@yamada-ui+core@0.5.1_@types+react@18.2.15_react-dom@18.2.0_react@18.2.0/node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts",
+    "gen:tokens": "yamada-cli tokens theme/index.ts --out node_modules/.pnpm/@yamada-ui+core@0.5.1_@types+react@18.2.15_react-dom@18.2.0_react@18.2.0/node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",
     "format": "prettier --write .",
@@ -39,7 +39,7 @@
     "react-live": "^4.1.5",
     "remark-breaks": "^4.0.0",
     "remark-emoji": "^4.0.0",
-    "remark-gfm": "^4.0.0",
+    "remark-gfm": "^3.0.1",
     "remark-slug": "^7.0.1"
   },
   "devDependencies": {

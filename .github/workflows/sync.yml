@@ -31,9 +31,9 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Build
-        run: pnpm build:changelog
+        run: pnpm build:changelogs
 
-      - name: Commit changelog
+      - name: Commit changelogs
         run: |
           git add .
           git commit -m 'ci(changelog): version packages'

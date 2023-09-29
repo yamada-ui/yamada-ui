@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.8.6
+
+### Patch Changes
+
+- [`75514b3d`](https://github.com/hirotomoyamada/yamada-ui/commit/75514b3de733c88f7800d28f47a757b484c62452) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `overflowY` from `scroll` to `auto`.
+
 ## 0.8.5
 
 ### Patch Changes

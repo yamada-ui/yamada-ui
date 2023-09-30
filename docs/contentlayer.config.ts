@@ -89,7 +89,6 @@ const getValidChildren = (
     if (!name) throw new Error()
 
     const { attributes, resolvedContent } = getAttributes(firstChildContent)
-    console.log(firstChild.value, name, firstChildContent)
 
     if (resolvedContent) {
       children[0].value = resolvedContent

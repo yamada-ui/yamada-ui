@@ -20,8 +20,11 @@ export const layout: Configs = {
   overflowX: true,
   overflowY: true,
   overscrollBehavior: true,
-  overscrollBehaviorX: true,
+  overscroll: { properties: 'overscrollBehavior' },
+  overscrollX: true,
+  textDecor: { properties: 'overscrollBehaviorX' },
   overscrollBehaviorY: true,
+  overscrollY: { properties: 'overscrollBehaviorY' },
   display: true,
   aspectRatio: true,
   verticalAlign: true,
@@ -41,9 +44,6 @@ Object.assign(layout, {
   maxW: layout.maxWidth,
   minH: layout.minHeight,
   maxH: layout.maxHeight,
-  overscroll: layout.overscrollBehavior,
-  overscrollX: layout.overscrollBehaviorX,
-  overscrollY: layout.overscrollBehaviorY,
 })
 
 export type LayoutProps<Y = 'responsive', M = 'colorMode'> = {

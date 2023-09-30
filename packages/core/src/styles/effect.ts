@@ -5,14 +5,14 @@ import { Configs, configs } from './config'
 export const effect: Configs = {
   boxShadow: configs.shadow('boxShadow'),
   mixBlendMode: true,
+  blendMode: configs.prop('mixBlendMode'),
   backgroundBlendMode: true,
+  bgBlendMode: configs.prop('backgroundBlendMode'),
   opacity: true,
 }
 
 Object.assign(effect, {
   shadow: effect.boxShadow,
-  blendMode: effect.mixBlendMode,
-  backgroundBlendMode: effect.backgroundBlendMode,
 })
 
 export type EffectProps<Y = 'responsive', M = 'colorMode'> = {

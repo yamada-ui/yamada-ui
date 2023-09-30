@@ -4,6 +4,7 @@ import { Configs, configs } from './config'
 
 export const position: Configs = {
   position: true,
+  pos: configs.prop('position'),
   zIndex: configs.prop('zIndex', 'zIndices'),
   inset: configs.space('inset'),
   insetX: configs.space(['left', 'right']),
@@ -21,7 +22,6 @@ export const position: Configs = {
 }
 
 Object.assign(position, {
-  pos: position.position,
   insetStart: position.insetInlineStart,
   insetEnd: position.insetInlineEnd,
 })

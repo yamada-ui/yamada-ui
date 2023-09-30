@@ -9,6 +9,7 @@ export const flex: Configs = {
   justifyContent: true,
   flexWrap: true,
   flexDirection: true,
+  flexDir: { properties: 'flexDirection' },
   flex: true,
   flexFlow: true,
   flexGrow: true,
@@ -24,10 +25,6 @@ export const flex: Configs = {
   rowGap: configs.space('rowGap'),
   columnGap: configs.space('columnGap'),
 }
-
-Object.assign(flex, {
-  flexDir: flex.flexDirection,
-})
 
 export type FlexProps<Y = 'responsive', M = 'colorMode'> = {
   /**

@@ -72,7 +72,7 @@ const getValidChildren = (
 
     if (type !== 'text' || !value) throw new Error()
 
-    const [, name, content] = value.match(/^:::(\w+)\s+([\s\S]*?)\s*:::$/m) ?? []
+    const [, name, content] = value.match(/^:::(\w+)\s+([\s\S]*?)\s*:::$/) ?? []
 
     if (!name || !content) throw new Error()
 
@@ -83,12 +83,13 @@ const getValidChildren = (
     const firstChild = children.at(0)
     const lastChild = children.at(-1)
 
-    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)\s*$/m) ?? []
-    const [, lastChildContent] = lastChild.value.match(/([\s\S]*?)\s*:::$/m) ?? []
+    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)\s*$/) ?? []
+    const [, lastChildContent] = lastChild.value.match(/([\s\S]*?)\s*:::$/) ?? []
 
     if (!name) throw new Error()
 
     const { attributes, resolvedContent } = getAttributes(firstChildContent)
+    console.log(firstChild.value, name, firstChildContent)
 
     if (resolvedContent) {
       children[0].value = resolvedContent
@@ -168,7 +169,7 @@ const computedFields: ComputedFields = {
 
 const Doc = defineDocumentType(() => ({
   name: 'Doc',
-  filePathPattern: '**/*.mdx',
+  filePathPattern: '(styled-system)/**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },

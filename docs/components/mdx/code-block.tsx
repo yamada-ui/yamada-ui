@@ -45,8 +45,8 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
   functional = toBoolean(functional)
   noInline = toBoolean(noInline)
 
-  const language = className?.replace(/language-/, '')
-  const code = raw.trim()
+  const language = className?.replace(/language-/, '') ?? 'sh'
+  const code = raw?.trim() ?? ''
   const theme = themes.nightOwl
   const isJSXorTSX = language === 'jsx' || language === 'tsx'
 

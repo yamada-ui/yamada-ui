@@ -80,35 +80,31 @@ Yamada UIには、レスポンシブなレイアウトを構築するために�
 
 コンポーネント内で現在のブレイクポイントを取得する場合には、`useBreakpoint`を使用します。
 
-```tsx
-function Demo() {
-  const breakpoint = useBreakpoint()
+```tsx functional=true
+const breakpoint = useBreakpoint()
 
-  return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
-}
+return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
 ```
 
 ### `useBreakpointValue`を使う
 
 `useBreakpointValue`は、引数で渡されたオブジェクトから現在のブレイクポイントの値を返すカスタムフックです。
 
-```tsx
-function Demo() {
-  const breakpoint = useBreakpoint()
-  const bg = useBreakpointValue({
-    base: 'red.500',
-    xl: 'blue.500',
-    lg: 'green.500',
-    md: 'yellow.500',
-    sm: 'purple.500',
-  })
+```tsx functional=true
+const breakpoint = useBreakpoint()
+const bg = useBreakpointValue({
+  base: 'red.500',
+  xl: 'blue.500',
+  lg: 'green.500',
+  md: 'yellow.500',
+  sm: 'purple.500',
+})
 
-  return (
-    <Box bg={bg} p='md' color='white'>
-      The current breakpoint is "{breakpoint}"
-    </Box>
-  )
-}
+return (
+  <Box bg={bg} p='md' color='white'>
+    The current breakpoint is "{breakpoint}"
+  </Box>
+)
 ```
 
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。

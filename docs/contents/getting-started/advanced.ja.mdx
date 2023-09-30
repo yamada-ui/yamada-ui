@@ -45,16 +45,14 @@ const App = () => {
 
 コンポーネント内で、テーマに定義されているトークンの値を取得する場合には、`useToken`を使用します。
 
-```tsx
-function Demo() {
-  const bg = useToken('colors', 'primary')
+```tsx functional=true
+const bg = useToken('colors', 'primary')
 
-  return (
-    <Box bg={bg} p='md' color='white'>
-      Primary for color tokens is "{bg}"
-    </Box>
-  )
-}
+return (
+  <Box bg={bg} p='md' color='white'>
+    Primary for color tokens is "{bg}"
+  </Box>
+)
 ```
 
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
@@ -146,35 +144,31 @@ Yamada UIのコンポーネントは、いくつかの`CSS`のオブジェクト
 
 コンポーネント内で現在のブレイクポイントを取得する場合には、`useBreakpoint`を使用します。
 
-```tsx
-function Demo() {
-  const breakpoint = useBreakpoint()
+```tsx functional=true
+const breakpoint = useBreakpoint()
 
-  return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
-}
+return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
 ```
 
 ### `useBreakpointValue`を使ってみましょう
 
 `useBreakpointValue`は、引数で渡されたオブジェクトから現在のブレイクポイントの値を返すカスタムフックです。
 
-```tsx
-function Demo() {
-  const breakpoint = useBreakpoint()
-  const bg = useBreakpointValue({
-    base: 'red.500',
-    xl: 'blue.500',
-    lg: 'green.500',
-    md: 'yellow.500',
-    sm: 'purple.500',
-  })
+```tsx functional=true
+const breakpoint = useBreakpoint()
+const bg = useBreakpointValue({
+  base: 'red.500',
+  xl: 'blue.500',
+  lg: 'green.500',
+  md: 'yellow.500',
+  sm: 'purple.500',
+})
 
-  return (
-    <Box bg={bg} p='md' color='white'>
-      The current breakpoint is "{breakpoint}"
-    </Box>
-  )
-}
+return (
+  <Box bg={bg} p='md' color='white'>
+    The current breakpoint is "{breakpoint}"
+  </Box>
+)
 ```
 
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
@@ -191,16 +185,14 @@ function Demo() {
 
 コンポーネント内で現在のカラーモードを取得する場合には、`useColorMode`を使用します。
 
-```tsx
-function Demo() {
-  const { colorMode, internalColorMode } = useColorMode()
+```tsx functional=true
+const { colorMode, internalColorMode } = useColorMode()
 
-  return (
-    <Box p='md'>
-      The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
-    </Box>
-  )
-}
+return (
+  <Box p='md'>
+    The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+  </Box>
+)
 ```
 
 :::note
@@ -212,18 +204,16 @@ function Demo() {
 
 `useColorModeValue`は、第1引数にライトモードの値、第2引数にダークモードの値を渡し、現在のカラーモードの値を返すカスタムフックです。
 
-```tsx
-function Demo() {
-  const { colorMode } = useColorMode()
-  const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
-  const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+```tsx functional=true
+const { colorMode } = useColorMode()
+const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
+const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
 
-  return (
-    <Box p='md' bg={bg} color={color}>
-      The current colorMode is "{colorMode}"
-    </Box>
-  )
-}
+return (
+  <Box p='md' bg={bg} color={color}>
+    The current colorMode is "{colorMode}"
+  </Box>
+)
 ```
 
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
@@ -240,208 +230,202 @@ function Demo() {
 
 `useAnimation`の引数は、配列も受け入れます。
 
-```tsx
-function Demo() {
-  const animation = useAnimation([
-    {
-      keyframes: {
-        '0%': {
-          bg: 'red.500',
-        },
-        '20%': {
-          bg: 'green.500',
-        },
-        '40%': {
-          bg: 'purple.500',
-        },
-        '60%': {
-          bg: 'yellow.500',
-        },
-        '80%': {
-          bg: 'blue.500',
-        },
-        '100%': {
-          bg: 'red.500',
-        },
+```tsx functional=true
+const animation = useAnimation([
+  {
+    keyframes: {
+      '0%': {
+        bg: 'red.500',
       },
-      duration: '10s',
-      iterationCount: 'infinite',
-      timingFunction: 'linear',
-    },
-    {
-      keyframes: {
-        '0%': {
-          h: 'xs',
-        },
-        '50%': {
-          h: 'md',
-        },
-        '100%': {
-          h: 'xs',
-        },
+      '20%': {
+        bg: 'green.500',
       },
-      duration: '10s',
-      iterationCount: 'infinite',
-      timingFunction: 'linear',
-    },
-    {
-      keyframes: {
-        '0%': {
-          w: 'full',
-        },
-        '50%': {
-          w: '50%',
-        },
-        '100%': {
-          w: 'full',
-        },
+      '40%': {
+        bg: 'purple.500',
       },
-      duration: '10s',
-      iterationCount: 'infinite',
-      timingFunction: 'linear',
+      '60%': {
+        bg: 'yellow.500',
+      },
+      '80%': {
+        bg: 'blue.500',
+      },
+      '100%': {
+        bg: 'red.500',
+      },
     },
-  ])
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+  {
+    keyframes: {
+      '0%': {
+        h: 'xs',
+      },
+      '50%': {
+        h: 'md',
+      },
+      '100%': {
+        h: 'xs',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+  {
+    keyframes: {
+      '0%': {
+        w: 'full',
+      },
+      '50%': {
+        w: '50%',
+      },
+      '100%': {
+        w: 'full',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+])
 
-  return (
-    <Box h='md'>
-      <Box w='full' h='xs' animation={animation} />
-    </Box>
-  )
-}
+return (
+  <Box h='md'>
+    <Box w='full' h='xs' animation={animation} />
+  </Box>
+)
 ```
 
 ### `useDynamicAnimation`を使ってみましょう
 
 `useDynamicAnimation`は、引数にオブジェクトを渡します。オブジェクトのキーはアニメーションのキーになり、`setState`の引数にキーを渡すことでアニメーションが変更されます。
 
-```tsx
-function Demo() {
-  const [animation, setAnimation] = useDynamicAnimation({
-    moveLeft: {
-      keyframes: {
-        '0%': {
-          transform: 'translateX(400%)',
-        },
-        '100%': {
-          transform: 'translateX(0%)',
-        },
+```tsx functional=true
+const [animation, setAnimation] = useDynamicAnimation({
+  moveLeft: {
+    keyframes: {
+      '0%': {
+        transform: 'translateX(400%)',
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
-    },
-    moveRight: {
-      keyframes: {
-        '0%': {
-          transform: 'translateX(0%)',
-        },
-        '100%': {
-          transform: 'translateX(400%)',
-        },
+      '100%': {
+        transform: 'translateX(0%)',
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
     },
-  })
+    duration: 'slower',
+    fillMode: 'forwards',
+    timingFunction: 'ease-in-out',
+  },
+  moveRight: {
+    keyframes: {
+      '0%': {
+        transform: 'translateX(0%)',
+      },
+      '100%': {
+        transform: 'translateX(400%)',
+      },
+    },
+    duration: 'slower',
+    fillMode: 'forwards',
+    timingFunction: 'ease-in-out',
+  },
+})
 
-  return (
-    <VStack alignItems='flex-start'>
-      <Button
-        colorScheme='gray'
-        onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
-      >
-        Click me!
-      </Button>
+return (
+  <VStack alignItems='flex-start'>
+    <Button
+      colorScheme='gray'
+      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+    >
+      Click me!
+    </Button>
 
-      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
-        Box
-      </Box>
-    </VStack>
-  )
-}
+    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+      Box
+    </Box>
+  </VStack>
+)
 ```
 
 動的なアニメーションと複数のアニメーションを組み合わせることも可能です。
 
-```tsx
-function Demo() {
-  const [animation, setAnimation] = useDynamicAnimation<
-    Record<'moveLeft' | 'moveRight', AnimationStyle[]>
-  >({
-    moveLeft: [
-      {
-        keyframes: {
-          '0%': {
-            transform: 'translateX(400%)',
-          },
-          '100%': {
-            transform: 'translateX(0%)',
-          },
+```tsx functional=true
+const [animation, setAnimation] = useDynamicAnimation<
+  Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+>({
+  moveLeft: [
+    {
+      keyframes: {
+        '0%': {
+          transform: 'translateX(400%)',
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
-      },
-      {
-        keyframes: {
-          '0%': {
-            bg: 'secondary',
-          },
-          '100%': {
-            bg: 'primary',
-          },
+        '100%': {
+          transform: 'translateX(0%)',
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
       },
-    ],
-    moveRight: [
-      {
-        keyframes: {
-          '0%': {
-            transform: 'translateX(0%)',
-          },
-          '100%': {
-            transform: 'translateX(400%)',
-          },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+    {
+      keyframes: {
+        '0%': {
+          bg: 'secondary',
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
-      },
-      {
-        keyframes: {
-          '0%': {
-            bg: 'primary',
-          },
-          '100%': {
-            bg: 'secondary',
-          },
+        '100%': {
+          bg: 'primary',
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
       },
-    ],
-  })
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+  ],
+  moveRight: [
+    {
+      keyframes: {
+        '0%': {
+          transform: 'translateX(0%)',
+        },
+        '100%': {
+          transform: 'translateX(400%)',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+    {
+      keyframes: {
+        '0%': {
+          bg: 'primary',
+        },
+        '100%': {
+          bg: 'secondary',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+  ],
+})
 
-  return (
-    <VStack alignItems='flex-start'>
-      <Button
-        colorScheme='gray'
-        onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
-      >
-        Click me!
-      </Button>
+return (
+  <VStack alignItems='flex-start'>
+    <Button
+      colorScheme='gray'
+      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+    >
+      Click me!
+    </Button>
 
-      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
-        Box
-      </Box>
-    </VStack>
-  )
-}
+    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+      Box
+    </Box>
+  </VStack>
+)
 ```
 
 :::note

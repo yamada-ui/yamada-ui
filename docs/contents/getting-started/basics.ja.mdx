@@ -79,54 +79,52 @@ Yamada UIは、アプリケーションで必要な`ローディングアニメ�
 `custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
 :::
 
-```tsx
-function Demo() {
-  const { screen, page, background } = useLoading()
+```tsx functional=true
+const { screen, page, background } = useLoading()
 
-  const demoScreen = async () => {
-    try {
-      screen.start()
+const onLoadingScreen = async () => {
+  try {
+    screen.start()
 
-      await wait(5000)
-    } finally {
-      screen.finish()
-    }
+    await wait(5000)
+  } finally {
+    screen.finish()
   }
-
-  const demoPage = async () => {
-    try {
-      page.start()
-
-      await wait(5000)
-    } finally {
-      page.finish()
-    }
-  }
-
-  const demoBackground = async () => {
-    try {
-      background.start()
-
-      await wait(5000)
-    } finally {
-      background.finish()
-    }
-  }
-
-  return (
-    <Wrap gap='md'>
-      <Button colorScheme='gray' onClick={demoScreen}>
-        Start screen loading
-      </Button>
-      <Button colorScheme='gray' onClick={demoPage}>
-        Start page loading
-      </Button>
-      <Button colorScheme='gray' onClick={demoBackground}>
-        Start background loading
-      </Button>
-    </Wrap>
-  )
 }
+
+const onLoadingPage = async () => {
+  try {
+    page.start()
+
+    await wait(5000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start()
+
+    await wait(5000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap='md'>
+    <Button colorScheme='gray' onClick={onLoadingScreen}>
+      Start screen loading
+    </Button>
+    <Button colorScheme='gray' onClick={onLoadingPage}>
+      Start page loading
+    </Button>
+    <Button colorScheme='gray' onClick={onLoadingBackground}>
+      Start background loading
+    </Button>
+  </Wrap>
+)
 ```
 
 :::note
@@ -143,24 +141,22 @@ Yamada UIは、アプリケーションで必要な`通知`をサポートして
 
 通知を表示するには、`useNotice`を使用します。`useNotice`は、通知を表示・制御するインスタンスを返します。
 
-```tsx
-function Demo() {
-  const notice = useNotice()
+```tsx functional=true
+const notice = useNotice()
 
-  return (
-    <Button
-      colorScheme='gray'
-      onClick={() =>
-        notice({
-          title: 'Notification',
-          description: 'This is description.',
-        })
-      }
-    >
-      Show notification
-    </Button>
-  )
-}
+return (
+  <Button
+    colorScheme='gray'
+    onClick={() =>
+      notice({
+        title: 'Notification',
+        description: 'This is description.',
+      })
+    }
+  >
+    Show notification
+  </Button>
+)
 ```
 
 :::note
@@ -384,27 +380,25 @@ export const config: ThemeConfig = {
 - `changeColorMode`: 引数に変更したいカラーモードを設定します。
 - `toggleColorMode`: ライトモードならダークモードへ、ダークモードならライトモードへ切り替えます。
 
-```tsx
-function Demo() {
-  const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+```tsx functional=true
+const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
-  return (
-    <Wrap gap='md'>
-      <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
-        ライトモード
-      </Button>
-      <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
-        ダークモード
-      </Button>
-      <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
-        システム
-      </Button>
-      <Button colorScheme='gray' onClick={toggleColorMode}>
-        {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
-      </Button>
-    </Wrap>
-  )
-}
+return (
+  <Wrap gap='md'>
+    <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
+      ライトモード
+    </Button>
+    <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
+      ダークモード
+    </Button>
+    <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
+      システム
+    </Button>
+    <Button colorScheme='gray' onClick={toggleColorMode}>
+      {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
+    </Button>
+  </Wrap>
+)
 ```
 
 :::note
@@ -432,40 +426,38 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
 :::
 
-```tsx
-function Demo() {
-  const animation = useAnimation({
-    keyframes: {
-      from: {
-        transform: 'rotate(0)',
-      },
-      to: {
-        transform: 'rotate(359deg)',
-      },
+```tsx functional=true
+const animation = useAnimation({
+  keyframes: {
+    from: {
+      transform: 'rotate(0)',
     },
-    duration: '0.8s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
-  })
+    to: {
+      transform: 'rotate(359deg)',
+    },
+  },
+  duration: '0.8s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
 
-  return (
-    <Center p='lg'>
-      <Center
-        w='150px'
-        h='150px'
-        p='1'
-        rounded='50%'
-        bgGradient={[
-          'linear(blackAlpha.50, blackAlpha.500)',
-          'linear(whiteAlpha.50, whiteAlpha.500)',
-        ]}
-        animation={animation}
-      >
-        <Box w='full' h='full' rounded='50%' bg={['white', 'black']} />
-      </Center>
+return (
+  <Center p='lg'>
+    <Center
+      w='150px'
+      h='150px'
+      p='1'
+      rounded='50%'
+      bgGradient={[
+        'linear(blackAlpha.50, blackAlpha.500)',
+        'linear(whiteAlpha.50, whiteAlpha.500)',
+      ]}
+      animation={animation}
+    >
+      <Box w='full' h='full' rounded='50%' bg={['white', 'black']} />
     </Center>
-  )
-}
+  </Center>
+)
 ```
 
 ### `Motion`を使ってみましょう

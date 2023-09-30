@@ -233,27 +233,25 @@ export const getServerSideProps = getServerSideCommonProps
 - `changeColorMode`: 引数に変更したいカラーモードを設定します。
 - `toggleColorMode`: ライトモードならダークモードへ、ダークモードならライトモードへ切り替えます。
 
-```tsx
-function Demo() {
-  const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+```tsx functional=true
+const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
-  return (
-    <Wrap gap='md'>
-      <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
-        ライトモード
-      </Button>
-      <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
-        ダークモード
-      </Button>
-      <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
-        システム
-      </Button>
-      <Button colorScheme='gray' onClick={toggleColorMode}>
-        {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
-      </Button>
-    </Wrap>
-  )
-}
+return (
+  <Wrap gap='md'>
+    <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
+      ライトモード
+    </Button>
+    <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
+      ダークモード
+    </Button>
+    <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
+      システム
+    </Button>
+    <Button colorScheme='gray' onClick={toggleColorMode}>
+      {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
+    </Button>
+  </Wrap>
+)
 ```
 
 ## カラーモードのユーティリティ
@@ -264,16 +262,14 @@ Yamada UIには、カラーモードの便利なカスタムフックを提供�
 
 コンポーネント内で現在のカラーモードを取得する場合には、`useColorMode`を使用します。
 
-```tsx
-function Demo() {
-  const { colorMode, internalColorMode } = useColorMode()
+```tsx functional=true
+const { colorMode, internalColorMode } = useColorMode()
 
-  return (
-    <Box p='md'>
-      The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
-    </Box>
-  )
-}
+return (
+  <Box p='md'>
+    The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+  </Box>
+)
 ```
 
 :::note
@@ -285,18 +281,16 @@ function Demo() {
 
 `useColorModeValue`は、第1引数にライトモードの値、第2引数にダークモードの値を渡し、現在のカラーモードの値を返すカスタムフックです。
 
-```tsx
-function Demo() {
-  const { colorMode } = useColorMode()
-  const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
-  const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+```tsx functional=true
+const { colorMode } = useColorMode()
+const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
+const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
 
-  return (
-    <Box p='md' bg={bg} color={color}>
-      The current colorMode is "{colorMode}"
-    </Box>
-  )
-}
+return (
+  <Box p='md' bg={bg} color={color}>
+    The current colorMode is "{colorMode}"
+  </Box>
+)
 ```
 
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。

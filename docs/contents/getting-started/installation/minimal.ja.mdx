@@ -104,36 +104,34 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 
 <PackageManagers packageNameOrCommand='@yamada-ui/use-animation' />
 
-```tsx
-function Demo() {
-  const animation = useAnimation({
-    keyframes: {
-      '0%': {
-        bg: '#ef4444',
-      },
-      '20%': {
-        bg: '#22c55e',
-      },
-      '40%': {
-        bg: '#a855f7',
-      },
-      '60%': {
-        bg: '#eab308',
-      },
-      '80%': {
-        bg: '#3b82f6',
-      },
-      '100%': {
-        bg: '#ef4444',
-      },
+```tsx functional=true
+const animation = useAnimation({
+  keyframes: {
+    '0%': {
+      bg: '#ef4444',
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
-  })
+    '20%': {
+      bg: '#22c55e',
+    },
+    '40%': {
+      bg: '#a855f7',
+    },
+    '60%': {
+      bg: '#eab308',
+    },
+    '80%': {
+      bg: '#3b82f6',
+    },
+    '100%': {
+      bg: '#ef4444',
+    },
+  },
+  duration: '10s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
 
-  return <ui.div w='full' h='xs' animation={animation} />
-}
+return <ui.div w='full' h='xs' animation={animation} />
 ```
 
 ### `Motion`を使ってみましょう

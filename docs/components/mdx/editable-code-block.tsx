@@ -33,21 +33,27 @@ export type EditableCodeBlockProps = {
   disabled?: boolean
   enableTypeScript?: boolean
   language?: string
+  functional?: boolean
   noInline?: boolean
   theme?: PrismTheme
   transformCode?: (code: string) => void
 }
 
-export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, ...rest }) => {
+export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional, ...rest }) => {
   code = code.trim().replace('// prettier-ignore', '').trim()
 
   const { t } = useI18n()
   const [editorCode, setEditorCode] = useState(code)
 
+  const transformCode = (code: string) => {
+    if (functional) code = '() => {' + code + '}'
+
+    return code
+  }
   const onChange = (code: string) => setEditorCode(code.trim())
 
   return (
-    <LiveProvider {...{ code: editorCode, enableTypeScript: true, scope }} {...rest}>
+    <LiveProvider {...{ code: editorCode, enableTypeScript: true, scope, transformCode }} {...rest}>
       <Box my='6'>
         <Box as={LivePreview} p='md' borderWidth='1px' rounded='md' overflowX='auto' zIndex='1' />
 

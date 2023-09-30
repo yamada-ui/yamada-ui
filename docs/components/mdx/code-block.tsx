@@ -16,6 +16,7 @@ type Children = {
   props: {
     className?: string
     title?: string
+    functional?: string | boolean
     live?: string | boolean
     noInline?: string | boolean
     children?: string
@@ -25,15 +26,23 @@ type Children = {
 
 export type CodeBlockProps = DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
 
-export const CodeBlock: FC<CodeBlockProps> = (props) => {
+export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
   const [isMounted, { on }] = useBoolean()
 
   useEffect(on, [on])
 
-  const children = props.children as Children
-  let { className, title, live = true, noInline, children: raw, highlight } = children.props
+  let {
+    className,
+    title,
+    live = true,
+    functional = false,
+    noInline,
+    children: raw,
+    highlight,
+  } = (children as Children).props
 
   live = toBoolean(live)
+  functional = toBoolean(functional)
   noInline = toBoolean(noInline)
 
   const language = className?.replace(/language-/, '')
@@ -42,7 +51,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const isJSXorTSX = language === 'jsx' || language === 'tsx'
 
   if (isMounted && isJSXorTSX && live) {
-    return <EditableCodeBlock {...{ code, language, theme, noInline }} />
+    return <EditableCodeBlock {...{ code, language, theme, noInline, functional }} />
   }
 
   return (

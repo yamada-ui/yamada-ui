@@ -8,9 +8,9 @@ import {
   ComponentDefaultProps,
   UIStyle,
   UIStyleProps,
-  ComponentMultiBaseStyle,
   ComponentMultiSizes,
   ComponentMultiVariants,
+  ComponentMultiStyle,
 } from '@yamada-ui/core'
 import { baseTheme, defaultTheme } from '@yamada-ui/theme'
 import {
@@ -83,10 +83,10 @@ export const extendStyle = (
 
 export const extendComponent = (
   name: keyof (typeof defaultTheme)['components'],
-  componentStyle?: ComponentStyle | ComponentMultiBaseStyle,
-): ComponentStyle | ComponentMultiBaseStyle =>
+  componentStyle?: ComponentStyle | ComponentMultiStyle,
+): ComponentStyle | ComponentMultiStyle =>
   mergeObject(
-    get<ComponentStyle | ComponentMultiBaseStyle>(
+    get<ComponentStyle | ComponentMultiStyle>(
       defaultTheme,
       `components.${name}`,
       {},

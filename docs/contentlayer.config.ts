@@ -168,7 +168,7 @@ const computedFields: ComputedFields = {
 
 const Doc = defineDocumentType(() => ({
   name: 'Doc',
-  filePathPattern: '(styled-system)/**/*.mdx',
+  filePathPattern: '**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },

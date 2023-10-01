@@ -156,7 +156,7 @@ export const withTransition: Story = () => {
   )
 }
 
-export const useStopPropagation: Story = () => {
+export const usePropagation: Story = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
 

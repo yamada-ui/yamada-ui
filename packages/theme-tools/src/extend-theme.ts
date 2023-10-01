@@ -8,6 +8,9 @@ import {
   ComponentDefaultProps,
   UIStyle,
   UIStyleProps,
+  ComponentMultiBaseStyle,
+  ComponentMultiSizes,
+  ComponentMultiVariants,
 } from '@yamada-ui/core'
 import { baseTheme, defaultTheme } from '@yamada-ui/theme'
 import {
@@ -80,17 +83,21 @@ export const extendStyle = (
 
 export const extendComponent = (
   name: keyof (typeof defaultTheme)['components'],
-  componentStyle?: ComponentStyle,
-): ComponentStyle =>
+  componentStyle?: ComponentStyle | ComponentMultiBaseStyle,
+): ComponentStyle | ComponentMultiBaseStyle =>
   mergeObject(
-    get<ComponentStyle>(defaultTheme, `components.${name}`, {}),
+    get<ComponentStyle | ComponentMultiBaseStyle>(
+      defaultTheme,
+      `components.${name}`,
+      {},
+    ),
     componentStyle ?? {},
   )
 
 export const extendComponentSize = (
   name: keyof (typeof defaultTheme)['components'],
-  componentSizes?: ComponentSizes,
-): ComponentSizes =>
+  componentSizes?: ComponentSizes | ComponentMultiSizes,
+): ComponentSizes | ComponentMultiSizes =>
   mergeObject(
     get<ComponentSizes>(defaultTheme, `components.${name}.sizes`, {}),
     componentSizes ?? {},
@@ -98,10 +105,14 @@ export const extendComponentSize = (
 
 export const extendComponentVariant = (
   name: keyof (typeof defaultTheme)['components'],
-  componentVariants?: ComponentVariants,
-): ComponentVariants =>
+  componentVariants?: ComponentVariants | ComponentMultiVariants,
+): ComponentVariants | ComponentMultiVariants =>
   mergeObject(
-    get<ComponentVariants>(defaultTheme, `components.${name}.variants`, {}),
+    get<ComponentVariants | ComponentMultiVariants>(
+      defaultTheme,
+      `components.${name}.variants`,
+      {},
+    ),
     componentVariants ?? {},
   )
 

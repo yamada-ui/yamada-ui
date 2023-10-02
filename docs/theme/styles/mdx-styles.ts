@@ -19,15 +19,15 @@ export const mdx: Record<string, CSSUIObject> = {
   h4: {
     mt: '8',
     mb: '6',
-    fontSize: { base: 'md' },
+    fontSize: { base: 'lg' },
   },
   h5: {
     my: '6',
-    fontSize: { base: 'sm' },
+    fontSize: { base: 'md' },
   },
   h6: {
     my: '6',
-    fontSize: { base: 'xs' },
+    fontSize: { base: 'sm' },
   },
   p: {
     my: '6',

@@ -497,6 +497,8 @@ return <Box w='full' h='xs' animation='gradient' />
 </Center>
 ```
 
+#### `AnimatePresence`を使う
+
 Reactでは、要素が`DOMツリー`から削除されるとアニメーションは維持されません。`AnimatePresence`コンポーネントでラッピングすることで、アニメーションが終了するまで要素は`DOMツリー`上で維持されます。
 
 ```tsx functional=true
@@ -569,6 +571,53 @@ return (
     bg='primary'
   />
 </Center>
+```
+
+#### `useMotionAnimationFrame`を使う
+
+`useMotionAnimationFrame`は、要素のアニメーションフレームごとに1回コールバックを実行します。コールバックは、**コールバックが最初に呼び出されてからの合計時間**と**最後のアニメーションフレームからの合計時間**を取得することができます。
+
+```tsx functional=true
+const containerRef = useRef<HTMLDivElement>(null)
+
+useMotionAnimationFrame((time, delta) => {
+  const rotate = Math.sin(time / 10000) * 200
+  const y = (1 + Math.sin(time / 1000)) * -50
+
+  containerRef.current.style.transform = `translateY(${y}px) rotateX(${rotate}deg) rotateY(${rotate}deg)`
+})
+
+const sides = useMemo(
+  () => [
+    { transform: 'rotateY(0deg) translateZ(60px)', bg: 'red.500' },
+    { transform: 'rotateY(90deg) translateZ(60px)', bg: 'orange.500' },
+    { transform: 'rotateY(180deg) translateZ(60px)', bg: 'pink.500' },
+    { transform: 'rotateY(-90deg) translateZ(60px)', bg: 'purple.500' },
+    { transform: 'rotateX(90deg) translateZ(60px);', bg: 'blue.500' },
+    { transform: 'rotateX(-90deg) translateZ(60px)', bg: 'green.500' },
+  ],
+  [],
+)
+
+return (
+  <Center h='md'>
+    <Box css={{ perspective: '800px' }} w='120px' h='120px'>
+      <Box ref={containerRef} position='relative' w='120px' h='120px' transformStyle='preserve-3d'>
+        {sides.map(({ transform, bg }) => (
+          <Box
+            key={bg.split('.')[0]}
+            position='absolute'
+            w='full'
+            h='full'
+            bg={bg}
+            opacity='0.6'
+            transform={transform}
+          />
+        ))}
+      </Box>
+    </Box>
+  </Center>
+)
 ```
 
 :::note
@@ -715,13 +764,13 @@ return (
 `dragConstraints`に`top`・`right`・`bottom`・`left`ごとに値(ピクセル単位)を設定したオブジェクトか、`ref`を渡すことでドラッグの可能領域を制約することができます。
 
 ```tsx functional=true
-const constraintsRef = useRef<HTMLDivElement>(null)
+const containerRef = useRef<HTMLDivElement>(null)
 
 return (
-  <Center ref={constraintsRef} h='md' gap='md'>
+  <Center ref={containerRef} h='md' gap='md'>
     <Motion
       drag
-      dragConstraints={constraintsRef}
+      dragConstraints={containerRef}
       p='md'
       cursor='grab'
       _active={{ cursor: 'grabbing' }}
@@ -758,13 +807,13 @@ return (
 `dragElastic`に`true`・`false`・`数値`または`top`・`right`・`bottom`・`left`ごとに数値を設定したオブジェクトを渡すことで、制約の外側で許可された動きの程度を設定できます。`0`が動きなし、`1`が完全に動きます。デフォルトは`0.5`が設定されています。
 
 ```tsx functional=true
-const constraintsRef = useRef<HTMLDivElement>(null)
+const containerRef = useRef<HTMLDivElement>(null)
 
 return (
-  <Center ref={constraintsRef} h='md' p='md' gap='md'>
+  <Center ref={containerRef} h='md' p='md' gap='md'>
     <Motion
       drag
-      dragConstraints={constraintsRef}
+      dragConstraints={containerRef}
       dragElastic={0}
       p='md'
       cursor='grab'
@@ -782,13 +831,13 @@ return (
 `dragMomentum`に`true`または`false`を渡すことで、パンのジェスチャーの勢いを要素に適応します。デフォルトは、`true`が設定されています。
 
 ```tsx functional=true
-const constraintsRef = useRef<HTMLDivElement>(null)
+const containerRef = useRef<HTMLDivElement>(null)
 
 return (
-  <Center ref={constraintsRef} h='md' p='md' gap='md'>
+  <Center ref={containerRef} h='md' p='md' gap='md'>
     <Motion
       drag
-      dragConstraints={constraintsRef}
+      dragConstraints={containerRef}
       dragMomentum={false}
       p='md'
       cursor='grab'
@@ -821,18 +870,18 @@ return (
 - `onViewportLeave`: 要素がビューポートに離れたときに発火するコールバック関数です。
 
 ```tsx functional=true
-const constraintsRef = useRef<HTMLDivElement>(null)
+const containerRef = useRef<HTMLDivElement>(null)
 
 return (
   <>
     <Text>Please scroll</Text>
 
-    <Box ref={constraintsRef} h='md' p='md' overflowY='auto'>
+    <Box ref={containerRef} h='md' p='md' overflowY='auto'>
       <HStack mt='24rem' justifyContent='center'>
         <Motion
           initial={{ x: -100 }}
           whileInView={{ x: 0 }}
-          viewport={{ root: constraintsRef }}
+          viewport={{ root: containerRef }}
           transition={{ duration: 1 }}
           onViewportEnter={(entry) => console.log('Scroll entires', entry)}
           onViewportLeave={(entry) => console.log('Scroll leaves', entry)}
@@ -847,7 +896,7 @@ return (
         <Motion
           initial={{ x: 100 }}
           whileInView={{ x: 0 }}
-          viewport={{ once: true, root: constraintsRef }}
+          viewport={{ once: true, root: containerRef }}
           transition={{ duration: 1 }}
           onViewportEnter={(entry) => console.log('Scroll entires', entry)}
           onViewportLeave={(entry) => console.log('Scroll leaves', entry)}
@@ -874,12 +923,12 @@ return (
 - `scrollYProgress`: 引数で指定された要素のオフセット間のスクロール(`y軸`)情報のインスタンス。
 
 ```tsx functional=true
-const constraintsRef = useRef<HTMLDivElement>(null)
-const { scrollYProgress } = useScroll({ container: constraintsRef })
+const containerRef = useRef<HTMLDivElement>(null)
+const { scrollYProgress } = useScroll({ container: containerRef })
 const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 
 return (
-  <Box ref={constraintsRef} position='relative' h='md' overflowY='auto'>
+  <Box ref={containerRef} position='relative' h='md' overflowY='auto'>
     <Box h='9xl'>
       <Box w='2xs' h='2xs' position='sticky' top='50%' left='50%' transform='translate(-50%, -50%)'>
         <Motion

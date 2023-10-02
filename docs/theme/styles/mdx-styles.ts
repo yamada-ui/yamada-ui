@@ -56,10 +56,18 @@ export const mdx: Record<string, CSSUIObject> = {
   ul: {
     my: '6',
     gap: '3',
+    '& ul,ol': {
+      mt: '2',
+      mb: '0',
+    },
   },
   ol: {
     my: '6',
     gap: '3',
+    '& ul,ol': {
+      mt: '2',
+      mb: '0',
+    },
   },
   li: {
     '& > p': { my: '0' },

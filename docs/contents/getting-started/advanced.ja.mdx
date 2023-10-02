@@ -18,7 +18,7 @@ Yamada UIは、テーマのユーティリティが他のUIライブラリより
 他にも、サイズを変更する`withDefaultSize`、バリアントを変更する`withDefaultVariant`も提供しています。
 :::
 
-### `withDefaultColorScheme`を使ってみましょう
+### `withDefaultColorScheme`を使う
 
 Yamada UIが提供しているほとんどのコンポーネントは、デフォルトの`colorScheme`に`primary`が設定されています。`withDefaultColorScheme`を使用して、`secondary`に変更します。
 
@@ -41,7 +41,7 @@ const App = () => {
 }
 ```
 
-### `useToken`を使ってみましょう
+### `useToken`を使う
 
 コンポーネント内で、テーマに定義されているトークンの値を取得する場合には、`useToken`を使用します。
 
@@ -140,7 +140,7 @@ Yamada UIのコンポーネントは、いくつかの`CSS`のオブジェクト
 
 [基本を学ぶ](/docs/getting-started/basics#レスポンシブについて)では、レスポンシブスタイルの設定を学びました。ここでは、現在のブレイクポイントを取得する方法や便利なユーティリティを学びます。
 
-### `useBreakpoint`を使ってみましょう
+### `useBreakpoint`を使う
 
 コンポーネント内で現在のブレイクポイントを取得する場合には、`useBreakpoint`を使用します。
 
@@ -150,7 +150,7 @@ const breakpoint = useBreakpoint()
 return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
 ```
 
-### `useBreakpointValue`を使ってみましょう
+### `useBreakpointValue`を使う
 
 `useBreakpointValue`は、引数で渡されたオブジェクトから現在のブレイクポイントの値を返すカスタムフックです。
 
@@ -181,7 +181,7 @@ return (
 
 [基本を学ぶ](/docs/getting-started/basics#カラーモードについて)では、カラーモードのスタイルの設定を学びました。ここでは、現在のカラーモードを取得する方法や便利なユーティリティを学びます。
 
-### `useColorMode`を使ってみましょう
+### `useColorMode`を使う
 
 コンポーネント内で現在のカラーモードを取得する場合には、`useColorMode`を使用します。
 
@@ -200,7 +200,7 @@ return (
 `internalColorMode`は、現在の`light`と`dark`または`system`を返します。
 :::
 
-### `useColorModeValue`を使ってみましょう
+### `useColorModeValue`を使う
 
 `useColorModeValue`は、第1引数にライトモードの値、第2引数にダークモードの値を渡し、現在のカラーモードの値を返すカスタムフックです。
 
@@ -226,9 +226,9 @@ return (
 
 [基本を学ぶ](/docs/getting-started/basics#アニメーションについて)では、`useAnimation`と`Motion`コンポーネントを学びました。ここでは、`useAnimation`で複数のアニメーションの設定や新しく動的なアニメーションを設定する`useDynamicAnimation`を学びます。
 
-### `useAnimation`で複数のアニメーションを使ってみましょう
+### `useAnimation`で複数のアニメーションを使う
 
-`useAnimation`の引数は、配列も受け入れます。
+`useAnimation`は、配列も受け入れます。
 
 ```tsx functional=true
 const animation = useAnimation([
@@ -298,7 +298,7 @@ return (
 )
 ```
 
-### `useDynamicAnimation`を使ってみましょう
+### `useDynamicAnimation`を使う
 
 `useDynamicAnimation`は、引数にオブジェクトを渡します。オブジェクトのキーはアニメーションのキーになり、`setState`の引数にキーを渡すことでアニメーションが変更されます。
 

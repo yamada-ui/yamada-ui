@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 0.9.4
+
+### Patch Changes
+
+- [`e73947ba`](https://github.com/hirotomoyamada/yamada-ui/commit/e73947ba6c843184ed9d21e6dbd2ac319aa5f888) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated property assignments in style configs.
+
+- [`bcdf6ae7`](https://github.com/hirotomoyamada/yamada-ui/commit/bcdf6ae7a062bdd9a15a57073ecc588603b9573b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `transformStyle` and `perspective` CSS properties.
+
 ## 0.9.3
 
 ### Patch Changes

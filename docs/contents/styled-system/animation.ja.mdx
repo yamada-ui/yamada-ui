@@ -1,9 +1,467 @@
 ---
 title: アニメーション
-description: このページは現在作成中です。
+description: Yamada UIは、すぐに使えるアニメーションをサポートしています。
 order: 6
 ---
 
-現在ページ作成中です。😘
+Yamada UIは、アニメーションに特化したコンポーネントの`Motion`やCSSの`keyframes`のように記述できる`useAnimation`など、多くのユーティリティを提供しています。
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+## CSSアニメーション
+
+Yamada UIは、CSSの`keyframes`のように記述できる`useAnimation`と`useDynamicAnimation`を提供しています。また、テーマにトークンを設定することで、プロジェクトにアニメーションの一貫性を担保することができます。
+
+### `useAnimation`を使う
+
+`useAnimation`は、引数に`keyframes`などを設定し、生成された`animation`を`props`に渡します。
+
+- `keyframes`: アニメーションの流れに沿ったキーフレーム(または中間地点)のスタイルを設定します。各スタイルの値は、Yamada UIのスタイルシステムやテーマのトークンが使用できます。
+- `duration`: 1回のアニメーションサイクルに要する時間の長さを設定します。
+- `timingFunction`: アニメーションの進め方を設定します。これは加速曲線を定義することで、キーフレーム間のアニメーションをどのように進めていくかを設定します。
+- `delay`: 要素が読み込まれてからアニメーションを始めるまでの遅延時間を設定します。
+- `iterationCount`: アニメーションを繰り返す回数を設定します。アニメーションを無限に繰り返すには`infinite`を指定してください。
+- `direction`: アニメーションのシーケンス完了時に、逆方向にアニメーションして繰り返すか、始めの状態にリセットしてアニメーションを繰り返すかを設定します。
+- `fillMode`: アニメーションの実行前後に、指定したスタイルを適用するかを設定します。
+- `playState`: アニメーションを一時停止したり、再開したりするかを設定します。
+
+:::note
+アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
+:::
+
+```tsx functional=true
+const animation = useAnimation({
+  keyframes: {
+    '0%': {
+      bg: 'red.500',
+    },
+    '20%': {
+      bg: 'green.500',
+    },
+    '40%': {
+      bg: 'purple.500',
+    },
+    '60%': {
+      bg: 'yellow.500',
+    },
+    '80%': {
+      bg: 'blue.500',
+    },
+    '100%': {
+      bg: 'red.500',
+    },
+  },
+  duration: '10s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
+
+return <Box w='full' h='xs' animation={animation} />
+```
+
+#### 複数のアニメーションを使う
+
+`useAnimation`にアニメーションの配列を渡すことで、複数のアニメーションを使うことができます。
+
+```tsx functional=true
+const animation = useAnimation([
+  {
+    keyframes: {
+      '0%': {
+        bg: 'red.500',
+      },
+      '20%': {
+        bg: 'green.500',
+      },
+      '40%': {
+        bg: 'purple.500',
+      },
+      '60%': {
+        bg: 'yellow.500',
+      },
+      '80%': {
+        bg: 'blue.500',
+      },
+      '100%': {
+        bg: 'red.500',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+  {
+    keyframes: {
+      '0%': {
+        h: 'xs',
+      },
+      '50%': {
+        h: 'md',
+      },
+      '100%': {
+        h: 'xs',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+  {
+    keyframes: {
+      '0%': {
+        w: 'full',
+      },
+      '50%': {
+        w: '50%',
+      },
+      '100%': {
+        w: 'full',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+])
+
+return (
+  <Box h='md'>
+    <Box w='full' h='xs' animation={animation} />
+  </Box>
+)
+```
+
+#### レスポンシブスタイル
+
+`props`の`animation`にオブジェクトを渡すだけでPCファーストのレスポンシブスタイルに対応します。
+
+```tsx functional=true
+const desktopAnimation = useAnimation({
+  keyframes: {
+    '0%': {
+      bg: 'red.500',
+    },
+    '20%': {
+      bg: 'green.500',
+    },
+    '40%': {
+      bg: 'purple.500',
+    },
+    '60%': {
+      bg: 'yellow.500',
+    },
+    '80%': {
+      bg: 'blue.500',
+    },
+    '100%': {
+      bg: 'red.500',
+    },
+  },
+  duration: '10s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
+
+const tabletAnimation = useAnimation({
+  keyframes: {
+    '0%': {
+      bg: 'cyan.500',
+    },
+    '20%': {
+      bg: 'emerald.500',
+    },
+    '40%': {
+      bg: 'pink.500',
+    },
+    '60%': {
+      bg: 'amber.500',
+    },
+    '80%': {
+      bg: 'sky.500',
+    },
+    '100%': {
+      bg: 'cyan.500',
+    },
+  },
+  duration: '10s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
+
+return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnimation }} />
+```
+
+:::note
+レスポンシブスタイルをもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+:::
+
+#### カラーモード
+
+`props`の`animation`に配列を渡すことでカラーモードに対応します。
+
+```tsx functional=true
+const lightAnimation = useAnimation({
+  keyframes: {
+    '0%': {
+      bg: 'red.500',
+    },
+    '20%': {
+      bg: 'green.500',
+    },
+    '40%': {
+      bg: 'purple.500',
+    },
+    '60%': {
+      bg: 'yellow.500',
+    },
+    '80%': {
+      bg: 'blue.500',
+    },
+    '100%': {
+      bg: 'red.500',
+    },
+  },
+  duration: '10s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
+
+const darkAnimation = useAnimation({
+  keyframes: {
+    '0%': {
+      bg: 'red.800',
+    },
+    '20%': {
+      bg: 'green.800',
+    },
+    '40%': {
+      bg: 'purple.800',
+    },
+    '60%': {
+      bg: 'yellow.800',
+    },
+    '80%': {
+      bg: 'blue.800',
+    },
+    '100%': {
+      bg: 'red.800',
+    },
+  },
+  duration: '10s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
+
+return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
+```
+
+:::note
+カラーモードをもっと学びたい場合は、[こちら](/docs/styled-system/color-mode)をご覧ください。
+:::
+
+### `useDynamicAnimation`を使う
+
+`useDynamicAnimation`は、引数にオブジェクトを渡します。オブジェクトのキーはアニメーションのキーになり、`setState`の引数にキーを渡すことでアニメーションが変更されます。
+
+```tsx functional=true
+const [animation, setAnimation] = useDynamicAnimation({
+  moveLeft: {
+    keyframes: {
+      '0%': {
+        transform: 'translateX(400%)',
+      },
+      '100%': {
+        transform: 'translateX(0%)',
+      },
+    },
+    duration: 'slower',
+    fillMode: 'forwards',
+    timingFunction: 'ease-in-out',
+  },
+  moveRight: {
+    keyframes: {
+      '0%': {
+        transform: 'translateX(0%)',
+      },
+      '100%': {
+        transform: 'translateX(400%)',
+      },
+    },
+    duration: 'slower',
+    fillMode: 'forwards',
+    timingFunction: 'ease-in-out',
+  },
+})
+
+return (
+  <VStack alignItems='flex-start'>
+    <Button
+      colorScheme='gray'
+      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+    >
+      Click me!
+    </Button>
+
+    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+      Box
+    </Box>
+  </VStack>
+)
+```
+
+#### 複数のアニメーションと組み合わせる
+
+動的なアニメーションと複数のアニメーションを組み合わせることも可能です。
+
+```tsx functional=true
+const [animation, setAnimation] = useDynamicAnimation<
+  Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+>({
+  moveLeft: [
+    {
+      keyframes: {
+        '0%': {
+          transform: 'translateX(400%)',
+        },
+        '100%': {
+          transform: 'translateX(0%)',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+    {
+      keyframes: {
+        '0%': {
+          bg: 'secondary',
+        },
+        '100%': {
+          bg: 'primary',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+  ],
+  moveRight: [
+    {
+      keyframes: {
+        '0%': {
+          transform: 'translateX(0%)',
+        },
+        '100%': {
+          transform: 'translateX(400%)',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+    {
+      keyframes: {
+        '0%': {
+          bg: 'primary',
+        },
+        '100%': {
+          bg: 'secondary',
+        },
+      },
+      duration: 'slower',
+      fillMode: 'forwards',
+      timingFunction: 'ease-in-out',
+    },
+  ],
+})
+
+return (
+  <VStack alignItems='flex-start'>
+    <Button
+      colorScheme='gray'
+      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+    >
+      Click me!
+    </Button>
+
+    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+      Box
+    </Box>
+  </VStack>
+)
+```
+
+### テーマのトークンを使う
+
+:::note status=warning
+テーマのアニメーションのトークンを使用する場合は、まず[テーマの運用](/docs/styled-system/theming/customize-theme#テーマの運用)をご覧ください。
+:::
+
+アニメーションのトークンを作成し、テーマに設定します。
+
+```ts title=./theme/tokens/animations.ts
+import { ThemeAnimationTokens } from '@yamada-ui/react'
+
+export const animations: ThemeAnimationTokens = {
+  gradient: {
+    keyframes: {
+      '0%': {
+        bg: 'red.500',
+      },
+      '20%': {
+        bg: 'green.500',
+      },
+      '40%': {
+        bg: 'purple.500',
+      },
+      '60%': {
+        bg: 'yellow.500',
+      },
+      '80%': {
+        bg: 'blue.500',
+      },
+      '100%': {
+        bg: 'red.500',
+      },
+    },
+    duration: '10s',
+    iterationCount: 'infinite',
+    timingFunction: 'linear',
+  },
+}
+```
+
+```ts title=./theme/tokens/index.ts
+import { animations } from './animations'
+
+export default { animations }
+```
+
+```ts title=./theme/index.ts highlight={4,9}
+import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import tokens from './tokens'
+
+const customTheme: UsageTheme = {
+  ...tokens,
+}
+
+export default extendTheme(customTheme)()
+```
+
+:::note
+作成したアニメーションのトークンは、型補完をすることをオススメします。型補完は、[CLI](/docs/styled-system/cli)を使用します。
+:::
+
+作成したトークンは、コンポーネントの`props`の`animation`で指定します。`useAnimation`と`useDynamicAnimation`でも使用することができます。
+
+```tsx functional=true
+return <Box w='full' h='xs' animation='gradient' />
+```
+
+## Motion
+
+### キーフレーム
+
+### バリアント
+
+### ジェスチャー
+
+### スクロール

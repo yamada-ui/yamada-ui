@@ -193,16 +193,12 @@ export default { Button }
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
 import customComponents from './components'
-import tokens from './tokens'
 
 const defaultComponents = defaultTheme.components
 
 const customTheme: UsageTheme = {
-  styles,
   components: { ...defaultComponents, ...customComponents },
-  ...tokens,
 }
 
 export default extendTheme(customTheme)({ omit: ['components'] })
@@ -340,16 +336,12 @@ export default { List }
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
 import customComponents from './components'
-import tokens from './tokens'
 
 const defaultComponents = defaultTheme.components
 
 const customTheme: UsageTheme = {
-  styles,
   components: { ...defaultComponents, ...customComponents },
-  ...tokens,
 }
 
 export default extendTheme(customTheme)({ omit: ['components'] })
@@ -406,16 +398,12 @@ export default { Banner }
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
 import customComponents from './components'
-import tokens from './tokens'
 
 const defaultComponents = defaultTheme.components
 
 const customTheme: UsageTheme = {
-  styles,
   components: { ...defaultComponents, ...customComponents },
-  ...tokens,
 }
 
 export default extendTheme(customTheme)({ omit: ['components'] })

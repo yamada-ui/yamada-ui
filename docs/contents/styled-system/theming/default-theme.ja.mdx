@@ -14,7 +14,7 @@ with_children_description: false
 
 ## Colors
 
-`color`・`borderColor`・`backgroundColor`・`fill`・`stroke`などは、このトークンを参照されます。
+`color`・`borderColor`・`backgroundColor`・`fill`・`stroke`などは、このトークンを参照します。
 
 :::note status=warning
 各コンポーネントは、`colorScheme`という概念があります。`colorScheme`は、このトークンを元に生成されます。生成には条件があり、キーが`brand`・`primary`・`secondary`・`warning`・`danger`・`link`か、`Hue(50から950)`が定義されている場合に生成されます。
@@ -131,8 +131,6 @@ with_children_description: false
 <ColorPaletters colorScheme='fuchsia' />
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const colors = {
   transparent: 'transparent',
   current: 'currentColor',
@@ -467,27 +465,21 @@ const colors = {
     950: '#4a044e',
   },
 }
-
-const theme = extendTheme({ colors })
 ```
 
 ## Gradients
 
-`backgroundImage`・`bgGradient`などは、このトークンを参照されます。
+`backgroundImage`・`bgGradient`などは、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const gradients = {
   // Not defined
 }
-
-const theme = extendTheme({ gradients })
 ```
 
 ## Spaces
 
-`margin`・`padding`・`gap`・`top`・`left`などは、このトークンを参照されます。
+`margin`・`padding`・`gap`・`top`・`left`などは、このトークンを参照します。
 
 | Name        | Space    | Pixels |                                     |
 | ----------- | -------- | ------ | ----------------------------------- |
@@ -525,8 +517,6 @@ const theme = extendTheme({ gradients })
 | 96          | 24rem    | 384px  | <Box bg='green.400' h='4' w='96'/>  |
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const spaces = {
   xs: '0.25rem',
   sm: '0.5rem',
@@ -572,17 +562,13 @@ const spaces = {
   84: '21rem',
   96: '24rem',
 }
-
-const theme = extendTheme({ spaces })
 ```
 
 ## Sizes
 
-`width`・`height`・`inlineSize`・`blockSize`・`boxSize`などは、このトークンを参照されます。
+`width`・`height`・`inlineSize`・`blockSize`・`boxSize`などは、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const sizes = {
   ...spaces,
   max: 'max-content',
@@ -610,8 +596,6 @@ const sizes = {
   '8xl': '80rem',
   '9xl': '90rem',
 }
-
-const theme = extendTheme({ sizes })
 ```
 
 :::note status=warning
@@ -625,15 +609,11 @@ const theme = extendTheme({ sizes })
 `fontFamily`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const fonts = {
   heading: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "游ゴシック体", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
   body: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "游ゴシック体", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
   mono: `SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
 }
-
-const theme = extendTheme({ fonts })
 ```
 
 ### FontSizes
@@ -641,8 +621,6 @@ const theme = extendTheme({ fonts })
 `fontSize`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const fontSizes = {
   '2xs': '0.625rem',
   xs: '0.75rem',
@@ -659,8 +637,6 @@ const fontSizes = {
   '8xl': '4.5rem',
   '9xl': '6rem',
 }
-
-const theme = extendTheme({ fontSizes })
 ```
 
 ### FontWeights
@@ -668,8 +644,6 @@ const theme = extendTheme({ fontSizes })
 `fontWeight`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const fontWeights = {
   hairline: 100,
   thin: 200,
@@ -681,8 +655,6 @@ const fontWeights = {
   extrabold: 800,
   black: 900,
 }
-
-const theme = extendTheme({ fontWeights })
 ```
 
 ### LineHeights
@@ -690,8 +662,6 @@ const theme = extendTheme({ fontWeights })
 `lineHeight`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const lineHeights = {
   normal: 'normal',
   none: 1,
@@ -709,8 +679,6 @@ const lineHeights = {
   '9': '2.25rem',
   '10': '2.5rem',
 }
-
-const theme = extendTheme({ lineHeights })
 ```
 
 ### LetterSpacings
@@ -718,8 +686,6 @@ const theme = extendTheme({ lineHeights })
 `letterSpacing`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const letterSpacings = {
   tighter: '-0.05em',
   tight: '-0.025em',
@@ -728,31 +694,23 @@ const letterSpacings = {
   wider: '0.05em',
   widest: '0.1em',
 }
-
-const theme = extendTheme({ letterSpacings })
 ```
 
 ## Borders
 
-`border`・`borderTop`・`borderInline`・`borderBlock`などは、このトークンを参照されます。
+`border`・`borderTop`・`borderInline`・`borderBlock`などは、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const borders = {
   // Not defined
 }
-
-const theme = extendTheme({ borders })
 ```
 
 ## Radii
 
-`borderRadius`・`rounded`・`borderTopRightRadius`・`roundedStart`などは、このトークンを参照されます。
+`borderRadius`・`rounded`・`borderTopRightRadius`・`roundedStart`などは、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const radii = {
   none: '0',
   sm: '0.125rem',
@@ -764,17 +722,13 @@ const radii = {
   '3xl': '1.5rem',
   full: '9999px',
 }
-
-const theme = extendTheme({ radii })
 ```
 
 ## Shadows
 
-`boxShadow`・`shadow`・`textShadow`などは、このトークンを参照されます。
+`boxShadow`・`shadow`・`textShadow`などは、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const shadows = {
   xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
   sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
@@ -792,33 +746,25 @@ const shadows = {
   'dark-lg':
     'rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px',
 }
-
-const theme = extendTheme({ shadows })
 ```
 
 ## Animations
 
-`animation`は、このトークンを参照されます。
+`animation`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const animations = {
   // Not defined
 }
-
-const theme = extendTheme({ animations })
 ```
 
 ## Transitions
 
-- `transitionProperty`は、この`transitions.property`を参照されます。
-- `transitionDuration`・`animationDuration`は、この`transitions.duration`を参照されます。
-- `transitionTimingFunction`・`animationTimingFunction`は、この`transitions.easing`を参照されます。
+- `transitionProperty`は、この`transitions.property`を参照します。
+- `transitionDuration`・`animationDuration`は、この`transitions.duration`を参照します。
+- `transitionTimingFunction`・`animationTimingFunction`は、この`transitions.easing`を参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const transitions = {
   property: {
     common: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
@@ -844,8 +790,6 @@ const transitions = {
     'ultra-slow': '500ms',
   },
 }
-
-const theme = extendTheme({ transitions })
 ```
 
 ## ZIndices
@@ -853,8 +797,6 @@ const theme = extendTheme({ transitions })
 `zIndex`は、このトークンを参照します。
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const zIndices = {
   yamcha: 1,
   kurillin: 9,
@@ -871,8 +813,6 @@ const zIndices = {
   sonGoku: 9998,
   beerus: 9999,
 }
-
-const theme = extendTheme({ zIndices })
 ```
 
 ## Breakpoint
@@ -884,8 +824,6 @@ const theme = extendTheme({ zIndices })
 :::
 
 ```ts live=false
-import { extendTheme } from '@yamada-ui/react'
-
 const breakpoints = {
   sm: '30em',
   md: '48em',
@@ -893,6 +831,4 @@ const breakpoints = {
   xl: '80em',
   '2xl': '90em',
 }
-
-const theme = extendTheme({ breakpoints })
 ```

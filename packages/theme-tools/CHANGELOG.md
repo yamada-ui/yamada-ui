@@ -1,5 +1,15 @@
 # @yamada-ui/theme-tools
 
+## 0.2.6
+
+### Patch Changes
+
+- [`e3817668`](https://github.com/hirotomoyamada/yamada-ui/commit/e381766837bd1d7f315201f1e959a7e548ff149f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `extendComponent`, `extendComponentVariant` and `extendComponentSize` support multi part component type definitions.
+
+- Updated dependencies [[`e73947ba`](https://github.com/hirotomoyamada/yamada-ui/commit/e73947ba6c843184ed9d21e6dbd2ac319aa5f888), [`264ab9e1`](https://github.com/hirotomoyamada/yamada-ui/commit/264ab9e1221303a7bdf642fc014b1b21774c4c6e), [`bcdf6ae7`](https://github.com/hirotomoyamada/yamada-ui/commit/bcdf6ae7a062bdd9a15a57073ecc588603b9573b)]:
+  - @yamada-ui/core@0.9.4
+  - @yamada-ui/theme@0.8.7
+
 ## 0.2.5
 
 ### Patch Changes

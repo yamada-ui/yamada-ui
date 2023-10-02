@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 0.8.7
+
+### Patch Changes
+
+- [`264ab9e1`](https://github.com/hirotomoyamada/yamada-ui/commit/264ab9e1221303a7bdf642fc014b1b21774c4c6e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added item style to list component.
+
+- Updated dependencies [[`e73947ba`](https://github.com/hirotomoyamada/yamada-ui/commit/e73947ba6c843184ed9d21e6dbd2ac319aa5f888), [`bcdf6ae7`](https://github.com/hirotomoyamada/yamada-ui/commit/bcdf6ae7a062bdd9a15a57073ecc588603b9573b)]:
+  - @yamada-ui/core@0.9.4
+
 ## 0.8.6
 
 ### Patch Changes

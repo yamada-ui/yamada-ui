@@ -280,6 +280,7 @@ export const formControlProperties: any[] = [
 type LabelOptions = {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
+  isRequired?: boolean
 }
 
 export type LabelProps = HTMLUIProps<'label'> & LabelOptions
@@ -289,6 +290,7 @@ export const Label = forwardRef<LabelProps, 'label'>(
     {
       className,
       htmlFor,
+      isRequired: isResolveRequired,
       requiredIndicator = <RequiredIndicator />,
       optionalIndicator = null,
       children,
@@ -299,6 +301,8 @@ export const Label = forwardRef<LabelProps, 'label'>(
     const { id, isRequired, isFocused, isDisabled, isInvalid, isReadOnly } =
       useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
+
+    isResolveRequired ??= isRequired
 
     const css: CSSUIObject = {
       display: 'block',
@@ -320,7 +324,7 @@ export const Label = forwardRef<LabelProps, 'label'>(
         {...rest}
       >
         {children}
-        {isRequired ? requiredIndicator : optionalIndicator}
+        {isResolveRequired ? requiredIndicator : optionalIndicator}
       </ui.label>
     )
   },

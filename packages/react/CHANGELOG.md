@@ -1,5 +1,26 @@
 # @yamada-ui/react
 
+## 0.7.7
+
+### Patch Changes
+
+- Updated dependencies [[`471916a9`](https://github.com/hirotomoyamada/yamada-ui/commit/471916a953cdcd2c4005911224ccf7d7fc5f3111)]:
+  - @yamada-ui/form-control@0.3.6
+  - @yamada-ui/autocomplete@0.3.6
+  - @yamada-ui/checkbox@0.3.6
+  - @yamada-ui/editable@0.3.6
+  - @yamada-ui/file-button@0.3.6
+  - @yamada-ui/file-input@0.3.6
+  - @yamada-ui/input@0.3.6
+  - @yamada-ui/native-select@0.3.6
+  - @yamada-ui/number-input@0.3.6
+  - @yamada-ui/pin-input@0.3.6
+  - @yamada-ui/radio@0.3.6
+  - @yamada-ui/select@0.3.6
+  - @yamada-ui/slider@0.3.6
+  - @yamada-ui/textarea@0.3.6
+  - @yamada-ui/switch@0.3.6
+
 ## 0.7.6
 
 ### Patch Changes

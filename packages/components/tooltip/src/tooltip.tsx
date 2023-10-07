@@ -14,7 +14,7 @@ import {
   AnimatePresence,
   MotionTransitionProperties,
 } from '@yamada-ui/motion'
-import { Portal } from '@yamada-ui/portal'
+import { Portal, PortalProps } from '@yamada-ui/portal'
 import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
 import { useDisclosure } from '@yamada-ui/use-disclosure'
 import { useEventListener } from '@yamada-ui/use-event-listener'
@@ -116,6 +116,14 @@ type TooltipOptions = {
    * The animation duration.
    */
   duration?: MotionTransitionProperties['duration']
+  /**
+   * Props for portal component.
+   */
+  portalProps?: Pick<PortalProps, 'appendToParentPortal' | 'containerRef'>
+  /**
+   * If `true`, the element will be transported to the end of document.body.
+   */
+  withPortal?: boolean
 }
 
 export type TooltipProps = HTMLUIProps<'div'> &
@@ -165,7 +173,10 @@ const getTooltipProps = (
 }
 
 export const Tooltip = forwardRef<TooltipProps, 'div'>(
-  ({ closeOnPointerDown, zIndex, ...props }, ref) => {
+  (
+    { closeOnPointerDown, zIndex, portalProps, withPortal = true, ...props },
+    ref,
+  ) => {
     const [styles, mergedProps] = useComponentStyle('Tooltip', props)
     const {
       className,
@@ -305,9 +316,10 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
     return (
       <>
         {trigger}
+
         <AnimatePresence>
           {isOpen ? (
-            <Portal>
+            <Portal isDisabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
                 zIndex={(zIndex ?? styles.zIndex) as UIProps['zIndex']}

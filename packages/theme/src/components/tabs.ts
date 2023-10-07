@@ -18,7 +18,7 @@ export const Tabs: ComponentMultiStyle = {
       transitionDuration: 'normal',
       _hover: { opacity: 0.7 },
       _focusVisible: {
-        zIndex: 1,
+        zIndex: 'yamcha',
         boxShadow: 'outline',
       },
       _selected: { _hover: { opacity: 1 } },

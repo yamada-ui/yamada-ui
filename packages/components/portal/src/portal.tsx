@@ -18,13 +18,20 @@ export type PortalProps = {
    * @default true
    */
   appendToParentPortal?: boolean
+  /**
+   * If `true`, the forwarding will be disabled.
+   */
+  isDisabled?: boolean
 }
 
 export const Portal = ({
   containerRef,
   appendToParentPortal = true,
+  isDisabled,
   children,
 }: PortalProps) => {
+  if (isDisabled) return children
+
   return containerRef ? (
     <ContainerPortal containerRef={containerRef} {...{ children }} />
   ) : (

@@ -40,7 +40,7 @@ export const Dropzone: ComponentMultiStyle = {
           borderWidth: '1px',
           borderStyle: 'solid',
           _focus: {
-            zIndex: 1,
+            zIndex: 'yamcha',
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -49,7 +49,7 @@ export const Dropzone: ComponentMultiStyle = {
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 1,
+            zIndex: 'yamcha',
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -98,7 +98,7 @@ export const Dropzone: ComponentMultiStyle = {
           borderWidth: '1px',
           borderStyle: 'dashed',
           _focus: {
-            zIndex: 1,
+            zIndex: 'yamcha',
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -107,7 +107,7 @@ export const Dropzone: ComponentMultiStyle = {
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 1,
+            zIndex: 'yamcha',
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },

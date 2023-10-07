@@ -16,7 +16,7 @@ export const Menu: ComponentStyle = {
       borderColor: 'inherit',
       color: 'inherit',
       boxShadow: ['sm', 'dark-lg'],
-      zIndex: 1,
+      zIndex: 'yamcha',
     },
     item: {
       py: '1.5',

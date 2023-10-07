@@ -25,7 +25,7 @@ export const Editable: ComponentMultiStyle = {
       transitionDuration: 'normal',
       _placeholder: { opacity: 0.6 },
       _focus: {
-        zIndex: 1,
+        zIndex: 'yamcha',
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(
@@ -46,7 +46,7 @@ export const Editable: ComponentMultiStyle = {
         }`,
       },
       _focusVisible: {
-        zIndex: 1,
+        zIndex: 'yamcha',
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(
@@ -72,7 +72,7 @@ export const Editable: ComponentMultiStyle = {
       transitionDuration: 'normal',
       _placeholder: { opacity: 0.6 },
       _focus: {
-        zIndex: 1,
+        zIndex: 'yamcha',
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(
@@ -93,7 +93,7 @@ export const Editable: ComponentMultiStyle = {
         }`,
       },
       _focusVisible: {
-        zIndex: 1,
+        zIndex: 'yamcha',
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(

@@ -73,7 +73,7 @@ export const DatePicker: ComponentMultiStyle = {
       borderColor: 'inherit',
       color: 'inherit',
       boxShadow: ['sm', 'dark-lg'],
-      zIndex: 1,
+      zIndex: 'yamcha',
     },
   },
 

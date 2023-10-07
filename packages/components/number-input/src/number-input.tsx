@@ -710,7 +710,7 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, 'div'>(
       insetEnd: '0px',
       margin: '1px',
       height: 'calc(100% - 2px)',
-      zIndex: 1,
+      zIndex: 'yamcha',
       ...styles.addon,
     }
 

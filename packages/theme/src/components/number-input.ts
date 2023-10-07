@@ -64,7 +64,7 @@ export const NumberInput: ComponentMultiStyle = {
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 1,
+            zIndex: 'yamcha',
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },

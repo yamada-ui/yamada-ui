@@ -8,7 +8,7 @@ export const Dialog: ComponentMultiStyle = {
       bg: ['white', 'black'],
       color: 'inherit',
       boxShadow: ['lg', 'dark-lg'],
-      zIndex: 'ginyu',
+      zIndex: 'recoome',
     },
     closeButton: {
       top: '3',
@@ -16,7 +16,7 @@ export const Dialog: ComponentMultiStyle = {
     },
     overlay: {
       bg: 'blackAlpha.600',
-      zIndex: 'recoome',
+      zIndex: 'burter',
     },
     header: {
       pt: 'md',

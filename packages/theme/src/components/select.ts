@@ -76,7 +76,7 @@ export const Select: ComponentMultiStyle = {
       borderColor: 'inherit',
       color: 'inherit',
       boxShadow: ['sm', 'dark-lg'],
-      zIndex: 1,
+      zIndex: 'yamcha',
     },
     group: {},
     groupLabel: {

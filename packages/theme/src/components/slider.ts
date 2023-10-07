@@ -35,7 +35,7 @@ export const Slider: ComponentStyle = {
     },
     thumb: ({ orientation: o }) => ({
       position: 'absolute',
-      zIndex: 1,
+      zIndex: 'yamcha',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

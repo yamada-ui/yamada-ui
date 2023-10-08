@@ -29,6 +29,14 @@ const directions: Record<string, string> = {
   'to-tl': 'to top left',
 }
 
+const transforms = [
+  'rotate(var(--ui-rotate, 0))',
+  'scaleX(var(--ui-scale-x, 1))',
+  'scaleY(var(--ui-scale-y, 1))',
+  'skewX(var(--ui-skew-x, 0))',
+  'skewY(var(--ui-skew-y, 0))',
+]
+
 const directionValues = new Set(Object.values(directions))
 
 export const globalValues = new Set([
@@ -40,9 +48,10 @@ export const globalValues = new Set([
   'unset',
 ])
 
-export const isCSSFunction = (value: any) => {
-  return isString(value) && value.includes('(') && value.includes(')')
-}
+export const isCSSFunction = (value: any) =>
+  isString(value) && value.includes('(') && value.includes(')')
+
+export const isCSSVar = (value: string) => /^var\(--.+\)$/.test(value)
 
 export const analyzeCSSValue = (value: any) => {
   let n = parseFloat(value.toString())
@@ -62,7 +71,7 @@ export const tokenToCSSVar =
     }
   }
 
-export const createGradient: Transform = (value, theme) => {
+export const generateGradient: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)
@@ -109,6 +118,57 @@ export const createGradient: Transform = (value, theme) => {
 
   return `${type}(${values.join(', ')})`
 }
+
+export const generateTransform: Transform = (value) => {
+  if (value === 'auto')
+    return [
+      'translateX(var(--ui-translate-x, 0))',
+      'translateY(var(--ui-translate-y, 0))',
+      ...transforms,
+    ].join(' ')
+
+  if (value === 'auto-3d')
+    return [
+      'translate3d(var(--ui-translate-x, 0), var(--ui-translate-y, 0), 0)',
+      ...transforms,
+    ].join(' ')
+
+  return value
+}
+
+export const generateFilter =
+  (type: 'filter' | 'backdrop' = 'filter'): Transform =>
+  (value) => {
+    if (value !== 'auto') return value
+
+    if (type === 'filter') {
+      return [
+        'var(--ui-blur, /*!*/ /*!*/)',
+        'var(--ui-brightness, /*!*/ /*!*/)',
+        'var(--ui-contrast, /*!*/ /*!*/)',
+        'var(--ui-drop-shadow, /*!*/ /*!*/)',
+        'var(--ui-grayscale, /*!*/ /*!*/)',
+        'var(--ui-hue-rotate, /*!*/ /*!*/)',
+        'var(--ui-invert, /*!*/ /*!*/)',
+        'var(--ui-opacity, /*!*/ /*!*/)',
+        'var(--ui-saturate, /*!*/ /*!*/)',
+        'var(--ui-sepia, /*!*/ /*!*/)',
+      ].join(' ')
+    } else {
+      return [
+        'var(--ui-backdrop-blur, /*!*/ /*!*/)',
+        'var(--ui-backdrop-brightness, /*!*/ /*!*/)',
+        'var(--ui-backdrop-contrast, /*!*/ /*!*/)',
+        'var(--ui-backdrop-drop-shadow, /*!*/ /*!*/)',
+        'var(--ui-backdrop-grayscale, /*!*/ /*!*/)',
+        'var(--ui-backdrop-hue-rotate, /*!*/ /*!*/)',
+        'var(--ui-backdrop-invert, /*!*/ /*!*/)',
+        'var(--ui-backdrop-opacity, /*!*/ /*!*/)',
+        'var(--ui-backdrop-saturate, /*!*/ /*!*/)',
+        'var(--ui-backdrop-sepia, /*!*/ /*!*/)',
+      ].join(' ')
+    }
+  }
 
 export const mode =
   <L extends any, D extends any>(light: L, dark: D) =>

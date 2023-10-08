@@ -7,8 +7,11 @@ import {
   analyzeCSSValue,
   isCSSFunction,
   tokenToCSSVar,
-  createGradient,
+  generateGradient,
   globalValues,
+  isCSSVar,
+  generateTransform,
+  generateFilter,
 } from './utils'
 
 type CSSProperties = Union<keyof CSS.Properties>
@@ -72,6 +75,13 @@ export const transforms = {
 
     return isUnitless || isNumber(value) ? `${value}px` : value
   },
+  deg: (value: any) => {
+    if (isCSSVar(value) || value == null) return value
+
+    const isUnitless = typeof value === 'string' && !value.endsWith('deg')
+
+    return isUnitless || isNumber(value) ? `${value}deg` : value
+  },
   fraction: (value: any) => {
     if (isNumber(value) && value <= 1) {
       return `${value * 100}%`
@@ -104,7 +114,16 @@ export const transforms = {
       return value
     }
   },
-  gradient: createGradient,
+  function:
+    (func: string, transform?: Transform): Transform =>
+    (value: any, ...rest) => {
+      if (transform) value = transform(value, ...rest)
+
+      return `${func}(${value})`
+    },
+  gradient: generateGradient,
+  transform: generateTransform,
+  filter: generateFilter,
 }
 
 export const configs = {
@@ -138,4 +157,5 @@ export const configs = {
     transform,
   }),
   gradient: createConfig('gradients', transforms.gradient),
+  blur: createConfig('blurs', transforms.function('blur')),
 }

@@ -1,5 +1,5 @@
 import { escape, merge, calc, Dict, isArray } from '@yamada-ui/utils'
-import { createGradient, pseudos } from '../styles'
+import { generateGradient, pseudos } from '../styles'
 import { VarTokens } from '../theme'
 import { CSSMap, StyledTheme } from '../theme.types'
 
@@ -34,10 +34,10 @@ export const createVars = (
     let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
 
     if (token.startsWith('gradients')) {
-      lightValue = createGradient(lightValue, {
+      lightValue = generateGradient(lightValue, {
         __cssMap: cssMap,
       } as StyledTheme<Dict>)
-      darkValue = createGradient(darkValue, {
+      darkValue = generateGradient(darkValue, {
         __cssMap: cssMap,
       } as StyledTheme<Dict>)
     }

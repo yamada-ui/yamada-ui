@@ -16,6 +16,7 @@ export type VarToken = {
 export type VarTokens = Record<string, VarToken>
 
 const tokens = [
+  'blurs',
   'borders',
   'breakpoints',
   'colors',

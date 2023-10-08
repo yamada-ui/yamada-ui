@@ -1,4 +1,5 @@
 import { animations } from './animations'
+import { blurs } from './blurs'
 import { borders } from './borders'
 import { breakpoints } from './breakpoints'
 import { colors } from './colors'
@@ -17,6 +18,7 @@ import { zIndices } from './z-indices'
 
 export default {
   animations,
+  blurs,
   borders,
   breakpoints,
   colors,

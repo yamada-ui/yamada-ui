@@ -2,6 +2,7 @@ import { UITheme } from './ui-theme.types'
 
 export interface GeneratedTheme extends UITheme {
   animations: string & {}
+  blurs: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {})
   borders: string & {}
   breakpoints: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {})
   colors:

@@ -17,6 +17,7 @@ export const config: Config[] = [
   { key: 'lineHeights' },
   { key: 'radii' },
   { key: 'shadows' },
+  { key: 'blurs' },
   { key: 'sizes', maxScanDepth: 2 },
   { key: 'spaces', flatMap: (value) => [value, `-${value}`] },
   { key: 'zIndices' },

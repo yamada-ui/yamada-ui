@@ -1,5 +1,14 @@
 # @yamada-ui/link
 
+## 0.3.5
+
+### Patch Changes
+
+- [`eb954000`](https://github.com/hirotomoyamada/yamada-ui/commit/eb954000f0ac07cfb7d90e13f491a9e043ea50cb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the `z-index` globally.
+
+- Updated dependencies [[`ec8ff49c`](https://github.com/hirotomoyamada/yamada-ui/commit/ec8ff49c3dd7767f0586386c58fe5be484e8a924)]:
+  - @yamada-ui/core@0.10.0
+
 ## 0.3.4
 
 ### Patch Changes

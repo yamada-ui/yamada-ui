@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.5.0
+
+### Minor Changes
+
+- [`588a878e`](https://github.com/hirotomoyamada/yamada-ui/commit/588a878eb7449c66f8bbe043a45adfb96e716ef7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added blurs in theme.
+
 ## 0.4.1
 
 ### Patch Changes

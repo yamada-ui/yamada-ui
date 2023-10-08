@@ -1,5 +1,17 @@
 # @yamada-ui/table
 
+## 0.3.7
+
+### Patch Changes
+
+- Updated dependencies [[`ec8ff49c`](https://github.com/hirotomoyamada/yamada-ui/commit/ec8ff49c3dd7767f0586386c58fe5be484e8a924)]:
+  - @yamada-ui/core@0.10.0
+  - @yamada-ui/checkbox@0.3.7
+  - @yamada-ui/icon@0.3.5
+  - @yamada-ui/native-table@0.3.5
+  - @yamada-ui/pagination@0.4.5
+  - @yamada-ui/select@0.3.7
+
 ## 0.3.6
 
 ### Patch Changes

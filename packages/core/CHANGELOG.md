@@ -1,5 +1,16 @@
 # @yamada-ui/core
 
+## 0.10.0
+
+### Minor Changes
+
+- [`ec8ff49c`](https://github.com/hirotomoyamada/yamada-ui/commit/ec8ff49c3dd7767f0586386c58fe5be484e8a924) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended the properties to add `filter` and `transform`.
+
+### Patch Changes
+
+- Updated dependencies [[`eb954000`](https://github.com/hirotomoyamada/yamada-ui/commit/eb954000f0ac07cfb7d90e13f491a9e043ea50cb)]:
+  - @yamada-ui/portal@0.3.2
+
 ## 0.9.4
 
 ### Patch Changes

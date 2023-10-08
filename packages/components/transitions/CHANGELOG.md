@@ -1,5 +1,16 @@
 # @yamada-ui/transitions
 
+## 0.3.5
+
+### Patch Changes
+
+- [`2cb452ac`](https://github.com/hirotomoyamada/yamada-ui/commit/2cb452ac8e436625890f5e6aa747294b2c80e33a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Omitted `scale` from `HTMLUIProps`.
+
+- Updated dependencies [[`ec8ff49c`](https://github.com/hirotomoyamada/yamada-ui/commit/ec8ff49c3dd7767f0586386c58fe5be484e8a924)]:
+  - @yamada-ui/core@0.10.0
+  - @yamada-ui/motion@0.4.5
+  - @yamada-ui/use-value@0.2.5
+
 ## 0.3.4
 
 ### Patch Changes

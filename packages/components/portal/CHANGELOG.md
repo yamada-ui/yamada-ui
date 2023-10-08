@@ -1,5 +1,11 @@
 # @yamada-ui/portal
 
+## 0.3.2
+
+### Patch Changes
+
+- [`eb954000`](https://github.com/hirotomoyamada/yamada-ui/commit/eb954000f0ac07cfb7d90e13f491a9e043ea50cb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the `z-index` globally.
+
 ## 0.3.1
 
 ### Patch Changes

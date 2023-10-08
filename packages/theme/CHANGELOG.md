@@ -1,5 +1,18 @@
 # @yamada-ui/theme
 
+## 0.9.0
+
+### Minor Changes
+
+- [`588a878e`](https://github.com/hirotomoyamada/yamada-ui/commit/588a878eb7449c66f8bbe043a45adfb96e716ef7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added blurs in theme.
+
+### Patch Changes
+
+- [`eb954000`](https://github.com/hirotomoyamada/yamada-ui/commit/eb954000f0ac07cfb7d90e13f491a9e043ea50cb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the `z-index` globally.
+
+- Updated dependencies [[`ec8ff49c`](https://github.com/hirotomoyamada/yamada-ui/commit/ec8ff49c3dd7767f0586386c58fe5be484e8a924)]:
+  - @yamada-ui/core@0.10.0
+
 ## 0.8.7
 
 ### Patch Changes

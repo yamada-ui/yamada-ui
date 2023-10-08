@@ -1,5 +1,20 @@
 # @yamada-ui/tooltip
 
+## 0.4.0
+
+### Minor Changes
+
+- [`4c27460b`](https://github.com/hirotomoyamada/yamada-ui/commit/4c27460be6a4e2168dc0ccb92304ba75e3c23639) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added portalProps to `Tooltip` props.
+
+### Patch Changes
+
+- Updated dependencies [[`eb954000`](https://github.com/hirotomoyamada/yamada-ui/commit/eb954000f0ac07cfb7d90e13f491a9e043ea50cb), [`ec8ff49c`](https://github.com/hirotomoyamada/yamada-ui/commit/ec8ff49c3dd7767f0586386c58fe5be484e8a924), [`2cb452ac`](https://github.com/hirotomoyamada/yamada-ui/commit/2cb452ac8e436625890f5e6aa747294b2c80e33a)]:
+  - @yamada-ui/portal@0.3.2
+  - @yamada-ui/core@0.10.0
+  - @yamada-ui/transitions@0.3.5
+  - @yamada-ui/motion@0.4.5
+  - @yamada-ui/use-popper@0.4.5
+
 ## 0.3.4
 
 ### Patch Changes

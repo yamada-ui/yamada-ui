@@ -26,7 +26,7 @@ type ScaleFadeOptions = {
 }
 
 export type ScaleFadeProps = WithTransitionProps<
-  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+  Omit<HTMLUIProps<'div'>, 'scale'> & HTMLMotionProps<'div'>
 > &
   ScaleFadeOptions
 

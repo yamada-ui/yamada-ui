@@ -18,7 +18,7 @@ export const globalStyle: UIStyle = {
       color: 'whiteAlpha.400',
     },
   },
-  '*, *::before, &::after': {
+  '*, *::before, *::after': {
     borderWidth: '0',
     borderStyle: 'solid',
     borderColor: 'border',

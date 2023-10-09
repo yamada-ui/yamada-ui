@@ -39,12 +39,12 @@ export type Configs = Record<string, ConfigProps | true>
 export const createTransform =
   ({
     token,
-    compose,
     transform,
+    compose,
   }: {
     token: ThemeToken
-    compose?: Transform
     transform?: Transform
+    compose?: Transform
   }): Transform =>
   (value, theme) => {
     value = tokenToCSSVar(token, value)(theme)

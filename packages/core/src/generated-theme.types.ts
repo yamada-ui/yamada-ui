@@ -266,6 +266,7 @@ export interface GeneratedTheme extends UITheme {
     | 'fuchsia.950'
     | 'primary'
     | 'secondary'
+    | 'success'
     | 'warning'
     | 'danger'
     | 'link'
@@ -287,8 +288,8 @@ export interface GeneratedTheme extends UITheme {
     | 'yellow'
     | 'lime'
     | 'green'
-    | 'secondary'
     | 'emerald'
+    | 'success'
     | 'teal'
     | 'cyan'
     | 'sky'
@@ -298,6 +299,7 @@ export interface GeneratedTheme extends UITheme {
     | 'indigo'
     | 'violet'
     | 'purple'
+    | 'secondary'
     | 'fuchsia'
     | (string & {})
   fonts: 'heading' | 'body' | 'mono' | (string & {})

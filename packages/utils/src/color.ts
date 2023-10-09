@@ -8,6 +8,10 @@ import {
 } from 'color2k'
 import { getMemoizedObject as get, Dict, isArray } from '.'
 
+export const hues = [
+  50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
+] as const
+
 export const isGray = (colorScheme: string) =>
   colorScheme === 'gray' ||
   colorScheme === 'zinc' ||
@@ -16,16 +20,23 @@ export const isGray = (colorScheme: string) =>
 
 export const getColor =
   (color: string, fallback?: string) =>
-  (theme: Dict, colorMode?: 'light' | 'dark') => {
+  (theme: Dict = {}, colorMode?: 'light' | 'dark') => {
+    const [token, hue] = color.split('.')
+
+    const [, relatedToken] =
+      Object.entries(theme.semantics?.colorSchemes ?? {}).find(
+        ([semanticToken]) => token === semanticToken,
+      ) ?? []
+
+    if (relatedToken) color = `${relatedToken}.${hue}`
+
     const hex = get<
       string | number | [string | number, string | number] | undefined
     >(theme, `colors.${color}`, color)
 
     try {
       if (isArray(hex)) {
-        const [lightHex, darkHex] = hex
-
-        return toHex(String(colorMode !== 'dark' ? lightHex : darkHex))
+        return toHex(String(colorMode !== 'dark' ? hex[0] : hex[1]))
       } else {
         return toHex(String(hex))
       }
@@ -37,7 +48,7 @@ export const getColor =
 export const lightenColor =
   (color: string, amount: number) =>
   (theme?: Dict, colorMode?: 'light' | 'dark') => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+    const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(lighten(raw, amount / 100))
   }
@@ -45,7 +56,7 @@ export const lightenColor =
 export const darkenColor =
   (color: string, amount: number) =>
   (theme?: Dict, colorMode?: 'light' | 'dark') => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+    const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(darken(raw, amount / 100))
   }
@@ -53,7 +64,7 @@ export const darkenColor =
 export const tintColor =
   (color: string, amount: number) =>
   (theme?: Dict, colorMode?: 'light' | 'dark') => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+    const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(mix(raw, '#fff', amount))
   }
@@ -61,7 +72,7 @@ export const tintColor =
 export const shadeColor =
   (color: string, amount: number) =>
   (theme?: Dict, colorMode?: 'light' | 'dark') => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+    const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(mix(raw, '#000', amount / 100))
   }
@@ -69,19 +80,19 @@ export const shadeColor =
 export const transparentizeColor =
   (color: string, alpha: number) =>
   (theme?: Dict, colorMode?: 'light' | 'dark') => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+    const raw = getColor(color, color)(theme, colorMode)
 
     return transparentize(raw, 1 - alpha)
   }
 
 export const toneColor =
-  (color: string, l: number) =>
+  (color: string, hue: (typeof hues)[number]) =>
   (theme?: Dict, colorMode?: 'light' | 'dark') => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+    const raw = getColor(color, color)(theme, colorMode)
 
-    if (l < 0 || 900 < l) return color
+    if (hue < 50 || 950 < hue) return color
 
-    let n = (l - 500) / 10
+    let n = (hue - 500) / 10
 
     const isLighten = n <= 0
 

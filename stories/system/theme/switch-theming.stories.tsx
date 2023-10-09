@@ -21,23 +21,29 @@ export default {
 
 export const basic = () => {
   const pinkTheme = extendTheme({
-    colors: {
-      primary: '#D53F8C',
-      secondary: '#ED64A6',
+    semantics: {
+      colorSchemes: {
+        primary: 'pink',
+        secondary: 'violet',
+      },
     },
   })()
 
   const purpleTheme = extendTheme({
-    colors: {
-      primary: '#805AD5',
-      secondary: '#9F7AEA',
+    semantics: {
+      colorSchemes: {
+        primary: 'purple',
+        secondary: 'teal',
+      },
     },
   })()
 
   const greenTheme = extendTheme({
-    colors: {
-      primary: '#38A169',
-      secondary: '#48BB78',
+    semantics: {
+      colorSchemes: {
+        primary: 'green',
+        secondary: 'cyan',
+      },
     },
   })()
 

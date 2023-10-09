@@ -50,23 +50,25 @@ export const extractTransitions = (theme: any) => {
   let transitionDuration: string[] = []
   let transitionEasing: string[] = []
 
-  const { transitions } = theme
+  const { transitions, semantics } = theme
 
   if (!isObject(transitions))
     return { transitionProperty, transitionDuration, transitionEasing }
 
+  const { property, duration, easing } = semantics.transitions ?? {}
+
   Object.entries(transitions).forEach(([key, value]) => {
     switch (key) {
       case 'property':
-        transitionProperty = extractPaths(value)
+        transitionProperty = [...extractPaths(value), ...extractPaths(property)]
         break
 
       case 'duration':
-        transitionDuration = extractPaths(value)
+        transitionDuration = [...extractPaths(value), ...extractPaths(duration)]
         break
 
       case 'easing':
-        transitionEasing = extractPaths(value)
+        transitionEasing = [...extractPaths(value), ...extractPaths(easing)]
         break
 
       default:

@@ -1,5 +1,4 @@
-import { ComponentStyle, isDefaultColor } from '@yamada-ui/core'
-import { toneColor } from '@yamada-ui/utils'
+import { ComponentStyle } from '@yamada-ui/core'
 
 export const Radio: ComponentStyle = {
   baseStyle: {
@@ -7,7 +6,7 @@ export const Radio: ComponentStyle = {
       _readOnly: { cursor: 'auto' },
       _disabled: { cursor: 'not-allowed' },
     },
-    icon: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    icon: ({ colorScheme: c = 'primary' }) => ({
       transitionProperty: 'box-shadow',
       transitionDuration: 'normal',
       border: '2px solid',
@@ -25,17 +24,11 @@ export const Radio: ComponentStyle = {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           rounded: 'full',
-          bg: isDefaultColor(
-            [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-            [`${c}.500`, `${c}.200`],
-          )(c),
+          bg: [`${c}.500`, `${c}.200`],
         },
         _hover: {
           _before: {
-            bg: isDefaultColor(
-              [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-              [`${c}.600`, `${c}.300`],
-            )(c),
+            bg: [`${c}.600`, `${c}.300`],
           },
         },
         _disabled: {

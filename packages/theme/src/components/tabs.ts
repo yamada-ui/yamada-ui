@@ -1,5 +1,5 @@
-import { ComponentMultiStyle, isDefaultColor, mode } from '@yamada-ui/core'
-import { getColor, toneColor, transparentizeColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from '@yamada-ui/core'
+import { getColor, transparentizeColor } from '@yamada-ui/utils'
 
 export const Tabs: ComponentMultiStyle = {
   baseStyle: {
@@ -34,12 +34,7 @@ export const Tabs: ComponentMultiStyle = {
   },
 
   variants: {
-    line: ({
-      theme: t,
-      colorMode: m,
-      colorScheme: c = 'primary',
-      orientation,
-    }) => {
+    line: ({ colorScheme: c = 'primary', orientation }) => {
       const isVertical = orientation === 'vertical'
 
       return {
@@ -52,10 +47,7 @@ export const Tabs: ComponentMultiStyle = {
         tab: {
           borderColor: 'transparent',
           _selected: {
-            color: isDefaultColor(
-              [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-              [`${c}.600`, `${c}.300`],
-            )(c),
+            color: [`${c}.600`, `${c}.300`],
             borderColor: 'currentColor',
           },
           ...(isVertical
@@ -72,12 +64,7 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    sticky: ({
-      theme: t,
-      colorMode: m,
-      colorScheme: c = 'primary',
-      orientation,
-    }) => {
+    sticky: ({ colorScheme: c = 'primary', orientation }) => {
       const isVertical = orientation === 'vertical'
 
       return {
@@ -90,10 +77,7 @@ export const Tabs: ComponentMultiStyle = {
         tab: {
           borderColor: 'transparent',
           _selected: {
-            color: isDefaultColor(
-              [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-              [`${c}.600`, `${c}.300`],
-            )(c),
+            color: [`${c}.600`, `${c}.300`],
             borderColor: 'inherit',
             ...(isVertical
               ? { borderEndColor: ['white', 'black'] }
@@ -136,17 +120,8 @@ export const Tabs: ComponentMultiStyle = {
             ...(isVertical ? { marginBottom: '-1px' } : { marginEnd: '-1px' }),
           },
           _selected: {
-            bg: isDefaultColor(
-              [
-                toneColor(c, 100)(t, m),
-                transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m),
-              ],
-              [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-            )(c),
-            color: isDefaultColor(
-              [toneColor(c, 800)(t, m), toneColor(c, 200)(t, m)],
-              [`${c}.800`, `${c}.200`],
-            )(c),
+            bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+            color: [`${c}.800`, `${c}.200`],
           },
           ...(isVertical
             ? {
@@ -183,13 +158,7 @@ export const Tabs: ComponentMultiStyle = {
             ...(isVertical ? { marginBottom: '-1px' } : { marginEnd: '-1px' }),
           },
           _selected: {
-            bg: isDefaultColor(
-              [
-                toneColor(c, 500)(t, m),
-                transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
-              ],
-              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-            )(c),
+            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
             color: [`white`, `whiteAlpha.800`],
           },
           ...(isVertical
@@ -207,16 +176,10 @@ export const Tabs: ComponentMultiStyle = {
       }
     },
     rounded: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
-      const color = isDefaultColor(
-        mode(
-          toneColor(c, 500)(t, m),
-          transparentizeColor(toneColor(c, 200)(t, m), 0.8)(t, m),
-        )(m),
-        mode(
-          getColor(`${c}.500`)(t, m),
-          transparentizeColor(`${c}.200`, 0.8)(t, m),
-        )(m),
-      )(c)
+      const color = mode(
+        getColor(`${c}.500`)(t, m),
+        transparentizeColor(`${c}.200`, 0.8)(t, m),
+      )(m)
 
       return {
         tabList: { gap: 'sm' },
@@ -241,17 +204,8 @@ export const Tabs: ComponentMultiStyle = {
         fontWeight: 'semibold',
         color: 'gray.600',
         _selected: {
-          bg: isDefaultColor(
-            [
-              toneColor(c, 100)(t, m),
-              transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m),
-            ],
-            [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-          )(c),
-          color: isDefaultColor(
-            [toneColor(c, 800)(t, m), toneColor(c, 200)(t, m)],
-            [`${c}.800`, `${c}.200`],
-          )(c),
+          bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+          color: [`${c}.800`, `${c}.200`],
         },
       },
     }),
@@ -265,13 +219,7 @@ export const Tabs: ComponentMultiStyle = {
         borderRadius: 'full',
         fontWeight: 'semibold',
         _selected: {
-          bg: isDefaultColor(
-            [
-              toneColor(c, 500)(t, m),
-              transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
-            ],
-            [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-          )(c),
+          bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
           color: [`white`, `whiteAlpha.800`],
         },
       },

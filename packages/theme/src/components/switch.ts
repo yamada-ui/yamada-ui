@@ -1,5 +1,5 @@
-import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
-import { toneColor, transparentizeColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from '@yamada-ui/core'
+import { transparentizeColor } from '@yamada-ui/utils'
 
 export const Switch: ComponentMultiStyle = {
   baseStyle: {
@@ -32,39 +32,27 @@ export const Switch: ComponentMultiStyle = {
   },
 
   variants: {
-    thick: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    thick: ({ colorScheme: c = 'primary' }) => ({
       track: {
         p: '1',
         _checked: {
-          bg: isDefaultColor(
-            [toneColor(c, 500)(t, m), toneColor(c, 400)(t, m)],
-            [`${c}.500`, `${c}.400`],
-          )(c),
+          bg: [`${c}.500`, `${c}.400`],
         },
       },
     }),
     thin: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
       track: {
         _checked: {
-          bg: isDefaultColor(
-            [
-              transparentizeColor(toneColor(c, 400)(t, m), 0.7),
-              transparentizeColor(toneColor(c, 200)(t, m), 0.6),
-            ],
-            [
-              transparentizeColor(`${c}.400`, 0.7),
-              transparentizeColor(`${c}.200`, 0.6),
-            ],
-          )(c),
+          bg: [
+            transparentizeColor(`${c}.400`, 0.7)(t, m),
+            transparentizeColor(`${c}.200`, 0.6)(t, m),
+          ],
         },
       },
       thumb: {
         boxShadow: 'dark-md',
         _checked: {
-          bg: isDefaultColor(
-            [toneColor(c, 500)(t, m), toneColor(c, 400)(t, m)],
-            [`${c}.500`, `${c}.400`],
-          )(c),
+          bg: [`${c}.500`, `${c}.400`],
         },
       },
     }),

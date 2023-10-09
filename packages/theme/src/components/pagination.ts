@@ -1,5 +1,5 @@
-import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
-import { transparentizeColor, toneColor, isGray } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from '@yamada-ui/core'
+import { transparentizeColor, isGray } from '@yamada-ui/utils'
 
 export const Pagination: ComponentMultiStyle = {
   baseStyle: {
@@ -44,7 +44,7 @@ export const Pagination: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
+    solid: ({ colorScheme: c = 'primary' }) => {
       const isAccessible = c === 'yellow' || c === 'cyan' || c === 'lime'
 
       return {
@@ -52,24 +52,15 @@ export const Pagination: ComponentMultiStyle = {
           border: '1px solid',
           borderColor: 'border',
           _selected: {
-            bg: isDefaultColor(
-              [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-              isGray(c)
-                ? [`${c}.200`, `${c}.700`]
-                : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-            )(c),
-            borderColor: isDefaultColor(
-              [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-              isGray(c)
-                ? [`${c}.200`, `${c}.700`]
-                : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-            )(c),
+            bg: isGray(c)
+              ? [`${c}.200`, `${c}.700`]
+              : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
+            borderColor: isGray(c)
+              ? [`${c}.200`, `${c}.700`]
+              : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
             color: isGray(c)
               ? undefined
-              : isDefaultColor(
-                  [`white`, `gray.800`],
-                  [isAccessible ? `black` : `white`, `gray.800`],
-                )(c),
+              : [isAccessible ? `black` : `white`, `gray.800`],
           },
           _hover: {
             bg: [`gray.200`, `whiteAlpha.100`],
@@ -86,21 +77,19 @@ export const Pagination: ComponentMultiStyle = {
         },
       }
     },
-    outline: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
+    outline: ({ colorScheme: c = 'primary' }) => {
       return {
         item: {
           border: '1px solid',
           borderColor: 'border',
           _selected: {
             bg: isGray(c) ? undefined : 'transparent',
-            borderColor: isDefaultColor(
-              [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-              isGray(c) ? [`${c}.500`, `${c}.400`] : [`${c}.600`, `${c}.300`],
-            )(c),
-            color: isDefaultColor(
-              [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
-              isGray(c) ? [`inherit`, `${c}.400`] : [`${c}.600`, `${c}.200`],
-            )(c),
+            borderColor: isGray(c)
+              ? [`${c}.500`, `${c}.400`]
+              : [`${c}.600`, `${c}.300`],
+            color: isGray(c)
+              ? [`inherit`, `${c}.400`]
+              : [`${c}.600`, `${c}.200`],
           },
           _hover: {
             bg: ['gray.200', 'whiteAlpha.100'],
@@ -123,32 +112,19 @@ export const Pagination: ComponentMultiStyle = {
           _selected: {
             bg: isGray(c) ? undefined : 'transparent',
             fontWeight: 'semibold',
-            color: isDefaultColor(
-              [toneColor(c, 600)(t, m), toneColor(c, 200)(t, m)],
-              isGray(c) ? [`inherit`, `${c}.200`] : [`${c}.600`, `${c}.200`],
-            )(c),
+            color: isGray(c)
+              ? [`inherit`, `${c}.200`]
+              : [`${c}.600`, `${c}.200`],
           },
           _hover: {
-            bg: isDefaultColor(
-              [
-                toneColor(c, 100)(t, m),
-                transparentizeColor(toneColor(c, 200)(t, m), 0.12)(t, m),
-              ],
-              isGray(c)
-                ? [`${c}.200`, `whiteAlpha.200`]
-                : [`${c}.100`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
-            )(c),
+            bg: isGray(c)
+              ? [`${c}.200`, `whiteAlpha.200`]
+              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
           },
           _active: {
-            bg: isDefaultColor(
-              [
-                toneColor(c, 200)(t, m),
-                transparentizeColor(toneColor(c, 200)(t, m), 0.24)(t, m),
-              ],
-              isGray(c)
-                ? [`${c}.300`, `whiteAlpha.300`]
-                : [`${c}.200`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
-            )(c),
+            bg: isGray(c)
+              ? [`${c}.300`, `whiteAlpha.300`]
+              : [`${c}.200`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
           },
         },
       }

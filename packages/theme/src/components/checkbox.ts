@@ -1,5 +1,4 @@
-import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
-import { toneColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
 export const Checkbox: ComponentMultiStyle = {
   baseStyle: {
@@ -7,31 +6,19 @@ export const Checkbox: ComponentMultiStyle = {
       _readOnly: { cursor: 'auto' },
       _disabled: { cursor: 'not-allowed' },
     },
-    icon: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    icon: ({ colorScheme: c = 'primary' }) => ({
       transitionProperty: 'box-shadow',
       transitionDuration: 'normal',
       border: '2px solid',
       borderColor: 'inherit',
       color: 'white',
       _checked: {
-        bg: isDefaultColor(
-          [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-          [`${c}.500`, `${c}.200`],
-        )(c),
-        borderColor: isDefaultColor(
-          [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-          [`${c}.500`, `${c}.200`],
-        )(c),
+        bg: [`${c}.500`, `${c}.200`],
+        borderColor: [`${c}.500`, `${c}.200`],
         color: ['white', 'gray.900'],
         _hover: {
-          bg: isDefaultColor(
-            [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-            [`${c}.600`, `${c}.300`],
-          )(c),
-          borderColor: isDefaultColor(
-            [toneColor(c, 600)(t, m), toneColor(c, 300)(t, m)],
-            [`${c}.600`, `${c}.300`],
-          )(c),
+          bg: [`${c}.600`, `${c}.300`],
+          borderColor: [`${c}.600`, `${c}.300`],
         },
         _disabled: {
           borderColor: ['gray.200', 'transparent'],
@@ -40,14 +27,8 @@ export const Checkbox: ComponentMultiStyle = {
         },
       },
       _indeterminate: {
-        bg: isDefaultColor(
-          [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-          [`${c}.500`, `${c}.200`],
-        )(c),
-        borderColor: isDefaultColor(
-          [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-          [`${c}.500`, `${c}.200`],
-        )(c),
+        bg: [`${c}.500`, `${c}.200`],
+        borderColor: [`${c}.500`, `${c}.200`],
         color: ['white', 'gray.900'],
       },
       _disabled: {

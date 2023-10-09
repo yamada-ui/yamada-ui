@@ -1,5 +1,5 @@
-import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
-import { isUndefined, toneColor, transparentizeColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from '@yamada-ui/core'
+import { isUndefined, transparentizeColor } from '@yamada-ui/utils'
 
 export const SegmentedControl: ComponentMultiStyle = {
   baseStyle: {
@@ -35,13 +35,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       active: {
         bg: isUndefined(c)
           ? ['whiteAlpha.700', 'whiteAlpha.100']
-          : isDefaultColor(
-              [
-                toneColor(c, 500)(t, m),
-                transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
-              ],
-              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-            )(c),
+          : [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
         rounded: 'md',
       },
       button: {
@@ -65,13 +59,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       active: {
         bg: isUndefined(c)
           ? ['whiteAlpha.700', 'whiteAlpha.100']
-          : isDefaultColor(
-              [
-                toneColor(c, 500)(t, m),
-                transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
-              ],
-              [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-            )(c),
+          : [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
         rounded: 'full',
       },
       button: {

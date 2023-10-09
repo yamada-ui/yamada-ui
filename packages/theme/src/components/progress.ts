@@ -1,5 +1,5 @@
-import { ComponentMultiStyle, mode, isDefaultColor } from '@yamada-ui/core'
-import { toneColor, getColor, isArray } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from '@yamada-ui/core'
+import { getColor, isArray } from '@yamada-ui/utils'
 
 export const Progress: ComponentMultiStyle = {
   baseStyle: {
@@ -22,9 +22,9 @@ export const Progress: ComponentMultiStyle = {
 
       const bgColor = f
         ? isArray(f)
-          ? f.map((c) => getColor(c, c)(t, m))
+          ? mode(getColor(f[0], f[0])(t, m), getColor(f[1], f[1])(t, m))(m)
           : getColor(f, f)(t, m)
-        : isDefaultColor(toneColor(c, l)(t, m), getColor(`${c}.${l}`)(t, m))(c)
+        : getColor(`${c}.${l}`)(t, m)
 
       const bgImage = hasStripe
         ? `linear-gradient(

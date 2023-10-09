@@ -8,7 +8,7 @@ export const Link: ComponentStyle = {
     cursor: 'pointer',
     textDecoration: 'none',
     outline: 'none',
-    color: 'inherit',
+    color: 'link',
     _hover: {
       textDecoration: 'underline',
     },

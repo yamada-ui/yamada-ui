@@ -1,5 +1,5 @@
-import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
-import { toneColor, transparentizeColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from '@yamada-ui/core'
+import { transparentizeColor } from '@yamada-ui/utils'
 
 export const Calendar: ComponentMultiStyle = {
   baseStyle: {
@@ -66,68 +66,50 @@ export const Calendar: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
-      const bg = isDefaultColor(
-        [
-          toneColor(c, 500)(t, m),
-          transparentizeColor(toneColor(c, 500)(t, m), 0.6)(t, m),
-        ],
-        [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-      )(c)
-
-      const borderColor = isDefaultColor(
-        [
-          toneColor(c, 200)(t, m),
-          transparentizeColor(toneColor(c, 200)(t, m), 0.6)(t, m),
-        ],
-        [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
-      )(c)
-
-      return {
-        button: {
-          _selected: { bg, color: [`white`, `whiteAlpha.800`], _hover: { bg } },
-        },
-        day: {
-          _today: { border: '1px solid', borderColor },
-          _selected: {
-            bg,
-            color: [`white`, `whiteAlpha.800`],
-            borderColor: ['transparent', 'transparent'],
-            _hover: { bg },
+    solid: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+      button: {
+        _selected: {
+          bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
+          color: [`white`, `whiteAlpha.800`],
+          _hover: {
+            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
           },
         },
-      }
-    },
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
-      const bg = isDefaultColor(
-        [
-          toneColor(c, 100)(t, m),
-          transparentizeColor(toneColor(c, 200)(t, m), 0.16)(t, m),
-        ],
-        [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-      )(c)
-
-      const borderColor = isDefaultColor(
-        [
-          toneColor(c, 200)(t, m),
-          transparentizeColor(toneColor(c, 200)(t, m), 0.6)(t, m),
-        ],
-        [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
-      )(c)
-
-      const color = isDefaultColor(
-        [toneColor(c, 800)(t, m), toneColor(c, 200)(t, m)],
-        [`${c}.800`, `${c}.200`],
-      )(c)
-
-      return {
-        button: { _selected: { bg, color } },
-        day: {
-          _today: { border: '1px solid', borderColor },
-          _selected: { bg, color, borderColor: ['transparent', 'transparent'] },
+      },
+      day: {
+        _today: {
+          border: '1px solid',
+          borderColor: [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
         },
-      }
-    },
+        _selected: {
+          bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
+          color: [`white`, `whiteAlpha.800`],
+          borderColor: ['transparent', 'transparent'],
+          _hover: {
+            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
+          },
+        },
+      },
+    }),
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+      button: {
+        _selected: {
+          bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+          color: [`${c}.800`, `${c}.200`],
+        },
+      },
+      day: {
+        _today: {
+          border: '1px solid',
+          borderColor: [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
+        },
+        _selected: {
+          bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+          color: [`${c}.800`, `${c}.200`],
+          borderColor: ['transparent', 'transparent'],
+        },
+      },
+    }),
     unstyled: {
       container: {
         gap: 'inherit',

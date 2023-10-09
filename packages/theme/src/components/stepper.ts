@@ -1,93 +1,86 @@
-import { ComponentMultiStyle, isDefaultColor } from '@yamada-ui/core'
-import { getMemoizedObject as get, toneColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from '@yamada-ui/core'
+import { getMemoizedObject as get } from '@yamada-ui/utils'
 
 export const Stepper: ComponentMultiStyle = {
-  baseStyle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
-    const color = isDefaultColor(
-      [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-      [`${c}.500`, `${c}.200`],
-    )(c)
-
-    return {
-      stepper: {
-        w: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        _vertical: {
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          gap: 0,
-        },
-        _horizontal: {
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 4,
-        },
+  baseStyle: ({ colorScheme: c = 'primary' }) => ({
+    stepper: {
+      w: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      _vertical: {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 0,
       },
-      step: {
-        position: 'relative',
-        display: 'flex',
-        gap: 2,
-        flex: 1,
-        flexShrink: 0,
-        _horizontal: {
-          alignItems: 'center',
-        },
-        '&:last-of-type:not([data-stretch])': {
-          flex: 'initial',
-        },
-      },
-      status: {
-        display: 'flex',
-        justifyContent: 'center',
+      _horizontal: {
+        flexDirection: 'row',
         alignItems: 'center',
-        flexShrink: 0,
-        rounded: 'full',
-        transitionProperty: 'common',
-        transitionDuration: 'slow',
-        '&[data-status=active]': {
-          borderWidth: '2px',
-          borderColor: color,
-        },
-        '&[data-status=complete]': {
-          bg: color,
-          color: ['white', 'black'],
-        },
-        '&[data-status=incomplete]': {
-          borderWidth: '2px',
-        },
+        gap: 4,
       },
-      icon: {
-        flexShrink: 0,
+    },
+    step: {
+      position: 'relative',
+      display: 'flex',
+      gap: 2,
+      flex: 1,
+      flexShrink: 0,
+      _horizontal: {
+        alignItems: 'center',
       },
-      number: {},
-      title: {
-        fontWeight: 'medium',
+      '&:last-of-type:not([data-stretch])': {
+        flex: 'initial',
       },
-      description: {
-        color: ['blackAlpha.500', 'whiteAlpha.600'],
+    },
+    status: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexShrink: 0,
+      rounded: 'full',
+      transitionProperty: 'common',
+      transitionDuration: 'slow',
+      '&[data-status=active]': {
+        borderWidth: '2px',
+        borderColor: [`${c}.500`, `${c}.200`],
       },
-      separator: {
-        bg: 'border',
-        flex: 1,
-        transitionProperty: 'common',
-        transitionDuration: 'slow',
-        '&[data-status=complete]': {
-          bg: color,
-        },
-        _vertical: {
-          position: 'absolute',
-          w: 0.5,
-          h: '100%',
-        },
-        _horizontal: {
-          w: '100%',
-          h: 0.5,
-          ms: 2,
-        },
+      '&[data-status=complete]': {
+        bg: [`${c}.500`, `${c}.200`],
+        color: ['white', 'black'],
       },
-    }
-  },
+      '&[data-status=incomplete]': {
+        borderWidth: '2px',
+      },
+    },
+    icon: {
+      flexShrink: 0,
+    },
+    number: {},
+    title: {
+      fontWeight: 'medium',
+    },
+    description: {
+      color: ['blackAlpha.500', 'whiteAlpha.600'],
+    },
+    separator: {
+      bg: 'border',
+      flex: 1,
+      transitionProperty: 'common',
+      transitionDuration: 'slow',
+      '&[data-status=complete]': {
+        bg: [`${c}.500`, `${c}.200`],
+      },
+      _vertical: {
+        position: 'absolute',
+        w: 0.5,
+        h: '100%',
+      },
+      _horizontal: {
+        w: '100%',
+        h: 0.5,
+        ms: 2,
+      },
+    },
+  }),
 
   sizes: {
     sm: ({ theme: t }) => ({

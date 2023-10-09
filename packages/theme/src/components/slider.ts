@@ -1,5 +1,4 @@
-import { ComponentStyle, isDefaultColor } from '@yamada-ui/core'
-import { toneColor } from '@yamada-ui/utils'
+import { ComponentStyle } from '@yamada-ui/core'
 
 export const Slider: ComponentStyle = {
   baseStyle: {
@@ -22,13 +21,10 @@ export const Slider: ComponentStyle = {
         bg: ['gray.300', 'whiteAlpha.300'],
       },
     },
-    filledTrack: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    filledTrack: ({ colorScheme: c = 'primary' }) => ({
       w: 'inherit',
       h: 'inherit',
-      bg: isDefaultColor(
-        [toneColor(c, 500)(t, m), toneColor(c, 200)(t, m)],
-        [`${c}.500`, `${c}.200`],
-      )(c),
+      bg: [`${c}.500`, `${c}.200`],
     }),
     mark: {
       fontSize: 'sm',

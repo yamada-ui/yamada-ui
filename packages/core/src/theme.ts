@@ -4,6 +4,7 @@ import {
   pickObject,
   omitObject,
   Dict,
+  hues,
 } from '@yamada-ui/utils'
 import { ThemeProps, analyzeBreakpoints, createVars } from './css'
 import { ThemeConfig } from './theme.types'
@@ -70,21 +71,36 @@ const createTokens = (theme: Dict): VarTokens => {
 
   const semanticTokens = theme.semantics ?? {}
 
-  const defaultTokenEntries = Object.entries(
+  const defaultTokenEntries: [string, VarToken][] = Object.entries(
     flattenObject(defaultTokens) ?? {},
   ).map(([token, value]) => {
     const enhancedToken = { isSemantic: false, value }
 
-    return [token, enhancedToken] as [string, VarToken]
+    return [token, enhancedToken]
   })
 
-  const semanticTokenEntries = Object.entries(
+  const semanticTokenEntries: [string, VarToken][] = Object.entries(
     flattenObject(semanticTokens) ?? {},
-  ).map(([token, value]) => {
-    const enhancedToken = { isSemantic: true, value }
+  ).reduce(
+    (prev, [token, value]) => {
+      if (token.startsWith('colorSchemes.')) {
+        const [, semanticToken] = token.split('.')
 
-    return [token, enhancedToken] as [string, VarToken]
-  })
+        hues.forEach((hue) => {
+          const enhancedToken = { isSemantic: true, value: `${value}.${hue}` }
+
+          prev.push([`colors.${semanticToken}.${hue}`, enhancedToken])
+        })
+      } else {
+        const enhancedToken = { isSemantic: true, value }
+
+        prev.push([token, enhancedToken])
+      }
+
+      return prev
+    },
+    [] as [string, VarToken][],
+  )
 
   return objectFromEntries<VarTokens>([
     ...defaultTokenEntries,

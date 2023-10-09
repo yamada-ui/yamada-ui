@@ -9,15 +9,6 @@ import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
 import { Transform } from './config'
 
-export const defaultColorSchemes = [
-  'brand',
-  'primary',
-  'secondary',
-  'warning',
-  'danger',
-  'link',
-]
-
 const directions: Record<string, string> = {
   'to-t': 'to top',
   'to-tr': 'to top right',
@@ -75,6 +66,7 @@ export const generateGradient: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)
+
   if (!prevent) return `url('${value}')`
 
   const regex = /(^[a-z-A-Z]+)\((.*)\)/g
@@ -107,6 +99,7 @@ export const generateGradient: Transform = (value, theme) => {
     const ratio = isCSSFunction(_ratio) ? _ratio : _ratio && _ratio.split(' ')
 
     const token = `colors.${color}`
+
     color = token in theme.__cssMap ? theme.__cssMap[token].ref : color
 
     if (ratio) {
@@ -174,13 +167,6 @@ export const mode =
   <L extends any, D extends any>(light: L, dark: D) =>
   (colorMode: ColorMode | undefined = 'light'): L | D =>
     colorMode === 'light' ? light : dark
-
-export const isDefaultColor =
-  (defaultColor: any, otherColor: any) =>
-  (colorScheme: string | undefined): any =>
-    colorScheme && defaultColorSchemes.includes(colorScheme)
-      ? defaultColor
-      : otherColor
 
 export const keyframes = (...arg: CSSObject[]): Keyframes =>
   emotionKeyframes(...arg)

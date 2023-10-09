@@ -73,10 +73,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
     themeSchemeManager.get(config?.initialThemeScheme),
   )
 
-  const theme = useMemo(
-    () => (isUndefined(themeScheme) ? initialTheme : initialTheme[themeScheme]),
-    [initialTheme, themeScheme],
-  )
+  const theme = useMemo(() => {
+    if (isUndefined(themeScheme)) return initialTheme
+
+    if (themeScheme in initialTheme) return initialTheme[themeScheme]
+
+    return initialTheme
+  }, [initialTheme, themeScheme])
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
     (themeScheme: ThemeScheme) => {

@@ -71,7 +71,6 @@ export const withNestedLink: Story = () => {
         href='https://dragon-ball-official.com/'
         isExternal
         fontWeight='bold'
-        color='link'
       >
         オフィシャルサイト
       </Link>

@@ -1,9 +1,16 @@
 import { useColorMode, useTheme, Theme } from '@yamada-ui/core'
-import { getMemoizedObject as get, isArray } from '@yamada-ui/utils'
+import {
+  getMemoizedObject as get,
+  isArray,
+  isUndefined,
+} from '@yamada-ui/utils'
 
 export const useToken = <
   Y extends string | number = string,
-  M extends keyof Omit<Theme, 'components'> = keyof Omit<Theme, 'components'>,
+  M extends keyof Omit<Theme, 'components' | 'colorSchemes'> = keyof Omit<
+    Theme,
+    'components' | 'colorSchemes'
+  >,
 >(
   name: M,
   path: Theme[M] | number | undefined,
@@ -21,13 +28,42 @@ export const useToken = <
 
   if (name === 'transitionEasing') name = 'transitions.easing' as M
 
-  const value = get<Y | [Y, Y] | undefined>(theme, `${name}.${path}`)
+  let value = get<Y | [Y, Y] | undefined>(theme, `${name}.${path}`)
 
-  if (isArray(value)) {
-    const [lightValue, darkValue] = value
+  if (!isUndefined(value)) {
+    if (isArray(value)) {
+      const [lightValue, darkValue] = value
 
-    return colorMode === 'light' ? lightValue : darkValue
+      return colorMode === 'light' ? lightValue : darkValue
+    } else {
+      return value
+    }
   } else {
-    return value
+    value = get<Y | [Y, Y] | undefined>(theme, `semantics.${name}.${path}`)
+
+    if (isArray(value)) {
+      value = [
+        get<Y>(theme, `${name}.${value[0]}`) ?? value[0],
+        get<Y>(theme, `${name}.${value[1]}`) ?? value[1],
+      ]
+    } else {
+      value = get<Y | undefined>(theme, `${name}.${value}`) ?? value
+    }
+
+    if (isArray(value)) {
+      const [lightValue, darkValue] = value
+
+      value = colorMode === 'light' ? lightValue : darkValue
+
+      if (isArray(value)) {
+        const [lightValue, darkValue] = value as unknown as [Y, Y]
+
+        return colorMode === 'light' ? lightValue : darkValue
+      } else {
+        return value
+      }
+    } else {
+      return value
+    }
   }
 }

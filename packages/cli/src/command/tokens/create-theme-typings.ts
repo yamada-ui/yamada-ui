@@ -1,4 +1,4 @@
-import { isArray, isObject, prettier } from '../../utils'
+import { isArray, isObject, omitObject, prettier } from '../../utils'
 import { config } from './config'
 
 type Component = {
@@ -6,28 +6,7 @@ type Component = {
   variants: string[]
 }
 
-const defaultColors = [
-  'brand',
-  'primary',
-  'secondary',
-  'warning',
-  'danger',
-  'link',
-]
-
-const hues = [
-  '50',
-  '100',
-  '200',
-  '300',
-  '400',
-  '500',
-  '600',
-  '700',
-  '800',
-  '900',
-  '950',
-]
+const hues = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
 export const printComponent = (components: Record<string, Component>) =>
   `components: { ${Object.entries(components)
@@ -103,18 +82,25 @@ const isHue = (value: any) => {
 
   const keys = Object.keys(value)
 
-  return hues.every((key) => keys.includes(key))
+  return hues.every((key) => keys.includes(key.toString()))
 }
 
-const isDefaultColor = (key: any) => defaultColors.includes(key)
-
 export const extractColorSchemes = (theme: any) => {
-  const { colors } = theme
+  const { colors, semantics } = theme
 
   if (!isObject(colors)) return []
 
   return Object.entries(colors).reduce((array, [key, value]) => {
-    if (isHue(value) || isDefaultColor(key)) array.push(key)
+    if (!isHue(value)) return array
+
+    array.push(key)
+
+    const [semanticKey] =
+      Object.entries(semantics?.colorSchemes ?? {}).find(
+        ([, relatedKey]) => key === relatedKey,
+      ) ?? []
+
+    if (semanticKey) array.push(semanticKey)
 
     return array
   }, [] as string[])
@@ -176,7 +162,10 @@ export const createThemeTypings = async (theme: any) => {
       }
 
       if (isObject(theme.semantics)) {
-        const semanticKeys = extractKeys(theme.semantics, key)
+        const semanticKeys = extractKeys(
+          omitObject(theme.semantics, ['colorSchemes']),
+          key,
+        )
           .filter(filter)
           .flatMap(flatMap)
 

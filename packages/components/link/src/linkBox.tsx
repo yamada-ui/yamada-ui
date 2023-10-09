@@ -42,7 +42,6 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>(
         target={isExternal ? '_blank' : target}
         rel={isExternal ? 'noopener' : rel}
         className={cx('ui-link-overlay', className)}
-        isExternal={isExternal}
         href={href}
         __css={css}
         {...rest}

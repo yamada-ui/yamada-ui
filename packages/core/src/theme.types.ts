@@ -309,7 +309,10 @@ export type ThemeConfig = {
 export type LayerStyles = Record<string, UIStyle>
 export type TextStyles = Record<string, UIStyle>
 export type Components = Record<string, ComponentStyle | ComponentMultiStyle>
-export type Semantics = Omit<UsageTheme, 'styles' | 'components' | 'semantics'>
+export type Semantics = Omit<
+  BaseTheme,
+  'styles' | 'components' | 'semantics'
+> & { colorSchemes?: Partial<Record<string, Theme['colorSchemes']>> }
 
 export type ThemeTokens = {
   [key: string | number]:
@@ -332,7 +335,7 @@ export type ThemeTransitionTokens = {
   easing?: ThemeTokens
 }
 
-export type UsageTheme = {
+type BaseTheme = {
   styles?: {
     globalStyle?: UIStyle
     resetStyle?: UIStyle
@@ -358,6 +361,9 @@ export type UsageTheme = {
   transitions?: ThemeTransitionTokens
   components?: Components
   semantics?: Semantics
+}
+
+export type UsageTheme = BaseTheme & {
   [key: string]: any
 }
 

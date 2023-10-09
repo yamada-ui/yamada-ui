@@ -14,7 +14,7 @@ import { FC } from 'react'
 
 const statuses = {
   info: { icon: InfoIcon, colorScheme: 'primary' },
-  success: { icon: CheckIcon, colorScheme: 'secondary' },
+  success: { icon: CheckIcon, colorScheme: 'success' },
   warning: { icon: WarningIcon, colorScheme: 'warning' },
   error: { icon: WarningIcon, colorScheme: 'danger' },
   loading: { icon: Loading, colorScheme: 'primary' },

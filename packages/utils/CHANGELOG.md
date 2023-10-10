@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 0.3.0
+
+### Minor Changes
+
+- [`7e24d8e4`](https://github.com/hirotomoyamada/yamada-ui/commit/7e24d8e4557912cedd3856242c67ba972b824334) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Modified `getColor` to be able to retrieve the value of semantic tokens.
+
 ## 0.2.1
 
 ### Patch Changes

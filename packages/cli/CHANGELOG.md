@@ -1,5 +1,15 @@
 # @yamada-ui/cli
 
+## 0.6.0
+
+### Minor Changes
+
+- [`6e87fdeb`](https://github.com/hirotomoyamada/yamada-ui/commit/6e87fdebf70110b366c134326677084a5a3ef86b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated theme typings creation logic.
+
+### Patch Changes
+
+- [`f752d149`](https://github.com/hirotomoyamada/yamada-ui/commit/f752d149958d50fea2438926319b1c1ae896a11f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Merged semantics transitions with theme transitions.
+
 ## 0.5.0
 
 ### Minor Changes

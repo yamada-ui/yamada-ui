@@ -1,5 +1,19 @@
 # @yamada-ui/alert
 
+## 0.5.0
+
+### Minor Changes
+
+- [`40e3c800`](https://github.com/hirotomoyamada/yamada-ui/commit/40e3c800d80c31cf30d4b7e14f29b993bc152d5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `colorScheme` for success status.
+
+### Patch Changes
+
+- Updated dependencies [[`ce7552c2`](https://github.com/hirotomoyamada/yamada-ui/commit/ce7552c265e67d8dc580132521ece9c91b4b545a), [`7e24d8e4`](https://github.com/hirotomoyamada/yamada-ui/commit/7e24d8e4557912cedd3856242c67ba972b824334)]:
+  - @yamada-ui/core@0.11.0
+  - @yamada-ui/utils@0.3.0
+  - @yamada-ui/icon@0.3.6
+  - @yamada-ui/loading@0.4.6
+
 ## 0.4.5
 
 ### Patch Changes

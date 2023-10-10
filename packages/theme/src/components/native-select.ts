@@ -1,22 +1,51 @@
 import { ComponentMultiStyle, mode } from '@yamada-ui/core'
 import { getColor, isArray } from '@yamada-ui/utils'
 
-export const Input: ComponentMultiStyle = {
+export const NativeSelect: ComponentMultiStyle = {
   baseStyle: {
+    container: {},
     field: {
+      cursor: 'pointer',
       width: '100%',
       minWidth: 0,
       outline: 0,
       position: 'relative',
       appearance: 'none',
+      pb: '1px',
+      lineHeight: 'normal',
       transitionProperty: 'common',
       transitionDuration: 'normal',
-      _placeholder: {
-        color: 'gray.500',
+      _focus: {
+        zIndex: 'unset',
       },
       _disabled: {
         opacity: 0.4,
         cursor: 'not-allowed',
+      },
+      _placeholder: {
+        color: 'gray.500',
+      },
+      _dark: {
+        _placeholder: {
+          color: 'whiteAlpha.400',
+        },
+      },
+      _readOnly: {
+        pointerEvents: 'none',
+        _placeholder: {
+          color: 'inherit !important',
+        },
+      },
+    },
+    icon: {
+      width: '6',
+      py: '2',
+      color: ['blackAlpha.600', 'whiteAlpha.600'],
+      fontSize: 'xl',
+      outline: 0,
+      rounded: 'md',
+      _disabled: {
+        opacity: 0.5,
       },
     },
   },
@@ -43,24 +72,18 @@ export const Input: ComponentMultiStyle = {
           _hover: {
             borderColor: ['gray.300', 'whiteAlpha.400'],
           },
-          _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+          _active: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 'yamcha',
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
-        },
-        addon: {
-          border: '1px solid',
-          borderColor: ['inherit', 'whiteAlpha.50'],
-          bg: ['gray.100', 'whiteAlpha.300'],
         },
       }
     },
@@ -85,9 +108,9 @@ export const Input: ComponentMultiStyle = {
           _hover: {
             bg: ['gray.200', 'whiteAlpha.100'],
           },
-          _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+          _active: {
+            bg: 'transparent',
+            borderColor: focusBorderColor,
           },
           _invalid: {
             borderColor: errorBorderColor,
@@ -96,10 +119,6 @@ export const Input: ComponentMultiStyle = {
             bg: 'transparent',
             borderColor: focusBorderColor,
           },
-        },
-        addon: {
-          border: '2px solid transparent',
-          bg: ['gray.100', 'whiteAlpha.50'],
         },
       }
     },
@@ -123,9 +142,9 @@ export const Input: ComponentMultiStyle = {
           rounded: '0',
           px: '0',
           bg: 'transparent',
-          _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+          _active: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
           _invalid: {
             borderColor: errorBorderColor,
@@ -136,22 +155,10 @@ export const Input: ComponentMultiStyle = {
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
         },
-        addon: {
-          border: '2px solid',
-          borderColor: 'inherit',
-          bg: 'transparent',
-          rounded: '0',
-          px: '0',
-        },
       }
     },
     unstyled: {
       field: {
-        bg: 'transparent',
-        minH: 'auto',
-        px: '0',
-      },
-      addon: {
         bg: 'transparent',
         minH: 'auto',
         px: '0',
@@ -163,57 +170,51 @@ export const Input: ComponentMultiStyle = {
     xs: {
       field: {
         fontSize: 'xs',
-        px: '2',
+        pl: '2',
+        pr: '8',
         minH: '6',
         rounded: 'sm',
       },
-      addon: {
-        fontSize: 'xs',
-        px: '2',
-        minH: '6',
-        rounded: 'sm',
+      icon: {
+        pt: '2',
+        fontSize: 'lg',
+        insetEnd: '1',
       },
     },
     sm: {
       field: {
         fontSize: 'sm',
-        px: '2',
+        pl: '2',
+        pr: '8',
         minH: '8',
         rounded: 'md',
       },
-      addon: {
-        fontSize: 'sm',
-        px: '2',
-        minH: '8',
-        rounded: 'md',
+      icon: {
+        insetEnd: '2',
       },
     },
     md: {
       field: {
         fontSize: 'md',
-        px: '3',
+        pl: '3',
+        pr: '8',
         minH: '10',
         rounded: 'md',
       },
-      addon: {
-        fontSize: 'md',
-        px: '3',
-        minH: '10',
-        rounded: 'md',
+      icon: {
+        insetEnd: '2',
       },
     },
     lg: {
       field: {
         fontSize: 'lg',
-        px: '4',
+        pl: '4',
+        pr: '8',
         minH: '12',
         rounded: 'md',
       },
-      addon: {
-        fontSize: 'lg',
-        px: '4',
-        minH: '12',
-        rounded: 'md',
+      icon: {
+        insetEnd: '2',
       },
     },
   },

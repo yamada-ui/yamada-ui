@@ -1,6 +1,6 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from '@yamada-ui/core'
 
-export const Slider: ComponentStyle = {
+export const Slider: ComponentMultiStyle = {
   baseStyle: {
     container: ({ orientation: o }) => ({
       display: 'inline-block',

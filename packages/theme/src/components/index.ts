@@ -1,5 +1,6 @@
 import { Accordion } from './accordion'
 import { Alert } from './alert'
+import { Autocomplete } from './autocomplete'
 import { Avatar } from './avatar'
 import { Badge } from './badge'
 import { Breadcrumb } from './breadcrumb'
@@ -16,6 +17,7 @@ import { Divider } from './divider'
 import { Drawer } from './drawer'
 import { Dropzone } from './dropzone'
 import { Editable } from './editable'
+import { FileInput } from './file-input'
 import { FormControl } from './form-control'
 import { Heading } from './heading'
 import { Indicator } from './indicator'
@@ -27,12 +29,19 @@ import { Mark } from './mark'
 import { Markdown } from './markdown'
 import { Menu } from './menu'
 import { Modal } from './modal'
+import { MonthPicker } from './month-picker'
+import { MultiAutocomplete } from './multi-autocomplete'
+import { MultiSelect } from './multi-select'
+import { NativeSelect } from './native-select'
+import { NativeTable } from './native-table'
 import { NumberInput } from './number-input'
 import { Pagination } from './pagination'
+import { PagingTable } from './paging-table'
 import { PinInput } from './pin-input'
 import { Popover } from './popover'
 import { Progress } from './progress'
 import { Radio } from './radio'
+import { RangeSlider } from './range-slider'
 import { Reorder } from './reorder'
 import { ScrollArea } from './scroll-area'
 import { SegmentedControl } from './segmented-control'
@@ -51,6 +60,7 @@ export default {
   Indicator,
   Accordion,
   Alert,
+  Autocomplete,
   Avatar,
   Badge,
   Breadcrumb,
@@ -67,6 +77,7 @@ export default {
   Drawer,
   Dropzone,
   Editable,
+  FileInput,
   FormControl,
   Heading,
   Input,
@@ -77,16 +88,23 @@ export default {
   Markdown,
   Menu,
   Modal,
+  MonthPicker,
+  MultiAutocomplete,
+  MultiSelect,
+  NativeSelect,
   NumberInput,
   Pagination,
+  PagingTable,
   PinInput,
   Popover,
   Progress,
   Radio,
+  RangeSlider,
   Reorder,
   ScrollArea,
   SegmentedControl,
   Select,
+  NativeTable,
   Skeleton,
   Slider,
   Stepper,

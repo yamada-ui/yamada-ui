@@ -300,13 +300,13 @@ export const customColor: Story = () => {
       />
 
       <Slider
-        track={{ bg: 'green.200' }}
-        filledTrack={{ bg: 'green.500' }}
-        thumb={{ bg: 'green.700' }}
+        trackProps={{ bg: 'green.200' }}
+        filledTrackProps={{ bg: 'green.500' }}
+        thumbProps={{ bg: 'green.700' }}
       />
 
       <Slider>
-        <SliderTrack bg='blue.200' filledTrack={{ bg: 'blue.500' }} />
+        <SliderTrack bg='blue.200' filledTrackProps={{ bg: 'blue.500' }} />
         <SliderThumb bg='blue.700' />
       </Slider>
 
@@ -325,7 +325,7 @@ export const customThumb: Story = () => {
   return (
     <>
       <Slider
-        thumb={{
+        thumbProps={{
           color: 'blue.500',
           boxSize: '6',
           children: <Icon icon={faWaveSquare} />,

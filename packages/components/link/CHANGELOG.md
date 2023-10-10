@@ -1,5 +1,15 @@
 # @yamada-ui/link
 
+## 0.3.6
+
+### Patch Changes
+
+- [`9082920e`](https://github.com/hirotomoyamada/yamada-ui/commit/9082920e81e4e113decc2cac24aea09a0dde4d8f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `isExternal` property from `LinkOverlay`.
+
+- Updated dependencies [[`ce7552c2`](https://github.com/hirotomoyamada/yamada-ui/commit/ce7552c265e67d8dc580132521ece9c91b4b545a), [`7e24d8e4`](https://github.com/hirotomoyamada/yamada-ui/commit/7e24d8e4557912cedd3856242c67ba972b824334)]:
+  - @yamada-ui/core@0.11.0
+  - @yamada-ui/utils@0.3.0
+
 ## 0.3.5
 
 ### Patch Changes

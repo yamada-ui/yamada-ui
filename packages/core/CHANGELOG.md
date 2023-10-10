@@ -1,5 +1,17 @@
 # @yamada-ui/core
 
+## 0.11.0
+
+### Minor Changes
+
+- [`ce7552c2`](https://github.com/hirotomoyamada/yamada-ui/commit/ce7552c265e67d8dc580132521ece9c91b4b545a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `defaultColorSchemes` and `isDefaultColor` function.
+
+### Patch Changes
+
+- Updated dependencies [[`7e24d8e4`](https://github.com/hirotomoyamada/yamada-ui/commit/7e24d8e4557912cedd3856242c67ba972b824334)]:
+  - @yamada-ui/utils@0.3.0
+  - @yamada-ui/portal@0.3.3
+
 ## 0.10.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @yamada-ui/use-controllable-state
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`7e24d8e4`](https://github.com/hirotomoyamada/yamada-ui/commit/7e24d8e4557912cedd3856242c67ba972b824334)]:
+  - @yamada-ui/utils@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes

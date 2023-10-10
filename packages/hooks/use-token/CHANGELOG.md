@@ -1,5 +1,17 @@
 # @yamada-ui/use-token
 
+## 0.3.0
+
+### Minor Changes
+
+- [`87dfbf12`](https://github.com/hirotomoyamada/yamada-ui/commit/87dfbf126a9fba0d83b6367628a447cfc51005b0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance value retrieval and checking.
+
+### Patch Changes
+
+- Updated dependencies [[`ce7552c2`](https://github.com/hirotomoyamada/yamada-ui/commit/ce7552c265e67d8dc580132521ece9c91b4b545a), [`7e24d8e4`](https://github.com/hirotomoyamada/yamada-ui/commit/7e24d8e4557912cedd3856242c67ba972b824334)]:
+  - @yamada-ui/core@0.11.0
+  - @yamada-ui/utils@0.3.0
+
 ## 0.2.5
 
 ### Patch Changes

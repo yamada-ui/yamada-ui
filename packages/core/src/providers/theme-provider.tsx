@@ -21,15 +21,10 @@ import {
   useCallback,
   useEffect,
 } from 'react'
-import {
-  transformTheme,
-  StyledTheme,
-  ThemeScheme,
-  ThemeConfig,
-  useColorMode,
-  css,
-  UIStyle,
-} from '..'
+import { css, UIStyle } from '../css'
+import { transformTheme } from '../theme'
+import { StyledTheme, ThemeConfig, ThemeScheme } from '../theme.types'
+import { useColorMode } from './color-mode-provider'
 import { themeSchemeManager, ThemeSchemeManager } from './theme-manager'
 
 const { localStorage } = themeSchemeManager

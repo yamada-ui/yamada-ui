@@ -91,7 +91,7 @@ export const pseudos = {
   /**
    * The CSS `::placeholder` pseudo-element
    */
-  _placeholder: '&[data-placeholder], &::placeholder',
+  _placeholder: '&::placeholder, &[data-placeholder]',
   /**
    * The CSS `:placeholder-shown` pseudo-class
    */

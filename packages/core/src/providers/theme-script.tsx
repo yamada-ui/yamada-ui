@@ -1,4 +1,4 @@
-import { ThemeScheme } from '..'
+import { ThemeScheme } from '../theme.types'
 
 type ThemeSchemeScriptProps = {
   type?: 'localStorage' | 'cookie'

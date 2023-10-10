@@ -1,4 +1,4 @@
-import { ThemeScheme } from '..'
+import { ThemeScheme } from '../theme.types'
 import { THEME_SCHEME_STORAGE_KEY } from './theme-script'
 
 const hasSupport = !!globalThis?.document

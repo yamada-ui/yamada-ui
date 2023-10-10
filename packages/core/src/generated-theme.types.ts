@@ -584,6 +584,10 @@ export interface GeneratedTheme extends UITheme {
         | 'top-accent'
         | (string & {})
     }
+    Autocomplete: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     Avatar: {
       sizes: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | (string & {})
       variants: string & {}
@@ -660,6 +664,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | 'full' | (string & {})
       variants: 'solid' | 'dashed' | 'unstyled' | (string & {})
     }
+    FileInput: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     Heading: {
       sizes:
         | '4xl'
@@ -697,6 +705,22 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
+    MonthPicker: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
+    MultiAutocomplete: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
+    MultiSelect: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
+    NativeSelect: {
+      sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
+      variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
     NumberInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
@@ -704,6 +728,10 @@ export interface GeneratedTheme extends UITheme {
     Pagination: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {})
       variants: 'solid' | 'outline' | 'ghost' | 'unstyled' | (string & {})
+    }
+    PagingTable: {
+      sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {})
+      variants: 'simple' | 'striped' | 'unstyled' | (string & {})
     }
     PinInput: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
@@ -714,6 +742,10 @@ export interface GeneratedTheme extends UITheme {
       variants: string & {}
     }
     Radio: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
+    RangeSlider: {
+      sizes: 'sm' | 'md' | 'lg' | (string & {})
+      variants: string & {}
+    }
     Reorder: {
       sizes: 'sm' | 'md' | 'normal' | 'lg' | (string & {})
       variants: 'elevated' | 'outline' | 'unstyled' | (string & {})
@@ -725,6 +757,10 @@ export interface GeneratedTheme extends UITheme {
     Select: {
       sizes: 'xs' | 'sm' | 'md' | 'lg' | (string & {})
       variants: 'outline' | 'filled' | 'flushed' | 'unstyled' | (string & {})
+    }
+    NativeTable: {
+      sizes: 'sm' | 'md' | 'lg' | 'xl' | (string & {})
+      variants: 'simple' | 'striped' | 'unstyled' | (string & {})
     }
     Slider: { sizes: 'sm' | 'md' | 'lg' | (string & {}); variants: string & {} }
     Stepper: {

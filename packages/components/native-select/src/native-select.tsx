@@ -91,7 +91,7 @@ export type NativeSelectProps = Omit<HTMLUIProps<'select'>, 'size'> &
 
 export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Select', props)
+    const [styles, mergedProps] = useMultiComponentStyle('NativeSelect', props)
     let {
       className,
       children,
@@ -102,7 +102,6 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
       minH,
       minHeight,
       options = [],
-      value,
       placeholder,
       containerProps,
       iconProps,
@@ -112,7 +111,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
     rest = useFormControlProps(rest)
 
     const formControlProps = pickObject(rest, formControlProperties)
-    const [layoutProps, selectPorps] = splitObject(rest, layoutStylesProperties)
+    const [layoutProps, selectProps] = splitObject(rest, layoutStylesProperties)
 
     let computedChildren: ReactElement[] = []
 
@@ -158,14 +157,13 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
           <ui.select
             ref={ref}
             className={cx('ui-native-select-field', className)}
-            value={value}
             __css={{
               paddingEnd: '2rem',
               h: h ?? height,
               minH: minH ?? minHeight,
               ...styles.field,
             }}
-            {...selectPorps}
+            {...selectProps}
           >
             {placeholder ? (
               <NativeOption value='' hidden={!placeholderInOptions}>

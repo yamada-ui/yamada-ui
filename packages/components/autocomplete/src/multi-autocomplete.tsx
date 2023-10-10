@@ -97,7 +97,10 @@ export type MultiAutocompleteProps = ThemeProps<'Select'> &
 
 export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Select', props)
+    const [styles, mergedProps] = useMultiComponentStyle(
+      'MultiAutocomplete',
+      props,
+    )
     let {
       className,
       defaultValue = [],

@@ -139,7 +139,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
     w: '100%',
     h: 'fit-content',
     color,
-    ...styles.containerProps,
+    ...styles.container,
   }
 
   return (

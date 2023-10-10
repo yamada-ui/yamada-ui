@@ -91,7 +91,7 @@ const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
 export const FileInput = forwardRef<FileInputProps, 'input'>(
   ({ children, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Input', props)
+    const [styles, mergedProps] = useMultiComponentStyle('FileInput', props)
     const {
       className,
       id,

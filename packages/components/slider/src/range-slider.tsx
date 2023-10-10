@@ -689,7 +689,7 @@ export type RangeSliderProps = Omit<
   RangeSliderOptions
 
 export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Slider', props)
+  const [styles, mergedProps] = useMultiComponentStyle('RangeSlider', props)
   const {
     className,
     children,

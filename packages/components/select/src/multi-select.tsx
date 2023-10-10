@@ -85,7 +85,7 @@ export type MultiSelectProps = ThemeProps<'Select'> &
   MultiSelectOptions
 
 export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
+  const [styles, mergedProps] = useMultiComponentStyle('MultiSelect', props)
   let {
     className,
     defaultValue = [],

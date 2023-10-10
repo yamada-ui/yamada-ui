@@ -118,6 +118,7 @@ export const Table = forwardRef(
       ...omitObject(computedProps, [
         'highlightOnSelected',
         'highlightOnHover',
+        'withBorder',
         'withColumnBorders',
       ]),
       checkboxProps: { colorScheme, ...checkboxProps },

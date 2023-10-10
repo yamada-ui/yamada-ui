@@ -55,7 +55,7 @@ export type MonthPickerProps = Omit<
   UseMonthPickerProps
 
 export const MonthPicker = forwardRef<MonthPickerProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('DatePicker', props)
+  const [styles, mergedProps] = useMultiComponentStyle('MonthPicker', props)
   let {
     className,
     isClearable = true,

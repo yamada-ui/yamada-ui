@@ -136,11 +136,14 @@ export const PagingTable = forwardRef(
     { colorScheme, highlightOnSelected = true, ...props }: PagingTableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
-    const [styles, { size, ...mergedProps }] = useMultiComponentStyle('Table', {
-      colorScheme,
-      highlightOnSelected,
-      ...props,
-    })
+    const [styles, { size, ...mergedProps }] = useMultiComponentStyle(
+      'PagingTable',
+      {
+        colorScheme,
+        highlightOnSelected,
+        ...props,
+      },
+    )
     const {
       className,
       containerProps,
@@ -175,6 +178,7 @@ export const PagingTable = forwardRef(
       ...omitObject(computedProps, [
         'highlightOnSelected',
         'highlightOnHover',
+        'withBorder',
         'withColumnBorders',
       ]),
       checkboxProps: { colorScheme, ...checkboxProps },

@@ -48,7 +48,7 @@ export type NativeTableProps = HTMLUIProps<'table'> &
 
 export const NativeTable = forwardRef<NativeTableProps, 'table'>(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Table', props)
+    const [styles, mergedProps] = useMultiComponentStyle('NativeTable', props)
     const { className, layout, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = { tableLayout: layout, ...styles.table }
@@ -59,7 +59,11 @@ export const NativeTable = forwardRef<NativeTableProps, 'table'>(
           ref={ref}
           className={cx('ui-native-table', className)}
           __css={css}
-          {...omitObject(rest, ['withColumnBorders', 'highlightOnHover'])}
+          {...omitObject(rest, [
+            'withBorder',
+            'withColumnBorders',
+            'highlightOnHover',
+          ])}
         />
       </TableStyleProvider>
     )

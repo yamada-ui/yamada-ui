@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-animation",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Yamada UI useAnimation custom hook",
   "keywords": [
     "use-animation"

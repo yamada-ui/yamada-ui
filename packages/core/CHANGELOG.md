@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.11.1
+
+### Patch Changes
+
+- [`3adec6b1`](https://github.com/hirotomoyamada/yamada-ui/commit/3adec6b1e3e6b5faed457a5aed354a4cb63c0e86) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `mergeStyle` function.
+
 ## 0.11.0
 
 ### Minor Changes

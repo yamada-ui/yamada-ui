@@ -1,5 +1,16 @@
 # @yamada-ui/theme
 
+## 0.11.0
+
+### Minor Changes
+
+- [`eef5b494`](https://github.com/hirotomoyamada/yamada-ui/commit/eef5b494dd3c7b582754df0a7e65ed10353e7066) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allowed each component to reference.
+
+### Patch Changes
+
+- Updated dependencies [[`3adec6b1`](https://github.com/hirotomoyamada/yamada-ui/commit/3adec6b1e3e6b5faed457a5aed354a4cb63c0e86)]:
+  - @yamada-ui/core@0.11.1
+
 ## 0.10.0
 
 ### Minor Changes

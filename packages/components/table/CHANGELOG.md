@@ -1,5 +1,21 @@
 # @yamada-ui/table
 
+## 0.4.0
+
+### Minor Changes
+
+- [`9fdf7d41`](https://github.com/hirotomoyamada/yamada-ui/commit/9fdf7d412e593645f73787d20190d11cb2261a8f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added component style in theme.
+
+### Patch Changes
+
+- Updated dependencies [[`9fdf7d41`](https://github.com/hirotomoyamada/yamada-ui/commit/9fdf7d412e593645f73787d20190d11cb2261a8f), [`3adec6b1`](https://github.com/hirotomoyamada/yamada-ui/commit/3adec6b1e3e6b5faed457a5aed354a4cb63c0e86)]:
+  - @yamada-ui/native-table@0.4.0
+  - @yamada-ui/select@0.4.0
+  - @yamada-ui/core@0.11.1
+  - @yamada-ui/checkbox@0.3.9
+  - @yamada-ui/icon@0.3.7
+  - @yamada-ui/pagination@0.4.7
+
 ## 0.3.8
 
 ### Patch Changes

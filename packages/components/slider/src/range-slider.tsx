@@ -642,14 +642,41 @@ const [RangeSliderProvider, useRangeSliderContext] =
   })
 
 type RangeSliderOptions = {
-  input?: HTMLUIProps<'input'>
-  track?: RangeSliderTrackProps
-  filledTrack?: RangeSliderFilledTrackProps
-  thumb?: RangeSliderThumbProps
+  /**
+   * Props for range slider input element.
+   */
+  inputProps?: HTMLUIProps<'input'>
+  /**
+   * Props for range slider track element.
+   */
+  trackProps?: RangeSliderTrackProps
+  /**
+   * Props for range slider filled track element.
+   */
+  filledTrackProps?: RangeSliderFilledTrackProps
+  /**
+   * Props for range slider thumb element.
+   */
+  thumbProps?: RangeSliderThumbProps
+  /**
+   * The CSS `color` property. Used in `color` of track element.
+   */
   trackColor?: UIProps['color']
+  /**
+   * The CSS `color` property. Used in `color` of filled track element.
+   */
   filledTrackColor?: UIProps['color']
+  /**
+   * The CSS `height` property. Used in `height` of track element.
+   */
   trackSize?: UIProps['h']
+  /**
+   * The CSS `background` property. Used in `background` of thumb element.
+   */
   thumbColor?: UIProps['bg']
+  /**
+   * The CSS `box-size` property. Used in `box-size` of thumb element.
+   */
   thumbSize?: UIProps['boxSize']
 }
 
@@ -666,10 +693,10 @@ export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
   const {
     className,
     children,
-    input,
-    track,
-    filledTrack,
-    thumb,
+    inputProps,
+    trackProps,
+    filledTrackProps,
+    thumbProps,
     trackColor,
     filledTrackColor,
     trackSize,
@@ -728,15 +755,15 @@ export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
         getMarkProps,
         getThumbProps,
         getInputProps,
-        track,
+        trackProps,
         trackColor,
         trackSize,
-        filledTrack,
+        filledTrackProps,
         filledTrackColor,
-        thumb,
+        thumbProps,
         thumbColor,
         thumbSize,
-        input,
+        inputProps,
         styles,
       }}
     >
@@ -759,12 +786,18 @@ export const RangeSlider = forwardRef<RangeSliderProps, 'div'>((props, ref) => {
 })
 
 export type RangeSliderTrackProps = HTMLUIProps<'div'> &
-  Pick<RangeSliderOptions, 'filledTrack'>
+  Pick<RangeSliderOptions, 'filledTrackProps'>
 
 export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, 'div'>(
-  ({ className, children, filledTrack, ...rest }, ref) => {
-    const { styles, track, trackColor, trackSize, isVertical, getTrackProps } =
-      useRangeSliderContext()
+  ({ className, children, filledTrackProps, ...rest }, ref) => {
+    const {
+      styles,
+      trackProps,
+      trackColor,
+      trackSize,
+      isVertical,
+      getTrackProps,
+    } = useRangeSliderContext()
 
     const css: CSSUIObject = { ...styles.track }
 
@@ -780,13 +813,13 @@ export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, 'div'>(
                 ? { w: trackSize }
                 : { h: trackSize }
               : {}),
-            ...track,
+            ...trackProps,
             ...rest,
           },
           ref,
         )}
       >
-        {children ?? <RangeSliderFilledTrack {...filledTrack} />}
+        {children ?? <RangeSliderFilledTrack {...filledTrackProps} />}
       </ui.div>
     )
   },
@@ -798,7 +831,7 @@ export const RangeSliderFilledTrack = forwardRef<
   RangeSliderFilledTrackProps,
   'div'
 >(({ className, ...rest }, ref) => {
-  const { styles, filledTrack, filledTrackColor, getFilledTrackProps } =
+  const { styles, filledTrackProps, filledTrackColor, getFilledTrackProps } =
     useRangeSliderContext()
 
   const css: CSSUIObject = { ...styles.filledTrack }
@@ -810,7 +843,7 @@ export const RangeSliderFilledTrack = forwardRef<
       {...getFilledTrackProps(
         {
           ...(filledTrackColor ? { bg: filledTrackColor } : {}),
-          ...filledTrack,
+          ...filledTrackProps,
           ...rest,
         },
         ref,
@@ -850,10 +883,10 @@ const RangeSliderThumb = forwardRef<
 >(({ className, index, children, ...rest }, ref) => {
   const {
     styles,
-    thumb,
+    thumbProps,
     thumbColor,
     thumbSize,
-    input,
+    inputProps,
     getThumbProps,
     getInputProps,
   } = useRangeSliderContext()
@@ -869,13 +902,13 @@ const RangeSliderThumb = forwardRef<
           index,
           ...(thumbColor ? { bg: thumbColor } : {}),
           ...(thumbSize ? { boxSize: thumbSize } : {}),
-          ...thumb,
+          ...thumbProps,
           ...rest,
         },
         ref,
       )}
     >
-      <ui.input {...getInputProps({ ...input, index }, ref)} />
+      <ui.input {...getInputProps({ ...inputProps, index }, ref)} />
       {children}
     </ui.div>
   )

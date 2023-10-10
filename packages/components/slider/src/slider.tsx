@@ -520,14 +520,41 @@ const [SliderProvider, useSliderContext] = createContext<SliderContext>({
 })
 
 type SliderOptions = {
-  input?: HTMLUIProps<'input'>
-  track?: SliderTrackProps
-  filledTrack?: SliderFilledTrackProps
-  thumb?: SliderThumbProps
+  /**
+   * Props for slider input element.
+   */
+  inputProps?: HTMLUIProps<'input'>
+  /**
+   * Props for slider track element.
+   */
+  trackProps?: SliderTrackProps
+  /**
+   * Props for slider filled track element.
+   */
+  filledTrackProps?: SliderFilledTrackProps
+  /**
+   * Props for slider thumb element.
+   */
+  thumbProps?: SliderThumbProps
+  /**
+   * The CSS `color` property. Used in `color` of track element.
+   */
   trackColor?: UIProps['color']
+  /**
+   * The CSS `color` property. Used in `color` of filled track element.
+   */
   filledTrackColor?: UIProps['color']
+  /**
+   * The CSS `height` property. Used in `height` of track element.
+   */
   trackSize?: UIProps['h']
+  /**
+   * The CSS `background` property. Used in `background` of thumb element.
+   */
   thumbColor?: UIProps['bg']
+  /**
+   * The CSS `box-size` property. Used in `box-size` of thumb element.
+   */
   thumbSize?: UIProps['boxSize']
 }
 
@@ -541,10 +568,10 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
   const {
     className,
     children,
-    input,
-    track,
-    filledTrack,
-    thumb,
+    inputProps,
+    trackProps,
+    filledTrackProps,
+    thumbProps,
     trackColor,
     filledTrackColor,
     trackSize,
@@ -583,12 +610,12 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
         getFilledTrackProps,
         getMarkProps,
         getThumbProps,
-        track,
+        trackProps,
         trackColor,
         trackSize,
-        filledTrack,
+        filledTrackProps,
         filledTrackColor,
-        thumb,
+        thumbProps,
         thumbColor,
         thumbSize,
         styles,
@@ -599,7 +626,7 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
         __css={css}
         {...getContainerProps()}
       >
-        <ui.input {...getInputProps(input, ref)} />
+        <ui.input {...getInputProps(inputProps, ref)} />
 
         {customSliderTrack ?? <SliderTrack />}
 
@@ -612,12 +639,18 @@ export const Slider = forwardRef<SliderProps, 'input'>((props, ref) => {
 })
 
 export type SliderTrackProps = HTMLUIProps<'div'> &
-  Pick<SliderOptions, 'filledTrack'>
+  Pick<SliderOptions, 'filledTrackProps'>
 
 export const SliderTrack = forwardRef<SliderTrackProps, 'div'>(
-  ({ className, children, filledTrack, ...rest }, ref) => {
-    const { styles, track, trackColor, trackSize, isVertical, getTrackProps } =
-      useSliderContext()
+  ({ className, children, filledTrackProps, ...rest }, ref) => {
+    const {
+      styles,
+      trackProps,
+      trackColor,
+      trackSize,
+      isVertical,
+      getTrackProps,
+    } = useSliderContext()
 
     const css: CSSUIObject = { ...styles.track }
 
@@ -633,13 +666,13 @@ export const SliderTrack = forwardRef<SliderTrackProps, 'div'>(
                 ? { w: trackSize }
                 : { h: trackSize }
               : {}),
-            ...track,
+            ...trackProps,
             ...rest,
           },
           ref,
         )}
       >
-        {children ?? <SliderFilledTrack {...filledTrack} />}
+        {children ?? <SliderFilledTrack {...filledTrackProps} />}
       </ui.div>
     )
   },
@@ -649,7 +682,7 @@ export type SliderFilledTrackProps = HTMLUIProps<'div'>
 
 export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, 'div'>(
   ({ className, ...rest }, ref) => {
-    const { styles, filledTrack, filledTrackColor, getFilledTrackProps } =
+    const { styles, filledTrackProps, filledTrackColor, getFilledTrackProps } =
       useSliderContext()
 
     const css: CSSUIObject = { ...styles.filledTrack }
@@ -661,7 +694,7 @@ export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, 'div'>(
         {...getFilledTrackProps(
           {
             ...(filledTrackColor ? { bg: filledTrackColor } : {}),
-            ...filledTrack,
+            ...filledTrackProps,
             ...rest,
           },
           ref,
@@ -698,7 +731,7 @@ export type SliderThumbProps = HTMLUIProps<'div'>
 
 export const SliderThumb = forwardRef<SliderThumbProps, 'div'>(
   ({ className, ...rest }, ref) => {
-    const { styles, thumb, thumbColor, thumbSize, getThumbProps } =
+    const { styles, thumbProps, thumbColor, thumbSize, getThumbProps } =
       useSliderContext()
 
     const css: CSSUIObject = { ...styles.thumb }
@@ -711,7 +744,7 @@ export const SliderThumb = forwardRef<SliderThumbProps, 'div'>(
           {
             ...(thumbColor ? { bg: thumbColor } : {}),
             ...(thumbSize ? { boxSize: thumbSize } : {}),
-            ...thumb,
+            ...thumbProps,
             ...rest,
           },
           ref,

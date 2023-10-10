@@ -60,7 +60,9 @@ export const Header = memo(
           as='header'
           w='full'
           bg={isScroll ? ['whiteAlpha.500', 'blackAlpha.200'] : undefined}
-          backdropFilter='saturate(180%) blur(10px)'
+          backdropFilter='auto'
+          backdropSaturate='180%'
+          backdropBlur='10px'
           shadow={isScroll ? ['base', 'dark-sm'] : undefined}
           transitionProperty='common'
           transitionDuration='slower'
@@ -68,7 +70,7 @@ export const Header = memo(
           top='0'
           left='0'
           right='0'
-          zIndex='ginyu'
+          zIndex='guldo'
           {...rest}
         >
           <HStack w='full' maxW='9xl' py='3' px={{ base: 'lg', md: 'md' }}>

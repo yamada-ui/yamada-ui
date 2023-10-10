@@ -34,7 +34,7 @@ describe('getStatusColorScheme', () => {
   })
 
   test('success', () => {
-    expect(getStatusColorScheme('success')).toBe('secondary')
+    expect(getStatusColorScheme('success')).toBe('success')
   })
 
   test('warning', () => {

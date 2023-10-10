@@ -5,9 +5,12 @@ import {
   omitObject,
   Dict,
   hues,
+  isObject,
+  runIfFunc,
+  isFunction,
 } from '@yamada-ui/utils'
-import { ThemeProps, analyzeBreakpoints, createVars } from './css'
-import { ThemeConfig } from './theme.types'
+import { ThemeProps, UIStyleProps, analyzeBreakpoints, createVars } from './css'
+import { ComponentMultiStyle, ComponentStyle, ThemeConfig } from './theme.types'
 
 export type VarToken = {
   isSemantic: boolean
@@ -113,3 +116,39 @@ const omitTheme = (theme: Dict): Dict =>
 
 export const omitThemeProps = <T extends ThemeProps>(props: T) =>
   omitObject(props, ['size', 'variant', 'colorScheme'])
+
+export const mergeStyle = <T extends ComponentStyle | ComponentMultiStyle>(
+  target: T,
+  source: T,
+): T => {
+  let result = Object.assign({}, target) as T
+
+  if (isObject(source)) {
+    if (isObject(target)) {
+      for (const [sourceKey, sourceValue] of Object.entries(source)) {
+        const targetValue = target[sourceKey as keyof T]
+
+        if (target.hasOwnProperty(sourceKey)) {
+          if (!isFunction(targetValue) && !isFunction(sourceValue)) {
+            result[sourceKey as keyof T] = mergeStyle(
+              targetValue,
+              sourceValue,
+            ) as T[keyof T]
+          } else {
+            result[sourceKey as keyof T] = ((props: UIStyleProps) =>
+              mergeStyle(
+                runIfFunc(targetValue, props) as T,
+                runIfFunc(sourceValue, props) as T,
+              )) as T[keyof T]
+          }
+        } else {
+          Object.assign(result, { [sourceKey]: sourceValue })
+        }
+      }
+    } else {
+      result = source
+    }
+  }
+
+  return result as T
+}

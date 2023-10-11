@@ -14,10 +14,11 @@ export const filter: Configs = {
     properties: '--ui-contrast',
     transform: transforms.function('contrast'),
   },
-  dropShadow: {
-    properties: '--ui-drop-shadow',
-    transform: transforms.function('drop-shadow'),
-  },
+  dropShadow: configs.prop(
+    '--ui-drop-shadow',
+    'shadows',
+    transforms.function('drop-shadow'),
+  ),
   grayscale: {
     properties: '--ui-grayscale',
     transform: transforms.function('grayscale'),
@@ -48,10 +49,11 @@ export const filter: Configs = {
     properties: '--ui-backdrop-contrast',
     transform: transforms.function('contrast'),
   },
-  backdropDropShadow: {
-    properties: '--ui-backdrop-drop-shadow',
-    transform: transforms.function('drop-shadow'),
-  },
+  backdropDropShadow: configs.prop(
+    '--ui-backdrop-drop-shadow',
+    'shadows',
+    transforms.function('drop-shadow'),
+  ),
   backdropGrayscale: {
     properties: '--ui-backdrop-grayscale',
     transform: transforms.function('grayscale'),
@@ -94,7 +96,7 @@ export type FilterProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * If `filter=auto`, sets the value of `--ui-drop-shadow`.
    */
-  dropShadow?: Token<StringLiteral, unknown, Y, M>
+  dropShadow?: Token<StringLiteral, 'shadows', Y, M>
   /**
    * If `filter=auto`, sets the value of `--ui-grayscale`.
    */
@@ -134,7 +136,7 @@ export type FilterProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.
    */
-  backdropDropShadow?: Token<StringLiteral, unknown, Y, M>
+  backdropDropShadow?: Token<StringLiteral, 'shadows', Y, M>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.
    */

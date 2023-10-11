@@ -1,5 +1,17 @@
 # @yamada-ui/modal
 
+## 0.4.8
+
+### Patch Changes
+
+- Updated dependencies [[`c1a79e92`](https://github.com/hirotomoyamada/yamada-ui/commit/c1a79e921a2aa5cd6fec47ca9971aa678085dcf6)]:
+  - @yamada-ui/core@0.11.2
+  - @yamada-ui/button@0.3.8
+  - @yamada-ui/close-button@0.3.8
+  - @yamada-ui/motion@0.4.8
+  - @yamada-ui/transitions@0.3.8
+  - @yamada-ui/use-value@0.2.8
+
 ## 0.4.7
 
 ### Patch Changes

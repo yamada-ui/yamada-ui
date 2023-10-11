@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.11.2
+
+### Patch Changes
+
+- [`c1a79e92`](https://github.com/hirotomoyamada/yamada-ui/commit/c1a79e921a2aa5cd6fec47ca9971aa678085dcf6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `dropShadow` and `backdropDropShadow` configurations.
+
 ## 0.11.1
 
 ### Patch Changes

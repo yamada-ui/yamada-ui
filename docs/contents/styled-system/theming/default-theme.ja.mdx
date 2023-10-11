@@ -17,7 +17,7 @@ with_children_description: false
 `color`・`borderColor`・`backgroundColor`・`fill`・`stroke`などは、このトークンを参照します。
 
 :::note status=warning
-各コンポーネントは、`colorScheme`という概念があります。`colorScheme`は、このトークンを元に生成されます。生成には条件があり、キーが`brand`・`primary`・`secondary`・`warning`・`danger`・`link`か、`Hue(50から950)`が定義されている場合に生成されます。
+各コンポーネントは、`colorScheme`という概念があります。`colorScheme`は、このトークンを元に生成されます。生成には条件があり、`Hue(50から950)`が定義されている場合に生成されます。
 :::
 
 ### Black & White
@@ -27,16 +27,20 @@ with_children_description: false
   <ColorPaletter color='white' />
 </ColorPaletterContainer>
 
-### Basics
+### Semantics
 
 <ColorPaletterContainer>
   <ColorPaletter color='primary' />
   <ColorPaletter color='secondary' />
+  <ColorPaletter color='success' />
   <ColorPaletter color='warning' />
   <ColorPaletter color='danger' />
   <ColorPaletter color='link' />
-  <ColorPaletter color='border' />
 </ColorPaletterContainer>
+
+:::note
+`primary`・`secondary`・`success`・`warning`・`danger`・`link`は、セマンティックトークンによって定義されています。詳しくは、[こちら](/docs/styled-system/semantic-tokens)をご覧ください。
+:::
 
 ### BlackAlpha
 
@@ -136,11 +140,6 @@ const colors = {
   current: 'currentColor',
   black: '#1F2123',
   white: '#F6F6F6',
-  primary: '#2196F3',
-  secondary: '#49B657',
-  warning: '#FF9800',
-  danger: '#F44336',
-  link: '#1D94E0',
   border: ['rgba(0, 0, 0, 0.08)', 'rgba(255, 255, 255, 0.06)'],
 
   whiteAlpha: {
@@ -706,6 +705,20 @@ const borders = {
 }
 ```
 
+## Blurs
+
+`blur`・`backdropBlur`は、このトークンを参照します。
+
+```ts live=false
+const blurs = {
+  sm: '4px',
+  md: '8px',
+  lg: '12px',
+  xl: '16px',
+  '2xl': '24px',
+}
+```
+
 ## Radii
 
 `borderRadius`・`rounded`・`borderTopRightRadius`・`roundedStart`などは、このトークンを参照します。
@@ -726,7 +739,7 @@ const radii = {
 
 ## Shadows
 
-`boxShadow`・`shadow`・`textShadow`などは、このトークンを参照します。
+`boxShadow`・`shadow`・`textShadow`は、このトークンを参照します。
 
 ```ts live=false
 const shadows = {

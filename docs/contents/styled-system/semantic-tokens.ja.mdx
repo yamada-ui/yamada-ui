@@ -10,13 +10,42 @@ Yamada UIは、あらゆるスケール(色やフォントサイズなど)のセ
 セマンティックトークンとは、デザインシステムなどで使用される用語で、色やフォントサイズのデザインの属性を抽象化した変数やトークンを指します。これらのトークンは、その名前から直感的にその機能や意味を理解できるように名付けられます。
 :::
 
-セマンティックトークンは、テーマで定義することができます。
+実際に設定されている値はこちらです。
+
+```ts
+export const semantics: Semantics = {
+  colors: {
+    primary: 'blue.500',
+    secondary: 'purple.500',
+    success: 'emerald.500',
+    warning: 'orange.500',
+    danger: 'red.500',
+    link: 'sky.500',
+  },
+  colorSchemes: {
+    primary: 'blue',
+    secondary: 'purple',
+    success: 'emerald',
+    warning: 'orange',
+    danger: 'red',
+    link: 'sky',
+  },
+}
+```
+
+:::note status=warning
+`colorSchemes`で選択できる値は、テーマの`colors`で`Hue(50から950)`が定義されているトークンのみです。
+:::
+
+セマンティックトークンは、テーマの`semantics`に定義します。
 
 ```tsx live=false
 import { UIProvider, extendTheme } from '@yamada-ui/react'
 
 const semantics = {
-  error: 'red.500',
+  colors: {
+    brand: 'violet.500',
+  },
 }
 
 const customTheme = extendTheme({ semantics })()
@@ -31,10 +60,10 @@ const App = () => {
 ```
 
 ```tsx live=false
-<Text color='error'>This is Error</Text>
+<Text color='brand'>This is Brand color</Text>
 ```
 
-これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)で定義されている`colors.red.500`を`error`というセマンティックトークンを生成します。
+これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)で定義されている`colors.violet.500`を`brand`というセマンティックトークンを生成しています。
 
 :::note
 テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[コンポーネントのスタイル](/docs/styled-system/theming/component-style)をご覧ください。

@@ -64,6 +64,68 @@ const App = () => {
 テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[コンポーネントのスタイル](/docs/styled-system/theming/component-style)をご覧ください。
 :::
 
+### セマンティックトークンを変更する
+
+Yamada UIは、あらゆるスケール(色やフォントサイズなど)のセマンティックトークンをサポートしています。
+
+:::note
+セマンティックトークンとは、デザインシステムなどで使用される用語で、色やフォントサイズのデザインの属性を抽象化した変数やトークンを指します。これらのトークンは、その名前から直感的にその機能や意味を理解できるように名付けられます。
+:::
+
+実際に設定されている値はこちらです。
+
+```ts
+export const semantics: Semantics = {
+  colors: {
+    primary: 'blue.500',
+    secondary: 'purple.500',
+    success: 'emerald.500',
+    warning: 'orange.500',
+    danger: 'red.500',
+    link: 'sky.500',
+  },
+  colorSchemes: {
+    primary: 'blue',
+    secondary: 'purple',
+    success: 'emerald',
+    warning: 'orange',
+    danger: 'red',
+    link: 'sky',
+  },
+}
+```
+
+プロジェクトによって、セマンティックトークンを変更する場合があるでしょう。
+
+例えば、`primary`を`pink`にしたいとします。その場合は、`semantics`を変更します。
+
+```tsx live=false highlight={4,5,6,7,8,9,10,11}
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const customTheme = extendTheme({
+  semantics: {
+    colors: {
+      primary: 'pink.500',
+    },
+    colorSchemes: {
+      primary: 'pink',
+    },
+  },
+})()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+セマンティックトークンをもっと学びたい場合は、[こちら](/docs/styled-system/semantic-tokens)をご覧ください。
+:::
+
 ### ローディングを使う
 
 Yamada UIは、アプリケーションで必要な`ローディングアニメーション`をサポートしています。

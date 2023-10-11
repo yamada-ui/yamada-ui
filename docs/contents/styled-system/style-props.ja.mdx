@@ -359,6 +359,43 @@ with_children_description: false
 | `filter`                             | `filter`                | none                                                         |
 | `backdropFilter`                     | `backdrop-filter`       | none                                                         |
 
+## フィルター
+
+```tsx live=false
+// When to use custom value.
+<Box filter='grayscale(80%)' />
+
+// When to use theme token value.
+<Box filter='auto' blur='md' />
+```
+
+| Prop                 | CSSプロパティ     | テーマのトークン                                             |
+| -------------------- | ----------------- | ------------------------------------------------------------ |
+| `filter`             | `filter`          | none                                                         |
+| `blur`               | `filter`          | [blurs](/docs/styled-system/theming/default-theme#blurs)     |
+| `brightness`         | `filter`          | none                                                         |
+| `contrast`           | `filter`          | none                                                         |
+| `dropShadow`         | `filter`          | [shadows](/docs/styled-system/theming/default-theme#shadows) |
+| `grayscale`          | `filter`          | none                                                         |
+| `hueRotate`          | `filter`          | none                                                         |
+| `invert`             | `filter`          | none                                                         |
+| `saturate`           | `filter`          | none                                                         |
+| `sepia`              | `filter`          | none                                                         |
+| `backdropFilter`     | `backdrop-filter` | none                                                         |
+| `backdropBlur`       | `backdrop-filter` | [blurs](/docs/styled-system/theming/default-theme#blurs)     |
+| `backdropBrightness` | `backdrop-filter` | none                                                         |
+| `backdropContrast`   | `backdrop-filter` | none                                                         |
+| `backdropDropShadow` | `backdrop-filter` | [shadows](/docs/styled-system/theming/default-theme#shadows) |
+| `backdropGrayscale`  | `backdrop-filter` | none                                                         |
+| `backdropHueRotate`  | `backdrop-filter` | none                                                         |
+| `backdropInvert`     | `backdrop-filter` | none                                                         |
+| `backdropSaturate`   | `backdrop-filter` | none                                                         |
+| `backdropSepia`      | `backdrop-filter` | none                                                         |
+
+:::note status=warning
+`blur`・`brightness`・`backdropBlur`・`backdropBrightness`などを使用する場合は、`filter`・`backdropFilter`に`auto`を設定する必要があります。
+:::
+
 ## 擬似要素とセレクター
 
 | Prop                   | CSSプロパティ                                                                                | テーマのトークン |
@@ -431,6 +468,16 @@ with_children_description: false
 | `clipPath`                 | `clip-path`                                    | none                                                                          |
 | `transform`                | `transform`                                    | none                                                                          |
 | `transformOrigin`          | `transform-origin`                             | none                                                                          |
+| `transformStyle`           | `transform-style`                              | none                                                                          |
+| `perspective`              | `perspective`                                  | none                                                                          |
+| `translateX`               | `transform`                                    | none                                                                          |
+| `translateY`               | `transform`                                    | none                                                                          |
+| `scale`                    | `transform`                                    | none                                                                          |
+| `scaleX`                   | `transform`                                    | none                                                                          |
+| `scaleY`                   | `transform`                                    | none                                                                          |
+| `rotate`                   | `transform`                                    | none                                                                          |
+| `skewX`                    | `transform`                                    | none                                                                          |
+| `skewY`                    | `transform`                                    | none                                                                          |
 | `transitionProperty`       | `transition-property`                          | [transitions.property](/docs/styled-system/theming/default-theme#transitions) |
 | `transitionDuration`       | `transition-duration`                          | [transitions.duration](/docs/styled-system/theming/default-theme#transitions) |
 | `transitionTimingFunction` | `transition-timing-function`                   | [transitions.easing](/docs/styled-system/theming/default-theme#transitions)   |
@@ -463,3 +510,7 @@ with_children_description: false
 | `scrollPaddingRight`       | `scroll-padding-right`                         | [spaces](/docs/styled-system/theming/default-theme#spaces)                    |
 | `scrollPaddingY`           | `scroll-padding-top` + `scroll-padding-bottom` | [spaces](/docs/styled-system/theming/default-theme#spaces)                    |
 | `scrollPaddingX`           | `scroll-padding-left` + `scroll-padding-right` | [spaces](/docs/styled-system/theming/default-theme#spaces)                    |
+
+:::note status=warning
+`translateX`・`scale`・`skewX`などを使用する場合は、`transform`に`auto`または`auto-3d`を設定する必要があります。
+:::

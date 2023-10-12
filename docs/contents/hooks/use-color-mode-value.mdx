@@ -1,8 +1,37 @@
 ---
 title: useColorModeValue
-description: This page is currently being created.
+description: '`useColorModeValue` is a custom hook that returns the value for the current color mode from the provided values.'
+package_name: '@yamada-ui/core'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useColorModeValue } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const { colorMode } = useColorMode()
+const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
+const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+
+return (
+  <Box
+    bg={bg}
+    p='md'
+    rounded='md'
+    color={color}
+    transitionProperty='all'
+    transitionDuration='normal'
+  >
+    The current colorMode is "{colorMode}"
+  </Box>
+)
+```
+
+:::note
+If you want to learn more about color modes, please check [here](/docs/styled-system/color-mode).
+:::

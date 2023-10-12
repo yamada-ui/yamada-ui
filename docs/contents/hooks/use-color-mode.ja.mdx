@@ -1,8 +1,50 @@
 ---
 title: useColorMode
-description: このページは現在作成中です。
+description: '`useColorMode`は、現在のカラーモードを返すカスタムフックです。'
+package_name: '@yamada-ui/core'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useColorMode } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const { colorMode, internalColorMode, changeColorMode, toggleColorMode } = useColorMode()
+
+return (
+  <>
+    <Text>
+      The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+    </Text>
+
+    <Wrap mt='md' gap='md'>
+      <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
+        ライトモード
+      </Button>
+      <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
+        ダークモード
+      </Button>
+      <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
+        システム
+      </Button>
+      <Button colorScheme='gray' onClick={toggleColorMode}>
+        {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
+      </Button>
+    </Wrap>
+  </>
+)
+```
+
+:::note status=warning
+`colorMode`は、現在の`light`と`dark`を返します。
+`internalColorMode`は、現在の`light`と`dark`または`system`を返します。
+:::
+
+:::note
+カラーモードをもっと学びたい場合は、[こちら](/docs/styled-system/color-mode)をご覧ください。
+:::

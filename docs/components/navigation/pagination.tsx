@@ -71,12 +71,12 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
         fontWeight='semibold'
         transitionProperty='colors'
         transitionDuration='fast'
-        color={[`${colorScheme}.600`, `${colorScheme}.400`]}
+        color={[`${colorScheme}.500`, `${colorScheme}.400`]}
         _hover={{
-          color: [`${colorScheme}.500`, `${colorScheme}.300`],
+          color: [`${colorScheme}.600`, `${colorScheme}.500`],
         }}
         _active={{
-          color: [`${colorScheme}.700`, `${colorScheme}.500`],
+          color: [`${colorScheme}.700`, `${colorScheme}.600`],
         }}
       >
         {isPrev ? <ChevronIcon transform='rotate(90deg)' fontSize='1.3em' /> : null}

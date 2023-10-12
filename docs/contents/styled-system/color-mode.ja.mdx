@@ -230,7 +230,7 @@ export const getServerSideProps = getServerSideCommonProps
 
 アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。
 
-- `changeColorMode`: 引数に変更したいカラーモードを設定します。
+- `changeColorMode`: 任意のカラーモードを設定します。
 - `toggleColorMode`: ライトモードならダークモードへ、ダークモードならライトモードへ切り替えます。
 
 ```tsx functional=true
@@ -266,9 +266,9 @@ Yamada UIには、カラーモードの便利なカスタムフックを提供�
 const { colorMode, internalColorMode } = useColorMode()
 
 return (
-  <Box p='md'>
+  <Text>
     The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
-  </Box>
+  </Text>
 )
 ```
 

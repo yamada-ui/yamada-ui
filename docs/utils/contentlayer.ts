@@ -24,7 +24,9 @@ export const getTree =
       .map(({ is_expand, ...doc }) => {
         return {
           ...doc,
-          is_expand: is_expand || paths.join('/').startsWith(doc.data.paths.join('/')),
+          is_expand:
+            is_expand ||
+            doc.data.paths.every((path: string, index: number) => path === paths[index]),
           children: getTree(docs, doc.data.paths)(paths),
         }
       })

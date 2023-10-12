@@ -83,7 +83,7 @@ const getValidChildren = (
     const firstChild = children.at(0)
     const lastChild = children.at(-1)
 
-    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)\s*$/) ?? []
+    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]+)\s*$/) ?? []
     const [, lastChildContent] = lastChild.value.match(/([\s\S]*?)\s*:::$/) ?? []
 
     if (!name) throw new Error()
@@ -115,12 +115,10 @@ const getAttributes = (content: string = ''): { attributes: any[]; resolvedConte
     value: value.trim(),
   }))
 
-  const resolvedContent = content.replace(reg, '').trim()
+  const resolvedContent = content.replace(reg, '').replace(/^\s+/, '')
 
   return { attributes, resolvedContent }
 }
-
-;[{ type: 'mdxJsxAttribute', name: 'status', value: 'error' }]
 
 const insertElement =
   ({

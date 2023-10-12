@@ -50,9 +50,9 @@ export const DocLayout: FC<DocLayoutProps> = ({
               {title}
             </Heading>
 
-            <DocLinks />
-
             {with_description ? <TextWithCode mt='md'>{description}</TextWithCode> : null}
+
+            <DocLinks />
 
             <Tabs />
 

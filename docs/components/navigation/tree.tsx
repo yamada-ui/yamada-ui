@@ -12,6 +12,7 @@ import {
   useTheme,
   useColorMode,
   transparentizeColor,
+  isGray,
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC, memo, useEffect } from 'react'
@@ -103,21 +104,33 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         userSelect='none'
         rounded='md'
         gap='0'
-        color={isActive ? [`${colorScheme}.700`, 'white'] : isNested ? 'muted' : undefined}
+        color={
+          isActive
+            ? isGray(colorScheme)
+              ? [`inherit`, `${colorScheme}.200`]
+              : [`${colorScheme}.600`, `${colorScheme}.200`]
+            : isNested
+            ? 'muted'
+            : undefined
+        }
         bg={
           isActive
-            ? [
-                transparentizeColor(`${colorScheme}.200`, 0.32)(theme, colorMode),
-                transparentizeColor(`${colorScheme}.400`, 0.16)(theme, colorMode),
-              ]
+            ? isGray(colorScheme)
+              ? [`${colorScheme}.200`, `whiteAlpha.200`]
+              : [
+                  `${colorScheme}.100`,
+                  transparentizeColor(`${colorScheme}.200`, 0.12)(theme, colorMode),
+                ]
             : undefined
         }
         _hover={{
           color: isActive ? undefined : ['black', 'white'],
-          bg: isActive ? undefined : ['gray.100', 'whiteAlpha.50'],
+          bg: isActive
+            ? undefined
+            : [transparentizeColor(`gray.200`, 0.64)(theme, colorMode), 'whiteAlpha.100'],
         }}
         _active={{
-          bg: isActive ? undefined : ['gray.200', 'whiteAlpha.100'],
+          bg: isActive ? undefined : ['gray.200', 'whiteAlpha.200'],
         }}
         transitionProperty='colors'
         transitionDuration='normal'

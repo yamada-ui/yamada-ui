@@ -41,6 +41,9 @@
     "editable-code-block": {
       "label": "Editable example"
     },
+    "doc-links": {
+      "source": "Source"
+    },
     "select-package-managers": {
       "name": "Package",
       "description": "Description"

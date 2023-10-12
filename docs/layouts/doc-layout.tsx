@@ -10,6 +10,7 @@ import {
   Tabs,
   LinkCards,
   EditPageLink,
+  DocLinks,
 } from 'components/navigation'
 import { TextWithCode } from 'components/typography'
 import { Data, Doc } from 'contentlayer/generated'
@@ -48,6 +49,8 @@ export const DocLayout: FC<DocLayoutProps> = ({
             <Heading as='h1' size='2xl'>
               {title}
             </Heading>
+
+            <DocLinks />
 
             {with_description ? <TextWithCode mt='md'>{description}</TextWithCode> : null}
 

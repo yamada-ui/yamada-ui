@@ -45,6 +45,9 @@
     "editable-code-block": {
       "label": "編集可能な例"
     },
+    "doc-links": {
+      "source": "ソース"
+    },
     "select-package-managers": {
       "name": "パッケージ",
       "description": "説明"

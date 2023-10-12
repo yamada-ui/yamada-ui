@@ -26,15 +26,15 @@ export const Footer = memo(
                     : CONSTANT.SNS.GITHUB.YAMADA_UI + '/graphs/contributors'
                 }
                 target='_blank'
-                textDecoration='underline'
               >
                 {str}
               </Link>
             ))}
           </Text>
 
-          <HStack color={['blackAlpha.700', 'whiteAlpha.700']}>
+          <HStack>
             <Link
+              color={['blackAlpha.700', 'whiteAlpha.700']}
               href={CONSTANT.SNS.GITHUB.HIROTOMO_YAMADA}
               target='_blank'
               aria-label='GitHub profile of Hirotomo Yamada'
@@ -43,6 +43,7 @@ export const Footer = memo(
             </Link>
 
             <Link
+              color={['blackAlpha.700', 'whiteAlpha.700']}
               href={CONSTANT.SNS.TWITTER.HIROTOMO_YAMADA}
               target='_blank'
               aria-label='Twitter Hirotomo Yamada'

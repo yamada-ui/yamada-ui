@@ -19,7 +19,7 @@ declare module 'contentlayer/generated' {
     with_children: boolean
     with_description: boolean
     with_children_description: boolean
-    package: string
+    package_name: string
     locale: string
     paths: string[]
     description?: string

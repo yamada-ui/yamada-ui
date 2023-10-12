@@ -5,7 +5,7 @@ import { Icon as UIIcon, IconProps as UIIconProps } from '@yamada-ui/icon'
 import { cx } from '@yamada-ui/utils'
 import { useMemo } from 'react'
 
-type FontAwesomeIconOptions = {
+type IconOptions = {
   /**
    * The icon of the font awesome.
    * Check the docs to see the icon of possible modifiers you can pass.
@@ -19,9 +19,9 @@ type FontAwesomeIconOptions = {
   size?: CSSUIProps['fontSize']
 }
 
-export type FontAwesomeIconProps = UIIconProps & FontAwesomeIconOptions
+export type IconProps = UIIconProps & IconOptions
 
-export const Icon = forwardRef<FontAwesomeIconProps, 'svg'>(
+export const Icon = forwardRef<IconProps, 'svg'>(
   ({ className, icon, size: fontSize, __css, ...rest }, ref) => {
     const css = useMemo(
       () => ({

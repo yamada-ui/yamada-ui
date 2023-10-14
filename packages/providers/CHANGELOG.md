@@ -1,5 +1,16 @@
 # @yamada-ui/providers
 
+## 0.8.10
+
+### Patch Changes
+
+- Updated dependencies [[`efa39e12`](https://github.com/hirotomoyamada/yamada-ui/commit/efa39e1258e88019b5aa605ddacfbf2d2b3c757c)]:
+  - @yamada-ui/core@0.11.3
+  - @yamada-ui/loading@0.4.9
+  - @yamada-ui/motion@0.4.9
+  - @yamada-ui/notice@0.4.9
+  - @yamada-ui/theme@0.11.2
+
 ## 0.8.9
 
 ### Patch Changes

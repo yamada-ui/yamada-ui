@@ -1,6 +1,6 @@
-import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { ColorModeScript } from '@yamada-ui/react'
-import { customConfig } from 'theme'
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+import { config } from 'theme'
 
 class Document extends NextDocument {
   static getInitialProps(props: DocumentContext) {
@@ -16,7 +16,7 @@ class Document extends NextDocument {
         </Head>
 
         <body>
-          <ColorModeScript initialColorMode={customConfig.initialColorMode} />
+          <ColorModeScript initialColorMode={config.initialColorMode} />
           <Main />
           <NextScript />
         </body>

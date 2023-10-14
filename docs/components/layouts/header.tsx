@@ -268,11 +268,18 @@ type ThemeSchemeButtonProps = IconButtonProps & {
 }
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...rest }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const { theme, changeThemeScheme } = useTheme()
   const { colorSchemes = [] } = theme
 
   return (
-    <Popover {...popoverProps} closeOnButton={false}>
+    <Popover
+      {...popoverProps}
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      closeOnButton={false}
+    >
       <PopoverTrigger>
         <IconButton
           aria-label='Open color mode switching menu'
@@ -302,7 +309,10 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
               _focusVisible={{ shadow: 'outline' }}
               transitionProperty='common'
               transitionDuration='slower'
-              onClick={() => changeThemeScheme(colorScheme)}
+              onClick={() => {
+                changeThemeScheme(colorScheme)
+                onClose()
+              }}
             />
           ))}
         </PopoverBody>

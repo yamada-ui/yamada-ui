@@ -8,11 +8,11 @@ import {
   useColorMode,
   ColorMode,
 } from '@yamada-ui/react'
-import { forwardRef } from 'react'
+import { FC, PropsWithChildren } from 'react'
 
-export type HeaderProps = {}
+export type HeaderProps = PropsWithChildren
 
-export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
+export const Header: FC<HeaderProps> = ({}) => {
   const { internalColorMode, changeColorMode } = useColorMode()
 
   return (
@@ -24,8 +24,8 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
       top={0}
       boxShadow={['sm', 'md']}
     >
-      <HStack ref={ref} w='full' maxW='1440px' py='md'>
-        <Image src={`${process.env.PUBLIC_URL}/logo-colored@2x.png`} w='2xs' />
+      <HStack w='full' maxW='1440px' py='md'>
+        <Image src='/logo-colored@2x.png' w='2xs' />
 
         <Spacer />
 
@@ -45,4 +45,4 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(({}, ref) => {
       </HStack>
     </Flex>
   )
-})
+}

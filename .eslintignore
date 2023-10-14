@@ -6,3 +6,4 @@ build
 pnpm-lock.yaml
 examples
 cli
+storybook-static

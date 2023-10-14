@@ -7,9 +7,10 @@ import { CONSTANT } from 'constant'
 import { useI18n } from 'contexts/i18n-context'
 import { PageProvider } from 'contexts/page-context'
 import { TopLayout } from 'layouts/top-layout'
-import { getServerSideCommonProps } from 'utils/next'
+import { getStaticCommonProps } from 'utils/next'
 
-type PageProps = InferGetStaticPropsType<typeof getServerSideProps>
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>
+// type PageProps = InferGetStaticPropsType<typeof getServerSideProps>
 
 const Page: NextPage<PageProps> = ({ docs, tree }) => {
   const { t, tc } = useI18n()
@@ -75,4 +76,5 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
 
 export default Page
 
-export const getServerSideProps = getServerSideCommonProps
+export const getStaticProps = getStaticCommonProps
+// export const getServerSideProps = getServerSideCommonProps

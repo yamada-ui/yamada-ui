@@ -1,0 +1,2 @@
+import{a as t}from"./jsx-runtime-03b4ddbf.js";import{f as i}from"./forward-ref-8b7d2a6f.js";import{u as n}from"./use-component-style-592ec7b6.js";import{o as p}from"./theme-provider-175f48f0.js";import{d as c,e as f}from"./factory-8dd5dfe0.js";const x=i((s,o)=>{const[r,e]=n("Heading",s),{className:a,...m}=p(e);return t(c.h1,{ref:o,className:f("ui-heading",a),__css:r,...m})});export{x as H};
+//# sourceMappingURL=heading-7f7bb6dc.js.map

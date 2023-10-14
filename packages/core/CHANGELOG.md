@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.11.3
+
+### Patch Changes
+
+- [`efa39e12`](https://github.com/hirotomoyamada/yamada-ui/commit/efa39e1258e88019b5aa605ddacfbf2d2b3c757c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated cookie and localStorage `ColorModeScripts`.
+
 ## 0.11.2
 
 ### Patch Changes

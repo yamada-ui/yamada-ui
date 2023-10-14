@@ -1,5 +1,15 @@
 # @yamada-ui/fontawesome
 
+## 0.3.9
+
+### Patch Changes
+
+- [`e5903f14`](https://github.com/hirotomoyamada/yamada-ui/commit/e5903f148609c7fcec5b60556e6c230723b512a2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed type and export definitions.
+
+- Updated dependencies [[`efa39e12`](https://github.com/hirotomoyamada/yamada-ui/commit/efa39e1258e88019b5aa605ddacfbf2d2b3c757c)]:
+  - @yamada-ui/core@0.11.3
+  - @yamada-ui/icon@0.3.9
+
 ## 0.3.8
 
 ### Patch Changes

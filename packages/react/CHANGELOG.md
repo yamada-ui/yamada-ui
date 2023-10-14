@@ -1,5 +1,71 @@
 # @yamada-ui/react
 
+## 0.8.2
+
+### Patch Changes
+
+- Updated dependencies [[`efa39e12`](https://github.com/hirotomoyamada/yamada-ui/commit/efa39e1258e88019b5aa605ddacfbf2d2b3c757c)]:
+  - @yamada-ui/core@0.11.3
+  - @yamada-ui/accordion@0.3.9
+  - @yamada-ui/alert@0.5.3
+  - @yamada-ui/autocomplete@0.4.2
+  - @yamada-ui/avatar@0.3.9
+  - @yamada-ui/badge@0.3.9
+  - @yamada-ui/breadcrumb@0.3.9
+  - @yamada-ui/button@0.3.9
+  - @yamada-ui/card@0.3.9
+  - @yamada-ui/checkbox@0.3.11
+  - @yamada-ui/close-button@0.3.9
+  - @yamada-ui/editable@0.3.11
+  - @yamada-ui/file-button@0.3.11
+  - @yamada-ui/file-input@0.4.2
+  - @yamada-ui/form-control@0.3.11
+  - @yamada-ui/highlight@0.3.9
+  - @yamada-ui/icon@0.3.9
+  - @yamada-ui/image@0.3.9
+  - @yamada-ui/indicator@0.3.9
+  - @yamada-ui/input@0.3.11
+  - @yamada-ui/kbd@0.3.9
+  - @yamada-ui/layouts@0.3.9
+  - @yamada-ui/link@0.3.9
+  - @yamada-ui/list@0.3.9
+  - @yamada-ui/loading@0.4.9
+  - @yamada-ui/menu@0.3.9
+  - @yamada-ui/modal@0.4.9
+  - @yamada-ui/motion@0.4.9
+  - @yamada-ui/native-select@0.4.2
+  - @yamada-ui/native-table@0.4.2
+  - @yamada-ui/notice@0.4.9
+  - @yamada-ui/number-input@0.3.11
+  - @yamada-ui/pagination@0.4.9
+  - @yamada-ui/pin-input@0.3.11
+  - @yamada-ui/popover@0.3.9
+  - @yamada-ui/progress@0.4.9
+  - @yamada-ui/radio@0.3.11
+  - @yamada-ui/reorder@0.3.9
+  - @yamada-ui/scroll-area@0.3.9
+  - @yamada-ui/segmented-control@0.3.9
+  - @yamada-ui/select@0.4.2
+  - @yamada-ui/skeleton@0.3.9
+  - @yamada-ui/slider@0.4.2
+  - @yamada-ui/stepper@0.3.9
+  - @yamada-ui/switch@0.3.11
+  - @yamada-ui/tabs@0.3.9
+  - @yamada-ui/tag@0.3.9
+  - @yamada-ui/textarea@0.3.11
+  - @yamada-ui/tooltip@0.4.4
+  - @yamada-ui/transitions@0.3.9
+  - @yamada-ui/typography@0.3.9
+  - @yamada-ui/use-animation@0.3.9
+  - @yamada-ui/use-breakpoint@0.2.9
+  - @yamada-ui/use-popper@0.4.9
+  - @yamada-ui/use-token@0.3.3
+  - @yamada-ui/use-value@0.2.9
+  - @yamada-ui/providers@0.8.10
+  - @yamada-ui/theme@0.11.2
+  - @yamada-ui/theme-tools@0.2.11
+  - @yamada-ui/use-media-query@0.2.10
+
 ## 0.8.1
 
 ### Patch Changes

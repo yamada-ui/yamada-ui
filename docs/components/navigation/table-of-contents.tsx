@@ -16,7 +16,6 @@ import { memo, useState } from 'react'
 import { List as ListIcon } from 'components/media-and-icons'
 import { TextWithCode } from 'components/typography'
 import { Content } from 'contentlayer/generated'
-import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
 import { useEventListener } from 'hooks/use-event-listener'
 
@@ -29,7 +28,6 @@ export const TableOfContents = memo(
     const { theme } = useTheme()
     const { colorMode } = useColorMode()
     const { t } = useI18n()
-    const { colorScheme } = useConfigs()
 
     useEventListener(
       'scroll',
@@ -78,12 +76,12 @@ export const TableOfContents = memo(
                   pl={`calc(${lv - 1} * ${pl})`}
                   py='sm'
                   borderLeftWidth='1px'
-                  borderLeftColor={isActive ? `${colorScheme}.400` : 'border'}
+                  borderLeftColor={isActive ? `primary.400` : 'border'}
                   bg={
                     isActive
                       ? [
-                          transparentizeColor(`${colorScheme}.200`, 0.32)(theme, colorMode),
-                          transparentizeColor(`${colorScheme}.400`, 0.16)(theme, colorMode),
+                          transparentizeColor(`primary.200`, 0.32)(theme, colorMode),
+                          transparentizeColor(`primary.400`, 0.16)(theme, colorMode),
                         ]
                       : undefined
                   }

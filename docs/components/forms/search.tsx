@@ -57,7 +57,7 @@ export const Search = memo(
           rounded='md'
           gap='sm'
           color={['gray.600', 'whiteAlpha.600']}
-          _focus={{ shadow: 'outline' }}
+          _focusVisible={{ shadow: 'outline' }}
           transitionProperty='common'
           transitionDuration='slower'
           {...rest}

@@ -9,11 +9,18 @@ import {
   DrawerProps,
   HStack,
   IconButton,
+  IconButtonProps,
   Menu,
   MenuButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuProps,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverProps,
+  PopoverTrigger,
   Spacer,
   Tag,
   Text,
@@ -26,12 +33,21 @@ import {
   useDisclosure,
   useMotionValueEvent,
   useScroll,
+  useTheme,
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, memo, useEffect, useRef, useState } from 'react'
 import { Search } from 'components/forms'
-import { Discord, Github, Hamburger, Moon, Sun, Translate } from 'components/media-and-icons'
+import {
+  ColorPalette,
+  Discord,
+  Github,
+  Hamburger,
+  Moon,
+  Sun,
+  Translate,
+} from 'components/media-and-icons'
 import { NextLinkIconButton, Tree } from 'components/navigation'
 import { CONSTANT } from 'constant'
 import { useI18n } from 'contexts/i18n-context'
@@ -115,9 +131,6 @@ export const Header = memo(
 type ButtonGroupProps = Partial<UseDisclosureReturn> & { isMobile?: boolean }
 
 const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onClose }) => {
-  const { locale, changeLocale } = useI18n()
-  const { colorMode, toggleColorMode } = useColorMode()
-
   return (
     <HStack gap='sm'>
       <NextLinkIconButton
@@ -142,38 +155,16 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         icon={<Github />}
       />
 
-      {CONSTANT.I18N.LOCALES.length > 1 ? (
-        <Menu placement={!isMobile ? 'bottom-end' : 'bottom'}>
-          <MenuButton
-            as={IconButton}
-            aria-label='Open language switching menu'
-            variant='ghost'
-            colorScheme='gray'
-            display={{ base: 'inline-flex', md: !isMobile ? 'none' : undefined }}
-            color='muted'
-            icon={<Translate />}
-          />
+      <ThemeSchemeButton display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }} />
 
-          <MenuList>
-            <MenuOptionGroup<string> value={locale} onChange={changeLocale} type='radio'>
-              {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
-                <MenuOptionItem key={value} value={value} closeOnSelect>
-                  {label}
-                </MenuOptionItem>
-              ))}
-            </MenuOptionGroup>
-          </MenuList>
-        </Menu>
+      {CONSTANT.I18N.LOCALES.length > 1 ? (
+        <I18nButton
+          menuProps={{ placement: isMobile ? 'bottom' : 'bottom-end' }}
+          display={{ base: 'inline-flex', md: !isMobile ? 'none' : undefined }}
+        />
       ) : null}
 
-      <IconButton
-        variant='ghost'
-        colorScheme='gray'
-        aria-label={`Switch to ${colorMode === 'light' ? 'dark' : 'light'} mode`}
-        color='muted'
-        onClick={toggleColorMode}
-        icon={colorMode === 'dark' ? <Sun /> : <Moon />}
-      />
+      <ColorModeButton />
 
       {!isOpen ? (
         <IconButton
@@ -199,6 +190,128 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
 })
 
 ButtonGroup.displayName = 'ButtonGroup'
+
+type I18nButtonProps = IconButtonProps & {
+  menuProps?: MenuProps
+}
+
+const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
+  const { locale, changeLocale } = useI18n()
+
+  return (
+    <Menu placement='bottom-end' {...menuProps}>
+      <MenuButton
+        as={IconButton}
+        aria-label='Open language switching menu'
+        variant='ghost'
+        colorScheme='gray'
+        color='muted'
+        icon={<Translate />}
+        {...rest}
+      />
+
+      <MenuList>
+        <MenuOptionGroup<string> value={locale} onChange={changeLocale} type='radio'>
+          {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
+            <MenuOptionItem key={value} value={value} closeOnSelect>
+              {label}
+            </MenuOptionItem>
+          ))}
+        </MenuOptionGroup>
+      </MenuList>
+    </Menu>
+  )
+})
+
+I18nButton.displayName = 'I18nButton'
+
+type ColorModeButtonProps = IconButtonProps & {
+  menuProps?: MenuProps
+}
+
+const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) => {
+  const { colorMode, internalColorMode, changeColorMode } = useColorMode()
+
+  return (
+    <Menu placement='bottom-end' {...menuProps}>
+      <MenuButton
+        as={IconButton}
+        aria-label='Open color mode switching menu'
+        variant='ghost'
+        colorScheme='gray'
+        color='muted'
+        icon={colorMode === 'dark' ? <Sun /> : <Moon />}
+        {...rest}
+      />
+
+      <MenuList>
+        <MenuOptionGroup<string> value={internalColorMode} onChange={changeColorMode} type='radio'>
+          <MenuOptionItem value='light' closeOnSelect>
+            Light
+          </MenuOptionItem>
+          <MenuOptionItem value='dark' closeOnSelect>
+            Dark
+          </MenuOptionItem>
+          <MenuOptionItem value='system' closeOnSelect>
+            System
+          </MenuOptionItem>
+        </MenuOptionGroup>
+      </MenuList>
+    </Menu>
+  )
+})
+
+ColorModeButton.displayName = 'ColorModeButton'
+
+type ThemeSchemeButtonProps = IconButtonProps & {
+  popoverProps?: PopoverProps
+}
+
+const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...rest }) => {
+  const { theme, changeThemeScheme } = useTheme()
+  const { colorSchemes = [] } = theme
+
+  return (
+    <Popover {...popoverProps} closeOnButton={false}>
+      <PopoverTrigger>
+        <IconButton
+          aria-label='Open color mode switching menu'
+          variant='ghost'
+          colorScheme='gray'
+          color='muted'
+          icon={<ColorPalette />}
+          {...rest}
+        />
+      </PopoverTrigger>
+
+      <PopoverContent>
+        <PopoverBody display='grid' gridTemplateColumns={{ base: 'repeat(4, 1fr)' }}>
+          {colorSchemes.map((colorScheme: string) => (
+            <Box
+              as='button'
+              type='button'
+              key={colorScheme}
+              bg={`${colorScheme}.500`}
+              minW={{ base: '12', md: '10' }}
+              minH={{ base: '12', md: '10' }}
+              rounded='md'
+              boxShadow='inner'
+              outline='0'
+              _hover={{ bg: `${colorScheme}.600` }}
+              _active={{ bg: `${colorScheme}.700` }}
+              _focusVisible={{ shadow: 'outline' }}
+              transitionProperty='common'
+              transitionDuration='slower'
+              onClick={() => changeThemeScheme(colorScheme)}
+            />
+          ))}
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  )
+})
+
+ThemeSchemeButton.displayName = 'ThemeSchemeButton'
 
 type MobileMenuProps = DrawerProps
 

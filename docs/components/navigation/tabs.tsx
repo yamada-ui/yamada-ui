@@ -2,7 +2,6 @@ import { forwardRef, StackProps, HStack, dataAttr, Box, Center } from '@yamada-u
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { memo } from 'react'
-import { useConfigs } from 'contexts/configs-context'
 import { usePage } from 'contexts/page-context'
 
 export type TabsProps = StackProps
@@ -11,7 +10,6 @@ export const Tabs = memo(
   forwardRef<TabsProps, 'div'>(({ ...rest }, ref) => {
     const { tabs } = usePage()
     const { asPath } = useRouter()
-    const { colorScheme } = useConfigs()
 
     return tabs.length ? (
       <Box as='nav' overflowX='auto' mt='normal'>
@@ -43,7 +41,7 @@ export const Tabs = memo(
                 _focus={{ outline: 'none' }}
                 _focusVisible={{ zIndex: 1, boxShadow: 'outline' }}
                 _selected={{
-                  color: [`${colorScheme}.600`, `${colorScheme}.300`],
+                  color: [`primary.600`, `primary.300`],
 
                   borderColor: 'currentColor',
                   _hover: { opacity: 1 },

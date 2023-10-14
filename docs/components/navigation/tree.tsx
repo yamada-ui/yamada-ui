@@ -18,7 +18,6 @@ import Link from 'next/link'
 import { FC, memo, useEffect } from 'react'
 import { Label } from 'components/data-display'
 import { DocWithChildren } from 'contentlayer/generated'
-import { useConfigs } from 'contexts/configs-context'
 import { usePage } from 'contexts/page-context'
 
 export type TreeProps = ListProps
@@ -94,9 +93,8 @@ type ListItemLinkProps = Pick<RecursiveListItemProps, 'title' | 'label' | 'slug'
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
   ({ title, label, slug, isNested, isOpen, isActive, withToggleButton, onToggle }) => {
-    const { theme } = useTheme()
+    const { theme, themeScheme } = useTheme()
     const { colorMode } = useColorMode()
-    const { colorScheme } = useConfigs()
 
     return (
       <HStack
@@ -106,21 +104,18 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         gap='0'
         color={
           isActive
-            ? isGray(colorScheme)
-              ? [`inherit`, `${colorScheme}.200`]
-              : [`${colorScheme}.600`, `${colorScheme}.200`]
+            ? isGray(themeScheme)
+              ? [`inherit`, `primary.200`]
+              : [`primary.600`, `primary.200`]
             : isNested
             ? 'muted'
             : undefined
         }
         bg={
           isActive
-            ? isGray(colorScheme)
-              ? [`${colorScheme}.200`, `whiteAlpha.200`]
-              : [
-                  `${colorScheme}.100`,
-                  transparentizeColor(`${colorScheme}.200`, 0.12)(theme, colorMode),
-                ]
+            ? isGray(themeScheme)
+              ? [`primary.200`, `whiteAlpha.200`]
+              : [`primary.100`, transparentizeColor(`primary.200`, 0.12)(theme, colorMode)]
             : undefined
         }
         _hover={{

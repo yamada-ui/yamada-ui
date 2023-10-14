@@ -11,7 +11,6 @@ import {
 import Link from 'next/link'
 import { FC, memo } from 'react'
 import { Doc } from 'contentlayer/generated'
-import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
 import { usePage } from 'contexts/page-context'
 
@@ -43,7 +42,6 @@ export const Pagination = memo(
 type PaginationItemProps = GridItemProps & { doc?: Doc; isPrev?: boolean }
 
 const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
-  const { colorScheme } = useConfigs()
   const { t } = useI18n()
 
   return doc ? (
@@ -71,12 +69,12 @@ const PaginationItem: FC<PaginationItemProps> = ({ doc, isPrev, ...rest }) => {
         fontWeight='semibold'
         transitionProperty='colors'
         transitionDuration='fast'
-        color={[`${colorScheme}.500`, `${colorScheme}.400`]}
+        color={[`primary.500`, `primary.400`]}
         _hover={{
-          color: [`${colorScheme}.600`, `${colorScheme}.500`],
+          color: [`primary.600`, `primary.500`],
         }}
         _active={{
-          color: [`${colorScheme}.700`, `${colorScheme}.600`],
+          color: [`primary.700`, `primary.600`],
         }}
       >
         {isPrev ? <ChevronIcon transform='rotate(90deg)' fontSize='1.3em' /> : null}

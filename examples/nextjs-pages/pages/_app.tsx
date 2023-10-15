@@ -1,9 +1,6 @@
 import type { AppProps } from 'next/app'
-import { extendConfig, extendTheme, UIProvider, colorModeManager } from '@yamada-ui/react'
-import { customTheme, customConfig } from 'theme'
-
-const theme = extendTheme(customTheme)()
-const config = extendConfig(customConfig)
+import { UIProvider, colorModeManager } from '@yamada-ui/react'
+import { theme, config } from 'theme'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { cookies } = pageProps

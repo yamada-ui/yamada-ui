@@ -1,10 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { App } from './app'
-import { extendConfig, extendTheme, UIProvider } from '@yamada-ui/react'
-import { customTheme, customConfig } from 'theme'
-
-const theme = extendTheme(customTheme)()
-const config = extendConfig(customConfig)
+import { UIProvider } from '@yamada-ui/react'
+import { theme, config } from 'theme'
 
 const container = document.getElementById('app')
 

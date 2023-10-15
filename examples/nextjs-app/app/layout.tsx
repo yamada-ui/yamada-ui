@@ -1,18 +1,9 @@
 'use client'
 
-import {
-  colorModeManager,
-  extendConfig,
-  extendTheme,
-  UIProvider,
-  ColorModeScript,
-} from '@yamada-ui/react'
+import { colorModeManager, UIProvider, ColorModeScript } from '@yamada-ui/react'
 import { CacheProvider } from '@yamada-ui/nextjs'
 import { ReactNode } from 'react'
-import { customTheme, customConfig } from 'theme'
-
-const theme = extendTheme(customTheme)()
-const config = extendConfig(customConfig)
+import { theme, config } from 'theme'
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (

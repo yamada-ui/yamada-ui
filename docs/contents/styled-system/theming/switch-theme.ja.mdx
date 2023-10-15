@@ -4,7 +4,7 @@ description: ユーザーがテーマを切り替える方法。
 order: 5
 ---
 
-Yamada UIは、ユーザーがテーマを切り替え可能にする機能があります。
+Yamada UIは、ユーザーがテーマを切り替える機能を提供しています。
 
 :::note
 この機能を有効にするには、複数のテーマを用意する必要があります。
@@ -15,80 +15,79 @@ Yamada UIは、ユーザーがテーマを切り替え可能にする機能が�
 ユーザーがテーマを切り替えるには、次の2つのことを行う必要があります。
 
 1. 複数のテーマを用意する
-2. コンフィグに`initialThemeScheme`を設定する。
-3. `ThemeSchemeScript`をアプリケーションに追加する。
+2. `ThemeSchemeScript`をアプリケーションに追加する。
 
 ### 複数のテーマを用意する
 
-今回は、複数のテーマを新しく用意するのはコストが掛かるためデフォルトのテーマからカラーを変更したテーマを複数用意します。
+今回は、デフォルトのテーマからカラーを変更したテーマを複数用意します。
 
 :::note
-テーマのカスタマイズの仕方が分からない場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
+テーマをカスタマイズする方法が分からない場合は、[こちら](/docs/styled-system/theming/customize-theme)をご覧ください。
+:::
+
+`themeSchemes`にオブジェクトを渡します。このオブジェクトのキーがテーマを切り替えるために必要な`themeScheme`になります。
+
+:::note status=warning
+`themeSchemes`は、CSSの`属性セレクター`を用いて`カスタムプロパティ`をオーバーライドします。`themeScheme`が切り替わるごとに対応する`属性セレクター`内の`カスタムプロパティ`が参照されます。
 :::
 
 ```tsx live=false
-import { defaultTheme, extendTheme } from '@yamada-ui/react'
+import { extendTheme } from '@yamada-ui/react'
 
-const pinkTheme = extendTheme({
-  colors: {
-    primary: '#ec4899',
+export const theme = extendTheme({
+  themeSchemes: {
+    pink: {
+      semantics: {
+        colors: { primary: 'pink.500' },
+        colorSchemes: { primary: 'pink' },
+      },
+    },
+    purple: {
+      semantics: {
+        colors: { primary: 'purple.500' },
+        colorSchemes: { primary: 'purple' },
+      },
+    },
+    green: {
+      semantics: {
+        colors: { primary: 'green.500' },
+        colorSchemes: { primary: 'green' },
+      },
+    },
   },
 })()
-
-const purpleTheme = extendTheme({
-  colors: {
-    primary: '#a855f7',
-  },
-})()
-
-const greenTheme = extendTheme({
-  colors: {
-    primary: '#22c55e',
-  },
-})()
-
-export const theme = {
-  default: defaultTheme,
-  pink: pinkTheme,
-  purple: purpleTheme,
-  green: greenTheme,
-}
 ```
 
-### コンフィグをカスタマイズする
+もし、`themeSchemes`で渡したテーマのいずれかをデフォルトで使用したい場合は、コンフィグの`initialThemeScheme`に初期値を設定します。
 
-コンフィグの`initialThemeScheme`に初期値を設定します。
+```tsx live=false highlight={1,26,27,28}
+import { extendTheme, extendConfig } from '@yamada-ui/react'
 
-```tsx live=false highlight={1,28,29,30,34}
-import { defaultTheme, extendTheme, extendConfig } from '@yamada-ui/react'
-
-const pinkTheme = extendTheme({
-  colors: {
-    primary: '#ec4899',
+export const theme = extendTheme({
+  themeSchemes: {
+    pink: {
+      semantics: {
+        colors: { primary: 'pink.500' },
+        colorSchemes: { primary: 'pink' },
+      },
+    },
+    purple: {
+      semantics: {
+        colors: { primary: 'purple.500' },
+        colorSchemes: { primary: 'purple' },
+      },
+    },
+    green: {
+      semantics: {
+        colors: { primary: 'green.500' },
+        colorSchemes: { primary: 'green' },
+      },
+    },
   },
 })()
-
-const purpleTheme = extendTheme({
-  colors: {
-    primary: '#a855f7',
-  },
-})()
-
-const greenTheme = extendTheme({
-  colors: {
-    primary: '#22c55e',
-  },
-})()
-
-export const theme = {
-  default: defaultTheme,
-  pink: pinkTheme,
-  purple: purpleTheme,
-  green: greenTheme,
-}
 
 export const config = extendConfig({
-  initialThemeScheme: 'default',
+  initialThemeScheme: 'pink',
 })
 ```
 
@@ -111,7 +110,7 @@ const container = document.getElementById('app')
 const root = createRoot(container!)
 
 root.render(
-  <>
+  <Text>
     <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
 
     <UIProvider theme={theme} config={config}>
@@ -256,36 +255,32 @@ export const getServerSideProps = getServerSideCommonProps
 
 ## テーマを切り替える
 
-テーマの切り替えには、`changeThemeScheme`を使います。
+テーマの切り替えには、`changeThemeScheme`を使います。もし`themeScheme`を元に戻したい場合は、`base`を渡します。
 
-```tsx live=false
-import { useTheme } from '@yamada-ui/react'
+```tsx functional=true
+const { themeScheme, changeThemeScheme } = useTheme()
 
-const Demo = () => {
-  const { themeScheme, changeThemeScheme } = useTheme()
+return (
+  <>
+    <Text>The current scheme is "{themeScheme}"</Text>
 
-  return (
-    <>
-      <Text>現在のテーマ：{themeScheme}</Text>
+    <HStack mt='md'>
+      <Button colorScheme='gray' onClick={() => changeThemeScheme('base')}>
+        Base Theme
+      </Button>
 
-      <HStack>
-        <Button colorScheme='gray' onClick={() => changeThemeScheme('default')}>
-          Default Theme
-        </Button>
+      <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
+        Pink Theme
+      </Button>
 
-        <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
-          Pink Theme
-        </Button>
+      <Button colorScheme='purple' onClick={() => changeThemeScheme('purple')}>
+        Purple Theme
+      </Button>
 
-        <Button colorScheme='purple' onClick={() => changeThemeScheme('purple')}>
-          Purple Theme
-        </Button>
-
-        <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
-          Green Theme
-        </Button>
-      </HStack>
-    </>
-  )
-}
+      <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
+        Green Theme
+      </Button>
+    </HStack>
+  </>
+)
 ```

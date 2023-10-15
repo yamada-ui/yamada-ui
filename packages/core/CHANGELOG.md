@@ -1,5 +1,15 @@
 # @yamada-ui/core
 
+## 0.12.0
+
+### Minor Changes
+
+- [`ad6bf131`](https://github.com/hirotomoyamada/yamada-ui/commit/ad6bf131a4a96145cfa6b00bcee3b0c0280191ce) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated theme structure and handling.
+
+### Patch Changes
+
+- [`f42c23ef`](https://github.com/hirotomoyamada/yamada-ui/commit/f42c23ef990c2fa303b79a64c71a5c3fbe8001f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added alert in config.
+
 ## 0.11.3
 
 ### Patch Changes

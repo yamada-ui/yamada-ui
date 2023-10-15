@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.7.0
+
+### Minor Changes
+
+- [`13524ce4`](https://github.com/hirotomoyamada/yamada-ui/commit/13524ce43c0b65077ae4b25def36d471b0958e5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `themeSchemes` extraction.
+
 ## 0.6.0
 
 ### Minor Changes

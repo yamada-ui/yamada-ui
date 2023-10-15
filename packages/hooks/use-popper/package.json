@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-popper",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "Yamada UI usePopper custom hook",
   "keywords": [
     "use-popper"

@@ -1,5 +1,16 @@
 # @yamada-ui/alert
 
+## 0.5.4
+
+### Patch Changes
+
+- [`bf55a56d`](https://github.com/hirotomoyamada/yamada-ui/commit/bf55a56d6ad856fe5381fb30918eba3339939953) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated status handling logic.
+
+- Updated dependencies [[`ad6bf131`](https://github.com/hirotomoyamada/yamada-ui/commit/ad6bf131a4a96145cfa6b00bcee3b0c0280191ce), [`f42c23ef`](https://github.com/hirotomoyamada/yamada-ui/commit/f42c23ef990c2fa303b79a64c71a5c3fbe8001f4)]:
+  - @yamada-ui/core@0.12.0
+  - @yamada-ui/icon@0.3.10
+  - @yamada-ui/loading@0.4.10
+
 ## 0.5.3
 
 ### Patch Changes

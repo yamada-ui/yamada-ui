@@ -4,7 +4,7 @@ import {
   Box,
   useColorMode,
   ThemeTokens,
-  Semantics,
+  ThemeSemantics,
   Center,
   Image,
   extendToken,
@@ -53,7 +53,7 @@ export const useExtendToken = () => {
 }
 
 export const useSemanticToken = () => {
-  const semantics: Semantics = {
+  const semantics: ThemeSemantics = {
     colors: {
       primary: '#FF7F0B', // override token primary
       newPrimary: 'red.500',

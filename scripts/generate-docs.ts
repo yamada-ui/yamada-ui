@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs'
 import { readFile } from 'fs/promises'
 import path from 'path'
-import { Components } from '@yamada-ui/react'
+import { ThemeComponents } from '@yamada-ui/react'
 import { defaultTheme } from '@yamada-ui/theme'
 import { format, resolveConfig } from 'prettier'
 import {
@@ -18,7 +18,7 @@ import {
 
 type Theme = {
   colors?: Record<string, unknown>
-  components?: Components
+  components?: ThemeComponents
 }
 
 type ComponentTypeInfo = {

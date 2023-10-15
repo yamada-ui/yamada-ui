@@ -19,6 +19,7 @@ jobs:
           GH_PAT: ${{ secrets.PAT_TOKEN }}
           GIT_EMAIL: hirotomo.yamada@avap.co.jp
           GIT_USERNAME: hirotomoyamada
+          ASSIGNEES: hirotomoyamada
 
       - name: Checkout
         uses: actions/checkout@master

@@ -8,7 +8,6 @@ import {
   Heading,
   Container,
   UIProvider,
-  defaultTheme,
   extendTheme,
   extendConfig,
   useTheme,
@@ -20,40 +19,47 @@ export default {
 }
 
 export const basic = () => {
-  const pinkTheme = extendTheme({
-    semantics: {
-      colorSchemes: {
-        primary: 'pink',
-        secondary: 'violet',
+  const theme = extendTheme({
+    themeSchemes: {
+      pink: {
+        semantics: {
+          colors: {
+            primary: 'pink.500',
+            secondary: 'violet.500',
+          },
+          colorSchemes: {
+            primary: 'pink',
+            secondary: 'violet',
+          },
+        },
+      },
+      purple: {
+        semantics: {
+          colors: {
+            primary: 'purple.500',
+            secondary: 'teal.500',
+          },
+          colorSchemes: {
+            primary: 'purple',
+            secondary: 'teal',
+          },
+        },
+      },
+      green: {
+        semantics: {
+          colors: {
+            primary: 'green.500',
+            secondary: 'cyan.500',
+          },
+          colorSchemes: {
+            primary: 'green',
+            secondary: 'cyan',
+          },
+        },
       },
     },
   })()
-
-  const purpleTheme = extendTheme({
-    semantics: {
-      colorSchemes: {
-        primary: 'purple',
-        secondary: 'teal',
-      },
-    },
-  })()
-
-  const greenTheme = extendTheme({
-    semantics: {
-      colorSchemes: {
-        primary: 'green',
-        secondary: 'cyan',
-      },
-    },
-  })()
-
-  const theme = {
-    Default: defaultTheme,
-    Pink: pinkTheme,
-    Purple: purpleTheme,
-    Green: greenTheme,
-  }
-  const config = extendConfig({ initialThemeScheme: 'Default' })
+  const config = extendConfig({ initialThemeScheme: 'pink' })
 
   const App: FC = () => {
     const { themeScheme, changeThemeScheme } = useTheme()
@@ -61,24 +67,21 @@ export const basic = () => {
     return (
       <VStack>
         <HStack>
-          <Button
-            colorScheme='gray'
-            onClick={() => changeThemeScheme('Default')}
-          >
-            Default Theme
+          <Button colorScheme='gray' onClick={() => changeThemeScheme('base')}>
+            Base Theme
           </Button>
-          <Button colorScheme='pink' onClick={() => changeThemeScheme('Pink')}>
+          <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
             Pink Theme
           </Button>
           <Button
             colorScheme='purple'
-            onClick={() => changeThemeScheme('Purple')}
+            onClick={() => changeThemeScheme('purple')}
           >
             Purple Theme
           </Button>
           <Button
             colorScheme='green'
-            onClick={() => changeThemeScheme('Green')}
+            onClick={() => changeThemeScheme('green')}
           >
             Green Theme
           </Button>

@@ -16,11 +16,7 @@ import {
 
 type CSSProperties = Union<keyof CSS.Properties>
 
-export type Transform = (
-  value: any,
-  theme: StyledTheme<Dict>,
-  css?: Dict,
-) => any
+export type Transform = (value: any, theme: StyledTheme, css?: Dict) => any
 
 export type ConfigProps = {
   static?: CSSObject
@@ -29,7 +25,7 @@ export type ConfigProps = {
   properties?:
     | CSSProperties
     | CSSProperties[]
-    | ((theme: StyledTheme<Dict>) => CSSProperties)
+    | ((theme: StyledTheme) => CSSProperties)
   token?: ThemeToken
   transform?: Transform
 }

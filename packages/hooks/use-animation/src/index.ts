@@ -29,7 +29,7 @@ const getValue =
       'keyframes'
     >],
   ) =>
-  (theme: StyledTheme<Dict>, colorMode: ColorMode) => {
+  (theme: StyledTheme, colorMode: ColorMode) => {
     const value = get(theme, `${name}.${path}`)
 
     if (isArray(value)) {
@@ -44,7 +44,7 @@ const getValue =
 const transformConfig =
   (obj: Omit<AnimationStyle, 'keyframes'>) =>
   (
-    theme: StyledTheme<Dict>,
+    theme: StyledTheme,
     colorMode: ColorMode,
   ): Omit<AnimationStyle, 'keyframes'> =>
     Object.entries(obj).reduce((obj, [key, value]) => {
@@ -64,7 +64,7 @@ const createKeyframes =
     keyframes: AnimationStyle['keyframes'],
     config: Omit<AnimationStyle, 'keyframes'>,
   ) =>
-  (theme: StyledTheme<Dict>, colorMode: ColorMode): string => {
+  (theme: StyledTheme, colorMode: ColorMode): string => {
     const generatedKeyframes = css(keyframes)(theme)
 
     const {
@@ -84,7 +84,7 @@ const createKeyframes =
 
 const createAnimation =
   (tokenOrObj: AnimationStyle | Theme['animations']) =>
-  (theme: StyledTheme<Dict>, colorMode: ColorMode) => {
+  (theme: StyledTheme, colorMode: ColorMode) => {
     let resolvedStyle: AnimationStyle | undefined
 
     if (isString(tokenOrObj)) {

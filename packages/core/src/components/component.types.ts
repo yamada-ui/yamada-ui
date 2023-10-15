@@ -1,4 +1,3 @@
-import { Dict } from '@yamada-ui/utils'
 import * as React from 'react'
 import {
   CSSUIProps,
@@ -24,7 +23,7 @@ export type UIFactory = {
 }
 
 export type StyledResolverProps = CSSUIObject & {
-  theme: StyledTheme<Dict>
+  theme: StyledTheme
   /**
    * Used for internal css management.
    *

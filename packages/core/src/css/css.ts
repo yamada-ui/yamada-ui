@@ -52,7 +52,7 @@ const expandResponsive = (
 
 const expandCSS =
   (css: CSSUIProps | CSSUIObject) =>
-  (theme: StyledTheme<Dict>): Dict => {
+  (theme: StyledTheme): Dict => {
     if (!theme.__breakpoints) return css
 
     const { isResponsive, queries } = theme.__breakpoints
@@ -83,7 +83,7 @@ const expandCSS =
   }
 
 export const getCSS = (options: {
-  theme: StyledTheme<Dict>
+  theme: StyledTheme
   styles: Dict
   pseudos: Dict
 }): ((cssOrFunc: CSSObjectOrFunc | CSSUIObject) => Dict) => {
@@ -182,7 +182,7 @@ export const getCSS = (options: {
 
 export const css =
   (cssObject: CSSObjectOrFunc | CSSUIObject) =>
-  (theme: StyledTheme<Dict>): Dict =>
+  (theme: StyledTheme): Dict =>
     getCSS({
       theme,
       styles,

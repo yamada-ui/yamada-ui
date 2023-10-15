@@ -35,10 +35,10 @@ export const createVars =
       if (token.startsWith('gradients')) {
         lightValue = generateGradient(lightValue, {
           __cssMap: cssMap,
-        } as StyledTheme<Dict>)
+        } as StyledTheme)
         darkValue = generateGradient(darkValue, {
           __cssMap: cssMap,
-        } as StyledTheme<Dict>)
+        } as StyledTheme)
       }
 
       if (!isSemantic) {

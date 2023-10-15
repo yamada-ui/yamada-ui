@@ -3,7 +3,7 @@ import {
   Keyframes,
   CSSObject,
 } from '@emotion/react'
-import { isArray, isObject, isString, Dict } from '@yamada-ui/utils'
+import { isArray, isObject, isString } from '@yamada-ui/utils'
 import { ColorMode } from '../css'
 import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
@@ -52,7 +52,7 @@ export const analyzeCSSValue = (value: any) => {
 }
 
 export const tokenToCSSVar =
-  (token: ThemeToken, value: any) => (theme: StyledTheme<Dict>) => {
+  (token: ThemeToken, value: any) => (theme: StyledTheme) => {
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {

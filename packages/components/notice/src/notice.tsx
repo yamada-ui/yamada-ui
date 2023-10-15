@@ -15,7 +15,7 @@ import {
   NoticeConfigOptions,
   StyledTheme,
 } from '@yamada-ui/core'
-import { Dict, merge } from '@yamada-ui/utils'
+import { merge } from '@yamada-ui/utils'
 import { FC, ReactNode, useMemo } from 'react'
 
 export type UseNoticeOptions = NoticeConfigOptions
@@ -115,7 +115,7 @@ const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
 
 const createNoticeFunc = (
   defaultOptions: UseNoticeOptions,
-  theme: StyledTheme<Dict>,
+  theme: StyledTheme,
 ) => {
   const themeOptions = theme.__config.notice?.options ?? {}
 

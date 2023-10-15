@@ -266,6 +266,7 @@ export interface GeneratedTheme extends UITheme {
     | 'fuchsia.950'
     | 'primary'
     | 'secondary'
+    | 'info'
     | 'success'
     | 'warning'
     | 'danger'
@@ -531,7 +532,7 @@ export interface GeneratedTheme extends UITheme {
     | '-3.5'
     | (string & {})
   textStyles: string & {}
-  themeSchemes: string & {}
+  themeSchemes: 'base' | (string & {})
   transitionDuration:
     | 'ultra-fast'
     | 'faster'

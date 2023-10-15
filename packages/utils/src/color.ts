@@ -8,6 +8,8 @@ import {
 } from 'color2k'
 import { getMemoizedObject as get, Dict, isArray } from '.'
 
+type ColorMode = 'light' | 'dark'
+
 export const hues = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
@@ -20,11 +22,11 @@ export const isGray = (colorScheme: string) =>
 
 export const getColor =
   (color: string, fallback?: string) =>
-  (theme: Dict = {}, colorMode?: 'light' | 'dark') => {
+  (theme: Dict = {}, colorMode?: ColorMode) => {
     const [token, hue] = color.split('.')
 
     const [, relatedToken] =
-      Object.entries(theme.semantics?.colorSchemes ?? {}).find(
+      Object.entries<string>(theme.semantics?.colorSchemes ?? {}).find(
         ([semanticToken]) => token === semanticToken,
       ) ?? []
 
@@ -46,40 +48,35 @@ export const getColor =
   }
 
 export const lightenColor =
-  (color: string, amount: number) =>
-  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(lighten(raw, amount / 100))
   }
 
 export const darkenColor =
-  (color: string, amount: number) =>
-  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(darken(raw, amount / 100))
   }
 
 export const tintColor =
-  (color: string, amount: number) =>
-  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(mix(raw, '#fff', amount))
   }
 
 export const shadeColor =
-  (color: string, amount: number) =>
-  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
     return toHex(mix(raw, '#000', amount / 100))
   }
 
 export const transparentizeColor =
-  (color: string, alpha: number) =>
-  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (color: string, alpha: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
     return transparentize(raw, 1 - alpha)
@@ -87,7 +84,7 @@ export const transparentizeColor =
 
 export const toneColor =
   (color: string, hue: (typeof hues)[number]) =>
-  (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
     if (hue < 50 || 950 < hue) return color
@@ -170,7 +167,7 @@ const getBrightness = (color: string) => {
 }
 
 export const isTone =
-  (color: string) => (theme?: Dict, colorMode?: 'light' | 'dark') => {
+  (color: string) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = theme ? getColor(color)(theme, colorMode) : color
 
     const brightness = getBrightness(raw)
@@ -181,9 +178,9 @@ export const isTone =
   }
 
 export const isLight =
-  (color: string) => (theme?: Dict, colorMode?: 'light' | 'dark') =>
+  (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
     isTone(color)(theme, colorMode) === 'dark'
 
 export const isDark =
-  (color: string) => (theme?: Dict, colorMode?: 'light' | 'dark') =>
+  (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
     isTone(color)(theme, colorMode) === 'light'

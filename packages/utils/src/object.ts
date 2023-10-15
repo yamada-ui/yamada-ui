@@ -67,7 +67,7 @@ export const filterUndefined = <T extends Dict>(obj: T): T =>
 export const merge = <T extends Dict>(
   target: any,
   source: any,
-  overrideArray: boolean = false,
+  mergeArray: boolean = false,
 ): T => {
   let result = Object.assign({}, target)
 
@@ -76,14 +76,14 @@ export const merge = <T extends Dict>(
       for (const [sourceKey, sourceValue] of Object.entries(source)) {
         const targetValue = target[sourceKey]
 
-        if (overrideArray && isArray(sourceValue) && isArray(targetValue)) {
+        if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
           result[sourceKey] = targetValue.concat(...sourceValue)
         } else if (
           !isFunction(sourceValue) &&
           isObject(sourceValue) &&
           target.hasOwnProperty(sourceKey)
         ) {
-          result[sourceKey] = merge(targetValue, sourceValue, overrideArray)
+          result[sourceKey] = merge(targetValue, sourceValue, mergeArray)
         } else {
           Object.assign(result, { [sourceKey]: sourceValue })
         }

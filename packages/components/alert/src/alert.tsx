@@ -56,7 +56,7 @@ export type AlertProps = HTMLUIProps<'div'> & ThemeProps<'Alert'> & AlertOptions
 export const Alert = forwardRef<AlertProps, 'div'>(
   ({ status = 'info', colorScheme, ...props }, ref) => {
     const { theme } = useTheme()
-    const statuses = theme.__config.alert?.statuses ?? {}
+    const statuses = theme.__config?.alert?.statuses ?? {}
 
     colorScheme = colorScheme ?? getStatusColorScheme(status, statuses)
 
@@ -103,7 +103,7 @@ export const AlertIcon: FC<AlertIconProps> = ({
 }) => {
   const { status, styles } = useAlert()
   const { theme } = useTheme()
-  const statuses = theme.__config.alert?.statuses ?? {}
+  const statuses = theme.__config?.alert?.statuses ?? {}
 
   const Icon = getStatusIcon(status, statuses)
   const css: CSSUIObject = {

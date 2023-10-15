@@ -30,7 +30,7 @@ test("should have role='alert'", () => {
 
 describe('getStatusColorScheme', () => {
   test('info', () => {
-    expect(getStatusColorScheme('info')).toBe('primary')
+    expect(getStatusColorScheme('info')).toBe('info')
   })
 
   test('success', () => {

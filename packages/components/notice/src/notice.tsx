@@ -115,7 +115,7 @@ const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
 
 const createNoticeFunc = (
   defaultOptions: UseNoticeOptions,
-  theme: StyledTheme<Dict<any>>,
+  theme: StyledTheme<Dict>,
 ) => {
   const themeOptions = theme.__config.notice?.options ?? {}
 

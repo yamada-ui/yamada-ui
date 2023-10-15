@@ -1,4 +1,3 @@
-import { Dict } from '@yamada-ui/utils'
 import type * as CSS from 'csstype'
 import { StylesProps, PseudosProps } from '../styles'
 import { Theme, StyledTheme } from '../theme.types'
@@ -53,7 +52,7 @@ export type Token<
   ? ColorModeArray<Y> | Y
   : Y
 
-export type StyledProps<Y> = Y | ((theme: StyledTheme<Dict>) => Y)
+export type StyledProps<Y> = Y | ((theme: StyledTheme) => Y)
 
 export type StyleProperties = CSS.Properties &
   Omit<StylesProps, keyof CSS.Properties>
@@ -91,9 +90,10 @@ export type CSSUIProps<Y = 'responsive', M = 'colorMode'> = StylesProps<Y, M> &
   PseudosProps
 
 export type UIStyleProps = {
-  theme: StyledTheme<Dict>
+  theme: StyledTheme
   colorMode?: ColorMode
   colorScheme?: Theme['colorSchemes']
+  themeScheme?: Theme['themeSchemes']
   [key: string]: any
 }
 
@@ -149,7 +149,7 @@ export type AnimationStyle = {
 }
 
 export type FunctionCSSInterpolation = {
-  (theme: StyledTheme<Dict>): CSSUIProps
+  (theme: StyledTheme): CSSUIProps
 }
 
 export type CSSObjectOrFunc = CSSUIProps | FunctionCSSInterpolation

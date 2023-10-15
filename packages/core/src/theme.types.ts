@@ -457,7 +457,18 @@ export type CustomTheme = {}
 
 export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
-export type StyledTheme<T> = T & {
+export type ChangeThemeScheme = (themeScheme: Theme['themeSchemes']) => void
+
+export type PropsTheme<T extends object = Dict> = T & {
+  themeScheme: Theme['themeSchemes']
+  changeThemeScheme: ChangeThemeScheme
+  __config: ThemeConfig
+  __cssVars: Dict
+  __cssMap: CSSMap
+  __breakpoints: AnalyzeBreakpointsReturn
+}
+
+export type StyledTheme<T extends object = Dict> = T & {
   __config: ThemeConfig
   __cssVars: Dict
   __cssMap: CSSMap

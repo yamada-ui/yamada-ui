@@ -161,7 +161,7 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   props: Props,
   isMulti: boolean = false,
 ): [styles: Styles<IsMulti>, props: Props] => {
-  const { theme } = useTheme()
+  const { theme, themeScheme } = useTheme()
   const { colorMode } = useColorMode()
 
   const componentStyle = get<ComponentStyle | undefined>(
@@ -180,18 +180,19 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
     let styles = getStyles<IsMulti>(componentStyle.baseStyle ?? {}, {
       theme,
       colorMode,
+      themeScheme,
       ...args,
     })({ isMulti })
 
     const variantStyles = getModifierStyles<IsMulti>(
       props.variant,
       componentStyle.variants ?? {},
-      { theme, colorMode, ...args },
+      { theme, colorMode, themeScheme, ...args },
     )({ isMulti })
     const sizeStyles = getModifierStyles<IsMulti>(
       props.size,
       componentStyle.sizes ?? {},
-      { theme, colorMode, ...args },
+      { theme, colorMode, themeScheme, ...args },
     )({ isMulti })
 
     styles = merge(styles, sizeStyles)

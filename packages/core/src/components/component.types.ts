@@ -3,9 +3,9 @@ import {
   CSSUIProps,
   CSSUIObject,
   StylesProps,
-  StyledTheme,
   CSSObject,
   Interpolation,
+  PropsTheme,
 } from '..'
 import { DOMElements } from '.'
 
@@ -23,7 +23,7 @@ export type UIFactory = {
 }
 
 export type StyledResolverProps = CSSUIObject & {
-  theme: StyledTheme
+  theme: PropsTheme
   /**
    * Used for internal css management.
    *

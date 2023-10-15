@@ -5,26 +5,37 @@ import {
   ThemeProviderProps as EmotionThemeProviderProps,
   Interpolation,
   Theme,
+  CSSObject,
 } from '@emotion/react'
-import { Dict, runIfFunc, getMemoizedObject as get } from '@yamada-ui/utils'
+import {
+  Dict,
+  runIfFunc,
+  getMemoizedObject as get,
+  isUndefined,
+  merge,
+} from '@yamada-ui/utils'
 import {
   FC,
   useMemo,
   useContext,
-  Context,
   useState,
   useCallback,
   useEffect,
 } from 'react'
 import { css, UIStyle } from '../css'
 import { transformTheme } from '../theme'
-import { StyledTheme, ThemeConfig, Theme as UITheme } from '../theme.types'
+import {
+  ChangeThemeScheme,
+  PropsTheme,
+  StyledTheme,
+  ThemeConfig,
+  Theme as UITheme,
+  UsageTheme,
+} from '../theme.types'
 import { useColorMode } from './color-mode-provider'
 import { themeSchemeManager, ThemeSchemeManager } from './theme-manager'
 
 const { localStorage } = themeSchemeManager
-
-export type ChangeThemeScheme = (themeScheme: UITheme['themeSchemes']) => void
 
 type ThemeProviderOptions = {
   /**
@@ -98,9 +109,11 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 export const CSSVars: FC = () => {
   return (
     <Global
-      styles={({ __cssVars }: Dict) => ({
-        ':host, :root, [data-mode]': __cssVars,
-      })}
+      styles={
+        (({ __cssVars }: PropsTheme) => {
+          return { ':host, :root, [data-mode]': __cssVars } as CSSObject
+        }) as Interpolation<Theme>
+      }
     />
   )
 }
@@ -111,10 +124,15 @@ export const ResetStyle: FC = () => {
   return (
     <Global
       styles={
-        ((theme: StyledTheme<Dict>) => {
+        ((theme: PropsTheme) => {
+          const { themeScheme } = theme
           let style = get<UIStyle>(theme, 'styles.resetStyle', {})
 
-          const computedStyle = runIfFunc(style, { theme, colorMode })
+          const computedStyle = runIfFunc(style, {
+            theme,
+            colorMode,
+            themeScheme,
+          })
 
           if (!computedStyle) return undefined
 
@@ -131,10 +149,15 @@ export const GlobalStyle: FC = () => {
   return (
     <Global
       styles={
-        ((theme: StyledTheme<Dict>) => {
+        ((theme: PropsTheme) => {
+          const { themeScheme } = theme
           let style = get<UIStyle>(theme, 'styles.globalStyle', {})
 
-          const computedStyle = runIfFunc(style, { theme, colorMode })
+          const computedStyle = runIfFunc(style, {
+            theme,
+            colorMode,
+            themeScheme,
+          })
 
           if (!computedStyle) return undefined
 
@@ -145,31 +168,36 @@ export const GlobalStyle: FC = () => {
   )
 }
 
-type ThemeContext<T extends object = Dict> = Context<
-  {
-    themeScheme: UITheme['themeSchemes']
-    changeThemeScheme: ChangeThemeScheme
-  } & StyledTheme<T>
->
-
 export const useTheme = <T extends object = Dict>() => {
-  const { themeScheme, changeThemeScheme, ...theme } = useContext(
-    ThemeContext as unknown as ThemeContext<T>,
-  )
+  const { themeScheme, changeThemeScheme, ...internalTheme } = useContext(
+    ThemeContext,
+  ) as PropsTheme<UsageTheme>
 
-  if (!theme)
+  if (!internalTheme)
     throw Error(
       'useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`',
     )
 
+  const theme = useMemo(() => {
+    if (isUndefined(themeScheme) || themeScheme === 'base') return internalTheme
+
+    const nestedTheme = internalTheme.themeSchemes?.[themeScheme]
+
+    if (!nestedTheme) return internalTheme
+
+    return merge(internalTheme, nestedTheme)
+  }, [themeScheme, internalTheme])
+
   const value = useMemo(
     () =>
-      ({ themeScheme, changeThemeScheme, theme }) as {
-        themeScheme: UITheme['themeSchemes']
-        changeThemeScheme: ChangeThemeScheme
+      ({ themeScheme, changeThemeScheme, theme, internalTheme }) as Pick<
+        PropsTheme,
+        'themeScheme' | 'changeThemeScheme'
+      > & {
         theme: StyledTheme<T>
+        internalTheme: StyledTheme<T>
       },
-    [changeThemeScheme, theme, themeScheme],
+    [themeScheme, changeThemeScheme, theme, internalTheme],
   )
 
   return value

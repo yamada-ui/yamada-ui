@@ -26,7 +26,7 @@ type ColorModeContext = {
 
 const getColorMode = (
   manager: ColorModeManager,
-  fallback?: ColorMode | 'system',
+  fallback: ColorMode | 'system',
 ) =>
   manager.type === 'cookie' && manager.ssr ? manager.get(fallback) : fallback
 
@@ -45,8 +45,8 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   config: { initialColorMode = 'light', disableTransitionOnChange = true } = {},
   children,
 }) => {
-  const [colorMode, setColorMode] = useState<ColorMode | 'system' | undefined>(
-    () => getColorMode(colorModeManager, initialColorMode),
+  const [colorMode, setColorMode] = useState<ColorMode | 'system'>(() =>
+    getColorMode(colorModeManager, initialColorMode),
   )
   const [systemColorMode, setSystemColorMode] = useState<ColorMode | undefined>(
     undefined,

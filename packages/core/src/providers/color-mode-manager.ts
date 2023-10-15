@@ -6,9 +6,7 @@ const hasSupport = !!globalThis?.document
 export type ColorModeManager = {
   type: 'cookie' | 'localStorage'
   ssr?: boolean
-  get: (
-    initColorMode?: ColorMode | 'system',
-  ) => ColorMode | 'system' | undefined
+  get: (initColorMode?: ColorMode | 'system') => ColorMode | 'system'
   set: (colorMode: ColorMode | 'system') => void
 }
 
@@ -47,7 +45,7 @@ const createCookieStorage = (
   ssr: !!cookie,
   type: 'cookie',
   get: (initColorMode = 'light') => {
-    if (cookie) return parseCookie(cookie, key)
+    if (cookie) return parseCookie(cookie, key) || initColorMode
 
     if (!hasSupport) return initColorMode
 

@@ -1,4 +1,10 @@
-import { Dict, extendConfig, extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
+import {
+  extendConfig,
+  extendTheme,
+  withDefaultColorScheme,
+  UsageTheme,
+  ThemeSchemes,
+} from '@yamada-ui/react'
 import { components } from './components'
 import { customConfig } from './config'
 import { semantics } from './semantics'
@@ -29,30 +35,27 @@ const colorSchemes = [
   'fuchsia',
 ]
 
-export const commonTheme = {
+export const customTheme: UsageTheme = {
   styles: { globalStyle, resetStyle, layerStyles, textStyles, otherStyle, mdx },
   semantics,
   components,
+  themeSchemes: colorSchemes.reduce(
+    (prev, colorScheme) => ({
+      ...prev,
+      [colorScheme]: {
+        semantics: {
+          colors: { primary: `${colorScheme}.500` },
+          colorSchemes: { primary: colorScheme },
+        },
+      },
+    }),
+    {} as ThemeSchemes,
+  ),
   colorSchemes,
   ...tokens,
 }
 
-export const theme = colorSchemes.reduce((prev, colorScheme) => {
-  prev[colorScheme] = extendTheme(
-    commonTheme,
-    {
-      semantics: {
-        colors: { primary: `${colorScheme}.500` },
-        colorSchemes: {
-          primary: colorScheme,
-        },
-      },
-    },
-    withDefaultColorScheme({ colorScheme: 'primary' }),
-  )()
-
-  return prev
-}, {} as Dict)
+export const theme = extendTheme(customTheme, withDefaultColorScheme({ colorScheme: 'primary' }))()
 
 export const config = extendConfig(customConfig)
 

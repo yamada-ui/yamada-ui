@@ -1,7 +1,7 @@
 import { PortalProps } from '@yamada-ui/portal'
 import { Dict, StringLiteral } from '@yamada-ui/utils'
 import type { Variants } from 'framer-motion'
-import { ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import {
   UIStyle,
   AnimationStyle,
@@ -31,7 +31,11 @@ export type NoticePlacement =
   | 'bottom-left'
   | 'bottom-right'
 
-export type NoticeStatus = 'warning' | 'info' | 'success' | 'error' | 'loading'
+export type AlertStatuses = Partial<
+  Record<AlertStatus, { icon?: FC; colorScheme?: Theme['colorSchemes'] }>
+>
+
+export type AlertStatus = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
 export type NoticeComponentProps = NoticeConfigOptions & { onClose: () => void }
 
@@ -60,7 +64,7 @@ export type NoticeConfigOptions = ThemeProps<'Alert'> & {
    *
    * @default 'info'
    */
-  status?: NoticeStatus
+  status?: AlertStatus
   /**
    * The loading icon to use.
    */
@@ -204,6 +208,8 @@ export type ThemeConfig = {
   /**
    * The initial theme scheme.
    * This is only applicable if multiple themes are provided.
+   *
+   * @default 'base'
    */
   initialThemeScheme?: Theme['themeSchemes']
   /**
@@ -243,6 +249,15 @@ export type ThemeConfig = {
      * @default 'ui'
      */
     prefix?: StringLiteral
+  }
+  /**
+   * The config of the alert.
+   */
+  alert?: {
+    /**
+     * The statuses of the alert.
+     */
+    statuses?: AlertStatuses
   }
   /**
    * The config of the notice.

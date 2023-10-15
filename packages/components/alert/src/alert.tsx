@@ -6,21 +6,23 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
+  useTheme,
+  AlertStatuses,
 } from '@yamada-ui/core'
 import { InfoIcon, WarningIcon, CheckIcon } from '@yamada-ui/icon'
 import { Loading, LoadingProps } from '@yamada-ui/loading'
 import { createContext, cx } from '@yamada-ui/utils'
 import { FC } from 'react'
 
-const statuses = {
-  info: { icon: InfoIcon, colorScheme: 'primary' },
+const defaultStatuses = {
+  info: { icon: InfoIcon, colorScheme: 'info' },
   success: { icon: CheckIcon, colorScheme: 'success' },
   warning: { icon: WarningIcon, colorScheme: 'warning' },
   error: { icon: WarningIcon, colorScheme: 'danger' },
   loading: { icon: Loading, colorScheme: 'primary' },
 } as const
 
-type Status = keyof typeof statuses
+type Status = keyof typeof defaultStatuses
 
 type AlertContext = {
   status: Status
@@ -32,10 +34,13 @@ const [AlertProvider, useAlert] = createContext<AlertContext>({
   errorMessage: `useAlert returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
 })
 
-export const getStatusColorScheme = (status: Status) =>
-  statuses[status].colorScheme
+export const getStatusColorScheme = (
+  status: Status,
+  statuses?: AlertStatuses,
+) => statuses?.[status]?.colorScheme ?? defaultStatuses[status].colorScheme
 
-export const getStatusIcon = (status: Status) => statuses[status].icon
+export const getStatusIcon = (status: Status, statuses?: AlertStatuses) =>
+  statuses?.[status]?.icon ?? defaultStatuses[status].icon
 
 type AlertOptions = {
   /**
@@ -50,7 +55,10 @@ export type AlertProps = HTMLUIProps<'div'> & ThemeProps<'Alert'> & AlertOptions
 
 export const Alert = forwardRef<AlertProps, 'div'>(
   ({ status = 'info', colorScheme, ...props }, ref) => {
-    colorScheme = colorScheme ?? getStatusColorScheme(status)
+    const { theme } = useTheme()
+    const statuses = theme.__config.alert?.statuses ?? {}
+
+    colorScheme = colorScheme ?? getStatusColorScheme(status, statuses)
 
     const [styles, mergedProps] = useMultiComponentStyle('Alert', {
       ...props,
@@ -94,8 +102,10 @@ export const AlertIcon: FC<AlertIconProps> = ({
   ...rest
 }) => {
   const { status, styles } = useAlert()
+  const { theme } = useTheme()
+  const statuses = theme.__config.alert?.statuses ?? {}
 
-  const Icon = getStatusIcon(status)
+  const Icon = getStatusIcon(status, statuses)
   const css: CSSUIObject = {
     ...(status === 'loading' ? styles.loading : styles.icon),
   }

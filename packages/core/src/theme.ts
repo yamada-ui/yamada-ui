@@ -22,11 +22,10 @@ export type VarTokens = Record<string, VarToken>
 const tokens = [
   'blurs',
   'borders',
-  'breakpoints',
   'colors',
+  'fonts',
   'fontSizes',
   'fontWeights',
-  'fonts',
   'gradients',
   'letterSpacings',
   'lineHeights',
@@ -41,6 +40,7 @@ const tokens = [
 export type ThemeToken =
   | (typeof tokens)[number]
   | 'animations'
+  | 'breakpoints'
   | 'transitions.duration'
   | 'transitions.property'
   | 'transitions.easing'
@@ -53,15 +53,31 @@ export const transformTheme = <T extends Dict>(
 
   const tokens = createTokens(theme)
   const prefix = config?.var?.prefix
-  const breakpoints = theme.breakpoints
+  const { breakpoints, themeSchemes } = theme ?? {}
 
-  const { cssMap, cssVars } = createVars(tokens, prefix)
+  const { cssMap, cssVars } = createVars(tokens, prefix)()
+
+  let nestedCSSVars: Record<string, Dict> = {}
+
+  if (themeSchemes) {
+    for (const [themeScheme, nestedTheme] of Object.entries<Dict>(
+      themeSchemes,
+    )) {
+      const nestedTokens = createTokens(nestedTheme)
+
+      const { cssVars } = createVars(nestedTokens, prefix)(tokens)
+
+      nestedCSSVars[
+        `[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`
+      ] = cssVars
+    }
+  }
 
   const defaultCSSVars: Dict = {}
 
   Object.assign(theme, {
     __config: config,
-    __cssVars: { ...defaultCSSVars, ...cssVars },
+    __cssVars: { ...defaultCSSVars, ...cssVars, ...nestedCSSVars },
     __cssMap: cssMap,
     __breakpoints: analyzeBreakpoints(breakpoints),
   })

@@ -6,12 +6,7 @@ import {
   Interpolation,
   Theme,
 } from '@emotion/react'
-import {
-  Dict,
-  isUndefined,
-  runIfFunc,
-  getMemoizedObject as get,
-} from '@yamada-ui/utils'
+import { Dict, runIfFunc, getMemoizedObject as get } from '@yamada-ui/utils'
 import {
   FC,
   useMemo,
@@ -23,25 +18,21 @@ import {
 } from 'react'
 import { css, UIStyle } from '../css'
 import { transformTheme } from '../theme'
-import { StyledTheme, ThemeConfig, ThemeScheme } from '../theme.types'
+import { StyledTheme, ThemeConfig, Theme as UITheme } from '../theme.types'
 import { useColorMode } from './color-mode-provider'
 import { themeSchemeManager, ThemeSchemeManager } from './theme-manager'
 
 const { localStorage } = themeSchemeManager
 
-export type ChangeThemeScheme = (themeScheme: ThemeScheme) => void
+export type ChangeThemeScheme = (themeScheme: UITheme['themeSchemes']) => void
 
 type ThemeProviderOptions = {
   /**
    * The theme of the yamada ui.
-   *
-   * If omitted, uses the default theme provided by yamada ui.
    */
   theme: Dict
   /**
    * The config of the yamada ui.
-   *
-   * If omitted, uses the default config provided by yamada ui.
    */
   config?: ThemeConfig
   /**
@@ -64,20 +55,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   themeSchemeManager = localStorage,
   children,
 }) => {
-  const [themeScheme, setThemeScheme] = useState<ThemeScheme | undefined>(
+  const [themeScheme, setThemeScheme] = useState<UITheme['themeSchemes']>(
     themeSchemeManager.get(config?.initialThemeScheme),
   )
 
-  const theme = useMemo(() => {
-    if (isUndefined(themeScheme)) return initialTheme
-
-    if (themeScheme in initialTheme) return initialTheme[themeScheme]
-
-    return initialTheme
-  }, [initialTheme, themeScheme])
-
   const changeThemeScheme: ChangeThemeScheme = useCallback(
-    (themeScheme: ThemeScheme) => {
+    (themeScheme) => {
       const cleanup = config?.disableTransitionOnChange
         ? preventTransition()
         : undefined
@@ -93,9 +76,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
     [config, themeSchemeManager],
   )
 
-  const computedTheme = useMemo(
-    () => transformTheme(theme, config),
-    [theme, config],
+  const theme = useMemo(
+    () => transformTheme(initialTheme, config),
+    [initialTheme, config],
   )
 
   useEffect(() => {
@@ -105,9 +88,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   }, [changeThemeScheme, themeSchemeManager])
 
   return (
-    <EmotionThemeProvider
-      theme={{ themeScheme, changeThemeScheme, ...computedTheme }}
-    >
+    <EmotionThemeProvider theme={{ themeScheme, changeThemeScheme, ...theme }}>
       <CSSVars />
       {children}
     </EmotionThemeProvider>
@@ -166,19 +147,14 @@ export const GlobalStyle: FC = () => {
 
 type ThemeContext<T extends object = Dict> = Context<
   {
-    themeScheme: ThemeScheme
+    themeScheme: UITheme['themeSchemes']
     changeThemeScheme: ChangeThemeScheme
   } & StyledTheme<T>
 >
 
 export const useTheme = <T extends object = Dict>() => {
   const { themeScheme, changeThemeScheme, ...theme } = useContext(
-    ThemeContext as unknown as Context<
-      {
-        themeScheme: ThemeScheme
-        changeThemeScheme: ChangeThemeScheme
-      } & StyledTheme<T>
-    >,
+    ThemeContext as unknown as ThemeContext<T>,
   )
 
   if (!theme)
@@ -189,7 +165,7 @@ export const useTheme = <T extends object = Dict>() => {
   const value = useMemo(
     () =>
       ({ themeScheme, changeThemeScheme, theme }) as {
-        themeScheme: ThemeScheme
+        themeScheme: UITheme['themeSchemes']
         changeThemeScheme: ChangeThemeScheme
         theme: StyledTheme<T>
       },

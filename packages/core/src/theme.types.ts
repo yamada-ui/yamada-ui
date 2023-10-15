@@ -1,5 +1,5 @@
 import { PortalProps } from '@yamada-ui/portal'
-import { Dict, StringLiteral, Union } from '@yamada-ui/utils'
+import { Dict, StringLiteral } from '@yamada-ui/utils'
 import type { Variants } from 'framer-motion'
 import { ReactNode } from 'react'
 import {
@@ -13,8 +13,6 @@ import {
 } from './css'
 import { GeneratedTheme } from './generated-theme.types'
 import { UITheme } from './ui-theme.types'
-
-export type ThemeScheme = Union<string>
 
 export type LoadingVariant =
   | 'oval'
@@ -207,7 +205,7 @@ export type ThemeConfig = {
    * The initial theme scheme.
    * This is only applicable if multiple themes are provided.
    */
-  initialThemeScheme?: ThemeScheme
+  initialThemeScheme?: Theme['themeSchemes']
   /**
    * The initial color mode.
    * If `system`, the system will apply the color mode.
@@ -308,12 +306,6 @@ export type ThemeConfig = {
 
 export type LayerStyles = Record<string, UIStyle>
 export type TextStyles = Record<string, UIStyle>
-export type Components = Record<string, ComponentStyle | ComponentMultiStyle>
-export type Semantics = Omit<
-  BaseTheme,
-  'styles' | 'components' | 'semantics'
-> & { colorSchemes?: Partial<Record<string, Theme['colorSchemes']>> }
-
 export type ThemeTokens = {
   [key: string | number]:
     | string
@@ -321,19 +313,40 @@ export type ThemeTokens = {
     | [string | number, string | number]
     | ThemeTokens
 }
-
 export type ThemeAnimationTokens = {
   [key: string | number]:
     | AnimationStyle
     | AnimationStyle[]
     | ThemeAnimationTokens
 }
-
 export type ThemeTransitionTokens = {
   property?: ThemeTokens
   duration?: ThemeTokens
   easing?: ThemeTokens
 }
+export type ThemeBreakpoints = { [key: string | number]: string | number }
+export type ThemeSemantics = Omit<
+  BaseTheme,
+  | 'styles'
+  | 'components'
+  | 'semantics'
+  | 'themeSchemes'
+  | 'animation'
+  | 'breakpoints'
+> & { colorSchemes?: Partial<Record<string, Theme['colorSchemes']>> }
+export type ThemeSchemes = Partial<
+  Record<
+    string,
+    Omit<
+      BaseTheme,
+      'styles' | 'components' | 'themeSchemes' | 'breakpoints' | 'animation'
+    >
+  >
+>
+export type ThemeComponents = Record<
+  string,
+  ComponentStyle | ComponentMultiStyle
+>
 
 type BaseTheme = {
   styles?: {
@@ -343,24 +356,26 @@ type BaseTheme = {
     textStyles?: TextStyles
     [key: string]: any
   }
+  animations?: ThemeAnimationTokens
+  blurs?: ThemeTokens
   borders?: ThemeTokens
+  breakpoints?: ThemeBreakpoints
   colors?: ThemeTokens
-  breakpoints?: ThemeTokens
   fonts?: ThemeTokens
   fontSizes?: ThemeTokens
   fontWeights?: ThemeTokens
+  gradients?: ThemeTokens
   letterSpacings?: ThemeTokens
   lineHeights?: ThemeTokens
   radii?: ThemeTokens
   shadows?: ThemeTokens
   sizes?: ThemeTokens
   spaces?: ThemeTokens
-  zIndices?: ThemeTokens
-  gradients?: ThemeTokens
-  animations?: ThemeAnimationTokens
   transitions?: ThemeTransitionTokens
-  components?: Components
-  semantics?: Semantics
+  zIndices?: ThemeTokens
+  semantics?: ThemeSemantics
+  themeSchemes?: ThemeSchemes
+  components?: ThemeComponents
 }
 
 export type UsageTheme = BaseTheme & {

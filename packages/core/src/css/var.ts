@@ -21,90 +21,91 @@ const tokenToVar = (_token: string, prefix: string): Var => {
   return createVar(token, prefix)
 }
 
-export const createVars = (
-  tokens: VarTokens,
-  prefix: string = 'ui',
-): { cssMap: CSSMap; cssVars: Dict } => {
-  let cssMap: CSSMap = {}
-  let cssVars: Dict = {}
+export const createVars =
+  (tokens: VarTokens, prefix: string = 'ui') =>
+  (baseTokens?: VarTokens): { cssMap: CSSMap; cssVars: Dict } => {
+    let cssMap: CSSMap = {}
+    let cssVars: Dict = {}
 
-  for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
-    const { variable, reference } = tokenToVar(token, prefix)
+    for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
+      const { variable, reference } = tokenToVar(token, prefix)
 
-    let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
+      let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
 
-    if (token.startsWith('gradients')) {
-      lightValue = generateGradient(lightValue, {
-        __cssMap: cssMap,
-      } as StyledTheme<Dict>)
-      darkValue = generateGradient(darkValue, {
-        __cssMap: cssMap,
-      } as StyledTheme<Dict>)
-    }
-
-    if (!isSemantic) {
-      if (token.startsWith('spaces')) {
-        const keys = token.split('.')
-        const [firstKey, ...restKeys] = keys
-
-        const negativeToken = `${firstKey}.-${restKeys.join('.')}`
-
-        const negativeValue = calc.negate(lightValue)
-        const negativeReference = calc.negate(reference)
-
-        cssMap[negativeToken] = {
-          value: negativeValue,
-          var: variable,
-          ref: negativeReference,
-        }
+      if (token.startsWith('gradients')) {
+        lightValue = generateGradient(lightValue, {
+          __cssMap: cssMap,
+        } as StyledTheme<Dict>)
+        darkValue = generateGradient(darkValue, {
+          __cssMap: cssMap,
+        } as StyledTheme<Dict>)
       }
 
-      cssVars[variable] = lightValue
+      if (!isSemantic) {
+        if (token.startsWith('spaces')) {
+          const keys = token.split('.')
+          const [firstKey, ...restKeys] = keys
 
-      if (darkValue)
-        cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: darkValue } })
+          const negativeToken = `${firstKey}.-${restKeys.join('.')}`
+
+          const negativeValue = calc.negate(lightValue)
+          const negativeReference = calc.negate(reference)
+
+          cssMap[negativeToken] = {
+            value: negativeValue,
+            var: variable,
+            ref: negativeReference,
+          }
+        }
+
+        cssVars[variable] = lightValue
+
+        if (darkValue)
+          cssVars = merge(cssVars, {
+            [pseudos._dark]: { [variable]: darkValue },
+          })
+
+        cssMap[token] = {
+          value: lightValue,
+          var: variable,
+          ref: reference,
+        }
+
+        continue
+      }
+
+      const fetchParent = (
+        value: string | number = '',
+      ): [string | undefined, string | number] => {
+        const [parent] = token.split('.')
+
+        const _token = [parent, value].join('.')
+
+        const tokenValue = tokens[_token] ?? baseTokens?.[_token]
+
+        if (!tokenValue) return [, value]
+
+        const { variable, reference } = tokenToVar(_token, prefix)
+
+        return [variable, reference]
+      }
+
+      const [parentVar, parentRef] = fetchParent(lightValue)
+
+      cssVars = merge(cssVars, { [variable]: parentRef })
+
+      if (darkValue) {
+        const [, parentRef] = fetchParent(darkValue)
+
+        cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: parentRef } })
+      }
 
       cssMap[token] = {
-        value: lightValue,
+        value: parentVar ?? lightValue,
         var: variable,
         ref: reference,
       }
-
-      continue
     }
 
-    const fetchParent = (
-      value: string | number = '',
-    ): [string | undefined, string | number] => {
-      const [parent] = token.split('.')
-
-      const _token = [parent, value].join('.')
-
-      const tokenValue = tokens[_token]
-
-      if (!tokenValue) return [, value]
-
-      const { variable, reference } = tokenToVar(_token, prefix)
-
-      return [variable, reference]
-    }
-
-    const [parentVar, parentRef] = fetchParent(lightValue)
-
-    cssVars = merge(cssVars, { [variable]: parentRef })
-
-    if (darkValue) {
-      const [, parentRef] = fetchParent(darkValue)
-
-      cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: parentRef } })
-    }
-
-    cssMap[token] = {
-      value: parentVar ?? lightValue,
-      var: variable,
-      ref: reference,
-    }
+    return { cssMap, cssVars }
   }
-
-  return { cssMap, cssVars }
-}

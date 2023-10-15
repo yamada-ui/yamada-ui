@@ -111,9 +111,9 @@ export const extractColorSchemes = (theme: any) => {
 export const extractThemeSchemes = (theme: any) => {
   const { themeSchemes } = theme
 
-  if (!isObject(themeSchemes)) return []
+  if (!isObject(themeSchemes)) return ['base']
 
-  return Object.keys(themeSchemes)
+  return ['base', ...Object.keys(themeSchemes)]
 }
 
 export const extractPaths = (

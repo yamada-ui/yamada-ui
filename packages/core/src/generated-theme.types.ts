@@ -531,6 +531,7 @@ export interface GeneratedTheme extends UITheme {
     | '-3.5'
     | (string & {})
   textStyles: string & {}
+  themeSchemes: string & {}
   transitionDuration:
     | 'ultra-fast'
     | 'faster'

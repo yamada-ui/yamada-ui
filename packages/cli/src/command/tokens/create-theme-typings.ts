@@ -108,6 +108,14 @@ export const extractColorSchemes = (theme: any) => {
   }, [] as string[])
 }
 
+export const extractThemeSchemes = (theme: any) => {
+  const { themeSchemes } = theme
+
+  if (!isObject(themeSchemes)) return []
+
+  return Object.keys(themeSchemes)
+}
+
 export const extractPaths = (
   target: any,
   maxDepth = 3,
@@ -182,6 +190,7 @@ export const createThemeTypings = async (theme: any) => {
   const textStyles = extractKeys(theme, 'styles.textStyles')
   const layerStyles = extractKeys(theme, 'styles.layerStyles')
   const colorSchemes = extractColorSchemes(theme)
+  const themeSchemes = extractThemeSchemes(theme)
   const { transitionProperty, transitionDuration, transitionEasing } =
     extractTransitions(theme)
   const componentTypes = extractComponents(theme)
@@ -193,6 +202,7 @@ export const createThemeTypings = async (theme: any) => {
         textStyles,
         layerStyles,
         colorSchemes,
+        themeSchemes,
         transitionProperty,
         transitionDuration,
         transitionEasing,

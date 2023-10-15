@@ -37,3 +37,4 @@ jobs:
           commit-message: 'ci(changesets): ${{ github.sha }}'
           title: 'Version Packages'
           branch: changeset-release/main
+          assignees: 'hirotomoyamada'

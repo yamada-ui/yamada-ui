@@ -7,14 +7,14 @@ const baseTheme = {
     'https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png',
 
   // Colors
-  colorPrimary: defaultTheme.colors.secondary,
-  colorSecondary: defaultTheme.colors.primary,
+  colorPrimary: defaultTheme.colors.green[500],
+  colorSecondary: defaultTheme.colors.blue[500],
 
   // UI
   appBorderRadius: 0,
 
   // Toolbar default and active colors
-  barSelectedColor: defaultTheme.colors.primary,
+  barSelectedColor: defaultTheme.colors.blue[500],
 
   // Typography
   fontBase: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,

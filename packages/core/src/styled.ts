@@ -12,8 +12,9 @@ import {
   UIComponent,
   StyledResolverProps,
   As,
+  shouldForwardProp,
 } from './components'
-import { CSSUIProps, css, CSSUIObject, shouldForwardProp } from './css'
+import { CSSUIProps, css, CSSUIObject } from './css'
 import { useColorMode } from './providers'
 import { styles, pseudos } from './styles'
 

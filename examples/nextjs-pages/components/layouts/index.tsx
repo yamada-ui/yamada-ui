@@ -14,7 +14,7 @@ export const Layout: FC<LayoutProps> = ({ ...rest }) => {
           alignItems='flex-start'
           w='full'
           maxW='9xl'
-          gap='0'
+          gap={{ base: 'lg', md: 'md' }}
           py='lg'
           px={{ base: 'lg', md: 'md' }}
           {...rest}

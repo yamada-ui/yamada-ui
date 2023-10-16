@@ -1,2 +1,0 @@
-import{a as p}from"./jsx-runtime-03b4ddbf.js";import{u as n}from"./form-control-656e66ed.js";import{f as u}from"./forward-ref-8b7d2a6f.js";import{a as f}from"./use-component-style-c6f16384.js";import{o as l}from"./theme-provider-89b34f8f.js";import{d as c,e as d}from"./factory-0b90ba06.js";const C=u((o,r)=>{const[t,e]=f("Input",o);let{className:m,htmlSize:a,...s}=l(e);s=n(s);const i={...t.field};return p(c.input,{ref:r,className:d("ui-input",m),size:a,__css:i,...s})});export{C as I};
-//# sourceMappingURL=input-e8f94a90.js.map

@@ -1,5 +1,15 @@
 # @yamada-ui/input
 
+## 0.3.14
+
+### Patch Changes
+
+- Updated dependencies [[`f4c37a4b`](https://github.com/hirotomoyamada/yamada-ui/commit/f4c37a4b4df2e14fc5d162a6a3990ce841f93331)]:
+  - @yamada-ui/core@0.12.2
+  - @yamada-ui/file-input@0.4.5
+  - @yamada-ui/form-control@0.3.14
+  - @yamada-ui/use-token@0.3.6
+
 ## 0.3.13
 
 ### Patch Changes

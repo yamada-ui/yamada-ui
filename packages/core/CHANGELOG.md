@@ -1,5 +1,21 @@
 # @yamada-ui/core
 
+## 0.12.1
+
+### Patch Changes
+
+- [`58a763b4`](https://github.com/hirotomoyamada/yamada-ui/commit/58a763b49623b95c9a643e04f044dbab076e7535) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored animation handling.
+
+- [`0e5e72e1`](https://github.com/hirotomoyamada/yamada-ui/commit/0e5e72e14c8b46f8b948918312bbb2d03464b523) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed dict type from `StyledTheme`.
+
+- [`02a33f1e`](https://github.com/hirotomoyamada/yamada-ui/commit/02a33f1e619b08d2a12ce5cc277d1692a3bb4a0a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated theme and component types.
+
+- [`ebb9023a`](https://github.com/hirotomoyamada/yamada-ui/commit/ebb9023ab97f61792e149e217a7fbe635e5b48e1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved `shouldForwardProp` to components.
+
+- Updated dependencies [[`49cf0999`](https://github.com/hirotomoyamada/yamada-ui/commit/49cf0999e6b3aededb08c6f8f80fd3209cddeb27), [`d048b650`](https://github.com/hirotomoyamada/yamada-ui/commit/d048b650fccb91c281ea4bbebee104dd2b7d18f0)]:
+  - @yamada-ui/utils@0.3.1
+  - @yamada-ui/portal@0.3.4
+
 ## 0.12.0
 
 ### Minor Changes

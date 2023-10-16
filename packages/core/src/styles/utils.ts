@@ -3,11 +3,14 @@ import {
   Keyframes,
   CSSObject,
 } from '@emotion/react'
-import { isArray, isObject, isString } from '@yamada-ui/utils'
-import { ColorMode } from '../css'
+import { StyleSheet } from '@emotion/sheet'
+import { isArray, isObject, isString, Dict } from '@yamada-ui/utils'
+import { ColorMode, css } from '../css'
 import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
 import { Transform } from './config'
+
+const styleSheet = new StyleSheet({ key: 'css', container: document.head })
 
 const directions: Record<string, string> = {
   'to-t': 'to top',
@@ -110,6 +113,58 @@ export const generateGradient: Transform = (value, theme) => {
   })
 
   return `${type}(${values.join(', ')})`
+}
+
+const transformAnimationValue = (value: Dict) =>
+  Object.entries(value).reduce((prev, [key, value]) => {
+    if (key === 'duration') {
+      prev['animationDuration'] = value
+    } else if (key === 'timingFunction') {
+      prev['animationTimingFunction'] = value
+    } else {
+      prev[key] = value
+    }
+
+    return prev
+  }, {} as Dict)
+
+export const generateAnimation: Transform = (value, theme) => {
+  if (value == null || globalValues.has(value)) return value
+
+  if (isObject(value)) {
+    const {
+      keyframes,
+      animationDuration = '0s',
+      animationTimingFunction = 'ease',
+      delay = '0s',
+      iterationCount = '1',
+      direction = 'normal',
+      fillMode = 'none',
+      playState = 'running',
+    } = css(transformAnimationValue(value))(theme)
+    const { name, styles } = emotionKeyframes(keyframes)
+
+    styleSheet.insert(styles)
+
+    return `${name} ${animationDuration} ${animationTimingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
+  } else if (value.includes(',')) {
+    value = value
+      .split(',')
+      .map((value: string) => {
+        value = value.trim()
+
+        value = tokenToCSSVar('animations', value)(theme)
+
+        return value
+      })
+      .join(',')
+
+    return value
+  } else {
+    value = tokenToCSSVar('animations', value)(theme)
+
+    return value
+  }
 }
 
 export const generateTransform: Transform = (value) => {

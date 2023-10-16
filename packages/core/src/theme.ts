@@ -10,7 +10,12 @@ import {
   isFunction,
 } from '@yamada-ui/utils'
 import { ThemeProps, UIStyleProps, analyzeBreakpoints, createVars } from './css'
-import { ComponentMultiStyle, ComponentStyle, ThemeConfig } from './theme.types'
+import {
+  CSSMap,
+  ComponentMultiStyle,
+  ComponentStyle,
+  ThemeConfig,
+} from './theme.types'
 
 export type VarToken = {
   isSemantic: boolean
@@ -19,14 +24,13 @@ export type VarToken = {
 
 export type VarTokens = Record<string, VarToken>
 
-const tokens = [
+const primaryTokens = [
   'blurs',
   'borders',
   'colors',
   'fonts',
   'fontSizes',
   'fontWeights',
-  'gradients',
   'letterSpacings',
   'lineHeights',
   'radii',
@@ -37,39 +41,51 @@ const tokens = [
   'zIndices',
 ] as const
 
+const secondaryTokens = ['gradients'] as const
+
 export type ThemeToken =
-  | (typeof tokens)[number]
+  | (typeof primaryTokens)[number]
+  | (typeof secondaryTokens)[number]
   | 'animations'
   | 'breakpoints'
   | 'transitions.duration'
   | 'transitions.property'
   | 'transitions.easing'
 
-export const transformTheme = <T extends Dict>(
-  _theme: T,
-  config?: ThemeConfig,
-): Dict => {
-  const theme = omitTheme(_theme)
-
-  const tokens = createTokens(theme)
-  const prefix = config?.var?.prefix
+export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
+  theme = omitTheme(theme)
   const { breakpoints, themeSchemes } = theme ?? {}
+  const prefix = config?.var?.prefix
 
-  const { cssMap, cssVars } = createVars(tokens, prefix)()
+  const primaryTokens = createTokens(theme)
+  const secondaryTokens = createTokens(theme, 'secondary')
+  const animationTokens = createTokens(theme, 'animation')
 
-  let nestedCSSVars: Record<string, Dict> = {}
+  let { cssMap, cssVars } = createAllVars(
+    createVars(primaryTokens, prefix),
+    createVars(secondaryTokens, prefix),
+    createVars(animationTokens, prefix),
+  )()
 
   if (themeSchemes) {
     for (const [themeScheme, nestedTheme] of Object.entries<Dict>(
       themeSchemes,
     )) {
-      const nestedTokens = createTokens(nestedTheme)
+      const nestedPrimaryTokens = createTokens(nestedTheme)
+      const nestedSecondaryTokens = createTokens(nestedTheme, 'secondary')
+      const nestedAnimationTokens = createTokens(nestedTheme, 'animation')
 
-      const { cssVars } = createVars(nestedTokens, prefix)(tokens)
+      let { cssVars: nestedCSSVars } = createAllVars(
+        createVars(nestedPrimaryTokens, prefix),
+        createVars(nestedSecondaryTokens, prefix),
+        createVars(nestedAnimationTokens, prefix),
+      )({ ...primaryTokens, ...secondaryTokens, ...animationTokens })
 
-      nestedCSSVars[
-        `[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`
-      ] = cssVars
+      cssVars = {
+        ...cssVars,
+        [`[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`]:
+          nestedCSSVars,
+      }
     }
   }
 
@@ -77,7 +93,7 @@ export const transformTheme = <T extends Dict>(
 
   Object.assign(theme, {
     __config: config,
-    __cssVars: { ...defaultCSSVars, ...cssVars, ...nestedCSSVars },
+    __cssVars: { ...defaultCSSVars, ...cssVars },
     __cssMap: cssMap,
     __breakpoints: analyzeBreakpoints(breakpoints),
   })
@@ -85,21 +101,50 @@ export const transformTheme = <T extends Dict>(
   return theme
 }
 
-const createTokens = (theme: Dict): VarTokens => {
-  const defaultTokens = pickObject(theme, tokens as unknown as string[])
+const createTokens = (
+  theme: Dict,
+  target: 'primary' | 'secondary' | 'animation' = 'primary',
+): VarTokens => {
+  let defaultTokens: string[] = []
+  let semanticTokens: string[] = []
+  let omitKeys: string[] = []
 
-  const semanticTokens = theme.semantics ?? {}
+  switch (target) {
+    case 'primary':
+      defaultTokens = [...primaryTokens]
+      semanticTokens = [...primaryTokens, 'colorSchemes']
+
+      break
+
+    case 'secondary':
+      defaultTokens = [...secondaryTokens]
+      semanticTokens = [...secondaryTokens]
+
+      break
+
+    case 'animation':
+      defaultTokens = ['animations']
+      semanticTokens = ['animations']
+      omitKeys = ['keyframes']
+
+      break
+
+    default:
+      break
+  }
+
+  const defaultTokenMap = pickObject(theme, defaultTokens)
+  const semanticTokenMap = pickObject(theme.semantics ?? {}, semanticTokens)
 
   const defaultTokenEntries: [string, VarToken][] = Object.entries(
-    flattenObject(defaultTokens) ?? {},
+    flattenObject(defaultTokenMap, Infinity, omitKeys),
   ).map(([token, value]) => {
     const enhancedToken = { isSemantic: false, value }
 
     return [token, enhancedToken]
   })
-
   const semanticTokenEntries: [string, VarToken][] = Object.entries(
-    flattenObject(semanticTokens) ?? {},
+    flattenObject(semanticTokenMap, Infinity, omitKeys),
   ).reduce(
     (prev, [token, value]) => {
       if (token.startsWith('colorSchemes.')) {
@@ -126,6 +171,32 @@ const createTokens = (theme: Dict): VarTokens => {
     ...semanticTokenEntries,
   ])
 }
+
+const createAllVars =
+  (
+    ...funcs: ((arg: {
+      baseTokens?: VarTokens
+      cssMap?: CSSMap
+      cssVars?: Dict
+    }) => { cssMap: CSSMap; cssVars: Dict })[]
+  ) =>
+  (baseTokens?: VarTokens) => {
+    let resolvedCSSMap: CSSMap = {}
+    let resolvedCSSVars: Dict = {}
+
+    for (const func of funcs) {
+      const { cssMap, cssVars } = func({
+        baseTokens,
+        cssMap: resolvedCSSMap,
+        cssVars: resolvedCSSVars,
+      })
+
+      resolvedCSSMap = { ...resolvedCSSMap, ...cssMap }
+      resolvedCSSVars = { ...resolvedCSSVars, ...cssVars }
+    }
+
+    return { cssMap: resolvedCSSMap, cssVars: resolvedCSSVars }
+  }
 
 const omitTheme = (theme: Dict): Dict =>
   omitObject(theme, ['__cssMap', '__cssVar', '__breakpoints'])

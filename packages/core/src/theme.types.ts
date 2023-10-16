@@ -328,34 +328,33 @@ export type ThemeTokens = {
     | [string | number, string | number]
     | ThemeTokens
 }
-export type ThemeAnimationTokens = {
-  [key: string | number]:
-    | AnimationStyle
-    | AnimationStyle[]
-    | ThemeAnimationTokens
+export type ThemeAnimationTokens<
+  T extends AnimationStyle | string = AnimationStyle,
+> = {
+  [key: string | number]: T | T[] | ThemeAnimationTokens<T>
 }
 export type ThemeTransitionTokens = {
   property?: ThemeTokens
   duration?: ThemeTokens
   easing?: ThemeTokens
 }
-export type ThemeBreakpoints = { [key: string | number]: string | number }
+export type ThemeBreakpointTokens = { [key: string | number]: string | number }
 export type ThemeSemantics = Omit<
   BaseTheme,
   | 'styles'
   | 'components'
   | 'semantics'
   | 'themeSchemes'
-  | 'animation'
   | 'breakpoints'
-> & { colorSchemes?: Partial<Record<string, Theme['colorSchemes']>> }
+  | 'animations'
+> & {
+  colorSchemes?: Partial<Record<string, Theme['colorSchemes']>>
+  animations?: ThemeAnimationTokens<AnimationStyle | string>
+}
 export type ThemeSchemes = Partial<
   Record<
     string,
-    Omit<
-      BaseTheme,
-      'styles' | 'components' | 'themeSchemes' | 'breakpoints' | 'animation'
-    >
+    Omit<BaseTheme, 'styles' | 'components' | 'themeSchemes' | 'breakpoints'>
   >
 >
 export type ThemeComponents = Record<
@@ -374,7 +373,7 @@ type BaseTheme = {
   animations?: ThemeAnimationTokens
   blurs?: ThemeTokens
   borders?: ThemeTokens
-  breakpoints?: ThemeBreakpoints
+  breakpoints?: ThemeBreakpointTokens
   colors?: ThemeTokens
   fonts?: ThemeTokens
   fontSizes?: ThemeTokens

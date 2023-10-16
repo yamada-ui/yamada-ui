@@ -1,28 +1,8 @@
 import { isArray, isObject, merge, runIfFunc, Dict } from '@yamada-ui/utils'
-import {
-  styles,
-  pseudos,
-  ConfigProps,
-  keyframes as emotionKeyframes,
-} from '../styles'
+import { styles, pseudos, ConfigProps } from '../styles'
 import { StyledTheme } from '../theme.types'
 import { BreakpointQueries } from './breakpoint'
 import { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from './css.types'
-
-const expandAnimation = ({
-  keyframes,
-  duration = '0s',
-  timingFunction = 'ease',
-  delay = '0s',
-  iterationCount = '1',
-  direction = 'normal',
-  fillMode = 'none',
-  playState = 'running',
-}: Dict) => {
-  const name = emotionKeyframes(keyframes)
-
-  return `${name} ${duration} ${timingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
-}
 
 const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],
@@ -82,13 +62,15 @@ const expandCSS =
     return computedCSS
   }
 
-export const getCSS = (options: {
+export const getCSS = ({
+  theme,
+  styles = {},
+  pseudos = {},
+}: {
   theme: StyledTheme
   styles: Dict
   pseudos: Dict
 }): ((cssOrFunc: CSSObjectOrFunc | CSSUIObject) => Dict) => {
-  const { theme, styles = {}, pseudos = {} } = options
-
   const createCSS = (
     cssOrFunc: CSSObjectOrFunc | CSSUIObject,
     isNested: boolean = false,
@@ -117,23 +99,6 @@ export const getCSS = (options: {
       }
 
       value = style?.transform?.(value, theme) ?? value
-
-      if (style?.isAnimation) {
-        if (isObject(value)) {
-          value = expandAnimation(createCSS(value, true))
-        }
-
-        if (isArray(value)) {
-          value = value
-            .flat()
-            .map((nestedValue) =>
-              isObject(nestedValue)
-                ? expandAnimation(createCSS(nestedValue, true))
-                : nestedValue,
-            )
-            .join(', ')
-        }
-      }
 
       if (style?.isProcessResult) {
         value = createCSS(value, true)

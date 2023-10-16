@@ -1,5 +1,12 @@
-import { escape, merge, calc, Dict, isArray } from '@yamada-ui/utils'
-import { generateGradient, pseudos } from '../styles'
+import {
+  escape,
+  merge,
+  calc,
+  Dict,
+  isArray,
+  isUndefined,
+} from '@yamada-ui/utils'
+import { generateAnimation, generateGradient, pseudos } from '../styles'
 import { VarTokens } from '../theme'
 import { CSSMap, StyledTheme } from '../theme.types'
 
@@ -15,40 +22,95 @@ const createVar = (token: string, prefix: string): Var => {
   return { variable, reference }
 }
 
-const tokenToVar = (_token: string, prefix: string): Var => {
-  const token = _token.replace(/\./g, '-')
+const tokenToVar = (token: string, prefix: string): Var => {
+  token = token.replace(/\./g, '-')
 
   return createVar(token, prefix)
 }
 
 export const createVars =
   (tokens: VarTokens, prefix: string = 'ui') =>
-  (baseTokens?: VarTokens): { cssMap: CSSMap; cssVars: Dict } => {
-    let cssMap: CSSMap = {}
-    let cssVars: Dict = {}
-
+  ({
+    baseTokens,
+    cssMap = {},
+    cssVars = {},
+  }: {
+    baseTokens?: VarTokens
+    cssMap?: CSSMap
+    cssVars?: Dict
+  } = {}): { cssMap: CSSMap; cssVars: Dict } => {
     for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
+      const fetchParent = (
+        value: string | number = '',
+      ): [string | undefined, string | number] => {
+        const [parent] = token.split('.')
+
+        const relatedToken = [parent, value].join('.')
+
+        const tokenValue = tokens[relatedToken] ?? baseTokens?.[relatedToken]
+
+        if (!tokenValue) return [, value]
+
+        const { variable, reference } = tokenToVar(relatedToken, prefix)
+
+        return [variable, reference]
+      }
+
       const { variable, reference } = tokenToVar(token, prefix)
 
-      let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
+      let resolvedLightValue: string | number | undefined
+      let resplvedDarkValue: string | number | undefined
 
-      if (token.startsWith('gradients')) {
-        lightValue = generateGradient(lightValue, {
-          __cssMap: cssMap,
-        } as StyledTheme)
-        darkValue = generateGradient(darkValue, {
-          __cssMap: cssMap,
-        } as StyledTheme)
+      if (token.startsWith('animations.')) {
+        if (isArray(value)) {
+          resolvedLightValue = value
+            .map((value) =>
+              generateAnimation(value, {
+                __cssMap: cssMap,
+              } as StyledTheme),
+            )
+            .join(',')
+        } else {
+          resolvedLightValue = generateAnimation(value, {
+            __cssMap: cssMap,
+          } as StyledTheme)
+        }
+      } else {
+        let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
+
+        if (token.startsWith('gradients.')) {
+          const [lightParentVar, lightParentRef] = fetchParent(lightValue)
+          const [darkParentVar, darkParentRef] = fetchParent(darkValue)
+
+          if (lightParentVar) {
+            resolvedLightValue = lightParentRef
+          } else {
+            resolvedLightValue = generateGradient(fetchParent(lightValue)[1], {
+              __cssMap: cssMap,
+            } as StyledTheme)
+          }
+
+          if (darkParentVar) {
+            resplvedDarkValue = darkParentRef
+          } else {
+            resplvedDarkValue = generateGradient(darkValue, {
+              __cssMap: cssMap,
+            } as StyledTheme)
+          }
+        } else {
+          resolvedLightValue = lightValue
+          resplvedDarkValue = darkValue
+        }
       }
 
       if (!isSemantic) {
-        if (token.startsWith('spaces')) {
+        if (token.startsWith('spaces') && !isUndefined(resolvedLightValue)) {
           const keys = token.split('.')
           const [firstKey, ...restKeys] = keys
 
           const negativeToken = `${firstKey}.-${restKeys.join('.')}`
 
-          const negativeValue = calc.negate(lightValue)
+          const negativeValue = calc.negate(resolvedLightValue)
           const negativeReference = calc.negate(reference)
 
           cssMap[negativeToken] = {
@@ -58,15 +120,15 @@ export const createVars =
           }
         }
 
-        cssVars[variable] = lightValue
+        cssVars[variable] = resolvedLightValue
 
-        if (darkValue)
+        if (resplvedDarkValue)
           cssVars = merge(cssVars, {
-            [pseudos._dark]: { [variable]: darkValue },
+            [pseudos._dark]: { [variable]: resplvedDarkValue },
           })
 
         cssMap[token] = {
-          value: lightValue,
+          value: resolvedLightValue,
           var: variable,
           ref: reference,
         }
@@ -74,34 +136,18 @@ export const createVars =
         continue
       }
 
-      const fetchParent = (
-        value: string | number = '',
-      ): [string | undefined, string | number] => {
-        const [parent] = token.split('.')
-
-        const _token = [parent, value].join('.')
-
-        const tokenValue = tokens[_token] ?? baseTokens?.[_token]
-
-        if (!tokenValue) return [, value]
-
-        const { variable, reference } = tokenToVar(_token, prefix)
-
-        return [variable, reference]
-      }
-
-      const [parentVar, parentRef] = fetchParent(lightValue)
+      const [parentVar, parentRef] = fetchParent(resolvedLightValue)
 
       cssVars = merge(cssVars, { [variable]: parentRef })
 
-      if (darkValue) {
-        const [, parentRef] = fetchParent(darkValue)
+      if (resplvedDarkValue) {
+        const [, parentRef] = fetchParent(resplvedDarkValue)
 
         cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: parentRef } })
       }
 
       cssMap[token] = {
-        value: parentVar ?? lightValue,
+        value: parentVar ?? resolvedLightValue,
         var: variable,
         ref: reference,
       }

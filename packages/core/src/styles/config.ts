@@ -12,6 +12,7 @@ import {
   isCSSVar,
   generateTransform,
   generateFilter,
+  generateAnimation,
 } from './utils'
 
 type CSSProperties = Union<keyof CSS.Properties>
@@ -21,7 +22,6 @@ export type Transform = (value: any, theme: StyledTheme, css?: Dict) => any
 export type ConfigProps = {
   static?: CSSObject
   isProcessResult?: boolean
-  isAnimation?: boolean
   properties?:
     | CSSProperties
     | CSSProperties[]
@@ -118,6 +118,7 @@ export const transforms = {
       return `${func}(${value})`
     },
   gradient: generateGradient,
+  animation: generateAnimation,
   transform: generateTransform,
   filter: generateFilter,
 }

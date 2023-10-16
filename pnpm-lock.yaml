@@ -303,7 +303,7 @@ importers:
     devDependencies:
       '@craco/craco':
         specifier: ^7.1.0
-        version: 7.1.0(@swc/core@1.3.92)(@types/node@20.8.6)(postcss@8.4.27)(react-scripts@5.0.1)(typescript@5.2.2)
+        version: 7.1.0(@swc/core@1.3.92)(@types/node@20.8.6)(postcss@8.4.31)(react-scripts@5.0.1)(typescript@5.2.2)
       '@types/node':
         specifier: 20.8.6
         version: 20.8.6
@@ -1894,6 +1894,9 @@ importers:
       '@emotion/react':
         specifier: ^11.11.0
         version: 11.11.0(@types/react@18.2.25)(react@18.2.0)
+      '@emotion/sheet':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.25)(react@18.2.0)
@@ -6024,14 +6027,14 @@ packages:
       chalk: 4.1.2
     dev: false
 
-  /@craco/craco@7.1.0(@swc/core@1.3.92)(@types/node@20.8.6)(postcss@8.4.27)(react-scripts@5.0.1)(typescript@5.2.2):
+  /@craco/craco@7.1.0(@swc/core@1.3.92)(@types/node@20.8.6)(postcss@8.4.31)(react-scripts@5.0.1)(typescript@5.2.2):
     resolution: {integrity: sha512-oRAcPIKYrfPXp9rSzlsDNeOaVtDiKhoyqSXUoqiK24jCkHr4T8m/a2f74yXIzCbIheoUWDOIfWZyRgFgT+cpqA==}
     engines: {node: '>=6'}
     hasBin: true
     peerDependencies:
       react-scripts: ^5.0.0
     dependencies:
-      autoprefixer: 10.4.14(postcss@8.4.27)
+      autoprefixer: 10.4.14(postcss@8.4.31)
       cosmiconfig: 7.1.0
       cosmiconfig-typescript-loader: 1.0.9(@swc/core@1.3.92)(@types/node@20.8.6)(cosmiconfig@7.1.0)(typescript@5.2.2)
       cross-spawn: 7.0.3
@@ -11419,7 +11422,7 @@ packages:
       postcss: 8.4.23
       postcss-value-parser: 4.2.0
 
-  /autoprefixer@10.4.14(postcss@8.4.27):
+  /autoprefixer@10.4.14(postcss@8.4.31):
     resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
@@ -11431,7 +11434,7 @@ packages:
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
-      postcss: 8.4.27
+      postcss: 8.4.31
       postcss-value-parser: 4.2.0
     dev: true
 
@@ -20202,7 +20205,6 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
-    dev: false
 
   /preferred-pm@3.0.3:
     resolution: {integrity: sha512-+wZgbxNES/KlJs9q40F/1sfOd/j7f1O9JaHcW5Dsn3aUUOZg3L2bjpVUcKV2jvtElYfoTuQiNeMfQJ4kwUAhCQ==}

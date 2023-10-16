@@ -1,5 +1,12 @@
 # @yamada-ui/use-size
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`49cf0999`](https://github.com/hirotomoyamada/yamada-ui/commit/49cf0999e6b3aededb08c6f8f80fd3209cddeb27), [`d048b650`](https://github.com/hirotomoyamada/yamada-ui/commit/d048b650fccb91c281ea4bbebee104dd2b7d18f0)]:
+  - @yamada-ui/utils@0.3.1
+
 ## 0.2.2
 
 ### Patch Changes

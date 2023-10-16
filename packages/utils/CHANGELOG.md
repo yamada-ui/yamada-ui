@@ -1,5 +1,13 @@
 # @yamada-ui/utils
 
+## 0.3.1
+
+### Patch Changes
+
+- [`49cf0999`](https://github.com/hirotomoyamada/yamada-ui/commit/49cf0999e6b3aededb08c6f8f80fd3209cddeb27) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed 'overrideArray' to 'mergeArray' from merge function.
+
+- [`d048b650`](https://github.com/hirotomoyamada/yamada-ui/commit/d048b650fccb91c281ea4bbebee104dd2b7d18f0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `omitKeys` parameter to `flattenObject` function.
+
 ## 0.3.0
 
 ### Minor Changes

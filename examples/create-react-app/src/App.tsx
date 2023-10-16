@@ -1,10 +1,6 @@
 import { FC } from 'react'
-import { Header } from 'components'
+import { Layout } from 'components/layouts'
 
 export const App: FC = () => {
-  return (
-    <>
-      <Header />
-    </>
-  )
+  return <Layout></Layout>
 }

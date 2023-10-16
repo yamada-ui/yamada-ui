@@ -1,4 +1,4 @@
-import { ColorModeScript } from '@yamada-ui/react'
+import { ColorModeScript, ThemeSchemeScript } from '@yamada-ui/react'
 import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { config } from 'theme'
 
@@ -17,6 +17,7 @@ class Document extends NextDocument {
 
         <body>
           <ColorModeScript initialColorMode={config.initialColorMode} />
+          <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
           <Main />
           <NextScript />
         </body>

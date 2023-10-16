@@ -1,14 +1,8 @@
-'use client'
-
-import { Header } from 'components'
+import { Layout } from 'components/layouts'
 import { FC } from 'react'
 
 const Page: FC = () => {
-  return (
-    <>
-      <Header />
-    </>
-  )
+  return <Layout></Layout>
 }
 
 export default Page

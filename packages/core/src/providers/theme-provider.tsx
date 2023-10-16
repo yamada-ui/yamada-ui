@@ -41,7 +41,7 @@ type ThemeProviderOptions = {
   /**
    * The theme of the yamada ui.
    */
-  theme: Dict
+  theme?: Dict
   /**
    * The config of the yamada ui.
    */
@@ -61,7 +61,7 @@ export type ThemeProviderProps = Omit<EmotionThemeProviderProps, 'theme'> &
   ThemeProviderOptions
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
-  theme: initialTheme,
+  theme: initialTheme = {},
   config,
   themeSchemeManager = localStorage,
   children,

@@ -15,6 +15,7 @@ export const Layout: FC<LayoutProps> = ({ ...rest }) => {
           w='full'
           maxW='9xl'
           gap='0'
+          py='lg'
           px={{ base: 'lg', md: 'md' }}
           {...rest}
         />

@@ -4,13 +4,15 @@ import {
   CSSObject,
 } from '@emotion/react'
 import { StyleSheet } from '@emotion/sheet'
-import { isArray, isObject, isString, Dict } from '@yamada-ui/utils'
+import { isArray, isObject, isString, Dict, createdDom } from '@yamada-ui/utils'
 import { ColorMode, css } from '../css'
 import { ThemeToken } from '../theme'
 import { StyledTheme } from '../theme.types'
 import { Transform } from './config'
 
-const styleSheet = new StyleSheet({ key: 'css', container: document.head })
+const styleSheet = createdDom()
+  ? new StyleSheet({ key: 'css', container: document.head })
+  : undefined
 
 const directions: Record<string, string> = {
   'to-t': 'to top',
@@ -144,7 +146,7 @@ export const generateAnimation: Transform = (value, theme) => {
     } = css(transformAnimationValue(value))(theme)
     const { name, styles } = emotionKeyframes(keyframes)
 
-    styleSheet.insert(styles)
+    styleSheet?.insert(styles)
 
     return `${name} ${animationDuration} ${animationTimingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   } else if (value.includes(',')) {

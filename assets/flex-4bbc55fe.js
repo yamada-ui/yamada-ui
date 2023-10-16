@@ -1,0 +1,2 @@
+import{a}from"./jsx-runtime-03b4ddbf.js";import{f as o}from"./forward-ref-8b7d2a6f.js";import{d}from"./factory-0b90ba06.js";const w=o(({direction:r,justify:s,align:i,wrap:t,basis:p,grow:f,shrink:n,...c},e)=>{const m={display:"flex",flexDirection:r,justifyContent:s,alignItems:i,flexWrap:t,flexBasis:p,flexGrow:f,flexShrink:n};return a(d.div,{ref:e,__css:m,...c})}),g=o((r,s)=>a(w,{ref:s,wrap:"wrap",...r}));export{w as F,g as W};
+//# sourceMappingURL=flex-4bbc55fe.js.map

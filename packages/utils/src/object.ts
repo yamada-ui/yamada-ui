@@ -99,12 +99,16 @@ export const merge = <T extends Dict>(
 export const flattenObject = <T extends Dict>(
   obj: any,
   maxDepth: number = Infinity,
+  omitKeys: string[] = [],
 ): T => {
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
   return Object.entries(obj).reduce((result, [key, value]) => {
-    if (isObject(value)) {
-      Object.entries(flattenObject(value, maxDepth - 1)).forEach(
+    if (
+      isObject(value) &&
+      !Object.keys(value).some((key) => omitKeys.includes(key))
+    ) {
+      Object.entries(flattenObject(value, maxDepth - 1, omitKeys)).forEach(
         ([childKey, childValue]) => {
           result[`${key}.${childKey}`] = childValue
         },

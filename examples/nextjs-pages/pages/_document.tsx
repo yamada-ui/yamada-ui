@@ -16,8 +16,16 @@ class Document extends NextDocument {
         </Head>
 
         <body>
-          <ColorModeScript initialColorMode={config.initialColorMode} />
-          <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
+          <ColorModeScript
+            type='cookie'
+            nonce='testing'
+            initialColorMode={config.initialColorMode}
+          />
+          <ThemeSchemeScript
+            type='cookie'
+            nonce='testing'
+            initialThemeScheme={config.initialThemeScheme}
+          />
           <Main />
           <NextScript />
         </body>

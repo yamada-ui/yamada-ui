@@ -7,11 +7,11 @@ const App = ({ Component, pageProps }: AppProps) => {
   const resolvedColorModeManager =
     typeof cookies === 'string'
       ? colorModeManager.cookieStorageSSR(cookies)
-      : colorModeManager.localStorage
+      : colorModeManager.cookieStorage
   const resolvedThemeSchemeManager =
     typeof cookies === 'string'
       ? themeSchemeManager.cookieStorageSSR(cookies)
-      : themeSchemeManager.localStorage
+      : themeSchemeManager.cookieStorage
 
   return (
     <UIProvider

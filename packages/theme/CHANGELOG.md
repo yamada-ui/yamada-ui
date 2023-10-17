@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.11.6
+
+### Patch Changes
+
+- [`219e9284`](https://github.com/hirotomoyamada/yamada-ui/commit/219e9284227a09263b555d0473c55900b0746fbe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed `pagination`, `checkbox` and `radio` styles.
+
 ## 0.11.5
 
 ### Patch Changes

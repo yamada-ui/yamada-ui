@@ -199,7 +199,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
   const { locale, changeLocale } = useI18n()
 
   return (
-    <Menu placement='bottom-end' {...menuProps}>
+    <Menu placement='bottom-end' restoreFocus={false} {...menuProps}>
       <MenuButton
         as={IconButton}
         aria-label='Open language switching menu'
@@ -233,7 +233,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
   const { colorMode, internalColorMode, changeColorMode } = useColorMode()
 
   return (
-    <Menu placement='bottom-end' {...menuProps}>
+    <Menu placement='bottom-end' restoreFocus={false} {...menuProps}>
       <MenuButton
         as={IconButton}
         aria-label='Open color mode switching menu'
@@ -279,6 +279,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
       onOpen={onOpen}
       onClose={onClose}
       closeOnButton={false}
+      restoreFocus={false}
     >
       <PopoverTrigger>
         <IconButton

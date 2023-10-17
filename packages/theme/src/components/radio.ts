@@ -13,16 +13,13 @@ export const Radio: ComponentStyle = {
       borderColor: 'inherit',
       rounded: 'full',
       color: 'white',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       _checked: {
         _before: {
           content: `""`,
           display: 'inline-block',
-          w: '70%',
-          h: '70%',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
           rounded: 'full',
           bg: [`${c}.500`, `${c}.200`],
         },
@@ -62,15 +59,30 @@ export const Radio: ComponentStyle = {
 
   sizes: {
     sm: {
-      icon: { boxSize: '3' },
+      icon: {
+        boxSize: '3.5',
+        _before: {
+          boxSize: '1.5',
+        },
+      },
       label: { fontSize: 'sm' },
     },
     md: {
-      icon: { boxSize: '4' },
+      icon: {
+        boxSize: '4',
+        _before: {
+          boxSize: '2',
+        },
+      },
       label: { fontSize: 'md' },
     },
     lg: {
-      icon: { boxSize: '5' },
+      icon: {
+        boxSize: '5',
+        _before: {
+          boxSize: '3',
+        },
+      },
       label: { fontSize: 'lg' },
     },
   },

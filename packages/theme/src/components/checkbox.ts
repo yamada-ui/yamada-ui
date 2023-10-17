@@ -50,7 +50,7 @@ export const Checkbox: ComponentMultiStyle = {
 
   sizes: {
     sm: {
-      icon: { boxSize: '3', rounded: 'sm', fontSize: '3xs' },
+      icon: { boxSize: '3.5', rounded: 'base', fontSize: '2xs' },
       label: { fontSize: 'sm' },
     },
     md: {
@@ -58,7 +58,7 @@ export const Checkbox: ComponentMultiStyle = {
       label: { fontSize: 'md' },
     },
     lg: {
-      icon: { boxSize: '5', rounded: 'base', fontSize: '2xs' },
+      icon: { boxSize: '5', rounded: 'base', fontSize: 'sm' },
       label: { fontSize: 'lg' },
     },
   },

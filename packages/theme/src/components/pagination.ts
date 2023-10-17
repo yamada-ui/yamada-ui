@@ -18,7 +18,7 @@ export const Pagination: ComponentMultiStyle = {
       rounded: 'md',
       transitionProperty: 'common',
       transitionDuration: 'slower',
-      _selected: { pointerEvents: 'none' },
+      _selected: { cursor: 'default', pointerEvents: 'none' },
       _focus: {
         outline: 'none',
       },
@@ -61,6 +61,11 @@ export const Pagination: ComponentMultiStyle = {
             color: isGray(c)
               ? undefined
               : [isAccessible ? `black` : `white`, `gray.800`],
+            _hover: {
+              bg: isGray(c)
+                ? [`${c}.200`, `${c}.700`]
+                : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
+            },
           },
           _hover: {
             bg: [`gray.200`, `whiteAlpha.100`],
@@ -83,13 +88,16 @@ export const Pagination: ComponentMultiStyle = {
           border: '1px solid',
           borderColor: 'border',
           _selected: {
-            bg: isGray(c) ? undefined : 'transparent',
+            bg: 'transparent',
             borderColor: isGray(c)
               ? [`${c}.500`, `${c}.400`]
               : [`${c}.600`, `${c}.300`],
             color: isGray(c)
               ? [`inherit`, `${c}.400`]
               : [`${c}.600`, `${c}.200`],
+            _hover: {
+              bg: ['transparent', 'transparent'],
+            },
           },
           _hover: {
             bg: ['gray.200', 'whiteAlpha.100'],

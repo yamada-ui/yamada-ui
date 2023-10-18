@@ -80,7 +80,7 @@ export type FilterProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `filter` property.
    */
-  filter?: Token<CSS.Property.Filter, unknown, Y, M>
+  filter?: Token<CSS.Property.Filter | 'auto', unknown, Y, M>
   /**
    * If `filter=auto`, sets the value of `--ui-blur`.
    */
@@ -120,7 +120,7 @@ export type FilterProps<Y = 'responsive', M = 'colorMode'> = {
   /**
    * The CSS `backdrop-filter` property.
    */
-  backdropFilter?: Token<CSS.Property.BackdropFilter, unknown, Y, M>
+  backdropFilter?: Token<CSS.Property.BackdropFilter | 'auto', unknown, Y, M>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.
    */

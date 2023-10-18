@@ -13,9 +13,9 @@ import { tokens } from './tokens'
 
 const colorSchemes = [
   'gray',
-  'zinc',
-  'neutral',
-  'stone',
+  // 'zinc',
+  // 'neutral',
+  // 'stone',
   'red',
   'rose',
   'pink',

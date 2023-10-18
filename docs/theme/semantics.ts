@@ -1,6 +1,6 @@
-import { Semantics } from '@yamada-ui/react'
+import { ThemeSemantics } from '@yamada-ui/react'
 
-export const semantics: Semantics = {
+export const semantics: ThemeSemantics = {
   colors: {
     muted: ['blackAlpha.700', 'whiteAlpha.700'],
   },

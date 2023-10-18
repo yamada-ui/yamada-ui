@@ -83,7 +83,7 @@ const getValidChildren = (
     const firstChild = children.at(0)
     const lastChild = children.at(-1)
 
-    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)\s*$/) ?? []
+    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)$/) ?? []
     const [, lastChildContent] = lastChild.value.match(/([\s\S]*?)\s*:::$/) ?? []
 
     if (!name) throw new Error()
@@ -115,12 +115,10 @@ const getAttributes = (content: string = ''): { attributes: any[]; resolvedConte
     value: value.trim(),
   }))
 
-  const resolvedContent = content.replace(reg, '').trim()
+  const resolvedContent = content.replace(reg, '').replace(/^\s+/, '')
 
   return { attributes, resolvedContent }
 }
-
-;[{ type: 'mdxJsxAttribute', name: 'status', value: 'error' }]
 
 const insertElement =
   ({
@@ -182,7 +180,7 @@ const Doc = defineDocumentType(() => ({
       options: ['New', 'Considering', 'Planned', 'Experimental'],
     },
     tags: { type: 'list', of: { type: 'string' } },
-    is_expand: { type: 'boolean', default: false },
+    is_expanded: { type: 'boolean', default: false },
     is_active: { type: 'boolean', default: true },
     is_tabs: { type: 'boolean', default: false },
     with_table_of_contents: { type: 'boolean', default: true },
@@ -190,7 +188,7 @@ const Doc = defineDocumentType(() => ({
     with_children_description: { type: 'boolean', default: true },
     with_description: { type: 'boolean', default: false },
     version: { type: 'string' },
-    package: { type: 'string' },
+    package_name: { type: 'string' },
     release_url: { type: 'string' },
     release_date: { type: 'string' },
   },
@@ -203,7 +201,7 @@ const Doc = defineDocumentType(() => ({
         title,
         locale: getLocale(_raw.flattenedPath),
         paths: omitLocaleSlug(_raw.flattenedPath).split('/'),
-        editUrl: `${CONSTANT.SNS.GITHUB.EDIT_URL}/${_id}`,
+        editUrl: `${CONSTANT.SNS.GITHUB.DOC_EDIT_URL}/${_id}`,
         contents: getTableOfContents(body.raw, table_of_contents_max_lv),
       }),
     },

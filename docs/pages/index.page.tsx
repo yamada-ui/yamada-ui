@@ -4,17 +4,16 @@ import { Section } from 'components/layouts'
 import { SEO, Arrow, Github } from 'components/media-and-icons'
 import { NextLinkButton } from 'components/navigation'
 import { CONSTANT } from 'constant'
-import { useConfigs } from 'contexts/configs-context'
 import { useI18n } from 'contexts/i18n-context'
 import { PageProvider } from 'contexts/page-context'
 import { TopLayout } from 'layouts/top-layout'
 import { getStaticCommonProps } from 'utils/next'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
+// type PageProps = InferGetStaticPropsType<typeof getServerSideProps>
 
 const Page: NextPage<PageProps> = ({ docs, tree }) => {
   const { t, tc } = useI18n()
-  const { colorScheme } = useConfigs()
 
   return (
     <PageProvider value={{ docs, tree }}>
@@ -31,7 +30,7 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
               textAlign='center'
             >
               {tc('home.hero.heading', (str) => (
-                <Text as='span' color={`${colorScheme}.600`}>
+                <Text as='span' color='primary'>
                   {str}
                 </Text>
               ))}
@@ -78,3 +77,4 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
 export default Page
 
 export const getStaticProps = getStaticCommonProps
+// export const getServerSideProps = getServerSideCommonProps

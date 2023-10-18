@@ -8,7 +8,7 @@ type PageContext = {
   breadcrumbs?: Doc[]
   childrenTree?: DocWithChildren[]
   pagination?: DocPagination
-}
+} & Partial<Omit<Doc, 'body' | 'data'>>
 
 export const [PageProvider, usePage] = createContext<PageContext>({
   strict: true,

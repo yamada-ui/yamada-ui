@@ -11,13 +11,11 @@ import {
 } from '@yamada-ui/react'
 import { FC } from 'react'
 import { Github, Twitter } from 'components/media-and-icons'
-import { useConfigs } from 'contexts/configs-context'
 
 export type MemberProps = StackProps &
   Pick<AvatarProps, 'name' | 'src'> & { description: string; github?: string; twitter?: string }
 
 export const Member: FC<MemberProps> = ({ name, src, description, github, twitter, ...rest }) => {
-  const { colorScheme } = useConfigs()
   return (
     <HStack alignItems='flex-start' gap='6' {...rest}>
       <Avatar name={name} size='xl' src={src} />
@@ -31,12 +29,12 @@ export const Member: FC<MemberProps> = ({ name, src, description, github, twitte
               href={github}
               target='_blank'
               aria-label={`GitHub profile of ${name}`}
-              color={[`${colorScheme}.600`, `${colorScheme}.400`]}
+              color={[`primary.600`, `primary.400`]}
               _hover={{
-                color: [`${colorScheme}.500`, `${colorScheme}.300`],
+                color: [`primary.500`, `primary.300`],
               }}
               _active={{
-                color: [`${colorScheme}.700`, `${colorScheme}.500`],
+                color: [`primary.700`, `primary.500`],
               }}
             >
               <Github />
@@ -48,12 +46,12 @@ export const Member: FC<MemberProps> = ({ name, src, description, github, twitte
               href={twitter}
               target='_blank'
               aria-label={`Twitter ${name}`}
-              color={[`${colorScheme}.600`, `${colorScheme}.400`]}
+              color={[`primary.600`, `primary.400`]}
               _hover={{
-                color: [`${colorScheme}.500`, `${colorScheme}.300`],
+                color: [`primary.500`, `primary.300`],
               }}
               _active={{
-                color: [`${colorScheme}.700`, `${colorScheme}.500`],
+                color: [`primary.700`, `primary.500`],
               }}
             >
               <Twitter />

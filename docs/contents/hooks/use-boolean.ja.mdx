@@ -1,8 +1,28 @@
 ---
 title: useBoolean
-description: このページは現在作成中です。
+description: '`useBoolean`は、`on`・`off`・`toggle`関数を使用して真偽値を管理するために使用されるカスタムフックです。'
+package_name: '@yamada-ui/use-boolean'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useBoolean } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const [flg, { toggle }] = useBoolean()
+
+return (
+  <>
+    <Text>state: {String(flg)}</Text>
+
+    <Button mt='md' onClick={toggle}>
+      Click me to toggle the boolean value
+    </Button>
+  </>
+)
+```

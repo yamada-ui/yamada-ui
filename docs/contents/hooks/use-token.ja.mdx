@@ -1,8 +1,28 @@
 ---
 title: useToken
-description: このページは現在作成中です。
+description: '`useToken`は、テーマからトークンを取得するカスタムフックです。'
+package_name: '@yamada-ui/use-token'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useToken } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const bg = useToken('colors', 'primary')
+
+return (
+  <Box bg={bg} p='md' rounded='md' color='white'>
+    Primary for color tokens is "{bg}"
+  </Box>
+)
+```
+
+:::note
+テーマをもっと学びたい場合は、[こちら](/docs/styled-system/theming)をご覧ください。
+:::

@@ -3,7 +3,6 @@ import { themes } from 'prism-react-renderer'
 import { FC, useState } from 'react'
 import { Highlight } from './code-block'
 import { CopyButton } from 'components/forms'
-import { useConfigs } from 'contexts/configs-context'
 
 type PackageMangerNames = 'pnpm' | 'npm' | 'yarn'
 
@@ -34,7 +33,6 @@ export type PackageManagersProps = BoxProps & {
 }
 
 export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand, ...rest }) => {
-  const { colorScheme } = useConfigs()
   const [selectedPackageName, setSelectedPackageName] = useState<string>('pnpm')
   const language = 'bash'
   const code = getCode(selectedPackageName, packageNameOrCommand)
@@ -56,7 +54,7 @@ export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand
               color={['whiteAlpha.700', 'whiteAlpha.600']}
               _selected={{
                 color: ['white', 'white'],
-                borderColor: [`${colorScheme}.400`, `${colorScheme}.300`],
+                borderColor: [`primary.400`, `primary.300`],
               }}
               onClick={() => setSelectedPackageName(name)}
               _focusVisible={{ bg: 'whiteAlpha.50' }}

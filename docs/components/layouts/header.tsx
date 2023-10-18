@@ -29,6 +29,7 @@ import {
   forwardRef,
   mergeRefs,
   useBreakpoint,
+  useBreakpointValue,
   useColorMode,
   useDisclosure,
   useMotionValueEvent,
@@ -158,10 +159,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       <ThemeSchemeButton display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }} />
 
       {CONSTANT.I18N.LOCALES.length > 1 ? (
-        <I18nButton
-          menuProps={{ placement: isMobile ? 'bottom' : 'bottom-end' }}
-          display={{ base: 'inline-flex', md: !isMobile ? 'none' : undefined }}
-        />
+        <I18nButton display={{ base: 'inline-flex', md: !isMobile ? 'none' : undefined }} />
       ) : null}
 
       <ColorModeButton />
@@ -196,10 +194,28 @@ type I18nButtonProps = IconButtonProps & {
 }
 
 const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
+  const padding = useBreakpointValue({ base: 32, md: 16 })
   const { locale, changeLocale } = useI18n()
 
   return (
-    <Menu placement='bottom-end' restoreFocus={false} {...menuProps}>
+    <Menu
+      placement='bottom'
+      modifiers={[
+        {
+          name: 'preventOverflow',
+          options: {
+            padding: {
+              top: padding,
+              bottom: padding,
+              left: padding,
+              right: padding,
+            },
+          },
+        },
+      ]}
+      restoreFocus={false}
+      {...menuProps}
+    >
       <MenuButton
         as={IconButton}
         aria-label='Open language switching menu'
@@ -230,10 +246,28 @@ type ColorModeButtonProps = IconButtonProps & {
 }
 
 const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) => {
+  const padding = useBreakpointValue({ base: 32, md: 16 })
   const { colorMode, internalColorMode, changeColorMode } = useColorMode()
 
   return (
-    <Menu placement='bottom-end' restoreFocus={false} {...menuProps}>
+    <Menu
+      placement='bottom'
+      modifiers={[
+        {
+          name: 'preventOverflow',
+          options: {
+            padding: {
+              top: padding,
+              bottom: padding,
+              left: padding,
+              right: padding,
+            },
+          },
+        },
+      ]}
+      restoreFocus={false}
+      {...menuProps}
+    >
       <MenuButton
         as={IconButton}
         aria-label='Open color mode switching menu'
@@ -278,6 +312,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
       isOpen={isOpen}
       onOpen={onOpen}
       onClose={onClose}
+      placement='bottom'
       closeOnButton={false}
       restoreFocus={false}
     >
@@ -358,6 +393,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
           top='0'
           left='0'
           right='0'
+          zIndex='kurillin'
           w='full'
           h='3'
           bgGradient={[
@@ -370,6 +406,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
           bottom='0'
           left='0'
           right='0'
+          zIndex='kurillin'
           w='full'
           h='3'
           bgGradient={[

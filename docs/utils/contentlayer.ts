@@ -21,11 +21,11 @@ export const getTree =
         return paths.length === lv + 1 && paths.join('/').startsWith(parentPaths.join('/'))
       })
       .sort((a, b) => a.order - b.order)
-      .map(({ is_expand, ...doc }) => {
+      .map(({ is_expanded, ...doc }) => {
         return {
           ...doc,
-          is_expand:
-            is_expand ||
+          is_expanded:
+            is_expanded ||
             doc.data.paths.every((path: string, index: number) => path === paths[index]),
           children: getTree(docs, doc.data.paths)(paths),
         }

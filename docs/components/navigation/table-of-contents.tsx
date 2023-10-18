@@ -6,10 +6,8 @@ import {
   StackProps,
   Text,
   VStack,
+  dataAttr,
   forwardRef,
-  transparentizeColor,
-  useColorMode,
-  useTheme,
   useToken,
 } from '@yamada-ui/react'
 import { memo, useState } from 'react'
@@ -23,10 +21,9 @@ export type TableOfContentsProps = StackProps & { contents: Content[] }
 
 export const TableOfContents = memo(
   forwardRef<TableOfContentsProps, 'div'>(({ contents, ...rest }, ref) => {
-    const [activeId, setActiveId] = useState<string>('')
+    const [selectedId, setSelectedId] = useState<string>('')
     const pl = useToken('spaces', '4')
-    const { theme } = useTheme()
-    const { colorMode } = useColorMode()
+
     const { t } = useI18n()
 
     useEventListener(
@@ -42,7 +39,7 @@ export const TableOfContents = memo(
           if (el.getBoundingClientRect().top < 100) currentId = id
         }
 
-        setActiveId(currentId)
+        setSelectedId(currentId)
       },
       () => document,
       { passive: true },
@@ -66,33 +63,53 @@ export const TableOfContents = memo(
 
           <List gap='0' fontSize='sm' color='muted' ml='sm'>
             {contents.map(({ lv, title, id }) => {
-              const isActive = activeId == id
+              const isSelected = selectedId == id
 
               return (
                 <ListItem
                   key={id}
                   as='a'
                   href={`#${id}`}
+                  userSelect='none'
                   pl={`calc(${lv - 1} * ${pl})`}
                   py='sm'
+                  outline='0'
                   borderLeftWidth='1px'
-                  borderLeftColor={isActive ? `primary.400` : 'border'}
-                  bg={
-                    isActive
-                      ? [
-                          transparentizeColor(`primary.200`, 0.32)(theme, colorMode),
-                          transparentizeColor(`primary.400`, 0.16)(theme, colorMode),
-                        ]
-                      : undefined
-                  }
+                  borderLeftColor={isSelected ? `primary.400` : 'border'}
+                  data-selected={dataAttr(isSelected)}
+                  _selected={{
+                    color: [`black`, 'white'],
+                    bg: [`primary.300`, `primary.300`],
+                  }}
                   _hover={{
-                    color: isActive ? undefined : ['black', 'white'],
+                    color: isSelected ? undefined : ['black', 'white'],
+                  }}
+                  _focusVisible={{
+                    boxShadow: 'inner-outline',
                   }}
                   transitionProperty='colors'
                   transitionDuration='normal'
-                  isTruncated
+                  position='relative'
+                  _before={{
+                    content: "''",
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    bg: 'white',
+                    opacity: 0.8,
+                  }}
+                  _dark={{
+                    _before: {
+                      bg: 'black',
+                      opacity: 0.86,
+                    },
+                  }}
                 >
-                  <TextWithCode isTruncated>{title}</TextWithCode>
+                  <TextWithCode position='relative' zIndex='yamcha' isTruncated>
+                    {title}
+                  </TextWithCode>
                 </ListItem>
               )
             })}
@@ -104,6 +121,7 @@ export const TableOfContents = memo(
           top='0'
           left='0'
           right='0'
+          zIndex='kurillin'
           w='full'
           h='4'
           bgGradient={[
@@ -116,6 +134,7 @@ export const TableOfContents = memo(
           bottom='0'
           left='0'
           right='0'
+          zIndex='kurillin'
           w='full'
           h='4'
           bgGradient={[

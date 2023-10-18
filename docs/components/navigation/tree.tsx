@@ -7,12 +7,9 @@ import {
   ListItem,
   ListProps,
   Text,
+  dataAttr,
   forwardRef,
   useBoolean,
-  useTheme,
-  useColorMode,
-  transparentizeColor,
-  isGray,
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { FC, memo, useEffect } from 'react'
@@ -39,17 +36,17 @@ export const Tree = memo(
 type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ title, menu, slug, label, children, isNested, is_expand }) => {
+  ({ title, menu, slug, label, children, isNested, is_expanded }) => {
     if (menu) title = menu
 
-    const [isOpen, { on, toggle }] = useBoolean(is_expand)
+    const [isOpen, { on, toggle }] = useBoolean(is_expanded)
 
     useEffect(() => {
-      if (is_expand) on()
-    }, [is_expand, on])
+      if (is_expanded) on()
+    }, [is_expanded, on])
 
-    const isChildActive = children.some(({ is_expand }) => is_expand)
-    const isActive = !isChildActive && is_expand
+    const isChildExpanded = children.some(({ is_expanded }) => is_expanded)
+    const isSelected = !isChildExpanded && is_expanded
     const withToggleButton = !!children.length
 
     return (
@@ -60,7 +57,7 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
             label,
             slug,
             isNested,
-            isActive,
+            isSelected,
             isOpen,
             withToggleButton,
             onToggle: toggle,
@@ -85,54 +82,58 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
 RecursiveListItem.displayName = 'RecursiveListItem'
 
 type ListItemLinkProps = Pick<RecursiveListItemProps, 'title' | 'label' | 'slug' | 'isNested'> & {
-  isActive?: boolean
+  isSelected?: boolean
   isOpen?: boolean
   withToggleButton?: boolean
   onToggle?: () => void
 }
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
-  ({ title, label, slug, isNested, isOpen, isActive, withToggleButton, onToggle }) => {
-    const { theme, themeScheme } = useTheme()
-    const { colorMode } = useColorMode()
-
+  ({ title, label, slug, isNested, isOpen, isSelected, withToggleButton, onToggle }) => {
     return (
       <HStack
+        data-selected={dataAttr(isSelected)}
         cursor='pointer'
         userSelect='none'
         rounded='md'
         gap='0'
-        color={
-          isActive
-            ? isGray(themeScheme)
-              ? [`inherit`, `primary.200`]
-              : [`primary.600`, `primary.200`]
-            : isNested
-            ? 'muted'
-            : undefined
-        }
-        bg={
-          isActive
-            ? isGray(themeScheme)
-              ? [`primary.200`, `whiteAlpha.200`]
-              : [`primary.100`, transparentizeColor(`primary.200`, 0.12)(theme, colorMode)]
-            : undefined
-        }
+        color={isNested ? 'muted' : undefined}
+        _selected={{
+          color: [`black`, 'white'],
+          bg: [`primary.300`, `primary.300`],
+        }}
         _hover={{
-          color: isActive ? undefined : ['black', 'white'],
-          bg: isActive
-            ? undefined
-            : [transparentizeColor(`gray.200`, 0.64)(theme, colorMode), 'whiteAlpha.100'],
+          color: ['black', 'white'],
+          bg: !isSelected ? [`gray.300`, 'whiteAlpha.400'] : undefined,
         }}
         _active={{
-          bg: isActive ? undefined : ['gray.200', 'whiteAlpha.200'],
+          bg: !isSelected ? ['gray.400', 'whiteAlpha.500'] : undefined,
         }}
         transitionProperty='colors'
         transitionDuration='normal'
+        position='relative'
+        _before={{
+          content: "''",
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bg: 'white',
+          opacity: 0.8,
+        }}
+        _dark={{
+          _before: {
+            bg: 'black',
+            opacity: 0.86,
+          },
+        }}
       >
         <Text
           as={Link}
           href={slug}
+          position='static'
+          zIndex='yamcha'
           display='inline-flex'
           pl='3'
           py='sm'
@@ -152,8 +153,9 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         {withToggleButton ? (
           <Center
             as='button'
-            px='3'
-            py='sm'
+            position='static'
+            zIndex='yamcha'
+            p='sm'
             fontSize='1.5em'
             rounded='md'
             boxSizing='content-box'

@@ -11,6 +11,12 @@ import { includes } from './utils/array'
 import { toCamelCase } from './utils/assertion'
 import { locales, otherLocales } from './utils/i18n'
 
+const PICK_DOCUMENT_TYPES = process.env.PICK_DOCUMENT_TYPES
+  ? process.env.PICK_DOCUMENT_TYPES.split(',').map((str) => str.trim())
+  : []
+const OMIT_DOCUMENT_TYPES = process.env.OMIT_DOCUMENT_TYPES
+  ? process.env.OMIT_DOCUMENT_TYPES.split(',').map((str) => str.trim())
+  : []
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
 const omitLocaleSlug = (path: string): string => {
@@ -215,12 +221,42 @@ export const documentTypeNames = [
   'figma',
   'changelog',
   'community',
-] as const
+]
 
-const documentTypes = documentTypeNames.map((name) =>
+let resolvedDocumentTypeNames = documentTypeNames
+
+if (OMIT_DOCUMENT_TYPES.length) {
+  if (
+    !OMIT_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
+  ) {
+    throw new Error('Invalid document name. Please check ".env."')
+  }
+
+  resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter(
+    (documentTypeName) => !OMIT_DOCUMENT_TYPES.includes(documentTypeName),
+  )
+}
+
+if (PICK_DOCUMENT_TYPES.length) {
+  if (
+    !PICK_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
+  ) {
+    throw new Error('Invalid document name. Please check ".env."')
+  }
+
+  resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter((documentTypeName) =>
+    PICK_DOCUMENT_TYPES.includes(documentTypeName),
+  )
+}
+
+if (!resolvedDocumentTypeNames.length) {
+  throw new Error('The document generate is required. Please check ".env."')
+}
+
+const documentTypes = resolvedDocumentTypeNames.map((documentTypeName) =>
   defineDocumentType(() => ({
-    name: toCamelCase(name),
-    filePathPattern: `${name}/**/*.mdx`,
+    name: toCamelCase(documentTypeName),
+    filePathPattern: `${documentTypeName}/**/*.mdx`,
     ...documentDef,
   })),
 )

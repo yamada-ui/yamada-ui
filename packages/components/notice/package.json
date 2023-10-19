@@ -48,6 +48,9 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/alert": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
+    "@yamada-ui/use-timeout": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

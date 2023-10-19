@@ -49,7 +49,11 @@
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/use-token": "workspace:*",
-    "@yamada-ui/icon": "workspace:*"
+    "@yamada-ui/motion": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
+    "@yamada-ui/use-timeout": "workspace:*",
+    "@yamada-ui/icon": "workspace:*",
+    "react-remove-scroll": "^2.5.4"
   },
   "devDependencies": {
     "react": "^18.0.0",

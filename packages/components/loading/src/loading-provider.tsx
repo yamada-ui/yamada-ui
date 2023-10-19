@@ -6,7 +6,6 @@ import {
   LoadingConfigOptions,
   HTMLUIProps,
 } from '@yamada-ui/core'
-import { Loading } from '@yamada-ui/loading'
 import {
   AnimatePresence,
   Motion,
@@ -37,6 +36,7 @@ import {
   RefObject,
 } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
+import { Loading } from './loading'
 
 type LoadingContextProps = {
   /**
@@ -101,7 +101,7 @@ type LoadingState = {
 
 export type LoadingProviderProps = PropsWithChildren<ThemeConfig['loading']>
 
-export const LoadingContext = createContext({} as LoadingContext)
+const LoadingContext = createContext({} as LoadingContext)
 
 type Refs = {
   isLoading: RefObject<LoadingContextProps['isLoading']>

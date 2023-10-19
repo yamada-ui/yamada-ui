@@ -7,12 +7,12 @@ import {
   GlobalStyle,
   ThemeSchemeManager,
 } from '@yamada-ui/core'
+import { LoadingProvider } from '@yamada-ui/loading'
+import { NoticeProvider } from '@yamada-ui/notice'
 import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
 import { Dict } from '@yamada-ui/utils'
 import { FC, ReactNode } from 'react'
 import { EnvironmentProvider, Environment } from './environment-provider'
-import { LoadingProvider } from './loading-provider'
-import { NoticeProvider } from './notice-provider'
 
 export type UIProviderProps = {
   /**

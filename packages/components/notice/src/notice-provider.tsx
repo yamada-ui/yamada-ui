@@ -6,11 +6,11 @@ import {
   MotionVariants,
   MotionStyle,
 } from '@yamada-ui/motion'
-import { noticeStore, NoticeOptions } from '@yamada-ui/notice'
 import { Portal } from '@yamada-ui/portal'
 import { useTimeout } from '@yamada-ui/use-timeout'
 import { runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
 import { FC, memo, useEffect, useState, useSyncExternalStore } from 'react'
+import { noticeStore, NoticeOptions } from './notice'
 
 export type NoticeProviderProps = Omit<
   Required<ThemeConfig>['notice'],

@@ -5,7 +5,6 @@ export const NativeTable: ComponentMultiStyle = {
   baseStyle: {
     container: {},
     table: {
-      h: '100%',
       fontVariantNumeric: 'lining-nums tabular-nums',
       borderCollapse: 'collapse',
     },

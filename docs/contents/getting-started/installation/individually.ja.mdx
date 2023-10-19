@@ -6,7 +6,7 @@ order: 2
 ---
 
 :::note status=warning
-[基本を学ぶ](/docs/getting-started/installation/basic)や[応用を学ぶ](/docs/getting-started/installation/advanced)など多くのページは、[すべて](/docs/getting-started/installation)でインストールしている想定で説明されています。
+[基本を学ぶ](/getting-started/installation/basic)や[応用を学ぶ](/getting-started/installation/advanced)など多くのページは、[すべて](/getting-started/installation)でインストールしている想定で説明されています。
 :::
 
 ## パッケージをインストールする
@@ -31,7 +31,7 @@ Yamada UIのコアやユーティリティをインストールします。
 
 ## `ThemeProvider`を追加する
 
-コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマ](/docs/styled-system/theming/default-theme)と[コンフィグ](/docs/styled-system/configure/default-config)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
+コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマ](/styled-system/theming/default-theme)と[コンフィグ](/styled-system/configure/default-config)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
 ```tsx live=false highlight={6,7,8,11}
 import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
@@ -70,7 +70,7 @@ const App = () => {
 ```
 
 :::note
-テーマやコンフィグをカスタマイズしたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)と[コンフィグをカスタマイズする](/docs/styled-system/configure/customize-config)をご覧ください。
+テーマやコンフィグをカスタマイズしたい場合は、[テーマをカスタマイズする](/styled-system/theming/customize-theme)と[コンフィグをカスタマイズする](/styled-system/configure/customize-config)をご覧ください。
 :::
 
 :::note status=warning
@@ -96,14 +96,14 @@ const Demo = () => {
 Yamada UIを知るために、基本やテーマを学んでみませんか？😎
 
 <CardContainer>
-  <LinkCard href='/docs/getting-started/basics' />
+  <LinkCard href='/getting-started/basics' />
   <LinkCard
-    href='/docs/styled-system/theming'
+    href='/styled-system/theming'
     title='テーマについて学ぶ'
     description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
   />
   <LinkCard
-    href='/docs/components'
+    href='/components'
     title='コンポーネントを探索する'
     description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
   />

@@ -10,15 +10,15 @@ import {
   Tabs,
   LinkCards,
   EditPageLink,
-  DocLinks,
+  RelatedLinks,
 } from 'components/navigation'
 import { TextWithCode } from 'components/typography'
-import { Data, Doc } from 'contentlayer/generated'
+import { DocumentData, DocumentTypes } from 'contentlayer/generated'
 import { usePage } from 'contexts/page-context'
 
-export type DocLayoutProps = PropsWithChildren<Doc & Data>
+export type DocumentLayoutProps = PropsWithChildren<DocumentTypes & DocumentData>
 
-export const DocLayout: FC<DocLayoutProps> = ({
+export const DocumentLayout: FC<DocumentLayoutProps> = ({
   title,
   description,
   editUrl,
@@ -29,7 +29,7 @@ export const DocLayout: FC<DocLayoutProps> = ({
   contents,
   children,
 }) => {
-  const { childrenTree } = usePage()
+  const { documentChildrenTree } = usePage()
 
   return (
     <>
@@ -52,14 +52,14 @@ export const DocLayout: FC<DocLayoutProps> = ({
 
             {with_description ? <TextWithCode mt='md'>{description}</TextWithCode> : null}
 
-            <DocLinks />
+            <RelatedLinks />
 
             <Tabs />
 
             <Box>
               {children}
 
-              {with_children && childrenTree.length ? (
+              {with_children && documentChildrenTree.length ? (
                 <>
                   <Divider mt='xl' />
 

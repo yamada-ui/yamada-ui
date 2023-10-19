@@ -16,7 +16,7 @@ Yamada UIは、他のUIライブラリと同様にテーマという概念が存
 
 テーマは、コンポーネントのスタイルやカラー・スペース・フォントサイズ・その他多くのプロパティのトークンが定義されている変更可能なオブジェクトです。
 
-プロジェクトに[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を設定するには、アプリケーションのルートに`UIProvider`を追加する必要があります。
+プロジェクトに[デフォルトのテーマ](/styled-system/theming/default-theme)を設定するには、アプリケーションのルートに`UIProvider`を追加する必要があります。
 
 ```tsx live=false highlight={5,7}
 import { UIProvider } from '@yamada-ui/react'
@@ -31,7 +31,7 @@ const App = () => {
 ```
 
 :::note
-[デフォルトのテーマ](/docs/styled-system/theming/default-theme)は、`UIProvider`のなかに含まれています。
+[デフォルトのテーマ](/styled-system/theming/default-theme)は、`UIProvider`のなかに含まれています。
 :::
 
 ### テーマをカスタマイズする
@@ -57,11 +57,11 @@ const App = () => {
 これでアプリケーション全体の余白が変更されました。
 
 :::note status=warning
-`extendTheme`は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
+`extendTheme`は、[デフォルトのテーマ](/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合、[デフォルトのテーマ](/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
 :::
 
 :::note
-テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[コンポーネントのスタイル](/docs/styled-system/theming/component-style)をご覧ください。
+テーマをもっと学びたい場合は、[テーマをカスタマイズする](/styled-system/theming/customize-theme)や[コンポーネントのスタイル](/styled-system/theming/component-style)をご覧ください。
 :::
 
 ### セマンティックトークンを変更する
@@ -123,7 +123,7 @@ const App = () => {
 ```
 
 :::note
-セマンティックトークンをもっと学びたい場合は、[こちら](/docs/styled-system/semantic-tokens)をご覧ください。
+セマンティックトークンをもっと学びたい場合は、[こちら](/styled-system/semantic-tokens)をご覧ください。
 :::
 
 ### ローディングを使う
@@ -138,7 +138,7 @@ Yamada UIは、アプリケーションで必要な`ローディングアニメ�
 - `finish`: ローディングアニメーションを終了します。
 
 :::note status=warning
-`custom`は、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
+`custom`は、[デフォルトのコンフィグ](/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](/styled-system/loading)をご覧ください。
 :::
 
 ```tsx functional=true
@@ -194,7 +194,7 @@ return (
 :::
 
 :::note
-ローディングをもっと知りたい場合は、[こちら](/docs/styled-system/loading)をご覧ください。
+ローディングをもっと知りたい場合は、[こちら](/styled-system/loading)をご覧ください。
 :::
 
 ### 通知を使う
@@ -226,7 +226,7 @@ return (
 :::
 
 :::note
-通知をもっと知りたい場合は、[こちら](/docs/styled-system/notification)をご覧ください。
+通知をもっと知りたい場合は、[こちら](/styled-system/notification)をご覧ください。
 :::
 
 ## スタイルについて
@@ -265,7 +265,7 @@ Yamada UIは、コンポーネントに`props`を渡すだけでスタイルを�
 ```
 
 :::note
-`Style props`やショートコードをもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
+`Style props`やショートコードをもっと学びたい場合は、[こちら](/styled-system/style-props)をご覧ください。
 :::
 
 ### コンポーネント
@@ -322,7 +322,7 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 
 すべてのスタイルの`props`は、オブジェクトも受け入れます。まずは、背景色を変えてみましょう。
 
-- オブジェクトのキーは、テーマの[ブレイクポイント](/docs/getting-started/basics#ブレイクポイントについて)で設定されているキーを定義します。
+- オブジェクトのキーは、テーマの[ブレイクポイント](/getting-started/basics#ブレイクポイントについて)で設定されているキーを定義します。
 - オブジェクトの値は、キーで設定するスタイルの値を定義します。
 
 ```tsx
@@ -363,7 +363,7 @@ Yamada UIは、すぐに使えるレスポンシブスタイルをサポート�
 ```
 
 :::note
-レスポンシブスタイルをもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+レスポンシブスタイルをもっと学びたい場合は、[こちら](/styled-system/responsive-styles)をご覧ください。
 :::
 
 :::note status=warning
@@ -372,7 +372,7 @@ Yamada UIは、レスポンシブデザインに`@media(max-width)`のメディ�
 
 ### ブレイクポイントについて
 
-レスポンシブスタイルは、テーマで定義されたブレイクポイントを参照します。Yamada UIには、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)があり、ブレイクポイントが定義されています。
+レスポンシブスタイルは、テーマで定義されたブレイクポイントを参照します。Yamada UIには、[デフォルトのテーマ](/styled-system/theming/default-theme)があり、ブレイクポイントが定義されています。
 
 実際に定義されている値はこちらです。
 
@@ -387,7 +387,7 @@ export const breakpoints = {
 ```
 
 :::note
-ブレイクポイントを変更したい場合は、[こちら](/docs/docs/styled-system/responsive-styles#ブレイクポイントをカスタマイズする)をご覧ください。
+ブレイクポイントを変更したい場合は、[こちら](/styled-system/responsive-styles#ブレイクポイントをカスタマイズする)をご覧ください。
 :::
 
 ## カラーモードについて
@@ -413,7 +413,7 @@ Yamada UIのすべてのコンポーネントは、ダークモードをサポ�
 
 ### カラーモードを切り替える
 
-カラーモードは、[デフォルトのコンフィグ](/docs/styled-system/configure/default-config)に設定されています。
+カラーモードは、[デフォルトのコンフィグ](/styled-system/configure/default-config)に設定されています。
 
 実際に定義されている値はこちらです。
 
@@ -434,7 +434,7 @@ export const config: ThemeConfig = {
 :::
 
 :::note
-コンフィグを変更したい場合は、[こちら](/docs/styled-system/configure/customize-config)ををご覧ください。
+コンフィグを変更したい場合は、[こちら](/styled-system/configure/customize-config)ををご覧ください。
 :::
 
 アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。
@@ -464,7 +464,7 @@ return (
 ```
 
 :::note
-カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードを学びたい場合は、[こちら](/docs/styled-system/color-mode)をご覧ください。
+カラーモードは、`localStorage`や`cookies`を用いて実装されています。カラーモードを学びたい場合は、[こちら](/styled-system/color-mode)をご覧ください。
 :::
 
 ## アニメーションについて
@@ -485,7 +485,7 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 - `playState`: アニメーションを一時停止したり、再開したりするかを設定します。
 
 :::note
-アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
+アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
 :::
 
 ```tsx functional=true
@@ -550,7 +550,7 @@ return (
 ```
 
 :::note
-アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
+アニメーションをもっと学びたい場合は、[こちら](/styled-system/animation)をご覧ください。
 :::
 
 ## Congratulations!
@@ -561,21 +561,21 @@ return (
 
 `普通の山田`になったアナタへ、山田からこの言葉を贈ります。
 
-「次は、[応用で学ぶ](/docs/getting-started/advanced)で待ってるねっ///」😘
+「次は、[応用で学ぶ](/getting-started/advanced)で待ってるねっ///」😘
 
 ## もっと学習をする
 
 Yamada UIをもっと知るために、応用やテーマを学んでみませんか？😎
 
 <CardContainer>
-  <LinkCard href='/docs/getting-started/advanced' />
+  <LinkCard href='/getting-started/advanced' />
   <LinkCard
-    href='/docs/styled-system/theming'
+    href='/styled-system/theming'
     title='テーマについて学ぶ'
     description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
   />
   <LinkCard
-    href='/docs/components'
+    href='/components'
     title='コンポーネントを探索する'
     description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
   />

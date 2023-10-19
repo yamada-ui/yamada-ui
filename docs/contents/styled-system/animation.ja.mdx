@@ -24,7 +24,7 @@ Yamada UIは、CSSの`keyframes`のように記述できる`useAnimation`と`use
 - `playState`: アニメーションを一時停止したり、再開したりするかを設定します。
 
 :::note
-アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
+アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
 :::
 
 ```tsx functional=true
@@ -190,7 +190,7 @@ return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnima
 ```
 
 :::note
-レスポンシブスタイルをもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+レスポンシブスタイルをもっと学びたい場合は、[こちら](/styled-system/responsive-styles)をご覧ください。
 :::
 
 #### カラーモード
@@ -254,7 +254,7 @@ return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
 ```
 
 :::note
-カラーモードをもっと学びたい場合は、[こちら](/docs/styled-system/color-mode)をご覧ください。
+カラーモードをもっと学びたい場合は、[こちら](/styled-system/color-mode)をご覧ください。
 :::
 
 ### `useDynamicAnimation`を使う
@@ -392,7 +392,7 @@ return (
 ### テーマのトークンを使う
 
 :::note status=warning
-テーマのアニメーションのトークンを使用する場合は、まず[テーマの運用](/docs/styled-system/theming/customize-theme#テーマの運用)をご覧ください。
+テーマのアニメーションのトークンを使用する場合は、まず[テーマの運用](/styled-system/theming/customize-theme#テーマの運用)をご覧ください。
 :::
 
 アニメーションのトークンを作成し、テーマに設定します。
@@ -447,7 +447,7 @@ export default extendTheme(customTheme)()
 ```
 
 :::note
-作成したアニメーションのトークンは、型補完をすることをオススメします。型補完は、[CLI](/docs/styled-system/cli)を使用します。
+作成したアニメーションのトークンは、型補完をすることをオススメします。型補完は、[CLI](/styled-system/cli)を使用します。
 :::
 
 作成したトークンは、コンポーネントの`props`の`animation`で指定します。`useAnimation`と`useDynamicAnimation`でも使用することができます。

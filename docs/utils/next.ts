@@ -1,123 +1,113 @@
-import { GetServerSidePropsContext, GetStaticPathsContext, GetStaticPropsContext } from 'next'
+import { GetStaticPathsContext, GetStaticPropsContext } from 'next'
 import { toArray } from './array'
+import { toKebabCase } from './assertion'
 import {
-  getBreadcrumbs,
-  getDoc,
-  getDocs,
-  getPagination,
+  getDocumentBreadcrumbs,
+  getDocument,
+  getDocuments,
+  getDocumentPagination,
   getPath,
-  getTabs,
-  getTree,
-  omitTabDocs,
+  getDocumentTabs,
+  getDocumentTree,
+  omitDocumentTabs,
 } from './contentlayer'
 import { otherLocales } from './i18n'
-import { Data, allDocs } from 'contentlayer/generated'
+import { DocumentData, DocumentTypeNames, allDocuments } from 'contentlayer/generated'
 
-export const getServerSideCommonProps = async ({
-  req,
-  params,
-  locale,
-}: GetServerSidePropsContext) => {
-  const cookies = req.headers.cookie ?? ''
-  const paths = toArray(params?.slug ?? [])
+export const getStaticCommonProps = async ({ locale }: GetStaticPropsContext) => {
+  const documents = getDocuments(locale)
+  const documentTree = getDocumentTree(omitDocumentTabs(documents))()
 
-  const docs = getDocs(locale)
-  const tree = getTree(omitTabDocs(docs))(paths)
-
-  return { props: { cookies, docs, tree } }
+  return { props: { documents, documentTree } }
 }
 
-export const getStaticCommonProps = async ({ params, locale }: GetStaticPropsContext) => {
-  const paths = toArray(params?.slug ?? [])
+export const getStaticDocumentProps =
+  (documentTypeName: DocumentTypeNames) =>
+  async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
+    const paths = [toKebabCase(documentTypeName), ...toArray(params?.slug ?? [])]
 
-  const docs = getDocs(locale)
-  const tree = getTree(omitTabDocs(docs))(paths)
+    const documents = getDocuments(locale)
+    const documentTree = getDocumentTree(omitDocumentTabs(documents))(paths)
+    const document =
+      getDocument(documents, paths, locale) ?? getDocument(documents, paths, defaultLocale)
 
-  return { props: { docs, tree } }
-}
+    const { documentTabs, parentDocument, parentPaths } = getDocumentTabs(documents, document)
+    const documentChildrenTree = getDocumentTree(documents, paths)(paths)
+    const documentBreadcrumbs = getDocumentBreadcrumbs(
+      documents,
+      parentPaths ?? paths,
+      locale,
+      defaultLocale,
+    )
+    const documentPagination = getDocumentPagination(documentTree, parentDocument ?? document)
 
-export const getServerSideDocProps = async ({
-  req,
-  params,
-  locale,
-  defaultLocale,
-}: GetServerSidePropsContext) => {
-  const cookies = req.headers.cookie ?? ''
-  const paths = toArray(params?.slug ?? [])
-
-  const docs = getDocs(locale)
-  const tree = getTree(omitTabDocs(docs))(paths)
-  const doc = getDoc(docs, paths, locale) ?? getDoc(docs, paths, defaultLocale)
-
-  const { tabs, parentDoc, parentPaths } = getTabs(docs, doc)
-  const childrenTree = getTree(docs, paths)(paths)
-  const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale, defaultLocale)
-  const pagination = getPagination(tree, parentDoc ?? doc)
-
-  return { props: { cookies, ...doc, docs, tree, breadcrumbs, childrenTree, tabs, pagination } }
-}
-
-export const getStaticDocProps = async ({
-  params,
-  locale,
-  defaultLocale,
-}: GetStaticPropsContext) => {
-  const paths = toArray(params?.slug ?? [])
-  const docs = getDocs(locale)
-  const tree = getTree(omitTabDocs(docs))(paths)
-  const doc = getDoc(docs, paths, locale) ?? getDoc(docs, paths, defaultLocale)
-
-  const { tabs, parentDoc, parentPaths } = getTabs(docs, doc)
-  const childrenTree = getTree(docs, paths)(paths)
-  const breadcrumbs = getBreadcrumbs(docs, parentPaths ?? paths, locale, defaultLocale)
-  const pagination = getPagination(tree, parentDoc ?? doc)
-
-  return { props: { ...doc, docs, tree, breadcrumbs, childrenTree, tabs, pagination } }
-}
+    return {
+      props: {
+        ...document,
+        documents,
+        documentTree,
+        documentBreadcrumbs,
+        documentChildrenTree,
+        documentTabs,
+        documentPagination,
+      },
+    }
+  }
 
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
-export const getStaticDocPaths = async ({ defaultLocale, locales }: GetStaticPathsContext) => {
-  const docs = locales.flatMap((locale) =>
-    allDocs.filter(({ is_active, _id }) => {
-      if (!is_active) return false
+export const getStaticDocumentPaths =
+  (documentTypeName: DocumentTypeNames) =>
+  async ({ defaultLocale, locales }: GetStaticPathsContext) => {
+    const prefixId = toKebabCase(documentTypeName)
 
-      if (locale === defaultLocale) {
-        const isContains = new RegExp(`\.${OTHER_LOCALES}\.mdx$`).test(_id)
+    const documents = locales.flatMap((locale) =>
+      allDocuments.filter(({ type, is_active, _id }) => {
+        if (!is_active) return false
 
-        return !isContains && _id.endsWith('.mdx')
-      } else {
-        return _id.endsWith(`.${locale}.mdx`)
-      }
-    }),
-  )
+        if (type !== documentTypeName) return false
 
-  const paths = docs
-    .map(({ _id, data }) => {
-      const { locale } = data as Data
-      const path = getPath(_id)
-      const params = { slug: path.split('/').filter((str) => str !== 'index') }
+        if (locale === defaultLocale) {
+          const isContains = new RegExp(`\.${OTHER_LOCALES}\.mdx$`).test(_id)
 
-      const notExistLocales = otherLocales.filter((otherLocale) => {
-        const otherLocaleDoc = docs.find(({ _id, data }) => {
-          const { locale } = data as Data
-          const otherLocalePath = getPath(_id)
+          return !isContains && _id.endsWith('.mdx')
+        } else {
+          return _id.endsWith(`.${locale}.mdx`)
+        }
+      }),
+    )
 
-          return path === otherLocalePath && locale === otherLocale
+    const reg = new RegExp(`^${prefixId}/`)
+
+    const paths = documents
+      .map(({ _id, data }) => {
+        const id = _id.replace(reg, '')
+
+        const { locale } = data as DocumentData
+        const path = getPath(id)
+        const params = { slug: path.split('/').filter((str) => str !== 'index') }
+
+        const notExistLocales = otherLocales.filter((otherLocale) => {
+          const otherLocaleDoc = documents.find(({ _id, data }) => {
+            const id = _id.replace(reg, '')
+            const { locale } = data as DocumentData
+            const otherLocalePath = getPath(id)
+
+            return path === otherLocalePath && locale === otherLocale
+          })
+
+          return !otherLocaleDoc
         })
 
-        return !otherLocaleDoc
+        if (notExistLocales.length) {
+          const otherPaths = notExistLocales.map((locale) => ({ params, locale }))
+
+          return [{ params, locale }, ...otherPaths]
+        } else {
+          return { params, locale }
+        }
       })
+      .flat()
 
-      if (notExistLocales.length) {
-        const otherPaths = notExistLocales.map((locale) => ({ params, locale }))
-
-        return [{ params, locale }, ...otherPaths]
-      } else {
-        return { params, locale }
-      }
-    })
-    .flat()
-
-  return { paths, fallback: false }
-}
+    return { paths, fallback: false }
+  }

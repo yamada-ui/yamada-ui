@@ -1,14 +1,18 @@
 import { createContext } from '@yamada-ui/react'
-import { DocPagination, Doc, DocWithChildren } from 'contentlayer/generated'
+import {
+  DocumentTypesPagination,
+  DocumentTypes,
+  DocumentTypesWithChildren,
+} from 'contentlayer/generated'
 
 type PageContext = {
-  docs: Doc[]
-  tree: DocWithChildren[]
-  tabs?: Doc[]
-  breadcrumbs?: Doc[]
-  childrenTree?: DocWithChildren[]
-  pagination?: DocPagination
-} & Partial<Omit<Doc, 'body' | 'data'>>
+  documents: DocumentTypes[]
+  documentTree: DocumentTypesWithChildren[]
+  documentTabs?: DocumentTypes[]
+  documentBreadcrumbs?: DocumentTypes[]
+  documentChildrenTree?: DocumentTypesWithChildren[]
+  documentPagination?: DocumentTypesPagination
+} & Partial<Omit<DocumentTypes, 'body' | 'data'>>
 
 export const [PageProvider, usePage] = createContext<PageContext>({
   strict: true,

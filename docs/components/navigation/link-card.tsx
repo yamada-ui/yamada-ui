@@ -24,15 +24,15 @@ export type LinkCardProps = CardProps & {
 export const LinkCard = memo(
   forwardRef<LinkCardProps, 'div'>(
     ({ title, label, description, href, with_description = true, ...rest }, ref) => {
-      const { docs } = usePage()
+      const { documents } = usePage()
 
       if (href.startsWith('/')) {
-        const doc = docs.find(({ slug }) => slug === href)
+        const document = documents.find(({ slug }) => slug === href)
 
-        if (doc) {
-          title ??= doc.menu ?? doc.title
-          label ??= doc.label
-          description ??= doc.description
+        if (document) {
+          title ??= document.menu ?? document.title
+          label ??= document.label
+          description ??= document.description
         }
       }
 

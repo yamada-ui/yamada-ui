@@ -7,12 +7,12 @@ order: 2
 すべてのYamada UIのコンポーネントは、テーマからスタイルやトークンを継承します。シナリオによっては、プロジェクトに合わせた`カラー`などをカスタマイズする必要がある場合があります。
 
 :::note status=warning
-テーマをカスタマイズする場合は、`extendTheme`を使用することをオススメします。これは、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合は、[デフォルトのテーマ](/docs/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
+テーマをカスタマイズする場合は、`extendTheme`を使用することをオススメします。これは、[デフォルトのテーマ](/styled-system/theming/default-theme)を継承したテーマを作成します。`extendTheme`を使用しない場合は、[デフォルトのテーマ](/styled-system/theming/default-theme)を継承せず全く新しいテーマになります。
 :::
 
 ## テーマの運用
 
-テーマをカスタマイズした場合、型補完をすることをオススメします。型補完は、[CLI](/docs/styled-system/cli)を使用します。
+テーマをカスタマイズした場合、型補完をすることをオススメします。型補完は、[CLI](/styled-system/cli)を使用します。
 
 :::note status=warning
 `CLI`を使用する場合は、ファイルのデフォルトでエクスポートされているテーマを参照するので、テーマのファイルを作成する必要があります。
@@ -111,7 +111,7 @@ export default extendTheme(customTheme)({ omit: ['colors'] })
 
 ## スタイルを変更する
 
-`styles`には[globalStyle](/docs/styled-system/global-styles)・[resetStyle](/docs/styled-system/reset-styles)・[layerStyles](/docs/styled-system/text-and-layer-styles)・[textStyles](/docs/styled-system/text-and-layer-styles)などを設定できます。
+`styles`には[globalStyle](/styled-system/global-styles)・[resetStyle](/styled-system/reset-styles)・[layerStyles](/styled-system/text-and-layer-styles)・[textStyles](/styled-system/text-and-layer-styles)などを設定できます。
 
 今回は、`body`のスタイルなどを設定する`globalStyle`を変更してみましょう。
 
@@ -174,7 +174,7 @@ export default extendTheme(customTheme)({ omit: ['styles'] })
 ```
 
 :::note
-テキストとレイヤースタイルを学びたい場合は、[こちら](/docs/styled-system/text-and-layer-styles)をご覧ください。
+テキストとレイヤースタイルを学びたい場合は、[こちら](/styled-system/text-and-layer-styles)をご覧ください。
 :::
 
 ## コンポーネントのスタイルを変更する
@@ -275,7 +275,7 @@ const Demo = () => {
 :::
 
 :::note
-Yamada UIが提供するコンポーネントに限らず、独自のカスタムコンポーネントのスタイルを作成することができます。詳しくは、[こちら](/docs/styled-system/theming/component-style#独自のコンポーネントを作成する)をご覧ください。
+Yamada UIが提供するコンポーネントに限らず、独自のカスタムコンポーネントのスタイルを作成することができます。詳しくは、[こちら](/styled-system/theming/component-style#独自のコンポーネントを作成する)をご覧ください。
 :::
 
 ## ユーティリティ

@@ -1,5 +1,71 @@
 # @yamada-ui/react
 
+## 0.8.7
+
+### Patch Changes
+
+- Updated dependencies [[`c1db45c8`](https://github.com/hirotomoyamada/yamada-ui/commit/c1db45c8f0b06c2baec289cf4be835603a9589d9), [`33df2f8d`](https://github.com/hirotomoyamada/yamada-ui/commit/33df2f8d93a0f7507bade5b7fbc89f63761f46c0), [`11c878ce`](https://github.com/hirotomoyamada/yamada-ui/commit/11c878ceb1cfa216ec33ba6780857c2c7d36a1f5)]:
+  - @yamada-ui/loading@0.5.0
+  - @yamada-ui/notice@0.5.0
+  - @yamada-ui/providers@0.9.0
+  - @yamada-ui/theme@0.11.7
+  - @yamada-ui/core@0.12.3
+  - @yamada-ui/alert@0.5.7
+  - @yamada-ui/button@0.3.13
+  - @yamada-ui/use-media-query@0.2.15
+  - @yamada-ui/theme-tools@0.2.16
+  - @yamada-ui/accordion@0.3.13
+  - @yamada-ui/autocomplete@0.4.6
+  - @yamada-ui/avatar@0.3.13
+  - @yamada-ui/badge@0.3.13
+  - @yamada-ui/breadcrumb@0.3.13
+  - @yamada-ui/card@0.3.13
+  - @yamada-ui/checkbox@0.3.15
+  - @yamada-ui/close-button@0.3.13
+  - @yamada-ui/editable@0.3.15
+  - @yamada-ui/file-button@0.3.15
+  - @yamada-ui/file-input@0.4.6
+  - @yamada-ui/form-control@0.3.15
+  - @yamada-ui/highlight@0.3.13
+  - @yamada-ui/icon@0.3.13
+  - @yamada-ui/image@0.3.13
+  - @yamada-ui/indicator@0.3.13
+  - @yamada-ui/input@0.3.15
+  - @yamada-ui/kbd@0.3.13
+  - @yamada-ui/layouts@0.3.13
+  - @yamada-ui/link@0.3.13
+  - @yamada-ui/list@0.3.13
+  - @yamada-ui/menu@0.3.13
+  - @yamada-ui/modal@0.4.13
+  - @yamada-ui/motion@0.4.13
+  - @yamada-ui/native-select@0.4.6
+  - @yamada-ui/native-table@0.4.6
+  - @yamada-ui/number-input@0.3.15
+  - @yamada-ui/pagination@0.4.13
+  - @yamada-ui/pin-input@0.3.15
+  - @yamada-ui/popover@0.3.13
+  - @yamada-ui/progress@0.4.13
+  - @yamada-ui/radio@0.3.15
+  - @yamada-ui/reorder@0.3.13
+  - @yamada-ui/scroll-area@0.3.13
+  - @yamada-ui/segmented-control@0.3.13
+  - @yamada-ui/select@0.4.6
+  - @yamada-ui/skeleton@0.3.13
+  - @yamada-ui/slider@0.4.6
+  - @yamada-ui/stepper@0.3.13
+  - @yamada-ui/switch@0.3.15
+  - @yamada-ui/tabs@0.3.13
+  - @yamada-ui/tag@0.3.13
+  - @yamada-ui/textarea@0.3.15
+  - @yamada-ui/tooltip@0.4.8
+  - @yamada-ui/transitions@0.3.13
+  - @yamada-ui/typography@0.3.13
+  - @yamada-ui/use-animation@0.4.2
+  - @yamada-ui/use-breakpoint@0.2.13
+  - @yamada-ui/use-popper@0.4.13
+  - @yamada-ui/use-token@0.3.7
+  - @yamada-ui/use-value@0.2.13
+
 ## 0.8.6
 
 ### Patch Changes

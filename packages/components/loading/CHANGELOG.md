@@ -1,5 +1,20 @@
 # @yamada-ui/loading
 
+## 0.5.0
+
+### Minor Changes
+
+- [`c1db45c8`](https://github.com/hirotomoyamada/yamada-ui/commit/c1db45c8f0b06c2baec289cf4be835603a9589d9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved loading and notice providers to each package.
+
+### Patch Changes
+
+- Updated dependencies [[`11c878ce`](https://github.com/hirotomoyamada/yamada-ui/commit/11c878ceb1cfa216ec33ba6780857c2c7d36a1f5)]:
+  - @yamada-ui/core@0.12.3
+  - @yamada-ui/icon@0.3.13
+  - @yamada-ui/motion@0.4.13
+  - @yamada-ui/use-token@0.3.7
+  - @yamada-ui/use-value@0.2.13
+
 ## 0.4.12
 
 ### Patch Changes

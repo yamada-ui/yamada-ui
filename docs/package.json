@@ -5,7 +5,6 @@
   "scripts": {
     "prepare": "husky install",
     "dev": "next dev",
-    "prebuild": "pnpm build:contents",
     "build": "contentlayer build && next build",
     "build:profile": "next build --profile",
     "build:changelogs": "tsx scripts/changelog",

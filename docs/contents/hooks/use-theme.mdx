@@ -1,28 +1,56 @@
 ---
-title: useToken
-description: '`useToken`は、テーマを取得するカスタムフックです。'
+title: useTheme
+description: '`useToken` is a custom hook that retrieves a theme and returns a function to switch the theme.'
 package_name: '@yamada-ui/core'
 with_description: true
 ---
 
-## インポート
+## Import
 
 ```ts
-import { useToken } from '@yamada-ui/react'
+import { useTheme } from '@yamada-ui/react'
 ```
 
-## 使い方
+## Usage
 
 ```tsx functional=true
-const bg = useToken('colors', 'primary')
+const { theme } = useTheme()
 
-return (
-  <Box bg={bg} p='md' rounded='md' color='white'>
-    Primary for color tokens is "{bg}"
-  </Box>
-)
+return <Text noOfLines={3}>{JSON.stringify(theme)}</Text>
 ```
 
 :::note
-テーマをもっと学びたい場合は、[こちら](/styled-system/theming)をご覧ください。
+If you want to learn more about the theme, please check [here](/styled-system/theming).
+:::
+
+### Switch theme
+
+```tsx functional=true
+const { themeScheme, changeThemeScheme } = useTheme()
+
+return (
+  <>
+    <Text>The current scheme is "{themeScheme}"</Text>
+
+    <Wrap mt='md' gap='md'>
+      <Button onClick={() => changeThemeScheme('base')}>Base Theme</Button>
+
+      <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
+        Pink Theme
+      </Button>
+
+      <Button colorScheme='purple' onClick={() => changeThemeScheme('purple')}>
+        Purple Theme
+      </Button>
+
+      <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
+        Green Theme
+      </Button>
+    </Wrap>
+  </>
+)
+```
+
+:::note satus=warning
+To switch themes, you need to have multiple themes prepared. For more details, please check [here](/styled-system/theming/switch-theme).
 :::

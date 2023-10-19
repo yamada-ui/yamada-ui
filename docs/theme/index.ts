@@ -1,10 +1,4 @@
-import {
-  extendConfig,
-  extendTheme,
-  withDefaultColorScheme,
-  UsageTheme,
-  ThemeSchemes,
-} from '@yamada-ui/react'
+import { extendConfig, extendTheme, UsageTheme, ThemeSchemes } from '@yamada-ui/react'
 import { components } from './components'
 import { customConfig } from './config'
 import { semantics } from './semantics'
@@ -55,7 +49,7 @@ export const customTheme: UsageTheme = {
   ...tokens,
 }
 
-export const theme = extendTheme(customTheme, withDefaultColorScheme({ colorScheme: 'primary' }))()
+export const theme = extendTheme(customTheme)()
 
 export const config = extendConfig(customConfig)
 

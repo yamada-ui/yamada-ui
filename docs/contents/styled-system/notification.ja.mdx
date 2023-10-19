@@ -14,10 +14,7 @@ Yamada UIは、アプリケーションで必要な`通知`をサポートして
 const notice = useNotice()
 
 return (
-  <Button
-    colorScheme='gray'
-    onClick={() => notice({ title: 'Notification', description: 'This is description.' })}
-  >
+  <Button onClick={() => notice({ title: 'Notification', description: 'This is description.' })}>
     Show notification
   </Button>
 )
@@ -40,7 +37,6 @@ const notice = useNotice({ duration: 8000 })
 
 return (
   <Button
-    colorScheme='gray'
     onClick={() =>
       notice({ title: 'Notification', description: 'This is description.', duration: 10000 })
     }
@@ -58,10 +54,7 @@ return (
 const notice = useNotice({ duration: null, isClosable: true })
 
 return (
-  <Button
-    colorScheme='gray'
-    onClick={() => notice({ title: 'Notification', description: 'This is description.' })}
-  >
+  <Button onClick={() => notice({ title: 'Notification', description: 'This is description.' })}>
     Show notification
   </Button>
 )
@@ -84,7 +77,6 @@ return (
     {placements.map((placement) => (
       <Button
         key={placement}
-        colorScheme='gray'
         onClick={() =>
           notice({ title: 'Notification', description: 'This is description.', placement })
         }
@@ -104,10 +96,7 @@ return (
 const notice = useNotice({ limit: 3 })
 
 return (
-  <Button
-    colorScheme='gray'
-    onClick={() => notice({ title: 'Notification', description: 'This is description.' })}
-  >
+  <Button onClick={() => notice({ title: 'Notification', description: 'This is description.' })}>
     Show notification
   </Button>
 )
@@ -126,7 +115,6 @@ return (
     {variants.map((variant) => (
       <Button
         key={variant}
-        colorScheme='gray'
         onClick={() =>
           notice({ title: 'Notification', description: 'This is description.', variant })
         }
@@ -151,7 +139,6 @@ return (
     {statuses.map((status) => (
       <Button
         key={status}
-        colorScheme='gray'
         onClick={() =>
           notice({ title: 'Notification', description: 'This is description.', status })
         }
@@ -176,7 +163,6 @@ return (
     {colorSchemes.map((colorScheme) => (
       <Button
         key={colorScheme}
-        colorScheme='gray'
         onClick={() =>
           notice({ title: 'Notification', description: 'This is description.', colorScheme })
         }
@@ -201,7 +187,6 @@ return (
     {variants.map((variant) => (
       <Button
         key={variant}
-        colorScheme='gray'
         onClick={() =>
           notice({
             title: 'Notification',
@@ -246,12 +231,8 @@ const onUpdate = () => {
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={onOpen}>
-      Show notification
-    </Button>
-    <Button colorScheme='gray' onClick={onUpdate}>
-      Update last notification
-    </Button>
+    <Button onClick={onOpen}>Show notification</Button>
+    <Button onClick={onUpdate}>Update last notification</Button>
   </Wrap>
 )
 ```
@@ -283,15 +264,9 @@ const onCloseAll = () => {
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={onOpen}>
-      Show notification
-    </Button>
-    <Button colorScheme='gray' onClick={onClose}>
-      Close last notification
-    </Button>
-    <Button colorScheme='gray' onClick={onCloseAll}>
-      Close all notification
-    </Button>
+    <Button onClick={onOpen}>Show notification</Button>
+    <Button onClick={onClose}>Close last notification</Button>
+    <Button onClick={onCloseAll}>Close all notification</Button>
   </Wrap>
 )
 ```
@@ -310,9 +285,7 @@ const notice = useNotice({
 })
 
 return (
-  <Button colorScheme='gray' onClick={() => notice({ description: 'This is description.' })}>
-    Show notification
-  </Button>
+  <Button onClick={() => notice({ description: 'This is description.' })}>Show notification</Button>
 )
 ```
 
@@ -324,7 +297,6 @@ const notice = useNotice({ style: { maxW: '100%', minW: '100%' } })
 return (
   <Wrap gap='md'>
     <Button
-      colorScheme='gray'
       onClick={() =>
         notice({ title: 'Notification', description: 'This is description.', isClosable: true })
       }
@@ -333,7 +305,6 @@ return (
     </Button>
 
     <Button
-      colorScheme='gray'
       onClick={() =>
         notice({
           title: 'Notification',

@@ -294,7 +294,6 @@ const [animation, setAnimation] = useDynamicAnimation({
 return (
   <VStack alignItems='flex-start'>
     <Button
-      colorScheme='gray'
       onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
     >
       Click me!
@@ -376,7 +375,6 @@ const [animation, setAnimation] = useDynamicAnimation<
 return (
   <VStack alignItems='flex-start'>
     <Button
-      colorScheme='gray'
       onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
     >
       Click me!
@@ -506,9 +504,7 @@ const [isVisible, { toggle }] = useBoolean()
 
 return (
   <>
-    <Button colorScheme='gray' onClick={toggle}>
-      Click me!
-    </Button>
+    <Button onClick={toggle}>Click me!</Button>
 
     <Center h='3xs' gap='md'>
       <AnimatePresence>

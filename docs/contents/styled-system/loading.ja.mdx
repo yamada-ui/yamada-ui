@@ -54,15 +54,9 @@ const onLoadingBackground = async () => {
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={onLoadingScreen}>
-      Start screen loading
-    </Button>
-    <Button colorScheme='gray' onClick={onLoadingPage}>
-      Start page loading
-    </Button>
-    <Button colorScheme='gray' onClick={onLoadingBackground}>
-      Start background loading
-    </Button>
+    <Button onClick={onLoadingScreen}>Start screen loading</Button>
+    <Button onClick={onLoadingPage}>Start page loading</Button>
+    <Button onClick={onLoadingBackground}>Start background loading</Button>
   </Wrap>
 )
 ```
@@ -80,15 +74,9 @@ const { screen, page, background } = useLoading()
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={() => screen.start({ duration: 5000 })}>
-      Start screen loading
-    </Button>
-    <Button colorScheme='gray' onClick={() => page.start({ duration: 5000 })}>
-      Start page loading
-    </Button>
-    <Button colorScheme='gray' onClick={() => background.start({ duration: 5000 })}>
-      Start background loading
-    </Button>
+    <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
+    <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
+    <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
   </Wrap>
 )
 ```
@@ -102,16 +90,13 @@ const { screen, page, background } = useLoading()
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
+    <Button onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
       Start screen loading
     </Button>
-    <Button colorScheme='gray' onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
+    <Button onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
       Start page loading
     </Button>
-    <Button
-      colorScheme='gray'
-      onClick={() => background.start({ message: 'Loading', duration: 5000 })}
-    >
+    <Button onClick={() => background.start({ message: 'Loading', duration: 5000 })}>
       Start background loading
     </Button>
   </Wrap>
@@ -126,7 +111,6 @@ const { screen, page, background } = useLoading()
 return (
   <Wrap gap='md'>
     <Button
-      colorScheme='gray'
       onClick={() =>
         screen.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
       }
@@ -134,13 +118,11 @@ return (
       Start screen loading
     </Button>
     <Button
-      colorScheme='gray'
       onClick={() => page.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })}
     >
       Start page loading
     </Button>
     <Button
-      colorScheme='gray'
       onClick={() =>
         background.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
       }
@@ -202,15 +184,9 @@ const onLoadingBackground = async () => {
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={onLoadingScreen}>
-      Start screen loading
-    </Button>
-    <Button colorScheme='gray' onClick={onLoadingPage}>
-      Start page loading
-    </Button>
-    <Button colorScheme='gray' onClick={onLoadingBackground}>
-      Start background loading
-    </Button>
+    <Button onClick={onLoadingScreen}>Start screen loading</Button>
+    <Button onClick={onLoadingPage}>Start page loading</Button>
+    <Button onClick={onLoadingBackground}>Start background loading</Button>
   </Wrap>
 )
 ```
@@ -247,15 +223,9 @@ function App() {
 
   return (
     <Wrap gap='md'>
-      <Button colorScheme='gray' onClick={() => screen.start({ duration: 5000 })}>
-        Start screen loading
-      </Button>
-      <Button colorScheme='gray' onClick={() => page.start({ duration: 5000 })}>
-        Start page loading
-      </Button>
-      <Button colorScheme='gray' onClick={() => background.start({ duration: 5000 })}>
-        Start background loading
-      </Button>
+      <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
+      <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
+      <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
     </Wrap>
   )
 }
@@ -416,11 +386,7 @@ const customConfig = extendConfig({
 function App() {
   const { custom } = useLoading()
 
-  return (
-    <Button colorScheme='gray' onClick={() => custom.start({ duration: 5000 })}>
-      Start custom loading
-    </Button>
-  )
+  return <Button onClick={() => custom.start({ duration: 5000 })}>Start custom loading</Button>
 }
 
 return (

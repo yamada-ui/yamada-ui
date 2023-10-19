@@ -49,6 +49,7 @@ const Page: NextPage<PageProps> = ({ documents, documentTree }) => {
           <HStack flexDirection={{ base: 'row', md: 'column' }} justifyContent='center'>
             <NextLinkButton
               size='xl'
+              colorScheme='primary'
               w={{ base: 'auto', md: 'full' }}
               rightIcon={<Arrow />}
               href='/getting-started'
@@ -58,7 +59,6 @@ const Page: NextPage<PageProps> = ({ documents, documentTree }) => {
 
             <NextLinkButton
               size='xl'
-              colorScheme='gray'
               w={{ base: 'auto', md: 'full' }}
               leftIcon={<Github />}
               href={CONSTANT.SNS.GITHUB.YAMADA_UI}

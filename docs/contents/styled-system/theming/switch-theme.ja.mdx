@@ -264,10 +264,8 @@ return (
   <>
     <Text>The current scheme is "{themeScheme}"</Text>
 
-    <HStack mt='md'>
-      <Button colorScheme='gray' onClick={() => changeThemeScheme('base')}>
-        Base Theme
-      </Button>
+    <Wrap mt='md' gap='md'>
+      <Button onClick={() => changeThemeScheme('base')}>Base Theme</Button>
 
       <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
         Pink Theme
@@ -280,7 +278,7 @@ return (
       <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
         Green Theme
       </Button>
-    </HStack>
+    </Wrap>
   </>
 )
 ```

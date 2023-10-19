@@ -23,16 +23,10 @@ return (
     </Text>
 
     <Wrap mt='md' gap='md'>
-      <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
-        ライトモード
-      </Button>
-      <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
-        ダークモード
-      </Button>
-      <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
-        システム
-      </Button>
-      <Button colorScheme='gray' onClick={toggleColorMode}>
+      <Button onClick={() => changeColorMode('light')}>ライトモード</Button>
+      <Button onClick={() => changeColorMode('dark')}>ダークモード</Button>
+      <Button onClick={() => changeColorMode('system')}>システム</Button>
+      <Button onClick={toggleColorMode}>
         {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
       </Button>
     </Wrap>

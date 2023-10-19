@@ -74,12 +74,7 @@ Yamada UIのすべてのコンポーネントは、`アサーション`するこ
 例えば、`Button`のスタイルや挙動を保持しつつ、HTMLタグの`a`に変更する必要があるとします。
 
 ```tsx
-<Button
-  as='a'
-  href='https://github.com/hirotomoyamada/yamada-ui'
-  target='_blank'
-  colorScheme='gray'
->
+<Button as='a' href='https://github.com/hirotomoyamada/yamada-ui' target='_blank'>
   GitHub
 </Button>
 ```
@@ -335,7 +330,6 @@ const [animation, setAnimation] = useDynamicAnimation({
 return (
   <VStack alignItems='flex-start'>
     <Button
-      colorScheme='gray'
       onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
     >
       Click me!
@@ -415,7 +409,6 @@ const [animation, setAnimation] = useDynamicAnimation<
 return (
   <VStack alignItems='flex-start'>
     <Button
-      colorScheme='gray'
       onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
     >
       Click me!

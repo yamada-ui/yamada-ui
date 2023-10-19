@@ -75,7 +75,7 @@ Yamada UIは、あらゆるスケール(色やフォントサイズなど)のセ
 実際に設定されている値はこちらです。
 
 ```ts
-export const semantics: Semantics = {
+export const semantics: ThemeSemantics = {
   colors: {
     primary: 'blue.500',
     secondary: 'purple.500',
@@ -176,15 +176,9 @@ const onLoadingBackground = async () => {
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={onLoadingScreen}>
-      Start screen loading
-    </Button>
-    <Button colorScheme='gray' onClick={onLoadingPage}>
-      Start page loading
-    </Button>
-    <Button colorScheme='gray' onClick={onLoadingBackground}>
-      Start background loading
-    </Button>
+    <Button onClick={onLoadingScreen}>Start screen loading</Button>
+    <Button onClick={onLoadingPage}>Start page loading</Button>
+    <Button onClick={onLoadingBackground}>Start background loading</Button>
   </Wrap>
 )
 ```
@@ -208,7 +202,6 @@ const notice = useNotice()
 
 return (
   <Button
-    colorScheme='gray'
     onClick={() =>
       notice({
         title: 'Notification',
@@ -447,16 +440,10 @@ const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
 return (
   <Wrap gap='md'>
-    <Button colorScheme='gray' onClick={() => changeColorMode('light')}>
-      ライトモード
-    </Button>
-    <Button colorScheme='gray' onClick={() => changeColorMode('dark')}>
-      ダークモード
-    </Button>
-    <Button colorScheme='gray' onClick={() => changeColorMode('system')}>
-      システム
-    </Button>
-    <Button colorScheme='gray' onClick={toggleColorMode}>
+    <Button onClick={() => changeColorMode('light')}>ライトモード</Button>
+    <Button onClick={() => changeColorMode('dark')}>ダークモード</Button>
+    <Button onClick={() => changeColorMode('system')}>システム</Button>
+    <Button onClick={toggleColorMode}>
       {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
     </Button>
   </Wrap>

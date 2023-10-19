@@ -13,7 +13,7 @@ export const ColorModeButton: FC<ColorModeButtonProps> = ({ ...rest }) => {
   )
 
   return (
-    <Button colorScheme='gray' onClick={toggleColorMode} {...rest}>
+    <Button onClick={toggleColorMode} {...rest}>
       {children}
     </Button>
   )

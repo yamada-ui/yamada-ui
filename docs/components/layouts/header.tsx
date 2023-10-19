@@ -139,7 +139,6 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         isExternal
         aria-label='GitHub repository'
         variant='ghost'
-        colorScheme='gray'
         display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }}
         color='muted'
         icon={<Discord />}
@@ -150,7 +149,6 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
         isExternal
         aria-label='Discord server'
         variant='ghost'
-        colorScheme='gray'
         display={{ base: 'inline-flex', lg: !isMobile ? 'none' : undefined }}
         color='muted'
         icon={<Github />}
@@ -167,7 +165,6 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(({ isMobile, isOpen, onOpen, onCl
       {!isOpen ? (
         <IconButton
           variant='ghost'
-          colorScheme='gray'
           aria-label='Open navigation menu'
           display={{ base: 'none', lg: 'inline-flex' }}
           color='muted'
@@ -220,7 +217,6 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
         as={IconButton}
         aria-label='Open language switching menu'
         variant='ghost'
-        colorScheme='gray'
         color='muted'
         icon={<Translate />}
         {...rest}
@@ -272,7 +268,6 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
         as={IconButton}
         aria-label='Open color mode switching menu'
         variant='ghost'
-        colorScheme='gray'
         color='muted'
         icon={colorMode === 'dark' ? <Sun /> : <Moon />}
         {...rest}
@@ -320,7 +315,6 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
         <IconButton
           aria-label='Open color mode switching menu'
           variant='ghost'
-          colorScheme='gray'
           color='muted'
           icon={<ColorPalette />}
           {...rest}

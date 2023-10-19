@@ -20,22 +20,16 @@ return (
   <>
     <Text>state: {String(flg)}</Text>
 
-    <Wrap gap='md'>
-      <Button mt='md' onClick={on}>
-        On
-      </Button>
-      <Button mt='md' onClick={off}>
-        Off
-      </Button>
-      <Button mt='md' onClick={toggle}>
-        Toggle
-      </Button>
+    <Wrap mt='md' gap='md'>
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
     </Wrap>
   </>
 )
 ```
 
-### 初期値を使う
+### Use initial value
 
 ```tsx functional=true
 const [flg, { on, off, toggle }] = useBoolean(true)
@@ -44,16 +38,10 @@ return (
   <>
     <Text>state: {String(flg)}</Text>
 
-    <Wrap gap='md'>
-      <Button mt='md' onClick={on}>
-        On
-      </Button>
-      <Button mt='md' onClick={off}>
-        Off
-      </Button>
-      <Button mt='md' onClick={toggle}>
-        Toggle
-      </Button>
+    <Wrap mt='md' gap='md'>
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
     </Wrap>
   </>
 )

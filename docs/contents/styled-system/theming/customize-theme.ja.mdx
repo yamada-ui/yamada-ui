@@ -109,6 +109,73 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ['colors'] })
 ```
 
+## セマンティックトークンを変更する
+
+セマンティックトークンの中に、各コンポーネントで使用されるカラースキーマが設定されています。
+
+実際に設定されている値はこちらです。
+
+```ts
+export const semantics: ThemeSemantics = {
+  colors: {
+    primary: 'blue.500',
+    secondary: 'purple.500',
+    success: 'emerald.500',
+    warning: 'orange.500',
+    danger: 'red.500',
+    link: 'sky.500',
+  },
+  colorSchemes: {
+    primary: 'blue',
+    secondary: 'purple',
+    success: 'emerald',
+    warning: 'orange',
+    danger: 'red',
+    link: 'sky',
+  },
+}
+```
+
+今回は、デフォルトのカラースキーマを変更してみましょう。
+
+`theme`の配下に`semantics.ts`を作成します。
+
+```ts title=./theme/semantics.ts
+import { ThemeSemantics } from '@yamada-ui/react'
+
+export const semantics: ThemeSemantics = {
+  colors: {
+    primary: 'pink.500',
+  },
+  colorSchemes: {
+    primary: 'pink',
+  },
+}
+```
+
+`customTheme`に`semantics`を含めます。
+
+```ts title=./theme/index.ts highlight={5,10}
+import { extendTheme, UsageTheme } from '@yamada-ui/react'
+// import styles from './styles'
+// import components from './components'
+import tokens from './tokens'
+import { semantics } from './semantics'
+
+const customTheme: UsageTheme = {
+  // styles,
+  // components,
+  semantics,
+  ...tokens,
+}
+
+export default extendTheme(customTheme)()
+```
+
+:::note
+セマンティックトークンをもっと学びたい場合は、[こちら](/styled-system/semantic-tokens)をご覧ください。
+:::
+
 ## スタイルを変更する
 
 `styles`には[globalStyle](/styled-system/global-styles)・[resetStyle](/styled-system/reset-styles)・[layerStyles](/styled-system/text-and-layer-styles)・[textStyles](/styled-system/text-and-layer-styles)などを設定できます。
@@ -141,15 +208,17 @@ export default { globalStyle }
 
 `customTheme`に`styles`を含めます。
 
-```ts title=./theme/index.ts highlight={2,7}
+```ts title=./theme/index.ts highlight={2,8}
 import { extendTheme, UsageTheme } from '@yamada-ui/react'
 import styles from './styles'
 // import components from './components'
 import tokens from './tokens'
+import { semantics } from './semantics'
 
 const customTheme: UsageTheme = {
   styles,
   // components,
+  semantics,
   ...tokens,
 }
 
@@ -163,10 +232,12 @@ import { extendTheme, UsageTheme } from '@yamada-ui/react'
 import styles from './styles'
 // import components from './components'
 import tokens from './tokens'
+import { semantics } from './semantics'
 
 const customTheme: UsageTheme = {
   styles,
   // components,
+  semantics,
   ...tokens,
 }
 
@@ -237,15 +308,17 @@ export default { Container }
 
 `customTheme`に`components`を含めます。
 
-```ts title=./theme/index.ts highlight={3,8}
+```ts title=./theme/index.ts highlight={3,9}
 import { extendTheme, UsageTheme } from '@yamada-ui/react'
 import styles from './styles'
 import components from './components'
 import tokens from './tokens'
+import { semantics } from './semantics'
 
 const customTheme: UsageTheme = {
   styles,
   components,
+  semantics,
   ...tokens,
 }
 

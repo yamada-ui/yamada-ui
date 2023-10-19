@@ -1,5 +1,19 @@
 # @yamada-ui/providers
 
+## 0.9.0
+
+### Minor Changes
+
+- [`c1db45c8`](https://github.com/hirotomoyamada/yamada-ui/commit/c1db45c8f0b06c2baec289cf4be835603a9589d9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved loading and notice providers to each package.
+
+### Patch Changes
+
+- Updated dependencies [[`c1db45c8`](https://github.com/hirotomoyamada/yamada-ui/commit/c1db45c8f0b06c2baec289cf4be835603a9589d9), [`33df2f8d`](https://github.com/hirotomoyamada/yamada-ui/commit/33df2f8d93a0f7507bade5b7fbc89f63761f46c0), [`11c878ce`](https://github.com/hirotomoyamada/yamada-ui/commit/11c878ceb1cfa216ec33ba6780857c2c7d36a1f5)]:
+  - @yamada-ui/loading@0.5.0
+  - @yamada-ui/notice@0.5.0
+  - @yamada-ui/theme@0.11.7
+  - @yamada-ui/core@0.12.3
+
 ## 0.8.14
 
 ### Patch Changes

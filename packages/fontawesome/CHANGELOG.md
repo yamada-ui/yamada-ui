@@ -1,5 +1,13 @@
 # @yamada-ui/fontawesome
 
+## 0.3.13
+
+### Patch Changes
+
+- Updated dependencies [[`11c878ce`](https://github.com/hirotomoyamada/yamada-ui/commit/11c878ceb1cfa216ec33ba6780857c2c7d36a1f5)]:
+  - @yamada-ui/core@0.12.3
+  - @yamada-ui/icon@0.3.13
+
 ## 0.3.12
 
 ### Patch Changes

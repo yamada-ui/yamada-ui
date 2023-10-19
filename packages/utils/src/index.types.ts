@@ -1,4 +1,11 @@
-type Primitive = null | undefined | string | number | boolean | symbol | bigint
+export type Primitive =
+  | null
+  | undefined
+  | string
+  | number
+  | boolean
+  | symbol
+  | bigint
 
 type PathImpl<K extends string | number | symbol, V> = K extends string | number
   ? V extends Primitive

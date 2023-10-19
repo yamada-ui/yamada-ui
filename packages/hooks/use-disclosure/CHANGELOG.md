@@ -1,5 +1,16 @@
 # @yamada-ui/use-disclosure
 
+## 0.4.0
+
+### Minor Changes
+
+- [`b26c0347`](https://github.com/hirotomoyamada/yamada-ui/commit/b26c03477ef97ec763fdcc29b802a4f39e10183a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `useDisclosure` for timing control.
+
+### Patch Changes
+
+- Updated dependencies [[`7484afb2`](https://github.com/hirotomoyamada/yamada-ui/commit/7484afb2998f47e57818245286b91d412e8e1093)]:
+  - @yamada-ui/utils@0.3.2
+
 ## 0.3.3
 
 ### Patch Changes

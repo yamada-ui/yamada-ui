@@ -225,32 +225,34 @@ export const documentTypeNames = [
 
 let resolvedDocumentTypeNames = documentTypeNames
 
-if (OMIT_DOCUMENT_TYPES.length) {
-  if (
-    !OMIT_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
-  ) {
-    throw new Error('Invalid document name. Please check ".env."')
+if (process.env.NODE_ENV === 'development') {
+  if (OMIT_DOCUMENT_TYPES.length) {
+    if (
+      !OMIT_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
+    ) {
+      throw new Error('Invalid document name. Please check ".env."')
+    }
+
+    resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter(
+      (documentTypeName) => !OMIT_DOCUMENT_TYPES.includes(documentTypeName),
+    )
   }
 
-  resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter(
-    (documentTypeName) => !OMIT_DOCUMENT_TYPES.includes(documentTypeName),
-  )
-}
+  if (PICK_DOCUMENT_TYPES.length) {
+    if (
+      !PICK_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
+    ) {
+      throw new Error('Invalid document name. Please check ".env."')
+    }
 
-if (PICK_DOCUMENT_TYPES.length) {
-  if (
-    !PICK_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
-  ) {
-    throw new Error('Invalid document name. Please check ".env."')
+    resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter((documentTypeName) =>
+      PICK_DOCUMENT_TYPES.includes(documentTypeName),
+    )
   }
 
-  resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter((documentTypeName) =>
-    PICK_DOCUMENT_TYPES.includes(documentTypeName),
-  )
-}
-
-if (!resolvedDocumentTypeNames.length) {
-  throw new Error('The document generate is required. Please check ".env."')
+  if (!resolvedDocumentTypeNames.length) {
+    throw new Error('The document generate is required. Please check ".env."')
+  }
 }
 
 const documentTypes = resolvedDocumentTypeNames.map((documentTypeName) =>

@@ -14,15 +14,47 @@ import { useBoolean } from '@yamada-ui/react'
 ## 使い方
 
 ```tsx functional=true
-const [flg, { toggle }] = useBoolean()
+const [flg, { on, off, toggle }] = useBoolean()
 
 return (
   <>
     <Text>state: {String(flg)}</Text>
 
-    <Button mt='md' onClick={toggle}>
-      Click me to toggle the boolean value
-    </Button>
+    <Wrap gap='md'>
+      <Button mt='md' onClick={on}>
+        On
+      </Button>
+      <Button mt='md' onClick={off}>
+        Off
+      </Button>
+      <Button mt='md' onClick={toggle}>
+        Toggle
+      </Button>
+    </Wrap>
+  </>
+)
+```
+
+### 初期値を使う
+
+```tsx functional=true
+const [flg, { on, off, toggle }] = useBoolean(true)
+
+return (
+  <>
+    <Text>state: {String(flg)}</Text>
+
+    <Wrap gap='md'>
+      <Button mt='md' onClick={on}>
+        On
+      </Button>
+      <Button mt='md' onClick={off}>
+        Off
+      </Button>
+      <Button mt='md' onClick={toggle}>
+        Toggle
+      </Button>
+    </Wrap>
   </>
 )
 ```

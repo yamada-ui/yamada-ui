@@ -53,7 +53,6 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
     <Button
       as={Link}
       variant='outline'
-      colorScheme='gray'
       display='inline-flex'
       alignItems='center'
       h='8'

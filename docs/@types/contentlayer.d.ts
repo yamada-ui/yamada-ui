@@ -1,11 +1,11 @@
-import type { Doc } from 'contentlayer/generated'
+import type { DocumentTypes } from 'contentlayer/generated'
 
 declare module 'contentlayer/generated' {
-  type Content = { id: string; lv: 1 | 2 | 3; title: string }
+  type DocumentContent = { id: string; lv: 1 | 2 | 3; title: string }
 
-  type DocPagination = { prev?: Doc | null; next?: Doc | null }
+  type DocumentTypesPagination = { prevDocument?: Doc | null; nextDocument?: Doc | null }
 
-  type Data = {
+  type DocumentData = {
     title: string
     menu: string
     tab: string
@@ -25,8 +25,8 @@ declare module 'contentlayer/generated' {
     description?: string
     editUrl?: string
     version?: string
-    contents?: Content[]
+    contents?: DocumentContent[]
   }
 
-  type DocWithChildren = Doc & { children: DocWithChildren[] }
+  type DocumentTypesWithChildren = DocumentTypes & { children: DocumentTypesWithChildren[] }
 }

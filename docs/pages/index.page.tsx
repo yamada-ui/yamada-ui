@@ -10,13 +10,12 @@ import { TopLayout } from 'layouts/top-layout'
 import { getStaticCommonProps } from 'utils/next'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
-// type PageProps = InferGetStaticPropsType<typeof getServerSideProps>
 
-const Page: NextPage<PageProps> = ({ docs, tree }) => {
+const Page: NextPage<PageProps> = ({ documents, documentTree }) => {
   const { t, tc } = useI18n()
 
   return (
-    <PageProvider value={{ docs, tree }}>
+    <PageProvider value={{ documents, documentTree }}>
       <TopLayout>
         <SEO title={t('home.title')} description={t('home.description')} />
 
@@ -52,7 +51,7 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
               size='xl'
               w={{ base: 'auto', md: 'full' }}
               rightIcon={<Arrow />}
-              href='/docs/getting-started'
+              href='/getting-started'
             >
               {tc('home.hero.started')}
             </NextLinkButton>
@@ -77,4 +76,3 @@ const Page: NextPage<PageProps> = ({ docs, tree }) => {
 export default Page
 
 export const getStaticProps = getStaticCommonProps
-// export const getServerSideProps = getServerSideCommonProps

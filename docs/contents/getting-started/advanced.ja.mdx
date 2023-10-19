@@ -4,13 +4,13 @@ description: Yamada UIのテーマ・スタイル・レスポンシブ・ダー�
 order: 3
 ---
 
-このガイドでは、[基本を学ぶ](/docs/getting-started/basics)で説明した概念や機能の応用を説明します。
+このガイドでは、[基本を学ぶ](/getting-started/basics)で説明した概念や機能の応用を説明します。
 
 ## テーマの応用
 
 Yamada UIは、テーマのユーティリティが他のUIライブラリよりも豊富です。
 
-[基本を学ぶ](/docs/getting-started/basics#テーマについて)では、テーマの継承に`extendTheme`を使用することを学びました。ここでは、各コンポーネントで設定されている`colorScheme`を変更する方法やテーマに定義されているトークンの値を取得する方法を学びます。
+[基本を学ぶ](/getting-started/basics#テーマについて)では、テーマの継承に`extendTheme`を使用することを学びました。ここでは、各コンポーネントで設定されている`colorScheme`を変更する方法やテーマに定義されているトークンの値を取得する方法を学びます。
 
 各コンポーネントで設定されている`colorScheme`を変更するには、`withDefaultColorScheme`を使用します。
 
@@ -58,12 +58,12 @@ return (
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
 
 :::note
-テーマをもっと学びたい場合は、[テーマをカスタマイズする](/docs/styled-system/theming/customize-theme)や[コンポーネントのスタイル](/docs/styled-system/theming/component-style)をご覧ください。
+テーマをもっと学びたい場合は、[テーマをカスタマイズする](/styled-system/theming/customize-theme)や[コンポーネントのスタイル](/styled-system/theming/component-style)をご覧ください。
 :::
 
 ## スタイルの応用
 
-[基本を学ぶ](/docs/getting-started/basics#スタイルについて)では、`Style props`やショートハンドを学びました。ここでは、要素のレンダリングを変更する方法やYamada UIのスタイルシステムの重要度を学びます。
+[基本を学ぶ](/getting-started/basics#スタイルについて)では、`Style props`やショートハンドを学びました。ここでは、要素のレンダリングを変更する方法やYamada UIのスタイルシステムの重要度を学びます。
 
 ### `as`について
 
@@ -96,7 +96,7 @@ Yamada UIは、スタイルを設定するために`Style props`以外にも`sx`
 - `css`: [Emotion](https://emotion.sh/)の`CSS`のオブジェクトを受け入れます。
 
 :::note status=warning
-`sx`と`css`が必要になるケースは、ほとんどありません。次のセクションで説明する[順序について](/docs/getting-started/advanced#順序について)において、`sx`と`css`の存在を理解していれば問題ありません。
+`sx`と`css`が必要になるケースは、ほとんどありません。次のセクションで説明する[順序について](/getting-started/advanced#順序について)において、`sx`と`css`の存在を理解していれば問題ありません。
 :::
 
 ```tsx
@@ -133,12 +133,12 @@ Yamada UIのコンポーネントは、いくつかの`CSS`のオブジェクト
 6. `css`: コンポーネントの`css`の`props`
 
 :::note
-`Style props`やショートコードをもっと学びたい場合は、[こちら](/docs/styled-system/style-props)をご覧ください。
+`Style props`やショートコードをもっと学びたい場合は、[こちら](/styled-system/style-props)をご覧ください。
 :::
 
 ## レスポンシブの応用
 
-[基本を学ぶ](/docs/getting-started/basics#レスポンシブについて)では、レスポンシブスタイルの設定を学びました。ここでは、現在のブレイクポイントを取得する方法や便利なユーティリティを学びます。
+[基本を学ぶ](/getting-started/basics#レスポンシブについて)では、レスポンシブスタイルの設定を学びました。ここでは、現在のブレイクポイントを取得する方法や便利なユーティリティを学びます。
 
 ### `useBreakpoint`を使う
 
@@ -174,12 +174,12 @@ return (
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
 
 :::note
-レスポンシブスタイルをもっと学びたい場合は、[こちら](/docs/styled-system/responsive-styles)をご覧ください。
+レスポンシブスタイルをもっと学びたい場合は、[こちら](/styled-system/responsive-styles)をご覧ください。
 :::
 
 ## カラーモードの応用
 
-[基本を学ぶ](/docs/getting-started/basics#カラーモードについて)では、カラーモードのスタイルの設定を学びました。ここでは、現在のカラーモードを取得する方法や便利なユーティリティを学びます。
+[基本を学ぶ](/getting-started/basics#カラーモードについて)では、カラーモードのスタイルの設定を学びました。ここでは、現在のカラーモードを取得する方法や便利なユーティリティを学びます。
 
 ### `useColorMode`を使う
 
@@ -219,12 +219,12 @@ return (
 これは、Yamada UI以外のライブラリのコンポーネントのスタイルを設定するのに適しています。
 
 :::note
-カラーモードをもっと学びたい場合は、[こちら](/docs/styled-system/color-mode)をご覧ください。
+カラーモードをもっと学びたい場合は、[こちら](/styled-system/color-mode)をご覧ください。
 :::
 
 ## アニメーションの応用
 
-[基本を学ぶ](/docs/getting-started/basics#アニメーションについて)では、`useAnimation`と`Motion`コンポーネントを学びました。ここでは、`useAnimation`で複数のアニメーションの設定や新しく動的なアニメーションを設定する`useDynamicAnimation`を学びます。
+[基本を学ぶ](/getting-started/basics#アニメーションについて)では、`useAnimation`と`Motion`コンポーネントを学びました。ここでは、`useAnimation`で複数のアニメーションの設定や新しく動的なアニメーションを設定する`useDynamicAnimation`を学びます。
 
 ### `useAnimation`で複数のアニメーションを使う
 
@@ -429,7 +429,7 @@ return (
 ```
 
 :::note
-アニメーションをもっと学びたい場合は、[こちら](/docs/styled-system/animation)をご覧ください。
+アニメーションをもっと学びたい場合は、[こちら](/styled-system/animation)をご覧ください。
 :::
 
 ## Congratulations!
@@ -444,12 +444,12 @@ Yamada UIをもっと知るために、テーマやコンポーネントを学�
 
 <CardContainer>
   <LinkCard
-    href='/docs/styled-system/theming'
+    href='/styled-system/theming'
     title='テーマについて学ぶ'
     description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
   />
   <LinkCard
-    href='/docs/components'
+    href='/components'
     title='コンポーネントを探索する'
     description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
   />

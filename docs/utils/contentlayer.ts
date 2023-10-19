@@ -1,63 +1,76 @@
 import { CONSTANT } from 'constant'
-import { Data, DocWithChildren, Doc, DocPagination, allDocs } from 'contentlayer/generated'
+import {
+  DocumentData,
+  DocumentTypesWithChildren,
+  DocumentTypes,
+  DocumentTypesPagination,
+  allDocuments,
+} from 'contentlayer/generated'
 import { flattenArray } from 'utils/array'
 import { otherLocales } from 'utils/i18n'
 
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
 
-export const getTree =
-  (docs: Doc[], parentPaths: string[] = []) =>
-  (paths?: string[]): DocWithChildren[] => {
+export const getDocumentTree =
+  (documents: DocumentTypes[], parentPaths: string[] = []) =>
+  (paths: string[] = []): DocumentTypesWithChildren[] => {
     const lv = parentPaths.length
 
-    return docs
+    return documents
       .filter(({ is_active, data }) => {
         if (!is_active) return false
 
-        let { paths } = data as Data
+        let { paths } = data as DocumentData
 
         paths = paths.filter(Boolean)
 
         return paths.length === lv + 1 && paths.join('/').startsWith(parentPaths.join('/'))
       })
       .sort((a, b) => a.order - b.order)
-      .map(({ is_expanded, ...doc }) => {
+      .map(({ is_expanded, ...document }) => {
         return {
-          ...doc,
+          ...document,
           is_expanded:
             is_expanded ||
-            doc.data.paths.every((path: string, index: number) => path === paths[index]),
-          children: getTree(docs, doc.data.paths)(paths),
+            document.data.paths.every((path: string, index: number) => path === paths[index]),
+          children: getDocumentTree(documents, document.data.paths)(paths),
         }
       })
   }
 
-export const getPagination = (tree: DocWithChildren[], target: Doc): DocPagination => {
-  const flattenTree = flattenArray(tree, 'children')
+export const getDocumentPagination = (
+  documentTree: DocumentTypesWithChildren[],
+  document: DocumentTypes,
+): DocumentTypesPagination => {
+  const flattenTree = flattenArray(documentTree, 'children')
 
-  let pagination: DocPagination = {}
+  let pagination: DocumentTypesPagination = {}
 
   for (let i = 0; i < flattenTree.length; i++) {
-    if (flattenTree[i].slug !== target.slug) continue
+    if (flattenTree[i].slug !== document.slug) continue
 
-    pagination = { prev: flattenTree[i - 1] ?? null, next: flattenTree[i + 1] ?? null }
+    pagination = {
+      prevDocument: flattenTree[i - 1] ?? null,
+      nextDocument: flattenTree[i + 1] ?? null,
+    }
   }
 
   return pagination
 }
 
-export const getBreadcrumbs = (
-  docs: Doc[],
+export const getDocumentBreadcrumbs = (
+  documents: DocumentTypes[],
   paths: string[],
   locale: string,
   defaultLocale: string,
-): Doc[] => {
-  let breadcrumbs: Doc[] = []
+): DocumentTypes[] => {
+  let breadcrumbs: DocumentTypes[] = []
 
   for (let i = 0; i <= paths.length - 1; i++) {
     breadcrumbs = [
       ...breadcrumbs,
-      getDoc(docs, paths.slice(0, i), locale) ?? getDoc(docs, paths.slice(0, i), defaultLocale),
+      getDocument(documents, paths.slice(0, i), locale) ??
+        getDocument(documents, paths.slice(0, i), defaultLocale),
     ]
   }
 
@@ -66,8 +79,8 @@ export const getBreadcrumbs = (
   return breadcrumbs
 }
 
-export const getDocs = (locale: string): Doc[] =>
-  allDocs
+export const getDocuments = (locale: string): DocumentTypes[] =>
+  allDocuments
     .filter(({ _id, is_active, data }) => {
       if (!is_active) return false
 
@@ -77,7 +90,7 @@ export const getDocs = (locale: string): Doc[] =>
 
       const defaultLocalePath = getPath(_id)
 
-      const currentLocaleDoc = allDocs.find(({ _id, data }) => {
+      const currentLocaleDoc = allDocuments.find(({ _id, data }) => {
         const path = getPath(_id)
 
         return path === defaultLocalePath && data.locale === locale
@@ -87,10 +100,14 @@ export const getDocs = (locale: string): Doc[] =>
     })
     .sort((a, b) => a.slug.toLowerCase().localeCompare(b.slug.toLowerCase()))
 
-export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
+export const getDocument = (
+  documents: DocumentTypes[],
+  paths: string[],
+  locale: string,
+): DocumentTypes => {
   const ext = `${locale !== CONSTANT.I18N.DEFAULT_LOCALE ? `${locale}.` : ''}mdx`
 
-  return docs.find(({ _id }) => {
+  return documents.find(({ _id }) => {
     if (paths.length === 0) {
       return _id === `index.${ext}`
     } else {
@@ -101,32 +118,40 @@ export const getDoc = (docs: Doc[], paths: string[], locale: string): Doc => {
   })
 }
 
-export const getTabs = (docs: Doc[], doc: Doc) => {
-  const { is_tabs, slug } = doc
+export const getDocumentTabs = (documents: DocumentTypes[], document: DocumentTypes) => {
+  const { is_tabs, slug } = document
 
-  let tabs: Doc[] = []
-  let parentDoc: Doc | undefined
+  let documentTabs: DocumentTypes[] = []
+  let parentDocument: DocumentTypes | undefined
   let parentPaths: string[] | undefined
 
   if (is_tabs) {
-    tabs = docs.filter((doc) => new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(doc.slug))
+    documentTabs = documents.filter((document) =>
+      new RegExp(`^${slug}($|\\/[^\\/]+$)`).test(document.slug),
+    )
   } else {
-    parentDoc = docs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
+    parentDocument = documents.find(
+      (document) => document.slug === slug.slice(0, slug.lastIndexOf('/')),
+    )
 
-    if (!parentDoc?.is_tabs) parentDoc = undefined
+    if (!parentDocument?.is_tabs) parentDocument = undefined
 
-    if (parentDoc) {
-      parentPaths = parentDoc.slug.split('/').slice(2)
-      tabs = docs.filter(({ slug }) => new RegExp(`^${parentDoc.slug}($|\\/[^\\/]+$)`).test(slug))
+    if (parentDocument) {
+      parentPaths = parentDocument.slug.split('/').slice(2)
+      documentTabs = documents.filter(({ slug }) =>
+        new RegExp(`^${parentDocument.slug}($|\\/[^\\/]+$)`).test(slug),
+      )
     }
   }
 
-  return { tabs, parentDoc, parentPaths }
+  return { documentTabs, parentDocument, parentPaths }
 }
 
-export const omitTabDocs = (docs: Doc[]): Doc[] =>
-  docs.filter(({ slug }) => {
-    const parentDoc = docs.find((doc) => doc.slug === slug.slice(0, slug.lastIndexOf('/')))
+export const omitDocumentTabs = (documents: DocumentTypes[]): DocumentTypes[] =>
+  documents.filter(({ slug }) => {
+    const parentDoc = documents.find(
+      (document) => document.slug === slug.slice(0, slug.lastIndexOf('/')),
+    )
 
     return !(parentDoc?.is_tabs ?? false)
   })

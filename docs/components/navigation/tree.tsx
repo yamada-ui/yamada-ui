@@ -14,26 +14,26 @@ import {
 import Link from 'next/link'
 import { FC, memo, useEffect } from 'react'
 import { Label } from 'components/data-display'
-import { DocWithChildren } from 'contentlayer/generated'
+import { DocumentTypesWithChildren } from 'contentlayer/generated'
 import { usePage } from 'contexts/page-context'
 
 export type TreeProps = ListProps
 
 export const Tree = memo(
   forwardRef<TreeProps, 'div'>(({ ...rest }, ref) => {
-    const { tree } = usePage()
+    const { documentTree } = usePage()
 
     return (
       <List ref={ref} gap='sm' fontSize='sm' {...rest}>
-        {tree.map((doc) => (
-          <RecursiveListItem key={doc.slug} {...doc} />
+        {documentTree.map((document) => (
+          <RecursiveListItem key={document.slug} {...document} />
         ))}
       </List>
     )
   }),
 )
 
-type RecursiveListItemProps = DocWithChildren & { isNested?: boolean }
+type RecursiveListItemProps = DocumentTypesWithChildren & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
   ({ title, menu, slug, label, children, isNested, is_expanded }) => {

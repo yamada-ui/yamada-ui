@@ -15,9 +15,9 @@ export type BreadcrumbProps = UIBreadcrumbProps
 
 export const Breadcrumb = memo(
   forwardRef<BreadcrumbProps, 'div'>(({ ...rest }, ref) => {
-    const { breadcrumbs = [] } = usePage()
+    const { documentBreadcrumbs = [] } = usePage()
 
-    return breadcrumbs.length ? (
+    return documentBreadcrumbs.length ? (
       <UIBreadcrumb
         ref={ref}
         separator={<ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />}
@@ -28,13 +28,13 @@ export const Breadcrumb = memo(
         listProps={{ h: 6 }}
         {...rest}
       >
-        {breadcrumbs.map(({ title, menu, slug }, index) => (
+        {documentBreadcrumbs.map(({ title, menu, slug }, index) => (
           <BreadcrumbItem key={slug}>
             <BreadcrumbLink as={Link} href={slug}>
               {menu ?? title}
             </BreadcrumbLink>
 
-            {breadcrumbs.length === index + 1 ? (
+            {documentBreadcrumbs.length === index + 1 ? (
               <BreadcrumbSeparator ms='1'>
                 <ChevronIcon fontSize='1rem' transform='rotate(-90deg)' />
               </BreadcrumbSeparator>

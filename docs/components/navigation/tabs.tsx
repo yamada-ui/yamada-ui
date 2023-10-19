@@ -8,21 +8,21 @@ export type TabsProps = StackProps
 
 export const Tabs = memo(
   forwardRef<TabsProps, 'div'>(({ ...rest }, ref) => {
-    const { tabs } = usePage()
+    const { documentTabs } = usePage()
     const { asPath } = useRouter()
 
-    return tabs.length ? (
+    return documentTabs.length ? (
       <Box as='nav' overflowX='auto' mt='normal'>
         <HStack
           ref={ref}
           as='ul'
-          index={tabs.findIndex(({ slug }) => slug === asPath)}
+          index={documentTabs.findIndex(({ slug }) => slug === asPath)}
           gap='0'
           borderColor='inherit'
           borderBottomWidth='1px'
           {...rest}
         >
-          {tabs.map(({ tab, menu, title, slug }) => (
+          {documentTabs.map(({ tab, menu, title, slug }) => (
             <Box as='li' key={slug}>
               <Center
                 as={Link}

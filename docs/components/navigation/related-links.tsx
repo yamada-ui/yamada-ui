@@ -5,10 +5,10 @@ import { CONSTANT } from 'constant'
 import { useI18n } from 'contexts/i18n-context'
 import { usePage } from 'contexts/page-context'
 
-export type DocLinksProps = FlexProps
+export type RelatedLinksProps = FlexProps
 
-export const DocLinks = memo(
-  forwardRef<DocLinksProps, 'div'>(({ ...rest }, ref) => {
+export const RelatedLinks = memo(
+  forwardRef<RelatedLinksProps, 'div'>(({ ...rest }, ref) => {
     const { package_name } = usePage()
     const { t } = useI18n()
 
@@ -23,23 +23,23 @@ export const DocLinks = memo(
     return (
       <Wrap ref={ref} mt='4' gap='md' {...rest}>
         {dirName ? (
-          <DocLink
+          <DocumentLink
             href={`${CONSTANT.SNS.GITHUB.UI_EDIT_URL}/${
               isHook ? 'hooks' : 'components'
             }/${dirName}`}
             leftIcon={<Github boxSize='1rem' color={['gray.700', 'whiteAlpha.800']} />}
           >
             {t('component.doc-links.source')}
-          </DocLink>
+          </DocumentLink>
         ) : null}
 
         {package_name ? (
-          <DocLink
+          <DocumentLink
             href={`https://www.npmjs.com/package/${package_name}`}
             leftIcon={<Npm boxSize='2rem' color='red.500' />}
           >
             {package_name}
-          </DocLink>
+          </DocumentLink>
         ) : null}
       </Wrap>
     )
@@ -48,7 +48,7 @@ export const DocLinks = memo(
 
 type DocLinkProps = ButtonProps & LinkProps
 
-const DocLink: FC<DocLinkProps> = memo(({ ...rest }) => {
+const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   return (
     <Button
       as={Link}
@@ -80,4 +80,4 @@ const DocLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   )
 })
 
-DocLink.displayName = 'DocLink'
+DocumentLink.displayName = 'DocumentLink'

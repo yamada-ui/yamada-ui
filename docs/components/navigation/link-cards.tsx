@@ -7,11 +7,11 @@ export type LinkCardsProps = GridProps & { with_description?: boolean }
 
 export const LinkCards = memo(
   forwardRef<LinkCardsProps, 'div'>(({ with_description = true, ...rest }, ref) => {
-    const { childrenTree } = usePage()
+    const { documentChildrenTree } = usePage()
 
     return (
       <CardContainer ref={ref} {...rest}>
-        {childrenTree.map(({ title, menu, description, label, slug }) => (
+        {documentChildrenTree.map(({ title, menu, description, label, slug }) => (
           <GridItem key={slug}>
             <LinkCard
               {...{ href: slug, title: menu ?? title, description, label, with_description }}

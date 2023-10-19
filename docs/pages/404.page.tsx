@@ -10,11 +10,11 @@ import { getStaticCommonProps } from 'utils/next'
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const Page: NextPage<PageProps> = ({ docs, tree }) => {
+const Page: NextPage<PageProps> = ({ documents, documentTree }) => {
   const { tc } = useI18n()
 
   return (
-    <PageProvider value={{ docs, tree }}>
+    <PageProvider value={{ documents, documentTree }}>
       <TopLayout>
         <SEO
           title={tc('not-found.title') as string}

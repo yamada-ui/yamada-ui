@@ -13,11 +13,11 @@ import {
 import { memo, useState } from 'react'
 import { List as ListIcon } from 'components/media-and-icons'
 import { TextWithCode } from 'components/typography'
-import { Content } from 'contentlayer/generated'
+import { DocumentContent } from 'contentlayer/generated'
 import { useI18n } from 'contexts/i18n-context'
 import { useEventListener } from 'hooks/use-event-listener'
 
-export type TableOfContentsProps = StackProps & { contents: Content[] }
+export type TableOfContentsProps = StackProps & { contents: DocumentContent[] }
 
 export const TableOfContents = memo(
   forwardRef<TableOfContentsProps, 'div'>(({ contents, ...rest }, ref) => {

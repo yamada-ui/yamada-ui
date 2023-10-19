@@ -1,4 +1,4 @@
-import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files'
+import { DocumentTypeDef, defineDocumentType, makeSource } from 'contentlayer/source-files'
 import GithubSlugger from 'github-slugger'
 import remarkBreaks from 'remark-breaks'
 import remarkEmoji from 'remark-emoji'
@@ -8,6 +8,7 @@ import { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { CONSTANT } from './constant'
 import { includes } from './utils/array'
+import { toCamelCase } from './utils/assertion'
 import { locales, otherLocales } from './utils/i18n'
 
 const OTHER_LOCALES = `(${otherLocales.join('|')})`
@@ -157,60 +158,76 @@ export const getTableOfContents = (raw: string, maxLv = Infinity) => {
     .filter(({ lv }) => maxLv >= lv)
 }
 
-const computedFields: ComputedFields = {
+const fields: DocumentTypeDef['fields'] = {
+  title: { type: 'string', required: true },
+  menu: { type: 'string' },
+  tab: { type: 'string' },
+  description: { type: 'string', required: true },
+  order: { type: 'number', default: 530000 },
+  table_of_contents_max_lv: { type: 'number', default: Infinity },
+  label: {
+    type: 'enum',
+    options: ['New', 'Considering', 'Planned', 'Experimental'],
+  },
+  tags: { type: 'list', of: { type: 'string' } },
+  is_expanded: { type: 'boolean', default: false },
+  is_active: { type: 'boolean', default: true },
+  is_tabs: { type: 'boolean', default: false },
+  with_table_of_contents: { type: 'boolean', default: true },
+  with_children: { type: 'boolean', default: false },
+  with_children_description: { type: 'boolean', default: true },
+  with_description: { type: 'boolean', default: false },
+  version: { type: 'string' },
+  package_name: { type: 'string' },
+  release_url: { type: 'string' },
+  release_date: { type: 'string' },
+}
+
+const computedFields: DocumentTypeDef['computedFields'] = {
   slug: {
     type: 'string',
-    resolve: ({ _raw }) => `/docs/${omitLocaleSlug(_raw.flattenedPath)}`,
+    resolve: ({ _raw }) => `/${omitLocaleSlug(_raw.flattenedPath)}`,
+  },
+  data: {
+    type: 'json',
+    resolve: async ({ _id, _raw, title, body, table_of_contents_max_lv, ...rest }) => ({
+      ...rest,
+      title,
+      locale: getLocale(_raw.flattenedPath),
+      paths: omitLocaleSlug(_raw.flattenedPath).split('/'),
+      editUrl: `${CONSTANT.SNS.GITHUB.DOC_EDIT_URL}/${_id}`,
+      contents: getTableOfContents(body.raw, table_of_contents_max_lv),
+    }),
   },
 }
 
-const Doc = defineDocumentType(() => ({
-  name: 'Doc',
-  filePathPattern: '**/*.mdx',
+const documentDef: Omit<DocumentTypeDef, 'name'> = {
   contentType: 'mdx',
-  fields: {
-    title: { type: 'string', required: true },
-    menu: { type: 'string' },
-    tab: { type: 'string' },
-    description: { type: 'string', required: true },
-    order: { type: 'number', default: 530000 },
-    table_of_contents_max_lv: { type: 'number', default: Infinity },
-    label: {
-      type: 'enum',
-      options: ['New', 'Considering', 'Planned', 'Experimental'],
-    },
-    tags: { type: 'list', of: { type: 'string' } },
-    is_expanded: { type: 'boolean', default: false },
-    is_active: { type: 'boolean', default: true },
-    is_tabs: { type: 'boolean', default: false },
-    with_table_of_contents: { type: 'boolean', default: true },
-    with_children: { type: 'boolean', default: false },
-    with_children_description: { type: 'boolean', default: true },
-    with_description: { type: 'boolean', default: false },
-    version: { type: 'string' },
-    package_name: { type: 'string' },
-    release_url: { type: 'string' },
-    release_date: { type: 'string' },
-  },
-  computedFields: {
-    ...computedFields,
-    data: {
-      type: 'json',
-      resolve: async ({ _id, _raw, title, body, table_of_contents_max_lv, ...rest }) => ({
-        ...rest,
-        title,
-        locale: getLocale(_raw.flattenedPath),
-        paths: omitLocaleSlug(_raw.flattenedPath).split('/'),
-        editUrl: `${CONSTANT.SNS.GITHUB.DOC_EDIT_URL}/${_id}`,
-        contents: getTableOfContents(body.raw, table_of_contents_max_lv),
-      }),
-    },
-  },
-}))
+  fields,
+  computedFields,
+}
+
+export const documentTypeNames = [
+  'getting-started',
+  'styled-system',
+  'components',
+  'hooks',
+  'figma',
+  'changelog',
+  'community',
+] as const
+
+const documentTypes = documentTypeNames.map((name) =>
+  defineDocumentType(() => ({
+    name: toCamelCase(name),
+    filePathPattern: `${name}/**/*.mdx`,
+    ...documentDef,
+  })),
+)
 
 export default makeSource({
   contentDirPath: 'contents',
-  documentTypes: [Doc],
+  documentTypes,
   mdx: {
     rehypePlugins: [rehypeCodeMeta],
     remarkPlugins: [remarkSlug, remarkGfm, remarkEmoji, remarkUIComponent, remarkBreaks],

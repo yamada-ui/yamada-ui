@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 0.3.2
+
+### Patch Changes
+
+- [`7484afb2`](https://github.com/hirotomoyamada/yamada-ui/commit/7484afb2998f47e57818245286b91d412e8e1093) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported 'Primitive' type.
+
 ## 0.3.1
 
 ### Patch Changes

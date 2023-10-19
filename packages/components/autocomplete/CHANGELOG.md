@@ -1,5 +1,21 @@
 # @yamada-ui/autocomplete
 
+## 0.4.7
+
+### Patch Changes
+
+- Updated dependencies [[`7484afb2`](https://github.com/hirotomoyamada/yamada-ui/commit/7484afb2998f47e57818245286b91d412e8e1093), [`db0f85d8`](https://github.com/hirotomoyamada/yamada-ui/commit/db0f85d8a4aba129217d9c5750d8a6f08d852561)]:
+  - @yamada-ui/utils@0.3.2
+  - @yamada-ui/popover@0.3.14
+  - @yamada-ui/form-control@0.3.16
+  - @yamada-ui/icon@0.3.14
+  - @yamada-ui/select@0.4.7
+  - @yamada-ui/core@0.12.4
+  - @yamada-ui/use-clickable@0.3.4
+  - @yamada-ui/use-controllable-state@0.2.4
+  - @yamada-ui/use-descendant@0.2.4
+  - @yamada-ui/use-outside-click@0.2.4
+
 ## 0.4.6
 
 ### Patch Changes

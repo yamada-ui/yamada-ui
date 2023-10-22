@@ -1,11 +1,129 @@
 ---
 title: Getting Started with Next.js
-description: This page is currently being created.
+description: A guide to installing and using Yamada UI in a Next.js project.
 menu: Next.js
 is_tabs: true
 tab: Pages Router
 ---
 
-We're currently in the process of creating a page.😘
+## Installation
 
-Wouldn't you like to contribute this page? That's amazing!
+Let's create the application.
+
+Execute one of the following commands in the terminal.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm create next-app my-app --typescript',
+    npm: 'npx create-next-app my-app --typescript',
+    yarn: 'yarn create next-app my-app --typescript',
+  }}
+/>
+
+Yamada UI offers a plethora of components and hooks just by installing `@yamada-ui/react`.
+
+<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+
+For using components like Table, Calendar, Carousel, etc., you need to install them separately.
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: '@yamada-ui/table',
+      description: 'Provides a handy table component using `@tanstack/react-table`.',
+      isDefaultCheck: true,
+    },
+    {
+      name: '@yamada-ui/calendar',
+      description: 'Offers a useful calendar and date picker component utilizing `dayjs`.',
+    },
+    {
+      name: '@yamada-ui/carousel',
+      description: 'Introduces a user-friendly carousel component based on `embla-carousel-react`.',
+    },
+    {
+      name: '@yamada-ui/dropzone',
+      description: 'Grants a nifty dropzone component through `react-dropzone`.',
+    },
+    {
+      name: '@yamada-ui/markdown',
+      description:
+        'Brings a functional markdown component using both `react-markdown` and `react-syntax-highlighter`.',
+    },
+    {
+      name: '@yamada-ui/fontawesome',
+      description: 'Offers a component tailored for easy use of `Font Awesome`.',
+    },
+  ]}
+/>
+
+:::note
+To enhance performance by individually installing components and hooks, please check [here](/getting-started/installation/individually).
+If you solely wish to utilize Yamada UI's styling system, please check [here](/getting-started/installation/minimal).
+:::
+
+## Add `UIProvider`
+
+After installing Yamada UI, add the `UIProvider`.
+
+```tsx live=false title=_app.tsx highlight={6,8}
+import type { AppProps } from 'next/app'
+import { UIProvider } from '@yamada-ui/react'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <UIProvider>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+The [Default theme](/styled-system/theming/default-theme) resides within the `UIProvider`.
+:::
+
+:::note
+For theme and configuration personalization, consult [Customize the theme](/styled-system/theming/customize-theme) and [Customize the configuration](/styled-system/configure/customize-config).
+:::
+
+## Incorporate `ColorModeScript`
+
+To ensure the color mode functions correctly, you must incorporate the `ColorModeScript` within the `body`.
+
+This is crucial because the color mode leverages `localStorage` or `cookies`, ensuring synchronous operation upon page loading.
+
+```tsx live=false title=_document.tsx highlight={10}
+import { Html, Head, Main, NextScript } from 'next/document'
+import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+
+export default function Document() {
+  return (
+    <Html lang='en'>
+      <Head />
+
+      <body>
+        <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+:::note status=warning
+Ensure that the `initialColorMode` prop matches the `initialColorMode` in your config. If you have a specific config, provide its `initialColorMode`.
+:::
+
+## Use the components
+
+After integrating the `UIProvider`, you can invoke the components within the application.
+
+```tsx live=false title=index.tsx
+import { Button } from '@yamada-ui/react'
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```

@@ -1,9 +1,573 @@
 ---
-title: Learn the basics
-description: This page is currently being created.
+title: Learning the Basics
+description: Read a 3-minute tutorial to learn the basics of Yamada UI's themes, styles, responsiveness, dark mode, and animations.
 order: 2
 ---
 
-We're currently in the process of creating a page.😘
+This guide will help you understand the concepts of Yamada UI. It is recommended to read this guide before starting development.
 
-Wouldn't you like to contribute this page? That's amazing!
+:::note status=warning
+This guide is basic and is intended to make you feel the `fun` of developing with Yamada UI. Therefore, it does not explain each concept and function in depth. If you want to know more, please check the links within the page.
+:::
+
+## About Themes
+
+Yamada UI, like other UI libraries, has a concept of themes.
+
+A theme is a modifiable object where tokens of many properties such as component styles, colors, spaces, font sizes, and others are defined.
+
+To set a [default theme](/styled-system/theming/default-theme) for your project, you need to add `UIProvider` to the root of your application.
+
+```tsx live=false highlight={5,7}
+import { UIProvider } from '@yamada-ui/react'
+
+const App = () => {
+  return (
+    <UIProvider>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+The [default theme](/styled-system/theming/default-theme) is included in the `UIProvider`.
+:::
+
+### Customizing the Theme
+
+If you want to customize the theme, pass `theme` to `UIProvider`.
+
+```tsx live=false highlight={3,4,5,9}
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const customTheme = extendTheme({
+  spaces: { xs: '1rem', sm: '1.25rem', md: '1.5rem', normal: '2rem', lg: '2.5rem', xl: '3rem' },
+})()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+This has changed the margins of the entire application.
+
+:::note status=warning
+`extendTheme` creates a theme that inherits the [default theme](/styled-system/theming/default-theme). If you do not use `extendTheme`, it will become a completely new theme without inheriting the [default theme](/styled-system/theming/default-theme).
+:::
+
+:::note
+If you want to learn more about themes, please see [Customizing the Theme](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
+:::
+
+### Changing Semantic Tokens
+
+Yamada UI supports semantic tokens of all scales (such as color and font size).
+
+:::note
+Semantic tokens are terms used in design systems, referring to variables or tokens that abstract the design attributes of color and font size. These tokens are named so that their function and meaning can be intuitively understood from their names.
+:::
+
+The values that are actually set are as follows.
+
+```ts
+export const semantics: ThemeSemantics = {
+  colors: {
+    primary: 'blue.500',
+    secondary: 'purple.500',
+    success: 'emerald.500',
+    warning: 'orange.500',
+    danger: 'red.500',
+    link: 'sky.500',
+  },
+  colorSchemes: {
+    primary: 'blue',
+    secondary: 'purple',
+    success: 'emerald',
+    warning: 'orange',
+    danger: 'red',
+    link: 'sky',
+  },
+}
+```
+
+Depending on the project, you may want to change the semantic tokens.
+
+For example, suppose you want to change `primary` to `pink`. In that case, you change `semantics`.
+
+```tsx live=false highlight={4,5,6,7,8,9,10,11}
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const customTheme = extendTheme({
+  semantics: {
+    colors: {
+      primary: 'pink.500',
+    },
+    colorSchemes: {
+      primary: 'pink',
+    },
+  },
+})()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+If you want to learn more about semantic tokens, please see [here](/styled-system/semantic-tokens).
+:::
+
+### Using Loading
+
+Yamada UI supports the `loading animation` necessary for applications.
+
+To display loading, use `useLoading`. `useLoading` returns instances of `screen`, `page`, `background`, and `custom`. These instances include several methods.
+
+- `isLoading`: Determines whether the loading animation is in progress.
+- `start`: Starts the loading animation.
+- `update`: Updates the information of the loading animation.
+- `finish`: Ends the loading animation.
+
+:::note status=warning
+`custom` is not set in the [default config](/styled-system/configure/default-config). If you want to set up custom loading, please see [here](/styled-system/loading).
+:::
+
+```tsx functional=true
+const { screen, page, background } = useLoading()
+
+const onLoadingScreen = async () => {
+  try {
+    screen.start()
+
+    await wait(5000)
+  } finally {
+    screen.finish()
+  }
+}
+
+const onLoadingPage = async () => {
+  try {
+    page.start()
+
+    await wait(5000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start()
+
+    await wait(5000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={onLoadingScreen}>Start screen loading</Button>
+    <Button onClick={onLoadingPage}>Start page loading</Button>
+    <Button onClick={onLoadingBackground}>Start background loading</Button>
+  </Wrap>
+)
+```
+
+:::note
+The loading icon and style can be set with the `config` passed to the `useLoading` argument or `UIProvider`.
+:::
+
+:::note
+If you want to know more about loading, please see [here](/styled-system/loading).
+:::
+
+### Using Notifications
+
+Yamada UI supports `notifications` that are necessary for your application.
+
+To display notifications, use `useNotice`. `useNotice` returns an instance that displays and controls notifications.
+
+```tsx functional=true
+const notice = useNotice()
+
+return (
+  <Button
+    onClick={() =>
+      notice({
+        title: 'Notification',
+        description: 'This is description.',
+      })
+    }
+  >
+    Show notification
+  </Button>
+)
+```
+
+:::note
+You can change the variant and display position of the notification with the `config` that can be passed to the arguments of `useNotice` or `UIProvider`.
+:::
+
+:::note
+If you want to know more about notifications, please see [here](/styled-system/notification).
+:::
+
+## About Styles
+
+With Yamada UI, you can easily change styles just by passing `props` to the components. It also provides many convenient shorthands, improving development efficiency.
+
+For example, for `padding`, you can also write `p`, and if you want to set both `margin-left` and `margin-right`, you can write `mx`.
+
+```tsx
+<Box w='full' p='md' bg='warning' color='white'>
+  This is Box
+</Box>
+```
+
+### Pseudo Elements
+
+```tsx
+<Box
+  position='relative'
+  boxSize='2xs'
+  bg='primary'
+  p='md'
+  color='white'
+  _after={{
+    content: "'after'",
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    bg: 'secondary',
+    p: 'md',
+    color: 'white',
+  }}
+>
+  Box
+</Box>
+```
+
+:::note
+If you want to learn more about `Style props` and shortcodes, please check [here](/styled-system/style-props).
+:::
+
+### Component
+
+Many of the components provided by Yamada UI can have their styles changed by setting `variant`, `size`, and `colorScheme`.
+
+```tsx
+<Wrap gap='md'>
+  <Button>Basic</Button>
+
+  <Button variant='solid' colorScheme='green'>
+    Solid
+  </Button>
+
+  <Button variant='outline' colorScheme='orange'>
+    Outline
+  </Button>
+
+  <Button variant='ghost' colorScheme='red'>
+    Ghost
+  </Button>
+
+  <Button variant='link' colorScheme='sky'>
+    Link
+  </Button>
+
+  <Button variant='unstyled'>Unstyle</Button>
+</Wrap>
+```
+
+```tsx
+<Wrap gap='md'>
+  <Button colorScheme='primary' size='xs'>
+    X Small
+  </Button>
+
+  <Button colorScheme='secondary' size='sm'>
+    Small
+  </Button>
+
+  <Button colorScheme='warning' size='md'>
+    Medium
+  </Button>
+
+  <Button colorScheme='danger' size='lg'>
+    Large
+  </Button>
+</Wrap>
+```
+
+## About Responsiveness
+
+Yamada UI supports ready-to-use responsive styles. Just by passing an object to the style's `props`, it will support PC-first responsive styles.
+
+All style `props` also accept objects. Let's start by changing the background color.
+
+- The keys of the object define the keys set in the theme's [breakpoints](/getting-started/basics#about-breakpoints).
+- The values of the object define the values of the styles set by the key.
+
+```tsx
+<Box
+  w='full'
+  p='md'
+  bg={{ base: 'primary', '2xl': 'secondary', xl: 'warning', lg: 'danger' }}
+  color='white'
+>
+  This is Box
+</Box>
+```
+
+Please change the screen width and check it out.
+
+The above code generates the following `CSS`.
+
+```css
+.Box {
+  background: var(--ui-colors-primary);
+
+  @media screen and (max-width: 1440px) {
+    background: var(--ui-colors-secondary);
+  }
+
+  @media screen and (max-width: 1280px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 976px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 480px) {
+    background: var(--ui-colors-danger);
+  }
+}
+```
+
+:::note
+If you want to learn more about responsive styles, please see [here](/styled-system/responsive-styles).
+:::
+
+:::note status=warning
+Yamada UI uses `@media(max-width)` media queries for responsive design.
+:::
+
+### About Breakpoints
+
+Responsive styles refer to the breakpoints defined in the theme. Yamada UI has a [default theme](/styled-system/theming/default-theme) where breakpoints are defined.
+
+Here are the actual defined values.
+
+```ts title=breakpoints.ts
+export const breakpoints = {
+  sm: '30em', // 480px
+  md: '48em', // 768px
+  lg: '61em', // 976px
+  xl: '80em', // 1280px
+  '2xl': '90em', // 1440px
+}
+```
+
+:::note
+If you want to change the breakpoints, please see [here](/styled-system/responsive-styles#customizing-breakpoints).
+:::
+
+## About Color Mode
+
+Yamada UI includes support for managing the color mode of your application.
+
+All components of Yamada UI support dark mode. Also, if you want to set the style of the color mode individually, it will correspond to the color mode just by passing an array to the `props` of the style.
+
+All `props` of the style also accept arrays. First, let's change the background color.
+
+- Define the value of the style you want to set in light mode as the first argument.
+- Define the value of the style you want to set in dark mode as the second argument.
+
+```tsx
+<Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
+  This is Box
+</Box>
+```
+
+Please change the color mode with the button below and check it out.
+
+<ColorModeButton />
+### Switching Color Modes
+
+The color mode is set in the [default config](/styled-system/configure/default-config).
+
+Here are the actual defined values.
+
+```ts title=config.ts
+export const config: ThemeConfig = {
+  initialColorMode: 'light',
+}
+```
+
+- `initialColorMode`: This is the initial value of the color mode. It accepts three values.
+
+  - `light`: Light mode.
+  - `dark`: Dark mode.
+  - `system`: Retrieves the color mode from the operating system (OS).
+
+:::note status=warning
+If `initialColorMode` is not set, it will internally be `light`.
+:::
+
+:::note
+If you want to change the config, please see [here](/styled-system/configure/customize-config).
+:::
+
+If you want to change the color mode within the application, use `changeColorMode` or `toggleColorMode`.
+
+- `changeColorMode`: Sets any color mode.
+- `toggleColorMode`: Switches to dark mode if it's light mode, and to light mode if it's dark mode.
+
+```tsx functional=true
+const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={() => changeColorMode('light')}>Light Mode</Button>
+    <Button onClick={() => changeColorMode('dark')}>Dark Mode</Button>
+    <Button onClick={() => changeColorMode('system')}>System</Button>
+    <Button onClick={toggleColorMode}>
+      Switch to {colorMode === 'light' ? 'Dark' : 'Light'} Mode
+    </Button>
+  </Wrap>
+)
+```
+
+:::note
+The color mode is implemented using `localStorage` or `cookies`. If you want to learn about color modes, please see [here](/styled-system/color-mode).
+:::
+
+## About Animation
+
+Yamada UI provides many utilities, such as `Motion`, a component specialized for animation, and `useAnimation`, which can be described like CSS's `keyframes`.
+
+### Using `useAnimation`
+
+`useAnimation` sets arguments such as `keyframes`, and passes the generated `animation` to `props`.
+
+- `keyframes`: Set the style of keyframes (or intermediate points) along the flow of the animation. The values of each style can use tokens from the Yamada UI style system and theme.
+- `duration`: Set the length of time required for one animation cycle.
+- `timingFunction`: Set how the animation progresses. This defines the acceleration curve, setting how the animation progresses between keyframes.
+- `delay`: Set the delay time from when the element is loaded until the animation begins.
+- `iterationCount`: Set the number of times the animation repeats. To repeat the animation indefinitely, specify `infinite`.
+- `direction`: Set whether to animate in the reverse direction and repeat when the animation sequence is completed, or to reset to the initial state and repeat the animation.
+- `fillMode`: Set whether to apply the specified style before and after the execution of the animation.
+- `playState`: Set whether to pause or resume the animation.
+
+:::note
+The animation settings are based on [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) and [Using CSS animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations#setting_the_animation).
+:::
+
+```tsx functional=true
+const animation = useAnimation({
+  keyframes: {
+    from: {
+      transform: 'rotate(0)',
+    },
+    to: {
+      transform: 'rotate(359deg)',
+    },
+  },
+  duration: '0.8s',
+  iterationCount: 'infinite',
+  timingFunction: 'linear',
+})
+
+return (
+  <Center p='lg'>
+    <Center
+      w='150px'
+      h='150px'
+      p='1'
+      rounded='50%'
+      bgGradient={[
+        'linear(blackAlpha.50, blackAlpha.500)',
+        'linear(whiteAlpha.50, whiteAlpha.500)',
+      ]}
+      animation={animation}
+    >
+      <Box w='full' h='full' rounded='50%' bg={['white', 'black']} />
+    </Center>
+  </Center>
+)
+```
+
+### Using `Motion`
+
+There are many `props` for the `Motion` component. This time, we will briefly introduce `whileHover`, `whileTap`, and `whileFocus`.
+
+- `whileHover`: This is an animation that fires when an element is hovered over.
+- `whileTap`: This is an animation that fires when an element is clicked or tapped.
+- `whileFocus`: This is an animation that fires when an element is focused.
+
+This time, we are setting `scale: 1.1` and `scale: 0.9` to enlarge and reduce the size.
+
+```tsx
+<Center p='lg'>
+  <Motion
+    as='button'
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    whileFocus={{ scale: 1.1 }}
+    p='md'
+    rounded='md'
+    bg='primary'
+    color='white'
+  >
+    Click me!
+  </Motion>
+</Center>
+```
+
+:::note
+If you want to learn more about animation, please check [here](/styled-system/animation).
+:::
+
+## Congratulations!
+
+Congratulations🎉
+
+Now, you have become a `Regular Yamada`🥳
+
+To you who have become a `Regular Yamada`, Yamada gives you these words.
+
+"I'll be waiting for you in [Learn in Application](/getting-started/advanced) next///"😘
+
+## Learn More
+
+Why not learn more about Yamada UI, including its applications and themes? 😎
+
+<CardContainer>
+  <LinkCard href='/getting-started/advanced' />
+  <LinkCard
+    href='/styled-system/theming'
+    title='Learn about theming'
+    description='Learn about the default theme of Yamada UI, and how to create and modify the values of color, font, and other theme elements.'
+  />
+  <LinkCard
+    href='/components'
+    title='Explore components'
+    description='Yamada UI offers over 100 flexible components. All components support animations and dark mode.'
+  />
+  <LinkCard
+    href='https://github.com/hirotomoyamada/yamada-ui'
+    title='Explore the source code'
+    description='The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star.'
+  />
+</CardContainer>

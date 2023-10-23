@@ -42,6 +42,8 @@ const getPaths = async (path: string, lang: keyof typeof LANG_MAP): Promise<stri
   }
 }
 
+const splitContent = (content: string): string[] => content.split(/\n(?=## |### )/).filter(Boolean)
+
 const translateContent = async (content: string, lang: keyof typeof LANG_MAP): Promise<string> => {
   const from = `from ${LANG_MAP[lang === 'en' ? 'ja' : 'en']}`
   const to = `to ${LANG_MAP[lang]}`
@@ -92,7 +94,11 @@ program
 
             let content = await readFile(path, 'utf8')
 
-            content = await translateContent(content, targetLang)
+            const contents = await Promise.all(
+              splitContent(content).map((content) => translateContent(content, targetLang)),
+            )
+
+            content = contents.join('\n')
 
             content = await prettier(content)
 

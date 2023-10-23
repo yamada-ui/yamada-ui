@@ -79,7 +79,7 @@ program
     const errors = new Map<string, string>()
 
     try {
-      spinner.text = `Read files [1 / 4]...`
+      spinner.text = `Read files...`
 
       const resolvedPaths = await getPaths(targetPath, targetLang)
 

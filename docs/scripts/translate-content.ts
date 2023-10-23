@@ -102,17 +102,19 @@ program
 
             content = await prettier(content)
 
-            outPath ??= path.replace(
-              new RegExp(`${targetLang === 'en' ? '.ja' : ''}\.mdx$`),
-              `${targetLang === 'en' ? '' : '.ja'}.mdx`,
-            )
+            const resolvedOutPath =
+              outPath ??
+              path.replace(
+                new RegExp(`${targetLang === 'en' ? '.ja' : ''}\.mdx$`),
+                `${targetLang === 'en' ? '' : '.ja'}.mdx`,
+              )
 
-            await writeFile(outPath, content)
+            await writeFile(resolvedOutPath, content)
 
             const [start, end] = process.hrtime(hrtime)
             const duration = (Number(end - start) / 1e9).toFixed(2)
 
-            successes.set(outPath, duration)
+            successes.set(resolvedOutPath, duration)
 
             spinner.text = `Translate files [${successes.size} / ${totalCount}]...`
           } catch (e) {

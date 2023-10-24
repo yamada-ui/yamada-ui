@@ -1,5 +1,14 @@
 # @yamada-ui/popover
 
+## 0.3.15
+
+### Patch Changes
+
+- [`c060f820`](https://github.com/hirotomoyamada/yamada-ui/commit/c060f8203c8a0a4d13d38bef643fc0f719380f22) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `useDisclosure` type.
+
+- Updated dependencies [[`c060f820`](https://github.com/hirotomoyamada/yamada-ui/commit/c060f8203c8a0a4d13d38bef643fc0f719380f22)]:
+  - @yamada-ui/use-disclosure@0.4.1
+
 ## 0.3.14
 
 ### Patch Changes

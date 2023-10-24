@@ -1,17 +1,22 @@
 import { useCallbackRef } from '@yamada-ui/utils'
 import { useCallback, useRef, useState } from 'react'
 
-export type UseDisclosureProps<T extends (...args: any[]) => any = () => void> =
-  {
-    isOpen?: boolean
-    defaultIsOpen?: boolean
-    onOpen?: T
-    onClose?: T
-    timing?: 'before' | 'after'
-  }
+export type UseDisclosureProps<
+  T extends (...args: any[]) => any = () => void,
+  K extends (...args: any[]) => any = () => void,
+> = {
+  isOpen?: boolean
+  defaultIsOpen?: boolean
+  onOpen?: T
+  onClose?: K
+  timing?: 'before' | 'after'
+}
 
-export const useDisclosure = <T extends (...args: any[]) => any = () => void>(
-  props: UseDisclosureProps<T> = {},
+export const useDisclosure = <
+  T extends (...args: any[]) => any = () => void,
+  K extends (...args: any[]) => any = () => void,
+>(
+  props: UseDisclosureProps<T, K> = {},
 ) => {
   const [defaultIsOpen, setIsOpen] = useState<boolean>(
     props.defaultIsOpen ?? false,
@@ -44,12 +49,12 @@ export const useDisclosure = <T extends (...args: any[]) => any = () => void>(
       if (timingRef.current === 'after') await handleClose?.(...args)
     },
     [isControlled, handleClose, timingRef],
-  ) as unknown as T
+  ) as unknown as K
 
   const onToggle = useCallback(
     (...args: any) => (!isOpen ? onOpen(...args) : onClose(...args)),
     [isOpen, onOpen, onClose],
-  ) as unknown as T
+  ) as unknown as T | K
 
   return { isOpen, onOpen, onClose, onToggle }
 }

@@ -1,5 +1,12 @@
 # @yamada-ui/calendar
 
+## 0.5.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/popover@0.3.16
+
 ## 0.5.8
 
 ### Patch Changes

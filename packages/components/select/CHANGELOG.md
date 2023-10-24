@@ -1,5 +1,12 @@
 # @yamada-ui/select
 
+## 0.4.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/popover@0.3.16
+
 ## 0.4.8
 
 ### Patch Changes

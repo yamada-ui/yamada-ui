@@ -1,5 +1,11 @@
 # @yamada-ui/use-disclosure
 
+## 0.4.2
+
+### Patch Changes
+
+- [`dab3214e`](https://github.com/hirotomoyamada/yamada-ui/commit/dab3214eef5c98e54889ee5c1d0899c7a5189713) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated function parameters and types.
+
 ## 0.4.1
 
 ### Patch Changes

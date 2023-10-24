@@ -9,7 +9,7 @@ on:
 
 jobs:
   assign:
-    name: Auto assign
+    name: Auto Assign
     runs-on: ubuntu-latest
     steps:
       - name: Set GitHub assignees

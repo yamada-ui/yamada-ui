@@ -1,21 +1,16 @@
-import { Primitive, useCallbackRef } from '@yamada-ui/utils'
+import { useCallbackRef } from '@yamada-ui/utils'
 import { useCallback, useRef, useState } from 'react'
 
-type Args = Array<any> | object | Primitive
+export type UseDisclosureProps<T extends (...args: any[]) => any = () => void> =
+  {
+    isOpen?: boolean
+    defaultIsOpen?: boolean
+    onOpen?: T
+    onClose?: T
+    timing?: 'before' | 'after'
+  }
 
-type ChainFunction<T extends Args = any> = (
-  ...args: T extends Array<any> ? T : T[]
-) => void | Promise<void>
-
-export type UseDisclosureProps<T extends Args = any> = {
-  isOpen?: boolean
-  defaultIsOpen?: boolean
-  onOpen?: ChainFunction<T>
-  onClose?: ChainFunction<T>
-  timing?: 'before' | 'after'
-}
-
-export const useDisclosure = <T extends Args = any>(
+export const useDisclosure = <T extends (...args: any[]) => any = () => void>(
   props: UseDisclosureProps<T> = {},
 ) => {
   const [defaultIsOpen, setIsOpen] = useState<boolean>(
@@ -29,8 +24,8 @@ export const useDisclosure = <T extends Args = any>(
   const isControlled = props.isOpen !== undefined
   const isOpen = props.isOpen !== undefined ? props.isOpen : defaultIsOpen
 
-  const onOpen: ChainFunction<T> = useCallback(
-    async (...args: T extends Array<any> ? T : T[]) => {
+  const onOpen = useCallback(
+    async (...args: any) => {
       if (timingRef.current === 'before') await handleOpen?.(...args)
 
       if (!isControlled) setIsOpen(true)
@@ -38,10 +33,10 @@ export const useDisclosure = <T extends Args = any>(
       if (timingRef.current === 'after') await handleOpen?.(...args)
     },
     [isControlled, handleOpen, timingRef],
-  )
+  ) as unknown as T
 
-  const onClose: ChainFunction<T> = useCallback(
-    async (...args: T extends Array<any> ? T : T[]) => {
+  const onClose = useCallback(
+    async (...args: any) => {
       if (timingRef.current === 'before') await handleClose?.(...args)
 
       if (!isControlled) setIsOpen(false)
@@ -49,13 +44,12 @@ export const useDisclosure = <T extends Args = any>(
       if (timingRef.current === 'after') await handleClose?.(...args)
     },
     [isControlled, handleClose, timingRef],
-  )
+  ) as unknown as T
 
-  const onToggle: ChainFunction<T> = useCallback(
-    (...args: T extends Array<any> ? T : T[]) =>
-      !isOpen ? onOpen(...args) : onClose(...args),
+  const onToggle = useCallback(
+    (...args: any) => (!isOpen ? onOpen(...args) : onClose(...args)),
     [isOpen, onOpen, onClose],
-  )
+  ) as unknown as T
 
   return { isOpen, onOpen, onClose, onToggle }
 }

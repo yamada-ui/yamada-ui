@@ -53,11 +53,11 @@ type TooltipOptions = {
   /**
    * Callback to run when the tooltip shows.
    */
-  onOpen?(): void
+  onOpen?: () => void
   /**
    * Callback to run when the tooltip hides.
    */
-  onClose?(): void
+  onClose?: () => void
   /**
    * If `true`, the tooltip will be disabled.
    *
@@ -200,7 +200,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
 
     closeOnPointerDown = closeOnMouseDown
 
-    const { isOpen, onOpen, onClose } = useDisclosure<any>(rest)
+    const { isOpen, onOpen, onClose } = useDisclosure(rest)
 
     const triggerRef = useRef<HTMLElement>(null)
 

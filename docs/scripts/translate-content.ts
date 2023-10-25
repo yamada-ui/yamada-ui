@@ -136,7 +136,7 @@ program
                       if (isLogs)
                         console.log(
                           chalk.gray(`[${path}]`),
-                          chalk.yellow(`Retry ${retry}`),
+                          chalk.yellow(`Retry(${retry})`),
                           `${title}`,
                         )
                     },

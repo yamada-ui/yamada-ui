@@ -174,7 +174,11 @@ program
         const [start, end] = process.hrtime(hrtime)
         const duration = (Number(end - start) / 1e9).toFixed(2)
 
-        if (spinner) spinner.succeed(chalk.green(`Done in ${duration}s` + '\n'))
+        if (spinner) {
+          spinner.succeed(chalk.green(`Done in ${duration}s` + '\n'))
+        } else {
+          console.log('\n' + chalk.green(`Done in ${duration}s` + '\n'))
+        }
 
         if (!isLogs) {
           if (successes.size !== 0) {

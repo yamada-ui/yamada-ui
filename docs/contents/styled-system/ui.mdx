@@ -1,9 +1,89 @@
 ---
 title: ui
-description: This page is currently being created.
+description: How to generate JSX elements enabled with Yamada UI's style system.
 order: 12
 ---
 
-We're currently in the process of creating a page.😘
+`ui` is an object of JSX elements enabled with Yamada UI's style system, and it can also be used as a function for custom components to receive Yamada UI's style system.
 
-Wouldn't you like to contribute this page? That's amazing!
+## How to use
+
+Use the `ui.<element>` notation to generate basic HTML elements with a style system.
+For example, to generate a plain HTML element `button` with a style system, write `<ui.button />`.
+
+```tsx
+<ui.button py='sm' px='md' rounded='md' bg='purple.600' color='white' _hover={{ bg: 'purple.500' }}>
+  Click me!
+</ui.button>
+```
+
+Please refer to [here](https://github.com/hirotomoyamada/yamada-ui/blob/0590c12a5ff0c40413f963304dab10a5c93c29b6/packages/core/src/components/element.types.ts#L1) for the supported elements.
+
+:::note
+If you want to learn more about `Style props`, please see [here](/styled-system/style-props).
+:::
+
+## Creating a Component
+
+`ui` can be used in two ways: the JSX element `<ui.div />` and the function that returns a JSX element `ui('div')`.
+
+The function is suitable for generating simple components.
+
+```tsx live=false
+import { ui } from '@yamada-ui/core'
+
+const Button = ui('button')
+
+const Demo = () => {
+  return <Button>Click me!</Button>
+}
+```
+
+You can also set default styles.
+
+```tsx live=false
+import { ui } from '@yamada-ui/core'
+
+const Button = ui('button', {
+  baseStyle: {
+    py: 'sm',
+    px: 'md',
+    rounded: 'md',
+    bg: 'purple.600',
+    color: 'white',
+    _hover: { bg: 'purple.500' },
+  },
+})
+
+const Demo = () => {
+  return <Button>Click me!</Button>
+}
+```
+
+You can pass a custom component as an argument and generate a custom component with the Yamada UI style system enabled.
+
+```tsx live=false
+import { ui } from '@yamada-ui/core'
+import { YourComponent } from './your-component'
+
+const NewComponent = ui('YourComponent')
+
+const Demo = () => {
+  return (
+    <NewComponent
+      py='sm'
+      px='md'
+      rounded='md'
+      bg='purple.600'
+      color='white'
+      _hover={{ bg: 'purple.500' }}
+    >
+      Click me!
+    </NewComponent>
+  )
+}
+```
+
+:::note
+This is effective when you want to use the Yamada UI style system with components from other libraries.
+:::

@@ -1,9 +1,65 @@
 ---
 title: CLI
-description: This page is currently being created.
+description: Generate types of customized themes using CLI commands.
 order: 15
 ---
 
-We're currently in the process of creating a page.😘
+You can generate types of tokens for customized themes such as colors and font sizes using Yamada CLI.
 
-Wouldn't you like to contribute this page? That's amazing!
+The CLI reads the customized theme and generates token types in `node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts`.
+
+## Installation
+
+Run one of the following commands in the terminal.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm add --dev @yamada-ui/cli',
+    npm: 'npm install --save-dev @yamada-ui/cli',
+    yarn: 'yarn add --dev @yamada-ui/cli',
+  }}
+/>
+
+Add a script to `package.json` and specify the location of the customized theme in the script.
+
+```json title=package.json
+{
+  ...
+  "scripts" : {
+    ...
+    "theme" : "yamada-cli tokens path/to/theme.ts",
+    "theme:watch" : "yamada-cli tokens path/to/theme.ts --watch",
+  } 、
+  ...
+}
+```
+
+:::note status=warning
+Don't forget to replace `path/to/theme.ts`.
+:::
+
+:::note status=warning
+Some package managers like `pnpm` may not find the output destination due to symbolic links, etc. In that case, use the `--out` option of the CLI to specify the output destination.
+:::
+
+## How to use
+
+To generate the type of theme, run one of the following scripts.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm theme',
+    npm: 'npm run theme',
+    yarn: 'yarn theme',
+  }}
+/>
+
+If you want to continuously generate types while customizing the theme, run one of the following scripts.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm theme:watch',
+    npm: 'npm run theme:watch',
+    yarn: 'yarn theme:watch',
+  }}
+/>

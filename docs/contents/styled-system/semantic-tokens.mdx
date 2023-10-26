@@ -1,9 +1,70 @@
 ---
 title: Semantic Tokens
-description: This page is currently being created.
+description: Yamada UI supports semantic tokens.
 order: 8
 ---
 
-We're currently in the process of creating a page.😘
+Yamada UI supports semantic tokens of all scales (such as color and font size).
 
-Wouldn't you like to contribute this page? That's amazing!
+:::note
+Semantic tokens are terms used in design systems, etc., referring to abstracted variables or tokens of design attributes such as color and font size. These tokens are named so that their function and meaning can be intuitively understood from their names.
+:::
+
+The values that are actually set are as follows.
+
+```ts
+export const semantics: ThemeSemantics = {
+  colors: {
+    primary: 'blue.500',
+    secondary: 'purple.500',
+    success: 'emerald.500',
+    warning: 'orange.500',
+    danger: 'red.500',
+    link: 'sky.500',
+  },
+  colorSchemes: {
+    primary: 'blue',
+    secondary: 'purple',
+    success: 'emerald',
+    warning: 'orange',
+    danger: 'red',
+    link: 'sky',
+  },
+}
+```
+
+:::note status=warning
+The values that can be selected in `colorSchemes` are only the tokens where `Hue (from 50 to 950)` is defined in the theme's `colors`.
+:::
+
+Semantic tokens are defined in the theme's `semantics`.
+
+```tsx live=false
+import { UIProvider, extendTheme } from '@yamada-ui/react'
+
+const semantics = {
+  colors: {
+    brand: 'violet.500',
+  },
+}
+
+const customTheme = extendTheme({ semantics })()
+
+const App = () => {
+  return (
+    <UIProvider theme={customTheme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+```tsx live=false
+<Text color='brand'>This is Brand color</Text>
+```
+
+This generates a semantic token called `brand` for `colors.violet.500` defined in the [default theme](/styled-system/theming/default-theme).
+
+:::note
+If you want to learn more about themes, please see [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
+:::

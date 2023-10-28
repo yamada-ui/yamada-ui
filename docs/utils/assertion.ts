@@ -17,3 +17,8 @@ export const toKebabCase = (value: string & {}) =>
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
     .toLowerCase()
     .replace(/^-/, '')
+
+export const wait = (ms: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })

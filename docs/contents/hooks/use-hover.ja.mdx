@@ -1,8 +1,24 @@
 ---
 title: useHover
-description: このページは現在作成中です。
+description: '`useHover`は、ポインタが要素上に移動したか離れたかを検出するカスタムフックです。'
+package_name: '@yamada-ui/use-hover'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useHover } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const { hovered, ref } = useHover()
+
+return (
+  <Box ref={ref} w='full' bg='red.500' p='md' rounded='md' color='white'>
+    {hovered ? 'I am hovered' : 'Put mouse over me please'}
+  </Box>
+)
+```

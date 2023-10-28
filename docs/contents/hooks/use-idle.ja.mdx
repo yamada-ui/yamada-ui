@@ -1,8 +1,31 @@
 ---
 title: useIdle
-description: このページは現在作成中です。
+description: '`useIdle`は、ユーザーが一定時間何もしなかったかどうかをミリ秒単位で検出するカスタムフックです。'
+package_name: '@yamada-ui/use-idle'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useIdle } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const idle = useIdle(2000)
+
+return (
+  <Box
+    bg={idle ? 'blue.500' : 'red.500'}
+    p='md'
+    rounded='md'
+    color='white'
+    transitionProperty='all'
+    transitionDuration='slower'
+  >
+    Current state: {idle ? 'idle' : 'not idle'}
+  </Box>
+)
+```

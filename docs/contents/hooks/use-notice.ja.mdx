@@ -1,8 +1,330 @@
 ---
 title: useNotice
-description: このページは現在作成中です。
+description: '`useNotice`は、アプリケーションの通知を制御するカスタムフックです。'
+package_name: '@yamada-ui/notice'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useNotice } from '@yamada-ui/react'
+```
+
+## 使い方
+
+通知を表示するには、`useNotice`を使用します。`useNotice`は、通知を表示・制御するインスタンスを返します。
+
+```tsx functional=true
+const notice = useNotice()
+
+return (
+  <Button onClick={() => notice({ title: 'Notification', description: 'This is description.' })}>
+    Show notification
+  </Button>
+)
+```
+
+:::note
+通知をもっと学びたい場合は、[こちら](/styled-system/notification)をご覧ください。
+:::
+
+## 通知をカスタマイズする
+
+通知のオプションは、`useNotice`の引数か`useNotice`から返されたインスタンスの引数に渡します。
+
+:::note
+オプションは、`useNotice`から返されたインスタンスの引数が優先されます。
+:::
+
+### 表示時間を変更する
+
+表示時間の変更は、`duration`で変更します。
+
+```tsx functional=true
+const notice = useNotice({ duration: 8000 })
+
+return (
+  <Button
+    onClick={() =>
+      notice({ title: 'Notification', description: 'This is description.', duration: 10000 })
+    }
+  >
+    Show notification
+  </Button>
+)
+```
+
+### 維持させる
+
+表示の維持は、`duration`を`null`にします。
+
+```tsx functional=true
+const notice = useNotice({ duration: null, isClosable: true })
+
+return (
+  <Button onClick={() => notice({ title: 'Notification', description: 'This is description.' })}>
+    Show notification
+  </Button>
+)
+```
+
+:::note status=warning
+表示を維持した場合、`isClosable`を`true`にすることをオススメします。そうしなければ、ユーザーが通知を閉じる手段がありません。
+:::
+
+### 位置を変更する
+
+表示の位置の変更は、`placement`で変更します。
+
+```tsx functional=true
+const notice = useNotice()
+const placements = ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']
+
+return (
+  <Wrap gap='md'>
+    {placements.map((placement) => (
+      <Button
+        key={placement}
+        onClick={() =>
+          notice({ title: 'Notification', description: 'This is description.', placement })
+        }
+      >
+        Show "{placement}" notification
+      </Button>
+    ))}
+  </Wrap>
+)
+```
+
+### 表示件数を制限する
+
+表示件数を制限には、`limit`で変更します。
+
+```tsx functional=true
+const notice = useNotice({ limit: 3 })
+
+return (
+  <Button onClick={() => notice({ title: 'Notification', description: 'This is description.' })}>
+    Show notification
+  </Button>
+)
+```
+
+### バリアントを変更する
+
+`Alert`と同じバリアントを使用します。
+
+```tsx functional=true
+const notice = useNotice()
+const variants = ['basic', 'solid', 'subtle', 'top-accent', 'left-accent']
+
+return (
+  <Wrap gap='md'>
+    {variants.map((variant) => (
+      <Button
+        key={variant}
+        onClick={() =>
+          notice({ title: 'Notification', description: 'This is description.', variant })
+        }
+      >
+        Show "{variant}" notification
+      </Button>
+    ))}
+  </Wrap>
+)
+```
+
+### ステータスを変更する
+
+ステータスは、通知の色を変更します。
+
+```tsx functional=true
+const notice = useNotice()
+const statuses = ['info', 'success', 'warning', 'error', 'loading']
+
+return (
+  <Wrap gap='md'>
+    {statuses.map((status) => (
+      <Button
+        key={status}
+        onClick={() =>
+          notice({ title: 'Notification', description: 'This is description.', status })
+        }
+      >
+        Show "{status}" notification
+      </Button>
+    ))}
+  </Wrap>
+)
+```
+
+### カラースキーマを使う
+
+色の変更は、`colorScheme`で変更します。
+
+```tsx functional=true
+const notice = useNotice()
+const colorSchemes = ['green', 'purple', 'gray', 'pink']
+
+return (
+  <Wrap gap='md'>
+    {colorSchemes.map((colorScheme) => (
+      <Button
+        key={colorScheme}
+        onClick={() =>
+          notice({ title: 'Notification', description: 'This is description.', colorScheme })
+        }
+      >
+        Show "{colorScheme}" notification
+      </Button>
+    ))}
+  </Wrap>
+)
+```
+
+### ローディングのバリアントを変更する
+
+ローディングアイコンのバリアントの変更は、`icon.variant`で変更します。
+
+```tsx functional=true
+const notice = useNotice()
+const variants = ['oval', 'puff', 'dots', 'grid']
+
+return (
+  <Wrap gap='md'>
+    {variants.map((variant) => (
+      <Button
+        key={variant}
+        onClick={() =>
+          notice({
+            title: 'Notification',
+            description: 'This is description.',
+            status: 'loading',
+            icon: { variant },
+          })
+        }
+      >
+        Show "{variant}" notification
+      </Button>
+    ))}
+  </Wrap>
+)
+```
+
+### 通知を更新する
+
+通知を更新する場合は、インスタンスから生成された`id`を指定して新しいオプションを渡します。
+
+```tsx functional=true
+const notice = useNotice()
+const ref = useRef<string | number | undefined>(undefined)
+
+const onOpen = () => {
+  ref.current = notice({
+    title: 'Notification',
+    description: 'This is description.',
+    colorScheme: 'orange',
+    duration: 30000,
+  })
+}
+const onUpdate = () => {
+  if (ref.current)
+    notice.update(ref.current, {
+      title: 'Updated notification',
+      description: 'This is updated description.',
+      colorScheme: 'blue',
+      duration: 30000,
+    })
+}
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={onOpen}>Show notification</Button>
+    <Button onClick={onUpdate}>Update last notification</Button>
+  </Wrap>
+)
+```
+
+### 通知を閉じる
+
+すべての通知を閉じるには、インスタンスのメソッドの`coloseAll`を使用します。個別の通知を閉じる場合は、インスタンスから生成された`id`を指定します。
+
+```tsx functional=true
+const notice = useNotice()
+const ref = useRef<string | number | undefined>(undefined)
+
+const onOpen = () => {
+  ref.current = notice({
+    title: 'Notification',
+    description: 'This is description.',
+    duration: 30000,
+    isClosable: true,
+  })
+}
+
+const onClose = () => {
+  if (ref.current) notice.close(ref.current)
+}
+
+const onCloseAll = () => {
+  notice.closeAll()
+}
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={onOpen}>Show notification</Button>
+    <Button onClick={onClose}>Close last notification</Button>
+    <Button onClick={onCloseAll}>Close all notification</Button>
+  </Wrap>
+)
+```
+
+### コンポーネントをカスタマイズする
+
+描写するコンポーネントをカスタマイズする場合は、`component`を使用します。
+
+```tsx functional=true
+const notice = useNotice({
+  component: ({ description }) => (
+    <Box color='white' py={3} px={4} bg='purple.500'>
+      {description}
+    </Box>
+  ),
+})
+
+return (
+  <Button onClick={() => notice({ description: 'This is description.' })}>Show notification</Button>
+)
+```
+
+### スタイルをカスタマイズする
+
+```tsx functional=true
+const notice = useNotice({ style: { maxW: '100%', minW: '100%' } })
+
+return (
+  <Wrap gap='md'>
+    <Button
+      onClick={() =>
+        notice({ title: 'Notification', description: 'This is description.', isClosable: true })
+      }
+    >
+      Show notification
+    </Button>
+
+    <Button
+      onClick={() =>
+        notice({
+          title: 'Notification',
+          description: 'This is description.',
+          isClosable: true,
+          style: { minW: '60%' },
+        })
+      }
+    >
+      Show individual style notification
+    </Button>
+  </Wrap>
+)
+```

@@ -1,9 +1,102 @@
 ---
 title: Getting Started with Create React App
-description: This page is currently being created.
+description: A guide to installing and using Yamada UI in a Create React App project.
 menu: Create React App
 ---
 
-We're currently in the process of creating a page.😘
+## Installation
 
-Wouldn't you like to contribute this page? That's amazing!
+Let's create the application.
+
+Execute one of the following commands in the terminal.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm create react-app my-app --template typescript',
+    npm: 'npx create-react-app my-app --template typescript',
+    yarn: 'yarn create react-app my-app --template typescript',
+  }}
+/>
+
+With Yamada UI, just by installing `@yamada-ui/react`, you can use most of the components and hooks.
+
+<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+
+If you want to use components like Table, Calendar, Carousel, etc., you need to install them separately.
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: '@yamada-ui/table',
+      description: 'Provides a convenient table component using `@tanstack/react-table`.',
+      isDefaultCheck: true,
+    },
+    {
+      name: '@yamada-ui/calendar',
+      description: 'Provides a convenient calendar and date picker component using `dayjs`.',
+    },
+    {
+      name: '@yamada-ui/carousel',
+      description: 'Provides a convenient carousel component using `embla-carousel-react`.',
+    },
+    {
+      name: '@yamada-ui/dropzone',
+      description: 'Provides a convenient dropzone component using `react-dropzone`.',
+    },
+    {
+      name: '@yamada-ui/markdown',
+      description:
+        'Provides a convenient markdown component using `react-markdown` and `react-syntax-highlighter`.',
+    },
+    {
+      name: '@yamada-ui/fontawesome',
+      description: 'Provides a component for conveniently using `Font Awesome`.',
+    },
+  ]}
+/>
+
+:::note
+To improve performance by installing components and hooks individually, please check [here](/getting-started/installation/individually).
+If you only want to use Yamada UI's styling system, please check [here](/getting-started/installation/minimal).
+:::
+
+## Add `UIProvider`
+
+After installing Yamada UI, add the `UIProvider`.
+
+```tsx live=false title=index.tsx highlight={10,12}
+import { createRoot } from 'react-dom/client'
+import { App } from './app'
+import { UIProvider } from '@yamada-ui/react'
+
+const container = document.getElementById('app')
+
+const root = createRoot(container!)
+
+root.render(
+  <UIProvider>
+    <App />
+  </UIProvider>,
+)
+```
+
+:::note
+The [Default theme](/styled-system/theming/default-theme) is included inside the `UIProvider`.
+:::
+
+:::note
+If you want to customize the theme or configuration, please check [Customize the theme](/styled-system/theming/customize-theme) and [Customize the configuration](/styled-system/configure/customize-config).
+:::
+
+## Use the components
+
+Once you've added the `UIProvider`, call the components within the application.
+
+```tsx live=false title=app.tsx
+import { FC } from 'react'
+import { Button } from '@yamada-ui/react'
+
+export const App: FC = () => {
+  return <Button>Click me!</Button>
+}
+```

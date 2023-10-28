@@ -1,8 +1,25 @@
 ---
 title: useMediaQuery
-description: このページは現在作成中です。
+description: '`useMediaQuery`は、単一または複数のメディアクエリに一致するかどうかを検知するカスタムフックです。'
+package_name: '@yamada-ui/use-media-query'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useMediaQuery } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const [isLarge, isDark] = useMediaQuery(['(min-width: 1280px)', '(prefers-color-scheme: dark)'])
+
+return (
+  <>
+    <Text>{isLarge ? 'larger than 1280px' : 'smaller than 1280px'}</Text>
+    <Text>{isDark ? 'color mode is dark' : 'color mode is light'}</Text>
+  </>
+)
+```

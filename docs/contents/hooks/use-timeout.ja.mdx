@@ -1,8 +1,22 @@
 ---
 title: useTimeout
-description: このページは現在作成中です。
+description: '`useTimeout`は、指定されたミリ秒後に関数を実行するカスタムフックです。'
+package_name: '@yamada-ui/use-timeout'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useTimeout } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const [state, setState] = useState<number>(1)
+
+useTimeout(() => setState((prev) => prev + 1), 3000)
+
+return <Text>Current state: {state}</Text>
+```

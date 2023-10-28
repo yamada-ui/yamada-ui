@@ -1,8 +1,197 @@
 ---
 title: useLoading
-description: このページは現在作成中です。
+description: '`useLoading`は、アプリケーションのローディングを制御するカスタムフックです。'
+package_name: '@yamada-ui/loading'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useLoading } from '@yamada-ui/react'
+```
+
+## 使い方
+
+`useLoading`は、`screen`・`page`・`background`・`custom`のインスタンスを返します。インスタンスには、いくつかのメソッドが含まれています。
+
+- `isLoading`: ローディングアニメーション中かどうかを取得します。
+- `start`: ローディングアニメーションを開始します。
+- `update`: ローディングアニメーションの情報を更新します。
+- `finish`: ローディングアニメーションを終了します。
+
+:::note status=warning
+`custom`は、[デフォルトのコンフィグ](/styled-system/configure/default-config)で設定されていません。カスタムローディングを設定したい場合は、[こちら](#カスタムコンポーネントを使う)をご覧ください。
+:::
+
+```tsx functional=true
+const { screen, page, background } = useLoading()
+
+const onLoadingScreen = async () => {
+  try {
+    screen.start()
+
+    await wait(5000)
+  } finally {
+    screen.finish()
+  }
+}
+
+const onLoadingPage = async () => {
+  try {
+    page.start()
+
+    await wait(5000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start()
+
+    await wait(5000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={onLoadingScreen}>Start screen loading</Button>
+    <Button onClick={onLoadingPage}>Start page loading</Button>
+    <Button onClick={onLoadingBackground}>Start background loading</Button>
+  </Wrap>
+)
+```
+
+:::note
+ローディングをもっと学びたい場合は、[こちら](/styled-system/loading)をご覧ください。
+:::
+
+### タイムアウトを付与する
+
+通信などのケースでは、タイムアウトを付与する必要があります。その場合は、`duration`を使います。
+
+```tsx functional=true
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
+    <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
+    <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
+  </Wrap>
+)
+```
+
+### メッセージを付与する
+
+ローディングにメッセージを付与する場合は、`message`を使います。
+
+```tsx functional=true
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
+      Start screen loading
+    </Button>
+    <Button onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
+      Start page loading
+    </Button>
+    <Button onClick={() => background.start({ message: 'Loading', duration: 5000 })}>
+      Start background loading
+    </Button>
+  </Wrap>
+)
+```
+
+`message`は、`JSXエレメント`を渡せます。
+
+```tsx functional=true
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap='md'>
+    <Button
+      onClick={() =>
+        screen.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+      }
+    >
+      Start screen loading
+    </Button>
+    <Button
+      onClick={() => page.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })}
+    >
+      Start page loading
+    </Button>
+    <Button
+      onClick={() =>
+        background.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+      }
+    >
+      Start background loading
+    </Button>
+  </Wrap>
+)
+```
+
+### メッセージを更新する
+
+メッセージを更新する場合は、メソッドの`update`を使用してオプションを渡します。
+
+```tsx functional=true
+const { screen, page, background } = useLoading()
+
+const onLoadingScreen = async () => {
+  try {
+    screen.start({ message: 'Loading' })
+
+    await wait(3000)
+
+    screen.update({ message: 'Please wait' })
+
+    await wait(3000)
+  } finally {
+    screen.finish()
+  }
+}
+
+const onLoadingPage = async () => {
+  try {
+    page.start({ message: 'Loading' })
+
+    await wait(3000)
+
+    page.update({ message: 'Please wait' })
+
+    await wait(3000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start({ message: 'Loading' })
+
+    await wait(3000)
+
+    background.update({ message: 'Please wait' })
+
+    await wait(3000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={onLoadingScreen}>Start screen loading</Button>
+    <Button onClick={onLoadingPage}>Start page loading</Button>
+    <Button onClick={onLoadingBackground}>Start background loading</Button>
+  </Wrap>
+)
+```

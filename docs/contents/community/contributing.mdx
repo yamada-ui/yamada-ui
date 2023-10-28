@@ -1,10 +1,73 @@
 ---
 title: Contributing to Yamada UI
-description: This page is currently being created.
-menu: Contributing
+description: This page is currently under construction.
+menu: Contribution
 order: 2
 ---
 
-We're currently in the process of creating a page.😘
+Thank you for your interest in contributing to Yamada UI😎, you are awesome!!!
 
-Wouldn't you like to contribute this page? That's amazing!
+When it comes to open source, there are different ways you can contribute, all of which are valuable. Here are some guidelines that should help you as you prepare your contribution.
+
+## Setup the Project
+
+The following steps will get you up and running to contribute to Yamada UI:
+
+1. Fork the [repository](https://github.com/hirotomoyamada/yamada-docs).
+
+2. Clone your fork locally.
+
+```sh
+git clone https://github.com/<your_github_username>/yamada-docs.git
+
+cd yamada-docs
+```
+
+3. Setup all the dependencies and packages by running `pnpm install`. This command will install dependencies.
+
+4. Run `pnpm dev` to start the local server. In the case of `Windows`, `contentlayer` may not work as expected. If so, run `npx contentlayer build` before `pnpm dev`.
+
+## Commands
+
+- **`pnpm install`**: Sets up all dependencies and packages.
+- **`pnpm dev`**: Launches the local server.
+- **`pnpm build`**: Builds the site.
+- **`pnpm lint`**: Checks for code issues.
+
+## Update the Document
+
+### Commit Convention
+
+Before you create a Pull Request, please check whether your commits comply with
+the commit conventions used in this repository.
+
+When you create a commit we kindly ask you to follow the convention
+`category(scope or module): message` in your commit message while using one of
+the following categories:
+
+- `feat / feature`: all changes that introduce completely new code or new features
+- `fix`: changes that fix a bug (ideally you will additionally reference an issue if present)
+- `refactor`: any code related change that is not a fix nor a feature
+- `docs`: changing existing or creating new documentation (i.e. README, docs for usage of a lib or cli usage)
+- `build`: all changes regarding the build of the software, changes to dependencies or the addition of new dependencies
+- `test`: all changes regarding tests (adding new tests or changing existing ones)
+- `ci`: all changes regarding the configuration of continuous integration (i.e. github actions, ci system)
+- `chore`: all changes to the repository that do not fit into any of the above categories
+
+If you are interested in the detailed specification you can visit
+https://www.conventionalcommits.org or check out the
+[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
+
+### Steps to PR
+
+1. Fork and clone the [repository](https://github.com/hirotomoyamada/yamada-docs).
+
+2. Create a new branch from the `main` branch, following the [type/scope] naming convention. For example, `fix/accordion-hook` or `menu-typo`. `Type` is one of the standard commit types such as `docs`, `fix`, `feat`, `build`, etc. `Scope` is a short word that represents the scope of work.
+
+3. Make changes and commit according to the [commit convention](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention).
+
+4. Once all the tasks above are completed, push your changes. After pushing, a pull request URL will be generated. Please submit your request following the template. Also, check the checks within the pull request and make sure the build has completed successfully. If there are any issues, this pull request will not be merged.
+
+## License
+
+By contributing code to the `Yamada UI` GitHub repository, you agree that your contributed code will be licensed under the MIT license.

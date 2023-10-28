@@ -1,9 +1,93 @@
 ---
 title: Gradient
-description: This page is currently being created.
+description: Yamada UI supports readily available gradients.
 order: 7
 ---
 
-We're currently in the process of creating a page.😘
+Yamada UI provides an API to easily create gradients.
 
-Wouldn't you like to contribute this page? That's amazing!
+## How to use
+
+To add a gradient, set the value according to the `bgGradient` API.
+
+- `linear(<direction>, <from>, <to>)`
+- `radial(<from>, <to>)`
+
+You can also use other CSS gradient functions such as `repeating-linear` and `conic`.
+
+Shorthand is also provided for `<direction>`.
+
+```ts
+{
+  'to-t': 'to top',
+  'to-tr': 'to top right',
+  'to-r': 'to right',
+  'to-br': 'to bottom right',
+  'to-b': 'to bottom',
+  'to-bl': 'to bottom left',
+  'to-l': 'to left',
+  'to-tl': 'to top left',
+}
+```
+
+```tsx
+<Box w='full' h='xs' bgGradient='linear(to-r, purple.500, blue.400)' />
+```
+
+### Color Customization
+
+The API can use both [color tokens](/styled-system/theming/default-theme#colors) and [CSS color values](https://developer.mozilla.org/ja/Web/CSS/color).
+
+```tsx
+<Box w='full' h='xs' bgGradient='linear(to-r, #59a9e1, #f37bdf)' />
+```
+
+### Gradient Tokens
+
+Gradient tokens can be defined in the theme.
+
+```ts
+import { ThemeTokens } from '@yamada-ui/react'
+
+export const gradients: ThemeTokens = {
+  blue: 'linear(to-r, #132293, #2375b4)',
+}
+```
+
+```tsx
+<Box w='full' h='xs' bgGradient='blue' />
+```
+
+:::note status=warning
+Gradient tokens are not defined in the [default theme](/styled-system/theming/default-theme). If you want to use gradient tokens, please see [how to customize the theme](/styled-system/theming/customize-theme).
+:::
+
+## Text Gradient
+
+To add a gradient to the text, set `text` to `bgGradient` and `bgClip`.
+
+```tsx
+<Heading size='2xl' bgGradient='linear(to-r, orange.400, red.500)' bgClip='text' isTruncated>
+  About Krillin... About Krillinーーーっ！！！！！
+</Heading>
+```
+
+## Responsive Gradients
+
+You can support responsive styles by passing an object to `bgGradient`.
+
+```tsx
+<Box
+  w='full'
+  h='xs'
+  bgGradient={{
+    base: 'linear(to-tr, teal.300, yellow.400)',
+    lg: 'linear(to-t, blue.200, teal.500)',
+    md: 'linear(to-b, orange.100, purple.300)',
+  }}
+/>
+```
+
+:::note
+If you want to learn more about responsive styles, please see [here](/styled-system/responsive-styles).
+:::

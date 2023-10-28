@@ -1,9 +1,114 @@
 ---
 title: Getting Started with Next.js
-description: This page is currently being created.
+description: A guide to install and use Yamada UI in your Next.js project.
 tab: App Router
 ---
 
-We're currently in the process of creating a page.😘
+## Installation
 
-Wouldn't you like to contribute this page? That's amazing!
+Let's create the application.
+
+Execute one of the following commands in the terminal.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: 'pnpm create next-app my-app --typescript',
+    npm: 'npx create-next-app my-app --typescript',
+    yarn: 'yarn create next-app my-app --typescript',
+  }}
+/>
+
+With just the installation of `@yamada-ui/react` and `@yamada-ui/nextjs`, you can use most of the components and hooks from Yamada UI.
+
+<PackageManagers packageNameOrCommand={['@yamada-ui/react', '@yamada-ui/nextjs']} />
+
+For features such as tables, calendars, carousels, etc., separate installation is required.
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: '@yamada-ui/table',
+      description: 'Provides a handy table component using `@tanstack/react-table`.',
+      isDefaultCheck: true,
+    },
+    {
+      name: '@yamada-ui/calendar',
+      description: 'Provides a handy calendar and date picker component using `dayjs`.',
+    },
+    {
+      name: '@yamada-ui/carousel',
+      description: 'Provides a handy carousel component using `embla-carousel-react`.',
+    },
+    {
+      name: '@yamada-ui/dropzone',
+      description: 'Provides a handy drop zone component using `react-dropzone`.',
+    },
+    {
+      name: '@yamada-ui/markdown',
+      description:
+        'Provides a handy markdown component using `react-markdown` and `react-syntax-highlighter`.',
+    },
+    {
+      name: '@yamada-ui/fontawesome',
+      description: 'Provides a component for conveniently using `Font Awesome`.',
+    },
+  ]}
+/>
+
+:::note
+To improve performance by installing components or hooks individually, please click [here](/getting-started/installation/individually).
+If you want to use only the style system of Yamada UI, please click [here](/getting-started/installation/minimal).
+:::
+
+## Add `UIProvider`, `CacheProvider`, and `ColorModeScript`
+
+In Next.js 13, `server components` are used by default. However, **Yamada UI is a `client component`**.
+
+Pages or components using Yamada UI components need to add `'use client'` to convert to `client components`.
+
+After installing Yamada UI, add `UIProvider`, `CacheProvider`, and `ColorModeScript`.
+
+```tsx live=false title=layout.tsx highlight={10,12,13,14}
+'use client'
+
+import { colorModeManager, UIProvider, ColorModeScript } from '@yamada-ui/react'
+import { CacheProvider } from '@yamada-ui/nextjs'
+
+const { cookieStorageManager } = colorModeManager
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang='en'>
+      <body>
+        <ColorModeScript type='cookie' nonce='testing' />
+
+        <CacheProvider>
+          <UIProvider colorModeManager={cookieStorageManager}>{children}</UIProvider>
+        </CacheProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+:::note status=warning
+You need to add `'use client'` at the beginning of the page.
+:::
+
+## Use the components
+
+After adding `UIProvider`, call the components within the application.
+
+```tsx live=false title=page.tsx
+'use client'
+
+import { Button } from '@yamada-ui/react'
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+:::note status=warning
+You need to add `'use client'` at the beginning of the page.
+:::

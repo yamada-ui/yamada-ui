@@ -1,8 +1,24 @@
 ---
 title: useHover
-description: This page is currently being created.
+description: '`useHover` is a custom hook that detects whether the pointer has moved over or left an element.'
+package_name: '@yamada-ui/use-hover'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useHover } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const { hovered, ref } = useHover()
+
+return (
+  <Box ref={ref} w='full' bg='red.500' p='md' rounded='md' color='white'>
+    {hovered ? 'I am hovered' : 'Put mouse over me please'}
+  </Box>
+)
+```

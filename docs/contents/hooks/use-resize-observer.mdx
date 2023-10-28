@@ -1,8 +1,30 @@
 ---
 title: useResizeObserver
-description: This page is currently being created.
+description: '`useResizeObserver` is a custom hook that tracks changes in the size and position of an element.'
+package_name: '@yamada-ui/use-resize-observer'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useResizeObserver } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const [flg, { toggle }] = useBoolean()
+
+const [ref, rect] = useResizeObserver<HTMLButtonElement>()
+
+return (
+  <>
+    <Text>{JSON.stringify(rect)}</Text>
+
+    <Button ref={ref} mt='md' onClick={toggle} w={flg ? 'xl' : 'sm'} h={flg ? 'xl' : 'sm'}>
+      Click me to toggle the boolean value
+    </Button>
+  </>
+)
+```

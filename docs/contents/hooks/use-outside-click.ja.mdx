@@ -1,8 +1,36 @@
 ---
 title: useOutsideClick
-description: このページは現在作成中です。
+description: '`useOutsideClick`は、要素の外側のクリックイベントを検出するカスタムフックです。'
+package_name: '@yamada-ui/use-outside-click'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useOutsideClick } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const ref = useRef<HTMLDivElement>(null)
+const [isOpen, setIsOpen] = useState(false)
+
+useOutsideClick({
+  ref,
+  handler: () => setIsOpen(false),
+})
+
+return (
+  <>
+    {isOpen ? (
+      <Center ref={ref} h='10' px='4' bg='danger' color='white' rounded='md'>
+        Hey, Click anywhere outside of me to close.
+      </Center>
+    ) : (
+      <Button onClick={() => setIsOpen(true)}>Please Click</Button>
+    )}
+  </>
+)
+```

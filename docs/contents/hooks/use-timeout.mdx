@@ -1,8 +1,22 @@
 ---
 title: useTimeout
-description: This page is currently being created.
+description: '`useTimeout` is a custom hook that executes a function after a specified number of milliseconds.'
+package_name: '@yamada-ui/use-timeout'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useTimeout } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const [state, setState] = useState<number>(1)
+
+useTimeout(() => setState((prev) => prev + 1), 3000)
+
+return <Text>Current state: {state}</Text>
+```

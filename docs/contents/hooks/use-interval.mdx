@@ -1,8 +1,22 @@
 ---
 title: useInterval
-description: This page is currently being created.
+description: '`useInterval` is a custom hook that runs a function at a specified interval.'
+package_name: '@yamada-ui/use-interval'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useInterval } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const [state, setState] = useState<number>(1)
+
+useInterval(() => setState((prev) => prev + 1), 3000)
+
+return <Text>Current state: {state}</Text>
+```

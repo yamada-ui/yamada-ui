@@ -20,7 +20,7 @@
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",
     "format": "prettier --write .",
     "dev": "turbo run dev --filter=!./examples/*",
-    "test": "jest",
+    "test": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "prebuild": "pnpm --prefix packages/cli build && pnpm gen:tokens",

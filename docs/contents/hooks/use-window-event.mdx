@@ -1,8 +1,36 @@
 ---
 title: useWindowEvent
-description: This page is currently being created.
+description: '`useWindowEvent` is a custom hook that assigns a specified event listener to `window`.'
+package_name: '@yamada-ui/use-window-event'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useWindowEvent } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const inputRef = useRef<HTMLInputElement>(null)
+
+useWindowEvent('keydown', (ev) => {
+  if (ev.code === 'KeyK' && (ev.ctrlKey || ev.metaKey)) {
+    ev.preventDefault()
+
+    if (inputRef.current) inputRef.current.focus()
+  }
+})
+
+return (
+  <>
+    <Text>
+      Focus: <Kbd>Ctrl + K</Kbd>
+    </Text>
+
+    <Input ref={inputRef} mt='md' />
+  </>
+)
+```

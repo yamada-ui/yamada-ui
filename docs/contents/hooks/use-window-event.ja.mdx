@@ -1,8 +1,36 @@
 ---
 title: useWindowEvent
-description: このページは現在作成中です。
+description: '`useWindowEvent`は、`window`へ指定されたイベントリスナーを割り当てるカスタムフックです。'
+package_name: '@yamada-ui/use-window-event'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useWindowEvent } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const inputRef = useRef<HTMLInputElement>(null)
+
+useWindowEvent('keydown', (ev) => {
+  if (ev.code === 'KeyK' && (ev.ctrlKey || ev.metaKey)) {
+    ev.preventDefault()
+
+    if (inputRef.current) inputRef.current.focus()
+  }
+})
+
+return (
+  <>
+    <Text>
+      Focus: <Kbd>Ctrl + K</Kbd>
+    </Text>
+
+    <Input ref={inputRef} mt='md' />
+  </>
+)
+```

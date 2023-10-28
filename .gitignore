@@ -7,6 +7,7 @@ node_modules
 
 # compiled
 storybook-static
+coverage
 dist
 
 # misc
@@ -28,5 +29,3 @@ yarn-error.log*
 # dotenv environment variables file
 .env
 .env.*
-
-coverage

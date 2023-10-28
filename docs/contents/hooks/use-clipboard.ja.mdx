@@ -1,8 +1,99 @@
 ---
 title: useClipboard
-description: このページは現在作成中です。
+description: '`useClipboard`は、値をクリップボードにコピーする処理を行うカスタムフックです。'
+package_name: '@yamada-ui/use-clipboard'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useClipboard } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const { onCopy, value, setValue, hasCopied } = useClipboard()
+
+return (
+  <>
+    <HStack gap='md'>
+      <Input
+        placeholder='text to be copied...'
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button onClick={onCopy}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+    </HStack>
+
+    <Editable placeholder='Paste here' mt='md'>
+      <EditablePreview width='full' />
+      <EditableInput />
+    </Editable>
+  </>
+)
+```
+
+### 初期値を使う
+
+```tsx functional=true
+const { onCopy, value, setValue, hasCopied } = useClipboard('initial value')
+
+return (
+  <>
+    <HStack gap='md'>
+      <Input
+        placeholder='text to be copied...'
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button onClick={onCopy}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+    </HStack>
+
+    <Editable placeholder='Paste here' mt='md'>
+      <EditablePreview width='full' />
+      <EditableInput />
+    </Editable>
+  </>
+)
+```
+
+### タイムアウトを制御する
+
+```tsx functional=true
+const { onCopy, value, setValue, hasCopied } = useClipboard('', 5000)
+
+return (
+  <>
+    <HStack gap='md'>
+      <Input
+        placeholder='text to be copied...'
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button onClick={onCopy}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+    </HStack>
+
+    <Editable placeholder='Paste here' mt='md'>
+      <EditablePreview width='full' />
+      <EditableInput />
+    </Editable>
+  </>
+)
+```
+
+### 指定した値をコピーする
+
+```tsx functional=true
+const { onCopy, hasCopied } = useClipboard()
+
+const value = '孫悟空'
+
+return (
+  <HStack gap='md'>
+    <Input value={value} isReadOnly />
+    <Button onClick={() => onCopy(value)}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+  </HStack>
+)
+```

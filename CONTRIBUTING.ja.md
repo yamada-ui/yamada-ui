@@ -77,7 +77,7 @@ cd yamada-ui
 
 ### プルリクエストの手順
 
-1. `Yamada UI`のリポジトリをフォークし、クローンします。
+1. [リポジトリ](https://github.com/hirotomoyamada/yamada-ui)をフォークし、クローンします。
 
 2. `main`ブランチから新しいブランチを作成します。[タイプ/スコープ]という命名規則に従います。例えば、`fix/accordion-hook`や`docs/menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
 

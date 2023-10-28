@@ -1,8 +1,32 @@
 ---
 title: usePrevious
-description: This page is currently being created.
+description: '`usePrevious` is a custom hook for obtaining the previous value.'
+package_name: '@yamada-ui/use-previous'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { usePrevious } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const [flg, { toggle }] = useBoolean()
+
+const prevFlg = usePrevious(flg)
+
+return (
+  <>
+    <Text>
+      state: {String(flg)}, prev: {String(prevFlg)}
+    </Text>
+
+    <Button mt='md' onClick={toggle}>
+      Click me to toggle the boolean value
+    </Button>
+  </>
+)
+```

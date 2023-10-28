@@ -1,7 +1,7 @@
 import { Box, useColorMode, useColorModeValue } from '@yamada-ui/react'
 
 export default {
-  title: 'System / Styles / Color Scheme',
+  title: 'System / Styles / Color Mode',
 }
 
 export const basic = () => {

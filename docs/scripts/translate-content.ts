@@ -106,6 +106,10 @@ program
 
         const resolvedPaths = await getPaths(targetPath, targetLang)
 
+        if (!resolvedPaths.length) {
+          throw new Error(`[${targetPath}] Not Found`)
+        }
+
         const totalCount = resolvedPaths.length
 
         if (spinner) spinner.text = `Translate files [0 / ${totalCount}]...`

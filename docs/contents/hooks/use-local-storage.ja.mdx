@@ -1,8 +1,33 @@
 ---
 title: useLocalStorage
-description: このページは現在作成中です。
+description: '`useLocalStorage`は、ローカルストレージに値を保持・更新・取得するカスタムフックです。'
+package_name: '@yamada-ui/use-local-storage'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useLocalStorage } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const [value, setValue, resetValue] = useLocalStorage<number>({
+  key: 'value',
+  defaultValue: 1,
+})
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={() => setValue((prev) => prev + 1)}>
+      Current Local Storage value: {value}
+    </Button>
+
+    <Button colorScheme='danger' onClick={resetValue}>
+      Reset Local Storage value
+    </Button>
+  </Wrap>
+)
+```

@@ -1,8 +1,33 @@
 ---
 title: useLocalStorage
-description: This page is currently being created.
+description: '`useLocalStorage` is a custom hook for storing, updating, and retrieving values in local storage.'
+package_name: '@yamada-ui/use-local-storage'
+with_description: true
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { useLocalStorage } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx functional=true
+const [value, setValue, resetValue] = useLocalStorage<number>({
+  key: 'value',
+  defaultValue: 1,
+})
+
+return (
+  <Wrap gap='md'>
+    <Button onClick={() => setValue((prev) => prev + 1)}>
+      Current Local Storage value: {value}
+    </Button>
+
+    <Button colorScheme='danger' onClick={resetValue}>
+      Reset Local Storage value
+    </Button>
+  </Wrap>
+)
+```

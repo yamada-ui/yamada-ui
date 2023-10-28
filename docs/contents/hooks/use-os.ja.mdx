@@ -1,8 +1,20 @@
 ---
 title: useOS
-description: このページは現在作成中です。
+description: '`useOS`は、ユーザーのOSを返すカスタムフックです。'
+package_name: '@yamada-ui/use-os'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useOS } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const os = useOS()
+
+return <Text>Your os is "{os}"</Text>
+```

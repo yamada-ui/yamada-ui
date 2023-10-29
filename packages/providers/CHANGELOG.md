@@ -1,5 +1,11 @@
 # @yamada-ui/providers
 
+## 0.9.2
+
+### Patch Changes
+
+- [`c7890fad`](https://github.com/hirotomoyamada/yamada-ui/commit/c7890fadca736dcd3dec4f4cdcea0be856af3e45) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `theme` prop type to Dict only.
+
 ## 0.9.1
 
 ### Patch Changes

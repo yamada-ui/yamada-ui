@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/cli",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Generate theme tokens for autocomplete",
   "keywords": [
     "theme",

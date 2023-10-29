@@ -9,12 +9,16 @@ import {
   forwardRef,
   handlerAll,
   useDisclosure,
+  isApple,
 } from '@yamada-ui/react'
 import { useRouter } from 'next/router'
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { MagnifyingGlass } from 'components/media-and-icons'
 import { useI18n } from 'contexts/i18n-context'
 import { useEventListener } from 'hooks/use-event-listener'
+
+const ACTION_DEFAULT_KEY = 'Ctrl'
+const ACTION_APPLE_KEY = '⌘'
 
 export type SearchProps = StackProps & {}
 
@@ -23,6 +27,11 @@ export const Search = memo(
     const { events } = useRouter()
     const { t, tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
+
+    useEffect(() => {
+      if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
+    }, [])
 
     useEffect(() => {
       events.on('routeChangeComplete', onClose)
@@ -33,11 +42,11 @@ export const Search = memo(
     }, [onClose, events])
 
     useEventListener('keydown', (ev) => {
-      if (ev.key !== '/' || isOpen) return
+      if (ev.key.toLowerCase() !== 'k' || !ev[isApple() ? 'metaKey' : 'ctrlKey']) return
 
       ev.preventDefault()
 
-      onOpen()
+      isOpen ? onClose() : onOpen()
     })
 
     return (
@@ -64,10 +73,8 @@ export const Search = memo(
           onClick={handlerAll(rest.onClick, onOpen)}
         >
           <MagnifyingGlass />
-
           <Text flex='1'>{tc('component.forms.search.message')}</Text>
-
-          <Kbd>{tc('component.forms.search.command')}</Kbd>
+          <Kbd>{actionKey} + K</Kbd>
         </HStack>
 
         <Modal size='3xl' isOpen={isOpen} onClose={onClose} withCloseButton={false} placement='top'>

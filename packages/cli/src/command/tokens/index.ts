@@ -13,7 +13,7 @@ export const generateThemeTypings = async ({
   theme: Record<string, any>
   outFile?: string
 }) => {
-  const spinner = ora('Generating Yamada-UI theme typings').start()
+  const spinner = ora('Generating Yamada UI theme typings').start()
 
   try {
     const start = process.hrtime.bigint()

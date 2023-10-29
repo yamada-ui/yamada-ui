@@ -41,6 +41,9 @@ dependencies:
   github-slugger:
     specifier: ^2.0.0
     version: 2.0.0
+  match-sorter:
+    specifier: ^6.3.1
+    version: registry.npmjs.org/match-sorter@6.3.1
   next:
     specifier: 13.5.6
     version: 13.5.6(@opentelemetry/api@1.6.0)(react-dom@18.2.0)(react@18.2.0)
@@ -203,7 +206,7 @@ packages:
     resolution: {integrity: sha512-T0O+aa+4w0u06iNmapipJXMV4HoUir03hpx3/YqXXhu9xim3w+dVphjFWl1OH8NbZHw5Lbm9k45drDkgq2VNNA==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      regenerator-runtime: 0.14.0
+      regenerator-runtime: registry.npmjs.org/regenerator-runtime@0.14.0
     dev: false
 
   /@babel/runtime@7.23.2:
@@ -579,7 +582,7 @@ packages:
     resolution: {integrity: sha512-m4HEDZleaaCH+XgDDsPF15Ht6wTLsgDTeR3WYj9Q/k76JtWhrJjcP4+/XlG8LGT/Rol9qUfOIztXeA84ATpqPQ==}
     dependencies:
       '@babel/helper-module-imports': 7.22.15
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.2
       '@emotion/hash': 0.9.1
       '@emotion/memoize': 0.8.1
       '@emotion/serialize': 1.1.2
@@ -2074,7 +2077,7 @@ packages:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
     engines: {node: '>=10', npm: '>=6'}
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.2
       cosmiconfig: 7.1.0
       resolve: 1.22.8
     dev: false
@@ -11212,6 +11215,15 @@ packages:
       yallist: registry.npmjs.org/yallist@4.0.0
     dev: true
 
+  registry.npmjs.org/match-sorter@6.3.1:
+    resolution: {integrity: sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/match-sorter/-/match-sorter-6.3.1.tgz}
+    name: match-sorter
+    version: 6.3.1
+    dependencies:
+      '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.2
+      remove-accents: registry.npmjs.org/remove-accents@0.4.2
+    dev: false
+
   registry.npmjs.org/md5@2.3.0:
     resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/md5/-/md5-2.3.0.tgz}
     name: md5
@@ -11551,6 +11563,12 @@ packages:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.14.0.tgz}
     name: regenerator-runtime
     version: 0.14.0
+    dev: false
+
+  registry.npmjs.org/remove-accents@0.4.2:
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/remove-accents/-/remove-accents-0.4.2.tgz}
+    name: remove-accents
+    version: 0.4.2
     dev: false
 
   registry.npmjs.org/resolve-from@4.0.0:

@@ -31,6 +31,7 @@
     "@yamada-ui/table": "0.4.9",
     "contentlayer": "^0.3.4",
     "github-slugger": "^2.0.0",
+    "match-sorter": "^6.3.1",
     "next": "13.5.6",
     "next-contentlayer": "^0.3.4",
     "next-seo": "^6.1.0",

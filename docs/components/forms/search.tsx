@@ -10,9 +10,13 @@ import {
   handlerAll,
   useDisclosure,
   isApple,
+  ModalProps,
+  Divider,
+  VStack,
 } from '@yamada-ui/react'
+import { matchSorter } from 'match-sorter'
 import { useRouter } from 'next/router'
-import { memo, useEffect, useState } from 'react'
+import { FC, KeyboardEvent, memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { MagnifyingGlass } from 'components/media-and-icons'
 import { useI18n } from 'contexts/i18n-context'
 import { useEventListener } from 'hooks/use-event-listener'
@@ -25,7 +29,7 @@ export type SearchProps = StackProps & {}
 export const Search = memo(
   forwardRef<SearchProps, 'button'>(({ ...rest }, ref) => {
     const { events } = useRouter()
-    const { t, tc } = useI18n()
+    const { tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
 
@@ -77,32 +81,76 @@ export const Search = memo(
           <Kbd>{actionKey} + K</Kbd>
         </HStack>
 
-        <Modal size='3xl' isOpen={isOpen} onClose={onClose} withCloseButton={false} placement='top'>
-          <ModalBody position='relative'>
-            <ui.input
-              w='full'
-              pl='lg'
-              placeholder={t('component.forms.search.placeholder') as string}
-              maxLength={64}
-              autoComplete='off'
-              autoCorrect='off'
-              spellCheck='false'
-              _placeholder={{
-                color: ['gray.500', 'whiteAlpha.500'],
-              }}
-            />
-
-            <MagnifyingGlass
-              position='absolute'
-              top='50%'
-              left='md'
-              transform='translateY(-50%)'
-              color={['gray.500', 'whiteAlpha.500']}
-              pointerEvents='none'
-            />
-          </ModalBody>
-        </Modal>
+        <SearchModal isOpen={isOpen} onClose={onClose} />
       </>
     )
   }),
 )
+
+type SearchModalProps = ModalProps
+
+const SearchModal: FC<SearchModalProps> = memo(({ isOpen, ...rest }) => {
+  const [query, setQuery] = useState<string>('')
+  const { t, contents } = useI18n()
+
+  const hits = useMemo(() => {
+    if (!query.length) return []
+
+    return matchSorter(contents, query, {
+      keys: ['hierarchy.lv1', 'hierarchy.lv2', 'hierarchy.lv3', 'content'],
+    }).slice(0, 40)
+  }, [query, contents])
+
+  const onKeyDown = useCallback((ev: KeyboardEvent<HTMLInputElement>) => {
+    console.log(ev)
+  }, [])
+
+  useEffect(() => {
+    if (isOpen) return
+
+    setQuery('')
+  }, [isOpen])
+
+  return (
+    <Modal size='3xl' withCloseButton={false} placement='top' isOpen={isOpen} {...rest}>
+      <ModalBody>
+        <HStack position='relative' w='full'>
+          <ui.input
+            flex='1'
+            pl='lg'
+            placeholder={t('component.forms.search.placeholder') as string}
+            maxLength={64}
+            autoComplete='off'
+            autoCorrect='off'
+            spellCheck='false'
+            _placeholder={{
+              color: ['gray.500', 'whiteAlpha.500'],
+            }}
+            value={query}
+            onChange={(ev) => setQuery(ev.target.value)}
+            onKeyDown={onKeyDown}
+          />
+
+          <MagnifyingGlass
+            position='absolute'
+            top='50%'
+            left='0'
+            transform='translateY(-50%)'
+            color={['gray.500', 'whiteAlpha.500']}
+            pointerEvents='none'
+          />
+        </HStack>
+
+        {hits.length ? (
+          <>
+            <Divider />
+
+            <VStack gap='sm'></VStack>
+          </>
+        ) : null}
+      </ModalBody>
+    </Modal>
+  )
+})
+
+SearchModal.displayName = 'SearchModal'

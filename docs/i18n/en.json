@@ -27,7 +27,6 @@
     "forms": {
       "search": {
         "message": "Search the docs",
-        "command": "/",
         "placeholder": "Search the docs"
       }
     },

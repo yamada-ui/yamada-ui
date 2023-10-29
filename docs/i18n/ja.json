@@ -31,7 +31,6 @@
     "forms": {
       "search": {
         "message": "ドキュメントを検索する",
-        "command": "/",
         "placeholder": "ドキュメントを検索する"
       }
     },

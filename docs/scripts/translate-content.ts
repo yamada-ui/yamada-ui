@@ -97,7 +97,7 @@ program
   .action(
     async (targetPath: string, { out: outPath, lang: targetLang = 'en', logs: isLogs }: Option) => {
       const hrtime = process.hrtime()
-      const spinner = !isLogs ? ora('Generating Yamada-UI theme typings').start() : undefined
+      const spinner = !isLogs ? ora('Translating content files').start() : undefined
       const successes = new Map<string, string>()
       const errors = new Map<string, string>()
 

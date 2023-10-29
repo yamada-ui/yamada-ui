@@ -10,11 +10,31 @@ import React, { FC, useState } from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 import { CopyButton } from 'components/forms'
 import { useI18n } from 'contexts/i18n-context'
+import { theme as defaultTheme } from 'theme'
 
 const wait = (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
+
+const UIProvider: FC<UIComponents.UIProviderProps> = ({
+  theme = defaultTheme,
+  config,
+  children,
+}) => {
+  return (
+    <UIComponents.ThemeProvider theme={theme} config={config}>
+      <UIComponents.LoadingProvider {...config.loading}>
+        <UIComponents.ResetStyle />
+        <UIComponents.GlobalStyle />
+
+        {children}
+
+        <UIComponents.NoticeProvider {...config.notice} />
+      </UIComponents.LoadingProvider>
+    </UIComponents.ThemeProvider>
+  )
+}
 
 const scope = {
   React,
@@ -24,6 +44,7 @@ const scope = {
   // ...DropzoneComponents,
   ...TableComponents,
   ...CalendarComponents,
+  UIProvider,
   FontAwesomeIcon,
   wait,
 }

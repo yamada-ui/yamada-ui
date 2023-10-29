@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.7.1
+
+### Patch Changes
+
+- [`52ec8227`](https://github.com/hirotomoyamada/yamada-ui/commit/52ec82272b3f235e541b9f1b52bd610bf7782176) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected naming convention in spinner message.
+
 ## 0.7.0
 
 ### Minor Changes

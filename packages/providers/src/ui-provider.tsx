@@ -20,7 +20,7 @@ export type UIProviderProps = {
    *
    * If omitted, uses the default theme provided by yamada ui.
    */
-  theme?: Dict | Dict[]
+  theme?: Dict
   /**
    * The config of the yamada ui.
    *

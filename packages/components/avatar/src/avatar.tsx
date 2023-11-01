@@ -176,7 +176,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
 
   return (
     <ui.img
-      className='ui-avatar-image'
+      className='ui-avatar__image'
       src={src}
       srcSet={srcSet}
       alt={name}

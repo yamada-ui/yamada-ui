@@ -81,21 +81,21 @@ cd yamada-ui
 
 2. `main`ブランチから新しいブランチを作成します。[タイプ/スコープ]という命名規則に従います。例えば、`fix/accordion-hook`や`docs/menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
 
-3. 変更を行い、[コミット規約](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention)に従ってコミットします。
+3. 変更を行い、`pnpm changeset`を実行して、変更の詳細な説明を作成します。これは、更新を公開する際にチェンジログを生成するために使用されます。
+   [Changesetについてさらに学ぶ](https://github.com/atlassian/changesets/tree/master/packages/cli)
+
+4. また、jsxのスニペットをchangesetに提供する場合、スニペットの始まりで以下のようにしてライブプレビューをオフにしてください。
+   ` ```jsx live=false`
+
+> CIの設定やPrettierなどの小さな変更を行った場合は、`pnpm changeset add --empty`を実行して、空のchangesetファイルを生成し、変更を文書化することができます。
+
+5. 次に、[コミット規約](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention)に従ってコミットします。
 
    - `変更の確認`: コマンドの`pnpm storybook`を実行すると、Storybookが起動します。Storybookのソースは、`./stories`です。
    - `新しいコンポーネントの作成`: コマンドの`pnpm gen:component`を実行すると、テンプレートからコンポーネントを作成し、依存関係もインストールします。
    - `既存のコンポーネントに機能を追加`: 追加後は、機能が分かるように対象のコンポーネントのストーリーを追加してください。
    - `新しいフックの作成`: コマンドの`pnpm gen:hook`を実行すると、テンプレートからフックを作成し、依存関係もインストールします。
    - `既存のフックに機能を追加`: 追加後は、機能が分かるように対象のフックのストーリーを追加してください。
-
-4. `pnpm changeset`を実行して、変更の詳細な説明を作成します。これは、更新を公開する際にチェンジログを生成するために使用されます。
-   [Changesetについてさらに学ぶ](https://github.com/atlassian/changesets/tree/master/packages/cli)
-
-5. また、jsxのスニペットをchangesetに提供する場合、スニペットの始まりで以下のようにしてライブプレビューをオフにしてください。
-   ` ```jsx live=false`
-
-> CIの設定やPrettierなどの小さな変更を行った場合は、`pnpm changeset add --empty`を実行して、空のchangesetファイルを生成し、変更を文書化することができます。
 
 6. 上記の全てのタスクを完了したら、変更をプッシュしてください。プッシュ後、プルリクエストのURLが生成されます。テンプレートに従ってリクエストを提出してください。また、プルリクエスト内のチェックを確認し、品質チェックが正常に完了していることを確認してください。問題がある場合、このプルリクエストはマージされません。
 

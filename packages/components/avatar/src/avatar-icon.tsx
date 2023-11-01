@@ -7,7 +7,7 @@ export const AvatarIcon: FC<IconProps> = (props) => (
     color={['white', 'black']}
     width='100%'
     height='100%'
-    className='ui-avatar-icon'
+    className='ui-avatar__icon'
     {...props}
   >
     <path

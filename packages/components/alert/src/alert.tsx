@@ -113,7 +113,7 @@ export const AlertIcon: FC<AlertIconProps> = ({
   return (
     <ui.span
       display='inherit'
-      className={cx('ui-alert-icon', className)}
+      className={cx('ui-alert__icon', className)}
       __css={css}
       {...rest}
     >
@@ -142,7 +142,7 @@ export const AlertTitle = forwardRef<AlertTitleProps, 'p'>(
     return (
       <ui.p
         ref={ref}
-        className={cx('ui-alert-title', className)}
+        className={cx('ui-alert__title', className)}
         __css={css}
         {...rest}
       />
@@ -163,7 +163,7 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-alert-desc', className)}
+        className={cx('ui-alert__desc', className)}
         __css={css}
         {...rest}
       />

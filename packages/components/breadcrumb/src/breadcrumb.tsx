@@ -78,7 +78,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, 'nav'>((props, ref) => {
         __css={styles.container}
         {...rest}
       >
-        <ui.ol className='ui-breadcrumb-list' {...listProps} __css={css}>
+        <ui.ol className='ui-breadcrumb__list' {...listProps} __css={css}>
           {cloneChildren}
         </ui.ol>
       </ui.nav>
@@ -146,7 +146,7 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, 'li'>(
     return (
       <ui.li
         ref={ref}
-        className={cx('ui-breadcrumb-item', className)}
+        className={cx('ui-breadcrumb__item', className)}
         __css={css}
         {...rest}
       >
@@ -179,7 +179,7 @@ export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, 'a'>(
         ref={ref}
         as={!isCurrentPage ? 'a' : 'span'}
         aria-current={isCurrentPage ? 'page' : undefined}
-        className={cx('ui-breadcrumb-link', className)}
+        className={cx('ui-breadcrumb__link', className)}
         __css={styles.link}
         {...rest}
       >
@@ -210,7 +210,7 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className='ui-breadcrumb-link-separator'
+        className='ui-breadcrumb__link__separator'
         __css={css}
         {...rest}
       >

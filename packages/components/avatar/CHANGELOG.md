@@ -1,5 +1,13 @@
 # @yamada-ui/avatar
 
+## 0.3.15
+
+### Patch Changes
+
+- [#198](https://github.com/hirotomoyamada/yamada-ui/pull/198) [`e76f73f4`](https://github.com/hirotomoyamada/yamada-ui/commit/e76f73f492eacff31ee2282b92f3c68e40a91273) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `AvatarName` and `AvatarIcon` and `AvatarBadge`.
+
+- [#198](https://github.com/hirotomoyamada/yamada-ui/pull/198) [`f43b05d7`](https://github.com/hirotomoyamada/yamada-ui/commit/f43b05d79ba3cf1a3cc7cd2e093e862b4c4c19b6) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `AvatarImage` & `AvatarGroup`.
+
 ## 0.3.14
 
 ### Patch Changes

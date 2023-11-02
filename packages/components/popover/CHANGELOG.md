@@ -1,5 +1,11 @@
 # @yamada-ui/popover
 
+## 0.3.17
+
+### Patch Changes
+
+- [`3484ee20`](https://github.com/hirotomoyamada/yamada-ui/commit/3484ee20ca18c3e7c291d686b0e308f54b95154e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Popover` isLazy was not working.
+
 ## 0.3.16
 
 ### Patch Changes

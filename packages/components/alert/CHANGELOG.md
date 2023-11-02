@@ -1,5 +1,11 @@
 # @yamada-ui/alert
 
+## 0.5.9
+
+### Patch Changes
+
+- [#199](https://github.com/hirotomoyamada/yamada-ui/pull/199) [`8db26f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/8db26f8f6782b84fc2334bcfef8939d176278f50) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Alert`.
+
 ## 0.5.8
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/card
 
+## 0.3.15
+
+### Patch Changes
+
+- [#204](https://github.com/hirotomoyamada/yamada-ui/pull/204) [`9cc9136b`](https://github.com/hirotomoyamada/yamada-ui/commit/9cc9136ba69d8f3a0dd110f71f82e6cacc1b8c86) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Card`
+
 ## 0.3.14
 
 ### Patch Changes

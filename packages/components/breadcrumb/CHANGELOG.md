@@ -1,5 +1,13 @@
 # @yamada-ui/breadcrumb
 
+## 0.3.15
+
+### Patch Changes
+
+- [#197](https://github.com/hirotomoyamada/yamada-ui/pull/197) [`3d613278`](https://github.com/hirotomoyamada/yamada-ui/commit/3d613278c70e1a60854f286a3986ce657e30ff7f) Thanks [@illionillion](https://github.com/illionillion)! - CHanged `className` in `BreadcrumbSeparator`.
+
+- [#197](https://github.com/hirotomoyamada/yamada-ui/pull/197) [`07422944`](https://github.com/hirotomoyamada/yamada-ui/commit/07422944a20321a9df2cc76835780161b03744fe) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Breadcrumb`.
+
 ## 0.3.14
 
 ### Patch Changes

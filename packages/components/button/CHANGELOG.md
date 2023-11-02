@@ -1,5 +1,11 @@
 # @yamada-ui/button
 
+## 0.3.15
+
+### Patch Changes
+
+- [#196](https://github.com/hirotomoyamada/yamada-ui/pull/196) [`fe91b8d9`](https://github.com/hirotomoyamada/yamada-ui/commit/fe91b8d97a9f4fc1b0a3c7e97e5053c94cb2089d) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Button`.
+
 ## 0.3.14
 
 ### Patch Changes

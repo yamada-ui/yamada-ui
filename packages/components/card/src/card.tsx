@@ -81,7 +81,7 @@ export const CardHeader = forwardRef<CardHeaderProps, 'header'>(
     return (
       <ui.header
         ref={ref}
-        className={cx('ui-card-header', className)}
+        className={cx('ui-card__header', className)}
         __css={css}
         {...rest}
       />
@@ -105,7 +105,7 @@ export const CardBody = forwardRef<CardBodyProps, 'main'>(
     return (
       <ui.main
         ref={ref}
-        className={cx('ui-card-body', className)}
+        className={cx('ui-card__body', className)}
         __css={css}
         {...rest}
       />
@@ -129,7 +129,7 @@ export const CardFooter = forwardRef<CardFooterProps, 'footer'>(
     return (
       <ui.footer
         ref={ref}
-        className={cx('ui-card-footer', className)}
+        className={cx('ui-card__footer', className)}
         __css={css}
         {...rest}
       />

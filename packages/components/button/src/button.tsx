@@ -140,12 +140,12 @@ export const Button = forwardRef<ButtonProps, 'button'>(
         type={type ?? defaultType}
         disabled={isDisabled || isLoading}
         data-active={dataAttr(isActive)}
-        data-loading={dataAttr(isLoading)}
+        data__loading={dataAttr(isLoading)}
         __css={css}
         {...rest}
       >
         {isLoading && loadingPlacement === 'start' ? (
-          <Loading className='ui-button-loading--start' {...loadingProps} />
+          <Loading className='ui-button__loading--start' {...loadingProps} />
         ) : null}
 
         {isLoading ? (
@@ -159,7 +159,7 @@ export const Button = forwardRef<ButtonProps, 'button'>(
         )}
 
         {isLoading && loadingPlacement === 'end' ? (
-          <Loading className='ui-button-loading--end' {...loadingProps} />
+          <Loading className='ui-button__loading--end' {...loadingProps} />
         ) : null}
       </ui.button>
     )
@@ -189,7 +189,7 @@ const Loading: FC<
   }, [loadingIcon])
 
   return (
-    <ui.div className={cx('ui-button-loading', className)} __css={css}>
+    <ui.div className={cx('ui-button__loading', className)} __css={css}>
       {element}
     </ui.div>
   )
@@ -212,7 +212,7 @@ const Content: FC<Pick<ButtonProps, 'leftIcon' | 'rightIcon' | 'children'>> = ({
 const Icon: FC<HTMLUIProps<'span'>> = ({ children, className, ...rest }) => {
   return (
     <ui.span
-      className={cx('ui-button-icon', className)}
+      className={cx('ui-button__icon', className)}
       display='inline-flex'
       alignSelf='center'
       flexShrink={0}

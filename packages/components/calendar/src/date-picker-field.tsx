@@ -27,13 +27,13 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, 'input'>(
     return (
       <PopoverTrigger>
         <ui.div
-          className={cx('ui-date-picker-field', className)}
+          className={cx('ui-date-picker__field', className)}
           __css={css}
           {...rest}
         >
           <ui.input
             ref={ref}
-            className='ui-date-picker-input'
+            className='ui-date-picker__input'
             display='inline-block'
             w='full'
             {...inputProps}

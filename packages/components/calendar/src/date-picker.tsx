@@ -117,11 +117,11 @@ export const DatePicker = forwardRef<DatePickerProps, 'input'>((props, ref) => {
           )}
 
           <PopoverContent
-            className='ui-date-picker-popover'
+            className='ui-date-picker__popover'
             __css={{ ...styles.popover }}
           >
             <Calendar
-              className='ui-date-picker-calender'
+              className='ui-date-picker__calendar'
               {...getCalendarProps()}
             />
           </PopoverContent>

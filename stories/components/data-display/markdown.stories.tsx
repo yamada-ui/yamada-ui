@@ -122,7 +122,7 @@ You will need to install them separately.
 # Provide a convenient Table component using \`@tanstack/react-table\`.
 $ pnpm add @yamada-ui/table
 
-# Provide a convenient Calender and datePicker, MonthPicker component
+# Provide a convenient Calendar and datePicker, MonthPicker component
 $ pnpm add @yamada-ui/calendar
 
 # Provide a convenient Carousel component using \`embla-carousel-react\`.

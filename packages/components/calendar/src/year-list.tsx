@@ -2,7 +2,7 @@ import { Button, ButtonProps } from '@yamada-ui/button'
 import { ui, HTMLUIProps } from '@yamada-ui/core'
 import { cx, filterUndefined } from '@yamada-ui/utils'
 import { FC } from 'react'
-import { CalenderHeader, CalenderHeaderProps } from './calender-header'
+import { CalendarHeader, CalendarHeaderProps } from './calendar-header'
 import {
   getFormattedLabel,
   useCalendarContext,
@@ -21,7 +21,7 @@ type YearListOptions = {
 }
 
 export type YearListProps = HTMLUIProps<'div'> &
-  Omit<CalenderHeaderProps, 'label' | 'index'> &
+  Omit<CalendarHeaderProps, 'label' | 'index'> &
   YearListOptions
 
 export const YearList: FC<YearListProps> = ({
@@ -55,7 +55,7 @@ export const YearList: FC<YearListProps> = ({
 
   return (
     <ui.div __css={{ ...styles.content }} {...filterUndefined(rest)}>
-      <CalenderHeader
+      <CalendarHeader
         {...{
           ...headerProps,
           label: `${minYearLabel} - ${maxYearLabel}`,
@@ -67,7 +67,7 @@ export const YearList: FC<YearListProps> = ({
       />
 
       <ui.div
-        className={cx('ui-calendar-year-list', className)}
+        className={cx('ui-calendar__year__list', className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,
           minW: styles.content?.minW ?? styles.content?.minWidth,
@@ -85,7 +85,7 @@ export const YearList: FC<YearListProps> = ({
         {rangeYears.map((year, index) => (
           <Button
             key={index}
-            className='ui-calender-year-list-button'
+            className='ui-calendar__year__list__button'
             variant='ghost'
             __css={{
               minW: 'auto',

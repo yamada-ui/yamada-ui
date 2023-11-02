@@ -154,7 +154,7 @@ export const FormControl = forwardRef<FormControlProps, 'div'>(
         <FormControlStylesProvider value={styles}>
           <ui.div
             ref={ref}
-            className={cx('ui-form-control', className)}
+            className={cx('ui-form__control', className)}
             role='group'
             __css={css}
             {...rest}
@@ -313,7 +313,7 @@ export const Label = forwardRef<LabelProps, 'label'>(
     return (
       <ui.label
         ref={ref}
-        className={cx('ui-form-label', className)}
+        className={cx('ui-form__label', className)}
         data-focus={dataAttr(isFocused)}
         data-disabled={dataAttr(isDisabled)}
         data-readonly={dataAttr(isReadOnly)}
@@ -341,7 +341,7 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-form-required-indicator', className)}
+        className={cx('ui-form__required__indicator', className)}
         role='presentation'
         aria-hidden={true}
         __css={css}
@@ -367,7 +367,7 @@ export const HelperMessage = forwardRef<HelperMessageProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-form-helper-message', className)}
+        className={cx('ui-form__helper__message', className)}
         __css={css}
         {...rest}
       />
@@ -389,7 +389,7 @@ export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-form-error-message', className)}
+        className={cx('ui-form__error__message', className)}
         aria-live='polite'
         __css={css}
         {...rest}

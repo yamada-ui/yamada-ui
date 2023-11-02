@@ -174,12 +174,12 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
     return (
       <PopoverTrigger>
         <ui.div
-          className={cx('ui-autocomplete-field', className)}
+          className={cx('ui-autocomplete__field', className)}
           __css={css}
           {...rest}
         >
           <ui.input
-            className='ui-autocomplete-input'
+            className='ui-autocomplete__input'
             display='inline-block'
             w='full'
             placeholder={placeholder}

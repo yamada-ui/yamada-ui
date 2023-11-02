@@ -310,7 +310,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
     return (
       <PopoverTrigger>
         <ui.div
-          className={cx('ui-autocomplete-field', className)}
+          className={cx('ui-autocomplete__field', className)}
           __css={css}
           py={displayValue?.length && component ? '0.125rem' : undefined}
           {...rest}
@@ -318,7 +318,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
           {cloneChildren}
 
           <ui.input
-            className='ui-autocomplete-input'
+            className='ui-autocomplete__input'
             display='inline-block'
             flex='1'
             overflow='hidden'

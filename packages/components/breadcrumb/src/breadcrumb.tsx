@@ -210,7 +210,7 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className='ui-breadcrumb__link__separator'
+        className='ui-breadcrumb__item__separator'
         __css={css}
         {...rest}
       >

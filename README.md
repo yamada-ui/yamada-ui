@@ -143,6 +143,8 @@ const Example = () => {
 
 Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
 
+The documentation site for Yamada UI is located in a separate [repository](https://github.com/hirotomoyamada/yamada-docs). If you're interested in contributing to the documentation, please refer to this [contribution guide](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.md).
+
 ## License
 
 MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)

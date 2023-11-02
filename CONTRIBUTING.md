@@ -93,7 +93,19 @@ https://www.conventionalcommits.org or check out the
    can be either `docs`, `fix`, `feat`, `build`, or any other conventional
    commit type. `scope` is just a short id that describes the scope of work.
 
-3. Make and commit your changes following the
+3. Make and Run `pnpm changeset` to create a detailed description of your changes. This
+   will be used to generate a changelog when we publish an update.
+   [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
+
+4. Also, if you provide `jsx` snippets to the changeset, please turn off the
+   live preview by doing the following at the beginning of the snippet:
+   ` ```jsx live=false`
+
+> If you made minor changes like CI config, prettier, etc, you can run
+> `pnpm changeset add --empty` to generate an empty changeset file to document
+> your changes.
+
+5. Next, commit your changes following the
    [commit convention](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention).
 
    - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
@@ -101,18 +113,6 @@ https://www.conventionalcommits.org or check out the
    - `Adding functionality to an existing component`: After adding, please add a story for the target component so that the functionality can be understood.
    - `Creating a new hook`: When you run the `pnpm gen:hook` command, a hook is created from a template and dependencies are installed.
    - `Adding functionality to an existing hook`: After adding, please add a story for the target hook so that the functionality can be understood.
-
-4. Run `pnpm changeset` to create a detailed description of your changes. This
-   will be used to generate a changelog when we publish an update.
-   [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
-
-5. Also, if you provide `jsx` snippets to the changeset, please turn off the
-   live preview by doing the following at the beginning of the snippet:
-   ` ```jsx live=false`
-
-> If you made minor changes like CI config, prettier, etc, you can run
-> `pnpm changeset add --empty` to generate an empty changeset file to document
-> your changes.
 
 6. Once you have completed all of the above tasks, please push your changes.
    After pushing, a URL for the pull request will be generated. Follow the template and submit your request accordingly.

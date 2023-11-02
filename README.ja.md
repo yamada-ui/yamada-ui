@@ -134,6 +134,8 @@ const Example = () => {
 
 あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。
 
+また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/hirotomoyamada/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
+
 ## ライセンス
 
 MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)

@@ -15,4 +15,4 @@ jobs:
       - name: Set GitHub assignees
         run: gh pr edit ${{ github.event.number }} --add-assignee hirotomoyamada --repo ${{ github.repository }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}

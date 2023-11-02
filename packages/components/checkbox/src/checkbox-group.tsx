@@ -151,7 +151,7 @@ export const CheckboxGroup = forwardRef(
       >
         <Flex
           ref={ref}
-          className={cx('ui-checkbox-group', className)}
+          className={cx('ui-checkbox__group', className)}
           role='group'
           direction={direction}
           gap={gap ?? (direction === 'row' ? '1rem' : undefined)}

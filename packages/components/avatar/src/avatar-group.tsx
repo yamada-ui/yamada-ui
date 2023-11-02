@@ -75,7 +75,7 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
     >
       {excess > 0 ? (
         <ui.span
-          className='ui-avatar-excess'
+          className='ui-avatar__excess'
           borderRadius={borderRadius}
           rounded={rounded}
           ms={gap}

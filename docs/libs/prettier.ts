@@ -1,12 +1,13 @@
-import { format, resolveConfig } from 'prettier'
+import { format, resolveConfig, Options } from 'prettier'
 
-export const prettier = async (content: string) => {
-  const prettierConfig = await resolveConfig(process.cwd())
+export const prettier = async (content: string, customConfig?: Options) => {
+  const config = await resolveConfig(process.cwd())
 
   try {
     return format(content, {
-      ...prettierConfig,
+      ...config,
       parser: 'mdx',
+      ...customConfig,
     })
   } catch {
     return content

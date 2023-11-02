@@ -1,1 +1,3142 @@
-[]
+[
+  {
+    "title": "Contributing to Yamada UI",
+    "type": "page",
+    "description": "This page is currently under construction.",
+    "slug": "/community/contributing",
+    "hierarchy": { "lv1": "Contributing to Yamada UI" }
+  },
+  {
+    "title": "Setup the Project",
+    "type": "fragment",
+    "slug": "/community/contributing#setup-the-project",
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Setup the Project", "lv3": null }
+  },
+  {
+    "title": "Commands",
+    "type": "fragment",
+    "slug": "/community/contributing#commands",
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Commands", "lv3": null }
+  },
+  {
+    "title": "Update the Document",
+    "type": "fragment",
+    "slug": "/community/contributing#update-the-document",
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Update the Document", "lv3": null }
+  },
+  {
+    "title": "Commit Convention",
+    "type": "fragment",
+    "slug": "/community/contributing#commit-convention",
+    "hierarchy": {
+      "lv1": "Contributing to Yamada UI",
+      "lv2": "Update the Document",
+      "lv3": "Commit Convention"
+    }
+  },
+  {
+    "title": "Steps to PR",
+    "type": "fragment",
+    "slug": "/community/contributing#steps-to-pr",
+    "hierarchy": {
+      "lv1": "Contributing to Yamada UI",
+      "lv2": "Commit Convention",
+      "lv3": "Steps to PR"
+    }
+  },
+  {
+    "title": "License",
+    "type": "fragment",
+    "slug": "/community/contributing#license",
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "License", "lv3": null }
+  },
+  {
+    "title": "Community",
+    "type": "page",
+    "description": "Yamada UIのコミュニティ",
+    "slug": "/community",
+    "hierarchy": { "lv1": "Community" }
+  },
+  {
+    "title": "Team and Contributors",
+    "type": "page",
+    "description": "Wonderful engineers who have provided time, effort, and thought to Yamada UI.",
+    "slug": "/community/team",
+    "hierarchy": { "lv1": "Team and Contributors" }
+  },
+  {
+    "title": "Core Team",
+    "type": "fragment",
+    "slug": "/community/team#core-team",
+    "hierarchy": { "lv1": "Team and Contributors", "lv2": "Core Team", "lv3": null }
+  },
+  {
+    "title": "Badge",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/badge",
+    "hierarchy": { "lv1": "Badge" }
+  },
+  {
+    "title": "Calendar",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/calendar",
+    "hierarchy": { "lv1": "Calendar" }
+  },
+  {
+    "title": "Card",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/card",
+    "hierarchy": { "lv1": "Card" }
+  },
+  {
+    "title": "Carousel",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/carousel",
+    "hierarchy": { "lv1": "Carousel" }
+  },
+  {
+    "title": "Data display",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display",
+    "hierarchy": { "lv1": "Data display" }
+  },
+  {
+    "title": "Kbd",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/kbd",
+    "hierarchy": { "lv1": "Kbd" }
+  },
+  {
+    "title": "List",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/list",
+    "hierarchy": { "lv1": "List" }
+  },
+  {
+    "title": "Markdown",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/markdown",
+    "hierarchy": { "lv1": "Markdown" }
+  },
+  {
+    "title": "NativeTable",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/native-table",
+    "hierarchy": { "lv1": "NativeTable" }
+  },
+  {
+    "title": "PagingTable",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/paging-table",
+    "hierarchy": { "lv1": "PagingTable" }
+  },
+  {
+    "title": "Reorder",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/reorder",
+    "hierarchy": { "lv1": "Reorder" }
+  },
+  {
+    "title": "ScrollArea",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/scroll-area",
+    "hierarchy": { "lv1": "ScrollArea" }
+  },
+  {
+    "title": "Table",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/table",
+    "hierarchy": { "lv1": "Table" }
+  },
+  {
+    "title": "Tag",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/data-display/tag",
+    "hierarchy": { "lv1": "Tag" }
+  },
+  {
+    "title": "Accordion",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/disclosure/accordion",
+    "hierarchy": { "lv1": "Accordion" }
+  },
+  {
+    "title": "Desclosure",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/disclosure",
+    "hierarchy": { "lv1": "Desclosure" }
+  },
+  {
+    "title": "Tabs",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/disclosure/tabs",
+    "hierarchy": { "lv1": "Tabs" }
+  },
+  {
+    "title": "Alert",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/feedback/alert",
+    "hierarchy": { "lv1": "Alert" }
+  },
+  {
+    "title": "CircleProgress",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/feedback/circle-progress",
+    "hierarchy": { "lv1": "CircleProgress" }
+  },
+  {
+    "title": "Feedback",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/feedback",
+    "hierarchy": { "lv1": "Feedback" }
+  },
+  {
+    "title": "Loading",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/feedback/loading",
+    "hierarchy": { "lv1": "Loading" }
+  },
+  {
+    "title": "Progress",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/feedback/progress",
+    "hierarchy": { "lv1": "Progress" }
+  },
+  {
+    "title": "Skeleton",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/feedback/skeleton",
+    "hierarchy": { "lv1": "Skeleton" }
+  },
+  {
+    "title": "Autocomplete",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/autocomplete",
+    "hierarchy": { "lv1": "Autocomplete" }
+  },
+  {
+    "title": "Button",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/button",
+    "hierarchy": { "lv1": "Button" }
+  },
+  {
+    "title": "Checkbox",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/checkbox",
+    "hierarchy": { "lv1": "Checkbox" }
+  },
+  {
+    "title": "DatePicker",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/date-picker",
+    "hierarchy": { "lv1": "DatePicker" }
+  },
+  {
+    "title": "Dropzone",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/dropzone",
+    "hierarchy": { "lv1": "Dropzone" }
+  },
+  {
+    "title": "Editable",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/editable",
+    "hierarchy": { "lv1": "Editable" }
+  },
+  {
+    "title": "FileButton",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/file-button",
+    "hierarchy": { "lv1": "FileButton" }
+  },
+  {
+    "title": "FileInput",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/file-input",
+    "hierarchy": { "lv1": "FileInput" }
+  },
+  {
+    "title": "FormControl",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/form-control",
+    "hierarchy": { "lv1": "FormControl" }
+  },
+  {
+    "title": "Forms",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms",
+    "hierarchy": { "lv1": "Forms" }
+  },
+  {
+    "title": "Input",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/input",
+    "hierarchy": { "lv1": "Input" }
+  },
+  {
+    "title": "MonthPicker",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/month-picker",
+    "hierarchy": { "lv1": "MonthPicker" }
+  },
+  {
+    "title": "MultiAutocomplete",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/multi-autocomplete",
+    "hierarchy": { "lv1": "MultiAutocomplete" }
+  },
+  {
+    "title": "MultiSelect",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/multi-select",
+    "hierarchy": { "lv1": "MultiSelect" }
+  },
+  {
+    "title": "NativeSelect",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/native-select",
+    "hierarchy": { "lv1": "NativeSelect" }
+  },
+  {
+    "title": "NumberInput",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/number-input",
+    "hierarchy": { "lv1": "NumberInput" }
+  },
+  {
+    "title": "PinInput",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/pin-input",
+    "hierarchy": { "lv1": "PinInput" }
+  },
+  {
+    "title": "Radio",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/radio",
+    "hierarchy": { "lv1": "Radio" }
+  },
+  {
+    "title": "RangeSlider",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/range-slider",
+    "hierarchy": { "lv1": "RangeSlider" }
+  },
+  {
+    "title": "SegmentedControl",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/segmented-control",
+    "hierarchy": { "lv1": "SegmentedControl" }
+  },
+  {
+    "title": "Select",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/select",
+    "hierarchy": { "lv1": "Select" }
+  },
+  {
+    "title": "Slider",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/slider",
+    "hierarchy": { "lv1": "Slider" }
+  },
+  {
+    "title": "Switch",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/switch",
+    "hierarchy": { "lv1": "Switch" }
+  },
+  {
+    "title": "Textarea",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/forms/textarea",
+    "hierarchy": { "lv1": "Textarea" }
+  },
+  {
+    "title": "Components",
+    "type": "page",
+    "description": "Yamada UI provides prebuilt components to help you build projects faster.",
+    "slug": "/components",
+    "hierarchy": { "lv1": "Components" }
+  },
+  {
+    "title": "AspectRatio",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/aspect-ratio",
+    "hierarchy": { "lv1": "AspectRatio" }
+  },
+  {
+    "title": "Box",
+    "type": "page",
+    "description": "`Box` is the most abstract component upon which all other components are built.",
+    "slug": "/components/layouts/box",
+    "hierarchy": { "lv1": "Box" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/box#import",
+    "hierarchy": { "lv1": "Box", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/box#usage",
+    "hierarchy": { "lv1": "Box", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Center",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/center",
+    "hierarchy": { "lv1": "Center" }
+  },
+  {
+    "title": "Container",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/container",
+    "hierarchy": { "lv1": "Container" }
+  },
+  {
+    "title": "Divider",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/divider",
+    "hierarchy": { "lv1": "Divider" }
+  },
+  {
+    "title": "Flex",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/flex",
+    "hierarchy": { "lv1": "Flex" }
+  },
+  {
+    "title": "Grid",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/grid",
+    "hierarchy": { "lv1": "Grid" }
+  },
+  {
+    "title": "Layouts",
+    "type": "page",
+    "description": "`Box` and `Stack`, among others, are provided as components to help you structure the layout of your project.",
+    "slug": "/components/layouts",
+    "hierarchy": { "lv1": "Layouts" }
+  },
+  {
+    "title": "Stack",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/stack",
+    "hierarchy": { "lv1": "Stack" }
+  },
+  {
+    "title": "Wrap",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/layouts/wrap",
+    "hierarchy": { "lv1": "Wrap" }
+  },
+  {
+    "title": "Avatar",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/media-and-icons/avatar",
+    "hierarchy": { "lv1": "Avatar" }
+  },
+  {
+    "title": "Fontawesome",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/media-and-icons/fontawesome",
+    "hierarchy": { "lv1": "Fontawesome" }
+  },
+  {
+    "title": "Icon",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/media-and-icons/icon",
+    "hierarchy": { "lv1": "Icon" }
+  },
+  {
+    "title": "Image",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/media-and-icons/image",
+    "hierarchy": { "lv1": "Image" }
+  },
+  {
+    "title": "Media and Icons",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/media-and-icons",
+    "hierarchy": { "lv1": "Media and Icons" }
+  },
+  {
+    "title": "Indicator",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/media-and-icons/indicator",
+    "hierarchy": { "lv1": "Indicator" }
+  },
+  {
+    "title": "Breadcrumb",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/navigation/breadcrumb",
+    "hierarchy": { "lv1": "Breadcrumb" }
+  },
+  {
+    "title": "Navigation",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/navigation",
+    "hierarchy": { "lv1": "Navigation" }
+  },
+  {
+    "title": "Link",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/navigation/link",
+    "hierarchy": { "lv1": "Link" }
+  },
+  {
+    "title": "Linkbox",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/navigation/linkbox",
+    "hierarchy": { "lv1": "Linkbox" }
+  },
+  {
+    "title": "Pagination",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/navigation/pagination",
+    "hierarchy": { "lv1": "Pagination" }
+  },
+  {
+    "title": "Stepper",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/navigation/stepper",
+    "hierarchy": { "lv1": "Stepper" }
+  },
+  {
+    "title": "Dialog",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay/dialog",
+    "hierarchy": { "lv1": "Dialog" }
+  },
+  {
+    "title": "Drawer",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay/drawer",
+    "hierarchy": { "lv1": "Drawer" }
+  },
+  {
+    "title": "Overlay",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay",
+    "hierarchy": { "lv1": "Overlay" }
+  },
+  {
+    "title": "Menu",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay/menu",
+    "hierarchy": { "lv1": "Menu" }
+  },
+  {
+    "title": "Modal",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay/modal",
+    "hierarchy": { "lv1": "Modal" }
+  },
+  {
+    "title": "Popover",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay/popover",
+    "hierarchy": { "lv1": "Popover" }
+  },
+  {
+    "title": "Tooltip",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/overlay/tooltip",
+    "hierarchy": { "lv1": "Tooltip" }
+  },
+  {
+    "title": "Collapse",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/transitions/collapse",
+    "hierarchy": { "lv1": "Collapse" }
+  },
+  {
+    "title": "Fade",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/transitions/fade",
+    "hierarchy": { "lv1": "Fade" }
+  },
+  {
+    "title": "Transitions",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/transitions",
+    "hierarchy": { "lv1": "Transitions" }
+  },
+  {
+    "title": "ScaleFade",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/transitions/scale-fade",
+    "hierarchy": { "lv1": "ScaleFade" }
+  },
+  {
+    "title": "Slide",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/transitions/slide",
+    "hierarchy": { "lv1": "Slide" }
+  },
+  {
+    "title": "SlideFide",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/transitions/slide-fide",
+    "hierarchy": { "lv1": "SlideFide" }
+  },
+  {
+    "title": "Heading",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/typography/heading",
+    "hierarchy": { "lv1": "Heading" }
+  },
+  {
+    "title": "Highlight",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/typography/highlight",
+    "hierarchy": { "lv1": "Highlight" }
+  },
+  {
+    "title": "Typography",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/typography",
+    "hierarchy": { "lv1": "Typography" }
+  },
+  {
+    "title": "Text",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/components/typography/text",
+    "hierarchy": { "lv1": "Text" }
+  },
+  {
+    "title": "Figma",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/figma",
+    "hierarchy": { "lv1": "Figma" }
+  },
+  {
+    "title": "Learning Applications",
+    "type": "page",
+    "description": "Learn the applications of themes, styles, responsive, dark mode, and animations of Yamada UI.",
+    "slug": "/getting-started/advanced",
+    "hierarchy": { "lv1": "Learning Applications" }
+  },
+  {
+    "title": "Applying Themes",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#applying-themes",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Themes", "lv3": null }
+  },
+  {
+    "title": "Using `withDefaultColorScheme`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-withdefaultcolorscheme",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Applying Themes",
+      "lv3": "Using `withDefaultColorScheme`"
+    }
+  },
+  {
+    "title": "Using `useToken`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-usetoken",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Using `withDefaultColorScheme`",
+      "lv3": "Using `useToken`"
+    }
+  },
+  {
+    "title": "Applying Styles",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#applying-styles",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles", "lv3": null }
+  },
+  {
+    "title": "About `as`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#about-as",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles", "lv3": "About `as`" }
+  },
+  {
+    "title": "About `sx` and `css`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#about-sx-and-css",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "About `as`",
+      "lv3": "About `sx` and `css`"
+    }
+  },
+  {
+    "title": "About the Order",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#about-the-order",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "About `sx` and `css`",
+      "lv3": "About the Order"
+    }
+  },
+  {
+    "title": "Application of Responsiveness",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#application-of-responsiveness",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Application of Responsiveness",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Using `useBreakpoint`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-usebreakpoint",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Application of Responsiveness",
+      "lv3": "Using `useBreakpoint`"
+    }
+  },
+  {
+    "title": "Using `useBreakpointValue`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-usebreakpointvalue",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Using `useBreakpoint`",
+      "lv3": "Using `useBreakpointValue`"
+    }
+  },
+  {
+    "title": "Application of Color Mode",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#application-of-color-mode",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Color Mode", "lv3": null }
+  },
+  {
+    "title": "Using `useColorMode`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-usecolormode",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Application of Color Mode",
+      "lv3": "Using `useColorMode`"
+    }
+  },
+  {
+    "title": "Using `useColorModeValue`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-usecolormodevalue",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Using `useColorMode`",
+      "lv3": "Using `useColorModeValue`"
+    }
+  },
+  {
+    "title": "Application of Animation",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#application-of-animation",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Animation", "lv3": null }
+  },
+  {
+    "title": "Using Multiple Animations with `useAnimation`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-multiple-animations-with-useanimation",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Application of Animation",
+      "lv3": "Using Multiple Animations with `useAnimation`"
+    }
+  },
+  {
+    "title": "Using `useDynamicAnimation`",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#using-usedynamicanimation",
+    "hierarchy": {
+      "lv1": "Learning Applications",
+      "lv2": "Using Multiple Animations with `useAnimation`",
+      "lv3": "Using `useDynamicAnimation`"
+    }
+  },
+  {
+    "title": "Congratulations!",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#congratulations",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Congratulations!", "lv3": null }
+  },
+  {
+    "title": "Learn More",
+    "type": "fragment",
+    "slug": "/getting-started/advanced#learn-more",
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Learn More", "lv3": null }
+  },
+  {
+    "title": "Learning the Basics",
+    "type": "page",
+    "description": "Read a 3-minute tutorial to learn the basics of Yamada UI's themes, styles, responsiveness, dark mode, and animations.",
+    "slug": "/getting-started/basics",
+    "hierarchy": { "lv1": "Learning the Basics" }
+  },
+  {
+    "title": "About Themes",
+    "type": "fragment",
+    "slug": "/getting-started/basics#about-themes",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Themes", "lv3": null }
+  },
+  {
+    "title": "Customizing the Theme",
+    "type": "fragment",
+    "slug": "/getting-started/basics#customizing-the-theme",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "About Themes",
+      "lv3": "Customizing the Theme"
+    }
+  },
+  {
+    "title": "Changing Semantic Tokens",
+    "type": "fragment",
+    "slug": "/getting-started/basics#changing-semantic-tokens",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "Customizing the Theme",
+      "lv3": "Changing Semantic Tokens"
+    }
+  },
+  {
+    "title": "Using Loading",
+    "type": "fragment",
+    "slug": "/getting-started/basics#using-loading",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "Changing Semantic Tokens",
+      "lv3": "Using Loading"
+    }
+  },
+  {
+    "title": "Using Notifications",
+    "type": "fragment",
+    "slug": "/getting-started/basics#using-notifications",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "Using Loading",
+      "lv3": "Using Notifications"
+    }
+  },
+  {
+    "title": "About Styles",
+    "type": "fragment",
+    "slug": "/getting-started/basics#about-styles",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Styles", "lv3": null }
+  },
+  {
+    "title": "Pseudo Elements",
+    "type": "fragment",
+    "slug": "/getting-started/basics#pseudo-elements",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Styles", "lv3": "Pseudo Elements" }
+  },
+  {
+    "title": "Component",
+    "type": "fragment",
+    "slug": "/getting-started/basics#component",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Pseudo Elements", "lv3": "Component" }
+  },
+  {
+    "title": "About Responsiveness",
+    "type": "fragment",
+    "slug": "/getting-started/basics#about-responsiveness",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Responsiveness", "lv3": null }
+  },
+  {
+    "title": "About Breakpoints",
+    "type": "fragment",
+    "slug": "/getting-started/basics#about-breakpoints",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "About Responsiveness",
+      "lv3": "About Breakpoints"
+    }
+  },
+  {
+    "title": "About Color Mode",
+    "type": "fragment",
+    "slug": "/getting-started/basics#about-color-mode",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Color Mode", "lv3": null }
+  },
+  {
+    "title": "Switching Color Modes",
+    "type": "fragment",
+    "slug": "/getting-started/basics#switching-color-modes",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "About Color Mode",
+      "lv3": "Switching Color Modes"
+    }
+  },
+  {
+    "title": "About Animation",
+    "type": "fragment",
+    "slug": "/getting-started/basics#about-animation",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation", "lv3": null }
+  },
+  {
+    "title": "Using `useAnimation`",
+    "type": "fragment",
+    "slug": "/getting-started/basics#using-useanimation",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "About Animation",
+      "lv3": "Using `useAnimation`"
+    }
+  },
+  {
+    "title": "Using `Motion`",
+    "type": "fragment",
+    "slug": "/getting-started/basics#using-motion",
+    "hierarchy": {
+      "lv1": "Learning the Basics",
+      "lv2": "Using `useAnimation`",
+      "lv3": "Using `Motion`"
+    }
+  },
+  {
+    "title": "Congratulations!",
+    "type": "fragment",
+    "slug": "/getting-started/basics#congratulations",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Congratulations!", "lv3": null }
+  },
+  {
+    "title": "Learn More",
+    "type": "fragment",
+    "slug": "/getting-started/basics#learn-more",
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Learn More", "lv3": null }
+  },
+  {
+    "title": "Getting Started with Create React App",
+    "type": "page",
+    "description": "A guide to installing and using Yamada UI in a Create React App project.",
+    "slug": "/getting-started/frameworks/create-react-app",
+    "hierarchy": { "lv1": "Getting Started with Create React App" }
+  },
+  {
+    "title": "Installation",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/create-react-app#installation",
+    "hierarchy": {
+      "lv1": "Getting Started with Create React App",
+      "lv2": "Installation",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Add `UIProvider`",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/create-react-app#add-uiprovider",
+    "hierarchy": {
+      "lv1": "Getting Started with Create React App",
+      "lv2": "Add `UIProvider`",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Use the components",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/create-react-app#use-the-components",
+    "hierarchy": {
+      "lv1": "Getting Started with Create React App",
+      "lv2": "Use the components",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Framework",
+    "type": "page",
+    "description": "How to install and use Yamada UI for each framework.",
+    "slug": "/getting-started/frameworks",
+    "hierarchy": { "lv1": "Framework" }
+  },
+  {
+    "title": "Getting Started with Next.js",
+    "type": "page",
+    "description": "A guide to installing and using Yamada UI in a Next.js project.",
+    "slug": "/getting-started/frameworks/nextjs",
+    "hierarchy": { "lv1": "Getting Started with Next.js" }
+  },
+  {
+    "title": "Installation",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#installation",
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Installation", "lv3": null }
+  },
+  {
+    "title": "Add `UIProvider`",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#add-uiprovider",
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Add `UIProvider`", "lv3": null }
+  },
+  {
+    "title": "Incorporate `ColorModeScript`",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#incorporate-colormodescript",
+    "hierarchy": {
+      "lv1": "Getting Started with Next.js",
+      "lv2": "Incorporate `ColorModeScript`",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Use the components",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#use-the-components",
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Use the components", "lv3": null }
+  },
+  {
+    "title": "Getting Started",
+    "type": "page",
+    "description": "How to start with Yamada UI.",
+    "slug": "/getting-started",
+    "hierarchy": { "lv1": "Getting Started" }
+  },
+  {
+    "title": "Installation",
+    "type": "page",
+    "description": "How to install and use Yamada UI in the project.",
+    "slug": "/getting-started/installation",
+    "hierarchy": { "lv1": "Installation" }
+  },
+  {
+    "title": "Installation",
+    "type": "fragment",
+    "slug": "/getting-started/installation#installation",
+    "hierarchy": { "lv1": "Installation", "lv2": "Installation", "lv3": null }
+  },
+  {
+    "title": "Add `UIProvider`",
+    "type": "fragment",
+    "slug": "/getting-started/installation#add-uiprovider",
+    "hierarchy": { "lv1": "Installation", "lv2": "Add `UIProvider`", "lv3": null }
+  },
+  {
+    "title": "Use the components",
+    "type": "fragment",
+    "slug": "/getting-started/installation#use-the-components",
+    "hierarchy": { "lv1": "Installation", "lv2": "Use the components", "lv3": null }
+  },
+  {
+    "title": "Start Learning",
+    "type": "fragment",
+    "slug": "/getting-started/installation#start-learning",
+    "hierarchy": { "lv1": "Installation", "lv2": "Start Learning", "lv3": null }
+  },
+  {
+    "title": "Hooks",
+    "type": "page",
+    "description": "This page is currently being created.",
+    "slug": "/hooks",
+    "hierarchy": { "lv1": "Hooks" }
+  },
+  {
+    "title": "useAnimation",
+    "type": "page",
+    "description": "`useAnimation` is a custom hook that implements animations similar to CSS's `keyframes`.",
+    "slug": "/hooks/use-animation",
+    "hierarchy": { "lv1": "useAnimation" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-animation#import",
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-animation#usage",
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Use Multiple Animations",
+    "type": "fragment",
+    "slug": "/hooks/use-animation#use-multiple-animations",
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Usage", "lv3": "Use Multiple Animations" }
+  },
+  {
+    "title": "Responsive Style",
+    "type": "fragment",
+    "slug": "/hooks/use-animation#responsive-style",
+    "hierarchy": {
+      "lv1": "useAnimation",
+      "lv2": "Use Multiple Animations",
+      "lv3": "Responsive Style"
+    }
+  },
+  {
+    "title": "Color Mode",
+    "type": "fragment",
+    "slug": "/hooks/use-animation#color-mode",
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Responsive Style", "lv3": "Color Mode" }
+  },
+  {
+    "title": "useAsync",
+    "type": "page",
+    "description": "`useAsync` is a custom hook that executes an asynchronous function and tracks its state.",
+    "slug": "/hooks/use-async",
+    "hierarchy": { "lv1": "useAsync" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-async#import",
+    "hierarchy": { "lv1": "useAsync", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-async#usage",
+    "hierarchy": { "lv1": "useAsync", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Re-execution",
+    "type": "fragment",
+    "slug": "/hooks/use-async#re-execution",
+    "hierarchy": { "lv1": "useAsync", "lv2": "Usage", "lv3": "Re-execution" }
+  },
+  {
+    "title": "useBoolean",
+    "type": "page",
+    "description": "`useBoolean` is a custom hook used to manage boolean values using `on`, `off`, and `toggle` functions.",
+    "slug": "/hooks/use-boolean",
+    "hierarchy": { "lv1": "useBoolean" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-boolean#import",
+    "hierarchy": { "lv1": "useBoolean", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-boolean#usage",
+    "hierarchy": { "lv1": "useBoolean", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Use initial value",
+    "type": "fragment",
+    "slug": "/hooks/use-boolean#use-initial-value",
+    "hierarchy": { "lv1": "useBoolean", "lv2": "Usage", "lv3": "Use initial value" }
+  },
+  {
+    "title": "useBreakpointValue",
+    "type": "page",
+    "description": "`useBreakpointValue` is a custom hook that returns the value of the current breakpoint from the provided object. This hook monitors changes in the window size and returns the appropriate value.",
+    "slug": "/hooks/use-breakpoint-value",
+    "hierarchy": { "lv1": "useBreakpointValue" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint-value#import",
+    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint-value#usage",
+    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useBreakpoint",
+    "type": "page",
+    "description": "`useBreakpoint` is a custom hook that returns the current breakpoint. This hook monitors changes in the window size and returns the appropriate value.",
+    "slug": "/hooks/use-breakpoint",
+    "hierarchy": { "lv1": "useBreakpoint" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint#import",
+    "hierarchy": { "lv1": "useBreakpoint", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint#usage",
+    "hierarchy": { "lv1": "useBreakpoint", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useClipboard",
+    "type": "page",
+    "description": "`useClipboard` is a custom hook that performs the process of copying a value to the clipboard.",
+    "slug": "/hooks/use-clipboard",
+    "hierarchy": { "lv1": "useClipboard" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-clipboard#import",
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-clipboard#usage",
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Using Initial Values",
+    "type": "fragment",
+    "slug": "/hooks/use-clipboard#using-initial-values",
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Usage", "lv3": "Using Initial Values" }
+  },
+  {
+    "title": "Controlling Timeout",
+    "type": "fragment",
+    "slug": "/hooks/use-clipboard#controlling-timeout",
+    "hierarchy": {
+      "lv1": "useClipboard",
+      "lv2": "Using Initial Values",
+      "lv3": "Controlling Timeout"
+    }
+  },
+  {
+    "title": "Copy the specified value",
+    "type": "fragment",
+    "slug": "/hooks/use-clipboard#copy-the-specified-value",
+    "hierarchy": {
+      "lv1": "useClipboard",
+      "lv2": "Controlling Timeout",
+      "lv3": "Copy the specified value"
+    }
+  },
+  {
+    "title": "useColorModeValue",
+    "type": "page",
+    "description": "`useColorModeValue` is a custom hook that returns the value for the current color mode from the provided values.",
+    "slug": "/hooks/use-color-mode-value",
+    "hierarchy": { "lv1": "useColorModeValue" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-color-mode-value#import",
+    "hierarchy": { "lv1": "useColorModeValue", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-color-mode-value#usage",
+    "hierarchy": { "lv1": "useColorModeValue", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useColorMode",
+    "type": "page",
+    "description": "`useColorMode` is a custom hook that returns the current color mode.",
+    "slug": "/hooks/use-color-mode",
+    "hierarchy": { "lv1": "useColorMode" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-color-mode#import",
+    "hierarchy": { "lv1": "useColorMode", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-color-mode#usage",
+    "hierarchy": { "lv1": "useColorMode", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useDisclosure",
+    "type": "page",
+    "description": "`useDisclosure` is a custom hook that helps handle common open, close or toggle scenarios. It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.",
+    "slug": "/hooks/use-disclosure",
+    "hierarchy": { "lv1": "useDisclosure" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-disclosure#import",
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-disclosure#usage",
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Using Callback Functions",
+    "type": "fragment",
+    "slug": "/hooks/use-disclosure#using-callback-functions",
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "Usage", "lv3": "Using Callback Functions" }
+  },
+  {
+    "title": "useDynamicAnimation",
+    "type": "page",
+    "description": "`useDynamicAnimation` is a custom hook used to switch animations.",
+    "slug": "/hooks/use-dynamic-animation",
+    "hierarchy": { "lv1": "useDynamicAnimation" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-dynamic-animation#import",
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-dynamic-animation#usage",
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Use Multiple Animations",
+    "type": "fragment",
+    "slug": "/hooks/use-dynamic-animation#use-multiple-animations",
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Usage", "lv3": "Use Multiple Animations" }
+  },
+  {
+    "title": "useHover",
+    "type": "page",
+    "description": "`useHover` is a custom hook that detects whether the pointer has moved over or left an element.",
+    "slug": "/hooks/use-hover",
+    "hierarchy": { "lv1": "useHover" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-hover#import",
+    "hierarchy": { "lv1": "useHover", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-hover#usage",
+    "hierarchy": { "lv1": "useHover", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useIdle",
+    "type": "page",
+    "description": "`useIdle` is a custom hook that detects whether the user has been idle for a certain amount of time in milliseconds.",
+    "slug": "/hooks/use-idle",
+    "hierarchy": { "lv1": "useIdle" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-idle#import",
+    "hierarchy": { "lv1": "useIdle", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-idle#usage",
+    "hierarchy": { "lv1": "useIdle", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useInterval",
+    "type": "page",
+    "description": "`useInterval` is a custom hook that runs a function at a specified interval.",
+    "slug": "/hooks/use-interval",
+    "hierarchy": { "lv1": "useInterval" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-interval#import",
+    "hierarchy": { "lv1": "useInterval", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-interval#usage",
+    "hierarchy": { "lv1": "useInterval", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useLoading",
+    "type": "page",
+    "description": "`useLoading` is a custom hook that controls the loading of the application.",
+    "slug": "/hooks/use-loading",
+    "hierarchy": { "lv1": "useLoading" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-loading#import",
+    "hierarchy": { "lv1": "useLoading", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-loading#usage",
+    "hierarchy": { "lv1": "useLoading", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Add a Timeout",
+    "type": "fragment",
+    "slug": "/hooks/use-loading#add-a-timeout",
+    "hierarchy": { "lv1": "useLoading", "lv2": "Usage", "lv3": "Add a Timeout" }
+  },
+  {
+    "title": "Add a Message",
+    "type": "fragment",
+    "slug": "/hooks/use-loading#add-a-message",
+    "hierarchy": { "lv1": "useLoading", "lv2": "Add a Timeout", "lv3": "Add a Message" }
+  },
+  {
+    "title": "Update the message",
+    "type": "fragment",
+    "slug": "/hooks/use-loading#update-the-message",
+    "hierarchy": { "lv1": "useLoading", "lv2": "Add a Message", "lv3": "Update the message" }
+  },
+  {
+    "title": "useLocalStorage",
+    "type": "page",
+    "description": "`useLocalStorage` is a custom hook for storing, updating, and retrieving values in local storage.",
+    "slug": "/hooks/use-local-storage",
+    "hierarchy": { "lv1": "useLocalStorage" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-local-storage#import",
+    "hierarchy": { "lv1": "useLocalStorage", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-local-storage#usage",
+    "hierarchy": { "lv1": "useLocalStorage", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useMediaQuery",
+    "type": "page",
+    "description": "`useMediaQuery` is a custom hook that detects whether it matches a single or multiple media queries.",
+    "slug": "/hooks/use-media-query",
+    "hierarchy": { "lv1": "useMediaQuery" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-media-query#import",
+    "hierarchy": { "lv1": "useMediaQuery", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-media-query#usage",
+    "hierarchy": { "lv1": "useMediaQuery", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useNotice",
+    "type": "page",
+    "description": "`useNotice` is a custom hook that controls the notifications of the application.",
+    "slug": "/hooks/use-notice",
+    "hierarchy": { "lv1": "useNotice" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#import",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#usage",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Customize Notifications",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#customize-notifications",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Customize Notifications", "lv3": null }
+  },
+  {
+    "title": "Change Display Time",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#change-display-time",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Display Time"
+    }
+  },
+  {
+    "title": "Maintain",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#maintain",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Change Display Time", "lv3": "Maintain" }
+  },
+  {
+    "title": "Change Position",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#change-position",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Maintain", "lv3": "Change Position" }
+  },
+  {
+    "title": "Limit the number of displays",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#limit-the-number-of-displays",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Change Position",
+      "lv3": "Limit the number of displays"
+    }
+  },
+  {
+    "title": "Change the Variant",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#change-the-variant",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Limit the number of displays",
+      "lv3": "Change the Variant"
+    }
+  },
+  {
+    "title": "Change the Status",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#change-the-status",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Change the Variant", "lv3": "Change the Status" }
+  },
+  {
+    "title": "Using Color Schemes",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#using-color-schemes",
+    "hierarchy": { "lv1": "useNotice", "lv2": "Change the Status", "lv3": "Using Color Schemes" }
+  },
+  {
+    "title": "Changing the Loading Icon Variant",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#changing-the-loading-icon-variant",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Using Color Schemes",
+      "lv3": "Changing the Loading Icon Variant"
+    }
+  },
+  {
+    "title": "Update the notification",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#update-the-notification",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Changing the Loading Icon Variant",
+      "lv3": "Update the notification"
+    }
+  },
+  {
+    "title": "Close Notification",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#close-notification",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Update the notification",
+      "lv3": "Close Notification"
+    }
+  },
+  {
+    "title": "Customizing Components",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#customizing-components",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Close Notification",
+      "lv3": "Customizing Components"
+    }
+  },
+  {
+    "title": "Customize the style",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#customize-the-style",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Customizing Components",
+      "lv3": "Customize the style"
+    }
+  },
+  {
+    "title": "useOS",
+    "type": "page",
+    "description": "`useOS` is a custom hook that returns the user's OS.",
+    "slug": "/hooks/use-os",
+    "hierarchy": { "lv1": "useOS" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-os#import",
+    "hierarchy": { "lv1": "useOS", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-os#usage",
+    "hierarchy": { "lv1": "useOS", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useOutsideClick",
+    "type": "page",
+    "description": "`useOutsideClick` is a custom hook that detects click events outside of an element.",
+    "slug": "/hooks/use-outside-click",
+    "hierarchy": { "lv1": "useOutsideClick" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-outside-click#import",
+    "hierarchy": { "lv1": "useOutsideClick", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-outside-click#usage",
+    "hierarchy": { "lv1": "useOutsideClick", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "usePrevious",
+    "type": "page",
+    "description": "`usePrevious` is a custom hook for obtaining the previous value.",
+    "slug": "/hooks/use-previous",
+    "hierarchy": { "lv1": "usePrevious" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-previous#import",
+    "hierarchy": { "lv1": "usePrevious", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-previous#usage",
+    "hierarchy": { "lv1": "usePrevious", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useResizeObserver",
+    "type": "page",
+    "description": "`useResizeObserver` is a custom hook that tracks changes in the size and position of an element.",
+    "slug": "/hooks/use-resize-observer",
+    "hierarchy": { "lv1": "useResizeObserver" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-resize-observer#import",
+    "hierarchy": { "lv1": "useResizeObserver", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-resize-observer#usage",
+    "hierarchy": { "lv1": "useResizeObserver", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useTheme",
+    "type": "page",
+    "description": "`useToken` is a custom hook that retrieves a theme and returns a function to switch the theme.",
+    "slug": "/hooks/use-theme",
+    "hierarchy": { "lv1": "useTheme" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-theme#import",
+    "hierarchy": { "lv1": "useTheme", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-theme#usage",
+    "hierarchy": { "lv1": "useTheme", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Switch theme",
+    "type": "fragment",
+    "slug": "/hooks/use-theme#switch-theme",
+    "hierarchy": { "lv1": "useTheme", "lv2": "Usage", "lv3": "Switch theme" }
+  },
+  {
+    "title": "useTimeout",
+    "type": "page",
+    "description": "`useTimeout` is a custom hook that executes a function after a specified number of milliseconds.",
+    "slug": "/hooks/use-timeout",
+    "hierarchy": { "lv1": "useTimeout" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-timeout#import",
+    "hierarchy": { "lv1": "useTimeout", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-timeout#usage",
+    "hierarchy": { "lv1": "useTimeout", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useToken",
+    "type": "page",
+    "description": "`useToken` is a custom hook that retrieves tokens from the theme.",
+    "slug": "/hooks/use-token",
+    "hierarchy": { "lv1": "useToken" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-token#import",
+    "hierarchy": { "lv1": "useToken", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-token#usage",
+    "hierarchy": { "lv1": "useToken", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useUpdateEffect",
+    "type": "page",
+    "description": "`useUpdateEffect` is a custom hook that skips side effects on the initial render, and only runs side effects when the dependency array changes.",
+    "slug": "/hooks/use-update-effect",
+    "hierarchy": { "lv1": "useUpdateEffect" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-update-effect#import",
+    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-update-effect#usage",
+    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useValue",
+    "type": "page",
+    "description": "`useValue` is a custom hook that combines `useBreakpointValue` and `useColorModeValue`.",
+    "slug": "/hooks/use-value",
+    "hierarchy": { "lv1": "useValue" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-value#import",
+    "hierarchy": { "lv1": "useValue", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-value#usage",
+    "hierarchy": { "lv1": "useValue", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "useWindowEvent",
+    "type": "page",
+    "description": "`useWindowEvent` is a custom hook that assigns a specified event listener to `window`.",
+    "slug": "/hooks/use-window-event",
+    "hierarchy": { "lv1": "useWindowEvent" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-window-event#import",
+    "hierarchy": { "lv1": "useWindowEvent", "lv2": "Import", "lv3": null }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-window-event#usage",
+    "hierarchy": { "lv1": "useWindowEvent", "lv2": "Usage", "lv3": null }
+  },
+  {
+    "title": "Animation",
+    "type": "page",
+    "description": "Yamada UI supports ready-to-use animations.",
+    "slug": "/styled-system/animation",
+    "hierarchy": { "lv1": "Animation" }
+  },
+  {
+    "title": "CSS Animation",
+    "type": "fragment",
+    "slug": "/styled-system/animation#css-animation",
+    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": null }
+  },
+  {
+    "title": "Using `useAnimation`",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-useanimation",
+    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": "Using `useAnimation`" }
+  },
+  {
+    "title": "Using multiple animations",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-multiple-animations",
+    "hierarchy": { "lv1": "Animation", "lv2": "Using `useAnimation`", "lv3": null }
+  },
+  {
+    "title": "Responsive styles",
+    "type": "fragment",
+    "slug": "/styled-system/animation#responsive-styles",
+    "hierarchy": { "lv1": "Animation", "lv2": "Using multiple animations", "lv3": null }
+  },
+  {
+    "title": "Color mode",
+    "type": "fragment",
+    "slug": "/styled-system/animation#color-mode",
+    "hierarchy": { "lv1": "Animation", "lv2": "Responsive styles", "lv3": null }
+  },
+  {
+    "title": "Using `useDynamicAnimation`",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-usedynamicanimation",
+    "hierarchy": { "lv1": "Animation", "lv2": "Color mode", "lv3": "Using `useDynamicAnimation`" }
+  },
+  {
+    "title": "Combining with multiple animations",
+    "type": "fragment",
+    "slug": "/styled-system/animation#combining-with-multiple-animations",
+    "hierarchy": { "lv1": "Animation", "lv2": "Using `useDynamicAnimation`", "lv3": null }
+  },
+  {
+    "title": "Using Theme Tokens",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-theme-tokens",
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Combining with multiple animations",
+      "lv3": "Using Theme Tokens"
+    }
+  },
+  {
+    "title": "Motion",
+    "type": "fragment",
+    "slug": "/styled-system/animation#motion",
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": null }
+  },
+  {
+    "title": "Animation",
+    "type": "fragment",
+    "slug": "/styled-system/animation#animation",
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Animation" }
+  },
+  {
+    "title": "Using `AnimatePresence`",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-animatepresence",
+    "hierarchy": { "lv1": "Animation", "lv2": "Animation", "lv3": null }
+  },
+  {
+    "title": "Keyframes",
+    "type": "fragment",
+    "slug": "/styled-system/animation#keyframes",
+    "hierarchy": { "lv1": "Animation", "lv2": "Using `AnimatePresence`", "lv3": null }
+  },
+  {
+    "title": "Using `useMotionAnimationFrame`",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-usemotionanimationframe",
+    "hierarchy": { "lv1": "Animation", "lv2": "Keyframes", "lv3": null }
+  },
+  {
+    "title": "Gestures",
+    "type": "fragment",
+    "slug": "/styled-system/animation#gestures",
+    "hierarchy": { "lv1": "Animation", "lv2": "Using `useMotionAnimationFrame`", "lv3": "Gestures" }
+  },
+  {
+    "title": "Hover",
+    "type": "fragment",
+    "slug": "/styled-system/animation#hover",
+    "hierarchy": { "lv1": "Animation", "lv2": "Gestures", "lv3": null }
+  },
+  {
+    "title": "Click/Tap",
+    "type": "fragment",
+    "slug": "/styled-system/animation#clicktap",
+    "hierarchy": { "lv1": "Animation", "lv2": "Hover", "lv3": null }
+  },
+  {
+    "title": "Focus",
+    "type": "fragment",
+    "slug": "/styled-system/animation#focus",
+    "hierarchy": { "lv1": "Animation", "lv2": "Click/Tap", "lv3": null }
+  },
+  {
+    "title": "Drag",
+    "type": "fragment",
+    "slug": "/styled-system/animation#drag",
+    "hierarchy": { "lv1": "Animation", "lv2": "Focus", "lv3": "Drag" }
+  },
+  {
+    "title": "Constraining the possible area",
+    "type": "fragment",
+    "slug": "/styled-system/animation#constraining-the-possible-area",
+    "hierarchy": { "lv1": "Animation", "lv2": "Drag", "lv3": null }
+  },
+  {
+    "title": "Elasticity and Momentum",
+    "type": "fragment",
+    "slug": "/styled-system/animation#elasticity-and-momentum",
+    "hierarchy": { "lv1": "Animation", "lv2": "Constraining the possible area", "lv3": null }
+  },
+  {
+    "title": "Scroll",
+    "type": "fragment",
+    "slug": "/styled-system/animation#scroll",
+    "hierarchy": { "lv1": "Animation", "lv2": "Elasticity and Momentum", "lv3": "Scroll" }
+  },
+  {
+    "title": "Using `useScroll`",
+    "type": "fragment",
+    "slug": "/styled-system/animation#using-usescroll",
+    "hierarchy": { "lv1": "Animation", "lv2": "Scroll", "lv3": null }
+  },
+  {
+    "title": "CLI",
+    "type": "page",
+    "description": "Generate types of customized themes using CLI commands.",
+    "slug": "/styled-system/cli",
+    "hierarchy": { "lv1": "CLI" }
+  },
+  {
+    "title": "Installation",
+    "type": "fragment",
+    "slug": "/styled-system/cli#installation",
+    "hierarchy": { "lv1": "CLI", "lv2": "Installation", "lv3": null }
+  },
+  {
+    "title": "How to use",
+    "type": "fragment",
+    "slug": "/styled-system/cli#how-to-use",
+    "hierarchy": { "lv1": "CLI", "lv2": "How to use", "lv3": null }
+  },
+  {
+    "title": "Color Mode",
+    "type": "page",
+    "description": "All components of Yamada UI support dark mode.",
+    "slug": "/styled-system/color-mode",
+    "hierarchy": { "lv1": "Color Mode" }
+  },
+  {
+    "title": "Setup",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#setup",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": null }
+  },
+  {
+    "title": "Customize the Config",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#customize-the-config",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": "Customize the Config" }
+  },
+  {
+    "title": "Add `ColorModeScript`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#add-colormodescript",
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Customize the Config",
+      "lv3": "Add `ColorModeScript`"
+    }
+  },
+  {
+    "title": "In the case of Create React App",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#in-the-case-of-create-react-app",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Add `ColorModeScript`", "lv3": null }
+  },
+  {
+    "title": "In the case of Next.js",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#in-the-case-of-nextjs",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "In the case of Create React App", "lv3": null }
+  },
+  {
+    "title": "Adding `colorModeManager`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#adding-colormodemanager",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Adding `colorModeManager`", "lv3": null }
+  },
+  {
+    "title": "Prepare `getServerSideProps`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#prepare-getserversideprops",
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Adding `colorModeManager`",
+      "lv3": "Prepare `getServerSideProps`"
+    }
+  },
+  {
+    "title": "Passing `cookieStorageSSR`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#passing-cookiestoragessr",
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Prepare `getServerSideProps`",
+      "lv3": "Passing `cookieStorageSSR`"
+    }
+  },
+  {
+    "title": "Add `getServerSideProps`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#add-getserversideprops",
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Passing `cookieStorageSSR`",
+      "lv3": "Add `getServerSideProps`"
+    }
+  },
+  {
+    "title": "Syntax of Color Mode",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#syntax-of-color-mode",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Syntax of Color Mode", "lv3": null }
+  },
+  {
+    "title": "Switching Color Modes",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#switching-color-modes",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Switching Color Modes", "lv3": null }
+  },
+  {
+    "title": "Color Mode Utility",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#color-mode-utility",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility", "lv3": null }
+  },
+  {
+    "title": "Using `useColorMode`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#using-usecolormode",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility", "lv3": "Using `useColorMode`" }
+  },
+  {
+    "title": "Using `useColorModeValue`",
+    "type": "fragment",
+    "slug": "/styled-system/color-mode#using-usecolormodevalue",
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Using `useColorMode`",
+      "lv3": "Using `useColorModeValue`"
+    }
+  },
+  {
+    "title": "Customizing the Config",
+    "type": "page",
+    "description": "How to customize the default config of Yamada UI.",
+    "slug": "/styled-system/configure/customize-config",
+    "hierarchy": { "lv1": "Customizing the Config" }
+  },
+  {
+    "title": "Change Color Mode",
+    "type": "fragment",
+    "slug": "/styled-system/configure/customize-config#change-color-mode",
+    "hierarchy": { "lv1": "Customizing the Config", "lv2": "Change Color Mode", "lv3": null }
+  },
+  {
+    "title": "Changing the prefix of `CSS` custom properties",
+    "type": "fragment",
+    "slug": "/styled-system/configure/customize-config#changing-the-prefix-of-css-custom-properties",
+    "hierarchy": {
+      "lv1": "Customizing the Config",
+      "lv2": "Changing the prefix of `CSS` custom properties",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Default Config",
+    "type": "page",
+    "description": "Default config of Yamada UI.",
+    "slug": "/styled-system/configure/default-config",
+    "hierarchy": { "lv1": "Default Config" }
+  },
+  {
+    "title": "Config",
+    "type": "page",
+    "description": "The config of Yamada UI is a global setting used in various parts of the system.",
+    "slug": "/styled-system/configure",
+    "hierarchy": { "lv1": "Config" }
+  },
+  {
+    "title": "Global Style",
+    "type": "page",
+    "description": "How to customize and add global styles.",
+    "slug": "/styled-system/global-styles",
+    "hierarchy": { "lv1": "Global Style" }
+  },
+  {
+    "title": "Customizing Global Styles",
+    "type": "fragment",
+    "slug": "/styled-system/global-styles#customizing-global-styles",
+    "hierarchy": { "lv1": "Global Style", "lv2": "Customizing Global Styles", "lv3": null }
+  },
+  {
+    "title": "Adding Global Styles",
+    "type": "fragment",
+    "slug": "/styled-system/global-styles#adding-global-styles",
+    "hierarchy": { "lv1": "Global Style", "lv2": "Adding Global Styles", "lv3": null }
+  },
+  {
+    "title": "Gradient",
+    "type": "page",
+    "description": "Yamada UI supports readily available gradients.",
+    "slug": "/styled-system/gradient",
+    "hierarchy": { "lv1": "Gradient" }
+  },
+  {
+    "title": "How to use",
+    "type": "fragment",
+    "slug": "/styled-system/gradient#how-to-use",
+    "hierarchy": { "lv1": "Gradient", "lv2": "How to use", "lv3": null }
+  },
+  {
+    "title": "Color Customization",
+    "type": "fragment",
+    "slug": "/styled-system/gradient#color-customization",
+    "hierarchy": { "lv1": "Gradient", "lv2": "How to use", "lv3": "Color Customization" }
+  },
+  {
+    "title": "Gradient Tokens",
+    "type": "fragment",
+    "slug": "/styled-system/gradient#gradient-tokens",
+    "hierarchy": { "lv1": "Gradient", "lv2": "Color Customization", "lv3": "Gradient Tokens" }
+  },
+  {
+    "title": "Text Gradient",
+    "type": "fragment",
+    "slug": "/styled-system/gradient#text-gradient",
+    "hierarchy": { "lv1": "Gradient", "lv2": "Text Gradient", "lv3": null }
+  },
+  {
+    "title": "Responsive Gradients",
+    "type": "fragment",
+    "slug": "/styled-system/gradient#responsive-gradients",
+    "hierarchy": { "lv1": "Gradient", "lv2": "Responsive Gradients", "lv3": null }
+  },
+  {
+    "title": "Style System",
+    "type": "page",
+    "description": "Learn about the Style props and themes of Yamada UI. Style props are a method to change the style of a component just by passing props to the component.",
+    "slug": "/styled-system",
+    "hierarchy": { "lv1": "Style System" }
+  },
+  {
+    "title": "Loading",
+    "type": "page",
+    "description": "Yamada UI supports the necessary loading animations for applications.",
+    "slug": "/styled-system/loading",
+    "hierarchy": { "lv1": "Loading" }
+  },
+  {
+    "title": "How to use",
+    "type": "fragment",
+    "slug": "/styled-system/loading#how-to-use",
+    "hierarchy": { "lv1": "Loading", "lv2": "How to use", "lv3": null }
+  },
+  {
+    "title": "Customizing Loading",
+    "type": "fragment",
+    "slug": "/styled-system/loading#customizing-loading",
+    "hierarchy": { "lv1": "Loading", "lv2": "Customizing Loading", "lv3": null }
+  },
+  {
+    "title": "Adding a Timeout",
+    "type": "fragment",
+    "slug": "/styled-system/loading#adding-a-timeout",
+    "hierarchy": { "lv1": "Loading", "lv2": "Customizing Loading", "lv3": "Adding a Timeout" }
+  },
+  {
+    "title": "Add a Message",
+    "type": "fragment",
+    "slug": "/styled-system/loading#add-a-message",
+    "hierarchy": { "lv1": "Loading", "lv2": "Adding a Timeout", "lv3": "Add a Message" }
+  },
+  {
+    "title": "Update the message",
+    "type": "fragment",
+    "slug": "/styled-system/loading#update-the-message",
+    "hierarchy": { "lv1": "Loading", "lv2": "Add a Message", "lv3": "Update the message" }
+  },
+  {
+    "title": "Customize from Config",
+    "type": "fragment",
+    "slug": "/styled-system/loading#customize-from-config",
+    "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config", "lv3": null }
+  },
+  {
+    "title": "Using `initialState`",
+    "type": "fragment",
+    "slug": "/styled-system/loading#using-initialstate",
+    "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config", "lv3": "Using `initialState`" }
+  },
+  {
+    "title": "Using Custom Components",
+    "type": "fragment",
+    "slug": "/styled-system/loading#using-custom-components",
+    "hierarchy": {
+      "lv1": "Loading",
+      "lv2": "Using `initialState`",
+      "lv3": "Using Custom Components"
+    }
+  },
+  {
+    "title": "Notification",
+    "type": "page",
+    "description": "Yamada UI supports the necessary notifications in the application.",
+    "slug": "/styled-system/notification",
+    "hierarchy": { "lv1": "Notification" }
+  },
+  {
+    "title": "How to use",
+    "type": "fragment",
+    "slug": "/styled-system/notification#how-to-use",
+    "hierarchy": { "lv1": "Notification", "lv2": "How to use", "lv3": null }
+  },
+  {
+    "title": "Customize Notifications",
+    "type": "fragment",
+    "slug": "/styled-system/notification#customize-notifications",
+    "hierarchy": { "lv1": "Notification", "lv2": "Customize Notifications", "lv3": null }
+  },
+  {
+    "title": "Change Display Time",
+    "type": "fragment",
+    "slug": "/styled-system/notification#change-display-time",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Display Time"
+    }
+  },
+  {
+    "title": "Maintain",
+    "type": "fragment",
+    "slug": "/styled-system/notification#maintain",
+    "hierarchy": { "lv1": "Notification", "lv2": "Change Display Time", "lv3": "Maintain" }
+  },
+  {
+    "title": "Change Position",
+    "type": "fragment",
+    "slug": "/styled-system/notification#change-position",
+    "hierarchy": { "lv1": "Notification", "lv2": "Maintain", "lv3": "Change Position" }
+  },
+  {
+    "title": "Limit the number of displays",
+    "type": "fragment",
+    "slug": "/styled-system/notification#limit-the-number-of-displays",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Change Position",
+      "lv3": "Limit the number of displays"
+    }
+  },
+  {
+    "title": "Change the Variant",
+    "type": "fragment",
+    "slug": "/styled-system/notification#change-the-variant",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Limit the number of displays",
+      "lv3": "Change the Variant"
+    }
+  },
+  {
+    "title": "Change the Status",
+    "type": "fragment",
+    "slug": "/styled-system/notification#change-the-status",
+    "hierarchy": { "lv1": "Notification", "lv2": "Change the Variant", "lv3": "Change the Status" }
+  },
+  {
+    "title": "Using Color Schemes",
+    "type": "fragment",
+    "slug": "/styled-system/notification#using-color-schemes",
+    "hierarchy": { "lv1": "Notification", "lv2": "Change the Status", "lv3": "Using Color Schemes" }
+  },
+  {
+    "title": "Changing the Loading Icon Variant",
+    "type": "fragment",
+    "slug": "/styled-system/notification#changing-the-loading-icon-variant",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Using Color Schemes",
+      "lv3": "Changing the Loading Icon Variant"
+    }
+  },
+  {
+    "title": "Update the notification",
+    "type": "fragment",
+    "slug": "/styled-system/notification#update-the-notification",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Changing the Loading Icon Variant",
+      "lv3": "Update the notification"
+    }
+  },
+  {
+    "title": "Close Notification",
+    "type": "fragment",
+    "slug": "/styled-system/notification#close-notification",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Update the notification",
+      "lv3": "Close Notification"
+    }
+  },
+  {
+    "title": "Customizing Components",
+    "type": "fragment",
+    "slug": "/styled-system/notification#customizing-components",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Close Notification",
+      "lv3": "Customizing Components"
+    }
+  },
+  {
+    "title": "Customize the style",
+    "type": "fragment",
+    "slug": "/styled-system/notification#customize-the-style",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customizing Components",
+      "lv3": "Customize the style"
+    }
+  },
+  {
+    "title": "Customize from Config",
+    "type": "fragment",
+    "slug": "/styled-system/notification#customize-from-config",
+    "hierarchy": { "lv1": "Notification", "lv2": "Customize from Config", "lv3": null }
+  },
+  {
+    "title": "Reset Styles",
+    "type": "page",
+    "description": "How to customize and add reset styles.",
+    "slug": "/styled-system/reset-styles",
+    "hierarchy": { "lv1": "Reset Styles" }
+  },
+  {
+    "title": "Customize Reset Styles",
+    "type": "fragment",
+    "slug": "/styled-system/reset-styles#customize-reset-styles",
+    "hierarchy": { "lv1": "Reset Styles", "lv2": "Customize Reset Styles", "lv3": null }
+  },
+  {
+    "title": "Adding Reset Styles",
+    "type": "fragment",
+    "slug": "/styled-system/reset-styles#adding-reset-styles",
+    "hierarchy": { "lv1": "Reset Styles", "lv2": "Adding Reset Styles", "lv3": null }
+  },
+  {
+    "title": "Responsive Styles",
+    "type": "page",
+    "description": "Yamada UI supports ready-to-use responsive styles.",
+    "slug": "/styled-system/responsive-styles",
+    "hierarchy": { "lv1": "Responsive Styles" }
+  },
+  {
+    "title": "About Breakpoints",
+    "type": "fragment",
+    "slug": "/styled-system/responsive-styles#about-breakpoints",
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "About Breakpoints", "lv3": null }
+  },
+  {
+    "title": "Syntax for Responsive Styles",
+    "type": "fragment",
+    "slug": "/styled-system/responsive-styles#syntax-for-responsive-styles",
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Syntax for Responsive Styles", "lv3": null }
+  },
+  {
+    "title": "Responsive Utilities",
+    "type": "fragment",
+    "slug": "/styled-system/responsive-styles#responsive-utilities",
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Responsive Utilities", "lv3": null }
+  },
+  {
+    "title": "Using `useBreakpoint`",
+    "type": "fragment",
+    "slug": "/styled-system/responsive-styles#using-usebreakpoint",
+    "hierarchy": {
+      "lv1": "Responsive Styles",
+      "lv2": "Responsive Utilities",
+      "lv3": "Using `useBreakpoint`"
+    }
+  },
+  {
+    "title": "Using `useBreakpointValue`",
+    "type": "fragment",
+    "slug": "/styled-system/responsive-styles#using-usebreakpointvalue",
+    "hierarchy": {
+      "lv1": "Responsive Styles",
+      "lv2": "Using `useBreakpoint`",
+      "lv3": "Using `useBreakpointValue`"
+    }
+  },
+  {
+    "title": "Customizing Breakpoints",
+    "type": "fragment",
+    "slug": "/styled-system/responsive-styles#customizing-breakpoints",
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Customizing Breakpoints", "lv3": null }
+  },
+  {
+    "title": "Semantic Tokens",
+    "type": "page",
+    "description": "Yamada UI supports semantic tokens.",
+    "slug": "/styled-system/semantic-tokens",
+    "hierarchy": { "lv1": "Semantic Tokens" }
+  },
+  {
+    "title": "Style props",
+    "type": "page",
+    "description": "Learn about the Style props of Yamada UI. Style props is a method to change the style of a component just by passing props to the component.",
+    "slug": "/styled-system/style-props",
+    "hierarchy": { "lv1": "Style props" }
+  },
+  {
+    "title": "Color and Background",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#color-and-background",
+    "hierarchy": { "lv1": "Style props", "lv2": "Color and Background", "lv3": null }
+  },
+  {
+    "title": "Margins and Padding",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#margins-and-padding",
+    "hierarchy": { "lv1": "Style props", "lv2": "Margins and Padding", "lv3": null }
+  },
+  {
+    "title": "Typography",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#typography",
+    "hierarchy": { "lv1": "Style props", "lv2": "Typography", "lv3": null }
+  },
+  {
+    "title": "Layout",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#layout",
+    "hierarchy": { "lv1": "Style props", "lv2": "Layout", "lv3": null }
+  },
+  {
+    "title": "Position",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#position",
+    "hierarchy": { "lv1": "Style props", "lv2": "Position", "lv3": null }
+  },
+  {
+    "title": "List",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#list",
+    "hierarchy": { "lv1": "Style props", "lv2": "List", "lv3": null }
+  },
+  {
+    "title": "Border",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#border",
+    "hierarchy": { "lv1": "Style props", "lv2": "Border", "lv3": null }
+  },
+  {
+    "title": "Effects",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#effects",
+    "hierarchy": { "lv1": "Style props", "lv2": "Effects", "lv3": null }
+  },
+  {
+    "title": "Filter",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#filter",
+    "hierarchy": { "lv1": "Style props", "lv2": "Filter", "lv3": null }
+  },
+  {
+    "title": "Pseudo Elements and Selectors",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#pseudo-elements-and-selectors",
+    "hierarchy": { "lv1": "Style props", "lv2": "Pseudo Elements and Selectors", "lv3": null }
+  },
+  {
+    "title": "Others",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#others",
+    "hierarchy": { "lv1": "Style props", "lv2": "Others", "lv3": null }
+  },
+  {
+    "title": "Text and Layer Styles",
+    "type": "page",
+    "description": "How to use text and layer styles.",
+    "slug": "/styled-system/text-and-layer-styles",
+    "hierarchy": { "lv1": "Text and Layer Styles" }
+  },
+  {
+    "title": "Customizing the Theme",
+    "type": "fragment",
+    "slug": "/styled-system/text-and-layer-styles#customizing-the-theme",
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Customizing the Theme", "lv3": null }
+  },
+  {
+    "title": "Layer Styles",
+    "type": "fragment",
+    "slug": "/styled-system/text-and-layer-styles#layer-styles",
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Layer Styles", "lv3": null }
+  },
+  {
+    "title": "Text Style",
+    "type": "fragment",
+    "slug": "/styled-system/text-and-layer-styles#text-style",
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Text Style", "lv3": null }
+  },
+  {
+    "title": "Other Styles",
+    "type": "fragment",
+    "slug": "/styled-system/text-and-layer-styles#other-styles",
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Other Styles", "lv3": null }
+  },
+  {
+    "title": "Component Styles",
+    "type": "page",
+    "description": "How to create and customize component styles.",
+    "slug": "/styled-system/theming/component-style",
+    "hierarchy": { "lv1": "Component Styles" }
+  },
+  {
+    "title": "Basic Styles and Modifier Styles",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#basic-styles-and-modifier-styles",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Basic Styles and Modifier Styles",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Single Part and Multiple Part Components",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#single-part-and-multiple-part-components",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Single Part and Multiple Part Components",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Single Part Component",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#single-part-component",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Single Part and Multiple Part Components",
+      "lv3": "Single Part Component"
+    }
+  },
+  {
+    "title": "Component with Multiple Parts",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#component-with-multiple-parts",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Single Part Component",
+      "lv3": "Component with Multiple Parts"
+    }
+  },
+  {
+    "title": "Styling of Single Part Components",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#styling-of-single-part-components",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Component with Multiple Parts",
+      "lv3": "Styling of Single Part Components"
+    }
+  },
+  {
+    "title": "Styling Multi-part Components",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#styling-multi-part-components",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Styling of Single Part Components",
+      "lv3": "Styling Multi-part Components"
+    }
+  },
+  {
+    "title": "Creating Custom Components",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-style#creating-custom-components",
+    "hierarchy": { "lv1": "Component Styles", "lv2": "Creating Custom Components", "lv3": null }
+  },
+  {
+    "title": "Customizing the Theme",
+    "type": "page",
+    "description": "How to customize the default theme of Yamada UI.",
+    "slug": "/styled-system/theming/customize-theme",
+    "hierarchy": { "lv1": "Customizing the Theme" }
+  },
+  {
+    "title": "Theme Operation",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#theme-operation",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Theme Operation", "lv3": null }
+  },
+  {
+    "title": "Changing Tokens",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#changing-tokens",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Tokens", "lv3": null }
+  },
+  {
+    "title": "Changing Semantic Tokens",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#changing-semantic-tokens",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Semantic Tokens", "lv3": null }
+  },
+  {
+    "title": "Changing Styles",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#changing-styles",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Styles", "lv3": null }
+  },
+  {
+    "title": "Changing the Style of Components",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#changing-the-style-of-components",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Changing the Style of Components",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Utility",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#utility",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": null }
+  },
+  {
+    "title": "Using `extendTheme`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendtheme",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using `extendTheme`" }
+  },
+  {
+    "title": "Merging multiple themes",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#merging-multiple-themes",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Using `extendTheme`", "lv3": null }
+  },
+  {
+    "title": "Not inheriting from the default theme",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#not-inheriting-from-the-default-theme",
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Merging multiple themes", "lv3": null }
+  },
+  {
+    "title": "Inheriting from the default theme excluding specific tokens",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#inheriting-from-the-default-theme-excluding-specific-tokens",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Not inheriting from the default theme",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Inheriting only specific tokens from the default theme",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#inheriting-only-specific-tokens-from-the-default-theme",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Inheriting from the default theme excluding specific tokens",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Using `extendBaseTheme`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendbasetheme",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Inheriting only specific tokens from the default theme",
+      "lv3": "Using `extendBaseTheme`"
+    }
+  },
+  {
+    "title": "Using `extendStyle`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendstyle",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendBaseTheme`",
+      "lv3": "Using `extendStyle`"
+    }
+  },
+  {
+    "title": "Using `extendToken`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendtoken",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendStyle`",
+      "lv3": "Using `extendToken`"
+    }
+  },
+  {
+    "title": "Using `extendComponent`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendcomponent",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendToken`",
+      "lv3": "Using `extendComponent`"
+    }
+  },
+  {
+    "title": "Using `extendComponentSize`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendcomponentsize",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendComponent`",
+      "lv3": "Using `extendComponentSize`"
+    }
+  },
+  {
+    "title": "Using `extendComponentVariant`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendcomponentvariant",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendComponentSize`",
+      "lv3": "Using `extendComponentVariant`"
+    }
+  },
+  {
+    "title": "Using `extendComponentDefaultProps`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-extendcomponentdefaultprops",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendComponentVariant`",
+      "lv3": "Using `extendComponentDefaultProps`"
+    }
+  },
+  {
+    "title": "Using `withDefaultSize`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-withdefaultsize",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `extendComponentDefaultProps`",
+      "lv3": "Using `withDefaultSize`"
+    }
+  },
+  {
+    "title": "Using `withDefaultVariant`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-withdefaultvariant",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `withDefaultSize`",
+      "lv3": "Using `withDefaultVariant`"
+    }
+  },
+  {
+    "title": "Using `withDefaultColorScheme`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-withdefaultcolorscheme",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `withDefaultVariant`",
+      "lv3": "Using `withDefaultColorScheme`"
+    }
+  },
+  {
+    "title": "Using `withDefaultProps`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-withdefaultprops",
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Using `withDefaultColorScheme`",
+      "lv3": "Using `withDefaultProps`"
+    }
+  },
+  {
+    "title": "Default Theme",
+    "type": "page",
+    "description": "The default theme of Yamada UI.",
+    "slug": "/styled-system/theming/default-theme",
+    "hierarchy": { "lv1": "Default Theme" }
+  },
+  {
+    "title": "Colors",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#colors",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": null }
+  },
+  {
+    "title": "BlackAlpha",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#blackalpha",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "BlackAlpha" }
+  },
+  {
+    "title": "Gray",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#gray",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "BlackAlpha", "lv3": "Gray" }
+  },
+  {
+    "title": "Zinc",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#zinc",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Gray", "lv3": "Zinc" }
+  },
+  {
+    "title": "Neutral",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#neutral",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Zinc", "lv3": "Neutral" }
+  },
+  {
+    "title": "Stone",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#stone",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Neutral", "lv3": "Stone" }
+  },
+  {
+    "title": "Red",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#red",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Stone", "lv3": "Red" }
+  },
+  {
+    "title": "Amber",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#amber",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Red", "lv3": "Amber" }
+  },
+  {
+    "title": "エメラルド",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#エメラルド",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Amber", "lv3": "エメラルド" }
+  },
+  {
+    "title": "Sky",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#sky",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "エメラルド", "lv3": "Sky" }
+  },
+  {
+    "title": "Blue",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#blue",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sky", "lv3": "Blue" }
+  },
+  {
+    "title": "Indigo",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#indigo",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Blue", "lv3": "Indigo" }
+  },
+  {
+    "title": "Gradients",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#gradients",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Gradients", "lv3": null }
+  },
+  {
+    "title": "Spaces",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#spaces",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Spaces", "lv3": null }
+  },
+  {
+    "title": "Sizes",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#sizes",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": null }
+  },
+  {
+    "title": "Fonts (Font families)",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#fonts-font-families",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": "Fonts (Font families)" }
+  },
+  {
+    "title": "FontSizes",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#fontsizes",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Fonts (Font families)", "lv3": "FontSizes" }
+  },
+  {
+    "title": "FontWeights",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#fontweights",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "FontSizes", "lv3": "FontWeights" }
+  },
+  {
+    "title": "LineHeights",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#lineheights",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "FontWeights", "lv3": "LineHeights" }
+  },
+  {
+    "title": "LetterSpacings",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#letterspacings",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "LineHeights", "lv3": "LetterSpacings" }
+  },
+  {
+    "title": "Borders",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#borders",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Borders", "lv3": null }
+  },
+  {
+    "title": "Blurs",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#blurs",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Blurs", "lv3": null }
+  },
+  {
+    "title": "Radii",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#radii",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Radii", "lv3": null }
+  },
+  {
+    "title": "Shadows",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#shadows",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Shadows", "lv3": null }
+  },
+  {
+    "title": "Animations",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#animations",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Animations", "lv3": null }
+  },
+  {
+    "title": "Transitions",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#transitions",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Transitions", "lv3": null }
+  },
+  {
+    "title": "ZIndices",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#zindices",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "ZIndices", "lv3": null }
+  },
+  {
+    "title": "Breakpoint",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#breakpoint",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoint", "lv3": null }
+  },
+  {
+    "title": "Theme",
+    "type": "page",
+    "description": "The theme of Yamada UI is customizable and ensures the consistency of the application's design.",
+    "slug": "/styled-system/theming",
+    "hierarchy": { "lv1": "Theme" }
+  },
+  {
+    "title": "Switching Themes",
+    "type": "page",
+    "description": "How users can switch themes.",
+    "slug": "/styled-system/theming/switch-theme",
+    "hierarchy": { "lv1": "Switching Themes" }
+  },
+  {
+    "title": "Setup",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#setup",
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": null }
+  },
+  {
+    "title": "Preparing Multiple Themes",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#preparing-multiple-themes",
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": "Preparing Multiple Themes" }
+  },
+  {
+    "title": "Add `ThemeSchemeScript`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#add-themeschemescript",
+    "hierarchy": {
+      "lv1": "Switching Themes",
+      "lv2": "Preparing Multiple Themes",
+      "lv3": "Add `ThemeSchemeScript`"
+    }
+  },
+  {
+    "title": "In the case of Create React App",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#in-the-case-of-create-react-app",
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add `ThemeSchemeScript`", "lv3": null }
+  },
+  {
+    "title": "In the case of Next.js",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#in-the-case-of-nextjs",
+    "hierarchy": {
+      "lv1": "Switching Themes",
+      "lv2": "In the case of Create React App",
+      "lv3": null
+    }
+  },
+  {
+    "title": "Add `themeSchemeManager`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#add-themeschememanager",
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add `themeSchemeManager`", "lv3": null }
+  },
+  {
+    "title": "Prepare `getServerSideProps`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#prepare-getserversideprops",
+    "hierarchy": {
+      "lv1": "Switching Themes",
+      "lv2": "Add `themeSchemeManager`",
+      "lv3": "Prepare `getServerSideProps`"
+    }
+  },
+  {
+    "title": "Passing `cookieStorageSSR`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#passing-cookiestoragessr",
+    "hierarchy": {
+      "lv1": "Switching Themes",
+      "lv2": "Prepare `getServerSideProps`",
+      "lv3": "Passing `cookieStorageSSR`"
+    }
+  },
+  {
+    "title": "Add `getServerSideProps`",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#add-getserversideprops",
+    "hierarchy": {
+      "lv1": "Switching Themes",
+      "lv2": "Passing `cookieStorageSSR`",
+      "lv3": "Add `getServerSideProps`"
+    }
+  },
+  {
+    "title": "Switching Themes",
+    "type": "fragment",
+    "slug": "/styled-system/theming/switch-theme#switching-themes",
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Switching Themes", "lv3": null }
+  },
+  {
+    "title": "ui",
+    "type": "page",
+    "description": "How to generate JSX elements enabled with Yamada UI's style system.",
+    "slug": "/styled-system/ui",
+    "hierarchy": { "lv1": "ui" }
+  },
+  {
+    "title": "How to use",
+    "type": "fragment",
+    "slug": "/styled-system/ui#how-to-use",
+    "hierarchy": { "lv1": "ui", "lv2": "How to use", "lv3": null }
+  },
+  {
+    "title": "Creating a Component",
+    "type": "fragment",
+    "slug": "/styled-system/ui#creating-a-component",
+    "hierarchy": { "lv1": "ui", "lv2": "Creating a Component", "lv3": null }
+  }
+]

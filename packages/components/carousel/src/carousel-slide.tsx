@@ -42,7 +42,7 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
 
     return (
       <ui.div
-        className={cx('ui-carousel-slide', className)}
+        className={cx('ui-carousel__slide', className)}
         __css={css}
         {...getSlideProps({})}
       >
@@ -59,7 +59,7 @@ const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className='ui-carousel-slide-inner'
+        className='ui-carousel__slide__inner'
         w='100%'
         h='100%'
         {...rest}

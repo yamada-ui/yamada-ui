@@ -15,7 +15,7 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, 'button'>(
     return (
       <CarouselControl
         operation='prev'
-        className={cx('ui-carousel-control-prev', className)}
+        className={cx('ui-carousel__control--prev', className)}
         icon={
           <ChevronIcon
             __css={{
@@ -40,7 +40,7 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, 'button'>(
     return (
       <CarouselControl
         operation='next'
-        className={cx('ui-carousel-control-next', className)}
+        className={cx('ui-carousel__control--next', className)}
         icon={
           <ChevronIcon
             __css={{
@@ -73,7 +73,7 @@ const CarouselControl = forwardRef<
   return (
     <IconButton
       ref={ref}
-      className={cx('ui-carousel-control', className)}
+      className={cx('ui-carousel__control', className)}
       colorScheme={colorScheme}
       isRounded
       __css={css}

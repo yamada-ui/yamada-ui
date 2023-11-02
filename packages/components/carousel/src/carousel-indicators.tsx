@@ -33,7 +33,7 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-carousel-indicators', className)}
+        className={cx('ui-carousel__indicators', className)}
         __css={css}
         {...rest}
       >
@@ -76,7 +76,7 @@ const CarouselIndicator: FC<CarouselIndicatorProps> = ({
     <ui.button
       type='button'
       tabIndex={-1}
-      className={cx('ui-carousel-indicator', className)}
+      className={cx('ui-carousel__indicator', className)}
       __css={css}
       {...rest}
     />

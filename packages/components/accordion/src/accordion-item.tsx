@@ -186,7 +186,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
       >
         <ui.div
           ref={ref}
-          className={cx('ui-accordion-item', className)}
+          className={cx('ui-accordion__item', className)}
           aria-expanded={ariaAttr(isOpen)}
           __css={css}
           {...rest}

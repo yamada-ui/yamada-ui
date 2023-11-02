@@ -61,7 +61,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
     return (
       <ui.button
         {...getLabelProps(rest, ref)}
-        className={cx('ui-accordion-label', className)}
+        className={cx('ui-accordion__label', className)}
         __css={css}
       >
         {children}
@@ -94,7 +94,7 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   if (children)
     return (
       <ui.span
-        className={cx('ui-accordion-icon', className)}
+        className={cx('ui-accordion__icon', className)}
         __css={{
           display: 'inline-flex',
           justifyContent: 'center',
@@ -108,7 +108,7 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
 
   return (
     <ChevronIcon
-      className={cx('ui-accordion-icon', className)}
+      className={cx('ui-accordion__icon', className)}
       __css={css}
       {...rest}
     />

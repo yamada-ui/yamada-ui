@@ -16,7 +16,7 @@ import {
   getValidChildren,
   omitObject,
 } from '@yamada-ui/utils'
-import { RefAttributes } from 'react'
+import { ReactNode, RefAttributes } from 'react'
 import { usePopover } from './popover'
 import { PopoverProps, PopoverCloseButton } from '.'
 
@@ -109,6 +109,17 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       PopoverCloseButton,
     )
 
+    const resolvedChildren = (): ReactNode => {
+      return (
+        <>
+          {customPopoverCloseButton ??
+            (closeOnButton ? <PopoverCloseButton /> : null)}
+
+          {cloneChildren}
+        </>
+      )
+    }
+
     const css: CSSUIObject = {
       position: 'relative',
       w: '100%',
@@ -145,10 +156,13 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
           {...(animation !== 'none'
             ? getPopoverContentProps(animation, duration)
             : {})}
-          {...(getPopoverProps(rest, ref) as Omit<
-            DOMAttributes & RefAttributes<any>,
-            'onDrag'
-          >)}
+          {...(getPopoverProps(
+            {
+              ...rest,
+              children: resolvedChildren(),
+            },
+            ref,
+          ) as Omit<DOMAttributes & RefAttributes<any>, 'onDrag'>)}
           initial='exit'
           animate={isOpen ? 'enter' : 'exit'}
           exit='exit'
@@ -157,12 +171,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
             rest.onAnimationComplete,
           )}
           __css={css}
-        >
-          {customPopoverCloseButton ??
-            (closeOnButton ? <PopoverCloseButton /> : null)}
-
-          {cloneChildren}
-        </ui.section>
+        />
       </ui.div>
     )
   },

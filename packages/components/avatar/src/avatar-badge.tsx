@@ -55,7 +55,7 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-avatar-badge', className)}
+        className={cx('ui-avatar__badge', className)}
         boxSize={boxSize}
         __css={css}
         {...rest}

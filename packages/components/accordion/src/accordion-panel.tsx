@@ -48,7 +48,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
       >
         <ui.div
           {...getPanelProps(rest, ref)}
-          className={cx('ui-accordion-panel', className)}
+          className={cx('ui-accordion__panel', className)}
           __css={css}
         />
       </Collapse>

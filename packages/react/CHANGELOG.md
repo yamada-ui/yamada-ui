@@ -1,5 +1,26 @@
 # @yamada-ui/react
 
+## 0.8.12
+
+### Patch Changes
+
+- Updated dependencies [[`9cc9136b`](https://github.com/hirotomoyamada/yamada-ui/commit/9cc9136ba69d8f3a0dd110f71f82e6cacc1b8c86), [`fe91b8d9`](https://github.com/hirotomoyamada/yamada-ui/commit/fe91b8d97a9f4fc1b0a3c7e97e5053c94cb2089d), [`3d613278`](https://github.com/hirotomoyamada/yamada-ui/commit/3d613278c70e1a60854f286a3986ce657e30ff7f), [`e76f73f4`](https://github.com/hirotomoyamada/yamada-ui/commit/e76f73f492eacff31ee2282b92f3c68e40a91273), [`3484ee20`](https://github.com/hirotomoyamada/yamada-ui/commit/3484ee20ca18c3e7c291d686b0e308f54b95154e), [`07422944`](https://github.com/hirotomoyamada/yamada-ui/commit/07422944a20321a9df2cc76835780161b03744fe), [`487ce914`](https://github.com/hirotomoyamada/yamada-ui/commit/487ce914a3c4137b3014f65aedc20f91f78f1555), [`f43b05d7`](https://github.com/hirotomoyamada/yamada-ui/commit/f43b05d79ba3cf1a3cc7cd2e093e862b4c4c19b6), [`8db26f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/8db26f8f6782b84fc2334bcfef8939d176278f50)]:
+  - @yamada-ui/card@0.3.15
+  - @yamada-ui/button@0.3.15
+  - @yamada-ui/breadcrumb@0.3.15
+  - @yamada-ui/avatar@0.3.15
+  - @yamada-ui/popover@0.3.17
+  - @yamada-ui/accordion@0.3.15
+  - @yamada-ui/alert@0.5.9
+  - @yamada-ui/file-button@0.3.17
+  - @yamada-ui/modal@0.4.15
+  - @yamada-ui/autocomplete@0.4.10
+  - @yamada-ui/menu@0.3.17
+  - @yamada-ui/select@0.4.10
+  - @yamada-ui/notice@0.5.2
+  - @yamada-ui/providers@0.9.3
+  - @yamada-ui/use-media-query@0.2.18
+
 ## 0.8.11
 
 ### Patch Changes

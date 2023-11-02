@@ -1,5 +1,13 @@
 # @yamada-ui/autocomplete
 
+## 0.4.10
+
+### Patch Changes
+
+- Updated dependencies [[`3484ee20`](https://github.com/hirotomoyamada/yamada-ui/commit/3484ee20ca18c3e7c291d686b0e308f54b95154e)]:
+  - @yamada-ui/popover@0.3.17
+  - @yamada-ui/select@0.4.10
+
 ## 0.4.9
 
 ### Patch Changes

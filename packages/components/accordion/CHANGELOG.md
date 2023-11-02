@@ -1,5 +1,11 @@
 # @yamada-ui/accordion
 
+## 0.3.15
+
+### Patch Changes
+
+- [#202](https://github.com/hirotomoyamada/yamada-ui/pull/202) [`487ce914`](https://github.com/hirotomoyamada/yamada-ui/commit/487ce914a3c4137b3014f65aedc20f91f78f1555) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Accordion`.
+
 ## 0.3.14
 
 ### Patch Changes

@@ -45,7 +45,7 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, 'li'>(
 
     return (
       <ui.li
-        className={cx('ui-autocomplete__empty', className)}
+        className={cx('ui-autocomplete__item--empty', className)}
         __css={css}
         {...getEmptyProps(rest, ref)}
       >

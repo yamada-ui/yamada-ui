@@ -179,7 +179,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
           {...rest}
         >
           <ui.input
-            className='ui-autocomplete__input'
+            className='ui-autocomplete__field__input'
             display='inline-block'
             w='full'
             placeholder={placeholder}

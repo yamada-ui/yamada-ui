@@ -73,7 +73,7 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
 
   return (
     <AutocompleteIcon
-      className={cx('ui-autocomplete__clear__icon', className)}
+      className={cx('ui-autocomplete__icon--clear', className)}
       __css={styles.clearIcon}
       {...rest}
     >

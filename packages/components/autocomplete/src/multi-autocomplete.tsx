@@ -318,7 +318,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
           {cloneChildren}
 
           <ui.input
-            className='ui-autocomplete__input'
+            className={cx('ui-autocomplete__field__input', className)}
             display='inline-block'
             flex='1'
             overflow='hidden'

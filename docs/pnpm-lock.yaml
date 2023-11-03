@@ -74,6 +74,9 @@ dependencies:
   remark-slug:
     specifier: ^7.0.1
     version: 7.0.1
+  scroll-into-view-if-needed:
+    specifier: ^3.1.0
+    version: registry.npmjs.org/scroll-into-view-if-needed@3.1.0
 
 devDependencies:
   '@commitlint/cli':
@@ -10750,6 +10753,12 @@ packages:
     engines: {node: '>= 6'}
     dev: false
 
+  registry.npmjs.org/compute-scroll-into-view@3.1.0:
+    resolution: {integrity: sha512-rj8l8pD4bJ1nx+dAkMhV1xB5RuZEyVysfxJqB1pRchh1KVvwOv9b7CGB8ZfjTImVv2oF+sYMUkMZq6Na5Ftmbg==, tarball: https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-3.1.0.tgz}
+    name: compute-scroll-into-view
+    version: 3.1.0
+    dev: false
+
   registry.npmjs.org/concat-stream@1.6.2:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==, tarball: https://registry.npmjs.org/concat-stream/-/concat-stream-1.6.2.tgz}
     name: concat-stream
@@ -12173,6 +12182,14 @@ packages:
     name: safe-buffer
     version: 5.2.1
     dev: true
+
+  registry.npmjs.org/scroll-into-view-if-needed@3.1.0:
+    resolution: {integrity: sha512-49oNpRjWRvnU8NyGVmUaYG4jtTkNonFZI86MmGRDqBphEK2EXT9gdEUoQPZhuBM8yWHxCWbobltqYO5M4XrUvQ==, tarball: https://registry.npmjs.org/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.1.0.tgz}
+    name: scroll-into-view-if-needed
+    version: 3.1.0
+    dependencies:
+      compute-scroll-into-view: registry.npmjs.org/compute-scroll-into-view@3.1.0
+    dev: false
 
   registry.npmjs.org/semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==, tarball: https://registry.npmjs.org/semver/-/semver-7.5.4.tgz}

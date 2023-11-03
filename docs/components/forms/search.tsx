@@ -13,14 +13,30 @@ import {
   ModalProps,
   Divider,
   VStack,
+  ModalHeader,
+  Highlight,
+  dataAttr,
+  useUpdateEffect,
 } from '@yamada-ui/react'
 import { matchSorter } from 'match-sorter'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, KeyboardEvent, memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { MagnifyingGlass } from 'components/media-and-icons'
+import {
+  FC,
+  KeyboardEvent,
+  RefObject,
+  createRef,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import scrollIntoView from 'scroll-into-view-if-needed'
+import { File, Hash, MagnifyingGlass } from 'components/media-and-icons'
 import { useI18n } from 'contexts/i18n-context'
 import { useEventListener } from 'hooks/use-event-listener'
-
 const ACTION_DEFAULT_KEY = 'Ctrl'
 const ACTION_APPLE_KEY = '⌘'
 
@@ -89,21 +105,71 @@ export const Search = memo(
 
 type SearchModalProps = ModalProps
 
-const SearchModal: FC<SearchModalProps> = memo(({ isOpen, ...rest }) => {
+const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) => {
   const [query, setQuery] = useState<string>('')
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const { t, contents } = useI18n()
+  const router = useRouter()
+  const eventRef = useRef<'mouse' | 'keyboard'>(null)
+  const directionRef = useRef<'up' | 'down'>('down')
+  const compositionRef = useRef<boolean>(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
 
   const hits = useMemo(() => {
     if (!query.length) return []
 
     return matchSorter(contents, query, {
-      keys: ['hierarchy.lv1', 'hierarchy.lv2', 'hierarchy.lv3', 'content'],
-    }).slice(0, 40)
+      keys: ['hierarchy.lv1', 'hierarchy.lv2', 'hierarchy.lv3', 'description', 'title'],
+    }).slice(0, 20)
   }, [query, contents])
 
-  const onKeyDown = useCallback((ev: KeyboardEvent<HTMLInputElement>) => {
-    console.log(ev)
-  }, [])
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLInputElement>) => {
+      if (compositionRef.current) return
+
+      eventRef.current = 'keyboard'
+
+      const actions: Record<string, Function | undefined> = {
+        ArrowDown: () => {
+          if (selectedIndex + 1 === hits.length) return
+
+          directionRef.current = 'down'
+          setSelectedIndex(selectedIndex + 1)
+        },
+        ArrowUp: () => {
+          if (selectedIndex === 0) return
+
+          directionRef.current = 'up'
+          setSelectedIndex(selectedIndex - 1)
+        },
+        Enter: () => {
+          if (!hits.length) return
+
+          onClose()
+          router.push(hits[selectedIndex].slug)
+        },
+        Home: () => {
+          directionRef.current = 'up'
+          setSelectedIndex(0)
+        },
+        End: () => {
+          directionRef.current = 'down'
+          setSelectedIndex(hits.length - 1)
+        },
+      }
+
+      const action = actions[ev.key]
+
+      if (!action) return
+
+      ev.preventDefault()
+      ev.stopPropagation()
+
+      action(ev)
+    },
+    [hits, onClose, selectedIndex, router],
+  )
 
   useEffect(() => {
     if (isOpen) return
@@ -111,9 +177,43 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, ...rest }) => {
     setQuery('')
   }, [isOpen])
 
+  useUpdateEffect(() => {
+    setSelectedIndex(0)
+  }, [query])
+
+  useUpdateEffect(() => {
+    if (!containerRef.current || eventRef.current === 'mouse') return
+
+    const itemRef = itemRefs.current.get(selectedIndex)
+
+    if (!itemRef.current) return
+
+    scrollIntoView(itemRef.current, {
+      behavior: (actions) =>
+        actions.forEach(({ el, top }) => {
+          if (directionRef.current === 'down') {
+            el.scrollTop = top + 16
+          } else {
+            el.scrollTop = top - 17
+          }
+        }),
+      scrollMode: 'if-needed',
+      block: 'nearest',
+      inline: 'nearest',
+      boundary: containerRef.current,
+    })
+  }, [selectedIndex])
+
   return (
-    <Modal size='3xl' withCloseButton={false} placement='top' isOpen={isOpen} {...rest}>
-      <ModalBody>
+    <Modal
+      size='3xl'
+      withCloseButton={false}
+      placement='top'
+      isOpen={isOpen}
+      onClose={onClose}
+      {...rest}
+    >
+      <ModalHeader fontWeight='normal' fontSize='md' pb='md'>
         <HStack position='relative' w='full'>
           <ui.input
             flex='1'
@@ -129,6 +229,12 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, ...rest }) => {
             value={query}
             onChange={(ev) => setQuery(ev.target.value)}
             onKeyDown={onKeyDown}
+            onCompositionStart={() => {
+              compositionRef.current = true
+            }}
+            onCompositionEnd={() => {
+              compositionRef.current = false
+            }}
           />
 
           <MagnifyingGlass
@@ -140,15 +246,72 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, ...rest }) => {
             pointerEvents='none'
           />
         </HStack>
+      </ModalHeader>
 
-        {hits.length ? (
-          <>
-            <Divider />
+      {hits.length ? (
+        <ModalBody ref={containerRef} my='0' pb='md'>
+          <Divider />
 
-            <VStack gap='sm'></VStack>
-          </>
-        ) : null}
-      </ModalBody>
+          <VStack as='ul' gap='sm'>
+            {hits.map(({ title, type, slug, hierarchy }, index) => {
+              const isSelected = index === selectedIndex
+              const ref = createRef<HTMLDivElement>()
+
+              itemRefs.current.set(index, ref)
+
+              return (
+                <HStack
+                  as={NextLink}
+                  ref={ref}
+                  key={slug}
+                  href={slug}
+                  borderWidth='1px'
+                  rounded='md'
+                  minH='16'
+                  py='sm'
+                  px='md'
+                  data-selected={dataAttr(isSelected)}
+                  bg={['gray.100', 'whiteAlpha.50']}
+                  transitionProperty='colors'
+                  transitionDuration='normal'
+                  _focus={{ outline: 'none' }}
+                  _focusVisible={{ boxShadow: 'outline' }}
+                  _selected={{ bg: ['gray.200', 'whiteAlpha.100'] }}
+                  _active={{ bg: ['gray.300', 'whiteAlpha.200'] }}
+                  onClick={onClose}
+                  onMouseEnter={() => {
+                    eventRef.current = 'mouse'
+                    setSelectedIndex(index)
+                  }}
+                >
+                  {type === 'page' ? (
+                    <File fontSize='xl' color={['gray.600', 'whiteAlpha.500']} />
+                  ) : (
+                    <Hash fontSize='xl' color={['gray.500', 'whiteAlpha.400']} />
+                  )}
+
+                  <VStack gap='0'>
+                    {type === 'fragment' ? (
+                      <Text fontSize='xs' color='muted'>
+                        {hierarchy.lv1}
+                      </Text>
+                    ) : null}
+
+                    <Highlight
+                      query={query}
+                      markProps={{
+                        variant: 'solid',
+                      }}
+                    >
+                      {title}
+                    </Highlight>
+                  </VStack>
+                </HStack>
+              )
+            })}
+          </VStack>
+        </ModalBody>
+      ) : null}
     </Modal>
   )
 })

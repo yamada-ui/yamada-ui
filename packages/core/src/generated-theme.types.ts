@@ -689,7 +689,13 @@ export interface GeneratedTheme extends UITheme {
     }
     Mark: {
       sizes: string & {}
-      variants: 'solid' | 'subtle' | 'outline' | (string & {})
+      variants:
+        | 'solid'
+        | 'subtle'
+        | 'outline'
+        | 'text-accent'
+        | 'unstyled'
+        | (string & {})
     }
     Modal: {
       sizes:

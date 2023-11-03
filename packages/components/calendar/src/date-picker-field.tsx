@@ -33,7 +33,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, 'input'>(
         >
           <ui.input
             ref={ref}
-            className='ui-date-picker__input'
+            className='ui-date-picker__field__input'
             display='inline-block'
             w='full'
             {...inputProps}

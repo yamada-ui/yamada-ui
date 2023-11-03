@@ -67,7 +67,7 @@ export const YearList: FC<YearListProps> = ({
       />
 
       <ui.div
-        className={cx('ui-calendar__year__list', className)}
+        className={cx('ui-calendar__year-list', className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,
           minW: styles.content?.minW ?? styles.content?.minWidth,
@@ -85,7 +85,7 @@ export const YearList: FC<YearListProps> = ({
         {rangeYears.map((year, index) => (
           <Button
             key={index}
-            className='ui-calendar__year__list__button'
+            className='ui-calendar__year-list__button'
             variant='ghost'
             __css={{
               minW: 'auto',

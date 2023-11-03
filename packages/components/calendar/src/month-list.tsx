@@ -62,7 +62,7 @@ export const MonthList: FC<MonthListProps> = ({
       />
 
       <ui.div
-        className={cx('ui-calendar__month__list', className)}
+        className={cx('ui-calendar__month-list', className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,
           minW: styles.content?.minW ?? styles.content?.minWidth,
@@ -80,7 +80,7 @@ export const MonthList: FC<MonthListProps> = ({
         {rangeMonths.map((month, index) => (
           <Button
             key={index}
-            className='ui-calendar__month__list__button'
+            className='ui-calendar__month-list__button'
             variant='ghost'
             __css={{
               minW: 'auto',

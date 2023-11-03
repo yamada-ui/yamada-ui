@@ -59,7 +59,7 @@ export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
 }) => {
   return (
     <Icon
-      className={cx('ui-date-picker__calendar__icon', className)}
+      className={cx('ui-date-picker__icon__calendar', className)}
       viewBox='0 0 24 24'
       {...rest}
     >
@@ -93,7 +93,7 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
 
   return (
     <DatePickerIcon
-      className={cx('ui-date-picker__clear__icon', className)}
+      className={cx('ui-date-picker__icon--clear', className)}
       __css={styles.clearIcon}
       {...rest}
     >

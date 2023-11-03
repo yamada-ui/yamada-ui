@@ -47,8 +47,8 @@ export const LinkCard = memo(
           bg={['gray.100', 'whiteAlpha.50']}
           _focus={{ outline: 'none' }}
           _focusVisible={{ boxShadow: 'outline' }}
-          _hover={{ bg: ['gray.200', 'whiteAlpha.100'] }}
-          _active={{ bg: ['gray.300', 'whiteAlpha.200'] }}
+          _hover={{ bg: ['gray.200', 'whiteAlpha.200'] }}
+          _active={{ bg: ['gray.300', 'whiteAlpha.300'] }}
           transitionProperty='colors'
           transitionDuration='normal'
           {...rest}

@@ -101,29 +101,29 @@ export const MonthPicker = forwardRef<MonthPickerProps, 'div'>((props, ref) => {
           {...getContainerProps(containerProps)}
         >
           <DatePickerField
-            className='ui-month-picker-field'
+            className='ui-month-picker__field'
             {...getFieldProps({ h, minH }, ref)}
             inputProps={getInputProps(inputProps)}
           />
 
           {isClearable && value ? (
             <DatePickerClearIcon
-              className='ui-month-picker-clear-icon'
+              className='ui-month-picker__icon--clear'
               {...getIconProps({ clear: true, ...clearIconProps })}
             />
           ) : (
             <DatePickerIcon
-              className='ui-month-picker-icon'
+              className='ui-month-picker__icon'
               {...getIconProps({ clear: false, ...iconProps })}
             />
           )}
 
           <PopoverContent
-            className='ui-month-picker-popover'
+            className='ui-month-picker__popover'
             __css={{ ...styles.popover }}
           >
             <Calendar
-              className='ui-month-picker-calender'
+              className='ui-month-picker__calendar'
               {...getCalendarProps()}
             />
           </PopoverContent>

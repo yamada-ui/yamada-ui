@@ -3,7 +3,7 @@ import { ui, HTMLUIProps } from '@yamada-ui/core'
 import { cx, filterUndefined } from '@yamada-ui/utils'
 import dayjs from 'dayjs'
 import { FC, useMemo } from 'react'
-import { CalenderHeader, CalenderHeaderProps } from './calender-header'
+import { CalendarHeader, CalendarHeaderProps } from './calendar-header'
 import {
   getFormattedLabel,
   getMonthDays,
@@ -38,7 +38,7 @@ type MonthOptions = {
 }
 
 export type MonthProps = HTMLUIProps<'div'> &
-  Omit<CalenderHeaderProps, 'label' | 'index'> &
+  Omit<CalendarHeaderProps, 'label' | 'index'> &
   MonthOptions
 
 export const Month: FC<MonthProps> = ({
@@ -103,7 +103,7 @@ export const Month: FC<MonthProps> = ({
               __css={{ ...styles.content }}
               {...filterUndefined(rest)}
             >
-              <CalenderHeader
+              <CalendarHeader
                 {...{
                   ...headerProps,
                   label: getFormattedLabel(month, locale, dateFormat),
@@ -116,7 +116,7 @@ export const Month: FC<MonthProps> = ({
               />
 
               <ui.table
-                className={cx('ui-calendar-month', className)}
+                className={cx('ui-calendar__month', className)}
                 __css={{
                   w: styles.content?.w ?? styles.content?.width,
                   minW: styles.content?.minW ?? styles.content?.minWidth,
@@ -150,7 +150,7 @@ export const Month: FC<MonthProps> = ({
                           {...thProps}
                         >
                           <ui.div
-                            className='ui-calendar-month-weekday'
+                            className='ui-calendar__month__weekday'
                             __css={{
                               w: 'full',
                               display: 'flex',
@@ -182,7 +182,7 @@ export const Month: FC<MonthProps> = ({
                           return (
                             <ui.td key={col} {...tdProps}>
                               <Button
-                                className='ui-calendar-month-day'
+                                className='ui-calendar__month__day'
                                 variant='ghost'
                                 __css={{
                                   minW: 'auto',
@@ -223,7 +223,7 @@ export type WeekdayProps = { weekday: string; index: number }
 
 export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
   return (
-    <ui.span className='ui-calendar-month-weekday-label'>{weekday}</ui.span>
+    <ui.span className='ui-calendar__month__weekday__label'>{weekday}</ui.span>
   )
 }
 
@@ -239,6 +239,8 @@ export type DayProps = {
 
 export const Day: FC<DayProps> = ({ date }) => {
   return (
-    <ui.span className='ui-calendar-month-day-label'>{date.getDate()}</ui.span>
+    <ui.span className='ui-calendar__month__day__label'>
+      {date.getDate()}
+    </ui.span>
   )
 }

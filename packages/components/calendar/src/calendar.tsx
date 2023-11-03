@@ -9,7 +9,7 @@ import {
 } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import { forwardRef, ForwardedRef, Ref } from 'react'
-import { CalenderHeaderProps } from './calender-header'
+import { CalendarHeaderProps } from './calendar-header'
 import { Month, MonthProps } from './month'
 import { MonthList, MonthListProps } from './month-list'
 import {
@@ -34,7 +34,7 @@ export type CalendarBaseProps = Omit<
 > &
   ThemeProps<'Calendar'> &
   CalendarOptions &
-  Omit<CalenderHeaderProps, 'label' | 'index'> &
+  Omit<CalendarHeaderProps, 'label' | 'index'> &
   Pick<YearListProps, 'yearProps'> &
   Pick<MonthListProps, 'monthProps'> &
   Pick<MonthProps, 'tableProps' | 'weekdayProps' | 'dayProps'>

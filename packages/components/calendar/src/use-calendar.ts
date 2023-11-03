@@ -720,11 +720,11 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
 export type UseCalendarReturn = ReturnType<typeof useCalendar>
 
-export type UseCalenderHeaderProps = {
+export type UseCalendarHeaderProps = {
   index?: number
 }
 
-export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
+export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
   const {
     prevMonth,
     nextMonth,
@@ -959,7 +959,7 @@ export const useCalenderHeader = ({ index }: UseCalenderHeaderProps) => {
   return { getContainerProps, getControlProps, getLabelProps }
 }
 
-export type UseCalenderHeaderReturn = ReturnType<typeof useCalenderHeader>
+export type UseCalendarHeaderReturn = ReturnType<typeof useCalendarHeader>
 
 export const useYearList = () => {
   const {

@@ -14,16 +14,17 @@ type Content = {
   description?: string
   slug: string
   hierarchy: {
-    lv1: string | null
-    lv2?: string | null
-    lv3?: string | null
+    lv1: string
+    lv2?: string
+    lv3?: string
+    lv4?: string
   }
 }
 
 type TableOfContent = {
   content: string
   slug: string
-  lvl: 1 | 2 | 3
+  lvl: 1 | 2 | 3 | 4
 }
 
 const getPaths = async (path: string = 'contents'): Promise<string[]> => {
@@ -129,19 +130,48 @@ program.action(async () => {
               const tableOfContents = toc(content).json as TableOfContent[]
 
               tableOfContents.forEach((item, index) => {
-                const prevItem = tableOfContents[index - 1]
+                const prevTableOfContents = tableOfContents.slice(0, index)
                 const fragment = '#' + item.slug
 
-                contents.push({
+                const content: Content = {
                   title: item.content,
                   type: 'fragment',
                   slug: slug + fragment,
-                  hierarchy: {
-                    lv1: title,
-                    lv2: item.lvl === 2 ? item.content : prevItem.content ?? null,
-                    lv3: item.lvl === 3 ? item.content : null,
-                  },
-                })
+                  hierarchy: { lv1: title },
+                }
+
+                if (item.lvl <= 2) {
+                  content.hierarchy.lv2 = item.content
+                }
+
+                if (item.lvl === 3) {
+                  const lv2Item = prevTableOfContents.findLast(({ lvl }) => lvl < item.lvl)
+
+                  if (!lv2Item) {
+                    content.hierarchy.lv2 = item.content
+                  } else {
+                    content.hierarchy.lv2 = lv2Item.content
+                    content.hierarchy.lv3 = item.content
+                  }
+                }
+
+                if (item.lvl === 4) {
+                  const lv3Item = prevTableOfContents.findLast(({ lvl }) => lvl < item.lvl)
+                  const lv2Item = prevTableOfContents.findLast(({ lvl }) => lvl < lv3Item?.lvl)
+
+                  if (!lv3Item) {
+                    content.hierarchy.lv2 = item.content
+                  } else if (!lv2Item) {
+                    content.hierarchy.lv2 = lv3Item.content
+                    content.hierarchy.lv3 = item.content
+                  } else {
+                    content.hierarchy.lv2 = lv2Item.content
+                    content.hierarchy.lv3 = lv3Item.content
+                    content.hierarchy.lv4 = item.content
+                  }
+                }
+
+                contents.push(content)
               })
 
               return contents

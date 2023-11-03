@@ -46,7 +46,7 @@ const InputElement = forwardRef<InputElementProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-input-element', className)}
+        className={cx('ui-input__element', className)}
         __css={css}
         {...rest}
       />
@@ -59,7 +59,7 @@ export const InputLeftElement = forwardRef<InputElementProps, 'div'>(
     return (
       <InputElement
         ref={ref}
-        className={cx('ui-input-element-left', className)}
+        className={cx('ui-input__element--left', className)}
         placement='left'
         {...rest}
       />
@@ -72,7 +72,7 @@ export const InputRightElement = forwardRef<InputElementProps, 'div'>(
     return (
       <InputElement
         ref={ref}
-        className={cx('ui-input-element-right', className)}
+        className={cx('ui-input__element--right', className)}
         placement='right'
         {...rest}
       />

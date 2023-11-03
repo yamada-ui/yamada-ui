@@ -117,7 +117,7 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
   const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
 
   const hits = useMemo(() => {
-    if (!query.length) return []
+    if (query.length < 2) return []
 
     return matchSorter(contents, query, {
       keys: ['hierarchy.lv1', 'hierarchy.lv2', 'hierarchy.lv3', 'description', 'title'],

@@ -27,7 +27,7 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, 'ul'>(
 
     return (
       <PopoverContent
-        className={cx('ui-autocomplete-list', className)}
+        className={cx('ui-autocomplete__list', className)}
         w={w}
         minW={minW}
         __css={css}

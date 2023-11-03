@@ -28,12 +28,16 @@ export const AutocompleteOptionGroup = forwardRef<
 
     return (
       <ui.li
-        className='ui-autocomplete-group-container'
+        className={cx(
+          'ui-autocomplete__item',
+          'ui-autocomplete__item--group',
+          className,
+        )}
         __css={{ w: '100%', h: 'fit-content', color }}
         {...getContainerProps()}
       >
         <ui.span
-          className={cx('ui-autocomplete-group-label')}
+          className={cx('ui-autocomplete__item__group-label')}
           __css={styles.groupLabel}
           noOfLines={1}
         >
@@ -42,7 +46,7 @@ export const AutocompleteOptionGroup = forwardRef<
 
         <ui.ul
           {...getGroupProps({}, ref)}
-          className={cx('ui-autocomplete-group', className)}
+          className={cx('ui-autocomplete__item__group', className)}
           __css={{ h, minH, ...styles.group }}
         >
           {children}

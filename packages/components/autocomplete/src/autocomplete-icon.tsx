@@ -41,7 +41,7 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-autocomplete-icon', className)}
+        className={cx('ui-autocomplete__icon', className)}
         __css={css}
         {...rest}
       >
@@ -73,7 +73,7 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
 
   return (
     <AutocompleteIcon
-      className={cx('ui-autocomplete-clear-icon', className)}
+      className={cx('ui-autocomplete__icon--clear', className)}
       __css={styles.clearIcon}
       {...rest}
     >
@@ -102,7 +102,7 @@ export const AutocompleteItemIcon = forwardRef<
   return (
     <ui.span
       ref={ref}
-      className={cx('ui-autocomplete-item-icon', className)}
+      className={cx('ui-autocomplete__item__icon', className)}
       __css={css}
       {...rest}
     />

@@ -42,7 +42,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, 'li'>(
 
     return (
       <ui.li
-        className={cx('ui-autocomplete-item', className)}
+        className={cx('ui-autocomplete__item', className)}
         __css={css}
         {...getOptionProps({}, ref)}
       >

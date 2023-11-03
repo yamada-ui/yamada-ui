@@ -307,7 +307,7 @@ const CarouselSlides = forwardRef<CarouselSlidesProps, 'div'>(
     const css: CSSUIObject = { w: '100%', h: 'fit-content', overflow: 'hidden' }
 
     return (
-      <ui.div ref={ref} className='ui-carousel-sliders' __css={css}>
+      <ui.div ref={ref} className='ui-carousel__sliders' __css={css}>
         <CarouselSlidesInner {...rest} />
       </ui.div>
     )
@@ -328,5 +328,7 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
       : {}),
   }
 
-  return <ui.div className='ui-carousel-sliders-inner' __css={css} {...rest} />
+  return (
+    <ui.div className='ui-carousel__sliders__inner' __css={css} {...rest} />
+  )
 }

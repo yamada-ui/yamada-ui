@@ -433,12 +433,12 @@ export const Checkbox = forwardRef(
         ])}
       >
         <ui.input
-          className='ui-checkbox-input'
+          className='ui-checkbox__input'
           {...getInputProps(inputProps, ref)}
         />
 
         <ui.span
-          className='ui-checkbox-icon'
+          className='ui-checkbox__icon'
           __css={{
             pointerEvents: isReadOnly ? 'none' : undefined,
             position: 'relative',
@@ -454,7 +454,7 @@ export const Checkbox = forwardRef(
         </ui.span>
 
         <ui.span
-          className='ui-checkbox-label'
+          className='ui-checkbox__label'
           __css={{ ...styles.label }}
           {...getLabelProps(labelProps)}
         >

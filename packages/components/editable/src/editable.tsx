@@ -546,7 +546,7 @@ export const EditablePreview = forwardRef<EditablePreviewProps, 'span'>(
 
     return (
       <ui.span
-        className={cx('ui-editable-preview', className)}
+        className={cx('ui-editable__preview', className)}
         {...getPreviewProps(rest, ref)}
         __css={css}
       />
@@ -571,7 +571,7 @@ export const EditableInput = forwardRef<EditableInputProps, 'input'>(
 
     return (
       <ui.input
-        className={cx('ui-editable-input', className)}
+        className={cx('ui-editable__input', className)}
         {...getInputProps(rest, ref)}
         __css={css}
       />
@@ -596,7 +596,7 @@ export const EditableTextarea = forwardRef<EditableTextareaProps, 'textarea'>(
 
     return (
       <ui.textarea
-        className={cx('ui-editable-textarea', className)}
+        className={cx('ui-editable__textarea', className)}
         {...getTextareaProps(rest, ref)}
         __css={css}
       />

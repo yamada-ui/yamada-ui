@@ -1,5 +1,32 @@
 # @yamada-ui/react
 
+## 0.8.13
+
+### Patch Changes
+
+- Updated dependencies [[`f19e4368`](https://github.com/hirotomoyamada/yamada-ui/commit/f19e43681a4381848eddf2bb252c64960c6bdcc1), [`f0e049ae`](https://github.com/hirotomoyamada/yamada-ui/commit/f0e049ae6ed89627f35b2b538015c3c326b1ea66), [`44daf8e1`](https://github.com/hirotomoyamada/yamada-ui/commit/44daf8e174097a776ac2b6005b3c2579dab495dc), [`ec2589cb`](https://github.com/hirotomoyamada/yamada-ui/commit/ec2589cb8d426e86c8743f33f92486ee1e628e91), [`4a261287`](https://github.com/hirotomoyamada/yamada-ui/commit/4a26128794762933a2f619cb69eb8a5b556b295d), [`ff637114`](https://github.com/hirotomoyamada/yamada-ui/commit/ff6371144a997575d8ddaa999da22338fee13b7b), [`38a7fff9`](https://github.com/hirotomoyamada/yamada-ui/commit/38a7fff93a05aba59554d31a6cd00cadbd308f58)]:
+  - @yamada-ui/image@0.3.15
+  - @yamada-ui/form-control@0.3.17
+  - @yamada-ui/checkbox@0.3.17
+  - @yamada-ui/theme@0.11.9
+  - @yamada-ui/editable@0.3.17
+  - @yamada-ui/autocomplete@0.4.11
+  - @yamada-ui/avatar@0.3.16
+  - @yamada-ui/file-button@0.3.18
+  - @yamada-ui/file-input@0.4.8
+  - @yamada-ui/input@0.3.17
+  - @yamada-ui/native-select@0.4.8
+  - @yamada-ui/number-input@0.3.17
+  - @yamada-ui/pin-input@0.3.17
+  - @yamada-ui/radio@0.3.17
+  - @yamada-ui/select@0.4.11
+  - @yamada-ui/slider@0.4.8
+  - @yamada-ui/textarea@0.3.17
+  - @yamada-ui/switch@0.3.17
+  - @yamada-ui/providers@0.9.4
+  - @yamada-ui/theme-tools@0.2.18
+  - @yamada-ui/use-media-query@0.2.19
+
 ## 0.8.12
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/calendar
 
+## 0.5.11
+
+### Patch Changes
+
+- [#206](https://github.com/hirotomoyamada/yamada-ui/pull/206) [`1761fd39`](https://github.com/hirotomoyamada/yamada-ui/commit/1761fd394d972636b3ca2775722a6c3af7ef2499) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Calendar` and fix from `calender` to `calendar`.
+
+- Updated dependencies [[`f0e049ae`](https://github.com/hirotomoyamada/yamada-ui/commit/f0e049ae6ed89627f35b2b538015c3c326b1ea66)]:
+  - @yamada-ui/form-control@0.3.17
+
 ## 0.5.10
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/carousel
 
+## 0.3.16
+
+### Patch Changes
+
+- [#207](https://github.com/hirotomoyamada/yamada-ui/pull/207) [`6ded947a`](https://github.com/hirotomoyamada/yamada-ui/commit/6ded947a2d57b16c49eab1119c375d6f0391e68b) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Carousel`.
+
 ## 0.3.15
 
 ### Patch Changes

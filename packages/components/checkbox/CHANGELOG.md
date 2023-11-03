@@ -1,5 +1,14 @@
 # @yamada-ui/checkbox
 
+## 0.3.17
+
+### Patch Changes
+
+- [#208](https://github.com/hirotomoyamada/yamada-ui/pull/208) [`44daf8e1`](https://github.com/hirotomoyamada/yamada-ui/commit/44daf8e174097a776ac2b6005b3c2579dab495dc) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Checkbox`.
+
+- Updated dependencies [[`f0e049ae`](https://github.com/hirotomoyamada/yamada-ui/commit/f0e049ae6ed89627f35b2b538015c3c326b1ea66)]:
+  - @yamada-ui/form-control@0.3.17
+
 ## 0.3.16
 
 ### Patch Changes

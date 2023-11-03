@@ -1,5 +1,11 @@
 # @yamada-ui/form-control
 
+## 0.3.17
+
+### Patch Changes
+
+- [#211](https://github.com/hirotomoyamada/yamada-ui/pull/211) [`f0e049ae`](https://github.com/hirotomoyamada/yamada-ui/commit/f0e049ae6ed89627f35b2b538015c3c326b1ea66) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Formcontrol`.
+
 ## 0.3.16
 
 ### Patch Changes

@@ -341,7 +341,7 @@ const RequiredIndicator = forwardRef<RequiredIndicatorProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-form__required__indicator', className)}
+        className={cx('ui-form__required-indicator', className)}
         role='presentation'
         aria-hidden={true}
         __css={css}
@@ -367,7 +367,7 @@ export const HelperMessage = forwardRef<HelperMessageProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-form__helper__message', className)}
+        className={cx('ui-form__helper-message', className)}
         __css={css}
         {...rest}
       />
@@ -389,7 +389,7 @@ export const ErrorMessage = forwardRef<ErrorMessageProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-form__error__message', className)}
+        className={cx('ui-form__error-message', className)}
         aria-live='polite'
         __css={css}
         {...rest}

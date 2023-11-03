@@ -1,5 +1,6 @@
 import { ComponentStyle, mode } from '@yamada-ui/core'
 import {
+  getMemoizedObject as get,
   transparentizeColor,
   isArray,
   getColor,
@@ -8,7 +9,6 @@ import {
 
 export const Button: ComponentStyle = {
   baseStyle: {
-    lineHeight: 1.2,
     rounded: 'md',
     fontWeight: 'semibold',
     transitionProperty: 'common',
@@ -178,30 +178,34 @@ export const Button: ComponentStyle = {
   },
 
   sizes: {
-    xs: {
+    xs: ({ theme: t }) => ({
       h: 6,
       minW: 6,
       fontSize: 'xs',
+      lineHeight: get(t, 'sizes.6'),
       px: 2,
-    },
-    sm: {
+    }),
+    sm: ({ theme: t }) => ({
       h: 8,
       minW: 8,
       fontSize: 'sm',
+      lineHeight: get(t, 'sizes.8'),
       px: 3,
-    },
-    md: {
+    }),
+    md: ({ theme: t }) => ({
       h: 10,
       minW: 10,
       fontSize: 'md',
+      lineHeight: get(t, 'sizes.10'),
       px: 4,
-    },
-    lg: {
+    }),
+    lg: ({ theme: t }) => ({
       h: 12,
       minW: 12,
       fontSize: 'lg',
+      lineHeight: get(t, 'sizes.12'),
       px: 6,
-    },
+    }),
   },
 
   defaultProps: {

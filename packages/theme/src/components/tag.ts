@@ -1,19 +1,22 @@
 import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { transparentizeColor, getColor, isGray } from '@yamada-ui/utils'
+import {
+  getMemoizedObject as get,
+  transparentizeColor,
+  getColor,
+  isGray,
+} from '@yamada-ui/utils'
 
 export const Tag: ComponentMultiStyle = {
   baseStyle: {
     container: {
       outline: 0,
       fontWeight: 'medium',
-      lineHeight: 1.2,
       rounded: 'md',
       _focusVisible: {
         boxShadow: 'outline',
       },
     },
     label: {
-      lineHeight: 1.8,
       overflow: 'visible',
     },
     closeButton: {
@@ -38,18 +41,6 @@ export const Tag: ComponentMultiStyle = {
         boxShadow: 'outline',
         bg: 'rgba(0, 0, 0, 0.14)',
       },
-    },
-  },
-
-  sizes: {
-    sm: {
-      container: { minH: '5', minW: '5', fontSize: 'xs', px: '2' },
-    },
-    md: {
-      container: { minH: '6', minW: '6', fontSize: 'sm', px: '2' },
-    },
-    lg: {
-      container: { minH: '8', minW: '8', fontSize: 'md', px: '3' },
     },
   },
 
@@ -84,6 +75,36 @@ export const Tag: ComponentMultiStyle = {
         }
       },
     },
+  },
+
+  sizes: {
+    sm: ({ theme: t }) => ({
+      container: {
+        minH: '6',
+        minW: '6',
+        fontSize: 'xs',
+        px: '2',
+        lineHeight: get(t, 'sizes.6'),
+      },
+    }),
+    md: ({ theme: t }) => ({
+      container: {
+        minH: '7',
+        minW: '7',
+        fontSize: 'sm',
+        px: '2',
+        lineHeight: get(t, 'sizes.7'),
+      },
+    }),
+    lg: ({ theme: t }) => ({
+      container: {
+        minH: '8',
+        minW: '8',
+        fontSize: 'md',
+        px: '3',
+        lineHeight: get(t, 'sizes.8'),
+      },
+    }),
   },
 
   defaultProps: {

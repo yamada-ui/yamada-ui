@@ -1,8 +1,83 @@
 ---
 title: useAsync
-description: このページは現在作成中です。
+description: '`useAsync`は、は非同期関数を実行し、その状態を追跡するカスタムフックです。'
+package_name: '@yamada-ui/use-idle'
+with_description: true
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { useAsync } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx functional=true
+const [flg, { toggle }] = useBoolean()
+const { value, error, loading } = useAsync(
+  async () =>
+    new Promise<string>((resolve, reject) => {
+      console.log('deps:', JSON.stringify(flg))
+
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          resolve('✌️')
+        } else {
+          reject(new Error('A pseudo random error occurred'))
+        }
+      }, 3000)
+    }),
+  [flg],
+)
+
+return (
+  <>
+    {loading ? (
+      <Text>Loading...</Text>
+    ) : error ? (
+      <Text>Error: {error.message}</Text>
+    ) : (
+      <Text>Value: {value}</Text>
+    )}
+
+    <Button mt='md' onClick={toggle}>
+      Update state
+    </Button>
+  </>
+)
+```
+
+### 再実行をする
+
+```tsx functional=true
+const { value, error, loading, retry } = useAsyncRetry(
+  async () =>
+    new Promise<string>((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          resolve('✌️')
+        } else {
+          reject(new Error('A pseudo random error occurred'))
+        }
+      }, 3000)
+    }),
+  [],
+)
+
+return (
+  <>
+    {loading ? (
+      <Text>Loading...</Text>
+    ) : error ? (
+      <Text>Error: {error.message}</Text>
+    ) : (
+      <Text>Value: {value}</Text>
+    )}
+
+    <Button mt='md' onClick={retry}>
+      Retry
+    </Button>
+  </>
+)
+```

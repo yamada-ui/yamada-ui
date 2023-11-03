@@ -5,6 +5,7 @@ import {
   Text,
   StringLiteral,
   noop,
+  Dict,
 } from '@yamada-ui/react'
 import { useRouter } from 'next/router'
 import {
@@ -17,22 +18,26 @@ import {
   Fragment,
 } from 'react'
 import { CONSTANT } from 'constant'
-import en from 'i18n/en.json'
-import ja from 'i18n/ja.json'
+import CONTENT_EN from 'i18n/content.en.json'
+import CONTENT_JA from 'i18n/content.ja.json'
+import UI_EN from 'i18n/ui.en.json'
+import UI_JA from 'i18n/ui.ja.json'
 import { Locale } from 'utils/i18n'
 
-type LocaleData = typeof en
+type UIData = typeof UI_EN
 
-const localeData = { ja, en }
+const uiData = { ja: UI_JA, en: UI_EN }
+const contentData = { ja: CONTENT_JA, en: CONTENT_EN }
 
 type I18nContext = {
   locale: Locale
-  t: (path: Path<LocaleData>) => string
+  t: (path: Path<UIData>) => string
   tc: (
-    path: Path<LocaleData>,
+    path: Path<UIData>,
     callback?: (str: string, index: number) => JSX.Element,
   ) => string | JSX.Element[]
   changeLocale: (locale: Locale & StringLiteral) => void
+  contents: Dict[]
 }
 
 const I18nContext = createContext<I18nContext>({
@@ -40,12 +45,15 @@ const I18nContext = createContext<I18nContext>({
   t: () => '',
   tc: () => '',
   changeLocale: noop,
+  contents: [],
 })
 
 export type I18nProviderProps = PropsWithChildren
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const { locale, pathname, asPath, push } = useRouter()
+
+  const contents = useMemo(() => contentData[locale], [locale])
 
   const changeLocale = useCallback(
     (locale: Locale & StringLiteral) => {
@@ -54,14 +62,11 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     [push, pathname, asPath],
   )
 
-  const t = useCallback(
-    (path: Path<LocaleData>) => get<string>(localeData[locale], path, ''),
-    [locale],
-  )
+  const t = useCallback((path: Path<UIData>) => get<string>(uiData[locale], path, ''), [locale])
 
   const tc = useCallback(
-    (path: Path<LocaleData>, callback?: (str: string, index: number) => JSX.Element) => {
-      const strOrArray = get<string | string[]>(localeData[locale], path, '')
+    (path: Path<UIData>, callback?: (str: string, index: number) => JSX.Element) => {
+      const strOrArray = get<string | string[]>(uiData[locale], path, '')
 
       if (isString(strOrArray)) {
         const match = strOrArray.match(/`([^`]+)`/)
@@ -83,8 +88,8 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   )
 
   const value = useMemo(
-    () => ({ locale: locale as Locale, t, tc, changeLocale }),
-    [changeLocale, locale, t, tc],
+    () => ({ locale: locale as Locale, t, tc, changeLocale, contents }),
+    [changeLocale, locale, t, tc, contents],
   )
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>

@@ -16,7 +16,6 @@
     "message": "You just hit a route that doesn't exist... the sadness.😢",
     "back-to-home": "Back to Home"
   },
-  "menu": {},
   "component": {
     "feedback": {
       "ad-banner": {
@@ -27,7 +26,6 @@
     "forms": {
       "search": {
         "message": "Search the docs",
-        "command": "/",
         "placeholder": "Search the docs"
       }
     },

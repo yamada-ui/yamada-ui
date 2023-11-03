@@ -50,7 +50,7 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
               {title}
             </Heading>
 
-            {with_description ? <TextWithCode mt='md'>{description}</TextWithCode> : null}
+            {with_description ? <TextWithCode mt='6'>{description}</TextWithCode> : null}
 
             <RelatedLinks />
 

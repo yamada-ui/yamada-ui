@@ -712,20 +712,20 @@
     "hierarchy": { "lv1": "応用を学ぶ", "lv2": "テーマの応用" }
   },
   {
-    "title": "`withDefaultColorScheme`を使う",
+    "title": "withDefaultColorSchemeを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#withdefaultcolorschemeを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
       "lv2": "テーマの応用",
-      "lv3": "`withDefaultColorScheme`を使う"
+      "lv3": "withDefaultColorSchemeを使う"
     }
   },
   {
-    "title": "`useToken`を使う",
+    "title": "useTokenを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usetokenを使う",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "テーマの応用", "lv3": "`useToken`を使う" }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "テーマの応用", "lv3": "useTokenを使う" }
   },
   {
     "title": "スタイルの応用",
@@ -734,16 +734,16 @@
     "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用" }
   },
   {
-    "title": "`as`について",
+    "title": "asについて",
     "type": "fragment",
     "slug": "/getting-started/advanced#asについて",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": "`as`について" }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": "asについて" }
   },
   {
-    "title": "`sx`や`css`について",
+    "title": "sxやcssについて",
     "type": "fragment",
     "slug": "/getting-started/advanced#sxやcssについて",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": "`sx`や`css`について" }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": "sxやcssについて" }
   },
   {
     "title": "順序について",
@@ -758,23 +758,19 @@
     "hierarchy": { "lv1": "応用を学ぶ", "lv2": "レスポンシブの応用" }
   },
   {
-    "title": "`useBreakpoint`を使う",
+    "title": "useBreakpointを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usebreakpointを使う",
-    "hierarchy": {
-      "lv1": "応用を学ぶ",
-      "lv2": "レスポンシブの応用",
-      "lv3": "`useBreakpoint`を使う"
-    }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "レスポンシブの応用", "lv3": "useBreakpointを使う" }
   },
   {
-    "title": "`useBreakpointValue`を使う",
+    "title": "useBreakpointValueを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usebreakpointvalueを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
       "lv2": "レスポンシブの応用",
-      "lv3": "`useBreakpointValue`を使う"
+      "lv3": "useBreakpointValueを使う"
     }
   },
   {
@@ -784,19 +780,19 @@
     "hierarchy": { "lv1": "応用を学ぶ", "lv2": "カラーモードの応用" }
   },
   {
-    "title": "`useColorMode`を使う",
+    "title": "useColorModeを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usecolormodeを使う",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "カラーモードの応用", "lv3": "`useColorMode`を使う" }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "カラーモードの応用", "lv3": "useColorModeを使う" }
   },
   {
-    "title": "`useColorModeValue`を使う",
+    "title": "useColorModeValueを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usecolormodevalueを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
       "lv2": "カラーモードの応用",
-      "lv3": "`useColorModeValue`を使う"
+      "lv3": "useColorModeValueを使う"
     }
   },
   {
@@ -806,23 +802,23 @@
     "hierarchy": { "lv1": "応用を学ぶ", "lv2": "アニメーションの応用" }
   },
   {
-    "title": "`useAnimation`で複数のアニメーションを使う",
+    "title": "useAnimationで複数のアニメーションを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#useanimationで複数のアニメーションを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
       "lv2": "アニメーションの応用",
-      "lv3": "`useAnimation`で複数のアニメーションを使う"
+      "lv3": "useAnimationで複数のアニメーションを使う"
     }
   },
   {
-    "title": "`useDynamicAnimation`を使う",
+    "title": "useDynamicAnimationを使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usedynamicanimationを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
       "lv2": "アニメーションの応用",
-      "lv3": "`useDynamicAnimation`を使う"
+      "lv3": "useDynamicAnimationを使う"
     }
   },
   {
@@ -935,20 +931,20 @@
     "hierarchy": { "lv1": "基本を学ぶ", "lv2": "アニメーションについて" }
   },
   {
-    "title": "`useAnimation`を使う",
+    "title": "useAnimationを使う",
     "type": "fragment",
     "slug": "/getting-started/basics#useanimationを使う",
     "hierarchy": {
       "lv1": "基本を学ぶ",
       "lv2": "アニメーションについて",
-      "lv3": "`useAnimation`を使う"
+      "lv3": "useAnimationを使う"
     }
   },
   {
-    "title": "`Motion`を使う",
+    "title": "Motionを使う",
     "type": "fragment",
     "slug": "/getting-started/basics#motionを使う",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "アニメーションについて", "lv3": "`Motion`を使う" }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "アニメーションについて", "lv3": "Motionを使う" }
   },
   {
     "title": "Congratulations!",
@@ -976,10 +972,10 @@
     "hierarchy": { "lv1": "Create React Appではじめる", "lv2": "パッケージをインストールする" }
   },
   {
-    "title": "`UIProvider`を追加する",
+    "title": "UIProviderを追加する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#uiproviderを追加する",
-    "hierarchy": { "lv1": "Create React Appではじめる", "lv2": "`UIProvider`を追加する" }
+    "hierarchy": { "lv1": "Create React Appではじめる", "lv2": "UIProviderを追加する" }
   },
   {
     "title": "コンポーネントを使用する",
@@ -1008,16 +1004,16 @@
     "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "パッケージをインストールする" }
   },
   {
-    "title": "`UIProvider`を追加する",
+    "title": "UIProviderを追加する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#uiproviderを追加する",
-    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "`UIProvider`を追加する" }
+    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "UIProviderを追加する" }
   },
   {
-    "title": "`ColorModeScript`を追加する",
+    "title": "ColorModeScriptを追加する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#colormodescriptを追加する",
-    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "`ColorModeScript`を追加する" }
+    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "ColorModeScriptを追加する" }
   },
   {
     "title": "コンポーネントを使用する",
@@ -1046,10 +1042,10 @@
     "hierarchy": { "lv1": "インストール", "lv2": "パッケージをインストールする" }
   },
   {
-    "title": "`UIProvider`を追加する",
+    "title": "UIProviderを追加する",
     "type": "fragment",
     "slug": "/getting-started/installation#uiproviderを追加する",
-    "hierarchy": { "lv1": "インストール", "lv2": "`UIProvider`を追加する" }
+    "hierarchy": { "lv1": "インストール", "lv2": "UIProviderを追加する" }
   },
   {
     "title": "コンポーネントを使用する",
@@ -1795,13 +1791,13 @@
     "hierarchy": { "lv1": "アニメーション", "lv2": "CSSアニメーション" }
   },
   {
-    "title": "`useAnimation`を使う",
+    "title": "useAnimationを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#useanimationを使う",
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "CSSアニメーション",
-      "lv3": "`useAnimation`を使う"
+      "lv3": "useAnimationを使う"
     }
   },
   {
@@ -1811,7 +1807,7 @@
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "CSSアニメーション",
-      "lv3": "`useAnimation`を使う",
+      "lv3": "useAnimationを使う",
       "lv4": "複数のアニメーションを使う"
     }
   },
@@ -1822,7 +1818,7 @@
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "CSSアニメーション",
-      "lv3": "`useAnimation`を使う",
+      "lv3": "useAnimationを使う",
       "lv4": "レスポンシブスタイル"
     }
   },
@@ -1833,18 +1829,18 @@
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "CSSアニメーション",
-      "lv3": "`useAnimation`を使う",
+      "lv3": "useAnimationを使う",
       "lv4": "カラーモード"
     }
   },
   {
-    "title": "`useDynamicAnimation`を使う",
+    "title": "useDynamicAnimationを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#usedynamicanimationを使う",
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "CSSアニメーション",
-      "lv3": "`useDynamicAnimation`を使う"
+      "lv3": "useDynamicAnimationを使う"
     }
   },
   {
@@ -1854,7 +1850,7 @@
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "CSSアニメーション",
-      "lv3": "`useDynamicAnimation`を使う",
+      "lv3": "useDynamicAnimationを使う",
       "lv4": "複数のアニメーションと組み合わせる"
     }
   },
@@ -1881,14 +1877,14 @@
     "hierarchy": { "lv1": "アニメーション", "lv2": "Motion", "lv3": "アニメーション" }
   },
   {
-    "title": "`AnimatePresence`を使う",
+    "title": "AnimatePresenceを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#animatepresenceを使う",
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "Motion",
       "lv3": "アニメーション",
-      "lv4": "`AnimatePresence`を使う"
+      "lv4": "AnimatePresenceを使う"
     }
   },
   {
@@ -1903,14 +1899,14 @@
     }
   },
   {
-    "title": "`useMotionAnimationFrame`を使う",
+    "title": "useMotionAnimationFrameを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#usemotionanimationframeを使う",
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "Motion",
       "lv3": "アニメーション",
-      "lv4": "`useMotionAnimationFrame`を使う"
+      "lv4": "useMotionAnimationFrameを使う"
     }
   },
   {
@@ -1987,14 +1983,14 @@
     "hierarchy": { "lv1": "アニメーション", "lv2": "Motion", "lv3": "スクロール" }
   },
   {
-    "title": "`useScroll`を使う",
+    "title": "useScrollを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#usescrollを使う",
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "Motion",
       "lv3": "スクロール",
-      "lv4": "`useScroll`を使う"
+      "lv4": "useScrollを使う"
     }
   },
   {
@@ -2040,13 +2036,13 @@
     }
   },
   {
-    "title": "`ColorModeScript`を追加する",
+    "title": "ColorModeScriptを追加する",
     "type": "fragment",
     "slug": "/styled-system/color-mode#colormodescriptを追加する",
     "hierarchy": {
       "lv1": "カラーモード",
       "lv2": "セットアップ",
-      "lv3": "`ColorModeScript`を追加する"
+      "lv3": "ColorModeScriptを追加する"
     }
   },
   {
@@ -2056,7 +2052,7 @@
     "hierarchy": {
       "lv1": "カラーモード",
       "lv2": "セットアップ",
-      "lv3": "`ColorModeScript`を追加する",
+      "lv3": "ColorModeScriptを追加する",
       "lv4": "Create React Appの場合"
     }
   },
@@ -2067,44 +2063,44 @@
     "hierarchy": {
       "lv1": "カラーモード",
       "lv2": "セットアップ",
-      "lv3": "`ColorModeScript`を追加する",
+      "lv3": "ColorModeScriptを追加する",
       "lv4": "Next.jsの場合"
     }
   },
   {
-    "title": "`colorModeManager`を追加する",
+    "title": "colorModeManagerを追加する",
     "type": "fragment",
     "slug": "/styled-system/color-mode#colormodemanagerを追加する",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "`colorModeManager`を追加する" }
+    "hierarchy": { "lv1": "カラーモード", "lv2": "colorModeManagerを追加する" }
   },
   {
-    "title": "`getServerSideProps`を用意する",
+    "title": "getServerSidePropsを用意する",
     "type": "fragment",
     "slug": "/styled-system/color-mode#getserversidepropsを用意する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "`colorModeManager`を追加する",
-      "lv3": "`getServerSideProps`を用意する"
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "getServerSidePropsを用意する"
     }
   },
   {
-    "title": "`cookieStorageSSR`を渡す",
+    "title": "cookieStorageSSRを渡す",
     "type": "fragment",
     "slug": "/styled-system/color-mode#cookiestoragessrを渡す",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "`colorModeManager`を追加する",
-      "lv3": "`cookieStorageSSR`を渡す"
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "cookieStorageSSRを渡す"
     }
   },
   {
-    "title": "`getServerSideProps`を追加する",
+    "title": "getServerSidePropsを追加する",
     "type": "fragment",
     "slug": "/styled-system/color-mode#getserversidepropsを追加する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "`colorModeManager`を追加する",
-      "lv3": "`getServerSideProps`を追加する"
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "getServerSidePropsを追加する"
     }
   },
   {
@@ -2126,23 +2122,23 @@
     "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードのユーティリティ" }
   },
   {
-    "title": "`useColorMode`を使う",
+    "title": "useColorModeを使う",
     "type": "fragment",
     "slug": "/styled-system/color-mode#usecolormodeを使う",
     "hierarchy": {
       "lv1": "カラーモード",
       "lv2": "カラーモードのユーティリティ",
-      "lv3": "`useColorMode`を使う"
+      "lv3": "useColorModeを使う"
     }
   },
   {
-    "title": "`useColorModeValue`を使う",
+    "title": "useColorModeValueを使う",
     "type": "fragment",
     "slug": "/styled-system/color-mode#usecolormodevalueを使う",
     "hierarchy": {
       "lv1": "カラーモード",
       "lv2": "カラーモードのユーティリティ",
-      "lv3": "`useColorModeValue`を使う"
+      "lv3": "useColorModeValueを使う"
     }
   },
   {
@@ -2159,12 +2155,12 @@
     "hierarchy": { "lv1": "コンフィグをカスタマイズする", "lv2": "カラーモードを変更する" }
   },
   {
-    "title": "`CSS`カスタムプロパティをプレフィックスを変更する",
+    "title": "CSSカスタムプロパティをプレフィックスを変更する",
     "type": "fragment",
     "slug": "/styled-system/configure/customize-config#cssカスタムプロパティをプレフィックスを変更する",
     "hierarchy": {
       "lv1": "コンフィグをカスタマイズする",
-      "lv2": "`CSS`カスタムプロパティをプレフィックスを変更する"
+      "lv2": "CSSカスタムプロパティをプレフィックスを変更する"
     }
   },
   {
@@ -2300,13 +2296,13 @@
     "hierarchy": { "lv1": "ローディング", "lv2": "コンフィグからカスタマイズする" }
   },
   {
-    "title": "`initialState`を使う",
+    "title": "initialStateを使う",
     "type": "fragment",
     "slug": "/styled-system/loading#initialstateを使う",
     "hierarchy": {
       "lv1": "ローディング",
       "lv2": "コンフィグからカスタマイズする",
-      "lv3": "`initialState`を使う"
+      "lv3": "initialStateを使う"
     }
   },
   {
@@ -2473,23 +2469,23 @@
     "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "レスポンシブのユーティリティ" }
   },
   {
-    "title": "`useBreakpoint`を使う",
+    "title": "useBreakpointを使う",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#usebreakpointを使う",
     "hierarchy": {
       "lv1": "レスポンシブスタイル",
       "lv2": "レスポンシブのユーティリティ",
-      "lv3": "`useBreakpoint`を使う"
+      "lv3": "useBreakpointを使う"
     }
   },
   {
-    "title": "`useBreakpointValue`を使う",
+    "title": "useBreakpointValueを使う",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#usebreakpointvalueを使う",
     "hierarchy": {
       "lv1": "レスポンシブスタイル",
       "lv2": "レスポンシブのユーティリティ",
-      "lv3": "`useBreakpointValue`を使う"
+      "lv3": "useBreakpointValueを使う"
     }
   },
   {
@@ -2721,13 +2717,13 @@
     "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "ユーティリティ" }
   },
   {
-    "title": "`extendTheme`を使う",
+    "title": "extendThemeを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendthemeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendTheme`を使う"
+      "lv3": "extendThemeを使う"
     }
   },
   {
@@ -2737,7 +2733,7 @@
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendTheme`を使う",
+      "lv3": "extendThemeを使う",
       "lv4": "複数のテーマをマージする"
     }
   },
@@ -2748,7 +2744,7 @@
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendTheme`を使う",
+      "lv3": "extendThemeを使う",
       "lv4": "デフォルトのテーマを継承しない"
     }
   },
@@ -2759,7 +2755,7 @@
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendTheme`を使う",
+      "lv3": "extendThemeを使う",
       "lv4": "デフォルトテーマから特定のトークンを除外して継承する"
     }
   },
@@ -2770,118 +2766,118 @@
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendTheme`を使う",
+      "lv3": "extendThemeを使う",
       "lv4": "デフォルトテーマから特定のトークンだけ継承する"
     }
   },
   {
-    "title": "`extendBaseTheme`を使う",
+    "title": "extendBaseThemeを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendbasethemeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendBaseTheme`を使う"
+      "lv3": "extendBaseThemeを使う"
     }
   },
   {
-    "title": "`extendStyle`を使う",
+    "title": "extendStyleを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendstyleを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendStyle`を使う"
+      "lv3": "extendStyleを使う"
     }
   },
   {
-    "title": "`extendToken`を使う",
+    "title": "extendTokenを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendtokenを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendToken`を使う"
+      "lv3": "extendTokenを使う"
     }
   },
   {
-    "title": "`extendComponent`を使う",
+    "title": "extendComponentを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendcomponentを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendComponent`を使う"
+      "lv3": "extendComponentを使う"
     }
   },
   {
-    "title": "`extendComponentSize`を使う",
+    "title": "extendComponentSizeを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendcomponentsizeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendComponentSize`を使う"
+      "lv3": "extendComponentSizeを使う"
     }
   },
   {
-    "title": "`extendComponentVariant`を使う",
+    "title": "extendComponentVariantを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendcomponentvariantを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendComponentVariant`を使う"
+      "lv3": "extendComponentVariantを使う"
     }
   },
   {
-    "title": "`extendComponentDefaultProps`を使う",
+    "title": "extendComponentDefaultPropsを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#extendcomponentdefaultpropsを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`extendComponentDefaultProps`を使う"
+      "lv3": "extendComponentDefaultPropsを使う"
     }
   },
   {
-    "title": "`withDefaultSize`を使う",
+    "title": "withDefaultSizeを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#withdefaultsizeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`withDefaultSize`を使う"
+      "lv3": "withDefaultSizeを使う"
     }
   },
   {
-    "title": "`withDefaultVariant`を使う",
+    "title": "withDefaultVariantを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#withdefaultvariantを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`withDefaultVariant`を使う"
+      "lv3": "withDefaultVariantを使う"
     }
   },
   {
-    "title": "`withDefaultColorScheme`を使う",
+    "title": "withDefaultColorSchemeを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#withdefaultcolorschemeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`withDefaultColorScheme`を使う"
+      "lv3": "withDefaultColorSchemeを使う"
     }
   },
   {
-    "title": "`withDefaultProps`を使う",
+    "title": "withDefaultPropsを使う",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#withdefaultpropsを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
-      "lv3": "`withDefaultProps`を使う"
+      "lv3": "withDefaultPropsを使う"
     }
   },
   {
@@ -3184,13 +3180,13 @@
     }
   },
   {
-    "title": "`ThemeSchemeScript`を追加する",
+    "title": "ThemeSchemeScriptを追加する",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#themeschemescriptを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
-      "lv3": "`ThemeSchemeScript`を追加する"
+      "lv3": "ThemeSchemeScriptを追加する"
     }
   },
   {
@@ -3200,7 +3196,7 @@
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
-      "lv3": "`ThemeSchemeScript`を追加する",
+      "lv3": "ThemeSchemeScriptを追加する",
       "lv4": "Create React Appの場合"
     }
   },
@@ -3211,44 +3207,44 @@
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
-      "lv3": "`ThemeSchemeScript`を追加する",
+      "lv3": "ThemeSchemeScriptを追加する",
       "lv4": "Next.jsの場合"
     }
   },
   {
-    "title": "`themeSchemeManager`を追加する",
+    "title": "themeSchemeManagerを追加する",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#themeschememanagerを追加する",
-    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "`themeSchemeManager`を追加する" }
+    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "themeSchemeManagerを追加する" }
   },
   {
-    "title": "`getServerSideProps`を用意する",
+    "title": "getServerSidePropsを用意する",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#getserversidepropsを用意する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "`themeSchemeManager`を追加する",
-      "lv3": "`getServerSideProps`を用意する"
+      "lv2": "themeSchemeManagerを追加する",
+      "lv3": "getServerSidePropsを用意する"
     }
   },
   {
-    "title": "`cookieStorageSSR`を渡す",
+    "title": "cookieStorageSSRを渡す",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#cookiestoragessrを渡す",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "`themeSchemeManager`を追加する",
-      "lv3": "`cookieStorageSSR`を渡す"
+      "lv2": "themeSchemeManagerを追加する",
+      "lv3": "cookieStorageSSRを渡す"
     }
   },
   {
-    "title": "`getServerSideProps`を追加する",
+    "title": "getServerSidePropsを追加する",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#getserversidepropsを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "`themeSchemeManager`を追加する",
-      "lv3": "`getServerSideProps`を追加する"
+      "lv2": "themeSchemeManagerを追加する",
+      "lv3": "getServerSidePropsを追加する"
     }
   },
   {

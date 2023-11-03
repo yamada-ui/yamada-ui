@@ -712,23 +712,23 @@
     "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Themes" }
   },
   {
-    "title": "Using `withDefaultColorScheme`",
+    "title": "Using withDefaultColorScheme",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-withdefaultcolorscheme",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Applying Themes",
-      "lv3": "Using `withDefaultColorScheme`"
+      "lv3": "Using withDefaultColorScheme"
     }
   },
   {
-    "title": "Using `useToken`",
+    "title": "Using useToken",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usetoken",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Applying Themes",
-      "lv3": "Using `useToken`"
+      "lv3": "Using useToken"
     }
   },
   {
@@ -738,19 +738,19 @@
     "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles" }
   },
   {
-    "title": "About `as`",
+    "title": "About as",
     "type": "fragment",
     "slug": "/getting-started/advanced#about-as",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles", "lv3": "About `as`" }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles", "lv3": "About as" }
   },
   {
-    "title": "About `sx` and `css`",
+    "title": "About sx and css",
     "type": "fragment",
     "slug": "/getting-started/advanced#about-sx-and-css",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Applying Styles",
-      "lv3": "About `sx` and `css`"
+      "lv3": "About sx and css"
     }
   },
   {
@@ -770,23 +770,23 @@
     "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Responsiveness" }
   },
   {
-    "title": "Using `useBreakpoint`",
+    "title": "Using useBreakpoint",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usebreakpoint",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Application of Responsiveness",
-      "lv3": "Using `useBreakpoint`"
+      "lv3": "Using useBreakpoint"
     }
   },
   {
-    "title": "Using `useBreakpointValue`",
+    "title": "Using useBreakpointValue",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usebreakpointvalue",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Application of Responsiveness",
-      "lv3": "Using `useBreakpointValue`"
+      "lv3": "Using useBreakpointValue"
     }
   },
   {
@@ -796,23 +796,23 @@
     "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Color Mode" }
   },
   {
-    "title": "Using `useColorMode`",
+    "title": "Using useColorMode",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usecolormode",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Application of Color Mode",
-      "lv3": "Using `useColorMode`"
+      "lv3": "Using useColorMode"
     }
   },
   {
-    "title": "Using `useColorModeValue`",
+    "title": "Using useColorModeValue",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usecolormodevalue",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Application of Color Mode",
-      "lv3": "Using `useColorModeValue`"
+      "lv3": "Using useColorModeValue"
     }
   },
   {
@@ -822,23 +822,23 @@
     "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Animation" }
   },
   {
-    "title": "Using Multiple Animations with `useAnimation`",
+    "title": "Using Multiple Animations with useAnimation",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-multiple-animations-with-useanimation",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Application of Animation",
-      "lv3": "Using Multiple Animations with `useAnimation`"
+      "lv3": "Using Multiple Animations with useAnimation"
     }
   },
   {
-    "title": "Using `useDynamicAnimation`",
+    "title": "Using useDynamicAnimation",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usedynamicanimation",
     "hierarchy": {
       "lv1": "Learning Applications",
       "lv2": "Application of Animation",
-      "lv3": "Using `useDynamicAnimation`"
+      "lv3": "Using useDynamicAnimation"
     }
   },
   {
@@ -959,20 +959,20 @@
     "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation" }
   },
   {
-    "title": "Using `useAnimation`",
+    "title": "Using useAnimation",
     "type": "fragment",
     "slug": "/getting-started/basics#using-useanimation",
     "hierarchy": {
       "lv1": "Learning the Basics",
       "lv2": "About Animation",
-      "lv3": "Using `useAnimation`"
+      "lv3": "Using useAnimation"
     }
   },
   {
-    "title": "Using `Motion`",
+    "title": "Using Motion",
     "type": "fragment",
     "slug": "/getting-started/basics#using-motion",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation", "lv3": "Using `Motion`" }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation", "lv3": "Using Motion" }
   },
   {
     "title": "Congratulations!",
@@ -1000,10 +1000,10 @@
     "hierarchy": { "lv1": "Getting Started with Create React App", "lv2": "Installation" }
   },
   {
-    "title": "Add `UIProvider`",
+    "title": "Add UIProvider",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#add-uiprovider",
-    "hierarchy": { "lv1": "Getting Started with Create React App", "lv2": "Add `UIProvider`" }
+    "hierarchy": { "lv1": "Getting Started with Create React App", "lv2": "Add UIProvider" }
   },
   {
     "title": "Use the components",
@@ -1032,16 +1032,16 @@
     "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Installation" }
   },
   {
-    "title": "Add `UIProvider`",
+    "title": "Add UIProvider",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#add-uiprovider",
-    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Add `UIProvider`" }
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Add UIProvider" }
   },
   {
-    "title": "Incorporate `ColorModeScript`",
+    "title": "Incorporate ColorModeScript",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#incorporate-colormodescript",
-    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Incorporate `ColorModeScript`" }
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Incorporate ColorModeScript" }
   },
   {
     "title": "Use the components",
@@ -1070,10 +1070,10 @@
     "hierarchy": { "lv1": "Installation", "lv2": "Installation" }
   },
   {
-    "title": "Add `UIProvider`",
+    "title": "Add UIProvider",
     "type": "fragment",
     "slug": "/getting-started/installation#add-uiprovider",
-    "hierarchy": { "lv1": "Installation", "lv2": "Add `UIProvider`" }
+    "hierarchy": { "lv1": "Installation", "lv2": "Add UIProvider" }
   },
   {
     "title": "Use the components",
@@ -1823,10 +1823,10 @@
     "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation" }
   },
   {
-    "title": "Using `useAnimation`",
+    "title": "Using useAnimation",
     "type": "fragment",
     "slug": "/styled-system/animation#using-useanimation",
-    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": "Using `useAnimation`" }
+    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": "Using useAnimation" }
   },
   {
     "title": "Using multiple animations",
@@ -1835,7 +1835,7 @@
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "CSS Animation",
-      "lv3": "Using `useAnimation`",
+      "lv3": "Using useAnimation",
       "lv4": "Using multiple animations"
     }
   },
@@ -1846,7 +1846,7 @@
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "CSS Animation",
-      "lv3": "Using `useAnimation`",
+      "lv3": "Using useAnimation",
       "lv4": "Responsive styles"
     }
   },
@@ -1857,19 +1857,15 @@
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "CSS Animation",
-      "lv3": "Using `useAnimation`",
+      "lv3": "Using useAnimation",
       "lv4": "Color mode"
     }
   },
   {
-    "title": "Using `useDynamicAnimation`",
+    "title": "Using useDynamicAnimation",
     "type": "fragment",
     "slug": "/styled-system/animation#using-usedynamicanimation",
-    "hierarchy": {
-      "lv1": "Animation",
-      "lv2": "CSS Animation",
-      "lv3": "Using `useDynamicAnimation`"
-    }
+    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": "Using useDynamicAnimation" }
   },
   {
     "title": "Combining with multiple animations",
@@ -1878,7 +1874,7 @@
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "CSS Animation",
-      "lv3": "Using `useDynamicAnimation`",
+      "lv3": "Using useDynamicAnimation",
       "lv4": "Combining with multiple animations"
     }
   },
@@ -1901,14 +1897,14 @@
     "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Animation" }
   },
   {
-    "title": "Using `AnimatePresence`",
+    "title": "Using AnimatePresence",
     "type": "fragment",
     "slug": "/styled-system/animation#using-animatepresence",
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "Motion",
       "lv3": "Animation",
-      "lv4": "Using `AnimatePresence`"
+      "lv4": "Using AnimatePresence"
     }
   },
   {
@@ -1918,14 +1914,14 @@
     "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Animation", "lv4": "Keyframes" }
   },
   {
-    "title": "Using `useMotionAnimationFrame`",
+    "title": "Using useMotionAnimationFrame",
     "type": "fragment",
     "slug": "/styled-system/animation#using-usemotionanimationframe",
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "Motion",
       "lv3": "Animation",
-      "lv4": "Using `useMotionAnimationFrame`"
+      "lv4": "Using useMotionAnimationFrame"
     }
   },
   {
@@ -1987,15 +1983,10 @@
     "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Scroll" }
   },
   {
-    "title": "Using `useScroll`",
+    "title": "Using useScroll",
     "type": "fragment",
     "slug": "/styled-system/animation#using-usescroll",
-    "hierarchy": {
-      "lv1": "Animation",
-      "lv2": "Motion",
-      "lv3": "Scroll",
-      "lv4": "Using `useScroll`"
-    }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Scroll", "lv4": "Using useScroll" }
   },
   {
     "title": "CLI",
@@ -2036,10 +2027,10 @@
     "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": "Customize the Config" }
   },
   {
-    "title": "Add `ColorModeScript`",
+    "title": "Add ColorModeScript",
     "type": "fragment",
     "slug": "/styled-system/color-mode#add-colormodescript",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": "Add `ColorModeScript`" }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": "Add ColorModeScript" }
   },
   {
     "title": "In the case of Create React App",
@@ -2048,7 +2039,7 @@
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Setup",
-      "lv3": "Add `ColorModeScript`",
+      "lv3": "Add ColorModeScript",
       "lv4": "In the case of Create React App"
     }
   },
@@ -2059,44 +2050,44 @@
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Setup",
-      "lv3": "Add `ColorModeScript`",
+      "lv3": "Add ColorModeScript",
       "lv4": "In the case of Next.js"
     }
   },
   {
-    "title": "Adding `colorModeManager`",
+    "title": "Adding colorModeManager",
     "type": "fragment",
     "slug": "/styled-system/color-mode#adding-colormodemanager",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Adding `colorModeManager`" }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Adding colorModeManager" }
   },
   {
-    "title": "Prepare `getServerSideProps`",
+    "title": "Prepare getServerSideProps",
     "type": "fragment",
     "slug": "/styled-system/color-mode#prepare-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Adding `colorModeManager`",
-      "lv3": "Prepare `getServerSideProps`"
+      "lv2": "Adding colorModeManager",
+      "lv3": "Prepare getServerSideProps"
     }
   },
   {
-    "title": "Passing `cookieStorageSSR`",
+    "title": "Passing cookieStorageSSR",
     "type": "fragment",
     "slug": "/styled-system/color-mode#passing-cookiestoragessr",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Adding `colorModeManager`",
-      "lv3": "Passing `cookieStorageSSR`"
+      "lv2": "Adding colorModeManager",
+      "lv3": "Passing cookieStorageSSR"
     }
   },
   {
-    "title": "Add `getServerSideProps`",
+    "title": "Add getServerSideProps",
     "type": "fragment",
     "slug": "/styled-system/color-mode#add-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Adding `colorModeManager`",
-      "lv3": "Add `getServerSideProps`"
+      "lv2": "Adding colorModeManager",
+      "lv3": "Add getServerSideProps"
     }
   },
   {
@@ -2118,19 +2109,19 @@
     "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility" }
   },
   {
-    "title": "Using `useColorMode`",
+    "title": "Using useColorMode",
     "type": "fragment",
     "slug": "/styled-system/color-mode#using-usecolormode",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility", "lv3": "Using `useColorMode`" }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility", "lv3": "Using useColorMode" }
   },
   {
-    "title": "Using `useColorModeValue`",
+    "title": "Using useColorModeValue",
     "type": "fragment",
     "slug": "/styled-system/color-mode#using-usecolormodevalue",
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Color Mode Utility",
-      "lv3": "Using `useColorModeValue`"
+      "lv3": "Using useColorModeValue"
     }
   },
   {
@@ -2147,12 +2138,12 @@
     "hierarchy": { "lv1": "Customizing the Config", "lv2": "Change Color Mode" }
   },
   {
-    "title": "Changing the prefix of `CSS` custom properties",
+    "title": "Changing the prefix of CSS custom properties",
     "type": "fragment",
     "slug": "/styled-system/configure/customize-config#changing-the-prefix-of-css-custom-properties",
     "hierarchy": {
       "lv1": "Customizing the Config",
-      "lv2": "Changing the prefix of `CSS` custom properties"
+      "lv2": "Changing the prefix of CSS custom properties"
     }
   },
   {
@@ -2276,10 +2267,10 @@
     "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config" }
   },
   {
-    "title": "Using `initialState`",
+    "title": "Using initialState",
     "type": "fragment",
     "slug": "/styled-system/loading#using-initialstate",
-    "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config", "lv3": "Using `initialState`" }
+    "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config", "lv3": "Using initialState" }
   },
   {
     "title": "Using Custom Components",
@@ -2477,23 +2468,23 @@
     "hierarchy": { "lv1": "Responsive Styles", "lv2": "Responsive Utilities" }
   },
   {
-    "title": "Using `useBreakpoint`",
+    "title": "Using useBreakpoint",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#using-usebreakpoint",
     "hierarchy": {
       "lv1": "Responsive Styles",
       "lv2": "Responsive Utilities",
-      "lv3": "Using `useBreakpoint`"
+      "lv3": "Using useBreakpoint"
     }
   },
   {
-    "title": "Using `useBreakpointValue`",
+    "title": "Using useBreakpointValue",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#using-usebreakpointvalue",
     "hierarchy": {
       "lv1": "Responsive Styles",
       "lv2": "Responsive Utilities",
-      "lv3": "Using `useBreakpointValue`"
+      "lv3": "Using useBreakpointValue"
     }
   },
   {
@@ -2722,10 +2713,10 @@
     "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility" }
   },
   {
-    "title": "Using `extendTheme`",
+    "title": "Using extendTheme",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendtheme",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using `extendTheme`" }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using extendTheme" }
   },
   {
     "title": "Merging multiple themes",
@@ -2734,7 +2725,7 @@
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendTheme`",
+      "lv3": "Using extendTheme",
       "lv4": "Merging multiple themes"
     }
   },
@@ -2745,7 +2736,7 @@
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendTheme`",
+      "lv3": "Using extendTheme",
       "lv4": "Not inheriting from the default theme"
     }
   },
@@ -2756,7 +2747,7 @@
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendTheme`",
+      "lv3": "Using extendTheme",
       "lv4": "Inheriting from the default theme excluding specific tokens"
     }
   },
@@ -2767,110 +2758,110 @@
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendTheme`",
+      "lv3": "Using extendTheme",
       "lv4": "Inheriting only specific tokens from the default theme"
     }
   },
   {
-    "title": "Using `extendBaseTheme`",
+    "title": "Using extendBaseTheme",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendbasetheme",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendBaseTheme`"
+      "lv3": "Using extendBaseTheme"
     }
   },
   {
-    "title": "Using `extendStyle`",
+    "title": "Using extendStyle",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendstyle",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using `extendStyle`" }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using extendStyle" }
   },
   {
-    "title": "Using `extendToken`",
+    "title": "Using extendToken",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendtoken",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using `extendToken`" }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using extendToken" }
   },
   {
-    "title": "Using `extendComponent`",
+    "title": "Using extendComponent",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponent",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendComponent`"
+      "lv3": "Using extendComponent"
     }
   },
   {
-    "title": "Using `extendComponentSize`",
+    "title": "Using extendComponentSize",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentsize",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendComponentSize`"
+      "lv3": "Using extendComponentSize"
     }
   },
   {
-    "title": "Using `extendComponentVariant`",
+    "title": "Using extendComponentVariant",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentvariant",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendComponentVariant`"
+      "lv3": "Using extendComponentVariant"
     }
   },
   {
-    "title": "Using `extendComponentDefaultProps`",
+    "title": "Using extendComponentDefaultProps",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentdefaultprops",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `extendComponentDefaultProps`"
+      "lv3": "Using extendComponentDefaultProps"
     }
   },
   {
-    "title": "Using `withDefaultSize`",
+    "title": "Using withDefaultSize",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-withdefaultsize",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `withDefaultSize`"
+      "lv3": "Using withDefaultSize"
     }
   },
   {
-    "title": "Using `withDefaultVariant`",
+    "title": "Using withDefaultVariant",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-withdefaultvariant",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `withDefaultVariant`"
+      "lv3": "Using withDefaultVariant"
     }
   },
   {
-    "title": "Using `withDefaultColorScheme`",
+    "title": "Using withDefaultColorScheme",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-withdefaultcolorscheme",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `withDefaultColorScheme`"
+      "lv3": "Using withDefaultColorScheme"
     }
   },
   {
-    "title": "Using `withDefaultProps`",
+    "title": "Using withDefaultProps",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-withdefaultprops",
     "hierarchy": {
       "lv1": "Customizing the Theme",
       "lv2": "Utility",
-      "lv3": "Using `withDefaultProps`"
+      "lv3": "Using withDefaultProps"
     }
   },
   {
@@ -3075,10 +3066,10 @@
     "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": "Preparing Multiple Themes" }
   },
   {
-    "title": "Add `ThemeSchemeScript`",
+    "title": "Add ThemeSchemeScript",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#add-themeschemescript",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": "Add `ThemeSchemeScript`" }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": "Add ThemeSchemeScript" }
   },
   {
     "title": "In the case of Create React App",
@@ -3087,7 +3078,7 @@
     "hierarchy": {
       "lv1": "Switching Themes",
       "lv2": "Setup",
-      "lv3": "Add `ThemeSchemeScript`",
+      "lv3": "Add ThemeSchemeScript",
       "lv4": "In the case of Create React App"
     }
   },
@@ -3098,44 +3089,44 @@
     "hierarchy": {
       "lv1": "Switching Themes",
       "lv2": "Setup",
-      "lv3": "Add `ThemeSchemeScript`",
+      "lv3": "Add ThemeSchemeScript",
       "lv4": "In the case of Next.js"
     }
   },
   {
-    "title": "Add `themeSchemeManager`",
+    "title": "Add themeSchemeManager",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#add-themeschememanager",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add `themeSchemeManager`" }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add themeSchemeManager" }
   },
   {
-    "title": "Prepare `getServerSideProps`",
+    "title": "Prepare getServerSideProps",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#prepare-getserversideprops",
     "hierarchy": {
       "lv1": "Switching Themes",
-      "lv2": "Add `themeSchemeManager`",
-      "lv3": "Prepare `getServerSideProps`"
+      "lv2": "Add themeSchemeManager",
+      "lv3": "Prepare getServerSideProps"
     }
   },
   {
-    "title": "Passing `cookieStorageSSR`",
+    "title": "Passing cookieStorageSSR",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#passing-cookiestoragessr",
     "hierarchy": {
       "lv1": "Switching Themes",
-      "lv2": "Add `themeSchemeManager`",
-      "lv3": "Passing `cookieStorageSSR`"
+      "lv2": "Add themeSchemeManager",
+      "lv3": "Passing cookieStorageSSR"
     }
   },
   {
-    "title": "Add `getServerSideProps`",
+    "title": "Add getServerSideProps",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#add-getserversideprops",
     "hierarchy": {
       "lv1": "Switching Themes",
-      "lv2": "Add `themeSchemeManager`",
-      "lv3": "Add `getServerSideProps`"
+      "lv2": "Add themeSchemeManager",
+      "lv3": "Add getServerSideProps"
     }
   },
   {

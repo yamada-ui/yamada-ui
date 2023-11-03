@@ -76,7 +76,7 @@ const CarouselIndicator: FC<CarouselIndicatorProps> = ({
     <ui.button
       type='button'
       tabIndex={-1}
-      className={cx('ui-carousel__indicator', className)}
+      className={cx('ui-carousel__indicators__indicator', className)}
       __css={css}
       {...rest}
     />

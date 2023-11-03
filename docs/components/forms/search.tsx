@@ -297,12 +297,7 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
                       </Text>
                     ) : null}
 
-                    <Highlight
-                      query={query}
-                      markProps={{
-                        variant: 'solid',
-                      }}
-                    >
+                    <Highlight query={query} markProps={{ variant: 'text-accent' }}>
                       {title}
                     </Highlight>
                   </VStack>

@@ -120,7 +120,14 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
     if (query.length < 2) return []
 
     return matchSorter(contents, query, {
-      keys: ['hierarchy.lv1', 'hierarchy.lv2', 'hierarchy.lv3', 'description', 'title'],
+      keys: [
+        'hierarchy.lv1',
+        'hierarchy.lv2',
+        'hierarchy.lv3',
+        'hierarchy.lv4',
+        'description',
+        'title',
+      ],
     }).slice(0, 20)
   }, [query, contents])
 
@@ -276,8 +283,8 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
                   transitionDuration='normal'
                   _focus={{ outline: 'none' }}
                   _focusVisible={{ boxShadow: 'outline' }}
-                  _selected={{ bg: ['gray.200', 'whiteAlpha.100'] }}
-                  _active={{ bg: ['gray.300', 'whiteAlpha.200'] }}
+                  _selected={{ bg: ['gray.200', 'whiteAlpha.200'] }}
+                  _active={{ bg: ['gray.300', 'whiteAlpha.300'] }}
                   onClick={onClose}
                   onMouseEnter={() => {
                     eventRef.current = 'mouse'
@@ -292,9 +299,15 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
 
                   <VStack gap='0'>
                     {type === 'fragment' ? (
-                      <Text fontSize='xs' color='muted'>
+                      <Highlight
+                        fontSize='xs'
+                        color='muted'
+                        noOfLines={1}
+                        query={query}
+                        markProps={{ variant: 'text-accent' }}
+                      >
                         {hierarchy.lv1}
-                      </Text>
+                      </Highlight>
                     ) : null}
 
                     <Highlight query={query} markProps={{ variant: 'text-accent' }}>

@@ -10,19 +10,19 @@
     "title": "セットアップ",
     "type": "fragment",
     "slug": "/community/contributing#セットアップ",
-    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "セットアップ", "lv3": null }
+    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "セットアップ" }
   },
   {
     "title": "コマンド",
     "type": "fragment",
     "slug": "/community/contributing#コマンド",
-    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "コマンド", "lv3": null }
+    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "コマンド" }
   },
   {
     "title": "ドキュメントを更新する",
     "type": "fragment",
     "slug": "/community/contributing#ドキュメントを更新する",
-    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "ドキュメントを更新する", "lv3": null }
+    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "ドキュメントを更新する" }
   },
   {
     "title": "コミット規約",
@@ -40,7 +40,7 @@
     "slug": "/community/contributing#プルリクエストの手順",
     "hierarchy": {
       "lv1": "Yamada UIへ貢献する",
-      "lv2": "コミット規約",
+      "lv2": "ドキュメントを更新する",
       "lv3": "プルリクエストの手順"
     }
   },
@@ -48,7 +48,7 @@
     "title": "ライセンス",
     "type": "fragment",
     "slug": "/community/contributing#ライセンス",
-    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "ライセンス", "lv3": null }
+    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "ライセンス" }
   },
   {
     "title": "コミュニティ",
@@ -68,7 +68,7 @@
     "title": "コアチーム",
     "type": "fragment",
     "slug": "/community/team#コアチーム",
-    "hierarchy": { "lv1": "チームと貢献者", "lv2": "コアチーム", "lv3": null }
+    "hierarchy": { "lv1": "チームと貢献者", "lv2": "コアチーム" }
   },
   {
     "title": "Badge",
@@ -424,13 +424,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/components/layouts/box#インポート",
-    "hierarchy": { "lv1": "Box", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "Box", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/components/layouts/box#使い方",
-    "hierarchy": { "lv1": "Box", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "Box", "lv2": "使い方" }
   },
   {
     "title": "Center",
@@ -709,7 +709,7 @@
     "title": "テーマの応用",
     "type": "fragment",
     "slug": "/getting-started/advanced#テーマの応用",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "テーマの応用", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "テーマの応用" }
   },
   {
     "title": "`withDefaultColorScheme`を使う",
@@ -725,17 +725,13 @@
     "title": "`useToken`を使う",
     "type": "fragment",
     "slug": "/getting-started/advanced#usetokenを使う",
-    "hierarchy": {
-      "lv1": "応用を学ぶ",
-      "lv2": "`withDefaultColorScheme`を使う",
-      "lv3": "`useToken`を使う"
-    }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "テーマの応用", "lv3": "`useToken`を使う" }
   },
   {
     "title": "スタイルの応用",
     "type": "fragment",
     "slug": "/getting-started/advanced#スタイルの応用",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用" }
   },
   {
     "title": "`as`について",
@@ -747,19 +743,19 @@
     "title": "`sx`や`css`について",
     "type": "fragment",
     "slug": "/getting-started/advanced#sxやcssについて",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "`as`について", "lv3": "`sx`や`css`について" }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": "`sx`や`css`について" }
   },
   {
     "title": "順序について",
     "type": "fragment",
     "slug": "/getting-started/advanced#順序について",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "`sx`や`css`について", "lv3": "順序について" }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "スタイルの応用", "lv3": "順序について" }
   },
   {
     "title": "レスポンシブの応用",
     "type": "fragment",
     "slug": "/getting-started/advanced#レスポンシブの応用",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "レスポンシブの応用", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "レスポンシブの応用" }
   },
   {
     "title": "`useBreakpoint`を使う",
@@ -777,7 +773,7 @@
     "slug": "/getting-started/advanced#usebreakpointvalueを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
-      "lv2": "`useBreakpoint`を使う",
+      "lv2": "レスポンシブの応用",
       "lv3": "`useBreakpointValue`を使う"
     }
   },
@@ -785,7 +781,7 @@
     "title": "カラーモードの応用",
     "type": "fragment",
     "slug": "/getting-started/advanced#カラーモードの応用",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "カラーモードの応用", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "カラーモードの応用" }
   },
   {
     "title": "`useColorMode`を使う",
@@ -799,7 +795,7 @@
     "slug": "/getting-started/advanced#usecolormodevalueを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
-      "lv2": "`useColorMode`を使う",
+      "lv2": "カラーモードの応用",
       "lv3": "`useColorModeValue`を使う"
     }
   },
@@ -807,7 +803,7 @@
     "title": "アニメーションの応用",
     "type": "fragment",
     "slug": "/getting-started/advanced#アニメーションの応用",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "アニメーションの応用", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "アニメーションの応用" }
   },
   {
     "title": "`useAnimation`で複数のアニメーションを使う",
@@ -825,7 +821,7 @@
     "slug": "/getting-started/advanced#usedynamicanimationを使う",
     "hierarchy": {
       "lv1": "応用を学ぶ",
-      "lv2": "`useAnimation`で複数のアニメーションを使う",
+      "lv2": "アニメーションの応用",
       "lv3": "`useDynamicAnimation`を使う"
     }
   },
@@ -833,13 +829,13 @@
     "title": "Congratulations!",
     "type": "fragment",
     "slug": "/getting-started/advanced#congratulations",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "Congratulations!", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "Congratulations!" }
   },
   {
     "title": "もっと学習をする",
     "type": "fragment",
     "slug": "/getting-started/advanced#もっと学習をする",
-    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "もっと学習をする", "lv3": null }
+    "hierarchy": { "lv1": "応用を学ぶ", "lv2": "もっと学習をする" }
   },
   {
     "title": "基本を学ぶ",
@@ -852,7 +848,7 @@
     "title": "テーマについて",
     "type": "fragment",
     "slug": "/getting-started/basics#テーマについて",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "テーマについて", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "テーマについて" }
   },
   {
     "title": "テーマをカスタマイズする",
@@ -866,7 +862,7 @@
     "slug": "/getting-started/basics#セマンティックトークンを変更する",
     "hierarchy": {
       "lv1": "基本を学ぶ",
-      "lv2": "テーマをカスタマイズする",
+      "lv2": "テーマについて",
       "lv3": "セマンティックトークンを変更する"
     }
   },
@@ -874,23 +870,19 @@
     "title": "ローディングを使う",
     "type": "fragment",
     "slug": "/getting-started/basics#ローディングを使う",
-    "hierarchy": {
-      "lv1": "基本を学ぶ",
-      "lv2": "セマンティックトークンを変更する",
-      "lv3": "ローディングを使う"
-    }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "テーマについて", "lv3": "ローディングを使う" }
   },
   {
     "title": "通知を使う",
     "type": "fragment",
     "slug": "/getting-started/basics#通知を使う",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "ローディングを使う", "lv3": "通知を使う" }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "テーマについて", "lv3": "通知を使う" }
   },
   {
     "title": "スタイルについて",
     "type": "fragment",
     "slug": "/getting-started/basics#スタイルについて",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "スタイルについて", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "スタイルについて" }
   },
   {
     "title": "擬似要素",
@@ -902,13 +894,13 @@
     "title": "コンポーネント",
     "type": "fragment",
     "slug": "/getting-started/basics#コンポーネント",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "擬似要素", "lv3": "コンポーネント" }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "スタイルについて", "lv3": "コンポーネント" }
   },
   {
     "title": "レスポンシブについて",
     "type": "fragment",
     "slug": "/getting-started/basics#レスポンシブについて",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "レスポンシブについて", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "レスポンシブについて" }
   },
   {
     "title": "ブレイクポイントについて",
@@ -924,7 +916,7 @@
     "title": "カラーモードについて",
     "type": "fragment",
     "slug": "/getting-started/basics#カラーモードについて",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "カラーモードについて", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "カラーモードについて" }
   },
   {
     "title": "カラーモードを切り替える",
@@ -940,7 +932,7 @@
     "title": "アニメーションについて",
     "type": "fragment",
     "slug": "/getting-started/basics#アニメーションについて",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "アニメーションについて", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "アニメーションについて" }
   },
   {
     "title": "`useAnimation`を使う",
@@ -956,19 +948,19 @@
     "title": "`Motion`を使う",
     "type": "fragment",
     "slug": "/getting-started/basics#motionを使う",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "`useAnimation`を使う", "lv3": "`Motion`を使う" }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "アニメーションについて", "lv3": "`Motion`を使う" }
   },
   {
     "title": "Congratulations!",
     "type": "fragment",
     "slug": "/getting-started/basics#congratulations",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "Congratulations!", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "Congratulations!" }
   },
   {
     "title": "もっと学習をする",
     "type": "fragment",
     "slug": "/getting-started/basics#もっと学習をする",
-    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "もっと学習をする", "lv3": null }
+    "hierarchy": { "lv1": "基本を学ぶ", "lv2": "もっと学習をする" }
   },
   {
     "title": "Create React Appではじめる",
@@ -981,31 +973,19 @@
     "title": "パッケージをインストールする",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#パッケージをインストールする",
-    "hierarchy": {
-      "lv1": "Create React Appではじめる",
-      "lv2": "パッケージをインストールする",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Create React Appではじめる", "lv2": "パッケージをインストールする" }
   },
   {
     "title": "`UIProvider`を追加する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#uiproviderを追加する",
-    "hierarchy": {
-      "lv1": "Create React Appではじめる",
-      "lv2": "`UIProvider`を追加する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Create React Appではじめる", "lv2": "`UIProvider`を追加する" }
   },
   {
     "title": "コンポーネントを使用する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#コンポーネントを使用する",
-    "hierarchy": {
-      "lv1": "Create React Appではじめる",
-      "lv2": "コンポーネントを使用する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Create React Appではじめる", "lv2": "コンポーネントを使用する" }
   },
   {
     "title": "フレームワーク",
@@ -1025,25 +1005,25 @@
     "title": "パッケージをインストールする",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#パッケージをインストールする",
-    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "パッケージをインストールする", "lv3": null }
+    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "パッケージをインストールする" }
   },
   {
     "title": "`UIProvider`を追加する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#uiproviderを追加する",
-    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "`UIProvider`を追加する", "lv3": null }
+    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "`UIProvider`を追加する" }
   },
   {
     "title": "`ColorModeScript`を追加する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#colormodescriptを追加する",
-    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "`ColorModeScript`を追加する", "lv3": null }
+    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "`ColorModeScript`を追加する" }
   },
   {
     "title": "コンポーネントを使用する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#コンポーネントを使用する",
-    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "コンポーネントを使用する", "lv3": null }
+    "hierarchy": { "lv1": "Next.jsではじめる", "lv2": "コンポーネントを使用する" }
   },
   {
     "title": "はじめる",
@@ -1063,25 +1043,25 @@
     "title": "パッケージをインストールする",
     "type": "fragment",
     "slug": "/getting-started/installation#パッケージをインストールする",
-    "hierarchy": { "lv1": "インストール", "lv2": "パッケージをインストールする", "lv3": null }
+    "hierarchy": { "lv1": "インストール", "lv2": "パッケージをインストールする" }
   },
   {
     "title": "`UIProvider`を追加する",
     "type": "fragment",
     "slug": "/getting-started/installation#uiproviderを追加する",
-    "hierarchy": { "lv1": "インストール", "lv2": "`UIProvider`を追加する", "lv3": null }
+    "hierarchy": { "lv1": "インストール", "lv2": "`UIProvider`を追加する" }
   },
   {
     "title": "コンポーネントを使用する",
     "type": "fragment",
     "slug": "/getting-started/installation#コンポーネントを使用する",
-    "hierarchy": { "lv1": "インストール", "lv2": "コンポーネントを使用する", "lv3": null }
+    "hierarchy": { "lv1": "インストール", "lv2": "コンポーネントを使用する" }
   },
   {
     "title": "学習を開始する",
     "type": "fragment",
     "slug": "/getting-started/installation#学習を開始する",
-    "hierarchy": { "lv1": "インストール", "lv2": "学習を開始する", "lv3": null }
+    "hierarchy": { "lv1": "インストール", "lv2": "学習を開始する" }
   },
   {
     "title": "フック",
@@ -1101,13 +1081,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-animation#インポート",
-    "hierarchy": { "lv1": "useAnimation", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-animation#使い方",
-    "hierarchy": { "lv1": "useAnimation", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "使い方" }
   },
   {
     "title": "複数のアニメーションを使う",
@@ -1119,17 +1099,13 @@
     "title": "レスポンシブスタイル",
     "type": "fragment",
     "slug": "/hooks/use-animation#レスポンシブスタイル",
-    "hierarchy": {
-      "lv1": "useAnimation",
-      "lv2": "複数のアニメーションを使う",
-      "lv3": "レスポンシブスタイル"
-    }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "使い方", "lv3": "レスポンシブスタイル" }
   },
   {
     "title": "カラーモード",
     "type": "fragment",
     "slug": "/hooks/use-animation#カラーモード",
-    "hierarchy": { "lv1": "useAnimation", "lv2": "レスポンシブスタイル", "lv3": "カラーモード" }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "使い方", "lv3": "カラーモード" }
   },
   {
     "title": "useAsync",
@@ -1142,13 +1118,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-async#インポート",
-    "hierarchy": { "lv1": "useAsync", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useAsync", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-async#使い方",
-    "hierarchy": { "lv1": "useAsync", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useAsync", "lv2": "使い方" }
   },
   {
     "title": "再実行をする",
@@ -1167,13 +1143,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-boolean#インポート",
-    "hierarchy": { "lv1": "useBoolean", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useBoolean", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-boolean#使い方",
-    "hierarchy": { "lv1": "useBoolean", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useBoolean", "lv2": "使い方" }
   },
   {
     "title": "初期値を使う",
@@ -1192,13 +1168,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint-value#インポート",
-    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint-value#使い方",
-    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "使い方" }
   },
   {
     "title": "useBreakpoint",
@@ -1211,13 +1187,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint#インポート",
-    "hierarchy": { "lv1": "useBreakpoint", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpoint", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint#使い方",
-    "hierarchy": { "lv1": "useBreakpoint", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpoint", "lv2": "使い方" }
   },
   {
     "title": "useClipboard",
@@ -1230,13 +1206,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#インポート",
-    "hierarchy": { "lv1": "useClipboard", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#使い方",
-    "hierarchy": { "lv1": "useClipboard", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "使い方" }
   },
   {
     "title": "初期値を使う",
@@ -1248,17 +1224,13 @@
     "title": "タイムアウトを制御する",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#タイムアウトを制御する",
-    "hierarchy": { "lv1": "useClipboard", "lv2": "初期値を使う", "lv3": "タイムアウトを制御する" }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "使い方", "lv3": "タイムアウトを制御する" }
   },
   {
     "title": "指定した値をコピーする",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#指定した値をコピーする",
-    "hierarchy": {
-      "lv1": "useClipboard",
-      "lv2": "タイムアウトを制御する",
-      "lv3": "指定した値をコピーする"
-    }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "使い方", "lv3": "指定した値をコピーする" }
   },
   {
     "title": "useColorModeValue",
@@ -1271,13 +1243,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-color-mode-value#インポート",
-    "hierarchy": { "lv1": "useColorModeValue", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useColorModeValue", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-color-mode-value#使い方",
-    "hierarchy": { "lv1": "useColorModeValue", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useColorModeValue", "lv2": "使い方" }
   },
   {
     "title": "useColorMode",
@@ -1290,13 +1262,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-color-mode#インポート",
-    "hierarchy": { "lv1": "useColorMode", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useColorMode", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-color-mode#使い方",
-    "hierarchy": { "lv1": "useColorMode", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useColorMode", "lv2": "使い方" }
   },
   {
     "title": "useDisclosure",
@@ -1309,13 +1281,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-disclosure#インポート",
-    "hierarchy": { "lv1": "useDisclosure", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-disclosure#使い方",
-    "hierarchy": { "lv1": "useDisclosure", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "使い方" }
   },
   {
     "title": "コールバック関数を使う",
@@ -1334,13 +1306,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-dynamic-animation#インポート",
-    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-dynamic-animation#使い方",
-    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "使い方" }
   },
   {
     "title": "複数のアニメーションを使う",
@@ -1363,13 +1335,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-hover#インポート",
-    "hierarchy": { "lv1": "useHover", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useHover", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-hover#使い方",
-    "hierarchy": { "lv1": "useHover", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useHover", "lv2": "使い方" }
   },
   {
     "title": "useIdle",
@@ -1382,13 +1354,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-idle#インポート",
-    "hierarchy": { "lv1": "useIdle", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useIdle", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-idle#使い方",
-    "hierarchy": { "lv1": "useIdle", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useIdle", "lv2": "使い方" }
   },
   {
     "title": "useInterval",
@@ -1401,13 +1373,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-interval#インポート",
-    "hierarchy": { "lv1": "useInterval", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useInterval", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-interval#使い方",
-    "hierarchy": { "lv1": "useInterval", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useInterval", "lv2": "使い方" }
   },
   {
     "title": "useLoading",
@@ -1420,13 +1392,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-loading#インポート",
-    "hierarchy": { "lv1": "useLoading", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useLoading", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-loading#使い方",
-    "hierarchy": { "lv1": "useLoading", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useLoading", "lv2": "使い方" }
   },
   {
     "title": "タイムアウトを付与する",
@@ -1438,21 +1410,13 @@
     "title": "メッセージを付与する",
     "type": "fragment",
     "slug": "/hooks/use-loading#メッセージを付与する",
-    "hierarchy": {
-      "lv1": "useLoading",
-      "lv2": "タイムアウトを付与する",
-      "lv3": "メッセージを付与する"
-    }
+    "hierarchy": { "lv1": "useLoading", "lv2": "使い方", "lv3": "メッセージを付与する" }
   },
   {
     "title": "メッセージを更新する",
     "type": "fragment",
     "slug": "/hooks/use-loading#メッセージを更新する",
-    "hierarchy": {
-      "lv1": "useLoading",
-      "lv2": "メッセージを付与する",
-      "lv3": "メッセージを更新する"
-    }
+    "hierarchy": { "lv1": "useLoading", "lv2": "使い方", "lv3": "メッセージを更新する" }
   },
   {
     "title": "useLocalStorage",
@@ -1465,13 +1429,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-local-storage#インポート",
-    "hierarchy": { "lv1": "useLocalStorage", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useLocalStorage", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-local-storage#使い方",
-    "hierarchy": { "lv1": "useLocalStorage", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useLocalStorage", "lv2": "使い方" }
   },
   {
     "title": "useMediaQuery",
@@ -1484,13 +1448,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-media-query#インポート",
-    "hierarchy": { "lv1": "useMediaQuery", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useMediaQuery", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-media-query#使い方",
-    "hierarchy": { "lv1": "useMediaQuery", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useMediaQuery", "lv2": "使い方" }
   },
   {
     "title": "useNotice",
@@ -1503,19 +1467,19 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-notice#インポート",
-    "hierarchy": { "lv1": "useNotice", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useNotice", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-notice#使い方",
-    "hierarchy": { "lv1": "useNotice", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useNotice", "lv2": "使い方" }
   },
   {
     "title": "通知をカスタマイズする",
     "type": "fragment",
     "slug": "/hooks/use-notice#通知をカスタマイズする",
-    "hierarchy": { "lv1": "useNotice", "lv2": "通知をカスタマイズする", "lv3": null }
+    "hierarchy": { "lv1": "useNotice", "lv2": "通知をカスタマイズする" }
   },
   {
     "title": "表示時間を変更する",
@@ -1531,25 +1495,33 @@
     "title": "維持させる",
     "type": "fragment",
     "slug": "/hooks/use-notice#維持させる",
-    "hierarchy": { "lv1": "useNotice", "lv2": "表示時間を変更する", "lv3": "維持させる" }
+    "hierarchy": { "lv1": "useNotice", "lv2": "通知をカスタマイズする", "lv3": "維持させる" }
   },
   {
     "title": "位置を変更する",
     "type": "fragment",
     "slug": "/hooks/use-notice#位置を変更する",
-    "hierarchy": { "lv1": "useNotice", "lv2": "維持させる", "lv3": "位置を変更する" }
+    "hierarchy": { "lv1": "useNotice", "lv2": "通知をカスタマイズする", "lv3": "位置を変更する" }
   },
   {
     "title": "表示件数を制限する",
     "type": "fragment",
     "slug": "/hooks/use-notice#表示件数を制限する",
-    "hierarchy": { "lv1": "useNotice", "lv2": "位置を変更する", "lv3": "表示件数を制限する" }
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "表示件数を制限する"
+    }
   },
   {
     "title": "バリアントを変更する",
     "type": "fragment",
     "slug": "/hooks/use-notice#バリアントを変更する",
-    "hierarchy": { "lv1": "useNotice", "lv2": "表示件数を制限する", "lv3": "バリアントを変更する" }
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "バリアントを変更する"
+    }
   },
   {
     "title": "ステータスを変更する",
@@ -1557,7 +1529,7 @@
     "slug": "/hooks/use-notice#ステータスを変更する",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "バリアントを変更する",
+      "lv2": "通知をカスタマイズする",
       "lv3": "ステータスを変更する"
     }
   },
@@ -1567,7 +1539,7 @@
     "slug": "/hooks/use-notice#カラースキーマを使う",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "ステータスを変更する",
+      "lv2": "通知をカスタマイズする",
       "lv3": "カラースキーマを使う"
     }
   },
@@ -1577,7 +1549,7 @@
     "slug": "/hooks/use-notice#ローディングのバリアントを変更する",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "カラースキーマを使う",
+      "lv2": "通知をカスタマイズする",
       "lv3": "ローディングのバリアントを変更する"
     }
   },
@@ -1585,17 +1557,13 @@
     "title": "通知を更新する",
     "type": "fragment",
     "slug": "/hooks/use-notice#通知を更新する",
-    "hierarchy": {
-      "lv1": "useNotice",
-      "lv2": "ローディングのバリアントを変更する",
-      "lv3": "通知を更新する"
-    }
+    "hierarchy": { "lv1": "useNotice", "lv2": "通知をカスタマイズする", "lv3": "通知を更新する" }
   },
   {
     "title": "通知を閉じる",
     "type": "fragment",
     "slug": "/hooks/use-notice#通知を閉じる",
-    "hierarchy": { "lv1": "useNotice", "lv2": "通知を更新する", "lv3": "通知を閉じる" }
+    "hierarchy": { "lv1": "useNotice", "lv2": "通知をカスタマイズする", "lv3": "通知を閉じる" }
   },
   {
     "title": "コンポーネントをカスタマイズする",
@@ -1603,7 +1571,7 @@
     "slug": "/hooks/use-notice#コンポーネントをカスタマイズする",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "通知を閉じる",
+      "lv2": "通知をカスタマイズする",
       "lv3": "コンポーネントをカスタマイズする"
     }
   },
@@ -1613,7 +1581,7 @@
     "slug": "/hooks/use-notice#スタイルをカスタマイズする",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "コンポーネントをカスタマイズする",
+      "lv2": "通知をカスタマイズする",
       "lv3": "スタイルをカスタマイズする"
     }
   },
@@ -1628,13 +1596,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-os#インポート",
-    "hierarchy": { "lv1": "useOS", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useOS", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-os#使い方",
-    "hierarchy": { "lv1": "useOS", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useOS", "lv2": "使い方" }
   },
   {
     "title": "useOutsideClick",
@@ -1647,13 +1615,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-outside-click#インポート",
-    "hierarchy": { "lv1": "useOutsideClick", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useOutsideClick", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-outside-click#使い方",
-    "hierarchy": { "lv1": "useOutsideClick", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useOutsideClick", "lv2": "使い方" }
   },
   {
     "title": "usePrevious",
@@ -1666,13 +1634,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-previous#インポート",
-    "hierarchy": { "lv1": "usePrevious", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "usePrevious", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-previous#使い方",
-    "hierarchy": { "lv1": "usePrevious", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "usePrevious", "lv2": "使い方" }
   },
   {
     "title": "useResizeObserver",
@@ -1685,13 +1653,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-resize-observer#インポート",
-    "hierarchy": { "lv1": "useResizeObserver", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useResizeObserver", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-resize-observer#使い方",
-    "hierarchy": { "lv1": "useResizeObserver", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useResizeObserver", "lv2": "使い方" }
   },
   {
     "title": "useTheme",
@@ -1704,13 +1672,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-theme#インポート",
-    "hierarchy": { "lv1": "useTheme", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useTheme", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-theme#使い方",
-    "hierarchy": { "lv1": "useTheme", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useTheme", "lv2": "使い方" }
   },
   {
     "title": "テーマを切り替える",
@@ -1729,13 +1697,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-timeout#インポート",
-    "hierarchy": { "lv1": "useTimeout", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useTimeout", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-timeout#使い方",
-    "hierarchy": { "lv1": "useTimeout", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useTimeout", "lv2": "使い方" }
   },
   {
     "title": "useToken",
@@ -1748,13 +1716,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-token#インポート",
-    "hierarchy": { "lv1": "useToken", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useToken", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-token#使い方",
-    "hierarchy": { "lv1": "useToken", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useToken", "lv2": "使い方" }
   },
   {
     "title": "useUpdateEffect",
@@ -1767,13 +1735,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-update-effect#インポート",
-    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-update-effect#使い方",
-    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "使い方" }
   },
   {
     "title": "useValue",
@@ -1786,13 +1754,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-value#インポート",
-    "hierarchy": { "lv1": "useValue", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useValue", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-value#使い方",
-    "hierarchy": { "lv1": "useValue", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useValue", "lv2": "使い方" }
   },
   {
     "title": "useWindowEvent",
@@ -1805,13 +1773,13 @@
     "title": "インポート",
     "type": "fragment",
     "slug": "/hooks/use-window-event#インポート",
-    "hierarchy": { "lv1": "useWindowEvent", "lv2": "インポート", "lv3": null }
+    "hierarchy": { "lv1": "useWindowEvent", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/hooks/use-window-event#使い方",
-    "hierarchy": { "lv1": "useWindowEvent", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "useWindowEvent", "lv2": "使い方" }
   },
   {
     "title": "アニメーション",
@@ -1824,7 +1792,7 @@
     "title": "CSSアニメーション",
     "type": "fragment",
     "slug": "/styled-system/animation#cssアニメーション",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "CSSアニメーション", "lv3": null }
+    "hierarchy": { "lv1": "アニメーション", "lv2": "CSSアニメーション" }
   },
   {
     "title": "`useAnimation`を使う",
@@ -1840,19 +1808,34 @@
     "title": "複数のアニメーションを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#複数のアニメーションを使う",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "`useAnimation`を使う", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "CSSアニメーション",
+      "lv3": "`useAnimation`を使う",
+      "lv4": "複数のアニメーションを使う"
+    }
   },
   {
     "title": "レスポンシブスタイル",
     "type": "fragment",
     "slug": "/styled-system/animation#レスポンシブスタイル",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "複数のアニメーションを使う", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "CSSアニメーション",
+      "lv3": "`useAnimation`を使う",
+      "lv4": "レスポンシブスタイル"
+    }
   },
   {
     "title": "カラーモード",
     "type": "fragment",
     "slug": "/styled-system/animation#カラーモード",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "レスポンシブスタイル", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "CSSアニメーション",
+      "lv3": "`useAnimation`を使う",
+      "lv4": "カラーモード"
+    }
   },
   {
     "title": "`useDynamicAnimation`を使う",
@@ -1860,7 +1843,7 @@
     "slug": "/styled-system/animation#usedynamicanimationを使う",
     "hierarchy": {
       "lv1": "アニメーション",
-      "lv2": "カラーモード",
+      "lv2": "CSSアニメーション",
       "lv3": "`useDynamicAnimation`を使う"
     }
   },
@@ -1868,7 +1851,12 @@
     "title": "複数のアニメーションと組み合わせる",
     "type": "fragment",
     "slug": "/styled-system/animation#複数のアニメーションと組み合わせる",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "`useDynamicAnimation`を使う", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "CSSアニメーション",
+      "lv3": "`useDynamicAnimation`を使う",
+      "lv4": "複数のアニメーションと組み合わせる"
+    }
   },
   {
     "title": "テーマのトークンを使う",
@@ -1876,7 +1864,7 @@
     "slug": "/styled-system/animation#テーマのトークンを使う",
     "hierarchy": {
       "lv1": "アニメーション",
-      "lv2": "複数のアニメーションと組み合わせる",
+      "lv2": "CSSアニメーション",
       "lv3": "テーマのトークンを使う"
     }
   },
@@ -1884,7 +1872,7 @@
     "title": "Motion",
     "type": "fragment",
     "slug": "/styled-system/animation#motion",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "Motion", "lv3": null }
+    "hierarchy": { "lv1": "アニメーション", "lv2": "Motion" }
   },
   {
     "title": "アニメーション",
@@ -1896,77 +1884,118 @@
     "title": "`AnimatePresence`を使う",
     "type": "fragment",
     "slug": "/styled-system/animation#animatepresenceを使う",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "アニメーション", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "アニメーション",
+      "lv4": "`AnimatePresence`を使う"
+    }
   },
   {
     "title": "キーフレーム",
     "type": "fragment",
     "slug": "/styled-system/animation#キーフレーム",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "`AnimatePresence`を使う", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "アニメーション",
+      "lv4": "キーフレーム"
+    }
   },
   {
     "title": "`useMotionAnimationFrame`を使う",
     "type": "fragment",
     "slug": "/styled-system/animation#usemotionanimationframeを使う",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "キーフレーム", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "アニメーション",
+      "lv4": "`useMotionAnimationFrame`を使う"
+    }
   },
   {
     "title": "ジェスチャー",
     "type": "fragment",
     "slug": "/styled-system/animation#ジェスチャー",
-    "hierarchy": {
-      "lv1": "アニメーション",
-      "lv2": "`useMotionAnimationFrame`を使う",
-      "lv3": "ジェスチャー"
-    }
+    "hierarchy": { "lv1": "アニメーション", "lv2": "Motion", "lv3": "ジェスチャー" }
   },
   {
     "title": "ホバー",
     "type": "fragment",
     "slug": "/styled-system/animation#ホバー",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "ジェスチャー", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "ジェスチャー",
+      "lv4": "ホバー"
+    }
   },
   {
     "title": "クリック・タップ",
     "type": "fragment",
     "slug": "/styled-system/animation#クリック・タップ",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "ホバー", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "ジェスチャー",
+      "lv4": "クリック・タップ"
+    }
   },
   {
     "title": "フォーカス",
     "type": "fragment",
     "slug": "/styled-system/animation#フォーカス",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "クリック・タップ", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "ジェスチャー",
+      "lv4": "フォーカス"
+    }
   },
   {
     "title": "ドラッグ",
     "type": "fragment",
     "slug": "/styled-system/animation#ドラッグ",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "フォーカス", "lv3": "ドラッグ" }
+    "hierarchy": { "lv1": "アニメーション", "lv2": "Motion", "lv3": "ドラッグ" }
   },
   {
     "title": "可能領域を制約する",
     "type": "fragment",
     "slug": "/styled-system/animation#可能領域を制約する",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "ドラッグ", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "ドラッグ",
+      "lv4": "可能領域を制約する"
+    }
   },
   {
     "title": "弾力と勢い",
     "type": "fragment",
     "slug": "/styled-system/animation#弾力と勢い",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "可能領域を制約する", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "ドラッグ",
+      "lv4": "弾力と勢い"
+    }
   },
   {
     "title": "スクロール",
     "type": "fragment",
     "slug": "/styled-system/animation#スクロール",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "弾力と勢い", "lv3": "スクロール" }
+    "hierarchy": { "lv1": "アニメーション", "lv2": "Motion", "lv3": "スクロール" }
   },
   {
     "title": "`useScroll`を使う",
     "type": "fragment",
     "slug": "/styled-system/animation#usescrollを使う",
-    "hierarchy": { "lv1": "アニメーション", "lv2": "スクロール", "lv3": null }
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "スクロール",
+      "lv4": "`useScroll`を使う"
+    }
   },
   {
     "title": "CLI",
@@ -1979,13 +2008,13 @@
     "title": "インストール",
     "type": "fragment",
     "slug": "/styled-system/cli#インストール",
-    "hierarchy": { "lv1": "CLI", "lv2": "インストール", "lv3": null }
+    "hierarchy": { "lv1": "CLI", "lv2": "インストール" }
   },
   {
     "title": "使い方",
     "type": "fragment",
     "slug": "/styled-system/cli#使い方",
-    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方" }
   },
   {
     "title": "カラーモード",
@@ -1998,7 +2027,7 @@
     "title": "セットアップ",
     "type": "fragment",
     "slug": "/styled-system/color-mode#セットアップ",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "セットアップ", "lv3": null }
+    "hierarchy": { "lv1": "カラーモード", "lv2": "セットアップ" }
   },
   {
     "title": "コンフィグをカスタマイズする",
@@ -2016,7 +2045,7 @@
     "slug": "/styled-system/color-mode#colormodescriptを追加する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "コンフィグをカスタマイズする",
+      "lv2": "セットアップ",
       "lv3": "`ColorModeScript`を追加する"
     }
   },
@@ -2024,19 +2053,29 @@
     "title": "Create React Appの場合",
     "type": "fragment",
     "slug": "/styled-system/color-mode#create-react-appの場合",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "`ColorModeScript`を追加する", "lv3": null }
+    "hierarchy": {
+      "lv1": "カラーモード",
+      "lv2": "セットアップ",
+      "lv3": "`ColorModeScript`を追加する",
+      "lv4": "Create React Appの場合"
+    }
   },
   {
     "title": "Next.jsの場合",
     "type": "fragment",
     "slug": "/styled-system/color-mode#nextjsの場合",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "Create React Appの場合", "lv3": null }
+    "hierarchy": {
+      "lv1": "カラーモード",
+      "lv2": "セットアップ",
+      "lv3": "`ColorModeScript`を追加する",
+      "lv4": "Next.jsの場合"
+    }
   },
   {
     "title": "`colorModeManager`を追加する",
     "type": "fragment",
     "slug": "/styled-system/color-mode#colormodemanagerを追加する",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "`colorModeManager`を追加する", "lv3": null }
+    "hierarchy": { "lv1": "カラーモード", "lv2": "`colorModeManager`を追加する" }
   },
   {
     "title": "`getServerSideProps`を用意する",
@@ -2054,7 +2093,7 @@
     "slug": "/styled-system/color-mode#cookiestoragessrを渡す",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "`getServerSideProps`を用意する",
+      "lv2": "`colorModeManager`を追加する",
       "lv3": "`cookieStorageSSR`を渡す"
     }
   },
@@ -2064,7 +2103,7 @@
     "slug": "/styled-system/color-mode#getserversidepropsを追加する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "`cookieStorageSSR`を渡す",
+      "lv2": "`colorModeManager`を追加する",
       "lv3": "`getServerSideProps`を追加する"
     }
   },
@@ -2072,19 +2111,19 @@
     "title": "カラーモードの構文",
     "type": "fragment",
     "slug": "/styled-system/color-mode#カラーモードの構文",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードの構文", "lv3": null }
+    "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードの構文" }
   },
   {
     "title": "カラーモードを切り替える",
     "type": "fragment",
     "slug": "/styled-system/color-mode#カラーモードを切り替える",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードを切り替える", "lv3": null }
+    "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードを切り替える" }
   },
   {
     "title": "カラーモードのユーティリティ",
     "type": "fragment",
     "slug": "/styled-system/color-mode#カラーモードのユーティリティ",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードのユーティリティ", "lv3": null }
+    "hierarchy": { "lv1": "カラーモード", "lv2": "カラーモードのユーティリティ" }
   },
   {
     "title": "`useColorMode`を使う",
@@ -2102,7 +2141,7 @@
     "slug": "/styled-system/color-mode#usecolormodevalueを使う",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "`useColorMode`を使う",
+      "lv2": "カラーモードのユーティリティ",
       "lv3": "`useColorModeValue`を使う"
     }
   },
@@ -2117,11 +2156,7 @@
     "title": "カラーモードを変更する",
     "type": "fragment",
     "slug": "/styled-system/configure/customize-config#カラーモードを変更する",
-    "hierarchy": {
-      "lv1": "コンフィグをカスタマイズする",
-      "lv2": "カラーモードを変更する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "コンフィグをカスタマイズする", "lv2": "カラーモードを変更する" }
   },
   {
     "title": "`CSS`カスタムプロパティをプレフィックスを変更する",
@@ -2129,8 +2164,7 @@
     "slug": "/styled-system/configure/customize-config#cssカスタムプロパティをプレフィックスを変更する",
     "hierarchy": {
       "lv1": "コンフィグをカスタマイズする",
-      "lv2": "`CSS`カスタムプロパティをプレフィックスを変更する",
-      "lv3": null
+      "lv2": "`CSS`カスタムプロパティをプレフィックスを変更する"
     }
   },
   {
@@ -2158,17 +2192,13 @@
     "title": "グローバルスタイルをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/global-styles#グローバルスタイルをカスタマイズする",
-    "hierarchy": {
-      "lv1": "グローバルスタイル",
-      "lv2": "グローバルスタイルをカスタマイズする",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "グローバルスタイル", "lv2": "グローバルスタイルをカスタマイズする" }
   },
   {
     "title": "グローバルスタイルを追加する",
     "type": "fragment",
     "slug": "/styled-system/global-styles#グローバルスタイルを追加する",
-    "hierarchy": { "lv1": "グローバルスタイル", "lv2": "グローバルスタイルを追加する", "lv3": null }
+    "hierarchy": { "lv1": "グローバルスタイル", "lv2": "グローバルスタイルを追加する" }
   },
   {
     "title": "グラデーション",
@@ -2181,7 +2211,7 @@
     "title": "使い方",
     "type": "fragment",
     "slug": "/styled-system/gradient#使い方",
-    "hierarchy": { "lv1": "グラデーション", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "グラデーション", "lv2": "使い方" }
   },
   {
     "title": "色のカスタマイズ",
@@ -2193,23 +2223,19 @@
     "title": "グラデーションのトークン",
     "type": "fragment",
     "slug": "/styled-system/gradient#グラデーションのトークン",
-    "hierarchy": {
-      "lv1": "グラデーション",
-      "lv2": "色のカスタマイズ",
-      "lv3": "グラデーションのトークン"
-    }
+    "hierarchy": { "lv1": "グラデーション", "lv2": "使い方", "lv3": "グラデーションのトークン" }
   },
   {
     "title": "テキストのグラデーション",
     "type": "fragment",
     "slug": "/styled-system/gradient#テキストのグラデーション",
-    "hierarchy": { "lv1": "グラデーション", "lv2": "テキストのグラデーション", "lv3": null }
+    "hierarchy": { "lv1": "グラデーション", "lv2": "テキストのグラデーション" }
   },
   {
     "title": "レスポンシブなグラデーション",
     "type": "fragment",
     "slug": "/styled-system/gradient#レスポンシブなグラデーション",
-    "hierarchy": { "lv1": "グラデーション", "lv2": "レスポンシブなグラデーション", "lv3": null }
+    "hierarchy": { "lv1": "グラデーション", "lv2": "レスポンシブなグラデーション" }
   },
   {
     "title": "スタイルシステム",
@@ -2229,13 +2255,13 @@
     "title": "使い方",
     "type": "fragment",
     "slug": "/styled-system/loading#使い方",
-    "hierarchy": { "lv1": "ローディング", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "ローディング", "lv2": "使い方" }
   },
   {
     "title": "ローディングをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/loading#ローディングをカスタマイズする",
-    "hierarchy": { "lv1": "ローディング", "lv2": "ローディングをカスタマイズする", "lv3": null }
+    "hierarchy": { "lv1": "ローディング", "lv2": "ローディングをカスタマイズする" }
   },
   {
     "title": "タイムアウトを付与する",
@@ -2253,7 +2279,7 @@
     "slug": "/styled-system/loading#メッセージを付与する",
     "hierarchy": {
       "lv1": "ローディング",
-      "lv2": "タイムアウトを付与する",
+      "lv2": "ローディングをカスタマイズする",
       "lv3": "メッセージを付与する"
     }
   },
@@ -2263,7 +2289,7 @@
     "slug": "/styled-system/loading#メッセージを更新する",
     "hierarchy": {
       "lv1": "ローディング",
-      "lv2": "メッセージを付与する",
+      "lv2": "ローディングをカスタマイズする",
       "lv3": "メッセージを更新する"
     }
   },
@@ -2271,7 +2297,7 @@
     "title": "コンフィグからカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/loading#コンフィグからカスタマイズする",
-    "hierarchy": { "lv1": "ローディング", "lv2": "コンフィグからカスタマイズする", "lv3": null }
+    "hierarchy": { "lv1": "ローディング", "lv2": "コンフィグからカスタマイズする" }
   },
   {
     "title": "`initialState`を使う",
@@ -2289,7 +2315,7 @@
     "slug": "/styled-system/loading#カスタムコンポーネントを使う",
     "hierarchy": {
       "lv1": "ローディング",
-      "lv2": "`initialState`を使う",
+      "lv2": "コンフィグからカスタマイズする",
       "lv3": "カスタムコンポーネントを使う"
     }
   },
@@ -2304,13 +2330,13 @@
     "title": "使い方",
     "type": "fragment",
     "slug": "/styled-system/notification#使い方",
-    "hierarchy": { "lv1": "通知", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "通知", "lv2": "使い方" }
   },
   {
     "title": "通知をカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/notification#通知をカスタマイズする",
-    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": null }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする" }
   },
   {
     "title": "表示時間を変更する",
@@ -2322,37 +2348,37 @@
     "title": "維持させる",
     "type": "fragment",
     "slug": "/styled-system/notification#維持させる",
-    "hierarchy": { "lv1": "通知", "lv2": "表示時間を変更する", "lv3": "維持させる" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "維持させる" }
   },
   {
     "title": "位置を変更する",
     "type": "fragment",
     "slug": "/styled-system/notification#位置を変更する",
-    "hierarchy": { "lv1": "通知", "lv2": "維持させる", "lv3": "位置を変更する" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "位置を変更する" }
   },
   {
     "title": "表示件数を制限する",
     "type": "fragment",
     "slug": "/styled-system/notification#表示件数を制限する",
-    "hierarchy": { "lv1": "通知", "lv2": "位置を変更する", "lv3": "表示件数を制限する" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "表示件数を制限する" }
   },
   {
     "title": "バリアントを変更する",
     "type": "fragment",
     "slug": "/styled-system/notification#バリアントを変更する",
-    "hierarchy": { "lv1": "通知", "lv2": "表示件数を制限する", "lv3": "バリアントを変更する" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "バリアントを変更する" }
   },
   {
     "title": "ステータスを変更する",
     "type": "fragment",
     "slug": "/styled-system/notification#ステータスを変更する",
-    "hierarchy": { "lv1": "通知", "lv2": "バリアントを変更する", "lv3": "ステータスを変更する" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "ステータスを変更する" }
   },
   {
     "title": "カラースキーマを使う",
     "type": "fragment",
     "slug": "/styled-system/notification#カラースキーマを使う",
-    "hierarchy": { "lv1": "通知", "lv2": "ステータスを変更する", "lv3": "カラースキーマを使う" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "カラースキーマを使う" }
   },
   {
     "title": "ローディングのバリアントを変更する",
@@ -2360,7 +2386,7 @@
     "slug": "/styled-system/notification#ローディングのバリアントを変更する",
     "hierarchy": {
       "lv1": "通知",
-      "lv2": "カラースキーマを使う",
+      "lv2": "通知をカスタマイズする",
       "lv3": "ローディングのバリアントを変更する"
     }
   },
@@ -2368,23 +2394,23 @@
     "title": "通知を更新する",
     "type": "fragment",
     "slug": "/styled-system/notification#通知を更新する",
-    "hierarchy": {
-      "lv1": "通知",
-      "lv2": "ローディングのバリアントを変更する",
-      "lv3": "通知を更新する"
-    }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "通知を更新する" }
   },
   {
     "title": "通知を閉じる",
     "type": "fragment",
     "slug": "/styled-system/notification#通知を閉じる",
-    "hierarchy": { "lv1": "通知", "lv2": "通知を更新する", "lv3": "通知を閉じる" }
+    "hierarchy": { "lv1": "通知", "lv2": "通知をカスタマイズする", "lv3": "通知を閉じる" }
   },
   {
     "title": "コンポーネントをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/notification#コンポーネントをカスタマイズする",
-    "hierarchy": { "lv1": "通知", "lv2": "通知を閉じる", "lv3": "コンポーネントをカスタマイズする" }
+    "hierarchy": {
+      "lv1": "通知",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "コンポーネントをカスタマイズする"
+    }
   },
   {
     "title": "スタイルをカスタマイズする",
@@ -2392,7 +2418,7 @@
     "slug": "/styled-system/notification#スタイルをカスタマイズする",
     "hierarchy": {
       "lv1": "通知",
-      "lv2": "コンポーネントをカスタマイズする",
+      "lv2": "通知をカスタマイズする",
       "lv3": "スタイルをカスタマイズする"
     }
   },
@@ -2400,7 +2426,7 @@
     "title": "コンフィグからカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/notification#コンフィグからカスタマイズする",
-    "hierarchy": { "lv1": "通知", "lv2": "コンフィグからカスタマイズする", "lv3": null }
+    "hierarchy": { "lv1": "通知", "lv2": "コンフィグからカスタマイズする" }
   },
   {
     "title": "リセットスタイル",
@@ -2413,17 +2439,13 @@
     "title": "リセットスタイルをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/reset-styles#リセットスタイルをカスタマイズする",
-    "hierarchy": {
-      "lv1": "リセットスタイル",
-      "lv2": "リセットスタイルをカスタマイズする",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "リセットスタイル", "lv2": "リセットスタイルをカスタマイズする" }
   },
   {
     "title": "リセットスタイルを追加する",
     "type": "fragment",
     "slug": "/styled-system/reset-styles#リセットスタイルを追加する",
-    "hierarchy": { "lv1": "リセットスタイル", "lv2": "リセットスタイルを追加する", "lv3": null }
+    "hierarchy": { "lv1": "リセットスタイル", "lv2": "リセットスタイルを追加する" }
   },
   {
     "title": "レスポンシブスタイル",
@@ -2436,23 +2458,19 @@
     "title": "ブレイクポイントについて",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#ブレイクポイントについて",
-    "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "ブレイクポイントについて", "lv3": null }
+    "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "ブレイクポイントについて" }
   },
   {
     "title": "レスポンシブスタイルの構文",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#レスポンシブスタイルの構文",
-    "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "レスポンシブスタイルの構文", "lv3": null }
+    "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "レスポンシブスタイルの構文" }
   },
   {
     "title": "レスポンシブのユーティリティ",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#レスポンシブのユーティリティ",
-    "hierarchy": {
-      "lv1": "レスポンシブスタイル",
-      "lv2": "レスポンシブのユーティリティ",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "レスポンシブのユーティリティ" }
   },
   {
     "title": "`useBreakpoint`を使う",
@@ -2470,7 +2488,7 @@
     "slug": "/styled-system/responsive-styles#usebreakpointvalueを使う",
     "hierarchy": {
       "lv1": "レスポンシブスタイル",
-      "lv2": "`useBreakpoint`を使う",
+      "lv2": "レスポンシブのユーティリティ",
       "lv3": "`useBreakpointValue`を使う"
     }
   },
@@ -2478,11 +2496,7 @@
     "title": "ブレイクポイントをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#ブレイクポイントをカスタマイズする",
-    "hierarchy": {
-      "lv1": "レスポンシブスタイル",
-      "lv2": "ブレイクポイントをカスタマイズする",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "レスポンシブスタイル", "lv2": "ブレイクポイントをカスタマイズする" }
   },
   {
     "title": "セマンティックトークン",
@@ -2502,67 +2516,67 @@
     "title": "カラーとバックグラウンド",
     "type": "fragment",
     "slug": "/styled-system/style-props#カラーとバックグラウンド",
-    "hierarchy": { "lv1": "Style props", "lv2": "カラーとバックグラウンド", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "カラーとバックグラウンド" }
   },
   {
     "title": "マージンとパディング",
     "type": "fragment",
     "slug": "/styled-system/style-props#マージンとパディング",
-    "hierarchy": { "lv1": "Style props", "lv2": "マージンとパディング", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "マージンとパディング" }
   },
   {
     "title": "タイポグラフィ",
     "type": "fragment",
     "slug": "/styled-system/style-props#タイポグラフィ",
-    "hierarchy": { "lv1": "Style props", "lv2": "タイポグラフィ", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "タイポグラフィ" }
   },
   {
     "title": "レイアウト",
     "type": "fragment",
     "slug": "/styled-system/style-props#レイアウト",
-    "hierarchy": { "lv1": "Style props", "lv2": "レイアウト", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "レイアウト" }
   },
   {
     "title": "ポジション",
     "type": "fragment",
     "slug": "/styled-system/style-props#ポジション",
-    "hierarchy": { "lv1": "Style props", "lv2": "ポジション", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "ポジション" }
   },
   {
     "title": "リスト",
     "type": "fragment",
     "slug": "/styled-system/style-props#リスト",
-    "hierarchy": { "lv1": "Style props", "lv2": "リスト", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "リスト" }
   },
   {
     "title": "ボーダー",
     "type": "fragment",
     "slug": "/styled-system/style-props#ボーダー",
-    "hierarchy": { "lv1": "Style props", "lv2": "ボーダー", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "ボーダー" }
   },
   {
     "title": "エフェクト",
     "type": "fragment",
     "slug": "/styled-system/style-props#エフェクト",
-    "hierarchy": { "lv1": "Style props", "lv2": "エフェクト", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "エフェクト" }
   },
   {
     "title": "フィルター",
     "type": "fragment",
     "slug": "/styled-system/style-props#フィルター",
-    "hierarchy": { "lv1": "Style props", "lv2": "フィルター", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "フィルター" }
   },
   {
     "title": "擬似要素とセレクター",
     "type": "fragment",
     "slug": "/styled-system/style-props#擬似要素とセレクター",
-    "hierarchy": { "lv1": "Style props", "lv2": "擬似要素とセレクター", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "擬似要素とセレクター" }
   },
   {
     "title": "その他",
     "type": "fragment",
     "slug": "/styled-system/style-props#その他",
-    "hierarchy": { "lv1": "Style props", "lv2": "その他", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "その他" }
   },
   {
     "title": "テキストとレイヤースタイル",
@@ -2575,29 +2589,25 @@
     "title": "テーマをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#テーマをカスタマイズする",
-    "hierarchy": {
-      "lv1": "テキストとレイヤースタイル",
-      "lv2": "テーマをカスタマイズする",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "テーマをカスタマイズする" }
   },
   {
     "title": "レイヤースタイル",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#レイヤースタイル",
-    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "レイヤースタイル", "lv3": null }
+    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "レイヤースタイル" }
   },
   {
     "title": "テキストスタイル",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#テキストスタイル",
-    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "テキストスタイル", "lv3": null }
+    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "テキストスタイル" }
   },
   {
     "title": "その他のスタイル",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#その他のスタイル",
-    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "その他のスタイル", "lv3": null }
+    "hierarchy": { "lv1": "テキストとレイヤースタイル", "lv2": "その他のスタイル" }
   },
   {
     "title": "コンポーネントのスタイル",
@@ -2610,11 +2620,7 @@
     "title": "基本スタイルと修飾子スタイル",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#基本スタイルと修飾子スタイル",
-    "hierarchy": {
-      "lv1": "コンポーネントのスタイル",
-      "lv2": "基本スタイルと修飾子スタイル",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "コンポーネントのスタイル", "lv2": "基本スタイルと修飾子スタイル" }
   },
   {
     "title": "単一パーツと複数パーツのコンポーネント",
@@ -2622,8 +2628,7 @@
     "slug": "/styled-system/theming/component-style#単一パーツと複数パーツのコンポーネント",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
-      "lv2": "単一パーツと複数パーツのコンポーネント",
-      "lv3": null
+      "lv2": "単一パーツと複数パーツのコンポーネント"
     }
   },
   {
@@ -2642,7 +2647,7 @@
     "slug": "/styled-system/theming/component-style#複数パーツのコンポーネント",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
-      "lv2": "単一パーツのコンポーネント",
+      "lv2": "単一パーツと複数パーツのコンポーネント",
       "lv3": "複数パーツのコンポーネント"
     }
   },
@@ -2652,7 +2657,7 @@
     "slug": "/styled-system/theming/component-style#単一パーツのコンポーネントのスタイリング",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
-      "lv2": "複数パーツのコンポーネント",
+      "lv2": "単一パーツと複数パーツのコンポーネント",
       "lv3": "単一パーツのコンポーネントのスタイリング"
     }
   },
@@ -2662,7 +2667,7 @@
     "slug": "/styled-system/theming/component-style#複数パーツのコンポーネントのスタイリング",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
-      "lv2": "単一パーツのコンポーネントのスタイリング",
+      "lv2": "単一パーツと複数パーツのコンポーネント",
       "lv3": "複数パーツのコンポーネントのスタイリング"
     }
   },
@@ -2670,11 +2675,7 @@
     "title": "独自のコンポーネントを作成する",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#独自のコンポーネントを作成する",
-    "hierarchy": {
-      "lv1": "コンポーネントのスタイル",
-      "lv2": "独自のコンポーネントを作成する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "コンポーネントのスタイル", "lv2": "独自のコンポーネントを作成する" }
   },
   {
     "title": "テーマをカスタマイズする",
@@ -2687,45 +2688,37 @@
     "title": "テーマの運用",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#テーマの運用",
-    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "テーマの運用", "lv3": null }
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "テーマの運用" }
   },
   {
     "title": "トークンを変更する",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#トークンを変更する",
-    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "トークンを変更する", "lv3": null }
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "トークンを変更する" }
   },
   {
     "title": "セマンティックトークンを変更する",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#セマンティックトークンを変更する",
-    "hierarchy": {
-      "lv1": "テーマをカスタマイズする",
-      "lv2": "セマンティックトークンを変更する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "セマンティックトークンを変更する" }
   },
   {
     "title": "スタイルを変更する",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#スタイルを変更する",
-    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "スタイルを変更する", "lv3": null }
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "スタイルを変更する" }
   },
   {
     "title": "コンポーネントのスタイルを変更する",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する",
-    "hierarchy": {
-      "lv1": "テーマをカスタマイズする",
-      "lv2": "コンポーネントのスタイルを変更する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "コンポーネントのスタイルを変更する" }
   },
   {
     "title": "ユーティリティ",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#ユーティリティ",
-    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "ユーティリティ", "lv3": null }
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "ユーティリティ" }
   },
   {
     "title": "`extendTheme`を使う",
@@ -2741,7 +2734,12 @@
     "title": "複数のテーマをマージする",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#複数のテーマをマージする",
-    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "`extendTheme`を使う", "lv3": null }
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "`extendTheme`を使う",
+      "lv4": "複数のテーマをマージする"
+    }
   },
   {
     "title": "デフォルトのテーマを継承しない",
@@ -2749,8 +2747,9 @@
     "slug": "/styled-system/theming/customize-theme#デフォルトのテーマを継承しない",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "複数のテーマをマージする",
-      "lv3": null
+      "lv2": "ユーティリティ",
+      "lv3": "`extendTheme`を使う",
+      "lv4": "デフォルトのテーマを継承しない"
     }
   },
   {
@@ -2759,8 +2758,9 @@
     "slug": "/styled-system/theming/customize-theme#デフォルトテーマから特定のトークンを除外して継承する",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "デフォルトのテーマを継承しない",
-      "lv3": null
+      "lv2": "ユーティリティ",
+      "lv3": "`extendTheme`を使う",
+      "lv4": "デフォルトテーマから特定のトークンを除外して継承する"
     }
   },
   {
@@ -2769,8 +2769,9 @@
     "slug": "/styled-system/theming/customize-theme#デフォルトテーマから特定のトークンだけ継承する",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "デフォルトテーマから特定のトークンを除外して継承する",
-      "lv3": null
+      "lv2": "ユーティリティ",
+      "lv3": "`extendTheme`を使う",
+      "lv4": "デフォルトテーマから特定のトークンだけ継承する"
     }
   },
   {
@@ -2779,7 +2780,7 @@
     "slug": "/styled-system/theming/customize-theme#extendbasethemeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "デフォルトテーマから特定のトークンだけ継承する",
+      "lv2": "ユーティリティ",
       "lv3": "`extendBaseTheme`を使う"
     }
   },
@@ -2789,7 +2790,7 @@
     "slug": "/styled-system/theming/customize-theme#extendstyleを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendBaseTheme`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`extendStyle`を使う"
     }
   },
@@ -2799,7 +2800,7 @@
     "slug": "/styled-system/theming/customize-theme#extendtokenを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendStyle`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`extendToken`を使う"
     }
   },
@@ -2809,7 +2810,7 @@
     "slug": "/styled-system/theming/customize-theme#extendcomponentを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendToken`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`extendComponent`を使う"
     }
   },
@@ -2819,7 +2820,7 @@
     "slug": "/styled-system/theming/customize-theme#extendcomponentsizeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendComponent`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`extendComponentSize`を使う"
     }
   },
@@ -2829,7 +2830,7 @@
     "slug": "/styled-system/theming/customize-theme#extendcomponentvariantを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendComponentSize`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`extendComponentVariant`を使う"
     }
   },
@@ -2839,7 +2840,7 @@
     "slug": "/styled-system/theming/customize-theme#extendcomponentdefaultpropsを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendComponentVariant`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`extendComponentDefaultProps`を使う"
     }
   },
@@ -2849,7 +2850,7 @@
     "slug": "/styled-system/theming/customize-theme#withdefaultsizeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`extendComponentDefaultProps`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`withDefaultSize`を使う"
     }
   },
@@ -2859,7 +2860,7 @@
     "slug": "/styled-system/theming/customize-theme#withdefaultvariantを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`withDefaultSize`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`withDefaultVariant`を使う"
     }
   },
@@ -2869,7 +2870,7 @@
     "slug": "/styled-system/theming/customize-theme#withdefaultcolorschemeを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`withDefaultVariant`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`withDefaultColorScheme`を使う"
     }
   },
@@ -2879,7 +2880,7 @@
     "slug": "/styled-system/theming/customize-theme#withdefaultpropsを使う",
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
-      "lv2": "`withDefaultColorScheme`を使う",
+      "lv2": "ユーティリティ",
       "lv3": "`withDefaultProps`を使う"
     }
   },
@@ -2894,7 +2895,7 @@
     "title": "Colors",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#colors",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors" }
   },
   {
     "title": "Black & White",
@@ -2906,169 +2907,169 @@
     "title": "Semantics",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#semantics",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Black & White", "lv3": "Semantics" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Semantics" }
   },
   {
     "title": "BlackAlpha",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#blackalpha",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Semantics", "lv3": "BlackAlpha" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "BlackAlpha" }
   },
   {
     "title": "WhiteAlpha",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#whitealpha",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "BlackAlpha", "lv3": "WhiteAlpha" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "WhiteAlpha" }
   },
   {
     "title": "Gray",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#gray",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "WhiteAlpha", "lv3": "Gray" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Gray" }
   },
   {
     "title": "Zinc",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#zinc",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Gray", "lv3": "Zinc" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Zinc" }
   },
   {
     "title": "Neutral",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#neutral",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Zinc", "lv3": "Neutral" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Neutral" }
   },
   {
     "title": "Stone",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#stone",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Neutral", "lv3": "Stone" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Stone" }
   },
   {
     "title": "Red",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#red",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Stone", "lv3": "Red" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Red" }
   },
   {
     "title": "Rose",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#rose",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Red", "lv3": "Rose" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Rose" }
   },
   {
     "title": "Pink",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#pink",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Rose", "lv3": "Pink" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Pink" }
   },
   {
     "title": "Orange",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#orange",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Pink", "lv3": "Orange" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Orange" }
   },
   {
     "title": "Amber",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#amber",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Orange", "lv3": "Amber" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Amber" }
   },
   {
     "title": "Yellow",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#yellow",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Amber", "lv3": "Yellow" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Yellow" }
   },
   {
     "title": "Lime",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#lime",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Yellow", "lv3": "Lime" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Lime" }
   },
   {
     "title": "Green",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#green",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Lime", "lv3": "Green" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Green" }
   },
   {
     "title": "Emerald",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#emerald",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Green", "lv3": "Emerald" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Emerald" }
   },
   {
     "title": "Teal",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#teal",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Emerald", "lv3": "Teal" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Teal" }
   },
   {
     "title": "Cyan",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#cyan",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Teal", "lv3": "Cyan" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Cyan" }
   },
   {
     "title": "Sky",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#sky",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Cyan", "lv3": "Sky" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Sky" }
   },
   {
     "title": "Blue",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#blue",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Sky", "lv3": "Blue" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Blue" }
   },
   {
     "title": "Indigo",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#indigo",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Blue", "lv3": "Indigo" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Indigo" }
   },
   {
     "title": "Violet",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#violet",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Indigo", "lv3": "Violet" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Violet" }
   },
   {
     "title": "Purple",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#purple",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Violet", "lv3": "Purple" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Purple" }
   },
   {
     "title": "Fuchsia",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#fuchsia",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Purple", "lv3": "Fuchsia" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Fuchsia" }
   },
   {
     "title": "Gradients",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#gradients",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Gradients", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Gradients" }
   },
   {
     "title": "Spaces",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#spaces",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Spaces", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Spaces" }
   },
   {
     "title": "Sizes",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#sizes",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Sizes", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Sizes" }
   },
   {
     "title": "Typography",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#typography",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Typography", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Typography" }
   },
   {
     "title": "Fonts (Font families)",
@@ -3084,73 +3085,73 @@
     "title": "FontSizes",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#fontsizes",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Fonts (Font families)", "lv3": "FontSizes" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Typography", "lv3": "FontSizes" }
   },
   {
     "title": "FontWeights",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#fontweights",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "FontSizes", "lv3": "FontWeights" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Typography", "lv3": "FontWeights" }
   },
   {
     "title": "LineHeights",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#lineheights",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "FontWeights", "lv3": "LineHeights" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Typography", "lv3": "LineHeights" }
   },
   {
     "title": "LetterSpacings",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#letterspacings",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "LineHeights", "lv3": "LetterSpacings" }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Typography", "lv3": "LetterSpacings" }
   },
   {
     "title": "Borders",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#borders",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Borders", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Borders" }
   },
   {
     "title": "Blurs",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#blurs",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Blurs", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Blurs" }
   },
   {
     "title": "Radii",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#radii",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Radii", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Radii" }
   },
   {
     "title": "Shadows",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#shadows",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Shadows", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Shadows" }
   },
   {
     "title": "Animations",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#animations",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Animations", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Animations" }
   },
   {
     "title": "Transitions",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#transitions",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Transitions", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Transitions" }
   },
   {
     "title": "ZIndices",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#zindices",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "ZIndices", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "ZIndices" }
   },
   {
     "title": "Breakpoint",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#breakpoint",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Breakpoint", "lv3": null }
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Breakpoint" }
   },
   {
     "title": "テーマ",
@@ -3170,7 +3171,7 @@
     "title": "セットアップ",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#セットアップ",
-    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "セットアップ", "lv3": null }
+    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "セットアップ" }
   },
   {
     "title": "複数のテーマを用意する",
@@ -3188,7 +3189,7 @@
     "slug": "/styled-system/theming/switch-theme#themeschemescriptを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "複数のテーマを用意する",
+      "lv2": "セットアップ",
       "lv3": "`ThemeSchemeScript`を追加する"
     }
   },
@@ -3198,25 +3199,27 @@
     "slug": "/styled-system/theming/switch-theme#create-react-appの場合",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "`ThemeSchemeScript`を追加する",
-      "lv3": null
+      "lv2": "セットアップ",
+      "lv3": "`ThemeSchemeScript`を追加する",
+      "lv4": "Create React Appの場合"
     }
   },
   {
     "title": "Next.jsの場合",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#nextjsの場合",
-    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "Create React Appの場合", "lv3": null }
+    "hierarchy": {
+      "lv1": "テーマを切り替える",
+      "lv2": "セットアップ",
+      "lv3": "`ThemeSchemeScript`を追加する",
+      "lv4": "Next.jsの場合"
+    }
   },
   {
     "title": "`themeSchemeManager`を追加する",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#themeschememanagerを追加する",
-    "hierarchy": {
-      "lv1": "テーマを切り替える",
-      "lv2": "`themeSchemeManager`を追加する",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "`themeSchemeManager`を追加する" }
   },
   {
     "title": "`getServerSideProps`を用意する",
@@ -3234,7 +3237,7 @@
     "slug": "/styled-system/theming/switch-theme#cookiestoragessrを渡す",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "`getServerSideProps`を用意する",
+      "lv2": "`themeSchemeManager`を追加する",
       "lv3": "`cookieStorageSSR`を渡す"
     }
   },
@@ -3244,7 +3247,7 @@
     "slug": "/styled-system/theming/switch-theme#getserversidepropsを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
-      "lv2": "`cookieStorageSSR`を渡す",
+      "lv2": "`themeSchemeManager`を追加する",
       "lv3": "`getServerSideProps`を追加する"
     }
   },
@@ -3252,7 +3255,7 @@
     "title": "テーマを切り替える",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#テーマを切り替える",
-    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "テーマを切り替える", "lv3": null }
+    "hierarchy": { "lv1": "テーマを切り替える", "lv2": "テーマを切り替える" }
   },
   {
     "title": "ui",
@@ -3265,12 +3268,12 @@
     "title": "使い方",
     "type": "fragment",
     "slug": "/styled-system/ui#使い方",
-    "hierarchy": { "lv1": "ui", "lv2": "使い方", "lv3": null }
+    "hierarchy": { "lv1": "ui", "lv2": "使い方" }
   },
   {
     "title": "コンポーネントを作る",
     "type": "fragment",
     "slug": "/styled-system/ui#コンポーネントを作る",
-    "hierarchy": { "lv1": "ui", "lv2": "コンポーネントを作る", "lv3": null }
+    "hierarchy": { "lv1": "ui", "lv2": "コンポーネントを作る" }
   }
 ]

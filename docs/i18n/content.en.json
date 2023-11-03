@@ -10,19 +10,19 @@
     "title": "Setup the Project",
     "type": "fragment",
     "slug": "/community/contributing#setup-the-project",
-    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Setup the Project", "lv3": null }
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Setup the Project" }
   },
   {
     "title": "Commands",
     "type": "fragment",
     "slug": "/community/contributing#commands",
-    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Commands", "lv3": null }
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Commands" }
   },
   {
     "title": "Update the Document",
     "type": "fragment",
     "slug": "/community/contributing#update-the-document",
-    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Update the Document", "lv3": null }
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Update the Document" }
   },
   {
     "title": "Commit Convention",
@@ -40,7 +40,7 @@
     "slug": "/community/contributing#steps-to-pr",
     "hierarchy": {
       "lv1": "Contributing to Yamada UI",
-      "lv2": "Commit Convention",
+      "lv2": "Update the Document",
       "lv3": "Steps to PR"
     }
   },
@@ -48,7 +48,7 @@
     "title": "License",
     "type": "fragment",
     "slug": "/community/contributing#license",
-    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "License", "lv3": null }
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "License" }
   },
   {
     "title": "Community",
@@ -68,7 +68,7 @@
     "title": "Core Team",
     "type": "fragment",
     "slug": "/community/team#core-team",
-    "hierarchy": { "lv1": "Team and Contributors", "lv2": "Core Team", "lv3": null }
+    "hierarchy": { "lv1": "Team and Contributors", "lv2": "Core Team" }
   },
   {
     "title": "Badge",
@@ -424,13 +424,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/components/layouts/box#import",
-    "hierarchy": { "lv1": "Box", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "Box", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/components/layouts/box#usage",
-    "hierarchy": { "lv1": "Box", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "Box", "lv2": "Usage" }
   },
   {
     "title": "Center",
@@ -709,7 +709,7 @@
     "title": "Applying Themes",
     "type": "fragment",
     "slug": "/getting-started/advanced#applying-themes",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Themes", "lv3": null }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Themes" }
   },
   {
     "title": "Using `withDefaultColorScheme`",
@@ -727,7 +727,7 @@
     "slug": "/getting-started/advanced#using-usetoken",
     "hierarchy": {
       "lv1": "Learning Applications",
-      "lv2": "Using `withDefaultColorScheme`",
+      "lv2": "Applying Themes",
       "lv3": "Using `useToken`"
     }
   },
@@ -735,7 +735,7 @@
     "title": "Applying Styles",
     "type": "fragment",
     "slug": "/getting-started/advanced#applying-styles",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles", "lv3": null }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles" }
   },
   {
     "title": "About `as`",
@@ -749,7 +749,7 @@
     "slug": "/getting-started/advanced#about-sx-and-css",
     "hierarchy": {
       "lv1": "Learning Applications",
-      "lv2": "About `as`",
+      "lv2": "Applying Styles",
       "lv3": "About `sx` and `css`"
     }
   },
@@ -759,7 +759,7 @@
     "slug": "/getting-started/advanced#about-the-order",
     "hierarchy": {
       "lv1": "Learning Applications",
-      "lv2": "About `sx` and `css`",
+      "lv2": "Applying Styles",
       "lv3": "About the Order"
     }
   },
@@ -767,11 +767,7 @@
     "title": "Application of Responsiveness",
     "type": "fragment",
     "slug": "/getting-started/advanced#application-of-responsiveness",
-    "hierarchy": {
-      "lv1": "Learning Applications",
-      "lv2": "Application of Responsiveness",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Responsiveness" }
   },
   {
     "title": "Using `useBreakpoint`",
@@ -789,7 +785,7 @@
     "slug": "/getting-started/advanced#using-usebreakpointvalue",
     "hierarchy": {
       "lv1": "Learning Applications",
-      "lv2": "Using `useBreakpoint`",
+      "lv2": "Application of Responsiveness",
       "lv3": "Using `useBreakpointValue`"
     }
   },
@@ -797,7 +793,7 @@
     "title": "Application of Color Mode",
     "type": "fragment",
     "slug": "/getting-started/advanced#application-of-color-mode",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Color Mode", "lv3": null }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Color Mode" }
   },
   {
     "title": "Using `useColorMode`",
@@ -815,7 +811,7 @@
     "slug": "/getting-started/advanced#using-usecolormodevalue",
     "hierarchy": {
       "lv1": "Learning Applications",
-      "lv2": "Using `useColorMode`",
+      "lv2": "Application of Color Mode",
       "lv3": "Using `useColorModeValue`"
     }
   },
@@ -823,7 +819,7 @@
     "title": "Application of Animation",
     "type": "fragment",
     "slug": "/getting-started/advanced#application-of-animation",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Animation", "lv3": null }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Application of Animation" }
   },
   {
     "title": "Using Multiple Animations with `useAnimation`",
@@ -841,7 +837,7 @@
     "slug": "/getting-started/advanced#using-usedynamicanimation",
     "hierarchy": {
       "lv1": "Learning Applications",
-      "lv2": "Using Multiple Animations with `useAnimation`",
+      "lv2": "Application of Animation",
       "lv3": "Using `useDynamicAnimation`"
     }
   },
@@ -849,13 +845,13 @@
     "title": "Congratulations!",
     "type": "fragment",
     "slug": "/getting-started/advanced#congratulations",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Congratulations!", "lv3": null }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Congratulations!" }
   },
   {
     "title": "Learn More",
     "type": "fragment",
     "slug": "/getting-started/advanced#learn-more",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Learn More", "lv3": null }
+    "hierarchy": { "lv1": "Learning Applications", "lv2": "Learn More" }
   },
   {
     "title": "Learning the Basics",
@@ -868,7 +864,7 @@
     "title": "About Themes",
     "type": "fragment",
     "slug": "/getting-started/basics#about-themes",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Themes", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Themes" }
   },
   {
     "title": "Customizing the Theme",
@@ -886,7 +882,7 @@
     "slug": "/getting-started/basics#changing-semantic-tokens",
     "hierarchy": {
       "lv1": "Learning the Basics",
-      "lv2": "Customizing the Theme",
+      "lv2": "About Themes",
       "lv3": "Changing Semantic Tokens"
     }
   },
@@ -894,11 +890,7 @@
     "title": "Using Loading",
     "type": "fragment",
     "slug": "/getting-started/basics#using-loading",
-    "hierarchy": {
-      "lv1": "Learning the Basics",
-      "lv2": "Changing Semantic Tokens",
-      "lv3": "Using Loading"
-    }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Themes", "lv3": "Using Loading" }
   },
   {
     "title": "Using Notifications",
@@ -906,7 +898,7 @@
     "slug": "/getting-started/basics#using-notifications",
     "hierarchy": {
       "lv1": "Learning the Basics",
-      "lv2": "Using Loading",
+      "lv2": "About Themes",
       "lv3": "Using Notifications"
     }
   },
@@ -914,7 +906,7 @@
     "title": "About Styles",
     "type": "fragment",
     "slug": "/getting-started/basics#about-styles",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Styles", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Styles" }
   },
   {
     "title": "Pseudo Elements",
@@ -926,13 +918,13 @@
     "title": "Component",
     "type": "fragment",
     "slug": "/getting-started/basics#component",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Pseudo Elements", "lv3": "Component" }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Styles", "lv3": "Component" }
   },
   {
     "title": "About Responsiveness",
     "type": "fragment",
     "slug": "/getting-started/basics#about-responsiveness",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Responsiveness", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Responsiveness" }
   },
   {
     "title": "About Breakpoints",
@@ -948,7 +940,7 @@
     "title": "About Color Mode",
     "type": "fragment",
     "slug": "/getting-started/basics#about-color-mode",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Color Mode", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Color Mode" }
   },
   {
     "title": "Switching Color Modes",
@@ -964,7 +956,7 @@
     "title": "About Animation",
     "type": "fragment",
     "slug": "/getting-started/basics#about-animation",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation" }
   },
   {
     "title": "Using `useAnimation`",
@@ -980,23 +972,19 @@
     "title": "Using `Motion`",
     "type": "fragment",
     "slug": "/getting-started/basics#using-motion",
-    "hierarchy": {
-      "lv1": "Learning the Basics",
-      "lv2": "Using `useAnimation`",
-      "lv3": "Using `Motion`"
-    }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "About Animation", "lv3": "Using `Motion`" }
   },
   {
     "title": "Congratulations!",
     "type": "fragment",
     "slug": "/getting-started/basics#congratulations",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Congratulations!", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Congratulations!" }
   },
   {
     "title": "Learn More",
     "type": "fragment",
     "slug": "/getting-started/basics#learn-more",
-    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Learn More", "lv3": null }
+    "hierarchy": { "lv1": "Learning the Basics", "lv2": "Learn More" }
   },
   {
     "title": "Getting Started with Create React App",
@@ -1009,31 +997,19 @@
     "title": "Installation",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#installation",
-    "hierarchy": {
-      "lv1": "Getting Started with Create React App",
-      "lv2": "Installation",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Getting Started with Create React App", "lv2": "Installation" }
   },
   {
     "title": "Add `UIProvider`",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#add-uiprovider",
-    "hierarchy": {
-      "lv1": "Getting Started with Create React App",
-      "lv2": "Add `UIProvider`",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Getting Started with Create React App", "lv2": "Add `UIProvider`" }
   },
   {
     "title": "Use the components",
     "type": "fragment",
     "slug": "/getting-started/frameworks/create-react-app#use-the-components",
-    "hierarchy": {
-      "lv1": "Getting Started with Create React App",
-      "lv2": "Use the components",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Getting Started with Create React App", "lv2": "Use the components" }
   },
   {
     "title": "Framework",
@@ -1053,29 +1029,25 @@
     "title": "Installation",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#installation",
-    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Installation", "lv3": null }
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Installation" }
   },
   {
     "title": "Add `UIProvider`",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#add-uiprovider",
-    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Add `UIProvider`", "lv3": null }
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Add `UIProvider`" }
   },
   {
     "title": "Incorporate `ColorModeScript`",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#incorporate-colormodescript",
-    "hierarchy": {
-      "lv1": "Getting Started with Next.js",
-      "lv2": "Incorporate `ColorModeScript`",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Incorporate `ColorModeScript`" }
   },
   {
     "title": "Use the components",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#use-the-components",
-    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Use the components", "lv3": null }
+    "hierarchy": { "lv1": "Getting Started with Next.js", "lv2": "Use the components" }
   },
   {
     "title": "Getting Started",
@@ -1095,25 +1067,25 @@
     "title": "Installation",
     "type": "fragment",
     "slug": "/getting-started/installation#installation",
-    "hierarchy": { "lv1": "Installation", "lv2": "Installation", "lv3": null }
+    "hierarchy": { "lv1": "Installation", "lv2": "Installation" }
   },
   {
     "title": "Add `UIProvider`",
     "type": "fragment",
     "slug": "/getting-started/installation#add-uiprovider",
-    "hierarchy": { "lv1": "Installation", "lv2": "Add `UIProvider`", "lv3": null }
+    "hierarchy": { "lv1": "Installation", "lv2": "Add `UIProvider`" }
   },
   {
     "title": "Use the components",
     "type": "fragment",
     "slug": "/getting-started/installation#use-the-components",
-    "hierarchy": { "lv1": "Installation", "lv2": "Use the components", "lv3": null }
+    "hierarchy": { "lv1": "Installation", "lv2": "Use the components" }
   },
   {
     "title": "Start Learning",
     "type": "fragment",
     "slug": "/getting-started/installation#start-learning",
-    "hierarchy": { "lv1": "Installation", "lv2": "Start Learning", "lv3": null }
+    "hierarchy": { "lv1": "Installation", "lv2": "Start Learning" }
   },
   {
     "title": "Hooks",
@@ -1133,13 +1105,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-animation#import",
-    "hierarchy": { "lv1": "useAnimation", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-animation#usage",
-    "hierarchy": { "lv1": "useAnimation", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Usage" }
   },
   {
     "title": "Use Multiple Animations",
@@ -1151,17 +1123,13 @@
     "title": "Responsive Style",
     "type": "fragment",
     "slug": "/hooks/use-animation#responsive-style",
-    "hierarchy": {
-      "lv1": "useAnimation",
-      "lv2": "Use Multiple Animations",
-      "lv3": "Responsive Style"
-    }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Usage", "lv3": "Responsive Style" }
   },
   {
     "title": "Color Mode",
     "type": "fragment",
     "slug": "/hooks/use-animation#color-mode",
-    "hierarchy": { "lv1": "useAnimation", "lv2": "Responsive Style", "lv3": "Color Mode" }
+    "hierarchy": { "lv1": "useAnimation", "lv2": "Usage", "lv3": "Color Mode" }
   },
   {
     "title": "useAsync",
@@ -1174,13 +1142,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-async#import",
-    "hierarchy": { "lv1": "useAsync", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useAsync", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-async#usage",
-    "hierarchy": { "lv1": "useAsync", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useAsync", "lv2": "Usage" }
   },
   {
     "title": "Re-execution",
@@ -1199,13 +1167,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-boolean#import",
-    "hierarchy": { "lv1": "useBoolean", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useBoolean", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-boolean#usage",
-    "hierarchy": { "lv1": "useBoolean", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useBoolean", "lv2": "Usage" }
   },
   {
     "title": "Use initial value",
@@ -1224,13 +1192,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint-value#import",
-    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint-value#usage",
-    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpointValue", "lv2": "Usage" }
   },
   {
     "title": "useBreakpoint",
@@ -1243,13 +1211,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint#import",
-    "hierarchy": { "lv1": "useBreakpoint", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpoint", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-breakpoint#usage",
-    "hierarchy": { "lv1": "useBreakpoint", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useBreakpoint", "lv2": "Usage" }
   },
   {
     "title": "useClipboard",
@@ -1262,13 +1230,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#import",
-    "hierarchy": { "lv1": "useClipboard", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#usage",
-    "hierarchy": { "lv1": "useClipboard", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Usage" }
   },
   {
     "title": "Using Initial Values",
@@ -1280,21 +1248,13 @@
     "title": "Controlling Timeout",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#controlling-timeout",
-    "hierarchy": {
-      "lv1": "useClipboard",
-      "lv2": "Using Initial Values",
-      "lv3": "Controlling Timeout"
-    }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Usage", "lv3": "Controlling Timeout" }
   },
   {
     "title": "Copy the specified value",
     "type": "fragment",
     "slug": "/hooks/use-clipboard#copy-the-specified-value",
-    "hierarchy": {
-      "lv1": "useClipboard",
-      "lv2": "Controlling Timeout",
-      "lv3": "Copy the specified value"
-    }
+    "hierarchy": { "lv1": "useClipboard", "lv2": "Usage", "lv3": "Copy the specified value" }
   },
   {
     "title": "useColorModeValue",
@@ -1307,13 +1267,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-color-mode-value#import",
-    "hierarchy": { "lv1": "useColorModeValue", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useColorModeValue", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-color-mode-value#usage",
-    "hierarchy": { "lv1": "useColorModeValue", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useColorModeValue", "lv2": "Usage" }
   },
   {
     "title": "useColorMode",
@@ -1326,13 +1286,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-color-mode#import",
-    "hierarchy": { "lv1": "useColorMode", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useColorMode", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-color-mode#usage",
-    "hierarchy": { "lv1": "useColorMode", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useColorMode", "lv2": "Usage" }
   },
   {
     "title": "useDisclosure",
@@ -1345,13 +1305,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-disclosure#import",
-    "hierarchy": { "lv1": "useDisclosure", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-disclosure#usage",
-    "hierarchy": { "lv1": "useDisclosure", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useDisclosure", "lv2": "Usage" }
   },
   {
     "title": "Using Callback Functions",
@@ -1370,13 +1330,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-dynamic-animation#import",
-    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-dynamic-animation#usage",
-    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useDynamicAnimation", "lv2": "Usage" }
   },
   {
     "title": "Use Multiple Animations",
@@ -1395,13 +1355,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-hover#import",
-    "hierarchy": { "lv1": "useHover", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useHover", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-hover#usage",
-    "hierarchy": { "lv1": "useHover", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useHover", "lv2": "Usage" }
   },
   {
     "title": "useIdle",
@@ -1414,13 +1374,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-idle#import",
-    "hierarchy": { "lv1": "useIdle", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useIdle", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-idle#usage",
-    "hierarchy": { "lv1": "useIdle", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useIdle", "lv2": "Usage" }
   },
   {
     "title": "useInterval",
@@ -1433,13 +1393,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-interval#import",
-    "hierarchy": { "lv1": "useInterval", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useInterval", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-interval#usage",
-    "hierarchy": { "lv1": "useInterval", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useInterval", "lv2": "Usage" }
   },
   {
     "title": "useLoading",
@@ -1452,13 +1412,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-loading#import",
-    "hierarchy": { "lv1": "useLoading", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useLoading", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-loading#usage",
-    "hierarchy": { "lv1": "useLoading", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useLoading", "lv2": "Usage" }
   },
   {
     "title": "Add a Timeout",
@@ -1470,13 +1430,13 @@
     "title": "Add a Message",
     "type": "fragment",
     "slug": "/hooks/use-loading#add-a-message",
-    "hierarchy": { "lv1": "useLoading", "lv2": "Add a Timeout", "lv3": "Add a Message" }
+    "hierarchy": { "lv1": "useLoading", "lv2": "Usage", "lv3": "Add a Message" }
   },
   {
     "title": "Update the message",
     "type": "fragment",
     "slug": "/hooks/use-loading#update-the-message",
-    "hierarchy": { "lv1": "useLoading", "lv2": "Add a Message", "lv3": "Update the message" }
+    "hierarchy": { "lv1": "useLoading", "lv2": "Usage", "lv3": "Update the message" }
   },
   {
     "title": "useLocalStorage",
@@ -1489,13 +1449,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-local-storage#import",
-    "hierarchy": { "lv1": "useLocalStorage", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useLocalStorage", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-local-storage#usage",
-    "hierarchy": { "lv1": "useLocalStorage", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useLocalStorage", "lv2": "Usage" }
   },
   {
     "title": "useMediaQuery",
@@ -1508,13 +1468,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-media-query#import",
-    "hierarchy": { "lv1": "useMediaQuery", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useMediaQuery", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-media-query#usage",
-    "hierarchy": { "lv1": "useMediaQuery", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useMediaQuery", "lv2": "Usage" }
   },
   {
     "title": "useNotice",
@@ -1527,19 +1487,19 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-notice#import",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useNotice", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-notice#usage",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useNotice", "lv2": "Usage" }
   },
   {
     "title": "Customize Notifications",
     "type": "fragment",
     "slug": "/hooks/use-notice#customize-notifications",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Customize Notifications", "lv3": null }
+    "hierarchy": { "lv1": "useNotice", "lv2": "Customize Notifications" }
   },
   {
     "title": "Change Display Time",
@@ -1555,13 +1515,13 @@
     "title": "Maintain",
     "type": "fragment",
     "slug": "/hooks/use-notice#maintain",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Change Display Time", "lv3": "Maintain" }
+    "hierarchy": { "lv1": "useNotice", "lv2": "Customize Notifications", "lv3": "Maintain" }
   },
   {
     "title": "Change Position",
     "type": "fragment",
     "slug": "/hooks/use-notice#change-position",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Maintain", "lv3": "Change Position" }
+    "hierarchy": { "lv1": "useNotice", "lv2": "Customize Notifications", "lv3": "Change Position" }
   },
   {
     "title": "Limit the number of displays",
@@ -1569,7 +1529,7 @@
     "slug": "/hooks/use-notice#limit-the-number-of-displays",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Change Position",
+      "lv2": "Customize Notifications",
       "lv3": "Limit the number of displays"
     }
   },
@@ -1579,7 +1539,7 @@
     "slug": "/hooks/use-notice#change-the-variant",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Limit the number of displays",
+      "lv2": "Customize Notifications",
       "lv3": "Change the Variant"
     }
   },
@@ -1587,13 +1547,21 @@
     "title": "Change the Status",
     "type": "fragment",
     "slug": "/hooks/use-notice#change-the-status",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Change the Variant", "lv3": "Change the Status" }
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Customize Notifications",
+      "lv3": "Change the Status"
+    }
   },
   {
     "title": "Using Color Schemes",
     "type": "fragment",
     "slug": "/hooks/use-notice#using-color-schemes",
-    "hierarchy": { "lv1": "useNotice", "lv2": "Change the Status", "lv3": "Using Color Schemes" }
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Customize Notifications",
+      "lv3": "Using Color Schemes"
+    }
   },
   {
     "title": "Changing the Loading Icon Variant",
@@ -1601,7 +1569,7 @@
     "slug": "/hooks/use-notice#changing-the-loading-icon-variant",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Using Color Schemes",
+      "lv2": "Customize Notifications",
       "lv3": "Changing the Loading Icon Variant"
     }
   },
@@ -1611,7 +1579,7 @@
     "slug": "/hooks/use-notice#update-the-notification",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Changing the Loading Icon Variant",
+      "lv2": "Customize Notifications",
       "lv3": "Update the notification"
     }
   },
@@ -1621,7 +1589,7 @@
     "slug": "/hooks/use-notice#close-notification",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Update the notification",
+      "lv2": "Customize Notifications",
       "lv3": "Close Notification"
     }
   },
@@ -1631,7 +1599,7 @@
     "slug": "/hooks/use-notice#customizing-components",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Close Notification",
+      "lv2": "Customize Notifications",
       "lv3": "Customizing Components"
     }
   },
@@ -1641,7 +1609,7 @@
     "slug": "/hooks/use-notice#customize-the-style",
     "hierarchy": {
       "lv1": "useNotice",
-      "lv2": "Customizing Components",
+      "lv2": "Customize Notifications",
       "lv3": "Customize the style"
     }
   },
@@ -1656,13 +1624,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-os#import",
-    "hierarchy": { "lv1": "useOS", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useOS", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-os#usage",
-    "hierarchy": { "lv1": "useOS", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useOS", "lv2": "Usage" }
   },
   {
     "title": "useOutsideClick",
@@ -1675,13 +1643,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-outside-click#import",
-    "hierarchy": { "lv1": "useOutsideClick", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useOutsideClick", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-outside-click#usage",
-    "hierarchy": { "lv1": "useOutsideClick", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useOutsideClick", "lv2": "Usage" }
   },
   {
     "title": "usePrevious",
@@ -1694,13 +1662,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-previous#import",
-    "hierarchy": { "lv1": "usePrevious", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "usePrevious", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-previous#usage",
-    "hierarchy": { "lv1": "usePrevious", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "usePrevious", "lv2": "Usage" }
   },
   {
     "title": "useResizeObserver",
@@ -1713,13 +1681,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-resize-observer#import",
-    "hierarchy": { "lv1": "useResizeObserver", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useResizeObserver", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-resize-observer#usage",
-    "hierarchy": { "lv1": "useResizeObserver", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useResizeObserver", "lv2": "Usage" }
   },
   {
     "title": "useTheme",
@@ -1732,13 +1700,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-theme#import",
-    "hierarchy": { "lv1": "useTheme", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useTheme", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-theme#usage",
-    "hierarchy": { "lv1": "useTheme", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useTheme", "lv2": "Usage" }
   },
   {
     "title": "Switch theme",
@@ -1757,13 +1725,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-timeout#import",
-    "hierarchy": { "lv1": "useTimeout", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useTimeout", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-timeout#usage",
-    "hierarchy": { "lv1": "useTimeout", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useTimeout", "lv2": "Usage" }
   },
   {
     "title": "useToken",
@@ -1776,13 +1744,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-token#import",
-    "hierarchy": { "lv1": "useToken", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useToken", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-token#usage",
-    "hierarchy": { "lv1": "useToken", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useToken", "lv2": "Usage" }
   },
   {
     "title": "useUpdateEffect",
@@ -1795,13 +1763,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-update-effect#import",
-    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-update-effect#usage",
-    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useUpdateEffect", "lv2": "Usage" }
   },
   {
     "title": "useValue",
@@ -1814,13 +1782,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-value#import",
-    "hierarchy": { "lv1": "useValue", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useValue", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-value#usage",
-    "hierarchy": { "lv1": "useValue", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useValue", "lv2": "Usage" }
   },
   {
     "title": "useWindowEvent",
@@ -1833,13 +1801,13 @@
     "title": "Import",
     "type": "fragment",
     "slug": "/hooks/use-window-event#import",
-    "hierarchy": { "lv1": "useWindowEvent", "lv2": "Import", "lv3": null }
+    "hierarchy": { "lv1": "useWindowEvent", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
     "slug": "/hooks/use-window-event#usage",
-    "hierarchy": { "lv1": "useWindowEvent", "lv2": "Usage", "lv3": null }
+    "hierarchy": { "lv1": "useWindowEvent", "lv2": "Usage" }
   },
   {
     "title": "Animation",
@@ -1852,7 +1820,7 @@
     "title": "CSS Animation",
     "type": "fragment",
     "slug": "/styled-system/animation#css-animation",
-    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": null }
+    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation" }
   },
   {
     "title": "Using `useAnimation`",
@@ -1864,47 +1832,67 @@
     "title": "Using multiple animations",
     "type": "fragment",
     "slug": "/styled-system/animation#using-multiple-animations",
-    "hierarchy": { "lv1": "Animation", "lv2": "Using `useAnimation`", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "CSS Animation",
+      "lv3": "Using `useAnimation`",
+      "lv4": "Using multiple animations"
+    }
   },
   {
     "title": "Responsive styles",
     "type": "fragment",
     "slug": "/styled-system/animation#responsive-styles",
-    "hierarchy": { "lv1": "Animation", "lv2": "Using multiple animations", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "CSS Animation",
+      "lv3": "Using `useAnimation`",
+      "lv4": "Responsive styles"
+    }
   },
   {
     "title": "Color mode",
     "type": "fragment",
     "slug": "/styled-system/animation#color-mode",
-    "hierarchy": { "lv1": "Animation", "lv2": "Responsive styles", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "CSS Animation",
+      "lv3": "Using `useAnimation`",
+      "lv4": "Color mode"
+    }
   },
   {
     "title": "Using `useDynamicAnimation`",
     "type": "fragment",
     "slug": "/styled-system/animation#using-usedynamicanimation",
-    "hierarchy": { "lv1": "Animation", "lv2": "Color mode", "lv3": "Using `useDynamicAnimation`" }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "CSS Animation",
+      "lv3": "Using `useDynamicAnimation`"
+    }
   },
   {
     "title": "Combining with multiple animations",
     "type": "fragment",
     "slug": "/styled-system/animation#combining-with-multiple-animations",
-    "hierarchy": { "lv1": "Animation", "lv2": "Using `useDynamicAnimation`", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "CSS Animation",
+      "lv3": "Using `useDynamicAnimation`",
+      "lv4": "Combining with multiple animations"
+    }
   },
   {
     "title": "Using Theme Tokens",
     "type": "fragment",
     "slug": "/styled-system/animation#using-theme-tokens",
-    "hierarchy": {
-      "lv1": "Animation",
-      "lv2": "Combining with multiple animations",
-      "lv3": "Using Theme Tokens"
-    }
+    "hierarchy": { "lv1": "Animation", "lv2": "CSS Animation", "lv3": "Using Theme Tokens" }
   },
   {
     "title": "Motion",
     "type": "fragment",
     "slug": "/styled-system/animation#motion",
-    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": null }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion" }
   },
   {
     "title": "Animation",
@@ -1916,73 +1904,98 @@
     "title": "Using `AnimatePresence`",
     "type": "fragment",
     "slug": "/styled-system/animation#using-animatepresence",
-    "hierarchy": { "lv1": "Animation", "lv2": "Animation", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Animation",
+      "lv4": "Using `AnimatePresence`"
+    }
   },
   {
     "title": "Keyframes",
     "type": "fragment",
     "slug": "/styled-system/animation#keyframes",
-    "hierarchy": { "lv1": "Animation", "lv2": "Using `AnimatePresence`", "lv3": null }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Animation", "lv4": "Keyframes" }
   },
   {
     "title": "Using `useMotionAnimationFrame`",
     "type": "fragment",
     "slug": "/styled-system/animation#using-usemotionanimationframe",
-    "hierarchy": { "lv1": "Animation", "lv2": "Keyframes", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Animation",
+      "lv4": "Using `useMotionAnimationFrame`"
+    }
   },
   {
     "title": "Gestures",
     "type": "fragment",
     "slug": "/styled-system/animation#gestures",
-    "hierarchy": { "lv1": "Animation", "lv2": "Using `useMotionAnimationFrame`", "lv3": "Gestures" }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Gestures" }
   },
   {
     "title": "Hover",
     "type": "fragment",
     "slug": "/styled-system/animation#hover",
-    "hierarchy": { "lv1": "Animation", "lv2": "Gestures", "lv3": null }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Gestures", "lv4": "Hover" }
   },
   {
     "title": "Click/Tap",
     "type": "fragment",
     "slug": "/styled-system/animation#clicktap",
-    "hierarchy": { "lv1": "Animation", "lv2": "Hover", "lv3": null }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Gestures", "lv4": "Click/Tap" }
   },
   {
     "title": "Focus",
     "type": "fragment",
     "slug": "/styled-system/animation#focus",
-    "hierarchy": { "lv1": "Animation", "lv2": "Click/Tap", "lv3": null }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Gestures", "lv4": "Focus" }
   },
   {
     "title": "Drag",
     "type": "fragment",
     "slug": "/styled-system/animation#drag",
-    "hierarchy": { "lv1": "Animation", "lv2": "Focus", "lv3": "Drag" }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Drag" }
   },
   {
     "title": "Constraining the possible area",
     "type": "fragment",
     "slug": "/styled-system/animation#constraining-the-possible-area",
-    "hierarchy": { "lv1": "Animation", "lv2": "Drag", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Drag",
+      "lv4": "Constraining the possible area"
+    }
   },
   {
     "title": "Elasticity and Momentum",
     "type": "fragment",
     "slug": "/styled-system/animation#elasticity-and-momentum",
-    "hierarchy": { "lv1": "Animation", "lv2": "Constraining the possible area", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Drag",
+      "lv4": "Elasticity and Momentum"
+    }
   },
   {
     "title": "Scroll",
     "type": "fragment",
     "slug": "/styled-system/animation#scroll",
-    "hierarchy": { "lv1": "Animation", "lv2": "Elasticity and Momentum", "lv3": "Scroll" }
+    "hierarchy": { "lv1": "Animation", "lv2": "Motion", "lv3": "Scroll" }
   },
   {
     "title": "Using `useScroll`",
     "type": "fragment",
     "slug": "/styled-system/animation#using-usescroll",
-    "hierarchy": { "lv1": "Animation", "lv2": "Scroll", "lv3": null }
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Scroll",
+      "lv4": "Using `useScroll`"
+    }
   },
   {
     "title": "CLI",
@@ -1995,13 +2008,13 @@
     "title": "Installation",
     "type": "fragment",
     "slug": "/styled-system/cli#installation",
-    "hierarchy": { "lv1": "CLI", "lv2": "Installation", "lv3": null }
+    "hierarchy": { "lv1": "CLI", "lv2": "Installation" }
   },
   {
     "title": "How to use",
     "type": "fragment",
     "slug": "/styled-system/cli#how-to-use",
-    "hierarchy": { "lv1": "CLI", "lv2": "How to use", "lv3": null }
+    "hierarchy": { "lv1": "CLI", "lv2": "How to use" }
   },
   {
     "title": "Color Mode",
@@ -2014,7 +2027,7 @@
     "title": "Setup",
     "type": "fragment",
     "slug": "/styled-system/color-mode#setup",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": null }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup" }
   },
   {
     "title": "Customize the Config",
@@ -2026,29 +2039,35 @@
     "title": "Add `ColorModeScript`",
     "type": "fragment",
     "slug": "/styled-system/color-mode#add-colormodescript",
-    "hierarchy": {
-      "lv1": "Color Mode",
-      "lv2": "Customize the Config",
-      "lv3": "Add `ColorModeScript`"
-    }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Setup", "lv3": "Add `ColorModeScript`" }
   },
   {
     "title": "In the case of Create React App",
     "type": "fragment",
     "slug": "/styled-system/color-mode#in-the-case-of-create-react-app",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Add `ColorModeScript`", "lv3": null }
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Setup",
+      "lv3": "Add `ColorModeScript`",
+      "lv4": "In the case of Create React App"
+    }
   },
   {
     "title": "In the case of Next.js",
     "type": "fragment",
     "slug": "/styled-system/color-mode#in-the-case-of-nextjs",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "In the case of Create React App", "lv3": null }
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Setup",
+      "lv3": "Add `ColorModeScript`",
+      "lv4": "In the case of Next.js"
+    }
   },
   {
     "title": "Adding `colorModeManager`",
     "type": "fragment",
     "slug": "/styled-system/color-mode#adding-colormodemanager",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Adding `colorModeManager`", "lv3": null }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Adding `colorModeManager`" }
   },
   {
     "title": "Prepare `getServerSideProps`",
@@ -2066,7 +2085,7 @@
     "slug": "/styled-system/color-mode#passing-cookiestoragessr",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Prepare `getServerSideProps`",
+      "lv2": "Adding `colorModeManager`",
       "lv3": "Passing `cookieStorageSSR`"
     }
   },
@@ -2076,7 +2095,7 @@
     "slug": "/styled-system/color-mode#add-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Passing `cookieStorageSSR`",
+      "lv2": "Adding `colorModeManager`",
       "lv3": "Add `getServerSideProps`"
     }
   },
@@ -2084,19 +2103,19 @@
     "title": "Syntax of Color Mode",
     "type": "fragment",
     "slug": "/styled-system/color-mode#syntax-of-color-mode",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Syntax of Color Mode", "lv3": null }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Syntax of Color Mode" }
   },
   {
     "title": "Switching Color Modes",
     "type": "fragment",
     "slug": "/styled-system/color-mode#switching-color-modes",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Switching Color Modes", "lv3": null }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Switching Color Modes" }
   },
   {
     "title": "Color Mode Utility",
     "type": "fragment",
     "slug": "/styled-system/color-mode#color-mode-utility",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility", "lv3": null }
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility" }
   },
   {
     "title": "Using `useColorMode`",
@@ -2110,7 +2129,7 @@
     "slug": "/styled-system/color-mode#using-usecolormodevalue",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Using `useColorMode`",
+      "lv2": "Color Mode Utility",
       "lv3": "Using `useColorModeValue`"
     }
   },
@@ -2125,7 +2144,7 @@
     "title": "Change Color Mode",
     "type": "fragment",
     "slug": "/styled-system/configure/customize-config#change-color-mode",
-    "hierarchy": { "lv1": "Customizing the Config", "lv2": "Change Color Mode", "lv3": null }
+    "hierarchy": { "lv1": "Customizing the Config", "lv2": "Change Color Mode" }
   },
   {
     "title": "Changing the prefix of `CSS` custom properties",
@@ -2133,8 +2152,7 @@
     "slug": "/styled-system/configure/customize-config#changing-the-prefix-of-css-custom-properties",
     "hierarchy": {
       "lv1": "Customizing the Config",
-      "lv2": "Changing the prefix of `CSS` custom properties",
-      "lv3": null
+      "lv2": "Changing the prefix of `CSS` custom properties"
     }
   },
   {
@@ -2162,13 +2180,13 @@
     "title": "Customizing Global Styles",
     "type": "fragment",
     "slug": "/styled-system/global-styles#customizing-global-styles",
-    "hierarchy": { "lv1": "Global Style", "lv2": "Customizing Global Styles", "lv3": null }
+    "hierarchy": { "lv1": "Global Style", "lv2": "Customizing Global Styles" }
   },
   {
     "title": "Adding Global Styles",
     "type": "fragment",
     "slug": "/styled-system/global-styles#adding-global-styles",
-    "hierarchy": { "lv1": "Global Style", "lv2": "Adding Global Styles", "lv3": null }
+    "hierarchy": { "lv1": "Global Style", "lv2": "Adding Global Styles" }
   },
   {
     "title": "Gradient",
@@ -2181,7 +2199,7 @@
     "title": "How to use",
     "type": "fragment",
     "slug": "/styled-system/gradient#how-to-use",
-    "hierarchy": { "lv1": "Gradient", "lv2": "How to use", "lv3": null }
+    "hierarchy": { "lv1": "Gradient", "lv2": "How to use" }
   },
   {
     "title": "Color Customization",
@@ -2193,19 +2211,19 @@
     "title": "Gradient Tokens",
     "type": "fragment",
     "slug": "/styled-system/gradient#gradient-tokens",
-    "hierarchy": { "lv1": "Gradient", "lv2": "Color Customization", "lv3": "Gradient Tokens" }
+    "hierarchy": { "lv1": "Gradient", "lv2": "How to use", "lv3": "Gradient Tokens" }
   },
   {
     "title": "Text Gradient",
     "type": "fragment",
     "slug": "/styled-system/gradient#text-gradient",
-    "hierarchy": { "lv1": "Gradient", "lv2": "Text Gradient", "lv3": null }
+    "hierarchy": { "lv1": "Gradient", "lv2": "Text Gradient" }
   },
   {
     "title": "Responsive Gradients",
     "type": "fragment",
     "slug": "/styled-system/gradient#responsive-gradients",
-    "hierarchy": { "lv1": "Gradient", "lv2": "Responsive Gradients", "lv3": null }
+    "hierarchy": { "lv1": "Gradient", "lv2": "Responsive Gradients" }
   },
   {
     "title": "Style System",
@@ -2225,13 +2243,13 @@
     "title": "How to use",
     "type": "fragment",
     "slug": "/styled-system/loading#how-to-use",
-    "hierarchy": { "lv1": "Loading", "lv2": "How to use", "lv3": null }
+    "hierarchy": { "lv1": "Loading", "lv2": "How to use" }
   },
   {
     "title": "Customizing Loading",
     "type": "fragment",
     "slug": "/styled-system/loading#customizing-loading",
-    "hierarchy": { "lv1": "Loading", "lv2": "Customizing Loading", "lv3": null }
+    "hierarchy": { "lv1": "Loading", "lv2": "Customizing Loading" }
   },
   {
     "title": "Adding a Timeout",
@@ -2243,19 +2261,19 @@
     "title": "Add a Message",
     "type": "fragment",
     "slug": "/styled-system/loading#add-a-message",
-    "hierarchy": { "lv1": "Loading", "lv2": "Adding a Timeout", "lv3": "Add a Message" }
+    "hierarchy": { "lv1": "Loading", "lv2": "Customizing Loading", "lv3": "Add a Message" }
   },
   {
     "title": "Update the message",
     "type": "fragment",
     "slug": "/styled-system/loading#update-the-message",
-    "hierarchy": { "lv1": "Loading", "lv2": "Add a Message", "lv3": "Update the message" }
+    "hierarchy": { "lv1": "Loading", "lv2": "Customizing Loading", "lv3": "Update the message" }
   },
   {
     "title": "Customize from Config",
     "type": "fragment",
     "slug": "/styled-system/loading#customize-from-config",
-    "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config", "lv3": null }
+    "hierarchy": { "lv1": "Loading", "lv2": "Customize from Config" }
   },
   {
     "title": "Using `initialState`",
@@ -2269,7 +2287,7 @@
     "slug": "/styled-system/loading#using-custom-components",
     "hierarchy": {
       "lv1": "Loading",
-      "lv2": "Using `initialState`",
+      "lv2": "Customize from Config",
       "lv3": "Using Custom Components"
     }
   },
@@ -2284,13 +2302,13 @@
     "title": "How to use",
     "type": "fragment",
     "slug": "/styled-system/notification#how-to-use",
-    "hierarchy": { "lv1": "Notification", "lv2": "How to use", "lv3": null }
+    "hierarchy": { "lv1": "Notification", "lv2": "How to use" }
   },
   {
     "title": "Customize Notifications",
     "type": "fragment",
     "slug": "/styled-system/notification#customize-notifications",
-    "hierarchy": { "lv1": "Notification", "lv2": "Customize Notifications", "lv3": null }
+    "hierarchy": { "lv1": "Notification", "lv2": "Customize Notifications" }
   },
   {
     "title": "Change Display Time",
@@ -2306,13 +2324,17 @@
     "title": "Maintain",
     "type": "fragment",
     "slug": "/styled-system/notification#maintain",
-    "hierarchy": { "lv1": "Notification", "lv2": "Change Display Time", "lv3": "Maintain" }
+    "hierarchy": { "lv1": "Notification", "lv2": "Customize Notifications", "lv3": "Maintain" }
   },
   {
     "title": "Change Position",
     "type": "fragment",
     "slug": "/styled-system/notification#change-position",
-    "hierarchy": { "lv1": "Notification", "lv2": "Maintain", "lv3": "Change Position" }
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Position"
+    }
   },
   {
     "title": "Limit the number of displays",
@@ -2320,7 +2342,7 @@
     "slug": "/styled-system/notification#limit-the-number-of-displays",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Change Position",
+      "lv2": "Customize Notifications",
       "lv3": "Limit the number of displays"
     }
   },
@@ -2330,7 +2352,7 @@
     "slug": "/styled-system/notification#change-the-variant",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Limit the number of displays",
+      "lv2": "Customize Notifications",
       "lv3": "Change the Variant"
     }
   },
@@ -2338,13 +2360,21 @@
     "title": "Change the Status",
     "type": "fragment",
     "slug": "/styled-system/notification#change-the-status",
-    "hierarchy": { "lv1": "Notification", "lv2": "Change the Variant", "lv3": "Change the Status" }
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customize Notifications",
+      "lv3": "Change the Status"
+    }
   },
   {
     "title": "Using Color Schemes",
     "type": "fragment",
     "slug": "/styled-system/notification#using-color-schemes",
-    "hierarchy": { "lv1": "Notification", "lv2": "Change the Status", "lv3": "Using Color Schemes" }
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customize Notifications",
+      "lv3": "Using Color Schemes"
+    }
   },
   {
     "title": "Changing the Loading Icon Variant",
@@ -2352,7 +2382,7 @@
     "slug": "/styled-system/notification#changing-the-loading-icon-variant",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Using Color Schemes",
+      "lv2": "Customize Notifications",
       "lv3": "Changing the Loading Icon Variant"
     }
   },
@@ -2362,7 +2392,7 @@
     "slug": "/styled-system/notification#update-the-notification",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Changing the Loading Icon Variant",
+      "lv2": "Customize Notifications",
       "lv3": "Update the notification"
     }
   },
@@ -2372,7 +2402,7 @@
     "slug": "/styled-system/notification#close-notification",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Update the notification",
+      "lv2": "Customize Notifications",
       "lv3": "Close Notification"
     }
   },
@@ -2382,7 +2412,7 @@
     "slug": "/styled-system/notification#customizing-components",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Close Notification",
+      "lv2": "Customize Notifications",
       "lv3": "Customizing Components"
     }
   },
@@ -2392,7 +2422,7 @@
     "slug": "/styled-system/notification#customize-the-style",
     "hierarchy": {
       "lv1": "Notification",
-      "lv2": "Customizing Components",
+      "lv2": "Customize Notifications",
       "lv3": "Customize the style"
     }
   },
@@ -2400,7 +2430,7 @@
     "title": "Customize from Config",
     "type": "fragment",
     "slug": "/styled-system/notification#customize-from-config",
-    "hierarchy": { "lv1": "Notification", "lv2": "Customize from Config", "lv3": null }
+    "hierarchy": { "lv1": "Notification", "lv2": "Customize from Config" }
   },
   {
     "title": "Reset Styles",
@@ -2413,13 +2443,13 @@
     "title": "Customize Reset Styles",
     "type": "fragment",
     "slug": "/styled-system/reset-styles#customize-reset-styles",
-    "hierarchy": { "lv1": "Reset Styles", "lv2": "Customize Reset Styles", "lv3": null }
+    "hierarchy": { "lv1": "Reset Styles", "lv2": "Customize Reset Styles" }
   },
   {
     "title": "Adding Reset Styles",
     "type": "fragment",
     "slug": "/styled-system/reset-styles#adding-reset-styles",
-    "hierarchy": { "lv1": "Reset Styles", "lv2": "Adding Reset Styles", "lv3": null }
+    "hierarchy": { "lv1": "Reset Styles", "lv2": "Adding Reset Styles" }
   },
   {
     "title": "Responsive Styles",
@@ -2432,19 +2462,19 @@
     "title": "About Breakpoints",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#about-breakpoints",
-    "hierarchy": { "lv1": "Responsive Styles", "lv2": "About Breakpoints", "lv3": null }
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "About Breakpoints" }
   },
   {
     "title": "Syntax for Responsive Styles",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#syntax-for-responsive-styles",
-    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Syntax for Responsive Styles", "lv3": null }
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Syntax for Responsive Styles" }
   },
   {
     "title": "Responsive Utilities",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#responsive-utilities",
-    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Responsive Utilities", "lv3": null }
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Responsive Utilities" }
   },
   {
     "title": "Using `useBreakpoint`",
@@ -2462,7 +2492,7 @@
     "slug": "/styled-system/responsive-styles#using-usebreakpointvalue",
     "hierarchy": {
       "lv1": "Responsive Styles",
-      "lv2": "Using `useBreakpoint`",
+      "lv2": "Responsive Utilities",
       "lv3": "Using `useBreakpointValue`"
     }
   },
@@ -2470,7 +2500,7 @@
     "title": "Customizing Breakpoints",
     "type": "fragment",
     "slug": "/styled-system/responsive-styles#customizing-breakpoints",
-    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Customizing Breakpoints", "lv3": null }
+    "hierarchy": { "lv1": "Responsive Styles", "lv2": "Customizing Breakpoints" }
   },
   {
     "title": "Semantic Tokens",
@@ -2490,67 +2520,67 @@
     "title": "Color and Background",
     "type": "fragment",
     "slug": "/styled-system/style-props#color-and-background",
-    "hierarchy": { "lv1": "Style props", "lv2": "Color and Background", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Color and Background" }
   },
   {
     "title": "Margins and Padding",
     "type": "fragment",
     "slug": "/styled-system/style-props#margins-and-padding",
-    "hierarchy": { "lv1": "Style props", "lv2": "Margins and Padding", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Margins and Padding" }
   },
   {
     "title": "Typography",
     "type": "fragment",
     "slug": "/styled-system/style-props#typography",
-    "hierarchy": { "lv1": "Style props", "lv2": "Typography", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Typography" }
   },
   {
     "title": "Layout",
     "type": "fragment",
     "slug": "/styled-system/style-props#layout",
-    "hierarchy": { "lv1": "Style props", "lv2": "Layout", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Layout" }
   },
   {
     "title": "Position",
     "type": "fragment",
     "slug": "/styled-system/style-props#position",
-    "hierarchy": { "lv1": "Style props", "lv2": "Position", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Position" }
   },
   {
     "title": "List",
     "type": "fragment",
     "slug": "/styled-system/style-props#list",
-    "hierarchy": { "lv1": "Style props", "lv2": "List", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "List" }
   },
   {
     "title": "Border",
     "type": "fragment",
     "slug": "/styled-system/style-props#border",
-    "hierarchy": { "lv1": "Style props", "lv2": "Border", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Border" }
   },
   {
     "title": "Effects",
     "type": "fragment",
     "slug": "/styled-system/style-props#effects",
-    "hierarchy": { "lv1": "Style props", "lv2": "Effects", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Effects" }
   },
   {
     "title": "Filter",
     "type": "fragment",
     "slug": "/styled-system/style-props#filter",
-    "hierarchy": { "lv1": "Style props", "lv2": "Filter", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Filter" }
   },
   {
     "title": "Pseudo Elements and Selectors",
     "type": "fragment",
     "slug": "/styled-system/style-props#pseudo-elements-and-selectors",
-    "hierarchy": { "lv1": "Style props", "lv2": "Pseudo Elements and Selectors", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Pseudo Elements and Selectors" }
   },
   {
     "title": "Others",
     "type": "fragment",
     "slug": "/styled-system/style-props#others",
-    "hierarchy": { "lv1": "Style props", "lv2": "Others", "lv3": null }
+    "hierarchy": { "lv1": "Style props", "lv2": "Others" }
   },
   {
     "title": "Text and Layer Styles",
@@ -2563,25 +2593,25 @@
     "title": "Customizing the Theme",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#customizing-the-theme",
-    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Customizing the Theme", "lv3": null }
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Customizing the Theme" }
   },
   {
     "title": "Layer Styles",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#layer-styles",
-    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Layer Styles", "lv3": null }
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Layer Styles" }
   },
   {
     "title": "Text Style",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#text-style",
-    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Text Style", "lv3": null }
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Text Style" }
   },
   {
     "title": "Other Styles",
     "type": "fragment",
     "slug": "/styled-system/text-and-layer-styles#other-styles",
-    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Other Styles", "lv3": null }
+    "hierarchy": { "lv1": "Text and Layer Styles", "lv2": "Other Styles" }
   },
   {
     "title": "Component Styles",
@@ -2594,21 +2624,13 @@
     "title": "Basic Styles and Modifier Styles",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#basic-styles-and-modifier-styles",
-    "hierarchy": {
-      "lv1": "Component Styles",
-      "lv2": "Basic Styles and Modifier Styles",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Component Styles", "lv2": "Basic Styles and Modifier Styles" }
   },
   {
     "title": "Single Part and Multiple Part Components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#single-part-and-multiple-part-components",
-    "hierarchy": {
-      "lv1": "Component Styles",
-      "lv2": "Single Part and Multiple Part Components",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Component Styles", "lv2": "Single Part and Multiple Part Components" }
   },
   {
     "title": "Single Part Component",
@@ -2626,7 +2648,7 @@
     "slug": "/styled-system/theming/component-style#component-with-multiple-parts",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single Part Component",
+      "lv2": "Single Part and Multiple Part Components",
       "lv3": "Component with Multiple Parts"
     }
   },
@@ -2636,7 +2658,7 @@
     "slug": "/styled-system/theming/component-style#styling-of-single-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Component with Multiple Parts",
+      "lv2": "Single Part and Multiple Part Components",
       "lv3": "Styling of Single Part Components"
     }
   },
@@ -2646,7 +2668,7 @@
     "slug": "/styled-system/theming/component-style#styling-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Styling of Single Part Components",
+      "lv2": "Single Part and Multiple Part Components",
       "lv3": "Styling Multi-part Components"
     }
   },
@@ -2654,7 +2676,7 @@
     "title": "Creating Custom Components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#creating-custom-components",
-    "hierarchy": { "lv1": "Component Styles", "lv2": "Creating Custom Components", "lv3": null }
+    "hierarchy": { "lv1": "Component Styles", "lv2": "Creating Custom Components" }
   },
   {
     "title": "Customizing the Theme",
@@ -2667,41 +2689,37 @@
     "title": "Theme Operation",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#theme-operation",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Theme Operation", "lv3": null }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Theme Operation" }
   },
   {
     "title": "Changing Tokens",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-tokens",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Tokens", "lv3": null }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Tokens" }
   },
   {
     "title": "Changing Semantic Tokens",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-semantic-tokens",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Semantic Tokens", "lv3": null }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Semantic Tokens" }
   },
   {
     "title": "Changing Styles",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-styles",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Styles", "lv3": null }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Styles" }
   },
   {
     "title": "Changing the Style of Components",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-the-style-of-components",
-    "hierarchy": {
-      "lv1": "Customizing the Theme",
-      "lv2": "Changing the Style of Components",
-      "lv3": null
-    }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing the Style of Components" }
   },
   {
     "title": "Utility",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#utility",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": null }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility" }
   },
   {
     "title": "Using `extendTheme`",
@@ -2713,13 +2731,23 @@
     "title": "Merging multiple themes",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#merging-multiple-themes",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Using `extendTheme`", "lv3": null }
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Utility",
+      "lv3": "Using `extendTheme`",
+      "lv4": "Merging multiple themes"
+    }
   },
   {
     "title": "Not inheriting from the default theme",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#not-inheriting-from-the-default-theme",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Merging multiple themes", "lv3": null }
+    "hierarchy": {
+      "lv1": "Customizing the Theme",
+      "lv2": "Utility",
+      "lv3": "Using `extendTheme`",
+      "lv4": "Not inheriting from the default theme"
+    }
   },
   {
     "title": "Inheriting from the default theme excluding specific tokens",
@@ -2727,8 +2755,9 @@
     "slug": "/styled-system/theming/customize-theme#inheriting-from-the-default-theme-excluding-specific-tokens",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Not inheriting from the default theme",
-      "lv3": null
+      "lv2": "Utility",
+      "lv3": "Using `extendTheme`",
+      "lv4": "Inheriting from the default theme excluding specific tokens"
     }
   },
   {
@@ -2737,8 +2766,9 @@
     "slug": "/styled-system/theming/customize-theme#inheriting-only-specific-tokens-from-the-default-theme",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Inheriting from the default theme excluding specific tokens",
-      "lv3": null
+      "lv2": "Utility",
+      "lv3": "Using `extendTheme`",
+      "lv4": "Inheriting only specific tokens from the default theme"
     }
   },
   {
@@ -2747,7 +2777,7 @@
     "slug": "/styled-system/theming/customize-theme#using-extendbasetheme",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Inheriting only specific tokens from the default theme",
+      "lv2": "Utility",
       "lv3": "Using `extendBaseTheme`"
     }
   },
@@ -2755,21 +2785,13 @@
     "title": "Using `extendStyle`",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendstyle",
-    "hierarchy": {
-      "lv1": "Customizing the Theme",
-      "lv2": "Using `extendBaseTheme`",
-      "lv3": "Using `extendStyle`"
-    }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using `extendStyle`" }
   },
   {
     "title": "Using `extendToken`",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendtoken",
-    "hierarchy": {
-      "lv1": "Customizing the Theme",
-      "lv2": "Using `extendStyle`",
-      "lv3": "Using `extendToken`"
-    }
+    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility", "lv3": "Using `extendToken`" }
   },
   {
     "title": "Using `extendComponent`",
@@ -2777,7 +2799,7 @@
     "slug": "/styled-system/theming/customize-theme#using-extendcomponent",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `extendToken`",
+      "lv2": "Utility",
       "lv3": "Using `extendComponent`"
     }
   },
@@ -2787,7 +2809,7 @@
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentsize",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `extendComponent`",
+      "lv2": "Utility",
       "lv3": "Using `extendComponentSize`"
     }
   },
@@ -2797,7 +2819,7 @@
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentvariant",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `extendComponentSize`",
+      "lv2": "Utility",
       "lv3": "Using `extendComponentVariant`"
     }
   },
@@ -2807,7 +2829,7 @@
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentdefaultprops",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `extendComponentVariant`",
+      "lv2": "Utility",
       "lv3": "Using `extendComponentDefaultProps`"
     }
   },
@@ -2817,7 +2839,7 @@
     "slug": "/styled-system/theming/customize-theme#using-withdefaultsize",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `extendComponentDefaultProps`",
+      "lv2": "Utility",
       "lv3": "Using `withDefaultSize`"
     }
   },
@@ -2827,7 +2849,7 @@
     "slug": "/styled-system/theming/customize-theme#using-withdefaultvariant",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `withDefaultSize`",
+      "lv2": "Utility",
       "lv3": "Using `withDefaultVariant`"
     }
   },
@@ -2837,7 +2859,7 @@
     "slug": "/styled-system/theming/customize-theme#using-withdefaultcolorscheme",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `withDefaultVariant`",
+      "lv2": "Utility",
       "lv3": "Using `withDefaultColorScheme`"
     }
   },
@@ -2847,7 +2869,7 @@
     "slug": "/styled-system/theming/customize-theme#using-withdefaultprops",
     "hierarchy": {
       "lv1": "Customizing the Theme",
-      "lv2": "Using `withDefaultColorScheme`",
+      "lv2": "Utility",
       "lv3": "Using `withDefaultProps`"
     }
   },
@@ -2862,7 +2884,7 @@
     "title": "Colors",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#colors",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors" }
   },
   {
     "title": "BlackAlpha",
@@ -2874,79 +2896,79 @@
     "title": "Gray",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#gray",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "BlackAlpha", "lv3": "Gray" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Gray" }
   },
   {
     "title": "Zinc",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#zinc",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Gray", "lv3": "Zinc" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Zinc" }
   },
   {
     "title": "Neutral",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#neutral",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Zinc", "lv3": "Neutral" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Neutral" }
   },
   {
     "title": "Stone",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#stone",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Neutral", "lv3": "Stone" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Stone" }
   },
   {
     "title": "Red",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#red",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Stone", "lv3": "Red" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Red" }
   },
   {
     "title": "Amber",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#amber",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Red", "lv3": "Amber" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Amber" }
   },
   {
     "title": "エメラルド",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#エメラルド",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Amber", "lv3": "エメラルド" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "エメラルド" }
   },
   {
     "title": "Sky",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#sky",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "エメラルド", "lv3": "Sky" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Sky" }
   },
   {
     "title": "Blue",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#blue",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Sky", "lv3": "Blue" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Blue" }
   },
   {
     "title": "Indigo",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#indigo",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Blue", "lv3": "Indigo" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Indigo" }
   },
   {
     "title": "Gradients",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#gradients",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Gradients", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Gradients" }
   },
   {
     "title": "Spaces",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#spaces",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Spaces", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Spaces" }
   },
   {
     "title": "Sizes",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#sizes",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes" }
   },
   {
     "title": "Fonts (Font families)",
@@ -2958,73 +2980,73 @@
     "title": "FontSizes",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#fontsizes",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Fonts (Font families)", "lv3": "FontSizes" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": "FontSizes" }
   },
   {
     "title": "FontWeights",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#fontweights",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "FontSizes", "lv3": "FontWeights" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": "FontWeights" }
   },
   {
     "title": "LineHeights",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#lineheights",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "FontWeights", "lv3": "LineHeights" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": "LineHeights" }
   },
   {
     "title": "LetterSpacings",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#letterspacings",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "LineHeights", "lv3": "LetterSpacings" }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes", "lv3": "LetterSpacings" }
   },
   {
     "title": "Borders",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#borders",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Borders", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Borders" }
   },
   {
     "title": "Blurs",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#blurs",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Blurs", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Blurs" }
   },
   {
     "title": "Radii",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#radii",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Radii", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Radii" }
   },
   {
     "title": "Shadows",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#shadows",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Shadows", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Shadows" }
   },
   {
     "title": "Animations",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#animations",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Animations", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Animations" }
   },
   {
     "title": "Transitions",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#transitions",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Transitions", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Transitions" }
   },
   {
     "title": "ZIndices",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#zindices",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "ZIndices", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "ZIndices" }
   },
   {
     "title": "Breakpoint",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#breakpoint",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoint", "lv3": null }
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoint" }
   },
   {
     "title": "Theme",
@@ -3044,7 +3066,7 @@
     "title": "Setup",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#setup",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": null }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup" }
   },
   {
     "title": "Preparing Multiple Themes",
@@ -3056,17 +3078,18 @@
     "title": "Add `ThemeSchemeScript`",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#add-themeschemescript",
-    "hierarchy": {
-      "lv1": "Switching Themes",
-      "lv2": "Preparing Multiple Themes",
-      "lv3": "Add `ThemeSchemeScript`"
-    }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup", "lv3": "Add `ThemeSchemeScript`" }
   },
   {
     "title": "In the case of Create React App",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#in-the-case-of-create-react-app",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add `ThemeSchemeScript`", "lv3": null }
+    "hierarchy": {
+      "lv1": "Switching Themes",
+      "lv2": "Setup",
+      "lv3": "Add `ThemeSchemeScript`",
+      "lv4": "In the case of Create React App"
+    }
   },
   {
     "title": "In the case of Next.js",
@@ -3074,15 +3097,16 @@
     "slug": "/styled-system/theming/switch-theme#in-the-case-of-nextjs",
     "hierarchy": {
       "lv1": "Switching Themes",
-      "lv2": "In the case of Create React App",
-      "lv3": null
+      "lv2": "Setup",
+      "lv3": "Add `ThemeSchemeScript`",
+      "lv4": "In the case of Next.js"
     }
   },
   {
     "title": "Add `themeSchemeManager`",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#add-themeschememanager",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add `themeSchemeManager`", "lv3": null }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add `themeSchemeManager`" }
   },
   {
     "title": "Prepare `getServerSideProps`",
@@ -3100,7 +3124,7 @@
     "slug": "/styled-system/theming/switch-theme#passing-cookiestoragessr",
     "hierarchy": {
       "lv1": "Switching Themes",
-      "lv2": "Prepare `getServerSideProps`",
+      "lv2": "Add `themeSchemeManager`",
       "lv3": "Passing `cookieStorageSSR`"
     }
   },
@@ -3110,7 +3134,7 @@
     "slug": "/styled-system/theming/switch-theme#add-getserversideprops",
     "hierarchy": {
       "lv1": "Switching Themes",
-      "lv2": "Passing `cookieStorageSSR`",
+      "lv2": "Add `themeSchemeManager`",
       "lv3": "Add `getServerSideProps`"
     }
   },
@@ -3118,7 +3142,7 @@
     "title": "Switching Themes",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#switching-themes",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Switching Themes", "lv3": null }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Switching Themes" }
   },
   {
     "title": "ui",
@@ -3131,12 +3155,12 @@
     "title": "How to use",
     "type": "fragment",
     "slug": "/styled-system/ui#how-to-use",
-    "hierarchy": { "lv1": "ui", "lv2": "How to use", "lv3": null }
+    "hierarchy": { "lv1": "ui", "lv2": "How to use" }
   },
   {
     "title": "Creating a Component",
     "type": "fragment",
     "slug": "/styled-system/ui#creating-a-component",
-    "hierarchy": { "lv1": "ui", "lv2": "Creating a Component", "lv3": null }
+    "hierarchy": { "lv1": "ui", "lv2": "Creating a Component" }
   }
 ]

@@ -96,6 +96,8 @@ const getIsTab = async (paths: string[], slug: string) => {
   return !!data.is_tabs
 }
 
+const formatTitle = (value: string) => value.replace(/`/g, '')
+
 program.action(async () => {
   const hrtime = process.hrtime()
   const spinner = ora('Generating search content files').start()
@@ -114,7 +116,7 @@ program.action(async () => {
               const file = await readFile(path, 'utf8')
 
               const { data, content } = matter(file)
-              const { title, description } = data
+              let { title, description } = data
               const slug = getSlug(path)
 
               if (slug.startsWith('/changelog')) return []
@@ -123,8 +125,10 @@ program.action(async () => {
 
               if (isTab) return []
 
+              title = formatTitle(title)
+
               const contents: Content[] = [
-                { title: title, type: 'page', description, slug, hierarchy: { lv1: title } },
+                { title, type: 'page', description, slug, hierarchy: { lv1: title } },
               ]
 
               const tableOfContents = toc(content).json as TableOfContent[]
@@ -132,6 +136,8 @@ program.action(async () => {
               tableOfContents.forEach((item, index) => {
                 const prevTableOfContents = tableOfContents.slice(0, index)
                 const fragment = '#' + item.slug
+
+                item.content = formatTitle(item.content)
 
                 const content: Content = {
                   title: item.content,
@@ -150,7 +156,7 @@ program.action(async () => {
                   if (!lv2Item) {
                     content.hierarchy.lv2 = item.content
                   } else {
-                    content.hierarchy.lv2 = lv2Item.content
+                    content.hierarchy.lv2 = formatTitle(lv2Item.content)
                     content.hierarchy.lv3 = item.content
                   }
                 }
@@ -162,11 +168,11 @@ program.action(async () => {
                   if (!lv3Item) {
                     content.hierarchy.lv2 = item.content
                   } else if (!lv2Item) {
-                    content.hierarchy.lv2 = lv3Item.content
+                    content.hierarchy.lv2 = formatTitle(lv3Item.content)
                     content.hierarchy.lv3 = item.content
                   } else {
-                    content.hierarchy.lv2 = lv2Item.content
-                    content.hierarchy.lv3 = lv3Item.content
+                    content.hierarchy.lv2 = formatTitle(lv2Item.content)
+                    content.hierarchy.lv3 = formatTitle(lv3Item.content)
                     content.hierarchy.lv4 = item.content
                   }
                 }

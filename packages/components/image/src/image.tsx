@@ -1,5 +1,5 @@
 import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
-import { omitObject } from '@yamada-ui/utils'
+import { cx, omitObject } from '@yamada-ui/utils'
 import { isValidElement, ReactElement, useMemo } from 'react'
 import { shouldShowFallbackImage, useImage, UseImageProps } from './use-image'
 
@@ -37,6 +37,7 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
     loading,
     ignoreFallback,
     crossOrigin,
+    className,
     fallbackStrategy = 'beforeLoadOrError',
     referrerPolicy,
     size: boxSize,
@@ -59,7 +60,7 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
       return (
         <ui.img
           ref={ref}
-          className='ui-image-fallback'
+          className={cx('ui-image--fallback', className)}
           src={fallback as string | undefined}
           __css={css}
           {...(ignoreFallback ? rest : omitObject(rest, ['onError', 'onLoad']))}
@@ -76,7 +77,7 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
       crossOrigin={crossOrigin}
       loading={loading}
       referrerPolicy={referrerPolicy}
-      className={'ui-image'}
+      className={cx('ui-image', className)}
       __css={css}
       {...(ignoreFallback ? rest : omitObject(rest, ['onError', 'onLoad']))}
     />

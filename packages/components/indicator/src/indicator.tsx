@@ -168,7 +168,7 @@ export const Indicator = forwardRef<IndicatorProps, 'div'>((props, ref) => {
   return (
     <ui.div
       ref={ref}
-      className={cx('ui-indicator-container', className)}
+      className={cx('ui-indicator__container', className)}
       __css={{
         position: 'relative',
         display: computedInline ? 'inline-block' : 'block',

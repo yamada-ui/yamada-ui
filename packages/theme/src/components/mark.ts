@@ -28,10 +28,7 @@ export const Mark: ComponentStyle = {
       }
     },
     'text-accent': ({ theme: t, colorMode: m, colorScheme: c = 'gray' }) => ({
-      color: [
-        getColor(`${c}.500`)(t, m),
-        transparentizeColor(`${c}.200`, 0.8)(t, m),
-      ],
+      color: [`${c}.500`, transparentizeColor(`${c}.200`, 0.8)(t, m)],
       p: 0,
     }),
     unstyled: {

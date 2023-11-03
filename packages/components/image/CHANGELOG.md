@@ -1,5 +1,11 @@
 # @yamada-ui/image
 
+## 0.3.15
+
+### Patch Changes
+
+- [#213](https://github.com/hirotomoyamada/yamada-ui/pull/213) [`f19e4368`](https://github.com/hirotomoyamada/yamada-ui/commit/f19e43681a4381848eddf2bb252c64960c6bdcc1) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Image`.
+
 ## 0.3.14
 
 ### Patch Changes

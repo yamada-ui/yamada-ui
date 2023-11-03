@@ -1,5 +1,15 @@
 # @yamada-ui/autocomplete
 
+## 0.4.11
+
+### Patch Changes
+
+- [#205](https://github.com/hirotomoyamada/yamada-ui/pull/205) [`38a7fff9`](https://github.com/hirotomoyamada/yamada-ui/commit/38a7fff93a05aba59554d31a6cd00cadbd308f58) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Autocomplete`.
+
+- Updated dependencies [[`f0e049ae`](https://github.com/hirotomoyamada/yamada-ui/commit/f0e049ae6ed89627f35b2b538015c3c326b1ea66)]:
+  - @yamada-ui/form-control@0.3.17
+  - @yamada-ui/select@0.4.11
+
 ## 0.4.10
 
 ### Patch Changes

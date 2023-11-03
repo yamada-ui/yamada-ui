@@ -1,5 +1,14 @@
 # @yamada-ui/dropzone
 
+## 0.3.17
+
+### Patch Changes
+
+- [#209](https://github.com/hirotomoyamada/yamada-ui/pull/209) [`d7473a9d`](https://github.com/hirotomoyamada/yamada-ui/commit/d7473a9dd921469175c105765e12f385de043007) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Dropzone`.
+
+- Updated dependencies [[`f0e049ae`](https://github.com/hirotomoyamada/yamada-ui/commit/f0e049ae6ed89627f35b2b538015c3c326b1ea66)]:
+  - @yamada-ui/form-control@0.3.17
+
 ## 0.3.16
 
 ### Patch Changes

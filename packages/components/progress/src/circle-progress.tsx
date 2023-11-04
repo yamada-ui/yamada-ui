@@ -4,7 +4,6 @@ import {
   HTMLUIProps,
   CSSUIObject,
   CSSUIProps,
-  StylesProps,
 } from '@yamada-ui/core'
 import { useAnimation } from '@yamada-ui/use-animation'
 import { useToken } from '@yamada-ui/use-token'
@@ -120,7 +119,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, 'div'>(
           strokeDasharray: '400, 400',
           strokeDashoffset: '-260',
         },
-      } as Record<string, StylesProps<'unResponsive', 'unColorMode'>>,
+      },
       duration: typeof speed[0] === 'string' ? speed[0] : `${speed[0]}s`,
       iterationCount: 'infinite',
       timingFunction: 'linear',

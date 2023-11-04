@@ -5,8 +5,9 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  CSSUIProps,
   useMultiComponentStyle,
+  ColorModeToken,
+  CSS,
 } from '@yamada-ui/core'
 import {
   FormControlOptions,
@@ -41,11 +42,11 @@ type FileInputOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * The value of the file input.
    */

@@ -3,7 +3,6 @@ import {
   forwardRef,
   HTMLUIProps,
   CSSUIObject,
-  UIProps,
   CSSUIProps,
 } from '@yamada-ui/core'
 import { motion, HTMLMotionProps } from '@yamada-ui/motion'
@@ -138,7 +137,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
       minWidth ??
       ((styles.container?.minW ??
         styles.container?.minWidth) as CSSUIProps['minW'])
-    zIndex = (zIndex ?? styles.container?.zIndex) as UIProps['zIndex']
+    zIndex = (zIndex ?? styles.container?.zIndex) as CSSUIProps['zIndex']
 
     return (
       <ui.div

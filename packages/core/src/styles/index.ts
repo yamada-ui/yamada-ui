@@ -52,20 +52,20 @@ export const layoutStyle = {
 
 export const layoutStylesProperties: any[] = Object.keys(layoutStyle)
 
-export type StylesProps<Y = 'responsive', M = 'colorMode'> = LayoutProps<Y, M> &
-  ColorProps<Y, M> &
-  GridProps<Y, M> &
-  FlexProps<Y, M> &
-  ScrollProps<Y, M> &
-  ListProps<Y, M> &
-  TypographyProps<Y, M> &
-  PositionProps<Y, M> &
-  BackgroundProps<Y, M> &
-  SpaceProps<Y, M> &
-  EffectProps<Y, M> &
-  InteractivityProps<Y, M> &
-  FilterProps<Y, M> &
-  TransformProps<Y, M> &
-  TransitionProps<Y, M> &
-  BorderProps<Y, M> &
-  OthersProps<Y, M>
+export type StylesProps = LayoutProps &
+  ColorProps &
+  GridProps &
+  FlexProps &
+  ScrollProps &
+  ListProps &
+  TypographyProps &
+  PositionProps &
+  BackgroundProps &
+  SpaceProps &
+  EffectProps &
+  InteractivityProps &
+  FilterProps &
+  TransformProps &
+  TransitionProps &
+  BorderProps &
+  OthersProps

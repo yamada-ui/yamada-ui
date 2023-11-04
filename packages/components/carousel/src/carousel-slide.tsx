@@ -1,10 +1,4 @@
-import {
-  ui,
-  forwardRef,
-  HTMLUIProps,
-  CSSUIObject,
-  UIProps,
-} from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { cx } from '@yamada-ui/utils'
 import {
   useCarouselContext,
@@ -16,7 +10,7 @@ type CarouselSlideOptions = {
   /**
    * The CSS `width` property.
    */
-  size?: UIProps['width']
+  size?: CSSUIObject['width']
 }
 
 export type CarouselSlideProps = HTMLUIProps<'div'> &

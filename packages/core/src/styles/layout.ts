@@ -46,157 +46,157 @@ Object.assign(layout, {
   maxH: layout.maxHeight,
 })
 
-export type LayoutProps<Y = 'responsive', M = 'colorMode'> = {
+export type LayoutProps = {
   /**
    * The CSS `display` property.
    */
-  display?: Token<CSS.Property.Display, unknown, Y, M>
+  display?: Token<CSS.Property.Display>
   /**
    * The CSS `width` property.
    */
-  width?: Token<CSS.Property.Width | number, 'sizes', Y, M>
+  width?: Token<CSS.Property.Width | number, 'sizes'>
   /**
    * The CSS `width` property.
    */
-  w?: Token<CSS.Property.Width | number, 'sizes', Y, M>
+  w?: Token<CSS.Property.Width | number, 'sizes'>
   /**
    * The CSS `inline-size` property.
    */
-  inlineSize?: Token<CSS.Property.InlineSize | number, 'sizes', Y, M>
+  inlineSize?: Token<CSS.Property.InlineSize | number, 'sizes'>
   /**
    * The CSS `width`, and `height` property.
    */
-  boxSize?: Token<CSS.Property.Width | number, 'sizes', Y, M>
+  boxSize?: Token<CSS.Property.Width | number, 'sizes'>
   /**
    * The CSS `max-width` property.
    */
-  maxWidth?: Token<CSS.Property.MaxWidth | number, 'sizes', Y, M>
+  maxWidth?: Token<CSS.Property.MaxWidth | number, 'sizes'>
   /**
    * The CSS `max-width` property.
    */
-  maxW?: Token<CSS.Property.MaxWidth | number, 'sizes', Y, M>
+  maxW?: Token<CSS.Property.MaxWidth | number, 'sizes'>
   /**
    * The CSS `max-inline-size` property.
    */
-  maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, 'sizes', Y, M>
+  maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, 'sizes'>
   /**
    * The CSS `min-width` property.
    */
-  minWidth?: Token<CSS.Property.MinWidth | number, 'sizes', Y, M>
+  minWidth?: Token<CSS.Property.MinWidth | number, 'sizes'>
   /**
    * The CSS `min-width` property.
    */
-  minW?: Token<CSS.Property.MinWidth | number, 'sizes', Y, M>
+  minW?: Token<CSS.Property.MinWidth | number, 'sizes'>
   /**
    * The CSS `min-inline-size` property.
    */
-  minInlineSize?: Token<CSS.Property.MinInlineSize | number, 'sizes', Y, M>
+  minInlineSize?: Token<CSS.Property.MinInlineSize | number, 'sizes'>
   /**
    * The CSS `height` property.
    */
-  height?: Token<CSS.Property.Height | number, 'sizes', Y, M>
+  height?: Token<CSS.Property.Height | number, 'sizes'>
   /**
    * The CSS `height` property.
    */
-  h?: Token<CSS.Property.Height | number, 'sizes', Y, M>
+  h?: Token<CSS.Property.Height | number, 'sizes'>
   /**
    * The CSS `block-size` property.
    */
-  blockSize?: Token<CSS.Property.BlockSize | number, 'sizes', Y, M>
+  blockSize?: Token<CSS.Property.BlockSize | number, 'sizes'>
   /**
    * The CSS `max-height` property.
    */
-  maxHeight?: Token<CSS.Property.MaxHeight | number, 'sizes', Y, M>
+  maxHeight?: Token<CSS.Property.MaxHeight | number, 'sizes'>
   /**
    * The CSS `max-height` property.
    */
-  maxH?: Token<CSS.Property.MaxHeight | number, 'sizes', Y, M>
+  maxH?: Token<CSS.Property.MaxHeight | number, 'sizes'>
   /**
    * The CSS `max-block-size` property.
    */
-  maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, 'sizes', Y, M>
+  maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, 'sizes'>
   /**
    * The CSS `min-height` property.
    */
-  minHeight?: Token<CSS.Property.MinHeight | number, 'sizes', Y, M>
+  minHeight?: Token<CSS.Property.MinHeight | number, 'sizes'>
   /**
    * The CSS `min-height` property.
    */
-  minH?: Token<CSS.Property.MinHeight | number, 'sizes', Y, M>
+  minH?: Token<CSS.Property.MinHeight | number, 'sizes'>
   /**
    * The CSS `min-block-size` property.
    */
-  minBlockSize?: Token<CSS.Property.MinBlockSize | number, 'sizes', Y, M>
+  minBlockSize?: Token<CSS.Property.MinBlockSize | number, 'sizes'>
   /**
    * The CSS `vertical-align` property.
    */
-  verticalAlign?: Token<CSS.Property.VerticalAlign | number, Y, M>
+  verticalAlign?: Token<CSS.Property.VerticalAlign | number>
   /**
    * The CSS `overflow` property.
    */
-  overflow?: Token<CSS.Property.Overflow, unknown, Y, M>
+  overflow?: Token<CSS.Property.Overflow>
   /**
    * The CSS `overflow-x` property.
    */
-  overflowX?: Token<CSS.Property.OverflowX, unknown, Y, M>
+  overflowX?: Token<CSS.Property.OverflowX>
   /**
    * The CSS `overflow-y` property.
    */
-  overflowY?: Token<CSS.Property.OverflowY, unknown, Y, M>
+  overflowY?: Token<CSS.Property.OverflowY>
   /**
    * The CSS `overflow-x` property.
    */
-  boxSizing?: Token<CSS.Property.BoxSizing, unknown, Y, M>
+  boxSizing?: Token<CSS.Property.BoxSizing>
   /**
    * The CSS `box-decoration-break` property.
    */
-  boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak, unknown, Y, M>
+  boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak>
   /**
    * The CSS `float` property.
    */
-  float?: Token<CSS.Property.Float, unknown, Y, M>
+  float?: Token<CSS.Property.Float>
   /**
    * The CSS `object-fit` property.
    */
-  objectFit?: Token<CSS.Property.ObjectFit, unknown, Y, M>
+  objectFit?: Token<CSS.Property.ObjectFit>
   /**
    * The CSS `object-position` property.
    */
-  objectPosition?: Token<CSS.Property.ObjectPosition | number, unknown, Y, M>
+  objectPosition?: Token<CSS.Property.ObjectPosition | number>
   /**
    * The CSS `overscroll-behavior` property.
    */
-  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior, unknown, Y, M>
+  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior>
   /**
    * The CSS `overscroll-behavior` property.
    */
-  overscroll?: Token<CSS.Property.OverscrollBehavior, unknown, Y, M>
+  overscroll?: Token<CSS.Property.OverscrollBehavior>
   /**
    * The CSS `overscroll-behavior-x` property.
    */
-  overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX, unknown, Y, M>
+  overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX>
   /**
    * The CSS `overscroll-behavior-x` property.
    */
-  overscrollX?: Token<CSS.Property.OverscrollBehaviorX, unknown, Y, M>
+  overscrollX?: Token<CSS.Property.OverscrollBehaviorX>
   /**
    * The CSS `overscroll-behavior-y` property.
    */
-  overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY, unknown, Y, M>
+  overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY>
   /**
    * The CSS `overscroll-behavior-y` property.
    */
-  overscrollY?: Token<CSS.Property.OverscrollBehaviorY, unknown, Y, M>
+  overscrollY?: Token<CSS.Property.OverscrollBehaviorY>
   /**
    * The CSS `visibility` property.
    */
-  visibility?: Token<CSS.Property.Visibility, unknown, Y, M>
+  visibility?: Token<CSS.Property.Visibility>
   /**
    * The CSS `isolation` property.
    */
-  isolation?: Token<CSS.Property.Isolation, unknown, Y, M>
+  isolation?: Token<CSS.Property.Isolation>
   /**
    * The CSS `aspect-ratio` property.
    */
-  aspectRatio?: Token<CSS.Property.AspectRatio, unknown, Y, M>
+  aspectRatio?: Token<CSS.Property.AspectRatio>
 }

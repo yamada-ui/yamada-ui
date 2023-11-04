@@ -41,7 +41,7 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, 'a'>(
         ref={ref}
         target={isExternal ? '_blank' : target}
         rel={isExternal ? 'noopener' : rel}
-        className={cx('ui-link-overlay', className)}
+        className={cx('ui-link__overlay', className)}
         href={href}
         __css={css}
         {...rest}
@@ -59,7 +59,7 @@ export const LinkBox = forwardRef<LinkBoxProps, 'div'>((props, ref) => {
   const { className, children, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    'a[href]:not(.ui-link-overlay), abbr[title]': {
+    'a[href]:not(.ui-link__overlay), abbr[title]': {
       position: 'relative',
       zIndex: 'yamcha',
     },
@@ -69,7 +69,7 @@ export const LinkBox = forwardRef<LinkBoxProps, 'div'>((props, ref) => {
   return (
     <ui.div
       ref={ref}
-      className={cx('ui-link-box', className)}
+      className={cx('ui-link__box', className)}
       __css={css}
       position='relative'
       {...rest}

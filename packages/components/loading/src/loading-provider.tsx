@@ -449,7 +449,7 @@ const PageComponent = memo(
       >
         <ui.div
           as={motion.div}
-          className='ui-loading-page-container'
+          className='ui-loading-page__container'
           {...getMotionProps(initialState, 'scaleFade')}
           __css={css}
         >
@@ -492,7 +492,7 @@ const BackgroundComponent = memo(
 
     return (
       <Motion
-        className='ui-loading-page-container'
+        className='ui-loading-page__background-container'
         {...getMotionProps(initialState, 'scaleFade')}
         __css={css}
       >

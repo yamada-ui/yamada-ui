@@ -43,7 +43,7 @@ const InputAddon = forwardRef<InputAddonProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-input-addon', className)}
+        className={cx('ui-input__addon', className)}
         __css={css}
         {...rest}
       />
@@ -56,7 +56,7 @@ export const InputLeftAddon = forwardRef<InputAddonProps, 'div'>(
     return (
       <InputAddon
         ref={ref}
-        className={cx('ui-input-addon-left', className)}
+        className={cx('ui-input__addon--left', className)}
         placement='left'
         {...rest}
       />
@@ -69,7 +69,7 @@ export const InputRightAddon = forwardRef<InputAddonProps, 'div'>(
     return (
       <InputAddon
         ref={ref}
-        className={cx('ui-input-addon-right', className)}
+        className={cx('ui-input__addon--right', className)}
         placement='right'
         {...rest}
       />

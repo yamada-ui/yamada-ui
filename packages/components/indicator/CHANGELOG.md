@@ -1,5 +1,16 @@
 # @yamada-ui/indicator
 
+## 0.3.15
+
+### Patch Changes
+
+- [#219](https://github.com/hirotomoyamada/yamada-ui/pull/219) [`98df2fe8`](https://github.com/hirotomoyamada/yamada-ui/commit/98df2fe88f3d64ad403eb2b752ff5d48ad531d96) Thanks [@illionillion](https://github.com/illionillion)! - Change `className` in `Indicator`.
+
+- Updated dependencies [[`f23e2e3d`](https://github.com/hirotomoyamada/yamada-ui/commit/f23e2e3d5d9c7dc56bd76c0a6639e77a0210fa4b), [`6be7db00`](https://github.com/hirotomoyamada/yamada-ui/commit/6be7db002112720dbc9fc962a9380476e7481b83)]:
+  - @yamada-ui/utils@0.3.3
+  - @yamada-ui/core@0.12.5
+  - @yamada-ui/use-value@0.2.15
+
 ## 0.3.14
 
 ### Patch Changes

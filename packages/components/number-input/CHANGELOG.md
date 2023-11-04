@@ -1,5 +1,20 @@
 # @yamada-ui/number-input
 
+## 0.3.18
+
+### Patch Changes
+
+- [#221](https://github.com/hirotomoyamada/yamada-ui/pull/221) [`6be7db00`](https://github.com/hirotomoyamada/yamada-ui/commit/6be7db002112720dbc9fc962a9380476e7481b83) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplified type definition.
+
+- Updated dependencies [[`f23e2e3d`](https://github.com/hirotomoyamada/yamada-ui/commit/f23e2e3d5d9c7dc56bd76c0a6639e77a0210fa4b), [`6be7db00`](https://github.com/hirotomoyamada/yamada-ui/commit/6be7db002112720dbc9fc962a9380476e7481b83)]:
+  - @yamada-ui/utils@0.3.3
+  - @yamada-ui/core@0.12.5
+  - @yamada-ui/form-control@0.3.18
+  - @yamada-ui/icon@0.3.15
+  - @yamada-ui/use-counter@0.3.5
+  - @yamada-ui/use-event-listener@0.2.5
+  - @yamada-ui/use-interval@0.2.5
+
 ## 0.3.17
 
 ### Patch Changes

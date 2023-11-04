@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-token",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Yamada UI useToken custom hook",
   "keywords": [
     "use-token"

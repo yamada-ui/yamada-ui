@@ -1,5 +1,20 @@
 # @yamada-ui/input
 
+## 0.3.18
+
+### Patch Changes
+
+- [#218](https://github.com/hirotomoyamada/yamada-ui/pull/218) [`6091c75c`](https://github.com/hirotomoyamada/yamada-ui/commit/6091c75c2213e2f789495d64303dd95e00f2d31f) Thanks [@illionillion](https://github.com/illionillion)! - CHanged `className` in `Input`.
+
+- [#221](https://github.com/hirotomoyamada/yamada-ui/pull/221) [`6be7db00`](https://github.com/hirotomoyamada/yamada-ui/commit/6be7db002112720dbc9fc962a9380476e7481b83) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplified type definition.
+
+- Updated dependencies [[`f23e2e3d`](https://github.com/hirotomoyamada/yamada-ui/commit/f23e2e3d5d9c7dc56bd76c0a6639e77a0210fa4b), [`6be7db00`](https://github.com/hirotomoyamada/yamada-ui/commit/6be7db002112720dbc9fc962a9380476e7481b83)]:
+  - @yamada-ui/utils@0.3.3
+  - @yamada-ui/file-input@0.4.9
+  - @yamada-ui/core@0.12.5
+  - @yamada-ui/form-control@0.3.18
+  - @yamada-ui/use-token@0.3.9
+
 ## 0.3.17
 
 ### Patch Changes

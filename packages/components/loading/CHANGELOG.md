@@ -1,5 +1,21 @@
 # @yamada-ui/loading
 
+## 0.5.2
+
+### Patch Changes
+
+- [#222](https://github.com/hirotomoyamada/yamada-ui/pull/222) [`3095b613`](https://github.com/hirotomoyamada/yamada-ui/commit/3095b613c023fc9050138faf76f5273832f33317) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `LoadingProvider`.
+
+- Updated dependencies [[`f23e2e3d`](https://github.com/hirotomoyamada/yamada-ui/commit/f23e2e3d5d9c7dc56bd76c0a6639e77a0210fa4b), [`6be7db00`](https://github.com/hirotomoyamada/yamada-ui/commit/6be7db002112720dbc9fc962a9380476e7481b83)]:
+  - @yamada-ui/utils@0.3.3
+  - @yamada-ui/core@0.12.5
+  - @yamada-ui/icon@0.3.15
+  - @yamada-ui/motion@0.4.15
+  - @yamada-ui/portal@0.3.6
+  - @yamada-ui/use-timeout@0.2.5
+  - @yamada-ui/use-token@0.3.9
+  - @yamada-ui/use-value@0.2.15
+
 ## 0.5.1
 
 ### Patch Changes

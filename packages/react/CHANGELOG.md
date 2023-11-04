@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 0.8.15
+
+### Patch Changes
+
+- Updated dependencies [[`f0de5cd9`](https://github.com/hirotomoyamada/yamada-ui/commit/f0de5cd97416a2eb6fa2b5aa091b05b82a47397b)]:
+  - @yamada-ui/link@0.3.16
+
 ## 0.8.14
 
 ### Patch Changes

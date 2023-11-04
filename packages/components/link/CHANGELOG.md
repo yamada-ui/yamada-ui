@@ -1,5 +1,11 @@
 # @yamada-ui/link
 
+## 0.3.16
+
+### Patch Changes
+
+- [#220](https://github.com/hirotomoyamada/yamada-ui/pull/220) [`f0de5cd9`](https://github.com/hirotomoyamada/yamada-ui/commit/f0de5cd97416a2eb6fa2b5aa091b05b82a47397b) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Link`.
+
 ## 0.3.15
 
 ### Patch Changes

@@ -6,7 +6,7 @@ import {
   HTMLUIProps,
   ThemeProps,
   useComponentStyle,
-  UIProps,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import {
   motion,
@@ -322,7 +322,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
             <Portal isDisabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
-                zIndex={(zIndex ?? styles.zIndex) as UIProps['zIndex']}
+                zIndex={(zIndex ?? styles.zIndex) as CSSUIProps['zIndex']}
                 pointerEvents='none'
               >
                 <ui.div

@@ -19,57 +19,57 @@ export const transform: Configs = {
   skewY: { properties: '--ui-skew-y', transform: transforms.deg },
 }
 
-export type TransformProps<Y = 'responsive', M = 'colorMode'> = {
+export type TransformProps = {
   /**
    * The CSS `clip-path` property.
    */
-  clipPath?: Token<CSS.Property.ClipPath, unknown, Y, M>
+  clipPath?: Token<CSS.Property.ClipPath>
   /**
    * The CSS `transform` property.
    */
-  transform?: Token<CSS.Property.Transform | 'auto' | 'auto-3d', unknown, Y, M>
+  transform?: Token<CSS.Property.Transform | 'auto' | 'auto-3d'>
   /**
    * The CSS `transform-origin` property.
    */
-  transformOrigin?: Token<CSS.Property.TransformOrigin | number, 'sizes', Y, M>
+  transformOrigin?: Token<CSS.Property.TransformOrigin | number, 'sizes'>
   /**
    * The CSS `transform-style` property.
    */
-  transformStyle?: Token<CSS.Property.TransformStyle, unknown, Y, M>
+  transformStyle?: Token<CSS.Property.TransformStyle>
   /**
    * The CSS `perspective` property.
    */
-  perspective?: Token<CSS.Property.Perspective, unknown, Y, M>
+  perspective?: Token<CSS.Property.Perspective>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */
-  translateX?: Token<StringLiteral, 'spaces', Y, M>
+  translateX?: Token<StringLiteral, 'spaces'>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.
    */
-  translateY?: Token<StringLiteral, 'spaces', Y, M>
+  translateY?: Token<StringLiteral, 'spaces'>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.
    */
-  scale?: Token<StringLiteral, unknown, Y, M>
+  scale?: Token<StringLiteral>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.
    */
-  scaleX?: Token<StringLiteral, unknown, Y, M>
+  scaleX?: Token<StringLiteral>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.
    */
-  scaleY?: Token<StringLiteral, unknown, Y, M>
+  scaleY?: Token<StringLiteral>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.
    */
-  rotate?: Token<StringLiteral, unknown, Y, M>
+  rotate?: Token<StringLiteral>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.
    */
-  skewX?: Token<StringLiteral, unknown, Y, M>
+  skewX?: Token<StringLiteral>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.
    */
-  skewY?: Token<StringLiteral, unknown, Y, M>
+  skewY?: Token<StringLiteral>
 }

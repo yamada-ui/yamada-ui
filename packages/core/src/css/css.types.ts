@@ -2,23 +2,25 @@ import type * as CSS from 'csstype'
 import { StylesProps, PseudosProps } from '../styles'
 import { Theme, StyledTheme } from '../theme.types'
 
+export type * as CSS from 'csstype'
+
 export type ColorMode = 'light' | 'dark'
+
+type ThemeVariant<Y extends keyof Theme['components'] | unknown = unknown> =
+  Y extends keyof Theme['components']
+    ? UIValue<Theme['components'][Y]['variants']>
+    : UIValue<string>
+
+type ThemeSize<Y extends keyof Theme['components'] | unknown = unknown> =
+  Y extends keyof Theme['components']
+    ? UIValue<Theme['components'][Y]['sizes']>
+    : UIValue<string>
 
 export type ThemeProps<
   Y extends keyof Theme['components'] | unknown = unknown,
 > = {
-  variant?: Y extends keyof Theme['components']
-    ?
-        | ResponsiveObject<Theme['components'][Y]['variants']>
-        | ColorModeArray<Theme['components'][Y]['variants']>
-        | Theme['components'][Y]['variants']
-    : ResponsiveObject<string> | ColorModeArray<string> | string
-  size?: Y extends keyof Theme['components']
-    ?
-        | ResponsiveObject<Theme['components'][Y]['sizes']>
-        | ColorModeArray<Theme['components'][Y]['sizes']>
-        | Theme['components'][Y]['sizes']
-    : ResponsiveObject<string> | ColorModeArray<string> | string
+  variant?: ThemeVariant<Y>
+  size?: ThemeSize<Y>
   colorScheme?: Theme['colorSchemes']
 }
 
@@ -27,30 +29,21 @@ export type ColorModeArray<Y> = [Y, Y]
 export type ResponsiveObject<Y> = Record<'base', Y> &
   Partial<Record<Theme['breakpoints'], Y>>
 
-export type Token<
-  Y,
-  M = unknown,
-  D = 'responsive',
-  H = 'colorMode',
-> = M extends keyof Theme
-  ? D extends 'responsive'
-    ? H extends 'colorMode'
-      ?
-          | ResponsiveObject<Y | Theme[M]>
-          | ColorModeArray<Y | Theme[M]>
-          | Y
-          | Theme[M]
-      : ResponsiveObject<Y | Theme[M]> | Y | Theme[M]
-    : H extends 'colorMode'
-    ? ColorModeArray<Y | Theme[M]> | Y | Theme[M]
-    : Y | Theme[M]
-  : D extends 'responsive'
-  ? H extends 'colorMode'
-    ? ResponsiveObject<Y> | ColorModeArray<Y> | Y
-    : ResponsiveObject<Y> | Y
-  : H extends 'colorMode'
-  ? ColorModeArray<Y> | Y
-  : Y
+type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
+
+export type BaseToken<Y, M = unknown> = M extends keyof Theme ? Y | Theme[M] : Y
+
+export type ColorModeToken<Y, M = unknown> = M extends keyof Theme
+  ? ColorModeArray<Y | Theme[M]> | Y | Theme[M]
+  : ColorModeArray<Y> | Y
+
+export type ResponsiveToken<Y, M = unknown> = M extends keyof Theme
+  ? ResponsiveObject<Y | Theme[M]> | Y | Theme[M]
+  : ResponsiveObject<Y> | Y
+
+export type Token<Y, M = unknown> = M extends keyof Theme
+  ? UIValue<Y | Theme[M]>
+  : UIValue<Y>
 
 export type StyledProps<Y> = Y | ((theme: StyledTheme) => Y)
 
@@ -58,9 +51,7 @@ export type StyleProperties = CSS.Properties &
   Omit<StylesProps, keyof CSS.Properties>
 
 type StyleValue<Y extends keyof StyleProperties> = StyledProps<
-  | ResponsiveObject<boolean | number | string | StyleProperties[Y]>
-  | ColorModeArray<boolean | number | string | StyleProperties[Y]>
-  | StyleProperties[Y]
+  UIValue<StyleProperties[Y]>
 >
 
 export type StyleUIValue = {
@@ -86,8 +77,7 @@ export type RecursiveCSSUIObject<Y> = Y &
 
 export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
-export type CSSUIProps<Y = 'responsive', M = 'colorMode'> = StylesProps<Y, M> &
-  PseudosProps
+export type CSSUIProps = StylesProps & PseudosProps
 
 export type UIStyleProps = {
   theme: StyledTheme
@@ -103,49 +93,17 @@ export type UIMultiStyle =
   | ((props: UIStyleProps) => Record<string, UIStyle>)
 
 export type AnimationStyle = {
-  keyframes: Record<string, StylesProps<'unResponsive', 'unColorMode'>>
-  duration?: Token<
-    CSS.Property.AnimationDuration,
-    'transitionDuration',
-    'unResponsive',
-    'unColorMode'
-  >
-  timingFunction?: Token<
+  keyframes: Record<string, StyleUIValue>
+  duration?: BaseToken<CSS.Property.AnimationDuration, 'transitionDuration'>
+  timingFunction?: BaseToken<
     CSS.Property.AnimationTimingFunction,
-    'transitionEasing',
-    'unResponsive',
-    'unColorMode'
+    'transitionEasing'
   >
-  delay?: Token<
-    CSS.Property.AnimationDelay,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  iterationCount?: Token<
-    CSS.Property.AnimationIterationCount,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  direction?: Token<
-    CSS.Property.AnimationDirection,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  fillMode?: Token<
-    CSS.Property.AnimationFillMode,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
-  playState?: Token<
-    CSS.Property.AnimationPlayState,
-    unknown,
-    'unResponsive',
-    'unColorMode'
-  >
+  delay?: BaseToken<CSS.Property.AnimationDelay>
+  iterationCount?: BaseToken<CSS.Property.AnimationIterationCount>
+  direction?: BaseToken<CSS.Property.AnimationDirection>
+  fillMode?: BaseToken<CSS.Property.AnimationFillMode>
+  playState?: BaseToken<CSS.Property.AnimationPlayState>
 }
 
 export type FunctionCSSInterpolation = {

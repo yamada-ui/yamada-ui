@@ -6,7 +6,8 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  CSSUIProps,
+  ColorModeToken,
+  CSS,
 } from '@yamada-ui/core'
 import {
   FormControlOptions,
@@ -433,11 +434,11 @@ type EditableOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   children?:
     | ReactNode
     | ((

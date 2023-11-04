@@ -76,85 +76,85 @@ export const filter: Configs = {
   },
 }
 
-export type FilterProps<Y = 'responsive', M = 'colorMode'> = {
+export type FilterProps = {
   /**
    * The CSS `filter` property.
    */
-  filter?: Token<CSS.Property.Filter | 'auto', unknown, Y, M>
+  filter?: Token<CSS.Property.Filter | 'auto'>
   /**
    * If `filter=auto`, sets the value of `--ui-blur`.
    */
-  blur?: Token<StringLiteral, 'blurs', Y, M>
+  blur?: Token<StringLiteral, 'blurs'>
   /**
    * If `filter=auto`, sets the value of `--ui-brightness`.
    */
-  brightness?: Token<StringLiteral, unknown, Y, M>
+  brightness?: Token<StringLiteral>
   /**
    * If `filter=auto`, sets the value of `--ui-contrast`.
    */
-  contrast?: Token<StringLiteral, unknown, Y, M>
+  contrast?: Token<StringLiteral>
   /**
    * If `filter=auto`, sets the value of `--ui-drop-shadow`.
    */
-  dropShadow?: Token<StringLiteral, 'shadows', Y, M>
+  dropShadow?: Token<StringLiteral, 'shadows'>
   /**
    * If `filter=auto`, sets the value of `--ui-grayscale`.
    */
-  grayscale?: Token<StringLiteral, unknown, Y, M>
+  grayscale?: Token<StringLiteral>
   /**
    * If `filter=auto`, sets the value of `--ui-hue-rotate`.
    */
-  hueRotate?: Token<StringLiteral, unknown, Y, M>
+  hueRotate?: Token<StringLiteral>
   /**
    * If `filter=auto`, sets the value of `--ui-invert`.
    */
-  invert?: Token<StringLiteral, unknown, Y, M>
+  invert?: Token<StringLiteral>
   /**
    * If `filter=auto`, sets the value of `--ui-saturate`.
    */
-  saturate?: Token<StringLiteral, unknown, Y, M>
+  saturate?: Token<StringLiteral>
   /**
    * If `filter=auto`, sets the value of `--ui-sepia`.
    */
-  sepia?: Token<StringLiteral, unknown, Y, M>
+  sepia?: Token<StringLiteral>
   /**
    * The CSS `backdrop-filter` property.
    */
-  backdropFilter?: Token<CSS.Property.BackdropFilter | 'auto', unknown, Y, M>
+  backdropFilter?: Token<CSS.Property.BackdropFilter | 'auto'>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.
    */
-  backdropBlur?: Token<StringLiteral, 'blurs', Y, M>
+  backdropBlur?: Token<StringLiteral, 'blurs'>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.
    */
-  backdropBrightness?: Token<StringLiteral, unknown, Y, M>
+  backdropBrightness?: Token<StringLiteral>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.
    */
-  backdropContrast?: Token<StringLiteral, unknown, Y, M>
+  backdropContrast?: Token<StringLiteral>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.
    */
-  backdropDropShadow?: Token<StringLiteral, 'shadows', Y, M>
+  backdropDropShadow?: Token<StringLiteral, 'shadows'>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.
    */
-  backdropGrayscale?: Token<StringLiteral, unknown, Y, M>
+  backdropGrayscale?: Token<StringLiteral>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.
    */
-  backdropHueRotate?: Token<StringLiteral, unknown, Y, M>
+  backdropHueRotate?: Token<StringLiteral>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.
    */
-  backdropInvert?: Token<StringLiteral, unknown, Y, M>
+  backdropInvert?: Token<StringLiteral>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.
    */
-  backdropSaturate?: Token<StringLiteral, unknown, Y, M>
+  backdropSaturate?: Token<StringLiteral>
   /**
    * If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.
    */
-  backdropSepia?: Token<StringLiteral, unknown, Y, M>
+  backdropSepia?: Token<StringLiteral>
 }

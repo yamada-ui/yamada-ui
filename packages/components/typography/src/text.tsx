@@ -2,10 +2,10 @@ import {
   ui,
   forwardRef,
   HTMLUIProps,
-  CSSUIProps,
   omitThemeProps,
   ThemeProps,
   useComponentStyle,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import { cx, filterUndefined } from '@yamada-ui/utils'
 

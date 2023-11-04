@@ -13,37 +13,37 @@ export const interactivity: Configs = {
   outlineColor: configs.color('outlineColor'),
 }
 
-export type InteractivityProps<Y = 'responsive', M = 'colorMode'> = {
+export type InteractivityProps = {
   /**
    * The CSS `appearance` property.
    */
-  appearance?: Token<CSS.Property.Appearance, unknown, Y, M>
+  appearance?: Token<CSS.Property.Appearance>
   /**
    * The CSS `user-select` property.
    */
-  userSelect?: Token<CSS.Property.UserSelect, unknown, Y, M>
+  userSelect?: Token<CSS.Property.UserSelect>
   /**
    * The CSS `pointer-events` property.
    */
-  pointerEvents?: Token<CSS.Property.PointerEvents, unknown, Y, M>
+  pointerEvents?: Token<CSS.Property.PointerEvents>
   /**
    * The CSS `resize` property.
    */
-  resize?: Token<CSS.Property.Resize, unknown, Y, M>
+  resize?: Token<CSS.Property.Resize>
   /**
    * The CSS `cursor` property.
    */
-  cursor?: Token<CSS.Property.Cursor, unknown, Y, M>
+  cursor?: Token<CSS.Property.Cursor>
   /**
    * The CSS `outline` property.
    */
-  outline?: Token<CSS.Property.Outline | number, unknown, Y, M>
+  outline?: Token<CSS.Property.Outline | number>
   /**
    * The CSS `outline-offset` property.
    */
-  outlineOffset?: Token<CSS.Property.OutlineOffset | number, unknown, Y, M>
+  outlineOffset?: Token<CSS.Property.OutlineOffset | number>
   /**
    * The CSS `outline-color` property.
    */
-  outlineColor?: Token<CSS.Property.Color, 'colors', Y, M>
+  outlineColor?: Token<CSS.Property.Color, 'colors'>
 }

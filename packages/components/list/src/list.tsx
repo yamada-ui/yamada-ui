@@ -2,11 +2,11 @@ import {
   ui,
   forwardRef,
   HTMLUIProps,
-  CSSUIProps,
   ThemeProps,
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import { Icon, IconProps } from '@yamada-ui/icon'
 import { createContext, cx, getValidChildren } from '@yamada-ui/utils'
@@ -32,7 +32,7 @@ type ListOptions = {
    *
    * @default 'sm'
    */
-  gap?: CSSUIProps['gap']
+  gap?: CSSUIObject['gap']
 }
 
 export type ListProps = HTMLUIProps<'ul'> & ThemeProps<'List'> & ListOptions

@@ -6,7 +6,8 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  CSSUIProps,
+  ColorModeToken,
+  CSS,
 } from '@yamada-ui/core'
 import {
   useFormControlProps,
@@ -126,11 +127,11 @@ type PinInputOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
 }
 
 export type PinInputProps = Omit<HTMLUIProps<'div'>, 'onChange'> &

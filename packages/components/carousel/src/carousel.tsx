@@ -7,7 +7,7 @@ import {
   ThemeProps,
   CSSUIObject,
   Token,
-  UIProps,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import { useToken } from '@yamada-ui/use-token'
 import { useValue } from '@yamada-ui/use-value'
@@ -127,7 +127,7 @@ type CarouselOptions = {
   /**
    * The CSS `width` property.
    */
-  slideSize?: UIProps['width']
+  slideSize?: CSSUIProps['width']
   /**
    * Props for carousel inner element.
    */

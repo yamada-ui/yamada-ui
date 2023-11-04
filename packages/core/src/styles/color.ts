@@ -9,21 +9,21 @@ export const color: Configs = {
   stroke: configs.color('stroke'),
 }
 
-export type ColorProps<Y = 'responsive', M = 'colorMode'> = {
+export type ColorProps = {
   /**
    * The CSS `color` property.
    */
-  color?: Token<CSS.Property.Color, 'colors', Y, M>
+  color?: Token<CSS.Property.Color, 'colors'>
   /**
    * The CSS `color` property.
    */
-  textColor?: Token<CSS.Property.Color, 'colors', Y, M>
+  textColor?: Token<CSS.Property.Color, 'colors'>
   /**
    * The CSS `fill` property.
    */
-  fill?: Token<CSS.Property.Color, 'colors', Y, M>
+  fill?: Token<CSS.Property.Color, 'colors'>
   /**
    * The CSS `stroke` property.
    */
-  stroke?: Token<CSS.Property.Color, 'colors', Y, M>
+  stroke?: Token<CSS.Property.Color, 'colors'>
 }

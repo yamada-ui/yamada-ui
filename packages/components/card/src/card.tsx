@@ -6,7 +6,6 @@ import {
   HTMLUIProps,
   ThemeProps,
   useMultiComponentStyle,
-  CSSUIProps,
 } from '@yamada-ui/core'
 import { createContext, cx } from '@yamada-ui/utils'
 
@@ -19,15 +18,15 @@ type CardOptions = {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIProps['flexDirection']
+  direction?: CSSUIObject['flexDirection']
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIProps['justifyContent']
+  justify?: CSSUIObject['justifyContent']
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIProps['alignItems']
+  align?: CSSUIObject['alignItems']
 }
 
 export type CardProps = HTMLUIProps<'article'> &

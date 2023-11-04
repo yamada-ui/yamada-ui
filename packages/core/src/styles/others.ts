@@ -31,15 +31,15 @@ export const others: Configs = {
   },
 }
 
-export type OthersProps<Y = 'responsive', M = 'colorMode'> = {
+export type OthersProps = {
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: Token<StringLiteral, 'layerStyles', Y, M>
+  layerStyle?: Token<StringLiteral, 'layerStyles'>
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: Token<StringLiteral, 'textStyles', Y, M>
+  textStyle?: Token<StringLiteral, 'textStyles'>
   /**
    * Apply other styles defined in `theme.styles`.
    *
@@ -50,5 +50,5 @@ export type OthersProps<Y = 'responsive', M = 'colorMode'> = {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: Token<StringLiteral, unknown, Y, M>
+  apply?: Token<StringLiteral>
 }

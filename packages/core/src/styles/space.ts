@@ -56,222 +56,197 @@ Object.assign(space, {
   paddingEnd: space.paddingInlineEnd,
 })
 
-export type SpaceProps<Y = 'responsive', M = 'colorMode'> = {
+export type SpaceProps = {
   /**
    * The CSS `margin` property.
    */
-  m?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  m?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `margin` property.
    */
-  margin?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  margin?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `margin-top` property.
    */
-  mt?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  mt?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `margin-block-start` property.
    */
-  marginBlockStart?: Token<
-    CSS.Property.MarginBlockStart | number,
-    'spaces',
-    Y,
-    M
-  >
+  marginBlockStart?: Token<CSS.Property.MarginBlockStart | number, 'spaces'>
   /**
    * The CSS `margin-top` property.
    */
-  marginTop?: Token<CSS.Property.MarginTop | number, 'spaces', Y, M>
+  marginTop?: Token<CSS.Property.MarginTop | number, 'spaces'>
   /**
    * The CSS `margin-right` property.
    */
-  mr?: Token<CSS.Property.MarginRight | number, 'spaces', Y, M>
+  mr?: Token<CSS.Property.MarginRight | number, 'spaces'>
   /**
    * The CSS `margin-inline-end` property.
    */
-  marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, 'spaces', Y, M>
+  marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, 'spaces'>
   /**
    * The CSS `margin-inline-end` property.
    */
-  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, 'spaces', Y, M>
+  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, 'spaces'>
   /**
    * The CSS `margin-inline-end` property.
    */
-  me?: Token<CSS.Property.MarginInlineEnd | number, 'spaces', Y, M>
+  me?: Token<CSS.Property.MarginInlineEnd | number, 'spaces'>
   /**
    * The CSS `margin-right` property.
    */
-  marginRight?: Token<CSS.Property.MarginRight | number, 'spaces', Y, M>
+  marginRight?: Token<CSS.Property.MarginRight | number, 'spaces'>
   /**
    * The CSS `margin-bottom` property.
    */
-  mb?: Token<CSS.Property.MarginBottom | number, 'spaces', Y, M>
+  mb?: Token<CSS.Property.MarginBottom | number, 'spaces'>
   /**
    * The CSS `margin-block-end` property.
    */
-  marginBlockEnd?: Token<CSS.Property.MarginBlockEnd | number, 'spaces', Y, M>
+  marginBlockEnd?: Token<CSS.Property.MarginBlockEnd | number, 'spaces'>
   /**
    * The CSS `margin-bottom` property.
    */
-  marginBottom?: Token<CSS.Property.MarginBottom | number, 'spaces', Y, M>
+  marginBottom?: Token<CSS.Property.MarginBottom | number, 'spaces'>
   /**
    * The CSS `margin-left` property.
    */
-  ml?: Token<CSS.Property.MarginLeft | number, 'spaces', Y, M>
+  ml?: Token<CSS.Property.MarginLeft | number, 'spaces'>
   /**
    * The CSS `margin-inline-start` property.
    */
-  marginInlineStart?: Token<
-    CSS.Property.MarginInlineStart | number,
-    'spaces',
-    Y,
-    M
-  >
+  marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, 'spaces'>
   /**
    * The CSS `margin-inline-start` property.
    */
-  marginStart?: Token<CSS.Property.MarginInlineStart | number, 'spaces', Y, M>
+  marginStart?: Token<CSS.Property.MarginInlineStart | number, 'spaces'>
   /**
    * The CSS `margin-inline-start` property.
    */
-  ms?: Token<CSS.Property.MarginInlineStart | number, 'spaces', Y, M>
+  ms?: Token<CSS.Property.MarginInlineStart | number, 'spaces'>
   /**
    * The CSS `margin-left` property.
    */
-  marginLeft?: Token<CSS.Property.MarginLeft | number, 'spaces', Y, M>
+  marginLeft?: Token<CSS.Property.MarginLeft | number, 'spaces'>
   /**
    * The CSS `margin-inline-start`, and `margin-inline-end` property.
    */
-  mx?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  mx?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `margin-inline` property.
    */
-  marginInline?: Token<CSS.Property.MarginInline | number, 'spaces', Y, M>
+  marginInline?: Token<CSS.Property.MarginInline | number, 'spaces'>
   /**
    * The CSS `margin-inline-start`, and `margin-inline-end` property.
    */
-  marginX?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  marginX?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `margin-top`, and `margin-bottom` property.
    */
-  my?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  my?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `margin-block` property.
    */
-  marginBlock?: Token<CSS.Property.MarginBlock | number, 'spaces', Y, M>
+  marginBlock?: Token<CSS.Property.MarginBlock | number, 'spaces'>
   /**
    * The CSS `margin-top`, and `margin-bottom` property.
    */
-  marginY?: Token<CSS.Property.Margin | number, 'spaces', Y, M>
+  marginY?: Token<CSS.Property.Margin | number, 'spaces'>
   /**
    * The CSS `padding` property.
    */
-  p?: Token<CSS.Property.Padding | number, 'spaces', Y, M>
+  p?: Token<CSS.Property.Padding | number, 'spaces'>
   /**
    * The CSS `padding` property.
    */
-  padding?: Token<CSS.Property.Padding | number, 'spaces', Y, M>
+  padding?: Token<CSS.Property.Padding | number, 'spaces'>
   /**
    * The CSS `padding-top` property.
    */
-  pt?: Token<CSS.Property.PaddingTop | number, 'spaces', Y, M>
+  pt?: Token<CSS.Property.PaddingTop | number, 'spaces'>
   /**
    * The CSS `padding-block-start` property.
    */
-  paddingBlockStart?: Token<
-    CSS.Property.PaddingBlockStart | number,
-    'spaces',
-    Y,
-    M
-  >
+  paddingBlockStart?: Token<CSS.Property.PaddingBlockStart | number, 'spaces'>
   /**
    * The CSS `padding-top` property.
    */
-  paddingTop?: Token<CSS.Property.PaddingTop | number, 'spaces', Y, M>
+  paddingTop?: Token<CSS.Property.PaddingTop | number, 'spaces'>
   /**
    * The CSS `padding-right` property.
    */
-  pr?: Token<CSS.Property.PaddingRight | number, 'spaces', Y, M>
+  pr?: Token<CSS.Property.PaddingRight | number, 'spaces'>
   /**
    * The CSS `padding-inline-end` property.
    */
-  paddingInlineEnd?: Token<
-    CSS.Property.PaddingInlineEnd | number,
-    'spaces',
-    Y,
-    M
-  >
+  paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, 'spaces'>
   /**
    * The CSS `padding-inline-end` property.
    */
-  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, 'spaces', Y, M>
+  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, 'spaces'>
   /**
    * The CSS `padding-inline-end` property.
    */
-  pe?: Token<CSS.Property.PaddingInlineEnd | number, 'spaces', Y, M>
+  pe?: Token<CSS.Property.PaddingInlineEnd | number, 'spaces'>
   /**
    * The CSS `padding-right` property.
    */
-  paddingRight?: Token<CSS.Property.PaddingRight | number, 'spaces', Y, M>
+  paddingRight?: Token<CSS.Property.PaddingRight | number, 'spaces'>
   /**
    * The CSS `padding-bottom` property.
    */
-  pb?: Token<CSS.Property.PaddingBottom | number, 'spaces', Y, M>
+  pb?: Token<CSS.Property.PaddingBottom | number, 'spaces'>
   /**
    * The CSS `padding-block-end` property.
    */
-  paddingBlockEnd?: Token<CSS.Property.PaddingBlockEnd | number, 'spaces', Y, M>
+  paddingBlockEnd?: Token<CSS.Property.PaddingBlockEnd | number, 'spaces'>
   /**
    * The CSS `padding-bottom` property.
    */
-  paddingBottom?: Token<CSS.Property.PaddingBottom | number, 'spaces', Y, M>
+  paddingBottom?: Token<CSS.Property.PaddingBottom | number, 'spaces'>
   /**
    * The CSS `padding-left` property.
    */
-  pl?: Token<CSS.Property.PaddingLeft | number, 'spaces', Y, M>
+  pl?: Token<CSS.Property.PaddingLeft | number, 'spaces'>
   /**
    * The CSS `padding-inline-start` property.
    */
-  paddingInlineStart?: Token<
-    CSS.Property.PaddingInlineStart | number,
-    'spaces',
-    Y,
-    M
-  >
+  paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, 'spaces'>
   /**
    * The CSS `padding-inline-start` property.
    */
-  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, 'spaces', Y, M>
+  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, 'spaces'>
   /**
    * The CSS `padding-inline-start` property.
    */
-  ps?: Token<CSS.Property.PaddingInlineStart | number, 'spaces', Y, M>
+  ps?: Token<CSS.Property.PaddingInlineStart | number, 'spaces'>
   /**
    * The CSS `padding-left` property.
    */
-  paddingLeft?: Token<CSS.Property.PaddingLeft | number, 'spaces', Y, M>
+  paddingLeft?: Token<CSS.Property.PaddingLeft | number, 'spaces'>
   /**
    * The CSS `padding-inline-start`, and `padding-inline-end` property.
    */
-  px?: Token<CSS.Property.Padding | number, 'spaces', Y, M>
+  px?: Token<CSS.Property.Padding | number, 'spaces'>
   /**
    * The CSS `padding-inline` property.
    */
-  paddingInline?: Token<CSS.Property.PaddingInline | number, 'spaces', Y, M>
+  paddingInline?: Token<CSS.Property.PaddingInline | number, 'spaces'>
   /**
    * The CSS `padding-inline-start`, and `padding-inline-end` property.
    */
-  paddingX?: Token<CSS.Property.Padding | number, 'spaces', Y, M>
+  paddingX?: Token<CSS.Property.Padding | number, 'spaces'>
   /**
    * The CSS `padding-top`, and `padding-bottom` property.
    */
-  py?: Token<CSS.Property.Padding | number, 'spaces', Y, M>
+  py?: Token<CSS.Property.Padding | number, 'spaces'>
   /**
    * The CSS `padding-block` property.
    */
-  paddingBlock?: Token<CSS.Property.PaddingBlock | number, 'spaces', Y, M>
+  paddingBlock?: Token<CSS.Property.PaddingBlock | number, 'spaces'>
   /**
    * The CSS `padding-top`, and `padding-bottom` property.
    */
-  paddingY?: Token<CSS.Property.Padding | number, 'spaces', Y, M>
+  paddingY?: Token<CSS.Property.Padding | number, 'spaces'>
 }

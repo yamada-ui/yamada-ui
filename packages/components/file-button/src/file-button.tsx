@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@yamada-ui/button'
-import { ui, forwardRef, CSSUIProps } from '@yamada-ui/core'
+import { ui, forwardRef, ColorModeToken, CSS } from '@yamada-ui/core'
 import {
   FormControlOptions,
   formControlProperties,
@@ -34,7 +34,7 @@ type FileButtonOptions = {
   /**
    * The border color when the button is invalid.
    */
-  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * Function to be called when a file change event occurs.
    */

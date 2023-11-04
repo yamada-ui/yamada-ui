@@ -26,82 +26,77 @@ Object.assign(position, {
   insetEnd: position.insetInlineEnd,
 })
 
-export type PositionProps<Y = 'responsive', M = 'colorMode'> = {
+export type PositionProps = {
   /**
    * The CSS `z-index` property.
    */
-  zIndex?: Token<CSS.Property.ZIndex, 'zIndices', Y, M>
+  zIndex?: Token<CSS.Property.ZIndex, 'zIndices'>
   /**
    * The CSS `top` property.
    */
-  top?: Token<CSS.Property.Top | number, 'spaces', Y, M>
+  top?: Token<CSS.Property.Top | number, 'spaces'>
   /**
    * The CSS `inset-block-start` property.
    */
-  insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, 'spaces', Y, M>
+  insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, 'spaces'>
   /**
    * The CSS `right` property.
    */
-  right?: Token<CSS.Property.Right | number, 'spaces', Y, M>
+  right?: Token<CSS.Property.Right | number, 'spaces'>
   /**
    * The CSS `inset-inline-end` property.
    */
-  insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, 'spaces', Y, M>
+  insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, 'spaces'>
   /**
    * The CSS `inset-inline-end` property.
    */
-  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, 'spaces', Y, M>
+  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, 'spaces'>
   /**
    * The CSS `bottom` property.
    */
-  bottom?: Token<CSS.Property.Bottom | number, 'spaces', Y, M>
+  bottom?: Token<CSS.Property.Bottom | number, 'spaces'>
   /**
    * The CSS `inset-block-end` property.
    */
-  insetBlockEnd?: Token<CSS.Property.InsetBlockEnd | number, 'spaces', Y, M>
+  insetBlockEnd?: Token<CSS.Property.InsetBlockEnd | number, 'spaces'>
   /**
    * The CSS `left` property.
    */
-  left?: Token<CSS.Property.Left | number, 'spaces', Y, M>
+  left?: Token<CSS.Property.Left | number, 'spaces'>
   /**
    * The CSS `inset-inline-start` property.
    */
-  insetInlineStart?: Token<
-    CSS.Property.InsetInlineStart | number,
-    'spaces',
-    Y,
-    M
-  >
+  insetInlineStart?: Token<CSS.Property.InsetInlineStart | number, 'spaces'>
   /**
    * The CSS `inset-start` property.
    */
-  insetStart?: Token<CSS.Property.InsetInlineStart | number, 'spaces', Y, M>
+  insetStart?: Token<CSS.Property.InsetInlineStart | number, 'spaces'>
   /**
    * The CSS `top`, `left`, `bottom`, `right` property.
    */
-  inset?: Token<CSS.Property.Inset | number, 'spaces', Y, M>
+  inset?: Token<CSS.Property.Inset | number, 'spaces'>
   /**
    * The CSS `left`, and `right` property.
    */
-  insetX?: Token<CSS.Property.Inset | number, 'spaces', Y, M>
+  insetX?: Token<CSS.Property.Inset | number, 'spaces'>
   /**
    * The CSS `top`, and `bottom` property.
    */
-  insetY?: Token<CSS.Property.Inset | number, 'spaces', Y, M>
+  insetY?: Token<CSS.Property.Inset | number, 'spaces'>
   /**
    * The CSS `position` property.
    */
-  pos?: Token<CSS.Property.Position, unknown, Y, M>
+  pos?: Token<CSS.Property.Position>
   /**
    * The CSS `position` property.
    */
-  position?: Token<CSS.Property.Position, unknown, Y, M>
+  position?: Token<CSS.Property.Position>
   /**
    * The CSS `inset-inline` property.
    */
-  insetInline?: Token<CSS.Property.InsetInline, unknown, Y, M>
+  insetInline?: Token<CSS.Property.InsetInline>
   /**
    * The CSS `inset-block` property.
    */
-  insetBlock?: Token<CSS.Property.InsetBlock, unknown, Y, M>
+  insetBlock?: Token<CSS.Property.InsetBlock>
 }

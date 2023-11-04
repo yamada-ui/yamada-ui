@@ -151,6 +151,7 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, 'li'>(
         {...rest}
       >
         {cloneChildren}
+
         {!isLastChild ? (
           <BreadcrumbSeparator gap={gap}>{separator}</BreadcrumbSeparator>
         ) : null}
@@ -193,7 +194,7 @@ type BreadcrumbSeparatorOptions = {
   /**
    * The CSS `margin-inline-start`, and `margin-inline-end` property.
    */
-  gap?: CSSUIProps['mx']
+  gap?: CSSUIObject['mx']
 }
 
 export type BreadcrumbSeparatorProps = HTMLUIProps<'span'> &

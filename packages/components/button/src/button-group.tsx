@@ -1,7 +1,7 @@
 import {
   ui,
   forwardRef,
-  CSSUIProps,
+  CSSUIObject,
   HTMLUIProps,
   ThemeProps,
 } from '@yamada-ui/core'
@@ -12,7 +12,7 @@ type ButtonGroupOptions = {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIProps['flexDirection']
+  direction?: CSSUIObject['flexDirection']
   /**
    * If `true`, the borderRadius of button that are direct children will be altered to look flushed together.
    *
@@ -63,7 +63,7 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
     const isColumn =
       flexDirection === 'column' || flexDirection === 'column-reverse'
 
-    const css = {
+    const css: CSSUIObject = {
       display: 'inline-flex',
       flexDirection,
     }

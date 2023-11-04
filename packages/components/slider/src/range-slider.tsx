@@ -6,7 +6,7 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  UIProps,
+  CSSUIProps,
 } from '@yamada-ui/core'
 import {
   FormControlOptions,
@@ -661,23 +661,23 @@ type RangeSliderOptions = {
   /**
    * The CSS `color` property. Used in `color` of track element.
    */
-  trackColor?: UIProps['color']
+  trackColor?: CSSUIProps['color']
   /**
    * The CSS `color` property. Used in `color` of filled track element.
    */
-  filledTrackColor?: UIProps['color']
+  filledTrackColor?: CSSUIProps['color']
   /**
    * The CSS `height` property. Used in `height` of track element.
    */
-  trackSize?: UIProps['h']
+  trackSize?: CSSUIProps['h']
   /**
    * The CSS `background` property. Used in `background` of thumb element.
    */
-  thumbColor?: UIProps['bg']
+  thumbColor?: CSSUIProps['bg']
   /**
    * The CSS `box-size` property. Used in `box-size` of thumb element.
    */
-  thumbSize?: UIProps['boxSize']
+  thumbSize?: CSSUIProps['boxSize']
 }
 
 export type RangeSliderProps = Omit<

@@ -6,7 +6,8 @@ import {
   HTMLUIProps,
   ThemeProps,
   useMultiComponentStyle,
-  CSSUIProps,
+  ColorModeToken,
+  CSS,
 } from '@yamada-ui/core'
 import {
   FormControlOptions,
@@ -47,11 +48,11 @@ type DropzoneOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: CSSUIProps<'unresponsive'>['borderColor']
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
   /**
    * If `true`, display the dropzone loading icon.
    *

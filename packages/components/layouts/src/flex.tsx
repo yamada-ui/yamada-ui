@@ -1,40 +1,34 @@
-import {
-  ui,
-  forwardRef,
-  HTMLUIProps,
-  CSSUIProps,
-  CSSUIObject,
-} from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 
 type FlexOptions = {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIProps['flexDirection']
+  direction?: CSSUIObject['flexDirection']
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIProps['justifyContent']
+  justify?: CSSUIObject['justifyContent']
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIProps['alignItems']
+  align?: CSSUIObject['alignItems']
   /**
    * The CSS `flex-wrap` property.
    */
-  wrap?: CSSUIProps['flexWrap']
+  wrap?: CSSUIObject['flexWrap']
   /**
    * The CSS `flex-basis` property.
    */
-  basis?: CSSUIProps['flexBasis']
+  basis?: CSSUIObject['flexBasis']
   /**
    * The CSS `flex-grow` property.
    */
-  grow?: CSSUIProps['flexGrow']
+  grow?: CSSUIObject['flexGrow']
   /**
    * The CSS `flex-shrink` property.
    */
-  shrink?: CSSUIProps['flexShrink']
+  shrink?: CSSUIObject['flexShrink']
 }
 
 export type FlexProps = HTMLUIProps<'div'> & FlexOptions

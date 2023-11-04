@@ -1,4 +1,4 @@
-import { ui, forwardRef, UIProps, CSSUIObject } from '@yamada-ui/core'
+import { ui, forwardRef, CSSUIProps, CSSUIObject } from '@yamada-ui/core'
 import { useValue } from '@yamada-ui/use-value'
 import { cx } from '@yamada-ui/utils'
 import { Skeleton, SkeletonProps } from './'
@@ -7,11 +7,11 @@ type SkeletonTextOptions = {
   /**
    * The CSS `gap` property.
    */
-  gap?: UIProps['gap']
+  gap?: CSSUIProps['gap']
   /**
    * The CSS `height` property.
    */
-  textHeight?: UIProps['height']
+  textHeight?: CSSUIProps['height']
 }
 
 export type SkeletonTextProps = SkeletonProps & SkeletonTextOptions

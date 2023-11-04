@@ -1,4 +1,4 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
 import { getValidChildren, cx, replaceObject } from '@yamada-ui/utils'
 import { cloneElement, Fragment, ReactElement, useMemo } from 'react'
 
@@ -6,19 +6,19 @@ type StackOptions = {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIProps['flexDirection']
+  direction?: CSSUIObject['flexDirection']
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIProps['justifyContent']
+  justify?: CSSUIObject['justifyContent']
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIProps['alignItems']
+  align?: CSSUIObject['alignItems']
   /**
    * The CSS `flex-wrap` property.
    */
-  wrap?: CSSUIProps['flexWrap']
+  wrap?: CSSUIObject['flexWrap']
   /**
    * If `true`, each stack item will show a divider.
    */
@@ -85,7 +85,7 @@ export const Stack = forwardRef<StackProps, 'div'>(
         })
       : validChildren
 
-    const css = useMemo(
+    const css: CSSUIObject = useMemo(
       () => ({
         display: 'flex',
         flexDirection,

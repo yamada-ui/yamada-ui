@@ -7,7 +7,8 @@ import {
   omitThemeProps,
   CSSUIObject,
   Interpolation,
-  CSSUIProps,
+  ColorModeToken,
+  CSS,
 } from '@yamada-ui/core'
 import { useAnimation } from '@yamada-ui/use-animation'
 import { createContext, cx, omitObject, valueToPercent } from '@yamada-ui/utils'
@@ -66,7 +67,7 @@ type ProgressOptions = {
   /**
    * The CSS `color` property.
    */
-  filledTrackColor?: CSSUIProps<'unResponsive'>['color']
+  filledTrackColor?: ColorModeToken<CSS.Property.Color, 'colors'>
 }
 
 export type ProgressProps = HTMLUIProps<'div'> &

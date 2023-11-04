@@ -10,25 +10,25 @@ export const list: Configs = {
   listStyleImg: configs.prop('listStyleImage'),
 }
 
-export type ListProps<Y = 'responsive', M = 'colorMode'> = {
+export type ListProps = {
   /**
    * The CSS `list-style-type` property.
    */
-  listStyleType?: Token<CSS.Property.ListStyleType, unknown, Y, M>
+  listStyleType?: Token<CSS.Property.ListStyleType>
   /**
    * The CSS `list-style-position` property.
    */
-  listStylePosition?: Token<CSS.Property.ListStylePosition, unknown, Y, M>
+  listStylePosition?: Token<CSS.Property.ListStylePosition>
   /**
    * The CSS `list-style-position` property.
    */
-  listStylePos?: Token<CSS.Property.ListStylePosition, unknown, Y, M>
+  listStylePos?: Token<CSS.Property.ListStylePosition>
   /**
    * The CSS `list-style-image` property.
    */
-  listStyleImage?: Token<CSS.Property.ListStyleImage, unknown, Y, M>
+  listStyleImage?: Token<CSS.Property.ListStyleImage>
   /**
    * The CSS `list-style-image` property.
    */
-  listStyleImg?: Token<CSS.Property.ListStyleImage, unknown, Y, M>
+  listStyleImg?: Token<CSS.Property.ListStyleImage>
 }

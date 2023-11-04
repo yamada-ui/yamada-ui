@@ -2,7 +2,7 @@ import { IconButtonProps } from '@yamada-ui/button'
 import {
   CSSUIObject,
   HTMLUIProps,
-  UIProps,
+  CSSUIProps,
   layoutStylesProperties,
 } from '@yamada-ui/core'
 import { useControllableState } from '@yamada-ui/use-controllable-state'
@@ -33,7 +33,7 @@ type CarouselContext = {
   includeGapInSize: boolean
   slidesToScroll: number
   slideSize: string | number
-  gap: UIProps['gap']
+  gap: CSSUIProps['gap']
   styles: Record<string, CSSUIObject>
 }
 
@@ -154,7 +154,7 @@ export type UseCarouselProps = Omit<
    *
    * @default 'md'
    */
-  gap?: UIProps['gap']
+  gap?: CSSUIProps['gap']
   /**
    * The carousel slide width.
    *

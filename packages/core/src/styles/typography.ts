@@ -40,112 +40,97 @@ export const typography: Configs = {
   },
 }
 
-export type TypographyProps<Y = 'responsive', M = 'colorMode'> = {
+export type TypographyProps = {
   /**
    * The CSS `font-weight` property.
    */
-  fontWeight?: Token<number | StringLiteral, 'fontWeights', Y, M>
+  fontWeight?: Token<number | StringLiteral, 'fontWeights'>
   /**
    * The CSS `line-height` property.
    */
-  lineHeight?: Token<CSS.Property.LineHeight | number, 'lineHeights', Y, M>
+  lineHeight?: Token<CSS.Property.LineHeight | number, 'lineHeights'>
   /**
    * The CSS `letter-spacing` property.
    */
-  letterSpacing?: Token<
-    CSS.Property.LetterSpacing | number,
-    'letterSpacings',
-    Y,
-    M
-  >
+  letterSpacing?: Token<CSS.Property.LetterSpacing | number, 'letterSpacings'>
   /**
    * The CSS `font-size` property.
    */
-  fontSize?: Token<CSS.Property.FontSize | number, 'fontSizes', Y, M>
+  fontSize?: Token<CSS.Property.FontSize | number, 'fontSizes'>
   /**
    * The CSS `font-family` property.
    */
-  fontFamily?: Token<CSS.Property.FontFamily, 'fonts', Y, M>
+  fontFamily?: Token<CSS.Property.FontFamily, 'fonts'>
   /**
    * The CSS `text-align` property.
    */
-  textAlign?: Token<CSS.Property.TextAlign, unknown, Y, M>
+  textAlign?: Token<CSS.Property.TextAlign>
   /**
    * The CSS `font-style` property.
    */
-  fontStyle?: Token<CSS.Property.FontStyle, unknown, Y, M>
+  fontStyle?: Token<CSS.Property.FontStyle>
   /**
    * The CSS `text-indent` property.
    */
-  textIndent?: Token<CSS.Property.TextIndent, unknown, Y, M>
+  textIndent?: Token<CSS.Property.TextIndent>
   /**
    * The CSS `word-break` property.
    */
-  wordBreak?: Token<CSS.Property.WordBreak, unknown, Y, M>
+  wordBreak?: Token<CSS.Property.WordBreak>
   /**
    * The CSS `overflow-wrap` property.
    */
-  overflowWrap?: Token<CSS.Property.OverflowWrap, unknown, Y, M>
+  overflowWrap?: Token<CSS.Property.OverflowWrap>
   /**
    * The CSS `text-overflow` property.
    */
-  textOverflow?: Token<CSS.Property.TextOverflow, unknown, Y, M>
+  textOverflow?: Token<CSS.Property.TextOverflow>
   /**
    * The CSS `text-transform` property.
    */
-  textTransform?: Token<CSS.Property.TextTransform, unknown, Y, M>
+  textTransform?: Token<CSS.Property.TextTransform>
   /**
    * The CSS `white-space` property.
    */
-  whiteSpace?: Token<CSS.Property.WhiteSpace, unknown, Y, M>
+  whiteSpace?: Token<CSS.Property.WhiteSpace>
   /**
    * The CSS `text-decoration` property.
    */
-  textDecoration?: Token<CSS.Property.TextDecoration | number, unknown, Y, M>
+  textDecoration?: Token<CSS.Property.TextDecoration | number>
   /**
    * The CSS `text-decoration` property.
    */
-  textDecor?: Token<CSS.Property.TextDecoration | number, unknown, Y, M>
+  textDecor?: Token<CSS.Property.TextDecoration | number>
   /**
    * The CSS `text-decoration-color` property.
    */
-  textDecorationColor?: Token<CSS.Property.TextDecorationColor, 'colors', Y, M>
+  textDecorationColor?: Token<CSS.Property.TextDecorationColor, 'colors'>
   /**
    * The CSS `text-decoration-thickness` property.
    */
-  textDecorationThickness?: Token<
-    CSS.Property.TextDecorationThickness,
-    unknown,
-    Y,
-    M
-  >
+  textDecorationThickness?: Token<CSS.Property.TextDecorationThickness>
   /**
    * The CSS `text-decoration-style` property.
    */
-  textDecorationStyle?: Token<CSS.Property.TextDecorationStyle, unknown, Y, M>
+  textDecorationStyle?: Token<CSS.Property.TextDecorationStyle>
   /**
    * The CSS `text-decoration-line` property.
    */
-  textDecorationLine?: Token<CSS.Property.TextDecorationLine, unknown, Y, M>
+  textDecorationLine?: Token<CSS.Property.TextDecorationLine>
   /**
    * The CSS `text-underline-offset` property.
    */
-  textUnderlineOffset?: Token<
-    CSS.Property.TextUnderlineOffset | number,
-    unknown,
-    Y,
-    M
-  >
+  textUnderlineOffset?: Token<CSS.Property.TextUnderlineOffset | number>
   /**
    * The `text-shadow` property.
    */
-  textShadow?: Token<CSS.Property.TextShadow | number, 'shadows', Y, M>
+  textShadow?: Token<CSS.Property.TextShadow | number, 'shadows'>
   /**
    * Used to visually truncate a text after a number of lines.
    */
-  noOfLines?: Token<number, unknown, Y, M>
+  noOfLines?: Token<number>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
-  isTruncated?: Token<boolean, unknown, Y, M>
+  isTruncated?: Token<boolean>
 }

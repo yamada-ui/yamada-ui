@@ -1,55 +1,61 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps, Token } from '@yamada-ui/core'
+import {
+  ui,
+  forwardRef,
+  HTMLUIProps,
+  CSSUIObject,
+  Token,
+} from '@yamada-ui/core'
 import { replaceObject } from '@yamada-ui/utils'
 
 type GridOptions = {
   /**
    * The CSS `grid-template-columns` property.
    */
-  templateColumns?: CSSUIProps['gridTemplateColumns']
+  templateColumns?: CSSUIObject['gridTemplateColumns']
   /**
    * The CSS `grid-template-rows` property.
    */
-  templateRows?: CSSUIProps['gridTemplateRows']
+  templateRows?: CSSUIObject['gridTemplateRows']
   /**
    * The CSS `grid-template-areas` property.
    */
-  templateAreas?: CSSUIProps['gridTemplateAreas']
+  templateAreas?: CSSUIObject['gridTemplateAreas']
   /**
    * The CSS `grid-column` property.
    */
-  column?: CSSUIProps['gridColumn']
+  column?: CSSUIObject['gridColumn']
   /**
    * The CSS `grid-row` property.
    */
-  row?: CSSUIProps['gridRow']
+  row?: CSSUIObject['gridRow']
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIProps['gridArea']
+  area?: CSSUIObject['gridArea']
   /**
    * The CSS `grid-gap` property.
    */
-  gap?: CSSUIProps['gridGap']
+  gap?: CSSUIObject['gridGap']
   /**
    * The CSS `grid-row-gap` property.
    */
-  rowGap?: CSSUIProps['gridRowGap']
+  rowGap?: CSSUIObject['gridRowGap']
   /**
    * The CSS `grid-column-gap` property.
    */
-  columnGap?: CSSUIProps['gridColumnGap']
+  columnGap?: CSSUIObject['gridColumnGap']
   /**
    * The CSS `grid-auto-flow` property.
    */
-  autoFlow?: CSSUIProps['gridAutoFlow']
+  autoFlow?: CSSUIObject['gridAutoFlow']
   /**
    * The CSS `grid-auto-columns` property.
    */
-  autoColumns?: CSSUIProps['gridAutoColumns']
+  autoColumns?: CSSUIObject['gridAutoColumns']
   /**
    * The CSS `grid-auto-rows` property.
    */
-  autoRows?: CSSUIProps['gridAutoRows']
+  autoRows?: CSSUIObject['gridAutoRows']
 }
 
 export type GridProps = HTMLUIProps<'div'> & GridOptions
@@ -73,7 +79,7 @@ export const Grid = forwardRef<GridProps, 'div'>(
     },
     ref,
   ) => {
-    const css = {
+    const css: CSSUIObject = {
       display: 'grid',
       gridTemplateColumns,
       gridTemplateRows,
@@ -97,7 +103,7 @@ type GridItemOptions = {
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIProps['gridArea']
+  area?: CSSUIObject['gridArea']
   /**
    * The number of columns the grid item should `span`.
    */
@@ -109,19 +115,19 @@ type GridItemOptions = {
   /**
    * The CSS `grid-column-start` property.
    */
-  colStart?: CSSUIProps['gridColumnStart']
+  colStart?: CSSUIObject['gridColumnStart']
   /**
    * The CSS `grid-column-end` property.
    */
-  colEnd?: CSSUIProps['gridColumnEnd']
+  colEnd?: CSSUIObject['gridColumnEnd']
   /**
    * The CSS `grid-row-start` property.
    */
-  rowStart?: CSSUIProps['gridRowStart']
+  rowStart?: CSSUIObject['gridRowStart']
   /**
    * The CSS `grid-row-end` property.
    */
-  rowEnd?: CSSUIProps['gridRowEnd']
+  rowEnd?: CSSUIObject['gridRowEnd']
 }
 
 export type GridItemProps = HTMLUIProps<'div'> & GridItemOptions
@@ -140,7 +146,7 @@ export const GridItem = forwardRef<GridItemProps, 'div'>(
     },
     ref,
   ) => {
-    const css = {
+    const css: CSSUIObject = {
       gridColumn: replaceObject(colSpan, (value) =>
         value != null ? `span ${value}/span ${value}` : undefined,
       ),

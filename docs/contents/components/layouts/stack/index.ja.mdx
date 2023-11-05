@@ -1,12 +1,122 @@
 ---
 title: Stack
-description: このページは現在作成中です。
+description: '`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Stack, VStack, HStack } from '@yamada-ui/react'
+```
+
+- `Stack`は、子要素を垂直または水平方向にスタックするために使用されます。
+- `VStack`は、子要素を垂直方向にスタックするために使用されます。
+- `HStack`は、子要素を水平方向にスタックするために使用されます。
+
+## 使い方
+
+```tsx
+<Stack direction={{ base: 'column', lg: 'row' }}>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</Stack>
+```
+
+### 垂直方向へスタックさせる
+
+```tsx
+<VStack>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</VStack>
+```
+
+### 水平方向へスタックさせる
+
+```tsx
+<HStack>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</HStack>
+```
+
+### 子要素間に区切り線を設ける
+
+```tsx
+<VStack divider={<Divider />}>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</VStack>
+```
+
+### `Spacer`を使う
+
+```tsx
+<HStack>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</HStack>
+```

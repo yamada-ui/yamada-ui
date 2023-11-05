@@ -1,12 +1,104 @@
 ---
 title: Grid
-description: このページは現在作成中です。
+description: '`Grid`は、グリッドレイアウトを管理するためのコンポーネントです。また、便利なスタイルのショートハンドが用意されています。'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Grid, GridItem } from '@yamada-ui/react'
+```
+
+`Grid`に用意されているショートハンドは下記の通りです。
+
+- `templateColumns`: `gridTemplateColumns`を短縮した`props`です。
+- `templateRows`: `gridTemplateRows`を短縮した`props`です。
+- `templateAreas`: `gridTemplateAreas`を短縮した`props`です。
+- `column`: `gridColumn`を短縮した`props`です。
+- `row`: `gridRow`を短縮した`props`です。
+- `area`: `gridArea`を短縮した`props`です。
+- `autoFlow`: `gridAutoFlow`を短縮した`props`です。
+- `autoColumns`: `gridAutoColumns`を短縮した`props`です。
+- `autoRows`: `gridAutoRows`を短縮した`props`です。
+
+`GridItem`に用意されているショートハンドは下記の通りです。
+
+- `area`: `gridArea`を短縮した`props`です。
+- `colStart`: `gridColumnStart`を短縮した`props`です。
+- `colEnd`: `gridColumnEnd`を短縮した`props`です。
+- `rowStart`: `gridRowStart`を短縮した`props`です。
+- `rowEnd`: `gridRowEnd`を短縮した`props`です。
+
+:::note
+ショートハンド以外にも、冗長な`props`を渡すこともできます。
+:::
+
+## 使い方
+
+```tsx
+<Grid templateColumns='repeat(4, 1fr)' gap='md'>
+  <GridItem w='full' h='4xs' rounded='md' bg='primary' />
+
+  <GridItem w='full' h='4xs' rounded='md' bg='secondary' />
+
+  <GridItem w='full' h='4xs' rounded='md' bg='warning' />
+
+  <GridItem w='full' h='4xs' rounded='md' bg='danger' />
+</Grid>
+```
+
+### `templateAreas`を使う
+
+```tsx
+<Grid
+  templateAreas={`
+    "one one two three"
+    "four five two six"
+    "four seven seven eight"
+  `}
+  gap='md'
+>
+  <GridItem area='one' w='full' minH='4xs' rounded='md' bg='primary' />
+
+  <GridItem area='two' w='full' minH='4xs' rounded='md' bg='secondary' />
+
+  <GridItem area='three' w='full' minH='4xs' rounded='md' bg='warning' />
+
+  <GridItem area='four' w='full' minH='4xs' rounded='md' bg='danger' />
+
+  <GridItem area='five' w='full' minH='4xs' rounded='md' bg='primary' />
+
+  <GridItem area='six' w='full' minH='4xs' rounded='md' bg='secondary' />
+
+  <GridItem area='seven' w='full' minH='4xs' rounded='md' bg='warning' />
+
+  <GridItem area='eight' w='full' minH='4xs' rounded='md' bg='danger' />
+</Grid>
+```
+
+### 複数の列と行をまたがる
+
+```tsx
+<Grid w='full' templateColumns='repeat(4, 1fr)' templateRows='repeat(3, 1fr)' gap='md'>
+  <GridItem colSpan={2} w='full' minH='4xs' rounded='md' bg='primary' />
+
+  <GridItem colSpan={2} rowSpan={3} w='full' minH='4xs' rounded='md' bg='secondary' />
+
+  <GridItem rowStart={2} rowEnd={4} w='full' minH='4xs' rounded='md' bg='warning' />
+
+  <GridItem
+    colStart={2}
+    colEnd={3}
+    rowStart={2}
+    rowEnd={4}
+    w='full'
+    minH='4xs'
+    rounded='md'
+    bg='danger'
+  />
+</Grid>
+```

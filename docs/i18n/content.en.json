@@ -99,11 +99,11 @@
     "hierarchy": { "lv1": "Carousel" }
   },
   {
-    "title": "Data display",
+    "title": "Data Display",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components for constructing the display of project data, such as `Table` and `Calendar`, are available.",
     "slug": "/components/data-display",
-    "hierarchy": { "lv1": "Data display" }
+    "hierarchy": { "lv1": "Data Display" }
   },
   {
     "title": "Kbd",
@@ -176,11 +176,11 @@
     "hierarchy": { "lv1": "Accordion" }
   },
   {
-    "title": "Desclosure",
+    "title": "Disclosure",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components such as `Accordion` and `Tabs` are available to display a large number of items while saving display area.",
     "slug": "/components/disclosure",
-    "hierarchy": { "lv1": "Desclosure" }
+    "hierarchy": { "lv1": "Disclosure" }
   },
   {
     "title": "Tabs",
@@ -206,7 +206,7 @@
   {
     "title": "Feedback",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components such as `Alert` and `Skeleton` are available to prompt users to wait during notifications to users or while content is loading.",
     "slug": "/components/feedback",
     "hierarchy": { "lv1": "Feedback" }
   },
@@ -295,11 +295,11 @@
     "hierarchy": { "lv1": "FormControl" }
   },
   {
-    "title": "Forms",
+    "title": "Form",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components for building forms in the project, such as `Input` and `Select`, are available.",
     "slug": "/components/forms",
-    "hierarchy": { "lv1": "Forms" }
+    "hierarchy": { "lv1": "Form" }
   },
   {
     "title": "Input",
@@ -409,14 +409,32 @@
   {
     "title": "AspectRatio",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.",
     "slug": "/components/layouts/aspect-ratio",
     "hierarchy": { "lv1": "AspectRatio" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/aspect-ratio#import",
+    "hierarchy": { "lv1": "AspectRatio", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/aspect-ratio#usage",
+    "hierarchy": { "lv1": "AspectRatio", "lv2": "Usage" }
+  },
+  {
+    "title": "Using iframe",
+    "type": "fragment",
+    "slug": "/components/layouts/aspect-ratio#using-iframe",
+    "hierarchy": { "lv1": "AspectRatio", "lv2": "Usage", "lv3": "Using iframe" }
+  },
+  {
     "title": "Box",
     "type": "page",
-    "description": "`Box` is the most abstract component upon which all other components are built.",
+    "description": "`Box` is the most abstract component on which all other components are built. By default, it renders a `div` element.",
     "slug": "/components/layouts/box",
     "hierarchy": { "lv1": "Box" }
   },
@@ -433,60 +451,208 @@
     "hierarchy": { "lv1": "Box", "lv2": "Usage" }
   },
   {
+    "title": "Using as",
+    "type": "fragment",
+    "slug": "/components/layouts/box#using-as",
+    "hierarchy": { "lv1": "Box", "lv2": "Usage", "lv3": "Using as" }
+  },
+  {
     "title": "Center",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Center` is a component that aligns the child elements in the center within the component.",
     "slug": "/components/layouts/center",
     "hierarchy": { "lv1": "Center" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/center#import",
+    "hierarchy": { "lv1": "Center", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/center#usage",
+    "hierarchy": { "lv1": "Center", "lv2": "Usage" }
+  },
+  {
     "title": "Container",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Container` is a component used as a general division element. By default, it renders the `section` element.",
     "slug": "/components/layouts/container",
     "hierarchy": { "lv1": "Container" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/container#import",
+    "hierarchy": { "lv1": "Container", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/container#usage",
+    "hierarchy": { "lv1": "Container", "lv2": "Usage" }
+  },
+  {
+    "title": "Centering Child Elements",
+    "type": "fragment",
+    "slug": "/components/layouts/container#centering-child-elements",
+    "hierarchy": { "lv1": "Container", "lv2": "Usage", "lv3": "Centering Child Elements" }
+  },
+  {
     "title": "Divider",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Divider` is a component that represents a division between elements.",
     "slug": "/components/layouts/divider",
     "hierarchy": { "lv1": "Divider" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/divider#import",
+    "hierarchy": { "lv1": "Divider", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/divider#usage",
+    "hierarchy": { "lv1": "Divider", "lv2": "Usage" }
+  },
+  {
+    "title": "Draw a vertical dividing line",
+    "type": "fragment",
+    "slug": "/components/layouts/divider#draw-a-vertical-dividing-line",
+    "hierarchy": { "lv1": "Divider", "lv2": "Usage", "lv3": "Draw a vertical dividing line" }
+  },
+  {
     "title": "Flex",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.",
     "slug": "/components/layouts/flex",
     "hierarchy": { "lv1": "Flex" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/flex#import",
+    "hierarchy": { "lv1": "Flex", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/flex#usage",
+    "hierarchy": { "lv1": "Flex", "lv2": "Usage" }
+  },
+  {
+    "title": "Using Spacer",
+    "type": "fragment",
+    "slug": "/components/layouts/flex#using-spacer",
+    "hierarchy": { "lv1": "Flex", "lv2": "Usage", "lv3": "Using Spacer" }
+  },
+  {
     "title": "Grid",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Grid` is a component for managing grid layouts. It also comes with handy style shorthand.",
     "slug": "/components/layouts/grid",
     "hierarchy": { "lv1": "Grid" }
   },
   {
-    "title": "Layouts",
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#import",
+    "hierarchy": { "lv1": "Grid", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#usage",
+    "hierarchy": { "lv1": "Grid", "lv2": "Usage" }
+  },
+  {
+    "title": "Using templateAreas",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#using-templateareas",
+    "hierarchy": { "lv1": "Grid", "lv2": "Usage", "lv3": "Using templateAreas" }
+  },
+  {
+    "title": "Spanning Multiple Columns and Rows",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#spanning-multiple-columns-and-rows",
+    "hierarchy": { "lv1": "Grid", "lv2": "Usage", "lv3": "Spanning Multiple Columns and Rows" }
+  },
+  {
+    "title": "Layout",
     "type": "page",
-    "description": "`Box` and `Stack`, among others, are provided as components to help you structure the layout of your project.",
+    "description": "Components for building the layout of the project, such as `Box` and `Stack`, are available.",
     "slug": "/components/layouts",
-    "hierarchy": { "lv1": "Layouts" }
+    "hierarchy": { "lv1": "Layout" }
   },
   {
     "title": "Stack",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Stack` is a component that groups elements and provides space between child elements.",
     "slug": "/components/layouts/stack",
     "hierarchy": { "lv1": "Stack" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#import",
+    "hierarchy": { "lv1": "Stack", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#usage",
+    "hierarchy": { "lv1": "Stack", "lv2": "Usage" }
+  },
+  {
+    "title": "Stack Vertically",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#stack-vertically",
+    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Stack Vertically" }
+  },
+  {
+    "title": "Stack Horizontally",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#stack-horizontally",
+    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Stack Horizontally" }
+  },
+  {
+    "title": "Add a dividing line between child elements",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#add-a-dividing-line-between-child-elements",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "Usage",
+      "lv3": "Add a dividing line between child elements"
+    }
+  },
+  {
+    "title": "Using Spacer",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#using-spacer",
+    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Using Spacer" }
+  },
+  {
     "title": "Wrap",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`",
     "slug": "/components/layouts/wrap",
     "hierarchy": { "lv1": "Wrap" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/wrap#import",
+    "hierarchy": { "lv1": "Wrap", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/wrap#usage",
+    "hierarchy": { "lv1": "Wrap", "lv2": "Usage" }
   },
   {
     "title": "Avatar",
@@ -519,7 +685,7 @@
   {
     "title": "Media and Icons",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components such as `Icon` and `Image` are available to embed images and `svg` into your project.",
     "slug": "/components/media-and-icons",
     "hierarchy": { "lv1": "Media and Icons" }
   },
@@ -540,7 +706,7 @@
   {
     "title": "Navigation",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components such as `Link` and `Breadcrumb` are available to display hyperlinks and the location of pages within the project.",
     "slug": "/components/navigation",
     "hierarchy": { "lv1": "Navigation" }
   },
@@ -589,7 +755,7 @@
   {
     "title": "Overlay",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components such as `Modal` and `Drawer` are available to temporarily interrupt interaction with the background UI.",
     "slug": "/components/overlay",
     "hierarchy": { "lv1": "Overlay" }
   },
@@ -636,11 +802,11 @@
     "hierarchy": { "lv1": "Fade" }
   },
   {
-    "title": "Transitions",
+    "title": "Transition",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components such as `Collapse` and `Fade` are available to provide animations to elements and create visual transitions.",
     "slug": "/components/transitions",
-    "hierarchy": { "lv1": "Transitions" }
+    "hierarchy": { "lv1": "Transition" }
   },
   {
     "title": "ScaleFade",
@@ -680,7 +846,7 @@
   {
     "title": "Typography",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Components for constructing the text of the project, such as `Heading` and `Text`, are available.",
     "slug": "/components/typography",
     "hierarchy": { "lv1": "Typography" }
   },
@@ -1090,7 +1256,7 @@
   {
     "title": "Hooks",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "Yamada UI offers a range of handy custom hooks to expedite the construction of your projects.",
     "slug": "/hooks",
     "hierarchy": { "lv1": "Hooks" }
   },
@@ -2002,10 +2168,10 @@
     "hierarchy": { "lv1": "CLI", "lv2": "Installation" }
   },
   {
-    "title": "How to use",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/styled-system/cli#how-to-use",
-    "hierarchy": { "lv1": "CLI", "lv2": "How to use" }
+    "slug": "/styled-system/cli#usage",
+    "hierarchy": { "lv1": "CLI", "lv2": "Usage" }
   },
   {
     "title": "Color Mode",
@@ -2187,22 +2353,22 @@
     "hierarchy": { "lv1": "Gradient" }
   },
   {
-    "title": "How to use",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/styled-system/gradient#how-to-use",
-    "hierarchy": { "lv1": "Gradient", "lv2": "How to use" }
+    "slug": "/styled-system/gradient#usage",
+    "hierarchy": { "lv1": "Gradient", "lv2": "Usage" }
   },
   {
     "title": "Color Customization",
     "type": "fragment",
     "slug": "/styled-system/gradient#color-customization",
-    "hierarchy": { "lv1": "Gradient", "lv2": "How to use", "lv3": "Color Customization" }
+    "hierarchy": { "lv1": "Gradient", "lv2": "Usage", "lv3": "Color Customization" }
   },
   {
     "title": "Gradient Tokens",
     "type": "fragment",
     "slug": "/styled-system/gradient#gradient-tokens",
-    "hierarchy": { "lv1": "Gradient", "lv2": "How to use", "lv3": "Gradient Tokens" }
+    "hierarchy": { "lv1": "Gradient", "lv2": "Usage", "lv3": "Gradient Tokens" }
   },
   {
     "title": "Text Gradient",
@@ -2231,10 +2397,10 @@
     "hierarchy": { "lv1": "Loading" }
   },
   {
-    "title": "How to use",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/styled-system/loading#how-to-use",
-    "hierarchy": { "lv1": "Loading", "lv2": "How to use" }
+    "slug": "/styled-system/loading#usage",
+    "hierarchy": { "lv1": "Loading", "lv2": "Usage" }
   },
   {
     "title": "Customizing Loading",
@@ -2290,10 +2456,10 @@
     "hierarchy": { "lv1": "Notification" }
   },
   {
-    "title": "How to use",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/styled-system/notification#how-to-use",
-    "hierarchy": { "lv1": "Notification", "lv2": "How to use" }
+    "slug": "/styled-system/notification#usage",
+    "hierarchy": { "lv1": "Notification", "lv2": "Usage" }
   },
   {
     "title": "Customize Notifications",
@@ -3143,10 +3309,10 @@
     "hierarchy": { "lv1": "ui" }
   },
   {
-    "title": "How to use",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/styled-system/ui#how-to-use",
-    "hierarchy": { "lv1": "ui", "lv2": "How to use" }
+    "slug": "/styled-system/ui#usage",
+    "hierarchy": { "lv1": "ui", "lv2": "Usage" }
   },
   {
     "title": "Creating a Component",

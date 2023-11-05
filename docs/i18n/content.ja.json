@@ -101,7 +101,7 @@
   {
     "title": "データディスプレイ",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Table`や`Calendar`など、プロジェクトのデータの表示を構築するコンポーネントが用意されています。",
     "slug": "/components/data-display",
     "hierarchy": { "lv1": "データディスプレイ" }
   },
@@ -178,7 +178,7 @@
   {
     "title": "ディスクロージャー",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Accordion`や`Tabs`など、表示領域を節約して多数の項目を表示するコンポーネントが用意されています。",
     "slug": "/components/disclosure",
     "hierarchy": { "lv1": "ディスクロージャー" }
   },
@@ -206,7 +206,7 @@
   {
     "title": "フィードバック",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Alert`や`Skeleton`など、ユーザーへの通知やコンテンツの読み込み中にユーザーへ待機を促すコンポーネントが用意されています。",
     "slug": "/components/feedback",
     "hierarchy": { "lv1": "フィードバック" }
   },
@@ -297,7 +297,7 @@
   {
     "title": "フォーム",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Input`や`Select`など、プロジェクトのフォームを構築するコンポーネントが用意されています。",
     "slug": "/components/forms",
     "hierarchy": { "lv1": "フォーム" }
   },
@@ -409,14 +409,32 @@
   {
     "title": "AspectRatio",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`AspectRatio`は、アスペクト比を維持したビデオやマップなどを埋め込むためのコンポーネントです。",
     "slug": "/components/layouts/aspect-ratio",
     "hierarchy": { "lv1": "AspectRatio" }
   },
   {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/aspect-ratio#インポート",
+    "hierarchy": { "lv1": "AspectRatio", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/aspect-ratio#使い方",
+    "hierarchy": { "lv1": "AspectRatio", "lv2": "使い方" }
+  },
+  {
+    "title": "iframeを使う",
+    "type": "fragment",
+    "slug": "/components/layouts/aspect-ratio#iframeを使う",
+    "hierarchy": { "lv1": "AspectRatio", "lv2": "使い方", "lv3": "iframeを使う" }
+  },
+  {
     "title": "Box",
     "type": "page",
-    "description": "`Box`は、他のすべてのコンポーネントがその上に構築される最も抽象的なコンポーネントです。",
+    "description": "`Box`は、他のすべてのコンポーネントがその上に構築される最も抽象的なコンポーネントです。デフォルトでは、`div`要素をレンダリングします。",
     "slug": "/components/layouts/box",
     "hierarchy": { "lv1": "Box" }
   },
@@ -433,39 +451,135 @@
     "hierarchy": { "lv1": "Box", "lv2": "使い方" }
   },
   {
+    "title": "asを使う",
+    "type": "fragment",
+    "slug": "/components/layouts/box#asを使う",
+    "hierarchy": { "lv1": "Box", "lv2": "使い方", "lv3": "asを使う" }
+  },
+  {
     "title": "Center",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Center`は、コンポーネント内の子要素を中央に配置するコンポーネントです。",
     "slug": "/components/layouts/center",
     "hierarchy": { "lv1": "Center" }
   },
   {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/center#インポート",
+    "hierarchy": { "lv1": "Center", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/center#使い方",
+    "hierarchy": { "lv1": "Center", "lv2": "使い方" }
+  },
+  {
     "title": "Container",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Container`は、汎用的な区分要素として使用するコンポーネントです。デフォルトでは、`section`要素をレンダリングします。",
     "slug": "/components/layouts/container",
     "hierarchy": { "lv1": "Container" }
   },
   {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/container#インポート",
+    "hierarchy": { "lv1": "Container", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/container#使い方",
+    "hierarchy": { "lv1": "Container", "lv2": "使い方" }
+  },
+  {
+    "title": "子要素を中央にする",
+    "type": "fragment",
+    "slug": "/components/layouts/container#子要素を中央にする",
+    "hierarchy": { "lv1": "Container", "lv2": "使い方", "lv3": "子要素を中央にする" }
+  },
+  {
     "title": "Divider",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Divider`は、要素間において区切りを表すコンポーネントです。",
     "slug": "/components/layouts/divider",
     "hierarchy": { "lv1": "Divider" }
   },
   {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/divider#インポート",
+    "hierarchy": { "lv1": "Divider", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/divider#使い方",
+    "hierarchy": { "lv1": "Divider", "lv2": "使い方" }
+  },
+  {
+    "title": "垂直に区切り線を引く",
+    "type": "fragment",
+    "slug": "/components/layouts/divider#垂直に区切り線を引く",
+    "hierarchy": { "lv1": "Divider", "lv2": "使い方", "lv3": "垂直に区切り線を引く" }
+  },
+  {
     "title": "Flex",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Flex`は、`Box`に`flex`を設定したコンポーネントです。また、便利なスタイルのショートハンドが用意されています。",
     "slug": "/components/layouts/flex",
     "hierarchy": { "lv1": "Flex" }
   },
   {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/flex#インポート",
+    "hierarchy": { "lv1": "Flex", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/flex#使い方",
+    "hierarchy": { "lv1": "Flex", "lv2": "使い方" }
+  },
+  {
+    "title": "Spacerを使う",
+    "type": "fragment",
+    "slug": "/components/layouts/flex#spacerを使う",
+    "hierarchy": { "lv1": "Flex", "lv2": "使い方", "lv3": "Spacerを使う" }
+  },
+  {
     "title": "Grid",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Grid`は、グリッドレイアウトを管理するためのコンポーネントです。また、便利なスタイルのショートハンドが用意されています。",
     "slug": "/components/layouts/grid",
     "hierarchy": { "lv1": "Grid" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#インポート",
+    "hierarchy": { "lv1": "Grid", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#使い方",
+    "hierarchy": { "lv1": "Grid", "lv2": "使い方" }
+  },
+  {
+    "title": "templateAreasを使う",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#templateareasを使う",
+    "hierarchy": { "lv1": "Grid", "lv2": "使い方", "lv3": "templateAreasを使う" }
+  },
+  {
+    "title": "複数の列と行をまたがる",
+    "type": "fragment",
+    "slug": "/components/layouts/grid#複数の列と行をまたがる",
+    "hierarchy": { "lv1": "Grid", "lv2": "使い方", "lv3": "複数の列と行をまたがる" }
   },
   {
     "title": "レイアウト",
@@ -477,16 +591,64 @@
   {
     "title": "Stack",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。",
     "slug": "/components/layouts/stack",
     "hierarchy": { "lv1": "Stack" }
   },
   {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#インポート",
+    "hierarchy": { "lv1": "Stack", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#使い方",
+    "hierarchy": { "lv1": "Stack", "lv2": "使い方" }
+  },
+  {
+    "title": "垂直方向へスタックさせる",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#垂直方向へスタックさせる",
+    "hierarchy": { "lv1": "Stack", "lv2": "使い方", "lv3": "垂直方向へスタックさせる" }
+  },
+  {
+    "title": "水平方向へスタックさせる",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#水平方向へスタックさせる",
+    "hierarchy": { "lv1": "Stack", "lv2": "使い方", "lv3": "水平方向へスタックさせる" }
+  },
+  {
+    "title": "子要素間に区切り線を設ける",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#子要素間に区切り線を設ける",
+    "hierarchy": { "lv1": "Stack", "lv2": "使い方", "lv3": "子要素間に区切り線を設ける" }
+  },
+  {
+    "title": "Spacerを使う",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#spacerを使う",
+    "hierarchy": { "lv1": "Stack", "lv2": "使い方", "lv3": "Spacerを使う" }
+  },
+  {
     "title": "Wrap",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Wrap`は、`Flex`に`wrap`を設定したコンポーネントです。`Flex`から便利なスタイルのショートハンドを継承しています。",
     "slug": "/components/layouts/wrap",
     "hierarchy": { "lv1": "Wrap" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/wrap#インポート",
+    "hierarchy": { "lv1": "Wrap", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/wrap#使い方",
+    "hierarchy": { "lv1": "Wrap", "lv2": "使い方" }
   },
   {
     "title": "Avatar",
@@ -519,7 +681,7 @@
   {
     "title": "メディアとアイコン",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Icon`や`Image`など、プロジェクトに画像や`svg`を埋め込むコンポーネントが用意されています。",
     "slug": "/components/media-and-icons",
     "hierarchy": { "lv1": "メディアとアイコン" }
   },
@@ -540,7 +702,7 @@
   {
     "title": "ナビゲーション",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Link`や`Breadcrumb`など、ハイパーリンクやプロジェクト内でのページの位置を表示するコンポーネントが用意されています。",
     "slug": "/components/navigation",
     "hierarchy": { "lv1": "ナビゲーション" }
   },
@@ -589,7 +751,7 @@
   {
     "title": "オーバーレイ",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Modal`や`Drawer`など、背景のUIとのインタラクションを一時的に遮断するコンポーネントが用意されています。",
     "slug": "/components/overlay",
     "hierarchy": { "lv1": "オーバーレイ" }
   },
@@ -638,7 +800,7 @@
   {
     "title": "トランジション",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Collapse`や`Fade`など、要素にアニメーションを提供して視覚的な遷移を演出するコンポーネントが用意されています。",
     "slug": "/components/transitions",
     "hierarchy": { "lv1": "トランジション" }
   },
@@ -680,7 +842,7 @@
   {
     "title": "タイポグラフィ",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "`Heading`や`Text`など、プロジェクトのテキストを構築するコンポーネントが用意されています。",
     "slug": "/components/typography",
     "hierarchy": { "lv1": "タイポグラフィ" }
   },
@@ -1062,7 +1224,7 @@
   {
     "title": "フック",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "Yamada UIには、プロジェクトをより迅速に構築できるように便利なカスタムフックが用意されています。",
     "slug": "/hooks",
     "hierarchy": { "lv1": "フック" }
   },

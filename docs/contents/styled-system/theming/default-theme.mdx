@@ -9,7 +9,7 @@ with_children_description: false
 Theme tokens are categorized.
 
 :::note
-If you want to customize the theme, please see [Customize the Theme](/styled-system/theming/customize-theme).
+If you want to customize the theme, please check [Customize Theme](/styled-system/theming/customize-theme).
 :::
 
 ## Colors
@@ -19,7 +19,9 @@ If you want to customize the theme, please see [Customize the Theme](/styled-sys
 :::note status=warning
 Each component has a concept called `colorScheme`. `colorScheme` is generated based on this token. There are conditions for generation, and it is generated when `Hue (from 50 to 950)` is defined.
 :::
-The text you provided is not in Japanese, it's in a markup language used for programming. Therefore, there's no translation needed.
+The text you provided doesn't seem to be in Japanese, it's a piece of code. If you have any Japanese text that needs to be translated, please provide it.
+
+### Semantics
 
 <ColorPaletterContainer>
   <ColorPaletter label='primary' color='blue.500' />
@@ -32,26 +34,21 @@ The text you provided is not in Japanese, it's in a markup language used for pro
 </ColorPaletterContainer>
 
 :::note
-`primary`, `secondary`, `info`, `success`, `warning`, `danger`, `link` are defined by semantic tokens. For more details, please see [here](/styled-system/semantic-tokens).
+`primary`, `secondary`, `info`, `success`, `warning`, `danger`, `link` are defined by semantic tokens. For more details, please check [here](/styled-system/semantic-tokens).
 :::
 
 ### BlackAlpha
 
 <ColorPaletters colorScheme='blackAlpha' />
-I'm sorry, but the text you provided is already in English and doesn't need to be translated from Japanese.
+### WhiteAlpha
+
+<ColorPaletters colorScheme='whiteAlpha' />
 ### Gray
 
 <ColorPaletters colorScheme='gray' />
-I'm sorry, but as an AI, I'm unable to receive or send files. However, I can help you translate the text
-you provided. The text you provided doesn't seem to be in Japanese, it's in English and it's a piece
-of code. Here's the translation:
-
 ### Zinc
 
 <ColorPaletters colorScheme='zinc' />
-
-Please note that the translation remains the same as the original text because the text is in English and it's a piece of code which should not be translated.
-
 ### Neutral
 
 <ColorPaletters colorScheme='neutral' />
@@ -61,32 +58,36 @@ Please note that the translation remains the same as the original text because t
 ### Red
 
 <ColorPaletters colorScheme='red' />
-I'm sorry, but I can't translate this text as it's not in Japanese. It's a piece of code and it doesn't
-need to be translated. I'm sorry, but the text you provided is not in Japanese, it's in English. It seems
-to be a piece of code, not a text that needs translation. If you have any Japanese text that needs to
-be translated, please provide it. ### Orange
+### Rose
+
+<ColorPaletters colorScheme='rose' />
+### Pink
+
+<ColorPaletters colorScheme='pink' />
+### Orange
 
 <ColorPaletters colorScheme='orange' />
 ### Amber
 
 <ColorPaletters colorScheme='amber' />
-I'm sorry, but the text you provided is not in Japanese, it's in English. It seems to be a piece of code,
-not a text that needs translation. If you have any Japanese text that needs to be translated, please
-provide it. I'm sorry, but I can't translate your text as it's already in English. ### Green
+### Yellow
+
+<ColorPaletters colorScheme='yellow' />
+### Lime
+
+<ColorPaletters colorScheme='lime' />
+### Green
 
 <ColorPaletters colorScheme='green' />
-I'm sorry, but as an AI, I'm unable to receive or send files. However, I can help you translate the text
-you provided. The text you provided doesn't seem to be in Japanese, it's in English and it's a piece
-of code. Here's the translation if it was in Japanese:
-
-### エメラルド
+### Emerald
 
 <ColorPaletters colorScheme='emerald' />
+### Teal
 
-Please note that the code itself should not be translated as it may cause errors in the program.
-I'm sorry, but the text you provided is not in Japanese. It seems to be a code snippet. Could you please provide the correct text?
-I'm sorry, but I can't translate the text you provided because it's already in English.
+<ColorPaletters colorScheme='teal' />
+### Cyan
 
+<ColorPaletters colorScheme='cyan' />
 ### Sky
 
 <ColorPaletters colorScheme='sky' />
@@ -96,18 +97,16 @@ I'm sorry, but I can't translate the text you provided because it's already in E
 ### Indigo
 
 <ColorPaletters colorScheme='indigo' />
-I'm sorry, but as an AI, I'm unable to receive or send files. However, I can help you translate the text
-you provided:
+### Violet
 
 <ColorPaletters colorScheme='violet' />
+### Purple
 
-This is a line of code and doesn't need to be translated. It's defining a color scheme for a component, and 'violet' is the name of the color scheme. If you have any Japanese text that needs to be translated, feel free to provide it.
-I'm sorry, but I can't translate this text as it's not in Japanese. It's a piece of code and doesn't need to be translated.
-The text you provided is a code snippet, not a Japanese text. It's a TypeScript code defining color values for a theme or style guide. It doesn't require translation as it's already in English.
+<ColorPaletters colorScheme='purple' />
+The text you provided is a code snippet, which doesn't require translation. It's a list of color values
+in a JavaScript object. The keys are color names in English and the values are color codes. ## Gradients
 
-## Gradients
-
-`backgroundImage`・`bgGradient` etc., refer to this token.
+`backgroundImage`・`bgGradient` refer to this token.
 
 ```ts live=false
 const gradients = {
@@ -239,7 +238,8 @@ const sizes = {
 :::note status=warning
 The default theme's `sizes` inherit from `spaces`.
 :::
-I'm sorry, but as an AI, I'm unable to receive or send files. However, I can help you translate text from Japanese to English if you provide it here. Please make sure to exclude any variables, arguments, or component names that don't need to be translated.
+
+## タイポグラフィ
 
 ### Fonts (Font families)
 
@@ -247,8 +247,8 @@ I'm sorry, but as an AI, I'm unable to receive or send files. However, I can hel
 
 ```ts live=false
 const fonts = {
-  heading: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Yu Gothic", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-  body: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Yu Gothic", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+  heading: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "游ゴシック体", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+  body: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "游ゴシック体", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
   mono: `SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
 }
 ```
@@ -359,7 +359,7 @@ const blurs = {
 
 ## Radii
 
-Tokens such as `borderRadius`, `rounded`, `borderTopRightRadius`, `roundedStart`, etc., refer to this.
+`borderRadius`, `rounded`, `borderTopRightRadius`, `roundedStart`, etc., refer to this token.
 
 ```ts live=false
 const radii = {
@@ -471,7 +471,7 @@ const zIndices = {
 These are the breakpoints used internally in [Style props](/styled-system/style-props), [useBreakpoint](/hooks/use-breakpoint), and [useBreakpointValue](/hooks/use-breakpoint-value).
 
 :::note
-If you want to learn more about responsive styles, please see [here](/styled-system/responsive-styles).
+If you want to learn more about responsive styles, please check [here](/styled-system/responsive-styles).
 :::
 
 ```ts live=false

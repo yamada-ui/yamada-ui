@@ -4,7 +4,7 @@ description: All components of Yamada UI support dark mode.
 order: 5
 ---
 
-Yamada UI includes support for managing the color mode of the application.
+Yamada UI incorporates support for managing the color mode of the application.
 
 All components of Yamada UI support dark mode. Depending on the scenario, it may be necessary to make the component compatible with the color mode.
 
@@ -31,7 +31,7 @@ export const config: ThemeConfig = {
 
   - `light`: Light mode.
   - `dark`: Dark mode.
-  - `system`: Retrieves the color mode from the operating system (OS).
+  - `system`: Retrieves the color mode from the Operating System (OS).
 
 ```tsx live=false
 import { UIProvider, extendConfig } from '@yamada-ui/react'
@@ -53,7 +53,7 @@ const App = () => {
 
 ### Add `ColorModeScript`
 
-In order for the color mode to work properly, you need to add `ColorModeScript` within the `body`.
+In order for the color mode to function properly, you need to add `ColorModeScript` within the `body`.
 
 The reason is that the color mode is implemented using `localStorage` or `cookies`, and it is necessary to synchronize correctly at the time of page loading.
 
@@ -149,7 +149,7 @@ Please pass the same `initialColorMode` as the config to the `initialColorMode` 
 :::
 
 :::note
-For the case of App Router, please see [here](/getting-started/frameworks/nextjs/app-router#uiprovidercacheprovidercolormodescriptを追加する).
+For the case of App Router, please check [here](/getting-started/frameworks/nextjs/app-router#add-uiprovidercacheprovidercolormodescript).
 :::
 
 ## Adding `colorModeManager`
@@ -213,12 +213,12 @@ export default function Index() {
 export const getServerSideProps = getServerSideCommonProps
 ```
 
-## Syntax of Color Mode
+## Syntax for Color Mode
 
-When setting the style of the color mode, it can be made compatible with the color mode by simply passing an array to the `props` of the style.
+To set the style for the color mode, simply pass an array to the `props` of the style to support the color mode.
 
-- Define the value of the style you want to set in light mode as the first argument.
-- Define the value of the style you want to set in dark mode as the second argument.
+- Define the value of the style you want to set for the light mode in the first argument.
+- Define the value of the style you want to set for the dark mode in the second argument.
 
 ```tsx
 <Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
@@ -226,7 +226,7 @@ When setting the style of the color mode, it can be made compatible with the col
 </Box>
 ```
 
-## Switching Color Modes
+## Switching Color Mode
 
 If you want to change the color mode within the application, use `changeColorMode` or `toggleColorMode`.
 
@@ -242,7 +242,7 @@ return (
     <Button onClick={() => changeColorMode('dark')}>Dark Mode</Button>
     <Button onClick={() => changeColorMode('system')}>System</Button>
     <Button onClick={toggleColorMode}>
-      {colorMode === 'light' ? 'Switch to Dark' : 'Switch to Light'} Mode
+      Switch to {colorMode === 'light' ? 'Dark' : 'Light'} Mode
     </Button>
   </Wrap>
 )

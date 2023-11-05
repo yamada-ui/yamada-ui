@@ -1,5 +1,5 @@
 ---
-title: Customizing the Config
+title: Customizing Config
 description: How to customize the default config of Yamada UI.
 order: 2
 ---
@@ -7,10 +7,10 @@ order: 2
 By customizing the config, you can change the [color mode](/styled-system/color-mode) and the prefix of `CSS` custom properties.
 
 :::note status=warning
-When customizing the config, we recommend using `extendConfig`. This creates a config that inherits from the [default config](/styled-system/configure/default-config). If you do not use `extendConfig`, it will become a completely new config that does not inherit from the [default config](/styled-system/configure/default-config).
+When customizing the config, it is recommended to use `extendConfig`. This creates a config that inherits the [default config](/styled-system/configure/default-config). If you do not use `extendConfig`, it will be a completely new config without inheriting the [default config](/styled-system/configure/default-config).
 :::
 
-## Change Color Mode
+## Changing the Color Mode
 
 Use `extendConfig` to pass the generated config to `UIProvider`'s `config`.
 
@@ -28,9 +28,9 @@ const App = () => {
 }
 ```
 
-## Changing the prefix of `CSS` custom properties
+## Changing the Prefix of `CSS` Custom Properties
 
-Use `extendConfig` to pass the generated config to the `config` of `UIProvider`.
+Pass the generated config to the `config` of `UIProvider` using `extendConfig`.
 
 ```tsx live=false highlight={3,7}
 import { UIProvider, extendConfig } from '@yamada-ui/react'

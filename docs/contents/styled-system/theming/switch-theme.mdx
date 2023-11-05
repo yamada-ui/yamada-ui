@@ -4,15 +4,15 @@ description: How users can switch themes.
 order: 5
 ---
 
-Yamada UI provides a feature that allows users to switch themes.
+Yamada UI provides a feature for users to switch themes.
 
 :::note
-In order to enable this feature, you need to prepare multiple themes.
+To enable this feature, you need to prepare multiple themes.
 :::
 
 ## Setup
 
-In order for the user to switch themes, the following two things need to be done:
+To switch themes, users need to do the following two things:
 
 1. Prepare multiple themes
 2. Add `ThemeSchemeScript` to the application.
@@ -22,7 +22,7 @@ In order for the user to switch themes, the following two things need to be done
 This time, we will prepare multiple themes that have changed colors from the default theme.
 
 :::note
-If you don't know how to customize a theme, please see [here](/styled-system/theming/customize-theme).
+If you don't know how to customize a theme, please check [here](/styled-system/theming/customize-theme).
 :::
 
 Pass an object to `themeSchemes`. The key of this object will be the `themeScheme` needed to switch themes.
@@ -91,11 +91,11 @@ export const config = extendConfig({
 })
 ```
 
-### Add `ThemeSchemeScript`
+### Adding `ThemeSchemeScript`
 
 To properly switch themes, you need to add `ThemeSchemeScript` within the `body`.
 
-The reason is that the theme switching is implemented using `localStorage` or `cookies`, and it is necessary to properly synchronize at the time of page loading.
+The reason is that the theme switching is implemented using `localStorage` or `cookies`, and it is necessary to correctly synchronize at the time of page loading.
 
 #### In the case of Create React App
 
@@ -121,7 +121,7 @@ root.render(
 ```
 
 :::note status=warning
-Please pass the same `initialThemeScheme` as the config to `props`' `initialThemeScheme`.
+Please pass the same `initialThemeScheme` as the config to the `initialThemeScheme` of `props`.
 :::
 
 #### In the case of Next.js
@@ -189,10 +189,10 @@ export default function App({ Component, pageProps }: AppProps) {
 ```
 
 :::note status=warning
-Please pass the same `initialThemeScheme` as the config to `props`' `initialThemeScheme`.
+Please pass the same `initialThemeScheme` as the config to the `initialThemeScheme` of `props`.
 :::
 
-## Add `themeSchemeManager`
+## Adding `themeSchemeManager`
 
 In the case of sites rendered on the server side, such as Next.js, you may want to include the theme schema in the request to avoid changing the theme during hydration.
 

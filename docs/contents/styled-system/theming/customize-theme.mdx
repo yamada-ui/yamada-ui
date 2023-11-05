@@ -7,22 +7,22 @@ order: 2
 All components of Yamada UI inherit styles and tokens from the theme. Depending on the scenario, you may need to customize things like `color` to match your project.
 
 :::note status=warning
-When customizing the theme, we recommend using `extendTheme`. This creates a theme that inherits from the [default theme](/styled-system/theming/default-theme). If you do not use `extendTheme`, it will become a completely new theme that does not inherit from the [default theme](/styled-system/theming/default-theme).
+When customizing the theme, it is recommended to use `extendTheme`. This creates a theme that inherits from the [default theme](/styled-system/theming/default-theme). If you do not use `extendTheme`, it will become a completely new theme that does not inherit from the [default theme](/styled-system/theming/default-theme).
 :::
 
-## Theme Operation
+## Theme Usage
 
-If you customize a theme, it is recommended to perform type completion. Type completion uses the [CLI](/styled-system/cli).
+If you customize the theme, it is recommended to use type completion. Type completion uses the [CLI](/styled-system/cli).
 
 :::note status=warning
-When using `CLI`, you need to create a theme file because it refers to the theme that is exported by default in the file.
+When using the `CLI`, you need to create a theme file because it refers to the theme that is exported by default in the file.
 :::
 
-Considering that theme tokens and styles may be added or changed during development, it is recommended to keep the theme in a folder.
+Considering that the theme's tokens and styles may be added or changed during development, it is recommended to keep the theme in a folder.
 
 ```sh
 ./theme
-├ components # Folder to define the style of each component
+├ components # Folder to define the styles of each component
 ├ tokens # Folder to define each token
 ├ styles # Folder to define global styles and reset styles
 ├ config.ts # File to set the config
@@ -45,7 +45,7 @@ export default extendTheme(customTheme)()
 ```
 
 :::note
-`extendTheme` is used to export the theme by default.
+The theme is being exported by default using `extendTheme`.
 :::
 
 ## Changing Tokens
@@ -64,7 +64,7 @@ export const colors: ThemeTokens = {
 ```
 
 :::note
-We have added a new `banner` to `colors` and changed `black`. Also, by defining an array, it can support color modes.
+We have added a new `banner` to `colors` and changed `black`. Also, by defining an array, you can support color modes.
 :::
 
 Create `index.ts` and export the `colors` you created earlier.
@@ -173,14 +173,14 @@ export default extendTheme(customTheme)()
 ```
 
 :::note
-If you want to learn more about semantic tokens, please see [here](/styled-system/semantic-tokens).
+If you want to learn more about semantic tokens, please check [here](/styled-system/semantic-tokens).
 :::
 
 ## Changing Styles
 
 You can set [globalStyle](/styled-system/global-styles), [resetStyle](/styled-system/reset-styles), [layerStyles](/styled-system/text-and-layer-styles), [textStyles](/styled-system/text-and-layer-styles), etc. in `styles`.
 
-This time, let's try changing the `globalStyle` that sets styles such as the `body`.
+This time, let's try changing the `globalStyle` that sets the style of `body`.
 
 Create `global-style.ts` under `styles`.
 
@@ -195,10 +195,10 @@ export const globalStyle: UIStyle = {
 ```
 
 :::note
-The background of the `body` is being changed. Also, by defining an array, you can support color modes.
+The background of `body` is being changed. Also, by defining an array, you can support color modes.
 :::
 
-Create `index.ts` and export the `globalStyle` you created earlier.
+Create `index.ts` and export the `globalStyle` you just created.
 
 ```ts title=./theme/styles/index.ts
 import { globalStyle } from './global-style'
@@ -245,21 +245,21 @@ export default extendTheme(customTheme)({ omit: ['styles'] })
 ```
 
 :::note
-If you want to learn about text and layer styles, please see [here](/styled-system/text-and-layer-styles).
+If you want to learn about text and layer styles, please check [here](/styled-system/text-and-layer-styles).
 :::
 
 ## Changing the Style of Components
 
 Depending on the project, you may want to change the style of Yamada UI's components. Since Yamada UI's components refer to the style of the theme, you can easily change the style of the components.
 
-The style of a component is composed of the component's basic style (`baseStyle`), styles of various sizes (`sizes`), styles of various visuals (`variants`), and default `props` (`defaultProps`).
+The style of a component is composed of the basic style of the component (`baseStyle`), styles of various sizes (`sizes`), styles of various visuals (`variants`), and default `props` (`defaultProps`).
 
 :::note
-Not all components have a `size` or `variant`. To check which components are compatible, refer to the `props` on the component's page.
+Not all components have `size` or `variant`. To check which components are compatible, please refer to the `props` on the component's page.
 :::
 
 :::note
-Yamada UI can style components by setting style `props` on the component. However, large projects have many developers, and setting styles individually can compromise design consistency. In that case, you can avoid this by setting the common style in the style of the theme's components.
+Yamada UI can style components by setting style `props` on them. However, large projects have many developers, and setting styles individually can compromise design consistency. In that case, you can avoid this by setting common styles in the style of the theme's components.
 :::
 
 This time, let's change the `Container` component.
@@ -279,23 +279,23 @@ export const Container: ComponentStyle = {
     lg: { p: 'lg', fontSize: 'lg' },
   },
   variants: {
-    'with-border-solid': {
+    'wtih-border-solid': {
       borderWidth: '1px',
     },
-    'with-border-dotted': {
+    'wtih-border-dotted': {
       borderWidth: '1px',
       borderStyle: 'dotted',
     },
   },
   defaultProps: {
     size: 'md',
-    variant: 'with-border-solid',
+    variant: 'wtih-border-solid',
   },
 }
 ```
 
 :::note
-The background color has been changed, and each size and variant is defined in `sizes` and `variants`, respectively. `defaultProps` sets the initial values.
+The background color is changed, each size is defined in `sizes`, and each variant is defined in `variants`. `defaultProps` sets the default values.
 :::
 
 Create `index.ts` and export the `Container` you just created.
@@ -325,7 +325,7 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)()
 ```
 
-Now, the background color of `Container` has been changed, and the style can be changed by passing `size` or `variant`.
+Now, the background color of `Container` is changed, and the style is changed by passing `size` or `variant`.
 
 ```tsx live=false
 import { Container } from '@yamada-ui/react'
@@ -340,15 +340,15 @@ const Demo = () => {
 ```
 
 :::note status=warning
-The `Container` changed this time is a component composed of a single element. There are also components composed of multiple elements (such as `Accordion`). When changing a component composed of multiple elements, the type definition becomes `ComponentMultiStyle`.
+The `Container` we changed this time is a component composed of a single element. There are also components composed of multiple elements (such as `Accordion`). When changing a component composed of multiple elements, the type definition becomes `ComponentMultiStyle`.
 :::
 
 :::note
-To check the theme style of each component, refer to the `Theme` on the component's page.
+To check the theme style of each component, please refer to the `Theme` on the component's page.
 :::
 
 :::note
-You can create styles for custom components, not just the components provided by Yamada UI. For more details, please see [here](/styled-system/theming/component-style#creating-custom-components).
+You can create styles for custom components, not just the components provided by Yamada UI. For more details, please check [here](/styled-system/theming/component-style#creating-custom-components).
 :::
 
 ## Utility
@@ -370,7 +370,7 @@ const secondTheme: UsageTheme = {}
 export default extendTheme(firstTheme, secondTheme)()
 ```
 
-#### Not inheriting from the default theme
+#### Not inheriting the default theme
 
 ```ts title=./theme/index.ts highlight={12}
 import { extendTheme, UsageTheme } from '@yamada-ui/react'
@@ -403,7 +403,7 @@ export default extendTheme(customTheme)({ pick: ['spaces'] })
 
 ### Using `extendBaseTheme`
 
-Create a new theme that inherits only the global styles and tokens such as colors from the default theme. It is also possible to pass multiple objects and specify options.
+This creates a new theme that inherits only the tokens such as global styles and colors of the default theme. It is also possible to pass multiple objects and specify options.
 
 ```ts title=./theme/index.ts highlight={12}
 import { extendBaseTheme, UsageTheme } from '@yamada-ui/react'
@@ -424,7 +424,7 @@ export default extendBaseTheme(customTheme)()
 
 ### Using `extendStyle`
 
-Inherit `globalStyle` or `resetStyle` to create a new style.
+Create a new style by inheriting `globalStyle` or `resetStyle`.
 
 ```ts
 import { extendStyle, UIStyle } from '@yamada-ui/react'
@@ -438,7 +438,7 @@ const globalStyle: UIStyle = extendStyle('globalStyle', {
 
 ### Using `extendToken`
 
-Inherits a specific token to create a new token.
+This creates a new token by inheriting a specific token.
 
 ```ts
 import { extendToken, ThemeTokens } from '@yamada-ui/react'
@@ -452,7 +452,7 @@ const colors: ThemeTokens = extendToken('colors', {
 
 ### Using `extendComponent`
 
-Inherits the style of a specific component to create the style of a new component.
+This creates the style of a new component by inheriting the style of a specific component.
 
 ```ts
 import { extendComponent, ComponentStyle } from '@yamada-ui/react'
@@ -466,7 +466,7 @@ const Button: ComponentStyle = extendComponent('Button', {
 
 ### Using `extendComponentSize`
 
-This inherits the size of a specific component to create the size of a new component.
+This creates the size of a new component by inheriting the size of a specific component.
 
 ```ts
 import { extendComponentSize, ComponentStyle } from '@yamada-ui/react'
@@ -486,12 +486,12 @@ const Tag: ComponentStyle = {
 ```
 
 :::note
-This function can be used in cases where you only want to inherit `sizes`, but do not want to inherit `baseStyle` or `variants`.
+You can use this function when you only want to inherit `sizes`, but not `baseStyle` or `variants`.
 :::
 
 ### Using `extendComponentVariant`
 
-This will inherit a specific component's variant and create a new component's variant.
+This creates a new component variant by inheriting a specific component's variant.
 
 ```ts
 import { extendComponentVariant, ComponentStyle } from '@yamada-ui/react'
@@ -499,7 +499,7 @@ import { extendComponentVariant, ComponentStyle } from '@yamada-ui/react'
 const Tag: ComponentStyle = {
   baseStyle: {
     /**
-     * Define new styles
+     * Define new style
      */
   },
   variants: extendComponentVariant('Tag', {
@@ -511,12 +511,12 @@ const Tag: ComponentStyle = {
 ```
 
 :::note
-This function can be used in cases where you only want to inherit `variants`, but do not want to inherit `baseStyle` or `sizes`.
+You can use this function when you only want to inherit `variants`, but not `baseStyle` or `sizes`.
 :::
 
 ### Using `extendComponentDefaultProps`
 
-This extends the `props` of a specific component to create the `props` of a new component.
+This creates the `props` of a new component by inheriting the `props` of a specific component.
 
 ```ts
 import { extendComponentDefaultProps, ComponentStyle } from '@yamada-ui/react'
@@ -524,7 +524,7 @@ import { extendComponentDefaultProps, ComponentStyle } from '@yamada-ui/react'
 const Tag: ComponentStyle = {
   baseStyle: {
     /**
-     * Define a new style
+     * Define new style
      */
   },
   defaultProps: extendComponentDefaultProps('Tag', {
@@ -536,12 +536,12 @@ const Tag: ComponentStyle = {
 ```
 
 :::note
-This function can be used in cases where you want to inherit only `defaultProps`, but not `baseStyle` or `sizes`.
+You can use this function when you don't want to inherit `baseStyle` or `sizes`, but only want to inherit `defaultProps`.
 :::
 
-### Using `withDefaultSize`
+### Usage of `withDefaultSize`
 
-Change the default size of `all` or `some` components.
+It changes the default size of `all` or `some` components.
 
 ```ts title=./theme/index.ts
 import { extendTheme, withDefaultSize } from '@yamada-ui/react'
@@ -561,7 +561,7 @@ export default extendTheme(
 
 ### Using `withDefaultVariant`
 
-This changes the default variant of `all` or `some` components.
+Changes the default variant of `all` or `some` components.
 
 ```ts title=./theme/index.ts
 import { extendTheme, withDefaultVariant } from '@yamada-ui/react'
@@ -581,7 +581,7 @@ export default extendTheme(
 
 ### Using `withDefaultColorScheme`
 
-This changes the default color scheme for `all` or `some` of the components.
+Changes the default color scheme of `all` or `some` components.
 
 ```ts title=./theme/index.ts
 import { extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
@@ -599,9 +599,9 @@ export default extendTheme(
 )()
 ```
 
-### Using `withDefaultProps`
+### Usage of `withDefaultProps`
 
-This changes all or some of the default `props` of the components in bulk.
+It changes all or part of the default `props` of the components at once.
 
 ```ts title=./theme/index.ts
 import { extendTheme, withDefaultProps } from '@yamada-ui/react'

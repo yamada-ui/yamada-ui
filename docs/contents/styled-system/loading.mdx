@@ -1,22 +1,22 @@
 ---
 title: Loading
-description: Yamada UI supports the necessary loading animations for applications.
+description: Yamada UI supports the loading animations needed in applications.
 order: 10
 ---
 
-Yamada UI supports the necessary `loading animations` for applications.
+Yamada UI supports the `loading animations` needed in applications.
 
 ## Usage
 
 To display loading, use `useLoading`. `useLoading` returns instances of `screen`, `page`, `background`, and `custom`. These instances include several methods.
 
-- `isLoading`: Determines whether the loading animation is in progress.
+- `isLoading`: Retrieves whether it is in the loading animation.
 - `start`: Starts the loading animation.
 - `update`: Updates the information of the loading animation.
 - `finish`: Ends the loading animation.
 
 :::note status=warning
-`custom` is not set in the [default config](/styled-system/configure/default-config). If you want to set up custom loading, please see [here](#Using-custom-components).
+`custom` is not set in the [default config](/styled-system/configure/default-config). If you want to set up custom loading, please check [here](#Using-Custom-Components).
 :::
 
 ```tsx functional=true
@@ -63,7 +63,7 @@ return (
 
 ## Customizing Loading
 
-By passing options to the method, you can customize the loading.
+By passing options to the method, you can customize loading.
 
 ### Adding a Timeout
 
@@ -81,7 +81,7 @@ return (
 )
 ```
 
-### Add a Message
+### Adding a Message
 
 To add a message to the loading, use `message`.
 
@@ -103,7 +103,7 @@ return (
 )
 ```
 
-`message` can take a `JSX element`.
+You can pass a `JSX element` to `message`.
 
 ```tsx functional=true
 const { screen, page, background } = useLoading()
@@ -133,9 +133,9 @@ return (
 )
 ```
 
-### Update the message
+### Update the Message
 
-When updating the message, pass the options using the `update` method.
+To update the message, pass options to the `update` method.
 
 ```tsx functional=true
 const { screen, page, background } = useLoading()
@@ -239,9 +239,9 @@ return (
 
 ### Using `initialState`
 
-By using `initialState`, a loading display will be shown when the application loads.
+By using `initialState`, a loading display will be shown when the application is loaded.
 
-This is suitable for communication during loading (such as retrieving user information).
+This is suitable for communication during loading (such as obtaining user information).
 
 ```tsx live=false highlight={6}
 import { UIProvider, extendConfig } from '@yamada-ui/react'
@@ -269,7 +269,7 @@ If you set `initialState` to `true`, you need to call `finish` of the `useLoadin
 
 ### Using Custom Components
 
-Depending on the scenario, you may need to implement a loading animation that matches your project.
+Depending on the scenario, you may need to implement a loading animation that fits your project.
 
 In that case, you can utilize `custom`.
 
@@ -397,5 +397,5 @@ return (
 ```
 
 :::note
-If you want to learn more about configuration, please see [Customizing Configuration](/styled-system/configure/customize-config).
+If you want to learn more about the config, please check [Customizing Config](/styled-system/configure/customize-config).
 :::

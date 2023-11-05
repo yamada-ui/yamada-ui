@@ -27,14 +27,14 @@ export const breakpoints = {
 ```
 
 :::note
-If you want to change the breakpoints, please see [here](#customizing-breakpoints).
+If you want to change the breakpoints, please check [here](#customizing-breakpoints).
 :::
 
 ## Syntax for Responsive Styles
 
-When setting responsive styles, you can support PC-first responsive styles simply by passing an object to the style's `props`.
+To set responsive styles, simply pass an object to the style's `props` to support PC-first responsive styles.
 
-- The keys of the object define the keys set in the theme's [breakpoints](#About Breakpoints).
+- The keys of the object define the keys set in the theme's [breakpoints](#about-breakpoints).
 - The values of the object define the values of the styles set by the key.
 
 ```tsx
@@ -86,7 +86,7 @@ const breakpoint = useBreakpoint()
 return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
 ```
 
-### Using `useBreakpointValue`
+### Usage of `useBreakpointValue`
 
 `useBreakpointValue` is a custom hook that returns the value of the current breakpoint from the object passed as an argument.
 
@@ -138,5 +138,5 @@ const App = () => {
 ```
 
 :::note
-If you want to learn more about themes, please see [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
+If you want to learn more about themes, please check [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
 :::

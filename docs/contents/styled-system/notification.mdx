@@ -22,10 +22,10 @@ return (
 
 ## Customize Notifications
 
-Notification options are passed as arguments to `useNotice` or to the instance returned from `useNotice`.
+The notification options are passed as arguments to `useNotice` or to the instance returned from `useNotice`.
 
 :::note
-The options of the instance returned from `useNotice` take precedence.
+The arguments of the instance returned from `useNotice` take precedence.
 :::
 
 ### Change Display Time
@@ -88,7 +88,7 @@ return (
 )
 ```
 
-### Limit the number of displays
+### Limiting the Number of Displays
 
 To limit the number of displays, change it with `limit`.
 
@@ -102,9 +102,9 @@ return (
 )
 ```
 
-### Change the Variant
+### Changing Variants
 
-Use the same variant as `Alert`.
+We use the same variants as `Alert`.
 
 ```tsx functional=true
 const notice = useNotice()
@@ -126,7 +126,7 @@ return (
 )
 ```
 
-### Change the Status
+### Change Status
 
 The status changes the color of the notification.
 
@@ -152,7 +152,7 @@ return (
 
 ### Using Color Schemes
 
-You can change the color using `colorScheme`.
+To change colors, modify `colorScheme`.
 
 ```tsx functional=true
 const notice = useNotice()
@@ -174,7 +174,7 @@ return (
 )
 ```
 
-### Changing the Loading Icon Variant
+### Changing the Loading Variant
 
 You can change the variant of the loading icon with `icon.variant`.
 
@@ -203,9 +203,9 @@ return (
 )
 ```
 
-### Update the notification
+### Update Notification
 
-When updating the notification, pass the new options by specifying the `id` generated from the instance.
+To update a notification, pass new options specifying the `id` generated from the instance.
 
 ```tsx functional=true
 const notice = useNotice()
@@ -273,7 +273,7 @@ return (
 
 ### Customizing Components
 
-When customizing the component to be rendered, use `component`.
+To customize the component to be rendered, use `component`.
 
 ```tsx functional=true
 const notice = useNotice({
@@ -289,7 +289,7 @@ return (
 )
 ```
 
-### Customize the style
+### Customize the Style
 
 ```tsx functional=true
 const notice = useNotice({ style: { maxW: '100%', minW: '100%' } })
@@ -298,7 +298,7 @@ return (
   <Wrap gap='md'>
     <Button
       onClick={() =>
-        notice({ title: 'Notification', description: 'This is a description.', isClosable: true })
+        notice({ title: 'Notification', description: 'This is description.', isClosable: true })
       }
     >
       Show notification
@@ -308,7 +308,7 @@ return (
       onClick={() =>
         notice({
           title: 'Notification',
-          description: 'This is a description.',
+          description: 'This is description.',
           isClosable: true,
           style: { minW: '60%' },
         })
@@ -348,5 +348,5 @@ const App = () => {
 ```
 
 :::note
-If you want to learn more about config, please see [Customize Config](/styled-system/configure/customize-config).
+If you want to learn more about config, please check [Customize Config](/styled-system/configure/customize-config).
 :::

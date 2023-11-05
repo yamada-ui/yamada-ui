@@ -1,12 +1,42 @@
 ---
 title: Divider
-description: This page is currently being created.
+description: '`Divider` is a component that represents a division between elements.'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Divider } from '@yamada-ui/react'
+```
+
+## How to use
+
+```tsx
+<Flex direction='column' gap='md'>
+  <Divider variant='solid' />
+
+  <Divider variant='dashed' />
+
+  <Divider variant='dotted' />
+</Flex>
+```
+
+### Draw a vertical dividing line
+
+```tsx
+<Flex h='sm' gap='md'>
+  <Divider orientation='vertical' variant='solid' />
+
+  <Divider orientation='vertical' variant='dashed' />
+
+  <Divider orientation='vertical' variant='dotted' />
+</Flex>
+```
+
+:::note status=warning
+When making the dividing line vertical, you need to set the height to the parent element or `Divider`.
+:::

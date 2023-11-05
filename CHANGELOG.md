@@ -6,6 +6,8 @@
 
 ## Previous Releases
 
+### November 5, 2023: [v0.8.14](/.changelog/v0.8.14.mdx)
+
 ### November 3, 2023: [v0.8.13](/.changelog/v0.8.13.mdx)
 
 ### November 2, 2023: [v0.8.12](/.changelog/v0.8.12.mdx)
@@ -155,6 +157,8 @@
 ### June 8, 2023: [v0.2.5](/.changelog/v0.2.5.mdx)
 
 ### June 8, 2023: [v0.2.4](/.changelog/v0.2.4.mdx)
+
+### June 6, 2023: [vundefined](/.changelog/vundefined.mdx)
 
 ### June 7, 2023: [v0.2.3](/.changelog/v0.2.3.mdx)
 

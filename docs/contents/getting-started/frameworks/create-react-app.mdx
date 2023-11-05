@@ -4,11 +4,11 @@ description: A guide to installing and using Yamada UI in a Create React App pro
 menu: Create React App
 ---
 
-## Installation
+## Install the package
 
-Let's create the application.
+First, create an application.
 
-Execute one of the following commands in the terminal.
+Run one of the following commands in the terminal.
 
 <PackageManagers
   packageNameOrCommand={{
@@ -18,11 +18,11 @@ Execute one of the following commands in the terminal.
   }}
 />
 
-With Yamada UI, just by installing `@yamada-ui/react`, you can use most of the components and hooks.
+With Yamada UI, you can use most components and hooks just by installing `@yamada-ui/react`.
 
 <PackageManagers packageNameOrCommand='@yamada-ui/react' />
 
-If you want to use components like Table, Calendar, Carousel, etc., you need to install them separately.
+If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
 <SelectPackageManagers
   packages={[
@@ -57,12 +57,12 @@ If you want to use components like Table, Calendar, Carousel, etc., you need to 
 
 :::note
 To improve performance by installing components and hooks individually, please check [here](/getting-started/installation/individually).
-If you only want to use Yamada UI's styling system, please check [here](/getting-started/installation/minimal).
+If you only want to use the Yamada UI style system, please check [here](/getting-started/installation/minimal).
 :::
 
-## Add `UIProvider`
+## Adding `UIProvider`
 
-After installing Yamada UI, add the `UIProvider`.
+After installing Yamada UI, add `UIProvider`.
 
 ```tsx live=false title=index.tsx highlight={10,12}
 import { createRoot } from 'react-dom/client'
@@ -81,16 +81,16 @@ root.render(
 ```
 
 :::note
-The [Default theme](/styled-system/theming/default-theme) is included inside the `UIProvider`.
+The [default theme](/styled-system/theming/default-theme) is included in `UIProvider`.
 :::
 
 :::note
-If you want to customize the theme or configuration, please check [Customize the theme](/styled-system/theming/customize-theme) and [Customize the configuration](/styled-system/configure/customize-config).
+If you want to customize the theme or config, please check [customize the theme](/styled-system/theming/customize-theme) and [customize the config](/styled-system/configure/customize-config).
 :::
 
-## Use the components
+## Using the Component
 
-Once you've added the `UIProvider`, call the components within the application.
+Once you've added `UIProvider`, call the component within your application.
 
 ```tsx live=false title=app.tsx
 import { FC } from 'react'

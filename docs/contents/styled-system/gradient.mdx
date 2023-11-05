@@ -1,12 +1,12 @@
 ---
 title: Gradient
-description: Yamada UI supports readily available gradients.
+description: Yamada UI supports readily usable gradients.
 order: 7
 ---
 
 Yamada UI provides an API to easily create gradients.
 
-## How to use
+## Usage
 
 To add a gradient, set the value according to the `bgGradient` API.
 
@@ -15,7 +15,7 @@ To add a gradient, set the value according to the `bgGradient` API.
 
 You can also use other CSS gradient functions such as `repeating-linear` and `conic`.
 
-Shorthand is also provided for `<direction>`.
+Shorthand is also available for `<direction>`.
 
 ```ts
 {
@@ -59,20 +59,20 @@ export const gradients: ThemeTokens = {
 ```
 
 :::note status=warning
-Gradient tokens are not defined in the [default theme](/styled-system/theming/default-theme). If you want to use gradient tokens, please see [how to customize the theme](/styled-system/theming/customize-theme).
+Gradient tokens are not defined in the [default theme](/styled-system/theming/default-theme). If you want to use gradient tokens, please check [how to customize the theme](/styled-system/theming/customize-theme).
 :::
 
 ## Text Gradient
 
-To add a gradient to the text, set `text` to `bgGradient` and `bgClip`.
+To add a gradient to the text, set `text` for `bgGradient` and `bgClip`.
 
 ```tsx
 <Heading size='2xl' bgGradient='linear(to-r, orange.400, red.500)' bgClip='text' isTruncated>
-  About Krillin... About Krillinーーーっ！！！！！
+  Thinking about Krillin... Thinking about Krillin!!!!!
 </Heading>
 ```
 
-## Responsive Gradients
+## Responsive Gradient
 
 You can support responsive styles by passing an object to `bgGradient`.
 
@@ -89,5 +89,5 @@ You can support responsive styles by passing an object to `bgGradient`.
 ```
 
 :::note
-If you want to learn more about responsive styles, please see [here](/styled-system/responsive-styles).
+If you want to learn more about responsive styles, please check [here](/styled-system/responsive-styles).
 :::

@@ -4,11 +4,11 @@ description: How to use text and layer styles.
 order: 9
 ---
 
-In most projects, you may notice that certain `text properties (such as font size)` and `layer properties (such as background color)` are being repeated. As the scale of the project grows, there is a possibility that the consistency of the design cannot be guaranteed.
+In most projects, you may notice that certain `text properties (such as font size)` and `layer properties (such as background color)` are being repeated. As the scale of the project grows, it may become difficult to ensure design consistency.
 
-By using `textStyle` and `layerStyle`, you can maintain the consistency of the design.
+By using `textStyle` and `layerStyle`, you can maintain design consistency.
 
-## Customizing the Theme
+## Customize the Theme
 
 To use `textStyle` and `layerStyle`, you need to define tokens and styles in the theme.
 
@@ -61,7 +61,7 @@ const App = () => {
 ```
 
 :::note
-If you want to learn more about themes, please see [Customizing the Theme](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
+If you want to learn more about themes, please check [Customize the Theme](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
 :::
 
 ## Layer Styles
@@ -74,17 +74,17 @@ To refer to the styles defined in the theme's `layerStyles`, set the token in `l
 
 ## Text Style
 
-To refer to the style defined in the `textStyles` of the theme, set the token in `textStyle`.
+To refer to the style defined in the theme's `textStyles`, set the token to `textStyle`.
 
 ```tsx
 <Heading textStyle='gradient' isTruncated>
-  About Krillin... About Krillinーーー!!
+  About Krillin... About Krillin!!!!!
 </Heading>
 ```
 
 ## Other Styles
 
-You can freely define tokens and styles in the `styles` of the theme.
+You can freely define tokens and styles in the theme's `styles`.
 
 ```tsx live=false
 import { UIProvider, extendTheme } from '@yamada-ui/react'
@@ -108,7 +108,7 @@ const App = () => {
 }
 ```
 
-To refer to the style defined in the `styles` of the theme, set the token in `apply`.
+To reference the style defined in the theme's `styles`, set the token in `apply`.
 
 ```tsx
 <Heading apply='otherStyle.title' isTruncated>

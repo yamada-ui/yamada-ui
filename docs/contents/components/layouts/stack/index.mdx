@@ -1,12 +1,124 @@
 ---
 title: Stack
-description: This page is currently being created.
+description: '`Stack` is a component that groups elements and provides space between child elements.'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Stack, VStack, HStack } from '@yamada-ui/react'
+```
+
+- `Stack` is used to stack child elements vertically or horizontally.
+- `VStack` is used to stack child elements vertically.
+- `HStack` is used to stack child elements horizontally.
+
+## Usage
+
+```tsx
+<Stack direction={{ base: 'column', lg: 'row' }}>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</Stack>
+```
+
+### Stack Vertically
+
+```tsx
+<VStack>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</VStack>
+```
+
+### Stack Horizontally
+
+```tsx
+<HStack>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</HStack>
+```
+
+### Add a dividing line between child elements
+
+```tsx
+<VStack divider={<Divider />}>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</VStack>
+```
+
+### Using `Spacer`
+
+```tsx
+<HStack>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</HStack>
+```
+
+(Note: The text in the code block is not translated as it is programming code, not Japanese text.)

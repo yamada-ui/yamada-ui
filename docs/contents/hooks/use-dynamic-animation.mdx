@@ -16,7 +16,7 @@ import { useDynamicAnimation } from '@yamada-ui/react'
 `useDynamicAnimation` takes an object as an argument. The keys of the object become the keys of the animation, and the animation changes by passing the key as an argument to `setState`.
 
 :::note
-`useDynamicAnimation` uses `useAnimation` internally. For detailed definitions of animations, please see [here](/hooks/use-animation).
+`useDynamicAnimation` internally uses `useAnimation`. For detailed animation definitions, please check [here](/hooks/use-animation).
 :::
 
 ```tsx functional=true
@@ -65,10 +65,10 @@ return (
 ```
 
 :::note
-If you want to learn more about animations, please see [here](/styled-system/animation).
+If you want to learn more about animation, please check [here](/styled-system/animation).
 :::
 
-### Use Multiple Animations
+### Using Multiple Animations
 
 ```tsx functional=true
 const [animation, setAnimation] = useDynamicAnimation<

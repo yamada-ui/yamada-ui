@@ -1,12 +1,12 @@
 ---
 title: Style props
-description: Learn about the Style props of Yamada UI. Style props is a method to change the style of a component just by passing props to the component.
+description: Learn about Style props in Yamada UI. Style props is a method to change the style of a component just by passing props to the component.
 order: 1
 with_children: true
 with_children_description: false
 ---
 
-`Style props` is a method to change the style of a component just by passing `props` to the component. It also provides many convenient shorthands, improving development efficiency.
+`Style props` is a method to change the style of a component just by passing `props` to the component. It also provides many useful shorthands, improving development efficiency.
 
 ```tsx
 <Box w='full' p='md' bg='warning' color='white'>
@@ -65,7 +65,7 @@ with_children_description: false
 <Box m={['md', 'sm']} />
 ```
 
-| Prop                                       | CSS Property                                  | Theme Token                                           |
+| Prop                                       | CSS Property                                  | Theme Tokens                                          |
 | ------------------------------------------ | --------------------------------------------- | ----------------------------------------------------- |
 | `m`, `margin`                              | `margin`                                      | [spaces](/styled-system/theming/default-theme#spaces) |
 | `mt`, `marginTop`                          | `margin-top`                                  | [spaces](/styled-system/theming/default-theme#spaces) |
@@ -97,16 +97,16 @@ with_children_description: false
 ## Typography
 
 ```tsx live=false
-// When to use theme token value.
+// Usage of theme token value.
 <Box fontSize='md' />
 
-// When to use custom value.
+// Usage of custom value.
 <Box fontSize='1rem' />
 
-// When to use responsive styles.
+// Usage of responsive styles.
 <Box fontSize={{ base: 'lg', md: '1rem' }} />
 
-// When to use color mode styles.
+// Usage of color mode styles.
 <Box fontSize={['md', 'sm']} />
 ```
 
@@ -135,16 +135,16 @@ with_children_description: false
 ## Layout
 
 ```tsx live=false
-// When to use theme token value.
+// Usage of theme token value.
 <Box w='md' />
 
-// When to use custom value.
+// Usage of custom value.
 <Box w='1rem' />
 
-// When to use responsive styles.
+// Usage of responsive styles.
 <Box w={{ base: 'lg', md: '1rem' }} />
 
-// When to use color mode styles.
+// Usage of color mode styles.
 <Box w={['md', 'sm']} />
 ```
 
@@ -219,16 +219,16 @@ with_children_description: false
 ## Position
 
 ```tsx live=false
-// When to use theme token value.
+// Usage of theme token value.
 <Box pos="absolute" top='md' />
 
-// When to use custom value.
+// Usage of custom value.
 <Box pos="absolute" top='2rem' />
 
-// When to use responsive styles.
+// Usage of responsive styles.
 <Box pos="absolute" top={{ base: 'md', md: '8px' }} />
 
-// When to use color mode styles.
+// Usage of color mode styles.
 <Box pos="absolute" top={['md', 'sm']} />
 ```
 
@@ -261,16 +261,16 @@ with_children_description: false
 ## Border
 
 ```tsx live=false
-// When to use theme token value.
+// Usage of theme token value.
 <Box borderRadius='md' />
 
-// When to use custom value.
+// Usage of custom value.
 <Box borderRadius='2rem' />
 
-// When to use responsive styles.
+// Usage of responsive styles.
 <Box borderRadius={{ base: 'md', md: '8px' }} />
 
-// When to use color mode styles.
+// Usage of color mode styles.
 <Box borderRadius={['md', 'sm']} />
 ```
 
@@ -335,16 +335,16 @@ with_children_description: false
 ## Effects
 
 ```tsx live=false
-// When to use theme token value.
+// Usage of theme token value.
 <Box shadow='md' />
 
-// When to use custom value.
+// Usage of custom value.
 <Box shadow='0 0 0 1px rgba(0, 0, 0, 0.05)' />
 
-// When to use responsive styles.
+// Usage of responsive styles.
 <Box shadow={{ base: 'lg', md: 'md' }} />
 
-// When to use color mode styles.
+// Usage of color mode styles.
 <Box shadow={['md', 'dark-md']} />
 ```
 
@@ -393,7 +393,7 @@ with_children_description: false
 | `backdropSepia`      | `backdrop-filter` | none                                                    |
 
 :::note status=warning
-When using `blur`, `brightness`, `backdropBlur`, `backdropBrightness`, etc., you need to set `auto` for `filter` and `backdropFilter`.
+When using `blur`, `brightness`, `backdropBlur`, `backdropBrightness`, etc., you need to set `filter` and `backdropFilter` to `auto`.
 :::
 
 ## Pseudo Elements and Selectors
@@ -512,5 +512,5 @@ When using `blur`, `brightness`, `backdropBlur`, `backdropBrightness`, etc., you
 | `scrollPaddingX`           | `scroll-padding-left` + `scroll-padding-right` | [spaces](/styled-system/theming/default-theme#spaces)                    |
 
 :::note status=warning
-When using `translateX`, `scale`, `skewX`, etc., you need to set `transform` to `auto` or `auto-3d`.
+When using `translateX`, `scale`, `skewX`, etc., you need to set `auto` or `auto-3d` to `transform`.
 :::

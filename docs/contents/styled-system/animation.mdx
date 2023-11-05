@@ -10,21 +10,21 @@ Yamada UI provides many utilities, such as `Motion`, a component specialized for
 
 Yamada UI provides `useAnimation` and `useDynamicAnimation` that can be described like CSS's `keyframes`. Also, by setting tokens in the theme, you can ensure consistency of animation in the project.
 
-### Using `useAnimation`
+### Usage of `useAnimation`
 
 `useAnimation` sets arguments such as `keyframes`, and passes the generated `animation` to `props`.
 
-- `keyframes`: Sets the style of keyframes (or intermediate points) along the flow of the animation. The values of each style can use tokens from the Yamada UI style system or theme.
-- `duration`: Sets the length of time required for one animation cycle.
-- `timingFunction`: Sets how the animation progresses. This defines the acceleration curve, setting how the animation progresses between keyframes.
-- `delay`: Sets the delay time from when the element is loaded until the animation begins.
-- `iterationCount`: Sets the number of times the animation repeats. To repeat the animation indefinitely, specify `infinite`.
-- `direction`: Sets whether to animate in reverse direction and repeat when the animation sequence is completed, or to reset to the initial state and repeat the animation.
-- `fillMode`: Sets whether to apply the specified style before and after the execution of the animation.
-- `playState`: Sets whether to pause or resume the animation.
+- `keyframes`: Set the style of keyframes (or intermediate points) along the flow of the animation. The values of each style can use the tokens of the Yamada UI style system and theme.
+- `duration`: Set the length of time required for one animation cycle.
+- `timingFunction`: Set how the animation progresses. This defines the acceleration curve, setting how the animation between keyframes progresses.
+- `delay`: Set the delay time from when the element is loaded until the animation begins.
+- `iterationCount`: Set the number of times the animation repeats. To repeat the animation indefinitely, specify `infinite`.
+- `direction`: Set whether to animate in the reverse direction and repeat when the animation sequence is completed, or to reset to the initial state and repeat the animation.
+- `fillMode`: Set whether to apply the specified style before and after the execution of the animation.
+- `playState`: Set whether to pause or resume the animation.
 
 :::note
-The animation settings are based on [@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes) and [Using CSS animations](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定).
+The animation settings are based on [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) and [Using CSS animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations#animation_properties).
 :::
 
 ```tsx functional=true
@@ -57,7 +57,7 @@ const animation = useAnimation({
 return <Box w='full' h='xs' animation={animation} />
 ```
 
-#### Using multiple animations
+#### Using Multiple Animations
 
 By passing an array of animations to `useAnimation`, you can use multiple animations.
 
@@ -129,7 +129,7 @@ return (
 )
 ```
 
-#### Responsive styles
+#### Responsive Styles
 
 By passing an object to `animation` in `props`, it supports PC-first responsive styles.
 
@@ -190,12 +190,12 @@ return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnima
 ```
 
 :::note
-If you want to learn more about responsive styles, please see [here](/styled-system/responsive-styles).
+If you want to learn more about responsive styles, please check [here](/styled-system/responsive-styles).
 :::
 
-#### Color mode
+#### Color Modes
 
-By passing an array to `animation` in `props`, it supports color mode.
+By passing an array to `animation` in `props`, it supports color modes.
 
 ```tsx functional=true
 const lightAnimation = useAnimation({
@@ -254,10 +254,10 @@ return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
 ```
 
 :::note
-If you want to learn more about color mode, please see [here](/styled-system/color-mode).
+If you want to learn more about color modes, please check [here](/styled-system/color-mode).
 :::
 
-### Using `useDynamicAnimation`
+### Usage of `useDynamicAnimation`
 
 `useDynamicAnimation` takes an object as an argument. The keys of the object become the keys of the animation, and the animation changes by passing the key as an argument to `setState`.
 
@@ -390,7 +390,7 @@ return (
 ### Using Theme Tokens
 
 :::note status=warning
-If you are going to use the theme's animation tokens, please first check out [Theme Operation](/styled-system/theming/customize-theme#Theme Operation).
+If you are going to use the theme's animation tokens, please first check [Theme Operation](/styled-system/theming/customize-theme#Theme Operation).
 :::
 
 Create animation tokens and set them in the theme.
@@ -445,10 +445,10 @@ export default extendTheme(customTheme)()
 ```
 
 :::note
-It is recommended to use type completion for the animation tokens you create. Type completion is done using the [CLI](/styled-system/cli).
+It is recommended to use type completion for the animation tokens you created. For type completion, use the [CLI](/styled-system/cli).
 :::
 
-The tokens you create are specified in the `animation` of the component's `props`. They can also be used with `useAnimation` and `useDynamicAnimation`.
+The created tokens are specified in the `animation` of the component's `props`. They can also be used with `useAnimation` and `useDynamicAnimation`.
 
 ```tsx functional=true
 return <Box w='full' h='xs' animation='gradient' />
@@ -456,23 +456,23 @@ return <Box w='full' h='xs' animation='gradient' />
 
 ## Motion
 
-By using the `Motion` component, you can easily implement many animations.
+You can easily implement many animations by using the `Motion` component.
 
 :::note
-The `Motion` component internally uses [Framer Motion](https://www.framer.com/motion/). If you want to know more about the features of the component, please see [here](https://www.framer.com/motion/component/).
+The `Motion` component internally uses [Framer Motion](https://www.framer.com/motion/). If you want to know more about the component's features, please check [here](https://www.framer.com/motion/component/).
 :::
 
 ### Animation
 
-By setting styles to `initial`, `animate`, and `exit`, you can implement animations on elements. You can also set the required time and delay time in `transition`.
+By setting styles to `initial`, `animate`, and `exit`, you can implement animations to elements. You can also set the required time and delay time in `transition`.
 
-- `initial`: This is a style object of the initial value of the element.
+- `initial`: This is a style object for the initial value of the element.
 - `animate`: This is a style object that you want to change (animate) from `initial`.
 - `exit`: This is a style object that you want to change (animate) when the element is removed from the `DOM tree`.
-- `transition`: This is an object that sets the required time and delay time.
+- `transition`: This is an object to set the required time and delay time.
 
 :::note status=warning
-The style objects used in `initial`, `animate`, `exit`, and `transition` are not `Style Props` of Yamada UI. Please refer to the [Framer Motion](https://www.framer.com/motion/) documentation for the properties of the style object.
+The style objects used in `initial`, `animate`, `exit`, and `transition` are not `Style Props` of Yamada UI. For the properties of the style object, please check [Framer Motion](https://www.framer.com/motion/).
 :::
 
 ```tsx
@@ -495,7 +495,7 @@ The style objects used in `initial`, `animate`, `exit`, and `transition` are not
 </Center>
 ```
 
-#### Using `AnimatePresence`
+#### Usage of `AnimatePresence`
 
 In React, animations are not maintained when elements are removed from the `DOM tree`. By wrapping with the `AnimatePresence` component, the element is maintained on the `DOM tree` until the animation ends.
 
@@ -545,7 +545,7 @@ return (
 
 #### Keyframes
 
-By passing an array to the property of the style object, you can set keyframes. Each keyframe is placed at an equal interval throughout the animation. If you set `times` in `transition`, you can override the interval.
+By passing an array to the property of the style object, you can set keyframes. Each keyframe is placed at an equal interval throughout the animation. You can override the interval by setting `times` in `transition`.
 
 ```tsx
 <Center h='md'>
@@ -569,7 +569,7 @@ By passing an array to the property of the style object, you can set keyframes. 
 </Center>
 ```
 
-#### Using `useMotionAnimationFrame`
+#### Usage of `useMotionAnimationFrame`
 
 `useMotionAnimationFrame` executes a callback once for each animation frame of the element. The callback can get the **total time since the callback was first called** and the **total time from the last animation frame**.
 
@@ -617,7 +617,7 @@ return (
 ```
 
 :::note
-If you want to know more about animation, please see [here](https://www.framer.com/motion/animation/).
+If you want to know more about animation, please check [here](https://www.framer.com/motion/animation/).
 :::
 
 ### Gestures
@@ -630,9 +630,9 @@ The hover gesture detects whether the pointer has moved over or away from an ele
 
 The difference between `onMouseEnter` and `onMouseLeave` is that they are guaranteed to fire only as a result of actual mouse events.
 
-- `whileHover`: An animation that fires when an element is hovered.
-- `onHoverStart`: A callback function that fires when the pointer moves over an element.
-- `onHoverEnd`: A callback function that fires when the pointer moves away from an element.
+- `whileHover`: An animation that fires when the element is hovered.
+- `onHoverStart`: A callback function that fires when the pointer moves over the element.
+- `onHoverEnd`: A callback function that fires when the pointer moves away from the element.
 
 ```tsx
 <Center p='lg'>
@@ -652,16 +652,16 @@ The difference between `onMouseEnter` and `onMouseLeave` is that they are guaran
 ```
 
 :::note
-If you want to know more about hover animations, please visit [here](https://www.framer.com/motion/gestures/#hover).
+If you want to know more about hover animations, please check [here](https://www.framer.com/motion/gestures/#hover).
 :::
 
 #### Click/Tap
 
 The click/tap gesture detects whether the primary pointer (such as a left click or touch) has pressed down or released the same element.
 
-- `whileTap`: An animation that fires when an element is clicked/tapped.
-- `onTap`: A callback function that fires when a click/tap on an element has successfully ended.
-- `onTapStart`: A callback function that fires when a click/tap on an element has started.
+- `whileTap`: An animation that fires when the element is clicked/tapped.
+- `onTap`: A callback function that fires when a click/tap on the element has successfully ended.
+- `onTapStart`: A callback function that fires when a click/tap on the element has started.
 - `onTapCancel`: A callback function that fires when a click/tap has been cancelled (released outside the element).
 
 ```tsx
@@ -683,7 +683,7 @@ The click/tap gesture detects whether the primary pointer (such as a left click 
 ```
 
 :::note
-If you want to know more about click/tap animations, please visit [here](https://www.framer.com/motion/gestures/#tap).
+If you want to know more about click/tap animations, please check [here](https://www.framer.com/motion/gestures/#tap).
 :::
 
 #### Focus
@@ -699,14 +699,14 @@ The focus gesture detects whether an element has been focused, following the sam
 ```
 
 :::note
-If you want to know more about focus animations, please visit [here](https://www.framer.com/motion/gestures/#focus).
+If you want to know more about focus animations, please check [here](https://www.framer.com/motion/gestures/#focus).
 :::
 
 ### Drag
 
 Detects the movement of the pointer and makes the element follow it.
 
-If you want to enable dragging for an element, set `drag` to `true` or pass `x` or `y`. If you pass `x` or `y`, it will only follow the `x-axis` or `y-axis`.
+If you want to enable dragging on an element, set `drag` to `true` or pass `x` or `y`. If you pass `x` or `y`, it will only follow the `x-axis` or `y-axis`.
 
 - `onDrag`: A callback function that fires during dragging.
 - `onDragStart`: A callback function that fires when dragging starts.
@@ -755,7 +755,7 @@ If you want to enable dragging for an element, set `drag` to `true` or pass `x` 
 </Center>
 ```
 
-#### Constraining the possible area
+#### Constraining the Possible Area
 
 You can constrain the possible area of dragging by passing an object with values (in pixels) for `top`, `right`, `bottom`, and `left` to `dragConstraints`, or by passing a `ref`.
 
@@ -849,7 +849,7 @@ return (
 ```
 
 :::note
-If you want to know more about drag animation, please visit [here](https://www.framer.com/motion/gestures/#drag).
+If you want to know more about drag animation, please check [here](https://www.framer.com/motion/gestures/#drag).
 :::
 
 ### Scroll
@@ -857,9 +857,9 @@ If you want to know more about drag animation, please visit [here](https://www.f
 You can detect when an element enters and leaves the viewport and implement animations.
 
 - `whileInView`: An animation that fires when an element enters the viewport.
-- `viewport`: An object that sets the detection method for the viewport.
-  - `once`: If `true`, the animation will fire only once when the element enters the viewport.
-  - `root`: By passing a `ref`, the viewport of the specified element will be used. If no element is specified, the window's viewport will be used.
+- `viewport`: An object that sets how the viewport is detected.
+  - `once`: If `true`, the animation fires only once when the element enters the viewport.
+  - `root`: By passing a `ref`, the viewport of the specified element is used. If no element is specified, the window's viewport is used.
   - `margin`: The margin added to the viewport when detecting whether an element has entered the viewport. By default, it is `"0px"`. It is described like the `margin` of `CSS` (e.g., `"0px -20px 0px 100px"`).
   - `amount`: By passing `"some"`, `"all"`, or a number, you can set the height of the element that needs to intersect with the viewport. The default is `"some"`.
 - `onViewportEnter`: A callback function that fires when an element enters the viewport.
@@ -909,7 +909,7 @@ return (
 )
 ```
 
-#### Using `useScroll`
+#### Usage of `useScroll`
 
 `useScroll` returns four instances. By using these instances, you can implement animations according to the scroll.
 
@@ -950,5 +950,5 @@ return (
 ```
 
 :::note
-If you want to know more about scroll animations, please visit [here](https://www.framer.com/motion/scroll-animations/).
+If you want to know more about scroll animations, please check [here](https://www.framer.com/motion/scroll-animations/).
 :::

@@ -4,11 +4,11 @@ description: How to create and customize component styles.
 order: 4
 ---
 
-Maintaining flexible styles for components in a growing project is a challenging task.
+Maintaining flexible component styles in a growing project is a challenging task.
 
-To solve this, Yamada UI constructs each component with basic styles and modifier styles. This allows for flexible style changes.
+To solve this, Yamada UI is structured with each component consisting of basic styles and modifier styles. This allows for flexible style changes.
 
-In addition, we provide `useComponentStyle` and `useMultiComponentStyle` to manage the styles of the components you create with themes.
+In addition, we provide `useComponentStyle` and `useMultiComponentStyle` to manage the styles of the components you create with a theme.
 
 ## Basic Styles and Modifier Styles
 
@@ -33,43 +33,43 @@ The order is as follows, and the same property values are overwritten:
 `Color Scheme` and `Color Mode` are values that assist modifier styles, not styles themselves.
 :::
 
-## Single Part and Multiple Part Components
+## Single-Part and Multi-Part Components
 
-Yamada UI components consist of **components made up of a single part** (such as `Button`, `Link`, etc.) and **components made up of multiple parts** (such as `Tab`, `Menu`, etc.).
+Yamada UI components consist of **single-part components** (such as `Button`, `Link`, etc.) and **multi-part components** (such as `Tab`, `Menu`, etc.).
 
 ### Single Part Component
 
-A single part component is a component composed of a single element. For example, the `Button` component renders the `button` HTML element.
+A single part component is a component composed of a single element. For example, the `Button` component renders the HTML element `button`.
 
 ```tsx live=false
 <Button>Click me!</Button>
 ```
 
 :::note status=warning
-Even though it may appear as a **single part component**, there are cases where it is a **multi-part component** that internally switches elements based on conditional branching. For example, `Tag`, `Checkbox`, `Radio`, etc. are applicable.
+There may be cases where it appears to be a **single part component**, but internally it is a **multiple part component** that switches elements based on conditional branching. For example, `Tag`, `Checkbox`, `Radio`, etc. fall under this category.
 :::
 
-### Component with Multiple Parts
+### Multi-part Components
 
-A component with multiple parts is a component that consists of multiple elements. The child elements are dependent on the parent element. For example, the `List` component is composed of `ListItem` and `ListIcon`.
+Multi-part components are components composed of multiple elements. The child elements are dependent on the parent element. For example, the `List` component is composed of `ListItem` and `ListIcon`.
 
 ```tsx live=false
 <List>
-  <ListItem>Shall I dance for joy if you don't mind?</ListItem>
-  <ListItem>Take my life!!! Toss!!!</ListItem>
+  <ListItem>Shall I dance for joy if you like?</ListItem>
+  <ListItem>Take my life!!! Touh!!!</ListItem>
   <ListItem>U... Behind me, who boasts the fastest speed in the universe...</ListItem>
-  <ListItem>There was no way we could win...</ListItem>
-  <ListItem>Am I like a trash picker at the game venue...</ListItem>
+  <ListItem>O... We were never supposed to win...</ListItem>
+  <ListItem>Am I like a trash picker at the match venue...</ListItem>
 </List>
 ```
 
-### Styling of Single Part Components
+### Styling Single Part Components
 
 :::note status=warning
-Before styling, please refer to [Theme Operation](/styled-system/theming/customize-theme#Theme Operation) and [Changing the Style of Components](/styled-system/theming/customize-theme#Changing the Style of Components).
+Before styling, please check [Theme Operation](/styled-system/theming/customize-theme#theme-operation) and [Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles).
 :::
 
-[Changing the Style of Components](/styled-system/theming/customize-theme#Changing the Style of Components) was styling that inherited the default theme.
+[Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles) was styling that inherited the default theme.
 
 This time, we will style the `Button` anew.
 
@@ -170,7 +170,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // Default values for `variant` and `size`, etc.
+  // Default values for `variant`, `size`, etc.
   defaultProps: {
     variant: 'solid',
     size: 'md',
@@ -180,7 +180,7 @@ export const Button: ComponentStyle = {
 ```
 
 :::note
-Functions can retrieve `theme`, `colorMode`, and `props` in addition to `colorScheme`.
+Functions can get `theme`, `colorMode`, `props` in addition to `colorScheme`.
 :::
 
 Set the style of the created component to the theme.
@@ -207,10 +207,10 @@ export default extendTheme(customTheme)({ omit: ['components'] })
 ### Styling Multi-part Components
 
 :::note status=warning
-Before styling, please refer to [Theme Operation](/styled-system/theming/customize-theme#Theme Operation) and [Changing Component Styles](/styled-system/theming/customize-theme#Changing Component Styles).
+Before styling, please check [Theme Operation](/styled-system/theming/customize-theme#Theme-Operation) and [Changing Component Styles](/styled-system/theming/customize-theme#Changing-Component-Styles).
 :::
 
-[Changing Component Styles](/styled-system/theming/customize-theme#Changing Component Styles) was styling that inherited the default theme.
+[Changing Component Styles](/styled-system/theming/customize-theme#Changing-Component-Styles) was styling that inherited the default theme.
 
 This time, we will style the `List` anew.
 
@@ -323,7 +323,7 @@ export const List: ComponentMultiStyle = {
 ```
 
 :::note status=warning
-`key` varies depending on the component. To check the `key` of each component, please refer to the `theme` on the component's page.
+`key` varies depending on the component. To check the `key` of each component, please refer to the `theme` of the component page.
 :::
 
 Set the style of the created component to the theme.
@@ -347,7 +347,7 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ['components'] })
 ```
 
-## Creating Custom Components
+## Creating Your Own Components
 
 Depending on the project, you may need to create your own components. To manage the style of these custom components with a theme, Yamada UI provides `useComponentStyle` and `useMultiComponentStyle` to get the style of the components.
 
@@ -410,7 +410,7 @@ export default extendTheme(customTheme)({ omit: ['components'] })
 ```
 
 :::note
-It is recommended to perform type completion for the created `variants` and `sizes`. Type completion is done using the [CLI](/styled-system/cli).
+It is recommended to perform type completion for the created `variants` and `sizes`. For type completion, use the [CLI](/styled-system/cli).
 :::
 
 Finally, call `useComponentStyle` within the component and load the style.

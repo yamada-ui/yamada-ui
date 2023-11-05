@@ -7,7 +7,7 @@ order: 8
 Yamada UI supports semantic tokens of all scales (such as color and font size).
 
 :::note
-Semantic tokens are terms used in design systems, etc., referring to abstracted variables or tokens of design attributes such as color and font size. These tokens are named so that their function and meaning can be intuitively understood from their names.
+Semantic tokens are terms used in design systems, referring to variables or tokens that abstract design attributes such as color and font size. These tokens are named so that their function and meaning can be intuitively understood from their names.
 :::
 
 The values that are actually set are as follows.
@@ -34,7 +34,7 @@ export const semantics: ThemeSemantics = {
 ```
 
 :::note status=warning
-The values that can be selected in `colorSchemes` are only the tokens where `Hue (from 50 to 950)` is defined in the theme's `colors`.
+The values that can be selected in `colorSchemes` are only tokens where `Hue (from 50 to 950)` is defined in the theme's `colors`.
 :::
 
 Semantic tokens are defined in the theme's `semantics`.
@@ -66,5 +66,5 @@ const App = () => {
 This generates a semantic token called `brand` for `colors.violet.500` defined in the [default theme](/styled-system/theming/default-theme).
 
 :::note
-If you want to learn more about themes, please see [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
+If you want to learn more about themes, please check [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
 :::

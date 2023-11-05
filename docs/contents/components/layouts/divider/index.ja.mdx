@@ -1,12 +1,42 @@
 ---
 title: Divider
-description: このページは現在作成中です。
+description: '`Divider`は、要素間において区切りを表すコンポーネントです。'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Divider } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx
+<Flex direction='column' gap='md'>
+  <Divider variant='solid' />
+
+  <Divider variant='dashed' />
+
+  <Divider variant='dotted' />
+</Flex>
+```
+
+### 垂直に区切り線を引く
+
+```tsx
+<Flex h='sm' gap='md'>
+  <Divider orientation='vertical' variant='solid' />
+
+  <Divider orientation='vertical' variant='dashed' />
+
+  <Divider orientation='vertical' variant='dotted' />
+</Flex>
+```
+
+:::note status=warning
+区切り線を垂直にする場合は、親要素または`Divider`に高さを設定する必要があります。
+:::

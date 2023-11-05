@@ -1,14 +1,14 @@
 ---
 title: Getting Started with Next.js
-description: A guide to install and use Yamada UI in your Next.js project.
+description: A guide to installing and using Yamada UI in your Next.js project.
 tab: App Router
 ---
 
-## Installation
+## Install the package
 
-Let's create the application.
+First, create an application.
 
-Execute one of the following commands in the terminal.
+Run one of the following commands in the terminal.
 
 <PackageManagers
   packageNameOrCommand={{
@@ -18,35 +18,35 @@ Execute one of the following commands in the terminal.
   }}
 />
 
-With just the installation of `@yamada-ui/react` and `@yamada-ui/nextjs`, you can use most of the components and hooks from Yamada UI.
+With Yamada UI, you can use most components and hooks just by installing `@yamada-ui/react` and `@yamada-ui/nextjs`.
 
 <PackageManagers packageNameOrCommand={['@yamada-ui/react', '@yamada-ui/nextjs']} />
 
-For features such as tables, calendars, carousels, etc., separate installation is required.
+If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
 <SelectPackageManagers
   packages={[
     {
       name: '@yamada-ui/table',
-      description: 'Provides a handy table component using `@tanstack/react-table`.',
+      description: 'Provides a convenient table component using `@tanstack/react-table`.',
       isDefaultCheck: true,
     },
     {
       name: '@yamada-ui/calendar',
-      description: 'Provides a handy calendar and date picker component using `dayjs`.',
+      description: 'Provides a convenient calendar and date picker component using `dayjs`.',
     },
     {
       name: '@yamada-ui/carousel',
-      description: 'Provides a handy carousel component using `embla-carousel-react`.',
+      description: 'Provides a convenient carousel component using `embla-carousel-react`.',
     },
     {
       name: '@yamada-ui/dropzone',
-      description: 'Provides a handy drop zone component using `react-dropzone`.',
+      description: 'Provides a convenient dropzone component using `react-dropzone`.',
     },
     {
       name: '@yamada-ui/markdown',
       description:
-        'Provides a handy markdown component using `react-markdown` and `react-syntax-highlighter`.',
+        'Provides a convenient markdown component using `react-markdown` and `react-syntax-highlighter`.',
     },
     {
       name: '@yamada-ui/fontawesome',
@@ -56,15 +56,15 @@ For features such as tables, calendars, carousels, etc., separate installation i
 />
 
 :::note
-To improve performance by installing components or hooks individually, please click [here](/getting-started/installation/individually).
-If you want to use only the style system of Yamada UI, please click [here](/getting-started/installation/minimal).
+To improve performance by installing components and hooks individually, please check [here](/getting-started/installation/individually).
+If you only want to use the Yamada UI style system, please check [here](/getting-started/installation/minimal).
 :::
 
 ## Add `UIProvider`, `CacheProvider`, and `ColorModeScript`
 
 In Next.js 13, `server components` are used by default. However, **Yamada UI is a `client component`**.
 
-Pages or components using Yamada UI components need to add `'use client'` to convert to `client components`.
+Pages and components that use Yamada UI components need to add `'use client'` and convert to `client components`.
 
 After installing Yamada UI, add `UIProvider`, `CacheProvider`, and `ColorModeScript`.
 
@@ -95,9 +95,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 You need to add `'use client'` at the beginning of the page.
 :::
 
-## Use the components
+## Using the Component
 
-After adding `UIProvider`, call the components within the application.
+Once you've added `UIProvider`, you call the component within the application.
 
 ```tsx live=false title=page.tsx
 'use client'

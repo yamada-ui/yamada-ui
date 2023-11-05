@@ -4,12 +4,12 @@ description: How to generate JSX elements enabled with Yamada UI's style system.
 order: 12
 ---
 
-`ui` is an object of JSX elements enabled with Yamada UI's style system, and it can also be used as a function for custom components to receive Yamada UI's style system.
+`ui` is an object of JSX elements enabled with Yamada UI's style system, and can also be used as a function for custom components to receive Yamada UI's style system.
 
-## How to use
+## Usage
 
 Use the `ui.<element>` notation to generate basic HTML elements with a style system.
-For example, to generate a plain HTML element `button` with a style system, write `<ui.button />`.
+For example, to generate a plain HTML `button` element with a style system, write `<ui.button />`.
 
 ```tsx
 <ui.button py='sm' px='md' rounded='md' bg='purple.600' color='white' _hover={{ bg: 'purple.500' }}>
@@ -17,10 +17,10 @@ For example, to generate a plain HTML element `button` with a style system, writ
 </ui.button>
 ```
 
-Please refer to [here](https://github.com/hirotomoyamada/yamada-ui/blob/0590c12a5ff0c40413f963304dab10a5c93c29b6/packages/core/src/components/element.types.ts#L1) for the supported elements.
+For supported elements, please check [here](https://github.com/hirotomoyamada/yamada-ui/blob/0590c12a5ff0c40413f963304dab10a5c93c29b6/packages/core/src/components/element.types.ts#L1).
 
 :::note
-If you want to learn more about `Style props`, please see [here](/styled-system/style-props).
+If you want to learn more about `Style props`, please check [here](/styled-system/style-props).
 :::
 
 ## Creating a Component

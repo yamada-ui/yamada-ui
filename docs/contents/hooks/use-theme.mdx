@@ -1,6 +1,6 @@
 ---
 title: useTheme
-description: '`useToken` is a custom hook that retrieves a theme and returns a function to switch the theme.'
+description: '`useTheme` is a custom hook that returns a function for retrieving and switching themes.'
 package_name: '@yamada-ui/core'
 with_description: true
 ---
@@ -23,7 +23,7 @@ return <Text noOfLines={3}>{JSON.stringify(theme)}</Text>
 If you want to learn more about the theme, please check [here](/styled-system/theming).
 :::
 
-### Switch theme
+### Switching Themes
 
 ```tsx functional=true
 const { themeScheme, changeThemeScheme } = useTheme()
@@ -52,5 +52,5 @@ return (
 ```
 
 :::note satus=warning
-To switch themes, you need to have multiple themes prepared. For more details, please check [here](/styled-system/theming/switch-theme).
+In order to switch themes, you need to prepare multiple themes. For more details, please check [here](/styled-system/theming/switch-theme).
 :::

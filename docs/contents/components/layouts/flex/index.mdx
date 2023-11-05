@@ -1,12 +1,74 @@
 ---
 title: Flex
-description: This page is currently being created.
+description: '`Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Flex } from '@yamada-ui/react'
+```
+
+## Usage
+
+The shorthand provided in `Flex` is as follows:
+
+- `direction`: This is a shorthand `props` for `flexDirection`.
+- `wrap`: This is a shorthand `props` for `flexWrap`.
+- `basis`: This is a shorthand `props` for `flexBasis`.
+- `grow`: This is a shorthand `props` for `flexGrow`.
+- `shrink`: This is a shorthand `props` for `flexShrink`.
+- `align`: This is a shorthand `props` for `alignItems`.
+- `justify`: This is a shorthand `props` for `justifyContent`.
+
+:::note
+In addition to the shorthand, you can also pass verbose `props`.
+:::
+
+```tsx
+<Flex gap='md'>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</Flex>
+```
+
+### Using `Spacer`
+
+```tsx
+<Flex w='full' gap='md'>
+  <Box p='md' rounded='4' bg='primary' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='secondary' color='white'>
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box p='md' rounded='4' bg='warning' color='white'>
+    Box
+  </Box>
+
+  <Box p='md' rounded='4' bg='danger' color='white'>
+    Box
+  </Box>
+</Flex>
+```

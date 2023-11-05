@@ -1,12 +1,104 @@
 ---
 title: Grid
-description: This page is currently being created.
+description: '`Grid` is a component for managing grid layouts. It also comes with handy style shorthand.'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Grid, GridItem } from '@yamada-ui/react'
+```
+
+The shorthand available for `Grid` is as follows:
+
+- `templateColumns`: This is a shorthand `props` for `gridTemplateColumns`.
+- `templateRows`: This is a shorthand `props` for `gridTemplateRows`.
+- `templateAreas`: This is a shorthand `props` for `gridTemplateAreas`.
+- `column`: This is a shorthand `props` for `gridColumn`.
+- `row`: This is a shorthand `props` for `gridRow`.
+- `area`: This is a shorthand `props` for `gridArea`.
+- `autoFlow`: This is a shorthand `props` for `gridAutoFlow`.
+- `autoColumns`: This is a shorthand `props` for `gridAutoColumns`.
+- `autoRows`: This is a shorthand `props` for `gridAutoRows`.
+
+The shorthand available for `GridItem` is as follows:
+
+- `area`: This is a shorthand `props` for `gridArea`.
+- `colStart`: This is a shorthand `props` for `gridColumnStart`.
+- `colEnd`: This is a shorthand `props` for `gridColumnEnd`.
+- `rowStart`: This is a shorthand `props` for `gridRowStart`.
+- `rowEnd`: This is a shorthand `props` for `gridRowEnd`.
+
+:::note
+In addition to the shorthand, you can also pass verbose `props`.
+:::
+
+## Usage
+
+```tsx
+<Grid templateColumns='repeat(4, 1fr)' gap='md'>
+  <GridItem w='full' h='4xs' rounded='md' bg='primary' />
+
+  <GridItem w='full' h='4xs' rounded='md' bg='secondary' />
+
+  <GridItem w='full' h='4xs' rounded='md' bg='warning' />
+
+  <GridItem w='full' h='4xs' rounded='md' bg='danger' />
+</Grid>
+```
+
+### Using `templateAreas`
+
+```tsx
+<Grid
+  templateAreas={`
+    "one one two three"
+    "four five two six"
+    "four seven seven eight"
+  `}
+  gap='md'
+>
+  <GridItem area='one' w='full' minH='4xs' rounded='md' bg='primary' />
+
+  <GridItem area='two' w='full' minH='4xs' rounded='md' bg='secondary' />
+
+  <GridItem area='three' w='full' minH='4xs' rounded='md' bg='warning' />
+
+  <GridItem area='four' w='full' minH='4xs' rounded='md' bg='danger' />
+
+  <GridItem area='five' w='full' minH='4xs' rounded='md' bg='primary' />
+
+  <GridItem area='six' w='full' minH='4xs' rounded='md' bg='secondary' />
+
+  <GridItem area='seven' w='full' minH='4xs' rounded='md' bg='warning' />
+
+  <GridItem area='eight' w='full' minH='4xs' rounded='md' bg='danger' />
+</Grid>
+```
+
+### Spanning Multiple Columns and Rows
+
+```tsx
+<Grid w='full' templateColumns='repeat(4, 1fr)' templateRows='repeat(3, 1fr)' gap='md'>
+  <GridItem colSpan={2} w='full' minH='4xs' rounded='md' bg='primary' />
+
+  <GridItem colSpan={2} rowSpan={3} w='full' minH='4xs' rounded='md' bg='secondary' />
+
+  <GridItem rowStart={2} rowEnd={4} w='full' minH='4xs' rounded='md' bg='warning' />
+
+  <GridItem
+    colStart={2}
+    colEnd={3}
+    rowStart={2}
+    rowEnd={4}
+    w='full'
+    minH='4xs'
+    rounded='md'
+    bg='danger'
+  />
+</Grid>
+```

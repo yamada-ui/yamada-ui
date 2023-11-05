@@ -65,10 +65,13 @@ const translateContent = async ({
     const messages: ChatCompletionMessageParam[] = [
       {
         role: 'system',
-        content:
-          `Please translate the text of the mdx file that I will send you ${from} ${to}. Please note the following points:\n` +
-          `- The text you send will be saved as mdx. Therefore, except for the text to be translated, please output the contents of the sent mdx file as is.\n` +
-          `- Be sure to avoid translating sentences that don't need to be translated. e.g, variables, arguments, component names, etc.\n`,
+        content: [
+          `Please translate the text of the mdx file that I will send you ${from} ${to}. Please note the following points:`,
+          `- The text you send will be saved as mdx. Therefore, except for the text to be translated, please output the contents of the sent mdx file as is.`,
+          `- Be sure to avoid translating sentences that don't need to be translated. e.g, variables, arguments, component names, etc.`,
+          // Exception handling:
+          `- For short sentences, use "Usage" instead of "How to Use" as much as possible.  Also, when prompting for a hyperlink, use "please check [<page-title> or 'here'](<url>)".`,
+        ].join('\n'),
       },
       { role: 'user', content },
     ]

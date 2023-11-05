@@ -1,12 +1,30 @@
 ---
 title: Wrap
-description: このページは現在作成中です。
+description: '`Wrap`は、`Flex`に`wrap`を設定したコンポーネントです。`Flex`から便利なスタイルのショートハンドを継承しています。'
 package_name: '@yamada-ui/layouts'
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Wrap } from '@yamada-ui/react'
+```
+
+## 使い方
+
+```tsx
+<Wrap gap='md'>
+  {Array(20)
+    .fill(0)
+    .map((_, index) =>
+      ['primary', 'secondary', 'warning', 'danger'].map((bg, nestedIndex) => (
+        <Box key={`${index}-${nestedIndex}`} p='md' rounded='md' bg={bg} color='white'>
+          Box
+        </Box>
+      )),
+    )}
+</Wrap>
+```

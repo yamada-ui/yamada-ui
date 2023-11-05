@@ -8,9 +8,9 @@ In this guide, we will explain the applications of the concepts and features des
 
 ## Applying Themes
 
-Yamada UI has more theme utilities than other UI libraries.
+Yamada UI offers a richer set of theme utilities than other UI libraries.
 
-In [Learning the Basics](/getting-started/basics#about-themes), you learned to use `extendTheme` for theme inheritance. Here, you will learn how to change the `colorScheme` set in each component and how to get the value of tokens defined in the theme.
+In [Learning the Basics](/getting-started/basics#about-themes), you learned how to use `extendTheme` for theme inheritance. Here, you will learn how to change the `colorScheme` set in each component and how to get the value of tokens defined in the theme.
 
 To change the `colorScheme` set in each component, use `withDefaultColorScheme`.
 
@@ -55,10 +55,10 @@ return (
 )
 ```
 
-This is suitable for setting the style of components of libraries other than Yamada UI.
+This is suitable for setting the style of components from libraries other than Yamada UI.
 
 :::note
-If you want to learn more about themes, please see [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
+If you want to learn more about themes, please check [Customizing Themes](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-style).
 :::
 
 ## Applying Styles
@@ -67,9 +67,9 @@ In [Learning the Basics](/getting-started/basics#about-styles), you learned abou
 
 ### About `as`
 
-All components of Yamada UI can `assert`.
+All components of Yamada UI can perform `assertions`.
 
-`Assertion` is a feature that allows you to pass HTML tags or other components to a component, rendering it as a different element or component while retaining the original component's style and behavior.
+An `assertion` is a feature that allows you to pass HTML tags or other components to a component, rendering it as a different element or component while retaining the original component's style and behavior.
 
 For example, suppose you need to change the `Button` to the HTML tag `a` while retaining its style and behavior.
 
@@ -91,7 +91,7 @@ Yamada UI provides `sx` and `css` in addition to `Style props` for setting style
 - `css`: Accepts the `CSS` object of [Emotion](https://emotion.sh/).
 
 :::note status=warning
-There are hardly any cases where `sx` and `css` are necessary. As long as you understand the existence of `sx` and `css` in the [Order](/getting-started/advanced#order) explained in the next section, there is no problem.
+There are hardly any cases where `sx` and `css` are necessary. As long as you understand the existence of `sx` and `css` in the [Order](/getting-started/advanced#Order) section explained in the next section, there will be no problem.
 :::
 
 ```tsx
@@ -114,9 +114,9 @@ There are hardly any cases where `sx` and `css` are necessary. As long as you un
 `css` cannot use Yamada UI's `Style props`.
 :::
 
-### About the Order
+### About Order
 
-The components of Yamada UI accept several `CSS` objects and have a set order.
+Yamada UI components accept several `CSS` objects and have a set order.
 
 The order is as follows, and the same property values will be overwritten.
 
@@ -128,12 +128,12 @@ The order is as follows, and the same property values will be overwritten.
 6. `css`: The `css` `props` of the component
 
 :::note
-If you want to learn more about `Style props` or shortcodes, please see [here](/styled-system/style-props).
+If you want to learn more about `Style props` or shortcodes, please check [here](/styled-system/style-props).
 :::
 
-## Application of Responsiveness
+## Application of Responsive
 
-In [Learning the Basics](/getting-started/basics#about-responsiveness), you learned how to set up responsive styles. Here, you will learn how to get the current breakpoint and useful utilities.
+In [Learning the Basics](/getting-started/basics#about-responsive), you learned how to set up responsive styles. Here, you will learn how to get the current breakpoint and useful utilities.
 
 ### Using `useBreakpoint`
 
@@ -169,7 +169,7 @@ return (
 This is suitable for setting the style of components from libraries other than Yamada UI.
 
 :::note
-If you want to learn more about responsive styles, please see [here](/styled-system/responsive-styles).
+If you want to learn more about responsive styles, please check [here](/styled-system/responsive-styles).
 :::
 
 ## Application of Color Mode
@@ -214,16 +214,16 @@ return (
 This is suitable for setting the style of components from libraries other than Yamada UI.
 
 :::note
-If you want to learn more about color modes, please see [here](/styled-system/color-mode).
+If you want to learn more about color modes, please check [here](/styled-system/color-mode).
 :::
 
 ## Application of Animation
 
-In [Learning the Basics](/getting-started/basics#about-animation), you learned about the `useAnimation` and `Motion` components. Here, you will learn about setting multiple animations with `useAnimation` and setting new dynamic animations with `useDynamicAnimation`.
+In [Learning the Basics](/getting-started/basics#About-Animation), you learned about the `useAnimation` and `Motion` components. Here, you will learn about setting multiple animations with `useAnimation` and setting new dynamic animations with `useDynamicAnimation`. Please check [here](/getting-started/basics#About-Animation).
 
 ### Using Multiple Animations with `useAnimation`
 
-`useAnimation` can also accept an array.
+`useAnimation` can also accept arrays.
 
 ```tsx functional=true
 const animation = useAnimation([
@@ -293,7 +293,7 @@ return (
 )
 ```
 
-### Using `useDynamicAnimation`
+### Usage of `useDynamicAnimation`
 
 `useDynamicAnimation` takes an object as an argument. The keys of the object become the keys of the animation, and the animation changes by passing the key as an argument to `setState`.
 
@@ -427,19 +427,19 @@ If you want to learn more about animations, please check [here](/styled-system/a
 
 ## Congratulations!
 
-Congratulations 🎉
+Congratulations🎉
 
-Now, you can become `Wonderful Yamada` 🥳
+Now, you can become `Wonderful Yamada`🥳
 
 ## Learn More
 
-Why not learn more about Yamada UI by studying its themes and components? 😎
+Want to know more about Yamada UI? Why not learn about themes and components? 😎
 
 <CardContainer>
   <LinkCard
     href='/styled-system/theming'
     title='Learn about Themes'
-    description='Learn about the default theme of Yamada UI, and how to create and modify the values of colors, fonts, and other theme elements.'
+    description='Learn about the default theme of Yamada UI, and how to create and modify the values of color, font, and other theme elements.'
   />
   <LinkCard
     href='/components'

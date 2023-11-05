@@ -1,12 +1,144 @@
 ---
 title: Text
-description: This page is currently being created.
-package_name: '@yamada-ui/text'
+description: '`Text` is a component that represents a paragraph of text. By default, it renders a `p` element.'
+package_name: '@yamada-ui/typography'
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Text } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx
+<Text>It's 530,000. Don't worry i won'tuse all of my power……</Text>
+```
+
+### Changing the Size
+
+```tsx
+<VStack gap='md'>
+  <Text fontSize='6xl' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='5xl' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='4xl' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='3xl' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='2xl' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='xl' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='lg' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='md' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='sm' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+
+  <Text fontSize='xs' isTruncated>
+    It's 530,000. Don't worry i won'tuse all of my power……
+  </Text>
+</VStack>
+```
+
+### Using `as`
+
+You can render as a different element or component by passing `as`.
+
+```tsx
+<VStack gap='md'>
+  <Text as='b'>I’ve always loved fireworks!</Text>
+
+  <Text as='i'>I’ve always loved fireworks!</Text>
+
+  <Text as='u'>I’ve always loved fireworks!</Text>
+
+  <Text as='abbr'>I’ve always loved fireworks!</Text>
+
+  <Text as='del'>I’ve always loved fireworks!</Text>
+
+  <Text as='em'>I’ve always loved fireworks!</Text>
+
+  <Text as='ins'>I’ve always loved fireworks!</Text>
+
+  <Text as='kbd'>I’ve always loved fireworks!</Text>
+
+  <Text as='mark'>I’ve always loved fireworks!</Text>
+
+  <Text as='s'>I’ve always loved fireworks!</Text>
+
+  <Text as='samp'>I’ve always loved fireworks!</Text>
+
+  <Text as='sub'>I’ve always loved fireworks!</Text>
+</VStack>
+```
+
+### Truncating Text
+
+If you want to truncate text after a certain number of lines, specify the number of lines in `noOfLines`. If the specified number of lines is exceeded, an ellipsis will be displayed.
+
+```tsx
+<VStack gap='md'>
+  <Text fontSize='2xl' noOfLines={3}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves
+    around the treasure "Dragon Ball", which grants any one wish if all seven scattered balls around
+    the world are collected, and the protagonist Goku (Son Goku), depicting "adventure", "dream",
+    "battle", "friendship", and so on in a long manga.
+  </Text>
+
+  <Text fontSize='2xl' noOfLines={2}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves
+    around the treasure "Dragon Ball", which grants any one wish if all seven scattered balls around
+    the world are collected, and the protagonist Goku (Son Goku), depicting "adventure", "dream",
+    "battle", "friendship", and so on in a long manga.
+  </Text>
+
+  <Text fontSize='2xl' noOfLines={1}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves
+    around the treasure "Dragon Ball", which grants any one wish if all seven scattered balls around
+    the world are collected, and the protagonist Goku (Son Goku), depicting "adventure", "dream",
+    "battle", "friendship", and so on in a long manga.
+  </Text>
+</VStack>
+```
+
+### Applying Gradient
+
+```tsx
+<Text
+  w='full'
+  fontSize='xl'
+  fontWeight='bold'
+  bgGradient='linear(to-l, #7928CA, #FF0080)'
+  bgClip='text'
+>
+  Not bad, Satan! You might really be the savior of the world!
+</Text>
+```

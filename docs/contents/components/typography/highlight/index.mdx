@@ -1,12 +1,179 @@
 ---
 title: Highlight
-description: This page is currently being created.
+description: '`Highlight` is a component that highlights specified strings within the text. By default, it renders a `p` element.'
 package_name: '@yamada-ui/highlight'
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Highlight } from '@yamada-ui/react'
+```
+
+## Usage
+
+Specify the string you want to highlight in `query`.
+
+```tsx
+<Highlight query='Dragon'>
+  "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+  "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+  revolves around the treasure "Dragon Ball", which grants any one wish when all seven scattered
+  balls are collected, and the protagonist Goku. It is a long manga depicting "adventure", "dream",
+  "battle", "friendship", etc. From 1986 to 1996, "Dragon Ball" and "Dragon Ball Z" were broadcast
+  on the Fuji TV network, recording an average viewer rating of over 20% during the 11-year series
+  broadcast period. In addition, it is a representative work of Japanese manga and anime, boasting
+  immense popularity worldwide, being broadcast in more than 80 countries around the world.
+</Highlight>
+```
+
+### Specify Multiple
+
+```tsx
+<Highlight query={['Dragon Ball', 'Akira Toriyama']}>
+  "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+  "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+  revolves around the treasure "Dragon Ball", which grants any single wish when all seven scattered
+  balls are collected, and the protagonist, Son Goku. It is a long manga depicting "adventure",
+  "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and "Dragon Ball Z" were
+  broadcast on the Fuji TV network, recording an average viewer rating of over 20% during the
+  11-year series broadcast period. In addition, it is a representative work of Japanese manga and
+  anime, boasting immense popularity worldwide, being broadcast in more than 80 countries.
+</Highlight>
+```
+
+### Styling Highlights
+
+```tsx
+<VStack gap='md'>
+  <Highlight query='Dragon Ball' markProps={{ variant: 'subtle' }}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+    revolves around the treasure "Dragon Ball", which can grant any wish if all seven scattered
+    balls around the world are collected, and the protagonist Goku. It is a long manga that depicts
+    "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and
+    "Dragon Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of
+    over 20% during the 11-year series broadcast period. It is also broadcast in more than 80
+    countries around the world, making it a representative work of Japanese manga and anime that
+    boasts immense popularity worldwide.
+  </Highlight>
+
+  <Highlight query='Dragon Ball' markProps={{ variant: 'solid' }}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+    revolves around the treasure "Dragon Ball", which can grant any wish if all seven scattered
+    balls around the world are collected, and the protagonist Goku. It is a long manga that depicts
+    "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and
+    "Dragon Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of
+    over 20% during the 11-year series broadcast period. It is also broadcast in more than 80
+    countries around the world, making it a representative work of Japanese manga and anime that
+    boasts immense popularity worldwide.
+  </Highlight>
+
+  <Highlight query='Dragon Ball' markProps={{ variant: 'outline' }}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+    revolves around the treasure "Dragon Ball", which can grant any wish if all seven scattered
+    balls around the world are collected, and the protagonist Goku. It is a long manga that depicts
+    "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and
+    "Dragon Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of
+    over 20% during the 11-year series broadcast period. It is also broadcast in more than 80
+    countries around the world, making it a representative work of Japanese manga and anime that
+    boasts immense popularity worldwide.
+  </Highlight>
+
+  <Highlight query='Dragon Ball' markProps={{ variant: 'text-accent' }}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+    revolves around the treasure "Dragon Ball", which can grant any wish if all seven scattered
+    balls around the world are collected, and the protagonist Goku. It is a long manga that depicts
+    "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and
+    "Dragon Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of
+    over 20% during the 11-year series broadcast period. It is also broadcast in more than 80
+    countries around the world, making it a representative work of Japanese manga and anime that
+    boasts immense popularity worldwide.
+  </Highlight>
+</VStack>
+```
+
+```tsx
+<Highlight query='Dragon Ball' markProps={{ colorScheme: 'green' }}>
+  "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+  "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+  revolves around the treasure "Dragon Ball", which can grant any wish if all seven scattered balls
+  around the world are collected, and the protagonist Goku. It is a long manga that depicts
+  "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and "Dragon
+  Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of over 20%
+  during the 11-year series broadcast period. It is also broadcast in more than 80 countries around
+  the world, making it a representative work of Japanese manga and anime that boasts immense
+  popularity worldwide.
+</Highlight>
+```
+
+```tsx
+<Highlight query='Dragon Ball' markProps={{ rounded: 'full' }}>
+  "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+  "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+  revolves around the treasure "Dragon Ball", which can grant any wish if all seven scattered balls
+  around the world are collected, and the protagonist Goku. It is a long manga that depicts
+  "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and "Dragon
+  Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of over 20%
+  during the 11-year series broadcast period. It is also broadcast in more than 80 countries around
+  the world, making it a representative work of Japanese manga and anime that boasts immense
+  popularity worldwide.
+</Highlight>
+```
+
+### Using Fragments
+
+By default, `Highlight` renders a `p` element. By setting `isFragment`, `highlight` uses a [Fragment](https://react.dev/reference/react/Fragment).
+
+```tsx
+<Heading>
+  <Highlight isFragment query={['Dragon Ball', 'Akira Toriyama']}>
+    "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in
+    "Weekly Shonen Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story
+    revolves around the treasure "Dragon Ball", which grants any one wish when all seven scattered
+    balls are collected, and the protagonist, Son Goku. It is a long manga that depicts "adventure",
+    "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and "Dragon Ball Z"
+    were broadcast on the Fuji TV network, recording an average viewer rating of over 20% during the
+    11-year series broadcast period. In addition, it is a representative work of Japanese manga and
+    anime, boasting immense popularity worldwide, being broadcast in more than 80 countries around
+    the world.
+  </Highlight>
+</Heading>
+```
+
+### Customizing Rendered Elements
+
+By using `useHighlight`, you can customize multiple elements and their styles.
+
+```tsx functional=true
+const chunks = useHighlight({
+  text: '"Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the treasure "Dragon Ball", which grants any one wish when all seven scattered balls are collected, and the protagonist Goku. It is a long manga depicting "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "Dragon Ball" and "Dragon Ball Z" were broadcast on the Fuji TV network, recording an average viewer rating of over 20% during the 11-year series broadcast period. In addition, it is a representative work of Japanese manga and anime, boasting immense popularity worldwide, being broadcast in more than 80 countries around the world.',
+  query: ['Dragon Ball', 'Akira Toriyama'],
+})
+
+return (
+  <Text>
+    {chunks.map(({ match, text }, i) =>
+      match ? (
+        text === 'Akira Toriyama' ? (
+          <Mark key={i} colorScheme='red'>
+            {text}
+          </Mark>
+        ) : (
+          <Mark key={i} colorScheme='green'>
+            {text}
+          </Mark>
+        )
+      ) : (
+        text
+      ),
+    )}
+  </Text>
+)
+```

@@ -1,12 +1,64 @@
 ---
 title: Heading
-description: This page is currently being created.
-package_name: '@yamada-ui/heading'
-is_tabs: true
+description: '`Heading` is a component that represents the heading of a section. By default, it renders the `h1` element.'
+package_name: '@yamada-ui/typography'
 with_description: true
-tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Heading } from '@yamada-ui/react'
+```
+
+## Usage
+
+```tsx
+<Heading>ギャルのパンティーおくれーーーっ！！！！！</Heading>
+```
+
+### Change Size
+
+```tsx
+<VStack gap='md'>
+  <Heading as='h1' size='4xl' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h2' size='3xl' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h2' size='2xl' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h3' size='xl' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h3' size='lg' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h4' size='md' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h5' size='sm' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+
+  <Heading as='h6' size='xs' isTruncated>
+    ギャルのパンティーおくれーーーっ！！！！！
+  </Heading>
+</VStack>
+```
+
+### Apply Gradient
+
+```tsx
+<Heading w='full' size='2xl' bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text' isTruncated>
+  Are you talking about Kuririn ?!!!!!
+</Heading>
+```

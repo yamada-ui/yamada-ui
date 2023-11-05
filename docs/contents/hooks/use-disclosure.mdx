@@ -1,6 +1,6 @@
 ---
 title: useDisclosure
-description: '`useDisclosure` is a custom hook that helps handle common open, close or toggle scenarios. It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.'
+description: '`useDisclosure` is a custom hook that helps handle common open/close or toggle scenarios. It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.'
 package_name: '@yamada-ui/use-disclosure'
 with_description: true
 ---
@@ -37,7 +37,7 @@ return (
 
 ### Using Callback Functions
 
-By defining a callback function as an argument, you can call the callback function when `onOpen` or `onClose` is executed. This is useful for executing things like `APIs` before opening components such as `modals`.
+By defining a callback function as an argument, you can call the callback function when executing `onOpen` or `onClose`. This is useful for executing things like `APIs` before opening components such as `modals`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure({
@@ -62,18 +62,17 @@ return (
       success='Divide'
       onSuccess={() => onClose('This is arg')}
     >
-      Earth, sea, and all living things... Please share your energy with me, just a little bit at a
-      time...!!!
+      Earth, sea, and all living things... Please share a little bit of energy with me...!!!
     </Dialog>
   </>
 )
 ```
 
 :::note status=warning
-By default, the callback function is called before `onOpen` or `onClose` is executed.
+By default, the callback function is called before executing `onOpen` or `onClose`.
 :::
 
-If you want to call the callback function after `onOpen` or `onClose` is executed, set `after` to `timing`.
+If you want to call the callback function after executing `onOpen` or `onClose`, set `after` to `timing`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure({
@@ -99,8 +98,7 @@ return (
       success='Divide'
       onSuccess={() => onClose('This is arg')}
     >
-      Earth, sea, and all living things... Please share your energy with me, just a little bit at a
-      time...!!!
+      Earth, sea, and all living things... Please share a little bit of energy with me...!!!
     </Dialog>
   </>
 )

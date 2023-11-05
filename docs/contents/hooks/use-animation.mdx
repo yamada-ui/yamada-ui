@@ -1,6 +1,6 @@
 ---
 title: useAnimation
-description: "`useAnimation` is a custom hook that implements animations similar to CSS's `keyframes`."
+description: '`useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.'
 package_name: '@yamada-ui/use-animation'
 with_description: true
 ---
@@ -20,12 +20,12 @@ import { useAnimation } from '@yamada-ui/react'
 - `timingFunction`: Set how the animation progresses. This defines the acceleration curve, setting how the animation progresses between keyframes.
 - `delay`: Set the delay time from when the element is loaded until the animation begins.
 - `iterationCount`: Set the number of times the animation repeats. To repeat the animation indefinitely, specify `infinite`.
-- `direction`: Set whether to animate in the reverse direction when the animation sequence is completed and repeat, or reset to the initial state and repeat the animation.
+- `direction`: Set whether to animate in the reverse direction and repeat when the animation sequence is complete, or to reset to the initial state and repeat the animation.
 - `fillMode`: Set whether to apply the specified style before and after the execution of the animation.
 - `playState`: Set whether to pause or resume the animation.
 
 :::note
-The animation settings are based on [@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes) and [Use CSS animations](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定).
+The animation settings are based on [@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes) and [Using CSS animations](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定).
 :::
 
 ```tsx functional=true
@@ -59,10 +59,10 @@ return <Box w='full' h='xs' animation={animation} />
 ```
 
 :::note
-If you want to learn more about animation, please see [here](/styled-system/animation).
+If you want to learn more about animation, please check [here](/styled-system/animation).
 :::
 
-### Use Multiple Animations
+### Using Multiple Animations
 
 ```tsx functional=true
 const animation = useAnimation([
@@ -190,8 +190,6 @@ const tabletAnimation = useAnimation({
 return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnimation }} />
 ```
 
-(Note: The text was already in English, so no translation was needed.)
-
 ### Color Mode
 
 ```tsx functional=true
@@ -251,5 +249,5 @@ return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
 ```
 
 :::note
-If you want to learn more about color modes, please visit [here](/styled-system/color-mode).
+If you want to learn more about color mode, please check [here](/styled-system/color-mode).
 :::

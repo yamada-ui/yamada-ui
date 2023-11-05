@@ -1,6 +1,6 @@
 ---
 title: useLoading
-description: '`useLoading` is a custom hook that controls the loading of the application.'
+description: '`useLoading` is a custom hook for controlling the loading of the application.'
 package_name: '@yamada-ui/loading'
 with_description: true
 ---
@@ -13,7 +13,7 @@ import { useLoading } from '@yamada-ui/react'
 
 ## Usage
 
-`useLoading` returns instances of `screen`, `page`, `background`, and `custom`. These instances include several methods.
+`useLoading` returns instances of `screen`, `page`, `background`, and `custom`. The instances include several methods.
 
 - `isLoading`: Determines whether the loading animation is in progress.
 - `start`: Starts the loading animation.
@@ -21,7 +21,7 @@ import { useLoading } from '@yamada-ui/react'
 - `finish`: Ends the loading animation.
 
 :::note status=warning
-`custom` is not set in the [default config](/styled-system/configure/default-config). If you want to set up custom loading, please see [here](#Using-custom-components).
+`custom` is not set in the [default config](/styled-system/configure/default-config). If you want to set up custom loading, please check [here](#Using-Custom-Components).
 :::
 
 ```tsx functional=true
@@ -67,10 +67,10 @@ return (
 ```
 
 :::note
-If you want to learn more about loading, please see [here](/styled-system/loading).
+If you want to learn more about loading, please check [here](/styled-system/loading).
 :::
 
-### Add a Timeout
+### Adding a Timeout
 
 In cases such as communication, it is necessary to add a timeout. In that case, use `duration`.
 
@@ -86,7 +86,7 @@ return (
 )
 ```
 
-### Add a Message
+### Adding a Message
 
 To add a message to the loading, use `message`.
 
@@ -138,9 +138,9 @@ return (
 )
 ```
 
-### Update the message
+### Update Message
 
-When updating the message, pass the options using the `update` method.
+To update a message, pass options to the `update` method.
 
 ```tsx functional=true
 const { screen, page, background } = useLoading()

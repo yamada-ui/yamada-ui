@@ -23,11 +23,11 @@ return (
     </Text>
 
     <Wrap mt='md' gap='md'>
-      <Button onClick={() => changeColorMode('light')}>Light mode</Button>
-      <Button onClick={() => changeColorMode('dark')}>Dark mode</Button>
+      <Button onClick={() => changeColorMode('light')}>Light Mode</Button>
+      <Button onClick={() => changeColorMode('dark')}>Dark Mode</Button>
       <Button onClick={() => changeColorMode('system')}>System</Button>
       <Button onClick={toggleColorMode}>
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'} mode
+        {colorMode === 'light' ? 'Switch to Dark' : 'Switch to Light'} Mode
       </Button>
     </Wrap>
   </>

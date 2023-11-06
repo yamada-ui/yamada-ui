@@ -92,7 +92,7 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
 }) => {
   if (inline)
     return (
-      <ui.code className={cx('ui-markdown-code', className)}>
+      <ui.code className={cx('ui-markdown__code--inline', className)}>
         {children}
       </ui.code>
     )
@@ -104,7 +104,7 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
   return (
     <ui.pre
       as={SyntaxHighlighter as any}
-      className={cx('ui-markdown-code', className)}
+      className={cx('ui-markdown__code', className)}
       language={language}
       style={(styles as any)[theme]}
     >

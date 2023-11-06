@@ -1,0 +1,11 @@
+import{a as u,j as D,F}from"./jsx-runtime-03b4ddbf.js";import{r as f}from"./index-76fb7be0.js";import{u as S}from"./environment-provider-bc762e27.js";import{L as g,h as L}from"./factory-c9bc4a28.js";import{T as h}from"./text-d5943c82.js";import"./_commonjsHelpers-de833af9.js";import"./forward-ref-8b7d2a6f.js";import"./use-component-style-ab2b35f8.js";import"./theme-provider-a03ffa08.js";const Q=(s,{ssr:i=!0,fallback:c}={})=>{const{getWindow:m}=S(),d=L(s)?s:[s];let l=L(c)?c:[c];l=l.filter(r=>r!=null);const[j,x]=f.useState(()=>d.map((r,t)=>({media:r,matches:i?!!l[t]:m().matchMedia(r).matches})));return f.useEffect(()=>{const r=m();x(d.map(e=>({media:e,matches:r.matchMedia(e).matches})));const t=d.map(e=>r.matchMedia(e)),a=e=>{x(y=>y.slice().map(p=>p.media===e.media?{...p,matches:e.matches}:p))};return t.forEach(e=>{g(e.addListener)?e.addListener(a):e.addEventListener("change",a)}),()=>{t.forEach(e=>{g(e.removeListener)?e.removeListener(a):e.removeEventListener("change",a)})}},[m]),j.map(r=>r.matches)},C={title:"Hooks / useMediaQuery"},n=()=>{const[s]=Q("(min-width: 1280px)");return u(h,{children:s?"larger than 1280px":"smaller than 1280px"})},o=()=>{const[s,i]=Q(["(min-width: 1280px)","(prefers-color-scheme: dark)"]);return D(F,{children:[u(h,{children:s?"larger than 1280px":"smaller than 1280px"}),u(h,{children:i?"color mode is dark":"color mode is light"})]})};var M,E,T;n.parameters={...n.parameters,docs:{...(M=n.parameters)==null?void 0:M.docs,source:{originalSource:`() => {
+  const [flg] = useMediaQuery('(min-width: 1280px)');
+  return <Text>{flg ? 'larger than 1280px' : 'smaller than 1280px'}</Text>;
+}`,...(T=(E=n.parameters)==null?void 0:E.docs)==null?void 0:T.source}}};var k,v,w;o.parameters={...o.parameters,docs:{...(k=o.parameters)==null?void 0:k.docs,source:{originalSource:`() => {
+  const [isLarge, isDark] = useMediaQuery(['(min-width: 1280px)', '(prefers-color-scheme: dark)']);
+  return <>
+      <Text>{isLarge ? 'larger than 1280px' : 'smaller than 1280px'}</Text>
+      <Text>{isDark ? 'color mode is dark' : 'color mode is light'}</Text>
+    </>;
+}`,...(w=(v=o.parameters)==null?void 0:v.docs)==null?void 0:w.source}}};const G=["basic","useMulti"];export{G as __namedExportsOrder,n as basic,C as default,o as useMulti};
+//# sourceMappingURL=use-media-query.stories-469ca776.js.map

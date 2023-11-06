@@ -1,2 +1,0 @@
-import{a as i}from"./jsx-runtime-b08f8875.js";import{u as c}from"./td-b388edec.js";import{f as m}from"./forward-ref-cf7188bd.js";import{d as p,e as n}from"./factory-ab7c3580.js";const d=m(({className:o,placement:s="bottom",...t},a)=>{const r=c(),e={captionSide:s,...r.caption};return i(p.caption,{ref:a,className:n("ui-table-caption",o),__css:e,...t})});export{d as T};
-//# sourceMappingURL=table-caption-75891f44.js.map

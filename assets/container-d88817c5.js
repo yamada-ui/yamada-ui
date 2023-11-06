@@ -1,2 +1,0 @@
-import{a as i}from"./jsx-runtime-b08f8875.js";import{r as c}from"./index-8ee6c85d.js";import{f as p}from"./forward-ref-cf7188bd.js";import{u as f}from"./use-component-style-07e84389.js";import{o as u}from"./theme-provider-1097130b.js";import{d as l,e as C}from"./factory-ab7c3580.js";const _=p((r,e)=>{const[o,t]=f("Container",r),{className:m,centerContent:s,...a}=u(t),n=c.useMemo(()=>({alignItems:s?"center":void 0,...o}),[s,o]);return i(l.section,{ref:e,className:C("ui-container",m),__css:n,...a})});export{_ as C};
-//# sourceMappingURL=container-d88817c5.js.map

@@ -88,7 +88,7 @@ export const MenuOptionGroup = forwardRef(
     return (
       <MenuGroup
         ref={ref}
-        className={cx('ui-menu-option-group', className)}
+        className={cx('ui-menu__option-group', className)}
         {...omitObject(rest, ['value', 'onChange'])}
       >
         {cloneChildren}

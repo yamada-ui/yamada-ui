@@ -199,7 +199,7 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
     return (
       <MenuItem
         ref={ref}
-        className={cx('ui-menu-option-item', className)}
+        className={cx('ui-menu__option-item', className)}
         aria-checked={ariaAttr(isChecked)}
         closeOnSelect={closeOnSelect}
         {...rest}
@@ -233,7 +233,7 @@ const MenuIcon = forwardRef<MenuIconProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-menu-icon', className)}
+        className={cx('ui-menu__icon', className)}
         __css={css}
         {...rest}
       />
@@ -252,7 +252,7 @@ const MenuCommand = forwardRef<MenuCommandProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-menu-command', className)}
+        className={cx('ui-menu__command', className)}
         __css={css}
         {...rest}
       />

@@ -113,6 +113,12 @@ type UseDatePickerBaseProps = Omit<
      */
     allowInput?: boolean
     /**
+     * If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions.
+     *
+     * @default true
+     */
+    allowInputBeyond?: boolean
+    /**
      * Props for calendar component.
      */
     calendarProps?: CalendarBaseProps
@@ -169,6 +175,7 @@ export const useDatePicker = ({
   placeholder,
   closeOnSelect = true,
   allowInput = true,
+  allowInputBeyond = false,
   pattern = /[^0-9\-\/]/g,
   ...rest
 }: UseDatePickerProps) => {
@@ -194,26 +201,30 @@ export const useDatePicker = ({
 
       if (date == null) return date
 
-      if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
-      if (minDate && isBeforeMinDate(date, minDate)) date = minDate
+      if (!allowInputBeyond) {
+        if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
+        if (minDate && isBeforeMinDate(date, minDate)) date = minDate
+      }
 
       return date
     },
-    [inputFormat, locale, maxDate, minDate, parseDate],
+    [allowInputBeyond, inputFormat, locale, maxDate, minDate, parseDate],
   )
 
   const dateToString = useCallback(
     (value: Date | null): string | undefined => {
       if (value == null) return undefined
 
-      if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
-      if (minDate && isBeforeMinDate(value, minDate)) value = minDate
+      if (!allowInputBeyond) {
+        if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
+        if (minDate && isBeforeMinDate(value, minDate)) value = minDate
+      }
 
       return dayjs(value)
         .locale(locale ?? 'en')
         .format(inputFormat)
     },
-    [inputFormat, locale, maxDate, minDate],
+    [allowInputBeyond, inputFormat, locale, maxDate, minDate],
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)

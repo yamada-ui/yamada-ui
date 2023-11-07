@@ -605,7 +605,7 @@ export const withPaginateBy: Story = () => {
   return <Calendar amountOfMonths={3} disableOutsideDays paginateBy={1} />
 }
 
-export const withNaxSelectedValues: Story = () => {
+export const withMaxSelectedValues: Story = () => {
   return <Calendar defaultValue={[]} maxSelectedValues={3} />
 }
 

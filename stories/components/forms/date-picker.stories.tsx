@@ -583,6 +583,16 @@ export const withMinMaxDate: Story = () => {
     />
   )
 }
+export const withAllowInputBeyond: Story = () => {
+  return (
+    <DatePicker
+      placeholder='YYYY/MM/DD'
+      minDate={new Date(new Date().setDate(1))}
+      maxDate={new Date(new Date().setDate(18))}
+      allowInputBeyond
+    />
+  )
+}
 
 export const withToday: Story = () => {
   return <DatePicker placeholder='YYYY/MM/DD' today />

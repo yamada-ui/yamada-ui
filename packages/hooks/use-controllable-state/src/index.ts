@@ -1,38 +1,38 @@
 import { useCallbackRef, runIfFunc } from '@yamada-ui/utils'
-import { Dispatch, SetStateAction, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 
-export type UseControllableStateProps<T extends any> = {
+export type UseControllableStateProps<T> = {
   value?: T
   defaultValue?: T | (() => T)
   onChange?: (value: T) => void
   onUpdate?: (prev: T, next: T) => boolean
 }
 
-export const useControllableState = <T extends any>(
-  props: UseControllableStateProps<T>,
-) => {
-  props.onUpdate = props.onUpdate ?? ((prev, next) => prev !== next)
+export const useControllableState = <T>({
+  value,
+  ...rest
+}: UseControllableStateProps<T>) => {
+  rest.onUpdate = rest.onUpdate ?? ((prev, next) => prev !== next)
 
-  const onChange = useCallbackRef(props.onChange)
-  const onUpdate = useCallbackRef(props.onUpdate)
+  const onChange = useCallbackRef(rest.onChange)
+  const onUpdate = useCallbackRef(rest.onUpdate)
 
-  const [defaultValue, setDefaultValue] = useState(props.defaultValue as T)
-  const controlledRef = useRef(props.value !== undefined)
-  const controlled = controlledRef.current
-  const value = controlled ? (props.value as T) : defaultValue
+  const [defaultValue, setDefaultValue] = useState(rest.defaultValue as T)
+  const controlled = value !== undefined
+  const resolvedValue = controlled ? value : defaultValue
 
   const setValue = useCallbackRef(
     (next: SetStateAction<T>) => {
-      const nextValue = runIfFunc(next, value)
+      const nextValue = runIfFunc(next, resolvedValue)
 
-      if (!onUpdate(value, nextValue)) return
+      if (!onUpdate(resolvedValue, nextValue)) return
 
       if (!controlled) setDefaultValue(nextValue)
 
       onChange(nextValue)
     },
-    [controlled, value, onChange, onUpdate],
+    [controlled, resolvedValue, onChange, onUpdate],
   )
 
-  return [value, setValue] as [T, Dispatch<SetStateAction<T>>]
+  return [resolvedValue, setValue] as [T, Dispatch<SetStateAction<T>>]
 }

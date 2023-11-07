@@ -33,18 +33,6 @@ type GridOptions = {
    */
   area?: CSSUIObject['gridArea']
   /**
-   * The CSS `grid-gap` property.
-   */
-  gap?: CSSUIObject['gridGap']
-  /**
-   * The CSS `grid-row-gap` property.
-   */
-  rowGap?: CSSUIObject['gridRowGap']
-  /**
-   * The CSS `grid-column-gap` property.
-   */
-  columnGap?: CSSUIObject['gridColumnGap']
-  /**
    * The CSS `grid-auto-flow` property.
    */
   autoFlow?: CSSUIObject['gridAutoFlow']
@@ -69,9 +57,9 @@ export const Grid = forwardRef<GridProps, 'div'>(
       column: gridColumn,
       row: gridRow,
       area: gridArea,
-      gap: gridGap,
-      rowGap: gridRowGap,
-      columnGap: gridColumnGap,
+      gap,
+      rowGap,
+      columnGap,
       autoFlow: gridAutoFlow,
       autoColumns: gridAutoColumns,
       autoRows: gridAutoRows,
@@ -87,9 +75,9 @@ export const Grid = forwardRef<GridProps, 'div'>(
       gridColumn,
       gridRow,
       gridArea,
-      gridGap,
-      gridRowGap,
-      gridColumnGap,
+      gap,
+      rowGap,
+      columnGap,
       gridAutoFlow,
       gridAutoColumns,
       gridAutoRows,

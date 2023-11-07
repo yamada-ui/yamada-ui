@@ -156,7 +156,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
         >
           <ui.select
             ref={ref}
-            className={cx('ui-native-select-field', className)}
+            className={cx('ui-native-select__field', className)}
             __css={{
               paddingEnd: '2rem',
               h: h ?? height,
@@ -216,7 +216,7 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
 
   return (
     <ui.div
-      className={cx('ui-native-select-icon', className)}
+      className={cx('ui-native-select__icon', className)}
       __css={css}
       {...rest}
     >

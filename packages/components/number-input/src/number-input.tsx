@@ -689,7 +689,7 @@ const NumberInputField = forwardRef<NumberInputFieldProps, 'input'>(
     return (
       <ui.input
         ref={ref}
-        className={cx('ui-number-input-field', className)}
+        className={cx('ui-number-input__field', className)}
         __css={css}
         {...rest}
       />
@@ -718,7 +718,7 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-number-input-addon', className)}
+        className={cx('ui-number-input__addon', className)}
         aria-hidden
         __css={css}
         {...rest}
@@ -751,7 +751,7 @@ const NumberIncrementStepper = forwardRef<NumberIncrementStepperProps, 'div'>(
 
     return (
       <Stepper
-        className={cx('ui-number-input-stepper', className)}
+        className={cx('ui-number-input__stepper--up', className)}
         {...getIncrementProps(rest, ref)}
         __css={css}
       >
@@ -771,7 +771,7 @@ const NumberDecrementStepper = forwardRef<NumberDecrementStepperProps, 'div'>(
 
     return (
       <Stepper
-        className={cx('ui-number-input-stepper', className)}
+        className={cx('ui-number-input__stepper--down', className)}
         {...getDecrementProps(rest, ref)}
         __css={css}
       >

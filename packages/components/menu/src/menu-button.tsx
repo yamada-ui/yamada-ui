@@ -35,7 +35,7 @@ export const MenuButton = forwardRef<MenuButtonProps, 'button'>(
       <PopoverTrigger>
         <Component
           ref={ref}
-          className={cx('ui-menu__button', className)}
+          className={cx('ui-menu', className)}
           {...rest}
           data-active={dataAttr(isOpen)}
           aria-expanded={ariaAttr(isOpen)}

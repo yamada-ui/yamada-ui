@@ -13,14 +13,14 @@ export const MenuGroup = forwardRef<MenuGroupProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-menu__group', className)}
+        className={cx('ui-menu__item--group', className)}
         role='group'
         __css={css}
         {...rest}
       >
         {title ? (
           <ui.span
-            className={cx('ui-menu__group-title')}
+            className={cx('ui-menu__item--group-title')}
             __css={styles.groupTitle}
           >
             {title}

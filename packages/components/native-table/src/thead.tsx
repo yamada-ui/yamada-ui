@@ -13,7 +13,7 @@ export const Thead = forwardRef<TableHeadProps, 'thead'>(
     return (
       <ui.thead
         ref={ref}
-        className={cx('ui-table-thead', className)}
+        className={cx('ui-native-table__thead', className)}
         __css={css}
         {...rest}
       />

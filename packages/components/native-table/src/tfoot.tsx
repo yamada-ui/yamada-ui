@@ -13,7 +13,7 @@ export const Tfoot = forwardRef<TableFootProps, 'tfoot'>(
     return (
       <ui.tfoot
         ref={ref}
-        className={cx('ui-table-tfoot', className)}
+        className={cx('ui-native-table__tfoot', className)}
         __css={css}
         {...rest}
       />

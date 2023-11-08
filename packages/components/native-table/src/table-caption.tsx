@@ -22,7 +22,7 @@ export const TableCaption = forwardRef<TableCaptionProps, 'caption'>(
     return (
       <ui.caption
         ref={ref}
-        className={cx('ui-table-caption', className)}
+        className={cx('ui-native-table__caption', className)}
         __css={css}
         {...rest}
       />

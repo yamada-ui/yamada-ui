@@ -182,7 +182,7 @@ export const DrawerOverlay = forwardRef<DrawerOverlayProps, 'div'>(
     return (
       <ModalOverlay
         ref={ref}
-        className={cx('ui-drawer-overlay', className)}
+        className={cx('ui-drawer__overlay', className)}
         __css={css}
         {...rest}
       />
@@ -201,7 +201,7 @@ export const DrawerCloseButton = forwardRef<DrawerCloseButtonProps, 'button'>(
     return (
       <ModalCloseButton
         ref={ref}
-        className={cx('ui-drawer-close-button', className)}
+        className={cx('ui-drawer__close-button', className)}
         __css={css}
         {...rest}
       />
@@ -220,7 +220,7 @@ export const DrawerHeader = forwardRef<DrawerHeaderProps, 'header'>(
     return (
       <ModalHeader
         ref={ref}
-        className={cx('ui-drawer-header', className)}
+        className={cx('ui-drawer__header', className)}
         __css={css}
         {...rest}
       />
@@ -239,7 +239,7 @@ export const DrawerBody = forwardRef<DrawerBodyProps, 'main'>(
     return (
       <ModalBody
         ref={ref}
-        className={cx('ui-drawer-body', className)}
+        className={cx('ui-drawer__body', className)}
         __css={css}
         {...rest}
       />
@@ -258,7 +258,7 @@ export const DrawerFooter = forwardRef<DrawerFooterProps, 'footer'>(
     return (
       <ModalFooter
         ref={ref}
-        className={cx('ui-drawer-footer', className)}
+        className={cx('ui-drawer__footer', className)}
         __css={css}
         {...rest}
       />

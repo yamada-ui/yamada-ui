@@ -18,7 +18,7 @@ export const ModalHeader = forwardRef<ModalHeaderProps, 'header'>(
     return (
       <ui.header
         ref={ref}
-        className={cx('ui-modal-header', className)}
+        className={cx('ui-modal__header', className)}
         __css={css}
         {...rest}
       />

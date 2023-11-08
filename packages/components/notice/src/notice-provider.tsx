@@ -58,7 +58,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
     }
 
     return (
-      <ui.ul key={placement} className='ui-notice-list' __css={css}>
+      <ui.ul key={placement} className='ui-notice__list' __css={css}>
         <AnimatePresence initial={false}>
           {notices.map((notice) => (
             <NoticeComponent key={notice.id} variants={variants} {...notice} />
@@ -171,7 +171,7 @@ const NoticeComponent = memo(
           } as MotionStyle
         }
       >
-        <ui.div className='ui-notice-container' __css={css}>
+        <ui.div className='ui-notice__container' __css={css}>
           {runIfFunc(message, { onClose })}
         </ui.div>
       </motion.li>

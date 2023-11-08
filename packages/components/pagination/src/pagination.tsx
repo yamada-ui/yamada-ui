@@ -155,7 +155,7 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
         {computedWithEdges ? (
           <Component
             page='first'
-            className='ui-pagination-item-first'
+            className='ui-pagination__item--first'
             isDisabled={isDisabled || currentPage === 1}
             {...(edgeProps as ComponentPropsWithoutRef<'button'>)}
             {...(edgeFirstProps as ComponentPropsWithoutRef<'button'>)}
@@ -170,7 +170,7 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
         {computedWithControls ? (
           <Component
             page='prev'
-            className='ui-pagination-item-prev'
+            className='ui-pagination__item--prev'
             isDisabled={isDisabled || currentPage === 1}
             {...(controlProps as ComponentPropsWithoutRef<'button'>)}
             {...(controlPrevProps as ComponentPropsWithoutRef<'button'>)}
@@ -198,7 +198,7 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
         {computedWithControls ? (
           <Component
             page='next'
-            className='ui-pagination-item-next'
+            className='ui-pagination__item--next'
             isDisabled={isDisabled || currentPage === total}
             {...(controlProps as ComponentPropsWithoutRef<'button'>)}
             {...(controlNextProps as ComponentPropsWithoutRef<'button'>)}
@@ -213,7 +213,7 @@ export const Pagination = forwardRef<PaginationProps, 'div'>((props, ref) => {
         {computedWithEdges ? (
           <Component
             page='last'
-            className='ui-pagination-item-last'
+            className='ui-pagination__item--last'
             isDisabled={isDisabled || currentPage === total}
             {...(edgeProps as ComponentPropsWithoutRef<'button'>)}
             {...(edgeLastProps as ComponentPropsWithoutRef<'button'>)}

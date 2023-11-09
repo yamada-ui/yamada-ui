@@ -17,7 +17,7 @@ export const TableContainer = forwardRef<TableContainerProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-native-table__container', className)}
+        className={cx('ui-table__container', className)}
         __css={css}
         {...rest}
       />

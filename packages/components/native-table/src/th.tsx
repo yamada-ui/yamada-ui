@@ -22,7 +22,7 @@ export const Th = forwardRef<ThProps, 'th'>(
     return (
       <ui.th
         ref={ref}
-        className={cx('ui-native-table__th', className)}
+        className={cx('ui-table__th', className)}
         __css={css}
         data-is-numeric={isNumeric}
         {...rest}

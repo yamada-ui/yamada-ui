@@ -22,7 +22,7 @@ export const Td = forwardRef<TdProps, 'td'>(
     return (
       <ui.td
         ref={ref}
-        className={cx('ui-native-table__td', className)}
+        className={cx('ui-table__td', className)}
         __css={css}
         data-is-numeric={isNumeric}
         {...rest}

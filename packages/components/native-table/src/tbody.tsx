@@ -13,7 +13,7 @@ export const Tbody = forwardRef<TableBodyProps, 'tbody'>(
     return (
       <ui.tbody
         ref={ref}
-        className={cx('ui-native-table__tbody', className)}
+        className={cx('ui-table__tbody', className)}
         __css={css}
         {...rest}
       />

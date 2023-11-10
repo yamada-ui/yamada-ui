@@ -18,7 +18,7 @@ export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
     return (
       <ui.header
         ref={ref}
-        className={cx("ui-popover-header", className)}
+        className={cx("ui-popover__header", className)}
         __css={css}
         {...rest}
       />

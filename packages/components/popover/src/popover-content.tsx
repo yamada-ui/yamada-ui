@@ -151,7 +151,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
       >
         <ui.section
           as={motion[as as keyof typeof motion]}
-          className={cx("ui-popover-content", className)}
+          className={cx("ui-popover__content", className)}
           {...(animation !== "none"
             ? getPopoverContentProps(animation, duration)
             : {})}

@@ -18,7 +18,7 @@ export const PopoverFooter = forwardRef<PopoverFooterProps, "footer">(
     return (
       <ui.footer
         ref={ref}
-        className={cx("ui-popover-footer", className)}
+        className={cx("ui-popover__footer", className)}
         __css={css}
         {...rest}
       />

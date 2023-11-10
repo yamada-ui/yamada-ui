@@ -1,14 +1,14 @@
 ---
 title: useDynamicAnimation
-description: '`useDynamicAnimation` is a custom hook used to switch animations.'
-package_name: '@yamada-ui/use-animation'
+description: "`useDynamicAnimation` is a custom hook used to switch animations."
+package_name: "@yamada-ui/use-animation"
 with_description: true
 ---
 
 ## Import
 
 ```ts
-import { useDynamicAnimation } from '@yamada-ui/react'
+import { useDynamicAnimation } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -23,41 +23,41 @@ import { useDynamicAnimation } from '@yamada-ui/react'
 const [animation, setAnimation] = useDynamicAnimation({
   moveLeft: {
     keyframes: {
-      '0%': {
-        transform: 'translateX(400%)',
+      "0%": {
+        transform: "translateX(400%)",
       },
-      '100%': {
-        transform: 'translateX(0%)',
+      "100%": {
+        transform: "translateX(0%)",
       },
     },
-    duration: 'slower',
-    fillMode: 'forwards',
-    timingFunction: 'ease-in-out',
+    duration: "slower",
+    fillMode: "forwards",
+    timingFunction: "ease-in-out",
   },
   moveRight: {
     keyframes: {
-      '0%': {
-        transform: 'translateX(0%)',
+      "0%": {
+        transform: "translateX(0%)",
       },
-      '100%': {
-        transform: 'translateX(400%)',
+      "100%": {
+        transform: "translateX(400%)",
       },
     },
-    duration: 'slower',
-    fillMode: 'forwards',
-    timingFunction: 'ease-in-out',
+    duration: "slower",
+    fillMode: "forwards",
+    timingFunction: "ease-in-out",
   },
 })
 
 return (
-  <VStack alignItems='flex-start'>
+  <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
     >
       Click me!
     </Button>
 
-    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+    <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
       Box
     </Box>
   </VStack>
@@ -72,75 +72,75 @@ If you want to learn more about animation, please check [here](/styled-system/an
 
 ```tsx functional=true
 const [animation, setAnimation] = useDynamicAnimation<
-  Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+  Record<"moveLeft" | "moveRight", AnimationStyle[]>
 >({
   moveLeft: [
     {
       keyframes: {
-        '0%': {
-          transform: 'translateX(400%)',
+        "0%": {
+          transform: "translateX(400%)",
         },
-        '100%': {
-          transform: 'translateX(0%)',
+        "100%": {
+          transform: "translateX(0%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     {
       keyframes: {
-        '0%': {
-          bg: 'secondary',
+        "0%": {
+          bg: "secondary",
         },
-        '100%': {
-          bg: 'primary',
+        "100%": {
+          bg: "primary",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   ],
   moveRight: [
     {
       keyframes: {
-        '0%': {
-          transform: 'translateX(0%)',
+        "0%": {
+          transform: "translateX(0%)",
         },
-        '100%': {
-          transform: 'translateX(400%)',
+        "100%": {
+          transform: "translateX(400%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     {
       keyframes: {
-        '0%': {
-          bg: 'primary',
+        "0%": {
+          bg: "primary",
         },
-        '100%': {
-          bg: 'secondary',
+        "100%": {
+          bg: "secondary",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   ],
 })
 
 return (
-  <VStack alignItems='flex-start'>
+  <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
     >
       Click me!
     </Button>
 
-    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+    <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
       Box
     </Box>
   </VStack>

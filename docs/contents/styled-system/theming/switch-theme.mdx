@@ -32,26 +32,26 @@ Pass an object to `themeSchemes`. The key of this object will be the `themeSchem
 :::
 
 ```tsx live=false
-import { extendTheme } from '@yamada-ui/react'
+import { extendTheme } from "@yamada-ui/react"
 
 export const theme = extendTheme({
   themeSchemes: {
     pink: {
       semantics: {
-        colors: { primary: 'pink.500' },
-        colorSchemes: { primary: 'pink' },
+        colors: { primary: "pink.500" },
+        colorSchemes: { primary: "pink" },
       },
     },
     purple: {
       semantics: {
-        colors: { primary: 'purple.500' },
-        colorSchemes: { primary: 'purple' },
+        colors: { primary: "purple.500" },
+        colorSchemes: { primary: "purple" },
       },
     },
     green: {
       semantics: {
-        colors: { primary: 'green.500' },
-        colorSchemes: { primary: 'green' },
+        colors: { primary: "green.500" },
+        colorSchemes: { primary: "green" },
       },
     },
   },
@@ -61,33 +61,33 @@ export const theme = extendTheme({
 If you want to use any of the themes passed in `themeSchemes` by default, set the initial value in `initialThemeScheme` of the config.
 
 ```tsx live=false highlight={1,26,27,28}
-import { extendTheme, extendConfig } from '@yamada-ui/react'
+import { extendTheme, extendConfig } from "@yamada-ui/react"
 
 export const theme = extendTheme({
   themeSchemes: {
     pink: {
       semantics: {
-        colors: { primary: 'pink.500' },
-        colorSchemes: { primary: 'pink' },
+        colors: { primary: "pink.500" },
+        colorSchemes: { primary: "pink" },
       },
     },
     purple: {
       semantics: {
-        colors: { primary: 'purple.500' },
-        colorSchemes: { primary: 'purple' },
+        colors: { primary: "purple.500" },
+        colorSchemes: { primary: "purple" },
       },
     },
     green: {
       semantics: {
-        colors: { primary: 'green.500' },
-        colorSchemes: { primary: 'green' },
+        colors: { primary: "green.500" },
+        colorSchemes: { primary: "green" },
       },
     },
   },
 })()
 
 export const config = extendConfig({
-  initialThemeScheme: 'pink',
+  initialThemeScheme: "pink",
 })
 ```
 
@@ -127,13 +127,13 @@ Please pass the same `initialThemeScheme` as the config to the `initialThemeSche
 #### In the case of Next.js
 
 ```tsx live=false title=_document.tsx highlight={2,3,11}
-import { Html, Head, Main, NextScript } from 'next/document'
-import { ThemeSchemeScript } from '@yamada-ui/react'
-import { config } from '../theme'
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@yamada-ui/react"
+import { config } from "../theme"
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head />
 
       <body>
@@ -149,19 +149,19 @@ export default function Document() {
 Depending on the project, you may need to retrieve values from `cookies`. In that case, use `cookieStorageManager`.
 
 ```tsx live=false title=_document.tsx highlight={2,3,12,13}
-import { Html, Head, Main, NextScript } from 'next/document'
-import { ThemeSchemeScript } from '@yamada-ui/react'
-import { config } from '../theme'
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@yamada-ui/react"
+import { config } from "../theme"
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head />
 
       <body>
         <ThemeSchemeScript
-          type='cookie'
-          nonce='testing'
+          type="cookie"
+          nonce="testing"
           initialThemeScheme={config.initialThemeScheme}
         />
         <Main />
@@ -173,9 +173,9 @@ export default function Document() {
 ```
 
 ```tsx live=false title=_app.tsx highlight={2,3,5,9}
-import type { AppProps } from 'next/app'
-import { UIProvider, colorModeManager } from '@yamada-ui/react'
-import { config } from '../theme'
+import type { AppProps } from "next/app"
+import { UIProvider, colorModeManager } from "@yamada-ui/react"
+import { config } from "../theme"
 
 const { cookieStorageManager } = colorModeManager
 
@@ -205,12 +205,12 @@ If you are not using server-side rendering, you do not need to follow these step
 To commonize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
 
 ```ts live=false
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext } from "next"
 
 export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => {
   return {
     props: {
-      cookies: req.headers.cookie ?? '',
+      cookies: req.headers.cookie ?? "",
     },
   }
 }
@@ -221,14 +221,14 @@ export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => 
 Pass `cookieStorageSSR` to `themeSchemeManager` of `UIProvider`.
 
 ```tsx live=false title=_app.tsx highlight={2,4,7,8,11}
-import type { AppProps } from 'next/app'
-import { UIProvider, themeSchemeManager } from '@yamada-ui/react'
+import type { AppProps } from "next/app"
+import { UIProvider, themeSchemeManager } from "@yamada-ui/react"
 
 const { cookieStorageSSR, localStorage } = themeSchemeManager
 
 export default function App({ Component, pageProps }: AppProps) {
   const { cookies } = pageProps
-  const themeSchemeManager = typeof cookies === 'string' ? cookieStorageSSR(cookies) : localStorage
+  const themeSchemeManager = typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
 
   return (
     <UIProvider themeSchemeManager={themeSchemeManager}>
@@ -243,8 +243,8 @@ export default function App({ Component, pageProps }: AppProps) {
 We will add the `getServerSideCommonProps` we created earlier to each page.
 
 ```tsx live=false title=index.tsx highlight={1,8}
-import { getServerSideCommonProps } from '../get-server-side-props.ts'
-import { Button } from '@yamada-ui/react'
+import { getServerSideCommonProps } from "../get-server-side-props.ts"
+import { Button } from "@yamada-ui/react"
 
 export default function Index() {
   return <Button>Click me!</Button>
@@ -264,18 +264,18 @@ return (
   <>
     <Text>The current scheme is "{themeScheme}"</Text>
 
-    <Wrap mt='md' gap='md'>
-      <Button onClick={() => changeThemeScheme('base')}>Base Theme</Button>
+    <Wrap mt="md" gap="md">
+      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
 
-      <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
+      <Button colorScheme="pink" onClick={() => changeThemeScheme("pink")}>
         Pink Theme
       </Button>
 
-      <Button colorScheme='purple' onClick={() => changeThemeScheme('purple')}>
+      <Button colorScheme="purple" onClick={() => changeThemeScheme("purple")}>
         Purple Theme
       </Button>
 
-      <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
+      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
         Green Theme
       </Button>
     </Wrap>

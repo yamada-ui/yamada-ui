@@ -1,8 +1,8 @@
-import { Text, useBreakpoint } from '@yamada-ui/react'
-import { Column, Table } from '@yamada-ui/table'
-import { FC, useMemo, useState } from 'react'
-import { PackageManagers } from './package-managers'
-import { useI18n } from 'contexts/i18n-context'
+import { Text, useBreakpoint } from "@yamada-ui/react"
+import { Column, Table } from "@yamada-ui/table"
+import { FC, useMemo, useState } from "react"
+import { PackageManagers } from "./package-managers"
+import { useI18n } from "contexts/i18n-context"
 
 type Package = { name: string; description: string; isDefaultCheck?: boolean }
 
@@ -18,23 +18,23 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages
   const columns = useMemo<Column<Package>[]>(() => {
     const columns: Column<Package>[] = [
       {
-        header: t('component.select-package-managers.name'),
-        accessorKey: 'name',
-        css: { w: '12.5rem' },
+        header: t("component.select-package-managers.name"),
+        accessorKey: "name",
+        css: { w: "12.5rem" },
       },
     ]
 
-    if (breakpoint !== 'sm') {
+    if (breakpoint !== "sm") {
       columns.push({
-        header: t('component.select-package-managers.description'),
-        accessorKey: 'description',
+        header: t("component.select-package-managers.description"),
+        accessorKey: "description",
         cell: ({ getValue }) => (
           <Text noOfLines={1}>
             {getValue<string>()
               .split(/`([^`]+)`/)
               .map((value, index) =>
                 index % 2 === 1 ? (
-                  <Text key={index} as='code' apply='mdx.code'>
+                  <Text key={index} as="code" apply="mdx.code">
                     {value}
                   </Text>
                 ) : (
@@ -51,20 +51,20 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages
 
   return (
     <>
-      <PackageManagers packageNameOrCommand={selectedPackageNames} mb='4' />
+      <PackageManagers packageNameOrCommand={selectedPackageNames} mb="4" />
 
       <Table
-        mt='4'
-        mb='6'
-        colorScheme='primary'
+        mt="4"
+        mb="6"
+        colorScheme="primary"
         columns={columns}
         data={packages}
-        rowId='name'
+        rowId="name"
         defaultSelectedRowIds={selectedPackageNames}
         onChangeSelect={setSelectedPackageNames}
         selectColumnProps={{
           css: {
-            w: '2.5rem',
+            w: "2.5rem",
           },
         }}
         enableSorting={false}

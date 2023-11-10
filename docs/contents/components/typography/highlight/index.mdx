@@ -1,7 +1,7 @@
 ---
 title: Highlight
-description: '`Highlight` is a component that highlights specified strings within the text. By default, it renders a `p` element.'
-package_name: '@yamada-ui/highlight'
+description: "`Highlight` is a component that highlights specified strings within the text. By default, it renders a `p` element."
+package_name: "@yamada-ui/highlight"
 is_tabs: true
 with_description: true
 tab: Usage
@@ -10,7 +10,7 @@ tab: Usage
 ## Import
 
 ```ts
-import { Highlight } from '@yamada-ui/react'
+import { Highlight } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ import { Highlight } from '@yamada-ui/react'
 Specify the string you want to highlight in `query`.
 
 ```tsx
-<Highlight query='Dragon'>
+<Highlight query="Dragon">
   "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
   Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves around
   the treasure "DRAGON BALL", which grants any one wish when all seven scattered balls are
@@ -33,7 +33,7 @@ Specify the string you want to highlight in `query`.
 ### Specify Multiple
 
 ```tsx
-<Highlight query={['DRAGON BALL', 'Akira Toriyama']}>
+<Highlight query={["DRAGON BALL", "Akira Toriyama"]}>
   "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
   Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves around
   the treasure "DRAGON BALL", which grants any single wish when all seven scattered balls are
@@ -48,8 +48,8 @@ Specify the string you want to highlight in `query`.
 ### Styling Highlights
 
 ```tsx
-<VStack gap='md'>
-  <Highlight query='DRAGON BALL' markProps={{ variant: 'subtle' }}>
+<VStack gap="md">
+  <Highlight query="DRAGON BALL" markProps={{ variant: "subtle" }}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves
     around the treasure "DRAGON BALL", which can grant any wish if all seven scattered balls around
@@ -61,7 +61,7 @@ Specify the string you want to highlight in `query`.
     popularity worldwide.
   </Highlight>
 
-  <Highlight query='DRAGON BALL' markProps={{ variant: 'solid' }}>
+  <Highlight query="DRAGON BALL" markProps={{ variant: "solid" }}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves
     around the treasure "DRAGON BALL", which can grant any wish if all seven scattered balls around
@@ -73,7 +73,7 @@ Specify the string you want to highlight in `query`.
     popularity worldwide.
   </Highlight>
 
-  <Highlight query='DRAGON BALL' markProps={{ variant: 'outline' }}>
+  <Highlight query="DRAGON BALL" markProps={{ variant: "outline" }}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves
     around the treasure "DRAGON BALL", which can grant any wish if all seven scattered balls around
@@ -85,7 +85,7 @@ Specify the string you want to highlight in `query`.
     popularity worldwide.
   </Highlight>
 
-  <Highlight query='DRAGON BALL' markProps={{ variant: 'text-accent' }}>
+  <Highlight query="DRAGON BALL" markProps={{ variant: "text-accent" }}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves
     around the treasure "DRAGON BALL", which can grant any wish if all seven scattered balls around
@@ -100,7 +100,7 @@ Specify the string you want to highlight in `query`.
 ```
 
 ```tsx
-<Highlight query='DRAGON BALL' markProps={{ colorScheme: 'green' }}>
+<Highlight query="DRAGON BALL" markProps={{ colorScheme: "green" }}>
   "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
   Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves around
   the treasure "DRAGON BALL", which can grant any wish if all seven scattered balls around the world
@@ -113,7 +113,7 @@ Specify the string you want to highlight in `query`.
 ```
 
 ```tsx
-<Highlight query='DRAGON BALL' markProps={{ rounded: 'full' }}>
+<Highlight query="DRAGON BALL" markProps={{ rounded: "full" }}>
   "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
   Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves around
   the treasure "DRAGON BALL", which can grant any wish if all seven scattered balls around the world
@@ -131,7 +131,7 @@ By default, `Highlight` renders a `p` element. By setting `isFragment`, `highlig
 
 ```tsx
 <Heading>
-  <Highlight isFragment query={['DRAGON BALL', 'Akira Toriyama']}>
+  <Highlight isFragment query={["DRAGON BALL", "Akira Toriyama"]}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from the 51st issue of 1984 to the 25th issue of 1995. The story revolves
     around the treasure "DRAGON BALL", which grants any one wish when all seven scattered balls are
@@ -152,19 +152,19 @@ By using `useHighlight`, you can customize multiple elements and their styles.
 ```tsx functional=true
 const chunks = useHighlight({
   text: '"DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the treasure "DRAGON BALL", which grants any one wish when all seven scattered balls are collected, and the protagonist Goku. It is a long manga depicting "adventure", "dreams", "battles", "friendship", etc. From 1986 to 1996, "DRAGON BALL" and "DRAGON BALL Z" were broadcast on the Fuji TV network, recording an average viewer rating of over 20% during the 11-year series broadcast period. In addition, it is a representative work of Japanese manga and anime, boasting immense popularity worldwide, being broadcast in more than 80 countries around the world.',
-  query: ['DRAGON BALL', 'Akira Toriyama'],
+  query: ["DRAGON BALL", "Akira Toriyama"],
 })
 
 return (
   <Text>
     {chunks.map(({ match, text }, i) =>
       match ? (
-        text === 'Akira Toriyama' ? (
-          <Mark key={i} colorScheme='red'>
+        text === "Akira Toriyama" ? (
+          <Mark key={i} colorScheme="red">
             {text}
           </Mark>
         ) : (
-          <Mark key={i} colorScheme='green'>
+          <Mark key={i} colorScheme="green">
             {text}
           </Mark>
         )

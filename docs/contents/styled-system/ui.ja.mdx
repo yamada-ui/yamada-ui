@@ -12,7 +12,7 @@ order: 12
 例えば、スタイルシステムを備えたプレーンなHTML要素の`button`を生成する場合は、`<ui.button />`と記述します。
 
 ```tsx
-<ui.button py='sm' px='md' rounded='md' bg='purple.600' color='white' _hover={{ bg: 'purple.500' }}>
+<ui.button py="sm" px="md" rounded="md" bg="purple.600" color="white" _hover={{ bg: "purple.500" }}>
   Click me!
 </ui.button>
 ```
@@ -30,9 +30,9 @@ order: 12
 関数は、簡単なコンポーネントを生成するのに適しています。
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button')
+const Button = ui("button")
 
 const Demo = () => {
   return <Button>Click me!</Button>
@@ -42,16 +42,16 @@ const Demo = () => {
 デフォルトのスタイルを設定することもできます。
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button', {
+const Button = ui("button", {
   baseStyle: {
-    py: 'sm',
-    px: 'md',
-    rounded: 'md',
-    bg: 'purple.600',
-    color: 'white',
-    _hover: { bg: 'purple.500' },
+    py: "sm",
+    px: "md",
+    rounded: "md",
+    bg: "purple.600",
+    color: "white",
+    _hover: { bg: "purple.500" },
   },
 })
 
@@ -63,20 +63,20 @@ const Demo = () => {
 引数にカスタムコンポーネントを渡し、Yamada UIのスタイルシステムを有効にしたカスタムコンポーネントを生成することもできます。
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
-import { YourComponent } from './your-component'
+import { ui } from "@yamada-ui/core"
+import { YourComponent } from "./your-component"
 
-const NewComponent = ui('YourComponent')
+const NewComponent = ui("YourComponent")
 
 const Demo = () => {
   return (
     <NewComponent
-      py='sm'
-      px='md'
-      rounded='md'
-      bg='purple.600'
-      color='white'
-      _hover={{ bg: 'purple.500' }}
+      py="sm"
+      px="md"
+      rounded="md"
+      bg="purple.600"
+      color="white"
+      _hover={{ bg: "purple.500" }}
     >
       Click me!
     </NewComponent>

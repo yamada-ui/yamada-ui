@@ -14,46 +14,46 @@ tab: Pages Router
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: 'pnpm create next-app my-app --typescript',
-    npm: 'npx create-next-app my-app --typescript',
-    yarn: 'yarn create next-app my-app --typescript',
+    pnpm: "pnpm create next-app my-app --typescript",
+    npm: "npx create-next-app my-app --typescript",
+    yarn: "yarn create next-app my-app --typescript",
   }}
 />
 
 Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
 テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールをする必要があります。
 
 <SelectPackageManagers
   packages={[
     {
-      name: '@yamada-ui/table',
-      description: '`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。',
+      name: "@yamada-ui/table",
+      description: "`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。",
       isDefaultCheck: true,
     },
     {
-      name: '@yamada-ui/calendar',
+      name: "@yamada-ui/calendar",
       description:
-        '`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。',
+        "`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/carousel',
-      description: '`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。',
+      name: "@yamada-ui/carousel",
+      description: "`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/dropzone',
-      description: '`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。',
+      name: "@yamada-ui/dropzone",
+      description: "`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/markdown',
+      name: "@yamada-ui/markdown",
       description:
-        '`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。',
+        "`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/fontawesome',
-      description: '`Font Awesome`を便利に使用するためのコンポーネントを提供します。',
+      name: "@yamada-ui/fontawesome",
+      description: "`Font Awesome`を便利に使用するためのコンポーネントを提供します。",
     },
   ]}
 />
@@ -68,8 +68,8 @@ Yamada UIのスタイルシステムのみを使用したい場合は、[こち�
 Yamada UIをインストール後、`UIProvider`を追加します。
 
 ```tsx live=false title=_app.tsx highlight={6,8}
-import type { AppProps } from 'next/app'
-import { UIProvider } from '@yamada-ui/react'
+import type { AppProps } from "next/app"
+import { UIProvider } from "@yamada-ui/react"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -95,12 +95,12 @@ export default function App({ Component, pageProps }: AppProps) {
 理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 ```tsx live=false title=_document.tsx highlight={10}
-import { Html, Head, Main, NextScript } from 'next/document'
-import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head />
 
       <body>
@@ -122,7 +122,7 @@ export default function Document() {
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを呼び出します。
 
 ```tsx live=false title=index.tsx
-import { Button } from '@yamada-ui/react'
+import { Button } from "@yamada-ui/react"
 
 export default function Home() {
   return <Button>Click me!</Button>

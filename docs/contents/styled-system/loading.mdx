@@ -53,7 +53,7 @@ const onLoadingBackground = async () => {
 }
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={onLoadingScreen}>Start screen loading</Button>
     <Button onClick={onLoadingPage}>Start page loading</Button>
     <Button onClick={onLoadingBackground}>Start background loading</Button>
@@ -73,7 +73,7 @@ In cases such as communication, it is necessary to add a timeout. In that case, 
 const { screen, page, background } = useLoading()
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
     <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
     <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
@@ -89,14 +89,14 @@ To add a message to the loading, use `message`.
 const { screen, page, background } = useLoading()
 
 return (
-  <Wrap gap='md'>
-    <Button onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
+  <Wrap gap="md">
+    <Button onClick={() => screen.start({ message: "Loading", duration: 5000 })}>
       Start screen loading
     </Button>
-    <Button onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
+    <Button onClick={() => page.start({ message: "Loading", duration: 5000 })}>
       Start page loading
     </Button>
-    <Button onClick={() => background.start({ message: 'Loading', duration: 5000 })}>
+    <Button onClick={() => background.start({ message: "Loading", duration: 5000 })}>
       Start background loading
     </Button>
   </Wrap>
@@ -109,22 +109,22 @@ You can pass a `JSX element` to `message`.
 const { screen, page, background } = useLoading()
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button
       onClick={() =>
-        screen.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        screen.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })
       }
     >
       Start screen loading
     </Button>
     <Button
-      onClick={() => page.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })}
+      onClick={() => page.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })}
     >
       Start page loading
     </Button>
     <Button
       onClick={() =>
-        background.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        background.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })
       }
     >
       Start background loading
@@ -142,11 +142,11 @@ const { screen, page, background } = useLoading()
 
 const onLoadingScreen = async () => {
   try {
-    screen.start({ message: 'Loading' })
+    screen.start({ message: "Loading" })
 
     await wait(3000)
 
-    screen.update({ message: 'Please wait' })
+    screen.update({ message: "Please wait" })
 
     await wait(3000)
   } finally {
@@ -156,11 +156,11 @@ const onLoadingScreen = async () => {
 
 const onLoadingPage = async () => {
   try {
-    page.start({ message: 'Loading' })
+    page.start({ message: "Loading" })
 
     await wait(3000)
 
-    page.update({ message: 'Please wait' })
+    page.update({ message: "Please wait" })
 
     await wait(3000)
   } finally {
@@ -170,11 +170,11 @@ const onLoadingPage = async () => {
 
 const onLoadingBackground = async () => {
   try {
-    background.start({ message: 'Loading' })
+    background.start({ message: "Loading" })
 
     await wait(3000)
 
-    background.update({ message: 'Please wait' })
+    background.update({ message: "Please wait" })
 
     await wait(3000)
   } finally {
@@ -183,7 +183,7 @@ const onLoadingBackground = async () => {
 }
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={onLoadingScreen}>Start screen loading</Button>
     <Button onClick={onLoadingPage}>Start page loading</Button>
     <Button onClick={onLoadingBackground}>Start background loading</Button>
@@ -202,17 +202,17 @@ const customConfig = extendConfig({
   loading: {
     screen: {
       icon: {
-        variant: 'grid',
+        variant: "grid",
       },
     },
     page: {
       icon: {
-        variant: 'grid',
+        variant: "grid",
       },
     },
     background: {
       icon: {
-        variant: 'grid',
+        variant: "grid",
       },
     },
   },
@@ -222,7 +222,7 @@ function App() {
   const { screen, page, background } = useLoading()
 
   return (
-    <Wrap gap='md'>
+    <Wrap gap="md">
       <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
       <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
       <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
@@ -244,7 +244,7 @@ By using `initialState`, a loading display will be shown when the application is
 This is suitable for communication during loading (such as obtaining user information).
 
 ```tsx live=false highlight={6}
-import { UIProvider, extendConfig } from '@yamada-ui/react'
+import { UIProvider, extendConfig } from "@yamada-ui/react"
 
 const customConfig = extendConfig({
   loading: {
@@ -282,9 +282,9 @@ const customConfig = extendConfig({
 
         return (
           <Motion
-            initial={!initialState ? 'initial' : false}
-            animate='animate'
-            exit='exit'
+            initial={!initialState ? "initial" : false}
+            animate="animate"
+            exit="exit"
             variants={{
               initial: {
                 opacity: 0,
@@ -305,25 +305,25 @@ const customConfig = extendConfig({
               },
             }}
             sx={{
-              position: 'fixed',
+              position: "fixed",
               top: 0,
               right: 0,
               bottom: 0,
               left: 0,
               zIndex: 9999,
-              bg: 'blackAlpha.600',
-              w: '100vw',
-              h: '100vh',
-              p: 'md',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              bg: "blackAlpha.600",
+              w: "100vw",
+              h: "100vh",
+              p: "md",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Motion
-              initial={!initialState ? 'initial' : false}
-              animate='animate'
-              exit='exit'
+              initial={!initialState ? "initial" : false}
+              animate="animate"
+              exit="exit"
               variants={{
                 initial: {
                   opacity: 0,
@@ -347,21 +347,21 @@ const customConfig = extendConfig({
                 },
               }}
               sx={{
-                bg: ['white', 'black'],
-                maxW: 'md',
-                p: 'md',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: 'sm',
-                rounded: 'md',
-                boxShadow: ['lg', 'dark-lg'],
+                bg: ["white", "black"],
+                maxW: "md",
+                p: "md",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "sm",
+                rounded: "md",
+                boxShadow: ["lg", "dark-lg"],
               }}
             >
-              <Loading variant='dots' size='6xl' />
+              <Loading variant="dots" size="6xl" />
 
-              <VStack align='center' mb='md' gap='sm'>
+              <VStack align="center" mb="md" gap="sm">
                 <Text>Downloading files…</Text>
                 {message ? (
                   isValidElement(message) ? (
@@ -372,7 +372,7 @@ const customConfig = extendConfig({
                 ) : null}
               </VStack>
 
-              <Button size='sm' onClick={onFinish}>
+              <Button size="sm" onClick={onFinish}>
                 Play to background
               </Button>
             </Motion>

@@ -30,31 +30,31 @@ Yamada UIは、CSSの`keyframes`のように記述できる`useAnimation`と`use
 ```tsx functional=true
 const animation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.500',
+    "0%": {
+      bg: "red.500",
     },
-    '20%': {
-      bg: 'green.500',
+    "20%": {
+      bg: "green.500",
     },
-    '40%': {
-      bg: 'purple.500',
+    "40%": {
+      bg: "purple.500",
     },
-    '60%': {
-      bg: 'yellow.500',
+    "60%": {
+      bg: "yellow.500",
     },
-    '80%': {
-      bg: 'blue.500',
+    "80%": {
+      bg: "blue.500",
     },
-    '100%': {
-      bg: 'red.500',
+    "100%": {
+      bg: "red.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <Box w='full' h='xs' animation={animation} />
+return <Box w="full" h="xs" animation={animation} />
 ```
 
 #### 複数のアニメーションを使う
@@ -65,66 +65,66 @@ return <Box w='full' h='xs' animation={animation} />
 const animation = useAnimation([
   {
     keyframes: {
-      '0%': {
-        bg: 'red.500',
+      "0%": {
+        bg: "red.500",
       },
-      '20%': {
-        bg: 'green.500',
+      "20%": {
+        bg: "green.500",
       },
-      '40%': {
-        bg: 'purple.500',
+      "40%": {
+        bg: "purple.500",
       },
-      '60%': {
-        bg: 'yellow.500',
+      "60%": {
+        bg: "yellow.500",
       },
-      '80%': {
-        bg: 'blue.500',
+      "80%": {
+        bg: "blue.500",
       },
-      '100%': {
-        bg: 'red.500',
+      "100%": {
+        bg: "red.500",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
   {
     keyframes: {
-      '0%': {
-        h: 'xs',
+      "0%": {
+        h: "xs",
       },
-      '50%': {
-        h: 'md',
+      "50%": {
+        h: "md",
       },
-      '100%': {
-        h: 'xs',
+      "100%": {
+        h: "xs",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
   {
     keyframes: {
-      '0%': {
-        w: 'full',
+      "0%": {
+        w: "full",
       },
-      '50%': {
-        w: '50%',
+      "50%": {
+        w: "50%",
       },
-      '100%': {
-        w: 'full',
+      "100%": {
+        w: "full",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
 ])
 
 return (
-  <Box h='md'>
-    <Box w='full' h='xs' animation={animation} />
+  <Box h="md">
+    <Box w="full" h="xs" animation={animation} />
   </Box>
 )
 ```
@@ -136,57 +136,57 @@ return (
 ```tsx functional=true
 const desktopAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.500',
+    "0%": {
+      bg: "red.500",
     },
-    '20%': {
-      bg: 'green.500',
+    "20%": {
+      bg: "green.500",
     },
-    '40%': {
-      bg: 'purple.500',
+    "40%": {
+      bg: "purple.500",
     },
-    '60%': {
-      bg: 'yellow.500',
+    "60%": {
+      bg: "yellow.500",
     },
-    '80%': {
-      bg: 'blue.500',
+    "80%": {
+      bg: "blue.500",
     },
-    '100%': {
-      bg: 'red.500',
+    "100%": {
+      bg: "red.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
 const tabletAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'cyan.500',
+    "0%": {
+      bg: "cyan.500",
     },
-    '20%': {
-      bg: 'emerald.500',
+    "20%": {
+      bg: "emerald.500",
     },
-    '40%': {
-      bg: 'pink.500',
+    "40%": {
+      bg: "pink.500",
     },
-    '60%': {
-      bg: 'amber.500',
+    "60%": {
+      bg: "amber.500",
     },
-    '80%': {
-      bg: 'sky.500',
+    "80%": {
+      bg: "sky.500",
     },
-    '100%': {
-      bg: 'cyan.500',
+    "100%": {
+      bg: "cyan.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnimation }} />
+return <Box w="full" h="xs" animation={{ base: desktopAnimation, md: tabletAnimation }} />
 ```
 
 :::note
@@ -200,57 +200,57 @@ return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnima
 ```tsx functional=true
 const lightAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.500',
+    "0%": {
+      bg: "red.500",
     },
-    '20%': {
-      bg: 'green.500',
+    "20%": {
+      bg: "green.500",
     },
-    '40%': {
-      bg: 'purple.500',
+    "40%": {
+      bg: "purple.500",
     },
-    '60%': {
-      bg: 'yellow.500',
+    "60%": {
+      bg: "yellow.500",
     },
-    '80%': {
-      bg: 'blue.500',
+    "80%": {
+      bg: "blue.500",
     },
-    '100%': {
-      bg: 'red.500',
+    "100%": {
+      bg: "red.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
 const darkAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.800',
+    "0%": {
+      bg: "red.800",
     },
-    '20%': {
-      bg: 'green.800',
+    "20%": {
+      bg: "green.800",
     },
-    '40%': {
-      bg: 'purple.800',
+    "40%": {
+      bg: "purple.800",
     },
-    '60%': {
-      bg: 'yellow.800',
+    "60%": {
+      bg: "yellow.800",
     },
-    '80%': {
-      bg: 'blue.800',
+    "80%": {
+      bg: "blue.800",
     },
-    '100%': {
-      bg: 'red.800',
+    "100%": {
+      bg: "red.800",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
+return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
 ```
 
 :::note
@@ -265,41 +265,41 @@ return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
 const [animation, setAnimation] = useDynamicAnimation({
   moveLeft: {
     keyframes: {
-      '0%': {
-        transform: 'translateX(400%)',
+      "0%": {
+        transform: "translateX(400%)",
       },
-      '100%': {
-        transform: 'translateX(0%)',
+      "100%": {
+        transform: "translateX(0%)",
       },
     },
-    duration: 'slower',
-    fillMode: 'forwards',
-    timingFunction: 'ease-in-out',
+    duration: "slower",
+    fillMode: "forwards",
+    timingFunction: "ease-in-out",
   },
   moveRight: {
     keyframes: {
-      '0%': {
-        transform: 'translateX(0%)',
+      "0%": {
+        transform: "translateX(0%)",
       },
-      '100%': {
-        transform: 'translateX(400%)',
+      "100%": {
+        transform: "translateX(400%)",
       },
     },
-    duration: 'slower',
-    fillMode: 'forwards',
-    timingFunction: 'ease-in-out',
+    duration: "slower",
+    fillMode: "forwards",
+    timingFunction: "ease-in-out",
   },
 })
 
 return (
-  <VStack alignItems='flex-start'>
+  <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
     >
       Click me!
     </Button>
 
-    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+    <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
       Box
     </Box>
   </VStack>
@@ -312,75 +312,75 @@ return (
 
 ```tsx functional=true
 const [animation, setAnimation] = useDynamicAnimation<
-  Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+  Record<"moveLeft" | "moveRight", AnimationStyle[]>
 >({
   moveLeft: [
     {
       keyframes: {
-        '0%': {
-          transform: 'translateX(400%)',
+        "0%": {
+          transform: "translateX(400%)",
         },
-        '100%': {
-          transform: 'translateX(0%)',
+        "100%": {
+          transform: "translateX(0%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     {
       keyframes: {
-        '0%': {
-          bg: 'secondary',
+        "0%": {
+          bg: "secondary",
         },
-        '100%': {
-          bg: 'primary',
+        "100%": {
+          bg: "primary",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   ],
   moveRight: [
     {
       keyframes: {
-        '0%': {
-          transform: 'translateX(0%)',
+        "0%": {
+          transform: "translateX(0%)",
         },
-        '100%': {
-          transform: 'translateX(400%)',
+        "100%": {
+          transform: "translateX(400%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     {
       keyframes: {
-        '0%': {
-          bg: 'primary',
+        "0%": {
+          bg: "primary",
         },
-        '100%': {
-          bg: 'secondary',
+        "100%": {
+          bg: "secondary",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   ],
 })
 
 return (
-  <VStack alignItems='flex-start'>
+  <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
     >
       Click me!
     </Button>
 
-    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+    <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
       Box
     </Box>
   </VStack>
@@ -396,46 +396,46 @@ return (
 アニメーションのトークンを作成し、テーマに設定します。
 
 ```ts title=./theme/tokens/animations.ts
-import { ThemeAnimationTokens } from '@yamada-ui/react'
+import { ThemeAnimationTokens } from "@yamada-ui/react"
 
 export const animations: ThemeAnimationTokens = {
   gradient: {
     keyframes: {
-      '0%': {
-        bg: 'red.500',
+      "0%": {
+        bg: "red.500",
       },
-      '20%': {
-        bg: 'green.500',
+      "20%": {
+        bg: "green.500",
       },
-      '40%': {
-        bg: 'purple.500',
+      "40%": {
+        bg: "purple.500",
       },
-      '60%': {
-        bg: 'yellow.500',
+      "60%": {
+        bg: "yellow.500",
       },
-      '80%': {
-        bg: 'blue.500',
+      "80%": {
+        bg: "blue.500",
       },
-      '100%': {
-        bg: 'red.500',
+      "100%": {
+        bg: "red.500",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
 }
 ```
 
 ```ts title=./theme/tokens/index.ts
-import { animations } from './animations'
+import { animations } from "./animations"
 
 export default { animations }
 ```
 
 ```ts title=./theme/index.ts highlight={4,9}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import tokens from './tokens'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   ...tokens,
@@ -451,7 +451,7 @@ export default extendTheme(customTheme)()
 作成したトークンは、コンポーネントの`props`の`animation`で指定します。`useAnimation`と`useDynamicAnimation`でも使用することができます。
 
 ```tsx functional=true
-return <Box w='full' h='xs' animation='gradient' />
+return <Box w="full" h="xs" animation="gradient" />
 ```
 
 ## Motion
@@ -476,19 +476,19 @@ return <Box w='full' h='xs' animation='gradient' />
 :::
 
 ```tsx
-<Center p='lg'>
+<Center p="lg">
   <Motion
     initial={{ x: -100 }}
     animate={{ x: 100 }}
     transition={{
       duration: 2,
-      ease: 'easeInOut',
+      ease: "easeInOut",
       repeat: Infinity,
     }}
-    p='md'
-    rounded='md'
-    bg='primary'
-    color='white'
+    p="md"
+    rounded="md"
+    bg="primary"
+    color="white"
   >
     Hover me!
   </Motion>
@@ -506,7 +506,7 @@ return (
   <>
     <Button onClick={toggle}>Click me!</Button>
 
-    <Center h='3xs' gap='md'>
+    <Center h="3xs" gap="md">
       <AnimatePresence>
         {isVisible ? (
           <Motion
@@ -514,10 +514,10 @@ return (
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
-            bg='primary'
-            color='white'
-            p='md'
-            rounded='md'
+            bg="primary"
+            color="white"
+            p="md"
+            rounded="md"
           >
             Enabled "AnimatePresence"
           </Motion>
@@ -530,10 +530,10 @@ return (
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          bg='secondary'
-          color='white'
-          p='md'
-          rounded='md'
+          bg="secondary"
+          color="white"
+          p="md"
+          rounded="md"
         >
           Disabled "AnimatePresence"
         </Motion>
@@ -548,23 +548,23 @@ return (
 スタイルオブジェクトのプロパティに配列を渡すことで、キーフレームを設定することができます。各キーフレームは、アニメーション全体で均等な間隔で配置されます。`transition`に`times`を設定すると間隔をオーバーライドすることができます。
 
 ```tsx
-<Center h='md'>
+<Center h="md">
   <Motion
     animate={{
       scale: [1, 2, 2, 1, 1],
       rotate: [0, 0, 180, 180, 0],
-      borderRadius: ['0%', '0%', '50%', '50%', '0%'],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
     }}
     transition={{
       duration: 2,
-      ease: 'easeInOut',
+      ease: "easeInOut",
       times: [0, 0.2, 0.5, 0.8, 1],
       repeat: Infinity,
       repeatDelay: 1,
     }}
-    w='3xs'
-    h='3xs'
-    bg='primary'
+    w="3xs"
+    h="3xs"
+    bg="primary"
   />
 </Center>
 ```
@@ -585,28 +585,28 @@ useMotionAnimationFrame((time, delta) => {
 
 const sides = useMemo(
   () => [
-    { transform: 'rotateY(0deg) translateZ(60px)', bg: 'red.500' },
-    { transform: 'rotateY(90deg) translateZ(60px)', bg: 'orange.500' },
-    { transform: 'rotateY(180deg) translateZ(60px)', bg: 'pink.500' },
-    { transform: 'rotateY(-90deg) translateZ(60px)', bg: 'purple.500' },
-    { transform: 'rotateX(90deg) translateZ(60px);', bg: 'blue.500' },
-    { transform: 'rotateX(-90deg) translateZ(60px)', bg: 'green.500' },
+    { transform: "rotateY(0deg) translateZ(60px)", bg: "red.500" },
+    { transform: "rotateY(90deg) translateZ(60px)", bg: "orange.500" },
+    { transform: "rotateY(180deg) translateZ(60px)", bg: "pink.500" },
+    { transform: "rotateY(-90deg) translateZ(60px)", bg: "purple.500" },
+    { transform: "rotateX(90deg) translateZ(60px);", bg: "blue.500" },
+    { transform: "rotateX(-90deg) translateZ(60px)", bg: "green.500" },
   ],
   [],
 )
 
 return (
-  <Center h='md'>
-    <Box css={{ perspective: '800px' }} w='120px' h='120px'>
-      <Box ref={containerRef} position='relative' w='120px' h='120px' transformStyle='preserve-3d'>
+  <Center h="md">
+    <Box css={{ perspective: "800px" }} w="120px" h="120px">
+      <Box ref={containerRef} position="relative" w="120px" h="120px" transformStyle="preserve-3d">
         {sides.map(({ transform, bg }) => (
           <Box
-            key={bg.split('.')[0]}
-            position='absolute'
-            w='full'
-            h='full'
+            key={bg.split(".")[0]}
+            position="absolute"
+            w="full"
+            h="full"
             bg={bg}
-            opacity='0.6'
+            opacity="0.6"
             transform={transform}
           />
         ))}
@@ -635,16 +635,16 @@ return (
 - `onHoverEnd`: ポインタが要素上から離れたときに発火するコールバック関数です。
 
 ```tsx
-<Center p='lg'>
+<Center p="lg">
   <Motion
-    as='button'
+    as="button"
     whileHover={{ scale: 1.1 }}
-    onHoverStart={(ev) => console.log('Hover starts')}
-    onHoverEnd={(ev) => console.log('Hover ends')}
-    p='md'
-    rounded='md'
-    bg='primary'
-    color='white'
+    onHoverStart={(ev) => console.log("Hover starts")}
+    onHoverEnd={(ev) => console.log("Hover ends")}
+    p="md"
+    rounded="md"
+    bg="primary"
+    color="white"
   >
     Hover me!
   </Motion>
@@ -665,17 +665,17 @@ return (
 - `onTapCancel`: クリック・タップがキャンセルされた(要素外で放した)ときに発火するコールバック関数です。
 
 ```tsx
-<Center p='lg'>
+<Center p="lg">
   <Motion
-    as='button'
+    as="button"
     whileTap={{ scale: 1.1 }}
-    onTap={(ev, { point }) => console.log('Tap ends', 'x:', point.x, 'y:', point.y)}
-    onTapStart={(ev, { point }) => console.log('Tap starts', 'x:', point.x, 'y:', point.y)}
-    onTapCancel={(ev, { point }) => console.log('Tap cancels', 'x:', point.x, 'y:', point.y)}
-    p='md'
-    rounded='md'
-    bg='primary'
-    color='white'
+    onTap={(ev, { point }) => console.log("Tap ends", "x:", point.x, "y:", point.y)}
+    onTapStart={(ev, { point }) => console.log("Tap starts", "x:", point.x, "y:", point.y)}
+    onTapCancel={(ev, { point }) => console.log("Tap cancels", "x:", point.x, "y:", point.y)}
+    p="md"
+    rounded="md"
+    bg="primary"
+    color="white"
   >
     Click me!
   </Motion>
@@ -691,8 +691,8 @@ return (
 フォーカスのジェスチャは、`CSS`のセレクターである`focus-visible`と同じルールに従って、要素がフォーカスをされたかを検出します。
 
 ```tsx
-<Center p='lg'>
-  <Motion as='button' whileFocus={{ scale: 1.1 }} p='md' rounded='md' bg='primary' color='white'>
+<Center p="lg">
+  <Motion as="button" whileFocus={{ scale: 1.1 }} p="md" rounded="md" bg="primary" color="white">
     Focus me!
   </Motion>
 </Center>
@@ -713,42 +713,42 @@ return (
 - `onDragEnd`: ドラッグが終了したときに発火するコールバック関数です。
 
 ```tsx
-<Center h='md' gap='md'>
+<Center h="md" gap="md">
   <Motion
     drag
-    onDrag={(ev, { point }) => console.log('Drag', 'x:', point.x, 'y:', point.y)}
-    onDragStart={(ev, { point }) => console.log('Drag starts', 'x:', point.x, 'y:', point.y)}
-    onDragEnd={(ev, { point }) => console.log('Drag ends', 'x:', point.x, 'y:', point.y)}
-    p='md'
-    cursor='grab'
-    _active={{ cursor: 'grabbing' }}
-    rounded='md'
-    bg='primary'
-    color='white'
+    onDrag={(ev, { point }) => console.log("Drag", "x:", point.x, "y:", point.y)}
+    onDragStart={(ev, { point }) => console.log("Drag starts", "x:", point.x, "y:", point.y)}
+    onDragEnd={(ev, { point }) => console.log("Drag ends", "x:", point.x, "y:", point.y)}
+    p="md"
+    cursor="grab"
+    _active={{ cursor: "grabbing" }}
+    rounded="md"
+    bg="primary"
+    color="white"
   >
     Drag me!
   </Motion>
 
   <Motion
-    drag='x'
-    p='md'
-    cursor='grab'
-    _active={{ cursor: 'grabbing' }}
-    rounded='md'
-    bg='secondary'
-    color='white'
+    drag="x"
+    p="md"
+    cursor="grab"
+    _active={{ cursor: "grabbing" }}
+    rounded="md"
+    bg="secondary"
+    color="white"
   >
     Only X
   </Motion>
 
   <Motion
-    drag='y'
-    p='md'
-    cursor='grab'
-    _active={{ cursor: 'grabbing' }}
-    rounded='md'
-    bg='warning'
-    color='white'
+    drag="y"
+    p="md"
+    cursor="grab"
+    _active={{ cursor: "grabbing" }}
+    rounded="md"
+    bg="warning"
+    color="white"
   >
     Only Y
   </Motion>
@@ -763,16 +763,16 @@ return (
 const containerRef = useRef<HTMLDivElement>(null)
 
 return (
-  <Center ref={containerRef} h='md' gap='md'>
+  <Center ref={containerRef} h="md" gap="md">
     <Motion
       drag
       dragConstraints={containerRef}
-      p='md'
-      cursor='grab'
-      _active={{ cursor: 'grabbing' }}
-      rounded='md'
-      bg='primary'
-      color='white'
+      p="md"
+      cursor="grab"
+      _active={{ cursor: "grabbing" }}
+      rounded="md"
+      bg="primary"
+      color="white"
     >
       Drag me!
     </Motion>
@@ -785,12 +785,12 @@ return (
         bottom: 100,
         left: 0,
       }}
-      p='md'
-      cursor='grab'
-      _active={{ cursor: 'grabbing' }}
-      rounded='md'
-      bg='secondary'
-      color='white'
+      p="md"
+      cursor="grab"
+      _active={{ cursor: "grabbing" }}
+      rounded="md"
+      bg="secondary"
+      color="white"
     >
       Only right & bottom
     </Motion>
@@ -806,17 +806,17 @@ return (
 const containerRef = useRef<HTMLDivElement>(null)
 
 return (
-  <Center ref={containerRef} h='md' p='md' gap='md'>
+  <Center ref={containerRef} h="md" p="md" gap="md">
     <Motion
       drag
       dragConstraints={containerRef}
       dragElastic={0}
-      p='md'
-      cursor='grab'
-      _active={{ cursor: 'grabbing' }}
-      rounded='md'
-      bg='primary'
-      color='white'
+      p="md"
+      cursor="grab"
+      _active={{ cursor: "grabbing" }}
+      rounded="md"
+      bg="primary"
+      color="white"
     >
       Drag me!
     </Motion>
@@ -830,17 +830,17 @@ return (
 const containerRef = useRef<HTMLDivElement>(null)
 
 return (
-  <Center ref={containerRef} h='md' p='md' gap='md'>
+  <Center ref={containerRef} h="md" p="md" gap="md">
     <Motion
       drag
       dragConstraints={containerRef}
       dragMomentum={false}
-      p='md'
-      cursor='grab'
-      _active={{ cursor: 'grabbing' }}
-      rounded='md'
-      bg='primary'
-      color='white'
+      p="md"
+      cursor="grab"
+      _active={{ cursor: "grabbing" }}
+      rounded="md"
+      bg="primary"
+      color="white"
     >
       Drag me!
     </Motion>
@@ -872,19 +872,19 @@ return (
   <>
     <Text>Please scroll</Text>
 
-    <Box ref={containerRef} h='md' p='md' overflowY='auto'>
-      <HStack mt='24rem' justifyContent='center'>
+    <Box ref={containerRef} h="md" p="md" overflowY="auto">
+      <HStack mt="24rem" justifyContent="center">
         <Motion
           initial={{ x: -100 }}
           whileInView={{ x: 0 }}
           viewport={{ root: containerRef }}
           transition={{ duration: 1 }}
-          onViewportEnter={(entry) => console.log('Scroll entires', entry)}
-          onViewportLeave={(entry) => console.log('Scroll leaves', entry)}
-          p='md'
-          rounded='md'
-          bg='primary'
-          color='white'
+          onViewportEnter={(entry) => console.log("Scroll entires", entry)}
+          onViewportLeave={(entry) => console.log("Scroll leaves", entry)}
+          p="md"
+          rounded="md"
+          bg="primary"
+          color="white"
         >
           Abled to meet me!
         </Motion>
@@ -894,12 +894,12 @@ return (
           whileInView={{ x: 0 }}
           viewport={{ once: true, root: containerRef }}
           transition={{ duration: 1 }}
-          onViewportEnter={(entry) => console.log('Scroll entires', entry)}
-          onViewportLeave={(entry) => console.log('Scroll leaves', entry)}
-          p='md'
-          rounded='md'
-          bg='secondary'
-          color='white'
+          onViewportEnter={(entry) => console.log("Scroll entires", entry)}
+          onViewportLeave={(entry) => console.log("Scroll leaves", entry)}
+          p="md"
+          rounded="md"
+          bg="secondary"
+          color="white"
         >
           Once me!
         </Motion>
@@ -924,23 +924,23 @@ const { scrollYProgress } = useScroll({ container: containerRef })
 const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 
 return (
-  <Box ref={containerRef} position='relative' h='md' overflowY='auto'>
-    <Box h='9xl'>
-      <Box w='2xs' h='2xs' position='sticky' top='50%' left='50%' transform='translate(-50%, -50%)'>
+  <Box ref={containerRef} position="relative" h="md" overflowY="auto">
+    <Box h="9xl">
+      <Box w="2xs" h="2xs" position="sticky" top="50%" left="50%" transform="translate(-50%, -50%)">
         <Motion
           style={{ scale }}
-          w='full'
-          h='full'
-          overflow='hidden'
-          bg={['blackAlpha.200', 'whiteAlpha.200']}
-          rounded='3xl'
+          w="full"
+          h="full"
+          overflow="hidden"
+          bg={["blackAlpha.200", "whiteAlpha.200"]}
+          rounded="3xl"
         >
           <Motion
             style={{ scaleY: scrollYProgress }}
-            w='inherit'
-            h='inherit'
-            bg='primary'
-            transformOrigin='50% 100%'
+            w="inherit"
+            h="inherit"
+            bg="primary"
+            transformOrigin="50% 100%"
           />
         </Motion>
       </Box>

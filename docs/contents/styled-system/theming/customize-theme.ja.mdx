@@ -30,7 +30,7 @@ order: 2
 ```
 
 ```ts title=./theme/index.ts
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
 // import tokens from './tokens'
@@ -55,11 +55,11 @@ export default extendTheme(customTheme)()
 `tokens`の配下に`colors.ts`を作成します。
 
 ```ts title=./theme/tokens/colors.ts
-import { ThemeTokens } from '@yamada-ui/react'
+import { ThemeTokens } from "@yamada-ui/react"
 
 export const colors: ThemeTokens = {
-  banner: '#9d38a0',
-  black: ['#1F2123', '#101112'],
+  banner: "#9d38a0",
+  black: ["#1F2123", "#101112"],
 }
 ```
 
@@ -70,7 +70,7 @@ export const colors: ThemeTokens = {
 `index.ts`を作成し、先ほど作成した`colors`をエクスポートします。
 
 ```ts title=./theme/tokens/index.ts
-import { colors } from './colors'
+import { colors } from "./colors"
 
 export default { colors }
 ```
@@ -78,10 +78,10 @@ export default { colors }
 `customTheme`に`tokens`を含めます。
 
 ```ts title=./theme/index.ts highlight={4,9}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
-import tokens from './tokens'
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   // styles,
@@ -95,10 +95,10 @@ export default extendTheme(customTheme)()
 もし、デフォルトのテーマから`colors`だけ継承したくない場合は、`extendTheme`に`omit`を渡します。
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
-import tokens from './tokens'
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   // styles,
@@ -106,7 +106,7 @@ const customTheme: UsageTheme = {
   ...tokens,
 }
 
-export default extendTheme(customTheme)({ omit: ['colors'] })
+export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
 ## セマンティックトークンを変更する
@@ -118,20 +118,20 @@ export default extendTheme(customTheme)({ omit: ['colors'] })
 ```ts
 export const semantics: ThemeSemantics = {
   colors: {
-    primary: 'blue.500',
-    secondary: 'purple.500',
-    success: 'emerald.500',
-    warning: 'orange.500',
-    danger: 'red.500',
-    link: 'sky.500',
+    primary: "blue.500",
+    secondary: "purple.500",
+    success: "emerald.500",
+    warning: "orange.500",
+    danger: "red.500",
+    link: "sky.500",
   },
   colorSchemes: {
-    primary: 'blue',
-    secondary: 'purple',
-    success: 'emerald',
-    warning: 'orange',
-    danger: 'red',
-    link: 'sky',
+    primary: "blue",
+    secondary: "purple",
+    success: "emerald",
+    warning: "orange",
+    danger: "red",
+    link: "sky",
   },
 }
 ```
@@ -141,14 +141,14 @@ export const semantics: ThemeSemantics = {
 `theme`の配下に`semantics.ts`を作成します。
 
 ```ts title=./theme/semantics.ts
-import { ThemeSemantics } from '@yamada-ui/react'
+import { ThemeSemantics } from "@yamada-ui/react"
 
 export const semantics: ThemeSemantics = {
   colors: {
-    primary: 'pink.500',
+    primary: "pink.500",
   },
   colorSchemes: {
-    primary: 'pink',
+    primary: "pink",
   },
 }
 ```
@@ -156,11 +156,11 @@ export const semantics: ThemeSemantics = {
 `customTheme`に`semantics`を含めます。
 
 ```ts title=./theme/index.ts highlight={5,10}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   // styles,
@@ -185,11 +185,11 @@ export default extendTheme(customTheme)()
 `styles`の配下に`global-style.ts`を作成します。
 
 ```ts title=./theme/styles/global-style.ts
-import { UIStyle } from '@yamada-ui/react'
+import { UIStyle } from "@yamada-ui/react"
 
 export const globalStyle: UIStyle = {
   body: {
-    bg: ['black', 'white'],
+    bg: ["black", "white"],
   },
 }
 ```
@@ -201,7 +201,7 @@ export const globalStyle: UIStyle = {
 `index.ts`を作成し、先ほど作成した`globalStyle`をエクスポートします。
 
 ```ts title=./theme/styles/index.ts
-import { globalStyle } from './global-style'
+import { globalStyle } from "./global-style"
 
 export default { globalStyle }
 ```
@@ -209,11 +209,11 @@ export default { globalStyle }
 `customTheme`に`styles`を含めます。
 
 ```ts title=./theme/index.ts highlight={2,8}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
 // import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   styles,
@@ -228,11 +228,11 @@ export default extendTheme(customTheme)()
 もし、デフォルトのテーマから`styles`だけ継承したくない場合は、`extendTheme`に`omit`を渡します。
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
 // import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   styles,
@@ -241,7 +241,7 @@ const customTheme: UsageTheme = {
   ...tokens,
 }
 
-export default extendTheme(customTheme)({ omit: ['styles'] })
+export default extendTheme(customTheme)({ omit: ["styles"] })
 ```
 
 :::note
@@ -267,29 +267,29 @@ Yamada UIは、コンポーネントにスタイルの`props`を設定するこ�
 `components`の配下に`container.ts`を作成します。
 
 ```ts title=./theme/components/container.ts
-import { ComponentStyle } from '@yamada-ui/react'
+import { ComponentStyle } from "@yamada-ui/react"
 
 export const Container: ComponentStyle = {
   baseStyle: {
-    bg: 'green.100',
+    bg: "green.100",
   },
   sizes: {
-    sm: { p: 'sm', fontSize: 'sm' },
-    md: { p: 'md', fontSize: 'md' },
-    lg: { p: 'lg', fontSize: 'lg' },
+    sm: { p: "sm", fontSize: "sm" },
+    md: { p: "md", fontSize: "md" },
+    lg: { p: "lg", fontSize: "lg" },
   },
   variants: {
-    'wtih-border-solid': {
-      borderWidth: '1px',
+    "wtih-border-solid": {
+      borderWidth: "1px",
     },
-    'wtih-border-dotted': {
-      borderWidth: '1px',
-      borderStyle: 'dotted',
+    "wtih-border-dotted": {
+      borderWidth: "1px",
+      borderStyle: "dotted",
     },
   },
   defaultProps: {
-    size: 'md',
-    variant: 'wtih-border-solid',
+    size: "md",
+    variant: "wtih-border-solid",
   },
 }
 ```
@@ -301,7 +301,7 @@ export const Container: ComponentStyle = {
 `index.ts`を作成し、先ほど作成した`Container`をエクスポートします。
 
 ```ts title=./theme/components/index.ts
-import { Container } from './container'
+import { Container } from "./container"
 
 export default { Container }
 ```
@@ -309,11 +309,11 @@ export default { Container }
 `customTheme`に`components`を含めます。
 
 ```ts title=./theme/index.ts highlight={3,9}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
-import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
+import components from "./components"
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   styles,
@@ -328,11 +328,11 @@ export default extendTheme(customTheme)()
 これで、`Container`の背景色は変更され、`size`または`variant`を渡すことでスタイルが変更されます。
 
 ```tsx live=false
-import { Container } from '@yamada-ui/react'
+import { Container } from "@yamada-ui/react"
 
 const Demo = () => {
   return (
-    <Container size='sm' variant='with-border-dotted'>
+    <Container size="sm" variant="with-border-dotted">
       This is Container
     </Container>
   )
@@ -362,7 +362,7 @@ Yamada UIは、テーマのユーティリティを多く提供しています�
 #### 複数のテーマをマージする
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const firstTheme: UsageTheme = {}
 const secondTheme: UsageTheme = {}
@@ -373,7 +373,7 @@ export default extendTheme(firstTheme, secondTheme)()
 #### デフォルトのテーマを継承しない
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const firstTheme: UsageTheme = {}
 const secondTheme: UsageTheme = {}
@@ -384,21 +384,21 @@ export default extendTheme(firstTheme, secondTheme)({ merge: false })
 #### デフォルトテーマから特定のトークンを除外して継承する
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const customTheme: UsageTheme = {}
 
-export default extendTheme(customTheme)({ omit: ['colors'] })
+export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
 #### デフォルトテーマから特定のトークンだけ継承する
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const customTheme: UsageTheme = {}
 
-export default extendTheme(customTheme)({ pick: ['spaces'] })
+export default extendTheme(customTheme)({ pick: ["spaces"] })
 ```
 
 ### `extendBaseTheme`を使う
@@ -406,9 +406,9 @@ export default extendTheme(customTheme)({ pick: ['spaces'] })
 デフォルトのテーマのグローバルスタイルやカラーなどのトークンのみを継承して、新しいテーマを作成します。複数のオブジェクトを渡すことも可能です。また、オプションを指定することも可能です。
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendBaseTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
-import tokens from './tokens'
+import { extendBaseTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   styles,
@@ -427,9 +427,9 @@ export default extendBaseTheme(customTheme)()
 `globalStyle`や`resetStyle`を継承して、新しいスタイルを作成します。
 
 ```ts
-import { extendStyle, UIStyle } from '@yamada-ui/react'
+import { extendStyle, UIStyle } from "@yamada-ui/react"
 
-const globalStyle: UIStyle = extendStyle('globalStyle', {
+const globalStyle: UIStyle = extendStyle("globalStyle", {
   /**
    * 追加のスタイルを定義する
    */
@@ -441,9 +441,9 @@ const globalStyle: UIStyle = extendStyle('globalStyle', {
 特定のトークンを継承して、新しいトークンを作成します。
 
 ```ts
-import { extendToken, ThemeTokens } from '@yamada-ui/react'
+import { extendToken, ThemeTokens } from "@yamada-ui/react"
 
-const colors: ThemeTokens = extendToken('colors', {
+const colors: ThemeTokens = extendToken("colors", {
   /**
    * 追加のトークンを定義する
    */
@@ -455,9 +455,9 @@ const colors: ThemeTokens = extendToken('colors', {
 特定のコンポーネントのスタイルを継承して、新しいコンポーネントのスタイルを作成します。
 
 ```ts
-import { extendComponent, ComponentStyle } from '@yamada-ui/react'
+import { extendComponent, ComponentStyle } from "@yamada-ui/react"
 
-const Button: ComponentStyle = extendComponent('Button', {
+const Button: ComponentStyle = extendComponent("Button", {
   /**
    * 追加の`baseStyle`や`sizes`を定義する
    */
@@ -469,7 +469,7 @@ const Button: ComponentStyle = extendComponent('Button', {
 特定のコンポーネントのサイズを継承して、新しいコンポーネントのサイズを作成します。
 
 ```ts
-import { extendComponentSize, ComponentStyle } from '@yamada-ui/react'
+import { extendComponentSize, ComponentStyle } from "@yamada-ui/react"
 
 const Tag: ComponentStyle = {
   baseStyle: {
@@ -477,7 +477,7 @@ const Tag: ComponentStyle = {
      * 新しいスタイルを定義する
      */
   },
-  sizes: extendComponentSize('Tag', {
+  sizes: extendComponentSize("Tag", {
     /**
      * 追加のサイズを定義する
      */
@@ -494,7 +494,7 @@ const Tag: ComponentStyle = {
 特定のコンポーネントのバリアントを継承して、新しいコンポーネントのバリアントを作成します。
 
 ```ts
-import { extendComponentVariant, ComponentStyle } from '@yamada-ui/react'
+import { extendComponentVariant, ComponentStyle } from "@yamada-ui/react"
 
 const Tag: ComponentStyle = {
   baseStyle: {
@@ -502,7 +502,7 @@ const Tag: ComponentStyle = {
      * 新しいスタイルを定義する
      */
   },
-  variants: extendComponentVariant('Tag', {
+  variants: extendComponentVariant("Tag", {
     /**
      * 追加のバリアントを定義する
      */
@@ -519,7 +519,7 @@ const Tag: ComponentStyle = {
 特定のコンポーネントの`props`を継承して、新しいコンポーネントの`props`を作成します。
 
 ```ts
-import { extendComponentDefaultProps, ComponentStyle } from '@yamada-ui/react'
+import { extendComponentDefaultProps, ComponentStyle } from "@yamada-ui/react"
 
 const Tag: ComponentStyle = {
   baseStyle: {
@@ -527,7 +527,7 @@ const Tag: ComponentStyle = {
      * 新しいスタイルを定義する
      */
   },
-  defaultProps: extendComponentDefaultProps('Tag', {
+  defaultProps: extendComponentDefaultProps("Tag", {
     /**
      * 追加のpropsを定義する
      */
@@ -544,7 +544,7 @@ const Tag: ComponentStyle = {
 `すべて`または`一部`のコンポーネントのデフォルトのサイズを変更します。
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultSize } from '@yamada-ui/react'
+import { extendTheme, withDefaultSize } from "@yamada-ui/react"
 
 /**
  * 省略
@@ -553,8 +553,8 @@ import { extendTheme, withDefaultSize } from '@yamada-ui/react'
 export default extendTheme(
   customTheme,
   withDefaultSize({
-    size: 'lg',
-    components: ['Badge', 'Tag', 'Button'], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
+    size: "lg",
+    components: ["Badge", "Tag", "Button"], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
   }),
 )()
 ```
@@ -564,7 +564,7 @@ export default extendTheme(
 `すべて`または`一部`のコンポーネントのデフォルトのバリアントを変更します。
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultVariant } from '@yamada-ui/react'
+import { extendTheme, withDefaultVariant } from "@yamada-ui/react"
 
 /**
  * 省略
@@ -573,8 +573,8 @@ import { extendTheme, withDefaultVariant } from '@yamada-ui/react'
 export default extendTheme(
   customTheme,
   withDefaultVariant({
-    variant: 'solid',
-    components: ['Badge', 'Tag', 'Button'], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
+    variant: "solid",
+    components: ["Badge", "Tag", "Button"], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
   }),
 )()
 ```
@@ -584,7 +584,7 @@ export default extendTheme(
 `すべて`または`一部`のコンポーネントのデフォルトのカラースキーマを変更します。
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
+import { extendTheme, withDefaultColorScheme } from "@yamada-ui/react"
 
 /**
  * 省略
@@ -593,8 +593,8 @@ import { extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
 export default extendTheme(
   customTheme,
   withDefaultColorScheme({
-    colorScheme: 'primary',
-    components: ['Badge', 'Tag', 'Button'], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
+    colorScheme: "primary",
+    components: ["Badge", "Tag", "Button"], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
   }),
 )()
 ```
@@ -604,7 +604,7 @@ export default extendTheme(
 `すべて`または`一部`のコンポーネントのデフォルトの`props`を一括で変更します。
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultProps } from '@yamada-ui/react'
+import { extendTheme, withDefaultProps } from "@yamada-ui/react"
 
 /**
  * 省略
@@ -614,11 +614,11 @@ export default extendTheme(
   customTheme,
   withDefaultProps({
     defaultProps: {
-      size: 'lg',
-      variant: 'solid',
-      colorScheme: 'primary',
+      size: "lg",
+      variant: "solid",
+      colorScheme: "primary",
     },
-    components: ['Badge', 'Tag', 'Button'], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
+    components: ["Badge", "Tag", "Button"], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
   }),
 )()
 ```

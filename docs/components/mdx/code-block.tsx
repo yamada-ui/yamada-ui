@@ -1,16 +1,16 @@
 // import * as DropzoneComponents from '@yamada-ui/dropzone'
-import { Box, Text, useBoolean } from '@yamada-ui/react'
-import dynamic from 'next/dynamic'
+import { Box, Text, useBoolean } from "@yamada-ui/react"
+import dynamic from "next/dynamic"
 import {
   Highlight as ReactHighlight,
   HighlightProps as ReactHighlightProps,
   themes,
-} from 'prism-react-renderer'
-import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react'
-import { CopyButton } from 'components/forms'
-import { toBoolean } from 'utils/assertion'
+} from "prism-react-renderer"
+import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from "react"
+import { CopyButton } from "components/forms"
+import { toBoolean } from "utils/assertion"
 
-const EditableCodeBlock = dynamic(() => import('./editable-code-block'))
+const EditableCodeBlock = dynamic(() => import("./editable-code-block"))
 
 type Children = {
   props: {
@@ -45,32 +45,32 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
   functional = toBoolean(functional)
   noInline = toBoolean(noInline)
 
-  const language = className?.replace(/language-/, '') ?? 'sh'
-  const code = raw?.trim() ?? ''
+  const language = className?.replace(/language-/, "") ?? "sh"
+  const code = raw?.trim() ?? ""
   const theme = themes.nightOwl
-  const isJSXorTSX = language === 'jsx' || language === 'tsx'
+  const isJSXorTSX = language === "jsx" || language === "tsx"
 
   if (isMounted && isJSXorTSX && live) {
     return <EditableCodeBlock {...{ code, language, theme, noInline, functional }} />
   }
 
   return (
-    <Box position='relative' my='6'>
+    <Box position="relative" my="6">
       <Box
-        rounded='md'
-        bg={['zinc.800', 'zinc.900']}
-        sx={{ '& > div': { py: '6' } }}
-        overflow='hidden'
+        rounded="md"
+        bg={["zinc.800", "zinc.900"]}
+        sx={{ "& > div": { py: "6" } }}
+        overflow="hidden"
       >
         {title ? (
           <Text
-            display='block'
-            py='sm'
-            px='md'
-            borderBottomWidth='1px'
-            bg={['whiteAlpha.200', 'whiteAlpha.100']}
-            fontSize='xs'
-            color={['whiteAlpha.700', 'whiteAlpha.600']}
+            display="block"
+            py="sm"
+            px="md"
+            borderBottomWidth="1px"
+            bg={["whiteAlpha.200", "whiteAlpha.100"]}
+            fontSize="xs"
+            color={["whiteAlpha.700", "whiteAlpha.600"]}
             isTruncated
           >
             {title}
@@ -80,7 +80,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
         <Highlight {...{ code, language, theme, highlight }} />
       </Box>
 
-      <CopyButton value={code} position='absolute' top={title ? '3.3rem' : '1.125rem'} right='4' />
+      <CopyButton value={code} position="absolute" top={title ? "3.3rem" : "1.125rem"} right="4" />
     </Box>
   )
 }
@@ -101,7 +101,7 @@ const computeHighlight = (highlight: string) => {
   }
 }
 
-export type HighlightProps = Omit<ReactHighlightProps, 'children'> & { highlight?: string }
+export type HighlightProps = Omit<ReactHighlightProps, "children"> & { highlight?: string }
 
 export const Highlight: FC<HighlightProps> = ({ language, highlight, ...rest }) => {
   const shouldHighlight = computeHighlight(highlight)
@@ -109,18 +109,18 @@ export const Highlight: FC<HighlightProps> = ({ language, highlight, ...rest }) 
   return (
     <ReactHighlight language={language} {...rest}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Box fontSize='sm' overflowX='auto' data-language={language}>
-          <Box as='pre' className={className} style={{ ...style, backgroundColor: 'inherit' }}>
+        <Box fontSize="sm" overflowX="auto" data-language={language}>
+          <Box as="pre" className={className} style={{ ...style, backgroundColor: "inherit" }}>
             {tokens.map((line, index) => (
               <Box
                 key={index}
-                minW='0'
-                px='4'
-                bg={shouldHighlight(index) ? 'whiteAlpha.200' : undefined}
+                minW="0"
+                px="4"
+                bg={shouldHighlight(index) ? "whiteAlpha.200" : undefined}
                 {...getLineProps({ line, key: index })}
               >
                 {line.map((token, index) => (
-                  <Text key={index} as='span' {...getTokenProps({ token, key: index })} />
+                  <Text key={index} as="span" {...getTokenProps({ token, key: index })} />
                 ))}
               </Box>
             ))}

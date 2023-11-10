@@ -1,14 +1,14 @@
 ---
 title: useBreakpoint
-description: '`useBreakpoint`は、現在のブレイクポイントを返すカスタムフックです。このフックは、ウィンドウのサイズの変更を監視し、適切な値を返します。'
-package_name: '@yamada-ui/use-breakpoint'
+description: "`useBreakpoint`は、現在のブレイクポイントを返すカスタムフックです。このフックは、ウィンドウのサイズの変更を監視し、適切な値を返します。"
+package_name: "@yamada-ui/use-breakpoint"
 with_description: true
 ---
 
 ## インポート
 
 ```ts
-import { useBreakpoint } from '@yamada-ui/react'
+import { useBreakpoint } from "@yamada-ui/react"
 ```
 
 ## 使い方
@@ -19,17 +19,17 @@ const breakpoint = useBreakpoint()
 return (
   <Box
     bg={{
-      base: 'red.500',
-      xl: 'blue.500',
-      lg: 'green.500',
-      md: 'yellow.500',
-      sm: 'purple.500',
+      base: "red.500",
+      xl: "blue.500",
+      lg: "green.500",
+      md: "yellow.500",
+      sm: "purple.500",
     }}
-    p='md'
-    rounded='md'
-    color='white'
-    transitionProperty='all'
-    transitionDuration='slower'
+    p="md"
+    rounded="md"
+    color="white"
+    transitionProperty="all"
+    transitionDuration="slower"
   >
     The current breakpoint is "{breakpoint}"
   </Box>

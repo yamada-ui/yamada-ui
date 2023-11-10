@@ -15,9 +15,9 @@ When customizing the config, it is recommended to use `extendConfig`. This creat
 Use `extendConfig` to pass the generated config to `UIProvider`'s `config`.
 
 ```tsx live=false highlight={3,7}
-import { UIProvider, extendConfig } from '@yamada-ui/react'
+import { UIProvider, extendConfig } from "@yamada-ui/react"
 
-const customConfig = extendConfig({ initialColorMode: 'system' })
+const customConfig = extendConfig({ initialColorMode: "system" })
 
 const App = () => {
   return (
@@ -33,9 +33,9 @@ const App = () => {
 Pass the generated config to the `config` of `UIProvider` using `extendConfig`.
 
 ```tsx live=false highlight={3,7}
-import { UIProvider, extendConfig } from '@yamada-ui/react'
+import { UIProvider, extendConfig } from "@yamada-ui/react"
 
-const customConfig = extendConfig({ var: { prefix: 'hoge' } })
+const customConfig = extendConfig({ var: { prefix: "hoge" } })
 
 const App = () => {
   return (

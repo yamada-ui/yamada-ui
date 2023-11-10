@@ -31,7 +31,7 @@ Yamada UIは、簡単にグラデーションを作成するAPIを提供して�
 ```
 
 ```tsx
-<Box w='full' h='xs' bgGradient='linear(to-r, purple.500, blue.400)' />
+<Box w="full" h="xs" bgGradient="linear(to-r, purple.500, blue.400)" />
 ```
 
 ### 色のカスタマイズ
@@ -39,7 +39,7 @@ Yamada UIは、簡単にグラデーションを作成するAPIを提供して�
 APIは、[色のトークン](/styled-system/theming/default-theme#colors)や[CSSの色の値](https://developer.mozilla.org/ja/Web/CSS/color)の両方を使用できます。
 
 ```tsx
-<Box w='full' h='xs' bgGradient='linear(to-r, #59a9e1, #f37bdf)' />
+<Box w="full" h="xs" bgGradient="linear(to-r, #59a9e1, #f37bdf)" />
 ```
 
 ### グラデーションのトークン
@@ -47,15 +47,15 @@ APIは、[色のトークン](/styled-system/theming/default-theme#colors)や[CS
 グラデーションのトークンは、テーマに定義することができます。
 
 ```ts
-import { ThemeTokens } from '@yamada-ui/react'
+import { ThemeTokens } from "@yamada-ui/react"
 
 export const gradients: ThemeTokens = {
-  blue: 'linear(to-r, #132293, #2375b4)',
+  blue: "linear(to-r, #132293, #2375b4)",
 }
 ```
 
 ```tsx
-<Box w='full' h='xs' bgGradient='blue' />
+<Box w="full" h="xs" bgGradient="blue" />
 ```
 
 :::note status=warning
@@ -67,7 +67,7 @@ export const gradients: ThemeTokens = {
 テキストのグラデーションを追加するには、`bgGradient`と`bgClip`に`text`を設定します。
 
 ```tsx
-<Heading size='2xl' bgGradient='linear(to-r, orange.400, red.500)' bgClip='text' isTruncated>
+<Heading size="2xl" bgGradient="linear(to-r, orange.400, red.500)" bgClip="text" isTruncated>
   クリリンのことか……クリリンのことかーーーっ！！！！！
 </Heading>
 ```
@@ -78,12 +78,12 @@ export const gradients: ThemeTokens = {
 
 ```tsx
 <Box
-  w='full'
-  h='xs'
+  w="full"
+  h="xs"
   bgGradient={{
-    base: 'linear(to-tr, teal.300, yellow.400)',
-    lg: 'linear(to-t, blue.200, teal.500)',
-    md: 'linear(to-b, orange.100, purple.300)',
+    base: "linear(to-tr, teal.300, yellow.400)",
+    lg: "linear(to-t, blue.200, teal.500)",
+    md: "linear(to-b, orange.100, purple.300)",
   }}
 />
 ```

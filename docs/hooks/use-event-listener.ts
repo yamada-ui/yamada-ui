@@ -1,5 +1,5 @@
-import { StringLiteral, runIfFunc, useCallbackRef } from '@yamada-ui/react'
-import { useEffect } from 'react'
+import { StringLiteral, runIfFunc, useCallbackRef } from "@yamada-ui/react"
+import { useEffect } from "react"
 
 type DocumentOrElement = Document | HTMLElement | null
 

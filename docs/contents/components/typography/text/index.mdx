@@ -1,7 +1,7 @@
 ---
 title: Text
-description: '`Text` is a component that represents a paragraph of text. By default, it renders a `p` element.'
-package_name: '@yamada-ui/typography'
+description: "`Text` is a component that represents a paragraph of text. By default, it renders a `p` element."
+package_name: "@yamada-ui/typography"
 is_tabs: true
 with_description: true
 tab: Usage
@@ -10,7 +10,7 @@ tab: Usage
 ## Import
 
 ```ts
-import { Text } from '@yamada-ui/react'
+import { Text } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -22,44 +22,44 @@ import { Text } from '@yamada-ui/react'
 ### Changing the Size
 
 ```tsx
-<VStack gap='md'>
-  <Text fontSize='6xl' isTruncated>
+<VStack gap="md">
+  <Text fontSize="6xl" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='5xl' isTruncated>
+  <Text fontSize="5xl" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='4xl' isTruncated>
+  <Text fontSize="4xl" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='3xl' isTruncated>
+  <Text fontSize="3xl" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='2xl' isTruncated>
+  <Text fontSize="2xl" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='xl' isTruncated>
+  <Text fontSize="xl" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='lg' isTruncated>
+  <Text fontSize="lg" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='md' isTruncated>
+  <Text fontSize="md" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='sm' isTruncated>
+  <Text fontSize="sm" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 
-  <Text fontSize='xs' isTruncated>
+  <Text fontSize="xs" isTruncated>
     It's 530,000. Don't worry i won'tuse all of my power……
   </Text>
 </VStack>
@@ -70,30 +70,30 @@ import { Text } from '@yamada-ui/react'
 You can render as a different element or component by passing `as`.
 
 ```tsx
-<VStack gap='md'>
-  <Text as='b'>I’ve always loved fireworks!</Text>
+<VStack gap="md">
+  <Text as="b">I’ve always loved fireworks!</Text>
 
-  <Text as='i'>I’ve always loved fireworks!</Text>
+  <Text as="i">I’ve always loved fireworks!</Text>
 
-  <Text as='u'>I’ve always loved fireworks!</Text>
+  <Text as="u">I’ve always loved fireworks!</Text>
 
-  <Text as='abbr'>I’ve always loved fireworks!</Text>
+  <Text as="abbr">I’ve always loved fireworks!</Text>
 
-  <Text as='del'>I’ve always loved fireworks!</Text>
+  <Text as="del">I’ve always loved fireworks!</Text>
 
-  <Text as='em'>I’ve always loved fireworks!</Text>
+  <Text as="em">I’ve always loved fireworks!</Text>
 
-  <Text as='ins'>I’ve always loved fireworks!</Text>
+  <Text as="ins">I’ve always loved fireworks!</Text>
 
-  <Text as='kbd'>I’ve always loved fireworks!</Text>
+  <Text as="kbd">I’ve always loved fireworks!</Text>
 
-  <Text as='mark'>I’ve always loved fireworks!</Text>
+  <Text as="mark">I’ve always loved fireworks!</Text>
 
-  <Text as='s'>I’ve always loved fireworks!</Text>
+  <Text as="s">I’ve always loved fireworks!</Text>
 
-  <Text as='samp'>I’ve always loved fireworks!</Text>
+  <Text as="samp">I’ve always loved fireworks!</Text>
 
-  <Text as='sub'>I’ve always loved fireworks!</Text>
+  <Text as="sub">I’ve always loved fireworks!</Text>
 </VStack>
 ```
 
@@ -102,8 +102,8 @@ You can render as a different element or component by passing `as`.
 If you want to truncate text after a certain number of lines, specify the number of lines in `noOfLines`. If the specified number of lines is exceeded, an ellipsis will be displayed.
 
 ```tsx
-<VStack gap='md'>
-  <Text fontSize='2xl' noOfLines={3}>
+<VStack gap="md">
+  <Text fontSize="2xl" noOfLines={3}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the
     treasure "DRAGON BALL", which grants any one wish if all seven scattered balls around the world
@@ -111,7 +111,7 @@ If you want to truncate text after a certain number of lines, specify the number
     "friendship", and so on in a long manga.
   </Text>
 
-  <Text fontSize='2xl' noOfLines={2}>
+  <Text fontSize="2xl" noOfLines={2}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the
     treasure "DRAGON BALL", which grants any one wish if all seven scattered balls around the world
@@ -119,7 +119,7 @@ If you want to truncate text after a certain number of lines, specify the number
     "friendship", and so on in a long manga.
   </Text>
 
-  <Text fontSize='2xl' noOfLines={1}>
+  <Text fontSize="2xl" noOfLines={1}>
     "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
     Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the
     treasure "DRAGON BALL", which grants any one wish if all seven scattered balls around the world
@@ -133,11 +133,11 @@ If you want to truncate text after a certain number of lines, specify the number
 
 ```tsx
 <Text
-  w='full'
-  fontSize='xl'
-  fontWeight='bold'
-  bgGradient='linear(to-l, #7928CA, #FF0080)'
-  bgClip='text'
+  w="full"
+  fontSize="xl"
+  fontWeight="bold"
+  bgGradient="linear(to-l, #7928CA, #FF0080)"
+  bgClip="text"
 >
   やるじゃねえかサタン！おめえはホントに世界の救世主かもな！
 </Text>

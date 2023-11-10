@@ -18,11 +18,11 @@ Yamada UIは、レスポンシブデザインに`@media(max-width)`のメディ�
 
 ```ts title=breakpoints.ts
 export const breakpoints = {
-  sm: '30em', // 480px
-  md: '48em', // 768px
-  lg: '61em', // 976px
-  xl: '80em', // 1280px
-  '2xl': '90em', // 1440px
+  sm: "30em", // 480px
+  md: "48em", // 768px
+  lg: "61em", // 976px
+  xl: "80em", // 1280px
+  "2xl": "90em", // 1440px
 }
 ```
 
@@ -39,10 +39,10 @@ export const breakpoints = {
 
 ```tsx
 <Box
-  w='full'
-  p='md'
-  bg={{ base: 'primary', '2xl': 'secondary', xl: 'warning', lg: 'danger' }}
-  color='white'
+  w="full"
+  p="md"
+  bg={{ base: "primary", "2xl": "secondary", xl: "warning", lg: "danger" }}
+  color="white"
 >
   This is Box
 </Box>
@@ -83,7 +83,7 @@ Yamada UIには、レスポンシブなレイアウトを構築するために�
 ```tsx functional=true
 const breakpoint = useBreakpoint()
 
-return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
+return <Box p="md">The current breakpoint is "{breakpoint}"</Box>
 ```
 
 ### `useBreakpointValue`を使う
@@ -93,15 +93,15 @@ return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
 ```tsx functional=true
 const breakpoint = useBreakpoint()
 const bg = useBreakpointValue({
-  base: 'red.500',
-  xl: 'blue.500',
-  lg: 'green.500',
-  md: 'yellow.500',
-  sm: 'purple.500',
+  base: "red.500",
+  xl: "blue.500",
+  lg: "green.500",
+  md: "yellow.500",
+  sm: "purple.500",
 })
 
 return (
-  <Box bg={bg} p='md' color='white'>
+  <Box bg={bg} p="md" color="white">
     The current breakpoint is "{breakpoint}"
   </Box>
 )
@@ -116,17 +116,17 @@ return (
 `sm`・`md`・`lg`・`xl`などの一般的なエイリアスを使用することをオススメします。
 
 ```tsx live=false
-import { UIProvider, extendTheme } from '@yamada-ui/react'
+import { UIProvider, extendTheme } from "@yamada-ui/react"
 
 const breakpoints = {
-  sm: '376px',
-  MD: '768px',
-  lg: '960px',
-  xl: '1200px',
-  '2xl': '1440px',
+  sm: "376px",
+  MD: "768px",
+  lg: "960px",
+  xl: "1200px",
+  "2xl": "1440px",
 }
 
-const customTheme = extendTheme({ breakpoints })({ omit: 'breakpoints' })
+const customTheme = extendTheme({ breakpoints })({ omit: "breakpoints" })
 
 const App = () => {
   return (

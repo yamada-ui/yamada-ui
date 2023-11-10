@@ -1,4 +1,4 @@
-import { CONSTANT } from '../constant'
+import { CONSTANT } from "../constant"
 
 export type Locale = (typeof locales)[number]
 

@@ -16,14 +16,14 @@ Yamada UIのコアやユーティリティをインストールします。
 ターミナルで次のコマンドのいずれかを実行します。
 
 <PackageManagers
-  packageNameOrCommand={['@yamada-ui/core', '@yamada-ui/theme', '@yamada-ui/utils']}
+  packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/theme", "@yamada-ui/utils"]}
 />
 
 次に、プロジェクトに使用したいコンポーネントやフックをインストールしていきます。
 
 ここでは、`Box`などを含んでいる`@yamada-ui/layouts`をインストールしてみましょう。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/layouts' />
+<PackageManagers packageNameOrCommand="@yamada-ui/layouts" />
 
 :::note
 コンポーネントやフックのパッケージ名は、各ドキュメントページに記載されています。
@@ -34,8 +34,8 @@ Yamada UIのコアやユーティリティをインストールします。
 コアやコンポーネントをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマ](/styled-system/theming/default-theme)と[デフォルトのコンフィグ](/styled-system/configure/default-config)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
 ```tsx live=false highlight={6,7,8,11}
-import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -52,8 +52,8 @@ const App = () => {
 ダークモードを対応させたい場合は、`ColorModeProvider`も追加します。
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -82,7 +82,7 @@ const App = () => {
 アプリケーション内でコンポーネントを呼び出します。
 
 ```tsx live=false
-import { Box } from '@yamada-ui/layouts'
+import { Box } from "@yamada-ui/layouts"
 
 const Demo = () => {
   return <Box>This is Box</Box>
@@ -96,20 +96,20 @@ const Demo = () => {
 Yamada UIを知るために、基本やテーマを学んでみませんか？😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/basics' />
+  <LinkCard href="/getting-started/basics" />
   <LinkCard
-    href='/styled-system/theming'
-    title='テーマについて学ぶ'
-    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+    href="/styled-system/theming"
+    title="テーマについて学ぶ"
+    description="Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。"
   />
   <LinkCard
-    href='/components'
-    title='コンポーネントを探索する'
-    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+    href="/components"
+    title="コンポーネントを探索する"
+    description="Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。"
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='ソースコードを探索する'
-    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="ソースコードを探索する"
+    description="Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。"
   />
 </CardContainer>

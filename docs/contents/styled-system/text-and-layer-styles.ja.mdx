@@ -13,39 +13,39 @@ order: 9
 `textStyle`と`layerStyle`を使用するには、テーマにトークンとスタイルを定義する必要があります。
 
 ```tsx live=false
-import { UIProvider, extendTheme, LayerStyles, TextStyles } from '@yamada-ui/react'
+import { UIProvider, extendTheme, LayerStyles, TextStyles } from "@yamada-ui/react"
 
 const layerStyles: LayerStyles = {
   masterRoshi: {
-    position: 'relative',
-    m: 'md',
-    boxSize: '4xs',
-    border: '6px solid #000',
-    rounded: 'full',
-    bg: '#FFF',
-    fontFamily: 'serif',
-    color: '#000',
-    fontSize: '8xl',
-    fontWeight: 'bold',
+    position: "relative",
+    m: "md",
+    boxSize: "4xs",
+    border: "6px solid #000",
+    rounded: "full",
+    bg: "#FFF",
+    fontFamily: "serif",
+    color: "#000",
+    fontSize: "8xl",
+    fontWeight: "bold",
     _after: {
       content: '""',
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
       zIndex: -1,
-      rounded: 'md',
-      bg: '#FF7F0B',
-      boxSize: '3xs',
+      rounded: "md",
+      bg: "#FF7F0B",
+      boxSize: "3xs",
     },
   },
 }
 
 const textStyles: TextStyles = {
   gradient: {
-    fontSize: '5xl',
-    bgGradient: 'linear(to-r, orange.400, red.500)',
-    bgClip: 'text',
+    fontSize: "5xl",
+    bgGradient: "linear(to-r, orange.400, red.500)",
+    bgClip: "text",
   },
 }
 
@@ -69,7 +69,7 @@ const App = () => {
 テーマの`layerStyles`で定義したスタイルを参照するには、`layerStyle`にトークンを設定します。
 
 ```tsx
-<Center layerStyle='masterRoshi'>亀</Center>
+<Center layerStyle="masterRoshi">亀</Center>
 ```
 
 ## テキストスタイル
@@ -77,7 +77,7 @@ const App = () => {
 テーマの`textStyles`で定義したスタイルを参照するには、`textStyle`にトークンを設定します。
 
 ```tsx
-<Heading textStyle='gradient' isTruncated>
+<Heading textStyle="gradient" isTruncated>
   クリリンのことか……クリリンのことかーーーっ！！！！！
 </Heading>
 ```
@@ -87,13 +87,13 @@ const App = () => {
 テーマの`styles`には、自由にトークンとスタイルを定義できます。
 
 ```tsx live=false
-import { UIProvider, extendTheme } from '@yamada-ui/react'
+import { UIProvider, extendTheme } from "@yamada-ui/react"
 
 const otherStyle: Record<string, CSSUIObject> = {
   title: {
-    fontSize: '5xl',
-    bgGradient: 'linear(to-r, #59a9e1, #f37bdf)',
-    bgClip: 'text',
+    fontSize: "5xl",
+    bgGradient: "linear(to-r, #59a9e1, #f37bdf)",
+    bgClip: "text",
   },
 }
 
@@ -111,7 +111,7 @@ const App = () => {
 テーマの`styles`で定義したスタイルを参照するには、`apply`にトークンを設定します。
 
 ```tsx
-<Heading apply='otherStyle.title' isTruncated>
+<Heading apply="otherStyle.title" isTruncated>
   私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
 </Heading>
 ```

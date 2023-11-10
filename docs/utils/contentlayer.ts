@@ -1,15 +1,15 @@
-import { CONSTANT } from 'constant'
+import { CONSTANT } from "constant"
 import {
   DocumentData,
   DocumentTypesWithChildren,
   DocumentTypes,
   DocumentTypesPagination,
   allDocuments,
-} from 'contentlayer/generated'
-import { flattenArray } from 'utils/array'
-import { otherLocales } from 'utils/i18n'
+} from "contentlayer/generated"
+import { flattenArray } from "utils/array"
+import { otherLocales } from "utils/i18n"
 
-const OTHER_LOCALES = `(${otherLocales.join('|')})`
+const OTHER_LOCALES = `(${otherLocales.join("|")})`
 
 export const getDocumentTree =
   (documents: DocumentTypes[], parentPaths: string[] = []) =>
@@ -24,7 +24,7 @@ export const getDocumentTree =
 
         paths = paths.filter(Boolean)
 
-        return paths.length === lv + 1 && paths.join('/').startsWith(parentPaths.join('/'))
+        return paths.length === lv + 1 && paths.join("/").startsWith(parentPaths.join("/"))
       })
       .sort((a, b) => a.order - b.order)
       .map(({ is_expanded, ...document }) => {
@@ -42,7 +42,7 @@ export const getDocumentPagination = (
   documentTree: DocumentTypesWithChildren[],
   document: DocumentTypes,
 ): DocumentTypesPagination => {
-  const flattenTree = flattenArray(documentTree, 'children')
+  const flattenTree = flattenArray(documentTree, "children")
 
   let pagination: DocumentTypesPagination = {}
 
@@ -105,14 +105,14 @@ export const getDocument = (
   paths: string[],
   locale: string,
 ): DocumentTypes => {
-  const ext = `${locale !== CONSTANT.I18N.DEFAULT_LOCALE ? `${locale}.` : ''}mdx`
+  const ext = `${locale !== CONSTANT.I18N.DEFAULT_LOCALE ? `${locale}.` : ""}mdx`
 
   return documents.find(({ _id }) => {
     if (paths.length === 0) {
       return _id === `index.${ext}`
     } else {
       return (
-        _id.endsWith(`${paths.join('/')}/index.${ext}`) || _id.endsWith(`${paths.join('/')}.${ext}`)
+        _id.endsWith(`${paths.join("/")}/index.${ext}`) || _id.endsWith(`${paths.join("/")}.${ext}`)
       )
     }
   })
@@ -131,13 +131,13 @@ export const getDocumentTabs = (documents: DocumentTypes[], document: DocumentTy
     )
   } else {
     parentDocument = documents.find(
-      (document) => document.slug === slug.slice(0, slug.lastIndexOf('/')),
+      (document) => document.slug === slug.slice(0, slug.lastIndexOf("/")),
     )
 
     if (!parentDocument?.is_tabs) parentDocument = undefined
 
     if (parentDocument) {
-      parentPaths = parentDocument.slug.split('/').slice(2)
+      parentPaths = parentDocument.slug.split("/").slice(2)
       documentTabs = documents.filter(({ slug }) =>
         new RegExp(`^${parentDocument.slug}($|\\/[^\\/]+$)`).test(slug),
       )
@@ -150,10 +150,10 @@ export const getDocumentTabs = (documents: DocumentTypes[], document: DocumentTy
 export const omitDocumentTabs = (documents: DocumentTypes[]): DocumentTypes[] =>
   documents.filter(({ slug }) => {
     const parentDoc = documents.find(
-      (document) => document.slug === slug.slice(0, slug.lastIndexOf('/')),
+      (document) => document.slug === slug.slice(0, slug.lastIndexOf("/")),
     )
 
     return !(parentDoc?.is_tabs ?? false)
   })
 
-export const getPath = (id: string) => id.replace(new RegExp(`\(.${OTHER_LOCALES})?\.mdx$`), '')
+export const getPath = (id: string) => id.replace(new RegExp(`\(.${OTHER_LOCALES})?\.mdx$`), "")

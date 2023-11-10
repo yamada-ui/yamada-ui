@@ -16,38 +16,38 @@ Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほと�
 
 ターミナルで次のコマンドのいずれかを実行します。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
 テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールをする必要があります。
 
 <SelectPackageManagers
   packages={[
     {
-      name: '@yamada-ui/table',
-      description: '`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。',
+      name: "@yamada-ui/table",
+      description: "`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。",
       isDefaultCheck: true,
     },
     {
-      name: '@yamada-ui/calendar',
+      name: "@yamada-ui/calendar",
       description:
-        '`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。',
+        "`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/carousel',
-      description: '`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。',
+      name: "@yamada-ui/carousel",
+      description: "`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/dropzone',
-      description: '`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。',
+      name: "@yamada-ui/dropzone",
+      description: "`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/markdown',
+      name: "@yamada-ui/markdown",
       description:
-        '`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。',
+        "`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/fontawesome',
-      description: '`Font Awesome`を便利に使用するためのコンポーネントを提供します。',
+      name: "@yamada-ui/fontawesome",
+      description: "`Font Awesome`を便利に使用するためのコンポーネントを提供します。",
     },
   ]}
 />
@@ -61,7 +61,7 @@ Yamada UIは、React 18のみ互換性があります。React 17以前を使用�
 Yamada UIをインストール後、アプリケーションのルートに`UIProvider`を追加します。
 
 ```tsx live=false highlight={5,7}
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = () => {
   return (
@@ -77,7 +77,7 @@ const App = () => {
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを呼び出します。
 
 ```tsx live=false
-import { Button } from '@yamada-ui/react'
+import { Button } from "@yamada-ui/react"
 
 const Demo = () => {
   return <Button>Click me!</Button>
@@ -91,20 +91,20 @@ const Demo = () => {
 Yamada UIを知るために、基本やテーマを学んでみませんか？😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/basics' />
+  <LinkCard href="/getting-started/basics" />
   <LinkCard
-    href='/styled-system/theming'
-    title='テーマについて学ぶ'
-    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+    href="/styled-system/theming"
+    title="テーマについて学ぶ"
+    description="Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。"
   />
   <LinkCard
-    href='/components'
-    title='コンポーネントを探索する'
-    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+    href="/components"
+    title="コンポーネントを探索する"
+    description="Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。"
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='ソースコードを探索する'
-    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="ソースコードを探索する"
+    description="Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。"
   />
 </CardContainer>

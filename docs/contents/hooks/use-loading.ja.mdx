@@ -1,14 +1,14 @@
 ---
 title: useLoading
-description: '`useLoading`は、アプリケーションのローディングを制御するカスタムフックです。'
-package_name: '@yamada-ui/loading'
+description: "`useLoading`は、アプリケーションのローディングを制御するカスタムフックです。"
+package_name: "@yamada-ui/loading"
 with_description: true
 ---
 
 ## インポート
 
 ```ts
-import { useLoading } from '@yamada-ui/react'
+import { useLoading } from "@yamada-ui/react"
 ```
 
 ## 使い方
@@ -58,7 +58,7 @@ const onLoadingBackground = async () => {
 }
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={onLoadingScreen}>Start screen loading</Button>
     <Button onClick={onLoadingPage}>Start page loading</Button>
     <Button onClick={onLoadingBackground}>Start background loading</Button>
@@ -78,7 +78,7 @@ return (
 const { screen, page, background } = useLoading()
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
     <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
     <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
@@ -94,14 +94,14 @@ return (
 const { screen, page, background } = useLoading()
 
 return (
-  <Wrap gap='md'>
-    <Button onClick={() => screen.start({ message: 'Loading', duration: 5000 })}>
+  <Wrap gap="md">
+    <Button onClick={() => screen.start({ message: "Loading", duration: 5000 })}>
       Start screen loading
     </Button>
-    <Button onClick={() => page.start({ message: 'Loading', duration: 5000 })}>
+    <Button onClick={() => page.start({ message: "Loading", duration: 5000 })}>
       Start page loading
     </Button>
-    <Button onClick={() => background.start({ message: 'Loading', duration: 5000 })}>
+    <Button onClick={() => background.start({ message: "Loading", duration: 5000 })}>
       Start background loading
     </Button>
   </Wrap>
@@ -114,22 +114,22 @@ return (
 const { screen, page, background } = useLoading()
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button
       onClick={() =>
-        screen.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        screen.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })
       }
     >
       Start screen loading
     </Button>
     <Button
-      onClick={() => page.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })}
+      onClick={() => page.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })}
     >
       Start page loading
     </Button>
     <Button
       onClick={() =>
-        background.start({ message: <Text color='primary'>Loading</Text>, duration: 5000 })
+        background.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })
       }
     >
       Start background loading
@@ -147,11 +147,11 @@ const { screen, page, background } = useLoading()
 
 const onLoadingScreen = async () => {
   try {
-    screen.start({ message: 'Loading' })
+    screen.start({ message: "Loading" })
 
     await wait(3000)
 
-    screen.update({ message: 'Please wait' })
+    screen.update({ message: "Please wait" })
 
     await wait(3000)
   } finally {
@@ -161,11 +161,11 @@ const onLoadingScreen = async () => {
 
 const onLoadingPage = async () => {
   try {
-    page.start({ message: 'Loading' })
+    page.start({ message: "Loading" })
 
     await wait(3000)
 
-    page.update({ message: 'Please wait' })
+    page.update({ message: "Please wait" })
 
     await wait(3000)
   } finally {
@@ -175,11 +175,11 @@ const onLoadingPage = async () => {
 
 const onLoadingBackground = async () => {
   try {
-    background.start({ message: 'Loading' })
+    background.start({ message: "Loading" })
 
     await wait(3000)
 
-    background.update({ message: 'Please wait' })
+    background.update({ message: "Please wait" })
 
     await wait(3000)
   } finally {
@@ -188,7 +188,7 @@ const onLoadingBackground = async () => {
 }
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={onLoadingScreen}>Start screen loading</Button>
     <Button onClick={onLoadingPage}>Start page loading</Button>
     <Button onClick={onLoadingBackground}>Start background loading</Button>

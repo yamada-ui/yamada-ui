@@ -17,10 +17,10 @@ import {
   Highlight,
   dataAttr,
   useUpdateEffect,
-} from '@yamada-ui/react'
-import { matchSorter } from 'match-sorter'
-import NextLink from 'next/link'
-import { useRouter } from 'next/router'
+} from "@yamada-ui/react"
+import { matchSorter } from "match-sorter"
+import NextLink from "next/link"
+import { useRouter } from "next/router"
 import {
   FC,
   KeyboardEvent,
@@ -32,18 +32,18 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react'
-import scrollIntoView from 'scroll-into-view-if-needed'
-import { File, Hash, MagnifyingGlass } from 'components/media-and-icons'
-import { useI18n } from 'contexts/i18n-context'
-import { useEventListener } from 'hooks/use-event-listener'
-const ACTION_DEFAULT_KEY = 'Ctrl'
-const ACTION_APPLE_KEY = '⌘'
+} from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
+import { File, Hash, MagnifyingGlass } from "components/media-and-icons"
+import { useI18n } from "contexts/i18n-context"
+import { useEventListener } from "hooks/use-event-listener"
+const ACTION_DEFAULT_KEY = "Ctrl"
+const ACTION_APPLE_KEY = "⌘"
 
 export type SearchProps = StackProps & {}
 
 export const Search = memo(
-  forwardRef<SearchProps, 'button'>(({ ...rest }, ref) => {
+  forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
     const { events } = useRouter()
     const { tc } = useI18n()
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -54,15 +54,15 @@ export const Search = memo(
     }, [])
 
     useEffect(() => {
-      events.on('routeChangeComplete', onClose)
+      events.on("routeChangeComplete", onClose)
 
       return () => {
-        events.off('routeChangeComplete', onClose)
+        events.off("routeChangeComplete", onClose)
       }
     }, [onClose, events])
 
-    useEventListener('keydown', (ev) => {
-      if (ev.key.toLowerCase() !== 'k' || !ev[isApple() ? 'metaKey' : 'ctrlKey']) return
+    useEventListener("keydown", (ev) => {
+      if (ev.key.toLowerCase() !== "k" || !ev[isApple() ? "metaKey" : "ctrlKey"]) return
 
       ev.preventDefault()
 
@@ -72,28 +72,28 @@ export const Search = memo(
     return (
       <>
         <HStack
-          as='button'
-          type='button'
+          as="button"
+          type="button"
           ref={ref}
-          w='full'
-          maxW='xl'
-          h='10'
-          px='3'
-          outline='0'
-          border='1px solid'
+          w="full"
+          maxW="xl"
+          h="10"
+          px="3"
+          outline="0"
+          border="1px solid"
           borderColor={[`gray.200`, `whiteAlpha.300`]}
-          bg={['white', 'black']}
-          rounded='md'
-          gap='sm'
-          color={['gray.600', 'whiteAlpha.600']}
-          _focusVisible={{ shadow: 'outline' }}
-          transitionProperty='common'
-          transitionDuration='slower'
+          bg={["white", "black"]}
+          rounded="md"
+          gap="sm"
+          color={["gray.600", "whiteAlpha.600"]}
+          _focusVisible={{ shadow: "outline" }}
+          transitionProperty="common"
+          transitionDuration="slower"
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         >
           <MagnifyingGlass />
-          <Text flex='1'>{tc('component.forms.search.message')}</Text>
+          <Text flex="1">{tc("component.forms.search.message")}</Text>
           <Kbd>{actionKey} + K</Kbd>
         </HStack>
 
@@ -106,12 +106,12 @@ export const Search = memo(
 type SearchModalProps = ModalProps
 
 const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) => {
-  const [query, setQuery] = useState<string>('')
+  const [query, setQuery] = useState<string>("")
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const { t, contents } = useI18n()
   const router = useRouter()
-  const eventRef = useRef<'mouse' | 'keyboard'>(null)
-  const directionRef = useRef<'up' | 'down'>('down')
+  const eventRef = useRef<"mouse" | "keyboard">(null)
+  const directionRef = useRef<"up" | "down">("down")
   const compositionRef = useRef<boolean>(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
@@ -121,12 +121,12 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
 
     return matchSorter(contents, query, {
       keys: [
-        'hierarchy.lv1',
-        'hierarchy.lv2',
-        'hierarchy.lv3',
-        'hierarchy.lv4',
-        'description',
-        'title',
+        "hierarchy.lv1",
+        "hierarchy.lv2",
+        "hierarchy.lv3",
+        "hierarchy.lv4",
+        "description",
+        "title",
       ],
     }).slice(0, 20)
   }, [query, contents])
@@ -135,19 +135,19 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
     (ev: KeyboardEvent<HTMLInputElement>) => {
       if (compositionRef.current) return
 
-      eventRef.current = 'keyboard'
+      eventRef.current = "keyboard"
 
       const actions: Record<string, Function | undefined> = {
         ArrowDown: () => {
           if (selectedIndex + 1 === hits.length) return
 
-          directionRef.current = 'down'
+          directionRef.current = "down"
           setSelectedIndex(selectedIndex + 1)
         },
         ArrowUp: () => {
           if (selectedIndex === 0) return
 
-          directionRef.current = 'up'
+          directionRef.current = "up"
           setSelectedIndex(selectedIndex - 1)
         },
         Enter: () => {
@@ -157,11 +157,11 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
           router.push(hits[selectedIndex].slug)
         },
         Home: () => {
-          directionRef.current = 'up'
+          directionRef.current = "up"
           setSelectedIndex(0)
         },
         End: () => {
-          directionRef.current = 'down'
+          directionRef.current = "down"
           setSelectedIndex(hits.length - 1)
         },
       }
@@ -181,7 +181,7 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
   useEffect(() => {
     if (isOpen) return
 
-    setQuery('')
+    setQuery("")
   }, [isOpen])
 
   useUpdateEffect(() => {
@@ -189,7 +189,7 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
   }, [query])
 
   useUpdateEffect(() => {
-    if (!containerRef.current || eventRef.current === 'mouse') return
+    if (!containerRef.current || eventRef.current === "mouse") return
 
     const itemRef = itemRefs.current.get(selectedIndex)
 
@@ -198,40 +198,40 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
     scrollIntoView(itemRef.current, {
       behavior: (actions) =>
         actions.forEach(({ el, top }) => {
-          if (directionRef.current === 'down') {
+          if (directionRef.current === "down") {
             el.scrollTop = top + 16
           } else {
             el.scrollTop = top - 17
           }
         }),
-      scrollMode: 'if-needed',
-      block: 'nearest',
-      inline: 'nearest',
+      scrollMode: "if-needed",
+      block: "nearest",
+      inline: "nearest",
       boundary: containerRef.current,
     })
   }, [selectedIndex])
 
   return (
     <Modal
-      size='3xl'
+      size="3xl"
       withCloseButton={false}
-      placement='top'
+      placement="top"
       isOpen={isOpen}
       onClose={onClose}
       {...rest}
     >
-      <ModalHeader fontWeight='normal' fontSize='md' pb='md'>
-        <HStack position='relative' w='full'>
+      <ModalHeader fontWeight="normal" fontSize="md" pb="md">
+        <HStack position="relative" w="full">
           <ui.input
-            flex='1'
-            pl='lg'
-            placeholder={t('component.forms.search.placeholder') as string}
+            flex="1"
+            pl="lg"
+            placeholder={t("component.forms.search.placeholder") as string}
             maxLength={64}
-            autoComplete='off'
-            autoCorrect='off'
-            spellCheck='false'
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck="false"
             _placeholder={{
-              color: ['gray.500', 'whiteAlpha.500'],
+              color: ["gray.500", "whiteAlpha.500"],
             }}
             value={query}
             onChange={(ev) => setQuery(ev.target.value)}
@@ -245,21 +245,21 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
           />
 
           <MagnifyingGlass
-            position='absolute'
-            top='50%'
-            left='0'
-            transform='translateY(-50%)'
-            color={['gray.500', 'whiteAlpha.500']}
-            pointerEvents='none'
+            position="absolute"
+            top="50%"
+            left="0"
+            transform="translateY(-50%)"
+            color={["gray.500", "whiteAlpha.500"]}
+            pointerEvents="none"
           />
         </HStack>
       </ModalHeader>
 
       {hits.length ? (
-        <ModalBody ref={containerRef} my='0' pb='md'>
+        <ModalBody ref={containerRef} my="0" pb="md">
           <Divider />
 
-          <VStack as='ul' gap='sm'>
+          <VStack as="ul" gap="sm">
             {hits.map(({ title, type, slug, hierarchy }, index) => {
               const isSelected = index === selectedIndex
               const ref = createRef<HTMLDivElement>()
@@ -272,45 +272,45 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
                   ref={ref}
                   key={slug}
                   href={slug}
-                  borderWidth='1px'
-                  rounded='md'
-                  minH='16'
-                  py='sm'
-                  px='md'
+                  borderWidth="1px"
+                  rounded="md"
+                  minH="16"
+                  py="sm"
+                  px="md"
                   data-selected={dataAttr(isSelected)}
-                  bg={['gray.100', 'whiteAlpha.50']}
-                  transitionProperty='colors'
-                  transitionDuration='normal'
-                  _focus={{ outline: 'none' }}
-                  _focusVisible={{ boxShadow: 'outline' }}
-                  _selected={{ bg: ['gray.200', 'whiteAlpha.200'] }}
-                  _active={{ bg: ['gray.300', 'whiteAlpha.300'] }}
+                  bg={["gray.100", "whiteAlpha.50"]}
+                  transitionProperty="colors"
+                  transitionDuration="normal"
+                  _focus={{ outline: "none" }}
+                  _focusVisible={{ boxShadow: "outline" }}
+                  _selected={{ bg: ["gray.200", "whiteAlpha.200"] }}
+                  _active={{ bg: ["gray.300", "whiteAlpha.300"] }}
                   onClick={onClose}
                   onMouseEnter={() => {
-                    eventRef.current = 'mouse'
+                    eventRef.current = "mouse"
                     setSelectedIndex(index)
                   }}
                 >
-                  {type === 'page' ? (
-                    <File fontSize='xl' color={['gray.600', 'whiteAlpha.500']} />
+                  {type === "page" ? (
+                    <File fontSize="xl" color={["gray.600", "whiteAlpha.500"]} />
                   ) : (
-                    <Hash fontSize='xl' color={['gray.500', 'whiteAlpha.400']} />
+                    <Hash fontSize="xl" color={["gray.500", "whiteAlpha.400"]} />
                   )}
 
-                  <VStack gap='0'>
-                    {type === 'fragment' ? (
+                  <VStack gap="0">
+                    {type === "fragment" ? (
                       <Highlight
-                        fontSize='xs'
-                        color='muted'
+                        fontSize="xs"
+                        color="muted"
                         noOfLines={1}
                         query={query}
-                        markProps={{ variant: 'text-accent' }}
+                        markProps={{ variant: "text-accent" }}
                       >
                         {hierarchy.lv1}
                       </Highlight>
                     ) : null}
 
-                    <Highlight query={query} markProps={{ variant: 'text-accent' }} noOfLines={1}>
+                    <Highlight query={query} markProps={{ variant: "text-accent" }} noOfLines={1}>
                       {title}
                     </Highlight>
                   </VStack>
@@ -324,4 +324,4 @@ const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) =>
   )
 })
 
-SearchModal.displayName = 'SearchModal'
+SearchModal.displayName = "SearchModal"

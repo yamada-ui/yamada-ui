@@ -23,12 +23,12 @@ Yamada UIは、テーマのユーティリティが他のUIライブラリより
 Yamada UIが提供しているほとんどのコンポーネントは、デフォルトの`colorScheme`に`primary`が設定されています。`withDefaultColorScheme`を使用して、`secondary`に変更します。
 
 ```tsx live=false highlight={3,4,5,6,7,8,12}
-import { UIProvider, extendTheme } from '@yamada-ui/react'
+import { UIProvider, extendTheme } from "@yamada-ui/react"
 
 const customTheme = extendTheme(
   withDefaultColorScheme({
-    colorScheme: 'primary',
-    components: ['Badge', 'Tag', 'Button'], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
+    colorScheme: "primary",
+    components: ["Badge", "Tag", "Button"], // もし、空の配列を渡した場合は、すべてのコンポーネントに設定されます。
   }),
 )()
 
@@ -46,10 +46,10 @@ const App = () => {
 コンポーネント内で、テーマに定義されているトークンの値を取得する場合には、`useToken`を使用します。
 
 ```tsx functional=true
-const bg = useToken('colors', 'primary')
+const bg = useToken("colors", "primary")
 
 return (
-  <Box bg={bg} p='md' color='white'>
+  <Box bg={bg} p="md" color="white">
     Primary for color tokens is "{bg}"
   </Box>
 )
@@ -74,7 +74,7 @@ Yamada UIのすべてのコンポーネントは、`アサーション`するこ
 例えば、`Button`のスタイルや挙動を保持しつつ、HTMLタグの`a`に変更する必要があるとします。
 
 ```tsx
-<Button as='a' href='https://github.com/hirotomoyamada/yamada-ui' target='_blank'>
+<Button as="a" href="https://github.com/hirotomoyamada/yamada-ui" target="_blank">
   GitHub
 </Button>
 ```
@@ -96,16 +96,16 @@ Yamada UIは、スタイルを設定するために`Style props`以外にも`sx`
 
 ```tsx
 <Box
-  p='md'
-  display='flex'
-  gap='sm'
+  p="md"
+  display="flex"
+  gap="sm"
   sx={{
-    '&:hover > p': {
-      color: 'danger',
+    "&:hover > p": {
+      color: "danger",
     },
   }}
 >
-  <Text as='span'>Hover me!</Text>
+  <Text as="span">Hover me!</Text>
   <Text>This is Text</Text>
 </Box>
 ```
@@ -142,7 +142,7 @@ Yamada UIのコンポーネントは、いくつかの`CSS`のオブジェクト
 ```tsx functional=true
 const breakpoint = useBreakpoint()
 
-return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
+return <Box p="md">The current breakpoint is "{breakpoint}"</Box>
 ```
 
 ### `useBreakpointValue`を使う
@@ -152,15 +152,15 @@ return <Box p='md'>The current breakpoint is "{breakpoint}"</Box>
 ```tsx functional=true
 const breakpoint = useBreakpoint()
 const bg = useBreakpointValue({
-  base: 'red.500',
-  xl: 'blue.500',
-  lg: 'green.500',
-  md: 'yellow.500',
-  sm: 'purple.500',
+  base: "red.500",
+  xl: "blue.500",
+  lg: "green.500",
+  md: "yellow.500",
+  sm: "purple.500",
 })
 
 return (
-  <Box bg={bg} p='md' color='white'>
+  <Box bg={bg} p="md" color="white">
     The current breakpoint is "{breakpoint}"
   </Box>
 )
@@ -184,7 +184,7 @@ return (
 const { colorMode, internalColorMode } = useColorMode()
 
 return (
-  <Box p='md'>
+  <Box p="md">
     The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
   </Box>
 )
@@ -201,11 +201,11 @@ return (
 
 ```tsx functional=true
 const { colorMode } = useColorMode()
-const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
-const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+const bg = useColorModeValue("blackAlpha.800", "whiteAlpha.800")
+const color = useColorModeValue("whiteAlpha.800", "blackAlpha.800")
 
 return (
-  <Box p='md' bg={bg} color={color}>
+  <Box p="md" bg={bg} color={color}>
     The current colorMode is "{colorMode}"
   </Box>
 )
@@ -229,66 +229,66 @@ return (
 const animation = useAnimation([
   {
     keyframes: {
-      '0%': {
-        bg: 'red.500',
+      "0%": {
+        bg: "red.500",
       },
-      '20%': {
-        bg: 'green.500',
+      "20%": {
+        bg: "green.500",
       },
-      '40%': {
-        bg: 'purple.500',
+      "40%": {
+        bg: "purple.500",
       },
-      '60%': {
-        bg: 'yellow.500',
+      "60%": {
+        bg: "yellow.500",
       },
-      '80%': {
-        bg: 'blue.500',
+      "80%": {
+        bg: "blue.500",
       },
-      '100%': {
-        bg: 'red.500',
+      "100%": {
+        bg: "red.500",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
   {
     keyframes: {
-      '0%': {
-        h: 'xs',
+      "0%": {
+        h: "xs",
       },
-      '50%': {
-        h: 'md',
+      "50%": {
+        h: "md",
       },
-      '100%': {
-        h: 'xs',
+      "100%": {
+        h: "xs",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
   {
     keyframes: {
-      '0%': {
-        w: 'full',
+      "0%": {
+        w: "full",
       },
-      '50%': {
-        w: '50%',
+      "50%": {
+        w: "50%",
       },
-      '100%': {
-        w: 'full',
+      "100%": {
+        w: "full",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
 ])
 
 return (
-  <Box h='md'>
-    <Box w='full' h='xs' animation={animation} />
+  <Box h="md">
+    <Box w="full" h="xs" animation={animation} />
   </Box>
 )
 ```
@@ -301,41 +301,41 @@ return (
 const [animation, setAnimation] = useDynamicAnimation({
   moveLeft: {
     keyframes: {
-      '0%': {
-        transform: 'translateX(400%)',
+      "0%": {
+        transform: "translateX(400%)",
       },
-      '100%': {
-        transform: 'translateX(0%)',
+      "100%": {
+        transform: "translateX(0%)",
       },
     },
-    duration: 'slower',
-    fillMode: 'forwards',
-    timingFunction: 'ease-in-out',
+    duration: "slower",
+    fillMode: "forwards",
+    timingFunction: "ease-in-out",
   },
   moveRight: {
     keyframes: {
-      '0%': {
-        transform: 'translateX(0%)',
+      "0%": {
+        transform: "translateX(0%)",
       },
-      '100%': {
-        transform: 'translateX(400%)',
+      "100%": {
+        transform: "translateX(400%)",
       },
     },
-    duration: 'slower',
-    fillMode: 'forwards',
-    timingFunction: 'ease-in-out',
+    duration: "slower",
+    fillMode: "forwards",
+    timingFunction: "ease-in-out",
   },
 })
 
 return (
-  <VStack alignItems='flex-start'>
+  <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
     >
       Click me!
     </Button>
 
-    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+    <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
       Box
     </Box>
   </VStack>
@@ -346,75 +346,75 @@ return (
 
 ```tsx functional=true
 const [animation, setAnimation] = useDynamicAnimation<
-  Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+  Record<"moveLeft" | "moveRight", AnimationStyle[]>
 >({
   moveLeft: [
     {
       keyframes: {
-        '0%': {
-          transform: 'translateX(400%)',
+        "0%": {
+          transform: "translateX(400%)",
         },
-        '100%': {
-          transform: 'translateX(0%)',
+        "100%": {
+          transform: "translateX(0%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     {
       keyframes: {
-        '0%': {
-          bg: 'secondary',
+        "0%": {
+          bg: "secondary",
         },
-        '100%': {
-          bg: 'primary',
+        "100%": {
+          bg: "primary",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   ],
   moveRight: [
     {
       keyframes: {
-        '0%': {
-          transform: 'translateX(0%)',
+        "0%": {
+          transform: "translateX(0%)",
         },
-        '100%': {
-          transform: 'translateX(400%)',
+        "100%": {
+          transform: "translateX(400%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     {
       keyframes: {
-        '0%': {
-          bg: 'primary',
+        "0%": {
+          bg: "primary",
         },
-        '100%': {
-          bg: 'secondary',
+        "100%": {
+          bg: "secondary",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   ],
 })
 
 return (
-  <VStack alignItems='flex-start'>
+  <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === 'moveRight' ? 'moveLeft' : 'moveRight'))}
+      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
     >
       Click me!
     </Button>
 
-    <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+    <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
       Box
     </Box>
   </VStack>
@@ -437,18 +437,18 @@ Yamada UIをもっと知るために、テーマやコンポーネントを学�
 
 <CardContainer>
   <LinkCard
-    href='/styled-system/theming'
-    title='テーマについて学ぶ'
-    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+    href="/styled-system/theming"
+    title="テーマについて学ぶ"
+    description="Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。"
   />
   <LinkCard
-    href='/components'
-    title='コンポーネントを探索する'
-    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+    href="/components"
+    title="コンポーネントを探索する"
+    description="Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。"
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='ソースコードを探索する'
-    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="ソースコードを探索する"
+    description="Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。"
   />
 </CardContainer>

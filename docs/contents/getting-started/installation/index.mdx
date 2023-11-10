@@ -16,37 +16,37 @@ By installing `@yamada-ui/react`, you can use most of the components and hooks i
 
 Run one of the following commands in your terminal.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
 If you want to use features like tables, calendars, carousels, etc., you need to install them separately.
 
 <SelectPackageManagers
   packages={[
     {
-      name: '@yamada-ui/table',
-      description: 'Provides a handy table component using `@tanstack/react-table`.',
+      name: "@yamada-ui/table",
+      description: "Provides a handy table component using `@tanstack/react-table`.",
       isDefaultCheck: true,
     },
     {
-      name: '@yamada-ui/calendar',
-      description: 'Provides a handy calendar and date picker component using `dayjs`.',
+      name: "@yamada-ui/calendar",
+      description: "Provides a handy calendar and date picker component using `dayjs`.",
     },
     {
-      name: '@yamada-ui/carousel',
-      description: 'Provides a handy carousel component using `embla-carousel-react`.',
+      name: "@yamada-ui/carousel",
+      description: "Provides a handy carousel component using `embla-carousel-react`.",
     },
     {
-      name: '@yamada-ui/dropzone',
-      description: 'Provides a handy dropzone component using `react-dropzone`.',
+      name: "@yamada-ui/dropzone",
+      description: "Provides a handy dropzone component using `react-dropzone`.",
     },
     {
-      name: '@yamada-ui/markdown',
+      name: "@yamada-ui/markdown",
       description:
-        'Provides a handy markdown component using `react-markdown` and `react-syntax-highlighter`.',
+        "Provides a handy markdown component using `react-markdown` and `react-syntax-highlighter`.",
     },
     {
-      name: '@yamada-ui/fontawesome',
-      description: 'Provides a component for convenient use of `Font Awesome`.',
+      name: "@yamada-ui/fontawesome",
+      description: "Provides a component for convenient use of `Font Awesome`.",
     },
   ]}
 />
@@ -60,7 +60,7 @@ Yamada UI is only compatible with React 18. If you are using React 17 or earlier
 After installing Yamada UI, add `UIProvider` to the root of your application.
 
 ```tsx live=false highlight={5,7}
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = () => {
   return (
@@ -76,7 +76,7 @@ const App = () => {
 Once you've added the `UIProvider`, call the component within your application.
 
 ```tsx live=false
-import { Button } from '@yamada-ui/react'
+import { Button } from "@yamada-ui/react"
 
 const Demo = () => {
   return <Button>Click me!</Button>
@@ -90,20 +90,20 @@ With this, the setup of Yamada UI is complete!
 Why not learn the basics and themes to get to know Yamada UI? 😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/basics' />
+  <LinkCard href="/getting-started/basics" />
   <LinkCard
-    href='/styled-system/theming'
-    title='Learn about Themes'
-    description='Get to know the default theme of Yamada UI, and learn how to create and change the values of color, font, and other theme elements.'
+    href="/styled-system/theming"
+    title="Learn about Themes"
+    description="Get to know the default theme of Yamada UI, and learn how to create and change the values of color, font, and other theme elements."
   />
   <LinkCard
-    href='/components'
-    title='Explore Components'
-    description='Yamada UI offers over 100 highly flexible components. All components support animations and dark mode.'
+    href="/components"
+    title="Explore Components"
+    description="Yamada UI offers over 100 highly flexible components. All components support animations and dark mode."
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='Explore the Source Code'
-    description='The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star.'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="Explore the Source Code"
+    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>

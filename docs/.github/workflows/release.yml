@@ -34,7 +34,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           base: main
           delete-branch: true
-          commit-message: 'ci(changesets): ${{ github.sha }}'
-          title: 'Version Packages'
+          commit-message: "ci(changesets): ${{ github.sha }}"
+          title: "Version Packages"
           branch: changeset-release/main
-          assignees: 'hirotomoyamada'
+          assignees: "hirotomoyamada"

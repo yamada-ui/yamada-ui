@@ -1,22 +1,22 @@
-import { forwardRef, Tag, TagProps } from '@yamada-ui/react'
-import { memo } from 'react'
+import { forwardRef, Tag, TagProps } from "@yamada-ui/react"
+import { memo } from "react"
 
 export type LabelProps = TagProps
 
 export const Label = memo(
-  forwardRef<LabelProps, 'div'>(({ children, ...rest }, ref) => {
+  forwardRef<LabelProps, "div">(({ children, ...rest }, ref) => {
     return children ? (
       <Tag
         ref={ref}
-        size='sm'
+        size="sm"
         colorScheme={
-          children === 'New'
-            ? 'blue'
-            : children === 'Experimental'
-            ? 'purple'
-            : children === 'Planned'
-            ? 'orange'
-            : 'gray'
+          children === "New"
+            ? "blue"
+            : children === "Experimental"
+            ? "purple"
+            : children === "Planned"
+            ? "orange"
+            : "gray"
         }
         {...rest}
       >

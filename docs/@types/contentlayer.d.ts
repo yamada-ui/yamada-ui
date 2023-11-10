@@ -1,6 +1,6 @@
-import type { DocumentTypes } from 'contentlayer/generated'
+import type { DocumentTypes } from "contentlayer/generated"
 
-declare module 'contentlayer/generated' {
+declare module "contentlayer/generated" {
   type DocumentContent = { id: string; lv: 1 | 2 | 3; title: string }
 
   type DocumentTypesPagination = { prevDocument?: Doc | null; nextDocument?: Doc | null }

@@ -31,7 +31,7 @@ Shorthand is also available for `<direction>`.
 ```
 
 ```tsx
-<Box w='full' h='xs' bgGradient='linear(to-r, purple.500, blue.400)' />
+<Box w="full" h="xs" bgGradient="linear(to-r, purple.500, blue.400)" />
 ```
 
 ### Color Customization
@@ -39,7 +39,7 @@ Shorthand is also available for `<direction>`.
 The API can use both [color tokens](/styled-system/theming/default-theme#colors) and [CSS color values](https://developer.mozilla.org/ja/Web/CSS/color).
 
 ```tsx
-<Box w='full' h='xs' bgGradient='linear(to-r, #59a9e1, #f37bdf)' />
+<Box w="full" h="xs" bgGradient="linear(to-r, #59a9e1, #f37bdf)" />
 ```
 
 ### Gradient Tokens
@@ -47,15 +47,15 @@ The API can use both [color tokens](/styled-system/theming/default-theme#colors)
 Gradient tokens can be defined in the theme.
 
 ```ts
-import { ThemeTokens } from '@yamada-ui/react'
+import { ThemeTokens } from "@yamada-ui/react"
 
 export const gradients: ThemeTokens = {
-  blue: 'linear(to-r, #132293, #2375b4)',
+  blue: "linear(to-r, #132293, #2375b4)",
 }
 ```
 
 ```tsx
-<Box w='full' h='xs' bgGradient='blue' />
+<Box w="full" h="xs" bgGradient="blue" />
 ```
 
 :::note status=warning
@@ -67,7 +67,7 @@ Gradient tokens are not defined in the [default theme](/styled-system/theming/de
 To add a gradient to the text, set `text` for `bgGradient` and `bgClip`.
 
 ```tsx
-<Heading size='2xl' bgGradient='linear(to-r, orange.400, red.500)' bgClip='text' isTruncated>
+<Heading size="2xl" bgGradient="linear(to-r, orange.400, red.500)" bgClip="text" isTruncated>
   Thinking about Krillin... Thinking about Krillin!!!!!
 </Heading>
 ```
@@ -78,12 +78,12 @@ You can support responsive styles by passing an object to `bgGradient`.
 
 ```tsx
 <Box
-  w='full'
-  h='xs'
+  w="full"
+  h="xs"
   bgGradient={{
-    base: 'linear(to-tr, teal.300, yellow.400)',
-    lg: 'linear(to-t, blue.200, teal.500)',
-    md: 'linear(to-b, orange.100, purple.300)',
+    base: "linear(to-tr, teal.300, yellow.400)",
+    lg: "linear(to-t, blue.200, teal.500)",
+    md: "linear(to-b, orange.100, purple.300)",
   }}
 />
 ```

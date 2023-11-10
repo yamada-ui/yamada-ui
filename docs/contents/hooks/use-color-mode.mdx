@@ -1,14 +1,14 @@
 ---
 title: useColorMode
-description: '`useColorMode` is a custom hook that returns the current color mode.'
-package_name: '@yamada-ui/core'
+description: "`useColorMode` is a custom hook that returns the current color mode."
+package_name: "@yamada-ui/core"
 with_description: true
 ---
 
 ## Import
 
 ```ts
-import { useColorMode } from '@yamada-ui/react'
+import { useColorMode } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -22,12 +22,12 @@ return (
       The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
     </Text>
 
-    <Wrap mt='md' gap='md'>
-      <Button onClick={() => changeColorMode('light')}>Light Mode</Button>
-      <Button onClick={() => changeColorMode('dark')}>Dark Mode</Button>
-      <Button onClick={() => changeColorMode('system')}>System</Button>
+    <Wrap mt="md" gap="md">
+      <Button onClick={() => changeColorMode("light")}>Light Mode</Button>
+      <Button onClick={() => changeColorMode("dark")}>Dark Mode</Button>
+      <Button onClick={() => changeColorMode("system")}>System</Button>
       <Button onClick={toggleColorMode}>
-        {colorMode === 'light' ? 'Switch to Dark' : 'Switch to Light'} Mode
+        {colorMode === "light" ? "Switch to Dark" : "Switch to Light"} Mode
       </Button>
     </Wrap>
   </>

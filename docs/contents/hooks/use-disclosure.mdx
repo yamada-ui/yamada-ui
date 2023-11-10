@@ -1,14 +1,14 @@
 ---
 title: useDisclosure
-description: '`useDisclosure` is a custom hook that helps handle common open/close or toggle scenarios. It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.'
-package_name: '@yamada-ui/use-disclosure'
+description: "`useDisclosure` is a custom hook that helps handle common open/close or toggle scenarios. It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc."
+package_name: "@yamada-ui/use-disclosure"
 with_description: true
 ---
 
 ## Import
 
 ```ts
-import { useDisclosure } from '@yamada-ui/react'
+import { useDisclosure } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -23,10 +23,10 @@ return (
     <Dialog
       isOpen={isOpen}
       onClose={onClose}
-      header='Son Goku'
-      cancel='No way'
+      header="Son Goku"
+      cancel="No way"
       onCancel={onClose}
-      success='Share'
+      success="Share"
       onSuccess={onClose}
     >
       Earth, sea, and all living things... Please share a little bit of your energy with me...!!!
@@ -42,25 +42,25 @@ By defining a callback function as an argument, you can call the callback functi
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure({
   onOpen: (...args: string[]) => {
-    console.log('Args:', args)
+    console.log("Args:", args)
   },
   onClose: (...args: string[]) => {
-    console.log('Args:', args)
+    console.log("Args:", args)
   },
 })
 
 return (
   <>
-    <Button onClick={() => onOpen('This is arg')}>Open Dialog</Button>
+    <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
     <Dialog
       isOpen={isOpen}
-      onClose={() => onClose('This is arg')}
-      header='Son Goku'
-      cancel='No way'
-      onCancel={() => onClose('This is arg')}
-      success='Divide'
-      onSuccess={() => onClose('This is arg')}
+      onClose={() => onClose("This is arg")}
+      header="Son Goku"
+      cancel="No way"
+      onCancel={() => onClose("This is arg")}
+      success="Divide"
+      onSuccess={() => onClose("This is arg")}
     >
       Earth, sea, and all living things... Please share a little bit of energy with me...!!!
     </Dialog>
@@ -77,26 +77,26 @@ If you want to call the callback function after executing `onOpen` or `onClose`,
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure({
   onOpen: (...args: string[]) => {
-    console.log('Args:', args)
+    console.log("Args:", args)
   },
   onClose: (...args: string[]) => {
-    console.log('Args:', args)
+    console.log("Args:", args)
   },
-  timing: 'after',
+  timing: "after",
 })
 
 return (
   <>
-    <Button onClick={() => onOpen('This is arg')}>Open Dialog</Button>
+    <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
     <Dialog
       isOpen={isOpen}
-      onClose={() => onClose('This is arg')}
-      header='Son Goku'
-      cancel='No way'
-      onCancel={() => onClose('This is arg')}
-      success='Divide'
-      onSuccess={() => onClose('This is arg')}
+      onClose={() => onClose("This is arg")}
+      header="Son Goku"
+      cancel="No way"
+      onCancel={() => onClose("This is arg")}
+      success="Divide"
+      onSuccess={() => onClose("This is arg")}
     >
       Earth, sea, and all living things... Please share a little bit of energy with me...!!!
     </Dialog>

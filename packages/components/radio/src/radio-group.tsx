@@ -206,7 +206,7 @@ export const RadioGroup = forwardRef(
       >
         <Flex
           ref={ref}
-          className={cx("ui-radio-group", className)}
+          className={cx("ui-radio__group", className)}
           direction={direction}
           gap={gap ?? (direction === "row" ? "1rem" : undefined)}
           {...getContainerProps(

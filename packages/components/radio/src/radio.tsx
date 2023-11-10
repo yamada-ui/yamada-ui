@@ -312,12 +312,12 @@ export const Radio = forwardRef(
         }}
       >
         <ui.input
-          className="ui-radio-input"
+          className="ui-radio__input"
           {...getInputProps(inputProps, ref)}
         />
 
         <ui.span
-          className="ui-radio-icon"
+          className="ui-radio__icon"
           {...getIconProps(iconProps)}
           __css={{
             position: "relative",
@@ -328,7 +328,7 @@ export const Radio = forwardRef(
         />
 
         <ui.span
-          className="ui-radio-label"
+          className="ui-radio__label"
           {...getLabelProps(labelProps)}
           __css={{ ...styles.label }}
         >

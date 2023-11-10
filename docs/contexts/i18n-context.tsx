@@ -6,8 +6,8 @@ import {
   StringLiteral,
   noop,
   Dict,
-} from '@yamada-ui/react'
-import { useRouter } from 'next/router'
+} from "@yamada-ui/react"
+import { useRouter } from "next/router"
 import {
   PropsWithChildren,
   createContext,
@@ -16,13 +16,13 @@ import {
   FC,
   useCallback,
   Fragment,
-} from 'react'
-import { CONSTANT } from 'constant'
-import CONTENT_EN from 'i18n/content.en.json'
-import CONTENT_JA from 'i18n/content.ja.json'
-import UI_EN from 'i18n/ui.en.json'
-import UI_JA from 'i18n/ui.ja.json'
-import { Locale } from 'utils/i18n'
+} from "react"
+import { CONSTANT } from "constant"
+import CONTENT_EN from "i18n/content.en.json"
+import CONTENT_JA from "i18n/content.ja.json"
+import UI_EN from "i18n/ui.en.json"
+import UI_JA from "i18n/ui.ja.json"
+import { Locale } from "utils/i18n"
 
 type UIData = typeof UI_EN
 
@@ -42,8 +42,8 @@ type I18nContext = {
 
 const I18nContext = createContext<I18nContext>({
   locale: CONSTANT.I18N.DEFAULT_LOCALE as Locale,
-  t: () => '',
-  tc: () => '',
+  t: () => "",
+  tc: () => "",
   changeLocale: noop,
   contents: [],
 })
@@ -62,11 +62,11 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     [push, pathname, asPath],
   )
 
-  const t = useCallback((path: Path<UIData>) => get<string>(uiData[locale], path, ''), [locale])
+  const t = useCallback((path: Path<UIData>) => get<string>(uiData[locale], path, ""), [locale])
 
   const tc = useCallback(
     (path: Path<UIData>, callback?: (str: string, index: number) => JSX.Element) => {
-      const strOrArray = get<string | string[]>(uiData[locale], path, '')
+      const strOrArray = get<string | string[]>(uiData[locale], path, "")
 
       if (isString(strOrArray)) {
         const match = strOrArray.match(/`([^`]+)`/)
@@ -78,7 +78,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
         }
       } else {
         return strOrArray.map((str, index) => (
-          <Text key={index} as='span' display='block'>
+          <Text key={index} as="span" display="block">
             {renderElement(str, callback)}
           </Text>
         ))
@@ -99,9 +99,9 @@ const renderElement = (str: string, callback?: (str: string, index: number) => J
   const array = str.split(/(`[^`]+`)/)
 
   return array.map((str, index) => {
-    if (str.startsWith('`') && str.endsWith('`')) {
+    if (str.startsWith("`") && str.endsWith("`")) {
       return (
-        <Fragment key={index}>{callback ? callback(str.replace(/`/g, ''), index) : str}</Fragment>
+        <Fragment key={index}>{callback ? callback(str.replace(/`/g, ""), index) : str}</Fragment>
       )
     } else {
       return <Fragment key={index}>{str}</Fragment>

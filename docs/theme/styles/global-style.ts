@@ -1,5 +1,5 @@
-import { UIStyle } from '@yamada-ui/react'
+import { UIStyle } from "@yamada-ui/react"
 
 export const globalStyle: UIStyle = {
-  '#__next': { minH: '100dvh' },
+  "#__next": { minH: "100dvh" },
 }

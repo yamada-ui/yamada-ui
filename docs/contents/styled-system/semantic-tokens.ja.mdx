@@ -15,20 +15,20 @@ Yamada UIは、あらゆるスケール(色やフォントサイズなど)のセ
 ```ts
 export const semantics: ThemeSemantics = {
   colors: {
-    primary: 'blue.500',
-    secondary: 'purple.500',
-    success: 'emerald.500',
-    warning: 'orange.500',
-    danger: 'red.500',
-    link: 'sky.500',
+    primary: "blue.500",
+    secondary: "purple.500",
+    success: "emerald.500",
+    warning: "orange.500",
+    danger: "red.500",
+    link: "sky.500",
   },
   colorSchemes: {
-    primary: 'blue',
-    secondary: 'purple',
-    success: 'emerald',
-    warning: 'orange',
-    danger: 'red',
-    link: 'sky',
+    primary: "blue",
+    secondary: "purple",
+    success: "emerald",
+    warning: "orange",
+    danger: "red",
+    link: "sky",
   },
 }
 ```
@@ -40,11 +40,11 @@ export const semantics: ThemeSemantics = {
 セマンティックトークンは、テーマの`semantics`に定義します。
 
 ```tsx live=false
-import { UIProvider, extendTheme } from '@yamada-ui/react'
+import { UIProvider, extendTheme } from "@yamada-ui/react"
 
 const semantics = {
   colors: {
-    brand: 'violet.500',
+    brand: "violet.500",
   },
 }
 
@@ -60,7 +60,7 @@ const App = () => {
 ```
 
 ```tsx live=false
-<Text color='brand'>This is Brand color</Text>
+<Text color="brand">This is Brand color</Text>
 ```
 
 これは、[デフォルトのテーマ](/styled-system/theming/default-theme)で定義されている`colors.violet.500`を`brand`というセマンティックトークンを生成しています。

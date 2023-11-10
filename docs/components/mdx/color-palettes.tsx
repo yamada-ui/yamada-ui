@@ -10,10 +10,10 @@ import {
   useTheme,
   useToken,
   useValue,
-} from '@yamada-ui/react'
-import { FC } from 'react'
+} from "@yamada-ui/react"
+import { FC } from "react"
 
-export type ColorPaletterProps = Omit<StackProps, 'color'> & {
+export type ColorPaletterProps = Omit<StackProps, "color"> & {
   color: string
   label: string
 }
@@ -21,18 +21,18 @@ export type ColorPaletterProps = Omit<StackProps, 'color'> & {
 export const ColorPaletter: FC<ColorPaletterProps> = ({ label, color, ...rest }) => {
   if (!label) label = color
 
-  const value = useToken('colors', color)
+  const value = useToken("colors", color)
   const computedValue = useValue(value)
 
   return (
     <HStack {...rest}>
-      <Box bg={color} minW='12' minH='12' rounded='md' boxShadow='inner' />
+      <Box bg={color} minW="12" minH="12" rounded="md" boxShadow="inner" />
 
-      <VStack gap='1'>
-        <Text fontWeight='semibold' noOfLines={1} textTransform='capitalize'>
+      <VStack gap="1">
+        <Text fontWeight="semibold" noOfLines={1} textTransform="capitalize">
           {label}
         </Text>
-        <Text noOfLines={1} color='muted'>
+        <Text noOfLines={1} color="muted">
           {computedValue}
         </Text>
       </VStack>
@@ -40,8 +40,8 @@ export const ColorPaletter: FC<ColorPaletterProps> = ({ label, color, ...rest })
   )
 }
 
-export type ColorPalettersProps = Omit<ColorPaletterContainerProps, 'color'> & {
-  colorScheme: keyof (typeof defaultTheme)['colors']
+export type ColorPalettersProps = Omit<ColorPaletterContainerProps, "color"> & {
+  colorScheme: keyof (typeof defaultTheme)["colors"]
 }
 
 export const ColorPaletters: FC<ColorPalettersProps> = ({ colorScheme, ...rest }) => {
@@ -65,9 +65,9 @@ export type ColorPaletterContainerProps = GridProps
 export const ColorPaletterContainer: FC<ColorPaletterContainerProps> = ({ ...rest }) => {
   return (
     <Grid
-      my='6'
-      templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(2, 1fr)', sm: 'repeat(1, 1fr)' }}
-      gap='4'
+      my="6"
+      templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(2, 1fr)", sm: "repeat(1, 1fr)" }}
+      gap="4"
       {...rest}
     />
   )

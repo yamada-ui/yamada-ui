@@ -1,9 +1,9 @@
-import { createContext } from '@yamada-ui/react'
+import { createContext } from "@yamada-ui/react"
 import {
   DocumentTypesPagination,
   DocumentTypes,
   DocumentTypesWithChildren,
-} from 'contentlayer/generated'
+} from "contentlayer/generated"
 
 type PageContext = {
   documents: DocumentTypes[]
@@ -12,10 +12,10 @@ type PageContext = {
   documentBreadcrumbs?: DocumentTypes[]
   documentChildrenTree?: DocumentTypesWithChildren[]
   documentPagination?: DocumentTypesPagination
-} & Partial<Omit<DocumentTypes, 'body' | 'data'>>
+} & Partial<Omit<DocumentTypes, "body" | "data">>
 
 export const [PageProvider, usePage] = createContext<PageContext>({
   strict: true,
-  errorMessage: '',
-  name: 'PageContext',
+  errorMessage: "",
+  name: "PageContext",
 })

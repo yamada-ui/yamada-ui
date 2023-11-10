@@ -16,14 +16,14 @@ Install the core and utilities of Yamada UI.
 Run one of the following commands in the terminal.
 
 <PackageManagers
-  packageNameOrCommand={['@yamada-ui/core', '@yamada-ui/theme', '@yamada-ui/utils']}
+  packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/theme", "@yamada-ui/utils"]}
 />
 
 Next, install the components and hooks you want to use in your project.
 
 Here, let's try installing `@yamada-ui/layouts` which includes `Box`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/layouts' />
+<PackageManagers packageNameOrCommand="@yamada-ui/layouts" />
 
 :::note
 The package names of components and hooks are listed on each documentation page.
@@ -34,8 +34,8 @@ The package names of components and hooks are listed on each documentation page.
 After installing the core and components, add `ThemeProvider` to the root of your application and pass the [default theme](/styled-system/theming/default-theme) and [default config](/styled-system/configure/default-config) from `@yamada-ui/theme`. If you have your own theme or config, pass those instead.
 
 ```tsx live=false highlight={6,7,8,11}
-import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -52,8 +52,8 @@ const App = () => {
 If you want to support dark mode, add `ColorModeProvider` as well.
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -82,7 +82,7 @@ If you do not pass `theme` or `config` to `ThemeProvider`, the styles and tokens
 Call the component within the application.
 
 ```tsx live=false
-import { Box } from '@yamada-ui/layouts'
+import { Box } from "@yamada-ui/layouts"
 
 const Demo = () => {
   return <Box>This is Box</Box>
@@ -96,20 +96,20 @@ With this, the setup of Yamada UI is complete!
 Why not learn the basics and themes to get to know Yamada UI? 😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/basics' />
+  <LinkCard href="/getting-started/basics" />
   <LinkCard
-    href='/styled-system/theming'
-    title='Learn about Themes'
-    description='Learn about the default theme of Yamada UI, and how to create and change the values of colors, fonts, and other theme elements.'
+    href="/styled-system/theming"
+    title="Learn about Themes"
+    description="Learn about the default theme of Yamada UI, and how to create and change the values of colors, fonts, and other theme elements."
   />
   <LinkCard
-    href='/components'
-    title='Explore Components'
-    description='Yamada UI offers over 100 flexible components. All components support animations and dark mode.'
+    href="/components"
+    title="Explore Components"
+    description="Yamada UI offers over 100 flexible components. All components support animations and dark mode."
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='Explore the Source Code'
-    description='The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star.'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="Explore the Source Code"
+    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>

@@ -1,14 +1,14 @@
 ---
 title: useAnimation
-description: '`useAnimation`は、CSSの`keyframes`のように記述してアニメーションを実装するカスタムフックです。'
-package_name: '@yamada-ui/use-animation'
+description: "`useAnimation`は、CSSの`keyframes`のように記述してアニメーションを実装するカスタムフックです。"
+package_name: "@yamada-ui/use-animation"
 with_description: true
 ---
 
 ## インポート
 
 ```ts
-import { useAnimation } from '@yamada-ui/react'
+import { useAnimation } from "@yamada-ui/react"
 ```
 
 ## 使い方
@@ -31,31 +31,31 @@ import { useAnimation } from '@yamada-ui/react'
 ```tsx functional=true
 const animation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.500',
+    "0%": {
+      bg: "red.500",
     },
-    '20%': {
-      bg: 'green.500',
+    "20%": {
+      bg: "green.500",
     },
-    '40%': {
-      bg: 'purple.500',
+    "40%": {
+      bg: "purple.500",
     },
-    '60%': {
-      bg: 'yellow.500',
+    "60%": {
+      bg: "yellow.500",
     },
-    '80%': {
-      bg: 'blue.500',
+    "80%": {
+      bg: "blue.500",
     },
-    '100%': {
-      bg: 'red.500',
+    "100%": {
+      bg: "red.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <Box w='full' h='xs' animation={animation} />
+return <Box w="full" h="xs" animation={animation} />
 ```
 
 :::note
@@ -68,66 +68,66 @@ return <Box w='full' h='xs' animation={animation} />
 const animation = useAnimation([
   {
     keyframes: {
-      '0%': {
-        bg: 'red.500',
+      "0%": {
+        bg: "red.500",
       },
-      '20%': {
-        bg: 'green.500',
+      "20%": {
+        bg: "green.500",
       },
-      '40%': {
-        bg: 'purple.500',
+      "40%": {
+        bg: "purple.500",
       },
-      '60%': {
-        bg: 'yellow.500',
+      "60%": {
+        bg: "yellow.500",
       },
-      '80%': {
-        bg: 'blue.500',
+      "80%": {
+        bg: "blue.500",
       },
-      '100%': {
-        bg: 'red.500',
+      "100%": {
+        bg: "red.500",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
   {
     keyframes: {
-      '0%': {
-        h: 'xs',
+      "0%": {
+        h: "xs",
       },
-      '50%': {
-        h: 'md',
+      "50%": {
+        h: "md",
       },
-      '100%': {
-        h: 'xs',
+      "100%": {
+        h: "xs",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
   {
     keyframes: {
-      '0%': {
-        w: 'full',
+      "0%": {
+        w: "full",
       },
-      '50%': {
-        w: '50%',
+      "50%": {
+        w: "50%",
       },
-      '100%': {
-        w: 'full',
+      "100%": {
+        w: "full",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   },
 ])
 
 return (
-  <Box h='md'>
-    <Box w='full' h='xs' animation={animation} />
+  <Box h="md">
+    <Box w="full" h="xs" animation={animation} />
   </Box>
 )
 ```
@@ -137,57 +137,57 @@ return (
 ```tsx functional=true
 const desktopAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.500',
+    "0%": {
+      bg: "red.500",
     },
-    '20%': {
-      bg: 'green.500',
+    "20%": {
+      bg: "green.500",
     },
-    '40%': {
-      bg: 'purple.500',
+    "40%": {
+      bg: "purple.500",
     },
-    '60%': {
-      bg: 'yellow.500',
+    "60%": {
+      bg: "yellow.500",
     },
-    '80%': {
-      bg: 'blue.500',
+    "80%": {
+      bg: "blue.500",
     },
-    '100%': {
-      bg: 'red.500',
+    "100%": {
+      bg: "red.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
 const tabletAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'cyan.500',
+    "0%": {
+      bg: "cyan.500",
     },
-    '20%': {
-      bg: 'emerald.500',
+    "20%": {
+      bg: "emerald.500",
     },
-    '40%': {
-      bg: 'pink.500',
+    "40%": {
+      bg: "pink.500",
     },
-    '60%': {
-      bg: 'amber.500',
+    "60%": {
+      bg: "amber.500",
     },
-    '80%': {
-      bg: 'sky.500',
+    "80%": {
+      bg: "sky.500",
     },
-    '100%': {
-      bg: 'cyan.500',
+    "100%": {
+      bg: "cyan.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnimation }} />
+return <Box w="full" h="xs" animation={{ base: desktopAnimation, md: tabletAnimation }} />
 ```
 
 ### カラーモード
@@ -195,57 +195,57 @@ return <Box w='full' h='xs' animation={{ base: desktopAnimation, md: tabletAnima
 ```tsx functional=true
 const lightAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.500',
+    "0%": {
+      bg: "red.500",
     },
-    '20%': {
-      bg: 'green.500',
+    "20%": {
+      bg: "green.500",
     },
-    '40%': {
-      bg: 'purple.500',
+    "40%": {
+      bg: "purple.500",
     },
-    '60%': {
-      bg: 'yellow.500',
+    "60%": {
+      bg: "yellow.500",
     },
-    '80%': {
-      bg: 'blue.500',
+    "80%": {
+      bg: "blue.500",
     },
-    '100%': {
-      bg: 'red.500',
+    "100%": {
+      bg: "red.500",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
 const darkAnimation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: 'red.800',
+    "0%": {
+      bg: "red.800",
     },
-    '20%': {
-      bg: 'green.800',
+    "20%": {
+      bg: "green.800",
     },
-    '40%': {
-      bg: 'purple.800',
+    "40%": {
+      bg: "purple.800",
     },
-    '60%': {
-      bg: 'yellow.800',
+    "60%": {
+      bg: "yellow.800",
     },
-    '80%': {
-      bg: 'blue.800',
+    "80%": {
+      bg: "blue.800",
     },
-    '100%': {
-      bg: 'red.800',
+    "100%": {
+      bg: "red.800",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <Box w='full' h='xs' animation={[lightAnimation, darkAnimation]} />
+return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
 ```
 
 :::note

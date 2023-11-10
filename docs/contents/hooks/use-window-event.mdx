@@ -8,7 +8,7 @@ with_description: true
 ## Import
 
 ```ts
-import { useWindowEvent } from '@yamada-ui/react'
+import { useWindowEvent } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -16,8 +16,8 @@ import { useWindowEvent } from '@yamada-ui/react'
 ```tsx functional=true
 const inputRef = useRef<HTMLInputElement>(null)
 
-useWindowEvent('keydown', (ev) => {
-  if (ev.code === 'KeyK' && (ev.ctrlKey || ev.metaKey)) {
+useWindowEvent("keydown", (ev) => {
+  if (ev.code === "KeyK" && (ev.ctrlKey || ev.metaKey)) {
     ev.preventDefault()
 
     if (inputRef.current) inputRef.current.focus()
@@ -30,7 +30,7 @@ return (
       Focus: <Kbd>Ctrl + K</Kbd>
     </Text>
 
-    <Input ref={inputRef} mt='md' />
+    <Input ref={inputRef} mt="md" />
   </>
 )
 ```

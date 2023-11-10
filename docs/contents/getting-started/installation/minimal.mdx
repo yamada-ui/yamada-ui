@@ -15,7 +15,7 @@ Install the core and utilities of Yamada UI.
 
 Run one of the following commands in the terminal.
 
-<PackageManagers packageNameOrCommand={['@yamada-ui/core', '@yamada-ui/utils']} />
+<PackageManagers packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/utils"]} />
 ## Using `ui`
 
 After installation, call `ui` within the application.
@@ -26,7 +26,7 @@ Use the `ui.<element>` notation to generate basic HTML elements with a style sys
 For example, to generate a `div` of plain HTML elements with a style system, write `<ui.div />`.
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
 const Demo = () => {
   return (
@@ -43,11 +43,11 @@ Let's try it with `button` this time.
 
 ```tsx
 <ui.button
-  background='#ef4444'
-  color='#ffffff'
-  padding='1rem'
-  borderRadius='.5rem'
-  _hover={{ background: '#dc2626' }}
+  background="#ef4444"
+  color="#ffffff"
+  padding="1rem"
+  borderRadius=".5rem"
+  _hover={{ background: "#dc2626" }}
 >
   Click me!
 </ui.button>
@@ -64,9 +64,9 @@ If you want to learn more about `Style props`, please check [here](/styled-syste
 The function is suitable for generating simple components.
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button')
+const Button = ui("button")
 
 const Demo = () => {
   return <Button>Click me!</Button>
@@ -76,15 +76,15 @@ const Demo = () => {
 You can also set default styles.
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button', {
+const Button = ui("button", {
   baseStyle: {
-    background: '#ef4444',
-    color: '#ffffff',
-    padding: '1rem',
-    borderRadius: '.5rem',
-    _hover: { background: '#dc2626' },
+    background: "#ef4444",
+    color: "#ffffff",
+    padding: "1rem",
+    borderRadius: ".5rem",
+    _hover: { background: "#dc2626" },
   },
 })
 
@@ -101,62 +101,62 @@ Yamada UI provides many utilities such as `Motion`, a component specialized for 
 
 Install `@yamada-ui/use-animation`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/use-animation' />
+<PackageManagers packageNameOrCommand="@yamada-ui/use-animation" />
 
 ```tsx functional=true
 const animation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: '#ef4444',
+    "0%": {
+      bg: "#ef4444",
     },
-    '20%': {
-      bg: '#22c55e',
+    "20%": {
+      bg: "#22c55e",
     },
-    '40%': {
-      bg: '#a855f7',
+    "40%": {
+      bg: "#a855f7",
     },
-    '60%': {
-      bg: '#eab308',
+    "60%": {
+      bg: "#eab308",
     },
-    '80%': {
-      bg: '#3b82f6',
+    "80%": {
+      bg: "#3b82f6",
     },
-    '100%': {
-      bg: '#ef4444',
+    "100%": {
+      bg: "#ef4444",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <ui.div w='full' h='xs' animation={animation} />
+return <ui.div w="full" h="xs" animation={animation} />
 ```
 
 ### Using `Motion`
 
 Install `@yamada-ui/motion`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/motion' />
+<PackageManagers packageNameOrCommand="@yamada-ui/motion" />
 
 ```tsx
-<ui.div display='flex' placeContent='center' placeItems='center' w='100%' h='24rem'>
+<ui.div display="flex" placeContent="center" placeItems="center" w="100%" h="24rem">
   <Motion
     animate={{
       scale: [1, 2, 2, 1, 1],
       rotate: [0, 0, 180, 180, 0],
-      borderRadius: ['0%', '0%', '50%', '50%', '0%'],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
     }}
     transition={{
       duration: 2,
-      ease: 'easeInOut',
+      ease: "easeInOut",
       times: [0, 0.2, 0.5, 0.8, 1],
       repeat: Infinity,
       repeatDelay: 1,
     }}
-    w='7.5rem'
-    h='7.5rem'
-    bg='primary'
+    w="7.5rem"
+    h="7.5rem"
+    bg="primary"
   />
 </ui.div>
 ```
@@ -169,13 +169,13 @@ If you want to learn more about animation, please check [here](/styled-system/an
 
 If you want to use the [default theme](/styled-system/theming/default-theme) of Yamada UI, install `@yamada-ui/theme`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/theme' />
+<PackageManagers packageNameOrCommand="@yamada-ui/theme" />
 
 After installing the theme, add `ThemeProvider` to the root of your application and pass the [default theme](/styled-system/theming/default-theme) and [default config](/styled-system/configure/default-config) from `@yamada-ui/theme`. If you have your own theme or config, pass them instead.
 
 ```tsx live=false highlight={6,7,8,11}
-import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { baseTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { baseTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -192,8 +192,8 @@ const App = () => {
 If you want to support dark mode, also add `ColorModeProvider`.
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { baseTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { baseTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -222,20 +222,20 @@ If you do not pass `theme` or `config` to `ThemeProvider`, the tokens will not b
 Why not learn the basics and themes to get to know Yamada UI? 😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/basics' />
+  <LinkCard href="/getting-started/basics" />
   <LinkCard
-    href='/styled-system/theming'
-    title='Learn about Themes'
-    description='Learn about the default theme of Yamada UI, and how to create and change the values of colors, fonts, and other theme elements.'
+    href="/styled-system/theming"
+    title="Learn about Themes"
+    description="Learn about the default theme of Yamada UI, and how to create and change the values of colors, fonts, and other theme elements."
   />
   <LinkCard
-    href='/components'
-    title='Explore Components'
-    description='Yamada UI offers over 100 flexible components. All components support animations and dark mode.'
+    href="/components"
+    title="Explore Components"
+    description="Yamada UI offers over 100 flexible components. All components support animations and dark mode."
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='Explore the Source Code'
-    description='The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star.'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="Explore the Source Code"
+    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>

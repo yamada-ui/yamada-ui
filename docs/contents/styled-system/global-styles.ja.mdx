@@ -15,27 +15,27 @@ order: 13
 ```ts title=global-style.ts
 export const globalStyle: UIStyle = {
   body: {
-    fontFamily: 'body',
-    bg: ['white', 'black'],
-    color: ['black', 'white'],
-    transitionProperty: 'background-color',
-    transitionDuration: 'normal',
-    lineHeight: 'base',
-    overflowX: 'hidden',
+    fontFamily: "body",
+    bg: ["white", "black"],
+    color: ["black", "white"],
+    transitionProperty: "background-color",
+    transitionDuration: "normal",
+    lineHeight: "base",
+    overflowX: "hidden",
   },
-  '*::placeholder': {
-    color: 'gray.500',
+  "*::placeholder": {
+    color: "gray.500",
   },
   _dark: {
-    '*::placeholder': {
-      color: 'whiteAlpha.400',
+    "*::placeholder": {
+      color: "whiteAlpha.400",
     },
   },
-  '*, *::before, &::after': {
-    borderWidth: '0',
-    borderStyle: 'solid',
-    borderColor: 'border',
-    wordWrap: 'break-word',
+  "*, *::before, &::after": {
+    borderWidth: "0",
+    borderStyle: "solid",
+    borderColor: "border",
+    wordWrap: "break-word",
   },
 }
 ```
@@ -47,12 +47,12 @@ export const globalStyle: UIStyle = {
 `styles.globalStyle`は、スタイルオブジェクトまたはスタイルオブジェクトを返す関数を定義できます。
 
 ```tsx live=false
-import { UIProvider, extendTheme, UIStyle } from '@yamada-ui/react'
+import { UIProvider, extendTheme, UIStyle } from "@yamada-ui/react"
 
 const globalStyle: UIStyle = {
   body: {
-    bg: 'red.600',
-    color: 'white',
+    bg: "red.600",
+    color: "white",
   },
 }
 
@@ -70,12 +70,12 @@ const App = () => {
 関数の場合は、`theme`と`colorMode`を取得できます。
 
 ```tsx live=false
-import { UIProvider, extendTheme, UIStyle } from '@yamada-ui/react'
+import { UIProvider, extendTheme, UIStyle } from "@yamada-ui/react"
 
 const globalStyle: UIStyle = ({ theme, colorMode }) => ({
   body: {
-    bg: 'red.600',
-    color: 'white',
+    bg: "red.600",
+    color: "white",
   },
 })
 
@@ -105,12 +105,12 @@ const App = () => {
 3. グローバルスタイルを定義し、`ThemeProvider`の`theme`に渡す。
 
 ```tsx live=false highlight={3,4,5,6,7,8,12,13,16}
-import { ThemeProvider, GlobalStyle } from '@yamada-ui/core'
+import { ThemeProvider, GlobalStyle } from "@yamada-ui/core"
 
 const globalStyle: UIStyle = {
   body: {
-    bg: ['white', 'black'],
-    color: ['black', 'white'],
+    bg: ["white", "black"],
+    color: ["black", "white"],
   },
 }
 
@@ -127,11 +127,11 @@ const App = () => {
 
 [デフォルトのテーマ](/styled-system/theming/default-theme)のグローバルスタイルを使いたい場合は、`@yamada-ui/theme`をインストールした後、`defaultTheme`か`baseTheme`を`ThemeProvider`に渡します。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/theme' />
+<PackageManagers packageNameOrCommand="@yamada-ui/theme" />
 
 ```tsx live=false highlight={7,8,11}
-import { ThemeProvider, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, baseTheme } from '@yamada-ui/theme'
+import { ThemeProvider, GlobalStyle } from "@yamada-ui/core"
+import { defaultTheme, baseTheme } from "@yamada-ui/theme"
 
 const App = () => {
   return (

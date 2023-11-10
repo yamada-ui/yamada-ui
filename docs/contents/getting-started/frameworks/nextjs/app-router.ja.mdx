@@ -12,46 +12,46 @@ tab: App Router
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: 'pnpm create next-app my-app --typescript',
-    npm: 'npx create-next-app my-app --typescript',
-    yarn: 'yarn create next-app my-app --typescript',
+    pnpm: "pnpm create next-app my-app --typescript",
+    npm: "npx create-next-app my-app --typescript",
+    yarn: "yarn create next-app my-app --typescript",
   }}
 />
 
 Yamada UIは、`@yamada-ui/react`と`@yamada-ui/nextjs`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
 
-<PackageManagers packageNameOrCommand={['@yamada-ui/react', '@yamada-ui/nextjs']} />
+<PackageManagers packageNameOrCommand={["@yamada-ui/react", "@yamada-ui/nextjs"]} />
 
 テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールをする必要があります。
 
 <SelectPackageManagers
   packages={[
     {
-      name: '@yamada-ui/table',
-      description: '`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。',
+      name: "@yamada-ui/table",
+      description: "`@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。",
       isDefaultCheck: true,
     },
     {
-      name: '@yamada-ui/calendar',
+      name: "@yamada-ui/calendar",
       description:
-        '`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。',
+        "`dayjs`を使用した、便利なカレンダーとデイトピッカーコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/carousel',
-      description: '`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。',
+      name: "@yamada-ui/carousel",
+      description: "`embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/dropzone',
-      description: '`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。',
+      name: "@yamada-ui/dropzone",
+      description: "`react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/markdown',
+      name: "@yamada-ui/markdown",
       description:
-        '`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。',
+        "`react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。",
     },
     {
-      name: '@yamada-ui/fontawesome',
-      description: '`Font Awesome`を便利に使用するためのコンポーネントを提供します。',
+      name: "@yamada-ui/fontawesome",
+      description: "`Font Awesome`を便利に使用するためのコンポーネントを提供します。",
     },
   ]}
 />
@@ -70,18 +70,18 @@ Yamada UIのコンポーネントを使用するページやコンポーネン�
 Yamada UIをインストール後、`UIProvider`と`CacheProvider`と`ColorModeScript`を追加します。
 
 ```tsx live=false title=layout.tsx highlight={10,12,13,14}
-'use client'
+"use client"
 
-import { colorModeManager, UIProvider, ColorModeScript } from '@yamada-ui/react'
-import { CacheProvider } from '@yamada-ui/nextjs'
+import { colorModeManager, UIProvider, ColorModeScript } from "@yamada-ui/react"
+import { CacheProvider } from "@yamada-ui/nextjs"
 
 const { cookieStorageManager } = colorModeManager
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body>
-        <ColorModeScript type='cookie' nonce='testing' />
+        <ColorModeScript type="cookie" nonce="testing" />
 
         <CacheProvider>
           <UIProvider colorModeManager={cookieStorageManager}>{children}</UIProvider>
@@ -101,9 +101,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを呼び出します。
 
 ```tsx live=false title=page.tsx
-'use client'
+"use client"
 
-import { Button } from '@yamada-ui/react'
+import { Button } from "@yamada-ui/react"
 
 export default function Home() {
   return <Button>Click me!</Button>

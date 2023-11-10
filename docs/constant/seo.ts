@@ -1,3 +1,3 @@
 export const SEO = {
-  TITLE_TEMPLATE: '%s - Yamada UI',
+  TITLE_TEMPLATE: "%s - Yamada UI",
 }

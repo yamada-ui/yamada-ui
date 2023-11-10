@@ -12,45 +12,45 @@ Run one of the following commands in the terminal.
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: 'pnpm create react-app my-app --template typescript',
-    npm: 'npx create-react-app my-app --template typescript',
-    yarn: 'yarn create react-app my-app --template typescript',
+    pnpm: "pnpm create react-app my-app --template typescript",
+    npm: "npx create-react-app my-app --template typescript",
+    yarn: "yarn create react-app my-app --template typescript",
   }}
 />
 
 With Yamada UI, you can use most components and hooks just by installing `@yamada-ui/react`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
 If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
 <SelectPackageManagers
   packages={[
     {
-      name: '@yamada-ui/table',
-      description: 'Provides a convenient table component using `@tanstack/react-table`.',
+      name: "@yamada-ui/table",
+      description: "Provides a convenient table component using `@tanstack/react-table`.",
       isDefaultCheck: true,
     },
     {
-      name: '@yamada-ui/calendar',
-      description: 'Provides a convenient calendar and date picker component using `dayjs`.',
+      name: "@yamada-ui/calendar",
+      description: "Provides a convenient calendar and date picker component using `dayjs`.",
     },
     {
-      name: '@yamada-ui/carousel',
-      description: 'Provides a convenient carousel component using `embla-carousel-react`.',
+      name: "@yamada-ui/carousel",
+      description: "Provides a convenient carousel component using `embla-carousel-react`.",
     },
     {
-      name: '@yamada-ui/dropzone',
-      description: 'Provides a convenient dropzone component using `react-dropzone`.',
+      name: "@yamada-ui/dropzone",
+      description: "Provides a convenient dropzone component using `react-dropzone`.",
     },
     {
-      name: '@yamada-ui/markdown',
+      name: "@yamada-ui/markdown",
       description:
-        'Provides a convenient markdown component using `react-markdown` and `react-syntax-highlighter`.',
+        "Provides a convenient markdown component using `react-markdown` and `react-syntax-highlighter`.",
     },
     {
-      name: '@yamada-ui/fontawesome',
-      description: 'Provides a component for conveniently using `Font Awesome`.',
+      name: "@yamada-ui/fontawesome",
+      description: "Provides a component for conveniently using `Font Awesome`.",
     },
   ]}
 />
@@ -65,11 +65,11 @@ If you only want to use the Yamada UI style system, please check [here](/getting
 After installing Yamada UI, add `UIProvider`.
 
 ```tsx live=false title=index.tsx highlight={10,12}
-import { createRoot } from 'react-dom/client'
-import { App } from './app'
-import { UIProvider } from '@yamada-ui/react'
+import { createRoot } from "react-dom/client"
+import { App } from "./app"
+import { UIProvider } from "@yamada-ui/react"
 
-const container = document.getElementById('app')
+const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
@@ -93,8 +93,8 @@ If you want to customize the theme or config, please check [customize the theme]
 Once you've added `UIProvider`, call the component within your application.
 
 ```tsx live=false title=app.tsx
-import { FC } from 'react'
-import { Button } from '@yamada-ui/react'
+import { FC } from "react"
+import { Button } from "@yamada-ui/react"
 
 export const App: FC = () => {
   return <Button>Click me!</Button>

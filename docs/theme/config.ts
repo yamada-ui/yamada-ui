@@ -1,5 +1,5 @@
-import { ThemeConfig } from '@yamada-ui/react'
+import { ThemeConfig } from "@yamada-ui/react"
 
 export const customConfig: ThemeConfig = {
-  initialColorMode: 'system',
+  initialColorMode: "system",
 }

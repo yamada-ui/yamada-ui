@@ -5,9 +5,9 @@ import {
   IconButtonProps,
   Link as UILink,
   LinkProps as UILinkProps,
-} from '@yamada-ui/react'
-import Link, { LinkProps } from 'next/link'
-import { FC } from 'react'
+} from "@yamada-ui/react"
+import Link, { LinkProps } from "next/link"
+import { FC } from "react"
 
 export type NextLinkProps = UILinkProps
 
@@ -16,7 +16,7 @@ export const NextLink: FC<NextLinkProps> = ({ ...rest }) => {
 }
 
 export type NextLinkButtonProps = ButtonProps &
-  Omit<LinkProps, 'as'> & {
+  Omit<LinkProps, "as"> & {
     isExternal?: boolean
   }
 
@@ -24,15 +24,15 @@ export const NextLinkButton: FC<NextLinkButtonProps> = ({ isExternal, ...rest })
   return (
     <Button
       as={Link}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener' : undefined}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener" : undefined}
       {...rest}
     />
   )
 }
 
 export type NextLinkIconButtonProps = IconButtonProps &
-  Omit<LinkProps, 'as'> & {
+  Omit<LinkProps, "as"> & {
     isExternal?: boolean
   }
 
@@ -40,8 +40,8 @@ export const NextLinkIconButton: FC<NextLinkIconButtonProps> = ({ isExternal, ..
   return (
     <IconButton
       as={Link}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener' : undefined}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener" : undefined}
       {...rest}
     />
   )

@@ -1,14 +1,14 @@
 ---
 title: useTheme
-description: '`useTheme` is a custom hook that returns a function for retrieving and switching themes.'
-package_name: '@yamada-ui/core'
+description: "`useTheme` is a custom hook that returns a function for retrieving and switching themes."
+package_name: "@yamada-ui/core"
 with_description: true
 ---
 
 ## Import
 
 ```ts
-import { useTheme } from '@yamada-ui/react'
+import { useTheme } from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -32,18 +32,18 @@ return (
   <>
     <Text>The current scheme is "{themeScheme}"</Text>
 
-    <Wrap mt='md' gap='md'>
-      <Button onClick={() => changeThemeScheme('base')}>Base Theme</Button>
+    <Wrap mt="md" gap="md">
+      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
 
-      <Button colorScheme='pink' onClick={() => changeThemeScheme('pink')}>
+      <Button colorScheme="pink" onClick={() => changeThemeScheme("pink")}>
         Pink Theme
       </Button>
 
-      <Button colorScheme='purple' onClick={() => changeThemeScheme('purple')}>
+      <Button colorScheme="purple" onClick={() => changeThemeScheme("purple")}>
         Purple Theme
       </Button>
 
-      <Button colorScheme='green' onClick={() => changeThemeScheme('green')}>
+      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
         Green Theme
       </Button>
     </Wrap>

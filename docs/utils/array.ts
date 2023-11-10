@@ -1,4 +1,4 @@
-import { isArray } from '@yamada-ui/react'
+import { isArray } from "@yamada-ui/react"
 
 export type MixedArray = string | (string | string)[]
 

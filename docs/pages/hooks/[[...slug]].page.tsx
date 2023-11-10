@@ -1,9 +1,9 @@
-import { NextPage, InferGetStaticPropsType } from 'next'
-import { useMDXComponent } from 'next-contentlayer/hooks'
-import { MDXComponents } from 'components/mdx'
-import { PageProvider } from 'contexts/page-context'
-import { DocumentLayout } from 'layouts/document-layout'
-import { getStaticDocumentPaths, getStaticDocumentProps } from 'utils/next'
+import { NextPage, InferGetStaticPropsType } from "next"
+import { useMDXComponent } from "next-contentlayer/hooks"
+import { MDXComponents } from "components/mdx"
+import { PageProvider } from "contexts/page-context"
+import { DocumentLayout } from "layouts/document-layout"
+import { getStaticDocumentPaths, getStaticDocumentProps } from "utils/next"
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -21,6 +21,6 @@ const Page: NextPage<PageProps> = ({ body, data, documents, ...rest }) => {
 
 export default Page
 
-export const getStaticPaths = getStaticDocumentPaths('Hooks')
+export const getStaticPaths = getStaticDocumentPaths("Hooks")
 
-export const getStaticProps = getStaticDocumentProps('Hooks')
+export const getStaticProps = getStaticDocumentProps("Hooks")

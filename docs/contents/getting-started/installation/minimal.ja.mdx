@@ -15,7 +15,7 @@ Yamada UIのコアやユーティリティをインストールします。
 
 ターミナルで次のコマンドのいずれかを実行します。
 
-<PackageManagers packageNameOrCommand={['@yamada-ui/core', '@yamada-ui/utils']} />
+<PackageManagers packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/utils"]} />
 
 ## `ui`を使用する
 
@@ -27,7 +27,7 @@ Yamada UIのコアやユーティリティをインストールします。
 例えば、スタイルシステムを備えたプレーンなHTML要素の`div`を生成する場合は、`<ui.div />`と記述します。
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
 const Demo = () => {
   return (
@@ -44,11 +44,11 @@ const Demo = () => {
 
 ```tsx
 <ui.button
-  background='#ef4444'
-  color='#ffffff'
-  padding='1rem'
-  borderRadius='.5rem'
-  _hover={{ background: '#dc2626' }}
+  background="#ef4444"
+  color="#ffffff"
+  padding="1rem"
+  borderRadius=".5rem"
+  _hover={{ background: "#dc2626" }}
 >
   Click me!
 </ui.button>
@@ -65,9 +65,9 @@ const Demo = () => {
 関数は、簡単なコンポーネントを生成するのに適しています。
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button')
+const Button = ui("button")
 
 const Demo = () => {
   return <Button>Click me!</Button>
@@ -77,15 +77,15 @@ const Demo = () => {
 デフォルトのスタイルを設定することもできます。
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button', {
+const Button = ui("button", {
   baseStyle: {
-    background: '#ef4444',
-    color: '#ffffff',
-    padding: '1rem',
-    borderRadius: '.5rem',
-    _hover: { background: '#dc2626' },
+    background: "#ef4444",
+    color: "#ffffff",
+    padding: "1rem",
+    borderRadius: ".5rem",
+    _hover: { background: "#dc2626" },
   },
 })
 
@@ -102,62 +102,62 @@ Yamada UIは、アニメーションに特化したコンポーネントの`Moti
 
 `@yamada-ui/use-animation`をインストールします。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/use-animation' />
+<PackageManagers packageNameOrCommand="@yamada-ui/use-animation" />
 
 ```tsx functional=true
 const animation = useAnimation({
   keyframes: {
-    '0%': {
-      bg: '#ef4444',
+    "0%": {
+      bg: "#ef4444",
     },
-    '20%': {
-      bg: '#22c55e',
+    "20%": {
+      bg: "#22c55e",
     },
-    '40%': {
-      bg: '#a855f7',
+    "40%": {
+      bg: "#a855f7",
     },
-    '60%': {
-      bg: '#eab308',
+    "60%": {
+      bg: "#eab308",
     },
-    '80%': {
-      bg: '#3b82f6',
+    "80%": {
+      bg: "#3b82f6",
     },
-    '100%': {
-      bg: '#ef4444',
+    "100%": {
+      bg: "#ef4444",
     },
   },
-  duration: '10s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
-return <ui.div w='full' h='xs' animation={animation} />
+return <ui.div w="full" h="xs" animation={animation} />
 ```
 
 ### `Motion`を使う
 
 `@yamada-ui/motion`をインストールします。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/motion' />
+<PackageManagers packageNameOrCommand="@yamada-ui/motion" />
 
 ```tsx
-<ui.div display='flex' placeContent='center' placeItems='center' w='100%' h='24rem'>
+<ui.div display="flex" placeContent="center" placeItems="center" w="100%" h="24rem">
   <Motion
     animate={{
       scale: [1, 2, 2, 1, 1],
       rotate: [0, 0, 180, 180, 0],
-      borderRadius: ['0%', '0%', '50%', '50%', '0%'],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
     }}
     transition={{
       duration: 2,
-      ease: 'easeInOut',
+      ease: "easeInOut",
       times: [0, 0.2, 0.5, 0.8, 1],
       repeat: Infinity,
       repeatDelay: 1,
     }}
-    w='7.5rem'
-    h='7.5rem'
-    bg='primary'
+    w="7.5rem"
+    h="7.5rem"
+    bg="primary"
   />
 </ui.div>
 ```
@@ -170,13 +170,13 @@ return <ui.div w='full' h='xs' animation={animation} />
 
 Yamada UIの[デフォルトのテーマ](/styled-system/theming/default-theme)を使用したい場合は、`@yamada-ui/theme`をインストールします。
 
-<PackageManagers packageNameOrCommand='@yamada-ui/theme' />
+<PackageManagers packageNameOrCommand="@yamada-ui/theme" />
 
 テーマをインストール後、アプリケーションのルートに`ThemeProvider`を追加し、`@yamada-ui/theme`から[デフォルトのテーマ](/styled-system/theming/default-theme)と[デフォルトのコンフィグ](/styled-system/configure/default-config)を渡します。もし、あなたのテーマやコンフィグがある場合は、そちらを渡します。
 
 ```tsx live=false highlight={6,7,8,11}
-import { ThemeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { baseTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { baseTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -193,8 +193,8 @@ const App = () => {
 ダークモードを対応させたい場合は、`ColorModeProvider`も追加します。
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from '@yamada-ui/core'
-import { baseTheme, defaultConfig } from '@yamada-ui/theme'
+import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import { baseTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {
   return (
@@ -223,20 +223,20 @@ const App = () => {
 Yamada UIを知るために、基本やテーマを学んでみませんか？😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/basics' />
+  <LinkCard href="/getting-started/basics" />
   <LinkCard
-    href='/styled-system/theming'
-    title='テーマについて学ぶ'
-    description='Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。'
+    href="/styled-system/theming"
+    title="テーマについて学ぶ"
+    description="Yamada UIのデフォルトのテーマを知り、色・フォント・その他のテーマの値を作成・変更する方法を学ぶ。"
   />
   <LinkCard
-    href='/components'
-    title='コンポーネントを探索する'
-    description='Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。'
+    href="/components"
+    title="コンポーネントを探索する"
+    description="Yamada UIは、100以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。"
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='ソースコードを探索する'
-    description='Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="ソースコードを探索する"
+    description="Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。"
   />
 </CardContainer>

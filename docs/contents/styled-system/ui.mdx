@@ -12,7 +12,7 @@ Use the `ui.<element>` notation to generate basic HTML elements with a style sys
 For example, to generate a plain HTML `button` element with a style system, write `<ui.button />`.
 
 ```tsx
-<ui.button py='sm' px='md' rounded='md' bg='purple.600' color='white' _hover={{ bg: 'purple.500' }}>
+<ui.button py="sm" px="md" rounded="md" bg="purple.600" color="white" _hover={{ bg: "purple.500" }}>
   Click me!
 </ui.button>
 ```
@@ -30,9 +30,9 @@ If you want to learn more about `Style props`, please check [here](/styled-syste
 The function is suitable for generating simple components.
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button')
+const Button = ui("button")
 
 const Demo = () => {
   return <Button>Click me!</Button>
@@ -42,16 +42,16 @@ const Demo = () => {
 You can also set default styles.
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
+import { ui } from "@yamada-ui/core"
 
-const Button = ui('button', {
+const Button = ui("button", {
   baseStyle: {
-    py: 'sm',
-    px: 'md',
-    rounded: 'md',
-    bg: 'purple.600',
-    color: 'white',
-    _hover: { bg: 'purple.500' },
+    py: "sm",
+    px: "md",
+    rounded: "md",
+    bg: "purple.600",
+    color: "white",
+    _hover: { bg: "purple.500" },
   },
 })
 
@@ -63,20 +63,20 @@ const Demo = () => {
 You can pass a custom component as an argument and generate a custom component with the Yamada UI style system enabled.
 
 ```tsx live=false
-import { ui } from '@yamada-ui/core'
-import { YourComponent } from './your-component'
+import { ui } from "@yamada-ui/core"
+import { YourComponent } from "./your-component"
 
-const NewComponent = ui('YourComponent')
+const NewComponent = ui("YourComponent")
 
 const Demo = () => {
   return (
     <NewComponent
-      py='sm'
-      px='md'
-      rounded='md'
-      bg='purple.600'
-      color='white'
-      _hover={{ bg: 'purple.500' }}
+      py="sm"
+      px="md"
+      rounded="md"
+      bg="purple.600"
+      color="white"
+      _hover={{ bg: "purple.500" }}
     >
       Click me!
     </NewComponent>

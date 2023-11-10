@@ -1,14 +1,14 @@
 ---
 title: useUpdateEffect
-description: '`useUpdateEffect`は、初回のレンダリング時には副作用をスキップし、依存配列が変更された場合にのみ副作用を実行するカスタムフックです。'
-package_name: '@yamada-ui/utils'
+description: "`useUpdateEffect`は、初回のレンダリング時には副作用をスキップし、依存配列が変更された場合にのみ副作用を実行するカスタムフックです。"
+package_name: "@yamada-ui/utils"
 with_description: true
 ---
 
 ## インポート
 
 ```ts
-import { useUpdateEffect } from '@yamada-ui/react'
+import { useUpdateEffect } from "@yamada-ui/react"
 ```
 
 ## 使い方
@@ -31,7 +31,7 @@ return (
     <Text>state changed by useEffect: {String(state)}</Text>
     <Text>state changed by useUpdateEffect: {String(updateState)}</Text>
 
-    <Button mt='md' onClick={toggle}>
+    <Button mt="md" onClick={toggle}>
       Update state
     </Button>
   </>

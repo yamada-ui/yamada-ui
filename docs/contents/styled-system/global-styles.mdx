@@ -15,27 +15,27 @@ The actual defined values are as follows.
 ```ts title=global-style.ts
 export const globalStyle: UIStyle = {
   body: {
-    fontFamily: 'body',
-    bg: ['white', 'black'],
-    color: ['black', 'white'],
-    transitionProperty: 'background-color',
-    transitionDuration: 'normal',
-    lineHeight: 'base',
-    overflowX: 'hidden',
+    fontFamily: "body",
+    bg: ["white", "black"],
+    color: ["black", "white"],
+    transitionProperty: "background-color",
+    transitionDuration: "normal",
+    lineHeight: "base",
+    overflowX: "hidden",
   },
-  '*::placeholder': {
-    color: 'gray.500',
+  "*::placeholder": {
+    color: "gray.500",
   },
   _dark: {
-    '*::placeholder': {
-      color: 'whiteAlpha.400',
+    "*::placeholder": {
+      color: "whiteAlpha.400",
     },
   },
-  '*, *::before, &::after': {
-    borderWidth: '0',
-    borderStyle: 'solid',
-    borderColor: 'border',
-    wordWrap: 'break-word',
+  "*, *::before, &::after": {
+    borderWidth: "0",
+    borderStyle: "solid",
+    borderColor: "border",
+    wordWrap: "break-word",
   },
 }
 ```
@@ -47,12 +47,12 @@ You can customize global styles simply by changing the `styles.globalStyle` of t
 `styles.globalStyle` can define a style object or a function that returns a style object.
 
 ```tsx live=false
-import { UIProvider, extendTheme, UIStyle } from '@yamada-ui/react'
+import { UIProvider, extendTheme, UIStyle } from "@yamada-ui/react"
 
 const globalStyle: UIStyle = {
   body: {
-    bg: 'red.600',
-    color: 'white',
+    bg: "red.600",
+    color: "white",
   },
 }
 
@@ -70,12 +70,12 @@ const App = () => {
 In the case of a function, you can get `theme` and `colorMode`.
 
 ```tsx live=false
-import { UIProvider, extendTheme, UIStyle } from '@yamada-ui/react'
+import { UIProvider, extendTheme, UIStyle } from "@yamada-ui/react"
 
 const globalStyle: UIStyle = ({ theme, colorMode }) => ({
   body: {
-    bg: 'red.600',
-    color: 'white',
+    bg: "red.600",
+    color: "white",
   },
 })
 
@@ -105,12 +105,12 @@ If you want to use global styles, you need to do the following three things:
 3. Define global styles and pass them to `theme` of `ThemeProvider`.
 
 ```tsx live=false highlight={3,4,5,6,7,8,12,13,16}
-import { ThemeProvider, GlobalStyle } from '@yamada-ui/core'
+import { ThemeProvider, GlobalStyle } from "@yamada-ui/core"
 
 const globalStyle: UIStyle = {
   body: {
-    bg: ['white', 'black'],
-    color: ['black', 'white'],
+    bg: ["white", "black"],
+    color: ["black", "white"],
   },
 }
 
@@ -127,11 +127,11 @@ const App = () => {
 
 If you want to use the global styles of the [Default Theme](/styled-system/theming/default-theme), install `@yamada-ui/theme` and pass `defaultTheme` or `baseTheme` to `ThemeProvider`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/theme' />
+<PackageManagers packageNameOrCommand="@yamada-ui/theme" />
 
 ```tsx live=false highlight={7,8,11}
-import { ThemeProvider, GlobalStyle } from '@yamada-ui/core'
-import { defaultTheme, baseTheme } from '@yamada-ui/theme'
+import { ThemeProvider, GlobalStyle } from "@yamada-ui/core"
+import { defaultTheme, baseTheme } from "@yamada-ui/theme"
 
 const App = () => {
   return (

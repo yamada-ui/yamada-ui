@@ -19,7 +19,7 @@ A theme is a modifiable object where tokens of many properties such as component
 To set a [default theme](/styled-system/theming/default-theme) for your project, you need to add `UIProvider` to the root of your application.
 
 ```tsx live=false highlight={5,7}
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = () => {
   return (
@@ -39,10 +39,10 @@ The [default theme](/styled-system/theming/default-theme) is included within the
 If you want to customize the theme, pass `theme` to `UIProvider`.
 
 ```tsx live=false highlight={3,4,5,9}
-import { UIProvider, extendTheme } from '@yamada-ui/react'
+import { UIProvider, extendTheme } from "@yamada-ui/react"
 
 const customTheme = extendTheme({
-  spaces: { xs: '1rem', sm: '1.25rem', md: '1.5rem', normal: '2rem', lg: '2.5rem', xl: '3rem' },
+  spaces: { xs: "1rem", sm: "1.25rem", md: "1.5rem", normal: "2rem", lg: "2.5rem", xl: "3rem" },
 })()
 
 const App = () => {
@@ -77,20 +77,20 @@ The values that are actually set are as follows.
 ```ts
 export const semantics: ThemeSemantics = {
   colors: {
-    primary: 'blue.500',
-    secondary: 'purple.500',
-    success: 'emerald.500',
-    warning: 'orange.500',
-    danger: 'red.500',
-    link: 'sky.500',
+    primary: "blue.500",
+    secondary: "purple.500",
+    success: "emerald.500",
+    warning: "orange.500",
+    danger: "red.500",
+    link: "sky.500",
   },
   colorSchemes: {
-    primary: 'blue',
-    secondary: 'purple',
-    success: 'emerald',
-    warning: 'orange',
-    danger: 'red',
-    link: 'sky',
+    primary: "blue",
+    secondary: "purple",
+    success: "emerald",
+    warning: "orange",
+    danger: "red",
+    link: "sky",
   },
 }
 ```
@@ -100,15 +100,15 @@ Depending on the project, you may want to change the semantic tokens.
 For example, suppose you want to change `primary` to `pink`. In that case, you change `semantics`.
 
 ```tsx live=false highlight={4,5,6,7,8,9,10,11}
-import { UIProvider, extendTheme } from '@yamada-ui/react'
+import { UIProvider, extendTheme } from "@yamada-ui/react"
 
 const customTheme = extendTheme({
   semantics: {
     colors: {
-      primary: 'pink.500',
+      primary: "pink.500",
     },
     colorSchemes: {
-      primary: 'pink',
+      primary: "pink",
     },
   },
 })()
@@ -175,7 +175,7 @@ const onLoadingBackground = async () => {
 }
 
 return (
-  <Wrap gap='md'>
+  <Wrap gap="md">
     <Button onClick={onLoadingScreen}>Start screen loading</Button>
     <Button onClick={onLoadingPage}>Start page loading</Button>
     <Button onClick={onLoadingBackground}>Start background loading</Button>
@@ -204,8 +204,8 @@ return (
   <Button
     onClick={() =>
       notice({
-        title: 'Notification',
-        description: 'This is description.',
+        title: "Notification",
+        description: "This is description.",
       })
     }
   >
@@ -229,7 +229,7 @@ With Yamada UI, you can easily change styles just by passing `props` to the comp
 For example, you can write `p` for `padding`, and if you want to set both `margin-left` and `margin-right`, you can write `mx`.
 
 ```tsx
-<Box w='full' p='md' bg='warning' color='white'>
+<Box w="full" p="md" bg="warning" color="white">
   This is Box
 </Box>
 ```
@@ -238,19 +238,19 @@ For example, you can write `p` for `padding`, and if you want to set both `margi
 
 ```tsx
 <Box
-  position='relative'
-  boxSize='2xs'
-  bg='primary'
-  p='md'
-  color='white'
+  position="relative"
+  boxSize="2xs"
+  bg="primary"
+  p="md"
+  color="white"
   _after={{
     content: "'after'",
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    bg: 'secondary',
-    p: 'md',
-    color: 'white',
+    position: "absolute",
+    top: "0",
+    right: "0",
+    bg: "secondary",
+    p: "md",
+    color: "white",
   }}
 >
   Box
@@ -266,44 +266,44 @@ If you want to learn more about `Style props` and shortcodes, please check [here
 Many of the components provided by Yamada UI can have their styles changed by setting `variant`, `size`, and `colorScheme`.
 
 ```tsx
-<Wrap gap='md'>
+<Wrap gap="md">
   <Button>Basic</Button>
 
-  <Button variant='solid' colorScheme='green'>
+  <Button variant="solid" colorScheme="green">
     Solid
   </Button>
 
-  <Button variant='outline' colorScheme='orange'>
+  <Button variant="outline" colorScheme="orange">
     Outline
   </Button>
 
-  <Button variant='ghost' colorScheme='red'>
+  <Button variant="ghost" colorScheme="red">
     Ghost
   </Button>
 
-  <Button variant='link' colorScheme='sky'>
+  <Button variant="link" colorScheme="sky">
     Link
   </Button>
 
-  <Button variant='unstyled'>Unstyle</Button>
+  <Button variant="unstyled">Unstyle</Button>
 </Wrap>
 ```
 
 ```tsx
-<Wrap gap='md'>
-  <Button colorScheme='primary' size='xs'>
+<Wrap gap="md">
+  <Button colorScheme="primary" size="xs">
     X Small
   </Button>
 
-  <Button colorScheme='secondary' size='sm'>
+  <Button colorScheme="secondary" size="sm">
     Small
   </Button>
 
-  <Button colorScheme='warning' size='md'>
+  <Button colorScheme="warning" size="md">
     Medium
   </Button>
 
-  <Button colorScheme='danger' size='lg'>
+  <Button colorScheme="danger" size="lg">
     Large
   </Button>
 </Wrap>
@@ -320,10 +320,10 @@ All style `props` also accept objects. Let's start by changing the background co
 
 ```tsx
 <Box
-  w='full'
-  p='md'
-  bg={{ base: 'primary', '2xl': 'secondary', xl: 'warning', lg: 'danger' }}
-  color='white'
+  w="full"
+  p="md"
+  bg={{ base: "primary", "2xl": "secondary", xl: "warning", lg: "danger" }}
+  color="white"
 >
   This is Box
 </Box>
@@ -371,11 +371,11 @@ Here are the actual defined values.
 
 ```ts title=breakpoints.ts
 export const breakpoints = {
-  sm: '30em', // 480px
-  md: '48em', // 768px
-  lg: '61em', // 976px
-  xl: '80em', // 1280px
-  '2xl': '90em', // 1440px
+  sm: "30em", // 480px
+  md: "48em", // 768px
+  lg: "61em", // 976px
+  xl: "80em", // 1280px
+  "2xl": "90em", // 1440px
 }
 ```
 
@@ -395,7 +395,7 @@ All `props` of the style also accept arrays. First, let's change the background 
 - Define the value of the style you want to set in dark mode as the second argument.
 
 ```tsx
-<Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
+<Box w="full" p="md" bg={["primary", "secondary"]} color="white">
   This is Box
 </Box>
 ```
@@ -411,7 +411,7 @@ Here are the actual defined values.
 
 ```ts title=config.ts
 export const config: ThemeConfig = {
-  initialColorMode: 'light',
+  initialColorMode: "light",
 }
 ```
 
@@ -438,12 +438,12 @@ If you want to change the color mode within the application, use `changeColorMod
 const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
 return (
-  <Wrap gap='md'>
-    <Button onClick={() => changeColorMode('light')}>Light Mode</Button>
-    <Button onClick={() => changeColorMode('dark')}>Dark Mode</Button>
-    <Button onClick={() => changeColorMode('system')}>System</Button>
+  <Wrap gap="md">
+    <Button onClick={() => changeColorMode("light")}>Light Mode</Button>
+    <Button onClick={() => changeColorMode("dark")}>Dark Mode</Button>
+    <Button onClick={() => changeColorMode("system")}>System</Button>
     <Button onClick={toggleColorMode}>
-      Switch to {colorMode === 'light' ? 'Dark' : 'Light'} Mode
+      Switch to {colorMode === "light" ? "Dark" : "Light"} Mode
     </Button>
   </Wrap>
 )
@@ -478,31 +478,31 @@ The animation settings are based on [@keyframes](https://developer.mozilla.org/e
 const animation = useAnimation({
   keyframes: {
     from: {
-      transform: 'rotate(0)',
+      transform: "rotate(0)",
     },
     to: {
-      transform: 'rotate(359deg)',
+      transform: "rotate(359deg)",
     },
   },
-  duration: '0.8s',
-  iterationCount: 'infinite',
-  timingFunction: 'linear',
+  duration: "0.8s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
 })
 
 return (
-  <Center p='lg'>
+  <Center p="lg">
     <Center
-      w='150px'
-      h='150px'
-      p='1'
-      rounded='50%'
+      w="150px"
+      h="150px"
+      p="1"
+      rounded="50%"
       bgGradient={[
-        'linear(blackAlpha.50, blackAlpha.500)',
-        'linear(whiteAlpha.50, whiteAlpha.500)',
+        "linear(blackAlpha.50, blackAlpha.500)",
+        "linear(whiteAlpha.50, whiteAlpha.500)",
       ]}
       animation={animation}
     >
-      <Box w='full' h='full' rounded='50%' bg={['white', 'black']} />
+      <Box w="full" h="full" rounded="50%" bg={["white", "black"]} />
     </Center>
   </Center>
 )
@@ -519,16 +519,16 @@ There are many `props` for the `Motion` component. This time, we will briefly in
 In this case, we are setting `scale: 1.1` and `scale: 0.9` to enlarge and reduce the size.
 
 ```tsx
-<Center p='lg'>
+<Center p="lg">
   <Motion
-    as='button'
+    as="button"
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.9 }}
     whileFocus={{ scale: 1.1 }}
-    p='md'
-    rounded='md'
-    bg='primary'
-    color='white'
+    p="md"
+    rounded="md"
+    bg="primary"
+    color="white"
   >
     Click me!
   </Motion>
@@ -554,20 +554,20 @@ To you who have become a `Regular Yamada`, Yamada gives you these words.
 Want to learn more about Yamada UI, including its applications and themes? 😎
 
 <CardContainer>
-  <LinkCard href='/getting-started/advanced' />
+  <LinkCard href="/getting-started/advanced" />
   <LinkCard
-    href='/styled-system/theming'
-    title='Learn about Theming'
-    description='Learn about the default theme of Yamada UI, and how to create and modify the values of colors, fonts, and other theme elements.'
+    href="/styled-system/theming"
+    title="Learn about Theming"
+    description="Learn about the default theme of Yamada UI, and how to create and modify the values of colors, fonts, and other theme elements."
   />
   <LinkCard
-    href='/components'
-    title='Explore Components'
-    description='Yamada UI offers over 100 flexible components. All components support animations and dark mode.'
+    href="/components"
+    title="Explore Components"
+    description="Yamada UI offers over 100 flexible components. All components support animations and dark mode."
   />
   <LinkCard
-    href='https://github.com/hirotomoyamada/yamada-ui'
-    title='Explore the Source Code'
-    description='The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star.'
+    href="https://github.com/hirotomoyamada/yamada-ui"
+    title="Explore the Source Code"
+    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>

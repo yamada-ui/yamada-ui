@@ -23,7 +23,7 @@ Yamada UIのすべてのコンポーネントは、ダークモードをサポ�
 
 ```ts title=config.ts
 export const config: ThemeConfig = {
-  initialColorMode: 'light',
+  initialColorMode: "light",
 }
 ```
 
@@ -34,10 +34,10 @@ export const config: ThemeConfig = {
   - `system`: オペレーションシステム(OS)からカラーモードを取得します。
 
 ```tsx live=false
-import { UIProvider, extendConfig } from '@yamada-ui/react'
+import { UIProvider, extendConfig } from "@yamada-ui/react"
 
 export const config: ThemeConfig = {
-  initialColorMode: 'system',
+  initialColorMode: "system",
 }
 
 const customConfig = extendConfig(config)
@@ -60,11 +60,11 @@ const App = () => {
 #### Create React Appの場合
 
 ```tsx live=false title=index.tsx highlight={3,11}
-import { createRoot } from 'react-dom/client'
-import { App } from './app'
-import { UIProvider, ColorModeScript, defaultConfig } from '@yamada-ui/react'
+import { createRoot } from "react-dom/client"
+import { App } from "./app"
+import { UIProvider, ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
-const container = document.getElementById('app')
+const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
@@ -86,12 +86,12 @@ root.render(
 #### Next.jsの場合
 
 ```tsx live=false title=_document.tsx highlight={2,10}
-import { Html, Head, Main, NextScript } from 'next/document'
-import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head />
 
       <body>
@@ -107,18 +107,18 @@ export default function Document() {
 プロジェクトによっては、`cookies`から値を取得する場合があるかもしれません。その場合は、`cookieStorageManager`を使用します。
 
 ```tsx live=false title=_document.tsx highlight={2,11,12}
-import { Html, Head, Main, NextScript } from 'next/document'
-import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head />
 
       <body>
         <ColorModeScript
-          type='cookie'
-          nonce='testing'
+          type="cookie"
+          nonce="testing"
           initialColorMode={defaultConfig.initialColorMode}
         />
         <Main />
@@ -130,8 +130,8 @@ export default function Document() {
 ```
 
 ```tsx live=false title=_app.tsx highlight={2,4,8}
-import type { AppProps } from 'next/app'
-import { UIProvider, colorModeManager } from '@yamada-ui/react'
+import type { AppProps } from "next/app"
+import { UIProvider, colorModeManager } from "@yamada-ui/react"
 
 const { cookieStorageManager } = colorModeManager
 
@@ -165,12 +165,12 @@ Next.jsなどのサーバー側でレンダリングされるサイトの場合�
 複数のページで`getServerSideProps`を共通化するために、`getServerSideCommonProps`を定義します。
 
 ```ts live=false
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext } from "next"
 
 export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => {
   return {
     props: {
-      cookies: req.headers.cookie ?? '',
+      cookies: req.headers.cookie ?? "",
     },
   }
 }
@@ -181,14 +181,14 @@ export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => 
 `UIProvider`の`colorModeManager`に`cookieStorageSSR`を渡します。
 
 ```tsx live=false title=_app.tsx highlight={2,4,7,8,11}
-import type { AppProps } from 'next/app'
-import { UIProvider, colorModeManager } from '@yamada-ui/react'
+import type { AppProps } from "next/app"
+import { UIProvider, colorModeManager } from "@yamada-ui/react"
 
 const { cookieStorageSSR, localStorage } = colorModeManager
 
 export default function App({ Component, pageProps }: AppProps) {
   const { cookies } = pageProps
-  const colorModeManager = typeof cookies === 'string' ? cookieStorageSSR(cookies) : localStorage
+  const colorModeManager = typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
 
   return (
     <UIProvider colorModeManager={colorModeManager}>
@@ -203,8 +203,8 @@ export default function App({ Component, pageProps }: AppProps) {
 先ほど作成した`getServerSideCommonProps`を各ページに追加します。
 
 ```tsx live=false title=index.tsx highlight={1,8}
-import { getServerSideCommonProps } from '../get-server-side-props.ts'
-import { Button } from '@yamada-ui/react'
+import { getServerSideCommonProps } from "../get-server-side-props.ts"
+import { Button } from "@yamada-ui/react"
 
 export default function Index() {
   return <Button>Click me!</Button>
@@ -221,7 +221,7 @@ export const getServerSideProps = getServerSideCommonProps
 - 第2引数にダークモードに設定したいスタイルの値を定義します。
 
 ```tsx
-<Box w='full' p='md' bg={['primary', 'secondary']} color='white'>
+<Box w="full" p="md" bg={["primary", "secondary"]} color="white">
   This is Box
 </Box>
 ```
@@ -237,12 +237,12 @@ export const getServerSideProps = getServerSideCommonProps
 const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
 return (
-  <Wrap gap='md'>
-    <Button onClick={() => changeColorMode('light')}>ライトモード</Button>
-    <Button onClick={() => changeColorMode('dark')}>ダークモード</Button>
-    <Button onClick={() => changeColorMode('system')}>システム</Button>
+  <Wrap gap="md">
+    <Button onClick={() => changeColorMode("light")}>ライトモード</Button>
+    <Button onClick={() => changeColorMode("dark")}>ダークモード</Button>
+    <Button onClick={() => changeColorMode("system")}>システム</Button>
     <Button onClick={toggleColorMode}>
-      {colorMode === 'light' ? 'ダーク' : 'ライト'}モードに切り替える
+      {colorMode === "light" ? "ダーク" : "ライト"}モードに切り替える
     </Button>
   </Wrap>
 )
@@ -277,11 +277,11 @@ return (
 
 ```tsx functional=true
 const { colorMode } = useColorMode()
-const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
-const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+const bg = useColorModeValue("blackAlpha.800", "whiteAlpha.800")
+const color = useColorModeValue("whiteAlpha.800", "blackAlpha.800")
 
 return (
-  <Box p='md' bg={bg} color={color}>
+  <Box p="md" bg={bg} color={color}>
     The current colorMode is "{colorMode}"
   </Box>
 )

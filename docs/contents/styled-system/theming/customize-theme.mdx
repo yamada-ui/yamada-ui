@@ -30,7 +30,7 @@ Considering that the theme's tokens and styles may be added or changed during de
 ```
 
 ```ts title=./theme/index.ts
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
 // import tokens from './tokens'
@@ -55,11 +55,11 @@ This time, let's try changing new and existing tokens in `colors`.
 Create `colors.ts` under `tokens`.
 
 ```ts title=./theme/tokens/colors.ts
-import { ThemeTokens } from '@yamada-ui/react'
+import { ThemeTokens } from "@yamada-ui/react"
 
 export const colors: ThemeTokens = {
-  banner: '#9d38a0',
-  black: ['#1F2123', '#101112'],
+  banner: "#9d38a0",
+  black: ["#1F2123", "#101112"],
 }
 ```
 
@@ -70,7 +70,7 @@ We have added a new `banner` to `colors` and changed `black`. Also, by defining 
 Create `index.ts` and export the `colors` you created earlier.
 
 ```ts title=./theme/tokens/index.ts
-import { colors } from './colors'
+import { colors } from "./colors"
 
 export default { colors }
 ```
@@ -78,10 +78,10 @@ export default { colors }
 Include `tokens` in `customTheme`.
 
 ```ts title=./theme/index.ts highlight={4,9}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
-import tokens from './tokens'
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   // styles,
@@ -95,10 +95,10 @@ export default extendTheme(customTheme)()
 If you don't want to inherit only `colors` from the default theme, pass `omit` to `extendTheme`.
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
-import tokens from './tokens'
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   // styles,
@@ -106,7 +106,7 @@ const customTheme: UsageTheme = {
   ...tokens,
 }
 
-export default extendTheme(customTheme)({ omit: ['colors'] })
+export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
 ## Changing Semantic Tokens
@@ -118,20 +118,20 @@ Here are the actual values that are set.
 ```ts
 export const semantics: ThemeSemantics = {
   colors: {
-    primary: 'blue.500',
-    secondary: 'purple.500',
-    success: 'emerald.500',
-    warning: 'orange.500',
-    danger: 'red.500',
-    link: 'sky.500',
+    primary: "blue.500",
+    secondary: "purple.500",
+    success: "emerald.500",
+    warning: "orange.500",
+    danger: "red.500",
+    link: "sky.500",
   },
   colorSchemes: {
-    primary: 'blue',
-    secondary: 'purple',
-    success: 'emerald',
-    warning: 'orange',
-    danger: 'red',
-    link: 'sky',
+    primary: "blue",
+    secondary: "purple",
+    success: "emerald",
+    warning: "orange",
+    danger: "red",
+    link: "sky",
   },
 }
 ```
@@ -141,14 +141,14 @@ This time, let's try changing the default color scheme.
 Create `semantics.ts` under `theme`.
 
 ```ts title=./theme/semantics.ts
-import { ThemeSemantics } from '@yamada-ui/react'
+import { ThemeSemantics } from "@yamada-ui/react"
 
 export const semantics: ThemeSemantics = {
   colors: {
-    primary: 'pink.500',
+    primary: "pink.500",
   },
   colorSchemes: {
-    primary: 'pink',
+    primary: "pink",
   },
 }
 ```
@@ -156,11 +156,11 @@ export const semantics: ThemeSemantics = {
 Include `semantics` in `customTheme`.
 
 ```ts title=./theme/index.ts highlight={5,10}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 // import styles from './styles'
 // import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   // styles,
@@ -185,11 +185,11 @@ This time, let's try changing the `globalStyle` that sets the style of `body`.
 Create `global-style.ts` under `styles`.
 
 ```ts title=./theme/styles/global-style.ts
-import { UIStyle } from '@yamada-ui/react'
+import { UIStyle } from "@yamada-ui/react"
 
 export const globalStyle: UIStyle = {
   body: {
-    bg: ['black', 'white'],
+    bg: ["black", "white"],
   },
 }
 ```
@@ -201,7 +201,7 @@ The background of `body` is being changed. Also, by defining an array, you can s
 Create `index.ts` and export the `globalStyle` you just created.
 
 ```ts title=./theme/styles/index.ts
-import { globalStyle } from './global-style'
+import { globalStyle } from "./global-style"
 
 export default { globalStyle }
 ```
@@ -209,11 +209,11 @@ export default { globalStyle }
 Include `styles` in `customTheme`.
 
 ```ts title=./theme/index.ts highlight={2,8}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
 // import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   styles,
@@ -228,11 +228,11 @@ export default extendTheme(customTheme)()
 If you don't want to inherit only `styles` from the default theme, pass `omit` to `extendTheme`.
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
 // import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   styles,
@@ -241,7 +241,7 @@ const customTheme: UsageTheme = {
   ...tokens,
 }
 
-export default extendTheme(customTheme)({ omit: ['styles'] })
+export default extendTheme(customTheme)({ omit: ["styles"] })
 ```
 
 :::note
@@ -267,29 +267,29 @@ This time, let's change the `Container` component.
 Create `container.ts` under `components`.
 
 ```ts title=./theme/components/container.ts
-import { ComponentStyle } from '@yamada-ui/react'
+import { ComponentStyle } from "@yamada-ui/react"
 
 export const Container: ComponentStyle = {
   baseStyle: {
-    bg: 'green.100',
+    bg: "green.100",
   },
   sizes: {
-    sm: { p: 'sm', fontSize: 'sm' },
-    md: { p: 'md', fontSize: 'md' },
-    lg: { p: 'lg', fontSize: 'lg' },
+    sm: { p: "sm", fontSize: "sm" },
+    md: { p: "md", fontSize: "md" },
+    lg: { p: "lg", fontSize: "lg" },
   },
   variants: {
-    'wtih-border-solid': {
-      borderWidth: '1px',
+    "wtih-border-solid": {
+      borderWidth: "1px",
     },
-    'wtih-border-dotted': {
-      borderWidth: '1px',
-      borderStyle: 'dotted',
+    "wtih-border-dotted": {
+      borderWidth: "1px",
+      borderStyle: "dotted",
     },
   },
   defaultProps: {
-    size: 'md',
-    variant: 'wtih-border-solid',
+    size: "md",
+    variant: "wtih-border-solid",
   },
 }
 ```
@@ -301,7 +301,7 @@ The background color is changed, each size is defined in `sizes`, and each varia
 Create `index.ts` and export the `Container` you just created.
 
 ```ts title=./theme/components/index.ts
-import { Container } from './container'
+import { Container } from "./container"
 
 export default { Container }
 ```
@@ -309,11 +309,11 @@ export default { Container }
 Include `components` in `customTheme`.
 
 ```ts title=./theme/index.ts highlight={3,9}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
-import components from './components'
-import tokens from './tokens'
-import { semantics } from './semantics'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
+import components from "./components"
+import tokens from "./tokens"
+import { semantics } from "./semantics"
 
 const customTheme: UsageTheme = {
   styles,
@@ -328,11 +328,11 @@ export default extendTheme(customTheme)()
 Now, the background color of `Container` is changed, and the style is changed by passing `size` or `variant`.
 
 ```tsx live=false
-import { Container } from '@yamada-ui/react'
+import { Container } from "@yamada-ui/react"
 
 const Demo = () => {
   return (
-    <Container size='sm' variant='with-border-dotted'>
+    <Container size="sm" variant="with-border-dotted">
       This is Container
     </Container>
   )
@@ -362,7 +362,7 @@ Create a new theme by inheriting the default theme. It is also possible to pass 
 #### Merging multiple themes
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const firstTheme: UsageTheme = {}
 const secondTheme: UsageTheme = {}
@@ -373,7 +373,7 @@ export default extendTheme(firstTheme, secondTheme)()
 #### Not inheriting the default theme
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const firstTheme: UsageTheme = {}
 const secondTheme: UsageTheme = {}
@@ -384,21 +384,21 @@ export default extendTheme(firstTheme, secondTheme)({ merge: false })
 #### Inheriting from the default theme excluding specific tokens
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const customTheme: UsageTheme = {}
 
-export default extendTheme(customTheme)({ omit: ['colors'] })
+export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
 #### Inheriting only specific tokens from the default theme
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendTheme, UsageTheme } from '@yamada-ui/react'
+import { extendTheme, UsageTheme } from "@yamada-ui/react"
 
 const customTheme: UsageTheme = {}
 
-export default extendTheme(customTheme)({ pick: ['spaces'] })
+export default extendTheme(customTheme)({ pick: ["spaces"] })
 ```
 
 ### Using `extendBaseTheme`
@@ -406,9 +406,9 @@ export default extendTheme(customTheme)({ pick: ['spaces'] })
 This creates a new theme that inherits only the tokens such as global styles and colors of the default theme. It is also possible to pass multiple objects and specify options.
 
 ```ts title=./theme/index.ts highlight={12}
-import { extendBaseTheme, UsageTheme } from '@yamada-ui/react'
-import styles from './styles'
-import tokens from './tokens'
+import { extendBaseTheme, UsageTheme } from "@yamada-ui/react"
+import styles from "./styles"
+import tokens from "./tokens"
 
 const customTheme: UsageTheme = {
   styles,
@@ -427,9 +427,9 @@ export default extendBaseTheme(customTheme)()
 Create a new style by inheriting `globalStyle` or `resetStyle`.
 
 ```ts
-import { extendStyle, UIStyle } from '@yamada-ui/react'
+import { extendStyle, UIStyle } from "@yamada-ui/react"
 
-const globalStyle: UIStyle = extendStyle('globalStyle', {
+const globalStyle: UIStyle = extendStyle("globalStyle", {
   /**
    * Define additional styles
    */
@@ -441,9 +441,9 @@ const globalStyle: UIStyle = extendStyle('globalStyle', {
 This creates a new token by inheriting a specific token.
 
 ```ts
-import { extendToken, ThemeTokens } from '@yamada-ui/react'
+import { extendToken, ThemeTokens } from "@yamada-ui/react"
 
-const colors: ThemeTokens = extendToken('colors', {
+const colors: ThemeTokens = extendToken("colors", {
   /**
    * Define additional tokens
    */
@@ -455,9 +455,9 @@ const colors: ThemeTokens = extendToken('colors', {
 This creates the style of a new component by inheriting the style of a specific component.
 
 ```ts
-import { extendComponent, ComponentStyle } from '@yamada-ui/react'
+import { extendComponent, ComponentStyle } from "@yamada-ui/react"
 
-const Button: ComponentStyle = extendComponent('Button', {
+const Button: ComponentStyle = extendComponent("Button", {
   /**
    * Define additional `baseStyle` and `sizes`
    */
@@ -469,7 +469,7 @@ const Button: ComponentStyle = extendComponent('Button', {
 This creates the size of a new component by inheriting the size of a specific component.
 
 ```ts
-import { extendComponentSize, ComponentStyle } from '@yamada-ui/react'
+import { extendComponentSize, ComponentStyle } from "@yamada-ui/react"
 
 const Tag: ComponentStyle = {
   baseStyle: {
@@ -477,7 +477,7 @@ const Tag: ComponentStyle = {
      * Define a new style
      */
   },
-  sizes: extendComponentSize('Tag', {
+  sizes: extendComponentSize("Tag", {
     /**
      * Define additional sizes
      */
@@ -494,7 +494,7 @@ You can use this function when you only want to inherit `sizes`, but not `baseSt
 This creates a new component variant by inheriting a specific component's variant.
 
 ```ts
-import { extendComponentVariant, ComponentStyle } from '@yamada-ui/react'
+import { extendComponentVariant, ComponentStyle } from "@yamada-ui/react"
 
 const Tag: ComponentStyle = {
   baseStyle: {
@@ -502,7 +502,7 @@ const Tag: ComponentStyle = {
      * Define new style
      */
   },
-  variants: extendComponentVariant('Tag', {
+  variants: extendComponentVariant("Tag", {
     /**
      * Define additional variants
      */
@@ -519,7 +519,7 @@ You can use this function when you only want to inherit `variants`, but not `bas
 This creates the `props` of a new component by inheriting the `props` of a specific component.
 
 ```ts
-import { extendComponentDefaultProps, ComponentStyle } from '@yamada-ui/react'
+import { extendComponentDefaultProps, ComponentStyle } from "@yamada-ui/react"
 
 const Tag: ComponentStyle = {
   baseStyle: {
@@ -527,7 +527,7 @@ const Tag: ComponentStyle = {
      * Define new style
      */
   },
-  defaultProps: extendComponentDefaultProps('Tag', {
+  defaultProps: extendComponentDefaultProps("Tag", {
     /**
      * Define additional props
      */
@@ -544,7 +544,7 @@ You can use this function when you don't want to inherit `baseStyle` or `sizes`,
 It changes the default size of `all` or `some` components.
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultSize } from '@yamada-ui/react'
+import { extendTheme, withDefaultSize } from "@yamada-ui/react"
 
 /**
  * omitted
@@ -553,8 +553,8 @@ import { extendTheme, withDefaultSize } from '@yamada-ui/react'
 export default extendTheme(
   customTheme,
   withDefaultSize({
-    size: 'lg',
-    components: ['Badge', 'Tag', 'Button'], // If you pass an empty array, it will be set for all components.
+    size: "lg",
+    components: ["Badge", "Tag", "Button"], // If you pass an empty array, it will be set for all components.
   }),
 )()
 ```
@@ -564,7 +564,7 @@ export default extendTheme(
 Changes the default variant of `all` or `some` components.
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultVariant } from '@yamada-ui/react'
+import { extendTheme, withDefaultVariant } from "@yamada-ui/react"
 
 /**
  * omitted
@@ -573,8 +573,8 @@ import { extendTheme, withDefaultVariant } from '@yamada-ui/react'
 export default extendTheme(
   customTheme,
   withDefaultVariant({
-    variant: 'solid',
-    components: ['Badge', 'Tag', 'Button'], // If you pass an empty array, it will be set for all components.
+    variant: "solid",
+    components: ["Badge", "Tag", "Button"], // If you pass an empty array, it will be set for all components.
   }),
 )()
 ```
@@ -584,7 +584,7 @@ export default extendTheme(
 Changes the default color scheme of `all` or `some` components.
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
+import { extendTheme, withDefaultColorScheme } from "@yamada-ui/react"
 
 /**
  * omitted
@@ -593,8 +593,8 @@ import { extendTheme, withDefaultColorScheme } from '@yamada-ui/react'
 export default extendTheme(
   customTheme,
   withDefaultColorScheme({
-    colorScheme: 'primary',
-    components: ['Badge', 'Tag', 'Button'], // If you pass an empty array, it will be set for all components.
+    colorScheme: "primary",
+    components: ["Badge", "Tag", "Button"], // If you pass an empty array, it will be set for all components.
   }),
 )()
 ```
@@ -604,7 +604,7 @@ export default extendTheme(
 It changes all or part of the default `props` of the components at once.
 
 ```ts title=./theme/index.ts
-import { extendTheme, withDefaultProps } from '@yamada-ui/react'
+import { extendTheme, withDefaultProps } from "@yamada-ui/react"
 
 /**
  * omitted
@@ -614,11 +614,11 @@ export default extendTheme(
   customTheme,
   withDefaultProps({
     defaultProps: {
-      size: 'lg',
-      variant: 'solid',
-      colorScheme: 'primary',
+      size: "lg",
+      variant: "solid",
+      colorScheme: "primary",
     },
-    components: ['Badge', 'Tag', 'Button'], // If you pass an empty array, it will be set for all components.
+    components: ["Badge", "Tag", "Button"], // If you pass an empty array, it will be set for all components.
   }),
 )()
 ```

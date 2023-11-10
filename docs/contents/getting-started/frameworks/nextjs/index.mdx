@@ -14,45 +14,45 @@ Run one of the following commands in the terminal.
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: 'pnpm create next-app my-app --typescript',
-    npm: 'npx create-next-app my-app --typescript',
-    yarn: 'yarn create next-app my-app --typescript',
+    pnpm: "pnpm create next-app my-app --typescript",
+    npm: "npx create-next-app my-app --typescript",
+    yarn: "yarn create next-app my-app --typescript",
   }}
 />
 
 With Yamada UI, you can use most components and hooks just by installing `@yamada-ui/react`.
 
-<PackageManagers packageNameOrCommand='@yamada-ui/react' />
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
 If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
 <SelectPackageManagers
   packages={[
     {
-      name: '@yamada-ui/table',
-      description: 'Provides a convenient table component using `@tanstack/react-table`.',
+      name: "@yamada-ui/table",
+      description: "Provides a convenient table component using `@tanstack/react-table`.",
       isDefaultCheck: true,
     },
     {
-      name: '@yamada-ui/calendar',
-      description: 'Provides a convenient calendar and date picker component using `dayjs`.',
+      name: "@yamada-ui/calendar",
+      description: "Provides a convenient calendar and date picker component using `dayjs`.",
     },
     {
-      name: '@yamada-ui/carousel',
-      description: 'Provides a convenient carousel component using `embla-carousel-react`.',
+      name: "@yamada-ui/carousel",
+      description: "Provides a convenient carousel component using `embla-carousel-react`.",
     },
     {
-      name: '@yamada-ui/dropzone',
-      description: 'Provides a convenient dropzone component using `react-dropzone`.',
+      name: "@yamada-ui/dropzone",
+      description: "Provides a convenient dropzone component using `react-dropzone`.",
     },
     {
-      name: '@yamada-ui/markdown',
+      name: "@yamada-ui/markdown",
       description:
-        'Provides a convenient markdown component using `react-markdown` and `react-syntax-highlighter`.',
+        "Provides a convenient markdown component using `react-markdown` and `react-syntax-highlighter`.",
     },
     {
-      name: '@yamada-ui/fontawesome',
-      description: 'Provides a component for conveniently using `Font Awesome`.',
+      name: "@yamada-ui/fontawesome",
+      description: "Provides a component for conveniently using `Font Awesome`.",
     },
   ]}
 />
@@ -67,8 +67,8 @@ If you only want to use the Yamada UI style system, please check [here](/getting
 After installing Yamada UI, add `UIProvider`.
 
 ```tsx live=false title=_app.tsx highlight={6,8}
-import type { AppProps } from 'next/app'
-import { UIProvider } from '@yamada-ui/react'
+import type { AppProps } from "next/app"
+import { UIProvider } from "@yamada-ui/react"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -94,12 +94,12 @@ In order for the color mode to function properly, you need to add `ColorModeScri
 The reason is that the color mode is implemented using `localStorage` or `cookies`, and it is necessary to synchronize correctly at the time of page loading.
 
 ```tsx live=false title=_document.tsx highlight={10}
-import { Html, Head, Main, NextScript } from 'next/document'
-import { ColorModeScript, defaultConfig } from '@yamada-ui/react'
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
 export default function Document() {
   return (
-    <Html lang='en'>
+    <Html lang="en">
       <Head />
 
       <body>
@@ -121,7 +121,7 @@ Please pass the same `initialColorMode` as the config to the `initialColorMode` 
 Once you've added the `UIProvider`, call the component within your application.
 
 ```tsx live=false title=index.tsx
-import { Button } from '@yamada-ui/react'
+import { Button } from "@yamada-ui/react"
 
 export default function Home() {
   return <Button>Click me!</Button>

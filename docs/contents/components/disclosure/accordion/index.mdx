@@ -14,8 +14,8 @@ import { Accordion, AccordionItem, AccordionLabel, AccordionPanel } from "@yamad
 ```
 
 - `Accordion`: A wrapper component that controls the child elements (`AccordionItem`).
-- `AccordionItem`: The component for each item.
-- `AccordionLabel`: The component for the button that toggles the expansion and collapse state of an item.
+- `AccordionItem`: The component for an item.
+- `AccordionLabel`: The component for a button that toggles the expansion and collapse state of an item.
 - `AccordionPanel`: The component that displays the details of an item.
 
 :::note
@@ -255,7 +255,7 @@ To disable a specific item, set `isDisabled`.
 
 ### Using `AccordionPanel`
 
-If `AccordionItem` does not have `AccordionPanel` in `children`, it automatically wraps `children` with `AccordionPanel`. If you want to customize `AccordionPanel`, set `AccordionPanel` to `children`.
+If `AccordionPanel` is not present in `children`, `AccordionItem` automatically wraps `children` with `AccordionPanel`. If you want to customize `AccordionPanel`, set `AccordionPanel` to `children`.
 
 ```tsx
 <Accordion>

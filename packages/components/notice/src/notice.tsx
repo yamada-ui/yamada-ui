@@ -340,20 +340,28 @@ const Notice: FC<NoticeProps> = ({
     >
       <AlertIcon
         variant={icon?.variant}
+        className='ui-notice__icon'
         {...(icon?.color ? { color: icon.color } : {})}
       >
         {icon?.children}
       </AlertIcon>
 
       <ui.div flex='1'>
-        {title ? <AlertTitle noOfLines={1}>{title}</AlertTitle> : null}
+        {title ? (
+          <AlertTitle className='ui-notice__title' noOfLines={1}>
+            {title}
+          </AlertTitle>
+        ) : null}
         {description ? (
-          <AlertDescription noOfLines={3}>{description}</AlertDescription>
+          <AlertDescription className='ui-notice__desc' noOfLines={3}>
+            {description}
+          </AlertDescription>
         ) : null}
       </ui.div>
 
       {isClosable ? (
         <CloseButton
+          className='ui-notice__close-button'
           size='sm'
           onClick={onClose}
           position='absolute'

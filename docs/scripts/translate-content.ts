@@ -52,6 +52,28 @@ const getOutPath = (path: string, lang: keyof typeof LANG_MAP) =>
 const getResultList = (map: Map<string, string>) =>
   Array.from(map.entries()).map(([path, duration]) => `${path}: ${duration}s\n`)
 
+const extractCodeBlocks = (content: string) => {
+  const reg = /```[\s\S]*?```/g
+  const codeBlocks = Array.from(content.match(reg) || [])
+  const placeholders = codeBlocks.map((_, index) => `CODEBLOCK_PLACEHOLDER_${index}`)
+
+  const resolvedContent = content.replace(reg, (match) => {
+    const index = codeBlocks.indexOf(match)
+
+    return `CODEBLOCK_PLACEHOLDER_${index}`
+  })
+
+  return { resolvedContent, codeBlocks, placeholders }
+}
+
+const restoreCodeBlocks = (content: string, codeBlocks: string[], placeholders: string[]) => {
+  placeholders.forEach((placeholder, index) => {
+    content = content.replace(placeholder, codeBlocks[index])
+  })
+
+  return content
+}
+
 const translateContent = async ({
   content,
   lang,
@@ -67,6 +89,8 @@ const translateContent = async ({
     const from = `from ${LANG_MAP[lang === "en" ? "ja" : "en"]}`
     const to = `to ${LANG_MAP[lang]}`
 
+    const { resolvedContent, codeBlocks, placeholders } = extractCodeBlocks(content)
+
     const messages: ChatCompletionMessageParam[] = [
       {
         role: "system",
@@ -78,7 +102,7 @@ const translateContent = async ({
           `- For short sentences, use "Usage" instead of "How to Use" as much as possible.  Also, when prompting for a hyperlink, use "please check [<page-title> or 'here'](<url>)".`,
         ].join("\n"),
       },
-      { role: "user", content },
+      { role: "user", content: resolvedContent },
     ]
 
     const { choices } = await openai.chat.completions.create({
@@ -87,7 +111,7 @@ const translateContent = async ({
       temperature: 0,
     })
 
-    return choices[0].message?.content
+    return restoreCodeBlocks(choices[0].message?.content, codeBlocks, placeholders)
   } catch (e) {
     onRetry?.(retry)
 

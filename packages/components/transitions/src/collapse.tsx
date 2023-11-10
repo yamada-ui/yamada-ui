@@ -127,11 +127,11 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
           },
           exit: {
             height: {
-              duration: duration ?? 0.2,
+              duration: duration ?? 0.3,
               ease: MOTION_TRANSITION_EASINGS.ease,
             },
             opacity: {
-              duration: duration ?? 0.3,
+              duration: duration ?? 0.4,
               ease: MOTION_TRANSITION_EASINGS.ease,
             },
           },

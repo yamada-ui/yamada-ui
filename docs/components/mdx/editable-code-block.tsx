@@ -1,4 +1,4 @@
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faMinus, faPlus, faPoo } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
@@ -12,6 +12,7 @@ import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
 import { theme as defaultTheme } from "theme"
+
 const wait = (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
@@ -47,6 +48,7 @@ const scope = {
   UIProvider,
   FontAwesomeIcon,
   // Font Awesome Icons
+  faPoo,
   faMinus,
   faPlus,
   wait,

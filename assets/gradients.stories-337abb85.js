@@ -1,5 +1,0 @@
-import{M as a}from"./index-f8a9533e.js";import{a as r,j as m,F as c}from"./jsx-runtime-03b4ddbf.js";import{u as s}from"./index-a1cf9e47.js";import"./iframe-e54a9aeb.js";import"../sb-preview/runtime.js";import"./index-76fb7be0.js";import"./_commonjsHelpers-de833af9.js";import"./index-d3ea75b5.js";import"./index-13a69483.js";import"./index-356e4a49.js";function o(e){const t=Object.assign({h1:"h1",pre:"pre",code:"code"},s(),e.components);return m(c,{children:[r(a,{title:"Documents / Theme / Gradients"}),`
-`,r(t.h1,{id:"gradients",children:"Gradients"}),`
-`,r(t.pre,{children:r(t.code,{className:"language-ts",children:`Not defined
-`})})]})}function i(e={}){const{wrapper:t}=Object.assign({},s(),e.components);return t?r(t,{...e,children:r(o,{...e})}):o(e)}const p=()=>{throw new Error("Docs-only story")};p.parameters={docsOnly:!0};const n={title:"Documents / Theme / Gradients",tags:["stories-mdx"],includeStories:["__page"]};n.parameters=n.parameters||{};n.parameters.docs={...n.parameters.docs||{},page:i};const j=["__page"];export{j as __namedExportsOrder,p as __page,n as default};
-//# sourceMappingURL=gradients.stories-337abb85.js.map

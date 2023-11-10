@@ -383,7 +383,7 @@ export const PinInputField = forwardRef<PinInputFieldProps, "input">(
 
     return (
       <ui.input
-        className={cx("ui-pin-input-field", className)}
+        className={cx("ui-pin-input__field", className)}
         {...getInputProps({ ...rest, ref: mergeRefs(register, ref), index })}
         __css={css}
       />

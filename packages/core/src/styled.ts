@@ -1,22 +1,22 @@
-import createStyled, { FunctionInterpolation } from '@emotion/styled'
+import createStyled, { FunctionInterpolation } from "@emotion/styled"
 import {
   filterObject,
   runIfFunc,
   Dict,
   assignAfter,
   filterUndefined,
-} from '@yamada-ui/utils'
-import { ComponentType, createElement, forwardRef } from 'react'
+} from "@yamada-ui/utils"
+import { ComponentType, createElement, forwardRef } from "react"
 import {
   StyledOptions,
   UIComponent,
   StyledResolverProps,
   As,
   shouldForwardProp,
-} from './components'
-import { CSSUIProps, css, CSSUIObject } from './css'
-import { useColorMode } from './providers'
-import { styles, pseudos } from './styles'
+} from "./components"
+import { CSSUIProps, css, CSSUIObject } from "./css"
+import { useColorMode } from "./providers"
+import { styles, pseudos } from "./styles"
 
 const emotionStyled = ((createStyled as any).default ??
   createStyled) as typeof createStyled
@@ -69,12 +69,12 @@ export const styled = <T extends As, P extends object = {}>(
 
     return createElement(Component, {
       ref,
-      'data-mode': forced ? colorMode : undefined,
+      "data-mode": forced ? colorMode : undefined,
       ...props,
     })
   })
 
-  UIComponent.displayName = 'UIComponent'
+  UIComponent.displayName = "UIComponent"
 
   return UIComponent as UIComponent<T, P>
 }

@@ -1,12 +1,12 @@
-import { ComponentMultiStyle } from '@yamada-ui/core'
-import { shadeColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from "@yamada-ui/core"
+import { shadeColor } from "@yamada-ui/utils"
 
 export const Alert: ComponentMultiStyle = {
   baseStyle: {
     container: {
       px: 4,
       py: 3,
-      rounded: 'md',
+      rounded: "md",
     },
     icon: {
       flexShrink: 0,
@@ -16,11 +16,11 @@ export const Alert: ComponentMultiStyle = {
     loading: {
       flexShrink: 0,
       marginEnd: 3,
-      fontSize: 'xl',
+      fontSize: "xl",
     },
     title: {
       marginEnd: 2,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       lineHeight: 5,
     },
     description: {
@@ -29,60 +29,60 @@ export const Alert: ComponentMultiStyle = {
   },
 
   variants: {
-    basic: ({ colorScheme: c = 'primary' }) => ({
-      container: { bg: ['white', 'black'], borderWidth: '1px' },
+    basic: ({ colorScheme: c = "primary" }) => ({
+      container: { bg: ["white", "black"], borderWidth: "1px" },
       icon: { color: [`${c}.500`, `${c}.200`] },
       loading: { color: [`${c}.500`, `${c}.200`] },
     }),
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: { bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)] },
       icon: { color: [`${c}.500`, `${c}.200`] },
       loading: { color: [`${c}.500`, `${c}.200`] },
     }),
-    solid: ({ colorScheme: c = 'primary' }) => ({
+    solid: ({ colorScheme: c = "primary" }) => ({
       container: {
         bg: [`${c}.500`, `${c}.200`],
-        color: ['white', 'gray.900'],
+        color: ["white", "gray.900"],
       },
     }),
-    'island-accent': ({ colorScheme: c = 'primary' }) => ({
+    "island-accent": ({ colorScheme: c = "primary" }) => ({
       container: {
-        bg: ['white', 'black'],
-        borderWidth: '1px',
+        bg: ["white", "black"],
+        borderWidth: "1px",
         pl: 7,
         _before: {
           content: '""',
-          position: 'absolute',
-          top: '50%',
+          position: "absolute",
+          top: "50%",
           left: 3,
-          transform: 'translateY(-50%)',
+          transform: "translateY(-50%)",
           w: 1,
-          h: 'calc(100% - 1.5rem)',
+          h: "calc(100% - 1.5rem)",
           bg: [`${c}.500`, `${c}.200`],
-          rounded: 'full',
+          rounded: "full",
         },
       },
       icon: { color: [`${c}.500`, `${c}.200`] },
     }),
-    'left-accent': ({
+    "left-accent": ({
       theme: t,
       colorMode: m,
-      colorScheme: c = 'primary',
+      colorScheme: c = "primary",
     }) => ({
       container: {
         bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
         pl: 3,
-        borderLeft: '0.25rem solid',
+        borderLeft: "0.25rem solid",
         borderLeftColor: [`${c}.500`, `${c}.200`],
         rounded: 4,
       },
       icon: { color: [`${c}.500`, `${c}.200`] },
     }),
-    'top-accent': ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => ({
+    "top-accent": ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: {
         bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
         pt: 3,
-        borderTop: '0.25rem solid',
+        borderTop: "0.25rem solid",
         borderTopColor: [`${c}.500`, `${c}.200`],
         rounded: 4,
       },
@@ -91,7 +91,7 @@ export const Alert: ComponentMultiStyle = {
   },
 
   defaultProps: {
-    variant: 'basic',
-    colorScheme: 'primary',
+    variant: "basic",
+    colorScheme: "primary",
   },
 }

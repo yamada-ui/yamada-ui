@@ -1,10 +1,10 @@
-import { Button, ButtonProps } from '@yamada-ui/button'
-import { ui, forwardRef, ColorModeToken, CSS } from '@yamada-ui/core'
+import { Button, ButtonProps } from "@yamada-ui/button"
+import { ui, forwardRef, ColorModeToken, CSS } from "@yamada-ui/core"
 import {
   FormControlOptions,
   formControlProperties,
   useFormControlProps,
-} from '@yamada-ui/form-control'
+} from "@yamada-ui/form-control"
 import {
   assignRef,
   cx,
@@ -14,14 +14,14 @@ import {
   mergeRefs,
   omitObject,
   pickObject,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   ChangeEvent,
   ForwardedRef,
   ReactNode,
   useCallback,
   useRef,
-} from 'react'
+} from "react"
 
 type Props = {
   onClick: () => void
@@ -34,7 +34,7 @@ type FileButtonOptions = {
   /**
    * The border color when the button is invalid.
    */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * Function to be called when a file change event occurs.
    */
@@ -46,19 +46,19 @@ type FileButtonOptions = {
   resetRef?: ForwardedRef<() => void>
 }
 
-type InputProps = Partial<Pick<HTMLInputElement, 'accept' | 'multiple'>>
+type InputProps = Partial<Pick<HTMLInputElement, "accept" | "multiple">>
 
-export type FileButtonProps = Omit<ButtonProps, 'onChange' | 'children'> &
+export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
   InputProps &
   FileButtonOptions &
   FormControlOptions
 
-export const FileButton = forwardRef<FileButtonProps, 'input'>(
+export const FileButton = forwardRef<FileButtonProps, "input">(
   ({ className, resetRef, as: As, children, ...props }, ref) => {
     const { id, name, accept, multiple, form, ...rest } =
       useFormControlProps(props)
 
-    const { disabled, readOnly, required, 'aria-invalid': isInvalid } = rest
+    const { disabled, readOnly, required, "aria-invalid": isInvalid } = rest
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -80,7 +80,7 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
     )
 
     const onReset = useCallback(() => {
-      if (inputRef.current) inputRef.current.value = ''
+      if (inputRef.current) inputRef.current.value = ""
     }, [])
 
     if (!isFunction(children)) {
@@ -88,8 +88,8 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
 
       children = (
         <Component
-          className={cx('ui-file-button', className)}
-          {...omitObject(rest, ['onChange'])}
+          className={cx("ui-file-button", className)}
+          {...omitObject(rest, ["onChange"])}
           onClick={handlerAll(rest.onClick, onClick)}
         >
           {children}
@@ -103,7 +103,7 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
       <>
         <ui.input
           ref={mergeRefs(inputRef, ref)}
-          type='file'
+          type="file"
           tabIndex={-1}
           id={id}
           name={name}
@@ -111,15 +111,15 @@ export const FileButton = forwardRef<FileButtonProps, 'input'>(
           accept={accept}
           multiple={multiple}
           style={{
-            border: '0px',
-            clip: 'rect(0px, 0px, 0px, 0px)',
-            height: '1px',
-            width: '1px',
-            margin: '-1px',
-            padding: '0px',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            position: 'absolute',
+            border: "0px",
+            clip: "rect(0px, 0px, 0px, 0px)",
+            height: "1px",
+            width: "1px",
+            margin: "-1px",
+            padding: "0px",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            position: "absolute",
           }}
           onChange={onChange}
           {...pickObject(rest, formControlProperties)}

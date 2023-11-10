@@ -1,6 +1,6 @@
-import { getMemoizedObject as get, Dict, StringLiteral } from '@yamada-ui/utils'
-import { Token } from '../css'
-import { Configs, Transform } from './config'
+import { getMemoizedObject as get, Dict, StringLiteral } from "@yamada-ui/utils"
+import { Token } from "../css"
+import { Configs, Transform } from "./config"
 
 const transform: Transform = (value, theme, css = {}) => {
   const resolvedCSS: Dict = {}
@@ -35,11 +35,11 @@ export type OthersProps = {
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: Token<StringLiteral, 'layerStyles'>
+  layerStyle?: Token<StringLiteral, "layerStyles">
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: Token<StringLiteral, 'textStyles'>
+  textStyle?: Token<StringLiteral, "textStyles">
   /**
    * Apply other styles defined in `theme.styles`.
    *

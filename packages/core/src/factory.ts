@@ -4,8 +4,8 @@ import {
   StyledOptions,
   HTMLUIComponents,
   UIComponent,
-} from './components'
-import { styled } from './styled'
+} from "./components"
+import { styled } from "./styled"
 
 const factory = () => {
   const cache = new Map<DOMElements, UIComponent<DOMElements>>()

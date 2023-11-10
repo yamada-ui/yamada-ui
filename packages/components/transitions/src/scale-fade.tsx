@@ -1,4 +1,4 @@
-import { ui, HTMLUIProps, forwardRef, CSSUIObject } from '@yamada-ui/core'
+import { ui, HTMLUIProps, forwardRef, CSSUIObject } from "@yamada-ui/core"
 import {
   motion,
   HTMLMotionProps,
@@ -7,8 +7,8 @@ import {
   transitionExit,
   WithTransitionProps,
   MotionTransitionVariants,
-} from '@yamada-ui/motion'
-import { cx } from '@yamada-ui/utils'
+} from "@yamada-ui/motion"
+import { cx } from "@yamada-ui/utils"
 
 type ScaleFadeOptions = {
   /**
@@ -26,7 +26,7 @@ type ScaleFadeOptions = {
 }
 
 export type ScaleFadeProps = WithTransitionProps<
-  Omit<HTMLUIProps<'div'>, 'scale'> & HTMLMotionProps<'div'>
+  Omit<HTMLUIProps<"div">, "scale"> & HTMLMotionProps<"div">
 > &
   ScaleFadeOptions
 
@@ -57,13 +57,13 @@ const variants: MotionTransitionVariants = {
 }
 
 export const scaleFadeProps = {
-  initial: 'exit',
-  animate: 'enter',
-  exit: 'exit',
+  initial: "exit",
+  animate: "enter",
+  exit: "exit",
   variants,
 }
 
-export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
+export const ScaleFade = forwardRef<ScaleFadeProps, "div">(
   (
     {
       unmountOnExit,
@@ -79,7 +79,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
     },
     ref,
   ) => {
-    const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
+    const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const custom = {
       scale,
@@ -93,7 +93,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
     const css: CSSUIObject = {
-      w: '100%',
+      w: "100%",
     }
 
     return (
@@ -102,7 +102,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, 'div'>(
           <ui.div
             as={motion.div}
             ref={ref}
-            className={cx('ui-scale-fade', className)}
+            className={cx("ui-scale-fade", className)}
             custom={custom}
             {...scaleFadeProps}
             animate={animate}

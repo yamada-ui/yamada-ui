@@ -6,14 +6,14 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { createContext, cx, omitObject } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { createContext, cx, omitObject } from "@yamada-ui/utils"
 
 type TableStyleContext = Record<string, CSSUIObject>
 
 export const [TableStyleProvider, useTableStyles] =
   createContext<TableStyleContext>({
-    name: 'TableStyleContext',
+    name: "TableStyleContext",
     errorMessage: `useTableStyles returned is 'undefined'. Seems you forgot to wrap the components in "<Table />" or "<NativeTable />" or "<PagingTable />"`,
   })
 
@@ -21,7 +21,7 @@ type NativeTableOptions = {
   /**
    * The CSS `table-layout` property.
    */
-  layout?: CSSUIObject['tableLayout']
+  layout?: CSSUIObject["tableLayout"]
   /**
    * If `true`, highlight the row when the table row is hovered.
    *
@@ -42,13 +42,13 @@ type NativeTableOptions = {
   withColumnBorders?: boolean
 }
 
-export type NativeTableProps = HTMLUIProps<'table'> &
-  ThemeProps<'Table'> &
+export type NativeTableProps = HTMLUIProps<"table"> &
+  ThemeProps<"Table"> &
   NativeTableOptions
 
-export const NativeTable = forwardRef<NativeTableProps, 'table'>(
+export const NativeTable = forwardRef<NativeTableProps, "table">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('NativeTable', props)
+    const [styles, mergedProps] = useMultiComponentStyle("NativeTable", props)
     const { className, layout, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = { tableLayout: layout, ...styles.table }
@@ -57,12 +57,12 @@ export const NativeTable = forwardRef<NativeTableProps, 'table'>(
       <TableStyleProvider value={styles}>
         <ui.table
           ref={ref}
-          className={cx('ui-table', className)}
+          className={cx("ui-table", className)}
           __css={css}
           {...omitObject(rest, [
-            'withBorder',
-            'withColumnBorders',
-            'highlightOnHover',
+            "withBorder",
+            "withColumnBorders",
+            "highlightOnHover",
           ])}
         />
       </TableStyleProvider>

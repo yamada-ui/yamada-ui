@@ -1,22 +1,22 @@
-import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray } from "@yamada-ui/utils"
 
 export const Input: ComponentMultiStyle = {
   baseStyle: {
     field: {
-      width: '100%',
+      width: "100%",
       minWidth: 0,
       outline: 0,
-      position: 'relative',
-      appearance: 'none',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      position: "relative",
+      appearance: "none",
+      transitionProperty: "common",
+      transitionDuration: "normal",
       _placeholder: {
-        color: 'gray.500',
+        color: "gray.500",
       },
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
     },
   },
@@ -25,8 +25,8 @@ export const Input: ComponentMultiStyle = {
     outline: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -37,38 +37,38 @@ export const Input: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '1px solid',
-          borderColor: 'inherit',
-          bg: 'inherit',
+          border: "1px solid",
+          borderColor: "inherit",
+          bg: "inherit",
           _hover: {
-            borderColor: ['gray.300', 'whiteAlpha.400'],
+            borderColor: ["gray.300", "whiteAlpha.400"],
           },
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
         },
         addon: {
-          border: '1px solid',
-          borderColor: ['inherit', 'whiteAlpha.50'],
-          bg: ['gray.100', 'whiteAlpha.300'],
+          border: "1px solid",
+          borderColor: ["inherit", "whiteAlpha.50"],
+          bg: ["gray.100", "whiteAlpha.300"],
         },
       }
     },
     filled: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -79,35 +79,35 @@ export const Input: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '2px solid',
-          borderColor: 'transparent',
-          bg: ['gray.100', 'whiteAlpha.50'],
+          border: "2px solid",
+          borderColor: "transparent",
+          bg: ["gray.100", "whiteAlpha.50"],
           _hover: {
-            bg: ['gray.200', 'whiteAlpha.100'],
+            bg: ["gray.200", "whiteAlpha.100"],
           },
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
           },
           _focusVisible: {
-            bg: 'transparent',
+            bg: "transparent",
             borderColor: focusBorderColor,
           },
         },
         addon: {
-          border: '2px solid transparent',
-          bg: ['gray.100', 'whiteAlpha.50'],
+          border: "2px solid transparent",
+          bg: ["gray.100", "whiteAlpha.50"],
         },
       }
     },
     flushed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -118,14 +118,14 @@ export const Input: ComponentMultiStyle = {
 
       return {
         field: {
-          borderBottom: '1px solid',
-          borderColor: 'inherit',
-          rounded: '0',
-          px: '0',
-          bg: 'transparent',
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          rounded: "0",
+          px: "0",
+          bg: "transparent",
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
@@ -137,24 +137,24 @@ export const Input: ComponentMultiStyle = {
           },
         },
         addon: {
-          border: '2px solid',
-          borderColor: 'inherit',
-          bg: 'transparent',
-          rounded: '0',
-          px: '0',
+          border: "2px solid",
+          borderColor: "inherit",
+          bg: "transparent",
+          rounded: "0",
+          px: "0",
         },
       }
     },
     unstyled: {
       field: {
-        bg: 'transparent',
-        minH: 'auto',
-        px: '0',
+        bg: "transparent",
+        minH: "auto",
+        px: "0",
       },
       addon: {
-        bg: 'transparent',
-        minH: 'auto',
-        px: '0',
+        bg: "transparent",
+        minH: "auto",
+        px: "0",
       },
     },
   },
@@ -162,64 +162,64 @@ export const Input: ComponentMultiStyle = {
   sizes: {
     xs: {
       field: {
-        fontSize: 'xs',
-        px: '2',
-        minH: '6',
-        rounded: 'sm',
+        fontSize: "xs",
+        px: "2",
+        minH: "6",
+        rounded: "sm",
       },
       addon: {
-        fontSize: 'xs',
-        px: '2',
-        minH: '6',
-        rounded: 'sm',
+        fontSize: "xs",
+        px: "2",
+        minH: "6",
+        rounded: "sm",
       },
     },
     sm: {
       field: {
-        fontSize: 'sm',
-        px: '2',
-        minH: '8',
-        rounded: 'md',
+        fontSize: "sm",
+        px: "2",
+        minH: "8",
+        rounded: "md",
       },
       addon: {
-        fontSize: 'sm',
-        px: '2',
-        minH: '8',
-        rounded: 'md',
+        fontSize: "sm",
+        px: "2",
+        minH: "8",
+        rounded: "md",
       },
     },
     md: {
       field: {
-        fontSize: 'md',
-        px: '3',
-        minH: '10',
-        rounded: 'md',
+        fontSize: "md",
+        px: "3",
+        minH: "10",
+        rounded: "md",
       },
       addon: {
-        fontSize: 'md',
-        px: '3',
-        minH: '10',
-        rounded: 'md',
+        fontSize: "md",
+        px: "3",
+        minH: "10",
+        rounded: "md",
       },
     },
     lg: {
       field: {
-        fontSize: 'lg',
-        px: '4',
-        minH: '12',
-        rounded: 'md',
+        fontSize: "lg",
+        px: "4",
+        minH: "12",
+        rounded: "md",
       },
       addon: {
-        fontSize: 'lg',
-        px: '4',
-        minH: '12',
-        rounded: 'md',
+        fontSize: "lg",
+        px: "4",
+        minH: "12",
+        rounded: "md",
       },
     },
   },
 
   defaultProps: {
-    size: 'md',
-    variant: 'outline',
+    size: "md",
+    variant: "outline",
   },
 }

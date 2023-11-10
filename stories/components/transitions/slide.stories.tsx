@@ -1,10 +1,10 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { Button, Slide, Text, useBoolean, VStack } from '@yamada-ui/react'
+import { Meta, StoryFn } from "@storybook/react"
+import { Button, Slide, Text, useBoolean, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Slide>
 
 const meta: Meta<typeof Slide> = {
-  title: 'Components / Transitions / Slide',
+  title: "Components / Transitions / Slide",
   component: Slide,
 }
 
@@ -17,13 +17,13 @@ export const basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} placement='bottom'>
-        <VStack w='full' bg='orange.500' p='md'>
-          <Text color='white'>
+      <Slide isOpen={isOpen} placement="bottom">
+        <VStack w="full" bg="orange.500" p="md">
+          <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
-          <Button onClick={toggle} alignSelf='flex-end'>
+          <Button onClick={toggle} alignSelf="flex-end">
             Close
           </Button>
         </VStack>
@@ -39,13 +39,13 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} placement='bottom' duration={0.7}>
-        <VStack w='full' bg='orange.500' p='md'>
-          <Text color='white'>
+      <Slide isOpen={isOpen} placement="bottom" duration={0.7}>
+        <VStack w="full" bg="orange.500" p="md">
+          <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
-          <Button onClick={toggle} alignSelf='flex-end'>
+          <Button onClick={toggle} alignSelf="flex-end">
             Close
           </Button>
         </VStack>
@@ -61,13 +61,13 @@ export const withPlacement: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} placement='left'>
-        <VStack w='full' bg='orange.500' p='md'>
-          <Text color='white'>
+      <Slide isOpen={isOpen} placement="left">
+        <VStack w="full" bg="orange.500" p="md">
+          <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
-          <Button onClick={toggle} alignSelf='flex-end'>
+          <Button onClick={toggle} alignSelf="flex-end">
             Close
           </Button>
         </VStack>

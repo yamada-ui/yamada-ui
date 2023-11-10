@@ -1,4 +1,4 @@
-import { useSafeLayoutEffect } from '@yamada-ui/utils'
+import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import {
   ImgHTMLAttributes,
   SyntheticEvent,
@@ -6,7 +6,7 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react'
+} from "react"
 
 type HTMLImageElementProps = ImgHTMLAttributes<HTMLImageElement>
 
@@ -26,11 +26,11 @@ export type UseImageProps = {
   /**
    * A callback for when the image `src` has been loaded.
    */
-  onLoad?: HTMLImageElementProps['onLoad']
+  onLoad?: HTMLImageElementProps["onLoad"]
   /**
    * A callback for when there was an error loading the image `src`.
    */
-  onError?: HTMLImageElementProps['onError']
+  onError?: HTMLImageElementProps["onError"]
   /**
    * If `true`, opt out of the `fallbackSrc` logic and use as `img`.
    *
@@ -41,21 +41,21 @@ export type UseImageProps = {
    * The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.
    * This tells the browser to request cross-origin access when trying to download the image data.
    */
-  crossOrigin?: HTMLImageElementProps['crossOrigin']
+  crossOrigin?: HTMLImageElementProps["crossOrigin"]
   /**
    * The image `loading` attribute.
    */
-  loading?: HTMLImageElementProps['loading']
+  loading?: HTMLImageElementProps["loading"]
 }
 
-type Status = 'loading' | 'failed' | 'pending' | 'loaded'
+type Status = "loading" | "failed" | "pending" | "loaded"
 
 export const shouldShowFallbackImage = (
   status: Status,
-  fallbackStrategy: 'onError' | 'beforeLoadOrError',
+  fallbackStrategy: "onError" | "beforeLoadOrError",
 ) =>
-  (status !== 'loaded' && fallbackStrategy === 'beforeLoadOrError') ||
-  (status === 'failed' && fallbackStrategy === 'onError')
+  (status !== "loaded" && fallbackStrategy === "beforeLoadOrError") ||
+  (status === "failed" && fallbackStrategy === "onError")
 
 export const useImage = ({
   loading,
@@ -67,10 +67,10 @@ export const useImage = ({
   sizes,
   ignoreFallback,
 }: UseImageProps) => {
-  const [status, setStatus] = useState<Status>('pending')
+  const [status, setStatus] = useState<Status>("pending")
 
   useEffect(() => {
-    setStatus(src ? 'loading' : 'pending')
+    setStatus(src ? "loading" : "pending")
   }, [src])
 
   const imageRef = useRef<HTMLImageElement | null>()
@@ -92,7 +92,7 @@ export const useImage = ({
     img.onload = (ev) => {
       flush()
 
-      setStatus('loaded')
+      setStatus("loaded")
 
       onLoad?.(ev as unknown as SyntheticEvent<HTMLImageElement, Event>)
     }
@@ -100,7 +100,7 @@ export const useImage = ({
     img.onerror = (error) => {
       flush()
 
-      setStatus('failed')
+      setStatus("failed")
 
       onError?.(error as any)
     }
@@ -119,14 +119,14 @@ export const useImage = ({
   useSafeLayoutEffect(() => {
     if (ignoreFallback) return
 
-    if (status === 'loading') load()
+    if (status === "loading") load()
 
     return () => {
       flush()
     }
   }, [status, load, ignoreFallback])
 
-  return ignoreFallback ? 'loaded' : status
+  return ignoreFallback ? "loaded" : status
 }
 
 export type UseImageReturn = ReturnType<typeof useImage>

@@ -1,10 +1,10 @@
-import { ComponentMultiStyle, mergeStyle } from '@yamada-ui/core'
-import { Table } from './table'
+import { ComponentMultiStyle, mergeStyle } from "@yamada-ui/core"
+import { Table } from "./table"
 
 export const PagingTable: ComponentMultiStyle = mergeStyle(Table, {
   baseStyle: {
     pagingControl: {
-      gridTemplateColumns: '1fr 5fr 1fr',
+      gridTemplateColumns: "1fr 5fr 1fr",
     },
   },
 

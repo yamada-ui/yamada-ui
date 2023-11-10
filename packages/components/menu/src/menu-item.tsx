@@ -1,5 +1,5 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { useClickable } from '@yamada-ui/use-clickable'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { useClickable } from "@yamada-ui/use-clickable"
 import {
   ariaAttr,
   cx,
@@ -7,7 +7,7 @@ import {
   isHTMLElement,
   mergeRefs,
   useUpdateEffect,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   FC,
   FocusEvent,
@@ -15,13 +15,13 @@ import {
   ReactElement,
   useCallback,
   useRef,
-} from 'react'
-import { useMenu, useMenuDescendant } from './menu'
+} from "react"
+import { useMenu, useMenuDescendant } from "./menu"
 
 const isTargetMenuItem = (target: EventTarget | null) => {
   return (
     isHTMLElement(target) &&
-    !!target?.getAttribute('role')?.startsWith('menu-item')
+    !!target?.getAttribute("role")?.startsWith("menu-item")
   )
 }
 
@@ -54,9 +54,9 @@ type MenuItemOptions = {
   command?: string
 }
 
-export type MenuItemProps = HTMLUIProps<'button'> & MenuItemOptions
+export type MenuItemProps = HTMLUIProps<"button"> & MenuItemOptions
 
-export const MenuItem = forwardRef<MenuItemProps, 'button'>(
+export const MenuItem = forwardRef<MenuItemProps, "button">(
   (
     {
       as,
@@ -125,26 +125,26 @@ export const MenuItem = forwardRef<MenuItemProps, 'button'>(
       }
     }, [isFocused, trulyDisabled, menuRef, isOpen])
 
-    type = as || type ? type ?? undefined : 'button'
+    type = as || type ? type ?? undefined : "button"
 
     children =
       icon || command ? (
-        <ui.span style={{ pointerEvents: 'none', flex: 1 }}>{children}</ui.span>
+        <ui.span style={{ pointerEvents: "none", flex: 1 }}>{children}</ui.span>
       ) : (
         children
       )
 
     const css: CSSUIObject = {
-      textDecoration: 'none',
-      color: 'inherit',
-      userSelect: 'none',
-      display: 'flex',
-      width: '100%',
-      alignItems: 'center',
-      textAlign: 'start',
-      flex: '0 0 auto',
+      textDecoration: "none",
+      color: "inherit",
+      userSelect: "none",
+      display: "flex",
+      width: "100%",
+      alignItems: "center",
+      textAlign: "start",
+      flex: "0 0 auto",
       outline: 0,
-      gap: '0.75rem',
+      gap: "0.75rem",
       ...styles.item,
     }
 
@@ -154,9 +154,9 @@ export const MenuItem = forwardRef<MenuItemProps, 'button'>(
         {...rest}
         as={as}
         type={type}
-        role='menu-item'
+        role="menu-item"
         tabIndex={isFocused ? 0 : -1}
-        className={cx('ui-menu__item', className)}
+        className={cx("ui-menu__item", className)}
         __css={css}
       >
         {icon ? <MenuIcon>{icon}</MenuIcon> : null}
@@ -185,13 +185,13 @@ type MenuOptionItemOptions = {
   /**
    * The type of the menu option item.
    */
-  type?: 'radio' | 'checkbox'
+  type?: "radio" | "checkbox"
 }
 
-export type MenuOptionItemProps = Omit<MenuItemProps, 'icon' | 'command'> &
+export type MenuOptionItemProps = Omit<MenuItemProps, "icon" | "command"> &
   MenuOptionItemOptions
 
-export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
+export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
     { className, icon, isChecked, closeOnSelect = false, children, ...rest },
     ref,
@@ -199,7 +199,7 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
     return (
       <MenuItem
         ref={ref}
-        className={cx('ui-menu__item--option', className)}
+        className={cx("ui-menu__item--option", className)}
         aria-checked={ariaAttr(isChecked)}
         closeOnSelect={closeOnSelect}
         {...rest}
@@ -215,25 +215,25 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, 'button'>(
   },
 )
 
-type MenuIconProps = HTMLUIProps<'span'>
+type MenuIconProps = HTMLUIProps<"span">
 
-const MenuIcon = forwardRef<MenuIconProps, 'span'>(
+const MenuIcon = forwardRef<MenuIconProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useMenu()
 
     const css: CSSUIObject = {
       flexShrink: 0,
-      display: 'inline-flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: '0.85em',
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize: "0.85em",
       ...styles.icon,
     }
 
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-menu__item__icon', className)}
+        className={cx("ui-menu__item__icon", className)}
         __css={css}
         {...rest}
       />
@@ -241,9 +241,9 @@ const MenuIcon = forwardRef<MenuIconProps, 'span'>(
   },
 )
 
-type MenuCommandProps = HTMLUIProps<'span'>
+type MenuCommandProps = HTMLUIProps<"span">
 
-const MenuCommand = forwardRef<MenuCommandProps, 'span'>(
+const MenuCommand = forwardRef<MenuCommandProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useMenu()
 
@@ -252,7 +252,7 @@ const MenuCommand = forwardRef<MenuCommandProps, 'span'>(
     return (
       <ui.span
         ref={ref}
-        className={cx('ui-menu__item__command', className)}
+        className={cx("ui-menu__item__command", className)}
         __css={css}
         {...rest}
       />
@@ -261,10 +261,10 @@ const MenuCommand = forwardRef<MenuCommandProps, 'span'>(
 )
 
 const CheckIcon: FC = () => (
-  <svg viewBox='0 0 14 14' width='1em' height='1em'>
+  <svg viewBox="0 0 14 14" width="1em" height="1em">
     <polygon
-      fill='currentColor'
-      points='5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039'
+      fill="currentColor"
+      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
     />
   </svg>
 )

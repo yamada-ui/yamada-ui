@@ -1,31 +1,31 @@
-import { ThemeSchemes, extendConfig, extendTheme } from '@yamada-ui/react'
-import components from './components'
-import { globalStyle, resetStyle, layerStyles, textStyles } from './styles'
-import tokens from './tokens'
-import { customConfig } from './config'
+import { ThemeSchemes, extendConfig, extendTheme } from "@yamada-ui/react"
+import components from "./components"
+import { globalStyle, resetStyle, layerStyles, textStyles } from "./styles"
+import tokens from "./tokens"
+import { customConfig } from "./config"
 
 const colorSchemes = [
-  'gray',
-  'zinc',
-  'neutral',
-  'stone',
-  'red',
-  'rose',
-  'pink',
-  'orange',
-  'amber',
-  'yellow',
-  'lime',
-  'green',
-  'emerald',
-  'teal',
-  'cyan',
-  'sky',
-  'blue',
-  'indigo',
-  'violet',
-  'purple',
-  'fuchsia',
+  "gray",
+  "zinc",
+  "neutral",
+  "stone",
+  "red",
+  "rose",
+  "pink",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
 ]
 
 export const customTheme = {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from "react"
 
 export const useBoolean = (init: boolean = false): UseBooleanReture => {
   const [flg, setFlg] = useState<boolean>(init)

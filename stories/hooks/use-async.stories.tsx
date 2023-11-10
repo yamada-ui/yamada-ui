@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/react'
-import { Text, useAsync } from '@yamada-ui/react'
+import { Meta } from "@storybook/react"
+import { Text, useAsync } from "@yamada-ui/react"
 
 const meta: Meta = {
-  title: 'Hooks / useAsync',
+  title: "Hooks / useAsync",
 }
 
 export default meta
@@ -13,9 +13,9 @@ export const basic = () => {
       new Promise<string>((resolve, reject) => {
         setTimeout(() => {
           if (Math.random() > 0.5) {
-            resolve('✌️')
+            resolve("✌️")
           } else {
-            reject(new Error('A pseudo random error occurred'))
+            reject(new Error("A pseudo random error occurred"))
           }
         }, 3000)
       }),

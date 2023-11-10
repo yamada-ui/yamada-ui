@@ -1,14 +1,14 @@
-import { StringLiteral } from '@yamada-ui/utils'
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs, transforms } from './config'
+import { StringLiteral } from "@yamada-ui/utils"
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs, transforms } from "./config"
 
 export const typography: Configs = {
-  fontFamily: configs.prop('fontFamily', 'fonts'),
-  fontSize: configs.prop('fontSize', 'fontSizes', transforms.px),
-  fontWeight: configs.prop('fontWeight', 'fontWeights'),
-  lineHeight: configs.prop('lineHeight', 'lineHeights'),
-  letterSpacing: configs.prop('letterSpacing', 'letterSpacings'),
+  fontFamily: configs.prop("fontFamily", "fonts"),
+  fontSize: configs.prop("fontSize", "fontSizes", transforms.px),
+  fontWeight: configs.prop("fontWeight", "fontWeights"),
+  lineHeight: configs.prop("lineHeight", "lineHeights"),
+  letterSpacing: configs.prop("letterSpacing", "letterSpacings"),
   textAlign: true,
   fontStyle: true,
   textIndent: true,
@@ -17,23 +17,23 @@ export const typography: Configs = {
   textOverflow: true,
   textTransform: true,
   whiteSpace: true,
-  textDecorationColor: configs.color('textDecorationColor'),
+  textDecorationColor: configs.color("textDecorationColor"),
   textDecoration: true,
-  textDecor: { properties: 'textDecoration' },
+  textDecor: { properties: "textDecoration" },
   textDecorationLine: true,
   textDecorationStyle: true,
   textDecorationThickness: true,
   textUnderlineOffset: true,
-  textShadow: configs.shadow('textShadow'),
+  textShadow: configs.shadow("textShadow"),
   noOfLines: {
     static: {
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      display: '-webkit-box',
-      WebkitBoxOrient: 'vertical',
-      WebkitLineClamp: 'var(--ui-line-clamp)',
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
     },
-    properties: '--ui-line-clamp',
+    properties: "--ui-line-clamp",
   },
   isTruncated: {
     transform: transforms.isTruncated,
@@ -44,23 +44,23 @@ export type TypographyProps = {
   /**
    * The CSS `font-weight` property.
    */
-  fontWeight?: Token<number | StringLiteral, 'fontWeights'>
+  fontWeight?: Token<number | StringLiteral, "fontWeights">
   /**
    * The CSS `line-height` property.
    */
-  lineHeight?: Token<CSS.Property.LineHeight | number, 'lineHeights'>
+  lineHeight?: Token<CSS.Property.LineHeight | number, "lineHeights">
   /**
    * The CSS `letter-spacing` property.
    */
-  letterSpacing?: Token<CSS.Property.LetterSpacing | number, 'letterSpacings'>
+  letterSpacing?: Token<CSS.Property.LetterSpacing | number, "letterSpacings">
   /**
    * The CSS `font-size` property.
    */
-  fontSize?: Token<CSS.Property.FontSize | number, 'fontSizes'>
+  fontSize?: Token<CSS.Property.FontSize | number, "fontSizes">
   /**
    * The CSS `font-family` property.
    */
-  fontFamily?: Token<CSS.Property.FontFamily, 'fonts'>
+  fontFamily?: Token<CSS.Property.FontFamily, "fonts">
   /**
    * The CSS `text-align` property.
    */
@@ -104,7 +104,7 @@ export type TypographyProps = {
   /**
    * The CSS `text-decoration-color` property.
    */
-  textDecorationColor?: Token<CSS.Property.TextDecorationColor, 'colors'>
+  textDecorationColor?: Token<CSS.Property.TextDecorationColor, "colors">
   /**
    * The CSS `text-decoration-thickness` property.
    */
@@ -124,7 +124,7 @@ export type TypographyProps = {
   /**
    * The `text-shadow` property.
    */
-  textShadow?: Token<CSS.Property.TextShadow | number, 'shadows'>
+  textShadow?: Token<CSS.Property.TextShadow | number, "shadows">
   /**
    * Used to visually truncate a text after a number of lines.
    */

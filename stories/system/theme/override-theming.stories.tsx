@@ -1,8 +1,8 @@
-import { Center, Image, UIProvider, UsageTheme } from '@yamada-ui/react'
-import { FC } from 'react'
+import { Center, Image, UIProvider, UsageTheme } from "@yamada-ui/react"
+import { FC } from "react"
 
 export default {
-  title: 'System / Theme / Override Theming',
+  title: "System / Theme / Override Theming",
 }
 
 export const basic = () => {
@@ -12,9 +12,9 @@ export const basic = () => {
      */
     styles: {
       globalStyle: {
-        fontFamily: 'body',
-        bg: ['white', 'black'],
-        color: ['black', 'white'],
+        fontFamily: "body",
+        bg: ["white", "black"],
+        color: ["black", "white"],
       },
     },
   }
@@ -28,11 +28,11 @@ export const basic = () => {
 
 const App: FC = () => {
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
       <Image
-        w='full'
-        maxW='32rem'
-        src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png'
+        w="full"
+        maxW="32rem"
+        src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png"
       />
     </Center>
   )

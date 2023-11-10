@@ -6,10 +6,10 @@ import {
   useComponentStyle,
   CSSUIObject,
   omitThemeProps,
-} from '@yamada-ui/core'
-import { Text, TextProps } from '@yamada-ui/typography'
-import { cx, isArray } from '@yamada-ui/utils'
-import { FC, Fragment, ReactNode, useMemo } from 'react'
+} from "@yamada-ui/core"
+import { Text, TextProps } from "@yamada-ui/typography"
+import { cx, isArray } from "@yamada-ui/utils"
+import { FC, Fragment, ReactNode, useMemo } from "react"
 
 type Options = { text: string; query: string | string[] }
 
@@ -21,7 +21,7 @@ const escapeRegexp = (term: string): string =>
 const buildRegex = (query: string[]): RegExp | undefined => {
   query = query.filter(Boolean).map((text) => escapeRegexp(text.trim()))
 
-  if (query.length) return new RegExp(`(${query.join('|')})`, 'ig')
+  if (query.length) return new RegExp(`(${query.join("|")})`, "ig")
 }
 
 const highlightWords = ({ text, query }: Options): Chunk[] => {
@@ -64,11 +64,11 @@ export const Highlight: FC<HighlightProps> = ({
   query,
   children: text,
   markProps,
-  lineHeight = 'tall',
+  lineHeight = "tall",
   ...rest
 }) => {
-  if (typeof text !== 'string')
-    throw new Error('The children prop of Highlight must be a string')
+  if (typeof text !== "string")
+    throw new Error("The children prop of Highlight must be a string")
 
   const chunks = useHighlight({ query, text })
 
@@ -89,22 +89,22 @@ export const Highlight: FC<HighlightProps> = ({
   )
 }
 
-export type MarkProps = HTMLUIProps<'mark'> & ThemeProps<'Mark'>
+export type MarkProps = HTMLUIProps<"mark"> & ThemeProps<"Mark">
 
-export const Mark = forwardRef<MarkProps, 'mark'>((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle('Mark', props)
+export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
+  const [styles, mergedProps] = useComponentStyle("Mark", props)
   const { className, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    bg: 'transparent',
-    whiteSpace: 'nowrap',
+    bg: "transparent",
+    whiteSpace: "nowrap",
     ...styles,
   }
 
   return (
     <ui.mark
       ref={ref}
-      className={cx('ui-mark', className)}
+      className={cx("ui-mark", className)}
       __css={css}
       {...rest}
     />

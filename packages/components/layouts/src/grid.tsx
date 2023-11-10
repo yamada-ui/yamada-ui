@@ -4,51 +4,51 @@ import {
   HTMLUIProps,
   CSSUIObject,
   Token,
-} from '@yamada-ui/core'
-import { replaceObject } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { replaceObject } from "@yamada-ui/utils"
 
 type GridOptions = {
   /**
    * The CSS `grid-template-columns` property.
    */
-  templateColumns?: CSSUIObject['gridTemplateColumns']
+  templateColumns?: CSSUIObject["gridTemplateColumns"]
   /**
    * The CSS `grid-template-rows` property.
    */
-  templateRows?: CSSUIObject['gridTemplateRows']
+  templateRows?: CSSUIObject["gridTemplateRows"]
   /**
    * The CSS `grid-template-areas` property.
    */
-  templateAreas?: CSSUIObject['gridTemplateAreas']
+  templateAreas?: CSSUIObject["gridTemplateAreas"]
   /**
    * The CSS `grid-column` property.
    */
-  column?: CSSUIObject['gridColumn']
+  column?: CSSUIObject["gridColumn"]
   /**
    * The CSS `grid-row` property.
    */
-  row?: CSSUIObject['gridRow']
+  row?: CSSUIObject["gridRow"]
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIObject['gridArea']
+  area?: CSSUIObject["gridArea"]
   /**
    * The CSS `grid-auto-flow` property.
    */
-  autoFlow?: CSSUIObject['gridAutoFlow']
+  autoFlow?: CSSUIObject["gridAutoFlow"]
   /**
    * The CSS `grid-auto-columns` property.
    */
-  autoColumns?: CSSUIObject['gridAutoColumns']
+  autoColumns?: CSSUIObject["gridAutoColumns"]
   /**
    * The CSS `grid-auto-rows` property.
    */
-  autoRows?: CSSUIObject['gridAutoRows']
+  autoRows?: CSSUIObject["gridAutoRows"]
 }
 
-export type GridProps = HTMLUIProps<'div'> & GridOptions
+export type GridProps = HTMLUIProps<"div"> & GridOptions
 
-export const Grid = forwardRef<GridProps, 'div'>(
+export const Grid = forwardRef<GridProps, "div">(
   (
     {
       templateColumns: gridTemplateColumns,
@@ -68,7 +68,7 @@ export const Grid = forwardRef<GridProps, 'div'>(
     ref,
   ) => {
     const css: CSSUIObject = {
-      display: 'grid',
+      display: "grid",
       gridTemplateColumns,
       gridTemplateRows,
       gridTemplateAreas,
@@ -91,7 +91,7 @@ type GridItemOptions = {
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIObject['gridArea']
+  area?: CSSUIObject["gridArea"]
   /**
    * The number of columns the grid item should `span`.
    */
@@ -103,24 +103,24 @@ type GridItemOptions = {
   /**
    * The CSS `grid-column-start` property.
    */
-  colStart?: CSSUIObject['gridColumnStart']
+  colStart?: CSSUIObject["gridColumnStart"]
   /**
    * The CSS `grid-column-end` property.
    */
-  colEnd?: CSSUIObject['gridColumnEnd']
+  colEnd?: CSSUIObject["gridColumnEnd"]
   /**
    * The CSS `grid-row-start` property.
    */
-  rowStart?: CSSUIObject['gridRowStart']
+  rowStart?: CSSUIObject["gridRowStart"]
   /**
    * The CSS `grid-row-end` property.
    */
-  rowEnd?: CSSUIObject['gridRowEnd']
+  rowEnd?: CSSUIObject["gridRowEnd"]
 }
 
-export type GridItemProps = HTMLUIProps<'div'> & GridItemOptions
+export type GridItemProps = HTMLUIProps<"div"> & GridItemOptions
 
-export const GridItem = forwardRef<GridItemProps, 'div'>(
+export const GridItem = forwardRef<GridItemProps, "div">(
   (
     {
       area: gridArea,

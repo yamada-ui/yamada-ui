@@ -2,16 +2,16 @@ import {
   faArrowLeft,
   faArrowRight,
   faPoo,
-} from '@fortawesome/free-solid-svg-icons'
-import { Meta, StoryFn } from '@storybook/react'
+} from "@fortawesome/free-solid-svg-icons"
+import { Meta, StoryFn } from "@storybook/react"
 import {
   Carousel,
   CarouselSlide,
   CarouselControlNext,
   CarouselControlPrev,
   CarouselIndicators,
-} from '@yamada-ui/carousel'
-import { Icon } from '@yamada-ui/fontawesome'
+} from "@yamada-ui/carousel"
+import { Icon } from "@yamada-ui/fontawesome"
 import {
   Progress,
   Center,
@@ -23,13 +23,13 @@ import {
   Text,
   CardFooter,
   Button,
-} from '@yamada-ui/react'
-import { useState } from 'react'
+} from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Carousel>
 
 const meta: Meta<typeof Carousel> = {
-  title: 'Components / Data Display / Carousel',
+  title: "Components / Data Display / Carousel",
   component: Carousel,
 }
 
@@ -38,16 +38,16 @@ export default meta
 export const basic: Story = () => {
   return (
     <Carousel>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -57,62 +57,62 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Carousel size='sm'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel size="sm">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Carousel size='md'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel size="md">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Carousel size='lg'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel size="lg">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Carousel size='xl'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel size="xl">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
@@ -123,32 +123,32 @@ export const withSize: Story = () => {
 export const withOrientation: Story = () => {
   return (
     <>
-      <Carousel orientation='horizontal'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel orientation="horizontal">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Carousel orientation='vertical'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel orientation="vertical">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
@@ -159,16 +159,16 @@ export const withOrientation: Story = () => {
 export const withDefaultIndex: Story = () => {
   return (
     <Carousel defaultIndex={1}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -178,16 +178,16 @@ export const withDefaultIndex: Story = () => {
 export const withGap: Story = () => {
   return (
     <Carousel gap={0}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -197,16 +197,16 @@ export const withGap: Story = () => {
 export const withSpeed: Story = () => {
   return (
     <Carousel speed={50}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -215,17 +215,17 @@ export const withSpeed: Story = () => {
 
 export const withSlideSize: Story = () => {
   return (
-    <Carousel slideSize='50%'>
-      <CarouselSlide as={Center} bg='primary'>
+    <Carousel slideSize="50%">
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary' size='100%'>
+      <CarouselSlide as={Center} bg="secondary" size="100%">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -235,47 +235,47 @@ export const withSlideSize: Story = () => {
 export const withAlign: Story = () => {
   return (
     <>
-      <Carousel slideSize='50%' align='center'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel slideSize="50%" align="center">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Carousel slideSize='50%' align='start'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel slideSize="50%" align="start">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Carousel slideSize='50%' align='end'>
-        <CarouselSlide as={Center} bg='primary'>
+      <Carousel slideSize="50%" align="end">
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
@@ -285,32 +285,32 @@ export const withAlign: Story = () => {
 
 export const withSlidesToScroll: Story = () => {
   return (
-    <Carousel slideSize='33.3%' slidesToScroll={3} loop={false}>
-      <CarouselSlide as={Center} bg='primary'>
+    <Carousel slideSize="33.3%" slidesToScroll={3} loop={false}>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         5
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         6
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         7
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         8
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         9
       </CarouselSlide>
     </Carousel>
@@ -320,23 +320,23 @@ export const withSlidesToScroll: Story = () => {
 export const withCard: Story = () => {
   return (
     <Carousel
-      slideSize='50%'
-      align='start'
+      slideSize="50%"
+      align="start"
       slidesToScroll={2}
-      h='auto'
-      controlProps={{ colorScheme: 'whiteAlpha', color: 'white' }}
+      h="auto"
+      controlProps={{ colorScheme: "whiteAlpha", color: "white" }}
     >
-      <CarouselSlide as={Card} variant='subtle'>
-        <CardHeader justifyContent='center'>
+      <CarouselSlide as={Card} variant="subtle">
+        <CardHeader justifyContent="center">
           <Image
-            src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
-            w='full'
-            rounded='md'
+            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            w="full"
+            rounded="md"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
 
           <Text>
             『ドラゴンボール』（DRAGON
@@ -345,21 +345,21 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
 
-      <CarouselSlide as={Card} variant='subtle'>
-        <CardHeader justifyContent='center'>
+      <CarouselSlide as={Card} variant="subtle">
+        <CardHeader justifyContent="center">
           <Image
-            src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
-            w='full'
-            rounded='md'
+            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            w="full"
+            rounded="md"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
 
           <Text>
             『ドラゴンボール』（DRAGON
@@ -368,21 +368,21 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
 
-      <CarouselSlide as={Card} variant='subtle'>
-        <CardHeader justifyContent='center'>
+      <CarouselSlide as={Card} variant="subtle">
+        <CardHeader justifyContent="center">
           <Image
-            src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
-            w='full'
-            rounded='md'
+            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            w="full"
+            rounded="md"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
 
           <Text>
             『ドラゴンボール』（DRAGON
@@ -391,21 +391,21 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
 
-      <CarouselSlide as={Card} variant='subtle'>
-        <CardHeader justifyContent='center'>
+      <CarouselSlide as={Card} variant="subtle">
+        <CardHeader justifyContent="center">
           <Image
-            src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
-            w='full'
-            rounded='md'
+            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            w="full"
+            rounded="md"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
 
           <Text>
             『ドラゴンボール』（DRAGON
@@ -414,7 +414,7 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </CarouselSlide>
     </Carousel>
@@ -424,16 +424,16 @@ export const withCard: Story = () => {
 export const withAutoplay: Story = () => {
   return (
     <Carousel autoplay loop={false}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -443,16 +443,16 @@ export const withAutoplay: Story = () => {
 export const withDelay: Story = () => {
   return (
     <Carousel autoplay delay={1000}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -462,16 +462,16 @@ export const withDelay: Story = () => {
 export const withDragFree: Story = () => {
   return (
     <Carousel dragFree>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -484,38 +484,38 @@ export const withScrollProgress: Story = () => {
   return (
     <>
       <Carousel loop={false} dragFree onScrollProgress={onScrollProgress}>
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
-      <Progress value={value} colorScheme='gray' />
+      <Progress value={value} colorScheme="gray" />
     </>
   )
 }
 
 export const disabledIncludeGapInSize: Story = () => {
   return (
-    <Carousel slideSize='50%' includeGapInSize={false}>
-      <CarouselSlide as={Center} bg='primary'>
+    <Carousel slideSize="50%" includeGapInSize={false}>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -525,16 +525,16 @@ export const disabledIncludeGapInSize: Story = () => {
 export const disabledLoop: Story = () => {
   return (
     <Carousel loop={false}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -544,16 +544,16 @@ export const disabledLoop: Story = () => {
 export const disabledDraggable: Story = () => {
   return (
     <Carousel draggable={false}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -563,16 +563,16 @@ export const disabledDraggable: Story = () => {
 export const disabledStopMouseEnterAutoplay: Story = () => {
   return (
     <Carousel autoplay stopMouseEnterAutoplay={false}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -582,16 +582,16 @@ export const disabledStopMouseEnterAutoplay: Story = () => {
 export const disabledControlButton: Story = () => {
   return (
     <Carousel withControls={false}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -601,16 +601,16 @@ export const disabledControlButton: Story = () => {
 export const disabledIndicators: Story = () => {
   return (
     <Carousel withIndicators={false}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -622,16 +622,16 @@ export const customControl: Story = () => {
 
   return (
     <Carousel draggable={false} index={index} onChange={onChange}>
-      <CarouselSlide as={Center} bg='primary'>
+      <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='secondary'>
+      <CarouselSlide as={Center} bg="secondary">
         2
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='warning'>
+      <CarouselSlide as={Center} bg="warning">
         3
       </CarouselSlide>
-      <CarouselSlide as={Center} bg='danger'>
+      <CarouselSlide as={Center} bg="danger">
         4
       </CarouselSlide>
     </Carousel>
@@ -642,46 +642,46 @@ export const customControlButton: Story = () => {
   return (
     <>
       <Carousel controlProps={{ icon: <Icon icon={faPoo} /> }}>
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
       <Carousel controlPrevProps={{ icon: <Icon icon={faArrowLeft} /> }}>
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
       <Carousel controlNextProps={{ icon: <Icon icon={faArrowRight} /> }}>
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
@@ -690,16 +690,16 @@ export const customControlButton: Story = () => {
         <CarouselControlPrev icon={<Icon icon={faArrowLeft} />} />
         <CarouselControlNext icon={<Icon icon={faArrowRight} />} />
 
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
@@ -712,51 +712,51 @@ export const customIndicators: Story = () => {
     <>
       <Carousel
         indicatorsProps={{
-          bottom: '8',
+          bottom: "8",
           component: ({ isSelected }) => (
             <Icon
               icon={faPoo}
-              color={isSelected ? 'whiteAlpha.700' : 'whiteAlpha.400'}
-              cursor='pointer'
+              color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
+              cursor="pointer"
             />
           ),
         }}
       >
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
       </Carousel>
 
       <Carousel>
-        <CarouselSlide as={Center} bg='primary'>
+        <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='secondary'>
+        <CarouselSlide as={Center} bg="secondary">
           2
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='warning'>
+        <CarouselSlide as={Center} bg="warning">
           3
         </CarouselSlide>
-        <CarouselSlide as={Center} bg='danger'>
+        <CarouselSlide as={Center} bg="danger">
           4
         </CarouselSlide>
 
         <CarouselIndicators
           sx={{
-            '& > *': {
-              w: '4',
-              _selected: { w: '12' },
-              transitionProperty: 'width',
-              transitionDuration: 'slower',
+            "& > *": {
+              w: "4",
+              _selected: { w: "12" },
+              transitionProperty: "width",
+              transitionDuration: "slower",
             },
           }}
         />

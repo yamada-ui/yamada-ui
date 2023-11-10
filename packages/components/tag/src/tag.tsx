@@ -6,10 +6,10 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/core'
-import { Icon } from '@yamada-ui/icon'
-import { useClickable } from '@yamada-ui/use-clickable'
-import { cx } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { Icon } from "@yamada-ui/icon"
+import { useClickable } from "@yamada-ui/use-clickable"
+import { cx } from "@yamada-ui/utils"
 import {
   FC,
   HTMLAttributes,
@@ -17,7 +17,7 @@ import {
   ReactElement,
   ReactNode,
   useRef,
-} from 'react'
+} from "react"
 
 type TagnOptions = {
   /**
@@ -40,10 +40,10 @@ type TagnOptions = {
   isDisabled?: boolean
 }
 
-export type TagProps = HTMLUIProps<'span'> & ThemeProps<'Tag'> & TagnOptions
+export type TagProps = HTMLUIProps<"span"> & ThemeProps<"Tag"> & TagnOptions
 
-export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Tag', props)
+export const Tag = forwardRef<TagProps, "span">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Tag", props)
   const {
     className,
     leftIcon,
@@ -55,18 +55,18 @@ export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    maxW: '100%',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '1',
-    verticalAlign: 'top',
+    maxW: "100%",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "1",
+    verticalAlign: "top",
     ...styles.container,
   }
 
   return (
     <ui.span
       ref={ref}
-      className={cx('ui-tag', className)}
+      className={cx("ui-tag", className)}
       __css={css}
       {...rest}
     >
@@ -83,7 +83,7 @@ export const Tag = forwardRef<TagProps, 'span'>((props, ref) => {
 })
 
 const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
-  const [styles] = useMultiComponentStyle('Tag', props)
+  const [styles] = useMultiComponentStyle("Tag", props)
   const css = styles.label
 
   return (
@@ -95,34 +95,34 @@ const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
 
 const CloseIcon: FC = () => {
   return (
-    <Icon verticalAlign='inherit' viewBox='0 0 512 512' fontSize='lg'>
+    <Icon verticalAlign="inherit" viewBox="0 0 512 512" fontSize="lg">
       <path
-        fill='currentColor'
-        d='M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z'
+        fill="currentColor"
+        d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
       />
     </Icon>
   )
 }
 
-type CloseButtonProps = HTMLUIProps<'span'> & { isDisabled?: boolean }
+type CloseButtonProps = HTMLUIProps<"span"> & { isDisabled?: boolean }
 
 const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const [styles] = useMultiComponentStyle('Tag', props)
+  const [styles] = useMultiComponentStyle("Tag", props)
 
   const css: CSSUIObject = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    outline: '0',
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    outline: "0",
     ...styles.closeButton,
   }
 
   const rest = useClickable({ ref, ...(props as HTMLAttributes<HTMLElement>) })
 
   return (
-    <ui.span aria-label='close' __css={css} {...rest}>
+    <ui.span aria-label="close" __css={css} {...rest}>
       {children}
     </ui.span>
   )

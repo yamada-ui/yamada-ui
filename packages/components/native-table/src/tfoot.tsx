@@ -1,10 +1,10 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useTableStyles } from './native-table'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useTableStyles } from "./native-table"
 
-export type TableFootProps = HTMLUIProps<'tfoot'>
+export type TableFootProps = HTMLUIProps<"tfoot">
 
-export const Tfoot = forwardRef<TableFootProps, 'tfoot'>(
+export const Tfoot = forwardRef<TableFootProps, "tfoot">(
   ({ className, ...rest }, ref) => {
     const styles = useTableStyles()
 
@@ -13,7 +13,7 @@ export const Tfoot = forwardRef<TableFootProps, 'tfoot'>(
     return (
       <ui.tfoot
         ref={ref}
-        className={cx('ui-table__tfoot', className)}
+        className={cx("ui-table__tfoot", className)}
         __css={css}
         {...rest}
       />

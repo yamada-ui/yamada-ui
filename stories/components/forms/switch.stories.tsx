@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   Label,
   Switch,
@@ -7,14 +7,14 @@ import {
   HStack,
   VStack,
   Button,
-} from '@yamada-ui/react'
-import { useId } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+} from "@yamada-ui/react"
+import { useId } from "react"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Switch>
 
 const meta: Meta<typeof Switch> = {
-  title: 'Components / Forms / Switch',
+  title: "Components / Forms / Switch",
   component: Switch,
 }
 
@@ -27,9 +27,9 @@ export const withReverse: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Switch size='sm'>small size</Switch>
-      <Switch size='md'>medium size</Switch>
-      <Switch size='lg'>large size</Switch>
+      <Switch size="sm">small size</Switch>
+      <Switch size="md">medium size</Switch>
+      <Switch size="lg">large size</Switch>
     </>
   )
 }
@@ -37,8 +37,8 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Switch variant='thick'>thick</Switch>
-      <Switch variant='thin'>thin</Switch>
+      <Switch variant="thick">thick</Switch>
+      <Switch variant="thin">thin</Switch>
     </>
   )
 }
@@ -47,8 +47,8 @@ export const withLabel: Story = () => {
   const id = useId()
 
   return (
-    <HStack gap='sm'>
-      <Label htmlFor={id} userSelect='none'>
+    <HStack gap="sm">
+      <Label htmlFor={id} userSelect="none">
         Please Click
       </Label>
       <Switch id={id} />
@@ -58,108 +58,108 @@ export const withLabel: Story = () => {
 
 export const withColorScheme: Story = () => {
   return (
-    <Wrap gap='md'>
-      <Switch colorScheme='primary' defaultChecked>
+    <Wrap gap="md">
+      <Switch colorScheme="primary" defaultChecked>
         Primary
       </Switch>
 
-      <Switch colorScheme='secondary' defaultChecked>
+      <Switch colorScheme="secondary" defaultChecked>
         Secondary
       </Switch>
 
-      <Switch colorScheme='warning' defaultChecked>
+      <Switch colorScheme="warning" defaultChecked>
         Warning
       </Switch>
 
-      <Switch colorScheme='danger' defaultChecked>
+      <Switch colorScheme="danger" defaultChecked>
         Danger
       </Switch>
 
-      <Switch colorScheme='link' defaultChecked>
+      <Switch colorScheme="link" defaultChecked>
         Link
       </Switch>
 
-      <Switch colorScheme='gray' defaultChecked>
+      <Switch colorScheme="gray" defaultChecked>
         Gray
       </Switch>
 
-      <Switch colorScheme='zinc' defaultChecked>
+      <Switch colorScheme="zinc" defaultChecked>
         Zinc
       </Switch>
 
-      <Switch colorScheme='neutral' defaultChecked>
+      <Switch colorScheme="neutral" defaultChecked>
         Neutral
       </Switch>
 
-      <Switch colorScheme='stone' defaultChecked>
+      <Switch colorScheme="stone" defaultChecked>
         Stone
       </Switch>
 
-      <Switch colorScheme='red' defaultChecked>
+      <Switch colorScheme="red" defaultChecked>
         Red
       </Switch>
 
-      <Switch colorScheme='rose' defaultChecked>
+      <Switch colorScheme="rose" defaultChecked>
         Rose
       </Switch>
 
-      <Switch colorScheme='pink' defaultChecked>
+      <Switch colorScheme="pink" defaultChecked>
         Pink
       </Switch>
 
-      <Switch colorScheme='orange' defaultChecked>
+      <Switch colorScheme="orange" defaultChecked>
         Orange
       </Switch>
 
-      <Switch colorScheme='amber' defaultChecked>
+      <Switch colorScheme="amber" defaultChecked>
         Amber
       </Switch>
 
-      <Switch colorScheme='yellow' defaultChecked>
+      <Switch colorScheme="yellow" defaultChecked>
         Yellow
       </Switch>
 
-      <Switch colorScheme='lime' defaultChecked>
+      <Switch colorScheme="lime" defaultChecked>
         Lime
       </Switch>
 
-      <Switch colorScheme='green' defaultChecked>
+      <Switch colorScheme="green" defaultChecked>
         Green
       </Switch>
 
-      <Switch colorScheme='emerald' defaultChecked>
+      <Switch colorScheme="emerald" defaultChecked>
         Emerald
       </Switch>
 
-      <Switch colorScheme='teal' defaultChecked>
+      <Switch colorScheme="teal" defaultChecked>
         Teal
       </Switch>
 
-      <Switch colorScheme='cyan' defaultChecked>
+      <Switch colorScheme="cyan" defaultChecked>
         Cyan
       </Switch>
 
-      <Switch colorScheme='sky' defaultChecked>
+      <Switch colorScheme="sky" defaultChecked>
         Sky
       </Switch>
 
-      <Switch colorScheme='blue' defaultChecked>
+      <Switch colorScheme="blue" defaultChecked>
         Blue
       </Switch>
 
-      <Switch colorScheme='indigo' defaultChecked>
+      <Switch colorScheme="indigo" defaultChecked>
         Indigo
       </Switch>
 
-      <Switch colorScheme='violet' defaultChecked>
+      <Switch colorScheme="violet" defaultChecked>
         Violet
       </Switch>
 
-      <Switch colorScheme='purple' defaultChecked>
+      <Switch colorScheme="purple" defaultChecked>
         Purple
       </Switch>
 
-      <Switch colorScheme='fuchsia' defaultChecked>
+      <Switch colorScheme="fuchsia" defaultChecked>
         Fuchsia
       </Switch>
     </Wrap>
@@ -203,14 +203,14 @@ export const reactHookForm: Story = () => {
 
   const { control, handleSubmit, watch } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name='switch'
+        name="switch"
         control={control}
         render={({ field: { value, ...rest } }) => (
           <Switch isChecked={value} {...rest}>
@@ -219,7 +219,7 @@ export const reactHookForm: Story = () => {
         )}
       />
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>
@@ -235,14 +235,14 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const { control, handleSubmit, watch } = useForm<Data>({ defaultValues })
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name='switch'
+        name="switch"
         control={control}
         render={({ field: { value, ...rest } }) => (
           <Switch isChecked={value} {...rest}>
@@ -251,7 +251,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
         )}
       />
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>

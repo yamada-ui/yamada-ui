@@ -6,11 +6,11 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { Popover, PopoverTrigger } from '@yamada-ui/popover'
-import { cx } from '@yamada-ui/utils'
-import { AutocompleteIcon, AutocompleteIconProps } from './autocomplete-icon'
-import { AutocompleteList, AutocompleteListProps } from './autocomplete-list'
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { cx } from "@yamada-ui/utils"
+import { AutocompleteIcon, AutocompleteIconProps } from "./autocomplete-icon"
+import { AutocompleteList, AutocompleteListProps } from "./autocomplete-list"
 import {
   AutocompleteProvider,
   useAutocomplete,
@@ -18,8 +18,8 @@ import {
   AutocompleteDescendantsContextProvider,
   useAutocompleteContext,
   useAutocompleteInput,
-} from './use-autocomplete'
-import { AutocompleteCreate, AutocompleteEmpty } from './'
+} from "./use-autocomplete"
+import { AutocompleteCreate, AutocompleteEmpty } from "./"
 
 type AutocompleteOptions = {
   /**
@@ -33,34 +33,34 @@ type AutocompleteOptions = {
   /**
    * Props for autocomplete container element.
    */
-  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
    * Props for autocomplete list element.
    */
-  listProps?: Omit<AutocompleteListProps, 'children'>
+  listProps?: Omit<AutocompleteListProps, "children">
   /**
    * Props for autocomplete input element.
    */
-  inputProps?: HTMLUIProps<'input'>
+  inputProps?: HTMLUIProps<"input">
   /**
    * Props for autocomplete icon element.
    */
   iconProps?: AutocompleteIconProps
 }
 
-export type AutocompleteProps = ThemeProps<'Select'> &
+export type AutocompleteProps = ThemeProps<"Select"> &
   Omit<
     UseAutocompleteProps<string>,
-    'maxSelectedValues' | 'omitSelectedValues'
+    "maxSelectedValues" | "omitSelectedValues"
   > &
   AutocompleteOptions
 
-export const Autocomplete = forwardRef<AutocompleteProps, 'input'>(
+export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Autocomplete', props)
+    const [styles, mergedProps] = useMultiComponentStyle("Autocomplete", props)
     let {
       className,
-      defaultValue = '',
+      defaultValue = "",
       color,
       h,
       height,
@@ -91,9 +91,9 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>(
     minH = minH ?? minHeight
 
     const css: CSSUIObject = {
-      position: 'relative',
-      w: '100%',
-      h: 'fit-content',
+      position: "relative",
+      w: "100%",
+      h: "fit-content",
       color,
       ...styles.container,
     }
@@ -112,7 +112,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>(
         >
           <Popover {...getPopoverProps()}>
             <ui.div
-              className={cx('ui-autocomplete', className)}
+              className={cx("ui-autocomplete", className)}
               __css={css}
               {...getContainerProps(containerProps)}
             >
@@ -152,39 +152,39 @@ export const Autocomplete = forwardRef<AutocompleteProps, 'input'>(
   },
 )
 
-type AutocompleteFieldProps = HTMLUIProps<'div'> &
-  Pick<AutocompleteProps, 'inputProps'>
+type AutocompleteFieldProps = HTMLUIProps<"div"> &
+  Pick<AutocompleteProps, "inputProps">
 
-const AutocompleteField = forwardRef<AutocompleteFieldProps, 'input'>(
+const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
   ({ className, h, minH, placeholder, inputProps, ...rest }, ref) => {
     const { displayValue, inputValue, styles } = useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
 
     const css: CSSUIObject = {
-      paddingEnd: '2rem',
+      paddingEnd: "2rem",
       h,
       minH,
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       ...styles.field,
-      cursor: 'text',
+      cursor: "text",
     }
 
     return (
       <PopoverTrigger>
         <ui.div
-          className={cx('ui-autocomplete__field', className)}
+          className={cx("ui-autocomplete__field", className)}
           __css={css}
           {...rest}
         >
           <ui.input
-            className='ui-autocomplete__field__input'
-            display='inline-block'
-            w='full'
+            className="ui-autocomplete__field__input"
+            display="inline-block"
+            w="full"
             placeholder={placeholder}
             {...getInputProps(
-              { ...inputProps, value: inputValue || displayValue || '' },
+              { ...inputProps, value: inputValue || displayValue || "" },
               ref,
             )}
           />

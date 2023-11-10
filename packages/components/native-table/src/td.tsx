@@ -1,6 +1,6 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useTableStyles } from './native-table'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useTableStyles } from "./native-table"
 
 type TdOptions = {
   /**
@@ -11,9 +11,9 @@ type TdOptions = {
   isNumeric?: boolean
 }
 
-export type TdProps = HTMLUIProps<'td'> & TdOptions
+export type TdProps = HTMLUIProps<"td"> & TdOptions
 
-export const Td = forwardRef<TdProps, 'td'>(
+export const Td = forwardRef<TdProps, "td">(
   ({ className, isNumeric, ...rest }, ref) => {
     const styles = useTableStyles()
 
@@ -22,7 +22,7 @@ export const Td = forwardRef<TdProps, 'td'>(
     return (
       <ui.td
         ref={ref}
-        className={cx('ui-table__td', className)}
+        className={cx("ui-table__td", className)}
         __css={css}
         data-is-numeric={isNumeric}
         {...rest}

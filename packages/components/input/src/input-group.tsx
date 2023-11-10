@@ -7,51 +7,51 @@ import {
   HTMLUIProps,
   ThemeProps,
   CSSUIProps,
-} from '@yamada-ui/core'
-import { FileInput } from '@yamada-ui/file-input'
-import { useToken } from '@yamada-ui/use-token'
+} from "@yamada-ui/core"
+import { FileInput } from "@yamada-ui/file-input"
+import { useToken } from "@yamada-ui/use-token"
 import {
   createContext,
   cx,
   filterUndefined,
   getValidChildren,
-} from '@yamada-ui/utils'
-import { cloneElement } from 'react'
+} from "@yamada-ui/utils"
+import { cloneElement } from "react"
 import {
   Input,
   InputRightElement,
   InputLeftElement,
   InputLeftAddon,
   InputRightAddon,
-} from './'
+} from "./"
 
-export type InputGroupProps = HTMLUIProps<'div'> & ThemeProps<'Input'>
+export type InputGroupProps = HTMLUIProps<"div"> & ThemeProps<"Input">
 
 type InputGroupContext = Record<string, CSSUIObject>
 
 const [InputGroupProvider, useInputGroup] = createContext<InputGroupContext>({
-  name: 'InputGroupContext',
+  name: "InputGroupContext",
   errorMessage: `useInputGroup returned is 'undefined'. Seems you forgot to wrap the components in "<InputGroup />" `,
 })
 
 export { useInputGroup }
 
-export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
-  const [styles] = useMultiComponentStyle('Input', props)
+export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
+  const [styles] = useMultiComponentStyle("Input", props)
   const { className, children, ...rest } = omitThemeProps(props)
 
   const css: CSSUIObject = {
-    width: '100%',
-    display: 'flex',
-    position: 'relative',
+    width: "100%",
+    display: "flex",
+    position: "relative",
   }
   const groupProps: CSSUIProps = {}
   const minHeight: any =
-    useToken('sizes', (styles.field?.minHeight ?? styles.field?.minH) as any) ??
+    useToken("sizes", (styles.field?.minHeight ?? styles.field?.minH) as any) ??
     styles.field?.minHeight ??
     styles.field?.minH
   const height: any =
-    useToken('sizes', (styles.field?.height ?? styles.field?.h) as any) ??
+    useToken("sizes", (styles.field?.height ?? styles.field?.h) as any) ??
     styles.field?.height ??
     styles.field?.h
 
@@ -85,8 +85,8 @@ export const InputGroup = forwardRef<InputGroupProps, 'div'>((props, ref) => {
     <InputGroupProvider value={styles}>
       <ui.div
         ref={ref}
-        className={cx('ui-input-group', className)}
-        role='group'
+        className={cx("ui-input-group", className)}
+        role="group"
         __css={css}
         {...rest}
       >

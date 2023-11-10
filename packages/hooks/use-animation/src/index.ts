@@ -3,34 +3,34 @@ import {
   AnimationStyle,
   Theme,
   generateAnimation,
-} from '@yamada-ui/core'
-import { useBoolean } from '@yamada-ui/use-boolean'
-import { useEventListener } from '@yamada-ui/use-event-listener'
+} from "@yamada-ui/core"
+import { useBoolean } from "@yamada-ui/use-boolean"
+import { useEventListener } from "@yamada-ui/use-event-listener"
 import {
   isArray,
   isUndefined,
   runIfFunc,
   getOwnerWindow,
-} from '@yamada-ui/utils'
-import { useCallback, useEffect, useRef, useState } from 'react'
+} from "@yamada-ui/utils"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 type Styles =
   | AnimationStyle
-  | Theme['animations']
-  | (AnimationStyle | Theme['animations'])[]
+  | Theme["animations"]
+  | (AnimationStyle | Theme["animations"])[]
 
 export const useAnimation = (styles: Styles): string => {
   const { theme } = useTheme()
 
   if (isArray(styles)) {
-    return styles.map((style) => generateAnimation(style, theme)).join(', ')
+    return styles.map((style) => generateAnimation(style, theme)).join(", ")
   } else {
     return generateAnimation(styles, theme)
   }
 }
 
 export const useDynamicAnimation = <
-  T extends (AnimationStyle | Theme['animations'])[] | Record<string, Styles>,
+  T extends (AnimationStyle | Theme["animations"])[] | Record<string, Styles>,
 >(
   arrayOrObj: T,
   init?: keyof T | (keyof T)[],
@@ -61,7 +61,7 @@ export const useDynamicAnimation = <
       if (isArray(styles)) {
         cache.current.set(
           key,
-          styles.map((style) => generateAnimation(style, theme)).join(', '),
+          styles.map((style) => generateAnimation(style, theme)).join(", "),
         )
       } else {
         cache.current.set(key, generateAnimation(styles, theme))
@@ -69,9 +69,9 @@ export const useDynamicAnimation = <
     }
 
     if (isArray(keys.current)) {
-      return keys.current.map((key) => cache.current.get(key)).join(', ')
+      return keys.current.map((key) => cache.current.get(key)).join(", ")
     } else {
-      return cache.current.get(keys.current ?? '')
+      return cache.current.get(keys.current ?? "")
     }
   })
 
@@ -100,10 +100,10 @@ export const useDynamicAnimation = <
 
       if (isArray(keys.current)) {
         setAnimations(
-          keys.current.map((key) => cache.current.get(key)).join(', '),
+          keys.current.map((key) => cache.current.get(key)).join(", "),
         )
       } else {
-        setAnimations(cache.current.get(keys.current ?? ''))
+        setAnimations(cache.current.get(keys.current ?? ""))
       }
     },
     [arrayOrObj],
@@ -133,7 +133,7 @@ export const useAnimationObserver = ({
 
   useEventListener(
     () => ref.current,
-    'animationend',
+    "animationend",
     () => setMounted(isOpen),
   )
 
@@ -143,7 +143,7 @@ export const useAnimationObserver = ({
     present: !hidden,
     onAnimationComplete() {
       const ownerWindow = getOwnerWindow(ref.current)
-      const ev = new ownerWindow.CustomEvent('animationend', {
+      const ev = new ownerWindow.CustomEvent("animationend", {
         bubbles: true,
       })
 

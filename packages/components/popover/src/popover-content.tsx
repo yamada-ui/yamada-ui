@@ -4,9 +4,9 @@ import {
   HTMLUIProps,
   CSSUIObject,
   CSSUIProps,
-} from '@yamada-ui/core'
-import { motion, HTMLMotionProps } from '@yamada-ui/motion'
-import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
+} from "@yamada-ui/core"
+import { motion, HTMLMotionProps } from "@yamada-ui/motion"
+import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import {
   cx,
   DOMAttributes,
@@ -14,60 +14,60 @@ import {
   funcAll,
   getValidChildren,
   omitObject,
-} from '@yamada-ui/utils'
-import { ReactNode, RefAttributes } from 'react'
-import { usePopover } from './popover'
-import { PopoverProps, PopoverCloseButton } from '.'
+} from "@yamada-ui/utils"
+import { ReactNode, RefAttributes } from "react"
+import { usePopover } from "./popover"
+import { PopoverProps, PopoverCloseButton } from "."
 
 export type PopoverContentProps = Omit<
-  HTMLUIProps<'section'>,
-  keyof Omit<HTMLMotionProps<'section'>, 'children'>
+  HTMLUIProps<"section">,
+  keyof Omit<HTMLMotionProps<"section">, "children">
 > &
   Omit<
-    HTMLMotionProps<'section'>,
-    | 'color'
-    | 'style'
-    | 'onDrag'
-    | 'onDragEnd'
-    | 'onDragStart'
-    | 'onAnimationStart'
-    | 'variants'
-    | 'transition'
+    HTMLMotionProps<"section">,
+    | "color"
+    | "style"
+    | "onDrag"
+    | "onDragEnd"
+    | "onDragStart"
+    | "onAnimationStart"
+    | "variants"
+    | "transition"
   >
 
 const getPopoverContentProps = (
-  animation: PopoverProps['animation'] = 'scale',
-  duration?: PopoverProps['duration'],
+  animation: PopoverProps["animation"] = "scale",
+  duration?: PopoverProps["duration"],
 ) => {
   const custom = {
     reverse: true,
     duration,
-    enter: { visibility: 'visible' },
-    transitionEnd: { exit: { visibility: 'hidden' } },
+    enter: { visibility: "visible" },
+    transitionEnd: { exit: { visibility: "hidden" } },
   }
 
   switch (animation) {
-    case 'scale':
+    case "scale":
       return {
         ...scaleFadeProps,
         custom: { ...custom, scale: 0.95 },
       }
-    case 'top':
+    case "top":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetX: 0, offsetY: -16 },
       }
-    case 'right':
+    case "right":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetX: 16, offsetY: 0 },
       }
-    case 'left':
+    case "left":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetX: -16, offsetY: 0 },
       }
-    case 'bottom':
+    case "bottom":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetX: 0, offsetY: 16 },
@@ -75,10 +75,10 @@ const getPopoverContentProps = (
   }
 }
 
-export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
+export const PopoverContent = forwardRef<PopoverContentProps, "section">(
   (
     {
-      as = 'section',
+      as = "section",
       className,
       children,
       w,
@@ -120,39 +120,39 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
     }
 
     const css: CSSUIObject = {
-      position: 'relative',
-      w: '100%',
-      display: 'flex',
-      flexDirection: 'column',
+      position: "relative",
+      w: "100%",
+      display: "flex",
+      flexDirection: "column",
       outline: 0,
-      ...omitObject(__css ?? styles.container, ['zIndex']),
+      ...omitObject(__css ?? styles.container, ["zIndex"]),
     }
 
     w =
       w ??
       width ??
-      ((styles.container?.w ?? styles.container?.width) as CSSUIProps['w'])
+      ((styles.container?.w ?? styles.container?.width) as CSSUIProps["w"])
     minW =
       minW ??
       minWidth ??
       ((styles.container?.minW ??
-        styles.container?.minWidth) as CSSUIProps['minW'])
-    zIndex = (zIndex ?? styles.container?.zIndex) as CSSUIProps['zIndex']
+        styles.container?.minWidth) as CSSUIProps["minW"])
+    zIndex = (zIndex ?? styles.container?.zIndex) as CSSUIProps["zIndex"]
 
     return (
       <ui.div
         {...getPopperProps({
-          style: { visibility: isOpen ? 'visible' : 'hidden' },
+          style: { visibility: isOpen ? "visible" : "hidden" },
         })}
-        className='ui-popover'
+        className="ui-popover"
         w={w}
         minW={minW}
         zIndex={zIndex}
       >
         <ui.section
           as={motion[as as keyof typeof motion]}
-          className={cx('ui-popover-content', className)}
-          {...(animation !== 'none'
+          className={cx("ui-popover-content", className)}
+          {...(animation !== "none"
             ? getPopoverContentProps(animation, duration)
             : {})}
           {...(getPopoverProps(
@@ -161,10 +161,10 @@ export const PopoverContent = forwardRef<PopoverContentProps, 'section'>(
               children: resolvedChildren(),
             },
             ref,
-          ) as Omit<DOMAttributes & RefAttributes<any>, 'onDrag'>)}
-          initial='exit'
-          animate={isOpen ? 'enter' : 'exit'}
-          exit='exit'
+          ) as Omit<DOMAttributes & RefAttributes<any>, "onDrag">)}
+          initial="exit"
+          animate={isOpen ? "enter" : "exit"}
+          exit="exit"
           onAnimationComplete={funcAll(
             onAnimationComplete,
             rest.onAnimationComplete,

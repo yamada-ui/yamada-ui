@@ -1,40 +1,40 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { getValidChildren, cx, replaceObject } from '@yamada-ui/utils'
-import { cloneElement, Fragment, ReactElement, useMemo } from 'react'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { getValidChildren, cx, replaceObject } from "@yamada-ui/utils"
+import { cloneElement, Fragment, ReactElement, useMemo } from "react"
 
 type StackOptions = {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIObject['flexDirection']
+  direction?: CSSUIObject["flexDirection"]
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIObject['justifyContent']
+  justify?: CSSUIObject["justifyContent"]
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIObject['alignItems']
+  align?: CSSUIObject["alignItems"]
   /**
    * The CSS `flex-wrap` property.
    */
-  wrap?: CSSUIObject['flexWrap']
+  wrap?: CSSUIObject["flexWrap"]
   /**
    * If `true`, each stack item will show a divider.
    */
   divider?: ReactElement
 }
 
-export type StackProps = HTMLUIProps<'div'> & StackOptions
+export type StackProps = HTMLUIProps<"div"> & StackOptions
 
-export const Stack = forwardRef<StackProps, 'div'>(
+export const Stack = forwardRef<StackProps, "div">(
   (
     {
-      direction: flexDirection = 'column',
+      direction: flexDirection = "column",
       justify: justifyContent,
       align: alignItems,
       wrap: flexWrap,
-      gap = 'md',
+      gap = "md",
       divider,
       className,
       children,
@@ -43,21 +43,21 @@ export const Stack = forwardRef<StackProps, 'div'>(
     ref,
   ) => {
     const isColumn = (value: any) =>
-      value === 'column' || value === 'column-reverse'
+      value === "column" || value === "column-reverse"
 
     const dividerCSS = useMemo(
       () => ({
         w: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? '100%' : 'fix-content',
+          isColumn(value) ? "100%" : "fix-content",
         ),
         h: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? 'fix-content' : '100%',
+          isColumn(value) ? "fix-content" : "100%",
         ),
         borderLeftWidth: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? 0 : '1px',
+          isColumn(value) ? 0 : "1px",
         ),
         borderBottomWidth: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? '1px' : 0,
+          isColumn(value) ? "1px" : 0,
         ),
       }),
       [flexDirection],
@@ -67,7 +67,7 @@ export const Stack = forwardRef<StackProps, 'div'>(
 
     const cloneChildren = divider
       ? validChildren.map((child, index) => {
-          const key = typeof child.key !== 'undefined' ? child.key : index
+          const key = typeof child.key !== "undefined" ? child.key : index
 
           const cloneDivider = cloneElement(
             divider as React.ReactElement<any>,
@@ -87,7 +87,7 @@ export const Stack = forwardRef<StackProps, 'div'>(
 
     const css: CSSUIObject = useMemo(
       () => ({
-        display: 'flex',
+        display: "flex",
         flexDirection,
         justifyContent,
         alignItems,
@@ -100,7 +100,7 @@ export const Stack = forwardRef<StackProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-stack', className)}
+        className={cx("ui-stack", className)}
         __css={css}
         {...rest}
       >
@@ -110,10 +110,10 @@ export const Stack = forwardRef<StackProps, 'div'>(
   },
 )
 
-export const HStack = forwardRef<StackProps, 'div'>((props, ref) => (
-  <Stack ref={ref} direction='row' align='center' {...props} />
+export const HStack = forwardRef<StackProps, "div">((props, ref) => (
+  <Stack ref={ref} direction="row" align="center" {...props} />
 ))
 
-export const VStack = forwardRef<StackProps, 'div'>((props, ref) => (
-  <Stack ref={ref} direction='column' align='stretch' w='100%' {...props} />
+export const VStack = forwardRef<StackProps, "div">((props, ref) => (
+  <Stack ref={ref} direction="column" align="stretch" w="100%" {...props} />
 ))

@@ -1,6 +1,6 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useTableStyles } from './native-table'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useTableStyles } from "./native-table"
 
 type TableCaptionOptions = {
   /**
@@ -8,13 +8,13 @@ type TableCaptionOptions = {
    *
    * @default 'bottom'
    */
-  placement?: 'top' | 'bottom'
+  placement?: "top" | "bottom"
 }
 
-export type TableCaptionProps = HTMLUIProps<'caption'> & TableCaptionOptions
+export type TableCaptionProps = HTMLUIProps<"caption"> & TableCaptionOptions
 
-export const TableCaption = forwardRef<TableCaptionProps, 'caption'>(
-  ({ className, placement = 'bottom', ...rest }, ref) => {
+export const TableCaption = forwardRef<TableCaptionProps, "caption">(
+  ({ className, placement = "bottom", ...rest }, ref) => {
     const styles = useTableStyles()
 
     const css: CSSUIObject = { captionSide: placement, ...styles.caption }
@@ -22,7 +22,7 @@ export const TableCaption = forwardRef<TableCaptionProps, 'caption'>(
     return (
       <ui.caption
         ref={ref}
-        className={cx('ui-table__caption', className)}
+        className={cx("ui-table__caption", className)}
         __css={css}
         {...rest}
       />

@@ -1,12 +1,12 @@
-import { ui, CSSUIObject, forwardRef } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { FC, ReactElement } from 'react'
-import { AutocompleteItemIcon } from './autocomplete-icon'
+import { ui, CSSUIObject, forwardRef } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { FC, ReactElement } from "react"
+import { AutocompleteItemIcon } from "./autocomplete-icon"
 import {
   useAutocompleteContext,
   useAutocompleteOption,
   UseAutocompleteOptionProps,
-} from './use-autocomplete'
+} from "./use-autocomplete"
 
 type AutocompleteOptionOptions = {
   /**
@@ -18,7 +18,7 @@ type AutocompleteOptionOptions = {
 export type AutocompleteOptionProps = UseAutocompleteOptionProps &
   AutocompleteOptionOptions
 
-export const AutocompleteOption = forwardRef<AutocompleteOptionProps, 'li'>(
+export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
   ({ className, icon, ...rest }, ref) => {
     const { styles } = useAutocompleteContext()
     const { isSelected, customIcon, children, getOptionProps } =
@@ -27,22 +27,22 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, 'li'>(
     icon = icon ?? customIcon
 
     const css: CSSUIObject = {
-      textDecoration: 'none',
-      color: 'inherit',
-      userSelect: 'none',
-      display: 'flex',
-      width: '100%',
-      alignItems: 'center',
-      textAlign: 'start',
-      flex: '0 0 auto',
+      textDecoration: "none",
+      color: "inherit",
+      userSelect: "none",
+      display: "flex",
+      width: "100%",
+      alignItems: "center",
+      textAlign: "start",
+      flex: "0 0 auto",
       outline: 0,
-      gap: '0.75rem',
+      gap: "0.75rem",
       ...styles.item,
     }
 
     return (
       <ui.li
-        className={cx('ui-autocomplete__item', className)}
+        className={cx("ui-autocomplete__item", className)}
         __css={css}
         {...getOptionProps({}, ref)}
       >
@@ -52,7 +52,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, 'li'>(
           </AutocompleteItemIcon>
         ) : null}
         {icon ? (
-          <ui.span style={{ pointerEvents: 'none', flex: 1 }} noOfLines={1}>
+          <ui.span style={{ pointerEvents: "none", flex: 1 }} noOfLines={1}>
             {children}
           </ui.span>
         ) : (
@@ -64,10 +64,10 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, 'li'>(
 )
 
 const CheckIcon: FC = () => (
-  <svg viewBox='0 0 14 14' width='1em' height='1em'>
+  <svg viewBox="0 0 14 14" width="1em" height="1em">
     <polygon
-      fill='currentColor'
-      points='5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039'
+      fill="currentColor"
+      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
     />
   </svg>
 )

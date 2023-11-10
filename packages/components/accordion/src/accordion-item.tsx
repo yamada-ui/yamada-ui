@@ -1,4 +1,4 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import {
   ariaAttr,
   createContext,
@@ -11,18 +11,18 @@ import {
   mergeRefs,
   omitChildren,
   PropGetter,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   KeyboardEvent,
   KeyboardEventHandler,
   ReactNode,
   useCallback,
-} from 'react'
-import { useAccordionContext, useAccordionDescendant } from './accordion'
-import { AccordionLabel } from './accordion-label'
-import { AccordionPanel } from './accordion-panel'
+} from "react"
+import { useAccordionContext, useAccordionDescendant } from "./accordion"
+import { AccordionLabel } from "./accordion-label"
+import { AccordionPanel } from "./accordion-panel"
 
-type AccordionItemContext = Omit<AccordionItemOptions, 'children'> & {
+type AccordionItemContext = Omit<AccordionItemOptions, "children"> & {
   isOpen: boolean
   getLabelProps: PropGetter
   getPanelProps: PropGetter
@@ -30,7 +30,7 @@ type AccordionItemContext = Omit<AccordionItemOptions, 'children'> & {
 
 const [AccordionItemProvider, useAccordionItemContext] =
   createContext<AccordionItemContext>({
-    name: 'AccordionItemContext',
+    name: "AccordionItemContext",
     errorMessage: `useAccordionItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<AccordionItem />"`,
   })
 
@@ -60,10 +60,10 @@ type AccordionItemOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionItemProps = Omit<HTMLUIProps<'div'>, 'children'> &
+export type AccordionItemProps = Omit<HTMLUIProps<"div">, "children"> &
   AccordionItemOptions
 
-export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
+export const AccordionItem = forwardRef<AccordionItemProps, "div">(
   ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
     const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
       useAccordionContext()
@@ -143,9 +143,9 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
       (props = {}, ref = null) => ({
         ...props,
         ref: mergeRefs(register, ref),
-        type: 'button',
+        type: "button",
         disabled: isDisabled,
-        'aria-expanded': ariaAttr(isOpen),
+        "aria-expanded": ariaAttr(isOpen),
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -158,17 +158,17 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
       [],
     )
 
-    const css: CSSUIObject = { ...styles.item, overflowAnchor: 'none' }
+    const css: CSSUIObject = { ...styles.item, overflowAnchor: "none" }
 
     const cloneLabel =
-      typeof label === 'function'
+      typeof label === "function"
         ? label({
             isExpanded: isOpen,
             isDisabled,
           })
         : label
 
-    if (typeof children === 'function')
+    if (typeof children === "function")
       children = children({ isExpanded: isOpen, isDisabled })
 
     const validChildren = getValidChildren(children)
@@ -186,7 +186,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, 'div'>(
       >
         <ui.div
           ref={ref}
-          className={cx('ui-accordion__item', className)}
+          className={cx("ui-accordion__item", className)}
           aria-expanded={ariaAttr(isOpen)}
           __css={css}
           {...rest}

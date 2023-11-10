@@ -9,9 +9,9 @@ import {
   VStack,
   isArray,
   useColorMode,
-} from '@yamada-ui/react'
-import { FC, ReactNode, useEffect } from 'react'
-import { useDarkMode } from 'storybook-dark-mode'
+} from "@yamada-ui/react"
+import { FC, ReactNode, useEffect } from "react"
+import { useDarkMode } from "storybook-dark-mode"
 
 export const JSX: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -24,7 +24,7 @@ export const JSX: FC<{ children: ReactNode }> = ({ children }) => {
 const App: FC<ContainerProps> = ({ children }) => {
   const { changeColorMode } = useColorMode()
 
-  const colorMode = useDarkMode() ? 'dark' : 'light'
+  const colorMode = useDarkMode() ? "dark" : "light"
 
   useEffect(() => {
     changeColorMode(colorMode)
@@ -51,25 +51,25 @@ type ColorPalletProps = {
 }
 
 export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
-  const colorMode = useDarkMode() ? 'dark' : 'light'
+  const colorMode = useDarkMode() ? "dark" : "light"
 
   return (
     <HStack key={hue}>
       <Box
         bg={hue ? `${name}.${hue}` : name}
-        minW='12'
-        minH='12'
-        rounded='md'
-        boxShadow='inner'
+        minW="12"
+        minH="12"
+        rounded="md"
+        boxShadow="inner"
       />
-      <VStack gap='1'>
-        <Text m='0' fontWeight='semibold' noOfLines={1}>
+      <VStack gap="1">
+        <Text m="0" fontWeight="semibold" noOfLines={1}>
           {name.charAt(0).toUpperCase() + name.slice(1)} {hue}
         </Text>
-        <Text m='0' noOfLines={1}>
+        <Text m="0" noOfLines={1}>
           {!isArray(value)
             ? value
-            : colorMode === 'light'
+            : colorMode === "light"
             ? value[0]
             : value[1]}
         </Text>

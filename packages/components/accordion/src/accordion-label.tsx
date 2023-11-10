@@ -1,9 +1,9 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { ChevronIcon, IconProps } from '@yamada-ui/icon'
-import { cx } from '@yamada-ui/utils'
-import { FC, PropsWithChildren, ReactNode } from 'react'
-import { useAccordionContext } from './accordion'
-import { useAccordionItemContext } from './accordion-item'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ChevronIcon, IconProps } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { FC, PropsWithChildren, ReactNode } from "react"
+import { useAccordionContext } from "./accordion"
+import { useAccordionItemContext } from "./accordion-item"
 
 type AccordionLabelOptions = {
   /**
@@ -14,9 +14,9 @@ type AccordionLabelOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionLabelProps = HTMLUIProps<'button'> & AccordionLabelOptions
+export type AccordionLabelProps = HTMLUIProps<"button"> & AccordionLabelOptions
 
-export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
+export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
   ({ className, icon: customIcon, children, ...rest }, ref) => {
     const {
       isOpen,
@@ -27,15 +27,15 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
     const { icon: generalIcon, iconHidden, styles } = useAccordionContext()
 
     const css: CSSUIObject = {
-      display: 'inline-flex',
-      alignItems: 'center',
-      width: '100%',
+      display: "inline-flex",
+      alignItems: "center",
+      width: "100%",
       outline: 0,
       ...styles.button,
     }
 
     const cloneCustomIcon =
-      typeof customIcon === 'function'
+      typeof customIcon === "function"
         ? customIcon({
             isExpanded: isOpen,
             isDisabled,
@@ -43,7 +43,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
         : customIcon
 
     const cloneSupplementlIcon =
-      typeof supplementIcon === 'function'
+      typeof supplementIcon === "function"
         ? supplementIcon({
             isExpanded: isOpen,
             isDisabled,
@@ -51,7 +51,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
         : supplementIcon
 
     const cloneGenerallIcon =
-      typeof generalIcon === 'function'
+      typeof generalIcon === "function"
         ? generalIcon({
             isExpanded: isOpen,
             isDisabled,
@@ -61,7 +61,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, 'button'>(
     return (
       <ui.button
         {...getLabelProps(rest, ref)}
-        className={cx('ui-accordion__label', className)}
+        className={cx("ui-accordion__label", className)}
         __css={css}
       >
         {children}
@@ -85,21 +85,21 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
 
   const css: CSSUIObject = {
     opacity: isDisabled ? 0.4 : 1,
-    transform: isOpen ? 'rotate(-180deg)' : undefined,
-    transition: 'transform 0.2s',
-    transformOrigin: 'center',
+    transform: isOpen ? "rotate(-180deg)" : undefined,
+    transition: "transform 0.2s",
+    transformOrigin: "center",
     ...styles.icon,
   }
 
   if (children)
     return (
       <ui.span
-        className={cx('ui-accordion__icon', className)}
+        className={cx("ui-accordion__icon", className)}
         __css={{
-          display: 'inline-flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          ml: 'auto',
+          display: "inline-flex",
+          justifyContent: "center",
+          alignItems: "center",
+          ml: "auto",
         }}
       >
         {children}
@@ -108,7 +108,7 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
 
   return (
     <ChevronIcon
-      className={cx('ui-accordion__icon', className)}
+      className={cx("ui-accordion__icon", className)}
       __css={css}
       {...rest}
     />

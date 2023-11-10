@@ -1,34 +1,34 @@
-import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray } from "@yamada-ui/utils"
 
 export const NumberInput: ComponentMultiStyle = {
   baseStyle: {
     container: {},
     field: {
-      width: '100%',
+      width: "100%",
       minWidth: 0,
       outline: 0,
-      position: 'relative',
-      appearance: 'none',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      position: "relative",
+      appearance: "none",
+      transitionProperty: "common",
+      transitionDuration: "normal",
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
     },
     addon: {},
     stepper: {
-      borderStart: '1px solid',
-      borderColor: 'inherit',
-      color: ['blackAlpha.600', 'whiteAlpha.600'],
+      borderStart: "1px solid",
+      borderColor: "inherit",
+      color: ["blackAlpha.600", "whiteAlpha.600"],
       _active: {
-        bg: ['gray.200', 'whiteAlpha.300'],
+        bg: ["gray.200", "whiteAlpha.300"],
       },
-      _readOnly: { cursor: 'auto' },
+      _readOnly: { cursor: "auto" },
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
     },
   },
@@ -37,8 +37,8 @@ export const NumberInput: ComponentMultiStyle = {
     outline: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -49,22 +49,22 @@ export const NumberInput: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '1px solid',
-          borderColor: 'inherit',
-          bg: 'inherit',
+          border: "1px solid",
+          borderColor: "inherit",
+          bg: "inherit",
           _hover: {
-            borderColor: ['gray.300', 'whiteAlpha.400'],
+            borderColor: ["gray.300", "whiteAlpha.400"],
           },
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -74,8 +74,8 @@ export const NumberInput: ComponentMultiStyle = {
     filled: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -86,21 +86,21 @@ export const NumberInput: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '2px solid',
-          borderColor: 'transparent',
-          bg: ['gray.100', 'whiteAlpha.50'],
+          border: "2px solid",
+          borderColor: "transparent",
+          bg: ["gray.100", "whiteAlpha.50"],
           _hover: {
-            bg: ['gray.200', 'whiteAlpha.100'],
+            bg: ["gray.200", "whiteAlpha.100"],
           },
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
           },
           _focusVisible: {
-            bg: 'transparent',
+            bg: "transparent",
             borderColor: focusBorderColor,
           },
         },
@@ -109,8 +109,8 @@ export const NumberInput: ComponentMultiStyle = {
     flushed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -121,14 +121,14 @@ export const NumberInput: ComponentMultiStyle = {
 
       return {
         field: {
-          borderBottom: '1px solid',
-          borderColor: 'inherit',
-          rounded: '0',
-          px: '0',
-          bg: 'transparent',
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          rounded: "0",
+          px: "0",
+          bg: "transparent",
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
@@ -140,32 +140,32 @@ export const NumberInput: ComponentMultiStyle = {
           },
         },
         stepper: {
-          bg: 'transparent',
-          border: 'none',
+          bg: "transparent",
+          border: "none",
           _active: {
-            bg: 'transparent',
+            bg: "transparent",
             opacity: 0.7,
           },
           _last: {
-            border: 'none',
+            border: "none",
           },
         },
       }
     },
     unstyled: {
       field: {
-        bg: 'transparent',
-        h: 'auto',
-        px: '0',
+        bg: "transparent",
+        h: "auto",
+        px: "0",
       },
       stepper: {
-        bg: 'transparent',
-        border: 'none',
+        bg: "transparent",
+        border: "none",
         _active: {
-          bg: 'transparent',
+          bg: "transparent",
         },
         _last: {
-          border: 'none',
+          border: "none",
         },
       },
     },
@@ -174,88 +174,88 @@ export const NumberInput: ComponentMultiStyle = {
   sizes: {
     xs: {
       field: {
-        fontSize: 'xs',
-        px: '2',
-        h: '6',
-        rounded: 'sm',
+        fontSize: "xs",
+        px: "2",
+        h: "6",
+        rounded: "sm",
       },
       stepper: {
-        fontSize: 'xs',
+        fontSize: "xs",
         _first: {
-          borderTopEndRadius: 'sm',
+          borderTopEndRadius: "sm",
         },
         _last: {
-          borderBottomEndRadius: 'sm',
-          mt: '-1px',
-          borderTop: '1px solid',
-          borderColor: 'inherit',
+          borderBottomEndRadius: "sm",
+          mt: "-1px",
+          borderTop: "1px solid",
+          borderColor: "inherit",
         },
       },
     },
     sm: {
       field: {
-        fontSize: 'sm',
-        px: '2',
-        h: '8',
-        rounded: 'md',
+        fontSize: "sm",
+        px: "2",
+        h: "8",
+        rounded: "md",
       },
       stepper: {
-        fontSize: 'sm',
+        fontSize: "sm",
         _first: {
-          borderTopEndRadius: 'md',
+          borderTopEndRadius: "md",
         },
         _last: {
-          borderBottomEndRadius: 'md',
-          mt: '-1px',
-          borderTop: '1px solid',
-          borderColor: 'inherit',
+          borderBottomEndRadius: "md",
+          mt: "-1px",
+          borderTop: "1px solid",
+          borderColor: "inherit",
         },
       },
     },
     md: {
       field: {
-        fontSize: 'md',
-        px: '3',
-        h: '10',
-        rounded: 'md',
+        fontSize: "md",
+        px: "3",
+        h: "10",
+        rounded: "md",
       },
       stepper: {
-        fontSize: 'md',
+        fontSize: "md",
         _first: {
-          borderTopEndRadius: 'md',
+          borderTopEndRadius: "md",
         },
         _last: {
-          borderBottomEndRadius: 'md',
-          mt: '-1px',
-          borderTop: '1px solid',
-          borderColor: 'inherit',
+          borderBottomEndRadius: "md",
+          mt: "-1px",
+          borderTop: "1px solid",
+          borderColor: "inherit",
         },
       },
     },
     lg: {
       field: {
-        fontSize: 'lg',
-        px: '4',
-        h: '12',
-        rounded: 'md',
+        fontSize: "lg",
+        px: "4",
+        h: "12",
+        rounded: "md",
       },
       stepper: {
-        fontSize: 'lg',
+        fontSize: "lg",
         _first: {
-          borderTopEndRadius: 'md',
+          borderTopEndRadius: "md",
         },
         _last: {
-          borderBottomEndRadius: 'md',
-          mt: '-1px',
-          borderTop: '1px solid',
-          borderColor: 'inherit',
+          borderBottomEndRadius: "md",
+          mt: "-1px",
+          borderTop: "1px solid",
+          borderColor: "inherit",
         },
       },
     },
   },
 
   defaultProps: {
-    size: 'md',
-    variant: 'outline',
+    size: "md",
+    variant: "outline",
   },
 }

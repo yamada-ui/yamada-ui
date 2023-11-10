@@ -1,19 +1,19 @@
-import { ColorMode } from '../css'
-import { COLOR_MODE_STORAGE_KEY } from './color-mode-script'
+import { ColorMode } from "../css"
+import { COLOR_MODE_STORAGE_KEY } from "./color-mode-script"
 
 const hasSupport = !!globalThis?.document
 
 export type ColorModeManager = {
-  type: 'cookie' | 'localStorage'
+  type: "cookie" | "localStorage"
   ssr?: boolean
-  get: (initColorMode?: ColorMode | 'system') => ColorMode | 'system'
-  set: (colorMode: ColorMode | 'system') => void
+  get: (initColorMode?: ColorMode | "system") => ColorMode | "system"
+  set: (colorMode: ColorMode | "system") => void
 }
 
 const createLocalStorage = (storageKey: string): ColorModeManager => ({
   ssr: false,
-  type: 'localStorage',
-  get: (initColorMode = 'light') => {
+  type: "localStorage",
+  get: (initColorMode = "light") => {
     if (!hasSupport) return initColorMode
 
     try {
@@ -43,8 +43,8 @@ const createCookieStorage = (
   cookie?: string,
 ): ColorModeManager => ({
   ssr: !!cookie,
-  type: 'cookie',
-  get: (initColorMode = 'light') => {
+  type: "cookie",
+  get: (initColorMode = "light") => {
     if (cookie) return parseCookie(cookie, key) || initColorMode
 
     if (!hasSupport) return initColorMode

@@ -6,18 +6,18 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createDescendant } from '@yamada-ui/use-descendant'
-import { LazyMode } from '@yamada-ui/use-disclosure'
+} from "@yamada-ui/core"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { LazyMode } from "@yamada-ui/use-disclosure"
 import {
   createContext,
   cx,
   findChildren,
   pickChildren,
   getValidChildren,
-} from '@yamada-ui/utils'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+} from "@yamada-ui/utils"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import {
   TabList,
   TabListProps,
@@ -25,7 +25,7 @@ import {
   TabPanelsProps,
   Tab,
   TabPanel,
-} from './'
+} from "./"
 
 const {
   DescendantsContextProvider,
@@ -36,7 +36,7 @@ const {
 
 export { useTabsDescendantsContext, useTabsDescendant }
 
-type TabsContext = Omit<TabsOptions, 'index' | 'defaultIndex' | 'onChange'> & {
+type TabsContext = Omit<TabsOptions, "index" | "defaultIndex" | "onChange"> & {
   focusedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
   selectedIndex: number
@@ -45,7 +45,7 @@ type TabsContext = Omit<TabsOptions, 'index' | 'defaultIndex' | 'onChange'> & {
 }
 
 const [TabsProvider, useTabsContext] = createContext<TabsContext>({
-  name: 'TabsContext',
+  name: "TabsContext",
   errorMessage: `useTabsContext returned is 'undefined'. Seems you forgot to wrap the components in "<Tabs />"`,
 })
 
@@ -69,7 +69,7 @@ type TabsOptions = {
   /**
    * The alignment of the tabs.
    */
-  align?: 'start' | 'end' | 'center'
+  align?: "start" | "end" | "center"
   /**
    * If `true`, the tabs will be manually activated and　display its panel by pressing Space or Enter.
    *
@@ -98,7 +98,7 @@ type TabsOptions = {
    *
    * @default 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: "vertical" | "horizontal"
   /**
    * The callback invoked when the index changes.
    */
@@ -113,13 +113,13 @@ type TabsOptions = {
   tabPanelsProps?: TabPanelsProps
 }
 
-export type TabsProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
-  ThemeProps<'Tabs'> &
+export type TabsProps = Omit<HTMLUIProps<"div">, "onChange"> &
+  ThemeProps<"Tabs"> &
   TabsOptions
 
-export const Tabs = forwardRef<TabsProps, 'div'>(
-  ({ align = 'start', ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Tabs', {
+export const Tabs = forwardRef<TabsProps, "div">(
+  ({ align = "start", ...props }, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle("Tabs", {
       align,
       ...props,
     })
@@ -131,8 +131,8 @@ export const Tabs = forwardRef<TabsProps, 'div'>(
       isFitted,
       isManual,
       isLazy = true,
-      lazyBehavior = 'keepMounted',
-      orientation = 'horizontal',
+      lazyBehavior = "keepMounted",
+      orientation = "horizontal",
       tabListProps,
       tabPanelsProps,
       children,
@@ -160,7 +160,7 @@ export const Tabs = forwardRef<TabsProps, 'div'>(
       if (index != null) setFocusedIndex(index)
     }, [index])
 
-    const css: CSSUIObject = { w: '100%', ...styles.container }
+    const css: CSSUIObject = { w: "100%", ...styles.container }
 
     return (
       <DescendantsContextProvider value={descendants}>
@@ -183,7 +183,7 @@ export const Tabs = forwardRef<TabsProps, 'div'>(
         >
           <ui.div
             ref={ref}
-            className={cx('ui-tabs', className)}
+            className={cx("ui-tabs", className)}
             __css={css}
             {...rest}
           >

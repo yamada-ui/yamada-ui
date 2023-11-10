@@ -6,9 +6,9 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { Popover, PopoverTrigger } from '@yamada-ui/popover'
-import { cx, getValidChildren, handlerAll, isArray } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { cx, getValidChildren, handlerAll, isArray } from "@yamada-ui/utils"
 import {
   cloneElement,
   CSSProperties,
@@ -16,17 +16,17 @@ import {
   MouseEventHandler,
   ReactElement,
   useMemo,
-} from 'react'
-import { SelectIcon, SelectClearIcon, SelectIconProps } from './select-icon'
-import { SelectList, SelectListProps } from './select-list'
+} from "react"
+import { SelectIcon, SelectClearIcon, SelectIconProps } from "./select-icon"
+import { SelectList, SelectListProps } from "./select-list"
 import {
   useSelect,
   UseSelectProps,
   SelectDescendantsContextProvider,
   SelectProvider,
   useSelectContext,
-} from './use-select'
-import { OptionGroup, Option, UIOption } from './'
+} from "./use-select"
+import { OptionGroup, Option, UIOption } from "./"
 
 type MultiSelectOptions = {
   /**
@@ -65,11 +65,11 @@ type MultiSelectOptions = {
   /**
    * Props for select container element.
    */
-  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
    * Props for select list element.
    */
-  listProps?: Omit<SelectListProps, 'children'>
+  listProps?: Omit<SelectListProps, "children">
   /**
    * Props for select icon element.
    */
@@ -80,12 +80,12 @@ type MultiSelectOptions = {
   clearIconProps?: SelectIconProps
 }
 
-export type MultiSelectProps = ThemeProps<'Select'> &
-  Omit<UseSelectProps<string[]>, 'placeholderInOptions' | 'isEmpty'> &
+export type MultiSelectProps = ThemeProps<"Select"> &
+  Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty"> &
   MultiSelectOptions
 
-export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('MultiSelect', props)
+export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("MultiSelect", props)
   let {
     className,
     defaultValue = [],
@@ -123,7 +123,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
           <OptionGroup
             key={i}
             label={label as string}
-            {...(props as HTMLUIProps<'ul'>)}
+            {...(props as HTMLUIProps<"ul">)}
           >
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
@@ -162,9 +162,9 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
   minH = minH ?? minHeight
 
   const css: CSSUIObject = {
-    position: 'relative',
-    w: '100%',
-    h: 'fit-content',
+    position: "relative",
+    w: "100%",
+    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -174,7 +174,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
       <SelectProvider value={{ ...rest, value, placeholder, styles }}>
         <Popover {...getPopoverProps()}>
           <ui.div
-            className={cx('ui-multi-select', className)}
+            className={cx("ui-multi-select", className)}
             __css={css}
             {...getContainerProps(containerProps)}
           >
@@ -210,15 +210,15 @@ export const MultiSelect = forwardRef<MultiSelectProps, 'div'>((props, ref) => {
   )
 })
 
-type MultiSelectFieldProps = HTMLUIProps<'div'> &
-  Pick<MultiSelectOptions, 'component' | 'separator'>
+type MultiSelectFieldProps = HTMLUIProps<"div"> &
+  Pick<MultiSelectOptions, "component" | "separator">
 
-const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
+const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
   (
     {
       className,
       component,
-      separator = ',',
+      separator = ",",
       isTruncated,
       noOfLines = 1,
       h,
@@ -252,9 +252,9 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
               }) as ReactElement
 
               const style: CSSProperties = {
-                marginBlockStart: '0.125rem',
-                marginBlockEnd: '0.125rem',
-                marginInlineEnd: '0.25rem',
+                marginBlockStart: "0.125rem",
+                marginBlockEnd: "0.125rem",
+                marginInlineEnd: "0.25rem",
               }
 
               return el ? cloneElement(el as ReactElement, { style }) : null
@@ -268,7 +268,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
               const isLast = displayValue.length === index + 1
 
               return (
-                <ui.span key={index} display='inline-block' me='0.25rem'>
+                <ui.span key={index} display="inline-block" me="0.25rem">
                   {value}
                   {!isLast ? separator : null}
                 </ui.span>
@@ -289,20 +289,20 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, 'div'>(
     ])
 
     const css: CSSUIObject = {
-      paddingEnd: '2rem',
+      paddingEnd: "2rem",
       h,
       minH,
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       ...styles.field,
     }
 
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-multi-select-field', className)}
+        className={cx("ui-multi-select-field", className)}
         __css={css}
-        py={displayValue?.length && component ? '0.125rem' : undefined}
+        py={displayValue?.length && component ? "0.125rem" : undefined}
         {...rest}
       >
         {cloneChildren}

@@ -1,6 +1,6 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const flex: Configs = {
   alignItems: true,
@@ -9,21 +9,21 @@ export const flex: Configs = {
   justifyContent: true,
   flexWrap: true,
   flexDirection: true,
-  flexDir: { properties: 'flexDirection' },
+  flexDir: { properties: "flexDirection" },
   flex: true,
   flexFlow: true,
   flexGrow: true,
   flexShrink: true,
-  flexBasis: configs.size('flexBasis'),
+  flexBasis: configs.size("flexBasis"),
   justifySelf: true,
   alignSelf: true,
   order: true,
   placeItems: true,
   placeContent: true,
   placeSelf: true,
-  gap: configs.space('gap'),
-  rowGap: configs.space('rowGap'),
-  columnGap: configs.space('columnGap'),
+  gap: configs.space("gap"),
+  rowGap: configs.space("rowGap"),
+  columnGap: configs.space("columnGap"),
 }
 
 export type FlexProps = {
@@ -70,15 +70,15 @@ export type FlexProps = {
   /**
    * The CSS `gap` property.
    */
-  gap?: Token<CSS.Property.Gap | number, 'spaces'>
+  gap?: Token<CSS.Property.Gap | number, "spaces">
   /**
    * The CSS `row-gap` property.
    */
-  rowGap?: Token<CSS.Property.RowGap | number, 'spaces'>
+  rowGap?: Token<CSS.Property.RowGap | number, "spaces">
   /**
    * The CSS `column-gap` property.
    */
-  columnGap?: Token<CSS.Property.ColumnGap | number, 'spaces'>
+  columnGap?: Token<CSS.Property.ColumnGap | number, "spaces">
   /**
    * The CSS `justify-self` property.
    */

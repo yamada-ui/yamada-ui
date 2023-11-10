@@ -1,3 +1,3 @@
-import { TextStyles } from '@yamada-ui/core'
+import { TextStyles } from "@yamada-ui/core"
 
 export const textStyles: TextStyles = {}

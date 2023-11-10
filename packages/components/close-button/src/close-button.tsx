@@ -6,9 +6,9 @@ import {
   CSSUIObject,
   useComponentStyle,
   omitThemeProps,
-} from '@yamada-ui/core'
-import { CloseIcon } from '@yamada-ui/icon'
-import { cx } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { CloseIcon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 
 type CloseButtonOptions = {
   /**
@@ -19,21 +19,21 @@ type CloseButtonOptions = {
   isDisabled?: boolean
 }
 
-export type CloseButtonProps = HTMLUIProps<'button'> &
-  ThemeProps<'CloseButton'> &
+export type CloseButtonProps = HTMLUIProps<"button"> &
+  ThemeProps<"CloseButton"> &
   CloseButtonOptions
 
-export const CloseButton = forwardRef<CloseButtonProps, 'button'>(
+export const CloseButton = forwardRef<CloseButtonProps, "button">(
   (props, ref) => {
-    const [styles, mergedProps] = useComponentStyle('CloseButton', props)
+    const [styles, mergedProps] = useComponentStyle("CloseButton", props)
     const { className, children, isDisabled, __css, ...rest } =
       omitThemeProps(mergedProps)
 
     const css: CSSUIObject = {
       outline: 0,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       flexShrink: 0,
       ...styles,
       ...__css,
@@ -42,13 +42,13 @@ export const CloseButton = forwardRef<CloseButtonProps, 'button'>(
     return (
       <ui.button
         ref={ref}
-        type='button'
-        className={cx('ui-close-button', className)}
+        type="button"
+        className={cx("ui-close-button", className)}
         disabled={isDisabled}
         __css={css}
         {...rest}
       >
-        {children || <CloseIcon width='1em' height='1em' />}
+        {children || <CloseIcon width="1em" height="1em" />}
       </ui.button>
     )
   },

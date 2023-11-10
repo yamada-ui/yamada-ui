@@ -1,4 +1,4 @@
-import { ui, HTMLUIProps, forwardRef, CSSUIObject } from '@yamada-ui/core'
+import { ui, HTMLUIProps, forwardRef, CSSUIObject } from "@yamada-ui/core"
 import {
   motion,
   HTMLMotionProps,
@@ -8,9 +8,9 @@ import {
   WithTransitionProps,
   MotionTransitionVariants,
   MOTION_TRANSITION_EASINGS,
-} from '@yamada-ui/motion'
-import { createdDom, cx } from '@yamada-ui/utils'
-import { useEffect, useState } from 'react'
+} from "@yamada-ui/motion"
+import { createdDom, cx } from "@yamada-ui/utils"
+import { useEffect, useState } from "react"
 
 const isNumeric = (value?: string | number) =>
   value != null && parseFloat(value.toString()) > 0
@@ -37,7 +37,7 @@ type CollapseOptions = {
 }
 
 export type CollapseProps = WithTransitionProps<
-  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+  HTMLUIProps<"div"> & HTMLMotionProps<"div">
 > &
   CollapseOptions
 
@@ -75,20 +75,20 @@ const variants: MotionTransitionVariants = {
 }
 
 export const collapseProps = {
-  initial: 'exit',
-  animate: 'enter',
-  exit: 'exit',
+  initial: "exit",
+  animate: "enter",
+  exit: "exit",
   variants,
 }
 
-export const Collapse = forwardRef<CollapseProps, 'div'>(
+export const Collapse = forwardRef<CollapseProps, "div">(
   (
     {
       unmountOnExit,
       isOpen,
       animationOpacity = true,
       startingHeight = 0,
-      endingHeight = 'auto',
+      endingHeight = "auto",
       transition,
       transitionEnd,
       delay,
@@ -109,7 +109,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
     }, [])
 
     const hasStartingHeight = parseFloat(startingHeight.toString()) > 0
-    const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
+    const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     isOpen = unmountOnExit ? isOpen : true
     transition = !mounted
@@ -142,7 +142,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
           ...transitionEnd,
           exit: {
             ...transitionEnd?.exit,
-            display: hasStartingHeight ? 'block' : 'none',
+            display: hasStartingHeight ? "block" : "none",
           },
         }
 
@@ -157,7 +157,7 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
     }
 
     const css: CSSUIObject = {
-      w: '100%',
+      w: "100%",
       ...__css,
     }
 
@@ -167,16 +167,16 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(
           <ui.div
             as={motion.div}
             ref={ref}
-            className={cx('ui-collapse', className)}
+            className={cx("ui-collapse", className)}
             {...rest}
             {...collapseProps}
             custom={custom}
             animate={animate}
-            initial={unmountOnExit ? 'exit' : false}
+            initial={unmountOnExit ? "exit" : false}
             __css={css}
             style={{
-              overflow: 'hidden',
-              display: 'block',
+              overflow: "hidden",
+              display: "block",
               ...style,
             }}
           />

@@ -1,10 +1,10 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { Container, Heading, Image, Text } from '@yamada-ui/react'
+import { Meta, StoryFn } from "@storybook/react"
+import { Container, Heading, Image, Text } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Container>
 
 const meta: Meta<typeof Container> = {
-  title: 'Components / Layouts / Container',
+  title: "Components / Layouts / Container",
   component: Container,
 }
 
@@ -13,21 +13,21 @@ export default meta
 export const basic: Story = () => {
   return (
     <Container
-      p='md'
-      gap='md'
-      rounded='md'
-      alignItems='center'
-      textAlign='center'
-      border='1px solid'
-      borderColor='inherit'
-      boxShadow='md'
+      p="md"
+      gap="md"
+      rounded="md"
+      alignItems="center"
+      textAlign="center"
+      border="1px solid"
+      borderColor="inherit"
+      boxShadow="md"
     >
       <Image
-        src='https://dragon-ball-official.com/assets/img/intro/intro_2.png'
-        maxW='sm'
+        src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
+        maxW="sm"
       />
 
-      <Heading size='xl'>『ドラゴンボール』（DRAGON BALL）</Heading>
+      <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
 
       <Text>
         『ドラゴンボール』（DRAGON

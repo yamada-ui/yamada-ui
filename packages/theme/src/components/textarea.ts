@@ -1,22 +1,22 @@
-import { ComponentStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray } from '@yamada-ui/utils'
+import { ComponentStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray } from "@yamada-ui/utils"
 
 export const Textarea: ComponentStyle = {
   baseStyle: {
-    width: '100%',
+    width: "100%",
     minWidth: 0,
     outline: 0,
-    position: 'relative',
-    appearance: 'none',
-    transitionProperty: 'common',
-    transitionDuration: 'normal',
-    py: '2',
-    minH: '20',
-    lineHeight: 'short',
-    verticalAlign: 'top',
+    position: "relative",
+    appearance: "none",
+    transitionProperty: "common",
+    transitionDuration: "normal",
+    py: "2",
+    minH: "20",
+    lineHeight: "short",
+    verticalAlign: "top",
     _disabled: {
       opacity: 0.4,
-      cursor: 'not-allowed',
+      cursor: "not-allowed",
     },
   },
 
@@ -24,8 +24,8 @@ export const Textarea: ComponentStyle = {
     outline: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -35,22 +35,22 @@ export const Textarea: ComponentStyle = {
         : getColor(ec, ec)(t, m)
 
       return {
-        border: '1px solid',
-        borderColor: 'inherit',
-        bg: 'inherit',
+        border: "1px solid",
+        borderColor: "inherit",
+        bg: "inherit",
         _hover: {
-          borderColor: ['gray.300', 'whiteAlpha.400'],
+          borderColor: ["gray.300", "whiteAlpha.400"],
         },
         _readOnly: {
-          boxShadow: 'none !important',
-          userSelect: 'all',
+          boxShadow: "none !important",
+          userSelect: "all",
         },
         _invalid: {
           borderColor: errorBorderColor,
           boxShadow: `0 0 0 1px ${errorBorderColor}`,
         },
         _focusVisible: {
-          zIndex: 'yamcha',
+          zIndex: "yamcha",
           borderColor: focusBorderColor,
           boxShadow: `0 0 0 1px ${focusBorderColor}`,
         },
@@ -59,8 +59,8 @@ export const Textarea: ComponentStyle = {
     filled: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -70,21 +70,21 @@ export const Textarea: ComponentStyle = {
         : getColor(ec, ec)(t, m)
 
       return {
-        border: '2px solid',
-        borderColor: 'transparent',
-        bg: ['gray.100', 'whiteAlpha.50'],
+        border: "2px solid",
+        borderColor: "transparent",
+        bg: ["gray.100", "whiteAlpha.50"],
         _hover: {
-          bg: ['gray.200', 'whiteAlpha.100'],
+          bg: ["gray.200", "whiteAlpha.100"],
         },
         _readOnly: {
-          boxShadow: 'none !important',
-          userSelect: 'all',
+          boxShadow: "none !important",
+          userSelect: "all",
         },
         _invalid: {
           borderColor: errorBorderColor,
         },
         _focusVisible: {
-          bg: 'transparent',
+          bg: "transparent",
           borderColor: focusBorderColor,
         },
       }
@@ -92,8 +92,8 @@ export const Textarea: ComponentStyle = {
     flushed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -103,15 +103,15 @@ export const Textarea: ComponentStyle = {
         : getColor(ec, ec)(t, m)
 
       return {
-        borderBottom: '1px solid',
-        borderColor: 'inherit',
-        rounded: '0',
-        py: '0',
-        px: '0',
-        bg: 'transparent',
+        borderBottom: "1px solid",
+        borderColor: "inherit",
+        rounded: "0",
+        py: "0",
+        px: "0",
+        bg: "transparent",
         _readOnly: {
-          boxShadow: 'none !important',
-          userSelect: 'all',
+          boxShadow: "none !important",
+          userSelect: "all",
         },
         _invalid: {
           borderColor: errorBorderColor,
@@ -124,46 +124,46 @@ export const Textarea: ComponentStyle = {
       }
     },
     unstyled: {
-      bg: 'transparent',
-      h: 'auto',
-      py: '0',
-      px: '0',
+      bg: "transparent",
+      h: "auto",
+      py: "0",
+      px: "0",
     },
   },
 
   sizes: {
     xs: {
-      fontSize: 'xs',
-      py: '2',
-      px: '2',
-      h: '6',
-      rounded: 'sm',
+      fontSize: "xs",
+      py: "2",
+      px: "2",
+      h: "6",
+      rounded: "sm",
     },
     sm: {
-      fontSize: 'sm',
-      py: '2',
-      px: '2',
-      h: '8',
-      rounded: 'md',
+      fontSize: "sm",
+      py: "2",
+      px: "2",
+      h: "8",
+      rounded: "md",
     },
     md: {
-      fontSize: 'md',
-      py: '2',
-      px: '3',
-      h: '10',
-      rounded: 'md',
+      fontSize: "md",
+      py: "2",
+      px: "3",
+      h: "10",
+      rounded: "md",
     },
     lg: {
-      fontSize: 'lg',
-      py: '3',
-      px: '4',
-      h: '12',
-      rounded: 'md',
+      fontSize: "lg",
+      py: "3",
+      px: "4",
+      h: "12",
+      rounded: "md",
     },
   },
 
   defaultProps: {
-    size: 'md',
-    variant: 'outline',
+    size: "md",
+    variant: "outline",
   },
 }

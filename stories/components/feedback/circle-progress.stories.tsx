@@ -1,10 +1,10 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { CircleProgress, CircleProgressLabel } from '@yamada-ui/react'
+import { Meta, StoryFn } from "@storybook/react"
+import { CircleProgress, CircleProgressLabel } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof CircleProgress>
 
 const meta: Meta<typeof CircleProgress> = {
-  title: 'Components / Feedback / CircleProgress',
+  title: "Components / Feedback / CircleProgress",
   component: CircleProgress,
 }
 
@@ -38,14 +38,14 @@ export const withLabel: Story = () => {
   return (
     <>
       <CircleProgress
-        size='120px'
+        size="120px"
         min={0}
         max={1000}
         value={444}
-        color='purple.500'
-        trackColor='green.300'
+        color="purple.500"
+        trackColor="green.300"
       >
-        <CircleProgressLabel color='purple.500'>444%</CircleProgressLabel>
+        <CircleProgressLabel color="purple.500">444%</CircleProgressLabel>
       </CircleProgress>
     </>
   )

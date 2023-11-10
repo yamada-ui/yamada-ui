@@ -1,4 +1,4 @@
-type Status = 'loaded' | 'error'
+type Status = "loaded" | "error"
 
 const originalImage = window.Image
 
@@ -8,14 +8,14 @@ export const image = () => {
   //@ts-expect-error
   window.Image = class Image {
     onload = () => {
-      console.log('called')
+      console.log("called")
     }
 
     onerror = () => {}
 
-    src = ''
+    src = ""
 
-    alt = ''
+    alt = ""
 
     hasAttribute(name: string) {
       return name in this
@@ -27,7 +27,7 @@ export const image = () => {
 
     constructor() {
       setTimeout(() => {
-        if (status === 'error') {
+        if (status === "error") {
           this.onerror()
         } else {
           this.onload()

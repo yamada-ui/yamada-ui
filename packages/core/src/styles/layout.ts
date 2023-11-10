@@ -1,30 +1,30 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const layout: Configs = {
-  width: configs.sizeTransform('width'),
-  inlineSize: configs.sizeTransform('inlineSize'),
-  height: configs.size('height'),
-  blockSize: configs.size('blockSize'),
-  boxSize: configs.size(['width', 'height']),
-  minWidth: configs.size('minWidth'),
-  minInlineSize: configs.size('minInlineSize'),
-  minHeight: configs.size('minHeight'),
-  minBlockSize: configs.size('minBlockSize'),
-  maxWidth: configs.size('maxWidth'),
-  maxInlineSize: configs.size('maxInlineSize'),
-  maxHeight: configs.size('maxHeight'),
-  maxBlockSize: configs.size('maxBlockSize'),
+  width: configs.sizeTransform("width"),
+  inlineSize: configs.sizeTransform("inlineSize"),
+  height: configs.size("height"),
+  blockSize: configs.size("blockSize"),
+  boxSize: configs.size(["width", "height"]),
+  minWidth: configs.size("minWidth"),
+  minInlineSize: configs.size("minInlineSize"),
+  minHeight: configs.size("minHeight"),
+  minBlockSize: configs.size("minBlockSize"),
+  maxWidth: configs.size("maxWidth"),
+  maxInlineSize: configs.size("maxInlineSize"),
+  maxHeight: configs.size("maxHeight"),
+  maxBlockSize: configs.size("maxBlockSize"),
   overflow: true,
   overflowX: true,
   overflowY: true,
   overscrollBehavior: true,
-  overscroll: { properties: 'overscrollBehavior' },
+  overscroll: { properties: "overscrollBehavior" },
   overscrollX: true,
-  textDecor: { properties: 'overscrollBehaviorX' },
+  textDecor: { properties: "overscrollBehaviorX" },
   overscrollBehaviorY: true,
-  overscrollY: { properties: 'overscrollBehaviorY' },
+  overscrollY: { properties: "overscrollBehaviorY" },
   display: true,
   aspectRatio: true,
   verticalAlign: true,
@@ -54,79 +54,79 @@ export type LayoutProps = {
   /**
    * The CSS `width` property.
    */
-  width?: Token<CSS.Property.Width | number, 'sizes'>
+  width?: Token<CSS.Property.Width | number, "sizes">
   /**
    * The CSS `width` property.
    */
-  w?: Token<CSS.Property.Width | number, 'sizes'>
+  w?: Token<CSS.Property.Width | number, "sizes">
   /**
    * The CSS `inline-size` property.
    */
-  inlineSize?: Token<CSS.Property.InlineSize | number, 'sizes'>
+  inlineSize?: Token<CSS.Property.InlineSize | number, "sizes">
   /**
    * The CSS `width`, and `height` property.
    */
-  boxSize?: Token<CSS.Property.Width | number, 'sizes'>
+  boxSize?: Token<CSS.Property.Width | number, "sizes">
   /**
    * The CSS `max-width` property.
    */
-  maxWidth?: Token<CSS.Property.MaxWidth | number, 'sizes'>
+  maxWidth?: Token<CSS.Property.MaxWidth | number, "sizes">
   /**
    * The CSS `max-width` property.
    */
-  maxW?: Token<CSS.Property.MaxWidth | number, 'sizes'>
+  maxW?: Token<CSS.Property.MaxWidth | number, "sizes">
   /**
    * The CSS `max-inline-size` property.
    */
-  maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, 'sizes'>
+  maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, "sizes">
   /**
    * The CSS `min-width` property.
    */
-  minWidth?: Token<CSS.Property.MinWidth | number, 'sizes'>
+  minWidth?: Token<CSS.Property.MinWidth | number, "sizes">
   /**
    * The CSS `min-width` property.
    */
-  minW?: Token<CSS.Property.MinWidth | number, 'sizes'>
+  minW?: Token<CSS.Property.MinWidth | number, "sizes">
   /**
    * The CSS `min-inline-size` property.
    */
-  minInlineSize?: Token<CSS.Property.MinInlineSize | number, 'sizes'>
+  minInlineSize?: Token<CSS.Property.MinInlineSize | number, "sizes">
   /**
    * The CSS `height` property.
    */
-  height?: Token<CSS.Property.Height | number, 'sizes'>
+  height?: Token<CSS.Property.Height | number, "sizes">
   /**
    * The CSS `height` property.
    */
-  h?: Token<CSS.Property.Height | number, 'sizes'>
+  h?: Token<CSS.Property.Height | number, "sizes">
   /**
    * The CSS `block-size` property.
    */
-  blockSize?: Token<CSS.Property.BlockSize | number, 'sizes'>
+  blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
   /**
    * The CSS `max-height` property.
    */
-  maxHeight?: Token<CSS.Property.MaxHeight | number, 'sizes'>
+  maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
   /**
    * The CSS `max-height` property.
    */
-  maxH?: Token<CSS.Property.MaxHeight | number, 'sizes'>
+  maxH?: Token<CSS.Property.MaxHeight | number, "sizes">
   /**
    * The CSS `max-block-size` property.
    */
-  maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, 'sizes'>
+  maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, "sizes">
   /**
    * The CSS `min-height` property.
    */
-  minHeight?: Token<CSS.Property.MinHeight | number, 'sizes'>
+  minHeight?: Token<CSS.Property.MinHeight | number, "sizes">
   /**
    * The CSS `min-height` property.
    */
-  minH?: Token<CSS.Property.MinHeight | number, 'sizes'>
+  minH?: Token<CSS.Property.MinHeight | number, "sizes">
   /**
    * The CSS `min-block-size` property.
    */
-  minBlockSize?: Token<CSS.Property.MinBlockSize | number, 'sizes'>
+  minBlockSize?: Token<CSS.Property.MinBlockSize | number, "sizes">
   /**
    * The CSS `vertical-align` property.
    */

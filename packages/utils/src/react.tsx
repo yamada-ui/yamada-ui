@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { isNumber, isString } from '.'
+import * as React from "react"
+import { isNumber, isString } from "."
 
 type DOMElement = Element & HTMLOrSVGElement
 
@@ -45,7 +45,7 @@ type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
 
 export const createContext = <ContextType extends any = any>({
   strict = true,
-  errorMessage = 'useContext: `context` is undefined. Seems you forgot to wrap component within the Provider',
+  errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
   name,
 }: Options = {}) => {
   const Context = React.createContext<ContextType | undefined>(undefined)
@@ -57,7 +57,7 @@ export const createContext = <ContextType extends any = any>({
 
     if (!context && strict) {
       const error = new Error(errorMessage)
-      error.name = 'ContextError'
+      error.name = "ContextError"
       Error.captureStackTrace?.(error, useContext)
       throw error
     }
@@ -158,12 +158,12 @@ export const pickChildren = (
   children.filter((child) => types.every((type) => child.type === type))
 
 export const cx = (...classNames: (string | undefined)[]) =>
-  classNames.filter(Boolean).join(' ')
+  classNames.filter(Boolean).join(" ")
 
 type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T>
 
 export const isRefObject = (val: any): val is { current: any } =>
-  'current' in val
+  "current" in val
 
 export const assignRef = <T extends any = any>(
   ref: ReactRef<T> | undefined,
@@ -171,7 +171,7 @@ export const assignRef = <T extends any = any>(
 ) => {
   if (ref == null) return
 
-  if (typeof ref === 'function') {
+  if (typeof ref === "function") {
     ref(value)
 
     return

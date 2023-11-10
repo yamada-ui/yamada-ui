@@ -1,7 +1,7 @@
-import { createdDom } from '@yamada-ui/utils'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { createdDom } from "@yamada-ui/utils"
+import { useEffect, useMemo, useRef, useState } from "react"
 
-export type ObserverRect = Omit<DOMRectReadOnly, 'toJSON'>
+export type ObserverRect = Omit<DOMRectReadOnly, "toJSON">
 
 const defaultRect: ObserverRect = {
   x: 0,

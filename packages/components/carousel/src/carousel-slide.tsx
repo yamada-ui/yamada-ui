@@ -1,23 +1,23 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import {
   useCarouselContext,
   useCarouselSlide,
   UseCarouselSlideProps,
-} from './use-carousel'
+} from "./use-carousel"
 
 type CarouselSlideOptions = {
   /**
    * The CSS `width` property.
    */
-  size?: CSSUIObject['width']
+  size?: CSSUIObject["width"]
 }
 
-export type CarouselSlideProps = HTMLUIProps<'div'> &
+export type CarouselSlideProps = HTMLUIProps<"div"> &
   UseCarouselSlideProps &
   CarouselSlideOptions
 
-export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
+export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
   ({ className, size, ...rest }, ref) => {
     const { slideSize, includeGapInSize, orientation, gap } =
       useCarouselContext()
@@ -27,16 +27,16 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
     size ??= slideSize
 
     const css: CSSUIObject = {
-      position: 'relative',
+      position: "relative",
       flex: `0 0 ${size}`,
       ...(includeGapInSize
-        ? { [orientation === 'vertical' ? 'pb' : 'pr']: gap }
-        : { [orientation === 'vertical' ? 'mb' : 'mr']: gap }),
+        ? { [orientation === "vertical" ? "pb" : "pr"]: gap }
+        : { [orientation === "vertical" ? "mb" : "mr"]: gap }),
     }
 
     return (
       <ui.div
-        className={cx('ui-carousel__slide', className)}
+        className={cx("ui-carousel__slide", className)}
         __css={css}
         {...getSlideProps({})}
       >
@@ -46,16 +46,16 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, 'div'>(
   },
 )
 
-type CarouselSlideInnerProps = HTMLUIProps<'div'>
+type CarouselSlideInnerProps = HTMLUIProps<"div">
 
-const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, 'div'>(
+const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
   ({ ...rest }, ref) => {
     return (
       <ui.div
         ref={ref}
-        className='ui-carousel__slide__inner'
-        w='100%'
-        h='100%'
+        className="ui-carousel__slide__inner"
+        w="100%"
+        h="100%"
         {...rest}
       />
     )

@@ -1,20 +1,20 @@
-import { Theme } from '../theme.types'
+import { Theme } from "../theme.types"
 
 type ThemeSchemeScriptProps = {
-  type?: 'localStorage' | 'cookie'
-  initialThemeScheme?: Theme['themeSchemes']
+  type?: "localStorage" | "cookie"
+  initialThemeScheme?: Theme["themeSchemes"]
   storageKey?: string
   nonce?: string
 }
 
-export const THEME_SCHEME_STORAGE_KEY = 'ui-theme-scheme'
+export const THEME_SCHEME_STORAGE_KEY = "ui-theme-scheme"
 
 export const getThemeSchemeScript = ({
-  initialThemeScheme: init = 'base',
-  type = 'localStorage',
+  initialThemeScheme: init = "base",
+  type = "localStorage",
   storageKey = THEME_SCHEME_STORAGE_KEY,
-}: Omit<ThemeSchemeScriptProps, 'nonce'>) => {
-  const isCookie = type === 'cookie'
+}: Omit<ThemeSchemeScriptProps, "nonce">) => {
+  const isCookie = type === "cookie"
 
   const cookieScript = `(function(){try{var a=function(c){var o=document.documentElement;return o.dataset.theme=c,c},h='${init}',r='${storageKey}',t=document.cookie.match(new RegExp('(^| )'.concat(r,'=([^;]+)'))),c=t?t[2]:null;c?a(c):(document.cookie=''.concat(r,'=').concat(a(h),'; max-age=31536000; path=/'))}catch(a){}})()`
 
@@ -33,7 +33,7 @@ export const ThemeSchemeScript = ({
 
   return (
     <script
-      id='ui-theme-script'
+      id="ui-theme-script"
       nonce={nonce}
       dangerouslySetInnerHTML={{ __html: html }}
     />

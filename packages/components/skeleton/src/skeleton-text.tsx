@@ -1,22 +1,22 @@
-import { ui, forwardRef, CSSUIProps, CSSUIObject } from '@yamada-ui/core'
-import { useValue } from '@yamada-ui/use-value'
-import { cx } from '@yamada-ui/utils'
-import { Skeleton, SkeletonProps } from './'
+import { ui, forwardRef, CSSUIProps, CSSUIObject } from "@yamada-ui/core"
+import { useValue } from "@yamada-ui/use-value"
+import { cx } from "@yamada-ui/utils"
+import { Skeleton, SkeletonProps } from "./"
 
 type SkeletonTextOptions = {
   /**
    * The CSS `gap` property.
    */
-  gap?: CSSUIProps['gap']
+  gap?: CSSUIProps["gap"]
   /**
    * The CSS `height` property.
    */
-  textHeight?: CSSUIProps['height']
+  textHeight?: CSSUIProps["height"]
 }
 
 export type SkeletonTextProps = SkeletonProps & SkeletonTextOptions
 
-export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
+export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
   (
     {
       className,
@@ -26,8 +26,8 @@ export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
       fadeDuration,
       speed,
       isLoaded,
-      gap = '2',
-      textHeight = '2',
+      gap = "2",
+      textHeight = "2",
       children,
       ...rest
     },
@@ -36,13 +36,13 @@ export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
     const computedNoOfLines = useValue(noOfLines)
 
     const css: CSSUIObject = {
-      w: 'full',
+      w: "full",
     }
 
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-skeleton-text', className)}
+        className={cx("ui-skeleton-text", className)}
         __css={css}
         {...rest}
       >
@@ -57,7 +57,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, 'div'>(
               ? {
                   mb: !isLast ? gap : undefined,
                   w:
-                    computedNoOfLines > 1 ? (!isLast ? '100%' : '80%') : '100%',
+                    computedNoOfLines > 1 ? (!isLast ? "100%" : "80%") : "100%",
                   h: textHeight,
                 }
               : {}

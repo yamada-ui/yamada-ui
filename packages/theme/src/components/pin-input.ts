@@ -1,23 +1,23 @@
-import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray } from "@yamada-ui/utils"
 
 export const PinInput: ComponentMultiStyle = {
   baseStyle: {
     container: {
-      gap: 'sm',
+      gap: "sm",
     },
     field: {
-      width: '100%',
+      width: "100%",
       minWidth: 0,
       outline: 0,
-      position: 'relative',
-      appearance: 'none',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
-      textAlign: 'center',
+      position: "relative",
+      appearance: "none",
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      textAlign: "center",
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
     },
   },
@@ -26,8 +26,8 @@ export const PinInput: ComponentMultiStyle = {
     outline: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -38,22 +38,22 @@ export const PinInput: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '1px solid',
-          borderColor: 'inherit',
-          bg: 'inherit',
+          border: "1px solid",
+          borderColor: "inherit",
+          bg: "inherit",
           _hover: {
-            borderColor: ['gray.300', 'whiteAlpha.400'],
+            borderColor: ["gray.300", "whiteAlpha.400"],
           },
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -63,8 +63,8 @@ export const PinInput: ComponentMultiStyle = {
     filled: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -75,21 +75,21 @@ export const PinInput: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '2px solid',
-          borderColor: 'transparent',
-          bg: ['gray.100', 'whiteAlpha.50'],
+          border: "2px solid",
+          borderColor: "transparent",
+          bg: ["gray.100", "whiteAlpha.50"],
           _hover: {
-            bg: ['gray.200', 'whiteAlpha.100'],
+            bg: ["gray.200", "whiteAlpha.100"],
           },
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
           },
           _focusVisible: {
-            bg: 'transparent',
+            bg: "transparent",
             borderColor: focusBorderColor,
           },
         },
@@ -98,8 +98,8 @@ export const PinInput: ComponentMultiStyle = {
     flushed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -110,14 +110,14 @@ export const PinInput: ComponentMultiStyle = {
 
       return {
         field: {
-          borderBottom: '1px solid',
-          borderColor: 'inherit',
-          rounded: '0',
-          px: '0',
-          bg: 'transparent',
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          rounded: "0",
+          px: "0",
+          bg: "transparent",
           _readOnly: {
-            boxShadow: 'none !important',
-            userSelect: 'all',
+            boxShadow: "none !important",
+            userSelect: "all",
           },
           _invalid: {
             borderColor: errorBorderColor,
@@ -132,9 +132,9 @@ export const PinInput: ComponentMultiStyle = {
     },
     unstyled: {
       field: {
-        bg: 'transparent',
-        h: 'auto',
-        px: '0',
+        bg: "transparent",
+        h: "auto",
+        px: "0",
       },
     },
   },
@@ -142,40 +142,40 @@ export const PinInput: ComponentMultiStyle = {
   sizes: {
     xs: {
       field: {
-        fontSize: 'xs',
-        w: '6',
-        h: '6',
-        borderRadius: 'sm',
+        fontSize: "xs",
+        w: "6",
+        h: "6",
+        borderRadius: "sm",
       },
     },
     sm: {
       field: {
-        fontSize: 'sm',
-        w: '8',
-        h: '8',
-        borderRadius: 'md',
+        fontSize: "sm",
+        w: "8",
+        h: "8",
+        borderRadius: "md",
       },
     },
     md: {
       field: {
-        fontSize: 'md',
-        w: '10',
-        h: '10',
-        borderRadius: 'md',
+        fontSize: "md",
+        w: "10",
+        h: "10",
+        borderRadius: "md",
       },
     },
     lg: {
       field: {
-        fontSize: 'lg',
-        w: '12',
-        h: '12',
-        borderRadius: 'md',
+        fontSize: "lg",
+        w: "12",
+        h: "12",
+        borderRadius: "md",
       },
     },
   },
 
   defaultProps: {
-    size: 'md',
-    variant: 'outline',
+    size: "md",
+    variant: "outline",
   },
 }

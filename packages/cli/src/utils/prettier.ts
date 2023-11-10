@@ -1,4 +1,4 @@
-import { format, resolveConfig } from 'prettier'
+import { format, resolveConfig } from "prettier"
 
 export const prettier = async (content: string) => {
   const prettierConfig = await resolveConfig(process.cwd())
@@ -6,7 +6,7 @@ export const prettier = async (content: string) => {
   try {
     return format(content, {
       ...prettierConfig,
-      parser: 'typescript',
+      parser: "typescript",
     })
   } catch {
     return content

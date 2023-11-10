@@ -1,13 +1,13 @@
-import { ColorMode } from '../css'
+import { ColorMode } from "../css"
 
 const classNames = {
-  light: 'ui-light',
-  dark: 'ui-dark',
+  light: "ui-light",
+  dark: "ui-dark",
 }
 
 const queries = {
-  light: '(prefers-color-scheme: light)',
-  dark: '(prefers-color-scheme: dark)',
+  light: "(prefers-color-scheme: light)",
+  dark: "(prefers-color-scheme: dark)",
 }
 
 type GetColorModeUtilsProps = {
@@ -34,35 +34,35 @@ export const getColorModeUtils = ({
   const query = () => window.matchMedia(queries.dark)
 
   const getSystemColorMode = (fallback?: ColorMode) => {
-    const dark = query().matches ?? fallback === 'dark'
+    const dark = query().matches ?? fallback === "dark"
 
-    return dark ? 'dark' : 'light'
+    return dark ? "dark" : "light"
   }
 
   const addListener = (func: (cm: ColorMode) => unknown) => {
     const mql = query()
 
     const listener = (e: MediaQueryListEvent) => {
-      func(e.matches ? 'dark' : 'light')
+      func(e.matches ? "dark" : "light")
     }
 
-    if (typeof mql.addListener === 'function') {
+    if (typeof mql.addListener === "function") {
       mql.addListener(listener)
     } else {
-      mql.addEventListener('change', listener)
+      mql.addEventListener("change", listener)
     }
 
     return () => {
-      if (typeof mql.removeListener === 'function') {
+      if (typeof mql.removeListener === "function") {
         mql.removeListener(listener)
       } else {
-        mql.removeEventListener('change', listener)
+        mql.removeEventListener("change", listener)
       }
     }
   }
 
   const preventTransition = () => {
-    const css = document.createElement('style')
+    const css = document.createElement("style")
 
     const node = document.createTextNode(
       `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,

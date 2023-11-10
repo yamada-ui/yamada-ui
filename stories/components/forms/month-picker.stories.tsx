@@ -1,32 +1,32 @@
-import { faPoo } from '@fortawesome/free-solid-svg-icons'
-import { Meta, StoryFn } from '@storybook/react'
-import { MonthPicker, MonthPickerProps } from '@yamada-ui/calendar'
-import { Icon } from '@yamada-ui/fontawesome'
-import { FormControl, Grid, Heading, VStack, Button } from '@yamada-ui/react'
-import { useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import 'dayjs/locale/ja'
+import { faPoo } from "@fortawesome/free-solid-svg-icons"
+import { Meta, StoryFn } from "@storybook/react"
+import { MonthPicker, MonthPickerProps } from "@yamada-ui/calendar"
+import { Icon } from "@yamada-ui/fontawesome"
+import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof MonthPicker>
 
 const meta: Meta<typeof MonthPicker> = {
-  title: 'Components / Forms / MonthPicker',
+  title: "Components / Forms / MonthPicker",
   component: MonthPicker,
 }
 
 export default meta
 
 export const basic: Story = () => {
-  return <MonthPicker placeholder='basic' />
+  return <MonthPicker placeholder="basic" />
 }
 
 export const withSize: Story = () => {
   return (
     <>
-      <MonthPicker placeholder='extra small size' size='xs' />
-      <MonthPicker placeholder='small size' size='sm' />
-      <MonthPicker placeholder='medium size' size='md' />
-      <MonthPicker placeholder='large size' size='lg' />
+      <MonthPicker placeholder="extra small size" size="xs" />
+      <MonthPicker placeholder="small size" size="sm" />
+      <MonthPicker placeholder="medium size" size="md" />
+      <MonthPicker placeholder="large size" size="lg" />
     </>
   )
 }
@@ -34,9 +34,9 @@ export const withSize: Story = () => {
 export const withCalendarSize: Story = () => {
   return (
     <>
-      <MonthPicker placeholder='small size' calendarSize='sm' />
-      <MonthPicker placeholder='medium size' calendarSize='md' />
-      <MonthPicker placeholder='large size' calendarSize='lg' />
+      <MonthPicker placeholder="small size" calendarSize="sm" />
+      <MonthPicker placeholder="medium size" calendarSize="md" />
+      <MonthPicker placeholder="large size" calendarSize="lg" />
     </>
   )
 }
@@ -44,10 +44,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MonthPicker variant='outline' placeholder='outline' />
-      <MonthPicker variant='filled' placeholder='filled' />
-      <MonthPicker variant='flushed' placeholder='flushed' />
-      <MonthPicker variant='unstyled' placeholder='unstyled' />
+      <MonthPicker variant="outline" placeholder="outline" />
+      <MonthPicker variant="filled" placeholder="filled" />
+      <MonthPicker variant="flushed" placeholder="flushed" />
+      <MonthPicker variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -55,322 +55,322 @@ export const withVariant: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <>
-      <Heading size='xl'>Solid</Heading>
+      <Heading size="xl">Solid</Heading>
 
-      <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
+      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='primary'
+          calendarVariant="solid"
+          calendarColorScheme="primary"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='secondary'
+          calendarVariant="solid"
+          calendarColorScheme="secondary"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='warning'
+          calendarVariant="solid"
+          calendarColorScheme="warning"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='danger'
+          calendarVariant="solid"
+          calendarColorScheme="danger"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='link'
+          calendarVariant="solid"
+          calendarColorScheme="link"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='gray'
+          calendarVariant="solid"
+          calendarColorScheme="gray"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='zinc'
+          calendarVariant="solid"
+          calendarColorScheme="zinc"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='neutral'
+          calendarVariant="solid"
+          calendarColorScheme="neutral"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='stone'
+          calendarVariant="solid"
+          calendarColorScheme="stone"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='red'
+          calendarVariant="solid"
+          calendarColorScheme="red"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='rose'
+          calendarVariant="solid"
+          calendarColorScheme="rose"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='pink'
+          calendarVariant="solid"
+          calendarColorScheme="pink"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='orange'
+          calendarVariant="solid"
+          calendarColorScheme="orange"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='amber'
+          calendarVariant="solid"
+          calendarColorScheme="amber"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='yellow'
+          calendarVariant="solid"
+          calendarColorScheme="yellow"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='lime'
+          calendarVariant="solid"
+          calendarColorScheme="lime"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='green'
+          calendarVariant="solid"
+          calendarColorScheme="green"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='emerald'
+          calendarVariant="solid"
+          calendarColorScheme="emerald"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='teal'
+          calendarVariant="solid"
+          calendarColorScheme="teal"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='cyan'
+          calendarVariant="solid"
+          calendarColorScheme="cyan"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='sky'
+          calendarVariant="solid"
+          calendarColorScheme="sky"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='blue'
+          calendarVariant="solid"
+          calendarColorScheme="blue"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='indigo'
+          calendarVariant="solid"
+          calendarColorScheme="indigo"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='violet'
+          calendarVariant="solid"
+          calendarColorScheme="violet"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='purple'
+          calendarVariant="solid"
+          calendarColorScheme="purple"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='solid'
-          calendarColorScheme='fuchsia'
+          calendarVariant="solid"
+          calendarColorScheme="fuchsia"
           defaultValue={new Date()}
         />
       </Grid>
 
-      <Heading size='xl'>Subtle</Heading>
+      <Heading size="xl">Subtle</Heading>
 
-      <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
+      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='primary'
+          calendarVariant="subtle"
+          calendarColorScheme="primary"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='secondary'
+          calendarVariant="subtle"
+          calendarColorScheme="secondary"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='warning'
+          calendarVariant="subtle"
+          calendarColorScheme="warning"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='danger'
+          calendarVariant="subtle"
+          calendarColorScheme="danger"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='link'
+          calendarVariant="subtle"
+          calendarColorScheme="link"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='gray'
+          calendarVariant="subtle"
+          calendarColorScheme="gray"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='zinc'
+          calendarVariant="subtle"
+          calendarColorScheme="zinc"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='neutral'
+          calendarVariant="subtle"
+          calendarColorScheme="neutral"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='stone'
+          calendarVariant="subtle"
+          calendarColorScheme="stone"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='red'
+          calendarVariant="subtle"
+          calendarColorScheme="red"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='rose'
+          calendarVariant="subtle"
+          calendarColorScheme="rose"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='pink'
+          calendarVariant="subtle"
+          calendarColorScheme="pink"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='orange'
+          calendarVariant="subtle"
+          calendarColorScheme="orange"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='amber'
+          calendarVariant="subtle"
+          calendarColorScheme="amber"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='yellow'
+          calendarVariant="subtle"
+          calendarColorScheme="yellow"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='lime'
+          calendarVariant="subtle"
+          calendarColorScheme="lime"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='green'
+          calendarVariant="subtle"
+          calendarColorScheme="green"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='emerald'
+          calendarVariant="subtle"
+          calendarColorScheme="emerald"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='teal'
+          calendarVariant="subtle"
+          calendarColorScheme="teal"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='cyan'
+          calendarVariant="subtle"
+          calendarColorScheme="cyan"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='sky'
+          calendarVariant="subtle"
+          calendarColorScheme="sky"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='blue'
+          calendarVariant="subtle"
+          calendarColorScheme="blue"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='indigo'
+          calendarVariant="subtle"
+          calendarColorScheme="indigo"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='violet'
+          calendarVariant="subtle"
+          calendarColorScheme="violet"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='purple'
+          calendarVariant="subtle"
+          calendarColorScheme="purple"
           defaultValue={new Date()}
         />
 
         <MonthPicker
-          calendarVariant='subtle'
-          calendarColorScheme='fuchsia'
+          calendarVariant="subtle"
+          calendarColorScheme="fuchsia"
           defaultValue={new Date()}
         />
       </Grid>
@@ -385,33 +385,33 @@ export const withDefaultValue: Story = () => {
 export const withDefaultType: Story = () => {
   return (
     <>
-      <MonthPicker placeholder='month' defaultType='month' />
+      <MonthPicker placeholder="month" defaultType="month" />
 
-      <MonthPicker placeholder='year' defaultType='year' />
+      <MonthPicker placeholder="year" defaultType="year" />
     </>
   )
 }
 
 export const withDefaultMonth: Story = () => {
   return (
-    <MonthPicker placeholder='YYYY/MM' defaultMonth={new Date('1993-08')} />
+    <MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08")} />
   )
 }
 
 export const withBorderColor: Story = () => {
   return (
     <>
-      <MonthPicker placeholder='default border color' />
+      <MonthPicker placeholder="default border color" />
 
       <MonthPicker
-        focusBorderColor='green.500'
-        placeholder='custom border color'
+        focusBorderColor="green.500"
+        placeholder="custom border color"
       />
 
       <MonthPicker
         isInvalid
-        errorBorderColor='orange.500'
-        placeholder='custom border color'
+        errorBorderColor="orange.500"
+        placeholder="custom border color"
       />
     </>
   )
@@ -420,8 +420,8 @@ export const withBorderColor: Story = () => {
 export const withPattern: Story = () => {
   return (
     <MonthPicker
-      placeholder='MMM YYYY'
-      inputFormat='MMM YYYY'
+      placeholder="MMM YYYY"
+      inputFormat="MMM YYYY"
       pattern={/[^\w, ]/g}
       defaultValue={new Date()}
     />
@@ -429,45 +429,45 @@ export const withPattern: Story = () => {
 }
 
 export const withInputFormat: Story = () => {
-  return <MonthPicker placeholder='YYYY-MM' inputFormat='YYYY-MM' />
+  return <MonthPicker placeholder="YYYY-MM" inputFormat="YYYY-MM" />
 }
 
 export const withParseDate: Story = () => {
   return (
     <MonthPicker
-      placeholder='YYYY/MM'
-      inputFormat='YYYY/MM'
+      placeholder="YYYY/MM"
+      inputFormat="YYYY/MM"
       parseDate={(value) => new Date(value)}
     />
   )
 }
 
 export const withPlacement: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' placement='bottom-end' />
+  return <MonthPicker placeholder="YYYY/MM" placement="bottom-end" />
 }
 
 export const withOffset: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' offset={[16, 16]} />
+  return <MonthPicker placeholder="YYYY/MM" offset={[16, 16]} />
 }
 
 export const withGutter: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' gutter={32} />
+  return <MonthPicker placeholder="YYYY/MM" gutter={32} />
 }
 
 export const withDuration: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' duration={0.4} />
+  return <MonthPicker placeholder="YYYY/MM" duration={0.4} />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <MonthPicker isDisabled variant='outline' placeholder='outline' />
-      <MonthPicker isDisabled variant='filled' placeholder='filled' />
-      <MonthPicker isDisabled variant='flushed' placeholder='flushed' />
-      <MonthPicker isDisabled variant='unstyled' placeholder='unstyled' />
+      <MonthPicker isDisabled variant="outline" placeholder="outline" />
+      <MonthPicker isDisabled variant="filled" placeholder="filled" />
+      <MonthPicker isDisabled variant="flushed" placeholder="flushed" />
+      <MonthPicker isDisabled variant="unstyled" placeholder="unstyled" />
 
-      <FormControl isDisabled label='What is your birthday?'>
-        <MonthPicker placeholder='YYYY/MM' />
+      <FormControl isDisabled label="What is your birthday?">
+        <MonthPicker placeholder="YYYY/MM" />
       </FormControl>
     </>
   )
@@ -476,13 +476,13 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MonthPicker isReadOnly variant='outline' placeholder='outline' />
-      <MonthPicker isReadOnly variant='filled' placeholder='filled' />
-      <MonthPicker isReadOnly variant='flushed' placeholder='flushed' />
-      <MonthPicker isReadOnly variant='unstyled' placeholder='unstyled' />
+      <MonthPicker isReadOnly variant="outline" placeholder="outline" />
+      <MonthPicker isReadOnly variant="filled" placeholder="filled" />
+      <MonthPicker isReadOnly variant="flushed" placeholder="flushed" />
+      <MonthPicker isReadOnly variant="unstyled" placeholder="unstyled" />
 
-      <FormControl isReadOnly label='What is your birthday?'>
-        <MonthPicker placeholder='YYYY/MM' />
+      <FormControl isReadOnly label="What is your birthday?">
+        <MonthPicker placeholder="YYYY/MM" />
       </FormControl>
     </>
   )
@@ -491,17 +491,17 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MonthPicker isInvalid variant='outline' placeholder='outline' />
-      <MonthPicker isInvalid variant='filled' placeholder='filled' />
-      <MonthPicker isInvalid variant='flushed' placeholder='flushed' />
-      <MonthPicker isInvalid variant='unstyled' placeholder='unstyled' />
+      <MonthPicker isInvalid variant="outline" placeholder="outline" />
+      <MonthPicker isInvalid variant="filled" placeholder="filled" />
+      <MonthPicker isInvalid variant="flushed" placeholder="flushed" />
+      <MonthPicker isInvalid variant="unstyled" placeholder="unstyled" />
 
       <FormControl
         isInvalid
-        label='What is your birthday?'
-        errorMessage='This is required.'
+        label="What is your birthday?"
+        errorMessage="This is required."
       >
-        <MonthPicker placeholder='YYYY/MM' />
+        <MonthPicker placeholder="YYYY/MM" />
       </FormControl>
     </>
   )
@@ -510,7 +510,7 @@ export const isInvalid: Story = () => {
 export const withMinMaxDate: Story = () => {
   return (
     <MonthPicker
-      placeholder='YYYY/MM'
+      placeholder="YYYY/MM"
       minDate={new Date(1993, 8)}
       maxDate={new Date(2000, 10)}
     />
@@ -520,63 +520,63 @@ export const withMinMaxDate: Story = () => {
 export const withLocale: Story = () => {
   // import 'dayjs/locale/ja'
 
-  return <MonthPicker locale='ja' />
+  return <MonthPicker locale="ja" />
 }
 
 export const withFormat: Story = () => {
   return (
-    <Grid w='full' templateColumns='repeat(3, 1fr)' gap='md'>
+    <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
       <MonthPicker
-        placeholder='YYYY/MM'
-        locale='ja'
-        defaultType='month'
-        yearFormat='YYYY年'
+        placeholder="YYYY/MM"
+        locale="ja"
+        defaultType="month"
+        yearFormat="YYYY年"
       />
 
       <MonthPicker
-        placeholder='YYYY/MM'
-        locale='ja'
-        defaultType='month'
-        monthFormat='MM'
+        placeholder="YYYY/MM"
+        locale="ja"
+        defaultType="month"
+        monthFormat="MM"
       />
 
       <MonthPicker
-        placeholder='YYYY/MM'
-        locale='ja'
-        defaultType='year'
-        yearFormat='YY'
+        placeholder="YYYY/MM"
+        locale="ja"
+        defaultType="year"
+        yearFormat="YY"
       />
     </Grid>
   )
 }
 
 export const disabledCloseOnSelect: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' closeOnSelect={false} />
+  return <MonthPicker placeholder="YYYY/MM" closeOnSelect={false} />
 }
 
 export const disabledCloseOnBlur: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' closeOnBlur={false} />
+  return <MonthPicker placeholder="YYYY/MM" closeOnBlur={false} />
 }
 
 export const disabledIsClearable: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' isClearable={false} />
+  return <MonthPicker placeholder="YYYY/MM" isClearable={false} />
 }
 
 export const disabledAllowInput: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' allowInput={false} />
+  return <MonthPicker placeholder="YYYY/MM" allowInput={false} />
 }
 
 export const disabledControls: Story = () => {
-  return <MonthPicker placeholder='YYYY/MM' withControls={false} />
+  return <MonthPicker placeholder="YYYY/MM" withControls={false} />
 }
 
 export const customIcon: Story = () => {
   return (
     <>
-      <MonthPicker placeholder='YYYY/MM' iconProps={{ color: 'primary' }} />
+      <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
 
       <MonthPicker
-        placeholder='YYYY/MM'
+        placeholder="YYYY/MM"
         iconProps={{ children: <Icon icon={faPoo} /> }}
       />
     </>
@@ -584,11 +584,11 @@ export const customIcon: Story = () => {
 }
 
 export const customControlType: Story = () => {
-  const [type, onChangeType] = useState<MonthPickerProps['type']>('month')
+  const [type, onChangeType] = useState<MonthPickerProps["type"]>("month")
 
   return (
     <MonthPicker
-      placeholder='YYYY/MM'
+      placeholder="YYYY/MM"
       type={type}
       onChangeType={onChangeType}
     />
@@ -596,11 +596,11 @@ export const customControlType: Story = () => {
 }
 
 export const customControlMonth: Story = () => {
-  const [month, onChangeMonth] = useState<Date>(new Date('1993-08-18'))
+  const [month, onChangeMonth] = useState<Date>(new Date("1993-08-18"))
 
   return (
     <MonthPicker
-      placeholder='YYYY/MM'
+      placeholder="YYYY/MM"
       month={month}
       onChangeMonth={onChangeMonth}
     />
@@ -610,7 +610,7 @@ export const customControlMonth: Story = () => {
 export const customControlValue: Story = () => {
   const [value, onChange] = useState<Date | null>(new Date())
 
-  return <MonthPicker placeholder='YYYY/MM' value={value} onChange={onChange} />
+  return <MonthPicker placeholder="YYYY/MM" value={value} onChange={onChange} />
 }
 
 export const reactHookForm: Story = () => {
@@ -623,28 +623,28 @@ export const reactHookForm: Story = () => {
     formState: { errors },
   } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.datePicker}
-        label='Birthday'
+        label="Birthday"
         errorMessage={errors.datePicker?.message}
       >
         <Controller
-          name='datePicker'
+          name="datePicker"
           control={control}
-          rules={{ required: { value: true, message: 'This is required.' } }}
+          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
-            <MonthPicker placeholder='YYYY/MM' {...field} />
+            <MonthPicker placeholder="YYYY/MM" {...field} />
           )}
         />
       </FormControl>
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>
@@ -665,28 +665,28 @@ export const reactHookFormWithDefaultValue: Story = () => {
     formState: { errors },
   } = useForm<Data>({ defaultValues })
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.datePicker}
-        label='Birthday'
+        label="Birthday"
         errorMessage={errors.datePicker?.message}
       >
         <Controller
-          name='datePicker'
+          name="datePicker"
           control={control}
-          rules={{ required: { value: true, message: 'This is required.' } }}
+          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
-            <MonthPicker placeholder='YYYY/MM' {...field} />
+            <MonthPicker placeholder="YYYY/MM" {...field} />
           )}
         />
       </FormControl>
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>

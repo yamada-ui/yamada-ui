@@ -6,28 +6,28 @@ import {
   ThemeProps,
   useComponentStyle,
   CSSUIProps,
-} from '@yamada-ui/core'
-import { cx, filterUndefined } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { cx, filterUndefined } from "@yamada-ui/utils"
 
 type TextOptions = {
   /**
    * The CSS `text-align` property.
    */
-  align?: CSSUIProps['textAlign']
+  align?: CSSUIProps["textAlign"]
   /**
    * The CSS `text-decoration` property.
    */
-  decoration?: CSSUIProps['textDecoration']
+  decoration?: CSSUIProps["textDecoration"]
   /**
    * The CSS `text-transform` property.
    */
-  casing?: CSSUIProps['textTransform']
+  casing?: CSSUIProps["textTransform"]
 }
 
-export type TextProps = HTMLUIProps<'p'> & ThemeProps<'Text'> & TextOptions
+export type TextProps = HTMLUIProps<"p"> & ThemeProps<"Text"> & TextOptions
 
-export const Text = forwardRef<TextProps, 'p'>((props, ref) => {
-  const [css, mergedProps] = useComponentStyle('Text', props)
+export const Text = forwardRef<TextProps, "p">((props, ref) => {
+  const [css, mergedProps] = useComponentStyle("Text", props)
   const {
     className,
     align: textAlign,
@@ -45,7 +45,7 @@ export const Text = forwardRef<TextProps, 'p'>((props, ref) => {
   return (
     <ui.p
       ref={ref}
-      className={cx('ui-text', className)}
+      className={cx("ui-text", className)}
       __css={css}
       {...textProps}
       {...rest}

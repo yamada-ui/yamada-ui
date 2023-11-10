@@ -1,25 +1,25 @@
-import { ui, CSSUIObject, ThemeConfig } from '@yamada-ui/core'
+import { ui, CSSUIObject, ThemeConfig } from "@yamada-ui/core"
 import {
   AnimatePresence,
   motion,
   useIsPresent,
   MotionVariants,
   MotionStyle,
-} from '@yamada-ui/motion'
-import { Portal } from '@yamada-ui/portal'
-import { useTimeout } from '@yamada-ui/use-timeout'
-import { cx, runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
-import { FC, memo, useEffect, useState, useSyncExternalStore } from 'react'
-import { noticeStore, NoticeOptions } from './notice'
+} from "@yamada-ui/motion"
+import { Portal } from "@yamada-ui/portal"
+import { useTimeout } from "@yamada-ui/use-timeout"
+import { cx, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
+import { FC, memo, useEffect, useState, useSyncExternalStore } from "react"
+import { noticeStore, NoticeOptions } from "./notice"
 
 export type NoticeProviderProps = Omit<
-  Required<ThemeConfig>['notice'],
-  'options'
+  Required<ThemeConfig>["notice"],
+  "options"
 >
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
-  gap = 'md',
+  gap = "md",
   appendToParentPortal,
   containerRef,
 }) => {
@@ -30,25 +30,25 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   )
 
   const components = Object.entries(state).map(([placement, notices]) => {
-    const top = placement.includes('top')
-      ? 'env(safe-area-inset-top, 0px)'
+    const top = placement.includes("top")
+      ? "env(safe-area-inset-top, 0px)"
       : undefined
-    const bottom = placement.includes('bottom')
-      ? 'env(safe-area-inset-bottom, 0px)'
+    const bottom = placement.includes("bottom")
+      ? "env(safe-area-inset-bottom, 0px)"
       : undefined
-    const right = !placement.includes('left')
-      ? 'env(safe-area-inset-right, 0px)'
+    const right = !placement.includes("left")
+      ? "env(safe-area-inset-right, 0px)"
       : undefined
-    const left = !placement.includes('right')
-      ? 'env(safe-area-inset-left, 0px)'
+    const left = !placement.includes("right")
+      ? "env(safe-area-inset-left, 0px)"
       : undefined
 
     const css: CSSUIObject = {
-      position: 'fixed',
-      zIndex: 'zarbon',
-      pointerEvents: 'none',
-      display: 'flex',
-      flexDirection: 'column',
+      position: "fixed",
+      zIndex: "zarbon",
+      pointerEvents: "none",
+      display: "flex",
+      flexDirection: "column",
       margin: gap,
       gap,
       top,
@@ -60,7 +60,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
     return (
       <ui.ul
         key={placement}
-        className={cx('ui-notice__list', `ui-notice__list--${placement}`)}
+        className={cx("ui-notice__list", `ui-notice__list--${placement}`)}
         __css={css}
       >
         <AnimatePresence initial={false}>
@@ -85,8 +85,8 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 const defaultVariants: MotionVariants = {
   initial: ({ placement }) => ({
     opacity: 0,
-    [['top', 'bottom'].includes(placement) ? 'y' : 'x']:
-      (placement === 'bottom' ? 1 : placement.includes('right') ? 1 : -1) * 24,
+    [["top", "bottom"].includes(placement) ? "y" : "x"]:
+      (placement === "bottom" ? 1 : placement.includes("right") ? 1 : -1) * 24,
   }),
   animate: {
     opacity: 1,
@@ -109,7 +109,7 @@ const defaultVariants: MotionVariants = {
 }
 
 type NoticeComponentProps = NoticeOptions &
-  Pick<NoticeProviderProps, 'variants'>
+  Pick<NoticeProviderProps, "variants">
 
 const NoticeComponent = memo(
   ({
@@ -147,35 +147,35 @@ const NoticeComponent = memo(
     useTimeout(onClose, delay)
 
     const css: CSSUIObject = {
-      pointerEvents: 'auto',
-      maxW: '2xl',
-      minW: 'sm',
+      pointerEvents: "auto",
+      maxW: "2xl",
+      minW: "sm",
       ...style,
     }
 
     return (
       <motion.li
         layout
-        className='ui-notice__list__item'
+        className="ui-notice__list__item"
         variants={variants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
+        initial="initial"
+        animate="animate"
+        exit="exit"
         onHoverStart={onMouseEnter}
         onHoverEnd={onMouseLeave}
         custom={{ placement }}
         style={
           {
-            display: 'flex',
-            justifyContent: placement.includes('left')
-              ? 'flex-start'
-              : placement.includes('right')
-              ? 'flex-end'
-              : 'center',
+            display: "flex",
+            justifyContent: placement.includes("left")
+              ? "flex-start"
+              : placement.includes("right")
+              ? "flex-end"
+              : "center",
           } as MotionStyle
         }
       >
-        <ui.div className='ui-notice__list__item__inner' __css={css}>
+        <ui.div className="ui-notice__list__item__inner" __css={css}>
           {runIfFunc(message, { onClose })}
         </ui.div>
       </motion.li>
@@ -183,4 +183,4 @@ const NoticeComponent = memo(
   },
 )
 
-NoticeComponent.displayName = 'NoticeComponent'
+NoticeComponent.displayName = "NoticeComponent"

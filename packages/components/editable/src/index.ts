@@ -5,7 +5,7 @@ export {
   EditablePreview,
   useEditable,
   useEditableControl,
-} from './editable'
+} from "./editable"
 export type {
   EditableProps,
   EditableInputProps,
@@ -13,4 +13,4 @@ export type {
   EditablePreviewProps,
   UseEditableProps,
   UseEditableReturn,
-} from './editable'
+} from "./editable"

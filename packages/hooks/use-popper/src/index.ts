@@ -4,11 +4,11 @@ import {
   Modifier,
   VirtualElement,
   Placement,
-} from '@popperjs/core'
-import { Token } from '@yamada-ui/core'
-import { useValue } from '@yamada-ui/use-value'
-import { mergeRefs, PropGetter } from '@yamada-ui/utils'
-import { useCallback, useEffect, useRef } from 'react'
+} from "@popperjs/core"
+import { Token } from "@yamada-ui/core"
+import { useValue } from "@yamada-ui/use-value"
+import { mergeRefs, PropGetter } from "@yamada-ui/utils"
+import { useCallback, useEffect, useRef } from "react"
 
 export type UsePopperProps = {
   /**
@@ -52,7 +52,7 @@ export type UsePopperProps = {
    *
    * @default 'clippingParents'
    */
-  boundary?: 'clippingParents' | 'scrollParent' | HTMLElement
+  boundary?: "clippingParents" | "scrollParent" | HTMLElement
   /**
    * If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.
    *
@@ -64,7 +64,7 @@ export type UsePopperProps = {
    *
    * @default 'absolute'
    */
-  strategy?: 'absolute' | 'fixed'
+  strategy?: "absolute" | "fixed"
   /**
    * The placement of the popper relative to its reference.
    *
@@ -86,21 +86,21 @@ const defaultEventListeners = {
 }
 
 const transforms: Record<string, string> = {
-  top: 'bottom center',
-  'top-start': 'bottom left',
-  'top-end': 'bottom right',
+  top: "bottom center",
+  "top-start": "bottom left",
+  "top-end": "bottom right",
 
-  bottom: 'top center',
-  'bottom-start': 'top left',
-  'bottom-end': 'top right',
+  bottom: "top center",
+  "bottom-start": "top left",
+  "bottom-end": "top right",
 
-  left: 'right center',
-  'left-start': 'right top',
-  'left-end': 'right bottom',
+  left: "right center",
+  "left-start": "right top",
+  "left-end": "right bottom",
 
-  right: 'left center',
-  'right-start': 'left top',
-  'right-end': 'left bottom',
+  right: "left center",
+  "right-start": "left top",
+  "right-end": "left bottom",
 }
 
 export const usePopper = ({
@@ -111,9 +111,9 @@ export const usePopper = ({
   gutter: _gutter = 8,
   flip = true,
   preventOverflow = true,
-  boundary = 'clippingParents',
-  strategy = 'absolute',
-  placement: _placement = 'bottom',
+  boundary = "clippingParents",
+  strategy = "absolute",
+  placement: _placement = "bottom",
   modifiers,
 }: UsePopperProps = {}) => {
   const reference = useRef<Element | VirtualElement | null>(null)
@@ -130,13 +130,13 @@ export const usePopper = ({
 
     cleanup.current?.()
 
-    const modifierTransformOrigin: Modifier<'transformOrigin', any> = {
-      name: 'transformOrigin',
+    const modifierTransformOrigin: Modifier<"transformOrigin", any> = {
+      name: "transformOrigin",
       enabled: true,
-      phase: 'write',
+      phase: "write",
       fn: ({ state }) => {
         state.elements.popper.style.setProperty(
-          '--popper-transform-origin',
+          "--popper-transform-origin",
           transforms[state.placement],
         )
       },
@@ -144,15 +144,15 @@ export const usePopper = ({
         ({ state }) =>
         () => {
           state.elements.popper.style.setProperty(
-            '--popper-transform-origin',
+            "--popper-transform-origin",
             transforms[state.placement],
           )
         },
     }
 
     const modifierEventListeners = {
-      name: 'eventListeners',
-      ...(typeof eventListeners === 'object'
+      name: "eventListeners",
+      ...(typeof eventListeners === "object"
         ? {
             enabled: true,
             options: { ...defaultEventListeners, ...eventListeners },
@@ -164,27 +164,27 @@ export const usePopper = ({
     }
 
     const modifierOffset = {
-      name: 'offset',
+      name: "offset",
       options: { offset: offset ?? [0, gutter] },
     }
 
     const modifierFlip = {
-      name: 'flip',
+      name: "flip",
       enabled: !!flip,
       options: { padding: 8 },
     }
 
     const modifierPreventOverflow = {
-      name: 'preventOverflow',
+      name: "preventOverflow",
       enabled: !!preventOverflow,
       options: { boundary },
     }
 
-    const modifierMatchWidth: Modifier<'matchWidth', any> = {
-      name: 'matchWidth',
+    const modifierMatchWidth: Modifier<"matchWidth", any> = {
+      name: "matchWidth",
       enabled: !!matchWidth,
-      phase: 'beforeWrite',
-      requires: ['computeStyles'],
+      phase: "beforeWrite",
+      requires: ["computeStyles"],
       fn: ({ state }) => {
         state.styles.popper.width = `${state.rects.reference.width}px`
       },
@@ -270,8 +270,8 @@ export const usePopper = ({
       style: {
         ...props.style,
         position: strategy,
-        minWidth: matchWidth ? undefined : 'max-content',
-        inset: '0 auto auto 0',
+        minWidth: matchWidth ? undefined : "max-content",
+        inset: "0 auto auto 0",
       },
     }),
     [strategy, popperRef, matchWidth],
@@ -280,7 +280,7 @@ export const usePopper = ({
   return {
     update: () => instance.current?.update(),
     forceUpdate: () => instance.current?.forceUpdate(),
-    transformOrigin: 'var(--popper-transform-origin)',
+    transformOrigin: "var(--popper-transform-origin)",
     referenceRef,
     popperRef,
     getPopperProps,

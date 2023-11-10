@@ -1,28 +1,28 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs, transforms } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs, transforms } from "./config"
 
 export const transition: Configs = {
   transitionDelay: true,
   willChange: true,
   transitionProperty: configs.prop(
-    'transitionProperty',
-    'transitions.property',
+    "transitionProperty",
+    "transitions.property",
   ),
   transitionDuration: configs.prop(
-    'transitionDuration',
-    'transitions.duration',
+    "transitionDuration",
+    "transitions.duration",
   ),
   transitionTimingFunction: configs.prop(
-    'transitionTimingFunction',
-    'transitions.easing',
+    "transitionTimingFunction",
+    "transitions.easing",
   ),
-  animation: configs.propTransform('animation', transforms.animation),
+  animation: configs.propTransform("animation", transforms.animation),
   animationName: true,
-  animationDuration: configs.prop('animationDuration', 'transitions.duration'),
+  animationDuration: configs.prop("animationDuration", "transitions.duration"),
   animationTimingFunction: configs.prop(
-    'animationTimingFunction',
-    'transitions.easing',
+    "animationTimingFunction",
+    "transitions.easing",
   ),
   animationDelay: true,
   animationIterationCount: true,
@@ -45,26 +45,26 @@ export type TransitionProps = {
    */
   transitionProperty?: Token<
     CSS.Property.TransitionProperty,
-    'transitionProperty'
+    "transitionProperty"
   >
   /**
    * The CSS `transition-duration` property.
    */
   transitionDuration?: Token<
     CSS.Property.TransitionDuration,
-    'transitionDuration'
+    "transitionDuration"
   >
   /**
    * The CSS `transition-timing-function` property.
    */
   transitionTimingFunction?: Token<
     CSS.Property.TransitionTimingFunction,
-    'transitionEasing'
+    "transitionEasing"
   >
   /**
    * The CSS `animation` property.
    */
-  animation?: Token<CSS.Property.Animation, 'animations'>
+  animation?: Token<CSS.Property.Animation, "animations">
   /**
    * The CSS `animation-name` property.
    */
@@ -74,14 +74,14 @@ export type TransitionProps = {
    */
   animationDuration?: Token<
     CSS.Property.AnimationDuration,
-    'transitionDuration'
+    "transitionDuration"
   >
   /**
    * The CSS `animation-timing-function` property.
    */
   animationTimingFunction?: Token<
     CSS.Property.AnimationTimingFunction,
-    'transitionEasing'
+    "transitionEasing"
   >
   /**
    * The CSS `animation-delay` property.

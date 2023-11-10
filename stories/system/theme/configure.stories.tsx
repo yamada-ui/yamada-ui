@@ -1,8 +1,8 @@
-import { UIProvider, extendConfig, Center, Image } from '@yamada-ui/react'
-import { FC } from 'react'
+import { UIProvider, extendConfig, Center, Image } from "@yamada-ui/react"
+import { FC } from "react"
 
 export default {
-  title: 'System / Theme / Configure',
+  title: "System / Theme / Configure",
 }
 
 export const extendConfigure = () => {
@@ -35,11 +35,11 @@ export const overrideConfigure = () => {
 
 const App: FC = () => {
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
       <Image
-        w='full'
-        maxW='xl'
-        src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png'
+        w="full"
+        maxW="xl"
+        src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png"
       />
     </Center>
   )

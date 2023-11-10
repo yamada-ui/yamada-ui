@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   NativeTable,
   Thead,
@@ -13,13 +13,13 @@ import {
   Box,
   defaultTheme,
   TableContainer,
-} from '@yamada-ui/react'
-import { FC, useState } from 'react'
+} from "@yamada-ui/react"
+import { FC, useState } from "react"
 
 type Story = StoryFn<typeof NativeTable>
 
 const meta: Meta<typeof NativeTable> = {
-  title: 'Components / Data Display / NativeTable',
+  title: "Components / Data Display / NativeTable",
   component: NativeTable,
 }
 
@@ -132,10 +132,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <Table size='sm' />
-      <Table size='md' />
-      <Table size='lg' />
-      <Table size='xl' />
+      <Table size="sm" />
+      <Table size="md" />
+      <Table size="lg" />
+      <Table size="xl" />
     </>
   )
 }
@@ -195,8 +195,8 @@ export const withVariant: Story = () => {
 
   return (
     <>
-      <Table variant='simple' />
-      <Table variant='striped' />
+      <Table variant="simple" />
+      <Table variant="striped" />
     </>
   )
 }
@@ -256,57 +256,57 @@ export const withColorScheme: Story = () => {
 
   return (
     <>
-      <Table variant='striped' colorScheme='primary' />
+      <Table variant="striped" colorScheme="primary" />
 
-      <Table variant='striped' colorScheme='secondary' />
+      <Table variant="striped" colorScheme="secondary" />
 
-      <Table variant='striped' colorScheme='warning' />
+      <Table variant="striped" colorScheme="warning" />
 
-      <Table variant='striped' colorScheme='danger' />
+      <Table variant="striped" colorScheme="danger" />
 
-      <Table variant='striped' colorScheme='link' />
+      <Table variant="striped" colorScheme="link" />
 
-      <Table variant='striped' colorScheme='gray' />
+      <Table variant="striped" colorScheme="gray" />
 
-      <Table variant='striped' colorScheme='zinc' />
+      <Table variant="striped" colorScheme="zinc" />
 
-      <Table variant='striped' colorScheme='neutral' />
+      <Table variant="striped" colorScheme="neutral" />
 
-      <Table variant='striped' colorScheme='stone' />
+      <Table variant="striped" colorScheme="stone" />
 
-      <Table variant='striped' colorScheme='red' />
+      <Table variant="striped" colorScheme="red" />
 
-      <Table variant='striped' colorScheme='rose' />
+      <Table variant="striped" colorScheme="rose" />
 
-      <Table variant='striped' colorScheme='pink' />
+      <Table variant="striped" colorScheme="pink" />
 
-      <Table variant='striped' colorScheme='orange' />
+      <Table variant="striped" colorScheme="orange" />
 
-      <Table variant='striped' colorScheme='amber' />
+      <Table variant="striped" colorScheme="amber" />
 
-      <Table variant='striped' colorScheme='yellow' />
+      <Table variant="striped" colorScheme="yellow" />
 
-      <Table variant='striped' colorScheme='lime' />
+      <Table variant="striped" colorScheme="lime" />
 
-      <Table variant='striped' colorScheme='green' />
+      <Table variant="striped" colorScheme="green" />
 
-      <Table variant='striped' colorScheme='emerald' />
+      <Table variant="striped" colorScheme="emerald" />
 
-      <Table variant='striped' colorScheme='teal' />
+      <Table variant="striped" colorScheme="teal" />
 
-      <Table variant='striped' colorScheme='cyan' />
+      <Table variant="striped" colorScheme="cyan" />
 
-      <Table variant='striped' colorScheme='sky' />
+      <Table variant="striped" colorScheme="sky" />
 
-      <Table variant='striped' colorScheme='blue' />
+      <Table variant="striped" colorScheme="blue" />
 
-      <Table variant='striped' colorScheme='indigo' />
+      <Table variant="striped" colorScheme="indigo" />
 
-      <Table variant='striped' colorScheme='violet' />
+      <Table variant="striped" colorScheme="violet" />
 
-      <Table variant='striped' colorScheme='purple' />
+      <Table variant="striped" colorScheme="purple" />
 
-      <Table variant='striped' colorScheme='fuchsia' />
+      <Table variant="striped" colorScheme="fuchsia" />
     </>
   )
 }
@@ -472,7 +472,7 @@ export const withCaption: Story = () => {
     <>
       <TableContainer>
         <NativeTable>
-          <TableCaption placement='top'>
+          <TableCaption placement="top">
             ©バードスタジオ/集英社・東映アニメーション
           </TableCaption>
 
@@ -523,7 +523,7 @@ export const withCaption: Story = () => {
       </TableContainer>
       <TableContainer>
         <NativeTable>
-          <TableCaption placement='bottom'>
+          <TableCaption placement="bottom">
             ©バードスタジオ/集英社・東映アニメーション
           </TableCaption>
 
@@ -580,20 +580,20 @@ export const withStickyHeader: Story = () => {
   const [isScrolled, setIsScrolled] = useState(false)
 
   return (
-    <TableContainer w='full'>
+    <TableContainer w="full">
       <ScrollArea
-        w='full'
-        h='xs'
+        w="full"
+        h="xs"
         onScrollPositionChange={({ y }) => setIsScrolled(y !== 0)}
       >
         <NativeTable>
           <Thead
-            position='sticky'
+            position="sticky"
             top={0}
-            bg={['white', 'black']}
-            transitionProperty='box-shadow'
-            transitionDuration='slow'
-            boxShadow={isScrolled ? 'md' : undefined}
+            bg={["white", "black"]}
+            transitionProperty="box-shadow"
+            transitionDuration="slow"
+            boxShadow={isScrolled ? "md" : undefined}
           >
             <Tr>
               <Th>Name</Th>
@@ -609,7 +609,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>0.25rem</Td>
               <Td isNumeric>4px</Td>
               <Td>
-                <Box maxW='0.25rem' h='9xs' bg='red.500' />
+                <Box maxW="0.25rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -617,7 +617,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>0.5rem</Td>
               <Td isNumeric>8px</Td>
               <Td>
-                <Box maxW='0.5rem' h='9xs' bg='red.500' />
+                <Box maxW="0.5rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -625,7 +625,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>1rem</Td>
               <Td isNumeric>16px</Td>
               <Td>
-                <Box maxW='1rem' h='9xs' bg='red.500' />
+                <Box maxW="1rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -633,7 +633,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>1.5rem</Td>
               <Td isNumeric>24px</Td>
               <Td>
-                <Box maxW='1.5rem' h='9xs' bg='red.500' />
+                <Box maxW="1.5rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -641,7 +641,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>2rem</Td>
               <Td isNumeric>32px</Td>
               <Td>
-                <Box maxW='2rem' h='9xs' bg='red.500' />
+                <Box maxW="2rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -649,7 +649,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>3rem</Td>
               <Td isNumeric>48px</Td>
               <Td>
-                <Box maxW='3rem' h='9xs' bg='red.500' />
+                <Box maxW="3rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -657,7 +657,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>4.5rem</Td>
               <Td isNumeric>72px</Td>
               <Td>
-                <Box maxW='4.5rem' h='9xs' bg='red.500' />
+                <Box maxW="4.5rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -665,7 +665,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>6rem</Td>
               <Td isNumeric>96px</Td>
               <Td>
-                <Box maxW='6rem' h='9xs' bg='red.500' />
+                <Box maxW="6rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             <Tr>
@@ -673,7 +673,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>10rem</Td>
               <Td isNumeric>160px</Td>
               <Td>
-                <Box maxW='10rem' h='9xs' bg='red.500' />
+                <Box maxW="10rem" h="9xs" bg="red.500" />
               </Td>
             </Tr>
             {Object.entries(defaultTheme.spaces)
@@ -686,7 +686,7 @@ export const withStickyHeader: Story = () => {
                     <Td isNumeric>{value}</Td>
                     <Td isNumeric>{`${parseFloat(value) * 16}px`}</Td>
                     <Td>
-                      <Box maxW={value} h='9xs' bg='green.500' />
+                      <Box maxW={value} h="9xs" bg="green.500" />
                     </Td>
                   </Tr>
                 )

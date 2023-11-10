@@ -1,15 +1,15 @@
-import { CSSUIObject, Token } from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { useValue } from '@yamada-ui/use-value'
-import { createContext } from '@yamada-ui/utils'
-import { useCallback, useMemo } from 'react'
+import { CSSUIObject, Token } from "@yamada-ui/core"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { useValue } from "@yamada-ui/use-value"
+import { createContext } from "@yamada-ui/utils"
+import { useCallback, useMemo } from "react"
 
 type PaginationContext = Record<string, CSSUIObject>
 
 export const [PaginationProvider, usePaginationContext] =
   createContext<PaginationContext>({
     strict: false,
-    name: 'PaginationContext',
+    name: "PaginationContext",
   })
 
 export type UsePaginationProps = {
@@ -95,7 +95,7 @@ export const usePagination = ({
     [setCurrentPage],
   )
 
-  const range = useMemo((): (number | 'dots')[] => {
+  const range = useMemo((): (number | "dots")[] => {
     const minimumTotal = computedSiblings * 2 + 3 + computedBoundaries * 2
 
     if (minimumTotal >= total) return computedRange(1, total)
@@ -117,7 +117,7 @@ export const usePagination = ({
 
       return [
         ...computedRange(1, prevPages),
-        'dots',
+        "dots",
         ...computedRange(total - (computedBoundaries - 1), total),
       ]
     }
@@ -127,16 +127,16 @@ export const usePagination = ({
 
       return [
         ...computedRange(1, computedBoundaries),
-        'dots',
+        "dots",
         ...computedRange(total - nextPages, total),
       ]
     }
 
     return [
       ...computedRange(1, computedBoundaries),
-      'dots',
+      "dots",
       ...computedRange(prevSiblings, nextSiblings),
-      'dots',
+      "dots",
       ...computedRange(total - computedBoundaries + 1, total),
     ]
   }, [computedBoundaries, computedSiblings, currentPage, total])

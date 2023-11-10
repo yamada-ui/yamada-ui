@@ -1,13 +1,13 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { useLazyDisclosure } from '@yamada-ui/use-disclosure'
-import { cx } from '@yamada-ui/utils'
-import { useRef } from 'react'
-import { useTabPanelContext } from './tab-panels'
-import { useTabsContext } from './tabs'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
+import { cx } from "@yamada-ui/utils"
+import { useRef } from "react"
+import { useTabPanelContext } from "./tab-panels"
+import { useTabsContext } from "./tabs"
 
-export type TabPanelProps = HTMLUIProps<'div'>
+export type TabPanelProps = HTMLUIProps<"div">
 
-export const TabPanel = forwardRef<TabPanelProps, 'div'>(
+export const TabPanel = forwardRef<TabPanelProps, "div">(
   ({ className, children, ...rest }, ref) => {
     const { isLazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
     const { isSelected } = useTabPanelContext()
@@ -28,8 +28,8 @@ export const TabPanel = forwardRef<TabPanelProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-tabs-panel', className)}
-        role='tabpanel'
+        className={cx("ui-tabs-panel", className)}
+        role="tabpanel"
         __css={css}
         {...rest}
         hidden={!isSelected}

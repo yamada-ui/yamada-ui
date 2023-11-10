@@ -6,11 +6,11 @@ import {
   ThemeProps,
   useComponentStyle,
   ColorModeArray,
-} from '@yamada-ui/core'
-import { useValue } from '@yamada-ui/use-value'
-import { cx, filterEmpty } from '@yamada-ui/utils'
-import { ComponentPropsWithoutRef, FC } from 'react'
-import ReactMarkdown from 'react-markdown'
+} from "@yamada-ui/core"
+import { useValue } from "@yamada-ui/use-value"
+import { cx, filterEmpty } from "@yamada-ui/utils"
+import { ComponentPropsWithoutRef, FC } from "react"
+import ReactMarkdown from "react-markdown"
 import {
   CodeProps,
   HeadingProps,
@@ -19,13 +19,13 @@ import {
   TableDataCellProps,
   TableRowProps,
   UnorderedListProps,
-} from 'react-markdown/lib/ast-to-react'
-import { ReactMarkdownProps } from 'react-markdown/lib/complex-types'
-import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import * as styles from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import rehypeRaw from 'rehype-raw'
-import remarkGfm from 'remark-gfm'
+} from "react-markdown/lib/ast-to-react"
+import { ReactMarkdownProps } from "react-markdown/lib/complex-types"
+import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import * as styles from "react-syntax-highlighter/dist/cjs/styles/prism"
+import rehypeRaw from "rehype-raw"
+import remarkGfm from "remark-gfm"
 
 type CodeTheme = keyof typeof styles
 
@@ -46,17 +46,17 @@ type MarkdownOptions = ReactMarkdownOptions & {
   code?: { theme?: CodeTheme | ColorModeArray<CodeTheme> }
 }
 
-export type MarkdownProps = Omit<HTMLUIProps<'div'>, 'children'> &
-  ThemeProps<'Markdown'> &
+export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
+  ThemeProps<"Markdown"> &
   MarkdownOptions
 
-export const Markdown = forwardRef<MarkdownProps, 'div'>((props, ref) => {
-  const [css, mergedProps] = useComponentStyle('Markdown', props)
+export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
+  const [css, mergedProps] = useComponentStyle("Markdown", props)
   let {
     className,
     remarkPlugins,
     rehypePlugins,
-    linkTarget = '_blank',
+    linkTarget = "_blank",
     components,
     code,
     ...rest
@@ -73,7 +73,7 @@ export const Markdown = forwardRef<MarkdownProps, 'div'>((props, ref) => {
     <ui.div
       as={ReactMarkdown}
       ref={ref}
-      className={cx('ui-markdown', className)}
+      className={cx("ui-markdown", className)}
       remarkPlugins={remarkPlugins}
       rehypePlugins={rehypePlugins}
       components={components}
@@ -84,31 +84,31 @@ export const Markdown = forwardRef<MarkdownProps, 'div'>((props, ref) => {
   )
 })
 
-const Code: FC<MarkdownComponentCodeProps & MarkdownOptions['code']> = ({
+const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["code"]> = ({
   inline,
   className,
   children,
-  theme = 'oneDark',
+  theme = "oneDark",
 }) => {
   if (inline)
     return (
-      <ui.code className={cx('ui-markdown__code--inline', className)}>
+      <ui.code className={cx("ui-markdown__code--inline", className)}>
         {children}
       </ui.code>
     )
 
   theme = useValue(theme)
 
-  const language = className?.replace(/language-/, '')
+  const language = className?.replace(/language-/, "")
 
   return (
     <ui.pre
       as={SyntaxHighlighter as any}
-      className={cx('ui-markdown__code', className)}
+      className={cx("ui-markdown__code", className)}
       language={language}
       style={(styles as any)[theme]}
     >
-      {String(children).replace(/\n$/, '')}
+      {String(children).replace(/\n$/, "")}
     </ui.pre>
   )
 }

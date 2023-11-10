@@ -1,7 +1,7 @@
-import { PortalProps } from '@yamada-ui/portal'
-import { Dict, StringLiteral } from '@yamada-ui/utils'
-import type { Variants } from 'framer-motion'
-import { FC, ReactNode } from 'react'
+import { PortalProps } from "@yamada-ui/portal"
+import { Dict, StringLiteral } from "@yamada-ui/utils"
+import type { Variants } from "framer-motion"
+import { FC, ReactNode } from "react"
 import {
   UIStyle,
   AnimationStyle,
@@ -10,36 +10,36 @@ import {
   CSSUIProps,
   CSSUIObject,
   UIMultiStyle,
-} from './css'
-import { GeneratedTheme } from './generated-theme.types'
-import { UITheme } from './ui-theme.types'
+} from "./css"
+import { GeneratedTheme } from "./generated-theme.types"
+import { UITheme } from "./ui-theme.types"
 
 export type LoadingVariant =
-  | 'oval'
-  | 'grid'
-  | 'audio'
-  | 'dots'
-  | 'puff'
-  | 'rings'
-  | 'circles'
+  | "oval"
+  | "grid"
+  | "audio"
+  | "dots"
+  | "puff"
+  | "rings"
+  | "circles"
 
 export type NoticePlacement =
-  | 'top'
-  | 'top-left'
-  | 'top-right'
-  | 'bottom'
-  | 'bottom-left'
-  | 'bottom-right'
+  | "top"
+  | "top-left"
+  | "top-right"
+  | "bottom"
+  | "bottom-left"
+  | "bottom-right"
 
 export type AlertStatuses = Partial<
-  Record<AlertStatus, { icon?: FC; colorScheme?: Theme['colorSchemes'] }>
+  Record<AlertStatus, { icon?: FC; colorScheme?: Theme["colorSchemes"] }>
 >
 
-export type AlertStatus = 'info' | 'success' | 'warning' | 'error' | 'loading'
+export type AlertStatus = "info" | "success" | "warning" | "error" | "loading"
 
 export type NoticeComponentProps = NoticeConfigOptions & { onClose: () => void }
 
-export type NoticeConfigOptions = ThemeProps<'Alert'> & {
+export type NoticeConfigOptions = ThemeProps<"Alert"> & {
   /**
    * The placement of the notice.
    *
@@ -73,7 +73,7 @@ export type NoticeConfigOptions = ThemeProps<'Alert'> & {
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps['color']
+    color?: CSSUIProps["color"]
     children?: ReactNode
   }
   /**
@@ -102,8 +102,8 @@ export type NoticeConfigOptions = ThemeProps<'Alert'> & {
 
 export type LoadingComponentProps = {
   initialState?: boolean
-  icon: LoadingConfigOptions['icon']
-  text: LoadingConfigOptions['text']
+  icon: LoadingConfigOptions["icon"]
+  text: LoadingConfigOptions["text"]
   duration: number | null
   message: ReactNode | undefined
   onFinish: () => void
@@ -124,15 +124,15 @@ export type LoadingConfigOptions = {
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps['color']
+    color?: CSSUIProps["color"]
     /**
      * The CSS `color` property.
      */
-    secondaryColor?: CSSUIProps['color']
+    secondaryColor?: CSSUIProps["color"]
     /**
      * The CSS `box-size` property.
      */
-    size?: CSSUIProps['boxSize']
+    size?: CSSUIProps["boxSize"]
   }
   /**
    * Props for loading text element.
@@ -141,27 +141,27 @@ export type LoadingConfigOptions = {
     /**
      * The CSS `font-family` property.
      */
-    fontFamily?: CSSUIProps['fontFamily']
+    fontFamily?: CSSUIProps["fontFamily"]
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps['color']
+    color?: CSSUIProps["color"]
     /**
      * The CSS `font-size` property.
      */
-    fontSize?: CSSUIProps['fontSize']
+    fontSize?: CSSUIProps["fontSize"]
     /**
      * The CSS `font-weight` property.
      */
-    fontWeight?: CSSUIProps['fontWeight']
+    fontWeight?: CSSUIProps["fontWeight"]
     /**
      * The CSS `letter-spacing` property.
      */
-    letterSpacing?: CSSUIProps['letterSpacing']
+    letterSpacing?: CSSUIProps["letterSpacing"]
     /**
      * The CSS `line-height` property.
      */
-    lineHeight?: CSSUIProps['letterSpacing']
+    lineHeight?: CSSUIProps["letterSpacing"]
   }
   /**
    * The number of `ms` the loading will continue to be displayed.
@@ -197,11 +197,11 @@ export type LoadingConfigOptions = {
    *
    * @default true
    */
-  appendToParentPortal?: PortalProps['appendToParentPortal']
+  appendToParentPortal?: PortalProps["appendToParentPortal"]
   /**
    * The `ref` to the component where the portal will be attached to.
    */
-  containerRef?: PortalProps['containerRef']
+  containerRef?: PortalProps["containerRef"]
 }
 
 export type ThemeConfig = {
@@ -211,14 +211,14 @@ export type ThemeConfig = {
    *
    * @default 'base'
    */
-  initialThemeScheme?: Theme['themeSchemes']
+  initialThemeScheme?: Theme["themeSchemes"]
   /**
    * The initial color mode.
    * If `system`, the system will apply the color mode.
    *
    * @default 'light'
    */
-  initialColorMode?: 'light' | 'dark' | 'system'
+  initialColorMode?: "light" | "dark" | "system"
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
@@ -279,7 +279,7 @@ export type ThemeConfig = {
      *
      * @default 'md'
      */
-    gap?: CSSUIProps['gap']
+    gap?: CSSUIProps["gap"]
     /**
      * If `true`, the portal will check if it is within a parent portal
      * and append itself to the parent's portal node.
@@ -290,11 +290,11 @@ export type ThemeConfig = {
      *
      * @default true
      */
-    appendToParentPortal?: PortalProps['appendToParentPortal']
+    appendToParentPortal?: PortalProps["appendToParentPortal"]
     /**
      * The `ref` to the component where the portal will be attached to.
      */
-    containerRef?: PortalProps['containerRef']
+    containerRef?: PortalProps["containerRef"]
   }
   /**
    * The config of the loading.
@@ -341,20 +341,20 @@ export type ThemeTransitionTokens = {
 export type ThemeBreakpointTokens = { [key: string | number]: string | number }
 export type ThemeSemantics = Omit<
   BaseTheme,
-  | 'styles'
-  | 'components'
-  | 'semantics'
-  | 'themeSchemes'
-  | 'breakpoints'
-  | 'animations'
+  | "styles"
+  | "components"
+  | "semantics"
+  | "themeSchemes"
+  | "breakpoints"
+  | "animations"
 > & {
-  colorSchemes?: Partial<Record<string, Theme['colorSchemes']>>
+  colorSchemes?: Partial<Record<string, Theme["colorSchemes"]>>
   animations?: ThemeAnimationTokens<AnimationStyle | string>
 }
 export type ThemeSchemes = Partial<
   Record<
     string,
-    Omit<BaseTheme, 'styles' | 'components' | 'themeSchemes' | 'breakpoints'>
+    Omit<BaseTheme, "styles" | "components" | "themeSchemes" | "breakpoints">
   >
 >
 export type ThemeComponents = Record<
@@ -401,11 +401,11 @@ export type ComponentVariants = Record<string, UIStyle>
 export type ComponentSizes = Record<string, UIStyle>
 export type ComponentDefaultProps<
   Y extends Dict = Dict,
-  M extends keyof Theme['components'] | unknown = unknown,
-> = Partial<Omit<Y, 'variant' | 'size' | 'colorScheme'>> & {
-  variant?: ThemeProps<M>['variant']
-  size?: ThemeProps<M>['size']
-  colorScheme?: ThemeProps<M>['colorScheme']
+  M extends keyof Theme["components"] | unknown = unknown,
+> = Partial<Omit<Y, "variant" | "size" | "colorScheme">> & {
+  variant?: ThemeProps<M>["variant"]
+  size?: ThemeProps<M>["size"]
+  colorScheme?: ThemeProps<M>["colorScheme"]
 }
 
 export type ComponentStyle<Y extends Dict = Dict> = {
@@ -456,10 +456,10 @@ export type CustomTheme = {}
 
 export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
-export type ChangeThemeScheme = (themeScheme: Theme['themeSchemes']) => void
+export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 
 export type PropsTheme<T extends object = Dict> = T & {
-  themeScheme: Theme['themeSchemes']
+  themeScheme: Theme["themeSchemes"]
   changeThemeScheme: ChangeThemeScheme
   __config: ThemeConfig
   __cssVars: Dict

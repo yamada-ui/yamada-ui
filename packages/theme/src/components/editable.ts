@@ -1,31 +1,31 @@
-import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray } from "@yamada-ui/utils"
 
 export const Editable: ComponentMultiStyle = {
   baseStyle: {
     container: {
-      w: 'full',
+      w: "full",
     },
     preview: {
-      rounded: 'md',
-      p: '1',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      rounded: "md",
+      p: "1",
+      transitionProperty: "common",
+      transitionDuration: "normal",
     },
     input: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => ({
-      rounded: 'md',
-      p: '1',
-      w: 'full',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      rounded: "md",
+      p: "1",
+      w: "full",
+      transitionProperty: "common",
+      transitionDuration: "normal",
       _placeholder: { opacity: 0.6 },
       _focus: {
-        zIndex: 'yamcha',
+        zIndex: "yamcha",
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(
@@ -46,7 +46,7 @@ export const Editable: ComponentMultiStyle = {
         }`,
       },
       _focusVisible: {
-        zIndex: 'yamcha',
+        zIndex: "yamcha",
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(
@@ -60,19 +60,19 @@ export const Editable: ComponentMultiStyle = {
     textarea: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => ({
-      boxSizing: 'content-box',
-      rounded: 'md',
-      p: '1',
-      w: 'full',
-      h: 'calc(1em * 1.5)',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      boxSizing: "content-box",
+      rounded: "md",
+      p: "1",
+      w: "full",
+      h: "calc(1em * 1.5)",
+      transitionProperty: "common",
+      transitionDuration: "normal",
       _placeholder: { opacity: 0.6 },
       _focus: {
-        zIndex: 'yamcha',
+        zIndex: "yamcha",
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(
@@ -93,7 +93,7 @@ export const Editable: ComponentMultiStyle = {
         }`,
       },
       _focusVisible: {
-        zIndex: 'yamcha',
+        zIndex: "yamcha",
         boxShadow: `0 0 0 1px ${
           isArray(fc)
             ? mode(

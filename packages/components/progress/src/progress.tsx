@@ -9,10 +9,10 @@ import {
   Interpolation,
   ColorModeToken,
   CSS,
-} from '@yamada-ui/core'
-import { useAnimation } from '@yamada-ui/use-animation'
-import { createContext, cx, omitObject, valueToPercent } from '@yamada-ui/utils'
-import { FC } from 'react'
+} from "@yamada-ui/core"
+import { useAnimation } from "@yamada-ui/use-animation"
+import { createContext, cx, omitObject, valueToPercent } from "@yamada-ui/utils"
+import { FC } from "react"
 
 const [ProgressProvider, useProgress] = createContext<
   Record<string, CSSUIObject>
@@ -67,15 +67,15 @@ type ProgressOptions = {
   /**
    * The CSS `color` property.
    */
-  filledTrackColor?: ColorModeToken<CSS.Property.Color, 'colors'>
+  filledTrackColor?: ColorModeToken<CSS.Property.Color, "colors">
 }
 
-export type ProgressProps = HTMLUIProps<'div'> &
-  ThemeProps<'Progress'> &
+export type ProgressProps = HTMLUIProps<"div"> &
+  ThemeProps<"Progress"> &
   ProgressOptions
 
-export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Progress', props)
+export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Progress", props)
   const {
     className,
     children,
@@ -95,9 +95,9 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
 
   const css: CSSUIObject = {
-    w: '100%',
-    overflow: 'hidden',
-    pos: 'relative',
+    w: "100%",
+    overflow: "hidden",
+    pos: "relative",
     ...styles.track,
   }
 
@@ -105,10 +105,10 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
     <ProgressProvider value={styles}>
       <ui.div
         ref={ref}
-        className={cx('ui-progress', className)}
+        className={cx("ui-progress", className)}
         __css={css}
         borderRadius={borderRadius}
-        {...omitObject(rest, ['filledTrackColor'])}
+        {...omitObject(rest, ["filledTrackColor"])}
       >
         <ProgressFilledTrack
           min={min}
@@ -126,7 +126,7 @@ export const Progress = forwardRef<ProgressProps, 'div'>((props, ref) => {
   )
 })
 
-type ProgressFilledTrackProps = HTMLUIProps<'div'> & ProgressProps
+type ProgressFilledTrackProps = HTMLUIProps<"div"> & ProgressProps
 
 const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
   value = 0,
@@ -135,7 +135,7 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
   hasStripe,
   isStripeAnimation,
   isAnimation,
-  speed = '1.4s',
+  speed = "1.4s",
   ...rest
 }) => {
   const percent = valueToPercent(value, min, max)
@@ -144,22 +144,22 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
 
   const stripeAnimation = useAnimation({
     keyframes: {
-      '0%': { bgPosition: '1rem 0' },
-      '100%': { bgPosition: '0 0' },
+      "0%": { bgPosition: "1rem 0" },
+      "100%": { bgPosition: "0 0" },
     },
-    duration: typeof speed === 'string' ? speed : `${speed}s`,
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: typeof speed === "string" ? speed : `${speed}s`,
+    iterationCount: "infinite",
+    timingFunction: "linear",
   })
 
   const interpolationAnimation = useAnimation({
     keyframes: {
-      '0%': { left: '-40%' },
-      '100%': { left: '100%' },
+      "0%": { left: "-40%" },
+      "100%": { left: "100%" },
     },
-    duration: typeof speed === 'string' ? speed : `${speed}s`,
-    iterationCount: 'infinite',
-    timingFunction: 'ease',
+    duration: typeof speed === "string" ? speed : `${speed}s`,
+    iterationCount: "infinite",
+    timingFunction: "ease",
   })
 
   isStripeAnimation = !isAnimation && hasStripe && isStripeAnimation
@@ -172,9 +172,9 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
       : {}),
     ...(isAnimation
       ? {
-          position: 'absolute',
-          willChange: 'left',
-          minWidth: '50%',
+          position: "absolute",
+          willChange: "left",
+          minWidth: "50%",
           animation: interpolationAnimation,
         }
       : {}),
@@ -182,7 +182,7 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
 
   const __css: CSSUIObject = {
     w: `${percent}%`,
-    h: '100%',
+    h: "100%",
     ...styles.filledTrack,
   }
 

@@ -1,5 +1,5 @@
-import { useEventListeners } from '@yamada-ui/use-event-listener'
-import { dataAttr, mergeRefs } from '@yamada-ui/utils'
+import { useEventListeners } from "@yamada-ui/use-event-listener"
+import { dataAttr, mergeRefs } from "@yamada-ui/utils"
 import {
   HTMLAttributes,
   KeyboardEvent,
@@ -7,7 +7,7 @@ import {
   Ref,
   useCallback,
   useState,
-} from 'react'
+} from "react"
 
 export type UseClickableProps = HTMLAttributes<HTMLElement> & {
   /**
@@ -41,12 +41,12 @@ export type UseClickableProps = HTMLAttributes<HTMLElement> & {
 }
 
 const isValidElement = (
-  ev: KeyboardEvent | KeyboardEvent['nativeEvent'],
+  ev: KeyboardEvent | KeyboardEvent["nativeEvent"],
 ): boolean => {
   const { tagName, isContentEditable } = ev.target as HTMLElement
 
   return (
-    tagName !== 'INPUT' && tagName !== 'TEXTAREA' && isContentEditable !== true
+    tagName !== "INPUT" && tagName !== "TEXTAREA" && isContentEditable !== true
   )
 }
 
@@ -77,7 +77,7 @@ export const useClickable = ({
   const refCb = (node: any) => {
     if (!node) return
 
-    if (node.tagName !== 'BUTTON') setIsButton(false)
+    if (node.tagName !== "BUTTON") setIsButton(false)
   }
 
   const handleClick = useCallback(
@@ -103,7 +103,7 @@ export const useClickable = ({
 
         setIsPressed(false)
 
-        listeners.remove(document, 'keyup', onDocumentKeyUp, false)
+        listeners.remove(document, "keyup", onDocumentKeyUp, false)
       }
     },
     [isPressed, listeners],
@@ -117,17 +117,17 @@ export const useClickable = ({
 
       if (!isValidElement(ev.nativeEvent) || isButton) return
 
-      if (clickOnSpace && ev.key === ' ') {
+      if (clickOnSpace && ev.key === " ") {
         ev.preventDefault()
         setIsPressed(true)
       }
 
-      if (clickOnEnter && ev.key === 'Enter') {
+      if (clickOnEnter && ev.key === "Enter") {
         ev.preventDefault()
         ev.currentTarget.click()
       }
 
-      listeners.add(document, 'keyup', onDocumentKeyUp, false)
+      listeners.add(document, "keyup", onDocumentKeyUp, false)
     },
     [
       isDisabled,
@@ -148,7 +148,7 @@ export const useClickable = ({
 
       if (!isValidElement(ev.nativeEvent) || isButton) return
 
-      if (clickOnSpace && ev.key === ' ') {
+      if (clickOnSpace && ev.key === " ") {
         ev.preventDefault()
         setIsPressed(false)
 
@@ -164,7 +164,7 @@ export const useClickable = ({
 
       setIsPressed(false)
 
-      listeners.remove(document, 'mouseup', onDocumentMouseUp, false)
+      listeners.remove(document, "mouseup", onDocumentMouseUp, false)
     },
     [listeners],
   )
@@ -184,7 +184,7 @@ export const useClickable = ({
 
       ev.currentTarget.focus({ preventScroll: true })
 
-      listeners.add(document, 'mouseup', onDocumentMouseUp, false)
+      listeners.add(document, "mouseup", onDocumentMouseUp, false)
 
       onMouseDown?.(ev)
     },
@@ -232,8 +232,8 @@ export const useClickable = ({
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
-      type: 'button',
-      'aria-disabled': trulyDisabled ? undefined : isDisabled,
+      type: "button",
+      "aria-disabled": trulyDisabled ? undefined : isDisabled,
       disabled: trulyDisabled,
       onClick: handleClick,
       onMouseDown,
@@ -247,9 +247,9 @@ export const useClickable = ({
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
-      role: 'button',
-      'data-active': dataAttr(isPressed),
-      'aria-disabled': isDisabled ? ('true' as const) : undefined,
+      role: "button",
+      "data-active": dataAttr(isPressed),
+      "aria-disabled": isDisabled ? ("true" as const) : undefined,
       tabIndex: trulyDisabled ? undefined : tabIndex,
       onClick: handleClick,
       onMouseDown: handleMouseDown,

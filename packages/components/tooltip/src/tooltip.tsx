@@ -7,18 +7,18 @@ import {
   ThemeProps,
   useComponentStyle,
   CSSUIProps,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   motion,
   HTMLMotionProps,
   AnimatePresence,
   MotionTransitionProperties,
-} from '@yamada-ui/motion'
-import { Portal, PortalProps } from '@yamada-ui/portal'
-import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
-import { useDisclosure } from '@yamada-ui/use-disclosure'
-import { useEventListener } from '@yamada-ui/use-event-listener'
-import { UsePopperProps, usePopper } from '@yamada-ui/use-popper'
+} from "@yamada-ui/motion"
+import { Portal, PortalProps } from "@yamada-ui/portal"
+import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
+import { useEventListener } from "@yamada-ui/use-event-listener"
+import { UsePopperProps, usePopper } from "@yamada-ui/use-popper"
 import {
   cx,
   handlerAll,
@@ -27,7 +27,7 @@ import {
   getOwnerWindow,
   getOwnerDocument,
   omitObject,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   Children,
   ReactNode,
@@ -35,7 +35,7 @@ import {
   useCallback,
   useEffect,
   useRef,
-} from 'react'
+} from "react"
 
 type TooltipOptions = {
   /**
@@ -111,60 +111,60 @@ type TooltipOptions = {
    *
    * @default 'scale'
    */
-  animation?: 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+  animation?: "scale" | "top" | "right" | "left" | "bottom" | "none"
   /**
    * The animation duration.
    */
-  duration?: MotionTransitionProperties['duration']
+  duration?: MotionTransitionProperties["duration"]
   /**
    * Props for portal component.
    */
-  portalProps?: Pick<PortalProps, 'appendToParentPortal' | 'containerRef'>
+  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
   /**
    * If `true`, the element will be transported to the end of document.body.
    */
   withPortal?: boolean
 }
 
-export type TooltipProps = HTMLUIProps<'div'> &
-  ThemeProps<'Tooltip'> &
-  Omit<HTMLMotionProps<'div'>, 'color' | 'style' | 'variants' | 'transition'> &
-  Pick<UsePopperProps, 'modifiers' | 'gutter' | 'offset' | 'placement'> &
+export type TooltipProps = HTMLUIProps<"div"> &
+  ThemeProps<"Tooltip"> &
+  Omit<HTMLMotionProps<"div">, "color" | "style" | "variants" | "transition"> &
+  Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &
   TooltipOptions
 
 const getTooltipProps = (
-  animation: TooltipProps['animation'] = 'scale',
-  duration?: TooltipProps['duration'],
+  animation: TooltipProps["animation"] = "scale",
+  duration?: TooltipProps["duration"],
 ) => {
   const custom = {
     reverse: true,
     duration,
-    enter: { visibility: 'visible' },
-    transitionEnd: { exit: { visibility: 'hidden' } },
+    enter: { visibility: "visible" },
+    transitionEnd: { exit: { visibility: "hidden" } },
   }
 
   switch (animation) {
-    case 'scale':
+    case "scale":
       return {
         ...scaleFadeProps,
         custom: { ...custom, scale: 0.95 },
       }
-    case 'top':
+    case "top":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetY: -16 },
       }
-    case 'right':
+    case "right":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetX: 16 },
       }
-    case 'left':
+    case "left":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetX: -16 },
       }
-    case 'bottom':
+    case "bottom":
       return {
         ...slideFadeProps,
         custom: { ...custom, offsetY: 16 },
@@ -172,12 +172,12 @@ const getTooltipProps = (
   }
 }
 
-export const Tooltip = forwardRef<TooltipProps, 'div'>(
+export const Tooltip = forwardRef<TooltipProps, "div">(
   (
     { closeOnPointerDown, zIndex, portalProps, withPortal = true, ...props },
     ref,
   ) => {
-    const [styles, mergedProps] = useComponentStyle('Tooltip', props)
+    const [styles, mergedProps] = useComponentStyle("Tooltip", props)
     const {
       className,
       children,
@@ -259,23 +259,23 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) =>
-        isOpen && ev.key === 'Escape' ? closeWithDelay() : undefined,
+        isOpen && ev.key === "Escape" ? closeWithDelay() : undefined,
       [isOpen, closeWithDelay],
     )
 
     useEventListener(
       () => getOwnerDocument(triggerRef.current),
-      'keydown',
+      "keydown",
       (ev) => (closeOnEsc ? onKeyDown(ev) : undefined),
     )
 
     useEventListener(
       () => getOwnerDocument(triggerRef.current),
-      'scroll',
+      "scroll",
       () => (isOpen && closeOnScroll ? closeNow() : undefined),
     )
 
-    useEventListener(() => triggerRef.current, 'pointerleave', closeWithDelay)
+    useEventListener(() => triggerRef.current, "pointerleave", closeWithDelay)
 
     useEffect(
       () => () => {
@@ -290,7 +290,7 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
         ...props,
         ref: mergeRefs(triggerRef, ref, referenceRef),
         onPointerEnter: handlerAll(props.onPointerEnter, (e) =>
-          e.pointerType !== 'touch' ? openWithDelay() : undefined,
+          e.pointerType !== "touch" ? openWithDelay() : undefined,
         ),
         onClick: handlerAll(props.onClick, onClick),
         onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
@@ -307,8 +307,8 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
     const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
 
     const css: CSSUIObject = {
-      position: 'relative',
-      ...omitObject(styles, ['zIndex']),
+      position: "relative",
+      ...omitObject(styles, ["zIndex"]),
     }
 
     if (!label) return <>{children}</>
@@ -322,26 +322,26 @@ export const Tooltip = forwardRef<TooltipProps, 'div'>(
             <Portal isDisabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
-                zIndex={(zIndex ?? styles.zIndex) as CSSUIProps['zIndex']}
-                pointerEvents='none'
+                zIndex={(zIndex ?? styles.zIndex) as CSSUIProps["zIndex"]}
+                pointerEvents="none"
               >
                 <ui.div
                   as={motion.div}
                   ref={ref}
-                  className={cx('ui-tooltip', className)}
+                  className={cx("ui-tooltip", className)}
                   style={{ transformOrigin }}
-                  {...(animation !== 'none'
+                  {...(animation !== "none"
                     ? getTooltipProps(animation, duration)
                     : {})}
-                  initial='exit'
-                  animate={isOpen ? 'enter' : 'exit'}
-                  exit='exit'
+                  initial="exit"
+                  animate={isOpen ? "enter" : "exit"}
+                  exit="exit"
                   __css={css}
                   {...omitObject(rest, [
-                    'isOpen',
-                    'defaultIsOpen',
-                    'onOpen',
-                    'onClose',
+                    "isOpen",
+                    "defaultIsOpen",
+                    "onOpen",
+                    "onClose",
                   ])}
                 >
                   {label}

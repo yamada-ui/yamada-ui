@@ -5,15 +5,15 @@ import {
   omitThemeProps,
   CSSUIObject,
   ThemeProps,
-} from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { ReactNode, useMemo } from 'react'
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { ReactNode, useMemo } from "react"
 import {
   StepperProvider,
   UseStepperProps,
   useStepper,
   StepperDescendantsContextProvider,
-} from './use-stepper'
+} from "./use-stepper"
 import {
   Step,
   StepProps,
@@ -25,7 +25,7 @@ import {
   StepTitleProps,
   StepDescriptionProps,
   StepSeparatorProps,
-} from './'
+} from "./"
 
 export type Steps = ({
   /**
@@ -67,12 +67,12 @@ type StepperOptions = {
   steps?: Steps
 }
 
-export type StepperProps = ThemeProps<'Stepper'> &
+export type StepperProps = ThemeProps<"Stepper"> &
   UseStepperProps &
   StepperOptions
 
-export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Stepper', props)
+export const Stepper = forwardRef<StepperProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Stepper", props)
   const { className, steps, children, ...computedProps } =
     omitThemeProps(mergedProps)
 
@@ -123,7 +123,7 @@ export const Stepper = forwardRef<StepperProps, 'div'>((props, ref) => {
     <StepperDescendantsContextProvider value={descendants}>
       <StepperProvider value={{ ...rest, styles }}>
         <ui.div
-          className={cx('ui-stepper', className)}
+          className={cx("ui-stepper", className)}
           __css={css}
           {...getContainerProps({}, ref)}
         >

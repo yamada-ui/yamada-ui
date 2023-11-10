@@ -1,12 +1,12 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { PopoverTrigger } from '@yamada-ui/popover'
-import { ariaAttr, cx, dataAttr, funcAll, handlerAll } from '@yamada-ui/utils'
-import { KeyboardEvent, useCallback } from 'react'
-import { useMenu } from './menu'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { PopoverTrigger } from "@yamada-ui/popover"
+import { ariaAttr, cx, dataAttr, funcAll, handlerAll } from "@yamada-ui/utils"
+import { KeyboardEvent, useCallback } from "react"
+import { useMenu } from "./menu"
 
-export type MenuButtonProps = HTMLUIProps<'button'>
+export type MenuButtonProps = HTMLUIProps<"button">
 
-export const MenuButton = forwardRef<MenuButtonProps, 'button'>(
+export const MenuButton = forwardRef<MenuButtonProps, "button">(
   ({ className, children, as: As, ...rest }, ref) => {
     const { isOpen, onOpen, onFocusFirstItem, onFocusLastItem } = useMenu()
 
@@ -35,13 +35,13 @@ export const MenuButton = forwardRef<MenuButtonProps, 'button'>(
       <PopoverTrigger>
         <Component
           ref={ref}
-          className={cx('ui-menu', className)}
+          className={cx("ui-menu", className)}
           {...rest}
           data-active={dataAttr(isOpen)}
           aria-expanded={ariaAttr(isOpen)}
           onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
         >
-          <ui.span __css={{ pointerEvents: 'none', flex: '1 1 auto', minW: 0 }}>
+          <ui.span __css={{ pointerEvents: "none", flex: "1 1 auto", minW: 0 }}>
             {children}
           </ui.span>
         </Component>
@@ -50,13 +50,13 @@ export const MenuButton = forwardRef<MenuButtonProps, 'button'>(
   },
 )
 
-const Button = forwardRef<MenuButtonProps, 'button'>((rest, ref) => {
+const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
   const { styles } = useMenu()
 
   const css: CSSUIObject = {
-    display: 'inline-flex',
-    appearance: 'none',
-    alignItems: 'center',
+    display: "inline-flex",
+    appearance: "none",
+    alignItems: "center",
     outline: 0,
     ...styles.button,
   }

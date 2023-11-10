@@ -1,7 +1,7 @@
-import { forwardRef } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { ReactElement } from 'react'
-import { Button, ButtonProps } from './button'
+import { forwardRef } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { ReactElement } from "react"
+import { Button, ButtonProps } from "./button"
 
 type IconButtonOptions = {
   /**
@@ -18,18 +18,18 @@ type IconButtonOptions = {
 
 export type IconButtonProps = Omit<
   ButtonProps,
-  'leftIcon' | 'rightIcon' | 'loadingIcon' | 'loadingText' | 'loadingPlacement'
+  "leftIcon" | "rightIcon" | "loadingIcon" | "loadingText" | "loadingPlacement"
 > &
   IconButtonOptions
 
-export const IconButton = forwardRef<IconButtonProps, 'button'>(
+export const IconButton = forwardRef<IconButtonProps, "button">(
   ({ icon, isRounded, children, className, ...rest }, ref) => {
     return (
       <Button
-        className={cx('ui-icon-button', className)}
+        className={cx("ui-icon-button", className)}
         ref={ref}
         p={0}
-        {...(isRounded ? { rounded: 'full' } : {})}
+        {...(isRounded ? { rounded: "full" } : {})}
         {...rest}
       >
         {icon || children}

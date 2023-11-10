@@ -24,8 +24,8 @@ export {
   useMotionValue,
   useMotionValueEvent,
   useCycle,
-} from 'framer-motion'
-export { Motion } from './motion'
-export type { MotionProps } from './motion'
-export * from './motion.types'
-export * from './utils'
+} from "framer-motion"
+export { Motion } from "./motion"
+export type { MotionProps } from "./motion"
+export * from "./motion.types"
+export * from "./utils"

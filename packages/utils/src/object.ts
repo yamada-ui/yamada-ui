@@ -1,4 +1,4 @@
-import { isObject, isArray, Dict, isFunction } from '.'
+import { isObject, isArray, Dict, isFunction } from "."
 
 export const omitObject = <T extends Dict, K extends keyof T>(
   obj: T,
@@ -154,7 +154,7 @@ export const getObject = (
   fallback?: any,
   i?: number,
 ) => {
-  const k = typeof path === 'string' ? path.split('.') : [path]
+  const k = typeof path === "string" ? path.split(".") : [path]
 
   for (i = 0; i < k.length; i += 1) {
     if (!obj) break
@@ -173,7 +173,7 @@ export const memoizeObject = (func: typeof getObject) => {
     fallback?: any,
     i?: number,
   ): T => {
-    if (typeof obj === 'undefined') {
+    if (typeof obj === "undefined") {
       return func(obj, path, fallback)
     }
 
@@ -197,7 +197,7 @@ export const getMemoizedObject = memoizeObject(getObject)
 
 export const assignAfter = (target: Record<string, any>, ...sources: any[]) => {
   if (target == null)
-    throw new TypeError('Cannot convert undefined or null to object')
+    throw new TypeError("Cannot convert undefined or null to object")
 
   const result: Record<string, unknown> = { ...target }
 

@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react'
+import { act } from "@testing-library/react"
 
 export const queue = (): Promise<void> => act(() => Promise.resolve())
 

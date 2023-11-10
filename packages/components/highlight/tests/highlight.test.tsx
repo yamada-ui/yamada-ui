@@ -1,11 +1,11 @@
-import { renderHook } from '@yamada-ui/test'
-import { useHighlight } from '../src'
+import { renderHook } from "@yamada-ui/test"
+import { useHighlight } from "../src"
 
-describe('<Highlight/>', () => {
-  test.each([[], ''])(
-    'useHighlight returns no matches if queries is empty but returns original value',
+describe("<Highlight/>", () => {
+  test.each([[], ""])(
+    "useHighlight returns no matches if queries is empty but returns original value",
     (query) => {
-      const text = 'this is an ordinary text which should not have any matches'
+      const text = "this is an ordinary text which should not have any matches"
 
       const { result } = renderHook(() =>
         useHighlight({
@@ -20,13 +20,13 @@ describe('<Highlight/>', () => {
     },
   )
 
-  test('useHighlight matches correctly', () => {
-    const query = ['', 'text']
+  test("useHighlight matches correctly", () => {
+    const query = ["", "text"]
 
     const { result } = renderHook(() =>
       useHighlight({
         query: query,
-        text: 'this is an ordinary text which should have one match ',
+        text: "this is an ordinary text which should have one match ",
       }),
     )
 

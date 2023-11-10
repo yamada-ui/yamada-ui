@@ -4,15 +4,15 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { createContext, cx, dataAttr } from '@yamada-ui/utils'
-import { useMemo } from 'react'
+} from "@yamada-ui/core"
+import { createContext, cx, dataAttr } from "@yamada-ui/utils"
+import { useMemo } from "react"
 
 type ButtonGroupOptions = {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIObject['flexDirection']
+  direction?: CSSUIObject["flexDirection"]
   /**
    * If `true`, the borderRadius of button that are direct children will be altered to look flushed together.
    *
@@ -27,24 +27,24 @@ type ButtonGroupOptions = {
   isDisabled?: boolean
 }
 
-export type ButtonGroupProps = HTMLUIProps<'div'> &
-  ThemeProps<'Button'> &
+export type ButtonGroupProps = HTMLUIProps<"div"> &
+  ThemeProps<"Button"> &
   ButtonGroupOptions
 
-type ButtonGroupContext = ThemeProps<'Button'> & {
+type ButtonGroupContext = ThemeProps<"Button"> & {
   isDisabled?: boolean
 }
 
 const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
   {
     strict: false,
-    name: 'ButtonGroupContext',
+    name: "ButtonGroupContext",
   },
 )
 
 export { useButtonGroup }
 
-export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
+export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
   (
     {
       className,
@@ -61,10 +61,10 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
     ref,
   ) => {
     const isColumn =
-      flexDirection === 'column' || flexDirection === 'column-reverse'
+      flexDirection === "column" || flexDirection === "column-reverse"
 
     const css: CSSUIObject = {
-      display: 'inline-flex',
+      display: "inline-flex",
       flexDirection,
     }
 
@@ -75,14 +75,14 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
 
     if (isAttached) {
       Object.assign(css, {
-        '> *:first-of-type:not(:last-of-type)': isColumn
-          ? { borderBottomRadius: 0, marginBlockEnd: '-1px' }
-          : { borderRightRadius: 0, marginInlineEnd: '-1px' },
-        '> *:not(:first-of-type):not(:last-of-type)': isColumn
-          ? { borderRadius: 0, marginBlockStart: '-1px' }
-          : { borderRadius: 0, marginInlineEnd: '-1px' },
-        '> *:not(:first-of-type):last-of-type': isColumn
-          ? { borderTopRadius: 0, marginBlockStart: '-1px' }
+        "> *:first-of-type:not(:last-of-type)": isColumn
+          ? { borderBottomRadius: 0, marginBlockEnd: "-1px" }
+          : { borderRightRadius: 0, marginInlineEnd: "-1px" },
+        "> *:not(:first-of-type):not(:last-of-type)": isColumn
+          ? { borderRadius: 0, marginBlockStart: "-1px" }
+          : { borderRadius: 0, marginInlineEnd: "-1px" },
+        "> *:not(:first-of-type):last-of-type": isColumn
+          ? { borderTopRadius: 0, marginBlockStart: "-1px" }
           : { borderLeftRadius: 0 },
       })
     } else {
@@ -97,8 +97,8 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, 'div'>(
       <ButtonGroupProvider value={context}>
         <ui.div
           ref={ref}
-          role='group'
-          className={cx('ui-button-group', className)}
+          role="group"
+          className={cx("ui-button-group", className)}
           data-attached={dataAttr(isAttached)}
           __css={css}
           {...rest}

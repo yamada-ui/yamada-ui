@@ -6,24 +6,24 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { ImageProps, useImage } from '@yamada-ui/image'
-import { createContext, cx, dataAttr, handlerAll } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { ImageProps, useImage } from "@yamada-ui/image"
+import { createContext, cx, dataAttr, handlerAll } from "@yamada-ui/utils"
 import {
   cloneElement,
   FC,
   HTMLAttributeReferrerPolicy,
   ReactElement,
   useState,
-} from 'react'
-import { AvatarIcon } from './avatar-icon'
-import { AvatarName } from './avatar-name'
+} from "react"
+import { AvatarIcon } from "./avatar-icon"
+import { AvatarName } from "./avatar-name"
 
 type AvatarContext = Record<string, CSSUIObject>
 
 export const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
   strict: false,
-  name: 'AvatarContext',
+  name: "AvatarContext",
 })
 
 type AvatarOptions = {
@@ -37,21 +37,21 @@ type AvatarOptions = {
   /**
    * The image url of the avatar.
    */
-  src?: ImageProps['src']
+  src?: ImageProps["src"]
   /**
    * List of sources to use for different screen resolutions.
    */
-  srcSet?: ImageProps['srcSet']
+  srcSet?: ImageProps["srcSet"]
   /**
    * Defines loading strategy.
    */
-  loading?: ImageProps['loading']
+  loading?: ImageProps["loading"]
   /**
    * If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times.
    *
    * @default false
    */
-  ignoreFallback?: ImageProps['ignoreFallback']
+  ignoreFallback?: ImageProps["ignoreFallback"]
   /**
    * The avatar icon to use.
    */
@@ -70,12 +70,12 @@ type AvatarOptions = {
   referrerPolicy?: HTMLAttributeReferrerPolicy
 }
 
-export type AvatarProps = HTMLUIProps<'span'> &
-  ThemeProps<'Avatar'> &
+export type AvatarProps = HTMLUIProps<"span"> &
+  ThemeProps<"Avatar"> &
   AvatarOptions
 
-export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Avatar', props)
+export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Avatar", props)
   const {
     className,
     src,
@@ -84,8 +84,8 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
     loading,
     icon,
     ignoreFallback,
-    borderRadius = 'full',
-    rounded = 'full',
+    borderRadius = "full",
+    rounded = "full",
     onError,
     onLoad,
     format,
@@ -96,14 +96,14 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const css: CSSUIObject = {
-    position: 'relative',
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "relative",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
     flexShrink: 0,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    fontWeight: 'medium',
+    textAlign: "center",
+    textTransform: "uppercase",
+    fontWeight: "medium",
     ...styles.container,
   }
 
@@ -111,7 +111,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
     <AvatarProvider value={styles}>
       <ui.span
         ref={ref}
-        className={cx('ui-avatar', className)}
+        className={cx("ui-avatar", className)}
         data-loading={dataAttr(isLoading)}
         borderRadius={borderRadius}
         rounded={rounded}
@@ -138,7 +138,7 @@ export const Avatar = forwardRef<AvatarProps, 'span'>((props, ref) => {
 })
 
 type AvatarImageProps = ImageProps &
-  Pick<AvatarProps, 'name' | 'format' | 'icon' | 'ignoreFallback'>
+  Pick<AvatarProps, "name" | "format" | "icon" | "ignoreFallback">
 
 const AvatarImage: FC<AvatarImageProps> = ({
   src,
@@ -157,7 +157,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
 }) => {
   const status = useImage({ src, onError, crossOrigin, ignoreFallback })
 
-  const isLoaded = status === 'loaded'
+  const isLoaded = status === "loaded"
 
   const isFallback = !src || !isLoaded
 
@@ -165,18 +165,18 @@ const AvatarImage: FC<AvatarImageProps> = ({
     return name ? (
       <AvatarName name={name} format={format} />
     ) : (
-      cloneElement(icon, { role: 'img' })
+      cloneElement(icon, { role: "img" })
     )
 
   const css: CSSUIObject = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   }
 
   return (
     <ui.img
-      className='ui-avatar__image'
+      className="ui-avatar__image"
       src={src}
       srcSet={srcSet}
       alt={name}

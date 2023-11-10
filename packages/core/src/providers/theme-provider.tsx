@@ -6,14 +6,14 @@ import {
   Interpolation,
   Theme,
   CSSObject,
-} from '@emotion/react'
+} from "@emotion/react"
 import {
   Dict,
   runIfFunc,
   getMemoizedObject as get,
   isUndefined,
   merge,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   FC,
   useMemo,
@@ -21,9 +21,9 @@ import {
   useState,
   useCallback,
   useEffect,
-} from 'react'
-import { css, UIStyle } from '../css'
-import { transformTheme } from '../theme'
+} from "react"
+import { css, UIStyle } from "../css"
+import { transformTheme } from "../theme"
 import {
   ChangeThemeScheme,
   PropsTheme,
@@ -31,9 +31,9 @@ import {
   ThemeConfig,
   Theme as UITheme,
   UsageTheme,
-} from '../theme.types'
-import { useColorMode } from './color-mode-provider'
-import { themeSchemeManager, ThemeSchemeManager } from './theme-manager'
+} from "../theme.types"
+import { useColorMode } from "./color-mode-provider"
+import { themeSchemeManager, ThemeSchemeManager } from "./theme-manager"
 
 const { localStorage } = themeSchemeManager
 
@@ -57,7 +57,7 @@ type ThemeProviderOptions = {
   themeSchemeManager?: ThemeSchemeManager
 }
 
-export type ThemeProviderProps = Omit<EmotionThemeProviderProps, 'theme'> &
+export type ThemeProviderProps = Omit<EmotionThemeProviderProps, "theme"> &
   ThemeProviderOptions
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
@@ -66,7 +66,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   themeSchemeManager = localStorage,
   children,
 }) => {
-  const [themeScheme, setThemeScheme] = useState<UITheme['themeSchemes']>(
+  const [themeScheme, setThemeScheme] = useState<UITheme["themeSchemes"]>(
     themeSchemeManager.get(config?.initialThemeScheme),
   )
 
@@ -111,7 +111,7 @@ export const CSSVars: FC = () => {
     <Global
       styles={
         (({ __cssVars }: PropsTheme) => {
-          return { ':host, :root, [data-mode]': __cssVars } as CSSObject
+          return { ":host, :root, [data-mode]": __cssVars } as CSSObject
         }) as Interpolation<Theme>
       }
     />
@@ -126,7 +126,7 @@ export const ResetStyle: FC = () => {
       styles={
         ((theme: PropsTheme) => {
           const { themeScheme } = theme
-          let style = get<UIStyle>(theme, 'styles.resetStyle', {})
+          let style = get<UIStyle>(theme, "styles.resetStyle", {})
 
           const computedStyle = runIfFunc(style, {
             theme,
@@ -151,7 +151,7 @@ export const GlobalStyle: FC = () => {
       styles={
         ((theme: PropsTheme) => {
           const { themeScheme } = theme
-          let style = get<UIStyle>(theme, 'styles.globalStyle', {})
+          let style = get<UIStyle>(theme, "styles.globalStyle", {})
 
           const computedStyle = runIfFunc(style, {
             theme,
@@ -175,11 +175,11 @@ export const useTheme = <T extends object = Dict>() => {
 
   if (!internalTheme)
     throw Error(
-      'useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`',
+      "useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
     )
 
   const theme = useMemo(() => {
-    if (isUndefined(themeScheme) || themeScheme === 'base') return internalTheme
+    if (isUndefined(themeScheme) || themeScheme === "base") return internalTheme
 
     const nestedTheme = internalTheme.themeSchemes?.[themeScheme]
 
@@ -192,7 +192,7 @@ export const useTheme = <T extends object = Dict>() => {
     () =>
       ({ themeScheme, changeThemeScheme, theme, internalTheme }) as Pick<
         PropsTheme,
-        'themeScheme' | 'changeThemeScheme'
+        "themeScheme" | "changeThemeScheme"
       > & {
         theme: StyledTheme<T>
         internalTheme: StyledTheme<T>
@@ -204,7 +204,7 @@ export const useTheme = <T extends object = Dict>() => {
 }
 
 const preventTransition = () => {
-  const css = document.createElement('style')
+  const css = document.createElement("style")
 
   const node = document.createTextNode(
     `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,

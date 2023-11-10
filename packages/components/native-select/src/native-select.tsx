@@ -7,13 +7,13 @@ import {
   HTMLUIProps,
   ThemeProps,
   layoutStylesProperties,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   FormControlOptions,
   useFormControlProps,
   formControlProperties,
-} from '@yamada-ui/form-control'
-import { ChevronIcon } from '@yamada-ui/icon'
+} from "@yamada-ui/form-control"
+import { ChevronIcon } from "@yamada-ui/icon"
 import {
   createContext,
   cx,
@@ -22,30 +22,30 @@ import {
   isValidElement,
   isArray,
   pickObject,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   cloneElement,
   DetailedHTMLProps,
   FC,
   OptionHTMLAttributes,
   ReactElement,
-} from 'react'
+} from "react"
 
 type Value = DetailedHTMLProps<
   OptionHTMLAttributes<HTMLOptionElement>,
   HTMLOptionElement
->['value']
+>["value"]
 
 export type UINativeOption = Omit<
   DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
-  'label' | 'children' | 'value'
+  "label" | "children" | "value"
 > & { label?: string; value?: Value | UINativeOption[] }
 
 type NativeSelectContext = Record<string, CSSUIObject>
 
 const [NativeSelectProvider, useNativeSelect] =
   createContext<NativeSelectContext>({
-    name: 'NativeSelectContext',
+    name: "NativeSelectContext",
     errorMessage: `useNativeSelect returned is 'undefined'. Seems you forgot to wrap the components in "<NativeSelect />"`,
   })
 
@@ -77,21 +77,21 @@ type NativeSelectOptions = {
   /**
    * Props for container element.
    */
-  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
    * Props for icon element.
    */
-  iconProps?: HTMLUIProps<'div'>
+  iconProps?: HTMLUIProps<"div">
 }
 
-export type NativeSelectProps = Omit<HTMLUIProps<'select'>, 'size'> &
-  ThemeProps<'Select'> &
+export type NativeSelectProps = Omit<HTMLUIProps<"select">, "size"> &
+  ThemeProps<"Select"> &
   NativeSelectOptions &
   FormControlOptions
 
-export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
+export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('NativeSelect', props)
+    const [styles, mergedProps] = useMultiComponentStyle("NativeSelect", props)
     let {
       className,
       children,
@@ -142,11 +142,11 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
     return (
       <NativeSelectProvider value={styles}>
         <ui.div
-          className='ui-native-select'
+          className="ui-native-select"
           __css={{
-            position: 'relative',
-            w: '100%',
-            h: 'fit-content',
+            position: "relative",
+            w: "100%",
+            h: "fit-content",
             color,
             ...styles.container,
           }}
@@ -156,9 +156,9 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
         >
           <ui.select
             ref={ref}
-            className={cx('ui-native-select__field', className)}
+            className={cx("ui-native-select__field", className)}
             __css={{
-              paddingEnd: '2rem',
+              paddingEnd: "2rem",
               h: h ?? height,
               minH: minH ?? minHeight,
               ...styles.field,
@@ -166,7 +166,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
             {...selectProps}
           >
             {placeholder ? (
-              <NativeOption value='' hidden={!placeholderInOptions}>
+              <NativeOption value="" hidden={!placeholderInOptions}>
                 {placeholder}
               </NativeOption>
             ) : null}
@@ -180,7 +180,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, 'select'>(
   },
 )
 
-type NativeSelectIconProps = HTMLUIProps<'div'>
+type NativeSelectIconProps = HTMLUIProps<"div">
 
 const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   className,
@@ -190,13 +190,13 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   const styles = useNativeSelect()
 
   const css: CSSUIObject = {
-    position: 'absolute',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    pointerEvents: 'none',
-    top: '50%',
-    transform: 'translateY(-50%)',
+    position: "absolute",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    pointerEvents: "none",
+    top: "50%",
+    transform: "translateY(-50%)",
     ...styles.icon,
   }
 
@@ -205,18 +205,18 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   const cloneChildren = validChildren.map((child) =>
     cloneElement(child, {
       focusable: false,
-      'aria-hidden': true,
+      "aria-hidden": true,
       style: {
-        width: '1em',
-        height: '1em',
-        color: 'currentColor',
+        width: "1em",
+        height: "1em",
+        color: "currentColor",
       },
     }),
   )
 
   return (
     <ui.div
-      className={cx('ui-native-select__icon', className)}
+      className={cx("ui-native-select__icon", className)}
       __css={css}
       {...rest}
     >
@@ -225,16 +225,16 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   )
 }
 
-export type NativeOptionGroupProps = HTMLUIProps<'optgroup'>
+export type NativeOptionGroupProps = HTMLUIProps<"optgroup">
 
-export const NativeOptionGroup = forwardRef<NativeOptionGroupProps, 'optgroup'>(
+export const NativeOptionGroup = forwardRef<NativeOptionGroupProps, "optgroup">(
   (props, ref) => <ui.optgroup ref={ref} {...props} />,
 )
 
-export type NativeOptionProps = Omit<HTMLUIProps<'option'>, 'children'> & {
+export type NativeOptionProps = Omit<HTMLUIProps<"option">, "children"> & {
   children?: string
 }
 
-export const NativeOption = forwardRef<NativeOptionProps, 'option'>(
+export const NativeOption = forwardRef<NativeOptionProps, "option">(
   (props, ref) => <ui.option ref={ref} {...props} />,
 )

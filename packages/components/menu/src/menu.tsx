@@ -3,15 +3,15 @@ import {
   omitThemeProps,
   CSSUIObject,
   ThemeProps,
-} from '@yamada-ui/core'
-import { Popover, PopoverProps } from '@yamada-ui/popover'
-import { createDescendant } from '@yamada-ui/use-descendant'
-import { useDisclosure } from '@yamada-ui/use-disclosure'
+} from "@yamada-ui/core"
+import { Popover, PopoverProps } from "@yamada-ui/popover"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import {
   createContext,
   useUnmountEffect,
   useUpdateEffect,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   Dispatch,
   FC,
@@ -20,7 +20,7 @@ import {
   useCallback,
   useRef,
   useState,
-} from 'react'
+} from "react"
 
 const {
   DescendantsContextProvider,
@@ -44,7 +44,7 @@ type MenuContext = MenuOptions & {
 }
 
 const [MenuProvider, useMenu] = createContext<MenuContext>({
-  name: 'MenuContext',
+  name: "MenuContext",
   errorMessage: `useMenu returned is 'undefined'. Seems you forgot to wrap the components in "<Menu />"`,
 })
 
@@ -59,16 +59,16 @@ type MenuOptions = {
   closeOnSelect?: boolean
 }
 
-export type MenuProps = ThemeProps<'Menu'> &
-  Omit<PopoverProps, 'closeOnButton'> &
+export type MenuProps = ThemeProps<"Menu"> &
+  Omit<PopoverProps, "closeOnButton"> &
   MenuOptions
 
 export const Menu: FC<MenuProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Menu', props)
+  const [styles, mergedProps] = useMultiComponentStyle("Menu", props)
   const {
     initialFocusRef,
     closeOnSelect = true,
-    placement = 'bottom-start',
+    placement = "bottom-start",
     duration = 0.2,
     ...rest
   } = omitThemeProps(mergedProps)

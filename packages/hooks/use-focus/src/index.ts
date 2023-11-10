@@ -1,4 +1,4 @@
-import { useEventListener } from '@yamada-ui/use-event-listener'
+import { useEventListener } from "@yamada-ui/use-event-listener"
 import {
   FocusableElement,
   getActiveElement,
@@ -8,8 +8,8 @@ import {
   useSafeLayoutEffect,
   useUpdateEffect,
   isSafari,
-} from '@yamada-ui/utils'
-import { RefObject, useCallback, useRef } from 'react'
+} from "@yamada-ui/utils"
+import { RefObject, useCallback, useRef } from "react"
 
 export type UseFocusOnHideProps = {
   focusRef: RefObject<FocusableElement>
@@ -104,7 +104,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
     onFocus()
   }, [onFocus])
 
-  useEventListener(element, 'transitionend', onFocus)
+  useEventListener(element, "transitionend", onFocus)
 }
 
 export type UseFocusOnMouseDownProps = {
@@ -120,7 +120,7 @@ export const useFocusOnPointerDown = ({
 }: UseFocusOnMouseDownProps) => {
   const doc = () => ref.current?.ownerDocument ?? document
 
-  useEventListener(doc, 'pointerdown', (ev) => {
+  useEventListener(doc, "pointerdown", (ev) => {
     if (!isSafari() || !enabled) return
     const target = ev.target as HTMLElement
 

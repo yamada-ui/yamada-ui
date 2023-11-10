@@ -8,18 +8,18 @@ import {
   Center,
   Image,
   extendToken,
-} from '@yamada-ui/react'
-import { FC } from 'react'
+} from "@yamada-ui/react"
+import { FC } from "react"
 
 export default {
-  title: 'System / Theme / Tokens',
+  title: "System / Theme / Tokens",
 }
 
 export const useColorModeToken = () => {
   const { colorMode } = useColorMode()
 
   const colors: ThemeTokens = {
-    primary: ['#2196F3', '#F44336'],
+    primary: ["#2196F3", "#F44336"],
   }
 
   const theme = extendTheme({ colors })()
@@ -27,12 +27,12 @@ export const useColorModeToken = () => {
   return (
     <UIProvider theme={theme}>
       <Box
-        bg='primary'
-        p='md'
-        rounded='md'
-        color='white'
-        transitionProperty='all'
-        transitionDuration='normal'
+        bg="primary"
+        p="md"
+        rounded="md"
+        color="white"
+        transitionProperty="all"
+        transitionDuration="normal"
       >
         The current colorMode is "{colorMode}"
       </Box>
@@ -41,7 +41,7 @@ export const useColorModeToken = () => {
 }
 
 export const useExtendToken = () => {
-  const colors: ThemeTokens = extendToken('colors')
+  const colors: ThemeTokens = extendToken("colors")
 
   const theme = extendTheme({ colors })()
 
@@ -55,9 +55,9 @@ export const useExtendToken = () => {
 export const useSemanticToken = () => {
   const semantics: ThemeSemantics = {
     colors: {
-      primary: '#FF7F0B', // override token primary
-      newPrimary: 'red.500',
-      extendPrimary: 'primary',
+      primary: "#FF7F0B", // override token primary
+      newPrimary: "red.500",
+      extendPrimary: "primary",
     },
   }
 
@@ -65,15 +65,15 @@ export const useSemanticToken = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Box bg='primary' w='full' p='4' rounded='md' color='white'>
+      <Box bg="primary" w="full" p="4" rounded="md" color="white">
         override primary
       </Box>
 
-      <Box bg='newPrimary' w='full' p='4' rounded='md' color='white'>
+      <Box bg="newPrimary" w="full" p="4" rounded="md" color="white">
         new primary
       </Box>
 
-      <Box bg='extendPrimary' w='full' p='4' rounded='md' color='white'>
+      <Box bg="extendPrimary" w="full" p="4" rounded="md" color="white">
         extend primary
       </Box>
     </UIProvider>
@@ -82,11 +82,11 @@ export const useSemanticToken = () => {
 
 const App: FC = () => {
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
       <Image
-        w='full'
-        maxW='32rem'
-        src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png'
+        w="full"
+        maxW="32rem"
+        src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png"
       />
     </Center>
   )

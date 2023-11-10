@@ -6,7 +6,7 @@ export {
   useFormControl,
   useFormControlProps,
   formControlProperties,
-} from './form-control'
+} from "./form-control"
 export type {
   FormControlProps,
   LabelProps,
@@ -14,4 +14,4 @@ export type {
   ErrorMessageProps,
   UseFormControlProps,
   FormControlOptions,
-} from './form-control'
+} from "./form-control"

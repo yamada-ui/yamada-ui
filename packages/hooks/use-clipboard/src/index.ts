@@ -1,6 +1,6 @@
-import { isNumber, isString } from '@yamada-ui/utils'
-import copy from 'copy-to-clipboard'
-import { useState, useCallback, useEffect } from 'react'
+import { isNumber, isString } from "@yamada-ui/utils"
+import copy from "copy-to-clipboard"
+import { useState, useCallback, useEffect } from "react"
 
 export type UseClipboardOptions = {
   timeout?: number
@@ -8,7 +8,7 @@ export type UseClipboardOptions = {
 }
 
 export const useClipboard = (
-  defaultValue: string = '',
+  defaultValue: string = "",
   timeoutOrOptions: number | UseClipboardOptions = {},
 ) => {
   const [hasCopied, setHasCopied] = useState(false)

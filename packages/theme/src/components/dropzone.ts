@@ -1,21 +1,21 @@
-import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray, transparentizeColor } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray, transparentizeColor } from "@yamada-ui/utils"
 
 export const Dropzone: ComponentMultiStyle = {
   baseStyle: {
     container: {
-      w: '100%',
-      bg: ['gray.100', 'whiteAlpha.50'],
+      w: "100%",
+      bg: ["gray.100", "whiteAlpha.50"],
       outline: 0,
-      overflow: 'hidden',
+      overflow: "hidden",
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
     },
     overlay: {
-      bg: ['whiteAlpha.500', 'blackAlpha.300'],
-      zIndex: 'kurillin',
+      bg: ["whiteAlpha.500", "blackAlpha.300"],
+      zIndex: "kurillin",
     },
   },
 
@@ -23,8 +23,8 @@ export const Dropzone: ComponentMultiStyle = {
     solid: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -35,12 +35,12 @@ export const Dropzone: ComponentMultiStyle = {
 
       return {
         container: {
-          color: ['blackAlpha.500', 'whiteAlpha.500'],
-          rounded: 'md',
-          borderWidth: '1px',
-          borderStyle: 'solid',
+          color: ["blackAlpha.500", "whiteAlpha.500"],
+          rounded: "md",
+          borderWidth: "1px",
+          borderStyle: "solid",
           _focus: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -49,31 +49,31 @@ export const Dropzone: ComponentMultiStyle = {
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _hover: {
-            cursor: 'pointer',
-            bg: ['gray.200', 'whiteAlpha.100'],
+            cursor: "pointer",
+            bg: ["gray.200", "whiteAlpha.100"],
           },
           _accept: {
             bg: [
-              transparentizeColor('blue.200', 0.48)(t, m),
-              transparentizeColor('blue.400', 0.12)(t, m),
+              transparentizeColor("blue.200", 0.48)(t, m),
+              transparentizeColor("blue.400", 0.12)(t, m),
             ],
-            borderColor: ['blue.500', 'blue.300'],
+            borderColor: ["blue.500", "blue.300"],
           },
           _reject: {
             bg: [
-              transparentizeColor('red.200', 0.48)(t, m),
-              transparentizeColor('red.400', 0.12)(t, m),
+              transparentizeColor("red.200", 0.48)(t, m),
+              transparentizeColor("red.400", 0.12)(t, m),
             ],
-            borderColor: ['red.500', 'red.300'],
+            borderColor: ["red.500", "red.300"],
           },
           _loading: {
-            cursor: 'not-allowed',
-            bg: ['gray.100', 'whiteAlpha.50'],
+            cursor: "not-allowed",
+            bg: ["gray.100", "whiteAlpha.50"],
           },
         },
       }
@@ -81,8 +81,8 @@ export const Dropzone: ComponentMultiStyle = {
     dashed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -93,12 +93,12 @@ export const Dropzone: ComponentMultiStyle = {
 
       return {
         container: {
-          color: ['blackAlpha.500', 'whiteAlpha.500'],
-          rounded: 'md',
-          borderWidth: '1px',
-          borderStyle: 'dashed',
+          color: ["blackAlpha.500", "whiteAlpha.500"],
+          rounded: "md",
+          borderWidth: "1px",
+          borderStyle: "dashed",
           _focus: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
@@ -107,66 +107,66 @@ export const Dropzone: ComponentMultiStyle = {
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _focusVisible: {
-            zIndex: 'yamcha',
+            zIndex: "yamcha",
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _hover: {
-            cursor: 'pointer',
-            bg: ['gray.200', 'whiteAlpha.100'],
+            cursor: "pointer",
+            bg: ["gray.200", "whiteAlpha.100"],
           },
           _accept: {
             bg: [
-              transparentizeColor('blue.200', 0.48)(t, m),
-              transparentizeColor('blue.400', 0.12)(t, m),
+              transparentizeColor("blue.200", 0.48)(t, m),
+              transparentizeColor("blue.400", 0.12)(t, m),
             ],
-            borderColor: ['blue.500', 'blue.300'],
+            borderColor: ["blue.500", "blue.300"],
           },
           _reject: {
             bg: [
-              transparentizeColor('red.200', 0.48)(t, m),
-              transparentizeColor('red.400', 0.12)(t, m),
+              transparentizeColor("red.200", 0.48)(t, m),
+              transparentizeColor("red.400", 0.12)(t, m),
             ],
-            borderColor: ['red.500', 'red.300'],
+            borderColor: ["red.500", "red.300"],
           },
           _loading: {
-            cursor: 'not-allowed',
-            bg: ['gray.100', 'whiteAlpha.50'],
+            cursor: "not-allowed",
+            bg: ["gray.100", "whiteAlpha.50"],
           },
         },
       }
     },
     unstyled: {
       container: {
-        bg: 'transparent',
-        h: 'auto',
+        bg: "transparent",
+        h: "auto",
       },
       overlay: {
-        bg: 'transparent',
+        bg: "transparent",
       },
     },
   },
 
   sizes: {
     xs: {
-      container: { h: 'xs' },
+      container: { h: "xs" },
     },
     sm: {
-      container: { h: 'sm' },
+      container: { h: "sm" },
     },
     md: {
-      container: { h: 'md' },
+      container: { h: "md" },
     },
     lg: {
-      container: { h: 'lg' },
+      container: { h: "lg" },
     },
     full: {
-      container: { h: 'full' },
+      container: { h: "full" },
     },
   },
 
   defaultProps: {
-    size: 'sm',
-    variant: 'dashed',
+    size: "sm",
+    variant: "dashed",
   },
 }

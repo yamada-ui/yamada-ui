@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/react'
-import { Button, Text, useBoolean } from '@yamada-ui/react'
+import { Meta } from "@storybook/react"
+import { Button, Text, useBoolean } from "@yamada-ui/react"
 
 const meta: Meta = {
-  title: 'Hooks / useBoolean',
+  title: "Hooks / useBoolean",
 }
 
 export default meta
@@ -22,8 +22,8 @@ export const useOnOff = () => {
   const [flg, { on, off }] = useBoolean()
 
   return (
-    <Text w='full' onMouseEnter={on} onMouseLeave={off}>
-      {flg ? 'I am hovered' : 'Put mouse over me please'}
+    <Text w="full" onMouseEnter={on} onMouseLeave={off}>
+      {flg ? "I am hovered" : "Put mouse over me please"}
     </Text>
   )
 }

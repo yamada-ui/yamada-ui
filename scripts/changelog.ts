@@ -1,8 +1,8 @@
-import { existsSync, mkdirSync } from 'fs'
-import { readFile, writeFile } from 'fs/promises'
-import { Octokit, RestEndpointMethodTypes } from '@octokit/rest'
+import { existsSync, mkdirSync } from "fs"
+import { readFile, writeFile } from "fs/promises"
+import { Octokit, RestEndpointMethodTypes } from "@octokit/rest"
 
-type PullRequests = RestEndpointMethodTypes['pulls']['list']['response']['data']
+type PullRequests = RestEndpointMethodTypes["pulls"]["list"]["response"]["data"]
 type PullRequest = PullRequests[number]
 
 export type PullRequestData = {
@@ -24,15 +24,15 @@ const getPullRequestData = ({
 }: PullRequest): PullRequestData | undefined => {
   if (!content) return
 
-  content ??= ''
+  content ??= ""
 
-  const parts = content.split('# Releases')
+  const parts = content.split("# Releases")
   content = parts[1] || content
 
-  const date = new Date(merged_at ?? updated_at).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  const date = new Date(merged_at ?? updated_at).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   })
 
   const match = content.match(/## @yamada-ui\/react\@(?<version>\d.+)/)
@@ -52,23 +52,23 @@ const getPullRequestData = ({
     })
 
   const body = [
-    '---',
+    "---",
     `title: Version ${version}`,
     `description: Explore the changelog for Yamada UI version ${version}. Learn about the latest features, bug fixes, and improvements.`,
     `release_url: ${url}`,
     `release_date: ${date}`,
     `version: ${version}`,
-    '---',
+    "---",
     `${sanitized}`,
-  ].join('\n')
+  ].join("\n")
 
   return { id, url, body, date, version }
 }
 
 const getPrByNumber = async (pull_number: number): Promise<PullRequest> => {
   const { data } = await octokit.pulls.get({
-    owner: 'hirotomoyamada',
-    repo: 'yamada-ui',
+    owner: "hirotomoyamada",
+    repo: "yamada-ui",
     pull_number,
   })
 
@@ -77,11 +77,11 @@ const getPrByNumber = async (pull_number: number): Promise<PullRequest> => {
 
 const getLatestPr = async (): Promise<PullRequest> => {
   const { data } = await octokit.pulls.list({
-    state: 'closed',
-    owner: 'hirotomoyamada',
-    repo: 'yamada-ui',
-    base: 'main',
-    head: 'hirotomoyamada:changeset-release/main',
+    state: "closed",
+    owner: "hirotomoyamada",
+    repo: "yamada-ui",
+    base: "main",
+    head: "hirotomoyamada:changeset-release/main",
     per_page: 1,
   })
 
@@ -90,11 +90,11 @@ const getLatestPr = async (): Promise<PullRequest> => {
 
 const getMergedPrs = async (): Promise<PullRequests> => {
   const { data } = await octokit.pulls.list({
-    state: 'all',
-    owner: 'hirotomoyamada',
-    repo: 'yamada-ui',
-    base: 'main',
-    head: 'hirotomoyamada:changeset-release/main',
+    state: "all",
+    owner: "hirotomoyamada",
+    repo: "yamada-ui",
+    base: "main",
+    head: "hirotomoyamada:changeset-release/main",
     per_page: 100,
   })
 
@@ -105,13 +105,13 @@ const writePrFile = async ({
   version,
   body,
 }: PullRequestData): Promise<void> => {
-  if (!existsSync('.changelog')) mkdirSync('.changelog')
+  if (!existsSync(".changelog")) mkdirSync(".changelog")
 
   return writeFile(`.changelog/v${version}.mdx`, body)
 }
 
 export const manifest = {
-  path: '.changelog/manifest.json',
+  path: ".changelog/manifest.json",
 
   async write(data: PullRequestData[]) {
     data = data.sort((a, b) => b.id - a.id)
@@ -121,7 +121,7 @@ export const manifest = {
 
   async read(): Promise<PullRequestData[]> {
     try {
-      return JSON.parse(await readFile(this.path, 'utf8'))
+      return JSON.parse(await readFile(this.path, "utf8"))
     } catch (error) {
       return []
     }
@@ -143,14 +143,14 @@ const writeReadme = async (): Promise<void> => {
   const [latest, ...others] = sortedData
 
   const body = [
-    '# Changelog\n',
-    '## Latest Release\n',
+    "# Changelog\n",
+    "## Latest Release\n",
     latest,
-    '\n## Previous Releases\n',
+    "\n## Previous Releases\n",
     ...others,
-  ].join('\n')
+  ].join("\n")
 
-  await writeFile('CHANGELOG.md', body)
+  await writeFile("CHANGELOG.md", body)
 }
 
 const sync = async (): Promise<void> => {
@@ -184,13 +184,13 @@ const syncLatest = async (): Promise<void> => {
   if (data) await updateFiles(data)
 }
 
-const arg = process.argv[2] ?? ''
+const arg = process.argv[2] ?? ""
 
 const main = async () => {
-  if (arg.includes('--latest')) {
+  if (arg.includes("--latest")) {
     await syncLatest()
-  } else if (arg.includes('--number')) {
-    const prNumber = +arg.replace('--number=', '')
+  } else if (arg.includes("--number")) {
+    const prNumber = +arg.replace("--number=", "")
 
     await syncByNumber(prNumber)
   } else {

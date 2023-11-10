@@ -1,2 +1,2 @@
-export { Indicator } from './indicator'
-export type { IndicatorProps } from './indicator'
+export { Indicator } from "./indicator"
+export type { IndicatorProps } from "./indicator"

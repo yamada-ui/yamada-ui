@@ -1,15 +1,15 @@
-import { useColorMode, useTheme, Theme } from '@yamada-ui/core'
+import { useColorMode, useTheme, Theme } from "@yamada-ui/core"
 import {
   getMemoizedObject as get,
   isArray,
   isUndefined,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 
 export const useToken = <
   Y extends string | number = string,
-  M extends keyof Omit<Theme, 'components' | 'colorSchemes'> = keyof Omit<
+  M extends keyof Omit<Theme, "components" | "colorSchemes"> = keyof Omit<
     Theme,
-    'components' | 'colorSchemes'
+    "components" | "colorSchemes"
   >,
 >(
   name: M,
@@ -18,15 +18,15 @@ export const useToken = <
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
-  if (name === 'layerStyles') name = 'styles.layerStyles' as M
+  if (name === "layerStyles") name = "styles.layerStyles" as M
 
-  if (name === 'textStyles') name = 'styles.textStyles' as M
+  if (name === "textStyles") name = "styles.textStyles" as M
 
-  if (name === 'transitionProperty') name = 'transitions.property' as M
+  if (name === "transitionProperty") name = "transitions.property" as M
 
-  if (name === 'transitionDuration') name = 'transitions.duration' as M
+  if (name === "transitionDuration") name = "transitions.duration" as M
 
-  if (name === 'transitionEasing') name = 'transitions.easing' as M
+  if (name === "transitionEasing") name = "transitions.easing" as M
 
   let value = get<Y | [Y, Y] | undefined>(theme, `${name}.${path}`)
 
@@ -34,7 +34,7 @@ export const useToken = <
     if (isArray(value)) {
       const [lightValue, darkValue] = value
 
-      return colorMode === 'light' ? lightValue : darkValue
+      return colorMode === "light" ? lightValue : darkValue
     } else {
       return value
     }
@@ -53,12 +53,12 @@ export const useToken = <
     if (isArray(value)) {
       const [lightValue, darkValue] = value
 
-      value = colorMode === 'light' ? lightValue : darkValue
+      value = colorMode === "light" ? lightValue : darkValue
 
       if (isArray(value)) {
         const [lightValue, darkValue] = value as unknown as [Y, Y]
 
-        return colorMode === 'light' ? lightValue : darkValue
+        return colorMode === "light" ? lightValue : darkValue
       } else {
         return value
       }

@@ -1,8 +1,8 @@
-export { Select } from './select'
-export type { SelectProps, UIOption } from './select'
-export { MultiSelect } from './multi-select'
-export type { MultiSelectProps } from './multi-select'
-export { OptionGroup } from './option-group'
-export type { OptionGroupProps } from './option-group'
-export { Option } from './option'
-export type { OptionProps } from './option'
+export { Select } from "./select"
+export type { SelectProps, UIOption } from "./select"
+export { MultiSelect } from "./multi-select"
+export type { MultiSelectProps } from "./multi-select"
+export { OptionGroup } from "./option-group"
+export type { OptionGroupProps } from "./option-group"
+export { Option } from "./option"
+export type { OptionProps } from "./option"

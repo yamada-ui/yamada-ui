@@ -16,5 +16,5 @@ export const matchMedia = (media: string, matches: boolean) => {
     },
   }
 
-  Object.defineProperty(window, 'matchMedia', desc)
+  Object.defineProperty(window, "matchMedia", desc)
 }

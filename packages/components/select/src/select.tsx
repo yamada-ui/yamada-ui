@@ -6,22 +6,22 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { Popover, PopoverTrigger } from '@yamada-ui/popover'
-import { cx, getValidChildren, isArray } from '@yamada-ui/utils'
-import { ReactElement } from 'react'
-import { SelectIcon, SelectIconProps } from './select-icon'
-import { SelectList, SelectListProps } from './select-list'
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
+import { ReactElement } from "react"
+import { SelectIcon, SelectIconProps } from "./select-icon"
+import { SelectList, SelectListProps } from "./select-list"
 import {
   useSelect,
   UseSelectProps,
   SelectDescendantsContextProvider,
   SelectProvider,
   useSelectContext,
-} from './use-select'
-import { OptionGroup, Option, OptionProps } from './'
+} from "./use-select"
+import { OptionGroup, Option, OptionProps } from "./"
 
-export type UIOption = Omit<OptionProps, 'value' | 'children'> & {
+export type UIOption = Omit<OptionProps, "value" | "children"> & {
   label?: string
   value?: string | UIOption[]
 }
@@ -42,30 +42,30 @@ type SelectOptions = {
   /**
    * Props for select container element.
    */
-  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
    * Props for select list element.
    */
-  listProps?: Omit<SelectListProps, 'children'>
+  listProps?: Omit<SelectListProps, "children">
   /**
    * Props for select icon element.
    */
   iconProps?: SelectIconProps
 }
 
-export type SelectProps = ThemeProps<'Select'> &
+export type SelectProps = ThemeProps<"Select"> &
   Omit<
     UseSelectProps<string>,
-    'isEmpty' | 'maxSelectedValues' | 'omitSelectedValues'
+    "isEmpty" | "maxSelectedValues" | "omitSelectedValues"
   > &
   SelectOptions
 
-export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Select', props)
+export const Select = forwardRef<SelectProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Select", props)
   let {
     className,
     placeholder,
-    defaultValue = '',
+    defaultValue = "",
     placeholderInOptions = true,
     options = [],
     color,
@@ -95,8 +95,8 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
         return (
           <OptionGroup
             key={i}
-            label={label ?? ''}
-            {...(props as HTMLUIProps<'ul'>)}
+            label={label ?? ""}
+            {...(props as HTMLUIProps<"ul">)}
           >
             {value.map(({ label, value, ...props }, i) =>
               !isArray(value) ? (
@@ -135,9 +135,9 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   minH = minH ?? minHeight
 
   const css: CSSUIObject = {
-    position: 'relative',
-    w: '100%',
-    h: 'fit-content',
+    position: "relative",
+    w: "100%",
+    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -149,7 +149,7 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
       >
         <Popover {...getPopoverProps()}>
           <ui.div
-            className={cx('ui-select', className)}
+            className={cx("ui-select", className)}
             __css={css}
             {...getContainerProps(containerProps)}
           >
@@ -175,25 +175,25 @@ export const Select = forwardRef<SelectProps, 'div'>((props, ref) => {
   )
 })
 
-type SelectFieldProps = HTMLUIProps<'div'>
+type SelectFieldProps = HTMLUIProps<"div">
 
-const SelectField = forwardRef<SelectFieldProps, 'div'>(
+const SelectField = forwardRef<SelectFieldProps, "div">(
   ({ className, isTruncated = true, noOfLines, h, minH, ...rest }, ref) => {
     const { displayValue, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      paddingEnd: '2rem',
+      paddingEnd: "2rem",
       h,
       minH,
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       ...styles.field,
     }
 
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-select-field', className)}
+        className={cx("ui-select-field", className)}
         __css={css}
         {...rest}
       >

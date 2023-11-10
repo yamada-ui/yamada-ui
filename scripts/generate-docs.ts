@@ -1,9 +1,9 @@
-import { writeFileSync } from 'fs'
-import { readFile } from 'fs/promises'
-import path from 'path'
-import { ThemeComponents } from '@yamada-ui/react'
-import { defaultTheme } from '@yamada-ui/theme'
-import { format, resolveConfig } from 'prettier'
+import { writeFileSync } from "fs"
+import { readFile } from "fs/promises"
+import path from "path"
+import { ThemeComponents } from "@yamada-ui/react"
+import { defaultTheme } from "@yamada-ui/theme"
+import { format, resolveConfig } from "prettier"
 import {
   readConfigFile,
   isInterfaceDeclaration,
@@ -14,7 +14,7 @@ import {
   sys,
   Symbol,
   TypeChecker,
-} from 'typescript'
+} from "typescript"
 
 type Theme = {
   colors?: Record<string, unknown>
@@ -54,34 +54,34 @@ type TypeSearchOptions = {
 const toLiteralStringType = (value: string[]) =>
   value
     .map((s) => `"${s}"`)
-    .join(' | ')
-    .trim() || 'string'
+    .join(" | ")
+    .trim() || "string"
 
 const isObject = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object' && value !== null
+  typeof value === "object" && value !== null
 
-const isString = (value: unknown): value is string => typeof value === 'string'
+const isString = (value: unknown): value is string => typeof value === "string"
 
 const defaultColors = [
-  'brand',
-  'primary',
-  'secondary',
-  'warning',
-  'danger',
-  'link',
+  "brand",
+  "primary",
+  "secondary",
+  "warning",
+  "danger",
+  "link",
 ]
 
 const hues = [
-  '50',
-  '100',
-  '200',
-  '300',
-  '400',
-  '500',
-  '600',
-  '700',
-  '800',
-  '900',
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
 ]
 
 const isHue = (value: unknown): value is Record<string, string> =>
@@ -92,7 +92,7 @@ const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
 const extractColorScheme = (
   colors: Record<string, unknown> | undefined,
 ): string => {
-  if (!colors) return 'string'
+  if (!colors) return "string"
 
   const validColors = Object.entries(colors)
     .filter(([key, values]) => isHue(values) || isDefaultColor(key))
@@ -119,13 +119,13 @@ const extractThemeProps = ({
     result[name] = {
       variant: {
         defaultValue: variant?.toString(),
-        type: variants ? toLiteralStringType(Object.keys(variants)) : 'string',
+        type: variants ? toLiteralStringType(Object.keys(variants)) : "string",
         required: false,
         description: `The variant of the ${name}.`,
       },
       size: {
         defaultValue: size?.toString(),
-        type: sizes ? toLiteralStringType(Object.keys(sizes)) : 'string',
+        type: sizes ? toLiteralStringType(Object.keys(sizes)) : "string",
         required: false,
         description: `The size of the ${name}.`,
       },
@@ -133,7 +133,7 @@ const extractThemeProps = ({
         defaultValue: colorScheme,
         type: colorSchemeType,
         required: false,
-        description: 'The visual color appearance of the component.',
+        description: "The visual color appearance of the component.",
       },
     }
   }
@@ -143,14 +143,14 @@ const extractThemeProps = ({
 
 const prettier = async (typeName: string) => {
   try {
-    const prefix = 'type ONLY_FOR_FORMAT = '
+    const prefix = "type ONLY_FOR_FORMAT = "
 
     const prettyType = await format(prefix + typeName, {
-      parser: 'typescript',
+      parser: "typescript",
       semi: false,
     })
 
-    return prettyType.replace(prefix, '').trim()
+    return prettyType.replace(prefix, "").trim()
   } catch {
     return typeName
   }
@@ -159,9 +159,9 @@ const prettier = async (typeName: string) => {
 const formatValue = (value: string | undefined) => {
   if (!value) return
 
-  const x = value.replace(/^"(.*)"$/, '$1')
+  const x = value.replace(/^"(.*)"$/, "$1")
 
-  return x === 'true' ? true : x === 'false' ? false : x
+  return x === "true" ? true : x === "false" ? false : x
 }
 
 const sortByRequiredProperties = (properties: ComponentTypeProperties) =>
@@ -180,7 +180,7 @@ const extractPropertiesOfTypeName = async (
   { shouldIgnoreProperty = () => false }: TypeSearchOptions = {},
 ) => {
   const regexSearchTerm =
-    typeof searchTerm === 'string' ? `^${searchTerm}$` : searchTerm
+    typeof searchTerm === "string" ? `^${searchTerm}$` : searchTerm
 
   const typeStatements = sourceFile.statements.filter(
     (statement) =>
@@ -205,14 +205,14 @@ const extractPropertiesOfTypeName = async (
 
       const defaultValue =
         docTags
-          .find((tag) => tag.name === 'default')
+          .find((tag) => tag.name === "default")
           ?.text?.map((doc) => doc.text)
-          ?.join('\n') || undefined
+          ?.join("\n") || undefined
 
       const nonNullableType = type.getNonNullableType()
 
       const typeName = typeChecker.typeToString(nonNullableType)
-      const required = nonNullableType === type && typeName !== 'any'
+      const required = nonNullableType === type && typeName !== "any"
 
       const prettyType = await prettier(typeName)
 
@@ -224,18 +224,18 @@ const extractPropertiesOfTypeName = async (
           property
             .getDocumentationComment(typeChecker)
             .map((comment) => comment.text)
-            .join('\n') || undefined,
+            .join("\n") || undefined,
       }
     }
 
     let typeName = (typeStatement as any).name.getText() as string
 
     if (/Props$/.test(typeName)) {
-      typeName = typeName.replace(/Props$/, '')
+      typeName = typeName.replace(/Props$/, "")
 
       results[typeName] = sortByRequiredProperties(properties)
     } else {
-      console.log('[docs]:', 'Omitting type', `\`${typeName}\``)
+      console.log("[docs]:", "Omitting type", `\`${typeName}\``)
     }
   }
 
@@ -253,10 +253,10 @@ const extractTypeExports = (code: string) => {
   let match = exportedTypeRegex.exec(code)
 
   while (match != null) {
-    const types = match[1].split(',').map((s) => s.trim())
+    const types = match[1].split(",").map((s) => s.trim())
 
     types.forEach((type) => {
-      let [typeName] = type.split(' ') ?? []
+      let [typeName] = type.split(" ") ?? []
 
       exported[typeName] = true
     })
@@ -266,7 +266,7 @@ const extractTypeExports = (code: string) => {
 
   const exportedTypes = Object.keys(exported).filter(Boolean)
 
-  console.log('[docs]:', exportedTypes.join(', '))
+  console.log("[docs]:", exportedTypes.join(", "))
 
   return exportedTypes
 }
@@ -319,15 +319,15 @@ const getSourceFileName = (symbol: Symbol): string | undefined => {
 
 const shouldIgnoreProperty = (property: Symbol) => {
   const sourceFileName = getSourceFileName(property)
-  const isExternal = /(node_modules|core)/.test(sourceFileName ?? '')
-  const isExcludedByName = ['children'].includes(property.getName())
+  const isExternal = /(node_modules|core)/.test(sourceFileName ?? "")
+  const isExcludedByName = ["children"].includes(property.getName())
 
   return isExternal || isExcludedByName
 }
 
 const main = async () => {
-  const content = await readFile(path.join('src', 'index.ts'), 'utf8')
-  const searchType = createTypeSearch('tsconfig.json', { shouldIgnoreProperty })
+  const content = await readFile(path.join("src", "index.ts"), "utf8")
+  const searchType = createTypeSearch("tsconfig.json", { shouldIgnoreProperty })
 
   const themeProps = extractThemeProps(defaultTheme)
 
@@ -356,10 +356,10 @@ const main = async () => {
 
   const data = await format(JSON.stringify(typeExportsWithThemeProps), {
     ...prettierConfig,
-    parser: 'json',
+    parser: "json",
   })
 
-  writeFileSync('DOCS.json', data)
+  writeFileSync("DOCS.json", data)
 }
 
 try {

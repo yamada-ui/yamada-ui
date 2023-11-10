@@ -1,21 +1,21 @@
-import { ComponentStyle } from '@yamada-ui/core'
+import { ComponentStyle } from "@yamada-ui/core"
 
 export const Divider: ComponentStyle = {
   baseStyle: {
-    borderColor: 'border',
+    borderColor: "border",
   },
 
   variants: {
     solid: {
-      borderStyle: 'solid',
+      borderStyle: "solid",
     },
     dashed: {
-      borderStyle: 'dashed',
+      borderStyle: "dashed",
     },
     dotted: {
-      borderStyle: 'dotted',
+      borderStyle: "dotted",
     },
   },
 
-  defaultProps: { variant: 'solid' },
+  defaultProps: { variant: "solid" },
 }

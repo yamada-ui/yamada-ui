@@ -1,7 +1,7 @@
-import { StringLiteral } from '@yamada-ui/utils'
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs, transforms } from './config'
+import { StringLiteral } from "@yamada-ui/utils"
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs, transforms } from "./config"
 
 export const transform: Configs = {
   clipPath: true,
@@ -9,14 +9,14 @@ export const transform: Configs = {
   transformOrigin: true,
   transformStyle: true,
   perspective: true,
-  translateX: configs.space('--ui-translate-x'),
-  translateY: configs.space('--ui-translate-y'),
-  scale: configs.prop(['--ui-scale-x', '--ui-scale-y']),
-  scaleX: configs.prop('--ui-scale-x'),
-  scaleY: configs.prop('--ui-scale-y'),
-  rotate: { properties: '--ui-rotate', transform: transforms.deg },
-  skewX: { properties: '--ui-skew-x', transform: transforms.deg },
-  skewY: { properties: '--ui-skew-y', transform: transforms.deg },
+  translateX: configs.space("--ui-translate-x"),
+  translateY: configs.space("--ui-translate-y"),
+  scale: configs.prop(["--ui-scale-x", "--ui-scale-y"]),
+  scaleX: configs.prop("--ui-scale-x"),
+  scaleY: configs.prop("--ui-scale-y"),
+  rotate: { properties: "--ui-rotate", transform: transforms.deg },
+  skewX: { properties: "--ui-skew-x", transform: transforms.deg },
+  skewY: { properties: "--ui-skew-y", transform: transforms.deg },
 }
 
 export type TransformProps = {
@@ -27,11 +27,11 @@ export type TransformProps = {
   /**
    * The CSS `transform` property.
    */
-  transform?: Token<CSS.Property.Transform | 'auto' | 'auto-3d'>
+  transform?: Token<CSS.Property.Transform | "auto" | "auto-3d">
   /**
    * The CSS `transform-origin` property.
    */
-  transformOrigin?: Token<CSS.Property.TransformOrigin | number, 'sizes'>
+  transformOrigin?: Token<CSS.Property.TransformOrigin | number, "sizes">
   /**
    * The CSS `transform-style` property.
    */
@@ -43,11 +43,11 @@ export type TransformProps = {
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */
-  translateX?: Token<StringLiteral, 'spaces'>
+  translateX?: Token<StringLiteral, "spaces">
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.
    */
-  translateY?: Token<StringLiteral, 'spaces'>
+  translateY?: Token<StringLiteral, "spaces">
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.
    */

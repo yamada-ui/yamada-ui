@@ -1,13 +1,13 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const effect: Configs = {
-  boxShadow: configs.shadow('boxShadow'),
+  boxShadow: configs.shadow("boxShadow"),
   mixBlendMode: true,
-  blendMode: configs.prop('mixBlendMode'),
+  blendMode: configs.prop("mixBlendMode"),
   backgroundBlendMode: true,
-  bgBlendMode: configs.prop('backgroundBlendMode'),
+  bgBlendMode: configs.prop("backgroundBlendMode"),
   opacity: true,
 }
 
@@ -19,11 +19,11 @@ export type EffectProps = {
   /**
    * The `box-shadow` property.
    */
-  boxShadow?: Token<CSS.Property.BoxShadow | number, 'shadows'>
+  boxShadow?: Token<CSS.Property.BoxShadow | number, "shadows">
   /**
    * The `box-shadow` property.
    */
-  shadow?: Token<CSS.Property.BoxShadow | number, 'shadows'>
+  shadow?: Token<CSS.Property.BoxShadow | number, "shadows">
   /**
    * The `mix-blend-mode` property.
    */

@@ -1,8 +1,8 @@
-import { useWindowEvent } from '@yamada-ui/use-window-event'
-import { isFunction } from '@yamada-ui/utils'
-import { useState, useCallback, useEffect } from 'react'
+import { useWindowEvent } from "@yamada-ui/use-window-event"
+import { isFunction } from "@yamada-ui/utils"
+import { useState, useCallback, useEffect } from "react"
 
-export type StorageType = 'localStorage' | 'sessionStorage'
+export type StorageType = "localStorage" | "sessionStorage"
 
 export type StorageProps<T> = {
   key: string
@@ -32,7 +32,7 @@ const deserializeJSON = (value: string | undefined) => {
 
 export const createStorage = <T>(type: StorageType, name: string) => {
   const eventName =
-    type === 'localStorage' ? 'ui-local-storage' : 'ui-session-storage'
+    type === "localStorage" ? "ui-local-storage" : "ui-session-storage"
 
   return ({
     key,
@@ -44,19 +44,19 @@ export const createStorage = <T>(type: StorageType, name: string) => {
     const readStorageValue = useCallback(
       (skipStorage?: boolean): T => {
         if (
-          typeof window === 'undefined' ||
+          typeof window === "undefined" ||
           !(type in window) ||
           window[type] === null ||
           skipStorage
         ) {
-          return (defaultValue ?? '') as T
+          return (defaultValue ?? "") as T
         }
 
         const storageValue = window[type].getItem(key)
 
         return storageValue !== null
           ? deserialize(storageValue)
-          : ((defaultValue ?? '') as T)
+          : ((defaultValue ?? "") as T)
       },
       [key, deserialize, defaultValue],
     )
@@ -97,7 +97,7 @@ export const createStorage = <T>(type: StorageType, name: string) => {
       setValue(defaultValue as T)
     }, [defaultValue, key])
 
-    useWindowEvent('storage', (ev) => {
+    useWindowEvent("storage", (ev) => {
       if (ev.storageArea === window[type] && ev.key === key)
         setValue(deserialize(ev.newValue ?? undefined))
     })
@@ -124,4 +124,4 @@ export const createStorage = <T>(type: StorageType, name: string) => {
 }
 
 export const useLocalStorage = <T = string>(props: StorageProps<T>) =>
-  createStorage<T>('localStorage', 'use-local-storage')(props)
+  createStorage<T>("localStorage", "use-local-storage")(props)

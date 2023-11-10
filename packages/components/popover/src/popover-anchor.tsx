@@ -5,8 +5,8 @@ import {
   PropsWithChildren,
   ReactElement,
   RefObject,
-} from 'react'
-import { usePopover } from './popover'
+} from "react"
+import { usePopover } from "./popover"
 
 export const PopoverAnchor: FC<PropsWithChildren<{}>> = ({ children }) => {
   const child = Children.only(children) as ReactElement & {

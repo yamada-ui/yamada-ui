@@ -1,5 +1,5 @@
-import { getOwnerDocument, useCallbackRef } from '@yamada-ui/utils'
-import { RefObject, useEffect, useRef } from 'react'
+import { getOwnerDocument, useCallbackRef } from "@yamada-ui/utils"
+import { RefObject, useEffect, useRef } from "react"
 
 export type UseOutsideClickProps = {
   enabled?: boolean
@@ -52,16 +52,16 @@ export const useOutsideClick = ({
 
     const doc = getOwnerDocument(ref.current)
 
-    doc.addEventListener('mousedown', onPointerDown, true)
-    doc.addEventListener('mouseup', onMouseUp, true)
-    doc.addEventListener('touchstart', onPointerDown, true)
-    doc.addEventListener('touchend', onTouchEnd, true)
+    doc.addEventListener("mousedown", onPointerDown, true)
+    doc.addEventListener("mouseup", onMouseUp, true)
+    doc.addEventListener("touchstart", onPointerDown, true)
+    doc.addEventListener("touchend", onTouchEnd, true)
 
     return () => {
-      doc.removeEventListener('mousedown', onPointerDown, true)
-      doc.removeEventListener('mouseup', onMouseUp, true)
-      doc.removeEventListener('touchstart', onPointerDown, true)
-      doc.removeEventListener('touchend', onTouchEnd, true)
+      doc.removeEventListener("mousedown", onPointerDown, true)
+      doc.removeEventListener("mouseup", onMouseUp, true)
+      doc.removeEventListener("touchstart", onPointerDown, true)
+      doc.removeEventListener("touchend", onTouchEnd, true)
     }
   }, [handler, ref, handlerRef, state, enabled])
 }
@@ -72,7 +72,7 @@ const isValidEvent = (
 ) => {
   const target = ev.target as HTMLElement
 
-  if ('button' in ev && ev.button > 0) return false
+  if ("button" in ev && ev.button > 0) return false
 
   if (target) if (!getOwnerDocument(target).contains(target)) return false
 

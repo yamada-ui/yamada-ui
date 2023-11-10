@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom"
 
 const { getComputedStyle } = window
 
@@ -6,8 +6,8 @@ window.getComputedStyle = (elt) => getComputedStyle(elt)
 window.Element.prototype.scrollTo = () => {}
 window.scrollTo = () => {}
 
-if (typeof window.matchMedia !== 'function') {
-  Object.defineProperty(window, 'matchMedia', {
+if (typeof window.matchMedia !== "function") {
+  Object.defineProperty(window, "matchMedia", {
     enumerable: true,
     configurable: true,
     writable: true,
@@ -24,7 +24,7 @@ if (typeof window.matchMedia !== 'function') {
   })
 }
 
-global.TextEncoder = require('util').TextEncoder
+global.TextEncoder = require("util").TextEncoder
 
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),

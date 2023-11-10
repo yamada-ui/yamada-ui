@@ -8,14 +8,14 @@ import {
   useMultiComponentStyle,
   ColorModeToken,
   CSS,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   FormControlOptions,
   formControlProperties,
   useFormControlProps,
-} from '@yamada-ui/form-control'
-import { Loading, LoadingProps } from '@yamada-ui/loading'
-import { Fade, FadeProps } from '@yamada-ui/transitions'
+} from "@yamada-ui/form-control"
+import { Loading, LoadingProps } from "@yamada-ui/loading"
+import { Fade, FadeProps } from "@yamada-ui/transitions"
 import {
   assignRef,
   createContext,
@@ -23,13 +23,13 @@ import {
   dataAttr,
   isArray,
   pickObject,
-} from '@yamada-ui/utils'
-import { FC, ForwardedRef, Fragment, PropsWithChildren } from 'react'
+} from "@yamada-ui/utils"
+import { FC, ForwardedRef, Fragment, PropsWithChildren } from "react"
 import {
   useDropzone,
   Accept,
   DropzoneOptions as ReactDropzoneOptions,
-} from 'react-dropzone'
+} from "react-dropzone"
 
 type DropzoneContext = {
   isLoading?: boolean
@@ -40,7 +40,7 @@ type DropzoneContext = {
 }
 
 const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
-  name: 'NativeSelectContext',
+  name: "NativeSelectContext",
   errorMessage: `useDropzoneContext returned is 'undefined'. Seems you forgot to wrap the components in "<Dropzone />"`,
 })
 
@@ -48,11 +48,11 @@ type DropzoneOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * If `true`, display the dropzone loading icon.
    *
@@ -77,14 +77,14 @@ type DropzoneOptions = {
   openRef?: ForwardedRef<() => void | undefined>
 }
 
-export type DropzoneProps = Omit<HTMLUIProps<'div'>, 'onDrop'> &
-  ThemeProps<'Dropzone'> &
+export type DropzoneProps = Omit<HTMLUIProps<"div">, "onDrop"> &
+  ThemeProps<"Dropzone"> &
   DropzoneOptions &
   FormControlOptions &
-  Omit<ReactDropzoneOptions, 'accept'>
+  Omit<ReactDropzoneOptions, "accept">
 
-export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Dropzone', props)
+export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Dropzone", props)
   const {
     id,
     name,
@@ -151,10 +151,10 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
   const isDragIdle = !isDragAccept && !isDragReject
 
   const css: CSSUIObject = {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     ...styles.container,
   }
 
@@ -163,7 +163,7 @@ export const Dropzone = forwardRef<DropzoneProps, 'input'>((props, ref) => {
       value={{ isLoading, isDragAccept, isDragReject, isDragIdle, styles }}
     >
       <ui.div
-        className={cx('ui-dropzone', className)}
+        className={cx("ui-dropzone", className)}
         __css={css}
         {...rest}
         {...getRootProps()}
@@ -192,14 +192,14 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   const { isLoading, styles } = useDropzoneContext()
 
   const css: CSSUIObject = {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    w: '100%',
-    h: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    w: "100%",
+    h: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     ...styles.overlay,
   }
 
@@ -207,13 +207,13 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
     <Fade
       isOpen={isLoading}
       unmountOnExit
-      className='ui-dropzone__overlay'
+      className="ui-dropzone__overlay"
       __css={css}
       {...rest}
     >
       <Loading
-        className='ui-dropzone__overlay__loading'
-        size='4xl'
+        className="ui-dropzone__overlay__loading"
+        size="4xl"
         {...loadingProps}
       />
     </Fade>

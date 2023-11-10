@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/react'
-import { Button, Text, useBoolean, useResizeObserver } from '@yamada-ui/react'
+import { Meta } from "@storybook/react"
+import { Button, Text, useBoolean, useResizeObserver } from "@yamada-ui/react"
 
 const meta: Meta = {
-  title: 'Hooks / useResizeObserver',
+  title: "Hooks / useResizeObserver",
 }
 
 export default meta
@@ -19,8 +19,8 @@ export const basic = () => {
       <Button
         ref={ref}
         onClick={toggle}
-        w={flg ? 'xl' : 'sm'}
-        h={flg ? 'xl' : 'sm'}
+        w={flg ? "xl" : "sm"}
+        h={flg ? "xl" : "sm"}
       >
         Click me to toggle the boolean value
       </Button>

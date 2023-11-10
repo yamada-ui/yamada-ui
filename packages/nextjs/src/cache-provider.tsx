@@ -1,6 +1,6 @@
-import { CacheProvider as EmotionCacheProvider } from '@emotion/react'
-import { FC, PropsWithChildren } from 'react'
-import { useEmotionCache, UseEmotionCacheProps } from './use-emotion-cache'
+import { CacheProvider as EmotionCacheProvider } from "@emotion/react"
+import { FC, PropsWithChildren } from "react"
+import { useEmotionCache, UseEmotionCacheProps } from "./use-emotion-cache"
 
 export type CacheProviderProps = PropsWithChildren<UseEmotionCacheProps>
 

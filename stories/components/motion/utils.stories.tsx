@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   AnimatePresence,
   Box,
@@ -10,12 +10,12 @@ import {
   useBoolean,
   useScroll,
   useTransform,
-} from '@yamada-ui/react'
+} from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: 'Components / Motion / Utils',
+  title: "Components / Motion / Utils",
   component: Motion,
 }
 
@@ -34,10 +34,10 @@ export const animatePresence: Story = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            bg='primary'
-            color='white'
-            p='md'
-            rounded='md'
+            bg="primary"
+            color="white"
+            p="md"
+            rounded="md"
           >
             Motion
           </Motion>
@@ -50,13 +50,13 @@ export const animatePresence: Story = () => {
 export const motionConfig: Story = () => {
   return (
     <MotionConfig transition={{ duration: 2 }}>
-      <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+      <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
         <Motion
           animate={{ x: 100 }}
-          bg='primary'
-          color='white'
-          p='md'
-          rounded='md'
+          bg="primary"
+          color="white"
+          p="md"
+          rounded="md"
         >
           Motion
         </Motion>
@@ -73,47 +73,47 @@ export const useScrollAndTransform: Story = () => {
   const y4 = useTransform(scrollYProgress, [0, 1], [0, -200])
 
   return (
-    <Box position='relative' w='full' h='300vh'>
+    <Box position="relative" w="full" h="300vh">
       <Text>Please scroll</Text>
 
       <Motion
         style={{ y: y1 }}
-        bg='primary'
-        boxSize='2xs'
-        rounded='full'
-        position='absolute'
-        top='110vh'
-        left='0'
+        bg="primary"
+        boxSize="2xs"
+        rounded="full"
+        position="absolute"
+        top="110vh"
+        left="0"
       />
 
       <Motion
         style={{ y: y2 }}
-        bg='warning'
-        boxSize='sm'
-        rounded='full'
-        position='absolute'
-        top='120vh'
-        left='20%'
+        bg="warning"
+        boxSize="sm"
+        rounded="full"
+        position="absolute"
+        top="120vh"
+        left="20%"
       />
 
       <Motion
         style={{ y: y3 }}
-        bg='danger'
-        boxSize='3xs'
-        rounded='full'
-        position='absolute'
-        top='110vh'
-        right='30%'
+        bg="danger"
+        boxSize="3xs"
+        rounded="full"
+        position="absolute"
+        top="110vh"
+        right="30%"
       />
 
       <Motion
         style={{ y: y4 }}
-        bg='secondary'
-        boxSize='xs'
-        rounded='full'
-        position='absolute'
-        top='120vh'
-        right='0'
+        bg="secondary"
+        boxSize="xs"
+        rounded="full"
+        position="absolute"
+        top="120vh"
+        right="0"
       />
     </Box>
   )

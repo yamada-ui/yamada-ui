@@ -1,4 +1,4 @@
-export { Markdown } from './markdown'
+export { Markdown } from "./markdown"
 export type {
   MarkdownProps,
   MarkdownComponentProps,
@@ -9,4 +9,4 @@ export type {
   MarkdownComponentUnorderedListProps,
   MarkdownComponentTableCellProps,
   MarkdownComponentTableRowProps,
-} from './markdown'
+} from "./markdown"

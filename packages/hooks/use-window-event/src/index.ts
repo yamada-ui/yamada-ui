@@ -1,5 +1,5 @@
-import { useCallbackRef } from '@yamada-ui/utils'
-import { useEffect } from 'react'
+import { useCallbackRef } from "@yamada-ui/utils"
+import { useEffect } from "react"
 
 type Handler<E extends string> = E extends keyof WindowEventMap
   ? (ev: WindowEventMap[E]) => void

@@ -5,25 +5,25 @@ import {
   mix,
   darken,
   lighten,
-} from 'color2k'
-import { getMemoizedObject as get, Dict, isArray } from '.'
+} from "color2k"
+import { getMemoizedObject as get, Dict, isArray } from "."
 
-type ColorMode = 'light' | 'dark'
+type ColorMode = "light" | "dark"
 
 export const hues = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 
 export const isGray = (colorScheme: string) =>
-  colorScheme === 'gray' ||
-  colorScheme === 'zinc' ||
-  colorScheme === 'neutral' ||
-  colorScheme === 'stone'
+  colorScheme === "gray" ||
+  colorScheme === "zinc" ||
+  colorScheme === "neutral" ||
+  colorScheme === "stone"
 
 export const getColor =
   (color: string, fallback?: string) =>
   (theme: Dict = {}, colorMode?: ColorMode) => {
-    const [token, hue] = color.split('.')
+    const [token, hue] = color.split(".")
 
     const [, relatedToken] =
       Object.entries<string>(theme.semantics?.colorSchemes ?? {}).find(
@@ -38,12 +38,12 @@ export const getColor =
 
     try {
       if (isArray(hex)) {
-        return toHex(String(colorMode !== 'dark' ? hex[0] : hex[1]))
+        return toHex(String(colorMode !== "dark" ? hex[0] : hex[1]))
       } else {
         return toHex(String(hex))
       }
     } catch {
-      return fallback ?? '#000000'
+      return fallback ?? "#000000"
     }
   }
 
@@ -65,14 +65,14 @@ export const tintColor =
   (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
-    return toHex(mix(raw, '#fff', amount))
+    return toHex(mix(raw, "#fff", amount))
   }
 
 export const shadeColor =
   (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
-    return toHex(mix(raw, '#000', amount / 100))
+    return toHex(mix(raw, "#000", amount / 100))
   }
 
 export const transparentizeColor =
@@ -97,7 +97,7 @@ export const toneColor =
 
     if (n !== 0) n = n - 5 * (isLighten ? 1 : -1)
 
-    return toHex(isLighten ? lighten(raw, n / 100) : mix(raw, '#000', n / 100))
+    return toHex(isLighten ? lighten(raw, n / 100) : mix(raw, "#000", n / 100))
   }
 
 export const randomColor = ({
@@ -118,7 +118,7 @@ export const randomColor = ({
 const randomHex = () =>
   `#${Math.floor(Math.random() * 0xffffff)
     .toString(16)
-    .padEnd(6, '0')}`
+    .padEnd(6, "0")}`
 
 const randomColorFromString = (str: string) => {
   let hash = 0
@@ -130,7 +130,7 @@ const randomColorFromString = (str: string) => {
     hash = hash & hash
   }
 
-  let color = '#'
+  let color = "#"
 
   for (let j = 0; j < 3; j += 1) {
     const value = (hash >> (j * 8)) & 255
@@ -174,13 +174,13 @@ export const isTone =
 
     const isDark = brightness < 128
 
-    return isDark ? 'dark' : 'light'
+    return isDark ? "dark" : "light"
   }
 
 export const isLight =
   (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
-    isTone(color)(theme, colorMode) === 'dark'
+    isTone(color)(theme, colorMode) === "dark"
 
 export const isDark =
   (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
-    isTone(color)(theme, colorMode) === 'light'
+    isTone(color)(theme, colorMode) === "light"

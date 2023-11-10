@@ -1,15 +1,15 @@
-import { Canvas, Meta } from '@storybook/blocks'
-import { Text, Center, Image } from '@yamada-ui/react'
-import { JSX } from '../components'
+import { Canvas, Meta } from "@storybook/blocks"
+import { Text, Center, Image } from "@yamada-ui/react"
+import { JSX } from "../components"
 
-<Meta title='Documents / Welcome' />
+<Meta title="Documents / Welcome" />
 
 <JSX>
-  <Center mb='16'>
+  <Center mb="16">
     <Image
-      w='full'
-      maxW='xl'
-      src='https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png'
+      w="full"
+      maxW="xl"
+      src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png"
     />
   </Center>
 </JSX>
@@ -19,7 +19,7 @@ import { JSX } from '../components'
 1. Wrap your application with the `UIProvider` provided
 
 ```tsx
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = ({ children }) => {
   return <UIProvider>{children}</UIProvider>
@@ -33,7 +33,7 @@ Yamada-ui supports light and dark modes by default
 2. Now you can start using components like so
 
 ```tsx
-import { Text } from '@yamada-ui/react'
+import { Text } from "@yamada-ui/react"
 
 const Example = () => {
   return <Text>ギャルのパンティーおくれーーーっ！！！！！</Text>

@@ -17,34 +17,34 @@ import {
   PaginationOptions,
   getPaginationRowModel,
   HeaderContext,
-} from '@tanstack/react-table'
-import { Checkbox, CheckboxProps } from '@yamada-ui/checkbox'
-import { ui, CSSUIObject, HTMLUIProps, ThemeProps } from '@yamada-ui/core'
-import { IconProps } from '@yamada-ui/icon'
-import { ThProps, TrProps, TdProps } from '@yamada-ui/native-table'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
+} from "@tanstack/react-table"
+import { Checkbox, CheckboxProps } from "@yamada-ui/checkbox"
+import { ui, CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import { IconProps } from "@yamada-ui/icon"
+import { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   createContext,
   PropGetter,
   handlerAll,
   runIfFunc,
-} from '@yamada-ui/utils'
-import { CSSProperties, useCallback, useMemo } from 'react'
+} from "@yamada-ui/utils"
+import { CSSProperties, useCallback, useMemo } from "react"
 
-export { flexRender as render, createColumnHelper } from '@tanstack/react-table'
+export { flexRender as render, createColumnHelper } from "@tanstack/react-table"
 export type {
   SortDirection,
   Row,
   Cell,
   CellContext,
   RowData,
-} from '@tanstack/react-table'
+} from "@tanstack/react-table"
 
-export type TableContext = Omit<UseTableReturn, 'getTableProps'>
+export type TableContext = Omit<UseTableReturn, "getTableProps">
 
 export const [TableProvider, useTableContext] = createContext<TableContext>({
   strict: false,
-  name: 'TableContext',
+  name: "TableContext",
 })
 
 export type ColumnStyles = {
@@ -59,7 +59,7 @@ export type Column<Y extends RowData, M = unknown> = ColumnDef<Y, M> &
 
 type SelectColumn<Y extends RowData, M = unknown> = Omit<
   Column<Y, M>,
-  'accessorKey' | 'accessorFn'
+  "accessorKey" | "accessorFn"
 >
 
 export type ColumnSort<Y extends RowData> = {
@@ -72,38 +72,38 @@ export type Sort<Y extends RowData> = ColumnSort<Y>[]
 export type UseTableOptions<Y extends RowData> = PartialKeys<
   Omit<
     CoreOptions<Y>,
-    | 'columns'
-    | 'defaultColumn'
-    | 'getCoreRowModel'
-    | 'state'
-    | 'initialState'
-    | 'onStateChange'
-    | 'getSubRows'
-    | 'mergeOptions'
+    | "columns"
+    | "defaultColumn"
+    | "getCoreRowModel"
+    | "state"
+    | "initialState"
+    | "onStateChange"
+    | "getSubRows"
+    | "mergeOptions"
   >,
-  'renderFallbackValue'
+  "renderFallbackValue"
 > &
-  Omit<SortingOptions<Y>, 'getSortedRowModel' | 'onSortingChange'> &
+  Omit<SortingOptions<Y>, "getSortedRowModel" | "onSortingChange"> &
   Omit<
     RowSelectionOptions<Y>,
-    'enableMultiRowSelection' | 'enableSubRowSelection' | 'onRowSelectionChange'
+    "enableMultiRowSelection" | "enableSubRowSelection" | "onRowSelectionChange"
   > &
-  Omit<PaginationOptions, 'getPaginationRowModel' | 'onPaginationChange'>
+  Omit<PaginationOptions, "getPaginationRowModel" | "onPaginationChange">
 
-type TableProps = HTMLUIProps<'table'> & ThemeProps<'Table'>
+type TableProps = HTMLUIProps<"table"> & ThemeProps<"Table">
 
 type HeaderGroupProps<Y extends RowData> =
-  | Omit<TrProps, 'key'>
-  | ((headers: Header<Y, unknown>[]) => Omit<TrProps, 'key'> | void)
+  | Omit<TrProps, "key">
+  | ((headers: Header<Y, unknown>[]) => Omit<TrProps, "key"> | void)
 type HeaderProps<Y extends RowData> =
-  | Omit<ThProps, 'key'>
-  | ((header: Header<Y, unknown>) => Omit<ThProps, 'key'> | void)
+  | Omit<ThProps, "key">
+  | ((header: Header<Y, unknown>) => Omit<ThProps, "key"> | void)
 type RowProps<Y extends RowData> =
-  | Omit<TrProps, 'key'>
-  | ((row: Row<Y>) => Omit<TrProps, 'key'> | void)
+  | Omit<TrProps, "key">
+  | ((row: Row<Y>) => Omit<TrProps, "key"> | void)
 type CellProps<Y extends RowData> =
-  | Omit<TdProps, 'key'>
-  | ((cell: Cell<Y, unknown>) => Omit<TdProps, 'key'> | void)
+  | Omit<TdProps, "key">
+  | ((cell: Cell<Y, unknown>) => Omit<TdProps, "key"> | void)
 
 export type UseTableProps<Y extends RowData> = TableProps &
   UseTableOptions<Y> & {
@@ -243,7 +243,7 @@ export type UseTableProps<Y extends RowData> = TableProps &
 
 const generateRowSelection = <Y extends RowData>(
   rowSelection: string[] | undefined,
-  enableRowSelection: UseTableProps<Y>['enableRowSelection'],
+  enableRowSelection: UseTableProps<Y>["enableRowSelection"],
 ): RowSelectionState => {
   if (!enableRowSelection) return {}
 
@@ -503,13 +503,13 @@ export const useTable = <Y extends RowData>({
 
 export type UseTableReturn = ReturnType<typeof useTable>
 
-const Center = ui('div', {
+const Center = ui("div", {
   baseStyle: {
-    w: '100%',
-    h: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    w: "100%",
+    h: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 })
 
@@ -519,7 +519,7 @@ const TotalCheckbox = <Y extends RowData>({
   enablePagenation,
   disabledRowIds = [],
 }: {
-  table: HeaderContext<Y, unknown>['table']
+  table: HeaderContext<Y, unknown>["table"]
   checkboxProps: CheckboxProps
   enablePagenation: boolean
   disabledRowIds?: string[]
@@ -582,7 +582,7 @@ export const mergeColumns = <Y extends RowData>({
   disabledRowIds?: string[]
 }): Column<Y>[] => [
   {
-    id: 'select',
+    id: "select",
     header: ({ table }) => (
       <TotalCheckbox
         {...{ table, checkboxProps, enablePagenation, disabledRowIds }}

@@ -5,21 +5,21 @@ import {
   CSSUIObject,
   LoadingConfigOptions,
   HTMLUIProps,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   AnimatePresence,
   Motion,
   motion,
   MotionVariants,
-} from '@yamada-ui/motion'
-import { Portal } from '@yamada-ui/portal'
-import { useTimeout } from '@yamada-ui/use-timeout'
+} from "@yamada-ui/motion"
+import { Portal } from "@yamada-ui/portal"
+import { useTimeout } from "@yamada-ui/use-timeout"
 import {
   isValidElement,
   assignRef,
   useUpdateEffect,
   isNumber,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   createContext,
   FC,
@@ -34,9 +34,9 @@ import {
   MutableRefObject,
   createRef,
   RefObject,
-} from 'react'
-import { RemoveScroll } from 'react-remove-scroll'
-import { Loading } from './loading'
+} from "react"
+import { RemoveScroll } from "react-remove-scroll"
+import { Loading } from "./loading"
 
 type LoadingContextProps = {
   /**
@@ -99,26 +99,26 @@ type LoadingState = {
   duration: number | null
 }
 
-export type LoadingProviderProps = PropsWithChildren<ThemeConfig['loading']>
+export type LoadingProviderProps = PropsWithChildren<ThemeConfig["loading"]>
 
 const LoadingContext = createContext({} as LoadingContext)
 
 type Refs = {
-  isLoading: RefObject<LoadingContextProps['isLoading']>
-  start: RefObject<LoadingContextProps['start']>
-  finish: RefObject<LoadingContextProps['finish']>
-  update: RefObject<LoadingContextProps['update']>
-  force: RefObject<LoadingContextProps['force']>
+  isLoading: RefObject<LoadingContextProps["isLoading"]>
+  start: RefObject<LoadingContextProps["start"]>
+  finish: RefObject<LoadingContextProps["finish"]>
+  update: RefObject<LoadingContextProps["update"]>
+  force: RefObject<LoadingContextProps["force"]>
 }
 
 type ControlRefs = MutableRefObject<Refs>
 
 const createLoadingRefs = (): Refs => ({
-  isLoading: createRef<LoadingContextProps['isLoading']>(),
-  start: createRef<LoadingContextProps['start']>(),
-  finish: createRef<LoadingContextProps['finish']>(),
-  update: createRef<LoadingContextProps['update']>(),
-  force: createRef<LoadingContextProps['force']>(),
+  isLoading: createRef<LoadingContextProps["isLoading"]>(),
+  start: createRef<LoadingContextProps["start"]>(),
+  finish: createRef<LoadingContextProps["finish"]>(),
+  update: createRef<LoadingContextProps["update"]>(),
+  force: createRef<LoadingContextProps["force"]>(),
 })
 
 const createLoadingFunc = (refs: ControlRefs): LoadingContextProps => ({
@@ -310,14 +310,14 @@ type RenderProps = {
 } & LoadingComponentProps
 
 const Render: FC<RenderProps> = ({ component, ...props }) => {
-  if (typeof component === 'function') {
+  if (typeof component === "function") {
     return component(props) as JSX.Element
   } else {
     return <></>
   }
 }
 
-type MessageProps = { message: ReactNode } & HTMLUIProps<'p'>
+type MessageProps = { message: ReactNode } & HTMLUIProps<"p">
 
 const Message: FC<MessageProps> = ({ message, ...rest }) => {
   return message ? (
@@ -329,14 +329,14 @@ const Message: FC<MessageProps> = ({ message, ...rest }) => {
   ) : null
 }
 
-const getVariants = (type: 'fade' | 'scaleFade' = 'fade'): MotionVariants => ({
+const getVariants = (type: "fade" | "scaleFade" = "fade"): MotionVariants => ({
   initial: {
     opacity: 0,
-    scale: type === 'scaleFade' ? 0.95 : undefined,
+    scale: type === "scaleFade" ? 0.95 : undefined,
   },
   animate: {
     opacity: 1,
-    scale: type === 'scaleFade' ? 1 : undefined,
+    scale: type === "scaleFade" ? 1 : undefined,
     transition: {
       duration: 0.4,
       ease: [0.4, 0, 0.2, 1],
@@ -344,7 +344,7 @@ const getVariants = (type: 'fade' | 'scaleFade' = 'fade'): MotionVariants => ({
   },
   exit: {
     opacity: 0,
-    scale: type === 'scaleFade' ? 0.95 : undefined,
+    scale: type === "scaleFade" ? 0.95 : undefined,
     transition: {
       duration: 0.4,
       ease: [0.4, 0, 1, 1],
@@ -353,30 +353,30 @@ const getVariants = (type: 'fade' | 'scaleFade' = 'fade'): MotionVariants => ({
 })
 
 const getOverlayStyle = (
-  type: 'fill' | 'transparent' = 'fill',
+  type: "fill" | "transparent" = "fill",
 ): CSSUIObject => ({
-  position: 'fixed',
+  position: "fixed",
   top: 0,
   right: 0,
   bottom: 0,
   left: 0,
-  zIndex: 'beerus',
-  bg: type === 'fill' ? ['white', 'black'] : 'blackAlpha.600',
-  w: '100vw',
-  h: '100vh',
-  p: 'md',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  zIndex: "beerus",
+  bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
+  w: "100vw",
+  h: "100vh",
+  p: "md",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 })
 
 const getMotionProps = (
   initialState: boolean | undefined,
-  type: 'fade' | 'scaleFade' = 'fade',
+  type: "fade" | "scaleFade" = "fade",
 ) => ({
-  initial: initialState ? false : 'initial',
-  animate: 'animate',
-  exit: 'exit',
+  initial: initialState ? false : "initial",
+  animate: "animate",
+  exit: "exit",
   variants: getVariants(type),
 })
 
@@ -390,24 +390,24 @@ const ScreenComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      maxW: 'md',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 'sm',
+      maxW: "md",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "sm",
     }
 
     useTimeout(onFinish, duration)
 
     return (
       <Motion
-        className='ui-loading-screen'
+        className="ui-loading-screen"
         {...getMotionProps(initialState)}
         __css={getOverlayStyle()}
       >
         <ui.div __css={css}>
-          <Loading size='6xl' {...icon} />
+          <Loading size="6xl" {...icon} />
           <Message message={message} noOfLines={3} {...text} />
         </ui.div>
       </Motion>
@@ -415,7 +415,7 @@ const ScreenComponent = memo(
   },
 )
 
-ScreenComponent.displayName = 'ScreenComponent'
+ScreenComponent.displayName = "ScreenComponent"
 
 const PageComponent = memo(
   ({
@@ -427,33 +427,33 @@ const PageComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      bg: ['white', 'black'],
-      maxW: 'md',
-      p: 'md',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 'sm',
-      rounded: 'md',
-      boxShadow: ['lg', 'dark-lg'],
+      bg: ["white", "black"],
+      maxW: "md",
+      p: "md",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "sm",
+      rounded: "md",
+      boxShadow: ["lg", "dark-lg"],
     }
 
     useTimeout(onFinish, duration)
 
     return (
       <Motion
-        className='ui-loading-page'
+        className="ui-loading-page"
         {...getMotionProps(initialState)}
-        __css={getOverlayStyle('transparent')}
+        __css={getOverlayStyle("transparent")}
       >
         <ui.div
           as={motion.div}
-          className='ui-loading-page__inner'
-          {...getMotionProps(initialState, 'scaleFade')}
+          className="ui-loading-page__inner"
+          {...getMotionProps(initialState, "scaleFade")}
           __css={css}
         >
-          <Loading size='6xl' {...icon} />
+          <Loading size="6xl" {...icon} />
           <Message message={message} noOfLines={3} {...text} />
         </ui.div>
       </Motion>
@@ -461,7 +461,7 @@ const PageComponent = memo(
   },
 )
 
-PageComponent.displayName = 'PageComponent'
+PageComponent.displayName = "PageComponent"
 
 const BackgroundComponent = memo(
   ({
@@ -473,37 +473,37 @@ const BackgroundComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      position: 'fixed',
-      right: 'md',
-      bottom: 'md',
-      zIndex: 'beerus',
-      bg: ['white', 'black'],
-      maxW: 'sm',
-      p: 'sm',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 'sm',
-      rounded: 'md',
-      boxShadow: ['3xl', 'dark-lg'],
+      position: "fixed",
+      right: "md",
+      bottom: "md",
+      zIndex: "beerus",
+      bg: ["white", "black"],
+      maxW: "sm",
+      p: "sm",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "sm",
+      rounded: "md",
+      boxShadow: ["3xl", "dark-lg"],
     }
 
     useTimeout(onFinish, duration)
 
     return (
       <Motion
-        className='ui-loading-background'
-        {...getMotionProps(initialState, 'scaleFade')}
+        className="ui-loading-background"
+        {...getMotionProps(initialState, "scaleFade")}
         __css={css}
       >
-        <Loading size='xl' {...icon} />
-        <Message message={message} fontSize='sm' noOfLines={1} {...text} />
+        <Loading size="xl" {...icon} />
+        <Message message={message} fontSize="sm" noOfLines={1} {...text} />
       </Motion>
     )
   },
 )
 
-BackgroundComponent.displayName = 'BackgroundComponent'
+BackgroundComponent.displayName = "BackgroundComponent"
 
 export const useLoading = (): LoadingContext => {
   const { screen, page, background, custom } = useContext(LoadingContext)

@@ -8,13 +8,13 @@ import {
   useMultiComponentStyle,
   ColorModeToken,
   CSS,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   FormControlOptions,
   useFormControlProps,
   formControlProperties,
-} from '@yamada-ui/form-control'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
+} from "@yamada-ui/form-control"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   assignRef,
   cx,
@@ -24,7 +24,7 @@ import {
   mergeRefs,
   omitObject,
   pickObject,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   ChangeEvent,
   cloneElement,
@@ -36,17 +36,17 @@ import {
   useCallback,
   useMemo,
   useRef,
-} from 'react'
+} from "react"
 
 type FileInputOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * The value of the file input.
    */
@@ -80,19 +80,19 @@ type FileInputOptions = {
   resetRef?: ForwardedRef<() => void>
 }
 
-type InputProps = Partial<Pick<HTMLInputElement, 'accept' | 'multiple'>>
+type InputProps = Partial<Pick<HTMLInputElement, "accept" | "multiple">>
 
-export type FileInputProps = Omit<HTMLUIProps<'div'>, 'onChange' | 'children'> &
-  ThemeProps<'Input'> &
+export type FileInputProps = Omit<HTMLUIProps<"div">, "onChange" | "children"> &
+  ThemeProps<"Input"> &
   InputProps &
   FileInputOptions &
   FormControlOptions
 
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
-export const FileInput = forwardRef<FileInputProps, 'input'>(
+export const FileInput = forwardRef<FileInputProps, "input">(
   ({ children, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('FileInput', props)
+    const [styles, mergedProps] = useMultiComponentStyle("FileInput", props)
     const {
       className,
       id,
@@ -106,7 +106,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
       component,
       format = defaultFormat,
       noOfLines = 1,
-      separator = ',',
+      separator = ",",
       resetRef,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
@@ -141,7 +141,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
     )
 
     const onReset = useCallback(() => {
-      if (inputRef.current) inputRef.current.value = ''
+      if (inputRef.current) inputRef.current.value = ""
 
       setValues(null)
     }, [setValues])
@@ -161,9 +161,9 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
               const el = component({ value, index })
 
               const style: CSSProperties = {
-                marginBlockStart: '0.125rem',
-                marginBlockEnd: '0.125rem',
-                marginInlineEnd: '0.25rem',
+                marginBlockStart: "0.125rem",
+                marginBlockEnd: "0.125rem",
+                marginInlineEnd: "0.25rem",
               }
 
               return el ? cloneElement(el as ReactElement, { style }) : null
@@ -177,7 +177,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
               const isLast = values.length === index + 1
 
               return (
-                <ui.span key={index} display='inline-block' me='0.25rem'>
+                <ui.span key={index} display="inline-block" me="0.25rem">
                   {format(value, index)}
                   {!isLast ? separator : null}
                 </ui.span>
@@ -189,9 +189,9 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
     }, [children, format, noOfLines, placeholder, separator, component, values])
 
     const css: CSSUIObject = {
-      display: 'flex',
-      alignItems: 'center',
-      cursor: !readOnly ? 'pointer' : 'auto',
+      display: "flex",
+      alignItems: "center",
+      cursor: !readOnly ? "pointer" : "auto",
       ...styles.field,
     }
 
@@ -199,7 +199,7 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
       <>
         <ui.input
           ref={mergeRefs(inputRef, ref)}
-          type='file'
+          type="file"
           tabIndex={-1}
           id={id}
           name={name}
@@ -207,15 +207,15 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
           accept={accept}
           multiple={multiple}
           style={{
-            border: '0px',
-            clip: 'rect(0px, 0px, 0px, 0px)',
-            height: '1px',
-            width: '1px',
-            margin: '-1px',
-            padding: '0px',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            position: 'absolute',
+            border: "0px",
+            clip: "rect(0px, 0px, 0px, 0px)",
+            height: "1px",
+            width: "1px",
+            margin: "-1px",
+            padding: "0px",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            position: "absolute",
           }}
           onChange={onChange}
           {...pickObject(rest, formControlProperties)}
@@ -223,9 +223,9 @@ export const FileInput = forwardRef<FileInputProps, 'input'>(
 
         <ui.div
           ref={ref}
-          className={cx('ui-file-input', className)}
-          py={values?.length && component ? '0.125rem' : undefined}
-          {...omitObject(rest, ['onChange'])}
+          className={cx("ui-file-input", className)}
+          py={values?.length && component ? "0.125rem" : undefined}
+          {...omitObject(rest, ["onChange"])}
           __css={css}
           tabIndex={0}
           data-placeholder={dataAttr(!values?.length)}

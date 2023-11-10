@@ -1,8 +1,8 @@
-import { writeFile } from 'fs/promises'
-import { findPackages } from 'find-packages'
+import { writeFile } from "fs/promises"
+import { findPackages } from "find-packages"
 
 const main = async () => {
-  const packages = await findPackages('packages/components')
+  const packages = await findPackages("packages/components")
 
   await Promise.allSettled(
     packages.map(async ({ dir, manifest }) => {

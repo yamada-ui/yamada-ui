@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   Box,
   Heading,
@@ -9,13 +9,13 @@ import {
   useScroll,
   useSpring,
   useTransform,
-} from '@yamada-ui/react'
-import { useMemo, useRef } from 'react'
+} from "@yamada-ui/react"
+import { useMemo, useRef } from "react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: 'Components / Motion / Scroll',
+  title: "Components / Motion / Scroll",
   component: Motion,
 }
 
@@ -27,14 +27,14 @@ export const basic: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        mt='100vh'
+        mt="100vh"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        onViewportEnter={(entry) => console.log('Element entries', entry)}
-        bg='primary'
-        color='white'
-        p='md'
-        rounded='md'
+        onViewportEnter={(entry) => console.log("Element entries", entry)}
+        bg="primary"
+        color="white"
+        p="md"
+        rounded="md"
       >
         Motion
       </Motion>
@@ -48,15 +48,15 @@ export const withTransition: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        mt='100vh'
+        mt="100vh"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        onViewportEnter={(entry) => console.log('Element entries', entry)}
-        bg='primary'
-        color='white'
-        p='md'
-        rounded='md'
+        onViewportEnter={(entry) => console.log("Element entries", entry)}
+        bg="primary"
+        color="white"
+        p="md"
+        rounded="md"
       >
         Motion
       </Motion>
@@ -70,15 +70,15 @@ export const withOnce: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        mt='100vh'
+        mt="100vh"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        bg='primary'
-        color='white'
-        p='md'
-        rounded='md'
+        bg="primary"
+        color="white"
+        p="md"
+        rounded="md"
       >
         Motion
       </Motion>
@@ -94,23 +94,23 @@ export const useViewport: Story = () => {
 
       <Box
         ref={scrollRef}
-        overflow='scroll'
-        w='full'
-        h='xs'
-        p='md'
-        borderWidth='1px'
-        rounded='md'
+        overflow="scroll"
+        w="full"
+        h="xs"
+        p="md"
+        borderWidth="1px"
+        rounded="md"
       >
         <Motion
-          mt='96'
+          mt="96"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ root: scrollRef, margin: '50px 0px 0px 0px' }}
+          viewport={{ root: scrollRef, margin: "50px 0px 0px 0px" }}
           transition={{ duration: 2 }}
-          bg='primary'
-          color='white'
-          p='md'
-          rounded='md'
+          bg="primary"
+          color="white"
+          p="md"
+          rounded="md"
         >
           Motion
         </Motion>
@@ -124,29 +124,29 @@ export const useHook: Story = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 
   return (
-    <Box w='full' h='300vh'>
+    <Box w="full" h="300vh">
       <Box
-        w='2xs'
-        h='2xs'
-        position='fixed'
-        top='50%'
-        left='50%'
-        transform='translate(-50%, -50%)'
+        w="2xs"
+        h="2xs"
+        position="fixed"
+        top="50%"
+        left="50%"
+        transform="translate(-50%, -50%)"
       >
         <Motion
           style={{ scale }}
-          w='full'
-          h='full'
-          overflow='hidden'
-          bg={['blackAlpha.200', 'whiteAlpha.200']}
-          rounded='3xl'
+          w="full"
+          h="full"
+          overflow="hidden"
+          bg={["blackAlpha.200", "whiteAlpha.200"]}
+          rounded="3xl"
         >
           <Motion
             style={{ scaleY: scrollYProgress }}
-            w='inherit'
-            h='inherit'
-            bg='primary'
-            transformOrigin='50% 100%'
+            w="inherit"
+            h="inherit"
+            bg="primary"
+            transformOrigin="50% 100%"
           />
         </Motion>
       </Box>
@@ -166,13 +166,13 @@ export const customScrollBar: Story = () => {
     <>
       <Motion
         style={{ scaleX }}
-        position='fixed'
-        top='0'
-        left='0'
-        right='0'
-        h='3'
-        bg='primary'
-        transformOrigin='0%'
+        position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        h="3"
+        bg="primary"
+        transformOrigin="0%"
       />
 
       <Text>
@@ -276,7 +276,7 @@ export const withVariants: Story = () => {
         y: 50,
         rotate: -10,
         transition: {
-          type: 'spring',
+          type: "spring",
           bounce: 0.4,
           duration: 0.8,
         },
@@ -287,14 +287,14 @@ export const withVariants: Story = () => {
 
   const foods: [string, number, number][] = useMemo(
     () => [
-      ['🍅', 340, 10],
-      ['🍊', 20, 40],
-      ['🍋', 60, 90],
-      ['🍐', 80, 120],
-      ['🍏', 100, 140],
-      ['🫐', 205, 245],
-      ['🍆', 260, 290],
-      ['🍇', 290, 320],
+      ["🍅", 340, 10],
+      ["🍊", 20, 40],
+      ["🍋", 60, 90],
+      ["🍐", 80, 120],
+      ["🍏", 100, 140],
+      ["🫐", 205, 245],
+      ["🍆", 260, 290],
+      ["🍇", 290, 320],
     ],
     [],
   )
@@ -302,44 +302,44 @@ export const withVariants: Story = () => {
   const hue = (h: number) => `hsl(${h}, 100%, 50%)`
 
   return (
-    <VStack maxW='500px' mx='auto' pb='200px'>
+    <VStack maxW="500px" mx="auto" pb="200px">
       {foods.map(([emoji, hueA, hueB], index) => (
         <Motion
           key={index}
-          initial='offscreen'
-          whileInView='onscreen'
+          initial="offscreen"
+          whileInView="onscreen"
           viewport={{ once: true, amount: 0.8 }}
-          overflow='hidden'
-          display='flex'
-          placeContent='center'
-          placeItems='center'
-          position='relative'
-          pt='20px'
-          mb='-120px'
+          overflow="hidden"
+          display="flex"
+          placeContent="center"
+          placeItems="center"
+          position="relative"
+          pt="20px"
+          mb="-120px"
         >
           <Box
-            position='absolute'
-            top='0'
-            left='0'
-            right='0'
-            bottom='0'
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
             clipPath='path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")'
             bg={`linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`}
           />
 
           <Motion
-            className='card'
+            className="card"
             variants={card}
-            fontSize='164px'
-            w='300px'
-            h='430px'
-            display='flex'
-            placeContent='center'
-            placeItems='center'
-            bg='white'
-            rounded='20px'
-            boxShadow='0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075), 0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075), 0 0 16px hsl(0deg 0% 0% / 0.075)'
-            transformOrigin='10% 60%'
+            fontSize="164px"
+            w="300px"
+            h="430px"
+            display="flex"
+            placeContent="center"
+            placeItems="center"
+            bg="white"
+            rounded="20px"
+            boxShadow="0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075), 0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075), 0 0 16px hsl(0deg 0% 0% / 0.075)"
+            transformOrigin="10% 60%"
           >
             {emoji}
           </Motion>

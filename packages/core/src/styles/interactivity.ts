@@ -1,6 +1,6 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const interactivity: Configs = {
   appearance: true,
@@ -10,7 +10,7 @@ export const interactivity: Configs = {
   pointerEvents: true,
   outline: true,
   outlineOffset: true,
-  outlineColor: configs.color('outlineColor'),
+  outlineColor: configs.color("outlineColor"),
 }
 
 export type InteractivityProps = {
@@ -45,5 +45,5 @@ export type InteractivityProps = {
   /**
    * The CSS `outline-color` property.
    */
-  outlineColor?: Token<CSS.Property.Color, 'colors'>
+  outlineColor?: Token<CSS.Property.Color, "colors">
 }

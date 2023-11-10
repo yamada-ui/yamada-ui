@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react'
+import { Meta } from "@storybook/react"
 import {
   Button,
   Editable,
@@ -7,10 +7,10 @@ import {
   HStack,
   Input,
   useClipboard,
-} from '@yamada-ui/react'
+} from "@yamada-ui/react"
 
 const meta: Meta = {
-  title: 'Hooks / useClipboard',
+  title: "Hooks / useClipboard",
 }
 
 export default meta
@@ -20,17 +20,17 @@ export const basic = () => {
 
   return (
     <>
-      <HStack gap='md'>
+      <HStack gap="md">
         <Input
-          placeholder='text to be copied...'
+          placeholder="text to be copied..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button onClick={onCopy}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
-      <Editable placeholder='Paste here'>
-        <EditablePreview width='full' />
+      <Editable placeholder="Paste here">
+        <EditablePreview width="full" />
         <EditableInput />
       </Editable>
     </>
@@ -38,21 +38,21 @@ export const basic = () => {
 }
 
 export const withTimeout = () => {
-  const { onCopy, value, setValue, hasCopied } = useClipboard('', 5000)
+  const { onCopy, value, setValue, hasCopied } = useClipboard("", 5000)
 
   return (
     <>
-      <HStack gap='md'>
+      <HStack gap="md">
         <Input
-          placeholder='text to be copied...'
+          placeholder="text to be copied..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button onClick={onCopy}>{hasCopied ? 'Copied!' : 'Copy'}</Button>
+        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
-      <Editable placeholder='Paste here'>
-        <EditablePreview width='full' />
+      <Editable placeholder="Paste here">
+        <EditablePreview width="full" />
         <EditableInput />
       </Editable>
     </>
@@ -62,13 +62,13 @@ export const withTimeout = () => {
 export const directCopy = () => {
   const { onCopy, hasCopied } = useClipboard()
 
-  const value = '孫悟空'
+  const value = "孫悟空"
 
   return (
-    <HStack gap='md'>
+    <HStack gap="md">
       <Input value={value} isReadOnly />
       <Button onClick={() => onCopy(value)}>
-        {hasCopied ? 'Copied!' : 'Copy'}
+        {hasCopied ? "Copied!" : "Copy"}
       </Button>
     </HStack>
   )

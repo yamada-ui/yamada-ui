@@ -1,4 +1,4 @@
-import { noop, useSafeLayoutEffect } from '@yamada-ui/utils'
+import { noop, useSafeLayoutEffect } from "@yamada-ui/utils"
 import {
   createContext,
   FC,
@@ -8,27 +8,27 @@ import {
   useMemo,
   useState,
   useContext,
-} from 'react'
-import { ColorMode } from '../css'
-import { ThemeConfig } from '../theme.types'
-import { colorModeManager, ColorModeManager } from './color-mode-manager'
-import { getColorModeUtils } from './color-mode-utils'
+} from "react"
+import { ColorMode } from "../css"
+import { ThemeConfig } from "../theme.types"
+import { colorModeManager, ColorModeManager } from "./color-mode-manager"
+import { getColorModeUtils } from "./color-mode-utils"
 
 const { localStorage } = colorModeManager
 
 type ColorModeContext = {
   forced?: boolean
   colorMode: ColorMode
-  internalColorMode: ColorMode | 'system'
-  changeColorMode: (colorMode: ColorMode | 'system') => void
+  internalColorMode: ColorMode | "system"
+  changeColorMode: (colorMode: ColorMode | "system") => void
   toggleColorMode: () => void
 }
 
 const getColorMode = (
   manager: ColorModeManager,
-  fallback: ColorMode | 'system',
+  fallback: ColorMode | "system",
 ) =>
-  manager.type === 'cookie' && manager.ssr ? manager.get(fallback) : fallback
+  manager.type === "cookie" && manager.ssr ? manager.get(fallback) : fallback
 
 export const ColorModeContext = createContext({} as ColorModeContext)
 
@@ -42,10 +42,10 @@ export type ColorModeProviderProps = {
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   colorMode: defaultColorMode,
   colorModeManager = localStorage,
-  config: { initialColorMode = 'light', disableTransitionOnChange = true } = {},
+  config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
   children,
 }) => {
-  const [colorMode, setColorMode] = useState<ColorMode | 'system'>(() =>
+  const [colorMode, setColorMode] = useState<ColorMode | "system">(() =>
     getColorMode(colorModeManager, initialColorMode),
   )
   const [systemColorMode, setSystemColorMode] = useState<ColorMode | undefined>(
@@ -53,9 +53,9 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 
   const defaultResolvedColorMode =
-    initialColorMode === 'dark' ? 'dark' : 'light'
+    initialColorMode === "dark" ? "dark" : "light"
   const resolvedColorMode =
-    colorMode === 'system'
+    colorMode === "system"
       ? systemColorMode
         ? systemColorMode
         : defaultResolvedColorMode
@@ -67,11 +67,11 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 
   const changeColorMode = useCallback(
-    (colorMode: ColorMode | 'system'): void => {
-      const resolved = colorMode === 'system' ? getSystemColorMode() : colorMode
+    (colorMode: ColorMode | "system"): void => {
+      const resolved = colorMode === "system" ? getSystemColorMode() : colorMode
 
       setColorMode(colorMode)
-      setClassName(resolved === 'dark')
+      setClassName(resolved === "dark")
       setDataset(resolved)
 
       colorModeManager.set(colorMode)
@@ -83,16 +83,16 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     (systemColorMode: ColorMode): void => {
       setSystemColorMode(systemColorMode)
 
-      if (colorMode !== 'system') return
+      if (colorMode !== "system") return
 
-      setClassName(systemColorMode === 'dark')
+      setClassName(systemColorMode === "dark")
       setDataset(systemColorMode)
     },
     [colorMode, setClassName, setDataset],
   )
 
   const toggleColorMode = useCallback((): void => {
-    changeColorMode(resolvedColorMode === 'dark' ? 'light' : 'dark')
+    changeColorMode(resolvedColorMode === "dark" ? "light" : "dark")
   }, [changeColorMode, resolvedColorMode])
 
   useSafeLayoutEffect(() => {
@@ -112,7 +112,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   const context = useMemo(
     () => ({
       colorMode: defaultColorMode ?? (resolvedColorMode as ColorMode),
-      internalColorMode: colorMode as ColorMode | 'system',
+      internalColorMode: colorMode as ColorMode | "system",
       changeColorMode: defaultColorMode ? noop : changeColorMode,
       toggleColorMode: defaultColorMode ? noop : toggleColorMode,
       forced: defaultColorMode !== undefined,
@@ -137,7 +137,7 @@ export const useColorMode = () => {
   const context = useContext(ColorModeContext)
 
   if (context === undefined)
-    throw new Error('useColorMode must be used within a ColorModeProvider')
+    throw new Error("useColorMode must be used within a ColorModeProvider")
 
   return context
 }
@@ -148,5 +148,5 @@ export const useColorModeValue = <L extends any, D extends any>(
 ): L | D => {
   const { colorMode } = useColorMode()
 
-  return colorMode === 'light' ? light : dark
+  return colorMode === "light" ? light : dark
 }

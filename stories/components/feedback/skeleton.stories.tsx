@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   Avatar,
   Heading,
@@ -6,13 +6,13 @@ import {
   SkeletonCircle,
   SkeletonText,
   Text,
-} from '@yamada-ui/react'
-import { useEffect, useState } from 'react'
+} from "@yamada-ui/react"
+import { useEffect, useState } from "react"
 
 type Story = StoryFn<typeof Skeleton>
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Components / Feedback / Skeleton',
+  title: "Components / Feedback / Skeleton",
   component: Skeleton,
 }
 
@@ -38,11 +38,11 @@ export const basic: Story = () => {
 export const withColor: Story = () => {
   return (
     <>
-      <Skeleton startColor='pink.500' endColor='orange.500' />
+      <Skeleton startColor="pink.500" endColor="orange.500" />
 
-      <SkeletonCircle startColor='pink.500' endColor='orange.500' />
+      <SkeletonCircle startColor="pink.500" endColor="orange.500" />
 
-      <SkeletonText startColor='pink.500' endColor='orange.500' />
+      <SkeletonText startColor="pink.500" endColor="orange.500" />
     </>
   )
 }
@@ -117,7 +117,7 @@ export const withFadeDuration: Story = () => {
       </Skeleton>
 
       <SkeletonCircle isLoaded={isLoaded} fadeDuration={2}>
-        <Avatar name='Hirotomo Yamada' />
+        <Avatar name="Hirotomo Yamada" />
       </SkeletonCircle>
 
       <SkeletonText isLoaded={isLoaded} fadeDuration={2}>

@@ -1,11 +1,11 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const grid: Configs = {
-  gridGap: configs.space('gridGap'),
-  gridColumnGap: configs.space('gridColumnGap'),
-  gridRowGap: configs.space('gridRowGap'),
+  gridGap: configs.space("gridGap"),
+  gridColumnGap: configs.space("gridColumnGap"),
+  gridRowGap: configs.space("gridRowGap"),
   gridColumn: true,
   gridRow: true,
   gridAutoFlow: true,
@@ -26,15 +26,15 @@ export type GridProps = {
   /**
    * The CSS `grid-gap` property.
    */
-  gridGap?: Token<CSS.Property.GridGap | number, 'spaces'>
+  gridGap?: Token<CSS.Property.GridGap | number, "spaces">
   /**
    * The CSS `grid-column-gap` property.
    */
-  gridColumnGap?: Token<CSS.Property.GridColumnGap | number, 'spaces'>
+  gridColumnGap?: Token<CSS.Property.GridColumnGap | number, "spaces">
   /**
    * The CSS `grid-row-gap` property.
    */
-  gridRowGap?: Token<CSS.Property.GridRowGap | number, 'spaces'>
+  gridRowGap?: Token<CSS.Property.GridRowGap | number, "spaces">
   /**
    * The CSS `grid-column-start` property.
    */

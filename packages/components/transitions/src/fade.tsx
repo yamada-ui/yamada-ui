@@ -1,4 +1,4 @@
-import { ui, HTMLUIProps, forwardRef, CSSUIObject } from '@yamada-ui/core'
+import { ui, HTMLUIProps, forwardRef, CSSUIObject } from "@yamada-ui/core"
 import {
   motion,
   HTMLMotionProps,
@@ -7,11 +7,11 @@ import {
   transitionExit,
   WithTransitionProps,
   MotionTransitionVariants,
-} from '@yamada-ui/motion'
-import { cx } from '@yamada-ui/utils'
+} from "@yamada-ui/motion"
+import { cx } from "@yamada-ui/utils"
 
 export type FadeProps = WithTransitionProps<
-  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+  HTMLUIProps<"div"> & HTMLMotionProps<"div">
 >
 
 const variants: MotionTransitionVariants = {
@@ -30,13 +30,13 @@ const variants: MotionTransitionVariants = {
 }
 
 export const fadeProps = {
-  initial: 'exit',
-  animate: 'enter',
-  exit: 'exit',
+  initial: "exit",
+  animate: "enter",
+  exit: "exit",
   variants,
 }
 
-export const Fade = forwardRef<FadeProps, 'div'>(
+export const Fade = forwardRef<FadeProps, "div">(
   (
     {
       unmountOnExit,
@@ -50,14 +50,14 @@ export const Fade = forwardRef<FadeProps, 'div'>(
     },
     ref,
   ) => {
-    const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
+    const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const custom = { transition, transitionEnd, delay, duration }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
     const css: CSSUIObject = {
-      w: '100%',
+      w: "100%",
     }
 
     return (
@@ -66,7 +66,7 @@ export const Fade = forwardRef<FadeProps, 'div'>(
           <ui.div
             as={motion.div}
             ref={ref}
-            className={cx('ui-fade', className)}
+            className={cx("ui-fade", className)}
             custom={custom}
             {...fadeProps}
             animate={animate}

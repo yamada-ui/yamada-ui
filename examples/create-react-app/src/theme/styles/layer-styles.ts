@@ -1,3 +1,3 @@
-import { LayerStyles } from '@yamada-ui/react'
+import { LayerStyles } from "@yamada-ui/react"
 
 export const layerStyles: LayerStyles = {}

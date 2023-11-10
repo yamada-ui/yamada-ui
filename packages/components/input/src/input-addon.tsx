@@ -1,6 +1,6 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useInputGroup } from './input-group'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useInputGroup } from "./input-group"
 
 type InputAddonOptions = {
   /**
@@ -8,34 +8,34 @@ type InputAddonOptions = {
    *
    * @default 'left'
    */
-  placement?: 'left' | 'right'
+  placement?: "left" | "right"
 }
 
-export type InputAddonProps = HTMLUIProps<'div'> & InputAddonOptions
+export type InputAddonProps = HTMLUIProps<"div"> & InputAddonOptions
 
-const InputAddon = forwardRef<InputAddonProps, 'div'>(
-  ({ className, placement = 'left', ...rest }, ref) => {
+const InputAddon = forwardRef<InputAddonProps, "div">(
+  ({ className, placement = "left", ...rest }, ref) => {
     const styles = useInputGroup()
 
     const placementStyles = {
       left: {
-        me: '-1px',
+        me: "-1px",
         roundedRight: 0,
-        borderEndColor: 'transparent',
+        borderEndColor: "transparent",
       },
       right: {
-        ms: '-1px',
+        ms: "-1px",
         roundedLeft: 0,
-        borderStartColor: 'transparent',
+        borderStartColor: "transparent",
       },
     }
 
     const css: CSSUIObject = {
-      flex: '0 0 auto',
-      w: 'auto',
-      display: 'flex',
-      alignItems: 'center',
-      whiteSpace: 'nowrap',
+      flex: "0 0 auto",
+      w: "auto",
+      display: "flex",
+      alignItems: "center",
+      whiteSpace: "nowrap",
       ...styles.addon,
       ...placementStyles[placement],
     }
@@ -43,7 +43,7 @@ const InputAddon = forwardRef<InputAddonProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-input__addon', className)}
+        className={cx("ui-input__addon", className)}
         __css={css}
         {...rest}
       />
@@ -51,26 +51,26 @@ const InputAddon = forwardRef<InputAddonProps, 'div'>(
   },
 )
 
-export const InputLeftAddon = forwardRef<InputAddonProps, 'div'>(
+export const InputLeftAddon = forwardRef<InputAddonProps, "div">(
   ({ className, ...rest }, ref) => {
     return (
       <InputAddon
         ref={ref}
-        className={cx('ui-input__addon--left', className)}
-        placement='left'
+        className={cx("ui-input__addon--left", className)}
+        placement="left"
         {...rest}
       />
     )
   },
 )
 
-export const InputRightAddon = forwardRef<InputAddonProps, 'div'>(
+export const InputRightAddon = forwardRef<InputAddonProps, "div">(
   ({ className, ...rest }, ref) => {
     return (
       <InputAddon
         ref={ref}
-        className={cx('ui-input__addon--right', className)}
-        placement='right'
+        className={cx("ui-input__addon--right", className)}
+        placement="right"
         {...rest}
       />
     )

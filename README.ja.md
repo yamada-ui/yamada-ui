@@ -96,7 +96,7 @@ $ pnpm add @yamada-ui/fontawesome
 1. パッケージで提供されている`UIProvider`を、あなたのアプリケーションをラップします。
 
 ```tsx
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = ({ children }) => {
   return <UIProvider>{children}</UIProvider>
@@ -110,7 +110,7 @@ export default App
 2. これで、以下のようにコンポーネントを使用できます。
 
 ```tsx
-import { Box, Text } from '@yamada-ui/react'
+import { Box, Text } from "@yamada-ui/react"
 
 const Example = () => {
   return (

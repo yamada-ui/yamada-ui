@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   Card,
   CardHeader,
@@ -10,12 +10,12 @@ import {
   Button,
   Image,
   VStack,
-} from '@yamada-ui/react'
+} from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Card>
 
 const meta: Meta<typeof Card> = {
-  title: 'Components / Data Display / Card',
+  title: "Components / Data Display / Card",
   component: Card,
 }
 
@@ -25,7 +25,7 @@ export const basic: Story = () => {
   return (
     <Card>
       <CardHeader>
-        <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+        <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
       </CardHeader>
 
       <CardBody>
@@ -41,9 +41,9 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Card size='sm'>
+      <Card size="sm">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -54,9 +54,9 @@ export const withSize: Story = () => {
         </CardBody>
       </Card>
 
-      <Card size='md'>
+      <Card size="md">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -67,9 +67,9 @@ export const withSize: Story = () => {
         </CardBody>
       </Card>
 
-      <Card size='normal'>
+      <Card size="normal">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -80,9 +80,9 @@ export const withSize: Story = () => {
         </CardBody>
       </Card>
 
-      <Card size='lg'>
+      <Card size="lg">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -99,9 +99,9 @@ export const withSize: Story = () => {
 export const withVarint: Story = () => {
   return (
     <>
-      <Card variant='elevated'>
+      <Card variant="elevated">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -112,9 +112,9 @@ export const withVarint: Story = () => {
         </CardBody>
       </Card>
 
-      <Card variant='outline'>
+      <Card variant="outline">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -125,9 +125,9 @@ export const withVarint: Story = () => {
         </CardBody>
       </Card>
 
-      <Card variant='subtle'>
+      <Card variant="subtle">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -138,9 +138,9 @@ export const withVarint: Story = () => {
         </CardBody>
       </Card>
 
-      <Card variant='solid'>
+      <Card variant="solid">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -151,9 +151,9 @@ export const withVarint: Story = () => {
         </CardBody>
       </Card>
 
-      <Card variant='unstyled'>
+      <Card variant="unstyled">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -170,246 +170,246 @@ export const withVarint: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <>
-      <Heading size='xl'>Subtle</Heading>
+      <Heading size="xl">Subtle</Heading>
 
-      <Grid w='full' templateColumns='repeat(4, 1fr)' gap='md'>
-        <Card variant='subtle' colorScheme='primary'>
+      <Grid w="full" templateColumns="repeat(4, 1fr)" gap="md">
+        <Card variant="subtle" colorScheme="primary">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='secondary'>
+        <Card variant="subtle" colorScheme="secondary">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='warning'>
+        <Card variant="subtle" colorScheme="warning">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='danger'>
+        <Card variant="subtle" colorScheme="danger">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='link'>
+        <Card variant="subtle" colorScheme="link">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='gray'>
+        <Card variant="subtle" colorScheme="gray">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='zinc'>
+        <Card variant="subtle" colorScheme="zinc">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='neutral'>
+        <Card variant="subtle" colorScheme="neutral">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='stone'>
+        <Card variant="subtle" colorScheme="stone">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='red'>
+        <Card variant="subtle" colorScheme="red">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='rose'>
+        <Card variant="subtle" colorScheme="rose">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='pink'>
+        <Card variant="subtle" colorScheme="pink">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='orange'>
+        <Card variant="subtle" colorScheme="orange">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='amber'>
+        <Card variant="subtle" colorScheme="amber">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='yellow'>
+        <Card variant="subtle" colorScheme="yellow">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='lime'>
+        <Card variant="subtle" colorScheme="lime">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='green'>
+        <Card variant="subtle" colorScheme="green">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='emerald'>
+        <Card variant="subtle" colorScheme="emerald">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='teal'>
+        <Card variant="subtle" colorScheme="teal">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='cyan'>
+        <Card variant="subtle" colorScheme="cyan">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='sky'>
+        <Card variant="subtle" colorScheme="sky">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='blue'>
+        <Card variant="subtle" colorScheme="blue">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='indigo'>
+        <Card variant="subtle" colorScheme="indigo">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='violet'>
+        <Card variant="subtle" colorScheme="violet">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='purple'>
+        <Card variant="subtle" colorScheme="purple">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='fuchsia'>
+        <Card variant="subtle" colorScheme="fuchsia">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='subtle' colorScheme='primary'>
+        <Card variant="subtle" colorScheme="primary">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
@@ -417,237 +417,237 @@ export const withColorScheme: Story = () => {
         </Card>
       </Grid>
 
-      <Heading size='xl'>Solid</Heading>
+      <Heading size="xl">Solid</Heading>
 
-      <Grid w='full' templateColumns='repeat(4, 1fr)' gap='md'>
-        <Card variant='solid' colorScheme='primary'>
+      <Grid w="full" templateColumns="repeat(4, 1fr)" gap="md">
+        <Card variant="solid" colorScheme="primary">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='secondary'>
+        <Card variant="solid" colorScheme="secondary">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='warning'>
+        <Card variant="solid" colorScheme="warning">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='danger'>
+        <Card variant="solid" colorScheme="danger">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='link'>
+        <Card variant="solid" colorScheme="link">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='gray'>
+        <Card variant="solid" colorScheme="gray">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='zinc'>
+        <Card variant="solid" colorScheme="zinc">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='neutral'>
+        <Card variant="solid" colorScheme="neutral">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='stone'>
+        <Card variant="solid" colorScheme="stone">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='red'>
+        <Card variant="solid" colorScheme="red">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='rose'>
+        <Card variant="solid" colorScheme="rose">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='pink'>
+        <Card variant="solid" colorScheme="pink">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='orange'>
+        <Card variant="solid" colorScheme="orange">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='amber'>
+        <Card variant="solid" colorScheme="amber">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='yellow'>
+        <Card variant="solid" colorScheme="yellow">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='lime'>
+        <Card variant="solid" colorScheme="lime">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='green'>
+        <Card variant="solid" colorScheme="green">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='emerald'>
+        <Card variant="solid" colorScheme="emerald">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='teal'>
+        <Card variant="solid" colorScheme="teal">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='cyan'>
+        <Card variant="solid" colorScheme="cyan">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='sky'>
+        <Card variant="solid" colorScheme="sky">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='blue'>
+        <Card variant="solid" colorScheme="blue">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='indigo'>
+        <Card variant="solid" colorScheme="indigo">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='violet'>
+        <Card variant="solid" colorScheme="violet">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='purple'>
+        <Card variant="solid" colorScheme="purple">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
           </CardBody>
         </Card>
 
-        <Card variant='solid' colorScheme='fuchsia'>
+        <Card variant="solid" colorScheme="fuchsia">
           <CardHeader>
-            <Heading size='md'>Primary</Heading>
+            <Heading size="md">Primary</Heading>
           </CardHeader>
           <CardBody>
             <Text>ColorScheme is Primary</Text>
@@ -660,17 +660,17 @@ export const withColorScheme: Story = () => {
 
 export const withImage: Story = () => {
   return (
-    <Card maxW='md'>
-      <CardHeader justifyContent='center'>
+    <Card maxW="md">
+      <CardHeader justifyContent="center">
         <Image
-          src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
-          w='full'
-          rounded='md'
+          src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+          w="full"
+          rounded="md"
         />
       </CardHeader>
 
       <CardBody>
-        <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+        <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
 
         <Text>
           『ドラゴンボール』（DRAGON
@@ -679,7 +679,7 @@ export const withImage: Story = () => {
       </CardBody>
 
       <CardFooter>
-        <Button colorScheme='primary'>Wikipadia</Button>
+        <Button colorScheme="primary">Wikipadia</Button>
       </CardFooter>
     </Card>
   )
@@ -688,19 +688,19 @@ export const withImage: Story = () => {
 export const horizonCard: Story = () => {
   return (
     <Card
-      direction={{ base: 'row', md: 'column' }}
-      overflow='hidden'
-      variant='outline'
+      direction={{ base: "row", md: "column" }}
+      overflow="hidden"
+      variant="outline"
     >
       <Image
-        src='https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg'
-        objectFit='cover'
-        maxW={{ base: '30%', md: '100%' }}
+        src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+        objectFit="cover"
+        maxW={{ base: "30%", md: "100%" }}
       />
 
-      <VStack gap='0'>
+      <VStack gap="0">
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -711,7 +711,7 @@ export const horizonCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </VStack>
     </Card>
@@ -720,10 +720,10 @@ export const horizonCard: Story = () => {
 
 export const multiCards: Story = () => {
   return (
-    <Grid templateColumns='repeat(auto-fill, minmax(320px, 1fr))' gap='md'>
+    <Grid templateColumns="repeat(auto-fill, minmax(320px, 1fr))" gap="md">
       <Card>
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -734,13 +734,13 @@ export const multiCards: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </Card>
 
       <Card>
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -751,13 +751,13 @@ export const multiCards: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </Card>
 
       <Card>
         <CardHeader>
-          <Heading size='md'>『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
         </CardHeader>
 
         <CardBody>
@@ -768,7 +768,7 @@ export const multiCards: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </CardFooter>
       </Card>
     </Grid>

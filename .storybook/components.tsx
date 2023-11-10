@@ -1,21 +1,21 @@
-import React, { FC, ReactNode, useEffect } from 'react'
-import { useDarkMode } from 'storybook-dark-mode'
+import React, { FC, ReactNode, useEffect } from "react"
+import { useDarkMode } from "storybook-dark-mode"
 import {
   Container,
   ContainerProps,
   UIProvider,
   useColorMode,
-} from '@yamada-ui/react'
+} from "@yamada-ui/react"
 import {
   DocsContainer as StorybookDocsContainer,
   DocsContainerProps,
-} from '@storybook/blocks'
-import { themes } from '@storybook/theming'
+} from "@storybook/blocks"
+import { themes } from "@storybook/theming"
 
 export const StoryProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <UIProvider>
-      <App p='md'>{children}</App>
+      <App p="md">{children}</App>
     </UIProvider>
   )
 }
@@ -23,14 +23,14 @@ export const StoryProvider: FC<{ children: ReactNode }> = ({ children }) => {
 const App: FC<ContainerProps> = ({ p, children }) => {
   const { changeColorMode } = useColorMode()
 
-  const colorMode = useDarkMode() ? 'dark' : 'light'
+  const colorMode = useDarkMode() ? "dark" : "light"
 
   useEffect(() => {
     changeColorMode(colorMode)
   }, [colorMode])
 
   return (
-    <Container p={p} gap='md' alignItems='flex-start'>
+    <Container p={p} gap="md" alignItems="flex-start">
       {children}
     </Container>
   )

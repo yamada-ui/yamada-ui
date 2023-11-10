@@ -1,21 +1,21 @@
-type Operator = '+' | '-' | '*' | '/'
+type Operator = "+" | "-" | "*" | "/"
 
 export type Operand = string | number
 
 const toExpression = (operator: Operator, ...args: Operand[]) =>
-  args.join(` ${operator} `).replace(/calc/g, '')
+  args.join(` ${operator} `).replace(/calc/g, "")
 
-const add = (...args: Operand[]) => `calc(${toExpression('+', ...args)})`
+const add = (...args: Operand[]) => `calc(${toExpression("+", ...args)})`
 
-const subtract = (...args: Operand[]) => `calc(${toExpression('-', ...args)})`
+const subtract = (...args: Operand[]) => `calc(${toExpression("-", ...args)})`
 
-const multiply = (...args: Operand[]) => `calc(${toExpression('*', ...args)})`
+const multiply = (...args: Operand[]) => `calc(${toExpression("*", ...args)})`
 
-const divide = (...args: Operand[]) => `calc(${toExpression('/', ...args)})`
+const divide = (...args: Operand[]) => `calc(${toExpression("/", ...args)})`
 
 const negate = (value: Operand) => {
   if (value != null && !isNaN(parseFloat(value.toString())))
-    return String(value).startsWith('-') ? String(value).slice(1) : `-${value}`
+    return String(value).startsWith("-") ? String(value).slice(1) : `-${value}`
 
   return multiply(value, -1)
 }

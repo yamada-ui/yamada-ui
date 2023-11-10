@@ -1,29 +1,29 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const color: Configs = {
-  color: configs.color('color'),
-  textColor: configs.color('color'),
-  fill: configs.color('fill'),
-  stroke: configs.color('stroke'),
+  color: configs.color("color"),
+  textColor: configs.color("color"),
+  fill: configs.color("fill"),
+  stroke: configs.color("stroke"),
 }
 
 export type ColorProps = {
   /**
    * The CSS `color` property.
    */
-  color?: Token<CSS.Property.Color, 'colors'>
+  color?: Token<CSS.Property.Color, "colors">
   /**
    * The CSS `color` property.
    */
-  textColor?: Token<CSS.Property.Color, 'colors'>
+  textColor?: Token<CSS.Property.Color, "colors">
   /**
    * The CSS `fill` property.
    */
-  fill?: Token<CSS.Property.Color, 'colors'>
+  fill?: Token<CSS.Property.Color, "colors">
   /**
    * The CSS `stroke` property.
    */
-  stroke?: Token<CSS.Property.Color, 'colors'>
+  stroke?: Token<CSS.Property.Color, "colors">
 }

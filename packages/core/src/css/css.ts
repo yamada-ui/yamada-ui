@@ -1,8 +1,8 @@
-import { isArray, isObject, merge, runIfFunc, Dict } from '@yamada-ui/utils'
-import { styles, pseudos, ConfigProps } from '../styles'
-import { StyledTheme } from '../theme.types'
-import { BreakpointQueries } from './breakpoint'
-import { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from './css.types'
+import { isArray, isObject, merge, runIfFunc, Dict } from "@yamada-ui/utils"
+import { styles, pseudos, ConfigProps } from "../styles"
+import { StyledTheme } from "../theme.types"
+import { BreakpointQueries } from "./breakpoint"
+import { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from "./css.types"
 
 const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],
@@ -17,7 +17,7 @@ const expandResponsive = (
   queries: BreakpointQueries,
 ): Dict =>
   Object.entries(value).reduce((css, [breakpointKey, breakpointValue]) => {
-    if (breakpointKey === 'base') {
+    if (breakpointKey === "base") {
       css[key] = breakpointValue
     } else {
       const query = queries.find(

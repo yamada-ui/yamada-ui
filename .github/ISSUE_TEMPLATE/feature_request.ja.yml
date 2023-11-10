@@ -1,43 +1,43 @@
-name: 'Feature Request (日本語)'
-description: '機能や強化をリクエストします'
-labels: ['enhancement']
+name: "Feature Request (日本語)"
+description: "機能や強化をリクエストします"
+labels: ["enhancement"]
 body:
-  - type: 'markdown'
+  - type: "markdown"
     attributes:
       value: |
         ご報告ありがとうございます！ 😎
 
         提出する前に、オープン/クローズされた問題を検索してください。
         以前に、誰かが同じことを尋ねているかもしれません！ 😎
-  - type: 'textarea'
-    id: 'description'
+  - type: "textarea"
+    id: "description"
     attributes:
-      label: '概要'
-      description: 'このリクエストを1,2行で説明してください。'
+      label: "概要"
+      description: "このリクエストを1,2行で説明してください。"
     validations:
       required: true
-  - type: 'textarea'
-    id: 'justification'
+  - type: "textarea"
+    id: "justification"
     attributes:
-      label: '問題の主張/正当化'
+      label: "問題の主張/正当化"
       description: |
         なぜ、これがYamada UIに追加されるべきか、理由を提供してください。
 
         この機能が問題に関連している場合は、それも言及してください。
     validations:
       required: true
-  - type: 'textarea'
-    id: 'proposed-solution'
+  - type: "textarea"
+    id: "proposed-solution"
     attributes:
-      label: '提案する解決策やAPI'
+      label: "提案する解決策やAPI"
       description: 理想的な設計やAPIへのコードスニペット、またはリンクを提供してください。
-  - type: 'textarea'
-    id: 'alternatives'
+  - type: "textarea"
+    id: "alternatives"
     attributes:
-      label: '代替案'
+      label: "代替案"
       description: このリクエストをする前に考慮した代替解決策は何ですか？
-  - type: 'textarea'
-    id: 'additional-information'
+  - type: "textarea"
+    id: "additional-information"
     attributes:
-      label: '追加情報'
+      label: "追加情報"
       description: スクリーンショット、ノート、アイデアへのリンクなどがある場合は、追加情報を提供してください。

@@ -1,13 +1,13 @@
-import type * as CSS from 'csstype'
-import { Token } from '../css'
-import { Configs, configs } from './config'
+import type * as CSS from "csstype"
+import { Token } from "../css"
+import { Configs, configs } from "./config"
 
 export const list: Configs = {
   listStyleType: true,
   listStylePosition: true,
-  listStylePos: configs.prop('listStylePosition'),
+  listStylePos: configs.prop("listStylePosition"),
   listStyleImage: true,
-  listStyleImg: configs.prop('listStyleImage'),
+  listStyleImg: configs.prop("listStyleImage"),
 }
 
 export type ListProps = {

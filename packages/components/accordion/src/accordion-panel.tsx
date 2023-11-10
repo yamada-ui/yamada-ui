@@ -1,17 +1,17 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { WithTransitionProps } from '@yamada-ui/motion'
-import { Collapse, CollapseProps } from '@yamada-ui/transitions'
-import { cx } from '@yamada-ui/utils'
-import { useAccordionContext } from './accordion'
-import { useAccordionItemContext } from './accordion-item'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { WithTransitionProps } from "@yamada-ui/motion"
+import { Collapse, CollapseProps } from "@yamada-ui/transitions"
+import { cx } from "@yamada-ui/utils"
+import { useAccordionContext } from "./accordion"
+import { useAccordionItemContext } from "./accordion-item"
 
 export type AccordionPanelProps = Omit<
-  WithTransitionProps<HTMLUIProps<'div'>>,
-  'isOpen'
+  WithTransitionProps<HTMLUIProps<"div">>,
+  "isOpen"
 > &
-  Pick<CollapseProps, 'animationOpacity' | 'startingHeight' | 'endingHeight'>
+  Pick<CollapseProps, "animationOpacity" | "startingHeight" | "endingHeight">
 
-export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
+export const AccordionPanel = forwardRef<AccordionPanelProps, "div">(
   (
     {
       className,
@@ -32,7 +32,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
     const { styles } = useAccordionContext()
 
     const resolvedChildren =
-      typeof children === 'string' ? <p>{children}</p> : children
+      typeof children === "string" ? <p>{children}</p> : children
 
     const css: CSSUIObject = { ...styles.panel }
 
@@ -52,7 +52,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
       >
         <ui.div
           {...getPanelProps(rest, ref)}
-          className={cx('ui-accordion__panel', className)}
+          className={cx("ui-accordion__panel", className)}
           __css={css}
         >
           {resolvedChildren}

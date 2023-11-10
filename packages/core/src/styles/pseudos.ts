@@ -1,4 +1,4 @@
-import { CSSUIObject } from '..'
+import { CSSUIObject } from ".."
 
 export type Pseudos = typeof pseudos
 
@@ -6,192 +6,192 @@ export const pseudos = {
   /**
    * The CSS `:hover` pseudo-class
    */
-  _hover: '&:hover, &[data-hover]',
+  _hover: "&:hover, &[data-hover]",
   /**
    * The CSS `:hover` pseudo-class
    */
-  _nativeHover: '&:hover',
+  _nativeHover: "&:hover",
   /**
    * The CSS `:active` pseudo-class
    */
-  _active: '&:active, &[data-active]',
+  _active: "&:active, &[data-active]",
   /**
    * The CSS `:active` pseudo-class
    */
-  _nativeActive: '&:active',
+  _nativeActive: "&:active",
   /**
    * The CSS `:focus` pseudo-class
    */
-  _focus: '&:focus, &[data-focus]',
+  _focus: "&:focus, &[data-focus]",
   /**
    * The CSS `:focus` pseudo-class
    */
-  _nativeFocus: '&:focus',
+  _nativeFocus: "&:focus",
   /**
    * The CSS `:focus-visible` pseudo-class
    */
-  _focusVisible: '&:focus-visible, &[data-focus-visible]',
+  _focusVisible: "&:focus-visible, &[data-focus-visible]",
   /**
    * The CSS `:focus-visible` pseudo-class
    */
-  _nativeFocusVisible: '&:focus-visible',
+  _nativeFocusVisible: "&:focus-visible",
   /**
    * The CSS `:disabled` pseudo-class
    */
-  _disabled: '&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]',
+  _disabled: "&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]",
   /**
    * The CSS `:read-only` pseudo-class
    */
-  _readOnly: '&[readonly], &[aria-readonly=true], &[data-readonly]',
+  _readOnly: "&[readonly], &[aria-readonly=true], &[data-readonly]",
   /**
    * The CSS `:indeterminate` pseudo-class
    */
   _indeterminate:
-    '&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]',
+    "&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]",
   /**
    * The CSS `:before` pseudo-element
    */
-  _before: '&::before',
+  _before: "&::before",
   /**
    * The CSS `:after` pseudo-element
    */
-  _after: '&::after',
+  _after: "&::after",
   /**
    * The CSS `:empty` pseudo-class
    */
-  _empty: '&:empty',
+  _empty: "&:empty",
   /**
    * Styles to apply when the ARIA attribute `aria-expanded` is `true`
    */
-  _expanded: '&[aria-expanded=true], &[data-expanded]',
+  _expanded: "&[aria-expanded=true], &[data-expanded]",
   /**
    * The CSS `:checked` pseudo-class
    */
-  _checked: '&:checked, &[data-checked], &[aria-checked=true]',
+  _checked: "&:checked, &[data-checked], &[aria-checked=true]",
   /**
    * The CSS `:invalid` pseudo-class
    */
-  _invalid: '&[data-invalid], &[aria-invalid=true]',
+  _invalid: "&[data-invalid], &[aria-invalid=true]",
   /**
    * The CSS `:invalid` pseudo-class
    */
-  _valid: '&:valid, &[data-valid], &[data-state=valid]',
+  _valid: "&:valid, &[data-valid], &[data-state=valid]",
   /**
    * Styles to apply when the ARIA attribute `aria-selected` is `true`
    */
-  _selected: '&[aria-selected=true], &[data-selected]',
+  _selected: "&[aria-selected=true], &[data-selected]",
   /**
    * The CSS `[hidden=true]` pseudo-class
    */
-  _hidden: '&[hidden], &[data-hidden]',
+  _hidden: "&[hidden], &[data-hidden]",
   /**
    * The CSS `:visited` pseudo-class
    */
-  _visited: '&:visited',
+  _visited: "&:visited",
   /**
    * The CSS `::placeholder` pseudo-element
    */
-  _placeholder: '&::placeholder, &[data-placeholder]',
+  _placeholder: "&::placeholder, &[data-placeholder]",
   /**
    * The CSS `:placeholder-shown` pseudo-class
    */
-  _placeholderShown: '&:placeholder-shown',
+  _placeholderShown: "&:placeholder-shown",
   /**
    * The CSS `:fullscreen` pseudo-class
    */
-  _fullScreen: '&:fullscreen',
+  _fullScreen: "&:fullscreen",
   /**
    * The CSS `::selection` pseudo-element
    */
-  _selection: '&::selection',
+  _selection: "&::selection",
   /**
    * The CSS `:nth-of-type(even)` pseudo-class
    */
-  _even: '&:nth-of-type(even)',
+  _even: "&:nth-of-type(even)",
   /**
    * The CSS `:nth-of-type(odd)` pseudo-class
    */
-  _odd: '&:nth-of-type(odd)',
+  _odd: "&:nth-of-type(odd)",
   /**
    * The CSS `:first-of-type` pseudo-class
    */
-  _first: '&:first-of-type',
+  _first: "&:first-of-type",
   /**
    * The CSS `:last-of-type` pseudo-class
    */
-  _last: '&:last-of-type',
+  _last: "&:last-of-type",
   /**
    * The CSS `:not(:first-of-type)` pseudo-class
    */
-  _notFirst: '&:not(:first-of-type)',
+  _notFirst: "&:not(:first-of-type)",
   /**
    * The CSS `:not(:last-of-type)` pseudo-class
    */
-  _notLast: '&:not(:last-of-type)',
+  _notLast: "&:not(:last-of-type)",
   /**
    * The CSS `:-webkit-autofill` pseudo-class
    */
-  _autofill: '&:-webkit-autofill',
-  _outside: '&[data-outside]',
-  _weekend: '&[data-weekend]',
-  _holiday: '&[data-holiday]',
-  _today: '&[data-today]',
-  _accept: '&[data-accept]',
-  _reject: '&[data-reject]',
-  _idle: '&[data-idle]',
-  _loading: '&[data-loading]',
+  _autofill: "&:-webkit-autofill",
+  _outside: "&[data-outside]",
+  _weekend: "&[data-weekend]",
+  _holiday: "&[data-holiday]",
+  _today: "&[data-today]",
+  _accept: "&[data-accept]",
+  _reject: "&[data-reject]",
+  _idle: "&[data-idle]",
+  _loading: "&[data-loading]",
   /**
    * The CSS `:vertical` pseudo-class
    */
-  _vertical: '&:vertical, &[data-orientation=vertical]',
+  _vertical: "&:vertical, &[data-orientation=vertical]",
   /**
    * The CSS `:horizontal` pseudo-class
    */
-  _horizontal: '&:horizontal, &[data-orientation=horizontal]',
+  _horizontal: "&:horizontal, &[data-orientation=horizontal]",
   /**
    * The CSS `::-webkit-scrollbar` pseudo-element
    */
-  _scrollbar: '&::-webkit-scrollbar',
+  _scrollbar: "&::-webkit-scrollbar",
   /**
    * The CSS `::-webkit-scrollbar-track` pseudo-element
    */
-  _scrollbarTrack: '&::-webkit-scrollbar-track',
+  _scrollbarTrack: "&::-webkit-scrollbar-track",
   /**
    * The CSS `::-webkit-scrollbar-track-piece` pseudo-element
    */
-  _scrollbarTrackPiece: '&::-webkit-scrollbar-track-piece',
+  _scrollbarTrackPiece: "&::-webkit-scrollbar-track-piece",
   /**
    * The CSS `::-webkit-scrollbar-thumb` pseudo-element
    */
-  _scrollbarThumb: '&::-webkit-scrollbar-thumb',
+  _scrollbarThumb: "&::-webkit-scrollbar-thumb",
   /**
    * The CSS `::-webkit-scrollbar-button` pseudo-element
    */
-  _scrollbarButton: '&::-webkit-scrollbar-button',
+  _scrollbarButton: "&::-webkit-scrollbar-button",
   /**
    * The CSS `::-webkit-scrollbar-corner` pseudo-element
    */
-  _scrollbarCorner: '&::-webkit-scrollbar-corner',
+  _scrollbarCorner: "&::-webkit-scrollbar-corner",
   /**
    * The CSS `@media (prefers-color-scheme: dark)` media feature
    */
-  _mediaDark: '@media (prefers-color-scheme: dark)',
+  _mediaDark: "@media (prefers-color-scheme: dark)",
   /**
    * The CSS `@media (prefers-reduced-motion: reduce)` media feature
    */
-  _mediaReduceMotion: '@media (prefers-reduced-motion: reduce)',
+  _mediaReduceMotion: "@media (prefers-reduced-motion: reduce)",
   /**
    * Styles for when `data-mode` is applied to any parent of
    * this component or element.
    */
   _dark:
-    '.ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]',
+    ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
    * Styles for when `data-mode` is applied to any parent of
    * this component or element.
    */
   _light:
-    '.ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]',
+    ".ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
 }
 
 export const pseudosProperties = Object.keys(

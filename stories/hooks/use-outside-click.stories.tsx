@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/react'
-import { Center, Button, useOutsideClick } from '@yamada-ui/react'
-import { useRef, useState } from 'react'
+import { Meta } from "@storybook/react"
+import { Center, Button, useOutsideClick } from "@yamada-ui/react"
+import { useRef, useState } from "react"
 
 const meta: Meta = {
-  title: 'Hooks / useOutsideClick',
+  title: "Hooks / useOutsideClick",
 }
 
 export default meta
@@ -20,7 +20,7 @@ export const basic = () => {
   return (
     <>
       {isOpen ? (
-        <Center ref={ref} h='10' px='4' bg='danger' color='white' rounded='md'>
+        <Center ref={ref} h="10" px="4" bg="danger" color="white" rounded="md">
           Hey, Click anywhere outside of me to close.
         </Center>
       ) : (

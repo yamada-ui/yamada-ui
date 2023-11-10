@@ -1,24 +1,24 @@
-import { Theme } from '../theme.types'
-import { THEME_SCHEME_STORAGE_KEY } from './theme-script'
+import { Theme } from "../theme.types"
+import { THEME_SCHEME_STORAGE_KEY } from "./theme-script"
 
 const hasSupport = !!globalThis?.document
 
 export type ThemeSchemeManager = {
-  type: 'cookie' | 'localStorage'
+  type: "cookie" | "localStorage"
   ssr?: boolean
-  get: (initialThemeScheme?: Theme['themeSchemes']) => Theme['themeSchemes']
-  set: (themeScheme: Theme['themeSchemes']) => void
+  get: (initialThemeScheme?: Theme["themeSchemes"]) => Theme["themeSchemes"]
+  set: (themeScheme: Theme["themeSchemes"]) => void
 }
 
 const createLocalStorage = (storageKey: string): ThemeSchemeManager => ({
   ssr: false,
-  type: 'localStorage',
-  get: (initThemeScheme = 'base') => {
+  type: "localStorage",
+  get: (initThemeScheme = "base") => {
     if (!hasSupport) return initThemeScheme
 
     try {
       const themeScheme = localStorage.getItem(storageKey) as
-        | Theme['themeSchemes']
+        | Theme["themeSchemes"]
         | null
 
       return themeScheme || initThemeScheme
@@ -37,10 +37,10 @@ const createLocalStorage = (storageKey: string): ThemeSchemeManager => ({
 const parseCookie = (
   cookie: string,
   key: string,
-): Theme['themeSchemes'] | undefined => {
+): Theme["themeSchemes"] | undefined => {
   const match = cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
-  return match?.[2] as Theme['themeSchemes'] | undefined
+  return match?.[2] as Theme["themeSchemes"] | undefined
 }
 
 const createCookieStorage = (
@@ -48,8 +48,8 @@ const createCookieStorage = (
   cookie?: string,
 ): ThemeSchemeManager => ({
   ssr: !!cookie,
-  type: 'cookie',
-  get: (initThemeScheme = 'base') => {
+  type: "cookie",
+  get: (initThemeScheme = "base") => {
     if (cookie) return parseCookie(cookie, key) || initThemeScheme
 
     if (!hasSupport) return initThemeScheme

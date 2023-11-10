@@ -1,10 +1,10 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { Text, Kbd } from '@yamada-ui/react'
+import { Meta, StoryFn } from "@storybook/react"
+import { Text, Kbd } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Kbd>
 
 const meta: Meta<typeof Kbd> = {
-  title: 'Components / Data Display / Kbd',
+  title: "Components / Data Display / Kbd",
   component: Kbd,
 }
 

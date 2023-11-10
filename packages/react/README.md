@@ -71,7 +71,7 @@ To get started with using the components, please follow the steps below:
 1. Wrap your application with the `UIProvider` provided
 
 ```tsx
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = ({ children }) => {
   return <UIProvider>{children}</UIProvider>
@@ -85,7 +85,7 @@ Yamada UI supports light and dark modes by default
 2. Now you can start using components like so
 
 ```tsx
-import { Box, Text } from '@yamada-ui/react'
+import { Box, Text } from "@yamada-ui/react"
 
 const Example = () => {
   return (

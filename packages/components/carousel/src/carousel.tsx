@@ -8,9 +8,9 @@ import {
   CSSUIObject,
   Token,
   CSSUIProps,
-} from '@yamada-ui/core'
-import { useToken } from '@yamada-ui/use-token'
-import { useValue } from '@yamada-ui/use-value'
+} from "@yamada-ui/core"
+import { useToken } from "@yamada-ui/use-token"
+import { useValue } from "@yamada-ui/use-value"
 import {
   cx,
   filterUndefined,
@@ -18,14 +18,14 @@ import {
   getValidChildren,
   omitChildren,
   pickChildren,
-} from '@yamada-ui/utils'
-import { cloneElement, FC } from 'react'
+} from "@yamada-ui/utils"
+import { cloneElement, FC } from "react"
 import {
   CarouselProvider,
   useCarousel,
   useCarouselContext,
   UseCarouselProps,
-} from './use-carousel'
+} from "./use-carousel"
 import {
   CarouselControlNext,
   CarouselControlPrev,
@@ -33,7 +33,7 @@ import {
   CarouselIndicators,
   CarouselIndicatorsProps,
   CarouselSlide,
-} from './'
+} from "./"
 
 type CarouselOptions = {
   /**
@@ -41,20 +41,20 @@ type CarouselOptions = {
    *
    * @default 'horizontal'
    */
-  orientation?: Token<'vertical' | 'horizontal'>
+  orientation?: Token<"vertical" | "horizontal">
   /**
    * The alignment of the carousel.
    *
    * @default 'center'
    */
-  align?: Token<'start' | 'center' | 'end' | number>
+  align?: Token<"start" | "center" | "end" | number>
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
    *
    * @default ''
    */
-  containScroll?: Token<'trimSnaps' | 'keepSnaps' | ''>
+  containScroll?: Token<"trimSnaps" | "keepSnaps" | "">
   /**
    * The number of slides that should be scrolled with next or previous buttons.
    *
@@ -127,11 +127,11 @@ type CarouselOptions = {
   /**
    * The CSS `width` property.
    */
-  slideSize?: CSSUIProps['width']
+  slideSize?: CSSUIProps["width"]
   /**
    * Props for carousel inner element.
    */
-  innerProps?: HTMLUIProps<'div'>
+  innerProps?: HTMLUIProps<"div">
   /**
    * If `true`, display the carousel control buttons.
    *
@@ -162,15 +162,15 @@ type CarouselOptions = {
   indicatorsProps?: CarouselIndicatorsProps
 }
 
-export type CarouselProps = ThemeProps<'Carousel'> &
-  Omit<HTMLUIProps<'div'>, 'onChange' | 'draggable'> &
+export type CarouselProps = ThemeProps<"Carousel"> &
+  Omit<HTMLUIProps<"div">, "onChange" | "draggable"> &
   Pick<
     UseCarouselProps,
-    'index' | 'defaultIndex' | 'onChange' | 'onScrollProgress'
+    "index" | "defaultIndex" | "onChange" | "onScrollProgress"
   > &
   CarouselOptions
 
-export const Carousel = forwardRef<CarouselProps, 'div'>(
+export const Carousel = forwardRef<CarouselProps, "div">(
   ({ h, height, minH, minHeight, ...props }, ref) => {
     const orientation = useValue(props.orientation)
     const align = useValue(props.align)
@@ -186,11 +186,11 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
     const skipSnaps = useValue(props.skipSnaps)
     const containScroll = useValue(props.containScroll)
     const includeGapInSize = useValue(props.includeGapInSize)
-    const gap = useToken('spaces', useValue(props.gap)) ?? useValue(props.gap)
+    const gap = useToken("spaces", useValue(props.gap)) ?? useValue(props.gap)
     const slideSize =
-      useToken('sizes', useValue(props.slideSize)) ?? useValue(props.slideSize)
+      useToken("sizes", useValue(props.slideSize)) ?? useValue(props.slideSize)
 
-    const [styles, mergedProps] = useMultiComponentStyle('Carousel', {
+    const [styles, mergedProps] = useMultiComponentStyle("Carousel", {
       ...props,
       orientation,
       align,
@@ -262,10 +262,10 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
     return (
       <CarouselProvider value={{ styles, ...rest }}>
         <ui.div
-          className={cx('ui-carousel', className)}
+          className={cx("ui-carousel", className)}
           __css={{
-            position: 'relative',
-            h: 'fit-content',
+            position: "relative",
+            h: "fit-content",
             ...styles.container,
           }}
           {...getContainerProps({}, ref)}
@@ -300,35 +300,35 @@ export const Carousel = forwardRef<CarouselProps, 'div'>(
   },
 )
 
-type CarouselSlidesProps = HTMLUIProps<'div'>
+type CarouselSlidesProps = HTMLUIProps<"div">
 
-const CarouselSlides = forwardRef<CarouselSlidesProps, 'div'>(
+const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
   ({ ...rest }, ref) => {
-    const css: CSSUIObject = { w: '100%', h: 'fit-content', overflow: 'hidden' }
+    const css: CSSUIObject = { w: "100%", h: "fit-content", overflow: "hidden" }
 
     return (
-      <ui.div ref={ref} className='ui-carousel__sliders' __css={css}>
+      <ui.div ref={ref} className="ui-carousel__sliders" __css={css}>
         <CarouselSlidesInner {...rest} />
       </ui.div>
     )
   },
 )
 
-type CarouselSlidesInnerProps = HTMLUIProps<'div'>
+type CarouselSlidesInnerProps = HTMLUIProps<"div">
 
 const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
   const { orientation, includeGapInSize, gap, styles } = useCarouselContext()
 
   const css: CSSUIObject = {
-    display: 'flex',
-    flexDirection: orientation === 'vertical' ? 'column' : 'row',
+    display: "flex",
+    flexDirection: orientation === "vertical" ? "column" : "row",
     ...styles.inner,
     ...(includeGapInSize
-      ? { [orientation === 'vertical' ? 'mb' : 'mr']: `-${gap}` }
+      ? { [orientation === "vertical" ? "mb" : "mr"]: `-${gap}` }
       : {}),
   }
 
   return (
-    <ui.div className='ui-carousel__sliders__inner' __css={css} {...rest} />
+    <ui.div className="ui-carousel__sliders__inner" __css={css} {...rest} />
   )
 }

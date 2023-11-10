@@ -1,6 +1,6 @@
-import { useEnvironment } from '@yamada-ui/providers'
-import { isArray, isFunction } from '@yamada-ui/utils'
-import { useEffect, useState } from 'react'
+import { useEnvironment } from "@yamada-ui/providers"
+import { isArray, isFunction } from "@yamada-ui/utils"
+import { useEffect, useState } from "react"
 
 export type UseMediaQueryOptions = {
   fallback?: boolean | boolean[]
@@ -54,7 +54,7 @@ export const useMediaQuery = (
       if (isFunction(mql.addListener)) {
         mql.addListener(handler)
       } else {
-        mql.addEventListener('change', handler)
+        mql.addEventListener("change", handler)
       }
     })
 
@@ -63,7 +63,7 @@ export const useMediaQuery = (
         if (isFunction(mql.removeListener)) {
           mql.removeListener(handler)
         } else {
-          mql.removeEventListener('change', handler)
+          mql.removeEventListener("change", handler)
         }
       })
     }

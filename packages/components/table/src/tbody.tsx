@@ -3,9 +3,9 @@ import {
   TableBodyProps as NativeTableBodyProps,
   Tr,
   Td,
-} from '@yamada-ui/native-table'
-import { dataAttr, ariaAttr, handlerAll, runIfFunc } from '@yamada-ui/utils'
-import { useTableContext, render } from './use-table'
+} from "@yamada-ui/native-table"
+import { dataAttr, ariaAttr, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import { useTableContext, render } from "./use-table"
 
 export type TableBodyProps = NativeTableBodyProps
 
@@ -53,7 +53,7 @@ export const Tbody = ({ ...rest }: TableBodyProps) => {
         return (
           <Tr
             key={id}
-            {...(rowsClickSelect && !isDisabled ? { cursor: 'pointer' } : {})}
+            {...(rowsClickSelect && !isDisabled ? { cursor: "pointer" } : {})}
             {...mergedRowProps}
             data-selected={dataAttr(isSelected)}
             data-disabled={dataAttr(isDisabled)}

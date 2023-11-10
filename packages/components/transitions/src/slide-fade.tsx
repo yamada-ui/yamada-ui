@@ -4,7 +4,7 @@ import {
   forwardRef,
   CSSUIObject,
   Token,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   motion,
   HTMLMotionProps,
@@ -13,9 +13,9 @@ import {
   transitionExit,
   WithTransitionProps,
   MotionTransitionVariants,
-} from '@yamada-ui/motion'
-import { useValue } from '@yamada-ui/use-value'
-import { cx } from '@yamada-ui/utils'
+} from "@yamada-ui/motion"
+import { useValue } from "@yamada-ui/use-value"
+import { cx } from "@yamada-ui/utils"
 
 type SlideFadeOptions = {
   /**
@@ -39,7 +39,7 @@ type SlideFadeOptions = {
 }
 
 export type SlideFadeProps = WithTransitionProps<
-  HTMLUIProps<'div'> & HTMLMotionProps<'div'>
+  HTMLUIProps<"div"> & HTMLMotionProps<"div">
 > &
   SlideFadeOptions
 
@@ -88,13 +88,13 @@ const variants: MotionTransitionVariants = {
 }
 
 export const slideFadeProps = {
-  initial: 'exit',
-  animate: 'enter',
-  exit: 'exit',
+  initial: "exit",
+  animate: "enter",
+  exit: "exit",
   variants,
 }
 
-export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
+export const SlideFade = forwardRef<SlideFadeProps, "div">(
   (
     {
       unmountOnExit,
@@ -111,7 +111,7 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
     },
     ref,
   ) => {
-    const animate = isOpen || unmountOnExit ? 'enter' : 'exit'
+    const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const offsetX = useValue(_offsetX)
     const offsetY = useValue(_offsetY)
@@ -129,7 +129,7 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
     const css: CSSUIObject = {
-      w: '100%',
+      w: "100%",
     }
 
     return (
@@ -138,7 +138,7 @@ export const SlideFade = forwardRef<SlideFadeProps, 'div'>(
           <ui.div
             as={motion.div}
             ref={ref}
-            className={cx('ui-slide-fade', className)}
+            className={cx("ui-slide-fade", className)}
             custom={custom}
             {...slideFadeProps}
             animate={animate}

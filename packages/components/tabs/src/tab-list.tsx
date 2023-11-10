@@ -1,17 +1,17 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { cx, handlerAll } from '@yamada-ui/utils'
-import { KeyboardEvent, KeyboardEventHandler, useCallback } from 'react'
-import { useTabsContext, useTabsDescendantsContext } from './tabs'
+import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { cx, handlerAll } from "@yamada-ui/utils"
+import { KeyboardEvent, KeyboardEventHandler, useCallback } from "react"
+import { useTabsContext, useTabsDescendantsContext } from "./tabs"
 
-export type TabListProps = HTMLUIProps<'div'>
+export type TabListProps = HTMLUIProps<"div">
 
-export const TabList = forwardRef<TabListProps, 'div'>(
+export const TabList = forwardRef<TabListProps, "div">(
   ({ className, ...rest }, ref) => {
     const { focusedIndex, orientation, tabListProps, styles } = useTabsContext()
 
     const descendants = useTabsDescendantsContext()
 
-    const isVertical = orientation === 'vertical'
+    const isVertical = orientation === "vertical"
 
     const onNext = useCallback(() => {
       const next = descendants.enabledNextValue(focusedIndex)
@@ -58,13 +58,13 @@ export const TabList = forwardRef<TabListProps, 'div'>(
       [onFirst, onLast, isVertical, onPrev, onNext],
     )
 
-    const css: CSSUIObject = { display: 'flex', ...styles.tabList }
+    const css: CSSUIObject = { display: "flex", ...styles.tabList }
 
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-tabs-list', className)}
-        role='tablist'
+        className={cx("ui-tabs-list", className)}
+        role="tablist"
         __css={css}
         {...tabListProps}
         {...rest}

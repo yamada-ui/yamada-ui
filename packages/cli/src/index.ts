@@ -1,9 +1,9 @@
-import * as path from 'path'
-import chokidar from 'chokidar'
-import { program } from 'commander'
-import { generateThemeTypings, themePath } from './command/tokens'
-import { initCLI } from './utils'
-import { bundleNRequire } from 'bundle-n-require'
+import * as path from "path"
+import chokidar from "chokidar"
+import { program } from "commander"
+import { generateThemeTypings, themePath } from "./command/tokens"
+import { initCLI } from "./utils"
+import { bundleNRequire } from "bundle-n-require"
 
 type Options = {
   out?: string
@@ -14,9 +14,9 @@ export const run = async () => {
   await initCLI()
 
   program
-    .command('tokens <source>')
-    .option('--out <path>', `output file to ${path.join(...themePath)}`)
-    .option('--watch [path]', 'Watch directory for changes and rebuild')
+    .command("tokens <source>")
+    .option("--out <path>", `output file to ${path.join(...themePath)}`)
+    .option("--watch [path]", "Watch directory for changes and rebuild")
     .action(
       async (
         themeFile: string,
@@ -34,18 +34,18 @@ export const run = async () => {
         const buildFile = async () => {
           await generateThemeTypings({ theme: file.theme, outFile })
 
-          if (watchFile) console.log('\n', '⌛️ Watching for changes...')
+          if (watchFile) console.log("\n", "⌛️ Watching for changes...")
         }
 
         if (watchFile) {
           const watchPath =
-            typeof watchFile === 'string' ? watchFile : file.dependencies
+            typeof watchFile === "string" ? watchFile : file.dependencies
 
           chokidar
             .watch(watchPath)
-            .on('ready', buildFile)
-            .on('change', async (filePath) => {
-              console.log('📦 File changed', filePath)
+            .on("ready", buildFile)
+            .on("change", async (filePath) => {
+              console.log("📦 File changed", filePath)
 
               file = await readFile()
 
@@ -57,7 +57,7 @@ export const run = async () => {
       },
     )
 
-  program.on('--help', () => {
+  program.on("--help", () => {
     console.info(`\nExample call:\n  $ yamada-cli tokens theme.ts\n`)
   })
 

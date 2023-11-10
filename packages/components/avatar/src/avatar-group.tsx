@@ -5,14 +5,14 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
   ThemeProps,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   cx,
   getValidChildren,
   isUndefined,
   filterUndefined,
-} from '@yamada-ui/utils'
-import { cloneElement } from 'react'
+} from "@yamada-ui/utils"
+import { cloneElement } from "react"
 
 type AvatarGroupOptions = {
   /**
@@ -21,19 +21,19 @@ type AvatarGroupOptions = {
   max?: number
 }
 
-export type AvatarGroupProps = HTMLUIProps<'div'> &
-  ThemeProps<'Avatar'> &
+export type AvatarGroupProps = HTMLUIProps<"div"> &
+  ThemeProps<"Avatar"> &
   AvatarGroupOptions
 
-export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
-  const [styles] = useMultiComponentStyle('Avatar', props)
+export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
+  const [styles] = useMultiComponentStyle("Avatar", props)
   const {
     className,
     max,
     borderColor,
-    gap = '-sm',
-    borderRadius = 'full',
-    rounded = 'full',
+    gap = "-sm",
+    borderRadius = "full",
+    rounded = "full",
     children,
     ...rest
   } = omitThemeProps(props)
@@ -55,7 +55,7 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
         marginEnd: !i ? 0 : gap,
         size: props.size,
         borderColor: child.props.borderColor ?? borderColor,
-        borderWidth: '2px',
+        borderWidth: "2px",
       }),
     ),
   )
@@ -63,32 +63,32 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, 'div'>((props, ref) => {
   return (
     <ui.div
       ref={ref}
-      className={cx('ui-avatar-group', className)}
+      className={cx("ui-avatar-group", className)}
       __css={{
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "flex-end",
+        alignItems: "center",
         ...styles.group,
       }}
       {...rest}
     >
       {excess > 0 ? (
         <ui.span
-          className='ui-avatar__excess'
+          className="ui-avatar__excess"
           borderRadius={borderRadius}
           rounded={rounded}
           ms={gap}
           __css={{
-            position: 'relative',
-            display: 'inline-flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            position: "relative",
+            display: "inline-flex",
+            justifyContent: "center",
+            alignItems: "center",
             flexShrink: 0,
-            textAlign: 'center',
-            textTransform: 'uppercase',
-            fontWeight: 'medium',
-            borderWidth: '2px',
+            textAlign: "center",
+            textTransform: "uppercase",
+            fontWeight: "medium",
+            borderWidth: "2px",
             ...styles.excess,
           }}
         >

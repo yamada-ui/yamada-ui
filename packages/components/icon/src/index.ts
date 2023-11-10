@@ -5,5 +5,5 @@ export {
   WarningIcon,
   CloseIcon,
   ChevronIcon,
-} from './icon'
-export type { IconProps } from './icon'
+} from "./icon"
+export type { IconProps } from "./icon"

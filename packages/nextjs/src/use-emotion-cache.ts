@@ -1,6 +1,6 @@
-import createEmotionCache, { Options } from '@emotion/cache'
-import { useServerInsertedHTML } from 'next/navigation'
-import { createElement, useMemo } from 'react'
+import createEmotionCache, { Options } from "@emotion/cache"
+import { useServerInsertedHTML } from "next/navigation"
+import { createElement, useMemo } from "react"
 
 export type UseEmotionCacheProps = Partial<Options>
 
@@ -9,7 +9,7 @@ const createCache = ((createEmotionCache as any).default ??
 
 export const useEmotionCache = (options?: UseEmotionCacheProps) => {
   const cache = useMemo(() => {
-    const cache = createCache({ key: 'css', prepend: true, ...options })
+    const cache = createCache({ key: "css", prepend: true, ...options })
 
     cache.compat = true
 
@@ -21,11 +21,11 @@ export const useEmotionCache = (options?: UseEmotionCacheProps) => {
 
     const props = {
       key,
-      'data-emotion': `${key} ${Object.keys(inserted).join(' ')}`,
-      dangerouslySetInnerHTML: { __html: Object.values(inserted).join(' ') },
+      "data-emotion": `${key} ${Object.keys(inserted).join(" ")}`,
+      dangerouslySetInnerHTML: { __html: Object.values(inserted).join(" ") },
     }
 
-    return createElement('style', props)
+    return createElement("style", props)
   })
 
   return cache

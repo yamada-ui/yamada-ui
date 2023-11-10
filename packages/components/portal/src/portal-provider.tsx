@@ -1,8 +1,8 @@
-import { createContext } from '@yamada-ui/utils'
+import { createContext } from "@yamada-ui/utils"
 
 type PortalContext = HTMLDivElement | null
 
 export const [PortalProvider, usePortal] = createContext<PortalContext>({
   strict: false,
-  name: 'PortalContext',
+  name: "PortalContext",
 })

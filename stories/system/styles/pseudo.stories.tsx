@@ -1,27 +1,27 @@
-import { Box, Center, Wrap } from '@yamada-ui/react'
+import { Box, Center, Wrap } from "@yamada-ui/react"
 
 export default {
-  title: 'System / Styles / Pseudo',
+  title: "System / Styles / Pseudo",
 }
 
 export const after = () => {
   return (
     <Box
-      pos='relative'
-      bg='primary'
-      m='lg'
-      p='lg'
-      rounded='lg'
-      color='white'
+      pos="relative"
+      bg="primary"
+      m="lg"
+      p="lg"
+      rounded="lg"
+      color="white"
       _after={{
         content: "'after'",
-        pos: 'absolute',
-        top: 'lg',
-        left: 'lg',
-        bg: 'secondary',
-        p: 'lg',
-        rounded: 'lg',
-        color: 'white',
+        pos: "absolute",
+        top: "lg",
+        left: "lg",
+        bg: "secondary",
+        p: "lg",
+        rounded: "lg",
+        color: "white",
       }}
     >
       Box
@@ -32,21 +32,21 @@ export const after = () => {
 export const before = () => {
   return (
     <Box
-      pos='relative'
-      bg='warning'
-      m='lg'
-      p='lg'
-      rounded='lg'
-      color='white'
+      pos="relative"
+      bg="warning"
+      m="lg"
+      p="lg"
+      rounded="lg"
+      color="white"
       _before={{
         content: "'before'",
-        pos: 'absolute',
-        top: '-lg',
-        left: '-lg',
-        bg: 'danger',
-        p: 'lg',
-        rounded: 'lg',
-        color: 'white',
+        pos: "absolute",
+        top: "-lg",
+        left: "-lg",
+        bg: "danger",
+        p: "lg",
+        rounded: "lg",
+        color: "white",
       }}
     >
       Box
@@ -57,15 +57,15 @@ export const before = () => {
 export const hover = () => {
   return (
     <Box
-      bg='primary'
-      p='md'
-      rounded='md'
-      color='white'
-      cursor='pointer'
-      transitionProperty='all'
-      transitionDuration='slower'
-      transitionTimingFunction='ease-in-out'
-      _hover={{ bg: 'secondary' }}
+      bg="primary"
+      p="md"
+      rounded="md"
+      color="white"
+      cursor="pointer"
+      transitionProperty="all"
+      transitionDuration="slower"
+      transitionTimingFunction="ease-in-out"
+      _hover={{ bg: "secondary" }}
     >
       Please Hover
     </Box>
@@ -75,15 +75,15 @@ export const hover = () => {
 export const other = () => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
   return (
-    <Wrap gap='md'>
+    <Wrap gap="md">
       {numbers.map((number) => (
         <Center
           key={number}
-          _odd={{ bg: 'red.500' }}
-          _even={{ bg: 'blue.500' }}
-          boxSize='5xs'
-          rounded='md'
-          color='white'
+          _odd={{ bg: "red.500" }}
+          _even={{ bg: "blue.500" }}
+          boxSize="5xs"
+          rounded="md"
+          color="white"
         >
           {number}
         </Center>

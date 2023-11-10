@@ -6,11 +6,11 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createDescendant } from '@yamada-ui/use-descendant'
-import { createContext, cx, isArray } from '@yamada-ui/utils'
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
+} from "@yamada-ui/core"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { createContext, cx, isArray } from "@yamada-ui/utils"
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react"
 
 const {
   DescendantsContextProvider,
@@ -22,7 +22,7 @@ export { useAccordionDescendant }
 
 type AccordionContext = Pick<
   AccordionOptions,
-  'isMultiple' | 'isToggle' | 'icon' | 'iconHidden'
+  "isMultiple" | "isToggle" | "icon" | "iconHidden"
 > & {
   index: number | number[]
   setIndex: Dispatch<SetStateAction<number | number[]>>
@@ -33,7 +33,7 @@ type AccordionContext = Pick<
 
 const [AccordionProvider, useAccordionContext] =
   createContext<AccordionContext>({
-    name: 'AccordionContext',
+    name: "AccordionContext",
     errorMessage: `useAccordionContext returned is 'undefined'. Seems you forgot to wrap the components in "<Accordion />"`,
   })
 
@@ -78,12 +78,12 @@ type AccordionOptions = {
   onChange?: (index: number | number[]) => void
 }
 
-export type AccordionProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
-  ThemeProps<'Accordion'> &
+export type AccordionProps = Omit<HTMLUIProps<"div">, "onChange"> &
+  ThemeProps<"Accordion"> &
   AccordionOptions
 
-export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Accordion', props)
+export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("Accordion", props)
   const {
     className,
     index: value,
@@ -126,7 +126,7 @@ export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
     return () => setFocusedIndex(-1)
   }, [])
 
-  const css: CSSUIObject = { w: 'full', ...styles.container }
+  const css: CSSUIObject = { w: "full", ...styles.container }
 
   return (
     <DescendantsContextProvider value={descendants}>
@@ -145,7 +145,7 @@ export const Accordion = forwardRef<AccordionProps, 'div'>((props, ref) => {
       >
         <ui.div
           ref={ref}
-          className={cx('ui-accordion', className)}
+          className={cx("ui-accordion", className)}
           __css={css}
           {...rest}
         />

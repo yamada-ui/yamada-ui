@@ -1,7 +1,7 @@
 const toNumber = (n: any): number => {
   const num = parseFloat(n)
 
-  return typeof num !== 'number' || Number.isNaN(num) ? 0 : num
+  return typeof num !== "number" || Number.isNaN(num) ? 0 : num
 }
 
 export const toPrecision = (n: number, precision?: number): string => {

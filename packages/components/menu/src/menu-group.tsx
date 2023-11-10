@@ -1,10 +1,10 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useMenu } from './menu'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useMenu } from "./menu"
 
-export type MenuGroupProps = HTMLUIProps<'div'>
+export type MenuGroupProps = HTMLUIProps<"div">
 
-export const MenuGroup = forwardRef<MenuGroupProps, 'div'>(
+export const MenuGroup = forwardRef<MenuGroupProps, "div">(
   ({ className, title, children, ...rest }, ref) => {
     const { styles } = useMenu()
 
@@ -13,14 +13,14 @@ export const MenuGroup = forwardRef<MenuGroupProps, 'div'>(
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-menu__item--group', className)}
-        role='group'
+        className={cx("ui-menu__item--group", className)}
+        role="group"
         __css={css}
         {...rest}
       >
         {title ? (
           <ui.span
-            className={cx('ui-menu__item--group-title')}
+            className={cx("ui-menu__item--group-title")}
             __css={styles.groupTitle}
           >
             {title}

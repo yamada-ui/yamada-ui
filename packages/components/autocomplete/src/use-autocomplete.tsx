@@ -2,17 +2,17 @@ import {
   CSSUIObject,
   HTMLUIProps,
   layoutStylesProperties,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   FormControlOptions,
   formControlProperties,
   useFormControlProps,
-} from '@yamada-ui/form-control'
-import { PopoverProps } from '@yamada-ui/popover'
-import { UIOption } from '@yamada-ui/select'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createDescendant } from '@yamada-ui/use-descendant'
-import { useOutsideClick } from '@yamada-ui/use-outside-click'
+} from "@yamada-ui/form-control"
+import { PopoverProps } from "@yamada-ui/popover"
+import { UIOption } from "@yamada-ui/select"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import {
   ariaAttr,
   createContext,
@@ -35,7 +35,7 @@ import {
   getValidChildren,
   isUndefined,
   DOMAttributes,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   ChangeEvent,
   CSSProperties,
@@ -50,103 +50,103 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react'
+} from "react"
 import {
   AutocompleteOption,
   AutocompleteOptionProps,
   AutocompleteOptionGroup,
-} from './'
+} from "./"
 
 const kanaMap: Record<string, string> = {
-  ｶﾞ: 'ガ',
-  ｷﾞ: 'ギ',
-  ｸﾞ: 'グ',
-  ｹﾞ: 'ゲ',
-  ｺﾞ: 'ゴ',
-  ｻﾞ: 'ザ',
-  ｼﾞ: 'ジ',
-  ｽﾞ: 'ズ',
-  ｾﾞ: 'ゼ',
-  ｿﾞ: 'ゾ',
-  ﾀﾞ: 'ダ',
-  ﾁﾞ: 'ヂ',
-  ﾂﾞ: 'ヅ',
-  ﾃﾞ: 'デ',
-  ﾄﾞ: 'ド',
-  ﾊﾞ: 'バ',
-  ﾋﾞ: 'ビ',
-  ﾌﾞ: 'ブ',
-  ﾍﾞ: 'ベ',
-  ﾎﾞ: 'ボ',
-  ﾊﾟ: 'パ',
-  ﾋﾟ: 'ピ',
-  ﾌﾟ: 'プ',
-  ﾍﾟ: 'ペ',
-  ﾎﾟ: 'ポ',
-  ｳﾞ: 'ヴ',
-  ﾜﾞ: 'ヷ',
-  ｦﾞ: 'ヺ',
-  ｱ: 'ア',
-  ｲ: 'イ',
-  ｳ: 'ウ',
-  ｴ: 'エ',
-  ｵ: 'オ',
-  ｶ: 'カ',
-  ｷ: 'キ',
-  ｸ: 'ク',
-  ｹ: 'ケ',
-  ｺ: 'コ',
-  ｻ: 'サ',
-  ｼ: 'シ',
-  ｽ: 'ス',
-  ｾ: 'セ',
-  ｿ: 'ソ',
-  ﾀ: 'タ',
-  ﾁ: 'チ',
-  ﾂ: 'ツ',
-  ﾃ: 'テ',
-  ﾄ: 'ト',
-  ﾅ: 'ナ',
-  ﾆ: 'ニ',
-  ﾇ: 'ヌ',
-  ﾈ: 'ネ',
-  ﾉ: 'ノ',
-  ﾊ: 'ハ',
-  ﾋ: 'ヒ',
-  ﾌ: 'フ',
-  ﾍ: 'ヘ',
-  ﾎ: 'ホ',
-  ﾏ: 'マ',
-  ﾐ: 'ミ',
-  ﾑ: 'ム',
-  ﾒ: 'メ',
-  ﾓ: 'モ',
-  ﾔ: 'ヤ',
-  ﾕ: 'ユ',
-  ﾖ: 'ヨ',
-  ﾗ: 'ラ',
-  ﾘ: 'リ',
-  ﾙ: 'ル',
-  ﾚ: 'レ',
-  ﾛ: 'ロ',
-  ﾜ: 'ワ',
-  ｦ: 'ヲ',
-  ﾝ: 'ン',
-  ｧ: 'ァ',
-  ｨ: 'ィ',
-  ｩ: 'ゥ',
-  ｪ: 'ェ',
-  ｫ: 'ォ',
-  ｯ: 'ッ',
-  ｬ: 'ャ',
-  ｭ: 'ュ',
-  ｮ: 'ョ',
-  '｡': '。',
-  '､': '、',
-  ｰ: 'ー',
-  '｢': '「',
-  '｣': '」',
-  '･': '・',
+  ｶﾞ: "ガ",
+  ｷﾞ: "ギ",
+  ｸﾞ: "グ",
+  ｹﾞ: "ゲ",
+  ｺﾞ: "ゴ",
+  ｻﾞ: "ザ",
+  ｼﾞ: "ジ",
+  ｽﾞ: "ズ",
+  ｾﾞ: "ゼ",
+  ｿﾞ: "ゾ",
+  ﾀﾞ: "ダ",
+  ﾁﾞ: "ヂ",
+  ﾂﾞ: "ヅ",
+  ﾃﾞ: "デ",
+  ﾄﾞ: "ド",
+  ﾊﾞ: "バ",
+  ﾋﾞ: "ビ",
+  ﾌﾞ: "ブ",
+  ﾍﾞ: "ベ",
+  ﾎﾞ: "ボ",
+  ﾊﾟ: "パ",
+  ﾋﾟ: "ピ",
+  ﾌﾟ: "プ",
+  ﾍﾟ: "ペ",
+  ﾎﾟ: "ポ",
+  ｳﾞ: "ヴ",
+  ﾜﾞ: "ヷ",
+  ｦﾞ: "ヺ",
+  ｱ: "ア",
+  ｲ: "イ",
+  ｳ: "ウ",
+  ｴ: "エ",
+  ｵ: "オ",
+  ｶ: "カ",
+  ｷ: "キ",
+  ｸ: "ク",
+  ｹ: "ケ",
+  ｺ: "コ",
+  ｻ: "サ",
+  ｼ: "シ",
+  ｽ: "ス",
+  ｾ: "セ",
+  ｿ: "ソ",
+  ﾀ: "タ",
+  ﾁ: "チ",
+  ﾂ: "ツ",
+  ﾃ: "テ",
+  ﾄ: "ト",
+  ﾅ: "ナ",
+  ﾆ: "ニ",
+  ﾇ: "ヌ",
+  ﾈ: "ネ",
+  ﾉ: "ノ",
+  ﾊ: "ハ",
+  ﾋ: "ヒ",
+  ﾌ: "フ",
+  ﾍ: "ヘ",
+  ﾎ: "ホ",
+  ﾏ: "マ",
+  ﾐ: "ミ",
+  ﾑ: "ム",
+  ﾒ: "メ",
+  ﾓ: "モ",
+  ﾔ: "ヤ",
+  ﾕ: "ユ",
+  ﾖ: "ヨ",
+  ﾗ: "ラ",
+  ﾘ: "リ",
+  ﾙ: "ル",
+  ﾚ: "レ",
+  ﾛ: "ロ",
+  ﾜ: "ワ",
+  ｦ: "ヲ",
+  ﾝ: "ン",
+  ｧ: "ァ",
+  ｨ: "ィ",
+  ｩ: "ゥ",
+  ｪ: "ェ",
+  ｫ: "ォ",
+  ｯ: "ッ",
+  ｬ: "ャ",
+  ｭ: "ュ",
+  ｮ: "ョ",
+  "｡": "。",
+  "､": "、",
+  ｰ: "ー",
+  "｢": "「",
+  "｣": "」",
+  "･": "・",
 }
 
 const defaultFormat = (value: string) => {
@@ -154,12 +154,12 @@ const defaultFormat = (value: string) => {
     String.fromCharCode(v.charCodeAt(0) - 0xfee0),
   )
 
-  const reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g')
+  const reg = new RegExp("(" + Object.keys(kanaMap).join("|") + ")", "g")
 
   value = value
     .replace(reg, (v) => kanaMap[v])
-    .replace(/ﾞ/g, '゛')
-    .replace(/ﾟ/g, '゜')
+    .replace(/ﾞ/g, "゛")
+    .replace(/ﾟ/g, "゜")
 
   value = value.toUpperCase()
 
@@ -189,7 +189,7 @@ const flattenOptions = (options: UIOption[]): UIOption[] => {
 
 const isTargetOption = (target: EventTarget | null): boolean =>
   isHTMLElement(target) &&
-  !!target?.getAttribute('role')?.startsWith('autocomplete-item')
+  !!target?.getAttribute("role")?.startsWith("autocomplete-item")
 
 export const {
   DescendantsContextProvider: AutocompleteDescendantsContextProvider,
@@ -200,7 +200,7 @@ export const {
 
 type AutocompleteContext = Omit<
   UseAutocompleteProps,
-  'value' | 'defaultValue' | 'onChange' | 'onCreate'
+  "value" | "defaultValue" | "onChange" | "onCreate"
 > & {
   value: string | string[]
   displayValue: string | string[] | undefined
@@ -231,20 +231,20 @@ type AutocompleteContext = Omit<
 
 export const [AutocompleteProvider, useAutocompleteContext] =
   createContext<AutocompleteContext>({
-    name: 'AutocompleteContext',
+    name: "AutocompleteContext",
     errorMessage: `useAutocompleteContext returned is 'undefined'. Seems you forgot to wrap the components in "<Autocomplete />" or "<MultiAutocomplete />"`,
   })
 
 type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
   PopoverProps,
-  | 'initialFocusRef'
-  | 'closeOnButton'
-  | 'isOpen'
-  | 'trigger'
-  | 'autoFocus'
-  | 'restoreFocus'
-  | 'openDelay'
-  | 'closeDelay'
+  | "initialFocusRef"
+  | "closeOnButton"
+  | "isOpen"
+  | "trigger"
+  | "autoFocus"
+  | "restoreFocus"
+  | "openDelay"
+  | "closeDelay"
 > &
   FormControlOptions & {
     /**
@@ -277,8 +277,8 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      * @default 'first'
      */
     insertPositionOnCreate?:
-      | Union<'first' | 'last'>
-      | [string, 'first' | 'last']
+      | Union<"first" | "last">
+      | [string, "first" | "last"]
     /**
      * If `true`, the list element will be closed when value is selected.
      *
@@ -310,7 +310,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
     /**
      * Props for select option element.
      */
-    optionProps?: Omit<AutocompleteOptionProps, 'value' | 'children'>
+    optionProps?: Omit<AutocompleteOptionProps, "value" | "children">
     /**
      * If provided, generate options based on data.
      */
@@ -318,13 +318,13 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
   }
 
 export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
-  HTMLUIProps<'input'>,
+  HTMLUIProps<"input">,
   | keyof UseAutocompleteBaseProps
-  | 'list'
-  | 'disabled'
-  | 'required'
-  | 'readOnly'
-  | 'size'
+  | "list"
+  | "disabled"
+  | "required"
+  | "readOnly"
+  | "size"
 > &
   UseAutocompleteBaseProps<T>
 
@@ -336,10 +336,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   closeOnBlur = true,
   closeOnEsc = true,
   createOption = false,
-  insertPositionOnCreate = 'first',
-  emptyMessage = 'No results found',
+  insertPositionOnCreate = "first",
+  emptyMessage = "No results found",
   format = defaultFormat,
-  placement = 'bottom-start',
+  placement = "bottom-start",
   duration = 0.2,
   optionProps,
   placeholder,
@@ -353,12 +353,12 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const formControlProps = pickObject(rest, formControlProperties)
   const [containerProps, inputProps] = splitObject(
     omitObject(rest as Dict, [
-      'id',
-      'value',
-      'defaultValue',
-      'onChange',
-      'month',
-      'onChangeMonth',
+      "id",
+      "value",
+      "defaultValue",
+      "onChange",
+      "month",
+      "onChangeMonth",
     ]),
     layoutStylesProperties,
   )
@@ -378,7 +378,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     onChange: rest.onChange,
   })
   const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
-  const [inputValue, setInputValue] = useState<string>('')
+  const [inputValue, setInputValue] = useState<string>("")
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
   const [isHit, setIsHit] = useState<boolean>(true)
@@ -395,25 +395,25 @@ export const useAutocomplete = <T extends string | string[] = string>({
       if (isArray(insertPositionOnCreate)) {
         return insertPositionOnCreate
       } else {
-        return [insertPositionOnCreate, 'first']
+        return [insertPositionOnCreate, "first"]
       }
     }, [insertPositionOnCreate])
 
   if (createOption && !isUndefined(children)) {
     console.warn(
-      `${!isMulti ? 'Autocomplete' : 'MultiAutocomplete'}: ${
-        !isMulti ? 'Autocomplete' : 'MultiAutocomplete'
+      `${!isMulti ? "Autocomplete" : "MultiAutocomplete"}: ${
+        !isMulti ? "Autocomplete" : "MultiAutocomplete"
       } internally prefers 'children'. If 'createOption' is true, it will not be reflected correctly. If want to reflect, please set 'options' in props.`,
     )
   }
 
   const selectedValues = descendants.enabledValues(
-    ({ node }) => isMulti && value.includes(node.dataset.value ?? ''),
+    ({ node }) => isMulti && value.includes(node.dataset.value ?? ""),
   )
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const enabledValues = descendants.enabledValues(
     ({ node, index }) =>
-      'target' in node.dataset && !selectedIndexes.includes(index),
+      "target" in node.dataset && !selectedIndexes.includes(index),
   )
 
   const validChildren = getValidChildren(children)
@@ -430,7 +430,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
         <AutocompleteOptionGroup
           key={i}
           label={label as string}
-          {...(props as HTMLUIProps<'ul'>)}
+          {...(props as HTMLUIProps<"ul">)}
         >
           {value.map(({ label, value, ...props }, i) =>
             !isArray(value) ? (
@@ -469,7 +469,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       if (isEmpty || isAllSelected) return
 
       const first = descendants.enabledfirstValue(
-        ({ node }) => 'target' in node.dataset,
+        ({ node }) => "target" in node.dataset,
       )
 
       if (!first) return
@@ -503,7 +503,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       if (isEmpty || isAllSelected) return
 
       const last = descendants.enabledlastValue(
-        ({ node }) => 'target' in node.dataset,
+        ({ node }) => "target" in node.dataset,
       )
 
       if (!last) return
@@ -539,7 +539,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       const selected = values.find(({ node }) =>
         !isMulti
           ? node.dataset.value === value
-          : value.includes(node.dataset.value ?? ''),
+          : value.includes(node.dataset.value ?? ""),
       )
 
       if (selected) setFocusedIndex(selected.index)
@@ -553,7 +553,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       const id = setTimeout(() => {
         const next = descendants.enabledNextValue(
           index,
-          ({ node }) => 'target' in node.dataset,
+          ({ node }) => "target" in node.dataset,
         )
 
         if (!next) return
@@ -590,7 +590,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       const id = setTimeout(() => {
         const prev = descendants.enabledPrevValue(
           index,
-          ({ node }) => 'target' in node.dataset,
+          ({ node }) => "target" in node.dataset,
         )
 
         if (!prev) return
@@ -635,12 +635,12 @@ export const useAutocomplete = <T extends string | string[] = string>({
       let isFocused = false
 
       values.forEach(({ node, index }) => {
-        if (format(node.textContent ?? '').includes(value)) {
+        if (format(node.textContent ?? "").includes(value)) {
           isHit = true
 
-          const isDisabled = 'disabled' in node.dataset
+          const isDisabled = "disabled" in node.dataset
 
-          node.dataset.target = ''
+          node.dataset.target = ""
 
           if (!isFocused && !isDisabled) {
             isFocused = true
@@ -661,7 +661,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       const values = descendants.values()
 
       values.forEach(({ node }) => {
-        node.dataset.target = ''
+        node.dataset.target = ""
       })
 
       if (runFocus) onFocusFirst()
@@ -676,7 +676,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       const enabledValues = descendants.enabledValues()
       const selectedValues = enabledValues
         .filter(({ node }) => node.dataset.value === newValue)
-        .map(({ node }) => node.textContent ?? '')
+        .map(({ node }) => node.textContent ?? "")
 
       setDisplayValue((prev) => {
         if (!isMulti) {
@@ -684,7 +684,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
         } else {
           selectedValues.forEach((selectedValue) => {
             const isSelected =
-              isArray(prev) && prev.includes(selectedValue ?? '')
+              isArray(prev) && prev.includes(selectedValue ?? "")
 
             if (!isSelected) {
               prev = [...(isArray(prev) ? prev : []), selectedValue] as T
@@ -722,7 +722,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       onChangeDisplayValue(newValue)
 
-      setInputValue('')
+      setInputValue("")
       rebirthOptions(false)
     },
     [onChangeDisplayValue, rebirthOptions, setValue],
@@ -731,12 +731,12 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const onSelect = useCallback(() => {
     let enabledValue = descendants.value(focusedIndex)
 
-    if ('disabled' in (enabledValue?.node.dataset ?? {}))
+    if ("disabled" in (enabledValue?.node.dataset ?? {}))
       enabledValue = undefined
 
     if (!enabledValue) return
 
-    const value = enabledValue.node.dataset.value ?? ''
+    const value = enabledValue.node.dataset.value ?? ""
 
     onChange(value)
 
@@ -790,9 +790,9 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     if (options) newOptions = options
 
-    if (firstInsertPositionOnCreate === 'first') {
+    if (firstInsertPositionOnCreate === "first") {
       newOptions = [newOption, ...newOptions]
-    } else if (firstInsertPositionOnCreate === 'last') {
+    } else if (firstInsertPositionOnCreate === "last") {
       newOptions = [...newOptions, newOption]
     } else {
       const i = newOptions.findIndex(
@@ -800,7 +800,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       )
 
       if (i !== -1 && isArray(newOptions[i].value)) {
-        if (secondInsertPositionOnCreate === 'first') {
+        if (secondInsertPositionOnCreate === "first") {
           newOptions[i].value = [
             newOption,
             ...(newOptions[i].value as UIOption[]),
@@ -814,7 +814,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       } else {
         console.warn(
           `${
-            !isMulti ? 'Autocomplete' : 'MultiAutocomplete'
+            !isMulti ? "Autocomplete" : "MultiAutocomplete"
           }: '${firstInsertPositionOnCreate}' specified in insertPositionOnCreate does not exist in the option group.`,
         )
       }
@@ -844,7 +844,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const onDelete = useCallback(() => {
     if (!isMulti) {
-      onChange('')
+      onChange("")
     } else {
       onChange(value[value.length - 1])
     }
@@ -856,7 +856,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       setValue([] as unknown as T)
       setDisplayValue(undefined)
-      setInputValue('')
+      setInputValue("")
       rebirthOptions()
     },
     [setDisplayValue, setInputValue, setValue, rebirthOptions],
@@ -888,7 +888,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      setInputValue('')
+      setInputValue("")
 
       if (isOpen) onClose()
     },
@@ -897,7 +897,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
-      if (ev.key === ' ') ev.key = ev.code
+      if (ev.key === " ") ev.key = ev.code
 
       if (formControlProps.disabled || formControlProps.readOnly) return
       if (isComposition.current) return
@@ -994,7 +994,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     if (isOpen) return
 
     setFocusedIndex(-1)
-    setInputValue('')
+    setInputValue("")
   }, [isOpen])
 
   useUpdateEffect(() => {
@@ -1021,7 +1021,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       onClose,
       placement,
       duration,
-      trigger: 'never',
+      trigger: "never",
       closeOnButton: false,
     }),
     [duration, isOpen, onClose, onOpen, placement, rest],
@@ -1047,8 +1047,8 @@ export const useAutocomplete = <T extends string | string[] = string>({
       ...props,
       ...formControlProps,
       placeholder,
-      'data-active': dataAttr(isOpen),
-      'aria-expanded': dataAttr(isOpen),
+      "data-active": dataAttr(isOpen),
+      "aria-expanded": dataAttr(isOpen),
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
@@ -1124,9 +1124,9 @@ export const useAutocompleteInput = () => {
       ...inputProps,
       ...props,
       id,
-      cursor: formControlProps.readOnly ? 'default' : 'text',
+      cursor: formControlProps.readOnly ? "default" : "text",
       pointerEvents:
-        formControlProps.disabled || isAllSelected ? 'none' : 'auto',
+        formControlProps.disabled || isAllSelected ? "none" : "auto",
       tabIndex: isAllSelected ? -1 : 0,
       onChange: handlerAll(props.onChange, onSearch),
       onCompositionStart: handlerAll(
@@ -1213,9 +1213,9 @@ export const useAutocompleteList = () => {
 
   const getListProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      as: 'ul',
+      as: "ul",
       ref: mergeRefs(listRef, ref),
-      role: 'select',
+      role: "select",
       tabIndex: -1,
       ...props,
       onAnimationComplete: handlerAll(
@@ -1231,7 +1231,7 @@ export const useAutocompleteList = () => {
   }
 }
 
-export type UseAutocompleteOptionGroupProps = HTMLUIProps<'ul'> & {
+export type UseAutocompleteOptionGroupProps = HTMLUIProps<"ul"> & {
   /**
    * The label of the autocomplete option group.
    */
@@ -1252,7 +1252,7 @@ export const useAutocompleteOptionGroup = ({
   const selectedValues =
     isMulti && omitSelectedValues
       ? descendants.values(({ node }) =>
-          value.includes(node.dataset.value ?? ''),
+          value.includes(node.dataset.value ?? ""),
         )
       : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
@@ -1260,7 +1260,7 @@ export const useAutocompleteOptionGroup = ({
     ({ node, index }) =>
       node.parentElement?.dataset.label === label &&
       !selectedIndexes.includes(index) &&
-      'target' in node.dataset,
+      "target" in node.dataset,
   )
 
   const isEmpty = !childValues.length
@@ -1270,15 +1270,15 @@ export const useAutocompleteOptionGroup = ({
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
-        border: '0px',
-        clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
-        margin: '-1px',
-        padding: '0px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        position: 'absolute',
+        border: "0px",
+        clip: "rect(0px, 0px, 0px, 0px)",
+        height: "1px",
+        width: "1px",
+        margin: "-1px",
+        padding: "0px",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        position: "absolute",
       }
 
       return {
@@ -1286,8 +1286,8 @@ export const useAutocompleteOptionGroup = ({
         ...props,
         ...computedRest[0],
         style: isEmpty ? style : undefined,
-        'data-label': label,
-        role: 'autocomplete-group-container',
+        "data-label": label,
+        role: "autocomplete-group-container",
       }
     },
     [computedRest, isEmpty, label],
@@ -1298,8 +1298,8 @@ export const useAutocompleteOptionGroup = ({
       ref,
       ...props,
       ...computedRest[1],
-      'data-label': label,
-      role: 'autocomplete-group',
+      "data-label": label,
+      role: "autocomplete-group",
     }),
     [computedRest, label],
   )
@@ -1316,8 +1316,8 @@ export type UseAutocompleteOptionGroupReturn = ReturnType<
 >
 
 export type UseAutocompleteOptionProps = Omit<
-  HTMLUIProps<'li'>,
-  'value' | 'children'
+  HTMLUIProps<"li">,
+  "value" | "children"
 > & {
   /**
    * The value of the select option.
@@ -1385,16 +1385,16 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   const isMulti = isArray(value)
   const isDuplicated = !isMulti
     ? frontValues.some(
-        ({ node }) => node.dataset.value === (computedProps.value ?? ''),
+        ({ node }) => node.dataset.value === (computedProps.value ?? ""),
       )
     : false
 
   const isSelected =
     !isDuplicated &&
     (!isMulti
-      ? (computedProps.value ?? '') === value
-      : value.includes(computedProps.value ?? ''))
-  const isTarget = 'target' in (itemRef.current?.dataset ?? {})
+      ? (computedProps.value ?? "") === value
+      : value.includes(computedProps.value ?? ""))
+  const isTarget = "target" in (itemRef.current?.dataset ?? {})
   const isFocused = index === focusedIndex
 
   const onClick = useCallback(
@@ -1415,7 +1415,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       setFocusedIndex(index)
 
-      onChange(computedProps.value ?? '')
+      onChange(computedProps.value ?? "")
 
       if (inputRef.current) inputRef.current.focus()
 
@@ -1439,37 +1439,37 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   )
 
   useEffect(() => {
-    if (isSelected) onChangeDisplayValue(computedProps.value ?? '', false)
+    if (isSelected) onChangeDisplayValue(computedProps.value ?? "", false)
   }, [computedProps, isSelected, onChangeDisplayValue])
 
   const getOptionProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
-        border: '0px',
-        clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
-        margin: '-1px',
-        padding: '0px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        position: 'absolute',
+        border: "0px",
+        clip: "rect(0px, 0px, 0px, 0px)",
+        height: "1px",
+        width: "1px",
+        margin: "-1px",
+        padding: "0px",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        position: "absolute",
       }
 
       return {
         ref: mergeRefs(itemRef, ref, register),
-        ...omitObject(computedProps, ['value']),
+        ...omitObject(computedProps, ["value"]),
         ...props,
-        role: 'autocomplete-item',
+        role: "autocomplete-item",
         tabIndex: -1,
         style:
           !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
-        'data-target': dataAttr(true),
-        'data-value': computedProps.value ?? '',
-        'data-focus': dataAttr(isFocused),
-        'data-disabled': dataAttr(isDisabled),
-        'aria-checked': ariaAttr(isSelected),
-        'aria-disabled': ariaAttr(isDisabled),
+        "data-target": dataAttr(true),
+        "data-value": computedProps.value ?? "",
+        "data-focus": dataAttr(isFocused),
+        "data-disabled": dataAttr(isDisabled),
+        "aria-checked": ariaAttr(isSelected),
+        "aria-disabled": ariaAttr(isDisabled),
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
@@ -1504,15 +1504,15 @@ export const useAutocompleteCreate = () => {
   const getCreateProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
-        border: '0px',
-        clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
-        margin: '-1px',
-        padding: '0px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        position: 'absolute',
+        border: "0px",
+        clip: "rect(0px, 0px, 0px, 0px)",
+        height: "1px",
+        width: "1px",
+        margin: "-1px",
+        padding: "0px",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        position: "absolute",
       }
 
       return {
@@ -1520,7 +1520,7 @@ export const useAutocompleteCreate = () => {
         ...props,
         tabIndex: -1,
         style: isHit ? style : undefined,
-        'data-focus': dataAttr(!isHit),
+        "data-focus": dataAttr(!isHit),
         onClick: handlerAll(props.onClick, onCreate),
       }
     },
@@ -1540,15 +1540,15 @@ export const useAutocompleteEmpty = () => {
   const getEmptyProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
-        border: '0px',
-        clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
-        margin: '-1px',
-        padding: '0px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        position: 'absolute',
+        border: "0px",
+        clip: "rect(0px, 0px, 0px, 0px)",
+        height: "1px",
+        width: "1px",
+        margin: "-1px",
+        padding: "0px",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        position: "absolute",
       }
 
       return {

@@ -1,11 +1,11 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from "react"
 
 const DEFAULT_EVENTS: (keyof DocumentEventMap)[] = [
-  'keypress',
-  'mousemove',
-  'touchmove',
-  'click',
-  'scroll',
+  "keypress",
+  "mousemove",
+  "touchmove",
+  "click",
+  "scroll",
 ]
 
 const DEFAULT_OPTIONS = {

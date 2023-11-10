@@ -1,7 +1,7 @@
-import { isMac } from '@yamada-ui/utils'
-import { useEffect, useState } from 'react'
+import { isMac } from "@yamada-ui/utils"
+import { useEffect, useState } from "react"
 
-type Modality = 'keyboard' | 'pointer' | 'virtual'
+type Modality = "keyboard" | "pointer" | "virtual"
 type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent
 type Handler = (modality: Modality, e: HandlerEvent | null) => void
 type FocusVisibleCallback = (isFocusVisible: boolean) => void
@@ -21,9 +21,9 @@ const onValid = (e: KeyboardEvent) => {
     e.metaKey ||
     (!isMac && e.altKey) ||
     e.ctrlKey ||
-    e.key === 'Control' ||
-    e.key === 'Shift' ||
-    e.key === 'Meta'
+    e.key === "Control" ||
+    e.key === "Shift" ||
+    e.key === "Meta"
   )
 }
 
@@ -31,23 +31,23 @@ const onKeyboard = (ev: KeyboardEvent) => {
   hasEventBeforeFocus = true
 
   if (onValid(ev)) {
-    modality = 'keyboard'
+    modality = "keyboard"
 
-    trigger('keyboard', ev)
+    trigger("keyboard", ev)
   }
 }
 
 const onPointer = (ev: PointerEvent | MouseEvent) => {
-  modality = 'pointer'
+  modality = "pointer"
 
-  if (ev.type === 'mousedown' || ev.type === 'pointerdown') {
+  if (ev.type === "mousedown" || ev.type === "pointerdown") {
     hasEventBeforeFocus = true
 
     const target = ev.composedPath ? ev.composedPath()[0] : ev.target
 
-    if ((target as HTMLElement).matches(':focus-visible')) return
+    if ((target as HTMLElement).matches(":focus-visible")) return
 
-    trigger('pointer', ev)
+    trigger("pointer", ev)
   }
 }
 
@@ -62,15 +62,15 @@ const onClick = (ev: MouseEvent) => {
 
   hasEventBeforeFocus = true
 
-  modality = 'virtual'
+  modality = "virtual"
 }
 
 const onFocus = (ev: FocusEvent) => {
   if (ev.target === window || ev.target === document) return
 
   if (!hasEventBeforeFocus && !hasBlurredWindowRecently) {
-    modality = 'virtual'
-    trigger('virtual', ev)
+    modality = "virtual"
+    trigger("virtual", ev)
   }
 
   hasEventBeforeFocus = false
@@ -82,10 +82,10 @@ const onBlur = () => {
   hasBlurredWindowRecently = true
 }
 
-const isFocusVisible = () => modality !== 'pointer'
+const isFocusVisible = () => modality !== "pointer"
 
 const setupGlobalFocusEvents = () => {
-  if (typeof window === 'undefined' || hasSetup) return
+  if (typeof window === "undefined" || hasSetup) return
 
   const { focus } = HTMLElement.prototype
 
@@ -95,21 +95,21 @@ const setupGlobalFocusEvents = () => {
     if (this) focus.apply(this, args)
   }
 
-  document.addEventListener('keydown', onKeyboard, true)
-  document.addEventListener('keyup', onKeyboard, true)
-  document.addEventListener('click', onClick, true)
+  document.addEventListener("keydown", onKeyboard, true)
+  document.addEventListener("keyup", onKeyboard, true)
+  document.addEventListener("click", onClick, true)
 
-  window.addEventListener('focus', onFocus, true)
-  window.addEventListener('blur', onBlur, false)
+  window.addEventListener("focus", onFocus, true)
+  window.addEventListener("blur", onBlur, false)
 
-  if (typeof PointerEvent !== 'undefined') {
-    document.addEventListener('pointerdown', onPointer, true)
-    document.addEventListener('pointermove', onPointer, true)
-    document.addEventListener('pointerup', onPointer, true)
+  if (typeof PointerEvent !== "undefined") {
+    document.addEventListener("pointerdown", onPointer, true)
+    document.addEventListener("pointermove", onPointer, true)
+    document.addEventListener("pointerup", onPointer, true)
   } else {
-    document.addEventListener('mousedown', onPointer, true)
-    document.addEventListener('mousemove', onPointer, true)
-    document.addEventListener('mouseup', onPointer, true)
+    document.addEventListener("mousedown", onPointer, true)
+    document.addEventListener("mousemove", onPointer, true)
+    document.addEventListener("mouseup", onPointer, true)
   }
 
   hasSetup = true

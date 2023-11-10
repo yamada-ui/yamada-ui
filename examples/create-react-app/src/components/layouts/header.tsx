@@ -24,12 +24,12 @@ import {
   CenterProps,
   useScroll,
   useMotionValueEvent,
-} from '@yamada-ui/react'
-import { ColorPalette, Moon, Sun } from 'components/media-and-icons'
-import { useRef } from 'react'
-import { useState } from 'react'
-import { memo } from 'react'
-import { FC } from 'react'
+} from "@yamada-ui/react"
+import { ColorPalette, Moon, Sun } from "components/media-and-icons"
+import { useRef } from "react"
+import { useState } from "react"
+import { memo } from "react"
+import { FC } from "react"
 
 export type HeaderProps = CenterProps
 
@@ -39,42 +39,42 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   const [y, setY] = useState<number>(0)
   const { height = 0 } = ref.current?.getBoundingClientRect() ?? {}
 
-  useMotionValueEvent(scrollY, 'change', setY)
+  useMotionValueEvent(scrollY, "change", setY)
 
   const isScroll = y > height
 
   return (
     <Center
       ref={ref}
-      as='header'
-      w='full'
-      bg={isScroll ? ['whiteAlpha.500', 'blackAlpha.200'] : undefined}
-      backdropFilter='auto'
-      backdropSaturate='180%'
-      backdropBlur='10px'
-      shadow={isScroll ? ['base', 'dark-sm'] : undefined}
-      transitionProperty='common'
-      transitionDuration='slower'
-      position='sticky'
-      top='0'
-      left='0'
-      right='0'
-      zIndex='guldo'
+      as="header"
+      w="full"
+      bg={isScroll ? ["whiteAlpha.500", "blackAlpha.200"] : undefined}
+      backdropFilter="auto"
+      backdropSaturate="180%"
+      backdropBlur="10px"
+      shadow={isScroll ? ["base", "dark-sm"] : undefined}
+      transitionProperty="common"
+      transitionDuration="slower"
+      position="sticky"
+      top="0"
+      left="0"
+      right="0"
+      zIndex="guldo"
       {...rest}
     >
-      <HStack w='full' maxW='9xl' py='3' px={{ base: 'lg', md: 'md' }}>
+      <HStack w="full" maxW="9xl" py="3" px={{ base: "lg", md: "md" }}>
         <Box
-          as='a'
-          href='/'
-          _focus={{ outline: 'none' }}
-          _focusVisible={{ boxShadow: 'outline' }}
-          rounded='md'
+          as="a"
+          href="/"
+          _focus={{ outline: "none" }}
+          _focusVisible={{ boxShadow: "outline" }}
+          rounded="md"
         >
           <Text
-            as='h1'
-            fontSize='2xl'
-            fontWeight='semibold'
-            whiteSpace='nowrap'
+            as="h1"
+            fontSize="2xl"
+            fontWeight="semibold"
+            whiteSpace="nowrap"
           >
             Yamada UI
           </Text>
@@ -104,7 +104,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
         restoreFocus={false}
         modifiers={[
           {
-            name: 'preventOverflow',
+            name: "preventOverflow",
             options: {
               padding: {
                 top: 32,
@@ -119,27 +119,27 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
       >
         <MenuButton
           as={IconButton}
-          aria-label='Open color mode switching menu'
-          variant='ghost'
-          colorScheme='gray'
-          color='muted'
-          icon={colorMode === 'dark' ? <Sun /> : <Moon />}
+          aria-label="Open color mode switching menu"
+          variant="ghost"
+          colorScheme="gray"
+          color="muted"
+          icon={colorMode === "dark" ? <Sun /> : <Moon />}
           {...rest}
         />
 
         <MenuList>
-          <MenuOptionGroup<ColorMode | 'system'>
+          <MenuOptionGroup<ColorMode | "system">
             value={internalColorMode}
             onChange={changeColorMode}
-            type='radio'
+            type="radio"
           >
-            <MenuOptionItem value='light' closeOnSelect>
+            <MenuOptionItem value="light" closeOnSelect>
               Light
             </MenuOptionItem>
-            <MenuOptionItem value='dark' closeOnSelect>
+            <MenuOptionItem value="dark" closeOnSelect>
               Dark
             </MenuOptionItem>
-            <MenuOptionItem value='system' closeOnSelect>
+            <MenuOptionItem value="system" closeOnSelect>
               System
             </MenuOptionItem>
           </MenuOptionGroup>
@@ -149,7 +149,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
   },
 )
 
-ColorModeButton.displayName = 'ColorModeButton'
+ColorModeButton.displayName = "ColorModeButton"
 
 type ThemeSchemeButtonProps = IconButtonProps & {
   popoverProps?: PopoverProps
@@ -171,7 +171,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
         restoreFocus={false}
         modifiers={[
           {
-            name: 'preventOverflow',
+            name: "preventOverflow",
             options: {
               padding: {
                 top: 32,
@@ -185,10 +185,10 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       >
         <PopoverTrigger>
           <IconButton
-            aria-label='Open color mode switching menu'
-            variant='ghost'
-            colorScheme='gray'
-            color='muted'
+            aria-label="Open color mode switching menu"
+            variant="ghost"
+            colorScheme="gray"
+            color="muted"
             icon={<ColorPalette />}
             {...rest}
           />
@@ -196,25 +196,25 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
 
         <PopoverContent>
           <PopoverBody
-            display='grid'
-            gridTemplateColumns={{ base: 'repeat(4, 1fr)' }}
+            display="grid"
+            gridTemplateColumns={{ base: "repeat(4, 1fr)" }}
           >
             {colorSchemes.map((colorScheme: string) => (
               <Box
-                as='button'
-                type='button'
+                as="button"
+                type="button"
                 key={colorScheme}
                 bg={`${colorScheme}.500`}
-                minW={{ base: '12', md: '10' }}
-                minH={{ base: '12', md: '10' }}
-                rounded='md'
-                boxShadow='inner'
-                outline='0'
+                minW={{ base: "12", md: "10" }}
+                minH={{ base: "12", md: "10" }}
+                rounded="md"
+                boxShadow="inner"
+                outline="0"
                 _hover={{ bg: `${colorScheme}.600` }}
                 _active={{ bg: `${colorScheme}.700` }}
-                _focusVisible={{ shadow: 'outline' }}
-                transitionProperty='common'
-                transitionDuration='slower'
+                _focusVisible={{ shadow: "outline" }}
+                transitionProperty="common"
+                transitionDuration="slower"
                 onClick={() => {
                   changeThemeScheme(colorScheme)
                   onClose()
@@ -228,4 +228,4 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   },
 )
 
-ThemeSchemeButton.displayName = 'ThemeSchemeButton'
+ThemeSchemeButton.displayName = "ThemeSchemeButton"

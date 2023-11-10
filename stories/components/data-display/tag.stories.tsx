@@ -1,12 +1,12 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { Meta, StoryFn } from '@storybook/react'
-import { Icon } from '@yamada-ui/fontawesome'
-import { Wrap, Tag } from '@yamada-ui/react'
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { Meta, StoryFn } from "@storybook/react"
+import { Icon } from "@yamada-ui/fontawesome"
+import { Wrap, Tag } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Tag>
 
 const meta: Meta<typeof Tag> = {
-  title: 'Components / Data Display / Tag',
+  title: "Components / Data Display / Tag",
   component: Tag,
 }
 
@@ -14,166 +14,166 @@ export default meta
 
 export const subtle: Story = () => {
   return (
-    <Wrap gap='md'>
-      <Tag colorScheme='primary'>Primary</Tag>
+    <Wrap gap="md">
+      <Tag colorScheme="primary">Primary</Tag>
 
-      <Tag colorScheme='secondary'>Secondary</Tag>
+      <Tag colorScheme="secondary">Secondary</Tag>
 
-      <Tag colorScheme='warning'>Warning</Tag>
+      <Tag colorScheme="warning">Warning</Tag>
 
-      <Tag colorScheme='danger'>Danger</Tag>
+      <Tag colorScheme="danger">Danger</Tag>
 
-      <Tag colorScheme='link'>Link</Tag>
+      <Tag colorScheme="link">Link</Tag>
 
-      <Tag colorScheme='gray'>Gray</Tag>
+      <Tag colorScheme="gray">Gray</Tag>
 
-      <Tag colorScheme='zinc'>Zinc</Tag>
+      <Tag colorScheme="zinc">Zinc</Tag>
 
-      <Tag colorScheme='neutral'>Neutral</Tag>
+      <Tag colorScheme="neutral">Neutral</Tag>
 
-      <Tag colorScheme='stone'>Stone</Tag>
+      <Tag colorScheme="stone">Stone</Tag>
 
-      <Tag colorScheme='red'>Red</Tag>
+      <Tag colorScheme="red">Red</Tag>
 
-      <Tag colorScheme='rose'>Rose</Tag>
+      <Tag colorScheme="rose">Rose</Tag>
 
-      <Tag colorScheme='pink'>Pink</Tag>
+      <Tag colorScheme="pink">Pink</Tag>
 
-      <Tag colorScheme='orange'>Orange</Tag>
+      <Tag colorScheme="orange">Orange</Tag>
 
-      <Tag colorScheme='amber'>Amber</Tag>
+      <Tag colorScheme="amber">Amber</Tag>
 
-      <Tag colorScheme='yellow'>Yellow</Tag>
+      <Tag colorScheme="yellow">Yellow</Tag>
 
-      <Tag colorScheme='lime'>Lime</Tag>
+      <Tag colorScheme="lime">Lime</Tag>
 
-      <Tag colorScheme='green'>Green</Tag>
+      <Tag colorScheme="green">Green</Tag>
 
-      <Tag colorScheme='emerald'>Emerald</Tag>
+      <Tag colorScheme="emerald">Emerald</Tag>
 
-      <Tag colorScheme='teal'>Teal</Tag>
+      <Tag colorScheme="teal">Teal</Tag>
 
-      <Tag colorScheme='cyan'>Cyan</Tag>
+      <Tag colorScheme="cyan">Cyan</Tag>
 
-      <Tag colorScheme='sky'>Sky</Tag>
+      <Tag colorScheme="sky">Sky</Tag>
 
-      <Tag colorScheme='blue'>Blue</Tag>
+      <Tag colorScheme="blue">Blue</Tag>
 
-      <Tag colorScheme='indigo'>Indigo</Tag>
+      <Tag colorScheme="indigo">Indigo</Tag>
 
-      <Tag colorScheme='violet'>Violet</Tag>
+      <Tag colorScheme="violet">Violet</Tag>
 
-      <Tag colorScheme='purple'>Purple</Tag>
+      <Tag colorScheme="purple">Purple</Tag>
 
-      <Tag colorScheme='fuchsia'>Fuchsia</Tag>
+      <Tag colorScheme="fuchsia">Fuchsia</Tag>
     </Wrap>
   )
 }
 
 export const solid: Story = () => {
   return (
-    <Wrap gap='md'>
-      <Tag variant='solid' colorScheme='primary'>
+    <Wrap gap="md">
+      <Tag variant="solid" colorScheme="primary">
         Primary
       </Tag>
 
-      <Tag variant='solid' colorScheme='secondary'>
+      <Tag variant="solid" colorScheme="secondary">
         Secondary
       </Tag>
 
-      <Tag variant='solid' colorScheme='warning'>
+      <Tag variant="solid" colorScheme="warning">
         Warning
       </Tag>
 
-      <Tag variant='solid' colorScheme='danger'>
+      <Tag variant="solid" colorScheme="danger">
         Danger
       </Tag>
 
-      <Tag variant='solid' colorScheme='link'>
+      <Tag variant="solid" colorScheme="link">
         Link
       </Tag>
 
-      <Tag variant='solid' colorScheme='gray'>
+      <Tag variant="solid" colorScheme="gray">
         Gray
       </Tag>
 
-      <Tag variant='solid' colorScheme='zinc'>
+      <Tag variant="solid" colorScheme="zinc">
         Zinc
       </Tag>
 
-      <Tag variant='solid' colorScheme='neutral'>
+      <Tag variant="solid" colorScheme="neutral">
         Neutral
       </Tag>
 
-      <Tag variant='solid' colorScheme='stone'>
+      <Tag variant="solid" colorScheme="stone">
         Stone
       </Tag>
 
-      <Tag variant='solid' colorScheme='red'>
+      <Tag variant="solid" colorScheme="red">
         Red
       </Tag>
 
-      <Tag variant='solid' colorScheme='rose'>
+      <Tag variant="solid" colorScheme="rose">
         Rose
       </Tag>
 
-      <Tag variant='solid' colorScheme='pink'>
+      <Tag variant="solid" colorScheme="pink">
         Pink
       </Tag>
 
-      <Tag variant='solid' colorScheme='orange'>
+      <Tag variant="solid" colorScheme="orange">
         Orange
       </Tag>
 
-      <Tag variant='solid' colorScheme='amber'>
+      <Tag variant="solid" colorScheme="amber">
         Amber
       </Tag>
 
-      <Tag variant='solid' colorScheme='yellow'>
+      <Tag variant="solid" colorScheme="yellow">
         Yellow
       </Tag>
 
-      <Tag variant='solid' colorScheme='lime'>
+      <Tag variant="solid" colorScheme="lime">
         Lime
       </Tag>
 
-      <Tag variant='solid' colorScheme='green'>
+      <Tag variant="solid" colorScheme="green">
         Green
       </Tag>
 
-      <Tag variant='solid' colorScheme='emerald'>
+      <Tag variant="solid" colorScheme="emerald">
         Emerald
       </Tag>
 
-      <Tag variant='solid' colorScheme='teal'>
+      <Tag variant="solid" colorScheme="teal">
         Teal
       </Tag>
 
-      <Tag variant='solid' colorScheme='cyan'>
+      <Tag variant="solid" colorScheme="cyan">
         Cyan
       </Tag>
 
-      <Tag variant='solid' colorScheme='sky'>
+      <Tag variant="solid" colorScheme="sky">
         Sky
       </Tag>
 
-      <Tag variant='solid' colorScheme='blue'>
+      <Tag variant="solid" colorScheme="blue">
         Blue
       </Tag>
 
-      <Tag variant='solid' colorScheme='indigo'>
+      <Tag variant="solid" colorScheme="indigo">
         Indigo
       </Tag>
 
-      <Tag variant='solid' colorScheme='violet'>
+      <Tag variant="solid" colorScheme="violet">
         Violet
       </Tag>
 
-      <Tag variant='solid' colorScheme='purple'>
+      <Tag variant="solid" colorScheme="purple">
         Purple
       </Tag>
 
-      <Tag variant='solid' colorScheme='fuchsia'>
+      <Tag variant="solid" colorScheme="fuchsia">
         Fuchsia
       </Tag>
     </Wrap>
@@ -182,108 +182,108 @@ export const solid: Story = () => {
 
 export const outline: Story = () => {
   return (
-    <Wrap gap='md'>
-      <Tag variant='outline' colorScheme='primary'>
+    <Wrap gap="md">
+      <Tag variant="outline" colorScheme="primary">
         Primary
       </Tag>
 
-      <Tag variant='outline' colorScheme='secondary'>
+      <Tag variant="outline" colorScheme="secondary">
         Secondary
       </Tag>
 
-      <Tag variant='outline' colorScheme='warning'>
+      <Tag variant="outline" colorScheme="warning">
         Warning
       </Tag>
 
-      <Tag variant='outline' colorScheme='danger'>
+      <Tag variant="outline" colorScheme="danger">
         Danger
       </Tag>
 
-      <Tag variant='outline' colorScheme='link'>
+      <Tag variant="outline" colorScheme="link">
         Link
       </Tag>
 
-      <Tag variant='outline' colorScheme='gray'>
+      <Tag variant="outline" colorScheme="gray">
         Gray
       </Tag>
 
-      <Tag variant='outline' colorScheme='zinc'>
+      <Tag variant="outline" colorScheme="zinc">
         Zinc
       </Tag>
 
-      <Tag variant='outline' colorScheme='neutral'>
+      <Tag variant="outline" colorScheme="neutral">
         Neutral
       </Tag>
 
-      <Tag variant='outline' colorScheme='stone'>
+      <Tag variant="outline" colorScheme="stone">
         Stone
       </Tag>
 
-      <Tag variant='outline' colorScheme='red'>
+      <Tag variant="outline" colorScheme="red">
         Red
       </Tag>
 
-      <Tag variant='outline' colorScheme='rose'>
+      <Tag variant="outline" colorScheme="rose">
         Rose
       </Tag>
 
-      <Tag variant='outline' colorScheme='pink'>
+      <Tag variant="outline" colorScheme="pink">
         Pink
       </Tag>
 
-      <Tag variant='outline' colorScheme='orange'>
+      <Tag variant="outline" colorScheme="orange">
         Orange
       </Tag>
 
-      <Tag variant='outline' colorScheme='amber'>
+      <Tag variant="outline" colorScheme="amber">
         Amber
       </Tag>
 
-      <Tag variant='outline' colorScheme='yellow'>
+      <Tag variant="outline" colorScheme="yellow">
         Yellow
       </Tag>
 
-      <Tag variant='outline' colorScheme='lime'>
+      <Tag variant="outline" colorScheme="lime">
         Lime
       </Tag>
 
-      <Tag variant='outline' colorScheme='green'>
+      <Tag variant="outline" colorScheme="green">
         Green
       </Tag>
 
-      <Tag variant='outline' colorScheme='emerald'>
+      <Tag variant="outline" colorScheme="emerald">
         Emerald
       </Tag>
 
-      <Tag variant='outline' colorScheme='teal'>
+      <Tag variant="outline" colorScheme="teal">
         Teal
       </Tag>
 
-      <Tag variant='outline' colorScheme='cyan'>
+      <Tag variant="outline" colorScheme="cyan">
         Cyan
       </Tag>
 
-      <Tag variant='outline' colorScheme='sky'>
+      <Tag variant="outline" colorScheme="sky">
         Sky
       </Tag>
 
-      <Tag variant='outline' colorScheme='blue'>
+      <Tag variant="outline" colorScheme="blue">
         Blue
       </Tag>
 
-      <Tag variant='outline' colorScheme='indigo'>
+      <Tag variant="outline" colorScheme="indigo">
         Indigo
       </Tag>
 
-      <Tag variant='outline' colorScheme='violet'>
+      <Tag variant="outline" colorScheme="violet">
         Violet
       </Tag>
 
-      <Tag variant='outline' colorScheme='purple'>
+      <Tag variant="outline" colorScheme="purple">
         Purple
       </Tag>
 
-      <Tag variant='outline' colorScheme='fuchsia'>
+      <Tag variant="outline" colorScheme="fuchsia">
         Fuchsia
       </Tag>
     </Wrap>
@@ -292,16 +292,16 @@ export const outline: Story = () => {
 
 export const withSize: Story = () => {
   return (
-    <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorScheme='primary' size='sm'>
+    <Wrap gap="md" alignItems="flex-start">
+      <Tag colorScheme="primary" size="sm">
         Small
       </Tag>
 
-      <Tag colorScheme='secondary' size='md'>
+      <Tag colorScheme="secondary" size="md">
         Medium
       </Tag>
 
-      <Tag colorScheme='warning' size='lg'>
+      <Tag colorScheme="warning" size="lg">
         Large
       </Tag>
     </Wrap>
@@ -310,16 +310,16 @@ export const withSize: Story = () => {
 
 export const withIcon: Story = () => {
   return (
-    <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorScheme='primary' size='sm' leftIcon={<Icon icon={faPlus} />}>
+    <Wrap gap="md" alignItems="flex-start">
+      <Tag colorScheme="primary" size="sm" leftIcon={<Icon icon={faPlus} />}>
         Small
       </Tag>
 
-      <Tag colorScheme='secondary' size='md' rightIcon={<Icon icon={faPlus} />}>
+      <Tag colorScheme="secondary" size="md" rightIcon={<Icon icon={faPlus} />}>
         Medium
       </Tag>
 
-      <Tag colorScheme='warning' size='lg' leftIcon={<Icon icon={faPlus} />}>
+      <Tag colorScheme="warning" size="lg" leftIcon={<Icon icon={faPlus} />}>
         Large
       </Tag>
     </Wrap>
@@ -328,20 +328,20 @@ export const withIcon: Story = () => {
 
 export const withCloseButton: Story = () => {
   return (
-    <Wrap gap='md' alignItems='flex-start'>
-      <Tag colorScheme='primary' rounded='full' onCloseClick={() => {}}>
+    <Wrap gap="md" alignItems="flex-start">
+      <Tag colorScheme="primary" rounded="full" onCloseClick={() => {}}>
         Cyan
       </Tag>
 
-      <Tag colorScheme='secondary' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme="secondary" rounded="full" onCloseClick={() => {}}>
         Secondary
       </Tag>
 
-      <Tag colorScheme='warning' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme="warning" rounded="full" onCloseClick={() => {}}>
         Warning
       </Tag>
 
-      <Tag colorScheme='danger' rounded='full' onCloseClick={() => {}}>
+      <Tag colorScheme="danger" rounded="full" onCloseClick={() => {}}>
         Danger
       </Tag>
     </Wrap>
@@ -350,11 +350,11 @@ export const withCloseButton: Story = () => {
 
 export const withDisabled: Story = () => {
   return (
-    <Wrap gap='md' alignItems='flex-start'>
+    <Wrap gap="md" alignItems="flex-start">
       <Tag
-        variant='solid'
-        colorScheme='primary'
-        rounded='full'
+        variant="solid"
+        colorScheme="primary"
+        rounded="full"
         onCloseClick={() => {}}
         isDisabled
       >
@@ -362,9 +362,9 @@ export const withDisabled: Story = () => {
       </Tag>
 
       <Tag
-        variant='solid'
-        colorScheme='secondary'
-        rounded='full'
+        variant="solid"
+        colorScheme="secondary"
+        rounded="full"
         onCloseClick={() => {}}
         isDisabled
       >
@@ -372,9 +372,9 @@ export const withDisabled: Story = () => {
       </Tag>
 
       <Tag
-        variant='solid'
-        colorScheme='warning'
-        rounded='full'
+        variant="solid"
+        colorScheme="warning"
+        rounded="full"
         onCloseClick={() => {}}
         isDisabled
       >
@@ -382,9 +382,9 @@ export const withDisabled: Story = () => {
       </Tag>
 
       <Tag
-        variant='solid'
-        colorScheme='danger'
-        rounded='full'
+        variant="solid"
+        colorScheme="danger"
+        rounded="full"
         onCloseClick={() => {}}
         isDisabled
       >

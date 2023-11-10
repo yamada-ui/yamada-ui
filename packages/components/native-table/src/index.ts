@@ -1,18 +1,18 @@
-export { NativeTable, TableStyleProvider, useTableStyles } from './native-table'
-export type { NativeTableProps } from './native-table'
-export { TableContainer } from './table-container'
-export type { TableContainerProps } from './table-container'
-export { Thead } from './thead'
-export type { TableHeadProps } from './thead'
-export { Tbody } from './tbody'
-export type { TableBodyProps } from './tbody'
-export { Tfoot } from './tfoot'
-export type { TableFootProps } from './tfoot'
-export { Tr } from './tr'
-export type { TrProps } from './tr'
-export { Th } from './th'
-export type { ThProps } from './th'
-export { Td } from './td'
-export type { TdProps } from './td'
-export { TableCaption } from './table-caption'
-export type { TableCaptionProps } from './table-caption'
+export { NativeTable, TableStyleProvider, useTableStyles } from "./native-table"
+export type { NativeTableProps } from "./native-table"
+export { TableContainer } from "./table-container"
+export type { TableContainerProps } from "./table-container"
+export { Thead } from "./thead"
+export type { TableHeadProps } from "./thead"
+export { Tbody } from "./tbody"
+export type { TableBodyProps } from "./tbody"
+export { Tfoot } from "./tfoot"
+export type { TableFootProps } from "./tfoot"
+export { Tr } from "./tr"
+export type { TrProps } from "./tr"
+export { Th } from "./th"
+export type { ThProps } from "./th"
+export { Td } from "./td"
+export type { TdProps } from "./td"
+export { TableCaption } from "./table-caption"
+export type { TableCaptionProps } from "./table-caption"

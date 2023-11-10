@@ -3,20 +3,20 @@ import {
   omitThemeProps,
   CSSUIObject,
   ThemeProps,
-} from '@yamada-ui/core'
-import { MotionTransitionProperties } from '@yamada-ui/motion'
-import { useAnimationObserver } from '@yamada-ui/use-animation'
+} from "@yamada-ui/core"
+import { MotionTransitionProperties } from "@yamada-ui/motion"
+import { useAnimationObserver } from "@yamada-ui/use-animation"
 import {
   useDisclosure,
   useLazyDisclosure,
   LazyMode,
-} from '@yamada-ui/use-disclosure'
+} from "@yamada-ui/use-disclosure"
 import {
   useFocusOnHide,
   useFocusOnShow,
   useFocusOnPointerDown,
-} from '@yamada-ui/use-focus'
-import { usePopper, UsePopperProps } from '@yamada-ui/use-popper'
+} from "@yamada-ui/use-focus"
+import { usePopper, UsePopperProps } from "@yamada-ui/use-popper"
 import {
   createContext,
   DOMAttributes,
@@ -26,7 +26,7 @@ import {
   mergeRefs,
   PropGetter,
   runIfFunc,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   FC,
   PropsWithChildren,
@@ -34,7 +34,7 @@ import {
   useCallback,
   useEffect,
   useRef,
-} from 'react'
+} from "react"
 
 type PopoverOptions = {
   /**
@@ -95,7 +95,7 @@ type PopoverOptions = {
    *
    * @default 'click'
    */
-  trigger?: 'click' | 'hover' | 'never'
+  trigger?: "click" | "hover" | "never"
   /**
    * The number of delay time to open.
    *
@@ -128,20 +128,20 @@ type PopoverOptions = {
    *
    * @default 'scale'
    */
-  animation?: 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+  animation?: "scale" | "top" | "right" | "left" | "bottom" | "none"
   /**
    * The animation duration.
    */
-  duration?: MotionTransitionProperties['duration']
+  duration?: MotionTransitionProperties["duration"]
 }
 
-export type PopoverProps = ThemeProps<'Popover'> &
-  Omit<UsePopperProps, 'enabled'> &
+export type PopoverProps = ThemeProps<"Popover"> &
+  Omit<UsePopperProps, "enabled"> &
   PropsWithChildren<PopoverOptions>
 
 type PopoverContext = Pick<
   PopoverOptions,
-  'isOpen' | 'onClose' | 'closeOnButton' | 'animation' | 'duration'
+  "isOpen" | "onClose" | "closeOnButton" | "animation" | "duration"
 > & {
   onAnimationComplete: () => void
   forceUpdate: () => void | undefined
@@ -154,13 +154,13 @@ type PopoverContext = Pick<
 
 const [PopoverProvider, usePopover] = createContext<PopoverContext>({
   strict: false,
-  name: 'PopoverContext',
+  name: "PopoverContext",
 })
 
 export { usePopover }
 
 export const Popover: FC<PopoverProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle('Popover', props)
+  const [styles, mergedProps] = useMultiComponentStyle("Popover", props)
   const {
     children,
     initialFocusRef,
@@ -169,12 +169,12 @@ export const Popover: FC<PopoverProps> = (props) => {
     closeOnBlur = true,
     closeOnEsc = true,
     closeOnButton = true,
-    trigger = 'click',
+    trigger = "click",
     openDelay = 200,
     closeDelay = 200,
     isLazy,
-    lazyBehavior = 'unmount',
-    animation = 'scale',
+    lazyBehavior = "unmount",
+    animation = "scale",
     duration,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -221,13 +221,13 @@ export const Popover: FC<PopoverProps> = (props) => {
   useFocusOnHide(popoverRef, {
     focusRef: triggerRef,
     visible: isOpen,
-    shouldFocus: restoreFocus && trigger === 'click',
+    shouldFocus: restoreFocus && trigger === "click",
   })
 
   useFocusOnShow(popoverRef, {
     focusRef: initialFocusRef,
     visible: isOpen,
-    shouldFocus: autoFocus && trigger === 'click',
+    shouldFocus: autoFocus && trigger === "click",
   })
 
   const shouldRenderChildren = useLazyDisclosure({
@@ -249,7 +249,7 @@ export const Popover: FC<PopoverProps> = (props) => {
         children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
         onKeyDown: handlerAll(props.onKeyDown, (ev) => {
-          if (closeOnEsc && ev.key === 'Escape') onClose()
+          if (closeOnEsc && ev.key === "Escape") onClose()
         }),
         onBlur: handlerAll(props.onBlur, (ev) => {
           const relatedTarget = getEventRelatedTarget(ev)
@@ -262,7 +262,7 @@ export const Popover: FC<PopoverProps> = (props) => {
         }),
       }
 
-      if (trigger === 'hover') {
+      if (trigger === "hover") {
         popoverProps.onMouseEnter = handlerAll(props.onMouseEnter, () => {
           isHoveringRef.current = true
         })
@@ -303,7 +303,7 @@ export const Popover: FC<PopoverProps> = (props) => {
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
       }
 
-      if (trigger === 'click') {
+      if (trigger === "click") {
         triggerProps.onClick = handlerAll(props.onClick, onToggle)
         triggerProps.onBlur = handlerAll(props.onBlur, (ev) => {
           const relatedTarget = getEventRelatedTarget(ev)
@@ -313,7 +313,7 @@ export const Popover: FC<PopoverProps> = (props) => {
         })
       }
 
-      if (trigger === 'hover') {
+      if (trigger === "hover") {
         triggerProps.onFocus = handlerAll(props.onFocus, () => {
           if (openTimeout.current === undefined) onOpen()
         })
@@ -326,7 +326,7 @@ export const Popover: FC<PopoverProps> = (props) => {
         })
 
         triggerProps.onKeyDown = handlerAll(props.onKeyDown, (ev) => {
-          if (ev.key === 'Escape') onClose()
+          if (ev.key === "Escape") onClose()
         })
 
         triggerProps.onMouseEnter = handlerAll(props.onMouseEnter, () => {

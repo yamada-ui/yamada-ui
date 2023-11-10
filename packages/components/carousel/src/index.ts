@@ -1,8 +1,8 @@
-export { Carousel } from './carousel'
-export type { CarouselProps } from './carousel'
-export { CarouselSlide } from './carousel-slide'
-export type { CarouselSlideProps } from './carousel-slide'
-export { CarouselControlPrev, CarouselControlNext } from './carousel-control'
-export type { CarouselControlProps } from './carousel-control'
-export { CarouselIndicators } from './carousel-indicators'
-export type { CarouselIndicatorsProps } from './carousel-indicators'
+export { Carousel } from "./carousel"
+export type { CarouselProps } from "./carousel"
+export { CarouselSlide } from "./carousel-slide"
+export type { CarouselSlideProps } from "./carousel-slide"
+export { CarouselControlPrev, CarouselControlNext } from "./carousel-control"
+export type { CarouselControlProps } from "./carousel-control"
+export { CarouselIndicators } from "./carousel-indicators"
+export type { CarouselIndicatorsProps } from "./carousel-indicators"

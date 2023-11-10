@@ -1,11 +1,11 @@
-import { ComponentMultiStyle } from '@yamada-ui/core'
-import { transparentizeColor, isGray } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from "@yamada-ui/core"
+import { transparentizeColor, isGray } from "@yamada-ui/utils"
 
 export const Pagination: ComponentMultiStyle = {
   baseStyle: {
     container: {
       _disabled: {
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
     },
     inner: {
@@ -13,44 +13,44 @@ export const Pagination: ComponentMultiStyle = {
     },
     item: {
       px: 1,
-      userSelect: 'none',
-      color: ['blackAlpha.700', 'whiteAlpha.700'],
-      rounded: 'md',
-      transitionProperty: 'common',
-      transitionDuration: 'slower',
-      _selected: { cursor: 'default', pointerEvents: 'none' },
+      userSelect: "none",
+      color: ["blackAlpha.700", "whiteAlpha.700"],
+      rounded: "md",
+      transitionProperty: "common",
+      transitionDuration: "slower",
+      _selected: { cursor: "default", pointerEvents: "none" },
       _focus: {
-        outline: 'none',
+        outline: "none",
       },
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
-        boxShadow: 'none',
+        cursor: "not-allowed",
+        boxShadow: "none",
       },
       _hover: {
         _disabled: {
-          bg: ['initial', 'initial'],
+          bg: ["initial", "initial"],
         },
       },
       _focusVisible: {
-        boxShadow: 'outline',
+        boxShadow: "outline",
       },
     },
     first: {},
     last: {},
     prev: {},
     next: {},
-    dots: { pointerEvents: 'none' },
+    dots: { pointerEvents: "none" },
   },
 
   variants: {
-    solid: ({ colorScheme: c = 'primary' }) => {
-      const isAccessible = c === 'yellow' || c === 'cyan' || c === 'lime'
+    solid: ({ colorScheme: c = "primary" }) => {
+      const isAccessible = c === "yellow" || c === "cyan" || c === "lime"
 
       return {
         item: {
-          border: '1px solid',
-          borderColor: 'border',
+          border: "1px solid",
+          borderColor: "border",
           _selected: {
             bg: isGray(c)
               ? [`${c}.200`, `${c}.700`]
@@ -70,7 +70,7 @@ export const Pagination: ComponentMultiStyle = {
           _hover: {
             bg: [`gray.200`, `whiteAlpha.100`],
             _disabled: {
-              bg: ['initial', 'initial'],
+              bg: ["initial", "initial"],
             },
           },
           _active: {
@@ -78,17 +78,17 @@ export const Pagination: ComponentMultiStyle = {
           },
         },
         dots: {
-          border: '0',
+          border: "0",
         },
       }
     },
-    outline: ({ colorScheme: c = 'primary' }) => {
+    outline: ({ colorScheme: c = "primary" }) => {
       return {
         item: {
-          border: '1px solid',
-          borderColor: 'border',
+          border: "1px solid",
+          borderColor: "border",
           _selected: {
-            bg: 'transparent',
+            bg: "transparent",
             borderColor: isGray(c)
               ? [`${c}.500`, `${c}.400`]
               : [`${c}.600`, `${c}.300`],
@@ -96,13 +96,13 @@ export const Pagination: ComponentMultiStyle = {
               ? [`inherit`, `${c}.400`]
               : [`${c}.600`, `${c}.200`],
             _hover: {
-              bg: ['transparent', 'transparent'],
+              bg: ["transparent", "transparent"],
             },
           },
           _hover: {
-            bg: ['gray.200', 'whiteAlpha.100'],
+            bg: ["gray.200", "whiteAlpha.100"],
             _disabled: {
-              bg: ['initial', 'initial'],
+              bg: ["initial", "initial"],
             },
           },
           _active: {
@@ -110,16 +110,16 @@ export const Pagination: ComponentMultiStyle = {
           },
         },
         dots: {
-          border: '0',
+          border: "0",
         },
       }
     },
-    ghost: ({ theme: t, colorMode: m, colorScheme: c = 'primary' }) => {
+    ghost: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => {
       return {
         item: {
           _selected: {
-            bg: isGray(c) ? undefined : 'transparent',
-            fontWeight: 'semibold',
+            bg: isGray(c) ? undefined : "transparent",
+            fontWeight: "semibold",
             color: isGray(c)
               ? [`inherit`, `${c}.200`]
               : [`${c}.600`, `${c}.200`],
@@ -140,81 +140,81 @@ export const Pagination: ComponentMultiStyle = {
     unstyled: {
       container: { gap: 0 },
       inner: { gap: 0 },
-      item: { bg: 'none', color: 'inherit', minW: 'auto', minH: 'auto' },
+      item: { bg: "none", color: "inherit", minW: "auto", minH: "auto" },
     },
   },
 
   sizes: {
     xs: {
       container: {
-        gap: 'xs',
+        gap: "xs",
       },
       inner: {
-        gap: 'xs',
+        gap: "xs",
       },
       item: {
         minW: 6,
         minH: 6,
-        fontSize: 'xs',
+        fontSize: "xs",
       },
     },
     sm: {
       container: {
-        gap: 'xs',
+        gap: "xs",
       },
       inner: {
-        gap: 'xs',
+        gap: "xs",
       },
       item: {
         minW: 7,
         minH: 7,
-        fontSize: 'sm',
+        fontSize: "sm",
       },
     },
     md: {
       container: {
-        gap: 'sm',
+        gap: "sm",
       },
       inner: {
-        gap: 'sm',
+        gap: "sm",
       },
       item: {
         minW: 8,
         minH: 8,
-        fontSize: 'md',
+        fontSize: "md",
       },
     },
     lg: {
       container: {
-        gap: 'sm',
+        gap: "sm",
       },
       inner: {
-        gap: 'sm',
+        gap: "sm",
       },
       item: {
         minW: 10,
         minH: 10,
-        fontSize: 'lg',
+        fontSize: "lg",
       },
     },
     xl: {
       container: {
-        gap: 'md',
+        gap: "md",
       },
       inner: {
-        gap: 'md',
+        gap: "md",
       },
       item: {
         minW: 12,
         minH: 12,
-        fontSize: 'xl',
+        fontSize: "xl",
       },
     },
   },
 
   defaultProps: {
-    variant: 'solid',
-    size: 'md',
-    colorScheme: 'primary',
+    variant: "solid",
+    size: "md",
+    colorScheme: "primary",
   },
 }

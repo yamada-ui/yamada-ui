@@ -1,6 +1,6 @@
-import { faWaveSquare } from '@fortawesome/free-solid-svg-icons'
-import { Meta, StoryFn } from '@storybook/react'
-import { Icon } from '@yamada-ui/fontawesome'
+import { faWaveSquare } from "@fortawesome/free-solid-svg-icons"
+import { Meta, StoryFn } from "@storybook/react"
+import { Icon } from "@yamada-ui/fontawesome"
 import {
   Slider,
   SliderFilledTrack,
@@ -14,14 +14,14 @@ import {
   Tooltip,
   useBoolean,
   VStack,
-} from '@yamada-ui/react'
-import { useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+} from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Slider>
 
 const meta: Meta<typeof Slider> = {
-  title: 'Components / Forms / Slider',
+  title: "Components / Forms / Slider",
   component: Slider,
 }
 
@@ -38,9 +38,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Slider size='sm' defaultValue={25} />
-      <Slider size='md' defaultValue={50} />
-      <Slider size='lg' defaultValue={75} />
+      <Slider size="sm" defaultValue={25} />
+      <Slider size="md" defaultValue={50} />
+      <Slider size="lg" defaultValue={75} />
     </>
   )
 }
@@ -48,63 +48,63 @@ export const withSize: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <>
-      <Slider colorScheme='primary' />
+      <Slider colorScheme="primary" />
 
-      <Slider colorScheme='secondary' />
+      <Slider colorScheme="secondary" />
 
-      <Slider colorScheme='warning' />
+      <Slider colorScheme="warning" />
 
-      <Slider colorScheme='danger' />
+      <Slider colorScheme="danger" />
 
-      <Slider colorScheme='link' />
+      <Slider colorScheme="link" />
 
-      <Slider colorScheme='gray' />
+      <Slider colorScheme="gray" />
 
-      <Slider colorScheme='zinc' />
+      <Slider colorScheme="zinc" />
 
-      <Slider colorScheme='neutral' />
+      <Slider colorScheme="neutral" />
 
-      <Slider colorScheme='stone' />
+      <Slider colorScheme="stone" />
 
-      <Slider colorScheme='red' />
+      <Slider colorScheme="red" />
 
-      <Slider colorScheme='rose' />
+      <Slider colorScheme="rose" />
 
-      <Slider colorScheme='pink' />
+      <Slider colorScheme="pink" />
 
-      <Slider colorScheme='orange' />
+      <Slider colorScheme="orange" />
 
-      <Slider colorScheme='amber' />
+      <Slider colorScheme="amber" />
 
-      <Slider colorScheme='yellow' />
+      <Slider colorScheme="yellow" />
 
-      <Slider colorScheme='lime' />
+      <Slider colorScheme="lime" />
 
-      <Slider colorScheme='green' />
+      <Slider colorScheme="green" />
 
-      <Slider colorScheme='emerald' />
+      <Slider colorScheme="emerald" />
 
-      <Slider colorScheme='teal' />
+      <Slider colorScheme="teal" />
 
-      <Slider colorScheme='cyan' />
+      <Slider colorScheme="cyan" />
 
-      <Slider colorScheme='sky' />
+      <Slider colorScheme="sky" />
 
-      <Slider colorScheme='blue' />
+      <Slider colorScheme="blue" />
 
-      <Slider colorScheme='indigo' />
+      <Slider colorScheme="indigo" />
 
-      <Slider colorScheme='violet' />
+      <Slider colorScheme="violet" />
 
-      <Slider colorScheme='purple' />
+      <Slider colorScheme="purple" />
 
-      <Slider colorScheme='fuchsia' />
+      <Slider colorScheme="fuchsia" />
     </>
   )
 }
 
 export const withOrientation: Story = () => {
-  return <Slider orientation='vertical' h='calc(100vh - 16px * 2)' />
+  return <Slider orientation="vertical" h="calc(100vh - 16px * 2)" />
 }
 
 export const withReversed: Story = () => {
@@ -113,8 +113,8 @@ export const withReversed: Story = () => {
       <Slider isReversed />
       <Slider
         isReversed
-        orientation='vertical'
-        h='calc(100vh - 16px * 3 - 14px)'
+        orientation="vertical"
+        h="calc(100vh - 16px * 3 - 14px)"
       />
     </>
   )
@@ -150,7 +150,7 @@ export const withFocusThumbOnChange: Story = () => {
       <Text>Value: {value}</Text>
       <Slider value={value} step={10} focusThumbOnChange={false} />
 
-      <Center w='full' gap='md'>
+      <Center w="full" gap="md">
         <Button
           isDisabled={value === 0}
           onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
@@ -159,7 +159,7 @@ export const withFocusThumbOnChange: Story = () => {
         </Button>
         <Button
           isDisabled={value === 100}
-          colorScheme='blue'
+          colorScheme="blue"
           onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
         >
           +10
@@ -171,39 +171,39 @@ export const withFocusThumbOnChange: Story = () => {
 
 export const withMark: Story = () => {
   return (
-    <VStack gap='lg'>
-      <Slider size='sm'>
-        <SliderMark value={25} w='10' ml='-5'>
+    <VStack gap="lg">
+      <Slider size="sm">
+        <SliderMark value={25} w="10" ml="-5">
           25%
         </SliderMark>
-        <SliderMark value={50} w='10' ml='-5'>
+        <SliderMark value={50} w="10" ml="-5">
           50%
         </SliderMark>
-        <SliderMark value={75} w='10' ml='-5'>
+        <SliderMark value={75} w="10" ml="-5">
           75%
         </SliderMark>
       </Slider>
 
-      <Slider size='md'>
-        <SliderMark value={25} w='10' ml='-5'>
+      <Slider size="md">
+        <SliderMark value={25} w="10" ml="-5">
           25%
         </SliderMark>
-        <SliderMark value={50} w='10' ml='-5'>
+        <SliderMark value={50} w="10" ml="-5">
           50%
         </SliderMark>
-        <SliderMark value={75} w='10' ml='-5'>
+        <SliderMark value={75} w="10" ml="-5">
           75%
         </SliderMark>
       </Slider>
 
-      <Slider size='lg'>
-        <SliderMark value={25} w='10' ml='-5'>
+      <Slider size="lg">
+        <SliderMark value={25} w="10" ml="-5">
           25%
         </SliderMark>
-        <SliderMark value={50} w='10' ml='-5'>
+        <SliderMark value={50} w="10" ml="-5">
           50%
         </SliderMark>
-        <SliderMark value={75} w='10' ml='-5'>
+        <SliderMark value={75} w="10" ml="-5">
           75%
         </SliderMark>
       </Slider>
@@ -219,21 +219,21 @@ export const withTooltip: Story = () => {
     <Slider
       value={value}
       onChange={onChange}
-      mt='10'
+      mt="10"
       onMouseEnter={on}
       onMouseLeave={off}
     >
-      <SliderMark value={25} w='10' ml='-5'>
+      <SliderMark value={25} w="10" ml="-5">
         25%
       </SliderMark>
-      <SliderMark value={50} w='10' ml='-5'>
+      <SliderMark value={50} w="10" ml="-5">
         50%
       </SliderMark>
-      <SliderMark value={75} w='10' ml='-5'>
+      <SliderMark value={75} w="10" ml="-5">
         75%
       </SliderMark>
 
-      <Tooltip placement='top' label={`${value}%`} isOpen={isOpen}>
+      <Tooltip placement="top" label={`${value}%`} isOpen={isOpen}>
         <SliderThumb />
       </Tooltip>
     </Slider>
@@ -247,8 +247,8 @@ export const isDisabled: Story = () => {
 
       <FormControl
         isDisabled
-        label='volume (sound)'
-        helperMessage='Please select your preferred volume.'
+        label="volume (sound)"
+        helperMessage="Please select your preferred volume."
       >
         <Slider />
       </FormControl>
@@ -263,8 +263,8 @@ export const isReadonly: Story = () => {
 
       <FormControl
         isReadOnly
-        label='volume (sound)'
-        helperMessage='Please select your preferred volume.'
+        label="volume (sound)"
+        helperMessage="Please select your preferred volume."
       >
         <Slider />
       </FormControl>
@@ -281,8 +281,8 @@ export const isInvalid: Story = () => {
 
       <FormControl
         isInvalid={value < 20}
-        label='volume (sound)'
-        errorMessage='Volume should be set to 20 or higher.'
+        label="volume (sound)"
+        errorMessage="Volume should be set to 20 or higher."
       >
         <Slider value={value} onChange={onChange} />
       </FormControl>
@@ -294,28 +294,28 @@ export const customColor: Story = () => {
   return (
     <>
       <Slider
-        trackColor='orange.200'
-        filledTrackColor='orange.500'
-        thumbColor='orange.700'
+        trackColor="orange.200"
+        filledTrackColor="orange.500"
+        thumbColor="orange.700"
       />
 
       <Slider
-        trackProps={{ bg: 'green.200' }}
-        filledTrackProps={{ bg: 'green.500' }}
-        thumbProps={{ bg: 'green.700' }}
+        trackProps={{ bg: "green.200" }}
+        filledTrackProps={{ bg: "green.500" }}
+        thumbProps={{ bg: "green.700" }}
       />
 
       <Slider>
-        <SliderTrack bg='blue.200' filledTrackProps={{ bg: 'blue.500' }} />
-        <SliderThumb bg='blue.700' />
+        <SliderTrack bg="blue.200" filledTrackProps={{ bg: "blue.500" }} />
+        <SliderThumb bg="blue.700" />
       </Slider>
 
       <Slider>
-        <SliderTrack bg='red.200'>
-          <SliderFilledTrack bg='red.500' />
+        <SliderTrack bg="red.200">
+          <SliderFilledTrack bg="red.500" />
         </SliderTrack>
 
-        <SliderThumb bg='red.700' />
+        <SliderThumb bg="red.700" />
       </Slider>
     </>
   )
@@ -326,14 +326,14 @@ export const customThumb: Story = () => {
     <>
       <Slider
         thumbProps={{
-          color: 'blue.500',
-          boxSize: '6',
+          color: "blue.500",
+          boxSize: "6",
           children: <Icon icon={faWaveSquare} />,
         }}
       />
 
       <Slider>
-        <SliderThumb color='blue.500' boxSize='6'>
+        <SliderThumb color="blue.500" boxSize="6">
           <Icon icon={faWaveSquare} />
         </SliderThumb>
       </Slider>
@@ -346,25 +346,25 @@ export const customMark: Story = () => {
 
   return (
     <>
-      <Slider value={value} onChange={onChange} mt='10'>
-        <SliderMark value={25} w='10' ml='-5'>
+      <Slider value={value} onChange={onChange} mt="10">
+        <SliderMark value={25} w="10" ml="-5">
           25%
         </SliderMark>
-        <SliderMark value={50} w='10' ml='-5'>
+        <SliderMark value={50} w="10" ml="-5">
           50%
         </SliderMark>
-        <SliderMark value={75} w='10' ml='-5'>
+        <SliderMark value={75} w="10" ml="-5">
           75%
         </SliderMark>
         <SliderMark
           value={value}
-          bg='blue.500'
-          color='white'
-          py='0.5'
-          rounded='md'
-          w='10'
-          mt='-10'
-          ml='-5'
+          bg="blue.500"
+          color="white"
+          py="0.5"
+          rounded="md"
+          w="10"
+          mt="-10"
+          ml="-5"
         >
           {value}%
         </SliderMark>
@@ -426,26 +426,26 @@ export const reactHookForm: Story = () => {
     formState: { errors },
   } = useForm<Data>({ defaultValues })
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.slider}
-        label='Volume'
+        label="Volume"
         errorMessage={errors.slider?.message}
       >
         <Controller
-          name='slider'
+          name="slider"
           control={control}
-          rules={{ max: { value: 50, message: 'The maximum value is 50.' } }}
+          rules={{ max: { value: 50, message: "The maximum value is 50." } }}
           render={({ field }) => <Slider {...field} />}
         />
       </FormControl>
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>

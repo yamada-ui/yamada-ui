@@ -6,9 +6,9 @@ import {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-} from '@yamada-ui/core'
-import { Popover, PopoverTrigger } from '@yamada-ui/popover'
-import { cx, handlerAll } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { cx, handlerAll } from "@yamada-ui/utils"
 import {
   cloneElement,
   CSSProperties,
@@ -16,13 +16,13 @@ import {
   MouseEventHandler,
   ReactElement,
   useMemo,
-} from 'react'
+} from "react"
 import {
   AutocompleteClearIcon,
   AutocompleteIcon,
   AutocompleteIconProps,
-} from './autocomplete-icon'
-import { AutocompleteList, AutocompleteListProps } from './autocomplete-list'
+} from "./autocomplete-icon"
+import { AutocompleteList, AutocompleteListProps } from "./autocomplete-list"
 import {
   AutocompleteProvider,
   useAutocomplete,
@@ -30,8 +30,8 @@ import {
   AutocompleteDescendantsContextProvider,
   useAutocompleteContext,
   useAutocompleteInput,
-} from './use-autocomplete'
-import { AutocompleteCreate, AutocompleteEmpty } from './'
+} from "./use-autocomplete"
+import { AutocompleteCreate, AutocompleteEmpty } from "./"
 
 type MultiAutocompleteOptions = {
   /**
@@ -72,15 +72,15 @@ type MultiAutocompleteOptions = {
   /**
    * Props for multi autocomplete container element.
    */
-  containerProps?: Omit<HTMLUIProps<'div'>, 'children'>
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
    * Props for multi autocomplete list element.
    */
-  listProps?: Omit<AutocompleteListProps, 'children'>
+  listProps?: Omit<AutocompleteListProps, "children">
   /**
    * Props for multi autocomplete input element.
    */
-  inputProps?: HTMLUIProps<'input'>
+  inputProps?: HTMLUIProps<"input">
   /**
    * Props for multi autocomplete icon element.
    */
@@ -91,14 +91,14 @@ type MultiAutocompleteOptions = {
   clearIconProps?: AutocompleteIconProps
 }
 
-export type MultiAutocompleteProps = ThemeProps<'Select'> &
+export type MultiAutocompleteProps = ThemeProps<"Select"> &
   UseAutocompleteProps<string[]> &
   MultiAutocompleteOptions
 
-export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>(
+export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(
-      'MultiAutocomplete',
+      "MultiAutocomplete",
       props,
     )
     let {
@@ -147,9 +147,9 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>(
     minH = minH ?? minHeight
 
     const css: CSSUIObject = {
-      position: 'relative',
-      w: '100%',
-      h: 'fit-content',
+      position: "relative",
+      w: "100%",
+      h: "fit-content",
       color,
       ...styles.container,
     }
@@ -169,7 +169,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>(
         >
           <Popover {...getPopoverProps()}>
             <ui.div
-              className={cx('ui-autocomplete', className)}
+              className={cx("ui-autocomplete", className)}
               __css={css}
               {...getContainerProps(containerProps)}
             >
@@ -220,18 +220,18 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, 'div'>(
   },
 )
 
-type MultiAutocompleteFieldProps = HTMLUIProps<'div'> &
+type MultiAutocompleteFieldProps = HTMLUIProps<"div"> &
   Pick<
     MultiAutocompleteProps,
-    'component' | 'separator' | 'keepPlaceholder' | 'inputProps'
+    "component" | "separator" | "keepPlaceholder" | "inputProps"
   >
 
-const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
+const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
   (
     {
       className,
       component,
-      separator = ',',
+      separator = ",",
       keepPlaceholder,
       h,
       minH,
@@ -274,10 +274,10 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
           })
 
           const style: CSSProperties = {
-            cursor: 'default',
-            marginBlockStart: '0.125rem',
-            marginBlockEnd: '0.125rem',
-            marginInlineEnd: '0.25rem',
+            cursor: "default",
+            marginBlockStart: "0.125rem",
+            marginBlockEnd: "0.125rem",
+            marginInlineEnd: "0.25rem",
           }
 
           return el ? cloneElement(el as ReactElement, { style }) : null
@@ -287,7 +287,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
           const isLast = displayValue.length === index + 1
 
           return (
-            <ui.span key={index} display='inline-block' me='0.25rem'>
+            <ui.span key={index} display="inline-block" me="0.25rem">
               {value}
               {!isLast || isOpen ? separator : null}
             </ui.span>
@@ -297,39 +297,39 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, 'div'>(
     }, [displayValue, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
-      paddingEnd: '2rem',
+      paddingEnd: "2rem",
       h,
       minH,
-      display: 'flex',
-      flexWrap: 'wrap',
-      alignItems: 'center',
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
       ...styles.field,
-      cursor: 'text',
+      cursor: "text",
     }
 
     return (
       <PopoverTrigger>
         <ui.div
-          className={cx('ui-autocomplete__field', className)}
+          className={cx("ui-autocomplete__field", className)}
           __css={css}
-          py={displayValue?.length && component ? '0.125rem' : undefined}
+          py={displayValue?.length && component ? "0.125rem" : undefined}
           {...rest}
         >
           {cloneChildren}
 
           <ui.input
-            className={cx('ui-autocomplete__field__input', className)}
-            display='inline-block'
-            flex='1'
-            overflow='hidden'
-            marginBlockStart='0.125rem'
-            marginBlockEnd='0.125rem'
+            className={cx("ui-autocomplete__field__input", className)}
+            display="inline-block"
+            flex="1"
+            overflow="hidden"
+            marginBlockStart="0.125rem"
+            marginBlockEnd="0.125rem"
             placeholder={
               !displayValue || (keepPlaceholder && isOpen)
                 ? placeholder
                 : undefined
             }
-            {...getInputProps({ ...inputProps, value: inputValue ?? '' }, ref)}
+            {...getInputProps({ ...inputProps, value: inputValue ?? "" }, ref)}
           />
         </ui.div>
       </PopoverTrigger>

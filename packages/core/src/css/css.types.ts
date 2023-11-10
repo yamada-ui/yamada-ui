@@ -1,33 +1,33 @@
-import type * as CSS from 'csstype'
-import { StylesProps, PseudosProps } from '../styles'
-import { Theme, StyledTheme } from '../theme.types'
+import type * as CSS from "csstype"
+import { StylesProps, PseudosProps } from "../styles"
+import { Theme, StyledTheme } from "../theme.types"
 
-export type * as CSS from 'csstype'
+export type * as CSS from "csstype"
 
-export type ColorMode = 'light' | 'dark'
+export type ColorMode = "light" | "dark"
 
-type ThemeVariant<Y extends keyof Theme['components'] | unknown = unknown> =
-  Y extends keyof Theme['components']
-    ? UIValue<Theme['components'][Y]['variants']>
+type ThemeVariant<Y extends keyof Theme["components"] | unknown = unknown> =
+  Y extends keyof Theme["components"]
+    ? UIValue<Theme["components"][Y]["variants"]>
     : UIValue<string>
 
-type ThemeSize<Y extends keyof Theme['components'] | unknown = unknown> =
-  Y extends keyof Theme['components']
-    ? UIValue<Theme['components'][Y]['sizes']>
+type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
+  Y extends keyof Theme["components"]
+    ? UIValue<Theme["components"][Y]["sizes"]>
     : UIValue<string>
 
 export type ThemeProps<
-  Y extends keyof Theme['components'] | unknown = unknown,
+  Y extends keyof Theme["components"] | unknown = unknown,
 > = {
   variant?: ThemeVariant<Y>
   size?: ThemeSize<Y>
-  colorScheme?: Theme['colorSchemes']
+  colorScheme?: Theme["colorSchemes"]
 }
 
 export type ColorModeArray<Y> = [Y, Y]
 
-export type ResponsiveObject<Y> = Record<'base', Y> &
-  Partial<Record<Theme['breakpoints'], Y>>
+export type ResponsiveObject<Y> = Record<"base", Y> &
+  Partial<Record<Theme["breakpoints"], Y>>
 
 type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
 
@@ -82,8 +82,8 @@ export type CSSUIProps = StylesProps & PseudosProps
 export type UIStyleProps = {
   theme: StyledTheme
   colorMode?: ColorMode
-  colorScheme?: Theme['colorSchemes']
-  themeScheme?: Theme['themeSchemes']
+  colorScheme?: Theme["colorSchemes"]
+  themeScheme?: Theme["themeSchemes"]
   [key: string]: any
 }
 
@@ -94,10 +94,10 @@ export type UIMultiStyle =
 
 export type AnimationStyle = {
   keyframes: Record<string, StyleUIValue>
-  duration?: BaseToken<CSS.Property.AnimationDuration, 'transitionDuration'>
+  duration?: BaseToken<CSS.Property.AnimationDuration, "transitionDuration">
   timingFunction?: BaseToken<
     CSS.Property.AnimationTimingFunction,
-    'transitionEasing'
+    "transitionEasing"
   >
   delay?: BaseToken<CSS.Property.AnimationDelay>
   iterationCount?: BaseToken<CSS.Property.AnimationIterationCount>

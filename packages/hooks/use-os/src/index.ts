@@ -1,10 +1,10 @@
 export type OS =
-  | 'undetermined'
-  | 'macos'
-  | 'ios'
-  | 'windows'
-  | 'android'
-  | 'linux'
+  | "undetermined"
+  | "macos"
+  | "ios"
+  | "windows"
+  | "android"
+  | "linux"
 
 const getOS = (): OS => {
   const { userAgent } = window.navigator
@@ -15,17 +15,17 @@ const getOS = (): OS => {
   const android = /Android/i
   const linux = /Linux/i
 
-  if (macos.test(userAgent)) return 'macos'
-  if (ios.test(userAgent)) return 'ios'
-  if (windows.test(userAgent)) return 'windows'
-  if (android.test(userAgent)) return 'android'
-  if (linux.test(userAgent)) return 'linux'
+  if (macos.test(userAgent)) return "macos"
+  if (ios.test(userAgent)) return "ios"
+  if (windows.test(userAgent)) return "windows"
+  if (android.test(userAgent)) return "android"
+  if (linux.test(userAgent)) return "linux"
 
-  return 'undetermined'
+  return "undetermined"
 }
 
 export const useOS = (): OS => {
-  if (typeof window !== 'undefined') return getOS()
+  if (typeof window !== "undefined") return getOS()
 
-  return 'undetermined'
+  return "undetermined"
 }

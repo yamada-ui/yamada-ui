@@ -8,33 +8,33 @@ import {
   useMultiComponentStyle,
   CSSUIProps,
   Token,
-} from '@yamada-ui/core'
-import { FocusLock, FocusLockProps } from '@yamada-ui/focus-lock'
+} from "@yamada-ui/core"
+import { FocusLock, FocusLockProps } from "@yamada-ui/focus-lock"
 import {
   motion,
   HTMLMotionProps,
   AnimatePresence,
   MotionTransitionProperties,
-} from '@yamada-ui/motion'
-import { Portal } from '@yamada-ui/portal'
-import { scaleFadeProps, slideFadeProps } from '@yamada-ui/transitions'
-import { useValue } from '@yamada-ui/use-value'
+} from "@yamada-ui/motion"
+import { Portal } from "@yamada-ui/portal"
+import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
+import { useValue } from "@yamada-ui/use-value"
 import {
   cx,
   createContext,
   getValidChildren,
   findChildren,
-} from '@yamada-ui/utils'
-import { cloneElement, KeyboardEvent, useCallback } from 'react'
-import { RemoveScroll } from 'react-remove-scroll'
-import { DrawerContent } from './drawer'
+} from "@yamada-ui/utils"
+import { cloneElement, KeyboardEvent, useCallback } from "react"
+import { RemoveScroll } from "react-remove-scroll"
+import { DrawerContent } from "./drawer"
 import {
   DrawerOverlay,
   DialogOverlay,
   DialogCloseButton,
   ModalOverlay,
   ModalCloseButton,
-} from './'
+} from "./"
 
 type ModalContext = ModalOptions & {
   styles: Record<string, CSSUIObject>
@@ -49,11 +49,11 @@ export { useModal }
 
 type ModalOptions = Pick<
   FocusLockProps,
-  | 'autoFocus'
-  | 'initialFocusRef'
-  | 'finalFocusRef'
-  | 'restoreFocus'
-  | 'lockFocusAcrossFrames'
+  | "autoFocus"
+  | "initialFocusRef"
+  | "finalFocusRef"
+  | "restoreFocus"
+  | "lockFocusAcrossFrames"
 > & {
   /**
    * If `true`, the open will be opened.
@@ -81,20 +81,20 @@ type ModalOptions = Pick<
    * @default 'center'
    */
   placement?: Token<
-    | 'center'
-    | 'top'
-    | 'right'
-    | 'bottom'
-    | 'left'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom-left'
-    | 'bottom-right'
+    | "center"
+    | "top"
+    | "right"
+    | "bottom"
+    | "left"
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right"
   >
   /**
    * The CSS `padding` property.
    */
-  outside?: CSSUIProps['p']
+  outside?: CSSUIProps["p"]
   /**
    * If `true`, display the modal close button.
    *
@@ -121,7 +121,7 @@ type ModalOptions = Pick<
    *
    * @default 'inside'
    */
-  scrollBehavior?: 'inside' | 'outside'
+  scrollBehavior?: "inside" | "outside"
   /**
    * If `true`, scrolling will be disabled on the `body` when the modal opens.
    *
@@ -145,24 +145,24 @@ type ModalOptions = Pick<
    *
    * @default 'scale'
    */
-  animation?: 'scale' | 'top' | 'right' | 'left' | 'bottom' | 'none'
+  animation?: "scale" | "top" | "right" | "left" | "bottom" | "none"
   /**
    * The animation duration.
    */
-  duration?: MotionTransitionProperties['duration']
+  duration?: MotionTransitionProperties["duration"]
 }
 
 export type ModalProps = Omit<
-  HTMLUIProps<'section'>,
-  'scrollBehavior' | 'animation'
+  HTMLUIProps<"section">,
+  "scrollBehavior" | "animation"
 > &
-  Omit<HTMLMotionProps<'section'>, 'color' | 'transition'> &
-  ThemeProps<'Modal'> &
+  Omit<HTMLMotionProps<"section">, "color" | "transition"> &
+  ThemeProps<"Modal"> &
   ModalOptions
 
-export const Modal = forwardRef<ModalProps, 'section'>(
+export const Modal = forwardRef<ModalProps, "section">(
   ({ size, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Modal', {
+    const [styles, mergedProps] = useMultiComponentStyle("Modal", {
       size,
       ...props,
     })
@@ -174,12 +174,12 @@ export const Modal = forwardRef<ModalProps, 'section'>(
       onOverlayClick,
       onEsc,
       onCloseComplete,
-      placement: _placement = 'center',
-      outside = 'md',
+      placement: _placement = "center",
+      outside = "md",
       withCloseButton = true,
       withOverlay = true,
       allowPinchZoom = false,
-      scrollBehavior = 'inside',
+      scrollBehavior = "inside",
       autoFocus,
       restoreFocus,
       initialFocusRef,
@@ -188,14 +188,14 @@ export const Modal = forwardRef<ModalProps, 'section'>(
       closeOnOverlay = true,
       closeOnEsc = true,
       lockFocusAcrossFrames = true,
-      animation = 'scale',
+      animation = "scale",
       duration,
       ...rest
     } = omitThemeProps(mergedProps)
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
-        if (ev.key !== 'Escape') return
+        if (ev.key !== "Escape") return
 
         ev.stopPropagation()
 
@@ -223,24 +223,24 @@ export const Modal = forwardRef<ModalProps, 'section'>(
     const placement = useValue(_placement)
 
     const css: CSSUIObject = {
-      position: 'fixed',
+      position: "fixed",
       top: 0,
       left: 0,
-      zIndex: 'jeice',
-      w: '100vw',
-      h: '100dvh',
-      p: size !== 'full' ? outside : undefined,
-      display: 'flex',
-      justifyContent: placement.includes('left')
-        ? 'flex-start'
-        : placement.includes('right')
-        ? 'flex-end'
-        : 'center',
-      alignItems: placement.includes('top')
-        ? 'flex-start'
-        : placement.includes('bottom')
-        ? 'flex-end'
-        : 'center',
+      zIndex: "jeice",
+      w: "100vw",
+      h: "100dvh",
+      p: size !== "full" ? outside : undefined,
+      display: "flex",
+      justifyContent: placement.includes("left")
+        ? "flex-start"
+        : placement.includes("right")
+        ? "flex-end"
+        : "center",
+      alignItems: placement.includes("top")
+        ? "flex-start"
+        : placement.includes("bottom")
+        ? "flex-end"
+        : "center",
     }
 
     return (
@@ -274,7 +274,7 @@ export const Modal = forwardRef<ModalProps, 'section'>(
                 >
                   <ui.div __css={css}>
                     {customModalOverlay ??
-                      (withOverlay && size !== 'full' ? (
+                      (withOverlay && size !== "full" ? (
                         <ModalOverlay />
                       ) : null)}
 
@@ -300,37 +300,37 @@ export const Modal = forwardRef<ModalProps, 'section'>(
 )
 
 type ModalContentProps = Omit<
-  HTMLUIProps<'section'>,
-  'scrollBehavior' | 'animation'
+  HTMLUIProps<"section">,
+  "scrollBehavior" | "animation"
 > &
-  Omit<HTMLMotionProps<'section'>, 'color' | 'transition'>
+  Omit<HTMLMotionProps<"section">, "color" | "transition">
 
 const getModalContentProps = (
-  animation: ModalProps['animation'] = 'scale',
-  duration?: MotionTransitionProperties['duration'],
+  animation: ModalProps["animation"] = "scale",
+  duration?: MotionTransitionProperties["duration"],
 ) => {
   switch (animation) {
-    case 'scale':
+    case "scale":
       return {
         ...scaleFadeProps,
         custom: { scale: 0.95, reverse: true, duration },
       }
-    case 'top':
+    case "top":
       return {
         ...slideFadeProps,
         custom: { offsetY: -16, reverse: true, duration },
       }
-    case 'right':
+    case "right":
       return {
         ...slideFadeProps,
         custom: { offsetX: 16, reverse: true, duration },
       }
-    case 'left':
+    case "left":
       return {
         ...slideFadeProps,
         custom: { offsetX: -16, reverse: true, duration },
       }
-    case 'bottom':
+    case "bottom":
       return {
         ...slideFadeProps,
         custom: { offsetY: 16, reverse: true, duration },
@@ -338,7 +338,7 @@ const getModalContentProps = (
   }
 }
 
-const ModalContent = forwardRef<ModalContentProps, 'section'>(
+const ModalContent = forwardRef<ModalContentProps, "section">(
   ({ className, children, __css, ...rest }, ref) => {
     const {
       styles,
@@ -358,14 +358,14 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
     )
 
     const props =
-      animation !== 'none' ? getModalContentProps(animation, duration) : {}
+      animation !== "none" ? getModalContentProps(animation, duration) : {}
 
     const css: CSSUIObject = {
-      position: 'relative',
-      maxH: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: scrollBehavior === 'inside' ? 'hidden' : 'auto',
+      position: "relative",
+      maxH: "100%",
+      display: "flex",
+      flexDirection: "column",
+      overflow: scrollBehavior === "inside" ? "hidden" : "auto",
       outline: 0,
       ...(__css ? __css : styles.container),
     }
@@ -374,7 +374,7 @@ const ModalContent = forwardRef<ModalContentProps, 'section'>(
       <ui.section
         as={motion.section}
         ref={ref}
-        className={cx('ui-modal', className)}
+        className={cx("ui-modal", className)}
         tabIndex={-1}
         __css={css}
         {...props}

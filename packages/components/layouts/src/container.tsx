@@ -6,9 +6,9 @@ import {
   useComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useMemo } from 'react'
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useMemo } from "react"
 
 type ContainerOptions = {
   /**
@@ -19,17 +19,17 @@ type ContainerOptions = {
   centerContent?: boolean
 }
 
-export type ContainerProps = HTMLUIProps<'section'> &
-  ThemeProps<'Container'> &
+export type ContainerProps = HTMLUIProps<"section"> &
+  ThemeProps<"Container"> &
   ContainerOptions
 
-export const Container = forwardRef<ContainerProps, 'section'>((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle('Container', props)
+export const Container = forwardRef<ContainerProps, "section">((props, ref) => {
+  const [styles, mergedProps] = useComponentStyle("Container", props)
   const { className, centerContent, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = useMemo(
     () => ({
-      alignItems: centerContent ? 'center' : undefined,
+      alignItems: centerContent ? "center" : undefined,
       ...styles,
     }),
     [centerContent, styles],
@@ -38,7 +38,7 @@ export const Container = forwardRef<ContainerProps, 'section'>((props, ref) => {
   return (
     <ui.section
       ref={ref}
-      className={cx('ui-container', className)}
+      className={cx("ui-container", className)}
       __css={css}
       {...rest}
     />

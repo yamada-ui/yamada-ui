@@ -5,15 +5,15 @@ import {
   HTMLUIProps,
   ThemeProps,
   ComponentArgs,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   FormControlOptions,
   useFormControl,
   useFormControlProps,
   formControlProperties,
-} from '@yamada-ui/form-control'
-import { AnimatePresence, motion, SVGMotionProps } from '@yamada-ui/motion'
-import { trackFocusVisible } from '@yamada-ui/use-focus-visible'
+} from "@yamada-ui/form-control"
+import { AnimatePresence, motion, SVGMotionProps } from "@yamada-ui/motion"
+import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
 import {
   cx,
   omitObject,
@@ -26,7 +26,7 @@ import {
   dataAttr,
   mergeRefs,
   funcAll,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -45,8 +45,8 @@ import {
   forwardRef,
   ForwardedRef,
   Ref,
-} from 'react'
-import { useCheckboxGroupContext } from './checkbox-group'
+} from "react"
+import { useCheckboxGroupContext } from "./checkbox-group"
 
 export type UseCheckboxProps<Y extends string | number = string> =
   FormControlOptions & {
@@ -147,14 +147,14 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const onKeyDown = useCallback(
     ({ key }: KeyboardEvent<Element>) => {
-      if (key === ' ') setActive(true)
+      if (key === " ") setActive(true)
     },
     [setActive],
   )
 
   const onKeyUp = useCallback(
     ({ key }: KeyboardEvent<Element>) => {
-      if (key === ' ') setActive(false)
+      if (key === " ") setActive(false)
     },
     [setActive],
   )
@@ -190,9 +190,9 @@ export const useCheckbox = <Y extends string | number = string>(
       ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
-        if (el) setIsLabel(el.tagName === 'LABEL')
+        if (el) setIsLabel(el.tagName === "LABEL")
       }),
-      'data-checked': dataAttr(checked),
+      "data-checked": dataAttr(checked),
       onClick: handlerAll(props.onClick, () => {
         if (isLabel) return
 
@@ -209,13 +209,13 @@ export const useCheckbox = <Y extends string | number = string>(
       ...pickObject(rest, formControlProperties),
       ...props,
       ref,
-      'data-active': dataAttr(isActive),
-      'data-hover': dataAttr(isHovered),
-      'data-checked': dataAttr(checked),
-      'data-focus': dataAttr(isFocused),
-      'data-focus-visible': dataAttr(isFocused && isFocusVisible),
-      'data-indeterminate': dataAttr(isIndeterminate),
-      'aria-hidden': true,
+      "data-active": dataAttr(isActive),
+      "data-hover": dataAttr(isHovered),
+      "data-checked": dataAttr(checked),
+      "data-focus": dataAttr(isFocused),
+      "data-focus-visible": dataAttr(isFocused && isFocusVisible),
+      "data-indeterminate": dataAttr(isIndeterminate),
+      "aria-hidden": true,
       onMouseDown: handlerAll(props.onMouseDown, (ev: React.MouseEvent) => {
         if (isFocused) ev.preventDefault()
 
@@ -242,7 +242,7 @@ export const useCheckbox = <Y extends string | number = string>(
       ...props,
       ref: mergeRefs(inputRef, ref),
       id,
-      type: 'checkbox',
+      type: "checkbox",
       name,
       value,
       tabIndex,
@@ -251,15 +251,15 @@ export const useCheckbox = <Y extends string | number = string>(
       readOnly,
       checked,
       style: {
-        border: '0px',
-        clip: 'rect(0px, 0px, 0px, 0px)',
-        height: '1px',
-        width: '1px',
-        margin: '-1px',
-        padding: '0px',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        position: 'absolute',
+        border: "0px",
+        clip: "rect(0px, 0px, 0px, 0px)",
+        height: "1px",
+        width: "1px",
+        margin: "-1px",
+        padding: "0px",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        position: "absolute",
       },
       onChange: handlerAll(props.onChange, onChange),
       onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
@@ -290,7 +290,7 @@ export const useCheckbox = <Y extends string | number = string>(
       ...pickObject(rest, formControlProperties),
       ...props,
       ref,
-      'data-checked': dataAttr(checked),
+      "data-checked": dataAttr(checked),
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
@@ -323,7 +323,7 @@ type CheckboxOptions = {
   /**
    * Props for icon component.
    */
-  iconProps?: Omit<HTMLUIProps<'span'>, 'children'> & { children: ReactElement }
+  iconProps?: Omit<HTMLUIProps<"span">, "children"> & { children: ReactElement }
   /**
    * Props for input element.
    */
@@ -331,14 +331,14 @@ type CheckboxOptions = {
   /**
    * Props for label element.
    */
-  labelProps?: HTMLUIProps<'span'>
+  labelProps?: HTMLUIProps<"span">
 }
 
 export type CheckboxProps<Y extends string | number = string> = Omit<
-  HTMLUIProps<'label'>,
-  keyof UseCheckboxProps | 'checked'
+  HTMLUIProps<"label">,
+  keyof UseCheckboxProps | "checked"
 > &
-  ThemeProps<'Checkbox'> &
+  ThemeProps<"Checkbox"> &
   UseCheckboxProps<Y> &
   CheckboxOptions
 
@@ -349,13 +349,13 @@ export const Checkbox = forwardRef(
   ) => {
     const group = useCheckboxGroupContext()
     const control = useFormControl(props)
-    const [styles, mergedProps] = useMultiComponentStyle('Checkbox', {
-      ...(group ? omitObject(group, ['value']) : {}),
+    const [styles, mergedProps] = useMultiComponentStyle("Checkbox", {
+      ...(group ? omitObject(group, ["value"]) : {}),
       ...props,
     })
     const {
       className,
-      gap = '0.5rem',
+      gap = "0.5rem",
       isRequired = group?.isRequired ?? control.isRequired,
       isReadOnly = group?.isReadOnly ?? control.isReadOnly,
       isDisabled = group?.isDisabled ?? control.isDisabled,
@@ -393,9 +393,9 @@ export const Checkbox = forwardRef(
     const cloneIcon = cloneElement(iconProps?.children ?? <CheckboxIcon />, {
       __css: {
         opacity: isChecked || isIndeterminate ? 1 : 0,
-        transform: isChecked || isIndeterminate ? 'scale(1)' : 'scale(0.95)',
-        transitionProperty: 'transform',
-        transitionDuration: 'normal',
+        transform: isChecked || isIndeterminate ? "scale(1)" : "scale(0.95)",
+        transitionProperty: "transform",
+        transitionDuration: "normal",
       },
       isIndeterminate,
       isChecked,
@@ -407,54 +407,54 @@ export const Checkbox = forwardRef(
 
     return (
       <ui.label
-        className={cx('ui-checkbox', className)}
+        className={cx("ui-checkbox", className)}
         {...getContainerProps()}
         __css={{
-          cursor: 'pointer',
-          position: 'relative',
-          display: 'inline-flex',
-          alignItems: 'center',
-          verticalAlign: 'top',
+          cursor: "pointer",
+          position: "relative",
+          display: "inline-flex",
+          alignItems: "center",
+          verticalAlign: "top",
           gap,
           ...styles.container,
         }}
         {...omitObject(rest, [
-          'id',
-          'name',
-          'value',
-          'defaultValue',
-          'defaultChecked',
-          'isChecked',
-          'isIndeterminate',
-          'onChange',
-          'onBlur',
-          'onFocus',
-          'tabIndex',
+          "id",
+          "name",
+          "value",
+          "defaultValue",
+          "defaultChecked",
+          "isChecked",
+          "isIndeterminate",
+          "onChange",
+          "onBlur",
+          "onFocus",
+          "tabIndex",
         ])}
       >
         <ui.input
-          className='ui-checkbox__input'
+          className="ui-checkbox__input"
           {...getInputProps(inputProps, ref)}
         />
 
         <ui.span
-          className='ui-checkbox__icon'
+          className="ui-checkbox__icon"
           __css={{
-            pointerEvents: isReadOnly ? 'none' : undefined,
-            position: 'relative',
-            display: 'inline-block',
-            userSelect: 'none',
+            pointerEvents: isReadOnly ? "none" : undefined,
+            position: "relative",
+            display: "inline-block",
+            userSelect: "none",
             ...styles.icon,
           }}
           {...getIconProps(
-            omitObject(iconProps ?? { children: undefined }, ['children']),
+            omitObject(iconProps ?? { children: undefined }, ["children"]),
           )}
         >
           {cloneIcon}
         </ui.span>
 
         <ui.span
-          className='ui-checkbox__label'
+          className="ui-checkbox__label"
           __css={{ ...styles.label }}
           {...getLabelProps(labelProps)}
         >
@@ -469,9 +469,9 @@ export const Checkbox = forwardRef(
   ): JSX.Element
 } & ComponentArgs
 
-Checkbox.displayName = 'Checkbox'
+Checkbox.displayName = "Checkbox"
 
-export type CheckboxIconProps = HTMLUIProps<'svg'> &
+export type CheckboxIconProps = HTMLUIProps<"svg"> &
   SVGMotionProps<SVGSVGElement> &
   FormControlOptions & {
     /**
@@ -494,10 +494,10 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
   ...rest
 }) => {
   const iconProps = omitObject(rest, [
-    'isRequired',
-    'isReadOnly',
-    'isDisabled',
-    'isInvalid',
+    "isRequired",
+    "isReadOnly",
+    "isDisabled",
+    "isInvalid",
   ])
 
   return (
@@ -505,10 +505,10 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
       {isIndeterminate || isChecked ? (
         <ui.div
           __css={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
           }}
         >
           <ui.div
@@ -517,14 +517,14 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
               unchecked: { scale: 0.5 },
               checked: { scale: 1 },
             }}
-            initial='unchecked'
-            animate='checked'
-            exit='unchecked'
+            initial="unchecked"
+            animate="checked"
+            exit="unchecked"
             style={
               {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               } as CSSProperties
             }
           >
@@ -540,14 +540,14 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
   )
 }
 
-const CheckIcon: FC<HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>> = (
+const CheckIcon: FC<HTMLUIProps<"svg"> & SVGMotionProps<SVGSVGElement>> = (
   props,
 ) => {
   return (
     <ui.svg
       as={motion.svg}
-      width='1.2em'
-      viewBox='0 0 12 10'
+      width="1.2em"
+      viewBox="0 0 12 10"
       variants={{
         unchecked: {
           opacity: 0,
@@ -560,26 +560,26 @@ const CheckIcon: FC<HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>> = (
         },
       }}
       style={{
-        fill: 'none',
+        fill: "none",
         strokeWidth: 2,
-        stroke: 'currentColor',
+        stroke: "currentColor",
         strokeDasharray: 16,
       }}
       {...props}
     >
-      <polyline points='1.5 6 4.5 9 10.5 1' />
+      <polyline points="1.5 6 4.5 9 10.5 1" />
     </ui.svg>
   )
 }
 
 const IndeterminateIcon: FC<
-  HTMLUIProps<'svg'> & SVGMotionProps<SVGSVGElement>
+  HTMLUIProps<"svg"> & SVGMotionProps<SVGSVGElement>
 > = (props) => {
   return (
     <ui.svg
       as={motion.svg}
-      width='1.2em'
-      viewBox='0 0 24 24'
+      width="1.2em"
+      viewBox="0 0 24 24"
       variants={{
         unchecked: {
           scaleX: 0.65,
@@ -594,10 +594,10 @@ const IndeterminateIcon: FC<
           },
         },
       }}
-      style={{ stroke: 'currentColor', strokeWidth: 4 }}
+      style={{ stroke: "currentColor", strokeWidth: 4 }}
       {...props}
     >
-      <line x1='21' x2='3' y1='12' y2='12' />
+      <line x1="21" x2="3" y1="12" y2="12" />
     </ui.svg>
   )
 }

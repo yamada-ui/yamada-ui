@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   Button,
   useDisclosure,
@@ -14,13 +14,13 @@ import {
   Container,
   Image,
   Heading,
-} from '@yamada-ui/react'
-import { useState } from 'react'
+} from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Modal>
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components / Overlay / Modal',
+  title: "Components / Overlay / Modal",
   component: Modal,
 }
 
@@ -42,10 +42,10 @@ export const basic: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -68,10 +68,10 @@ export const withDuration: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -79,15 +79,15 @@ export const withDuration: Story = () => {
 }
 
 export const withSize: Story = () => {
-  const [size, setSize] = useState<ModalProps['size']>('md')
+  const [size, setSize] = useState<ModalProps["size"]>("md")
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <Wrap gap='md'>
+      <Wrap gap="md">
         <Button
           onClick={() => {
-            setSize('sm')
+            setSize("sm")
             onOpen()
           }}
         >
@@ -96,7 +96,7 @@ export const withSize: Story = () => {
 
         <Button
           onClick={() => {
-            setSize('md')
+            setSize("md")
             onOpen()
           }}
         >
@@ -105,7 +105,7 @@ export const withSize: Story = () => {
 
         <Button
           onClick={() => {
-            setSize('lg')
+            setSize("lg")
             onOpen()
           }}
         >
@@ -114,7 +114,7 @@ export const withSize: Story = () => {
 
         <Button
           onClick={() => {
-            setSize('xl')
+            setSize("xl")
             onOpen()
           }}
         >
@@ -123,7 +123,7 @@ export const withSize: Story = () => {
 
         <Button
           onClick={() => {
-            setSize('full')
+            setSize("full")
             onOpen()
           }}
         >
@@ -140,10 +140,10 @@ export const withSize: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -151,15 +151,15 @@ export const withSize: Story = () => {
 }
 
 export const withPlacement: Story = () => {
-  const [placement, setPlacement] = useState<ModalProps['placement']>('center')
+  const [placement, setPlacement] = useState<ModalProps["placement"]>("center")
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <Wrap gap='md'>
+      <Wrap gap="md">
         <Button
           onClick={() => {
-            setPlacement('center')
+            setPlacement("center")
             onOpen()
           }}
         >
@@ -168,7 +168,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('top')
+            setPlacement("top")
             onOpen()
           }}
         >
@@ -177,7 +177,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('top-left')
+            setPlacement("top-left")
             onOpen()
           }}
         >
@@ -186,7 +186,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('left')
+            setPlacement("left")
             onOpen()
           }}
         >
@@ -195,7 +195,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('bottom-left')
+            setPlacement("bottom-left")
             onOpen()
           }}
         >
@@ -204,7 +204,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('bottom')
+            setPlacement("bottom")
             onOpen()
           }}
         >
@@ -213,7 +213,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('bottom-right')
+            setPlacement("bottom-right")
             onOpen()
           }}
         >
@@ -222,7 +222,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('right')
+            setPlacement("right")
             onOpen()
           }}
         >
@@ -231,7 +231,7 @@ export const withPlacement: Story = () => {
 
         <Button
           onClick={() => {
-            setPlacement('top-right')
+            setPlacement("top-right")
             onOpen()
           }}
         >
@@ -248,10 +248,10 @@ export const withPlacement: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -259,15 +259,15 @@ export const withPlacement: Story = () => {
 }
 
 export const withAnimation: Story = () => {
-  const [animation, setAnimation] = useState<ModalProps['animation']>('scale')
+  const [animation, setAnimation] = useState<ModalProps["animation"]>("scale")
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <Wrap gap='md'>
+      <Wrap gap="md">
         <Button
           onClick={() => {
-            setAnimation('scale')
+            setAnimation("scale")
             onOpen()
           }}
         >
@@ -276,7 +276,7 @@ export const withAnimation: Story = () => {
 
         <Button
           onClick={() => {
-            setAnimation('top')
+            setAnimation("top")
             onOpen()
           }}
         >
@@ -285,7 +285,7 @@ export const withAnimation: Story = () => {
 
         <Button
           onClick={() => {
-            setAnimation('left')
+            setAnimation("left")
             onOpen()
           }}
         >
@@ -294,7 +294,7 @@ export const withAnimation: Story = () => {
 
         <Button
           onClick={() => {
-            setAnimation('bottom')
+            setAnimation("bottom")
             onOpen()
           }}
         >
@@ -303,7 +303,7 @@ export const withAnimation: Story = () => {
 
         <Button
           onClick={() => {
-            setAnimation('right')
+            setAnimation("right")
             onOpen()
           }}
         >
@@ -320,10 +320,10 @@ export const withAnimation: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -347,10 +347,10 @@ export const nestedModal: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={firstControls.onClose}>
+          <Button variant="ghost" onClick={firstControls.onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary' onClick={secondControls.onOpen}>
+          <Button colorScheme="primary" onClick={secondControls.onOpen}>
             あらすじ
           </Button>
         </ModalFooter>
@@ -358,7 +358,7 @@ export const nestedModal: Story = () => {
         <Modal
           isOpen={secondControls.isOpen}
           onClose={secondControls.onClose}
-          size='sm'
+          size="sm"
         >
           <ModalHeader>あらすじ</ModalHeader>
 
@@ -367,10 +367,10 @@ export const nestedModal: Story = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost' onClick={secondControls.onClose}>
+            <Button variant="ghost" onClick={secondControls.onClose}>
               とじる
             </Button>
-            <Button colorScheme='primary'>Wikipadia</Button>
+            <Button colorScheme="primary">Wikipadia</Button>
           </ModalFooter>
         </Modal>
       </Modal>
@@ -394,10 +394,10 @@ export const disabledCloseButton: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -412,7 +412,7 @@ export const customCloseButton: Story = () => {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalCloseButton color='gray.400' />
+        <ModalCloseButton color="gray.400" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
 
@@ -422,10 +422,10 @@ export const customCloseButton: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -448,10 +448,10 @@ export const disabledOverlay: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -466,7 +466,7 @@ export const customOverlay: Story = () => {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay bg='blackAlpha.300' backdropFilter='blur(10px)' />
+        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
 
@@ -476,10 +476,10 @@ export const customOverlay: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -488,15 +488,15 @@ export const customOverlay: Story = () => {
 
 export const scrollBehavior: Story = () => {
   const [scrollBehavior, setScrollBehavior] =
-    useState<ModalProps['scrollBehavior']>('inside')
+    useState<ModalProps["scrollBehavior"]>("inside")
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <Wrap gap='md'>
+      <Wrap gap="md">
         <Button
           onClick={() => {
-            setScrollBehavior('inside')
+            setScrollBehavior("inside")
             onOpen()
           }}
         >
@@ -505,7 +505,7 @@ export const scrollBehavior: Story = () => {
 
         <Button
           onClick={() => {
-            setScrollBehavior('outside')
+            setScrollBehavior("outside")
             onOpen()
           }}
         >
@@ -546,10 +546,10 @@ export const scrollBehavior: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -564,21 +564,21 @@ export const scrollOnMount: Story = () => {
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Container
-        p='md'
-        gap='md'
-        rounded='md'
-        alignItems='center'
-        textAlign='center'
-        border='1px solid'
-        borderColor='inherit'
-        boxShadow='md'
+        p="md"
+        gap="md"
+        rounded="md"
+        alignItems="center"
+        textAlign="center"
+        border="1px solid"
+        borderColor="inherit"
+        boxShadow="md"
       >
         <Image
-          src='https://dragon-ball-official.com/assets/img/intro/intro_2.png'
-          maxW='sm'
+          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
+          maxW="sm"
         />
 
-        <Heading size='xl'>『ドラゴンボール』（DRAGON BALL）</Heading>
+        <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
 
         <Text>
           『ドラゴンボール』（DRAGON
@@ -617,10 +617,10 @@ export const scrollOnMount: Story = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
+          <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme='primary'>Wikipadia</Button>
+          <Button colorScheme="primary">Wikipadia</Button>
         </ModalFooter>
       </Modal>
     </>

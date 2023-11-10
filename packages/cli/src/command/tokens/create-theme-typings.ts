@@ -1,5 +1,5 @@
-import { isArray, isObject, omitObject, prettier } from '../../utils'
-import { config } from './config'
+import { isArray, isObject, omitObject, prettier } from "../../utils"
+import { config } from "./config"
 
 type Component = {
   sizes: string[]
@@ -25,10 +25,10 @@ export const print = (unions: Record<string, string[]>) =>
       ([key, union]) =>
         `${key}: ${union
           .map((value: any) => `"${value}"`)
-          .concat(['(string & {})'])
-          .join(' | ')};`,
+          .concat(["(string & {})"])
+          .join(" | ")};`,
     )
-    .join('\n')
+    .join("\n")
 
 export const extractComponents = ({ components = {} }: { components: any }) =>
   Object.entries<{ sizes?: object; variants?: object }>(components).reduce(
@@ -59,15 +59,15 @@ export const extractTransitions = (theme: any) => {
 
   Object.entries(transitions).forEach(([key, value]) => {
     switch (key) {
-      case 'property':
+      case "property":
         transitionProperty = [...extractPaths(value), ...extractPaths(property)]
         break
 
-      case 'duration':
+      case "duration":
         transitionDuration = [...extractPaths(value), ...extractPaths(duration)]
         break
 
-      case 'easing':
+      case "easing":
         transitionEasing = [...extractPaths(value), ...extractPaths(easing)]
         break
 
@@ -111,9 +111,9 @@ export const extractColorSchemes = (theme: any) => {
 export const extractThemeSchemes = (theme: any) => {
   const { themeSchemes } = theme
 
-  if (!isObject(themeSchemes)) return ['base']
+  if (!isObject(themeSchemes)) return ["base"]
 
-  return ['base', ...Object.keys(themeSchemes)]
+  return ["base", ...Object.keys(themeSchemes)]
 }
 
 export const extractPaths = (
@@ -140,7 +140,7 @@ export const extractPaths = (
 }
 
 export const extractKeys = (theme: any, key: string) => {
-  const keys = key.split('.')
+  const keys = key.split(".")
 
   const property = keys.reduce((obj, key) => obj[key] ?? {}, theme)
 
@@ -173,7 +173,7 @@ export const createThemeTypings = async (theme: any) => {
 
       if (isObject(theme.semantics)) {
         const semanticKeys = extractKeys(
-          omitObject(theme.semantics, ['colorSchemes']),
+          omitObject(theme.semantics, ["colorSchemes"]),
           key,
         )
           .filter(filter)
@@ -187,8 +187,8 @@ export const createThemeTypings = async (theme: any) => {
     {} as Record<string, string[]>,
   )
 
-  const textStyles = extractKeys(theme, 'styles.textStyles')
-  const layerStyles = extractKeys(theme, 'styles.layerStyles')
+  const textStyles = extractKeys(theme, "styles.textStyles")
+  const layerStyles = extractKeys(theme, "styles.layerStyles")
   const colorSchemes = extractColorSchemes(theme)
   const themeSchemes = extractThemeSchemes(theme)
   const { transitionProperty, transitionDuration, transitionEasing } =

@@ -1,6 +1,6 @@
 export type AnyPointerEvent = MouseEvent | TouchEvent | PointerEvent
 
-export type PointType = 'page' | 'client'
+export type PointType = "page" | "client"
 
 export type Point = {
   x: number
@@ -19,8 +19,8 @@ export type MixedEventListener = (
 export const isMouseEvent = (ev: any): ev is MouseEvent => {
   const win = getEventWindow(ev)
 
-  if (typeof win.PointerEvent !== 'undefined' && ev instanceof win.PointerEvent)
-    return !!(ev.pointerType === 'mouse')
+  if (typeof win.PointerEvent !== "undefined" && ev instanceof win.PointerEvent)
+    return !!(ev.pointerType === "mouse")
 
   return ev instanceof win.MouseEvent
 }
@@ -34,7 +34,7 @@ export const isMultiTouchEvent = (ev: AnyPointerEvent) =>
 export const getEventWindow = (ev: Event): typeof globalThis =>
   ((ev as UIEvent).view ?? window) as unknown as typeof globalThis
 
-export const pointFromTouch = (e: TouchEvent, type: PointType = 'page') => {
+export const pointFromTouch = (e: TouchEvent, type: PointType = "page") => {
   const point = e.touches[0] || e.changedTouches[0]
 
   return { x: point[`${type}X`], y: point[`${type}Y`] }
@@ -42,13 +42,13 @@ export const pointFromTouch = (e: TouchEvent, type: PointType = 'page') => {
 
 export const pointFromMouse = (
   point: MouseEvent | PointerEvent,
-  type: PointType = 'page',
+  type: PointType = "page",
 ) => ({
   x: point[`${type}X`],
   y: point[`${type}Y`],
 })
 
-export const getEventPoint = (ev: AnyPointerEvent, type: PointType = 'page') =>
+export const getEventPoint = (ev: AnyPointerEvent, type: PointType = "page") =>
   isTouchEvent(ev) ? pointFromTouch(ev, type) : pointFromMouse(ev, type)
 
 export const addDomEvent = (
@@ -85,4 +85,4 @@ export const addPointerEvent = (
   type: string,
   cb: MixedEventListener,
   options?: AddEventListenerOptions,
-) => addDomEvent(target, type, wrap(cb, type === 'pointerdown'), options)
+) => addDomEvent(target, type, wrap(cb, type === "pointerdown"), options)

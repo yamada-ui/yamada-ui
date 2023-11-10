@@ -1,27 +1,27 @@
-import { IconButton, IconButtonProps } from '@yamada-ui/button'
-import { forwardRef, CSSUIObject, useColorModeValue } from '@yamada-ui/core'
-import { ChevronIcon } from '@yamada-ui/icon'
-import { cx } from '@yamada-ui/utils'
-import { useCarouselContext, useCarouselControl } from './use-carousel'
+import { IconButton, IconButtonProps } from "@yamada-ui/button"
+import { forwardRef, CSSUIObject, useColorModeValue } from "@yamada-ui/core"
+import { ChevronIcon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { useCarouselContext, useCarouselControl } from "./use-carousel"
 
 export type CarouselControlProps = IconButtonProps
 
-export const CarouselControlPrev = forwardRef<CarouselControlProps, 'button'>(
+export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
 
-    const { getControlProps } = useCarouselControl({ operation: 'prev' })
+    const { getControlProps } = useCarouselControl({ operation: "prev" })
 
     return (
       <CarouselControl
-        operation='prev'
-        className={cx('ui-carousel__control--prev', className)}
+        operation="prev"
+        className={cx("ui-carousel__control--prev", className)}
         icon={
           <ChevronIcon
             __css={{
-              fontSize: '1.5em',
+              fontSize: "1.5em",
               transform:
-                orientation === 'vertical' ? 'rotate(180deg)' : 'rotate(90deg)',
+                orientation === "vertical" ? "rotate(180deg)" : "rotate(90deg)",
             }}
           />
         }
@@ -31,22 +31,22 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, 'button'>(
   },
 )
 
-export const CarouselControlNext = forwardRef<CarouselControlProps, 'button'>(
+export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
 
-    const { getControlProps } = useCarouselControl({ operation: 'next' })
+    const { getControlProps } = useCarouselControl({ operation: "next" })
 
     return (
       <CarouselControl
-        operation='next'
-        className={cx('ui-carousel__control--next', className)}
+        operation="next"
+        className={cx("ui-carousel__control--next", className)}
         icon={
           <ChevronIcon
             __css={{
-              fontSize: '1.5em',
+              fontSize: "1.5em",
               transform:
-                orientation === 'vertical' ? 'rotate(0deg)' : 'rotate(-90deg)',
+                orientation === "vertical" ? "rotate(0deg)" : "rotate(-90deg)",
             }}
           />
         }
@@ -57,15 +57,15 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, 'button'>(
 )
 
 const CarouselControl = forwardRef<
-  CarouselControlProps & { operation: 'prev' | 'next' },
-  'button'
+  CarouselControlProps & { operation: "prev" | "next" },
+  "button"
 >(({ className, operation, ...rest }, ref) => {
   const { styles } = useCarouselContext()
-  const colorScheme = useColorModeValue('whiteAlpha', 'blackAlpha')
+  const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha")
 
   const css: CSSUIObject = {
-    position: 'absolute',
-    zIndex: 'kurillin',
+    position: "absolute",
+    zIndex: "kurillin",
     ...styles.control,
     ...styles[operation],
   }
@@ -73,7 +73,7 @@ const CarouselControl = forwardRef<
   return (
     <IconButton
       ref={ref}
-      className={cx('ui-carousel__control', className)}
+      className={cx("ui-carousel__control", className)}
       colorScheme={colorScheme}
       isRounded
       __css={css}

@@ -1,7 +1,7 @@
-import { Box, useColorMode, useColorModeValue } from '@yamada-ui/react'
+import { Box, useColorMode, useColorModeValue } from "@yamada-ui/react"
 
 export default {
-  title: 'System / Styles / Color Mode',
+  title: "System / Styles / Color Mode",
 }
 
 export const basic = () => {
@@ -9,12 +9,12 @@ export const basic = () => {
 
   return (
     <Box
-      bg={['blackAlpha.800', 'whiteAlpha.800']}
-      p='md'
-      rounded='md'
-      color={['whiteAlpha.800', 'blackAlpha.800']}
-      transitionProperty='all'
-      transitionDuration='normal'
+      bg={["blackAlpha.800", "whiteAlpha.800"]}
+      p="md"
+      rounded="md"
+      color={["whiteAlpha.800", "blackAlpha.800"]}
+      transitionProperty="all"
+      transitionDuration="normal"
     >
       The current colorMode is "{colorMode}"
     </Box>
@@ -23,17 +23,17 @@ export const basic = () => {
 
 export const useHook = () => {
   const { colorMode } = useColorMode()
-  const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800')
-  const color = useColorModeValue('whiteAlpha.800', 'blackAlpha.800')
+  const bg = useColorModeValue("blackAlpha.800", "whiteAlpha.800")
+  const color = useColorModeValue("whiteAlpha.800", "blackAlpha.800")
 
   return (
     <Box
       bg={bg}
-      p='md'
-      rounded='md'
+      p="md"
+      rounded="md"
       color={color}
-      transitionProperty='all'
-      transitionDuration='normal'
+      transitionProperty="all"
+      transitionDuration="normal"
     >
       The current colorMode is "{colorMode}"
     </Box>

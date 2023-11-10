@@ -1,11 +1,11 @@
-import { IconButtonProps } from '@yamada-ui/button'
+import { IconButtonProps } from "@yamada-ui/button"
 import {
   CSSUIObject,
   HTMLUIProps,
   CSSUIProps,
   layoutStylesProperties,
-} from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
+} from "@yamada-ui/core"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   createContext,
   dataAttr,
@@ -14,8 +14,8 @@ import {
   RequiredPropGetter,
   splitObject,
   useUpdateEffect,
-} from '@yamada-ui/utils'
-import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
+} from "@yamada-ui/utils"
+import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react"
 import {
   Children,
   MouseEvent,
@@ -23,29 +23,29 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react'
+} from "react"
 
 type CarouselContext = {
   carousel: EmblaCarouselType | undefined
   indexes: number[]
   selectedIndex: number
-  orientation: 'vertical' | 'horizontal'
+  orientation: "vertical" | "horizontal"
   includeGapInSize: boolean
   slidesToScroll: number
   slideSize: string | number
-  gap: CSSUIProps['gap']
+  gap: CSSUIProps["gap"]
   styles: Record<string, CSSUIObject>
 }
 
 export const [CarouselProvider, useCarouselContext] =
   createContext<CarouselContext>({
-    name: 'CarouselContext',
+    name: "CarouselContext",
     errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
   })
 
 export type UseCarouselProps = Omit<
-  HTMLUIProps<'div'>,
-  'onChange' | 'draggable' | 'gap'
+  HTMLUIProps<"div">,
+  "onChange" | "draggable" | "gap"
 > & {
   /**
    * The index of the carousel slide.
@@ -66,20 +66,20 @@ export type UseCarouselProps = Omit<
    *
    * @default 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: "vertical" | "horizontal"
   /**
    * The alignment of the carousel.
    *
    * @default 'center'
    */
-  align?: 'start' | 'center' | 'end' | number
+  align?: "start" | "center" | "end" | number
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
    *
    * @default ''
    */
-  containScroll?: 'trimSnaps' | 'keepSnaps' | ''
+  containScroll?: "trimSnaps" | "keepSnaps" | ""
   /**
    * The number of slides that should be scrolled with next or previous buttons.
    *
@@ -154,7 +154,7 @@ export type UseCarouselProps = Omit<
    *
    * @default 'md'
    */
-  gap?: CSSUIProps['gap']
+  gap?: CSSUIProps["gap"]
   /**
    * The carousel slide width.
    *
@@ -171,21 +171,21 @@ export const useCarousel = ({
   index,
   defaultIndex = 0,
   onChange,
-  align = 'center',
-  orientation = 'horizontal',
+  align = "center",
+  orientation = "horizontal",
   autoplay = false,
   stopMouseEnterAutoplay = true,
   loop = true,
   speed = 10,
   delay = 4000,
-  gap = 'md',
+  gap = "md",
   slidesToScroll = 1,
   draggable = true,
   dragFree = false,
   inViewThreshold = 0,
   skipSnaps = false,
-  containScroll = '',
-  slideSize = '100%',
+  containScroll = "",
+  slideSize = "100%",
   includeGapInSize = true,
   onScrollProgress,
   children,
@@ -199,10 +199,10 @@ export const useCarousel = ({
     onChange,
   })
 
-  const isVertical = orientation === 'vertical'
+  const isVertical = orientation === "vertical"
 
   const [carouselRef, carousel] = useEmblaCarousel({
-    axis: isVertical ? 'y' : 'x',
+    axis: isVertical ? "y" : "x",
     startIndex: defaultIndex,
     loop,
     align,
@@ -302,14 +302,14 @@ export const useCarousel = ({
 
   useUpdateEffect(() => {
     if (carousel) {
-      carousel.on('select', onSelect)
-      carousel.on('scroll', onScroll)
+      carousel.on("select", onSelect)
+      carousel.on("scroll", onScroll)
 
       onScroll()
 
       return () => {
-        carousel.off('select', onSelect)
-        carousel.off('scroll', onScroll)
+        carousel.off("select", onSelect)
+        carousel.off("scroll", onScroll)
       }
     }
   }, [carousel, onScroll])
@@ -369,9 +369,9 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
-      role: 'carousel-slide',
-      'data-index': index,
-      'data-selected': dataAttr(isSelected),
+      role: "carousel-slide",
+      "data-index": index,
+      "data-selected": dataAttr(isSelected),
     }),
     [isSelected, index],
   )
@@ -382,7 +382,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 export type UseCarouselSlideReturn = ReturnType<typeof useCarouselSlide>
 
 export type UseCarouselControlProps = IconButtonProps & {
-  operation: 'prev' | 'next'
+  operation: "prev" | "next"
 }
 
 export const useCarouselControl = ({
@@ -391,7 +391,7 @@ export const useCarouselControl = ({
 }: UseCarouselControlProps) => {
   const { carousel } = useCarouselContext()
 
-  const isPrev = operation === 'prev'
+  const isPrev = operation === "prev"
 
   const disabled =
     rest.disabled ??
@@ -413,7 +413,7 @@ export const useCarouselControl = ({
       ...props,
       ref,
       disabled,
-      role: 'carousel-control',
+      role: "carousel-control",
       onClick: handlerAll(props.onClick, onClick),
     }),
     [disabled, onClick],
@@ -445,9 +445,9 @@ export const useCarouselIndicators = () => {
       return {
         ...props,
         key: index,
-        role: 'carousel-indicator',
-        'data-index': index,
-        'data-selected': dataAttr(isSelected),
+        role: "carousel-indicator",
+        "data-index": index,
+        "data-selected": dataAttr(isSelected),
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, index)),
       }
     },

@@ -1,5 +1,5 @@
-import { useCallbackRef } from '@yamada-ui/utils'
-import { useEffect } from 'react'
+import { useCallbackRef } from "@yamada-ui/utils"
+import { useEffect } from "react"
 
 export function useTimeout(
   callback: (...args: any[]) => void,

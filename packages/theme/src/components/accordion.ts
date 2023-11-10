@@ -1,70 +1,70 @@
-import { ComponentMultiStyle } from '@yamada-ui/core'
+import { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Accordion: ComponentMultiStyle = {
   baseStyle: {
     container: {},
     item: {},
     button: {
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      transitionProperty: "common",
+      transitionDuration: "normal",
       _focusVisible: {
-        boxShadow: 'outline',
+        boxShadow: "outline",
       },
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
-      py: '3',
-      px: '4',
+      py: "3",
+      px: "4",
     },
     panel: {
-      px: '4',
-      pb: '3',
+      px: "4",
+      pb: "3",
     },
     icon: {
-      ml: 'auto',
-      fontSize: '1.25em',
+      ml: "auto",
+      fontSize: "1.25em",
     },
   },
 
   variants: {
     basic: {
       item: {
-        borderTopWidth: '1px',
-        borderColor: 'inherit',
+        borderTopWidth: "1px",
+        borderColor: "inherit",
         _last: {
-          borderBottomWidth: '1px',
+          borderBottomWidth: "1px",
         },
       },
       button: {
         _hover: {
-          bg: 'blackAlpha.50',
+          bg: "blackAlpha.50",
           _disabled: {
-            bg: 'none',
+            bg: "none",
           },
         },
       },
     },
     card: {
       item: {
-        borderWidth: '1px',
-        rounded: 'md',
-        bg: ['blackAlpha.50', 'whiteAlpha.50'],
+        borderWidth: "1px",
+        rounded: "md",
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
         _expanded: {
-          bg: ['white', 'black'],
+          bg: ["white", "black"],
         },
         _notFirst: {
-          mt: 'md',
+          mt: "md",
         },
       },
       button: {
         _hover: {
-          bg: 'blackAlpha.50',
+          bg: "blackAlpha.50",
           _expanded: {
-            bg: 'none',
+            bg: "none",
           },
           _disabled: {
-            bg: 'none',
+            bg: "none",
           },
         },
       },
@@ -73,6 +73,6 @@ export const Accordion: ComponentMultiStyle = {
   },
 
   defaultProps: {
-    variant: 'basic',
+    variant: "basic",
   },
 }

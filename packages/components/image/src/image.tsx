@@ -1,7 +1,7 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from '@yamada-ui/core'
-import { cx, omitObject } from '@yamada-ui/utils'
-import { isValidElement, ReactElement, useMemo } from 'react'
-import { shouldShowFallbackImage, useImage, UseImageProps } from './use-image'
+import { ui, forwardRef, HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
+import { cx, omitObject } from "@yamada-ui/utils"
+import { isValidElement, ReactElement, useMemo } from "react"
+import { shouldShowFallbackImage, useImage, UseImageProps } from "./use-image"
 
 type ImageOptions = {
   /**
@@ -14,22 +14,22 @@ type ImageOptions = {
    *
    * @default "beforeLoadOrError"
    */
-  fallbackStrategy?: 'onError' | 'beforeLoadOrError'
+  fallbackStrategy?: "onError" | "beforeLoadOrError"
   /**
    * The CSS `box-size` property.
    */
-  size?: CSSUIProps['boxSize']
+  size?: CSSUIProps["boxSize"]
   /**
    * The CSS `object-fit` property.
    */
-  fit?: CSSUIProps['objectFit']
+  fit?: CSSUIProps["objectFit"]
 }
 
-export type ImageProps = Omit<HTMLUIProps<'img'>, keyof UseImageProps> &
+export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
   UseImageProps &
   ImageOptions
 
-export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
+export const Image = forwardRef<ImageProps, "img">((props, ref) => {
   let {
     fallback,
     src,
@@ -38,7 +38,7 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
     ignoreFallback,
     crossOrigin,
     className,
-    fallbackStrategy = 'beforeLoadOrError',
+    fallbackStrategy = "beforeLoadOrError",
     referrerPolicy,
     size: boxSize,
     fit: objectFit,
@@ -60,10 +60,10 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
       return (
         <ui.img
           ref={ref}
-          className={cx('ui-image--fallback', className)}
+          className={cx("ui-image--fallback", className)}
           src={fallback as string | undefined}
           __css={css}
-          {...(ignoreFallback ? rest : omitObject(rest, ['onError', 'onLoad']))}
+          {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
         />
       )
     }
@@ -77,9 +77,9 @@ export const Image = forwardRef<ImageProps, 'img'>((props, ref) => {
       crossOrigin={crossOrigin}
       loading={loading}
       referrerPolicy={referrerPolicy}
-      className={cx('ui-image', className)}
+      className={cx("ui-image", className)}
       __css={css}
-      {...(ignoreFallback ? rest : omitObject(rest, ['onError', 'onLoad']))}
+      {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
     />
   )
 })

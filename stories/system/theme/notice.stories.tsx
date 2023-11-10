@@ -4,18 +4,18 @@ import {
   Center,
   useNotice,
   Button,
-} from '@yamada-ui/react'
-import { FC } from 'react'
+} from "@yamada-ui/react"
+import { FC } from "react"
 
 export default {
-  title: 'System / Theme / Notice',
+  title: "System / Theme / Notice",
 }
 
 export const basic = () => {
   const config = extendConfig({
     notice: {
       options: {
-        placement: 'bottom-right',
+        placement: "bottom-right",
         limit: 3,
       },
     },
@@ -32,12 +32,12 @@ const App: FC = () => {
   const notice = useNotice()
 
   return (
-    <Center w='calc(100vw - 16px * 2)' h='calc(100vh - 16px * 2)'>
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: '孫悟空',
-            description: 'オッス！オラ悟空！',
+            title: "孫悟空",
+            description: "オッス！オラ悟空！",
           })
         }
       >

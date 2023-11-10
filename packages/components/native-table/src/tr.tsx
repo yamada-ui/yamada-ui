@@ -1,10 +1,10 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useTableStyles } from './native-table'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useTableStyles } from "./native-table"
 
-export type TrProps = HTMLUIProps<'tr'>
+export type TrProps = HTMLUIProps<"tr">
 
-export const Tr = forwardRef<TrProps, 'tr'>(({ className, ...rest }, ref) => {
+export const Tr = forwardRef<TrProps, "tr">(({ className, ...rest }, ref) => {
   const styles = useTableStyles()
 
   const css: CSSUIObject = { ...styles.tr }
@@ -12,7 +12,7 @@ export const Tr = forwardRef<TrProps, 'tr'>(({ className, ...rest }, ref) => {
   return (
     <ui.tr
       ref={ref}
-      className={cx('ui-table__tr', className)}
+      className={cx("ui-table__tr", className)}
       __css={css}
       {...rest}
     />

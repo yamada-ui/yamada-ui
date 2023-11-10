@@ -1,12 +1,12 @@
-import { Button, ButtonProps } from '@yamada-ui/button'
-import { CloseButtonProps } from '@yamada-ui/close-button'
+import { Button, ButtonProps } from "@yamada-ui/button"
+import { CloseButtonProps } from "@yamada-ui/close-button"
 import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
   CSSUIObject,
   ThemeProps,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   createContext,
   getValidChildren,
@@ -15,8 +15,8 @@ import {
   isValidElement,
   isEmpty,
   cx,
-} from '@yamada-ui/utils'
-import { ReactNode } from 'react'
+} from "@yamada-ui/utils"
+import { ReactNode } from "react"
 import {
   Modal,
   ModalProps,
@@ -29,7 +29,7 @@ import {
   ModalBodyProps,
   ModalFooter,
   ModalFooterProps,
-} from './'
+} from "./"
 
 type DialogOptions = {
   /**
@@ -67,7 +67,7 @@ type DialogOptions = {
 }
 
 export type DialogProps = Omit<ModalProps, keyof ThemeProps> &
-  ThemeProps<'Dialog'> &
+  ThemeProps<"Dialog"> &
   DialogOptions
 
 type DialogContext = Record<string, CSSUIObject>
@@ -77,9 +77,9 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
   errorMessage: `useDialog returned is 'undefined'. Seems you forgot to wrap the components in "<Dialog />" `,
 })
 
-export const Dialog = forwardRef<DialogProps, 'section'>(
+export const Dialog = forwardRef<DialogProps, "section">(
   ({ size, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Dialog', {
+    const [styles, mergedProps] = useMultiComponentStyle("Dialog", {
       size,
       ...props,
     })
@@ -135,17 +135,17 @@ export const Dialog = forwardRef<DialogProps, 'section'>(
       : success
 
     if (cancelButtonProps && !cancelButtonProps.variant)
-      cancelButtonProps.variant = 'ghost'
+      cancelButtonProps.variant = "ghost"
     if (otherButtonProps && !otherButtonProps.colorScheme)
-      otherButtonProps.colorScheme = 'secondary'
+      otherButtonProps.colorScheme = "secondary"
     if (successButtonProps && !successButtonProps.colorScheme)
-      successButtonProps.colorScheme = 'primary'
+      successButtonProps.colorScheme = "primary"
 
     return (
       <DialogProvider value={styles}>
         <Modal
           ref={ref}
-          className={cx('ui-dialog', className)}
+          className={cx("ui-dialog", className)}
           __css={css}
           {...{
             size,
@@ -156,7 +156,7 @@ export const Dialog = forwardRef<DialogProps, 'section'>(
           }}
         >
           {customDialogOverlay ??
-            (withOverlay && size !== 'full' ? <DialogOverlay /> : null)}
+            (withOverlay && size !== "full" ? <DialogOverlay /> : null)}
           {customDialogCloseButton ??
             (withCloseButton && onClose ? <DialogCloseButton /> : null)}
           {customDialogHeader ??
@@ -201,7 +201,7 @@ export const Dialog = forwardRef<DialogProps, 'section'>(
 
 export type DialogOverlayProps = ModalOverlayProps
 
-export const DialogOverlay = forwardRef<DialogOverlayProps, 'div'>(
+export const DialogOverlay = forwardRef<DialogOverlayProps, "div">(
   ({ className, ...rest }, ref) => {
     const styles = useDialog()
 
@@ -210,7 +210,7 @@ export const DialogOverlay = forwardRef<DialogOverlayProps, 'div'>(
     return (
       <ModalOverlay
         ref={ref}
-        className={cx('ui-dialog__overlay', className)}
+        className={cx("ui-dialog__overlay", className)}
         __css={css}
         {...rest}
       />
@@ -220,7 +220,7 @@ export const DialogOverlay = forwardRef<DialogOverlayProps, 'div'>(
 
 export type DialogCloseButtonProps = CloseButtonProps
 
-export const DialogCloseButton = forwardRef<DialogCloseButtonProps, 'button'>(
+export const DialogCloseButton = forwardRef<DialogCloseButtonProps, "button">(
   ({ className, ...rest }, ref) => {
     const styles = useDialog()
 
@@ -229,7 +229,7 @@ export const DialogCloseButton = forwardRef<DialogCloseButtonProps, 'button'>(
     return (
       <ModalCloseButton
         ref={ref}
-        className={cx('ui-dialog__close-button', className)}
+        className={cx("ui-dialog__close-button", className)}
         __css={css}
         {...rest}
       />
@@ -239,7 +239,7 @@ export const DialogCloseButton = forwardRef<DialogCloseButtonProps, 'button'>(
 
 export type DialogHeaderProps = ModalHeaderProps
 
-export const DialogHeader = forwardRef<DialogHeaderProps, 'header'>(
+export const DialogHeader = forwardRef<DialogHeaderProps, "header">(
   ({ className, ...rest }, ref) => {
     const styles = useDialog()
 
@@ -248,7 +248,7 @@ export const DialogHeader = forwardRef<DialogHeaderProps, 'header'>(
     return (
       <ModalHeader
         ref={ref}
-        className={cx('ui-dialog__header', className)}
+        className={cx("ui-dialog__header", className)}
         __css={css}
         {...rest}
       />
@@ -258,7 +258,7 @@ export const DialogHeader = forwardRef<DialogHeaderProps, 'header'>(
 
 export type DialogBodyProps = ModalBodyProps
 
-export const DialogBody = forwardRef<DialogBodyProps, 'main'>(
+export const DialogBody = forwardRef<DialogBodyProps, "main">(
   ({ className, ...rest }, ref) => {
     const styles = useDialog()
 
@@ -267,7 +267,7 @@ export const DialogBody = forwardRef<DialogBodyProps, 'main'>(
     return (
       <ModalBody
         ref={ref}
-        className={cx('ui-dialog__body', className)}
+        className={cx("ui-dialog__body", className)}
         __css={css}
         {...rest}
       />
@@ -277,7 +277,7 @@ export const DialogBody = forwardRef<DialogBodyProps, 'main'>(
 
 export type DialogFooterProps = ModalFooterProps
 
-export const DialogFooter = forwardRef<DialogFooterProps, 'footer'>(
+export const DialogFooter = forwardRef<DialogFooterProps, "footer">(
   ({ className, ...rest }, ref) => {
     const styles = useDialog()
 
@@ -286,7 +286,7 @@ export const DialogFooter = forwardRef<DialogFooterProps, 'footer'>(
     return (
       <ModalFooter
         ref={ref}
-        className={cx('ui-dialog__footer', className)}
+        className={cx("ui-dialog__footer", className)}
         __css={css}
         {...rest}
       />

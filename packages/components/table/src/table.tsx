@@ -1,34 +1,34 @@
-import { RowData } from '@tanstack/react-table'
+import { RowData } from "@tanstack/react-table"
 import {
   ui,
   useMultiComponentStyle,
   omitThemeProps,
   ComponentArgs,
   CSSUIObject,
-} from '@yamada-ui/core'
-import { TableStyleProvider, TableCaption } from '@yamada-ui/native-table'
+} from "@yamada-ui/core"
+import { TableStyleProvider, TableCaption } from "@yamada-ui/native-table"
 import {
   cx,
   pickChildren,
   getValidChildren,
   omitObject,
-} from '@yamada-ui/utils'
-import { ForwardedRef, forwardRef, Ref } from 'react'
-import { Tbody, TableBodyProps } from './tbody'
-import { Tfoot, TableFootProps } from './tfoot'
-import { Thead, TableHeadProps } from './thead'
+} from "@yamada-ui/utils"
+import { ForwardedRef, forwardRef, Ref } from "react"
+import { Tbody, TableBodyProps } from "./tbody"
+import { Tfoot, TableFootProps } from "./tfoot"
+import { Thead, TableHeadProps } from "./thead"
 import {
   TableContext,
   TableProvider,
   useTable,
   UseTableProps,
-} from './use-table'
+} from "./use-table"
 
 type TableOptions = {
   /**
    * The CSS `table-layout` property.
    */
-  layout?: CSSUIObject['tableLayout']
+  layout?: CSSUIObject["tableLayout"]
   /**
    * If `true`, highlight the row when the table row is selected.
    *
@@ -74,17 +74,17 @@ type TableOptions = {
 }
 
 type PagingTableProps =
-  | 'enablePagenation'
-  | 'pageIndex'
-  | 'defaultPageIndex'
-  | 'onChangePageIndex'
-  | 'pageSize'
-  | 'defaultPageSize'
-  | 'onChangePageSize'
-  | 'pageSizeList'
-  | 'pageCount'
-  | 'manualPagination'
-  | 'autoResetPageIndex'
+  | "enablePagenation"
+  | "pageIndex"
+  | "defaultPageIndex"
+  | "onChangePageIndex"
+  | "pageSize"
+  | "defaultPageSize"
+  | "onChangePageSize"
+  | "pageSizeList"
+  | "pageCount"
+  | "manualPagination"
+  | "autoResetPageIndex"
 
 export type TableProps<Y extends RowData = unknown> = Omit<
   UseTableProps<Y>,
@@ -97,7 +97,7 @@ export const Table = forwardRef(
     { colorScheme, highlightOnSelected = true, ...props }: TableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
-    const [styles, mergedProps] = useMultiComponentStyle('Table', {
+    const [styles, mergedProps] = useMultiComponentStyle("Table", {
       colorScheme,
       highlightOnSelected,
       ...props,
@@ -116,16 +116,16 @@ export const Table = forwardRef(
 
     const { getTableProps, ...rest } = useTable<Y>({
       ...omitObject(computedProps, [
-        'highlightOnSelected',
-        'highlightOnHover',
-        'withBorder',
-        'withColumnBorders',
+        "highlightOnSelected",
+        "highlightOnHover",
+        "withBorder",
+        "withColumnBorders",
       ]),
       checkboxProps: { colorScheme, ...checkboxProps },
     })
 
     const css: CSSUIObject = {
-      w: '100%',
+      w: "100%",
       tableLayout: layout,
       ...styles.table,
     }
@@ -137,7 +137,7 @@ export const Table = forwardRef(
       <TableStyleProvider value={styles}>
         <TableProvider value={{ ...rest } as TableContext}>
           <ui.table
-            className={cx('ui-table', className)}
+            className={cx("ui-table", className)}
             __css={css}
             {...getTableProps({}, ref)}
           >
@@ -156,4 +156,4 @@ export const Table = forwardRef(
   ): JSX.Element
 } & ComponentArgs
 
-Table.displayName = 'Table'
+Table.displayName = "Table"

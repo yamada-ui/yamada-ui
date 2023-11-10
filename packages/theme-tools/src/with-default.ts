@@ -1,13 +1,13 @@
-import { Theme, ComponentDefaultProps, UsageTheme } from '@yamada-ui/core'
-import { isArray, Union, merge } from '@yamada-ui/utils'
+import { Theme, ComponentDefaultProps, UsageTheme } from "@yamada-ui/core"
+import { isArray, Union, merge } from "@yamada-ui/utils"
 
 export const withDefaultSize =
   ({
     size,
     components,
   }: {
-    size: ComponentDefaultProps['size']
-    components?: Union<keyof Theme['components']>[]
+    size: ComponentDefaultProps["size"]
+    components?: Union<keyof Theme["components"]>[]
   }) =>
   (theme: UsageTheme): UsageTheme => {
     let keys: string[] = Object.keys(theme.components ?? {})
@@ -26,8 +26,8 @@ export const withDefaultVariant =
     variant,
     components,
   }: {
-    variant: ComponentDefaultProps['variant']
-    components?: Union<keyof Theme['components']>[]
+    variant: ComponentDefaultProps["variant"]
+    components?: Union<keyof Theme["components"]>[]
   }) =>
   (theme: UsageTheme): UsageTheme => {
     let keys: string[] = Object.keys(theme.components ?? {})
@@ -46,8 +46,8 @@ export const withDefaultColorScheme =
     colorScheme,
     components,
   }: {
-    colorScheme: ComponentDefaultProps['colorScheme']
-    components?: Union<keyof Theme['components']>[]
+    colorScheme: ComponentDefaultProps["colorScheme"]
+    components?: Union<keyof Theme["components"]>[]
   }) =>
   (theme: UsageTheme): UsageTheme => {
     let keys: string[] = Object.keys(theme.components ?? {})
@@ -67,7 +67,7 @@ export const withDefaultProps =
     components,
   }: {
     defaultProps: ComponentDefaultProps
-    components?: Union<keyof Theme['components']>[]
+    components?: Union<keyof Theme["components"]>[]
   }): UsageTheme =>
   (theme: UsageTheme) => {
     let keys: string[] = Object.keys(theme.components ?? {})

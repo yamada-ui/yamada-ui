@@ -6,9 +6,9 @@ import {
   useComponentStyle,
   omitThemeProps,
   CSSUIObject,
-} from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { useMemo } from 'react'
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useMemo } from "react"
 
 type DividerOptions = {
   /**
@@ -16,14 +16,14 @@ type DividerOptions = {
    *
    * @default 'horizontal'
    */
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: "horizontal" | "vertical"
 }
 
-export type DividerProps = HTMLUIProps<'hr'> &
-  ThemeProps<'Divider'> &
+export type DividerProps = HTMLUIProps<"hr"> &
+  ThemeProps<"Divider"> &
   DividerOptions
 
-export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
+export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
   const [
     {
       borderRightWidth,
@@ -36,10 +36,10 @@ export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
       ...styles
     },
     mergedProps,
-  ] = useComponentStyle('Divider', props)
+  ] = useComponentStyle("Divider", props)
   const {
     className,
-    orientation = 'horizontal',
+    orientation = "horizontal",
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -47,20 +47,20 @@ export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
   const customStyles = useMemo(
     () => ({
       vertical: {
-        border: '0',
+        border: "0",
         borderStyle,
         borderColor,
         borderLeftWidth:
-          borderLeftWidth || borderRightWidth || borderWidth || '1px',
-        height: '100%',
+          borderLeftWidth || borderRightWidth || borderWidth || "1px",
+        height: "100%",
       },
       horizontal: {
-        border: '0',
+        border: "0",
         borderStyle,
         borderColor,
         borderBottomWidth:
-          borderBottomWidth || borderTopWidth || borderWidth || '1px',
-        width: '100%',
+          borderBottomWidth || borderTopWidth || borderWidth || "1px",
+        width: "100%",
       },
     }),
     [
@@ -88,7 +88,7 @@ export const Divider = forwardRef<DividerProps, 'hr'>((props, ref) => {
   return (
     <ui.hr
       ref={ref}
-      className={cx('ui-divider', className)}
+      className={cx("ui-divider", className)}
       __css={css}
       {...rest}
     />

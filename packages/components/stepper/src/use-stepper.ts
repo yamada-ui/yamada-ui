@@ -1,11 +1,11 @@
-import { CSSUIObject, HTMLUIProps } from '@yamada-ui/core'
-import { createDescendant } from '@yamada-ui/use-descendant'
-import { createContext, PropGetter, mergeRefs } from '@yamada-ui/utils'
-import { useCallback } from 'react'
+import { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { createContext, PropGetter, mergeRefs } from "@yamada-ui/utils"
+import { useCallback } from "react"
 
 type StepperContext = Omit<
   UseStepperReturn,
-  'descendants' | 'getContainerProps'
+  "descendants" | "getContainerProps"
 > & {
   styles: Record<string, CSSUIObject>
 }
@@ -18,11 +18,11 @@ export const {
 
 export const [StepperProvider, useStepperContext] =
   createContext<StepperContext>({
-    name: 'StepperContext',
+    name: "StepperContext",
     errorMessage: `useStepperContext returned is 'undefined'. Seems you forgot to wrap the components in "<Stepper />"`,
   })
 
-export type UseStepperProps = HTMLUIProps<'div'> & {
+export type UseStepperProps = HTMLUIProps<"div"> & {
   /**
    * The active step index.
    */
@@ -32,7 +32,7 @@ export type UseStepperProps = HTMLUIProps<'div'> & {
    *
    * @default 'horizontal'
    */
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: "horizontal" | "vertical"
   /**
    * Whether to show or not the last separator while in vertical orientation.
    *
@@ -43,18 +43,18 @@ export type UseStepperProps = HTMLUIProps<'div'> & {
 
 export const useStepper = ({
   index,
-  orientation = 'horizontal',
+  orientation = "horizontal",
   showLastSeparator = false,
   ...rest
 }: UseStepperProps) => {
   const descendants = useStepperDescendants()
 
   const getStepStatus = useCallback(
-    (step: number): 'complete' | 'active' | 'incomplete' => {
-      if (step < index) return 'complete'
-      if (step > index) return 'incomplete'
+    (step: number): "complete" | "active" | "incomplete" => {
+      if (step < index) return "complete"
+      if (step > index) return "incomplete"
 
-      return 'active'
+      return "active"
     },
     [index],
   )
@@ -64,7 +64,7 @@ export const useStepper = ({
       ...rest,
       ...props,
       ref,
-      'data-orientation': orientation,
+      "data-orientation": orientation,
     }),
     [orientation, rest],
   )
@@ -95,8 +95,8 @@ export const useStep = () => {
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, register),
-      'data-status': status,
-      'data-orientation': orientation,
+      "data-status": status,
+      "data-orientation": orientation,
     }),
     [orientation, register, status],
   )

@@ -1,7 +1,7 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
-import { FC, ReactElement, cloneElement } from 'react'
-import { useCarouselContext, useCarouselIndicators } from './use-carousel'
+import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { FC, ReactElement, cloneElement } from "react"
+import { useCarouselContext, useCarouselIndicators } from "./use-carousel"
 
 type CarouselIndicatorsOptions = {
   /**
@@ -10,37 +10,37 @@ type CarouselIndicatorsOptions = {
   component?: FC<{ index: number; isSelected: boolean }>
 }
 
-export type CarouselIndicatorsProps = Omit<HTMLUIProps<'div'>, 'children'> &
+export type CarouselIndicatorsProps = Omit<HTMLUIProps<"div">, "children"> &
   CarouselIndicatorsOptions
 
-export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
+export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
   ({ className, component, ...rest }, ref) => {
     const { selectedIndex, orientation, styles } = useCarouselContext()
 
     const { indexes, getIndicatorProps } = useCarouselIndicators()
 
     const css: CSSUIObject = {
-      position: 'absolute',
-      zIndex: 'kurillin',
-      display: 'flex',
-      justifyContent: 'center',
+      position: "absolute",
+      zIndex: "kurillin",
+      display: "flex",
+      justifyContent: "center",
       ...styles.indicators,
-      ...(orientation === 'vertical'
-        ? { flexDirection: 'column' }
-        : { flexDirection: 'row' }),
+      ...(orientation === "vertical"
+        ? { flexDirection: "column" }
+        : { flexDirection: "row" }),
     }
 
     return (
       <ui.div
         ref={ref}
-        className={cx('ui-carousel__indicators', className)}
+        className={cx("ui-carousel__indicators", className)}
         __css={css}
         {...rest}
       >
         {indexes.map((index) => {
           const isSelected = index === selectedIndex
 
-          if (typeof component === 'function') {
+          if (typeof component === "function") {
             const child = component({
               index,
               isSelected,
@@ -62,7 +62,7 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, 'div'>(
   },
 )
 
-type CarouselIndicatorProps = HTMLUIProps<'button'>
+type CarouselIndicatorProps = HTMLUIProps<"button">
 
 const CarouselIndicator: FC<CarouselIndicatorProps> = ({
   className,
@@ -74,9 +74,9 @@ const CarouselIndicator: FC<CarouselIndicatorProps> = ({
 
   return (
     <ui.button
-      type='button'
+      type="button"
       tabIndex={-1}
-      className={cx('ui-carousel__indicators__indicator', className)}
+      className={cx("ui-carousel__indicators__indicator", className)}
       __css={css}
       {...rest}
     />

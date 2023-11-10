@@ -4,8 +4,8 @@ import {
   isElement,
   mergeRefs,
   useSafeLayoutEffect,
-} from '@yamada-ui/utils'
-import { Provider, RefCallback, useRef, useState } from 'react'
+} from "@yamada-ui/utils"
+import { Provider, RefCallback, useRef, useState } from "react"
 
 const sortNodes = (nodes: Node[]) =>
   nodes.sort((a, b) => {
@@ -27,7 +27,7 @@ const sortNodes = (nodes: Node[]) =>
       compare & Node.DOCUMENT_POSITION_DISCONNECTED ||
       compare & Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
     ) {
-      throw Error('Cannot sort the given nodes.')
+      throw Error("Cannot sort the given nodes.")
     } else {
       return 0
     }
@@ -266,9 +266,9 @@ type UseDescendantsReturn = ReturnType<typeof useDescendants>
 
 const [DescendantsContextProvider, useDescendantsContext] =
   createContext<UseDescendantsReturn>({
-    name: 'DescendantsProvider',
+    name: "DescendantsProvider",
     errorMessage:
-      'useDescendantsContext must be used within DescendantsContextProvider',
+      "useDescendantsContext must be used within DescendantsContextProvider",
   })
 
 const useDescendant = <

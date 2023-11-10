@@ -8,14 +8,14 @@ import {
   ThemeProps,
   ColorModeToken,
   CSS,
-} from '@yamada-ui/core'
+} from "@yamada-ui/core"
 import {
   useFormControlProps,
   FormControlOptions,
   formControlProperties,
-} from '@yamada-ui/form-control'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { createDescendant } from '@yamada-ui/use-descendant'
+} from "@yamada-ui/form-control"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { createDescendant } from "@yamada-ui/use-descendant"
 import {
   createContext,
   cx,
@@ -24,7 +24,7 @@ import {
   pickObject,
   filterUndefined,
   getValidChildren,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 import {
   ChangeEvent,
   KeyboardEvent,
@@ -33,15 +33,15 @@ import {
   useEffect,
   useId,
   useState,
-} from 'react'
+} from "react"
 
-const toArray = (value?: string) => value?.split('')
+const toArray = (value?: string) => value?.split("")
 
-const validate = (value: string, type: PinInputProps['type']) => {
+const validate = (value: string, type: PinInputProps["type"]) => {
   const NUMERIC_REGEX = /^[0-9]+$/
   const ALPHA_NUMERIC_REGEX = /^[a-zA-Z0-9]+$/i
 
-  const regex = type === 'alphanumeric' ? ALPHA_NUMERIC_REGEX : NUMERIC_REGEX
+  const regex = type === "alphanumeric" ? ALPHA_NUMERIC_REGEX : NUMERIC_REGEX
 
   return regex.test(value)
 }
@@ -58,7 +58,7 @@ type PinInputContext = {
 
 const [PinInputProvider, usePinInputContext] = createContext<PinInputContext>({
   strict: false,
-  name: 'PinInputContext',
+  name: "PinInputContext",
 })
 
 const { DescendantsContextProvider, useDescendants, useDescendant } =
@@ -75,7 +75,7 @@ type PinInputOptions = {
    *
    * @default 'number'
    */
-  type?: 'alphanumeric' | 'number'
+  type?: "alphanumeric" | "number"
   /**
    * The placeholder for the pin input.
    *
@@ -127,21 +127,21 @@ type PinInputOptions = {
   /**
    * The border color when the input is focused.
    */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * The border color when the input is invalid.
    */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, 'colors'>
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
 }
 
-export type PinInputProps = Omit<HTMLUIProps<'div'>, 'onChange'> &
-  ThemeProps<'PinInput'> &
+export type PinInputProps = Omit<HTMLUIProps<"div">, "onChange"> &
+  ThemeProps<"PinInput"> &
   FormControlOptions &
   PinInputOptions
 
-export const PinInput = forwardRef<PinInputProps, 'div'>(
+export const PinInput = forwardRef<PinInputProps, "div">(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle('PinInput', {
+    const [styles, mergedProps] = useMultiComponentStyle("PinInput", {
       focusBorderColor,
       errorBorderColor,
       ...props,
@@ -149,8 +149,8 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
     let {
       id,
       className,
-      type = 'number',
-      placeholder = '○',
+      type = "number",
+      placeholder = "○",
       value,
       defaultValue,
       autoFocus,
@@ -184,7 +184,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
     const [values, setValues] = useControllableState<string[]>({
       value: toArray(value),
       defaultValue: toArray(defaultValue) || [],
-      onChange: (values) => onChange?.(values.join('')),
+      onChange: (values) => onChange?.(values.join("")),
     })
 
     const focusNext = useCallback(
@@ -211,12 +211,12 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
         nextValues = nextValues.filter(Boolean)
 
         const isComplete =
-          value !== '' &&
+          value !== "" &&
           nextValues.length === descendants.count() &&
-          nextValues.every((value) => value != null && value !== '')
+          nextValues.every((value) => value != null && value !== "")
 
         if (isComplete) {
-          onComplete?.(nextValues.join(''))
+          onComplete?.(nextValues.join(""))
           descendants.value(index)?.node.blur()
         } else if (isFocus) {
           focusNext(index)
@@ -255,8 +255,8 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
           const currentValue = values[index]
           const nextValue = getNextValue(currentValue, eventValue)
 
-          if (nextValue === '') {
-            setValue('', index)
+          if (nextValue === "") {
+            setValue("", index)
 
             return
           }
@@ -265,13 +265,13 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
             if (!validate(eventValue, type)) return
 
             const nextValue = eventValue
-              .split('')
+              .split("")
               .filter((_, index) => index < descendants.count())
 
             setValues(nextValue)
 
             if (nextValue.length === descendants.count()) {
-              onComplete?.(nextValue.join(''))
+              onComplete?.(nextValue.join(""))
               descendants.value(index)?.node.blur()
             }
           } else {
@@ -285,14 +285,14 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
           key,
           target,
         }: KeyboardEvent<HTMLInputElement>) => {
-          if (key !== 'Backspace' || !manageFocus) return
+          if (key !== "Backspace" || !manageFocus) return
 
-          if ((target as HTMLInputElement).value === '') {
+          if ((target as HTMLInputElement).value === "") {
             const prevInput = descendants.prevValue(index, undefined, false)
 
             if (!prevInput) return
 
-            setValue('', index - 1, false)
+            setValue("", index - 1, false)
             prevInput.node?.focus()
             setMoveFocus(true)
           } else {
@@ -305,20 +305,20 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
         const onBlur = () => setFocusedIndex(-1)
 
         return {
-          inputMode: type === 'number' ? 'numeric' : 'text',
-          type: mask ? 'password' : type === 'number' ? 'tel' : 'text',
+          inputMode: type === "number" ? "numeric" : "text",
+          type: mask ? "password" : type === "number" ? "tel" : "text",
           ...pickObject(rest, formControlProperties),
           ...filterUndefined(props),
           id: `${id}-${index}`,
-          value: values[index] || '',
+          value: values[index] || "",
           onChange: handlerAll(props.onChange, onChange),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
           onFocus: handlerAll(props.onFocus, onFocus),
           onBlur: handlerAll(props.onBlur, onBlur),
-          autoComplete: otp ? 'one-time-code' : 'off',
+          autoComplete: otp ? "one-time-code" : "off",
           placeholder:
             focusedIndex === index && !rest.readOnly && !props.readOnly
-              ? ''
+              ? ""
               : placeholder,
         }
       },
@@ -341,8 +341,8 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
     )
 
     const css: CSSUIObject = {
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       ...styles.container,
     }
 
@@ -358,7 +358,7 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
         <PinInputProvider value={{ getInputProps, styles }}>
           <ui.div
             ref={ref}
-            className={cx('ui-pin-input', className)}
+            className={cx("ui-pin-input", className)}
             {...rest}
             __css={css}
           >
@@ -370,9 +370,9 @@ export const PinInput = forwardRef<PinInputProps, 'div'>(
   },
 )
 
-export type PinInputFieldProps = HTMLUIProps<'input'> & FormControlOptions
+export type PinInputFieldProps = HTMLUIProps<"input"> & FormControlOptions
 
-export const PinInputField = forwardRef<PinInputFieldProps, 'input'>(
+export const PinInputField = forwardRef<PinInputFieldProps, "input">(
   ({ className, ...rest }, ref) => {
     const { getInputProps, styles } = usePinInputContext()
     const { index, register } = useDescendant()
@@ -383,7 +383,7 @@ export const PinInputField = forwardRef<PinInputFieldProps, 'input'>(
 
     return (
       <ui.input
-        className={cx('ui-pin-input-field', className)}
+        className={cx("ui-pin-input-field", className)}
         {...getInputProps({ ...rest, ref: mergeRefs(register, ref), index })}
         __css={css}
       />

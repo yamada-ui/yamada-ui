@@ -1,54 +1,54 @@
-import { ComponentMultiStyle } from '@yamada-ui/core'
-import { getMemoizedObject as get } from '@yamada-ui/utils'
+import { ComponentMultiStyle } from "@yamada-ui/core"
+import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const Stepper: ComponentMultiStyle = {
-  baseStyle: ({ colorScheme: c = 'primary' }) => ({
+  baseStyle: ({ colorScheme: c = "primary" }) => ({
     stepper: {
-      w: '100%',
-      display: 'flex',
-      justifyContent: 'space-between',
+      w: "100%",
+      display: "flex",
+      justifyContent: "space-between",
       _vertical: {
-        flexDirection: 'column',
-        alignItems: 'flex-start',
+        flexDirection: "column",
+        alignItems: "flex-start",
         gap: 0,
       },
       _horizontal: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         gap: 4,
       },
     },
     step: {
-      position: 'relative',
-      display: 'flex',
+      position: "relative",
+      display: "flex",
       gap: 2,
       flex: 1,
       flexShrink: 0,
       _horizontal: {
-        alignItems: 'center',
+        alignItems: "center",
       },
-      '&:last-of-type:not([data-stretch])': {
-        flex: 'initial',
+      "&:last-of-type:not([data-stretch])": {
+        flex: "initial",
       },
     },
     status: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       flexShrink: 0,
-      rounded: 'full',
-      transitionProperty: 'common',
-      transitionDuration: 'slow',
-      '&[data-status=active]': {
-        borderWidth: '2px',
+      rounded: "full",
+      transitionProperty: "common",
+      transitionDuration: "slow",
+      "&[data-status=active]": {
+        borderWidth: "2px",
         borderColor: [`${c}.500`, `${c}.200`],
       },
-      '&[data-status=complete]': {
+      "&[data-status=complete]": {
         bg: [`${c}.500`, `${c}.200`],
-        color: ['white', 'black'],
+        color: ["white", "black"],
       },
-      '&[data-status=incomplete]': {
-        borderWidth: '2px',
+      "&[data-status=incomplete]": {
+        borderWidth: "2px",
       },
     },
     icon: {
@@ -56,26 +56,26 @@ export const Stepper: ComponentMultiStyle = {
     },
     number: {},
     title: {
-      fontWeight: 'medium',
+      fontWeight: "medium",
     },
     description: {
-      color: ['blackAlpha.500', 'whiteAlpha.600'],
+      color: ["blackAlpha.500", "whiteAlpha.600"],
     },
     separator: {
-      bg: 'border',
+      bg: "border",
       flex: 1,
-      transitionProperty: 'common',
-      transitionDuration: 'slow',
-      '&[data-status=complete]': {
+      transitionProperty: "common",
+      transitionDuration: "slow",
+      "&[data-status=complete]": {
         bg: [`${c}.500`, `${c}.200`],
       },
       _vertical: {
-        position: 'absolute',
+        position: "absolute",
         w: 0.5,
-        h: '100%',
+        h: "100%",
       },
       _horizontal: {
-        w: '100%',
+        w: "100%",
         h: 0.5,
         ms: 2,
       },
@@ -85,10 +85,10 @@ export const Stepper: ComponentMultiStyle = {
   sizes: {
     sm: ({ theme: t }) => ({
       title: {
-        fontSize: 'sm',
+        fontSize: "sm",
       },
       description: {
-        fontSize: 'xs',
+        fontSize: "xs",
       },
       status: {
         w: 6,
@@ -99,20 +99,20 @@ export const Stepper: ComponentMultiStyle = {
         h: 4,
       },
       number: {
-        fontSize: 'sm',
+        fontSize: "sm",
       },
       separator: {
-        maxHeight: `calc(100% - ${get(t, 'sizes.6')} - 8px)`,
-        top: `calc(${get(t, 'sizes.6')} + 4px)`,
-        insetStart: `calc(${get(t, 'sizes.6')} / 2 - 1px)`,
+        maxHeight: `calc(100% - ${get(t, "sizes.6")} - 8px)`,
+        top: `calc(${get(t, "sizes.6")} + 4px)`,
+        insetStart: `calc(${get(t, "sizes.6")} / 2 - 1px)`,
       },
     }),
     md: ({ theme: t }) => ({
       title: {
-        fontSize: 'md',
+        fontSize: "md",
       },
       description: {
-        fontSize: 'sn',
+        fontSize: "sn",
       },
       status: {
         w: 8,
@@ -123,20 +123,20 @@ export const Stepper: ComponentMultiStyle = {
         h: 5,
       },
       number: {
-        fontSize: 'md',
+        fontSize: "md",
       },
       separator: {
-        maxHeight: `calc(100% - ${get(t, 'sizes.8')} - 8px)`,
-        top: `calc(${get(t, 'sizes.8')} + 4px)`,
-        insetStart: `calc(${get(t, 'sizes.8')} / 2 - 1px)`,
+        maxHeight: `calc(100% - ${get(t, "sizes.8")} - 8px)`,
+        top: `calc(${get(t, "sizes.8")} + 4px)`,
+        insetStart: `calc(${get(t, "sizes.8")} / 2 - 1px)`,
       },
     }),
     lg: ({ theme: t }) => ({
       title: {
-        fontSize: 'lg',
+        fontSize: "lg",
       },
       description: {
-        fontSize: 'md',
+        fontSize: "md",
       },
       status: {
         w: 10,
@@ -147,18 +147,18 @@ export const Stepper: ComponentMultiStyle = {
         h: 6,
       },
       number: {
-        fontSize: 'lg',
+        fontSize: "lg",
       },
       separator: {
-        maxHeight: `calc(100% - ${get(t, 'sizes.10')} - 8px)`,
-        top: `calc(${get(t, 'sizes.10')} + 4px)`,
-        insetStart: `calc(${get(t, 'sizes.10')} / 2 - 1px)`,
+        maxHeight: `calc(100% - ${get(t, "sizes.10")} - 8px)`,
+        top: `calc(${get(t, "sizes.10")} + 4px)`,
+        insetStart: `calc(${get(t, "sizes.10")} / 2 - 1px)`,
       },
     }),
   },
 
   defaultProps: {
-    size: 'md',
-    colorScheme: 'primary',
+    size: "md",
+    colorScheme: "primary",
   },
 }

@@ -1,5 +1,5 @@
-import { useCallbackRef } from '@yamada-ui/utils'
-import { useCallback, useRef, useState } from 'react'
+import { useCallbackRef } from "@yamada-ui/utils"
+import { useCallback, useRef, useState } from "react"
 
 export type UseDisclosureProps<
   T extends (...args: any[]) => any = () => void,
@@ -9,7 +9,7 @@ export type UseDisclosureProps<
   defaultIsOpen?: boolean
   onOpen?: T
   onClose?: K
-  timing?: 'before' | 'after'
+  timing?: "before" | "after"
 }
 
 export const useDisclosure = <
@@ -22,7 +22,7 @@ export const useDisclosure = <
     props.defaultIsOpen ?? false,
   )
 
-  const timingRef = useRef(props.timing ?? 'after')
+  const timingRef = useRef(props.timing ?? "after")
   const handleOpen = useCallbackRef(props.onOpen)
   const handleClose = useCallbackRef(props.onClose)
 
@@ -31,22 +31,22 @@ export const useDisclosure = <
 
   const onOpen = useCallback(
     async (...args: any) => {
-      if (timingRef.current === 'before') await handleOpen?.(...args)
+      if (timingRef.current === "before") await handleOpen?.(...args)
 
       if (!isControlled) setIsOpen(true)
 
-      if (timingRef.current === 'after') await handleOpen?.(...args)
+      if (timingRef.current === "after") await handleOpen?.(...args)
     },
     [isControlled, handleOpen, timingRef],
   ) as unknown as T
 
   const onClose = useCallback(
     async (...args: any) => {
-      if (timingRef.current === 'before') await handleClose?.(...args)
+      if (timingRef.current === "before") await handleClose?.(...args)
 
       if (!isControlled) setIsOpen(false)
 
-      if (timingRef.current === 'after') await handleClose?.(...args)
+      if (timingRef.current === "after") await handleClose?.(...args)
     },
     [isControlled, handleClose, timingRef],
   ) as unknown as K
@@ -61,7 +61,7 @@ export const useDisclosure = <
 
 export type UseDisclosureReturn = ReturnType<typeof useDisclosure>
 
-export type LazyMode = 'unmount' | 'keepMounted'
+export type LazyMode = "unmount" | "keepMounted"
 
 export type UseLazyDisclosureProps = {
   enabled?: boolean
@@ -74,13 +74,13 @@ export const useLazyDisclosure = ({
   wasSelected,
   enabled,
   isSelected,
-  mode = 'unmount',
+  mode = "unmount",
 }: UseLazyDisclosureProps) => {
   if (!enabled) return true
 
   if (isSelected) return true
 
-  if (mode === 'keepMounted' && wasSelected) return true
+  if (mode === "keepMounted" && wasSelected) return true
 
   return false
 }

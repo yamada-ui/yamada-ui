@@ -1,9 +1,9 @@
-import { ComponentArgs, HTMLUIProps } from '@yamada-ui/core'
-import { useControllableState } from '@yamada-ui/use-controllable-state'
-import { cx, getValidChildren, omitObject, isArray } from '@yamada-ui/utils'
-import { cloneElement, ForwardedRef, forwardRef, Ref, useCallback } from 'react'
-import { MenuGroup } from './menu-group'
-import { MenuOptionItem } from './menu-item'
+import { ComponentArgs, HTMLUIProps } from "@yamada-ui/core"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { cx, getValidChildren, omitObject, isArray } from "@yamada-ui/utils"
+import { cloneElement, ForwardedRef, forwardRef, Ref, useCallback } from "react"
+import { MenuGroup } from "./menu-group"
+import { MenuOptionItem } from "./menu-item"
 
 type MenuOptionGroupOptions<Y extends string | string[] = string> = {
   /**
@@ -19,7 +19,7 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
    *
    * @default 'checkbox'
    */
-  type?: 'radio' | 'checkbox'
+  type?: "radio" | "checkbox"
   /**
    * The callback fired when any children checkbox is checked or unchecked.
    */
@@ -27,7 +27,7 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
 }
 
 export type MenuOptionGroupProps<Y extends string | string[] = string> = Omit<
-  HTMLUIProps<'div'>,
+  HTMLUIProps<"div">,
   keyof MenuOptionGroupOptions
 > &
   MenuOptionGroupOptions<Y>
@@ -43,9 +43,9 @@ export const MenuOptionGroup = forwardRef(
     }: MenuOptionGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const isRadio = type === 'radio'
+    const isRadio = type === "radio"
 
-    defaultValue = (isRadio ? '' : []) as Y
+    defaultValue = (isRadio ? "" : []) as Y
 
     const [value, setValue] = useControllableState({
       ...rest,
@@ -54,7 +54,7 @@ export const MenuOptionGroup = forwardRef(
 
     const onChange = useCallback(
       (selectedValue: string) => {
-        if (isRadio && typeof value === 'string') setValue(selectedValue as Y)
+        if (isRadio && typeof value === "string") setValue(selectedValue as Y)
 
         if (!isRadio && isArray(value)) {
           const nextValue = value.includes(selectedValue)
@@ -88,8 +88,8 @@ export const MenuOptionGroup = forwardRef(
     return (
       <MenuGroup
         ref={ref}
-        className={cx('ui-menu__item--group--option', className)}
-        {...omitObject(rest, ['value', 'onChange'])}
+        className={cx("ui-menu__item--group--option", className)}
+        {...omitObject(rest, ["value", "onChange"])}
       >
         {cloneChildren}
       </MenuGroup>
@@ -101,4 +101,4 @@ export const MenuOptionGroup = forwardRef(
   ): JSX.Element
 } & ComponentArgs
 
-MenuOptionGroup.displayName = 'MenuOptionGroup'
+MenuOptionGroup.displayName = "MenuOptionGroup"

@@ -1,14 +1,14 @@
-import { Meta } from '@storybook/react'
+import { Meta } from "@storybook/react"
 import {
   AnimationStyle,
   Box,
   Button,
   useAnimation,
   useDynamicAnimation,
-} from '@yamada-ui/react'
+} from "@yamada-ui/react"
 
 const meta: Meta = {
-  title: 'Hooks / useAnimation',
+  title: "Hooks / useAnimation",
 }
 
 export default meta
@@ -16,77 +16,77 @@ export default meta
 export const basic = () => {
   const animation = useAnimation({
     keyframes: {
-      '0%': {
-        bg: 'red.500',
+      "0%": {
+        bg: "red.500",
       },
-      '20%': {
-        bg: 'green.500',
+      "20%": {
+        bg: "green.500",
       },
-      '40%': {
-        bg: 'purple.500',
+      "40%": {
+        bg: "purple.500",
       },
-      '60%': {
-        bg: 'yellow.500',
+      "60%": {
+        bg: "yellow.500",
       },
-      '80%': {
-        bg: 'blue.500',
+      "80%": {
+        bg: "blue.500",
       },
-      '100%': {
-        bg: 'red.500',
+      "100%": {
+        bg: "red.500",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   })
 
-  return <Box w='full' h='xs' animation={animation} />
+  return <Box w="full" h="xs" animation={animation} />
 }
 
 export const pseudo = () => {
   const animation = useAnimation({
     keyframes: {
-      '0%': {
-        bg: 'red.500',
+      "0%": {
+        bg: "red.500",
       },
-      '20%': {
-        bg: 'green.500',
+      "20%": {
+        bg: "green.500",
       },
-      '40%': {
-        bg: 'purple.500',
+      "40%": {
+        bg: "purple.500",
       },
-      '60%': {
-        bg: 'yellow.500',
+      "60%": {
+        bg: "yellow.500",
       },
-      '80%': {
-        bg: 'blue.500',
+      "80%": {
+        bg: "blue.500",
       },
-      '100%': {
-        bg: 'red.500',
+      "100%": {
+        bg: "red.500",
       },
     },
-    duration: '10s',
-    iterationCount: 'infinite',
-    timingFunction: 'linear',
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
   })
 
   return (
     <Box
-      pos='relative'
-      bg='primary'
-      m='lg'
-      p='lg'
-      rounded='lg'
-      color='white'
+      pos="relative"
+      bg="primary"
+      m="lg"
+      p="lg"
+      rounded="lg"
+      color="white"
       _after={{
         content: "'after'",
-        pos: 'absolute',
-        top: 'lg',
-        left: 'lg',
-        bg: 'secondary',
-        p: 'lg',
-        rounded: 'lg',
-        color: 'white',
+        pos: "absolute",
+        top: "lg",
+        left: "lg",
+        bg: "secondary",
+        p: "lg",
+        rounded: "lg",
+        color: "white",
         animation,
       }}
     >
@@ -99,95 +99,95 @@ export const withMulti = () => {
   const animation = useAnimation([
     {
       keyframes: {
-        '0%': {
-          bg: 'red.500',
+        "0%": {
+          bg: "red.500",
         },
-        '20%': {
-          bg: 'green.500',
+        "20%": {
+          bg: "green.500",
         },
-        '40%': {
-          bg: 'purple.500',
+        "40%": {
+          bg: "purple.500",
         },
-        '60%': {
-          bg: 'yellow.500',
+        "60%": {
+          bg: "yellow.500",
         },
-        '80%': {
-          bg: 'blue.500',
+        "80%": {
+          bg: "blue.500",
         },
-        '100%': {
-          bg: 'red.500',
+        "100%": {
+          bg: "red.500",
         },
       },
-      duration: '10s',
-      iterationCount: 'infinite',
-      timingFunction: 'linear',
+      duration: "10s",
+      iterationCount: "infinite",
+      timingFunction: "linear",
     },
     {
       keyframes: {
-        '0%': {
-          h: 'xs',
+        "0%": {
+          h: "xs",
         },
-        '50%': {
-          h: 'md',
+        "50%": {
+          h: "md",
         },
-        '100%': {
-          h: 'xs',
+        "100%": {
+          h: "xs",
         },
       },
-      duration: '10s',
-      iterationCount: 'infinite',
-      timingFunction: 'linear',
+      duration: "10s",
+      iterationCount: "infinite",
+      timingFunction: "linear",
     },
     {
       keyframes: {
-        '0%': {
-          w: 'full',
+        "0%": {
+          w: "full",
         },
-        '50%': {
-          w: '50%',
+        "50%": {
+          w: "50%",
         },
-        '100%': {
-          w: 'full',
+        "100%": {
+          w: "full",
         },
       },
-      duration: '10s',
-      iterationCount: 'infinite',
-      timingFunction: 'linear',
+      duration: "10s",
+      iterationCount: "infinite",
+      timingFunction: "linear",
     },
   ])
 
-  return <Box w='full' h='xs' animation={animation} />
+  return <Box w="full" h="xs" animation={animation} />
 }
 
 export const withDynamic = () => {
   const [animation, setAnimation] = useDynamicAnimation<
-    Record<'moveLeft' | 'moveRight', AnimationStyle>
+    Record<"moveLeft" | "moveRight", AnimationStyle>
   >({
     moveLeft: {
       keyframes: {
-        '0%': {
-          transform: 'translateX(400%)',
+        "0%": {
+          transform: "translateX(400%)",
         },
-        '100%': {
-          transform: 'translateX(0%)',
+        "100%": {
+          transform: "translateX(0%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
     moveRight: {
       keyframes: {
-        '0%': {
-          transform: 'translateX(0%)',
+        "0%": {
+          transform: "translateX(0%)",
         },
-        '100%': {
-          transform: 'translateX(400%)',
+        "100%": {
+          transform: "translateX(400%)",
         },
       },
-      duration: 'slower',
-      fillMode: 'forwards',
-      timingFunction: 'ease-in-out',
+      duration: "slower",
+      fillMode: "forwards",
+      timingFunction: "ease-in-out",
     },
   })
 
@@ -196,14 +196,14 @@ export const withDynamic = () => {
       <Button
         onClick={() =>
           setAnimation((key) =>
-            key === 'moveRight' ? 'moveLeft' : 'moveRight',
+            key === "moveRight" ? "moveLeft" : "moveRight",
           )
         }
       >
         Please Click
       </Button>
 
-      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+      <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
         Box
       </Box>
     </>
@@ -212,62 +212,62 @@ export const withDynamic = () => {
 
 export const withDynamicAndMulti = () => {
   const [animation, setAnimation] = useDynamicAnimation<
-    Record<'moveLeft' | 'moveRight', AnimationStyle[]>
+    Record<"moveLeft" | "moveRight", AnimationStyle[]>
   >({
     moveLeft: [
       {
         keyframes: {
-          '0%': {
-            transform: 'translateX(400%)',
+          "0%": {
+            transform: "translateX(400%)",
           },
-          '100%': {
-            transform: 'translateX(0%)',
+          "100%": {
+            transform: "translateX(0%)",
           },
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
+        duration: "slower",
+        fillMode: "forwards",
+        timingFunction: "ease-in-out",
       },
       {
         keyframes: {
-          '0%': {
-            bg: 'secondary',
+          "0%": {
+            bg: "secondary",
           },
-          '100%': {
-            bg: 'primary',
+          "100%": {
+            bg: "primary",
           },
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
+        duration: "slower",
+        fillMode: "forwards",
+        timingFunction: "ease-in-out",
       },
     ],
     moveRight: [
       {
         keyframes: {
-          '0%': {
-            transform: 'translateX(0%)',
+          "0%": {
+            transform: "translateX(0%)",
           },
-          '100%': {
-            transform: 'translateX(400%)',
+          "100%": {
+            transform: "translateX(400%)",
           },
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
+        duration: "slower",
+        fillMode: "forwards",
+        timingFunction: "ease-in-out",
       },
       {
         keyframes: {
-          '0%': {
-            bg: 'primary',
+          "0%": {
+            bg: "primary",
           },
-          '100%': {
-            bg: 'secondary',
+          "100%": {
+            bg: "secondary",
           },
         },
-        duration: 'slower',
-        fillMode: 'forwards',
-        timingFunction: 'ease-in-out',
+        duration: "slower",
+        fillMode: "forwards",
+        timingFunction: "ease-in-out",
       },
     ],
   })
@@ -277,14 +277,14 @@ export const withDynamicAndMulti = () => {
       <Button
         onClick={() =>
           setAnimation((key) =>
-            key === 'moveRight' ? 'moveLeft' : 'moveRight',
+            key === "moveRight" ? "moveLeft" : "moveRight",
           )
         }
       >
         Please Click
       </Button>
 
-      <Box bg='primary' p='md' rounded='md' color='white' animation={animation}>
+      <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
         Box
       </Box>
     </>

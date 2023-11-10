@@ -1,5 +1,5 @@
-import { ReactNode, RefObject } from 'react'
-import { ContainerPortal, DefaultPortal } from './'
+import { ReactNode, RefObject } from "react"
+import { ContainerPortal, DefaultPortal } from "./"
 
 export type PortalProps = {
   /**
@@ -42,5 +42,5 @@ export const Portal = ({
   )
 }
 
-Portal.className = 'ui-portal'
-Portal.selector = '.ui-portal'
+Portal.className = "ui-portal"
+Portal.selector = ".ui-portal"

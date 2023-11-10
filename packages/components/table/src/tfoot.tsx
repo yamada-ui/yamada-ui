@@ -3,9 +3,9 @@ import {
   TableFootProps as NativeTableFootProps,
   Tr,
   Th,
-} from '@yamada-ui/native-table'
-import { runIfFunc } from '@yamada-ui/utils'
-import { useTableContext, render } from './use-table'
+} from "@yamada-ui/native-table"
+import { runIfFunc } from "@yamada-ui/utils"
+import { useTableContext, render } from "./use-table"
 
 export type TableFootProps = NativeTableFootProps
 

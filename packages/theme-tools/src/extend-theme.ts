@@ -11,8 +11,8 @@ import {
   ComponentMultiSizes,
   ComponentMultiVariants,
   ComponentMultiStyle,
-} from '@yamada-ui/core'
-import { baseTheme, defaultTheme } from '@yamada-ui/theme'
+} from "@yamada-ui/core"
+import { baseTheme, defaultTheme } from "@yamada-ui/theme"
 import {
   Dict,
   merge as mergeObject,
@@ -21,7 +21,7 @@ import {
   omitObject,
   pickObject,
   isFunction,
-} from '@yamada-ui/utils'
+} from "@yamada-ui/utils"
 
 type Options = {
   merge?: boolean
@@ -63,7 +63,7 @@ export const extendToken = (
   mergeObject(get<ThemeTokens>(defaultTheme, token, {}), tokens ?? {})
 
 export const extendStyle = (
-  name: 'globalStyle' | 'resetStyle',
+  name: "globalStyle" | "resetStyle",
   style: UIStyle,
 ): UIStyle => {
   const props: UIStyleProps = {
@@ -82,7 +82,7 @@ export const extendStyle = (
 }
 
 export const extendComponent = (
-  name: keyof (typeof defaultTheme)['components'],
+  name: keyof (typeof defaultTheme)["components"],
   componentStyle?: ComponentStyle | ComponentMultiStyle,
 ): ComponentStyle | ComponentMultiStyle =>
   mergeObject(
@@ -95,7 +95,7 @@ export const extendComponent = (
   )
 
 export const extendComponentSize = (
-  name: keyof (typeof defaultTheme)['components'],
+  name: keyof (typeof defaultTheme)["components"],
   componentSizes?: ComponentSizes | ComponentMultiSizes,
 ): ComponentSizes | ComponentMultiSizes =>
   mergeObject(
@@ -104,7 +104,7 @@ export const extendComponentSize = (
   )
 
 export const extendComponentVariant = (
-  name: keyof (typeof defaultTheme)['components'],
+  name: keyof (typeof defaultTheme)["components"],
   componentVariants?: ComponentVariants | ComponentMultiVariants,
 ): ComponentVariants | ComponentMultiVariants =>
   mergeObject(
@@ -117,7 +117,7 @@ export const extendComponentVariant = (
   )
 
 export const extendComponentDefaultProps = (
-  name: keyof (typeof defaultTheme)['components'],
+  name: keyof (typeof defaultTheme)["components"],
   componentDefaultProps?: ComponentDefaultProps,
 ): ComponentDefaultProps =>
   mergeObject(

@@ -1,49 +1,49 @@
-import { ComponentMultiStyle, mode } from '@yamada-ui/core'
-import { getColor, isArray } from '@yamada-ui/utils'
+import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import { getColor, isArray } from "@yamada-ui/utils"
 
 export const NativeSelect: ComponentMultiStyle = {
   baseStyle: {
     container: {},
     field: {
-      cursor: 'pointer',
-      width: '100%',
+      cursor: "pointer",
+      width: "100%",
       minWidth: 0,
       outline: 0,
-      position: 'relative',
-      appearance: 'none',
-      pb: '1px',
-      lineHeight: 'normal',
-      transitionProperty: 'common',
-      transitionDuration: 'normal',
+      position: "relative",
+      appearance: "none",
+      pb: "1px",
+      lineHeight: "normal",
+      transitionProperty: "common",
+      transitionDuration: "normal",
       _focus: {
-        zIndex: 'unset',
+        zIndex: "unset",
       },
       _disabled: {
         opacity: 0.4,
-        cursor: 'not-allowed',
+        cursor: "not-allowed",
       },
       _placeholder: {
-        color: 'gray.500',
+        color: "gray.500",
       },
       _dark: {
         _placeholder: {
-          color: 'whiteAlpha.400',
+          color: "whiteAlpha.400",
         },
       },
       _readOnly: {
-        pointerEvents: 'none',
+        pointerEvents: "none",
         _placeholder: {
-          color: 'inherit !important',
+          color: "inherit !important",
         },
       },
     },
     icon: {
-      width: '6',
-      py: '2',
-      color: ['blackAlpha.600', 'whiteAlpha.600'],
-      fontSize: 'xl',
+      width: "6",
+      py: "2",
+      color: ["blackAlpha.600", "whiteAlpha.600"],
+      fontSize: "xl",
       outline: 0,
-      rounded: 'md',
+      rounded: "md",
       _disabled: {
         opacity: 0.5,
       },
@@ -54,8 +54,8 @@ export const NativeSelect: ComponentMultiStyle = {
     outline: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -66,11 +66,11 @@ export const NativeSelect: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '1px solid',
-          borderColor: 'inherit',
-          bg: 'inherit',
+          border: "1px solid",
+          borderColor: "inherit",
+          bg: "inherit",
           _hover: {
-            borderColor: ['gray.300', 'whiteAlpha.400'],
+            borderColor: ["gray.300", "whiteAlpha.400"],
           },
           _active: {
             borderColor: focusBorderColor,
@@ -90,8 +90,8 @@ export const NativeSelect: ComponentMultiStyle = {
     filled: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -102,21 +102,21 @@ export const NativeSelect: ComponentMultiStyle = {
 
       return {
         field: {
-          border: '2px solid',
-          borderColor: 'transparent',
-          bg: ['gray.100', 'whiteAlpha.50'],
+          border: "2px solid",
+          borderColor: "transparent",
+          bg: ["gray.100", "whiteAlpha.50"],
           _hover: {
-            bg: ['gray.200', 'whiteAlpha.100'],
+            bg: ["gray.200", "whiteAlpha.100"],
           },
           _active: {
-            bg: 'transparent',
+            bg: "transparent",
             borderColor: focusBorderColor,
           },
           _invalid: {
             borderColor: errorBorderColor,
           },
           _focusVisible: {
-            bg: 'transparent',
+            bg: "transparent",
             borderColor: focusBorderColor,
           },
         },
@@ -125,8 +125,8 @@ export const NativeSelect: ComponentMultiStyle = {
     flushed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ['blue.500', 'blue.300'],
-      errorBorderColor: ec = ['red.500', 'red.300'],
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -137,11 +137,11 @@ export const NativeSelect: ComponentMultiStyle = {
 
       return {
         field: {
-          borderBottom: '1px solid',
-          borderColor: 'inherit',
-          rounded: '0',
-          px: '0',
-          bg: 'transparent',
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          rounded: "0",
+          px: "0",
+          bg: "transparent",
           _active: {
             borderColor: focusBorderColor,
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
@@ -159,9 +159,9 @@ export const NativeSelect: ComponentMultiStyle = {
     },
     unstyled: {
       field: {
-        bg: 'transparent',
-        minH: 'auto',
-        px: '0',
+        bg: "transparent",
+        minH: "auto",
+        px: "0",
       },
     },
   },
@@ -169,58 +169,58 @@ export const NativeSelect: ComponentMultiStyle = {
   sizes: {
     xs: {
       field: {
-        fontSize: 'xs',
-        pl: '2',
-        pr: '8',
-        minH: '6',
-        rounded: 'sm',
+        fontSize: "xs",
+        pl: "2",
+        pr: "8",
+        minH: "6",
+        rounded: "sm",
       },
       icon: {
-        pt: '2',
-        fontSize: 'lg',
-        insetEnd: '1',
+        pt: "2",
+        fontSize: "lg",
+        insetEnd: "1",
       },
     },
     sm: {
       field: {
-        fontSize: 'sm',
-        pl: '2',
-        pr: '8',
-        minH: '8',
-        rounded: 'md',
+        fontSize: "sm",
+        pl: "2",
+        pr: "8",
+        minH: "8",
+        rounded: "md",
       },
       icon: {
-        insetEnd: '2',
+        insetEnd: "2",
       },
     },
     md: {
       field: {
-        fontSize: 'md',
-        pl: '3',
-        pr: '8',
-        minH: '10',
-        rounded: 'md',
+        fontSize: "md",
+        pl: "3",
+        pr: "8",
+        minH: "10",
+        rounded: "md",
       },
       icon: {
-        insetEnd: '2',
+        insetEnd: "2",
       },
     },
     lg: {
       field: {
-        fontSize: 'lg',
-        pl: '4',
-        pr: '8',
-        minH: '12',
-        rounded: 'md',
+        fontSize: "lg",
+        pl: "4",
+        pr: "8",
+        minH: "12",
+        rounded: "md",
       },
       icon: {
-        insetEnd: '2',
+        insetEnd: "2",
       },
     },
   },
 
   defaultProps: {
-    size: 'md',
-    variant: 'outline',
+    size: "md",
+    variant: "outline",
   },
 }

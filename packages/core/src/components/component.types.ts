@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from "react"
 import {
   CSSUIProps,
   CSSUIObject,
@@ -6,8 +6,8 @@ import {
   CSSObject,
   Interpolation,
   PropsTheme,
-} from '..'
-import { DOMElements } from '.'
+} from ".."
+import { DOMElements } from "."
 
 export type StyledOptions = {
   shouldForwardProp?: (prop: string) => boolean
@@ -59,7 +59,7 @@ export type UIProps = CSSUIProps & {
 
 export type OmitProps<Y, M extends keyof any = never> = Omit<
   Y,
-  'as' | 'color' | M
+  "as" | "color" | M
 >
 
 export type IntersectionProps<
@@ -114,8 +114,8 @@ export type UIComponent<Y extends As, M extends object = {}> = Component<
 
 export type HTMLUIProps<Y extends As> = Omit<
   PropsOf<Y>,
-  Y extends 'svg'
-    ? 'ref' | 'children' | keyof StylesProps
-    : 'ref' | keyof StylesProps
+  Y extends "svg"
+    ? "ref" | "children" | keyof StylesProps
+    : "ref" | keyof StylesProps
 > &
   UIProps & { as?: As }

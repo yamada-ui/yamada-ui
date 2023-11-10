@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, useState } from 'react'
+import { useRef, useEffect, useCallback, useState } from "react"
 
 export const useHover = <T extends HTMLElement = HTMLDivElement>() => {
   const [hovered, setHovered] = useState(false)
@@ -11,12 +11,12 @@ export const useHover = <T extends HTMLElement = HTMLDivElement>() => {
     const el = ref.current
 
     if (el) {
-      el.addEventListener('mouseenter', onMouseEnter)
-      el.addEventListener('mouseleave', onMouseLeave)
+      el.addEventListener("mouseenter", onMouseEnter)
+      el.addEventListener("mouseleave", onMouseLeave)
 
       return () => {
-        el.removeEventListener('mouseenter', onMouseEnter)
-        el.removeEventListener('mouseleave', onMouseLeave)
+        el.removeEventListener("mouseenter", onMouseEnter)
+        el.removeEventListener("mouseleave", onMouseLeave)
       }
     }
   }, [onMouseEnter, onMouseLeave])

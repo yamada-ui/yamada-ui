@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/react'
-import { Input, Kbd, Text, useWindowEvent } from '@yamada-ui/react'
-import { useRef } from 'react'
+import { Meta } from "@storybook/react"
+import { Input, Kbd, Text, useWindowEvent } from "@yamada-ui/react"
+import { useRef } from "react"
 
 const meta: Meta = {
-  title: 'Hooks / useWindowEvent',
+  title: "Hooks / useWindowEvent",
 }
 
 export default meta
@@ -11,8 +11,8 @@ export default meta
 export const basic = () => {
   const inputRef = useRef<HTMLInputElement>(null)
 
-  useWindowEvent('keydown', (ev) => {
-    if (ev.code === 'KeyK' && (ev.ctrlKey || ev.metaKey)) {
+  useWindowEvent("keydown", (ev) => {
+    if (ev.code === "KeyK" && (ev.ctrlKey || ev.metaKey)) {
       ev.preventDefault()
       inputRef.current?.focus()
     }

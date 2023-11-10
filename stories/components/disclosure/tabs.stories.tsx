@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@yamada-ui/react'
-import { useState } from 'react'
+import { Meta, StoryFn } from "@storybook/react"
+import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Tabs>
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Components / Disclosure / Tabs',
+  title: "Components / Disclosure / Tabs",
   component: Tabs,
 }
 
@@ -58,7 +58,7 @@ export const withDefaultIndex: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Tabs size='sm'>
+      <Tabs size="sm">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -76,7 +76,7 @@ export const withSize: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs size='md'>
+      <Tabs size="md">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -94,7 +94,7 @@ export const withSize: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs size='lg'>
+      <Tabs size="lg">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -118,7 +118,7 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Tabs variant='line'>
+      <Tabs variant="line">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -136,7 +136,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='sticky'>
+      <Tabs variant="sticky">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -154,7 +154,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='sticky-subtle'>
+      <Tabs variant="sticky-subtle">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -172,7 +172,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='sticky-solid'>
+      <Tabs variant="sticky-solid">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -190,7 +190,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='rounded'>
+      <Tabs variant="rounded">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -208,7 +208,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='rounded-subtle'>
+      <Tabs variant="rounded-subtle">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -226,7 +226,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='rounded-solid'>
+      <Tabs variant="rounded-solid">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -244,7 +244,7 @@ export const withVariant: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='unstyled'>
+      <Tabs variant="unstyled">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -267,7 +267,7 @@ export const withVariant: Story = () => {
 
 export const withColorScheme: Story = () => {
   return (
-    <Tabs variant='rounded-solid' colorScheme='red'>
+    <Tabs variant="rounded-solid" colorScheme="red">
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>
@@ -290,7 +290,7 @@ export const withColorScheme: Story = () => {
 export const withAlign: Story = () => {
   return (
     <>
-      <Tabs align='start'>
+      <Tabs align="start">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -308,7 +308,7 @@ export const withAlign: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs align='center'>
+      <Tabs align="center">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -326,7 +326,7 @@ export const withAlign: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs align='end'>
+      <Tabs align="end">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -350,7 +350,7 @@ export const withAlign: Story = () => {
 export const withOrientation: Story = () => {
   return (
     <>
-      <Tabs orientation='horizontal'>
+      <Tabs orientation="horizontal">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -368,7 +368,7 @@ export const withOrientation: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs orientation='vertical'>
+      <Tabs orientation="vertical">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -392,7 +392,7 @@ export const withOrientation: Story = () => {
 export const withFitted: Story = () => {
   return (
     <>
-      <Tabs variant='line' isFitted>
+      <Tabs variant="line" isFitted>
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -410,7 +410,7 @@ export const withFitted: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant='sticky' isFitted>
+      <Tabs variant="sticky" isFitted>
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -499,7 +499,7 @@ export const isManual: Story = () => {
 
 export const isLazy: Story = () => {
   return (
-    <Tabs isLazy lazyBehavior='unmount'>
+    <Tabs isLazy lazyBehavior="unmount">
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>
@@ -545,7 +545,7 @@ export const customTabList: Story = () => {
 
 export const customTabPanels: Story = () => {
   return (
-    <Tabs variant='sticky'>
+    <Tabs variant="sticky">
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>

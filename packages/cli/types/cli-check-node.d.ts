@@ -1,1 +1,1 @@
-declare module 'cli-check-node'
+declare module "cli-check-node"

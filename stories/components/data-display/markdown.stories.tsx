@@ -1,11 +1,11 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { Markdown } from '@yamada-ui/markdown'
-import { Heading } from '@yamada-ui/react'
+import { Meta, StoryFn } from "@storybook/react"
+import { Markdown } from "@yamada-ui/markdown"
+import { Heading } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Markdown>
 
 const meta: Meta<typeof Markdown> = {
-  title: 'Components / Data Display / Markdown',
+  title: "Components / Data Display / Markdown",
   component: Markdown,
 }
 
@@ -16,7 +16,7 @@ export const basic: Story = () => {
 }
 
 export const withCodeTheme: Story = () => {
-  return <Markdown code={{ theme: 'materialDark' }}>{README}</Markdown>
+  return <Markdown code={{ theme: "materialDark" }}>{README}</Markdown>
 }
 
 export const customComponent: Story = () => {
@@ -25,9 +25,9 @@ export const customComponent: Story = () => {
       components={{
         h2: (props) => (
           <Heading
-            size='2xl'
-            bgGradient='linear(to-l, #f37bdf, #59a9e1)'
-            bgClip='text'
+            size="2xl"
+            bgGradient="linear(to-l, #f37bdf, #59a9e1)"
+            bgClip="text"
             isTruncated
             {...props}
           />

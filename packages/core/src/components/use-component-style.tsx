@@ -8,9 +8,9 @@ import {
   isArray,
   isObject,
   keysFormObject,
-} from '@yamada-ui/utils'
-import { useRef } from 'react'
-import isEqual from 'react-fast-compare'
+} from "@yamada-ui/utils"
+import { useRef } from "react"
+import isEqual from "react-fast-compare"
 import {
   ComponentStyle,
   CSSUIObject,
@@ -25,7 +25,7 @@ import {
   ComponentMultiVariants,
   ComponentMultiSizes,
   pseudos,
-} from '..'
+} from ".."
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject
@@ -59,7 +59,7 @@ const getModifierStyles =
 
       styles = merge(lightStyles, darkStyles)
     } else if (isObject(value)) {
-      if (keysFormObject(value).length === 1 && 'base' in value) {
+      if (keysFormObject(value).length === 1 && "base" in value) {
         styles = getStyles<IsMulti>(
           singleOrMultiStyles[value.base],
           props,
@@ -69,7 +69,7 @@ const getModifierStyles =
 
         const omitQueries = queries.filter(
           ({ breakpoint }) =>
-            breakpoint !== 'base' && keysFormObject(value).includes(breakpoint),
+            breakpoint !== "base" && keysFormObject(value).includes(breakpoint),
         )
 
         const minQuery = omitQueries.sort(
@@ -83,8 +83,8 @@ const getModifierStyles =
           .sort((a, b) => (a.minW ?? 0) - (b.minW ?? 0))[0]
 
         styles = Object.entries(value).reduce(
-          (styles, [breakpointKey, breakpointValue = '']) => {
-            if (breakpointKey === 'base') {
+          (styles, [breakpointKey, breakpointValue = ""]) => {
+            if (breakpointKey === "base") {
               const query = nextMaxQuery.minWQuery
 
               const baseStyles = getStyles<IsMulti>(
@@ -98,7 +98,7 @@ const getModifierStyles =
 
               const query = queries?.find(
                 ({ breakpoint }) => breakpoint === breakpointKey,
-              )?.[isMin ? 'maxWQuery' : 'minMaxQuery']
+              )?.[isMin ? "maxWQuery" : "minMaxQuery"]
 
               const queryStyles = getStyles<IsMulti>(
                 singleOrMultiStyles[breakpointValue],
@@ -175,7 +175,7 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
   props = merge(componentStyle?.defaultProps ?? {}, filterUndefined(props))
 
   if (componentStyle) {
-    const args = omitObject(props, ['children'])
+    const args = omitObject(props, ["children"])
 
     let styles = getStyles<IsMulti>(componentStyle.baseStyle ?? {}, {
       theme,

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react"
 
 export const createdDom = (): boolean =>
   !!(
-    typeof window !== 'undefined' &&
+    typeof window !== "undefined" &&
     window.document &&
     window.document.createElement
   )
@@ -21,8 +21,8 @@ export const isSafari = (): boolean => isApple() && vendor(/apple/i)
 
 export const isElement = (el: any): el is Element =>
   el != null &&
-  typeof el == 'object' &&
-  'nodeType' in el &&
+  typeof el == "object" &&
+  "nodeType" in el &&
   el.nodeType === Node.ELEMENT_NODE
 
 export const isHTMLElement = (el: any): el is HTMLElement => {
@@ -40,18 +40,18 @@ export const isHidden = (el: HTMLElement): boolean => {
 }
 
 export const isDisabled = (el: HTMLElement): boolean =>
-  Boolean(el.getAttribute('disabled')) === true ||
-  Boolean(el.getAttribute('aria-disabled')) === true
+  Boolean(el.getAttribute("disabled")) === true ||
+  Boolean(el.getAttribute("aria-disabled")) === true
 
 const isVisible = (el: HTMLElement) => el.offsetWidth > 0 && el.offsetHeight > 0
 
 export const hasTabIndex = (el: HTMLElement): boolean =>
-  el.hasAttribute('tabindex')
+  el.hasAttribute("tabindex")
 
 export const isContentEditable = (el: HTMLElement): boolean => {
-  const value = el.getAttribute('contenteditable')
+  const value = el.getAttribute("contenteditable")
 
-  return value !== 'false' && value != null
+  return value !== "false" && value != null
 }
 
 export const isContains = (
@@ -67,10 +67,10 @@ export const getEventRelatedTarget = (
   (ev.relatedTarget ??
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 
-type Booleanish = boolean | 'true' | 'false'
+type Booleanish = boolean | "true" | "false"
 
 export const dataAttr = (condition: boolean | undefined) =>
-  (condition ? '' : undefined) as Booleanish
+  (condition ? "" : undefined) as Booleanish
 
 export const ariaAttr = (
   condition: boolean | undefined,
@@ -81,20 +81,20 @@ export type FocusableElement = {
 }
 
 const focusableElList = [
-  'input:not(:disabled):not([disabled])',
-  'select:not(:disabled):not([disabled])',
-  'textarea:not(:disabled):not([disabled])',
-  'embed',
-  'iframe',
-  'object',
-  'a[href]',
-  'area[href]',
-  'button:not(:disabled):not([disabled])',
-  '[tabindex]',
-  'audio[controls]',
-  'video[controls]',
-  '*[tabindex]:not([aria-disabled])',
-  '*[contenteditable]',
+  "input:not(:disabled):not([disabled])",
+  "select:not(:disabled):not([disabled])",
+  "textarea:not(:disabled):not([disabled])",
+  "embed",
+  "iframe",
+  "object",
+  "a[href]",
+  "area[href]",
+  "button:not(:disabled):not([disabled])",
+  "[tabindex]",
+  "audio[controls]",
+  "video[controls]",
+  "*[tabindex]:not([aria-disabled])",
+  "*[contenteditable]",
 ]
 
 const focusableElSelector: string = focusableElList.join()
@@ -115,14 +115,14 @@ export const isFocusable = (el: HTMLElement): boolean => {
   }
 
   const { localName } = el
-  const focusableTags = ['input', 'select', 'textarea', 'button']
+  const focusableTags = ["input", "select", "textarea", "button"]
 
   if (focusableTags.indexOf(localName) >= 0) return true
 
   const others = {
-    a: () => el.hasAttribute('href'),
-    audio: () => el.hasAttribute('controls'),
-    video: () => el.hasAttribute('controls'),
+    a: () => el.hasAttribute("href"),
+    audio: () => el.hasAttribute("controls"),
+    video: () => el.hasAttribute("controls"),
   }
 
   if (localName in others) return others[localName as keyof typeof others]()

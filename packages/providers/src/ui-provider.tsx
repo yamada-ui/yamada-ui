@@ -6,13 +6,13 @@ import {
   ResetStyle,
   GlobalStyle,
   ThemeSchemeManager,
-} from '@yamada-ui/core'
-import { LoadingProvider } from '@yamada-ui/loading'
-import { NoticeProvider } from '@yamada-ui/notice'
-import { defaultTheme, defaultConfig } from '@yamada-ui/theme'
-import { Dict } from '@yamada-ui/utils'
-import { FC, ReactNode } from 'react'
-import { EnvironmentProvider, Environment } from './environment-provider'
+} from "@yamada-ui/core"
+import { LoadingProvider } from "@yamada-ui/loading"
+import { NoticeProvider } from "@yamada-ui/notice"
+import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
+import { Dict } from "@yamada-ui/utils"
+import { FC, ReactNode } from "react"
+import { EnvironmentProvider, Environment } from "./environment-provider"
 
 export type UIProviderProps = {
   /**

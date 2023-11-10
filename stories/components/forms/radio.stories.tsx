@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta, StoryFn } from "@storybook/react"
 import {
   FormControl,
   Radio,
@@ -10,14 +10,14 @@ import {
   Box,
   VStack,
   Button,
-} from '@yamada-ui/react'
-import { FC, useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+} from "@yamada-ui/react"
+import { FC, useState } from "react"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Radio>
 
 const meta: Meta<typeof Radio> = {
-  title: 'Components / Forms / Radio',
+  title: "Components / Forms / Radio",
   component: Radio,
 }
 
@@ -29,10 +29,10 @@ export const basic: Story = () => {
 
 export const withSize: Story = () => {
   return (
-    <Wrap gap='md'>
-      <Radio size='sm'>孫悟空</Radio>
-      <Radio size='md'>ベジータ</Radio>
-      <Radio size='lg'>フリーザ</Radio>
+    <Wrap gap="md">
+      <Radio size="sm">孫悟空</Radio>
+      <Radio size="md">ベジータ</Radio>
+      <Radio size="lg">フリーザ</Radio>
     </Wrap>
   )
 }
@@ -43,108 +43,108 @@ export const withDefaultChecked: Story = () => {
 
 export const withColorScheme: Story = () => {
   return (
-    <Wrap gap='md'>
-      <Radio colorScheme='primary' defaultChecked>
+    <Wrap gap="md">
+      <Radio colorScheme="primary" defaultChecked>
         Primary
       </Radio>
 
-      <Radio colorScheme='secondary' defaultChecked>
+      <Radio colorScheme="secondary" defaultChecked>
         Secondary
       </Radio>
 
-      <Radio colorScheme='warning' defaultChecked>
+      <Radio colorScheme="warning" defaultChecked>
         Warning
       </Radio>
 
-      <Radio colorScheme='danger' defaultChecked>
+      <Radio colorScheme="danger" defaultChecked>
         Danger
       </Radio>
 
-      <Radio colorScheme='link' defaultChecked>
+      <Radio colorScheme="link" defaultChecked>
         Link
       </Radio>
 
-      <Radio colorScheme='gray' defaultChecked>
+      <Radio colorScheme="gray" defaultChecked>
         Gray
       </Radio>
 
-      <Radio colorScheme='zinc' defaultChecked>
+      <Radio colorScheme="zinc" defaultChecked>
         Zinc
       </Radio>
 
-      <Radio colorScheme='neutral' defaultChecked>
+      <Radio colorScheme="neutral" defaultChecked>
         Neutral
       </Radio>
 
-      <Radio colorScheme='stone' defaultChecked>
+      <Radio colorScheme="stone" defaultChecked>
         Stone
       </Radio>
 
-      <Radio colorScheme='red' defaultChecked>
+      <Radio colorScheme="red" defaultChecked>
         Red
       </Radio>
 
-      <Radio colorScheme='rose' defaultChecked>
+      <Radio colorScheme="rose" defaultChecked>
         Rose
       </Radio>
 
-      <Radio colorScheme='pink' defaultChecked>
+      <Radio colorScheme="pink" defaultChecked>
         Pink
       </Radio>
 
-      <Radio colorScheme='orange' defaultChecked>
+      <Radio colorScheme="orange" defaultChecked>
         Orange
       </Radio>
 
-      <Radio colorScheme='amber' defaultChecked>
+      <Radio colorScheme="amber" defaultChecked>
         Amber
       </Radio>
 
-      <Radio colorScheme='yellow' defaultChecked>
+      <Radio colorScheme="yellow" defaultChecked>
         Yellow
       </Radio>
 
-      <Radio colorScheme='lime' defaultChecked>
+      <Radio colorScheme="lime" defaultChecked>
         Lime
       </Radio>
 
-      <Radio colorScheme='green' defaultChecked>
+      <Radio colorScheme="green" defaultChecked>
         Green
       </Radio>
 
-      <Radio colorScheme='emerald' defaultChecked>
+      <Radio colorScheme="emerald" defaultChecked>
         Emerald
       </Radio>
 
-      <Radio colorScheme='teal' defaultChecked>
+      <Radio colorScheme="teal" defaultChecked>
         Teal
       </Radio>
 
-      <Radio colorScheme='cyan' defaultChecked>
+      <Radio colorScheme="cyan" defaultChecked>
         Cyan
       </Radio>
 
-      <Radio colorScheme='sky' defaultChecked>
+      <Radio colorScheme="sky" defaultChecked>
         Sky
       </Radio>
 
-      <Radio colorScheme='blue' defaultChecked>
+      <Radio colorScheme="blue" defaultChecked>
         Blue
       </Radio>
 
-      <Radio colorScheme='indigo' defaultChecked>
+      <Radio colorScheme="indigo" defaultChecked>
         Indigo
       </Radio>
 
-      <Radio colorScheme='violet' defaultChecked>
+      <Radio colorScheme="violet" defaultChecked>
         Violet
       </Radio>
 
-      <Radio colorScheme='purple' defaultChecked>
+      <Radio colorScheme="purple" defaultChecked>
         Purple
       </Radio>
 
-      <Radio colorScheme='fuchsia' defaultChecked>
+      <Radio colorScheme="fuchsia" defaultChecked>
         Fuchsia
       </Radio>
     </Wrap>
@@ -159,29 +159,29 @@ export const isDisabled: Story = () => {
         All Notifications
       </Radio>
 
-      <RadioGroup defaultValue='all'>
-        <Radio value='all'>All Notifications</Radio>
-        <Radio value='important' isDisabled>
+      <RadioGroup defaultValue="all">
+        <Radio value="all">All Notifications</Radio>
+        <Radio value="important" isDisabled>
           Important Notifications
         </Radio>
-        <Radio value='service'>Service Notifications</Radio>
+        <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
       <FormControl
         isDisabled
-        label='Which notifications would you like to receive?'
+        label="Which notifications would you like to receive?"
       >
         <Radio defaultChecked>All Notifications</Radio>
       </FormControl>
 
       <FormControl
         isDisabled
-        label='Which notifications would you like to receive?'
+        label="Which notifications would you like to receive?"
       >
-        <RadioGroup defaultValue='all'>
-          <Radio value='all'>All Notifications</Radio>
-          <Radio value='important'>Important Notifications</Radio>
-          <Radio value='service'>Service Notifications</Radio>
+        <RadioGroup defaultValue="all">
+          <Radio value="all">All Notifications</Radio>
+          <Radio value="important">Important Notifications</Radio>
+          <Radio value="service">Service Notifications</Radio>
         </RadioGroup>
       </FormControl>
     </>
@@ -196,29 +196,29 @@ export const isReadonly: Story = () => {
         All Notifications
       </Radio>
 
-      <RadioGroup defaultValue='all'>
-        <Radio value='all'>All Notifications</Radio>
-        <Radio value='important' isReadOnly>
+      <RadioGroup defaultValue="all">
+        <Radio value="all">All Notifications</Radio>
+        <Radio value="important" isReadOnly>
           Important Notifications
         </Radio>
-        <Radio value='service'>Service Notifications</Radio>
+        <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
       <FormControl
         isReadOnly
-        label='Which notifications would you like to receive?'
+        label="Which notifications would you like to receive?"
       >
         <Radio defaultChecked>All Notifications</Radio>
       </FormControl>
 
       <FormControl
         isReadOnly
-        label='Which notifications would you like to receive?'
+        label="Which notifications would you like to receive?"
       >
-        <RadioGroup defaultValue='all'>
-          <Radio value='all'>All Notifications</Radio>
-          <Radio value='important'>Important Notifications</Radio>
-          <Radio value='service'>Service Notifications</Radio>
+        <RadioGroup defaultValue="all">
+          <Radio value="all">All Notifications</Radio>
+          <Radio value="important">Important Notifications</Radio>
+          <Radio value="service">Service Notifications</Radio>
         </RadioGroup>
       </FormControl>
     </>
@@ -233,31 +233,31 @@ export const isInvalid: Story = () => {
         All Notifications
       </Radio>
 
-      <RadioGroup defaultValue='all'>
-        <Radio value='all'>All Notifications</Radio>
-        <Radio value='important' isInvalid>
+      <RadioGroup defaultValue="all">
+        <Radio value="all">All Notifications</Radio>
+        <Radio value="important" isInvalid>
           Important Notifications
         </Radio>
-        <Radio value='service'>Service Notifications</Radio>
+        <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
       <FormControl
         isInvalid
-        label='Which notifications would you like to receive?'
-        errorMessage='This is required.'
+        label="Which notifications would you like to receive?"
+        errorMessage="This is required."
       >
         <Radio>All Notifications</Radio>
       </FormControl>
 
       <FormControl
         isInvalid
-        label='Which notifications would you like to receive?'
-        errorMessage='This is required.'
+        label="Which notifications would you like to receive?"
+        errorMessage="This is required."
       >
-        <RadioGroup defaultValue='all'>
-          <Radio value='all'>All Notifications</Radio>
-          <Radio value='important'>Important Notifications</Radio>
-          <Radio value='service'>Service Notifications</Radio>
+        <RadioGroup defaultValue="all">
+          <Radio value="all">All Notifications</Radio>
+          <Radio value="important">Important Notifications</Radio>
+          <Radio value="service">Service Notifications</Radio>
         </RadioGroup>
       </FormControl>
     </>
@@ -267,29 +267,29 @@ export const isInvalid: Story = () => {
 export const group: Story = () => {
   return (
     <>
-      <RadioGroup defaultValue='孫悟空'>
-        <Radio value='孫悟空'>孫悟空</Radio>
-        <Radio value='ベジータ'>ベジータ</Radio>
-        <Radio value='フリーザ'>フリーザ</Radio>
+      <RadioGroup defaultValue="孫悟空">
+        <Radio value="孫悟空">孫悟空</Radio>
+        <Radio value="ベジータ">ベジータ</Radio>
+        <Radio value="フリーザ">フリーザ</Radio>
       </RadioGroup>
 
-      <RadioGroup direction='row' defaultValue='孫悟空'>
-        <Radio value='孫悟空'>孫悟空</Radio>
-        <Radio value='ベジータ'>ベジータ</Radio>
-        <Radio value='フリーザ'>フリーザ</Radio>
+      <RadioGroup direction="row" defaultValue="孫悟空">
+        <Radio value="孫悟空">孫悟空</Radio>
+        <Radio value="ベジータ">ベジータ</Radio>
+        <Radio value="フリーザ">フリーザ</Radio>
       </RadioGroup>
     </>
   )
 }
 
 export const customControl: Story = () => {
-  const [value, setValue] = useState<string>('孫悟空')
+  const [value, setValue] = useState<string>("孫悟空")
 
   return (
     <RadioGroup value={value} onChange={(value) => setValue(value)}>
-      <Radio value='孫悟空'>孫悟空</Radio>
-      <Radio value='ベジータ'>ベジータ</Radio>
-      <Radio value='フリーザ'>フリーザ</Radio>
+      <Radio value="孫悟空">孫悟空</Radio>
+      <Radio value="ベジータ">ベジータ</Radio>
+      <Radio value="フリーザ">フリーザ</Radio>
     </RadioGroup>
   )
 }
@@ -299,20 +299,20 @@ export const customHook: Story = () => {
     const { getInputProps, getIconProps } = useRadio(props)
 
     return (
-      <Box as='label'>
+      <Box as="label">
         <input {...getInputProps()} />
 
         <Box
           {...getIconProps()}
-          cursor='pointer'
-          borderWidth='1px'
-          py='xs'
-          px='sm'
-          rounded='md'
+          cursor="pointer"
+          borderWidth="1px"
+          py="xs"
+          px="sm"
+          rounded="md"
           _checked={{
-            bg: 'blue.500',
-            color: 'white',
-            borderColor: 'blue.500',
+            bg: "blue.500",
+            color: "white",
+            borderColor: "blue.500",
           }}
         >
           {props.value}
@@ -322,14 +322,14 @@ export const customHook: Story = () => {
   }
 
   const { getContainerProps, getRadioProps } = useRadioGroup({
-    defaultValue: '孫悟空',
+    defaultValue: "孫悟空",
   })
 
   return (
-    <HStack gap='sm' {...getContainerProps()}>
-      <CustomRadio {...getRadioProps({ value: '孫悟空' })} />
-      <CustomRadio {...getRadioProps({ value: 'ベジータ' })} />
-      <CustomRadio {...getRadioProps({ value: 'フリーザ' })} />
+    <HStack gap="sm" {...getContainerProps()}>
+      <CustomRadio {...getRadioProps({ value: "孫悟空" })} />
+      <CustomRadio {...getRadioProps({ value: "ベジータ" })} />
+      <CustomRadio {...getRadioProps({ value: "フリーザ" })} />
     </HStack>
   )
 }
@@ -344,32 +344,32 @@ export const reactHookForm: Story = () => {
     formState: { errors },
   } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.radio}
-        label='Who is your favorite character?'
+        label="Who is your favorite character?"
         errorMessage={errors.radio?.message}
       >
         <Controller
-          name='radio'
+          name="radio"
           control={control}
-          rules={{ required: { value: true, message: 'This is required.' } }}
+          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RadioGroup {...field}>
-              <Radio value='孫悟空'>孫悟空</Radio>
-              <Radio value='ベジータ'>ベジータ</Radio>
-              <Radio value='フリーザ'>フリーザ</Radio>
+              <Radio value="孫悟空">孫悟空</Radio>
+              <Radio value="ベジータ">ベジータ</Radio>
+              <Radio value="フリーザ">フリーザ</Radio>
             </RadioGroup>
           )}
         />
       </FormControl>
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>
@@ -380,7 +380,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
   type Data = { radio: string }
 
   const defaultValues: Data = {
-    radio: '孫悟空',
+    radio: "孫悟空",
   }
 
   const {
@@ -390,32 +390,32 @@ export const reactHookFormWithDefaultValue: Story = () => {
     formState: { errors },
   } = useForm<Data>({ defaultValues })
 
-  const onSubmit: SubmitHandler<Data> = (data) => console.log('submit:', data)
+  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 
-  console.log('watch:', watch())
+  console.log("watch:", watch())
 
   return (
-    <VStack as='form' onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.radio}
-        label='Who is your favorite character?'
+        label="Who is your favorite character?"
         errorMessage={errors.radio?.message}
       >
         <Controller
-          name='radio'
+          name="radio"
           control={control}
-          rules={{ required: { value: true, message: 'This is required.' } }}
+          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RadioGroup {...field}>
-              <Radio value='孫悟空'>孫悟空</Radio>
-              <Radio value='ベジータ'>ベジータ</Radio>
-              <Radio value='フリーザ'>フリーザ</Radio>
+              <Radio value="孫悟空">孫悟空</Radio>
+              <Radio value="ベジータ">ベジータ</Radio>
+              <Radio value="フリーザ">フリーザ</Radio>
             </RadioGroup>
           )}
         />
       </FormControl>
 
-      <Button type='submit' alignSelf='flex-end'>
+      <Button type="submit" alignSelf="flex-end">
         Submit
       </Button>
     </VStack>

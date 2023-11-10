@@ -1,10 +1,10 @@
-import { defaultTheme } from '@yamada-ui/react'
+import { defaultTheme } from "@yamada-ui/react"
 
 const baseTheme = {
-  brandTitle: 'Yamada UI',
-  brandUrl: 'https://github.com/hirotomoyamada/yamada-ui',
+  brandTitle: "Yamada UI",
+  brandUrl: "https://github.com/hirotomoyamada/yamada-ui",
   brandImage:
-    'https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png',
+    "https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png",
 
   // Colors
   colorPrimary: defaultTheme.colors.green[500],
@@ -24,7 +24,7 @@ const baseTheme = {
 export const UITheme = {
   light: {
     ...baseTheme,
-    base: 'light',
+    base: "light",
 
     // UI
     appBg: defaultTheme.colors.white,
@@ -40,7 +40,7 @@ export const UITheme = {
   },
   dark: {
     ...baseTheme,
-    base: 'dark',
+    base: "dark",
 
     // UI
     appContentBg: defaultTheme.colors.black,

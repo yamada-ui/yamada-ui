@@ -3,8 +3,8 @@ import {
   countDecimal,
   toPrecision,
   useCallbackRef,
-} from '@yamada-ui/utils'
-import { useCallback, useState } from 'react'
+} from "@yamada-ui/utils"
+import { useCallback, useState } from "react"
 
 export interface UseCounterProps {
   /**
@@ -65,12 +65,12 @@ export const useCounter = ({
   const onChange = useCallbackRef(props.onChange)
 
   const [defaultValue, setValue] = useState<string | number>(() => {
-    if (props.defaultValue == null) return ''
+    if (props.defaultValue == null) return ""
 
-    return casting(props.defaultValue, props.step ?? 1, props.precision) ?? ''
+    return casting(props.defaultValue, props.step ?? 1, props.precision) ?? ""
   })
 
-  const isControlled = typeof props.value !== 'undefined'
+  const isControlled = typeof props.value !== "undefined"
   const value = isControlled ? (props.value as string | number) : defaultValue
 
   const countDecimal = getCountDecimal(parse(value), props.step ?? 1)
@@ -103,7 +103,7 @@ export const useCounter = ({
     (step = props.step ?? 1) => {
       let next: string | number
 
-      if (value === '') {
+      if (value === "") {
         next = parse(step)
       } else {
         next = parse(value) + step
@@ -120,7 +120,7 @@ export const useCounter = ({
     (step = props.step ?? 1) => {
       let next: string | number
 
-      if (value === '') {
+      if (value === "") {
         next = parse(-step)
       } else {
         next = parse(value) - step
@@ -137,7 +137,7 @@ export const useCounter = ({
     let next: string | number
 
     if (defaultValue == null) {
-      next = ''
+      next = ""
     } else {
       next = casting(defaultValue, props.step ?? 1, props.precision) ?? min
     }
@@ -180,7 +180,7 @@ export const useCounter = ({
 export type UseCounterReturn = ReturnType<typeof useCounter>
 
 const parse = (value: string | number): number =>
-  parseFloat(value.toString().replace(/[^\w.-]+/g, ''))
+  parseFloat(value.toString().replace(/[^\w.-]+/g, ""))
 
 const getCountDecimal = (value: number, step: number): number =>
   Math.max(countDecimal(step), countDecimal(value))

@@ -1,4 +1,4 @@
-import { useLatestRef } from '@yamada-ui/use-latest-ref'
+import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import {
   addPointerEvent,
   AnyPointerEvent,
@@ -6,9 +6,9 @@ import {
   isMultiTouchEvent,
   Point,
   PointerEventInfo,
-} from '@yamada-ui/utils'
-import sync, { cancelSync, getFrameData } from 'framesync'
-import { RefObject, useEffect, useRef } from 'react'
+} from "@yamada-ui/utils"
+import sync, { cancelSync, getFrameData } from "framesync"
+import { RefObject, useEffect, useRef } from "react"
 
 type PanEventInfo = {
   point: Point
@@ -89,10 +89,10 @@ const pipe =
 const distance1D = (a: number, b: number) => Math.abs(a - b)
 
 const isPoint = (point: any): point is { x: number; y: number } =>
-  'x' in point && 'y' in point
+  "x" in point && "y" in point
 
 const distance = <Y extends Point | number>(a: Y, b: Y) => {
-  if (typeof a === 'number' && typeof b === 'number') return distance1D(a, b)
+  if (typeof a === "number" && typeof b === "number") return distance1D(a, b)
 
   if (isPoint(a) && isPoint(b)) {
     const xDelta = distance1D(a.x, b.x)
@@ -179,9 +179,9 @@ const panEvent = (
   }
 
   let removeListeners = pipe(
-    addPointerEvent(win, 'pointermove', onPointerMove),
-    addPointerEvent(win, 'pointerup', onPointerUp),
-    addPointerEvent(win, 'pointercancel', onPointerUp),
+    addPointerEvent(win, "pointermove", onPointerMove),
+    addPointerEvent(win, "pointerup", onPointerUp),
+    addPointerEvent(win, "pointercancel", onPointerUp),
   )
 
   const end = () => {
@@ -248,7 +248,7 @@ export const usePanEvent = (
       panSession.current = panEvent(event, handlersRef.current, threshold)
     }
 
-    return addPointerEvent(node, 'pointerdown', onPointerDown)
+    return addPointerEvent(node, "pointerdown", onPointerDown)
   }, [ref, hasPanEvents, handlersRef, threshold])
 
   useEffect(() => {

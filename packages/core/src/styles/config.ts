@@ -1,8 +1,8 @@
-import { CSSObject } from '@emotion/react'
-import { isNumber, Union, Dict } from '@yamada-ui/utils'
-import type * as CSS from 'csstype'
-import { ThemeToken } from '../theme'
-import { StyledTheme } from '../theme.types'
+import { CSSObject } from "@emotion/react"
+import { isNumber, Union, Dict } from "@yamada-ui/utils"
+import type * as CSS from "csstype"
+import { ThemeToken } from "../theme"
+import { StyledTheme } from "../theme.types"
 import {
   analyzeCSSValue,
   isCSSFunction,
@@ -13,7 +13,7 @@ import {
   generateTransform,
   generateFilter,
   generateAnimation,
-} from './utils'
+} from "./utils"
 
 type CSSProperties = Union<keyof CSS.Properties>
 
@@ -74,7 +74,7 @@ export const transforms = {
   deg: (value: any) => {
     if (isCSSVar(value) || value == null) return value
 
-    const isUnitless = typeof value === 'string' && !value.endsWith('deg')
+    const isUnitless = typeof value === "string" && !value.endsWith("deg")
 
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
@@ -88,15 +88,15 @@ export const transforms = {
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
       }
     }
   },
   bgClip: (value: any) => {
-    if (value === 'text') {
-      return { color: 'transparent', backgroundClip: 'text' }
+    if (value === "text") {
+      return { color: "transparent", backgroundClip: "text" }
     } else {
       return { backgroundClip: value }
     }
@@ -124,17 +124,17 @@ export const transforms = {
 }
 
 export const configs = {
-  color: createConfig('colors'),
-  space: createConfig('spaces', transforms.px),
-  radii: createConfig('radii', transforms.px),
-  shadow: createConfig('shadows'),
-  border: createConfig('borders'),
-  size: createConfig('sizes', transforms.px),
-  sizeTransform: createConfig('sizes', transforms.fraction),
+  color: createConfig("colors"),
+  space: createConfig("spaces", transforms.px),
+  radii: createConfig("radii", transforms.px),
+  shadow: createConfig("shadows"),
+  border: createConfig("borders"),
+  size: createConfig("sizes", transforms.px),
+  sizeTransform: createConfig("sizes", transforms.fraction),
   prop: (
-    properties: ConfigProps['properties'],
+    properties: ConfigProps["properties"],
     token?: ThemeToken,
-    transform?: ConfigProps['transform'],
+    transform?: ConfigProps["transform"],
   ) =>
     token
       ? {
@@ -147,12 +147,12 @@ export const configs = {
           token,
         },
   propTransform: (
-    properties: ConfigProps['properties'],
-    transform?: ConfigProps['transform'],
+    properties: ConfigProps["properties"],
+    transform?: ConfigProps["transform"],
   ) => ({
     properties,
     transform,
   }),
-  gradient: createConfig('gradients', transforms.gradient),
-  blur: createConfig('blurs', transforms.function('blur')),
+  gradient: createConfig("gradients", transforms.gradient),
+  blur: createConfig("blurs", transforms.function("blur")),
 }

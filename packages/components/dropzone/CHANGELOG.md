@@ -1,5 +1,16 @@
 # @yamada-ui/dropzone
 
+## 0.4.0
+
+### Minor Changes
+
+- [`2f8506c3`](https://github.com/hirotomoyamada/yamada-ui/commit/2f8506c3015fea6d9ea21f3854d23cff3ea8678e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new file types to accept list.
+
+### Patch Changes
+
+- Updated dependencies [[`09c791c9`](https://github.com/hirotomoyamada/yamada-ui/commit/09c791c97883508c4a4e61ff867e8c6cfeb9fdea)]:
+  - @yamada-ui/transitions@0.3.16
+
 ## 0.3.18
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @yamada-ui/popover
 
+## 0.3.19
+
+### Patch Changes
+
+- Updated dependencies [[`09c791c9`](https://github.com/hirotomoyamada/yamada-ui/commit/09c791c97883508c4a4e61ff867e8c6cfeb9fdea)]:
+  - @yamada-ui/transitions@0.3.16
+
 ## 0.3.18
 
 ### Patch Changes

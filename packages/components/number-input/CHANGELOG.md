@@ -1,5 +1,11 @@
 # @yamada-ui/number-input
 
+## 0.3.19
+
+### Patch Changes
+
+- [#227](https://github.com/hirotomoyamada/yamada-ui/pull/227) [`9639d8e5`](https://github.com/hirotomoyamada/yamada-ui/commit/9639d8e51a786c93c190402b56d490bb96ca7760) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `NumberInput`.
+
 ## 0.3.18
 
 ### Patch Changes

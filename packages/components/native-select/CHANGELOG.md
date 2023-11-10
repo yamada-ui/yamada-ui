@@ -1,5 +1,11 @@
 # @yamada-ui/native-select
 
+## 0.4.10
+
+### Patch Changes
+
+- [#227](https://github.com/hirotomoyamada/yamada-ui/pull/227) [`7a2001f4`](https://github.com/hirotomoyamada/yamada-ui/commit/7a2001f41d492b1b33a54b64ac0a6343874e13ef) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `NativeSelect`.
+
 ## 0.4.9
 
 ### Patch Changes

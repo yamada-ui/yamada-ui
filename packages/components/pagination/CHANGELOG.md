@@ -1,5 +1,14 @@
 # @yamada-ui/pagination
 
+## 0.4.16
+
+### Patch Changes
+
+- [#231](https://github.com/hirotomoyamada/yamada-ui/pull/231) [`199b0b25`](https://github.com/hirotomoyamada/yamada-ui/commit/199b0b250d60c5a48291ee1cfcd56c41702fcc68) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Pagination`.
+
+- Updated dependencies [[`99a44d2c`](https://github.com/hirotomoyamada/yamada-ui/commit/99a44d2c0bee0e510b747d8f841648122081aad7)]:
+  - @yamada-ui/use-controllable-state@0.3.0
+
 ## 0.4.15
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/modal
 
+## 0.4.17
+
+### Patch Changes
+
+- [#231](https://github.com/hirotomoyamada/yamada-ui/pull/231) [`d07d41ac`](https://github.com/hirotomoyamada/yamada-ui/commit/d07d41ac5d58c140a468b2d0f5f2e2a1335bad55) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Modal` and `Drawer` and `Dialog`.
+
+- Updated dependencies [[`09c791c9`](https://github.com/hirotomoyamada/yamada-ui/commit/09c791c97883508c4a4e61ff867e8c6cfeb9fdea)]:
+  - @yamada-ui/transitions@0.3.16
+
 ## 0.4.16
 
 ### Patch Changes

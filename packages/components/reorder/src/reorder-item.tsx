@@ -82,7 +82,7 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
         <ui.li
           ref={ref}
           as={MotionReorder.Item}
-          className={cx("ui-reorder-item", className)}
+          className={cx("ui-reorder__item", className)}
           value={label}
           __css={css}
           {...rest}

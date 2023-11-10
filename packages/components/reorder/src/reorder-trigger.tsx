@@ -26,7 +26,7 @@ export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
     return (
       <ui.div
         ref={mergeRefs(register, ref)}
-        className={cx("ui-reorder-trigger", className)}
+        className={cx("ui-reorder__trigger", className)}
         __css={css}
         {...rest}
         data-selected={dataAttr(isDrag)}

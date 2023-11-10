@@ -1,5 +1,11 @@
 # @yamada-ui/transitions
 
+## 0.3.16
+
+### Patch Changes
+
+- [`09c791c9`](https://github.com/hirotomoyamada/yamada-ui/commit/09c791c97883508c4a4e61ff867e8c6cfeb9fdea) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Increased default transition durations.
+
 ## 0.3.15
 
 ### Patch Changes

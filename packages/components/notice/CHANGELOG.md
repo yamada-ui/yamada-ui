@@ -1,5 +1,11 @@
 # @yamada-ui/notice
 
+## 0.5.4
+
+### Patch Changes
+
+- [#231](https://github.com/hirotomoyamada/yamada-ui/pull/231) [`ac950ec1`](https://github.com/hirotomoyamada/yamada-ui/commit/ac950ec1650acbfee52f6c20d47545bc503f011a) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Notice`.
+
 ## 0.5.3
 
 ### Patch Changes

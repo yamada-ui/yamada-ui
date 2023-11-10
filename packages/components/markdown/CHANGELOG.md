@@ -1,5 +1,11 @@
 # @yamada-ui/markdown
 
+## 0.3.16
+
+### Patch Changes
+
+- [#225](https://github.com/hirotomoyamada/yamada-ui/pull/225) [`4520f2e6`](https://github.com/hirotomoyamada/yamada-ui/commit/4520f2e648acc9b879dd949956907657ddb596a1) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Markdown`.
+
 ## 0.3.15
 
 ### Patch Changes

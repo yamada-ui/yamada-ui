@@ -1,5 +1,16 @@
 # @yamada-ui/menu
 
+## 0.3.19
+
+### Patch Changes
+
+- [#228](https://github.com/hirotomoyamada/yamada-ui/pull/228) [`31ca1514`](https://github.com/hirotomoyamada/yamada-ui/commit/31ca15141f6d6bd21ec514b39cc07c2542947d37) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Menu`.
+
+- Updated dependencies [[`99a44d2c`](https://github.com/hirotomoyamada/yamada-ui/commit/99a44d2c0bee0e510b747d8f841648122081aad7), [`09c791c9`](https://github.com/hirotomoyamada/yamada-ui/commit/09c791c97883508c4a4e61ff867e8c6cfeb9fdea)]:
+  - @yamada-ui/use-controllable-state@0.3.0
+  - @yamada-ui/transitions@0.3.16
+  - @yamada-ui/popover@0.3.19
+
 ## 0.3.18
 
 ### Patch Changes

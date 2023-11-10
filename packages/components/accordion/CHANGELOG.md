@@ -1,5 +1,17 @@
 # @yamada-ui/accordion
 
+## 0.4.0
+
+### Minor Changes
+
+- [`100866f1`](https://github.com/hirotomoyamada/yamada-ui/commit/100866f17ccc5185bf1e761cd7c11e31e8dc7fd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added string child handling and rendering.
+
+### Patch Changes
+
+- Updated dependencies [[`99a44d2c`](https://github.com/hirotomoyamada/yamada-ui/commit/99a44d2c0bee0e510b747d8f841648122081aad7), [`09c791c9`](https://github.com/hirotomoyamada/yamada-ui/commit/09c791c97883508c4a4e61ff867e8c6cfeb9fdea)]:
+  - @yamada-ui/use-controllable-state@0.3.0
+  - @yamada-ui/transitions@0.3.16
+
 ## 0.3.16
 
 ### Patch Changes

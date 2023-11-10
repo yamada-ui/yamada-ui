@@ -1,5 +1,12 @@
 # @yamada-ui/providers
 
+## 0.9.6
+
+### Patch Changes
+
+- Updated dependencies [[`ac950ec1`](https://github.com/hirotomoyamada/yamada-ui/commit/ac950ec1650acbfee52f6c20d47545bc503f011a)]:
+  - @yamada-ui/notice@0.5.4
+
 ## 0.9.5
 
 ### Patch Changes

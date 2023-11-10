@@ -1,5 +1,11 @@
 # @yamada-ui/native-table
 
+## 0.4.9
+
+### Patch Changes
+
+- [#231](https://github.com/hirotomoyamada/yamada-ui/pull/231) [`64f44a9d`](https://github.com/hirotomoyamada/yamada-ui/commit/64f44a9dd7f5c4a845145d5e492f43bbd1e3cf48) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `NativeTable`.
+
 ## 0.4.8
 
 ### Patch Changes

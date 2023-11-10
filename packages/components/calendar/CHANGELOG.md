@@ -1,5 +1,17 @@
 # @yamada-ui/calendar
 
+## 0.6.0
+
+### Minor Changes
+
+- [`d3d68032`](https://github.com/hirotomoyamada/yamada-ui/commit/d3d680329ca3426a7eb81b29d6ab31f5c2ff3bf0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added 'allowInputBeyond' property.
+
+### Patch Changes
+
+- Updated dependencies [[`99a44d2c`](https://github.com/hirotomoyamada/yamada-ui/commit/99a44d2c0bee0e510b747d8f841648122081aad7)]:
+  - @yamada-ui/use-controllable-state@0.3.0
+  - @yamada-ui/popover@0.3.19
+
 ## 0.5.12
 
 ### Patch Changes

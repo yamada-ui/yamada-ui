@@ -1,5 +1,11 @@
 # @yamada-ui/layouts
 
+## 0.3.16
+
+### Patch Changes
+
+- [`ba8c30c5`](https://github.com/hirotomoyamada/yamada-ui/commit/ba8c30c5de8144f84911e4464485ca443afebac6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `grid-gap` properties in `Grid` component.
+
 ## 0.3.15
 
 ### Patch Changes

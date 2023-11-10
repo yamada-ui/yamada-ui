@@ -16,120 +16,113 @@ import { Text } from "@yamada-ui/react"
 ## Usage
 
 ```tsx
-<Text>It's 530,000. Don't worry i won'tuse all of my power……</Text>
+<Text>
+  私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+</Text>
 ```
 
-### Changing the Size
+### Change Size
 
 ```tsx
 <VStack gap="md">
   <Text fontSize="6xl" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="5xl" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="4xl" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="3xl" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="2xl" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="xl" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="lg" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="md" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="sm" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 
   <Text fontSize="xs" isTruncated>
-    It's 530,000. Don't worry i won'tuse all of my power……
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
 </VStack>
 ```
 
-### Using `as`
+### Use `as`
 
-You can render as a different element or component by passing `as`.
+By passing `as`, you can render it as a different element or component.
 
 ```tsx
 <VStack gap="md">
-  <Text as="b">I’ve always loved fireworks!</Text>
+  <Text as="b">へっ！きたねぇ花火だ</Text>
 
-  <Text as="i">I’ve always loved fireworks!</Text>
+  <Text as="i">へっ！きたねぇ花火だ</Text>
 
-  <Text as="u">I’ve always loved fireworks!</Text>
+  <Text as="u">へっ！きたねぇ花火だ</Text>
 
-  <Text as="abbr">I’ve always loved fireworks!</Text>
+  <Text as="abbr">へっ！きたねぇ花火だ</Text>
 
-  <Text as="del">I’ve always loved fireworks!</Text>
+  <Text as="del">へっ！きたねぇ花火だ</Text>
 
-  <Text as="em">I’ve always loved fireworks!</Text>
+  <Text as="em">へっ！きたねぇ花火だ</Text>
 
-  <Text as="ins">I’ve always loved fireworks!</Text>
+  <Text as="ins">へっ！きたねぇ花火だ</Text>
 
-  <Text as="kbd">I’ve always loved fireworks!</Text>
+  <Text as="kbd">へっ！きたねぇ花火だ</Text>
 
-  <Text as="mark">I’ve always loved fireworks!</Text>
+  <Text as="mark">へっ！きたねぇ花火だ</Text>
 
-  <Text as="s">I’ve always loved fireworks!</Text>
+  <Text as="s">へっ！きたねぇ花火だ</Text>
 
-  <Text as="samp">I’ve always loved fireworks!</Text>
+  <Text as="samp">へっ！きたねぇ花火だ</Text>
 
-  <Text as="sub">I’ve always loved fireworks!</Text>
+  <Text as="sub">へっ！きたねぇ花火だ</Text>
 </VStack>
 ```
 
-### Truncating Text
+### Truncate Text
 
-If you want to truncate text after a certain number of lines, specify the number of lines in `noOfLines`. If the specified number of lines is exceeded, an ellipsis will be displayed.
+If you want to truncate text after a certain number of lines, specify the number of lines with `noOfLines`. If the text exceeds the specified number of lines, an ellipsis will be displayed.
 
 ```tsx
 <VStack gap="md">
   <Text fontSize="2xl" noOfLines={3}>
-    "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
-    Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the
-    treasure "DRAGON BALL", which grants any one wish if all seven scattered balls around the world
-    are collected, and the protagonist Goku (Son Goku), depicting "adventure", "dream", "battle",
-    "friendship", and so on in a long manga.
+    『ドラゴンボール』（DRAGON
+    BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
   </Text>
 
   <Text fontSize="2xl" noOfLines={2}>
-    "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
-    Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the
-    treasure "DRAGON BALL", which grants any one wish if all seven scattered balls around the world
-    are collected, and the protagonist Goku (Son Goku), depicting "adventure", "dream", "battle",
-    "friendship", and so on in a long manga.
+    『ドラゴンボール』（DRAGON
+    BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
   </Text>
 
   <Text fontSize="2xl" noOfLines={1}>
-    "DRAGON BALL" is a Japanese manga work by Akira Toriyama. It was serialized in "Weekly Shonen
-    Jump" (Shueisha) from issue 51 in 1984 to issue 25 in 1995. The story revolves around the
-    treasure "DRAGON BALL", which grants any one wish if all seven scattered balls around the world
-    are collected, and the protagonist Goku (Son Goku), depicting "adventure", "dream", "battle",
-    "friendship", and so on in a long manga.
+    『ドラゴンボール』（DRAGON
+    BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
   </Text>
 </VStack>
 ```
 
-### Applying Gradient
+### Add Gradient
 
 ```tsx
 <Text

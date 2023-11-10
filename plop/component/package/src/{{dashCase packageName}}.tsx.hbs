@@ -6,20 +6,20 @@ import {
   HTMLUIProps,
   ThemeProps,
   useComponentStyle,
-} from '@yamada-ui/core'
-import { cx } from '@yamada-ui/utils'
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 
 type {{upperCase packageName}}Options = {}
 
-export type {{upperCase packageName}}Props = HTMLUIProps<'div'> & ThemeProps<'{{upperCase packageName}}'> & {{upperCase packageName}}Options
+export type {{upperCase packageName}}Props = HTMLUIProps<"div"> & ThemeProps<"{{upperCase packageName}}"> & {{upperCase packageName}}Options
 
-export const {{upperCase packageName}} = forwardRef<{{upperCase packageName}}Props, 'div'>((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle('{{upperCase packageName}}', props)
+export const {{upperCase packageName}} = forwardRef<{{upperCase packageName}}Props, "div">((props, ref) => {
+  const [styles, mergedProps] = useComponentStyle("{{upperCase packageName}}", props)
   const { className, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     ...styles,
   }
 
-  return <ui.div ref={ref} className={cx('ui-{{dashCase packageName}}', className)} __css={css} {...rest} />
+  return <ui.div ref={ref} className={cx("ui-{{dashCase packageName}}", className)} __css={css} {...rest} />
 })

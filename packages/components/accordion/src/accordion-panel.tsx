@@ -23,12 +23,16 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
       transitionEnd,
       delay,
       duration,
+      children,
       ...rest
     },
     ref,
   ) => {
     const { isOpen, getPanelProps } = useAccordionItemContext()
     const { styles } = useAccordionContext()
+
+    const resolvedChildren =
+      typeof children === 'string' ? <p>{children}</p> : children
 
     const css: CSSUIObject = { ...styles.panel }
 
@@ -50,7 +54,9 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, 'div'>(
           {...getPanelProps(rest, ref)}
           className={cx('ui-accordion__panel', className)}
           __css={css}
-        />
+        >
+          {resolvedChildren}
+        </ui.div>
       </Collapse>
     )
   },

@@ -15,7 +15,7 @@ import {
   NoticeConfigOptions,
   StyledTheme,
 } from '@yamada-ui/core'
-import { merge } from '@yamada-ui/utils'
+import { cx, merge } from '@yamada-ui/utils'
 import { FC, ReactNode, useMemo } from 'react'
 
 export type UseNoticeOptions = NoticeConfigOptions
@@ -325,6 +325,7 @@ const Notice: FC<NoticeProps> = ({
   title,
   description,
   isClosable,
+  className,
   onClose,
 }) => {
   return (
@@ -334,24 +335,33 @@ const Notice: FC<NoticeProps> = ({
       colorScheme={colorScheme}
       alignItems='start'
       boxShadow='lg'
+      className={cx('ui-notice', className)}
       pe={isClosable ? 8 : undefined}
     >
       <AlertIcon
         variant={icon?.variant}
+        className='ui-notice__icon'
         {...(icon?.color ? { color: icon.color } : {})}
       >
         {icon?.children}
       </AlertIcon>
 
       <ui.div flex='1'>
-        {title ? <AlertTitle noOfLines={1}>{title}</AlertTitle> : null}
+        {title ? (
+          <AlertTitle className='ui-notice__title' noOfLines={1}>
+            {title}
+          </AlertTitle>
+        ) : null}
         {description ? (
-          <AlertDescription noOfLines={3}>{description}</AlertDescription>
+          <AlertDescription className='ui-notice__desc' noOfLines={3}>
+            {description}
+          </AlertDescription>
         ) : null}
       </ui.div>
 
       {isClosable ? (
         <CloseButton
+          className='ui-notice__close-button'
           size='sm'
           onClick={onClose}
           position='absolute'

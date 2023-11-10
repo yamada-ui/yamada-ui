@@ -12,7 +12,7 @@ export const Tr = forwardRef<TrProps, 'tr'>(({ className, ...rest }, ref) => {
   return (
     <ui.tr
       ref={ref}
-      className={cx('ui-table-tr', className)}
+      className={cx('ui-table__tr', className)}
       __css={css}
       {...rest}
     />

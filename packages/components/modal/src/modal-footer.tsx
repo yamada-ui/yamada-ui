@@ -18,7 +18,7 @@ export const ModalFooter = forwardRef<ModalFooterProps, 'footer'>(
     return (
       <ui.footer
         ref={ref}
-        className={cx('ui-modal-footer', className)}
+        className={cx('ui-modal__footer', className)}
         __css={css}
         {...rest}
       />

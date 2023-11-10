@@ -8,7 +8,7 @@ import {
 } from '@yamada-ui/motion'
 import { Portal } from '@yamada-ui/portal'
 import { useTimeout } from '@yamada-ui/use-timeout'
-import { runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
+import { cx, runIfFunc, useUpdateEffect } from '@yamada-ui/utils'
 import { FC, memo, useEffect, useState, useSyncExternalStore } from 'react'
 import { noticeStore, NoticeOptions } from './notice'
 
@@ -58,7 +58,11 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
     }
 
     return (
-      <ui.ul key={placement} className='ui-notice-list' __css={css}>
+      <ui.ul
+        key={placement}
+        className={cx('ui-notice__list', `ui-notice__list--${placement}`)}
+        __css={css}
+      >
         <AnimatePresence initial={false}>
           {notices.map((notice) => (
             <NoticeComponent key={notice.id} variants={variants} {...notice} />
@@ -152,7 +156,7 @@ const NoticeComponent = memo(
     return (
       <motion.li
         layout
-        className='ui-notice'
+        className='ui-notice__list__item'
         variants={variants}
         initial='initial'
         animate='animate'
@@ -171,7 +175,7 @@ const NoticeComponent = memo(
           } as MotionStyle
         }
       >
-        <ui.div className='ui-notice-container' __css={css}>
+        <ui.div className='ui-notice__list__item__inner' __css={css}>
           {runIfFunc(message, { onClose })}
         </ui.div>
       </motion.li>

@@ -65,7 +65,7 @@ export const PaginationItem: FC<PaginationItemProps> = ({
 
   return (
     <ui.button
-      className={cx('ui-pagination-item', className)}
+      className={cx('ui-pagination__item', className)}
       type='button'
       tabIndex={page !== 'dots' ? 0 : -1}
       disabled={isDisabled}

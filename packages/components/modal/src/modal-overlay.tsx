@@ -33,7 +33,7 @@ export const ModalOverlay = forwardRef<ModalOverlayProps, 'div'>(
       <ui.div
         as={motion.div}
         ref={ref}
-        className={cx('ui-modal-overlay', className)}
+        className={cx('ui-modal__overlay', className)}
         custom={{ duration }}
         __css={css}
         onClick={handlerAll(onClick, onOverlayClick, (ev) => {

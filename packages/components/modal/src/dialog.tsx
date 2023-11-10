@@ -210,7 +210,7 @@ export const DialogOverlay = forwardRef<DialogOverlayProps, 'div'>(
     return (
       <ModalOverlay
         ref={ref}
-        className={cx('ui-dialog-overlay', className)}
+        className={cx('ui-dialog__overlay', className)}
         __css={css}
         {...rest}
       />
@@ -229,7 +229,7 @@ export const DialogCloseButton = forwardRef<DialogCloseButtonProps, 'button'>(
     return (
       <ModalCloseButton
         ref={ref}
-        className={cx('ui-dialog-close-button', className)}
+        className={cx('ui-dialog__close-button', className)}
         __css={css}
         {...rest}
       />
@@ -248,7 +248,7 @@ export const DialogHeader = forwardRef<DialogHeaderProps, 'header'>(
     return (
       <ModalHeader
         ref={ref}
-        className={cx('ui-dialog-header', className)}
+        className={cx('ui-dialog__header', className)}
         __css={css}
         {...rest}
       />
@@ -267,7 +267,7 @@ export const DialogBody = forwardRef<DialogBodyProps, 'main'>(
     return (
       <ModalBody
         ref={ref}
-        className={cx('ui-dialog-body', className)}
+        className={cx('ui-dialog__body', className)}
         __css={css}
         {...rest}
       />
@@ -286,7 +286,7 @@ export const DialogFooter = forwardRef<DialogFooterProps, 'footer'>(
     return (
       <ModalFooter
         ref={ref}
-        className={cx('ui-dialog-footer', className)}
+        className={cx('ui-dialog__footer', className)}
         __css={css}
         {...rest}
       />

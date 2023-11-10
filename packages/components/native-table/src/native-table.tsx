@@ -57,7 +57,7 @@ export const NativeTable = forwardRef<NativeTableProps, 'table'>(
       <TableStyleProvider value={styles}>
         <ui.table
           ref={ref}
-          className={cx('ui-native-table', className)}
+          className={cx('ui-table', className)}
           __css={css}
           {...omitObject(rest, [
             'withBorder',

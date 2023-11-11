@@ -158,7 +158,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
       onScroll={handlerAll(rest.onScroll, onScroll)}
     >
       {innerProps ? (
-        <ui.div className="ui-scroll-area-inner" {...innerProps}>
+        <ui.div className="ui-scroll-area__inner" {...innerProps}>
           {children}
         </ui.div>
       ) : (

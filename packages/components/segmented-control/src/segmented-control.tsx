@@ -313,7 +313,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             __css={css}
           >
             <ui.span
-              className="ui-segmented-control-active"
+              className="ui-segmented-control__active"
               {...getActiveProps()}
               __css={styles.active}
             />
@@ -389,7 +389,7 @@ export const SegmentedControlButton = forwardRef<
     return (
       <ui.label
         {...getLabelProps(omitObject(props, ["onChange"]))}
-        className={cx("ui-segmented-control-button", className)}
+        className={cx("ui-segmented-control__button", className)}
         __css={css}
         {...rest}
       >

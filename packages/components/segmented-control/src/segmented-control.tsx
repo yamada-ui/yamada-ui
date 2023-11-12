@@ -23,6 +23,7 @@ import {
   PropGetter,
   RequiredPropGetter,
   useCallbackRef,
+  useIsMounted,
 } from "@yamada-ui/utils"
 import {
   ChangeEvent,
@@ -111,6 +112,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       items = [],
       ...rest
     } = omitThemeProps(mergedProps)
+    const isMoutedRef = useIsMounted()
 
     id = id ?? useId()
     name = name ?? `segmented-control-${useId()}`
@@ -125,27 +127,18 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     const containerRef = useRef<HTMLDivElement>(null)
     const labelRefs = useRef<Map<string | number, HTMLLabelElement>>(new Map())
 
-    const [activePosition, setActivePosition] = useState({
-      width: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-    })
-
     const [value, setValue] = useControllableState({
       value: rest.value,
       defaultValue: rest.defaultValue,
       onChange: rest.onChange,
     })
 
-    useEffect(() => {
-      return trackFocusVisible(setIsFocusVisible)
-    }, [])
+    const getActivePosition = useCallback(() => {
+      const rect = { width: 0, height: 0, x: 0, y: 0 }
 
-    useEffect(() => {
       const el = labelRefs.current.get(value)
 
-      if (!el || !containerRef.current || !observerRef.current) return
+      if (!el || !containerRef.current || !observerRef.current) return rect
 
       const { paddingLeft, paddingTop } = getComputedStyle(containerRef.current)
 
@@ -153,14 +146,16 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       const gutterY = parseFloat(paddingTop) || 0
 
       let { width, height } = el.getBoundingClientRect()
-      const x = el.offsetLeft - gutterX
-      const y = el.offsetTop - gutterY
+      rect.x = el.offsetLeft - gutterX
+      rect.y = el.offsetTop - gutterY
 
-      width = width * (el.offsetWidth / width) || 0
-      height = height * (el.offsetWidth / width) || 0
+      rect.width = width * (el.offsetWidth / width) || 0
+      rect.height = height * (el.offsetWidth / width) || 0
 
-      setActivePosition({ width, height, x, y })
-    }, [focusedIndex, containerRect, labelRefs, observerRef, value])
+      return rect
+    }, [observerRef, value])
+
+    const [activePosition, setActivePosition] = useState(getActivePosition)
 
     const onChange = useCallback(
       (ev: ChangeEvent<HTMLInputElement>) => {
@@ -300,6 +295,14 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       [focusedIndex, isDisabled, isFocusVisible, isReadOnly, onFocus, value],
     )
 
+    useEffect(() => {
+      return trackFocusVisible(setIsFocusVisible)
+    }, [])
+
+    useEffect(() => {
+      setActivePosition(getActivePosition())
+    }, [focusedIndex, containerRect, value, getActivePosition])
+
     const css: CSSUIObject = {
       position: "relative",
       display: "inline-flex",
@@ -342,11 +345,14 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             className={cx("ui-segmented-control", className)}
             __css={css}
           >
-            <ui.span
-              className="ui-segmented-control__active"
-              {...getActiveProps()}
-              __css={styles.active}
-            />
+            {isMoutedRef.current ? (
+              <ui.span
+                className="ui-segmented-control__active"
+                {...getActiveProps()}
+                __css={styles.active}
+              />
+            ) : null}
+
             {computedChildren}
           </ui.div>
         </SegmentedControlProvider>

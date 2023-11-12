@@ -53,7 +53,7 @@ export type SkeletonProps = HTMLUIProps<"div"> &
   SkeletonOptions
 
 export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
-  let [styles, mergedProps] = useComponentStyle("Skeleton", props)
+  const [styles, mergedProps] = useComponentStyle("Skeleton", props)
   const {
     className,
     startColor,

@@ -11,6 +11,7 @@ import {
   Box,
   HStack,
   Button,
+  CheckboxItem,
 } from "@yamada-ui/react"
 import { FC, useState } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
@@ -300,7 +301,13 @@ export const indeterminate: Story = () => {
   )
 }
 
-export const group: Story = () => {
+export const withGroup: Story = () => {
+  const items: CheckboxItem[] = [
+    { label: "孫悟空", value: "孫悟空" },
+    { label: "ベジータ", value: "ベジータ" },
+    { label: "フリーザ", value: "フリーザ" },
+  ]
+
   return (
     <>
       <CheckboxGroup defaultValue={["孫悟空", "ベジータ"]}>
@@ -314,6 +321,8 @@ export const group: Story = () => {
         <Checkbox value="ベジータ">ベジータ</Checkbox>
         <Checkbox value="フリーザ">フリーザ</Checkbox>
       </CheckboxGroup>
+
+      <CheckboxGroup defaultValue={["孫悟空", "ベジータ"]} items={items} />
     </>
   )
 }

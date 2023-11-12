@@ -27,12 +27,17 @@ import {
 import {
   ChangeEvent,
   ChangeEventHandler,
+  ReactElement,
   useCallback,
   useEffect,
   useId,
   useRef,
   useState,
 } from "react"
+
+export type SegmentedControlItem = SegmentedControlButtonProps & {
+  label?: string
+}
 
 const { DescendantsContextProvider, useDescendants, useDescendant } =
   createDescendant<HTMLButtonElement>()
@@ -78,6 +83,12 @@ type SegmentedControlOptions = {
    * @default false
    */
   isDisabled?: boolean
+  /**
+   * If provided, generate segmented control buttons but based on items.
+   *
+   * @default '[]'
+   */
+  items?: SegmentedControlItem[]
 }
 
 export type SegmentedControlProps = Omit<HTMLUIProps<"div">, "onChange"> &
@@ -90,8 +101,16 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       "SegmentedControl",
       props,
     )
-    let { className, id, name, isReadOnly, isDisabled, children, ...rest } =
-      omitThemeProps(mergedProps)
+    let {
+      className,
+      id,
+      name,
+      isReadOnly,
+      isDisabled,
+      children,
+      items = [],
+      ...rest
+    } = omitThemeProps(mergedProps)
 
     id = id ?? useId()
     name = name ?? `segmented-control-${useId()}`
@@ -289,9 +308,20 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     }
 
     const validChildren = getValidChildren(children)
+    let computedChildren: ReactElement[] = []
+
+    if (!validChildren.length && items.length) {
+      computedChildren = items.map(({ label, value, ...props }, i) => (
+        <SegmentedControlButton key={i} value={value} {...props}>
+          {label}
+        </SegmentedControlButton>
+      ))
+    } else {
+      computedChildren = validChildren
+    }
 
     if (value == null && rest.defaultValue == null) {
-      for (const child of validChildren) {
+      for (const child of computedChildren) {
         if (child.type !== SegmentedControlButton) continue
 
         const value = child.props.value
@@ -317,7 +347,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
               {...getActiveProps()}
               __css={styles.active}
             />
-            {validChildren}
+            {computedChildren}
           </ui.div>
         </SegmentedControlProvider>
       </DescendantsContextProvider>

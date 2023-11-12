@@ -7,6 +7,7 @@ export type {
 } from "./checkbox"
 export { CheckboxGroup, useCheckboxGroup } from "./checkbox-group"
 export type {
+  CheckboxItem,
   CheckboxGroupProps,
   UseCheckboxGroupProps,
 } from "./checkbox-group"

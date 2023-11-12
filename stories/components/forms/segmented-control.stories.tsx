@@ -6,6 +6,7 @@ import {
   VStack,
   Button,
   FormControl,
+  SegmentedControlItem,
 } from "@yamada-ui/react"
 import { useState } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
@@ -20,12 +21,26 @@ const meta: Meta<typeof SegmentedControl> = {
 export default meta
 
 export const basic: Story = () => {
+  const items: SegmentedControlItem[] = [
+    { label: "孫悟空", value: "孫悟空" },
+    { label: "ベジータ", value: "ベジータ" },
+    { label: "フリーザ", value: "フリーザ" },
+  ]
+
   return (
-    <SegmentedControl>
-      <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-      <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
-      <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
-    </SegmentedControl>
+    <>
+      <SegmentedControl>
+        <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+        <SegmentedControlButton value="ベジータ">
+          ベジータ
+        </SegmentedControlButton>
+        <SegmentedControlButton value="フリーザ">
+          フリーザ
+        </SegmentedControlButton>
+      </SegmentedControl>
+
+      <SegmentedControl items={items} />
+    </>
   )
 }
 

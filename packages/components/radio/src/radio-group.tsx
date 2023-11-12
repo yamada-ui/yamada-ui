@@ -11,6 +11,7 @@ import {
   DOMAttributes,
   useCallbackRef,
   omitObject,
+  getValidChildren,
 } from "@yamada-ui/utils"
 import {
   ChangeEvent,
@@ -20,7 +21,13 @@ import {
   forwardRef,
   ForwardedRef,
   Ref,
+  ReactElement,
 } from "react"
+import { Radio, RadioProps } from "./radio"
+
+export type RadioItem<Y extends string | number = string> = RadioProps<Y> & {
+  label?: string
+}
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
@@ -61,6 +68,7 @@ export const useRadioGroup = <Y extends string | number = string>({
   id,
   name,
   isNative,
+
   ...props
 }: UseRadioGroupProps<Y>) => {
   id = id ?? useId()
@@ -149,7 +157,14 @@ export type RadioGroupProps<Y extends string | number = string> =
   ThemeProps<"Radio"> &
     Omit<FlexProps, "onChange"> &
     UseRadioGroupProps<Y> &
-    FormControlOptions
+    FormControlOptions & {
+      /**
+       * If provided, generate radios based on items.
+       *
+       * @default '[]'
+       */
+      items?: RadioItem<Y>[]
+    }
 
 type RadioGroupContext = ThemeProps<"Radio"> &
   FormControlOptions & {
@@ -177,6 +192,7 @@ export const RadioGroup = forwardRef(
       variant,
       colorScheme,
       children,
+      items = [],
       direction = "column",
       gap,
       ...props
@@ -186,6 +202,17 @@ export const RadioGroup = forwardRef(
     const { name, value, onChange, getContainerProps } = useRadioGroup(props)
     const { isRequired, isReadOnly, isDisabled, isInvalid } =
       useFormControl(props)
+
+    const validChildren = getValidChildren(children)
+    let computedChildren: ReactElement[] = []
+
+    if (!validChildren.length && items.length) {
+      computedChildren = items.map(({ label, value, ...props }, i) => (
+        <Radio key={i} value={value} {...props}>
+          {label}
+        </Radio>
+      ))
+    }
 
     return (
       <RadioGroupProvider
@@ -219,7 +246,7 @@ export const RadioGroup = forwardRef(
             ]),
           )}
         >
-          {children}
+          {children ?? computedChildren}
         </Flex>
       </RadioGroupProvider>
     )

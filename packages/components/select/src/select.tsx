@@ -34,6 +34,8 @@ export type SelectItem = SelectItemWithValue | SelectItemWithItems
 type SelectOptions = {
   /**
    * If provided, generate options based on items.
+   *
+   * @default '[]'
    */
   items?: SelectItem[]
   /**

@@ -24,7 +24,7 @@ import { Text } from "@yamada-ui/react"
 ### サイズを変更する
 
 ```tsx
-<VStack gap="md">
+<VStack>
   <Text fontSize="6xl" isTruncated>
     私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
   </Text>
@@ -72,7 +72,7 @@ import { Text } from "@yamada-ui/react"
 `as`を渡すことで、異なる要素やコンポーネントとしてレンダリングすることができます。
 
 ```tsx
-<VStack gap="md">
+<VStack>
   <Text as="b">へっ！きたねぇ花火だ</Text>
 
   <Text as="i">へっ！きたねぇ花火だ</Text>
@@ -104,7 +104,7 @@ import { Text } from "@yamada-ui/react"
 特定の行数以降のテキストを切り詰めたい場合は、`noOfLines`に行数を指定します。指定した行数を超えた場合は、省略記号が表示されます。
 
 ```tsx
-<VStack gap="md">
+<VStack>
   <Text fontSize="2xl" noOfLines={3}>
     『ドラゴンボール』（DRAGON
     BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。

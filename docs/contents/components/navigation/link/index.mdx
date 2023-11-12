@@ -1,12 +1,33 @@
 ---
 title: Link
-description: This page is currently being created.
+description: "`Link` is a component that creates hyperlinks to other web pages, locations within the same page, or other URLs."
 package_name: "@yamada-ui/link"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Link } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Link href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB">
+  ドラゴンボール - wikipedia
+</Link>
+```
+
+### External Links
+
+```tsx
+<Link
+  href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+  isExternal
+>
+  ドラゴンボール - wikipedia
+</Link>
+```

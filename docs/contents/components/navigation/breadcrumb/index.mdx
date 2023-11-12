@@ -1,12 +1,77 @@
 ---
 title: Breadcrumb
-description: This page is currently being created.
+description: "`Breadcrumb` is a component that helps users understand the hierarchy of a website."
 package_name: "@yamada-ui/breadcrumb"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
+```
+
+- `Breadcrumb`: A wrapper component that displays the navigation path.
+- `BreadcrumbItem`: A component for individual navigation elements.
+- `BreadcrumbLink`: A component that functions as a link for navigation elements.
+
+## Usage
+
+If it matches the current path, set `isCurrentPage` to `true`. In that case, it will be rendered as a `span` element instead of an `a` element.
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+### Customize the separator
+
+```tsx
+<Breadcrumb separator="-">
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+### Use an icon as a separator
+
+```tsx
+<Breadcrumb separator={<FontAwesomeIcon icon={faCaretRight} color="gray.300" />}>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```

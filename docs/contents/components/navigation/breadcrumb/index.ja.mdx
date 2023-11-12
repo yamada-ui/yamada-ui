@@ -1,12 +1,77 @@
 ---
 title: Breadcrumb
-description: このページは現在作成中です。
+description: "`Breadcrumb`は、ユーザーがウェブサイトの階層を理解するのに役立つコンポーネントです。"
 package_name: "@yamada-ui/breadcrumb"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
+```
+
+- `Breadcrumb`: ナビゲーションパスを表示するラッパーコンポーネントです。
+- `BreadcrumbItem`: 個々のナビゲーション要素のコンポーネントです。
+- `BreadcrumbLink`: ナビゲーション要素のリンクとして機能するコンポーネントです。
+
+## 使い方
+
+現在のパスと一致する場合は、`isCurrentPage`を`true`に設定します。その場合、`a`要素ではなく`span`要素でレンダリングされます。
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+### 区切りをカスタマイズする
+
+```tsx
+<Breadcrumb separator="-">
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+### アイコンを区切りとして使用する
+
+```tsx
+<Breadcrumb separator={<FontAwesomeIcon icon={faCaretRight} color="gray.300" />}>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```

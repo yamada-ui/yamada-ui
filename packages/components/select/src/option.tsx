@@ -35,7 +35,7 @@ export const Option = forwardRef<OptionProps, "li">(
 
     return (
       <ui.li
-        className={cx("ui-select-item", className)}
+        className={cx("ui-select__option-item", className)}
         __css={css}
         {...getOptionProps()}
       >
@@ -74,7 +74,7 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-select-item-icon", className)}
+        className={cx("ui-select__option-item-icon", className)}
         __css={css}
         {...rest}
       />

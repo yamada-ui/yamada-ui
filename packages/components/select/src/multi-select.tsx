@@ -300,7 +300,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-multi-select-field", className)}
+        className={cx("ui-multi-select__field", className)}
         __css={css}
         py={displayValue?.length && component ? "0.125rem" : undefined}
         {...rest}

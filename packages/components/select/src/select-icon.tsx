@@ -41,7 +41,7 @@ export const SelectIcon = forwardRef<SelectIconProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-select-icon", className)}
+        className={cx("ui-select__icon", className)}
         __css={css}
         {...rest}
       >
@@ -71,7 +71,7 @@ export const SelectClearIcon: FC<SelectClearIconProps> = ({
 
   return (
     <SelectIcon
-      className={cx("ui-select-clear-icon", className)}
+      className={cx("ui-select__clear-icon", className)}
       __css={styles.clearIcon}
       {...rest}
     >

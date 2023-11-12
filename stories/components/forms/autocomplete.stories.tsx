@@ -5,7 +5,7 @@ import {
   Autocomplete,
   AutocompleteOptionGroup,
   AutocompleteOption,
-  UIOption,
+  AutocompleteItem,
   FormControl,
   Button,
   VStack,
@@ -23,11 +23,11 @@ const meta: Meta<typeof Autocomplete> = {
 export default meta
 
 export const basic: Story = () => {
-  const options: UIOption[] = [
+  const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -35,7 +35,7 @@ export const basic: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -71,7 +71,7 @@ export const basic: Story = () => {
         </AutocompleteOptionGroup>
       </Autocomplete>
 
-      <Autocomplete placeholder="キャラクターを選択" options={options} />
+      <Autocomplete placeholder="キャラクターを選択" items={items} />
     </>
   )
 }
@@ -121,12 +121,12 @@ export const withEmptyMessage: Story = () => {
   )
 }
 
-export const withCreateOption: Story = () => {
-  const options: UIOption[] = [
+export const withAllowCreate: Story = () => {
+  const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -134,7 +134,7 @@ export const withCreateOption: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -148,21 +148,21 @@ export const withCreateOption: Story = () => {
   return (
     <Autocomplete
       placeholder="キャラクターを選択"
-      options={options}
-      createOption
-      onCreate={(newOption, newOptions) =>
-        console.log("created option", newOption, "new options", newOptions)
+      items={items}
+      allowCreate
+      onCreate={(newItem, newItems) =>
+        console.log("created item", newItem, "new items", newItems)
       }
     />
   )
 }
 
-export const withCreateOrder: Story = () => {
-  const options: UIOption[] = [
+export const withInsertPositionItem: Story = () => {
+  const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -170,7 +170,7 @@ export const withCreateOrder: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -185,27 +185,27 @@ export const withCreateOrder: Story = () => {
     <>
       <Autocomplete
         placeholder="キャラクターを選択"
-        options={options}
-        createOption
-        insertPositionOnCreate="first"
+        items={items}
+        allowCreate
+        insertPositionItem="first"
       />
       <Autocomplete
         placeholder="キャラクターを選択"
-        options={options}
-        createOption
-        insertPositionOnCreate="last"
+        items={items}
+        allowCreate
+        insertPositionItem="last"
       />
       <Autocomplete
         placeholder="キャラクターを選択"
-        options={options}
-        createOption
-        insertPositionOnCreate="地球人"
+        items={items}
+        allowCreate
+        insertPositionItem="地球人"
       />
       <Autocomplete
         placeholder="キャラクターを選択"
-        options={options}
-        createOption
-        insertPositionOnCreate={["フリーザ軍", "last"]}
+        items={items}
+        allowCreate
+        insertPositionItem={["フリーザ軍", "last"]}
       />
     </>
   )
@@ -460,11 +460,11 @@ export const reactHookForm: Story = () => {
     autocomplete3: string
   }
 
-  const options: UIOption[] = [
+  const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -472,7 +472,7 @@ export const reactHookForm: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -566,7 +566,7 @@ export const reactHookForm: Story = () => {
             <Autocomplete
               placeholder="キャラクターを選択"
               {...field}
-              options={options}
+              items={items}
             />
           )}
         />
@@ -592,11 +592,11 @@ export const reactHookFormWithDefaultValue: Story = () => {
     autocomplete3: "リクーム",
   }
 
-  const options: UIOption[] = [
+  const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -604,7 +604,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -698,7 +698,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
             <Autocomplete
               placeholder="キャラクターを選択"
               {...field}
-              options={options}
+              items={items}
             />
           )}
         />

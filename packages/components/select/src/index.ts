@@ -1,5 +1,5 @@
 export { Select } from "./select"
-export type { SelectProps, UIOption } from "./select"
+export type { SelectProps, SelectItem } from "./select"
 export { MultiSelect } from "./multi-select"
 export type { MultiSelectProps } from "./multi-select"
 export { OptionGroup } from "./option-group"

@@ -20,7 +20,6 @@ import {
   splitObject,
   getValidChildren,
   isValidElement,
-  isArray,
   pickObject,
 } from "@yamada-ui/utils"
 import {
@@ -31,15 +30,24 @@ import {
   ReactElement,
 } from "react"
 
+type NativeSelectBaseItem = Omit<
+  DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
+  "label" | "children" | "value"
+> & { label?: string }
+
 type Value = DetailedHTMLProps<
   OptionHTMLAttributes<HTMLOptionElement>,
   HTMLOptionElement
 >["value"]
 
-export type UINativeOption = Omit<
-  DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
-  "label" | "children" | "value"
-> & { label?: string; value?: Value | UINativeOption[] }
+type NativeSelectItemWithValue = NativeSelectBaseItem & { value?: Value }
+
+type NativeSelectItemWithItems = NativeSelectBaseItem & {
+  items?: NativeSelectItemWithValue[]
+}
+
+export type NativeSelectItem = NativeSelectItemWithValue &
+  NativeSelectItemWithItems
 
 type NativeSelectContext = Record<string, CSSUIObject>
 
@@ -51,11 +59,11 @@ const [NativeSelectProvider, useNativeSelect] =
 
 type NativeSelectOptions = {
   /**
-   * If provided, generate options based on data.
+   * If provided, generate options based on items.
    *
    * @default '[]'
    */
-  options?: UINativeOption[]
+  items?: NativeSelectItem[]
   /**
    * The placeholder for select.
    */
@@ -101,7 +109,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
       height,
       minH,
       minHeight,
-      options = [],
+      items = [],
       placeholder,
       containerProps,
       iconProps,
@@ -115,28 +123,32 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
 
     let computedChildren: ReactElement[] = []
 
-    if (!children && options.length) {
-      computedChildren = options.map(({ label, value, ...props }, i) => {
-        if (!isArray(value)) {
-          return (
-            <NativeOption key={i} value={value} {...props}>
-              {label}
-            </NativeOption>
-          )
-        } else {
-          return (
-            <NativeOptionGroup key={i} label={label} {...props}>
-              {value.map(({ label, value, ...props }, i) =>
-                !isArray(value) ? (
+    if (!children && items.length) {
+      computedChildren = items
+        .map((item, i) => {
+          if ("value" in item) {
+            const { label, value, ...props } = item
+
+            return (
+              <NativeOption key={i} value={value} {...props}>
+                {label}
+              </NativeOption>
+            )
+          } else if ("items" in item) {
+            const { label, items = [], ...props } = item
+
+            return (
+              <NativeOptionGroup key={i} label={label} {...props}>
+                {items.map(({ label, value, ...props }, i) => (
                   <NativeOption key={i} value={value} {...props}>
                     {label}
                   </NativeOption>
-                ) : null,
-              )}
-            </NativeOptionGroup>
-          )
-        }
-      })
+                ))}
+              </NativeOptionGroup>
+            )
+          }
+        })
+        .filter(Boolean) as ReactElement[]
     }
 
     return (

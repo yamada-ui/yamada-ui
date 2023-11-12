@@ -3,5 +3,5 @@ export type {
   NativeSelectProps,
   NativeOptionGroupProps,
   NativeOptionProps,
-  UINativeOption,
+  NativeSelectItem,
 } from "./native-select"

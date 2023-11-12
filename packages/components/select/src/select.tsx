@@ -8,7 +8,7 @@ import {
   ThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
-import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
+import { cx, getValidChildren } from "@yamada-ui/utils"
 import { ReactElement } from "react"
 import { SelectIcon, SelectIconProps } from "./select-icon"
 import { SelectList, SelectListProps } from "./select-list"
@@ -21,16 +21,21 @@ import {
 } from "./use-select"
 import { OptionGroup, Option, OptionProps } from "./"
 
-export type UIOption = Omit<OptionProps, "value" | "children"> & {
+type SelectBaseItem = Omit<OptionProps, "value" | "children"> & {
   label?: string
-  value?: string | UIOption[]
 }
+
+type SelectItemWithValue = SelectBaseItem & { value?: string }
+
+type SelectItemWithItems = SelectBaseItem & { items?: SelectItemWithValue[] }
+
+export type SelectItem = SelectItemWithValue | SelectItemWithItems
 
 type SelectOptions = {
   /**
-   * If provided, generate options based on data.
+   * If provided, generate options based on items.
    */
-  options?: UIOption[]
+  items?: SelectItem[]
   /**
    * The border color when the input is focused.
    */
@@ -67,7 +72,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     placeholder,
     defaultValue = "",
     placeholderInOptions = true,
-    options = [],
+    items = [],
     color,
     h,
     height,
@@ -83,32 +88,36 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []
 
-  if (!validChildren.length && options.length) {
-    computedChildren = options.map(({ label, value, ...props }, i) => {
-      if (!isArray(value)) {
-        return (
-          <Option key={i} value={value} {...props}>
-            {label}
-          </Option>
-        )
-      } else {
-        return (
-          <OptionGroup
-            key={i}
-            label={label ?? ""}
-            {...(props as HTMLUIProps<"ul">)}
-          >
-            {value.map(({ label, value, ...props }, i) =>
-              !isArray(value) ? (
+  if (!validChildren.length && items.length) {
+    computedChildren = items
+      .map((item, i) => {
+        if ("value" in item) {
+          const { label, value, ...props } = item
+
+          return (
+            <Option key={i} value={value} {...props}>
+              {label}
+            </Option>
+          )
+        } else if ("items" in item) {
+          const { label, items = [], ...props } = item
+
+          return (
+            <OptionGroup
+              key={i}
+              label={label ?? ""}
+              {...(props as HTMLUIProps<"ul">)}
+            >
+              {items.map(({ label, value, ...props }, i) => (
                 <Option key={i} value={value} {...props}>
                   {label}
                 </Option>
-              ) : null,
-            )}
-          </OptionGroup>
-        )
-      }
-    })
+              ))}
+            </OptionGroup>
+          )
+        }
+      })
+      .filter(Boolean) as ReactElement[]
   }
 
   const isEmpty =

@@ -1,5 +1,11 @@
 # @yamada-ui/popover
 
+## 0.3.20
+
+### Patch Changes
+
+- [#232](https://github.com/hirotomoyamada/yamada-ui/pull/232) [`4f84a92f`](https://github.com/hirotomoyamada/yamada-ui/commit/4f84a92f35ae9502681cad22aaf042acf5cef8f1) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Popover`.
+
 ## 0.3.19
 
 ### Patch Changes

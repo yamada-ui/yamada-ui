@@ -1,5 +1,11 @@
 # @yamada-ui/native-select
 
+## 0.5.0
+
+### Minor Changes
+
+- [`955e1b19`](https://github.com/hirotomoyamada/yamada-ui/commit/955e1b19f847f29f8e05b14e048a8fee2277e902) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed props from `options` to `items`.
+
 ## 0.4.10
 
 ### Patch Changes

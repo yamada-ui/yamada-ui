@@ -1,5 +1,17 @@
 # @yamada-ui/segmented-control
 
+## 0.4.0
+
+### Minor Changes
+
+- [`5545d7fe`](https://github.com/hirotomoyamada/yamada-ui/commit/5545d7febbe0860108961b29a3a9da316692a7c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added props `items`.
+
+### Patch Changes
+
+- [#232](https://github.com/hirotomoyamada/yamada-ui/pull/232) [`9cf8af35`](https://github.com/hirotomoyamada/yamada-ui/commit/9cf8af353caed8a6d155b05612ec55fc292b691c) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `SegmentedControl`.
+
+- [`d71ef22d`](https://github.com/hirotomoyamada/yamada-ui/commit/d71ef22dce20bea041276526a08c58d3f806055a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Optimized active position calculation.
+
 ## 0.3.16
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @yamada-ui/switch
 
+## 0.3.20
+
+### Patch Changes
+
+- Updated dependencies [[`5545d7fe`](https://github.com/hirotomoyamada/yamada-ui/commit/5545d7febbe0860108961b29a3a9da316692a7c3)]:
+  - @yamada-ui/checkbox@0.4.0
+
 ## 0.3.19
 
 ### Patch Changes

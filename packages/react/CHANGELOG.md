@@ -1,5 +1,23 @@
 # @yamada-ui/react
 
+## 0.8.17
+
+### Patch Changes
+
+- Updated dependencies [[`4f84a92f`](https://github.com/hirotomoyamada/yamada-ui/commit/4f84a92f35ae9502681cad22aaf042acf5cef8f1), [`9cf8af35`](https://github.com/hirotomoyamada/yamada-ui/commit/9cf8af353caed8a6d155b05612ec55fc292b691c), [`ed0b269b`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b269ba91fa6760e0e12b89643adc6965647e6), [`e2b2f727`](https://github.com/hirotomoyamada/yamada-ui/commit/e2b2f7273d1b6ae0718b8ea72554f2847a6192ae), [`674076bf`](https://github.com/hirotomoyamada/yamada-ui/commit/674076bf1a255ed8d0e2ade8019a1290886fc06d), [`955e1b19`](https://github.com/hirotomoyamada/yamada-ui/commit/955e1b19f847f29f8e05b14e048a8fee2277e902), [`d71ef22d`](https://github.com/hirotomoyamada/yamada-ui/commit/d71ef22dce20bea041276526a08c58d3f806055a), [`5545d7fe`](https://github.com/hirotomoyamada/yamada-ui/commit/5545d7febbe0860108961b29a3a9da316692a7c3), [`4d9519e8`](https://github.com/hirotomoyamada/yamada-ui/commit/4d9519e800146132ce3b1064656db11a5ad7bda8)]:
+  - @yamada-ui/popover@0.3.20
+  - @yamada-ui/segmented-control@0.4.0
+  - @yamada-ui/radio@0.4.0
+  - @yamada-ui/scroll-area@0.3.16
+  - @yamada-ui/pin-input@0.3.20
+  - @yamada-ui/native-select@0.5.0
+  - @yamada-ui/autocomplete@0.5.0
+  - @yamada-ui/select@0.5.0
+  - @yamada-ui/checkbox@0.4.0
+  - @yamada-ui/reorder@0.3.16
+  - @yamada-ui/menu@0.3.20
+  - @yamada-ui/switch@0.3.20
+
 ## 0.8.16
 
 ### Patch Changes

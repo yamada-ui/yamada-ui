@@ -9,7 +9,7 @@ import {
   MultiSelect,
   OptionGroup,
   Option,
-  UIOption,
+  SelectItem,
   FormControl,
   Tag,
   VStack,
@@ -28,11 +28,11 @@ const meta: Meta<typeof MultiSelect> = {
 export default meta
 
 export const basic: Story = () => {
-  const options: UIOption[] = [
+  const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -40,7 +40,7 @@ export const basic: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -76,7 +76,7 @@ export const basic: Story = () => {
         </OptionGroup>
       </MultiSelect>
 
-      <MultiSelect placeholder="キャラクターを選択" options={options} />
+      <MultiSelect placeholder="キャラクターを選択" items={items} />
     </>
   )
 }
@@ -445,11 +445,11 @@ export const customControl: Story = () => {
 export const reactHookForm: Story = () => {
   type Data = { select1: string[]; select2: string[]; select3: string[] }
 
-  const options: UIOption[] = [
+  const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -457,7 +457,7 @@ export const reactHookForm: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -543,7 +543,7 @@ export const reactHookForm: Story = () => {
             <MultiSelect
               placeholder="キャラクターを選択"
               {...field}
-              options={options}
+              items={items}
             />
           )}
         />
@@ -565,11 +565,11 @@ export const reactHookFormWithDefaultValue: Story = () => {
     select3: ["リクーム"],
   }
 
-  const options: UIOption[] = [
+  const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -577,7 +577,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -663,7 +663,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
             <MultiSelect
               placeholder="キャラクターを選択"
               {...field}
-              options={options}
+              items={items}
             />
           )}
         />

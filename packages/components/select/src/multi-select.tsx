@@ -8,7 +8,7 @@ import {
   ThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
-import { cx, getValidChildren, handlerAll, isArray } from "@yamada-ui/utils"
+import { cx, getValidChildren, handlerAll } from "@yamada-ui/utils"
 import {
   cloneElement,
   CSSProperties,
@@ -26,13 +26,13 @@ import {
   SelectProvider,
   useSelectContext,
 } from "./use-select"
-import { OptionGroup, Option, UIOption } from "./"
+import { OptionGroup, Option, SelectItem } from "./"
 
 type MultiSelectOptions = {
   /**
-   * If provided, generate options based on data.
+   * If provided, generate options based on items.
    */
-  options?: UIOption[]
+  items?: SelectItem[]
   /**
    * The custom display value to use.
    */
@@ -92,7 +92,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     component,
     separator,
     isClearable = true,
-    options = [],
+    items = [],
     color,
     h,
     height,
@@ -110,32 +110,36 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const validChildren = getValidChildren(children)
   let computedChildren: ReactElement[] = []
 
-  if (!validChildren.length && options.length) {
-    computedChildren = options.map(({ label, value, ...props }, i) => {
-      if (!isArray(value)) {
-        return (
-          <Option key={i} value={value} {...props}>
-            {label}
-          </Option>
-        )
-      } else {
-        return (
-          <OptionGroup
-            key={i}
-            label={label as string}
-            {...(props as HTMLUIProps<"ul">)}
-          >
-            {value.map(({ label, value, ...props }, i) =>
-              !isArray(value) ? (
+  if (!validChildren.length && items.length) {
+    computedChildren = items
+      .map((item, i) => {
+        if ("value" in item) {
+          const { label, value, ...props } = item
+
+          return (
+            <Option key={i} value={value} {...props}>
+              {label}
+            </Option>
+          )
+        } else if ("items" in item) {
+          const { label, items = [], ...props } = item
+
+          return (
+            <OptionGroup
+              key={i}
+              label={label ?? ""}
+              {...(props as HTMLUIProps<"ul">)}
+            >
+              {items.map(({ label, value, ...props }, i) => (
                 <Option key={i} value={value} {...props}>
                   {label}
                 </Option>
-              ) : null,
-            )}
-          </OptionGroup>
-        )
-      }
-    })
+              ))}
+            </OptionGroup>
+          )
+        }
+      })
+      .filter(Boolean) as ReactElement[]
   }
 
   let isEmpty = !validChildren.length && !computedChildren.length

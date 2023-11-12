@@ -41,7 +41,11 @@
       "label": "GitHubでこのページを編集する"
     },
     "editable-code-block": {
-      "label": "編集可能な例"
+      "label": "編集可能な例",
+      "control-button": {
+        "open": "もっと見る",
+        "close": "とじる"
+      }
     },
     "doc-links": {
       "source": "ソース"

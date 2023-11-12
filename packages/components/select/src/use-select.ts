@@ -434,6 +434,7 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const onClick = useCallback(() => {
     if (isOpen) return
+
     onOpen()
 
     onFocusFirstOrSelected()
@@ -578,10 +579,10 @@ export const useSelect = <T extends MaybeValue = string>({
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
+
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [computedProps, formControlProps, onBlur, onClick, onFocus, rest],
+    [computedProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getFieldProps: PropGetter = useCallback(
@@ -599,9 +600,10 @@ export const useSelect = <T extends MaybeValue = string>({
         !isMulti ? displayValue === undefined : !displayValue?.length,
       ),
       "aria-expanded": dataAttr(isOpen),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, isMulti, displayValue, rest, onKeyDown],
+    [computedProps, isOpen, isMulti, displayValue, rest, onFocus, onKeyDown],
   )
 
   return {

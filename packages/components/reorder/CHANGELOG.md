@@ -1,5 +1,11 @@
 # @yamada-ui/reorder
 
+## 0.3.16
+
+### Patch Changes
+
+- [#232](https://github.com/hirotomoyamada/yamada-ui/pull/232) [`4d9519e8`](https://github.com/hirotomoyamada/yamada-ui/commit/4d9519e800146132ce3b1064656db11a5ad7bda8) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Reorder`.
+
 ## 0.3.15
 
 ### Patch Changes

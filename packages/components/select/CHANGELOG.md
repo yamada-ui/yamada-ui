@@ -1,5 +1,16 @@
 # @yamada-ui/select
 
+## 0.5.0
+
+### Minor Changes
+
+- [`955e1b19`](https://github.com/hirotomoyamada/yamada-ui/commit/955e1b19f847f29f8e05b14e048a8fee2277e902) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed props from `options` to `items`.
+
+### Patch Changes
+
+- Updated dependencies [[`4f84a92f`](https://github.com/hirotomoyamada/yamada-ui/commit/4f84a92f35ae9502681cad22aaf042acf5cef8f1)]:
+  - @yamada-ui/popover@0.3.20
+
 ## 0.4.13
 
 ### Patch Changes

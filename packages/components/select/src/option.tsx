@@ -1,6 +1,6 @@
 import { ui, CSSUIObject, forwardRef, HTMLUIProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { FC, ReactElement } from "react"
+import { ReactElement } from "react"
 import {
   useSelectContext,
   useSelectOption,
@@ -74,7 +74,7 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-select__option-item-icon", className)}
+        className={cx("ui-select__option-item__icon", className)}
         __css={css}
         {...rest}
       />
@@ -82,11 +82,18 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
   },
 )
 
-const CheckIcon: FC = () => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em">
+type OptionCheckIconProps = HTMLUIProps<"svg">
+
+const CheckIcon = forwardRef<OptionCheckIconProps, "svg">(({ className }) => (
+  <svg
+    viewBox="0 0 14 14"
+    width="1em"
+    height="1em"
+    className={cx("ui-select__option-item__check-icon", className)}
+  >
     <polygon
       fill="currentColor"
       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
     />
   </svg>
-)
+))

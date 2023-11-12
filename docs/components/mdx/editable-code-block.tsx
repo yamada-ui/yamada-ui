@@ -1,13 +1,22 @@
-import { faMinus, faPlus, faPoo } from "@fortawesome/free-solid-svg-icons"
+import { faMinus, faPlus, faPoo, faCaretRight } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
-import { Box, Text } from "@yamada-ui/react"
+import {
+  Box,
+  Text,
+  ScrollArea,
+  useDisclosure,
+  useBoolean,
+  Button,
+  useUpdateEffect,
+  useResizeObserver,
+} from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { PrismTheme } from "prism-react-renderer"
-import React, { FC, useState } from "react"
+import React, { FC, PropsWithChildren, useState } from "react"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
@@ -51,6 +60,7 @@ const scope = {
   faPoo,
   faMinus,
   faPlus,
+  faCaretRight,
   wait,
 }
 
@@ -76,31 +86,16 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional
 
     return code
   }
+
   const onChange = (code: string) => setEditorCode(code.trim())
 
   return (
     <LiveProvider {...{ code: editorCode, enableTypeScript: true, scope, transformCode }} {...rest}>
       <Box my="6">
-        <Box as={LivePreview} p="md" borderWidth="1px" rounded="md" overflowX="auto" zIndex="1" />
+        <Box as={LivePreview} p="md" borderWidth="1px" rounded="md" overflowX="auto" />
 
-        <Box position="relative" zIndex="0">
-          <Box
-            rounded="md"
-            my="4"
-            bg={["zinc.800", "zinc.900"]}
-            sx={{ "& > div": { pt: "8", pb: "6" } }}
-          >
-            <Box
-              as={LiveEditor}
-              onChange={onChange}
-              px="md"
-              fontSize="sm"
-              overflowX="auto"
-              sx={{ "& > pre": { p: "0px !important", bg: "none !important" } }}
-            />
-          </Box>
-
-          <Box position="absolute" top="2" left="0" right="0" w="full">
+        <Box rounded="md" overflow="hidden" my="4" position="relative">
+          <Box py="2" bg={["zinc.800", "zinc.900"]} w="full">
             <Text
               color="whiteAlpha.700"
               fontSize="xs"
@@ -113,6 +108,17 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional
               {t("component.editable-code-block.label")}
             </Text>
           </Box>
+
+          <Editor>
+            <Box
+              as={LiveEditor}
+              onChange={onChange}
+              px="md"
+              fontSize="sm"
+              overflowX="auto"
+              sx={{ "& > pre": { p: "0px !important", bg: "none !important" } }}
+            />
+          </Editor>
 
           <CopyButton value={code} position="absolute" top="1.125rem" right="4" />
         </Box>
@@ -132,3 +138,53 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional
 }
 
 export default EditableCodeBlock
+
+const Editor: FC<PropsWithChildren> = ({ children }) => {
+  const { t } = useI18n()
+  const [isMax, { on, off }] = useBoolean()
+  const { isOpen, onToggle, onClose } = useDisclosure()
+  const [ref, rect] = useResizeObserver<HTMLDivElement>()
+
+  useUpdateEffect(() => {
+    const { height } = rect
+
+    if (height >= 320) {
+      on()
+    } else {
+      off()
+      onClose()
+    }
+  }, [rect])
+
+  return (
+    <>
+      <ScrollArea
+        ref={ref}
+        bg={["zinc.800", "zinc.900"]}
+        sx={{ "& > div": { pt: "0", pb: isMax ? "10" : "6" } }}
+        maxH={isOpen ? "full" : "sm"}
+        type="never"
+      >
+        {children}
+      </ScrollArea>
+
+      {isMax ? (
+        <Button
+          size="sm"
+          position="absolute"
+          rounded="full"
+          bottom="2"
+          left="50%"
+          transform="translateX(-50%)"
+          onClick={onToggle}
+        >
+          {t(
+            isOpen
+              ? "component.editable-code-block.control-button.close"
+              : "component.editable-code-block.control-button.open",
+          )}
+        </Button>
+      ) : null}
+    </>
+  )
+}

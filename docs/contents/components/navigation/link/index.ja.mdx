@@ -1,12 +1,33 @@
 ---
 title: Link
-description: このページは現在作成中です。
+description: "`Link`は、別のウェブページや同一ページ内の場所、または他のURLへのハイパーリンクを作成するコンポーネントです。"
 package_name: "@yamada-ui/link"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Link } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<Link href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB">
+  ドラゴンボール - wikipedia
+</Link>
+```
+
+### 外部リンク
+
+```tsx
+<Link
+  href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+  isExternal
+>
+  ドラゴンボール - wikipedia
+</Link>
+```

@@ -1,12 +1,130 @@
 ---
 title: Pagination
-description: このページは現在作成中です。
+description: "`Pagination`は、コンテンツのページ分割とナビゲーションを管理するためのコンポーネントです。"
 package_name: "@yamada-ui/pagination"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Pagination } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<Pagination total={10} />
+```
+
+### バリアントを変更する
+
+```tsx
+<VStack>
+  <Pagination total={10} variant="solid" />
+  <Pagination total={10} variant="outline" />
+  <Pagination total={10} variant="ghost" />
+  <Pagination total={10} variant="unstyled" />
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx
+<VStack>
+  <Pagination total={10} size="xs" />
+  <Pagination total={10} size="sm" />
+  <Pagination total={10} size="md" />
+  <Pagination total={10} size="lg" />
+  <Pagination total={10} size="xl" />
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx
+<VStack>
+  <Pagination total={10} variant="solid" colorScheme="secondary" />
+  <Pagination total={10} variant="outline" colorScheme="orange" />
+  <Pagination total={10} variant="ghost" colorScheme="cyan" />
+</VStack>
+```
+
+### エッジコントロールボタンを追加する
+
+最初と最後のページに移動するボタンを追加するには、`withEdges`を`true`にします。
+
+```tsx
+<Pagination total={10} withEdges />
+```
+
+### 前後の数をカスタマイズする
+
+現在のページの前後に表示する数を変更したい場合は、`siblings`に表示したい数を設定します。
+
+```tsx
+<Pagination total={77} siblings={3} />
+```
+
+### 最初と最後の数をカスタマイズする
+
+最初と最後に表示する数を変更したい場合は、`boundaries`に表示したい数を設定します。
+
+```tsx
+<Pagination total={77} boundaries={3} />
+```
+
+### ページネーションを無効にする
+
+ページネーションを無効にしたい場合は、`isDisabled`を設定します。
+
+```tsx
+<VStack>
+  <Pagination total={10} variant="solid" isDisabled />
+  <Pagination total={10} variant="outline" isDisabled />
+  <Pagination total={10} variant="ghost" isDisabled />
+  <Pagination total={10} variant="unstyled" isDisabled />
+</VStack>
+```
+
+### コントロールボタンをカスタマイズする
+
+- `controlProps`: 両方のボタンに設定される`props`です。
+- `controlPrevProps`: 前のボタンに設定される`props`です。
+- `controlNextProps`: 次のボタンに設定される`props`です。
+
+```tsx
+<VStack>
+  <Pagination total={10} controlProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <Pagination total={10} controlPrevProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <Pagination total={10} controlNextProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+</VStack>
+```
+
+### エッジコントロールボタンをカスタマイズする
+
+- `edgeProps`: 両方のボタンに設定される`props`です。
+- `edgeFirstProps`: 最初のボタンに設定される`props`です。
+- `edgeLastProps`: 最後のボタンに設定される`props`です。
+
+```tsx
+<VStack>
+  <Pagination total={10} withEdges edgeProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <Pagination
+    total={10}
+    withEdges
+    edgeFirstProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
+  <Pagination total={10} withEdges edgeLastProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+</VStack>
+```
+
+### 制御する
+
+```tsx functional=true
+const [page, onChange] = useState<number>(1)
+
+return <Pagination page={page} total={10} onChange={onChange} />
+```

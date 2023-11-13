@@ -1,6 +1,6 @@
 ---
 title: Tabs
-description: "`Tabs` is a component for switching between different view areas."
+description: "`Tabs` is a component for switching between different display areas."
 package_name: "@yamada-ui/tabs"
 is_tabs: true
 with_description: true
@@ -41,7 +41,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### Variants
+### Change Variant
 
 ```tsx
 <VStack>
@@ -143,7 +143,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### Size
+### Change Size
 
 ```tsx
 <VStack>
@@ -185,9 +185,45 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### Activate a tab by default
+### Change Color Scheme
 
-To activate a specific tab from the start, set the `defaultIndex` to the `index` of the item.
+```tsx
+<VStack>
+  <Tabs variant="rounded-solid" colorScheme="red">
+    <Tab>孫悟空</Tab>
+    <Tab>ベジータ</Tab>
+    <Tab>フリーザ</Tab>
+
+    <TabPanel>
+      <Text>クリリンのことか……クリリンのことかーーーっ！！！！！</Text>
+    </TabPanel>
+    <TabPanel>
+      <Text>へっ！きたねぇ花火だ</Text>
+    </TabPanel>
+    <TabPanel>
+      <Text>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Text>
+    </TabPanel>
+  </Tabs>
+
+  <Tabs variant="sticky-solid" colorScheme="purple">
+    <Tab>孫悟空</Tab>
+    <Tab>ベジータ</Tab>
+    <Tab>フリーザ</Tab>
+
+    <TabPanel>クリリンのことか……クリリンのことかーーーっ！！！！！</TabPanel>
+    <TabPanel>へっ！きたねぇ花火だ</TabPanel>
+    <TabPanel>
+      私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+    </TabPanel>
+  </Tabs>
+</VStack>
+```
+
+### Activate by Default
+
+To activate a specific tab from the start, set the `index` of the item to `defaultIndex`.
 
 ```tsx
 <Tabs defaultIndex={1}>
@@ -203,7 +239,7 @@ To activate a specific tab from the start, set the `defaultIndex` to the `index`
 </Tabs>
 ```
 
-### Change tab alignment
+### Change Alignment
 
 By setting `align` to `start`, `center`, or `end`, you can change the alignment of the tabs.
 
@@ -247,7 +283,7 @@ By setting `align` to `start`, `center`, or `end`, you can change the alignment 
 </VStack>
 ```
 
-### Change tab orientation
+### Change Orientation
 
 By setting `orientation` to `horizontal` or `vertical`, you can change the orientation of the tabs.
 
@@ -279,7 +315,7 @@ By setting `orientation` to `horizontal` or `vertical`, you can change the orien
 </VStack>
 ```
 
-### Stretch tabs to container width
+### Stretch to Container Width
 
 By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of the container.
 
@@ -297,9 +333,9 @@ By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of
 </Tabs>
 ```
 
-### Disable a tab
+### Disable
 
-If you want to disable a specific tab, set `isDisabled`.
+To disable a specific tab, set `isDisabled`.
 
 ```tsx
 <Tabs>
@@ -315,7 +351,7 @@ If you want to disable a specific tab, set `isDisabled`.
 </Tabs>
 ```
 
-### Manual activation of tabs
+### Manual Activation
 
 By default, the focused tab is automatically activated. If you want to activate the tab at a specific time (when `Enter` or `Space` is pressed), set `isManual` to `true`.
 
@@ -333,7 +369,7 @@ By default, the focused tab is automatically activated. If you want to activate 
 </Tabs>
 ```
 
-### Lazy rendering of panels
+### Lazy Rendering
 
 By default, all panels are rendered in the DOM regardless of whether they are active. This means that even hidden panels are rendered but are invisible due to styling.
 
@@ -353,7 +389,7 @@ If you want to delay the rendering of each panel until the tab becomes active, s
 </Tabs>
 ```
 
-### Using `TabList`
+### Use `TabList`
 
 If `TabList` is not present in `children`, `Tab` automatically wraps the `Tab` within `children` with `TabList`. If you want to customize `TabList`, set `TabList` in `children`.
 
@@ -373,7 +409,7 @@ If `TabList` is not present in `children`, `Tab` automatically wraps the `Tab` w
 </Tabs>
 ```
 
-### Using `TabPanels`
+### Use `TabPanels`
 
 If `TabPanels` is not present in `children`, `Tab` automatically wraps the `TabPanel` within `children` with `TabPanels`. If you want to customize `TabPanels`, set `TabPanels` in `children`.
 

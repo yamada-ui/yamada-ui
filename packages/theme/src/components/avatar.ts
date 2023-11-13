@@ -8,10 +8,11 @@ export const Avatar: ComponentMultiStyle = {
       const bg = string ? randomColor({ string }) : "gray.400"
 
       return {
+        bg,
         color: isDark(bg)(t, m) ? "white" : "black",
         borderColor: ["white", "black"],
         verticalAlign: "top",
-        _loading: { bg },
+        _loaded: { bg: "inherit" },
       }
     },
     name: {},

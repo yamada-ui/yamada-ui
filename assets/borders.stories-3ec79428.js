@@ -1,5 +1,0 @@
-import{M as a}from"./index-46bad733.js";import{a as r,j as m,F as c}from"./jsx-runtime-03b4ddbf.js";import{u as s}from"./index-a1cf9e47.js";import"./iframe-3697e1ce.js";import"../sb-preview/runtime.js";import"./index-76fb7be0.js";import"./_commonjsHelpers-de833af9.js";import"./index-d3ea75b5.js";import"./index-13a69483.js";import"./index-356e4a49.js";function n(e){const t=Object.assign({h1:"h1",pre:"pre",code:"code"},s(),e.components);return m(c,{children:[r(a,{title:"Documents / Theme / Borders"}),`
-`,r(t.h1,{id:"borders",children:"Borders"}),`
-`,r(t.pre,{children:r(t.code,{className:"language-ts",children:`Not defined
-`})})]})}function i(e={}){const{wrapper:t}=Object.assign({},s(),e.components);return t?r(t,{...e,children:r(n,{...e})}):n(e)}const p=()=>{throw new Error("Docs-only story")};p.parameters={docsOnly:!0};const o={title:"Documents / Theme / Borders",tags:["stories-mdx"],includeStories:["__page"]};o.parameters=o.parameters||{};o.parameters.docs={...o.parameters.docs||{},page:i};const j=["__page"];export{j as __namedExportsOrder,p as __page,o as default};
-//# sourceMappingURL=borders.stories-3ec79428.js.map

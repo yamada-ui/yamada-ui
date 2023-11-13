@@ -27,7 +27,7 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
 
     return (
       <PopoverContent
-        className={cx("ui-select-list", className)}
+        className={cx("ui-select__list", className)}
         w={w}
         minW={minW}
         __css={css}

@@ -9,7 +9,7 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
     return (
       <Skeleton
         ref={ref}
-        className={cx("ui-skeleton-circle", className)}
+        className={cx("ui-skeleton__circle", className)}
         rounded="full"
         boxSize={boxSize}
         {...rest}

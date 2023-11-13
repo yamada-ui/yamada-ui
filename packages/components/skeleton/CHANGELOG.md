@@ -1,5 +1,20 @@
 # @yamada-ui/skeleton
 
+## 0.3.17
+
+### Patch Changes
+
+- [#240](https://github.com/hirotomoyamada/yamada-ui/pull/240) [`d7873e79`](https://github.com/hirotomoyamada/yamada-ui/commit/d7873e79f27b360e1a6947daa30a7636addd91b7) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Skeleton`.
+
+## 0.3.16
+
+### Patch Changes
+
+- Updated dependencies [[`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392)]:
+  - @yamada-ui/core@0.12.6
+  - @yamada-ui/use-animation@0.4.5
+  - @yamada-ui/use-value@0.2.16
+
 ## 0.3.15
 
 ### Patch Changes

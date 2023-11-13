@@ -1,5 +1,21 @@
 # @yamada-ui/select
 
+## 0.5.2
+
+### Patch Changes
+
+- [#240](https://github.com/hirotomoyamada/yamada-ui/pull/240) [`23c5ff1d`](https://github.com/hirotomoyamada/yamada-ui/commit/23c5ff1d24f6a193ec1bbcee2a0e57289b6021e7) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Select`.
+
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [[`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392)]:
+  - @yamada-ui/core@0.12.6
+  - @yamada-ui/form-control@0.3.19
+  - @yamada-ui/icon@0.3.16
+  - @yamada-ui/popover@0.3.21
+
 ## 0.5.0
 
 ### Minor Changes

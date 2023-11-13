@@ -171,7 +171,6 @@ export const customStep: Story = () => {
   return (
     <>
       <Stepper index={activeStep}>
-        {/* @ts-ignore */}
         {steps.map(({ title, description }, index) => (
           <Step key={index}>
             <StepStatus />
@@ -223,7 +222,6 @@ export const customStatus: Story = () => {
       <Stepper index={activeStep} steps={steps} />
 
       <Stepper index={activeStep}>
-        {/* @ts-ignore */}
         {steps.map(({ title, description }, index) => (
           <Step key={index}>
             <StepStatus complete={<Icon icon={faPoo} />} />

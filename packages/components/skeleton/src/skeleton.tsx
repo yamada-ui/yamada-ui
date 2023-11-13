@@ -53,7 +53,7 @@ export type SkeletonProps = HTMLUIProps<"div"> &
   SkeletonOptions
 
 export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
-  let [styles, mergedProps] = useComponentStyle("Skeleton", props)
+  const [styles, mergedProps] = useComponentStyle("Skeleton", props)
   const {
     className,
     startColor,
@@ -122,7 +122,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-skeleton", className)}
+        className={cx("ui-skeleton", "ui-skeleton--loaded", className)}
         {...rest}
         animation={animation}
       />

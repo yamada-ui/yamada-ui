@@ -122,7 +122,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-skeleton", className)}
+        className={cx("ui-skeleton", "ui-skeleton--loaded", className)}
         {...rest}
         animation={animation}
       />

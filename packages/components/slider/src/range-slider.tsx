@@ -803,7 +803,7 @@ export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-slider-track", className)}
+        className={cx("ui-slider__track", className)}
         __css={css}
         {...getTrackProps(
           {
@@ -838,7 +838,7 @@ export const RangeSliderFilledTrack = forwardRef<
 
   return (
     <ui.div
-      className={cx("ui-slider-filledTrack", className)}
+      className={cx("ui-slider__track-filled", className)}
       __css={css}
       {...getFilledTrackProps(
         {
@@ -867,7 +867,7 @@ export const RangeSliderMark = forwardRef<RangeSliderMarkProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-slider-mark", className)}
+        className={cx("ui-slider__mark", className)}
         __css={css}
         {...getMarkProps(rest, ref)}
       />
@@ -895,7 +895,7 @@ const RangeSliderThumb = forwardRef<
 
   return (
     <ui.div
-      className={cx("ui-slider-thumb", className)}
+      className={cx("ui-slider__thumb", className)}
       __css={css}
       {...getThumbProps(
         {

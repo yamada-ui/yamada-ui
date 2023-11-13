@@ -51,16 +51,16 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
     )
 
     useEffect(() => {
-      x.onChange((subscription) => {
-        if (orientation === "horizontal") setIsDrag(subscription !== 0)
+      const unsubscribeX = x.on("change", (x) => {
+        if (orientation === "horizontal") setIsDrag(x !== 0)
       })
-      y.onChange((subscription) => {
-        if (orientation === "vertical") setIsDrag(subscription !== 0)
+      const unsubscribeY = y.on("change", (y) => {
+        if (orientation === "vertical") setIsDrag(y !== 0)
       })
 
       return () => {
-        x.destroy()
-        y.destroy()
+        unsubscribeX()
+        unsubscribeY()
       }
     }, [orientation, x, y])
 
@@ -86,6 +86,7 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
           value={label}
           __css={css}
           {...rest}
+          // @ts-ignore
           dragListener={!hasTrigger}
           dragControls={dragControls}
           data-selected={dataAttr(isDrag)}

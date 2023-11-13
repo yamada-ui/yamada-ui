@@ -47,7 +47,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-step-status", className)}
+        className={cx("ui-step__status", className)}
         data-status={status}
         __css={css}
         {...rest}
@@ -70,7 +70,7 @@ export const StepNumber = forwardRef<StepNumberProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-step-number", className)}
+        className={cx("ui-step__number", className)}
         data-status={status}
         __css={css}
         {...rest}
@@ -96,7 +96,7 @@ export const StepIcon = forwardRef<StepIconProps, "svg">(
       <Icon
         ref={ref}
         as={as}
-        className={cx("ui-step-icon", className)}
+        className={cx("ui-step__icon", className)}
         data-status={status}
         __css={css}
         {...rest}

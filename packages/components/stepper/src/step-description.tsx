@@ -15,7 +15,7 @@ export const StepDescription = forwardRef<StepDescriptionProps, "p">(
     return (
       <ui.p
         ref={ref}
-        className={cx("ui-step-description", className)}
+        className={cx("ui-step__description", className)}
         data-status={status}
         __css={css}
         {...rest}

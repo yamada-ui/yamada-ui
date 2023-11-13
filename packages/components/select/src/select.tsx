@@ -204,7 +204,7 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-select-field", className)}
+        className={cx("ui-select__field", className)}
         __css={css}
         {...rest}
       >

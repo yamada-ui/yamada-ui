@@ -1,5 +1,14 @@
 # @yamada-ui/motion
 
+## 0.4.16
+
+### Patch Changes
+
+- [`c9f7f595`](https://github.com/hirotomoyamada/yamada-ui/commit/c9f7f595c9014e5c6440bb81b3153f2197ed1053) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated MotionProps type definition.
+
+- Updated dependencies [[`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392)]:
+  - @yamada-ui/core@0.12.6
+
 ## 0.4.15
 
 ### Patch Changes

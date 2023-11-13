@@ -42,7 +42,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-skeleton-text", className)}
+        className={cx("ui-skeleton__text", className)}
         __css={css}
         {...rest}
       >

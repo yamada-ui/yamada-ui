@@ -69,12 +69,12 @@
     "plop": "^4.0.0",
     "prettier": "^3.0.3",
     "remark-breaks": "^4.0.0",
-    "remark-emoji": "^4.0.1",
+    "remark-emoji": "4.0.0",
     "remark-gfm": "^3.0.1",
     "remark-slug": "^7.0.1",
     "tsx": "^4.1.1",
     "typescript": "5.2.2",
-    "unified": "^11.0.4",
+    "unified": "^10.1.2",
     "unist-util-visit": "^5.0.0"
   }
 }

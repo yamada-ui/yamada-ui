@@ -149,8 +149,8 @@ devDependencies:
     specifier: ^4.0.0
     version: registry.npmjs.org/remark-breaks@4.0.0
   remark-emoji:
-    specifier: ^4.0.1
-    version: registry.npmjs.org/remark-emoji@4.0.1
+    specifier: 4.0.0
+    version: registry.npmjs.org/remark-emoji@4.0.0
   remark-gfm:
     specifier: ^3.0.1
     version: registry.npmjs.org/remark-gfm@3.0.1
@@ -164,8 +164,8 @@ devDependencies:
     specifier: 5.2.2
     version: registry.npmjs.org/typescript@5.2.2
   unified:
-    specifier: ^11.0.4
-    version: registry.npmjs.org/unified@11.0.4
+    specifier: ^10.1.2
+    version: registry.npmjs.org/unified@10.1.2
   unist-util-visit:
     specifier: ^5.0.0
     version: registry.npmjs.org/unist-util-visit@5.0.0
@@ -10793,17 +10793,15 @@ packages:
       unified: registry.npmjs.org/unified@11.0.4
     dev: true
 
-  registry.npmjs.org/remark-emoji@4.0.1:
-    resolution: {integrity: sha512-fHdvsTR1dHkWKev9eNyhTo4EFwbUvJ8ka9SgeWkMPYFX4WoI7ViVBms3PjlQYgw5TLvNQso3GUB/b/8t3yo+dg==, tarball: https://registry.npmjs.org/remark-emoji/-/remark-emoji-4.0.1.tgz}
+  registry.npmjs.org/remark-emoji@4.0.0:
+    resolution: {integrity: sha512-lQP1lFaYOz6zyJTBfOwYChM1YkgJEVcxSnUBkjo9qujqWwpY36MRFzDjYDk9YNdHqkw5yExB8MnVVHb6wX9QNA==, tarball: https://registry.npmjs.org/remark-emoji/-/remark-emoji-4.0.0.tgz}
     name: remark-emoji
-    version: 4.0.1
+    version: 4.0.0
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
-      '@types/mdast': registry.npmjs.org/@types/mdast@4.0.3
       emoticon: registry.npmjs.org/emoticon@4.0.1
       mdast-util-find-and-replace: registry.npmjs.org/mdast-util-find-and-replace@3.0.1
       node-emoji: registry.npmjs.org/node-emoji@2.1.0
-      unified: registry.npmjs.org/unified@11.0.4
     dev: true
 
   registry.npmjs.org/remark-frontmatter@4.0.1:

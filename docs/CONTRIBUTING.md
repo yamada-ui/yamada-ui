@@ -52,7 +52,7 @@ the following categories:
 - `chore`: all changes to the repository that do not fit into any of the above categories
 
 If you are interested in the detailed specification you can visit
-https://www.conventionalcommits.org or check out the
+[Conventional Commits](https://www.conventionalcommits.org) or check out the
 [Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
 
 ### Steps to PR

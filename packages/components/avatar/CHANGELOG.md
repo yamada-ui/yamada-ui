@@ -1,5 +1,16 @@
 # @yamada-ui/avatar
 
+## 0.3.18
+
+### Patch Changes
+
+- [`2ee4867c`](https://github.com/hirotomoyamada/yamada-ui/commit/2ee4867c3d5ad78c85ef59877686ce078fe01d56) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated avatar props and state handling.
+
+- Updated dependencies [[`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392)]:
+  - @yamada-ui/core@0.12.6
+  - @yamada-ui/icon@0.3.16
+  - @yamada-ui/image@0.3.17
+
 ## 0.3.17
 
 ### Patch Changes

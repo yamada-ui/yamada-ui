@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.12.6
+
+### Patch Changes
+
+- [`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_loaded` pseudo property.
+
 ## 0.12.5
 
 ### Patch Changes

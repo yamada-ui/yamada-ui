@@ -1,5 +1,12 @@
 # @yamada-ui/image
 
+## 0.3.17
+
+### Patch Changes
+
+- Updated dependencies [[`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392)]:
+  - @yamada-ui/core@0.12.6
+
 ## 0.3.16
 
 ### Patch Changes

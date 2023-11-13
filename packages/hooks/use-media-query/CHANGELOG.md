@@ -1,5 +1,12 @@
 # @yamada-ui/use-media-query
 
+## 0.2.22
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@0.9.7
+
 ## 0.2.21
 
 ### Patch Changes

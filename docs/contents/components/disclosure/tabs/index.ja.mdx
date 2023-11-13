@@ -221,7 +221,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### タブを最初からアクティブにする
+### 最初からアクティブにする
 
 初回から特定のタブをアクティブにする場合は`defaultIndex`に項目の`index`を設定します。
 
@@ -239,7 +239,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### タブの配置を変更する
+### 配置を変更する
 
 `align`に`start`, `center`, `end`を設定することで、タブの配置を変更できます。
 
@@ -283,9 +283,9 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### タブの方向を変更する
+### 方向を変更する
 
-`orientation`に`horizontal`または`vertical`を設定することで、タブを方向を変更できます。
+`orientation`に`horizontal`または`vertical`を設定することで、タブの方向を変更できます。
 
 ```tsx
 <VStack>
@@ -315,7 +315,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### タブをコンテナ幅まで引き伸ばす
+### コンテナ幅まで引き伸ばす
 
 `isFitted`を`true`にすることで、タブをコンテナ幅まで均等に引き伸ばします。
 
@@ -333,7 +333,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### タブを無効にする
+### 無効にする
 
 特定のタブを無効にしたい場合は、`isDisabled`を設定します。
 
@@ -351,7 +351,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### タブのアクティブをマニュアル化する
+### アクティブをマニュアル化する
 
 デフォルトでは、フォーカスされたタブは自動的にアクティブ化されます。任意のタイミング(`Enter`や`Space`が押されたとき)でタブをアクティブ化したい場合は、`isManual`を`true`に設定します。
 
@@ -369,7 +369,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### パネルの遅延レンダリング
+### 遅延レンダリング
 
 デフォルトでは、すべてのパネルはアクティブに関わらずDOMにレンダリングされます。つまり、非表示のパネルもレンダリングされているが、スタイルによって非表示になっていることになります。
 

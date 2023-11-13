@@ -13,10 +13,10 @@ tab: Usage
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 ```
 
-- `Tabs`: A wrapper component that controls child elements (`TabList`, `TabPanels`).
-- `TabList`: A wrapper component that controls child elements (`Tab`).
+- `Tabs`: A wrapper component that controls the child elements (`TabList`, `TabPanels`).
+- `TabList`: A wrapper component that controls the child elements (`Tab`).
 - `Tab`: A component that functions as a label for the panel and a button to display that panel.
-- `TabPanels`: A wrapper component that controls child elements (`TabPanel`).
+- `TabPanels`: A wrapper component that controls the child elements (`TabPanel`).
 - `TabPanel`: A component that displays content associated with a label.
 
 :::note
@@ -41,7 +41,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### Change Variants
+### Change Variant
 
 ```tsx
 <VStack>
@@ -221,9 +221,9 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### Activate Tabs from the Start
+### Activate by Default
 
-To activate a specific tab from the beginning, set the `index` of the item to `defaultIndex`.
+To activate a specific tab from the start, set the `index` of the item to `defaultIndex`.
 
 ```tsx
 <Tabs defaultIndex={1}>
@@ -239,7 +239,7 @@ To activate a specific tab from the beginning, set the `index` of the item to `d
 </Tabs>
 ```
 
-### Change Tab Alignment
+### Change Alignment
 
 By setting `align` to `start`, `center`, or `end`, you can change the alignment of the tabs.
 
@@ -283,7 +283,7 @@ By setting `align` to `start`, `center`, or `end`, you can change the alignment 
 </VStack>
 ```
 
-### Change Tab Orientation
+### Change Orientation
 
 By setting `orientation` to `horizontal` or `vertical`, you can change the orientation of the tabs.
 
@@ -315,7 +315,7 @@ By setting `orientation` to `horizontal` or `vertical`, you can change the orien
 </VStack>
 ```
 
-### Stretch Tabs to Container Width
+### Stretch to Container Width
 
 By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of the container.
 
@@ -333,9 +333,9 @@ By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of
 </Tabs>
 ```
 
-### Disable Tabs
+### Disable
 
-If you want to disable a specific tab, set `isDisabled`.
+To disable a specific tab, set `isDisabled`.
 
 ```tsx
 <Tabs>
@@ -351,7 +351,7 @@ If you want to disable a specific tab, set `isDisabled`.
 </Tabs>
 ```
 
-### Manual Activation of Tabs
+### Manual Activation
 
 By default, the focused tab is automatically activated. If you want to activate the tab at a specific time (when `Enter` or `Space` is pressed), set `isManual` to `true`.
 
@@ -369,11 +369,11 @@ By default, the focused tab is automatically activated. If you want to activate 
 </Tabs>
 ```
 
-### Delayed Panel Rendering
+### Lazy Rendering
 
 By default, all panels are rendered in the DOM regardless of whether they are active. This means that even hidden panels are rendered but are invisible due to styling.
 
-If you want to delay the rendering of each panel until the tab is active, set `isLazy` to `true`.
+If you want to delay the rendering of each panel until the tab becomes active, set `isLazy` to `true`.
 
 ```tsx
 <Tabs isLazy lazyBehavior="unmount">
@@ -391,7 +391,7 @@ If you want to delay the rendering of each panel until the tab is active, set `i
 
 ### Use `TabList`
 
-If `TabList` does not exist in `children`, `Tab` automatically wraps the `Tab` in `children` with `TabList`. If you want to customize `TabList`, set `TabList` in `children`.
+If `TabList` is not present in `children`, `Tab` automatically wraps the `Tab` within `children` with `TabList`. If you want to customize `TabList`, set `TabList` in `children`.
 
 ```tsx
 <Tabs>
@@ -411,7 +411,7 @@ If `TabList` does not exist in `children`, `Tab` automatically wraps the `Tab` i
 
 ### Use `TabPanels`
 
-If `TabPanels` does not exist in `children`, `Tab` automatically wraps the `TabPanel` in `children` with `TabPanels`. If you want to customize `TabPanels`, set `TabPanels` in `children`.
+If `TabPanels` is not present in `children`, `Tab` automatically wraps the `TabPanel` within `children` with `TabPanels`. If you want to customize `TabPanels`, set `TabPanels` in `children`.
 
 ```tsx
 <Tabs variant="sticky">

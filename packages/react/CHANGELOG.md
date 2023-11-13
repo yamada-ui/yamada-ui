@@ -1,5 +1,14 @@
 # @yamada-ui/react
 
+## 0.8.19
+
+### Patch Changes
+
+- Updated dependencies [[`d7873e79`](https://github.com/hirotomoyamada/yamada-ui/commit/d7873e79f27b360e1a6947daa30a7636addd91b7), [`23c5ff1d`](https://github.com/hirotomoyamada/yamada-ui/commit/23c5ff1d24f6a193ec1bbcee2a0e57289b6021e7)]:
+  - @yamada-ui/skeleton@0.3.17
+  - @yamada-ui/select@0.5.2
+  - @yamada-ui/autocomplete@0.5.2
+
 ## 0.8.18
 
 ### Patch Changes

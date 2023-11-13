@@ -1,5 +1,11 @@
 # @yamada-ui/skeleton
 
+## 0.3.17
+
+### Patch Changes
+
+- [#240](https://github.com/hirotomoyamada/yamada-ui/pull/240) [`d7873e79`](https://github.com/hirotomoyamada/yamada-ui/commit/d7873e79f27b360e1a6947daa30a7636addd91b7) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Skeleton`.
+
 ## 0.3.16
 
 ### Patch Changes

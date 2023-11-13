@@ -37,7 +37,11 @@
       "label": "Edit this page on GitHub"
     },
     "editable-code-block": {
-      "label": "Editable example"
+      "label": "Editable example",
+      "control-button": {
+        "open": "Read more",
+        "close": "Close"
+      }
     },
     "doc-links": {
       "source": "Source"

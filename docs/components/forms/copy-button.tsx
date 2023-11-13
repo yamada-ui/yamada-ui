@@ -14,7 +14,7 @@ export const CopyButton = memo(
           label="Copied!"
           placement="left"
           isOpen={hasCopied}
-          bg="secondary"
+          bg="success"
           h="8"
           display="inline-flex"
           alignItems="center"
@@ -24,12 +24,12 @@ export const CopyButton = memo(
             size="sm"
             aria-label="Copy the code"
             variant="unstyled"
-            color={hasCopied ? "secondary" : "whiteAlpha.600"}
+            color={hasCopied ? "success" : "whiteAlpha.600"}
             border="1px solid"
-            borderColor={hasCopied ? "secondary" : "whiteAlpha.600"}
+            borderColor={hasCopied ? "success" : "whiteAlpha.600"}
             bg={["zinc.800", "zinc.900"]}
             _hover={{
-              color: hasCopied ? "secondary" : "whiteAlpha.800",
+              color: hasCopied ? "success" : "whiteAlpha.800",
               borderColor: hasCopied ? "secondaru" : "whiteAlpha.800",
             }}
             display="flex"

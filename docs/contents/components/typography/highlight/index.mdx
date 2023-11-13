@@ -1,6 +1,6 @@
 ---
 title: Highlight
-description: "`Highlight` is a component that highlights specified strings within the text. By default, it renders a `p` element."
+description: "`Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element."
 package_name: "@yamada-ui/highlight"
 is_tabs: true
 with_description: true
@@ -33,7 +33,7 @@ Specify the string you want to highlight in `query`.
 </Highlight>
 ```
 
-### Variants
+### Change Variants
 
 ```tsx
 <VStack>
@@ -59,7 +59,7 @@ Specify the string you want to highlight in `query`.
 </VStack>
 ```
 
-### Styling the Highlight
+### Change Color Scheme
 
 ```tsx
 <Highlight query="ドラゴンボール" markProps={{ colorScheme: "green" }}>
@@ -68,6 +68,8 @@ Specify the string you want to highlight in `query`.
 </Highlight>
 ```
 
+### Style the Highlight
+
 ```tsx
 <Highlight query="ドラゴンボール" markProps={{ rounded: "full" }}>
   『ドラゴンボール』（DRAGON
@@ -75,7 +77,7 @@ Specify the string you want to highlight in `query`.
 </Highlight>
 ```
 
-### Using Fragments
+### Use Fragments
 
 By default, `Highlight` renders a `p` element. By setting `isFragment`, `highlight` will use [Fragments](https://react.dev/reference/react/Fragment).
 
@@ -88,7 +90,7 @@ By default, `Highlight` renders a `p` element. By setting `isFragment`, `highlig
 </Heading>
 ```
 
-### Customizing the Rendered Element
+### Customize the Rendered Element
 
 By using `useHighlight`, you can customize multiple elements and their styles.
 

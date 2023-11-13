@@ -19,7 +19,7 @@ import { Pagination } from "@yamada-ui/react"
 <Pagination total={10} />
 ```
 
-### バリアント
+### バリアントを変更する
 
 ```tsx
 <VStack>
@@ -27,6 +27,28 @@ import { Pagination } from "@yamada-ui/react"
   <Pagination total={10} variant="outline" />
   <Pagination total={10} variant="ghost" />
   <Pagination total={10} variant="unstyled" />
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx
+<VStack>
+  <Pagination total={10} size="xs" />
+  <Pagination total={10} size="sm" />
+  <Pagination total={10} size="md" />
+  <Pagination total={10} size="lg" />
+  <Pagination total={10} size="xl" />
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx
+<VStack>
+  <Pagination total={10} variant="solid" colorScheme="secondary" />
+  <Pagination total={10} variant="outline" colorScheme="orange" />
+  <Pagination total={10} variant="ghost" colorScheme="cyan" />
 </VStack>
 ```
 

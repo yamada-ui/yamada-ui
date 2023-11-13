@@ -41,7 +41,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### バリアント
+### バリアントを変更する
 
 ```tsx
 <VStack>
@@ -143,7 +143,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### サイズ
+### サイズを変更する
 
 ```tsx
 <VStack>
@@ -172,6 +172,42 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
   </Tabs>
 
   <Tabs size="lg">
+    <Tab>孫悟空</Tab>
+    <Tab>ベジータ</Tab>
+    <Tab>フリーザ</Tab>
+
+    <TabPanel>クリリンのことか……クリリンのことかーーーっ！！！！！</TabPanel>
+    <TabPanel>へっ！きたねぇ花火だ</TabPanel>
+    <TabPanel>
+      私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+    </TabPanel>
+  </Tabs>
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx
+<VStack>
+  <Tabs variant="rounded-solid" colorScheme="red">
+    <Tab>孫悟空</Tab>
+    <Tab>ベジータ</Tab>
+    <Tab>フリーザ</Tab>
+
+    <TabPanel>
+      <Text>クリリンのことか……クリリンのことかーーーっ！！！！！</Text>
+    </TabPanel>
+    <TabPanel>
+      <Text>へっ！きたねぇ花火だ</Text>
+    </TabPanel>
+    <TabPanel>
+      <Text>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Text>
+    </TabPanel>
+  </Tabs>
+
+  <Tabs variant="sticky-solid" colorScheme="purple">
     <Tab>孫悟空</Tab>
     <Tab>ベジータ</Tab>
     <Tab>フリーザ</Tab>

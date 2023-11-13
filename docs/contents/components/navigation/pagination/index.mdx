@@ -19,7 +19,7 @@ import { Pagination } from "@yamada-ui/react"
 <Pagination total={10} />
 ```
 
-### Variants
+### Change Variant
 
 ```tsx
 <VStack>
@@ -27,6 +27,28 @@ import { Pagination } from "@yamada-ui/react"
   <Pagination total={10} variant="outline" />
   <Pagination total={10} variant="ghost" />
   <Pagination total={10} variant="unstyled" />
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Pagination total={10} size="xs" />
+  <Pagination total={10} size="sm" />
+  <Pagination total={10} size="md" />
+  <Pagination total={10} size="lg" />
+  <Pagination total={10} size="xl" />
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx
+<VStack>
+  <Pagination total={10} variant="solid" colorScheme="secondary" />
+  <Pagination total={10} variant="outline" colorScheme="orange" />
+  <Pagination total={10} variant="ghost" colorScheme="cyan" />
 </VStack>
 ```
 
@@ -48,7 +70,7 @@ If you want to change the number of pages displayed before and after the current
 
 ### Customize the Number of Boundaries
 
-If you want to change the number of pages displayed at the beginning and end, set the desired number to `boundaries`.
+If you want to change the number of pages displayed at the beginning and the end, set the desired number to `boundaries`.
 
 ```tsx
 <Pagination total={77} boundaries={3} />
@@ -69,9 +91,9 @@ If you want to disable pagination, set `isDisabled`.
 
 ### Customize Control Buttons
 
-- `controlProps`: `props` set for both buttons.
-- `controlPrevProps`: `props` set for the previous button.
-- `controlNextProps`: `props` set for the next button.
+- `controlProps`: `props` that are set for both buttons.
+- `controlPrevProps`: `props` that are set for the previous button.
+- `controlNextProps`: `props` that are set for the next button.
 
 ```tsx
 <VStack>
@@ -83,9 +105,9 @@ If you want to disable pagination, set `isDisabled`.
 
 ### Customize Edge Control Buttons
 
-- `edgeProps`: `props` set for both buttons.
-- `edgeFirstProps`: `props` set for the first button.
-- `edgeLastProps`: `props` set for the last button.
+- `edgeProps`: `props` that are set for both buttons.
+- `edgeFirstProps`: `props` that are set for the first button.
+- `edgeLastProps`: `props` that are set for the last button.
 
 ```tsx
 <VStack>

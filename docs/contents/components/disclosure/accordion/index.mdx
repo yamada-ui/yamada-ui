@@ -42,7 +42,7 @@ By default, only one item can be expanded at a time, and expanding another item 
 </Accordion>
 ```
 
-### Variants
+### Change Variants
 
 ```tsx
 <VStack>
@@ -76,9 +76,11 @@ By default, only one item can be expanded at a time, and expanding another item 
 </VStack>
 ```
 
-### Pre-expand a specific item
+### Change Color Scheme
 
-To have a specific item expanded from the start, set the item's `index` to `defaultIndex`.
+### Set a Specific Item to be Expanded by Default
+
+To have a specific item expanded by default, set the `index` of the item to `defaultIndex`.
 
 ```tsx
 <Accordion defaultIndex={1}>
@@ -96,7 +98,7 @@ To have a specific item expanded from the start, set the item's `index` to `defa
 </Accordion>
 ```
 
-### Expand multiple items at once
+### Expand Multiple Items at Once
 
 Setting `isMultiple` to `true` allows multiple items to be expanded at the same time.
 
@@ -116,7 +118,7 @@ Setting `isMultiple` to `true` allows multiple items to be expanded at the same 
 </Accordion>
 ```
 
-### Enable toggling of item expansion and collapse
+### Enable Toggling of Item Expansion/Collapse
 
 Setting `isToggle` to `true` allows an expanded item to be collapsible again.
 
@@ -136,7 +138,7 @@ Setting `isToggle` to `true` allows an expanded item to be collapsible again.
 </Accordion>
 ```
 
-### Customize the icon
+### Customize Icons
 
 If you do not want to display an icon, set `iconHidden` to `true`.
 
@@ -199,7 +201,7 @@ If you want to switch icons based on the expansion and collapse state of an item
 </Accordion>
 ```
 
-### Disable an item
+### Disable an Item
 
 To disable a specific item, set `isDisabled`.
 
@@ -219,7 +221,7 @@ To disable a specific item, set `isDisabled`.
 </Accordion>
 ```
 
-### Using `AccordionLabel`
+### Use `AccordionLabel`
 
 `AccordionItem` internally renders `AccordionLabel` by setting the `label` in `props`, but if you want to customize `AccordionLabel`, set `AccordionLabel` to `children`.
 
@@ -253,9 +255,9 @@ To disable a specific item, set `isDisabled`.
 </Accordion>
 ```
 
-### Using `AccordionPanel`
+### Use `AccordionPanel`
 
-If `AccordionPanel` is not present in `children`, `AccordionItem` automatically wraps `children` with `AccordionPanel`. If you want to customize `AccordionPanel`, set `AccordionPanel` to `children`.
+If `AccordionItem` does not have `AccordionPanel` in `children`, it automatically wraps `children` with `AccordionPanel`. If you want to customize `AccordionPanel`, set `AccordionPanel` to `children`.
 
 ```tsx
 <Accordion>

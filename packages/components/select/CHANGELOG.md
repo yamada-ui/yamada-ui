@@ -1,5 +1,11 @@
 # @yamada-ui/select
 
+## 0.5.2
+
+### Patch Changes
+
+- [#240](https://github.com/hirotomoyamada/yamada-ui/pull/240) [`23c5ff1d`](https://github.com/hirotomoyamada/yamada-ui/commit/23c5ff1d24f6a193ec1bbcee2a0e57289b6021e7) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Select`.
+
 ## 0.5.1
 
 ### Patch Changes

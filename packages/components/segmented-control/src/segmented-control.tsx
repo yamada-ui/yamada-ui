@@ -23,16 +23,22 @@ import {
   PropGetter,
   RequiredPropGetter,
   useCallbackRef,
+  useIsMounted,
 } from "@yamada-ui/utils"
 import {
   ChangeEvent,
   ChangeEventHandler,
+  ReactElement,
   useCallback,
   useEffect,
   useId,
   useRef,
   useState,
 } from "react"
+
+export type SegmentedControlItem = SegmentedControlButtonProps & {
+  label?: string
+}
 
 const { DescendantsContextProvider, useDescendants, useDescendant } =
   createDescendant<HTMLButtonElement>()
@@ -78,6 +84,12 @@ type SegmentedControlOptions = {
    * @default false
    */
   isDisabled?: boolean
+  /**
+   * If provided, generate segmented control buttons but based on items.
+   *
+   * @default '[]'
+   */
+  items?: SegmentedControlItem[]
 }
 
 export type SegmentedControlProps = Omit<HTMLUIProps<"div">, "onChange"> &
@@ -90,8 +102,17 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       "SegmentedControl",
       props,
     )
-    let { className, id, name, isReadOnly, isDisabled, children, ...rest } =
-      omitThemeProps(mergedProps)
+    let {
+      className,
+      id,
+      name,
+      isReadOnly,
+      isDisabled,
+      children,
+      items = [],
+      ...rest
+    } = omitThemeProps(mergedProps)
+    const isMoutedRef = useIsMounted()
 
     id = id ?? useId()
     name = name ?? `segmented-control-${useId()}`
@@ -106,27 +127,18 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     const containerRef = useRef<HTMLDivElement>(null)
     const labelRefs = useRef<Map<string | number, HTMLLabelElement>>(new Map())
 
-    const [activePosition, setActivePosition] = useState({
-      width: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-    })
-
     const [value, setValue] = useControllableState({
       value: rest.value,
       defaultValue: rest.defaultValue,
       onChange: rest.onChange,
     })
 
-    useEffect(() => {
-      return trackFocusVisible(setIsFocusVisible)
-    }, [])
+    const getActivePosition = useCallback(() => {
+      const rect = { width: 0, height: 0, x: 0, y: 0 }
 
-    useEffect(() => {
       const el = labelRefs.current.get(value)
 
-      if (!el || !containerRef.current || !observerRef.current) return
+      if (!el || !containerRef.current || !observerRef.current) return rect
 
       const { paddingLeft, paddingTop } = getComputedStyle(containerRef.current)
 
@@ -134,14 +146,16 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       const gutterY = parseFloat(paddingTop) || 0
 
       let { width, height } = el.getBoundingClientRect()
-      const x = el.offsetLeft - gutterX
-      const y = el.offsetTop - gutterY
+      rect.x = el.offsetLeft - gutterX
+      rect.y = el.offsetTop - gutterY
 
-      width = width * (el.offsetWidth / width) || 0
-      height = height * (el.offsetWidth / width) || 0
+      rect.width = width * (el.offsetWidth / width) || 0
+      rect.height = height * (el.offsetWidth / width) || 0
 
-      setActivePosition({ width, height, x, y })
-    }, [focusedIndex, containerRect, labelRefs, observerRef, value])
+      return rect
+    }, [observerRef, value])
+
+    const [activePosition, setActivePosition] = useState(getActivePosition)
 
     const onChange = useCallback(
       (ev: ChangeEvent<HTMLInputElement>) => {
@@ -281,6 +295,14 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       [focusedIndex, isDisabled, isFocusVisible, isReadOnly, onFocus, value],
     )
 
+    useEffect(() => {
+      return trackFocusVisible(setIsFocusVisible)
+    }, [])
+
+    useEffect(() => {
+      setActivePosition(getActivePosition())
+    }, [focusedIndex, containerRect, value, getActivePosition])
+
     const css: CSSUIObject = {
       position: "relative",
       display: "inline-flex",
@@ -289,9 +311,20 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     }
 
     const validChildren = getValidChildren(children)
+    let computedChildren: ReactElement[] = []
+
+    if (!validChildren.length && items.length) {
+      computedChildren = items.map(({ label, value, ...props }, i) => (
+        <SegmentedControlButton key={i} value={value} {...props}>
+          {label}
+        </SegmentedControlButton>
+      ))
+    } else {
+      computedChildren = validChildren
+    }
 
     if (value == null && rest.defaultValue == null) {
-      for (const child of validChildren) {
+      for (const child of computedChildren) {
         if (child.type !== SegmentedControlButton) continue
 
         const value = child.props.value
@@ -312,12 +345,15 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             className={cx("ui-segmented-control", className)}
             __css={css}
           >
-            <ui.span
-              className="ui-segmented-control__active"
-              {...getActiveProps()}
-              __css={styles.active}
-            />
-            {validChildren}
+            {isMoutedRef.current ? (
+              <ui.span
+                className="ui-segmented-control__active"
+                {...getActiveProps()}
+                __css={styles.active}
+              />
+            ) : null}
+
+            {computedChildren}
           </ui.div>
         </SegmentedControlProvider>
       </DescendantsContextProvider>

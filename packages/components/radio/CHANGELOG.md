@@ -1,5 +1,15 @@
 # @yamada-ui/radio
 
+## 0.4.0
+
+### Minor Changes
+
+- [`5545d7fe`](https://github.com/hirotomoyamada/yamada-ui/commit/5545d7febbe0860108961b29a3a9da316692a7c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added props `items`.
+
+### Patch Changes
+
+- [#232](https://github.com/hirotomoyamada/yamada-ui/pull/232) [`ed0b269b`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b269ba91fa6760e0e12b89643adc6965647e6) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Radio`.
+
 ## 0.3.19
 
 ### Patch Changes

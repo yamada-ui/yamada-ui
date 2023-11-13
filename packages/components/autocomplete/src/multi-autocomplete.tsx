@@ -130,7 +130,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
       getPopoverProps,
       getContainerProps,
       getFieldProps,
-      createOption,
+      allowCreate,
       isEmpty,
       inputValue,
       computedChildren,
@@ -162,7 +162,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
             value,
             formControlProps,
             inputValue,
-            createOption,
+            allowCreate,
             isEmpty,
             styles,
           }}
@@ -195,17 +195,13 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
 
               {!isEmpty ? (
                 <AutocompleteList {...listProps}>
-                  {createOption ? (
-                    <AutocompleteCreate />
-                  ) : (
-                    <AutocompleteEmpty />
-                  )}
+                  {allowCreate ? <AutocompleteCreate /> : <AutocompleteEmpty />}
 
                   {children ?? computedChildren}
                 </AutocompleteList>
               ) : (
                 <AutocompleteList {...listProps}>
-                  {createOption && inputValue ? (
+                  {allowCreate && inputValue ? (
                     <AutocompleteCreate />
                   ) : (
                     <AutocompleteEmpty />

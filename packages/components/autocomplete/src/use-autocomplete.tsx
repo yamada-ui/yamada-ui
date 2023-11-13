@@ -9,7 +9,6 @@ import {
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import { PopoverProps } from "@yamada-ui/popover"
-import { UIOption } from "@yamada-ui/select"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
@@ -56,6 +55,25 @@ import {
   AutocompleteOptionProps,
   AutocompleteOptionGroup,
 } from "./"
+
+type AutocompleteBaseItem = Omit<
+  AutocompleteOptionProps,
+  "value" | "children"
+> & {
+  label?: string
+}
+
+type AutocompleteItemWithValue = AutocompleteBaseItem & {
+  value?: string
+}
+
+type AutocompleteItemWithItems = AutocompleteBaseItem & {
+  items?: AutocompleteItemWithValue[]
+}
+
+export type AutocompleteItem =
+  | AutocompleteItemWithValue
+  | AutocompleteItemWithItems
 
 const kanaMap: Record<string, string> = {
   ｶﾞ: "ガ",
@@ -166,25 +184,31 @@ const defaultFormat = (value: string) => {
   return value
 }
 
-const flattenOptions = (options: UIOption[]): UIOption[] => {
-  const filterOptions = (options: UIOption[]): (UIOption | UIOption[])[] =>
-    options
-      .map((options) => {
-        const { value, isDisabled, isFocusable } = options
+const flattenItems = (
+  items: AutocompleteItem[],
+): AutocompleteItemWithValue[] => {
+  const filterItems = (
+    items: AutocompleteItem[] | AutocompleteItemWithValue[],
+  ): (AutocompleteItemWithValue | AutocompleteItemWithValue[])[] =>
+    items
+      .map((item) => {
+        const { isDisabled, isFocusable } = item
         const trulyDisabled = !!isDisabled && !isFocusable
-        const isMulti = isArray(value)
 
         if (trulyDisabled) return
 
-        if (!isMulti) {
-          return options
+        if ("items" in item) {
+          return filterItems(item.items ?? [])
         } else {
-          return filterOptions(value)
+          return item as AutocompleteItemWithValue
         }
       })
-      .filter(Boolean) as (UIOption | UIOption[])[]
+      .filter(Boolean) as (
+      | AutocompleteItemWithValue
+      | AutocompleteItemWithValue[]
+    )[]
 
-  return filterOptions(options).flat(Infinity) as UIOption[]
+  return filterItems(items).flat(Infinity) as AutocompleteItemWithValue[]
 }
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -266,7 +290,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
     /**
      * The callback invoked when autocomlete option created.
      */
-    onCreate?: (newOption: UIOption, newOptions: UIOption[]) => void
+    onCreate?: (newItem: AutocompleteItem, newItems: AutocompleteItem[]) => void
     /**
      * Function to format text when search input.
      */
@@ -276,9 +300,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      *
      * @default 'first'
      */
-    insertPositionOnCreate?:
-      | Union<"first" | "last">
-      | [string, "first" | "last"]
+    insertPositionItem?: Union<"first" | "last"> | [string, "first" | "last"]
     /**
      * If `true`, the list element will be closed when value is selected.
      *
@@ -292,11 +314,11 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     emptyMessage?: string
     /**
-     * If `true`, enables the creation of autocomplete options.
+     * If `true`, enables the creation of autocomplete option.
      *
      * @default false
      */
-    createOption?: boolean
+    allowCreate?: boolean
     /**
      * If `true`, the selected item(s) will be excluded from the list.
      *
@@ -312,9 +334,9 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     optionProps?: Omit<AutocompleteOptionProps, "value" | "children">
     /**
-     * If provided, generate options based on data.
+     * If provided, generate options based on items.
      */
-    options?: UIOption[]
+    items?: AutocompleteItem[]
   }
 
 export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
@@ -335,14 +357,15 @@ export const useAutocomplete = <T extends string | string[] = string>({
   maxSelectedValues,
   closeOnBlur = true,
   closeOnEsc = true,
-  createOption = false,
-  insertPositionOnCreate = "first",
+  allowCreate = false,
+  insertPositionItem = "first",
   emptyMessage = "No results found",
   format = defaultFormat,
   placement = "bottom-start",
   duration = 0.2,
   optionProps,
   placeholder,
+  items,
   children,
   ...rest
 }: UseAutocompleteProps<T>) => {
@@ -371,7 +394,9 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const timeoutIds = useRef<Set<any>>(new Set([]))
   const isComposition = useRef<boolean>(false)
 
-  const [options, setOptions] = useState<UIOption[] | undefined>(rest.options)
+  const [resolvedItems, setResolvedItems] = useState<
+    AutocompleteItem[] | undefined
+  >(items)
   const [value, setValue] = useControllableState({
     value: rest.value,
     defaultValue: rest.defaultValue,
@@ -386,24 +411,23 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
 
   const isFocused = focusedIndex > -1
-  const isCreate = focusedIndex === -2 && createOption
+  const isCreate = focusedIndex === -2 && allowCreate
   const isMulti = isArray(value)
   const isEmptyValue = !isMulti ? !value : !value.length
 
-  const [firstInsertPositionOnCreate, secondInsertPositionOnCreate] =
-    useMemo(() => {
-      if (isArray(insertPositionOnCreate)) {
-        return insertPositionOnCreate
-      } else {
-        return [insertPositionOnCreate, "first"]
-      }
-    }, [insertPositionOnCreate])
+  const [firstInsertPositionItem, secondInsertPositionItem] = useMemo(() => {
+    if (isArray(insertPositionItem)) {
+      return insertPositionItem
+    } else {
+      return [insertPositionItem, "first"]
+    }
+  }, [insertPositionItem])
 
-  if (createOption && !isUndefined(children)) {
+  if (allowCreate && !isUndefined(children)) {
     console.warn(
       `${!isMulti ? "Autocomplete" : "MultiAutocomplete"}: ${
         !isMulti ? "Autocomplete" : "MultiAutocomplete"
-      } internally prefers 'children'. If 'createOption' is true, it will not be reflected correctly. If want to reflect, please set 'options' in props.`,
+      } internally prefers 'children'. If 'allowCreate' is true, it will not be reflected correctly. If want to reflect, please set 'items' in props.`,
     )
   }
 
@@ -418,27 +442,29 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const validChildren = getValidChildren(children)
 
-  const computedChildren = options?.map(({ label, value, ...props }, i) => {
-    if (!isArray(value)) {
+  const computedChildren = resolvedItems?.map((item, i) => {
+    if ("value" in item) {
+      const { label, value, ...props } = item
+
       return (
         <AutocompleteOption key={i} value={value} {...props}>
           {label}
         </AutocompleteOption>
       )
-    } else {
+    } else if ("items" in item) {
+      const { label, items = [], ...props } = item
+
       return (
         <AutocompleteOptionGroup
           key={i}
           label={label as string}
           {...(props as HTMLUIProps<"ul">)}
         >
-          {value.map(({ label, value, ...props }, i) =>
-            !isArray(value) ? (
-              <AutocompleteOption key={i} value={value} {...props}>
-                {label}
-              </AutocompleteOption>
-            ) : null,
-          )}
+          {items.map(({ label, value, ...props }, i) => (
+            <AutocompleteOption key={i} value={value} {...props}>
+              {label}
+            </AutocompleteOption>
+          ))}
         </AutocompleteOptionGroup>
       )
     }
@@ -449,14 +475,14 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return
 
-    if (!createOption && (isEmpty || isAllSelected)) return
+    if (!allowCreate && (isEmpty || isAllSelected)) return
 
     setIsOpen(true)
 
     if (inputRef.current) inputRef.current.focus()
 
     rest.onOpen?.()
-  }, [createOption, formControlProps, isAllSelected, isEmpty, rest])
+  }, [allowCreate, formControlProps, isAllSelected, isEmpty, rest])
 
   const onClose = useCallback(() => {
     setIsOpen(false)
@@ -784,61 +810,59 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const onCreate = useCallback(() => {
     if (!listRef.current) return
 
-    const newOption: UIOption = { label: inputValue, value: inputValue }
+    const newItem: AutocompleteItem = { label: inputValue, value: inputValue }
 
-    let newOptions: UIOption[] = []
+    let newItems: AutocompleteItem[] = []
 
-    if (options) newOptions = options
+    if (resolvedItems) newItems = resolvedItems
 
-    if (firstInsertPositionOnCreate === "first") {
-      newOptions = [newOption, ...newOptions]
-    } else if (firstInsertPositionOnCreate === "last") {
-      newOptions = [...newOptions, newOption]
+    if (firstInsertPositionItem === "first") {
+      newItems = [newItem, ...newItems]
+    } else if (firstInsertPositionItem === "last") {
+      newItems = [...newItems, newItem]
     } else {
-      const i = newOptions.findIndex(
-        ({ label }) => label === firstInsertPositionOnCreate,
+      const i = newItems.findIndex(
+        ({ label }) => label === firstInsertPositionItem,
       )
 
-      if (i !== -1 && isArray(newOptions[i].value)) {
-        if (secondInsertPositionOnCreate === "first") {
-          newOptions[i].value = [
-            newOption,
-            ...(newOptions[i].value as UIOption[]),
-          ]
+      const targetItem = newItems[i]
+
+      if (i !== -1 && "items" in targetItem) {
+        if (secondInsertPositionItem === "first") {
+          targetItem.items = [newItem, ...(targetItem.items ?? [])]
         } else {
-          newOptions[i].value = [
-            ...(newOptions[i].value as UIOption[]),
-            newOption,
-          ]
+          targetItem.items = [...(targetItem.items ?? []), newItem]
         }
+
+        newItems[i] = targetItem
       } else {
         console.warn(
           `${
             !isMulti ? "Autocomplete" : "MultiAutocomplete"
-          }: '${firstInsertPositionOnCreate}' specified in insertPositionOnCreate does not exist in the option group.`,
+          }: '${firstInsertPositionItem}' specified in insertPositionItem does not exist in the option group.`,
         )
       }
     }
 
-    setOptions(newOptions)
+    setResolvedItems(newItems)
     onChange(inputValue)
     rebirthOptions(false)
 
-    const index = flattenOptions(newOptions).findIndex(
+    const index = flattenItems(newItems).findIndex(
       ({ value }) => value === inputValue,
     )
 
     setFocusedIndex(index)
 
-    rest.onCreate?.(newOption, newOptions)
+    rest.onCreate?.(newItem, newItems)
   }, [
     inputValue,
-    options,
-    firstInsertPositionOnCreate,
+    resolvedItems,
+    firstInsertPositionItem,
     onChange,
     rebirthOptions,
     rest,
-    secondInsertPositionOnCreate,
+    secondInsertPositionItem,
     isMulti,
   ])
 
@@ -1067,7 +1091,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     focusedIndex,
     omitSelectedValues,
     closeOnSelect,
-    createOption,
+    allowCreate,
     emptyMessage,
     isOpen,
     isAllSelected,

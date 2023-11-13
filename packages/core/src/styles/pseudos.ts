@@ -140,6 +140,7 @@ export const pseudos = {
   _reject: "&[data-reject]",
   _idle: "&[data-idle]",
   _loading: "&[data-loading]",
+  _loaded: "&[data-loaded]",
   /**
    * The CSS `:vertical` pseudo-class
    */

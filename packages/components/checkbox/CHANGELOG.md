@@ -1,5 +1,11 @@
 # @yamada-ui/checkbox
 
+## 0.4.0
+
+### Minor Changes
+
+- [`5545d7fe`](https://github.com/hirotomoyamada/yamada-ui/commit/5545d7febbe0860108961b29a3a9da316692a7c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added props `items`.
+
 ## 0.3.19
 
 ### Patch Changes

@@ -10,6 +10,7 @@ import {
   Box,
   VStack,
   Button,
+  RadioItem,
 } from "@yamada-ui/react"
 import { FC, useState } from "react"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
@@ -264,7 +265,13 @@ export const isInvalid: Story = () => {
   )
 }
 
-export const group: Story = () => {
+export const withGroup: Story = () => {
+  const items: RadioItem[] = [
+    { label: "孫悟空", value: "孫悟空" },
+    { label: "ベジータ", value: "ベジータ" },
+    { label: "フリーザ", value: "フリーザ" },
+  ]
+
   return (
     <>
       <RadioGroup defaultValue="孫悟空">
@@ -278,6 +285,8 @@ export const group: Story = () => {
         <Radio value="ベジータ">ベジータ</Radio>
         <Radio value="フリーザ">フリーザ</Radio>
       </RadioGroup>
+
+      <RadioGroup defaultValue="孫悟空" items={items} />
     </>
   )
 }

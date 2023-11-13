@@ -10,8 +10,22 @@ import {
   useCallbackRef,
   PropGetter,
   DOMAttributes,
+  getValidChildren,
 } from "@yamada-ui/utils"
-import { ChangeEvent, ForwardedRef, forwardRef, Ref, useCallback } from "react"
+import {
+  ChangeEvent,
+  ForwardedRef,
+  forwardRef,
+  ReactElement,
+  Ref,
+  useCallback,
+} from "react"
+import { Checkbox, CheckboxProps } from "./checkbox"
+
+export type CheckboxItem<Y extends string | number = string> =
+  CheckboxProps<Y> & {
+    label?: string
+  }
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
@@ -96,7 +110,14 @@ export type CheckboxGroupProps<Y extends string | number = string> =
   ThemeProps<"Checkbox"> &
     Omit<FlexProps, "onChange"> &
     UseCheckboxGroupProps<Y> &
-    FormControlOptions
+    FormControlOptions & {
+      /**
+       * If provided, generate checkboxes based on items.
+       *
+       * @default '[]'
+       */
+      items?: CheckboxItem<Y>[]
+    }
 
 type CheckboxContext = ThemeProps<"Checkbox"> &
   FormControlOptions & {
@@ -123,6 +144,7 @@ export const CheckboxGroup = forwardRef(
       variant,
       colorScheme,
       children,
+      items = [],
       direction = "column",
       gap,
       ...props
@@ -132,6 +154,17 @@ export const CheckboxGroup = forwardRef(
     const { value, onChange } = useCheckboxGroup<Y>(props)
     const { isRequired, isReadOnly, isDisabled, isInvalid } =
       useFormControl(props)
+
+    const validChildren = getValidChildren(children)
+    let computedChildren: ReactElement[] = []
+
+    if (!validChildren.length && items.length) {
+      computedChildren = items.map(({ label, value, ...props }, i) => (
+        <Checkbox key={i} value={value} {...props}>
+          {label}
+        </Checkbox>
+      ))
+    }
 
     return (
       <CheckboxGroupProvider
@@ -165,7 +198,7 @@ export const CheckboxGroup = forwardRef(
             "isReadOnly",
           ])}
         >
-          {children}
+          {children ?? computedChildren}
         </Flex>
       </CheckboxGroupProvider>
     )

@@ -1,5 +1,11 @@
 # @yamada-ui/scroll-area
 
+## 0.3.16
+
+### Patch Changes
+
+- [#232](https://github.com/hirotomoyamada/yamada-ui/pull/232) [`e2b2f727`](https://github.com/hirotomoyamada/yamada-ui/commit/e2b2f7273d1b6ae0718b8ea72554f2847a6192ae) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `ScrollArea`.
+
 ## 0.3.15
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/pin-input
 
+## 0.3.20
+
+### Patch Changes
+
+- [#232](https://github.com/hirotomoyamada/yamada-ui/pull/232) [`674076bf`](https://github.com/hirotomoyamada/yamada-ui/commit/674076bf1a255ed8d0e2ade8019a1290886fc06d) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `PinInput`.
+
 ## 0.3.19
 
 ### Patch Changes

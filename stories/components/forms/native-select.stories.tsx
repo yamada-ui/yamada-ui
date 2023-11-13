@@ -7,7 +7,7 @@ import {
   NativeOption,
   NativeOptionGroup,
   NativeSelect,
-  UINativeOption,
+  NativeSelectItem,
   VStack,
 } from "@yamada-ui/react"
 import { useState } from "react"
@@ -23,11 +23,11 @@ const meta: Meta<typeof NativeSelect> = {
 export default meta
 
 export const basic: Story = () => {
-  const options: UINativeOption[] = [
+  const items: NativeSelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
-      value: [
+      items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
@@ -35,7 +35,7 @@ export const basic: Story = () => {
     },
     {
       label: "フリーザ軍",
-      value: [
+      items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
         { label: "リクーム", value: "リクーム" },
@@ -71,7 +71,7 @@ export const basic: Story = () => {
         </NativeOptionGroup>
       </NativeSelect>
 
-      <NativeSelect placeholder="キャラクターを選択" options={options} />
+      <NativeSelect placeholder="キャラクターを選択" items={items} />
     </>
   )
 }

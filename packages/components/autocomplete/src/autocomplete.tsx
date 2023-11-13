@@ -80,7 +80,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       getPopoverProps,
       getContainerProps,
       getFieldProps,
-      createOption,
+      allowCreate,
       isEmpty,
       inputValue,
       computedChildren,
@@ -105,7 +105,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
             ...rest,
             formControlProps,
             inputValue,
-            createOption,
+            allowCreate,
             isEmpty,
             styles,
           }}
@@ -127,17 +127,13 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
 
               {!isEmpty ? (
                 <AutocompleteList {...listProps}>
-                  {createOption ? (
-                    <AutocompleteCreate />
-                  ) : (
-                    <AutocompleteEmpty />
-                  )}
+                  {allowCreate ? <AutocompleteCreate /> : <AutocompleteEmpty />}
 
                   {children ?? computedChildren}
                 </AutocompleteList>
               ) : (
                 <AutocompleteList {...listProps}>
-                  {createOption && inputValue ? (
+                  {allowCreate && inputValue ? (
                     <AutocompleteCreate />
                   ) : (
                     <AutocompleteEmpty />

@@ -1,5 +1,12 @@
 # @yamada-ui/table
 
+## 0.4.17
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/select@0.5.3
+
 ## 0.4.16
 
 ### Patch Changes

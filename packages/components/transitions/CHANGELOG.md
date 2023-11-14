@@ -1,5 +1,11 @@
 # @yamada-ui/transitions
 
+## 0.3.18
+
+### Patch Changes
+
+- [`2402e45f`](https://github.com/hirotomoyamada/yamada-ui/commit/2402e45f1267928c792f37259153e4d78d0e33cd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `zIndex` to `Slide` component style.
+
 ## 0.3.17
 
 ### Patch Changes

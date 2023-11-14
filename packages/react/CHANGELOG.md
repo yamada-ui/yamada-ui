@@ -1,5 +1,19 @@
 # @yamada-ui/react
 
+## 0.8.21
+
+### Patch Changes
+
+- Updated dependencies [[`2402e45f`](https://github.com/hirotomoyamada/yamada-ui/commit/2402e45f1267928c792f37259153e4d78d0e33cd)]:
+  - @yamada-ui/transitions@0.3.18
+  - @yamada-ui/accordion@0.4.2
+  - @yamada-ui/menu@0.3.22
+  - @yamada-ui/modal@0.4.19
+  - @yamada-ui/popover@0.3.22
+  - @yamada-ui/tooltip@0.4.15
+  - @yamada-ui/autocomplete@0.5.3
+  - @yamada-ui/select@0.5.3
+
 ## 0.8.20
 
 ### Patch Changes

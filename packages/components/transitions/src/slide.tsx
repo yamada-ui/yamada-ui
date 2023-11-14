@@ -111,6 +111,7 @@ export const Slide = forwardRef<SlideProps, "div">(
 
     const css: CSSUIObject = {
       position: "fixed",
+      zIndex: "jeice",
       ...__css,
       ...position,
     }

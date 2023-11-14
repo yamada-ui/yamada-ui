@@ -1,12 +1,30 @@
 ---
-title: Fontawesome
-description: This page is currently being created.
+title: Fontawesome Icon
+description: "`@yamada-ui/fontawesome` provides convenient components for using `Font Awesome`."
 package_name: "@yamada-ui/fontawesome"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+<PackageManagers packageNameOrCommand="@yamada-ui/fontawesome" />
+
+:::note status=warning
+`@yamada-ui/fontawesome` is not included in `@yamada-ui/react`, so it needs to be installed separately.
+:::
+
+```ts
+import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
+```
+
+## Usage
+
+```ts
+import { faPoo } from "@fortawesome/free-solid-svg-icons"
+```
+
+```tsx
+<FontAwesomeIcon icon={faPoo} />
+```

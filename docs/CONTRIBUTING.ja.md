@@ -48,7 +48,7 @@ cd yamada-docs
 - `ci`: 継続的インテグレーションの設定に関する変更をした場合（例：github actions、CIシステムなど）
 - `chore`: 上記のいずれにも当てはまらないリポジトリへの変更をした場合
 
-詳しい仕様については、https://www.conventionalcommits.org を確認するか、[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)を確認してください。
+詳しい仕様については、[Conventional Commits](https://www.conventionalcommits.org)を確認するか、[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)を確認してください。
 
 ### プルリクエストの手順
 

@@ -1,5 +1,11 @@
 # @yamada-ui/switch
 
+## 0.3.22
+
+### Patch Changes
+
+- [#247](https://github.com/hirotomoyamada/yamada-ui/pull/247) [`bf765a00`](https://github.com/hirotomoyamada/yamada-ui/commit/bf765a00f234f89c4f08f312e942d9a781a6b6b7) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Swicth`.
+
 ## 0.3.21
 
 ### Patch Changes

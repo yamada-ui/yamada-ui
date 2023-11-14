@@ -1,5 +1,18 @@
 # @yamada-ui/react
 
+## 0.8.20
+
+### Patch Changes
+
+- Updated dependencies [[`a3dfcb7b`](https://github.com/hirotomoyamada/yamada-ui/commit/a3dfcb7befa31608a00e7928ee51e219810d23bd), [`660798a6`](https://github.com/hirotomoyamada/yamada-ui/commit/660798a63fcbb0fe86a2c218ae5a3175e5e0b5ec), [`de329da2`](https://github.com/hirotomoyamada/yamada-ui/commit/de329da27afa52fe5b03c79b7f506dcb99c4279b), [`bf765a00`](https://github.com/hirotomoyamada/yamada-ui/commit/bf765a00f234f89c4f08f312e942d9a781a6b6b7)]:
+  - @yamada-ui/theme@0.11.12
+  - @yamada-ui/slider@0.4.12
+  - @yamada-ui/stepper@0.3.17
+  - @yamada-ui/switch@0.3.22
+  - @yamada-ui/providers@0.9.8
+  - @yamada-ui/theme-tools@0.2.21
+  - @yamada-ui/use-media-query@0.2.23
+
 ## 0.8.19
 
 ### Patch Changes

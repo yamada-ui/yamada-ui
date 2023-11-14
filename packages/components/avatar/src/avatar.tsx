@@ -7,7 +7,7 @@ import {
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import { ImageProps, useImage } from "@yamada-ui/image"
+import { ImageProps, useImage, UseImageProps } from "@yamada-ui/image"
 import { createContext, cx, dataAttr, handlerAll } from "@yamada-ui/utils"
 import {
   cloneElement,
@@ -57,10 +57,6 @@ type AvatarOptions = {
    */
   icon?: ReactElement
   /**
-   * Function called when image failed to load.
-   */
-  onError?: () => void
-  /**
    * Function to get the initials to display.
    */
   format?: (name: string) => string
@@ -72,7 +68,8 @@ type AvatarOptions = {
 
 export type AvatarProps = HTMLUIProps<"span"> &
   ThemeProps<"Avatar"> &
-  AvatarOptions
+  AvatarOptions &
+  Pick<UseImageProps, "onLoad" | "onError">
 
 export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Avatar", props)
@@ -93,7 +90,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const css: CSSUIObject = {
     position: "relative",
@@ -112,7 +109,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
       <ui.span
         ref={ref}
         className={cx("ui-avatar", className)}
-        data-loading={dataAttr(isLoading)}
+        data-loaded={dataAttr(isLoaded)}
         borderRadius={borderRadius}
         rounded={rounded}
         __css={css}
@@ -124,7 +121,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
           loading={loading}
           borderRadius={borderRadius}
           rounded={rounded}
-          onLoad={handlerAll(onLoad, () => setIsLoading(false))}
+          onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
           onError={onError}
           format={format}
           name={name}
@@ -155,7 +152,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   crossOrigin,
   referrerPolicy,
 }) => {
-  const status = useImage({ src, onError, crossOrigin, ignoreFallback })
+  const status = useImage({ src, onLoad, onError, crossOrigin, ignoreFallback })
 
   const isLoaded = status === "loaded"
 
@@ -181,7 +178,6 @@ const AvatarImage: FC<AvatarImageProps> = ({
       srcSet={srcSet}
       alt={name}
       loading={loading}
-      onLoad={onLoad}
       referrerPolicy={referrerPolicy}
       borderRadius={borderRadius}
       rounded={rounded}

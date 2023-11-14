@@ -1,16 +1,17 @@
-import { ui, forwardRef, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef, HTMLUIProps, OmitProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { motion, HTMLMotionProps } from "framer-motion"
+import { ReactHTML } from "react"
 
 type MotionOptions = {
   as?: keyof typeof motion
 }
 
-export type MotionProps = Omit<
-  HTMLUIProps<"div">,
-  "as" | "style" | "onDrag" | "onDragStart" | "onDragEnd"
+export type MotionProps<Y extends keyof ReactHTML = "div"> = OmitProps<
+  HTMLUIProps<Y>,
+  keyof HTMLMotionProps<Y>
 > &
-  HTMLMotionProps<"div"> &
+  HTMLMotionProps<Y> &
   MotionOptions
 
 export const Motion = forwardRef<MotionProps, "div", false>(

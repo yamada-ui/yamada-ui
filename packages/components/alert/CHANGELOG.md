@@ -1,5 +1,14 @@
 # @yamada-ui/alert
 
+## 0.5.11
+
+### Patch Changes
+
+- Updated dependencies [[`03be9bf8`](https://github.com/hirotomoyamada/yamada-ui/commit/03be9bf8dc949821baea727f69ee832055426392)]:
+  - @yamada-ui/core@0.12.6
+  - @yamada-ui/icon@0.3.16
+  - @yamada-ui/loading@0.5.3
+
 ## 0.5.10
 
 ### Patch Changes

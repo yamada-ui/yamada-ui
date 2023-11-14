@@ -5,6 +5,8 @@ export const Indicator: ComponentStyle = {
   baseStyle: ({ withBorder }) => ({
     zIndex: "kurillin",
     rounded: "full",
+    w: "fit-content",
+    h: "fit-content",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

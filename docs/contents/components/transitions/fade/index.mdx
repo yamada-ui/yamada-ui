@@ -1,12 +1,74 @@
 ---
 title: Fade
-description: This page is currently being created.
+description: "`Fade` is a component that gradually shows or hides an element."
 package_name: "@yamada-ui/transitions"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Fade } from "@yamada-ui/react"
+```
+
+## Usage
+
+To control the visibility, set `isOpen`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Fade isOpen={isOpen}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Fade>
+  </>
+)
+```
+
+### Change the Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Fade isOpen={isOpen} duration={0.4}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Fade>
+  </>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Fade isOpen={isOpen} unmountOnExit>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Fade>
+  </>
+)
+```

@@ -1,12 +1,116 @@
 ---
 title: Collapse
-description: This page is currently being created.
+description: "`Collapse` is a component that allows you to expand or collapse an element for display."
 package_name: "@yamada-ui/transitions"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Collapse } from "@yamada-ui/react"
+```
+
+## Usage
+
+To control visibility, set `isOpen`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Collapse isOpen={isOpen}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+  </>
+)
+```
+
+### Change Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Collapse isOpen={isOpen} duration={0.7}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+  </>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Collapse isOpen={isOpen} unmountOnExit>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+  </>
+)
+```
+
+### Disable Opacity Animation
+
+To disable opacity animation, set `animationOpacity` to `false`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Collapse isOpen={isOpen} animationOpacity={false}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+  </>
+)
+```
+
+### Add Initial Height
+
+To add an initial height, set a string or number to `startingHeight`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Collapse isOpen={isOpen} startingHeight={36}>
+      <Box color="purple.500" mt="md">
+        私の戦闘力は530000です。
+        <br />
+        ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Box>
+    </Collapse>
+  </>
+)
+```

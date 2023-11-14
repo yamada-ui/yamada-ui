@@ -1,12 +1,113 @@
 ---
 title: SlideFide
-description: This page is currently being created.
+description: "`SlideFide` is a component that gradually shows or hides an element while moving it from a specified position."
 package_name: "@yamada-ui/transitions"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { SlideFide } from "@yamada-ui/react"
+```
+
+## Usage
+
+To control the visibility, set `isOpen`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <SlideFade isOpen={isOpen}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </SlideFade>
+  </>
+)
+```
+
+### Change Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <SlideFade isOpen={isOpen} duration={0.4}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </SlideFade>
+  </>
+)
+```
+
+### Change Position
+
+To change the position where the element will show or hide, specify a string or number for `offsetX` and `offsetY`.
+
+- `offsetX`: Specifies the horizontal direction. By default, it is `0`.
+- `offsetY`: Specifies the vertical direction. By default, it is `8`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <SlideFade isOpen={isOpen} offsetX={20} offsetY={0}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </SlideFade>
+  </>
+)
+```
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <SlideFade isOpen={isOpen} offsetY={-20}>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </SlideFade>
+  </>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx functional=true
+const { isOpen, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <SlideFade isOpen={isOpen} unmountOnExit>
+      <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </SlideFade>
+  </>
+)
+```

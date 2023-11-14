@@ -656,7 +656,7 @@ export const SliderTrack = forwardRef<SliderTrackProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-slider-track", className)}
+        className={cx("ui-slider__track", className)}
         __css={css}
         {...getTrackProps(
           {
@@ -689,7 +689,7 @@ export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-slider-filledTrack", className)}
+        className={cx("ui-slider__track-filled", className)}
         __css={css}
         {...getFilledTrackProps(
           {
@@ -719,7 +719,7 @@ export const SliderMark = forwardRef<SliderMarkProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-slider-mark", className)}
+        className={cx("ui-slider__mark", className)}
         __css={css}
         {...getMarkProps(rest, ref)}
       />
@@ -738,7 +738,7 @@ export const SliderThumb = forwardRef<SliderThumbProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-slider-thumb", className)}
+        className={cx("ui-slider__thumb", className)}
         __css={css}
         {...getThumbProps(
           {

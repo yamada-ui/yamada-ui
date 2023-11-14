@@ -116,13 +116,13 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       ])}
     >
       <ui.input
-        className="ui-switch-input"
+        className={cx("ui-switch__input", className)}
         {...getInputProps(inputProps, ref)}
       />
 
       {cloneIcon ?? (
         <ui.span
-          className="ui-switch-track"
+          className={cx("ui-switch__track", className)}
           __css={{
             boxSizing: "content-box",
             display: "inline-flex",
@@ -135,7 +135,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         >
           <ui.span
             as={motion.span}
-            className="ui-switch-thumb"
+            className={cx("ui-switch__thumb", className)}
             data-checked={dataAttr(isChecked)}
             layout
             transition={transition}
@@ -146,7 +146,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
 
       {children ? (
         <ui.span
-          className="ui-switch-label"
+          className={cx("ui-switch__label", className)}
           __css={{ ...styles.label }}
           {...getLabelProps(labelProps)}
         >

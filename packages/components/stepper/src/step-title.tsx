@@ -15,7 +15,7 @@ export const StepTitle = forwardRef<StepTitleProps, "h3">(
     return (
       <ui.h3
         ref={ref}
-        className={cx("ui-step-title", className)}
+        className={cx("ui-step__title", className)}
         data-status={status}
         __css={css}
         {...rest}

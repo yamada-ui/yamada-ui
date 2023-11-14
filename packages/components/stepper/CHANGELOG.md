@@ -1,5 +1,11 @@
 # @yamada-ui/stepper
 
+## 0.3.17
+
+### Patch Changes
+
+- [#247](https://github.com/hirotomoyamada/yamada-ui/pull/247) [`de329da2`](https://github.com/hirotomoyamada/yamada-ui/commit/de329da27afa52fe5b03c79b7f506dcb99c4279b) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Stepper`.
+
 ## 0.3.16
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/slider
 
+## 0.4.12
+
+### Patch Changes
+
+- [#247](https://github.com/hirotomoyamada/yamada-ui/pull/247) [`660798a6`](https://github.com/hirotomoyamada/yamada-ui/commit/660798a63fcbb0fe86a2c218ae5a3175e5e0b5ec) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Slider`.
+
 ## 0.4.11
 
 ### Patch Changes

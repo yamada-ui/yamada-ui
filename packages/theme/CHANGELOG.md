@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.11.12
+
+### Patch Changes
+
+- [`a3dfcb7b`](https://github.com/hirotomoyamada/yamada-ui/commit/a3dfcb7befa31608a00e7928ee51e219810d23bd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added width and height `fit-content` in `Indicator`.
+
 ## 0.11.11
 
 ### Patch Changes

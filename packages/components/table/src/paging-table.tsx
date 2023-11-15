@@ -207,7 +207,7 @@ export const PagingTable = forwardRef(
             {...containerProps}
           >
             <ui.table
-              className="ui-paging-table"
+              className={cx("ui-paging-table", className)}
               __css={css}
               {...getTableProps({}, ref)}
             >
@@ -234,7 +234,7 @@ export const PagingTable = forwardRef(
               )
             ) : withPagingControl ? (
               <ui.div
-                className="ui-paging-table__control"
+                className={cx("ui-paging-table__control", className)}
                 __css={{ display: "grid", ...styles.pagingControl }}
                 {...pagingControlProps}
               >

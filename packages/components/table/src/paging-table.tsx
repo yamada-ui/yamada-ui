@@ -197,7 +197,7 @@ export const PagingTable = forwardRef(
       <TableStyleProvider value={styles}>
         <TableProvider value={{ ...rest } as TableContext}>
           <ui.div
-            className={cx("ui-paging-table-container", className)}
+            className={cx("ui-paging-table__container", className)}
             __css={{
               w: "100%",
               display: "flex",
@@ -234,7 +234,7 @@ export const PagingTable = forwardRef(
               )
             ) : withPagingControl ? (
               <ui.div
-                className="ui-paging-table-control"
+                className="ui-paging-table__control"
                 __css={{ display: "grid", ...styles.pagingControl }}
                 {...pagingControlProps}
               >

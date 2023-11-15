@@ -88,7 +88,7 @@ const SortIcon: FC<SortIconProps> = ({ isSorted, ...rest }) => {
   if (!isSorted) {
     return (
       <Icon
-        className="ui-table-sort-icon"
+        className="ui-table__sort-icon"
         focusable="false"
         aria-hidden
         viewBox="0 0 24 24"

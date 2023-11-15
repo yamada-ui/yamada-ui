@@ -28,7 +28,7 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-tabs-panel", className)}
+        className={cx("ui-tabs__panel", className)}
         role="tabpanel"
         __css={css}
         {...rest}

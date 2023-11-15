@@ -59,7 +59,7 @@ export const Tab = forwardRef<TabProps, "button">(
 
     return (
       <ui.button
-        className={cx("ui-tabs-tab", className)}
+        className={cx("ui-tabs__tab", className)}
         __css={css}
         role="tab"
         {...props}

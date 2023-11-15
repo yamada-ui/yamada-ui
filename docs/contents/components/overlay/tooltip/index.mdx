@@ -1,12 +1,170 @@
 ---
 title: Tooltip
-description: This page is currently being created.
+description: "`Tooltip` is a component that displays brief information, such as supplementary details about an element."
 package_name: "@yamada-ui/tooltip"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Tooltip } from "@yamada-ui/react"
+```
+
+## Usage
+
+To control the visibility, set `isOpen`.
+
+:::note status=warning
+If the `children` of `Tooltip` is a functional component, please use `forwardRef` in the functional component to receive the `ref` from `Tooltip`.
+:::
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ">
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```
+
+### Change the Display Position
+
+To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
+
+```tsx
+<VStack>
+  <Tooltip label="へっ！きたねぇ花火だ" placement="top">
+    <Text w="fit-content">Open top Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="left">
+    <Text w="fit-content">Open left Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom">
+    <Text w="fit-content">Open bottom Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="right">
+    <Text w="fit-content">Open right Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="top-start">
+    <Text w="fit-content">Open top start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="top-end">
+    <Text w="fit-content">Open top end Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="left-start">
+    <Text w="fit-content">Open left start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="left-end">
+    <Text w="fit-content">Open left end Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom-start">
+    <Text w="fit-content">Open bottom start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom-end">
+    <Text w="fit-content">Open bottom end Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="right-start">
+    <Text w="fit-content">Open right start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="right-end">
+    <Text w="fit-content">Open right end Tooltip</Text>
+  </Tooltip>
+</VStack>
+```
+
+### Change the Animation
+
+To change the animation for showing or hiding, set `animation` to values like `top` or `left`. By default, `scale` is set.
+
+```tsx
+<VStack>
+  <Tooltip label="へっ！きたねぇ花火だ" animation="scale">
+    <Text w="fit-content">Open scale Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="top">
+    <Text w="fit-content">Open top Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="left">
+    <Text w="fit-content">Open left Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="bottom">
+    <Text w="fit-content">Open bottom Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="right">
+    <Text w="fit-content">Open right Hover</Text>
+  </Tooltip>
+</VStack>
+```
+
+### Change the Duration
+
+To change the duration, set `duration` to a number (seconds).
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" duration={0.7}>
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```
+
+### Change the Offset
+
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position using `gutter` or `offset`.
+
+`gutter` allows you to set the difference from a simple element, and `offset` allows you to set `[horizontal axis, vertical axis]`.
+
+```tsx
+<VStack>
+  <Tooltip label="へっ！きたねぇ花火だ" gutter={32}>
+    <Text w="fit-content">Please Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" offset={[16, 16]}>
+    <Text w="fit-content">Please Hover</Text>
+  </Tooltip>
+</VStack>
+```
+
+### Add a Delay
+
+To change the duration, set `duration` to a number (milliseconds).
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" placement="top" openDelay={500} closeDelay={500}>
+  <Text w="fit-content">Delay Open and Close 500ms</Text>
+</Tooltip>
+```
+
+### Disable
+
+To disable the tooltip, set `isDisabled` to `true`.
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" isDisabled>
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```
+
+### Always Visible
+
+To always display the tooltip, set `isOpen` to `true`.
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" isOpen>
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```

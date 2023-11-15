@@ -1,12 +1,80 @@
 ---
 title: Progress
-description: This page is currently being created.
-package_name: "@yamada-ui/progress"
+description: "`Progress` is a component for visually indicating progress."
+package_name: "@yamada-ui/feedback"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Progress } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Progress value={18} />
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Progress colorScheme="green" value={19} size="xs" />
+  <Progress colorScheme="pink" value={93} size="sm" />
+  <Progress colorScheme="purple" value={8} size="md" />
+  <Progress colorScheme="red" value={18} size="lg" />
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx
+<Progress colorScheme="purple" value={18} />
+```
+
+### Change Color
+
+If you want to change the color without using a color scheme, specify the color in `filledTrackColor`.
+
+```tsx
+<Progress filledTrackColor="green.500" value={18} />
+```
+
+### Customize Style
+
+For example, here is how to round the corners of the bar.
+
+```tsx
+<VStack>
+  <Progress colorScheme="orange" value={10} borderRadius="sm" />
+  <Progress colorScheme="yellow" value={31} rounded="md" />
+</VStack>
+```
+
+### Apply Stripes
+
+By setting `hasStripe` to `true`, you can apply stripes to the background color.
+
+```tsx
+<Progress hasStripe value={19} />
+```
+
+### Apply Animation to Stripes
+
+If you want to add animation to the background color stripes, set `isStripeAnimation` to `true`.
+
+```tsx
+<Progress hasStripe isStripeAnimation value={20} />
+```
+
+### Apply Animation
+
+Setting `isAnimation` to `true` will apply animation.
+
+```tsx
+<Progress isAnimation />
+```

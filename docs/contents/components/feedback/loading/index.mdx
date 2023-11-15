@@ -1,12 +1,48 @@
 ---
 title: Loading
-description: This page is currently being created.
-package_name: "@yamada-ui/loading"
+description: "`Loading` is a component displayed during waiting times such as while data is loading."
+package_name: "@yamada-ui/react"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Loading } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Loading />
+```
+
+### Change Variants
+
+```tsx
+<Wrap gap="md">
+  <Loading variant="oval" size="3xl" color="red.500" />
+  <Loading variant="grid" size="3xl" color="orange.500" />
+  <Loading variant="audio" size="3xl" color="yellow.500" />
+  <Loading variant="dots" size="3xl" color="green.500" />
+  <Loading variant="puff" size="3xl" color="teal.500" />
+  <Loading variant="rings" size="3xl" color="blue.500" />
+  <Loading variant="circles" size="3xl" color="cyan.500" />
+</Wrap>
+```
+
+### Change Size
+
+```tsx
+<Wrap gap="md">
+  <Loading variant="oval" size="lg" color="red.500" />
+  <Loading variant="grid" size="xl" color="orange.500" />
+  <Loading variant="audio" size="2xl" color="yellow.500" />
+  <Loading variant="dots" size="3xl" color="green.500" />
+  <Loading variant="puff" size="4xl" color="teal.500" />
+  <Loading variant="rings" size="5xl" color="blue.500" />
+  <Loading variant="circles" size="6xl" color="cyan.500" />
+</Wrap>
+```

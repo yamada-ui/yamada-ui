@@ -1,12 +1,48 @@
 ---
 title: Loading
-description: このページは現在作成中です。
+description: "`Loading`は、データの読み込み中などの待機時間に表示するコンポーネントです。"
 package_name: "@yamada-ui/loading"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Loading } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<Loading />
+```
+
+### バリアントを変更する
+
+```tsx
+<Wrap gap="md">
+  <Loading variant="oval" size="3xl" color="red.500" />
+  <Loading variant="grid" size="3xl" color="orange.500" />
+  <Loading variant="audio" size="3xl" color="yellow.500" />
+  <Loading variant="dots" size="3xl" color="green.500" />
+  <Loading variant="puff" size="3xl" color="teal.500" />
+  <Loading variant="rings" size="3xl" color="blue.500" />
+  <Loading variant="circles" size="3xl" color="cyan.500" />
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx
+<Wrap gap="md">
+  <Loading variant="oval" size="lg" color="red.500" />
+  <Loading variant="grid" size="xl" color="orange.500" />
+  <Loading variant="audio" size="2xl" color="yellow.500" />
+  <Loading variant="dots" size="3xl" color="green.500" />
+  <Loading variant="puff" size="4xl" color="teal.500" />
+  <Loading variant="rings" size="5xl" color="blue.500" />
+  <Loading variant="circles" size="6xl" color="cyan.500" />
+</Wrap>
+```

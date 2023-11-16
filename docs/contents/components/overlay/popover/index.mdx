@@ -1,12 +1,432 @@
 ---
 title: Popover
-description: This page is currently being created.
+description: "`Popover` is a component that floats around an element to display information."
 package_name: "@yamada-ui/popover"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverAnchor,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+} from "@yamada-ui/react"
+```
+
+- `Popover`: A component to control the state of the popover.
+- `PopoverTrigger`: A wrapper component to control the reference element.
+- `PopoverAnchor`: A wrapper component used to reference an element other than the `PopoverTrigger` element.
+- `PopoverCloseButton`: A component for the button that closes the popover.
+- `PopoverContent`: A component to display the content of the popover.
+- `PopoverHeader`: A component to display the header of the popover.
+- `PopoverBody`: A component to display the main content of the popover.
+- `PopoverFooter`: A component to display the footer of the popover.
+
+:::note
+`PopoverCloseButton` can be omitted.
+:::
+
+## Usage
+
+Set the element that the popover will reference (such as coordinates) in `PopoverTrigger`. Set the content in `PopoverContent`.
+
+:::note status=warning
+If the `children` of `PopoverTrigger` or `PopoverAnchor` are functional components, please use `forwardRef` in the functional component to receive the `ref` from `PopoverTrigger` or `PopoverAnchor`.
+:::
+
+```tsx
+<Popover>
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+
+  <PopoverContent>
+    <PopoverHeader>ベジータ!</PopoverHeader>
+    <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    <PopoverFooter>第280話</PopoverFooter>
+  </PopoverContent>
+</Popover>
+```
+
+### Displaying by referencing a different element
+
+If you want to reference (such as coordinates) a different element than the `PopoverTrigger` element, use `PopoverAnchor`.
+
+```tsx
+<HStack>
+  <Popover closeOnBlur={false}>
+    <PopoverAnchor>
+      <Text>Here display Popover</Text>
+    </PopoverAnchor>
+
+    <PopoverTrigger>
+      <Button>Open Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+      <PopoverFooter>第280話</PopoverFooter>
+    </PopoverContent>
+  </Popover>
+</HStack>
+```
+
+### Changing the animation
+
+To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
+
+```tsx
+<Wrap gap="md">
+  <Popover animation="scale">
+    <PopoverTrigger>
+      <Button>Open scale Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover animation="top">
+    <PopoverTrigger>
+      <Button>Open top Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover animation="left">
+    <PopoverTrigger>
+      <Button>Open left Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover animation="bottom">
+    <PopoverTrigger>
+      <Button>Open bottom Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover animation="right">
+    <PopoverTrigger>
+      <Button>Open right Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+</Wrap>
+```
+
+### Changing the display position
+
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+
+```tsx
+<Wrap gap="md">
+  <Popover placement="top">
+    <PopoverTrigger>
+      <Button>Open top center Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="top-start">
+    <PopoverTrigger>
+      <Button>Open top start Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="top-end">
+    <PopoverTrigger>
+      <Button>Open top end Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="left">
+    <PopoverTrigger>
+      <Button>Open left center Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="left-start">
+    <PopoverTrigger>
+      <Button>Open left start Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="left-end">
+    <PopoverTrigger>
+      <Button>Open left end Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="bottom">
+    <PopoverTrigger>
+      <Button>Open bottom center Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="bottom-start">
+    <PopoverTrigger>
+      <Button>Open bottom start Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="bottom-end">
+    <PopoverTrigger>
+      <Button>Open bottom end Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="right">
+    <PopoverTrigger>
+      <Button>Open right center Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="right-start">
+    <PopoverTrigger>
+      <Button>Open right start Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover placement="right-end">
+    <PopoverTrigger>
+      <Button>Open right end Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+</Wrap>
+```
+
+### Changing the duration
+
+To change the duration, set `duration` to a numerical value (seconds).
+
+```tsx
+<Popover duration={0.7}>
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+
+  <PopoverContent>
+    <PopoverHeader>ベジータ!</PopoverHeader>
+    <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
+### Changing the offset
+
+Depending on the size of the element or the situation, you may want to change the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
+
+`gutter` allows you to set a simple difference with the element, and `offset` allows you to set `[horizontal axis, vertical axis]`.
+
+```tsx
+<HStack>
+  <Popover gutter={32}>
+    <PopoverTrigger>
+      <Button>Open Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+
+  <Popover offset={[16, 16]}>
+    <PopoverTrigger>
+      <Button>Open Popover</Button>
+    </PopoverTrigger>
+
+    <PopoverContent>
+      <PopoverHeader>ベジータ!</PopoverHeader>
+      <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+    </PopoverContent>
+  </Popover>
+</HStack>
+```
+
+### Activate on hover
+
+By default, the `PopoverTrigger` element becomes active when clicked. If you want it to become active when hovered, set `trigger` to `hover`.
+
+```tsx
+<Popover trigger="hover">
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+
+  <PopoverContent>
+    <PopoverHeader>ベジータ!</PopoverHeader>
+    <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
+### Delayed rendering
+
+By default, it is rendered in the DOM regardless of being active. In other words, it is rendered even when not visible, but is hidden by style.
+
+If you want to delay rendering until it becomes active, set `isLazy` to `true`.
+
+```tsx
+<Popover isLazy>
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+
+  <PopoverContent>
+    <PopoverHeader>ベジータ!</PopoverHeader>
+    <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
+### Disabling the close button
+
+To disable (hide) the close button, set `closeOnButton` to `true`.
+
+```tsx
+<Popover closeOnButton={false}>
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+
+  <PopoverContent>
+    <PopoverHeader>ベジータ!</PopoverHeader>
+    <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
+### Customizing the close button
+
+If you want to customize the `PopoverCloseButton` by passing `props`, etc., set it without omitting.
+
+```tsx
+<Popover>
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+
+  <PopoverContent>
+    <PopoverCloseButton color="red.500" />
+    <PopoverHeader>ベジータ!</PopoverHeader>
+    <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
+### Controlling
+
+Use hooks to control the opening and closing of the Popover.
+
+```tsx functional=true
+const { isOpen, onClose, onToggle } = useDisclosure()
+
+return (
+  <>
+    <Button mr="md" onClick={onToggle}>
+      Open Popover
+    </Button>
+
+    <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
+      <PopoverTrigger>
+        <Button colorScheme="primary">Target Popover</Button>
+      </PopoverTrigger>
+
+      <PopoverContent>
+        <PopoverHeader>ベジータ!</PopoverHeader>
+        <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+      </PopoverContent>
+    </Popover>
+  </>
+)
+```

@@ -1,12 +1,168 @@
 ---
 title: Tooltip
-description: このページは現在作成中です。
+description: "`Tooltip`は、要素の補足など短い情報を表示するコンポーネントです。"
 package_name: "@yamada-ui/tooltip"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Tooltip } from "@yamada-ui/react"
+```
+
+## 使い方
+
+:::note status=warning
+`Tooltip`の`children`が関数コンポーネントの場合は、関数コンポーネントに`forwardRef`を使用して`Tooptip`からの`ref`を受け取れるようにしてください。
+:::
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ">
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```
+
+### 表示位置を変更する
+
+表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
+
+```tsx
+<VStack>
+  <Tooltip label="へっ！きたねぇ花火だ" placement="top">
+    <Text w="fit-content">Open top Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="left">
+    <Text w="fit-content">Open left Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom">
+    <Text w="fit-content">Open bottom Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="right">
+    <Text w="fit-content">Open right Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="top-start">
+    <Text w="fit-content">Open top start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="top-end">
+    <Text w="fit-content">Open top end Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="left-start">
+    <Text w="fit-content">Open left start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="left-end">
+    <Text w="fit-content">Open left end Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom-start">
+    <Text w="fit-content">Open bottom start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom-end">
+    <Text w="fit-content">Open bottom end Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="right-start">
+    <Text w="fit-content">Open right start Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" placement="right-end">
+    <Text w="fit-content">Open right end Tooltip</Text>
+  </Tooltip>
+</VStack>
+```
+
+### アニメーションを変更する
+
+表示または非表示のアニメーションを変更するには、`animation`に`top`や`left`などを設定します。デフォルトでは、`scale`が設定されています。
+
+```tsx
+<VStack>
+  <Tooltip label="へっ！きたねぇ花火だ" animation="scale">
+    <Text w="fit-content">Open scale Tooltip</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="top">
+    <Text w="fit-content">Open top Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="left">
+    <Text w="fit-content">Open left Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="bottom">
+    <Text w="fit-content">Open bottom Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" animation="right">
+    <Text w="fit-content">Open right Hover</Text>
+  </Tooltip>
+</VStack>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" duration={0.7}>
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```
+
+### オフセットを変更する
+
+要素の大きさやシチュエーションによっては、ツールチップの位置を変更したい場合があります。その場合は、`gutter`または`offset`で位置を調整します。
+
+`gutter`は、単純な要素との差を設定でき、`offset`は、`[横軸, 縦軸]`を設定できます。
+
+```tsx
+<VStack>
+  <Tooltip label="へっ！きたねぇ花火だ" gutter={32}>
+    <Text w="fit-content">Please Hover</Text>
+  </Tooltip>
+
+  <Tooltip label="へっ！きたねぇ花火だ" offset={[16, 16]}>
+    <Text w="fit-content">Please Hover</Text>
+  </Tooltip>
+</VStack>
+```
+
+### 遅延させる
+
+表示または非表示を遅延させたい場合は、`openDelay`または`closeDelay`に数値(ミリ秒)を設定します。
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" placement="top" openDelay={500} closeDelay={500}>
+  <Text w="fit-content">Delay Open and Close 500ms</Text>
+</Tooltip>
+```
+
+### 無効にする
+
+ツールチップを無効にするには、`isDisabled`を`true`に設定します。
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" isDisabled>
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```
+
+### 常に表示する
+
+ツールチップを常に表示するには、`isOpen`を`true`に設定します。
+
+```tsx
+<Tooltip label="へっ！きたねぇ花火だ" isOpen>
+  <Text w="fit-content">Please Hover</Text>
+</Tooltip>
+```

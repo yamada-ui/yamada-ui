@@ -1,12 +1,67 @@
 ---
 title: CircleProgress
-description: このページは現在作成中です。
-package_name: "@yamada-ui/circle-progress"
+description: "`CircleProgress`は、進行状況を円形のプログレスバーで表示するコンポーネントです。"
+package_name: "@yamada-ui/progress"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { CircleProgress, CircleProgressLabel } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<CircleProgress value={19} />
+```
+
+### サイズを変更する
+
+`size`に文字列または数値を設定することで、`boxSize`(`width`, `height`)を変更できます。
+
+```tsx
+<CircleProgress value={18} size={32} />
+```
+
+### 太さを変更する
+
+プログレスバーの太さを変更をしたい場合は、`thickness`に文字列または数値を設定します。
+
+```tsx
+<CircleProgress value={31} thickness={1} />
+```
+
+### ラベルを追加する
+
+```tsx
+<CircleProgress
+  size="120px"
+  min={0}
+  max={1000}
+  value={444}
+  color="purple.500"
+  trackColor="green.300"
+>
+  <CircleProgressLabel color="purple.500">444%</CircleProgressLabel>
+</CircleProgress>
+```
+
+### 角を丸くする
+
+`isRounded`を`true`にすることで、プログレスバーを丸くすることができます。
+
+```tsx
+<CircleProgress value={18} isRounded />
+```
+
+### アニメーションを適応する
+
+`isAnimation`を`true`に設定すると、アニメーションが適応されます。
+
+```tsx
+<CircleProgress value={18} isAnimation />
+```

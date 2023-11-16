@@ -28,10 +28,10 @@ dependencies:
     version: 0.3.16(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/nextjs':
     specifier: 4.1.14
-    version: 4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.21)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.22)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
-    specifier: 0.8.21
-    version: 0.8.21(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 0.8.22
+    version: 0.8.22(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
     specifier: 0.4.17
     version: 0.4.17(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
@@ -2865,7 +2865,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/nextjs@4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.21)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/nextjs@4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.22)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-RXxV7stolj+YIiyZOcJyqhfb/4Tcd1UVAS2vALpN/zbgDFouYHljz/M0+dLnNRoXn35lixdWfPMgdXdbrOXjAw==}
     peerDependencies:
       '@emotion/react': '>=11'
@@ -2876,7 +2876,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.1(@types/react@18.2.37)(react@18.2.0)
       '@yamada-ui/core': 0.12.4(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 0.8.21(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 0.8.22(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 0.3.2(react@18.2.0)
       next: 14.0.2(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -3049,8 +3049,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@0.8.21(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-LOkdgf8Z+oHooRp4JHyEWdBSk/YeUlbzplPoZkEMIe3BFqq2y2cuNyvCWJaz9CK3HtR4HD48odZdyzt0p4FnrA==}
+  /@yamada-ui/react@0.8.22(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-bqo5WYbv04nCsTehHIIvuganf9WzF0HMgEwuuuMPHRL3A+A7yA+EQcPHoN9IMqmPGR63nAS7i8MT82/fV3YEJg==}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -3104,7 +3104,7 @@ packages:
       '@yamada-ui/scroll-area': 0.3.17(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/segmented-control': 0.4.1(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/select': 0.5.3(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/skeleton': 0.3.17(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/skeleton': 0.4.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/slider': 0.4.12(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/stepper': 0.3.17(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/switch': 0.3.22(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
@@ -3218,8 +3218,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/skeleton@0.3.17(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-V8obYDBfntjlMdiqzUDT7uIdL58Uv2chS2xPmbDO2G/5uIZuRY/Ls7fxdpN7ZorWtB94iwArabg+gop0GrQRHw==}
+  /@yamada-ui/skeleton@0.4.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ON2/pfrEemlUfhddMoxmNdG+YxH0O6O3c8mF7qPeDbycZID7cJofwXsFvuxZnSUeXbOgiBw0zWuIbcpQb0ArrA==}
     peerDependencies:
       react: '>=18'
     dependencies:

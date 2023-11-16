@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-description: "`Tooltip` is a component that displays brief information, such as supplementary details about an element."
+description: "`Tooltip` is a component that displays short information, such as supplementary details for an element."
 package_name: "@yamada-ui/tooltip"
 is_tabs: true
 with_description: true
@@ -15,8 +15,6 @@ import { Tooltip } from "@yamada-ui/react"
 
 ## Usage
 
-To control the visibility, set `isOpen`.
-
 :::note status=warning
 If the `children` of `Tooltip` is a functional component, please use `forwardRef` in the functional component to receive the `ref` from `Tooltip`.
 :::
@@ -29,7 +27,7 @@ If the `children` of `Tooltip` is a functional component, please use `forwardRef
 
 ### Change the Display Position
 
-To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
 ```tsx
 <VStack>
@@ -85,7 +83,7 @@ To change the display position, set `placement` to values like `top` or `left-st
 
 ### Change the Animation
 
-To change the animation for showing or hiding, set `animation` to values like `top` or `left`. By default, `scale` is set.
+To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
 
 ```tsx
 <VStack>
@@ -159,7 +157,7 @@ To disable the tooltip, set `isDisabled` to `true`.
 </Tooltip>
 ```
 
-### Always Visible
+### Always Display
 
 To always display the tooltip, set `isOpen` to `true`.
 

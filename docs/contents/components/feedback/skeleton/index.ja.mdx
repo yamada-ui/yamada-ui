@@ -41,7 +41,7 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "@yamada-ui/react"
 
 ### サイズを変更する
 
-要素の横幅や縦幅を変更するには、`boxSize`や`textHeight`を文字列または数値を設定します。
+要素の幅や高さを変更するには、`boxSize`や`textHeight`を文字列または数値を設定します。
 
 ```tsx
 <VStack>
@@ -53,7 +53,7 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "@yamada-ui/react"
 </VStack>
 ```
 
-また、子要素を渡すことで、横幅と縦幅を合わせることができます。
+また、子要素を渡すことで、幅と高さを合わせることができます。
 
 ```tsx
 <Skeleton>
@@ -109,7 +109,7 @@ return (
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} noOfLines={1}>
+    <SkeletonText isLoaded={isLoaded} noOfLines={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
@@ -139,7 +139,7 @@ return (
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} fadeDuration={6} noOfLines={1}>
+    <SkeletonText isLoaded={isLoaded} fadeDuration={6} noOfLines={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>

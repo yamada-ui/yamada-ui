@@ -1,6 +1,6 @@
 ---
 title: Skeleton
-description: "`Skeleton` is a component that functions as a placeholder until content is loaded."
+description: "`Skeleton` is a component that acts as a placeholder until content is loaded."
 package_name: "@yamada-ui/skeleton"
 is_tabs: true
 with_description: true
@@ -41,7 +41,7 @@ You can set the start and end colors of the animation with `startColor` and `end
 
 ### Change Size
 
-To change the width and height of an element, set `boxSize` or `textHeight` as a string or a number.
+To change the width and height of an element, set `boxSize` or `textHeight` as a string or number.
 
 ```tsx
 <VStack>
@@ -76,7 +76,7 @@ By setting a number to `noOfLines`, you can change the number of lines. The defa
 
 ### Change Duration
 
-You can change the duration of the animation by setting `speed` as a string or a number (seconds). The default is set to `0.8`.
+You can change the duration of the animation by setting `speed` as a string or number (seconds). The default is set to `0.8`.
 
 ```tsx
 <VStack>
@@ -109,7 +109,7 @@ return (
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} noOfLines={1}>
+    <SkeletonText isLoaded={isLoaded} noOfLines={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
@@ -120,7 +120,7 @@ return (
 
 ### Change Fade Out Duration
 
-To change the duration of the placeholder's fade out, set `fadeDuration` as a number (seconds). By default, `0.4` is set.
+To change the duration of the placeholder fade out, set `fadeDuration` as a number (seconds). By default, `0.4` is set.
 
 ```tsx functional=true
 const [isLoaded, { toggle }] = useBoolean()
@@ -139,7 +139,7 @@ return (
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} fadeDuration={6} noOfLines={1}>
+    <SkeletonText isLoaded={isLoaded} fadeDuration={6} noOfLines={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>

@@ -1,5 +1,11 @@
 # @yamada-ui/skeleton
 
+## 0.4.0
+
+### Minor Changes
+
+- [`26f3b574`](https://github.com/hirotomoyamada/yamada-ui/commit/26f3b574ba4556990d11ef9b44141cfb0196ad7e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added child rendering and `fitContent` prop.
+
 ## 0.3.17
 
 ### Patch Changes

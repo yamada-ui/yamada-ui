@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-description: "`Tooltip` is a component that displays short information, such as supplementary details for an element."
+description: "`Tooltip` is a component that displays short information such as supplementary details for an element."
 package_name: "@yamada-ui/tooltip"
 is_tabs: true
 with_description: true
@@ -25,7 +25,7 @@ If the `children` of `Tooltip` is a functional component, please use `forwardRef
 </Tooltip>
 ```
 
-### Change the Display Position
+### Change the display position
 
 To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
@@ -81,7 +81,7 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 </VStack>
 ```
 
-### Change the Animation
+### Change the animation
 
 To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
 
@@ -109,7 +109,7 @@ To change the show or hide animation, set `animation` to `top`, `left`, etc. By 
 </VStack>
 ```
 
-### Change the Duration
+### Change the duration
 
 To change the duration, set `duration` to a number (seconds).
 
@@ -119,11 +119,11 @@ To change the duration, set `duration` to a number (seconds).
 </Tooltip>
 ```
 
-### Change the Offset
+### Change the offset
 
-Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position using `gutter` or `offset`.
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
 
-`gutter` allows you to set the difference from a simple element, and `offset` allows you to set `[horizontal axis, vertical axis]`.
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal axis, vertical axis]`.
 
 ```tsx
 <VStack>
@@ -137,9 +137,9 @@ Depending on the size of the element or the situation, you may want to adjust th
 </VStack>
 ```
 
-### Add a Delay
+### Delay
 
-To change the duration, set `duration` to a number (milliseconds).
+If you want to delay the display or hiding, set `openDelay` or `closeDelay` to a number (milliseconds).
 
 ```tsx
 <Tooltip label="へっ！きたねぇ花火だ" placement="top" openDelay={500} closeDelay={500}>
@@ -157,7 +157,7 @@ To disable the tooltip, set `isDisabled` to `true`.
 </Tooltip>
 ```
 
-### Always Display
+### Always display
 
 To always display the tooltip, set `isOpen` to `true`.
 

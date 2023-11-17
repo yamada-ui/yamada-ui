@@ -3,6 +3,7 @@ import {
   faPlus,
   faPoo,
   faBars,
+  faCheck,
   faArrowUpRightFromSquare,
   faEdit,
   faCaretRight,
@@ -26,7 +27,7 @@ import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { PrismTheme } from "prism-react-renderer"
 import React, { FC, PropsWithChildren, useState } from "react"
-import { FaRobot } from "react-icons/fa"
+import { FaRobot, FaCheckCircle } from "react-icons/fa"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
@@ -70,6 +71,7 @@ const scope = {
   faPoo,
   faMinus,
   faPlus,
+  faCheck,
   faCaretRight,
   faChevronDown,
   faBars,
@@ -77,6 +79,7 @@ const scope = {
   faEdit,
   // React Icons
   FaRobot,
+  FaCheckCircle,
   // Utils
   wait,
 }

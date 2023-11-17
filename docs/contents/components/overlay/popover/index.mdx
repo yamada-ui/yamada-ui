@@ -40,7 +40,7 @@ import {
 Set the element that the popover will reference (such as coordinates) in `PopoverTrigger`. Set the content in `PopoverContent`.
 
 :::note status=warning
-If the `children` of `PopoverTrigger` or `PopoverAnchor` are functional components, please use `forwardRef` in the functional component to receive the `ref` from `PopoverTrigger` or `PopoverAnchor`.
+If the `children` of `PopoverTrigger` or `PopoverAnchor` are function components, please use `forwardRef` in the function component to receive the `ref` from `PopoverTrigger` or `PopoverAnchor`.
 :::
 
 ```tsx
@@ -57,7 +57,29 @@ If the `children` of `PopoverTrigger` or `PopoverAnchor` are functional componen
 </Popover>
 ```
 
-### Displaying based on a different element
+### Accessing Internal State
+
+The `children` are provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
+
+```tsx
+<Menu>
+  {({ isOpen }) => (
+    <>
+      <PopoverTrigger>
+        <Button>{isOpen ? "Close" : "Open"} Popover</Button>
+      </PopoverTrigger>
+
+      <PopoverContent>
+        <PopoverHeader>ベジータ!</PopoverHeader>
+        <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+        <PopoverFooter>第280話</PopoverFooter>
+      </PopoverContent>
+    </>
+  )}
+</Menu>
+```
+
+### Displaying Based on a Different Element
 
 If you want to reference (such as coordinates) a different element than the one in `PopoverTrigger`, use `PopoverAnchor`.
 
@@ -81,9 +103,9 @@ If you want to reference (such as coordinates) a different element than the one 
 </HStack>
 ```
 
-### Changing the animation
+### Changing the Animation
 
-To change the animation for showing or hiding, set `animation` to `top`, `left`, etc. By default, `scale` is set.
+To change the show/hide animation, set `animation` to values like `top` or `left`. By default, `scale` is set.
 
 ```tsx
 <Wrap gap="md">
@@ -144,9 +166,9 @@ To change the animation for showing or hiding, set `animation` to `top`, `left`,
 </Wrap>
 ```
 
-### Changing the position
+### Changing the Placement
 
-To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+To change the placement, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
 
 ```tsx
 <Wrap gap="md">
@@ -284,9 +306,9 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 </Wrap>
 ```
 
-### Changing the duration
+### Changing the Duration
 
-To change the duration, set `duration` to a number (seconds).
+To change the duration, set `duration` to a numerical value (seconds).
 
 ```tsx
 <Popover duration={0.7}>
@@ -301,7 +323,7 @@ To change the duration, set `duration` to a number (seconds).
 </Popover>
 ```
 
-### Changing the offset
+### Changing the Offset
 
 Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
 
@@ -333,9 +355,9 @@ Depending on the size of the element or the situation, you may want to adjust th
 </HStack>
 ```
 
-### Activate on hover
+### Activating on Hover
 
-By default, the popover becomes active when the `PopoverTrigger` element is clicked. If you want it to activate on hover, set `trigger` to `hover`.
+By default, the popover is activated when the `PopoverTrigger` element is clicked. If you want it to activate on hover, set `trigger` to `hover`.
 
 ```tsx
 <Popover trigger="hover">
@@ -350,9 +372,9 @@ By default, the popover becomes active when the `PopoverTrigger` element is clic
 </Popover>
 ```
 
-### Delayed rendering
+### Delayed Rendering
 
-By default, it is rendered in the DOM regardless of whether it is active. In other words, it is rendered even when not visible, but is hidden by style.
+By default, it is rendered in the DOM regardless of being active. In other words, it is rendered even when not visible, but it is hidden by style.
 
 If you want to delay rendering until it becomes active, set `isLazy` to `true`.
 
@@ -369,7 +391,7 @@ If you want to delay rendering until it becomes active, set `isLazy` to `true`.
 </Popover>
 ```
 
-### Disabling the close button
+### Disabling the Close Button
 
 To disable (hide) the close button, set `closeOnButton` to `true`.
 
@@ -386,9 +408,9 @@ To disable (hide) the close button, set `closeOnButton` to `true`.
 </Popover>
 ```
 
-### Customizing the close button
+### Customizing the Close Button
 
-If you want to customize the `PopoverCloseButton` by passing `props`, etc., set it without omitting.
+If you want to customize the `PopoverCloseButton` by passing `props` or similar, set it without omitting.
 
 ```tsx
 <Popover>
@@ -405,8 +427,6 @@ If you want to customize the `PopoverCloseButton` by passing `props`, etc., set 
 ```
 
 ### Controlling
-
-Use hooks to control the opening and closing of the Popover.
 
 ```tsx functional=true
 const { isOpen, onClose, onToggle } = useDisclosure()

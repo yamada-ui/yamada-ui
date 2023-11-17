@@ -1,12 +1,372 @@
 ---
 title: Tag
-description: このページは現在作成中です。
+description: "`Tag`は、アイテムを説明するキーワードを使用して分類または整理するコンポーネントです。"
 package_name: "@yamada-ui/tag"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Tag } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<Tag>Tag</Tag>
+```
+
+### バリアントを変更する
+
+```tsx
+<Wrap gap="md">
+  <Tag variant="subtle" colorScheme="primary">
+    Primary
+  </Tag>
+  <Tag variant="solid" colorScheme="secondary">
+    Secondary
+  </Tag>
+  <Tag variant="outline" colorScheme="success">
+    Success
+  </Tag>
+</Wrap>
+```
+
+### サイズを変更する
+
+アイコンを含む`Tag`の例です。
+
+```tsx
+<Wrap gap="md" alignItems="flex-start">
+  <Tag colorScheme="primary" size="sm">
+    Small
+  </Tag>
+  <Tag colorScheme="secondary" size="md">
+    Medium
+  </Tag>
+  <Tag colorScheme="warning" size="lg">
+    Large
+  </Tag>
+</Wrap>
+```
+
+### カラースキーマを変更する
+
+```tsx
+<VStack>
+  <Wrap gap="md">
+    <Tag variant="subtle" colorScheme="primary">
+      Primary
+    </Tag>
+    <Tag variant="subtle" colorScheme="secondary">
+      Secondary
+    </Tag>
+    <Tag variant="subtle" colorScheme="warning">
+      Warning
+    </Tag>
+    <Tag variant="subtle" colorScheme="success">
+      Success
+    </Tag>
+    <Tag variant="subtle" colorScheme="danger">
+      Danger
+    </Tag>
+    <Tag variant="subtle" colorScheme="link">
+      Link
+    </Tag>
+    <Tag variant="subtle" colorScheme="gray">
+      Gray
+    </Tag>
+    <Tag variant="subtle" colorScheme="zinc">
+      Zinc
+    </Tag>
+    <Tag variant="subtle" colorScheme="neutral">
+      Neutral
+    </Tag>
+    <Tag variant="subtle" colorScheme="stone">
+      Stone
+    </Tag>
+    <Tag variant="subtle" colorScheme="red">
+      Red
+    </Tag>
+    <Tag variant="subtle" colorScheme="rose">
+      Rose
+    </Tag>
+    <Tag variant="subtle" colorScheme="pink">
+      Pink
+    </Tag>
+    <Tag variant="subtle" colorScheme="orange">
+      Orange
+    </Tag>
+    <Tag variant="subtle" colorScheme="amber">
+      Amber
+    </Tag>
+    <Tag variant="subtle" colorScheme="yellow">
+      Yellow
+    </Tag>
+    <Tag variant="subtle" colorScheme="lime">
+      Lime
+    </Tag>
+    <Tag variant="subtle" colorScheme="green">
+      Green
+    </Tag>
+    <Tag variant="subtle" colorScheme="emerald">
+      Emerald
+    </Tag>
+    <Tag variant="subtle" colorScheme="teal">
+      Teal
+    </Tag>
+    <Tag variant="subtle" colorScheme="cyan">
+      Cyan
+    </Tag>
+    <Tag variant="subtle" colorScheme="sky">
+      Sky
+    </Tag>
+    <Tag variant="subtle" colorScheme="blue">
+      Blue
+    </Tag>
+    <Tag variant="subtle" colorScheme="indigo">
+      Indigo
+    </Tag>
+    <Tag variant="subtle" colorScheme="violet">
+      Violet
+    </Tag>
+    <Tag variant="subtle" colorScheme="purple">
+      Purple
+    </Tag>
+    <Tag variant="subtle" colorScheme="fuchsia">
+      Fuchsia
+    </Tag>
+  </Wrap>
+
+  <Wrap gap="md">
+    <Tag variant="solid" colorScheme="primary">
+      Primary
+    </Tag>
+    <Tag variant="solid" colorScheme="secondary">
+      Secondary
+    </Tag>
+    <Tag variant="solid" colorScheme="warning">
+      Warning
+    </Tag>
+    <Tag variant="solid" colorScheme="success">
+      Success
+    </Tag>
+    <Tag variant="solid" colorScheme="danger">
+      Danger
+    </Tag>
+    <Tag variant="solid" colorScheme="link">
+      Link
+    </Tag>
+    <Tag variant="solid" colorScheme="gray">
+      Gray
+    </Tag>
+    <Tag variant="solid" colorScheme="zinc">
+      Zinc
+    </Tag>
+    <Tag variant="solid" colorScheme="neutral">
+      Neutral
+    </Tag>
+    <Tag variant="solid" colorScheme="stone">
+      Stone
+    </Tag>
+    <Tag variant="solid" colorScheme="red">
+      Red
+    </Tag>
+    <Tag variant="solid" colorScheme="rose">
+      Rose
+    </Tag>
+    <Tag variant="solid" colorScheme="pink">
+      Pink
+    </Tag>
+    <Tag variant="solid" colorScheme="orange">
+      Orange
+    </Tag>
+    <Tag variant="solid" colorScheme="amber">
+      Amber
+    </Tag>
+    <Tag variant="solid" colorScheme="yellow">
+      Yellow
+    </Tag>
+    <Tag variant="solid" colorScheme="lime">
+      Lime
+    </Tag>
+    <Tag variant="solid" colorScheme="green">
+      Green
+    </Tag>
+    <Tag variant="solid" colorScheme="emerald">
+      Emerald
+    </Tag>
+    <Tag variant="solid" colorScheme="teal">
+      Teal
+    </Tag>
+    <Tag variant="solid" colorScheme="cyan">
+      Cyan
+    </Tag>
+    <Tag variant="solid" colorScheme="sky">
+      Sky
+    </Tag>
+    <Tag variant="solid" colorScheme="blue">
+      Blue
+    </Tag>
+    <Tag variant="solid" colorScheme="indigo">
+      Indigo
+    </Tag>
+    <Tag variant="solid" colorScheme="violet">
+      Violet
+    </Tag>
+    <Tag variant="solid" colorScheme="purple">
+      Purple
+    </Tag>
+    <Tag variant="solid" colorScheme="fuchsia">
+      Fuchsia
+    </Tag>
+  </Wrap>
+
+  <Wrap gap="md">
+    <Tag variant="outline" colorScheme="primary">
+      Primary
+    </Tag>
+    <Tag variant="outline" colorScheme="secondary">
+      Secondary
+    </Tag>
+    <Tag variant="outline" colorScheme="warning">
+      Warning
+    </Tag>
+    <Tag variant="outline" colorScheme="success">
+      Success
+    </Tag>
+    <Tag variant="outline" colorScheme="danger">
+      Danger
+    </Tag>
+    <Tag variant="outline" colorScheme="link">
+      Link
+    </Tag>
+    <Tag variant="outline" colorScheme="gray">
+      Gray
+    </Tag>
+    <Tag variant="outline" colorScheme="zinc">
+      Zinc
+    </Tag>
+    <Tag variant="outline" colorScheme="neutral">
+      Neutral
+    </Tag>
+    <Tag variant="outline" colorScheme="stone">
+      Stone
+    </Tag>
+    <Tag variant="outline" colorScheme="red">
+      Red
+    </Tag>
+    <Tag variant="outline" colorScheme="rose">
+      Rose
+    </Tag>
+    <Tag variant="outline" colorScheme="pink">
+      Pink
+    </Tag>
+    <Tag variant="outline" colorScheme="orange">
+      Orange
+    </Tag>
+    <Tag variant="outline" colorScheme="amber">
+      Amber
+    </Tag>
+    <Tag variant="outline" colorScheme="yellow">
+      Yellow
+    </Tag>
+    <Tag variant="outline" colorScheme="lime">
+      Lime
+    </Tag>
+    <Tag variant="outline" colorScheme="green">
+      Green
+    </Tag>
+    <Tag variant="outline" colorScheme="emerald">
+      Emerald
+    </Tag>
+    <Tag variant="outline" colorScheme="teal">
+      Teal
+    </Tag>
+    <Tag variant="outline" colorScheme="cyan">
+      Cyan
+    </Tag>
+    <Tag variant="outline" colorScheme="sky">
+      Sky
+    </Tag>
+    <Tag variant="outline" colorScheme="blue">
+      Blue
+    </Tag>
+    <Tag variant="outline" colorScheme="indigo">
+      Indigo
+    </Tag>
+    <Tag variant="outline" colorScheme="violet">
+      Violet
+    </Tag>
+    <Tag variant="outline" colorScheme="purple">
+      Purple
+    </Tag>
+    <Tag variant="outline" colorScheme="fuchsia">
+      Fuchsia
+    </Tag>
+  </Wrap>
+</VStack>
+```
+
+### アイコンを追加する
+
+アイコンを追加する場合は、`icon`に`ReactElement`を設定します。
+
+```tsx
+<Wrap gap="md" alignItems="flex-start">
+  <Tag colorScheme="primary" size="sm" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+    Small
+  </Tag>
+  <Tag colorScheme="secondary" size="md" rightIcon={<FontAwesomeIcon icon={faPlus} />}>
+    Medium
+  </Tag>
+  <Tag colorScheme="warning" size="lg" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+    Large
+  </Tag>
+</Wrap>
+```
+
+### 閉じるボタンを追加する
+
+閉じるボタンを追加する場合は、`onClose`を設定します。
+
+```tsx
+<Wrap gap="md" alignItems="flex-start">
+  <Tag colorScheme="primary" rounded="full" onClose={() => {}}>
+    Cyan
+  </Tag>
+  <Tag colorScheme="secondary" rounded="full" onClose={() => {}}>
+    Secondary
+  </Tag>
+  <Tag colorScheme="warning" rounded="full" onClose={() => {}}>
+    Warning
+  </Tag>
+  <Tag colorScheme="danger" rounded="full" onClose={() => {}}>
+    Danger
+  </Tag>
+</Wrap>
+```
+
+### 閉じるボタンを無効にする
+
+閉じるボタンを無効にする場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<Wrap gap="md" alignItems="flex-start">
+  <Tag variant="solid" colorScheme="primary" rounded="full" onClose={() => {}} isDisabled>
+    Cyan
+  </Tag>
+  <Tag variant="solid" colorScheme="secondary" rounded="full" onClose={() => {}} isDisabled>
+    Secondary
+  </Tag>
+  <Tag variant="solid" colorScheme="warning" rounded="full" onClose={() => {}} isDisabled>
+    Warning
+  </Tag>
+  <Tag variant="solid" colorScheme="danger" rounded="full" onClose={() => {}} isDisabled>
+    Danger
+  </Tag>
+</Wrap>
+```

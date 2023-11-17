@@ -1,12 +1,238 @@
 ---
 title: Card
-description: This page is currently being created.
+description: "`Card` is a component that groups and displays related information. By default, it renders a `section` element."
 package_name: "@yamada-ui/card"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Card, CardHeader, CardBody, CardFooter } from "@yamada-ui/react"
+```
+
+- `Card`: A wrapper component for the card.
+- `CardHeader`: A component that displays the header of the card.
+- `CardBody`: A component that displays the main content of the card.
+- `CardFooter`: A component that displays the footer of the card.
+
+## Usage
+
+```tsx
+<Card>
+  <CardHeader>
+    <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+  </CardHeader>
+
+  <CardBody>
+    <Text>
+      『ドラゴンボール』（DRAGON
+      BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Text>
+  </CardBody>
+</Card>
+```
+
+### Change Variant
+
+```tsx
+<VStack>
+  <Card variant="elevated">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card variant="outline">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card variant="subtle">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card variant="solid">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Card size="sm">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card size="md">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card size="normal">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card size="lg">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx
+<VStack>
+  <Card variant="subtle" colorScheme="green">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+
+  <Card variant="solid" colorScheme="pink">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+  </Card>
+</VStack>
+```
+
+### Customize Layout
+
+```tsx
+<Card maxW="md">
+  <CardHeader justifyContent="center">
+    <Image
+      src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+      w="full"
+      rounded="md"
+    />
+  </CardHeader>
+
+  <CardBody>
+    <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+
+    <Text>
+      『ドラゴンボール』（DRAGON
+      BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Text>
+  </CardBody>
+
+  <CardFooter>
+    <Button colorScheme="primary">Wikipadia</Button>
+  </CardFooter>
+</Card>
+```
+
+```tsx
+<Card direction={{ base: "row", md: "column" }} overflow="hidden" variant="outline">
+  <Image
+    src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+    objectFit="cover"
+    maxW={{ base: "30%", md: "100%" }}
+  />
+
+  <VStack gap="0">
+    <CardHeader>
+      <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+    </CardHeader>
+
+    <CardBody>
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    </CardBody>
+
+    <CardFooter>
+      <Button colorScheme="primary">Wikipadia</Button>
+    </CardFooter>
+  </VStack>
+</Card>
+```

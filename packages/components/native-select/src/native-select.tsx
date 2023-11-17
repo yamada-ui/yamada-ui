@@ -154,7 +154,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
     return (
       <NativeSelectProvider value={styles}>
         <ui.div
-          className="ui-native-select"
+          className="ui-select"
           __css={{
             position: "relative",
             w: "100%",
@@ -168,7 +168,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
         >
           <ui.select
             ref={ref}
-            className={cx("ui-native-select__field", className)}
+            className={cx("ui-select__field", className)}
             __css={{
               paddingEnd: "2rem",
               h: h ?? height,
@@ -227,11 +227,7 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   )
 
   return (
-    <ui.div
-      className={cx("ui-native-select__icon", className)}
-      __css={css}
-      {...rest}
-    >
+    <ui.div className={cx("ui-select__icon", className)} __css={css} {...rest}>
       {isValidElement(children) ? cloneChildren : <ChevronIcon />}
     </ui.div>
   )

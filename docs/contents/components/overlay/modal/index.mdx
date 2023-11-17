@@ -21,11 +21,11 @@ import {
 ```
 
 - `Modal`: A wrapper component that controls the state of the modal.
-- `ModalOverlay`: The component for the overlay that exists behind the modal.
-- `ModalCloseButton`: The component for the button that closes the modal.
-- `ModalHeader`: The component that displays the modal's header.
-- `ModalBody`: The component that displays the main content of the modal.
-- `ModalFooter`: The component that displays the modal's footer.
+- `ModalOverlay`: A component for the overlay that exists behind the modal.
+- `ModalCloseButton`: A component for the button that closes the modal.
+- `ModalHeader`: A component that displays the header of the modal.
+- `ModalBody`: A component that displays the main content of the modal.
+- `ModalFooter`: A component that displays the footer of the modal.
 
 :::note
 `ModalOverlay` and `ModalCloseButton` can be omitted.
@@ -33,7 +33,7 @@ import {
 
 ## Usage
 
-To control the display or hide, set `isOpen` and `onClose`.
+To control visibility, set `isOpen` and `onClose`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -104,7 +104,7 @@ return (
 
 ### Change Position
 
-To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
 
 ```tsx functional=true
 const placementMap = [
@@ -161,7 +161,7 @@ return (
 
 ### Change Animation
 
-To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
+To change the show/hide animation, set `animation` to values like `top` or `left`. By default, `scale` is set.
 
 ```tsx functional=true
 const animationMap = ["scale", "top", "left", "bottom", "right"]
@@ -234,7 +234,7 @@ return (
 
 ### Change Overflow Behavior
 
-By default, `inside` is set, and scrolling only occurs within `ModalBody`. If you set `outside`, scrolling will occur within the `Modal`.
+By default, `inside` is set, and scrolling only occurs within the `ModalBody`. If you set `outside`, scrolling will occur within the `Modal`.
 
 ```tsx functional=true
 const [scrollBehavior, setScrollBehavior] = useState("inside")
@@ -306,7 +306,7 @@ return (
 
 ### Do Not Block Scroll When Modal Opens
 
-By default, when the modal opens, it blocks the scroll of the main content to ensure accessibility. If you do not want to block the scroll of the main content, set `blockScrollOnMount` to `false`.
+By default, when the modal opens, scrolling of the main content is blocked to ensure accessibility. If you do not want to block the scrolling of the main content, set `blockScrollOnMount` to `false`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -336,7 +336,7 @@ return (
 
 ### Customize the Overlay
 
-If you want to customize `ModalOverlay` by passing `props`, etc., set it without omitting.
+If you want to customize the `ModalOverlay` by passing `props`, etc., set it without omitting.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -398,7 +398,7 @@ return (
 
 ### Customize the Close Button
 
-If you want to customize `ModalCloseButton` by passing `props`, etc., set it without omitting.
+If you want to customize the `ModalCloseButton` by passing `props`, etc., set it without omitting.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()

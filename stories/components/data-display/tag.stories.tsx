@@ -329,19 +329,19 @@ export const withIcon: Story = () => {
 export const withCloseButton: Story = () => {
   return (
     <Wrap gap="md" alignItems="flex-start">
-      <Tag colorScheme="primary" rounded="full" onCloseClick={() => {}}>
+      <Tag colorScheme="primary" rounded="full" onClose={() => {}}>
         Cyan
       </Tag>
 
-      <Tag colorScheme="secondary" rounded="full" onCloseClick={() => {}}>
+      <Tag colorScheme="secondary" rounded="full" onClose={() => {}}>
         Secondary
       </Tag>
 
-      <Tag colorScheme="warning" rounded="full" onCloseClick={() => {}}>
+      <Tag colorScheme="warning" rounded="full" onClose={() => {}}>
         Warning
       </Tag>
 
-      <Tag colorScheme="danger" rounded="full" onCloseClick={() => {}}>
+      <Tag colorScheme="danger" rounded="full" onClose={() => {}}>
         Danger
       </Tag>
     </Wrap>
@@ -355,7 +355,7 @@ export const withDisabled: Story = () => {
         variant="solid"
         colorScheme="primary"
         rounded="full"
-        onCloseClick={() => {}}
+        onClose={() => {}}
         isDisabled
       >
         Cyan
@@ -365,7 +365,7 @@ export const withDisabled: Story = () => {
         variant="solid"
         colorScheme="secondary"
         rounded="full"
-        onCloseClick={() => {}}
+        onClose={() => {}}
         isDisabled
       >
         Secondary
@@ -375,7 +375,7 @@ export const withDisabled: Story = () => {
         variant="solid"
         colorScheme="warning"
         rounded="full"
-        onCloseClick={() => {}}
+        onClose={() => {}}
         isDisabled
       >
         Warning
@@ -385,7 +385,7 @@ export const withDisabled: Story = () => {
         variant="solid"
         colorScheme="danger"
         rounded="full"
-        onCloseClick={() => {}}
+        onClose={() => {}}
         isDisabled
       >
         Danger

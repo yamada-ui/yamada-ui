@@ -31,7 +31,7 @@ type TagnOptions = {
   /**
    * Function to be executed when the close button is clicked.
    */
-  onCloseClick?: MouseEventHandler<HTMLElement>
+  onClose?: MouseEventHandler<HTMLElement>
   /**
    * If `true`, the tag is disabled.
    *
@@ -48,7 +48,7 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     className,
     leftIcon,
     rightIcon,
-    onCloseClick,
+    onClose,
     isDisabled,
     children,
     ...rest
@@ -73,8 +73,8 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       {leftIcon}
       <TagLabel>{children}</TagLabel>
       {rightIcon}
-      {onCloseClick ? (
-        <CloseButton isDisabled={isDisabled} onClick={onCloseClick}>
+      {onClose ? (
+        <CloseButton isDisabled={isDisabled} onClick={onClose}>
           <CloseIcon />
         </CloseButton>
       ) : null}
@@ -116,6 +116,7 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
     alignItems: "center",
     justifyContent: "center",
     outline: "0",
+    cursor: "pointer",
     ...styles.closeButton,
   }
 

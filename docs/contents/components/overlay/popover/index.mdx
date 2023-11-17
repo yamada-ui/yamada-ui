@@ -22,14 +22,14 @@ import {
 } from "@yamada-ui/react"
 ```
 
-- `Popover`: A component to control the state of the popover.
-- `PopoverTrigger`: A wrapper component to control the reference element.
-- `PopoverAnchor`: A wrapper component used to reference an element other than the `PopoverTrigger` element.
+- `Popover`: A wrapper component that controls the state of the popover.
+- `PopoverTrigger`: A wrapper component that controls the reference element.
+- `PopoverAnchor`: A wrapper component used when you want to reference an element other than the one in `PopoverTrigger`.
 - `PopoverCloseButton`: A component for the button that closes the popover.
-- `PopoverContent`: A component to display the content of the popover.
-- `PopoverHeader`: A component to display the header of the popover.
-- `PopoverBody`: A component to display the main content of the popover.
-- `PopoverFooter`: A component to display the footer of the popover.
+- `PopoverContent`: A component that displays the content of the popover.
+- `PopoverHeader`: A component that displays the header of the popover.
+- `PopoverBody`: A component that displays the main content of the popover.
+- `PopoverFooter`: A component that displays the footer of the popover.
 
 :::note
 `PopoverCloseButton` can be omitted.
@@ -57,9 +57,9 @@ If the `children` of `PopoverTrigger` or `PopoverAnchor` are functional componen
 </Popover>
 ```
 
-### Displaying by referencing a different element
+### Displaying based on a different element
 
-If you want to reference (such as coordinates) a different element than the `PopoverTrigger` element, use `PopoverAnchor`.
+If you want to reference (such as coordinates) a different element than the one in `PopoverTrigger`, use `PopoverAnchor`.
 
 ```tsx
 <HStack>
@@ -83,7 +83,7 @@ If you want to reference (such as coordinates) a different element than the `Pop
 
 ### Changing the animation
 
-To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
+To change the animation for showing or hiding, set `animation` to `top`, `left`, etc. By default, `scale` is set.
 
 ```tsx
 <Wrap gap="md">
@@ -144,7 +144,7 @@ To change the show or hide animation, set `animation` to `top`, `left`, etc. By 
 </Wrap>
 ```
 
-### Changing the display position
+### Changing the position
 
 To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
@@ -286,7 +286,7 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 
 ### Changing the duration
 
-To change the duration, set `duration` to a numerical value (seconds).
+To change the duration, set `duration` to a number (seconds).
 
 ```tsx
 <Popover duration={0.7}>
@@ -303,7 +303,7 @@ To change the duration, set `duration` to a numerical value (seconds).
 
 ### Changing the offset
 
-Depending on the size of the element or the situation, you may want to change the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
 
 `gutter` allows you to set a simple difference with the element, and `offset` allows you to set `[horizontal axis, vertical axis]`.
 
@@ -335,7 +335,7 @@ Depending on the size of the element or the situation, you may want to change th
 
 ### Activate on hover
 
-By default, the `PopoverTrigger` element becomes active when clicked. If you want it to become active when hovered, set `trigger` to `hover`.
+By default, the popover becomes active when the `PopoverTrigger` element is clicked. If you want it to activate on hover, set `trigger` to `hover`.
 
 ```tsx
 <Popover trigger="hover">
@@ -352,7 +352,7 @@ By default, the `PopoverTrigger` element becomes active when clicked. If you wan
 
 ### Delayed rendering
 
-By default, it is rendered in the DOM regardless of being active. In other words, it is rendered even when not visible, but is hidden by style.
+By default, it is rendered in the DOM regardless of whether it is active. In other words, it is rendered even when not visible, but is hidden by style.
 
 If you want to delay rendering until it becomes active, set `isLazy` to `true`.
 

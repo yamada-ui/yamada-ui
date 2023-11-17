@@ -1,12 +1,338 @@
 ---
 title: Drawer
-description: This page is currently being created.
-package_name: "@yamada-ui/drawer"
+description: "`Drawer` is a component for a panel that appears from the edge of the screen."
+package_name: "@yamada-ui/modal"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import {
+  Drawer,
+  DrawerOverlay,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+} from "@yamada-ui/react"
+```
+
+- `Drawer`: A wrapper component that controls the state of the panel.
+- `DrawerOverlay`: A component for the overlay behind the panel.
+- `DrawerCloseButton`: A component for the button that closes the panel.
+- `DrawerHeader`: A component that displays the header of the panel.
+- `DrawerBody`: A component that displays the main content of the panel.
+- `DrawerFooter`: A component that displays the footer of the panel.
+
+:::note
+`DrawerOverlay` and `DrawerCloseButton` can be omitted.
+:::
+
+## Usage
+
+To control the visibility, set `isOpen` and `onClose`.
+
+:::note
+`Drawer` internally uses `Modal`.
+:::
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Change the size
+
+```tsx functional=true
+const sizeMap = ["xs", "sm", "md", "lg", "xl", "full"]
+const [size, setSize] = useState("md")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      {sizeMap.map((size) => (
+        <Button
+          onClick={() => {
+            setSize(size)
+            onOpen()
+          }}
+        >
+          Open {size} Dialog
+        </Button>
+      ))}
+    </Wrap>
+
+    <Drawer isOpen={isOpen} onClose={onClose} size={size}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Change the position
+
+To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
+
+```tsx functional=true
+const placementMap = ["top", "right", "bottom", "left"]
+const [placement, setPlacement] = useState("center")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      {placementMap.map((placement) => (
+        <Button
+          onClick={() => {
+            setPlacement(placement)
+            onOpen()
+          }}
+        >
+          Open {placement} Modal
+        </Button>
+      ))}
+    </Wrap>
+
+    <Drawer isOpen={isOpen} onClose={onClose} placement={placement}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Change the duration
+
+To change the duration, set `duration` to a numerical value (seconds).
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose} duration={0.7}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Fit to the screen height
+
+If you want the panel to fit the height of the screen, set `isFullHeight` to `true`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose} placement="bottom" isFullHeight>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Do not block scroll on mount
+
+By default, scrolling of the main content is blocked when the panel is opened to ensure accessibility. If you do not want to block the scroll of the main content, set `blockScrollOnMount` to `false`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Customize the close button
+
+If you want to customize the `DrawerCloseButton` by passing `props`, etc., set it without omitting.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose}>
+      <DrawerCloseButton color="red.500" />
+
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Disable the close button
+
+If `onClose` is not set, the close button will be disabled (hidden).
+
+:::note status=warning
+By default, clicking on the overlay will close the modal. Please note that if `onClose` is not set, clicking on the overlay to close will also be disabled.
+:::
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Customize the overlay
+
+If you want to customize the `DrawerOverlay` by passing `props`, etc., set it without omitting.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose}>
+      <DrawerOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### Disable the overlay
+
+To disable (hide) the overlay of the panel, set `withOverlay` to `false`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer isOpen={isOpen} onClose={onClose} withOverlay={false}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>『ドラゴンボール』は、鳥山明による日本の漫画作品です。...</DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```

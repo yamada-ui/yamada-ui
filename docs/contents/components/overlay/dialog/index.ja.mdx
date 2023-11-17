@@ -36,7 +36,7 @@ import {
 表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
 
 :::note
-ダイアログは、モーダルを簡素化したコンポーネントです。
+`Dialog`は、内部的に`Modal`を使用しており、`Modal`を簡素化したコンポーネントです。
 :::
 
 ```tsx functional=true
@@ -419,7 +419,7 @@ return (
 `onClose`を設定しない場合は、閉じるボタンを無効(非表示)になります。
 
 :::note status=warning
-デフォルトでは、オーバーレイをクリック時にモーダルは閉じます。`onClose`が設定されないことでオーバーレイのクリックして閉じる動作も無効になることに注意してください。
+デフォルトでは、オーバーレイをクリック時にダイアログを閉じます。`onClose`が設定されないことでオーバーレイのクリックして閉じる動作も無効になることに注意してください。
 :::
 
 ```tsx functional=true
@@ -477,7 +477,7 @@ return (
 
 ### オーバーレイを無効にする
 
-モーダルのオーバーレイを無効(非表示)にする場合は、`withOverlay`を`false`にします。
+ダイアログのオーバーレイを無効(非表示)にする場合は、`withOverlay`を`false`にします。
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()

@@ -1,6 +1,6 @@
 ---
 title: Dialog
-description: "`Dialog` is a component used to confirm or interrupt user actions."
+description: "`Dialog` is a component used to confirm execution or interrupt actions by the user."
 package_name: "@yamada-ui/modal"
 is_tabs: true
 with_description: true
@@ -21,7 +21,7 @@ import {
 ```
 
 - `Dialog`: A wrapper component that controls the state of the dialog.
-- `DialogOverlay`: The overlay component that exists behind the dialog.
+- `DialogOverlay`: The component for the overlay behind the dialog.
 - `DialogCloseButton`: The component for the button that closes the dialog.
 - `DialogHeader`: The component that displays the dialog's header.
 - `DialogBody`: The component that displays the main content of the dialog.
@@ -36,7 +36,7 @@ import {
 To control visibility, set `isOpen` and `onClose`.
 
 :::note
-The dialog is a simplified component of a modal.
+`Dialog` internally uses `Modal` and is a simplified component of `Modal`.
 :::
 
 ```tsx functional=true
@@ -62,7 +62,7 @@ return (
 )
 ```
 
-Alternatively, if you do not omit `DialogHeader` and `DialogBody`, you can write it like this.
+Alternatively, if you do not omit `DialogHeader` or `DialogBody`, you can write it like this.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -133,7 +133,7 @@ return (
 
 ### Change Position
 
-To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
 ```tsx functional=true
 const placementMap = [
@@ -344,7 +344,7 @@ return (
 
 ### Customize Footer Buttons
 
-You can set `props` for `cancel` and `success` buttons.
+`cancel` and `success` can be set with `Button`'s `props`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -383,9 +383,9 @@ return (
 )
 ```
 
-### Customize the Close Button
+### Customize Close Button
 
-If you want to customize the `DialogCloseButton` by passing `props`, do not omit it and set it accordingly.
+If you want to customize `DialogCloseButton` with `props`, etc., set it without omitting.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -414,12 +414,12 @@ return (
 )
 ```
 
-### Disable the Close Button
+### Disable Close Button
 
 If `onClose` is not set, the close button will be disabled (hidden).
 
 :::note status=warning
-By default, clicking on the overlay will close the modal. Please note that if `onClose` is not set, clicking on the overlay to close will also be disabled.
+By default, clicking on the overlay closes the dialog. Please note that if `onClose` is not set, clicking on the overlay to close will also be disabled.
 :::
 
 ```tsx functional=true
@@ -444,9 +444,9 @@ return (
 )
 ```
 
-### Customize the Overlay
+### Customize Overlay
 
-If you want to customize the `DialogOverlay` by passing `props`, do not omit it and set it accordingly.
+If you want to pass `props` to `DialogOverlay` to customize it, set it without omitting.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -475,9 +475,9 @@ return (
 )
 ```
 
-### Disable the Overlay
+### Disable Overlay
 
-To disable (hide) the modal overlay, set `withOverlay` to `false`.
+To disable (hide) the dialog's overlay, set `withOverlay` to `false`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()

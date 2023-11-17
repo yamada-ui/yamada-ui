@@ -1,12 +1,504 @@
 ---
 title: Dialog
-description: This page is currently being created.
-package_name: "@yamada-ui/dialog"
+description: "`Dialog` is a component used to confirm execution or interrupt actions by the user."
+package_name: "@yamada-ui/modal"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import {
+  Dialog,
+  DialogOverlay,
+  DialogCloseButton,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@yamada-ui/react"
+```
+
+- `Dialog`: A wrapper component that controls the state of the dialog.
+- `DialogOverlay`: The component for the overlay behind the dialog.
+- `DialogCloseButton`: The component for the button that closes the dialog.
+- `DialogHeader`: The component that displays the dialog's header.
+- `DialogBody`: The component that displays the main content of the dialog.
+- `DialogFooter`: The component that displays the dialog's footer.
+
+:::note
+`DialogOverlay`, `DialogCloseButton`, `DialogHeader`, `DialogBody`, and `DialogFooter` can be omitted.
+:::
+
+## Usage
+
+To control visibility, set `isOpen` and `onClose`.
+
+:::note
+`Dialog` internally uses `Modal` and is a simplified component of `Modal`.
+:::
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+Alternatively, if you do not omit `DialogHeader` or `DialogBody`, you can write it like this.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog isOpen={isOpen} onClose={onClose}>
+      <DialogHeader>孫悟空</DialogHeader>
+
+      <DialogBody>
+        だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+      </DialogBody>
+
+      <DialogFooter>
+        <Button variant="ghost" onClick={onClose}>
+          わけない
+        </Button>
+        <Button colorScheme="primary" onClick={onClose}>
+          わける
+        </Button>
+      </DialogFooter>
+    </Dialog>
+  </>
+)
+```
+
+### Change Size
+
+```tsx functional=true
+const sizeMap = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "full"]
+const [size, setSize] = useState("md")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      {sizeMap.map((size) => (
+        <Button
+          onClick={() => {
+            setSize(size)
+            onOpen()
+          }}
+        >
+          Open {size} Dialog
+        </Button>
+      ))}
+    </Wrap>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      size={size}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Change Position
+
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+
+```tsx functional=true
+const placementMap = [
+  "center",
+  "top",
+  "top-left",
+  "top-right",
+  "right",
+  "right-top",
+  "right-bottom",
+  "bottom",
+  "bottom-left",
+  "bottom-right",
+  "left",
+  "left-top",
+  "left-bottom",
+]
+const [placement, setPlacement] = useState("center")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      {placementMap.map((placement) => (
+        <Button
+          onClick={() => {
+            setPlacement(placement)
+            onOpen()
+          }}
+        >
+          Open {placement} Modal
+        </Button>
+      ))}
+    </Wrap>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      placement={placement}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Change Duration
+
+To change the duration, set `duration` to a numerical value (seconds).
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+      duration={0.4}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Change Overflow Behavior
+
+By default, `inside` is set, and scrolling only occurs within `ModalBody`. If you set `outside`, scrolling will occur within the `Modal`.
+
+```tsx functional=true
+const [scrollBehavior, setScrollBehavior] = useState("inside")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          setScrollBehavior("inside")
+          onOpen()
+        }}
+      >
+        Open inside scroll Modal
+      </Button>
+      <Button
+        onClick={() => {
+          setScrollBehavior("outside")
+          onOpen()
+        }}
+      >
+        Open outside scroll Modal
+      </Button>
+    </Wrap>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      scrollBehavior={scrollBehavior}
+      h="xl"
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      <Text>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+
+      <Text>
+        1986年から1996年までフジテレビ系列で『ドラゴンボール』、『ドラゴンボールZ』が放送され、11年間のシリーズ放送期間中、平均視聴率20%以上を記録した。また、全世界80か国以上で放送されるなど、世界中で絶大な人気を誇る、日本の漫画・アニメを代表する作品である。
+        連載終了後もテレビアニメ・映画・ゲームなどが展開しており、映画『ドラゴンボール超
+        ブロリー』が全世界興行収入135億円を記録し、各国で大ヒットした。
+      </Text>
+
+      <Text>
+        1991年に『週刊少年ジャンプ21・22合併号』で行われた読者アンケートでは、同誌のアンケート史上最大得票となる1000通中815票を獲得し、1995年3・4合併号（1994年12月発売）で同誌の発行部数は653万部を記録。本作の連載終了後は同誌の部数が急速に減少していくなど、連載作品の中でも特に影響は大きかった。
+      </Text>
+
+      <Text>
+        単行本の発行部数は完全版（2000万部）を含み国内で1億6000万部以上、全世界累計で2億6000万部を記録。
+      </Text>
+
+      <Text>
+        ゲームソフトは現在までにミリオンセラーを10本以上輩出し、シリーズ累計販売本数は全世界5000万本に達する。『スーパードラゴンボールヒーローズ』はカード累計出荷枚数10億枚、登録ユーザー数は400万人を突破し、デジタルキッズカードゲーム市場でNo.1の人気タイトルである。
+      </Text>
+
+      <Text>
+        2019年時点で、漫画・アニメシリーズ・ゲーム作品などを含めた総売上は230億ドル（約2兆5000億円）に達する。
+      </Text>
+    </Dialog>
+  </>
+)
+```
+
+### Do Not Block Scrolling When Dialog Opens
+
+By default, when the dialog opens, it blocks scrolling of the main content to ensure accessibility. If you do not want to block scrolling of the main content, set `blockScrollOnMount` to `false`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Modal</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+      blockScrollOnMount={false}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Add Other Buttons
+
+If you want to add buttons other than `cancel` or `success`, set `other` and `onOther`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      other="どちらでもよい"
+      onOther={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Customize Footer Buttons
+
+`cancel` and `success` can be set with `Button`'s `props`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel={{
+        variant: "outline",
+        colorScheme: "red",
+        children: "わけない",
+      }}
+      onCancel={onClose}
+      other={{
+        variant: "outline",
+        colorScheme: "orange",
+        children: "どちらでもよい",
+      }}
+      onOther={onClose}
+      success={{
+        variant: "outline",
+        colorScheme: "blue",
+        children: "わける",
+      }}
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Customize Close Button
+
+If you want to customize `DialogCloseButton` with `props`, etc., set it without omitting.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      <DialogCloseButton color="red.500" />
+
+      <Text>
+        だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+      </Text>
+    </Dialog>
+  </>
+)
+```
+
+### Disable Close Button
+
+If `onClose` is not set, the close button will be disabled (hidden).
+
+:::note status=warning
+By default, clicking on the overlay closes the dialog. Please note that if `onClose` is not set, clicking on the overlay to close will also be disabled.
+:::
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```
+
+### Customize Overlay
+
+If you want to pass `props` to `DialogOverlay` to customize it, set it without omitting.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      <DialogOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+
+      <Text>
+        だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+      </Text>
+    </Dialog>
+  </>
+)
+```
+
+### Disable Overlay
+
+To disable (hide) the dialog's overlay, set `withOverlay` to `false`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      withOverlay={false}
+      header="孫悟空"
+      cancel="わけない"
+      onCancel={onClose}
+      success="わける"
+      onSuccess={onClose}
+    >
+      だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+    </Dialog>
+  </>
+)
+```

@@ -22,7 +22,7 @@ import {
 } from "@yamada-ui/react"
 ```
 
-- `Popover`: ポップオーバーの状態を制御するコンポーネントです。
+- `Popover`: ポップオーバーの状態を制御するラッパーコンポーネントです。
 - `PopoverTrigger`: 参照する要素を制御するラッパーコンポーネントです。
 - `PopoverAnchor`: `PopoverTrigger`の要素とは別に、要素を参照させたい場合に使用するラッパーコンポーネントです。
 - `PopoverCloseButton`: ポップオーバーを閉じるボタンのコンポーネントです。
@@ -55,6 +55,28 @@ import {
     <PopoverFooter>第280話</PopoverFooter>
   </PopoverContent>
 </Popover>
+```
+
+### 内部状態へアクセスする
+
+`children`には、`isOpen`や`onClose`などのメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+
+```tsx
+<Menu>
+  {({ isOpen }) => (
+    <>
+      <PopoverTrigger>
+        <Button>{isOpen ? "Close" : "Open"} Popover</Button>
+      </PopoverTrigger>
+
+      <PopoverContent>
+        <PopoverHeader>ベジータ!</PopoverHeader>
+        <PopoverBody>がんばれカカロット……お前がナンバー１だ！！</PopoverBody>
+        <PopoverFooter>第280話</PopoverFooter>
+      </PopoverContent>
+    </>
+  )}
+</Menu>
 ```
 
 ### 別の要素を参照して表示する
@@ -405,8 +427,6 @@ import {
 ```
 
 ### 制御する
-
-Popoverの開閉を制御するためのフックを使用します。
 
 ```tsx functional=true
 const { isOpen, onClose, onToggle } = useDisclosure()

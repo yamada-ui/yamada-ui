@@ -1,12 +1,407 @@
 ---
 title: Menu
-description: This page is currently being created.
+description: "`Menu` is a component that displays a common dropdown menu."
 package_name: "@yamada-ui/menu"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  MenuOptionItem,
+  MenuOptionGroup,
+  MenuDivider,
+} from "@yamada-ui/react"
+```
+
+- `Menu`: A wrapper component that controls the state of the menu.
+- `MenuButton`: A component that toggles the menu open or closed.
+- `MenuList`: A wrapper component that controls the items in the menu.
+- `MenuItem`: A component for the items in the menu.
+- `MenuGroup`: A wrapper component that groups items in the menu.
+- `MenuOptionItem`: A component for selectable (radio and checkbox) menu items.
+- `MenuOptionGroup`: A wrapper component that groups selectable (radio and checkbox) menu items.
+- `MenuDivider`: A component that separates items in the menu.
+
+## Usage
+
+```tsx
+<Menu>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Accessing Internal State
+
+`children` are provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
+
+```tsx
+<Menu>
+  {({ isOpen }) => (
+    <>
+      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+        {isOpen ? "Close" : "Open"} Menu
+      </MenuButton>
+
+      <MenuList>
+        <MenuItem>Set status</MenuItem>
+        <MenuItem>Edit Profile</MenuItem>
+        <MenuItem>Preferences</MenuItem>
+      </MenuList>
+    </>
+  )}
+</Menu>
+```
+
+### Displaying Commands in Items
+
+To display commands in items, set a string to `command`.
+
+```tsx
+<Menu>
+  <MenuButton as={IconButton} icon={<FontAwesomeIcon icon={faBars} />} variant="outline" />
+
+  <MenuList>
+    <MenuItem command="⌘T">New Tab</MenuItem>
+    <MenuItem command="⌘N">New Window</MenuItem>
+    <MenuItem command="⌘O">Open File</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Displaying Icons in Items
+
+To display icons in items, set a `ReactElement` to `icon`.
+
+```tsx
+<Menu>
+  <MenuButton as={IconButton} icon={<FontAwesomeIcon icon={faBars} />} variant="outline" />
+
+  <MenuList>
+    <MenuItem icon={<FontAwesomeIcon icon={faPlus} />} command="⌘T">
+      New Tab
+    </MenuItem>
+    <MenuItem icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />} command="⌘N">
+      New Window
+    </MenuItem>
+    <MenuItem icon={<FontAwesomeIcon icon={faEdit} />} command="⌘O">
+      Open File
+    </MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Focusing on an Item
+
+When opening the menu, if you want to focus on a specific item, set the target `ref` to `initialFocusRef`.
+
+```tsx functional=true
+const ref = useRef<HTMLButtonElement>(null)
+
+return (
+  <Menu initialFocusRef={ref}>
+    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+      Menu
+    </MenuButton>
+
+    <MenuList>
+      <MenuItem>Set status</MenuItem>
+      <MenuItem ref={ref}>Edit Profile</MenuItem>
+      <MenuItem>Preferences</MenuItem>
+    </MenuList>
+  </Menu>
+)
+```
+
+### Changing the Display Position
+
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom-start` is set.
+
+```tsx
+<Menu placement="top">
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Changing the Animation
+
+To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
+
+```tsx
+<Menu animation="top">
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Changing the Offset
+
+Depending on the size of the element or the situation, you may want to change the position of the menu. In that case, adjust the position with `gutter` or `offset`.
+
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal, vertical]`.
+
+```tsx
+<Wrap gap="md">
+  <Menu gutter={32}>
+    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+      Menu
+    </MenuButton>
+
+    <MenuList>
+      <MenuItem>Set status</MenuItem>
+      <MenuItem>Edit Profile</MenuItem>
+      <MenuItem>Preferences</MenuItem>
+    </MenuList>
+  </Menu>
+
+  <Menu offset={[16, 16]}>
+    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+      Menu
+    </MenuButton>
+
+    <MenuList>
+      <MenuItem>Set status</MenuItem>
+      <MenuItem>Edit Profile</MenuItem>
+      <MenuItem>Preferences</MenuItem>
+    </MenuList>
+  </Menu>
+</Wrap>
+```
+
+### Changing the Duration
+
+To change the duration, set a numerical value (seconds) to `duration`.
+
+```tsx
+<Menu duration={0.4}>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Adding Dividers Between Items
+
+By setting `MenuDivider` between `MenuItem`s, you can add dividers.
+
+```tsx
+<Menu>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+
+    <MenuDivider />
+
+    <MenuItem>Sign out</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Grouping Items
+
+To group items together, use `MenuGroup`.
+
+```tsx
+<Menu>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuGroup title="account">
+      <MenuItem>Set status</MenuItem>
+      <MenuItem>Edit Profile</MenuItem>
+      <MenuItem>Preferences</MenuItem>
+    </MenuGroup>
+
+    <MenuDivider />
+
+    <MenuGroup title="action">
+      <MenuItem>Sign out</MenuItem>
+    </MenuGroup>
+  </MenuList>
+</Menu>
+```
+
+### Selectable Items
+
+You can set selectable items like radios or checkboxes using `MenuOptionGroup` and `MenuOptionItem`.
+
+```tsx
+<Menu>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuOptionGroup title="order" type="radio">
+      <MenuOptionItem value="asc">Ascending</MenuOptionItem>
+      <MenuOptionItem value="desc">Descending</MenuOptionItem>
+    </MenuOptionGroup>
+
+    <MenuDivider />
+
+    <MenuOptionGroup title="display" type="checkbox">
+      <MenuOptionItem value="gender">gender</MenuOptionItem>
+      <MenuOptionItem value="email">email</MenuOptionItem>
+      <MenuOptionItem value="phone">phone</MenuOptionItem>
+    </MenuOptionGroup>
+  </MenuList>
+</Menu>
+```
+
+### Keeping the Menu Open After Item Selection
+
+If you do not want to close the menu upon item selection, set `closeOnSelect` to `false`.
+
+```tsx
+<Menu closeOnSelect={false}>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem closeOnSelect={true}>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Keeping the Menu Open When Focus is Lost
+
+If you do not want to close the menu when focus is lost, set `closeOnSelect` to `false`.
+
+```tsx
+<Menu closeOnBlur={false}>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Disabling an Item
+
+To disable an item, set `isDisabled` to `true`.
+
+```tsx
+<Menu>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem isDisabled>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Allowing Focus on Disabled Items
+
+To allow focus on disabled items, set `isFocusable` to `true`.
+
+```tsx
+<Menu>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem isDisabled isFocusable>
+      Edit Profile
+    </MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Lazy Rendering
+
+By default, it is rendered in the DOM regardless of being active. In other words, it is rendered but hidden by style.
+
+If you want to delay rendering until it becomes active, set `isLazy` to `true`.
+
+```tsx
+<Menu isLazy>
+  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    Menu
+  </MenuButton>
+
+  <MenuList>
+    <MenuItem>Set status</MenuItem>
+    <MenuItem>Edit Profile</MenuItem>
+    <MenuItem>Preferences</MenuItem>
+  </MenuList>
+</Menu>
+```
+
+### Controlling
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+      Menu
+    </MenuButton>
+
+    <MenuList>
+      <MenuItem>Set status</MenuItem>
+      <MenuItem>Edit Profile</MenuItem>
+      <MenuItem>Preferences</MenuItem>
+    </MenuList>
+  </Menu>
+)
+```

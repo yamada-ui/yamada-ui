@@ -7,7 +7,7 @@ import {
   Th,
   useTableStyles,
 } from "@yamada-ui/native-table"
-import { runIfFunc, handlerAll } from "@yamada-ui/utils"
+import { runIfFunc, handlerAll, cx } from "@yamada-ui/utils"
 import { FC } from "react"
 import { useTableContext, render, SortDirection, Column } from "./use-table"
 
@@ -72,7 +72,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
 
 export type SortIconProps = IconProps & { isSorted: false | SortDirection }
 
-const SortIcon: FC<SortIconProps> = ({ isSorted, ...rest }) => {
+const SortIcon: FC<SortIconProps> = ({ isSorted, className, ...rest }) => {
   const styles = useTableStyles()
 
   const css: CSSUIObject = {
@@ -88,7 +88,7 @@ const SortIcon: FC<SortIconProps> = ({ isSorted, ...rest }) => {
   if (!isSorted) {
     return (
       <Icon
-        className="ui-table-sort-icon"
+        className={cx("ui-table__sort-icon", className)}
         focusable="false"
         aria-hidden
         viewBox="0 0 24 24"

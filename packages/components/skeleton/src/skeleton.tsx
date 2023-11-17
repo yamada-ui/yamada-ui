@@ -11,7 +11,7 @@ import {
 import { useAnimation } from "@yamada-ui/use-animation"
 import { usePrevious } from "@yamada-ui/use-previous"
 import { useValue } from "@yamada-ui/use-value"
-import { cx, useIsMounted } from "@yamada-ui/utils"
+import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
 
 type SkeletonOptions = {
   /**
@@ -54,7 +54,7 @@ export type SkeletonProps = HTMLUIProps<"div"> &
 
 export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Skeleton", props)
-  const {
+  let {
     className,
     startColor,
     endColor,
@@ -62,14 +62,17 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     speed = 0.8,
     isLoaded,
     isFitContent,
+    children,
     ...rest
   } = omitThemeProps(mergedProps)
   const isMounted = useIsMounted()
-
+  const validChildren = getValidChildren(children)
   const prevIsLoaded = usePrevious(isLoaded)
-
   const computedStartColor = useValue(startColor)
   const computedEndColor = useValue(endColor)
+  const hasChildren = !!validChildren.length
+
+  isFitContent ??= hasChildren
 
   const fadeIn = useAnimation({
     keyframes: {
@@ -103,7 +106,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
 
   const css: CSSUIObject = {
     w: isFitContent ? "fit-content" : "full",
-    h: "4",
+    maxW: "full",
+    h: isFitContent ? "fit-content" : "4",
     boxShadow: "none",
     backgroundClip: "padding-box",
     cursor: "default",
@@ -125,7 +129,9 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         className={cx("ui-skeleton", "ui-skeleton--loaded", className)}
         {...rest}
         animation={animation}
-      />
+      >
+        {validChildren}
+      </ui.div>
     )
   } else {
     return (
@@ -135,7 +141,9 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         __css={css}
         {...rest}
         animation={animation}
-      />
+      >
+        {validChildren}
+      </ui.div>
     )
   }
 })

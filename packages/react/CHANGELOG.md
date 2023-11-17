@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 0.8.22
+
+### Patch Changes
+
+- Updated dependencies [[`26f3b574`](https://github.com/hirotomoyamada/yamada-ui/commit/26f3b574ba4556990d11ef9b44141cfb0196ad7e)]:
+  - @yamada-ui/skeleton@0.4.0
+
 ## 0.8.21
 
 ### Patch Changes

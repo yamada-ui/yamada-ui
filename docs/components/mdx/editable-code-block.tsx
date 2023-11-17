@@ -1,4 +1,13 @@
-import { faMinus, faPlus, faPoo, faCaretRight } from "@fortawesome/free-solid-svg-icons"
+import {
+  faMinus,
+  faPlus,
+  faPoo,
+  faBars,
+  faArrowUpRightFromSquare,
+  faEdit,
+  faCaretRight,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
@@ -62,6 +71,10 @@ const scope = {
   faMinus,
   faPlus,
   faCaretRight,
+  faChevronDown,
+  faBars,
+  faArrowUpRightFromSquare,
+  faEdit,
   // React Icons
   FaRobot,
   // Utils

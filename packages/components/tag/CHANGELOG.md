@@ -1,5 +1,11 @@
 # @yamada-ui/tag
 
+## 0.4.0
+
+### Minor Changes
+
+- [`35db51d4`](https://github.com/hirotomoyamada/yamada-ui/commit/35db51d46357372ac0211fc255f65ab138afca25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed `onCloseClick` to `onClose`.
+
 ## 0.3.16
 
 ### Patch Changes

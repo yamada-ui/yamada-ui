@@ -1,5 +1,11 @@
 # @yamada-ui/tabs
 
+## 0.3.20
+
+### Patch Changes
+
+- [#255](https://github.com/hirotomoyamada/yamada-ui/pull/255) [`df1d6e1c`](https://github.com/hirotomoyamada/yamada-ui/commit/df1d6e1c333ce1ac911268c8df88cd5600881d92) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Tabs`.
+
 ## 0.3.19
 
 ### Patch Changes

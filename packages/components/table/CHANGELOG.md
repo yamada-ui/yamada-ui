@@ -1,5 +1,11 @@
 # @yamada-ui/table
 
+## 0.4.18
+
+### Patch Changes
+
+- [#255](https://github.com/hirotomoyamada/yamada-ui/pull/255) [`8e10f071`](https://github.com/hirotomoyamada/yamada-ui/commit/8e10f0714021eff5d809e974244d0baed0b046d6) Thanks [@illionillion](https://github.com/illionillion)! - Changed `className` in `Table`.
+
 ## 0.4.17
 
 ### Patch Changes

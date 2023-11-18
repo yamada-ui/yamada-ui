@@ -29,7 +29,7 @@ import {
   useDropzone,
   Accept,
   DropzoneOptions as ReactDropzoneOptions,
-} from "react-dropzone"
+} from "react-dropzone-esm"
 
 type DropzoneContext = {
   isLoading?: boolean

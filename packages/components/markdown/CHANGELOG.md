@@ -1,5 +1,11 @@
 # @yamada-ui/markdown
 
+## 0.3.18
+
+### Patch Changes
+
+- [`510d4f4b`](https://github.com/hirotomoyamada/yamada-ui/commit/510d4f4b18d3538ebfa9a0f8ec4c947fa7a60a7e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added MarkdownComponents type export.
+
 ## 0.3.17
 
 ### Patch Changes

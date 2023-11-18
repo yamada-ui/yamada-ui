@@ -1,5 +1,14 @@
 # @yamada-ui/react
 
+## 0.8.23
+
+### Patch Changes
+
+- Updated dependencies [[`e674428f`](https://github.com/hirotomoyamada/yamada-ui/commit/e674428f4eab657331190aa0bb0b500f8ccd6abb), [`35db51d4`](https://github.com/hirotomoyamada/yamada-ui/commit/35db51d46357372ac0211fc255f65ab138afca25), [`df1d6e1c`](https://github.com/hirotomoyamada/yamada-ui/commit/df1d6e1c333ce1ac911268c8df88cd5600881d92)]:
+  - @yamada-ui/native-select@0.5.2
+  - @yamada-ui/tag@0.4.0
+  - @yamada-ui/tabs@0.3.20
+
 ## 0.8.22
 
 ### Patch Changes

@@ -61,34 +61,39 @@ const UIProvider: FC<UIComponents.UIProviderProps> = ({
   )
 }
 
-const scope = {
-  React,
-  ...React,
+const react = { React, ...React }
+const components = {
   ...UIComponents,
   ...CarouselComponents,
-  ...DropzoneComponents,
   ...TableComponents,
   ...CalendarComponents,
+  ...DropzoneComponents,
   ...MarkdownComponents,
-  UIProvider,
   FontAwesomeIcon,
-  // Font Awesome Icons
-  faPoo,
+  UIProvider,
+}
+const fontAwesomeIcons = {
   faMinus,
   faPlus,
-  faCheck,
-  faCaretRight,
-  faChevronDown,
-  faArrowLeft,
-  faArrowRight,
+  faPoo,
   faBars,
+  faCheck,
   faArrowUpRightFromSquare,
   faEdit,
-  // React Icons
-  FaRobot,
-  FaCheckCircle,
-  // Utils
-  wait,
+  faCaretRight,
+  faArrowLeft,
+  faArrowRight,
+  faChevronDown,
+}
+const reactIcons = { FaRobot, FaCheckCircle }
+const utils = { wait }
+
+const scope = {
+  ...react,
+  ...components,
+  ...fontAwesomeIcons,
+  ...reactIcons,
+  ...utils,
 }
 
 export type EditableCodeBlockProps = {

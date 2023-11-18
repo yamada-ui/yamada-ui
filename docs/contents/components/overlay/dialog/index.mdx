@@ -104,6 +104,7 @@ return (
     <Wrap gap="md">
       {sizeMap.map((size) => (
         <Button
+          key={size}
           onClick={() => {
             setSize(size)
             onOpen()
@@ -133,7 +134,7 @@ return (
 
 ### Change Position
 
-To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
 
 ```tsx functional=true
 const placementMap = [
@@ -159,6 +160,7 @@ return (
     <Wrap gap="md">
       {placementMap.map((placement) => (
         <Button
+          key={placement}
           onClick={() => {
             setPlacement(placement)
             onOpen()
@@ -285,7 +287,7 @@ return (
 )
 ```
 
-### Do Not Block Scrolling When Dialog Opens
+### Do Not Block Scroll When Dialog Opens
 
 By default, when the dialog opens, it blocks scrolling of the main content to ensure accessibility. If you do not want to block scrolling of the main content, set `blockScrollOnMount` to `false`.
 
@@ -385,7 +387,7 @@ return (
 
 ### Customize Close Button
 
-If you want to customize `DialogCloseButton` with `props`, etc., set it without omitting.
+If you want to customize `DialogCloseButton` by passing `props`, etc., do not omit it and set it accordingly.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -446,7 +448,7 @@ return (
 
 ### Customize Overlay
 
-If you want to pass `props` to `DialogOverlay` to customize it, set it without omitting.
+If you want to customize `DialogOverlay` by passing `props`, etc., do not omit it and set it accordingly.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -477,7 +479,7 @@ return (
 
 ### Disable Overlay
 
-To disable (hide) the dialog's overlay, set `withOverlay` to `false`.
+To disable (hide) the overlay of the dialog, set `withOverlay` to `false`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()

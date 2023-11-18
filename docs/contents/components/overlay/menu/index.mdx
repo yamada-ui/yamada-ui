@@ -27,8 +27,8 @@ import {
 - `MenuList`: A wrapper component that controls the items in the menu.
 - `MenuItem`: A component for the items in the menu.
 - `MenuGroup`: A wrapper component that groups items in the menu.
-- `MenuOptionItem`: A component for selectable (radio and checkbox) menu items.
-- `MenuOptionGroup`: A wrapper component that groups selectable (radio and checkbox) menu items.
+- `MenuOptionItem`: A component for selectable menu items (radio and checkbox).
+- `MenuOptionGroup`: A wrapper component that groups selectable menu items (radio and checkbox).
 - `MenuDivider`: A component that separates items in the menu.
 
 ## Usage
@@ -49,7 +49,7 @@ import {
 
 ### Accessing Internal State
 
-`children` are provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
+`children` is provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
 
 ```tsx
 <Menu>
@@ -107,7 +107,7 @@ To display icons in items, set a `ReactElement` to `icon`.
 </Menu>
 ```
 
-### Focusing on an Item
+### Focusing on Items
 
 When opening the menu, if you want to focus on a specific item, set the target `ref` to `initialFocusRef`.
 
@@ -149,7 +149,7 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 
 ### Changing the Animation
 
-To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
+To change the show/hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
 
 ```tsx
 <Menu animation="top">
@@ -267,7 +267,7 @@ To group items together, use `MenuGroup`.
 
 ### Selectable Items
 
-You can set selectable items like radios or checkboxes using `MenuOptionGroup` and `MenuOptionItem`.
+You can set selectable items like radios or checkboxes by using `MenuOptionGroup` and `MenuOptionItem`.
 
 ```tsx
 <Menu>
@@ -292,9 +292,9 @@ You can set selectable items like radios or checkboxes using `MenuOptionGroup` a
 </Menu>
 ```
 
-### Keeping the Menu Open After Item Selection
+### Keeping the Menu Open When an Item is Selected
 
-If you do not want to close the menu upon item selection, set `closeOnSelect` to `false`.
+If you do not want the menu to close when an item is selected, set `closeOnSelect` to `false`.
 
 ```tsx
 <Menu closeOnSelect={false}>
@@ -312,7 +312,7 @@ If you do not want to close the menu upon item selection, set `closeOnSelect` to
 
 ### Keeping the Menu Open When Focus is Lost
 
-If you do not want to close the menu when focus is lost, set `closeOnSelect` to `false`.
+If you do not want the menu to close when focus is lost, set `closeOnSelect` to `false`.
 
 ```tsx
 <Menu closeOnBlur={false}>
@@ -328,9 +328,9 @@ If you do not want to close the menu when focus is lost, set `closeOnSelect` to 
 </Menu>
 ```
 
-### Disabling an Item
+### Disabling Items
 
-To disable an item, set `isDisabled` to `true`.
+To disable items, set `isDisabled` to `true`.
 
 ```tsx
 <Menu>

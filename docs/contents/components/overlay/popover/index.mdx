@@ -24,7 +24,7 @@ import {
 
 - `Popover`: A wrapper component that controls the state of the popover.
 - `PopoverTrigger`: A wrapper component that controls the reference element.
-- `PopoverAnchor`: A wrapper component used when you want to reference an element other than the one in `PopoverTrigger`.
+- `PopoverAnchor`: A wrapper component used when you want to reference an element other than the `PopoverTrigger` element.
 - `PopoverCloseButton`: A component for the button that closes the popover.
 - `PopoverContent`: A component that displays the content of the popover.
 - `PopoverHeader`: A component that displays the header of the popover.
@@ -81,7 +81,7 @@ The `children` are provided with methods such as `isOpen` and `onClose`. You can
 
 ### Displaying Based on a Different Element
 
-If you want to reference (such as coordinates) a different element than the one in `PopoverTrigger`, use `PopoverAnchor`.
+If you want to reference (such as coordinates) a different element than the `PopoverTrigger` element, use `PopoverAnchor`.
 
 ```tsx
 <HStack>
@@ -105,7 +105,7 @@ If you want to reference (such as coordinates) a different element than the one 
 
 ### Changing the Animation
 
-To change the show/hide animation, set `animation` to values like `top` or `left`. By default, `scale` is set.
+To change the show or hide animation, set `animation` to `top`, `left`, etc. By default, `scale` is set.
 
 ```tsx
 <Wrap gap="md">
@@ -168,7 +168,7 @@ To change the show/hide animation, set `animation` to values like `top` or `left
 
 ### Changing the Placement
 
-To change the placement, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
+To change the placement, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
 ```tsx
 <Wrap gap="md">
@@ -308,7 +308,7 @@ To change the placement, set `placement` to values like `top` or `left-start`. B
 
 ### Changing the Duration
 
-To change the duration, set `duration` to a numerical value (seconds).
+To change the duration, set `duration` to a number (seconds).
 
 ```tsx
 <Popover duration={0.7}>
@@ -357,7 +357,7 @@ Depending on the size of the element or the situation, you may want to adjust th
 
 ### Activating on Hover
 
-By default, the popover is activated when the `PopoverTrigger` element is clicked. If you want it to activate on hover, set `trigger` to `hover`.
+By default, it becomes active when the `PopoverTrigger` element is clicked. If you want it to activate on hover, set `trigger` to `hover`.
 
 ```tsx
 <Popover trigger="hover">
@@ -374,7 +374,7 @@ By default, the popover is activated when the `PopoverTrigger` element is clicke
 
 ### Delayed Rendering
 
-By default, it is rendered in the DOM regardless of being active. In other words, it is rendered even when not visible, but it is hidden by style.
+By default, it is rendered in the DOM regardless of whether it is active. In other words, it is rendered but hidden by style.
 
 If you want to delay rendering until it becomes active, set `isLazy` to `true`.
 
@@ -410,7 +410,7 @@ To disable (hide) the close button, set `closeOnButton` to `true`.
 
 ### Customizing the Close Button
 
-If you want to customize the `PopoverCloseButton` by passing `props` or similar, set it without omitting.
+If you want to customize the `PopoverCloseButton` by passing `props`, etc., set it without omitting.
 
 ```tsx
 <Popover>

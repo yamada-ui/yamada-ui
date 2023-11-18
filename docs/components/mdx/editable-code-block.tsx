@@ -13,6 +13,7 @@ import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
+import * as MarkdownComponents from "@yamada-ui/markdown"
 import {
   Box,
   Text,
@@ -65,6 +66,7 @@ const scope = {
   ...DropzoneComponents,
   ...TableComponents,
   ...CalendarComponents,
+  ...MarkdownComponents,
   UIProvider,
   FontAwesomeIcon,
   // Font Awesome Icons

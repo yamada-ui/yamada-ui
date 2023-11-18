@@ -1,4 +1,3 @@
-````
 ---
 title: Calendar
 description: "`Calendar` is a component for displaying or selecting dates in a calendar."
@@ -10,13 +9,19 @@ tab: Usage
 
 ## Import
 
+<PackageManagers packageNameOrCommand="@yamada-ui/calendar" />
+
+:::note status=warning
+`@yamada-ui/calendar` is not included in `@yamada-ui/react`, so it needs to be installed separately.
+:::
+
 ```ts
 import { Calendar } from "@yamada-ui/calendar"
-````
+```
 
 ## Usage
 
-Here is an example of using a basic calendar.
+Here is a basic example of using the calendar.
 
 ```tsx
 <Calendar />
@@ -194,12 +199,12 @@ import "dayjs/locale/ja"
 ```
 
 :::note
-For locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
+For information about locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
 :::
 
 ### Change Date Format
 
-To change the date format, set strings to `dateFormat` or `yearFormat`.
+To change the date format, set `dateFormat` or `yearFormat` to a string.
 
 ```tsx
 <VStack>
@@ -212,7 +217,7 @@ To change the date format, set strings to `dateFormat` or `yearFormat`.
 ```
 
 :::note
-For formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
+For information about formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
 :::
 
 ### Disable Dates Outside the Current Month
@@ -322,7 +327,7 @@ return <Calendar value={value} onChange={onChange} />
 
 ### Customize Label Button
 
-To customize the label button, set `props` to `labelProps`.
+To customize the label button, set `labelProps` to `props`.
 
 ```tsx
 <VStack>
@@ -333,7 +338,7 @@ To customize the label button, set `props` to `labelProps`.
 
 ### Customize Control Buttons
 
-To customize control buttons, set `props` to `controlProps`, `prevProps`, or `nextProps`.
+To customize the control buttons, set `controlProps`, `prevProps`, and `nextProps` to `props`.
 
 ```tsx
 <VStack>
@@ -481,8 +486,4 @@ To customize control buttons, set `props` to `controlProps`, `prevProps`, or `ne
     ),
   }}
 />
-```
-
-```
-
 ```

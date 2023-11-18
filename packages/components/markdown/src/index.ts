@@ -1,6 +1,7 @@
 export { Markdown } from "./markdown"
 export type {
   MarkdownProps,
+  MarkdownComponents,
   MarkdownComponentProps,
   MarkdownComponentCodeProps,
   MarkdownComponentHeadingProps,

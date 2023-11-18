@@ -12,6 +12,7 @@ import { cx, filterEmpty } from "@yamada-ui/utils"
 import { ComponentPropsWithoutRef, FC } from "react"
 import ReactMarkdown from "react-markdown"
 import {
+  Components,
   CodeProps,
   HeadingProps,
   LiProps,
@@ -29,6 +30,7 @@ import remarkGfm from "remark-gfm"
 
 type CodeTheme = keyof typeof styles
 
+export type MarkdownComponents = Components
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
   ComponentPropsWithoutRef<Y> & ReactMarkdownProps
 export type MarkdownComponentCodeProps = CodeProps

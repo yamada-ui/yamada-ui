@@ -1,12 +1,488 @@
+````
 ---
 title: Calendar
-description: This page is currently being created.
+description: "`Calendar` is a component for displaying or selecting dates in a calendar."
 package_name: "@yamada-ui/calendar"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Calendar } from "@yamada-ui/calendar"
+````
+
+## Usage
+
+Here is an example of using a basic calendar.
+
+```tsx
+<Calendar />
+```
+
+### Change Variant
+
+```tsx
+<VStack>
+  <Calendar variant="solid" today defaultValue={new Date(new Date().setDate(1))} />
+  <Calendar variant="subtle" today defaultValue={new Date(new Date().setDate(1))} />
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Calendar size="sm" />
+  <Calendar size="md" />
+  <Calendar size="lg" />
+  <Calendar size="full" />
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx
+<VStack>
+  <Calendar
+    variant="solid"
+    colorScheme="secondary"
+    today
+    defaultValue={new Date(new Date().setDate(1))}
+  />
+  <Calendar
+    variant="subtle"
+    colorScheme="green"
+    today
+    defaultValue={new Date(new Date().setDate(1))}
+  />
+</VStack>
+```
+
+### Change Initial Type
+
+To change the initial type, set `defaultType` to `date` or `month`. By default, `date` is set.
+
+```tsx
+<VStack>
+  <Calendar defaultType="date" />
+  <Calendar defaultType="month" />
+  <Calendar defaultType="year" />
+</VStack>
+```
+
+### Set Initial Date Value
+
+To set the initial date value, set `defaultValue` to `Date`.
+
+```tsx
+<Calendar defaultValue={new Date()} />
+```
+
+### Set Initial Month Value
+
+To set the initial month value, set `defaultMonth` to `Date`.
+
+```tsx
+<Calendar defaultMonth={new Date("1993-08-18")} />
+```
+
+### Change First Day of the Week
+
+To change the first day of the week, set `firstDayOfWeek` to `monday` or `sunday`. By default, `monday` is set.
+
+```tsx
+<VStack>
+  <Calendar firstDayOfWeek="sunday" />
+  <Calendar firstDayOfWeek="monday" />
+</VStack>
+```
+
+### Set Minimum and Maximum Dates
+
+To set the selectable minimum and maximum dates, set `minDate` and `maxDate` to `Date`.
+
+```tsx
+<Calendar minDate={new Date(new Date().setDate(1))} maxDate={new Date(new Date().setDate(18))} />
+```
+
+### Highlight Today's Date
+
+To highlight today's date, set `today` to `true`.
+
+```tsx
+<Calendar today />
+```
+
+### Set Weekend Days
+
+To set weekend days, set `weekendDays` to an array of numbers. By default, `[0, 6]` is set.
+
+```tsx
+<Calendar weekendDays={[0, 1]} />
+```
+
+### Set Holidays
+
+To set holidays, set `holidays` to an array of `Date`.
+
+```tsx functional=true
+const holidays = [
+  new Date("2023-01-01"),
+  new Date("2023-01-02"),
+  new Date("2023-01-09"),
+  new Date("2023-02-11"),
+  new Date("2023-02-23"),
+  new Date("2023-03-21"),
+  new Date("2023-04-29"),
+  new Date("2023-05-03"),
+  new Date("2023-05-04"),
+  new Date("2023-05-05"),
+  new Date("2023-07-17"),
+  new Date("2023-08-11"),
+  new Date("2023-09-18"),
+  new Date("2023-09-23"),
+  new Date("2023-10-09"),
+  new Date("2023-11-03"),
+  new Date("2023-11-23"),
+  new Date("2024-01-01"),
+  new Date("2024-01-08"),
+  new Date("2024-02-11"),
+  new Date("2024-02-12"),
+  new Date("2024-02-23"),
+  new Date("2024-03-20"),
+  new Date("2024-04-29"),
+  new Date("2024-05-03"),
+  new Date("2024-05-04"),
+  new Date("2024-05-05"),
+  new Date("2024-05-06"),
+  new Date("2024-07-15"),
+  new Date("2024-08-11"),
+  new Date("2024-08-12"),
+  new Date("2024-09-16"),
+  new Date("2024-09-22"),
+  new Date("2024-09-23"),
+  new Date("2024-10-14"),
+  new Date("2024-11-03"),
+  new Date("2024-11-04"),
+  new Date("2024-11-23"),
+]
+
+return <Calendar holidays={holidays} />
+```
+
+### Exclude Specific Dates
+
+To exclude specific dates, use `excludeDate`.
+
+```tsx
+<Calendar excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6} />
+```
+
+### Set Locale
+
+To set the locale, import the data and set the target locale to `locale`.
+
+```ts
+import "dayjs/locale/ja"
+```
+
+```tsx
+<Calendar locale="ja" />
+```
+
+:::note
+For locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
+:::
+
+### Change Date Format
+
+To change the date format, set strings to `dateFormat` or `yearFormat`.
+
+```tsx
+<VStack>
+  <Calendar locale="ja" dateFormat="YYYY年 MMMM" />
+  <Calendar locale="ja" defaultType="month" yearFormat="YYYY年" />
+  <Calendar locale="ja" defaultType="month" monthFormat="MM" />
+  <Calendar locale="ja" defaultType="year" yearFormat="YY" />
+  <Calendar locale="ja" weekdayFormat="dd曜" />
+</VStack>
+```
+
+:::note
+For formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
+:::
+
+### Disable Dates Outside the Current Month
+
+To disable dates outside the current month, set `disableOutsideDays` to `true`.
+
+```tsx
+<Calendar disableOutsideDays />
+```
+
+### Change the Number of Months Displayed
+
+To change the number of months displayed, set `amountOfMonths` to a number.
+
+```tsx
+<VStack>
+  <Calendar amountOfMonths={1} disableOutsideDays />
+  <Calendar amountOfMonths={2} disableOutsideDays />
+  <Calendar amountOfMonths={3} disableOutsideDays />
+</VStack>
+```
+
+### Change Pagination Unit
+
+To change the pagination unit, set `paginateBy` to a number. By default, the same number as `amountOfMonths` is set.
+
+```tsx
+<Calendar amountOfMonths={2} disableOutsideDays paginateBy={1} />
+```
+
+### Allow Multiple Selection
+
+To allow multiple selection, set `defaultValue` to an empty array.
+
+```tsx
+<Calendar defaultValue={[]} />
+```
+
+### Set Maximum Number of Selectable Values
+
+To set the maximum number of selectable values, set `maxSelectedValues` to a number.
+
+```tsx
+<Calendar defaultValue={[]} maxSelectedValues={3} />
+```
+
+### Disable (Hide) Elements
+
+To disable (hide) elements (such as headers or labels), set `withHeader` and others to `false`.
+
+```tsx
+<VStack>
+  <Calendar withHeader={false} />
+  <Calendar withControls={false} />
+  <Calendar withLabel={false} />
+  <Calendar withWeekdays={false} />
+</VStack>
+```
+
+### Control
+
+```tsx functional=true
+const typeRef = useRef<() => void>(null)
+const prevRef = useRef<() => void>(null)
+const nextRef = useRef<() => void>(null)
+
+const onChangeType = () => {
+  if (typeRef.current) typeRef.current()
+}
+const onPrev = () => {
+  if (prevRef.current) prevRef.current()
+}
+const onNext = () => {
+  if (nextRef.current) nextRef.current()
+}
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button onClick={onPrev}>Prev</Button>
+      <Button onClick={onChangeType}>Change Type</Button>
+      <Button onClick={onNext}>Next</Button>
+    </Wrap>
+
+    <Calendar withHeader={false} typeRef={typeRef} prevRef={prevRef} nextRef={nextRef} />
+  </VStack>
+)
+```
+
+```tsx functional=true
+const [type, onChangeType] = useState<CalendarProps["type"]>("month")
+
+return <Calendar type={type} onChangeType={onChangeType} />
+```
+
+```tsx functional=true
+const [month, onChangeMonth] = useState<Date>(new Date("1993-08-18"))
+
+return <Calendar month={month} onChangeMonth={onChangeMonth} />
+```
+
+```tsx functional=true
+const [value, onChange] = useState<Date>(new Date())
+
+return <Calendar value={value} onChange={onChange} />
+```
+
+### Customize Label Button
+
+To customize the label button, set `props` to `labelProps`.
+
+```tsx
+<VStack>
+  <Calendar labelProps={{ color: "red.500" }} />
+  <Calendar labelProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
+</VStack>
+```
+
+### Customize Control Buttons
+
+To customize control buttons, set `props` to `controlProps`, `prevProps`, or `nextProps`.
+
+```tsx
+<VStack>
+  <Calendar controlProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
+  <Calendar prevProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
+  <Calendar nextProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
+</VStack>
+```
+
+### Customize Styling
+
+```tsx
+<VStack>
+  <Calendar defaultType="year" yearProps={{ color: "gray.500" }} />
+  <Calendar
+    defaultType="year"
+    yearProps={{
+      component: ({ year }) => (
+        <Tooltip label={year}>
+          <Center as="span" w="full" h="full">
+            {year}
+          </Center>
+        </Tooltip>
+      ),
+    }}
+  />
+</VStack>
+```
+
+```tsx
+<VStack>
+  <Calendar defaultType="month" monthProps={{ color: "gray.500" }} />
+  <Calendar
+    defaultType="month"
+    monthProps={{
+      component: ({ year, month }) => (
+        <Tooltip label={year}>
+          <Center as="span" w="full" h="full">
+            {month}
+          </Center>
+        </Tooltip>
+      ),
+    }}
+  />
+</VStack>
+```
+
+```tsx
+<VStack>
+  <Calendar locale="ja" weekdayProps={{ color: "orange.500" }} />
+  <Calendar
+    locale="ja"
+    weekdayProps={{
+      component: ({ weekday }) => (
+        <Tooltip label={`${weekday}曜日`} gutter={-8}>
+          <Center as="span" w="full" h="full">
+            {weekday}
+          </Center>
+        </Tooltip>
+      ),
+    }}
+  />
+</VStack>
+```
+
+```tsx
+<VStack>
+  <Calendar
+    dayProps={{
+      color: "blue.500",
+      _weekend: { color: "green.500" },
+      _outside: { color: "orange.500" },
+    }}
+  />
+
+  <Calendar
+    dayProps={{
+      sx: { _outside: { pointerEvents: "none" } },
+      component: ({ isOutside, date }) =>
+        !isOutside ? <Text as="span">{date.getDate()}</Text> : null,
+    }}
+  />
+
+  <Calendar
+    dayProps={{
+      component: ({ col, row, date }) => (
+        <Text as="span" color={col === 3 || row === 3 ? "blue.500" : undefined}>
+          {date.getDate()}
+        </Text>
+      ),
+    }}
+  />
+</VStack>
+```
+
+```tsx
+<Calendar
+  dateFormat="YYYY年 MMMM"
+  locale="ja"
+  size="full"
+  type="date"
+  headerProps={{ mb: 2 }}
+  labelProps={{ pointerEvents: "none", icon: { display: "none" } }}
+  tableProps={{
+    border: "1px solid",
+    borderColor: "border",
+    th: { border: "1px solid", borderColor: "border" },
+    td: { border: "1px solid", borderColor: "border" },
+  }}
+  dayProps={{
+    h: "auto",
+    p: 2,
+    _selected: undefined,
+    _hover: undefined,
+    _active: undefined,
+    transitionProperty: "none",
+    component: ({ date, isSelected }) => (
+      <VStack alignItems="center">
+        <Center
+          bg={isSelected ? "primary" : undefined}
+          w={8}
+          lineHeight={8}
+          rounded="full"
+          color={isSelected ? "white" : undefined}
+          transitionProperty="background"
+          transitionDuration="normal"
+        >
+          {date.getDate()}
+        </Center>
+
+        <List w="full" gap="sm">
+          <ListItem
+            w="full"
+            bg="secondary"
+            color="white"
+            fontSize="sm"
+            textAlign="center"
+            px="2"
+            rounded="md"
+          >
+            誕生日
+          </ListItem>
+        </List>
+      </VStack>
+    ),
+  }}
+/>
+```
+
+```
+
+```

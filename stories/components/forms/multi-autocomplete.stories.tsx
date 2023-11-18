@@ -285,7 +285,7 @@ export const withComponent: Story = () => {
       <MultiAutocomplete
         placeholder="キャラクターを選択"
         component={({ displayValue, onRemove }) => (
-          <Tag onCloseClick={onRemove}>{displayValue}</Tag>
+          <Tag onClose={onRemove}>{displayValue}</Tag>
         )}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>

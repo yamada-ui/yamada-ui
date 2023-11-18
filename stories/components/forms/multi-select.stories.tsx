@@ -155,7 +155,7 @@ export const withComponent: Story = () => {
       <MultiSelect
         placeholder="キャラクターを選択"
         component={({ displayValue, onRemove }) => (
-          <Tag onCloseClick={onRemove}>{displayValue}</Tag>
+          <Tag onClose={onRemove}>{displayValue}</Tag>
         )}
       >
         <Option value="孫悟空">孫悟空</Option>

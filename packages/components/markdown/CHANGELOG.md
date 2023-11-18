@@ -1,5 +1,11 @@
 # @yamada-ui/markdown
 
+## 0.4.0
+
+### Minor Changes
+
+- [`b5c2d5eb`](https://github.com/hirotomoyamada/yamada-ui/commit/b5c2d5eb3a409bc4c7a658dd9c6e9180ee567d03) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Upgraded `react-syntax-highligher` to esm version.
+
 ## 0.3.18
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/dropzone
 
+## 0.5.0
+
+### Minor Changes
+
+- [`fd70b95c`](https://github.com/hirotomoyamada/yamada-ui/commit/fd70b95c1a238da127c0d0a98de64c6913d99ec0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Upgraded `react-dropzone` to esm version.
+
 ## 0.4.2
 
 ### Patch Changes

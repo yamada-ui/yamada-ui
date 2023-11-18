@@ -24,11 +24,9 @@ import {
 import { ReactMarkdownProps } from "react-markdown/lib/complex-types"
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import * as styles from "react-syntax-highlighter/dist/cjs/styles/prism"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
-
-type CodeTheme = keyof typeof styles
+import { CodeThemeNames, codeThemes } from "./code-theme"
 
 export type MarkdownComponents = Components
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
@@ -45,7 +43,7 @@ type MarkdownOptions = ReactMarkdownOptions & {
   /**
    * If provided, this will set the theme for the code.
    */
-  code?: { theme?: CodeTheme | ColorModeArray<CodeTheme> }
+  code?: { theme?: CodeThemeNames | ColorModeArray<CodeThemeNames> }
 }
 
 export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
@@ -108,7 +106,7 @@ const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["code"]> = ({
       as={SyntaxHighlighter as any}
       className={cx("ui-markdown__code", className)}
       language={language}
-      style={(styles as any)[theme]}
+      style={codeThemes[theme]}
     >
       {String(children).replace(/\n$/, "")}
     </ui.pre>

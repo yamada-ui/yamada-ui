@@ -252,7 +252,7 @@ if (process.env.NODE_ENV === "development") {
   }
 
   if (!resolvedDocumentTypeNames.length) {
-    throw new Error('The document generate is required. Please check ".env."')
+    throw new Error('The document generate is required. Please check ".env"')
   }
 }
 
@@ -264,8 +264,19 @@ const documentTypes = resolvedDocumentTypeNames.map((documentTypeName) =>
   })),
 )
 
+let contentDirExclude: string[] = []
+
+if (documentTypeNames.length !== resolvedDocumentTypeNames.length) {
+  const omitDocumentTypeNames = documentTypeNames.filter(
+    (documentTypeName) => !resolvedDocumentTypeNames.includes(documentTypeName),
+  )
+
+  contentDirExclude = [`(${omitDocumentTypeNames.join("|")})/**`]
+}
+
 export default makeSource({
   contentDirPath: "contents",
+  contentDirExclude,
   documentTypes,
   mdx: {
     rehypePlugins: [rehypeCodeMeta],

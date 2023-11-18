@@ -7,6 +7,8 @@ import {
   faArrowUpRightFromSquare,
   faEdit,
   faCaretRight,
+  faArrowLeft,
+  faArrowRight,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
@@ -76,6 +78,8 @@ const scope = {
   faCheck,
   faCaretRight,
   faChevronDown,
+  faArrowLeft,
+  faArrowRight,
   faBars,
   faArrowUpRightFromSquare,
   faEdit,

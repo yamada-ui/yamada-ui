@@ -1,12 +1,637 @@
 ---
 title: Carousel
-description: This page is currently being created.
+description: "`Carousel` is a component that displays multiple elements like a slideshow."
 package_name: "@yamada-ui/carousel"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import {
+  Carousel,
+  CarouselSlide,
+  CarouselControlNext,
+  CarouselControlPrev,
+  CarouselIndicators,
+} from "@yamada-ui/react"
+```
+
+- `Carousel`: A wrapper component that controls the child elements (`CarouselSlide`).
+- `CarouselSlide`: A component that displays a slide.
+- `CarouselControlNext`: A component for the button that displays the next slide.
+- `CarouselControlPrev`: A component for the button that displays the previous slide.
+- `CarouselIndicators`: A component that displays the number of slides and the current slide position.
+
+:::note
+`CarouselControlNext`, `CarouselControlPrev`, and `CarouselIndicators` can be omitted.
+:::
+
+## Usage
+
+```tsx
+<Carousel>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Specify Size
+
+```tsx functional=true
+const sizeMap = ["sm", "md", "lg", "xl"]
+return (
+  <VStack>
+    {sizeMap.map((size) => (
+      <Carousel key={size} size={size}>
+        <CarouselSlide as={Center} bg="primary">
+          1
+        </CarouselSlide>
+        <CarouselSlide as={Center} bg="secondary">
+          2
+        </CarouselSlide>
+        <CarouselSlide as={Center} bg="warning">
+          3
+        </CarouselSlide>
+        <CarouselSlide as={Center} bg="danger">
+          4
+        </CarouselSlide>
+      </Carousel>
+    ))}
+  </VStack>
+)
+```
+
+### Change Direction
+
+To change the direction, set `orientation` to `horizontal` or `vertical`. By default, `horizontal` is set.
+
+```tsx
+<VStack>
+  <Carousel orientation="horizontal">
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel orientation="vertical">
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+</VStack>
+```
+
+### Specify the Initial Slide
+
+To specify the initial slide, set `defaultIndex` to the `index`.
+
+```tsx
+<Carousel defaultIndex={1}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Adjust Between Slides
+
+To adjust the space between slides, set `gap` to a string or a number. By default, `1rem` is set.
+
+```tsx
+<Carousel gap={0}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Change the Speed of Slide Transition
+
+To change the speed of the slide transition, set `speed` to a number. By default, `10` is set.
+
+```tsx
+<Carousel speed={50}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Change Slide Size
+
+To change the size of the slides, set `slideSize` to a string or a number. By default, `100%` is set.
+
+If you want to change the size of individual slides, set a value for `size` on `CarouselSlide`.
+
+```tsx
+<Carousel slideSize="50%">
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary" size="100%">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Change Slide Position
+
+To change the position of the slides, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
+
+```tsx
+<VStack>
+  <Carousel slideSize="50%" align="center">
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel slideSize="50%" align="start">
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel slideSize="50%" align="end">
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+</VStack>
+```
+
+### Change the Number of Slides to Scroll
+
+To change the number of slides to scroll, set `slidesToScroll` to a number. By default, `1` is set.
+
+```tsx
+<Carousel slideSize="33.3%" slidesToScroll={3} loop={false}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="primary">
+    5
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    6
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    7
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="primary">
+    8
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    9
+  </CarouselSlide>
+</Carousel>
+```
+
+### Use Autoplay
+
+To use autoplay, set `autoplay` to `true`.
+
+```tsx
+<Carousel autoplay>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+#### Change Autoplay Interval
+
+To change the autoplay interval, set `delay` to a number (milliseconds). By default, `4000` is set.
+
+```tsx
+<Carousel autoplay delay={1000}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+#### Do Not Stop Autoplay on Mouse Enter
+
+By default, autoplay stops when the element is hovered over. To prevent this, set `stopMouseEnterAutoplay` to `false`.
+
+```tsx
+<Carousel autoplay stopMouseEnterAutoplay={false}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Use Drag Free
+
+By setting `dragFree` to `true`, you can freely drag the slides.
+
+```tsx
+<Carousel dragFree>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Disable Loop
+
+To disable looping, set `loop` to `false`.
+
+```tsx
+<Carousel loop={false}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Disable Dragging
+
+To disable dragging, set `draggable` to `false`.
+
+```tsx
+<Carousel draggable={false}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Disable Control Buttons
+
+To disable control buttons, set `withControls` to `false`.
+
+```tsx
+<Carousel withControls={false}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Customize Control Buttons
+
+To customize control buttons, set `props` to `controlProps` or `controlPrevProps`, or use `CarouselControlPrev` or `CarouselControlNext`.
+
+```tsx
+<VStack>
+  <Carousel controlProps={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel controlPrevProps={{ icon: <FontAwesomeIcon icon={faArrowLeft} /> }}>
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel controlNextProps={{ icon: <FontAwesomeIcon icon={faArrowRight} /> }}>
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel>
+    <CarouselControlPrev icon={<FontAwesomeIcon icon={faArrowLeft} />} />
+    <CarouselControlNext icon={<FontAwesomeIcon icon={faArrowRight} />} />
+
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+</VStack>
+```
+
+### Disable Indicators
+
+To disable indicators, set `withIndicators` to `false`.
+
+```tsx
+<Carousel withIndicators={false}>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
+```
+
+### Customize Indicators
+
+To customize indicators, set `props` to `indicatorsProps`, or use `CarouselIndicators`.
+
+```tsx
+<VStack>
+  <Carousel
+    indicatorsProps={{
+      bottom: "8",
+      component: ({ isSelected }) => (
+        <FontAwesomeIcon
+          icon={faPoo}
+          color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
+          cursor="pointer"
+        />
+      ),
+    }}
+  >
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+
+  <Carousel>
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+
+    <CarouselIndicators
+      sx={{
+        "& > *": {
+          w: "4",
+          _selected: { w: "12" },
+          transitionProperty: "width",
+          transitionDuration: "slower",
+        },
+      }}
+    />
+  </Carousel>
+</VStack>
+```
+
+### Control
+
+```tsx functional=true
+const [index, onChange] = useState<number>(0)
+
+return (
+  <Carousel draggable={false} index={index} onChange={onChange}>
+    <CarouselSlide as={Center} bg="primary">
+      1
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="secondary">
+      2
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="warning">
+      3
+    </CarouselSlide>
+    <CarouselSlide as={Center} bg="danger">
+      4
+    </CarouselSlide>
+  </Carousel>
+)
+```
+
+You can access the current scroll amount using `onScrollProgress`.
+
+```tsx functional=true
+const [value, onScrollProgress] = useState<number>(0)
+
+return (
+  <>
+    <Carousel loop={false} dragFree onScrollProgress={onScrollProgress}>
+      <CarouselSlide as={Center} bg="primary">
+        1
+      </CarouselSlide>
+      <CarouselSlide as={Center} bg="secondary">
+        2
+      </CarouselSlide>
+      <CarouselSlide as={Center} bg="warning">
+        3
+      </CarouselSlide>
+      <CarouselSlide as={Center} bg="danger">
+        4
+      </CarouselSlide>
+    </Carousel>
+
+    <Progress value={value} colorScheme="gray" />
+  </>
+)
+```

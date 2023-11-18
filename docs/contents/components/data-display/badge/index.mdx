@@ -1,12 +1,294 @@
 ---
 title: Badge
-description: This page is currently being created.
+description: "`Badge` is a component that emphasizes the status of an item to make it immediately recognizable."
 package_name: "@yamada-ui/badge"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Badge } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Badge>New</Badge>
+```
+
+### Change Variant
+
+```tsx
+<Wrap gap="md">
+  <Badge variant="subtle" colorScheme="primary">
+    Primary
+  </Badge>
+  <Badge variant="solid" colorScheme="secondary">
+    Secondary
+  </Badge>
+  <Badge variant="outline" colorScheme="success">
+    Success
+  </Badge>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx
+<VStack>
+  <Wrap gap="md">
+    <Badge variant="subtle" colorScheme="primary">
+      Primary
+    </Badge>
+    <Badge variant="subtle" colorScheme="secondary">
+      Secondary
+    </Badge>
+    <Badge variant="subtle" colorScheme="warning">
+      Warning
+    </Badge>
+    <Badge variant="subtle" colorScheme="success">
+      Success
+    </Badge>
+    <Badge variant="subtle" colorScheme="danger">
+      Danger
+    </Badge>
+    <Badge variant="subtle" colorScheme="link">
+      Link
+    </Badge>
+    <Badge variant="subtle" colorScheme="gray">
+      Gray
+    </Badge>
+    <Badge variant="subtle" colorScheme="zinc">
+      Zinc
+    </Badge>
+    <Badge variant="subtle" colorScheme="neutral">
+      Neutral
+    </Badge>
+    <Badge variant="subtle" colorScheme="stone">
+      Stone
+    </Badge>
+    <Badge variant="subtle" colorScheme="red">
+      Red
+    </Badge>
+    <Badge variant="subtle" colorScheme="rose">
+      Rose
+    </Badge>
+    <Badge variant="subtle" colorScheme="pink">
+      Pink
+    </Badge>
+    <Badge variant="subtle" colorScheme="orange">
+      Orange
+    </Badge>
+    <Badge variant="subtle" colorScheme="amber">
+      Amber
+    </Badge>
+    <Badge variant="subtle" colorScheme="yellow">
+      Yellow
+    </Badge>
+    <Badge variant="subtle" colorScheme="lime">
+      Lime
+    </Badge>
+    <Badge variant="subtle" colorScheme="green">
+      Green
+    </Badge>
+    <Badge variant="subtle" colorScheme="emerald">
+      Emerald
+    </Badge>
+    <Badge variant="subtle" colorScheme="teal">
+      Teal
+    </Badge>
+    <Badge variant="subtle" colorScheme="cyan">
+      Cyan
+    </Badge>
+    <Badge variant="subtle" colorScheme="sky">
+      Sky
+    </Badge>
+    <Badge variant="subtle" colorScheme="blue">
+      Blue
+    </Badge>
+    <Badge variant="subtle" colorScheme="indigo">
+      Indigo
+    </Badge>
+    <Badge variant="subtle" colorScheme="violet">
+      Violet
+    </Badge>
+    <Badge variant="subtle" colorScheme="purple">
+      Purple
+    </Badge>
+    <Badge variant="subtle" colorScheme="fuchsia">
+      Fuchsia
+    </Badge>
+  </Wrap>
+
+  <Wrap gap="md">
+    <Badge variant="solid" colorScheme="primary">
+      Primary
+    </Badge>
+    <Badge variant="solid" colorScheme="secondary">
+      Secondary
+    </Badge>
+    <Badge variant="solid" colorScheme="warning">
+      Warning
+    </Badge>
+    <Badge variant="solid" colorScheme="success">
+      Success
+    </Badge>
+    <Badge variant="solid" colorScheme="danger">
+      Danger
+    </Badge>
+    <Badge variant="solid" colorScheme="link">
+      Link
+    </Badge>
+    <Badge variant="solid" colorScheme="gray">
+      Gray
+    </Badge>
+    <Badge variant="solid" colorScheme="zinc">
+      Zinc
+    </Badge>
+    <Badge variant="solid" colorScheme="neutral">
+      Neutral
+    </Badge>
+    <Badge variant="solid" colorScheme="stone">
+      Stone
+    </Badge>
+    <Badge variant="solid" colorScheme="red">
+      Red
+    </Badge>
+    <Badge variant="solid" colorScheme="rose">
+      Rose
+    </Badge>
+    <Badge variant="solid" colorScheme="pink">
+      Pink
+    </Badge>
+    <Badge variant="solid" colorScheme="orange">
+      Orange
+    </Badge>
+    <Badge variant="solid" colorScheme="amber">
+      Amber
+    </Badge>
+    <Badge variant="solid" colorScheme="yellow">
+      Yellow
+    </Badge>
+    <Badge variant="solid" colorScheme="lime">
+      Lime
+    </Badge>
+    <Badge variant="solid" colorScheme="green">
+      Green
+    </Badge>
+    <Badge variant="solid" colorScheme="emerald">
+      Emerald
+    </Badge>
+    <Badge variant="solid" colorScheme="teal">
+      Teal
+    </Badge>
+    <Badge variant="solid" colorScheme="cyan">
+      Cyan
+    </Badge>
+    <Badge variant="solid" colorScheme="sky">
+      Sky
+    </Badge>
+    <Badge variant="solid" colorScheme="blue">
+      Blue
+    </Badge>
+    <Badge variant="solid" colorScheme="indigo">
+      Indigo
+    </Badge>
+    <Badge variant="solid" colorScheme="violet">
+      Violet
+    </Badge>
+    <Badge variant="solid" colorScheme="purple">
+      Purple
+    </Badge>
+    <Badge variant="solid" colorScheme="fuchsia">
+      Fuchsia
+    </Badge>
+  </Wrap>
+
+  <Wrap gap="md">
+    <Badge variant="outline" colorScheme="primary">
+      Primary
+    </Badge>
+    <Badge variant="outline" colorScheme="secondary">
+      Secondary
+    </Badge>
+    <Badge variant="outline" colorScheme="warning">
+      Warning
+    </Badge>
+    <Badge variant="outline" colorScheme="success">
+      Success
+    </Badge>
+    <Badge variant="outline" colorScheme="danger">
+      Danger
+    </Badge>
+    <Badge variant="outline" colorScheme="link">
+      Link
+    </Badge>
+    <Badge variant="outline" colorScheme="gray">
+      Gray
+    </Badge>
+    <Badge variant="outline" colorScheme="zinc">
+      Zinc
+    </Badge>
+    <Badge variant="outline" colorScheme="neutral">
+      Neutral
+    </Badge>
+    <Badge variant="outline" colorScheme="stone">
+      Stone
+    </Badge>
+    <Badge variant="outline" colorScheme="red">
+      Red
+    </Badge>
+    <Badge variant="outline" colorScheme="rose">
+      Rose
+    </Badge>
+    <Badge variant="outline" colorScheme="pink">
+      Pink
+    </Badge>
+    <Badge variant="outline" colorScheme="orange">
+      Orange
+    </Badge>
+    <Badge variant="outline" colorScheme="amber">
+      Amber
+    </Badge>
+    <Badge variant="outline" colorScheme="yellow">
+      Yellow
+    </Badge>
+    <Badge variant="outline" colorScheme="lime">
+      Lime
+    </Badge>
+    <Badge variant="outline" colorScheme="green">
+      Green
+    </Badge>
+    <Badge variant="outline" colorScheme="emerald">
+      Emerald
+    </Badge>
+    <Badge variant="outline" colorScheme="teal">
+      Teal
+    </Badge>
+    <Badge variant="outline" colorScheme="cyan">
+      Cyan
+    </Badge>
+    <Badge variant="outline" colorScheme="sky">
+      Sky
+    </Badge>
+    <Badge variant="outline" colorScheme="blue">
+      Blue
+    </Badge>
+    <Badge variant="outline" colorScheme="indigo">
+      Indigo
+    </Badge>
+    <Badge variant="outline" colorScheme="violet">
+      Violet
+    </Badge>
+    <Badge variant="outline" colorScheme="purple">
+      Purple
+    </Badge>
+    <Badge variant="outline" colorScheme="fuchsia">
+      Fuchsia
+    </Badge>
+  </Wrap>
+</VStack>
+```

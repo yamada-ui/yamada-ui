@@ -1,12 +1,188 @@
 ---
 title: Reorder
-description: This page is currently being created.
+description: "`Reorder` is a component that allows you to change the order of items using drag and drop."
 package_name: "@yamada-ui/reorder"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Reorder, ReorderItem, ReorderTrigger } from "@yamada-ui/react"
+```
+
+- `Reorder`: A wrapper component that controls the child elements (`ReorderItem`).
+- `ReorderItem`: A component for items that can be dragged and dropped.
+- `ReorderTrigger`: A component that displays a draggable icon.
+
+## Usage
+
+```tsx
+<Reorder>
+  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem label="リクーム">リクーム</ReorderItem>
+  <ReorderItem label="バータ">バータ</ReorderItem>
+  <ReorderItem label="ジース">ジース</ReorderItem>
+  <ReorderItem label="グルド">グルド</ReorderItem>
+</Reorder>
+```
+
+### Change Variants
+
+```tsx
+<VStack divider={<Divider />}>
+  <Reorder variant="outline">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+
+  <Reorder variant="elevated">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+
+  <Reorder variant="unstyled">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack divider={<Divider />}>
+  <Reorder size="sm">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+
+  <Reorder size="md">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+
+  <Reorder size="normal">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+
+  <Reorder size="lg">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+</VStack>
+```
+
+### Change Orientation
+
+To change the orientation, set `orientation` to `vertical` or `horizontal`. By default, `vertical` is set.
+
+```tsx
+<VStack divider={<Divider />}>
+  <Reorder orientation="vertical">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+
+  <Reorder orientation="horizontal">
+    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem label="リクーム">リクーム</ReorderItem>
+    <ReorderItem label="バータ">バータ</ReorderItem>
+    <ReorderItem label="ジース">ジース</ReorderItem>
+    <ReorderItem label="グルド">グルド</ReorderItem>
+  </Reorder>
+</VStack>
+```
+
+### Limit the Draggable Area
+
+To limit the draggable area, use `ReorderTrigger`.
+
+```tsx
+<Reorder>
+  <ReorderItem label="孫悟空">
+    <HStack>
+      <ReorderTrigger />
+      <Text>孫悟空</Text>
+    </HStack>
+  </ReorderItem>
+
+  <ReorderItem label="ベジータ">
+    <HStack>
+      <ReorderTrigger>
+        <FontAwesomeIcon icon={faPoo} />
+      </ReorderTrigger>
+      <Text>ベジータ</Text>
+    </HStack>
+  </ReorderItem>
+</Reorder>
+```
+
+### Handle Change Events
+
+If you want to handle the event when the order of items has changed, use `onChange`. `onChange` provides the current order as an array.
+
+```tsx
+<Reorder onChange={(labels) => console.log(`changed '${labels.join(`', '`)}'`)}>
+  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem label="リクーム">リクーム</ReorderItem>
+  <ReorderItem label="バータ">バータ</ReorderItem>
+  <ReorderItem label="ジース">ジース</ReorderItem>
+  <ReorderItem label="グルド">グルド</ReorderItem>
+</Reorder>
+```
+
+### Handle Completion Events
+
+If you want to handle the event when the user's drag and drop has finished and the order of items is completed, use `onCompleteChange`. `onCompleteChange` provides the completed order as an array.
+
+```tsx
+<Reorder onCompleteChange={(labels) => console.log(`completed '${labels.join(`', '`)}'`)}>
+  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem label="リクーム">リクーム</ReorderItem>
+  <ReorderItem label="バータ">バータ</ReorderItem>
+  <ReorderItem label="ジース">ジース</ReorderItem>
+  <ReorderItem label="グルド">グルド</ReorderItem>
+</Reorder>
+```
+
+### Use in a Scrollable Area
+
+When using in an area with scrolling, set `layoutScroll` to `true` so that items can measure offsets correctly.
+
+```tsx
+<Reorder h="xs" overflowY="auto" layoutScroll>
+  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem label="リクーム">リクーム</ReorderItem>
+  <ReorderItem label="バータ">バータ</ReorderItem>
+  <ReorderItem label="ジース">ジース</ReorderItem>
+  <ReorderItem label="グルド">グルド</ReorderItem>
+</Reorder>
+```

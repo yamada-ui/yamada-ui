@@ -1,12 +1,115 @@
 ---
 title: List
-description: This page is currently being created.
+description: "`List` is a component for displaying lists. By default, it renders a `ul` element."
 package_name: "@yamada-ui/list"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { List, ListItem, ListIcon, DiscList, DecimalList } from "@yamada-ui/react"
+```
+
+- `list`: A wrapper component for a list without item icons.
+- `ListItem`: A component for an item.
+- `ListIcon`: A component for an item's icon.
+- `Disclist`: A wrapper component for an unordered list.
+- `DecimalList`: A wrapper component for an ordered list.
+
+## Usage
+
+```tsx
+<List>
+  <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+  <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
+  <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+  <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+  <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
+</List>
+```
+
+### Unordered List
+
+```tsx
+<DiscList>
+  <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+  <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
+  <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+  <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+  <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
+</DiscList>
+```
+
+### Ordered List
+
+```tsx
+<DecimalList>
+  <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+  <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
+  <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+  <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+  <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
+</DecimalList>
+```
+
+### Using Custom Icons
+
+To use custom icons for items, use `ListIcon`.
+
+```tsx
+<List>
+  <ListItem>
+    <ListIcon as={FaCheckCircle} color="green.500" />
+    よろしければわたしが喜びのダンスを踊りましょうか！
+  </ListItem>
+  <ListItem>
+    <ListIcon as={FaCheckCircle} color="green.500" />
+    お命頂だい!!!　とうっ!!!
+  </ListItem>
+  <ListItem>
+    <ListIcon as={FaCheckCircle} color="green.500" />
+    う…宇宙一のスピードを誇るオ…オレさまのうしろに……
+  </ListItem>
+  <ListItem>
+    <ListIcon as={FaCheckCircle} color="green.500" />
+    オ…オレたちが勝てるわけはなかったはずだ………
+  </ListItem>
+  <ListItem>
+    <ListIcon as={FontAwesomeIcon} icon={faCheck} color="green.500" />
+    オレは試合場のゴミ拾いみたいなもんかよ…
+  </ListItem>
+</List>
+```
+
+### Other Lists
+
+```tsx
+<VStack>
+  <List styleType="square">
+    <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+    <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
+    <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+    <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+    <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
+  </List>
+
+  <List styleType="circle">
+    <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+    <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
+    <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+    <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+    <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
+  </List>
+
+  <List styleType="lower-alpha" ms="1.2em">
+    <ListItem ps="0.2em">よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+    <ListItem ps="0.2em">お命頂だい!!!　とうっ!!!</ListItem>
+    <ListItem ps="0.2em">う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+    <ListItem ps="0.2em">オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+    <ListItem ps="0.2em">オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
+  </List>
+</VStack>
+```

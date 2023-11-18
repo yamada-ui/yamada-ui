@@ -104,6 +104,7 @@ return (
     <Wrap gap="md">
       {sizeMap.map((size) => (
         <Button
+          key={size}
           onClick={() => {
             setSize(size)
             onOpen()
@@ -159,6 +160,7 @@ return (
     <Wrap gap="md">
       {placementMap.map((placement) => (
         <Button
+          key={placement}
           onClick={() => {
             setPlacement(placement)
             onOpen()

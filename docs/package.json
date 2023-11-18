@@ -64,6 +64,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "markdown-toc": "^1.2.0",
+    "markdown-wasm": "^1.2.0",
     "next-contentlayer": "^0.3.4",
     "openai": "^4.17.4",
     "ora": "^7.0.1",

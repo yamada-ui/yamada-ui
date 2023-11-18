@@ -18,7 +18,7 @@ describe("<Tag />", () => {
 
   test("Tag with close button renders correctly", async () => {
     const { getByTestId } = render(
-      <Tag data-testid="tag" onCloseClick={() => {}}>
+      <Tag data-testid="tag" onClose={() => {}}>
         Tag
       </Tag>,
     )

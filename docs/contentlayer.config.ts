@@ -147,8 +147,9 @@ const insertElement =
 export const getTableOfContents = (raw: string, maxLv = Infinity) => {
   const slugger = new GithubSlugger()
 
-  const regexp = new RegExp(/^(## |### |#### )(.*)\n/, "gm")
-  const contents = [...raw.matchAll(regexp)]
+  raw = raw.replace(/```[\s\S]*?```/g, "")
+
+  const contents = [...raw.matchAll(/^(## |### |#### )(.*)\n/gm)]
 
   if (!contents.length) return []
 

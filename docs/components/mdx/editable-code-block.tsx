@@ -35,6 +35,7 @@ import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
 import { theme as defaultTheme } from "theme"
+import "dayjs/locale/ja"
 
 const wait = (ms: number) =>
   new Promise((resolve) => {

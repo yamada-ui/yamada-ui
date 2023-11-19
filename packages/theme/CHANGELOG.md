@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.11.13
+
+### Patch Changes
+
+- [`5ce8f758`](https://github.com/hirotomoyamada/yamada-ui/commit/5ce8f75861750ef08e8a848e1a5d3d82295edfda) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Set table `width` to `100%`.
+
 ## 0.11.12
 
 ### Patch Changes

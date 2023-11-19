@@ -1,5 +1,11 @@
 # @yamada-ui/table
 
+## 0.4.19
+
+### Patch Changes
+
+- [`d2a5f0a3`](https://github.com/hirotomoyamada/yamada-ui/commit/d2a5f0a3164d3776a2cb639e95abaec36b4111cc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `options` prop to `items` in pageSize `Select`.
+
 ## 0.4.18
 
 ### Patch Changes

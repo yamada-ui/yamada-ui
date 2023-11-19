@@ -3,8 +3,11 @@ import { transparentizeColor, isGray } from "@yamada-ui/utils"
 
 export const NativeTable: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
+    container: {
+      w: "100%",
+    },
     table: {
+      w: "100%",
       fontVariantNumeric: "lining-nums tabular-nums",
       borderCollapse: "collapse",
     },

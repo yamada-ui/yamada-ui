@@ -263,7 +263,7 @@ export const PagingTable = forwardRef(
                   }
                   maxW="3xs"
                   value={String(state.pagination.pageSize)}
-                  options={pageSizeList.map((pageSize) => ({
+                  items={pageSizeList.map((pageSize) => ({
                     label: formatPageSizeLabel(pageSize),
                     value: String(pageSize),
                   }))}

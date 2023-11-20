@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@faker-js/faker':
+    specifier: ^8.3.1
+    version: registry.npmjs.org/@faker-js/faker@8.3.1
   '@fortawesome/free-regular-svg-icons':
     specifier: ^6.4.2
     version: 6.4.2
@@ -8082,6 +8085,13 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  registry.npmjs.org/@faker-js/faker@8.3.1:
+    resolution: {integrity: sha512-FdgpFxY6V6rLZE9mmIBb9hM0xpfvQOSNOLnzolzKwsE1DH+gC7lEKV1p1IbR0lAYyvYd5a4u3qWJzowUkw1bIw==, tarball: https://registry.npmjs.org/@faker-js/faker/-/faker-8.3.1.tgz}
+    name: '@faker-js/faker'
+    version: 8.3.1
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
+    dev: false
 
   registry.npmjs.org/@next/swc-darwin-arm64@14.0.2:
     resolution: {integrity: sha512-i+jQY0fOb8L5gvGvojWyZMfQoQtDVB2kYe7fufOEiST6sicvzI2W5/EXo4lX5bLUjapHKe+nFxuVv7BA+Pd7LQ==, tarball: https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-14.0.2.tgz}

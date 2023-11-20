@@ -15,7 +15,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 
 - `Tabs`: A wrapper component that controls the child elements (`TabList`, `TabPanels`).
 - `TabList`: A wrapper component that controls the child elements (`Tab`).
-- `Tab`: A component that functions as a label for the panel and a button to display that panel.
+- `Tab`: A button component that functions as a label for the panel and displays that panel.
 - `TabPanels`: A wrapper component that controls the child elements (`TabPanel`).
 - `TabPanel`: A component that displays content associated with a label.
 
@@ -41,7 +41,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </Tabs>
 ```
 
-### Change Variant
+### Change Variants
 
 ```tsx
 <VStack>
@@ -221,9 +221,9 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 </VStack>
 ```
 
-### Activate by Default
+### Select a Default Item
 
-To activate a specific tab from the start, set the `index` of the item to `defaultIndex`.
+To select a default item, set the `index` of the item to `defaultIndex`.
 
 ```tsx
 <Tabs defaultIndex={1}>
@@ -335,7 +335,7 @@ By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of
 
 ### Disable
 
-To disable a specific tab, set `isDisabled`.
+If you want to disable a specific tab, set `isDisabled`.
 
 ```tsx
 <Tabs>
@@ -391,7 +391,7 @@ If you want to delay the rendering of each panel until the tab becomes active, s
 
 ### Use `TabList`
 
-If `TabList` is not present in `children`, `Tab` automatically wraps the `Tab` within `children` with `TabList`. If you want to customize `TabList`, set `TabList` in `children`.
+If `TabList` does not exist in `children`, `Tab` automatically wraps the `Tab` in `children` with `TabList`. If you want to customize `TabList`, set `TabList` in `children`.
 
 ```tsx
 <Tabs>
@@ -411,7 +411,7 @@ If `TabList` is not present in `children`, `Tab` automatically wraps the `Tab` w
 
 ### Use `TabPanels`
 
-If `TabPanels` is not present in `children`, `Tab` automatically wraps the `TabPanel` within `children` with `TabPanels`. If you want to customize `TabPanels`, set `TabPanels` in `children`.
+If `TabPanels` does not exist in `children`, `Tab` automatically wraps the `TabPanel` in `children` with `TabPanels`. If you want to customize `TabPanels`, set `TabPanels` in `children`.
 
 ```tsx
 <Tabs variant="sticky">

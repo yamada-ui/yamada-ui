@@ -21,7 +21,9 @@ import { Calendar } from "@yamada-ui/calendar"
 
 ## Usage
 
-Here is a basic example of using the calendar.
+:::note
+`Calendar` internally uses [dayjs](https://day.js.org/).
+:::
 
 ```tsx
 <Calendar />
@@ -66,9 +68,9 @@ Here is a basic example of using the calendar.
 </VStack>
 ```
 
-### Change Initial Type
+### Change Default Type
 
-To change the initial type, set `defaultType` to `date` or `month`. By default, `date` is set.
+To change the default type, set `defaultType` to `date` or `month`. By default, `date` is set.
 
 ```tsx
 <VStack>
@@ -78,17 +80,17 @@ To change the initial type, set `defaultType` to `date` or `month`. By default, 
 </VStack>
 ```
 
-### Set Initial Date Value
+### Set Default Date
 
-To set the initial date value, set `defaultValue` to `Date`.
+To set the default date, set `defaultValue` to `Date`.
 
 ```tsx
 <Calendar defaultValue={new Date()} />
 ```
 
-### Set Initial Month Value
+### Set Default Month
 
-To set the initial month value, set `defaultMonth` to `Date`.
+To set the default month, set `defaultMonth` to `Date`.
 
 ```tsx
 <Calendar defaultMonth={new Date("1993-08-18")} />
@@ -199,7 +201,7 @@ import "dayjs/locale/ja"
 ```
 
 :::note
-For information about locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
+For locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
 :::
 
 ### Change Date Format
@@ -217,7 +219,7 @@ To change the date format, set `dateFormat` or `yearFormat` to a string.
 ```
 
 :::note
-For information about formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
+For formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
 :::
 
 ### Disable Dates Outside the Current Month
@@ -338,7 +340,7 @@ To customize the label button, set `labelProps` to `props`.
 
 ### Customize Control Buttons
 
-To customize the control buttons, set `controlProps`, `prevProps`, and `nextProps` to `props`.
+To customize control buttons, set `controlProps`, `prevProps`, and `nextProps` to `props`.
 
 ```tsx
 <VStack>

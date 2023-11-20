@@ -31,6 +31,10 @@ import {
 
 ## Usage
 
+:::note
+`Carousel` internally uses [embla-carousel-react](https://www.embla-carousel.com/).
+:::
+
 ```tsx
 <Carousel>
   <CarouselSlide as={Center} bg="primary">
@@ -112,9 +116,9 @@ To change the direction, set `orientation` to `horizontal` or `vertical`. By def
 </VStack>
 ```
 
-### Specify the Initial Slide
+### Select Default Slide
 
-To specify the initial slide, set `defaultIndex` to the `index`.
+To select the default slide, set `defaultIndex` to the `index`.
 
 ```tsx
 <Carousel defaultIndex={1}>
@@ -154,7 +158,7 @@ To adjust the space between slides, set `gap` to a string or a number. By defaul
 </Carousel>
 ```
 
-### Change the Speed of Slide Transition
+### Change Speed of Slide Transition
 
 To change the speed of the slide transition, set `speed` to a number. By default, `10` is set.
 
@@ -198,9 +202,9 @@ If you want to change the size of individual slides, set a value for `size` on `
 </Carousel>
 ```
 
-### Change Slide Position
+### Change Slide Alignment
 
-To change the position of the slides, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
+To change the slide alignment, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
 
 ```tsx
 <VStack>
@@ -251,7 +255,7 @@ To change the position of the slides, set `align` to `start`, `center`, `end`, o
 </VStack>
 ```
 
-### Change the Number of Slides to Scroll
+### Change Number of Slides to Scroll
 
 To change the number of slides to scroll, set `slidesToScroll` to a number. By default, `1` is set.
 
@@ -350,7 +354,7 @@ By default, autoplay stops when the element is hovered over. To prevent this, se
 </Carousel>
 ```
 
-### Use Drag Free
+### Use Drag-Free
 
 By setting `dragFree` to `true`, you can freely drag the slides.
 

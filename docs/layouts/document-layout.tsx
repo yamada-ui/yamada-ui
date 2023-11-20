@@ -12,7 +12,7 @@ import {
   EditPageLink,
   RelatedLinks,
 } from "components/navigation"
-import { TextWithCode } from "components/typography"
+import { TextWithCodeOrLink } from "components/typography"
 import { DocumentData, DocumentTypes } from "contentlayer/generated"
 import { usePage } from "contexts/page-context"
 
@@ -50,7 +50,9 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
               {title}
             </Heading>
 
-            {with_description ? <TextWithCode mt="6">{description}</TextWithCode> : null}
+            {with_description ? (
+              <TextWithCodeOrLink mt="6">{description}</TextWithCodeOrLink>
+            ) : null}
 
             <RelatedLinks />
 

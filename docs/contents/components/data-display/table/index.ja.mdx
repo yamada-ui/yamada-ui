@@ -1,12 +1,1665 @@
 ---
 title: Table
-description: このページは現在作成中です。
+description: "`Table`は、列のソートや行の選択やクリックイベント機能を備えたテーブルのコンポーネントです。"
 package_name: "@yamada-ui/table"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+<PackageManagers packageNameOrCommand="@yamada-ui/table" />
+
+:::note status=warning
+`@yamada-ui/table`は、`@yamada-ui/react`に含まれていないため、別途インストールする必要があります。
+:::
+
+```ts
+import { Table } from "@yamada-ui/table"
+```
+
+## 使い方
+
+テーブルを構成するために`columns`と`data`を設定します。
+
+:::note
+`Table`は、内部的に[@tanstack/react-table](https://tanstack.com/table/v8)を使用しています。
+:::
+
+- `columns`: [ColumnDef](https://tanstack.com/table/v8/docs/api/core/column-def)と以下のプロパティがオブジェクトに設定できます。そのオブジェクトは1列になり、配列に列(オブジェクト)分を設定します。
+  - `className`: `Th`の`className`です。
+  - `style`: `Th`の`style`オブジェクトです。
+  - `sx`: `Th`の`sx`オブジェクトです。
+  - `css`: `Th`の`Styled Props`が使用できるオブジェクトです。
+- `data`: `columns`で設定した`accessorKey`や`accessorFn`の値をキーとしてセルの値をオブジェクトに設定します。そのオブジェクトは1行になり、配列に行(オブジェクト)分を設定します。
+
+```tsx live=false
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+```
+
+:::note
+`columns`と`data`は、メモ化することをオススメします。不要なレンダリングを抑制できます。
+:::
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} />
+```
+
+### バリアントを変更する
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table variant="simple" columns={columns} data={data} />
+    <Table variant="striped" columns={columns} data={data} />
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table size="sm" columns={columns} data={data} />
+    <Table size="md" columns={columns} data={data} />
+    <Table size="lg" columns={columns} data={data} />
+    <Table size="xl" columns={columns} data={data} />
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table variant="striped" colorScheme="secondary" columns={columns} data={data} />
+    <Table variant="striped" colorScheme="green" columns={columns} data={data} />
+  </VStack>
+)
+```
+
+### 列の区切り線を追加する
+
+列の区切り線を追加する場合は、`withColumnBorders`を`true`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} withColumnBorders />
+```
+
+### 外枠の区切り線を追加する
+
+外枠の区切り線を追加する場合は、`withBorder`を`true`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} withBorder />
+```
+
+### 行がホバーされたときにハイライトする
+
+行がホバーされたときにハイライトする場合は、`highlightOnHover`を`ttue`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} highlightOnHover />
+```
+
+### フッターを表示する
+
+フッターを表示する場合は、`withFooter`を`true`に設定します。もし、ヘッダー同様にフッターにもチェックボックスを表示したい場合は`withFooterSelect`を`true`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+      footer: "作品名",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+      footer: "放送期間",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+      footer: "話数",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table columns={columns} data={data} withFooter />
+    <Table columns={columns} data={data} withFooter withFooterSelect />
+  </VStack>
+)
+```
+
+### デフォルトのソートを設定する
+
+デフォルトのソートを設定するには、`defaultSort`に`id`と`desc`を設定します。
+
+- `id`: `columns`で設定した`id`, `accessorKey`, `accessorFn`の値です。
+- `desc`: 昇順は`false`、降順は`true`を設定します。
+
+ソートイベントをハンドルしたい場合は、`onChangeSort`を使用します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    defaultSort={[{ id: "name", desc: false }]}
+    onChangeSort={(sort) => {
+      console.log("sort", sort)
+    }}
+  />
+)
+```
+
+### 手動のソートを使う
+
+手動のソートを使う場合は、`manualSorting`を`true`に設定します。これは、サーバー側で並び替えを行う場合に便利です。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    manualSorting
+    onChangeSort={(sort) => {
+      console.log("sort", sort)
+    }}
+  />
+)
+```
+
+### 複数ソートの最大数を制限する
+
+デフォルトでは、複数ソートは有効です。もし、複数ソートの選択の最大数を制限したい場合は、`maxMultiSortColCount`に数値を設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    maxMultiSortColCount={2}
+    onChangeSort={(sort) => {
+      console.log("sort", sort)
+    }}
+  />
+)
+```
+
+### 昇順と降順の切り替わりを変更する
+
+デフォルトでは、ソートが有効になったとき、昇順から始まります。もし、降順から始めたい場合は、`sortDescFirst`を`true`に設定するか、特定の列だけ適応したい場合は、`columns`内の列(オブジェクト)に`sortDescFirst`を`true`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+      sortDescFirst: true,
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      sortDescFirst
+      onChangeSort={(sort) => {
+        console.log("sort", sort)
+      }}
+    />
+
+    <Table
+      columns={columns}
+      data={data}
+      onChangeSort={(sort) => {
+        console.log("sort", sort)
+      }}
+    />
+  </VStack>
+)
+```
+
+### ソートを無効にする
+
+ソートを無効にする場合は、`enableSorting`を`false`に設定するか、特定の列だけ無効にしたい場合は、`columns`内の列(オブジェクト)に`enableSorting`を`false`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+      enableSorting: false,
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table columns={columns} data={data} enableSorting={false} />
+
+    <Table
+      columns={columns}
+      data={data}
+      onChangeSort={(sort) => {
+        console.log("sort", sort)
+      }}
+    />
+  </VStack>
+)
+```
+
+### 複数ソートを無効にする
+
+複数ソートを無効にする場合は、`enableMultiSort`を`false`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableMultiSort={false}
+    onChangeSort={(sort) => {
+      console.log("sort", sort)
+    }}
+  />
+)
+```
+
+### 行のIDを指定する
+
+デフォルトの行のIDは、`index`の文字列です。1行目であれば、`"0"`になります。特定の列の値をIDとしたい場合は、`rowId`に`columns`内の列(オブジェクト)に設定されている`accessorKey`または`accessorFn`の値を設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} rowId="name" />
+```
+
+### デフォルトの選択された行を設定する
+
+デフォルトの選択された行を設定する場合は、`defaultSelectedRowIds`に行のIDを配列で設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    rowId="name"
+    defaultSelectedRowIds={["ドラゴンボール"]}
+    onChangeSelect={(selectedIds) => {
+      console.log("selectedIds", selectedIds)
+    }}
+  />
+)
+```
+
+### 特定の行の選択を無効にする
+
+特定の行の選択を無効にする場合は、`defaultSelectedRowIds`に行のIDを配列で設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    rowId="name"
+    disabledRowIds={["ドラゴンボールZ"]}
+    onChangeSelect={(selectedIds) => {
+      console.log("selectedIds", selectedIds)
+    }}
+  />
+)
+```
+
+### 行のクリックで選択できるようにする
+
+行のクリックで選択できるようにする場合は、`rowsClickSelect`を`true`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    rowId="name"
+    rowsClickSelect
+    onChangeSelect={(selectedIds) => {
+      console.log("selectedIds", selectedIds)
+    }}
+  />
+)
+```
+
+### 行の選択を無効にする
+
+行の選択を無効にする場合は、`enableRowSelection`を`false`に設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} enableRowSelection={false} />
+```
+
+### 行のクリックイベントをハンドルする
+
+行のクリックイベントをハンドルしたい場合は、`onClickRow`を使用します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    onClickRow={(row) => {
+      console.log("row", row)
+    }}
+  />
+)
+```
+
+### チェックボックス(列)のスタイリングをカスタマイズする
+
+チェックボックス(列)のスタイリングをカスタマイズする場合は、`checkboxProps`や`selectColumnProps`に`props`を設定します。
+
+- `checkboxProps`: チェックボックスの`props`を設定できます。
+- `selectColumnProps`: チェックボックスの列の`props`が設定できます。`false`にした場合、行の選択はできますが、チェックボックスの列は非表示になります。
+
+```tsx functional=true
+const [selectedRowIds, onChangeSelect] = useState<string[]>([])
+
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Table columns={columns} data={data} checkboxProps={{ colorScheme: "red" }} />
+    <Table columns={columns} data={data} selectColumnProps={{ css: { w: "40px" } }} />
+
+    <Text>Select ids {selectedRowIds.join(", ")}</Text>
+
+    <Table
+      columns={columns}
+      data={data}
+      selectColumnProps={false}
+      rowsClickSelect
+      selectedRowIds={selectedRowIds}
+      onChangeSelect={onChangeSelect}
+    />
+  </VStack>
+)
+```
+
+### ヘッダー(`Th`)のスタイリングをカスタマイズする
+
+ヘッダー(`Th`)のスタイリングをカスタマイズする場合は、`css`, `sx`, `style`でスタイリングすることができます。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+      css: { color: "primary" },
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+      sx: { color: "secondary" },
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+      style: { color: "red" },
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return <Table columns={columns} data={data} />
+```
+
+### スタイリングをカスタマイズする
+
+スタイリングをカスタマイズする場合は、`theadProps`や`rowProps`などに`props`を設定します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+      footer: "作品名",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+      footer: "放送期間",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+      footer: "話数",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      withFooter
+      theadProps={{ bg: ["red.200", "red.700"] }}
+      tbodyProps={{ bg: ["green.200", "green.700"] }}
+      tfootProps={{ bg: ["blue.200", "blue.700"] }}
+    />
+
+    <Table
+      columns={columns}
+      data={data}
+      withFooter
+      headerGroupProps={{ bg: ["red.200", "red.700"] }}
+      rowProps={{ bg: ["green.200", "green.700"] }}
+      footerGroupProps={{ bg: ["blue.200", "blue.700"] }}
+    />
+
+    <Table
+      columns={columns}
+      data={data}
+      withFooter
+      headerProps={({ column }) => {
+        if (column.columnDef.header === "作品名") return { color: ["red.400", "red.300"] }
+      }}
+      cellProps={({ column }) => {
+        if (column.columnDef.header === "作品名") return { color: ["red.400", "red.300"] }
+      }}
+      footerProps={({ column }) => {
+        if (column.columnDef.footer === "作品名") return { color: ["red.400", "red.300"] }
+      }}
+    />
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx functional=true
+const [sort, onChangeSort] = useState<Sort<Data>>([])
+const [selectedRowIds, onChangeSelect] = useState<string[]>([])
+
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () => [
+    {
+      name: "ドラゴンボール",
+      broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+      episode: "全153話",
+    },
+    {
+      name: "ドラゴンボールZ",
+      broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+      episode: "全291話 + スペシャル2話",
+    },
+    {
+      name: "ドラゴンボールGT",
+      broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+      episode: "全64話 + 番外編1話",
+    },
+    {
+      name: "ドラゴンボール改",
+      broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+      episode: "全159話",
+    },
+    {
+      name: "ドラゴンボール超",
+      broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+      episode: "全131話",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button onClick={() => onChangeSort([])}>Reset sort</Button>
+      <Button onClick={() => onChangeSelect([])}>Reset select</Button>
+    </Wrap>
+
+    <Table
+      columns={columns}
+      data={data}
+      rowId="name"
+      manualSorting
+      sort={sort}
+      onChangeSort={onChangeSort}
+      selectedRowIds={selectedRowIds}
+      onChangeSelect={onChangeSelect}
+    />
+  </VStack>
+)
+```

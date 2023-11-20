@@ -1,12 +1,723 @@
 ---
 title: PagingTable
-description: このページは現在作成中です。
-package_name: "@yamada-ui/paging-table"
+description: "`PagingTable`は、ページネーション機能を備えたテーブルのコンポーネントです。"
+package_name: "@yamada-ui/table"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+<PackageManagers packageNameOrCommand="@yamada-ui/table" />
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+:::note status=warning
+`@yamada-ui/table`は、`@yamada-ui/react`に含まれていないため、別途インストールする必要があります。
+:::
+
+## インポート
+
+```ts
+import { PagingTable } from "@yamada-ui/table"
+```
+
+## 使い方
+
+テーブルを構成するために`columns`と`data`を設定します。
+
+:::note
+`PagingTable`は、内部的に[Table](/components/data-display/table)を使用しています。`columns`と`data`については、[こちら](/components/data-display/table#使い方)をご覧ください。
+:::
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return <PagingTable columns={columns} data={data} />
+```
+
+### バリアントを変更する
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <VStack>
+    <PagingTable variant="simple" columns={columns} data={data} />
+    <PagingTable variant="striped" columns={columns} data={data} />
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <VStack>
+    <PagingTable size="sm" columns={columns} data={data} />
+    <PagingTable size="md" columns={columns} data={data} />
+    <PagingTable size="lg" columns={columns} data={data} />
+    <PagingTable size="xl" columns={columns} data={data} />
+  </VStack>
+)
+```
+
+### カラースキーマを変更する
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <VStack>
+    <PagingTable variant="striped" colorScheme="secondary" columns={columns} data={data} />
+    <PagingTable variant="striped" colorScheme="green" columns={columns} data={data} />
+  </VStack>
+)
+```
+
+### デフォルトのページを設定する
+
+デフォルトのページを設定する場合は、`defaultPageIndex`に数値を設定します。デフォルトでは、`0`が設定されています。
+
+ページの変更をハンドルしたい場合は、`onChangePageIndex`を使用します。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <PagingTable
+    columns={columns}
+    data={data}
+    defaultPageIndex={2}
+    onChangePageIndex={(pageIndex) => {
+      console.log("pageIndex", pageIndex)
+    }}
+  />
+)
+```
+
+### 手動のページネーションを使う
+
+手動のページネーションを使う場合は、`manualPagination`を`true`に設定します。これは、サーバー側でページネーションを行う場合に便利です。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 20; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return <PagingTable columns={columns} data={data} manualPagination />
+```
+
+### デフォルトのページサイズを設定する
+
+デフォルトのページサイズを設定する場合は、`defaultPageSize`に数値を設定します。デフォルトでは、`20`が設定されています。
+
+ページサイズの変更をハンドルしたい場合は、`onChangePageSize`を使用します。
+
+:::note
+もし、`defaultPageSize`がページサイズリスト(デフォルトでは、`[20, 50, 100]`が設定されています。)に存在しない場合は、ページサイズリストへ自動的に挿入されます。
+:::
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <PagingTable
+    columns={columns}
+    data={data}
+    defaultPageSize={10}
+    onChangePageSize={(pageSize) => {
+      console.log("pageSize", pageSize)
+    }}
+  />
+)
+```
+
+### ページサイズリストを変更する
+
+ページサイズリストを変更する場合は、`pageSizeList`に数値の配列を設定します。
+
+:::note
+もし、カスタマイズしたページサイズリストにデフォルトで設定されている`20`(`defaultPageSize`)が存在しない場合は、カスタマイズしたページサイズリストに合わせるために別途設定する必要があります。
+:::
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <PagingTable
+    columns={columns}
+    data={data}
+    defaultPageSize={30}
+    pageSizeList={[30, 60, 90]}
+    onChangePageSize={(pageSize) => {
+      console.log("pageSize", pageSize)
+    }}
+  />
+)
+```
+
+### ページサイズリストのラベルを変更する
+
+ページサイズリストのラベルを変更する場合は、`formatPageSizeLabel`を使います。
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <PagingTable
+    columns={columns}
+    data={data}
+    formatPageSizeLabel={(pageSize) => `${pageSize} Page`}
+  />
+)
+```
+
+### ページネーションのスタイリングをカスタマイズする
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <VStack>
+    <PagingTable
+      columns={columns}
+      data={data}
+      defaultPageSize={5}
+      containerProps={{ flexDirection: "column-reverse" }}
+    />
+
+    <PagingTable
+      columns={columns}
+      data={data}
+      defaultPageSize={5}
+      pagingControlProps={{ py: 4, bg: ["green.200", "green.700"] }}
+    />
+
+    <PagingTable
+      columns={columns}
+      data={data}
+      defaultPageSize={5}
+      paginationProps={{ variant: "outline", colorScheme: "pink" }}
+    />
+
+    <PagingTable
+      columns={columns}
+      data={data}
+      defaultPageSize={5}
+      selectProps={{ variant: "flushed" }}
+    />
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx functional=true
+const [pageSize, onChangePageSize] = useState<number>(20)
+
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <PagingTable
+    columns={columns}
+    data={data}
+    pageSize={pageSize}
+    onChangePageSize={onChangePageSize}
+  />
+)
+```
+
+```tsx functional=true
+const columns = useMemo<Column<Data>[]>(
+  () => [
+    {
+      header: "First Name",
+      accessorKey: "firstName",
+    },
+    {
+      header: "Last Name",
+      accessorKey: "lastName",
+    },
+    {
+      header: "Age",
+      accessorKey: "age",
+    },
+    {
+      header: "Email",
+      accessorKey: "email",
+    },
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(() => {
+  let resultData: Data[] = []
+
+  for (let i = 0; i < 100; i++) {
+    resultData.push({
+      id: faker.string.uuid(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int(75),
+      email: faker.internet.email(),
+    })
+  }
+
+  return resultData
+}, [])
+
+return (
+  <PagingTable columns={columns} data={data} defaultPageSize={10}>
+    {({
+      pageIndex,
+      pageSize,
+      totalPage,
+      getCanNextPage,
+      getCanPreviousPage,
+      setPageIndex,
+      previousPage,
+      nextPage,
+      setPageSize,
+    }) => {
+      return (
+        <VStack gap="md" alignItems="center">
+          <Text flex="1">
+            Page {pageIndex + 1} of {totalPage}
+          </Text>
+
+          <HStack>
+            <IconButton
+              size="sm"
+              icon={<FontAwesomeIcon icon={faChevronLeft} />}
+              isDisabled={!getCanPreviousPage()}
+              onClick={previousPage}
+            />
+
+            <NumberInput
+              size="sm"
+              w="24"
+              min={1}
+              max={totalPage}
+              value={pageIndex + 1}
+              onChange={(_, page) => setPageIndex(page - 1)}
+            />
+
+            <IconButton
+              size="sm"
+              icon={<FontAwesomeIcon icon={faChevronRight} />}
+              isDisabled={!getCanNextPage()}
+              onClick={nextPage}
+            />
+
+            <Select
+              size="sm"
+              w="24"
+              value={String(pageSize)}
+              onChange={(pageSize) => setPageSize(Number(pageSize))}
+              items={[
+                { label: "10", value: "10" },
+                { label: "20", value: "20" },
+                { label: "30", value: "30" },
+              ]}
+            />
+          </HStack>
+        </VStack>
+      )
+    }}
+  </PagingTable>
+)
+```

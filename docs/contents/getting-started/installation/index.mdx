@@ -1,3 +1,4 @@
+````
 ---
 title: Installation
 description: How to install and use Yamada UI in your project.
@@ -7,46 +8,51 @@ tab: All
 ---
 
 :::note
-If you are creating a site or landing page, not an app, we recommend [minimal](/getting-started/installation/minimal).
+If you are creating a site or landing page rather than an app, we recommend the [minimal](/getting-started/installation/minimal) setup.
 :::
 
-## Install the Package
+## Install the package
 
-By installing `@yamada-ui/react`, you can use most of the components and hooks in Yamada UI.
+You can use most components and hooks by installing `@yamada-ui/react`.
 
-Run one of the following commands in your terminal.
+Execute one of the following commands in your terminal.
 
 <PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
-If you want to use features like tables, calendars, carousels, etc., you need to install them separately.
+If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
 <SelectPackageManagers
   packages={[
     {
       name: "@yamada-ui/table",
-      description: "Provides a handy table component using `@tanstack/react-table`.",
+      description:
+        "Provides convenient table components using [@tanstack/react-table](https://tanstack.com/table/v8).",
       isDefaultCheck: true,
     },
     {
       name: "@yamada-ui/calendar",
-      description: "Provides a handy calendar and date picker component using `dayjs`.",
+      description:
+        "Provides convenient calendar and date picker components using [dayjs](https://day.js.org/).",
     },
     {
       name: "@yamada-ui/carousel",
-      description: "Provides a handy carousel component using `embla-carousel-react`.",
+      description:
+        "Provides convenient carousel components using [embla-carousel-react](https://www.embla-carousel.com/).",
     },
     {
       name: "@yamada-ui/dropzone",
-      description: "Provides a handy dropzone component using `react-dropzone`.",
+      description:
+        "Provides convenient dropzone components using [react-dropzone](https://react-dropzone.js.org/).",
     },
     {
       name: "@yamada-ui/markdown",
       description:
-        "Provides a handy markdown component using `react-markdown` and `react-syntax-highlighter`.",
+        "Provides convenient markdown components using [react-markdown](https://remarkjs.github.io/react-markdown/) and [react-syntax-highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/).",
     },
     {
       name: "@yamada-ui/fontawesome",
-      description: "Provides a component for convenient use of `Font Awesome`.",
+      description:
+        "Provides components for conveniently using [Font Awesome](https://fontawesome.com/).",
     },
   ]}
 />
@@ -69,11 +75,11 @@ const App = () => {
     </UIProvider>
   )
 }
-```
+````
 
-## Using the Component
+## Use components
 
-Once you've added the `UIProvider`, call the component within your application.
+Once you've added `UIProvider`, call the components within your application.
 
 ```tsx live=false
 import { Button } from "@yamada-ui/react"
@@ -83,9 +89,9 @@ const Demo = () => {
 }
 ```
 
-With this, the setup of Yamada UI is complete!
+With this, the setup for Yamada UI is complete!
 
-## Start Learning
+## Start learning
 
 Why not learn the basics and themes to get to know Yamada UI? 😎
 
@@ -93,17 +99,18 @@ Why not learn the basics and themes to get to know Yamada UI? 😎
   <LinkCard href="/getting-started/basics" />
   <LinkCard
     href="/styled-system/theming"
-    title="Learn about Themes"
-    description="Get to know the default theme of Yamada UI, and learn how to create and change the values of color, font, and other theme elements."
+    title="Learn about theming"
+    description="Learn how to know the default theme of Yamada UI, and how to create and change colors, fonts, and other theme values."
   />
   <LinkCard
     href="/components"
-    title="Explore Components"
-    description="Yamada UI offers over 100 highly flexible components. All components support animations and dark mode."
+    title="Explore components"
+    description="Yamada UI offers over 100 flexible components. All components support animations and dark mode."
   />
   <LinkCard
     href="https://github.com/hirotomoyamada/yamada-ui"
-    title="Explore the Source Code"
-    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
+    title="Explore the source code"
+    description="The packages and documentation site for Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>
+```

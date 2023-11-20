@@ -609,14 +609,6 @@ packages:
     requiresBuild: true
     dev: false
 
-  /@fortawesome/fontawesome-svg-core@6.4.2:
-    resolution: {integrity: sha512-gjYDSKv3TrM2sLTOKBc5rH9ckje8Wrwgx1CxAPbN5N3Fm4prfi7NsJVWd1jklp7i5uSCVwhZS5qlhMXqLrpAIg==, tarball: https://npm.fontawesome.com/@fortawesome/fontawesome-svg-core/-/6.4.2/fontawesome-svg-core-6.4.2.tgz}
-    engines: {node: '>=6'}
-    requiresBuild: true
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 6.4.2
-    dev: false
-
   /@fortawesome/free-regular-svg-icons@6.4.2:
     resolution: {integrity: sha512-0+sIUWnkgTVVXVAPQmW4vxb9ZTHv0WstOa3rBx9iPxrrrDH6bNLsDYuwXF9b6fGm+iR7DKQvQshUH/FJm3ed9Q==}
     engines: {node: '>=6'}
@@ -639,7 +631,7 @@ packages:
       '@fortawesome/fontawesome-svg-core': ~1 || ~6
       react: '>=16.3'
     dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.4.2
+      '@fortawesome/fontawesome-svg-core': registry.npmjs.org/@fortawesome/fontawesome-svg-core@6.4.2
       prop-types: registry.npmjs.org/prop-types@15.8.1
       react: 18.2.0
     dev: false
@@ -8093,6 +8085,24 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: false
 
+  registry.npmjs.org/@fortawesome/fontawesome-common-types@6.4.2:
+    resolution: {integrity: sha512-1DgP7f+XQIJbLFCTX1V2QnxVmpLdKdzzo2k8EmvDOePfchaIGQ9eCHj2up3/jNEbZuBqel5OxiaOJf37TWauRA==, tarball: https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.4.2.tgz}
+    name: '@fortawesome/fontawesome-common-types'
+    version: 6.4.2
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dev: false
+
+  registry.npmjs.org/@fortawesome/fontawesome-svg-core@6.4.2:
+    resolution: {integrity: sha512-gjYDSKv3TrM2sLTOKBc5rH9ckje8Wrwgx1CxAPbN5N3Fm4prfi7NsJVWd1jklp7i5uSCVwhZS5qlhMXqLrpAIg==, tarball: https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.4.2.tgz}
+    name: '@fortawesome/fontawesome-svg-core'
+    version: 6.4.2
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': registry.npmjs.org/@fortawesome/fontawesome-common-types@6.4.2
+    dev: false
+
   registry.npmjs.org/@next/swc-darwin-arm64@14.0.2:
     resolution: {integrity: sha512-i+jQY0fOb8L5gvGvojWyZMfQoQtDVB2kYe7fufOEiST6sicvzI2W5/EXo4lX5bLUjapHKe+nFxuVv7BA+Pd7LQ==, tarball: https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-14.0.2.tgz}
     name: '@next/swc-darwin-arm64'
@@ -8790,7 +8800,7 @@ packages:
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@fortawesome/fontawesome-svg-core': 6.4.2
+      '@fortawesome/fontawesome-svg-core': registry.npmjs.org/@fortawesome/fontawesome-svg-core@6.4.2
       '@fortawesome/react-fontawesome': 0.2.0(@fortawesome/fontawesome-svg-core@6.4.2)(react@18.2.0)
       '@yamada-ui/core': registry.npmjs.org/@yamada-ui/core@0.12.4(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/icon': registry.npmjs.org/@yamada-ui/icon@0.3.14(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)

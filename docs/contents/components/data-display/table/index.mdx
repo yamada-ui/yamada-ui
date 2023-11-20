@@ -497,7 +497,7 @@ return <Table columns={columns} data={data} highlightOnHover />
 
 ### Display Footer
 
-To display a footer, set `withFooter` to `true`. If you want to display checkboxes in the footer similar to the header, set `withFooterSelect` to `true`.
+To display a footer, set `withFooter` to `true`. If you want to display checkboxes in the footer like in the header, set `withFooterSelect` to `true`.
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(
@@ -560,9 +560,9 @@ return (
 )
 ```
 
-### Add Default Sorting
+### Set Default Sorting
 
-To add default sorting, set `defaultSort` with `id` and `desc`.
+To set the default sorting, set `id` and `desc` in `defaultSort`.
 
 - `id`: The value of `id`, `accessorKey`, or `accessorFn` set in `columns`.
 - `desc`: Set to `false` for ascending order, `true` for descending order.
@@ -699,7 +699,7 @@ return (
 
 ### Limit the Maximum Number of Multi-Sorts
 
-By default, multi-sort is enabled. If you want to limit the maximum number of multi-sort selections, set a number to `maxMultiSortColCount`.
+By default, multi-sort is enabled. If you want to limit the maximum number of multi-sort selections, set a number in `maxMultiSortColCount`.
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(
@@ -763,7 +763,7 @@ return (
 )
 ```
 
-### Change Ascending/Descending Sort Order
+### Change Ascending and Descending Order Toggle
 
 By default, sorting starts with ascending order. If you want to start with descending order, set `sortDescFirst` to `true`, or if you want to apply it to specific columns only, set `sortDescFirst` to `true` in the column (object) within `columns`.
 
@@ -978,7 +978,7 @@ return (
 
 ### Specify Row ID
 
-The default row ID is the string `index`. For the first row, it will be `"0"`. If you want to use a specific column's value as the ID, set `rowId` to the value of `accessorKey` or `accessorFn` set in the column (object).
+The default row ID is the string `index`. For the first row, it will be `"0"`. If you want to use a specific column's value as the ID, set `rowId` to the value of `accessorKey` or `accessorFn` set in the column (object) within `columns`.
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(
@@ -1035,7 +1035,7 @@ return <Table columns={columns} data={data} rowId="name" />
 
 ### Set Default Selected Rows
 
-To set default selected rows, set `defaultSelectedRowIds` with an array of row IDs.
+To set the default selected rows, set `defaultSelectedRowIds` with an array of row IDs.
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(
@@ -1167,9 +1167,9 @@ return (
 )
 ```
 
-### Enable Selection by Clicking Rows
+### Enable Selection by Row Click
 
-To enable selection by clicking rows, set `rowsClickSelect` to `true`.
+To enable selection by row click, set `rowsClickSelect` to `true`.
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(
@@ -1358,7 +1358,7 @@ return (
 
 ### Customize Checkbox (Column) Styling
 
-To customize the styling of checkboxes (column), set `props` to `checkboxProps` or `selectColumnProps`.
+To customize the styling of checkboxes (column), set `props` in `checkboxProps` or `selectColumnProps`.
 
 - `checkboxProps`: You can set the `props` for the checkbox.
 - `selectColumnProps`: You can set the `props` for the checkbox column. If set to `false`, row selection is possible, but the checkbox column will be hidden.
@@ -1496,7 +1496,7 @@ return <Table columns={columns} data={data} />
 
 ### Customize Styling
 
-To customize styling, set `props` to `theadProps`, `rowProps`, etc.
+To customize styling, set `props` in `theadProps`, `rowProps`, etc.
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(

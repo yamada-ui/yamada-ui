@@ -1,7 +1,8 @@
-import { Text, useBreakpoint } from "@yamada-ui/react"
+import { useBreakpoint } from "@yamada-ui/react"
 import { Column, Table } from "@yamada-ui/table"
 import { FC, useMemo, useState } from "react"
 import { PackageManagers } from "./package-managers"
+import { TextWithCodeOrLink } from "components/typography"
 import { useI18n } from "contexts/i18n-context"
 
 type Package = { name: string; description: string; isDefaultCheck?: boolean }
@@ -29,19 +30,7 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages
         header: t("component.select-package-managers.description"),
         accessorKey: "description",
         cell: ({ getValue }) => (
-          <Text noOfLines={1}>
-            {getValue<string>()
-              .split(/`([^`]+)`/)
-              .map((value, index) =>
-                index % 2 === 1 ? (
-                  <Text key={index} as="code" apply="mdx.code">
-                    {value}
-                  </Text>
-                ) : (
-                  value
-                ),
-              )}
-          </Text>
+          <TextWithCodeOrLink noOfLines={1}>{getValue<string>()}</TextWithCodeOrLink>
         ),
       })
     }

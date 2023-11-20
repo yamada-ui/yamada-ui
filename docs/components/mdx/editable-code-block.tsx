@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker"
 import {
   faMinus,
   faPlus,
@@ -86,7 +87,7 @@ const fontAwesomeIcons = {
   faChevronDown,
 }
 const reactIcons = { FaRobot, FaCheckCircle }
-const utils = { wait }
+const utils = { wait, faker }
 
 const scope = {
   ...react,

@@ -1,3 +1,4 @@
+````
 ---
 title: Individual Installation
 description: How to install and use Yamada UI in your project.
@@ -6,32 +7,32 @@ order: 2
 ---
 
 :::note status=warning
-Many pages such as [Learning the Basics](/getting-started/installation/basic) and [Learning Advanced Techniques](/getting-started/installation/advanced) are explained assuming that you have installed [everything](/getting-started/installation).
+Many pages, such as [Learn the Basics](/getting-started/installation/basic) and [Learn Advanced](/getting-started/installation/advanced), assume that you have installed everything from [All](/getting-started/installation).
 :::
 
-## Install the Package
+## Install Packages
 
 Install the core and utilities of Yamada UI.
 
-Run one of the following commands in the terminal.
+Run one of the following commands in your terminal.
 
 <PackageManagers
   packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/theme", "@yamada-ui/utils"]}
 />
 
-Next, install the components and hooks you want to use in your project.
+Next, install the components or hooks you want to use in your project.
 
-Here, let's try installing `@yamada-ui/layouts` which includes `Box`.
+Here, let's install `@yamada-ui/layouts`, which includes `Box` and others.
 
 <PackageManagers packageNameOrCommand="@yamada-ui/layouts" />
 
 :::note
-The package names of components and hooks are listed on each documentation page.
+The package names for components and hooks are listed on each documentation page.
 :::
 
-## Adding `ThemeProvider`
+## Add `ThemeProvider`
 
-After installing the core and components, add `ThemeProvider` to the root of your application and pass the [default theme](/styled-system/theming/default-theme) and [default config](/styled-system/configure/default-config) from `@yamada-ui/theme`. If you have your own theme or config, pass those instead.
+After installing the core and components, add `ThemeProvider`, `ResetStyle`, `GlobalStyle` to the root of your application, and pass the [default theme](/styled-system/theming/default-theme) and [default config](/styled-system/configure/default-config) from `@yamada-ui/theme`. If you have your own theme or config, pass those instead.
 
 ```tsx live=false highlight={6,7,8,11}
 import { ThemeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
@@ -47,9 +48,9 @@ const App = () => {
     </ThemeProvider>
   )
 }
-```
+````
 
-If you want to support dark mode, add `ColorModeProvider` as well.
+If you want to support dark mode, also add `ColorModeProvider`.
 
 ```tsx live=false highlight={7,12}
 import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
@@ -70,16 +71,16 @@ const App = () => {
 ```
 
 :::note
-If you want to customize the theme or config, please check [customize the theme](/styled-system/theming/customize-theme) and [customize the config](/styled-system/configure/customize-config).
+If you want to customize your theme or config, please check [Customize Theme](/styled-system/theming/customize-theme) and [Customize Config](/styled-system/configure/customize-config).
 :::
 
 :::note status=warning
-If you do not pass `theme` or `config` to `ThemeProvider`, the styles and tokens of the components will not be applied.
+If you do not pass `theme` or `config` to `ThemeProvider`, the component styles and tokens will not be reflected.
 :::
 
-## Using the Component
+## Use Components
 
-Call the component within the application.
+Call the components within your application.
 
 ```tsx live=false
 import { Box } from "@yamada-ui/layouts"
@@ -89,7 +90,7 @@ const Demo = () => {
 }
 ```
 
-With this, the setup of Yamada UI is complete!
+With this, the setup for Yamada UI is complete!
 
 ## Start Learning
 
@@ -99,8 +100,8 @@ Why not learn the basics and themes to get to know Yamada UI? 😎
   <LinkCard href="/getting-started/basics" />
   <LinkCard
     href="/styled-system/theming"
-    title="Learn about Themes"
-    description="Learn about the default theme of Yamada UI, and how to create and change the values of colors, fonts, and other theme elements."
+    title="Learn About Themes"
+    description="Learn about Yamada UI's default theme, and how to create and change colors, fonts, and other theme values."
   />
   <LinkCard
     href="/components"
@@ -110,6 +111,7 @@ Why not learn the basics and themes to get to know Yamada UI? 😎
   <LinkCard
     href="https://github.com/hirotomoyamada/yamada-ui"
     title="Explore the Source Code"
-    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
+    description="The packages and documentation site for Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>
+```

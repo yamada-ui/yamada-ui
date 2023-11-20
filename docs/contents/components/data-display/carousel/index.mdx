@@ -21,8 +21,8 @@ import {
 
 - `Carousel`: A wrapper component that controls the child elements (`CarouselSlide`).
 - `CarouselSlide`: A component that displays a slide.
-- `CarouselControlNext`: A component for the button that displays the next slide.
-- `CarouselControlPrev`: A component for the button that displays the previous slide.
+- `CarouselControlNext`: A component for the button that shows the next slide.
+- `CarouselControlPrev`: A component for the button that shows the previous slide.
 - `CarouselIndicators`: A component that displays the number of slides and the current slide position.
 
 :::note
@@ -30,6 +30,10 @@ import {
 :::
 
 ## Usage
+
+:::note
+`Carousel` internally uses [embla-carousel-react](https://www.embla-carousel.com/).
+:::
 
 ```tsx
 <Carousel>
@@ -133,7 +137,7 @@ To specify the initial slide, set `defaultIndex` to the `index`.
 </Carousel>
 ```
 
-### Adjust Between Slides
+### Adjust the Space Between Slides
 
 To adjust the space between slides, set `gap` to a string or a number. By default, `1rem` is set.
 
@@ -156,7 +160,7 @@ To adjust the space between slides, set `gap` to a string or a number. By defaul
 
 ### Change the Speed of Slide Transition
 
-To change the speed of the slide transition, set `speed` to a number. By default, `10` is set.
+To change the speed of slide transition, set `speed` to a number. By default, `10` is set.
 
 ```tsx
 <Carousel speed={50}>
@@ -175,9 +179,9 @@ To change the speed of the slide transition, set `speed` to a number. By default
 </Carousel>
 ```
 
-### Change Slide Size
+### Change the Size of Slides
 
-To change the size of the slides, set `slideSize` to a string or a number. By default, `100%` is set.
+To change the size of slides, set `slideSize` to a string or a number. By default, `100%` is set.
 
 If you want to change the size of individual slides, set a value for `size` on `CarouselSlide`.
 
@@ -198,9 +202,9 @@ If you want to change the size of individual slides, set a value for `size` on `
 </Carousel>
 ```
 
-### Change Slide Position
+### Change the Position of Slides
 
-To change the position of the slides, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
+To change the position of slides, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
 
 ```tsx
 <VStack>
@@ -308,9 +312,9 @@ To use autoplay, set `autoplay` to `true`.
 </Carousel>
 ```
 
-#### Change Autoplay Interval
+#### Change the Interval of Autoplay
 
-To change the autoplay interval, set `delay` to a number (milliseconds). By default, `4000` is set.
+To change the interval of autoplay, set `delay` to a number (milliseconds). By default, `4000` is set.
 
 ```tsx
 <Carousel autoplay delay={1000}>
@@ -373,7 +377,7 @@ By setting `dragFree` to `true`, you can freely drag the slides.
 
 ### Disable Loop
 
-To disable looping, set `loop` to `false`.
+To disable the loop, set `loop` to `false`.
 
 ```tsx
 <Carousel loop={false}>

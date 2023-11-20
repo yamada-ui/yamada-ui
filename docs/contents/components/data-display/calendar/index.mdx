@@ -21,7 +21,9 @@ import { Calendar } from "@yamada-ui/calendar"
 
 ## Usage
 
-Here is a basic example of using the calendar.
+:::note
+`Calendar` internally uses [dayjs](https://day.js.org/).
+:::
 
 ```tsx
 <Calendar />
@@ -338,7 +340,7 @@ To customize the label button, set `labelProps` to `props`.
 
 ### Customize Control Buttons
 
-To customize the control buttons, set `controlProps`, `prevProps`, and `nextProps` to `props`.
+To customize control buttons, set `controlProps`, `prevProps`, and `nextProps` to `props`.
 
 ```tsx
 <VStack>

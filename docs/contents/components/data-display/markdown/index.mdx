@@ -1,6 +1,6 @@
 ---
 title: Markdown
-description: "`Markdown` is a component for rendering text in markdown format."
+description: "`Markdown` is a component that renders text in markdown format."
 package_name: "@yamada-ui/markdown"
 is_tabs: true
 with_description: true
@@ -20,6 +20,10 @@ import { Markdown } from "@yamada-ui/markdown"
 ```
 
 ## Usage
+
+:::note
+`Markdown` internally uses [react-markdown](https://remarkjs.github.io/react-markdown/) and [react-syntax-highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/).
+:::
 
 ```tsx functional=true
 const README = `
@@ -122,7 +126,7 @@ return (
 )
 ```
 
-### Changing the Theme of Code Blocks
+### Change the theme of code blocks
 
 ```tsx functional=true
 const README = `
@@ -221,7 +225,7 @@ MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)
 return <Markdown code={{ theme: "materialDark" }}>{README}</Markdown>
 ```
 
-### Using Custom Components
+### Use custom components
 
 When using custom components, set the elements to be changed and the custom components in `components`.
 

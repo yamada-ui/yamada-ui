@@ -3,7 +3,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
-import { ComponentStory, Meta, StoryFn } from "@storybook/react"
+import { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
 import {
   HStack,
@@ -572,9 +572,7 @@ export const withDefaultPageIndex: Story = () => {
   )
 }
 
-export const customControlPageIndex: ComponentStory<
-  typeof PagingTable
-> = () => {
+export const customControlPageIndex: Story = () => {
   const [pageIndex, onChangePageIndex] = useState<number>(0)
 
   const columns = useMemo<Column<Data>[]>(
@@ -687,9 +685,7 @@ export const withManualPagination: Story = () => {
   )
 }
 
-export const withFormatPageSizeLabel: ComponentStory<
-  typeof PagingTable
-> = () => {
+export const withFormatPageSizeLabel: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {

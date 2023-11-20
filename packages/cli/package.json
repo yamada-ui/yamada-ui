@@ -52,7 +52,7 @@
   "devDependencies": {
     "ora": "^7.0.1",
     "update-notifier": "^6.0.2",
-    "@types/update-notifier": "6.0.7",
+    "@types/update-notifier": "6.0.8",
     "@types/cli-welcome": "^2.2.0",
     "@types/prettier": "^3.0.0"
   }

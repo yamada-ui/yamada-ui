@@ -1,6 +1,6 @@
 ---
 title: Dialog
-description: "`Dialog` is a component used to confirm execution or interrupt actions by the user."
+description: "`Dialog` is a component used to confirm or interrupt user actions."
 package_name: "@yamada-ui/modal"
 is_tabs: true
 with_description: true
@@ -36,7 +36,7 @@ import {
 To control visibility, set `isOpen` and `onClose`.
 
 :::note
-`Dialog` internally uses [Modal](/components/overlay/modal) and is a simplified component of `Modal`.
+`Dialog` internally uses [Modal](/components/overlay/modal), and is a simplified component of `Modal`.
 :::
 
 ```tsx functional=true
@@ -62,7 +62,7 @@ return (
 )
 ```
 
-Alternatively, if you do not omit `DialogHeader` or `DialogBody`, you can write it like this.
+Alternatively, if you do not omit `DialogHeader` and `DialogBody`, you can write it like this.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -166,7 +166,7 @@ return (
             onOpen()
           }}
         >
-          Open {placement} Modal
+          Open {placement} Dialog
         </Button>
       ))}
     </Wrap>
@@ -218,7 +218,7 @@ return (
 
 ### Change Overflow Behavior
 
-By default, `inside` is set, and scrolling only occurs within `ModalBody`. If you set `outside`, scrolling will occur within the `Modal`.
+By default, `inside` is set, and scrolling only occurs within `DialogBody`. If you set `outside`, scrolling will occur within the `Dialog`.
 
 ```tsx functional=true
 const [scrollBehavior, setScrollBehavior] = useState("inside")
@@ -233,7 +233,7 @@ return (
           onOpen()
         }}
       >
-        Open inside scroll Modal
+        Open inside scroll Dialog
       </Button>
       <Button
         onClick={() => {
@@ -241,7 +241,7 @@ return (
           onOpen()
         }}
       >
-        Open outside scroll Modal
+        Open outside scroll Dialog
       </Button>
     </Wrap>
 
@@ -289,14 +289,14 @@ return (
 
 ### Do Not Block Scroll When Dialog Opens
 
-By default, when the dialog opens, it blocks scrolling of the main content to ensure accessibility. If you do not want to block scrolling of the main content, set `blockScrollOnMount` to `false`.
+By default, when the dialog opens, it blocks scrolling of the main content to ensure accessibility. If you do not want to block the main content's scroll, set `blockScrollOnMount` to `false`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
 
 return (
   <>
-    <Button onClick={onOpen}>Open Modal</Button>
+    <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
       isOpen={isOpen}
@@ -387,7 +387,7 @@ return (
 
 ### Customize Close Button
 
-If you want to customize `DialogCloseButton` by passing `props`, etc., do not omit it and set it accordingly.
+If you want to customize `DialogCloseButton` by passing `props`, etc., do not omit it and set it up.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -448,7 +448,7 @@ return (
 
 ### Customize Overlay
 
-If you want to customize `DialogOverlay` by passing `props`, etc., do not omit it and set it accordingly.
+If you want to customize `DialogOverlay` by passing `props`, etc., do not omit it and set it up.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()
@@ -479,7 +479,7 @@ return (
 
 ### Disable Overlay
 
-To disable (hide) the overlay of the dialog, set `withOverlay` to `false`.
+To disable (hide) the dialog's overlay, set `withOverlay` to `false`.
 
 ```tsx functional=true
 const { isOpen, onOpen, onClose } = useDisclosure()

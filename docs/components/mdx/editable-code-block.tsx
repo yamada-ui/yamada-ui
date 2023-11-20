@@ -11,6 +11,8 @@ import {
   faArrowLeft,
   faArrowRight,
   faChevronDown,
+  faChevronLeft,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
@@ -85,6 +87,8 @@ const fontAwesomeIcons = {
   faArrowLeft,
   faArrowRight,
   faChevronDown,
+  faChevronLeft,
+  faChevronRight,
 }
 const reactIcons = { FaRobot, FaCheckCircle }
 const utils = { wait, faker }

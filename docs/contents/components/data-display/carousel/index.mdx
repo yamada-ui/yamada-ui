@@ -21,8 +21,8 @@ import {
 
 - `Carousel`: A wrapper component that controls the child elements (`CarouselSlide`).
 - `CarouselSlide`: A component that displays a slide.
-- `CarouselControlNext`: A component for the button that shows the next slide.
-- `CarouselControlPrev`: A component for the button that shows the previous slide.
+- `CarouselControlNext`: A component for the button that displays the next slide.
+- `CarouselControlPrev`: A component for the button that displays the previous slide.
 - `CarouselIndicators`: A component that displays the number of slides and the current slide position.
 
 :::note
@@ -116,9 +116,9 @@ To change the direction, set `orientation` to `horizontal` or `vertical`. By def
 </VStack>
 ```
 
-### Specify the Initial Slide
+### Select Default Slide
 
-To specify the initial slide, set `defaultIndex` to the `index`.
+To select the default slide, set `defaultIndex` to the `index`.
 
 ```tsx
 <Carousel defaultIndex={1}>
@@ -137,7 +137,7 @@ To specify the initial slide, set `defaultIndex` to the `index`.
 </Carousel>
 ```
 
-### Adjust the Space Between Slides
+### Adjust Between Slides
 
 To adjust the space between slides, set `gap` to a string or a number. By default, `1rem` is set.
 
@@ -158,9 +158,9 @@ To adjust the space between slides, set `gap` to a string or a number. By defaul
 </Carousel>
 ```
 
-### Change the Speed of Slide Transition
+### Change Speed of Slide Transition
 
-To change the speed of slide transition, set `speed` to a number. By default, `10` is set.
+To change the speed of the slide transition, set `speed` to a number. By default, `10` is set.
 
 ```tsx
 <Carousel speed={50}>
@@ -179,9 +179,9 @@ To change the speed of slide transition, set `speed` to a number. By default, `1
 </Carousel>
 ```
 
-### Change the Size of Slides
+### Change Slide Size
 
-To change the size of slides, set `slideSize` to a string or a number. By default, `100%` is set.
+To change the size of the slides, set `slideSize` to a string or a number. By default, `100%` is set.
 
 If you want to change the size of individual slides, set a value for `size` on `CarouselSlide`.
 
@@ -202,9 +202,9 @@ If you want to change the size of individual slides, set a value for `size` on `
 </Carousel>
 ```
 
-### Change the Position of Slides
+### Change Slide Alignment
 
-To change the position of slides, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
+To change the slide alignment, set `align` to `start`, `center`, `end`, or a number. By default, `center` is set.
 
 ```tsx
 <VStack>
@@ -255,7 +255,7 @@ To change the position of slides, set `align` to `start`, `center`, `end`, or a 
 </VStack>
 ```
 
-### Change the Number of Slides to Scroll
+### Change Number of Slides to Scroll
 
 To change the number of slides to scroll, set `slidesToScroll` to a number. By default, `1` is set.
 
@@ -312,9 +312,9 @@ To use autoplay, set `autoplay` to `true`.
 </Carousel>
 ```
 
-#### Change the Interval of Autoplay
+#### Change Autoplay Interval
 
-To change the interval of autoplay, set `delay` to a number (milliseconds). By default, `4000` is set.
+To change the autoplay interval, set `delay` to a number (milliseconds). By default, `4000` is set.
 
 ```tsx
 <Carousel autoplay delay={1000}>
@@ -354,7 +354,7 @@ By default, autoplay stops when the element is hovered over. To prevent this, se
 </Carousel>
 ```
 
-### Use Drag Free
+### Use Drag-Free
 
 By setting `dragFree` to `true`, you can freely drag the slides.
 
@@ -377,7 +377,7 @@ By setting `dragFree` to `true`, you can freely drag the slides.
 
 ### Disable Loop
 
-To disable the loop, set `loop` to `false`.
+To disable looping, set `loop` to `false`.
 
 ```tsx
 <Carousel loop={false}>

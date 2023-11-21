@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 0.8.25
+
+### Patch Changes
+
+- Updated dependencies [[`b7ac7cdc`](https://github.com/hirotomoyamada/yamada-ui/commit/b7ac7cdc9dcb8d11402bd8784c256313956a3a59)]:
+  - @yamada-ui/modal@0.5.0
+
 ## 0.8.24
 
 ### Patch Changes

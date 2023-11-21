@@ -1,5 +1,11 @@
 # @yamada-ui/modal
 
+## 0.5.0
+
+### Minor Changes
+
+- [`b7ac7cdc`](https://github.com/hirotomoyamada/yamada-ui/commit/b7ac7cdc9dcb8d11402bd8784c256313956a3a59) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `portalProps` to `Modal` component.
+
 ## 0.4.19
 
 ### Patch Changes

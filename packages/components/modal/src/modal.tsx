@@ -16,7 +16,7 @@ import {
   AnimatePresence,
   MotionTransitionProperties,
 } from "@yamada-ui/motion"
-import { Portal } from "@yamada-ui/portal"
+import { Portal, PortalProps } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { useValue } from "@yamada-ui/use-value"
 import {
@@ -150,6 +150,10 @@ type ModalOptions = Pick<
    * The animation duration.
    */
   duration?: MotionTransitionProperties["duration"]
+  /**
+   * Props to be forwarded to the portal component.
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export type ModalProps = Omit<
@@ -190,6 +194,7 @@ export const Modal = forwardRef<ModalProps, "section">(
       lockFocusAcrossFrames = true,
       animation = "scale",
       duration,
+      portalProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -259,7 +264,7 @@ export const Modal = forwardRef<ModalProps, "section">(
       >
         <AnimatePresence onExitComplete={onCloseComplete}>
           {isOpen ? (
-            <Portal>
+            <Portal {...portalProps}>
               <FocusLock
                 autoFocus={autoFocus}
                 initialFocusRef={initialFocusRef}

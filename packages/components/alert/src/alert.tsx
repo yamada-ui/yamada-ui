@@ -58,7 +58,7 @@ export const Alert = forwardRef<AlertProps, "div">(
     const { theme } = useTheme()
     const statuses = theme.__config?.alert?.statuses ?? {}
 
-    colorScheme = colorScheme ?? getStatusColorScheme(status, statuses)
+    colorScheme ??= getStatusColorScheme(status, statuses)
 
     const [styles, mergedProps] = useMultiComponentStyle("Alert", {
       ...props,

@@ -1,5 +1,14 @@
 # @yamada-ui/modal
 
+## 0.5.1
+
+### Patch Changes
+
+- [`78858b48`](https://github.com/hirotomoyamada/yamada-ui/commit/78858b4808af9dcc465e776a7df1b52bf31e880c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `portalProps` to `Drawer` component.
+
+- Updated dependencies []:
+  - @yamada-ui/button@0.3.18
+
 ## 0.5.0
 
 ### Minor Changes

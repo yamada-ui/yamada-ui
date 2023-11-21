@@ -1,5 +1,15 @@
 # @yamada-ui/autocomplete
 
+## 0.5.4
+
+### Patch Changes
+
+- [#271](https://github.com/hirotomoyamada/yamada-ui/pull/271) [`ca39f785`](https://github.com/hirotomoyamada/yamada-ui/commit/ca39f78556c8d85d8d0ef93d865764e31d7b6960) Thanks [@illionillion](https://github.com/illionillion)! - Changed `??` to `??=` in `Autocomplete`.
+
+- Updated dependencies [[`cd8a4b57`](https://github.com/hirotomoyamada/yamada-ui/commit/cd8a4b57fec448b4bb052282902ffcc018bd9d55)]:
+  - @yamada-ui/use-controllable-state@0.3.1
+  - @yamada-ui/select@0.5.4
+
 ## 0.5.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/use-controllable-state
 
+## 0.3.1
+
+### Patch Changes
+
+- [#271](https://github.com/hirotomoyamada/yamada-ui/pull/271) [`cd8a4b57`](https://github.com/hirotomoyamada/yamada-ui/commit/cd8a4b57fec448b4bb052282902ffcc018bd9d55) Thanks [@illionillion](https://github.com/illionillion)! - Changed `??` to `??=`.
+
 ## 0.3.0
 
 ### Minor Changes

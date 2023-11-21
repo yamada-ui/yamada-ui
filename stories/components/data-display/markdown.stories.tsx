@@ -12,7 +12,7 @@ const meta: Meta<typeof Markdown> = {
 export default meta
 
 export const basic: Story = () => {
-  return <Markdown>{README}</Markdown>
+  return <Markdown>{MESSAGE}</Markdown>
 }
 
 export const withCodeTheme: Story = () => {
@@ -39,6 +39,18 @@ export const customComponent: Story = () => {
   )
 }
 
+const MESSAGE = `
+
+:::note status=info
+やっほーーーー！！
+:::
+
+# あいうえお
+
+- なんだってばよ
+
+あっかんべー
+`
 const README = `
 <p align="center">
   <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />

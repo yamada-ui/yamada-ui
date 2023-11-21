@@ -1,3 +1,4 @@
+import { Alert, AlertIcon, AlertDescription } from "@yamada-ui/alert"
 import {
   ui,
   forwardRef,
@@ -27,7 +28,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
 import { CodeThemeNames, codeThemes } from "./code-theme"
-
+import { remarkUIComponent } from "./remark-ui-component"
 export type MarkdownComponents = Components
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
   ComponentPropsWithoutRef<Y> & ReactMarkdownProps
@@ -62,10 +63,23 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  remarkPlugins = [remarkGfm, ...filterEmpty(remarkPlugins ?? [])]
+  remarkPlugins = [
+    remarkGfm,
+    remarkUIComponent,
+    ...filterEmpty(remarkPlugins ?? []),
+  ]
   rehypePlugins = [rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
   components = {
     code: (props: CodeProps) => <Code {...code} {...props} />,
+    p: ({ children, ...rest }: any) => {
+      console.log(rest)
+      return (
+        <Alert>
+          <AlertIcon />
+          <AlertDescription>{children}</AlertDescription>
+        </Alert>
+      )
+    },
     ...components,
   }
 

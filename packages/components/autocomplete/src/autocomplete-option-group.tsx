@@ -23,8 +23,8 @@ export const AutocompleteOptionGroup = forwardRef<
     const { label, getContainerProps, getGroupProps } =
       useAutocompleteOptionGroup(rest)
 
-    h = h ?? height
-    minH = minH ?? minHeight
+    h ??= height
+    minH ??= minHeight
 
     return (
       <ui.li

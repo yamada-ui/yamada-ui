@@ -143,8 +143,8 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
       children,
     })
 
-    h = h ?? height
-    minH = minH ?? minHeight
+    h ??= height
+    minH ??= minHeight
 
     const css: CSSUIObject = {
       position: "relative",

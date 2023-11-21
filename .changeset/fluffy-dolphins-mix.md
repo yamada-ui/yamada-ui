@@ -2,4 +2,4 @@
 "@yamada-ui/autocomplete": patch
 ---
 
-Changec `??` to `??=` in `Autocomplete`.
+Changed `??` to `??=` in `Autocomplete`.

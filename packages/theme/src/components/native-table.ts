@@ -7,6 +7,7 @@ export const NativeTable: ComponentMultiStyle = {
       w: "100%",
     },
     table: {
+      h: "100%",
       w: "100%",
       fontVariantNumeric: "lining-nums tabular-nums",
       borderCollapse: "collapse",

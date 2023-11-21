@@ -81,6 +81,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       closeOnEsc,
       lockFocusAcrossFrames,
       duration = { enter: 0.4, exit: 0.3 },
+      portalProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -113,6 +114,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
             closeOnEsc,
             lockFocusAcrossFrames,
             duration,
+            portalProps,
           }}
         >
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}

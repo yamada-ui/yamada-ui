@@ -363,7 +363,7 @@ const getOverlayStyle = (
   zIndex: "beerus",
   bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
   w: "100vw",
-  h: "100vh",
+  h: "100dvh",
   p: "md",
   display: "flex",
   justifyContent: "center",

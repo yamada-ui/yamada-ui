@@ -152,9 +152,9 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, "li">(
       >
         {cloneChildren}
 
-        {!isLastChild && (
+        {!isLastChild ? (
           <BreadcrumbSeparator gap={gap}>{separator}</BreadcrumbSeparator>
-        )}
+        ) : null}
       </ui.li>
     )
   },
@@ -179,7 +179,7 @@ export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
       <ui.a
         ref={ref}
         as={!isCurrentPage ? "a" : "span"}
-        aria-current={isCurrentPage && "page"}
+        aria-current={isCurrentPage ? "page" : undefined}
         className={cx("ui-breadcrumb__link", className)}
         __css={styles.link}
         {...rest}

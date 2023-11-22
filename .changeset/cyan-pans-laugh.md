@@ -3,3 +3,4 @@
 ---
 
 Added test in `Breadcrumb`.
+Refactored in `Breadcrumb`.

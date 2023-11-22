@@ -46,7 +46,7 @@ export const Drawer: ComponentMultiStyle = {
     lg: { container: { maxW: "2xl" } },
     xl: { container: { maxW: "4xl" } },
     full: {
-      container: { minW: "100vw", minH: "100vh" },
+      container: { minW: "100vw", minH: "100dvh" },
     },
   },
 

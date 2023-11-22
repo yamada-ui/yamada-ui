@@ -1,5 +1,12 @@
 # @yamada-ui/file-button
 
+## 0.3.21
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@0.3.18
+
 ## 0.3.20
 
 ### Patch Changes

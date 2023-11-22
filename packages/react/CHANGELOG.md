@@ -1,5 +1,37 @@
 # @yamada-ui/react
 
+## 0.8.26
+
+### Patch Changes
+
+- Updated dependencies [[`832c86ef`](https://github.com/hirotomoyamada/yamada-ui/commit/832c86ef1b507eee7c394ac6c73da5891fede388), [`ca39f785`](https://github.com/hirotomoyamada/yamada-ui/commit/ca39f78556c8d85d8d0ef93d865764e31d7b6960), [`78858b48`](https://github.com/hirotomoyamada/yamada-ui/commit/78858b4808af9dcc465e776a7df1b52bf31e880c), [`0f0dcfc6`](https://github.com/hirotomoyamada/yamada-ui/commit/0f0dcfc609fa240dc10eff652e829ae997df6f36), [`85997e5b`](https://github.com/hirotomoyamada/yamada-ui/commit/85997e5b883df64f457cf03513270096d18f582e), [`cd8a4b57`](https://github.com/hirotomoyamada/yamada-ui/commit/cd8a4b57fec448b4bb052282902ffcc018bd9d55), [`98a03bba`](https://github.com/hirotomoyamada/yamada-ui/commit/98a03bba2f98b7d7d4c60ee89e4380d5fea7edec)]:
+  - @yamada-ui/theme@0.11.14
+  - @yamada-ui/autocomplete@0.5.4
+  - @yamada-ui/modal@0.5.1
+  - @yamada-ui/alert@0.5.12
+  - @yamada-ui/use-controllable-state@0.3.1
+  - @yamada-ui/loading@0.5.4
+  - @yamada-ui/providers@0.9.10
+  - @yamada-ui/theme-tools@0.2.23
+  - @yamada-ui/notice@0.5.6
+  - @yamada-ui/accordion@0.4.3
+  - @yamada-ui/checkbox@0.4.2
+  - @yamada-ui/editable@0.3.21
+  - @yamada-ui/file-input@0.4.12
+  - @yamada-ui/menu@0.3.23
+  - @yamada-ui/pagination@0.4.18
+  - @yamada-ui/pin-input@0.3.22
+  - @yamada-ui/radio@0.4.2
+  - @yamada-ui/segmented-control@0.4.2
+  - @yamada-ui/select@0.5.4
+  - @yamada-ui/slider@0.4.13
+  - @yamada-ui/tabs@0.3.21
+  - @yamada-ui/button@0.3.18
+  - @yamada-ui/use-media-query@0.2.25
+  - @yamada-ui/switch@0.3.23
+  - @yamada-ui/input@0.3.21
+  - @yamada-ui/file-button@0.3.21
+
 ## 0.8.25
 
 ### Patch Changes

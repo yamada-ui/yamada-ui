@@ -87,8 +87,8 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       ...rest
     } = useAutocomplete({ ...computedProps, defaultValue, children })
 
-    h = h ?? height
-    minH = minH ?? minHeight
+    h ??= height
+    minH ??= minHeight
 
     const css: CSSUIObject = {
       position: "relative",

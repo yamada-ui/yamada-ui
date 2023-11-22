@@ -53,6 +53,7 @@ export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
 
 export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Markdown", props)
+  console.log(css)
   let {
     className,
     remarkPlugins,
@@ -70,11 +71,13 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   ]
   rehypePlugins = [rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
   components = {
-    code: (props: CodeProps) => <Code {...code} {...props} />,
-    p: ({ children, ...rest }: any) => {
-      console.log(rest)
+    code: (props: CodeProps) => {
+      console.log(props)
+      return <Code {...code} {...props} />
+    },
+    note: ({ className, children, ...rest }: any) => {
       return (
-        <Alert>
+        <Alert status={className} {...rest}>
           <AlertIcon />
           <AlertDescription>{children}</AlertDescription>
         </Alert>

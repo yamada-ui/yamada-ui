@@ -4,9 +4,10 @@ export const remarkUIComponent: Plugin = () => (tree) => {
   visit(tree, "paragraph", (node: any) => {
     try {
       const { name, attributes, children } = getValidChildren(node.children)
+      console.log(node)
       switch (name) {
         case "note":
-          insertElement({ name: "p", attributes, children })(node)
+          insertElement({ name: "note", attributes, children })(node)
           break
         default:
           break
@@ -79,7 +80,8 @@ const getAttributes = (
 const insertElement =
   ({
     name,
-    children = [], //attributes = [],
+    children = [],
+    attributes = [],
   }: {
     name: string
     children: any[]
@@ -90,9 +92,9 @@ const insertElement =
     node.name = name
     node.data = {
       hName: "note",
-      hAttribute: {},
       hChildren: children,
+      hProperties: {
+        className: `${attributes[0].value}`,
+      },
     }
-    //node.attributes = attributes
-    node.children = children
   }

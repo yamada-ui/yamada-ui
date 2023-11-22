@@ -1,4 +1,9 @@
-import { Alert, AlertIcon, AlertDescription } from "@yamada-ui/alert"
+import {
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  AlertProps,
+} from "@yamada-ui/alert"
 import {
   ui,
   forwardRef,
@@ -29,6 +34,7 @@ import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
 import { CodeThemeNames, codeThemes } from "./code-theme"
 import { remarkUIComponent } from "./remark-ui-component"
+
 export type MarkdownComponents = Components
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
   ComponentPropsWithoutRef<Y> & ReactMarkdownProps
@@ -40,11 +46,33 @@ export type MarkdownComponentUnorderedListProps = UnorderedListProps
 export type MarkdownComponentTableCellProps = TableDataCellProps
 export type MarkdownComponentTableRowProps = TableRowProps
 
+const uiComponents = ({
+  codeProps,
+  noteProps,
+}: Pick<MarkdownProps, "codeProps" | "noteProps">): Components =>
+  ({
+    code: (props: CodeProps) => {
+      return <Code {...codeProps} {...props} />
+    },
+    note: ({ children, ...rest }: any) => {
+      return (
+        <Alert mb="4" {...noteProps} {...rest}>
+          <AlertIcon />
+          <AlertDescription>{children}</AlertDescription>
+        </Alert>
+      )
+    },
+  }) as Components
+
 type MarkdownOptions = ReactMarkdownOptions & {
   /**
    * If provided, this will set the theme for the code.
    */
-  code?: { theme?: CodeThemeNames | ColorModeArray<CodeThemeNames> }
+  codeProps?: { theme?: CodeThemeNames | ColorModeArray<CodeThemeNames> }
+  /**
+   * If provided, this will set the theme for the note.
+   */
+  noteProps?: AlertProps
 }
 
 export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
@@ -53,14 +81,14 @@ export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
 
 export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Markdown", props)
-  console.log(css)
   let {
     className,
     remarkPlugins,
     rehypePlugins,
     linkTarget = "_blank",
     components,
-    code,
+    codeProps,
+    noteProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -71,20 +99,9 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   ]
   rehypePlugins = [rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
   components = {
-    code: (props: CodeProps) => {
-      console.log(props)
-      return <Code {...code} {...props} />
-    },
-    note: ({ className, children, ...rest }: any) => {
-      return (
-        <Alert status={className} {...rest}>
-          <AlertIcon />
-          <AlertDescription>{children}</AlertDescription>
-        </Alert>
-      )
-    },
+    ...uiComponents({ codeProps, noteProps }),
     ...components,
-  }
+  } as MarkdownComponents
 
   return (
     <ui.div
@@ -101,7 +118,7 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   )
 })
 
-const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["code"]> = ({
+const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["codeProps"]> = ({
   inline,
   className,
   children,

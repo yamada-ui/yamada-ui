@@ -1,13 +1,15 @@
+import { Dict } from "@yamada-ui/utils"
 import { Plugin } from "unified"
 import { visit } from "unist-util-visit"
+
 export const remarkUIComponent: Plugin = () => (tree) => {
   visit(tree, "paragraph", (node: any) => {
     try {
-      const { name, attributes, children } = getValidChildren(node.children)
-      console.log(node)
+      const { name, properties, children } = getValidChildren(node.children)
+
       switch (name) {
         case "note":
-          insertElement({ name: "note", attributes, children })(node)
+          insertElement({ name: "note", properties, children })(node)
           break
         default:
           break
@@ -18,22 +20,23 @@ export const remarkUIComponent: Plugin = () => (tree) => {
 
 const getValidChildren = (
   children: any[],
-): { name: string; attributes: any[]; children: any[] } => {
+): { name: string; properties: Dict; children: any[] } => {
   if (!children.length) throw new Error()
 
   if (children.length === 1) {
     const { type, value } = children[0]
+
     if (type !== "text" || !value) throw new Error()
 
     const [, name, content] = value.match(/^:::(\w+)\s+([\s\S]*?)\s*:::$/) ?? []
 
     if (!name || !content) throw new Error()
 
-    const { attributes, resolvedContent } = getAttributes(content)
+    const { properties, resolvedContent } = getProperties(content)
 
     return {
       name,
-      attributes,
+      properties,
       children: [{ type: "text", value: resolvedContent }],
     }
   } else {
@@ -47,7 +50,7 @@ const getValidChildren = (
 
     if (!name) throw new Error()
 
-    const { attributes, resolvedContent } = getAttributes(firstChildContent)
+    const { properties, resolvedContent } = getProperties(firstChildContent)
 
     if (resolvedContent) {
       children[0].value = resolvedContent
@@ -61,40 +64,40 @@ const getValidChildren = (
       children.pop()
     }
 
-    return { name, attributes, children }
+    return { name, properties, children }
   }
 }
 
-const getAttributes = (
+const getProperties = (
   content: string = "",
-): { attributes: any[]; resolvedContent: string } => {
+): { properties: Dict; resolvedContent: string } => {
+  const properties: Dict = {}
   const reg = /(\w+)=([^\s]+)(?=\s|$)/g
-  const attributes = [...content.matchAll(reg)].map(([, name, value]) => ({
-    type: "paragraph",
-    name,
-    value: value.trim(),
-  }))
+  const results = [...content.matchAll(reg)]
+
+  results.forEach(([, name, value]) => {
+    properties[name] = value.trim()
+  })
+
   const resolvedContent = content.replace(reg, "").replace(/^\s+/, "")
-  return { attributes, resolvedContent }
+
+  return { properties, resolvedContent }
 }
 const insertElement =
   ({
     name,
     children = [],
-    attributes = [],
+    properties = {},
   }: {
     name: string
     children: any[]
-    attributes?: any[]
+    properties?: Dict
   }) =>
   (node: any) => {
     node.type = "custom"
-    node.name = name
     node.data = {
-      hName: "note",
+      hName: name,
       hChildren: children,
-      hProperties: {
-        className: `${attributes[0].value}`,
-      },
+      hProperties: properties,
     }
   }

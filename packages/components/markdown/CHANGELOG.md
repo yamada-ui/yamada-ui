@@ -1,5 +1,11 @@
 # @yamada-ui/markdown
 
+## 0.5.0
+
+### Minor Changes
+
+- [#274](https://github.com/hirotomoyamada/yamada-ui/pull/274) [`6dee0b08`](https://github.com/hirotomoyamada/yamada-ui/commit/6dee0b086d600fbc701405c53e498c514c71cc48) Thanks [@teru12012000](https://github.com/teru12012000)! - When write note in `Markdown` component, can express a supplementary explanation using Yamada UI `Alert` component.
+
 ## 0.4.0
 
 ### Minor Changes

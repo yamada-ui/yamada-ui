@@ -1,5 +1,11 @@
 # @yamada-ui/close-button
 
+## 0.3.17
+
+### Patch Changes
+
+- [#279](https://github.com/hirotomoyamada/yamada-ui/pull/279) [`00e88786`](https://github.com/hirotomoyamada/yamada-ui/commit/00e88786c11056b22c9919c5c71213f1b773bb05) Thanks [@illionillion](https://github.com/illionillion)! - Added `aria-label` in `CloseButton`.
+
 ## 0.3.16
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @yamada-ui/test
 
+## 0.2.0
+
+### Minor Changes
+
+- [`a9606ad5`](https://github.com/hirotomoyamada/yamada-ui/commit/a9606ad5f890e6a5c26462847f2d8167a8a2ebd2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added jest-dom imports for testing.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@0.9.11
+
 ## 0.1.73
 
 ### Patch Changes

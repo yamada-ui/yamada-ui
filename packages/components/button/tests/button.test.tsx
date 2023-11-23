@@ -36,7 +36,7 @@ describe("<Button/>", () => {
     // Submitting" visually hidden label shown
     expect(screen.getByText("Submitting")).toBeInTheDocument()
 
-    // Confirm spinner position
+    // Confirm loading position
     expect(screen.getByText(/loading start/i)).toHaveClass(
       "ui-button__loading--start",
     )

@@ -1,5 +1,11 @@
 # @yamada-ui/breadcrumb
 
+## 0.3.18
+
+### Patch Changes
+
+- [#277](https://github.com/hirotomoyamada/yamada-ui/pull/277) [`633bb3ae`](https://github.com/hirotomoyamada/yamada-ui/commit/633bb3ae11c920ecc923b9e15a07f5a5173e406b) Thanks [@illionillion](https://github.com/illionillion)! - Fixed `href` in `BreadcrumbLink`.
+
 ## 0.3.17
 
 ### Patch Changes

@@ -4,6 +4,7 @@ import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
 import { toHaveNoViolations } from "jest-axe"
 import { ReactElement } from "react"
+import "@testing-library/jest-dom"
 
 expect.extend(toHaveNoViolations)
 

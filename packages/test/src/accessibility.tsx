@@ -2,6 +2,7 @@ import { RenderOptions } from "@testing-library/react"
 import { axe, toHaveNoViolations, JestAxeConfigureOptions } from "jest-axe"
 import { ReactElement, isValidElement } from "react"
 import { render } from "./render"
+import "@testing-library/jest-dom"
 
 expect.extend(toHaveNoViolations)
 

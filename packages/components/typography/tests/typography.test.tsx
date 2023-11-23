@@ -1,5 +1,4 @@
 import { render } from "@yamada-ui/test"
-import React from "react"
 import { Heading, Text } from "../src"
 
 describe("<Heading />", () => {

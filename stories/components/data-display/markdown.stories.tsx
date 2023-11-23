@@ -39,6 +39,32 @@ export const customComponent: Story = () => {
   )
 }
 
+export const noteComponent: Story = () => {
+  return <Markdown>{NOTEBLOCK}</Markdown>
+}
+
+const NOTEBLOCK = `
+:::note 
+Status is notiong.
+:::
+
+:::note status=info
+Status is info.
+:::
+
+:::note status=warning
+Status is warning.
+:::
+
+:::note status=success
+Status is success.
+:::
+
+:::note status=error
+Status is error.
+:::
+`
+
 const README = `
 <p align="center">
   <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />

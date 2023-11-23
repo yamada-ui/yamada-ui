@@ -1,0 +1,77 @@
+---
+title: IconButton
+description: "`IconButton`は、ボタン内にアイコンを表示するコンポーネントです。"
+package_name: "@yamada-ui/button"
+is_tabs: true
+with_description: true
+tab: 使い方
+---
+
+## インポート
+
+```ts
+import { IconButton } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<IconButton icon={<FontAwesomeIcon icon={faPlus} />} />
+```
+
+### バリアントを変更する
+
+```tsx
+<Wrap gap="md">
+  <IconButton colorScheme="primary" variant="primary" icon={<FontAwesomeIcon icon={faPlus} />} />
+  <IconButton colorScheme="secondary" variant="outline" icon={<FontAwesomeIcon icon={faMinus} />} />
+  <IconButton colorScheme="warning" variant="ghost" icon={<FontAwesomeIcon icon={faSun} />} />
+  <IconButton colorScheme="danger" variant="link" icon={<FontAwesomeIcon icon={faMoon} />} />
+  <IconButton variant="unstyled" icon={<FontAwesomeIcon icon={faCheck} />} />
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx
+<Wrap gap="md">
+  <IconButton colorScheme="primary" size="xs" icon={<FontAwesomeIcon icon={faPlus} />} />
+  <IconButton colorScheme="secondary" size="sm" icon={<FontAwesomeIcon icon={faMinus} />} />
+  <IconButton colorScheme="warning" size="md" icon={<FontAwesomeIcon icon={faSun} />} />
+  <IconButton colorScheme="danger" size="lg" icon={<FontAwesomeIcon icon={faMoon} />} />
+</Wrap>
+```
+
+### 無効にする
+
+無効にする場合は、`isDisabled`を`true`にします。
+
+```tsx
+<Wrap gap="md">
+  <IconButton
+    isDisabled
+    colorScheme="primary"
+    variant="primary"
+    icon={<FontAwesomeIcon icon={faPlus} />}
+  />
+  <IconButton
+    isDisabled
+    colorScheme="secondary"
+    variant="outline"
+    icon={<FontAwesomeIcon icon={faMinus} />}
+  />
+  <IconButton
+    isDisabled
+    colorScheme="warning"
+    variant="ghost"
+    icon={<FontAwesomeIcon icon={faSun} />}
+  />
+  <IconButton
+    isDisabled
+    colorScheme="danger"
+    variant="link"
+    icon={<FontAwesomeIcon icon={faMoon} />}
+  />
+  <IconButton isDisabled variant="unstyled" icon={<FontAwesomeIcon icon={faCheck} />} />
+</Wrap>
+```

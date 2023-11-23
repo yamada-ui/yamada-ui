@@ -1,0 +1,1 @@
+{"version":3,"file":"box-262adc2c.js","sources":["../../packages/components/layouts/src/box.tsx"],"sourcesContent":["import { ui, HTMLUIProps } from \"@yamada-ui/core\"\n\nexport type BoxProps = HTMLUIProps<\"div\">\n\nexport const Box = ui(\"div\")\n"],"names":["Box","ui"],"mappings":"0CAIa,MAAAA,EAAMC,EAAG,KAAK"}

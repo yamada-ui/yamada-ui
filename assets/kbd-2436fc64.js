@@ -1,2 +1,0 @@
-import{j as a}from"./jsx-runtime-3bfad254.js";import{f as p}from"./forward-ref-cf7188bd.js";import{u as c}from"./use-component-style-57629fd2.js";import{o as f}from"./theme-provider-d246dc71.js";import{d as i,e as d}from"./factory-11559d5d.js";const K=p((s,o)=>{const[r,m]=c("Kbd",s),{className:e,...t}=f(m);return a(i.kbd,{ref:o,className:d("ui-kbd",e),__css:r,...t})});export{K};
-//# sourceMappingURL=kbd-2436fc64.js.map

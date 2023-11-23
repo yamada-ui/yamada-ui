@@ -26,7 +26,7 @@ import { PinInput, PinInputField } from "@yamada-ui/react"
 <PinInput />
 ```
 
-### Change Variants
+### Change Variant
 
 ```tsx
 <VStack>
@@ -48,9 +48,9 @@ import { PinInput, PinInputField } from "@yamada-ui/react"
 </VStack>
 ```
 
-### Set Default Values
+### Set Default Value
 
-To set default values, assign a string or number to `defaultValue`.
+To set a default value, set a string or number to `defaultValue`.
 
 ```tsx
 <VStack>
@@ -101,7 +101,7 @@ By default, only numeric input is allowed. To support alphanumeric, set `type` t
 
 ### Set Action on Completion
 
-To set the action upon completion, use the `onComplete` property.
+To set the action on completion, use the `onComplete` property.
 
 ```tsx functional=true
 const { page } = useLoading()
@@ -117,17 +117,17 @@ To use as a one-time password (`autocomplete="one-time-code"`), set `otp` to `tr
 <PinInput otp />
 ```
 
-### Mask Entered Values
+### Mask Entered Value
 
-To mask entered values, set `mask` to `true`.
+To mask the entered value, set `mask` to `true`.
 
 ```tsx
 <PinInput mask />
 ```
 
-### Use Custom Fields
+### Use Custom Field
 
-To use custom fields, utilize `PinInputField`.
+To use a custom field, use `PinInputField`.
 
 ```tsx
 <PinInput>
@@ -140,7 +140,7 @@ To use custom fields, utilize `PinInputField`.
 
 ### Disable Focus Management
 
-By default, focus automatically moves to the next field when an input is entered, and to the previous field when the `BackSpace` key is pressed. To disable this control, set `manageFocus` to `false`.
+By default, when a field is entered, the focus automatically moves to the next field. Also, when the `BackSpace` key is pressed, the focus moves to the previous field. To disable this control, set `manageFocus` to `false`.
 
 ```tsx
 <PinInput manageFocus={false} />
@@ -231,7 +231,7 @@ const onComplete = () => page.start({ duration: 5000 })
 return <PinInput value={value} onChange={onChange} onComplete={onComplete} />
 ```
 
-### Use with `React Hook Form`
+### Use `React Hook Form`
 
 ```tsx functional=true
 type Data = { pinInput: string }

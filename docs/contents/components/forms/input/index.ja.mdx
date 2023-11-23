@@ -69,7 +69,6 @@ import {
 
 ```tsx
 <VStack>
-  <Input placeholder="default border color" />
   <Input focusBorderColor="green.500" placeholder="custom border color" />
   <Input isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
 </VStack>
@@ -225,7 +224,7 @@ const [value, setValue] = useState<string>("オッス！オラ悟空！")
 return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 ```
 
-### `React Hook Form`を使用する
+### `React Hook Form`を使う
 
 ```tsx functional=true
 type Data = { name: string; cellphone: string; email: string }

@@ -12,7 +12,7 @@ export const useControllableState = <T>({
   value,
   ...rest
 }: UseControllableStateProps<T>) => {
-  rest.onUpdate = rest.onUpdate ?? ((prev, next) => prev !== next)
+  rest.onUpdate ??= (prev, next) => prev !== next
 
   const onChange = useCallbackRef(rest.onChange)
   const onUpdate = useCallbackRef(rest.onUpdate)

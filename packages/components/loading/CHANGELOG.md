@@ -1,5 +1,11 @@
 # @yamada-ui/loading
 
+## 0.5.4
+
+### Patch Changes
+
+- [#272](https://github.com/hirotomoyamada/yamada-ui/pull/272) [`98a03bba`](https://github.com/hirotomoyamada/yamada-ui/commit/98a03bba2f98b7d7d4c60ee89e4380d5fea7edec) Thanks [@yumemiru-masomi](https://github.com/yumemiru-masomi)! - Changed height Loading animation(screen, page)
+
 ## 0.5.3
 
 ### Patch Changes

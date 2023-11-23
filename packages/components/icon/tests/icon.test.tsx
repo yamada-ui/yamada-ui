@@ -1,5 +1,4 @@
 import { a11y } from "@yamada-ui/test"
-import React from "react"
 import { Md3DRotation } from "react-icons/md"
 import { Icon } from "../src"
 

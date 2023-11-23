@@ -1,5 +1,14 @@
 # @yamada-ui/alert
 
+## 0.5.12
+
+### Patch Changes
+
+- [#271](https://github.com/hirotomoyamada/yamada-ui/pull/271) [`0f0dcfc6`](https://github.com/hirotomoyamada/yamada-ui/commit/0f0dcfc609fa240dc10eff652e829ae997df6f36) Thanks [@illionillion](https://github.com/illionillion)! - Changed `??` to `??=` in `Alert`.
+
+- Updated dependencies [[`98a03bba`](https://github.com/hirotomoyamada/yamada-ui/commit/98a03bba2f98b7d7d4c60ee89e4380d5fea7edec)]:
+  - @yamada-ui/loading@0.5.4
+
 ## 0.5.11
 
 ### Patch Changes

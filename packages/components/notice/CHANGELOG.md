@@ -1,5 +1,12 @@
 # @yamada-ui/notice
 
+## 0.5.6
+
+### Patch Changes
+
+- Updated dependencies [[`0f0dcfc6`](https://github.com/hirotomoyamada/yamada-ui/commit/0f0dcfc609fa240dc10eff652e829ae997df6f36)]:
+  - @yamada-ui/alert@0.5.12
+
 ## 0.5.5
 
 ### Patch Changes

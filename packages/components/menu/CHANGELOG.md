@@ -1,5 +1,12 @@
 # @yamada-ui/menu
 
+## 0.3.23
+
+### Patch Changes
+
+- Updated dependencies [[`cd8a4b57`](https://github.com/hirotomoyamada/yamada-ui/commit/cd8a4b57fec448b4bb052282902ffcc018bd9d55)]:
+  - @yamada-ui/use-controllable-state@0.3.1
+
 ## 0.3.22
 
 ### Patch Changes

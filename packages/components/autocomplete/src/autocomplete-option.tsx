@@ -24,7 +24,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
     const { isSelected, customIcon, children, getOptionProps } =
       useAutocompleteOption(rest)
 
-    icon = icon ?? customIcon
+    icon ??= customIcon
 
     const css: CSSUIObject = {
       textDecoration: "none",

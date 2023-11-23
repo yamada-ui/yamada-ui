@@ -1,5 +1,12 @@
 # @yamada-ui/input
 
+## 0.3.21
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/file-input@0.4.12
+
 ## 0.3.20
 
 ### Patch Changes

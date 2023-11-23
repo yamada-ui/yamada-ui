@@ -1,5 +1,13 @@
 # @yamada-ui/theme
 
+## 0.11.14
+
+### Patch Changes
+
+- [#269](https://github.com/hirotomoyamada/yamada-ui/pull/269) [`832c86ef`](https://github.com/hirotomoyamada/yamada-ui/commit/832c86ef1b507eee7c394ac6c73da5891fede388) Thanks [@Dexson-Dsouza](https://github.com/Dexson-Dsouza)! - Added `height` to `NativeTable` component.
+
+- [#273](https://github.com/hirotomoyamada/yamada-ui/pull/273) [`85997e5b`](https://github.com/hirotomoyamada/yamada-ui/commit/85997e5b883df64f457cf03513270096d18f582e) Thanks [@saki10](https://github.com/saki10)! - Changed height size full doroa component
+
 ## 0.11.13
 
 ### Patch Changes

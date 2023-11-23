@@ -46,6 +46,7 @@ export const WithNoteComponents: Story = () => {
 const NOTE_COMPONENTS = `
 :::note 
 Status is notiong.
+There is a line break.
 :::
 
 :::note status=info

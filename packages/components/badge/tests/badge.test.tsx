@@ -1,5 +1,4 @@
 import { render, a11y } from "@yamada-ui/test"
-import React from "react"
 import { Badge } from "../src"
 
 describe("<Badge />", () => {

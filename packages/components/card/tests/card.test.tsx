@@ -1,7 +1,5 @@
 import { render } from "@yamada-ui/test"
-import React from "react"
 import { Card } from "../src"
-import "@testing-library/jest-dom"
 
 describe("<Card />", () => {
   test("renders card correctly", () => {

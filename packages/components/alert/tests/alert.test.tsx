@@ -1,10 +1,8 @@
 import { InfoIcon, WarningIcon, CheckIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
 import { render, a11y, screen } from "@yamada-ui/test"
-import React from "react"
 import { Alert, AlertIcon, AlertTitle, AlertDescription } from "../src"
 import { getStatusColorScheme, getStatusIcon } from "../src/alert"
-import "@testing-library/jest-dom"
 
 test("passes a11y test", async () => {
   await a11y(

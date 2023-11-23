@@ -58,9 +58,7 @@ const uiComponents = ({
       return (
         <Alert mb="4" {...noteProps} {...rest}>
           <AlertIcon />
-          <AlertDescription whiteSpace={"pre-line"}>
-            {children}
-          </AlertDescription>
+          <AlertDescription whiteSpace="pre-line">{children}</AlertDescription>
         </Alert>
       )
     },

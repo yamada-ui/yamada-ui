@@ -39,11 +39,11 @@ export const customComponent: Story = () => {
   )
 }
 
-export const noteComponent: Story = () => {
-  return <Markdown>{NOTEBLOCK}</Markdown>
+export const WithNoteComponents: Story = () => {
+  return <Markdown>{NOTE_COMPONENTS}</Markdown>
 }
 
-const NOTEBLOCK = `
+const NOTE_COMPONENTS = `
 :::note 
 Status is notiong.
 :::

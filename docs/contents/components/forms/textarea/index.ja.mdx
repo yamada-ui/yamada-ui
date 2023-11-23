@@ -46,10 +46,12 @@ import { Textarea } from "@yamada-ui/react"
 `resize`プロパティを使用して、`Textarea`のリサイズの挙動を制御できます。
 
 ```tsx
-<Textarea resize="block" placeholder="block" />
-<Textarea resize="horizontal" placeholder="horizontal" />
-<Textarea resize="vertical" placeholder="vertical" />
-<Textarea resize="none" placeholder="none" />
+<VStack>
+  <Textarea resize="block" placeholder="block" />
+  <Textarea resize="horizontal" placeholder="horizontal" />
+  <Textarea resize="vertical" placeholder="vertical" />
+  <Textarea resize="none" placeholder="none" />
+</VStack>
 ```
 
 ### ボーダーのカラーを変更する

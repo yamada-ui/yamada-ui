@@ -1,5 +1,4 @@
 import { render, a11y, screen } from "@yamada-ui/test"
-import * as React from "react"
 import { Button } from "../src"
 
 describe("<Button/>", () => {

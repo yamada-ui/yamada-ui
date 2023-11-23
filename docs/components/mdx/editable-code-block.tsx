@@ -36,7 +36,8 @@ import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { PrismTheme } from "prism-react-renderer"
 import React, { FC, PropsWithChildren, useState } from "react"
-import { FaRobot, FaCheckCircle } from "react-icons/fa"
+import { useForm, Controller } from "react-hook-form"
+import { FaRobot, FaCheckCircle, FaPhone } from "react-icons/fa"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
@@ -93,11 +94,12 @@ const fontAwesomeIcons = {
   faChevronLeft,
   faChevronRight,
   faEnvelope,
+  FaPhone,
   faSun,
   faMoon,
 }
-const reactIcons = { FaRobot, FaCheckCircle }
-const utils = { wait, faker }
+const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
+const utils = { wait, faker, useForm, Controller }
 
 const scope = {
   ...react,

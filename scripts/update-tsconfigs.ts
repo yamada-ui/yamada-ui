@@ -8,7 +8,7 @@ const main = async () => {
     packages.map(async ({ dir }) => {
       const data = {
         extends: "../../../tsconfig.json",
-        include: ["src", "index.ts"],
+        include: ["src", "tests", "index.ts"],
       }
 
       await writeFile(`${dir}/tsconfig.json`, JSON.stringify(data, null, 2))

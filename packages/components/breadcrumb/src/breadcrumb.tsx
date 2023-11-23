@@ -172,13 +172,14 @@ type BreadcrumbLinkOptions = {
 export type BreadcrumbLinkProps = HTMLUIProps<"a"> & BreadcrumbLinkOptions
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
-  ({ className, children, isCurrentPage, ...rest }, ref) => {
+  ({ className, children, isCurrentPage, href, ...rest }, ref) => {
     const styles = useBreadcrumb()
 
     return (
       <ui.a
         ref={ref}
         as={!isCurrentPage ? "a" : "span"}
+        href={!isCurrentPage ? href : undefined}
         aria-current={isCurrentPage ? "page" : undefined}
         className={cx("ui-breadcrumb__link", className)}
         __css={styles.link}

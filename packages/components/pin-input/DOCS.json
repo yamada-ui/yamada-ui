@@ -10,7 +10,7 @@
       "required": false,
       "description": "The border color when the input is invalid."
     },
-    "fileds": {
+    "items": {
       "type": "number",
       "defaultValue": "4",
       "required": false,

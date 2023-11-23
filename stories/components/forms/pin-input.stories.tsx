@@ -54,13 +54,13 @@ export const withVariant: Story = () => {
 export const withFields: Story = () => {
   return (
     <>
-      <PinInput fileds={3} />
+      <PinInput items={3} />
 
-      <PinInput fileds={4} />
+      <PinInput items={4} />
 
-      <PinInput fileds={5} />
+      <PinInput items={5} />
 
-      <PinInput fileds={6} />
+      <PinInput items={6} />
     </>
   )
 }

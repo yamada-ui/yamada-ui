@@ -123,7 +123,7 @@ type PinInputOptions = {
    *
    * @default 4
    */
-  fileds?: number
+  items?: number
   /**
    * The border color when the input is focused.
    */
@@ -159,7 +159,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       mask,
       onChange,
       onComplete,
-      fileds = 4,
+      items = 4,
       children,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
@@ -349,7 +349,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     let cloneChildren = getValidChildren(children)
 
     if (!cloneChildren.length)
-      for (let i = 0; i < fileds; i++) {
+      for (let i = 0; i < items; i++) {
         cloneChildren.push(<PinInputField key={i} />)
       }
 

@@ -16,7 +16,7 @@ export const basic: Story = () => {
 }
 
 export const withCodeTheme: Story = () => {
-  return <Markdown code={{ theme: "materialDark" }}>{README}</Markdown>
+  return <Markdown codeProps={{ theme: "materialDark" }}>{README}</Markdown>
 }
 
 export const customComponent: Story = () => {
@@ -38,6 +38,33 @@ export const customComponent: Story = () => {
     </Markdown>
   )
 }
+
+export const WithNoteComponents: Story = () => {
+  return <Markdown>{NOTE_COMPONENTS}</Markdown>
+}
+
+const NOTE_COMPONENTS = `
+:::note 
+Status is notiong.
+There is a line break.
+:::
+
+:::note status=info
+Status is info.
+:::
+
+:::note status=warning
+Status is warning.
+:::
+
+:::note status=success
+Status is success.
+:::
+
+:::note status=error
+Status is error.
+:::
+`
 
 const README = `
 <p align="center">

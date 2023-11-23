@@ -1,4 +1,10 @@
 import {
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  AlertProps,
+} from "@yamada-ui/alert"
+import {
   ui,
   forwardRef,
   HTMLUIProps,
@@ -27,6 +33,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
 import { CodeThemeNames, codeThemes } from "./code-theme"
+import { remarkUIComponent } from "./remark-ui-component"
 
 export type MarkdownComponents = Components
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
@@ -39,11 +46,33 @@ export type MarkdownComponentUnorderedListProps = UnorderedListProps
 export type MarkdownComponentTableCellProps = TableDataCellProps
 export type MarkdownComponentTableRowProps = TableRowProps
 
+const uiComponents = ({
+  codeProps,
+  noteProps,
+}: Pick<MarkdownProps, "codeProps" | "noteProps">): Components =>
+  ({
+    code: (props: CodeProps) => {
+      return <Code {...codeProps} {...props} />
+    },
+    note: ({ children, ...rest }: any) => {
+      return (
+        <Alert mb="4" {...noteProps} {...rest}>
+          <AlertIcon />
+          <AlertDescription whiteSpace="pre-line">{children}</AlertDescription>
+        </Alert>
+      )
+    },
+  }) as Components
+
 type MarkdownOptions = ReactMarkdownOptions & {
   /**
    * If provided, this will set the theme for the code.
    */
-  code?: { theme?: CodeThemeNames | ColorModeArray<CodeThemeNames> }
+  codeProps?: { theme?: CodeThemeNames | ColorModeArray<CodeThemeNames> }
+  /**
+   * If provided, this will set the theme for the note.
+   */
+  noteProps?: AlertProps
 }
 
 export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
@@ -58,16 +87,21 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
     rehypePlugins,
     linkTarget = "_blank",
     components,
-    code,
+    codeProps,
+    noteProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  remarkPlugins = [remarkGfm, ...filterEmpty(remarkPlugins ?? [])]
+  remarkPlugins = [
+    remarkGfm,
+    remarkUIComponent,
+    ...filterEmpty(remarkPlugins ?? []),
+  ]
   rehypePlugins = [rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
   components = {
-    code: (props: CodeProps) => <Code {...code} {...props} />,
+    ...uiComponents({ codeProps, noteProps }),
     ...components,
-  }
+  } as MarkdownComponents
 
   return (
     <ui.div
@@ -84,7 +118,7 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   )
 })
 
-const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["code"]> = ({
+const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["codeProps"]> = ({
   inline,
   className,
   children,

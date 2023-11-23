@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/alert": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "react-markdown": "^8.0.7",
@@ -54,9 +55,11 @@
     "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
-    "react": "^18.0.0",
+    "@types/react-syntax-highlighter": "^15.5.7",
     "clean-package": "2.2.0",
-    "@types/react-syntax-highlighter": "^15.5.7"
+    "react": "^18.0.0",
+    "unified": "10.1.2",
+    "unist-util-visit": "5.0.0"
   },
   "peerDependencies": {
     "react": ">=18"

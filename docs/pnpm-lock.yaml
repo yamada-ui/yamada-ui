@@ -31,13 +31,13 @@ dependencies:
     version: 0.5.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/nextjs':
     specifier: 4.1.14
-    version: 4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.27)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.28)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
-    specifier: 0.8.27
-    version: 0.8.27(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 0.8.28
+    version: 0.8.28(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
-    specifier: 0.4.21
-    version: 0.4.21(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 0.5.0
+    version: 0.5.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
   contentlayer:
     specifier: ^0.3.4
     version: 0.3.4(esbuild@0.19.7)(markdown-wasm@1.2.0)
@@ -2742,7 +2742,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/nextjs@4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.27)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/nextjs@4.1.14(@emotion/react@11.11.1)(@types/react@18.2.37)(@yamada-ui/react@0.8.28)(next@14.0.2)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-RXxV7stolj+YIiyZOcJyqhfb/4Tcd1UVAS2vALpN/zbgDFouYHljz/M0+dLnNRoXn35lixdWfPMgdXdbrOXjAw==}
     peerDependencies:
       '@emotion/react': '>=11'
@@ -2753,7 +2753,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.1(@types/react@18.2.37)(react@18.2.0)
       '@yamada-ui/core': 0.12.4(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 0.8.27(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 0.8.28(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 0.3.2(react@18.2.0)
       next: 14.0.2(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -2814,8 +2814,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/pin-input@0.3.22(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-cZqeO39XMjSpkrp7E4k2SbjETd/sypdP8mtcve9eAMP32nYOu7VKtehmD3RjCsUz1Lfwue4/IeoygMrJlmy8oA==}
+  /@yamada-ui/pin-input@0.4.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HHNRX7DqfjFEi8KUYNKpm0imrP9j/TopwWYqP1ZUS+o8Kc7xiSJU5IN9vmmoPkSANJINIX3xkltqevkrhc0nMQ==}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2926,8 +2926,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@0.8.27(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-tvv4KvnbckCa/lFbpgl6o4Aer4xWMwFdDLB7lpgp8h9CKBixDzkpUeZ/TotA7JTpXJ8XaTQdbWXbgfhKlezlJg==}
+  /@yamada-ui/react@0.8.28(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.37)(framer-motion@10.16.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-120hftB0xQNKxr/xHI+KkDaugIYEl7DNtgtts+dzQjVKXWQrQS6DX7CqkgJWJKxhAD9Gyj+pSyfNK7C7lnxLgg==}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -2971,7 +2971,7 @@ packages:
       '@yamada-ui/notice': 0.5.7(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/number-input': 0.3.20(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/pagination': 0.4.18(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/pin-input': 0.3.22(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/pin-input': 0.4.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/popover': 0.3.23(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 0.3.6(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/progress': 0.4.16(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
@@ -3159,8 +3159,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/table@0.4.21(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-nS4PXTLR+LXpTrvmvQGwRdhXNNQ2gRRp6LJT0FUCOeiG+cRuarysfMDu4MMi91fcoRadOLZ+OOmYPMdI69p/Ow==}
+  /@yamada-ui/table@0.5.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-jCRUJREIaQYBxNXCnM0OwLra6THzULtsyNBGG15j6BIHB6Qs9McAfr/nR/1axSi6aSEeTiuGFBX6AzeBhQl1rQ==}
     peerDependencies:
       react: '>=18'
     dependencies:

@@ -52,6 +52,8 @@ export type ColumnStyles = {
   style?: CSSProperties
   sx?: CSSUIObject
   css?: CSSUIObject
+  colSpan?: number
+  rowSpan?: number
 }
 
 export type Column<Y extends RowData, M = unknown> = ColumnDef<Y, M> &

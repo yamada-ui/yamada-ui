@@ -8,7 +8,7 @@ import {
   useTableStyles,
 } from "@yamada-ui/native-table"
 import { runIfFunc, handlerAll, cx } from "@yamada-ui/utils"
-import { FC } from "react"
+import { FC, useMemo } from "react"
 import { useTableContext, render, SortDirection, Column } from "./use-table"
 
 export type TableHeadProps = NativeTableHeadProps
@@ -17,32 +17,79 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
   const { headerGroups, headerGroupProps, headerProps, sortIconProps } =
     useTableContext()
 
+  const resolvedHeaderGroups = useMemo(
+    () =>
+      headerGroups.map((header) => {
+        const uppperHeaderGroups = headerGroups.filter(
+          ({ depth }) => depth < header.depth,
+        )
+        const lowerHeaderGroups = headerGroups.filter(
+          ({ depth }) => depth > header.depth,
+        )
+
+        header.headers = header.headers.filter((header) => {
+          return uppperHeaderGroups.every(({ headers }) =>
+            headers.every(({ column }) => column.id !== header.column.id),
+          )
+        })
+
+        header.headers = header.headers.map((header) => {
+          for (const { depth, headers } of [...lowerHeaderGroups].reverse()) {
+            const hasLower = !headers.every(
+              ({ column }) => column.id !== header.column.id,
+            )
+
+            if (hasLower) {
+              header.rowSpan = depth + 1
+
+              break
+            }
+          }
+
+          return header
+        })
+
+        return header
+      }),
+    [headerGroups],
+  )
+
   return (
     <NativeThead {...rest}>
-      {headerGroups.map(({ id, headers }) => {
+      {resolvedHeaderGroups.map(({ id, headers }) => {
         return (
           <Tr key={id} {...runIfFunc(headerGroupProps, headers)}>
             {headers.map((header) => {
-              const { id, colSpan, isPlaceholder, column, getContext } = header
+              const { id, colSpan, rowSpan, column, getContext } = header
               const {
                 columnDef,
                 getToggleSortingHandler,
                 getCanSort,
                 getIsSorted,
               } = column
-              const { sx, style, css } = columnDef as Column<unknown>
+              let {
+                sx,
+                style,
+                css,
+                colSpan: customColSpan,
+                rowSpan: customRowSpan,
+              } = columnDef as Column<unknown>
               const computedHeaderProps = runIfFunc(headerProps, header) ?? {}
+
+              const resolvedColSpan = (customColSpan ?? colSpan) || 1
+              const resolvedRowSpan = (customRowSpan ?? rowSpan) || 1
 
               const props = {
                 ...computedHeaderProps,
-                colSpan,
+                colSpan: resolvedColSpan,
+                rowSpan: resolvedRowSpan,
                 onClick: handlerAll(
                   computedHeaderProps.onClick,
                   getToggleSortingHandler(),
                 ),
               }
 
-              return !isPlaceholder ? (
+              return (
                 <Th
                   key={id}
                   {...props}
@@ -61,7 +108,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                     />
                   ) : null}
                 </Th>
-              ) : null
+              )
             })}
           </Tr>
         )

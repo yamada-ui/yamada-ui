@@ -1,5 +1,11 @@
 # @yamada-ui/pin-input
 
+## 0.4.0
+
+### Minor Changes
+
+- [`f1d033b9`](https://github.com/hirotomoyamada/yamada-ui/commit/f1d033b9da15321e5594dbca4a57d287265b0963) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed props `fields` to `items`.
+
 ## 0.3.22
 
 ### Patch Changes

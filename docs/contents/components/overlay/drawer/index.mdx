@@ -36,7 +36,7 @@ import {
 To control the visibility, set `isOpen` and `onClose`.
 
 :::note
-`Drawer` internally uses `Modal`.
+`Drawer` internally uses [Modal](/components/overlay/modal).
 :::
 
 ```tsx functional=true
@@ -62,7 +62,7 @@ return (
 )
 ```
 
-### Change the size
+### Change Size
 
 ```tsx functional=true
 const sizeMap = ["xs", "sm", "md", "lg", "xl", "full"]
@@ -80,7 +80,7 @@ return (
             onOpen()
           }}
         >
-          Open {size} Dialog
+          Open {size} Drawer
         </Button>
       ))}
     </Wrap>
@@ -101,7 +101,7 @@ return (
 )
 ```
 
-### Change the position
+### Change Position
 
 To change the display position, set `placement` to values like `top` or `left-start`. By default, `bottom` is set.
 
@@ -121,7 +121,7 @@ return (
             onOpen()
           }}
         >
-          Open {placement} Modal
+          Open {placement} Drawer
         </Button>
       ))}
     </Wrap>
@@ -142,7 +142,7 @@ return (
 )
 ```
 
-### Change the duration
+### Change Duration
 
 To change the duration, set `duration` to a numerical value (seconds).
 
@@ -169,7 +169,7 @@ return (
 )
 ```
 
-### Fit to the screen height
+### Fit to Screen Height
 
 If you want the panel to fit the height of the screen, set `isFullHeight` to `true`.
 
@@ -196,7 +196,7 @@ return (
 )
 ```
 
-### Do not block scroll on mount
+### Do Not Block Scroll on Mount
 
 By default, scrolling of the main content is blocked when the panel is opened to ensure accessibility. If you do not want to block the scroll of the main content, set `blockScrollOnMount` to `false`.
 
@@ -223,7 +223,7 @@ return (
 )
 ```
 
-### Customize the close button
+### Customize the Close Button
 
 If you want to customize the `DrawerCloseButton` by passing `props`, etc., set it without omitting.
 
@@ -252,7 +252,7 @@ return (
 )
 ```
 
-### Disable the close button
+### Disable the Close Button
 
 If `onClose` is not set, the close button will be disabled (hidden).
 
@@ -283,7 +283,7 @@ return (
 )
 ```
 
-### Customize the overlay
+### Customize the Overlay
 
 If you want to customize the `DrawerOverlay` by passing `props`, etc., set it without omitting.
 
@@ -312,7 +312,7 @@ return (
 )
 ```
 
-### Disable the overlay
+### Disable the Overlay
 
 To disable (hide) the overlay of the panel, set `withOverlay` to `false`.
 

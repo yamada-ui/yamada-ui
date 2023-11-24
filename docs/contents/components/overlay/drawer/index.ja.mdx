@@ -36,7 +36,7 @@ import {
 表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
 
 :::note
-`Drawer`は、内部的に`Modal`を使用しています。
+`Drawer`は、内部的に[Modal](/components/overlay/modal)を使用しています。
 :::
 
 ```tsx functional=true
@@ -80,7 +80,7 @@ return (
             onOpen()
           }}
         >
-          Open {size} Dialog
+          Open {size} Drawer
         </Button>
       ))}
     </Wrap>
@@ -121,7 +121,7 @@ return (
             onOpen()
           }}
         >
-          Open {placement} Modal
+          Open {placement} Drawer
         </Button>
       ))}
     </Wrap>

@@ -166,7 +166,7 @@ return (
             onOpen()
           }}
         >
-          Open {placement} Modal
+          Open {placement} Dialog
         </Button>
       ))}
     </Wrap>
@@ -218,7 +218,7 @@ return (
 
 ### オーバーフローの動作を変更する
 
-デフォルトでは、`inside`が設定されており、スクロールは`ModalBody`内でのみ発生します。`outside`を設定すると、`Modal`内でスクロールが発生します。
+デフォルトでは、`inside`が設定されており、スクロールは`DialogBody`内でのみ発生します。`outside`を設定すると、`Dialog`内でスクロールが発生します。
 
 ```tsx functional=true
 const [scrollBehavior, setScrollBehavior] = useState("inside")
@@ -233,7 +233,7 @@ return (
           onOpen()
         }}
       >
-        Open inside scroll Modal
+        Open inside scroll Dialog
       </Button>
       <Button
         onClick={() => {
@@ -241,7 +241,7 @@ return (
           onOpen()
         }}
       >
-        Open outside scroll Modal
+        Open outside scroll Dialog
       </Button>
     </Wrap>
 
@@ -296,7 +296,7 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 
 return (
   <>
-    <Button onClick={onOpen}>Open Modal</Button>
+    <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
       isOpen={isOpen}

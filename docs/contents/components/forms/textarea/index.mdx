@@ -1,12 +1,168 @@
 ---
 title: Textarea
-description: This page is currently being created.
+description: "`Textarea` is a component used to obtain multi-line text input."
 package_name: "@yamada-ui/textarea"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Textarea } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Textarea placeholder="basic"></Textarea>
+```
+
+### Change Variants
+
+```tsx
+<VStack>
+  <Textarea variant="outline" placeholder="outline" />
+  <Textarea variant="filled" placeholder="filled" />
+  <Textarea variant="flushed" placeholder="flushed" />
+  <Textarea variant="unstyled" placeholder="unstyled" />
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Textarea placeholder="extra small size" size="xs" />
+  <Textarea placeholder="small size" size="sm" />
+  <Textarea placeholder="medium size" size="md" />
+  <Textarea placeholder="large size" size="lg" />
+</VStack>
+```
+
+### Resize Settings
+
+Use the `resize` property to control the resize behavior of the `Textarea`.
+
+```tsx
+<VStack>
+  <Textarea resize="block" placeholder="block" />
+  <Textarea resize="horizontal" placeholder="horizontal" />
+  <Textarea resize="vertical" placeholder="vertical" />
+  <Textarea resize="none" placeholder="none" />
+</VStack>
+```
+
+### Change Border Color
+
+To change the border color, set the color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx
+<VStack>
+  <Textarea focusBorderColor="green.500" placeholder="custom border color" />
+  <Textarea isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+</VStack>
+```
+
+### Change Placeholder Color
+
+To change the placeholder color, set `props` to `_placeholder`.
+
+```tsx
+<VStack>
+  <Textarea placeholder="custom placeholder" _placeholder={{ opacity: 1, color: "gray.500" }} />
+  <Textarea
+    color="green.500"
+    placeholder="custom placeholder"
+    _placeholder={{ color: "inherit" }}
+  />
+</VStack>
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx
+<VStack>
+  <Textarea isDisabled variant="outline" placeholder="outline" />
+  <Textarea isDisabled variant="filled" placeholder="filled" />
+  <Textarea isDisabled variant="flushed" placeholder="flushed" />
+  <Textarea isDisabled variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isDisabled label="Feedback" helperMessage="We would like to get your feedback.">
+    <Textarea variant="outline" placeholder="your feedback" />
+  </FormControl>
+</VStack>
+```
+
+### Make Read-Only
+
+To make read-only, set `isReadOnly` to `true`.
+
+```tsx
+<VStack>
+  <Textarea isReadOnly variant="outline" placeholder="outline" />
+  <Textarea isReadOnly variant="filled" placeholder="filled" />
+  <Textarea isReadOnly variant="flushed" placeholder="flushed" />
+  <Textarea isReadOnly variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isReadOnly label="Feedback" helperMessage="We would like to get your feedback.">
+    <Textarea variant="outline" placeholder="your feedback" />
+  </FormControl>
+</VStack>
+```
+
+### Make Input Invalid
+
+To make the input invalid, set `isInvalid` to `true`.
+
+```tsx
+<VStack>
+  <Textarea isInvalid variant="outline" placeholder="outline" />
+  <Textarea isInvalid variant="filled" placeholder="filled" />
+  <Textarea isInvalid variant="flushed" placeholder="flushed" />
+  <Textarea isInvalid variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isInvalid label="Feedback" errorMessage="Feedback is required.">
+    <Textarea variant="outline" placeholder="your feedback" />
+  </FormControl>
+</VStack>
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+const {
+  register,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm()
+
+const onSubmit = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.textarea}
+      label="Feedback"
+      errorMessage={errors.textarea ? errors.textarea.message : undefined}
+    >
+      <Textarea
+        placeholder="your feedback"
+        {...register("textarea", {
+          required: { value: true, message: "This is required." },
+        })}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

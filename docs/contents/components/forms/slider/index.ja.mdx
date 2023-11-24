@@ -1,12 +1,408 @@
 ---
 title: Slider
-description: このページは現在作成中です。
+description: "`Slider`は、ユーザーが値の範囲から選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/slider"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Slider, SliderTrack, SliderFilledTrack, SliderThumb, SliderMark } from "@yamada-ui/react"
+```
+
+- `Slider`: 子要素(`SliderTrack`, `SliderThumb`)を制御するラッパーコンポーネントです。
+- `SliderTrack`: トラックを表示するラッパーコンポーネントです。
+- `SliderFilledTrack`: 塗りつぶされたトラックを表示するコンポーネントです。
+- `SliderThumb` スライダーの値を変更するために使用されるアイコンのコンポーネントです。
+- `SliderMark` 特定の値にラベルまたはマークとして表示するコンポーネントです。
+
+:::note
+`SliderTrack`, `SliderFilledTrack`と`SliderThumb`は、省略することができます。
+:::
+
+## 使い方
+
+```tsx
+<Slider />
+```
+
+### サイズを変更する
+
+```tsx
+<VStack>
+  <Slider size="sm" defaultValue={25} />
+  <Slider size="md" defaultValue={50} />
+  <Slider size="lg" defaultValue={75} />
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx
+<VStack>
+  <Slider colorScheme="secondary" />
+  <Slider colorScheme="green" />
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に数値を設定します。
+
+```tsx
+<Slider defaultValue={50} />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトでは、`horizontal`が設定されています。
+
+```tsx
+<Slider orientation="vertical" h="sm" />
+```
+
+### 逆方向にする
+
+逆方向にする場合は、`isReversed`を`true`に設定します。
+
+```tsx
+<Slider isReversed />
+```
+
+### 最小値と最大値を設定する
+
+最小値と最大値を設定する場合は、`min`または`max`に数値を設定します。デフォルトでは、`min`は`0`、`max`は`100`が設定されています。
+
+```tsx functional=true
+const [value, onChange] = useState<number>(50)
+
+return (
+  <VStack>
+    <Text>Value: {value}</Text>
+
+    <Slider value={value} min={0} max={200} onChange={onChange} />
+  </VStack>
+)
+```
+
+### ステップ値を設定する
+
+ステップ値を設定する場合は、`step`に数値を設定します。
+
+```tsx functional=true
+const [value, onChange] = useState<number>(50)
+
+return (
+  <VStack>
+    <Text>Value: {value}</Text>
+
+    <Slider value={value} step={10} onChange={onChange} />
+  </VStack>
+)
+```
+
+### 外部からの制御のみにする
+
+外部からの制御のみにする場合は、`focusThumbOnChange`を`false`にします。
+
+```tsx functional=true
+const [value, setValue] = useState<number>(50)
+
+return (
+  <>
+    <Text>Value: {value}</Text>
+
+    <Slider value={value} step={10} focusThumbOnChange={false} />
+
+    <Center w="full" gap="md">
+      <Button
+        isDisabled={value === 0}
+        onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
+      >
+        -10
+      </Button>
+      <Button
+        isDisabled={value === 100}
+        colorScheme="blue"
+        onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
+      >
+        +10
+      </Button>
+    </Center>
+  </>
+)
+```
+
+### 無効化する
+
+無効化する場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<VStack>
+  <Slider isDisabled />
+
+  <FormControl
+    isDisabled
+    label="volume (sound)"
+    helperMessage="Please select your preferred volume."
+  >
+    <Slider />
+  </FormControl>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx
+<VStack>
+  <Slider isReadOnly />
+
+  <FormControl
+    isReadOnly
+    label="volume (sound)"
+    helperMessage="Please select your preferred volume."
+  >
+    <Slider />
+  </FormControl>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`isInvalid`を`true`に設定します。
+
+```tsx functional=true
+const [value, onChange] = useState<number>(15)
+
+return (
+  <VStack>
+    <Slider isInvalid={value < 20} value={value} onChange={onChange} />
+
+    <FormControl
+      isInvalid={value < 20}
+      label="volume (sound)"
+      errorMessage="Volume should be set to 20 or higher."
+    >
+      <Slider value={value} onChange={onChange} />
+    </FormControl>
+  </>
+)
+```
+
+### マークを表示する
+
+マークを表示する場合は、`SliderMark`を使用します。
+
+```tsx
+<VStack gap="lg" my="10">
+  <Slider size="sm">
+    <SliderMark value={25} w="10" ml="-5">
+      25%
+    </SliderMark>
+    <SliderMark value={50} w="10" ml="-5">
+      50%
+    </SliderMark>
+    <SliderMark value={75} w="10" ml="-5">
+      75%
+    </SliderMark>
+  </Slider>
+
+  <Slider size="md">
+    <SliderMark value={25} w="10" ml="-5">
+      25%
+    </SliderMark>
+    <SliderMark value={50} w="10" ml="-5">
+      50%
+    </SliderMark>
+    <SliderMark value={75} w="10" ml="-5">
+      75%
+    </SliderMark>
+  </Slider>
+
+  <Slider size="lg">
+    <SliderMark value={25} w="10" ml="-5">
+      25%
+    </SliderMark>
+    <SliderMark value={50} w="10" ml="-5">
+      50%
+    </SliderMark>
+    <SliderMark value={75} w="10" ml="-5">
+      75%
+    </SliderMark>
+  </Slider>
+</VStack>
+```
+
+### ツールチップを表示する
+
+ツールチップを表示する場合は、`SliderThumb`を`Tooltip`でラッピングします。
+
+```tsx functional=true
+const [value, onChange] = useState<number>(50)
+const [isOpen, { on, off }] = useBoolean(false)
+
+return (
+  <Slider value={value} onChange={onChange} my="10" onMouseEnter={on} onMouseLeave={off}>
+    <SliderMark value={25} w="10" ml="-5">
+      25%
+    </SliderMark>
+    <SliderMark value={50} w="10" ml="-5">
+      50%
+    </SliderMark>
+    <SliderMark value={75} w="10" ml="-5">
+      75%
+    </SliderMark>
+
+    <Tooltip placement="top" label={`${value}%`} isOpen={isOpen}>
+      <SliderThumb />
+    </Tooltip>
+  </Slider>
+)
+```
+
+### スタイリングをカスタマイズする
+
+```tsx
+<VStack>
+  <Slider trackColor="orange.200" filledTrackColor="orange.500" thumbColor="orange.700" />
+
+  <Slider
+    trackProps={{ bg: "green.200" }}
+    filledTrackProps={{ bg: "green.500" }}
+    thumbProps={{ bg: "green.700" }}
+  />
+
+  <Slider>
+    <SliderTrack bg="blue.200" filledTrackProps={{ bg: "blue.500" }} />
+    <SliderThumb bg="blue.700" />
+  </Slider>
+
+  <Slider>
+    <SliderTrack bg="red.200">
+      <SliderFilledTrack bg="red.500" />
+    </SliderTrack>
+
+    <SliderThumb bg="red.700" />
+  </Slider>
+</VStack>
+```
+
+```tsx
+<VStack>
+  <Slider
+    thumbProps={{
+      color: "blue.500",
+      boxSize: "6",
+      children: <FontAwesomeIcon icon={faWaveSquare} />,
+    }}
+  />
+
+  <Slider>
+    <SliderThumb color="blue.500" boxSize="6">
+      <FontAwesomeIcon icon={faWaveSquare} />
+    </SliderThumb>
+  </Slider>
+</VStack>
+```
+
+```tsx functional=true
+const [value, onChange] = useState<number>(50)
+
+return (
+  <Slider value={value} onChange={onChange} my="10">
+    <SliderMark value={25} w="10" ml="-5">
+      25%
+    </SliderMark>
+    <SliderMark value={50} w="10" ml="-5">
+      50%
+    </SliderMark>
+    <SliderMark value={75} w="10" ml="-5">
+      75%
+    </SliderMark>
+    <SliderMark
+      value={value}
+      bg="blue.500"
+      color="white"
+      py="0.5"
+      rounded="md"
+      w="10"
+      mt="-10"
+      ml="-5"
+    >
+      {value}%
+    </SliderMark>
+  </Slider>
+)
+```
+
+### 変更の開始と終了のイベントをハンドルをする
+
+変更の開始と終了のイベントをハンドルをする場合は、`onChangeStart`や`onChangeEnd`を使用します。
+
+```tsx functional=true
+const [value, onChange] = useState<number>(50)
+const [startValue, onChangeStart] = useState<number>(50)
+const [endValue, onChangeEnd] = useState<number>(50)
+
+return (
+  <VStack>
+    <Text>
+      Value: {value}, Start Value: {startValue}, End Value: {endValue}
+    </Text>
+
+    <Slider
+      value={value}
+      onChange={onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
+    />
+  </VStack>
+)
+```
+
+### `React Hook Form`を使う
+
+```tsx functional=true
+type Data = { slider: number }
+
+const defaultValues: Data = {
+  slider: 50,
+}
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>({ defaultValues })
+
+const onSubmit = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.slider}
+      label="Volume"
+      errorMessage={errors.slider ? errors.slider.message : undefined}
+    >
+      <Controller
+        name="slider"
+        control={control}
+        rules={{ max: { value: 50, message: "The maximum value is 50." } }}
+        render={({ field }) => <Slider {...field} />}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

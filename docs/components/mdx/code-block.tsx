@@ -110,12 +110,18 @@ export const Highlight: FC<HighlightProps> = ({ language, highlight, ...rest }) 
     <ReactHighlight language={language} {...rest}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <Box fontSize="sm" overflowX="auto" data-language={language}>
-          <Box as="pre" className={className} style={{ ...style, backgroundColor: "inherit" }}>
+          <Box
+            as="pre"
+            className={className}
+            minW="fit-content"
+            style={{ ...style, backgroundColor: "inherit" }}
+          >
             {tokens.map((line, index) => (
               <Box
                 key={index}
-                minW="0"
-                px="4"
+                minW="fit-content"
+                pl="4"
+                pr="16"
                 bg={shouldHighlight(index) ? "whiteAlpha.200" : undefined}
                 {...getLineProps({ line, key: index })}
               >

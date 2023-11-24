@@ -6,24 +6,25 @@ order: 3
 ---
 
 :::note status=warning
-Many pages such as [Learning the Basics](/getting-started/installation/basic) and [Learning Advanced Techniques](/getting-started/installation/advanced) are explained assuming that you have installed [everything](/getting-started/installation).
+Many pages, such as [Learn the Basics](/getting-started/installation/basic) and [Learn Advanced](/getting-started/installation/advanced), assume that you have installed everything at [All](/getting-started/installation).
 :::
 
 ## Install the package
 
 Install the core and utilities of Yamada UI.
 
-Run one of the following commands in the terminal.
+Execute one of the following commands in the terminal.
 
 <PackageManagers packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/utils"]} />
+
 ## Using `ui`
 
-After installation, call `ui` within the application.
+After installation, call `ui` within your application.
 
-`ui` is an object of JSX elements that have enabled the Yamada UI style system, and can also be used as a function for custom components to receive the Yamada UI style system.
+`ui` is an object of JSX elements enabled with the Yamada UI style system and can also be used as a function to allow custom components to receive the Yamada UI style system.
 
-Use the `ui.<element>` notation to generate basic HTML elements with a style system.
-For example, to generate a `div` of plain HTML elements with a style system, write `<ui.div />`.
+Use the `ui.<element>` notation to create basic HTML elements with a style system.
+For example, to create a plain HTML `div` element with a style system, write `<ui.div />`.
 
 ```tsx live=false
 import { ui } from "@yamada-ui/core"
@@ -37,7 +38,7 @@ const Demo = () => {
 }
 ```
 
-To set the style, pass `props`.
+To set styles, pass `props`.
 
 Let's try it with `button` this time.
 
@@ -57,11 +58,11 @@ Let's try it with `button` this time.
 If you want to learn more about `Style props`, please check [here](/styled-system/style-props).
 :::
 
-## Creating a Component
+## Create a component
 
-`ui` can be used in two ways: the JSX element `<ui.div />` and the function `ui('div')` that returns a JSX element.
+`ui` can be used in two ways: as a JSX element `<ui.div />` and as a function `ui('div')` that returns a JSX element.
 
-The function is suitable for generating simple components.
+The function is suitable for creating simple components.
 
 ```tsx live=false
 import { ui } from "@yamada-ui/core"
@@ -95,7 +96,7 @@ const Demo = () => {
 
 ## If you want to use animation
 
-Yamada UI provides many utilities such as `Motion`, a component specialized for animation, and `useAnimation`, which can be described like CSS's `keyframes`.
+Yamada UI provides many utilities for animation, such as the `Motion` component specialized for animation and `useAnimation`, which can be described like CSS `keyframes`.
 
 ### Using `useAnimation`
 
@@ -171,7 +172,7 @@ If you want to use the [default theme](/styled-system/theming/default-theme) of 
 
 <PackageManagers packageNameOrCommand="@yamada-ui/theme" />
 
-After installing the theme, add `ThemeProvider` to the root of your application and pass the [default theme](/styled-system/theming/default-theme) and [default config](/styled-system/configure/default-config) from `@yamada-ui/theme`. If you have your own theme or config, pass them instead.
+After installing the theme, add `ThemeProvider`, `ResetStyle`, `GlobalStyle` to the root of your application, and pass the [default theme](/styled-system/theming/default-theme) and [default config](/styled-system/configure/default-config) from `@yamada-ui/theme`. If you have your own theme or config, pass that instead.
 
 ```tsx live=false highlight={6,7,8,11}
 import { ThemeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
@@ -210,11 +211,11 @@ const App = () => {
 ```
 
 :::note
-If you want to customize the theme or config, please check [how to customize the theme](/styled-system/theming/customize-theme) and [how to customize the config](/styled-system/configure/customize-config).
+If you want to customize your theme or config, please check [Customize Theme](/styled-system/theming/customize-theme) and [Customize Config](/styled-system/configure/customize-config).
 :::
 
 :::note status=warning
-If you do not pass `theme` or `config` to `ThemeProvider`, the tokens will not be reflected.
+If you do not pass `theme` or `config` to `ThemeProvider`, tokens will not be reflected.
 :::
 
 ## Start Learning
@@ -225,17 +226,18 @@ Why not learn the basics and themes to get to know Yamada UI? 😎
   <LinkCard href="/getting-started/basics" />
   <LinkCard
     href="/styled-system/theming"
-    title="Learn about Themes"
-    description="Learn about the default theme of Yamada UI, and how to create and change the values of colors, fonts, and other theme elements."
+    title="Learn About Themes"
+    description="Learn about Yamada UI's default theme, and how to create and change colors, fonts, and other theme values."
   />
   <LinkCard
     href="/components"
     title="Explore Components"
-    description="Yamada UI offers over 100 flexible components. All components support animations and dark mode."
+    description="Yamada UI offers over 100 flexible components. All components support animation and dark mode."
   />
   <LinkCard
     href="https://github.com/hirotomoyamada/yamada-ui"
     title="Explore the Source Code"
-    description="The package and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
+    description="The packages and documentation site of Yamada UI are open source. If you like Yamada UI, please give it a star."
   />
 </CardContainer>
+``` ````

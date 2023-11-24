@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 0.8.28
+
+### Patch Changes
+
+- Updated dependencies [[`f1d033b9`](https://github.com/hirotomoyamada/yamada-ui/commit/f1d033b9da15321e5594dbca4a57d287265b0963)]:
+  - @yamada-ui/pin-input@0.4.0
+
 ## 0.8.27
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/table
 
+## 0.5.0
+
+### Minor Changes
+
+- [`f7f7a110`](https://github.com/hirotomoyamada/yamada-ui/commit/f7f7a11084c88bc2c0941a53c277f3d4a6901d1a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `rowSpan`, `colSpan` to table columns.
+
 ## 0.4.21
 
 ### Patch Changes

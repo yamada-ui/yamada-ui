@@ -20,6 +20,7 @@ import {
   faPen,
   faXmark,
   faClose,
+  faFile,
 } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
@@ -104,6 +105,7 @@ const fontAwesomeIcons = {
   faPen,
   faXmark,
   faClose,
+  faFile,
 }
 const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
 const utils = { wait, faker, useForm, Controller }

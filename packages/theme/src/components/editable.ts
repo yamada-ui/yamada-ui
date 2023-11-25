@@ -69,7 +69,7 @@ export const Editable: ComponentMultiStyle = {
       rounded: "md",
       p: "1",
       w: "full",
-      h: "calc(1em * 1.5)",
+      h: "1lh",
       transitionProperty: "common",
       transitionDuration: "normal",
       _placeholder: { opacity: 0.6 },

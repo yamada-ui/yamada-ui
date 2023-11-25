@@ -1,5 +1,5 @@
-import * as React from "react"
-import {
+import type * as React from "react"
+import type {
   CSSUIProps,
   CSSUIObject,
   StylesProps,
@@ -7,7 +7,7 @@ import {
   Interpolation,
   PropsTheme,
 } from ".."
-import { DOMElements } from "."
+import type { DOMElements } from "."
 
 export type StyledOptions = {
   shouldForwardProp?: (prop: string) => boolean

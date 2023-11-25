@@ -1,8 +1,8 @@
-import { PortalProps } from "@yamada-ui/portal"
-import { Dict, StringLiteral } from "@yamada-ui/utils"
+import type { PortalProps } from "@yamada-ui/portal"
+import type { Dict, StringLiteral } from "@yamada-ui/utils"
 import type { Variants } from "framer-motion"
-import { FC, ReactNode } from "react"
-import {
+import type { FC, ReactNode } from "react"
+import type {
   UIStyle,
   AnimationStyle,
   ThemeProps,
@@ -11,8 +11,8 @@ import {
   CSSUIObject,
   UIMultiStyle,
 } from "./css"
-import { GeneratedTheme } from "./generated-theme.types"
-import { UITheme } from "./ui-theme.types"
+import type { GeneratedTheme } from "./generated-theme.types"
+import type { UITheme } from "./ui-theme.types"
 
 export type LoadingVariant =
   | "oval"

@@ -1,9 +1,5 @@
-import {
-  Tfoot as NativeTfoot,
-  TableFootProps as NativeTableFootProps,
-  Tr,
-  Th,
-} from "@yamada-ui/native-table"
+import type { TableFootProps as NativeTableFootProps } from "@yamada-ui/native-table"
+import { Tfoot as NativeTfoot, Tr, Th } from "@yamada-ui/native-table"
 import { runIfFunc } from "@yamada-ui/utils"
 import { useTableContext, render } from "./use-table"
 

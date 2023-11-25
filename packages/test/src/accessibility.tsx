@@ -1,6 +1,8 @@
-import { RenderOptions } from "@testing-library/react"
-import { axe, toHaveNoViolations, JestAxeConfigureOptions } from "jest-axe"
-import { ReactElement, isValidElement } from "react"
+import type { RenderOptions } from "@testing-library/react"
+import type { JestAxeConfigureOptions } from "jest-axe"
+import { axe, toHaveNoViolations } from "jest-axe"
+import type { ReactElement } from "react"
+import { isValidElement } from "react"
 import { render } from "./render"
 import "@testing-library/jest-dom"
 

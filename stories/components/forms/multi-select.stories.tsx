@@ -3,20 +3,21 @@ import {
   faCheck,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
+import type { SelectItem } from "@yamada-ui/react"
 import {
   MultiSelect,
   OptionGroup,
   Option,
-  SelectItem,
   FormControl,
   Tag,
   VStack,
   Button,
 } from "@yamada-ui/react"
 import { useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof MultiSelect>
 

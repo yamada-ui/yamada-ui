@@ -1,9 +1,9 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
+import type { DrawerProps } from "@yamada-ui/react"
 import {
   Button,
   useDisclosure,
   Drawer,
-  DrawerProps,
   DrawerOverlay,
   DrawerCloseButton,
   DrawerHeader,

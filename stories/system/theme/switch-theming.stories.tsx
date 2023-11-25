@@ -12,7 +12,7 @@ import {
   extendConfig,
   useTheme,
 } from "@yamada-ui/react"
-import { FC } from "react"
+import type { FC } from "react"
 
 export default {
   title: "System / Theme / Switch Theming",

@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react"
 import { useLoading, Button, Center, Wrap, Text } from "@yamada-ui/react"
 
 const meta: Meta = {

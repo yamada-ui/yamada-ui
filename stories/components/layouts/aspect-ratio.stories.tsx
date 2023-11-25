@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from "@storybook/react"
+import type { StoryFn, Meta } from "@storybook/react"
 import { AspectRatio, Image } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof AspectRatio>

@@ -1,4 +1,5 @@
-import { ComponentMultiStyle, mergeStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mergeStyle } from "@yamada-ui/core"
 import { Table } from "./table"
 
 export const PagingTable: ComponentMultiStyle = mergeStyle(Table, {

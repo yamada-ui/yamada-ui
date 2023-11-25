@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync } from "fs"
 import { readFile, writeFile } from "fs/promises"
-import { Octokit, RestEndpointMethodTypes } from "@octokit/rest"
+import type { RestEndpointMethodTypes } from "@octokit/rest"
+import { Octokit } from "@octokit/rest"
 
 type PullRequests = RestEndpointMethodTypes["pulls"]["list"]["response"]["data"]
 type PullRequest = PullRequests[number]

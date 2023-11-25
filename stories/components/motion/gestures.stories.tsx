@@ -1,5 +1,6 @@
-import { Meta, StoryFn } from "@storybook/react"
-import { Center, Motion, MotionVariants } from "@yamada-ui/react"
+import type { Meta, StoryFn } from "@storybook/react"
+import type { MotionVariants } from "@yamada-ui/react"
+import { Center, Motion } from "@yamada-ui/react"
 import { useMemo } from "react"
 
 type Story = StoryFn<typeof Motion>

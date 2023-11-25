@@ -1,8 +1,10 @@
-import { isArray, isObject, merge, runIfFunc, Dict } from "@yamada-ui/utils"
-import { styles, pseudos, ConfigProps } from "../styles"
-import { StyledTheme } from "../theme.types"
-import { BreakpointQueries } from "./breakpoint"
-import { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from "./css.types"
+import type { Dict } from "@yamada-ui/utils"
+import { isArray, isObject, merge, runIfFunc } from "@yamada-ui/utils"
+import type { ConfigProps } from "../styles"
+import { styles, pseudos } from "../styles"
+import type { StyledTheme } from "../theme.types"
+import type { BreakpointQueries } from "./breakpoint"
+import type { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from "./css.types"
 
 const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],

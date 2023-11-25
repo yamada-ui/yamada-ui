@@ -1,4 +1,5 @@
-import { ComponentMultiStyle, mergeStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mergeStyle } from "@yamada-ui/core"
 import { NativeTable } from "./native-table"
 
 export const Table: ComponentMultiStyle = mergeStyle(NativeTable, {

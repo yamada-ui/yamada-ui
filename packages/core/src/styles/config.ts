@@ -1,8 +1,9 @@
-import { CSSObject } from "@emotion/react"
-import { isNumber, Union, Dict } from "@yamada-ui/utils"
+import type { CSSObject } from "@emotion/react"
+import type { Union, Dict } from "@yamada-ui/utils"
+import { isNumber } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import { ThemeToken } from "../theme"
-import { StyledTheme } from "../theme.types"
+import type { ThemeToken } from "../theme"
+import type { StyledTheme } from "../theme.types"
 import {
   analyzeCSSValue,
   isCSSFunction,

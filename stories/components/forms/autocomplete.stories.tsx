@@ -1,17 +1,18 @@
 import { faCaretDown, faCheck } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
+import type { AutocompleteItem } from "@yamada-ui/react"
 import {
   Autocomplete,
   AutocompleteOptionGroup,
   AutocompleteOption,
-  AutocompleteItem,
   FormControl,
   Button,
   VStack,
 } from "@yamada-ui/react"
 import { useState } from "react"
-import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 
 type Story = StoryFn<typeof Autocomplete>
 

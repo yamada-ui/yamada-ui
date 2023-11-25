@@ -1,7 +1,9 @@
-import { forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
-import { KeyboardEvent, KeyboardEventHandler, useCallback } from "react"
+import type { KeyboardEvent, KeyboardEventHandler } from "react"
+import { useCallback } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu"
 
 export type MenuListProps = HTMLUIProps<"section">

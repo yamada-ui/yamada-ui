@@ -1,5 +1,7 @@
-import { ui, UIComponent, HTMLUIProps } from "@yamada-ui/core"
-import NextImage, { ImageProps as NextImageProps } from "next/image"
+import type { UIComponent, HTMLUIProps } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
+import type { ImageProps as NextImageProps } from "next/image"
+import NextImage from "next/image"
 
 export type ImageProps = Omit<HTMLUIProps<"img">, keyof NextImageProps> &
   NextImageProps

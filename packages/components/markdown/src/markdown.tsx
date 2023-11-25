@@ -1,23 +1,17 @@
-import {
-  Alert,
-  AlertIcon,
-  AlertDescription,
-  AlertProps,
-} from "@yamada-ui/alert"
+import type { AlertProps } from "@yamada-ui/alert"
+import { Alert, AlertIcon, AlertDescription } from "@yamada-ui/alert"
+import type { HTMLUIProps, ThemeProps, ColorModeArray } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
   omitThemeProps,
-  ThemeProps,
   useComponentStyle,
-  ColorModeArray,
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, filterEmpty } from "@yamada-ui/utils"
-import { ComponentPropsWithoutRef, FC } from "react"
+import type { ComponentPropsWithoutRef, FC } from "react"
 import ReactMarkdown from "react-markdown"
-import {
+import type {
   Components,
   CodeProps,
   HeadingProps,
@@ -27,12 +21,13 @@ import {
   TableRowProps,
   UnorderedListProps,
 } from "react-markdown/lib/ast-to-react"
-import { ReactMarkdownProps } from "react-markdown/lib/complex-types"
-import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown"
+import type { ReactMarkdownProps } from "react-markdown/lib/complex-types"
+import type { ReactMarkdownOptions } from "react-markdown/lib/react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
-import { CodeThemeNames, codeThemes } from "./code-theme"
+import type { CodeThemeNames } from "./code-theme"
+import { codeThemes } from "./code-theme"
 import { remarkUIComponent } from "./remark-ui-component"
 
 export type MarkdownComponents = Components

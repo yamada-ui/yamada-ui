@@ -1,12 +1,6 @@
 import { useSafeLayoutEffect } from "@yamada-ui/utils"
-import {
-  ImgHTMLAttributes,
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import type { ImgHTMLAttributes, SyntheticEvent } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 type HTMLImageElementProps = ImgHTMLAttributes<HTMLImageElement>
 

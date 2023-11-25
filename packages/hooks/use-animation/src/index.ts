@@ -1,9 +1,5 @@
-import {
-  useTheme,
-  AnimationStyle,
-  Theme,
-  generateAnimation,
-} from "@yamada-ui/core"
+import type { AnimationStyle, Theme } from "@yamada-ui/core"
+import { useTheme, generateAnimation } from "@yamada-ui/core"
 import { useBoolean } from "@yamada-ui/use-boolean"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import {

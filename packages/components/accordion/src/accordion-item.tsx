@@ -1,4 +1,6 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -10,14 +12,9 @@ import {
   isEmpty,
   mergeRefs,
   omitChildren,
-  PropGetter,
 } from "@yamada-ui/utils"
-import {
-  KeyboardEvent,
-  KeyboardEventHandler,
-  ReactNode,
-  useCallback,
-} from "react"
+import type { KeyboardEvent, KeyboardEventHandler, ReactNode } from "react"
+import { useCallback } from "react"
 import { useAccordionContext, useAccordionDescendant } from "./accordion"
 import { AccordionLabel } from "./accordion-label"
 import { AccordionPanel } from "./accordion-panel"

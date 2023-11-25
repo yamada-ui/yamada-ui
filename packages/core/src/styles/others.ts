@@ -1,6 +1,7 @@
-import { getMemoizedObject as get, Dict, StringLiteral } from "@yamada-ui/utils"
-import { Token } from "../css"
-import { Configs, Transform } from "./config"
+import type { Dict, StringLiteral } from "@yamada-ui/utils"
+import { getMemoizedObject as get } from "@yamada-ui/utils"
+import type { Token } from "../css"
+import type { Configs, Transform } from "./config"
 
 const transform: Transform = (value, theme, css = {}) => {
   const resolvedCSS: Dict = {}

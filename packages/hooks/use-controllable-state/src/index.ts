@@ -1,5 +1,6 @@
 import { useCallbackRef, runIfFunc } from "@yamada-ui/utils"
-import { Dispatch, SetStateAction, useState } from "react"
+import type { Dispatch, SetStateAction } from "react"
+import { useState } from "react"
 
 export type UseControllableStateProps<T> = {
   value?: T

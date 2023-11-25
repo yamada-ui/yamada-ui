@@ -1,13 +1,13 @@
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
   omitThemeProps,
-  ThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import NextLink, { LinkProps as NextLinkProps } from "next/link"
+import type { LinkProps as NextLinkProps } from "next/link"
+import NextLink from "next/link"
 
 type LegacyProps = "as" | "legacyBehavior" | "passHref"
 

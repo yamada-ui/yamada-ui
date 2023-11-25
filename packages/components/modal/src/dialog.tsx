@@ -1,11 +1,11 @@
-import { Button, ButtonProps } from "@yamada-ui/button"
-import { CloseButtonProps } from "@yamada-ui/close-button"
+import type { ButtonProps } from "@yamada-ui/button"
+import { Button } from "@yamada-ui/button"
+import type { CloseButtonProps } from "@yamada-ui/close-button"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  ThemeProps,
 } from "@yamada-ui/core"
 import {
   createContext,
@@ -16,19 +16,21 @@ import {
   isEmpty,
   cx,
 } from "@yamada-ui/utils"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
+import type {
+  ModalProps,
+  ModalOverlayProps,
+  ModalHeaderProps,
+  ModalBodyProps,
+  ModalFooterProps,
+} from "./"
 import {
   Modal,
-  ModalProps,
   ModalOverlay,
-  ModalOverlayProps,
   ModalCloseButton,
   ModalHeader,
-  ModalHeaderProps,
   ModalBody,
-  ModalBodyProps,
   ModalFooter,
-  ModalFooterProps,
 } from "./"
 
 type DialogOptions = {

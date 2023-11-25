@@ -1,15 +1,17 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
   CSSUIProps,
 } from "@yamada-ui/core"
 import {
-  FormControlOptions,
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
   useFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
@@ -17,12 +19,12 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
+import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
   omitObject,
   pickObject,
-  PropGetter,
   useCallbackRef,
   valueToPercent,
   clampNumber,
@@ -31,7 +33,6 @@ import {
   mergeRefs,
   dataAttr,
   handlerAll,
-  RequiredPropGetter,
   percentToValue,
   getValidChildren,
   findChildren,
@@ -39,13 +40,8 @@ import {
   omitChildren,
   includesChildren,
 } from "@yamada-ui/utils"
-import {
-  CSSProperties,
-  KeyboardEvent,
-  useCallback,
-  useRef,
-  useState,
-} from "react"
+import type { CSSProperties, KeyboardEvent } from "react"
+import { useCallback, useRef, useState } from "react"
 
 export type UseSliderProps = FormControlOptions & {
   /**

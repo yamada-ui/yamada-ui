@@ -1,4 +1,5 @@
-import { UIProvider, extendTheme, LayerStyles, Center } from "@yamada-ui/react"
+import type { LayerStyles } from "@yamada-ui/react"
+import { UIProvider, extendTheme, Center } from "@yamada-ui/react"
 
 export default {
   title: "System / Theme / Layer Styles",

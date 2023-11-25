@@ -1,8 +1,4 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
@@ -10,14 +6,22 @@ import {
   CSS,
 } from "@yamada-ui/core"
 import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
+import type { UseFormControlProps } from "@yamada-ui/form-control"
+import {
   useFormControlProps,
-  UseFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
 import { ChevronIcon } from "@yamada-ui/icon"
-import { useCounter, UseCounterProps } from "@yamada-ui/use-counter"
+import type { UseCounterProps } from "@yamada-ui/use-counter"
+import { useCounter } from "@yamada-ui/use-counter"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import { useInterval } from "@yamada-ui/use-interval"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -26,21 +30,17 @@ import {
   mergeRefs,
   omitObject,
   pickObject,
-  PropGetter,
   useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import {
+import type {
   ChangeEvent,
   InputHTMLAttributes,
   KeyboardEvent,
   KeyboardEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
 } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)

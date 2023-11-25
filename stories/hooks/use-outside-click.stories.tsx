@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react"
 import { Center, Button, useOutsideClick } from "@yamada-ui/react"
 import { useRef, useState } from "react"
 

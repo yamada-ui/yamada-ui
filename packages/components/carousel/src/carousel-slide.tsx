@@ -1,10 +1,8 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import {
-  useCarouselContext,
-  useCarouselSlide,
-  UseCarouselSlideProps,
-} from "./use-carousel"
+import type { UseCarouselSlideProps } from "./use-carousel"
+import { useCarouselContext, useCarouselSlide } from "./use-carousel"
 
 type CarouselSlideOptions = {
   /**

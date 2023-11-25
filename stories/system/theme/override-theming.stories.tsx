@@ -1,5 +1,6 @@
-import { Center, Image, UIProvider, UsageTheme } from "@yamada-ui/react"
-import { FC } from "react"
+import type { UsageTheme } from "@yamada-ui/react"
+import { Center, Image, UIProvider } from "@yamada-ui/react"
+import type { FC } from "react"
 
 export default {
   title: "System / Theme / Override Theming",

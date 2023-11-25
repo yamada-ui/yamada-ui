@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Button, Slide, Text, useBoolean, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Slide>

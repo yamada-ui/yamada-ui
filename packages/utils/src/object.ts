@@ -1,4 +1,5 @@
-import { isObject, isArray, Dict, isFunction } from "."
+import type { Dict } from "."
+import { isObject, isArray, isFunction } from "."
 
 export const omitObject = <T extends Dict, K extends keyof T>(
   obj: T,

@@ -1,7 +1,9 @@
-import { ui, forwardRef, HTMLUIProps, OmitProps } from "@yamada-ui/core"
+import type { HTMLUIProps, OmitProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { motion, HTMLMotionProps } from "framer-motion"
-import { ReactHTML } from "react"
+import type { HTMLMotionProps } from "framer-motion"
+import { motion } from "framer-motion"
+import type { ReactHTML } from "react"
 
 type MotionOptions = {
   as?: keyof typeof motion

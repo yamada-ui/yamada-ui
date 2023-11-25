@@ -1,18 +1,18 @@
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
   ColorModeToken,
   CSS,
 } from "@yamada-ui/core"
 import {
-  useFormControlProps,
-  FormControlOptions,
-} from "@yamada-ui/form-control"
+  ui,
+  forwardRef,
+  omitThemeProps,
+  useMultiComponentStyle,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import { useFormControlProps } from "@yamada-ui/form-control"
 import { cx } from "@yamada-ui/utils"
 
 type InputOptions = {

@@ -1,6 +1,7 @@
-import { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { createDescendant } from "@yamada-ui/use-descendant"
-import { createContext, PropGetter, mergeRefs } from "@yamada-ui/utils"
+import type { PropGetter } from "@yamada-ui/utils"
+import { createContext, mergeRefs } from "@yamada-ui/utils"
 import { useCallback } from "react"
 
 type StepperContext = Omit<

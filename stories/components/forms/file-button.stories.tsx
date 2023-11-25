@@ -1,5 +1,5 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
 import {
   Button,
@@ -13,7 +13,8 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { useRef, useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof FileButton>
 

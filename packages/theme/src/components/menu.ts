@@ -1,4 +1,4 @@
-import { ComponentStyle } from "@yamada-ui/core"
+import type { ComponentStyle } from "@yamada-ui/core"
 import { transparentizeColor } from "@yamada-ui/utils"
 
 export const Menu: ComponentStyle = {

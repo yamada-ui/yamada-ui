@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Box, Center, Motion, useDragControls } from "@yamada-ui/react"
 import { useRef } from "react"
 

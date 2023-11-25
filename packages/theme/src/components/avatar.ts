@@ -1,4 +1,4 @@
-import { ComponentMultiStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { getMemoizedObject as get, isDark, randomColor } from "@yamada-ui/utils"
 
 export const Avatar: ComponentMultiStyle = {

@@ -1,15 +1,17 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
   CSSUIProps,
 } from "@yamada-ui/core"
 import {
-  FormControlOptions,
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
   useFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
@@ -17,6 +19,7 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSizes } from "@yamada-ui/use-size"
+import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   clampNumber,
   createContext,
@@ -32,22 +35,14 @@ import {
   omitObject,
   percentToValue,
   pickObject,
-  PropGetter,
-  RequiredPropGetter,
   roundNumberToStep,
   useCallbackRef,
   useUpdateEffect,
   valueToPercent,
   includesChildren,
 } from "@yamada-ui/utils"
-import {
-  CSSProperties,
-  KeyboardEvent,
-  useCallback,
-  useId,
-  useRef,
-  useState,
-} from "react"
+import type { CSSProperties, KeyboardEvent } from "react"
+import { useCallback, useId, useRef, useState } from "react"
 
 export type UseRangeSliderProps = FormControlOptions & {
   /**
@@ -210,8 +205,8 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
     },
   })
 
-  id = id ?? useId()
-  name = name ?? id
+  id ??= useId()
+  name ??= id
 
   const getThumbId = useCallback((i: number) => `slider-thumb-${id}-${i}`, [id])
   const getInputId = useCallback((i: number) => `slider-input-${id}-${i}`, [id])
@@ -303,7 +298,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
 
   const focusThumb = useCallback(
     (i?: number) => {
-      i = i ?? activeIndex
+      i ??= activeIndex
 
       if (i === -1 || !focusThumbOnChange) return
 

@@ -1,16 +1,17 @@
+import type { Dict } from "@yamada-ui/utils"
 import {
   flattenObject,
   objectFromEntries,
   pickObject,
   omitObject,
-  Dict,
   hues,
   isObject,
   runIfFunc,
   isFunction,
 } from "@yamada-ui/utils"
-import { ThemeProps, UIStyleProps, analyzeBreakpoints, createVars } from "./css"
-import {
+import type { ThemeProps, UIStyleProps } from "./css"
+import { analyzeBreakpoints, createVars } from "./css"
+import type {
   CSSMap,
   ComponentMultiStyle,
   ComponentStyle,

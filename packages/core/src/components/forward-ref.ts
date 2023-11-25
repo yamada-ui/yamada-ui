@@ -1,5 +1,5 @@
 import * as React from "react"
-import { As, Component, IntersectionProps, PropsOf } from "."
+import type { As, Component, IntersectionProps, PropsOf } from "."
 
 export const forwardRef = <
   Props extends object,

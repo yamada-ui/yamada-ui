@@ -1,6 +1,7 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Button, FormControl, Textarea, VStack } from "@yamada-ui/react"
-import { SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Textarea>
 

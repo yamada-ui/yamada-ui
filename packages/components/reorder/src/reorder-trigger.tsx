@@ -1,7 +1,9 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { Icon, IconProps } from "@yamada-ui/icon"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
+import { Icon } from "@yamada-ui/icon"
 import { cx, handlerAll, mergeRefs, dataAttr } from "@yamada-ui/utils"
-import { FC } from "react"
+import type { FC } from "react"
 import { useReorderContext } from "./reorder"
 import { useReorderItemContext } from "./reorder-item"
 

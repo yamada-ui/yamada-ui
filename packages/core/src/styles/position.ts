@@ -1,6 +1,7 @@
 import type * as CSS from "csstype"
-import { Token } from "../css"
-import { Configs, configs } from "./config"
+import type { Token } from "../css"
+import type { Configs } from "./config"
+import { configs } from "./config"
 
 export const position: Configs = {
   position: true,

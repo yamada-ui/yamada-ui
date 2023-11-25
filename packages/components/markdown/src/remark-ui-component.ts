@@ -1,5 +1,5 @@
-import { Dict } from "@yamada-ui/utils"
-import { Plugin } from "unified"
+import type { Dict } from "@yamada-ui/utils"
+import type { Plugin } from "unified"
 import { visit } from "unist-util-visit"
 
 export const remarkUIComponent: Plugin = () => (tree) => {

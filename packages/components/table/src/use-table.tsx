@@ -1,11 +1,8 @@
-import {
+import type {
   ColumnDef,
   Row,
   Cell,
   RowData,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
   CoreOptions,
   RowSelectionOptions,
   SortingOptions,
@@ -15,21 +12,25 @@ import {
   RowSelectionState,
   OnChangeFn,
   PaginationOptions,
-  getPaginationRowModel,
   HeaderContext,
 } from "@tanstack/react-table"
-import { Checkbox, CheckboxProps } from "@yamada-ui/checkbox"
-import { ui, CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import { IconProps } from "@yamada-ui/icon"
-import { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
-  createContext,
-  PropGetter,
-  handlerAll,
-  runIfFunc,
-} from "@yamada-ui/utils"
-import { CSSProperties, useCallback, useMemo } from "react"
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+  getPaginationRowModel,
+} from "@tanstack/react-table"
+import type { CheckboxProps } from "@yamada-ui/checkbox"
+import { Checkbox } from "@yamada-ui/checkbox"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
+import type { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { PropGetter } from "@yamada-ui/utils"
+import { createContext, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import type { CSSProperties } from "react"
+import { useCallback, useMemo } from "react"
 
 export { flexRender as render, createColumnHelper } from "@tanstack/react-table"
 export type {
@@ -54,10 +55,20 @@ export type ColumnStyles = {
   css?: CSSUIObject
 }
 
-export type Column<Y extends RowData, M = unknown> = ColumnDef<Y, M> &
+type UIColumn<Y extends RowData, M = any> = {
+  colSpan?: number
+  rowSpan?: number
+  columns?: Column<Y, M>[]
+}
+
+export type Column<Y extends RowData, M = any> = Omit<
+  ColumnDef<Y, M>,
+  "columns"
+> &
+  UIColumn<Y, M> &
   ColumnStyles
 
-type SelectColumn<Y extends RowData, M = unknown> = Omit<
+type SelectColumn<Y extends RowData, M = any> = Omit<
   Column<Y, M>,
   "accessorKey" | "accessorFn"
 >
@@ -110,11 +121,11 @@ export type UseTableProps<Y extends RowData> = TableProps &
     /**
      * The array of column defs to use for the table.
      */
-    columns: Column<Y, unknown>[]
+    columns: Column<Y, any>[]
     /**
      * Default column options to use for all column defs supplied to the table.
      */
-    defaultColumn?: Partial<Column<Y, unknown>>
+    defaultColumn?: Partial<Column<Y, any>>
     /**
      * The id used to store the value when selected.
      */
@@ -405,7 +416,7 @@ export const useTable = <Y extends RowData>({
     getPageCount,
   } = useReactTable<Y>({
     data,
-    columns: mergedColumns,
+    columns: mergedColumns as ColumnDef<Y, any>[],
     state: {
       sorting,
       rowSelection: computedRowSelection,
@@ -615,6 +626,7 @@ export const mergeColumns = <Y extends RowData>({
       )
     },
     ...selectColumnProps,
+    css: { w: "0", ...selectColumnProps?.css },
   },
   ...columns,
 ]

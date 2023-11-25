@@ -1,10 +1,12 @@
 import { faPoo } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
-import { MonthPicker, MonthPickerProps } from "@yamada-ui/calendar"
+import type { Meta, StoryFn } from "@storybook/react"
+import type { MonthPickerProps } from "@yamada-ui/calendar"
+import { MonthPicker } from "@yamada-ui/calendar"
 import { Icon } from "@yamada-ui/fontawesome"
 import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
 import { useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof MonthPicker>

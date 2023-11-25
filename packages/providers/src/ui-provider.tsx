@@ -1,18 +1,21 @@
-import {
+import type {
   ThemeConfig,
+  ColorModeManager,
+  ThemeSchemeManager,
+} from "@yamada-ui/core"
+import {
   ThemeProvider,
   ColorModeProvider,
-  ColorModeManager,
   ResetStyle,
   GlobalStyle,
-  ThemeSchemeManager,
 } from "@yamada-ui/core"
 import { LoadingProvider } from "@yamada-ui/loading"
 import { NoticeProvider } from "@yamada-ui/notice"
 import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
-import { Dict } from "@yamada-ui/utils"
-import { FC, ReactNode } from "react"
-import { EnvironmentProvider, Environment } from "./environment-provider"
+import type { Dict } from "@yamada-ui/utils"
+import type { FC, ReactNode } from "react"
+import type { Environment } from "./environment-provider"
+import { EnvironmentProvider } from "./environment-provider"
 
 export type UIProviderProps = {
   /**

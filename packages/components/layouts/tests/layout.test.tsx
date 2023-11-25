@@ -1,5 +1,6 @@
 import { render, a11y, screen, fireEvent, waitFor } from "@yamada-ui/test"
-import { useState, useEffect, FC } from "react"
+import type { FC } from "react"
+import { useState, useEffect } from "react"
 import {
   Box,
   Container,

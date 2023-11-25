@@ -1,4 +1,4 @@
-import {
+import type {
   UsageTheme,
   ThemeToken,
   ThemeTokens,
@@ -13,8 +13,8 @@ import {
   ComponentMultiStyle,
 } from "@yamada-ui/core"
 import { baseTheme, defaultTheme } from "@yamada-ui/theme"
+import type { Dict } from "@yamada-ui/utils"
 import {
-  Dict,
   merge as mergeObject,
   getMemoizedObject as get,
   runIfFunc,

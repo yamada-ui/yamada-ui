@@ -1,8 +1,7 @@
+import type { ContainerProps, Dict } from "@yamada-ui/react"
 import {
   Box,
   Container,
-  ContainerProps,
-  Dict,
   HStack,
   Text,
   UIProvider,
@@ -10,7 +9,8 @@ import {
   isArray,
   useColorMode,
 } from "@yamada-ui/react"
-import { FC, ReactNode, useEffect } from "react"
+import type { FC, ReactNode } from "react"
+import { useEffect } from "react"
 import { useDarkMode } from "storybook-dark-mode"
 
 export const JSX: FC<{ children: ReactNode }> = ({ children }) => {

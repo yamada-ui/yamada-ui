@@ -1,15 +1,13 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   layoutStylesProperties,
 } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  FormControlOptions,
   useFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
@@ -22,13 +20,13 @@ import {
   isValidElement,
   pickObject,
 } from "@yamada-ui/utils"
-import {
-  cloneElement,
+import type {
   DetailedHTMLProps,
   FC,
   OptionHTMLAttributes,
   ReactElement,
 } from "react"
+import { cloneElement } from "react"
 
 type NativeSelectBaseItem = Omit<
   DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,

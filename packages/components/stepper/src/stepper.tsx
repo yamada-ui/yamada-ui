@@ -1,31 +1,27 @@
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  ThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { ReactNode, useMemo } from "react"
+import type { ReactNode } from "react"
+import { useMemo } from "react"
+import type { UseStepperProps } from "./use-stepper"
 import {
   StepperProvider,
-  UseStepperProps,
   useStepper,
   StepperDescendantsContextProvider,
 } from "./use-stepper"
-import {
-  Step,
+import type {
   StepProps,
-  StepTitle,
-  StepDescription,
-  StepSeparator,
-  StepStatus,
   StepStatusProps,
   StepTitleProps,
   StepDescriptionProps,
   StepSeparatorProps,
 } from "./"
+import { Step, StepTitle, StepDescription, StepSeparator, StepStatus } from "./"
 
 export type Steps = ({
   /**

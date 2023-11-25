@@ -1,4 +1,5 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
+import type { RadioItem } from "@yamada-ui/react"
 import {
   FormControl,
   Radio,
@@ -10,10 +11,11 @@ import {
   Box,
   VStack,
   Button,
-  RadioItem,
 } from "@yamada-ui/react"
-import { FC, useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { FC } from "react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Radio>
 

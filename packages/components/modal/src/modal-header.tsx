@@ -1,4 +1,5 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useModal } from "./modal"
 

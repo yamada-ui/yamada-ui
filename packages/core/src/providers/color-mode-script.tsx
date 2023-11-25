@@ -1,4 +1,4 @@
-import { ColorMode } from "../css"
+import type { ColorMode } from "../css"
 
 type ColorModeScriptProps = {
   type?: "localStorage" | "cookie"

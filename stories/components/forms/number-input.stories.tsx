@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import {
   Button,
   FormControl,
@@ -8,7 +8,8 @@ import {
   VStack,
   useNumberInput,
 } from "@yamada-ui/react"
-import { SubmitHandler, useForm, Controller } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 
 type Story = StoryFn<typeof NumberInput>
 

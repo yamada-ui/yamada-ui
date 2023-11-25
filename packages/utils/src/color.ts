@@ -6,7 +6,8 @@ import {
   darken,
   lighten,
 } from "color2k"
-import { getMemoizedObject as get, Dict, isArray } from "."
+import type { Dict } from "."
+import { getMemoizedObject as get, isArray } from "."
 
 type ColorMode = "light" | "dark"
 

@@ -1,4 +1,5 @@
-import { ui, HTMLUIProps } from "@yamada-ui/core"
+import type { HTMLUIProps } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
 
 export type CenterProps = HTMLUIProps<"div">
 

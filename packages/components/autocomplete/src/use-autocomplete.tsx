@@ -320,6 +320,10 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     allowCreate?: boolean
     /**
+     * If `true`, enables the free input of autocomplete option.
+     */
+    allowFree?: boolean
+    /**
      * If `true`, the selected item(s) will be excluded from the list.
      *
      * @default false
@@ -358,6 +362,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   closeOnBlur = true,
   closeOnEsc = true,
   allowCreate = false,
+  allowFree = false,
   insertPositionItem = "first",
   emptyMessage = "No results found",
   format = defaultFormat,
@@ -912,7 +917,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      setInputValue("")
+      if (!allowFree) setInputValue("")
 
       if (isOpen) onClose()
     },
@@ -1015,7 +1020,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   ])
 
   useUpdateEffect(() => {
-    if (isOpen) return
+    if (isOpen || allowFree) return
 
     setFocusedIndex(-1)
     setInputValue("")
@@ -1092,6 +1097,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     omitSelectedValues,
     closeOnSelect,
     allowCreate,
+    allowFree,
     emptyMessage,
     isOpen,
     isAllSelected,

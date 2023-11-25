@@ -19,7 +19,7 @@ import { FileInput } from "@yamada-ui/react"
 <FileInput placeholder="basic" />
 ```
 
-You can also customize it using `children`.
+Alternatively, you can customize using `children`. `children` provides an array of `File`.
 
 ```tsx
 <FileInput placeholder="multiple" multiple>
@@ -75,7 +75,7 @@ To customize the separator, set `separator` to a string.
 
 ### Use Custom Component
 
-To use a custom component, set `component` to a `ReactElement`. `component` will provide `value` (`File`) and `index`.
+To use a custom component, set `component` to a `ReactElement`. `component` provides `value` (`File`) and `index`.
 
 ```tsx
 <FileInput placeholder="multiple" multiple component={({ value: { name } }) => <Tag>{name}</Tag>} />
@@ -83,7 +83,7 @@ To use a custom component, set `component` to a `ReactElement`. `component` will
 
 ### Format File Names
 
-To format file names, use `format`. `format` will provide `File`.
+To format file names, use `format`. `format` provides `File`.
 
 ```tsx
 <FileInput
@@ -94,6 +94,8 @@ To format file names, use `format`. `format` will provide `File`.
 ```
 
 ### Change Border Color
+
+To change the border color, set `focusBorderColor` or `errorBorderColor` to a color.
 
 ```tsx
 <VStack>

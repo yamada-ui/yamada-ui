@@ -19,7 +19,7 @@ import { FileInput } from "@yamada-ui/react"
 <FileInput placeholder="basic" />
 ```
 
-または、`children`を使用してカスタマイズすることも可能です。
+または、`children`を使用してカスタマイズすることも可能です。`children`は、`File`を配列で提供します。
 
 ```tsx
 <FileInput placeholder="multiple" multiple>
@@ -94,6 +94,8 @@ import { FileInput } from "@yamada-ui/react"
 ```
 
 ### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
 
 ```tsx
 <VStack>

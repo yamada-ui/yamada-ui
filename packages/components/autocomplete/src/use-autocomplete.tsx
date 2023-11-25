@@ -921,7 +921,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (isOpen) onClose()
     },
-    [closeOnBlur, isHit, isOpen, onClose],
+    [closeOnBlur, isHit, isOpen, allowFree, onClose],
   )
 
   const onKeyDown = useCallback(

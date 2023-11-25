@@ -1,12 +1,336 @@
 ---
 title: Checkbox
-description: This page is currently being created.
+description: "`Checkbox` is a component used for allowing users to select multiple values from multiple options."
 package_name: "@yamada-ui/checkbox"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Checkbox>孫悟空</Checkbox>
+```
+
+### Change Size
+
+```tsx
+<Wrap gap="md">
+  <Checkbox size="sm">孫悟空</Checkbox>
+  <Checkbox size="md">ベジータ</Checkbox>
+  <Checkbox size="lg">フリーザ</Checkbox>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx
+<Wrap gap="md">
+  <Checkbox colorScheme="secondary" defaultChecked>
+    Secondary
+  </Checkbox>
+  <Checkbox colorScheme="green" defaultChecked>
+    Green
+  </Checkbox>
+</Wrap>
+```
+
+### Set as Default Checked
+
+To set the checkbox as checked by default, set `defaultChecked` to `true`.
+
+```tsx
+<Checkbox defaultChecked>孫悟空</Checkbox>
+```
+
+### Disable
+
+To disable the checkbox, set `isDisabled` to `true`.
+
+```tsx
+<VStack>
+  <Checkbox isDisabled>All Notifications</Checkbox>
+  <Checkbox isDisabled defaultChecked>
+    All Notifications
+  </Checkbox>
+
+  <CheckboxGroup defaultValue={["all"]}>
+    <Checkbox value="all">All Notifications</Checkbox>
+    <Checkbox value="important" isDisabled>
+      Important Notifications
+    </Checkbox>
+    <Checkbox value="service">Service Notifications</Checkbox>
+  </CheckboxGroup>
+
+  <FormControl isDisabled label="Which notifications would you like to receive?">
+    <Checkbox defaultChecked>All Notifications</Checkbox>
+  </FormControl>
+
+  <FormControl isDisabled label="Which notifications would you like to receive?">
+    <CheckboxGroup defaultValue={["all"]}>
+      <Checkbox value="all">All Notifications</Checkbox>
+      <Checkbox value="important">Important Notifications</Checkbox>
+      <Checkbox value="service">Service Notifications</Checkbox>
+    </CheckboxGroup>
+  </FormControl>
+</VStack>
+```
+
+### Set as Read-Only
+
+To make the checkbox read-only, set `isReadOnly` to `true`.
+
+```tsx
+<VStack>
+  <Checkbox isReadOnly>All Notifications</Checkbox>
+  <Checkbox isReadOnly defaultChecked>
+    All Notifications
+  </Checkbox>
+
+  <CheckboxGroup defaultValue={["all"]}>
+    <Checkbox value="all">All Notifications</Checkbox>
+    <Checkbox value="important" isReadOnly>
+      Important Notifications
+    </Checkbox>
+    <Checkbox value="service">Service Notifications</Checkbox>
+  </CheckboxGroup>
+
+  <FormControl isReadOnly label="Which notifications would you like to receive?">
+    <Checkbox defaultChecked>All Notifications</Checkbox>
+  </FormControl>
+
+  <FormControl isReadOnly label="Which notifications would you like to receive?">
+    <CheckboxGroup defaultValue={["all"]}>
+      <Checkbox value="all">All Notifications</Checkbox>
+      <Checkbox value="important">Important Notifications</Checkbox>
+      <Checkbox value="service">Service Notifications</Checkbox>
+    </CheckboxGroup>
+  </FormControl>
+</VStack>
+```
+
+### Set as Invalid Input
+
+To set the checkbox as an invalid input, set `isInvalid` to `true`.
+
+```tsx
+<VStack>
+  <Checkbox isInvalid>All Notifications</Checkbox>
+  <Checkbox isInvalid defaultChecked>
+    All Notifications
+  </Checkbox>
+
+  <CheckboxGroup defaultValue={["all"]}>
+    <Checkbox value="all">All Notifications</Checkbox>
+    <Checkbox value="important" isInvalid>
+      Important Notifications
+    </Checkbox>
+    <Checkbox value="service">Service Notifications</Checkbox>
+  </CheckboxGroup>
+
+  <FormControl
+    isInvalid
+    label="Which notifications would you like to receive?"
+    errorMessage="This is required."
+  >
+    <Checkbox>All Notifications</Checkbox>
+  </FormControl>
+
+  <FormControl
+    isInvalid
+    label="Which notifications would you like to receive?"
+    errorMessage="This is required."
+  >
+    <CheckboxGroup defaultValue={["all"]}>
+      <Checkbox value="all">All Notifications</Checkbox>
+      <Checkbox value="important">Important Notifications</Checkbox>
+      <Checkbox value="service">Service Notifications</Checkbox>
+    </CheckboxGroup>
+  </FormControl>
+</VStack>
+```
+
+### Set as Indeterminate
+
+To set the checkbox to an indeterminate state, set `isIndeterminate` to `true`.
+
+```tsx functional=true
+const [values, setValues] = useState([false, false])
+
+const allChecked = values.every(Boolean)
+const isIndeterminate = values.some(Boolean) && !allChecked
+
+return (
+  <VStack gap="sm">
+    <Checkbox
+      isChecked={allChecked}
+      isIndeterminate={isIndeterminate}
+      onChange={(e) => setValues([e.target.checked, e.target.checked])}
+    >
+      地球人
+    </Checkbox>
+
+    <VStack pl="md" gap="sm">
+      <Checkbox isChecked={values[0]} onChange={(e) => setValues([e.target.checked, values[1]])}>
+        孫悟空
+      </Checkbox>
+
+      <Checkbox isChecked={values[1]} onChange={(e) => setValues([values[0], e.target.checked])}>
+        孫悟飯
+      </Checkbox>
+    </VStack>
+  </VStack>
+)
+```
+
+### Grouping
+
+To group checkboxes, use `CheckboxGroup`. By setting `items` in `CheckboxGroup`, you can omit individual `Checkbox` components.
+
+```tsx functional=true
+const items: CheckboxItem[] = [
+  { label: "孫悟空", value: "孫悟空" },
+  { label: "ベジータ", value: "ベジータ" },
+  { label: "フリーザ", value: "フリーザ" },
+]
+
+return (
+  <VStack>
+    <CheckboxGroup defaultValue={["孫悟空", "ベジータ"]}>
+      <Checkbox value="孫悟空">孫悟空</Checkbox>
+      <Checkbox value="ベジータ">ベジータ</Checkbox>
+      <Checkbox value="フリーザ">フリーザ</Checkbox>
+    </CheckboxGroup>
+
+    <CheckboxGroup direction="row" defaultValue={["孫悟空", "ベジータ"]}>
+      <Checkbox value="孫悟空">孫悟空</Checkbox>
+      <Checkbox value="ベジータ">ベジータ</Checkbox>
+      <Checkbox value="フリーザ">フリーザ</Checkbox>
+    </CheckboxGroup>
+
+    <CheckboxGroup defaultValue={["孫悟空", "ベジータ"]} items={items} />
+  </VStack>
+)
+```
+
+### Control
+
+```tsx functional=true
+const [isChecked, { toggle }] = useBoolean(false)
+
+return (
+  <Checkbox isChecked={isChecked} onChange={toggle}>
+    孫悟空
+  </Checkbox>
+)
+```
+
+### Use Custom Hooks
+
+You can create customized checkboxes using custom hooks like `useCheckbox` or `useCheckboxGroup`.
+
+```tsx functional=true
+const CustomCheckbox: FC<ReturnType<UseCheckboxGroupReturn["getCheckboxProps"]>> = (props) => {
+  const { getInputProps, getIconProps } = useCheckbox(props)
+
+  return (
+    <Box as="label">
+      <input {...getInputProps()} />
+
+      <Box
+        {...getIconProps()}
+        cursor="pointer"
+        borderWidth="1px"
+        py="xs"
+        px="sm"
+        rounded="md"
+        _checked={{
+          bg: "blue.500",
+          color: "white",
+          borderColor: "blue.500",
+        }}
+      >
+        {props.value}
+      </Box>
+    </Box>
+  )
+}
+
+const { getCheckboxProps } = useCheckboxGroup<string>({ defaultValue: ["孫悟空"] })
+
+return (
+  <HStack gap="sm">
+    <CustomCheckbox {...getCheckboxProps({ value: "孫悟空" })} />
+    <CustomCheckbox {...getCheckboxProps({ value: "ベジータ" })} />
+    <CustomCheckbox {...getCheckboxProps({ value: "フリーザ" })} />
+  </HStack>
+)
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+type Data = { checkbox: boolean; checkboxGroup: string[] }
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>()
+
+const onSubmit = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.checkbox}
+      label="Who is your favorite character?"
+      errorMessage={errors.checkbox ? errors.checkbox.message : undefined}
+    >
+      <Controller
+        name="checkbox"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field: { value, ...rest } }) => (
+          <Checkbox isChecked={value} {...rest}>
+            孫悟空
+          </Checkbox>
+        )}
+      />
+    </FormControl>
+
+    <FormControl
+      isInvalid={!!errors.checkboxGroup}
+      label="Who is your favorite character?"
+      errorMessage={errors.checkboxGroup ? errors.checkboxGroup.message : undefined}
+    >
+      <Controller
+        name="checkboxGroup"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <CheckboxGroup {...field}>
+            <Checkbox value="孫悟空">孫悟空</Checkbox>
+            <Checkbox value="ベジータ">ベジータ</Checkbox>
+            <Checkbox value="フリーザ">フリーザ</Checkbox>
+          </CheckboxGroup>
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

@@ -1,11 +1,11 @@
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  ThemeProps,
 } from "@yamada-ui/core"
-import { Slide, SlideProps } from "@yamada-ui/transitions"
+import type { SlideProps } from "@yamada-ui/transitions"
+import { Slide } from "@yamada-ui/transitions"
 import {
   createContext,
   getValidChildren,
@@ -13,19 +13,21 @@ import {
   cx,
 } from "@yamada-ui/utils"
 import { useModal } from "./modal"
+import type {
+  ModalProps,
+  ModalOverlayProps,
+  ModalCloseButtonProps,
+  ModalHeaderProps,
+  ModalBodyProps,
+  ModalFooterProps,
+} from "./"
 import {
   Modal,
-  ModalProps,
   ModalOverlay,
-  ModalOverlayProps,
   ModalCloseButton,
-  ModalCloseButtonProps,
   ModalHeader,
-  ModalHeaderProps,
   ModalBody,
-  ModalBodyProps,
   ModalFooter,
-  ModalFooterProps,
 } from "./"
 
 type DrawerOptions = {

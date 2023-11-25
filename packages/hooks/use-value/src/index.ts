@@ -1,8 +1,5 @@
-import {
-  useColorModeValue,
-  ResponsiveObject,
-  ColorModeArray,
-} from "@yamada-ui/core"
+import type { ResponsiveObject, ColorModeArray } from "@yamada-ui/core"
+import { useColorModeValue } from "@yamada-ui/core"
 import { useBreakpointValue } from "@yamada-ui/use-breakpoint"
 import { isObject, isArray } from "@yamada-ui/utils"
 

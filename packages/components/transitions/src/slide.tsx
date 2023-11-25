@@ -1,18 +1,15 @@
-import {
-  ui,
-  HTMLUIProps,
-  forwardRef,
-  CSSUIObject,
-  Token,
-} from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject, Token } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type {
+  HTMLMotionProps,
+  WithTransitionProps,
+  MotionTransitionVariants,
+} from "@yamada-ui/motion"
 import {
   motion,
-  HTMLMotionProps,
   AnimatePresence,
   transitionEnter,
   transitionExit,
-  WithTransitionProps,
-  MotionTransitionVariants,
   MOTION_TRANSITION_VARIANTS,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"

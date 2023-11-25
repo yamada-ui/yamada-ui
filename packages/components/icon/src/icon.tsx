@@ -1,13 +1,8 @@
-import {
-  ui,
-  forwardRef,
-  CSSUIObject,
-  UIProps,
-  CSSUIProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, UIProps, CSSUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
-import { FC, SVGAttributes } from "react"
+import type { FC, SVGAttributes } from "react"
 
 type IconOptions = {
   /**

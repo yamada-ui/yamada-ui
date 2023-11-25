@@ -1,12 +1,11 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -15,9 +14,9 @@ import {
   handlerAll,
   dataAttr,
   ariaAttr,
-  Dict,
 } from "@yamada-ui/utils"
-import { useState, useId, ReactNode, FocusEventHandler } from "react"
+import type { ReactNode, FocusEventHandler } from "react"
+import { useState, useId } from "react"
 
 export type FormControlOptions = {
   /**
@@ -119,7 +118,7 @@ export const FormControl = forwardRef<FormControlProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    id = id ?? useId()
+    id ??= useId()
 
     const [isFocused, setFocused] = useState<boolean>(false)
 
@@ -230,11 +229,10 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
 }: UseFormControlProps<Y> & M) => {
   const control = useFormControlContext()
 
-  disabled = disabled ?? isDisabled ?? control?.isDisabled
-  required = required ?? isRequired ?? control?.isRequired
-  readOnly = readOnly ?? isReadOnly ?? control?.isReadOnly
-
-  isInvalid = isInvalid ?? control?.isInvalid
+  disabled ??= isDisabled ?? control?.isDisabled
+  required ??= isRequired ?? control?.isRequired
+  readOnly ??= isReadOnly ?? control?.isReadOnly
+  isInvalid ??= control?.isInvalid
 
   return {
     id: id ?? control?.id,

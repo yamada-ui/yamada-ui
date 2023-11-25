@@ -1,21 +1,13 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { cx, handlerAll, merge } from "@yamada-ui/utils"
-import {
-  UIEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import type { UIEvent } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 type ScrollAreaOptions = {
   /**

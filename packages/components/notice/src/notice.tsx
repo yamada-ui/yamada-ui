@@ -1,22 +1,22 @@
+import type { AlertProps } from "@yamada-ui/alert"
 import {
-  AlertProps,
   Alert,
   AlertDescription,
   AlertIcon,
   AlertTitle,
 } from "@yamada-ui/alert"
 import { CloseButton } from "@yamada-ui/close-button"
-import {
-  ui,
-  useTheme,
+import type {
   CSSUIObject,
   NoticePlacement,
   NoticeComponentProps,
   NoticeConfigOptions,
   StyledTheme,
 } from "@yamada-ui/core"
+import { ui, useTheme } from "@yamada-ui/core"
 import { cx, merge } from "@yamada-ui/utils"
-import { FC, ReactNode, useMemo } from "react"
+import type { FC, ReactNode } from "react"
+import { useMemo } from "react"
 
 export type UseNoticeOptions = NoticeConfigOptions
 
@@ -84,7 +84,7 @@ const createNotice = (
 ) => {
   counter += 1
 
-  id = id ?? counter
+  id ??= counter
 
   return {
     id,

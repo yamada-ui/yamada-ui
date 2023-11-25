@@ -1,23 +1,20 @@
-import {
-  ui,
-  forwardRef,
-  HTMLUIProps,
-  CSSUIObject,
-  CSSUIProps,
-} from "@yamada-ui/core"
-import { motion, HTMLMotionProps } from "@yamada-ui/motion"
+import type { HTMLUIProps, CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type { HTMLMotionProps } from "@yamada-ui/motion"
+import { motion } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
+import type { DOMAttributes } from "@yamada-ui/utils"
 import {
   cx,
-  DOMAttributes,
   findChildren,
   funcAll,
   getValidChildren,
   omitObject,
 } from "@yamada-ui/utils"
-import { ReactNode, RefAttributes } from "react"
+import type { ReactNode, RefAttributes } from "react"
 import { usePopover } from "./popover"
-import { PopoverProps, PopoverCloseButton } from "."
+import type { PopoverProps } from "."
+import { PopoverCloseButton } from "."
 
 export type PopoverContentProps = Omit<
   HTMLUIProps<"section">,

@@ -1,41 +1,38 @@
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  CSSUIProps,
+} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   useComponentStyle,
-  CSSUIProps,
 } from "@yamada-ui/core"
-import {
-  motion,
+import type {
   HTMLMotionProps,
-  AnimatePresence,
   MotionTransitionProperties,
 } from "@yamada-ui/motion"
-import { Portal, PortalProps } from "@yamada-ui/portal"
+import { motion, AnimatePresence } from "@yamada-ui/motion"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useEventListener } from "@yamada-ui/use-event-listener"
-import { UsePopperProps, usePopper } from "@yamada-ui/use-popper"
+import type { UsePopperProps } from "@yamada-ui/use-popper"
+import { usePopper } from "@yamada-ui/use-popper"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   handlerAll,
-  PropGetter,
   mergeRefs,
   getOwnerWindow,
   getOwnerDocument,
   omitObject,
 } from "@yamada-ui/utils"
-import {
-  Children,
-  ReactNode,
-  cloneElement,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react"
+import type { ReactNode } from "react"
+import { Children, cloneElement, useCallback, useEffect, useRef } from "react"
 
 type TooltipOptions = {
   /**

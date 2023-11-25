@@ -1,5 +1,6 @@
 import { useSafeLayoutEffect } from "@yamada-ui/utils"
-import { FC, useMemo, useState, PropsWithChildren, RefObject } from "react"
+import type { FC, PropsWithChildren, RefObject } from "react"
+import { useMemo, useState } from "react"
 import { createPortal } from "react-dom"
 import { PortalProvider } from "./portal-provider"
 

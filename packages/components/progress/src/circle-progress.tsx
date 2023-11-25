@@ -1,10 +1,5 @@
-import {
-  ui,
-  forwardRef,
-  HTMLUIProps,
-  CSSUIObject,
-  CSSUIProps,
-} from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"

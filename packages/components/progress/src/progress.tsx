@@ -1,18 +1,20 @@
-import {
-  ui,
-  forwardRef,
+import type {
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
-  omitThemeProps,
   CSSUIObject,
   Interpolation,
   ColorModeToken,
   CSS,
 } from "@yamada-ui/core"
+import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { createContext, cx, omitObject, valueToPercent } from "@yamada-ui/utils"
-import { FC } from "react"
+import type { FC } from "react"
 
 const [ProgressProvider, useProgress] = createContext<
   Record<string, CSSUIObject>

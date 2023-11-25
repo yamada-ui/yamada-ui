@@ -1,15 +1,13 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
-import { LazyMode } from "@yamada-ui/use-disclosure"
+import type { LazyMode } from "@yamada-ui/use-disclosure"
 import {
   createContext,
   cx,
@@ -17,15 +15,10 @@ import {
   pickChildren,
   getValidChildren,
 } from "@yamada-ui/utils"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import {
-  TabList,
-  TabListProps,
-  TabPanels,
-  TabPanelsProps,
-  Tab,
-  TabPanel,
-} from "./"
+import type { Dispatch, SetStateAction } from "react"
+import { useEffect, useState } from "react"
+import type { TabListProps, TabPanelsProps } from "./"
+import { TabList, TabPanels, Tab, TabPanel } from "./"
 
 const {
   DescendantsContextProvider,

@@ -1,16 +1,18 @@
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
   ColorModeToken,
   CSS,
 } from "@yamada-ui/core"
 import {
-  FormControlOptions,
+  ui,
+  forwardRef,
+  omitThemeProps,
+  useMultiComponentStyle,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
   useFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
@@ -25,18 +27,15 @@ import {
   omitObject,
   pickObject,
 } from "@yamada-ui/utils"
-import {
+import type {
   ChangeEvent,
-  cloneElement,
   CSSProperties,
   FC,
   ForwardedRef,
   ReactElement,
   ReactNode,
-  useCallback,
-  useMemo,
-  useRef,
 } from "react"
+import { cloneElement, useCallback, useMemo, useRef } from "react"
 
 type FileInputOptions = {
   /**

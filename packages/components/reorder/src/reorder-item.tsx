@@ -1,10 +1,10 @@
-import { ui, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
+import type { HTMLMotionProps, DragControls } from "@yamada-ui/motion"
 import {
   MotionReorder,
-  HTMLMotionProps,
   useMotionValue,
   useDragControls,
-  DragControls,
 } from "@yamada-ui/motion"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
 import { forwardRef, useCallback, useEffect, useState } from "react"

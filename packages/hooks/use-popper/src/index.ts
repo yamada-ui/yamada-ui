@@ -1,13 +1,14 @@
-import {
-  createPopper,
+import type {
   Instance,
   Modifier,
   VirtualElement,
   Placement,
 } from "@popperjs/core"
-import { Token } from "@yamada-ui/core"
+import { createPopper } from "@popperjs/core"
+import type { Token } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
-import { mergeRefs, PropGetter } from "@yamada-ui/utils"
+import type { PropGetter } from "@yamada-ui/utils"
+import { mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef } from "react"
 
 export type UsePopperProps = {

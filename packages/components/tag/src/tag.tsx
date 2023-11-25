@@ -1,23 +1,21 @@
+import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
-  ThemeProps,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
 } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx } from "@yamada-ui/utils"
-import {
+import type {
   FC,
   HTMLAttributes,
   MouseEventHandler,
   ReactElement,
   ReactNode,
-  useRef,
 } from "react"
+import { useRef } from "react"
 
 type TagnOptions = {
   /**

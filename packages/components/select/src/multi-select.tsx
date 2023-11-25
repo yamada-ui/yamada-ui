@@ -1,32 +1,27 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { cx, getValidChildren, handlerAll } from "@yamada-ui/utils"
-import {
-  cloneElement,
-  CSSProperties,
-  FC,
-  MouseEventHandler,
-  ReactElement,
-  useMemo,
-} from "react"
-import { SelectIcon, SelectClearIcon, SelectIconProps } from "./select-icon"
-import { SelectList, SelectListProps } from "./select-list"
+import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
+import { cloneElement, useMemo } from "react"
+import type { SelectIconProps } from "./select-icon"
+import { SelectIcon, SelectClearIcon } from "./select-icon"
+import type { SelectListProps } from "./select-list"
+import { SelectList } from "./select-list"
+import type { UseSelectProps } from "./use-select"
 import {
   useSelect,
-  UseSelectProps,
   SelectDescendantsContextProvider,
   SelectProvider,
   useSelectContext,
 } from "./use-select"
-import { OptionGroup, Option, SelectItem } from "./"
+import type { SelectItem } from "./"
+import { OptionGroup, Option } from "./"
 
 type MultiSelectOptions = {
   /**
@@ -162,8 +157,8 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     isEmpty,
   })
 
-  h = h ?? height
-  minH = minH ?? minHeight
+  h ??= height
+  minH ??= minHeight
 
   const css: CSSUIObject = {
     position: "relative",

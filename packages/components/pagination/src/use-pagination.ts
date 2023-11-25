@@ -1,4 +1,4 @@
-import { CSSUIObject, Token } from "@yamada-ui/core"
+import type { CSSUIObject, Token } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useValue } from "@yamada-ui/use-value"
 import { createContext } from "@yamada-ui/utils"

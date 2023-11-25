@@ -1,11 +1,5 @@
-import {
-  Children,
-  cloneElement,
-  FC,
-  PropsWithChildren,
-  ReactElement,
-  RefObject,
-} from "react"
+import type { FC, PropsWithChildren, ReactElement, RefObject } from "react"
+import { Children, cloneElement } from "react"
 import { usePopover } from "./popover"
 
 export const PopoverTrigger: FC<PropsWithChildren<{}>> = ({ children }) => {

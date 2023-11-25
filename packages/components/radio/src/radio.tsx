@@ -1,21 +1,15 @@
-import {
-  ui,
-  useMultiComponentStyle,
-  omitThemeProps,
-  HTMLUIProps,
-  ThemeProps,
-  ComponentArgs,
-} from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps, ComponentArgs } from "@yamada-ui/core"
+import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
   useFormControlProps,
-  FormControlOptions,
   formControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
-  PropGetter,
   useCallbackRef,
   omitObject,
   funcAll,
@@ -23,8 +17,7 @@ import {
   dataAttr,
   pickObject,
 } from "@yamada-ui/utils"
-import {
-  forwardRef,
+import type {
   ForwardedRef,
   Ref,
   ChangeEvent,
@@ -32,10 +25,8 @@ import {
   InputHTMLAttributes,
   KeyboardEvent,
   SyntheticEvent,
-  useCallback,
-  useEffect,
-  useState,
 } from "react"
+import { forwardRef, useCallback, useEffect, useState } from "react"
 import { useRadioGroupContenxt } from "./radio-group"
 
 export type UseRadioProps<Y extends string | number = string> =

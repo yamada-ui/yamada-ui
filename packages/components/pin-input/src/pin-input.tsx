@@ -1,8 +1,4 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
@@ -10,8 +6,14 @@ import {
   CSS,
 } from "@yamada-ui/core"
 import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
   useFormControlProps,
-  FormControlOptions,
   formControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
@@ -25,15 +27,8 @@ import {
   filterUndefined,
   getValidChildren,
 } from "@yamada-ui/utils"
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  Ref,
-  useCallback,
-  useEffect,
-  useId,
-  useState,
-} from "react"
+import type { ChangeEvent, KeyboardEvent, Ref } from "react"
+import { useCallback, useEffect, useId, useState } from "react"
 
 const toArray = (value?: string) => value?.split("")
 
@@ -164,7 +159,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
 
-    id = id ?? useId()
+    id ??= useId()
 
     const descendants = useDescendants()
 

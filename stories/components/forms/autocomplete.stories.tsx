@@ -182,14 +182,7 @@ export const withAllowFree: Story = () => {
   ]
 
   return (
-    <Autocomplete
-      placeholder="キャラクターを選択"
-      items={items}
-      allowFree
-      onCreate={(newItem, newItems) =>
-        console.log("created item", newItem, "new items", newItems)
-      }
-    />
+    <Autocomplete placeholder="キャラクターを選択" items={items} allowFree />
   )
 }
 

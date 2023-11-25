@@ -166,6 +166,39 @@ export const withAllowCreate: Story = () => {
   )
 }
 
+export const withAllowFree: Story = () => {
+  const items: AutocompleteItem[] = [
+    { label: "ベジータ", value: "ベジータ" },
+    {
+      label: "地球人",
+      items: [
+        { label: "孫悟空", value: "孫悟空" },
+        { label: "孫悟飯", value: "孫悟飯" },
+        { label: "クリリン", value: "クリリン" },
+      ],
+    },
+    {
+      label: "フリーザ軍",
+      items: [
+        { label: "フリーザ", value: "フリーザ" },
+        { label: "ギニュー", value: "ギニュー" },
+        { label: "リクーム", value: "リクーム" },
+        { label: "バータ", value: "バータ" },
+        { label: "ジース", value: "ジース" },
+        { label: "グルド", value: "グルド" },
+      ],
+    },
+  ]
+
+  return (
+    <MultiAutocomplete
+      placeholder="キャラクターを選択"
+      items={items}
+      allowFree
+    />
+  )
+}
+
 export const withInsertPositionItem: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },

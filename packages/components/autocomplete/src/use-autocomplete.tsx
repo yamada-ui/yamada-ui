@@ -697,6 +697,11 @@ export const useAutocomplete = <T extends string | string[] = string>({
         .filter(({ node }) => node.dataset.value === newValue)
         .map(({ node }) => node.textContent ?? "")
 
+      if (allowFree && selectedValues.length === 0) {
+        selectedValues.push(newValue)
+        setInputValue("")
+      }
+
       setDisplayValue((prev) => {
         if (!isMulti) {
           return selectedValues[0] as T

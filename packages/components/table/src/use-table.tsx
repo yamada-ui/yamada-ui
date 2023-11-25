@@ -13,6 +13,8 @@ import type {
   OnChangeFn,
   PaginationOptions,
   HeaderContext,
+  DisplayColumnDef,
+  AccessorColumnDef,
 } from "@tanstack/react-table"
 import {
   getCoreRowModel,
@@ -48,25 +50,25 @@ export const [TableProvider, useTableContext] = createContext<TableContext>({
   name: "TableContext",
 })
 
-export type ColumnStyles = {
+export type PropsColumnDef = {
   className?: string
   style?: CSSProperties
   sx?: CSSUIObject
   css?: CSSUIObject
-}
-
-type UIColumn<Y extends RowData, M = any> = {
   colSpan?: number
   rowSpan?: number
+}
+
+export type GroupColumnDef<Y extends RowData, M = any> = {
   columns?: Column<Y, M>[]
 }
 
-export type Column<Y extends RowData, M = any> = Omit<
-  ColumnDef<Y, M>,
-  "columns"
-> &
-  UIColumn<Y, M> &
-  ColumnStyles
+export type Column<Y extends RowData, M = any> = (
+  | DisplayColumnDef<Y, M>
+  | AccessorColumnDef<Y, M>
+) &
+  GroupColumnDef<Y, M> &
+  PropsColumnDef
 
 type SelectColumn<Y extends RowData, M = any> = Omit<
   Column<Y, M>,

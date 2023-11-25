@@ -91,7 +91,6 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      position: "relative",
       w: "100%",
       h: "fit-content",
       color,
@@ -116,14 +115,19 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
               __css={css}
               {...getContainerProps(containerProps)}
             >
-              <AutocompleteField
-                h={h}
-                minH={minH}
-                inputProps={inputProps}
-                {...getFieldProps({}, ref)}
-              />
+              <ui.div
+                className="ui-autocomplete__inner"
+                __css={{ position: "relative", ...styles.inner }}
+              >
+                <AutocompleteField
+                  h={h}
+                  minH={minH}
+                  inputProps={inputProps}
+                  {...getFieldProps({}, ref)}
+                />
 
-              <AutocompleteIcon {...iconProps} {...formControlProps} />
+                <AutocompleteIcon {...iconProps} {...formControlProps} />
+              </ui.div>
 
               {!isEmpty ? (
                 <AutocompleteList {...listProps}>

@@ -81,7 +81,6 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    position: "relative",
     w: "100%",
     h: "fit-content",
     color,
@@ -96,18 +95,25 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
           __css={css}
           {...getContainerProps(containerProps)}
         >
-          <DatePickerField
-            {...getFieldProps({ h, minH }, ref)}
-            inputProps={getInputProps(inputProps)}
-          />
-
-          {isClearable && value ? (
-            <DatePickerClearIcon
-              {...getIconProps({ clear: true, ...clearIconProps })}
+          <ui.div
+            className="ui-date-picker__inner"
+            __css={{ position: "relative", ...styles.inner }}
+          >
+            <DatePickerField
+              {...getFieldProps({ h, minH }, ref)}
+              inputProps={getInputProps(inputProps)}
             />
-          ) : (
-            <DatePickerIcon {...getIconProps({ clear: false, ...iconProps })} />
-          )}
+
+            {isClearable && value ? (
+              <DatePickerClearIcon
+                {...getIconProps({ clear: true, ...clearIconProps })}
+              />
+            ) : (
+              <DatePickerIcon
+                {...getIconProps({ clear: false, ...iconProps })}
+              />
+            )}
+          </ui.div>
 
           <PopoverContent
             className="ui-date-picker__popover"

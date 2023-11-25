@@ -161,7 +161,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    position: "relative",
     w: "100%",
     h: "fit-content",
     color,
@@ -177,25 +176,30 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
             __css={css}
             {...getContainerProps(containerProps)}
           >
-            <PopoverTrigger>
-              <MultiSelectField
-                component={component}
-                separator={separator}
-                h={h}
-                minH={minH}
-                {...getFieldProps({}, ref)}
-              />
-            </PopoverTrigger>
+            <ui.div
+              className="ui-multi-select__inner"
+              __css={{ position: "relative", ...styles.inner }}
+            >
+              <PopoverTrigger>
+                <MultiSelectField
+                  component={component}
+                  separator={separator}
+                  h={h}
+                  minH={minH}
+                  {...getFieldProps({}, ref)}
+                />
+              </PopoverTrigger>
 
-            {isClearable && value.length ? (
-              <SelectClearIcon
-                {...clearIconProps}
-                onClick={handlerAll(clearIconProps?.onClick, onClear)}
-                {...formControlProps}
-              />
-            ) : (
-              <SelectIcon {...iconProps} {...formControlProps} />
-            )}
+              {isClearable && value.length ? (
+                <SelectClearIcon
+                  {...clearIconProps}
+                  onClick={handlerAll(clearIconProps?.onClick, onClear)}
+                  {...formControlProps}
+                />
+              ) : (
+                <SelectIcon {...iconProps} {...formControlProps} />
+              )}
+            </ui.div>
 
             {!isEmpty ? (
               <SelectList {...listProps}>

@@ -137,7 +137,6 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      position: "relative",
       w: "100%",
       h: "fit-content",
       color,
@@ -159,29 +158,34 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
         >
           <Popover {...getPopoverProps()}>
             <ui.div
-              className={cx("ui-autocomplete", className)}
+              className={cx("ui-multi-autocomplete", className)}
               __css={css}
               {...getContainerProps(containerProps)}
             >
-              <MultiAutocompleteField
-                component={component}
-                separator={separator}
-                keepPlaceholder={keepPlaceholder}
-                h={h}
-                minH={minH}
-                inputProps={inputProps}
-                {...getFieldProps({}, ref)}
-              />
-
-              {isClearable && value.length ? (
-                <AutocompleteClearIcon
-                  {...clearIconProps}
-                  onClick={handlerAll(clearIconProps?.onClick, onClear)}
-                  {...formControlProps}
+              <ui.div
+                className="ui-multi-autocomplete__inner"
+                __css={{ position: "relative", ...styles.inner }}
+              >
+                <MultiAutocompleteField
+                  component={component}
+                  separator={separator}
+                  keepPlaceholder={keepPlaceholder}
+                  h={h}
+                  minH={minH}
+                  inputProps={inputProps}
+                  {...getFieldProps({}, ref)}
                 />
-              ) : (
-                <AutocompleteIcon {...iconProps} {...formControlProps} />
-              )}
+
+                {isClearable && value.length ? (
+                  <AutocompleteClearIcon
+                    {...clearIconProps}
+                    onClick={handlerAll(clearIconProps?.onClick, onClear)}
+                    {...formControlProps}
+                  />
+                ) : (
+                  <AutocompleteIcon {...iconProps} {...formControlProps} />
+                )}
+              </ui.div>
 
               {!isEmpty ? (
                 <AutocompleteList {...listProps}>
@@ -296,7 +300,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
     return (
       <PopoverTrigger>
         <ui.div
-          className={cx("ui-autocomplete__field", className)}
+          className={cx("ui-multi-autocomplete__field", className)}
           __css={css}
           py={displayValue?.length && component ? "0.125rem" : undefined}
           {...rest}
@@ -304,7 +308,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
           {cloneChildren}
 
           <ui.input
-            className={cx("ui-autocomplete__field__input", className)}
+            className="ui-multi-autocomplete__field__input"
             display="inline-block"
             flex="1"
             overflow="hidden"

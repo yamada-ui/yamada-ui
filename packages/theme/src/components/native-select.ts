@@ -10,7 +10,6 @@ export const NativeSelect: ComponentMultiStyle = {
       width: "100%",
       minWidth: 0,
       outline: 0,
-      position: "relative",
       appearance: "none",
       pb: "1px",
       lineHeight: "normal",

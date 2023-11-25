@@ -5,7 +5,7 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { PopoverProps } from "@yamada-ui/popover"
+import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { PropGetter, RequiredPropGetter, Dict } from "@yamada-ui/utils"
@@ -175,8 +175,8 @@ export const useDatePicker = ({
   const { id } = rest
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const [containerProps, inputProps] = splitObject(
-    omitObject(rest as Dict, ["id", "value", "onChange"]),
+  const [containerProps, inputProps] = splitObject<Dict, string>(
+    omitObject(rest, [...popoverProperties, "id", "value", "onChange"]),
     layoutStylesProperties,
   )
 

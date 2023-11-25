@@ -5,26 +5,12 @@ import { NativeSelect } from "./native-select"
 
 export const Select: ComponentMultiStyle = mergeStyle(NativeSelect, {
   baseStyle: ({ theme: t, colorMode: m }) => ({
-    clearIcon: {
-      transitionProperty: "common",
-      transitionDuration: "normal",
-      pointerEvents: "auto",
-      _hover: {
-        opacity: 0.8,
-      },
-      _disabled: {
-        pointerEvents: "none",
-        opacity: 0.4,
-      },
-      _focusVisible: {
-        boxShadow: "outline",
-        bg: "rgba(0, 0, 0, 0.14)",
-      },
-    },
+    inner: {},
     list: {
       rounded: "md",
       w: "100%",
-      maxH: { base: "xs" },
+      minW: "xs",
+      maxH: "xs",
       overflowY: "auto",
       py: "2",
       bg: ["white", "black"],

@@ -367,7 +367,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const formControlProps = pickObject(rest, formControlProperties)
   const [containerProps, inputProps] = splitObject<Dict, string>(
-    omitObject<Dict, string>(rest, [
+    omitObject(rest, [
       ...popoverProperties,
       "id",
       "value",
@@ -1051,6 +1051,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
+      matchWidth: true,
       ...rest,
       ...props,
       isOpen,

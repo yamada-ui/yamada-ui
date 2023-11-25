@@ -562,6 +562,7 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
+      matchWidth: true,
       ...rest,
       ...props,
       isOpen,

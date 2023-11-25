@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import {
   Button,
   FormControl,
@@ -8,7 +8,8 @@ import {
   useLoading,
 } from "@yamada-ui/react"
 import { useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof PinInput>
 

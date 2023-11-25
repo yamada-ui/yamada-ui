@@ -1,4 +1,5 @@
-import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mode } from "@yamada-ui/core"
 import { getColor, transparentizeColor } from "@yamada-ui/utils"
 
 export const Tabs: ComponentMultiStyle = {

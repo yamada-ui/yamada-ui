@@ -1,6 +1,7 @@
 import { faPoo } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
-import { Calendar, CalendarProps } from "@yamada-ui/calendar"
+import type { Meta, StoryFn } from "@storybook/react"
+import type { CalendarProps } from "@yamada-ui/calendar"
+import { Calendar } from "@yamada-ui/calendar"
 import { Icon } from "@yamada-ui/fontawesome"
 import {
   Heading,
@@ -805,7 +806,7 @@ export const constomDayButton: Story = () => {
         <Calendar
           dayProps={{
             component: ({ date }) => (
-              <Tooltip label={`No schedule`}>
+              <Tooltip label="No schedule">
                 <Center as="span" w="full" h="full">
                   {date.getDate()}
                 </Center>

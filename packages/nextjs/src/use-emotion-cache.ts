@@ -1,4 +1,5 @@
-import createEmotionCache, { Options } from "@emotion/cache"
+import type { Options } from "@emotion/cache"
+import createEmotionCache from "@emotion/cache"
 import { useServerInsertedHTML } from "next/navigation"
 import { createElement, useMemo } from "react"
 

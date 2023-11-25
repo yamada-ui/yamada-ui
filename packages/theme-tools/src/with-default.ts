@@ -1,5 +1,6 @@
-import { Theme, ComponentDefaultProps, UsageTheme } from "@yamada-ui/core"
-import { isArray, Union, merge } from "@yamada-ui/utils"
+import type { Theme, ComponentDefaultProps, UsageTheme } from "@yamada-ui/core"
+import type { Union } from "@yamada-ui/utils"
+import { isArray, merge } from "@yamada-ui/utils"
 
 export const withDefaultSize =
   ({

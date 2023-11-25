@@ -1,4 +1,4 @@
-import { ComponentStyle } from "@yamada-ui/core"
+import type { ComponentStyle } from "@yamada-ui/core"
 
 export const ScrollArea: ComponentStyle = {
   baseStyle: {

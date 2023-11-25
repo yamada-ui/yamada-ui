@@ -1,20 +1,23 @@
-import createStyled, { FunctionInterpolation } from "@emotion/styled"
+import type { FunctionInterpolation } from "@emotion/styled"
+import createStyled from "@emotion/styled"
+import type { Dict } from "@yamada-ui/utils"
 import {
   filterObject,
   runIfFunc,
-  Dict,
   assignAfter,
   filterUndefined,
 } from "@yamada-ui/utils"
-import { ComponentType, createElement, forwardRef } from "react"
-import {
+import type { ComponentType } from "react"
+import { createElement, forwardRef } from "react"
+import type {
   StyledOptions,
   UIComponent,
   StyledResolverProps,
   As,
-  shouldForwardProp,
 } from "./components"
-import { CSSUIProps, css, CSSUIObject } from "./css"
+import { shouldForwardProp } from "./components"
+import type { CSSUIProps, CSSUIObject } from "./css"
+import { css } from "./css"
 import { useColorMode } from "./providers"
 import { styles, pseudos } from "./styles"
 

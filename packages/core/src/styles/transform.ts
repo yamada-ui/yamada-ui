@@ -1,7 +1,8 @@
-import { StringLiteral } from "@yamada-ui/utils"
+import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import { Token } from "../css"
-import { Configs, configs, transforms } from "./config"
+import type { Token } from "../css"
+import type { Configs } from "./config"
+import { configs, transforms } from "./config"
 
 export const transform: Configs = {
   clipPath: true,

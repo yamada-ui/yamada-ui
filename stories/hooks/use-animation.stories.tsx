@@ -1,6 +1,6 @@
-import { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react"
+import type { AnimationStyle } from "@yamada-ui/react"
 import {
-  AnimationStyle,
   Box,
   Button,
   useAnimation,

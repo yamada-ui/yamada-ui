@@ -1,4 +1,4 @@
-import { UIStyle } from "@yamada-ui/core"
+import type { UIStyle } from "@yamada-ui/core"
 
 export const resetStyle: UIStyle = {
   "*": {

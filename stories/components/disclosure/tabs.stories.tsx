@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@yamada-ui/react"
 import { useState } from "react"
 

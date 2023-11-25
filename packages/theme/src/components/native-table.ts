@@ -1,4 +1,4 @@
-import { ComponentMultiStyle, UIMultiStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle, UIMultiStyle } from "@yamada-ui/core"
 import { transparentizeColor, isGray } from "@yamada-ui/utils"
 
 export const NativeTable: ComponentMultiStyle = {

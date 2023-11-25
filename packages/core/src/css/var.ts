@@ -1,14 +1,8 @@
-import {
-  escape,
-  merge,
-  calc,
-  Dict,
-  isArray,
-  isUndefined,
-} from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
+import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
 import { generateAnimation, generateGradient, pseudos } from "../styles"
-import { VarTokens } from "../theme"
-import { CSSMap, StyledTheme } from "../theme.types"
+import type { VarTokens } from "../theme"
+import type { CSSMap, StyledTheme } from "../theme.types"
 
 type Var = {
   variable: string

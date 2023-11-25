@@ -1,9 +1,10 @@
-import { render as reactRender, RenderOptions } from "@testing-library/react"
+import type { RenderOptions } from "@testing-library/react"
+import { render as reactRender } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
 import { toHaveNoViolations } from "jest-axe"
-import { ReactElement } from "react"
+import type { ReactElement } from "react"
 import "@testing-library/jest-dom"
 
 expect.extend(toHaveNoViolations)

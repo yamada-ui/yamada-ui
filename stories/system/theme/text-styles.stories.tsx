@@ -1,4 +1,5 @@
-import { UIProvider, extendTheme, TextStyles, Heading } from "@yamada-ui/react"
+import type { TextStyles } from "@yamada-ui/react"
+import { UIProvider, extendTheme, Heading } from "@yamada-ui/react"
 
 export default {
   title: "System / Theme / Text Styles",

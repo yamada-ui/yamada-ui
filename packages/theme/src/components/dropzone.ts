@@ -1,4 +1,5 @@
-import { ComponentMultiStyle, mode } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mode } from "@yamada-ui/core"
 import { getColor, isArray, transparentizeColor } from "@yamada-ui/utils"
 
 export const Dropzone: ComponentMultiStyle = {

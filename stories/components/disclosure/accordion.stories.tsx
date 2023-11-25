@@ -1,12 +1,12 @@
 import { faMinus, faPlus, faPoo } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
+import type { AccordionProps } from "@yamada-ui/react"
 import {
   Accordion,
   AccordionLabel,
   AccordionItem,
   AccordionPanel,
-  AccordionProps,
 } from "@yamada-ui/react"
 import { useState } from "react"
 

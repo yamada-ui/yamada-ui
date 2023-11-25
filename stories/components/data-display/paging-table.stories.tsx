@@ -3,7 +3,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
 import {
   HStack,
@@ -15,7 +15,8 @@ import {
   NumberInput,
   useLoading,
 } from "@yamada-ui/react"
-import { PagingTable, Column } from "@yamada-ui/table"
+import type { Column } from "@yamada-ui/table"
+import { PagingTable } from "@yamada-ui/table"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 type Story = StoryFn<typeof PagingTable>

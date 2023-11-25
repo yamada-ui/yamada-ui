@@ -1,4 +1,4 @@
-import { UITheme } from "./ui-theme.types"
+import type { UITheme } from "./ui-theme.types"
 
 export interface GeneratedTheme extends UITheme {
   animations: string & {}

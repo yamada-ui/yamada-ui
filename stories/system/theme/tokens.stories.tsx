@@ -1,15 +1,14 @@
+import type { ThemeTokens, ThemeSemantics } from "@yamada-ui/react"
 import {
   UIProvider,
   extendTheme,
   Box,
   useColorMode,
-  ThemeTokens,
-  ThemeSemantics,
   Center,
   Image,
   extendToken,
 } from "@yamada-ui/react"
-import { FC } from "react"
+import type { FC } from "react"
 
 export default {
   title: "System / Theme / Tokens",

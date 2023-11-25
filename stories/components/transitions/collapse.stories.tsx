@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Box, Button, Collapse, useBoolean, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Collapse>

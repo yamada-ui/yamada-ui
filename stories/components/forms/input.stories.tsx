@@ -1,5 +1,5 @@
 import { faCheck, faEnvelope } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
   Input,
@@ -14,7 +14,8 @@ import {
   FormControl,
   VStack,
 } from "@yamada-ui/react"
-import { SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { FaPhone } from "react-icons/fa"
 
 type Story = StoryFn<typeof Input>

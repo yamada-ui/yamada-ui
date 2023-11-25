@@ -1,4 +1,4 @@
-import { ThemeConfig } from "@yamada-ui/core"
+import type { ThemeConfig } from "@yamada-ui/core"
 
 export const config: ThemeConfig = {
   initialThemeScheme: "base",

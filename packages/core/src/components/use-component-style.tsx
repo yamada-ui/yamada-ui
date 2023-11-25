@@ -1,31 +1,29 @@
+import type { Dict } from "@yamada-ui/utils"
 import {
   getMemoizedObject as get,
   runIfFunc,
   merge,
   filterUndefined,
   omitObject,
-  Dict,
   isArray,
   isObject,
   keysFormObject,
 } from "@yamada-ui/utils"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
-import {
+import type {
   ComponentStyle,
   CSSUIObject,
   UIStyle,
   UIStyleProps,
-  useTheme,
-  useColorMode,
   ResponsiveObject,
   ColorModeArray,
   ComponentSizes,
   ComponentVariants,
   ComponentMultiVariants,
   ComponentMultiSizes,
-  pseudos,
 } from ".."
+import { useTheme, useColorMode, pseudos } from ".."
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject

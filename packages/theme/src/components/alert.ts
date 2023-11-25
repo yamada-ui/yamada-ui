@@ -1,4 +1,4 @@
-import { ComponentMultiStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { shadeColor } from "@yamada-ui/utils"
 
 export const Alert: ComponentMultiStyle = {

@@ -1,30 +1,27 @@
-import {
-  Global,
-  ThemeContext,
-  ThemeProvider as EmotionThemeProvider,
+import type {
   ThemeProviderProps as EmotionThemeProviderProps,
   Interpolation,
   Theme,
   CSSObject,
 } from "@emotion/react"
 import {
-  Dict,
+  Global,
+  ThemeContext,
+  ThemeProvider as EmotionThemeProvider,
+} from "@emotion/react"
+import type { Dict } from "@yamada-ui/utils"
+import {
   runIfFunc,
   getMemoizedObject as get,
   isUndefined,
   merge,
 } from "@yamada-ui/utils"
-import {
-  FC,
-  useMemo,
-  useContext,
-  useState,
-  useCallback,
-  useEffect,
-} from "react"
-import { css, UIStyle } from "../css"
+import type { FC } from "react"
+import { useMemo, useContext, useState, useCallback, useEffect } from "react"
+import type { UIStyle } from "../css"
+import { css } from "../css"
 import { transformTheme } from "../theme"
-import {
+import type {
   ChangeThemeScheme,
   PropsTheme,
   StyledTheme,
@@ -33,7 +30,8 @@ import {
   UsageTheme,
 } from "../theme.types"
 import { useColorMode } from "./color-mode-provider"
-import { themeSchemeManager, ThemeSchemeManager } from "./theme-manager"
+import type { ThemeSchemeManager } from "./theme-manager"
+import { themeSchemeManager } from "./theme-manager"
 
 const { localStorage } = themeSchemeManager
 

@@ -1,4 +1,4 @@
-import { ThemeSemantics } from "@yamada-ui/core"
+import type { ThemeSemantics } from "@yamada-ui/core"
 
 export const semantics: ThemeSemantics = {
   colors: {

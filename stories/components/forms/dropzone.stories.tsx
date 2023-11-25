@@ -3,7 +3,7 @@ import {
   faImage,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import {
   Dropzone,
   DropzoneAccept,

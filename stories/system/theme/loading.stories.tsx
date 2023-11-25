@@ -12,7 +12,8 @@ import {
   isValidElement,
   VStack,
 } from "@yamada-ui/react"
-import { FC, useEffect, useCallback } from "react"
+import type { FC } from "react"
+import { useEffect, useCallback } from "react"
 
 export default {
   title: "System / Theme / Loading",

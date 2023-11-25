@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import {
   Label,
   Switch,
@@ -9,7 +9,8 @@ import {
   Button,
 } from "@yamada-ui/react"
 import { useId } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Switch>
 

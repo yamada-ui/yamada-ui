@@ -1,6 +1,7 @@
 import { faPoo } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
+import type { Steps } from "@yamada-ui/react"
 import {
   Stepper,
   Step,
@@ -12,7 +13,6 @@ import {
   Button,
   HStack,
   Box,
-  Steps,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Stepper>

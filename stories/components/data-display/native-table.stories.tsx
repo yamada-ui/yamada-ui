@@ -1,4 +1,5 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
+import type { NativeTableProps } from "@yamada-ui/react"
 import {
   NativeTable,
   Thead,
@@ -8,13 +9,13 @@ import {
   Th,
   Td,
   TableCaption,
-  NativeTableProps,
   ScrollArea,
   Box,
   defaultTheme,
   TableContainer,
 } from "@yamada-ui/react"
-import { FC, useState } from "react"
+import type { FC } from "react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof NativeTable>
 

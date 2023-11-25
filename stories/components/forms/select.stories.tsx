@@ -1,17 +1,18 @@
 import { faCaretDown, faCheck } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
+import type { SelectItem } from "@yamada-ui/react"
 import {
   Select,
   OptionGroup,
   Option,
-  SelectItem,
   FormControl,
   VStack,
   Button,
 } from "@yamada-ui/react"
 import { useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Select>
 

@@ -1,5 +1,5 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
 import { Wrap, Tag } from "@yamada-ui/react"
 

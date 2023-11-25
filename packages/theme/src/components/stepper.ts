@@ -1,4 +1,4 @@
-import { ComponentMultiStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const Stepper: ComponentMultiStyle = {

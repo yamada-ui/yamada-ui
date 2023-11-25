@@ -1,17 +1,17 @@
 import { noop, useSafeLayoutEffect } from "@yamada-ui/utils"
+import type { FC, ReactNode } from "react"
 import {
   createContext,
-  FC,
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useState,
   useContext,
 } from "react"
-import { ColorMode } from "../css"
-import { ThemeConfig } from "../theme.types"
-import { colorModeManager, ColorModeManager } from "./color-mode-manager"
+import type { ColorMode } from "../css"
+import type { ThemeConfig } from "../theme.types"
+import type { ColorModeManager } from "./color-mode-manager"
+import { colorModeManager } from "./color-mode-manager"
 import { getColorModeUtils } from "./color-mode-utils"
 
 const { localStorage } = colorModeManager

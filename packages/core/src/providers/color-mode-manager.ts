@@ -1,4 +1,4 @@
-import { ColorMode } from "../css"
+import type { ColorMode } from "../css"
 import { COLOR_MODE_STORAGE_KEY } from "./color-mode-script"
 
 const hasSupport = !!globalThis?.document

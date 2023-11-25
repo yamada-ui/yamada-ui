@@ -1,4 +1,5 @@
-import { keysFormObject, createdDom, Dict } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
+import { keysFormObject, createdDom } from "@yamada-ui/utils"
 
 export type BreakpointQuery = {
   breakpoint: string

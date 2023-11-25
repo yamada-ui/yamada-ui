@@ -1,4 +1,5 @@
-import { ComponentStyle, mode } from "@yamada-ui/core"
+import type { ComponentStyle } from "@yamada-ui/core"
+import { mode } from "@yamada-ui/core"
 import { transparentizeColor, getColor } from "@yamada-ui/utils"
 
 export const Mark: ComponentStyle = {

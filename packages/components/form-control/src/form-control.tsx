@@ -118,7 +118,7 @@ export const FormControl = forwardRef<FormControlProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    id = id ?? useId()
+    id ??= useId()
 
     const [isFocused, setFocused] = useState<boolean>(false)
 
@@ -229,11 +229,10 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
 }: UseFormControlProps<Y> & M) => {
   const control = useFormControlContext()
 
-  disabled = disabled ?? isDisabled ?? control?.isDisabled
-  required = required ?? isRequired ?? control?.isRequired
-  readOnly = readOnly ?? isReadOnly ?? control?.isReadOnly
-
-  isInvalid = isInvalid ?? control?.isInvalid
+  disabled ??= isDisabled ?? control?.isDisabled
+  required ??= isRequired ?? control?.isRequired
+  readOnly ??= isReadOnly ?? control?.isReadOnly
+  isInvalid ??= control?.isInvalid
 
   return {
     id: id ?? control?.id,

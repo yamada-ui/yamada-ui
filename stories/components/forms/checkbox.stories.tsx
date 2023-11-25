@@ -41,114 +41,114 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultChecked: Story = () => {
-  return <Checkbox defaultChecked>孫悟空</Checkbox>
+export const withdefaultIsChecked: Story = () => {
+  return <Checkbox defaultIsChecked>孫悟空</Checkbox>
 }
 
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <Checkbox colorScheme="primary" defaultChecked>
+      <Checkbox colorScheme="primary" defaultIsChecked>
         Primary
       </Checkbox>
 
-      <Checkbox colorScheme="secondary" defaultChecked>
+      <Checkbox colorScheme="secondary" defaultIsChecked>
         Secondary
       </Checkbox>
 
-      <Checkbox colorScheme="warning" defaultChecked>
+      <Checkbox colorScheme="warning" defaultIsChecked>
         Warning
       </Checkbox>
 
-      <Checkbox colorScheme="danger" defaultChecked>
+      <Checkbox colorScheme="danger" defaultIsChecked>
         Danger
       </Checkbox>
 
-      <Checkbox colorScheme="link" defaultChecked>
+      <Checkbox colorScheme="link" defaultIsChecked>
         Link
       </Checkbox>
 
-      <Checkbox colorScheme="gray" defaultChecked>
+      <Checkbox colorScheme="gray" defaultIsChecked>
         Gray
       </Checkbox>
 
-      <Checkbox colorScheme="zinc" defaultChecked>
+      <Checkbox colorScheme="zinc" defaultIsChecked>
         Zinc
       </Checkbox>
 
-      <Checkbox colorScheme="neutral" defaultChecked>
+      <Checkbox colorScheme="neutral" defaultIsChecked>
         Neutral
       </Checkbox>
 
-      <Checkbox colorScheme="stone" defaultChecked>
+      <Checkbox colorScheme="stone" defaultIsChecked>
         Stone
       </Checkbox>
 
-      <Checkbox colorScheme="red" defaultChecked>
+      <Checkbox colorScheme="red" defaultIsChecked>
         Red
       </Checkbox>
 
-      <Checkbox colorScheme="rose" defaultChecked>
+      <Checkbox colorScheme="rose" defaultIsChecked>
         Rose
       </Checkbox>
 
-      <Checkbox colorScheme="pink" defaultChecked>
+      <Checkbox colorScheme="pink" defaultIsChecked>
         Pink
       </Checkbox>
 
-      <Checkbox colorScheme="orange" defaultChecked>
+      <Checkbox colorScheme="orange" defaultIsChecked>
         Orange
       </Checkbox>
 
-      <Checkbox colorScheme="amber" defaultChecked>
+      <Checkbox colorScheme="amber" defaultIsChecked>
         Amber
       </Checkbox>
 
-      <Checkbox colorScheme="yellow" defaultChecked>
+      <Checkbox colorScheme="yellow" defaultIsChecked>
         Yellow
       </Checkbox>
 
-      <Checkbox colorScheme="lime" defaultChecked>
+      <Checkbox colorScheme="lime" defaultIsChecked>
         Lime
       </Checkbox>
 
-      <Checkbox colorScheme="green" defaultChecked>
+      <Checkbox colorScheme="green" defaultIsChecked>
         Green
       </Checkbox>
 
-      <Checkbox colorScheme="emerald" defaultChecked>
+      <Checkbox colorScheme="emerald" defaultIsChecked>
         Emerald
       </Checkbox>
 
-      <Checkbox colorScheme="teal" defaultChecked>
+      <Checkbox colorScheme="teal" defaultIsChecked>
         Teal
       </Checkbox>
 
-      <Checkbox colorScheme="cyan" defaultChecked>
+      <Checkbox colorScheme="cyan" defaultIsChecked>
         Cyan
       </Checkbox>
 
-      <Checkbox colorScheme="sky" defaultChecked>
+      <Checkbox colorScheme="sky" defaultIsChecked>
         Sky
       </Checkbox>
 
-      <Checkbox colorScheme="blue" defaultChecked>
+      <Checkbox colorScheme="blue" defaultIsChecked>
         Blue
       </Checkbox>
 
-      <Checkbox colorScheme="indigo" defaultChecked>
+      <Checkbox colorScheme="indigo" defaultIsChecked>
         Indigo
       </Checkbox>
 
-      <Checkbox colorScheme="violet" defaultChecked>
+      <Checkbox colorScheme="violet" defaultIsChecked>
         Violet
       </Checkbox>
 
-      <Checkbox colorScheme="purple" defaultChecked>
+      <Checkbox colorScheme="purple" defaultIsChecked>
         Purple
       </Checkbox>
 
-      <Checkbox colorScheme="fuchsia" defaultChecked>
+      <Checkbox colorScheme="fuchsia" defaultIsChecked>
         Fuchsia
       </Checkbox>
     </Wrap>
@@ -159,7 +159,7 @@ export const isDisabled: Story = () => {
   return (
     <>
       <Checkbox isDisabled>All Notifications</Checkbox>
-      <Checkbox isDisabled defaultChecked>
+      <Checkbox isDisabled defaultIsChecked>
         All Notifications
       </Checkbox>
 
@@ -175,7 +175,7 @@ export const isDisabled: Story = () => {
         isDisabled
         label="Which notifications would you like to receive?"
       >
-        <Checkbox defaultChecked>All Notifications</Checkbox>
+        <Checkbox defaultIsChecked>All Notifications</Checkbox>
       </FormControl>
 
       <FormControl
@@ -196,7 +196,7 @@ export const isReadonly: Story = () => {
   return (
     <>
       <Checkbox isReadOnly>All Notifications</Checkbox>
-      <Checkbox isReadOnly defaultChecked>
+      <Checkbox isReadOnly defaultIsChecked>
         All Notifications
       </Checkbox>
 
@@ -212,7 +212,7 @@ export const isReadonly: Story = () => {
         isReadOnly
         label="Which notifications would you like to receive?"
       >
-        <Checkbox defaultChecked>All Notifications</Checkbox>
+        <Checkbox defaultIsChecked>All Notifications</Checkbox>
       </FormControl>
 
       <FormControl
@@ -233,7 +233,7 @@ export const isInvalid: Story = () => {
   return (
     <>
       <Checkbox isInvalid>All Notifications</Checkbox>
-      <Checkbox isInvalid defaultChecked>
+      <Checkbox isInvalid defaultIsChecked>
         All Notifications
       </Checkbox>
 

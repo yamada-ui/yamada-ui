@@ -64,7 +64,7 @@ export type UseCheckboxProps<Y extends string | number = string> =
      *
      * @default false
      */
-    defaultChecked?: boolean
+    defaultIsChecked?: boolean
     /**
      * If `true`, the checkbox will be checked.
      *
@@ -102,7 +102,7 @@ export const useCheckbox = <Y extends string | number = string>(
     id,
     name,
     value,
-    defaultChecked,
+    defaultIsChecked,
     tabIndex,
     required,
     disabled,
@@ -119,7 +119,7 @@ export const useCheckbox = <Y extends string | number = string>(
   const inputRef = useRef<HTMLInputElement>(null)
   const [isLabel, setIsLabel] = useState<boolean>(true)
 
-  const [isChecked, setIsChecked] = useState<boolean>(!!defaultChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(!!defaultIsChecked)
 
   const isControlled = props.isChecked !== undefined
   const checked = isControlled ? (props.isChecked as boolean) : isChecked
@@ -172,7 +172,7 @@ export const useCheckbox = <Y extends string | number = string>(
   useSafeLayoutEffect(() => {
     if (!inputRef.current?.form) return
 
-    inputRef.current.form.onreset = () => setIsChecked(!!defaultChecked)
+    inputRef.current.form.onreset = () => setIsChecked(!!defaultIsChecked)
   }, [])
 
   useSafeLayoutEffect(() => {
@@ -420,7 +420,7 @@ export const Checkbox = forwardRef(
           "name",
           "value",
           "defaultValue",
-          "defaultChecked",
+          "defaultIsChecked",
           "isChecked",
           "isIndeterminate",
           "onChange",

@@ -60,107 +60,107 @@ export const withLabel: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <Switch colorScheme="primary" defaultChecked>
+      <Switch colorScheme="primary" defaultIsChecked>
         Primary
       </Switch>
 
-      <Switch colorScheme="secondary" defaultChecked>
+      <Switch colorScheme="secondary" defaultIsChecked>
         Secondary
       </Switch>
 
-      <Switch colorScheme="warning" defaultChecked>
+      <Switch colorScheme="warning" defaultIsChecked>
         Warning
       </Switch>
 
-      <Switch colorScheme="danger" defaultChecked>
+      <Switch colorScheme="danger" defaultIsChecked>
         Danger
       </Switch>
 
-      <Switch colorScheme="link" defaultChecked>
+      <Switch colorScheme="link" defaultIsChecked>
         Link
       </Switch>
 
-      <Switch colorScheme="gray" defaultChecked>
+      <Switch colorScheme="gray" defaultIsChecked>
         Gray
       </Switch>
 
-      <Switch colorScheme="zinc" defaultChecked>
+      <Switch colorScheme="zinc" defaultIsChecked>
         Zinc
       </Switch>
 
-      <Switch colorScheme="neutral" defaultChecked>
+      <Switch colorScheme="neutral" defaultIsChecked>
         Neutral
       </Switch>
 
-      <Switch colorScheme="stone" defaultChecked>
+      <Switch colorScheme="stone" defaultIsChecked>
         Stone
       </Switch>
 
-      <Switch colorScheme="red" defaultChecked>
+      <Switch colorScheme="red" defaultIsChecked>
         Red
       </Switch>
 
-      <Switch colorScheme="rose" defaultChecked>
+      <Switch colorScheme="rose" defaultIsChecked>
         Rose
       </Switch>
 
-      <Switch colorScheme="pink" defaultChecked>
+      <Switch colorScheme="pink" defaultIsChecked>
         Pink
       </Switch>
 
-      <Switch colorScheme="orange" defaultChecked>
+      <Switch colorScheme="orange" defaultIsChecked>
         Orange
       </Switch>
 
-      <Switch colorScheme="amber" defaultChecked>
+      <Switch colorScheme="amber" defaultIsChecked>
         Amber
       </Switch>
 
-      <Switch colorScheme="yellow" defaultChecked>
+      <Switch colorScheme="yellow" defaultIsChecked>
         Yellow
       </Switch>
 
-      <Switch colorScheme="lime" defaultChecked>
+      <Switch colorScheme="lime" defaultIsChecked>
         Lime
       </Switch>
 
-      <Switch colorScheme="green" defaultChecked>
+      <Switch colorScheme="green" defaultIsChecked>
         Green
       </Switch>
 
-      <Switch colorScheme="emerald" defaultChecked>
+      <Switch colorScheme="emerald" defaultIsChecked>
         Emerald
       </Switch>
 
-      <Switch colorScheme="teal" defaultChecked>
+      <Switch colorScheme="teal" defaultIsChecked>
         Teal
       </Switch>
 
-      <Switch colorScheme="cyan" defaultChecked>
+      <Switch colorScheme="cyan" defaultIsChecked>
         Cyan
       </Switch>
 
-      <Switch colorScheme="sky" defaultChecked>
+      <Switch colorScheme="sky" defaultIsChecked>
         Sky
       </Switch>
 
-      <Switch colorScheme="blue" defaultChecked>
+      <Switch colorScheme="blue" defaultIsChecked>
         Blue
       </Switch>
 
-      <Switch colorScheme="indigo" defaultChecked>
+      <Switch colorScheme="indigo" defaultIsChecked>
         Indigo
       </Switch>
 
-      <Switch colorScheme="violet" defaultChecked>
+      <Switch colorScheme="violet" defaultIsChecked>
         Violet
       </Switch>
 
-      <Switch colorScheme="purple" defaultChecked>
+      <Switch colorScheme="purple" defaultIsChecked>
         Purple
       </Switch>
 
-      <Switch colorScheme="fuchsia" defaultChecked>
+      <Switch colorScheme="fuchsia" defaultIsChecked>
         Fuchsia
       </Switch>
     </Wrap>
@@ -171,7 +171,7 @@ export const isDisabled: Story = () => {
   return (
     <>
       <Switch isDisabled>disabled</Switch>
-      <Switch isDisabled defaultChecked>
+      <Switch isDisabled defaultIsChecked>
         disabled
       </Switch>
     </>
@@ -182,7 +182,7 @@ export const isReadonly: Story = () => {
   return (
     <>
       <Switch isReadOnly>read only</Switch>
-      <Switch isReadOnly defaultChecked>
+      <Switch isReadOnly defaultIsChecked>
         read only
       </Switch>
     </>

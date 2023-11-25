@@ -40,114 +40,114 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultChecked: Story = () => {
-  return <Radio defaultChecked>孫悟空</Radio>
+export const withdefaultIsChecked: Story = () => {
+  return <Radio defaultIsChecked>孫悟空</Radio>
 }
 
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <Radio colorScheme="primary" defaultChecked>
+      <Radio colorScheme="primary" defaultIsChecked>
         Primary
       </Radio>
 
-      <Radio colorScheme="secondary" defaultChecked>
+      <Radio colorScheme="secondary" defaultIsChecked>
         Secondary
       </Radio>
 
-      <Radio colorScheme="warning" defaultChecked>
+      <Radio colorScheme="warning" defaultIsChecked>
         Warning
       </Radio>
 
-      <Radio colorScheme="danger" defaultChecked>
+      <Radio colorScheme="danger" defaultIsChecked>
         Danger
       </Radio>
 
-      <Radio colorScheme="link" defaultChecked>
+      <Radio colorScheme="link" defaultIsChecked>
         Link
       </Radio>
 
-      <Radio colorScheme="gray" defaultChecked>
+      <Radio colorScheme="gray" defaultIsChecked>
         Gray
       </Radio>
 
-      <Radio colorScheme="zinc" defaultChecked>
+      <Radio colorScheme="zinc" defaultIsChecked>
         Zinc
       </Radio>
 
-      <Radio colorScheme="neutral" defaultChecked>
+      <Radio colorScheme="neutral" defaultIsChecked>
         Neutral
       </Radio>
 
-      <Radio colorScheme="stone" defaultChecked>
+      <Radio colorScheme="stone" defaultIsChecked>
         Stone
       </Radio>
 
-      <Radio colorScheme="red" defaultChecked>
+      <Radio colorScheme="red" defaultIsChecked>
         Red
       </Radio>
 
-      <Radio colorScheme="rose" defaultChecked>
+      <Radio colorScheme="rose" defaultIsChecked>
         Rose
       </Radio>
 
-      <Radio colorScheme="pink" defaultChecked>
+      <Radio colorScheme="pink" defaultIsChecked>
         Pink
       </Radio>
 
-      <Radio colorScheme="orange" defaultChecked>
+      <Radio colorScheme="orange" defaultIsChecked>
         Orange
       </Radio>
 
-      <Radio colorScheme="amber" defaultChecked>
+      <Radio colorScheme="amber" defaultIsChecked>
         Amber
       </Radio>
 
-      <Radio colorScheme="yellow" defaultChecked>
+      <Radio colorScheme="yellow" defaultIsChecked>
         Yellow
       </Radio>
 
-      <Radio colorScheme="lime" defaultChecked>
+      <Radio colorScheme="lime" defaultIsChecked>
         Lime
       </Radio>
 
-      <Radio colorScheme="green" defaultChecked>
+      <Radio colorScheme="green" defaultIsChecked>
         Green
       </Radio>
 
-      <Radio colorScheme="emerald" defaultChecked>
+      <Radio colorScheme="emerald" defaultIsChecked>
         Emerald
       </Radio>
 
-      <Radio colorScheme="teal" defaultChecked>
+      <Radio colorScheme="teal" defaultIsChecked>
         Teal
       </Radio>
 
-      <Radio colorScheme="cyan" defaultChecked>
+      <Radio colorScheme="cyan" defaultIsChecked>
         Cyan
       </Radio>
 
-      <Radio colorScheme="sky" defaultChecked>
+      <Radio colorScheme="sky" defaultIsChecked>
         Sky
       </Radio>
 
-      <Radio colorScheme="blue" defaultChecked>
+      <Radio colorScheme="blue" defaultIsChecked>
         Blue
       </Radio>
 
-      <Radio colorScheme="indigo" defaultChecked>
+      <Radio colorScheme="indigo" defaultIsChecked>
         Indigo
       </Radio>
 
-      <Radio colorScheme="violet" defaultChecked>
+      <Radio colorScheme="violet" defaultIsChecked>
         Violet
       </Radio>
 
-      <Radio colorScheme="purple" defaultChecked>
+      <Radio colorScheme="purple" defaultIsChecked>
         Purple
       </Radio>
 
-      <Radio colorScheme="fuchsia" defaultChecked>
+      <Radio colorScheme="fuchsia" defaultIsChecked>
         Fuchsia
       </Radio>
     </Wrap>
@@ -158,7 +158,7 @@ export const isDisabled: Story = () => {
   return (
     <>
       <Radio isDisabled>All Notifications</Radio>
-      <Radio isDisabled defaultChecked>
+      <Radio isDisabled defaultIsChecked>
         All Notifications
       </Radio>
 
@@ -174,7 +174,7 @@ export const isDisabled: Story = () => {
         isDisabled
         label="Which notifications would you like to receive?"
       >
-        <Radio defaultChecked>All Notifications</Radio>
+        <Radio defaultIsChecked>All Notifications</Radio>
       </FormControl>
 
       <FormControl
@@ -195,7 +195,7 @@ export const isReadonly: Story = () => {
   return (
     <>
       <Radio isReadOnly>All Notifications</Radio>
-      <Radio isReadOnly defaultChecked>
+      <Radio isReadOnly defaultIsChecked>
         All Notifications
       </Radio>
 
@@ -211,7 +211,7 @@ export const isReadonly: Story = () => {
         isReadOnly
         label="Which notifications would you like to receive?"
       >
-        <Radio defaultChecked>All Notifications</Radio>
+        <Radio defaultIsChecked>All Notifications</Radio>
       </FormControl>
 
       <FormControl
@@ -232,7 +232,7 @@ export const isInvalid: Story = () => {
   return (
     <>
       <Radio isInvalid>All Notifications</Radio>
-      <Radio isInvalid defaultChecked>
+      <Radio isInvalid defaultIsChecked>
         All Notifications
       </Radio>
 

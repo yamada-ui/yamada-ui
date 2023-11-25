@@ -48,7 +48,7 @@ export type UseRadioProps<Y extends string | number = string> =
      *
      * @default false
      */
-    defaultChecked?: boolean
+    defaultIsChecked?: boolean
     /**
      * If `true`, the radio will be checked.
      *
@@ -72,7 +72,7 @@ export const useRadio = <Y extends string | number = string>(
   const [isHovered, setHovered] = useState<boolean>(false)
   const [isActive, setActive] = useState<boolean>(false)
 
-  const [isChecked, setIsChecked] = useState<boolean>(!!props.defaultChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(!!props.defaultIsChecked)
 
   const isControlled = props.isChecked !== undefined
   const checked = isControlled ? (props.isChecked as boolean) : isChecked
@@ -286,7 +286,7 @@ export const Radio = forwardRef(
           "name",
           "value",
           "defaultValue",
-          "defaultChecked",
+          "defaultIsChecked",
           "isChecked",
           "onChange",
           "onBlur",

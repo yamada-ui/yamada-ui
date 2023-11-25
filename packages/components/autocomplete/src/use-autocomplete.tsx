@@ -725,7 +725,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
         }
       })
     },
-    [descendants, isMulti],
+    [descendants, isMulti, allowFree],
   )
 
   const onChange = useCallback(
@@ -755,7 +755,14 @@ export const useAutocomplete = <T extends string | string[] = string>({
       }
       rebirthOptions(false)
     },
-    [allowFree, onChangeDisplayValue, rebirthOptions, setValue],
+    [
+      allowFree,
+      onChangeDisplayValue,
+      rebirthOptions,
+      setValue,
+      descendants,
+      format,
+    ],
   )
 
   const onSelect = useCallback(() => {
@@ -924,7 +931,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (isOpen) onClose()
     },
-    [closeOnBlur, isHit, isOpen, allowFree, onClose],
+    [closeOnBlur, isHit, isOpen, inputValue, allowFree, onClose, onChange],
   )
 
   const onKeyDown = useCallback(
@@ -982,11 +989,13 @@ export const useAutocomplete = <T extends string | string[] = string>({
       action(ev)
     },
     [
+      allowFree,
       formControlProps,
       displayValue,
       inputValue,
       onOpen,
       isFocused,
+      isMulti,
       onFocusFirstOrSelected,
       onFocusNext,
       onFocusLastOrSelected,
@@ -1001,6 +1010,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       onClose,
       isEmptyValue,
       onDelete,
+      onChange,
     ],
   )
 

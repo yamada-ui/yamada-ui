@@ -320,7 +320,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     allowCreate?: boolean
     /**
-     * If `true`, enables the free input of autocomplete option.
+     * If `true`, enables the free input.
      */
     allowFree?: boolean
     /**

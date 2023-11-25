@@ -5,7 +5,7 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { PopoverProps } from "@yamada-ui/popover"
+import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { PropGetter, RequiredPropGetter, Dict } from "@yamada-ui/utils"
@@ -177,8 +177,9 @@ export const useMonthPicker = ({
   const { id } = rest
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const [containerProps, inputProps] = splitObject(
-    omitObject(rest as Dict, [
+  const [containerProps, inputProps] = splitObject<Dict, string>(
+    omitObject(rest, [
+      ...popoverProperties,
       "id",
       "value",
       "onChange",
@@ -237,6 +238,8 @@ export const useMonthPicker = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const onOpen = useCallback(() => {
+    console.trace("run")
+
     if (formControlProps.disabled || formControlProps.readOnly) return
 
     setIsOpen(true)
@@ -260,10 +263,8 @@ export const useMonthPicker = ({
 
       setValue(null)
       setInputValue(undefined)
-
-      if (allowInput && inputRef.current) inputRef.current.focus()
     },
-    [allowInput, setValue],
+    [setValue],
   )
 
   const onClick = useCallback(() => {
@@ -376,10 +377,9 @@ export const useMonthPicker = ({
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [containerProps, formControlProps, onBlur, onClick, onFocus, rest],
+    [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getPopoverProps = useCallback(
@@ -412,10 +412,11 @@ export const useMonthPicker = ({
         style,
         "data-active": dataAttr(isOpen),
         "aria-expanded": dataAttr(isOpen),
+        onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
       }
     },
-    [allowInput, formControlProps, isOpen, rest, onKeyDown],
+    [allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
   )
 
   const getInputProps: PropGetter = useCallback(

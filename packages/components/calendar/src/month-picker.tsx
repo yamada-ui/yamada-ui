@@ -82,7 +82,6 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    position: "relative",
     w: "100%",
     h: "fit-content",
     color,
@@ -97,23 +96,28 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
           __css={css}
           {...getContainerProps(containerProps)}
         >
-          <DatePickerField
-            className="ui-month-picker__field"
-            {...getFieldProps({ h, minH }, ref)}
-            inputProps={getInputProps(inputProps)}
-          />
+          <ui.div
+            className="ui-month-picker__inner"
+            __css={{ position: "relative", ...styles.inner }}
+          >
+            <DatePickerField
+              className="ui-month-picker__field"
+              {...getFieldProps({ h, minH }, ref)}
+              inputProps={getInputProps(inputProps)}
+            />
 
-          {isClearable && value ? (
-            <DatePickerClearIcon
-              className="ui-month-picker__icon--clear"
-              {...getIconProps({ clear: true, ...clearIconProps })}
-            />
-          ) : (
-            <DatePickerIcon
-              className="ui-month-picker__icon"
-              {...getIconProps({ clear: false, ...iconProps })}
-            />
-          )}
+            {isClearable && value ? (
+              <DatePickerClearIcon
+                className="ui-month-picker__icon--clear"
+                {...getIconProps({ clear: true, ...clearIconProps })}
+              />
+            ) : (
+              <DatePickerIcon
+                className="ui-month-picker__icon"
+                {...getIconProps({ clear: false, ...iconProps })}
+              />
+            )}
+          </ui.div>
 
           <PopoverContent
             className="ui-month-picker__popover"

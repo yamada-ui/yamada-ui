@@ -10,7 +10,7 @@ import {
   useFocusOnPointerDown,
 } from "@yamada-ui/use-focus"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
-import { usePopper } from "@yamada-ui/use-popper"
+import { usePopper, popperProperties } from "@yamada-ui/use-popper"
 import type { DOMAttributes, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
@@ -22,6 +22,27 @@ import {
 } from "@yamada-ui/utils"
 import type { FC, PropsWithChildren, RefObject } from "react"
 import { useCallback, useEffect, useRef } from "react"
+
+export const popoverProperties: any[] = [
+  ...popperProperties,
+  "isOpen",
+  "defaultIsOpen",
+  "onOpen",
+  "onClose",
+  "initialFocusRef",
+  "restoreFocus",
+  "autoFocus",
+  "closeOnBlur",
+  "closeOnEsc",
+  "closeOnButton",
+  "trigger",
+  "openDelay",
+  "closeDelay",
+  "isLazy",
+  "lazyBehavior",
+  "animation",
+  "duration",
+]
 
 type PopoverOptions = {
   /**

@@ -147,7 +147,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    position: "relative",
     w: "100%",
     h: "fit-content",
     color,
@@ -165,21 +164,26 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
             __css={css}
             {...getContainerProps(containerProps)}
           >
-            <PopoverTrigger>
-              <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
-            </PopoverTrigger>
+            <ui.div
+              className="ui-select__inner"
+              __css={{ position: "relative", ...styles.inner }}
+            >
+              <PopoverTrigger>
+                <SelectField h={h} minH={minH} {...getFieldProps({}, ref)}>
+                  <SelectIcon {...iconProps} {...formControlProps} />
+                </SelectField>
+              </PopoverTrigger>
 
-            <SelectIcon {...iconProps} {...formControlProps} />
+              {!isEmpty ? (
+                <SelectList {...listProps}>
+                  {!!placeholder && placeholderInOptions ? (
+                    <Option>{placeholder}</Option>
+                  ) : null}
 
-            {!isEmpty ? (
-              <SelectList {...listProps}>
-                {!!placeholder && placeholderInOptions ? (
-                  <Option>{placeholder}</Option>
-                ) : null}
-
-                {children ?? computedChildren}
-              </SelectList>
-            ) : null}
+                  {children ?? computedChildren}
+                </SelectList>
+              ) : null}
+            </ui.div>
           </ui.div>
         </Popover>
       </SelectProvider>

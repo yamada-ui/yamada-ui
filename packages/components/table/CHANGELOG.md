@@ -1,5 +1,22 @@
 # @yamada-ui/table
 
+## 0.5.1
+
+### Patch Changes
+
+- [`27434dec`](https://github.com/hirotomoyamada/yamada-ui/commit/27434dec6704dfb437514e4b309ba4e4a765a9df) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended `Column` type with `UIColumn`.
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`910651d8`](https://github.com/hirotomoyamada/yamada-ui/commit/910651d850fd3901200e54a3e863f10ae2c5659a), [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a), [`7ae02003`](https://github.com/hirotomoyamada/yamada-ui/commit/7ae020036f56eeb764202d7d2818ebf01d83b73a), [`71a6c742`](https://github.com/hirotomoyamada/yamada-ui/commit/71a6c74212761a5b1e25450cf317f3db59bc6106)]:
+  - @yamada-ui/select@0.5.6
+  - @yamada-ui/use-controllable-state@0.3.2
+  - @yamada-ui/native-table@0.4.11
+  - @yamada-ui/pagination@0.4.19
+  - @yamada-ui/checkbox@0.4.3
+  - @yamada-ui/icon@0.3.17
+  - @yamada-ui/core@0.12.7
+
 ## 0.5.0
 
 ### Minor Changes

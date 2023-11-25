@@ -1,5 +1,18 @@
 # @yamada-ui/tooltip
 
+## 0.4.16
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`c020084a`](https://github.com/hirotomoyamada/yamada-ui/commit/c020084a438549edfd89380a90667ffc03e6e6aa), [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a)]:
+  - @yamada-ui/use-popper@0.4.17
+  - @yamada-ui/transitions@0.3.19
+  - @yamada-ui/motion@0.4.17
+  - @yamada-ui/portal@0.3.7
+  - @yamada-ui/core@0.12.7
+
 ## 0.4.15
 
 ### Patch Changes

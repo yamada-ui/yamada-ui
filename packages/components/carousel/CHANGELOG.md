@@ -1,5 +1,19 @@
 # @yamada-ui/carousel
 
+## 0.3.21
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a)]:
+  - @yamada-ui/use-controllable-state@0.3.2
+  - @yamada-ui/button@0.3.19
+  - @yamada-ui/icon@0.3.17
+  - @yamada-ui/use-token@0.3.11
+  - @yamada-ui/use-value@0.2.17
+  - @yamada-ui/core@0.12.7
+
 ## 0.3.20
 
 ### Patch Changes

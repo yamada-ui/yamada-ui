@@ -1,5 +1,17 @@
 # @yamada-ui/input
 
+## 0.3.22
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a), [`7ae02003`](https://github.com/hirotomoyamada/yamada-ui/commit/7ae020036f56eeb764202d7d2818ebf01d83b73a)]:
+  - @yamada-ui/form-control@0.3.20
+  - @yamada-ui/file-input@0.4.13
+  - @yamada-ui/use-token@0.3.11
+  - @yamada-ui/core@0.12.7
+
 ## 0.3.21
 
 ### Patch Changes

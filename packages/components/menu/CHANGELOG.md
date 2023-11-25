@@ -1,5 +1,19 @@
 # @yamada-ui/menu
 
+## 0.3.25
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a), [`1f57bceb`](https://github.com/hirotomoyamada/yamada-ui/commit/1f57bceb3da9fc2e8316d0d782b93b4e26e39598)]:
+  - @yamada-ui/use-controllable-state@0.3.2
+  - @yamada-ui/transitions@0.3.19
+  - @yamada-ui/use-descendant@0.2.6
+  - @yamada-ui/use-clickable@0.3.6
+  - @yamada-ui/popover@0.3.24
+  - @yamada-ui/core@0.12.7
+
 ## 0.3.24
 
 ### Patch Changes

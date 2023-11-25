@@ -1,5 +1,11 @@
 # @yamada-ui/use-latest-ref
 
+## 0.2.1
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
 ## 0.2.0
 
 ### Minor Changes

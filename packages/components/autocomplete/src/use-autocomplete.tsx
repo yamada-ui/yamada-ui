@@ -5,7 +5,7 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { PopoverProps } from "@yamada-ui/popover"
+import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
@@ -361,14 +361,15 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const { id } = rest
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const [containerProps, inputProps] = splitObject(
-    omitObject(rest as Dict, [
+  const [containerProps, inputProps] = splitObject<Dict, string>(
+    omitObject<Dict, string>(rest, [
+      ...popoverProperties,
       "id",
       "value",
       "defaultValue",
       "onChange",
-      "month",
-      "onChangeMonth",
+      "onCreate",
+      "onSearch",
     ]),
     layoutStylesProperties,
   )

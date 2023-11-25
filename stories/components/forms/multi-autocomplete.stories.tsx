@@ -195,6 +195,7 @@ export const withAllowFree: Story = () => {
       placeholder="キャラクターを選択"
       items={items}
       allowFree
+      onChange={(values) => console.log("new values", values)}
     />
   )
 }

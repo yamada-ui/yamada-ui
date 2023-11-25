@@ -183,7 +183,12 @@ export const withAllowFree: Story = () => {
   ]
 
   return (
-    <Autocomplete placeholder="キャラクターを選択" items={items} allowFree />
+    <Autocomplete
+      placeholder="キャラクターを選択"
+      items={items}
+      allowFree
+      onChange={(value) => console.log("new value:", value)}
+    />
   )
 }
 

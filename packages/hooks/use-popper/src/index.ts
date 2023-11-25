@@ -11,6 +11,20 @@ import type { PropGetter } from "@yamada-ui/utils"
 import { mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef } from "react"
 
+export const popperProperties: any[] = [
+  "enabled",
+  "offset",
+  "gutter",
+  "preventOverflow",
+  "flip",
+  "matchWidth",
+  "boundary",
+  "eventListeners",
+  "strategy",
+  "placement",
+  "modifiers",
+]
+
 export type UsePopperProps = {
   /**
    * Whether the popper.js should be enabled.

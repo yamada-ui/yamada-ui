@@ -1,5 +1,15 @@
 # @yamada-ui/button
 
+## 0.3.19
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a)]:
+  - @yamada-ui/loading@0.5.5
+  - @yamada-ui/core@0.12.7
+
 ## 0.3.18
 
 ### Patch Changes

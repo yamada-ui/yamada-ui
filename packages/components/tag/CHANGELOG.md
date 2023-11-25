@@ -1,5 +1,16 @@
 # @yamada-ui/tag
 
+## 0.4.1
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- Updated dependencies [[`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a)]:
+  - @yamada-ui/use-clickable@0.3.6
+  - @yamada-ui/icon@0.3.17
+  - @yamada-ui/core@0.12.7
+
 ## 0.4.0
 
 ### Minor Changes

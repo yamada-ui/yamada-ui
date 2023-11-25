@@ -1,5 +1,16 @@
 # @yamada-ui/form-control
 
+## 0.3.20
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- [#385](https://github.com/hirotomoyamada/yamada-ui/pull/385) [`7ae02003`](https://github.com/hirotomoyamada/yamada-ui/commit/7ae020036f56eeb764202d7d2818ebf01d83b73a) Thanks [@illionillion](https://github.com/illionillion)! - Fixed `null coalescing assignment operator`.
+
+- Updated dependencies []:
+  - @yamada-ui/core@0.12.7
+
 ## 0.3.19
 
 ### Patch Changes

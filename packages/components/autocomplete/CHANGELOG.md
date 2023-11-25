@@ -1,5 +1,30 @@
 # @yamada-ui/autocomplete
 
+## 0.6.0
+
+### Minor Changes
+
+- [#383](https://github.com/hirotomoyamada/yamada-ui/pull/383) [`efa08fc0`](https://github.com/hirotomoyamada/yamada-ui/commit/efa08fc0d8d696a62963287c42d22fdc311c58dc) Thanks [@illionillion](https://github.com/illionillion)! - Added `allowFree` props to `Autocomplete`.
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- [`e5ce7d2f`](https://github.com/hirotomoyamada/yamada-ui/commit/e5ce7d2f96fbb533f5d1fc1a99455b30786b28b4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `Popover` component were not displayed correctly under certain conditions.
+
+- [`bda4f63c`](https://github.com/hirotomoyamada/yamada-ui/commit/bda4f63c95e0e089401e7bbd0e80cb00386b9fcc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Split props with `popoverProperties`.
+
+- Updated dependencies [[`910651d8`](https://github.com/hirotomoyamada/yamada-ui/commit/910651d850fd3901200e54a3e863f10ae2c5659a), [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a), [`7ae02003`](https://github.com/hirotomoyamada/yamada-ui/commit/7ae020036f56eeb764202d7d2818ebf01d83b73a), [`71a6c742`](https://github.com/hirotomoyamada/yamada-ui/commit/71a6c74212761a5b1e25450cf317f3db59bc6106), [`1f57bceb`](https://github.com/hirotomoyamada/yamada-ui/commit/1f57bceb3da9fc2e8316d0d782b93b4e26e39598)]:
+  - @yamada-ui/select@0.5.6
+  - @yamada-ui/use-controllable-state@0.3.2
+  - @yamada-ui/form-control@0.3.20
+  - @yamada-ui/use-outside-click@0.2.6
+  - @yamada-ui/use-descendant@0.2.6
+  - @yamada-ui/use-clickable@0.3.6
+  - @yamada-ui/popover@0.3.24
+  - @yamada-ui/icon@0.3.17
+  - @yamada-ui/core@0.12.7
+
 ## 0.5.5
 
 ### Patch Changes

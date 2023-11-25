@@ -1,5 +1,20 @@
 # @yamada-ui/notice
 
+## 0.5.8
+
+### Patch Changes
+
+- [#384](https://github.com/hirotomoyamada/yamada-ui/pull/384) [`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a) Thanks [@illionillion](https://github.com/illionillion)! - Formatted code.
+
+- [#385](https://github.com/hirotomoyamada/yamada-ui/pull/385) [`7ae02003`](https://github.com/hirotomoyamada/yamada-ui/commit/7ae020036f56eeb764202d7d2818ebf01d83b73a) Thanks [@illionillion](https://github.com/illionillion)! - Fixed `null coalescing assignment operator`.
+
+- Updated dependencies [[`65223fae`](https://github.com/hirotomoyamada/yamada-ui/commit/65223faeb235642c75285a9fe46c893478ef609a)]:
+  - @yamada-ui/close-button@0.3.18
+  - @yamada-ui/motion@0.4.17
+  - @yamada-ui/portal@0.3.7
+  - @yamada-ui/alert@0.5.13
+  - @yamada-ui/core@0.12.7
+
 ## 0.5.7
 
 ### Patch Changes

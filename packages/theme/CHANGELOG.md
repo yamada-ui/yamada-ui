@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.11.16
+
+### Patch Changes
+
+- [`67224485`](https://github.com/hirotomoyamada/yamada-ui/commit/67224485bdecb11eec23ecbe915a43904e266667) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed `EditablePreview` height.
+
 ## 0.11.15
 
 ### Patch Changes

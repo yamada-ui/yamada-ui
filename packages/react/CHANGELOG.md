@@ -1,5 +1,15 @@
 # @yamada-ui/react
 
+## 0.8.30
+
+### Patch Changes
+
+- Updated dependencies [[`67224485`](https://github.com/hirotomoyamada/yamada-ui/commit/67224485bdecb11eec23ecbe915a43904e266667)]:
+  - @yamada-ui/theme@0.11.16
+  - @yamada-ui/providers@0.9.13
+  - @yamada-ui/theme-tools@0.2.25
+  - @yamada-ui/use-media-query@0.2.28
+
 ## 0.8.29
 
 ### Patch Changes

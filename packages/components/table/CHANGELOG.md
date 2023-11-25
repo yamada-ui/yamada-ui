@@ -1,5 +1,11 @@
 # @yamada-ui/table
 
+## 0.5.2
+
+### Patch Changes
+
+- [`65236225`](https://github.com/hirotomoyamada/yamada-ui/commit/65236225f25422cc0e4791d686fbb6f2747856ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated column type definitions.
+
 ## 0.5.1
 
 ### Patch Changes

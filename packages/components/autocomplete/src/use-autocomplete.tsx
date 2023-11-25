@@ -960,6 +960,11 @@ export const useAutocomplete = <T extends string | string[] = string>({
           ? onSelect
           : !isOpen
           ? funcAll(onOpen, onFocusFirstOrSelected)
+          : allowFree && isMulti
+          ? () => {
+              if (inputValue) onChange(inputValue)
+              setFocusedIndex(0)
+            }
           : undefined,
         Home: isOpen ? onFocusFirst : undefined,
         End: isOpen ? onFocusLast : undefined,

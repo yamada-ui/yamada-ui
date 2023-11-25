@@ -307,6 +307,10 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     allowCreate?: boolean
     /**
+     * If `true`, enables the free input.
+     */
+    allowFree?: boolean
+    /**
      * If `true`, the selected item(s) will be excluded from the list.
      *
      * @default false
@@ -345,6 +349,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   closeOnBlur = true,
   closeOnEsc = true,
   allowCreate = false,
+  allowFree = false,
   insertPositionItem = "first",
   emptyMessage = "No results found",
   format = defaultFormat,
@@ -692,6 +697,11 @@ export const useAutocomplete = <T extends string | string[] = string>({
         .filter(({ node }) => node.dataset.value === newValue)
         .map(({ node }) => node.textContent ?? "")
 
+      if (allowFree && selectedValues.length === 0) {
+        selectedValues.push(newValue)
+        setInputValue("")
+      }
+
       setDisplayValue((prev) => {
         if (!isMulti) {
           return selectedValues[0] as T
@@ -715,7 +725,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
         }
       })
     },
-    [descendants, isMulti],
+    [descendants, isMulti, allowFree],
   )
 
   const onChange = useCallback(
@@ -733,13 +743,26 @@ export const useAutocomplete = <T extends string | string[] = string>({
           }
         }
       })
-
+      const isHit =
+        descendants
+          .values()
+          .filter(({ node }) =>
+            format(node.textContent ?? "").includes(newValue),
+          ).length > 0
       onChangeDisplayValue(newValue)
-
-      setInputValue("")
+      if (!allowFree || isHit) {
+        setInputValue("")
+      }
       rebirthOptions(false)
     },
-    [onChangeDisplayValue, rebirthOptions, setValue],
+    [
+      allowFree,
+      onChangeDisplayValue,
+      rebirthOptions,
+      setValue,
+      descendants,
+      format,
+    ],
   )
 
   const onSelect = useCallback(() => {
@@ -900,11 +923,15 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      setInputValue("")
+      if (allowFree && !!inputValue) {
+        onChange(inputValue)
+      } else {
+        setInputValue("")
+      }
 
       if (isOpen) onClose()
     },
-    [closeOnBlur, isHit, isOpen, onClose],
+    [closeOnBlur, isHit, isOpen, inputValue, allowFree, onClose, onChange],
   )
 
   const onKeyDown = useCallback(
@@ -940,6 +967,11 @@ export const useAutocomplete = <T extends string | string[] = string>({
           ? onSelect
           : !isOpen
           ? funcAll(onOpen, onFocusFirstOrSelected)
+          : allowFree && isMulti
+          ? () => {
+              if (inputValue) onChange(inputValue)
+              setFocusedIndex(0)
+            }
           : undefined,
         Home: isOpen ? onFocusFirst : undefined,
         End: isOpen ? onFocusLast : undefined,
@@ -957,11 +989,13 @@ export const useAutocomplete = <T extends string | string[] = string>({
       action(ev)
     },
     [
+      allowFree,
       formControlProps,
       displayValue,
       inputValue,
       onOpen,
       isFocused,
+      isMulti,
       onFocusFirstOrSelected,
       onFocusNext,
       onFocusLastOrSelected,
@@ -976,6 +1010,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       onClose,
       isEmptyValue,
       onDelete,
+      onChange,
     ],
   )
 
@@ -1003,7 +1038,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   ])
 
   useUpdateEffect(() => {
-    if (isOpen) return
+    if (isOpen || allowFree) return
 
     setFocusedIndex(-1)
     setInputValue("")
@@ -1081,6 +1116,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     omitSelectedValues,
     closeOnSelect,
     allowCreate,
+    allowFree,
     emptyMessage,
     isOpen,
     isAllSelected,

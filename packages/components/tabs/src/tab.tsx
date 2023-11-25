@@ -1,5 +1,7 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { useClickable, UseClickableProps } from "@yamada-ui/use-clickable"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type { UseClickableProps } from "@yamada-ui/use-clickable"
+import { useClickable } from "@yamada-ui/use-clickable"
 import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import { useTabsContext, useTabsDescendant } from "./tabs"
 

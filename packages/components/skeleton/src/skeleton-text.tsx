@@ -1,7 +1,9 @@
-import { ui, forwardRef, CSSUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
-import { Skeleton, SkeletonProps } from "./"
+import type { SkeletonProps } from "./"
+import { Skeleton } from "./"
 
 type SkeletonTextOptions = {
   /**

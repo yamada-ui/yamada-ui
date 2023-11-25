@@ -1,12 +1,7 @@
-import {
-  ui,
-  useMultiComponentStyle,
-  omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
-} from "@yamada-ui/core"
-import { MotionReorder, HTMLMotionProps } from "@yamada-ui/motion"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import type { HTMLMotionProps } from "@yamada-ui/motion"
+import { MotionReorder } from "@yamada-ui/motion"
 import {
   createContext,
   cx,

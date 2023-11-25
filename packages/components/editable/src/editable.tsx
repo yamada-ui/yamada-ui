@@ -1,8 +1,4 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
@@ -10,17 +6,23 @@ import {
   CSS,
 } from "@yamada-ui/core"
 import {
-  FormControlOptions,
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useFocusOnPointerDown } from "@yamada-ui/use-focus"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
   omitObject,
-  PropGetter,
   runIfFunc,
   useCallbackRef,
   useSafeLayoutEffect,
@@ -30,16 +32,8 @@ import {
   mergeRefs,
   pickObject,
 } from "@yamada-ui/utils"
-import {
-  ChangeEvent,
-  FocusEvent,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  KeyboardEvent,
-} from "react"
+import type { ChangeEvent, FocusEvent, ReactNode, KeyboardEvent } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export type UseEditableProps = FormControlOptions & {
   /**

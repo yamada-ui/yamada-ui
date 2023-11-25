@@ -1,19 +1,15 @@
+import type { HTMLUIProps, ThemeProps, ComponentArgs } from "@yamada-ui/core"
+import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  ui,
-  useMultiComponentStyle,
-  omitThemeProps,
-  HTMLUIProps,
-  ThemeProps,
-  ComponentArgs,
-} from "@yamada-ui/core"
-import {
-  FormControlOptions,
   useFormControl,
   useFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
-import { AnimatePresence, motion, SVGMotionProps } from "@yamada-ui/motion"
+import type { SVGMotionProps } from "@yamada-ui/motion"
+import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   omitObject,
@@ -21,16 +17,14 @@ import {
   useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
-  PropGetter,
   handlerAll,
   dataAttr,
   mergeRefs,
   funcAll,
 } from "@yamada-ui/utils"
-import {
+import type {
   ChangeEvent,
   ChangeEventHandler,
-  cloneElement,
   CSSProperties,
   FC,
   FocusEventHandler,
@@ -38,13 +32,16 @@ import {
   KeyboardEvent,
   ReactElement,
   SyntheticEvent,
+  ForwardedRef,
+  Ref,
+} from "react"
+import {
+  cloneElement,
   useCallback,
   useEffect,
   useRef,
   useState,
   forwardRef,
-  ForwardedRef,
-  Ref,
 } from "react"
 import { useCheckboxGroupContext } from "./checkbox-group"
 

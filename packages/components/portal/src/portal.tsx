@@ -1,4 +1,4 @@
-import { ReactNode, RefObject } from "react"
+import type { ReactNode, RefObject } from "react"
 import { ContainerPortal, DefaultPortal } from "./"
 
 export type PortalProps = {

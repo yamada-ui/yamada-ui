@@ -5,7 +5,8 @@ import {
   mergeRefs,
   useSafeLayoutEffect,
 } from "@yamada-ui/utils"
-import { Provider, RefCallback, useRef, useState } from "react"
+import type { Provider, RefCallback } from "react"
+import { useRef, useState } from "react"
 
 const sortNodes = (nodes: Node[]) =>
   nodes.sort((a, b) => {

@@ -1,15 +1,17 @@
-import { useCheckbox, UseCheckboxProps } from "@yamada-ui/checkbox"
+import type { UseCheckboxProps } from "@yamada-ui/checkbox"
+import { useCheckbox } from "@yamada-ui/checkbox"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   omitThemeProps,
-  HTMLUIProps,
-  ThemeProps,
   useMultiComponentStyle,
 } from "@yamada-ui/core"
-import { motion, MotionTransition } from "@yamada-ui/motion"
+import type { MotionTransition } from "@yamada-ui/motion"
+import { motion } from "@yamada-ui/motion"
 import { cx, dataAttr, omitObject } from "@yamada-ui/utils"
-import { cloneElement, InputHTMLAttributes, ReactElement } from "react"
+import type { InputHTMLAttributes, ReactElement } from "react"
+import { cloneElement } from "react"
 
 export type SwitchIconProps = {
   isChecked?: boolean

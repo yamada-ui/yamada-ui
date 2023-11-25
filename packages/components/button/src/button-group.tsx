@@ -1,10 +1,5 @@
-import {
-  ui,
-  forwardRef,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
 import { useMemo } from "react"
 

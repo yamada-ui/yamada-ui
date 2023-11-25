@@ -1,4 +1,5 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { useClickable } from "@yamada-ui/use-clickable"
 import {
   ariaAttr,
@@ -8,14 +9,8 @@ import {
   mergeRefs,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import {
-  FC,
-  FocusEvent,
-  MouseEvent,
-  ReactElement,
-  useCallback,
-  useRef,
-} from "react"
+import type { FC, FocusEvent, MouseEvent, ReactElement } from "react"
+import { useCallback, useRef } from "react"
 import { useMenu, useMenuDescendant } from "./menu"
 
 const isTargetMenuItem = (target: EventTarget | null) => {

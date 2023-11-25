@@ -1,22 +1,23 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
   Token,
 } from "@yamada-ui/core"
+import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, omitObject, dataAttr, handlerAll } from "@yamada-ui/utils"
-import { ComponentPropsWithoutRef, FC, useMemo } from "react"
-import { PaginationItem, PaginationItemProps } from "./pagination-item"
-import {
-  PaginationProvider,
-  usePagination,
-  UsePaginationProps,
-} from "./use-pagination"
+import type { ComponentPropsWithoutRef, FC } from "react"
+import { useMemo } from "react"
+import type { PaginationItemProps } from "./pagination-item"
+import { PaginationItem } from "./pagination-item"
+import type { UsePaginationProps } from "./use-pagination"
+import { PaginationProvider, usePagination } from "./use-pagination"
 
 type PaginationOptions = {
   /**

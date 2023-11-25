@@ -1,15 +1,18 @@
-import { CSSUIObject } from "@yamada-ui/core"
-import { Icon, ChevronIcon, IconProps } from "@yamada-ui/icon"
+import type { CSSUIObject } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
+import { Icon, ChevronIcon } from "@yamada-ui/icon"
+import type { TableHeadProps as NativeTableHeadProps } from "@yamada-ui/native-table"
 import {
   Thead as NativeThead,
-  TableHeadProps as NativeTableHeadProps,
   Tr,
   Th,
   useTableStyles,
 } from "@yamada-ui/native-table"
 import { runIfFunc, handlerAll, cx } from "@yamada-ui/utils"
-import { FC, useMemo } from "react"
-import { useTableContext, render, SortDirection, Column } from "./use-table"
+import type { FC } from "react"
+import { useMemo } from "react"
+import type { SortDirection, Column } from "./use-table"
+import { useTableContext, render } from "./use-table"
 
 export type TableHeadProps = NativeTableHeadProps
 

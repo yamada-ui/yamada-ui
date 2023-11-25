@@ -1,4 +1,5 @@
-import { useColorMode, useTheme, Theme } from "@yamada-ui/core"
+import type { Theme } from "@yamada-ui/core"
+import { useColorMode, useTheme } from "@yamada-ui/core"
 import {
   getMemoizedObject as get,
   isArray,

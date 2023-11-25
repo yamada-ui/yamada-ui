@@ -1,9 +1,5 @@
-import {
-  CSSUIObject,
-  CSSUIProps,
-  forwardRef,
-  HTMLUIProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
 import { useSelectContext, useSelectList } from "./use-select"

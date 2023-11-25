@@ -1,9 +1,7 @@
+import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
-  ThemeProps,
-  CSSUIObject,
   useComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"

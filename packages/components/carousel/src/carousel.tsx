@@ -1,13 +1,15 @@
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
+import type {
   HTMLUIProps,
   ThemeProps,
   CSSUIObject,
   Token,
   CSSUIProps,
+} from "@yamada-ui/core"
+import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
 } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
@@ -19,19 +21,19 @@ import {
   omitChildren,
   pickChildren,
 } from "@yamada-ui/utils"
-import { cloneElement, FC } from "react"
+import type { FC } from "react"
+import { cloneElement } from "react"
+import type { UseCarouselProps } from "./use-carousel"
 import {
   CarouselProvider,
   useCarousel,
   useCarouselContext,
-  UseCarouselProps,
 } from "./use-carousel"
+import type { CarouselControlProps, CarouselIndicatorsProps } from "./"
 import {
   CarouselControlNext,
   CarouselControlPrev,
-  CarouselControlProps,
   CarouselIndicators,
-  CarouselIndicatorsProps,
   CarouselSlide,
 } from "./"
 

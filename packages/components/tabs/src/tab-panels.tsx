@@ -1,4 +1,5 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { createContext, cx, getValidChildren } from "@yamada-ui/utils"
 import { createElement } from "react"
 import { useTabsContext } from "./tabs"

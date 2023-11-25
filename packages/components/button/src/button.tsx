@@ -1,22 +1,15 @@
+import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
-  ThemeProps,
-  CSSUIObject,
   useComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { Loading as LoadingIcon, LoadingProps } from "@yamada-ui/loading"
+import type { LoadingProps } from "@yamada-ui/loading"
+import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { cx, useMergeRefs, merge, dataAttr } from "@yamada-ui/utils"
-import {
-  ElementType,
-  FC,
-  ReactElement,
-  useCallback,
-  useMemo,
-  useState,
-} from "react"
+import type { ElementType, FC, ReactElement } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useButtonGroup } from "./button-group"
 
 type ButtonOptions = {

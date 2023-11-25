@@ -1,16 +1,19 @@
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  Token,
+} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   useComponentStyle,
-  Token,
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
-import { ReactNode, useMemo } from "react"
+import type { ReactNode } from "react"
+import { useMemo } from "react"
 
 type IndicatorOptions = {
   children: ReactNode

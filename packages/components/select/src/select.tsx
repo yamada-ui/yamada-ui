@@ -1,25 +1,26 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { cx, getValidChildren } from "@yamada-ui/utils"
-import { ReactElement } from "react"
-import { SelectIcon, SelectIconProps } from "./select-icon"
-import { SelectList, SelectListProps } from "./select-list"
+import type { ReactElement } from "react"
+import type { SelectIconProps } from "./select-icon"
+import { SelectIcon } from "./select-icon"
+import type { SelectListProps } from "./select-list"
+import { SelectList } from "./select-list"
+import type { UseSelectProps } from "./use-select"
 import {
   useSelect,
-  UseSelectProps,
   SelectDescendantsContextProvider,
   SelectProvider,
   useSelectContext,
 } from "./use-select"
-import { OptionGroup, Option, OptionProps } from "./"
+import type { OptionProps } from "./"
+import { OptionGroup, Option } from "./"
 
 type SelectBaseItem = Omit<OptionProps, "value" | "children"> & {
   label?: string

@@ -1,18 +1,21 @@
+import type {
+  HTMLUIProps,
+  ThemeProps,
+  CSSUIObject,
+  AlertStatuses,
+} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
-  ThemeProps,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
   useTheme,
-  AlertStatuses,
 } from "@yamada-ui/core"
 import { InfoIcon, WarningIcon, CheckIcon } from "@yamada-ui/icon"
-import { Loading, LoadingProps } from "@yamada-ui/loading"
+import type { LoadingProps } from "@yamada-ui/loading"
+import { Loading } from "@yamada-ui/loading"
 import { createContext, cx } from "@yamada-ui/utils"
-import { FC } from "react"
+import type { FC } from "react"
 
 const defaultStatuses = {
   info: { icon: InfoIcon, colorScheme: "info" },

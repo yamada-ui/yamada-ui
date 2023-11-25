@@ -1,12 +1,11 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -15,9 +14,9 @@ import {
   handlerAll,
   dataAttr,
   ariaAttr,
-  Dict,
 } from "@yamada-ui/utils"
-import { useState, useId, ReactNode, FocusEventHandler } from "react"
+import type { ReactNode, FocusEventHandler } from "react"
+import { useState, useId } from "react"
 
 export type FormControlOptions = {
   /**

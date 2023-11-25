@@ -1,16 +1,14 @@
-import { ui, CSSUIObject, ThemeConfig } from "@yamada-ui/core"
-import {
-  AnimatePresence,
-  motion,
-  useIsPresent,
-  MotionVariants,
-  MotionStyle,
-} from "@yamada-ui/motion"
+import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
+import type { MotionVariants, MotionStyle } from "@yamada-ui/motion"
+import { AnimatePresence, motion, useIsPresent } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import { cx, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
-import { FC, memo, useEffect, useState, useSyncExternalStore } from "react"
-import { noticeStore, NoticeOptions } from "./notice"
+import type { FC } from "react"
+import { memo, useEffect, useState, useSyncExternalStore } from "react"
+import type { NoticeOptions } from "./notice"
+import { noticeStore } from "./notice"
 
 export type NoticeProviderProps = Omit<
   Required<ThemeConfig>["notice"],

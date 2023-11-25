@@ -1,5 +1,6 @@
-import { forwardRef, CSSUIProps } from "@yamada-ui/core"
-import { IconProps } from "@yamada-ui/icon"
+import type { CSSUIProps } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"

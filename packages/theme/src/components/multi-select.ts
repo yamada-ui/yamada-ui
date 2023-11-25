@@ -17,7 +17,6 @@ export const MultiSelect: ComponentMultiStyle = mergeStyle(Select, {
       },
       _focusVisible: {
         boxShadow: "outline",
-        bg: "rgba(0, 0, 0, 0.14)",
       },
     },
   },

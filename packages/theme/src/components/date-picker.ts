@@ -63,7 +63,6 @@ export const DatePicker: ComponentMultiStyle = {
       },
       _focusVisible: {
         boxShadow: "outline",
-        bg: "rgba(0, 0, 0, 0.14)",
       },
     },
     popover: {

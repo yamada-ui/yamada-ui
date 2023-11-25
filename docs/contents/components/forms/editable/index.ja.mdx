@@ -1,12 +1,177 @@
 ---
 title: Editable
-description: このページは現在作成中です。
+description: "`Editable`は、インラインで編集可能なテキスト入力を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/editable"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Editable, EditableInput, EditablePreview, EditableTextarea } from "@yamada-ui/react"
+```
+
+- `Editable`: 子要素(`EditableInput`, `EditableTextarea`, `EditablePreview`)を制御するラッパーコンポーネントです。
+- `EditablePreview`: テキスト入力の値を表示するコンポーネントです。
+- `EditableInput`: テキスト入力を取得するコンポーネントです。`EditablePreview`がクリックまたはフォーカスすると表示されます。
+- `EditableTextarea`: 複数行のテキスト入力を取得するコンポーネントです。`EditablePreview`がクリックまたはフォーカスすると表示されます。
+
+## 使い方
+
+```tsx
+<Editable defaultValue="オッス！オラ悟空！">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+複数行の場合は、`EditableTextarea`を使用します。
+
+```tsx
+<Editable
+  defaultValue={`私の戦闘力は530000です。\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`}
+>
+  <EditablePreview />
+  <EditableTextarea h="2lh" />
+</Editable>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx
+<Editable focusBorderColor="green.500" defaultValue="custom border color">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### 無効化する
+
+無効化する場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<Editable isDisabled defaultValue="your email address">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx
+<Editable isReadOnly defaultValue="your email address">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### 無効な入力にする
+
+```tsx
+<Editable isInvalid defaultValue="your email address">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### 制御する
+
+```tsx functional=true
+const CustomControls = () => {
+  const { isEditing, getSubmitProps, getCancelProps, getEditProps } = useEditableControl()
+
+  return isEditing ? (
+    <ButtonGroup size="sm" gap="sm">
+      <IconButton icon={<FontAwesomeIcon icon={faCheck} />} {...getSubmitProps()} />
+      <IconButton icon={<FontAwesomeIcon icon={faXmark} />} {...getCancelProps()} />
+    </ButtonGroup>
+  ) : (
+    <ButtonGroup size="sm" gap="sm">
+      <IconButton icon={<FontAwesomeIcon icon={faPen} />} {...getEditProps()} />
+    </ButtonGroup>
+  )
+}
+
+return (
+  <Editable display="flex" gap="sm" isPreviewFocusable={false} defaultValue="オッス！オラ悟空！">
+    <EditablePreview w="full" />
+    <EditableInput />
+    <CustomControls />
+  </Editable>
+)
+```
+
+### `React Hook Form`を使う
+
+```tsx functional=true
+type Data = { input: string; textarea: string }
+
+const defaultValues: Data = {
+  input: "",
+  textarea: "",
+}
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>({ defaultValues })
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.input}
+      label="Name"
+      errorMessage={errors.input ? errors.input.message : undefined}
+    >
+      <Controller
+        name="input"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <Editable placeholder="孫悟空" {...field}>
+            <EditablePreview />
+            <EditableInput />
+          </Editable>
+        )}
+      />
+    </FormControl>
+
+    <FormControl
+      isInvalid={!!errors.textarea}
+      label="Feedback"
+      errorMessage={errors.textarea ? errors.textarea.message : undefined}
+    >
+      <Controller
+        name="textarea"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <Editable
+            placeholder={`私の戦闘力は530000です。\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`}
+            {...field}
+          >
+            <EditablePreview />
+            <EditableTextarea h="2lh" />
+          </Editable>
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

@@ -36,9 +36,12 @@ export const basic: Story = () => {
 
 export const withTextarea: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！">
+    <Editable
+      defaultValue={`私の戦闘力は530000です。\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`}
+      h="4lh"
+    >
       <EditablePreview />
-      <EditableTextarea />
+      <EditableTextarea h="4lh" />
     </Editable>
   )
 }

@@ -10,6 +10,7 @@ export const Editable: ComponentMultiStyle = {
     preview: {
       rounded: "md",
       p: "1",
+      whiteSpace: "pre-line",
       transitionProperty: "common",
       transitionDuration: "normal",
     },

@@ -1,7 +1,8 @@
-import { ComponentArgs, HTMLUIProps } from "@yamada-ui/core"
+import type { ComponentArgs, HTMLUIProps } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, omitObject, isArray } from "@yamada-ui/utils"
-import { cloneElement, ForwardedRef, forwardRef, Ref, useCallback } from "react"
+import type { ForwardedRef, Ref } from "react"
+import { cloneElement, forwardRef, useCallback } from "react"
 import { MenuGroup } from "./menu-group"
 import { MenuOptionItem } from "./menu-item"
 

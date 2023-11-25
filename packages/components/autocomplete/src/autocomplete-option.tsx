@@ -1,11 +1,12 @@
-import { ui, CSSUIObject, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { FC, ReactElement } from "react"
+import type { FC, ReactElement } from "react"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
+import type { UseAutocompleteOptionProps } from "./use-autocomplete"
 import {
   useAutocompleteContext,
   useAutocompleteOption,
-  UseAutocompleteOptionProps,
 } from "./use-autocomplete"
 
 type AutocompleteOptionOptions = {

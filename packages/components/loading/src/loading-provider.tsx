@@ -1,17 +1,13 @@
-import {
-  ui,
+import type {
   ThemeConfig,
   LoadingComponentProps,
   CSSUIObject,
   LoadingConfigOptions,
   HTMLUIProps,
 } from "@yamada-ui/core"
-import {
-  AnimatePresence,
-  Motion,
-  motion,
-  MotionVariants,
-} from "@yamada-ui/motion"
+import { ui } from "@yamada-ui/core"
+import type { MotionVariants } from "@yamada-ui/motion"
+import { AnimatePresence, Motion, motion } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import {
@@ -20,20 +16,22 @@ import {
   useUpdateEffect,
   isNumber,
 } from "@yamada-ui/utils"
-import {
-  createContext,
+import type {
   FC,
-  memo,
   PropsWithChildren,
   ReactNode,
+  MutableRefObject,
+  RefObject,
+} from "react"
+import {
+  createContext,
+  memo,
   useContext,
   useMemo,
   useState,
   Fragment,
   useRef,
-  MutableRefObject,
   createRef,
-  RefObject,
 } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { Loading } from "./loading"

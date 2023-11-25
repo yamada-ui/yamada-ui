@@ -1,26 +1,22 @@
-import { ComponentArgs, ThemeProps } from "@yamada-ui/core"
-import { FormControlOptions, useFormControl } from "@yamada-ui/form-control"
-import { Flex, FlexProps } from "@yamada-ui/layouts"
+import type { ComponentArgs, ThemeProps } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import { useFormControl } from "@yamada-ui/form-control"
+import type { FlexProps } from "@yamada-ui/layouts"
+import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { PropGetter, DOMAttributes } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
   isObject,
   omitObject,
   useCallbackRef,
-  PropGetter,
-  DOMAttributes,
   getValidChildren,
 } from "@yamada-ui/utils"
-import {
-  ChangeEvent,
-  ForwardedRef,
-  forwardRef,
-  ReactElement,
-  Ref,
-  useCallback,
-} from "react"
-import { Checkbox, CheckboxProps } from "./checkbox"
+import type { ChangeEvent, ForwardedRef, ReactElement, Ref } from "react"
+import { forwardRef, useCallback } from "react"
+import type { CheckboxProps } from "./checkbox"
+import { Checkbox } from "./checkbox"
 
 export type CheckboxItem<Y extends string | number = string> =
   CheckboxProps<Y> & {

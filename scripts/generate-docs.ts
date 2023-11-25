@@ -1,19 +1,17 @@
 import { writeFileSync } from "fs"
 import { readFile } from "fs/promises"
 import path from "path"
-import { ThemeComponents } from "@yamada-ui/react"
+import type { ThemeComponents } from "@yamada-ui/react"
 import { defaultTheme } from "@yamada-ui/theme"
 import { format, resolveConfig } from "prettier"
+import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
   readConfigFile,
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
-  SourceFile,
   parseJsonConfigFileContent,
   createProgram,
   sys,
-  Symbol,
-  TypeChecker,
 } from "typescript"
 
 type Theme = {

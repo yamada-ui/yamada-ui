@@ -1,6 +1,8 @@
-import { ui, CSSUIObject, forwardRef, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx, createContext, dataAttr } from "@yamada-ui/utils"
-import { useStep, useStepperContext, UseStepReturn } from "./use-stepper"
+import type { UseStepReturn } from "./use-stepper"
+import { useStep, useStepperContext } from "./use-stepper"
 
 export type StepContext = Omit<UseStepReturn, "getStepProps">
 

@@ -1,21 +1,25 @@
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
   ColorModeToken,
   CSS,
 } from "@yamada-ui/core"
 import {
-  FormControlOptions,
+  ui,
+  forwardRef,
+  omitThemeProps,
+  useMultiComponentStyle,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import { Loading, LoadingProps } from "@yamada-ui/loading"
-import { Fade, FadeProps } from "@yamada-ui/transitions"
+import type { LoadingProps } from "@yamada-ui/loading"
+import { Loading } from "@yamada-ui/loading"
+import type { FadeProps } from "@yamada-ui/transitions"
+import { Fade } from "@yamada-ui/transitions"
 import {
   assignRef,
   createContext,
@@ -24,12 +28,13 @@ import {
   isArray,
   pickObject,
 } from "@yamada-ui/utils"
-import { FC, ForwardedRef, Fragment, PropsWithChildren } from "react"
-import {
-  useDropzone,
+import type { FC, ForwardedRef, PropsWithChildren } from "react"
+import { Fragment } from "react"
+import type {
   Accept,
   DropzoneOptions as ReactDropzoneOptions,
 } from "react-dropzone-esm"
+import { useDropzone } from "react-dropzone-esm"
 
 type DropzoneContext = {
   isLoading?: boolean

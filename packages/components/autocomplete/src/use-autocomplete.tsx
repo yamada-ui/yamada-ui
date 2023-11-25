@@ -1,22 +1,19 @@
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { layoutStylesProperties } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  CSSUIObject,
-  HTMLUIProps,
-  layoutStylesProperties,
-} from "@yamada-ui/core"
-import {
-  FormControlOptions,
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import { PopoverProps } from "@yamada-ui/popover"
+import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
+import type { Dict, PropGetter, Union, DOMAttributes } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
   dataAttr,
-  Dict,
   funcAll,
   getEventRelatedTarget,
   handlerAll,
@@ -26,16 +23,13 @@ import {
   mergeRefs,
   omitObject,
   pickObject,
-  PropGetter,
   splitObject,
   useUnmountEffect,
   useUpdateEffect,
-  Union,
   getValidChildren,
   isUndefined,
-  DOMAttributes,
 } from "@yamada-ui/utils"
-import {
+import type {
   ChangeEvent,
   CSSProperties,
   Dispatch,
@@ -44,17 +38,10 @@ import {
   MouseEvent,
   RefObject,
   SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
 } from "react"
-import {
-  AutocompleteOption,
-  AutocompleteOptionProps,
-  AutocompleteOptionGroup,
-} from "./"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import type { AutocompleteOptionProps } from "./"
+import { AutocompleteOption, AutocompleteOptionGroup } from "./"
 
 type AutocompleteBaseItem = Omit<
   AutocompleteOptionProps,

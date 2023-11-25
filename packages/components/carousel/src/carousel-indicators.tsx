@@ -1,6 +1,8 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { FC, ReactElement, cloneElement } from "react"
+import type { FC, ReactElement } from "react"
+import { cloneElement } from "react"
 import { useCarouselContext, useCarouselIndicators } from "./use-carousel"
 
 type CarouselIndicatorsOptions = {

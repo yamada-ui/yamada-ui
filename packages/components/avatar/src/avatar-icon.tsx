@@ -1,5 +1,6 @@
-import { Icon, IconProps } from "@yamada-ui/icon"
-import { FC } from "react"
+import type { IconProps } from "@yamada-ui/icon"
+import { Icon } from "@yamada-ui/icon"
+import type { FC } from "react"
 
 export const AvatarIcon: FC<IconProps> = (props) => (
   <Icon

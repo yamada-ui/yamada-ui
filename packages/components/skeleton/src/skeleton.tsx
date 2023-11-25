@@ -1,12 +1,14 @@
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  CSSUIProps,
+} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   useComponentStyle,
-  CSSUIProps,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { usePrevious } from "@yamada-ui/use-previous"

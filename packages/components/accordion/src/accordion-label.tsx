@@ -1,7 +1,9 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ChevronIcon, IconProps } from "@yamada-ui/icon"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
+import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import { FC, PropsWithChildren, ReactNode } from "react"
+import type { FC, PropsWithChildren, ReactNode } from "react"
 import { useAccordionContext } from "./accordion"
 import { useAccordionItemContext } from "./accordion-item"
 

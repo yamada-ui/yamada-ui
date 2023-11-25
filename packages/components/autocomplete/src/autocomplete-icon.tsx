@@ -1,8 +1,10 @@
-import { ui, CSSUIObject, HTMLUIProps, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { ChevronIcon, CloseIcon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
-import { cloneElement, FC, HTMLAttributes, useRef } from "react"
+import type { FC, HTMLAttributes } from "react"
+import { cloneElement, useRef } from "react"
 import { useAutocompleteContext } from "./use-autocomplete"
 
 export type AutocompleteIconProps = HTMLUIProps<"div">

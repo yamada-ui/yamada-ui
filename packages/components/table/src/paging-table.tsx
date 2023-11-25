@@ -1,26 +1,22 @@
-import { RowData, PaginationInstance } from "@tanstack/react-table"
-import {
-  ui,
-  useMultiComponentStyle,
-  omitThemeProps,
-  ComponentArgs,
-  CSSUIObject,
-  HTMLUIProps,
-} from "@yamada-ui/core"
+import type { RowData, PaginationInstance } from "@tanstack/react-table"
+import type { ComponentArgs, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import { TableStyleProvider } from "@yamada-ui/native-table"
-import { Pagination, PaginationProps } from "@yamada-ui/pagination"
-import { Select, SelectProps } from "@yamada-ui/select"
+import type { PaginationProps } from "@yamada-ui/pagination"
+import { Pagination } from "@yamada-ui/pagination"
+import type { SelectProps } from "@yamada-ui/select"
+import { Select } from "@yamada-ui/select"
 import { cx, isFunction, omitObject } from "@yamada-ui/utils"
-import { ForwardedRef, forwardRef, ReactNode, Ref } from "react"
-import { TableBodyProps, Tbody } from "./tbody"
-import { TableFootProps, Tfoot } from "./tfoot"
-import { TableHeadProps, Thead } from "./thead"
-import {
-  TableContext,
-  TableProvider,
-  useTable,
-  UseTableProps,
-} from "./use-table"
+import type { ForwardedRef, ReactNode, Ref } from "react"
+import { forwardRef } from "react"
+import type { TableBodyProps } from "./tbody"
+import { Tbody } from "./tbody"
+import type { TableFootProps } from "./tfoot"
+import { Tfoot } from "./tfoot"
+import type { TableHeadProps } from "./thead"
+import { Thead } from "./thead"
+import type { TableContext, UseTableProps } from "./use-table"
+import { TableProvider, useTable } from "./use-table"
 
 type PaginationComponentProps<Y extends RowData> = Pick<
   PaginationInstance<Y>,

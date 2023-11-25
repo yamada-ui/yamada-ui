@@ -1,29 +1,19 @@
-import { IconButtonProps } from "@yamada-ui/button"
-import {
-  CSSUIObject,
-  HTMLUIProps,
-  CSSUIProps,
-  layoutStylesProperties,
-} from "@yamada-ui/core"
+import type { IconButtonProps } from "@yamada-ui/button"
+import type { CSSUIObject, HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
+import { layoutStylesProperties } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   dataAttr,
   handlerAll,
-  PropGetter,
-  RequiredPropGetter,
   splitObject,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react"
-import {
-  Children,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import type { EmblaCarouselType } from "embla-carousel-react"
+import useEmblaCarousel from "embla-carousel-react"
+import type { MouseEvent } from "react"
+import { Children, useCallback, useEffect, useRef, useState } from "react"
 
 type CarouselContext = {
   carousel: EmblaCarouselType | undefined

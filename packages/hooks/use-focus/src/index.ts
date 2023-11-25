@@ -1,6 +1,6 @@
 import { useEventListener } from "@yamada-ui/use-event-listener"
+import type { FocusableElement } from "@yamada-ui/utils"
 import {
-  FocusableElement,
   getActiveElement,
   getAllFocusable,
   isRefObject,
@@ -9,7 +9,8 @@ import {
   useUpdateEffect,
   isSafari,
 } from "@yamada-ui/utils"
-import { RefObject, useCallback, useRef } from "react"
+import type { RefObject } from "react"
+import { useCallback, useRef } from "react"
 
 export type UseFocusOnHideProps = {
   focusRef: RefObject<FocusableElement>

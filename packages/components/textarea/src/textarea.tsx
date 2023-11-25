@@ -1,18 +1,18 @@
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
+import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  useComponentStyle,
   ColorModeToken,
   CSS,
 } from "@yamada-ui/core"
 import {
-  useFormControlProps,
-  FormControlOptions,
-} from "@yamada-ui/form-control"
+  ui,
+  forwardRef,
+  omitThemeProps,
+  useComponentStyle,
+} from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import { useFormControlProps } from "@yamada-ui/form-control"
 import { cx, omitObject } from "@yamada-ui/utils"
 
 type TextareaOptions = {

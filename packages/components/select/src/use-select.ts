@@ -86,7 +86,17 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<"div">,
   "defaultValue" | "onChange"
 > &
-  Omit<PopoverProps, "initialFocusRef" | "closeOnButton" | "isOpen"> &
+  Omit<
+    PopoverProps,
+    | "initialFocusRef"
+    | "closeOnButton"
+    | "isOpen"
+    | "trigger"
+    | "autoFocus"
+    | "restoreFocus"
+    | "openDelay"
+    | "closeDelay"
+  > &
   FormControlOptions & {
     /**
      * The HTML `name` attribute used for forms.

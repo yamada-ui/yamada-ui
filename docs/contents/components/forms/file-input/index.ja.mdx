@@ -181,7 +181,9 @@ import { FileInput } from "@yamada-ui/react"
 </InputGroup>
 ```
 
-### リセットする
+### 値をリセットする
+
+値をリセットする場合は、`resetRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
 
 ```tsx functional=true
 const [value, onChange] = useState<File[] | null>(null)

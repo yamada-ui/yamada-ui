@@ -19,7 +19,7 @@ import { FileInput } from "@yamada-ui/react"
 <FileInput placeholder="basic" />
 ```
 
-Alternatively, you can customize using `children`. `children` provides an array of `File`.
+Or, you can customize using `children`. `children` provides an array of `File`.
 
 ```tsx
 <FileInput placeholder="multiple" multiple>
@@ -140,7 +140,7 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `isInvalid` to `true`.
 
 ```tsx
 <VStack>
@@ -181,7 +181,9 @@ To add an element, wrap `Input` with `InputGroup` and use `InputLeftElement` or 
 </InputGroup>
 ```
 
-### Reset
+### Reset Value
+
+To reset the value, set `resetRef` to a `ref`. A callback function is attached to the set `ref`, execute it.
 
 ```tsx functional=true
 const [value, onChange] = useState<File[] | null>(null)

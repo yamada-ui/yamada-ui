@@ -750,13 +750,19 @@ export const useAutocomplete = <T extends string | string[] = string>({
           }
         }
       })
-
+      const isHit =
+        descendants
+          .values()
+          .filter(({ node }) =>
+            format(node.textContent ?? "").includes(newValue),
+          ).length > 0
       onChangeDisplayValue(newValue)
-
-      setInputValue("")
+      if (!allowFree || isHit) {
+        setInputValue("")
+      }
       rebirthOptions(false)
     },
-    [onChangeDisplayValue, rebirthOptions, setValue],
+    [allowFree, onChangeDisplayValue, rebirthOptions, setValue],
   )
 
   const onSelect = useCallback(() => {
@@ -917,7 +923,11 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      if (!allowFree) setInputValue("")
+      if (allowFree && !!inputValue) {
+        onChange(inputValue)
+      } else {
+        setInputValue("")
+      }
 
       if (isOpen) onClose()
     },

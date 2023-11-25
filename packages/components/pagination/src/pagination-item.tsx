@@ -1,6 +1,7 @@
-import { ui, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import { ComponentPropsWithoutRef, FC, ReactNode } from "react"
+import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
 import {
   DotsIcon,
   FirstIcon,

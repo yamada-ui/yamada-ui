@@ -1,4 +1,4 @@
-import { Dict } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import type { Target, TargetAndTransition, Transition } from "framer-motion"
 
 export type {

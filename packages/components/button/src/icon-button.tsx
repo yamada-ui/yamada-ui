@@ -1,7 +1,8 @@
 import { forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { ReactElement } from "react"
-import { Button, ButtonProps } from "./button"
+import type { ReactElement } from "react"
+import type { ButtonProps } from "./button"
+import { Button } from "./button"
 
 type IconButtonOptions = {
   /**

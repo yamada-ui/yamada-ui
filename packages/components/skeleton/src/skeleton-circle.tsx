@@ -1,6 +1,7 @@
 import { forwardRef } from "@yamada-ui/core"
 import { cx, getValidChildren } from "@yamada-ui/utils"
-import { Skeleton, SkeletonProps } from "./"
+import type { SkeletonProps } from "./"
+import { Skeleton } from "./"
 
 export type SkeletonCircleProps = SkeletonProps
 

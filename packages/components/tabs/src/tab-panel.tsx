@@ -1,4 +1,5 @@
-import { ui, forwardRef, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
 import { cx } from "@yamada-ui/utils"
 import { useRef } from "react"

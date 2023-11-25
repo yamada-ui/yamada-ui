@@ -1,6 +1,6 @@
 import { isNumber } from "@yamada-ui/utils"
 import type { Transition } from "framer-motion"
-import { MotionTransitionProperties } from "./motion.types"
+import type { MotionTransitionProperties } from "./motion.types"
 
 export const MOTION_TRANSITION_EASINGS = {
   ease: [0.25, 0.1, 0.25, 1],

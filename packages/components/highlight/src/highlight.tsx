@@ -1,15 +1,15 @@
+import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  HTMLUIProps,
-  ThemeProps,
   useComponentStyle,
-  CSSUIObject,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { Text, TextProps } from "@yamada-ui/typography"
+import type { TextProps } from "@yamada-ui/typography"
+import { Text } from "@yamada-ui/typography"
 import { cx, isArray } from "@yamada-ui/utils"
-import { FC, Fragment, ReactNode, useMemo } from "react"
+import type { FC, ReactNode } from "react"
+import { Fragment, useMemo } from "react"
 
 type Options = { text: string; query: string | string[] }
 

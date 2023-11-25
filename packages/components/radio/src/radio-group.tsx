@@ -1,29 +1,23 @@
-import { ComponentArgs, ThemeProps } from "@yamada-ui/core"
-import { useFormControl, FormControlOptions } from "@yamada-ui/form-control"
-import { Flex, FlexProps } from "@yamada-ui/layouts"
+import type { ComponentArgs, ThemeProps } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import { useFormControl } from "@yamada-ui/form-control"
+import type { FlexProps } from "@yamada-ui/layouts"
+import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { PropGetter, DOMAttributes } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
   isObject,
   mergeRefs,
-  PropGetter,
-  DOMAttributes,
   useCallbackRef,
   omitObject,
   getValidChildren,
 } from "@yamada-ui/utils"
-import {
-  ChangeEvent,
-  useCallback,
-  useId,
-  useRef,
-  forwardRef,
-  ForwardedRef,
-  Ref,
-  ReactElement,
-} from "react"
-import { Radio, RadioProps } from "./radio"
+import type { ChangeEvent, ForwardedRef, Ref, ReactElement } from "react"
+import { useCallback, useId, useRef, forwardRef } from "react"
+import type { RadioProps } from "./radio"
+import { Radio } from "./radio"
 
 export type RadioItem<Y extends string | number = string> = RadioProps<Y> & {
   label?: string

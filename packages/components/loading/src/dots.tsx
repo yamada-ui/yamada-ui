@@ -1,5 +1,6 @@
 import { forwardRef } from "@yamada-ui/core"
-import { Icon, IconProps } from "@yamada-ui/icon"
+import type { IconProps } from "@yamada-ui/icon"
+import { Icon } from "@yamada-ui/icon"
 
 export type DotsProps = IconProps & {
   /**

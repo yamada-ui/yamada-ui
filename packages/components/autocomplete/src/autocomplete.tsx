@@ -1,20 +1,20 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
-import { AutocompleteIcon, AutocompleteIconProps } from "./autocomplete-icon"
-import { AutocompleteList, AutocompleteListProps } from "./autocomplete-list"
+import type { AutocompleteIconProps } from "./autocomplete-icon"
+import { AutocompleteIcon } from "./autocomplete-icon"
+import type { AutocompleteListProps } from "./autocomplete-list"
+import { AutocompleteList } from "./autocomplete-list"
+import type { UseAutocompleteProps } from "./use-autocomplete"
 import {
   AutocompleteProvider,
   useAutocomplete,
-  UseAutocompleteProps,
   AutocompleteDescendantsContextProvider,
   useAutocompleteContext,
   useAutocompleteInput,

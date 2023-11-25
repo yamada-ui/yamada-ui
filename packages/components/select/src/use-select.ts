@@ -1,26 +1,22 @@
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { layoutStylesProperties } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  CSSUIObject,
-  HTMLUIProps,
-  layoutStylesProperties,
-} from "@yamada-ui/core"
-import {
-  FormControlOptions,
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import { PopoverProps } from "@yamada-ui/popover"
+import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
+import type { Dict, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   dataAttr,
-  Dict,
   funcAll,
   handlerAll,
   omitObject,
   pickObject,
-  PropGetter,
   splitObject,
   useUnmountEffect,
   useUpdateEffect,
@@ -32,21 +28,18 @@ import {
   getEventRelatedTarget,
   isContains,
 } from "@yamada-ui/utils"
-import {
+import type {
   Dispatch,
   ForwardedRef,
   KeyboardEvent,
   RefObject,
   SetStateAction,
-  useCallback,
-  useRef,
-  useState,
   FocusEvent,
   MouseEvent,
-  useEffect,
   CSSProperties,
 } from "react"
-import { OptionProps } from "./"
+import { useCallback, useRef, useState, useEffect } from "react"
+import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
   isHTMLElement(target) &&

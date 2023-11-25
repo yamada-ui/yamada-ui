@@ -1,14 +1,13 @@
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
+import type { AnyPointerEvent, Point, PointerEventInfo } from "@yamada-ui/utils"
 import {
   addPointerEvent,
-  AnyPointerEvent,
   getEventPoint,
   isMultiTouchEvent,
-  Point,
-  PointerEventInfo,
 } from "@yamada-ui/utils"
 import sync, { cancelSync, getFrameData } from "framesync"
-import { RefObject, useEffect, useRef } from "react"
+import type { RefObject } from "react"
+import { useEffect, useRef } from "react"
 
 type PanEventInfo = {
   point: Point

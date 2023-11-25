@@ -1,8 +1,11 @@
-import { ui, CSSUIObject, forwardRef, HTMLUIProps } from "@yamada-ui/core"
-import { Icon, IconProps } from "@yamada-ui/icon"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
+import { Icon } from "@yamada-ui/icon"
 import { cx, runIfFunc } from "@yamada-ui/utils"
-import { ComponentProps, ReactNode } from "react"
-import { StepContext, useStepContext } from "./step"
+import type { ComponentProps, ReactNode } from "react"
+import type { StepContext } from "./step"
+import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
 export type StepStatusProps = {

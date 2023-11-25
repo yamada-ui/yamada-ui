@@ -1,40 +1,27 @@
-import {
-  useMultiComponentStyle,
-  omitThemeProps,
-  CSSUIObject,
-  ThemeProps,
-} from "@yamada-ui/core"
-import { MotionTransitionProperties } from "@yamada-ui/motion"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import type { MotionTransitionProperties } from "@yamada-ui/motion"
 import { useAnimationObserver } from "@yamada-ui/use-animation"
-import {
-  useDisclosure,
-  useLazyDisclosure,
-  LazyMode,
-} from "@yamada-ui/use-disclosure"
+import type { LazyMode } from "@yamada-ui/use-disclosure"
+import { useDisclosure, useLazyDisclosure } from "@yamada-ui/use-disclosure"
 import {
   useFocusOnHide,
   useFocusOnShow,
   useFocusOnPointerDown,
 } from "@yamada-ui/use-focus"
-import { usePopper, UsePopperProps } from "@yamada-ui/use-popper"
+import type { UsePopperProps } from "@yamada-ui/use-popper"
+import { usePopper } from "@yamada-ui/use-popper"
+import type { DOMAttributes, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
-  DOMAttributes,
   getEventRelatedTarget,
   handlerAll,
   isContains,
   mergeRefs,
-  PropGetter,
   runIfFunc,
 } from "@yamada-ui/utils"
-import {
-  FC,
-  PropsWithChildren,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react"
+import type { FC, PropsWithChildren, RefObject } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 type PopoverOptions = {
   /**

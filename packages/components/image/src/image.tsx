@@ -1,7 +1,10 @@
-import { ui, forwardRef, HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx, omitObject } from "@yamada-ui/utils"
-import { isValidElement, ReactElement, useMemo } from "react"
-import { shouldShowFallbackImage, useImage, UseImageProps } from "./use-image"
+import type { ReactElement } from "react"
+import { isValidElement, useMemo } from "react"
+import type { UseImageProps } from "./use-image"
+import { shouldShowFallbackImage, useImage } from "./use-image"
 
 type ImageOptions = {
   /**

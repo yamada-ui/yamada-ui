@@ -1,11 +1,6 @@
-import { RowData } from "@tanstack/react-table"
-import {
-  ui,
-  useMultiComponentStyle,
-  omitThemeProps,
-  ComponentArgs,
-  CSSUIObject,
-} from "@yamada-ui/core"
+import type { RowData } from "@tanstack/react-table"
+import type { ComponentArgs, CSSUIObject } from "@yamada-ui/core"
+import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import { TableStyleProvider, TableCaption } from "@yamada-ui/native-table"
 import {
   cx,
@@ -13,16 +8,16 @@ import {
   getValidChildren,
   omitObject,
 } from "@yamada-ui/utils"
-import { ForwardedRef, forwardRef, Ref } from "react"
-import { Tbody, TableBodyProps } from "./tbody"
-import { Tfoot, TableFootProps } from "./tfoot"
-import { Thead, TableHeadProps } from "./thead"
-import {
-  TableContext,
-  TableProvider,
-  useTable,
-  UseTableProps,
-} from "./use-table"
+import type { ForwardedRef, Ref } from "react"
+import { forwardRef } from "react"
+import type { TableBodyProps } from "./tbody"
+import { Tbody } from "./tbody"
+import type { TableFootProps } from "./tfoot"
+import { Tfoot } from "./tfoot"
+import type { TableHeadProps } from "./thead"
+import { Thead } from "./thead"
+import type { TableContext, UseTableProps } from "./use-table"
+import { TableProvider, useTable } from "./use-table"
 
 type TableOptions = {
   /**

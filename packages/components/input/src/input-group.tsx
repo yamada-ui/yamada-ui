@@ -1,12 +1,14 @@
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  CSSUIProps,
+} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
-  CSSUIProps,
 } from "@yamada-ui/core"
 import { FileInput } from "@yamada-ui/file-input"
 import { useToken } from "@yamada-ui/use-token"

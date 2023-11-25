@@ -1,10 +1,7 @@
-import {
-  useMultiComponentStyle,
-  omitThemeProps,
-  CSSUIObject,
-  ThemeProps,
-} from "@yamada-ui/core"
-import { Popover, PopoverProps } from "@yamada-ui/popover"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import type { PopoverProps } from "@yamada-ui/popover"
+import { Popover } from "@yamada-ui/popover"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import {
@@ -12,15 +9,8 @@ import {
   useUnmountEffect,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import {
-  Dispatch,
-  FC,
-  RefObject,
-  SetStateAction,
-  useCallback,
-  useRef,
-  useState,
-} from "react"
+import type { Dispatch, FC, RefObject, SetStateAction } from "react"
+import { useCallback, useRef, useState } from "react"
 
 const {
   DescendantsContextProvider,

@@ -1,16 +1,15 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
 import { useResizeObserver } from "@yamada-ui/use-resize-observer"
+import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -20,21 +19,11 @@ import {
   handlerAll,
   mergeRefs,
   omitObject,
-  PropGetter,
-  RequiredPropGetter,
   useCallbackRef,
   useIsMounted,
 } from "@yamada-ui/utils"
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  ReactElement,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react"
+import type { ChangeEvent, ChangeEventHandler, ReactElement } from "react"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
 
 export type SegmentedControlItem = SegmentedControlButtonProps & {
   label?: string

@@ -1,10 +1,8 @@
-import { ui, forwardRef, HTMLUIProps } from "@yamada-ui/core"
+import type { HTMLUIProps } from "@yamada-ui/core"
+import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import {
-  useSelectContext,
-  useSelectOptionGroup,
-  UseSelectOptionGroupProps,
-} from "./use-select"
+import type { UseSelectOptionGroupProps } from "./use-select"
+import { useSelectContext, useSelectOptionGroup } from "./use-select"
 
 type OptionGroupOptions = UseSelectOptionGroupProps
 

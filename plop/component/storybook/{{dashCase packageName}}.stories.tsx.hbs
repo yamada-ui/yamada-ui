@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react"
 import { {{upperCase packageName}} } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof {{upperCase packageName}}>
@@ -11,7 +11,6 @@ const meta: Meta<typeof {{upperCase packageName}}> = {
 export default meta
 
 export const basic: Story = () => {
-  return (
-    <{{upperCase packageName}}></{{upperCase packageName}}>
-  )
+  return <{{upperCase packageName}}></{{upperCase packageName}}>
+
 }

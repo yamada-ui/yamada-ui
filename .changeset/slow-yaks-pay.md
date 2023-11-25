@@ -9,4 +9,4 @@
 "@yamada-ui/radio": patch
 ---
 
-fixed `null coalescing assignment operator`.
+Fixed `null coalescing assignment operator`.

@@ -70,4 +70,4 @@
 "@yamada-ui/tag": patch
 ---
 
-Formated code.
+Formatted code.

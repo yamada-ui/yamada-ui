@@ -2,4 +2,4 @@
 "@yamada-ui/autocomplete": minor
 ---
 
-add `allowFree` property in `Autocomplete`.
+Added `allowFree` props to `Autocomplete`.

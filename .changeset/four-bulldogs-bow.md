@@ -2,4 +2,4 @@
 "@yamada-ui/select": patch
 ---
 
-Expanded use-select props omission.
+Expanded useSelect props omission.

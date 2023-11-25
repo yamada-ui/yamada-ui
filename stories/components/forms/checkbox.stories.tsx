@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { CheckboxItem } from "@yamada-ui/react"
+import type { CheckboxItem, UseCheckboxGroupReturn } from "@yamada-ui/react"
 import {
   Checkbox,
   CheckboxGroup,
@@ -352,7 +352,9 @@ export const customControlGroup: Story = () => {
 }
 
 export const customHook: Story = () => {
-  const CustomCheckbox: FC<any> = (props) => {
+  const CustomCheckbox: FC<
+    ReturnType<UseCheckboxGroupReturn["getCheckboxProps"]>
+  > = (props) => {
     const { getInputProps, getIconProps } = useCheckbox(props)
 
     return (
@@ -378,7 +380,9 @@ export const customHook: Story = () => {
     )
   }
 
-  const { getCheckboxProps } = useCheckboxGroup({ defaultValue: ["孫悟空"] })
+  const { getCheckboxProps } = useCheckboxGroup<string>({
+    defaultValue: ["孫悟空"],
+  })
 
   return (
     <HStack gap="sm">

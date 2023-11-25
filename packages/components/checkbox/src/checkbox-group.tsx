@@ -100,7 +100,8 @@ export const useCheckboxGroup = <Y extends string | number = string>({
   return { value, setValue, onChange, getCheckboxProps }
 }
 
-export type UseCheckboxGroupReturn = ReturnType<typeof useCheckboxGroup>
+export type UseCheckboxGroupReturn<Y extends string | number = string> =
+  ReturnType<typeof useCheckboxGroup<Y>>
 
 export type CheckboxGroupProps<Y extends string | number = string> =
   ThemeProps<"Checkbox"> &

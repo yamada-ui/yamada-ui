@@ -10,4 +10,5 @@ export type {
   CheckboxItem,
   CheckboxGroupProps,
   UseCheckboxGroupProps,
+  UseCheckboxGroupReturn,
 } from "./checkbox-group"

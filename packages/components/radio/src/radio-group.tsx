@@ -145,7 +145,8 @@ export const useRadioGroup = <Y extends string | number = string>({
   }
 }
 
-export type UseRadioGroupReturn = ReturnType<typeof useRadioGroup>
+export type UseRadioGroupReturn<Y extends string | number = string> =
+  ReturnType<typeof useRadioGroup<Y>>
 
 export type RadioGroupProps<Y extends string | number = string> =
   ThemeProps<"Radio"> &

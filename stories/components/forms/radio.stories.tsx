@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { RadioItem } from "@yamada-ui/react"
+import type { RadioItem, UseRadioGroupReturn } from "@yamada-ui/react"
 import {
   FormControl,
   Radio,
@@ -306,7 +306,9 @@ export const customControl: Story = () => {
 }
 
 export const customHook: Story = () => {
-  const CustomRadio: FC<any> = (props) => {
+  const CustomRadio: FC<ReturnType<UseRadioGroupReturn["getRadioProps"]>> = (
+    props,
+  ) => {
     const { getInputProps, getIconProps } = useRadio(props)
 
     return (
@@ -332,7 +334,7 @@ export const customHook: Story = () => {
     )
   }
 
-  const { getContainerProps, getRadioProps } = useRadioGroup({
+  const { getContainerProps, getRadioProps } = useRadioGroup<string>({
     defaultValue: "孫悟空",
   })
 

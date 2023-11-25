@@ -142,8 +142,8 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     isEmpty,
   })
 
-  h = h ?? height
-  minH = minH ?? minHeight
+  h ??= height
+  minH ??= minHeight
 
   const css: CSSUIObject = {
     position: "relative",

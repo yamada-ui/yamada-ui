@@ -84,8 +84,8 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     value,
   } = useDatePicker(computedProps)
 
-  h = h ?? height
-  minH = minH ?? minHeight
+  h ??= height
+  minH ??= minHeight
 
   const css: CSSUIObject = {
     position: "relative",

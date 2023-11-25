@@ -164,7 +164,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
 
-    id = id ?? useId()
+    id ??= useId()
 
     const descendants = useDescendants()
 

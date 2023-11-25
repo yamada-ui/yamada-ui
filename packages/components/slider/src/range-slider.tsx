@@ -210,8 +210,8 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
     },
   })
 
-  id = id ?? useId()
-  name = name ?? id
+  id ??= useId()
+  name ??= id
 
   const getThumbId = useCallback((i: number) => `slider-thumb-${id}-${i}`, [id])
   const getInputId = useCallback((i: number) => `slider-input-${id}-${i}`, [id])
@@ -303,7 +303,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
 
   const focusThumb = useCallback(
     (i?: number) => {
-      i = i ?? activeIndex
+      i ??= activeIndex
 
       if (i === -1 || !focusThumbOnChange) return
 

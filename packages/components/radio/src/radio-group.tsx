@@ -71,8 +71,8 @@ export const useRadioGroup = <Y extends string | number = string>({
 
   ...props
 }: UseRadioGroupProps<Y>) => {
-  id = id ?? useId()
-  name = name ?? `radio-${id}`
+  id ??= useId()
+  name ??= `radio-${id}`
 
   props.onChange = useCallbackRef(props.onChange)
 

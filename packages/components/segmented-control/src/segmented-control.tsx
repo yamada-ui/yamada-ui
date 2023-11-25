@@ -114,8 +114,8 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     } = omitThemeProps(mergedProps)
     const isMoutedRef = useIsMounted()
 
-    id = id ?? useId()
-    name = name ?? `segmented-control-${useId()}`
+    id ??= useId()
+    name ??= `segmented-control-${useId()}`
 
     rest.onChange = useCallbackRef(rest.onChange)
 

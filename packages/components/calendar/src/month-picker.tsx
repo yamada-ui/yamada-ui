@@ -81,8 +81,8 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     value,
   } = useMonthPicker(computedProps)
 
-  h = h ?? height
-  minH = minH ?? minHeight
+  h ??= height
+  minH ??= minHeight
 
   const css: CSSUIObject = {
     position: "relative",

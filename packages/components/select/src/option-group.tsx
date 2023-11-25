@@ -19,8 +19,8 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
     const { label, getContainerProps, getGroupProps } =
       useSelectOptionGroup(rest)
 
-    h = h ?? height
-    minH = minH ?? minHeight
+    h ??= height
+    minH ??= minHeight
 
     return (
       <ui.li

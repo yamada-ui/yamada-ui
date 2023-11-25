@@ -84,7 +84,7 @@ const createNotice = (
 ) => {
   counter += 1
 
-  id = id ?? counter
+  id ??= counter
 
   return {
     id,

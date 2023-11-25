@@ -18,7 +18,7 @@ export const Option = forwardRef<OptionProps, "li">(
     const { isSelected, customIcon, children, getOptionProps } =
       useSelectOption(ref, rest)
 
-    icon = icon ?? customIcon
+    icon ??= customIcon
 
     const css: CSSUIObject = {
       textDecoration: "none",

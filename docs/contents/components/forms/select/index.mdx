@@ -1,6 +1,6 @@
 ---
 title: Select
-description: "`Select` is a component used for allowing users to choose one option from a list."
+description: "`Select` is a component used for allowing a user to choose one option from a list."
 package_name: "@yamada-ui/select"
 is_tabs: true
 with_description: true
@@ -63,7 +63,7 @@ return <Select placeholder="キャラクターを選択" items={items} />
 
 ### Set Default Value
 
-To set a default value, assign a string to `defaultValue`.
+To set a default value, set a string to `defaultValue`.
 
 ```tsx
 <Select placeholder="キャラクターを選択" defaultValue="ベジータ">
@@ -127,7 +127,7 @@ return <Select placeholder="キャラクターを選択" items={items} />
 
 ### Exclude Placeholder from Options
 
-By default, a placeholder is included in the options. To exclude the placeholder from options, set `placeholderInOptions` to `false`.
+By default, the placeholder is included in the options. To exclude the placeholder from options, set `placeholderInOptions` to `false`.
 
 ```tsx
 <Select placeholder="キャラクターを選択" placeholderInOptions={false}>
@@ -148,9 +148,9 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 </VStack>
 ```
 
-### Do Not Close on Select
+### Keep Dropdown List Open on Selection
 
-By default, the list closes automatically upon selection. To prevent it from closing on select, set `closeOnSelect` to `false`.
+By default, the dropdown list closes automatically upon selection. To keep the dropdown list open on selection, set `closeOnSelect` to `false`.
 
 ```tsx
 <Select placeholder="キャラクターを選択" closeOnSelect={false}>
@@ -160,9 +160,9 @@ By default, the list closes automatically upon selection. To prevent it from clo
 </Select>
 ```
 
-### Do Not Close on Blur
+### Keep Dropdown List Open on Blur
 
-By default, the list closes automatically on blur. To prevent it from closing on blur, set `closeOnBlur` to `false`.
+By default, the dropdown list closes automatically on blur. To keep the dropdown list open on blur, set `closeOnBlur` to `false`.
 
 ```tsx
 <Select placeholder="キャラクターを選択" closeOnBlur={false}>
@@ -186,7 +186,7 @@ To change the placement, set `placement` to `top`, `left-start`, etc. By default
 
 ### Change Duration
 
-To change the duration, set `duration` to a number (seconds).
+To change the duration, set a number (seconds) to `duration`.
 
 ```tsx
 <Select placeholder="キャラクターを選択" duration={0.4}>
@@ -200,7 +200,7 @@ To change the duration, set `duration` to a number (seconds).
 
 Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
 
-`gutter` allows you to set the difference from a simple element, and `offset` allows you to set `[horizontal, vertical]`.
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal, vertical]`.
 
 ```tsx
 <VStack>

@@ -45,7 +45,7 @@ type DropzoneContext = {
 }
 
 const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
-  name: "NativeSelectContext",
+  name: "DropzoneContext",
   errorMessage: `useDropzoneContext returned is 'undefined'. Seems you forgot to wrap the components in "<Dropzone />"`,
 })
 

@@ -1,5 +1,12 @@
 # @yamada-ui/autocomplete
 
+## 0.6.1
+
+### Patch Changes
+
+- Updated dependencies [[`a1ee1bdb`](https://github.com/hirotomoyamada/yamada-ui/commit/a1ee1bdb113ebb18261e5b0910ca2a179aac1a96)]:
+  - @yamada-ui/select@0.5.7
+
 ## 0.6.0
 
 ### Minor Changes

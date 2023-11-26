@@ -1,5 +1,16 @@
 # @yamada-ui/react
 
+## 0.8.31
+
+### Patch Changes
+
+- Updated dependencies [[`de0eebc8`](https://github.com/hirotomoyamada/yamada-ui/commit/de0eebc83c72d86f2e337b1b363361e6cb75cd16), [`a1ee1bdb`](https://github.com/hirotomoyamada/yamada-ui/commit/a1ee1bdb113ebb18261e5b0910ca2a179aac1a96), [`965abe7d`](https://github.com/hirotomoyamada/yamada-ui/commit/965abe7dd9bacca8ffe61dc7de89ec087c4ff9a4)]:
+  - @yamada-ui/checkbox@0.5.0
+  - @yamada-ui/switch@0.4.0
+  - @yamada-ui/radio@0.5.0
+  - @yamada-ui/select@0.5.7
+  - @yamada-ui/autocomplete@0.6.1
+
 ## 0.8.30
 
 ### Patch Changes

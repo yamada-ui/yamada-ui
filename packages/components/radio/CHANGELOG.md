@@ -1,5 +1,15 @@
 # @yamada-ui/radio
 
+## 0.5.0
+
+### Minor Changes
+
+- [`de0eebc8`](https://github.com/hirotomoyamada/yamada-ui/commit/de0eebc83c72d86f2e337b1b363361e6cb75cd16) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Rename `defaultChecked` to `defaultIsChecked`.
+
+### Patch Changes
+
+- [`965abe7d`](https://github.com/hirotomoyamada/yamada-ui/commit/965abe7dd9bacca8ffe61dc7de89ec087c4ff9a4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Generic types in hook returns.
+
 ## 0.4.3
 
 ### Patch Changes

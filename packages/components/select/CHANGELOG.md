@@ -1,5 +1,11 @@
 # @yamada-ui/select
 
+## 0.5.7
+
+### Patch Changes
+
+- [`a1ee1bdb`](https://github.com/hirotomoyamada/yamada-ui/commit/a1ee1bdb113ebb18261e5b0910ca2a179aac1a96) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Restructured `Select` inner element.
+
 ## 0.5.6
 
 ### Patch Changes

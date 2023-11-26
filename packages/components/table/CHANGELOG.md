@@ -1,5 +1,13 @@
 # @yamada-ui/table
 
+## 0.5.3
+
+### Patch Changes
+
+- Updated dependencies [[`de0eebc8`](https://github.com/hirotomoyamada/yamada-ui/commit/de0eebc83c72d86f2e337b1b363361e6cb75cd16), [`a1ee1bdb`](https://github.com/hirotomoyamada/yamada-ui/commit/a1ee1bdb113ebb18261e5b0910ca2a179aac1a96), [`965abe7d`](https://github.com/hirotomoyamada/yamada-ui/commit/965abe7dd9bacca8ffe61dc7de89ec087c4ff9a4)]:
+  - @yamada-ui/checkbox@0.5.0
+  - @yamada-ui/select@0.5.7
+
 ## 0.5.2
 
 ### Patch Changes

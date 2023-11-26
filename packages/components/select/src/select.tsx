@@ -169,21 +169,21 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
               __css={{ position: "relative", ...styles.inner }}
             >
               <PopoverTrigger>
-                <SelectField h={h} minH={minH} {...getFieldProps({}, ref)}>
-                  <SelectIcon {...iconProps} {...formControlProps} />
-                </SelectField>
+                <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
               </PopoverTrigger>
 
-              {!isEmpty ? (
-                <SelectList {...listProps}>
-                  {!!placeholder && placeholderInOptions ? (
-                    <Option>{placeholder}</Option>
-                  ) : null}
-
-                  {children ?? computedChildren}
-                </SelectList>
-              ) : null}
+              <SelectIcon {...iconProps} {...formControlProps} />
             </ui.div>
+
+            {!isEmpty ? (
+              <SelectList {...listProps}>
+                {!!placeholder && placeholderInOptions ? (
+                  <Option>{placeholder}</Option>
+                ) : null}
+
+                {children ?? computedChildren}
+              </SelectList>
+            ) : null}
           </ui.div>
         </Popover>
       </SelectProvider>

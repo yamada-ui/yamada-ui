@@ -146,7 +146,7 @@ export const withComponent: Story = () => {
     <>
       <MultiSelect
         placeholder="キャラクターを選択"
-        component={({ displayValue }) => <Tag>{displayValue}</Tag>}
+        component={({ label }) => <Tag>{label}</Tag>}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -155,8 +155,8 @@ export const withComponent: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        component={({ displayValue, onRemove }) => (
-          <Tag onClose={onRemove}>{displayValue}</Tag>
+        component={({ label, onRemove }) => (
+          <Tag onClose={onRemove}>{label}</Tag>
         )}
       >
         <Option value="孫悟空">孫悟空</Option>

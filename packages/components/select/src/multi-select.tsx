@@ -33,7 +33,7 @@ type MultiSelectOptions = {
    */
   component?: FC<{
     value: string | number
-    displayValue: string
+    label: string
     index: number
     onRemove: MouseEventHandler<HTMLElement>
   }>
@@ -230,17 +230,16 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     },
     ref,
   ) => {
-    const { value, displayValue, onChange, placeholder, styles } =
-      useSelectContext()
+    const { value, label, onChange, placeholder, styles } = useSelectContext()
 
     const cloneChildren = useMemo(() => {
-      if (!displayValue?.length)
+      if (!label?.length)
         return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
 
       if (component) {
         return (
           <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
-            {(displayValue as string[]).map((displayValue, index) => {
+            {(label as string[]).map((label, index) => {
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
 
@@ -249,7 +248,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
 
               const el = component({
                 value: value[index],
-                displayValue,
+                label,
                 index,
                 onRemove,
               }) as ReactElement
@@ -267,8 +266,8 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
       } else {
         return (
           <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
-            {(displayValue as string[]).map((value, index) => {
-              const isLast = displayValue.length === index + 1
+            {(label as string[]).map((value, index) => {
+              const isLast = label.length === index + 1
 
               return (
                 <ui.span key={index} display="inline-block" me="0.25rem">
@@ -281,7 +280,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
         )
       }
     }, [
-      displayValue,
+      label,
       isTruncated,
       noOfLines,
       onChange,
@@ -305,7 +304,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
         ref={ref}
         className={cx("ui-multi-select__field", className)}
         __css={css}
-        py={displayValue?.length && component ? "0.125rem" : undefined}
+        py={label?.length && component ? "0.125rem" : undefined}
         {...rest}
       >
         {cloneChildren}

@@ -35,7 +35,7 @@ type MultiAutocompleteOptions = {
    */
   component?: FC<{
     value: string | number
-    displayValue: string
+    label: string
     index: number
     onRemove: MouseEventHandler<HTMLElement>
   }>
@@ -231,23 +231,16 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
     },
     ref,
   ) => {
-    const {
-      value,
-      displayValue,
-      inputValue,
-      onChange,
-      isOpen,
-      inputRef,
-      styles,
-    } = useAutocompleteContext()
+    const { value, label, inputValue, onChange, isOpen, inputRef, styles } =
+      useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
 
     const cloneChildren = useMemo(() => {
-      if (!displayValue?.length) return null
+      if (!label?.length) return null
 
       if (component) {
-        return (displayValue as string[]).map((displayValue, index) => {
+        return (label as string[]).map((label, index) => {
           const onRemove: MouseEventHandler<HTMLElement> = (e) => {
             e.stopPropagation()
 
@@ -258,7 +251,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
 
           const el = component({
             value: value[index],
-            displayValue,
+            label,
             index,
             onRemove,
           })
@@ -273,8 +266,8 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
           return el ? cloneElement(el as ReactElement, { style }) : null
         })
       } else {
-        return (displayValue as string[]).map((value, index) => {
-          const isLast = displayValue.length === index + 1
+        return (label as string[]).map((value, index) => {
+          const isLast = label.length === index + 1
 
           return (
             <ui.span key={index} display="inline-block" me="0.25rem">
@@ -284,7 +277,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
           )
         })
       }
-    }, [displayValue, component, value, onChange, isOpen, inputRef, separator])
+    }, [label, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
       paddingEnd: "2rem",
@@ -302,7 +295,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
         <ui.div
           className={cx("ui-multi-autocomplete__field", className)}
           __css={css}
-          py={displayValue?.length && component ? "0.125rem" : undefined}
+          py={label?.length && component ? "0.125rem" : undefined}
           {...rest}
         >
           {cloneChildren}
@@ -315,9 +308,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
             marginBlockStart="0.125rem"
             marginBlockEnd="0.125rem"
             placeholder={
-              !displayValue || (keepPlaceholder && isOpen)
-                ? placeholder
-                : undefined
+              !label || (keepPlaceholder && isOpen) ? placeholder : undefined
             }
             {...getInputProps({ ...inputProps, value: inputValue ?? "" }, ref)}
           />

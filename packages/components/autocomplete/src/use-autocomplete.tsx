@@ -214,13 +214,13 @@ type AutocompleteContext = Omit<
   "value" | "defaultValue" | "onChange" | "onCreate"
 > & {
   value: string | string[]
-  displayValue: string | string[] | undefined
+  label: string | string[] | undefined
   inputValue: string
   isHit: boolean
   isEmpty: boolean
   isAllSelected: boolean
   onChange: (newValue: string) => void
-  onChangeDisplayValue: (newValue: string, runOmit?: boolean) => void
+  onChangeLabel: (newValue: string, runOmit?: boolean) => void
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
   inputProps: DOMAttributes
@@ -395,7 +395,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     defaultValue: rest.defaultValue,
     onChange: rest.onChange,
   })
-  const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
+  const [label, setLabel] = useState<T | undefined>(undefined)
   const [inputValue, setInputValue] = useState<string>("")
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
@@ -690,7 +690,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     [descendants, onFocusFirst],
   )
 
-  const onChangeDisplayValue = useCallback(
+  const onChangeLabel = useCallback(
     (newValue: string, runOmit: boolean = true) => {
       const enabledValues = descendants.enabledValues()
       const selectedValues = enabledValues
@@ -702,7 +702,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
         setInputValue("")
       }
 
-      setDisplayValue((prev) => {
+      setLabel((prev) => {
         if (!isMulti) {
           return selectedValues[0] as T
         } else {
@@ -749,20 +749,13 @@ export const useAutocomplete = <T extends string | string[] = string>({
           .filter(({ node }) =>
             format(node.textContent ?? "").includes(newValue),
           ).length > 0
-      onChangeDisplayValue(newValue)
+      onChangeLabel(newValue)
       if (!allowFree || isHit) {
         setInputValue("")
       }
       rebirthOptions(false)
     },
-    [
-      allowFree,
-      onChangeDisplayValue,
-      rebirthOptions,
-      setValue,
-      descendants,
-      format,
-    ],
+    [allowFree, onChangeLabel, rebirthOptions, setValue, descendants, format],
   )
 
   const onSelect = useCallback(() => {
@@ -890,11 +883,11 @@ export const useAutocomplete = <T extends string | string[] = string>({
       ev.stopPropagation()
 
       setValue([] as unknown as T)
-      setDisplayValue(undefined)
+      setLabel(undefined)
       setInputValue("")
       rebirthOptions()
     },
-    [setDisplayValue, setInputValue, setValue, rebirthOptions],
+    [setLabel, setInputValue, setValue, rebirthOptions],
   )
 
   const onClick = useCallback(() => {
@@ -941,7 +934,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       if (formControlProps.disabled || formControlProps.readOnly) return
       if (isComposition.current) return
 
-      const enabledDelete = displayValue === inputValue || !inputValue.length
+      const enabledDelete = label === inputValue || !inputValue.length
 
       const actions: Record<string, Function | undefined> = {
         ArrowDown: isFocused
@@ -991,7 +984,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     [
       allowFree,
       formControlProps,
-      displayValue,
+      label,
       inputValue,
       onOpen,
       isFocused,
@@ -1107,7 +1100,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     id,
     descendants,
     value,
-    displayValue,
+    label,
     inputValue,
     isHit,
     isEmpty,
@@ -1125,7 +1118,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     optionProps,
     formControlProps,
     setFocusedIndex,
-    onChangeDisplayValue,
+    onChangeLabel,
     onChange,
     onSearch,
     onCreate,
@@ -1401,7 +1394,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     value,
     omitSelectedValues,
     onChange,
-    onChangeDisplayValue,
+    onChangeLabel,
     focusedIndex,
     setFocusedIndex,
     onClose,
@@ -1488,8 +1481,8 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   )
 
   useEffect(() => {
-    if (isSelected) onChangeDisplayValue(computedProps.value ?? "", false)
-  }, [computedProps, isSelected, onChangeDisplayValue])
+    if (isSelected) onChangeLabel(computedProps.value ?? "", false)
+  }, [computedProps, isSelected, onChangeLabel])
 
   const getOptionProps: PropGetter = useCallback(
     (props = {}, ref = null) => {

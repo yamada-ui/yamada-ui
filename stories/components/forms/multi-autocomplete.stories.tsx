@@ -310,7 +310,7 @@ export const withComponent: Story = () => {
     <>
       <MultiAutocomplete
         placeholder="キャラクターを選択"
-        component={({ displayValue }) => <Tag>{displayValue}</Tag>}
+        component={({ label }) => <Tag>{label}</Tag>}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -319,8 +319,8 @@ export const withComponent: Story = () => {
 
       <MultiAutocomplete
         placeholder="キャラクターを選択"
-        component={({ displayValue, onRemove }) => (
-          <Tag onClose={onRemove}>{displayValue}</Tag>
+        component={({ label, onRemove }) => (
+          <Tag onClose={onRemove}>{label}</Tag>
         )}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>

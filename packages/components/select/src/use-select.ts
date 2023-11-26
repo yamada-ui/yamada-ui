@@ -59,9 +59,9 @@ type SelectContext = Omit<
   "value" | "defaultValue" | "onChange" | "isEmpty"
 > & {
   value: MaybeValue
-  displayValue: MaybeValue | undefined
+  label: MaybeValue | undefined
   onChange: (newValue: string) => void
-  onChangeDisplayValue: (newValue: string, runOmit?: boolean) => void
+  onChangeLabel: (newValue: string, runOmit?: boolean) => void
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -178,7 +178,7 @@ export const useSelect = <T extends MaybeValue = string>({
     defaultValue: rest.defaultValue,
     onChange: rest.onChange,
   })
-  const [displayValue, setDisplayValue] = useState<T | undefined>(undefined)
+  const [label, setLabel] = useState<T | undefined>(undefined)
 
   const isFocused = focusedIndex > -1
   const isMulti = isArray(value)
@@ -324,7 +324,7 @@ export const useSelect = <T extends MaybeValue = string>({
   const onFocusLastOrSelected =
     isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
-  const onChangeDisplayValue = useCallback(
+  const onChangeLabel = useCallback(
     (newValue: string, runOmit: boolean = true) => {
       const values = descendants.values()
       const selectedValues = values
@@ -335,7 +335,7 @@ export const useSelect = <T extends MaybeValue = string>({
             : undefined,
         )
 
-      setDisplayValue((prev) => {
+      setLabel((prev) => {
         if (!isMulti) {
           return selectedValues[0] as T
         } else {
@@ -377,9 +377,9 @@ export const useSelect = <T extends MaybeValue = string>({
         }
       })
 
-      onChangeDisplayValue(newValue)
+      onChangeLabel(newValue)
     },
-    [onChangeDisplayValue, setValue],
+    [onChangeLabel, setValue],
   )
 
   const onClear = useCallback(
@@ -387,9 +387,9 @@ export const useSelect = <T extends MaybeValue = string>({
       ev.stopPropagation()
 
       setValue([] as unknown as T)
-      setDisplayValue(undefined)
+      setLabel(undefined)
     },
-    [setDisplayValue, setValue],
+    [setLabel, setValue],
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
@@ -601,19 +601,19 @@ export const useSelect = <T extends MaybeValue = string>({
       ...props,
       "data-active": dataAttr(isOpen),
       "data-placeholder": dataAttr(
-        !isMulti ? displayValue === undefined : !displayValue?.length,
+        !isMulti ? label === undefined : !label?.length,
       ),
       "aria-expanded": dataAttr(isOpen),
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, isMulti, displayValue, rest, onFocus, onKeyDown],
+    [computedProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
   )
 
   return {
     descendants,
     value,
-    displayValue,
+    label,
     focusedIndex,
     placeholder,
     placeholderInOptions,
@@ -625,7 +625,7 @@ export const useSelect = <T extends MaybeValue = string>({
     listRef,
     optionProps,
     formControlProps,
-    onChangeDisplayValue,
+    onChangeLabel,
     onChange,
     onClear,
     onOpen,
@@ -829,7 +829,7 @@ export const useSelectOption = (
     focusedIndex,
     optionProps,
     onChange,
-    onChangeDisplayValue,
+    onChangeLabel,
     onFocusNext,
     onClose,
     setFocusedIndex,
@@ -924,8 +924,8 @@ export const useSelectOption = (
   )
 
   useEffect(() => {
-    if (isSelected) onChangeDisplayValue(computedProps.value ?? "", false)
-  }, [computedProps, isSelected, onChangeDisplayValue])
+    if (isSelected) onChangeLabel(computedProps.value ?? "", false)
+  }, [computedProps, isSelected, onChangeLabel])
 
   const getOptionProps: PropGetter = useCallback(
     (props = {}) => {

@@ -195,7 +195,7 @@ type SelectFieldProps = HTMLUIProps<"div">
 
 const SelectField = forwardRef<SelectFieldProps, "div">(
   ({ className, isTruncated = true, noOfLines, h, minH, ...rest }, ref) => {
-    const { displayValue, placeholder, styles } = useSelectContext()
+    const { label, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
       paddingEnd: "2rem",
@@ -214,7 +214,7 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
         {...rest}
       >
         <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
-          {displayValue ?? placeholder}
+          {label ?? placeholder}
         </ui.span>
       </ui.div>
     )

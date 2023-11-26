@@ -61,6 +61,18 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
 </VStack>
 ```
 
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に文字列を設定します。
+
+```tsx
+<NativeSelect placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <NativeOption value="孫悟空">孫悟空</NativeOption>
+  <NativeOption value="ベジータ">ベジータ</NativeOption>
+  <NativeOption value="フリーザ">フリーザ</NativeOption>
+</NativeSelect>
+```
+
 ### グループ化する
 
 グループ化する場合は、`NativeOptionGroup`を使用します。

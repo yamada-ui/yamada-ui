@@ -61,6 +61,18 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
 </VStack>
 ```
 
+### Set Default Value
+
+To set a default value, assign a string to `defaultValue`.
+
+```tsx
+<NativeSelect placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <NativeOption value="孫悟空">孫悟空</NativeOption>
+  <NativeOption value="ベジータ">ベジータ</NativeOption>
+  <NativeOption value="フリーザ">フリーザ</NativeOption>
+</NativeSelect>
+```
+
 ### Grouping
 
 To group options, use `NativeOptionGroup`.
@@ -115,7 +127,7 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
 
 ### Exclude Placeholder from Options
 
-By default, the placeholder is included in the options. To exclude the placeholder from options, set `placeholderInOptions` to `false`.
+By default, a placeholder is included in the options. To exclude the placeholder from options, set `placeholderInOptions` to `false`.
 
 ```tsx
 <NativeSelect placeholder="キャラクターを選択" placeholderInOptions={false}>

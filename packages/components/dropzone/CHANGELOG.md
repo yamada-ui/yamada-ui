@@ -1,5 +1,11 @@
 # @yamada-ui/dropzone
 
+## 0.5.3
+
+### Patch Changes
+
+- [`9a0fcf60`](https://github.com/hirotomoyamada/yamada-ui/commit/9a0fcf601a586afea45a99d0b43b705629ff1b4a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected context name.
+
 ## 0.5.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/select
 
+## 0.5.8
+
+### Patch Changes
+
+- [`9920bf6c`](https://github.com/hirotomoyamada/yamada-ui/commit/9920bf6c47c79a2447fc83fe7343d16d8fd4774f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed `displayValue` to `label`.
+
 ## 0.5.7
 
 ### Patch Changes

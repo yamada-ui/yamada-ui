@@ -368,24 +368,22 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
   <MultiSelect
     placeholder="キャラクターを選択"
-    iconProps={{ children: <Icon icon={faCaretDown} /> }}
+    iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    clearIconProps={{ children: <FontAwesomeIcon icon={faTrash} w="0.5em" /> }}
   >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
   </MultiSelect>
 </VStack>
-```
-
-```tsx
-<MultiSelect
-  placeholder="キャラクターを選択"
-  clearIconProps={{ children: <Icon icon={faTrash} w="0.5em" /> }}
->
-  <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ">ベジータ</Option>
-  <Option value="フリーザ">フリーザ</Option>
-</MultiSelect>
 ```
 
 ### オプションをカスタマイズする
@@ -402,7 +400,7 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
   <MultiSelect
     placeholder="キャラクターを選択"
-    optionProps={{ icon: <Icon icon={faCheck} color="green.500" /> }}
+    optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color="green.500" /> }}
   >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>

@@ -16,7 +16,7 @@ import { MultiSelect, OptionGroup, Option } from "@yamada-ui/react"
 ## Usage
 
 :::note
-If you want to select a single option from a list, please check [Select](/components/forms/select).
+If you want to select only one option from the list, please check [Select](/components/forms/select).
 :::
 
 ```tsx
@@ -39,7 +39,7 @@ const items: SelectItem[] = [
 return <MultiSelect placeholder="キャラクターを選択" items={items} />
 ```
 
-### Change Variants
+### Change Variant
 
 ```tsx
 <VStack>
@@ -148,9 +148,9 @@ To customize the separator, set a string to `separator`.
 </MultiSelect>
 ```
 
-### Use Custom Components
+### Use Custom Component
 
-To use custom components, set a `ReactElement` to `component`. `component` provides `value`, `label`, `index`, `onRemove`.
+To use a custom component, set a `ReactElement` to `component`. `component` provides `value`, `label`, `index`, `onRemove`.
 
 ```tsx
 <VStack>
@@ -335,7 +335,7 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `isInvalid` to `true`.
 
 ```tsx
 <VStack>
@@ -368,24 +368,22 @@ To customize icons, set `props` to `iconProps` or `clearIconProps`.
 
   <MultiSelect
     placeholder="キャラクターを選択"
-    iconProps={{ children: <Icon icon={faCaretDown} /> }}
+    iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    clearIconProps={{ children: <FontAwesomeIcon icon={faTrash} w="0.5em" /> }}
   >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
   </MultiSelect>
 </VStack>
-```
-
-```tsx
-<MultiSelect
-  placeholder="キャラクターを選択"
-  clearIconProps={{ children: <Icon icon={faTrash} w="0.5em" /> }}
->
-  <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ">ベジータ</Option>
-  <Option value="フリーザ">フリーザ</Option>
-</MultiSelect>
 ```
 
 ### Customize Options
@@ -402,7 +400,7 @@ To customize options, set `props` to `optionProps`.
 
   <MultiSelect
     placeholder="キャラクターを選択"
-    optionProps={{ icon: <Icon icon={faCheck} color="green.500" /> }}
+    optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color="green.500" /> }}
   >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>

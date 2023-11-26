@@ -1,12 +1,489 @@
 ---
 title: MultiSelect
-description: This page is currently being created.
-package_name: "@yamada-ui/multi-select"
+description: "`MultiSelect` is a component used for allowing users to select multiple values from a list of options."
+package_name: "@yamada-ui/select"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { MultiSelect, OptionGroup, Option } from "@yamada-ui/react"
+```
+
+## Usage
+
+:::note
+If you want to select a single option from a list, please check [Select](/components/forms/select).
+:::
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+Alternatively, you can omit `Option` by setting `items`.
+
+```tsx functional=true
+const items: SelectItem[] = [
+  { label: "孫悟空", value: "孫悟空" },
+  { label: "ベジータ", value: "ベジータ" },
+  { label: "フリーザ", value: "フリーザ" },
+]
+
+return <MultiSelect placeholder="キャラクターを選択" items={items} />
+```
+
+### Change Variants
+
+```tsx
+<VStack>
+  <MultiSelect variant="outline" placeholder="outline" />
+  <MultiSelect variant="filled" placeholder="filled" />
+  <MultiSelect variant="flushed" placeholder="flushed" />
+  <MultiSelect variant="unstyled" placeholder="unstyled" />
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <MultiSelect placeholder="extra small size" size="xs" />
+  <MultiSelect placeholder="small size" size="sm" />
+  <MultiSelect placeholder="medium size" size="md" />
+  <MultiSelect placeholder="large size" size="lg" />
+</VStack>
+```
+
+### Set Default Values
+
+To set default values, set a string to `defaultValue`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" defaultValue={["ベジータ"]}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Grouping
+
+To group options, use `OptionGroup`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択">
+  <OptionGroup label="地球人">
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="孫悟飯">孫悟飯</Option>
+    <Option value="クリリン">クリリン</Option>
+  </OptionGroup>
+
+  <OptionGroup label="フリーザ軍">
+    <Option value="フリーザ">フリーザ</Option>
+    <Option value="ギニュー">ギニュー</Option>
+    <Option value="リクーム">リクーム</Option>
+    <Option value="バータ">バータ</Option>
+    <Option value="ジース">ジース</Option>
+    <Option value="グルド">グルド</Option>
+  </OptionGroup>
+</MultiSelect>
+```
+
+For `items`, set it like this.
+
+```tsx functional=true
+const items: SelectItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return <MultiSelect placeholder="キャラクターを選択" items={items} />
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx
+<VStack>
+  <MultiSelect focusBorderColor="green.500" placeholder="custom border color" />
+  <MultiSelect isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+</VStack>
+```
+
+### Customize Separator
+
+To customize the separator, set a string to `separator`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" separator=";">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Use Custom Components
+
+To use custom components, set a `ReactElement` to `component`. `component` provides `value`, `label`, `index`, `onRemove`.
+
+```tsx
+<VStack>
+  <MultiSelect placeholder="キャラクターを選択" component={({ label }) => <Tag>{label}</Tag>}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    component={({ label, onRemove }) => <Tag onClose={onRemove}>{label}</Tag>}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+</VStack>
+```
+
+### Exclude Selected Values from List
+
+To exclude selected values from the list, set `omitSelectedValues` to `true`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" omitSelectedValues={true}>
+  <OptionGroup label="地球人">
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="孫悟飯">孫悟飯</Option>
+    <Option value="クリリン">クリリン</Option>
+  </OptionGroup>
+
+  <OptionGroup label="フリーザ軍">
+    <Option value="フリーザ">フリーザ</Option>
+    <Option value="ギニュー">ギニュー</Option>
+    <Option value="リクーム">リクーム</Option>
+    <Option value="バータ">バータ</Option>
+    <Option value="ジース">ジース</Option>
+    <Option value="グルド">グルド</Option>
+  </OptionGroup>
+</MultiSelect>
+```
+
+### Set Maximum Number of Selectable Values
+
+To set the maximum number of selectable values, set `maxSelectedValues` to `true`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" maxSelectedValues={3}>
+  <OptionGroup label="地球人">
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="孫悟飯">孫悟飯</Option>
+    <Option value="クリリン">クリリン</Option>
+  </OptionGroup>
+
+  <OptionGroup label="フリーザ軍">
+    <Option value="フリーザ">フリーザ</Option>
+    <Option value="ギニュー">ギニュー</Option>
+    <Option value="リクーム">リクーム</Option>
+    <Option value="バータ">バータ</Option>
+    <Option value="ジース">ジース</Option>
+    <Option value="グルド">グルド</Option>
+  </OptionGroup>
+</MultiSelect>
+```
+
+### Close Dropdown List on Selection
+
+To close the dropdown list on selection, set `closeOnSelect` to `true`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" closeOnSelect={true}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Disable Clearing
+
+To disable clearing, set `isClearable` to `false`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" isClearable={false}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Change Display Position
+
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Change Duration
+
+To change the duration, set a number (seconds) to `duration`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択" duration={0.4}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Change Offset
+
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
+
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal, vertical]`.
+
+```tsx
+<VStack>
+  <MultiSelect placeholder="キャラクターを選択" gutter={32}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+
+  <MultiSelect placeholder="キャラクターを選択" offset={[16, 16]} listProps={{ maxW: "xs" }}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+</VStack>
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx
+<VStack>
+  <MultiSelect isDisabled variant="outline" placeholder="outline" />
+  <MultiSelect isDisabled variant="filled" placeholder="filled" />
+  <MultiSelect isDisabled variant="flushed" placeholder="flushed" />
+  <MultiSelect isDisabled variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isDisabled label="Which notifications would you like to receive?">
+    <MultiSelect placeholder="Select notifications" />
+  </FormControl>
+</VStack>
+```
+
+To disable an option, set `isDisabled` to `true` on `Option`.
+
+```tsx
+<MultiSelect placeholder="キャラクターを選択">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ" isDisabled>
+    ベジータ
+  </Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Make Read-Only
+
+To make read-only, set `isReadOnly` to `true`.
+
+```tsx
+<VStack>
+  <MultiSelect isReadOnly variant="outline" placeholder="outline" />
+  <MultiSelect isReadOnly variant="filled" placeholder="filled" />
+  <MultiSelect isReadOnly variant="flushed" placeholder="flushed" />
+  <MultiSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isReadOnly label="Which notifications would you like to receive?">
+    <MultiSelect placeholder="Select notifications" />
+  </FormControl>
+</VStack>
+```
+
+### Make Input Invalid
+
+To make input invalid, set `isInvalid` to `true`.
+
+```tsx
+<VStack>
+  <MultiSelect isInvalid variant="outline" placeholder="outline" />
+  <MultiSelect isInvalid variant="filled" placeholder="filled" />
+  <MultiSelect isInvalid variant="flushed" placeholder="flushed" />
+  <MultiSelect isInvalid variant="unstyled" placeholder="unstyled" />
+
+  <FormControl
+    isInvalid
+    label="Which notifications would you like to receive?"
+    errorMessage="This is required."
+  >
+    <MultiSelect placeholder="Select notifications" />
+  </FormControl>
+</VStack>
+```
+
+### Customize Icons
+
+To customize icons, set `props` to `iconProps` or `clearIconProps`.
+
+```tsx
+<VStack>
+  <MultiSelect placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    iconProps={{ children: <Icon icon={faCaretDown} /> }}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+</VStack>
+```
+
+```tsx
+<MultiSelect
+  placeholder="キャラクターを選択"
+  clearIconProps={{ children: <Icon icon={faTrash} w="0.5em" /> }}
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Customize Options
+
+To customize options, set `props` to `optionProps`.
+
+```tsx
+<VStack>
+  <MultiSelect placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    optionProps={{ icon: <Icon icon={faCheck} color="green.500" /> }}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+</VStack>
+```
+
+### Control
+
+```tsx functional=true
+const [value, onChange] = useState<string[]>(["孫悟空"])
+
+return (
+  <MultiSelect placeholder="キャラクターを選択" value={value} onChange={onChange}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </MultiSelect>
+)
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+type Data = { select: string[] }
+
+const items: SelectItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.select}
+      label="Who is your favorite character?"
+      errorMessage={errors.select ? errors.select.message : undefined}
+    >
+      <Controller
+        name="select"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <MultiSelect placeholder="キャラクターを選択" {...field} items={items} />
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

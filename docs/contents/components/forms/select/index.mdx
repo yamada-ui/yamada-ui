@@ -61,6 +61,18 @@ return <Select placeholder="キャラクターを選択" items={items} />
 </VStack>
 ```
 
+### Set Default Value
+
+To set a default value, assign a string to `defaultValue`.
+
+```tsx
+<Select placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
 ### Grouping
 
 To group options, use `OptionGroup`.
@@ -111,18 +123,6 @@ const items: SelectItem[] = [
 ]
 
 return <Select placeholder="キャラクターを選択" items={items} />
-```
-
-### Set Default Value
-
-To set a default value, assign a string to `defaultValue`.
-
-```tsx
-<Select placeholder="キャラクターを選択" defaultValue="ベジータ">
-  <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ">ベジータ</Option>
-  <Option value="フリーザ">フリーザ</Option>
-</Select>
 ```
 
 ### Exclude Placeholder from Options

@@ -1,12 +1,343 @@
 ---
 title: MonthPicker
-description: このページは現在作成中です。
-package_name: "@yamada-ui/month-picker"
+description: "`MonthPicker`は、ユーザーが月を選択するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/calendar"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+:::note status=warning
+`@yamada-ui/calendar`は、`@yamada-ui/react`に含まれていないため、別途インストールする必要があります。
+:::
+
+```ts
+import { MonthPicker } from "@yamada-ui/calendar"
+```
+
+## 使い方
+
+```tsx
+<MonthPicker placeholder="basic" />
+```
+
+### バリアントを変更する
+
+```tsx
+<VStack>
+  <MonthPicker variant="outline" placeholder="outline" />
+  <MonthPicker variant="filled" placeholder="filled" />
+  <MonthPicker variant="flushed" placeholder="flushed" />
+  <MonthPicker variant="unstyled" placeholder="unstyled" />
+</VStack>
+```
+
+カレンダーのバリアントを変更する場合は、`variant`を設定します。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="solid" calendarVariant="solid" />
+  <MonthPicker placeholder="subtle" calendarVariant="subtle" />
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="extra small size" size="xs" />
+  <MonthPicker placeholder="small size" size="sm" />
+  <MonthPicker placeholder="medium size" size="md" />
+  <MonthPicker placeholder="large size" size="lg" />
+</VStack>
+```
+
+カレンダーのサイズを変更する場合は、`calendarSize`を設定します。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="small size" calendarSize="sm" />
+  <MonthPicker placeholder="medium size" calendarSize="md" />
+  <MonthPicker placeholder="large size" calendarSize="lg" />
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx
+<VStack>
+  <MonthPicker
+    calendarVariant="solid"
+    calendarColorScheme="secondary"
+    today
+    defaultValue={new Date(new Date().setDate(1))}
+  />
+  <MonthPicker
+    calendarVariant="subtle"
+    calendarColorScheme="green"
+    today
+    defaultValue={new Date(new Date().setDate(1))}
+  />
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に`Date`を設定します。
+
+```tsx
+<MonthPicker defaultValue={new Date()} />
+```
+
+### デフォルトのタイプを変更する
+
+デフォルトのタイプを変更する場合は、`defaultType`に`month`または`year`を設定します。デフォルトでは、`year`が設定されています。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="month" defaultType="month" />
+  <MonthPicker placeholder="year" defaultType="year" />
+</VStack>
+```
+
+### デフォルトの月を設定する
+
+デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM/DD" defaultMonth={new Date("1993-08-18")} />
+```
+
+### パターンを設定する
+
+パターンを設定する場合は、`pattern`に正規表現を設定します。デフォルトでは、`'/[^0-9\-\/]/g'`が設定されています。
+
+```tsx
+<MonthPicker
+  placeholder="MMM YYYY"
+  inputFormat="MMM YYYY"
+  pattern={/[^\w, ]/g}
+  defaultValue={new Date()}
+/>
+```
+
+### 日付の解析
+
+日付の解析方法をカスタマイズすることができます。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM" inputFormat="YYYY/MM" parseDate={(value) => new Date(value)} />
+```
+
+### 最小と最大の月を設定する
+
+選択可能な最小と最大の月を設定する場合は、`minDate`と`maxDate`に`Date`を設定します。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM" minDate={new Date(1993, 8)} maxDate={new Date(2000, 10)} />
+```
+
+### ロケールを設定する
+
+ロケールを設定する場合は、データをインポートして、`locale`に対象のロケールを設定します。
+
+```ts
+import "dayjs/locale/ja"
+```
+
+```tsx
+<MonthPicker locale="ja" />
+```
+
+:::note
+ロケールについては、[こちら](https://day.js.org/docs/en/i18n/instance-locale)をご覧ください。
+:::
+
+### 年月のフォーマットを変更する
+
+日付のフォーマットを変更する場合は、`inputFormat`や`yearFormat`に文字列を設定します。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="YYYY-MM" inputFormat="YYYY-MM" />
+  <MonthPicker placeholder="YYYY/MM" locale="ja" defaultType="month" yearFormat="YYYY年" />
+</VStack>
+```
+
+:::note
+フォーマットについては、[こちら](https://day.js.org/docs/en/display/format#list-of-localized-formats)をご覧ください。
+:::
+
+### 選択時にカレンダーを閉じない
+
+デフォルトでは、選択時に自動的にカレンダーを閉じます。選択時にカレンダーを閉じないようにする場合は、`closeOnSelect`を`false`に設定します。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM" closeOnSelect={false} />
+```
+
+### ブラー時にカレンダーを閉じない
+
+デフォルトでは、ブラー時に自動的にカレンダーを閉じます。ブラー時にカレンダーを閉じないようにする場合は、`closeOnBlur`を`false`に設定します。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM" closeOnBlur={false} />
+```
+
+### クリアを無効化する
+
+クリアを無効化する場合は、`isClearable`を`false`に設定します。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM" isClearable={false} />
+```
+
+### 入力を許可しない
+
+入力を許可しない場合は、`allowInput`を`false`に設定します。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM" allowInput={false} />
+```
+
+### 表示位置を変更する
+
+表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
+
+```tsx
+<MonthPicker placeholder="YYYY/MM/DD" placement="bottom-end" />
+```
+
+### オフセットを変更する
+
+要素の大きさやシチュエーションによっては、ツールチップの位置を変更したい場合があります。その場合は、`gutter`または`offset`で位置を調整します。
+
+`gutter`は、単純な要素との差を設定でき、`offset`は、`[横軸, 縦軸]`を設定できます。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="YYYY/MM/DD" gutter={32} />
+  <MonthPicker placeholder="YYYY/MM/DD" offset={[16, 16]} />
+</VStack>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx
+<VStack>
+  <MonthPicker focusBorderColor="green.500" placeholder="custom border color" />
+  <MonthPicker isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+</VStack>
+```
+
+### 無効化する
+
+無効化する場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<VStack>
+  <MonthPicker isDisabled variant="outline" placeholder="outline" />
+  <MonthPicker isDisabled variant="filled" placeholder="filled" />
+  <MonthPicker isDisabled variant="flushed" placeholder="flushed" />
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx
+<VStack>
+  <MonthPicker isReadOnly variant="outline" placeholder="outline" />
+  <MonthPicker isReadOnly variant="filled" placeholder="filled" />
+  <MonthPicker isReadOnly variant="flushed" placeholder="flushed" />
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`isInvalid`を`true`に設定します。
+
+```tsx
+<VStack>
+  <MonthPicker isInvalid variant="outline" placeholder="outline" />
+  <MonthPicker isInvalid variant="filled" placeholder="filled" />
+  <MonthPicker isInvalid variant="flushed" placeholder="flushed" />
+</VStack>
+```
+
+### アイコンをカスタマイズする
+
+アイコンをカスタマイズする場合は、`iconProps`に`props`を設定します。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="YYYY/MM/DD" iconProps={{ color: "primary" }} />
+  <MonthPicker
+    placeholder="YYYY/MM/DD"
+    iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
+</VStack>
+```
+
+### 制御する
+
+```tsx functional=true
+const [value, onChange] = useState<Date | null>(new Date())
+
+return <MonthPicker placeholder="YYYY/MM" value={value} onChange={onChange} />
+```
+
+```tsx functional=true
+const [type, onChangeType] = useState<MonthPickerProps["type"]>("month")
+
+return <MonthPicker placeholder="YYYY/MM" type={type} onChangeType={onChangeType} />
+```
+
+```tsx functional=true
+const [month, onChangeMonth] = useState<Date>(new Date("1993-08-18"))
+
+return <MonthPicker placeholder="YYYY/MM" month={month} onChangeMonth={onChangeMonth} />
+```
+
+### `React Hook Form`を使う
+
+```tsx functional=true
+type Data = { MonthPicker: Date | null }
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.MonthPicker}
+      label="Birthday"
+      errorMessage={errors.MonthPicker ? errors.MonthPicker.message : undefined}
+    >
+      <Controller
+        name="MonthPicker"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => <MonthPicker placeholder="YYYY/MM" {...field} />}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

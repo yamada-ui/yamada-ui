@@ -1,12 +1,539 @@
 ---
 title: Autocomplete
-description: This page is currently being created.
+description: "`Autocomplete` is a component used to display suggestions in response to user text input."
 package_name: "@yamada-ui/autocomplete"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Autocomplete, AutocompleteOptionGroup, AutocompleteOption } from "@yamada-ui/react"
+```
+
+## Usage
+
+:::note
+If you want to select multiple values from a list of options, please check [MultiAutocomplete](/components/forms/multi-autocomplete).
+:::
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択">
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+Alternatively, you can omit `AutocompleteOption` by setting `items`.
+
+```tsx functional=true
+const items: AutocompleteItem[] = [
+  { label: "孫悟空", value: "孫悟空" },
+  { label: "ベジータ", value: "ベジータ" },
+  { label: "フリーザ", value: "フリーザ" },
+]
+
+return <Autocomplete placeholder="キャラクターを選択" items={items} />
+```
+
+### Change Variant
+
+```tsx
+<VStack>
+  <Autocomplete variant="outline" placeholder="outline" />
+  <Autocomplete variant="filled" placeholder="filled" />
+  <Autocomplete variant="flushed" placeholder="flushed" />
+  <Autocomplete variant="unstyled" placeholder="unstyled" />
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Autocomplete placeholder="extra small size" size="xs" />
+  <Autocomplete placeholder="small size" size="sm" />
+  <Autocomplete placeholder="medium size" size="md" />
+  <Autocomplete placeholder="large size" size="lg" />
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a string to `defaultValue`.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+### Grouping
+
+To group items, use `AutocompleteOptionGroup`.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択">
+  <AutocompleteOptionGroup label="地球人">
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="孫悟飯">孫悟飯</AutocompleteOption>
+    <AutocompleteOption value="クリリン">クリリン</AutocompleteOption>
+  </AutocompleteOptionGroup>
+
+  <AutocompleteOptionGroup label="フリーザ軍">
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+    <AutocompleteOption value="ギニュー">ギニュー</AutocompleteOption>
+    <AutocompleteOption value="リクーム">リクーム</AutocompleteOption>
+    <AutocompleteOption value="バータ">バータ</AutocompleteOption>
+    <AutocompleteOption value="ジース">ジース</AutocompleteOption>
+    <AutocompleteOption value="グルド">グルド</AutocompleteOption>
+  </AutocompleteOptionGroup>
+</Autocomplete>
+```
+
+For `items`, set it up like this.
+
+```tsx functional=true
+const items: SelectItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return <Autocomplete placeholder="キャラクターを選択" items={items} />
+```
+
+### Change Message When No Suggestions
+
+To change the message when there are no suggestions, set a string to `emptyMessage`.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択" emptyMessage="キャラクターが存在しません">
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+### Allow Creation of New Items
+
+To allow the creation of new items, set `allowCreate` to `true`.
+
+```tsx functional=true
+const items: AutocompleteItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return (
+  <Autocomplete
+    placeholder="キャラクターを選択"
+    items={items}
+    allowCreate
+    onCreate={(newItem, newItems) => console.log("created item", newItem, "new items", newItems)}
+  />
+)
+```
+
+### Change Insert Position of Created Items
+
+To change the insert position of created items, set `insertPositionItem` to `first`, `last`, or a specific group name followed by `first` or `last`. By default, `first` is set.
+
+- `first`: Inserts at the beginning of the list.
+- `last`: Inserts at the end of the list.
+- `[Group Name, first | last]`: If you want to insert at the beginning or end of a specific group, set the group name and `first` or `last`.
+
+```tsx functional=true
+const items: AutocompleteItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return (
+  <VStack>
+    <Autocomplete
+      placeholder="キャラクターを選択"
+      items={items}
+      allowCreate
+      insertPositionItem="first"
+    />
+    <Autocomplete
+      placeholder="キャラクターを選択"
+      items={items}
+      allowCreate
+      insertPositionItem="last"
+    />
+    <Autocomplete
+      placeholder="キャラクターを選択"
+      items={items}
+      allowCreate
+      insertPositionItem="地球人"
+    />
+    <Autocomplete
+      placeholder="キャラクターを選択"
+      items={items}
+      allowCreate
+      insertPositionItem={["フリーザ軍", "last"]}
+    />
+  </VStack>
+)
+```
+
+### Allow Free Input
+
+By default, values not in the suggestions are cleared on blur. To allow free input without clearing, set `allowFree` to `true`.
+
+```tsx functional=true
+const items: AutocompleteItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return <Autocomplete placeholder="キャラクターを選択" items={items} allowFree />
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx
+<VStack>
+  <Autocomplete focusBorderColor="green.500" placeholder="custom border color">
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+
+  <Autocomplete isInvalid errorBorderColor="orange.500" placeholder="custom border color">
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+</VStack>
+```
+
+### Do Not Close Dropdown List on Selection
+
+By default, the dropdown list closes automatically upon selection. To prevent the dropdown list from closing on selection, set `closeOnSelect` to `false`.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択" closeOnSelect={false}>
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+### Do Not Close Dropdown List on Blur
+
+By default, the dropdown list closes automatically on blur. To prevent the dropdown list from closing on blur, set `closeOnBlur` to `false`.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択" closeOnBlur={false}>
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+### Change Display Position
+
+To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+### Change Offset
+
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
+
+`gutter` allows you to set the difference from a simple element, and `offset` allows you to set `[horizontal axis, vertical axis]`.
+
+```tsx
+<VStack>
+  <Autocomplete placeholder="キャラクターを選択" duration={0.4}>
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+
+  <Autocomplete placeholder="キャラクターを選択" gutter={32}>
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+</VStack>
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx
+<VStack>
+  <Autocomplete isDisabled variant="outline" placeholder="outline" />
+  <Autocomplete isDisabled variant="filled" placeholder="filled" />
+  <Autocomplete isDisabled variant="flushed" placeholder="flushed" />
+  <Autocomplete isDisabled variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isDisabled label="Which notifications would you like to receive?">
+    <Autocomplete placeholder="Autocomplete notifications" />
+  </FormControl>
+</VStack>
+```
+
+To disable an option, set `isDisabled` to `true` on `AutocompleteOption`.
+
+```tsx
+<Autocomplete placeholder="キャラクターを選択">
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ" isDisabled>
+    ベジータ
+  </AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</Autocomplete>
+```
+
+### Make Read-Only
+
+To make read-only, set `isReadOnly` to `true`.
+
+```tsx
+<VStack>
+  <Autocomplete isReadOnly variant="outline" placeholder="outline" />
+  <Autocomplete isReadOnly variant="filled" placeholder="filled" />
+  <Autocomplete isReadOnly variant="flushed" placeholder="flushed" />
+  <Autocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isReadOnly label="Which notifications would you like to receive?">
+    <Autocomplete placeholder="Autocomplete notifications" />
+  </FormControl>
+</VStack>
+```
+
+### Make Input Invalid
+
+To make the input invalid, set `isInvalid` to `true`.
+
+```tsx
+<VStack>
+  <Autocomplete isInvalid variant="outline" placeholder="outline" />
+  <Autocomplete isInvalid variant="filled" placeholder="filled" />
+  <Autocomplete isInvalid variant="flushed" placeholder="flushed" />
+  <Autocomplete isInvalid variant="unstyled" placeholder="unstyled" />
+
+  <FormControl
+    isInvalid
+    label="Which notifications would you like to receive?"
+    errorMessage="This is required."
+  >
+    <Autocomplete placeholder="Autocomplete notifications" />
+  </FormControl>
+</VStack>
+```
+
+### Customize Icon
+
+To customize the icon, set `props` to `iconProps`.
+
+```tsx
+<VStack>
+  <Autocomplete placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+
+  <Autocomplete
+    placeholder="キャラクターを選択"
+    iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+  >
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+</VStack>
+```
+
+### Customize Option
+
+To customize an option, set `props` to `optionProps`.
+
+```tsx
+<VStack>
+  <Autocomplete placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+
+  <Autocomplete
+    placeholder="キャラクターを選択"
+    optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color="green.500" /> }}
+  >
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+</VStack>
+```
+
+### Control
+
+```tsx functional=true
+const [value, onChange] = useState<string>("孫悟空")
+
+return (
+  <Autocomplete placeholder="キャラクターを選択" value={value} onChange={onChange}>
+    <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+    <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+    <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+  </Autocomplete>
+)
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+type Data = {
+  autocomplete: string
+}
+
+const items: AutocompleteItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.autocomplete}
+      label="Who is your favorite character?"
+      errorMessage={errors.autocomplete ? errors.autocomplete.message : undefined}
+    >
+      <Controller
+        name="autocomplete"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <Autocomplete placeholder="キャラクターを選択" {...field} items={items} />
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

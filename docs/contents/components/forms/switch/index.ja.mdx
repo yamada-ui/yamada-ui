@@ -1,12 +1,145 @@
 ---
 title: Switch
-description: このページは現在作成中です。
+description: "`Switch`は、オンとオフの状態を切り替えるために使用されるコンポーネントです。"
 package_name: "@yamada-ui/switch"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { Switch } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<Switch>basic</Switch>
+```
+
+### バリアントを変更する
+
+```tsx
+<Wrap gap="md">
+  <Switch variant="thick">thick</Switch>
+  <Switch variant="thin">thin</Switch>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx
+<Wrap gap="md">
+  <Switch size="sm">small size</Switch>
+  <Switch size="md">medium size</Switch>
+  <Switch size="lg">large size</Switch>
+</Wrap>
+```
+
+### カラースキームを変更する
+
+```tsx
+<Wrap gap="md">
+  <Switch colorScheme="secondary" defaultIsChecked>
+    Secondary
+  </Switch>
+  <Switch colorScheme="green" defaultIsChecked>
+    Green
+  </Switch>
+</Wrap>
+```
+
+### ラベルの位置を変更する
+
+ラベルの位置を変更する場合は、`isReverse`を`true`に設定します。
+
+```tsx
+<Switch isReverse>basic</Switch>
+```
+
+### 無効化する
+
+無効化する場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<Wrap gap="md">
+  <Switch isDisabled>disabled</Switch>
+  <Switch isDisabled defaultIsChecked>
+    disabled
+  </Switch>
+</Wrap>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx
+<Wrap gap="md">
+  <Switch isReadOnly>read only</Switch>
+  <Switch isReadOnly defaultIsChecked>
+    read only
+  </Switch>
+</Wrap>
+```
+
+### ラベルをカスタマイズする
+
+ラベルをカスタマイズする場合は、`Label`を使用します。
+
+```tsx functional=true
+const id = useId()
+
+return (
+  <HStack gap="sm">
+    <Label htmlFor={id} userSelect="none">
+      Please Click
+    </Label>
+    <Switch id={id} />
+  </HStack>
+)
+```
+
+### 制御する
+
+```tsx functional=true
+const [isChecked, { toggle }] = useBoolean(false)
+
+return (
+  <Switch isChecked={isChecked} onChange={toggle}>
+    custom control
+  </Switch>
+)
+```
+
+### `React Hook Form`を使う
+
+```tsx functional=true
+type Data = { switch: boolean }
+
+const { control, handleSubmit, watch } = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <Controller
+      name="switch"
+      control={control}
+      render={({ field: { value, ...rest } }) => (
+        <Switch isChecked={value} {...rest}>
+          Dark mode
+        </Switch>
+      )}
+    />
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

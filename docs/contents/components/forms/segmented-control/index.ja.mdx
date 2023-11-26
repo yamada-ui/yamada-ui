@@ -1,12 +1,216 @@
 ---
 title: SegmentedControl
-description: このページは現在作成中です。
+description: "`SegmentedControl`は、ユーザーが複数の選択肢の中から1つを選択するための使用されるコンポーネントです。"
 package_name: "@yamada-ui/segmented-control"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { SegmentedControl, SegmentedControlButton } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<SegmentedControl>
+  <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+  <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+  <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+</SegmentedControl>
+```
+
+または、`items`を設定することで`SegmentedControlButton`を省略することができます。
+
+```tsx functional=true
+const items: SegmentedControlItem[] = [
+  { label: "孫悟空", value: "孫悟空" },
+  { label: "ベジータ", value: "ベジータ" },
+  { label: "フリーザ", value: "フリーザ" },
+]
+
+return <SegmentedControl items={items} />
+```
+
+### バリアントを変更する
+
+```tsx
+<VStack alignItems="flex-start">
+  <SegmentedControl variant="basic">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+
+  <SegmentedControl variant="rounded">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx
+<VStack alignItems="flex-start">
+  <SegmentedControl size="sm">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+
+  <SegmentedControl size="md">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+
+  <SegmentedControl size="lg">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+</VStack>
+```
+
+### カラースキーマを変更する
+
+カラースキーマを変更して、異なる色のスタイルを適用します。
+
+```tsx
+<VStack alignItems="flex-start">
+  <SegmentedControl colorScheme="secondary">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+
+  <SegmentedControl colorScheme="green">
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に文字列を設定します。
+
+```tsx
+<SegmentedControl defaultValue="ベジータ">
+  <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+  <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+  <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+</SegmentedControl>
+```
+
+### 無効化する
+
+無効化する場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<VStack alignItems="flex-start">
+  <SegmentedControl isDisabled>
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+
+  <SegmentedControl>
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ" isDisabled>
+      ベジータ
+    </SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx
+<VStack alignItems="flex-start">
+  <SegmentedControl isReadOnly>
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+
+  <SegmentedControl>
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ" isReadOnly>
+      ベジータ
+    </SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+</VStack>
+```
+
+### 制御する
+
+```tsx functional=true
+const [value, onChange] = useState<string>("孫悟空")
+
+return (
+  <SegmentedControl value={value} onChange={onChange}>
+    <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+    <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+    <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+  </SegmentedControl>
+)
+```
+
+### `React Hook Form`を使う
+
+```tsx functional=true
+type Data = { segmentedControl: string }
+
+const defaultValues: Data = {
+  segmentedControl: "ベジータ",
+}
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>({ defaultValues })
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.segmentedControl}
+      label="Who is your favorite character?"
+      errorMessage={errors.segmentedControl ? errors.segmentedControl.message : undefined}
+    >
+      <Controller
+        name="segmentedControl"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <SegmentedControl {...field}>
+            <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
+            <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
+            <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
+          </SegmentedControl>
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

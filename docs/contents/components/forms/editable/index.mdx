@@ -1,12 +1,177 @@
 ---
 title: Editable
-description: This page is currently being created.
+description: "`Editable` is a component used to obtain inline editable text input."
 package_name: "@yamada-ui/editable"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Editable, EditableInput, EditablePreview, EditableTextarea } from "@yamada-ui/react"
+```
+
+- `Editable`: A wrapper component that controls child elements (`EditableInput`, `EditableTextarea`, `EditablePreview`).
+- `EditablePreview`: A component that displays the value of the text input.
+- `EditableInput`: A component that captures text input. It is displayed when `EditablePreview` is clicked or focused.
+- `EditableTextarea`: A component that captures multi-line text input. It is displayed when `EditablePreview` is clicked or focused.
+
+## Usage
+
+```tsx
+<Editable defaultValue="オッス！オラ悟空！">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+For multi-line cases, use `EditableTextarea`.
+
+```tsx
+<Editable
+  defaultValue={`私の戦闘力は530000です。\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`}
+>
+  <EditablePreview />
+  <EditableTextarea h="2lh" />
+</Editable>
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx
+<Editable focusBorderColor="green.500" defaultValue="custom border color">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx
+<Editable isDisabled defaultValue="your email address">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### Make Read-Only
+
+To make read-only, set `isReadOnly` to `true`.
+
+```tsx
+<Editable isReadOnly defaultValue="your email address">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### Make Input Invalid
+
+```tsx
+<Editable isInvalid defaultValue="your email address">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+### Control
+
+```tsx functional=true
+const CustomControls = () => {
+  const { isEditing, getSubmitProps, getCancelProps, getEditProps } = useEditableControl()
+
+  return isEditing ? (
+    <ButtonGroup size="sm" gap="sm">
+      <IconButton icon={<FontAwesomeIcon icon={faCheck} />} {...getSubmitProps()} />
+      <IconButton icon={<FontAwesomeIcon icon={faClose} />} {...getCancelProps()} />
+    </ButtonGroup>
+  ) : (
+    <ButtonGroup size="sm" gap="sm">
+      <IconButton icon={<FontAwesomeIcon icon={faPen} />} {...getEditProps()} />
+    </ButtonGroup>
+  )
+}
+
+return (
+  <Editable display="flex" gap="sm" isPreviewFocusable={false} defaultValue="オッス！オラ悟空！">
+    <EditablePreview w="full" />
+    <EditableInput />
+    <CustomControls />
+  </Editable>
+)
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+type Data = { input: string; textarea: string }
+
+const defaultValues: Data = {
+  input: "",
+  textarea: "",
+}
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>({ defaultValues })
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.input}
+      label="Name"
+      errorMessage={errors.input ? errors.input.message : undefined}
+    >
+      <Controller
+        name="input"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <Editable placeholder="孫悟空" {...field}>
+            <EditablePreview />
+            <EditableInput />
+          </Editable>
+        )}
+      />
+    </FormControl>
+
+    <FormControl
+      isInvalid={!!errors.textarea}
+      label="Feedback"
+      errorMessage={errors.textarea ? errors.textarea.message : undefined}
+    >
+      <Controller
+        name="textarea"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <Editable
+            placeholder={`私の戦闘力は530000です。\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`}
+            {...field}
+          >
+            <EditablePreview />
+            <EditableTextarea h="2lh" />
+          </Editable>
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

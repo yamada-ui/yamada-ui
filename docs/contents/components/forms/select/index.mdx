@@ -1,12 +1,407 @@
 ---
 title: Select
-description: This page is currently being created.
+description: "`Select` is a component used for allowing a user to choose one option from a list."
 package_name: "@yamada-ui/select"
 is_tabs: true
 with_description: true
 tab: Usage
 ---
 
-We're currently in the process of creating a page.😘
+## Import
 
-Wouldn't you like to contribute this page? That's amazing!
+```ts
+import { Select, Option, OptionGroup } from "@yamada-ui/react"
+```
+
+## Usage
+
+:::note
+If you want to select multiple values from a list of options, please check [MultiSelect](/components/forms/multi-select).
+:::
+
+```tsx
+<Select placeholder="キャラクターを選択">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+Alternatively, you can omit `Option` by setting `items`.
+
+```tsx functional=true
+const items: SelectItem[] = [
+  { label: "孫悟空", value: "孫悟空" },
+  { label: "ベジータ", value: "ベジータ" },
+  { label: "フリーザ", value: "フリーザ" },
+]
+
+return <Select placeholder="キャラクターを選択" items={items} />
+```
+
+### Change Variant
+
+```tsx
+<VStack>
+  <Select variant="outline" placeholder="outline" />
+  <Select variant="filled" placeholder="filled" />
+  <Select variant="flushed" placeholder="flushed" />
+  <Select variant="unstyled" placeholder="unstyled" />
+</VStack>
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Select placeholder="extra small size" size="xs" />
+  <Select placeholder="small size" size="sm" />
+  <Select placeholder="medium size" size="md" />
+  <Select placeholder="large size" size="lg" />
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a string to `defaultValue`.
+
+```tsx
+<Select placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Grouping
+
+To group options, use `OptionGroup`.
+
+```tsx
+<Select placeholder="キャラクターを選択">
+  <OptionGroup label="地球人">
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="孫悟飯">孫悟飯</Option>
+    <Option value="クリリン">クリリン</Option>
+  </OptionGroup>
+
+  <OptionGroup label="フリーザ軍">
+    <Option value="フリーザ">フリーザ</Option>
+    <Option value="ギニュー">ギニュー</Option>
+    <Option value="リクーム">リクーム</Option>
+    <Option value="バータ">バータ</Option>
+    <Option value="ジース">ジース</Option>
+    <Option value="グルド">グルド</Option>
+  </OptionGroup>
+</Select>
+```
+
+For `items`, set it up like this.
+
+```tsx functional=true
+const items: SelectItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return <Select placeholder="キャラクターを選択" items={items} />
+```
+
+### Exclude Placeholder from Options
+
+By default, the placeholder is included in the options. To exclude the placeholder from options, set `placeholderInOptions` to `false`.
+
+```tsx
+<Select placeholder="キャラクターを選択" placeholderInOptions={false}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx
+<VStack>
+  <Select focusBorderColor="green.500" placeholder="custom border color" />
+  <Select isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+</VStack>
+```
+
+### Keep Dropdown List Open on Selection
+
+By default, the dropdown list closes automatically upon selection. To keep the dropdown list open on selection, set `closeOnSelect` to `false`.
+
+```tsx
+<Select placeholder="キャラクターを選択" closeOnSelect={false}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Keep Dropdown List Open on Blur
+
+By default, the dropdown list closes automatically on blur. To keep the dropdown list open on blur, set `closeOnBlur` to `false`.
+
+```tsx
+<Select placeholder="キャラクターを選択" closeOnBlur={false}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Change Placement
+
+To change the placement, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+
+```tsx
+<Select placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Change Duration
+
+To change the duration, set a number (seconds) to `duration`.
+
+```tsx
+<Select placeholder="キャラクターを選択" duration={0.4}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Change Offset
+
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
+
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal, vertical]`.
+
+```tsx
+<VStack>
+  <Select placeholder="キャラクターを選択" gutter={32}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+
+  <Select placeholder="キャラクターを選択" offset={[16, 16]} listProps={{ maxW: "xs" }}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+</VStack>
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx
+<VStack>
+  <Select isDisabled variant="outline" placeholder="outline" />
+  <Select isDisabled variant="filled" placeholder="filled" />
+  <Select isDisabled variant="flushed" placeholder="flushed" />
+  <Select isDisabled variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isDisabled label="Which notifications would you like to receive?">
+    <Select placeholder="Select notifications" />
+  </FormControl>
+</VStack>
+```
+
+To disable an option, set `isDisabled` to `true` on `Option`.
+
+```tsx
+<Select placeholder="キャラクターを選択">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ" isDisabled>
+    ベジータ
+  </Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Make Read-Only
+
+To make it read-only, set `isReadOnly` to `true`.
+
+```tsx
+<VStack>
+  <Select isReadOnly variant="outline" placeholder="outline" />
+  <Select isReadOnly variant="filled" placeholder="filled" />
+  <Select isReadOnly variant="flushed" placeholder="flushed" />
+  <Select isReadOnly variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isReadOnly label="Which notifications would you like to receive?">
+    <Select placeholder="Select notifications" />
+  </FormControl>
+</VStack>
+```
+
+### Make Input Invalid
+
+To make the input invalid, set `isInvalid` to `true`.
+
+```tsx
+<VStack>
+  <Select isInvalid variant="outline" placeholder="outline" />
+  <Select isInvalid variant="filled" placeholder="filled" />
+  <Select isInvalid variant="flushed" placeholder="flushed" />
+  <Select isInvalid variant="unstyled" placeholder="unstyled" />
+
+  <FormControl
+    isInvalid
+    label="Which notifications would you like to receive?"
+    errorMessage="This is required."
+  >
+    <Select placeholder="Select notifications" />
+  </FormControl>
+</VStack>
+```
+
+### Customize Icon
+
+To customize the icon, set `props` to `iconProps`.
+
+```tsx
+<VStack>
+  <Select placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+
+  <Select
+    placeholder="キャラクターを選択"
+    iconProps={{ children: <FontAwesomeIcon icon={faCaretDown} /> }}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+</VStack>
+```
+
+### Customize Option
+
+To customize an option, set `props` to `optionProps`.
+
+```tsx
+<VStack>
+  <Select placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+
+  <Select
+    placeholder="キャラクターを選択"
+    optionProps={{ icon: <FontAwesomeIcon icon={faCheck} color="green.500" /> }}
+  >
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+</VStack>
+```
+
+### Control
+
+```tsx functional=true
+const [value, onChange] = useState<string>("孫悟空")
+
+return (
+  <Select placeholder="キャラクターを選択" value={value} onChange={onChange}>
+    <Option value="孫悟空">孫悟空</Option>
+    <Option value="ベジータ">ベジータ</Option>
+    <Option value="フリーザ">フリーザ</Option>
+  </Select>
+)
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+type Data = { select: string }
+
+const items: SelectItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.select}
+      label="Who is your favorite character?"
+      errorMessage={errors.select ? errors.select.message : undefined}
+    >
+      <Controller
+        name="select3"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => <Select placeholder="キャラクターを選択" {...field} items={items} />}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

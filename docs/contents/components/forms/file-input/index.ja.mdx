@@ -1,12 +1,283 @@
 ---
 title: FileInput
-description: このページは現在作成中です。
+description: "`FileInput`は、ユーザーがファイルを選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/file-input"
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
 
-現在ページ作成中です。😘
+## インポート
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+```ts
+import { FileInput } from "@yamada-ui/react"
+```
+
+## 使い方
+
+```tsx
+<FileInput placeholder="basic" />
+```
+
+または、`children`を使用してカスタマイズすることも可能です。`children`は、`File`を配列で提供します。
+
+```tsx
+<FileInput placeholder="multiple" multiple>
+  {(files) => <Text>Selected: {files ? files.length : 0}</Text>}
+</FileInput>
+```
+
+### バリアントを変更する
+
+```tsx
+<VStack>
+  <FileInput variant="outline" placeholder="outline" />
+  <FileInput variant="filled" placeholder="filled" />
+  <FileInput variant="flushed" placeholder="flushed" />
+  <FileInput variant="unstyled" placeholder="unstyled" />
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx
+<VStack>
+  <FileInput placeholder="extra small size" size="xs" />
+  <FileInput placeholder="small size" size="sm" />
+  <FileInput placeholder="medium size" size="md" />
+  <FileInput placeholder="large size" size="lg" />
+</VStack>
+```
+
+### 複数選択を許容する
+
+複数選択を許容する場合は、`multiple`を`true`に設定します。
+
+```tsx
+<FileInput placeholder="multiple" multiple />
+```
+
+### 拡張子を指定する
+
+拡張子を指定する場合は、`accept`に文字列(`タイプ, タイプ`)を設定します。
+
+```tsx
+<FileInput placeholder="only png, jpeg" accept="image/png,image/jpeg" />
+```
+
+### 区切りをカスタマイズする
+
+区切りをカスタマイズする場合は、`separator`に文字列を設定します。
+
+```tsx
+<FileInput placeholder="multiple" multiple separator=";" />
+```
+
+### カスタムコンポーネントを使用する
+
+カスタムコンポーネントを使用する場合は、`component`に`ReactElement`を設定します。`component`は、`value`(`File`)と`index`を提供します。
+
+```tsx
+<FileInput placeholder="multiple" multiple component={({ value: { name } }) => <Tag>{name}</Tag>} />
+```
+
+### ファイル名の整形する
+
+ファイル名の整形する場合は、`format`を使用します。`format`は、`File`を提供します。
+
+```tsx
+<FileInput
+  placeholder="multiple"
+  multiple
+  format={({ name }) => `${name.substring(0, name.indexOf("."))}`}
+/>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx
+<VStack>
+  <FileInput focusBorderColor="green.500" placeholder="custom border color" />
+  <FileInput isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+</VStack>
+```
+
+### 無効化する
+
+無効化する場合は、`isDisabled`を`true`に設定します。
+
+```tsx
+<VStack>
+  <FileInput isDisabled variant="outline" placeholder="outline" />
+  <FileInput isDisabled variant="filled" placeholder="filled" />
+  <FileInput isDisabled variant="flushed" placeholder="flushed" />
+  <FileInput isDisabled variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isDisabled label="Upload file">
+    <FileInput type="email" placeholder="your file" />
+  </FormControl>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx
+<VStack>
+  <FileInput isReadOnly variant="outline" placeholder="outline" />
+  <FileInput isReadOnly variant="filled" placeholder="filled" />
+  <FileInput isReadOnly variant="flushed" placeholder="flushed" />
+  <FileInput isReadOnly variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isReadOnly label="Upload file">
+    <FileInput type="email" placeholder="your file" />
+  </FormControl>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`isInvalid`を`true`に設定します。
+
+```tsx
+<VStack>
+  <FileInput isInvalid variant="outline" placeholder="outline" />
+  <FileInput isInvalid variant="filled" placeholder="filled" />
+  <FileInput isInvalid variant="flushed" placeholder="flushed" />
+  <FileInput isInvalid variant="unstyled" placeholder="unstyled" />
+
+  <FormControl isInvalid label="Upload file" errorMessage="File is required.">
+    <FileInput type="email" placeholder="your file" />
+  </FormControl>
+</VStack>
+```
+
+### アドオンを追加する
+
+アドオンを追加する場合は、`Input`を`InputGroup`でラッピングし、`InputLeftAddon`または`InputRightAddon`を使用します。
+
+```tsx
+<InputGroup>
+  <InputLeftAddon>
+    <FontAwesomeIcon icon={faFile} />
+  </InputLeftAddon>
+  <FileInput type="tel" placeholder="Please upload file" />
+</InputGroup>
+```
+
+### 要素を追加する
+
+要素を追加する場合は、`Input`を`InputGroup`でラッピングし、`InputLeftElement`または`InputRightElement`を使用します。
+
+```tsx
+<InputGroup>
+  <InputLeftElement>
+    <FontAwesomeIcon icon={faFile} color="gray.500" />
+  </InputLeftElement>
+  <FileInput type="email" placeholder="Please upload file" />
+</InputGroup>
+```
+
+### 値をリセットする
+
+値をリセットする場合は、`resetRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
+
+```tsx functional=true
+const [value, onChange] = useState<File[] | null>(null)
+const resetRef = useRef<() => void>(null)
+
+const onReset = () => {
+  onChange(null)
+
+  if (resetRef.current) resetRef.current()
+}
+
+return (
+  <VStack>
+    <Text>files: {value ? value.length : 0}</Text>
+
+    <InputGroup>
+      <FileInput multiple value={value} onChange={onChange} resetRef={resetRef} />
+
+      {value && value.length ? (
+        <InputRightElement isClick onClick={onReset}>
+          <FontAwesomeIcon icon={faClose} color="gray.500" />
+        </InputRightElement>
+      ) : null}
+    </InputGroup>
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx functional=true
+const [value, onChange] = useState<File[] | null>(null)
+
+return (
+  <VStack>
+    <Text>files: {value ? value.length : 0}</Text>
+
+    <FileInput value={value} onChange={onChange} multiple />
+  </VStack>
+)
+```
+
+### `React Hook Form`を使う
+
+```tsx functional=true
+type Data = { fileInput: File[] | null }
+
+const resetRef = useRef<() => void>(null)
+const {
+  control,
+  handleSubmit,
+  watch,
+  setValue,
+  formState: { errors },
+} = useForm<Data>()
+
+const onReset = () => {
+  setValue("fileInput", null)
+
+  if (resetRef.current) resetRef.current()
+}
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.fileInput}
+      label="Files"
+      errorMessage={errors.fileInput ? errors.fileInput.message : undefined}
+    >
+      <Controller
+        name="fileInput"
+        control={control}
+        rules={{ required: { value: true, message: "This is required." } }}
+        render={({ field }) => (
+          <InputGroup>
+            <FileInput multiple {...field} resetRef={resetRef} />
+
+            {field.value && field.value.length ? (
+              <InputRightElement isClick onClick={onReset}>
+                <FontAwesomeIcon icon={faClose} color="gray.500" />
+              </InputRightElement>
+            ) : null}
+          </InputGroup>
+        )}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

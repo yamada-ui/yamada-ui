@@ -33,10 +33,10 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Radio colorScheme="secondary" defaultChecked>
+  <Radio colorScheme="secondary" defaultIsChecked>
     Secondary
   </Radio>
-  <Radio colorScheme="green" defaultChecked>
+  <Radio colorScheme="green" defaultIsChecked>
     Green
   </Radio>
 </Wrap>
@@ -44,10 +44,10 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ### Set as Default Checked
 
-To set the radio button as default checked, set `defaultChecked` to `true`.
+To set the radio button as default checked, set `defaultIsChecked` to `true`.
 
 ```tsx
-<Radio defaultChecked>孫悟空</Radio>
+<Radio defaultIsChecked>孫悟空</Radio>
 ```
 
 ### Disable
@@ -57,7 +57,7 @@ To disable the radio button, set `isDisabled` to `true`.
 ```tsx
 <VStack>
   <Radio isDisabled>All Notifications</Radio>
-  <Radio isDisabled defaultChecked>
+  <Radio isDisabled defaultIsChecked>
     All Notifications
   </Radio>
 
@@ -70,7 +70,7 @@ To disable the radio button, set `isDisabled` to `true`.
   </RadioGroup>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
-    <Radio defaultChecked>All Notifications</Radio>
+    <Radio defaultIsChecked>All Notifications</Radio>
   </FormControl>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
@@ -90,7 +90,7 @@ To make the radio button read-only, set `isReadOnly` to `true`.
 ```tsx
 <VStack>
   <Radio isReadOnly>All Notifications</Radio>
-  <Radio isReadOnly defaultChecked>
+  <Radio isReadOnly defaultIsChecked>
     All Notifications
   </Radio>
 
@@ -103,7 +103,7 @@ To make the radio button read-only, set `isReadOnly` to `true`.
   </RadioGroup>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
-    <Radio defaultChecked>All Notifications</Radio>
+    <Radio defaultIsChecked>All Notifications</Radio>
   </FormControl>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
@@ -123,7 +123,7 @@ To set the radio button as an invalid input, set `isInvalid` to `true`.
 ```tsx
 <VStack>
   <Radio isInvalid>All Notifications</Radio>
-  <Radio isInvalid defaultChecked>
+  <Radio isInvalid defaultIsChecked>
     All Notifications
   </Radio>
 

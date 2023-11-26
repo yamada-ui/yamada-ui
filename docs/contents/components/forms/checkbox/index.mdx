@@ -33,10 +33,10 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Checkbox colorScheme="secondary" defaultChecked>
+  <Checkbox colorScheme="secondary" defaultIsChecked>
     Secondary
   </Checkbox>
-  <Checkbox colorScheme="green" defaultChecked>
+  <Checkbox colorScheme="green" defaultIsChecked>
     Green
   </Checkbox>
 </Wrap>
@@ -44,10 +44,10 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 
 ### Set as Default Checked
 
-To set the checkbox as checked by default, set `defaultChecked` to `true`.
+To set the checkbox as checked by default, set `defaultIsChecked` to `true`.
 
 ```tsx
-<Checkbox defaultChecked>孫悟空</Checkbox>
+<Checkbox defaultIsChecked>孫悟空</Checkbox>
 ```
 
 ### Disable
@@ -57,7 +57,7 @@ To disable the checkbox, set `isDisabled` to `true`.
 ```tsx
 <VStack>
   <Checkbox isDisabled>All Notifications</Checkbox>
-  <Checkbox isDisabled defaultChecked>
+  <Checkbox isDisabled defaultIsChecked>
     All Notifications
   </Checkbox>
 
@@ -70,7 +70,7 @@ To disable the checkbox, set `isDisabled` to `true`.
   </CheckboxGroup>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
-    <Checkbox defaultChecked>All Notifications</Checkbox>
+    <Checkbox defaultIsChecked>All Notifications</Checkbox>
   </FormControl>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
@@ -90,7 +90,7 @@ To make the checkbox read-only, set `isReadOnly` to `true`.
 ```tsx
 <VStack>
   <Checkbox isReadOnly>All Notifications</Checkbox>
-  <Checkbox isReadOnly defaultChecked>
+  <Checkbox isReadOnly defaultIsChecked>
     All Notifications
   </Checkbox>
 
@@ -103,7 +103,7 @@ To make the checkbox read-only, set `isReadOnly` to `true`.
   </CheckboxGroup>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
-    <Checkbox defaultChecked>All Notifications</Checkbox>
+    <Checkbox defaultIsChecked>All Notifications</Checkbox>
   </FormControl>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
@@ -123,7 +123,7 @@ To set the checkbox as an invalid input, set `isInvalid` to `true`.
 ```tsx
 <VStack>
   <Checkbox isInvalid>All Notifications</Checkbox>
-  <Checkbox isInvalid defaultChecked>
+  <Checkbox isInvalid defaultIsChecked>
     All Notifications
   </Checkbox>
 

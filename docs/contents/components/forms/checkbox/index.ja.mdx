@@ -33,10 +33,10 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Checkbox colorScheme="secondary" defaultChecked>
+  <Checkbox colorScheme="secondary" defaultIsChecked>
     Secondary
   </Checkbox>
-  <Checkbox colorScheme="green" defaultChecked>
+  <Checkbox colorScheme="green" defaultIsChecked>
     Green
   </Checkbox>
 </Wrap>
@@ -44,10 +44,10 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 
 ### デフォルトで選択された状態にする
 
-デフォルトでチェックされた状態にする場合は、`defaultChecked`を`true`に設定します。
+デフォルトでチェックされた状態にする場合は、`defaultIsChecked`を`true`に設定します。
 
 ```tsx
-<Checkbox defaultChecked>孫悟空</Checkbox>
+<Checkbox defaultIsChecked>孫悟空</Checkbox>
 ```
 
 ### 無効化する
@@ -57,7 +57,7 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Checkbox isDisabled>All Notifications</Checkbox>
-  <Checkbox isDisabled defaultChecked>
+  <Checkbox isDisabled defaultIsChecked>
     All Notifications
   </Checkbox>
 
@@ -70,7 +70,7 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
   </CheckboxGroup>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
-    <Checkbox defaultChecked>All Notifications</Checkbox>
+    <Checkbox defaultIsChecked>All Notifications</Checkbox>
   </FormControl>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
@@ -90,7 +90,7 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Checkbox isReadOnly>All Notifications</Checkbox>
-  <Checkbox isReadOnly defaultChecked>
+  <Checkbox isReadOnly defaultIsChecked>
     All Notifications
   </Checkbox>
 
@@ -103,7 +103,7 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
   </CheckboxGroup>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
-    <Checkbox defaultChecked>All Notifications</Checkbox>
+    <Checkbox defaultIsChecked>All Notifications</Checkbox>
   </FormControl>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
@@ -123,7 +123,7 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Checkbox isInvalid>All Notifications</Checkbox>
-  <Checkbox isInvalid defaultChecked>
+  <Checkbox isInvalid defaultIsChecked>
     All Notifications
   </Checkbox>
 

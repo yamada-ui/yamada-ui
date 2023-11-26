@@ -42,10 +42,10 @@ import { Switch } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Switch colorScheme="secondary" defaultChecked>
+  <Switch colorScheme="secondary" defaultIsChecked>
     Secondary
   </Switch>
-  <Switch colorScheme="green" defaultChecked>
+  <Switch colorScheme="green" defaultIsChecked>
     Green
   </Switch>
 </Wrap>
@@ -66,7 +66,7 @@ To disable, set `isDisabled` to `true`.
 ```tsx
 <Wrap gap="md">
   <Switch isDisabled>disabled</Switch>
-  <Switch isDisabled defaultChecked>
+  <Switch isDisabled defaultIsChecked>
     disabled
   </Switch>
 </Wrap>
@@ -79,7 +79,7 @@ To make read-only, set `isReadOnly` to `true`.
 ```tsx
 <Wrap gap="md">
   <Switch isReadOnly>read only</Switch>
-  <Switch isReadOnly defaultChecked>
+  <Switch isReadOnly defaultIsChecked>
     read only
   </Switch>
 </Wrap>

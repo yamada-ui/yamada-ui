@@ -33,10 +33,10 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Radio colorScheme="secondary" defaultChecked>
+  <Radio colorScheme="secondary" defaultIsChecked>
     Secondary
   </Radio>
-  <Radio colorScheme="green" defaultChecked>
+  <Radio colorScheme="green" defaultIsChecked>
     Green
   </Radio>
 </Wrap>
@@ -44,10 +44,10 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ### デフォルトで選択された状態にする
 
-デフォルトでチェックされた状態にする場合は、`defaultChecked`を`true`に設定します。
+デフォルトでチェックされた状態にする場合は、`defaultIsChecked`を`true`に設定します。
 
 ```tsx
-<Radio defaultChecked>孫悟空</Radio>
+<Radio defaultIsChecked>孫悟空</Radio>
 ```
 
 ### 無効化する
@@ -57,7 +57,7 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Radio isDisabled>All Notifications</Radio>
-  <Radio isDisabled defaultChecked>
+  <Radio isDisabled defaultIsChecked>
     All Notifications
   </Radio>
 
@@ -70,7 +70,7 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
   </RadioGroup>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
-    <Radio defaultChecked>All Notifications</Radio>
+    <Radio defaultIsChecked>All Notifications</Radio>
   </FormControl>
 
   <FormControl isDisabled label="Which notifications would you like to receive?">
@@ -90,7 +90,7 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Radio isReadOnly>All Notifications</Radio>
-  <Radio isReadOnly defaultChecked>
+  <Radio isReadOnly defaultIsChecked>
     All Notifications
   </Radio>
 
@@ -103,7 +103,7 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
   </RadioGroup>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
-    <Radio defaultChecked>All Notifications</Radio>
+    <Radio defaultIsChecked>All Notifications</Radio>
   </FormControl>
 
   <FormControl isReadOnly label="Which notifications would you like to receive?">
@@ -123,7 +123,7 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Radio isInvalid>All Notifications</Radio>
-  <Radio isInvalid defaultChecked>
+  <Radio isInvalid defaultIsChecked>
     All Notifications
   </Radio>
 

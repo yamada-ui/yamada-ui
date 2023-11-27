@@ -4,16 +4,13 @@ description: "Sets up Node.js and runs install"
 runs:
   using: composite
   steps:
-    - name: Launch Turbo remote cache server
-      uses: dtinth/setup-github-actions-caching-for-turbo@v1.1.0
-
     - name: Setup PNPM
-      uses: pnpm/action-setup@v2.2.4
+      uses: pnpm/action-setup@v2.4.0
       with:
         version: 8
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version-file: ".nvmrc"
         registry-url: "https://registry.npmjs.org"

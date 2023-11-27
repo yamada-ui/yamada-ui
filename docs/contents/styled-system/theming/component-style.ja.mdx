@@ -235,13 +235,12 @@ export const List: ComponentMultiStyle = {
   // ビジュアルのスタイル
   variants: {
     solid: {
-      bg: ["gray.500", "gray.200"],
-      color: ["white", "gray.800"],
+      item: { bg: ["gray.500", "gray.200"], color: ["white", "gray.800"] },
     },
     outline: {
-      borderWidth: "1px",
+      item: { borderWidth: "1px" },
     },
-    unstyled: { rounded: "inherit", lineHeight: "inherit" },
+    unstyled: { item: { rounded: "inherit", lineHeight: "inherit" } },
   },
 
   // サイズのスタイル

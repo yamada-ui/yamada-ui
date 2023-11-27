@@ -1,81 +1,81 @@
 ---
 title: Component Styles
-description: How to create and customize component styles.
+description: How to create and customize styles for components.
 order: 4
 ---
 
-Maintaining flexible component styles in a growing project is a challenging task.
+Maintaining flexible styles for components in a growing project can be a challenging task.
 
-To solve this, Yamada UI is structured with each component consisting of basic styles and modifier styles. This allows for flexible style changes.
+To solve this, Yamada UI structures each component with base styles and modifier styles. This allows for flexible style changes.
 
-In addition, we provide `useComponentStyle` and `useMultiComponentStyle` to manage the styles of the components you create with a theme.
+Additionally, to manage the styles of your custom components with themes, Yamada UI provides `useComponentStyle` and `useMultiComponentStyle` to retrieve component styles.
 
-## Basic Styles and Modifier Styles
+## Base Styles and Modifier Styles
 
-Most components are composed of basic styles and modifier styles that change visuals and sizes based on properties.
+Most components consist of base styles and modifier styles that change visuals and sizes based on properties.
 
-Common modifier styles include the following:
+Common modifier styles include:
 
 - `Size`: Components can have various sizes (small, medium, large, etc.).
 - `Variant`: Components can have various visuals (outline, solid, ghost, etc.).
-- `Color Scheme`: For a specific variant, components can have different color schemes.
-- `Color Mode`: Components can change styles based on the color mode (light, dark).
+- `Color Scheme`: Specific variants allow components to have different color schemes.
+- `Color Mode`: Components can change styles based on the color mode (light or dark).
 
-Also, there is an order in which styles are set.
+There is also an order in which styles are set.
 
-The order is as follows, and the same property values are overwritten:
+The order is as follows, and the values of the same property will be overwritten:
 
-1. `Basic Style`
+1. `Base Styles`
 2. `Size`
 3. `Variant`
 
 :::note status=warning
-`Color Scheme` and `Color Mode` are values that assist modifier styles, not styles themselves.
+`Color Scheme` and `Color Mode` are values that supplement modifier styles and are not styles themselves.
 :::
 
 ## Single-Part and Multi-Part Components
 
-Yamada UI components consist of **single-part components** (such as `Button`, `Link`, etc.) and **multi-part components** (such as `Tab`, `Menu`, etc.).
+Yamada UI components are either **single-part components** (`Button`, `Link`, etc.) or **multi-part components** (`Tab`, `Menu`, etc.).
 
-### Single Part Component
+### Single-Part Components
 
-A single part component is a component composed of a single element. For example, the `Button` component renders the HTML element `button`.
+Single-part components consist of a single element. For example, the `Button` component renders the HTML element `button`.
 
 ```tsx live=false
 <Button>Click me!</Button>
 ```
 
 :::note status=warning
-There may be cases where it appears to be a **single part component**, but internally it is a **multiple part component** that switches elements based on conditional branching. For example, `Tag`, `Checkbox`, `Radio`, etc. fall under this category.
+Some components may appear to be **single-part components** but internally switch elements based on conditions, making them **multi-part components**. Examples include `Tag`, `Checkbox`, `Radio`, etc.
 :::
 
-### Multi-part Components
+### Multi-Part Components
 
-Multi-part components are components composed of multiple elements. The child elements are dependent on the parent element. For example, the `List` component is composed of `ListItem` and `ListIcon`.
+Multi-part components consist of multiple elements. Child elements are dependent on the parent element. For example, the `List` component is composed of `ListItem` and `ListIcon`.
 
 ```tsx live=false
 <List>
-  <ListItem>Shall I dance for joy if you like?</ListItem>
-  <ListItem>Take my life!!! Touh!!!</ListItem>
-  <ListItem>U... Behind me, who boasts the fastest speed in the universe...</ListItem>
-  <ListItem>O... We were never supposed to win...</ListItem>
-  <ListItem>Am I like a trash picker at the match venue...</ListItem>
+  <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
+  <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
+  <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
+  <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
+  <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
 </List>
 ```
 
-### Styling Single Part Components
+### Styling Single-Part Components
 
 :::note status=warning
-Before styling, please check [Theme Operation](/styled-system/theming/customize-theme#theme-operation) and [Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles).
+Before styling, please check [Theme Operations](/styled-system/theming/customize-theme#theme-operations) and [Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles).
 :::
 
-[Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles) was styling that inherited the default theme.
+[Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles) was about styling with the default theme inherited.
 
-This time, we will style the `Button` anew.
+This time, we will style a new `Button`.
 
 ```ts title=./theme/components/button.ts
 export const Button: ComponentStyle = {
-  // Basic style
+  // 基本のスタイル
   baseStyle: {
     lineHeight: 1.2,
     fontWeight: "semibold",
@@ -83,7 +83,7 @@ export const Button: ComponentStyle = {
     transitionDuration: "slower",
   },
 
-  // Visual style
+  // ビジュアルのスタイル
   variants: {
     solid: {
       bg: ["gray.500", "gray.200"],
@@ -94,7 +94,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // Size style
+  // サイズのスタイル
   sizes: {
     sm: {
       h: 8,
@@ -116,7 +116,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // Default values for `variant` and `size`, etc.
+  // デフォルトの`variant`や`size`などの値
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -124,11 +124,11 @@ export const Button: ComponentStyle = {
 }
 ```
 
-Next, we will support dynamic `color schemes`. To receive a `color scheme` from a component, use a function.
+Next, we will support dynamic `Color Schemes`. To receive `Color Schemes` from the component, use a function.
 
 ```ts title=./theme/components/button.ts highlight={12,13,14,15,16,17,18,19,48}
 export const Button: ComponentStyle = {
-  // Basic style
+  // 基本のスタイル
   baseStyle: {
     lineHeight: 1.2,
     fontWeight: "semibold",
@@ -136,7 +136,7 @@ export const Button: ComponentStyle = {
     transitionDuration: "slower",
   },
 
-  // Visual style
+  // ビジュアルのスタイル
   variants: {
     solid: ({ colorScheme: c }) => ({
       bg: [`${c}.500`, `${c}.200`],
@@ -148,7 +148,7 @@ export const Button: ComponentStyle = {
     }),
   },
 
-  // Size style
+  // サイズのスタイル
   sizes: {
     sm: {
       h: 8,
@@ -170,7 +170,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // Default values for `variant`, `size`, etc.
+  // デフォルトの`variant`や`size`などの値
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -180,10 +180,10 @@ export const Button: ComponentStyle = {
 ```
 
 :::note
-Functions can get `theme`, `colorMode`, `props` in addition to `colorScheme`.
+The function can also retrieve `theme`, `colorMode`, and `props` in addition to `colorScheme`.
 :::
 
-Set the style of the created component to the theme.
+Set the style of the created component in the theme.
 
 ```ts title=./theme/components/index.ts
 import { Button } from "./button"
@@ -204,21 +204,21 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["components"] })
 ```
 
-### Styling Multi-part Components
+### Styling Multi-Part Components
 
 :::note status=warning
-Before styling, please check [Theme Operation](/styled-system/theming/customize-theme#Theme-Operation) and [Changing Component Styles](/styled-system/theming/customize-theme#Changing-Component-Styles).
+Before styling, please check [Theme Operations](/styled-system/theming/customize-theme#theme-operations) and [Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles).
 :::
 
-[Changing Component Styles](/styled-system/theming/customize-theme#Changing-Component-Styles) was styling that inherited the default theme.
+[Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles) was about styling with the default theme inherited.
 
-This time, we will style the `List` anew.
+This time, we will style a new `List`.
 
-Multi-part components are styled for each `key` associated with each part.
+Multi-part components are styled for each part tied to a `key`.
 
 ```ts title=./theme/components/list.ts
 export const List: ComponentMultiStyle = {
-  // Basic style
+  // 基本のスタイル
   baseStyle: {
     container: {},
     item: {
@@ -232,19 +232,18 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // Visual style
+  // ビジュアルのスタイル
   variants: {
     solid: {
-      bg: ["gray.500", "gray.200"],
-      color: ["white", "gray.800"],
+      item: { bg: ["gray.500", "gray.200"], color: ["white", "gray.800"] },
     },
     outline: {
-      borderWidth: "1px",
+      item: { borderWidth: "1px" },
     },
-    unstyled: { rounded: "inherit", lineHeight: "inherit" },
+    unstyled: { item: { rounded: "inherit", lineHeight: "inherit" } },
   },
 
-  // Size style
+  // サイズのスタイル
   sizes: {
     sm: {
       container: { gap: "sm" },
@@ -260,7 +259,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // Default values for `variant`, `size`, etc.
+  // デフォルトの`variant`や`size`などの値
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -268,11 +267,11 @@ export const List: ComponentMultiStyle = {
 }
 ```
 
-Next, we will support dynamic `color schemes`. To receive a `color scheme` from a component, use a function.
+Next, we will support dynamic `Color Schemes`. To receive `Color Schemes` from the component, use a function.
 
 ```ts title=./theme/components/list.ts highlight={18,19,20,21,22,23,47}
 export const List: ComponentMultiStyle = {
-  // Basic style
+  // 基本のスタイル
   baseStyle: {
     container: {},
     item: {
@@ -286,7 +285,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // Visual style
+  // ビジュアルのスタイル
   variants: {
     solid: ({ colorScheme: c }) => ({
       item: { bg: [`${c}.500`, `${c}.200`], color: ["white", `${c}.800`] },
@@ -297,7 +296,7 @@ export const List: ComponentMultiStyle = {
     unstyled: { item: { rounded: "inherit", lineHeight: "inherit" } },
   },
 
-  // Size style
+  // サイズのスタイル
   sizes: {
     sm: {
       container: { gap: "sm" },
@@ -313,7 +312,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // Default values for `variant`, `size`, etc.
+  // デフォルトの`variant`や`size`などの値
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -323,10 +322,10 @@ export const List: ComponentMultiStyle = {
 ```
 
 :::note status=warning
-`key` varies depending on the component. To check the `key` of each component, please refer to the `theme` of the component page.
+`Key` varies by component. To check the `key` for each component, refer to the `Theme` section on the component's page.
 :::
 
-Set the style of the created component to the theme.
+Set the style of the created component in the theme.
 
 ```ts title=./theme/components/index.ts
 import { List } from "./list"
@@ -334,24 +333,13 @@ import { List } from "./list"
 export default { List }
 ```
 
-```ts title=./theme/index.ts
-import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
-import customComponents from "./components"
+CODEBLOCK_PLACEHOLDER_5
 
-const defaultComponents = defaultTheme.components
+## Creating Custom Components
 
-const customTheme: UsageTheme = {
-  components: { ...defaultComponents, ...customComponents },
-}
+Depending on the project, you may need custom components. To manage the styles of these custom components with themes, Yamada UI provides `useComponentStyle` and `useMultiComponentStyle`.
 
-export default extendTheme(customTheme)({ omit: ["components"] })
-```
-
-## Creating Your Own Components
-
-Depending on the project, you may need to create your own components. To manage the style of these custom components with a theme, Yamada UI provides `useComponentStyle` and `useMultiComponentStyle` to get the style of the components.
-
-This time, we will create a single part component called `Banner`.
+This time, we will create a single-part component called `Banner`.
 
 First, create the component.
 
@@ -368,24 +356,24 @@ export const Banner: FC<BannerProps> = (props) => {
 }
 ```
 
-Next, set the style of `Banner` in the theme.
+Next, set the `Banner` style in the theme.
 
 ```ts title=./theme/components/banner.ts
 export const Banner: ComponentStyle = {
   baseStyle: {
-    // Basic style
+    // 基本のスタイル
   },
 
   variants: {
-    // Visual style
+    // ビジュアルのスタイル
   },
 
   sizes: {
-    // Size style
+    // サイズのスタイル
   },
 
   defaultProps: {
-    // Default values such as `variant` and `size`
+    // デフォルトの`variant`や`size`などの値
   },
 }
 ```
@@ -396,24 +384,13 @@ import { Banner } from "./banner"
 export default { Banner }
 ```
 
-```ts title=./theme/index.ts
-import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
-import customComponents from "./components"
-
-const defaultComponents = defaultTheme.components
-
-const customTheme: UsageTheme = {
-  components: { ...defaultComponents, ...customComponents },
-}
-
-export default extendTheme(customTheme)({ omit: ["components"] })
-```
+CODEBLOCK_PLACEHOLDER_5
 
 :::note
-It is recommended to perform type completion for the created `variants` and `sizes`. For type completion, use the [CLI](/styled-system/cli).
+It is recommended to use type completion for the created `variants` and `sizes`. Type completion can be done using the [CLI](/styled-system/cli).
 :::
 
-Finally, call `useComponentStyle` within the component and load the style.
+Finally, call `useComponentStyle` within the component to load the style.
 
 ```tsx live=false highlight={2,9,10,12}
 import { FC } from "react"
@@ -431,7 +408,7 @@ export const Banner: FC<BannerProps> = (props) => {
 }
 ```
 
-If `Banner` was a multi-part component, call `useMultiComponentStyle` within the component and the style reference would be as follows.
+If `Banner` were a multi-part component, you would call `useMultiComponentStyle` within the component, and the style reference would look like this:
 
 ```tsx live=false highlight={6,7,15,16,19,20,21,22}
 import { FC } from "react"
@@ -461,5 +438,5 @@ export const Banner: FC<BannerProps> = (props) => {
 ```
 
 :::note status=warning
-Please note that the style is passed to `__css`. This is an API like `sx`, but the style priority is the lowest. `__css` is a `props` used internally in Yamada UI components.
+Note that the style is passed to `__css`. This is an API similar to `sx`, but it has the lowest priority in terms of style. `__css` is a `prop` used internally by Yamada UI components.
 :::

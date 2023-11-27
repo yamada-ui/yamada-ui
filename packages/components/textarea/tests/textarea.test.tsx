@@ -26,4 +26,19 @@ describe("<Textarea />", () => {
 
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
   })
+
+  test("Resize Textarea renders correctly", () => {
+    render(<Textarea resize="none" />)
+
+    expect(screen.getByRole("textbox")).toHaveStyle({ resize: "none" })
+  })
+
+  test("Placeholder Textarea renders correctly", () => {
+    render(<Textarea placeholder="placeholder" />)
+
+    expect(screen.getByRole("textbox")).toHaveAttribute(
+      "placeholder",
+      "placeholder",
+    )
+  })
 })

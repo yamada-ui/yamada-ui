@@ -1,13 +1,14 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
-import matter from "gray-matter"
+import matter, { GrayMatterFile } from "gray-matter"
+import { prettier } from "libs/prettier"
+
+type Input = string | Buffer
 
 const DIR_PATH = path.join("contents", "changelog")
 
-const main = async () => {
-  let fileNames = await readdir(DIR_PATH)
-
-  fileNames = fileNames
+const getVersion = (fileNames: string[]) =>
+  fileNames
     .map((fileName) => {
       if (fileName.startsWith("index")) return
 
@@ -26,39 +27,66 @@ const main = async () => {
 
       return 0
     })
-    .map((version) => `v${version.join(".")}.mdx`)
 
-  fileNames.forEach(async (fileName, index) => {
-    index += 1
+const versionToFileName = (version: number[]) => `v${version.join(".")}.mdx`
 
-    let file = await readFile(path.join(DIR_PATH, fileName), "utf8")
+const generateMdxFiles = (fileNames: string[]) =>
+  Promise.all(
+    fileNames.map(async (fileName, index) => {
+      const filePath = path.join(DIR_PATH, fileName)
+      const { data, content } = await getMdxFile(filePath)
 
-    const { data, content } = matter(file)
+      data.table_of_contents_max_lv = 2
+      data.order = index + 1
 
-    data.table_of_contents_max_lv = 2
-    data.order = index
+      await writeMdxFile(filePath, data, content)
 
-    file = matter.stringify(content, data)
+      console.log(`[changelog]: formatted ${fileName}`)
 
-    await writeFile(path.join(DIR_PATH, fileName), file)
+      if (index !== 0) return
 
-    console.log(`[changelog]: formatted ${fileName}`)
+      await writeMdxIndexFile(data, content)
+    }),
+  )
 
-    if (index !== 1) return
+const getMdxFile = async (path: string) => {
+  const file = await readFile(path, "utf8")
 
-    data.menu = "Changelog"
-    data.order = 7
+  return matter(file)
+}
 
-    file = matter.stringify(content, data)
+const writeMdxFile = async (
+  path: string,
+  data: GrayMatterFile<Input>["data"],
+  content: GrayMatterFile<Input>["content"],
+) => {
+  let file = matter.stringify(content, data)
 
-    await writeFile(path.join(DIR_PATH, "index.mdx"), file)
+  file = await prettier(file)
 
-    data.menu = "変更履歴"
+  await writeFile(path, file)
+}
 
-    file = matter.stringify(content, data)
+const writeMdxIndexFile = async (
+  data: GrayMatterFile<Input>["data"],
+  content: GrayMatterFile<Input>["content"],
+) => {
+  data.menu = "Changelog"
+  data.order = 7
 
-    await writeFile(path.join(DIR_PATH, "index.ja.mdx"), file)
-  })
+  await writeMdxFile(path.join(DIR_PATH, "index.mdx"), data, content)
+
+  data.menu = "変更履歴"
+
+  await writeMdxFile(path.join(DIR_PATH, "index.ja.mdx"), data, content)
+}
+
+const main = async () => {
+  const fileNames = await readdir(DIR_PATH)
+  const versions = getVersion(fileNames)
+  const resolvedFileNames = versions.map(versionToFileName)
+
+  await generateMdxFiles(resolvedFileNames)
 }
 
 main()

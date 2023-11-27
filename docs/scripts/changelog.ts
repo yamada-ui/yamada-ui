@@ -49,7 +49,7 @@ const generateMdxFiles = (fileNames: string[]) =>
 
       await writeMdxFile(filePath, data, content)
 
-      console.log(`[changelog]: formatted ${fileName}`)
+      console.log(`[changelog]: Generated ${fileName}`)
 
       if (index !== 0) return
 
@@ -85,6 +85,8 @@ const writeMdxIndexFiles = async (data: Data, content: Content) => {
       data.menu = LOCALE_MENU_MAP[locale]
 
       await writeMdxFile(path.join(DIR_PATH, getMdxFileName("index", locale)), data, content)
+
+      console.log(`[changelog]: Generated ${getMdxFileName("index", locale)}`)
     }),
   )
 }

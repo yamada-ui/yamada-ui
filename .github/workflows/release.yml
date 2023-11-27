@@ -92,7 +92,7 @@ jobs:
 
       - name: Update Docs
         if: steps.changesets.outputs.published == 'true'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |

@@ -34,11 +34,8 @@ describe("<Textarea />", () => {
   })
 
   test("Placeholder Textarea renders correctly", () => {
-    render(<Textarea placeholder="placeholder" />)
+    render(<Textarea placeholder="text" />)
 
-    expect(screen.getByRole("textbox")).toHaveAttribute(
-      "placeholder",
-      "placeholder",
-    )
+    expect(screen.getByRole("textbox")).toHaveAttribute("placeholder", "text")
   })
 })

@@ -308,7 +308,9 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
             marginBlockStart="0.125rem"
             marginBlockEnd="0.125rem"
             placeholder={
-              !label || (keepPlaceholder && isOpen) ? placeholder : undefined
+              !label || !label?.length || (keepPlaceholder && isOpen)
+                ? placeholder
+                : undefined
             }
             {...getInputProps({ ...inputProps, value: inputValue ?? "" }, ref)}
           />

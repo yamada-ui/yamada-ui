@@ -1,0 +1,28 @@
+---
+title: Skeleton
+description: "`Skeleton`は、コンテンツが読み込まれるまでのプレースホルダーとして機能するコンポーネントです。"
+package_name: "@yamada-ui/skeleton"
+with_description: true
+tab: テーマ
+---
+
+`Skeleton`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const Skeleton: ComponentStyle = {
+  baseStyle: {
+    background: ["gray.100", "gray.800"],
+    borderColor: ["gray.400", "gray.600"],
+    opacity: 0.7,
+    borderRadius: "sm",
+  },
+  defaultProps: {
+    startColor: ["gray.100", "gray.800"],
+    endColor: ["gray.400", "gray.600"],
+  },
+}
+```

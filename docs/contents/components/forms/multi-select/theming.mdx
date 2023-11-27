@@ -1,0 +1,41 @@
+---
+title: MultiSelect
+description: >-
+  `MultiSelect` is a component used for allowing users to select multiple values
+  from a list of options.
+package_name: "@yamada-ui/select"
+with_description: true
+tab: Theming
+---
+
+The `MultiSelect` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
+
+:::note
+`MultiSelect` inherits the style from [Select](/components/forms/select).
+:::
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const MultiSelect: ComponentMultiStyle = mergeStyle(Select, {
+  baseStyle: {
+    clearIcon: {
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      pointerEvents: "auto",
+      _hover: {
+        opacity: 0.8,
+      },
+      _disabled: {
+        pointerEvents: "none",
+        opacity: 0.4,
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+    },
+  },
+})
+```

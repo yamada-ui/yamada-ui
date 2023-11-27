@@ -1,0 +1,71 @@
+---
+title: Select
+description: >-
+  `Select` is a component used for allowing a user to choose one option from a
+  list.
+package_name: "@yamada-ui/select"
+with_description: true
+tab: Theming
+---
+
+The `Select` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
+
+:::note
+`Select` inherits the style from [NativeSelect](/components/forms/native-select).
+:::
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Select: ComponentMultiStyle = mergeStyle(NativeSelect, {
+  baseStyle: ({ theme: t, colorMode: m }) => ({
+    inner: {},
+    list: {
+      rounded: "md",
+      w: "100%",
+      minW: "xs",
+      maxH: "xs",
+      overflowY: "auto",
+      py: "2",
+      bg: ["white", "black"],
+      border: "1px solid",
+      borderColor: "inherit",
+      color: "inherit",
+      boxShadow: ["sm", "dark-lg"],
+      zIndex: "yamcha",
+    },
+    group: {},
+    groupLabel: {
+      py: "1.5",
+      px: "3",
+      fontSize: "sm",
+      fontWeight: "semibold",
+      color: ["blackAlpha.600", "whiteAlpha.600"],
+    },
+    item: {
+      cursor: "pointer",
+      py: "1.5",
+      px: "3",
+      transitionProperty: "background",
+      transitionDuration: "ultra-fast",
+      transitionTimingFunction: "ease-in",
+      _focus: {
+        bg: [transparentizeColor(`gray.200`, 0.56)(t, m), "whiteAlpha.100"],
+      },
+      _hover: {
+        bg: ["gray.200", "whiteAlpha.50"],
+      },
+      _active: {
+        bg: [transparentizeColor(`gray.300`, 0.64)(t, m), "whiteAlpha.200"],
+      },
+      _disabled: {
+        opacity: 0.4,
+        cursor: "not-allowed",
+      },
+    },
+    itemIcon: {},
+  }),
+})
+```

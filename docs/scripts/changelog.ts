@@ -1,13 +1,23 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
-import matter from "gray-matter"
+import matter, { GrayMatterFile } from "gray-matter"
+import { CONSTANT } from "constant"
+import { prettier } from "libs/prettier"
+
+type Input = string | Buffer
+type Data = GrayMatterFile<Input>["data"]
+type Content = GrayMatterFile<Input>["content"]
+type Locale = (typeof LOCALES)[number]
 
 const DIR_PATH = path.join("contents", "changelog")
+const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
+const LOCALE_MENU_MAP = {
+  en: "Changelog",
+  ja: "変更履歴",
+}
 
-const main = async () => {
-  let fileNames = await readdir(DIR_PATH)
-
-  fileNames = fileNames
+const getVersions = (fileNames: string[]) =>
+  fileNames
     .map((fileName) => {
       if (fileName.startsWith("index")) return
 
@@ -26,39 +36,68 @@ const main = async () => {
 
       return 0
     })
-    .map((version) => `v${version.join(".")}.mdx`)
 
-  fileNames.forEach(async (fileName, index) => {
-    index += 1
+const versionToFileName = (version: number[]) => `v${version.join(".")}.mdx`
 
-    let file = await readFile(path.join(DIR_PATH, fileName), "utf8")
+const generateMdxFiles = (fileNames: string[]) =>
+  Promise.all(
+    fileNames.map(async (fileName, index) => {
+      const filePath = path.join(DIR_PATH, fileName)
+      const { data, content } = await getMdxFile(filePath)
 
-    const { data, content } = matter(file)
+      data.table_of_contents_max_lv = 2
+      data.order = index + 1
 
-    data.table_of_contents_max_lv = 2
-    data.order = index
+      await writeMdxFile(filePath, data, content)
 
-    file = matter.stringify(content, data)
+      console.log(`[changelog]: Generated ${fileName}`)
 
-    await writeFile(path.join(DIR_PATH, fileName), file)
+      if (index !== 0) return
 
-    console.log(`[changelog]: formatted ${fileName}`)
+      await writeMdxIndexFiles(data, content)
+    }),
+  )
 
-    if (index !== 1) return
+const getMdxFile = async (path: string) => {
+  const file = await readFile(path, "utf8")
 
-    data.menu = "Changelog"
-    data.order = 7
+  return matter(file)
+}
 
-    file = matter.stringify(content, data)
+const writeMdxFile = async (path: string, data: Data, content: Content) => {
+  let file = matter.stringify(content, data)
 
-    await writeFile(path.join(DIR_PATH, "index.mdx"), file)
+  file = await prettier(file)
 
-    data.menu = "変更履歴"
+  await writeFile(path, file)
+}
 
-    file = matter.stringify(content, data)
+const getMdxFileName = (fileName: string, locale: Locale) => {
+  if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
 
-    await writeFile(path.join(DIR_PATH, "index.ja.mdx"), file)
-  })
+  return fileName + ".mdx"
+}
+
+const writeMdxIndexFiles = async (data: Data, content: Content) => {
+  data.order = 7
+
+  await Promise.all(
+    LOCALES.map(async (locale) => {
+      data.menu = LOCALE_MENU_MAP[locale]
+
+      await writeMdxFile(path.join(DIR_PATH, getMdxFileName("index", locale)), data, content)
+
+      console.log(`[changelog]: Generated ${getMdxFileName("index", locale)}`)
+    }),
+  )
+}
+
+const main = async () => {
+  const fileNames = await readdir(DIR_PATH)
+  const versions = getVersions(fileNames)
+  const resolvedFileNames = versions.map(versionToFileName)
+
+  await generateMdxFiles(resolvedFileNames)
 }
 
 main()

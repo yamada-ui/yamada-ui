@@ -1,0 +1,55 @@
+---
+title: Indicator
+description: >-
+  `Indicator` is a component that displays at the corner of elements such as
+  avatars.
+package_name: "@yamada-ui/indicator"
+with_description: true
+tab: Theming
+---
+
+The `Indicator` is a [single part component](/styled-system/theming/component-style#single-part-component).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Indicator: ComponentStyle = {
+  baseStyle: ({ withBorder }) => ({
+    zIndex: "kurillin",
+    rounded: "full",
+    w: "fit-content",
+    h: "fit-content",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    outline: 0,
+    whiteSpace: "nowrap",
+    ...(withBorder ? { borderWidth: "0.2em", borderColor: ["white", "black"] } : {}),
+  }),
+
+  sizes: {
+    sm: { minH: 2, minW: 2, fontSize: "xs", px: 1, lineHeight: 1.6 },
+    md: { minH: 3, minW: 3, fontSize: "sm", px: 1.5, lineHeight: 1.5 },
+    lg: { minH: 4, minW: 4, fontSize: "md", px: 2, lineHeight: 1.4 },
+  },
+
+  variants: {
+    solid: ({ colorScheme: c = "primary" }) => ({
+      bg: [`${c}.500`, `${c}.200`],
+      color: ["white", "gray.900"],
+    }),
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+      bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
+      color: [`${c}.500`, `${c}.200`],
+    }),
+  },
+
+  defaultProps: {
+    size: "md",
+    variant: "solid",
+    colorScheme: "primary",
+  },
+}
+```

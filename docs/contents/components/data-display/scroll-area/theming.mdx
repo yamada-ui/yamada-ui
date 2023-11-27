@@ -1,0 +1,51 @@
+---
+title: ScrollArea
+description: "`ScrollArea` is a component that displays a customized scrollbar."
+package_name: "@yamada-ui/scroll-area"
+with_description: true
+tab: Theming
+---
+
+The `ScrollArea` is a [single part component](/styled-system/theming/component-style#single-part-component).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const ScrollArea: ComponentStyle = {
+  baseStyle: {
+    _scrollbar: {
+      w: "3",
+      h: "3",
+    },
+    _scrollbarTrack: {
+      bg: "transparent",
+    },
+    _scrollbarThumb: {
+      bg: "blackAlpha.600",
+      bgClip: "padding-box",
+      border: "3px solid transparent",
+      rounded: "full",
+      _nativeHover: {
+        bg: "blackAlpha.800",
+        bgClip: "padding-box",
+      },
+    },
+    _dark: {
+      _scrollbarThumb: {
+        bg: "whiteAlpha.600",
+        bgClip: "padding-box",
+        _nativeHover: {
+          bg: "whiteAlpha.800",
+          bgClip: "padding-box",
+        },
+      },
+    },
+    _scrollbarButton: {},
+    _scrollbarCorner: {
+      bg: "transparent",
+    },
+  },
+}
+```

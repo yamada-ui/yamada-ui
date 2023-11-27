@@ -1,0 +1,42 @@
+---
+title: Breadcrumb
+description: >-
+  `Breadcrumb` is a component that helps users understand the hierarchy of a
+  website.
+package_name: "@yamada-ui/breadcrumb"
+with_description: true
+tab: Theming
+---
+
+The `Breadcrumb` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Breadcrumb: ComponentMultiStyle = {
+  baseStyle: {
+    container: {},
+    item: {},
+    link: {
+      transitionProperty: "common",
+      transitionDuration: "fast",
+      transitionTimingFunction: "ease-out",
+      textDecoration: "none",
+      outline: "none",
+      color: "inherit",
+      "&:not([aria-current=page])": {
+        cursor: "pointer",
+        _hover: {
+          textDecoration: "underline",
+        },
+        _focusVisible: {
+          boxShadow: "outline",
+        },
+      },
+    },
+    separator: {},
+  },
+}
+```

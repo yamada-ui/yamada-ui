@@ -1,0 +1,47 @@
+---
+title: Heading
+description: >-
+  `Heading` is a component that represents section headings. By default, it
+  renders an `h1` element.
+package_name: "@yamada-ui/typography"
+with_description: true
+tab: Theming
+---
+
+The `Heading` is a [single part component](/styled-system/theming/component-style#single-part-component).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Heading: ComponentStyle = {
+  baseStyle: {
+    fontFamily: "heading",
+    fontWeight: "bold",
+  },
+
+  sizes: {
+    "4xl": {
+      fontSize: { base: "7xl", sm: "6xl" },
+    },
+    "3xl": {
+      fontSize: { base: "6xl", sm: "5xl" },
+    },
+    "2xl": {
+      fontSize: { base: "5xl", sm: "4xl" },
+    },
+    xl: {
+      fontSize: { base: "4xl", sm: "3xl" },
+    },
+    lg: {
+      fontSize: { base: "3xl", sm: "2xl" },
+    },
+    md: { fontSize: "xl" },
+    sm: { fontSize: "md" },
+    xs: { fontSize: "sm" },
+  },
+
+  defaultProps: { size: "xl" },
+}
+```

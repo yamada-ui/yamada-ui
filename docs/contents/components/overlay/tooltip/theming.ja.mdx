@@ -1,0 +1,32 @@
+---
+title: Tooltip
+description: "`Tooltip`は、要素の補足など短い情報を表示するコンポーネントです。"
+package_name: "@yamada-ui/tooltip"
+with_description: true
+tab: テーマ
+---
+
+`Tooltip`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const Tooltip: ComponentStyle = {
+  baseStyle: {
+    rounded: "md",
+    bg: ["white", "black"],
+    border: "1px solid",
+    borderColor: "inherit",
+    px: "sm",
+    py: "0.5",
+    fontWeight: "medium",
+    fontSize: "sm",
+    color: "inherit",
+    boxShadow: ["md", "dark-lg"],
+    maxW: "xs",
+    zIndex: "dodoria",
+  },
+}
+```

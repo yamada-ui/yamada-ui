@@ -1,0 +1,35 @@
+---
+title: Divider
+description: "`Divider`は、要素間において区切りを表すコンポーネントです。"
+package_name: "@yamada-ui/layouts"
+with_description: true
+tab: テーマ
+---
+
+`Divider`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const Divider: ComponentStyle = {
+  baseStyle: {
+    borderColor: "border",
+  },
+
+  variants: {
+    solid: {
+      borderStyle: "solid",
+    },
+    dashed: {
+      borderStyle: "dashed",
+    },
+    dotted: {
+      borderStyle: "dotted",
+    },
+  },
+
+  defaultProps: { variant: "solid" },
+}
+```

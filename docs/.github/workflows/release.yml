@@ -7,10 +7,6 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Get PNPM
-        id: pnpm-cache
-        run: echo "::set-output name=dir::$(pnpm cache dir)"
-
       - name: Checkout
         uses: actions/checkout@master
         with:
@@ -18,12 +14,6 @@ jobs:
 
       - name: Install
         uses: ./.github/composite-actions/install
-
-      - name: Setup Git user
-        shell: bash
-        run: |
-          git config --global user.email "hirotomo.yamada@avap.co.jp"
-          git config --global user.name "hirotomoyamada"
 
       - name: Update Yamada UI
         run: pnpm up '@yamada-ui/*' --latest

@@ -7,7 +7,7 @@ type Input = string | Buffer
 
 const DIR_PATH = path.join("contents", "changelog")
 
-const getVersion = (fileNames: string[]) =>
+const getVersions = (fileNames: string[]) =>
   fileNames
     .map((fileName) => {
       if (fileName.startsWith("index")) return
@@ -83,7 +83,7 @@ const writeMdxIndexFile = async (
 
 const main = async () => {
   const fileNames = await readdir(DIR_PATH)
-  const versions = getVersion(fileNames)
+  const versions = getVersions(fileNames)
   const resolvedFileNames = versions.map(versionToFileName)
 
   await generateMdxFiles(resolvedFileNames)

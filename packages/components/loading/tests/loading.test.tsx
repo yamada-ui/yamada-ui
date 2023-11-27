@@ -1,7 +1,7 @@
 import { render, a11y } from "@yamada-ui/test"
 import { Loading } from "../src"
 
-describe.only("<Loading />", () => {
+describe("<Loading />", () => {
   test("renders Loading correctly", () => {
     render(<Loading />)
   })

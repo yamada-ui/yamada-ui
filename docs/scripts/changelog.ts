@@ -7,6 +7,7 @@ import { prettier } from "libs/prettier"
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
 type Content = GrayMatterFile<Input>["content"]
+type Locale = (typeof LOCALES)[number]
 
 const DIR_PATH = path.join("contents", "changelog")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
@@ -71,7 +72,7 @@ const writeMdxFile = async (path: string, data: Data, content: Content) => {
   await writeFile(path, file)
 }
 
-const getMdxFileName = (fileName: string, locale: (typeof LOCALES)[number]) => {
+const getMdxFileName = (fileName: string, locale: Locale) => {
   if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
 
   return fileName + ".mdx"

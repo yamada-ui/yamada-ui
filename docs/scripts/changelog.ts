@@ -1,11 +1,19 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
 import matter, { GrayMatterFile } from "gray-matter"
+import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
 type Input = string | Buffer
+type Data = GrayMatterFile<Input>["data"]
+type Content = GrayMatterFile<Input>["content"]
 
 const DIR_PATH = path.join("contents", "changelog")
+const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
+const LOCALE_MENU_MAP = {
+  en: "Changelog",
+  ja: "変更履歴",
+}
 
 const getVersions = (fileNames: string[]) =>
   fileNames
@@ -45,7 +53,7 @@ const generateMdxFiles = (fileNames: string[]) =>
 
       if (index !== 0) return
 
-      await writeMdxIndexFile(data, content)
+      await writeMdxIndexFiles(data, content)
     }),
   )
 
@@ -55,11 +63,7 @@ const getMdxFile = async (path: string) => {
   return matter(file)
 }
 
-const writeMdxFile = async (
-  path: string,
-  data: GrayMatterFile<Input>["data"],
-  content: GrayMatterFile<Input>["content"],
-) => {
+const writeMdxFile = async (path: string, data: Data, content: Content) => {
   let file = matter.stringify(content, data)
 
   file = await prettier(file)
@@ -67,18 +71,22 @@ const writeMdxFile = async (
   await writeFile(path, file)
 }
 
-const writeMdxIndexFile = async (
-  data: GrayMatterFile<Input>["data"],
-  content: GrayMatterFile<Input>["content"],
-) => {
-  data.menu = "Changelog"
+const getMdxFileName = (fileName: string, locale: (typeof LOCALES)[number]) => {
+  if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
+
+  return fileName + ".mdx"
+}
+
+const writeMdxIndexFiles = async (data: Data, content: Content) => {
   data.order = 7
 
-  await writeMdxFile(path.join(DIR_PATH, "index.mdx"), data, content)
+  await Promise.all(
+    LOCALES.map(async (locale) => {
+      data.menu = LOCALE_MENU_MAP[locale]
 
-  data.menu = "変更履歴"
-
-  await writeMdxFile(path.join(DIR_PATH, "index.ja.mdx"), data, content)
+      await writeMdxFile(path.join(DIR_PATH, getMdxFileName("index", locale)), data, content)
+    }),
+  )
 }
 
 const main = async () => {

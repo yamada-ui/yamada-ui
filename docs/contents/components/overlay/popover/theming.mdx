@@ -1,0 +1,55 @@
+---
+title: Popover
+description: "`Popover` is a component that floats around an element to display information."
+package_name: "@yamada-ui/popover"
+with_description: true
+tab: Theming
+---
+
+The `Popover` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Popover: ComponentMultiStyle = {
+  baseStyle: {
+    container: {
+      rounded: "md",
+      bg: ["white", "black"],
+      border: "1px solid",
+      borderColor: "inherit",
+      color: "inherit",
+      boxShadow: ["md", "dark-lg"],
+      zIndex: "guldo",
+      _focusVisible: {
+        outline: 0,
+        boxShadow: "outline",
+      },
+    },
+    closeButton: {
+      top: "2",
+      right: "2",
+    },
+    header: {
+      p: "sm",
+      gap: "sm",
+      fontWeight: "semibold",
+      borderBottom: "1px solid",
+      borderColor: "inherit",
+    },
+    body: {
+      my: "sm",
+      px: "sm",
+      gap: "sm",
+    },
+    footer: {
+      p: "sm",
+      gap: "sm",
+      borderTop: "1px solid",
+      borderColor: "inherit",
+    },
+  },
+}
+```

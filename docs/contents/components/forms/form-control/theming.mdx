@@ -1,0 +1,52 @@
+---
+title: FormControl
+description: >-
+  `FormControl` is a component used to group form elements with labels, help
+  messages, error messages, etc.
+package_name: "@yamada-ui/form-control"
+with_description: true
+tab: Theming
+---
+
+The `FormControl` is a [single part component](/styled-system/theming/component-style#single-part-component).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const FormControl: ComponentStyle = {
+  baseStyle: {
+    container: {
+      w: "100%",
+      position: "relative",
+    },
+    label: {
+      fontSize: "md",
+      me: "3",
+      mb: "2",
+      fontWeight: "medium",
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      opacity: 1,
+      _disabled: {
+        opacity: 0.4,
+      },
+    },
+    requiredIndicator: {
+      ms: "1",
+      color: ["red.500", "red.300"],
+    },
+    helperMessage: {
+      mt: "2",
+      color: ["gray.600", "whiteAlpha.600"],
+      fontSize: "sm",
+    },
+    errorMessage: {
+      mt: "2",
+      color: ["red.500", "red.300"],
+      fontSize: "sm",
+    },
+  },
+}
+```

@@ -1,0 +1,194 @@
+---
+title: PinInput
+description: "`PinInput`は、ピンコードやOTP(ワンタイムパスワード)の入力を取得するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/pin-input"
+with_description: true
+tab: テーマ
+---
+
+`PinInput`は、[複数パーツのコンポーネント](/styled-system/theming/component-style#複数パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const PinInput: ComponentMultiStyle = {
+  baseStyle: {
+    container: {
+      gap: "sm",
+    },
+    field: {
+      width: "100%",
+      minWidth: 0,
+      outline: 0,
+      position: "relative",
+      appearance: "none",
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      textAlign: "center",
+      _disabled: {
+        opacity: 0.4,
+        cursor: "not-allowed",
+      },
+    },
+  },
+
+  variants: {
+    outline: ({
+      theme: t,
+      colorMode: m,
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        field: {
+          border: "1px solid",
+          borderColor: "inherit",
+          bg: "inherit",
+          _hover: {
+            borderColor: ["gray.300", "whiteAlpha.400"],
+          },
+          _readOnly: {
+            boxShadow: "none !important",
+            userSelect: "all",
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          _focusVisible: {
+            zIndex: "yamcha",
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+        },
+      }
+    },
+    filled: ({
+      theme: t,
+      colorMode: m,
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        field: {
+          border: "2px solid",
+          borderColor: "transparent",
+          bg: ["gray.100", "whiteAlpha.50"],
+          _hover: {
+            bg: ["gray.200", "whiteAlpha.100"],
+          },
+          _readOnly: {
+            boxShadow: "none !important",
+            userSelect: "all",
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+          },
+          _focusVisible: {
+            bg: "transparent",
+            borderColor: focusBorderColor,
+          },
+        },
+      }
+    },
+    flushed: ({
+      theme: t,
+      colorMode: m,
+      focusBorderColor: fc = ["blue.500", "blue.300"],
+      errorBorderColor: ec = ["red.500", "red.300"],
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        field: {
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          rounded: "0",
+          px: "0",
+          bg: "transparent",
+          _readOnly: {
+            boxShadow: "none !important",
+            userSelect: "all",
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
+          },
+          _focusVisible: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+          },
+        },
+      }
+    },
+    unstyled: {
+      field: {
+        bg: "transparent",
+        h: "auto",
+        px: "0",
+      },
+    },
+  },
+
+  sizes: {
+    xs: {
+      field: {
+        fontSize: "xs",
+        w: "6",
+        h: "6",
+        borderRadius: "sm",
+      },
+    },
+    sm: {
+      field: {
+        fontSize: "sm",
+        w: "8",
+        h: "8",
+        borderRadius: "md",
+      },
+    },
+    md: {
+      field: {
+        fontSize: "md",
+        w: "10",
+        h: "10",
+        borderRadius: "md",
+      },
+    },
+    lg: {
+      field: {
+        fontSize: "lg",
+        w: "12",
+        h: "12",
+        borderRadius: "md",
+      },
+    },
+  },
+
+  defaultProps: {
+    size: "md",
+    variant: "outline",
+  },
+}
+```

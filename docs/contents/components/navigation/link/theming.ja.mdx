@@ -1,0 +1,33 @@
+---
+title: Link
+description: "`Link`は、別のウェブページや同一ページ内の場所、または他のURLへのハイパーリンクを作成するコンポーネントです。"
+package_name: "@yamada-ui/link"
+with_description: true
+tab: テーマ
+---
+
+`Link`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const Link: ComponentStyle = {
+  baseStyle: {
+    transitionProperty: "common",
+    transitionDuration: "fast",
+    transitionTimingFunction: "ease-out",
+    cursor: "pointer",
+    textDecoration: "none",
+    outline: "none",
+    color: "link",
+    _hover: {
+      textDecoration: "underline",
+    },
+    _focusVisible: {
+      boxShadow: "outline",
+    },
+  },
+}
+```

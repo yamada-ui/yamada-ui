@@ -1,0 +1,50 @@
+---
+title: FormControl
+description: "`FormControl`は、フォーム要素に、ラベル、ヘルプメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/form-control"
+with_description: true
+tab: テーマ
+---
+
+`FormControl`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const FormControl: ComponentStyle = {
+  baseStyle: {
+    container: {
+      w: "100%",
+      position: "relative",
+    },
+    label: {
+      fontSize: "md",
+      me: "3",
+      mb: "2",
+      fontWeight: "medium",
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      opacity: 1,
+      _disabled: {
+        opacity: 0.4,
+      },
+    },
+    requiredIndicator: {
+      ms: "1",
+      color: ["red.500", "red.300"],
+    },
+    helperMessage: {
+      mt: "2",
+      color: ["gray.600", "whiteAlpha.600"],
+      fontSize: "sm",
+    },
+    errorMessage: {
+      mt: "2",
+      color: ["red.500", "red.300"],
+      fontSize: "sm",
+    },
+  },
+}
+```

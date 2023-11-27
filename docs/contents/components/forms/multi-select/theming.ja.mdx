@@ -1,0 +1,39 @@
+---
+title: MultiSelect
+description: "`MultiSelect`は、ユーザーがオプションのリストから複数の値を選択するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/select"
+with_description: true
+tab: テーマ
+---
+
+`MultiSelect`は、[複数パーツのコンポーネント](/styled-system/theming/component-style#複数パーツのコンポーネント)です。
+
+:::note
+`MultiSelect`は、[Select](/components/forms/select)のスタイルを継承しています。
+:::
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const MultiSelect: ComponentMultiStyle = mergeStyle(Select, {
+  baseStyle: {
+    clearIcon: {
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      pointerEvents: "auto",
+      _hover: {
+        opacity: 0.8,
+      },
+      _disabled: {
+        pointerEvents: "none",
+        opacity: 0.4,
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+    },
+  },
+})
+```

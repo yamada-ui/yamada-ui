@@ -8,6 +8,7 @@ node_modules
 # compiled
 storybook-static
 dist
+.docs
 
 # misc
 .DS_Store

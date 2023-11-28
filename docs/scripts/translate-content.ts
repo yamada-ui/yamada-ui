@@ -8,16 +8,16 @@ import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
 import { wait } from "utils/assertion"
 
-const LANG_MAP = {
+const LOCALE_MAP = {
   ja: "Japanese",
   en: "English",
 } as const
 
-type Option = { out?: string; lang?: keyof typeof LANG_MAP; logs?: boolean }
+type Option = { out?: string; locale?: keyof typeof LOCALE_MAP; logs?: boolean }
 
 const getPaths = async (
   path: string,
-  lang: keyof typeof LANG_MAP,
+  lang: keyof typeof LOCALE_MAP,
 ): Promise<string[]> => {
   try {
     const dirents = await readdir(path, { withFileTypes: true })
@@ -48,7 +48,7 @@ const getPaths = async (
   }
 }
 
-const getOutPath = (path: string, lang: keyof typeof LANG_MAP) =>
+const getOutPath = (path: string, lang: keyof typeof LOCALE_MAP) =>
   path.replace(
     new RegExp(`${lang === "en" ? ".ja" : ""}\.mdx$`),
     `${lang === "en" ? "" : ".ja"}.mdx`,
@@ -87,18 +87,18 @@ const restoreCodeBlocks = (
 
 const translateContent = async ({
   content,
-  lang,
+  locale,
   retry = 1,
   onRetry,
 }: {
   content: string
-  lang: keyof typeof LANG_MAP
+  locale: keyof typeof LOCALE_MAP
   retry?: number
   onRetry?: (retry: number) => void
 }): Promise<string> => {
   try {
-    const from = `from ${LANG_MAP[lang === "en" ? "ja" : "en"]}`
-    const to = `to ${LANG_MAP[lang]}`
+    const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
+    const to = `to ${LOCALE_MAP[locale]}`
 
     const { resolvedContent, codeBlocks, placeholders } =
       extractCodeBlocks(content)
@@ -135,19 +135,19 @@ const translateContent = async ({
 
     retry += 1
 
-    return await translateContent({ content, lang, retry, onRetry })
+    return await translateContent({ content, locale, retry, onRetry })
   }
 }
 
 program
   .argument("<path>")
   .option("-o, --out <path>")
-  .option("-l, --lang <lang>")
+  .option("-l, --locale <locale>")
   .option("--logs")
   .action(
     async (
       targetPath: string,
-      { out: outPath, lang = "en", logs: isLogs }: Option,
+      { out: outPath, locale = "en", logs: isLogs }: Option,
     ) => {
       const hrtime = process.hrtime()
       const spinner = !isLogs
@@ -159,7 +159,7 @@ program
       try {
         if (spinner) spinner.text = `Read files...`
 
-        const resolvedPaths = await getPaths(targetPath, lang)
+        const resolvedPaths = await getPaths(targetPath, locale)
 
         if (!resolvedPaths.length) throw new Error(`[${targetPath}] Not Found`)
 
@@ -182,11 +182,11 @@ program
                   )
               }
 
-              content = await translateContent({ content, lang, onRetry })
+              content = await translateContent({ content, locale, onRetry })
 
               content = await prettier(content)
 
-              const resolvedOutPath = outPath ?? getOutPath(path, lang)
+              const resolvedOutPath = outPath ?? getOutPath(path, locale)
 
               await writeFile(resolvedOutPath, content)
 

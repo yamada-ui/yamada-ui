@@ -10,7 +10,12 @@ tab: Usage
 ## Import
 
 ```ts
-import { FormControl, Label, HelperMessage, ErrorMessage } from "@yamada-ui/react"
+import {
+  FormControl,
+  Label,
+  HelperMessage,
+  ErrorMessage,
+} from "@yamada-ui/react"
 ```
 
 - `FormControl`: A wrapper component that controls child elements (`Label`, `helperMessage`, `ErrorMessage`).
@@ -44,7 +49,10 @@ Or, you can customize it using `Label`.
 To display a help message, set a `ReactNode` to `helperMessage`.
 
 ```tsx
-<FormControl label="Email address" helperMessage="We'll never share your email.">
+<FormControl
+  label="Email address"
+  helperMessage="We'll never share your email."
+>
   <Input type="email" placeholder="your email address" />
 </FormControl>
 ```

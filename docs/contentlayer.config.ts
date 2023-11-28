@@ -1,10 +1,11 @@
-import { DocumentTypeDef, defineDocumentType, makeSource } from "contentlayer/source-files"
+import type { DocumentTypeDef } from "contentlayer/source-files"
+import { defineDocumentType, makeSource } from "contentlayer/source-files"
 import GithubSlugger from "github-slugger"
 import remarkBreaks from "remark-breaks"
 import remarkEmoji from "remark-emoji"
 import remarkGfm from "remark-gfm"
 import remarkSlug from "remark-slug"
-import { Plugin } from "unified"
+import type { Plugin } from "unified"
 import { visit } from "unist-util-visit"
 import { CONSTANT } from "./constant"
 import { includes } from "./utils/array"
@@ -85,13 +86,19 @@ const getValidChildren = (
 
     const { attributes, resolvedContent } = getAttributes(content)
 
-    return { name, attributes, children: [{ type: "text", value: resolvedContent }] }
+    return {
+      name,
+      attributes,
+      children: [{ type: "text", value: resolvedContent }],
+    }
   } else {
     const firstChild = children.at(0)
     const lastChild = children.at(-1)
 
-    const [, name, firstChildContent] = firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)$/) ?? []
-    const [, lastChildContent] = lastChild.value.match(/([\s\S]*?)\s*:::$/) ?? []
+    const [, name, firstChildContent] =
+      firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)$/) ?? []
+    const [, lastChildContent] =
+      lastChild.value.match(/([\s\S]*?)\s*:::$/) ?? []
 
     if (!name) throw new Error()
 
@@ -113,7 +120,9 @@ const getValidChildren = (
   }
 }
 
-const getAttributes = (content: string = ""): { attributes: any[]; resolvedContent: string } => {
+const getAttributes = (
+  content: string = "",
+): { attributes: any[]; resolvedContent: string } => {
   const reg = /(\w+)=([^\s]+)(?=\s|$)/g
 
   const attributes = [...content.matchAll(reg)].map(([, name, value]) => ({
@@ -197,7 +206,14 @@ const computedFields: DocumentTypeDef["computedFields"] = {
   },
   data: {
     type: "json",
-    resolve: async ({ _id, _raw, title, body, table_of_contents_max_lv, ...rest }) => ({
+    resolve: async ({
+      _id,
+      _raw,
+      title,
+      body,
+      table_of_contents_max_lv,
+      ...rest
+    }) => ({
       ...rest,
       title,
       locale: getLocale(_raw.flattenedPath),
@@ -229,7 +245,9 @@ let resolvedDocumentTypeNames = documentTypeNames
 if (process.env.NODE_ENV === "development") {
   if (OMIT_DOCUMENT_TYPES.length) {
     if (
-      !OMIT_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
+      !OMIT_DOCUMENT_TYPES.every((documentTypeName) =>
+        documentTypeNames.includes(documentTypeName),
+      )
     ) {
       throw new Error('Invalid document name. Please check ".env."')
     }
@@ -241,13 +259,15 @@ if (process.env.NODE_ENV === "development") {
 
   if (PICK_DOCUMENT_TYPES.length) {
     if (
-      !PICK_DOCUMENT_TYPES.every((documentTypeName) => documentTypeNames.includes(documentTypeName))
+      !PICK_DOCUMENT_TYPES.every((documentTypeName) =>
+        documentTypeNames.includes(documentTypeName),
+      )
     ) {
       throw new Error('Invalid document name. Please check ".env."')
     }
 
-    resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter((documentTypeName) =>
-      PICK_DOCUMENT_TYPES.includes(documentTypeName),
+    resolvedDocumentTypeNames = resolvedDocumentTypeNames.filter(
+      (documentTypeName) => PICK_DOCUMENT_TYPES.includes(documentTypeName),
     )
   }
 
@@ -280,6 +300,12 @@ export default makeSource({
   documentTypes,
   mdx: {
     rehypePlugins: [rehypeCodeMeta],
-    remarkPlugins: [remarkSlug, remarkGfm, remarkEmoji, remarkUIComponent, remarkBreaks],
+    remarkPlugins: [
+      remarkSlug,
+      remarkGfm,
+      remarkEmoji,
+      remarkUIComponent,
+      remarkBreaks,
+    ],
   },
 })

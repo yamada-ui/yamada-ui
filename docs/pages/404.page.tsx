@@ -1,5 +1,5 @@
 import { Text, VStack } from "@yamada-ui/react"
-import { InferGetStaticPropsType, NextPage } from "next"
+import type { InferGetStaticPropsType, NextPage } from "next"
 import { Section } from "components/layouts"
 import { SEO } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
@@ -33,7 +33,12 @@ const Page: NextPage<PageProps> = ({ documents, documentTree }) => {
               {tc("not-found.heading")}
             </Text>
 
-            <Text w="full" maxW="2xl" fontSize={{ base: "xl", sm: "lg" }} textAlign="center">
+            <Text
+              w="full"
+              maxW="2xl"
+              fontSize={{ base: "xl", sm: "lg" }}
+              textAlign="center"
+            >
               {tc("not-found.message")}
             </Text>
           </VStack>

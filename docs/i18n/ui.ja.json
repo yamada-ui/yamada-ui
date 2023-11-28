@@ -58,6 +58,12 @@
       "light": "ダークモードに切り替える",
       "dark": "ライトモードに切り替える"
     },
+    "props-card": {
+      "required": "必須",
+      "description": "説明",
+      "type": "タイプ",
+      "default": "デフォルト"
+    },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"
     }

@@ -43,8 +43,9 @@ import {
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
-import { PrismTheme } from "prism-react-renderer"
-import React, { FC, PropsWithChildren, useState } from "react"
+import type { PrismTheme } from "prism-react-renderer"
+import type { FC, PropsWithChildren } from "react"
+import React, { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { FaRobot, FaCheckCircle, FaPhone } from "react-icons/fa"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
@@ -137,7 +138,11 @@ export type EditableCodeBlockProps = {
   transformCode?: (code: string) => void
 }
 
-export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional, ...rest }) => {
+export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
+  code,
+  functional,
+  ...rest
+}) => {
   code = code.trim().replace("// prettier-ignore", "").trim()
 
   const { t } = useI18n()
@@ -152,9 +157,18 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional
   const onChange = (code: string) => setEditorCode(code.trim())
 
   return (
-    <LiveProvider {...{ code: editorCode, enableTypeScript: true, scope, transformCode }} {...rest}>
+    <LiveProvider
+      {...{ code: editorCode, enableTypeScript: true, scope, transformCode }}
+      {...rest}
+    >
       <Box my="6">
-        <Box as={LivePreview} p="md" borderWidth="1px" rounded="md" overflowX="auto" />
+        <Box
+          as={LivePreview}
+          p="md"
+          borderWidth="1px"
+          rounded="md"
+          overflowX="auto"
+        />
 
         <Box rounded="md" overflow="hidden" my="4" position="relative">
           <Box py="2" bg={["zinc.800", "zinc.900"]} w="full">
@@ -182,7 +196,12 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({ code, functional
             />
           </Editor>
 
-          <CopyButton value={code} position="absolute" top="1.125rem" right="4" />
+          <CopyButton
+            value={code}
+            position="absolute"
+            top="1.125rem"
+            right="4"
+          />
         </Box>
 
         <Box

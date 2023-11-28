@@ -12,7 +12,14 @@ Use the `ui.<element>` notation to generate basic HTML elements with a style sys
 For example, to generate a plain HTML `button` element with a style system, write `<ui.button />`.
 
 ```tsx
-<ui.button py="sm" px="md" rounded="md" bg="purple.600" color="white" _hover={{ bg: "purple.500" }}>
+<ui.button
+  py="sm"
+  px="md"
+  rounded="md"
+  bg="purple.600"
+  color="white"
+  _hover={{ bg: "purple.500" }}
+>
   Click me!
 </ui.button>
 ```

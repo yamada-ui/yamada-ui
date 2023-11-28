@@ -292,7 +292,11 @@ To add an icon, set a `ReactElement` to `leftIcon` or `rightIcon`.
 
 ```tsx
 <Wrap gap="md">
-  <Button colorScheme="primary" variant="solid" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+  <Button
+    colorScheme="primary"
+    variant="solid"
+    leftIcon={<FontAwesomeIcon icon={faPlus} />}
+  >
     Button
   </Button>
   <Button
@@ -302,10 +306,18 @@ To add an icon, set a `ReactElement` to `leftIcon` or `rightIcon`.
   >
     Button
   </Button>
-  <Button colorScheme="warning" variant="ghost" leftIcon={<FontAwesomeIcon icon={faEnvelope} />}>
+  <Button
+    colorScheme="warning"
+    variant="ghost"
+    leftIcon={<FontAwesomeIcon icon={faEnvelope} />}
+  >
     Button
   </Button>
-  <Button colorScheme="danger" variant="link" leftIcon={<FontAwesomeIcon icon={faCheck} />}>
+  <Button
+    colorScheme="danger"
+    variant="link"
+    leftIcon={<FontAwesomeIcon icon={faCheck} />}
+  >
     Button
   </Button>
 </Wrap>

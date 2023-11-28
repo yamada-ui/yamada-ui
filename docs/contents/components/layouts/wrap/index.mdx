@@ -21,7 +21,13 @@ import { Wrap } from "@yamada-ui/react"
     .fill(0)
     .map((_, index) =>
       ["primary", "secondary", "warning", "danger"].map((bg, nestedIndex) => (
-        <Box key={`${index}-${nestedIndex}`} p="md" rounded="md" bg={bg} color="white">
+        <Box
+          key={`${index}-${nestedIndex}`}
+          p="md"
+          rounded="md"
+          bg={bg}
+          color="white"
+        >
           Box
         </Box>
       )),

@@ -83,12 +83,31 @@ In addition to the shorthand, you can also pass verbose `props`.
 ### Spanning Multiple Columns and Rows
 
 ```tsx
-<Grid w="full" templateColumns="repeat(4, 1fr)" templateRows="repeat(3, 1fr)" gap="md">
+<Grid
+  w="full"
+  templateColumns="repeat(4, 1fr)"
+  templateRows="repeat(3, 1fr)"
+  gap="md"
+>
   <GridItem colSpan={2} w="full" minH="4xs" rounded="md" bg="primary" />
 
-  <GridItem colSpan={2} rowSpan={3} w="full" minH="4xs" rounded="md" bg="secondary" />
+  <GridItem
+    colSpan={2}
+    rowSpan={3}
+    w="full"
+    minH="4xs"
+    rounded="md"
+    bg="secondary"
+  />
 
-  <GridItem rowStart={2} rowEnd={4} w="full" minH="4xs" rounded="md" bg="warning" />
+  <GridItem
+    rowStart={2}
+    rowEnd={4}
+    w="full"
+    minH="4xs"
+    rounded="md"
+    bg="warning"
+  />
 
   <GridItem
     colStart={2}

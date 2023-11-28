@@ -1,4 +1,5 @@
-import { forwardRef, Tag, TagProps } from "@yamada-ui/react"
+import type { TagProps } from "@yamada-ui/react"
+import { forwardRef, Tag } from "@yamada-ui/react"
 import { memo } from "react"
 
 export type LabelProps = TagProps
@@ -13,10 +14,10 @@ export const Label = memo(
           children === "New"
             ? "blue"
             : children === "Experimental"
-            ? "purple"
-            : children === "Planned"
-            ? "orange"
-            : "gray"
+              ? "purple"
+              : children === "Planned"
+                ? "orange"
+                : "gray"
         }
         {...rest}
       >

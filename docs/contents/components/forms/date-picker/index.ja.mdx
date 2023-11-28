@@ -272,9 +272,24 @@ import "dayjs/locale/ja"
 <VStack>
   <DatePicker placeholder="YYYY-MM-DD" inputFormat="YYYY-MM-DD" />
   <DatePicker placeholder="YYYY/MM/DD" locale="ja" dateFormat="YYYY年 MMMM" />
-  <DatePicker placeholder="YYYY/MM/DD" locale="ja" defaultType="month" yearFormat="YYYY年" />
-  <DatePicker placeholder="YYYY/MM/DD" locale="ja" defaultType="month" monthFormat="MM" />
-  <DatePicker placeholder="YYYY/MM/DD" locale="ja" defaultType="year" yearFormat="YY" />
+  <DatePicker
+    placeholder="YYYY/MM/DD"
+    locale="ja"
+    defaultType="month"
+    yearFormat="YYYY年"
+  />
+  <DatePicker
+    placeholder="YYYY/MM/DD"
+    locale="ja"
+    defaultType="month"
+    monthFormat="MM"
+  />
+  <DatePicker
+    placeholder="YYYY/MM/DD"
+    locale="ja"
+    defaultType="year"
+    yearFormat="YY"
+  />
   <DatePicker placeholder="YYYY/MM/DD" locale="ja" weekdayFormat="dd曜" />
 </VStack>
 ```
@@ -300,7 +315,12 @@ import "dayjs/locale/ja"
 ページネーションの単位を変更する場合は、`paginateBy`に数値を設定します。デフォルトでは、`amountOfMonths`と同じ数値が設定されるようになっています。
 
 ```tsx
-<DatePicker placeholder="YYYY/MM/DD" amountOfMonths={2} disableOutsideDays paginateBy={1} />
+<DatePicker
+  placeholder="YYYY/MM/DD"
+  amountOfMonths={2}
+  disableOutsideDays
+  paginateBy={1}
+/>
 ```
 
 ### 選択時にカレンダーを閉じない
@@ -371,7 +391,11 @@ import "dayjs/locale/ja"
 ```tsx
 <VStack>
   <DatePicker focusBorderColor="green.500" placeholder="custom border color" />
-  <DatePicker isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <DatePicker
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -418,7 +442,10 @@ import "dayjs/locale/ja"
 ```tsx
 <VStack>
   <DatePicker placeholder="YYYY/MM/DD" iconProps={{ color: "primary" }} />
-  <DatePicker placeholder="YYYY/MM/DD" iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <DatePicker
+    placeholder="YYYY/MM/DD"
+    iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
 </VStack>
 ```
 
@@ -433,13 +460,25 @@ return <DatePicker placeholder="YYYY/MM/DD" value={value} onChange={onChange} />
 ```tsx functional=true
 const [type, onChangeType] = useState<DatePickerProps["type"]>("month")
 
-return <DatePicker placeholder="YYYY/MM/DD" type={type} onChangeType={onChangeType} />
+return (
+  <DatePicker
+    placeholder="YYYY/MM/DD"
+    type={type}
+    onChangeType={onChangeType}
+  />
+)
 ```
 
 ```tsx functional=true
 const [month, onChangeMonth] = useState<Date>(new Date("1993-08-18"))
 
-return <DatePicker placeholder="YYYY/MM/DD" month={month} onChangeMonth={onChangeMonth} />
+return (
+  <DatePicker
+    placeholder="YYYY/MM/DD"
+    month={month}
+    onChangeMonth={onChangeMonth}
+  />
+)
 ```
 
 ### `React Hook Form`を使う
@@ -469,7 +508,9 @@ return (
         name="datePicker"
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
-        render={({ field }) => <DatePicker placeholder="YYYY/MM/DD" {...field} />}
+        render={({ field }) => (
+          <DatePicker placeholder="YYYY/MM/DD" {...field} />
+        )}
       />
     </FormControl>
 

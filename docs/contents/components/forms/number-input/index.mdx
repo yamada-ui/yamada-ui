@@ -48,7 +48,11 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 ```tsx
 <VStack>
   <NumberInput focusBorderColor="green.500" placeholder="custom border color" />
-  <NumberInput isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <NumberInput
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -58,7 +62,10 @@ To change the placeholder color, set `props` to `_placeholder`.
 
 ```tsx
 <VStack>
-  <NumberInput placeholder="custom placeholder" _placeholder={{ opacity: 1, color: "gray.500" }} />
+  <NumberInput
+    placeholder="custom placeholder"
+    _placeholder={{ opacity: 1, color: "gray.500" }}
+  />
   <NumberInput
     color="green.500"
     placeholder="custom placeholder"
@@ -112,7 +119,12 @@ By default, the component accepts any numeric input from the user, but values ex
 In some scenarios, you may not want to block out-of-range values. In that case, set `keepWithinRange` to `false`.
 
 ```tsx
-<NumberInput defaultValue={15} max={30} keepWithinRange={false} clampValueOnBlur={false} />
+<NumberInput
+  defaultValue={15}
+  max={30}
+  keepWithinRange={false}
+  clampValueOnBlur={false}
+/>
 ```
 
 ### Disable
@@ -168,7 +180,11 @@ To make the input invalid, set `isInvalid` to `true`.
   <NumberInput isInvalid variant="flushed" placeholder="flushed" />
   <NumberInput isInvalid variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isInvalid label="Order quantity" errorMessage="Order quantity is required.">
+  <FormControl
+    isInvalid
+    label="Order quantity"
+    errorMessage="Order quantity is required."
+  >
     <NumberInput />
   </FormControl>
 </VStack>

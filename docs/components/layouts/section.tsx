@@ -1,4 +1,5 @@
-import { CenterProps, VStack, forwardRef } from "@yamada-ui/react"
+import type { CenterProps } from "@yamada-ui/react"
+import { VStack, forwardRef } from "@yamada-ui/react"
 import { memo } from "react"
 
 export type SectionProps = CenterProps & {}

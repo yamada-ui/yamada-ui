@@ -97,9 +97,18 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} controlProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-  <Pagination total={10} controlPrevProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
-  <Pagination total={10} controlNextProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <Pagination
+    total={10}
+    controlProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
+  <Pagination
+    total={10}
+    controlPrevProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
+  <Pagination
+    total={10}
+    controlNextProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
 </VStack>
 ```
 
@@ -111,13 +120,21 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} withEdges edgeProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <Pagination
+    total={10}
+    withEdges
+    edgeProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
   <Pagination
     total={10}
     withEdges
     edgeFirstProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
   />
-  <Pagination total={10} withEdges edgeLastProps={{ children: <FontAwesomeIcon icon={faPoo} /> }} />
+  <Pagination
+    total={10}
+    withEdges
+    edgeLastProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
+  />
 </VStack>
 ```
 

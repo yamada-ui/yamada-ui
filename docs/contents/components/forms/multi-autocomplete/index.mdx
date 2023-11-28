@@ -10,7 +10,11 @@ tab: Usage
 ## Import
 
 ```ts
-import { MultiAutocomplete, AutocompleteOptionGroup, AutocompleteOption } from "@yamada-ui/react"
+import {
+  MultiAutocomplete,
+  AutocompleteOptionGroup,
+  AutocompleteOption,
+} from "@yamada-ui/react"
 ```
 
 ## Usage
@@ -78,7 +82,10 @@ To set default values, set an array of strings to `defaultValue`.
 To set a message to display when there are no items, use the `emptyMessage` property.
 
 ```tsx
-<MultiAutocomplete placeholder="キャラクターを選択" emptyMessage="キャラクターが存在しません">
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  emptyMessage="キャラクターが存在しません"
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -187,7 +194,9 @@ const items: AutocompleteItem[] = [
   },
 ]
 
-return <MultiAutocomplete placeholder="キャラクターを選択" items={items} allowFree />
+return (
+  <MultiAutocomplete placeholder="キャラクターを選択" items={items} allowFree />
+)
 ```
 
 ### Change Border Color
@@ -196,13 +205,20 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 
 ```tsx
 <VStack>
-  <MultiAutocomplete focusBorderColor="green.500" placeholder="custom border color">
+  <MultiAutocomplete
+    focusBorderColor="green.500"
+    placeholder="custom border color"
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
   </MultiAutocomplete>
 
-  <MultiAutocomplete isInvalid errorBorderColor="orange.500" placeholder="custom border color">
+  <MultiAutocomplete
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -240,7 +256,10 @@ To use a custom component, set a `ReactElement` to `component`. `component` prov
 
 ```tsx
 <VStack>
-  <MultiAutocomplete placeholder="キャラクターを選択" component={({ label }) => <Tag>{label}</Tag>}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    component={({ label }) => <Tag>{label}</Tag>}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -332,7 +351,11 @@ To disable clearing, set `isClearable` to `false`.
 To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
 ```tsx
-<MultiAutocomplete placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  placement="right-start"
+  maxW="xs"
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -372,7 +395,10 @@ To disable, set `isDisabled` to `true`.
   <MultiAutocomplete isDisabled variant="flushed" placeholder="flushed" />
   <MultiAutocomplete isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <MultiAutocomplete placeholder="Autocomplete notifications" />
   </FormControl>
 </>
@@ -401,7 +427,10 @@ To make read-only, set `isReadOnly` to `true`.
   <MultiAutocomplete isReadOnly variant="flushed" placeholder="flushed" />
   <MultiAutocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <MultiAutocomplete placeholder="Autocomplete notifications" />
   </FormControl>
 </>
@@ -434,7 +463,10 @@ To customize icons, set `props` to `iconProps` or `clearIconProps`.
 
 ```tsx
 <VStack>
-  <MultiAutocomplete placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    iconProps={{ color: "primary" }}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -466,7 +498,10 @@ To customize options, use the `optionProps` property.
 
 ```tsx
 <VStack>
-  <MultiAutocomplete placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    optionProps={{ color: "primary" }}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -489,7 +524,11 @@ To customize options, use the `optionProps` property.
 const [value, onChange] = useState<string[]>(["孫悟空"])
 
 return (
-  <MultiAutocomplete placeholder="キャラクターを選択" value={value} onChange={onChange}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    value={value}
+    onChange={onChange}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -516,7 +555,9 @@ return (
     <FormControl
       isInvalid={!!errors.autocomplete}
       label="Who is your favorite character?"
-      errorMessage={errors.autocomplete ? errors.autocomplete.message : undefined}
+      errorMessage={
+        errors.autocomplete ? errors.autocomplete.message : undefined
+      }
     >
       <Controller
         name="autocomplete"

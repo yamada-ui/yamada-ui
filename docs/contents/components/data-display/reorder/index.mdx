@@ -164,7 +164,11 @@ If you want to handle the event when the order of items has changed, use `onChan
 If you want to handle the event when the user's drag and drop has finished and the order of items is completed, use `onCompleteChange`. `onCompleteChange` provides the completed order as an array.
 
 ```tsx
-<Reorder onCompleteChange={(labels) => console.log(`completed '${labels.join(`', '`)}'`)}>
+<Reorder
+  onCompleteChange={(labels) =>
+    console.log(`completed '${labels.join(`', '`)}'`)
+  }
+>
   <ReorderItem label="ギニュー">ギニュー</ReorderItem>
   <ReorderItem label="リクーム">リクーム</ReorderItem>
   <ReorderItem label="バータ">バータ</ReorderItem>

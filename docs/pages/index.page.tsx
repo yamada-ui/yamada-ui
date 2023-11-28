@@ -1,5 +1,5 @@
 import { HStack, Heading, Text, VStack } from "@yamada-ui/react"
-import { InferGetStaticPropsType, NextPage } from "next"
+import type { InferGetStaticPropsType, NextPage } from "next"
 import { Section } from "components/layouts"
 import { SEO, Arrow, Github } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
@@ -46,7 +46,10 @@ const Page: NextPage<PageProps> = ({ documents, documentTree }) => {
             </Text>
           </VStack>
 
-          <HStack flexDirection={{ base: "row", md: "column" }} justifyContent="center">
+          <HStack
+            flexDirection={{ base: "row", md: "column" }}
+            justifyContent="center"
+          >
             <NextLinkButton
               size="xl"
               colorScheme="primary"

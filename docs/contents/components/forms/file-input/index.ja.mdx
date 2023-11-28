@@ -78,7 +78,11 @@ import { FileInput } from "@yamada-ui/react"
 カスタムコンポーネントを使用する場合は、`component`に`ReactElement`を設定します。`component`は、`value`(`File`)と`index`を提供します。
 
 ```tsx
-<FileInput placeholder="multiple" multiple component={({ value: { name } }) => <Tag>{name}</Tag>} />
+<FileInput
+  placeholder="multiple"
+  multiple
+  component={({ value: { name } }) => <Tag>{name}</Tag>}
+/>
 ```
 
 ### ファイル名の整形する
@@ -100,7 +104,11 @@ import { FileInput } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <FileInput focusBorderColor="green.500" placeholder="custom border color" />
-  <FileInput isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <FileInput
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -200,7 +208,12 @@ return (
     <Text>files: {value ? value.length : 0}</Text>
 
     <InputGroup>
-      <FileInput multiple value={value} onChange={onChange} resetRef={resetRef} />
+      <FileInput
+        multiple
+        value={value}
+        onChange={onChange}
+        resetRef={resetRef}
+      />
 
       {value && value.length ? (
         <InputRightElement isClick onClick={onReset}>

@@ -1,5 +1,5 @@
 import { Box, Center, Divider, HStack, Heading, VStack } from "@yamada-ui/react"
-import { FC, PropsWithChildren } from "react"
+import type { FC, PropsWithChildren } from "react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
 import { SEO } from "components/media-and-icons"
@@ -13,10 +13,12 @@ import {
   RelatedLinks,
 } from "components/navigation"
 import { TextWithCodeOrLink } from "components/typography"
-import { DocumentData, DocumentTypes } from "contentlayer/generated"
+import type { DocumentData, DocumentTypes } from "contentlayer/generated"
 import { usePage } from "contexts/page-context"
 
-export type DocumentLayoutProps = PropsWithChildren<DocumentTypes & DocumentData>
+export type DocumentLayoutProps = PropsWithChildren<
+  DocumentTypes & DocumentData
+>
 
 export const DocumentLayout: FC<DocumentLayoutProps> = ({
   title,
@@ -40,7 +42,13 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
       <Header />
 
       <Center as="main">
-        <HStack alignItems="flex-start" w="full" maxW="9xl" gap="0" px={{ base: "lg", md: "md" }}>
+        <HStack
+          alignItems="flex-start"
+          w="full"
+          maxW="9xl"
+          gap="0"
+          px={{ base: "lg", md: "md" }}
+        >
           <Sidebar display={{ base: "flex", lg: "none" }} />
 
           <VStack flex="1" minW="0" gap="0" py={{ base: "lg", md: "normal" }}>
@@ -78,7 +86,10 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
           </VStack>
 
           {with_table_of_contents && contents.length ? (
-            <TableOfContents display={{ base: "flex", xl: "none" }} contents={contents} />
+            <TableOfContents
+              display={{ base: "flex", xl: "none" }}
+              contents={contents}
+            />
           ) : null}
         </HStack>
       </Center>

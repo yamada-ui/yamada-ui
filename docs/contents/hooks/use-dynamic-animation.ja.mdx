@@ -52,7 +52,11 @@ const [animation, setAnimation] = useDynamicAnimation({
 return (
   <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
+      onClick={() =>
+        setAnimation((prev) =>
+          prev === "moveRight" ? "moveLeft" : "moveRight",
+        )
+      }
     >
       Click me!
     </Button>
@@ -135,7 +139,11 @@ const [animation, setAnimation] = useDynamicAnimation<
 return (
   <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
+      onClick={() =>
+        setAnimation((prev) =>
+          prev === "moveRight" ? "moveLeft" : "moveRight",
+        )
+      }
     >
       Click me!
     </Button>

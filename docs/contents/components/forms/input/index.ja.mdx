@@ -70,7 +70,11 @@ import {
 ```tsx
 <VStack>
   <Input focusBorderColor="green.500" placeholder="custom border color" />
-  <Input isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <Input
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -107,7 +111,11 @@ import {
   <Input isDisabled variant="flushed" placeholder="flushed" />
   <Input isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Email address" helperMessage="We'll never share your email.">
+  <FormControl
+    isDisabled
+    label="Email address"
+    helperMessage="We'll never share your email."
+  >
     <Input type="email" placeholder="your email address" />
   </FormControl>
 </VStack>
@@ -124,7 +132,11 @@ import {
   <Input isReadOnly variant="flushed" placeholder="flushed" />
   <Input isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Email address" helperMessage="We'll never share your email.">
+  <FormControl
+    isReadOnly
+    label="Email address"
+    helperMessage="We'll never share your email."
+  >
     <Input type="email" placeholder="your email address" />
   </FormControl>
 </VStack>
@@ -141,7 +153,11 @@ import {
   <Input isInvalid variant="flushed" placeholder="flushed" />
   <Input isInvalid variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isInvalid label="Email address" errorMessage="Email is required.">
+  <FormControl
+    isInvalid
+    label="Email address"
+    errorMessage="Email is required."
+  >
     <Input type="email" placeholder="your email address" />
   </FormControl>
 </VStack>
@@ -196,7 +212,11 @@ return (
     </InputGroup>
 
     <InputGroup size="md">
-      <Input pr="4.5rem" type={show ? "text" : "password"} placeholder="your password" />
+      <Input
+        pr="4.5rem"
+        type={show ? "text" : "password"}
+        placeholder="your password"
+      />
 
       <InputRightElement w="4.5rem" isClick>
         <Button h="1.75rem" size="sm" onClick={toggle}>

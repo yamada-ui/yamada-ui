@@ -8,6 +8,8 @@ with_description: true
 tab: Theming
 ---
 
+## Theming
+
 The `Button` is a [single part component](/styled-system/theming/component-style#single-part-component).
 
 :::note
@@ -63,7 +65,9 @@ export const Button: ComponentStyle = {
         bg: isGray(c)
           ? [`${c}.200`, `${c}.700`]
           : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-        color: isGray(c) ? undefined : [isAccessible ? `black` : `white`, `gray.800`],
+        color: isGray(c)
+          ? undefined
+          : [isAccessible ? `black` : `white`, `gray.800`],
         _hover: {
           bg: isGray(c)
             ? [`${c}.300`, `${c}.600`]
@@ -103,7 +107,9 @@ export const Button: ComponentStyle = {
 
       return {
         border: "1px solid",
-        borderColor: isGray(c) ? [`${c}.200`, `${c}.400`] : [`${c}.600`, `${c}.300`],
+        borderColor: isGray(c)
+          ? [`${c}.200`, `${c}.400`]
+          : [`${c}.600`, `${c}.300`],
         color: isGray(c) ? [`inherit`, `${c}.400`] : [`${c}.600`, `${c}.200`],
         bg: isGray(c) ? undefined : "transparent",
         _hover: {

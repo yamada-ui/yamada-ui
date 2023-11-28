@@ -93,7 +93,9 @@ const value = "孫悟空"
 return (
   <HStack gap="md">
     <Input value={value} isReadOnly />
-    <Button onClick={() => onCopy(value)}>{hasCopied ? "Copied!" : "Copy"}</Button>
+    <Button onClick={() => onCopy(value)}>
+      {hasCopied ? "Copied!" : "Copy"}
+    </Button>
   </HStack>
 )
 ```

@@ -1,6 +1,8 @@
-import { Box, BoxProps, Tab, Tabs, isArray, isObject } from "@yamada-ui/react"
+import type { BoxProps } from "@yamada-ui/react"
+import { Box, Tab, Tabs, isArray, isObject } from "@yamada-ui/react"
 import { themes } from "prism-react-renderer"
-import { FC, useState } from "react"
+import type { FC } from "react"
+import { useState } from "react"
 import { Highlight } from "./code-block"
 import { CopyButton } from "components/forms"
 
@@ -23,7 +25,9 @@ const getCode = (
 
     return (
       command +
-      (isArray(packageNameOrCommand) ? packageNameOrCommand.join(" ") : packageNameOrCommand)
+      (isArray(packageNameOrCommand)
+        ? packageNameOrCommand.join(" ")
+        : packageNameOrCommand)
     )
   }
 }
@@ -32,7 +36,10 @@ export type PackageManagersProps = BoxProps & {
   packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>
 }
 
-export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand, ...rest }) => {
+export const PackageManagers: FC<PackageManagersProps> = ({
+  packageNameOrCommand,
+  ...rest
+}) => {
   const [selectedPackageName, setSelectedPackageName] = useState<string>("pnpm")
   const language = "bash"
   const code = getCode(selectedPackageName, packageNameOrCommand)
@@ -67,7 +74,7 @@ export const PackageManagers: FC<PackageManagersProps> = ({ packageNameOrCommand
         <Highlight {...{ code, language, theme }} />
       </Box>
 
-      <CopyButton value={code} position="absolute" top={"3.3rem"} right="4" />
+      <CopyButton value={code} position="absolute" top="3.3rem" right="4" />
     </Box>
   )
 }

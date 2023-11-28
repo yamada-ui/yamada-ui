@@ -95,7 +95,19 @@ return (
 ### サイズを変更する
 
 ```tsx functional=true
-const sizeMap = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "full"]
+const sizeMap = [
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+  "2xl",
+  "3xl",
+  "4xl",
+  "5xl",
+  "6xl",
+  "full",
+]
 const [size, setSize] = useState("md")
 const { isOpen, onOpen, onClose } = useDisclosure()
 

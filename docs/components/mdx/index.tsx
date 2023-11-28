@@ -6,11 +6,16 @@ import * as TableComponents from "@yamada-ui/table"
 import type { MDXComponents as MDXComponentsType } from "mdx/types"
 import { CodeBlock } from "./code-block"
 import { ColorModeButton } from "./color-mode-button"
-import { ColorPaletters, ColorPaletter, ColorPaletterContainer } from "./color-palettes"
+import {
+  ColorPaletters,
+  ColorPaletter,
+  ColorPaletterContainer,
+} from "./color-palettes"
 import { Link } from "./link"
 import { LinkedHeading } from "./linked-heading"
 import { Member, MemberContainer } from "./members"
 import { PackageManagers } from "./package-managers"
+import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { LinkCard, CardContainer } from "components/navigation"
 
@@ -82,6 +87,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   ColorPaletter: (props) => <ColorPaletter {...props} />,
   CardContainer: (props) => <CardContainer {...props} />,
   LinkCard: (props) => <LinkCard {...props} />,
+  PropsCard: (props) => <PropsCard {...props} />,
 }
 
 export const MDXComponents = {

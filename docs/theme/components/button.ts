@@ -1,4 +1,4 @@
-import { ComponentStyle, ButtonProps } from "@yamada-ui/react"
+import type { ComponentStyle, ButtonProps } from "@yamada-ui/react"
 
 export const Button: ComponentStyle<ButtonProps> = {
   sizes: {

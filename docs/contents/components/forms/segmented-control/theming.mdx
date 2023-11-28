@@ -8,6 +8,8 @@ with_description: true
 tab: Theming
 ---
 
+## Theming
+
 The `SegmentedControl` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
 
 :::note
@@ -59,7 +61,10 @@ export const SegmentedControl: ComponentMultiStyle = {
           color: [`blackAlpha.800`, `whiteAlpha.800`],
         },
         _checked: {
-          color: [isUndefined(c) ? `blackAlpha.800` : `white`, `whiteAlpha.800`],
+          color: [
+            isUndefined(c) ? `blackAlpha.800` : `white`,
+            `whiteAlpha.800`,
+          ],
         },
       },
     }),
@@ -80,7 +85,10 @@ export const SegmentedControl: ComponentMultiStyle = {
           color: [`blackAlpha.800`, `whiteAlpha.800`],
         },
         _checked: {
-          color: [isUndefined(c) ? `blackAlpha.800` : `white`, `whiteAlpha.800`],
+          color: [
+            isUndefined(c) ? `blackAlpha.800` : `white`,
+            `whiteAlpha.800`,
+          ],
         },
       },
     }),

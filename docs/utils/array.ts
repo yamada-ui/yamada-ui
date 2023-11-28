@@ -13,7 +13,8 @@ export const flattenArray = <T extends any = any>(array: T[], key: keyof T) => {
 
     const targetItem = item[key]
 
-    if (isArray(targetItem)) result = [...result, ...flattenArray(targetItem, key)]
+    if (isArray(targetItem))
+      result = [...result, ...flattenArray(targetItem, key)]
   })
 
   return result

@@ -1,9 +1,9 @@
+import type { StackProps } from "@yamada-ui/react"
 import {
   Box,
   HStack,
   List,
   ListItem,
-  StackProps,
   Text,
   VStack,
   dataAttr,
@@ -13,7 +13,7 @@ import {
 import { memo, useState } from "react"
 import { List as ListIcon } from "components/media-and-icons"
 import { TextWithCode } from "components/typography"
-import { DocumentContent } from "contentlayer/generated"
+import type { DocumentContent } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
 import { useEventListener } from "hooks/use-event-listener"
 
@@ -55,7 +55,13 @@ export const TableOfContents = memo(
         maxH="calc(100dvh - 4rem)"
         {...rest}
       >
-        <VStack pt="lg" pb="16" pl="lg" overflowY="scroll" overscrollBehavior="contain">
+        <VStack
+          pt="lg"
+          pb="16"
+          pl="lg"
+          overflowY="scroll"
+          overscrollBehavior="contain"
+        >
           <HStack gap="sm">
             <ListIcon />
             <Text>{t("component.table-of-contents.title")}</Text>

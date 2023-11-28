@@ -34,10 +34,12 @@ const getPaths = async (path: string = "contents"): Promise<string[]> => {
     return (
       await Promise.all(
         dirents.flatMap(async (dirent) => {
+          const resolvedPath = `${path}/${dirent.name}`
+
           if (dirent.isDirectory()) {
-            return await getPaths(`${path}/${dirent.name}`)
+            return await getPaths(resolvedPath)
           } else {
-            return `${path}/${dirent.name}`
+            return resolvedPath
           }
         }),
       )
@@ -85,7 +87,9 @@ const getSlug = (path: string) => {
 }
 
 const getIsTab = async (paths: string[], slug: string) => {
-  const parentPath = paths.find((path) => getSlug(path) === slug.slice(0, slug.lastIndexOf("/")))
+  const parentPath = paths.find(
+    (path) => getSlug(path) === slug.slice(0, slug.lastIndexOf("/")),
+  )
 
   if (!parentPath) return false
 
@@ -125,10 +129,20 @@ program.action(async () => {
 
               if (isTab) return []
 
+              if (title === undefined) {
+                console.log(title, data, path)
+              }
+
               title = formatTitle(title)
 
               const contents: Content[] = [
-                { title, type: "page", description, slug, hierarchy: { lv1: title } },
+                {
+                  title,
+                  type: "page",
+                  description,
+                  slug,
+                  hierarchy: { lv1: title },
+                },
               ]
 
               const tableOfContents = toc(content).json as TableOfContent[]
@@ -151,7 +165,9 @@ program.action(async () => {
                 }
 
                 if (item.lvl === 3) {
-                  const lv2Item = prevTableOfContents.findLast(({ lvl }) => lvl < item.lvl)
+                  const lv2Item = prevTableOfContents.findLast(
+                    ({ lvl }) => lvl < item.lvl,
+                  )
 
                   if (!lv2Item) {
                     content.hierarchy.lv2 = item.content
@@ -162,8 +178,12 @@ program.action(async () => {
                 }
 
                 if (item.lvl === 4) {
-                  const lv3Item = prevTableOfContents.findLast(({ lvl }) => lvl < item.lvl)
-                  const lv2Item = prevTableOfContents.findLast(({ lvl }) => lvl < lv3Item?.lvl)
+                  const lv3Item = prevTableOfContents.findLast(
+                    ({ lvl }) => lvl < item.lvl,
+                  )
+                  const lv2Item = prevTableOfContents.findLast(
+                    ({ lvl }) => lvl < lv3Item?.lvl,
+                  )
 
                   if (!lv3Item) {
                     content.hierarchy.lv2 = item.content
@@ -185,7 +205,9 @@ program.action(async () => {
           )
         ).flat()
 
-        const data = await prettier(JSON.stringify(contents), { parser: "json" })
+        const data = await prettier(JSON.stringify(contents), {
+          parser: "json",
+        })
 
         await writeFile(`i18n/content.${lang}.json`, data)
       }),

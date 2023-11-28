@@ -1,12 +1,10 @@
 // import * as DropzoneComponents from '@yamada-ui/dropzone'
 import { Box, Text, useBoolean } from "@yamada-ui/react"
 import dynamic from "next/dynamic"
-import {
-  Highlight as ReactHighlight,
-  HighlightProps as ReactHighlightProps,
-  themes,
-} from "prism-react-renderer"
-import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from "react"
+import type { HighlightProps as ReactHighlightProps } from "prism-react-renderer"
+import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import { useEffect } from "react"
 import { CopyButton } from "components/forms"
 import { toBoolean } from "utils/assertion"
 
@@ -24,7 +22,10 @@ type Children = {
   }
 }
 
-export type CodeBlockProps = DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
+export type CodeBlockProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLPreElement>,
+  HTMLPreElement
+>
 
 export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
   const [isMounted, { on }] = useBoolean()
@@ -51,7 +52,9 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
   const isJSXorTSX = language === "jsx" || language === "tsx"
 
   if (isMounted && isJSXorTSX && live) {
-    return <EditableCodeBlock {...{ code, language, theme, noInline, functional }} />
+    return (
+      <EditableCodeBlock {...{ code, language, theme, noInline, functional }} />
+    )
   }
 
   return (
@@ -80,7 +83,12 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
         <Highlight {...{ code, language, theme, highlight }} />
       </Box>
 
-      <CopyButton value={code} position="absolute" top={title ? "3.3rem" : "1.125rem"} right="4" />
+      <CopyButton
+        value={code}
+        position="absolute"
+        top={title ? "3.3rem" : "1.125rem"}
+        right="4"
+      />
     </Box>
   )
 }
@@ -97,13 +105,21 @@ const computeHighlight = (highlight: string) => {
   return (index: number) => {
     const line = index + 1
 
-    return lines.some(([start, end]) => (end ? line >= start && line <= end : line === start))
+    return lines.some(([start, end]) =>
+      end ? line >= start && line <= end : line === start,
+    )
   }
 }
 
-export type HighlightProps = Omit<ReactHighlightProps, "children"> & { highlight?: string }
+export type HighlightProps = Omit<ReactHighlightProps, "children"> & {
+  highlight?: string
+}
 
-export const Highlight: FC<HighlightProps> = ({ language, highlight, ...rest }) => {
+export const Highlight: FC<HighlightProps> = ({
+  language,
+  highlight,
+  ...rest
+}) => {
   const shouldHighlight = computeHighlight(highlight)
 
   return (
@@ -126,7 +142,11 @@ export const Highlight: FC<HighlightProps> = ({ language, highlight, ...rest }) 
                 {...getLineProps({ line, key: index })}
               >
                 {line.map((token, index) => (
-                  <Text key={index} as="span" {...getTokenProps({ token, key: index })} />
+                  <Text
+                    key={index}
+                    as="span"
+                    {...getTokenProps({ token, key: index })}
+                  />
                 ))}
               </Box>
             ))}

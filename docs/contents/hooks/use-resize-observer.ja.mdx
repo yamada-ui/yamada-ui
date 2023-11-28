@@ -22,7 +22,13 @@ return (
   <>
     <Text>{JSON.stringify(rect)}</Text>
 
-    <Button ref={ref} mt="md" onClick={toggle} w={flg ? "xl" : "sm"} h={flg ? "xl" : "sm"}>
+    <Button
+      ref={ref}
+      mt="md"
+      onClick={toggle}
+      w={flg ? "xl" : "sm"}
+      h={flg ? "xl" : "sm"}
+    >
       Click me to toggle the boolean value
     </Button>
   </>

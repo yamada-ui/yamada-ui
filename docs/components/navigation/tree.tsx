@@ -1,3 +1,4 @@
+import type { ListProps } from "@yamada-ui/react"
 import {
   Center,
   ChevronIcon,
@@ -5,16 +6,16 @@ import {
   HStack,
   List,
   ListItem,
-  ListProps,
   Text,
   dataAttr,
   forwardRef,
   useBoolean,
 } from "@yamada-ui/react"
 import Link from "next/link"
-import { FC, memo, useEffect } from "react"
+import type { FC } from "react"
+import { memo, useEffect } from "react"
 import { Label } from "components/data-display"
-import { DocumentTypesWithChildren } from "contentlayer/generated"
+import type { DocumentTypesWithChildren } from "contentlayer/generated"
 import { usePage } from "contexts/page-context"
 
 export type TreeProps = ListProps
@@ -81,7 +82,10 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
 
 RecursiveListItem.displayName = "RecursiveListItem"
 
-type ListItemLinkProps = Pick<RecursiveListItemProps, "title" | "label" | "slug" | "isNested"> & {
+type ListItemLinkProps = Pick<
+  RecursiveListItemProps,
+  "title" | "label" | "slug" | "isNested"
+> & {
   isSelected?: boolean
   isOpen?: boolean
   withToggleButton?: boolean
@@ -89,7 +93,16 @@ type ListItemLinkProps = Pick<RecursiveListItemProps, "title" | "label" | "slug"
 }
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
-  ({ title, label, slug, isNested, isOpen, isSelected, withToggleButton, onToggle }) => {
+  ({
+    title,
+    label,
+    slug,
+    isNested,
+    isOpen,
+    isSelected,
+    withToggleButton,
+    onToggle,
+  }) => {
     return (
       <HStack
         data-selected={dataAttr(isSelected)}
@@ -131,6 +144,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
       >
         <Text
           as={Link}
+          prefetch={false}
           href={slug}
           position="static"
           zIndex="yamcha"

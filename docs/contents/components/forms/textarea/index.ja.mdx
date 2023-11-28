@@ -61,7 +61,11 @@ import { Textarea } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Textarea focusBorderColor="green.500" placeholder="custom border color" />
-  <Textarea isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <Textarea
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -71,7 +75,10 @@ import { Textarea } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Textarea placeholder="custom placeholder" _placeholder={{ opacity: 1, color: "gray.500" }} />
+  <Textarea
+    placeholder="custom placeholder"
+    _placeholder={{ opacity: 1, color: "gray.500" }}
+  />
   <Textarea
     color="green.500"
     placeholder="custom placeholder"
@@ -91,7 +98,11 @@ import { Textarea } from "@yamada-ui/react"
   <Textarea isDisabled variant="flushed" placeholder="flushed" />
   <Textarea isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Feedback" helperMessage="We would like to get your feedback.">
+  <FormControl
+    isDisabled
+    label="Feedback"
+    helperMessage="We would like to get your feedback."
+  >
     <Textarea variant="outline" placeholder="your feedback" />
   </FormControl>
 </VStack>
@@ -108,7 +119,11 @@ import { Textarea } from "@yamada-ui/react"
   <Textarea isReadOnly variant="flushed" placeholder="flushed" />
   <Textarea isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Feedback" helperMessage="We would like to get your feedback.">
+  <FormControl
+    isReadOnly
+    label="Feedback"
+    helperMessage="We would like to get your feedback."
+  >
     <Textarea variant="outline" placeholder="your feedback" />
   </FormControl>
 </VStack>

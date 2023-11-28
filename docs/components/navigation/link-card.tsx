@@ -1,14 +1,14 @@
+import type { CardProps, StringLiteral } from "@yamada-ui/react"
 import {
   Card,
   CardBody,
   CardHeader,
-  CardProps,
   forwardRef,
   Heading,
-  StringLiteral,
 } from "@yamada-ui/react"
 import Link from "next/link"
-import { memo, ReactNode } from "react"
+import type { ReactNode } from "react"
+import { memo } from "react"
 import { Label } from "components/data-display"
 import { TextWithCode } from "components/typography"
 import { usePage } from "contexts/page-context"
@@ -23,7 +23,10 @@ export type LinkCardProps = CardProps & {
 
 export const LinkCard = memo(
   forwardRef<LinkCardProps, "div">(
-    ({ title, label, description, href, with_description = true, ...rest }, ref) => {
+    (
+      { title, label, description, href, with_description = true, ...rest },
+      ref,
+    ) => {
       const { documents } = usePage()
 
       if (href.startsWith("/")) {
@@ -53,7 +56,12 @@ export const LinkCard = memo(
           transitionDuration="normal"
           {...rest}
         >
-          <CardHeader as="div" pt="md" pb={!with_description ? "md" : undefined} gap="sm">
+          <CardHeader
+            as="div"
+            pt="md"
+            pb={!with_description ? "md" : undefined}
+            gap="sm"
+          >
             <Heading size="md" noOfLines={1}>
               {title}
             </Heading>

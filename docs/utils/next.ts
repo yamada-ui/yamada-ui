@@ -1,4 +1,4 @@
-import { GetStaticPathsContext, GetStaticPropsContext } from "next"
+import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
 import { toArray } from "./array"
 import { toKebabCase } from "./assertion"
 import {
@@ -12,9 +12,12 @@ import {
   omitDocumentTabs,
 } from "./contentlayer"
 import { otherLocales } from "./i18n"
-import { DocumentData, DocumentTypeNames, allDocuments } from "contentlayer/generated"
+import type { DocumentData, DocumentTypeNames } from "contentlayer/generated"
+import { allDocuments } from "contentlayer/generated"
 
-export const getStaticCommonProps = async ({ locale }: GetStaticPropsContext) => {
+export const getStaticCommonProps = async ({
+  locale,
+}: GetStaticPropsContext) => {
   const documents = getDocuments(locale)
   const documentTree = getDocumentTree(omitDocumentTabs(documents))()
 
@@ -24,14 +27,21 @@ export const getStaticCommonProps = async ({ locale }: GetStaticPropsContext) =>
 export const getStaticDocumentProps =
   (documentTypeName: DocumentTypeNames) =>
   async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
-    const paths = [toKebabCase(documentTypeName), ...toArray(params?.slug ?? [])]
+    const paths = [
+      toKebabCase(documentTypeName),
+      ...toArray(params?.slug ?? []),
+    ]
 
     const documents = getDocuments(locale)
     const documentTree = getDocumentTree(omitDocumentTabs(documents))(paths)
     const document =
-      getDocument(documents, paths, locale) ?? getDocument(documents, paths, defaultLocale)
+      getDocument(documents, paths, locale) ??
+      getDocument(documents, paths, defaultLocale)
 
-    const { documentTabs, parentDocument, parentPaths } = getDocumentTabs(documents, document)
+    const { documentTabs, parentDocument, parentPaths } = getDocumentTabs(
+      documents,
+      document,
+    )
     const documentChildrenTree = getDocumentTree(documents, paths)(paths)
     const documentBreadcrumbs = getDocumentBreadcrumbs(
       documents,
@@ -39,7 +49,10 @@ export const getStaticDocumentProps =
       locale,
       defaultLocale,
     )
-    const documentPagination = getDocumentPagination(documentTree, parentDocument ?? document)
+    const documentPagination = getDocumentPagination(
+      documentTree,
+      parentDocument ?? document,
+    )
 
     return {
       props: {
@@ -85,7 +98,9 @@ export const getStaticDocumentPaths =
 
         const { locale } = data as DocumentData
         const path = getPath(id)
-        const params = { slug: path.split("/").filter((str) => str !== "index") }
+        const params = {
+          slug: path.split("/").filter((str) => str !== "index"),
+        }
 
         const notExistLocales = otherLocales.filter((otherLocale) => {
           const otherLocaleDoc = documents.find(({ _id, data }) => {
@@ -100,7 +115,10 @@ export const getStaticDocumentPaths =
         })
 
         if (notExistLocales.length) {
-          const otherPaths = notExistLocales.map((locale) => ({ params, locale }))
+          const otherPaths = notExistLocales.map((locale) => ({
+            params,
+            locale,
+          }))
 
           return [{ params, locale }, ...otherPaths]
         } else {

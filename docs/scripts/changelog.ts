@@ -1,6 +1,7 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
-import matter, { GrayMatterFile } from "gray-matter"
+import type { GrayMatterFile } from "gray-matter"
+import matter from "gray-matter"
 import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
@@ -85,7 +86,11 @@ const writeMdxIndexFiles = async (data: Data, content: Content) => {
     LOCALES.map(async (locale) => {
       data.menu = LOCALE_MENU_MAP[locale]
 
-      await writeMdxFile(path.join(DIR_PATH, getMdxFileName("index", locale)), data, content)
+      await writeMdxFile(
+        path.join(DIR_PATH, getMdxFileName("index", locale)),
+        data,
+        content,
+      )
 
       console.log(`[changelog]: Generated ${getMdxFileName("index", locale)}`)
     }),

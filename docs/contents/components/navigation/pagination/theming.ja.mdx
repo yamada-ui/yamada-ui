@@ -6,6 +6,8 @@ with_description: true
 tab: テーマ
 ---
 
+## テーマ
+
 `Pagination`は、[複数パーツのコンポーネント](/styled-system/theming/component-style#複数パーツのコンポーネント)です。
 
 :::note
@@ -70,7 +72,9 @@ export const Pagination: ComponentMultiStyle = {
             borderColor: isGray(c)
               ? [`${c}.200`, `${c}.700`]
               : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-            color: isGray(c) ? undefined : [isAccessible ? `black` : `white`, `gray.800`],
+            color: isGray(c)
+              ? undefined
+              : [isAccessible ? `black` : `white`, `gray.800`],
             _hover: {
               bg: isGray(c)
                 ? [`${c}.200`, `${c}.700`]
@@ -99,8 +103,12 @@ export const Pagination: ComponentMultiStyle = {
           borderColor: "border",
           _selected: {
             bg: "transparent",
-            borderColor: isGray(c) ? [`${c}.500`, `${c}.400`] : [`${c}.600`, `${c}.300`],
-            color: isGray(c) ? [`inherit`, `${c}.400`] : [`${c}.600`, `${c}.200`],
+            borderColor: isGray(c)
+              ? [`${c}.500`, `${c}.400`]
+              : [`${c}.600`, `${c}.300`],
+            color: isGray(c)
+              ? [`inherit`, `${c}.400`]
+              : [`${c}.600`, `${c}.200`],
             _hover: {
               bg: ["transparent", "transparent"],
             },
@@ -126,7 +134,9 @@ export const Pagination: ComponentMultiStyle = {
           _selected: {
             bg: isGray(c) ? undefined : "transparent",
             fontWeight: "semibold",
-            color: isGray(c) ? [`inherit`, `${c}.200`] : [`${c}.600`, `${c}.200`],
+            color: isGray(c)
+              ? [`inherit`, `${c}.200`]
+              : [`${c}.600`, `${c}.200`],
           },
           _hover: {
             bg: isGray(c)

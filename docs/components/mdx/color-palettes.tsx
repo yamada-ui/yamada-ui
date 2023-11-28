@@ -1,24 +1,26 @@
+import type { GridProps, StackProps, defaultTheme } from "@yamada-ui/react"
 import {
   Box,
   Grid,
-  GridProps,
   HStack,
-  StackProps,
   Text,
   VStack,
-  defaultTheme,
   useTheme,
   useToken,
   useValue,
 } from "@yamada-ui/react"
-import { FC } from "react"
+import type { FC } from "react"
 
 export type ColorPaletterProps = Omit<StackProps, "color"> & {
   color: string
   label: string
 }
 
-export const ColorPaletter: FC<ColorPaletterProps> = ({ label, color, ...rest }) => {
+export const ColorPaletter: FC<ColorPaletterProps> = ({
+  label,
+  color,
+  ...rest
+}) => {
   if (!label) label = color
 
   const value = useToken("colors", color)
@@ -44,7 +46,10 @@ export type ColorPalettersProps = Omit<ColorPaletterContainerProps, "color"> & {
   colorScheme: keyof (typeof defaultTheme)["colors"]
 }
 
-export const ColorPaletters: FC<ColorPalettersProps> = ({ colorScheme, ...rest }) => {
+export const ColorPaletters: FC<ColorPalettersProps> = ({
+  colorScheme,
+  ...rest
+}) => {
   const { theme } = useTheme()
 
   return (
@@ -62,11 +67,17 @@ export const ColorPaletters: FC<ColorPalettersProps> = ({ colorScheme, ...rest }
 
 export type ColorPaletterContainerProps = GridProps
 
-export const ColorPaletterContainer: FC<ColorPaletterContainerProps> = ({ ...rest }) => {
+export const ColorPaletterContainer: FC<ColorPaletterContainerProps> = ({
+  ...rest
+}) => {
   return (
     <Grid
       my="6"
-      templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(2, 1fr)", sm: "repeat(1, 1fr)" }}
+      templateColumns={{
+        base: "repeat(3, 1fr)",
+        md: "repeat(2, 1fr)",
+        sm: "repeat(1, 1fr)",
+      }}
       gap="4"
       {...rest}
     />

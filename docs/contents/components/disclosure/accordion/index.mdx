@@ -10,7 +10,12 @@ tab: Usage
 ## Import
 
 ```ts
-import { Accordion, AccordionItem, AccordionLabel, AccordionPanel } from "@yamada-ui/react"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionLabel,
+  AccordionPanel,
+} from "@yamada-ui/react"
 ```
 
 - `Accordion`: A wrapper component that controls the child elements (`AccordionItem`).
@@ -226,7 +231,9 @@ To disable a specific item, set `isDisabled`.
 ```tsx
 <Accordion>
   <AccordionItem>
-    <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>孫悟空少年編</AccordionLabel>
+    <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>
+      孫悟空少年編
+    </AccordionLabel>
 
     <AccordionPanel pt={3}>
       地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
@@ -244,7 +251,9 @@ To disable a specific item, set `isDisabled`.
   </AccordionItem>
 
   <AccordionItem>
-    <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>サイヤ人編</AccordionLabel>
+    <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>
+      サイヤ人編
+    </AccordionLabel>
 
     <AccordionPanel pt={3}>
       ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
@@ -282,7 +291,9 @@ If `AccordionItem` does not have `AccordionPanel` in `children`, it automaticall
 ### Control
 
 ```tsx functional=true
-const [index, onChange] = useState<AccordionProps["index"] | undefined>(undefined)
+const [index, onChange] = useState<AccordionProps["index"] | undefined>(
+  undefined,
+)
 
 return (
   <Accordion index={index} onChange={onChange}>

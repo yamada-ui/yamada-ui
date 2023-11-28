@@ -8,6 +8,8 @@ with_description: true
 tab: Theming
 ---
 
+## Theming
+
 The `Indicator` is a [single part component](/styled-system/theming/component-style#single-part-component).
 
 :::note
@@ -26,7 +28,9 @@ export const Indicator: ComponentStyle = {
     alignItems: "center",
     outline: 0,
     whiteSpace: "nowrap",
-    ...(withBorder ? { borderWidth: "0.2em", borderColor: ["white", "black"] } : {}),
+    ...(withBorder
+      ? { borderWidth: "0.2em", borderColor: ["white", "black"] }
+      : {}),
   }),
 
   sizes: {

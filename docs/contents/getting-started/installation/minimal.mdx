@@ -15,7 +15,9 @@ Install the core and utilities of Yamada UI.
 
 Execute one of the following commands in the terminal.
 
-<PackageManagers packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/utils"]} />
+<PackageManagers
+  packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/utils"]}
+/>
 
 ## Using `ui`
 
@@ -141,7 +143,13 @@ Install `@yamada-ui/motion`.
 <PackageManagers packageNameOrCommand="@yamada-ui/motion" />
 
 ```tsx
-<ui.div display="flex" placeContent="center" placeItems="center" w="100%" h="24rem">
+<ui.div
+  display="flex"
+  placeContent="center"
+  placeItems="center"
+  w="100%"
+  h="24rem"
+>
   <Motion
     animate={{
       scale: [1, 2, 2, 1, 1],
@@ -193,7 +201,12 @@ const App = () => {
 If you want to support dark mode, also add `ColorModeProvider`.
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import {
+  ThemeProvider,
+  ColorModeProvider,
+  ResetStyle,
+  GlobalStyle,
+} from "@yamada-ui/core"
 import { baseTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {

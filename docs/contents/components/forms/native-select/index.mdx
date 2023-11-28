@@ -143,8 +143,15 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 
 ```tsx
 <VStack>
-  <NativeSelect focusBorderColor="green.500" placeholder="custom border color" />
-  <NativeSelect isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <NativeSelect
+    focusBorderColor="green.500"
+    placeholder="custom border color"
+  />
+  <NativeSelect
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -159,7 +166,10 @@ To disable, set `isDisabled` to `true`.
   <NativeSelect isDisabled variant="flushed" placeholder="flushed" />
   <NativeSelect isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <NativeSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -176,7 +186,10 @@ To make read-only, set `isReadOnly` to `true`.
   <NativeSelect isReadOnly variant="flushed" placeholder="flushed" />
   <NativeSelect isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <NativeSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -209,7 +222,10 @@ To customize the icon, set `props` to `iconProps`.
 
 ```tsx
 <VStack>
-  <NativeSelect placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+  <NativeSelect
+    placeholder="キャラクターを選択"
+    iconProps={{ color: "primary" }}
+  >
     <NativeOption value="孫悟空">孫悟空</NativeOption>
     <NativeOption value="ベジータ">ベジータ</NativeOption>
     <NativeOption value="フリーザ">フリーザ</NativeOption>

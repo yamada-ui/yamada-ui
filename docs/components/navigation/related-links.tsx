@@ -1,5 +1,7 @@
-import { Button, ButtonProps, FlexProps, forwardRef, Link, LinkProps, Wrap } from "@yamada-ui/react"
-import { FC, memo } from "react"
+import type { ButtonProps, FlexProps, LinkProps } from "@yamada-ui/react"
+import { Button, forwardRef, Link, Wrap } from "@yamada-ui/react"
+import type { FC } from "react"
+import { memo } from "react"
 import { Github, Npm } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
@@ -27,7 +29,9 @@ export const RelatedLinks = memo(
             href={`${CONSTANT.SNS.GITHUB.UI_EDIT_URL}/${
               isHook ? "hooks" : "components"
             }/${dirName}`}
-            leftIcon={<Github boxSize="1rem" color={["gray.700", "whiteAlpha.800"]} />}
+            leftIcon={
+              <Github boxSize="1rem" color={["gray.700", "whiteAlpha.800"]} />
+            }
           >
             {t("component.doc-links.source")}
           </DocumentLink>

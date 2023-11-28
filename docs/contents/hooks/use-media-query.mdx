@@ -14,7 +14,10 @@ import { useMediaQuery } from "@yamada-ui/react"
 ## Usage
 
 ```tsx functional=true
-const [isLarge, isDark] = useMediaQuery(["(min-width: 1280px)", "(prefers-color-scheme: dark)"])
+const [isLarge, isDark] = useMediaQuery([
+  "(min-width: 1280px)",
+  "(prefers-color-scheme: dark)",
+])
 
 return (
   <>

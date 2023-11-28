@@ -1,13 +1,12 @@
-import {
-  Button,
+import type {
   ButtonProps,
-  IconButton,
   IconButtonProps,
-  Link as UILink,
   LinkProps as UILinkProps,
 } from "@yamada-ui/react"
-import Link, { LinkProps } from "next/link"
-import { FC } from "react"
+import { Button, IconButton, Link as UILink } from "@yamada-ui/react"
+import type { LinkProps } from "next/link"
+import Link from "next/link"
+import type { FC } from "react"
 
 export type NextLinkProps = UILinkProps
 
@@ -20,7 +19,10 @@ export type NextLinkButtonProps = ButtonProps &
     isExternal?: boolean
   }
 
-export const NextLinkButton: FC<NextLinkButtonProps> = ({ isExternal, ...rest }) => {
+export const NextLinkButton: FC<NextLinkButtonProps> = ({
+  isExternal,
+  ...rest
+}) => {
   return (
     <Button
       as={Link}
@@ -36,7 +38,10 @@ export type NextLinkIconButtonProps = IconButtonProps &
     isExternal?: boolean
   }
 
-export const NextLinkIconButton: FC<NextLinkIconButtonProps> = ({ isExternal, ...rest }) => {
+export const NextLinkIconButton: FC<NextLinkIconButtonProps> = ({
+  isExternal,
+  ...rest
+}) => {
   return (
     <IconButton
       as={Link}

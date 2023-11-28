@@ -18,9 +18,11 @@
         }
       }
     ],
+    "@next/next/no-title-in-document-head": "off",
+    "react/no-unescaped-entities": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "unused-imports/no-unused-imports": "error",
-    "react/no-unescaped-entities": "off",
-    "@next/next/no-title-in-document-head": "off"
+    "react/jsx-curly-brace-presence": "error",
+    "@typescript-eslint/consistent-type-imports": "error"
   }
 }

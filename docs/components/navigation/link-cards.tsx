@@ -1,4 +1,5 @@
-import { forwardRef, Grid, GridItem, GridProps } from "@yamada-ui/react"
+import type { GridProps } from "@yamada-ui/react"
+import { forwardRef, Grid, GridItem } from "@yamada-ui/react"
 import { memo } from "react"
 import { LinkCard } from "./link-card"
 import { usePage } from "contexts/page-context"
@@ -6,21 +7,31 @@ import { usePage } from "contexts/page-context"
 export type LinkCardsProps = GridProps & { with_description?: boolean }
 
 export const LinkCards = memo(
-  forwardRef<LinkCardsProps, "div">(({ with_description = true, ...rest }, ref) => {
-    const { documentChildrenTree } = usePage()
+  forwardRef<LinkCardsProps, "div">(
+    ({ with_description = true, ...rest }, ref) => {
+      const { documentChildrenTree } = usePage()
 
-    return (
-      <CardContainer ref={ref} {...rest}>
-        {documentChildrenTree.map(({ title, menu, description, label, slug }) => (
-          <GridItem key={slug}>
-            <LinkCard
-              {...{ href: slug, title: menu ?? title, description, label, with_description }}
-            />
-          </GridItem>
-        ))}
-      </CardContainer>
-    )
-  }),
+      return (
+        <CardContainer ref={ref} {...rest}>
+          {documentChildrenTree.map(
+            ({ title, menu, description, label, slug }) => (
+              <GridItem key={slug}>
+                <LinkCard
+                  {...{
+                    href: slug,
+                    title: menu ?? title,
+                    description,
+                    label,
+                    with_description,
+                  }}
+                />
+              </GridItem>
+            ),
+          )}
+        </CardContainer>
+      )
+    },
+  ),
 )
 
 export const CardContainer = memo(

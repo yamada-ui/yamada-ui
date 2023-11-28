@@ -61,7 +61,11 @@ To change the border color, set the color to `focusBorderColor` or `errorBorderC
 ```tsx
 <VStack>
   <Textarea focusBorderColor="green.500" placeholder="custom border color" />
-  <Textarea isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <Textarea
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -71,7 +75,10 @@ To change the placeholder color, set `props` to `_placeholder`.
 
 ```tsx
 <VStack>
-  <Textarea placeholder="custom placeholder" _placeholder={{ opacity: 1, color: "gray.500" }} />
+  <Textarea
+    placeholder="custom placeholder"
+    _placeholder={{ opacity: 1, color: "gray.500" }}
+  />
   <Textarea
     color="green.500"
     placeholder="custom placeholder"
@@ -91,7 +98,11 @@ To disable, set `isDisabled` to `true`.
   <Textarea isDisabled variant="flushed" placeholder="flushed" />
   <Textarea isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Feedback" helperMessage="We would like to get your feedback.">
+  <FormControl
+    isDisabled
+    label="Feedback"
+    helperMessage="We would like to get your feedback."
+  >
     <Textarea variant="outline" placeholder="your feedback" />
   </FormControl>
 </VStack>
@@ -108,7 +119,11 @@ To make read-only, set `isReadOnly` to `true`.
   <Textarea isReadOnly variant="flushed" placeholder="flushed" />
   <Textarea isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Feedback" helperMessage="We would like to get your feedback.">
+  <FormControl
+    isReadOnly
+    label="Feedback"
+    helperMessage="We would like to get your feedback."
+  >
     <Textarea variant="outline" placeholder="your feedback" />
   </FormControl>
 </VStack>

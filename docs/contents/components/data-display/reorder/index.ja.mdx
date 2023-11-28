@@ -164,7 +164,11 @@ import { Reorder, ReorderItem, ReorderTrigger } from "@yamada-ui/react"
 ユーザーのドラッグアンドドロップが終了し、項目の順序が完了されたイベントをハンドルしたい場合は、`onCompleteChange`を使用します。`onCompleteChange`は、完了した順序を配列を提供します。
 
 ```tsx
-<Reorder onCompleteChange={(labels) => console.log(`completed '${labels.join(`', '`)}'`)}>
+<Reorder
+  onCompleteChange={(labels) =>
+    console.log(`completed '${labels.join(`', '`)}'`)
+  }
+>
   <ReorderItem label="ギニュー">ギニュー</ReorderItem>
   <ReorderItem label="リクーム">リクーム</ReorderItem>
   <ReorderItem label="バータ">バータ</ReorderItem>

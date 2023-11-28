@@ -128,7 +128,11 @@ import { MonthPicker } from "@yamada-ui/calendar"
 日付の解析方法をカスタマイズすることができます。
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" inputFormat="YYYY/MM" parseDate={(value) => new Date(value)} />
+<MonthPicker
+  placeholder="YYYY/MM"
+  inputFormat="YYYY/MM"
+  parseDate={(value) => new Date(value)}
+/>
 ```
 
 ### 最小と最大の月を設定する
@@ -136,7 +140,11 @@ import { MonthPicker } from "@yamada-ui/calendar"
 選択可能な最小と最大の月を設定する場合は、`minDate`と`maxDate`に`Date`を設定します。
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" minDate={new Date(1993, 8)} maxDate={new Date(2000, 10)} />
+<MonthPicker
+  placeholder="YYYY/MM"
+  minDate={new Date(1993, 8)}
+  maxDate={new Date(2000, 10)}
+/>
 ```
 
 ### ロケールを設定する
@@ -162,7 +170,12 @@ import "dayjs/locale/ja"
 ```tsx
 <VStack>
   <MonthPicker placeholder="YYYY-MM" inputFormat="YYYY-MM" />
-  <MonthPicker placeholder="YYYY/MM" locale="ja" defaultType="month" yearFormat="YYYY年" />
+  <MonthPicker
+    placeholder="YYYY/MM"
+    locale="ja"
+    defaultType="month"
+    yearFormat="YYYY年"
+  />
 </VStack>
 ```
 
@@ -230,7 +243,11 @@ import "dayjs/locale/ja"
 ```tsx
 <VStack>
   <MonthPicker focusBorderColor="green.500" placeholder="custom border color" />
-  <MonthPicker isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <MonthPicker
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -295,13 +312,21 @@ return <MonthPicker placeholder="YYYY/MM" value={value} onChange={onChange} />
 ```tsx functional=true
 const [type, onChangeType] = useState<MonthPickerProps["type"]>("month")
 
-return <MonthPicker placeholder="YYYY/MM" type={type} onChangeType={onChangeType} />
+return (
+  <MonthPicker placeholder="YYYY/MM" type={type} onChangeType={onChangeType} />
+)
 ```
 
 ```tsx functional=true
 const [month, onChangeMonth] = useState<Date>(new Date("1993-08-18"))
 
-return <MonthPicker placeholder="YYYY/MM" month={month} onChangeMonth={onChangeMonth} />
+return (
+  <MonthPicker
+    placeholder="YYYY/MM"
+    month={month}
+    onChangeMonth={onChangeMonth}
+  />
+)
 ```
 
 ### `React Hook Form`を使う

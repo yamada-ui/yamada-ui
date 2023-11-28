@@ -35,7 +35,10 @@ import {
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -55,7 +58,10 @@ import {
 <Menu>
   {({ isOpen }) => (
     <>
-      <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+      <MenuButton
+        as={Button}
+        rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+      >
         {isOpen ? "Close" : "Open"} Menu
       </MenuButton>
 
@@ -75,7 +81,11 @@ import {
 
 ```tsx
 <Menu>
-  <MenuButton as={IconButton} icon={<FontAwesomeIcon icon={faBars} />} variant="outline" />
+  <MenuButton
+    as={IconButton}
+    icon={<FontAwesomeIcon icon={faBars} />}
+    variant="outline"
+  />
 
   <MenuList>
     <MenuItem command="⌘T">New Tab</MenuItem>
@@ -91,13 +101,20 @@ import {
 
 ```tsx
 <Menu>
-  <MenuButton as={IconButton} icon={<FontAwesomeIcon icon={faBars} />} variant="outline" />
+  <MenuButton
+    as={IconButton}
+    icon={<FontAwesomeIcon icon={faBars} />}
+    variant="outline"
+  />
 
   <MenuList>
     <MenuItem icon={<FontAwesomeIcon icon={faPlus} />} command="⌘T">
       New Tab
     </MenuItem>
-    <MenuItem icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />} command="⌘N">
+    <MenuItem
+      icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}
+      command="⌘N"
+    >
       New Window
     </MenuItem>
     <MenuItem icon={<FontAwesomeIcon icon={faEdit} />} command="⌘O">
@@ -116,7 +133,10 @@ const ref = useRef<HTMLButtonElement>(null)
 
 return (
   <Menu initialFocusRef={ref}>
-    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    <MenuButton
+      as={Button}
+      rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+    >
       Menu
     </MenuButton>
 
@@ -135,7 +155,10 @@ return (
 
 ```tsx
 <Menu placement="top">
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -153,7 +176,10 @@ return (
 
 ```tsx
 <Menu animation="top">
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -174,7 +200,10 @@ return (
 ```tsx
 <Wrap gap="md">
   <Menu gutter={32}>
-    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    <MenuButton
+      as={Button}
+      rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+    >
       Menu
     </MenuButton>
 
@@ -186,7 +215,10 @@ return (
   </Menu>
 
   <Menu offset={[16, 16]}>
-    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    <MenuButton
+      as={Button}
+      rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+    >
       Menu
     </MenuButton>
 
@@ -205,7 +237,10 @@ return (
 
 ```tsx
 <Menu duration={0.4}>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -223,7 +258,10 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -245,7 +283,10 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -271,7 +312,10 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -298,7 +342,10 @@ return (
 
 ```tsx
 <Menu closeOnSelect={false}>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -316,7 +363,10 @@ return (
 
 ```tsx
 <Menu closeOnBlur={false}>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -334,7 +384,10 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -352,7 +405,10 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -374,7 +430,10 @@ return (
 
 ```tsx
 <Menu isLazy>
-  <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+  <MenuButton
+    as={Button}
+    rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+  >
     Menu
   </MenuButton>
 
@@ -393,7 +452,10 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 
 return (
   <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-    <MenuButton as={Button} rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}>
+    <MenuButton
+      as={Button}
+      rightIcon={<FontAwesomeIcon size="xs" icon={faChevronDown} />}
+    >
       Menu
     </MenuButton>
 

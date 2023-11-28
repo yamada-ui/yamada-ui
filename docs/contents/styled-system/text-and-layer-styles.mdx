@@ -13,7 +13,12 @@ By using `textStyle` and `layerStyle`, you can maintain design consistency.
 To use `textStyle` and `layerStyle`, you need to define tokens and styles in the theme.
 
 ```tsx live=false
-import { UIProvider, extendTheme, LayerStyles, TextStyles } from "@yamada-ui/react"
+import {
+  UIProvider,
+  extendTheme,
+  LayerStyles,
+  TextStyles,
+} from "@yamada-ui/react"
 
 const layerStyles: LayerStyles = {
   masterRoshi: {
@@ -112,7 +117,7 @@ To reference the style defined in the theme's `styles`, set the token in `apply`
 
 ```tsx
 <Heading apply="otherStyle.title" isTruncated>
-  My power level is 530,000. But of course, I have no intention of fighting you at full power, so
-  don't worry...
+  My power level is 530,000. But of course, I have no intention of fighting you
+  at full power, so don't worry...
 </Heading>
 ```

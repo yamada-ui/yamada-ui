@@ -167,7 +167,9 @@ To commonize `getServerSideProps` across multiple pages, define `getServerSideCo
 ```ts live=false
 import { GetServerSidePropsContext } from "next"
 
-export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => {
+export const getServerSideCommonProps = ({
+  req,
+}: GetServerSidePropsContext) => {
   return {
     props: {
       cookies: req.headers.cookie ?? "",
@@ -188,7 +190,8 @@ const { cookieStorageSSR, localStorage } = colorModeManager
 
 export default function App({ Component, pageProps }: AppProps) {
   const { cookies } = pageProps
-  const colorModeManager = typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
+  const colorModeManager =
+    typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
 
   return (
     <UIProvider colorModeManager={colorModeManager}>
@@ -261,7 +264,8 @@ const { colorMode, internalColorMode } = useColorMode()
 
 return (
   <Text>
-    The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+    The current colorMode is "{colorMode}", internal colorMode is "
+    {internalColorMode}"
   </Text>
 )
 ```

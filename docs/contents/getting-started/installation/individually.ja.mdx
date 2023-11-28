@@ -16,7 +16,11 @@ Yamada UIのコアやユーティリティをインストールします。
 ターミナルで次のコマンドのいずれかを実行します。
 
 <PackageManagers
-  packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/theme", "@yamada-ui/utils"]}
+  packageNameOrCommand={[
+    "@yamada-ui/core",
+    "@yamada-ui/theme",
+    "@yamada-ui/utils",
+  ]}
 />
 
 次に、プロジェクトに使用したいコンポーネントやフックをインストールしていきます。
@@ -52,7 +56,12 @@ const App = () => {
 ダークモードを対応させたい場合は、`ColorModeProvider`も追加します。
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import {
+  ThemeProvider,
+  ColorModeProvider,
+  ResetStyle,
+  GlobalStyle,
+} from "@yamada-ui/core"
 import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {

@@ -1,4 +1,4 @@
-import { ThemeAnimationTokens } from "@yamada-ui/react"
+import type { ThemeAnimationTokens } from "@yamada-ui/react"
 
 export const animations: ThemeAnimationTokens = {
   gradient: {

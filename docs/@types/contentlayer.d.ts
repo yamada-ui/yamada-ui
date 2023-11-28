@@ -3,7 +3,10 @@ import type { DocumentTypes } from "contentlayer/generated"
 declare module "contentlayer/generated" {
   type DocumentContent = { id: string; lv: 1 | 2 | 3; title: string }
 
-  type DocumentTypesPagination = { prevDocument?: Doc | null; nextDocument?: Doc | null }
+  type DocumentTypesPagination = {
+    prevDocument?: Doc | null
+    nextDocument?: Doc | null
+  }
 
   type DocumentData = {
     title: string
@@ -28,5 +31,7 @@ declare module "contentlayer/generated" {
     contents?: DocumentContent[]
   }
 
-  type DocumentTypesWithChildren = DocumentTypes & { children: DocumentTypesWithChildren[] }
+  type DocumentTypesWithChildren = DocumentTypes & {
+    children: DocumentTypesWithChildren[]
+  }
 }

@@ -1,16 +1,15 @@
+import type { StackProps, ModalProps } from "@yamada-ui/react"
 import {
   ui,
   HStack,
   Kbd,
   Modal,
   ModalBody,
-  StackProps,
   Text,
   forwardRef,
   handlerAll,
   useDisclosure,
   isApple,
-  ModalProps,
   Divider,
   VStack,
   ModalHeader,
@@ -21,10 +20,8 @@ import {
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
+import type { FC, KeyboardEvent, RefObject } from "react"
 import {
-  FC,
-  KeyboardEvent,
-  RefObject,
   createRef,
   memo,
   useCallback,
@@ -62,7 +59,11 @@ export const Search = memo(
     }, [onClose, events])
 
     useEventListener("keydown", (ev) => {
-      if (ev.key.toLowerCase() !== "k" || !ev[isApple() ? "metaKey" : "ctrlKey"]) return
+      if (
+        ev.key.toLowerCase() !== "k" ||
+        !ev[isApple() ? "metaKey" : "ctrlKey"]
+      )
+        return
 
       ev.preventDefault()
 
@@ -105,223 +106,235 @@ export const Search = memo(
 
 type SearchModalProps = ModalProps
 
-const SearchModal: FC<SearchModalProps> = memo(({ isOpen, onClose, ...rest }) => {
-  const [query, setQuery] = useState<string>("")
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  const { t, contents } = useI18n()
-  const router = useRouter()
-  const eventRef = useRef<"mouse" | "keyboard">(null)
-  const directionRef = useRef<"up" | "down">("down")
-  const compositionRef = useRef<boolean>(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
+const SearchModal: FC<SearchModalProps> = memo(
+  ({ isOpen, onClose, ...rest }) => {
+    const [query, setQuery] = useState<string>("")
+    const [selectedIndex, setSelectedIndex] = useState<number>(0)
+    const { t, contents } = useI18n()
+    const router = useRouter()
+    const eventRef = useRef<"mouse" | "keyboard">(null)
+    const directionRef = useRef<"up" | "down">("down")
+    const compositionRef = useRef<boolean>(false)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
 
-  const hits = useMemo(() => {
-    if (query.length < 2) return []
+    const hits = useMemo(() => {
+      if (query.length < 2) return []
 
-    return matchSorter(contents, query, {
-      keys: [
-        "hierarchy.lv1",
-        "hierarchy.lv2",
-        "hierarchy.lv3",
-        "hierarchy.lv4",
-        "description",
-        "title",
-      ],
-    }).slice(0, 20)
-  }, [query, contents])
+      return matchSorter(contents, query, {
+        keys: [
+          "hierarchy.lv1",
+          "hierarchy.lv2",
+          "hierarchy.lv3",
+          "hierarchy.lv4",
+          "description",
+          "title",
+        ],
+      }).slice(0, 20)
+    }, [query, contents])
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (compositionRef.current) return
+    const onKeyDown = useCallback(
+      (ev: KeyboardEvent<HTMLInputElement>) => {
+        if (compositionRef.current) return
 
-      eventRef.current = "keyboard"
+        eventRef.current = "keyboard"
 
-      const actions: Record<string, Function | undefined> = {
-        ArrowDown: () => {
-          if (selectedIndex + 1 === hits.length) return
+        const actions: Record<string, Function | undefined> = {
+          ArrowDown: () => {
+            if (selectedIndex + 1 === hits.length) return
 
-          directionRef.current = "down"
-          setSelectedIndex(selectedIndex + 1)
-        },
-        ArrowUp: () => {
-          if (selectedIndex === 0) return
+            directionRef.current = "down"
+            setSelectedIndex(selectedIndex + 1)
+          },
+          ArrowUp: () => {
+            if (selectedIndex === 0) return
 
-          directionRef.current = "up"
-          setSelectedIndex(selectedIndex - 1)
-        },
-        Enter: () => {
-          if (!hits.length) return
+            directionRef.current = "up"
+            setSelectedIndex(selectedIndex - 1)
+          },
+          Enter: () => {
+            if (!hits.length) return
 
-          onClose()
-          router.push(hits[selectedIndex].slug)
-        },
-        Home: () => {
-          directionRef.current = "up"
-          setSelectedIndex(0)
-        },
-        End: () => {
-          directionRef.current = "down"
-          setSelectedIndex(hits.length - 1)
-        },
-      }
+            onClose()
+            router.push(hits[selectedIndex].slug)
+          },
+          Home: () => {
+            directionRef.current = "up"
+            setSelectedIndex(0)
+          },
+          End: () => {
+            directionRef.current = "down"
+            setSelectedIndex(hits.length - 1)
+          },
+        }
 
-      const action = actions[ev.key]
+        const action = actions[ev.key]
 
-      if (!action) return
+        if (!action) return
 
-      ev.preventDefault()
-      ev.stopPropagation()
+        ev.preventDefault()
+        ev.stopPropagation()
 
-      action(ev)
-    },
-    [hits, onClose, selectedIndex, router],
-  )
+        action(ev)
+      },
+      [hits, onClose, selectedIndex, router],
+    )
 
-  useEffect(() => {
-    if (isOpen) return
+    useEffect(() => {
+      if (isOpen) return
 
-    setQuery("")
-  }, [isOpen])
+      setQuery("")
+    }, [isOpen])
 
-  useUpdateEffect(() => {
-    setSelectedIndex(0)
-  }, [query])
+    useUpdateEffect(() => {
+      setSelectedIndex(0)
+    }, [query])
 
-  useUpdateEffect(() => {
-    if (!containerRef.current || eventRef.current === "mouse") return
+    useUpdateEffect(() => {
+      if (!containerRef.current || eventRef.current === "mouse") return
 
-    const itemRef = itemRefs.current.get(selectedIndex)
+      const itemRef = itemRefs.current.get(selectedIndex)
 
-    if (!itemRef.current) return
+      if (!itemRef.current) return
 
-    scrollIntoView(itemRef.current, {
-      behavior: (actions) =>
-        actions.forEach(({ el, top }) => {
-          if (directionRef.current === "down") {
-            el.scrollTop = top + 16
-          } else {
-            el.scrollTop = top - 17
-          }
-        }),
-      scrollMode: "if-needed",
-      block: "nearest",
-      inline: "nearest",
-      boundary: containerRef.current,
-    })
-  }, [selectedIndex])
+      scrollIntoView(itemRef.current, {
+        behavior: (actions) =>
+          actions.forEach(({ el, top }) => {
+            if (directionRef.current === "down") {
+              el.scrollTop = top + 16
+            } else {
+              el.scrollTop = top - 17
+            }
+          }),
+        scrollMode: "if-needed",
+        block: "nearest",
+        inline: "nearest",
+        boundary: containerRef.current,
+      })
+    }, [selectedIndex])
 
-  return (
-    <Modal
-      size="3xl"
-      withCloseButton={false}
-      placement="top"
-      isOpen={isOpen}
-      onClose={onClose}
-      {...rest}
-    >
-      <ModalHeader fontWeight="normal" fontSize="md" pb="md">
-        <HStack position="relative" w="full">
-          <ui.input
-            flex="1"
-            pl="lg"
-            placeholder={t("component.forms.search.placeholder") as string}
-            maxLength={64}
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck="false"
-            _placeholder={{
-              color: ["gray.500", "whiteAlpha.500"],
-            }}
-            value={query}
-            onChange={(ev) => setQuery(ev.target.value)}
-            onKeyDown={onKeyDown}
-            onCompositionStart={() => {
-              compositionRef.current = true
-            }}
-            onCompositionEnd={() => {
-              compositionRef.current = false
-            }}
-          />
+    return (
+      <Modal
+        size="3xl"
+        withCloseButton={false}
+        placement="top"
+        isOpen={isOpen}
+        onClose={onClose}
+        {...rest}
+      >
+        <ModalHeader fontWeight="normal" fontSize="md" pb="md">
+          <HStack position="relative" w="full">
+            <ui.input
+              flex="1"
+              pl="lg"
+              placeholder={t("component.forms.search.placeholder") as string}
+              maxLength={64}
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck="false"
+              _placeholder={{
+                color: ["gray.500", "whiteAlpha.500"],
+              }}
+              value={query}
+              onChange={(ev) => setQuery(ev.target.value)}
+              onKeyDown={onKeyDown}
+              onCompositionStart={() => {
+                compositionRef.current = true
+              }}
+              onCompositionEnd={() => {
+                compositionRef.current = false
+              }}
+            />
 
-          <MagnifyingGlass
-            position="absolute"
-            top="50%"
-            left="0"
-            transform="translateY(-50%)"
-            color={["gray.500", "whiteAlpha.500"]}
-            pointerEvents="none"
-          />
-        </HStack>
-      </ModalHeader>
+            <MagnifyingGlass
+              position="absolute"
+              top="50%"
+              left="0"
+              transform="translateY(-50%)"
+              color={["gray.500", "whiteAlpha.500"]}
+              pointerEvents="none"
+            />
+          </HStack>
+        </ModalHeader>
 
-      {hits.length ? (
-        <ModalBody ref={containerRef} my="0" pb="md">
-          <Divider />
+        {hits.length ? (
+          <ModalBody ref={containerRef} my="0" pb="md">
+            <Divider />
 
-          <VStack as="ul" gap="sm">
-            {hits.map(({ title, type, slug, hierarchy }, index) => {
-              const isSelected = index === selectedIndex
-              const ref = createRef<HTMLDivElement>()
+            <VStack as="ul" gap="sm">
+              {hits.map(({ title, type, slug, hierarchy }, index) => {
+                const isSelected = index === selectedIndex
+                const ref = createRef<HTMLDivElement>()
 
-              itemRefs.current.set(index, ref)
+                itemRefs.current.set(index, ref)
 
-              return (
-                <HStack
-                  as={NextLink}
-                  ref={ref}
-                  key={slug}
-                  href={slug}
-                  borderWidth="1px"
-                  rounded="md"
-                  minH="16"
-                  py="sm"
-                  px="md"
-                  data-selected={dataAttr(isSelected)}
-                  bg={["gray.100", "whiteAlpha.50"]}
-                  transitionProperty="colors"
-                  transitionDuration="normal"
-                  _focus={{ outline: "none" }}
-                  _focusVisible={{ boxShadow: "outline" }}
-                  _selected={{ bg: ["gray.200", "whiteAlpha.200"] }}
-                  _active={{ bg: ["gray.300", "whiteAlpha.300"] }}
-                  onClick={onClose}
-                  onMouseEnter={() => {
-                    eventRef.current = "mouse"
-                    setSelectedIndex(index)
-                  }}
-                >
-                  {type === "page" ? (
-                    <File fontSize="xl" color={["gray.600", "whiteAlpha.500"]} />
-                  ) : (
-                    <Hash fontSize="xl" color={["gray.500", "whiteAlpha.400"]} />
-                  )}
+                return (
+                  <HStack
+                    as={NextLink}
+                    ref={ref}
+                    key={slug}
+                    href={slug}
+                    borderWidth="1px"
+                    rounded="md"
+                    minH="16"
+                    py="sm"
+                    px="md"
+                    data-selected={dataAttr(isSelected)}
+                    bg={["gray.100", "whiteAlpha.50"]}
+                    transitionProperty="colors"
+                    transitionDuration="normal"
+                    _focus={{ outline: "none" }}
+                    _focusVisible={{ boxShadow: "outline" }}
+                    _selected={{ bg: ["gray.200", "whiteAlpha.200"] }}
+                    _active={{ bg: ["gray.300", "whiteAlpha.300"] }}
+                    onClick={onClose}
+                    onMouseEnter={() => {
+                      eventRef.current = "mouse"
+                      setSelectedIndex(index)
+                    }}
+                  >
+                    {type === "page" ? (
+                      <File
+                        fontSize="xl"
+                        color={["gray.600", "whiteAlpha.500"]}
+                      />
+                    ) : (
+                      <Hash
+                        fontSize="xl"
+                        color={["gray.500", "whiteAlpha.400"]}
+                      />
+                    )}
 
-                  <VStack gap="0">
-                    {type === "fragment" ? (
+                    <VStack gap="0">
+                      {type === "fragment" ? (
+                        <Highlight
+                          fontSize="xs"
+                          color="muted"
+                          noOfLines={1}
+                          query={query}
+                          markProps={{ variant: "text-accent" }}
+                        >
+                          {hierarchy.lv1}
+                        </Highlight>
+                      ) : null}
+
                       <Highlight
-                        fontSize="xs"
-                        color="muted"
-                        noOfLines={1}
                         query={query}
                         markProps={{ variant: "text-accent" }}
+                        noOfLines={1}
                       >
-                        {hierarchy.lv1}
+                        {title}
                       </Highlight>
-                    ) : null}
-
-                    <Highlight query={query} markProps={{ variant: "text-accent" }} noOfLines={1}>
-                      {title}
-                    </Highlight>
-                  </VStack>
-                </HStack>
-              )
-            })}
-          </VStack>
-        </ModalBody>
-      ) : null}
-    </Modal>
-  )
-})
+                    </VStack>
+                  </HStack>
+                )
+              })}
+            </VStack>
+          </ModalBody>
+        ) : null}
+      </Modal>
+    )
+  },
+)
 
 SearchModal.displayName = "SearchModal"

@@ -16,7 +16,11 @@ Install the core and utilities of Yamada UI.
 Run one of the following commands in your terminal.
 
 <PackageManagers
-  packageNameOrCommand={["@yamada-ui/core", "@yamada-ui/theme", "@yamada-ui/utils"]}
+  packageNameOrCommand={[
+    "@yamada-ui/core",
+    "@yamada-ui/theme",
+    "@yamada-ui/utils",
+  ]}
 />
 
 Next, install the components or hooks you want to use in your project.
@@ -52,7 +56,12 @@ const App = () => {
 If you want to support dark mode, also add `ColorModeProvider`.
 
 ```tsx live=false highlight={7,12}
-import { ThemeProvider, ColorModeProvider, ResetStyle, GlobalStyle } from "@yamada-ui/core"
+import {
+  ThemeProvider,
+  ColorModeProvider,
+  ResetStyle,
+  GlobalStyle,
+} from "@yamada-ui/core"
 import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 
 const App = () => {

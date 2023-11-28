@@ -33,8 +33,16 @@ import { Calendar } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <Calendar variant="solid" today defaultValue={new Date(new Date().setDate(1))} />
-  <Calendar variant="subtle" today defaultValue={new Date(new Date().setDate(1))} />
+  <Calendar
+    variant="solid"
+    today
+    defaultValue={new Date(new Date().setDate(1))}
+  />
+  <Calendar
+    variant="subtle"
+    today
+    defaultValue={new Date(new Date().setDate(1))}
+  />
 </VStack>
 ```
 
@@ -112,7 +120,10 @@ import { Calendar } from "@yamada-ui/calendar"
 選択可能な最小と最大の日付を設定する場合は、`minDate`と`maxDate`に`Date`を設定します。
 
 ```tsx
-<Calendar minDate={new Date(new Date().setDate(1))} maxDate={new Date(new Date().setDate(18))} />
+<Calendar
+  minDate={new Date(new Date().setDate(1))}
+  maxDate={new Date(new Date().setDate(18))}
+/>
 ```
 
 ### 今日の日付を強調表示する
@@ -304,7 +315,12 @@ return (
       <Button onClick={onNext}>Next</Button>
     </Wrap>
 
-    <Calendar withHeader={false} typeRef={typeRef} prevRef={prevRef} nextRef={nextRef} />
+    <Calendar
+      withHeader={false}
+      typeRef={typeRef}
+      prevRef={prevRef}
+      nextRef={nextRef}
+    />
   </VStack>
 )
 ```
@@ -334,7 +350,9 @@ return <Calendar value={value} onChange={onChange} />
 ```tsx
 <VStack>
   <Calendar labelProps={{ color: "red.500" }} />
-  <Calendar labelProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
+  <Calendar
+    labelProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
+  />
 </VStack>
 ```
 
@@ -344,9 +362,15 @@ return <Calendar value={value} onChange={onChange} />
 
 ```tsx
 <VStack>
-  <Calendar controlProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
-  <Calendar prevProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
-  <Calendar nextProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }} />
+  <Calendar
+    controlProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
+  />
+  <Calendar
+    prevProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
+  />
+  <Calendar
+    nextProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
+  />
 </VStack>
 ```
 

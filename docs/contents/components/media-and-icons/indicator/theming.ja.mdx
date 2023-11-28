@@ -6,6 +6,8 @@ with_description: true
 tab: テーマ
 ---
 
+## テーマ
+
 `Indicator`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
 
 :::note
@@ -24,7 +26,9 @@ export const Indicator: ComponentStyle = {
     alignItems: "center",
     outline: 0,
     whiteSpace: "nowrap",
-    ...(withBorder ? { borderWidth: "0.2em", borderColor: ["white", "black"] } : {}),
+    ...(withBorder
+      ? { borderWidth: "0.2em", borderColor: ["white", "black"] }
+      : {}),
   }),
 
   sizes: {

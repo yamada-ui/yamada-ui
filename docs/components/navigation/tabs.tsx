@@ -1,4 +1,5 @@
-import { forwardRef, StackProps, HStack, dataAttr, Box, Center } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
+import { forwardRef, HStack, dataAttr, Box, Center } from "@yamada-ui/react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { memo } from "react"

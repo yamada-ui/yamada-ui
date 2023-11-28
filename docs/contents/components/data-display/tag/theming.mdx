@@ -8,6 +8,8 @@ with_description: true
 tab: Theming
 ---
 
+## Theming
+
 The `Tag` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
 
 :::note
@@ -63,7 +65,10 @@ export const Tag: ComponentMultiStyle = {
     subtle: {
       container: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => {
         return {
-          bg: [isGray(c) ? `${c}.200` : `${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+          bg: [
+            isGray(c) ? `${c}.200` : `${c}.100`,
+            transparentizeColor(`${c}.200`, 0.16)(t, m),
+          ],
           color: [`${c}.800`, `${c}.200`],
         }
       },

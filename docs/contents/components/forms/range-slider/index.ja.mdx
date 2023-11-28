@@ -146,7 +146,11 @@ return (
         <Center gap="md">
           <Button
             isDisabled={value[0] === 0}
-            onClick={() => setValue((prev) => (prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev))}
+            onClick={() =>
+              setValue((prev) =>
+                prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev,
+              )
+            }
           >
             -5
           </Button>
@@ -156,7 +160,9 @@ return (
             colorScheme="blue"
             onClick={() =>
               setValue((prev) =>
-                prev[0] !== 100 && value[0] !== value[1] ? [prev[0] + 5, prev[1]] : prev,
+                prev[0] !== 100 && value[0] !== value[1]
+                  ? [prev[0] + 5, prev[1]]
+                  : prev,
               )
             }
           >
@@ -173,7 +179,9 @@ return (
             isDisabled={value[1] === 0 || value[0] === value[1]}
             onClick={() =>
               setValue((prev) =>
-                prev[1] !== 0 && value[0] !== value[1] ? [prev[0], prev[1] - 5] : prev,
+                prev[1] !== 0 && value[0] !== value[1]
+                  ? [prev[0], prev[1] - 5]
+                  : prev,
               )
             }
           >
@@ -183,7 +191,11 @@ return (
           <Button
             isDisabled={value[1] === 100}
             colorScheme="blue"
-            onClick={() => setValue((prev) => (prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev))}
+            onClick={() =>
+              setValue((prev) =>
+                prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev,
+              )
+            }
           >
             +10
           </Button>
@@ -305,7 +317,13 @@ const [value, onChange] = useState<[number, number]>([25, 75])
 const [isOpen, { on, off }] = useBoolean(false)
 
 return (
-  <RangeSlider value={value} onChange={onChange} my="10" onMouseEnter={on} onMouseLeave={off}>
+  <RangeSlider
+    value={value}
+    onChange={onChange}
+    my="10"
+    onMouseEnter={on}
+    onMouseLeave={off}
+  >
     {" "}
     <RangeSliderMark value={25} w="10" ml="-5">
       25%
@@ -330,7 +348,11 @@ return (
 
 ```tsx
 <VStack>
-  <RangeSlider trackColor="orange.200" filledTrackColor="orange.500" thumbColor="orange.700" />
+  <RangeSlider
+    trackColor="orange.200"
+    filledTrackColor="orange.500"
+    thumbColor="orange.700"
+  />
 
   <RangeSlider
     trackProps={{ bg: "green.200" }}

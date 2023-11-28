@@ -67,7 +67,12 @@ export const gradients: ThemeTokens = {
 テキストのグラデーションを追加するには、`bgGradient`と`bgClip`に`text`を設定します。
 
 ```tsx
-<Heading size="2xl" bgGradient="linear(to-r, orange.400, red.500)" bgClip="text" isTruncated>
+<Heading
+  size="2xl"
+  bgGradient="linear(to-r, orange.400, red.500)"
+  bgClip="text"
+  isTruncated
+>
   クリリンのことか……クリリンのことかーーーっ！！！！！
 </Heading>
 ```

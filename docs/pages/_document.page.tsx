@@ -8,7 +8,11 @@ const Document = () => {
       <Head />
 
       <body>
-        <ColorModeScript type="cookie" nonce="testing" initialColorMode={config.initialColorMode} />
+        <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={config.initialColorMode}
+        />
         <ThemeSchemeScript
           type="cookie"
           nonce="testing"

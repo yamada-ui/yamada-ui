@@ -20,7 +20,10 @@ import { Avatar, AvatarBadge, AvatarGroup } from "@yamada-ui/react"
 ## Usage
 
 ```tsx
-<Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+<Avatar
+  name="Hirotomo Yamada"
+  src="https://avatars.githubusercontent.com/u/84060430?v=4"
+/>
 ```
 
 ### Change Size
@@ -80,23 +83,38 @@ You can change the position of the badge by setting `placement`. The default is 
 
 ```tsx
 <Wrap gap="md">
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  >
     <AvatarBadge bg="primary" />
   </Avatar>
 
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  >
     <AvatarBadge bg="secondary" placement="top-start" />
   </Avatar>
 
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  >
     <AvatarBadge bg="green" placement="top-end" />
   </Avatar>
 
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  >
     <AvatarBadge bg="pink" placement="bottom-start" />
   </Avatar>
 
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  >
     <AvatarBadge bg="red" placement="bottom-end" />
   </Avatar>
 </Wrap>
@@ -105,7 +123,10 @@ You can change the position of the badge by setting `placement`. The default is 
 ### Style the Badge
 
 ```tsx
-<Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4">
+<Avatar
+  name="Hirotomo Yamada"
+  src="https://avatars.githubusercontent.com/u/84060430?v=4"
+>
   <AvatarBadge bg="red" borderColor="white" />
 </Avatar>
 ```
@@ -119,7 +140,10 @@ There are two fallbacks if the loading of `src` fails:
 
 ```tsx
 <Wrap gap="md">
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
   <Avatar name="Hirotomo Yamada" src="https://not-found.com" />
   <Avatar src="https://not-found.com" />
 </Wrap>
@@ -142,10 +166,25 @@ If you want to control the number of avatars displayed, specify a number with `m
 
 ```tsx
 <AvatarGroup max={3}>
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
-  <Avatar name="Hirotomo Yamada" src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
 </AvatarGroup>
 ```

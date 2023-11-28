@@ -10,7 +10,12 @@ tab: 使い方
 ## インポート
 
 ```ts
-import { FormControl, Label, HelperMessage, ErrorMessage } from "@yamada-ui/react"
+import {
+  FormControl,
+  Label,
+  HelperMessage,
+  ErrorMessage,
+} from "@yamada-ui/react"
 ```
 
 - `FormControl`: 子要素(`Label`, `helperMessage`, `ErrorMessage`)を制御するラッパーコンポーネントです。
@@ -44,7 +49,10 @@ import { FormControl, Label, HelperMessage, ErrorMessage } from "@yamada-ui/reac
 ヘルプメッセージを表示する場合は、`helperMessage`に`ReactNode`を設定します。
 
 ```tsx
-<FormControl label="Email address" helperMessage="We'll never share your email.">
+<FormControl
+  label="Email address"
+  helperMessage="We'll never share your email."
+>
   <Input type="email" placeholder="your email address" />
 </FormControl>
 ```

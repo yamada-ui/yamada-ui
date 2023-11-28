@@ -1,4 +1,4 @@
-import { ThemeTokens } from "@yamada-ui/react"
+import type { ThemeTokens } from "@yamada-ui/react"
 
 export const gradients: ThemeTokens = {
   ultra: "linear(to-r, #9d38a0, #208bcd)",

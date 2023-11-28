@@ -1,4 +1,4 @@
-import { CSSUIObject } from "@yamada-ui/react"
+import type { CSSUIObject } from "@yamada-ui/react"
 
 export const otherStyle: Record<string, CSSUIObject> = {
   title: {

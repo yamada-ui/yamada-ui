@@ -1,6 +1,8 @@
 import { useBreakpoint } from "@yamada-ui/react"
-import { Column, Table } from "@yamada-ui/table"
-import { FC, useMemo, useState } from "react"
+import type { Column } from "@yamada-ui/table"
+import { Table } from "@yamada-ui/table"
+import type { FC } from "react"
+import { useMemo, useState } from "react"
 import { PackageManagers } from "./package-managers"
 import { TextWithCodeOrLink } from "components/typography"
 import { useI18n } from "contexts/i18n-context"
@@ -9,11 +11,15 @@ type Package = { name: string; description: string; isDefaultCheck?: boolean }
 
 export type SelectPackageManagersProps = { packages: Package[] }
 
-export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages }) => {
+export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({
+  packages,
+}) => {
   const breakpoint = useBreakpoint()
   const { t } = useI18n()
   const [selectedPackageNames, setSelectedPackageNames] = useState<string[]>(
-    packages.filter(({ isDefaultCheck }) => isDefaultCheck).map(({ name }) => name),
+    packages
+      .filter(({ isDefaultCheck }) => isDefaultCheck)
+      .map(({ name }) => name),
   )
 
   const columns = useMemo<Column<Package>[]>(() => {
@@ -30,7 +36,9 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({ packages
         header: t("component.select-package-managers.description"),
         accessorKey: "description",
         cell: ({ getValue }) => (
-          <TextWithCodeOrLink noOfLines={1}>{getValue<string>()}</TextWithCodeOrLink>
+          <TextWithCodeOrLink noOfLines={1}>
+            {getValue<string>()}
+          </TextWithCodeOrLink>
         ),
       })
     }

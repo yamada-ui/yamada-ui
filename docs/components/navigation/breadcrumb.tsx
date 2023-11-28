@@ -1,6 +1,6 @@
+import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
 import {
   Breadcrumb as UIBreadcrumb,
-  BreadcrumbProps as UIBreadcrumbProps,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,

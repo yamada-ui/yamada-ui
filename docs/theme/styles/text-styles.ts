@@ -1,4 +1,4 @@
-import { TextStyles } from "@yamada-ui/react"
+import type { TextStyles } from "@yamada-ui/react"
 
 export const textStyles: TextStyles = {
   gradient: {

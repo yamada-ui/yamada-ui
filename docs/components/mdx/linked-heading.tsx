@@ -1,16 +1,24 @@
-import { Heading, HeadingProps, Link } from "@yamada-ui/react"
-import { FC } from "react"
+import type { HeadingProps } from "@yamada-ui/react"
+import { Heading, Link } from "@yamada-ui/react"
+import type { FC } from "react"
 import { Link as LinkIcon } from "components/media-and-icons"
 
 export type LinkedHeadingProps = HeadingProps
 
-export const LinkedHeading: FC<LinkedHeadingProps> = ({ id, children, ...rest }) => {
+export const LinkedHeading: FC<LinkedHeadingProps> = ({
+  id,
+  children,
+  ...rest
+}) => {
   return (
     <Heading
       id={id}
       position="relative"
       css={{ scrollMarginBlock: "6rem" }}
-      _hover={{ base: { "& > a": { opacity: 1 } }, md: { "& > a": { opacity: 0 } } }}
+      _hover={{
+        base: { "& > a": { opacity: 1 } },
+        md: { "& > a": { opacity: 0 } },
+      }}
       {...rest}
     >
       {id ? (

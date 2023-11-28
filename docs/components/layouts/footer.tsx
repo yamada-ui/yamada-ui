@@ -1,4 +1,12 @@
-import { Center, CenterProps, HStack, Link, Text, VStack, forwardRef } from "@yamada-ui/react"
+import type { CenterProps } from "@yamada-ui/react"
+import {
+  Center,
+  HStack,
+  Link,
+  Text,
+  VStack,
+  forwardRef,
+} from "@yamada-ui/react"
 import { memo } from "react"
 import { Github, Twitter } from "components/media-and-icons"
 import { CONSTANT } from "constant"
@@ -11,8 +19,21 @@ export const Footer = memo(
     const { tc } = useI18n()
 
     return (
-      <Center ref={ref} as="footer" position="sticky" top="100vh" w="full" {...rest}>
-        <VStack alignItems="center" w="full" maxW="9xl" py="xl" px={{ base: "lg", md: "md" }}>
+      <Center
+        ref={ref}
+        as="footer"
+        position="sticky"
+        top="100vh"
+        w="full"
+        {...rest}
+      >
+        <VStack
+          alignItems="center"
+          w="full"
+          maxW="9xl"
+          py="xl"
+          px={{ base: "lg", md: "md" }}
+        >
           <Text
             color={["blackAlpha.600", "whiteAlpha.600"]}
             fontSize={{ base: "md", sm: "sm" }}

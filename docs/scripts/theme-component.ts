@@ -1,6 +1,7 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
-import matter, { GrayMatterFile } from "gray-matter"
+import type { GrayMatterFile } from "gray-matter"
+import matter from "gray-matter"
 import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 import { toKebabCase } from "utils/assertion"
@@ -24,7 +25,12 @@ const LOCALE_TAB_MAP = {
   ja: "テーマ",
 }
 const LOCALE_DESC_MAP = {
-  en: ({ isMulti, componentName, baseComponentName, baseComponentPath }: Options) => {
+  en: ({
+    isMulti,
+    componentName,
+    baseComponentName,
+    baseComponentPath,
+  }: Options) => {
     let content = [
       `The \`${componentName}\` is a [${
         isMulti ? "multi" : "single"
@@ -51,7 +57,12 @@ const LOCALE_DESC_MAP = {
 
     return content.join("\n")
   },
-  ja: ({ isMulti, componentName, baseComponentName, baseComponentPath }: Options) => {
+  ja: ({
+    isMulti,
+    componentName,
+    baseComponentName,
+    baseComponentPath,
+  }: Options) => {
     let content = [
       `\`${componentName}\`は、[${
         isMulti ? "複数" : "単一"
@@ -85,7 +96,10 @@ const getThemes = async () => {
 
   const themeMap = await Promise.all(
     fileNames.map(async (fileName) => {
-      const content = await readFile(path.join(THEME_DIR_PATH, fileName), "utf8")
+      const content = await readFile(
+        path.join(THEME_DIR_PATH, fileName),
+        "utf8",
+      )
 
       const name = fileName.replace(".ts", "")
 
@@ -93,13 +107,16 @@ const getThemes = async () => {
     }),
   )
 
-  const themes = themeMap.reduce<Record<string, string>>((prev, { name, content }) => {
-    if (name !== "index") {
-      prev[name] = content
-    }
+  const themes = themeMap.reduce<Record<string, string>>(
+    (prev, { name, content }) => {
+      if (name !== "index") {
+        prev[name] = content
+      }
 
-    return prev
-  }, {})
+      return prev
+    },
+    {},
+  )
 
   return themes
 }
@@ -115,14 +132,18 @@ const getDirs = async (path: string) => {
 const getPaths = async () => {
   const categoryDirs = await getDirs(COMPONENT_DIR_PATH)
   const componentDirs = await Promise.all(
-    categoryDirs.map(async ({ name, path }) => await getDirs(`${path}/${name}`)),
+    categoryDirs.map(
+      async ({ name, path }) => await getDirs(`${path}/${name}`),
+    ),
   )
 
-  const paths = componentDirs.flat().reduce<Record<string, string>>((prev, { name, path }) => {
-    prev[name] = `${path}/${name}`
+  const paths = componentDirs
+    .flat()
+    .reduce<Record<string, string>>((prev, { name, path }) => {
+      prev[name] = `${path}/${name}`
 
-    return prev
-  }, {})
+      return prev
+    }, {})
 
   return paths
 }
@@ -175,13 +196,20 @@ const generateContent = async ({
     baseComponentPath = "/" + baseComponentPath.replace(/^contents\//, "")
   }
 
-  content = content.replace(/import(\s+type)?\s+{[^}]*}\s+from\s+['"][^'"]+['"]\s*/g, "")
+  content = content.replace(
+    /import(\s+type)?\s+{[^}]*}\s+from\s+['"][^'"]+['"]\s*/g,
+    "",
+  )
 
   content = "```ts\n" + content + "\n```"
 
   content =
-    LOCALE_DESC_MAP[locale]({ isMulti, componentName, baseComponentName, baseComponentPath }) +
-    content
+    LOCALE_DESC_MAP[locale]({
+      isMulti,
+      componentName,
+      baseComponentName,
+      baseComponentPath,
+    }) + content
 
   return content
 }
@@ -200,7 +228,10 @@ const writeMdxFile = async (path: string, data: Data, content: Content) => {
   await writeFile(path, file)
 }
 
-const generateMdxFiles = (themes: Record<string, string>, paths: Record<string, string>) =>
+const generateMdxFiles = (
+  themes: Record<string, string>,
+  paths: Record<string, string>,
+) =>
   Promise.all(
     Object.entries(themes).map(async ([name, content]) => {
       const dirPath = paths[name]
@@ -209,10 +240,18 @@ const generateMdxFiles = (themes: Record<string, string>, paths: Record<string, 
 
       await Promise.all(
         LOCALES.map(async (locale) => {
-          const data = await generateData(path.join(dirPath, getMdxFileName("index", locale)), {
-            tab: LOCALE_TAB_MAP[locale],
+          const data = await generateData(
+            path.join(dirPath, getMdxFileName("index", locale)),
+            {
+              tab: LOCALE_TAB_MAP[locale],
+            },
+          )
+          const resolvedContent = await generateContent({
+            data,
+            content,
+            locale,
+            paths,
           })
-          const resolvedContent = await generateContent({ data, content, locale, paths })
 
           const outPath = path.join(dirPath, getMdxFileName("theming", locale))
 

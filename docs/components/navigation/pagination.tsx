@@ -1,16 +1,16 @@
+import type { GridItemProps, GridProps } from "@yamada-ui/react"
 import {
   Box,
   ChevronIcon,
   Grid,
   GridItem,
-  GridItemProps,
-  GridProps,
   Text,
   forwardRef,
 } from "@yamada-ui/react"
 import Link from "next/link"
-import { FC, memo } from "react"
-import { DocumentTypes } from "contentlayer/generated"
+import type { FC } from "react"
+import { memo } from "react"
+import type { DocumentTypes } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
 
@@ -39,9 +39,16 @@ export const Pagination = memo(
   }),
 )
 
-type PaginationItemProps = GridItemProps & { document?: DocumentTypes; isPrev?: boolean }
+type PaginationItemProps = GridItemProps & {
+  document?: DocumentTypes
+  isPrev?: boolean
+}
 
-const PaginationItem: FC<PaginationItemProps> = ({ document, isPrev, ...rest }) => {
+const PaginationItem: FC<PaginationItemProps> = ({
+  document,
+  isPrev,
+  ...rest
+}) => {
   const { t } = useI18n()
 
   if (!document) return <Box />
@@ -60,7 +67,12 @@ const PaginationItem: FC<PaginationItemProps> = ({ document, isPrev, ...rest }) 
       _focusVisible={{ boxShadow: "outline" }}
       {...rest}
     >
-      <Text as="span" fontSize="sm" color="muted" {...(isPrev ? { ms: "1" } : { me: "1" })}>
+      <Text
+        as="span"
+        fontSize="sm"
+        color="muted"
+        {...(isPrev ? { ms: "1" } : { me: "1" })}
+      >
         {t(`component.pagination.${isPrev ? "prev" : "next"}`)}
       </Text>
 
@@ -81,13 +93,17 @@ const PaginationItem: FC<PaginationItemProps> = ({ document, isPrev, ...rest }) 
           color: [`primary.700`, `primary.600`],
         }}
       >
-        {isPrev ? <ChevronIcon transform="rotate(90deg)" fontSize="1.3em" /> : null}
+        {isPrev ? (
+          <ChevronIcon transform="rotate(90deg)" fontSize="1.3em" />
+        ) : null}
 
         <Text as="span" noOfLines={1}>
           {menu ?? title}
         </Text>
 
-        {!isPrev ? <ChevronIcon transform="rotate(-90deg)" fontSize="1.3em" /> : null}
+        {!isPrev ? (
+          <ChevronIcon transform="rotate(-90deg)" fontSize="1.3em" />
+        ) : null}
       </Text>
     </GridItem>
   )

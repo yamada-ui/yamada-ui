@@ -1,7 +1,8 @@
 import { Text } from "@yamada-ui/react"
-import { FC } from "react"
+import type { FC } from "react"
 import { ExternalLink } from "components/media-and-icons"
-import { NextLink, NextLinkProps } from "components/navigation"
+import type { NextLinkProps } from "components/navigation"
+import { NextLink } from "components/navigation"
 
 export type LinkProps = NextLinkProps
 

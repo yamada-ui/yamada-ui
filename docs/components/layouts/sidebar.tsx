@@ -1,4 +1,5 @@
-import { Box, StackProps, VStack, forwardRef } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
+import { Box, VStack, forwardRef } from "@yamada-ui/react"
 import { memo } from "react"
 import { Tree } from "components/navigation"
 

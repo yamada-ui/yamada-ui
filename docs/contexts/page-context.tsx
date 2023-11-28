@@ -1,5 +1,5 @@
 import { createContext } from "@yamada-ui/react"
-import {
+import type {
   DocumentTypesPagination,
   DocumentTypes,
   DocumentTypesWithChildren,

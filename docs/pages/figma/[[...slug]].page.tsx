@@ -1,4 +1,4 @@
-import { NextPage, InferGetStaticPropsType } from "next"
+import type { NextPage, InferGetStaticPropsType } from "next"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { MDXComponents } from "components/mdx"
 import { PageProvider } from "contexts/page-context"

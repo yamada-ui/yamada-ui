@@ -1,5 +1,5 @@
 import { Center, VStack } from "@yamada-ui/react"
-import { FC, PropsWithChildren } from "react"
+import type { FC, PropsWithChildren } from "react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header } from "components/layouts"
 

@@ -1,19 +1,16 @@
+import type { Path, StringLiteral, Dict } from "@yamada-ui/react"
 import {
   getMemoizedObject as get,
-  Path,
   isString,
   Text,
-  StringLiteral,
   noop,
-  Dict,
 } from "@yamada-ui/react"
 import { useRouter } from "next/router"
+import type { PropsWithChildren, FC } from "react"
 import {
-  PropsWithChildren,
   createContext,
   useMemo,
   useContext,
-  FC,
   useCallback,
   Fragment,
 } from "react"
@@ -22,7 +19,7 @@ import CONTENT_EN from "i18n/content.en.json"
 import CONTENT_JA from "i18n/content.ja.json"
 import UI_EN from "i18n/ui.en.json"
 import UI_JA from "i18n/ui.ja.json"
-import { Locale } from "utils/i18n"
+import type { Locale } from "utils/i18n"
 
 type UIData = typeof UI_EN
 
@@ -62,10 +59,16 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     [push, pathname, asPath],
   )
 
-  const t = useCallback((path: Path<UIData>) => get<string>(uiData[locale], path, ""), [locale])
+  const t = useCallback(
+    (path: Path<UIData>) => get<string>(uiData[locale], path, ""),
+    [locale],
+  )
 
   const tc = useCallback(
-    (path: Path<UIData>, callback?: (str: string, index: number) => JSX.Element) => {
+    (
+      path: Path<UIData>,
+      callback?: (str: string, index: number) => JSX.Element,
+    ) => {
       const strOrArray = get<string | string[]>(uiData[locale], path, "")
 
       if (isString(strOrArray)) {
@@ -95,13 +98,18 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }
 
-const renderElement = (str: string, callback?: (str: string, index: number) => JSX.Element) => {
+const renderElement = (
+  str: string,
+  callback?: (str: string, index: number) => JSX.Element,
+) => {
   const array = str.split(/(`[^`]+`)/)
 
   return array.map((str, index) => {
     if (str.startsWith("`") && str.endsWith("`")) {
       return (
-        <Fragment key={index}>{callback ? callback(str.replace(/`/g, ""), index) : str}</Fragment>
+        <Fragment key={index}>
+          {callback ? callback(str.replace(/`/g, ""), index) : str}
+        </Fragment>
       )
     } else {
       return <Fragment key={index}>{str}</Fragment>

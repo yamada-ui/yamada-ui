@@ -2,7 +2,7 @@ import { existsSync } from "fs"
 import { readFile, readdir, writeFile } from "fs/promises"
 import chalk from "chalk"
 import { program } from "commander"
-import { ChatCompletionMessageParam } from "openai/resources"
+import type { ChatCompletionMessageParam } from "openai/resources"
 import ora from "ora"
 import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
@@ -15,7 +15,10 @@ const LANG_MAP = {
 
 type Option = { out?: string; lang?: keyof typeof LANG_MAP; logs?: boolean }
 
-const getPaths = async (path: string, lang: keyof typeof LANG_MAP): Promise<string[]> => {
+const getPaths = async (
+  path: string,
+  lang: keyof typeof LANG_MAP,
+): Promise<string[]> => {
   try {
     const dirents = await readdir(path, { withFileTypes: true })
 
@@ -55,7 +58,9 @@ const getResultList = (map: Map<string, string>) =>
 const extractCodeBlocks = (content: string) => {
   const reg = /```[\s\S]*?```/g
   const codeBlocks = Array.from(content.match(reg) || [])
-  const placeholders = codeBlocks.map((_, index) => `CODEBLOCK_PLACEHOLDER_${index}`)
+  const placeholders = codeBlocks.map(
+    (_, index) => `CODEBLOCK_PLACEHOLDER_${index}`,
+  )
 
   const resolvedContent = content.replace(reg, (match) => {
     const index = codeBlocks.indexOf(match)
@@ -66,7 +71,11 @@ const extractCodeBlocks = (content: string) => {
   return { resolvedContent, codeBlocks, placeholders }
 }
 
-const restoreCodeBlocks = (content: string, codeBlocks: string[], placeholders: string[]) => {
+const restoreCodeBlocks = (
+  content: string,
+  codeBlocks: string[],
+  placeholders: string[],
+) => {
   placeholders.forEach((placeholder, index) => {
     content = content.replace(placeholder, codeBlocks[index])
   })
@@ -89,7 +98,8 @@ const translateContent = async ({
     const from = `from ${LANG_MAP[lang === "en" ? "ja" : "en"]}`
     const to = `to ${LANG_MAP[lang]}`
 
-    const { resolvedContent, codeBlocks, placeholders } = extractCodeBlocks(content)
+    const { resolvedContent, codeBlocks, placeholders } =
+      extractCodeBlocks(content)
 
     const messages: ChatCompletionMessageParam[] = [
       {
@@ -111,7 +121,11 @@ const translateContent = async ({
       temperature: 0,
     })
 
-    return restoreCodeBlocks(choices[0].message?.content, codeBlocks, placeholders)
+    return restoreCodeBlocks(
+      choices[0].message?.content,
+      codeBlocks,
+      placeholders,
+    )
   } catch (e) {
     onRetry?.(retry)
 
@@ -128,79 +142,103 @@ program
   .option("-o, --out <path>")
   .option("-l, --lang <lang>")
   .option("--logs")
-  .action(async (targetPath: string, { out: outPath, lang = "en", logs: isLogs }: Option) => {
-    const hrtime = process.hrtime()
-    const spinner = !isLogs ? ora("Translating content files").start() : undefined
-    const successes = new Map<string, string>()
-    const errors = new Map<string, string>()
+  .action(
+    async (
+      targetPath: string,
+      { out: outPath, lang = "en", logs: isLogs }: Option,
+    ) => {
+      const hrtime = process.hrtime()
+      const spinner = !isLogs
+        ? ora("Translating content files").start()
+        : undefined
+      const successes = new Map<string, string>()
+      const errors = new Map<string, string>()
 
-    try {
-      if (spinner) spinner.text = `Read files...`
+      try {
+        if (spinner) spinner.text = `Read files...`
 
-      const resolvedPaths = await getPaths(targetPath, lang)
+        const resolvedPaths = await getPaths(targetPath, lang)
 
-      if (!resolvedPaths.length) throw new Error(`[${targetPath}] Not Found`)
+        if (!resolvedPaths.length) throw new Error(`[${targetPath}] Not Found`)
 
-      const totalCount = resolvedPaths.length
+        const totalCount = resolvedPaths.length
 
-      if (spinner) spinner.text = `Translate files [0 / ${totalCount}]...`
+        if (spinner) spinner.text = `Translate files [0 / ${totalCount}]...`
 
-      await Promise.all(
-        resolvedPaths.map(async (path) => {
-          try {
-            const hrtime = process.hrtime()
+        await Promise.all(
+          resolvedPaths.map(async (path) => {
+            try {
+              const hrtime = process.hrtime()
 
-            let content = await readFile(path, "utf8")
+              let content = await readFile(path, "utf8")
 
-            const onRetry = (retry: number) => {
-              if (isLogs) console.log(chalk.gray(`[${path}]`), chalk.yellow(`Retry(${retry})`))
+              const onRetry = (retry: number) => {
+                if (isLogs)
+                  console.log(
+                    chalk.gray(`[${path}]`),
+                    chalk.yellow(`Retry(${retry})`),
+                  )
+              }
+
+              content = await translateContent({ content, lang, onRetry })
+
+              content = await prettier(content)
+
+              const resolvedOutPath = outPath ?? getOutPath(path, lang)
+
+              await writeFile(resolvedOutPath, content)
+
+              const [start, end] = process.hrtime(hrtime)
+              const duration = (Number(end - start) / 1e9).toFixed(2)
+
+              successes.set(resolvedOutPath, duration)
+
+              if (isLogs)
+                console.log(
+                  chalk.gray(`[${path}]`),
+                  chalk.green(`Done ${duration}s`),
+                )
+
+              if (spinner)
+                spinner.text = `Translate files [${successes.size} / ${totalCount}]...`
+            } catch (e) {
+              errors.set(path, e.message)
             }
+          }),
+        )
 
-            content = await translateContent({ content, lang, onRetry })
+        const [start, end] = process.hrtime(hrtime)
+        const duration = (Number(end - start) / 1e9).toFixed(2)
 
-            content = await prettier(content)
+        if (spinner) {
+          spinner.succeed(chalk.green(`Done in ${duration}s` + "\n"))
+        } else {
+          console.log("\n" + chalk.green(`Done in ${duration}s` + "\n"))
+        }
 
-            const resolvedOutPath = outPath ?? getOutPath(path, lang)
+        if (!isLogs) {
+          if (successes.size !== 0)
+            console.log(
+              chalk.bgGreen(" Successes "),
+              "\n",
+              chalk.green(...getResultList(successes)),
+            )
 
-            await writeFile(resolvedOutPath, content)
-
-            const [start, end] = process.hrtime(hrtime)
-            const duration = (Number(end - start) / 1e9).toFixed(2)
-
-            successes.set(resolvedOutPath, duration)
-
-            if (isLogs) console.log(chalk.gray(`[${path}]`), chalk.green(`Done ${duration}s`))
-
-            if (spinner) spinner.text = `Translate files [${successes.size} / ${totalCount}]...`
-          } catch (e) {
-            errors.set(path, e.message)
-          }
-        }),
-      )
-
-      const [start, end] = process.hrtime(hrtime)
-      const duration = (Number(end - start) / 1e9).toFixed(2)
-
-      if (spinner) {
-        spinner.succeed(chalk.green(`Done in ${duration}s` + "\n"))
-      } else {
-        console.log("\n" + chalk.green(`Done in ${duration}s` + "\n"))
+          if (errors.size !== 0)
+            console.log(
+              chalk.bgRed(" Errors "),
+              "\n",
+              chalk.red(...getResultList(errors)),
+            )
+        }
+      } catch (e) {
+        if (spinner) {
+          spinner.fail(chalk.red(e.message))
+        } else {
+          console.log(chalk.red(e.message))
+        }
       }
-
-      if (!isLogs) {
-        if (successes.size !== 0)
-          console.log(chalk.bgGreen(" Successes "), "\n", chalk.green(...getResultList(successes)))
-
-        if (errors.size !== 0)
-          console.log(chalk.bgRed(" Errors "), "\n", chalk.red(...getResultList(errors)))
-      }
-    } catch (e) {
-      if (spinner) {
-        spinner.fail(chalk.red(e.message))
-      } else {
-        console.log(chalk.red(e.message))
-      }
-    }
-  })
+    },
+  )
 
 program.parse()

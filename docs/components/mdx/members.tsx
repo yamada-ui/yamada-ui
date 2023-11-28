@@ -1,21 +1,23 @@
-import {
-  Avatar,
-  AvatarProps,
-  Grid,
-  GridProps,
-  HStack,
-  Link,
-  StackProps,
-  Text,
-  VStack,
-} from "@yamada-ui/react"
-import { FC } from "react"
+import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
+import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
+import type { FC } from "react"
 import { Github, Twitter } from "components/media-and-icons"
 
 export type MemberProps = StackProps &
-  Pick<AvatarProps, "name" | "src"> & { description: string; github?: string; twitter?: string }
+  Pick<AvatarProps, "name" | "src"> & {
+    description: string
+    github?: string
+    twitter?: string
+  }
 
-export const Member: FC<MemberProps> = ({ name, src, description, github, twitter, ...rest }) => {
+export const Member: FC<MemberProps> = ({
+  name,
+  src,
+  description,
+  github,
+  twitter,
+  ...rest
+}) => {
   return (
     <HStack alignItems="flex-start" gap="6" {...rest}>
       <Avatar name={name} size="xl" src={src} />

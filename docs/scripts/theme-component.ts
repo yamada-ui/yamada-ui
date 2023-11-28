@@ -32,6 +32,7 @@ const LOCALE_DESC_MAP = {
     baseComponentPath,
   }: Options) => {
     let content = [
+      "## Theming",
       `The \`${componentName}\` is a [${
         isMulti ? "multi" : "single"
       } part component](/styled-system/theming/component-style#${
@@ -64,6 +65,7 @@ const LOCALE_DESC_MAP = {
     baseComponentPath,
   }: Options) => {
     let content = [
+      "## テーマ",
       `\`${componentName}\`は、[${
         isMulti ? "複数" : "単一"
       }パーツのコンポーネント](/styled-system/theming/component-style#${
@@ -257,7 +259,7 @@ const generateMdxFiles = (
 
           await writeMdxFile(outPath, data, resolvedContent)
 
-          console.log(`[changelog]: Generated ${outPath}`)
+          console.log(`[theming]: Generated ${outPath}`)
         }),
       )
     }),

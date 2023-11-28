@@ -6,10 +6,36 @@ body:
       value: |
         問題を作成していただきありがとうございます！ 😎
 
-        提出する前に、オープン/クローズされた問題を検索してください。
-        以前に、誰かが同じことを尋ねているかもしれません！ 😎
+        提出する前に、オープン/クローズされた問題を検索してください。以前に、誰かが同じことを尋ねているかもしれません！ 😎
+
+          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
 
         山田たちは、全てボランティアです。このテンプレートを正確に記入することで、山田たちの手助けになります。💖
+  - type: dropdown
+    id: package
+    attributes:
+      label: どのパッケージに問題がありますか？
+      options:
+        - "@yamada-ui/react"
+        - "@yamada-ui/table"
+        - "@yamada-ui/calendar"
+        - "@yamada-ui/carousel"
+        - "@yamada-ui/dropzone"
+        - "@yamada-ui/markdown"
+        - "@yamada-ui/fontawesome"
+        - "@yamada-ui/nextjs"
+    validations:
+      required: true
+  - type: "input"
+    id: "version"
+    attributes:
+      label: "パッケージのバージョン"
+      description: "使用しているパッケージのバージョン。"
+      placeholder: "0.1.0"
+    validations:
+      required: true
   - type: "textarea"
     id: "description"
     attributes:
@@ -24,33 +50,31 @@ body:
     attributes:
       label: "再現へのリンク"
       description: |
-        バグを再現するCodeSandboxへのリンク（テンプレートについては https://github.com/hirotomoyamada/yamada-ui#codesandbox を参照）
+        可能であれば、最小限の再現を含むCodeSandboxへのリンクを含めてください。（テンプレートについては https://github.com/hirotomoyamada/yamada-ui#codesandbox を参照）
       placeholder: "https://codesandbox.io/"
   - type: "textarea"
     id: "steps"
     attributes:
       label: "再現手順"
       description: |
-        どのように問題を引き起こすか説明してください。
+        提供された再現で問題を再現する方法を説明してください。
       value: |
         1. '...'に行きます。
         2. '...'をクリックします。
         3. '...'までスクロールします。
         4. エラーを確認します。
-  - type: "input"
-    id: "version"
+  - type: dropdown
+    id: browser-type
     attributes:
-      label: "Yamada UIバージョン"
-      description: "使用しているYamada UIのバージョン。"
-      placeholder: "0.1.0"
-    validations:
-      required: true
-  - type: "input"
-    id: "browser"
-    attributes:
-      label: "ブラウザ"
-      description: "この問題が発生したブラウザ。"
-      placeholder: "Google Chrome 114"
+      label: ブラウザ
+      description: 問題が再現されるブラウザを選択してください。
+      options:
+        - "Chrome"
+        - "Firefox"
+        - "Safari"
+        - "Edge"
+        - "Opera"
+        - "その他（追加のコンテキストを追加）"
   - type: "checkboxes"
     id: "operating-system"
     attributes:
@@ -60,8 +84,23 @@ body:
         - label: "macOS"
         - label: "Windows"
         - label: "Linux"
+  - type: dropdown
+    id: fix
+    attributes:
+      label: まさか、問題の修正方法をご存知ですか？
+      options:
+        - "はい"
+        - "いいえ"
+  - type: dropdown
+    id: participate
+    attributes:
+      label: この問題の修正に参加し、修正を含むプルリクエストを作成する志はありますか？
+      options:
+        - "はい"
+        - "いいえ"
   - type: "textarea"
     id: "additional-information"
     attributes:
       label: "追加情報"
-      description: スクリーンショット、ノート、アイデアへのリンクなどがある場合は、追加情報を提供してください。
+      description: |
+        考えられる修正、スクリーンショット、ノート、アイデアへのリンクなど、持っている追加情報をこのセクションで提供してください。

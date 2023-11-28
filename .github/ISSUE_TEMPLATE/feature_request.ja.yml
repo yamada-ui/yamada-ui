@@ -5,10 +5,13 @@ body:
   - type: "markdown"
     attributes:
       value: |
-        ご報告ありがとうございます！ 😎
+        機能のリクエストを作成していただきありがとうございます！ 😎
 
-        提出する前に、オープン/クローズされた問題を検索してください。
-        以前に、誰かが同じことを尋ねているかもしれません！ 😎
+        提出する前に、オープン/クローズされた機能のリクエストを検索してください。以前に、誰かが同じことを尋ねているかもしれません！ 😎
+
+          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
   - type: "textarea"
     id: "description"
     attributes:
@@ -21,9 +24,9 @@ body:
     attributes:
       label: "問題の主張/正当化"
       description: |
-        なぜ、これがYamada UIに追加されるべきか、理由を提供してください。
+        なぜこの機能がYamada UIに追加されるべきか、有効な理由を提供してください。
 
-        この機能が問題に関連している場合は、それも言及してください。
+        この機能が遭遇した問題に関連している場合は、それも説明してください。
     validations:
       required: true
   - type: "textarea"
@@ -31,13 +34,20 @@ body:
     attributes:
       label: "提案する解決策やAPI"
       description: 理想的な設計やAPIへのコードスニペット、またはリンクを提供してください。
+      placeholder: |
+        ユーザーとして、____ したとき、____ が起こると予想していましたが、代わりに ____ が起こりました。
+
+        あなたが描く未来予想図:
+        1. '...'に行く
+        2. '....'をクリックする
+        3. ....
   - type: "textarea"
     id: "alternatives"
     attributes:
       label: "代替案"
-      description: このリクエストをする前に考慮した代替解決策は何ですか？
+      description: このリクエストをする前に、他の代替解決策や機能を検討しましたか？
   - type: "textarea"
     id: "additional-information"
     attributes:
       label: "追加情報"
-      description: スクリーンショット、ノート、アイデアへのリンクなどがある場合は、追加情報を提供してください。
+      description: この機能を理解または実装するのに役立つリソース（リンク、スクリーンショットなど）がありますか？

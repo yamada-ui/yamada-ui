@@ -1,4 +1,9 @@
-import { useCallbackRef, runIfFunc } from "@yamada-ui/utils"
+import {
+  useCallbackRef,
+  runIfFunc,
+  isUndefined,
+  isNull,
+} from "@yamada-ui/utils"
 import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 
@@ -28,7 +33,8 @@ export const useControllableState = <T>({
 
       if (!onUpdate(resolvedValue, nextValue)) return
 
-      if (!controlled || !nextValue) setDefaultValue(nextValue)
+      if (!controlled || isUndefined(nextValue) || isNull(nextValue))
+        setDefaultValue(nextValue)
 
       onChange(nextValue)
     },

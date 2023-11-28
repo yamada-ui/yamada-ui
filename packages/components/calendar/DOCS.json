@@ -2,7 +2,7 @@
   "Calendar": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -294,6 +294,12 @@
       "required": false,
       "description": "If `true`, allows input."
     },
+    "allowInputBeyond": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
+    },
     "amountOfMonths": {
       "type": "number",
       "defaultValue": "1",
@@ -313,7 +319,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"link\"\n  | (string & {})\n  | \"blue\"\n  | \"cyan\"\n  | \"gray\"\n  | \"green\"\n  | \"orange\"\n  | \"pink\"\n  | \"purple\"\n  | \"red\"\n  | \"teal\"\n  | \"yellow\"\n  | \"primary\"\n  | \"secondary\"\n  | \"warning\"\n  | \"danger\"\n  | \"whiteAlpha\"\n  | \"blackAlpha\"",
+      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false
     },
     "calendarProps": {
@@ -322,11 +328,11 @@
       "description": "Props for calendar component."
     },
     "calendarSize": {
-      "type": "type ONLY_FOR_FORMAT =\n  | (string & {})\n  | \"sm\"\n  | \"md\"\n  | \"lg\"\n  | \"full\"\n  | ResponsiveObject<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">\n  | ColorModeArray<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
+      "type": "UIValue<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
       "required": false
     },
     "calendarVariant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | (string & {})\n  | \"solid\"\n  | \"unstyled\"\n  | \"subtle\"\n  | ResponsiveObject<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">\n  | ColorModeArray<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
       "required": false
     },
     "clearIconProps": {
@@ -353,7 +359,7 @@
       "description": "If `true`, the list element will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -433,7 +439,7 @@
       "description": "The border color when the input is focused."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -592,7 +598,7 @@
       "description": "The pattern used to check the <input> element's."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
@@ -701,7 +707,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"link\"\n  | (string & {})\n  | \"blue\"\n  | \"cyan\"\n  | \"gray\"\n  | \"green\"\n  | \"orange\"\n  | \"pink\"\n  | \"purple\"\n  | \"red\"\n  | \"teal\"\n  | \"yellow\"\n  | \"primary\"\n  | \"secondary\"\n  | \"warning\"\n  | \"danger\"\n  | \"whiteAlpha\"\n  | \"blackAlpha\"",
+      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false
     },
     "calendarProps": {
@@ -710,11 +716,11 @@
       "description": "Props for calendar component."
     },
     "calendarSize": {
-      "type": "type ONLY_FOR_FORMAT =\n  | (string & {})\n  | \"sm\"\n  | \"md\"\n  | \"lg\"\n  | \"full\"\n  | ResponsiveObject<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">\n  | ColorModeArray<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
+      "type": "UIValue<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
       "required": false
     },
     "calendarVariant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | (string & {})\n  | \"solid\"\n  | \"unstyled\"\n  | \"subtle\"\n  | ResponsiveObject<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">\n  | ColorModeArray<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
       "required": false
     },
     "clearIconProps": {
@@ -739,6 +745,11 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
@@ -795,7 +806,7 @@
       "description": "The border color when the input is focused."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -938,7 +949,7 @@
       "description": "The pattern used to check the <input> element's."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
@@ -948,6 +959,12 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the MonthPicker."
     },
     "strategy": {
       "type": "\"fixed\" | \"absolute\"",
@@ -964,6 +981,12 @@
       "type": "Date",
       "required": false,
       "description": "The value of the calendar."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the MonthPicker."
     },
     "withControls": {
       "type": "boolean",

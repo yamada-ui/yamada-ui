@@ -2,7 +2,7 @@
   "Slider": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -11,10 +11,15 @@
       "required": false,
       "description": "The initial value of the slider."
     },
-    "filledTrack": { "type": "SliderFilledTrackProps", "required": false },
     "filledTrackColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 251 more ... | \"danger\">",
+      "required": false,
+      "description": "The CSS `color` property. Used in `color` of filled track element."
+    },
+    "filledTrackProps": {
+      "type": "SliderFilledTrackProps",
+      "required": false,
+      "description": "Props for slider filled track element."
     },
     "focusThumbOnChange": {
       "type": "boolean",
@@ -27,7 +32,11 @@
       "required": false,
       "description": "The base `id` to use for the slider."
     },
-    "input": { "type": "HTMLUIProps<\"input\">", "required": false },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for slider input element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -107,23 +116,35 @@
       "required": false,
       "description": "The step in which increments or decrements have to be made."
     },
-    "thumb": { "type": "SliderThumbProps", "required": false },
     "thumbColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 251 more ... | \"danger\">",
+      "required": false,
+      "description": "The CSS `background` property. Used in `background` of thumb element."
+    },
+    "thumbProps": {
+      "type": "SliderThumbProps",
+      "required": false,
+      "description": "Props for slider thumb element."
     },
     "thumbSize": {
-      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 63 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-max-content\" | ... 59 more ... | \"min-intrinsic\">",
+      "required": false,
+      "description": "The CSS `box-size` property. Used in `box-size` of thumb element."
     },
-    "track": { "type": "SliderTrackProps", "required": false },
     "trackColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 251 more ... | \"danger\">",
+      "required": false,
+      "description": "The CSS `color` property. Used in `color` of track element."
+    },
+    "trackProps": {
+      "type": "SliderTrackProps",
+      "required": false,
+      "description": "Props for slider track element."
     },
     "trackSize": {
-      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-max-content\" | ... 55 more ... | \"9xl\">",
+      "required": false,
+      "description": "The CSS `height` property. Used in `height` of track element."
     },
     "value": {
       "type": "number",
@@ -137,7 +158,11 @@
     }
   },
   "SliderTrack": {
-    "filledTrack": { "type": "SliderFilledTrackProps", "required": false }
+    "filledTrackProps": {
+      "type": "SliderFilledTrackProps",
+      "required": false,
+      "description": "Props for slider filled track element."
+    }
   },
   "SliderFilledTrack": {},
   "SliderThumb": {},
@@ -149,15 +174,26 @@
       "required": false,
       "description": "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together."
     },
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "defaultValue": {
       "type": "[number, number]",
       "required": false,
       "description": "The initial value of the slider."
     },
-    "filledTrack": { "type": "RangeSliderFilledTrackProps", "required": false },
     "filledTrackColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 251 more ... | \"danger\">",
+      "required": false,
+      "description": "The CSS `color` property. Used in `color` of filled track element."
+    },
+    "filledTrackProps": {
+      "type": "RangeSliderFilledTrackProps",
+      "required": false,
+      "description": "Props for range slider filled track element."
     },
     "focusThumbOnChange": {
       "type": "boolean",
@@ -170,7 +206,11 @@
       "required": false,
       "description": "The base `id` to use for the slider."
     },
-    "input": { "type": "HTMLUIProps<\"input\">", "required": false },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for range slider input element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -238,38 +278,65 @@
       "required": false,
       "description": "The orientation of the slider."
     },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the RangeSlider."
+    },
     "step": {
       "type": "number",
       "defaultValue": "1",
       "required": false,
       "description": "The step in which increments or decrements have to be made."
     },
-    "thumb": { "type": "RangeSliderThumbProps", "required": false },
     "thumbColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 251 more ... | \"danger\">",
+      "required": false,
+      "description": "The CSS `background` property. Used in `background` of thumb element."
+    },
+    "thumbProps": {
+      "type": "RangeSliderThumbProps",
+      "required": false,
+      "description": "Props for range slider thumb element."
     },
     "thumbSize": {
-      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 63 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-max-content\" | ... 59 more ... | \"min-intrinsic\">",
+      "required": false,
+      "description": "The CSS `box-size` property. Used in `box-size` of thumb element."
     },
-    "track": { "type": "RangeSliderTrackProps", "required": false },
     "trackColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 251 more ... | \"danger\">",
+      "required": false,
+      "description": "The CSS `color` property. Used in `color` of track element."
+    },
+    "trackProps": {
+      "type": "RangeSliderTrackProps",
+      "required": false,
+      "description": "Props for range slider track element."
     },
     "trackSize": {
-      "type": "number | \"px\" | \"min\" | \"max\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | ... 59 more ... | ColorModeArray<...>",
-      "required": false
+      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-max-content\" | ... 55 more ... | \"9xl\">",
+      "required": false,
+      "description": "The CSS `height` property. Used in `height` of track element."
     },
     "value": {
       "type": "[number, number]",
       "required": false,
       "description": "The value of the slider."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the RangeSlider."
     }
   },
   "RangeSliderTrack": {
-    "filledTrack": { "type": "RangeSliderFilledTrackProps", "required": false }
+    "filledTrackProps": {
+      "type": "RangeSliderFilledTrackProps",
+      "required": false,
+      "description": "Props for range slider filled track element."
+    }
   },
   "RangeSliderFilledTrack": {},
   "RangeSliderThumb": {},

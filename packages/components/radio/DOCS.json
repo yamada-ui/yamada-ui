@@ -2,11 +2,11 @@
   "Radio": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "defaultChecked": {
+    "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,
@@ -81,7 +81,7 @@
     }
   },
   "UseRadio": {
-    "defaultChecked": {
+    "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,
@@ -140,22 +140,22 @@
   },
   "RadioGroup": {
     "align": {
-      "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
+      "type": "\"center\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `align-items` property."
     },
     "basis": {
-      "type": "number | \"content\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | ... 6 more ... | ColorModeArray<...>",
+      "type": "number | \"content\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | ... 9 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-basis` property."
     },
     "direction": {
-      "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
     "grow": {
-      "type": "type ONLY_FOR_FORMAT =\n  | FlexGrow\n  | ResponsiveObject<FlexGrow>\n  | ColorModeArray<FlexGrow>",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | ResponsiveObject<FlexGrow> | ColorModeArray<FlexGrow> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-grow` property."
     },
@@ -189,8 +189,14 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
+    "items": {
+      "type": "RadioItem<Y>[]",
+      "defaultValue": "'[]'",
+      "required": false,
+      "description": "If provided, generate radios based on items."
+    },
     "justify": {
-      "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
+      "type": "\"center\" | \"right\" | \"left\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `justify-content` property."
     },
@@ -205,7 +211,7 @@
       "description": "The callback fired when any children radio is checked or unchecked."
     },
     "shrink": {
-      "type": "type ONLY_FOR_FORMAT =\n  | FlexShrink\n  | ResponsiveObject<FlexShrink>\n  | ColorModeArray<FlexShrink>",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | ResponsiveObject<FlexShrink> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-shrink` property."
     },
@@ -215,7 +221,7 @@
       "description": "The value of the radio group."
     },
     "wrap": {
-      "type": "type ONLY_FOR_FORMAT =\n  | FlexWrap\n  | ResponsiveObject<FlexWrap>\n  | ColorModeArray<FlexWrap>",
+      "type": "\"wrap\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap-reverse\" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }

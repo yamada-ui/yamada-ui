@@ -2,7 +2,7 @@
   "Tag": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -17,7 +17,7 @@
       "required": false,
       "description": "Icon to be displayed to the left of the tag."
     },
-    "onCloseClick": {
+    "onClose": {
       "type": "MouseEventHandler<HTMLElement>",
       "required": false,
       "description": "Function to be executed when the close button is clicked."

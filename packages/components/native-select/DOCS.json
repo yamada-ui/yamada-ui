@@ -1,5 +1,10 @@
 {
   "NativeSelect": {
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
       "required": false,
@@ -44,17 +49,29 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
-    "options": {
-      "type": "UINativeOption[]",
+    "items": {
+      "type": "NativeSelectItem[]",
       "defaultValue": "'[]'",
       "required": false,
-      "description": "If provided, generate options based on data."
+      "description": "If provided, generate options based on items."
     },
     "placeholderInOptions": {
       "type": "boolean",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, include placeholders in options."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the NativeSelect."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the NativeSelect."
     }
   },
   "NativeOptionGroup": {},

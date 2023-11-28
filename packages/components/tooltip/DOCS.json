@@ -47,7 +47,7 @@
       "description": "The animation duration."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -95,10 +95,20 @@
       "description": "The delay before showing the tooltip."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Pick<\n  PortalProps,\n  \"appendToParentPortal\" | \"containerRef\"\n>",
+      "required": false,
+      "description": "Props for portal component."
+    },
+    "withPortal": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the element will be transported to the end of document.body."
     }
   }
 }

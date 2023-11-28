@@ -1,23 +1,23 @@
 {
   "Card": {
     "align": {
-      "type": "type ONLY_FOR_FORMAT =\n  | AlignItems\n  | ResponsiveObject<AlignItems>\n  | ColorModeArray<AlignItems>",
+      "type": "\"center\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `align-items` property."
     },
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "direction": {
-      "type": "type ONLY_FOR_FORMAT =\n  | FlexDirection\n  | ResponsiveObject<FlexDirection>\n  | ColorModeArray<FlexDirection>",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
     "justify": {
-      "type": "type ONLY_FOR_FORMAT =\n  | JustifyContent\n  | ResponsiveObject<JustifyContent>\n  | ColorModeArray<JustifyContent>",
+      "type": "\"center\" | \"right\" | \"left\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `justify-content` property."
     },

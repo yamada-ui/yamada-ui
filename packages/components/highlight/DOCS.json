@@ -6,17 +6,17 @@
       "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text."
     },
     "align": {
-      "type": "type ONLY_FOR_FORMAT =\n  | TextAlign\n  | ResponsiveObject<TextAlign>\n  | ColorModeArray<TextAlign>",
+      "type": "UIValue<TextAlign>",
       "required": false,
       "description": "The CSS `text-align` property."
     },
     "casing": {
-      "type": "type ONLY_FOR_FORMAT =\n  | TextTransform\n  | ResponsiveObject<TextTransform>\n  | ColorModeArray<TextTransform>",
+      "type": "UIValue<TextTransform>",
       "required": false,
       "description": "The CSS `text-transform` property."
     },
     "decoration": {
-      "type": "number | \"blink\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"aliceblue\" | \"antiquewhite\" | \"aqua\" | \"aquamarine\" | \"azure\" | ... 187 more ... | ColorModeArray<...>",
+      "type": "UIValue<number | \"blink\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"aliceblue\" | \"antiquewhite\" | \"aqua\" | \"aquamarine\" | \"azure\" | ... 185 more ... | \"wavy\">",
       "required": false,
       "description": "The CSS `text-decoration` property."
     },
@@ -35,7 +35,7 @@
   "Mark": {
     "colorScheme": {
       "defaultValue": "secondary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -46,7 +46,7 @@
     },
     "variant": {
       "defaultValue": "subtle",
-      "type": "\"solid\" | \"subtle\" | \"outline\"",
+      "type": "\"solid\" | \"subtle\" | \"outline\" | \"text-accent\" | \"unstyled\"",
       "required": false,
       "description": "The variant of the Mark."
     }

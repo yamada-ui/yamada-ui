@@ -1,26 +1,9 @@
 {
   "Loading": {
-    "duration": {
-      "type": "string | number",
-      "required": false,
-      "description": "The CSS `dur` property."
-    },
-    "secondaryColor": {
-      "type": "\"link\" | \"border\" | Color | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 116 more ... | ColorModeArray<...>",
-      "defaultValue": "'primary'",
-      "required": false,
-      "description": "The CSS `color` property."
-    },
-    "size": {
-      "type": "number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 17 more ... | ColorModeArray<...>",
-      "required": false,
-      "description": "The CSS `font-size` property."
-    },
-    "variant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | \"oval\"\n  | \"audio\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
-      "defaultValue": "'oval'",
-      "required": false,
-      "description": "The variant of the Loading."
+    "duration": { "type": "number", "required": false },
+    "message": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false
     }
   }
 }

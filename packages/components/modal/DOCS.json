@@ -36,7 +36,7 @@
       "description": "If `true`, the modal will close when the overlay is clicked."
     },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -82,15 +82,20 @@
       "description": "Callback fired when the overlay is clicked."
     },
     "outside": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 78 more ... | ColorModeArray<...>",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"initial\" | \"inherit\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 72 more ... | \"-3.5\">",
       "required": false,
       "description": "The CSS `padding` property."
     },
     "placement": {
-      "type": "\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>",
+      "type": "UIValue<\n  | \"center\"\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'center'",
       "required": false,
       "description": "The placement of the modal."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "restoreFocus": {
       "type": "boolean",
@@ -182,7 +187,7 @@
       "description": "If `true`, the modal will close when the overlay is clicked."
     },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -258,15 +263,20 @@
       "description": "The dialog other to use."
     },
     "outside": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 78 more ... | ColorModeArray<...>",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"initial\" | \"inherit\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 72 more ... | \"-3.5\">",
       "required": false,
       "description": "The CSS `padding` property."
     },
     "placement": {
-      "type": "\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>",
+      "type": "UIValue<\n  | \"center\"\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'center'",
       "required": false,
       "description": "The placement of the modal."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "restoreFocus": {
       "type": "boolean",
@@ -352,7 +362,7 @@
       "description": "If `true`, the modal will close when the overlay is clicked."
     },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -374,7 +384,7 @@
     "isFullHeight": {
       "type": "boolean",
       "required": false,
-      "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100vh)."
+      "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh)."
     },
     "lockFocusAcrossFrames": {
       "type": "boolean",
@@ -403,10 +413,15 @@
       "description": "Callback fired when the overlay is clicked."
     },
     "placement": {
-      "type": "(\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"center\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>) & (\"top\" | ... 4 more ... | ColorModeArray<...>)",
+      "type": "UIValue<\n  | \"center\"\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n> &\n  UIValue<\"top\" | \"right\" | \"bottom\" | \"left\">",
       "defaultValue": "'center'",
       "required": false,
       "description": "The placement of the modal.\n\n\nThe placement of the drawer."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "restoreFocus": {
       "type": "boolean",

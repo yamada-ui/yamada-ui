@@ -1,5 +1,10 @@
 {
   "Table": {
+    "columns": {
+      "type": "Column<Y, any>[]",
+      "required": true,
+      "description": "The array of column defs to use for the table."
+    },
     "cellProps": {
       "type": "CellProps<Y>",
       "required": false,
@@ -12,9 +17,14 @@
     },
     "colorScheme": {
       "defaultValue": "gray",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "defaultColumn": {
+      "type": "Partial<Column<Y, any>>",
+      "required": false,
+      "description": "Default column options to use for all column defs supplied to the table."
     },
     "defaultSelectedRowIds": {
       "type": "string[]",
@@ -64,7 +74,7 @@
       "description": "If `true`, highlight the row when the table row is selected."
     },
     "layout": {
-      "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
+      "type": "\"fixed\" | \"auto\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
     },
@@ -100,7 +110,7 @@
       "description": "If `true`, allows selection by clicking on a row."
     },
     "selectColumnProps": {
-      "type": "false | SelectColumn<Y, unknown>",
+      "type": "false | SelectColumn<Y, any>",
       "required": false,
       "description": "Props for table select column component."
     },
@@ -172,6 +182,11 @@
     }
   },
   "PagingTable": {
+    "columns": {
+      "type": "Column<Y, any>[]",
+      "required": true,
+      "description": "The array of column defs to use for the table."
+    },
     "cellProps": {
       "type": "CellProps<Y>",
       "required": false,
@@ -182,10 +197,21 @@
       "required": false,
       "description": "Props for table checkbox element."
     },
+    "colorScheme": {
+      "defaultValue": "gray",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "containerProps": {
       "type": "HTMLUIProps<\"div\">",
       "required": false,
       "description": "Props for table container element."
+    },
+    "defaultColumn": {
+      "type": "Partial<Column<Y, any>>",
+      "required": false,
+      "description": "Default column options to use for all column defs supplied to the table."
     },
     "defaultPageIndex": {
       "type": "number",
@@ -252,7 +278,7 @@
       "description": "If `true`, highlight the row when the table row is selected."
     },
     "layout": {
-      "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
+      "type": "\"fixed\" | \"auto\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
     },
@@ -324,7 +350,7 @@
       "description": "If `true`, allows selection by clicking on a row."
     },
     "selectColumnProps": {
-      "type": "false | SelectColumn<Y, unknown>",
+      "type": "false | SelectColumn<Y, any>",
       "required": false,
       "description": "Props for table select column component."
     },
@@ -337,6 +363,12 @@
       "type": "Omit<\n  SelectProps,\n  | \"data\"\n  | \"defaultValue\"\n  | \"children\"\n  | \"onChange\"\n  | \"value\"\n  | \"placeholderInOptions\"\n>",
       "required": false,
       "description": "Props for select element."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+      "required": false,
+      "description": "The size of the PagingTable."
     },
     "sort": {
       "type": "Sort<Y>",
@@ -362,6 +394,12 @@
       "type": "TableHeadProps",
       "required": false,
       "description": "Props for table thead element."
+    },
+    "variant": {
+      "defaultValue": "simple",
+      "type": "\"simple\" | \"striped\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the PagingTable."
     },
     "withBorder": {
       "type": "boolean",

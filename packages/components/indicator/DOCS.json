@@ -2,12 +2,12 @@
   "Indicator": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "inline": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": false,
       "required": false,
       "description": "If `true`, set the indicator as an inline element."
@@ -24,7 +24,7 @@
       "description": "The indicator label to use."
     },
     "offset": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "0",
       "required": false,
       "description": "Changes position offset, usually used when element has border-radius."
@@ -36,7 +36,7 @@
       "description": "If `label` is of type number, the maximum number displayed."
     },
     "placement": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\" | ResponsiveObject<\"top\" | \"right\" | \"bottom\" | \"left\" | \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"> | ColorModeArray<...>",
+      "type": "UIValue<\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'top-right'",
       "required": false,
       "description": "The placement of the indicator."

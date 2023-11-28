@@ -2,7 +2,7 @@
   "Alert": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -12,7 +12,7 @@
       "description": "The size of the Alert."
     },
     "status": {
-      "type": "\"warning\" | \"info\" | \"success\" | \"error\" | \"loading\"",
+      "type": "\"info\" | \"success\" | \"warning\" | \"error\" | \"loading\"",
       "defaultValue": "'info'",
       "required": false,
       "description": "The status of the alert."

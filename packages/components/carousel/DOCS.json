@@ -1,24 +1,24 @@
 {
   "Carousel": {
     "align": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | \"center\"\n  | \"start\"\n  | \"end\"\n  | ResponsiveObject<number | \"center\" | \"start\" | \"end\">\n  | ColorModeArray<number | \"center\" | \"start\" | \"end\">",
+      "type": "UIValue<number | \"center\" | \"start\" | \"end\">",
       "defaultValue": "'center'",
       "required": false,
       "description": "The alignment of the carousel."
     },
     "autoplay": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the carousel will be autoplay."
     },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "containScroll": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"\"\n  | \"trimSnaps\"\n  | \"keepSnaps\"\n  | ResponsiveObject<\"\" | \"trimSnaps\" | \"keepSnaps\">\n  | ColorModeArray<\"\" | \"trimSnaps\" | \"keepSnaps\">",
+      "type": "UIValue<\"\" | \"trimSnaps\" | \"keepSnaps\">",
       "defaultValue": "''",
       "required": false,
       "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
@@ -45,25 +45,25 @@
       "description": "The initial index of the carousel slide."
     },
     "delay": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "4000",
       "required": false,
       "description": "The number for the autoplay interval of the carousel."
     },
     "dragFree": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": false,
       "required": false,
       "description": "If `true`, momentum scrolling will be enabled."
     },
     "draggable": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, carousel can be scrolled with mouse and touch interactions."
     },
     "includeGapInSize": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, gap will be treated as part of the carousel slide size."
@@ -84,13 +84,13 @@
       "description": "Props for carousel inner element."
     },
     "inViewThreshold": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "0",
       "required": false,
       "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
     },
     "loop": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop."
@@ -106,7 +106,7 @@
       "description": "A callback that return the current scroll amount when the carousel is scrolled."
     },
     "orientation": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"vertical\"\n  | \"horizontal\"\n  | ResponsiveObject<\"vertical\" | \"horizontal\">\n  | ColorModeArray<\"vertical\" | \"horizontal\">",
+      "type": "UIValue<\"vertical\" | \"horizontal\">",
       "defaultValue": "'horizontal'",
       "required": false,
       "description": "The orientation of the carousel."
@@ -118,30 +118,30 @@
       "description": "The size of the Carousel."
     },
     "skipSnaps": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": false,
       "required": false,
       "description": "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true."
     },
     "slideSize": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ColorModeArray<...>",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 60 more ... | \"9xl\">",
       "required": false,
       "description": "The CSS `width` property."
     },
     "slidesToScroll": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "1",
       "required": false,
       "description": "The number of slides that should be scrolled with next or previous buttons."
     },
     "speed": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "10",
       "required": false,
       "description": "Adjusts scroll speed when triggered by any of the methods.\nHigher numbers enables faster scrolling."
     },
     "stopMouseEnterAutoplay": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, autoplay will pause when the mouse entries over."
@@ -152,13 +152,13 @@
       "description": "The variant of the Carousel."
     },
     "withControls": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, display the carousel control buttons."
     },
     "withIndicators": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ResponsiveObject<boolean>\n  | ColorModeArray<boolean>",
+      "type": "UIValue<boolean>",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, display the carousel indicator buttons."
@@ -167,7 +167,7 @@
   "CarouselSlide": {
     "index": { "type": "number", "required": false },
     "size": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 64 more ... | ColorModeArray<...>",
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 65 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `width` property."
     }

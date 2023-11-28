@@ -162,7 +162,7 @@
       "description": "Show the component. triggers when enter or exit states."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | ResponsiveObject<\"top\" | \"right\" | \"bottom\" | \"left\">\n  | ColorModeArray<\"top\" | \"right\" | \"bottom\" | \"left\">",
+      "type": "UIValue<\"top\" | \"right\" | \"bottom\" | \"left\">",
       "defaultValue": "'right'",
       "required": false,
       "description": "The placement of the slide."
@@ -205,13 +205,13 @@
       "description": "Show the component. triggers when enter or exit states."
     },
     "offsetX": {
-      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | ResponsiveObject<string | number>\n  | ColorModeArray<string | number>",
+      "type": "UIValue<string | number>",
       "defaultValue": "0",
       "required": false,
       "description": "The offset on the horizontal or `x` axis."
     },
     "offsetY": {
-      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | ResponsiveObject<string | number>\n  | ColorModeArray<string | number>",
+      "type": "UIValue<string | number>",
       "defaultValue": "8",
       "required": false,
       "description": "The offset on the vertical or `y` axis."

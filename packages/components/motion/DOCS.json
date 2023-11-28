@@ -1,7 +1,1047 @@
 {
   "Motion": {
+    "about": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"about\"]\n>",
+      "required": false
+    },
+    "accessKey": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"accessKey\"]\n>",
+      "required": false
+    },
+    "aria-activedescendant": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-activedescendant\"]\n>",
+      "required": false
+    },
+    "aria-atomic": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-atomic\"]\n>",
+      "required": false
+    },
+    "aria-autocomplete": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-autocomplete\"]\n>",
+      "required": false
+    },
+    "aria-braillelabel": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-braillelabel\"]\n>",
+      "required": false
+    },
+    "aria-brailleroledescription": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-brailleroledescription\"]\n>",
+      "required": false
+    },
+    "aria-busy": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-busy\"]\n>",
+      "required": false
+    },
+    "aria-checked": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-checked\"]\n>",
+      "required": false
+    },
+    "aria-colcount": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colcount\"]\n>",
+      "required": false
+    },
+    "aria-colindex": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colindex\"]\n>",
+      "required": false
+    },
+    "aria-colindextext": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colindextext\"]\n>",
+      "required": false
+    },
+    "aria-colspan": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colspan\"]\n>",
+      "required": false
+    },
+    "aria-controls": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-controls\"]\n>",
+      "required": false
+    },
+    "aria-current": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-current\"]\n>",
+      "required": false
+    },
+    "aria-describedby": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-describedby\"]\n>",
+      "required": false
+    },
+    "aria-description": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-description\"]\n>",
+      "required": false
+    },
+    "aria-details": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-details\"]\n>",
+      "required": false
+    },
+    "aria-disabled": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-disabled\"]\n>",
+      "required": false
+    },
+    "aria-dropeffect": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-dropeffect\"]\n>",
+      "required": false
+    },
+    "aria-errormessage": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-errormessage\"]\n>",
+      "required": false
+    },
+    "aria-expanded": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-expanded\"]\n>",
+      "required": false
+    },
+    "aria-flowto": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-flowto\"]\n>",
+      "required": false
+    },
+    "aria-grabbed": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-grabbed\"]\n>",
+      "required": false
+    },
+    "aria-haspopup": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-haspopup\"]\n>",
+      "required": false
+    },
+    "aria-hidden": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-hidden\"]\n>",
+      "required": false
+    },
+    "aria-invalid": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-invalid\"]\n>",
+      "required": false
+    },
+    "aria-keyshortcuts": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-keyshortcuts\"]\n>",
+      "required": false
+    },
+    "aria-label": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-label\"]\n>",
+      "required": false
+    },
+    "aria-labelledby": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-labelledby\"]\n>",
+      "required": false
+    },
+    "aria-level": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-level\"]\n>",
+      "required": false
+    },
+    "aria-live": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-live\"]\n>",
+      "required": false
+    },
+    "aria-modal": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-modal\"]\n>",
+      "required": false
+    },
+    "aria-multiline": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-multiline\"]\n>",
+      "required": false
+    },
+    "aria-multiselectable": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-multiselectable\"]\n>",
+      "required": false
+    },
+    "aria-orientation": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-orientation\"]\n>",
+      "required": false
+    },
+    "aria-owns": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-owns\"]\n>",
+      "required": false
+    },
+    "aria-placeholder": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-placeholder\"]\n>",
+      "required": false
+    },
+    "aria-posinset": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-posinset\"]\n>",
+      "required": false
+    },
+    "aria-pressed": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-pressed\"]\n>",
+      "required": false
+    },
+    "aria-readonly": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-readonly\"]\n>",
+      "required": false
+    },
+    "aria-relevant": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-relevant\"]\n>",
+      "required": false
+    },
+    "aria-required": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-required\"]\n>",
+      "required": false
+    },
+    "aria-roledescription": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-roledescription\"]\n>",
+      "required": false
+    },
+    "aria-rowcount": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowcount\"]\n>",
+      "required": false
+    },
+    "aria-rowindex": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowindex\"]\n>",
+      "required": false
+    },
+    "aria-rowindextext": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowindextext\"]\n>",
+      "required": false
+    },
+    "aria-rowspan": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowspan\"]\n>",
+      "required": false
+    },
+    "aria-selected": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-selected\"]\n>",
+      "required": false
+    },
+    "aria-setsize": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-setsize\"]\n>",
+      "required": false
+    },
+    "aria-sort": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-sort\"]\n>",
+      "required": false
+    },
+    "aria-valuemax": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuemax\"]\n>",
+      "required": false
+    },
+    "aria-valuemin": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuemin\"]\n>",
+      "required": false
+    },
+    "aria-valuenow": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuenow\"]\n>",
+      "required": false
+    },
+    "aria-valuetext": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuetext\"]\n>",
+      "required": false
+    },
     "as": {
       "type": "\"symbol\" | \"object\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | \"b\" | \"base\" | \"bdi\" | \"bdo\" | \"big\" | \"blockquote\" | \"body\" | \"br\" | \"button\" | \"canvas\" | ... 149 more ... | \"view\"",
+      "required": false
+    },
+    "autoCapitalize": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoCapitalize\"]\n>",
+      "required": false
+    },
+    "autoCorrect": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoCorrect\"]\n>",
+      "required": false
+    },
+    "autoFocus": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoFocus\"]\n>",
+      "required": false
+    },
+    "autoSave": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoSave\"]\n>",
+      "required": false
+    },
+    "className": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"className\"]\n>",
+      "required": false
+    },
+    "color": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"color\"]\n>",
+      "required": false
+    },
+    "content": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"content\"]\n>",
+      "required": false
+    },
+    "contentEditable": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"contentEditable\"]\n>",
+      "required": false
+    },
+    "contextMenu": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"contextMenu\"]\n>",
+      "required": false
+    },
+    "dangerouslySetInnerHTML": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"dangerouslySetInnerHTML\"]\n>",
+      "required": false
+    },
+    "datatype": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"datatype\"]\n>",
+      "required": false
+    },
+    "defaultChecked": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"defaultChecked\"]\n>",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"defaultValue\"]\n>",
+      "required": false
+    },
+    "dir": {
+      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"dir\"]>",
+      "required": false
+    },
+    "draggable": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"draggable\"]\n>",
+      "required": false
+    },
+    "hidden": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"hidden\"]\n>",
+      "required": false
+    },
+    "id": {
+      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"id\"]>",
+      "required": false
+    },
+    "inlist": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"inlist\"]\n>",
+      "required": false
+    },
+    "inputMode": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"inputMode\"]\n>",
+      "required": false
+    },
+    "is": {
+      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"is\"]>",
+      "required": false
+    },
+    "itemID": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemID\"]\n>",
+      "required": false
+    },
+    "itemProp": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemProp\"]\n>",
+      "required": false
+    },
+    "itemRef": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemRef\"]\n>",
+      "required": false
+    },
+    "itemScope": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemScope\"]\n>",
+      "required": false
+    },
+    "itemType": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemType\"]\n>",
+      "required": false
+    },
+    "lang": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"lang\"]\n>",
+      "required": false
+    },
+    "nonce": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"nonce\"]\n>",
+      "required": false
+    },
+    "onAbort": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAbort\"]\n>",
+      "required": false
+    },
+    "onAbortCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAbortCapture\"]\n>",
+      "required": false
+    },
+    "onAnimationEnd": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationEnd\"]\n>",
+      "required": false
+    },
+    "onAnimationEndCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationEndCapture\"]\n>",
+      "required": false
+    },
+    "onAnimationIteration": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationIteration\"]\n>",
+      "required": false
+    },
+    "onAnimationIterationCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationIterationCapture\"]\n>",
+      "required": false
+    },
+    "onAnimationStartCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationStartCapture\"]\n>",
+      "required": false
+    },
+    "onAuxClick": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAuxClick\"]\n>",
+      "required": false
+    },
+    "onAuxClickCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAuxClickCapture\"]\n>",
+      "required": false
+    },
+    "onBeforeInput": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBeforeInput\"]\n>",
+      "required": false
+    },
+    "onBeforeInputCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBeforeInputCapture\"]\n>",
+      "required": false
+    },
+    "onBlur": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBlur\"]\n>",
+      "required": false
+    },
+    "onBlurCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBlurCapture\"]\n>",
+      "required": false
+    },
+    "onCanPlay": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlay\"]\n>",
+      "required": false
+    },
+    "onCanPlayCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlayCapture\"]\n>",
+      "required": false
+    },
+    "onCanPlayThrough": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlayThrough\"]\n>",
+      "required": false
+    },
+    "onCanPlayThroughCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlayThroughCapture\"]\n>",
+      "required": false
+    },
+    "onChange": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onChange\"]\n>",
+      "required": false
+    },
+    "onChangeCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onChangeCapture\"]\n>",
+      "required": false
+    },
+    "onClick": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onClick\"]\n>",
+      "required": false
+    },
+    "onClickCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onClickCapture\"]\n>",
+      "required": false
+    },
+    "onCompositionEnd": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionEnd\"]\n>",
+      "required": false
+    },
+    "onCompositionEndCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionEndCapture\"]\n>",
+      "required": false
+    },
+    "onCompositionStart": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionStart\"]\n>",
+      "required": false
+    },
+    "onCompositionStartCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionStartCapture\"]\n>",
+      "required": false
+    },
+    "onCompositionUpdate": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionUpdate\"]\n>",
+      "required": false
+    },
+    "onCompositionUpdateCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionUpdateCapture\"]\n>",
+      "required": false
+    },
+    "onContextMenu": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onContextMenu\"]\n>",
+      "required": false
+    },
+    "onContextMenuCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onContextMenuCapture\"]\n>",
+      "required": false
+    },
+    "onCopy": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCopy\"]\n>",
+      "required": false
+    },
+    "onCopyCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCopyCapture\"]\n>",
+      "required": false
+    },
+    "onCut": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCut\"]\n>",
+      "required": false
+    },
+    "onCutCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCutCapture\"]\n>",
+      "required": false
+    },
+    "onDoubleClick": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDoubleClick\"]\n>",
+      "required": false
+    },
+    "onDoubleClickCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDoubleClickCapture\"]\n>",
+      "required": false
+    },
+    "onDragCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragCapture\"]\n>",
+      "required": false
+    },
+    "onDragEndCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragEndCapture\"]\n>",
+      "required": false
+    },
+    "onDragEnter": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragEnter\"]\n>",
+      "required": false
+    },
+    "onDragEnterCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragEnterCapture\"]\n>",
+      "required": false
+    },
+    "onDragExit": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragExit\"]\n>",
+      "required": false
+    },
+    "onDragExitCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragExitCapture\"]\n>",
+      "required": false
+    },
+    "onDragLeave": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragLeave\"]\n>",
+      "required": false
+    },
+    "onDragLeaveCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragLeaveCapture\"]\n>",
+      "required": false
+    },
+    "onDragOver": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragOver\"]\n>",
+      "required": false
+    },
+    "onDragOverCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragOverCapture\"]\n>",
+      "required": false
+    },
+    "onDragStartCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragStartCapture\"]\n>",
+      "required": false
+    },
+    "onDrop": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDrop\"]\n>",
+      "required": false
+    },
+    "onDropCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDropCapture\"]\n>",
+      "required": false
+    },
+    "onDurationChange": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDurationChange\"]\n>",
+      "required": false
+    },
+    "onDurationChangeCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDurationChangeCapture\"]\n>",
+      "required": false
+    },
+    "onEmptied": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEmptied\"]\n>",
+      "required": false
+    },
+    "onEmptiedCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEmptiedCapture\"]\n>",
+      "required": false
+    },
+    "onEncrypted": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEncrypted\"]\n>",
+      "required": false
+    },
+    "onEncryptedCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEncryptedCapture\"]\n>",
+      "required": false
+    },
+    "onEnded": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEnded\"]\n>",
+      "required": false
+    },
+    "onEndedCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEndedCapture\"]\n>",
+      "required": false
+    },
+    "onError": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onError\"]\n>",
+      "required": false
+    },
+    "onErrorCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onErrorCapture\"]\n>",
+      "required": false
+    },
+    "onFocus": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onFocus\"]\n>",
+      "required": false
+    },
+    "onFocusCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onFocusCapture\"]\n>",
+      "required": false
+    },
+    "onGotPointerCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onGotPointerCapture\"]\n>",
+      "required": false
+    },
+    "onGotPointerCaptureCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onGotPointerCaptureCapture\"]\n>",
+      "required": false
+    },
+    "onInput": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInput\"]\n>",
+      "required": false
+    },
+    "onInputCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInputCapture\"]\n>",
+      "required": false
+    },
+    "onInvalid": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInvalid\"]\n>",
+      "required": false
+    },
+    "onInvalidCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInvalidCapture\"]\n>",
+      "required": false
+    },
+    "onKeyDown": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyDown\"]\n>",
+      "required": false
+    },
+    "onKeyDownCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyDownCapture\"]\n>",
+      "required": false
+    },
+    "onKeyPress": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyPress\"]\n>",
+      "required": false
+    },
+    "onKeyPressCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyPressCapture\"]\n>",
+      "required": false
+    },
+    "onKeyUp": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyUp\"]\n>",
+      "required": false
+    },
+    "onKeyUpCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyUpCapture\"]\n>",
+      "required": false
+    },
+    "onLoad": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoad\"]\n>",
+      "required": false
+    },
+    "onLoadCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadCapture\"]\n>",
+      "required": false
+    },
+    "onLoadedData": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedData\"]\n>",
+      "required": false
+    },
+    "onLoadedDataCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedDataCapture\"]\n>",
+      "required": false
+    },
+    "onLoadedMetadata": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedMetadata\"]\n>",
+      "required": false
+    },
+    "onLoadedMetadataCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedMetadataCapture\"]\n>",
+      "required": false
+    },
+    "onLoadStart": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadStart\"]\n>",
+      "required": false
+    },
+    "onLoadStartCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadStartCapture\"]\n>",
+      "required": false
+    },
+    "onLostPointerCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLostPointerCapture\"]\n>",
+      "required": false
+    },
+    "onLostPointerCaptureCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLostPointerCaptureCapture\"]\n>",
+      "required": false
+    },
+    "onMouseDown": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseDown\"]\n>",
+      "required": false
+    },
+    "onMouseDownCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseDownCapture\"]\n>",
+      "required": false
+    },
+    "onMouseEnter": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseEnter\"]\n>",
+      "required": false
+    },
+    "onMouseLeave": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseLeave\"]\n>",
+      "required": false
+    },
+    "onMouseMove": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseMove\"]\n>",
+      "required": false
+    },
+    "onMouseMoveCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseMoveCapture\"]\n>",
+      "required": false
+    },
+    "onMouseOut": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOut\"]\n>",
+      "required": false
+    },
+    "onMouseOutCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOutCapture\"]\n>",
+      "required": false
+    },
+    "onMouseOver": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOver\"]\n>",
+      "required": false
+    },
+    "onMouseOverCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOverCapture\"]\n>",
+      "required": false
+    },
+    "onMouseUp": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseUp\"]\n>",
+      "required": false
+    },
+    "onMouseUpCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseUpCapture\"]\n>",
+      "required": false
+    },
+    "onPaste": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPaste\"]\n>",
+      "required": false
+    },
+    "onPasteCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPasteCapture\"]\n>",
+      "required": false
+    },
+    "onPause": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPause\"]\n>",
+      "required": false
+    },
+    "onPauseCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPauseCapture\"]\n>",
+      "required": false
+    },
+    "onPlay": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlay\"]\n>",
+      "required": false
+    },
+    "onPlayCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlayCapture\"]\n>",
+      "required": false
+    },
+    "onPlaying": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlaying\"]\n>",
+      "required": false
+    },
+    "onPlayingCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlayingCapture\"]\n>",
+      "required": false
+    },
+    "onPointerCancel": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerCancel\"]\n>",
+      "required": false
+    },
+    "onPointerCancelCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerCancelCapture\"]\n>",
+      "required": false
+    },
+    "onPointerDown": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerDown\"]\n>",
+      "required": false
+    },
+    "onPointerDownCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerDownCapture\"]\n>",
+      "required": false
+    },
+    "onPointerEnter": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerEnter\"]\n>",
+      "required": false
+    },
+    "onPointerEnterCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerEnterCapture\"]\n>",
+      "required": false
+    },
+    "onPointerLeave": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerLeave\"]\n>",
+      "required": false
+    },
+    "onPointerLeaveCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerLeaveCapture\"]\n>",
+      "required": false
+    },
+    "onPointerMove": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerMove\"]\n>",
+      "required": false
+    },
+    "onPointerMoveCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerMoveCapture\"]\n>",
+      "required": false
+    },
+    "onPointerOut": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOut\"]\n>",
+      "required": false
+    },
+    "onPointerOutCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOutCapture\"]\n>",
+      "required": false
+    },
+    "onPointerOver": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOver\"]\n>",
+      "required": false
+    },
+    "onPointerOverCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOverCapture\"]\n>",
+      "required": false
+    },
+    "onPointerUp": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerUp\"]\n>",
+      "required": false
+    },
+    "onPointerUpCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerUpCapture\"]\n>",
+      "required": false
+    },
+    "onProgress": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onProgress\"]\n>",
+      "required": false
+    },
+    "onProgressCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onProgressCapture\"]\n>",
+      "required": false
+    },
+    "onRateChange": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onRateChange\"]\n>",
+      "required": false
+    },
+    "onRateChangeCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onRateChangeCapture\"]\n>",
+      "required": false
+    },
+    "onReset": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onReset\"]\n>",
+      "required": false
+    },
+    "onResetCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onResetCapture\"]\n>",
+      "required": false
+    },
+    "onResize": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onResize\"]\n>",
+      "required": false
+    },
+    "onResizeCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onResizeCapture\"]\n>",
+      "required": false
+    },
+    "onScroll": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onScroll\"]\n>",
+      "required": false
+    },
+    "onScrollCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onScrollCapture\"]\n>",
+      "required": false
+    },
+    "onSeeked": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeeked\"]\n>",
+      "required": false
+    },
+    "onSeekedCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeekedCapture\"]\n>",
+      "required": false
+    },
+    "onSeeking": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeeking\"]\n>",
+      "required": false
+    },
+    "onSeekingCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeekingCapture\"]\n>",
+      "required": false
+    },
+    "onSelect": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSelect\"]\n>",
+      "required": false
+    },
+    "onSelectCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSelectCapture\"]\n>",
+      "required": false
+    },
+    "onStalled": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onStalled\"]\n>",
+      "required": false
+    },
+    "onStalledCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onStalledCapture\"]\n>",
+      "required": false
+    },
+    "onSubmit": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSubmit\"]\n>",
+      "required": false
+    },
+    "onSubmitCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSubmitCapture\"]\n>",
+      "required": false
+    },
+    "onSuspend": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSuspend\"]\n>",
+      "required": false
+    },
+    "onSuspendCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSuspendCapture\"]\n>",
+      "required": false
+    },
+    "onTimeUpdate": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTimeUpdate\"]\n>",
+      "required": false
+    },
+    "onTimeUpdateCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTimeUpdateCapture\"]\n>",
+      "required": false
+    },
+    "onTouchCancel": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchCancel\"]\n>",
+      "required": false
+    },
+    "onTouchCancelCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchCancelCapture\"]\n>",
+      "required": false
+    },
+    "onTouchEnd": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchEnd\"]\n>",
+      "required": false
+    },
+    "onTouchEndCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchEndCapture\"]\n>",
+      "required": false
+    },
+    "onTouchMove": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchMove\"]\n>",
+      "required": false
+    },
+    "onTouchMoveCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchMoveCapture\"]\n>",
+      "required": false
+    },
+    "onTouchStart": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchStart\"]\n>",
+      "required": false
+    },
+    "onTouchStartCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchStartCapture\"]\n>",
+      "required": false
+    },
+    "onTransitionEnd": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTransitionEnd\"]\n>",
+      "required": false
+    },
+    "onTransitionEndCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTransitionEndCapture\"]\n>",
+      "required": false
+    },
+    "onVolumeChange": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onVolumeChange\"]\n>",
+      "required": false
+    },
+    "onVolumeChangeCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onVolumeChangeCapture\"]\n>",
+      "required": false
+    },
+    "onWaiting": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWaiting\"]\n>",
+      "required": false
+    },
+    "onWaitingCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWaitingCapture\"]\n>",
+      "required": false
+    },
+    "onWheel": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWheel\"]\n>",
+      "required": false
+    },
+    "onWheelCapture": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWheelCapture\"]\n>",
+      "required": false
+    },
+    "placeholder": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"placeholder\"]\n>",
+      "required": false
+    },
+    "prefix": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"prefix\"]\n>",
+      "required": false
+    },
+    "property": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"property\"]\n>",
+      "required": false
+    },
+    "radioGroup": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"radioGroup\"]\n>",
+      "required": false
+    },
+    "rel": {
+      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"rel\"]>",
+      "required": false
+    },
+    "resource": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"resource\"]\n>",
+      "required": false
+    },
+    "results": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"results\"]\n>",
+      "required": false
+    },
+    "rev": {
+      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"rev\"]>",
+      "required": false
+    },
+    "role": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"role\"]\n>",
+      "required": false
+    },
+    "security": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"security\"]\n>",
+      "required": false
+    },
+    "slot": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"slot\"]\n>",
+      "required": false
+    },
+    "spellCheck": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"spellCheck\"]\n>",
+      "required": false
+    },
+    "suppressContentEditableWarning": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"suppressContentEditableWarning\"]\n>",
+      "required": false
+    },
+    "suppressHydrationWarning": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"suppressHydrationWarning\"]\n>",
+      "required": false
+    },
+    "tabIndex": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"tabIndex\"]\n>",
+      "required": false
+    },
+    "title": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"title\"]\n>",
+      "required": false
+    },
+    "translate": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"translate\"]\n>",
+      "required": false
+    },
+    "typeof": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"typeof\"]\n>",
+      "required": false
+    },
+    "unselectable": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"unselectable\"]\n>",
+      "required": false
+    },
+    "vocab": {
+      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"vocab\"]\n>",
       "required": false
     }
   }

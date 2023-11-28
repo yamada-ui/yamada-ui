@@ -65,7 +65,7 @@
       "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -125,7 +125,7 @@
       "description": "The number of delay time to open."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."

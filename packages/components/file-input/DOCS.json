@@ -1,17 +1,22 @@
 {
   "FileInput": {
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "component": {
       "type": "FC<{ value: File; index: number }>",
       "required": false,
       "description": "The component that displays uploaded files."
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 253 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 253 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is focused."
     },
@@ -60,10 +65,22 @@
       "required": false,
       "description": "The string to separate uploaded files."
     },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the FileInput."
+    },
     "value": {
       "type": "File[]",
       "required": false,
       "description": "The value of the file input."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the FileInput."
     }
   }
 }

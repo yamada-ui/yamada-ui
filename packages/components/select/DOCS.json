@@ -6,12 +6,6 @@
       "required": false,
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
-    "closeDelay": {
-      "type": "number",
-      "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to close."
-    },
     "closeOnBlur": {
       "type": "boolean",
       "defaultValue": true,
@@ -31,7 +25,7 @@
       "description": "If `true`, the list element will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -78,7 +72,7 @@
       "description": "The border color when the input is focused."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -117,6 +111,12 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the form control will be required."
+    },
+    "items": {
+      "type": "SelectItem[]",
+      "defaultValue": "'[]'",
+      "required": false,
+      "description": "If provided, generate options based on items."
     },
     "lazyBehavior": {
       "type": "LazyMode",
@@ -165,21 +165,10 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
-    "openDelay": {
-      "type": "number",
-      "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to open."
-    },
     "optionProps": {
       "type": "Omit<OptionProps, \"children\" | \"value\">",
       "required": false,
       "description": "Props for select option element."
-    },
-    "options": {
-      "type": "UIOption[]",
-      "required": false,
-      "description": "If provided, generate options based on data."
     },
     "placeholderInOptions": {
       "type": "boolean",
@@ -188,7 +177,7 @@
       "description": "If `true`, include placeholders in options."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
@@ -198,12 +187,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "restoreFocus": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
     },
     "size": {
       "defaultValue": "md",
@@ -216,12 +199,6 @@
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
-    },
-    "trigger": {
-      "type": "\"click\" | \"hover\" | \"never\"",
-      "defaultValue": "'click'",
-      "required": false,
-      "description": "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
     },
     "value": {
       "type": "string",
@@ -247,12 +224,6 @@
       "required": false,
       "description": "Props for select clear icon element."
     },
-    "closeDelay": {
-      "type": "number",
-      "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to close."
-    },
     "closeOnBlur": {
       "type": "boolean",
       "defaultValue": true,
@@ -271,8 +242,13 @@
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
     },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "component": {
-      "type": "FC<{\n  value: string | number\n  displayValue: string\n  index: number\n  onRemove: MouseEventHandler<HTMLElement>\n}>",
+      "type": "FC<{\n  value: string | number\n  label: string\n  index: number\n  onRemove: MouseEventHandler<HTMLElement>\n}>",
       "required": false,
       "description": "The custom display value to use."
     },
@@ -319,7 +295,7 @@
       "description": "The border color when the input is focused."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -364,6 +340,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the form control will be required."
+    },
+    "items": {
+      "type": "SelectItem[]",
+      "required": false,
+      "description": "If provided, generate options based on items."
     },
     "lazyBehavior": {
       "type": "LazyMode",
@@ -423,24 +404,13 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
-    "openDelay": {
-      "type": "number",
-      "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to open."
-    },
     "optionProps": {
       "type": "Omit<OptionProps, \"children\" | \"value\">",
       "required": false,
       "description": "Props for select option element."
     },
-    "options": {
-      "type": "UIOption[]",
-      "required": false,
-      "description": "If provided, generate options based on data."
-    },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
@@ -451,17 +421,17 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
-    "restoreFocus": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
-    },
     "separator": {
       "type": "string",
       "defaultValue": "','",
       "required": false,
       "description": "The visual separator between each value."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the MultiSelect."
     },
     "strategy": {
       "type": "\"fixed\" | \"absolute\"",
@@ -469,16 +439,16 @@
       "required": false,
       "description": "The CSS positioning strategy to use."
     },
-    "trigger": {
-      "type": "\"click\" | \"hover\" | \"never\"",
-      "defaultValue": "'click'",
-      "required": false,
-      "description": "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
-    },
     "value": {
       "type": "string[]",
       "required": false,
       "description": "The value of the select."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the MultiSelect."
     }
   },
   "OptionGroup": {

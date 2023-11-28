@@ -1,9 +1,14 @@
 {
   "Markdown": {
-    "code": {
-      "type": "{ theme?: \"a11yDark\" | \"atomDark\" | \"base16AteliersulphurpoolLight\" | \"cb\" | \"coldarkCold\" | \"coldarkDark\" | \"coy\" | \"darcula\" | \"dark\" | \"dracula\" | \"duotoneDark\" | \"duotoneEarth\" | ... 27 more ... | undefined; }",
+    "codeProps": {
+      "type": "{ theme?: \"coy\" | \"dark\" | \"funky\" | \"okaidia\" | \"solarizedlight\" | \"tomorrow\" | \"twilight\" | \"prism\" | \"a11yDark\" | \"atomDark\" | \"base16AteliersulphurpoolLight\" | \"cb\" | \"coldarkCold\" | ... 32 more ... | undefined; }",
       "required": false,
       "description": "If provided, this will set the theme for the code."
+    },
+    "noteProps": {
+      "type": "AlertProps",
+      "required": false,
+      "description": "If provided, this will set the theme for the note."
     }
   },
   "MarkdownComponent": {},

@@ -1,5 +1,11 @@
 {
   "NativeTable": {
+    "colorScheme": {
+      "defaultValue": "gray",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "highlightOnHover": {
       "type": "boolean",
       "defaultValue": false,
@@ -7,9 +13,21 @@
       "description": "If `true`, highlight the row when the table row is hovered."
     },
     "layout": {
-      "type": "TableLayout | ResponsiveObject<string | number | boolean | undefined> | ColorModeArray<string | number | boolean | undefined> | ((theme: StyledTheme<...>) => TableLayout | ... 2 more ... | undefined)",
+      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+      "required": false,
+      "description": "The size of the NativeTable."
+    },
+    "variant": {
+      "defaultValue": "simple",
+      "type": "\"simple\" | \"striped\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the NativeTable."
     },
     "withBorder": {
       "type": "boolean",

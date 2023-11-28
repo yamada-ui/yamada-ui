@@ -5,9 +5,9 @@ body:
   - type: "markdown"
     attributes:
       value: |
-        Thank you for creating an issue 😎!
+        Thank you for creating an feature request 😎!
 
-        Please search open/closed issues before submitting. Someone might have asked the same thing before 😎!
+        Please search open/closed feature requests before submitting. Someone might have asked the same thing before 😎!
 
           - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
           - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)

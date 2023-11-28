@@ -1,5 +1,28 @@
 # @yamada-ui/react
 
+## 0.8.33
+
+### Patch Changes
+
+- Updated dependencies [[`868abae4`](https://github.com/hirotomoyamada/yamada-ui/commit/868abae4647429b71f5600c317e6971d47159c96), [`50123e72`](https://github.com/hirotomoyamada/yamada-ui/commit/50123e7274a2c90b3f5f56c380123892883125c7), [`6fc8124f`](https://github.com/hirotomoyamada/yamada-ui/commit/6fc8124f778d5a8863fa549630c90c4851de850e)]:
+  - @yamada-ui/file-button@0.3.23
+  - @yamada-ui/file-input@0.4.14
+  - @yamada-ui/autocomplete@0.7.0
+  - @yamada-ui/use-controllable-state@0.4.0
+  - @yamada-ui/input@0.3.23
+  - @yamada-ui/accordion@0.4.5
+  - @yamada-ui/checkbox@0.5.1
+  - @yamada-ui/editable@0.3.23
+  - @yamada-ui/menu@0.3.26
+  - @yamada-ui/pagination@0.4.20
+  - @yamada-ui/pin-input@0.4.2
+  - @yamada-ui/radio@0.5.1
+  - @yamada-ui/segmented-control@0.4.4
+  - @yamada-ui/select@0.5.9
+  - @yamada-ui/slider@0.4.15
+  - @yamada-ui/tabs@0.3.23
+  - @yamada-ui/switch@0.4.1
+
 ## 0.8.32
 
 ### Patch Changes

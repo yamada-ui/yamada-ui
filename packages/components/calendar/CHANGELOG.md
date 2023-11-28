@@ -1,5 +1,14 @@
 # @yamada-ui/calendar
 
+## 0.6.7
+
+### Patch Changes
+
+- [`868abae4`](https://github.com/hirotomoyamada/yamada-ui/commit/868abae4647429b71f5600c317e6971d47159c96) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `null` from union types.
+
+- Updated dependencies [[`6fc8124f`](https://github.com/hirotomoyamada/yamada-ui/commit/6fc8124f778d5a8863fa549630c90c4851de850e)]:
+  - @yamada-ui/use-controllable-state@0.4.0
+
 ## 0.6.6
 
 ### Patch Changes

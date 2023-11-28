@@ -1,5 +1,12 @@
 # @yamada-ui/accordion
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies [[`6fc8124f`](https://github.com/hirotomoyamada/yamada-ui/commit/6fc8124f778d5a8863fa549630c90c4851de850e)]:
+  - @yamada-ui/use-controllable-state@0.4.0
+
 ## 0.4.4
 
 ### Patch Changes

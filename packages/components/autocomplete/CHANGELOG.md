@@ -1,5 +1,17 @@
 # @yamada-ui/autocomplete
 
+## 0.7.0
+
+### Minor Changes
+
+- [#403](https://github.com/hirotomoyamada/yamada-ui/pull/403) [`50123e72`](https://github.com/hirotomoyamada/yamada-ui/commit/50123e7274a2c90b3f5f56c380123892883125c7) Thanks [@illionillion](https://github.com/illionillion)! - The issue where the `placeholder` isn't displaying has been resolved.
+
+### Patch Changes
+
+- Updated dependencies [[`6fc8124f`](https://github.com/hirotomoyamada/yamada-ui/commit/6fc8124f778d5a8863fa549630c90c4851de850e)]:
+  - @yamada-ui/use-controllable-state@0.4.0
+  - @yamada-ui/select@0.5.9
+
 ## 0.6.2
 
 ### Patch Changes

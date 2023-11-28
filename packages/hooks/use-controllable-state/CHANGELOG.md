@@ -1,5 +1,11 @@
 # @yamada-ui/use-controllable-state
 
+## 0.4.0
+
+### Minor Changes
+
+- [#409](https://github.com/hirotomoyamada/yamada-ui/pull/409) [`6fc8124f`](https://github.com/hirotomoyamada/yamada-ui/commit/6fc8124f778d5a8863fa549630c90c4851de850e) Thanks [@illionillion](https://github.com/illionillion)! - Fixed a bug that when a value was set in the `DatePicker` or `MonthPicker` and the Clear button was clicked, the value should be cleared, but it was not.
+
 ## 0.3.2
 
 ### Patch Changes

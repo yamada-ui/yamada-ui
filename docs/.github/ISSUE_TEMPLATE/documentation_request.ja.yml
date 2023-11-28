@@ -1,0 +1,33 @@
+name: "Feature Request (日本語)"
+description: "新しいドキュメントのリクエストや改善提案します"
+labels: ["enhancement"]
+body:
+  - type: "markdown"
+    attributes:
+      value: |
+        ドキュメントリクエストを作成していただきありがとうございます！ 😎
+
+        新しいドキュメントのトピックについてのアイデアがある、何かが適切にドキュメントされていないと気づいた、または現在のドキュメントに何か誤りがあると感じた場合は、ここが正解です！
+  - type: "input"
+    id: "subject"
+    attributes:
+      label: "主題"
+      description: "このリクエストの主題（コンポーネント、関数、トピック）は何ですか？"
+      placeholder: "DatePicker"
+    validations:
+      required: true
+  - type: "textarea"
+    id: "description"
+    attributes:
+      label: "説明"
+      description: "主題のドキュメントに何を追加、または変更するべきですか？"
+      placeholder: "`DatePicker`の使用例を追加してください。"
+    validations:
+      required: true
+  - type: dropdown
+    id: participate
+    attributes:
+      label: このドキュメントページの作成に参加し、プルリクエストを作成する志はありますか？
+      options:
+        - "はい"
+        - "いいえ"

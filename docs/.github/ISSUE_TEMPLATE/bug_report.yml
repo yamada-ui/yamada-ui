@@ -4,67 +4,30 @@ body:
   - type: "markdown"
     attributes:
       value: |
-        Thanks for creating an issue 😄!
+        Thank you for creating an issue 😎!
 
-        Please search open/closed issues before submitting. Someone
-        might have asked the same thing before 😉!
+        Please search open/closed issues before submitting. Someone might have asked the same thing before 😎!
 
-        We're all volunteers here, so help us help you by taking the time to
-        accurately fill out this template. ❤️
+          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
+
+        We're all volunteers here, so please help us help you by taking the time to accurately fill out this template. 💖
   - type: "textarea"
-    id: "description"
+    id: "quote"
     attributes:
-      label: "Description"
-      description: "A brief description of the issue."
-      placeholder: |
-        When I ____, I expected ____ to happen but ____ happened instead.
+      label: "Provide the exact quote of the error or issue"
+      description: "A brief description of the error or issue."
     validations:
       required: true
-  - type: "input"
-    id: "reproduction"
+  - type: input
     attributes:
-      label: "Link to Reproduction"
-      description: |
-        A link to a CodeSandbox reproduction which demonstrates the bug (see https://github.com/hirotomoyamada/yamada-ui#codesandbox for templates)
-      placeholder: "https://codesandbox.io/"
-  - type: "textarea"
-    id: "steps"
+      label: Does the docs page already exist? Please link to it.
+      description: "Example: https://yamada-ui.com/getting-started/installation"
+  - type: dropdown
+    id: participate
     attributes:
-      label: "Steps to reproduce"
-      description: |
-        Explain how to cause the issue in the provided reproduction.
-      value: |
-        1. Go to '...'
-        2. Click on '...'
-        3. Scroll down to '...'
-        4. See error
-  - type: "input"
-    id: "version"
-    attributes:
-      label: "Yamada UI Version"
-      description: "The version of Yamada UI you use."
-      placeholder: "0.1.0"
-    validations:
-      required: true
-  - type: "input"
-    id: "browser"
-    attributes:
-      label: "Browser"
-      description: "The browser(s) this issue occurred with."
-      placeholder: "Google Chrome 114"
-  - type: "checkboxes"
-    id: "operating-system"
-    attributes:
-      label: "Operating System"
-      description: "The operating system(s) this issue occurred with."
+      label: Are you willing to participate in fixing this issue and create a pull request with the fix?
       options:
-        - label: "macOS"
-        - label: "Windows"
-        - label: "Linux"
-  - type: "textarea"
-    id: "additional-information"
-    attributes:
-      label: "Additional Information"
-      description: |
-        Use this section to provide any additional information you might have
-        like screenshots, notes, or links to ideas.
+        - "Yes"
+        - "No"

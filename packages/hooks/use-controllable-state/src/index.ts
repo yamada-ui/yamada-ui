@@ -28,7 +28,7 @@ export const useControllableState = <T>({
 
       if (!onUpdate(resolvedValue, nextValue)) return
 
-      if (!controlled) setDefaultValue(nextValue)
+      if (!controlled || !nextValue) setDefaultValue(nextValue)
 
       onChange(nextValue)
     },

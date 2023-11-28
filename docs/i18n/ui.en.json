@@ -58,6 +58,12 @@
       "light": "Toggle Dark",
       "dark": "Toggle Light"
     },
+    "props-card": {
+      "required": "required",
+      "description": "Description",
+      "type": "Type",
+      "default": "Default"
+    },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"
     }

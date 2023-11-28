@@ -15,6 +15,7 @@ import { Link } from "./link"
 import { LinkedHeading } from "./linked-heading"
 import { Member, MemberContainer } from "./members"
 import { PackageManagers } from "./package-managers"
+import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { LinkCard, CardContainer } from "components/navigation"
 
@@ -86,6 +87,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   ColorPaletter: (props) => <ColorPaletter {...props} />,
   CardContainer: (props) => <CardContainer {...props} />,
   LinkCard: (props) => <LinkCard {...props} />,
+  PropsCard: (props) => <PropsCard {...props} />,
 }
 
 export const MDXComponents = {

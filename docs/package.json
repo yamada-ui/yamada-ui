@@ -10,6 +10,7 @@
     "build:profile": "next build --profile",
     "build:changelogs": "tsx scripts/changelog",
     "build:theme": "tsx scripts/theme-component",
+    "build:props": "tsx scripts/component-props",
     "build:search": "tsx scripts/search-content",
     "build:contents": "contentlayer build --clearCache",
     "start": "next start",

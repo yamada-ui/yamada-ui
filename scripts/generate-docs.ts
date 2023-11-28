@@ -1,5 +1,4 @@
-import { writeFileSync } from "fs"
-import { readFile } from "fs/promises"
+import { mkdir, readFile, writeFile } from "fs/promises"
 import path from "path"
 import type { ThemeComponents } from "@yamada-ui/react"
 import { defaultTheme } from "@yamada-ui/theme"
@@ -357,7 +356,12 @@ const main = async () => {
     parser: "json",
   })
 
-  writeFileSync("DOCS.json", data)
+  const rootPath = path.join(__dirname, "..")
+  const componentName = process.cwd().split("/").at(-1)
+
+  await mkdir(path.join(rootPath, ".docs"), { recursive: true })
+  await writeFile(path.join(rootPath, ".docs", `${componentName}.json`), data)
+  await writeFile("DOCS.json", data)
 }
 
 try {

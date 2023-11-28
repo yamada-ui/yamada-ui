@@ -2,8 +2,11 @@ import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
+import type { ChatCompletionMessageParam } from "openai/resources"
 import { CONSTANT } from "constant"
+import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
+import { wait } from "utils/assertion"
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -27,6 +30,10 @@ const LOCALE_TAB_MAP = {
 const LOCALE_TITLE_MAP = {
   en: "Props",
   ja: "Props",
+}
+const LOCALE_MAP = {
+  ja: "Japanese",
+  en: "English",
 }
 
 const getDocs = async () => {
@@ -94,6 +101,42 @@ const generateData = async (path: string, overrideData?: Data) => {
   return data
 }
 
+const translateDescription = async (
+  locale: Locale,
+  content: string,
+  retry: number = 1,
+) => {
+  try {
+    const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
+    const to = `to ${LOCALE_MAP[locale]}`
+
+    const messages: ChatCompletionMessageParam[] = [
+      {
+        role: "system",
+        content: [
+          `Please translate the text of the a JSDoc description that I will send you ${from} ${to}. Please note the following points:`,
+          `The text you send will be saved as a JSDoc description. Therefore, please output only the translated text.`,
+        ].join("\n"),
+      },
+      { role: "user", content },
+    ]
+
+    const { choices } = await openai.chat.completions.create({
+      model: "gpt-4-1106-preview",
+      messages,
+      temperature: 0,
+    })
+
+    return choices[0].message?.content
+  } catch (e) {
+    await wait(3000)
+
+    retry += 1
+
+    return await translateDescription(locale, content, retry)
+  }
+}
+
 const generateContent = async ({
   doc,
   locale,
@@ -103,11 +146,27 @@ const generateContent = async ({
 }) => {
   const content = [`## ${LOCALE_TITLE_MAP[locale]}`]
 
-  Object.entries(doc).forEach(([name, props]) => {
-    content.push(`\n### ${name} Props\n`)
+  if (locale !== "en") {
+    await Promise.all(
+      Object.entries(doc).map(async ([title, props]) => {
+        await Promise.all(
+          Object.entries(props).map(async ([name, { description }]) => {
+            if (!description) return
 
-    Object.entries(props).forEach(
-      ([name, { type, required, description, defaultValue }]) => {
+            description = await translateDescription(locale, description)
+
+            doc[title][name]["description"] = description
+          }),
+        )
+      }),
+    )
+  }
+
+  Object.entries(doc).map(([title, props]) => {
+    content.push(`\n### ${title} Props\n`)
+
+    Object.entries(props).map(
+      async ([name, { type, required, description, defaultValue }]) => {
         if (typeof type === "string") {
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }

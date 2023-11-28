@@ -24,10 +24,12 @@ const getPaths = async (
 
     const paths = await Promise.all(
       dirents.flatMap(async (dirent) => {
+        const resolvedPath = `${path}/${dirent.name}`
+
         if (dirent.isDirectory()) {
-          return await getPaths(`${path}/${dirent.name}`, lang)
+          return await getPaths(resolvedPath, lang)
         } else {
-          return `${path}/${dirent.name}`
+          return resolvedPath
         }
       }),
     )

@@ -14,12 +14,14 @@ import { useColorMode } from "@yamada-ui/react"
 ## Usage
 
 ```tsx functional=true
-const { colorMode, internalColorMode, changeColorMode, toggleColorMode } = useColorMode()
+const { colorMode, internalColorMode, changeColorMode, toggleColorMode } =
+  useColorMode()
 
 return (
   <>
     <Text>
-      The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+      The current colorMode is "{colorMode}", internal colorMode is "
+      {internalColorMode}"
     </Text>
 
     <Wrap mt="md" gap="md">

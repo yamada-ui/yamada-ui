@@ -132,7 +132,11 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 ```tsx
 <VStack>
   <MultiSelect focusBorderColor="green.500" placeholder="custom border color" />
-  <MultiSelect isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <MultiSelect
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -154,7 +158,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ```tsx
 <VStack>
-  <MultiSelect placeholder="キャラクターを選択" component={({ label }) => <Tag>{label}</Tag>}>
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    component={({ label }) => <Tag>{label}</Tag>}
+  >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
@@ -279,7 +286,11 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
     <Option value="フリーザ">フリーザ</Option>
   </MultiSelect>
 
-  <MultiSelect placeholder="キャラクターを選択" offset={[16, 16]} listProps={{ maxW: "xs" }}>
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    offset={[16, 16]}
+    listProps={{ maxW: "xs" }}
+  >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
@@ -298,7 +309,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
   <MultiSelect isDisabled variant="flushed" placeholder="flushed" />
   <MultiSelect isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <MultiSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -327,7 +341,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
   <MultiSelect isReadOnly variant="flushed" placeholder="flushed" />
   <MultiSelect isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <MultiSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -360,7 +377,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ```tsx
 <VStack>
-  <MultiSelect placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    iconProps={{ color: "primary" }}
+  >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
@@ -392,7 +412,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ```tsx
 <VStack>
-  <MultiSelect placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    optionProps={{ color: "primary" }}
+  >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
@@ -415,7 +438,11 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 const [value, onChange] = useState<string[]>(["孫悟空"])
 
 return (
-  <MultiSelect placeholder="キャラクターを選択" value={value} onChange={onChange}>
+  <MultiSelect
+    placeholder="キャラクターを選択"
+    value={value}
+    onChange={onChange}
+  >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
@@ -474,7 +501,11 @@ return (
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
         render={({ field }) => (
-          <MultiSelect placeholder="キャラクターを選択" {...field} items={items} />
+          <MultiSelect
+            placeholder="キャラクターを選択"
+            {...field}
+            items={items}
+          />
         )}
       />
     </FormControl>

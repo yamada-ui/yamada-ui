@@ -69,11 +69,17 @@ To disable the checkbox, set `isDisabled` to `true`.
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <Checkbox defaultIsChecked>All Notifications</Checkbox>
   </FormControl>
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <CheckboxGroup defaultValue={["all"]}>
       <Checkbox value="all">All Notifications</Checkbox>
       <Checkbox value="important">Important Notifications</Checkbox>
@@ -102,11 +108,17 @@ To make the checkbox read-only, set `isReadOnly` to `true`.
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <Checkbox defaultIsChecked>All Notifications</Checkbox>
   </FormControl>
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <CheckboxGroup defaultValue={["all"]}>
       <Checkbox value="all">All Notifications</Checkbox>
       <Checkbox value="important">Important Notifications</Checkbox>
@@ -178,11 +190,17 @@ return (
     </Checkbox>
 
     <VStack pl="md" gap="sm">
-      <Checkbox isChecked={values[0]} onChange={(e) => setValues([e.target.checked, values[1]])}>
+      <Checkbox
+        isChecked={values[0]}
+        onChange={(e) => setValues([e.target.checked, values[1]])}
+      >
         孫悟空
       </Checkbox>
 
-      <Checkbox isChecked={values[1]} onChange={(e) => setValues([values[0], e.target.checked])}>
+      <Checkbox
+        isChecked={values[1]}
+        onChange={(e) => setValues([values[0], e.target.checked])}
+      >
         孫悟飯
       </Checkbox>
     </VStack>
@@ -237,7 +255,9 @@ return (
 You can create customized checkboxes using custom hooks like `useCheckbox` or `useCheckboxGroup`.
 
 ```tsx functional=true
-const CustomCheckbox: FC<ReturnType<UseCheckboxGroupReturn["getCheckboxProps"]>> = (props) => {
+const CustomCheckbox: FC<
+  ReturnType<UseCheckboxGroupReturn["getCheckboxProps"]>
+> = (props) => {
   const { getInputProps, getIconProps } = useCheckbox(props)
 
   return (
@@ -263,7 +283,9 @@ const CustomCheckbox: FC<ReturnType<UseCheckboxGroupReturn["getCheckboxProps"]>>
   )
 }
 
-const { getCheckboxProps } = useCheckboxGroup<string>({ defaultValue: ["孫悟空"] })
+const { getCheckboxProps } = useCheckboxGroup<string>({
+  defaultValue: ["孫悟空"],
+})
 
 return (
   <HStack gap="sm">
@@ -312,7 +334,9 @@ return (
     <FormControl
       isInvalid={!!errors.checkboxGroup}
       label="Who is your favorite character?"
-      errorMessage={errors.checkboxGroup ? errors.checkboxGroup.message : undefined}
+      errorMessage={
+        errors.checkboxGroup ? errors.checkboxGroup.message : undefined
+      }
     >
       <Controller
         name="checkboxGroup"

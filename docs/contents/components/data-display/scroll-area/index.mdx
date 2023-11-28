@@ -118,7 +118,12 @@ const Content: FC = () => {
 return (
   <VStack divider={<Divider />}>
     {typeMap.map((type) => (
-      <ScrollArea key={type} type={type} h="xs" innerProps={{ as: VStack, gap: "md" }}>
+      <ScrollArea
+        key={type}
+        type={type}
+        h="xs"
+        innerProps={{ as: VStack, gap: "md" }}
+      >
         <Content />
       </ScrollArea>
     ))}
@@ -131,7 +136,12 @@ return (
 To change the duration it takes for the scrollbar to disappear, set `scrollHideDelay` to a numerical value (milliseconds).
 
 ```tsx
-<ScrollArea type="scroll" scrollHideDelay={4000} h="xs" innerProps={{ as: VStack, gap: "md" }}>
+<ScrollArea
+  type="scroll"
+  scrollHideDelay={4000}
+  h="xs"
+  innerProps={{ as: VStack, gap: "md" }}
+>
   <Heading size="sm">孫悟空少年編</Heading>
 
   <Text>

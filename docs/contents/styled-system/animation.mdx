@@ -186,7 +186,13 @@ const tabletAnimation = useAnimation({
   timingFunction: "linear",
 })
 
-return <Box w="full" h="xs" animation={{ base: desktopAnimation, md: tabletAnimation }} />
+return (
+  <Box
+    w="full"
+    h="xs"
+    animation={{ base: desktopAnimation, md: tabletAnimation }}
+  />
+)
 ```
 
 :::note
@@ -294,7 +300,11 @@ const [animation, setAnimation] = useDynamicAnimation({
 return (
   <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
+      onClick={() =>
+        setAnimation((prev) =>
+          prev === "moveRight" ? "moveLeft" : "moveRight",
+        )
+      }
     >
       Click me!
     </Button>
@@ -375,7 +385,11 @@ const [animation, setAnimation] = useDynamicAnimation<
 return (
   <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
+      onClick={() =>
+        setAnimation((prev) =>
+          prev === "moveRight" ? "moveLeft" : "moveRight",
+        )
+      }
     >
       Click me!
     </Button>
@@ -598,7 +612,13 @@ const sides = useMemo(
 return (
   <Center h="md">
     <Box css={{ perspective: "800px" }} w="120px" h="120px">
-      <Box ref={containerRef} position="relative" w="120px" h="120px" transformStyle="preserve-3d">
+      <Box
+        ref={containerRef}
+        position="relative"
+        w="120px"
+        h="120px"
+        transformStyle="preserve-3d"
+      >
         {sides.map(({ transform, bg }) => (
           <Box
             key={bg.split(".")[0]}
@@ -669,9 +689,15 @@ The click/tap gesture detects whether the primary pointer (such as a left click 
   <Motion
     as="button"
     whileTap={{ scale: 1.1 }}
-    onTap={(ev, { point }) => console.log("Tap ends", "x:", point.x, "y:", point.y)}
-    onTapStart={(ev, { point }) => console.log("Tap starts", "x:", point.x, "y:", point.y)}
-    onTapCancel={(ev, { point }) => console.log("Tap cancels", "x:", point.x, "y:", point.y)}
+    onTap={(ev, { point }) =>
+      console.log("Tap ends", "x:", point.x, "y:", point.y)
+    }
+    onTapStart={(ev, { point }) =>
+      console.log("Tap starts", "x:", point.x, "y:", point.y)
+    }
+    onTapCancel={(ev, { point }) =>
+      console.log("Tap cancels", "x:", point.x, "y:", point.y)
+    }
     p="md"
     rounded="md"
     bg="primary"
@@ -692,7 +718,14 @@ The focus gesture detects whether an element has been focused, following the sam
 
 ```tsx
 <Center p="lg">
-  <Motion as="button" whileFocus={{ scale: 1.1 }} p="md" rounded="md" bg="primary" color="white">
+  <Motion
+    as="button"
+    whileFocus={{ scale: 1.1 }}
+    p="md"
+    rounded="md"
+    bg="primary"
+    color="white"
+  >
     Focus me!
   </Motion>
 </Center>
@@ -716,9 +749,15 @@ If you want to enable dragging on an element, set `drag` to `true` or pass `x` o
 <Center h="md" gap="md">
   <Motion
     drag
-    onDrag={(ev, { point }) => console.log("Drag", "x:", point.x, "y:", point.y)}
-    onDragStart={(ev, { point }) => console.log("Drag starts", "x:", point.x, "y:", point.y)}
-    onDragEnd={(ev, { point }) => console.log("Drag ends", "x:", point.x, "y:", point.y)}
+    onDrag={(ev, { point }) =>
+      console.log("Drag", "x:", point.x, "y:", point.y)
+    }
+    onDragStart={(ev, { point }) =>
+      console.log("Drag starts", "x:", point.x, "y:", point.y)
+    }
+    onDragEnd={(ev, { point }) =>
+      console.log("Drag ends", "x:", point.x, "y:", point.y)
+    }
     p="md"
     cursor="grab"
     _active={{ cursor: "grabbing" }}
@@ -926,7 +965,14 @@ const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 return (
   <Box ref={containerRef} position="relative" h="md" overflowY="auto">
     <Box h="9xl">
-      <Box w="2xs" h="2xs" position="sticky" top="50%" left="50%" transform="translate(-50%, -50%)">
+      <Box
+        w="2xs"
+        h="2xs"
+        position="sticky"
+        top="50%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+      >
         <Motion
           style={{ scale }}
           w="full"

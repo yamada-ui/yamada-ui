@@ -10,7 +10,11 @@ tab: 使い方
 ## インポート
 
 ```ts
-import { MultiAutocomplete, AutocompleteOptionGroup, AutocompleteOption } from "@yamada-ui/react"
+import {
+  MultiAutocomplete,
+  AutocompleteOptionGroup,
+  AutocompleteOption,
+} from "@yamada-ui/react"
 ```
 
 ## 使い方
@@ -78,7 +82,10 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 項目がない場合に表示するメッセージを設定するには、`emptyMessage`プロパティを使用します。
 
 ```tsx
-<MultiAutocomplete placeholder="キャラクターを選択" emptyMessage="キャラクターが存在しません">
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  emptyMessage="キャラクターが存在しません"
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -187,7 +194,9 @@ const items: AutocompleteItem[] = [
   },
 ]
 
-return <MultiAutocomplete placeholder="キャラクターを選択" items={items} allowFree />
+return (
+  <MultiAutocomplete placeholder="キャラクターを選択" items={items} allowFree />
+)
 ```
 
 ### ボーダーのカラーを変更する
@@ -196,13 +205,20 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 
 ```tsx
 <VStack>
-  <MultiAutocomplete focusBorderColor="green.500" placeholder="custom border color">
+  <MultiAutocomplete
+    focusBorderColor="green.500"
+    placeholder="custom border color"
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
   </MultiAutocomplete>
 
-  <MultiAutocomplete isInvalid errorBorderColor="orange.500" placeholder="custom border color">
+  <MultiAutocomplete
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -240,7 +256,10 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 
 ```tsx
 <VStack>
-  <MultiAutocomplete placeholder="キャラクターを選択" component={({ label }) => <Tag>{label}</Tag>}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    component={({ label }) => <Tag>{label}</Tag>}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -332,7 +351,11 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
 
 ```tsx
-<MultiAutocomplete placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  placement="right-start"
+  maxW="xs"
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -372,7 +395,10 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
   <MultiAutocomplete isDisabled variant="flushed" placeholder="flushed" />
   <MultiAutocomplete isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <MultiAutocomplete placeholder="Autocomplete notifications" />
   </FormControl>
 </>
@@ -401,7 +427,10 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
   <MultiAutocomplete isReadOnly variant="flushed" placeholder="flushed" />
   <MultiAutocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <MultiAutocomplete placeholder="Autocomplete notifications" />
   </FormControl>
 </>
@@ -434,7 +463,10 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 
 ```tsx
 <VStack>
-  <MultiAutocomplete placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    iconProps={{ color: "primary" }}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -466,7 +498,10 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 
 ```tsx
 <VStack>
-  <MultiAutocomplete placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    optionProps={{ color: "primary" }}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -489,7 +524,11 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 const [value, onChange] = useState<string[]>(["孫悟空"])
 
 return (
-  <MultiAutocomplete placeholder="キャラクターを選択" value={value} onChange={onChange}>
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    value={value}
+    onChange={onChange}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -516,7 +555,9 @@ return (
     <FormControl
       isInvalid={!!errors.autocomplete}
       label="Who is your favorite character?"
-      errorMessage={errors.autocomplete ? errors.autocomplete.message : undefined}
+      errorMessage={
+        errors.autocomplete ? errors.autocomplete.message : undefined
+      }
     >
       <Controller
         name="autocomplete"

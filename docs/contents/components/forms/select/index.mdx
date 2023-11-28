@@ -144,7 +144,11 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 ```tsx
 <VStack>
   <Select focusBorderColor="green.500" placeholder="custom border color" />
-  <Select isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <Select
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -210,7 +214,11 @@ Depending on the size of the element or the situation, you may want to adjust th
     <Option value="フリーザ">フリーザ</Option>
   </Select>
 
-  <Select placeholder="キャラクターを選択" offset={[16, 16]} listProps={{ maxW: "xs" }}>
+  <Select
+    placeholder="キャラクターを選択"
+    offset={[16, 16]}
+    listProps={{ maxW: "xs" }}
+  >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
     <Option value="フリーザ">フリーザ</Option>
@@ -229,7 +237,10 @@ To disable, set `isDisabled` to `true`.
   <Select isDisabled variant="flushed" placeholder="flushed" />
   <Select isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <Select placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -258,7 +269,10 @@ To make it read-only, set `isReadOnly` to `true`.
   <Select isReadOnly variant="flushed" placeholder="flushed" />
   <Select isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <Select placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -395,7 +409,9 @@ return (
         name="select3"
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
-        render={({ field }) => <Select placeholder="キャラクターを選択" {...field} items={items} />}
+        render={({ field }) => (
+          <Select placeholder="キャラクターを選択" {...field} items={items} />
+        )}
       />
     </FormControl>
 

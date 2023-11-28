@@ -79,9 +79,15 @@ const { screen, page, background } = useLoading()
 
 return (
   <Wrap gap="md">
-    <Button onClick={() => screen.start({ duration: 5000 })}>Start screen loading</Button>
-    <Button onClick={() => page.start({ duration: 5000 })}>Start page loading</Button>
-    <Button onClick={() => background.start({ duration: 5000 })}>Start background loading</Button>
+    <Button onClick={() => screen.start({ duration: 5000 })}>
+      Start screen loading
+    </Button>
+    <Button onClick={() => page.start({ duration: 5000 })}>
+      Start page loading
+    </Button>
+    <Button onClick={() => background.start({ duration: 5000 })}>
+      Start background loading
+    </Button>
   </Wrap>
 )
 ```
@@ -95,13 +101,17 @@ const { screen, page, background } = useLoading()
 
 return (
   <Wrap gap="md">
-    <Button onClick={() => screen.start({ message: "Loading", duration: 5000 })}>
+    <Button
+      onClick={() => screen.start({ message: "Loading", duration: 5000 })}
+    >
       Start screen loading
     </Button>
     <Button onClick={() => page.start({ message: "Loading", duration: 5000 })}>
       Start page loading
     </Button>
-    <Button onClick={() => background.start({ message: "Loading", duration: 5000 })}>
+    <Button
+      onClick={() => background.start({ message: "Loading", duration: 5000 })}
+    >
       Start background loading
     </Button>
   </Wrap>
@@ -117,19 +127,30 @@ return (
   <Wrap gap="md">
     <Button
       onClick={() =>
-        screen.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })
+        screen.start({
+          message: <Text color="primary">Loading</Text>,
+          duration: 5000,
+        })
       }
     >
       Start screen loading
     </Button>
     <Button
-      onClick={() => page.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })}
+      onClick={() =>
+        page.start({
+          message: <Text color="primary">Loading</Text>,
+          duration: 5000,
+        })
+      }
     >
       Start page loading
     </Button>
     <Button
       onClick={() =>
-        background.start({ message: <Text color="primary">Loading</Text>, duration: 5000 })
+        background.start({
+          message: <Text color="primary">Loading</Text>,
+          duration: 5000,
+        })
       }
     >
       Start background loading

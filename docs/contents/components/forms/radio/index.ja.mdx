@@ -69,11 +69,17 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <Radio defaultIsChecked>All Notifications</Radio>
   </FormControl>
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <RadioGroup defaultValue="all">
       <Radio value="all">All Notifications</Radio>
       <Radio value="important">Important Notifications</Radio>
@@ -102,11 +108,17 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <Radio defaultIsChecked>All Notifications</Radio>
   </FormControl>
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <RadioGroup defaultValue="all">
       <Radio value="all">All Notifications</Radio>
       <Radio value="important">Important Notifications</Radio>
@@ -206,7 +218,9 @@ return (
 `useRadio`や`useRadioGroup`などのカスタムフックを使用して、カスタマイズしたチェックボックスを作成できます。
 
 ```tsx functional=true
-const CustomRadio: FC<ReturnType<UseRadioGroupReturn["getRadioProps"]>> = (props) => {
+const CustomRadio: FC<ReturnType<UseRadioGroupReturn["getRadioProps"]>> = (
+  props,
+) => {
   const { getInputProps, getIconProps } = useRadio(props)
 
   return (

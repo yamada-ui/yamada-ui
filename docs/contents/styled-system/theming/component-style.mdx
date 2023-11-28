@@ -349,7 +349,9 @@ import { ui, HTMLUIProps, ThemeProps } from "@yamada-ui/react"
 
 type BannerOptions = {}
 
-export type BannerProps = HTMLUIProps<"button"> & ThemeProps<"Banner"> & BannerOptions
+export type BannerProps = HTMLUIProps<"button"> &
+  ThemeProps<"Banner"> &
+  BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
   return <ui.button {...props} />
@@ -394,11 +396,19 @@ Finally, call `useComponentStyle` within the component to load the style.
 
 ```tsx live=false highlight={2,9,10,12}
 import { FC } from "react"
-import { ui, HTMLUIProps, ThemeProps, useComponentStyle, omitThemeProps } from "@yamada-ui/react"
+import {
+  ui,
+  HTMLUIProps,
+  ThemeProps,
+  useComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/react"
 
 type BannerOptions = {}
 
-export type BannerProps = HTMLUIProps<"button"> & ThemeProps<"Banner"> & BannerOptions
+export type BannerProps = HTMLUIProps<"button"> &
+  ThemeProps<"Banner"> &
+  BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
   const [styles, mergedProps] = useComponentStyle("Banner", props)
@@ -422,7 +432,9 @@ import {
 
 type BannerOptions = {}
 
-export type BannerProps = HTMLUIProps<"button"> & ThemeProps<"Banner"> & BannerOptions
+export type BannerProps = HTMLUIProps<"button"> &
+  ThemeProps<"Banner"> &
+  BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
   const [styles, mergedProps] = useMultiComponentStyle("Banner", props)

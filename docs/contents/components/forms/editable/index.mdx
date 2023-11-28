@@ -10,7 +10,12 @@ tab: Usage
 ## Import
 
 ```ts
-import { Editable, EditableInput, EditablePreview, EditableTextarea } from "@yamada-ui/react"
+import {
+  Editable,
+  EditableInput,
+  EditablePreview,
+  EditableTextarea,
+} from "@yamada-ui/react"
 ```
 
 - `Editable`: A wrapper component that controls child elements (`EditableInput`, `EditableTextarea`, `EditablePreview`).
@@ -84,12 +89,19 @@ To make read-only, set `isReadOnly` to `true`.
 
 ```tsx functional=true
 const CustomControls = () => {
-  const { isEditing, getSubmitProps, getCancelProps, getEditProps } = useEditableControl()
+  const { isEditing, getSubmitProps, getCancelProps, getEditProps } =
+    useEditableControl()
 
   return isEditing ? (
     <ButtonGroup size="sm" gap="sm">
-      <IconButton icon={<FontAwesomeIcon icon={faCheck} />} {...getSubmitProps()} />
-      <IconButton icon={<FontAwesomeIcon icon={faClose} />} {...getCancelProps()} />
+      <IconButton
+        icon={<FontAwesomeIcon icon={faCheck} />}
+        {...getSubmitProps()}
+      />
+      <IconButton
+        icon={<FontAwesomeIcon icon={faClose} />}
+        {...getCancelProps()}
+      />
     </ButtonGroup>
   ) : (
     <ButtonGroup size="sm" gap="sm">
@@ -99,7 +111,12 @@ const CustomControls = () => {
 }
 
 return (
-  <Editable display="flex" gap="sm" isPreviewFocusable={false} defaultValue="オッス！オラ悟空！">
+  <Editable
+    display="flex"
+    gap="sm"
+    isPreviewFocusable={false}
+    defaultValue="オッス！オラ悟空！"
+  >
     <EditablePreview w="full" />
     <EditableInput />
     <CustomControls />

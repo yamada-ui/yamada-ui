@@ -10,7 +10,11 @@ tab: 使い方
 ## インポート
 
 ```ts
-import { Autocomplete, AutocompleteOptionGroup, AutocompleteOption } from "@yamada-ui/react"
+import {
+  Autocomplete,
+  AutocompleteOptionGroup,
+  AutocompleteOption,
+} from "@yamada-ui/react"
 ```
 
 ## 使い方
@@ -130,7 +134,10 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} />
 候補が存在しない場合のメッセージを変更する場合は、`emptyMessage`に文字列を設定します。
 
 ```tsx
-<Autocomplete placeholder="キャラクターを選択" emptyMessage="キャラクターが存在しません">
+<Autocomplete
+  placeholder="キャラクターを選択"
+  emptyMessage="キャラクターが存在しません"
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -170,7 +177,9 @@ return (
     placeholder="キャラクターを選択"
     items={items}
     allowCreate
-    onCreate={(newItem, newItems) => console.log("created item", newItem, "new items", newItems)}
+    onCreate={(newItem, newItems) =>
+      console.log("created item", newItem, "new items", newItems)
+    }
   />
 )
 ```
@@ -280,7 +289,11 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
   </Autocomplete>
 
-  <Autocomplete isInvalid errorBorderColor="orange.500" placeholder="custom border color">
+  <Autocomplete
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -317,7 +330,11 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
 
 ```tsx
-<Autocomplete placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+<Autocomplete
+  placeholder="キャラクターを選択"
+  placement="right-start"
+  maxW="xs"
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -357,7 +374,10 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
   <Autocomplete isDisabled variant="flushed" placeholder="flushed" />
   <Autocomplete isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isDisabled label="Which notifications would you like to receive?">
+  <FormControl
+    isDisabled
+    label="Which notifications would you like to receive?"
+  >
     <Autocomplete placeholder="Autocomplete notifications" />
   </FormControl>
 </VStack>
@@ -386,7 +406,10 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
   <Autocomplete isReadOnly variant="flushed" placeholder="flushed" />
   <Autocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isReadOnly label="Which notifications would you like to receive?">
+  <FormControl
+    isReadOnly
+    label="Which notifications would you like to receive?"
+  >
     <Autocomplete placeholder="Autocomplete notifications" />
   </FormControl>
 </VStack>
@@ -419,7 +442,10 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 
 ```tsx
 <VStack>
-  <Autocomplete placeholder="キャラクターを選択" iconProps={{ color: "primary" }}>
+  <Autocomplete
+    placeholder="キャラクターを選択"
+    iconProps={{ color: "primary" }}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -442,7 +468,10 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 
 ```tsx
 <VStack>
-  <Autocomplete placeholder="キャラクターを選択" optionProps={{ color: "primary" }}>
+  <Autocomplete
+    placeholder="キャラクターを選択"
+    optionProps={{ color: "primary" }}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -465,7 +494,11 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 const [value, onChange] = useState<string>("孫悟空")
 
 return (
-  <Autocomplete placeholder="キャラクターを選択" value={value} onChange={onChange}>
+  <Autocomplete
+    placeholder="キャラクターを選択"
+    value={value}
+    onChange={onChange}
+  >
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -519,14 +552,20 @@ return (
     <FormControl
       isInvalid={!!errors.autocomplete}
       label="Who is your favorite character?"
-      errorMessage={errors.autocomplete ? errors.autocomplete.message : undefined}
+      errorMessage={
+        errors.autocomplete ? errors.autocomplete.message : undefined
+      }
     >
       <Controller
         name="autocomplete"
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
         render={({ field }) => (
-          <Autocomplete placeholder="キャラクターを選択" {...field} items={items} />
+          <Autocomplete
+            placeholder="キャラクターを選択"
+            {...field}
+            items={items}
+          />
         )}
       />
     </FormControl>

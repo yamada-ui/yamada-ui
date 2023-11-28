@@ -10,7 +10,13 @@ tab: Usage
 ## Import
 
 ```ts
-import { Slider, SliderTrack, SliderFilledTrack, SliderThumb, SliderMark } from "@yamada-ui/react"
+import {
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+} from "@yamada-ui/react"
 ```
 
 - `Slider`: A wrapper component that controls child elements (`SliderTrack`, `SliderThumb`).
@@ -247,7 +253,13 @@ const [value, onChange] = useState<number>(50)
 const [isOpen, { on, off }] = useBoolean(false)
 
 return (
-  <Slider value={value} onChange={onChange} my="10" onMouseEnter={on} onMouseLeave={off}>
+  <Slider
+    value={value}
+    onChange={onChange}
+    my="10"
+    onMouseEnter={on}
+    onMouseLeave={off}
+  >
     <SliderMark value={25} w="10" ml="-5">
       25%
     </SliderMark>
@@ -269,7 +281,11 @@ return (
 
 ```tsx
 <VStack>
-  <Slider trackColor="orange.200" filledTrackColor="orange.500" thumbColor="orange.700" />
+  <Slider
+    trackColor="orange.200"
+    filledTrackColor="orange.500"
+    thumbColor="orange.700"
+  />
 
   <Slider
     trackProps={{ bg: "green.200" }}

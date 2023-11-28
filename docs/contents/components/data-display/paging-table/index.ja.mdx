@@ -212,8 +212,18 @@ const data = useMemo<Data[]>(() => {
 
 return (
   <VStack>
-    <PagingTable variant="striped" colorScheme="secondary" columns={columns} data={data} />
-    <PagingTable variant="striped" colorScheme="green" columns={columns} data={data} />
+    <PagingTable
+      variant="striped"
+      colorScheme="secondary"
+      columns={columns}
+      data={data}
+    />
+    <PagingTable
+      variant="striped"
+      colorScheme="green"
+      columns={columns}
+      data={data}
+    />
   </VStack>
 )
 ```

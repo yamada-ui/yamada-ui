@@ -52,7 +52,9 @@ export const Tabs: ComponentMultiStyle = {
       return {
         tabList: {
           borderColor: "inherit",
-          ...(isVertical ? { borderEndWidth: "1px" } : { borderBottomWidth: "1px" }),
+          ...(isVertical
+            ? { borderEndWidth: "1px" }
+            : { borderBottomWidth: "1px" }),
         },
         tab: {
           borderColor: "transparent",
@@ -80,7 +82,9 @@ export const Tabs: ComponentMultiStyle = {
       return {
         tabList: {
           borderColor: "inherit",
-          ...(isVertical ? { borderEndWidth: "1px" } : { borderBottomWidth: "1px" }),
+          ...(isVertical
+            ? { borderEndWidth: "1px" }
+            : { borderBottomWidth: "1px" }),
         },
         tab: {
           borderColor: "transparent",
@@ -107,13 +111,20 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    "sticky-subtle": ({ theme: t, colorMode: m, colorScheme: c = "primary", orientation }) => {
+    "sticky-subtle": ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = "primary",
+      orientation,
+    }) => {
       const isVertical = orientation === "vertical"
 
       return {
         tabList: {
           borderColor: "inherit",
-          ...(isVertical ? { borderEndWidth: "1px" } : { borderBottomWidth: "1px" }),
+          ...(isVertical
+            ? { borderEndWidth: "1px" }
+            : { borderBottomWidth: "1px" }),
         },
         tab: {
           borderColor: "inherit",
@@ -138,13 +149,20 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    "sticky-solid": ({ theme: t, colorMode: m, colorScheme: c = "primary", orientation }) => {
+    "sticky-solid": ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = "primary",
+      orientation,
+    }) => {
       const isVertical = orientation === "vertical"
 
       return {
         tabList: {
           borderColor: "inherit",
-          ...(isVertical ? { borderEndWidth: "1px" } : { borderBottomWidth: "1px" }),
+          ...(isVertical
+            ? { borderEndWidth: "1px" }
+            : { borderBottomWidth: "1px" }),
         },
         tab: {
           borderColor: "inherit",
@@ -170,7 +188,10 @@ export const Tabs: ComponentMultiStyle = {
       }
     },
     rounded: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => {
-      const color = mode(getColor(`${c}.500`)(t, m), transparentizeColor(`${c}.200`, 0.8)(t, m))(m)
+      const color = mode(
+        getColor(`${c}.500`)(t, m),
+        transparentizeColor(`${c}.200`, 0.8)(t, m),
+      )(m)
 
       return {
         tabList: { gap: "sm" },
@@ -184,7 +205,11 @@ export const Tabs: ComponentMultiStyle = {
         },
       }
     },
-    "rounded-subtle": ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    "rounded-subtle": ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = "primary",
+    }) => ({
       tabList: { gap: "sm" },
       tab: {
         borderRadius: "full",
@@ -196,7 +221,11 @@ export const Tabs: ComponentMultiStyle = {
         },
       },
     }),
-    "rounded-solid": ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    "rounded-solid": ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = "primary",
+    }) => ({
       tabList: { gap: "sm" },
       tab: {
         borderRadius: "full",

@@ -48,7 +48,11 @@ import { NumberInput } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <NumberInput focusBorderColor="green.500" placeholder="custom border color" />
-  <NumberInput isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <NumberInput
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -58,7 +62,10 @@ import { NumberInput } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <NumberInput placeholder="custom placeholder" _placeholder={{ opacity: 1, color: "gray.500" }} />
+  <NumberInput
+    placeholder="custom placeholder"
+    _placeholder={{ opacity: 1, color: "gray.500" }}
+  />
   <NumberInput
     color="green.500"
     placeholder="custom placeholder"
@@ -112,7 +119,12 @@ import { NumberInput } from "@yamada-ui/react"
 シナリオによっては、範囲外の値をブロックしたくない場合があります。その場合は、`keepWithinRange`を`false`に設定します。
 
 ```tsx
-<NumberInput defaultValue={15} max={30} keepWithinRange={false} clampValueOnBlur={false} />
+<NumberInput
+  defaultValue={15}
+  max={30}
+  keepWithinRange={false}
+  clampValueOnBlur={false}
+/>
 ```
 
 ### 無効化する
@@ -168,7 +180,11 @@ import { NumberInput } from "@yamada-ui/react"
   <NumberInput isInvalid variant="flushed" placeholder="flushed" />
   <NumberInput isInvalid variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isInvalid label="Order quantity" errorMessage="Order quantity is required.">
+  <FormControl
+    isInvalid
+    label="Order quantity"
+    errorMessage="Order quantity is required."
+  >
     <NumberInput />
   </FormControl>
 </VStack>

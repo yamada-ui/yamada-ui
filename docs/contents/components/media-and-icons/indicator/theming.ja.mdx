@@ -24,7 +24,9 @@ export const Indicator: ComponentStyle = {
     alignItems: "center",
     outline: 0,
     whiteSpace: "nowrap",
-    ...(withBorder ? { borderWidth: "0.2em", borderColor: ["white", "black"] } : {}),
+    ...(withBorder
+      ? { borderWidth: "0.2em", borderColor: ["white", "black"] }
+      : {}),
   }),
 
   sizes: {

@@ -20,7 +20,9 @@ Execute one of the following commands in your terminal.
 
 Yamada UI allows you to use most components and hooks by simply installing `@yamada-ui/react` and `@yamada-ui/nextjs`.
 
-<PackageManagers packageNameOrCommand={["@yamada-ui/react", "@yamada-ui/nextjs"]} />
+<PackageManagers
+  packageNameOrCommand={["@yamada-ui/react", "@yamada-ui/nextjs"]}
+/>
 
 If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
@@ -81,14 +83,20 @@ import { CacheProvider } from "@yamada-ui/nextjs"
 
 const { cookieStorageManager } = colorModeManager
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <body>
         <ColorModeScript type="cookie" nonce="testing" />
 
         <CacheProvider>
-          <UIProvider colorModeManager={cookieStorageManager}>{children}</UIProvider>
+          <UIProvider colorModeManager={cookieStorageManager}>
+            {children}
+          </UIProvider>
         </CacheProvider>
       </body>
     </html>

@@ -104,7 +104,10 @@ export const NativeTable: ComponentMultiStyle = {
                 transitionDuration: "slow",
                 _hover: {
                   bg: isGray(c)
-                    ? [transparentizeColor(`${c}.200`, 0.8)(t, m), `whiteAlpha.200`]
+                    ? [
+                        transparentizeColor(`${c}.200`, 0.8)(t, m),
+                        `whiteAlpha.200`,
+                      ]
                     : [
                         transparentizeColor(`${c}.300`, 0.24)(t, m),
                         transparentizeColor(`${c}.200`, 0.16)(t, m),
@@ -170,7 +173,10 @@ export const NativeTable: ComponentMultiStyle = {
                 transitionDuration: "slow",
                 _hover: {
                   bg: isGray(c)
-                    ? [transparentizeColor(`${c}.200`, 0.8)(t, m), `whiteAlpha.200`]
+                    ? [
+                        transparentizeColor(`${c}.200`, 0.8)(t, m),
+                        `whiteAlpha.200`,
+                      ]
                     : [
                         transparentizeColor(`${c}.300`, 0.24)(t, m),
                         transparentizeColor(`${c}.200`, 0.16)(t, m),

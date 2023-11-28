@@ -187,7 +187,13 @@ const tabletAnimation = useAnimation({
   timingFunction: "linear",
 })
 
-return <Box w="full" h="xs" animation={{ base: desktopAnimation, md: tabletAnimation }} />
+return (
+  <Box
+    w="full"
+    h="xs"
+    animation={{ base: desktopAnimation, md: tabletAnimation }}
+  />
+)
 ```
 
 ### Color Mode

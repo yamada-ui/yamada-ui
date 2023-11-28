@@ -23,10 +23,26 @@ import { IconButton } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <IconButton colorScheme="primary" variant="primary" icon={<FontAwesomeIcon icon={faPlus} />} />
-  <IconButton colorScheme="secondary" variant="outline" icon={<FontAwesomeIcon icon={faMinus} />} />
-  <IconButton colorScheme="warning" variant="ghost" icon={<FontAwesomeIcon icon={faSun} />} />
-  <IconButton colorScheme="danger" variant="link" icon={<FontAwesomeIcon icon={faMoon} />} />
+  <IconButton
+    colorScheme="primary"
+    variant="primary"
+    icon={<FontAwesomeIcon icon={faPlus} />}
+  />
+  <IconButton
+    colorScheme="secondary"
+    variant="outline"
+    icon={<FontAwesomeIcon icon={faMinus} />}
+  />
+  <IconButton
+    colorScheme="warning"
+    variant="ghost"
+    icon={<FontAwesomeIcon icon={faSun} />}
+  />
+  <IconButton
+    colorScheme="danger"
+    variant="link"
+    icon={<FontAwesomeIcon icon={faMoon} />}
+  />
   <IconButton variant="unstyled" icon={<FontAwesomeIcon icon={faCheck} />} />
 </Wrap>
 ```
@@ -35,10 +51,26 @@ import { IconButton } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <IconButton colorScheme="primary" size="xs" icon={<FontAwesomeIcon icon={faPlus} />} />
-  <IconButton colorScheme="secondary" size="sm" icon={<FontAwesomeIcon icon={faMinus} />} />
-  <IconButton colorScheme="warning" size="md" icon={<FontAwesomeIcon icon={faSun} />} />
-  <IconButton colorScheme="danger" size="lg" icon={<FontAwesomeIcon icon={faMoon} />} />
+  <IconButton
+    colorScheme="primary"
+    size="xs"
+    icon={<FontAwesomeIcon icon={faPlus} />}
+  />
+  <IconButton
+    colorScheme="secondary"
+    size="sm"
+    icon={<FontAwesomeIcon icon={faMinus} />}
+  />
+  <IconButton
+    colorScheme="warning"
+    size="md"
+    icon={<FontAwesomeIcon icon={faSun} />}
+  />
+  <IconButton
+    colorScheme="danger"
+    size="lg"
+    icon={<FontAwesomeIcon icon={faMoon} />}
+  />
 </Wrap>
 ```
 
@@ -72,6 +104,10 @@ To disable, set `isDisabled` to `true`.
     variant="link"
     icon={<FontAwesomeIcon icon={faMoon} />}
   />
-  <IconButton isDisabled variant="unstyled" icon={<FontAwesomeIcon icon={faCheck} />} />
+  <IconButton
+    isDisabled
+    variant="unstyled"
+    icon={<FontAwesomeIcon icon={faCheck} />}
+  />
 </Wrap>
 ```

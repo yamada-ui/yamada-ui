@@ -142,7 +142,12 @@ Depending on the size of the element or the situation, you may want to adjust th
 If you want to delay the display or hiding, set `openDelay` or `closeDelay` to a number (milliseconds).
 
 ```tsx
-<Tooltip label="へっ！きたねぇ花火だ" placement="top" openDelay={500} closeDelay={500}>
+<Tooltip
+  label="へっ！きたねぇ花火だ"
+  placement="top"
+  openDelay={500}
+  closeDelay={500}
+>
   <Text w="fit-content">Delay Open and Close 500ms</Text>
 </Tooltip>
 ```

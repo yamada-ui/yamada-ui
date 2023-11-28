@@ -6,7 +6,11 @@ import * as TableComponents from "@yamada-ui/table"
 import type { MDXComponents as MDXComponentsType } from "mdx/types"
 import { CodeBlock } from "./code-block"
 import { ColorModeButton } from "./color-mode-button"
-import { ColorPaletters, ColorPaletter, ColorPaletterContainer } from "./color-palettes"
+import {
+  ColorPaletters,
+  ColorPaletter,
+  ColorPaletterContainer,
+} from "./color-palettes"
 import { Link } from "./link"
 import { LinkedHeading } from "./linked-heading"
 import { Member, MemberContainer } from "./members"

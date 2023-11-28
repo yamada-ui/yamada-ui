@@ -20,7 +20,9 @@ tab: App Router
 
 Yamada UIは、`@yamada-ui/react`と`@yamada-ui/nextjs`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
 
-<PackageManagers packageNameOrCommand={["@yamada-ui/react", "@yamada-ui/nextjs"]} />
+<PackageManagers
+  packageNameOrCommand={["@yamada-ui/react", "@yamada-ui/nextjs"]}
+/>
 
 テーブル・カレンダー・カルーセルなど使用する場合は、別途インストールをする必要があります。
 
@@ -81,14 +83,20 @@ import { CacheProvider } from "@yamada-ui/nextjs"
 
 const { cookieStorageManager } = colorModeManager
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <body>
         <ColorModeScript type="cookie" nonce="testing" />
 
         <CacheProvider>
-          <UIProvider colorModeManager={cookieStorageManager}>{children}</UIProvider>
+          <UIProvider colorModeManager={cookieStorageManager}>
+            {children}
+          </UIProvider>
         </CacheProvider>
       </body>
     </html>

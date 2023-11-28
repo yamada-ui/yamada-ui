@@ -74,7 +74,11 @@ An `assertion` is a feature that allows you to pass HTML tags or other component
 For example, suppose you need to change the `Button` to the HTML tag `a` while retaining its style and behavior.
 
 ```tsx
-<Button as="a" href="https://github.com/hirotomoyamada/yamada-ui" target="_blank">
+<Button
+  as="a"
+  href="https://github.com/hirotomoyamada/yamada-ui"
+  target="_blank"
+>
   GitHub
 </Button>
 ```
@@ -185,7 +189,8 @@ const { colorMode, internalColorMode } = useColorMode()
 
 return (
   <Box p="md">
-    The current colorMode is "{colorMode}", internal colorMode is "{internalColorMode}"
+    The current colorMode is "{colorMode}", internal colorMode is "
+    {internalColorMode}"
   </Box>
 )
 ```
@@ -330,7 +335,11 @@ const [animation, setAnimation] = useDynamicAnimation({
 return (
   <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
+      onClick={() =>
+        setAnimation((prev) =>
+          prev === "moveRight" ? "moveLeft" : "moveRight",
+        )
+      }
     >
       Click me!
     </Button>
@@ -409,7 +418,11 @@ const [animation, setAnimation] = useDynamicAnimation<
 return (
   <VStack alignItems="flex-start">
     <Button
-      onClick={() => setAnimation((prev) => (prev === "moveRight" ? "moveLeft" : "moveRight"))}
+      onClick={() =>
+        setAnimation((prev) =>
+          prev === "moveRight" ? "moveLeft" : "moveRight",
+        )
+      }
     >
       Click me!
     </Button>

@@ -30,7 +30,9 @@ import { FileButton } from "@yamada-ui/react"
 You can also customize it using `children`. `children` provides `onClick`, `isDisabled`, `isReadOnly`, `isInvalid`.
 
 ```tsx
-<FileButton>{({ onClick }) => <Link onClick={onClick}>Upload</Link>}</FileButton>
+<FileButton>
+  {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
+</FileButton>
 ```
 
 ### Change Variant
@@ -122,7 +124,11 @@ To disable, set `isDisabled` to `true`.
 <VStack alignItems="flex-start">
   <FileButton isDisabled>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} isDisabled />
+  <FileButton
+    as={IconButton}
+    icon={<FontAwesomeIcon icon={faPlus} />}
+    isDisabled
+  />
 
   <FileButton isDisabled>
     {({ onClick, isDisabled }) => (
@@ -137,7 +143,11 @@ To disable, set `isDisabled` to `true`.
     )}
   </FileButton>
 
-  <FormControl isDisabled label="Upload file" helperMessage="Please select a file to upload.">
+  <FormControl
+    isDisabled
+    label="Upload file"
+    helperMessage="Please select a file to upload."
+  >
     <FileButton>Upload</FileButton>
   </FormControl>
 </VStack>
@@ -151,7 +161,11 @@ To make read-only, set `isReadOnly` to `true`.
 <VStack alignItems="flex-start">
   <FileButton isReadOnly>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} isReadOnly />
+  <FileButton
+    as={IconButton}
+    icon={<FontAwesomeIcon icon={faPlus} />}
+    isReadOnly
+  />
 
   <FileButton isReadOnly>
     {({ onClick, isReadOnly }) => (
@@ -165,7 +179,11 @@ To make read-only, set `isReadOnly` to `true`.
     )}
   </FileButton>
 
-  <FormControl isReadOnly label="Upload file" helperMessage="Please select a file to upload.">
+  <FormControl
+    isReadOnly
+    label="Upload file"
+    helperMessage="Please select a file to upload."
+  >
     <FileButton>Upload</FileButton>
   </FormControl>
 </VStack>
@@ -179,7 +197,11 @@ To make the input invalid, set `isInvalid` to `true`.
 <VStack alignItems="flex-start">
   <FileButton isInvalid>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} isInvalid />
+  <FileButton
+    as={IconButton}
+    icon={<FontAwesomeIcon icon={faPlus} />}
+    isInvalid
+  />
 
   <FormControl isInvalid label="Upload file" errorMessage="File is required.">
     <FileButton>Upload</FileButton>
@@ -253,7 +275,10 @@ return (
         rules={{ required: { value: true, message: "This is required." } }}
         render={({ field: { ref, name, onChange, onBlur } }) => (
           <HStack>
-            <FileButton {...{ ref, name, onChange, onBlur }} resetRef={resetRef}>
+            <FileButton
+              {...{ ref, name, onChange, onBlur }}
+              resetRef={resetRef}
+            >
               Upload
             </FileButton>
 

@@ -317,13 +317,25 @@ import { Tag } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md" alignItems="flex-start">
-  <Tag colorScheme="primary" size="sm" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+  <Tag
+    colorScheme="primary"
+    size="sm"
+    leftIcon={<FontAwesomeIcon icon={faPlus} />}
+  >
     Small
   </Tag>
-  <Tag colorScheme="secondary" size="md" rightIcon={<FontAwesomeIcon icon={faPlus} />}>
+  <Tag
+    colorScheme="secondary"
+    size="md"
+    rightIcon={<FontAwesomeIcon icon={faPlus} />}
+  >
     Medium
   </Tag>
-  <Tag colorScheme="warning" size="lg" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+  <Tag
+    colorScheme="warning"
+    size="lg"
+    leftIcon={<FontAwesomeIcon icon={faPlus} />}
+  >
     Large
   </Tag>
 </Wrap>
@@ -356,16 +368,40 @@ import { Tag } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md" alignItems="flex-start">
-  <Tag variant="solid" colorScheme="primary" rounded="full" onClose={() => {}} isDisabled>
+  <Tag
+    variant="solid"
+    colorScheme="primary"
+    rounded="full"
+    onClose={() => {}}
+    isDisabled
+  >
     Cyan
   </Tag>
-  <Tag variant="solid" colorScheme="secondary" rounded="full" onClose={() => {}} isDisabled>
+  <Tag
+    variant="solid"
+    colorScheme="secondary"
+    rounded="full"
+    onClose={() => {}}
+    isDisabled
+  >
     Secondary
   </Tag>
-  <Tag variant="solid" colorScheme="warning" rounded="full" onClose={() => {}} isDisabled>
+  <Tag
+    variant="solid"
+    colorScheme="warning"
+    rounded="full"
+    onClose={() => {}}
+    isDisabled
+  >
     Warning
   </Tag>
-  <Tag variant="solid" colorScheme="danger" rounded="full" onClose={() => {}} isDisabled>
+  <Tag
+    variant="solid"
+    colorScheme="danger"
+    rounded="full"
+    onClose={() => {}}
+    isDisabled
+  >
     Danger
   </Tag>
 </Wrap>

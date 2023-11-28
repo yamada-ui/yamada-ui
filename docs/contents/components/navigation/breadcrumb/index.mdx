@@ -60,7 +60,9 @@ If it matches the current path, set `isCurrentPage` to `true`. In that case, it 
 ### Use an icon as a separator
 
 ```tsx
-<Breadcrumb separator={<FontAwesomeIcon icon={faCaretRight} color="gray.300" />}>
+<Breadcrumb
+  separator={<FontAwesomeIcon icon={faCaretRight} color="gray.300" />}
+>
   <BreadcrumbItem>
     <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
   </BreadcrumbItem>

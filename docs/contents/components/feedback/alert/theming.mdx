@@ -76,7 +76,11 @@ export const Alert: ComponentMultiStyle = {
       },
       icon: { color: [`${c}.500`, `${c}.200`] },
     }),
-    "left-accent": ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    "left-accent": ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = "primary",
+    }) => ({
       container: {
         bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
         pl: 3,

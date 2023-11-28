@@ -19,7 +19,11 @@ To display a notification, use `useNotice`. `useNotice` returns an instance to d
 const notice = useNotice()
 
 return (
-  <Button onClick={() => notice({ title: "Notification", description: "This is description." })}>
+  <Button
+    onClick={() =>
+      notice({ title: "Notification", description: "This is description." })
+    }
+  >
     Show notification
   </Button>
 )
@@ -47,7 +51,11 @@ const notice = useNotice({ duration: 8000 })
 return (
   <Button
     onClick={() =>
-      notice({ title: "Notification", description: "This is description.", duration: 10000 })
+      notice({
+        title: "Notification",
+        description: "This is description.",
+        duration: 10000,
+      })
     }
   >
     Show notification
@@ -63,7 +71,11 @@ To maintain the display, set `duration` to `null`.
 const notice = useNotice({ duration: null, isClosable: true })
 
 return (
-  <Button onClick={() => notice({ title: "Notification", description: "This is description." })}>
+  <Button
+    onClick={() =>
+      notice({ title: "Notification", description: "This is description." })
+    }
+  >
     Show notification
   </Button>
 )
@@ -79,7 +91,14 @@ To change the display position, modify it with `placement`.
 
 ```tsx functional=true
 const notice = useNotice()
-const placements = ["top-left", "top", "top-right", "bottom-left", "bottom", "bottom-right"]
+const placements = [
+  "top-left",
+  "top",
+  "top-right",
+  "bottom-left",
+  "bottom",
+  "bottom-right",
+]
 
 return (
   <Wrap gap="md">
@@ -87,7 +106,11 @@ return (
       <Button
         key={placement}
         onClick={() =>
-          notice({ title: "Notification", description: "This is description.", placement })
+          notice({
+            title: "Notification",
+            description: "This is description.",
+            placement,
+          })
         }
       >
         Show "{placement}" notification
@@ -105,7 +128,11 @@ To limit the number of displays, change it with `limit`.
 const notice = useNotice({ limit: 3 })
 
 return (
-  <Button onClick={() => notice({ title: "Notification", description: "This is description." })}>
+  <Button
+    onClick={() =>
+      notice({ title: "Notification", description: "This is description." })
+    }
+  >
     Show notification
   </Button>
 )
@@ -125,7 +152,11 @@ return (
       <Button
         key={variant}
         onClick={() =>
-          notice({ title: "Notification", description: "This is description.", variant })
+          notice({
+            title: "Notification",
+            description: "This is description.",
+            variant,
+          })
         }
       >
         Show "{variant}" notification
@@ -149,7 +180,11 @@ return (
       <Button
         key={status}
         onClick={() =>
-          notice({ title: "Notification", description: "This is description.", status })
+          notice({
+            title: "Notification",
+            description: "This is description.",
+            status,
+          })
         }
       >
         Show "{status}" notification
@@ -173,7 +208,11 @@ return (
       <Button
         key={colorScheme}
         onClick={() =>
-          notice({ title: "Notification", description: "This is description.", colorScheme })
+          notice({
+            title: "Notification",
+            description: "This is description.",
+            colorScheme,
+          })
         }
       >
         Show "{colorScheme}" notification
@@ -294,7 +333,9 @@ const notice = useNotice({
 })
 
 return (
-  <Button onClick={() => notice({ description: "This is description." })}>Show notification</Button>
+  <Button onClick={() => notice({ description: "This is description." })}>
+    Show notification
+  </Button>
 )
 ```
 
@@ -307,7 +348,11 @@ return (
   <Wrap gap="md">
     <Button
       onClick={() =>
-        notice({ title: "Notification", description: "This is description.", isClosable: true })
+        notice({
+          title: "Notification",
+          description: "This is description.",
+          isClosable: true,
+        })
       }
     >
       Show notification

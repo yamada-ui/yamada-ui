@@ -128,7 +128,11 @@ To set a pattern, set a regular expression to `pattern`. By default, `'/[^0-9\-\
 You can customize the method of parsing dates.
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" inputFormat="YYYY/MM" parseDate={(value) => new Date(value)} />
+<MonthPicker
+  placeholder="YYYY/MM"
+  inputFormat="YYYY/MM"
+  parseDate={(value) => new Date(value)}
+/>
 ```
 
 ### Set Minimum and Maximum Month
@@ -136,7 +140,11 @@ You can customize the method of parsing dates.
 To set the selectable minimum and maximum month, set a `Date` to `minDate` and `maxDate`.
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" minDate={new Date(1993, 8)} maxDate={new Date(2000, 10)} />
+<MonthPicker
+  placeholder="YYYY/MM"
+  minDate={new Date(1993, 8)}
+  maxDate={new Date(2000, 10)}
+/>
 ```
 
 ### Set Locale
@@ -162,7 +170,12 @@ To change the format of the date, set a string to `inputFormat` or `yearFormat`.
 ```tsx
 <VStack>
   <MonthPicker placeholder="YYYY-MM" inputFormat="YYYY-MM" />
-  <MonthPicker placeholder="YYYY/MM" locale="ja" defaultType="month" yearFormat="YYYY年" />
+  <MonthPicker
+    placeholder="YYYY/MM"
+    locale="ja"
+    defaultType="month"
+    yearFormat="YYYY年"
+  />
 </VStack>
 ```
 
@@ -230,7 +243,11 @@ To change the color of the border, set a color to `focusBorderColor` or `errorBo
 ```tsx
 <VStack>
   <MonthPicker focusBorderColor="green.500" placeholder="custom border color" />
-  <MonthPicker isInvalid errorBorderColor="orange.500" placeholder="custom border color" />
+  <MonthPicker
+    isInvalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
 </VStack>
 ```
 
@@ -295,13 +312,21 @@ return <MonthPicker placeholder="YYYY/MM" value={value} onChange={onChange} />
 ```tsx functional=true
 const [type, onChangeType] = useState<MonthPickerProps["type"]>("month")
 
-return <MonthPicker placeholder="YYYY/MM" type={type} onChangeType={onChangeType} />
+return (
+  <MonthPicker placeholder="YYYY/MM" type={type} onChangeType={onChangeType} />
+)
 ```
 
 ```tsx functional=true
 const [month, onChangeMonth] = useState<Date>(new Date("1993-08-18"))
 
-return <MonthPicker placeholder="YYYY/MM" month={month} onChangeMonth={onChangeMonth} />
+return (
+  <MonthPicker
+    placeholder="YYYY/MM"
+    month={month}
+    onChangeMonth={onChangeMonth}
+  />
+)
 ```
 
 ### Use `React Hook Form`

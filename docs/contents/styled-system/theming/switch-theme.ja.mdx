@@ -181,7 +181,11 @@ const { cookieStorageManager } = colorModeManager
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UIProvider theme={theme} config={config} colorModeManager={cookieStorageManager}>
+    <UIProvider
+      theme={theme}
+      config={config}
+      colorModeManager={cookieStorageManager}
+    >
       <Component {...pageProps} />
     </UIProvider>
   )
@@ -207,7 +211,9 @@ Next.jsなどのサーバー側でレンダリングされるサイトの場合�
 ```ts live=false
 import { GetServerSidePropsContext } from "next"
 
-export const getServerSideCommonProps = ({ req }: GetServerSidePropsContext) => {
+export const getServerSideCommonProps = ({
+  req,
+}: GetServerSidePropsContext) => {
   return {
     props: {
       cookies: req.headers.cookie ?? "",
@@ -228,7 +234,8 @@ const { cookieStorageSSR, localStorage } = themeSchemeManager
 
 export default function App({ Component, pageProps }: AppProps) {
   const { cookies } = pageProps
-  const themeSchemeManager = typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
+  const themeSchemeManager =
+    typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
 
   return (
     <UIProvider themeSchemeManager={themeSchemeManager}>

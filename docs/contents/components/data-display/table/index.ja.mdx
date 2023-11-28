@@ -318,8 +318,18 @@ const data = useMemo<Data[]>(
 
 return (
   <VStack>
-    <Table variant="striped" colorScheme="secondary" columns={columns} data={data} />
-    <Table variant="striped" colorScheme="green" columns={columns} data={data} />
+    <Table
+      variant="striped"
+      colorScheme="secondary"
+      columns={columns}
+      data={data}
+    />
+    <Table
+      variant="striped"
+      colorScheme="green"
+      columns={columns}
+      data={data}
+    />
   </VStack>
 )
 ```
@@ -1417,8 +1427,16 @@ const data = useMemo<Data[]>(
 
 return (
   <VStack>
-    <Table columns={columns} data={data} checkboxProps={{ colorScheme: "red" }} />
-    <Table columns={columns} data={data} selectColumnProps={{ css: { w: "40px" } }} />
+    <Table
+      columns={columns}
+      data={data}
+      checkboxProps={{ colorScheme: "red" }}
+    />
+    <Table
+      columns={columns}
+      data={data}
+      selectColumnProps={{ css: { w: "40px" } }}
+    />
 
     <Text>Select ids {selectedRowIds.join(", ")}</Text>
 
@@ -1575,13 +1593,16 @@ return (
       data={data}
       withFooter
       headerProps={({ column }) => {
-        if (column.columnDef.header === "作品名") return { color: ["red.400", "red.300"] }
+        if (column.columnDef.header === "作品名")
+          return { color: ["red.400", "red.300"] }
       }}
       cellProps={({ column }) => {
-        if (column.columnDef.header === "作品名") return { color: ["red.400", "red.300"] }
+        if (column.columnDef.header === "作品名")
+          return { color: ["red.400", "red.300"] }
       }}
       footerProps={({ column }) => {
-        if (column.columnDef.footer === "作品名") return { color: ["red.400", "red.300"] }
+        if (column.columnDef.footer === "作品名")
+          return { color: ["red.400", "red.300"] }
       }}
     />
   </VStack>

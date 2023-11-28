@@ -16,7 +16,12 @@ tab: 使い方
 :::
 
 ```ts
-import { Dropzone, DropzoneAccept, DropzoneReject, DropzoneIdle } from "@yamada-ui/dropzone"
+import {
+  Dropzone,
+  DropzoneAccept,
+  DropzoneReject,
+  DropzoneIdle,
+} from "@yamada-ui/dropzone"
 ```
 
 - `Dropzone`: ファイルをドラッグアンドドロップでアップロードするためのコンポーネントです。
@@ -123,7 +128,9 @@ import {
 <Dropzone maxSize={3 * 1024 ** 2}>
   <VStack w="auto" gap="2xs">
     <Text fontSize="xl">Drag file here or click to select file</Text>
-    <Text fontSize="sm">Attach as many files as you like, each file should not exceed 3mb</Text>
+    <Text fontSize="sm">
+      Attach as many files as you like, each file should not exceed 3mb
+    </Text>
   </VStack>
 </Dropzone>
 ```
@@ -136,7 +143,9 @@ import {
 <Dropzone multiple maxFiles={3}>
   <VStack w="auto" gap="2xs">
     <Text fontSize="xl">Drag file here or click to select file</Text>
-    <Text fontSize="sm">Attach as many files as you like, can upload up to 3 files</Text>
+    <Text fontSize="sm">
+      Attach as many files as you like, can upload up to 3 files
+    </Text>
   </VStack>
 </Dropzone>
 ```
@@ -166,7 +175,9 @@ import {
 
     <VStack gap="2xs">
       <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">Attach as many files as you like, each file should not exceed 3mb</Text>
+      <Text fontSize="sm">
+        Attach as many files as you like, each file should not exceed 3mb
+      </Text>
     </VStack>
   </HStack>
 </Dropzone>
@@ -185,7 +196,12 @@ import {
   accept={IMAGE_ACCEPT_TYPE}
   maxSize={3 * 1024 ** 2}
   onDrop={(acceptedFiles, fileRejections) =>
-    console.log("accepted files", acceptedFiles, "rejected files", fileRejections)
+    console.log(
+      "accepted files",
+      acceptedFiles,
+      "rejected files",
+      fileRejections,
+    )
   }
 >
   <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
@@ -203,7 +219,9 @@ import {
 
     <VStack gap="2xs">
       <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">Attach as many files as you like, each file should not exceed 3mb</Text>
+      <Text fontSize="sm">
+        Attach as many files as you like, each file should not exceed 3mb
+      </Text>
     </VStack>
   </HStack>
 </Dropzone>
@@ -234,7 +252,9 @@ import {
 
     <VStack gap="2xs">
       <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">Attach as many files as you like, each file should not exceed 3mb</Text>
+      <Text fontSize="sm">
+        Attach as many files as you like, each file should not exceed 3mb
+      </Text>
     </VStack>
   </HStack>
 </Dropzone>
@@ -265,7 +285,9 @@ import {
 
     <VStack gap="2xs">
       <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">Attach as many files as you like, each file should not exceed 3mb</Text>
+      <Text fontSize="sm">
+        Attach as many files as you like, each file should not exceed 3mb
+      </Text>
     </VStack>
   </HStack>
 </Dropzone>

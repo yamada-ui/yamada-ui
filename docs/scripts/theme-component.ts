@@ -244,9 +244,7 @@ const generateMdxFiles = (
         LOCALES.map(async (locale) => {
           const data = await generateData(
             path.join(dirPath, getMdxFileName("index", locale)),
-            {
-              tab: LOCALE_TAB_MAP[locale],
-            },
+            { tab: LOCALE_TAB_MAP[locale] },
           )
           const resolvedContent = await generateContent({
             data,

@@ -105,7 +105,7 @@ describe("<Checkbox />", () => {
     const allChecked = values.every(Boolean)
     const isIndeterminate = values.some(Boolean) && !allChecked
 
-    const { debug } = render(
+    render(
       <>
         <Checkbox
           data-testid="Checkbox1"
@@ -124,7 +124,7 @@ describe("<Checkbox />", () => {
         </Checkbox>
       </>,
     )
-    debug()
+
     expect(
       screen.getByTestId("Checkbox1").getElementsByTagName("span")[0],
     ).toHaveAttribute("data-indeterminate")

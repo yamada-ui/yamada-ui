@@ -8,9 +8,8 @@ body:
 
         Please search open/closed issues before submitting. Someone might have asked the same thing before 😎!
 
-          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
+          - [Issues](https://github.com/hirotomoyamada/yamada-docs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/hirotomoyamada/yamada-docs/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
 
         We're all volunteers here, so please help us help you by taking the time to accurately fill out this template. 💖
   - type: "textarea"

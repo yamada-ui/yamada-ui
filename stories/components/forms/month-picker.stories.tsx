@@ -610,13 +610,13 @@ export const customControlMonth: Story = () => {
 }
 
 export const customControlValue: Story = () => {
-  const [value, onChange] = useState<Date | null>(new Date())
+  const [value, onChange] = useState<Date | undefined>(new Date())
 
   return <MonthPicker placeholder="YYYY/MM" value={value} onChange={onChange} />
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { datePicker: Date | null }
+  type Data = { datePicker: Date | undefined }
 
   const {
     control,
@@ -654,7 +654,7 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { datePicker: Date | null }
+  type Data = { datePicker: Date | undefined }
 
   const defaultValues: Data = {
     datePicker: new Date(),

@@ -31,7 +31,7 @@ import type {
 } from "react"
 import { createRef, useCallback, useRef, useState } from "react"
 
-export type MaybeValue = Date | Date[] | undefined | null
+export type MaybeValue = Date | Date[] | undefined
 
 export type CalendarContext = Pick<
   Required<UseCalendarProps>,
@@ -218,15 +218,15 @@ export const getFormattedLabel = (
 }
 
 export const isSameMonth = (
-  date: Date | undefined | null,
-  comparison: Date | undefined | null,
+  date: Date | undefined,
+  comparison: Date | undefined,
 ): boolean =>
   date?.getFullYear() === comparison?.getFullYear() &&
   date?.getMonth() === comparison?.getMonth()
 
 export const isSameDate = (
-  date: Date | undefined | null,
-  comparison: Date | undefined | null,
+  date: Date | undefined,
+  comparison: Date | undefined,
 ) => isSameMonth(date, comparison) && date?.getDate() === comparison?.getDate()
 
 const onShouldFocus = <T = any>(

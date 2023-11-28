@@ -263,11 +263,11 @@ export const isInvalid: Story = () => {
 }
 
 export const useReset: Story = () => {
-  const [files, onChange] = useState<File[] | null>(null)
+  const [files, onChange] = useState<File[] | undefined>(undefined)
   const resetRef = useRef<() => void>(null)
 
   const onReset = () => {
-    onChange(null)
+    onChange(undefined)
     resetRef.current?.()
   }
 

@@ -49,15 +49,15 @@ type FileInputOptions = {
   /**
    * The value of the file input.
    */
-  value?: File[] | null
+  value?: File[]
   /**
    * The initial value of the file input.
    */
-  defaultValue?: File[] | null
+  defaultValue?: File[]
   /**
    * Function to be called when a file change event occurs.
    */
-  onChange?: (files: File[] | null) => void
+  onChange?: (files: File[] | undefined) => void
   /**
    * The component that displays uploaded files.
    */
@@ -72,7 +72,7 @@ type FileInputOptions = {
    * @default ','
    */
   separator?: string
-  children?: (files: File[] | null) => ReactNode
+  children?: (files: File[] | undefined) => ReactNode
   /**
    * Ref to a reset function.
    */
@@ -114,7 +114,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
 
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const [values, setValues] = useControllableState({
+    const [values, setValues] = useControllableState<File[] | undefined>({
       value,
       defaultValue,
       onChange: rest.onChange,
@@ -130,9 +130,9 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       (ev: ChangeEvent<HTMLInputElement>) => {
         let files = !isNull(ev.currentTarget.files)
           ? Array.from(ev.currentTarget.files)
-          : null
+          : undefined
 
-        if (!files?.length) files = null
+        if (!files?.length) files = undefined
 
         setValues(files)
       },
@@ -142,7 +142,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     const onReset = useCallback(() => {
       if (inputRef.current) inputRef.current.value = ""
 
-      setValues(null)
+      setValues(undefined)
     }, [setValues])
 
     assignRef(resetRef, onReset)

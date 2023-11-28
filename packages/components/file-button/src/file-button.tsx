@@ -35,7 +35,7 @@ type FileButtonOptions = {
   /**
    * Function to be called when a file change event occurs.
    */
-  onChange?: (files: File[] | null) => void
+  onChange?: (files: File[] | undefined) => void
   children?: ReactNode | ((props: Props) => ReactNode)
   /**
    * Ref to a reset function.
@@ -69,7 +69,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
       (ev: ChangeEvent<HTMLInputElement>) => {
         const files = !isNull(ev.currentTarget.files)
           ? Array.from(ev.currentTarget.files)
-          : null
+          : undefined
 
         rest.onChange?.(files)
       },

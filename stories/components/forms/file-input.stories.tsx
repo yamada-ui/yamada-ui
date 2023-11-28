@@ -183,11 +183,11 @@ export const useElement: Story = () => {
 }
 
 export const useReset: Story = () => {
-  const [value, onChange] = useState<File[] | null>(null)
+  const [value, onChange] = useState<File[] | undefined>(undefined)
   const resetRef = useRef<() => void>(null)
 
   const onReset = () => {
-    onChange(null)
+    onChange(undefined)
     resetRef.current?.()
   }
 
@@ -214,7 +214,7 @@ export const useReset: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [value, onChange] = useState<File[] | null>(null)
+  const [value, onChange] = useState<File[] | undefined>(undefined)
 
   return (
     <>
@@ -226,7 +226,7 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { fileInput: File[] | null }
+  type Data = { fileInput: File[] | undefined }
 
   const resetRef = useRef<() => void>(null)
   const {
@@ -238,7 +238,7 @@ export const reactHookForm: Story = () => {
   } = useForm<Data>()
 
   const onReset = () => {
-    setValue("fileInput", null)
+    setValue("fileInput", undefined)
     resetRef.current?.()
   }
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)

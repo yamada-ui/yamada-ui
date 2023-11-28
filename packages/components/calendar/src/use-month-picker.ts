@@ -35,7 +35,7 @@ import type { UseCalendarProps } from "./use-calendar"
 import { isAfterMaxDate, isBeforeMinDate } from "./use-calendar"
 
 type CalendarProps = Pick<
-  UseCalendarProps<Date | null>,
+  UseCalendarProps<Date | undefined>,
   | "value"
   | "defaultValue"
   | "onChange"
@@ -190,12 +190,12 @@ export const useMonthPicker = ({
   )
 
   const stringToDate = useCallback(
-    (value: string): Date | null => {
+    (value: string): Date | undefined => {
       let date = parseDate
         ? parseDate(value)
         : dayjs(value, inputFormat, locale).toDate()
 
-      if (date == null) return date
+      if (date == null) return undefined
 
       if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
       if (minDate && isBeforeMinDate(date, minDate)) date = minDate
@@ -206,7 +206,7 @@ export const useMonthPicker = ({
   )
 
   const dateToString = useCallback(
-    (value: Date | null): string | undefined => {
+    (value: Date | undefined): string | undefined => {
       if (value == null) return undefined
 
       if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
@@ -220,7 +220,7 @@ export const useMonthPicker = ({
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-  const [value, setValue] = useControllableState<Date | null>({
+  const [value, setValue] = useControllableState<Date | undefined>({
     value: rest.value,
     defaultValue,
     onChange: rest.onChange,
@@ -261,7 +261,7 @@ export const useMonthPicker = ({
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
-      setValue(null)
+      setValue(undefined)
       setInputValue(undefined)
     },
     [setValue],
@@ -321,7 +321,7 @@ export const useMonthPicker = ({
       if (type !== "date") {
         setType(type)
       } else {
-        let value: Date | null = null
+        let value: Date | undefined = undefined
 
         if (typeof year === "number" && typeof month === "number")
           value = new Date(year, month)
@@ -350,7 +350,7 @@ export const useMonthPicker = ({
       if (dayjs(value).isValid()) {
         setValue(value)
       } else {
-        setValue(null)
+        setValue(undefined)
       }
     },
     [pattern, stringToDate, setInputValue, setValue],

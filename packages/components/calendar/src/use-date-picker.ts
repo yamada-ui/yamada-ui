@@ -44,7 +44,7 @@ export const [DatePickerProvider, useDatePickerContext] =
   })
 
 type CalendarProps = Omit<
-  UseCalendarProps<Date | null>,
+  UseCalendarProps<Date | undefined>,
   "prevRef" | "typeRef" | "nextRef"
 >
 
@@ -72,7 +72,7 @@ type UseDatePickerBaseProps = Omit<
     /**
      * Function that converts the input value to Date type.
      */
-    parseDate?: (value: string) => Date | null
+    parseDate?: (value: string) => Date | undefined
     /**
      * The format used for conversion.
      * Check the docs to see the format of possible modifiers you can pass.
@@ -181,12 +181,12 @@ export const useDatePicker = ({
   )
 
   const stringToDate = useCallback(
-    (value: string): Date | null => {
+    (value: string): Date | undefined => {
       let date = parseDate
         ? parseDate(value)
         : dayjs(value, inputFormat, locale).toDate()
 
-      if (date == null) return date
+      if (date == null) return undefined
 
       if (!allowInputBeyond) {
         if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
@@ -199,7 +199,7 @@ export const useDatePicker = ({
   )
 
   const dateToString = useCallback(
-    (value: Date | null): string | undefined => {
+    (value: Date | undefined): string | undefined => {
       if (value == null) return undefined
 
       if (!allowInputBeyond) {
@@ -215,15 +215,19 @@ export const useDatePicker = ({
   )
 
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-  const [value, setValue] = useControllableState<Date | null>({
+  const [value, setValue] = useControllableState<Date | undefined>({
     value: rest.value,
     defaultValue,
     onChange: rest.onChange,
     onUpdate: (prev, next) => !isSameDate(prev, next),
+    // @ts-ignore
+    isShow: true,
   })
   const [inputValue, setInputValue] = useState<string | undefined>(
     dateToString(value),
   )
+
+  console.log("DatePicker", value, inputValue, defaultValue)
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -248,7 +252,7 @@ export const useDatePicker = ({
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
-      setValue(null)
+      setValue(undefined)
       setInputValue(undefined)
     },
     [setValue],
@@ -308,7 +312,7 @@ export const useDatePicker = ({
   )
 
   const onCalendarChange = useCallback(
-    (value: Date | null) => {
+    (value: Date | undefined) => {
       const inputValue = dateToString(value)
 
       setValue(value)
@@ -332,7 +336,7 @@ export const useDatePicker = ({
       if (dayjs(value).isValid()) {
         setValue(value)
       } else {
-        setValue(null)
+        setValue(undefined)
       }
     },
     [pattern, stringToDate, setInputValue, setValue],

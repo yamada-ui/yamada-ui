@@ -1,5 +1,11 @@
 # @yamada-ui/file-button
 
+## 0.3.23
+
+### Patch Changes
+
+- [`868abae4`](https://github.com/hirotomoyamada/yamada-ui/commit/868abae4647429b71f5600c317e6971d47159c96) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `null` from union types.
+
 ## 0.3.22
 
 ### Patch Changes

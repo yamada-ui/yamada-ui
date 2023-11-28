@@ -1,5 +1,11 @@
 # @yamada-ui/dropzone
 
+## 0.5.4
+
+### Patch Changes
+
+- [`401d7fc8`](https://github.com/hirotomoyamada/yamada-ui/commit/401d7fc8d31a8000a14d92de6801097d66a64fd9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added types from `react-dropzone`.
+
 ## 0.5.3
 
 ### Patch Changes

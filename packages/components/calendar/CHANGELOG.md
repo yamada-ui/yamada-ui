@@ -1,5 +1,11 @@
 # @yamada-ui/calendar
 
+## 0.6.8
+
+### Patch Changes
+
+- [`163ffa03`](https://github.com/hirotomoyamada/yamada-ui/commit/163ffa0337e1011ba2739ae2f3ae2132008639dc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `console.log`.
+
 ## 0.6.7
 
 ### Patch Changes

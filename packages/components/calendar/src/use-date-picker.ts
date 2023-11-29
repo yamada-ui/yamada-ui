@@ -227,8 +227,6 @@ export const useDatePicker = ({
     dateToString(value),
   )
 
-  console.log("DatePicker", value, inputValue, defaultValue)
-
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 

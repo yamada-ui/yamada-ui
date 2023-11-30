@@ -121,7 +121,7 @@ type TableOptions<Y extends RowData> = {
 
 export type PagingTableProps<Y extends RowData = unknown> = Omit<
   UseTableProps<Y>,
-  "enablePagenation" | "children"
+  "enablePagination" | "children"
 > &
   TableOptions<Y>
 
@@ -178,7 +178,7 @@ export const PagingTable = forwardRef(
         "withColumnBorders",
       ]),
       checkboxProps: { colorScheme, ...checkboxProps },
-      enablePagenation: true,
+      enablePagination: true,
     })
 
     const css: CSSUIObject = {

@@ -251,7 +251,7 @@ export type UseTableProps<Y extends RowData> = TableProps &
      *
      * @default false
      */
-    enablePagenation?: boolean
+    enablePagination?: boolean
   }
 
 const generateRowSelection = <Y extends RowData>(
@@ -331,7 +331,7 @@ export const useTable = <Y extends RowData>({
   pageCount,
   manualPagination,
   autoResetPageIndex,
-  enablePagenation = false,
+  enablePagination = false,
   ...rest
 }: UseTableProps<Y>) => {
   const [sorting, onSortingChange] = useControllableState({
@@ -359,7 +359,7 @@ export const useTable = <Y extends RowData>({
   })
 
   const computedPageSizeList = useMemo(() => {
-    if (!enablePagenation) return []
+    if (!enablePagination) return []
 
     let mergedPageSizeList = pageSizeList
 
@@ -369,7 +369,7 @@ export const useTable = <Y extends RowData>({
     mergedPageSizeList = mergedPageSizeList.sort((a, b) => a - b)
 
     return mergedPageSizeList
-  }, [enablePagenation, internalPageSize, pageSizeList])
+  }, [enablePagination, internalPageSize, pageSizeList])
 
   const computedRowSelection = useMemo(
     () => generateRowSelection(rowSelection, enableRowSelection),
@@ -380,7 +380,7 @@ export const useTable = <Y extends RowData>({
     () =>
       enableRowSelection && selectColumnProps !== false
         ? mergeColumns<Y>({
-            enablePagenation,
+            enablePagination,
             columns,
             checkboxProps,
             withFooterSelect,
@@ -392,7 +392,7 @@ export const useTable = <Y extends RowData>({
       checkboxProps,
       columns,
       disabledRowIds,
-      enablePagenation,
+      enablePagination,
       enableRowSelection,
       selectColumnProps,
       withFooterSelect,
@@ -422,7 +422,7 @@ export const useTable = <Y extends RowData>({
     state: {
       sorting,
       rowSelection: computedRowSelection,
-      ...(enablePagenation ? { pagination } : {}),
+      ...(enablePagination ? { pagination } : {}),
     },
     defaultColumn,
     debugAll,
@@ -451,7 +451,7 @@ export const useTable = <Y extends RowData>({
       ),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    ...(enablePagenation
+    ...(enablePagination
       ? {
           pageCount,
           manualPagination,
@@ -529,12 +529,12 @@ const Center = ui("div", {
 const TotalCheckbox = <Y extends RowData>({
   table,
   checkboxProps,
-  enablePagenation,
+  enablePagination,
   disabledRowIds = [],
 }: {
   table: HeaderContext<Y, unknown>["table"]
   checkboxProps: CheckboxProps
-  enablePagenation: boolean
+  enablePagination: boolean
   disabledRowIds?: string[]
 }) => {
   const {
@@ -557,13 +557,13 @@ const TotalCheckbox = <Y extends RowData>({
   const isAllChecked = unselectedRowIds.every((id) =>
     disabledRowIds.includes(id),
   )
-  const isChecked = !enablePagenation
+  const isChecked = !enablePagination
     ? getIsAllRowsSelected()
     : getIsAllPageRowsSelected()
-  const isIndeterminate = !enablePagenation
+  const isIndeterminate = !enablePagination
     ? getIsSomeRowsSelected()
     : getIsSomePageRowsSelected()
-  const onChange = !enablePagenation
+  const onChange = !enablePagination
     ? getToggleAllRowsSelectedHandler()
     : getToggleAllPageRowsSelectedHandler()
 
@@ -580,14 +580,14 @@ const TotalCheckbox = <Y extends RowData>({
 }
 
 export const mergeColumns = <Y extends RowData>({
-  enablePagenation,
+  enablePagination,
   columns,
   checkboxProps = {},
   withFooterSelect,
   selectColumnProps,
   disabledRowIds,
 }: {
-  enablePagenation: boolean
+  enablePagination: boolean
   columns: Column<Y>[]
   checkboxProps?: CheckboxProps
   withFooterSelect?: boolean
@@ -598,14 +598,14 @@ export const mergeColumns = <Y extends RowData>({
     id: "select",
     header: ({ table }) => (
       <TotalCheckbox
-        {...{ table, checkboxProps, enablePagenation, disabledRowIds }}
+        {...{ table, checkboxProps, enablePagination, disabledRowIds }}
       />
     ),
     ...(withFooterSelect
       ? {
           footer: ({ table }) => (
             <TotalCheckbox
-              {...{ table, checkboxProps, enablePagenation, disabledRowIds }}
+              {...{ table, checkboxProps, enablePagination, disabledRowIds }}
             />
           ),
         }

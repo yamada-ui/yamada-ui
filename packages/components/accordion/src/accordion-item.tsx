@@ -115,12 +115,12 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
             prev?.node.focus()
           },
           Home: () => {
-            const first = descendants.enabledfirstValue()
+            const first = descendants.enabledFirstValue()
 
             first?.node.focus()
           },
           End: () => {
-            const last = descendants.enabledlastValue()
+            const last = descendants.enabledLastValue()
 
             last?.node.focus()
           },

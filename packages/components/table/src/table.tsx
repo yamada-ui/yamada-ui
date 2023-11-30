@@ -69,7 +69,7 @@ type TableOptions = {
 }
 
 type PagingTableProps =
-  | "enablePagenation"
+  | "enablePagination"
   | "pageIndex"
   | "defaultPageIndex"
   | "onChangePageIndex"

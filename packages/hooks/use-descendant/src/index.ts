@@ -155,13 +155,13 @@ const descendantsManager = <T extends HTMLElement, K = {}>() => {
 
   const firstValue = (filter?: FilterDescendant<T, K>) => value(0, filter)
 
-  const enabledfirstValue = (filter?: FilterDescendant<T, K>) =>
+  const enabledFirstValue = (filter?: FilterDescendant<T, K>) =>
     enabledValue(0, filter)
 
   const lastValue = (filter?: FilterDescendant<T, K>) =>
     value(descendants.size - 1, filter)
 
-  const enabledlastValue = (filter?: FilterDescendant<T, K>) =>
+  const enabledLastValue = (filter?: FilterDescendant<T, K>) =>
     enabledValue(enabledValues(filter).length - 1, filter)
 
   const prevValue = (
@@ -238,8 +238,8 @@ const descendantsManager = <T extends HTMLElement, K = {}>() => {
     enabledValues,
     enabledValue,
     enabledIndexOf,
-    enabledfirstValue,
-    enabledlastValue,
+    enabledFirstValue,
+    enabledLastValue,
     enabledPrevValue,
     enabledNextValue,
   }

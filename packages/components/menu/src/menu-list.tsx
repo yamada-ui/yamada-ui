@@ -28,13 +28,13 @@ export const MenuList = forwardRef<MenuListProps, "section">(
     }, [descendants, focusedIndex, setFocusedIndex])
 
     const onFirst = useCallback(() => {
-      const first = descendants.enabledfirstValue()
+      const first = descendants.enabledFirstValue()
 
       if (first) setFocusedIndex(first.index)
     }, [descendants, setFocusedIndex])
 
     const onLast = useCallback(() => {
-      const last = descendants.enabledlastValue()
+      const last = descendants.enabledLastValue()
 
       if (last) setFocusedIndex(last.index)
     }, [descendants, setFocusedIndex])

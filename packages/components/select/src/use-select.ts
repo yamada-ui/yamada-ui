@@ -197,7 +197,7 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
-      const first = descendants.enabledfirstValue()
+      const first = descendants.enabledFirstValue()
 
       if (!first) return
 
@@ -219,7 +219,7 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const onFocusLast = useCallback(() => {
     const id = setTimeout(() => {
-      const last = descendants.enabledlastValue()
+      const last = descendants.enabledLastValue()
 
       if (!last) return
 
@@ -227,9 +227,9 @@ export const useSelect = <T extends MaybeValue = string>({
         setFocusedIndex(last.index)
       } else {
         if (selectedIndexes.includes(last.index)) {
-          const enabledlast = enabledValues.reverse()[0]
+          const enabledLast = enabledValues.reverse()[0]
 
-          setFocusedIndex(enabledlast.index)
+          setFocusedIndex(enabledLast.index)
         } else {
           setFocusedIndex(last.index)
         }

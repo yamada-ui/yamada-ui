@@ -487,7 +487,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     const id = setTimeout(() => {
       if (isEmpty || isAllSelected) return
 
-      const first = descendants.enabledfirstValue(
+      const first = descendants.enabledFirstValue(
         ({ node }) => "target" in node.dataset,
       )
 
@@ -521,7 +521,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     const id = setTimeout(() => {
       if (isEmpty || isAllSelected) return
 
-      const last = descendants.enabledlastValue(
+      const last = descendants.enabledLastValue(
         ({ node }) => "target" in node.dataset,
       )
 
@@ -531,9 +531,9 @@ export const useAutocomplete = <T extends string | string[] = string>({
         setFocusedIndex(last.index)
       } else {
         if (selectedIndexes.includes(last.index)) {
-          const enabledlast = enabledValues.reverse()[0]
+          const enabledLast = enabledValues.reverse()[0]
 
-          setFocusedIndex(enabledlast.index)
+          setFocusedIndex(enabledLast.index)
         } else {
           setFocusedIndex(last.index)
         }

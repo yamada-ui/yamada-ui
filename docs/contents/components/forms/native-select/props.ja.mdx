@@ -1,11 +1,90 @@
 ---
 title: NativeSelect
-description: このページは現在作成中です。
+description: >-
+  `NativeSelect`は、ユーザーがオプションのリストから1つを選択するために使用されるコンポーネントです。ブラウザ（ユーザーエージェント）によって提供されるネイティブなドロップダウンリストを表示します。
 package_name: "@yamada-ui/native-select"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### NativeSelect Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="containerProps"
+  type='Omit<HTMLUIProps<"div">, "children">'
+  description={"Props for container element."}
+/>
+<PropsCard
+  name="errorBorderColor"
+  type="string"
+  description={"The border color when the input is invalid."}
+/>
+<PropsCard
+  name="focusBorderColor"
+  type="string"
+  description={"The border color when the input is focused."}
+/>
+<PropsCard
+  name="iconProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for icon element."}
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="items"
+  type="NativeSelectItem[]"
+  description={"If provided, generate options based on items."}
+  defaultValue="'[]'"
+/>
+<PropsCard
+  name="placeholderInOptions"
+  type="boolean"
+  description={"If `true`, include placeholders in options."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the NativeSelect."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="variant"
+  type='"outline" | "filled" | "flushed" | "unstyled"'
+  description={"The variant of the NativeSelect."}
+  defaultValue="outline"
+/>
+
+### NativeOptionGroup Props
+
+### NativeOption Props

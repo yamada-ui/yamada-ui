@@ -1,11 +1,25 @@
 ---
 title: Fontawesome Icon
-description: このページは現在作成中です。
+description: "`@yamada-ui/fontawesome`は、`Font Awesome`を便利に使うコンポーネントを提供しています。"
 package_name: "@yamada-ui/fontawesome"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Icon Props
+
+<PropsCard
+  name="icon"
+  required
+  type="IconDefinition | IconProp"
+  description={
+    "The icon of the font awesome.\nCheck the docs to see the icon of possible modifiers you can pass."
+  }
+/>
+<PropsCard
+  name="size"
+  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
+  description={"The CSS `font-size` property."}
+/>

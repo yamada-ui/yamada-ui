@@ -1,11 +1,158 @@
 ---
 title: FormControl
-description: このページは現在作成中です。
+description: "`FormControl`は、フォーム要素に、ラベル、ヘルプメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/form-control"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### FormControl Props
+
+<PropsCard
+  name="errorMessage"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The form control error message to use."}
+/>
+<PropsCard
+  name="helperMessage"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The form control helper message to use."}
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReplace"
+  type="boolean"
+  description={
+    "If `true`, switch between helper message and error message using isInvalid."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The form control label to use."}
+/>
+<PropsCard
+  name="optionalIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+<PropsCard
+  name="requiredIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+### Label Props
+
+<PropsCard name="isRequired" type="boolean" />
+<PropsCard
+  name="optionalIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+<PropsCard
+  name="requiredIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+### HelperMessage Props
+
+### ErrorMessage Props
+
+### UseFormControl Props
+
+<PropsCard name="disabled" type="boolean" />
+<PropsCard name="id" type="string" />
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue="false"
+/>
+<PropsCard name="onBlur" type="FocusEventHandler<Y>" />
+<PropsCard name="onFocus" type="FocusEventHandler<Y>" />
+<PropsCard name="readOnly" type="boolean" />
+<PropsCard name="required" type="boolean" />

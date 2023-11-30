@@ -1,11 +1,66 @@
 ---
 title: Highlight
-description: This page is currently under construction.
+description: >-
+  `Highlight` is a component that highlights specified strings within text. By
+  default, it renders a `p` element.
 package_name: "@yamada-ui/highlight"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be amazing!
+### Highlight Props
+
+<PropsCard
+  name="query"
+  required
+  type="string | string[]"
+  description={
+    "Can be a single string or an array of strings. These are the terms that are highlighted in the text."
+  }
+/>
+<PropsCard
+  name="align"
+  type="UIValue<TextAlign>"
+  description={"The CSS `text-align` property."}
+/>
+<PropsCard
+  name="casing"
+  type="UIValue<TextTransform>"
+  description={"The CSS `text-transform` property."}
+/>
+<PropsCard
+  name="decoration"
+  type='UIValue<number | "blink" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "aliceblue" | "antiquewhite" | "aqua" | "aquamarine" | "azure" | ... 185 more ... | "wavy">'
+  description={"The CSS `text-decoration` property."}
+/>
+<PropsCard
+  name="isFragment"
+  type="boolean"
+  description={"If `true`, `Fragment` is used for rendering."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="markProps"
+  type="MarkProps"
+  description={
+    "Properties passed to the Mark component which is used to highlight the matched terms."
+  }
+/>
+
+### Mark Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue="secondary"
+/>
+<PropsCard name="size" type="string" description={"The size of the Mark."} />
+<PropsCard
+  name="variant"
+  type='"solid" | "subtle" | "outline" | "text-accent" | "unstyled"'
+  description={"The variant of the Mark."}
+  defaultValue="subtle"
+/>

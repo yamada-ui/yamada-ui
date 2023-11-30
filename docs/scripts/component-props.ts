@@ -1,12 +1,15 @@
 import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
+import { Octokit } from "@octokit/rest"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
-import type { ChatCompletionMessageParam } from "openai/resources"
+// import type { ChatCompletionMessageParam } from "openai/resources"
 import { CONSTANT } from "constant"
-import { openai } from "libs/openai"
+// import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
-import { wait } from "utils/assertion"
+// import { wait } from "utils/assertion"
+
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -20,8 +23,8 @@ type Props = {
   defaultValue?: string
 }
 
-const DOCS_DIR_PATH = path.join(".docs")
-const COMPONENT_DIR_PATH = path.join("contents", "components")
+const SOURCE_PATH = path.join("packages", "components")
+const DIST_PATH = path.join("contents", "components")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {
   en: "Props",
@@ -31,29 +34,46 @@ const LOCALE_TITLE_MAP = {
   en: "Props",
   ja: "Props",
 }
-const LOCALE_MAP = {
-  ja: "Japanese",
-  en: "English",
+// const LOCALE_MAP = {
+//   ja: "Japanese",
+//   en: "English",
+// }
+const REPO_REQUEST_PARAMETERS = {
+  owner: "hirotomoyamada",
+  repo: "yamada-ui",
+  path: SOURCE_PATH,
+  ref: "main",
 }
 
-const getDocs = async () => {
-  const fileNames = await readdir(DOCS_DIR_PATH)
+export const getDocs = async () => {
+  const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
 
-  const docMap = await Promise.all(
-    fileNames.map(async (fileName) => {
-      const content = await readFile(path.join(DOCS_DIR_PATH, fileName), "utf8")
-      const doc = JSON.parse(content) as Doc
+  const docs: Record<string, Doc> = {}
 
-      const name = fileName.replace(".json", "")
+  if (Array.isArray(data)) {
+    await Promise.all(
+      data.map(async ({ name, path }) => {
+        try {
+          path += "/DOCS.json"
 
-      return { name, doc }
-    }),
-  )
+          const { data } = await octokit.repos.getContent({
+            ...REPO_REQUEST_PARAMETERS,
+            path,
+          })
 
-  const docs = docMap.reduce<Record<string, Doc>>(
-    (prev, { name, doc }) => ({ ...prev, [name]: doc }),
-    {},
-  )
+          if ("content" in data) {
+            const content = Buffer.from(data.content, "base64").toString(
+              "utf-8",
+            )
+
+            docs[name] = JSON.parse(content)
+          }
+        } catch (e) {
+          console.log(`[props]: Not found ${name}`)
+        }
+      }),
+    )
+  }
 
   return docs
 }
@@ -67,7 +87,7 @@ const getDirs = async (path: string) => {
 }
 
 const getPaths = async () => {
-  const categoryDirs = await getDirs(COMPONENT_DIR_PATH)
+  const categoryDirs = await getDirs(DIST_PATH)
   const componentDirs = await Promise.all(
     categoryDirs.map(
       async ({ name, path }) => await getDirs(`${path}/${name}`),
@@ -101,41 +121,41 @@ const generateData = async (path: string, overrideData?: Data) => {
   return data
 }
 
-const translateDescription = async (
-  locale: Locale,
-  content: string,
-  retry: number = 1,
-) => {
-  try {
-    const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
-    const to = `to ${LOCALE_MAP[locale]}`
+// const translateDescription = async (
+//   locale: Locale,
+//   content: string,
+//   retry: number = 1,
+// ) => {
+//   try {
+//     const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
+//     const to = `to ${LOCALE_MAP[locale]}`
 
-    const messages: ChatCompletionMessageParam[] = [
-      {
-        role: "system",
-        content: [
-          `Please translate the text of the a JSDoc description that I will send you ${from} ${to}. Please note the following points:`,
-          `The text you send will be saved as a JSDoc description. Therefore, please output only the translated text.`,
-        ].join("\n"),
-      },
-      { role: "user", content },
-    ]
+//     const messages: ChatCompletionMessageParam[] = [
+//       {
+//         role: "system",
+//         content: [
+//           `Please translate the text of the a JSDoc description that I will send you ${from} ${to}. Please note the following points:`,
+//           `The text you send will be saved as a JSDoc description. Therefore, please output only the translated text.`,
+//         ].join("\n"),
+//       },
+//       { role: "user", content },
+//     ]
 
-    const { choices } = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
-      messages,
-      temperature: 0,
-    })
+//     const { choices } = await openai.chat.completions.create({
+//       model: "gpt-4-1106-preview",
+//       messages,
+//       temperature: 0,
+//     })
 
-    return choices[0].message?.content
-  } catch (e) {
-    await wait(3000)
+//     return choices[0].message?.content
+//   } catch (e) {
+//     await wait(3000)
 
-    retry += 1
+//     retry += 1
 
-    return await translateDescription(locale, content, retry)
-  }
-}
+//     return await translateDescription(locale, content, retry)
+//   }
+// }
 
 const generateContent = async ({
   doc,
@@ -146,21 +166,21 @@ const generateContent = async ({
 }) => {
   const content = [`## ${LOCALE_TITLE_MAP[locale]}`]
 
-  if (locale !== "en") {
-    await Promise.all(
-      Object.entries(doc).map(async ([title, props]) => {
-        await Promise.all(
-          Object.entries(props).map(async ([name, { description }]) => {
-            if (!description) return
+  // if (locale !== "en") {
+  //   await Promise.all(
+  //     Object.entries(doc).map(async ([title, props]) => {
+  //       await Promise.all(
+  //         Object.entries(props).map(async ([name, { description }]) => {
+  //           if (!description) return
 
-            description = await translateDescription(locale, description)
+  //           description = await translateDescription(locale, description)
 
-            doc[title][name]["description"] = description
-          }),
-        )
-      }),
-    )
-  }
+  //           doc[title][name]["description"] = description
+  //         }),
+  //       )
+  //     }),
+  //   )
+  // }
 
   Object.entries(doc).map(([title, props]) => {
     content.push(`\n### ${title} Props\n`)
@@ -171,17 +191,18 @@ const generateContent = async ({
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }
 
-        if (typeof defaultValue === "string") {
-          defaultValue = defaultValue
-            .replace(/<\s+/g, "<")
-            .replace(/\s+>/g, ">")
+        if (typeof description === "string") {
+          description = description.replace(/\n/g, "\\n")
         }
 
         const props = [`name="${name}"`]
 
         if (required) props.push("required")
-        if (type) props.push(`type='${type}'`)
-        if (description) props.push(`description='${description}'`)
+        if (type !== undefined) props.push(`type='${type}'`)
+        if (description !== undefined)
+          props.push(`description={"${description}"}`)
+        if (defaultValue !== undefined)
+          props.push(`defaultValue="${defaultValue}"`)
 
         content.push(`<PropsCard ${props.join("\n")} />`)
       },

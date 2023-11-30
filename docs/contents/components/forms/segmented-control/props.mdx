@@ -1,11 +1,96 @@
 ---
 title: SegmentedControl
-description: This page is currently under construction.
+description: >-
+  `SegmentedControl` is a component used for allowing users to select one option
+  from multiple choices.
 package_name: "@yamada-ui/segmented-control"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be fantastic!
+### SegmentedControl Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="items"
+  type="SegmentedControlItem[]"
+  description={
+    "If provided, generate segmented control buttons but based on items."
+  }
+  defaultValue="'[]'"
+/>
+<PropsCard
+  name="name"
+  type="string"
+  description={"The HTML `name` attribute used for forms."}
+/>
+<PropsCard
+  name="onChange"
+  type="(value: string) => void"
+  description={
+    "The callback fired when any children radio is checked or unchecked."
+  }
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description={"The size of the SegmentedControl."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="value"
+  type="string"
+  description={"The value of the segmented control."}
+/>
+<PropsCard
+  name="variant"
+  type='"basic" | "rounded"'
+  description={"The variant of the SegmentedControl."}
+  defaultValue="basic"
+/>
+
+### SegmentedControlButton Props
+
+<PropsCard
+  name="value"
+  required
+  type="string | number"
+  description={"The value of the segmented control button."}
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description={
+    "The callback fired when any children radio is checked or unchecked."
+  }
+/>

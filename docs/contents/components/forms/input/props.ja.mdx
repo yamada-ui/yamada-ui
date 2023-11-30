@@ -1,11 +1,55 @@
 ---
 title: Input
-description: このページは現在作成中です。
+description: "`Input`は、ユーザーからのテキスト入力を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/input"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Input Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the Input."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="variant"
+  type='"outline" | "filled" | "flushed" | "unstyled"'
+  description={"The variant of the Input."}
+  defaultValue="outline"
+/>
+
+### InputGroup Props
+
+### InputAddon Props
+
+<PropsCard
+  name="placement"
+  type='"right" | "left"'
+  description={"The placement of the element."}
+  defaultValue="'left'"
+/>
+
+### InputElement Props
+
+<PropsCard
+  name="isClick"
+  type="boolean"
+  description={"If `true`, the element clickable."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="placement"
+  type='"right" | "left"'
+  description={"The placement of the element."}
+  defaultValue="'left'"
+/>

@@ -1,11 +1,1129 @@
 ---
 title: Calendar
-description: This page is currently under construction.
+description: "`Calendar` is a component for displaying or selecting dates in a calendar."
 package_name: "@yamada-ui/calendar"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be fantastic!
+### Calendar Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue="primary"
+/>
+<PropsCard
+  name="defaultMonth"
+  type="Date"
+  description={"The initial month of the calendar."}
+  defaultValue="'new Date()'"
+/>
+<PropsCard
+  name="defaultValue"
+  type="Date"
+  description={"The initial value of the calendar."}
+/>
+<PropsCard
+  name="locale"
+  type="string"
+  description={
+    "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+  }
+  defaultValue="'en'"
+/>
+<PropsCard
+  name="maxDate"
+  type="Date"
+  description={"The maximum possible date."}
+/>
+<PropsCard
+  name="minDate"
+  type="Date"
+  description={"The minimum possible date."}
+/>
+<PropsCard
+  name="month"
+  type="Date"
+  description={"The month of the calendar."}
+/>
+<PropsCard
+  name="monthFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'MM'"
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Date | undefined) => void"
+  description={"The callback invoked when value state changes."}
+/>
+<PropsCard
+  name="onChangeMonth"
+  type="(value: Date) => void"
+  description={"The callback invoked when month state changes."}
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg" | "full"'
+  description={"The size of the Calendar."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="value"
+  type="Date"
+  description={"The value of the calendar."}
+/>
+<PropsCard
+  name="variant"
+  type='"solid" | "subtle" | "unstyled"'
+  description={"The variant of the Calendar."}
+  defaultValue="solid"
+/>
+<PropsCard
+  name="withControls"
+  type="boolean"
+  description={"If `true`, display the calendar control buttons."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withHeader"
+  type="boolean"
+  description={"If `true`, display the calendar header."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withLabel"
+  type="boolean"
+  description={"If `true`, display the calendar label button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="yearFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'YYYY'"
+/>
+
+### UseCalendar Props
+
+<PropsCard
+  name="amountOfMonths"
+  type="number"
+  description={"The number of months to display."}
+  defaultValue="1"
+/>
+<PropsCard
+  name="dateFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'MMMM YYYY'"
+/>
+<PropsCard
+  name="defaultMonth"
+  type="Date"
+  description={"The initial month of the calendar."}
+  defaultValue="'new Date()'"
+/>
+<PropsCard
+  name="defaultType"
+  type='"year" | "month" | "date"'
+  description={"The initial type of the calendar."}
+/>
+<PropsCard
+  name="defaultValue"
+  type="NonNullable<Y>"
+  description={"The initial value of the calendar."}
+/>
+<PropsCard
+  name="disableOutsideDays"
+  type="boolean"
+  description={"If `true`, outside days will be disabled."}
+/>
+<PropsCard
+  name="excludeDate"
+  type="(date: Date) => boolean"
+  description={
+    "Callback function to determine whether the day should be disabled."
+  }
+/>
+<PropsCard
+  name="firstDayOfWeek"
+  type='"sunday" | "monday"'
+  description={"Define the first day of the week."}
+  defaultValue="'monday'"
+/>
+<PropsCard name="holidays" type="Date[]" description={"Define holidays."} />
+<PropsCard
+  name="locale"
+  type="string"
+  description={
+    "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+  }
+  defaultValue="'en'"
+/>
+<PropsCard
+  name="maxDate"
+  type="Date"
+  description={"The maximum possible date."}
+/>
+<PropsCard
+  name="maxSelectedValues"
+  type="number"
+  description={"The maximum selectable value."}
+/>
+<PropsCard
+  name="minDate"
+  type="Date"
+  description={"The minimum possible date."}
+/>
+<PropsCard
+  name="month"
+  type="Date"
+  description={"The month of the calendar."}
+/>
+<PropsCard
+  name="monthFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'MM'"
+/>
+<PropsCard
+  name="nextRef"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: (() => void | undefined) | null) => void)
+  | MutableRefObject<(() => void | undefined) | null>"
+  description={"Ref to a next function."}
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Y) => void"
+  description={"The callback invoked when value state changes."}
+/>
+<PropsCard
+  name="onChangeMonth"
+  type="(value: Date) => void"
+  description={"The callback invoked when month state changes."}
+/>
+<PropsCard
+  name="onChangeType"
+  type='(
+  type: "year" | "month" | "date",
+  year?: number | undefined,
+  month?: number | undefined,
+) => void'
+  description={"The callback invoked when type state changes."}
+/>
+<PropsCard
+  name="paginateBy"
+  type="number"
+  description={"The number of months to paginate."}
+  defaultValue="1"
+/>
+<PropsCard
+  name="prevRef"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: (() => void | undefined) | null) => void)
+  | MutableRefObject<(() => void | undefined) | null>"
+  description={"Ref to a previous function."}
+/>
+<PropsCard name="selectMonthWith" type='"month" | "value"' />
+<PropsCard
+  name="today"
+  type="boolean"
+  description={"If `true`, highlight today."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="type"
+  type='"year" | "month" | "date"'
+  description={"The type of the calendar."}
+/>
+<PropsCard
+  name="typeRef"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: (() => void | undefined) | null) => void)
+  | MutableRefObject<(() => void | undefined) | null>"
+  description={"Ref to a type function."}
+/>
+<PropsCard
+  name="value"
+  type="NonNullable<Y>"
+  description={"The value of the calendar."}
+/>
+<PropsCard
+  name="weekdayFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'dd'"
+/>
+<PropsCard
+  name="weekendDays"
+  type="number[]"
+  description={"Define weekend days."}
+  defaultValue="'[0, 6]'"
+/>
+<PropsCard
+  name="withControls"
+  type="boolean"
+  description={"If `true`, display the calendar control buttons."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withHeader"
+  type="boolean"
+  description={"If `true`, display the calendar header."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withLabel"
+  type="boolean"
+  description={"If `true`, display the calendar label button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withWeekdays"
+  type="boolean"
+  description={"If `true`, display the calendar weekdays."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="yearFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'YYYY'"
+/>
+
+### Weekday Props
+
+<PropsCard name="index" required type="number" />
+<PropsCard name="weekday" required type="string" />
+
+### Day Props
+
+<PropsCard name="col" required type="number" />
+<PropsCard name="date" required type="Date" />
+<PropsCard name="isOutside" required type="boolean" />
+<PropsCard name="isSelected" required type="boolean" />
+<PropsCard name="isWeekend" required type="boolean" />
+<PropsCard name="row" required type="number" />
+<PropsCard name="weekday" required type="string" />
+
+### DatePicker Props
+
+<PropsCard
+  name="allowInput"
+  type="boolean"
+  description={"If `true`, allows input."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="allowInputBeyond"
+  type="boolean"
+  description={
+    "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="amountOfMonths"
+  type="number"
+  description={"The number of months to display."}
+  defaultValue="1"
+/>
+<PropsCard
+  name="animation"
+  type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue="'scale'"
+/>
+<PropsCard
+  name="boundary"
+  type='HTMLElement | "clippingParents" | "scrollParent"'
+  description={
+    "The boundary area for the popper. Used within the `preventOverflow` modifier."
+  }
+  defaultValue="'clippingParents'"
+/>
+<PropsCard
+  name="calendarColorScheme"
+  type='"link" | (string & {}) | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 11 more ... | "sky"'
+/>
+<PropsCard
+  name="calendarProps"
+  type="CalendarBaseProps"
+  description={"Props for calendar component."}
+/>
+<PropsCard
+  name="calendarSize"
+  type='UIValue<(string & {}) | "sm" | "md" | "lg" | "full">'
+/>
+<PropsCard
+  name="calendarVariant"
+  type='UIValue<(string & {}) | "solid" | "unstyled" | "subtle">'
+/>
+<PropsCard
+  name="clearIconProps"
+  type="DatePickerIconProps"
+  description={"Props for date picker clear icon element."}
+/>
+<PropsCard
+  name="closeOnBlur"
+  type="boolean"
+  description={
+    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the popover will close when you hit the `Esc` key."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnSelect"
+  type="boolean"
+  description={
+    "If `true`, the list element will be closed when value is selected."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="containerProps"
+  type='Omit<HTMLUIProps<"div">, "children">'
+  description={"Props for date picker container element."}
+/>
+<PropsCard
+  name="dateFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'MMMM YYYY'"
+/>
+<PropsCard
+  name="defaultIsOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
+/>
+<PropsCard
+  name="defaultMonth"
+  type="Date"
+  description={"The initial month of the calendar."}
+  defaultValue="'new Date()'"
+/>
+<PropsCard
+  name="defaultType"
+  type='"year" | "month" | "date"'
+  description={"The initial type of the calendar."}
+/>
+<PropsCard
+  name="defaultValue"
+  type="Date"
+  description={"The initial value of the calendar."}
+/>
+<PropsCard
+  name="disableOutsideDays"
+  type="boolean"
+  description={"If `true`, outside days will be disabled."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"enter" | "exit", number>>'
+  description={"The animation duration."}
+/>
+<PropsCard
+  name="errorBorderColor"
+  type="string"
+  description={"The border color when the input is invalid."}
+/>
+<PropsCard
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="excludeDate"
+  type="(date: Date) => boolean"
+  description={
+    "Callback function to determine whether the day should be disabled."
+  }
+/>
+<PropsCard
+  name="firstDayOfWeek"
+  type='"sunday" | "monday"'
+  description={"Define the first day of the week."}
+  defaultValue="'monday'"
+/>
+<PropsCard
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="focusBorderColor"
+  type="string"
+  description={"The border color when the input is focused."}
+/>
+<PropsCard
+  name="gutter"
+  type="UIValue<number>"
+  description={
+    "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+  }
+  defaultValue="8"
+/>
+<PropsCard name="holidays" type="Date[]" description={"Define holidays."} />
+<PropsCard
+  name="iconProps"
+  type="DatePickerIconProps"
+  description={"Props for date picker icon element."}
+/>
+<PropsCard
+  name="inputFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'YYYY/MM/DD'"
+/>
+<PropsCard
+  name="inputProps"
+  type='HTMLUIProps<"input">'
+  description={"Props for date picker input element."}
+/>
+<PropsCard
+  name="isClearable"
+  type="boolean"
+  description={"If `true`, display the date picker clear icon."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="lazyBehavior"
+  type="LazyMode"
+  description={
+    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+  }
+  defaultValue="'unmount'"
+/>
+<PropsCard
+  name="locale"
+  type="string"
+  description={
+    "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+  }
+  defaultValue="'en'"
+/>
+<PropsCard
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="maxDate"
+  type="Date"
+  description={"The maximum possible date."}
+/>
+<PropsCard
+  name="maxSelectedValues"
+  type="number"
+  description={"The maximum selectable value."}
+/>
+<PropsCard
+  name="minDate"
+  type="Date"
+  description={"The minimum possible date."}
+/>
+<PropsCard
+  name="modifiers"
+  type="Partial<Modifier<string, any>>[]"
+  description={
+    "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+  }
+/>
+<PropsCard
+  name="month"
+  type="Date"
+  description={"The month of the calendar."}
+/>
+<PropsCard
+  name="monthFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'MM'"
+/>
+<PropsCard
+  name="offset"
+  type="[number, number]"
+  description={
+    "The main and cross-axis offset to displace popper element from its reference element."
+  }
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Date | undefined) => void"
+  description={"The callback invoked when value state changes."}
+/>
+<PropsCard
+  name="onChangeMonth"
+  type="(value: Date) => void"
+  description={"The callback invoked when month state changes."}
+/>
+<PropsCard
+  name="onChangeType"
+  type='(
+  type: "year" | "month" | "date",
+  year?: number | undefined,
+  month?: number | undefined,
+) => void'
+  description={"The callback invoked when type state changes."}
+/>
+<PropsCard
+  name="onClose"
+  type="() => void"
+  description={"Callback fired when the popover closes."}
+/>
+<PropsCard
+  name="onOpen"
+  type="() => void"
+  description={"Callback fired when the popover opens."}
+/>
+<PropsCard
+  name="paginateBy"
+  type="number"
+  description={"The number of months to paginate."}
+  defaultValue="1"
+/>
+<PropsCard
+  name="parseDate"
+  type="(value: string) => Date | undefined"
+  description={"Function that converts the input value to Date type."}
+/>
+<PropsCard
+  name="pattern"
+  type="RegExp"
+  description={"The pattern used to check the <input> element's."}
+  defaultValue="'/[^0-9\-\/]/g'"
+/>
+<PropsCard
+  name="placement"
+  type="UIValue<Placement>"
+  description={"The placement of the popper relative to its reference."}
+  defaultValue="'bottom'"
+/>
+<PropsCard
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue="true"
+/>
+<PropsCard name="selectMonthWith" type='"month" | "value"' />
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the DatePicker."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="strategy"
+  type='"fixed" | "absolute"'
+  description={"The CSS positioning strategy to use."}
+  defaultValue="'absolute'"
+/>
+<PropsCard
+  name="today"
+  type="boolean"
+  description={"If `true`, highlight today."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="type"
+  type='"year" | "month" | "date"'
+  description={"The type of the calendar."}
+/>
+<PropsCard
+  name="value"
+  type="Date"
+  description={"The value of the calendar."}
+/>
+<PropsCard
+  name="variant"
+  type='"outline" | "filled" | "flushed" | "unstyled"'
+  description={"The variant of the DatePicker."}
+  defaultValue="outline"
+/>
+<PropsCard
+  name="weekdayFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'dd'"
+/>
+<PropsCard
+  name="weekendDays"
+  type="number[]"
+  description={"Define weekend days."}
+  defaultValue="'[0, 6]'"
+/>
+<PropsCard
+  name="withControls"
+  type="boolean"
+  description={"If `true`, display the calendar control buttons."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withHeader"
+  type="boolean"
+  description={"If `true`, display the calendar header."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withLabel"
+  type="boolean"
+  description={"If `true`, display the calendar label button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withWeekdays"
+  type="boolean"
+  description={"If `true`, display the calendar weekdays."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="yearFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'YYYY'"
+/>
+
+### MonthPicker Props
+
+<PropsCard
+  name="allowInput"
+  type="boolean"
+  description={"If `true`, allows input."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="animation"
+  type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue="'scale'"
+/>
+<PropsCard
+  name="boundary"
+  type='HTMLElement | "clippingParents" | "scrollParent"'
+  description={
+    "The boundary area for the popper. Used within the `preventOverflow` modifier."
+  }
+  defaultValue="'clippingParents'"
+/>
+<PropsCard
+  name="calendarColorScheme"
+  type='"link" | (string & {}) | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 11 more ... | "sky"'
+/>
+<PropsCard
+  name="calendarProps"
+  type="CalendarBaseProps"
+  description={"Props for calendar component."}
+/>
+<PropsCard
+  name="calendarSize"
+  type='UIValue<(string & {}) | "sm" | "md" | "lg" | "full">'
+/>
+<PropsCard
+  name="calendarVariant"
+  type='UIValue<(string & {}) | "solid" | "unstyled" | "subtle">'
+/>
+<PropsCard
+  name="clearIconProps"
+  type="DatePickerIconProps"
+  description={"Props for month picker clear icon element."}
+/>
+<PropsCard
+  name="closeOnBlur"
+  type="boolean"
+  description={
+    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the popover will close when you hit the `Esc` key."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnSelect"
+  type="boolean"
+  description={
+    "If `true`, the list element will be closed when value is selected."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="containerProps"
+  type='Omit<HTMLUIProps<"div">, "children">'
+  description={"Props for month picker container element."}
+/>
+<PropsCard
+  name="defaultIsOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
+/>
+<PropsCard
+  name="defaultMonth"
+  type="Date"
+  description={"The initial month of the calendar."}
+  defaultValue="'new Date()'"
+/>
+<PropsCard
+  name="defaultType"
+  type='"year" | "month"'
+  description={"The initial type of the month picker."}
+  defaultValue="'month'"
+/>
+<PropsCard
+  name="defaultValue"
+  type="Date"
+  description={"The initial value of the calendar."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"enter" | "exit", number>>'
+  description={"The animation duration."}
+/>
+<PropsCard
+  name="errorBorderColor"
+  type="string"
+  description={"The border color when the input is invalid."}
+/>
+<PropsCard
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="focusBorderColor"
+  type="string"
+  description={"The border color when the input is focused."}
+/>
+<PropsCard
+  name="gutter"
+  type="UIValue<number>"
+  description={
+    "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+  }
+  defaultValue="8"
+/>
+<PropsCard
+  name="iconProps"
+  type="DatePickerIconProps"
+  description={"Props for month picker icon element."}
+/>
+<PropsCard
+  name="inputFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'YYYY/MM'"
+/>
+<PropsCard
+  name="inputProps"
+  type='HTMLUIProps<"input">'
+  description={"Props for month picker input element."}
+/>
+<PropsCard
+  name="isClearable"
+  type="boolean"
+  description={"If `true`, display the month picker clear icon."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="lazyBehavior"
+  type="LazyMode"
+  description={
+    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+  }
+  defaultValue="'unmount'"
+/>
+<PropsCard
+  name="locale"
+  type="string"
+  description={
+    "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+  }
+  defaultValue="'en'"
+/>
+<PropsCard
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="maxDate"
+  type="Date"
+  description={"The maximum possible date."}
+/>
+<PropsCard
+  name="minDate"
+  type="Date"
+  description={"The minimum possible date."}
+/>
+<PropsCard
+  name="modifiers"
+  type="Partial<Modifier<string, any>>[]"
+  description={
+    "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+  }
+/>
+<PropsCard
+  name="month"
+  type="Date"
+  description={"The month of the calendar."}
+/>
+<PropsCard
+  name="monthFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'MM'"
+/>
+<PropsCard
+  name="offset"
+  type="[number, number]"
+  description={
+    "The main and cross-axis offset to displace popper element from its reference element."
+  }
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Date | undefined) => void"
+  description={"The callback invoked when value state changes."}
+/>
+<PropsCard
+  name="onChangeMonth"
+  type="(value: Date) => void"
+  description={"The callback invoked when month state changes."}
+/>
+<PropsCard
+  name="onChangeType"
+  type='(type: "year" | "month") => void'
+  description={"The callback invoked when type state changes."}
+/>
+<PropsCard
+  name="onClose"
+  type="() => void"
+  description={"Callback fired when the popover closes."}
+/>
+<PropsCard
+  name="onOpen"
+  type="() => void"
+  description={"Callback fired when the popover opens."}
+/>
+<PropsCard
+  name="parseDate"
+  type="(value: string) => Date | null"
+  description={"Function that converts the input value to Date type."}
+/>
+<PropsCard
+  name="pattern"
+  type="RegExp"
+  description={"The pattern used to check the <input> element's."}
+  defaultValue="'/[^0-9\-\/]/g'"
+/>
+<PropsCard
+  name="placement"
+  type="UIValue<Placement>"
+  description={"The placement of the popper relative to its reference."}
+  defaultValue="'bottom'"
+/>
+<PropsCard
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the MonthPicker."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="strategy"
+  type='"fixed" | "absolute"'
+  description={"The CSS positioning strategy to use."}
+  defaultValue="'absolute'"
+/>
+<PropsCard
+  name="type"
+  type='"year" | "month"'
+  description={"The type of the month picker."}
+/>
+<PropsCard
+  name="value"
+  type="Date"
+  description={"The value of the calendar."}
+/>
+<PropsCard
+  name="variant"
+  type='"outline" | "filled" | "flushed" | "unstyled"'
+  description={"The variant of the MonthPicker."}
+  defaultValue="outline"
+/>
+<PropsCard
+  name="withControls"
+  type="boolean"
+  description={"If `true`, display the calendar control buttons."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withHeader"
+  type="boolean"
+  description={"If `true`, display the calendar header."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withLabel"
+  type="boolean"
+  description={"If `true`, display the calendar label button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="yearFormat"
+  type="string"
+  description={
+    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+  }
+  defaultValue="'YYYY'"
+/>

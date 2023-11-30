@@ -1,11 +1,145 @@
 ---
 title: Progress
-description: This page is currently under construction.
+description: "`Progress` is a component for visually indicating progress."
 package_name: "@yamada-ui/progress"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Progress Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue="primary"
+/>
+<PropsCard
+  name="filledTrackColor"
+  type='"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 252 more ... | ColorModeArray<...>'
+  description={"The CSS `color` property."}
+/>
+<PropsCard
+  name="hasStripe"
+  type="boolean"
+  description={"If `true`, the progress bar will show stripe."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isAnimation"
+  type="boolean"
+  description={
+    "If `true`, the progress will be indeterminate and the `value` prop will be ignored."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="isStripeAnimation"
+  type="boolean"
+  description={
+    "If `true`, and hasStripe is `true`, the stripes will be animated."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="max"
+  type="number"
+  description={"The maximum value of the progress."}
+  defaultValue="100"
+/>
+<PropsCard
+  name="min"
+  type="number"
+  description={"The minimum value of the progress."}
+  defaultValue="0"
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the Progress."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="speed"
+  type="string | number"
+  description={"The animation speed in seconds."}
+  defaultValue="'1.4s'"
+/>
+<PropsCard
+  name="value"
+  type="number"
+  description={"The value of the progress."}
+  defaultValue="0"
+/>
+<PropsCard
+  name="variant"
+  type="string"
+  description={"The variant of the Progress."}
+/>
+
+### CircleProgress Props
+
+<PropsCard
+  name="color"
+  type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+  description={"The CSS `color` property."}
+  defaultValue="'primary'"
+/>
+<PropsCard
+  name="isAnimation"
+  type="boolean"
+  description={
+    "If `true`, the progress will be indeterminate and the `value` prop will be ignored."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRounded"
+  type="boolean"
+  description={"If `true`, the cap of the progress indicator will be rounded."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="max"
+  type="number"
+  description={"The maximum value of the progress."}
+  defaultValue="100"
+/>
+<PropsCard
+  name="min"
+  type="number"
+  description={"The minimum value of the progress."}
+  defaultValue="0"
+/>
+<PropsCard
+  name="size"
+  type='UIValue<number | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | "-moz-min-content" | ... 64 more ... | "9xl">'
+  description={"The CSS `box-size` property."}
+  defaultValue="'6rem'"
+/>
+<PropsCard
+  name="speed"
+  type="[string | number, string | number]"
+  description={"The animation speed in seconds."}
+  defaultValue="'[1.4s, 2s]'"
+/>
+<PropsCard
+  name="thickness"
+  type='UIValue<number | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | "-moz-min-content" | ... 64 more ... | "9xl">'
+  description={"The CSS `width` property."}
+  defaultValue="'0.625ewm'"
+/>
+<PropsCard
+  name="trackColor"
+  type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+  description={"The CSS `color` property."}
+  defaultValue="'border'"
+/>
+<PropsCard
+  name="value"
+  type="number"
+  description={"The value of the progress."}
+  defaultValue="0"
+/>

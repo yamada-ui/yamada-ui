@@ -1,11 +1,146 @@
 ---
 title: Accordion
-description: このページは現在作成中です。
+description: "`Accordion`は、情報を展開または折りたたんで表示するリストのコンポーネントです。"
 package_name: "@yamada-ui/accordion"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Accordion Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="defaultIndex"
+  type="number | number[]"
+  description={"The initial index(es) of the accordion item to expand."}
+/>
+<PropsCard
+  name="icon"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  description={"The accordion icon for all items to use."}
+/>
+<PropsCard
+  name="iconHidden"
+  type="boolean"
+  description={"If `true`, hide the accordion icon for all items."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="index"
+  type="number | number[]"
+  description={"The index(es) of the accordion item to expand."}
+/>
+<PropsCard
+  name="isMultiple"
+  type="boolean"
+  description={"If `true`, multiple accordion items can be expanded at once."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isToggle"
+  type="boolean"
+  description={"If `true`, any expanded accordion item can be collapsed again."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="onChange"
+  type="(index: number | number[]) => void"
+  description={
+    "The callback invoked when accordion items are expanded or collapsed."
+  }
+/>
+<PropsCard
+  name="size"
+  type="string"
+  description={"The size of the Accordion."}
+/>
+<PropsCard
+  name="variant"
+  type='"basic" | "card" | "unstyled"'
+  description={"The variant of the Accordion."}
+  defaultValue="basic"
+/>
+
+### AccordionItem Props
+
+<PropsCard
+  name="icon"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  description={"The accordion icon to use."}
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the accordion item will be disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="label"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  description={"The accordion label to use."}
+/>
+
+### AccordionPanel Props
+
+<PropsCard
+  name="animationOpacity"
+  type="boolean"
+  description={"If `true`, the opacity of the content will be animated."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="delay"
+  type='number | Partial<Record<"enter" | "exit", number>>'
+  description={"Custom `delay` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"enter" | "exit", number>>'
+  description={"Custom `duration` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="endingHeight"
+  type="string | number"
+  description={"The height you want the content in its expanded state."}
+  defaultValue="auto"
+/>
+<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+<PropsCard name="exit" type="any" description={"Custom `exit`."} />
+<PropsCard name="initial" type="any" description={"Custom `initial`."} />
+<PropsCard
+  name="startingHeight"
+  type="string | number"
+  description={"The height you want the content in its collapsed state."}
+  defaultValue="0"
+/>
+<PropsCard
+  name="transition"
+  type='Partial<Record<"enter" | "exit", Transition>>'
+  description={"Custom `transition` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="transitionEnd"
+  type='Partial<Record<"enter" | "exit", MakeCustomValueType<TargetProperties>>>'
+  description={"Custom `transitionEnd` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="unmountOnExit"
+  type="boolean"
+  description={
+    "If `true`, the element will unmount when `isOpen={false}` and animation is done."
+  }
+/>
+
+### AccordionLabel Props
+
+<PropsCard
+  name="icon"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  description={"The accordion icon to use."}
+/>

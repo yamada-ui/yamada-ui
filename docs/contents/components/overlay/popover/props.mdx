@@ -1,11 +1,608 @@
 ---
 title: Popover
-description: This page is currently under construction.
+description: "`Popover` is a component that floats around an element to display information."
 package_name: "@yamada-ui/popover"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be absolutely wonderful!
+### Popover Props
+
+<PropsCard
+  name="animation"
+  type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue="'scale'"
+/>
+<PropsCard
+  name="autoFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be transferred to the first interactive element when the popover opens."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="boundary"
+  type='HTMLElement | "clippingParents" | "scrollParent"'
+  description={
+    "The boundary area for the popper. Used within the `preventOverflow` modifier."
+  }
+  defaultValue="'clippingParents'"
+/>
+<PropsCard
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue="200"
+/>
+<PropsCard
+  name="closeOnBlur"
+  type="boolean"
+  description={
+    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnButton"
+  type="boolean"
+  description={"If `true`, display the popover close button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the popover will close when you hit the `Esc` key."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="defaultIsOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"The animation duration."}
+/>
+<PropsCard
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="gutter"
+  type="UIValue<number>"
+  description={
+    "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+  }
+  defaultValue="8"
+/>
+<PropsCard
+  name="initialFocusRef"
+  type="RefObject<{ focus(): void }>"
+  description={
+    "The `ref` of the element that should receive focus when the popover opens."
+  }
+/>
+<PropsCard
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="isOpen"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
+/>
+<PropsCard
+  name="lazyBehavior"
+  type="LazyMode"
+  description={
+    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+  }
+  defaultValue="'unmount'"
+/>
+<PropsCard
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="modifiers"
+  type="Partial<Modifier<string, any>>[]"
+  description={
+    "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+  }
+/>
+<PropsCard
+  name="offset"
+  type="[number, number]"
+  description={
+    "The main and cross-axis offset to displace popper element from its reference element."
+  }
+/>
+<PropsCard
+  name="onClose"
+  type="() => void"
+  description={"Callback fired when the popover closes."}
+/>
+<PropsCard
+  name="onOpen"
+  type="() => void"
+  description={"Callback fired when the popover opens."}
+/>
+<PropsCard
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue="200"
+/>
+<PropsCard
+  name="placement"
+  type="UIValue<Placement>"
+  description={"The placement of the popper relative to its reference."}
+  defaultValue="'bottom'"
+/>
+<PropsCard
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be returned to the element that triggers the popover when it closes."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="strategy"
+  type='"fixed" | "absolute"'
+  description={"The CSS positioning strategy to use."}
+  defaultValue="'absolute'"
+/>
+<PropsCard
+  name="trigger"
+  type='"click" | "hover" | "never"'
+  description={
+    "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
+  }
+  defaultValue="'click'"
+/>
+
+### PopoverCloseButton Props
+
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the button is disabled."}
+  defaultValue="false"
+/>
+
+### PopoverContent Props
+
+<PropsCard name="about" type="string" />
+<PropsCard name="accessKey" type="string" />
+<PropsCard name="aria-activedescendant" type="string" />
+<PropsCard name="aria-atomic" type="Booleanish" />
+<PropsCard
+  name="aria-autocomplete"
+  type='"list" | "none" | "inline" | "both"'
+/>
+<PropsCard name="aria-braillelabel" type="string" />
+<PropsCard name="aria-brailleroledescription" type="string" />
+<PropsCard name="aria-busy" type="Booleanish" />
+<PropsCard name="aria-checked" type='boolean | "true" | "false" | "mixed"' />
+<PropsCard name="aria-colcount" type="number" />
+<PropsCard name="aria-colindex" type="number" />
+<PropsCard name="aria-colindextext" type="string" />
+<PropsCard name="aria-colspan" type="number" />
+<PropsCard name="aria-controls" type="string" />
+<PropsCard
+  name="aria-current"
+  type='type ONLY_FOR_FORMAT =
+  | boolean
+  | "time"
+  | "true"
+  | "false"
+  | "page"
+  | "step"
+  | "location"
+  | "date"'
+/>
+<PropsCard name="aria-describedby" type="string" />
+<PropsCard name="aria-description" type="string" />
+<PropsCard name="aria-details" type="string" />
+<PropsCard name="aria-disabled" type="Booleanish" />
+<PropsCard
+  name="aria-dropeffect"
+  type='"link" | "none" | "copy" | "execute" | "move" | "popup"'
+/>
+<PropsCard name="aria-errormessage" type="string" />
+<PropsCard name="aria-expanded" type="Booleanish" />
+<PropsCard name="aria-flowto" type="string" />
+<PropsCard name="aria-grabbed" type="Booleanish" />
+<PropsCard
+  name="aria-haspopup"
+  type='type ONLY_FOR_FORMAT =
+  | boolean
+  | "dialog"
+  | "menu"
+  | "grid"
+  | "true"
+  | "false"
+  | "listbox"
+  | "tree"'
+/>
+<PropsCard name="aria-hidden" type="Booleanish" />
+<PropsCard
+  name="aria-invalid"
+  type='boolean | "true" | "false" | "grammar" | "spelling"'
+/>
+<PropsCard name="aria-keyshortcuts" type="string" />
+<PropsCard name="aria-label" type="string" />
+<PropsCard name="aria-labelledby" type="string" />
+<PropsCard name="aria-level" type="number" />
+<PropsCard name="aria-live" type='"off" | "assertive" | "polite"' />
+<PropsCard name="aria-modal" type="Booleanish" />
+<PropsCard name="aria-multiline" type="Booleanish" />
+<PropsCard name="aria-multiselectable" type="Booleanish" />
+<PropsCard name="aria-orientation" type='"horizontal" | "vertical"' />
+<PropsCard name="aria-owns" type="string" />
+<PropsCard name="aria-placeholder" type="string" />
+<PropsCard name="aria-posinset" type="number" />
+<PropsCard name="aria-pressed" type='boolean | "true" | "false" | "mixed"' />
+<PropsCard name="aria-readonly" type="Booleanish" />
+<PropsCard
+  name="aria-relevant"
+  type='type ONLY_FOR_FORMAT =
+  | "text"
+  | "all"
+  | "additions"
+  | "additions removals"
+  | "additions text"
+  | "removals"
+  | "removals additions"
+  | "removals text"
+  | "text additions"
+  | "text removals"'
+/>
+<PropsCard name="aria-required" type="Booleanish" />
+<PropsCard name="aria-roledescription" type="string" />
+<PropsCard name="aria-rowcount" type="number" />
+<PropsCard name="aria-rowindex" type="number" />
+<PropsCard name="aria-rowindextext" type="string" />
+<PropsCard name="aria-rowspan" type="number" />
+<PropsCard name="aria-selected" type="Booleanish" />
+<PropsCard name="aria-setsize" type="number" />
+<PropsCard
+  name="aria-sort"
+  type='"none" | "ascending" | "descending" | "other"'
+/>
+<PropsCard name="aria-valuemax" type="number" />
+<PropsCard name="aria-valuemin" type="number" />
+<PropsCard name="aria-valuenow" type="number" />
+<PropsCard name="aria-valuetext" type="string" />
+<PropsCard name="autoCapitalize" type="string" />
+<PropsCard name="autoCorrect" type="string" />
+<PropsCard name="autoFocus" type="boolean" />
+<PropsCard name="autoSave" type="string" />
+<PropsCard name="className" type="string" />
+<PropsCard name="content" type="string" />
+<PropsCard
+  name="contentEditable"
+  type='"inherit" | Booleanish | "plaintext-only"'
+/>
+<PropsCard name="contextMenu" type="string" />
+<PropsCard
+  name="dangerouslySetInnerHTML"
+  type="{ __html: string | TrustedHTML }"
+/>
+<PropsCard name="datatype" type="string" />
+<PropsCard name="defaultChecked" type="boolean" />
+<PropsCard name="defaultValue" type="string | number | readonly string[]" />
+<PropsCard name="dir" type="string" />
+<PropsCard name="draggable" type="Booleanish" />
+<PropsCard name="hidden" type="boolean" />
+<PropsCard name="id" type="string" />
+<PropsCard name="inlist" type="any" />
+<PropsCard
+  name="inputMode"
+  type='type ONLY_FOR_FORMAT =
+  | "search"
+  | "text"
+  | "none"
+  | "tel"
+  | "url"
+  | "email"
+  | "numeric"
+  | "decimal"'
+/>
+<PropsCard name="is" type="string" />
+<PropsCard name="itemID" type="string" />
+<PropsCard name="itemProp" type="string" />
+<PropsCard name="itemRef" type="string" />
+<PropsCard name="itemScope" type="boolean" />
+<PropsCard name="itemType" type="string" />
+<PropsCard name="lang" type="string" />
+<PropsCard name="nonce" type="string" />
+<PropsCard name="onAbort" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onAbortCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onAnimationEnd" type="AnimationEventHandler<HTMLElement>" />
+<PropsCard
+  name="onAnimationEndCapture"
+  type="AnimationEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onAnimationIteration"
+  type="AnimationEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onAnimationIterationCapture"
+  type="AnimationEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onAnimationStartCapture"
+  type="AnimationEventHandler<HTMLElement>"
+/>
+<PropsCard name="onAuxClick" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onAuxClickCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onBeforeInput" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onBeforeInputCapture" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onBlur" type="FocusEventHandler<HTMLElement>" />
+<PropsCard name="onBlurCapture" type="FocusEventHandler<HTMLElement>" />
+<PropsCard name="onCanPlay" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onCanPlayCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onCanPlayThrough" type="ReactEventHandler<HTMLElement>" />
+<PropsCard
+  name="onCanPlayThroughCapture"
+  type="ReactEventHandler<HTMLElement>"
+/>
+<PropsCard name="onChange" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onChangeCapture" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onClick" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onClickCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard
+  name="onCompositionEnd"
+  type="CompositionEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onCompositionEndCapture"
+  type="CompositionEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onCompositionStart"
+  type="CompositionEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onCompositionStartCapture"
+  type="CompositionEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onCompositionUpdate"
+  type="CompositionEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onCompositionUpdateCapture"
+  type="CompositionEventHandler<HTMLElement>"
+/>
+<PropsCard name="onContextMenu" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onContextMenuCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onCopy" type="ClipboardEventHandler<HTMLElement>" />
+<PropsCard name="onCopyCapture" type="ClipboardEventHandler<HTMLElement>" />
+<PropsCard name="onCut" type="ClipboardEventHandler<HTMLElement>" />
+<PropsCard name="onCutCapture" type="ClipboardEventHandler<HTMLElement>" />
+<PropsCard name="onDoubleClick" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onDoubleClickCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onDragCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragEndCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragEnter" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragEnterCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragExit" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragExitCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragLeave" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragLeaveCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragOver" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragOverCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDragStartCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDrop" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDropCapture" type="DragEventHandler<HTMLElement>" />
+<PropsCard name="onDurationChange" type="ReactEventHandler<HTMLElement>" />
+<PropsCard
+  name="onDurationChangeCapture"
+  type="ReactEventHandler<HTMLElement>"
+/>
+<PropsCard name="onEmptied" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onEmptiedCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onEncrypted" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onEncryptedCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onEnded" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onEndedCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onError" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onErrorCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onFocus" type="FocusEventHandler<HTMLElement>" />
+<PropsCard name="onFocusCapture" type="FocusEventHandler<HTMLElement>" />
+<PropsCard name="onGotPointerCapture" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onGotPointerCaptureCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onInput" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onInputCapture" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onInvalid" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onInvalidCapture" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onKeyDown" type="KeyboardEventHandler<HTMLElement>" />
+<PropsCard name="onKeyDownCapture" type="KeyboardEventHandler<HTMLElement>" />
+<PropsCard name="onKeyPress" type="KeyboardEventHandler<HTMLElement>" />
+<PropsCard name="onKeyPressCapture" type="KeyboardEventHandler<HTMLElement>" />
+<PropsCard name="onKeyUp" type="KeyboardEventHandler<HTMLElement>" />
+<PropsCard name="onKeyUpCapture" type="KeyboardEventHandler<HTMLElement>" />
+<PropsCard name="onLoad" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onLoadCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onLoadedData" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onLoadedDataCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onLoadedMetadata" type="ReactEventHandler<HTMLElement>" />
+<PropsCard
+  name="onLoadedMetadataCapture"
+  type="ReactEventHandler<HTMLElement>"
+/>
+<PropsCard name="onLoadStart" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onLoadStartCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard
+  name="onLostPointerCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard
+  name="onLostPointerCaptureCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onMouseDown" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseDownCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseEnter" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseLeave" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseMove" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseMoveCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseOut" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseOutCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseOver" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseOverCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseUp" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onMouseUpCapture" type="MouseEventHandler<HTMLElement>" />
+<PropsCard name="onPaste" type="ClipboardEventHandler<HTMLElement>" />
+<PropsCard name="onPasteCapture" type="ClipboardEventHandler<HTMLElement>" />
+<PropsCard name="onPause" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onPauseCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onPlay" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onPlayCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onPlaying" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onPlayingCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onPointerCancel" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onPointerCancelCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onPointerDown" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onPointerDownCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onPointerEnter" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onPointerEnterCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onPointerLeave" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onPointerLeaveCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onPointerMove" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onPointerMoveCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onPointerOut" type="PointerEventHandler<HTMLElement>" />
+<PropsCard name="onPointerOutCapture" type="PointerEventHandler<HTMLElement>" />
+<PropsCard name="onPointerOver" type="PointerEventHandler<HTMLElement>" />
+<PropsCard
+  name="onPointerOverCapture"
+  type="PointerEventHandler<HTMLElement>"
+/>
+<PropsCard name="onPointerUp" type="PointerEventHandler<HTMLElement>" />
+<PropsCard name="onPointerUpCapture" type="PointerEventHandler<HTMLElement>" />
+<PropsCard name="onProgress" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onProgressCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onRateChange" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onRateChangeCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onReset" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onResetCapture" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onResize" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onResizeCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onScroll" type="UIEventHandler<HTMLElement>" />
+<PropsCard name="onScrollCapture" type="UIEventHandler<HTMLElement>" />
+<PropsCard name="onSeeked" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSeekedCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSeeking" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSeekingCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSelect" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSelectCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onStalled" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onStalledCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSubmit" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onSubmitCapture" type="FormEventHandler<HTMLElement>" />
+<PropsCard name="onSuspend" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onSuspendCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onTimeUpdate" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onTimeUpdateCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onTouchCancel" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchCancelCapture" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchEnd" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchEndCapture" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchMove" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchMoveCapture" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchStart" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTouchStartCapture" type="TouchEventHandler<HTMLElement>" />
+<PropsCard name="onTransitionEnd" type="TransitionEventHandler<HTMLElement>" />
+<PropsCard
+  name="onTransitionEndCapture"
+  type="TransitionEventHandler<HTMLElement>"
+/>
+<PropsCard name="onVolumeChange" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onVolumeChangeCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onWaiting" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onWaitingCapture" type="ReactEventHandler<HTMLElement>" />
+<PropsCard name="onWheel" type="WheelEventHandler<HTMLElement>" />
+<PropsCard name="onWheelCapture" type="WheelEventHandler<HTMLElement>" />
+<PropsCard name="placeholder" type="string" />
+<PropsCard name="prefix" type="string" />
+<PropsCard name="property" type="string" />
+<PropsCard name="radioGroup" type="string" />
+<PropsCard name="rel" type="string" />
+<PropsCard name="resource" type="string" />
+<PropsCard name="results" type="number" />
+<PropsCard name="rev" type="string" />
+<PropsCard name="role" type="AriaRole" />
+<PropsCard name="security" type="string" />
+<PropsCard name="slot" type="string" />
+<PropsCard name="spellCheck" type="Booleanish" />
+<PropsCard name="suppressContentEditableWarning" type="boolean" />
+<PropsCard name="suppressHydrationWarning" type="boolean" />
+<PropsCard name="tabIndex" type="number" />
+<PropsCard name="title" type="string" />
+<PropsCard name="translate" type='"yes" | "no"' />
+<PropsCard name="typeof" type="string" />
+<PropsCard name="unselectable" type='"on" | "off"' />
+<PropsCard name="vocab" type="string" />
+
+### PopoverHeader Props
+
+### PopoverBody Props
+
+### PopoverFooter Props

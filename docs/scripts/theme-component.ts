@@ -1,10 +1,13 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
+import { Octokit } from "@octokit/rest"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 import { toKebabCase } from "utils/assertion"
+
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -17,8 +20,8 @@ type Options = {
   baseComponentPath: string | undefined
 }
 
-const THEME_DIR_PATH = path.join(".theme", "components")
-const COMPONENT_DIR_PATH = path.join("contents", "components")
+const SOURCE_PATH = path.join("packages", "theme", "src", "components")
+const DIST_PATH = path.join("contents", "components")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {
   en: "Theming",
@@ -92,33 +95,36 @@ const LOCALE_DESC_MAP = {
     return content.join("\n")
   },
 }
+const REPO_REQUEST_PARAMETERS = {
+  owner: "hirotomoyamada",
+  repo: "yamada-ui",
+  path: SOURCE_PATH,
+  ref: "main",
+}
 
 const getThemes = async () => {
-  const fileNames = await readdir(THEME_DIR_PATH)
+  const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
 
-  const themeMap = await Promise.all(
-    fileNames.map(async (fileName) => {
-      const content = await readFile(
-        path.join(THEME_DIR_PATH, fileName),
-        "utf8",
-      )
+  const themes: Record<string, string> = {}
 
-      const name = fileName.replace(".ts", "")
+  if (Array.isArray(data)) {
+    await Promise.all(
+      data.map(async ({ name, path }) => {
+        const { data } = await octokit.repos.getContent({
+          ...REPO_REQUEST_PARAMETERS,
+          path,
+        })
 
-      return { name, content }
-    }),
-  )
+        if ("content" in data) {
+          const content = Buffer.from(data.content, "base64").toString("utf-8")
 
-  const themes = themeMap.reduce<Record<string, string>>(
-    (prev, { name, content }) => {
-      if (name !== "index") {
-        prev[name] = content
-      }
+          name = name.replace(".ts", "")
 
-      return prev
-    },
-    {},
-  )
+          if (name !== "index") themes[name] = content
+        }
+      }),
+    )
+  }
 
   return themes
 }
@@ -132,7 +138,7 @@ const getDirs = async (path: string) => {
 }
 
 const getPaths = async () => {
-  const categoryDirs = await getDirs(COMPONENT_DIR_PATH)
+  const categoryDirs = await getDirs(DIST_PATH)
   const componentDirs = await Promise.all(
     categoryDirs.map(
       async ({ name, path }) => await getDirs(`${path}/${name}`),

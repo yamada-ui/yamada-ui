@@ -1,11 +1,53 @@
 ---
 title: Tag
-description: This page is currently under construction.
+description: >-
+  `Tag` is a component used to categorize or organize items using keywords that
+  describe them.
 package_name: "@yamada-ui/tag"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Tag Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue="primary"
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the tag is disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="leftIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"Icon to be displayed to the left of the tag."}
+/>
+<PropsCard
+  name="onClose"
+  type="MouseEventHandler<HTMLElement>"
+  description={"Function to be executed when the close button is clicked."}
+/>
+<PropsCard
+  name="rightIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"Icon to be displayed to the right of the tag."}
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description={"The size of the Tag."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="variant"
+  type='"solid" | "subtle" | "outline"'
+  description={"The variant of the Tag."}
+  defaultValue="subtle"
+/>

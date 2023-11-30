@@ -1,11 +1,51 @@
 ---
 title: Card
-description: このページは現在作成中です。
+description: "`Card`は、関連する情報をグループ化して表示するコンポーネントです。デフォルトでは、`section`要素をレンダリングします。"
 package_name: "@yamada-ui/card"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Card Props
+
+<PropsCard
+  name="align"
+  type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `align-items` property."}
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue="primary"
+/>
+<PropsCard
+  name="direction"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-direction` property."}
+/>
+<PropsCard
+  name="justify"
+  type='"center" | "right" | "left" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `justify-content` property."}
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "normal" | "lg"'
+  description={"The size of the Card."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="variant"
+  type='"elevated" | "outline" | "solid" | "subtle" | "unstyled"'
+  description={"The variant of the Card."}
+  defaultValue="elevated"
+/>
+
+### CardHeader Props
+
+### CardBody Props
+
+### CardFooter Props

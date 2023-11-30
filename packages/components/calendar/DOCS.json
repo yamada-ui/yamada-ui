@@ -21,7 +21,8 @@
       "type": "string",
       "defaultValue": "'en'",
       "required": false,
-      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/i18n/instance-locale"
     },
     "maxDate": {
       "type": "Date",
@@ -42,7 +43,8 @@
       "type": "string",
       "defaultValue": "'MM'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "onChange": {
       "type": "(value: Date | undefined) => void",
@@ -93,7 +95,8 @@
       "type": "string",
       "defaultValue": "'YYYY'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     }
   },
   "UseCalendar": {
@@ -107,7 +110,8 @@
       "type": "string",
       "defaultValue": "'MMMM YYYY'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "defaultMonth": {
       "type": "Date",
@@ -150,7 +154,8 @@
       "type": "string",
       "defaultValue": "'en'",
       "required": false,
-      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/i18n/instance-locale"
     },
     "maxDate": {
       "type": "Date",
@@ -176,7 +181,8 @@
       "type": "string",
       "defaultValue": "'MM'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "nextRef": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void | undefined) | null) => void)\n  | MutableRefObject<(() => void | undefined) | null>",
@@ -235,7 +241,8 @@
       "type": "string",
       "defaultValue": "'dd'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "weekendDays": {
       "type": "number[]",
@@ -271,7 +278,8 @@
       "type": "string",
       "defaultValue": "'YYYY'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     }
   },
   "Weekday": {
@@ -372,7 +380,8 @@
       "type": "string",
       "defaultValue": "'MMMM YYYY'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "defaultIsOpen": {
       "type": "boolean",
@@ -458,7 +467,8 @@
       "type": "string",
       "defaultValue": "'YYYY/MM/DD'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "inputProps": {
       "type": "HTMLUIProps<\"input\">",
@@ -511,7 +521,8 @@
       "type": "string",
       "defaultValue": "'en'",
       "required": false,
-      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/i18n/instance-locale"
     },
     "matchWidth": {
       "type": "boolean",
@@ -537,7 +548,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "month": {
       "type": "Date",
@@ -548,7 +560,8 @@
       "type": "string",
       "defaultValue": "'MM'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "offset": {
       "type": "[number, number]",
@@ -648,7 +661,8 @@
       "type": "string",
       "defaultValue": "'dd'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "weekendDays": {
       "type": "number[]",
@@ -684,7 +698,8 @@
       "type": "string",
       "defaultValue": "'YYYY'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     }
   },
   "MonthPicker": {
@@ -820,7 +835,8 @@
       "type": "string",
       "defaultValue": "'YYYY/MM'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "inputProps": {
       "type": "HTMLUIProps<\"input\">",
@@ -873,7 +889,8 @@
       "type": "string",
       "defaultValue": "'en'",
       "required": false,
-      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
+      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/i18n/instance-locale"
     },
     "matchWidth": {
       "type": "boolean",
@@ -894,7 +911,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "month": {
       "type": "Date",
@@ -905,7 +923,8 @@
       "type": "string",
       "defaultValue": "'MM'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "offset": {
       "type": "[number, number]",
@@ -1010,7 +1029,8 @@
       "type": "string",
       "defaultValue": "'YYYY'",
       "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     }
   }
 }

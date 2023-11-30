@@ -3,7 +3,8 @@
     "icon": {
       "type": "IconDefinition | IconProp",
       "required": true,
-      "description": "The icon of the font awesome.\nCheck the docs to see the icon of possible modifiers you can pass."
+      "description": "The icon of the font awesome.\nCheck the docs to see the icon of possible modifiers you can pass.",
+      "see": "https://fontawesome.com/v5/docs/web/use-with/react"
     },
     "size": {
       "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",

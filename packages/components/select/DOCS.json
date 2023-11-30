@@ -138,7 +138,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "name": {
       "type": "string",
@@ -371,7 +372,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "name": {
       "type": "string",

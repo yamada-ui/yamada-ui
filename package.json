@@ -34,7 +34,6 @@
     "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
     "changelog": "tsx scripts/changelog",
     "changelog:latest": "tsx scripts/changelog --latest",
-    "changelog:commit": "git add . && git commit git commit --allow-empty -m 'docs: add changelog' && git push",
     "changelog:format": "prettier --write .changelog",
     "version:dev": "changeset version --snapshot dev",
     "release:dev": "changeset publish --tag dev",

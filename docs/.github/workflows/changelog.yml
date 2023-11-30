@@ -1,0 +1,26 @@
+name: Changelog
+
+on:
+  push:
+    branches:
+      - changeset-release/main
+  workflow_dispatch:
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Build
+        run: pnpm build:changelogs
+
+      - name: Commit changelogs
+        run: |
+          git add .
+          git commit --allow-empty -m 'ci(changelog): version packages'
+          git push

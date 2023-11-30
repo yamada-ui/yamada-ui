@@ -1,5 +1,18 @@
 # @yamada-ui/accordion
 
+## 0.4.6
+
+### Patch Changes
+
+- [`27c0ff9d`](https://github.com/hirotomoyamada/yamada-ui/commit/27c0ff9d517b3a6909ff400317115b41343ee1a8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected camelCase and typos in code.
+
+- Updated dependencies [[`27c0ff9d`](https://github.com/hirotomoyamada/yamada-ui/commit/27c0ff9d517b3a6909ff400317115b41343ee1a8)]:
+  - @yamada-ui/use-descendant@0.2.7
+  - @yamada-ui/core@0.12.8
+  - @yamada-ui/icon@0.3.18
+  - @yamada-ui/motion@0.4.18
+  - @yamada-ui/transitions@0.3.20
+
 ## 0.4.5
 
 ### Patch Changes

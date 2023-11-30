@@ -1,5 +1,73 @@
 # @yamada-ui/react
 
+## 0.8.34
+
+### Patch Changes
+
+- Updated dependencies [[`27c0ff9d`](https://github.com/hirotomoyamada/yamada-ui/commit/27c0ff9d517b3a6909ff400317115b41343ee1a8)]:
+  - @yamada-ui/autocomplete@0.7.1
+  - @yamada-ui/accordion@0.4.6
+  - @yamada-ui/use-descendant@0.2.7
+  - @yamada-ui/select@0.5.10
+  - @yamada-ui/use-boolean@0.2.1
+  - @yamada-ui/menu@0.3.27
+  - @yamada-ui/tabs@0.3.24
+  - @yamada-ui/core@0.12.8
+  - @yamada-ui/pin-input@0.4.3
+  - @yamada-ui/segmented-control@0.4.5
+  - @yamada-ui/stepper@0.3.19
+  - @yamada-ui/use-animation@0.4.7
+  - @yamada-ui/alert@0.5.14
+  - @yamada-ui/avatar@0.3.20
+  - @yamada-ui/badge@0.3.18
+  - @yamada-ui/breadcrumb@0.3.20
+  - @yamada-ui/button@0.3.20
+  - @yamada-ui/card@0.3.19
+  - @yamada-ui/checkbox@0.5.2
+  - @yamada-ui/close-button@0.3.19
+  - @yamada-ui/editable@0.3.24
+  - @yamada-ui/file-button@0.3.24
+  - @yamada-ui/file-input@0.4.15
+  - @yamada-ui/form-control@0.3.21
+  - @yamada-ui/highlight@0.3.18
+  - @yamada-ui/icon@0.3.18
+  - @yamada-ui/image@0.3.19
+  - @yamada-ui/indicator@0.3.18
+  - @yamada-ui/input@0.3.24
+  - @yamada-ui/kbd@0.3.18
+  - @yamada-ui/layouts@0.3.19
+  - @yamada-ui/link@0.3.19
+  - @yamada-ui/list@0.3.18
+  - @yamada-ui/loading@0.5.6
+  - @yamada-ui/modal@0.5.4
+  - @yamada-ui/motion@0.4.18
+  - @yamada-ui/native-select@0.5.4
+  - @yamada-ui/native-table@0.4.12
+  - @yamada-ui/notice@0.5.9
+  - @yamada-ui/number-input@0.3.22
+  - @yamada-ui/pagination@0.4.21
+  - @yamada-ui/popover@0.3.25
+  - @yamada-ui/progress@0.4.18
+  - @yamada-ui/radio@0.5.2
+  - @yamada-ui/reorder@0.3.19
+  - @yamada-ui/scroll-area@0.3.19
+  - @yamada-ui/skeleton@0.4.2
+  - @yamada-ui/slider@0.4.16
+  - @yamada-ui/switch@0.4.2
+  - @yamada-ui/tag@0.4.2
+  - @yamada-ui/textarea@0.3.21
+  - @yamada-ui/tooltip@0.4.17
+  - @yamada-ui/transitions@0.3.20
+  - @yamada-ui/typography@0.3.18
+  - @yamada-ui/use-breakpoint@0.2.18
+  - @yamada-ui/use-popper@0.4.18
+  - @yamada-ui/use-token@0.3.12
+  - @yamada-ui/use-value@0.2.18
+  - @yamada-ui/providers@0.9.14
+  - @yamada-ui/theme@0.11.17
+  - @yamada-ui/theme-tools@0.2.26
+  - @yamada-ui/use-media-query@0.2.29
+
 ## 0.8.33
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @yamada-ui/segmented-control
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies [[`27c0ff9d`](https://github.com/hirotomoyamada/yamada-ui/commit/27c0ff9d517b3a6909ff400317115b41343ee1a8)]:
+  - @yamada-ui/use-descendant@0.2.7
+  - @yamada-ui/core@0.12.8
+
 ## 0.4.4
 
 ### Patch Changes

@@ -191,17 +191,18 @@ const generateContent = async ({
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }
 
-        if (typeof defaultValue === "string") {
-          defaultValue = defaultValue
-            .replace(/<\s+/g, "<")
-            .replace(/\s+>/g, ">")
+        if (typeof description === "string") {
+          description = description.replace(/\n/g, "\\n")
         }
 
         const props = [`name="${name}"`]
 
         if (required) props.push("required")
-        if (type) props.push(`type='${type}'`)
-        if (description) props.push(`description='${description}'`)
+        if (type !== undefined) props.push(`type='${type}'`)
+        if (description !== undefined)
+          props.push(`description={"${description}"}`)
+        if (defaultValue !== undefined)
+          props.push(`defaultValue="${defaultValue}"`)
 
         content.push(`<PropsCard ${props.join("\n")} />`)
       },

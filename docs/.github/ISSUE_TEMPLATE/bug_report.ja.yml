@@ -8,9 +8,8 @@ body:
 
         提出する前に、オープン/クローズされた問題を検索してください。以前に、誰かが同じことを尋ねているかもしれません！ 😎
 
-          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
+          - [Issues](https://github.com/hirotomoyamada/yamada-docs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/hirotomoyamada/yamada-docs/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
 
         山田たちは、全てボランティアです。このテンプレートを正確に記入することで、山田たちの手助けになります。💖
   - type: "textarea"

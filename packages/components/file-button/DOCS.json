@@ -63,7 +63,7 @@
       "description": "The text to display when the button is loading."
     },
     "onChange": {
-      "type": "(files: File[] | null) => void",
+      "type": "(files: File[] | undefined) => void",
       "required": false,
       "description": "Function to be called when a file change event occurs."
     },

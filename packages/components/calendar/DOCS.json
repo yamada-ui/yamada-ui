@@ -45,7 +45,7 @@
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
     },
     "onChange": {
-      "type": "(value: Date | null) => void",
+      "type": "(value: Date | undefined) => void",
       "required": false,
       "description": "The callback invoked when value state changes."
     },
@@ -556,7 +556,7 @@
       "description": "The main and cross-axis offset to displace popper element from its reference element."
     },
     "onChange": {
-      "type": "(value: Date | null) => void",
+      "type": "(value: Date | undefined) => void",
       "required": false,
       "description": "The callback invoked when value state changes."
     },
@@ -587,7 +587,7 @@
       "description": "The number of months to paginate."
     },
     "parseDate": {
-      "type": "(value: string) => Date | null",
+      "type": "(value: string) => Date | undefined",
       "required": false,
       "description": "Function that converts the input value to Date type."
     },
@@ -913,7 +913,7 @@
       "description": "The main and cross-axis offset to displace popper element from its reference element."
     },
     "onChange": {
-      "type": "(value: Date | null) => void",
+      "type": "(value: Date | undefined) => void",
       "required": false,
       "description": "The callback invoked when value state changes."
     },

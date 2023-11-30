@@ -1,12 +1,12 @@
 {
-  "FontAwesomeIcon": {
+  "Icon": {
     "icon": {
       "type": "IconDefinition | IconProp",
       "required": true,
       "description": "The icon of the font awesome.\nCheck the docs to see the icon of possible modifiers you can pass."
     },
     "size": {
-      "type": "number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 17 more ... | ColorModeArray<...>",
+      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
       "required": false,
       "description": "The CSS `font-size` property."
     }

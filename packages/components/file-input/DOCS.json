@@ -50,7 +50,7 @@
       "description": "If `true`, the form control will be required."
     },
     "onChange": {
-      "type": "(files: File[] | null) => void",
+      "type": "(files: File[] | undefined) => void",
       "required": false,
       "description": "Function to be called when a file change event occurs."
     },

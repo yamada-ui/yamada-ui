@@ -36,9 +36,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # - name: Generate Docs
-      #   run: pnpm gen:docs
-
       - name: Create release PR or publish to NPM
         id: changesets
         uses: changesets/action@v1
@@ -61,12 +58,32 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Update Docs
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm gen:docs
+          git add .
+          git commit --allow-empty -m 'docs: updated docs'
+          git push
+
       - name: Update Changelog
         if: steps.changesets.outputs.published == 'true'
         run: |
           pnpm changelog:latest
           pnpm changelog:format
-          pnpm changelog:commit
+          git add .
+          git commit --allow-empty -m 'docs: add changelog'
+          git push
+
+      - name: Sync Changelog
+        if: steps.changesets.outputs.published == 'true'
+        uses: hirotomoyamada/repo-file-sync-action@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GIT_EMAIL: hirotomo.yamada@avap.co.jp
+          GIT_USERNAME: hirotomoyamada
+          SKIP_PR: true
+          TARGET_BRANCH: changeset-release/main
 
       - name: Notification Mattermost and Discord
         if: steps.changesets.outputs.published == 'true'

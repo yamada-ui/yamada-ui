@@ -1,11 +1,55 @@
 ---
 title: Reorder
-description: This page is currently under construction.
+description: >-
+  `Reorder` is a component that allows you to change the order of items using
+  drag and drop.
 package_name: "@yamada-ui/reorder"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be amazing!
+### Reorder Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="onChange"
+  type="(labels: (string | number)[]) => void"
+  description="The callback invoked when reorder items are moved."
+/>
+<PropsCard
+  name="onCompleteChange"
+  type="(labels: (string | number)[]) => void"
+  description="The callback invoked when the movement of reorder items is completed."
+/>
+<PropsCard
+  name="orientation"
+  type='"horizontal" | "vertical"'
+  description="The orientation of the reorder."
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "normal" | "lg"'
+  description="The size of the Reorder."
+/>
+<PropsCard
+  name="variant"
+  type='"elevated" | "outline" | "unstyled"'
+  description="The variant of the Reorder."
+/>
+
+### ReorderItem Props
+
+<PropsCard
+  name="label"
+  required
+  type="string | number"
+  description="The label of the reorder item."
+/>
+
+### ReorderTrigger Props

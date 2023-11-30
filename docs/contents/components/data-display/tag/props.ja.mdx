@@ -1,11 +1,47 @@
 ---
 title: Tag
-description: このページは現在作成中です。
+description: "`Tag`は、アイテムを説明するキーワードを使用して分類または整理するコンポーネントです。"
 package_name: "@yamada-ui/tag"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Tag Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the tag is disabled."
+/>
+<PropsCard
+  name="leftIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description="Icon to be displayed to the left of the tag."
+/>
+<PropsCard
+  name="onClose"
+  type="MouseEventHandler<HTMLElement>"
+  description="Function to be executed when the close button is clicked."
+/>
+<PropsCard
+  name="rightIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description="Icon to be displayed to the right of the tag."
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description="The size of the Tag."
+/>
+<PropsCard
+  name="variant"
+  type='"solid" | "subtle" | "outline"'
+  description="The variant of the Tag."
+/>

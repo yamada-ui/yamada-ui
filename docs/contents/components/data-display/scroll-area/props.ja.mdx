@@ -1,11 +1,32 @@
 ---
 title: ScrollArea
-description: このページは現在作成中です。
+description: "`ScrollArea`は、カスタムされたスクロールバーが表示されるコンポーネントです。"
 package_name: "@yamada-ui/scroll-area"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### ScrollArea Props
+
+<PropsCard
+  name="innerProps"
+  type='HTMLUIProps<"div">'
+  description="Props for inner element."
+/>
+<PropsCard
+  name="onScrollPositionChange"
+  type="({ x, y }: { x: number; y: number }) => void"
+  description="Callback function for when the scroll position changes."
+/>
+<PropsCard
+  name="scrollHideDelay"
+  type="number"
+  description="Delay in milliseconds before scrollbars are hidden."
+/>
+<PropsCard
+  name="type"
+  type='"always" | "scroll" | "hover" | "never"'
+  description="Scrollbar visibility type."
+/>

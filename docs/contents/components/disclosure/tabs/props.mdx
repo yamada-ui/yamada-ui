@@ -1,11 +1,101 @@
 ---
 title: Tabs
-description: This page is currently under construction.
+description: "`Tabs` is a component for switching between different display areas."
 package_name: "@yamada-ui/tabs"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Tabs Props
+
+<PropsCard name="align"
+type='"center" | "start" | "end"'
+description='The alignment of the tabs.' />
+<PropsCard name="colorScheme"
+type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+description='The visual color appearance of the component.' />
+<PropsCard name="defaultIndex"
+type='number'
+description='The index of the selected tab.' />
+<PropsCard name="index"
+type='number'
+description='The index of the selected tab.' />
+<PropsCard name="isFitted"
+type='boolean'
+description='If `true`, tabs will stretch to width of the tablist.' />
+<PropsCard name="isLazy"
+type='boolean'
+description='If `true`, rendering of the tab panel's will be deferred until it is selected.' />
+<PropsCard name="isManual"
+type='boolean'
+description='If `true`, the tabs will be manually activated and　display its panel by pressing Space or Enter.
+
+If `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.' />
+
+<PropsCard name="lazyBehavior"
+type='LazyMode'
+description='The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.
+
+- `unmount`: The content of inactive tab panels are always unmounted.
+- `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected.' />
+  <PropsCard
+    name="onChange"
+    type="(index: number) => void"
+    description="The callback invoked when the index changes."
+  />
+  <PropsCard
+    name="orientation"
+    type='"horizontal" | "vertical"'
+    description="The orientation of the tab list."
+  />
+  <PropsCard
+    name="size"
+    type='"sm" | "md" | "lg"'
+    description="The size of the Tabs."
+  />
+  <PropsCard
+    name="tabListProps"
+    type="TabListProps"
+    description="Props for tab list component."
+  />
+  <PropsCard
+    name="tabPanelsProps"
+    type="TabPanelsProps"
+    description="Props for tab panels components."
+  />
+  <PropsCard
+    name="variant"
+    type='"line" | "sticky" | "sticky-subtle" | "sticky-solid" | "rounded" | "rounded-subtle" | "rounded-solid" | "unstyled"'
+    description="The variant of the Tabs."
+  />
+
+### TabList Props
+
+### Tab Props
+
+<PropsCard
+  name="clickOnEnter"
+  type="boolean"
+  description="Whether or not trigger click on pressing `Enter`."
+/>
+<PropsCard
+  name="clickOnSpace"
+  type="boolean"
+  description="Whether or not trigger click on pressing `Space`."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
+/>
+<PropsCard
+  name="isFocusable"
+  type="boolean"
+  description="If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+/>
+
+### TabPanels Props
+
+### TabPanel Props

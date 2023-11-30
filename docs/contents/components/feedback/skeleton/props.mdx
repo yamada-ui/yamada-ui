@@ -1,11 +1,84 @@
 ---
 title: Skeleton
-description: This page is currently under construction.
+description: "`Skeleton` is a component that acts as a placeholder until content is loaded."
 package_name: "@yamada-ui/skeleton"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be amazing!
+### Skeleton Props
+
+<PropsCard name="colorScheme"
+type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+description='The visual color appearance of the component.' />
+<PropsCard name="endColor"
+type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+description='The color at the animation end.' />
+<PropsCard name="fadeDuration"
+type='string | number'
+description='The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.' />
+<PropsCard name="isFitContent"
+type='boolean'
+description='If `true`, the skeleton will take the width of it's children.' />
+<PropsCard name="isLoaded"
+type='boolean'
+description='If `true`, it'll render its children with a nice fade transition.' />
+<PropsCard name="size"
+type='string'
+description='The size of the Skeleton.' />
+<PropsCard name="speed"
+type='string | number'
+description='The animation speed in seconds.' />
+<PropsCard name="startColor"
+type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+description='The color at the animation start.' />
+<PropsCard name="variant"
+type='string'
+description='The variant of the Skeleton.' />
+
+### SkeletonCircle Props
+
+<PropsCard name="endColor"
+type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+description='The color at the animation end.' />
+<PropsCard name="fadeDuration"
+type='string | number'
+description='The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.' />
+<PropsCard name="isFitContent"
+type='boolean'
+description='If `true`, the skeleton will take the width of it's children.' />
+<PropsCard name="isLoaded"
+type='boolean'
+description='If `true`, it'll render its children with a nice fade transition.' />
+<PropsCard name="speed"
+type='string | number'
+description='The animation speed in seconds.' />
+<PropsCard name="startColor"
+type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+description='The color at the animation start.' />
+
+### SkeletonText Props
+
+<PropsCard name="endColor"
+type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+description='The color at the animation end.' />
+<PropsCard name="fadeDuration"
+type='string | number'
+description='The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.' />
+<PropsCard name="isFitContent"
+type='boolean'
+description='If `true`, the skeleton will take the width of it's children.' />
+<PropsCard name="isLoaded"
+type='boolean'
+description='If `true`, it'll render its children with a nice fade transition.' />
+<PropsCard name="speed"
+type='string | number'
+description='The animation speed in seconds.' />
+<PropsCard name="startColor"
+type='UIValue<"link" | "border" | Color | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 251 more ... | "danger">'
+description='The color at the animation start.' />
+<PropsCard name="textHeight"
+type='UIValue<number | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "normal" | "1" | "2" | "3" | "4" | ... 53 more ... | "9xl">'
+description='The CSS `height` property.' />

@@ -1,11 +1,149 @@
 ---
 title: FormControl
-description: This page is currently being created.
+description: >-
+  `FormControl` is a component used to group form elements with labels, help
+  messages, error messages, etc.
 package_name: "@yamada-ui/form-control"
 with_description: true
 tab: Props
 ---
 
-We're currently in the process of creating a page.😘
+## Props
 
-Wouldn't you like to contribute this page? That's amazing!
+### FormControl Props
+
+<PropsCard
+  name="errorMessage"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description="The form control error message to use."
+/>
+<PropsCard
+  name="helperMessage"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description="The form control helper message to use."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isReplace"
+  type="boolean"
+  description="If `true`, switch between helper message and error message using isInvalid."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description="The form control label to use."
+/>
+<PropsCard
+  name="optionalIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+<PropsCard
+  name="requiredIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+### Label Props
+
+<PropsCard name="isRequired" type="boolean" />
+<PropsCard
+  name="optionalIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+<PropsCard
+  name="requiredIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+### HelperMessage Props
+
+### ErrorMessage Props
+
+### UseFormControl Props
+
+<PropsCard name="disabled" type="boolean" />
+<PropsCard name="id" type="string" />
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard name="onBlur" type="FocusEventHandler<Y>" />
+<PropsCard name="onFocus" type="FocusEventHandler<Y>" />
+<PropsCard name="readOnly" type="boolean" />
+<PropsCard name="required" type="boolean" />

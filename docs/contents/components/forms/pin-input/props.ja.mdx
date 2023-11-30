@@ -1,11 +1,86 @@
 ---
 title: PinInput
-description: このページは現在作成中です。
+description: "`PinInput`は、ピンコードやOTP(ワンタイムパスワード)の入力を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/pin-input"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### PinInput Props
+
+<PropsCard name="colorScheme"
+type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+description='The visual color appearance of the component.' />
+<PropsCard name="errorBorderColor"
+type='"link" | "border" | BorderColor | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 253 more ... | ColorModeArray<...>'
+description='The border color when the input is invalid.' />
+<PropsCard name="focusBorderColor"
+type='"link" | "border" | BorderColor | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 253 more ... | ColorModeArray<...>'
+description='The border color when the input is focused.' />
+<PropsCard name="isDisabled"
+type='boolean'
+description='If `true`, the form control will be disabled.' />
+<PropsCard name="isInvalid"
+type='boolean'
+description='If `true`, the form control will be invalid.' />
+<PropsCard name="isReadOnly"
+type='boolean'
+description='If `true`, the form control will be readonly.' />
+<PropsCard name="isRequired"
+type='boolean'
+description='If `true`, the form control will be required.' />
+<PropsCard name="items"
+type='number'
+description='The number of inputs to display.' />
+<PropsCard name="manageFocus"
+type='boolean'
+description='If `true`, focus will move automatically to the next input once filled.' />
+<PropsCard name="mask"
+type='boolean'
+description='If `true`, the input's value will be masked just like `type=password`.' />
+<PropsCard name="onChange"
+type='(value: string) => void'
+description='Function called on input change.' />
+<PropsCard name="onComplete"
+type='(value: string) => void'
+description='Function called when all inputs have valid values.' />
+<PropsCard name="otp"
+type='boolean'
+description='If `true`, the pin input component signals to its fields that they should.' />
+<PropsCard name="size"
+type='"xs" | "sm" | "md" | "lg"'
+description='The size of the PinInput.' />
+<PropsCard name="type"
+type='"number" | "alphanumeric"'
+description='The type of values the pin-input should allow.' />
+<PropsCard name="value"
+type='string'
+description='The value of the pin input.' />
+<PropsCard name="variant"
+type='"outline" | "filled" | "flushed" | "unstyled"'
+description='The variant of the PinInput.' />
+
+### PinInputField Props
+
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>

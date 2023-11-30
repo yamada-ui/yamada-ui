@@ -1,11 +1,32 @@
 ---
 title: List
-description: このページは現在作成中です。
+description: "`List`は、リストを表示するコンポーネントです。デフォルトでは、`ul`要素をレンダリングします。"
 package_name: "@yamada-ui/list"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### List Props
+
+<PropsCard
+  name="stylePosition"
+  type="UIValue<ListStylePosition>"
+  description="The CSS `list-style-position` property."
+/>
+<PropsCard
+  name="styleType"
+  type="UIValue<ListStyleType>"
+  description="The CSS `list-style-type` property."
+/>
+
+### ListIcon Props
+
+<PropsCard
+  name="size"
+  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "xs" | "3xl" | "4xl" | "large" | ... 13 more ... | "9xl">'
+  description="The CSS `font-size` property."
+/>
+
+### ListItem Props

@@ -1,11 +1,81 @@
 ---
 title: NativeTable
-description: このページは現在作成中です。
+description: "`NativeTable`は、データを効率的に整理して表示するコンポーネントです。"
 package_name: "@yamada-ui/native-table"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### NativeTable Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="highlightOnHover"
+  type="boolean"
+  description="If `true`, highlight the row when the table row is hovered."
+/>
+<PropsCard
+  name="layout"
+  type='"fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `table-layout` property."
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg" | "xl"'
+  description="The size of the NativeTable."
+/>
+<PropsCard
+  name="variant"
+  type='"simple" | "striped" | "unstyled"'
+  description="The variant of the NativeTable."
+/>
+<PropsCard
+  name="withBorder"
+  type="boolean"
+  description="If `true`, display the outer border of the table."
+/>
+<PropsCard
+  name="withColumnBorders"
+  type="boolean"
+  description="If `true`, display line on the columns of the table."
+/>
+
+### TableContainer Props
+
+### TableHead Props
+
+### TableBody Props
+
+### TableFoot Props
+
+### Tr Props
+
+### Th Props
+
+<PropsCard
+  name="isNumeric"
+  type="boolean"
+  description="Aligns the cell content to the right."
+/>
+
+### Td Props
+
+<PropsCard
+  name="isNumeric"
+  type="boolean"
+  description="Aligns the cell content to the right."
+/>
+
+### TableCaption Props
+
+<PropsCard
+  name="placement"
+  type='"top" | "bottom"'
+  description="The placement of the table caption."
+/>

@@ -1,11 +1,113 @@
 ---
 title: Button
-description: This page is currently being created.
+description: >-
+  `Button` is an interactive component that allows users to perform actions such
+  as submitting forms and toggling modals.
 package_name: "@yamada-ui/button"
 with_description: true
 tab: Props
 ---
 
-We're currently in the process of creating a page.😘
+## Props
 
-Wouldn't you like to contribute this page? That's amazing!
+### Button Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="isActive"
+  type="boolean"
+  description="If `true`, the button is represented as active."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the button is disabled."
+/>
+<PropsCard
+  name="isLoading"
+  type="boolean"
+  description="If `true`, the loading state of the button is represented."
+/>
+<PropsCard
+  name="leftIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description="The icon to display at the left side of the button."
+/>
+<PropsCard
+  name="loadingIcon"
+  type='type ONLY_FOR_FORMAT =
+  | "audio"
+  | "grid"
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | "oval"
+  | "dots"
+  | "puff"
+  | "rings"
+  | "circles"'
+  description="The icon to display when the button is loading."
+/>
+<PropsCard
+  name="loadingPlacement"
+  type='"end" | "start"'
+  description="The placement of the loading indicator. Accepts `start` or `end`."
+/>
+<PropsCard
+  name="loadingText"
+  type="string"
+  description="The text to display when the button is loading."
+/>
+<PropsCard
+  name="rightIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description="The icon to display at the right side of the button."
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description="The size of the Button."
+/>
+<PropsCard
+  name="variant"
+  type='"solid" | "outline" | "link" | "ghost" | "unstyled"'
+  description="The variant of the Button."
+/>
+
+### ButtonGroup Props
+
+<PropsCard
+  name="direction"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `flex-direction` property."
+/>
+<PropsCard
+  name="isAttached"
+  type="boolean"
+  description="If `true`, the borderRadius of button that are direct children will be altered to look flushed together."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, all wrapped button will be disabled."
+/>
+
+### IconButton Props
+
+<PropsCard name="icon"
+type='ReactElement<any, string | JSXElementConstructor<any>>'
+description='The icon to be used in the button.' />
+<PropsCard name="isActive"
+type='boolean'
+description='If `true`, the button is represented as active.' />
+<PropsCard name="isDisabled"
+type='boolean'
+description='If `true`, the button is disabled.' />
+<PropsCard name="isLoading"
+type='boolean'
+description='If `true`, the loading state of the button is represented.' />
+<PropsCard name="isRounded"
+type='boolean'
+description='If `true`, the button will be perfectly round. Else, it'll be slightly round.' />

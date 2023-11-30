@@ -1,11 +1,161 @@
 ---
 title: Pagination
-description: このページは現在作成中です。
+description: "`Pagination`は、コンテンツのページ分割とナビゲーションを管理するためのコンポーネントです。"
 package_name: "@yamada-ui/pagination"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Pagination Props
+
+<PropsCard
+  name="total"
+  required
+  type="number"
+  description="The total number of pages in pagination."
+/>
+<PropsCard
+  name="boundaries"
+  type="UIValue<number>"
+  description="Number of elements visible on the left/right edges."
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="component"
+  type="FC<PaginationItemProps>"
+  description="The pagination button component to use."
+/>
+<PropsCard
+  name="controlNextProps"
+  type='HTMLUIProps<"button">'
+  description="Props for next of the control button element."
+/>
+<PropsCard
+  name="controlPrevProps"
+  type='HTMLUIProps<"button">'
+  description="Props for previous of the control button element."
+/>
+<PropsCard
+  name="controlProps"
+  type='HTMLUIProps<"button">'
+  description="Props for control button element."
+/>
+<PropsCard
+  name="defaultPage"
+  type="number"
+  description="The initial page of the pagination.
+Should be less than `total` and greater than `1`."
+/>
+<PropsCard
+  name="edgeFirstProps"
+  type='HTMLUIProps<"button">'
+  description="Props for first of the edge button element."
+/>
+<PropsCard
+  name="edgeLastProps"
+  type='HTMLUIProps<"button">'
+  description="Props for last of the edge button element."
+/>
+<PropsCard
+  name="edgeProps"
+  type='HTMLUIProps<"button">'
+  description="Props for edge button element."
+/>
+<PropsCard
+  name="innerProps"
+  type='HTMLUIProps<"div">'
+  description="Props for inner element."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the pagination all item will be disabled."
+/>
+<PropsCard
+  name="itemProps"
+  type='HTMLUIProps<"button">'
+  description="Props for button element."
+/>
+<PropsCard
+  name="onChange"
+  type="(page: number) => void"
+  description="The callback invoked when the page changes."
+/>
+<PropsCard
+  name="page"
+  type="number"
+  description="The page of the pagination.
+Should be less than `total` and greater than `1`."
+/>
+<PropsCard
+  name="siblings"
+  type="UIValue<number>"
+  description="Number of siblings displayed on the left/right side of selected page."
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg" | "xl"'
+  description="The size of the Pagination."
+/>
+<PropsCard
+  name="variant"
+  type='"solid" | "outline" | "ghost" | "unstyled"'
+  description="The variant of the Pagination."
+/>
+<PropsCard
+  name="withControls"
+  type="UIValue<boolean>"
+  description="If `true`, display the control buttons."
+/>
+<PropsCard
+  name="withEdges"
+  type="UIValue<boolean>"
+  description="If `true`, display the edge buttons."
+/>
+
+### UsePagination Props
+
+<PropsCard
+  name="total"
+  required
+  type="number"
+  description="The total number of pages in pagination."
+/>
+<PropsCard
+  name="boundaries"
+  type="UIValue<number>"
+  description="Number of elements visible on the left/right edges."
+/>
+<PropsCard
+  name="defaultPage"
+  type="number"
+  description="The initial page of the pagination.
+Should be less than `total` and greater than `1`."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the pagination all item will be disabled."
+/>
+<PropsCard
+  name="onChange"
+  type="(page: number) => void"
+  description="The callback invoked when the page changes."
+/>
+<PropsCard
+  name="page"
+  type="number"
+  description="The page of the pagination.
+Should be less than `total` and greater than `1`."
+/>
+<PropsCard
+  name="siblings"
+  type="UIValue<number>"
+  description="Number of siblings displayed on the left/right side of selected page."
+/>

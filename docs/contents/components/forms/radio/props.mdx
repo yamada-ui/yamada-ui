@@ -1,11 +1,222 @@
 ---
 title: Radio
-description: This page is currently under construction.
+description: >-
+  `Radio` is a component used for allowing users to select one option from
+  multiple choices.
 package_name: "@yamada-ui/radio"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be amazing!
+### Radio Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="defaultIsChecked"
+  type="boolean"
+  description="If `true`, the radio will be initially checked."
+/>
+<PropsCard name="iconProps" type='HTMLUIProps<"span">' />
+<PropsCard name="id" type="string" description="id assigned to input." />
+<PropsCard name="inputProps" type="InputHTMLAttributes<HTMLInputElement>" />
+<PropsCard
+  name="isChecked"
+  type="boolean"
+  description="If `true`, the radio will be checked."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard name="labelProps" type='HTMLUIProps<"span">' />
+<PropsCard
+  name="name"
+  type="string"
+  description="The name of the input field in a radio."
+/>
+<PropsCard
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description="The callback invoked when the checked state changes."
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description="The size of the Radio."
+/>
+<PropsCard
+  name="value"
+  type="Y"
+  description="The value to be used in the radio button."
+/>
+<PropsCard
+  name="variant"
+  type="string"
+  description="The variant of the Radio."
+/>
+
+### UseRadio Props
+
+<PropsCard
+  name="defaultIsChecked"
+  type="boolean"
+  description="If `true`, the radio will be initially checked."
+/>
+<PropsCard name="id" type="string" description="id assigned to input." />
+<PropsCard
+  name="isChecked"
+  type="boolean"
+  description="If `true`, the radio will be checked."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard
+  name="name"
+  type="string"
+  description="The name of the input field in a radio."
+/>
+<PropsCard
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description="The callback invoked when the checked state changes."
+/>
+<PropsCard
+  name="value"
+  type="Y"
+  description="The value to be used in the radio button."
+/>
+
+### RadioGroup Props
+
+<PropsCard name="align"
+type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+description='The CSS `align-items` property.' />
+<PropsCard name="basis"
+type='number | "content" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | "-moz-min-content" | ... 9 more ... | ((theme: StyledTheme) => UIValue<...>)'
+description='The CSS `flex-basis` property.' />
+<PropsCard name="direction"
+type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+description='The CSS `flex-direction` property.' />
+<PropsCard name="grow"
+type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexGrow> | ColorModeArray<FlexGrow> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+description='The CSS `flex-grow` property.' />
+<PropsCard name="isDisabled"
+type='boolean'
+description='If `true`, the form control will be disabled.' />
+<PropsCard name="isInvalid"
+type='boolean'
+description='If `true`, the form control will be invalid.' />
+<PropsCard name="isNative"
+type='boolean'
+description='If `true`, input elements will receive `checked` attribute instead of `isChecked`.
+
+This assumes, you're using native radio inputs.' />
+
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard
+  name="items"
+  type="RadioItem<Y>[]"
+  description="If provided, generate radios based on items."
+/>
+<PropsCard
+  name="justify"
+  type='"center" | "right" | "left" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `justify-content` property."
+/>
+<PropsCard
+  name="name"
+  type="string"
+  description="The HTML `name` attribute used for forms."
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Y) => void"
+  description="The callback fired when any children radio is checked or unchecked."
+/>
+<PropsCard
+  name="shrink"
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexShrink> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `flex-shrink` property."
+/>
+<PropsCard name="value" type="Y" description="The value of the radio group." />
+<PropsCard
+  name="wrap"
+  type='"wrap" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap-reverse" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `flex-wrap` property."
+/>
+
+### UseRadioGroup Props
+
+<PropsCard name="defaultValue"
+type='Y'
+description='The initial value of the radio group.' />
+<PropsCard name="id"
+type='string'
+description='The top-level id string that will be applied to the radios.
+The index of the radio will be appended to this top-level id.' />
+<PropsCard name="isNative"
+type='boolean'
+description='If `true`, input elements will receive `checked` attribute instead of `isChecked`.
+
+This assumes, you're using native radio inputs.' />
+
+<PropsCard
+  name="name"
+  type="string"
+  description="The HTML `name` attribute used for forms."
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Y) => void"
+  description="The callback fired when any children radio is checked or unchecked."
+/>
+<PropsCard name="value" type="Y" description="The value of the radio group." />

@@ -1,11 +1,217 @@
 ---
 title: NumberInput
-description: このページは現在作成中です。
+description: "`NumberInput`は、ユーザーからの数値入力を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/number-input"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### NumberInput Props
+
+<PropsCard name="addonProps"
+type='HTMLUIProps<"div">'
+description='Props for addon component.' />
+<PropsCard name="allowMouseWheel"
+type='boolean'
+description='If `true`, the input's value will change based on mouse wheel.' />
+<PropsCard name="clampValueOnBlur"
+type='boolean'
+description='This controls the value update when you blur out of the input.
+- If `true` and the value is greater than `max`, the value will be reset to `max`.
+- Else, the value remains the same.' />
+<PropsCard name="colorScheme"
+type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+description='The visual color appearance of the component.' />
+<PropsCard name="containerProps"
+type='HTMLUIProps<"div">'
+description='Props for container element.' />
+<PropsCard name="decrementProps"
+type='NumberDecrementStepperProps'
+description='Props for decrement component.' />
+<PropsCard name="errorBorderColor"
+type='"link" | "border" | BorderColor | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 253 more ... | ColorModeArray<...>'
+description='The border color when the input is invalid.' />
+<PropsCard name="focusBorderColor"
+type='"link" | "border" | BorderColor | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 253 more ... | ColorModeArray<...>'
+description='The border color when the input is focused.' />
+<PropsCard name="focusInputOnChange"
+type='boolean'
+description='If `true`, the input will be focused as you increment or decrement the value with the stepper.' />
+<PropsCard name="format"
+type='(value: string | number) => string | number'
+description='If using a custom display format, this converts the default format to the custom format.' />
+<PropsCard name="getAriaValueText"
+type='(value: string | number) => string'
+description='This is used to format the value so that screen readers
+can speak out a more human-friendly value.
+
+It is used to set the `aria-valuetext` property of the input.' />
+
+<PropsCard name="incrementProps"
+type='NumberIncrementStepperProps'
+description='Props for increment component.' />
+<PropsCard name="isDisabled"
+type='boolean'
+description='If `true`, the form control will be disabled.' />
+<PropsCard name="isInvalid"
+type='boolean'
+description='If `true`, the form control will be invalid.' />
+<PropsCard name="isReadOnly"
+type='boolean'
+description='If `true`, the form control will be readonly.' />
+<PropsCard name="isRequired"
+type='boolean'
+description='If `true`, the form control will be required.' />
+<PropsCard name="isStepper"
+type='boolean'
+description='If `true`, display the addon for the number input.' />
+<PropsCard name="isValidCharacter"
+type='(value: string) => boolean'
+description='Whether the pressed key should be allowed in the input.
+The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/.' />
+<PropsCard name="keepWithinRange"
+type='boolean'
+description='This controls the value update behavior in general.
+
+- If `true` and you use the stepper or up/down arrow keys,
+  the value will not exceed the `max` or go lower than `min`.
+
+- If `false`, the value will be allowed to go out of range.' />
+  <PropsCard
+    name="onChange"
+    type="(valueAsString: string, valueAsNumber: number) => void"
+    description="The callback fired when the value changes."
+  />
+  <PropsCard
+    name="parse"
+    type="(value: string) => string"
+    description="If using a custom display format, this converts the custom format to a format `parseFloat` understands."
+  />
+  <PropsCard
+    name="precision"
+    type="number"
+    description="The number of decimal points used to round the value."
+  />
+  <PropsCard
+    name="size"
+    type='"xs" | "sm" | "md" | "lg"'
+    description="The size of the NumberInput."
+  />
+  <PropsCard
+    name="variant"
+    type='"outline" | "filled" | "flushed" | "unstyled"'
+    description="The variant of the NumberInput."
+  />
+
+### UseNumberInput Props
+
+<PropsCard name="allowMouseWheel"
+type='boolean'
+description='If `true`, the input's value will change based on mouse wheel.' />
+<PropsCard name="clampValueOnBlur"
+type='boolean'
+description='This controls the value update when you blur out of the input.
+- If `true` and the value is greater than `max`, the value will be reset to `max`.
+- Else, the value remains the same.' />
+<PropsCard name="defaultValue"
+type='string | number'
+description='The initial value of the counter.
+Should be less than `max` and greater than `min`.' />
+<PropsCard name="disabled"
+type='boolean' />
+<PropsCard name="focusInputOnChange"
+type='boolean'
+description='If `true`, the input will be focused as you increment or decrement the value with the stepper.' />
+<PropsCard name="format"
+type='(value: string | number) => string | number'
+description='If using a custom display format, this converts the default format to the custom format.' />
+<PropsCard name="getAriaValueText"
+type='(value: string | number) => string'
+description='This is used to format the value so that screen readers
+can speak out a more human-friendly value.
+
+It is used to set the `aria-valuetext` property of the input.' />
+
+<PropsCard name="id"
+type='string' />
+<PropsCard name="inputMode"
+type='type ONLY_FOR_FORMAT =
+  | "search"
+  | "text"
+  | "none"
+  | "tel"
+  | "url"
+  | "email"
+  | "numeric"
+  | "decimal"'
+description='Hints at the type of data that might be entered by the user.
+It also determines the type of keyboard shown to the user on mobile devices.' />
+<PropsCard name="isDisabled"
+type='boolean'
+description='If `true`, the form control will be disabled.' />
+<PropsCard name="isInvalid"
+type='boolean'
+description='If `true`, the form control will be invalid.' />
+<PropsCard name="isReadOnly"
+type='boolean'
+description='If `true`, the form control will be readonly.' />
+<PropsCard name="isRequired"
+type='boolean'
+description='If `true`, the form control will be required.' />
+<PropsCard name="isValidCharacter"
+type='(value: string) => boolean'
+description='Whether the pressed key should be allowed in the input.
+The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/.' />
+<PropsCard name="keepWithinRange"
+type='boolean'
+description='This controls the value update behavior in general.
+
+- If `true` and you use the stepper or up/down arrow keys,
+  the value will not exceed the `max` or go lower than `min`.
+
+- If `false`, the value will be allowed to go out of range.' />
+    <PropsCard name="max"
+type='number'
+description='The maximum value of the counter' />
+<PropsCard name="min"
+type='number'
+description='The minimum value of the counter' />
+<PropsCard name="name"
+type='string'
+description='The HTML `name` attribute used for forms.' />
+<PropsCard name="onBlur"
+type='FocusEventHandler<HTMLInputElement>' />
+<PropsCard name="onChange"
+type='(valueAsString: string, valueAsNumber: number) => void'
+description='The callback fired when the value changes.' />
+<PropsCard name="onFocus"
+type='FocusEventHandler<HTMLInputElement>' />
+<PropsCard name="onInvalid"
+type='(
+  message: ValidityState,
+  value: string,
+  valueAsNumber: number,
+) => void'
+description='The callback invoked when invalid number is entered.' />
+<PropsCard name="parse"
+type='(value: string) => string'
+description='If using a custom display format, this converts the custom format to a format `parseFloat` understands.' />
+<PropsCard name="pattern"
+type='string'
+description='The pattern used to check the <input> element's value against on form submission.' />
+<PropsCard name="precision"
+type='number'
+description='The number of decimal points used to round the value.' />
+<PropsCard name="readOnly"
+type='boolean' />
+<PropsCard name="required"
+type='boolean' />
+<PropsCard name="step"
+type='number'
+description='The step used to increment or decrement the value.' />
+<PropsCard name="value"
+type='string | number'
+description='The value of the counter.
+Should be less than `max` and greater than `min`.' />

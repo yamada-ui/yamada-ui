@@ -1,11 +1,34 @@
 ---
 title: List
-description: This page is currently under construction.
+description: >-
+  `List` is a component for displaying lists. By default, it renders a `ul`
+  element.
 package_name: "@yamada-ui/list"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### List Props
+
+<PropsCard
+  name="stylePosition"
+  type="UIValue<ListStylePosition>"
+  description="The CSS `list-style-position` property."
+/>
+<PropsCard
+  name="styleType"
+  type="UIValue<ListStyleType>"
+  description="The CSS `list-style-type` property."
+/>
+
+### ListIcon Props
+
+<PropsCard
+  name="size"
+  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "xs" | "3xl" | "4xl" | "large" | ... 13 more ... | "9xl">'
+  description="The CSS `font-size` property."
+/>
+
+### ListItem Props

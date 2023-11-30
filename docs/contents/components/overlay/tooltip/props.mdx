@@ -1,11 +1,123 @@
 ---
 title: Tooltip
-description: This page is currently under construction.
+description: >-
+  `Tooltip` is a component that displays short information, such as
+  supplementary details for an element.
 package_name: "@yamada-ui/tooltip"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Tooltip Props
+
+<PropsCard
+  name="closeDelay"
+  type="number"
+  description="The delay before hiding the tooltip."
+/>
+<PropsCard
+  name="closeOnClick"
+  type="boolean"
+  description="If `true`, the tooltip will hide on click."
+/>
+<PropsCard
+  name="closeOnEsc"
+  type="boolean"
+  description="If `true`, the tooltip will hide on pressing Esc key."
+/>
+<PropsCard
+  name="closeOnMouseDown"
+  type="boolean"
+  description="If `true`, the tooltip will hide while the mouse is down."
+/>
+<PropsCard
+  name="closeOnPointerDown"
+  type="boolean"
+  description="If `true`, the tooltip will hide while the pointer is down."
+/>
+<PropsCard
+  name="closeOnScroll"
+  type="boolean"
+  description="If `true`, the tooltip will hide on scroll."
+/>
+<PropsCard
+  name="defaultIsOpen"
+  type="boolean"
+  description="If `true`, the tooltip will be initially shown."
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description="The animation duration."
+/>
+<PropsCard
+  name="gutter"
+  type="UIValue<number>"
+  description="The distance or margin between the reference and popper.
+It is used internally to create an `offset` modifier."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the tooltip will be disabled."
+/>
+<PropsCard
+  name="isOpen"
+  type="boolean"
+  description="If `true`, the tooltip will be shown."
+/>
+<PropsCard
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description="The label of the tooltip."
+/>
+<PropsCard
+  name="modifiers"
+  type="Partial<Modifier<string, any>>[]"
+  description="Array of popper.js modifiers.
+Check the docs to see the list of possible modifiers you can pass."
+/>
+<PropsCard
+  name="offset"
+  type="[number, number]"
+  description="The main and cross-axis offset to displace popper element from its reference element."
+/>
+<PropsCard
+  name="onClose"
+  type="() => void"
+  description="Callback to run when the tooltip hides."
+/>
+<PropsCard
+  name="onOpen"
+  type="() => void"
+  description="Callback to run when the tooltip shows."
+/>
+<PropsCard
+  name="openDelay"
+  type="number"
+  description="The delay before showing the tooltip."
+/>
+<PropsCard
+  name="placement"
+  type="UIValue<Placement>"
+  description="The placement of the popper relative to its reference."
+/>
+<PropsCard
+  name="portalProps"
+  type='Pick<PortalProps,
+  "appendToParentPortal" | "containerRef">'
+  description="Props for portal component."
+/>
+<PropsCard
+  name="withPortal"
+  type="boolean"
+  description="If `true`, the element will be transported to the end of document.body."
+/>

@@ -1,11 +1,57 @@
 ---
 title: Textarea
-description: このページは現在作成中です。
+description: "`Textarea`は、複数行のテキスト入力を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/textarea"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Textarea Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="errorBorderColor"
+  type='"link" | "border" | BorderColor | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 253 more ... | ColorModeArray<...>'
+  description="The border color when the input is invalid."
+/>
+<PropsCard
+  name="focusBorderColor"
+  type='"link" | "border" | BorderColor | "current" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 253 more ... | ColorModeArray<...>'
+  description="The border color when the input is focused."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description="The size of the Textarea."
+/>
+<PropsCard
+  name="variant"
+  type='"outline" | "filled" | "flushed" | "unstyled"'
+  description="The variant of the Textarea."
+/>

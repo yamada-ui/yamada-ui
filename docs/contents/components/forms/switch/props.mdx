@@ -1,11 +1,121 @@
 ---
 title: Switch
-description: This page is currently being created.
+description: "`Switch` is a component used to toggle between on and off states."
 package_name: "@yamada-ui/switch"
 with_description: true
 tab: Props
 ---
 
-We're currently in the process of creating a page.😘
+## Props
 
-Wouldn't you like to contribute this page? That's amazing!
+### Switch Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="defaultIsChecked"
+  type="boolean"
+  description="If `true`, the checkbox will be initially checked."
+/>
+<PropsCard
+  name="icon"
+  type="ReactElement<SwitchIconProps,
+  string | JSXElementConstructor<any>>"
+  description="The switch icon to use."
+/>
+<PropsCard name="id" type="string" description="id assigned to input." />
+<PropsCard
+  name="inputProps"
+  type="InputHTMLAttributes<HTMLInputElement>"
+  description="Props for switch input element."
+/>
+<PropsCard
+  name="isChecked"
+  type="boolean"
+  description="If `true`, the checkbox will be checked."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the form control will be disabled."
+/>
+<PropsCard
+  name="isInvalid"
+  type="boolean"
+  description="If `true`, the form control will be invalid."
+/>
+<PropsCard
+  name="isReadOnly"
+  type="boolean"
+  description="If `true`, the form control will be readonly."
+/>
+<PropsCard
+  name="isRequired"
+  type="boolean"
+  description="If `true`, the form control will be required."
+/>
+<PropsCard
+  name="isReverse"
+  type="boolean"
+  description="Change switch label from right to left."
+/>
+<PropsCard
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description="Props for switch label element."
+/>
+<PropsCard
+  name="name"
+  type="string"
+  description="The HTML `name` attribute used for forms."
+/>
+<PropsCard
+  name="onBlur"
+  type="FocusEventHandler<HTMLInputElement>"
+  description="The callback invoked when the checkbox is blurred."
+/>
+<PropsCard
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description="The callback invoked when the checked state changes."
+/>
+<PropsCard
+  name="onFocus"
+  type="FocusEventHandler<HTMLInputElement>"
+  description="The callback invoked when the checkbox is focused."
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description="The size of the Switch."
+/>
+<PropsCard
+  name="tabIndex"
+  type="number"
+  description="The tab-index property of the underlying input element."
+/>
+<PropsCard
+  name="transition"
+  type="Transition"
+  description="Motion transition settings."
+/>
+<PropsCard
+  name="value"
+  type="string"
+  description="The value to be used in the checkbox input."
+/>
+<PropsCard
+  name="variant"
+  type='"thick" | "thin"'
+  description="The variant of the Switch."
+/>
+
+### SwitchIcon Props
+
+<PropsCard name="isActive" type="boolean" />
+<PropsCard name="isChecked" type="boolean" />
+<PropsCard name="isFocused" type="boolean" />
+<PropsCard name="isHovered" type="boolean" />

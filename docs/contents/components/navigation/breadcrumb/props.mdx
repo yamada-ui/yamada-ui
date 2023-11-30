@@ -1,11 +1,57 @@
 ---
 title: Breadcrumb
-description: This page is currently under construction.
+description: >-
+  `Breadcrumb` is a component that helps users understand the hierarchy of a
+  website.
 package_name: "@yamada-ui/breadcrumb"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Breadcrumb Props
+
+<PropsCard
+  name="gap"
+  type='UIValue<number | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "sm" | "md" | "lg" | "xl" | "2xl" | "1" | "-1" | "2" | "-2" | ... 73 more ... | "auto">'
+  description="The left and right margin applied to the separator."
+/>
+<PropsCard
+  name="listProps"
+  type='HTMLUIProps<"ol">'
+  description="Props for ol element."
+/>
+<PropsCard
+  name="separator"
+  type="string | Element"
+  description="The visual separator between each breadcrumb item."
+/>
+
+### BreadcrumbItem Props
+
+<PropsCard
+  name="isCurrentPage"
+  type="boolean"
+  description="If `true`, change to span element."
+/>
+<PropsCard
+  name="isLastChild"
+  type="boolean"
+  description="If `true`, not show separator."
+/>
+<PropsCard
+  name="separator"
+  type="string | Element"
+  description="The visual separator between each breadcrumb item."
+/>
+
+### BreadcrumbLink Props
+
+<PropsCard
+  name="isCurrentPage"
+  type="boolean"
+  description="If `true`, change to span element."
+/>
+
+### BreadcrumbSeparator Props

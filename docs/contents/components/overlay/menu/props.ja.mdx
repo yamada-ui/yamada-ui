@@ -1,11 +1,192 @@
 ---
 title: Menu
-description: このページは現在作成中です。
+description: "`Menu`は、一般的なドロップダウンメニューを表示するコンポーネントです。"
 package_name: "@yamada-ui/menu"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Menu Props
+
+<PropsCard name="animation"
+type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+description='The animation of the popover.' />
+<PropsCard name="autoFocus"
+type='boolean'
+description='If `true`, focus will be transferred to the first interactive element when the popover opens.' />
+<PropsCard name="boundary"
+type='HTMLElement | "clippingParents" | "scrollParent"'
+description='The boundary area for the popper. Used within the `preventOverflow` modifier.' />
+<PropsCard name="closeDelay"
+type='number'
+description='The number of delay time to close.' />
+<PropsCard name="closeOnBlur"
+type='boolean'
+description='If `true`, the popover will close when you blur out it by clicking outside or tabbing out.' />
+<PropsCard name="closeOnEsc"
+type='boolean'
+description='If `true`, the popover will close when you hit the `Esc` key.' />
+<PropsCard name="closeOnSelect"
+type='boolean'
+description='If `true`, the list element will be closed when value is selected.' />
+<PropsCard name="defaultIsOpen"
+type='boolean'
+description='If `true`, the popover will be initially opened.' />
+<PropsCard name="duration"
+type='number | Partial<Record<"enter" | "exit", number>>'
+description='The animation duration.' />
+<PropsCard name="eventListeners"
+type='type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }'
+description='If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.' />
+<PropsCard name="flip"
+type='boolean'
+description='If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.' />
+<PropsCard name="gutter"
+type='UIValue<number>'
+description='The distance or margin between the reference and popper.
+It is used internally to create an `offset` modifier.' />
+<PropsCard name="initialFocusRef"
+type='RefObject<{ focus(): void }>'
+description='The `ref` of the element that should receive focus when the popover opens.' />
+<PropsCard name="isLazy"
+type='boolean'
+description='If `true`, the PopoverContent rendering will be deferred until the popover is open.' />
+<PropsCard name="isOpen"
+type='boolean'
+description='If `true`, the popover will be opened.' />
+<PropsCard name="lazyBehavior"
+type='LazyMode'
+description='The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`
+
+- `unmount`: The popover's content is always unmounted when not open.
+- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.' />
+
+    <PropsCard name="matchWidth"
+type='boolean'
+description='If `true`, the popper will match the width of the reference at all times.
+It's useful for `autocomplete`, `date-picker` and `select` patterns.' />
+<PropsCard name="modifiers"
+type='Partial<Modifier<string, any>>[]'
+description='Array of popper.js modifiers.
+Check the docs to see the list of possible modifiers you can pass.' />
+<PropsCard name="offset"
+type='[number, number]'
+description='The main and cross-axis offset to displace popper element from its reference element.' />
+<PropsCard name="onClose"
+type='() => void'
+description='Callback fired when the popover closes.' />
+<PropsCard name="onOpen"
+type='() => void'
+description='Callback fired when the popover opens.' />
+<PropsCard name="openDelay"
+type='number'
+description='The number of delay time to open.' />
+<PropsCard name="placement"
+type='UIValue<Placement>'
+description='The placement of the popper relative to its reference.' />
+<PropsCard name="preventOverflow"
+type='boolean'
+description='If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.' />
+<PropsCard name="restoreFocus"
+type='boolean'
+description='If `true`, focus will be returned to the element that triggers the popover when it closes.' />
+<PropsCard name="strategy"
+type='"fixed" | "absolute"'
+description='The CSS positioning strategy to use.' />
+<PropsCard name="trigger"
+type='"click" | "hover" | "never"'
+description='The interaction that triggers the popover.
+
+- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.
+- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard.' />
+
+### MenuButton Props
+
+### MenuList Props
+
+### MenuItem Props
+
+<PropsCard
+  name="closeOnSelect"
+  type="boolean"
+  description="If `true`, the list element will be closed when selected."
+/>
+<PropsCard
+  name="command"
+  type="string"
+  description="Right-aligned label text content, useful for displaying hotkeys."
+/>
+<PropsCard
+  name="icon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description="The menu item icon to use."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the menu item will be disabled."
+/>
+<PropsCard
+  name="isFocusable"
+  type="boolean"
+  description="If `true`, the menu item will be focusable."
+/>
+
+### MenuOptionItem Props
+
+<PropsCard
+  name="closeOnSelect"
+  type="boolean"
+  description="If `true`, the list element will be closed when selected."
+/>
+<PropsCard
+  name="icon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description="The menu option item icon to use."
+/>
+<PropsCard
+  name="isChecked"
+  type="boolean"
+  description="If `true`, the checkbox or radio will be checked."
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description="If `true`, the menu item will be disabled."
+/>
+<PropsCard
+  name="isFocusable"
+  type="boolean"
+  description="If `true`, the menu item will be focusable."
+/>
+
+### MenuGroup Props
+
+### MenuOptionGroup Props
+
+<PropsCard
+  name="defaultValue"
+  type="Y"
+  description="The initial value of the menu item group."
+/>
+<PropsCard
+  name="onChange"
+  type="(value: Y) => void"
+  description="The callback fired when any children checkbox is checked or unchecked."
+/>
+<PropsCard
+  name="type"
+  type='"radio" | "checkbox"'
+  description="The type of the menu option group."
+/>
+<PropsCard
+  name="value"
+  type="Y"
+  description="The value of the menu item group."
+/>
+
+### MenuDivider Props

@@ -1,11 +1,50 @@
 ---
 title: Card
-description: This page is currently under construction.
+description: >-
+  `Card` is a component that groups and displays related information. By
+  default, it renders a `section` element.
 package_name: "@yamada-ui/card"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be fantastic!
+### Card Props
+
+<PropsCard
+  name="align"
+  type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `align-items` property."
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description="The visual color appearance of the component."
+/>
+<PropsCard
+  name="direction"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `flex-direction` property."
+/>
+<PropsCard
+  name="justify"
+  type='"center" | "right" | "left" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description="The CSS `justify-content` property."
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "normal" | "lg"'
+  description="The size of the Card."
+/>
+<PropsCard
+  name="variant"
+  type='"elevated" | "outline" | "solid" | "subtle" | "unstyled"'
+  description="The variant of the Card."
+/>
+
+### CardHeader Props
+
+### CardBody Props
+
+### CardFooter Props

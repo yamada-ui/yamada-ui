@@ -43,7 +43,7 @@
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
-    "gen:docs": "tsx ../../scripts/generate-docs"
+    "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -59,7 +59,7 @@
   "peerDependencies": {
     "react": ">=18"
   },
-  "clean-package": "../../clean-package.config.json",
+  "clean-package": "../../../clean-package.config.json",
   "tsup": {
     "clean": true,
     "target": "es2019",

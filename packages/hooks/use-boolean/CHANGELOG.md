@@ -1,5 +1,11 @@
 # @yamada-ui/use-boolean
 
+## 0.2.1
+
+### Patch Changes
+
+- [`27c0ff9d`](https://github.com/hirotomoyamada/yamada-ui/commit/27c0ff9d517b3a6909ff400317115b41343ee1a8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected camelCase and typos in code.
+
 ## 0.2.0
 
 ### Minor Changes

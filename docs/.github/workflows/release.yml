@@ -15,6 +15,19 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
+      - name: Build Theme
+        run: pnpm build:theme
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+      - name: Build Props
+        run: pnpm build:props
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+      - name: Build Search content
+        run: pnpm build:search
+
       - name: Update Yamada UI
         run: pnpm up '@yamada-ui/*' --latest
 
@@ -24,7 +37,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           base: main
           delete-branch: true
-          commit-message: "ci(changesets): ${{ github.sha }}"
+          commit-message: "ci(changesets): version packages"
           title: "Version Packages"
           branch: changeset-release/main
           assignees: "hirotomoyamada"

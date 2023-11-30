@@ -23,6 +23,7 @@ type ComponentTypeInfo = {
   defaultValue?: string | boolean | null
   required: boolean
   description?: string
+  see?: string
 }
 
 type ComponentTypeProperties = {
@@ -202,9 +203,11 @@ const extractPropertiesOfTypeName = async (
 
       const defaultValue =
         docTags
-          .find((tag) => tag.name === "default")
-          ?.text?.map((doc) => doc.text)
+          .find(({ name }) => name === "default")
+          ?.text?.map(({ text }) => text)
           ?.join("\n") || undefined
+
+      const see = docTags.find(({ name }) => name === "see")?.text?.at(-1)?.text
 
       const nonNullableType = type.getNonNullableType()
 
@@ -222,6 +225,7 @@ const extractPropertiesOfTypeName = async (
             .getDocumentationComment(typeChecker)
             .map((comment) => comment.text)
             .join("\n") || undefined,
+        see,
       }
     }
 

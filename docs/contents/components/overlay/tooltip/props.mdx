@@ -15,58 +15,67 @@ tab: Props
 <PropsCard
   name="closeDelay"
   type="number"
-  description="The delay before hiding the tooltip."
+  description={"The delay before hiding the tooltip."}
+  defaultValue="0"
 />
 <PropsCard
   name="closeOnClick"
   type="boolean"
-  description="If `true`, the tooltip will hide on click."
+  description={"If `true`, the tooltip will hide on click."}
+  defaultValue="true"
 />
 <PropsCard
   name="closeOnEsc"
   type="boolean"
-  description="If `true`, the tooltip will hide on pressing Esc key."
+  description={"If `true`, the tooltip will hide on pressing Esc key."}
+  defaultValue="true"
 />
 <PropsCard
   name="closeOnMouseDown"
   type="boolean"
-  description="If `true`, the tooltip will hide while the mouse is down."
+  description={"If `true`, the tooltip will hide while the mouse is down."}
+  defaultValue="false"
 />
 <PropsCard
   name="closeOnPointerDown"
   type="boolean"
-  description="If `true`, the tooltip will hide while the pointer is down."
+  description={"If `true`, the tooltip will hide while the pointer is down."}
+  defaultValue="false"
 />
 <PropsCard
   name="closeOnScroll"
   type="boolean"
-  description="If `true`, the tooltip will hide on scroll."
+  description={"If `true`, the tooltip will hide on scroll."}
+  defaultValue="false"
 />
 <PropsCard
   name="defaultIsOpen"
   type="boolean"
-  description="If `true`, the tooltip will be initially shown."
+  description={"If `true`, the tooltip will be initially shown."}
 />
 <PropsCard
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
-  description="The animation duration."
+  description={"The animation duration."}
 />
 <PropsCard
   name="gutter"
   type="UIValue<number>"
-  description="The distance or margin between the reference and popper.
-It is used internally to create an `offset` modifier."
+  description={
+    "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+  }
+  defaultValue="8"
 />
 <PropsCard
   name="isDisabled"
   type="boolean"
-  description="If `true`, the tooltip will be disabled."
+  description={"If `true`, the tooltip will be disabled."}
+  defaultValue="false"
 />
 <PropsCard
   name="isOpen"
   type="boolean"
-  description="If `true`, the tooltip will be shown."
+  description={"If `true`, the tooltip will be shown."}
 />
 <PropsCard
   name="label"
@@ -77,47 +86,54 @@ It is used internally to create an `offset` modifier."
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
   | ReactPortal"
-  description="The label of the tooltip."
+  description={"The label of the tooltip."}
 />
 <PropsCard
   name="modifiers"
   type="Partial<Modifier<string, any>>[]"
-  description="Array of popper.js modifiers.
-Check the docs to see the list of possible modifiers you can pass."
+  description={
+    "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+  }
 />
 <PropsCard
   name="offset"
   type="[number, number]"
-  description="The main and cross-axis offset to displace popper element from its reference element."
+  description={
+    "The main and cross-axis offset to displace popper element from its reference element."
+  }
 />
 <PropsCard
   name="onClose"
   type="() => void"
-  description="Callback to run when the tooltip hides."
+  description={"Callback to run when the tooltip hides."}
 />
 <PropsCard
   name="onOpen"
   type="() => void"
-  description="Callback to run when the tooltip shows."
+  description={"Callback to run when the tooltip shows."}
 />
 <PropsCard
   name="openDelay"
   type="number"
-  description="The delay before showing the tooltip."
+  description={"The delay before showing the tooltip."}
+  defaultValue="0"
 />
 <PropsCard
   name="placement"
   type="UIValue<Placement>"
-  description="The placement of the popper relative to its reference."
+  description={"The placement of the popper relative to its reference."}
+  defaultValue="'bottom'"
 />
 <PropsCard
   name="portalProps"
   type='Pick<PortalProps,
   "appendToParentPortal" | "containerRef">'
-  description="Props for portal component."
+  description={"Props for portal component."}
 />
 <PropsCard
   name="withPortal"
   type="boolean"
-  description="If `true`, the element will be transported to the end of document.body."
+  description={
+    "If `true`, the element will be transported to the end of document.body."
+  }
 />

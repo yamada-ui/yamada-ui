@@ -13,17 +13,19 @@ tab: Props
 <PropsCard
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
-  description="The visual color appearance of the component."
+  description={"The visual color appearance of the component."}
 />
 <PropsCard
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
-  description="The size of the Input."
+  description={"The size of the Input."}
+  defaultValue="md"
 />
 <PropsCard
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
-  description="The variant of the Input."
+  description={"The variant of the Input."}
+  defaultValue="outline"
 />
 
 ### InputGroup Props
@@ -33,7 +35,8 @@ tab: Props
 <PropsCard
   name="placement"
   type='"right" | "left"'
-  description="The placement of the element."
+  description={"The placement of the element."}
+  defaultValue="'left'"
 />
 
 ### InputElement Props
@@ -41,10 +44,12 @@ tab: Props
 <PropsCard
   name="isClick"
   type="boolean"
-  description="If `true`, the element clickable."
+  description={"If `true`, the element clickable."}
+  defaultValue="false"
 />
 <PropsCard
   name="placement"
   type='"right" | "left"'
-  description="The placement of the element."
+  description={"The placement of the element."}
+  defaultValue="'left'"
 />

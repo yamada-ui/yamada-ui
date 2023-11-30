@@ -15,17 +15,20 @@ tab: Props
 <PropsCard
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
-  description="The visual color appearance of the component."
+  description={"The visual color appearance of the component."}
+  defaultValue="primary"
 />
 <PropsCard
   name="inline"
   type="UIValue<boolean>"
-  description="If `true`, set the indicator as an inline element."
+  description={"If `true`, set the indicator as an inline element."}
+  defaultValue="false"
 />
 <PropsCard
   name="isDisabled"
   type="boolean"
-  description="If `true`, the indicator will be disabled."
+  description={"If `true`, the indicator will be disabled."}
+  defaultValue="false"
 />
 <PropsCard
   name="label"
@@ -36,17 +39,21 @@ tab: Props
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
   | ReactPortal"
-  description="The indicator label to use."
+  description={"The indicator label to use."}
 />
 <PropsCard
   name="offset"
   type="UIValue<number>"
-  description="Changes position offset, usually used when element has border-radius."
+  description={
+    "Changes position offset, usually used when element has border-radius."
+  }
+  defaultValue="0"
 />
 <PropsCard
   name="overflowCount"
   type="number"
-  description="If `label` is of type number, the maximum number displayed."
+  description={"If `label` is of type number, the maximum number displayed."}
+  defaultValue="99"
 />
 <PropsCard
   name="placement"
@@ -58,21 +65,30 @@ tab: Props
   | "top-right"
   | "bottom-left"
   | "bottom-right">'
-  description="The placement of the indicator."
+  description={"The placement of the indicator."}
+  defaultValue="'top-right'"
 />
-<PropsCard name="showZero" type="boolean" description="If `true`, display 0." />
+<PropsCard
+  name="showZero"
+  type="boolean"
+  description={"If `true`, display 0."}
+  defaultValue="true"
+/>
 <PropsCard
   name="size"
   type='"sm" | "md" | "lg"'
-  description="The size of the Indicator."
+  description={"The size of the Indicator."}
+  defaultValue="md"
 />
 <PropsCard
   name="variant"
   type='"solid" | "subtle"'
-  description="The variant of the Indicator."
+  description={"The variant of the Indicator."}
+  defaultValue="solid"
 />
 <PropsCard
   name="withBorder"
   type="boolean"
-  description="If `true`, display the border of the indicator."
+  description={"If `true`, display the border of the indicator."}
+  defaultValue="false"
 />

@@ -13,37 +13,43 @@ tab: Props
 <PropsCard
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
-  description="The visual color appearance of the component."
+  description={"The visual color appearance of the component."}
+  defaultValue="gray"
 />
 <PropsCard
   name="highlightOnHover"
   type="boolean"
-  description="If `true`, highlight the row when the table row is hovered."
+  description={"If `true`, highlight the row when the table row is hovered."}
+  defaultValue="false"
 />
 <PropsCard
   name="layout"
   type='"fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
-  description="The CSS `table-layout` property."
+  description={"The CSS `table-layout` property."}
 />
 <PropsCard
   name="size"
   type='"sm" | "md" | "lg" | "xl"'
-  description="The size of the NativeTable."
+  description={"The size of the NativeTable."}
+  defaultValue="md"
 />
 <PropsCard
   name="variant"
   type='"simple" | "striped" | "unstyled"'
-  description="The variant of the NativeTable."
+  description={"The variant of the NativeTable."}
+  defaultValue="simple"
 />
 <PropsCard
   name="withBorder"
   type="boolean"
-  description="If `true`, display the outer border of the table."
+  description={"If `true`, display the outer border of the table."}
+  defaultValue="false"
 />
 <PropsCard
   name="withColumnBorders"
   type="boolean"
-  description="If `true`, display line on the columns of the table."
+  description={"If `true`, display line on the columns of the table."}
+  defaultValue="false"
 />
 
 ### TableContainer Props
@@ -61,7 +67,8 @@ tab: Props
 <PropsCard
   name="isNumeric"
   type="boolean"
-  description="Aligns the cell content to the right."
+  description={"Aligns the cell content to the right."}
+  defaultValue="false"
 />
 
 ### Td Props
@@ -69,7 +76,8 @@ tab: Props
 <PropsCard
   name="isNumeric"
   type="boolean"
-  description="Aligns the cell content to the right."
+  description={"Aligns the cell content to the right."}
+  defaultValue="false"
 />
 
 ### TableCaption Props
@@ -77,5 +85,6 @@ tab: Props
 <PropsCard
   name="placement"
   type='"top" | "bottom"'
-  description="The placement of the table caption."
+  description={"The placement of the table caption."}
+  defaultValue="'bottom'"
 />

@@ -13,47 +13,56 @@ tab: Props
 <PropsCard
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
-  description="The visual color appearance of the component."
+  description={"The visual color appearance of the component."}
 />
 <PropsCard
   name="isDisabled"
   type="boolean"
-  description="If `true`, the segmented control will be disabled."
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue="false"
 />
 <PropsCard
   name="isReadOnly"
   type="boolean"
-  description="If `true`, the segmented control will be readonly."
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue="false"
 />
 <PropsCard
   name="items"
   type="SegmentedControlItem[]"
-  description="If provided, generate segmented control buttons but based on items."
+  description={
+    "If provided, generate segmented control buttons but based on items."
+  }
+  defaultValue="'[]'"
 />
 <PropsCard
   name="name"
   type="string"
-  description="The HTML `name` attribute used for forms."
+  description={"The HTML `name` attribute used for forms."}
 />
 <PropsCard
   name="onChange"
   type="(value: string) => void"
-  description="The callback fired when any children radio is checked or unchecked."
+  description={
+    "The callback fired when any children radio is checked or unchecked."
+  }
 />
 <PropsCard
   name="size"
   type='"sm" | "md" | "lg"'
-  description="The size of the SegmentedControl."
+  description={"The size of the SegmentedControl."}
+  defaultValue="md"
 />
 <PropsCard
   name="value"
   type="string"
-  description="The value of the segmented control."
+  description={"The value of the segmented control."}
 />
 <PropsCard
   name="variant"
   type='"basic" | "rounded"'
-  description="The variant of the SegmentedControl."
+  description={"The variant of the SegmentedControl."}
+  defaultValue="basic"
 />
 
 ### SegmentedControlButton Props
@@ -62,20 +71,24 @@ tab: Props
   name="value"
   required
   type="string | number"
-  description="The value of the segmented control button."
+  description={"The value of the segmented control button."}
 />
 <PropsCard
   name="isDisabled"
   type="boolean"
-  description="If `true`, the segmented control will be disabled."
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue="false"
 />
 <PropsCard
   name="isReadOnly"
   type="boolean"
-  description="If `true`, the segmented control will be readonly."
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue="false"
 />
 <PropsCard
   name="onChange"
   type="ChangeEventHandler<HTMLInputElement>"
-  description="The callback fired when any children radio is checked or unchecked."
+  description={
+    "The callback fired when any children radio is checked or unchecked."
+  }
 />

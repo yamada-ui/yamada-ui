@@ -15,32 +15,37 @@ tab: Props
 <PropsCard
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
-  description="The visual color appearance of the component."
+  description={"The visual color appearance of the component."}
 />
 <PropsCard
   name="onChange"
   type="(labels: (string | number)[]) => void"
-  description="The callback invoked when reorder items are moved."
+  description={"The callback invoked when reorder items are moved."}
 />
 <PropsCard
   name="onCompleteChange"
   type="(labels: (string | number)[]) => void"
-  description="The callback invoked when the movement of reorder items is completed."
+  description={
+    "The callback invoked when the movement of reorder items is completed."
+  }
 />
 <PropsCard
   name="orientation"
   type='"horizontal" | "vertical"'
-  description="The orientation of the reorder."
+  description={"The orientation of the reorder."}
+  defaultValue="'vertical'"
 />
 <PropsCard
   name="size"
   type='"sm" | "md" | "normal" | "lg"'
-  description="The size of the Reorder."
+  description={"The size of the Reorder."}
+  defaultValue="md"
 />
 <PropsCard
   name="variant"
   type='"elevated" | "outline" | "unstyled"'
-  description="The variant of the Reorder."
+  description={"The variant of the Reorder."}
+  defaultValue="outline"
 />
 
 ### ReorderItem Props
@@ -49,7 +54,7 @@ tab: Props
   name="label"
   required
   type="string | number"
-  description="The label of the reorder item."
+  description={"The label of the reorder item."}
 />
 
 ### ReorderTrigger Props

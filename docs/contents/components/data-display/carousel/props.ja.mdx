@@ -10,97 +10,187 @@ tab: Props
 
 ### Carousel Props
 
-<PropsCard name="align"
-type='UIValue<number | "center" | "start" | "end">'
-description='The alignment of the carousel.' />
-<PropsCard name="autoplay"
-type='UIValue<boolean>'
-description='If `true`, the carousel will be autoplay.' />
-<PropsCard name="colorScheme"
-type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
-description='The visual color appearance of the component.' />
-<PropsCard name="containScroll"
-type='UIValue<"" | "trimSnaps" | "keepSnaps">'
-description='Clear leading and trailing empty space that causes excessive scrolling.
-Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.' />
-<PropsCard name="controlNextProps"
-type='IconButtonProps'
-description='Props for next of the carousel control element.' />
-<PropsCard name="controlPrevProps"
-type='IconButtonProps'
-description='Props for previous of the carousel control element.' />
-<PropsCard name="controlProps"
-type='IconButtonProps'
-description='Props for carousel control element.' />
-<PropsCard name="defaultIndex"
-type='number'
-description='The initial index of the carousel slide.' />
-<PropsCard name="delay"
-type='UIValue<number>'
-description='The number for the autoplay interval of the carousel.' />
-<PropsCard name="dragFree"
-type='UIValue<boolean>'
-description='If `true`, momentum scrolling will be enabled.' />
-<PropsCard name="draggable"
-type='UIValue<boolean>'
-description='If `true`, carousel can be scrolled with mouse and touch interactions.' />
-<PropsCard name="includeGapInSize"
-type='UIValue<boolean>'
-description='If `true`, gap will be treated as part of the carousel slide size.' />
-<PropsCard name="index"
-type='number'
-description='The index of the carousel slide.' />
-<PropsCard name="indicatorsProps"
-type='CarouselIndicatorsProps'
-description='Props for carousel indicators element.' />
-<PropsCard name="innerProps"
-type='HTMLUIProps<"div">'
-description='Props for carousel inner element.' />
-<PropsCard name="inViewThreshold"
-type='UIValue<number>'
-description='Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.' />
-<PropsCard name="loop"
-type='UIValue<boolean>'
-description='If `true`, infinite looping.
-Automatically falls back to false if slide content isn't enough to loop.' />
-<PropsCard name="onChange"
-type='(index: number) => void'
-description='The callback invoked when carousel slide selected.' />
-<PropsCard name="onScrollProgress"
-type='(progress: number) => void'
-description='A callback that return the current scroll amount when the carousel is scrolled.' />
-<PropsCard name="orientation"
-type='UIValue<"vertical" | "horizontal">'
-description='The orientation of the carousel.' />
-<PropsCard name="size"
-type='"sm" | "md" | "lg" | "xl"'
-description='The size of the Carousel.' />
-<PropsCard name="skipSnaps"
-type='UIValue<boolean>'
-description='If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.
-Note that this option will be ignored if the dragFree option is set to true.' />
-<PropsCard name="slideSize"
-type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 60 more ... | "9xl">'
-description='The CSS `width` property.' />
-<PropsCard name="slidesToScroll"
-type='UIValue<number>'
-description='The number of slides that should be scrolled with next or previous buttons.' />
-<PropsCard name="speed"
-type='UIValue<number>'
-description='Adjusts scroll speed when triggered by any of the methods.
-Higher numbers enables faster scrolling.' />
-<PropsCard name="stopMouseEnterAutoplay"
-type='UIValue<boolean>'
-description='If `true`, autoplay will pause when the mouse entries over.' />
-<PropsCard name="variant"
-type='string'
-description='The variant of the Carousel.' />
-<PropsCard name="withControls"
-type='UIValue<boolean>'
-description='If `true`, display the carousel control buttons.' />
-<PropsCard name="withIndicators"
-type='UIValue<boolean>'
-description='If `true`, display the carousel indicator buttons.' />
+<PropsCard
+  name="align"
+  type='UIValue<number | "center" | "start" | "end">'
+  description={"The alignment of the carousel."}
+  defaultValue="'center'"
+/>
+<PropsCard
+  name="autoplay"
+  type="UIValue<boolean>"
+  description={"If `true`, the carousel will be autoplay."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="containScroll"
+  type='UIValue<"" | "trimSnaps" | "keepSnaps">'
+  description={
+    "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
+  }
+  defaultValue="''"
+/>
+<PropsCard
+  name="controlNextProps"
+  type="IconButtonProps"
+  description={"Props for next of the carousel control element."}
+/>
+<PropsCard
+  name="controlPrevProps"
+  type="IconButtonProps"
+  description={"Props for previous of the carousel control element."}
+/>
+<PropsCard
+  name="controlProps"
+  type="IconButtonProps"
+  description={"Props for carousel control element."}
+/>
+<PropsCard
+  name="defaultIndex"
+  type="number"
+  description={"The initial index of the carousel slide."}
+  defaultValue="0"
+/>
+<PropsCard
+  name="delay"
+  type="UIValue<number>"
+  description={"The number for the autoplay interval of the carousel."}
+  defaultValue="4000"
+/>
+<PropsCard
+  name="dragFree"
+  type="UIValue<boolean>"
+  description={"If `true`, momentum scrolling will be enabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="draggable"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, carousel can be scrolled with mouse and touch interactions."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="includeGapInSize"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, gap will be treated as part of the carousel slide size."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="index"
+  type="number"
+  description={"The index of the carousel slide."}
+/>
+<PropsCard
+  name="indicatorsProps"
+  type="CarouselIndicatorsProps"
+  description={"Props for carousel indicators element."}
+/>
+<PropsCard
+  name="innerProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for carousel inner element."}
+/>
+<PropsCard
+  name="inViewThreshold"
+  type="UIValue<number>"
+  description={
+    "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
+  }
+  defaultValue="0"
+/>
+<PropsCard
+  name="loop"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="onChange"
+  type="(index: number) => void"
+  description={"The callback invoked when carousel slide selected."}
+/>
+<PropsCard
+  name="onScrollProgress"
+  type="(progress: number) => void"
+  description={
+    "A callback that return the current scroll amount when the carousel is scrolled."
+  }
+/>
+<PropsCard
+  name="orientation"
+  type='UIValue<"vertical" | "horizontal">'
+  description={"The orientation of the carousel."}
+  defaultValue="'horizontal'"
+/>
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg" | "xl"'
+  description={"The size of the Carousel."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="skipSnaps"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="slideSize"
+  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 60 more ... | "9xl">'
+  description={"The CSS `width` property."}
+/>
+<PropsCard
+  name="slidesToScroll"
+  type="UIValue<number>"
+  description={
+    "The number of slides that should be scrolled with next or previous buttons."
+  }
+  defaultValue="1"
+/>
+<PropsCard
+  name="speed"
+  type="UIValue<number>"
+  description={
+    "Adjusts scroll speed when triggered by any of the methods.\nHigher numbers enables faster scrolling."
+  }
+  defaultValue="10"
+/>
+<PropsCard
+  name="stopMouseEnterAutoplay"
+  type="UIValue<boolean>"
+  description={"If `true`, autoplay will pause when the mouse entries over."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="variant"
+  type="string"
+  description={"The variant of the Carousel."}
+/>
+<PropsCard
+  name="withControls"
+  type="UIValue<boolean>"
+  description={"If `true`, display the carousel control buttons."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withIndicators"
+  type="UIValue<boolean>"
+  description={"If `true`, display the carousel indicator buttons."}
+  defaultValue="true"
+/>
 
 ### CarouselSlide Props
 
@@ -108,31 +198,47 @@ description='If `true`, display the carousel indicator buttons.' />
 <PropsCard
   name="size"
   type='number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 65 more ... | ((theme: StyledTheme) => UIValue<...>)'
-  description="The CSS `width` property."
+  description={"The CSS `width` property."}
 />
 
 ### CarouselControl Props
 
-<PropsCard name="icon"
-type='ReactElement<any, string | JSXElementConstructor<any>>'
-description='The icon to be used in the button.' />
-<PropsCard name="isActive"
-type='boolean'
-description='If `true`, the button is represented as active.' />
-<PropsCard name="isDisabled"
-type='boolean'
-description='If `true`, the button is disabled.' />
-<PropsCard name="isLoading"
-type='boolean'
-description='If `true`, the loading state of the button is represented.' />
-<PropsCard name="isRounded"
-type='boolean'
-description='If `true`, the button will be perfectly round. Else, it'll be slightly round.' />
+<PropsCard
+  name="icon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to be used in the button."}
+/>
+<PropsCard
+  name="isActive"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the button is disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isLoading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRounded"
+  type="boolean"
+  description={
+    "If `true`, the button will be perfectly round. Else, it'll be slightly round."
+  }
+  defaultValue="false"
+/>
 
 ### CarouselIndicators Props
 
 <PropsCard
   name="component"
   type="FC<{ index: number; isSelected: boolean }>"
-  description="The custom curousel indicator to use."
+  description={"The custom curousel indicator to use."}
 />

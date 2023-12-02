@@ -7460,6 +7460,12 @@
     "hierarchy": { "lv1": "Heading" }
   },
   {
+    "title": "テーマ",
+    "type": "fragment",
+    "slug": "/components/typography/heading/theming#テーマ",
+    "hierarchy": { "lv1": "Heading", "lv2": "テーマ" }
+  },
+  {
     "title": "Highlight",
     "type": "page",
     "description": "`Highlight`は、テキスト内の指定された文字列をハイライトするコンポーネントです。デフォルトでは、`p`要素をレンダリングします。",

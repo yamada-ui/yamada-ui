@@ -23,7 +23,7 @@ export const Tabs = memo(
           borderBottomWidth="1px"
           {...rest}
         >
-          {documentTabs.map(({ tab, menu, title, slug }) => (
+          {documentTabs.map(({ title, slug }) => (
             <Box as="li" key={slug}>
               <Center
                 as={Link}
@@ -48,7 +48,7 @@ export const Tabs = memo(
                   _hover: { opacity: 1 },
                 }}
               >
-                {tab ?? menu ?? title}
+                {title}
               </Center>
             </Box>
           ))}

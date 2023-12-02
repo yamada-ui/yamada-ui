@@ -10,7 +10,7 @@ import {
 import Link from "next/link"
 import type { FC } from "react"
 import { memo } from "react"
-import type { DocumentTypes } from "contentlayer/generated"
+import type { DocumentTypesNavigationItem } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
 
@@ -31,29 +31,28 @@ export const Pagination = memo(
         mt="xl"
         {...rest}
       >
-        <PaginationItem document={prevDocument} isPrev />
+        <PaginationItem {...prevDocument} isPrev />
 
-        <PaginationItem document={nextDocument} alignItems="flex-end" />
+        <PaginationItem {...nextDocument} alignItems="flex-end" />
       </Grid>
     )
   }),
 )
 
-type PaginationItemProps = GridItemProps & {
-  document?: DocumentTypes
-  isPrev?: boolean
-}
+type PaginationItemProps = GridItemProps &
+  DocumentTypesNavigationItem & {
+    isPrev?: boolean
+  }
 
 const PaginationItem: FC<PaginationItemProps> = ({
-  document,
+  title,
+  slug,
   isPrev,
   ...rest
 }) => {
   const { t } = useI18n()
 
-  if (!document) return <Box />
-
-  const { slug, menu, title } = document
+  if (!title || !slug) return <Box />
 
   return (
     <GridItem
@@ -98,7 +97,7 @@ const PaginationItem: FC<PaginationItemProps> = ({
         ) : null}
 
         <Text as="span" noOfLines={1}>
-          {menu ?? title}
+          {title}
         </Text>
 
         {!isPrev ? (

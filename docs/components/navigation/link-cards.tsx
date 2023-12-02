@@ -13,21 +13,19 @@ export const LinkCards = memo(
 
       return (
         <CardContainer ref={ref} {...rest}>
-          {documentChildrenTree.map(
-            ({ title, menu, description, label, slug }) => (
-              <GridItem key={slug}>
-                <LinkCard
-                  {...{
-                    href: slug,
-                    title: menu ?? title,
-                    description,
-                    label,
-                    with_description,
-                  }}
-                />
-              </GridItem>
-            ),
-          )}
+          {documentChildrenTree.map(({ title, description, label, slug }) => (
+            <GridItem key={slug}>
+              <LinkCard
+                {...{
+                  href: slug,
+                  title,
+                  description,
+                  label,
+                  with_description,
+                }}
+              />
+            </GridItem>
+          ))}
         </CardContainer>
       )
     },

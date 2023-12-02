@@ -15,7 +15,7 @@ import Link from "next/link"
 import type { FC } from "react"
 import { memo, useEffect } from "react"
 import { Label } from "components/data-display"
-import type { DocumentTypesWithChildren } from "contentlayer/generated"
+import type { DocumentTypeTree } from "contentlayer/generated"
 import { usePage } from "contexts/page-context"
 
 export type TreeProps = ListProps
@@ -34,12 +34,10 @@ export const Tree = memo(
   }),
 )
 
-type RecursiveListItemProps = DocumentTypesWithChildren & { isNested?: boolean }
+type RecursiveListItemProps = DocumentTypeTree & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ title, menu, slug, label, children, isNested, is_expanded }) => {
-    if (menu) title = menu
-
+  ({ title, slug, label, children, isNested, is_expanded }) => {
     const [isOpen, { on, toggle }] = useBoolean(is_expanded)
 
     useEffect(() => {

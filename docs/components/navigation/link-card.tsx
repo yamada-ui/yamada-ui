@@ -27,13 +27,13 @@ export const LinkCard = memo(
       { title, label, description, href, with_description = true, ...rest },
       ref,
     ) => {
-      const { documents } = usePage()
+      const { documentMap } = usePage()
 
       if (href.startsWith("/")) {
-        const document = documents.find(({ slug }) => slug === href)
+        const document = documentMap.find(({ slug }) => slug === href)
 
         if (document) {
-          title ??= document.menu ?? document.title
+          title ??= document.title
           label ??= document.label
           description ??= document.description
         }

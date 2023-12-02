@@ -17,10 +17,9 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Build
-        run: pnpm build:changelogs
+        run: pnpm build:changelog
 
       - name: Commit changelogs
         run: |
           git add .
-          git commit --allow-empty -m 'ci(changelog): version packages'
-          git push
+          git diff --staged --exit-code || (git commit -m 'ci(changelog): version packages' && git push)

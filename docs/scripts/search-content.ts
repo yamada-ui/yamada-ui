@@ -120,7 +120,11 @@ program.action(async () => {
               const file = await readFile(path, "utf8")
 
               const { data, content } = matter(file)
+
+              if (!Object.keys(data).length) return []
+
               let { title, description } = data
+
               const slug = getSlug(path)
 
               if (slug.startsWith("/changelog")) return []
@@ -128,10 +132,6 @@ program.action(async () => {
               const isTab = await getIsTab(paths, slug)
 
               if (isTab) return []
-
-              if (title === undefined) {
-                console.log(title, data, path)
-              }
 
               title = formatTitle(title)
 

@@ -26,21 +26,18 @@ Yamada UIは、最先端のWebアプリケーションやウェブサイトの�
 ## Contents
 
 - [リスペクト](#リスペクト)
-- [ドキュメント](#ドキュメント)
+- [ドキュメント](https://yamada-ui.vercel.app/ja)
 - [特徴](#特徴)
 - [インストール](#インストール)
 - [使い方](#使い方)
 - [CodeSandbox](#codesandbox)
+- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
 - [貢献する](#貢献する)
 - [ライセンス](#ライセンス)
 
 ## リスペクト
 
 Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[MUI](https://github.com/mui/material-ui)、[Mantine UI](https://github.com/mantinedev/mantine)から多くのインスピレーションを得ています。これは、私の人生に素晴らしい経験をもたらしました。Segun Adebayoをはじめとするすべての神々に、そのような経験をもたらしてくださったことに深く感謝しています。そして、愛しています。
-
-## ドキュメント
-
-現在、ドキュメントは[Storybook](https://hirotomoyamada.github.io/yamada-ui/)のみです。しかし、Storybookには全てのコンポーネントの各使い方を詳しく記載しています。
 
 ## 特徴
 

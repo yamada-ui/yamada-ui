@@ -22,7 +22,11 @@ cd yamada-docs
 
 3. `pnpm install`を実行して、すべての依存関係とパッケージをセットアップします。このコマンドは、依存関係をインストールします。
 
-4. `pnpm dev`を実行してローカルサーバーを起動します。`Windows`の場合は、`contentlayer`が期待通りに動作しない可能性があります。その場合は、`pnpm dev`の前に`npx contentlayer build`を実行してください。
+4. `pnpm dev`を実行してローカルサーバーを起動します。
+
+> [!TIP]
+>
+> `Windows`の場合は、`contentlayer`が期待通りに動作しない可能性があります。その場合は、`pnpm dev`の前に`npx contentlayer build`を実行してください。
 
 ## コマンド
 
@@ -48,7 +52,9 @@ cd yamada-docs
 - `ci`: 継続的インテグレーションの設定に関する変更をした場合（例：github actions、CIシステムなど）
 - `chore`: 上記のいずれにも当てはまらないリポジトリへの変更をした場合
 
-詳しい仕様については、[Conventional Commits](https://www.conventionalcommits.org)を確認するか、[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)を確認してください。
+> [!TIP]
+>
+> 詳しい仕様については、[Conventional Commits](https://www.conventionalcommits.org)を確認するか、[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)を確認してください。
 
 ### プルリクエストの手順
 

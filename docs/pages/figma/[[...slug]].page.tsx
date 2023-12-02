@@ -7,11 +7,11 @@ import { getStaticDocumentPaths, getStaticDocumentProps } from "utils/next"
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const Page: NextPage<PageProps> = ({ body, data, documents, ...rest }) => {
+const Page: NextPage<PageProps> = ({ body, data, ...rest }) => {
   const Component = useMDXComponent(body.code)
 
   return (
-    <PageProvider value={{ documents, ...rest }}>
+    <PageProvider {...rest}>
       <DocumentLayout {...{ ...data, ...rest }}>
         <Component components={MDXComponents} />
       </DocumentLayout>

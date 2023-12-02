@@ -267,7 +267,7 @@ const extractTypeExports = (code: string) => {
 
   const exportedTypes = Object.keys(exported).filter(Boolean)
 
-  console.log("[docs]:", exportedTypes.join(", "))
+  console.log("[docs]:", `Import type ${exportedTypes.join(", ")}`)
 
   return exportedTypes
 }
@@ -366,6 +366,8 @@ const main = async () => {
   await mkdir(path.join(rootPath, ".docs"), { recursive: true })
   await writeFile(path.join(rootPath, ".docs", `${componentName}.json`), data)
   await writeFile("DOCS.json", data)
+
+  console.log("[docs]:", `Generated DOCS.json`)
 }
 
 try {

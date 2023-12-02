@@ -1,5 +1,6 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
+import chalk from "chalk"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { CONSTANT } from "constant"
@@ -92,7 +93,11 @@ const writeMdxIndexFiles = async (data: Data, content: Content) => {
         content,
       )
 
-      console.log(`[changelog]: Generated ${getMdxFileName("index", locale)}`)
+      console.log(
+        chalk.green(
+          `[changelog]: Generated ${getMdxFileName("index", locale)}`,
+        ),
+      )
     }),
   )
 }

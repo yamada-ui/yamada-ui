@@ -1,6 +1,7 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
 import { Octokit } from "@octokit/rest"
+import chalk from "chalk"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { CONSTANT } from "constant"
@@ -263,7 +264,7 @@ const generateMdxFiles = (
 
           await writeMdxFile(outPath, data, resolvedContent)
 
-          console.log(`[theming]: Generated ${outPath}`)
+          console.log(chalk.green(`[theming]: Generated ${outPath}`))
         }),
       )
     }),

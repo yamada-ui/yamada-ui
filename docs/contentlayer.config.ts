@@ -206,16 +206,7 @@ const computedFields: DocumentTypeDef["computedFields"] = {
   },
   data: {
     type: "json",
-    resolve: async ({
-      _id,
-      _raw,
-      title,
-      body,
-      table_of_contents_max_lv,
-      ...rest
-    }) => ({
-      ...rest,
-      title,
+    resolve: async ({ _id, _raw, body, table_of_contents_max_lv }) => ({
       locale: getLocale(_raw.flattenedPath),
       paths: omitLocaleSlug(_raw.flattenedPath).split("/"),
       editUrl: `${CONSTANT.SNS.GITHUB.DOC_EDIT_URL}/${_id}`,

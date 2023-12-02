@@ -1,6 +1,7 @@
 import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
 import { Octokit } from "@octokit/rest"
+import chalk from "chalk"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 // import type { ChatCompletionMessageParam } from "openai/resources"
@@ -248,7 +249,7 @@ const generateMdxFiles = (
 
           await writeMdxFile(outPath, data, resolvedContent)
 
-          console.log(`[props]: Generated ${outPath}`)
+          console.log(chalk.green(`[props]: Generated ${outPath}`))
         }),
       )
     }),

@@ -4,7 +4,6 @@ import chalk from "chalk"
 import { program } from "commander"
 import matter from "gray-matter"
 import toc from "markdown-toc"
-import ora from "ora"
 import { otherLocales } from "../utils/i18n"
 import { prettier } from "libs/prettier"
 
@@ -103,12 +102,7 @@ const getIsTab = async (paths: string[], slug: string) => {
 const formatTitle = (value: string) => value.replace(/`/g, "")
 
 program.action(async () => {
-  const hrtime = process.hrtime()
-  const spinner = ora("Generating search content files").start()
-
   try {
-    if (spinner) spinner.text = `Read files...`
-
     const paths = await getPaths()
     const resolvedPaths = getReducePaths(paths)
 
@@ -120,7 +114,11 @@ program.action(async () => {
               const file = await readFile(path, "utf8")
 
               const { data, content } = matter(file)
+
+              if (!Object.keys(data).length) return []
+
               let { title, description } = data
+
               const slug = getSlug(path)
 
               if (slug.startsWith("/changelog")) return []
@@ -128,10 +126,6 @@ program.action(async () => {
               const isTab = await getIsTab(paths, slug)
 
               if (isTab) return []
-
-              if (title === undefined) {
-                console.log(title, data, path)
-              }
 
               title = formatTitle(title)
 
@@ -209,16 +203,15 @@ program.action(async () => {
           parser: "json",
         })
 
-        await writeFile(`i18n/content.${lang}.json`, data)
+        const outPath = `i18n/content.${lang}.json`
+
+        await writeFile(outPath, data)
+
+        console.log(chalk.green(`[search]: Generated ${outPath}`))
       }),
     )
-
-    const [start, end] = process.hrtime(hrtime)
-    const duration = (Number(end - start) / 1e9).toFixed(2)
-
-    spinner.succeed(chalk.green(`Done in ${duration}s` + "\n"))
   } catch (e) {
-    spinner.fail(chalk.red(e.message))
+    console.log(chalk.red(e.message))
   }
 })
 

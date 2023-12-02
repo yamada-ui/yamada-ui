@@ -6801,6 +6801,12 @@
     "hierarchy": { "lv1": "Heading" }
   },
   {
+    "title": "Theming",
+    "type": "fragment",
+    "slug": "/components/typography/heading/theming#theming",
+    "hierarchy": { "lv1": "Heading", "lv2": "Theming" }
+  },
+  {
     "title": "Highlight",
     "type": "page",
     "description": "`Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.",

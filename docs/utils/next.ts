@@ -6,14 +6,13 @@ import {
   getDocument,
   getDocuments,
   getDocumentPagination,
-  getPath,
   getDocumentTabs,
   getDocumentTree,
   omitDocumentTabs,
+  getActiveDocuments,
+  getDocumentPaths,
 } from "./contentlayer"
-import { otherLocales } from "./i18n"
-import type { DocumentData, DocumentTypeNames } from "contentlayer/generated"
-import { allDocuments } from "contentlayer/generated"
+import { type DocumentTypeNames } from "contentlayer/generated"
 
 export const getStaticCommonProps = async ({
   locale,
@@ -57,7 +56,6 @@ export const getStaticDocumentProps =
     return {
       props: {
         ...document,
-        documents,
         documentTree,
         documentBreadcrumbs,
         documentChildrenTree,
@@ -67,65 +65,14 @@ export const getStaticDocumentProps =
     }
   }
 
-const OTHER_LOCALES = `(${otherLocales.join("|")})`
-
 export const getStaticDocumentPaths =
   (documentTypeName: DocumentTypeNames) =>
   async ({ defaultLocale, locales }: GetStaticPathsContext) => {
-    const prefixId = toKebabCase(documentTypeName)
-
-    const documents = locales.flatMap((locale) =>
-      allDocuments.filter(({ type, is_active, _id }) => {
-        if (!is_active) return false
-
-        if (type !== documentTypeName) return false
-
-        if (locale === defaultLocale) {
-          const isContains = new RegExp(`\.${OTHER_LOCALES}\.mdx$`).test(_id)
-
-          return !isContains && _id.endsWith(".mdx")
-        } else {
-          return _id.endsWith(`.${locale}.mdx`)
-        }
-      }),
+    const documents = locales.flatMap(
+      getActiveDocuments({ documentTypeName, defaultLocale }),
     )
 
-    const reg = new RegExp(`^${prefixId}/`)
-
-    const paths = documents
-      .map(({ _id, data }) => {
-        const id = _id.replace(reg, "")
-
-        const { locale } = data as DocumentData
-        const path = getPath(id)
-        const params = {
-          slug: path.split("/").filter((str) => str !== "index"),
-        }
-
-        const notExistLocales = otherLocales.filter((otherLocale) => {
-          const otherLocaleDoc = documents.find(({ _id, data }) => {
-            const id = _id.replace(reg, "")
-            const { locale } = data as DocumentData
-            const otherLocalePath = getPath(id)
-
-            return path === otherLocalePath && locale === otherLocale
-          })
-
-          return !otherLocaleDoc
-        })
-
-        if (notExistLocales.length) {
-          const otherPaths = notExistLocales.map((locale) => ({
-            params,
-            locale,
-          }))
-
-          return [{ params, locale }, ...otherPaths]
-        } else {
-          return { params, locale }
-        }
-      })
-      .flat()
+    const paths = getDocumentPaths({ documentTypeName, documents })
 
     return { paths, fallback: false }
   }

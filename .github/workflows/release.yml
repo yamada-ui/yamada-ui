@@ -63,8 +63,7 @@ jobs:
         run: |
           pnpm gen:docs
           git add .
-          git commit --allow-empty -m 'docs: updated docs'
-          git push
+          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs' && git push)
 
       - name: Update Changelog
         if: steps.changesets.outputs.published == 'true'
@@ -72,8 +71,7 @@ jobs:
           pnpm changelog:latest
           pnpm changelog:format
           git add .
-          git commit --allow-empty -m 'docs: add changelog'
-          git push
+          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
 
       - name: Sync Changelog
         if: steps.changesets.outputs.published == 'true'

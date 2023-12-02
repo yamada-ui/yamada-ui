@@ -62,7 +62,7 @@ export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
   const secondaryTokens = createTokens(theme, "secondary")
   const animationTokens = createTokens(theme, "animation")
 
-  let { cssMap, cssVars } = createAllVars(
+  let { cssMap, cssVars } = mergeVars(
     createVars(primaryTokens, prefix),
     createVars(secondaryTokens, prefix),
     createVars(animationTokens, prefix),
@@ -76,7 +76,7 @@ export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
       const nestedSecondaryTokens = createTokens(nestedTheme, "secondary")
       const nestedAnimationTokens = createTokens(nestedTheme, "animation")
 
-      let { cssVars: nestedCSSVars } = createAllVars(
+      let { cssVars: nestedCSSVars } = mergeVars(
         createVars(nestedPrimaryTokens, prefix),
         createVars(nestedSecondaryTokens, prefix),
         createVars(nestedAnimationTokens, prefix),
@@ -173,7 +173,7 @@ const createTokens = (
   ])
 }
 
-const createAllVars =
+const mergeVars =
   (
     ...funcs: ((arg: {
       baseTokens?: VarTokens
@@ -211,31 +211,29 @@ export const mergeStyle = <T extends ComponentStyle | ComponentMultiStyle>(
 ): T => {
   let result = Object.assign({}, target) as T
 
-  if (isObject(source)) {
-    if (isObject(target)) {
-      for (const [sourceKey, sourceValue] of Object.entries(source)) {
-        const targetValue = target[sourceKey as keyof T]
+  if (isObject(source) && isObject(target)) {
+    for (const [sourceKey, sourceValue] of Object.entries(source)) {
+      const targetValue = target[sourceKey as keyof T]
 
-        if (target.hasOwnProperty(sourceKey)) {
-          if (!isFunction(targetValue) && !isFunction(sourceValue)) {
-            result[sourceKey as keyof T] = mergeStyle(
-              targetValue,
-              sourceValue,
-            ) as T[keyof T]
-          } else {
-            result[sourceKey as keyof T] = ((props: UIStyleProps) =>
-              mergeStyle(
-                runIfFunc(targetValue, props) as T,
-                runIfFunc(sourceValue, props) as T,
-              )) as T[keyof T]
-          }
+      if (target.hasOwnProperty(sourceKey)) {
+        if (!isFunction(targetValue) && !isFunction(sourceValue)) {
+          result[sourceKey as keyof T] = mergeStyle(
+            targetValue,
+            sourceValue,
+          ) as T[keyof T]
         } else {
-          Object.assign(result, { [sourceKey]: sourceValue })
+          result[sourceKey as keyof T] = ((props: UIStyleProps) =>
+            mergeStyle(
+              runIfFunc(targetValue, props) as T,
+              runIfFunc(sourceValue, props) as T,
+            )) as T[keyof T]
         }
+      } else {
+        Object.assign(result, { [sourceKey]: sourceValue })
       }
-    } else {
-      result = source
     }
+  } else {
+    result = source
   }
 
   return result as T

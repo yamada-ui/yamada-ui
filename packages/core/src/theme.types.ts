@@ -396,7 +396,7 @@ export type UsageTheme = BaseTheme & {
   [key: string]: any
 }
 
-export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
+export type ComponentBaseStyle = UIStyle
 export type ComponentVariants = Record<string, UIStyle>
 export type ComponentSizes = Record<string, UIStyle>
 export type ComponentDefaultProps<

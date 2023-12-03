@@ -72,24 +72,26 @@ export const merge = <T extends Dict>(
 ): T => {
   let result = Object.assign({}, target)
 
-  if (isObject(source) && isObject(target)) {
-    for (const [sourceKey, sourceValue] of Object.entries(source)) {
-      const targetValue = target[sourceKey]
+  if (isObject(source)) {
+    if (isObject(target)) {
+      for (const [sourceKey, sourceValue] of Object.entries(source)) {
+        const targetValue = target[sourceKey]
 
-      if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
-        result[sourceKey] = targetValue.concat(...sourceValue)
-      } else if (
-        !isFunction(sourceValue) &&
-        isObject(sourceValue) &&
-        target.hasOwnProperty(sourceKey)
-      ) {
-        result[sourceKey] = merge(targetValue, sourceValue, mergeArray)
-      } else {
-        Object.assign(result, { [sourceKey]: sourceValue })
+        if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
+          result[sourceKey] = targetValue.concat(...sourceValue)
+        } else if (
+          !isFunction(sourceValue) &&
+          isObject(sourceValue) &&
+          target.hasOwnProperty(sourceKey)
+        ) {
+          result[sourceKey] = merge(targetValue, sourceValue, mergeArray)
+        } else {
+          Object.assign(result, { [sourceKey]: sourceValue })
+        }
       }
+    } else {
+      result = source
     }
-  } else {
-    result = source
   }
 
   return result as T
@@ -157,6 +159,7 @@ export const getObject = (
 
   for (i = 0; i < k.length; i += 1) {
     if (!obj) break
+
     obj = obj[k[i]]
   }
 
@@ -172,9 +175,7 @@ export const memoizeObject = (func: typeof getObject) => {
     fallback?: any,
     i?: number,
   ): T => {
-    if (typeof obj === "undefined") {
-      return func(obj, path, fallback)
-    }
+    if (typeof obj === "undefined") return func(obj, path, fallback)
 
     if (!cache.has(obj)) cache.set(obj, new Map())
 

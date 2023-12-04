@@ -86,19 +86,17 @@ export const transparentizeColor =
 export const toneColor =
   (color: string, hue: (typeof hues)[number]) =>
   (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
-
     if (hue < 50 || 950 < hue) return color
 
-    let n = (hue - 500) / 10
+    let raw = color
 
-    const isLighten = n <= 0
+    if (theme && colorMode) getColor(color, color)(theme, colorMode)
 
-    if (isLighten) n *= -1
+    const coef = 0.75
 
-    if (n !== 0) n = n - 5 * (isLighten ? 1 : -1)
+    const amount = (500 - hue) * 0.001 * coef
 
-    return toHex(isLighten ? lighten(raw, n / 100) : mix(raw, "#000", n / 100))
+    return toHex(lighten(raw, amount))
   }
 
 export const randomColor = ({

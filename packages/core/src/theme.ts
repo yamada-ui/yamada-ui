@@ -1,4 +1,4 @@
-import type { Dict } from "@yamada-ui/utils"
+import type { Dict, Union } from "@yamada-ui/utils"
 import {
   flattenObject,
   objectFromEntries,
@@ -9,11 +9,13 @@ import {
   runIfFunc,
   isFunction,
 } from "@yamada-ui/utils"
-import type { ThemeProps, UIStyleProps } from "./css"
+import type { CSSUIObject, ThemeProps, UIStyle, UIStyleProps } from "./css"
 import { analyzeBreakpoints, createVars } from "./css"
 import type {
   CSSMap,
+  ComponentMultiSizes,
   ComponentMultiStyle,
+  ComponentMultiVariants,
   ComponentStyle,
   ThemeConfig,
 } from "./theme.types"
@@ -205,7 +207,30 @@ const omitTheme = (theme: Dict): Dict =>
 export const omitThemeProps = <T extends ThemeProps>(props: T) =>
   omitObject(props, ["size", "variant", "colorScheme"])
 
-export const mergeStyle = <T extends ComponentStyle | ComponentMultiStyle>(
+type MergeStyleOptions = Omit<Partial<FilterStyleOptions>, "isMulti">
+
+export const mergeStyle =
+  (target: ComponentStyle, ...sources: ComponentStyle[]) =>
+  ({ omit = [], pick = [] }: MergeStyleOptions = {}): ComponentStyle =>
+    sources.reduce(
+      (prev, source) =>
+        recursiveMergeStyle(filterStyle(prev)({ omit, pick }), source),
+      target,
+    )
+
+export const mergeMultiStyle =
+  (target: ComponentMultiStyle, ...sources: ComponentMultiStyle[]) =>
+  ({ omit = [], pick = [] }: MergeStyleOptions = {}): ComponentMultiStyle =>
+    sources.reduce(
+      (prev, source) =>
+        recursiveMergeStyle(
+          filterStyle(prev)({ omit, pick, isMulti: true }),
+          source,
+        ),
+      target,
+    )
+
+const recursiveMergeStyle = <T extends ComponentStyle | ComponentMultiStyle>(
   target: T,
   source: T,
 ): T => {
@@ -217,13 +242,13 @@ export const mergeStyle = <T extends ComponentStyle | ComponentMultiStyle>(
 
       if (target.hasOwnProperty(sourceKey)) {
         if (!isFunction(targetValue) && !isFunction(sourceValue)) {
-          result[sourceKey as keyof T] = mergeStyle(
+          result[sourceKey as keyof T] = recursiveMergeStyle(
             targetValue,
             sourceValue,
           ) as T[keyof T]
         } else {
           result[sourceKey as keyof T] = ((props: UIStyleProps) =>
-            mergeStyle(
+            recursiveMergeStyle(
               runIfFunc(targetValue, props) as T,
               runIfFunc(sourceValue, props) as T,
             )) as T[keyof T]
@@ -237,4 +262,120 @@ export const mergeStyle = <T extends ComponentStyle | ComponentMultiStyle>(
   }
 
   return result as T
+}
+
+type FilterStyleOptions = {
+  omit: Union<keyof (ComponentStyle | ComponentMultiStyle)>[]
+  pick: Union<keyof (ComponentStyle | ComponentMultiStyle)>[]
+  isMulti?: boolean
+}
+
+const filterStyle =
+  <T extends ComponentStyle | ComponentMultiStyle>(target: T) =>
+  ({ omit, pick, isMulti = false }: FilterStyleOptions): T => {
+    if (!isObject(target)) return target
+
+    if (omit.length)
+      target = internalFilterStyle(target, omit, isMulti)(omitObject) as T
+    if (pick.length)
+      target = internalFilterStyle(target, pick, isMulti)(pickObject) as T
+
+    return target
+  }
+
+const internalFilterStyle =
+  (
+    target: Dict<Dict | ((props: any) => Dict)>,
+    keys: string[],
+    isMulti: boolean,
+    refs: string[] = [],
+  ) =>
+  (func: typeof omitObject | typeof pickObject) => {
+    if (!isObject(target)) return target
+
+    target = func(target, keys)
+
+    Object.entries(target ?? {}).forEach(([nestedKey, value]) => {
+      const newKeys = keys.filter((key) => key !== nestedKey)
+      const newRefs = [...refs, nestedKey]
+
+      if (!onValidFilterStyleKey(newRefs, isMulti)) return
+
+      if (isFunction(value)) {
+        target[nestedKey] = (props) =>
+          internalFilterStyle(value(props), newKeys, isMulti, newRefs)(func)
+      } else {
+        target[nestedKey] = internalFilterStyle(
+          value,
+          newKeys,
+          isMulti,
+          newRefs,
+        )(func)
+      }
+    })
+
+    return target
+  }
+
+const onValidFilterStyleKey = (keys: string[], isMulti: boolean): boolean => {
+  const rootKey = keys[0]
+
+  switch (rootKey) {
+    case "baseStyle":
+      return keys.length < (isMulti ? 2 : 1)
+
+    case "variants":
+    case "sizes":
+      return keys.length < (isMulti ? 3 : 2)
+
+    default:
+      return false
+  }
+}
+
+export const pickStyle = (
+  target: ComponentMultiStyle,
+  targetKey: string,
+  withProps: boolean = true,
+): ComponentStyle => {
+  const result = {} as ComponentStyle
+
+  Object.entries(target).forEach(([key, value]) => {
+    switch (key) {
+      case "baseStyle":
+        if (isFunction(value)) {
+          result[key] = (props) => value(props)[targetKey] as CSSUIObject
+        } else {
+          result[key] = value[targetKey]
+        }
+
+        break
+
+      case "variants":
+      case "sizes":
+        result[key] = Object.entries(
+          value as ComponentMultiVariants | ComponentMultiSizes,
+        ).reduce<Record<string, UIStyle>>((prev, [key, value]) => {
+          if (isFunction(value)) {
+            prev[key] = (props) => value(props)[targetKey] as CSSUIObject
+          } else {
+            prev[key] = value[targetKey]
+          }
+
+          return prev
+        }, {})
+
+        break
+
+      case "defaultProps":
+        if (withProps) result[key] = value
+
+        break
+
+      default:
+        break
+    }
+  })
+
+  return result
 }

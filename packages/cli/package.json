@@ -46,14 +46,15 @@
     "cli-check-node": "^1.3.4",
     "cli-handle-unhandled": "^1.1.1",
     "cli-welcome": "^2.2.2",
+    "color2k": "^2.0.2",
     "commander": "^11.0.0",
     "prettier": "^3.0.1"
   },
   "devDependencies": {
-    "ora": "^7.0.1",
-    "update-notifier": "^6.0.2",
-    "@types/update-notifier": "6.0.8",
     "@types/cli-welcome": "^2.2.0",
-    "@types/prettier": "^3.0.0"
+    "@types/prettier": "^3.0.0",
+    "@types/update-notifier": "6.0.8",
+    "ora": "^7.0.1",
+    "update-notifier": "^6.0.2"
   }
 }

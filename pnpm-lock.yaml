@@ -486,6 +486,9 @@ importers:
       cli-welcome:
         specifier: ^2.2.2
         version: 2.2.2
+      color2k:
+        specifier: ^2.0.2
+        version: 2.0.2
       commander:
         specifier: ^11.0.0
         version: 11.0.0

@@ -1,6 +1,6 @@
-import type { ComponentStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Radio: ComponentStyle = {
+export const Radio: ComponentMultiStyle = {
   baseStyle: {
     container: {
       _readOnly: { cursor: "auto" },

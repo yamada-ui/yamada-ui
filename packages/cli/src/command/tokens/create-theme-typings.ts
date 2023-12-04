@@ -196,7 +196,7 @@ export const createThemeTypings = async (theme: any) => {
   const componentTypes = extractComponents(theme)
 
   return prettier(
-    `import { UITheme } from './ui-theme.types'\n\nexport interface GeneratedTheme extends UITheme { ${print(
+    `import type { UITheme } from './ui-theme.types'\n\nexport interface GeneratedTheme extends UITheme { ${print(
       {
         ...unions,
         textStyles,

@@ -4,6 +4,7 @@ import { getColor, isArray } from "@yamada-ui/utils"
 
 export const Input: ComponentMultiStyle = {
   baseStyle: {
+    container: {},
     field: {
       width: "100%",
       minWidth: 0,
@@ -14,6 +15,11 @@ export const Input: ComponentMultiStyle = {
       transitionDuration: "normal",
       _placeholder: {
         color: "gray.500",
+      },
+      _dark: {
+        _placeholder: {
+          color: "whiteAlpha.400",
+        },
       },
       _disabled: {
         opacity: 0.4,
@@ -51,6 +57,10 @@ export const Input: ComponentMultiStyle = {
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          _active: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _focusVisible: {
             zIndex: "yamcha",
@@ -93,6 +103,10 @@ export const Input: ComponentMultiStyle = {
           _invalid: {
             borderColor: errorBorderColor,
           },
+          _active: {
+            bg: "transparent",
+            borderColor: focusBorderColor,
+          },
           _focusVisible: {
             bg: "transparent",
             borderColor: focusBorderColor,
@@ -131,6 +145,10 @@ export const Input: ComponentMultiStyle = {
           _invalid: {
             borderColor: errorBorderColor,
             boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
+          },
+          _active: {
+            borderColor: focusBorderColor,
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
           _focusVisible: {
             borderColor: focusBorderColor,

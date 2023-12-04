@@ -144,7 +144,7 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
     }
 
     return (
-      <ui.button
+      <ui.li
         {...props}
         {...rest}
         as={as}
@@ -157,7 +157,7 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
         {icon ? <MenuIcon>{icon}</MenuIcon> : null}
         {children}
         {command ? <MenuCommand>{command}</MenuCommand> : null}
-      </ui.button>
+      </ui.li>
     )
   },
 )

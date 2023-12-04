@@ -159,6 +159,7 @@ export const getObject = (
 
   for (i = 0; i < k.length; i += 1) {
     if (!obj) break
+
     obj = obj[k[i]]
   }
 
@@ -174,9 +175,7 @@ export const memoizeObject = (func: typeof getObject) => {
     fallback?: any,
     i?: number,
   ): T => {
-    if (typeof obj === "undefined") {
-      return func(obj, path, fallback)
-    }
+    if (typeof obj === "undefined") return func(obj, path, fallback)
 
     if (!cache.has(obj)) cache.set(obj, new Map())
 

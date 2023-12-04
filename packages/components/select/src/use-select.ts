@@ -474,23 +474,23 @@ export const useSelect = <T extends MaybeValue = string>({
         ArrowDown: isFocused
           ? () => onFocusNext()
           : !isOpen
-          ? funcAll(onOpen, onFocusFirstOrSelected)
-          : undefined,
+            ? funcAll(onOpen, onFocusFirstOrSelected)
+            : undefined,
         ArrowUp: isFocused
           ? () => onFocusPrev()
           : !isOpen
-          ? funcAll(onOpen, onFocusLastOrSelected)
-          : undefined,
+            ? funcAll(onOpen, onFocusLastOrSelected)
+            : undefined,
         Space: isFocused
           ? onSelect
           : !isOpen
-          ? funcAll(onOpen, onFocusFirstOrSelected)
-          : undefined,
+            ? funcAll(onOpen, onFocusFirstOrSelected)
+            : undefined,
         Enter: isFocused
           ? onSelect
           : !isOpen
-          ? funcAll(onOpen, onFocusFirstOrSelected)
-          : undefined,
+            ? funcAll(onOpen, onFocusFirstOrSelected)
+            : undefined,
         Home: isOpen ? onFocusFirst : undefined,
         End: isOpen ? onFocusLast : undefined,
         Escape: closeOnEsc ? onClose : undefined,

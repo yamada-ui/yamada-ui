@@ -252,10 +252,10 @@ export const PagingTable = forwardRef(
                     size === "xl"
                       ? "lg"
                       : size === "lg"
-                      ? "md"
-                      : size === "md"
-                      ? "sm"
-                      : "xs"
+                        ? "md"
+                        : size === "md"
+                          ? "sm"
+                          : "xs"
                   }
                   maxW="3xs"
                   value={String(state.pagination.pageSize)}

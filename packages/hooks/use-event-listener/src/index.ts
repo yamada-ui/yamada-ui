@@ -10,10 +10,10 @@ type Options = boolean | AddEventListenerOptions
 type Handler<E extends Events> = E extends keyof DocumentEventMap
   ? (event: DocumentEventMap[E]) => void
   : E extends keyof WindowEventMap
-  ? (event: WindowEventMap[E]) => void
-  : E extends keyof GlobalEventHandlersEventMap
-  ? (event: GlobalEventHandlersEventMap[E]) => void
-  : ((event: Event) => void) | undefined
+    ? (event: WindowEventMap[E]) => void
+    : E extends keyof GlobalEventHandlersEventMap
+      ? (event: GlobalEventHandlersEventMap[E]) => void
+      : ((event: Event) => void) | undefined
 
 export const useEventListener = <E extends Events>(
   target: Target,

@@ -8,6 +8,10 @@ import { MenuOptionItem } from "./menu-item"
 
 type MenuOptionGroupOptions<Y extends string | string[] = string> = {
   /**
+   * The label of the option group.
+   */
+  label: string
+  /**
    * The value of the menu item group.
    */
   value?: Y

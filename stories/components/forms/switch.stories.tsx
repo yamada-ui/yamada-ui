@@ -21,6 +21,10 @@ const meta: Meta<typeof Switch> = {
 
 export default meta
 
+export const basic: Story = () => {
+  return <Switch>basic</Switch>
+}
+
 export const withReverse: Story = () => {
   return <Switch isReverse>basic</Switch>
 }

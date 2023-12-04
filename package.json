@@ -73,6 +73,7 @@
     "@storybook/addon-viewport": "7.6.3",
     "@storybook/blocks": "7.6.3",
     "@storybook/cli": "7.6.3",
+    "@storybook/manager-api": "7.6.3",
     "@storybook/react": "7.6.3",
     "@storybook/react-vite": "7.6.3",
     "@storybook/theming": "7.6.3",

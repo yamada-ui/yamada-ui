@@ -20,27 +20,26 @@ const config: StorybookConfig = {
     "@storybook/addon-storysource",
     "storybook-dark-mode",
   ],
-  viteFinal: async (config) =>
-    mergeConfig(config, {
+  viteFinal: async (config) => {
+    config = mergeConfig(config, {
       resolve: {
         alias: [
           {
-            find: /\@yanada-ui\/react$/,
-            replacement: path.resolve(
-              __dirname,
-              "../packages/components/react/src",
-            ),
+            find: /\@yamada-ui\/react$/,
+            replacement: path.resolve(__dirname, "../packages/react/src"),
           },
           {
-            find: /\@yanada-ui\/theme$/,
-            replacement: path.resolve(
-              __dirname,
-              "../packages/components/theme/src",
-            ),
+            find: /\@yamada-ui\/theme$/,
+            replacement: path.resolve(__dirname, "../packages/theme/src"),
           },
         ],
       },
-    }),
+    })
+
+    config.esbuild = undefined
+
+    return config
+  },
   typescript: {
     reactDocgen: false,
   },

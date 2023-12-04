@@ -2,4 +2,4 @@
 "@yamada-ui/core": minor
 ---
 
-add `shapeOutside` property.
+add `shapeOutside` and `shapeMargin` and `shapeImageThreshold` properties.

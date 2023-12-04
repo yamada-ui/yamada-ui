@@ -2,4 +2,4 @@
 "@yamada-ui/autocomplete": patch
 ---
 
-Changed classname `AutocompleteOptionGroup`.
+Changed className `AutocompleteOptionGroup`.

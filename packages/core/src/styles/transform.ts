@@ -7,6 +7,8 @@ import { configs, transforms } from "./config"
 export const transform: Configs = {
   clipPath: true,
   shapeOutside: true,
+  shapeMargin: true,
+  shapeImageThreshold: true,
   transform: { transform: transforms.transform },
   transformOrigin: true,
   transformStyle: true,
@@ -30,6 +32,14 @@ export type TransformProps = {
    * The CSS `shape-outside` property.
    */
   shapeOutside?: Token<CSS.Property.ShapeOutside>
+  /**
+   * The CSS `shape-margin` property.
+   */
+  shapeMargin?: Token<CSS.Property.ShapeMargin>
+  /**
+   * The CSS `shape-image-threshold` property.
+   */
+  shapeImageThreshold?: Token<CSS.Property.ShapeImageThreshold>
   /**
    * The CSS `transform` property.
    */

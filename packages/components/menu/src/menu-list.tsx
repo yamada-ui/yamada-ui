@@ -64,6 +64,7 @@ export const MenuList = forwardRef<MenuListProps, "section">(
 
     return (
       <PopoverContent
+        as="ul"
         ref={mergeRefs(menuRef, ref)}
         className={cx("ui-menu__list", className)}
         role="menu"

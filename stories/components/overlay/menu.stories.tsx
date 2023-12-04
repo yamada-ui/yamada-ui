@@ -243,7 +243,7 @@ export const withGroup: Story = () => {
       </MenuButton>
 
       <MenuList>
-        <MenuGroup title="account">
+        <MenuGroup label="account">
           <MenuItem>Set status</MenuItem>
           <MenuItem>Edit Profile</MenuItem>
           <MenuItem>Preferences</MenuItem>
@@ -251,7 +251,7 @@ export const withGroup: Story = () => {
 
         <MenuDivider />
 
-        <MenuGroup title="action">
+        <MenuGroup label="action">
           <MenuItem>Sign out</MenuItem>
         </MenuGroup>
       </MenuList>
@@ -270,14 +270,14 @@ export const withOptionGroup: Story = () => {
       </MenuButton>
 
       <MenuList>
-        <MenuOptionGroup title="order" type="radio">
+        <MenuOptionGroup label="order" type="radio">
           <MenuOptionItem value="asc">Ascending</MenuOptionItem>
           <MenuOptionItem value="desc">Descending</MenuOptionItem>
         </MenuOptionGroup>
 
         <MenuDivider />
 
-        <MenuOptionGroup title="display" type="checkbox">
+        <MenuOptionGroup label="display" type="checkbox">
           <MenuOptionItem value="gender">gender</MenuOptionItem>
           <MenuOptionItem value="email">email</MenuOptionItem>
           <MenuOptionItem value="phone">phone</MenuOptionItem>

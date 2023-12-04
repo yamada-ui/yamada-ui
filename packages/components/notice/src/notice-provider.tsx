@@ -168,8 +168,8 @@ const NoticeComponent = memo(
             justifyContent: placement.includes("left")
               ? "flex-start"
               : placement.includes("right")
-              ? "flex-end"
-              : "center",
+                ? "flex-end"
+                : "center",
           } as MotionStyle
         }
       >

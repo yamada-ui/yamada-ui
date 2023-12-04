@@ -116,8 +116,8 @@ export const findChildren = (
         types.some((type) => a.type === type)
           ? -1
           : types.some((type) => b.type === type)
-          ? 1
-          : 0,
+            ? 1
+            : 0,
       )
     : [undefined, ...children]) as [
     React.ReactElement | undefined,

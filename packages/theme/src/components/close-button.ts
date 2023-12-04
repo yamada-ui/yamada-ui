@@ -1,29 +1,13 @@
-import type { ComponentStyle } from "@yamada-ui/core"
+import { mergeStyle, type ComponentStyle } from "@yamada-ui/core"
+import { Button } from "./button"
 
-export const CloseButton: ComponentStyle = {
+export const CloseButton: ComponentStyle = mergeStyle(Button, {
   baseStyle: {
-    rounded: "md",
-    transitionProperty: "common",
-    transitionDuration: "normal",
-    _disabled: {
-      opacity: 0.4,
-      cursor: "not-allowed",
-      boxShadow: "none",
-    },
     _hover: {
       bg: ["blackAlpha.100", "whiteAlpha.100"],
-      _disabled: {
-        bg: ["initial", "initial"],
-      },
     },
     _active: {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
-      _disabled: {
-        bg: ["initial", "initial"],
-      },
-    },
-    _focusVisible: {
-      boxShadow: "outline",
     },
   },
 
@@ -45,4 +29,4 @@ export const CloseButton: ComponentStyle = {
   defaultProps: {
     size: "md",
   },
-}
+})({ omit: ["variants", "sizes", "defaultProps"] })

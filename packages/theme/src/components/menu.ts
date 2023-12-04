@@ -1,7 +1,7 @@
-import type { ComponentStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { transparentizeColor } from "@yamada-ui/utils"
 
-export const Menu: ComponentStyle = {
+export const Menu: ComponentMultiStyle = {
   baseStyle: ({ theme: t, colorMode: m }) => ({
     button: {
       transitionProperty: "common",
@@ -19,6 +19,7 @@ export const Menu: ComponentStyle = {
       zIndex: "yamcha",
     },
     item: {
+      cursor: "pointer",
       py: "1.5",
       px: "3",
       transitionProperty: "background",
@@ -48,7 +49,7 @@ export const Menu: ComponentStyle = {
       borderColor: "inherit",
     },
     group: {},
-    groupTitle: {
+    groupLabel: {
       py: "1.5",
       px: "3",
       fontSize: "sm",

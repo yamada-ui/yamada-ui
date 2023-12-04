@@ -39,13 +39,13 @@ export const Progress: ComponentMultiStyle = {
             transparent
           )`
         : isAnimation
-        ? `linear-gradient(
+          ? `linear-gradient(
             to right,
             transparent 0%,
             ${bgColor} 50%,
             transparent 100%
           )`
-        : undefined
+          : undefined
 
       return {
         transitionProperty: "common",

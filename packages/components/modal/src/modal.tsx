@@ -243,13 +243,13 @@ export const Modal = forwardRef<ModalProps, "section">(
       justifyContent: placement.includes("left")
         ? "flex-start"
         : placement.includes("right")
-        ? "flex-end"
-        : "center",
+          ? "flex-end"
+          : "center",
       alignItems: placement.includes("top")
         ? "flex-start"
         : placement.includes("bottom")
-        ? "flex-end"
-        : "center",
+          ? "flex-end"
+          : "center",
     }
 
     return (

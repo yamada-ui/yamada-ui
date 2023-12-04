@@ -50,7 +50,7 @@ export const withSize: Story = () => {
   )
 }
 
-export const withVarint: Story = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Calendar

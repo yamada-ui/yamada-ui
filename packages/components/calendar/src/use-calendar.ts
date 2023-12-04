@@ -1098,8 +1098,8 @@ export const useYearList = () => {
           (selectMonthWith === "month"
             ? year
             : !isMulti
-            ? selectedValue?.getFullYear()
-            : selectedValue[0]?.getFullYear()) === value
+              ? selectedValue?.getFullYear()
+              : selectedValue[0]?.getFullYear()) === value
         const isDisabled = value < minYear || value > maxYear
 
         yearRefs.current.set(index, createRef<HTMLButtonElement>())
@@ -1110,10 +1110,10 @@ export const useYearList = () => {
           tabIndex: isControlled
             ? -1
             : !rangeYears.includes(year) && rangeYears[0] === value
-            ? 0
-            : isSelected
-            ? 0
-            : -1,
+              ? 0
+              : isSelected
+                ? 0
+                : -1,
           "data-selected": dataAttr(isSelected),
           "data-value": value ?? "",
           "data-disabled": dataAttr(isDisabled),
@@ -1273,15 +1273,15 @@ export const useMonthList = () => {
         (selectMonthWith === "month"
           ? month.getFullYear()
           : !isMulti
-          ? selectedValue?.getFullYear()
-          : selectedValue[0]?.getFullYear()) === year
+            ? selectedValue?.getFullYear()
+            : selectedValue[0]?.getFullYear()) === year
       const isSelected =
         isSelectedYear &&
         (selectMonthWith === "month"
           ? month.getMonth()
           : !isMulti
-          ? selectedValue?.getMonth()
-          : selectedValue[0]?.getMonth()) === value
+            ? selectedValue?.getMonth()
+            : selectedValue[0]?.getMonth()) === value
       const isDisabled = !isMonthInRange({
         date: new Date(year, value),
         minDate,
@@ -1296,10 +1296,10 @@ export const useMonthList = () => {
         tabIndex: isControlled
           ? -1
           : !isSelectedYear && value === 0
-          ? 0
-          : isSelected
-          ? 0
-          : -1,
+            ? 0
+            : isSelected
+              ? 0
+              : -1,
         "data-selected": dataAttr(isSelected),
         "data-disabled": dataAttr(isDisabled),
         "data-value": value ?? "",
@@ -1598,15 +1598,15 @@ export const useMonth = () => {
           !!index || isControlled
             ? -1
             : (!(!isMulti
-                ? isSameMonth(month, selectedValue)
-                : selectedValue.some((selectedValue) =>
-                    isSameMonth(month, selectedValue),
-                  )) &&
-                !isOutside &&
-                value.getDate() === 1) ||
-              isSelected
-            ? 0
-            : -1,
+                  ? isSameMonth(month, selectedValue)
+                  : selectedValue.some((selectedValue) =>
+                      isSameMonth(month, selectedValue),
+                    )) &&
+                  !isOutside &&
+                  value.getDate() === 1) ||
+                isSelected
+              ? 0
+              : -1,
         "data-selected": dataAttr(isSelected),
         "data-outside": dataAttr(isOutside),
         "data-holiday": dataAttr(isHoliday),

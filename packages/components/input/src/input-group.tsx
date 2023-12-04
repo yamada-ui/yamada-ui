@@ -46,6 +46,7 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
     width: "100%",
     display: "flex",
     position: "relative",
+    ...styles.container,
   }
   const groupProps: CSSUIProps = {}
   const minHeight: any =

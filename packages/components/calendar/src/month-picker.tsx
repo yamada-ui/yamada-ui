@@ -121,7 +121,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
 
           <PopoverContent
             className="ui-month-picker__popover"
-            __css={{ ...styles.popover }}
+            __css={{ ...styles.list }}
           >
             <Calendar
               className="ui-month-picker__calendar"

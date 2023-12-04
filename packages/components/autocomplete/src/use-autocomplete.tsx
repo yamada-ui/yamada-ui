@@ -940,32 +940,32 @@ export const useAutocomplete = <T extends string | string[] = string>({
         ArrowDown: isFocused
           ? () => onFocusNext()
           : !isOpen
-          ? funcAll(onOpen, onFocusFirstOrSelected)
-          : undefined,
+            ? funcAll(onOpen, onFocusFirstOrSelected)
+            : undefined,
         ArrowUp: isFocused
           ? () => onFocusPrev()
           : !isOpen
-          ? funcAll(onOpen, onFocusLastOrSelected)
-          : undefined,
+            ? funcAll(onOpen, onFocusLastOrSelected)
+            : undefined,
         Space: isCreate
           ? onCreate
           : isFocused
-          ? onSelect
-          : !isOpen
-          ? funcAll(onOpen, onFocusFirstOrSelected)
-          : undefined,
+            ? onSelect
+            : !isOpen
+              ? funcAll(onOpen, onFocusFirstOrSelected)
+              : undefined,
         Enter: isCreate
           ? onCreate
           : isFocused
-          ? onSelect
-          : !isOpen
-          ? funcAll(onOpen, onFocusFirstOrSelected)
-          : allowFree && isMulti
-          ? () => {
-              if (inputValue) onChange(inputValue)
-              setFocusedIndex(0)
-            }
-          : undefined,
+            ? onSelect
+            : !isOpen
+              ? funcAll(onOpen, onFocusFirstOrSelected)
+              : allowFree && isMulti
+                ? () => {
+                    if (inputValue) onChange(inputValue)
+                    setFocusedIndex(0)
+                  }
+                : undefined,
         Home: isOpen ? onFocusFirst : undefined,
         End: isOpen ? onFocusLast : undefined,
         Escape: closeOnEsc ? onClose : undefined,

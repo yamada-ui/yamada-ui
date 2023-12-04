@@ -413,8 +413,8 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
             ? { paddingLeft: w / 2, paddingRight: w / 2 }
             : {}
           : h
-          ? { paddingTop: h / 2, paddingBottom: h / 2 }
-          : {}),
+            ? { paddingTop: h / 2, paddingBottom: h / 2 }
+            : {}),
       }
 
       return {

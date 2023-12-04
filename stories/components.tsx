@@ -70,8 +70,8 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
           {!isArray(value)
             ? value
             : colorMode === "light"
-            ? value[0]
-            : value[1]}
+              ? value[0]
+              : value[1]}
         </Text>
       </VStack>
     </HStack>

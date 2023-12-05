@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.7.2
+
+### Patch Changes
+
+- [`4cb358c`](https://github.com/hirotomoyamada/yamada-ui/commit/4cb358c6bb5a74e33dd70e7be39cd31664594c0e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Used import type for `UITheme` import.
+
 ## 0.7.1
 
 ### Patch Changes

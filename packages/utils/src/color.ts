@@ -11,6 +11,8 @@ import { getMemoizedObject as get, isArray } from "."
 
 type ColorMode = "light" | "dark"
 
+const coef = 0.75
+
 export const hues = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
@@ -92,12 +94,22 @@ export const toneColor =
 
     if (theme && colorMode) getColor(color, color)(theme, colorMode)
 
-    const coef = 0.75
-
     const amount = (500 - hue) * 0.001 * coef
 
     return toHex(lighten(raw, amount))
   }
+
+export const toneColors = (color: string) => {
+  const colors: Record<string, string> = {}
+
+  hues.forEach((hue) => {
+    const amount = (500 - hue) * 0.001 * coef
+
+    colors[hue] = toHex(lighten(color, amount))
+  })
+
+  return colors
+}
 
 export const randomColor = ({
   string,

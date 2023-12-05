@@ -8,7 +8,7 @@ const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-ui" }
 
 config()
 
-const octokit = new Octokit({ auth: process.env.PAT_TOKEN })
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const generateIssues = async (issues: Issue[]) => {
   for (const { title, body, labels } of issues) {

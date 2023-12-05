@@ -11,15 +11,14 @@ import { getMemoizedObject as get, isArray } from "."
 
 type ColorMode = "light" | "dark"
 
+const coef = 0.75
+
 export const hues = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 
 export const isGray = (colorScheme: string) =>
-  colorScheme === "gray" ||
-  colorScheme === "zinc" ||
-  colorScheme === "neutral" ||
-  colorScheme === "stone"
+  colorScheme === "gray" || colorScheme === "neutral"
 
 export const getColor =
   (color: string, fallback?: string) =>
@@ -86,20 +85,28 @@ export const transparentizeColor =
 export const toneColor =
   (color: string, hue: (typeof hues)[number]) =>
   (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
-
     if (hue < 50 || 950 < hue) return color
 
-    let n = (hue - 500) / 10
+    let raw = color
 
-    const isLighten = n <= 0
+    if (theme && colorMode) getColor(color, color)(theme, colorMode)
 
-    if (isLighten) n *= -1
+    const amount = (500 - hue) * 0.001 * coef
 
-    if (n !== 0) n = n - 5 * (isLighten ? 1 : -1)
-
-    return toHex(isLighten ? lighten(raw, n / 100) : mix(raw, "#000", n / 100))
+    return toHex(lighten(raw, amount))
   }
+
+export const toneColors = (color: string) => {
+  const colors: Record<string, string> = {}
+
+  hues.forEach((hue) => {
+    const amount = (500 - hue) * 0.001 * coef
+
+    colors[hue] = toHex(lighten(color, amount))
+  })
+
+  return colors
+}
 
 export const randomColor = ({
   string,

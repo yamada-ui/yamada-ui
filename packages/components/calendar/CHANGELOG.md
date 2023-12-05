@@ -1,5 +1,18 @@
 # @yamada-ui/calendar
 
+## 0.6.10
+
+### Patch Changes
+
+- [`9d3f84a`](https://github.com/hirotomoyamada/yamada-ui/commit/9d3f84af3cf9eb9b332f426bbbf1b670848d053b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed styles `popover` to `list`.
+
+- Updated dependencies [[`278b66b`](https://github.com/hirotomoyamada/yamada-ui/commit/278b66b6ea5220fe538525613c48e4f247c63284), [`a83f07e`](https://github.com/hirotomoyamada/yamada-ui/commit/a83f07ec2753124c6d00ea25e3acde59f191d696), [`689ffcb`](https://github.com/hirotomoyamada/yamada-ui/commit/689ffcb6e0fa8099f39bb5c48e5cd792157befac), [`cc59afe`](https://github.com/hirotomoyamada/yamada-ui/commit/cc59afeb9d1bcb4cfe108f83820aa0bb93d97906)]:
+  - @yamada-ui/core@0.13.0
+  - @yamada-ui/button@0.3.21
+  - @yamada-ui/form-control@0.3.22
+  - @yamada-ui/icon@0.3.19
+  - @yamada-ui/popover@0.3.26
+
 ## 0.6.9
 
 ### Patch Changes

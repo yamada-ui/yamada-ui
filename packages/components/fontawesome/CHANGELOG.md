@@ -1,5 +1,15 @@
 # @yamada-ui/fontawesome
 
+## 0.3.19
+
+### Patch Changes
+
+- [`a7d43b3`](https://github.com/hirotomoyamada/yamada-ui/commit/a7d43b3e6ff3f1b60db76595658689bdf4274974) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Upgraded `fontawesome-svg-core`.
+
+- Updated dependencies [[`278b66b`](https://github.com/hirotomoyamada/yamada-ui/commit/278b66b6ea5220fe538525613c48e4f247c63284), [`a83f07e`](https://github.com/hirotomoyamada/yamada-ui/commit/a83f07ec2753124c6d00ea25e3acde59f191d696), [`689ffcb`](https://github.com/hirotomoyamada/yamada-ui/commit/689ffcb6e0fa8099f39bb5c48e5cd792157befac), [`cc59afe`](https://github.com/hirotomoyamada/yamada-ui/commit/cc59afeb9d1bcb4cfe108f83820aa0bb93d97906)]:
+  - @yamada-ui/core@0.13.0
+  - @yamada-ui/icon@0.3.19
+
 ## 0.3.18
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @yamada-ui/input
 
+## 0.4.0
+
+### Minor Changes
+
+- [`d230492`](https://github.com/hirotomoyamada/yamada-ui/commit/d230492b5ece05d5e25937c5406e0a3084193953) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added container styles to `InputGroup`.
+
+### Patch Changes
+
+- Updated dependencies [[`278b66b`](https://github.com/hirotomoyamada/yamada-ui/commit/278b66b6ea5220fe538525613c48e4f247c63284), [`a83f07e`](https://github.com/hirotomoyamada/yamada-ui/commit/a83f07ec2753124c6d00ea25e3acde59f191d696), [`689ffcb`](https://github.com/hirotomoyamada/yamada-ui/commit/689ffcb6e0fa8099f39bb5c48e5cd792157befac), [`cc59afe`](https://github.com/hirotomoyamada/yamada-ui/commit/cc59afeb9d1bcb4cfe108f83820aa0bb93d97906)]:
+  - @yamada-ui/core@0.13.0
+  - @yamada-ui/file-input@0.4.16
+  - @yamada-ui/form-control@0.3.22
+  - @yamada-ui/use-token@0.3.13
+
 ## 0.3.24
 
 ### Patch Changes

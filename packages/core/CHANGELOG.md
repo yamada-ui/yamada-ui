@@ -1,5 +1,19 @@
 # @yamada-ui/core
 
+## 0.13.0
+
+### Minor Changes
+
+- [`a83f07e`](https://github.com/hirotomoyamada/yamada-ui/commit/a83f07ec2753124c6d00ea25e3acde59f191d696) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added theme util functions `mergeStyle`, `mergeMultiStyle`, `pickStyle`.
+
+- [#420](https://github.com/hirotomoyamada/yamada-ui/pull/420) [`689ffcb`](https://github.com/hirotomoyamada/yamada-ui/commit/689ffcb6e0fa8099f39bb5c48e5cd792157befac) Thanks [@illionillion](https://github.com/illionillion)! - add `shapeOutside` and `shapeMargin` and `shapeImageThreshold` properties.
+
+### Patch Changes
+
+- [`278b66b`](https://github.com/hirotomoyamada/yamada-ui/commit/278b66b6ea5220fe538525613c48e4f247c63284) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplified `ComponentBaseStyle` type.
+
+- [`cc59afe`](https://github.com/hirotomoyamada/yamada-ui/commit/cc59afeb9d1bcb4cfe108f83820aa0bb93d97906) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replaced `createAllVars` with `mergeVars`.
+
 ## 0.12.8
 
 ### Patch Changes

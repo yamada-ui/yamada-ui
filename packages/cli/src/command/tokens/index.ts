@@ -3,10 +3,13 @@ import { promisify } from "util"
 import ora from "ora"
 import { resolveOutputPath, themePath } from "./resolve-output-path"
 import { createThemeTypings } from "./create-theme-typings"
+import * as path from "path"
+import { bundleNRequire } from "bundle-n-require"
+import chokidar from "chokidar"
 
 const writeFileAsync = promisify(writeFile)
 
-export const generateThemeTypings = async ({
+const generateThemeTypings = async ({
   theme,
   outFile,
 }: {
@@ -30,9 +33,9 @@ export const generateThemeTypings = async ({
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    spinner.succeed(`Done in ${duration}s`)
+    spinner.succeed(`Done in ${duration}s\n`)
   } catch (e) {
-    spinner.fail("An error occurred")
+    spinner.fail("An error occurred\n")
 
     if (e instanceof Error) console.error(e.message)
   } finally {
@@ -41,3 +44,46 @@ export const generateThemeTypings = async ({
 }
 
 export { themePath }
+
+type Options = {
+  out?: string
+  watch?: string
+}
+
+export const actionTokens = async (
+  themeFile: string,
+  { out: outFile, watch: watchFile }: Options,
+) => {
+  const readFile = async () => {
+    const filePath = path.resolve(themeFile)
+    const { mod: theme, dependencies } = await bundleNRequire(filePath)
+
+    return { theme, dependencies }
+  }
+
+  let file = await readFile()
+
+  const buildFile = async () => {
+    await generateThemeTypings({ theme: file.theme, outFile })
+
+    if (watchFile) console.log("\n", "⌛️ Watching for changes...")
+  }
+
+  if (watchFile) {
+    const watchPath =
+      typeof watchFile === "string" ? watchFile : file.dependencies
+
+    chokidar
+      .watch(watchPath)
+      .on("ready", buildFile)
+      .on("change", async (filePath) => {
+        console.log("📦 File changed", filePath)
+
+        file = await readFile()
+
+        return buildFile()
+      })
+  } else {
+    await buildFile()
+  }
+}

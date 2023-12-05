@@ -36,7 +36,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Create release PR or publish to NPM
+      - name: Create Release PR or Publish to NPM
         id: changesets
         uses: changesets/action@v1
         with:
@@ -48,7 +48,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create @dev release
+      - name: Create @dev Release
         if: steps.changesets.outputs.published != 'true'
         run: |
           git checkout main
@@ -73,16 +73,6 @@ jobs:
           git add .
           git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
 
-      - name: Sync Changelog
-        if: steps.changesets.outputs.published == 'true'
-        uses: hirotomoyamada/repo-file-sync-action@main
-        with:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          GIT_EMAIL: hirotomo.yamada@avap.co.jp
-          GIT_USERNAME: hirotomoyamada
-          SKIP_PR: true
-          TARGET_BRANCH: changeset-release/main
-
       - name: Notification Mattermost and Discord
         if: steps.changesets.outputs.published == 'true'
         run: |
@@ -98,14 +88,14 @@ jobs:
 
       - name: Update Storybook
         if: steps.storybook.outputs.changed == 'true' || steps.changesets.outputs.published == 'true'
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           branch: gh-pages
           folder: storybook-static
           clean: true
           clean-exclude: .nojekyll
 
-      - name: Update Docs
+      - name: Release Docs
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:

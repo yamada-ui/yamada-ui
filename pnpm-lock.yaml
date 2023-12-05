@@ -486,6 +486,9 @@ importers:
       cli-welcome:
         specifier: ^2.2.2
         version: 2.2.2
+      color2k:
+        specifier: ^2.0.2
+        version: 2.0.2
       commander:
         specifier: ^11.0.0
         version: 11.0.0
@@ -14774,7 +14777,7 @@ packages:
     dev: false
 
   /dequal@2.0.3:
-    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==, tarball: https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz}
     engines: {node: '>=6'}
 
   /destroy@1.2.0:

@@ -1,0 +1,1 @@
+import{a as i}from"./jsx-runtime-yA-pgArV.js";import{m as s}from"./motion-XoqD_6Np.js";import{f as t}from"./forward-ref-6T0UNPU-.js";import{u as f,a as n}from"./factory-LMyrE5lk.js";const d=t(({as:o="div",className:r,...a},m)=>i(f.div,{as:s[o],ref:m,className:n("ui-motion",r),...a}));export{d as M};

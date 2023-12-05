@@ -2,6 +2,7 @@ import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
 import { Octokit } from "@octokit/rest"
 import chalk from "chalk"
+import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 // import type { ChatCompletionMessageParam } from "openai/resources"
@@ -9,6 +10,8 @@ import { CONSTANT } from "constant"
 // import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
 // import { wait } from "utils/assertion"
+
+config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 

@@ -8,14 +8,14 @@ tab: Theming
 
 ## Theming
 
-The `Menu` is a [single part component](/styled-system/theming/component-style#single-part-component).
+The `Menu` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
 
 :::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
-export const Menu: ComponentStyle = {
+export const Menu: ComponentMultiStyle = {
   baseStyle: ({ theme: t, colorMode: m }) => ({
     button: {
       transitionProperty: "common",
@@ -33,6 +33,7 @@ export const Menu: ComponentStyle = {
       zIndex: "yamcha",
     },
     item: {
+      cursor: "pointer",
       py: "1.5",
       px: "3",
       transitionProperty: "background",
@@ -62,7 +63,7 @@ export const Menu: ComponentStyle = {
       borderColor: "inherit",
     },
     group: {},
-    groupTitle: {
+    groupLabel: {
       py: "1.5",
       px: "3",
       fontSize: "sm",

@@ -11,13 +11,9 @@ tab: Theming
 The `FileInput` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
 
 :::note
-`FileInput` inherits the style from [Input](/components/forms/input).
-:::
-
-:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
-export const FileInput: ComponentMultiStyle = mergeStyle(Input, {})
+export const FileInput: ComponentMultiStyle = mergeMultiStyle(Input)()
 ```

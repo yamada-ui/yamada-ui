@@ -11,15 +11,11 @@ tab: Theming
 The `PagingTable` is a [multi part component](/styled-system/theming/component-style#multi-part-component).
 
 :::note
-`PagingTable` inherits the style from [Table](/components/data-display/table).
-:::
-
-:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
-export const PagingTable: ComponentMultiStyle = mergeStyle(Table, {
+export const PagingTable: ComponentMultiStyle = mergeMultiStyle(Table, {
   baseStyle: {
     pagingControl: {
       gridTemplateColumns: "1fr 5fr 1fr",
@@ -48,5 +44,5 @@ export const PagingTable: ComponentMultiStyle = mergeStyle(Table, {
       },
     },
   },
-})
+})()
 ```

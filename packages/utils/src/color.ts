@@ -18,10 +18,7 @@ export const hues = [
 ] as const
 
 export const isGray = (colorScheme: string) =>
-  colorScheme === "gray" ||
-  colorScheme === "zinc" ||
-  colorScheme === "neutral" ||
-  colorScheme === "stone"
+  colorScheme === "gray" || colorScheme === "neutral"
 
 export const getColor =
   (color: string, fallback?: string) =>

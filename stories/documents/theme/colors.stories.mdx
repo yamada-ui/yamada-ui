@@ -19,11 +19,16 @@ import { JSX, ColorPallets, ColorPallet } from "../../components"
 
 <JSX>
   <Grid templateColumns="repeat(3, 1fr)" gap="md">
-    <ColorPallet name="primary" value={defaultTheme.colors.primary} />
-    <ColorPallet name="secondary" value={defaultTheme.colors.secondary} />
-    <ColorPallet name="warning" value={defaultTheme.colors.warning} />
-    <ColorPallet name="danger" value={defaultTheme.colors.danger} />
-    <ColorPallet name="link" value={defaultTheme.colors.link} />
+    <ColorPallet name="primary" value={defaultTheme.semantics.colors.primary} />
+    <ColorPallet
+      name="secondary"
+      value={defaultTheme.semantics.colors.secondary}
+    />
+    <ColorPallet name="info" value={defaultTheme.semantics.colors.info} />
+    <ColorPallet name="success" value={defaultTheme.semantics.colors.success} />
+    <ColorPallet name="warning" value={defaultTheme.semantics.colors.warning} />
+    <ColorPallet name="danger" value={defaultTheme.semantics.colors.danger} />
+    <ColorPallet name="link" value={defaultTheme.semantics.colors.link} />
     <ColorPallet name="border" value={defaultTheme.colors.border} />
   </Grid>
 </JSX>
@@ -45,27 +50,11 @@ import { JSX, ColorPallets, ColorPallet } from "../../components"
   </Grid>
 </JSX>
 
-## Zinc
-
-<JSX>
-  <Grid templateColumns="repeat(3, 1fr)" gap="md">
-    <ColorPallets name="zinc" colors={defaultTheme.colors} />
-  </Grid>
-</JSX>
-
 ## Neutral
 
 <JSX>
   <Grid templateColumns="repeat(3, 1fr)" gap="md">
     <ColorPallets name="neutral" colors={defaultTheme.colors} />
-  </Grid>
-</JSX>
-
-## Stone
-
-<JSX>
-  <Grid templateColumns="repeat(3, 1fr)" gap="md">
-    <ColorPallets name="stone" colors={defaultTheme.colors} />
   </Grid>
 </JSX>
 
@@ -90,6 +79,14 @@ import { JSX, ColorPallets, ColorPallet } from "../../components"
 <JSX>
   <Grid templateColumns="repeat(3, 1fr)" gap="md">
     <ColorPallets name="pink" colors={defaultTheme.colors} />
+  </Grid>
+</JSX>
+
+## Flashy
+
+<JSX>
+  <Grid templateColumns="repeat(3, 1fr)" gap="md">
+    <ColorPallets name="flashy" colors={defaultTheme.colors} />
   </Grid>
 </JSX>
 

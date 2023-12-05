@@ -15,6 +15,11 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
+      - name: Build Changelog
+        run: pnpm build:changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
       - name: Build Theme
         run: pnpm build:theme
         env:

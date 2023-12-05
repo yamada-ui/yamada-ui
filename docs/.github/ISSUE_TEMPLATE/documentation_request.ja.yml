@@ -1,5 +1,5 @@
-name: "Feature Request (日本語)"
-description: "新しいドキュメントのリクエストや改善提案します"
+name: "Documentation Request (日本語)"
+description: "新しいドキュメントのリクエストや改善を提案します"
 labels: ["enhancement"]
 body:
   - type: "markdown"

@@ -2,11 +2,14 @@ import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
 import { Octokit } from "@octokit/rest"
 import chalk from "chalk"
+import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 import { toKebabCase } from "utils/assertion"
+
+config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
@@ -17,8 +20,10 @@ type Locale = (typeof LOCALES)[number]
 type Options = {
   isMulti: boolean
   componentName: string
-  baseComponentName: string | undefined
-  baseComponentPath: string | undefined
+  baseComponents?: {
+    name: string
+    path: string
+  }[]
 }
 
 const SOURCE_PATH = path.join("packages", "theme", "src", "components")
@@ -29,12 +34,7 @@ const LOCALE_TAB_MAP = {
   ja: "テーマ",
 }
 const LOCALE_DESC_MAP = {
-  en: ({
-    isMulti,
-    componentName,
-    baseComponentName,
-    baseComponentPath,
-  }: Options) => {
+  en: ({ isMulti, componentName, baseComponents }: Options) => {
     let content = [
       "## Theming",
       `The \`${componentName}\` is a [${
@@ -44,11 +44,13 @@ const LOCALE_DESC_MAP = {
       }-part-component).`,
     ]
 
-    if (baseComponentName) {
+    if (baseComponents) {
       content = [
         ...content,
         `\n:::note`,
-        `\`${componentName}\` inherits the style from [${baseComponentName}](${baseComponentPath}).`,
+        `\`${componentName}\` inherits the style from ${baseComponents
+          .map(({ name, path }) => `[${name}](${path})`)
+          .join(" and ")}.`,
         `:::\n`,
       ]
     }
@@ -62,12 +64,7 @@ const LOCALE_DESC_MAP = {
 
     return content.join("\n")
   },
-  ja: ({
-    isMulti,
-    componentName,
-    baseComponentName,
-    baseComponentPath,
-  }: Options) => {
+  ja: ({ isMulti, componentName, baseComponents }: Options) => {
     let content = [
       "## テーマ",
       `\`${componentName}\`は、[${
@@ -77,11 +74,13 @@ const LOCALE_DESC_MAP = {
       }パーツのコンポーネント)です。`,
     ]
 
-    if (baseComponentName) {
+    if (baseComponents) {
       content = [
         ...content,
         `\n:::note`,
-        `\`${componentName}\`は、[${baseComponentName}](${baseComponentPath})のスタイルを継承しています。`,
+        `\`${componentName}\`は、${baseComponents
+          .map(({ name, path }) => `[${name}](${path})`)
+          .join("と")}のスタイルを継承しています。`,
         `:::\n`,
       ]
     }
@@ -179,10 +178,25 @@ const getIsMulti = (content: string) => {
   return !![...content.matchAll(reg)].length
 }
 
-const getBaseName = (content: string) => {
-  const regex = /mergeStyle\(\s*([^,]+)/
+const getBaseComponents = (content: string, paths: Record<string, string>) => {
+  const componentNames =
+    content
+      .match(/(mergeStyle|mergeMultiStyle)\(\s*([^{)]+)/)?.[2]
+      .trim()
+      .replace(/,$/, "")
+      .split(",")
+      .map((value) => value.replace(/pickStyle\(/, "").trim())
+      .filter((value) => /^[A-Z]/.test(value)) ?? []
 
-  return content.match(regex)?.[1].trim()
+  if (!componentNames.length) return
+
+  return componentNames.map((name) => {
+    let path: string | undefined = paths[toKebabCase(name ?? "")]
+
+    if (path) path = "/" + path.replace(/^contents\//, "")
+
+    return { name, path }
+  })
 }
 
 const generateContent = async ({
@@ -198,12 +212,7 @@ const generateContent = async ({
 }) => {
   const componentName = data.title
   const isMulti = getIsMulti(content)
-  const baseComponentName = getBaseName(content)
-  let baseComponentPath = paths[toKebabCase(baseComponentName ?? "")]
-
-  if (baseComponentPath) {
-    baseComponentPath = "/" + baseComponentPath.replace(/^contents\//, "")
-  }
+  const baseComponents = getBaseComponents(content, paths)
 
   content = content.replace(
     /import(\s+type)?\s+{[^}]*}\s+from\s+['"][^'"]+['"]\s*/g,
@@ -216,8 +225,7 @@ const generateContent = async ({
     LOCALE_DESC_MAP[locale]({
       isMulti,
       componentName,
-      baseComponentName,
-      baseComponentPath,
+      baseComponents,
     }) + content
 
   return content

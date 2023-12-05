@@ -10,7 +10,7 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
   /**
    * The label of the option group.
    */
-  label: string
+  label?: string
   /**
    * The value of the menu item group.
    */

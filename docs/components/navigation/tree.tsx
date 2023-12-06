@@ -142,7 +142,6 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
       >
         <Text
           as={Link}
-          prefetch={false}
           href={slug}
           position="static"
           zIndex="yamcha"

@@ -667,6 +667,9 @@ importers:
       '@yamada-ui/loading':
         specifier: workspace:*
         version: link:../loading
+      '@yamada-ui/ripple':
+        specifier: workspace:*
+        version: link:../ripple
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -1574,6 +1577,25 @@ importers:
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
+  packages/components/ripple:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
       '@yamada-ui/motion':
         specifier: workspace:*
         version: link:../motion
@@ -2600,6 +2622,9 @@ importers:
       '@yamada-ui/reorder':
         specifier: workspace:*
         version: link:../components/reorder
+      '@yamada-ui/ripple':
+        specifier: workspace:*
+        version: link:../components/ripple
       '@yamada-ui/scroll-area':
         specifier: workspace:*
         version: link:../components/scroll-area

@@ -43,8 +43,8 @@
     "editable-code-block": {
       "label": "Editable example",
       "control-button": {
-        "open": "Read more",
-        "close": "Close"
+        "open": "Show more",
+        "close": "Show less"
       }
     },
     "doc-links": {

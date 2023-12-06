@@ -349,3 +349,5 @@ export const useAsyncRetry = <T,>(
 
   return { ...state, retry }
 }
+
+export const createId = (prefix: string) => `${prefix}-${new Date().getTime()}`

@@ -11,14 +11,15 @@ import { getMemoizedObject as get, isArray } from "."
 
 type ColorMode = "light" | "dark"
 
-const coef = 0.75
-
 export const hues = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 
 export const isGray = (colorScheme: string) =>
   colorScheme === "gray" || colorScheme === "neutral"
+
+export const isAccessible = (colorScheme: string) =>
+  colorScheme === "yellow" || colorScheme === "cyan" || colorScheme === "lime"
 
 export const getColor =
   (color: string, fallback?: string) =>
@@ -65,7 +66,7 @@ export const tintColor =
   (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
     const raw = getColor(color, color)(theme, colorMode)
 
-    return toHex(mix(raw, "#fff", amount))
+    return toHex(mix(raw, "#fff", amount / 100))
   }
 
 export const shadeColor =
@@ -83,7 +84,12 @@ export const transparentizeColor =
   }
 
 export const toneColor =
-  (color: string, hue: (typeof hues)[number]) =>
+  (
+    color: string,
+    hue: (typeof hues)[number],
+    lCoef: number = 0.94,
+    dCoef: number = 0.86,
+  ) =>
   (theme?: Dict, colorMode?: ColorMode) => {
     if (hue < 50 || 950 < hue) return color
 
@@ -91,15 +97,22 @@ export const toneColor =
 
     if (theme && colorMode) getColor(color, color)(theme, colorMode)
 
+    const coef = hue < 500 ? lCoef : dCoef
     const amount = (500 - hue) * 0.001 * coef
 
     return toHex(lighten(raw, amount))
   }
 
-export const toneColors = (color: string) => {
+export const toneColors = (
+  color: string,
+  lCoef: number = 0.94,
+  dCoef: number = 0.86,
+) => {
   const colors: Record<string, string> = {}
 
   hues.forEach((hue) => {
+    const coef = hue < 500 ? lCoef : dCoef
+
     const amount = (500 - hue) * 0.001 * coef
 
     colors[hue] = toHex(lighten(color, amount))

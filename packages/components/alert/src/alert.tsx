@@ -110,7 +110,8 @@ export const AlertIcon: FC<AlertIconProps> = ({
 
   const Icon = getStatusIcon(status, statuses)
   const css: CSSUIObject = {
-    ...(status === "loading" ? styles.loading : styles.icon),
+    ...styles.icon,
+    ...(status === "loading" ? styles.loading : {}),
   }
 
   return (

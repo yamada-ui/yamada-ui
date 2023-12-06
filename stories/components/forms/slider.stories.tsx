@@ -18,6 +18,7 @@ import {
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Slider>
 
@@ -49,57 +50,9 @@ export const withSize: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <>
-      <Slider colorScheme="primary" />
-
-      <Slider colorScheme="secondary" />
-
-      <Slider colorScheme="warning" />
-
-      <Slider colorScheme="danger" />
-
-      <Slider colorScheme="link" />
-
-      <Slider colorScheme="gray" />
-
-      <Slider colorScheme="zinc" />
-
-      <Slider colorScheme="neutral" />
-
-      <Slider colorScheme="stone" />
-
-      <Slider colorScheme="red" />
-
-      <Slider colorScheme="rose" />
-
-      <Slider colorScheme="pink" />
-
-      <Slider colorScheme="orange" />
-
-      <Slider colorScheme="amber" />
-
-      <Slider colorScheme="yellow" />
-
-      <Slider colorScheme="lime" />
-
-      <Slider colorScheme="green" />
-
-      <Slider colorScheme="emerald" />
-
-      <Slider colorScheme="teal" />
-
-      <Slider colorScheme="cyan" />
-
-      <Slider colorScheme="sky" />
-
-      <Slider colorScheme="blue" />
-
-      <Slider colorScheme="indigo" />
-
-      <Slider colorScheme="violet" />
-
-      <Slider colorScheme="purple" />
-
-      <Slider colorScheme="fuchsia" />
+      {colorSchemes.map((colorScheme) => (
+        <Slider key={colorScheme} colorScheme={colorScheme} />
+      ))}
     </>
   )
 }

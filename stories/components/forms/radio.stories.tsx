@@ -16,6 +16,7 @@ import type { FC } from "react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Radio>
 
@@ -40,116 +41,18 @@ export const withSize: Story = () => {
   )
 }
 
-export const withdefaultIsChecked: Story = () => {
+export const withDefaultIsChecked: Story = () => {
   return <Radio defaultIsChecked>孫悟空</Radio>
 }
 
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <Radio colorScheme="primary" defaultIsChecked>
-        Primary
-      </Radio>
-
-      <Radio colorScheme="secondary" defaultIsChecked>
-        Secondary
-      </Radio>
-
-      <Radio colorScheme="warning" defaultIsChecked>
-        Warning
-      </Radio>
-
-      <Radio colorScheme="danger" defaultIsChecked>
-        Danger
-      </Radio>
-
-      <Radio colorScheme="link" defaultIsChecked>
-        Link
-      </Radio>
-
-      <Radio colorScheme="gray" defaultIsChecked>
-        Gray
-      </Radio>
-
-      <Radio colorScheme="zinc" defaultIsChecked>
-        Zinc
-      </Radio>
-
-      <Radio colorScheme="neutral" defaultIsChecked>
-        Neutral
-      </Radio>
-
-      <Radio colorScheme="stone" defaultIsChecked>
-        Stone
-      </Radio>
-
-      <Radio colorScheme="red" defaultIsChecked>
-        Red
-      </Radio>
-
-      <Radio colorScheme="rose" defaultIsChecked>
-        Rose
-      </Radio>
-
-      <Radio colorScheme="pink" defaultIsChecked>
-        Pink
-      </Radio>
-
-      <Radio colorScheme="orange" defaultIsChecked>
-        Orange
-      </Radio>
-
-      <Radio colorScheme="amber" defaultIsChecked>
-        Amber
-      </Radio>
-
-      <Radio colorScheme="yellow" defaultIsChecked>
-        Yellow
-      </Radio>
-
-      <Radio colorScheme="lime" defaultIsChecked>
-        Lime
-      </Radio>
-
-      <Radio colorScheme="green" defaultIsChecked>
-        Green
-      </Radio>
-
-      <Radio colorScheme="emerald" defaultIsChecked>
-        Emerald
-      </Radio>
-
-      <Radio colorScheme="teal" defaultIsChecked>
-        Teal
-      </Radio>
-
-      <Radio colorScheme="cyan" defaultIsChecked>
-        Cyan
-      </Radio>
-
-      <Radio colorScheme="sky" defaultIsChecked>
-        Sky
-      </Radio>
-
-      <Radio colorScheme="blue" defaultIsChecked>
-        Blue
-      </Radio>
-
-      <Radio colorScheme="indigo" defaultIsChecked>
-        Indigo
-      </Radio>
-
-      <Radio colorScheme="violet" defaultIsChecked>
-        Violet
-      </Radio>
-
-      <Radio colorScheme="purple" defaultIsChecked>
-        Purple
-      </Radio>
-
-      <Radio colorScheme="fuchsia" defaultIsChecked>
-        Fuchsia
-      </Radio>
+      {colorSchemes.map((colorScheme) => (
+        <Radio key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
+          {colorScheme}
+        </Radio>
+      ))}
     </Wrap>
   )
 }

@@ -18,6 +18,7 @@ import {
 import type { Column } from "@yamada-ui/table"
 import { PagingTable } from "@yamada-ui/table"
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof PagingTable>
 
@@ -213,213 +214,16 @@ export const withColorScheme: Story = () => {
 
   return (
     <>
-      <PagingTable
-        variant="striped"
-        colorScheme="primary"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="secondary"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="warning"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="danger"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="link"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="gray"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="zinc"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="neutral"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="stone"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="red"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="rose"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="pink"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="orange"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="amber"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="yellow"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="lime"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="green"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="emerald"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="teal"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="cyan"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="sky"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="blue"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="indigo"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="violet"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="purple"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
-
-      <PagingTable
-        variant="striped"
-        colorScheme="fuchsia"
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
-      />
+      {colorSchemes.map((colorScheme) => (
+        <PagingTable
+          key={colorScheme}
+          variant="striped"
+          colorScheme={colorScheme}
+          columns={columns}
+          data={data}
+          defaultPageSize={5}
+        />
+      ))}
     </>
   )
 }

@@ -14,6 +14,7 @@ import {
   HStack,
   Box,
 } from "@yamada-ui/react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Stepper>
 
@@ -75,57 +76,14 @@ export const withColorScheme: Story = () => {
 
   return (
     <>
-      <Stepper colorScheme="primary" index={1} steps={steps} />
-
-      <Stepper colorScheme="secondary" index={1} steps={steps} />
-
-      <Stepper colorScheme="warning" index={1} steps={steps} />
-
-      <Stepper colorScheme="danger" index={1} steps={steps} />
-
-      <Stepper colorScheme="link" index={1} steps={steps} />
-
-      <Stepper colorScheme="gray" index={1} steps={steps} />
-
-      <Stepper colorScheme="zinc" index={1} steps={steps} />
-
-      <Stepper colorScheme="neutral" index={1} steps={steps} />
-
-      <Stepper colorScheme="stone" index={1} steps={steps} />
-
-      <Stepper colorScheme="red" index={1} steps={steps} />
-
-      <Stepper colorScheme="rose" index={1} steps={steps} />
-
-      <Stepper colorScheme="pink" index={1} steps={steps} />
-
-      <Stepper colorScheme="orange" index={1} steps={steps} />
-
-      <Stepper colorScheme="amber" index={1} steps={steps} />
-
-      <Stepper colorScheme="yellow" index={1} steps={steps} />
-
-      <Stepper colorScheme="lime" index={1} steps={steps} />
-
-      <Stepper colorScheme="green" index={1} steps={steps} />
-
-      <Stepper colorScheme="emerald" index={1} steps={steps} />
-
-      <Stepper colorScheme="teal" index={1} steps={steps} />
-
-      <Stepper colorScheme="cyan" index={1} steps={steps} />
-
-      <Stepper colorScheme="sky" index={1} steps={steps} />
-
-      <Stepper colorScheme="blue" index={1} steps={steps} />
-
-      <Stepper colorScheme="indigo" index={1} steps={steps} />
-
-      <Stepper colorScheme="violet" index={1} steps={steps} />
-
-      <Stepper colorScheme="purple" index={1} steps={steps} />
-
-      <Stepper colorScheme="fuchsia" index={1} steps={steps} />
+      {colorSchemes.map((colorScheme) => (
+        <Stepper
+          key={colorScheme}
+          colorScheme={colorScheme}
+          index={1}
+          steps={steps}
+        />
+      ))}
     </>
   )
 }

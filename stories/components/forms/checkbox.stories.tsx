@@ -17,6 +17,7 @@ import type { FC } from "react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Checkbox>
 
@@ -41,116 +42,18 @@ export const withSize: Story = () => {
   )
 }
 
-export const withdefaultIsChecked: Story = () => {
+export const withDefaultIsChecked: Story = () => {
   return <Checkbox defaultIsChecked>孫悟空</Checkbox>
 }
 
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <Checkbox colorScheme="primary" defaultIsChecked>
-        Primary
-      </Checkbox>
-
-      <Checkbox colorScheme="secondary" defaultIsChecked>
-        Secondary
-      </Checkbox>
-
-      <Checkbox colorScheme="warning" defaultIsChecked>
-        Warning
-      </Checkbox>
-
-      <Checkbox colorScheme="danger" defaultIsChecked>
-        Danger
-      </Checkbox>
-
-      <Checkbox colorScheme="link" defaultIsChecked>
-        Link
-      </Checkbox>
-
-      <Checkbox colorScheme="gray" defaultIsChecked>
-        Gray
-      </Checkbox>
-
-      <Checkbox colorScheme="zinc" defaultIsChecked>
-        Zinc
-      </Checkbox>
-
-      <Checkbox colorScheme="neutral" defaultIsChecked>
-        Neutral
-      </Checkbox>
-
-      <Checkbox colorScheme="stone" defaultIsChecked>
-        Stone
-      </Checkbox>
-
-      <Checkbox colorScheme="red" defaultIsChecked>
-        Red
-      </Checkbox>
-
-      <Checkbox colorScheme="rose" defaultIsChecked>
-        Rose
-      </Checkbox>
-
-      <Checkbox colorScheme="pink" defaultIsChecked>
-        Pink
-      </Checkbox>
-
-      <Checkbox colorScheme="orange" defaultIsChecked>
-        Orange
-      </Checkbox>
-
-      <Checkbox colorScheme="amber" defaultIsChecked>
-        Amber
-      </Checkbox>
-
-      <Checkbox colorScheme="yellow" defaultIsChecked>
-        Yellow
-      </Checkbox>
-
-      <Checkbox colorScheme="lime" defaultIsChecked>
-        Lime
-      </Checkbox>
-
-      <Checkbox colorScheme="green" defaultIsChecked>
-        Green
-      </Checkbox>
-
-      <Checkbox colorScheme="emerald" defaultIsChecked>
-        Emerald
-      </Checkbox>
-
-      <Checkbox colorScheme="teal" defaultIsChecked>
-        Teal
-      </Checkbox>
-
-      <Checkbox colorScheme="cyan" defaultIsChecked>
-        Cyan
-      </Checkbox>
-
-      <Checkbox colorScheme="sky" defaultIsChecked>
-        Sky
-      </Checkbox>
-
-      <Checkbox colorScheme="blue" defaultIsChecked>
-        Blue
-      </Checkbox>
-
-      <Checkbox colorScheme="indigo" defaultIsChecked>
-        Indigo
-      </Checkbox>
-
-      <Checkbox colorScheme="violet" defaultIsChecked>
-        Violet
-      </Checkbox>
-
-      <Checkbox colorScheme="purple" defaultIsChecked>
-        Purple
-      </Checkbox>
-
-      <Checkbox colorScheme="fuchsia" defaultIsChecked>
-        Fuchsia
-      </Checkbox>
+      {colorSchemes.map((colorScheme) => (
+        <Checkbox key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
+          {colorScheme}
+        </Checkbox>
+      ))}
     </Wrap>
   )
 }

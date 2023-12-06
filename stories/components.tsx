@@ -13,6 +13,34 @@ import type { FC, ReactNode } from "react"
 import { useEffect } from "react"
 import { useDarkMode } from "storybook-dark-mode"
 
+export const colorSchemes = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "danger",
+  "gray",
+  "neutral",
+  "red",
+  "rose",
+  "pink",
+  "flashy",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+]
+
 export const JSX: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <UIProvider>

@@ -3,6 +3,7 @@ import { TableCaption, Button, Text } from "@yamada-ui/react"
 import type { Column, Sort } from "@yamada-ui/table"
 import { Table } from "@yamada-ui/table"
 import { useMemo, useState } from "react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Table>
 
@@ -242,187 +243,15 @@ export const withColorScheme: Story = () => {
 
   return (
     <>
-      <Table
-        variant="striped"
-        colorScheme="primary"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="secondary"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="warning"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="danger"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="link"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="gray"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="zinc"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="neutral"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="stone"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="red"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="rose"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="pink"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="orange"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="amber"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="yellow"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="lime"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="green"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="emerald"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="teal"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="cyan"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="sky"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="blue"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="indigo"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="violet"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="purple"
-        columns={columns}
-        data={data}
-      />
-
-      <Table
-        variant="striped"
-        colorScheme="fuchsia"
-        columns={columns}
-        data={data}
-      />
+      {colorSchemes.map((colorScheme) => (
+        <Table
+          key={colorScheme}
+          variant="striped"
+          colorScheme={colorScheme}
+          columns={columns}
+          data={data}
+        />
+      ))}
     </>
   )
 }

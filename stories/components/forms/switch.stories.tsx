@@ -11,6 +11,7 @@ import {
 import { useId } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Switch>
 
@@ -64,109 +65,11 @@ export const withLabel: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <Switch colorScheme="primary" defaultIsChecked>
-        Primary
-      </Switch>
-
-      <Switch colorScheme="secondary" defaultIsChecked>
-        Secondary
-      </Switch>
-
-      <Switch colorScheme="warning" defaultIsChecked>
-        Warning
-      </Switch>
-
-      <Switch colorScheme="danger" defaultIsChecked>
-        Danger
-      </Switch>
-
-      <Switch colorScheme="link" defaultIsChecked>
-        Link
-      </Switch>
-
-      <Switch colorScheme="gray" defaultIsChecked>
-        Gray
-      </Switch>
-
-      <Switch colorScheme="zinc" defaultIsChecked>
-        Zinc
-      </Switch>
-
-      <Switch colorScheme="neutral" defaultIsChecked>
-        Neutral
-      </Switch>
-
-      <Switch colorScheme="stone" defaultIsChecked>
-        Stone
-      </Switch>
-
-      <Switch colorScheme="red" defaultIsChecked>
-        Red
-      </Switch>
-
-      <Switch colorScheme="rose" defaultIsChecked>
-        Rose
-      </Switch>
-
-      <Switch colorScheme="pink" defaultIsChecked>
-        Pink
-      </Switch>
-
-      <Switch colorScheme="orange" defaultIsChecked>
-        Orange
-      </Switch>
-
-      <Switch colorScheme="amber" defaultIsChecked>
-        Amber
-      </Switch>
-
-      <Switch colorScheme="yellow" defaultIsChecked>
-        Yellow
-      </Switch>
-
-      <Switch colorScheme="lime" defaultIsChecked>
-        Lime
-      </Switch>
-
-      <Switch colorScheme="green" defaultIsChecked>
-        Green
-      </Switch>
-
-      <Switch colorScheme="emerald" defaultIsChecked>
-        Emerald
-      </Switch>
-
-      <Switch colorScheme="teal" defaultIsChecked>
-        Teal
-      </Switch>
-
-      <Switch colorScheme="cyan" defaultIsChecked>
-        Cyan
-      </Switch>
-
-      <Switch colorScheme="sky" defaultIsChecked>
-        Sky
-      </Switch>
-
-      <Switch colorScheme="blue" defaultIsChecked>
-        Blue
-      </Switch>
-
-      <Switch colorScheme="indigo" defaultIsChecked>
-        Indigo
-      </Switch>
-
-      <Switch colorScheme="violet" defaultIsChecked>
-        Violet
-      </Switch>
-
-      <Switch colorScheme="purple" defaultIsChecked>
-        Purple
-      </Switch>
-
-      <Switch colorScheme="fuchsia" defaultIsChecked>
-        Fuchsia
-      </Switch>
+      {colorSchemes.map((colorScheme) => (
+        <Switch key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
+          {colorScheme}
+        </Switch>
+      ))}
     </Wrap>
   )
 }

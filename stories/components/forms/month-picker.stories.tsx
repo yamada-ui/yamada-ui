@@ -8,6 +8,7 @@ import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import "dayjs/locale/ja"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof MonthPicker>
 
@@ -60,321 +61,27 @@ export const withColorScheme: Story = () => {
       <Heading size="xl">Solid</Heading>
 
       <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="primary"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="secondary"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="warning"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="danger"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="link"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="gray"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="zinc"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="neutral"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="stone"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="red"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="rose"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="pink"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="orange"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="amber"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="yellow"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="lime"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="green"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="emerald"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="teal"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="cyan"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="sky"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="blue"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="indigo"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="violet"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="purple"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="solid"
-          calendarColorScheme="fuchsia"
-          defaultValue={new Date()}
-        />
+        {colorSchemes.map((colorScheme) => (
+          <MonthPicker
+            key={colorScheme}
+            calendarVariant="solid"
+            calendarColorScheme={colorScheme}
+            defaultValue={new Date()}
+          />
+        ))}
       </Grid>
 
       <Heading size="xl">Subtle</Heading>
 
       <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="primary"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="secondary"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="warning"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="danger"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="link"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="gray"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="zinc"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="neutral"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="stone"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="red"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="rose"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="pink"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="orange"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="amber"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="yellow"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="lime"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="green"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="emerald"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="teal"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="cyan"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="sky"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="blue"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="indigo"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="violet"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="purple"
-          defaultValue={new Date()}
-        />
-
-        <MonthPicker
-          calendarVariant="subtle"
-          calendarColorScheme="fuchsia"
-          defaultValue={new Date()}
-        />
+        {colorSchemes.map((colorScheme) => (
+          <MonthPicker
+            key={colorScheme}
+            calendarVariant="subtle"
+            calendarColorScheme={colorScheme}
+            defaultValue={new Date()}
+          />
+        ))}
       </Grid>
     </>
   )

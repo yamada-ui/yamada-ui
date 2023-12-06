@@ -33,6 +33,8 @@ export const solid: Story = () => {
 
       <Button colorScheme="secondary">Secondary</Button>
 
+      <Button colorScheme="success">Success</Button>
+
       <Button colorScheme="warning">Warning</Button>
 
       <Button colorScheme="danger">Danger</Button>
@@ -41,11 +43,7 @@ export const solid: Story = () => {
 
       <Button colorScheme="gray">Gray</Button>
 
-      <Button colorScheme="zinc">Zinc</Button>
-
       <Button colorScheme="neutral">Neutral</Button>
-
-      <Button colorScheme="stone">Stone</Button>
 
       <Button colorScheme="red">Red</Button>
 
@@ -95,6 +93,10 @@ export const outline: Story = () => {
         Secondary
       </Button>
 
+      <Button variant="outline" colorScheme="success">
+        Success
+      </Button>
+
       <Button variant="outline" colorScheme="warning">
         Warning
       </Button>
@@ -111,16 +113,8 @@ export const outline: Story = () => {
         Gray
       </Button>
 
-      <Button variant="outline" colorScheme="zinc">
-        Zinc
-      </Button>
-
       <Button variant="outline" colorScheme="neutral">
         Neutral
-      </Button>
-
-      <Button variant="outline" colorScheme="stone">
-        Stone
       </Button>
 
       <Button variant="outline" colorScheme="red">
@@ -205,6 +199,10 @@ export const ghost: Story = () => {
         Secondary
       </Button>
 
+      <Button variant="ghost" colorScheme="success">
+        Success
+      </Button>
+
       <Button variant="ghost" colorScheme="warning">
         Warning
       </Button>
@@ -221,16 +219,8 @@ export const ghost: Story = () => {
         Gray
       </Button>
 
-      <Button variant="ghost" colorScheme="zinc">
-        Zinc
-      </Button>
-
       <Button variant="ghost" colorScheme="neutral">
         Neutral
-      </Button>
-
-      <Button variant="ghost" colorScheme="stone">
-        Stone
       </Button>
 
       <Button variant="ghost" colorScheme="red">

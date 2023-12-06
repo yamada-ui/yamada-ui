@@ -15,6 +15,7 @@ import {
 import { useRef, useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof FileButton>
 
@@ -96,57 +97,11 @@ export const withSize: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <FileButton colorScheme="primary">Primary</FileButton>
-
-      <FileButton colorScheme="secondary">Secondary</FileButton>
-
-      <FileButton colorScheme="warning">Warning</FileButton>
-
-      <FileButton colorScheme="danger">Danger</FileButton>
-
-      <FileButton colorScheme="link">Link</FileButton>
-
-      <FileButton colorScheme="gray">Gray</FileButton>
-
-      <FileButton colorScheme="zinc">Zinc</FileButton>
-
-      <FileButton colorScheme="neutral">Neutral</FileButton>
-
-      <FileButton colorScheme="stone">Stone</FileButton>
-
-      <FileButton colorScheme="red">Red</FileButton>
-
-      <FileButton colorScheme="rose">Rose</FileButton>
-
-      <FileButton colorScheme="pink">Pink</FileButton>
-
-      <FileButton colorScheme="orange">Orange</FileButton>
-
-      <FileButton colorScheme="amber">Amber</FileButton>
-
-      <FileButton colorScheme="yellow">Yellow</FileButton>
-
-      <FileButton colorScheme="lime">Lime</FileButton>
-
-      <FileButton colorScheme="green">Green</FileButton>
-
-      <FileButton colorScheme="emerald">Emerald</FileButton>
-
-      <FileButton colorScheme="teal">Teal</FileButton>
-
-      <FileButton colorScheme="cyan">Cyan</FileButton>
-
-      <FileButton colorScheme="sky">Sky</FileButton>
-
-      <FileButton colorScheme="blue">Blue</FileButton>
-
-      <FileButton colorScheme="indigo">Indigo</FileButton>
-
-      <FileButton colorScheme="violet">Violet</FileButton>
-
-      <FileButton colorScheme="purple">Purple</FileButton>
-
-      <FileButton colorScheme="fuchsia">Fuchsia</FileButton>
+      {colorSchemes.map((colorScheme) => (
+        <FileButton key={colorScheme} colorScheme={colorScheme}>
+          {colorScheme}
+        </FileButton>
+      ))}
     </Wrap>
   )
 }

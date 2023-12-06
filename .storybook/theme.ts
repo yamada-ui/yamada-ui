@@ -7,7 +7,7 @@ const baseTheme = {
     "https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png",
 
   // Colors
-  colorPrimary: defaultTheme.colors.green[500],
+  colorPrimary: defaultTheme.colors.violet[500],
   colorSecondary: defaultTheme.colors.blue[500],
 
   // UI

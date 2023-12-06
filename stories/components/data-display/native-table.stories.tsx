@@ -16,6 +16,7 @@ import {
 } from "@yamada-ui/react"
 import type { FC } from "react"
 import { useState } from "react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof NativeTable>
 
@@ -257,57 +258,9 @@ export const withColorScheme: Story = () => {
 
   return (
     <>
-      <Table variant="striped" colorScheme="primary" />
-
-      <Table variant="striped" colorScheme="secondary" />
-
-      <Table variant="striped" colorScheme="warning" />
-
-      <Table variant="striped" colorScheme="danger" />
-
-      <Table variant="striped" colorScheme="link" />
-
-      <Table variant="striped" colorScheme="gray" />
-
-      <Table variant="striped" colorScheme="zinc" />
-
-      <Table variant="striped" colorScheme="neutral" />
-
-      <Table variant="striped" colorScheme="stone" />
-
-      <Table variant="striped" colorScheme="red" />
-
-      <Table variant="striped" colorScheme="rose" />
-
-      <Table variant="striped" colorScheme="pink" />
-
-      <Table variant="striped" colorScheme="orange" />
-
-      <Table variant="striped" colorScheme="amber" />
-
-      <Table variant="striped" colorScheme="yellow" />
-
-      <Table variant="striped" colorScheme="lime" />
-
-      <Table variant="striped" colorScheme="green" />
-
-      <Table variant="striped" colorScheme="emerald" />
-
-      <Table variant="striped" colorScheme="teal" />
-
-      <Table variant="striped" colorScheme="cyan" />
-
-      <Table variant="striped" colorScheme="sky" />
-
-      <Table variant="striped" colorScheme="blue" />
-
-      <Table variant="striped" colorScheme="indigo" />
-
-      <Table variant="striped" colorScheme="violet" />
-
-      <Table variant="striped" colorScheme="purple" />
-
-      <Table variant="striped" colorScheme="fuchsia" />
+      {colorSchemes.map((colorScheme) => (
+        <Table key={colorScheme} variant="striped" colorScheme={colorScheme} />
+      ))}
     </>
   )
 }

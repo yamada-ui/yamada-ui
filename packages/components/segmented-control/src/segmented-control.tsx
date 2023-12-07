@@ -101,7 +101,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       items = [],
       ...rest
     } = omitThemeProps(mergedProps)
-    const isMoutedRef = useIsMounted()
+    const isMountedRef = useIsMounted()
 
     id ??= useId()
     name ??= `segmented-control-${useId()}`
@@ -334,7 +334,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             className={cx("ui-segmented-control", className)}
             __css={css}
           >
-            {isMoutedRef.current ? (
+            {isMountedRef.current ? (
               <ui.span
                 className="ui-segmented-control__active"
                 {...getActiveProps()}

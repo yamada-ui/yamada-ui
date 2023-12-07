@@ -227,15 +227,15 @@
     }
   },
   "MenuOptionGroup": {
-    "label": {
-      "type": "string",
-      "required": true,
-      "description": "The label of the option group."
-    },
     "defaultValue": {
       "type": "Y",
       "required": false,
       "description": "The initial value of the menu item group."
+    },
+    "label": {
+      "type": "string",
+      "required": false,
+      "description": "The label of the option group."
     },
     "onChange": {
       "type": "(value: Y) => void",

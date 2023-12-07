@@ -3,18 +3,18 @@ import type { ThemeSemantics } from "@yamada-ui/core"
 export const semantics: ThemeSemantics = {
   colors: {
     primary: "blue.500",
-    secondary: "purple.500",
+    secondary: "violet.500",
     info: "blue.500",
-    success: "emerald.500",
+    success: "green.500",
     warning: "orange.500",
     danger: "red.500",
     link: "sky.500",
   },
   colorSchemes: {
     primary: "blue",
-    secondary: "purple",
+    secondary: "violet",
     info: "blue",
-    success: "emerald",
+    success: "green",
     warning: "orange",
     danger: "red",
     link: "sky",

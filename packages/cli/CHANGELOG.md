@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.8.0
+
+### Minor Changes
+
+- [`41565d4`](https://github.com/hirotomoyamada/yamada-ui/commit/41565d416495ea7a9f3ef7268b34d58fb0e74a99) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added color token generation command.
+
 ## 0.7.2
 
 ### Patch Changes

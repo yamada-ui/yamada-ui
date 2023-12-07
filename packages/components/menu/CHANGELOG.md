@@ -1,5 +1,21 @@
 # @yamada-ui/menu
 
+## 0.4.1
+
+### Patch Changes
+
+- [`6c54ebd`](https://github.com/hirotomoyamada/yamada-ui/commit/6c54ebd9ac3a5d99aa718cbdaebf3ebe9665c1dd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `label` property optional.
+
+- Updated dependencies [[`1d152af`](https://github.com/hirotomoyamada/yamada-ui/commit/1d152af140eb90965aab962fce285e5e0053d2a0), [`58aca09`](https://github.com/hirotomoyamada/yamada-ui/commit/58aca09239d453b5d5d5ba0958ebd6dfdab31485)]:
+  - @yamada-ui/utils@0.4.0
+  - @yamada-ui/popover@0.3.27
+  - @yamada-ui/transitions@0.3.22
+  - @yamada-ui/core@0.13.1
+  - @yamada-ui/use-clickable@0.3.7
+  - @yamada-ui/use-controllable-state@0.4.1
+  - @yamada-ui/use-descendant@0.2.8
+  - @yamada-ui/use-disclosure@0.4.4
+
 ## 0.4.0
 
 ### Minor Changes

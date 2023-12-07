@@ -11,7 +11,7 @@ export const colors = {
   current: "currentColor",
   black: "#141414",
   white: "#fbfbfb",
-  border: ["#eaeaea", "#404040"],
+  border: ["#dcdcde", "#434248"],
 
   whiteAlpha: {
     50: "rgba(255, 255, 255, 0.04)",

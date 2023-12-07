@@ -85,6 +85,7 @@
     "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/radio": "workspace:*",
     "@yamada-ui/reorder": "workspace:*",
+    "@yamada-ui/ripple": "workspace:*",
     "@yamada-ui/scroll-area": "workspace:*",
     "@yamada-ui/segmented-control": "workspace:*",
     "@yamada-ui/select": "workspace:*",

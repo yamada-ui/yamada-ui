@@ -12,6 +12,7 @@ export const colors = {
   black: "#141414",
   white: "#fbfbfb",
   border: ["#dcdcde", "#434248"],
+  focus: "#0070F0",
 
   whiteAlpha: {
     50: "rgba(255, 255, 255, 0.04)",

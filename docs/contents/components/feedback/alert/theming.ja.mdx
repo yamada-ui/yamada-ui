@@ -43,23 +43,25 @@ export const Alert: ComponentMultiStyle = {
   },
 
   variants: {
-    basic: ({ colorScheme: c = "primary" }) => ({
+    basic: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: { bg: ["white", "black"], borderWidth: "1px" },
-      icon: { color: [`${c}.500`, `${c}.200`] },
-      loading: { color: [`${c}.500`, `${c}.200`] },
+      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
     subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
-      container: { bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)] },
-      icon: { color: [`${c}.500`, `${c}.200`] },
-      loading: { color: [`${c}.500`, `${c}.200`] },
+      container: { bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)] },
+      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
-    solid: ({ colorScheme: c = "primary" }) => ({
+    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: {
-        bg: [`${c}.500`, `${c}.200`],
-        color: ["white", "gray.900"],
+        bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
+        color: "white",
       },
     }),
-    "island-accent": ({ colorScheme: c = "primary" }) => ({
+    "island-accent": ({
+      theme: t,
+      colorMode: m,
+      colorScheme: c = "primary",
+    }) => ({
       container: {
         bg: ["white", "black"],
         borderWidth: "1px",
@@ -72,11 +74,11 @@ export const Alert: ComponentMultiStyle = {
           transform: "translateY(-50%)",
           w: 1,
           h: "calc(100% - 1.5rem)",
-          bg: [`${c}.500`, `${c}.200`],
+          bg: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
           rounded: "full",
         },
       },
-      icon: { color: [`${c}.500`, `${c}.200`] },
+      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
     "left-accent": ({
       theme: t,
@@ -84,23 +86,23 @@ export const Alert: ComponentMultiStyle = {
       colorScheme: c = "primary",
     }) => ({
       container: {
-        bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
         pl: 3,
         borderLeft: "0.25rem solid",
-        borderLeftColor: [`${c}.500`, `${c}.200`],
+        borderLeftColor: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
         rounded: 4,
       },
-      icon: { color: [`${c}.500`, `${c}.200`] },
+      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
     "top-accent": ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: {
-        bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
         pt: 3,
         borderTop: "0.25rem solid",
-        borderTopColor: [`${c}.500`, `${c}.200`],
+        borderTopColor: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
         rounded: 4,
       },
-      icon: { color: [`${c}.500`, `${c}.200`] },
+      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
   },
 

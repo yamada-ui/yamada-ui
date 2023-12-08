@@ -12,9 +12,15 @@ tab: Props
 
 <PropsCard
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="gray"
+/>
+<PropsCard
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue="false"
 />
 <PropsCard
   name="isActive"
@@ -107,6 +113,12 @@ tab: Props
 
 ### IconButton Props
 
+<PropsCard
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue="false"
+/>
 <PropsCard
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"

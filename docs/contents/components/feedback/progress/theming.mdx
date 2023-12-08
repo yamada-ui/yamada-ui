@@ -18,7 +18,7 @@ If you want to change the style of the component, please check [here](/styled-sy
 export const Progress: ComponentMultiStyle = {
   baseStyle: {
     track: {
-      bg: ["gray.100", "whiteAlpha.300"],
+      bg: "border",
     },
     filledTrack: ({
       theme: t,
@@ -30,15 +30,13 @@ export const Progress: ComponentMultiStyle = {
     }) => {
       hasStripe = !isAnimation && hasStripe
 
-      const l = mode(500, 300)(m)
-
       const color = mode("rgba(255, 255, 255, 0.15)", "rgba(0,0,0,0.1)")(m)
 
       const bgColor = f
         ? isArray(f)
           ? mode(getColor(f[0], f[0])(t, m), getColor(f[1], f[1])(t, m))(m)
           : getColor(f, f)(t, m)
-        : getColor(`${c}.${l}`)(t, m)
+        : getColor(`${c}.500`)(t, m)
 
       const bgImage = hasStripe
         ? `linear-gradient(

@@ -39,12 +39,15 @@ export const Indicator: ComponentStyle = {
 
   variants: {
     solid: ({ colorScheme: c = "primary" }) => ({
-      bg: [`${c}.500`, `${c}.200`],
-      color: ["white", "gray.900"],
+      bg: [`${c}.500`, `${c}.600`],
+      color: `white`,
     }),
     subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
-      bg: [`${c}.100`, shadeColor(`${c}.200`, 56)(t, m)],
-      color: [`${c}.500`, `${c}.200`],
+      bg: [
+        isGray(c) ? `${c}.50` : `${c}.100`,
+        shadeColor(`${c}.300`, 58)(t, m),
+      ],
+      color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
     }),
   },
 

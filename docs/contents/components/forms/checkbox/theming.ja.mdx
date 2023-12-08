@@ -28,33 +28,37 @@ export const Checkbox: ComponentMultiStyle = {
       borderColor: "inherit",
       color: "white",
       _checked: {
-        bg: [`${c}.500`, `${c}.200`],
-        borderColor: [`${c}.500`, `${c}.200`],
-        color: ["white", "gray.900"],
+        bg: `${c}.500`,
+        borderColor: `${c}.500`,
+        color: ["white", "black"],
         _hover: {
-          bg: [`${c}.600`, `${c}.300`],
-          borderColor: [`${c}.600`, `${c}.300`],
+          bg: `${c}.600`,
+          borderColor: `${c}.600`,
         },
         _disabled: {
-          borderColor: ["gray.200", "transparent"],
-          bg: ["gray.200", "whiteAlpha.300"],
-          color: ["gray.500", "whiteAlpha.500"],
+          bg: ["blackAlpha.400", "whiteAlpha.300"],
         },
       },
       _indeterminate: {
-        bg: [`${c}.500`, `${c}.200`],
-        borderColor: [`${c}.500`, `${c}.200`],
-        color: ["white", "gray.900"],
+        bg: `${c}.500`,
+        borderColor: `${c}.500`,
+        color: "white",
       },
       _disabled: {
-        bg: ["gray.100", "whiteAlpha.100"],
-        borderColor: ["gray.100", "transparent"],
+        bg: ["blackAlpha.200", "whiteAlpha.100"],
+        borderColor: ["transparent", "transparent"],
       },
       _focusVisible: {
         boxShadow: "outline",
       },
       _invalid: {
-        borderColor: ["red.500", "red.300"],
+        borderColor: ["danger.500", "danger.400"],
+        _focusVisible: {
+          borderColor: "inherit",
+          _checked: {
+            borderColor: `${c}.500`,
+          },
+        },
       },
     }),
     label: {

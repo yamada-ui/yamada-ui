@@ -141,6 +141,7 @@ export const pseudos = {
   _idle: "&[data-idle]",
   _loading: "&[data-loading]",
   _loaded: "&[data-loaded]",
+  _ripple: "& .ui-ripple",
   /**
    * The CSS `:vertical` pseudo-class
    */

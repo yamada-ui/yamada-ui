@@ -1,5 +1,15 @@
 # @yamada-ui/core
 
+## 0.13.2
+
+### Patch Changes
+
+- [`ba00f80`](https://github.com/hirotomoyamada/yamada-ui/commit/ba00f8017c4f3d246892073797dee2763cfe939c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_ripple` pseudos props.
+
+- Updated dependencies [[`15bb13a`](https://github.com/hirotomoyamada/yamada-ui/commit/15bb13a4c921dd80a617205c4875f0b9ee36ad4f)]:
+  - @yamada-ui/utils@0.4.1
+  - @yamada-ui/portal@0.3.9
+
 ## 0.13.1
 
 ### Patch Changes

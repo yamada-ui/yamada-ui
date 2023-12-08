@@ -1,5 +1,19 @@
 # @yamada-ui/loading
 
+## 0.5.9
+
+### Patch Changes
+
+- Updated dependencies [[`15bb13a`](https://github.com/hirotomoyamada/yamada-ui/commit/15bb13a4c921dd80a617205c4875f0b9ee36ad4f), [`ba00f80`](https://github.com/hirotomoyamada/yamada-ui/commit/ba00f8017c4f3d246892073797dee2763cfe939c)]:
+  - @yamada-ui/utils@0.4.1
+  - @yamada-ui/core@0.13.2
+  - @yamada-ui/icon@0.3.21
+  - @yamada-ui/motion@0.4.21
+  - @yamada-ui/portal@0.3.9
+  - @yamada-ui/use-timeout@0.2.7
+  - @yamada-ui/use-token@0.3.15
+  - @yamada-ui/use-value@0.2.21
+
 ## 0.5.8
 
 ### Patch Changes

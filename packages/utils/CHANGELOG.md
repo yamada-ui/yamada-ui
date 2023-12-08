@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 0.4.1
+
+### Patch Changes
+
+- [`15bb13a`](https://github.com/hirotomoyamada/yamada-ui/commit/15bb13a4c921dd80a617205c4875f0b9ee36ad4f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `createId` and `isAccessible` functions.
+
 ## 0.4.0
 
 ### Minor Changes

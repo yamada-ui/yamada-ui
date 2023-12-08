@@ -1,7 +1,13 @@
 {
   "FileButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "errorBorderColor": {
-      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 253 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 242 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the button is invalid."
     },

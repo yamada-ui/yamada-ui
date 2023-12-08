@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-idle",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Yamada UI useIdle custom hook",
   "keywords": [
     "use-idle"

@@ -36,7 +36,7 @@
       "description": "If `true`, the modal will close when the overlay is clicked."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -135,6 +135,12 @@
   },
   "ModalOverlay": {},
   "ModalCloseButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -187,7 +193,7 @@
       "description": "If `true`, the modal will close when the overlay is clicked."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -321,6 +327,12 @@
   },
   "DialogOverlay": {},
   "DialogCloseButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -362,7 +374,7 @@
       "description": "If `true`, the modal will close when the overlay is clicked."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -455,6 +467,12 @@
   },
   "DrawerOverlay": {},
   "DrawerCloseButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,

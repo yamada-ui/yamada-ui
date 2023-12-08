@@ -18,7 +18,7 @@
       "description": "This controls the value update when you blur out of the input.\n- If `true` and the value is greater than `max`, the value will be reset to `max`.\n- Else, the value remains the same."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -33,12 +33,12 @@
       "description": "Props for decrement component."
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 253 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 242 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 253 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 242 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is focused."
     },

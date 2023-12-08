@@ -2,7 +2,7 @@
   "Calendar": {
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -327,7 +327,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 10 more ... | \"sky\"",
       "required": false
     },
     "calendarProps": {
@@ -367,7 +367,7 @@
       "description": "If `true`, the list element will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -722,7 +722,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 10 more ... | \"sky\"",
       "required": false
     },
     "calendarProps": {
@@ -762,7 +762,7 @@
       "description": "If `true`, the list element will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"red\" | \"rose\" | \"pink\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },

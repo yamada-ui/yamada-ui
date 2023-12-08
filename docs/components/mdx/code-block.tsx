@@ -61,7 +61,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
     <Box position="relative" my="6">
       <Box
         rounded="md"
-        bg={["zinc.800", "zinc.900"]}
+        bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div": { py: "6" } }}
         overflow="hidden"
       >

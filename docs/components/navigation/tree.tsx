@@ -115,10 +115,10 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         }}
         _hover={{
           color: ["black", "white"],
-          bg: !isSelected ? [`gray.300`, "whiteAlpha.400"] : undefined,
+          bg: !isSelected ? [`blackAlpha.400`, "whiteAlpha.400"] : undefined,
         }}
         _active={{
-          bg: !isSelected ? ["gray.400", "whiteAlpha.500"] : undefined,
+          bg: !isSelected ? ["blackAlpha.500", "whiteAlpha.500"] : undefined,
         }}
         transitionProperty="colors"
         transitionDuration="normal"
@@ -151,7 +151,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           flex="1"
           rounded="md"
           _focus={{ outline: "none" }}
-          _focusVisible={{ boxShadow: "inner-outline" }}
+          _focusVisible={{ boxShadow: "inline" }}
           onClick={!isOpen ? onToggle : undefined}
         >
           <Text as="span" noOfLines={1}>
@@ -171,7 +171,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             rounded="md"
             boxSizing="content-box"
             _focus={{ outline: "none" }}
-            _focusVisible={{ boxShadow: "inner-outline" }}
+            _focusVisible={{ boxShadow: "inline" }}
             onClick={onToggle}
             aria-label="Toggle children"
           >

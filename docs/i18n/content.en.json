@@ -9371,22 +9371,10 @@
     "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Gray" }
   },
   {
-    "title": "Zinc",
-    "type": "fragment",
-    "slug": "/styled-system/theming/default-theme#zinc",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Zinc" }
-  },
-  {
     "title": "Neutral",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#neutral",
     "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Neutral" }
-  },
-  {
-    "title": "Stone",
-    "type": "fragment",
-    "slug": "/styled-system/theming/default-theme#stone",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Stone" }
   },
   {
     "title": "Red",
@@ -9405,6 +9393,12 @@
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#pink",
     "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Pink" }
+  },
+  {
+    "title": "Flashy",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#flashy",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Flashy" }
   },
   {
     "title": "Orange",
@@ -9483,6 +9477,12 @@
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#purple",
     "hierarchy": { "lv1": "Default Theme", "lv2": "Colors", "lv3": "Purple" }
+  },
+  {
+    "title": "Gradients",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#gradients",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Gradients" }
   },
   {
     "title": "Spaces",

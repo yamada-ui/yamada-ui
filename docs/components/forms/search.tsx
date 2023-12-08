@@ -16,6 +16,7 @@ import {
   Highlight,
   dataAttr,
   useUpdateEffect,
+  Button,
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
@@ -82,11 +83,10 @@ export const Search = memo(
           px="3"
           outline="0"
           border="1px solid"
-          borderColor={[`gray.200`, `whiteAlpha.300`]}
           bg={["white", "black"]}
           rounded="md"
           gap="sm"
-          color={["gray.600", "whiteAlpha.600"]}
+          color={["blackAlpha.600", "whiteAlpha.400"]}
           _focusVisible={{ shadow: "outline" }}
           transitionProperty="common"
           transitionDuration="slower"
@@ -116,7 +116,9 @@ const SearchModal: FC<SearchModalProps> = memo(
     const directionRef = useRef<"up" | "down">("down")
     const compositionRef = useRef<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
+    const itemRefs = useRef<Map<number, RefObject<HTMLButtonElement>>>(
+      new Map(),
+    )
 
     const hits = useMemo(() => {
       if (query.length < 2) return []
@@ -232,9 +234,6 @@ const SearchModal: FC<SearchModalProps> = memo(
               autoComplete="off"
               autoCorrect="off"
               spellCheck="false"
-              _placeholder={{
-                color: ["gray.500", "whiteAlpha.500"],
-              }}
               value={query}
               onChange={(ev) => setQuery(ev.target.value)}
               onKeyDown={onKeyDown}
@@ -251,7 +250,7 @@ const SearchModal: FC<SearchModalProps> = memo(
               top="50%"
               left="0"
               transform="translateY(-50%)"
-              color={["gray.500", "whiteAlpha.500"]}
+              color={["blackAlpha.700", "whiteAlpha.600"]}
               pointerEvents="none"
             />
           </HStack>
@@ -264,12 +263,12 @@ const SearchModal: FC<SearchModalProps> = memo(
             <VStack as="ul" gap="sm">
               {hits.map(({ title, type, slug, hierarchy }, index) => {
                 const isSelected = index === selectedIndex
-                const ref = createRef<HTMLDivElement>()
+                const ref = createRef<HTMLButtonElement>()
 
                 itemRefs.current.set(index, ref)
 
                 return (
-                  <HStack
+                  <Button
                     as={NextLink}
                     ref={ref}
                     key={slug}
@@ -280,13 +279,13 @@ const SearchModal: FC<SearchModalProps> = memo(
                     py="sm"
                     px="md"
                     data-selected={dataAttr(isSelected)}
-                    bg={["gray.100", "whiteAlpha.50"]}
+                    bg={["blackAlpha.50", "whiteAlpha.50"]}
                     transitionProperty="colors"
                     transitionDuration="normal"
                     _focus={{ outline: "none" }}
                     _focusVisible={{ boxShadow: "outline" }}
-                    _selected={{ bg: ["gray.200", "whiteAlpha.200"] }}
-                    _active={{ bg: ["gray.300", "whiteAlpha.300"] }}
+                    _selected={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
+                    _active={{ bg: ["blackAlpha.200", "whiteAlpha.200"] }}
                     onClick={onClose}
                     onMouseEnter={() => {
                       eventRef.current = "mouse"
@@ -296,12 +295,12 @@ const SearchModal: FC<SearchModalProps> = memo(
                     {type === "page" ? (
                       <File
                         fontSize="xl"
-                        color={["gray.600", "whiteAlpha.500"]}
+                        color={["blackAlpha.700", "whiteAlpha.600"]}
                       />
                     ) : (
                       <Hash
                         fontSize="xl"
-                        color={["gray.500", "whiteAlpha.400"]}
+                        color={["blackAlpha.500", "whiteAlpha.400"]}
                       />
                     )}
 
@@ -326,7 +325,7 @@ const SearchModal: FC<SearchModalProps> = memo(
                         {title}
                       </Highlight>
                     </VStack>
-                  </HStack>
+                  </Button>
                 )
               })}
             </VStack>

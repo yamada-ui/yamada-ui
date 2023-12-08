@@ -171,7 +171,7 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
         />
 
         <Box rounded="md" overflow="hidden" my="4" position="relative">
-          <Box py="2" bg={["zinc.800", "zinc.900"]} w="full">
+          <Box py="2" bg={["neutral.800", "neutral.900"]} w="full">
             <Text
               color="whiteAlpha.700"
               fontSize="xs"
@@ -241,7 +241,7 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
     <>
       <ScrollArea
         ref={ref}
-        bg={["zinc.800", "zinc.900"]}
+        bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div": { pt: "0", pb: isMax ? "10" : "6" } }}
         maxH={isOpen ? "full" : "sm"}
         type="never"

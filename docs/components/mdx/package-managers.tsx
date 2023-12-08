@@ -49,7 +49,7 @@ export const PackageManagers: FC<PackageManagersProps> = ({
     <Box position="relative" my="6" {...rest}>
       <Box
         rounded="md"
-        bg={["zinc.800", "zinc.900"]}
+        bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div:last-child": { py: "6" } }}
         overflow="hidden"
       >

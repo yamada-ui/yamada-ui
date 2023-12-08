@@ -30,7 +30,10 @@ export const RelatedLinks = memo(
               isHook ? "hooks" : "components"
             }/${dirName}`}
             leftIcon={
-              <Github boxSize="1rem" color={["gray.700", "whiteAlpha.800"]} />
+              <Github
+                boxSize="1rem"
+                color={["blackAlpha.700", "whiteAlpha.600"]}
+              />
             }
           >
             {t("component.doc-links.source")}
@@ -73,8 +76,8 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
       transitionDuration="slower"
       color="muted"
       _hover={{
-        color: ["gray.600", "whiteAlpha.700"],
-        bg: [`gray.100`, `whiteAlpha.200`],
+        color: ["blackAlpha.700", "whiteAlpha.600"],
+        bg: [`blackAlpha.50`, `whiteAlpha.50`],
         textDecoration: "none",
       }}
       isExternal

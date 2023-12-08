@@ -91,7 +91,7 @@ export const TableOfContents = memo(
                     color: isSelected ? undefined : ["black", "white"],
                   }}
                   _focusVisible={{
-                    boxShadow: "inner-outline",
+                    boxShadow: "inline",
                   }}
                   transitionProperty="colors"
                   transitionDuration="normal"

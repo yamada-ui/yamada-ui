@@ -84,12 +84,12 @@ const PaginationItem: FC<PaginationItemProps> = ({
         fontWeight="semibold"
         transitionProperty="colors"
         transitionDuration="fast"
-        color={[`primary.500`, `primary.400`]}
+        color={[`primary.500`, `primary.500`]}
         _hover={{
-          color: [`primary.600`, `primary.500`],
+          color: [`primary.600`, `primary.600`],
         }}
         _active={{
-          color: [`primary.700`, `primary.600`],
+          color: [`primary.700`, `primary.700`],
         }}
       >
         {isPrev ? (

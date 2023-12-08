@@ -10101,12 +10101,6 @@
     "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Gray" }
   },
   {
-    "title": "Zinc",
-    "type": "fragment",
-    "slug": "/styled-system/theming/default-theme#zinc",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Zinc" }
-  },
-  {
     "title": "Neutral",
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#neutral",
@@ -10114,16 +10108,6 @@
       "lv1": "デフォルトのテーマ",
       "lv2": "Colors",
       "lv3": "Neutral"
-    }
-  },
-  {
-    "title": "Stone",
-    "type": "fragment",
-    "slug": "/styled-system/theming/default-theme#stone",
-    "hierarchy": {
-      "lv1": "デフォルトのテーマ",
-      "lv2": "Colors",
-      "lv3": "Stone"
     }
   },
   {
@@ -10143,6 +10127,16 @@
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#pink",
     "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Colors", "lv3": "Pink" }
+  },
+  {
+    "title": "Flashy",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#flashy",
+    "hierarchy": {
+      "lv1": "デフォルトのテーマ",
+      "lv2": "Colors",
+      "lv3": "Flashy"
+    }
   },
   {
     "title": "Orange",

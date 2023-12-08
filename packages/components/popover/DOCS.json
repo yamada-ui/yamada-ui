@@ -157,6 +157,12 @@
     }
   },
   "PopoverCloseButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,

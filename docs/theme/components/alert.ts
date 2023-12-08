@@ -10,8 +10,8 @@ export const Alert: ComponentMultiStyle = {
           shadeColor(`${c}.200`, 76)(t, m),
         ],
       },
-      icon: { color: [`${c}.400`, `${c}.200`] },
-      loading: { color: [`${c}.400`, `${c}.200`] },
+      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
+      loading: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
   },
 

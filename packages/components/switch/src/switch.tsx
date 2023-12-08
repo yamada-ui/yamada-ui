@@ -112,6 +112,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         "checked",
         "defaultIsChecked",
         "isChecked",
+        "isDisabled",
         "onChange",
         "onBlur",
         "onFocus",

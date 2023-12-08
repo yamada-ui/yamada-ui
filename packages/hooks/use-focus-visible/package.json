@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-focus-visible",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Yamada UI useFocusVisible custom hook",
   "keywords": [
     "use-focus-visible"

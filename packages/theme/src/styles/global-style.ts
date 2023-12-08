@@ -11,7 +11,7 @@ export const globalStyle: UIStyle = {
     overflowX: "hidden",
   },
   "*::placeholder": {
-    color: "gray.500",
+    color: "blackAlpha.600",
   },
   _dark: {
     "*::placeholder": {

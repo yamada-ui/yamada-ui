@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 import { mode } from "@yamada-ui/core"
-import { transparentizeColor, getColor } from "@yamada-ui/utils"
+import { getColor, isGray, shadeColor, tintColor } from "@yamada-ui/utils"
 
 export const Mark: ComponentStyle = {
   baseStyle: {
@@ -10,17 +10,20 @@ export const Mark: ComponentStyle = {
 
   variants: {
     solid: ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => ({
-      bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-      color: [`white`, `whiteAlpha.800`],
+      bg: [tintColor(`${c}.600`, 24)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
+      color: `white`,
     }),
     subtle: ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => ({
-      bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-      color: [`black`, `white`],
+      bg: [
+        isGray(c) ? `${c}.50` : `${c}.100`,
+        shadeColor(`${c}.300`, 58)(t, m),
+      ],
+      color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
     }),
     outline: ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => {
       const color = mode(
         getColor(`${c}.500`)(t, m),
-        transparentizeColor(`${c}.200`, 0.8)(t, m),
+        getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
       )(m)
 
       return {
@@ -28,8 +31,8 @@ export const Mark: ComponentStyle = {
         boxShadow: `inset 0 0 0px 1px ${color}`,
       }
     },
-    "text-accent": ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => ({
-      color: [`${c}.500`, transparentizeColor(`${c}.200`, 0.8)(t, m)],
+    "text-accent": ({ colorScheme: c = "gray" }) => ({
+      color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
       p: 0,
     }),
     unstyled: {

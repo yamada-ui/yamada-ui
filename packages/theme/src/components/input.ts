@@ -14,7 +14,7 @@ export const Input: ComponentMultiStyle = {
       transitionProperty: "common",
       transitionDuration: "normal",
       _placeholder: {
-        color: "gray.500",
+        color: "blackAlpha.600",
       },
       _dark: {
         _placeholder: {
@@ -32,8 +32,8 @@ export const Input: ComponentMultiStyle = {
     outline: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ["blue.500", "blue.300"],
-      errorBorderColor: ec = ["red.500", "red.300"],
+      focusBorderColor: fc = "focus",
+      errorBorderColor: ec = ["danger.500", "danger.400"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -48,7 +48,7 @@ export const Input: ComponentMultiStyle = {
           borderColor: "inherit",
           bg: "inherit",
           _hover: {
-            borderColor: ["gray.300", "whiteAlpha.400"],
+            borderColor: ["blackAlpha.500", "whiteAlpha.400"],
           },
           _readOnly: {
             boxShadow: "none !important",
@@ -71,15 +71,15 @@ export const Input: ComponentMultiStyle = {
         addon: {
           border: "1px solid",
           borderColor: ["inherit", "whiteAlpha.50"],
-          bg: ["gray.100", "whiteAlpha.300"],
+          bg: ["blackAlpha.300", "whiteAlpha.300"],
         },
       }
     },
     filled: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ["blue.500", "blue.300"],
-      errorBorderColor: ec = ["red.500", "red.300"],
+      focusBorderColor: fc = "focus",
+      errorBorderColor: ec = ["danger.500", "danger.400"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -92,9 +92,9 @@ export const Input: ComponentMultiStyle = {
         field: {
           border: "2px solid",
           borderColor: "transparent",
-          bg: ["gray.100", "whiteAlpha.50"],
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _hover: {
-            bg: ["gray.200", "whiteAlpha.100"],
+            bg: ["blackAlpha.100", "whiteAlpha.100"],
           },
           _readOnly: {
             boxShadow: "none !important",
@@ -102,27 +102,30 @@ export const Input: ComponentMultiStyle = {
           },
           _invalid: {
             borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _active: {
             bg: "transparent",
             borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _focusVisible: {
             bg: "transparent",
             borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
         },
         addon: {
           border: "2px solid transparent",
-          bg: ["gray.100", "whiteAlpha.50"],
+          bg: ["blackAlpha.300", "whiteAlpha.300"],
         },
       }
     },
     flushed: ({
       theme: t,
       colorMode: m,
-      focusBorderColor: fc = ["blue.500", "blue.300"],
-      errorBorderColor: ec = ["red.500", "red.300"],
+      focusBorderColor: fc = "focus",
+      errorBorderColor: ec = ["danger.500", "danger.400"],
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -138,6 +141,9 @@ export const Input: ComponentMultiStyle = {
           rounded: "0",
           px: "0",
           bg: "transparent",
+          _hover: {
+            borderColor: ["blackAlpha.500", "whiteAlpha.400"],
+          },
           _readOnly: {
             boxShadow: "none !important",
             userSelect: "all",
@@ -156,11 +162,10 @@ export const Input: ComponentMultiStyle = {
           },
         },
         addon: {
-          border: "2px solid",
+          borderBottom: "1px solid",
           borderColor: "inherit",
           bg: "transparent",
           rounded: "0",
-          px: "0",
         },
       }
     },

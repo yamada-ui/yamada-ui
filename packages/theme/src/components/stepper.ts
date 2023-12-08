@@ -41,10 +41,10 @@ export const Stepper: ComponentMultiStyle = {
       transitionDuration: "slow",
       "&[data-status=active]": {
         borderWidth: "2px",
-        borderColor: [`${c}.500`, `${c}.200`],
+        borderColor: [`${c}.500`, `${c}.400`],
       },
       "&[data-status=complete]": {
-        bg: [`${c}.500`, `${c}.200`],
+        bg: [`${c}.500`, `${c}.400`],
         color: ["white", "black"],
       },
       "&[data-status=incomplete]": {
@@ -59,7 +59,7 @@ export const Stepper: ComponentMultiStyle = {
       fontWeight: "medium",
     },
     description: {
-      color: ["blackAlpha.500", "whiteAlpha.600"],
+      color: ["blackAlpha.700", "whiteAlpha.600"],
     },
     separator: {
       bg: "border",
@@ -67,7 +67,7 @@ export const Stepper: ComponentMultiStyle = {
       transitionProperty: "common",
       transitionDuration: "slow",
       "&[data-status=complete]": {
-        bg: [`${c}.500`, `${c}.200`],
+        bg: [`${c}.500`, `${c}.400`],
       },
       _vertical: {
         position: "absolute",

@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle, UIMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor, isGray } from "@yamada-ui/utils"
+import { transparentizeColor, isGray, tintColor } from "@yamada-ui/utils"
 
 export const NativeTable: ComponentMultiStyle = {
   baseStyle: {
@@ -13,6 +13,7 @@ export const NativeTable: ComponentMultiStyle = {
       borderCollapse: "collapse",
     },
     tr: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
@@ -23,7 +24,7 @@ export const NativeTable: ComponentMultiStyle = {
     },
     th: {
       fontFamily: "heading",
-      fontWeight: "bold",
+      fontWeight: "semibold",
       textAlign: "start",
       textTransform: "uppercase",
       letterSpacing: "wider",
@@ -35,6 +36,7 @@ export const NativeTable: ComponentMultiStyle = {
       fontFamily: "heading",
       fontWeight: "medium",
       textAlign: "center",
+      color: ["blackAlpha.700", "whiteAlpha.600"],
     },
   },
 
@@ -52,9 +54,7 @@ export const NativeTable: ComponentMultiStyle = {
         ...(withBorder ? { borderWidth: "1px" } : {}),
       },
       th: {
-        color: ["gray.600", "gray.400"],
         borderBottomWidth: "1px",
-
         "&[data-is-numeric=true]": {
           textAlign: "end",
         },
@@ -62,26 +62,22 @@ export const NativeTable: ComponentMultiStyle = {
       },
       td: {
         borderBottomWidth: "1px",
-
         "&[data-is-numeric=true]": {
           textAlign: "end",
         },
         ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
-      },
-      caption: {
-        color: ["gray.600", "gray.100"],
       },
       tbody: {
         tr: {
           ...(highlightOnSelected
             ? {
                 _selected: {
-                  bg: isGray(c)
-                    ? [`${c}.100`, `whiteAlpha.50`]
-                    : [
-                        transparentizeColor(`${c}.400`, 0.08)(t, m),
-                        transparentizeColor(`${c}.200`, 0.04)(t, m),
-                      ],
+                  bg: [
+                    isGray(c)
+                      ? tintColor(`${c}.50`, 72)(t, m)
+                      : tintColor(`${c}.50`, 64)(t, m),
+                    transparentizeColor(`${c}.300`, 0.04)(t, m),
+                  ],
                 },
               }
             : {}),
@@ -91,15 +87,10 @@ export const NativeTable: ComponentMultiStyle = {
                 transitionProperty: "common",
                 transitionDuration: "slow",
                 _hover: {
-                  bg: isGray(c)
-                    ? [
-                        transparentizeColor(`${c}.200`, 0.8)(t, m),
-                        `whiteAlpha.200`,
-                      ]
-                    : [
-                        transparentizeColor(`${c}.300`, 0.24)(t, m),
-                        transparentizeColor(`${c}.200`, 0.16)(t, m),
-                      ],
+                  bg: [
+                    transparentizeColor(`${c}.400`, 0.08)(t, m),
+                    transparentizeColor(`${c}.300`, 0.12)(t, m),
+                  ],
                 },
               }
             : {}),
@@ -125,9 +116,7 @@ export const NativeTable: ComponentMultiStyle = {
         ...(withBorder ? { borderWidth: "1px" } : {}),
       },
       th: {
-        color: ["gray.600", "gray.400"],
         borderBottomWidth: "1px",
-
         "&[data-is-numeric=true]": {
           textAlign: "end",
         },
@@ -135,24 +124,20 @@ export const NativeTable: ComponentMultiStyle = {
       },
       td: {
         borderBottomWidth: "1px",
-
         "&[data-is-numeric=true]": {
           textAlign: "end",
         },
         ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
       },
-      caption: {
-        color: ["gray.600", "gray.100"],
-      },
       tbody: {
         tr: {
           _odd: {
-            bg: isGray(c)
-              ? [`${c}.100`, `whiteAlpha.50`]
-              : [
-                  transparentizeColor(`${c}.400`, 0.08)(t, m),
-                  transparentizeColor(`${c}.200`, 0.04)(t, m),
-                ],
+            bg: [
+              isGray(c)
+                ? tintColor(`${c}.50`, 72)(t, m)
+                : tintColor(`${c}.50`, 64)(t, m),
+              transparentizeColor(`${c}.300`, 0.04)(t, m),
+            ],
           },
           ...(highlightOnHover
             ? {
@@ -160,15 +145,10 @@ export const NativeTable: ComponentMultiStyle = {
                 transitionProperty: "common",
                 transitionDuration: "slow",
                 _hover: {
-                  bg: isGray(c)
-                    ? [
-                        transparentizeColor(`${c}.200`, 0.8)(t, m),
-                        `whiteAlpha.200`,
-                      ]
-                    : [
-                        transparentizeColor(`${c}.300`, 0.24)(t, m),
-                        transparentizeColor(`${c}.200`, 0.16)(t, m),
-                      ],
+                  bg: [
+                    transparentizeColor(`${c}.400`, 0.08)(t, m),
+                    transparentizeColor(`${c}.300`, 0.12)(t, m),
+                  ],
                 },
               }
             : {}),

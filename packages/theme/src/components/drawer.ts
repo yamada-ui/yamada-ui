@@ -1,41 +1,14 @@
-import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
+import { Modal } from "./modal"
 
-export const Drawer: ComponentMultiStyle = {
+export const Drawer: ComponentMultiStyle = mergeMultiStyle(Modal, {
   baseStyle: {
     container: ({ isFullHeight }) => ({
       ...(isFullHeight ? { height: "100dvh" } : {}),
-      maxH: "100dvh",
-      bg: ["white", "black"],
-      color: "inherit",
-      boxShadow: ["lg", "dark-lg"],
-      zIndex: "recoome",
+      w: "auto",
     }),
-    closeButton: {
-      top: "3",
-      right: "3",
-    },
-    overlay: {
-      bg: "blackAlpha.600",
-      zIndex: "burter",
-    },
-    header: {
-      pt: "md",
-      px: "md",
-      gap: "md",
-      fontSize: "xl",
-      fontWeight: "semibold",
-    },
     body: {
-      my: "md",
-      px: "md",
-      gap: "md",
-      flex: "1",
       overflow: "auto",
-    },
-    footer: {
-      px: "md",
-      pb: "md",
-      gap: "md",
     },
   },
 
@@ -53,4 +26,4 @@ export const Drawer: ComponentMultiStyle = {
   defaultProps: {
     size: "md",
   },
-}
+})({ omit: ["sizes"] })

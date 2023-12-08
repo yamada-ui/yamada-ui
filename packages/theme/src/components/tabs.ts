@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { mode } from "@yamada-ui/core"
-import { getColor, transparentizeColor } from "@yamada-ui/utils"
+import { getColor, isGray, shadeColor, tintColor } from "@yamada-ui/utils"
 
 export const Tabs: ComponentMultiStyle = {
   baseStyle: {
@@ -48,20 +48,21 @@ export const Tabs: ComponentMultiStyle = {
         tab: {
           borderColor: "transparent",
           _selected: {
-            color: [`${c}.600`, `${c}.300`],
+            color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
             borderColor: "currentColor",
           },
           ...(isVertical
             ? {
                 borderEndWidth: "1px",
                 borderEndStyle: "solid",
-                marginEnd: "-1px",
+                me: "-1px",
               }
             : {
                 borderBottomWidth: "1px",
                 borderBottomStyle: "solid",
-                marginBottom: "-1px",
+                mb: "-1px",
               }),
+          _ripple: { display: "none" },
         },
       }
     },
@@ -78,7 +79,7 @@ export const Tabs: ComponentMultiStyle = {
         tab: {
           borderColor: "transparent",
           _selected: {
-            color: [`${c}.600`, `${c}.300`],
+            color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
             borderColor: "inherit",
             ...(isVertical
               ? { borderEndColor: ["white", "black"] }
@@ -89,14 +90,15 @@ export const Tabs: ComponentMultiStyle = {
                 roundedLeft: "md",
                 borderWidth: "1px",
                 borderStyle: "solid",
-                marginEnd: "-2px",
+                me: "-2px",
               }
             : {
                 roundedTop: "md",
                 borderWidth: "1px",
                 borderStyle: "solid",
-                marginBottom: "-2px",
+                mb: "-2px",
               }),
+          _ripple: { display: "none" },
         },
       }
     },
@@ -118,22 +120,25 @@ export const Tabs: ComponentMultiStyle = {
         tab: {
           borderColor: "inherit",
           _notLast: {
-            ...(isVertical ? { marginBottom: "-1px" } : { marginEnd: "-1px" }),
+            ...(isVertical ? { borderBottom: "none" } : { borderEnd: "none" }),
           },
           _selected: {
-            bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-            color: [`${c}.800`, `${c}.200`],
+            bg: [
+              isGray(c) ? `${c}.50` : `${c}.100`,
+              shadeColor(`${c}.300`, 58)(t, m),
+            ],
+            color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
           },
           ...(isVertical
             ? {
                 borderWidth: "1px",
                 borderStyle: "solid",
-                marginEnd: "-1px",
+                me: "-1px",
               }
             : {
                 borderWidth: "1px",
                 borderStyle: "solid",
-                marginBottom: "-1px",
+                mb: "-1px",
               }),
         },
       }
@@ -156,22 +161,25 @@ export const Tabs: ComponentMultiStyle = {
         tab: {
           borderColor: "inherit",
           _notLast: {
-            ...(isVertical ? { marginBottom: "-1px" } : { marginEnd: "-1px" }),
+            ...(isVertical ? { borderBottom: "none" } : { borderEnd: "none" }),
           },
           _selected: {
-            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-            color: [`white`, `whiteAlpha.800`],
+            bg: [
+              tintColor(`${c}.600`, 24)(t, m),
+              shadeColor(`${c}.600`, 16)(t, m),
+            ],
+            color: `white`,
           },
           ...(isVertical
             ? {
                 borderWidth: "1px",
                 borderStyle: "solid",
-                marginEnd: "-1px",
+                me: "-1px",
               }
             : {
                 borderWidth: "1px",
                 borderStyle: "solid",
-                marginBottom: "-1px",
+                mb: "-1px",
               }),
         },
       }
@@ -179,14 +187,13 @@ export const Tabs: ComponentMultiStyle = {
     rounded: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => {
       const color = mode(
         getColor(`${c}.500`)(t, m),
-        transparentizeColor(`${c}.200`, 0.8)(t, m),
+        getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
       )(m)
 
       return {
         tabList: { gap: "sm" },
         tab: {
           borderRadius: "full",
-          fontWeight: "semibold",
           _selected: {
             color,
             boxShadow: `inset 0 0 0px 1px ${color}`,
@@ -202,11 +209,12 @@ export const Tabs: ComponentMultiStyle = {
       tabList: { gap: "sm" },
       tab: {
         borderRadius: "full",
-        fontWeight: "semibold",
-        color: "gray.600",
         _selected: {
-          bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-          color: [`${c}.800`, `${c}.200`],
+          bg: [
+            isGray(c) ? `${c}.50` : `${c}.100`,
+            shadeColor(`${c}.300`, 58)(t, m),
+          ],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
       },
     }),
@@ -218,14 +226,21 @@ export const Tabs: ComponentMultiStyle = {
       tabList: { gap: "sm" },
       tab: {
         borderRadius: "full",
-        fontWeight: "semibold",
         _selected: {
-          bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-          color: [`white`, `whiteAlpha.800`],
+          bg: [
+            tintColor(`${c}.600`, 24)(t, m),
+            shadeColor(`${c}.600`, 16)(t, m),
+          ],
+          color: `white`,
         },
       },
     }),
-    unstyled: {},
+    unstyled: {
+      tab: {
+        _hover: { opacity: "inherit" },
+        _ripple: { display: "none" },
+      },
+    },
   },
 
   sizes: {

@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor, isGray } from "@yamada-ui/utils"
+import { transparentizeColor, isGray, isAccessible } from "@yamada-ui/utils"
 
 export const Pagination: ComponentMultiStyle = {
   baseStyle: {
@@ -13,7 +13,6 @@ export const Pagination: ComponentMultiStyle = {
     },
     item: {
       px: 1,
-      userSelect: "none",
       color: ["blackAlpha.700", "whiteAlpha.700"],
       rounded: "md",
       transitionProperty: "common",
@@ -44,44 +43,38 @@ export const Pagination: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ colorScheme: c = "primary" }) => {
-      const isAccessible = c === "yellow" || c === "cyan" || c === "lime"
-
-      return {
-        item: {
-          border: "1px solid",
-          borderColor: "border",
-          _selected: {
-            bg: isGray(c)
-              ? [`${c}.200`, `${c}.700`]
-              : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-            borderColor: isGray(c)
-              ? [`${c}.200`, `${c}.700`]
-              : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-            color: isGray(c)
-              ? undefined
-              : [isAccessible ? `black` : `white`, `gray.800`],
-            _hover: {
-              bg: isGray(c)
-                ? [`${c}.200`, `${c}.700`]
-                : [isAccessible ? `${c}.400` : `${c}.500`, `${c}.200`],
-            },
-          },
+    solid: ({ colorScheme: c = "primary" }) => ({
+      item: {
+        border: "1px solid",
+        borderColor: "border",
+        _selected: {
+          bg: isGray(c)
+            ? [`${c}.50`, `${c}.700`]
+            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          borderColor: isGray(c)
+            ? [`${c}.50`, `${c}.700`]
+            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
           _hover: {
-            bg: [`gray.200`, `whiteAlpha.100`],
-            _disabled: {
-              bg: ["initial", "initial"],
-            },
-          },
-          _active: {
-            bg: [`gray.300`, `whiteAlpha.200`],
+            bg: isGray(c)
+              ? [`${c}.100`, `${c}.800`]
+              : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
           },
         },
-        dots: {
-          border: "0",
+        _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
         },
-      }
-    },
+        _active: {
+          bg: ["blackAlpha.100", "whiteAlpha.100"],
+        },
+      },
+      dots: {
+        border: "0",
+      },
+    }),
     outline: ({ colorScheme: c = "primary" }) => {
       return {
         item: {
@@ -89,24 +82,22 @@ export const Pagination: ComponentMultiStyle = {
           borderColor: "border",
           _selected: {
             bg: "transparent",
-            borderColor: isGray(c)
-              ? [`${c}.500`, `${c}.400`]
-              : [`${c}.600`, `${c}.300`],
+            borderColor: [`${c}.600`, `${c}.500`],
             color: isGray(c)
-              ? [`inherit`, `${c}.400`]
-              : [`${c}.600`, `${c}.200`],
+              ? ["blackAlpha.800", "whiteAlpha.700"]
+              : [`${c}.600`, `${c}.500`],
             _hover: {
               bg: ["transparent", "transparent"],
             },
           },
           _hover: {
-            bg: ["gray.200", "whiteAlpha.100"],
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
             _disabled: {
               bg: ["initial", "initial"],
             },
           },
           _active: {
-            bg: [`gray.300`, `whiteAlpha.200`],
+            bg: ["blackAlpha.100", "whiteAlpha.100"],
           },
         },
         dots: {
@@ -121,13 +112,11 @@ export const Pagination: ComponentMultiStyle = {
             bg: isGray(c) ? undefined : "transparent",
             fontWeight: "semibold",
             color: isGray(c)
-              ? [`inherit`, `${c}.200`]
-              : [`${c}.600`, `${c}.200`],
+              ? ["blackAlpha.800", "whiteAlpha.700"]
+              : [`${c}.600`, `${c}.500`],
           },
           _hover: {
-            bg: isGray(c)
-              ? [`${c}.200`, `whiteAlpha.200`]
-              : [`${c}.100`, transparentizeColor(`${c}.200`, 0.12)(t, m)],
+            bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
           },
           _active: {
             bg: isGray(c)
@@ -141,6 +130,7 @@ export const Pagination: ComponentMultiStyle = {
       container: { gap: 0 },
       inner: { gap: 0 },
       item: { bg: "none", color: "inherit", minW: "auto", minH: "auto" },
+      _ripple: { display: "none" },
     },
   },
 

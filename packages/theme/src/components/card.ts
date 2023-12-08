@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor } from "@yamada-ui/utils"
+import { shadeColor, tintColor } from "@yamada-ui/utils"
 
 export const Card: ComponentMultiStyle = {
   baseStyle: {
@@ -24,13 +24,13 @@ export const Card: ComponentMultiStyle = {
     },
     solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: {
-        bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-        color: [`white`, `whiteAlpha.800`],
+        bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
+        color: "white",
       },
     }),
     subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       container: {
-        bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
       },
     }),
     unstyled: {

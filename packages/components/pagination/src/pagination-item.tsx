@@ -1,5 +1,6 @@
 import type { CSSUIObject } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
+import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, dataAttr } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
 import {
@@ -28,6 +29,12 @@ type PaginationItemOptions = {
    * @default false
    */
   isDisabled?: boolean
+  /**
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
+   */
+  disableRipple?: boolean
 }
 
 export type PaginationItemProps = ComponentPropsWithoutRef<"button"> &
@@ -49,14 +56,19 @@ export const PaginationItem: FC<PaginationItemProps> = ({
   isActive,
   page,
   isDisabled,
+  disableRipple,
   children,
   ...rest
 }) => {
   const styles = usePaginationContext()
+  const { onClick, ...rippleProps } = useRipple(rest)
 
   children ??= iconMap[page] ?? page
 
   const css: CSSUIObject = {
+    position: "relative",
+    overflow: "hidden",
+    userSelect: "none",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -74,8 +86,11 @@ export const PaginationItem: FC<PaginationItemProps> = ({
       data-disabled={dataAttr(isDisabled)}
       __css={css}
       {...rest}
+      onClick={onClick}
     >
       {children}
+
+      <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
     </ui.button>
   )
 }

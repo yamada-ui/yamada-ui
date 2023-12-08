@@ -1,5 +1,6 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
+import { Ripple, useRipple } from "@yamada-ui/ripple"
 import type { UseClickableProps } from "@yamada-ui/use-clickable"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
@@ -16,6 +17,7 @@ export const Tab = forwardRef<TabProps, "button">(
       isFocusable,
       clickOnEnter,
       clickOnSpace,
+      children,
       ...props
     },
     ref,
@@ -23,6 +25,7 @@ export const Tab = forwardRef<TabProps, "button">(
     const {
       selectedIndex,
       isManual,
+      disableRipple,
       setSelectedIndex,
       setFocusedIndex,
       styles,
@@ -33,8 +36,6 @@ export const Tab = forwardRef<TabProps, "button">(
     })
 
     const isSelected = index === selectedIndex
-
-    const onClick = () => setSelectedIndex(index)
 
     const onFocus = () => {
       setFocusedIndex(index)
@@ -48,10 +49,13 @@ export const Tab = forwardRef<TabProps, "button">(
       isFocusable,
       clickOnEnter,
       clickOnSpace,
-      onClick: handlerAll(props.onClick, onClick),
+      onClick: handlerAll(props.onClick, () => setSelectedIndex(index)),
     })
+    const { onClick, ...rippleProps } = useRipple(rest)
 
     const css: CSSUIObject = {
+      position: "relative",
+      overflow: "hidden",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -69,8 +73,13 @@ export const Tab = forwardRef<TabProps, "button">(
         type="button"
         tabIndex={isSelected ? 0 : -1}
         aria-selected={ariaAttr(isSelected)}
+        onClick={onClick}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}
-      />
+      >
+        {children}
+
+        <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
+      </ui.button>
     )
   },
 )

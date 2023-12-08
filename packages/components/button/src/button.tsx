@@ -7,6 +7,7 @@ import {
 } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
+import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, useMergeRefs, merge, dataAttr } from "@yamada-ui/utils"
 import type { ElementType, FC, ReactElement } from "react"
 import { useCallback, useMemo, useState } from "react"
@@ -59,6 +60,12 @@ type ButtonOptions = {
    * @default 'start'
    */
   loadingPlacement?: "start" | "end"
+  /**
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
+   */
+  disableRipple?: boolean
 }
 
 export type ButtonProps = HTMLUIProps<"button"> &
@@ -84,12 +91,14 @@ export const Button = forwardRef<ButtonProps, "button">(
       loadingIcon,
       loadingText,
       loadingPlacement = "start",
+      disableRipple,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
 
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
     const ref = useMergeRefs(customRef, buttonRef)
+    const { onClick, ...rippleProps } = useRipple(rest)
 
     const css: CSSUIObject = useMemo(() => {
       const _focus =
@@ -107,6 +116,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         position: "relative",
         whiteSpace: "nowrap",
         verticalAlign: "middle",
+        overflow: "hidden",
         outline: "none",
         ...styles,
         ...__css,
@@ -136,6 +146,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         data__loading={dataAttr(isLoading)}
         __css={css}
         {...rest}
+        onClick={onClick}
       >
         {isLoading && loadingPlacement === "start" ? (
           <Loading className="ui-button__loading--start" {...loadingProps} />
@@ -154,6 +165,11 @@ export const Button = forwardRef<ButtonProps, "button">(
         {isLoading && loadingPlacement === "end" ? (
           <Loading className="ui-button__loading--end" {...loadingProps} />
         ) : null}
+
+        <Ripple
+          isDisabled={disableRipple || isDisabled || isLoading}
+          {...rippleProps}
+        />
       </ui.button>
     )
   },

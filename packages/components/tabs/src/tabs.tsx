@@ -35,6 +35,7 @@ type TabsContext = Omit<TabsOptions, "index" | "defaultIndex" | "onChange"> & {
   selectedIndex: number
   setSelectedIndex: Dispatch<SetStateAction<number>>
   styles: Record<string, CSSUIObject>
+  disableRipple: boolean
 }
 
 const [TabsProvider, useTabsContext] = createContext<TabsContext>({
@@ -104,6 +105,12 @@ type TabsOptions = {
    * Props for tab panels components.
    */
   tabPanelsProps?: TabPanelsProps
+  /**
+   * If `true`, disable ripple effects when pressing the tab.
+   *
+   * @default false
+   */
+  disableRipple?: boolean
 }
 
 export type TabsProps = Omit<HTMLUIProps<"div">, "onChange"> &
@@ -124,6 +131,7 @@ export const Tabs = forwardRef<TabsProps, "div">(
       isFitted,
       isManual,
       isLazy = true,
+      disableRipple = false,
       lazyBehavior = "keepMounted",
       orientation = "horizontal",
       tabListProps,
@@ -163,6 +171,7 @@ export const Tabs = forwardRef<TabsProps, "div">(
             setFocusedIndex,
             selectedIndex,
             setSelectedIndex,
+            disableRipple,
             isFitted,
             align,
             isManual,

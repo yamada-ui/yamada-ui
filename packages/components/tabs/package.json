@@ -47,6 +47,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/ripple": "workspace:*",
     "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",

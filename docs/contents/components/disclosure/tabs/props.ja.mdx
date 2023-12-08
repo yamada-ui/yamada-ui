@@ -17,7 +17,7 @@ tab: Props
 />
 <PropsCard
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "zinc" | "neutral" | "stone" | "red" | "rose" | "pink" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
@@ -25,6 +25,12 @@ tab: Props
   name="defaultIndex"
   type="number"
   description={"The index of the selected tab."}
+/>
+<PropsCard
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing the tab."}
+  defaultValue="false"
 />
 <PropsCard
   name="index"

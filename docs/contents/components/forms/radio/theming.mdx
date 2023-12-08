@@ -38,17 +38,16 @@ export const Radio: ComponentMultiStyle = {
           content: `""`,
           display: "inline-block",
           rounded: "full",
-          bg: [`${c}.500`, `${c}.200`],
+          bg: [`${c}.500`, `${c}.600`],
         },
         _hover: {
           _before: {
-            bg: [`${c}.600`, `${c}.300`],
+            bg: [`${c}.600`, `${c}.700`],
           },
         },
         _disabled: {
-          borderColor: ["gray.200", "transparent"],
           _before: {
-            bg: "gray.200",
+            bg: ["blackAlpha.400", "whiteAlpha.300"],
           },
           _dark: {
             _before: {
@@ -58,14 +57,16 @@ export const Radio: ComponentMultiStyle = {
         },
       },
       _disabled: {
-        bg: ["gray.100", "whiteAlpha.100"],
-        borderColor: ["gray.100", "transparent"],
+        bg: ["blackAlpha.200", "whiteAlpha.100"],
       },
       _focusVisible: {
         boxShadow: "outline",
       },
       _invalid: {
-        borderColor: ["red.500", "red.300"],
+        borderColor: ["danger.500", "danger.400"],
+        _focusVisible: {
+          borderColor: ["inherit", "inherit"],
+        },
       },
     }),
     label: {

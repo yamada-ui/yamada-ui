@@ -19,7 +19,7 @@ export const Avatar: ComponentMultiStyle = {
   baseStyle: {
     group: {},
     container: ({ theme: t, colorMode: m, name: string }) => {
-      const bg = string ? randomColor({ string }) : "gray.400"
+      const bg = string ? randomColor({ string }) : "blackAlpha.600"
 
       return {
         bg,
@@ -32,7 +32,7 @@ export const Avatar: ComponentMultiStyle = {
     name: {},
     excess: {
       borderColor: ["white", "black"],
-      bg: ["gray.200", "whiteAlpha.400"],
+      bg: ["blackAlpha.200", "whiteAlpha.200"],
     },
     badge: {
       rounded: "full",

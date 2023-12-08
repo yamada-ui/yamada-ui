@@ -19,7 +19,7 @@ export const SegmentedControl: ComponentMultiStyle = {
   baseStyle: {
     container: {
       p: "1",
-      bg: [`gray.200`, `whiteAlpha.200`],
+      bg: ["blackAlpha.50", "whiteAlpha.50"],
       _readOnly: { cursor: "auto" },
       _disabled: { cursor: "not-allowed" },
     },
@@ -30,9 +30,16 @@ export const SegmentedControl: ComponentMultiStyle = {
     },
     button: {
       transitionProperty: "common",
-      transitionDuration: "slower",
-      fontWeight: "semibold",
+      transitionDuration: "ultra-slow",
+      fontWeight: "medium",
       whiteSpace: "nowrap",
+      color: ["blackAlpha.800", "whiteAlpha.800"],
+      _hover: {
+        opacity: 0.7,
+        _checked: {
+          opacity: 1,
+        },
+      },
       _focusVisible: {
         boxShadow: "outline",
       },
@@ -42,51 +49,39 @@ export const SegmentedControl: ComponentMultiStyle = {
   },
 
   variants: {
-    basic: ({ theme: t, colorMode: m, colorScheme: c }) => ({
+    basic: ({ colorScheme: c = "gray" }) => ({
       container: {
         rounded: "lg",
       },
       active: {
-        bg: isUndefined(c)
-          ? ["whiteAlpha.700", "whiteAlpha.100"]
-          : [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
+        bg: isGray(c)
+          ? [`whiteAlpha.700`, `${c}.700`]
+          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+        color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "md",
       },
       button: {
         rounded: "md",
-        color: ["blackAlpha.700", "whiteAlpha.700"],
-        _hover: {
-          color: [`blackAlpha.800`, `whiteAlpha.800`],
-        },
         _checked: {
-          color: [
-            isUndefined(c) ? `blackAlpha.800` : `white`,
-            `whiteAlpha.800`,
-          ],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
       },
     }),
-    rounded: ({ theme: t, colorMode: m, colorScheme: c }) => ({
+    rounded: ({ colorScheme: c = "gray" }) => ({
       container: {
         rounded: "full",
       },
       active: {
-        bg: isUndefined(c)
-          ? ["whiteAlpha.700", "whiteAlpha.100"]
-          : [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
+        bg: isGray(c)
+          ? [`whiteAlpha.700`, `${c}.700`]
+          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+        color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "full",
       },
       button: {
         rounded: "full",
-        color: ["blackAlpha.700", "whiteAlpha.700"],
-        _hover: {
-          color: [`blackAlpha.800`, `whiteAlpha.800`],
-        },
         _checked: {
-          color: [
-            isUndefined(c) ? `blackAlpha.800` : `white`,
-            `whiteAlpha.800`,
-          ],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
       },
     }),

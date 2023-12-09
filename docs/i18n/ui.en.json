@@ -62,7 +62,8 @@
       "required": "required",
       "description": "Description",
       "type": "Type",
-      "default": "Default"
+      "default": "Default",
+      "docs": "Docs"
     },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"

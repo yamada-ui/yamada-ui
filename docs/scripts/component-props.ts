@@ -25,6 +25,7 @@ type Props = {
   required?: boolean
   description?: string
   defaultValue?: string
+  see?: string
 }
 
 const SOURCE_PATH = path.join("packages", "components")
@@ -190,7 +191,7 @@ const generateContent = async ({
     content.push(`\n### ${title} Props\n`)
 
     Object.entries(props).map(
-      async ([name, { type, required, description, defaultValue }]) => {
+      async ([name, { type, required, description, defaultValue, see }]) => {
         if (typeof type === "string") {
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }
@@ -207,6 +208,7 @@ const generateContent = async ({
           props.push(`description={"${description}"}`)
         if (defaultValue !== undefined)
           props.push(`defaultValue="${defaultValue}"`)
+        if (see !== undefined) props.push(`docs="${see}"`)
 
         content.push(`<PropsCard ${props.join("\n")} />`)
       },

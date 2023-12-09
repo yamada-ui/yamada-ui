@@ -62,7 +62,8 @@
       "required": "必須",
       "description": "説明",
       "type": "タイプ",
-      "default": "デフォルト"
+      "default": "デフォルト",
+      "docs": "ドキュメント"
     },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"

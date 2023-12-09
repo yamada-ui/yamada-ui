@@ -1,5 +1,13 @@
 # @yamada-ui/theme
 
+## 0.13.1
+
+### Patch Changes
+
+- [`00570fa`](https://github.com/hirotomoyamada/yamada-ui/commit/00570faf38843ff2786f3750594d32fae86edadc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `FormControl` type.
+
+- [`1cbbef3`](https://github.com/hirotomoyamada/yamada-ui/commit/1cbbef31657f9aff7a46d960ff4d47246d2ba453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `inline` shadow token.
+
 ## 0.13.0
 
 ### Minor Changes

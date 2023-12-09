@@ -1,5 +1,13 @@
 # @yamada-ui/cli
 
+## 0.8.1
+
+### Patch Changes
+
+- [`425f1b0`](https://github.com/hirotomoyamada/yamada-ui/commit/425f1b02d4dfa2d63b5baad56e26e07ab1fdfb35) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Compatible with `pnpm`.
+
+- [`161a66b`](https://github.com/hirotomoyamada/yamada-ui/commit/161a66bd5b48bbd0739fe5e28e1ecd92be0800b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added tone coefficient options to colors cmd.
+
 ## 0.8.0
 
 ### Minor Changes

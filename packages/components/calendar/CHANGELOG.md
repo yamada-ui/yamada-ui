@@ -1,5 +1,13 @@
 # @yamada-ui/calendar
 
+## 0.6.13
+
+### Patch Changes
+
+- [`d2d3643`](https://github.com/hirotomoyamada/yamada-ui/commit/d2d3643893dc1fd43d88ae26cb28a7057ee936e1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Optimized useMonthPicker hook.
+
+- [`86c4d13`](https://github.com/hirotomoyamada/yamada-ui/commit/86c4d139bfbda9af2ffadfccc8543f37341b2187) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary export types.
+
 ## 0.6.12
 
 ### Patch Changes

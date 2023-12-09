@@ -1,110 +1,21 @@
 {
   "Calendar": {
+    "amountOfMonths": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The number of months to display."
+    },
     "colorScheme": {
       "defaultValue": "primary",
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
-    "defaultMonth": {
-      "type": "Date",
-      "defaultValue": "'new Date()'",
+    "controlProps": {
+      "type": "IconButtonProps",
       "required": false,
-      "description": "The initial month of the calendar."
-    },
-    "defaultValue": {
-      "type": "Date",
-      "required": false,
-      "description": "The initial value of the calendar."
-    },
-    "locale": {
-      "type": "string",
-      "defaultValue": "'en'",
-      "required": false,
-      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
-      "see": "https://day.js.org/docs/en/i18n/instance-locale"
-    },
-    "maxDate": {
-      "type": "Date",
-      "required": false,
-      "description": "The maximum possible date."
-    },
-    "minDate": {
-      "type": "Date",
-      "required": false,
-      "description": "The minimum possible date."
-    },
-    "month": {
-      "type": "Date",
-      "required": false,
-      "description": "The month of the calendar."
-    },
-    "monthFormat": {
-      "type": "string",
-      "defaultValue": "'MM'",
-      "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
-      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
-    },
-    "onChange": {
-      "type": "(value: Date | undefined) => void",
-      "required": false,
-      "description": "The callback invoked when value state changes."
-    },
-    "onChangeMonth": {
-      "type": "(value: Date) => void",
-      "required": false,
-      "description": "The callback invoked when month state changes."
-    },
-    "size": {
-      "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the Calendar."
-    },
-    "value": {
-      "type": "Date",
-      "required": false,
-      "description": "The value of the calendar."
-    },
-    "variant": {
-      "defaultValue": "solid",
-      "type": "\"solid\" | \"subtle\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Calendar."
-    },
-    "withControls": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display the calendar control buttons."
-    },
-    "withHeader": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display the calendar header."
-    },
-    "withLabel": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display the calendar label button."
-    },
-    "yearFormat": {
-      "type": "string",
-      "defaultValue": "'YYYY'",
-      "required": false,
-      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
-      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
-    }
-  },
-  "UseCalendar": {
-    "amountOfMonths": {
-      "type": "number",
-      "defaultValue": "1",
-      "required": false,
-      "description": "The number of months to display."
+      "description": "Props for calendar control button element."
     },
     "dateFormat": {
       "type": "string",
@@ -113,6 +24,11 @@
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
+    "dayProps": {
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "required": false,
+      "description": "Props for calendar day button element."
+    },
     "defaultMonth": {
       "type": "Date",
       "defaultValue": "'new Date()'",
@@ -120,7 +36,7 @@
       "description": "The initial month of the calendar."
     },
     "defaultType": {
-      "type": "\"year\" | \"month\" | \"date\"",
+      "type": "\"date\" | \"month\" | \"year\"",
       "required": false,
       "description": "The initial type of the calendar."
     },
@@ -145,10 +61,20 @@
       "required": false,
       "description": "Define the first day of the week."
     },
+    "headerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for calendar header element."
+    },
     "holidays": {
       "type": "Date[]",
       "required": false,
       "description": "Define holidays."
+    },
+    "labelProps": {
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "required": false,
+      "description": "Props for calendar label button element."
     },
     "locale": {
       "type": "string",
@@ -184,6 +110,16 @@
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
+    "monthProps": {
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "required": false,
+      "description": "Props for calendar month button element."
+    },
+    "nextProps": {
+      "type": "IconButtonProps",
+      "required": false,
+      "description": "Props for calendar next control button element."
+    },
     "nextRef": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void | undefined) | null) => void)\n  | MutableRefObject<(() => void | undefined) | null>",
       "required": false,
@@ -200,7 +136,7 @@
       "description": "The callback invoked when month state changes."
     },
     "onChangeType": {
-      "type": "(\n  type: \"year\" | \"month\" | \"date\",\n  year?: number | undefined,\n  month?: number | undefined,\n) => void",
+      "type": "(\n  type: \"date\" | \"month\" | \"year\",\n  year?: number | undefined,\n  month?: number | undefined,\n) => void",
       "required": false,
       "description": "The callback invoked when type state changes."
     },
@@ -210,12 +146,28 @@
       "required": false,
       "description": "The number of months to paginate."
     },
+    "prevProps": {
+      "type": "IconButtonProps",
+      "required": false,
+      "description": "Props for calendar previous control button element."
+    },
     "prevRef": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void | undefined) | null) => void)\n  | MutableRefObject<(() => void | undefined) | null>",
       "required": false,
       "description": "Ref to a previous function."
     },
-    "selectMonthWith": { "type": "\"month\" | \"value\"", "required": false },
+    "selectMonthWith": { "type": "\"value\" | \"month\"", "required": false },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "description": "The size of the Calendar."
+    },
+    "tableProps": {
+      "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 20 more ... & { ...; }",
+      "required": false,
+      "description": "Props for calendar month table element."
+    },
     "today": {
       "type": "boolean",
       "defaultValue": false,
@@ -223,7 +175,7 @@
       "description": "If `true`, highlight today."
     },
     "type": {
-      "type": "\"year\" | \"month\" | \"date\"",
+      "type": "\"date\" | \"month\" | \"year\"",
       "required": false,
       "description": "The type of the calendar."
     },
@@ -237,12 +189,23 @@
       "required": false,
       "description": "The value of the calendar."
     },
+    "variant": {
+      "defaultValue": "solid",
+      "type": "\"solid\" | \"subtle\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Calendar."
+    },
     "weekdayFormat": {
       "type": "string",
       "defaultValue": "'dd'",
       "required": false,
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
+    },
+    "weekdayProps": {
+      "type": "Omit<PropsOf<\"div\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 20 more ... & { ...; }",
+      "required": false,
+      "description": "Props for calendar weekday element."
     },
     "weekendDays": {
       "type": "number[]",
@@ -280,20 +243,12 @@
       "required": false,
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
+    },
+    "yearProps": {
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "required": false,
+      "description": "Props for calendar year button element."
     }
-  },
-  "Weekday": {
-    "index": { "type": "number", "required": true },
-    "weekday": { "type": "string", "required": true }
-  },
-  "Day": {
-    "col": { "type": "number", "required": true },
-    "date": { "type": "Date", "required": true },
-    "isOutside": { "type": "boolean", "required": true },
-    "isSelected": { "type": "boolean", "required": true },
-    "isWeekend": { "type": "boolean", "required": true },
-    "row": { "type": "number", "required": true },
-    "weekday": { "type": "string", "required": true }
   },
   "DatePicker": {
     "allowInput": {
@@ -395,7 +350,7 @@
       "description": "The initial month of the calendar."
     },
     "defaultType": {
-      "type": "\"year\" | \"month\" | \"date\"",
+      "type": "\"date\" | \"month\" | \"year\"",
       "required": false,
       "description": "The initial type of the calendar."
     },
@@ -579,7 +534,7 @@
       "description": "The callback invoked when month state changes."
     },
     "onChangeType": {
-      "type": "(\n  type: \"year\" | \"month\" | \"date\",\n  year?: number | undefined,\n  month?: number | undefined,\n) => void",
+      "type": "(\n  type: \"date\" | \"month\" | \"year\",\n  year?: number | undefined,\n  month?: number | undefined,\n) => void",
       "required": false,
       "description": "The callback invoked when type state changes."
     },
@@ -622,7 +577,7 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
-    "selectMonthWith": { "type": "\"month\" | \"value\"", "required": false },
+    "selectMonthWith": { "type": "\"value\" | \"month\"", "required": false },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
@@ -642,7 +597,7 @@
       "description": "If `true`, highlight today."
     },
     "type": {
-      "type": "\"year\" | \"month\" | \"date\"",
+      "type": "\"date\" | \"month\" | \"year\"",
       "required": false,
       "description": "The type of the calendar."
     },
@@ -783,7 +738,7 @@
       "description": "The initial month of the calendar."
     },
     "defaultType": {
-      "type": "\"year\" | \"month\"",
+      "type": "\"month\" | \"year\"",
       "defaultValue": "'month'",
       "required": false,
       "description": "The initial type of the month picker."
@@ -942,7 +897,7 @@
       "description": "The callback invoked when month state changes."
     },
     "onChangeType": {
-      "type": "(type: \"year\" | \"month\") => void",
+      "type": "(type: \"month\" | \"year\") => void",
       "required": false,
       "description": "The callback invoked when type state changes."
     },
@@ -992,7 +947,7 @@
       "description": "The CSS positioning strategy to use."
     },
     "type": {
-      "type": "\"year\" | \"month\"",
+      "type": "\"month\" | \"year\"",
       "required": false,
       "description": "The type of the month picker."
     },

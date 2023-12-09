@@ -39,16 +39,50 @@
   },
   "Center": {},
   "Grid": {
-    "duration": {
-      "type": "string | number",
-      "defaultValue": "'1s'",
+    "area": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridArea> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
-      "description": "The CSS `dur` property."
+      "description": "The CSS `grid-area` property."
     },
-    "size": {
-      "type": "UIValue<number | \"small\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | ... 14 more ... | \"9xl\">",
+    "autoColumns": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ResponsiveObject<GridAutoColumns<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
-      "description": "The CSS `font-size` property."
+      "description": "The CSS `grid-auto-columns` property."
+    },
+    "autoFlow": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | ResponsiveObject<GridAutoFlow> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-auto-flow` property."
+    },
+    "autoRows": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ResponsiveObject<GridAutoRows<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-auto-rows` property."
+    },
+    "column": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridColumn> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-column` property."
+    },
+    "row": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridRow> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-row` property."
+    },
+    "templateAreas": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | ResponsiveObject<GridTemplateAreas> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-template-areas` property."
+    },
+    "templateColumns": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | ResponsiveObject<GridTemplateColumns<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIVa...",
+      "required": false,
+      "description": "The CSS `grid-template-columns` property."
+    },
+    "templateRows": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | ResponsiveObject<GridTemplateRows<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "required": false,
+      "description": "The CSS `grid-template-rows` property."
     }
   },
   "GridItem": {

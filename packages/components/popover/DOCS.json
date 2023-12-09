@@ -192,7 +192,7 @@
     "aria-colspan": { "type": "number", "required": false },
     "aria-controls": { "type": "string", "required": false },
     "aria-current": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"time\"\n  | \"true\"\n  | \"false\"\n  | \"page\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"time\"\n  | \"page\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
       "required": false
     },
     "aria-describedby": { "type": "string", "required": false },

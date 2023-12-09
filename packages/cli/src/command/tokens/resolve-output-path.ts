@@ -1,8 +1,5 @@
-import fs from "fs"
 import path from "path"
-import { promisify } from "util"
-
-const exists = promisify(fs.exists)
+import { glob } from "glob"
 
 export const themePath = [
   "node_modules",
@@ -13,28 +10,26 @@ export const themePath = [
 ]
 
 const resolveThemePath = async (): Promise<string | undefined> => {
-  const basePath = path.join("..", "..", "..")
-  const rootPath = process.cwd()
-
   const paths = [
-    path.resolve(basePath, "..", ...themePath),
-    path.resolve(basePath, "..", "..", ...themePath),
-    path.resolve(rootPath, ...themePath),
-    path.resolve(rootPath, "..", ...themePath),
-    path.resolve(rootPath, "..", "..", ...themePath),
+    path.join("node_modules", ".pnpm", "@yamada-ui+core@*", ...themePath),
+    path.join(...themePath),
   ]
 
   const triedPaths = await Promise.all(
     paths.map(async (possiblePath) => {
-      const isExist = await exists(possiblePath)
+      const paths = await glob(possiblePath)
 
-      if (isExist) return possiblePath
+      if (paths.length) return paths[0]
 
       return ""
     }),
   )
 
-  return triedPaths.find(Boolean)
+  const resolvedPath = triedPaths.find(Boolean)
+
+  if (!resolvedPath) return
+
+  return path.resolve(process.cwd(), resolvedPath)
 }
 
 export const resolveOutputPath = async (outPath?: string): Promise<string> => {

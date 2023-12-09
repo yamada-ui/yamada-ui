@@ -1,13 +1,10 @@
-import { writeFile } from "fs"
+import { writeFile } from "fs/promises"
 import path from "path"
-import { promisify } from "util"
 import { bundleNRequire } from "bundle-n-require"
 import chokidar from "chokidar"
 import ora from "ora"
 import { createThemeTypings } from "./create-theme-typings"
 import { resolveOutputPath, themePath } from "./resolve-output-path"
-
-const writeFileAsync = promisify(writeFile)
 
 const generateThemeTypings = async ({
   theme,
@@ -28,7 +25,7 @@ const generateThemeTypings = async ({
     spinner.info()
     spinner.text = `Write file "${outPath}"...`
 
-    await writeFileAsync(outPath, generatedTheme, "utf8")
+    await writeFile(outPath, generatedTheme, "utf8")
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

@@ -1,4 +1,5 @@
-import { Options, format, resolveConfig } from "prettier"
+import type { Options } from "prettier"
+import { format, resolveConfig } from "prettier"
 
 export const prettier = async (content: string, options?: Options) => {
   const prettierConfig = await resolveConfig(process.cwd())

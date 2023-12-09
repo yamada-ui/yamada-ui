@@ -1,4 +1,4 @@
-import { Dict } from "./assertion"
+import type { Dict } from "./assertion"
 
 export const omitObject = <T extends Dict, K extends keyof T>(
   obj: T,

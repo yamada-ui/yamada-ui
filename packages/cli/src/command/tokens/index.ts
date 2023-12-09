@@ -1,11 +1,11 @@
 import { writeFile } from "fs"
+import path from "path"
 import { promisify } from "util"
-import ora from "ora"
-import { resolveOutputPath, themePath } from "./resolve-output-path"
-import { createThemeTypings } from "./create-theme-typings"
-import * as path from "path"
 import { bundleNRequire } from "bundle-n-require"
 import chokidar from "chokidar"
+import ora from "ora"
+import { createThemeTypings } from "./create-theme-typings"
+import { resolveOutputPath, themePath } from "./resolve-output-path"
 
 const writeFileAsync = promisify(writeFile)
 

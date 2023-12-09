@@ -1,8 +1,8 @@
 import * as path from "path"
 import { program } from "commander"
+import { actionColors } from "./command/colors"
 import { actionTokens, themePath } from "./command/tokens"
 import { initCLI } from "./utils"
-import { actionColors } from "./command/colors"
 
 export const run = async () => {
   await initCLI()

@@ -1,8 +1,8 @@
 import checkNode from "cli-check-node"
 import unhandledError from "cli-handle-unhandled"
 import welcome from "cli-welcome"
-import JSON from "../../package.json"
 import updateNotifier from "update-notifier"
+import JSON from "../../package.json"
 
 export const initCLI = async () => {
   checkNode("12")

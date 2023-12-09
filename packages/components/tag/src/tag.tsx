@@ -17,7 +17,7 @@ import type {
 } from "react"
 import { useRef } from "react"
 
-type TagnOptions = {
+type TagOptions = {
   /**
    * Icon to be displayed to the left of the tag.
    */
@@ -38,7 +38,7 @@ type TagnOptions = {
   isDisabled?: boolean
 }
 
-export type TagProps = HTMLUIProps<"span"> & ThemeProps<"Tag"> & TagnOptions
+export type TagProps = HTMLUIProps<"span"> & ThemeProps<"Tag"> & TagOptions
 
 export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Tag", props)

@@ -33,11 +33,11 @@ The order is as follows, and the values of the same property will be overwritten
 `Color Scheme` and `Color Mode` are values that supplement modifier styles and are not styles themselves.
 :::
 
-## Single-Part and Multi-Part Components
+## Single part and multi part components
 
 Yamada UI components are either **single-part components** (`Button`, `Link`, etc.) or **multi-part components** (`Tab`, `Menu`, etc.).
 
-### Single-Part Components
+### Single part components
 
 Single-part components consist of a single element. For example, the `Button` component renders the HTML element `button`.
 
@@ -49,7 +49,7 @@ Single-part components consist of a single element. For example, the `Button` co
 Some components may appear to be **single-part components** but internally switch elements based on conditions, making them **multi-part components**. Examples include `Tag`, `Checkbox`, `Radio`, etc.
 :::
 
-### Multi-Part Components
+### Multi part components
 
 Multi-part components consist of multiple elements. Child elements are dependent on the parent element. For example, the `List` component is composed of `ListItem` and `ListIcon`.
 
@@ -63,7 +63,7 @@ Multi-part components consist of multiple elements. Child elements are dependent
 </List>
 ```
 
-### Styling Single-Part Components
+### Styling Single part components
 
 :::note status=warning
 Before styling, please check [Theme Operations](/styled-system/theming/customize-theme#theme-operations) and [Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles).
@@ -204,7 +204,7 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["components"] })
 ```
 
-### Styling Multi-Part Components
+### Styling Multi part components
 
 :::note status=warning
 Before styling, please check [Theme Operations](/styled-system/theming/customize-theme#theme-operations) and [Changing Component Styles](/styled-system/theming/customize-theme#changing-component-styles).

@@ -22,6 +22,7 @@
     "dev": "turbo run dev --filter=!./examples/*",
     "test": "jest",
     "typecheck": "tsc --noEmit",
+    "csscheck": "tsx scripts/check-css",
     "storybook": "storybook dev -p 6006",
     "prebuild": "pnpm --prefix packages/cli build && pnpm gen:tokens",
     "build": "turbo run build --filter=!./examples/*",

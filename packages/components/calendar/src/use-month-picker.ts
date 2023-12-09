@@ -1,10 +1,10 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { layoutStylesProperties, useTheme } from "@yamada-ui/core"
-import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
@@ -238,8 +238,6 @@ export const useMonthPicker = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const onOpen = useCallback(() => {
-    console.trace("run")
-
     if (formControlProps.disabled || formControlProps.readOnly) return
 
     setIsOpen(true)

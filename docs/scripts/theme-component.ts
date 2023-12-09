@@ -41,7 +41,7 @@ const LOCALE_DESC_MAP = {
         isMulti ? "multi" : "single"
       } part component](/styled-system/theming/component-style#${
         isMulti ? "multi" : "single"
-      }-part-component).`,
+      }-part-components).`,
     ]
 
     if (baseComponents) {

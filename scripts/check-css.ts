@@ -56,7 +56,7 @@ const getCSSProperties = (doc: Document) => {
 const getCSSTypes = async () => {
   const typeInfo: Record<string, string> = {}
 
-  const paths = await glob("**/*/csstype/index.d.ts")
+  const paths = await glob("node_modules/**/csstype/index.d.ts")
 
   const path = paths[0]
 

@@ -15,7 +15,7 @@
     "prepare": "husky install",
     "postinstall": "cd packages/cli && pnpm build",
     "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log",
-    "lint": "eslint packages/**/**/src scripts/**/** --ext .ts,.tsx --config .eslintrc --cache",
+    "lint": "eslint packages/**/**/src scripts/**/** --ext .ts,.tsx --max-warnings 0 --config .eslintrc --cache",
     "format:check": "prettier --check packages/**/**/src stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",
     "format": "prettier --write .",

@@ -37,19 +37,28 @@
         }
       }
     ],
+    "no-var": "error",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "off",
     "react/no-unescaped-entities": "off",
-    "@typescript-eslint/no-unused-vars": "error",
-    "unused-imports/no-unused-imports": "error",
     "react/jsx-curly-brace-presence": "error",
-    "@typescript-eslint/consistent-type-imports": "error"
+    "react/jsx-no-leaked-render": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "unused-imports/no-unused-imports": "error"
   },
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
       "parserOptions": {
         "project": ["tsconfig.json"]
+      }
+    },
+    {
+      "files": ["scripts/**/*.ts", "packages/cli/**/*.ts"],
+      "rules": {
+        "no-console": "off"
       }
     }
   ]

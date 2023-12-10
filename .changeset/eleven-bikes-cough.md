@@ -1,5 +1,4 @@
 ---
-"@yamada-ui/autocomplete": minor
 "@yamada-ui/calendar": minor
 ---
 

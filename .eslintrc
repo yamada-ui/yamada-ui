@@ -56,7 +56,7 @@
       }
     },
     {
-      "files": ["scripts/**/*.ts", "packages/cli/**/*.ts"],
+      "files": ["scripts/**/*", "packages/cli/**/*", "stories/**/*"],
       "rules": {
         "no-console": "off"
       }

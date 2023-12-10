@@ -23,7 +23,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
   const resolvedHeaderGroups = useMemo(
     () =>
       headerGroups.map((header) => {
-        const uppperHeaderGroups = headerGroups.filter(
+        const upperHeaderGroups = headerGroups.filter(
           ({ depth }) => depth < header.depth,
         )
         const lowerHeaderGroups = headerGroups.filter(
@@ -31,7 +31,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
         )
 
         header.headers = header.headers.filter((header) => {
-          return uppperHeaderGroups.every(({ headers }) =>
+          return upperHeaderGroups.every(({ headers }) =>
             headers.every(({ column }) => column.id !== header.column.id),
           )
         })
@@ -74,6 +74,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                 sx,
                 style,
                 css,
+                className,
                 colSpan: customColSpan,
                 rowSpan: customRowSpan,
               } = columnDef as Column<unknown>
@@ -96,6 +97,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                 <Th
                   key={id}
                   {...props}
+                  className={className}
                   sx={sx}
                   style={{ ...props.style, ...style }}
                   __css={{

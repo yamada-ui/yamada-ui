@@ -275,7 +275,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
     /**
-     * The callback invoked when autocomlete option created.
+     * The callback invoked when autocomplete option created.
      */
     onCreate?: (newItem: AutocompleteItem, newItems: AutocompleteItem[]) => void
     /**

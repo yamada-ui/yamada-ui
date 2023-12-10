@@ -117,7 +117,12 @@ export type UseRangeSliderProps = FormControlOptions & {
   onChange?: (value: [number, number]) => void
 }
 
-export const useRangeSlider = (props: UseRangeSliderProps) => {
+export const useRangeSlider = ({
+  focusThumbOnChange = true,
+  ...props
+}: UseRangeSliderProps) => {
+  props.isReadOnly ??= !focusThumbOnChange
+
   let {
     id,
     name,
@@ -127,7 +132,6 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
     defaultValue,
     orientation = "horizontal",
     isReversed,
-    focusThumbOnChange = true,
     betweenThumbs = 0,
     required,
     disabled,
@@ -563,9 +567,11 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
         ...props,
         ref,
         id: getThumbId(i),
-        tabIndex: isInteractive ? 0 : undefined,
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         role: "slider",
-        "data-active": dataAttr(isDragging && activeIndex === i),
+        "data-active": dataAttr(
+          isDragging && focusThumbOnChange && activeIndex === i,
+        ),
         "aria-orientation": orientation,
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
         onFocus: handlerAll(props.onFocus, rest.onFocus, () => {
@@ -580,6 +586,7 @@ export const useRangeSlider = (props: UseRangeSliderProps) => {
       }
     },
     [
+      focusThumbOnChange,
       activeIndex,
       getThumbId,
       isDragging,

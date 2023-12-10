@@ -5655,29 +5655,29 @@
     "hierarchy": { "lv1": "Link", "lv2": "Usage", "lv3": "External Links" }
   },
   {
-    "title": "Linkbox",
+    "title": "LinkBox",
     "type": "page",
-    "description": "`Linkbox` is a component that allows elements such as articles or cards to function as a single link.",
-    "slug": "/components/navigation/linkbox",
-    "hierarchy": { "lv1": "Linkbox" }
+    "description": "`LinkBox` is a component that allows elements such as articles or cards to function as a single link.",
+    "slug": "/components/navigation/link-box",
+    "hierarchy": { "lv1": "LinkBox" }
   },
   {
     "title": "Import",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#import",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "Import" }
+    "slug": "/components/navigation/link-box#import",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#usage",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "Usage" }
+    "slug": "/components/navigation/link-box#usage",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "Usage" }
   },
   {
     "title": "Nested Links",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#nested-links",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "Usage", "lv3": "Nested Links" }
+    "slug": "/components/navigation/link-box#nested-links",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "Usage", "lv3": "Nested Links" }
   },
   {
     "title": "Pagination",
@@ -6714,30 +6714,30 @@
     }
   },
   {
-    "title": "SlideFide",
+    "title": "SlideFade",
     "type": "page",
-    "description": "`SlideFide` is a component that gradually shows or hides an element while moving it from a specified position.",
-    "slug": "/components/transitions/slide-fide",
-    "hierarchy": { "lv1": "SlideFide" }
+    "description": "`SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.",
+    "slug": "/components/transitions/slide-fade",
+    "hierarchy": { "lv1": "SlideFade" }
   },
   {
     "title": "Import",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#import",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "Import" }
+    "slug": "/components/transitions/slide-fade#import",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#usage",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "Usage" }
+    "slug": "/components/transitions/slide-fade#usage",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "Usage" }
   },
   {
     "title": "Change the Duration",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#change-the-duration",
+    "slug": "/components/transitions/slide-fade#change-the-duration",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "Usage",
       "lv3": "Change the Duration"
     }
@@ -6745,9 +6745,9 @@
   {
     "title": "Change the Position",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#change-the-position",
+    "slug": "/components/transitions/slide-fade#change-the-position",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "Usage",
       "lv3": "Change the Position"
     }
@@ -6755,9 +6755,9 @@
   {
     "title": "Unmount on Exit",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#unmount-on-exit",
+    "slug": "/components/transitions/slide-fade#unmount-on-exit",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "Usage",
       "lv3": "Unmount on Exit"
     }
@@ -6792,19 +6792,6 @@
     "type": "fragment",
     "slug": "/components/typography/heading#add-a-gradient",
     "hierarchy": { "lv1": "Heading", "lv2": "Usage", "lv3": "Add a gradient" }
-  },
-  {
-    "title": "Heading",
-    "type": "page",
-    "description": "`Heading` is a component that represents section headings. By default, it renders an `h1` element.",
-    "slug": "/components/typography/heading/theming",
-    "hierarchy": { "lv1": "Heading" }
-  },
-  {
-    "title": "Theming",
-    "type": "fragment",
-    "slug": "/components/typography/heading/theming#theming",
-    "hierarchy": { "lv1": "Heading", "lv2": "Theming" }
   },
   {
     "title": "Highlight",
@@ -6939,24 +6926,24 @@
     "hierarchy": { "lv1": "Figma" }
   },
   {
-    "title": "Learning Applications",
+    "title": "Learn the Advanced",
     "type": "page",
     "description": "Learn the applications of themes, styles, responsive, dark mode, and animations of Yamada UI.",
     "slug": "/getting-started/advanced",
-    "hierarchy": { "lv1": "Learning Applications" }
+    "hierarchy": { "lv1": "Learn the Advanced" }
   },
   {
     "title": "Applying Themes",
     "type": "fragment",
     "slug": "/getting-started/advanced#applying-themes",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Themes" }
+    "hierarchy": { "lv1": "Learn the Advanced", "lv2": "Applying Themes" }
   },
   {
     "title": "Using withDefaultColorScheme",
     "type": "fragment",
     "slug": "/getting-started/advanced#using-withdefaultcolorscheme",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Applying Themes",
       "lv3": "Using withDefaultColorScheme"
     }
@@ -6966,7 +6953,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usetoken",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Applying Themes",
       "lv3": "Using useToken"
     }
@@ -6975,14 +6962,14 @@
     "title": "Applying Styles",
     "type": "fragment",
     "slug": "/getting-started/advanced#applying-styles",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Applying Styles" }
+    "hierarchy": { "lv1": "Learn the Advanced", "lv2": "Applying Styles" }
   },
   {
     "title": "About as",
     "type": "fragment",
     "slug": "/getting-started/advanced#about-as",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Applying Styles",
       "lv3": "About as"
     }
@@ -6992,7 +6979,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#about-sx-and-css",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Applying Styles",
       "lv3": "About sx and css"
     }
@@ -7002,7 +6989,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#about-order",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Applying Styles",
       "lv3": "About Order"
     }
@@ -7012,7 +6999,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#application-of-responsive",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Responsive"
     }
   },
@@ -7021,7 +7008,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usebreakpoint",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Responsive",
       "lv3": "Using useBreakpoint"
     }
@@ -7031,7 +7018,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usebreakpointvalue",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Responsive",
       "lv3": "Using useBreakpointValue"
     }
@@ -7041,7 +7028,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#application-of-color-mode",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Color Mode"
     }
   },
@@ -7050,7 +7037,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usecolormode",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Color Mode",
       "lv3": "Using useColorMode"
     }
@@ -7060,7 +7047,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#using-usecolormodevalue",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Color Mode",
       "lv3": "Using useColorModeValue"
     }
@@ -7070,7 +7057,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#application-of-animation",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Animation"
     }
   },
@@ -7079,7 +7066,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#using-multiple-animations-with-useanimation",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Animation",
       "lv3": "Using Multiple Animations with useAnimation"
     }
@@ -7089,7 +7076,7 @@
     "type": "fragment",
     "slug": "/getting-started/advanced#usage-of-usedynamicanimation",
     "hierarchy": {
-      "lv1": "Learning Applications",
+      "lv1": "Learn the Advanced",
       "lv2": "Application of Animation",
       "lv3": "Usage of useDynamicAnimation"
     }
@@ -7098,13 +7085,13 @@
     "title": "Congratulations!",
     "type": "fragment",
     "slug": "/getting-started/advanced#congratulations",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Congratulations!" }
+    "hierarchy": { "lv1": "Learn the Advanced", "lv2": "Congratulations!" }
   },
   {
     "title": "Learn More",
     "type": "fragment",
     "slug": "/getting-started/advanced#learn-more",
-    "hierarchy": { "lv1": "Learning Applications", "lv2": "Learn More" }
+    "hierarchy": { "lv1": "Learn the Advanced", "lv2": "Learn More" }
   },
   {
     "title": "Learn the Basics",
@@ -8520,27 +8507,24 @@
     }
   },
   {
-    "title": "Customizing Config",
+    "title": "Customize Config",
     "type": "page",
     "description": "How to customize the default config of Yamada UI.",
     "slug": "/styled-system/configure/customize-config",
-    "hierarchy": { "lv1": "Customizing Config" }
+    "hierarchy": { "lv1": "Customize Config" }
   },
   {
     "title": "Changing the Color Mode",
     "type": "fragment",
     "slug": "/styled-system/configure/customize-config#changing-the-color-mode",
-    "hierarchy": {
-      "lv1": "Customizing Config",
-      "lv2": "Changing the Color Mode"
-    }
+    "hierarchy": { "lv1": "Customize Config", "lv2": "Changing the Color Mode" }
   },
   {
     "title": "Changing the Prefix of CSS Custom Properties",
     "type": "fragment",
     "slug": "/styled-system/configure/customize-config#changing-the-prefix-of-css-custom-properties",
     "hierarchy": {
-      "lv1": "Customizing Config",
+      "lv1": "Customize Config",
       "lv2": "Changing the Prefix of CSS Custom Properties"
     }
   },
@@ -8559,23 +8543,23 @@
     "hierarchy": { "lv1": "Config" }
   },
   {
-    "title": "Global Style",
+    "title": "Global Styles",
     "type": "page",
     "description": "How to customize and add global styles.",
     "slug": "/styled-system/global-styles",
-    "hierarchy": { "lv1": "Global Style" }
+    "hierarchy": { "lv1": "Global Styles" }
   },
   {
     "title": "Customize Global Styles",
     "type": "fragment",
     "slug": "/styled-system/global-styles#customize-global-styles",
-    "hierarchy": { "lv1": "Global Style", "lv2": "Customize Global Styles" }
+    "hierarchy": { "lv1": "Global Styles", "lv2": "Customize Global Styles" }
   },
   {
     "title": "Adding Global Styles",
     "type": "fragment",
     "slug": "/styled-system/global-styles#adding-global-styles",
-    "hierarchy": { "lv1": "Global Style", "lv2": "Adding Global Styles" }
+    "hierarchy": { "lv1": "Global Styles", "lv2": "Adding Global Styles" }
   },
   {
     "title": "Gradient",
@@ -8619,11 +8603,11 @@
     "hierarchy": { "lv1": "Gradient", "lv2": "Responsive Gradient" }
   },
   {
-    "title": "Style System",
+    "title": "Styled System",
     "type": "page",
     "description": "Learn about the Style props and themes of Yamada UI. Style props is a method to change the style of a component just by passing props to the component.",
     "slug": "/styled-system",
-    "hierarchy": { "lv1": "Style System" }
+    "hierarchy": { "lv1": "Styled System" }
   },
   {
     "title": "Loading",
@@ -9055,52 +9039,52 @@
     }
   },
   {
-    "title": "Single-Part and Multi-Part Components",
+    "title": "Single part and multi part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#single-part-and-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single-Part and Multi-Part Components"
+      "lv2": "Single part and multi part components"
     }
   },
   {
-    "title": "Single-Part Components",
+    "title": "Single part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#single-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single-Part and Multi-Part Components",
-      "lv3": "Single-Part Components"
+      "lv2": "Single part and multi part components",
+      "lv3": "Single part components"
     }
   },
   {
-    "title": "Multi-Part Components",
+    "title": "Multi part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single-Part and Multi-Part Components",
-      "lv3": "Multi-Part Components"
+      "lv2": "Single part and multi part components",
+      "lv3": "Multi part components"
     }
   },
   {
-    "title": "Styling Single-Part Components",
+    "title": "Styling Single part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#styling-single-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single-Part and Multi-Part Components",
-      "lv3": "Styling Single-Part Components"
+      "lv2": "Single part and multi part components",
+      "lv3": "Styling Single part components"
     }
   },
   {
-    "title": "Styling Multi-Part Components",
+    "title": "Styling Multi part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-style#styling-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single-Part and Multi-Part Components",
-      "lv3": "Styling Multi-Part Components"
+      "lv2": "Single part and multi part components",
+      "lv3": "Styling Multi part components"
     }
   },
   {
@@ -9113,45 +9097,42 @@
     }
   },
   {
-    "title": "Customizing the Theme",
+    "title": "Customize Theme",
     "type": "page",
     "description": "How to customize the default theme of Yamada UI.",
     "slug": "/styled-system/theming/customize-theme",
-    "hierarchy": { "lv1": "Customizing the Theme" }
+    "hierarchy": { "lv1": "Customize Theme" }
   },
   {
     "title": "Theme Usage",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#theme-usage",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Theme Usage" }
+    "hierarchy": { "lv1": "Customize Theme", "lv2": "Theme Usage" }
   },
   {
     "title": "Changing Tokens",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-tokens",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Tokens" }
+    "hierarchy": { "lv1": "Customize Theme", "lv2": "Changing Tokens" }
   },
   {
     "title": "Changing Semantic Tokens",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-semantic-tokens",
-    "hierarchy": {
-      "lv1": "Customizing the Theme",
-      "lv2": "Changing Semantic Tokens"
-    }
+    "hierarchy": { "lv1": "Customize Theme", "lv2": "Changing Semantic Tokens" }
   },
   {
     "title": "Changing Styles",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-styles",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Changing Styles" }
+    "hierarchy": { "lv1": "Customize Theme", "lv2": "Changing Styles" }
   },
   {
     "title": "Changing the Style of Components",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-the-style-of-components",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Changing the Style of Components"
     }
   },
@@ -9159,14 +9140,14 @@
     "title": "Utility",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#utility",
-    "hierarchy": { "lv1": "Customizing the Theme", "lv2": "Utility" }
+    "hierarchy": { "lv1": "Customize Theme", "lv2": "Utility" }
   },
   {
     "title": "Using extendTheme",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendtheme",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendTheme"
     }
@@ -9176,7 +9157,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#merging-multiple-themes",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendTheme",
       "lv4": "Merging multiple themes"
@@ -9187,7 +9168,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#not-inheriting-the-default-theme",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendTheme",
       "lv4": "Not inheriting the default theme"
@@ -9198,7 +9179,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#inheriting-from-the-default-theme-excluding-specific-tokens",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendTheme",
       "lv4": "Inheriting from the default theme excluding specific tokens"
@@ -9209,7 +9190,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#inheriting-only-specific-tokens-from-the-default-theme",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendTheme",
       "lv4": "Inheriting only specific tokens from the default theme"
@@ -9220,7 +9201,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendbasetheme",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendBaseTheme"
     }
@@ -9230,7 +9211,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendstyle",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendStyle"
     }
@@ -9240,7 +9221,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendtoken",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendToken"
     }
@@ -9250,7 +9231,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponent",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendComponent"
     }
@@ -9260,7 +9241,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentsize",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendComponentSize"
     }
@@ -9270,7 +9251,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentvariant",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendComponentVariant"
     }
@@ -9280,7 +9261,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-extendcomponentdefaultprops",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using extendComponentDefaultProps"
     }
@@ -9290,7 +9271,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#usage-of-withdefaultsize",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Usage of withDefaultSize"
     }
@@ -9300,7 +9281,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-withdefaultvariant",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using withDefaultVariant"
     }
@@ -9310,7 +9291,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#using-withdefaultcolorscheme",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Using withDefaultColorScheme"
     }
@@ -9320,7 +9301,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#usage-of-withdefaultprops",
     "hierarchy": {
-      "lv1": "Customizing the Theme",
+      "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Usage of withDefaultProps"
     }
@@ -9608,24 +9589,24 @@
     "hierarchy": { "lv1": "Theme" }
   },
   {
-    "title": "Switching Themes",
+    "title": "Switch Themes",
     "type": "page",
     "description": "How users can switch themes.",
     "slug": "/styled-system/theming/switch-theme",
-    "hierarchy": { "lv1": "Switching Themes" }
+    "hierarchy": { "lv1": "Switch Themes" }
   },
   {
     "title": "Setup",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#setup",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup" }
+    "hierarchy": { "lv1": "Switch Themes", "lv2": "Setup" }
   },
   {
     "title": "Preparing Multiple Themes",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#preparing-multiple-themes",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Setup",
       "lv3": "Preparing Multiple Themes"
     }
@@ -9635,7 +9616,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#adding-themeschemescript",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Setup",
       "lv3": "Adding ThemeSchemeScript"
     }
@@ -9645,7 +9626,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#in-the-case-of-create-react-app",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Setup",
       "lv3": "Adding ThemeSchemeScript",
       "lv4": "In the case of Create React App"
@@ -9656,7 +9637,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#in-the-case-of-nextjs",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Setup",
       "lv3": "Adding ThemeSchemeScript",
       "lv4": "In the case of Next.js"
@@ -9666,17 +9647,14 @@
     "title": "Adding themeSchemeManager",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#adding-themeschememanager",
-    "hierarchy": {
-      "lv1": "Switching Themes",
-      "lv2": "Adding themeSchemeManager"
-    }
+    "hierarchy": { "lv1": "Switch Themes", "lv2": "Adding themeSchemeManager" }
   },
   {
     "title": "Prepare getServerSideProps",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#prepare-getserversideprops",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
       "lv3": "Prepare getServerSideProps"
     }
@@ -9686,7 +9664,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#passing-cookiestoragessr",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
       "lv3": "Passing cookieStorageSSR"
     }
@@ -9696,7 +9674,7 @@
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#add-getserversideprops",
     "hierarchy": {
-      "lv1": "Switching Themes",
+      "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
       "lv3": "Add getServerSideProps"
     }
@@ -9705,7 +9683,7 @@
     "title": "Switching Themes",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-theme#switching-themes",
-    "hierarchy": { "lv1": "Switching Themes", "lv2": "Switching Themes" }
+    "hierarchy": { "lv1": "Switch Themes", "lv2": "Switching Themes" }
   },
   {
     "title": "ui",

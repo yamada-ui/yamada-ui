@@ -6250,30 +6250,30 @@
     "hierarchy": { "lv1": "Link", "lv2": "使い方", "lv3": "外部リンク" }
   },
   {
-    "title": "Linkbox",
+    "title": "LinkBox",
     "type": "page",
-    "description": "`Linkbox`は、記事やカードなどの要素を一つのリンクとして機能させるコンポーネントです。",
-    "slug": "/components/navigation/linkbox",
-    "hierarchy": { "lv1": "Linkbox" }
+    "description": "`LinkBox`は、記事やカードなどの要素を一つのリンクとして機能させるコンポーネントです。",
+    "slug": "/components/navigation/link-box",
+    "hierarchy": { "lv1": "LinkBox" }
   },
   {
     "title": "インポート",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#インポート",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "インポート" }
+    "slug": "/components/navigation/link-box#インポート",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#使い方",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "使い方" }
+    "slug": "/components/navigation/link-box#使い方",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "使い方" }
   },
   {
     "title": "ネストされたリンク",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#ネストされたリンク",
+    "slug": "/components/navigation/link-box#ネストされたリンク",
     "hierarchy": {
-      "lv1": "Linkbox",
+      "lv1": "LinkBox",
       "lv2": "使い方",
       "lv3": "ネストされたリンク"
     }
@@ -7365,30 +7365,30 @@
     }
   },
   {
-    "title": "SlideFide",
+    "title": "SlideFade",
     "type": "page",
-    "description": "`SlideFide`は、要素を指定位置から移動しながら次第に表示または非表示にするコンポーネントです。",
-    "slug": "/components/transitions/slide-fide",
-    "hierarchy": { "lv1": "SlideFide" }
+    "description": "`SlideFade`は、要素を指定位置から移動しながら次第に表示または非表示にするコンポーネントです。",
+    "slug": "/components/transitions/slide-fade",
+    "hierarchy": { "lv1": "SlideFade" }
   },
   {
     "title": "インポート",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#インポート",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "インポート" }
+    "slug": "/components/transitions/slide-fade#インポート",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#使い方",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "使い方" }
+    "slug": "/components/transitions/slide-fade#使い方",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "使い方" }
   },
   {
     "title": "所要時間を変更する",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#所要時間を変更する",
+    "slug": "/components/transitions/slide-fade#所要時間を変更する",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "使い方",
       "lv3": "所要時間を変更する"
     }
@@ -7396,9 +7396,9 @@
   {
     "title": "位置を変更する",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#位置を変更する",
+    "slug": "/components/transitions/slide-fade#位置を変更する",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "使い方",
       "lv3": "位置を変更する"
     }
@@ -7406,9 +7406,9 @@
   {
     "title": "非表示時にアンマウントする",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#非表示時にアンマウントする",
+    "slug": "/components/transitions/slide-fade#非表示時にアンマウントする",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "使い方",
       "lv3": "非表示時にアンマウントする"
     }
@@ -7451,19 +7451,6 @@
       "lv2": "使い方",
       "lv3": "グラデーションをつける"
     }
-  },
-  {
-    "title": "Heading",
-    "type": "page",
-    "description": "`Heading`は、セクションの見出しを表すコンポーネントです。デフォルトでは、`h1`要素をレンダリングします。",
-    "slug": "/components/typography/heading/theming",
-    "hierarchy": { "lv1": "Heading" }
-  },
-  {
-    "title": "テーマ",
-    "type": "fragment",
-    "slug": "/components/typography/heading/theming#テーマ",
-    "hierarchy": { "lv1": "Heading", "lv2": "テーマ" }
   },
   {
     "title": "Highlight",

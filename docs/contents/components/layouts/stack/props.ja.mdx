@@ -1,11 +1,37 @@
 ---
 title: Stack
-description: このページは現在作成中です。
+description: "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。"
 package_name: "@yamada-ui/layouts"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Stack Props
+
+<PropsCard
+  name="align"
+  type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `align-items` property."}
+/>
+<PropsCard
+  name="direction"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-direction` property."}
+/>
+<PropsCard
+  name="divider"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"If `true`, each stack item will show a divider."}
+/>
+<PropsCard
+  name="justify"
+  type='"center" | "right" | "left" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `justify-content` property."}
+/>
+<PropsCard
+  name="wrap"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap" | "wrap-reverse" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-wrap` property."}
+/>

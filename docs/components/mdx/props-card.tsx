@@ -8,6 +8,7 @@ import {
   Text,
 } from "@yamada-ui/react"
 import type { FC } from "react"
+import { Link } from "./link"
 import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts/i18n-context"
 
@@ -17,6 +18,7 @@ export type PropsCardProps = CardProps & {
   required?: boolean
   description?: string
   defaultValue?: string
+  docs?: string
 }
 
 export const PropsCard: FC<PropsCardProps> = ({
@@ -25,6 +27,7 @@ export const PropsCard: FC<PropsCardProps> = ({
   required,
   description,
   defaultValue,
+  docs,
 }) => {
   const { t } = useI18n()
 
@@ -54,7 +57,7 @@ export const PropsCard: FC<PropsCardProps> = ({
       <CardBody
         display="grid"
         gridTemplateColumns="auto 1fr"
-        pt="8"
+        pt="6"
         rowGap="4"
         columnGap="6"
       >
@@ -89,6 +92,18 @@ export const PropsCard: FC<PropsCardProps> = ({
             <Text as="code" apply="mdx.code">
               {defaultValue}
             </Text>
+          </>
+        ) : null}
+
+        {typeof docs !== "undefined" ? (
+          <>
+            <Text lineHeight="1.5rem" fontWeight="medium" fontSize="sm">
+              {t("component.props-card.docs")}
+            </Text>
+
+            <Link href={docs} isExternal>
+              {docs}
+            </Link>
           </>
         ) : null}
       </CardBody>

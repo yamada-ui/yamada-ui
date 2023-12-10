@@ -1,11 +1,59 @@
 ---
 title: ScaleFade
-description: This page is currently under construction.
+description: >-
+  `ScaleFade` is a component that gradually scales up to reveal or scales down
+  to hide an element.
 package_name: "@yamada-ui/transitions"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be absolutely wonderful!
+### ScaleFade Props
+
+<PropsCard
+  name="delay"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"Custom `delay` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"Custom `duration` definition for `enter` and `exit`."}
+/>
+<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+<PropsCard
+  name="isOpen"
+  type="boolean"
+  description={"Show the component. triggers when enter or exit states."}
+/>
+<PropsCard
+  name="reverse"
+  type="boolean"
+  description={"If `true`, the element will transition back to exit state."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="scale"
+  type="number"
+  description={"The initial scale of the element."}
+  defaultValue="0.95"
+/>
+<PropsCard
+  name="transition"
+  type='Partial<Record<"exit" | "enter", Transition>>'
+  description={"Custom `transition` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="transitionEnd"
+  type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
+  description={"Custom `transitionEnd` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="unmountOnExit"
+  type="boolean"
+  description={
+    "If `true`, the element will unmount when `isOpen={false}` and animation is done."
+  }
+/>

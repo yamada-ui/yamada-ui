@@ -1,11 +1,49 @@
 ---
 title: IconButton
-description: This page is currently being created.
+description: "`IconButton` is a component that displays an icon within a button."
 package_name: "@yamada-ui/button"
 with_description: true
 tab: Props
 ---
 
-We're currently in the process of creating a page.😘
+## Props
 
-Wouldn't you like to contribute this page? That's amazing!
+### IconButton Props
+
+<PropsCard
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="icon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to be used in the button."}
+/>
+<PropsCard
+  name="isActive"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the button is disabled."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isLoading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
+  defaultValue="false"
+/>
+<PropsCard
+  name="isRounded"
+  type="boolean"
+  description={
+    "If `true`, the button will be perfectly round. Else, it'll be slightly round."
+  }
+  defaultValue="false"
+/>

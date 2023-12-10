@@ -1,11 +1,63 @@
 ---
 title: Collapse
-description: このページは現在作成中です。
+description: "`Collapse`は、要素を展開または折りたたんで表示するコンポーネントです。"
 package_name: "@yamada-ui/transitions"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Collapse Props
+
+<PropsCard
+  name="animationOpacity"
+  type="boolean"
+  description={"If `true`, the opacity of the content will be animated."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="delay"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"Custom `delay` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"Custom `duration` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="endingHeight"
+  type="string | number"
+  description={"The height you want the content in its expanded state."}
+  defaultValue="auto"
+/>
+<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+<PropsCard
+  name="isOpen"
+  type="boolean"
+  description={"Show the component. triggers when enter or exit states."}
+/>
+<PropsCard
+  name="startingHeight"
+  type="string | number"
+  description={"The height you want the content in its collapsed state."}
+  defaultValue="0"
+/>
+<PropsCard
+  name="transition"
+  type='Partial<Record<"exit" | "enter", Transition>>'
+  description={"Custom `transition` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="transitionEnd"
+  type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
+  description={"Custom `transitionEnd` definition for `enter` and `exit`."}
+/>
+<PropsCard
+  name="unmountOnExit"
+  type="boolean"
+  description={
+    "If `true`, the element will unmount when `isOpen={false}` and animation is done."
+  }
+/>

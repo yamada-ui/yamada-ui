@@ -731,7 +731,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   )
 
   const onChange = useCallback(
-    (newValue: string) => {
+    (newValue: string, runRebirth: boolean = true) => {
       setValue((prev) => {
         if (!isArray(prev)) {
           return newValue as T
@@ -757,9 +757,17 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!allowFree || isHit) setInputValue("")
 
-      rebirthOptions(false)
+      if (isMulti && runRebirth) rebirthOptions(false)
     },
-    [allowFree, onChangeLabel, rebirthOptions, setValue, descendants, format],
+    [
+      allowFree,
+      isMulti,
+      onChangeLabel,
+      rebirthOptions,
+      setValue,
+      descendants,
+      format,
+    ],
   )
 
   const onSelect = useCallback(() => {
@@ -874,26 +882,6 @@ export const useAutocomplete = <T extends string | string[] = string>({
     isMulti,
   ])
 
-  const onDelete = useCallback(() => {
-    if (!isMulti) {
-      onChange("")
-    } else {
-      onChange(value[value.length - 1])
-    }
-  }, [isMulti, onChange, value])
-
-  const onClear = useCallback(
-    (ev: MouseEvent<HTMLDivElement>) => {
-      ev.stopPropagation()
-
-      setValue([] as unknown as T)
-      setLabel(undefined)
-      setInputValue("")
-      rebirthOptions()
-    },
-    [setLabel, setInputValue, setValue, rebirthOptions],
-  )
-
   const onClick = useCallback(() => {
     if (isOpen) {
       if (inputRef.current) inputRef.current.focus()
@@ -920,15 +908,37 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      if (allowFree && !!inputValue) {
-        onChange(inputValue)
-      } else {
-        setInputValue("")
-      }
+      if (allowFree && !!inputValue) onChange(inputValue, false)
+
+      setInputValue("")
 
       if (isOpen) onClose()
     },
     [closeOnBlur, isHit, isOpen, inputValue, allowFree, onClose, onChange],
+  )
+
+  const onDelete = useCallback(() => {
+    if (!isMulti) {
+      onChange("")
+    } else {
+      onChange(value[value.length - 1])
+    }
+
+    if (!isOpen) onFocus()
+  }, [isMulti, isOpen, onChange, onFocus, value])
+
+  const onClear = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.stopPropagation()
+
+      setValue([] as unknown as T)
+      setLabel(undefined)
+      setInputValue("")
+      rebirthOptions()
+
+      if (isOpen && inputRef.current) inputRef.current.focus()
+    },
+    [isOpen, setLabel, setInputValue, setValue, rebirthOptions],
   )
 
   const onKeyDown = useCallback(

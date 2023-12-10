@@ -9,6 +9,8 @@ import matter from "gray-matter"
 import { CONSTANT } from "constant"
 // import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
+import { toCamelCase } from "utils/assertion"
+import { omitObject } from "utils/object"
 // import { wait } from "utils/assertion"
 
 config()
@@ -43,6 +45,33 @@ const LOCALE_TITLE_MAP = {
 //   ja: "Japanese",
 //   en: "English",
 // }
+const OVERRIDE_PATHS: Record<
+  string,
+  (string | { parent: string; children: string[] })[]
+> = {
+  layouts: [
+    "aspect-ratio",
+    "box",
+    "center",
+    "container",
+    "divider",
+    "flex",
+    { parent: "grid", children: ["grid-item"] },
+    "spacer",
+    "stack",
+  ],
+  select: ["multi-select"],
+  calendar: ["date-picker", "month-picker"],
+  slider: ["range-slider"],
+  table: ["paging-table"],
+  autocomplete: ["multi-autocomplete"],
+  modal: ["dialog", "drawer"],
+  typography: ["heading", "text"],
+  transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
+  progress: ["circle-progress"],
+  button: ["icon-button"],
+  link: [{ parent: "link-box", children: ["link-overlay"] }],
+}
 const REPO_REQUEST_PARAMETERS = {
   owner: "hirotomoyamada",
   repo: "yamada-ui",
@@ -71,7 +100,46 @@ export const getDocs = async () => {
               "utf-8",
             )
 
-            docs[name] = JSON.parse(content)
+            let doc = JSON.parse(content)
+
+            if (Object.keys(OVERRIDE_PATHS).includes(name)) {
+              const names = OVERRIDE_PATHS[name]
+
+              names.forEach((name) => {
+                if (typeof name === "string") {
+                  const displayName = toCamelCase(name)
+                  const nestedDoc = doc[displayName]
+
+                  if (nestedDoc) docs[name] = { [displayName]: nestedDoc }
+
+                  doc = omitObject(doc, [displayName])
+                } else {
+                  const { parent, children } = name
+
+                  const displayName = toCamelCase(parent)
+                  const nestedDoc = doc[displayName]
+
+                  if (nestedDoc) docs[parent] = { [displayName]: nestedDoc }
+
+                  children.forEach((child) => {
+                    const displayName = toCamelCase(child)
+                    const nestedDoc = doc[displayName]
+
+                    if (nestedDoc)
+                      docs[parent] = {
+                        ...docs[parent],
+                        [displayName]: nestedDoc,
+                      }
+
+                    doc = omitObject(doc, [displayName])
+                  })
+
+                  doc = omitObject(doc, [displayName])
+                }
+              })
+            }
+
+            if (Object.keys(doc).length) docs[name] = doc
           }
         } catch (e) {
           console.log(`[props]: Not found ${name}`)
@@ -238,25 +306,33 @@ const generateMdxFiles = (
 ) =>
   Promise.all(
     Object.entries(docs).map(async ([name, doc]) => {
-      const dirPath = paths[name]
+      try {
+        const dirPath = paths[name]
 
-      if (!dirPath) return
+        if (!dirPath)
+          throw new Error(`[props]: Resolved path ${toCamelCase(name)}`)
 
-      await Promise.all(
-        LOCALES.map(async (locale) => {
-          const data = await generateData(
-            path.join(dirPath, getMdxFileName("index", locale)),
-            { tab: LOCALE_TAB_MAP[locale] },
-          )
-          const resolvedContent = await generateContent({ doc, locale })
+        if (!Object.values(doc).some((content) => Object.keys(content).length))
+          throw new Error(`[props]: No props ${toCamelCase(name)}`)
 
-          const outPath = path.join(dirPath, getMdxFileName("props", locale))
+        await Promise.all(
+          LOCALES.map(async (locale) => {
+            const data = await generateData(
+              path.join(dirPath, getMdxFileName("index", locale)),
+              { tab: LOCALE_TAB_MAP[locale] },
+            )
+            const resolvedContent = await generateContent({ doc, locale })
 
-          await writeMdxFile(outPath, data, resolvedContent)
+            const outPath = path.join(dirPath, getMdxFileName("props", locale))
 
-          console.log(chalk.green(`[props]: Generated ${outPath}`))
-        }),
-      )
+            await writeMdxFile(outPath, data, resolvedContent)
+
+            console.log(chalk.green(`[props]: Generated ${outPath}`))
+          }),
+        )
+      } catch (e) {
+        console.log(chalk.red(e.message))
+      }
     }),
   )
 

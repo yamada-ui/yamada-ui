@@ -70,7 +70,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   kbd: (props) => <Kbd apply="mdx.kbd" {...props} />,
   Alert: (props) => <Alert apply="mdx.alert" {...props} />,
   Note: ({ children, ...rest }) => (
-    <Alert apply="mdx.alert" alignItems="flex-start" {...rest}>
+    <Alert apply="mdx.alert" variant="note" alignItems="flex-start" {...rest}>
       <AlertIcon mt="0.2em" />
       <AlertDescription as="p" apply="mdx.p">
         {children}

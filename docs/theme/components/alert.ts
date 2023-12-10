@@ -14,9 +14,4 @@ export const Alert: ComponentMultiStyle = {
       loading: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
   },
-
-  defaultProps: {
-    variant: "note",
-    colorScheme: "primary",
-  },
 }

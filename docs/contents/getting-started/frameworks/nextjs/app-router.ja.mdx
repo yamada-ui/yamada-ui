@@ -69,13 +69,13 @@ Yamada UIのスタイルシステムのみを使用したい場合は、[こち�
 
 ## `UIProvider`・`CacheProvider`・`ColorModeScript`を追加する
 
-Next.js 13では、デフォルトで`サーバーコンポーネント`を使用しています。しかし、**Yamada UIは、`クライアントコンポーネント`です**。
+Next.js 13から、デフォルトで`サーバーコンポーネント`を使用しています。しかし、**Yamada UIは、`クライアントコンポーネント`です**。
 
 Yamada UIのコンポーネントを使用するページやコンポーネントは、`'use client'`を追加して、`クライアントコンポーネント`に変換する必要があります。
 
 Yamada UIをインストール後、`UIProvider`と`CacheProvider`と`ColorModeScript`を追加します。
 
-```tsx live=false title=layout.tsx highlight={10,12,13,14}
+```tsx live=false title=layout.tsx highlight={16,18,19,21,22}
 "use client"
 
 import { colorModeManager, UIProvider, ColorModeScript } from "@yamada-ui/react"

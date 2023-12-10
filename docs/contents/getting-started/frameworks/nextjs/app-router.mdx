@@ -69,13 +69,13 @@ If you want to use only the Yamada UI style system, please check [here](/getting
 
 ## Add `UIProvider`, `CacheProvider`, and `ColorModeScript`
 
-In Next.js 13, `server components` are used by default. However, **Yamada UI is a `client component`**.
+As of Next.js 13, `server components` are used by default. However, **Yamada UI is a `client component`**.
 
 Pages and components using Yamada UI components need to add `'use client'` to convert them into `client components`.
 
 After installing Yamada UI, add `UIProvider`, `CacheProvider`, and `ColorModeScript`.
 
-```tsx live=false title=layout.tsx highlight={10,12,13,14}
+```tsx live=false title=layout.tsx highlight={16,18,19,21,22}
 "use client"
 
 import { colorModeManager, UIProvider, ColorModeScript } from "@yamada-ui/react"

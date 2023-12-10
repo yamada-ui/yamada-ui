@@ -15,7 +15,7 @@ type IconOptions = {
    * The icon of the font awesome.
    * Check the docs to see the icon of possible modifiers you can pass.
    *
-   * @see Doc https://fontawesome.com/v5/docs/web/use-with/react
+   * @see Docs https://fontawesome.com/v5/docs/web/use-with/react
    */
   icon: IconDefinition | IconProp
   /**

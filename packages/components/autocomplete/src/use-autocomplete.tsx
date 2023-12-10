@@ -663,6 +663,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
           if (!isFocused && !isDisabled) {
             isFocused = true
+
             setFocusedIndex(index)
           }
         } else {
@@ -699,6 +700,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (allowFree && selectedValues.length === 0) {
         selectedValues.push(newValue)
+
         setInputValue("")
       }
 
@@ -743,16 +745,18 @@ export const useAutocomplete = <T extends string | string[] = string>({
           }
         }
       })
+
       const isHit =
         descendants
           .values()
           .filter(({ node }) =>
             format(node.textContent ?? "").includes(newValue),
           ).length > 0
+
       onChangeLabel(newValue)
-      if (!allowFree || isHit) {
-        setInputValue("")
-      }
+
+      if (!allowFree || isHit) setInputValue("")
+
       rebirthOptions(false)
     },
     [allowFree, onChangeLabel, rebirthOptions, setValue, descendants, format],
@@ -963,6 +967,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
               : allowFree && isMulti
                 ? () => {
                     if (inputValue) onChange(inputValue)
+
                     setFocusedIndex(0)
                   }
                 : undefined,

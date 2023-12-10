@@ -104,8 +104,8 @@ devDependencies:
     specifier: ^6.10.0
     version: 6.13.1(@typescript-eslint/parser@6.13.2)(eslint@8.55.0)(typescript@5.3.2)
   '@yamada-ui/cli':
-    specifier: ^0.8.0
-    version: 0.8.0
+    specifier: ^0.8.1
+    version: 0.8.1
   chalk:
     specifier: ^5.3.0
     version: 5.3.0
@@ -2541,8 +2541,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/cli@0.8.0:
-    resolution: {integrity: sha512-px7BezZll5D1t5iyGnoXbhblpG2Qja5U2HpsEBDLPPduwzCFPEfaKF2TLLKsgVGp7rL/qhAhdWGvN3IhsvSIDQ==}
+  /@yamada-ui/cli@0.8.1:
+    resolution: {integrity: sha512-kiL0wB9cFBQ8uk34dFdr54GETTNxw5XXDUN1gxxAKZ2fEYozfHOhEv9sbfIenanlpK1dBETB4/xv3dA3gyBAkw==, tarball: https://registry.npmjs.org/@yamada-ui/cli/-/cli-0.8.1.tgz}
     hasBin: true
     dependencies:
       bundle-n-require: 1.0.1
@@ -2550,8 +2550,9 @@ packages:
       cli-check-node: 1.3.4
       cli-handle-unhandled: 1.1.1
       cli-welcome: 2.2.2
-      color2k: 2.0.2
+      color2k: 2.0.3
       commander: 11.1.0
+      glob: 10.3.10
       prettier: 3.1.0
     dev: true
 
@@ -4186,7 +4187,7 @@ packages:
     dev: true
 
   /bundle-n-require@1.0.1:
-    resolution: {integrity: sha512-gItLuU8M0uI7bcHim+wM+Y1bY9eG7j3XbGcU3ZCqsrJLj4ZIHhchHWQ1luL9c4P8yPNLC9Jkwbct/EgR0u/dzQ==}
+    resolution: {integrity: sha512-gItLuU8M0uI7bcHim+wM+Y1bY9eG7j3XbGcU3ZCqsrJLj4ZIHhchHWQ1luL9c4P8yPNLC9Jkwbct/EgR0u/dzQ==, tarball: https://registry.npmjs.org/bundle-n-require/-/bundle-n-require-1.0.1.tgz}
     dependencies:
       esbuild: 0.17.19
       node-eval: 2.0.0
@@ -4267,7 +4268,7 @@ packages:
       supports-color: 5.5.0
 
   /chalk@3.0.0:
-    resolution: {integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==}
+    resolution: {integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==, tarball: https://registry.npmjs.org/chalk/-/chalk-3.0.0.tgz}
     engines: {node: '>=8'}
     dependencies:
       ansi-styles: 4.3.0
@@ -4363,11 +4364,11 @@ packages:
     dev: true
 
   /clear-any-console@1.16.2:
-    resolution: {integrity: sha512-OL/7wZpNy9x0GBSzz3poWja84Nr7iaH8aYNsJ5Uet2BVLj6Lm1zvWpZN/yH46Vv3ae7YfHmLLMmfHj911fshJg==}
+    resolution: {integrity: sha512-OL/7wZpNy9x0GBSzz3poWja84Nr7iaH8aYNsJ5Uet2BVLj6Lm1zvWpZN/yH46Vv3ae7YfHmLLMmfHj911fshJg==, tarball: https://registry.npmjs.org/clear-any-console/-/clear-any-console-1.16.2.tgz}
     dev: true
 
   /cli-check-node@1.3.4:
-    resolution: {integrity: sha512-iLGgQXm82iP8eH3R67qbOWs5qqUOLmNnMy5Lzl/RybcMh3y+H2zWU5POzuQ6oDUOdz4XWuxcFhP75szqd6frLg==}
+    resolution: {integrity: sha512-iLGgQXm82iP8eH3R67qbOWs5qqUOLmNnMy5Lzl/RybcMh3y+H2zWU5POzuQ6oDUOdz4XWuxcFhP75szqd6frLg==, tarball: https://registry.npmjs.org/cli-check-node/-/cli-check-node-1.3.4.tgz}
     dependencies:
       chalk: 3.0.0
       log-symbols: 3.0.0
@@ -4388,14 +4389,14 @@ packages:
     dev: true
 
   /cli-handle-error@4.4.0:
-    resolution: {integrity: sha512-RyBCnKlc7xVr79cKb9RfBq+4fjwQeX8HKeNzIPnI/W+DWWIUUKh2ur576DpwJ3kZt2UGHlIAOF7N9txy+mgZsA==}
+    resolution: {integrity: sha512-RyBCnKlc7xVr79cKb9RfBq+4fjwQeX8HKeNzIPnI/W+DWWIUUKh2ur576DpwJ3kZt2UGHlIAOF7N9txy+mgZsA==, tarball: https://registry.npmjs.org/cli-handle-error/-/cli-handle-error-4.4.0.tgz}
     dependencies:
       chalk: 3.0.0
       log-symbols: 3.0.0
     dev: true
 
   /cli-handle-unhandled@1.1.1:
-    resolution: {integrity: sha512-Em91mJvU7VdgT2MxQpyY633vW1tDzRjPDbii6ZjEBHHLLh0xDoVkFt/wjvi9nSvJcz9rJmvtJSK8KL/hvF0Stg==}
+    resolution: {integrity: sha512-Em91mJvU7VdgT2MxQpyY633vW1tDzRjPDbii6ZjEBHHLLh0xDoVkFt/wjvi9nSvJcz9rJmvtJSK8KL/hvF0Stg==, tarball: https://registry.npmjs.org/cli-handle-unhandled/-/cli-handle-unhandled-1.1.1.tgz}
     dependencies:
       cli-handle-error: 4.4.0
     dev: true
@@ -4419,7 +4420,7 @@ packages:
     dev: true
 
   /cli-welcome@2.2.2:
-    resolution: {integrity: sha512-LgDGS0TW4nIf8v81wpuZzfOEDPcy68u0jKR0Fy5IaWftqdminI6FoDiMFt1mjPylqKGNv/wFsZ7fCs93IeDMIw==}
+    resolution: {integrity: sha512-LgDGS0TW4nIf8v81wpuZzfOEDPcy68u0jKR0Fy5IaWftqdminI6FoDiMFt1mjPylqKGNv/wFsZ7fCs93IeDMIw==, tarball: https://registry.npmjs.org/cli-welcome/-/cli-welcome-2.2.2.tgz}
     dependencies:
       chalk: 2.4.2
       clear-any-console: 1.16.2
@@ -4485,6 +4486,11 @@ packages:
 
   /color2k@2.0.2:
     resolution: {integrity: sha512-kJhwH5nAwb34tmyuqq/lgjEKzlFXn1U99NlnB6Ws4qVaERcRUYeYP1cBw6BJ4vxaWStAUEef4WMr7WjOCnBt8w==}
+    dev: false
+
+  /color2k@2.0.3:
+    resolution: {integrity: sha512-zW190nQTIoXcGCaU08DvVNFTmQhUpnJfVuAKfWqUQkflXKpaDdpaYoM0iluLS9lgJNHyBF58KKA2FBEwkD7wog==, tarball: https://registry.npmjs.org/color2k/-/color2k-2.0.3.tgz}
+    dev: true
 
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
@@ -5030,7 +5036,7 @@ packages:
     dev: true
 
   /esbuild@0.17.19:
-    resolution: {integrity: sha512-XQ0jAPFkK/u3LcVRcvVHQcTIqD6E2H1fvZMA5dQPSOWb3suUbWbfbRf94pjc0bNzRYLfIrDRQXr7X+LHIm5oHw==}
+    resolution: {integrity: sha512-XQ0jAPFkK/u3LcVRcvVHQcTIqD6E2H1fvZMA5dQPSOWb3suUbWbfbRf94pjc0bNzRYLfIrDRQXr7X+LHIm5oHw==, tarball: https://registry.npmjs.org/esbuild/-/esbuild-0.17.19.tgz}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
@@ -7223,7 +7229,7 @@ packages:
     dev: true
 
   /log-symbols@3.0.0:
-    resolution: {integrity: sha512-dSkNGuI7iG3mfvDzUuYZyvk5dD9ocYCYzNU6CYDE6+Xqd+gwme6Z00NS3dUh8mq/73HaEtT7m6W+yUPtU6BZnQ==}
+    resolution: {integrity: sha512-dSkNGuI7iG3mfvDzUuYZyvk5dD9ocYCYzNU6CYDE6+Xqd+gwme6Z00NS3dUh8mq/73HaEtT7m6W+yUPtU6BZnQ==, tarball: https://registry.npmjs.org/log-symbols/-/log-symbols-3.0.0.tgz}
     engines: {node: '>=8'}
     dependencies:
       chalk: 2.4.2
@@ -8109,7 +8115,7 @@ packages:
     dev: true
 
   /node-eval@2.0.0:
-    resolution: {integrity: sha512-Ap+L9HznXAVeJj3TJ1op6M6bg5xtTq8L5CU/PJxtkhea/DrIxdTknGKIECKd/v/Lgql95iuMAYvIzBNd0pmcMg==}
+    resolution: {integrity: sha512-Ap+L9HznXAVeJj3TJ1op6M6bg5xtTq8L5CU/PJxtkhea/DrIxdTknGKIECKd/v/Lgql95iuMAYvIzBNd0pmcMg==, tarball: https://registry.npmjs.org/node-eval/-/node-eval-2.0.0.tgz}
     engines: {node: '>= 4'}
     dependencies:
       path-is-absolute: 1.0.1
@@ -8613,7 +8619,7 @@ packages:
     dev: true
 
   /prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==, tarball: https://registry.npmjs.org/prettier/-/prettier-2.8.8.tgz}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true

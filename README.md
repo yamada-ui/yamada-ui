@@ -41,7 +41,7 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 ## Documentation
 
-Currently, the documentation is only available in [Storybook](https://hirotomoyamada.github.io/yamada-ui/). However, Storybook contains usage instructions for each prop of all the components.
+It's the https://yamada-ui.vercel.app website for the latest version of Yamada UI.
 
 ## Features
 

@@ -77,6 +77,8 @@ type MultiSelectOptions = {
   clearIconProps?: SelectIconProps
   /**
    * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
 }
@@ -104,7 +106,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     listProps,
     iconProps,
     clearIconProps,
-    portalProps,
+    portalProps = { isDisabled: true },
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)

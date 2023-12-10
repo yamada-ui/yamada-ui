@@ -58,7 +58,7 @@
     "@types/react-syntax-highlighter": "^15.5.7",
     "clean-package": "2.2.0",
     "react": "^18.0.0",
-    "unified": "10.1.2",
+    "unified": "11.0.4",
     "unist-util-visit": "5.0.0"
   },
   "peerDependencies": {

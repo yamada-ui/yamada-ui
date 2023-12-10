@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
 import { cloneElement, useMemo } from "react"
@@ -79,6 +81,13 @@ type MultiAutocompleteOptions = {
    * Props for multi autocomplete clear icon element.
    */
   clearIconProps?: AutocompleteIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   *
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export type MultiAutocompleteProps = ThemeProps<"Select"> &
@@ -109,6 +118,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
       inputProps,
       iconProps,
       clearIconProps,
+      portalProps = { isDisabled: false },
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
@@ -188,19 +198,27 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
               </ui.div>
 
               {!isEmpty ? (
-                <AutocompleteList {...listProps}>
-                  {allowCreate ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+                <Portal {...portalProps}>
+                  <AutocompleteList {...listProps}>
+                    {allowCreate ? (
+                      <AutocompleteCreate />
+                    ) : (
+                      <AutocompleteEmpty />
+                    )}
 
-                  {children ?? computedChildren}
-                </AutocompleteList>
+                    {children ?? computedChildren}
+                  </AutocompleteList>
+                </Portal>
               ) : (
-                <AutocompleteList {...listProps}>
-                  {allowCreate && inputValue ? (
-                    <AutocompleteCreate />
-                  ) : (
-                    <AutocompleteEmpty />
-                  )}
-                </AutocompleteList>
+                <Portal {...portalProps}>
+                  <AutocompleteList {...listProps}>
+                    {allowCreate && inputValue ? (
+                      <AutocompleteCreate />
+                    ) : (
+                      <AutocompleteEmpty />
+                    )}
+                  </AutocompleteList>
+                </Portal>
               )}
             </ui.div>
           </Popover>

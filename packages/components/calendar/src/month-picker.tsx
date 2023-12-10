@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverContent } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx } from "@yamada-ui/utils"
 import { Calendar } from "./calendar"
 import type { DatePickerFieldProps } from "./date-picker-field"
@@ -41,6 +43,13 @@ type MonthPickerOptions = {
    * Props for month picker clear icon element.
    */
   clearIconProps?: DatePickerIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   *
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export type MonthPickerProps = Omit<
@@ -65,6 +74,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     inputProps,
     iconProps,
     clearIconProps,
+    portalProps = { isDisabled: false },
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -119,15 +129,17 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
             )}
           </ui.div>
 
-          <PopoverContent
-            className="ui-month-picker__popover"
-            __css={{ ...styles.list }}
-          >
-            <Calendar
-              className="ui-month-picker__calendar"
-              {...getCalendarProps()}
-            />
-          </PopoverContent>
+          <Portal {...portalProps}>
+            <PopoverContent
+              className="ui-month-picker__popover"
+              __css={{ ...styles.list }}
+            >
+              <Calendar
+                className="ui-month-picker__calendar"
+                {...getCalendarProps()}
+              />
+            </PopoverContent>
+          </Portal>
         </ui.div>
       </Popover>
     </DatePickerProvider>

@@ -368,6 +368,7 @@ export interface GeneratedTheme extends UITheme {
     | "2xl"
     | "3xl"
     | "outline"
+    | "inline"
     | "inner"
     | "none"
     | "dark-sm"

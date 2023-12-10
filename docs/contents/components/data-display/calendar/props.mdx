@@ -11,114 +11,21 @@ tab: Props
 ### Calendar Props
 
 <PropsCard
+  name="amountOfMonths"
+  type="number"
+  description={"The number of months to display."}
+  defaultValue="1"
+/>
+<PropsCard
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
 <PropsCard
-  name="defaultMonth"
-  type="Date"
-  description={"The initial month of the calendar."}
-  defaultValue="'new Date()'"
-/>
-<PropsCard
-  name="defaultValue"
-  type="Date"
-  description={"The initial value of the calendar."}
-/>
-<PropsCard
-  name="locale"
-  type="string"
-  description={
-    "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
-  }
-  defaultValue="'en'"
-/>
-<PropsCard
-  name="maxDate"
-  type="Date"
-  description={"The maximum possible date."}
-/>
-<PropsCard
-  name="minDate"
-  type="Date"
-  description={"The minimum possible date."}
-/>
-<PropsCard
-  name="month"
-  type="Date"
-  description={"The month of the calendar."}
-/>
-<PropsCard
-  name="monthFormat"
-  type="string"
-  description={
-    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
-  }
-  defaultValue="'MM'"
-/>
-<PropsCard
-  name="onChange"
-  type="(value: Date | undefined) => void"
-  description={"The callback invoked when value state changes."}
-/>
-<PropsCard
-  name="onChangeMonth"
-  type="(value: Date) => void"
-  description={"The callback invoked when month state changes."}
-/>
-<PropsCard
-  name="size"
-  type='"sm" | "md" | "lg" | "full"'
-  description={"The size of the Calendar."}
-  defaultValue="md"
-/>
-<PropsCard
-  name="value"
-  type="Date"
-  description={"The value of the calendar."}
-/>
-<PropsCard
-  name="variant"
-  type='"solid" | "subtle" | "unstyled"'
-  description={"The variant of the Calendar."}
-  defaultValue="solid"
-/>
-<PropsCard
-  name="withControls"
-  type="boolean"
-  description={"If `true`, display the calendar control buttons."}
-  defaultValue="true"
-/>
-<PropsCard
-  name="withHeader"
-  type="boolean"
-  description={"If `true`, display the calendar header."}
-  defaultValue="true"
-/>
-<PropsCard
-  name="withLabel"
-  type="boolean"
-  description={"If `true`, display the calendar label button."}
-  defaultValue="true"
-/>
-<PropsCard
-  name="yearFormat"
-  type="string"
-  description={
-    "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
-  }
-  defaultValue="'YYYY'"
-/>
-
-### UseCalendar Props
-
-<PropsCard
-  name="amountOfMonths"
-  type="number"
-  description={"The number of months to display."}
-  defaultValue="1"
+  name="controlProps"
+  type="IconButtonProps"
+  description={"Props for calendar control button element."}
 />
 <PropsCard
   name="dateFormat"
@@ -129,6 +36,11 @@ tab: Props
   defaultValue="'MMMM YYYY'"
 />
 <PropsCard
+  name="dayProps"
+  type='Omit<PropsOf<"button">, "ref" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }'
+  description={"Props for calendar day button element."}
+/>
+<PropsCard
   name="defaultMonth"
   type="Date"
   description={"The initial month of the calendar."}
@@ -136,7 +48,7 @@ tab: Props
 />
 <PropsCard
   name="defaultType"
-  type='"year" | "month" | "date"'
+  type='"date" | "month" | "year"'
   description={"The initial type of the calendar."}
 />
 <PropsCard
@@ -162,7 +74,17 @@ tab: Props
   description={"Define the first day of the week."}
   defaultValue="'monday'"
 />
+<PropsCard
+  name="headerProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for calendar header element."}
+/>
 <PropsCard name="holidays" type="Date[]" description={"Define holidays."} />
+<PropsCard
+  name="labelProps"
+  type='Omit<PropsOf<"button">, "ref" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }'
+  description={"Props for calendar label button element."}
+/>
 <PropsCard
   name="locale"
   type="string"
@@ -200,6 +122,16 @@ tab: Props
   defaultValue="'MM'"
 />
 <PropsCard
+  name="monthProps"
+  type='Omit<PropsOf<"button">, "ref" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }'
+  description={"Props for calendar month button element."}
+/>
+<PropsCard
+  name="nextProps"
+  type="IconButtonProps"
+  description={"Props for calendar next control button element."}
+/>
+<PropsCard
   name="nextRef"
   type="type ONLY_FOR_FORMAT =
   | ((instance: (() => void | undefined) | null) => void)
@@ -219,7 +151,7 @@ tab: Props
 <PropsCard
   name="onChangeType"
   type='(
-  type: "year" | "month" | "date",
+  type: "date" | "month" | "year",
   year?: number | undefined,
   month?: number | undefined,
 ) => void'
@@ -232,13 +164,29 @@ tab: Props
   defaultValue="1"
 />
 <PropsCard
+  name="prevProps"
+  type="IconButtonProps"
+  description={"Props for calendar previous control button element."}
+/>
+<PropsCard
   name="prevRef"
   type="type ONLY_FOR_FORMAT =
   | ((instance: (() => void | undefined) | null) => void)
   | MutableRefObject<(() => void | undefined) | null>"
   description={"Ref to a previous function."}
 />
-<PropsCard name="selectMonthWith" type='"month" | "value"' />
+<PropsCard name="selectMonthWith" type='"value" | "month"' />
+<PropsCard
+  name="size"
+  type='"sm" | "md" | "lg" | "full"'
+  description={"The size of the Calendar."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="tableProps"
+  type='Omit<PropsOf<"table">, "ref" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 20 more ... & { ...; }'
+  description={"Props for calendar month table element."}
+/>
 <PropsCard
   name="today"
   type="boolean"
@@ -247,7 +195,7 @@ tab: Props
 />
 <PropsCard
   name="type"
-  type='"year" | "month" | "date"'
+  type='"date" | "month" | "year"'
   description={"The type of the calendar."}
 />
 <PropsCard
@@ -263,12 +211,23 @@ tab: Props
   description={"The value of the calendar."}
 />
 <PropsCard
+  name="variant"
+  type='"solid" | "subtle" | "unstyled"'
+  description={"The variant of the Calendar."}
+  defaultValue="solid"
+/>
+<PropsCard
   name="weekdayFormat"
   type="string"
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
   defaultValue="'dd'"
+/>
+<PropsCard
+  name="weekdayProps"
+  type='Omit<PropsOf<"div">, "ref" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 20 more ... & { ...; }'
+  description={"Props for calendar weekday element."}
 />
 <PropsCard
   name="weekendDays"
@@ -308,21 +267,11 @@ tab: Props
   }
   defaultValue="'YYYY'"
 />
-
-### Weekday Props
-
-<PropsCard name="index" required type="number" />
-<PropsCard name="weekday" required type="string" />
-
-### Day Props
-
-<PropsCard name="col" required type="number" />
-<PropsCard name="date" required type="Date" />
-<PropsCard name="isOutside" required type="boolean" />
-<PropsCard name="isSelected" required type="boolean" />
-<PropsCard name="isWeekend" required type="boolean" />
-<PropsCard name="row" required type="number" />
-<PropsCard name="weekday" required type="string" />
+<PropsCard
+  name="yearProps"
+  type='Omit<PropsOf<"button">, "ref" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }'
+  description={"Props for calendar year button element."}
+/>
 
 ### DatePicker Props
 
@@ -435,7 +384,7 @@ tab: Props
 />
 <PropsCard
   name="defaultType"
-  type='"year" | "month" | "date"'
+  type='"date" | "month" | "year"'
   description={"The initial type of the calendar."}
 />
 <PropsCard
@@ -638,7 +587,7 @@ tab: Props
 <PropsCard
   name="onChangeType"
   type='(
-  type: "year" | "month" | "date",
+  type: "date" | "month" | "year",
   year?: number | undefined,
   month?: number | undefined,
 ) => void'
@@ -685,7 +634,7 @@ tab: Props
   }
   defaultValue="true"
 />
-<PropsCard name="selectMonthWith" type='"month" | "value"' />
+<PropsCard name="selectMonthWith" type='"value" | "month"' />
 <PropsCard
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
@@ -706,7 +655,7 @@ tab: Props
 />
 <PropsCard
   name="type"
-  type='"year" | "month" | "date"'
+  type='"date" | "month" | "year"'
   description={"The type of the calendar."}
 />
 <PropsCard
@@ -856,7 +805,7 @@ tab: Props
 />
 <PropsCard
   name="defaultType"
-  type='"year" | "month"'
+  type='"month" | "year"'
   description={"The initial type of the month picker."}
   defaultValue="'month'"
 />
@@ -1035,7 +984,7 @@ tab: Props
 />
 <PropsCard
   name="onChangeType"
-  type='(type: "year" | "month") => void'
+  type='(type: "month" | "year") => void'
   description={"The callback invoked when type state changes."}
 />
 <PropsCard
@@ -1087,7 +1036,7 @@ tab: Props
 />
 <PropsCard
   name="type"
-  type='"year" | "month"'
+  type='"month" | "year"'
   description={"The type of the month picker."}
 />
 <PropsCard

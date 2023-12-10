@@ -10,7 +10,11 @@ tab: Props
 
 ### Loading Props
 
-<PropsCard name="duration" type="number" />
+<PropsCard
+  name="duration"
+  type="string | number"
+  description={"The CSS `dur` property."}
+/>
 <PropsCard
   name="message"
   type="type ONLY_FOR_FORMAT =
@@ -20,4 +24,28 @@ tab: Props
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
   | ReactPortal"
+/>
+<PropsCard
+  name="secondaryColor"
+  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
+  description={"The CSS `color` property."}
+  defaultValue="'primary'"
+/>
+<PropsCard
+  name="size"
+  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
+  description={"The CSS `font-size` property."}
+/>
+<PropsCard
+  name="variant"
+  type='type ONLY_FOR_FORMAT =
+  | "grid"
+  | "oval"
+  | "audio"
+  | "dots"
+  | "puff"
+  | "rings"
+  | "circles"'
+  description={"The variant of the Loading."}
+  defaultValue="'oval'"
 />

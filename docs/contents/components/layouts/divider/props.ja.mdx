@@ -1,11 +1,30 @@
 ---
 title: Divider
-description: このページは現在作成中です。
+description: "`Divider`は、要素間において区切りを表すコンポーネントです。"
 package_name: "@yamada-ui/layouts"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Divider Props
+
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="orientation"
+  type='"horizontal" | "vertical"'
+  description={"The orientation of the divider."}
+  defaultValue="'horizontal'"
+/>
+<PropsCard name="size" type="string" description={"The size of the Divider."} />
+<PropsCard
+  name="variant"
+  type='"solid" | "dashed" | "dotted"'
+  description={"The variant of the Divider."}
+  defaultValue="solid"
+/>

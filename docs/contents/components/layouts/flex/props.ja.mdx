@@ -1,11 +1,47 @@
 ---
 title: Flex
-description: このページは現在作成中です。
+description: "`Flex`は、`Box`に`flex`を設定したコンポーネントです。また、便利なスタイルのショートハンドが用意されています。"
 package_name: "@yamada-ui/layouts"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Flex Props
+
+<PropsCard
+  name="align"
+  type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `align-items` property."}
+/>
+<PropsCard
+  name="basis"
+  type='number | "content" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | "-moz-fit-content" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-basis` property."}
+/>
+<PropsCard
+  name="direction"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-direction` property."}
+/>
+<PropsCard
+  name="grow"
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexGrow> | ColorModeArray<FlexGrow> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-grow` property."}
+/>
+<PropsCard
+  name="justify"
+  type='"center" | "right" | "left" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `justify-content` property."}
+/>
+<PropsCard
+  name="shrink"
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexShrink> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-shrink` property."}
+/>
+<PropsCard
+  name="wrap"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap" | "wrap-reverse" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-wrap` property."}
+/>

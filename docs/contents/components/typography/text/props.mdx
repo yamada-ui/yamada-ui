@@ -1,11 +1,29 @@
 ---
 title: Text
-description: This page is currently under construction.
+description: >-
+  `Text` is a component that represents a paragraph of text. By default, it
+  renders a `p` element.
 package_name: "@yamada-ui/typography"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Text Props
+
+<PropsCard
+  name="align"
+  type="UIValue<TextAlign>"
+  description={"The CSS `text-align` property."}
+/>
+<PropsCard
+  name="casing"
+  type="UIValue<TextTransform>"
+  description={"The CSS `text-transform` property."}
+/>
+<PropsCard
+  name="decoration"
+  type='UIValue<number | "blink" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "aliceblue" | "antiquewhite" | "aqua" | "aquamarine" | "azure" | ... 185 more ... | "wavy">'
+  description={"The CSS `text-decoration` property."}
+/>

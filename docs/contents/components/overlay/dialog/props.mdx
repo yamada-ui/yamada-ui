@@ -1,11 +1,242 @@
 ---
 title: Dialog
-description: This page is currently under construction.
-package_name: "@yamada-ui/dialog"
+description: "`Dialog` is a component used to confirm or interrupt user actions."
+package_name: "@yamada-ui/modal"
 with_description: true
 tab: Props
 ---
 
-This page is currently under construction. 😘
+## Props
 
-Would you like to create this page for us? That would be wonderful!
+### Dialog Props
+
+<PropsCard
+  name="isOpen"
+  required
+  type="boolean"
+  description={"If `true`, the open will be opened."}
+/>
+<PropsCard
+  name="allowPinchZoom"
+  type="boolean"
+  description={
+    "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
+  }
+  defaultValue="false."
+/>
+<PropsCard
+  name="animation"
+  type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+  description={"The animation of the tooltip."}
+  defaultValue="'scale'"
+/>
+<PropsCard
+  name="blockScrollOnMount"
+  type="boolean"
+  description={
+    "If `true`, scrolling will be disabled on the `body` when the modal opens."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="cancel"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal
+  | ButtonProps"
+  description={"The dialog cancel to use."}
+/>
+<PropsCard
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the modal will close when the `Esc` key is pressed."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnOverlay"
+  type="boolean"
+  description={"If `true`, the modal will close when the overlay is clicked."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"The animation duration."}
+/>
+<PropsCard
+  name="finalFocusRef"
+  type="RefObject<FocusableElement>"
+  description={
+    "`ref` of the element to return focus to when `FocusLock` unmounts."
+  }
+/>
+<PropsCard
+  name="footer"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The dialog footer to use."}
+/>
+<PropsCard
+  name="header"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The dialog header to use."}
+/>
+<PropsCard
+  name="initialFocusRef"
+  type="RefObject<FocusableElement>"
+  description={"`ref` of the element to receive focus initially."}
+/>
+<PropsCard
+  name="lockFocusAcrossFrames"
+  type="boolean"
+  description={
+    "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="onCancel"
+  type="(onClose: (() => void) | undefined) => void"
+  description={"The callback invoked when cancel button clicked."}
+/>
+<PropsCard
+  name="onClose"
+  type="() => void"
+  description={"Callback invoked to close the modal."}
+/>
+<PropsCard
+  name="onCloseComplete"
+  type="() => void"
+  description={
+    "Callback function to run side effects after the modal has closed."
+  }
+/>
+<PropsCard
+  name="onEsc"
+  type="() => void"
+  description={
+    "Callback fired when the escape key is pressed and focus is within modal."
+  }
+/>
+<PropsCard
+  name="onOther"
+  type="(onClose: (() => void) | undefined) => void"
+  description={"The callback invoked when other button clicked."}
+/>
+<PropsCard
+  name="onOverlayClick"
+  type="() => void"
+  description={"Callback fired when the overlay is clicked."}
+/>
+<PropsCard
+  name="onSuccess"
+  type="(onClose: (() => void) | undefined) => void"
+  description={"The callback invoked when success button clicked."}
+/>
+<PropsCard
+  name="other"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal
+  | ButtonProps"
+  description={"The dialog other to use."}
+/>
+<PropsCard
+  name="outside"
+  type='UIValue<number | "px" | (string & {}) | "initial" | "inherit" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "1" | "-1" | "2" | "-2" | ... 72 more ... | "-3.5">'
+  description={"The CSS `padding` property."}
+/>
+<PropsCard
+  name="placement"
+  type='UIValue<| "center"
+  | "top"
+  | "right"
+  | "bottom"
+  | "left"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right">'
+  description={"The placement of the modal."}
+  defaultValue="'center'"
+/>
+<PropsCard
+  name="portalProps"
+  type='Omit<PortalProps, "children">'
+  description={"Props to be forwarded to the portal component."}
+/>
+<PropsCard
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="scrollBehavior"
+  type='"outside" | "inside"'
+  description={
+    "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport."
+  }
+  defaultValue="'inside'"
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full"'
+  description={"The size of the Dialog."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="success"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal
+  | ButtonProps"
+  description={"The dialog success to use."}
+/>
+<PropsCard
+  name="variant"
+  type="string"
+  description={"The variant of the Dialog."}
+/>
+<PropsCard
+  name="withCloseButton"
+  type="boolean"
+  description={"If `true`, display the modal close button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withOverlay"
+  type="boolean"
+  description={"If `true`, display the modal overlay."}
+  defaultValue="true"
+/>

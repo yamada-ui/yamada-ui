@@ -1,11 +1,27 @@
 ---
 title: Text
-description: このページは現在作成中です。
+description: "`Text`は、テキストの段落を表すコンポーネントです。デフォルトでは、`p`要素をレンダリングします。"
 package_name: "@yamada-ui/typography"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Text Props
+
+<PropsCard
+  name="align"
+  type="UIValue<TextAlign>"
+  description={"The CSS `text-align` property."}
+/>
+<PropsCard
+  name="casing"
+  type="UIValue<TextTransform>"
+  description={"The CSS `text-transform` property."}
+/>
+<PropsCard
+  name="decoration"
+  type='UIValue<number | "blink" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "aliceblue" | "antiquewhite" | "aqua" | "aquamarine" | "azure" | ... 185 more ... | "wavy">'
+  description={"The CSS `text-decoration` property."}
+/>

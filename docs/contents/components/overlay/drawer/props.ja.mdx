@@ -1,11 +1,158 @@
 ---
 title: Drawer
-description: このページは現在作成中です。
-package_name: "@yamada-ui/drawer"
+description: "`Drawer`は、画面の端から表示されるパネルのコンポーネントです。"
+package_name: "@yamada-ui/modal"
 with_description: true
 tab: Props
 ---
 
-現在ページ作成中です。😘
+## Props
 
-私たちの代わりに、このページを作成しませんか？それは、とても素晴らしいことです！
+### Drawer Props
+
+<PropsCard
+  name="isOpen"
+  required
+  type="boolean"
+  description={"If `true`, the open will be opened."}
+/>
+<PropsCard
+  name="allowPinchZoom"
+  type="boolean"
+  description={
+    "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
+  }
+  defaultValue="false."
+/>
+<PropsCard
+  name="blockScrollOnMount"
+  type="boolean"
+  description={
+    "If `true`, scrolling will be disabled on the `body` when the modal opens."
+  }
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the modal will close when the `Esc` key is pressed."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="closeOnOverlay"
+  type="boolean"
+  description={"If `true`, the modal will close when the overlay is clicked."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+<PropsCard
+  name="duration"
+  type='number | Partial<Record<"exit" | "enter", number>>'
+  description={"The animation duration."}
+/>
+<PropsCard
+  name="finalFocusRef"
+  type="RefObject<FocusableElement>"
+  description={
+    "`ref` of the element to return focus to when `FocusLock` unmounts."
+  }
+/>
+<PropsCard
+  name="initialFocusRef"
+  type="RefObject<FocusableElement>"
+  description={"`ref` of the element to receive focus initially."}
+/>
+<PropsCard
+  name="isFullHeight"
+  type="boolean"
+  description={
+    "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh)."
+  }
+/>
+<PropsCard
+  name="lockFocusAcrossFrames"
+  type="boolean"
+  description={
+    "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="onClose"
+  type="() => void"
+  description={"Callback invoked to close the modal."}
+/>
+<PropsCard
+  name="onCloseComplete"
+  type="() => void"
+  description={
+    "Callback function to run side effects after the modal has closed."
+  }
+/>
+<PropsCard
+  name="onEsc"
+  type="() => void"
+  description={
+    "Callback fired when the escape key is pressed and focus is within modal."
+  }
+/>
+<PropsCard
+  name="onOverlayClick"
+  type="() => void"
+  description={"Callback fired when the overlay is clicked."}
+/>
+<PropsCard
+  name="placement"
+  type='UIValue<| "center"
+  | "top"
+  | "right"
+  | "bottom"
+  | "left"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right"> &
+  UIValue<"top" | "right" | "bottom" | "left">'
+  description={"The placement of the modal.\n\n\nThe placement of the drawer."}
+  defaultValue="'center'"
+/>
+<PropsCard
+  name="portalProps"
+  type='Omit<PortalProps, "children">'
+  description={"Props to be forwarded to the portal component."}
+/>
+<PropsCard
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+  }
+  defaultValue="false"
+/>
+<PropsCard
+  name="size"
+  type='"xs" | "sm" | "md" | "lg" | "xl" | "full"'
+  description={"The size of the Drawer."}
+  defaultValue="md"
+/>
+<PropsCard
+  name="variant"
+  type="string"
+  description={"The variant of the Drawer."}
+/>
+<PropsCard
+  name="withCloseButton"
+  type="boolean"
+  description={"If `true`, display the modal close button."}
+  defaultValue="true"
+/>
+<PropsCard
+  name="withOverlay"
+  type="boolean"
+  description={"If `true`, display the modal overlay."}
+  defaultValue="true"
+/>

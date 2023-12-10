@@ -5655,29 +5655,29 @@
     "hierarchy": { "lv1": "Link", "lv2": "Usage", "lv3": "External Links" }
   },
   {
-    "title": "Linkbox",
+    "title": "LinkBox",
     "type": "page",
-    "description": "`Linkbox` is a component that allows elements such as articles or cards to function as a single link.",
-    "slug": "/components/navigation/linkbox",
-    "hierarchy": { "lv1": "Linkbox" }
+    "description": "`LinkBox` is a component that allows elements such as articles or cards to function as a single link.",
+    "slug": "/components/navigation/link-box",
+    "hierarchy": { "lv1": "LinkBox" }
   },
   {
     "title": "Import",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#import",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "Import" }
+    "slug": "/components/navigation/link-box#import",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#usage",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "Usage" }
+    "slug": "/components/navigation/link-box#usage",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "Usage" }
   },
   {
     "title": "Nested Links",
     "type": "fragment",
-    "slug": "/components/navigation/linkbox#nested-links",
-    "hierarchy": { "lv1": "Linkbox", "lv2": "Usage", "lv3": "Nested Links" }
+    "slug": "/components/navigation/link-box#nested-links",
+    "hierarchy": { "lv1": "LinkBox", "lv2": "Usage", "lv3": "Nested Links" }
   },
   {
     "title": "Pagination",
@@ -6792,19 +6792,6 @@
     "type": "fragment",
     "slug": "/components/typography/heading#add-a-gradient",
     "hierarchy": { "lv1": "Heading", "lv2": "Usage", "lv3": "Add a gradient" }
-  },
-  {
-    "title": "Heading",
-    "type": "page",
-    "description": "`Heading` is a component that represents section headings. By default, it renders an `h1` element.",
-    "slug": "/components/typography/heading/theming",
-    "hierarchy": { "lv1": "Heading" }
-  },
-  {
-    "title": "Theming",
-    "type": "fragment",
-    "slug": "/components/typography/heading/theming#theming",
-    "hierarchy": { "lv1": "Heading", "lv2": "Theming" }
   },
   {
     "title": "Highlight",

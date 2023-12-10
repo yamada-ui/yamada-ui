@@ -55,7 +55,8 @@
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*"
+    "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/portal": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

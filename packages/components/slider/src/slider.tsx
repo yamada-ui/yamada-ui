@@ -109,8 +109,13 @@ export type UseSliderProps = FormControlOptions & {
   onChange?: (value: number) => void
 }
 
-export const useSlider = (props: UseSliderProps) => {
-  const {
+export const useSlider = ({
+  focusThumbOnChange = true,
+  ...props
+}: UseSliderProps) => {
+  props.isReadOnly ??= !focusThumbOnChange
+
+  let {
     id,
     name,
     min = 0,
@@ -119,7 +124,6 @@ export const useSlider = (props: UseSliderProps) => {
     defaultValue,
     orientation = "horizontal",
     isReversed,
-    focusThumbOnChange = true,
     required,
     disabled,
     readOnly,
@@ -456,9 +460,9 @@ export const useSlider = (props: UseSliderProps) => {
         ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, thumbRef),
-        tabIndex: isInteractive ? 0 : undefined,
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         role: "slider",
-        "data-active": dataAttr(isDragging),
+        "data-active": dataAttr(isDragging && focusThumbOnChange),
         "aria-orientation": orientation,
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
         onFocus: handlerAll(props.onFocus, rest.onFocus, () =>
@@ -469,6 +473,7 @@ export const useSlider = (props: UseSliderProps) => {
       }
     },
     [
+      focusThumbOnChange,
       isDragging,
       isInteractive,
       isVertical,

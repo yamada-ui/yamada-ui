@@ -7365,30 +7365,30 @@
     }
   },
   {
-    "title": "SlideFide",
+    "title": "SlideFade",
     "type": "page",
-    "description": "`SlideFide`は、要素を指定位置から移動しながら次第に表示または非表示にするコンポーネントです。",
-    "slug": "/components/transitions/slide-fide",
-    "hierarchy": { "lv1": "SlideFide" }
+    "description": "`SlideFade`は、要素を指定位置から移動しながら次第に表示または非表示にするコンポーネントです。",
+    "slug": "/components/transitions/slide-fade",
+    "hierarchy": { "lv1": "SlideFade" }
   },
   {
     "title": "インポート",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#インポート",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "インポート" }
+    "slug": "/components/transitions/slide-fade#インポート",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "インポート" }
   },
   {
     "title": "使い方",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#使い方",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "使い方" }
+    "slug": "/components/transitions/slide-fade#使い方",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "使い方" }
   },
   {
     "title": "所要時間を変更する",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#所要時間を変更する",
+    "slug": "/components/transitions/slide-fade#所要時間を変更する",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "使い方",
       "lv3": "所要時間を変更する"
     }
@@ -7396,9 +7396,9 @@
   {
     "title": "位置を変更する",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#位置を変更する",
+    "slug": "/components/transitions/slide-fade#位置を変更する",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "使い方",
       "lv3": "位置を変更する"
     }
@@ -7406,9 +7406,9 @@
   {
     "title": "非表示時にアンマウントする",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#非表示時にアンマウントする",
+    "slug": "/components/transitions/slide-fade#非表示時にアンマウントする",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "使い方",
       "lv3": "非表示時にアンマウントする"
     }

@@ -6714,30 +6714,30 @@
     }
   },
   {
-    "title": "SlideFide",
+    "title": "SlideFade",
     "type": "page",
-    "description": "`SlideFide` is a component that gradually shows or hides an element while moving it from a specified position.",
-    "slug": "/components/transitions/slide-fide",
-    "hierarchy": { "lv1": "SlideFide" }
+    "description": "`SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.",
+    "slug": "/components/transitions/slide-fade",
+    "hierarchy": { "lv1": "SlideFade" }
   },
   {
     "title": "Import",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#import",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "Import" }
+    "slug": "/components/transitions/slide-fade#import",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "Import" }
   },
   {
     "title": "Usage",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#usage",
-    "hierarchy": { "lv1": "SlideFide", "lv2": "Usage" }
+    "slug": "/components/transitions/slide-fade#usage",
+    "hierarchy": { "lv1": "SlideFade", "lv2": "Usage" }
   },
   {
     "title": "Change the Duration",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#change-the-duration",
+    "slug": "/components/transitions/slide-fade#change-the-duration",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "Usage",
       "lv3": "Change the Duration"
     }
@@ -6745,9 +6745,9 @@
   {
     "title": "Change the Position",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#change-the-position",
+    "slug": "/components/transitions/slide-fade#change-the-position",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "Usage",
       "lv3": "Change the Position"
     }
@@ -6755,9 +6755,9 @@
   {
     "title": "Unmount on Exit",
     "type": "fragment",
-    "slug": "/components/transitions/slide-fide#unmount-on-exit",
+    "slug": "/components/transitions/slide-fade#unmount-on-exit",
     "hierarchy": {
-      "lv1": "SlideFide",
+      "lv1": "SlideFade",
       "lv2": "Usage",
       "lv3": "Unmount on Exit"
     }

@@ -51,6 +51,7 @@
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",

@@ -275,7 +275,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
      */
     onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
     /**
-     * The callback invoked when autocomlete option created.
+     * The callback invoked when autocomplete option created.
      */
     onCreate?: (newItem: AutocompleteItem, newItems: AutocompleteItem[]) => void
     /**
@@ -663,6 +663,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
           if (!isFocused && !isDisabled) {
             isFocused = true
+
             setFocusedIndex(index)
           }
         } else {
@@ -699,6 +700,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (allowFree && selectedValues.length === 0) {
         selectedValues.push(newValue)
+
         setInputValue("")
       }
 
@@ -729,7 +731,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   )
 
   const onChange = useCallback(
-    (newValue: string) => {
+    (newValue: string, runRebirth: boolean = true) => {
       setValue((prev) => {
         if (!isArray(prev)) {
           return newValue as T
@@ -743,19 +745,29 @@ export const useAutocomplete = <T extends string | string[] = string>({
           }
         }
       })
+
       const isHit =
         descendants
           .values()
           .filter(({ node }) =>
             format(node.textContent ?? "").includes(newValue),
           ).length > 0
+
       onChangeLabel(newValue)
-      if (!allowFree || isHit) {
-        setInputValue("")
-      }
-      rebirthOptions(false)
+
+      if (!allowFree || isHit) setInputValue("")
+
+      if (isMulti && runRebirth) rebirthOptions(false)
     },
-    [allowFree, onChangeLabel, rebirthOptions, setValue, descendants, format],
+    [
+      allowFree,
+      isMulti,
+      onChangeLabel,
+      rebirthOptions,
+      setValue,
+      descendants,
+      format,
+    ],
   )
 
   const onSelect = useCallback(() => {
@@ -870,26 +882,6 @@ export const useAutocomplete = <T extends string | string[] = string>({
     isMulti,
   ])
 
-  const onDelete = useCallback(() => {
-    if (!isMulti) {
-      onChange("")
-    } else {
-      onChange(value[value.length - 1])
-    }
-  }, [isMulti, onChange, value])
-
-  const onClear = useCallback(
-    (ev: MouseEvent<HTMLDivElement>) => {
-      ev.stopPropagation()
-
-      setValue([] as unknown as T)
-      setLabel(undefined)
-      setInputValue("")
-      rebirthOptions()
-    },
-    [setLabel, setInputValue, setValue, rebirthOptions],
-  )
-
   const onClick = useCallback(() => {
     if (isOpen) {
       if (inputRef.current) inputRef.current.focus()
@@ -916,15 +908,37 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      if (allowFree && !!inputValue) {
-        onChange(inputValue)
-      } else {
-        setInputValue("")
-      }
+      if (allowFree && !!inputValue) onChange(inputValue, false)
+
+      setInputValue("")
 
       if (isOpen) onClose()
     },
     [closeOnBlur, isHit, isOpen, inputValue, allowFree, onClose, onChange],
+  )
+
+  const onDelete = useCallback(() => {
+    if (!isMulti) {
+      onChange("")
+    } else {
+      onChange(value[value.length - 1])
+    }
+
+    if (!isOpen) onFocus()
+  }, [isMulti, isOpen, onChange, onFocus, value])
+
+  const onClear = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.stopPropagation()
+
+      setValue([] as unknown as T)
+      setLabel(undefined)
+      setInputValue("")
+      rebirthOptions()
+
+      if (isOpen && inputRef.current) inputRef.current.focus()
+    },
+    [isOpen, setLabel, setInputValue, setValue, rebirthOptions],
   )
 
   const onKeyDown = useCallback(
@@ -963,6 +977,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
               : allowFree && isMulti
                 ? () => {
                     if (inputValue) onChange(inputValue)
+
                     setFocusedIndex(0)
                   }
                 : undefined,

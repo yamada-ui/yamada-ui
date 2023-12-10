@@ -16,7 +16,7 @@ Yamada UI, like other UI libraries, has a concept of themes.
 
 A theme is a modifiable object where tokens of many properties such as component styles, colors, spaces, font sizes, and others are defined.
 
-To set a [default theme](/styled-system/theming/default-theme) for your project, you need to add `UIProvider` to the root of your application.
+To set a [Default Theme](/styled-system/theming/default-theme) for your project, you need to add `UIProvider` to the root of your application.
 
 ```tsx live=false highlight={5,7}
 import { UIProvider } from "@yamada-ui/react"
@@ -31,7 +31,7 @@ const App = () => {
 ```
 
 :::note
-The [default theme](/styled-system/theming/default-theme) is included within the `UIProvider`.
+The [Default Theme](/styled-system/theming/default-theme) is included within the `UIProvider`.
 :::
 
 ### Customize the Theme
@@ -64,11 +64,11 @@ const App = () => {
 This has changed the margins throughout the application.
 
 :::note status=warning
-`extendTheme` creates a theme that inherits the [default theme](/styled-system/theming/default-theme). If you do not use `extendTheme`, it will become a completely new theme without inheriting the [default theme](/styled-system/theming/default-theme).
+`extendTheme` creates a theme that inherits the [Default Theme](/styled-system/theming/default-theme). If you do not use `extendTheme`, it will become a completely new theme without inheriting the [Default Theme](/styled-system/theming/default-theme).
 :::
 
 :::note
-If you want to learn more about themes, please check [Customize the Theme](/styled-system/theming/customize-theme) and [Component Style](/styled-system/theming/component-style).
+If you want to learn more about themes, please check [Customize Theme](/styled-system/theming/customize-theme) and [Component Styles](/styled-system/theming/component-styles).
 :::
 
 ### Changing Semantic Tokens
@@ -147,7 +147,7 @@ To display loading, use `useLoading`. `useLoading` returns instances of `screen`
 - `finish`: Ends the loading animation.
 
 :::note status=warning
-`custom` is not set in the [default config](/styled-system/configure/default-config). If you want to set up custom loading, please check [here](/styled-system/loading).
+`custom` is not set in the [Default Config](/styled-system/configure/default-config). If you want to set up custom loading, please check [here](/styled-system/loading).
 :::
 
 ```tsx functional=true
@@ -374,7 +374,7 @@ Yamada UI uses `@media(max-width)` media queries for responsive design.
 
 ### About Breakpoints
 
-Responsive styles refer to the breakpoints defined in the theme. Yamada UI has a [default theme](/styled-system/theming/default-theme) where breakpoints are defined.
+Responsive styles refer to the breakpoints defined in the theme. Yamada UI has a [Default Theme](/styled-system/theming/default-theme) where breakpoints are defined.
 
 Here are the actual defined values.
 
@@ -414,7 +414,7 @@ Please change the color mode with the button below and check it out.
 <ColorModeButton />
 ### Switching Color Modes
 
-The color mode is set in the [default config](/styled-system/configure/default-config).
+The color mode is set in the [Default Config](/styled-system/configure/default-config).
 
 Here are the actual defined values.
 
@@ -556,7 +556,7 @@ Now, you have become a `Regular Yamada`🥳
 
 To you who have become a `Regular Yamada`, Yamada gives you these words.
 
-"I'll be waiting in [Learn in Application](/getting-started/advanced) next///"😘
+"I'll be waiting in [Learn the Advanced](/getting-started/advanced) next///"😘
 
 ## Learn More
 

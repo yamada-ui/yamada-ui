@@ -54,6 +54,7 @@
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
     "dayjs": "^1.11.7"
   },
   "devDependencies": {

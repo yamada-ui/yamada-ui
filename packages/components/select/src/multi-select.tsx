@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx, getValidChildren, handlerAll } from "@yamada-ui/utils"
 import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
 import { cloneElement, useMemo } from "react"
@@ -73,6 +75,12 @@ type MultiSelectOptions = {
    * Props for select clear icon element.
    */
   clearIconProps?: SelectIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export type MultiSelectProps = ThemeProps<"Select"> &
@@ -98,6 +106,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     listProps,
     iconProps,
     clearIconProps,
+    portalProps = { isDisabled: true },
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -202,9 +211,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
             </ui.div>
 
             {!isEmpty ? (
-              <SelectList {...listProps}>
-                {children ?? computedChildren}
-              </SelectList>
+              <Portal {...portalProps}>
+                <SelectList {...listProps}>
+                  {children ?? computedChildren}
+                </SelectList>
+              </Portal>
             ) : null}
           </ui.div>
         </Popover>

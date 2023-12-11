@@ -28,7 +28,7 @@ export const Checkbox: ComponentMultiStyle = {
       transitionDuration: "normal",
       border: "2px solid",
       borderColor: "inherit",
-      color: "white",
+      color: ["white", "black"],
       _checked: {
         bg: `${c}.500`,
         borderColor: `${c}.500`,
@@ -44,7 +44,7 @@ export const Checkbox: ComponentMultiStyle = {
       _indeterminate: {
         bg: `${c}.500`,
         borderColor: `${c}.500`,
-        color: "white",
+        color: ["white", "black"],
       },
       _disabled: {
         bg: ["blackAlpha.200", "whiteAlpha.100"],

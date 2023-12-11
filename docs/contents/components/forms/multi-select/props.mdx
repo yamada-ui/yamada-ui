@@ -247,6 +247,12 @@ tab: Props
   defaultValue="'bottom'"
 />
 <PropsCard
+  name="portalProps"
+  type='Omit<PortalProps, "children">'
+  description={"Props to be forwarded to the portal component."}
+  defaultValue="'{ isDisabled: true }'"
+/>
+<PropsCard
   name="preventOverflow"
   type="boolean"
   description={

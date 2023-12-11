@@ -197,7 +197,7 @@
     "onCreate": {
       "type": "(\n  newItem: AutocompleteItem,\n  newItems: AutocompleteItem[],\n) => void",
       "required": false,
-      "description": "The callback invoked when autocomlete option created."
+      "description": "The callback invoked when autocomplete option created."
     },
     "onOpen": {
       "type": "() => void",
@@ -219,6 +219,12 @@
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "preventOverflow": {
       "type": "boolean",
@@ -532,7 +538,7 @@
     "onCreate": {
       "type": "(\n  newItem: AutocompleteItem,\n  newItems: AutocompleteItem[],\n) => void",
       "required": false,
-      "description": "The callback invoked when autocomlete option created."
+      "description": "The callback invoked when autocomplete option created."
     },
     "onOpen": {
       "type": "() => void",
@@ -554,6 +560,12 @@
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "preventOverflow": {
       "type": "boolean",

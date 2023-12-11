@@ -1,5 +1,13 @@
 # @yamada-ui/tabs
 
+## 0.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/ripple@0.1.2
+
 ## 0.4.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @yamada-ui/slider
 
+## 0.4.20
+
+### Patch Changes
+
+- [#434](https://github.com/hirotomoyamada/yamada-ui/pull/434) [`78d897b`](https://github.com/hirotomoyamada/yamada-ui/commit/78d897b2e1fb5546ab7e08a77b465ba6b97f1c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved focus logic for `slider` and `RangeSlider`.
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/form-control@0.3.25
+
 ## 0.4.19
 
 ### Patch Changes

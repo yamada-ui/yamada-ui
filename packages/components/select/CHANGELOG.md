@@ -1,5 +1,19 @@
 # @yamada-ui/select
 
+## 0.6.0
+
+### Minor Changes
+
+- [#439](https://github.com/hirotomoyamada/yamada-ui/pull/439) [`13eb95c`](https://github.com/hirotomoyamada/yamada-ui/commit/13eb95cf198109599d94f782114afc8835d0e42a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Portal` component to allow `PopoverContent` transfer.
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/form-control@0.3.25
+  - @yamada-ui/icon@0.3.22
+  - @yamada-ui/popover@0.3.29
+
 ## 0.5.13
 
 ### Patch Changes

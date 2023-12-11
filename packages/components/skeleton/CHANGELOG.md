@@ -1,5 +1,14 @@
 # @yamada-ui/skeleton
 
+## 0.4.6
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/use-animation@0.4.11
+  - @yamada-ui/use-value@0.2.22
+
 ## 0.4.5
 
 ### Patch Changes

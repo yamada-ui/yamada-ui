@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.14.0
+
+### Minor Changes
+
+- [#442](https://github.com/hirotomoyamada/yamada-ui/pull/442) [`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff) Thanks [@illionillion](https://github.com/illionillion)! - Support `accent-color`.
+
 ## 0.13.2
 
 ### Patch Changes

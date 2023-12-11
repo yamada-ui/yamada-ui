@@ -1,5 +1,20 @@
 # @yamada-ui/calendar
 
+## 0.7.0
+
+### Minor Changes
+
+- [#440](https://github.com/hirotomoyamada/yamada-ui/pull/440) [`9f6302d`](https://github.com/hirotomoyamada/yamada-ui/commit/9f6302df9cd5a9911bbe8cae63b28112d13407aa) Thanks [@teru12012000](https://github.com/teru12012000)! - Added `Portal` component to allow `PopoverContent` transfer.
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/button@0.4.1
+  - @yamada-ui/form-control@0.3.25
+  - @yamada-ui/icon@0.3.22
+  - @yamada-ui/popover@0.3.29
+
 ## 0.6.13
 
 ### Patch Changes

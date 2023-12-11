@@ -1,5 +1,22 @@
 # @yamada-ui/autocomplete
 
+## 0.8.0
+
+### Minor Changes
+
+- [#440](https://github.com/hirotomoyamada/yamada-ui/pull/440) [`b7b02d2`](https://github.com/hirotomoyamada/yamada-ui/commit/b7b02d2f799bbce45242ea33a7a99ed50db27a72) Thanks [@teru12012000](https://github.com/teru12012000)! - Added `Portal` component to allow `PopoverContent` transfer.
+
+### Patch Changes
+
+- [#436](https://github.com/hirotomoyamada/yamada-ui/pull/436) [`10445b1`](https://github.com/hirotomoyamada/yamada-ui/commit/10445b1311de039fea6cf89323b2648ade1d754a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that caused the list to display incorrectly when `allowFree` was true.
+
+- Updated dependencies [[`13eb95c`](https://github.com/hirotomoyamada/yamada-ui/commit/13eb95cf198109599d94f782114afc8835d0e42a), [`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/select@0.6.0
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/form-control@0.3.25
+  - @yamada-ui/icon@0.3.22
+  - @yamada-ui/popover@0.3.29
+
 ## 0.7.4
 
 ### Patch Changes

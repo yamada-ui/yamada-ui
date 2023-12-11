@@ -90,7 +90,7 @@ Yamada UI is a React UI component library that streamlines the development of cu
 ## Contents
 
 - [Respect](#respect)
-- [Documentation](https://yamada-ui.vercel.app)
+- [Documentation](https://yamada-ui.com)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -105,7 +105,7 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 ## Documentation
 
-It's the https://yamada-ui.vercel.app website for the latest version of Yamada UI.
+It's the https://yamada-ui.com website for the latest version of Yamada UI.
 
 ## Features
 

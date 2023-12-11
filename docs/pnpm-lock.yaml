@@ -14,6 +14,9 @@ dependencies:
   '@fortawesome/free-solid-svg-icons':
     specifier: ^6.4.2
     version: 6.5.1
+  '@vercel/speed-insights':
+    specifier: ^1.0.1
+    version: 1.0.1
   '@yamada-ui/calendar':
     specifier: 0.6.13
     version: 0.6.13(@types/react@18.2.40)(react-dom@18.2.0)(react@18.2.0)
@@ -2359,6 +2362,11 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
+
+  /@vercel/speed-insights@1.0.1:
+    resolution: {integrity: sha512-cm8KTTsDgS1AbWsgIEZuMoyPUjclzeqJihyLp0tnA21B/x9iTE8hu2S5zM+/DBzihuHxWL1dx9pCWk22ctMFWQ==, tarball: https://registry.npmjs.org/@vercel/speed-insights/-/speed-insights-1.0.1.tgz}
+    requiresBuild: true
+    dev: false
 
   /@yamada-ui/accordion@0.4.9(@types/react@18.2.40)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-KZGSdSf0/r+ZnknKeD5eK68nsFq2Idjmf/zJ7BnCzEIGdslH8EQz10NsS7mkRxqG8QPtylwEYqW06WU7GcPnpQ==, tarball: https://registry.npmjs.org/@yamada-ui/accordion/-/accordion-0.4.9.tgz}

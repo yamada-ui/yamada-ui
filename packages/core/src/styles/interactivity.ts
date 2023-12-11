@@ -19,7 +19,7 @@ export type InteractivityProps = {
   /**
    * The CSS `accent-color` property.
    */
-  accentColor: Token<CSS.Property.AccentColor>
+  accentColor?: Token<CSS.Property.AccentColor, "colors">
   /**
    * The CSS `appearance` property.
    */

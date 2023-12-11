@@ -1,0 +1,1 @@
+import{j as s}from"./jsx-runtime-TtYKBvr-.js";import{B as f}from"./button-6NxM0NUu.js";import{f as i}from"./forward-ref-6T0UNPU-.js";import{a as u}from"./factory-ZREtkjNV.js";const l=i(({icon:o,isRounded:r,children:t,className:a,...m},n)=>s(f,{className:u("ui-icon-button",a),ref:n,p:0,...r?{rounded:"full"}:{},...m,children:o||t}));export{l as I};

@@ -2,7 +2,7 @@
   {
     "title": "Contributing to Yamada UI",
     "type": "page",
-    "description": "This page is currently under construction.",
+    "description": "We want to create a community where Yamada UI is enjoyable and educational for anyone and everyone.",
     "slug": "/community/contributing",
     "hierarchy": { "lv1": "Contributing to Yamada UI" }
   },
@@ -1571,6 +1571,16 @@
     "type": "fragment",
     "slug": "/components/feedback/alert#applying-loading",
     "hierarchy": { "lv1": "Alert", "lv2": "Usage", "lv3": "Applying Loading" }
+  },
+  {
+    "title": "Customize components",
+    "type": "fragment",
+    "slug": "/components/feedback/alert#customize-components",
+    "hierarchy": {
+      "lv1": "Alert",
+      "lv2": "Usage",
+      "lv3": "Customize components"
+    }
   },
   {
     "title": "CircleProgress",
@@ -4519,9 +4529,183 @@
   {
     "title": "RangeSlider",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`RangeSlider` is a component used for users to select a range of related values.",
     "slug": "/components/forms/range-slider",
     "hierarchy": { "lv1": "RangeSlider" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#import",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#usage",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#change-size",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#change-color-scheme",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Set Default Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-default-values",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Default Values"
+    }
+  },
+  {
+    "title": "Change Orientation",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#change-orientation",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Change Orientation"
+    }
+  },
+  {
+    "title": "Reverse Direction",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#reverse-direction",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Reverse Direction"
+    }
+  },
+  {
+    "title": "Set Minimum and Maximum Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-minimum-and-maximum-values",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Values"
+    }
+  },
+  {
+    "title": "Set Step Value",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-step-value",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Step Value"
+    }
+  },
+  {
+    "title": "Set Minimum Range Between Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-minimum-range-between-values",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Minimum Range Between Values"
+    }
+  },
+  {
+    "title": "Control Externally Only",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#control-externally-only",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Control Externally Only"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#disable",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#make-read-only",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Make Input Invalid",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#make-input-invalid",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Make Input Invalid"
+    }
+  },
+  {
+    "title": "Display Marks",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#display-marks",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Display Marks"
+    }
+  },
+  {
+    "title": "Display Tooltips",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#display-tooltips",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Display Tooltips"
+    }
+  },
+  {
+    "title": "Customize Styling",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#customize-styling",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Customize Styling"
+    }
+  },
+  {
+    "title": "Handle Events for Start and End of Changes",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#handle-events-for-start-and-end-of-changes",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Handle Events for Start and End of Changes"
+    }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
   },
   {
     "title": "SegmentedControl",
@@ -8913,72 +9097,72 @@
     "hierarchy": { "lv1": "Semantic Tokens" }
   },
   {
-    "title": "Style props",
+    "title": "Style Props",
     "type": "page",
     "description": "Learn about Style props in Yamada UI. Style props is a method to change the style of a component just by passing props to the component.",
     "slug": "/styled-system/style-props",
-    "hierarchy": { "lv1": "Style props" }
+    "hierarchy": { "lv1": "Style Props" }
   },
   {
     "title": "Color and Background",
     "type": "fragment",
     "slug": "/styled-system/style-props#color-and-background",
-    "hierarchy": { "lv1": "Style props", "lv2": "Color and Background" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Color and Background" }
   },
   {
     "title": "Margins and Padding",
     "type": "fragment",
     "slug": "/styled-system/style-props#margins-and-padding",
-    "hierarchy": { "lv1": "Style props", "lv2": "Margins and Padding" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Margins and Padding" }
   },
   {
     "title": "Typography",
     "type": "fragment",
     "slug": "/styled-system/style-props#typography",
-    "hierarchy": { "lv1": "Style props", "lv2": "Typography" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Typography" }
   },
   {
     "title": "Layout",
     "type": "fragment",
     "slug": "/styled-system/style-props#layout",
-    "hierarchy": { "lv1": "Style props", "lv2": "Layout" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Layout" }
   },
   {
     "title": "Position",
     "type": "fragment",
     "slug": "/styled-system/style-props#position",
-    "hierarchy": { "lv1": "Style props", "lv2": "Position" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Position" }
   },
   {
     "title": "List",
     "type": "fragment",
     "slug": "/styled-system/style-props#list",
-    "hierarchy": { "lv1": "Style props", "lv2": "List" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "List" }
   },
   {
     "title": "Border",
     "type": "fragment",
     "slug": "/styled-system/style-props#border",
-    "hierarchy": { "lv1": "Style props", "lv2": "Border" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Border" }
   },
   {
     "title": "Effects",
     "type": "fragment",
     "slug": "/styled-system/style-props#effects",
-    "hierarchy": { "lv1": "Style props", "lv2": "Effects" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Effects" }
   },
   {
     "title": "Filter",
     "type": "fragment",
     "slug": "/styled-system/style-props#filter",
-    "hierarchy": { "lv1": "Style props", "lv2": "Filter" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Filter" }
   },
   {
     "title": "Pseudo Elements and Selectors",
     "type": "fragment",
     "slug": "/styled-system/style-props#pseudo-elements-and-selectors",
     "hierarchy": {
-      "lv1": "Style props",
+      "lv1": "Style Props",
       "lv2": "Pseudo Elements and Selectors"
     }
   },
@@ -8986,7 +9170,7 @@
     "title": "Others",
     "type": "fragment",
     "slug": "/styled-system/style-props#others",
-    "hierarchy": { "lv1": "Style props", "lv2": "Others" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "Others" }
   },
   {
     "title": "Text and Layer Styles",
@@ -9026,13 +9210,13 @@
     "title": "Component Styles",
     "type": "page",
     "description": "How to create and customize styles for components.",
-    "slug": "/styled-system/theming/component-style",
+    "slug": "/styled-system/theming/component-styles",
     "hierarchy": { "lv1": "Component Styles" }
   },
   {
     "title": "Base Styles and Modifier Styles",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#base-styles-and-modifier-styles",
+    "slug": "/styled-system/theming/component-styles#base-styles-and-modifier-styles",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Base Styles and Modifier Styles"
@@ -9041,7 +9225,7 @@
   {
     "title": "Single part and multi part components",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#single-part-and-multi-part-components",
+    "slug": "/styled-system/theming/component-styles#single-part-and-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Single part and multi part components"
@@ -9050,7 +9234,7 @@
   {
     "title": "Single part components",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#single-part-components",
+    "slug": "/styled-system/theming/component-styles#single-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Single part and multi part components",
@@ -9060,7 +9244,7 @@
   {
     "title": "Multi part components",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#multi-part-components",
+    "slug": "/styled-system/theming/component-styles#multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Single part and multi part components",
@@ -9070,7 +9254,7 @@
   {
     "title": "Styling Single part components",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#styling-single-part-components",
+    "slug": "/styled-system/theming/component-styles#styling-single-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Single part and multi part components",
@@ -9080,7 +9264,7 @@
   {
     "title": "Styling Multi part components",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#styling-multi-part-components",
+    "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Single part and multi part components",
@@ -9090,7 +9274,7 @@
   {
     "title": "Creating Custom Components",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#creating-custom-components",
+    "slug": "/styled-system/theming/component-styles#creating-custom-components",
     "hierarchy": {
       "lv1": "Component Styles",
       "lv2": "Creating Custom Components"
@@ -9592,19 +9776,19 @@
     "title": "Switch Themes",
     "type": "page",
     "description": "How users can switch themes.",
-    "slug": "/styled-system/theming/switch-theme",
+    "slug": "/styled-system/theming/switch-themes",
     "hierarchy": { "lv1": "Switch Themes" }
   },
   {
     "title": "Setup",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#setup",
+    "slug": "/styled-system/theming/switch-themes#setup",
     "hierarchy": { "lv1": "Switch Themes", "lv2": "Setup" }
   },
   {
     "title": "Preparing Multiple Themes",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#preparing-multiple-themes",
+    "slug": "/styled-system/theming/switch-themes#preparing-multiple-themes",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Setup",
@@ -9614,7 +9798,7 @@
   {
     "title": "Adding ThemeSchemeScript",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#adding-themeschemescript",
+    "slug": "/styled-system/theming/switch-themes#adding-themeschemescript",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Setup",
@@ -9624,7 +9808,7 @@
   {
     "title": "In the case of Create React App",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#in-the-case-of-create-react-app",
+    "slug": "/styled-system/theming/switch-themes#in-the-case-of-create-react-app",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Setup",
@@ -9635,7 +9819,7 @@
   {
     "title": "In the case of Next.js",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#in-the-case-of-nextjs",
+    "slug": "/styled-system/theming/switch-themes#in-the-case-of-nextjs",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Setup",
@@ -9646,13 +9830,13 @@
   {
     "title": "Adding themeSchemeManager",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#adding-themeschememanager",
+    "slug": "/styled-system/theming/switch-themes#adding-themeschememanager",
     "hierarchy": { "lv1": "Switch Themes", "lv2": "Adding themeSchemeManager" }
   },
   {
     "title": "Prepare getServerSideProps",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#prepare-getserversideprops",
+    "slug": "/styled-system/theming/switch-themes#prepare-getserversideprops",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
@@ -9662,7 +9846,7 @@
   {
     "title": "Passing cookieStorageSSR",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#passing-cookiestoragessr",
+    "slug": "/styled-system/theming/switch-themes#passing-cookiestoragessr",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
@@ -9672,7 +9856,7 @@
   {
     "title": "Add getServerSideProps",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#add-getserversideprops",
+    "slug": "/styled-system/theming/switch-themes#add-getserversideprops",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
@@ -9682,7 +9866,7 @@
   {
     "title": "Switching Themes",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#switching-themes",
+    "slug": "/styled-system/theming/switch-themes#switching-themes",
     "hierarchy": { "lv1": "Switch Themes", "lv2": "Switching Themes" }
   },
   {

@@ -48,7 +48,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
 
   const language = className?.replace(/language-/, "") ?? "sh"
   const code = raw?.trim() ?? ""
-  const theme = themes.nightOwl
+  const theme = themes.oneDark
   const isJSXorTSX = language === "jsx" || language === "tsx"
 
   if (isMounted && isJSXorTSX && live) {

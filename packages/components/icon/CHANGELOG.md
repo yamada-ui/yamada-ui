@@ -1,5 +1,13 @@
 # @yamada-ui/icon
 
+## 0.3.22
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/use-token@0.3.16
+
 ## 0.3.21
 
 ### Patch Changes

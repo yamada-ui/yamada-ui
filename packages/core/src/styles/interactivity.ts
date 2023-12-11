@@ -16,6 +16,9 @@ export const interactivity: Configs = {
 }
 
 export type InteractivityProps = {
+  /**
+   * The CSS `accent-color` property.
+   */
   accentColor: Token<CSS.Property.AccentColor>
   /**
    * The CSS `appearance` property.

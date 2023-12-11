@@ -9,20 +9,9 @@ import {
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, filterEmpty } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef, FC } from "react"
+import type { FC } from "react"
 import ReactMarkdown from "react-markdown"
-import type {
-  Components,
-  CodeProps,
-  HeadingProps,
-  LiProps,
-  OrderedListProps,
-  TableDataCellProps,
-  TableRowProps,
-  UnorderedListProps,
-} from "react-markdown/lib/ast-to-react"
-import type { ReactMarkdownProps } from "react-markdown/lib/complex-types"
-import type { ReactMarkdownOptions } from "react-markdown/lib/react-markdown"
+import type { Components, Options } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
@@ -30,26 +19,23 @@ import type { CodeThemeNames } from "./code-theme"
 import { codeThemes } from "./code-theme"
 import { remarkUIComponent } from "./remark-ui-component"
 
-export type MarkdownComponents = Components
+type UIComponents = {
+  note?: FC<MarkdownComponentProps<"div">>
+}
+
+export type MarkdownComponents = Components & UIComponents
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
-  ComponentPropsWithoutRef<Y> & ReactMarkdownProps
-export type MarkdownComponentCodeProps = CodeProps
-export type MarkdownComponentHeadingProps = HeadingProps
-export type MarkdownComponentLiProps = LiProps
-export type MarkdownComponentOrderedListProps = OrderedListProps
-export type MarkdownComponentUnorderedListProps = UnorderedListProps
-export type MarkdownComponentTableCellProps = TableDataCellProps
-export type MarkdownComponentTableRowProps = TableRowProps
+  JSX.IntrinsicElements[Y]
 
 const uiComponents = ({
   codeProps,
   noteProps,
-}: Pick<MarkdownProps, "codeProps" | "noteProps">): Components =>
+}: Pick<MarkdownProps, "codeProps" | "noteProps">): MarkdownComponents =>
   ({
-    code: (props: CodeProps) => {
+    code: (props) => {
       return <Code {...codeProps} {...props} />
     },
-    note: ({ children, ...rest }: any) => {
+    note: ({ children, ...rest }) => {
       return (
         <Alert mb="4" {...noteProps} {...rest}>
           <AlertIcon />
@@ -57,9 +43,9 @@ const uiComponents = ({
         </Alert>
       )
     },
-  }) as Components
+  }) as MarkdownComponents
 
-type MarkdownOptions = ReactMarkdownOptions & {
+type MarkdownOptions = Options & {
   /**
    * If provided, this will set the theme for the code.
    */
@@ -80,7 +66,6 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
     className,
     remarkPlugins,
     rehypePlugins,
-    linkTarget = "_blank",
     components,
     codeProps,
     noteProps,
@@ -106,31 +91,28 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
       remarkPlugins={remarkPlugins}
       rehypePlugins={rehypePlugins}
       components={components}
-      linkTarget={linkTarget}
       __css={css}
       {...rest}
     />
   )
 })
 
-const Code: FC<MarkdownComponentCodeProps & MarkdownOptions["codeProps"]> = ({
-  inline,
-  className,
+const Code: FC<MarkdownComponentProps<"code"> & MarkdownProps["codeProps"]> = ({
+  className = "",
   children,
   theme = "oneDark",
 }) => {
-  if (inline)
-    return (
-      <ui.code className={cx("ui-markdown__code--inline", className)}>
-        {children}
-      </ui.code>
-    )
-
   theme = useValue(theme)
 
-  const language = className?.replace(/language-/, "")
+  const isInline = !/language-(\w+)/.test(className)
 
-  return (
+  const language = className.replace(/language-/, "")
+
+  return isInline ? (
+    <ui.code className={cx("ui-markdown__code--inline", className)}>
+      {children}
+    </ui.code>
+  ) : (
     <ui.pre
       as={SyntaxHighlighter as any}
       className={cx("ui-markdown__code", className)}

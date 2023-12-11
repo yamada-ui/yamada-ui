@@ -31,6 +31,7 @@ import * as CarouselComponents from "@yamada-ui/carousel"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import * as MarkdownComponents from "@yamada-ui/markdown"
+import type { SkeletonProps } from "@yamada-ui/react"
 import {
   Box,
   Text,
@@ -144,10 +145,6 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
   functional,
   ...rest
 }) => {
-  const [isMounted, { on }] = useBoolean()
-
-  useEffect(on, [on])
-
   code = code.trim().replace("// prettier-ignore", "").trim()
 
   const { t } = useI18n()
@@ -167,7 +164,7 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
       {...rest}
     >
       <Box my="6">
-        <Skeleton isLoaded={isMounted} rounded="md" w="full" isFitContent>
+        <Preview>
           <Box
             as={LivePreview}
             p="md"
@@ -175,7 +172,7 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
             rounded="md"
             overflowX="auto"
           />
-        </Skeleton>
+        </Preview>
 
         <Box rounded="md" overflow="hidden" my="4" position="relative">
           <Box py="2" bg={["neutral.800", "neutral.900"]} w="full">
@@ -226,6 +223,22 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
 }
 
 export default EditableCodeBlock
+
+const Preview: FC<SkeletonProps> = ({ ...rest }) => {
+  const [isMounted, { on }] = useBoolean()
+
+  useEffect(on, [on])
+
+  return (
+    <Skeleton
+      isLoaded={isMounted}
+      rounded="md"
+      w="full"
+      isFitContent
+      {...rest}
+    />
+  )
+}
 
 const Editor: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useI18n()

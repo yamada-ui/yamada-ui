@@ -594,6 +594,9 @@ importers:
       '@yamada-ui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@yamada-ui/portal':
+        specifier: workspace:*
+        version: link:../portal
       '@yamada-ui/select':
         specifier: workspace:*
         version: link:../select
@@ -713,6 +716,9 @@ importers:
       '@yamada-ui/popover':
         specifier: workspace:*
         version: link:../popover
+      '@yamada-ui/portal':
+        specifier: workspace:*
+        version: link:../portal
       '@yamada-ui/use-clickable':
         specifier: workspace:*
         version: link:../../hooks/use-clickable

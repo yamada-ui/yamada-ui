@@ -23,6 +23,8 @@ export const background: Configs = {
   bg: configs.color("background"),
   bgColor: configs.color("backgroundColor"),
   bgPos: configs.prop("backgroundPosition"),
+  bgPosX: configs.prop("backgroundPositionX"),
+  bgPosY: configs.prop("backgroundPositionY"),
   bgRepeat: configs.prop("backgroundRepeat"),
   bgAttachment: configs.prop("backgroundAttachment"),
   bgGradient: configs.gradient("backgroundImage"),

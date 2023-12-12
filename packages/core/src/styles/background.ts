@@ -8,11 +8,13 @@ export const background: Configs = {
   backgroundColor: configs.color("backgroundColor"),
   backgroundImage: configs.gradient("backgroundImage"),
   backgroundSize: true,
+  backgroundOrigin: true,
   backgroundPosition: true,
   backgroundRepeat: true,
   backgroundAttachment: true,
   backgroundClip: { transform: transforms.bgClip },
   bgSize: configs.prop("backgroundSize"),
+  bgOrigin: configs.prop("backgroundOrigin"),
   bgPosition: configs.prop("backgroundPosition"),
   bg: configs.color("background"),
   bgColor: configs.color("backgroundColor"),
@@ -65,6 +67,14 @@ export type BackgroundProps = {
    * The CSS `background-size` property.
    */
   backgroundSize?: Token<CSS.Property.BackgroundSize | number>
+  /**
+   * The CSS `background-origin` property.
+   */
+  backgroundOrigin?: Token<CSS.Property.BackgroundOrigin>
+  /**
+   * The CSS `background-origin` property.
+   */
+  bgOrigin?: Token<CSS.Property.BackgroundOrigin>
   /**
    * The CSS `background-position` property.
    */

@@ -1,5 +1,13 @@
 # @yamada-ui/tag
 
+## 0.4.6
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/icon@0.3.22
+
 ## 0.4.5
 
 ### Patch Changes

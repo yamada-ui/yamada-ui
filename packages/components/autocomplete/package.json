@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/autocomplete",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "description": "Yamada UI autocomplete component",
   "keywords": [
     "yamada",
@@ -55,7 +55,8 @@
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*"
+    "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/portal": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

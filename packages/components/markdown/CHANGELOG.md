@@ -1,5 +1,18 @@
 # @yamada-ui/markdown
 
+## 0.6.0
+
+### Minor Changes
+
+- [#441](https://github.com/hirotomoyamada/yamada-ui/pull/441) [`d3b83fc`](https://github.com/hirotomoyamada/yamada-ui/commit/d3b83fc36334fa6fa83605f8d8e2f53d9c81e846) Thanks [@renovate](https://github.com/apps/renovate)! - Upgraded `ReactMarkdown` to version 9.0.0.
+
+### Patch Changes
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/alert@0.5.18
+  - @yamada-ui/use-value@0.2.22
+
 ## 0.5.5
 
 ### Patch Changes

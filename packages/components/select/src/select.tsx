@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx, getValidChildren } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import type { SelectIconProps } from "./select-icon"
@@ -59,6 +61,12 @@ type SelectOptions = {
    * Props for select icon element.
    */
   iconProps?: SelectIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export type SelectProps = ThemeProps<"Select"> &
@@ -84,6 +92,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     containerProps,
     listProps,
     iconProps,
+    portalProps = { isDisabled: true },
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -176,13 +185,15 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
             </ui.div>
 
             {!isEmpty ? (
-              <SelectList {...listProps}>
-                {!!placeholder && placeholderInOptions ? (
-                  <Option>{placeholder}</Option>
-                ) : null}
+              <Portal {...portalProps}>
+                <SelectList {...listProps}>
+                  {!!placeholder && placeholderInOptions ? (
+                    <Option>{placeholder}</Option>
+                  ) : null}
 
-                {children ?? computedChildren}
-              </SelectList>
+                  {children ?? computedChildren}
+                </SelectList>
+              </Portal>
             ) : null}
           </ui.div>
         </Popover>

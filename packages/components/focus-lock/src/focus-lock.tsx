@@ -1,12 +1,10 @@
 import type { FocusableElement } from "@yamada-ui/utils"
-import { getAllFocusable } from "@yamada-ui/utils"
+import { getAllFocusable, interopDefault } from "@yamada-ui/utils"
 import type { FC, ReactNode, RefObject } from "react"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"
 
-const InternalFocusLock: typeof ReactFocusLock =
-  (ReactFocusLock as unknown as { default: typeof ReactFocusLock }).default ??
-  ReactFocusLock
+const InternalFocusLock = interopDefault(ReactFocusLock)
 
 export type FocusLockProps = {
   /**

@@ -5517,7 +5517,7 @@
   {
     "title": "Wrap",
     "type": "page",
-    "description": "`Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`",
+    "description": "`Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.",
     "slug": "/components/layouts/wrap",
     "hierarchy": { "lv1": "Wrap" }
   },

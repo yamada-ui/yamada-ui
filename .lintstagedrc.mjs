@@ -1,24 +1,22 @@
 import { ESLint } from "eslint"
 
-const removeIgnoredFiles = async (files) => {
+const omitIgnoredPaths = async (paths) => {
   const eslint = new ESLint()
 
-  const isIgnoredMap = await Promise.all(
-    files.map((file) => eslint.isPathIgnored(file)),
-  )
+  const resolvedPaths = (
+    await Promise.all(
+      paths.map((path) => (eslint.isPathIgnored(path) ? path : undefined)),
+    )
+  ).filter(Boolean)
 
-  const filteredFiles = files.filter((_, i) => !isIgnoredMap[i])
-
-  console.log(filteredFiles)
-
-  return filteredFiles.join(" ")
+  return resolvedPaths.join(" ")
 }
 
 export default {
   "**/*.{js,jsx,ts,tsx,md,mdx,yml,json,html,css}": ["prettier --write"],
-  "**/*.{js,jsx,ts,tsx}": async (files) => {
-    const filesToLint = await removeIgnoredFiles(files)
+  "**/*.{js,jsx,ts,tsx}": async (paths) => {
+    const resolvedPaths = await omitIgnoredPaths(paths)
 
-    return [`eslint --max-warnings=0 ${filesToLint}`]
+    return [`eslint --max-warnings=0 ${resolvedPaths}`]
   },
 }

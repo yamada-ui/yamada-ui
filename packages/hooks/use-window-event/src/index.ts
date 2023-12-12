@@ -6,11 +6,6 @@ type Handler<E extends string> = E extends keyof WindowEventMap
   : (ev: CustomEvent) => void
 type Options = boolean | AddEventListenerOptions
 
-/**
- * `useWindowEvent` is a custom hook that assigns an event listener to `window`.
- *
- * @see Docs https://yamada-ui.com/hooks/use-window-event
- */
 export const useWindowEvent = <E extends string>(
   event: E,
   handler: Handler<E>,

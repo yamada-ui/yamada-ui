@@ -32,11 +32,6 @@ export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
   UseImageProps &
   ImageOptions
 
-/**
- * `Image` is a component that displays images with fallback support.
- *
- * @see Docs https://yamada-ui.com/components/media-and-icons/image
- */
 export const Image = forwardRef<ImageProps, "img">((props, ref) => {
   let {
     fallback,

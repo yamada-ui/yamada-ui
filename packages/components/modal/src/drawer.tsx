@@ -57,11 +57,6 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
   errorMessage: `useDrawer returned is 'undefined'. Seems you forgot to wrap the components in "<Drawer />" `,
 })
 
-/**
- * `Drawer` is a component for a panel that appears from the edge of the screen.
- *
- * @see Docs https://yamada-ui.com/components/overlay/drawer
- */
 export const Drawer = forwardRef<DrawerProps, "div">(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Drawer", {

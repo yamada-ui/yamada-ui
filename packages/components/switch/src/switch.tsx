@@ -50,11 +50,6 @@ export type SwitchProps = Omit<UseCheckboxProps, "isIndeterminate"> &
   ThemeProps<"Switch"> &
   SwitchOptions
 
-/**
- * `Switch` is a component used to toggle between on and off states.
- *
- * @see Docs https://yamada-ui.com/components/forms/switch
- */
 export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Switch", props)
   const {

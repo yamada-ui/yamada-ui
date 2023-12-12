@@ -52,11 +52,6 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
 
 export type LinkBoxProps = HTMLUIProps<"div"> & ThemeProps<"LinkBox">
 
-/**
- * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.
- *
- * @see Docs https://yamada-ui.com/components/navigation/link-box
- */
 export const LinkBox = forwardRef<LinkBoxProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("LinkBox", props)
   const { className, children, ...rest } = omitThemeProps(mergedProps)

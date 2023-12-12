@@ -38,11 +38,6 @@ export type InputProps = Omit<
   InputOptions &
   FormControlOptions
 
-/**
- * `Input` is a component used to obtain text input from the user.
- *
- * @see Docs https://yamada-ui.com/components/forms/input
- */
 export const Input = forwardRef<InputProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Input", props)
   let { className, htmlSize, ...rest } = omitThemeProps(mergedProps)

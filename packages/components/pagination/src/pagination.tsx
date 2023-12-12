@@ -78,11 +78,6 @@ export type PaginationProps = Omit<
   UsePaginationProps &
   PaginationOptions
 
-/**
- * `Pagination` is a component for managing the pagination and navigation of content.
- *
- * @see Docs https://yamada-ui.com/components/navigation/pagination
- */
 export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Pagination", props)
   const {

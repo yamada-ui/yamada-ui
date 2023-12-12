@@ -39,11 +39,6 @@ export const fadeProps = {
   variants,
 }
 
-/**
- * `Fade` is a component that gradually shows or hides an element.
- *
- * @see Docs https://yamada-ui.com/components/transitions/fade
- */
 export const Fade = forwardRef<FadeProps, "div">(
   (
     {

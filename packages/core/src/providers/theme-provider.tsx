@@ -166,11 +166,6 @@ export const GlobalStyle: FC = () => {
   )
 }
 
-/**
- * `useTheme` is a custom hook that returns a function for retrieving and switching themes.
- *
- * @see Docs https://yamada-ui.com/hooks/use-theme
- */
 export const useTheme = <T extends object = Dict>() => {
   const { themeScheme, changeThemeScheme, ...internalTheme } = useContext(
     ThemeContext,

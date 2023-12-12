@@ -53,20 +53,7 @@ const createExtendTheme =
     )
   }
 
-/**
- * Create a new theme by inheriting the default theme.
- * It is also possible to pass multiple objects and specify options.
- *
- * @see Docs https://yamada-ui.com/styled-system/theming/customize-theme#using-extendtheme
- */
 export const extendTheme = createExtendTheme(defaultTheme)
-
-/**
- * This creates a new theme that inherits only the tokens such as global styles and colors of the default theme.
- * It is also possible to pass multiple objects and specify options.
- *
- * @see Docs https://yamada-ui.com/styled-system/theming/customize-theme#using-extendbasetheme
- */
 export const extendBaseTheme = createExtendTheme(baseTheme)
 
 export const extendToken = (

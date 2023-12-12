@@ -89,11 +89,6 @@ export type FileInputProps = Omit<HTMLUIProps<"div">, "onChange" | "children"> &
 
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
-/**
- * `FileInput` is a component used for users to select files.
- *
- * @see Docs https://yamada-ui.com/components/forms/file-input
- */
 export const FileInput = forwardRef<FileInputProps, "input">(
   ({ children, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("FileInput", props)

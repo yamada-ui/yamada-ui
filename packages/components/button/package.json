@@ -28,7 +28,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

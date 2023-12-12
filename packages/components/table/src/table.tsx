@@ -87,11 +87,6 @@ export type TableProps<Y extends RowData = unknown> = Omit<
 > &
   TableOptions
 
-/**
- * `Table` is a table component equipped with column sorting, row selection, and click event features.
- *
- * @see Docs https://yamada-ui.com/components/data-display/table
- */
 export const Table = forwardRef(
   <Y extends RowData>(
     { colorScheme, highlightOnSelected = true, ...props }: TableProps<Y>,

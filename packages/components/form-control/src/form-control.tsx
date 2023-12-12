@@ -99,11 +99,6 @@ const [FormControlStylesProvider, useFormControlStyles] = createContext<
   name: "FormControlStyleContext",
 })
 
-/**
- * `FormControl` is a component used to group form elements with labels, help messages, error messages, etc.
- *
- * @see Docs https://yamada-ui.com/components/forms/form-control
- */
 export const FormControl = forwardRef<FormControlProps, "div">(
   ({ id, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("FormControl", props)

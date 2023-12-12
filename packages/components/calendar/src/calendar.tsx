@@ -43,11 +43,6 @@ export type CalendarBaseProps = Omit<
 export type CalendarProps<Y extends MaybeValue = Date> = CalendarBaseProps &
   UseCalendarProps<Y>
 
-/**
- * `Calendar` is a component for displaying or selecting dates in a calendar.
- *
- * @see Docs https://yamada-ui.com/components/data-display/calendar
- */
 export const Calendar = forwardRef(
   <T extends MaybeValue = Date>(
     props: CalendarProps<T>,

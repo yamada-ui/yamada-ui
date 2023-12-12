@@ -50,11 +50,6 @@ export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
   FileButtonOptions &
   FormControlOptions
 
-/**
- * `FileButton` is a button component used for users to select files.
- *
- * @see Docs https://yamada-ui.com/components/forms/file-button
- */
 export const FileButton = forwardRef<FileButtonProps, "input">(
   ({ className, resetRef, as: As, children, ...props }, ref) => {
     const { id, name, accept, multiple, form, ...rest } =

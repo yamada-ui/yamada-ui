@@ -24,11 +24,6 @@ type TextOptions = {
 
 export type TextProps = HTMLUIProps<"p"> & ThemeProps<"Text"> & TextOptions
 
-/**
- * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.
- *
- * @see Docs https://yamada-ui.com/components/typography/text
- */
 export const Text = forwardRef<TextProps, "p">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Text", props)
   const {

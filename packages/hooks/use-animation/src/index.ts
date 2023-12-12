@@ -15,11 +15,6 @@ type Styles =
   | Theme["animations"]
   | (AnimationStyle | Theme["animations"])[]
 
-/**
- * `useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.
- *
- * @see Docs https://yamada-ui.com/hooks/use-animation
- */
 export const useAnimation = (styles: Styles): string => {
   const { theme } = useTheme()
 
@@ -30,11 +25,6 @@ export const useAnimation = (styles: Styles): string => {
   }
 }
 
-/**
- * `useDynamicAnimation` is a custom hook used to switch animations.
- *
- * @see Docs https://yamada-ui.com/hooks/use-dynamic-animation
- */
 export const useDynamicAnimation = <
   T extends (AnimationStyle | Theme["animations"])[] | Record<string, Styles>,
 >(

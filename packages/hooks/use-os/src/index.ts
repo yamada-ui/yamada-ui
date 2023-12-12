@@ -24,11 +24,6 @@ const getOS = (): OS => {
   return "undetermined"
 }
 
-/**
- * `useOS` is a custom hook that returns the user's OS.
- *
- * @see Docs https://yamada-ui.com/hooks/use-os
- */
 export const useOS = (): OS => {
   if (typeof window !== "undefined") return getOS()
 

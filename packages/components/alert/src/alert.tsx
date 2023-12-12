@@ -56,11 +56,6 @@ type AlertOptions = {
 
 export type AlertProps = HTMLUIProps<"div"> & ThemeProps<"Alert"> & AlertOptions
 
-/**
- * `Alert` is a component that conveys information to the user.
- *
- * @see Docs https://yamada-ui.com/components/feedback/alert
- */
 export const Alert = forwardRef<AlertProps, "div">(
   ({ status = "info", colorScheme, ...props }, ref) => {
     const { theme } = useTheme()

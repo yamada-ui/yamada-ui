@@ -29,11 +29,6 @@ type StackOptions = {
 
 export type StackProps = HTMLUIProps<"div"> & StackOptions
 
-/**
- * `Stack` is a component that groups elements and provides space between child elements.
- *
- * @see Docs https://yamada-ui.com/components/layouts/stack
- */
 export const Stack = forwardRef<StackProps, "div">(
   (
     {

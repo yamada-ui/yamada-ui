@@ -214,11 +214,6 @@ export const useCallbackRef = <T extends (...args: any[]) => any>(
   )
 }
 
-/**
- * `useUpdateEffect` is a custom hook that skips side effects on the initial render, and only runs them when the dependency array changes.
- *
- * @see Docs https://yamada-ui.com/hooks/use-update-effect
- */
 export const useUpdateEffect = (
   callback: React.EffectCallback,
   deps: React.DependencyList,
@@ -247,11 +242,6 @@ export const useUpdateEffect = (
 
 export type FunctionReturningPromise = (...args: any[]) => Promise<any>
 
-/**
- * `useAsync` is a custom hook that executes an asynchronous function and tracks its state.
- *
- * @see Docs https://yamada-ui.com/hooks/use-async
- */
 export const useAsync = <T extends FunctionReturningPromise>(
   func: T,
   deps: React.DependencyList = [],

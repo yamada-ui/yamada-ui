@@ -12,12 +12,6 @@ export type UseDisclosureProps<
   timing?: "before" | "after"
 }
 
-/**
- * `useDisclosure` is a custom hook that helps handle common open/close or toggle scenarios.
- * It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.
- *
- * @see Docs https://yamada-ui.com/hooks/use-disclosure
- */
 export const useDisclosure = <
   T extends (...args: any[]) => any = () => void,
   K extends (...args: any[]) => any = () => void,

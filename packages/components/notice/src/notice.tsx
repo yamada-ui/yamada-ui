@@ -148,11 +148,6 @@ const createNoticeFunc = (
 
 type CreateNoticeReturn = ReturnType<typeof createNoticeFunc>
 
-/**
- * `useNotice` is a custom hook that controls the notifications of the application.
- *
- * @see Docs https://yamada-ui.com/hooks/use-notice
- */
 export const useNotice = (
   defaultOptions?: UseNoticeOptions,
 ): CreateNoticeReturn => {

@@ -65,11 +65,6 @@ export type AvatarProps = HTMLUIProps<"span"> &
   AvatarOptions &
   Pick<UseImageProps, "onLoad" | "onError">
 
-/**
- * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
- *
- * @see Docs https://yamada-ui.com/components/media-and-icons/avatar
- */
 export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Avatar", props)
   const {

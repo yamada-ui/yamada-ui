@@ -14,11 +14,6 @@ type AspectRatioOptions = {
 
 export type AspectRatioProps = HTMLUIProps<"div"> & AspectRatioOptions
 
-/**
- * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.
- *
- * @see Docs https://yamada-ui.com/components/layouts/aspect-ratio
- */
 export const AspectRatio = forwardRef<AspectRatioProps, "div">(
   ({ className, ratio = 4 / 3, children, ...rest }, ref) => {
     const child = Children.only(children)

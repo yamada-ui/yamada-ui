@@ -7,11 +7,6 @@ export type UseClipboardOptions = {
   format?: string
 }
 
-/**
- * `useClipboard` is a custom hook that performs the operation of copying a value to the clipboard.
- *
- * @see Docs https://yamada-ui.com/hooks/use-clipboard
- */
 export const useClipboard = (
   defaultValue: string = "",
   timeoutOrOptions: number | UseClipboardOptions = {},

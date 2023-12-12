@@ -40,11 +40,6 @@ type ListOptions = {
 
 export type ListProps = HTMLUIProps<"ul"> & ThemeProps<"List"> & ListOptions
 
-/**
- * `List` is a component for displaying lists. By default, it renders a `ul` element.
- *
- * @see Docs https://yamada-ui.com/components/data-display/list
- */
 export const List = forwardRef<ListProps, "ul">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("List", props)
   const {

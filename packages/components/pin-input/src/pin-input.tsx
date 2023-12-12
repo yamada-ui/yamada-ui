@@ -134,11 +134,6 @@ export type PinInputProps = Omit<HTMLUIProps<"div">, "onChange"> &
   FormControlOptions &
   PinInputOptions
 
-/**
- * `PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.
- *
- * @see Docs https://yamada-ui.com/components/forms/pin-input
- */
 export const PinInput = forwardRef<PinInputProps, "div">(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("PinInput", {

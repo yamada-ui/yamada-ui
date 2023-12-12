@@ -23,10 +23,4 @@ const factory = () => {
   }) as UIFactory & HTMLUIComponents
 }
 
-/**
- * `ui` is an object of JSX elements enabled with Yamada UI's style system,
- * and can also be used as a function for custom components to receive Yamada UI's style system.
- *
- * @see Docs https://yamada-ui.com/styled-system/ui
- */
 export const ui = factory()

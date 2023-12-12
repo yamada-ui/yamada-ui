@@ -168,11 +168,6 @@ export type ModalProps = Omit<
   ThemeProps<"Modal"> &
   ModalOptions
 
-/**
- * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
- *
- * @see Docs https://yamada-ui.com/components/overlay/modal
- */
 export const Modal = forwardRef<ModalProps, "section">(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Modal", {

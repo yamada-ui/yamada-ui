@@ -26,7 +26,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -47,7 +46,7 @@
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
-    "react-focus-lock": "^2.9.5"
+    "react-focus-lock": "^2.9.1"
   },
   "devDependencies": {
     "react": "^18.0.0",

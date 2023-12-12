@@ -127,11 +127,6 @@ export type PagingTableProps<Y extends RowData = unknown> = Omit<
 
 const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
 
-/**
- * `PagingTable` is a table component with pagination functionality.
- *
- * @see Docs https://yamada-ui.com/components/data-display/paging-table
- */
 export const PagingTable = forwardRef(
   <Y extends RowData>(
     { colorScheme, highlightOnSelected = true, ...props }: PagingTableProps<Y>,

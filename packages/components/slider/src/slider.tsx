@@ -564,11 +564,6 @@ export type SliderProps = Omit<HTMLUIProps<"div">, keyof UseSliderProps> &
   UseSliderProps &
   SliderOptions
 
-/**
- * `Slider` is a component used for allowing users to select a value from a range.
- *
- * @see Docs https://yamada-ui.com/components/forms/slider
- */
 export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Slider", props)
   const {

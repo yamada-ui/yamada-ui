@@ -106,7 +106,7 @@ export type LayoutProps = {
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
   /**
-   * The CSS `block-size` property.
+   * The CSS `backface-visibility` property.
    */
   backfaceVisibility?: Token<CSS.Property.BackfaceVisibility>
   /**

@@ -10,12 +10,16 @@ export const background: Configs = {
   backgroundSize: true,
   backgroundOrigin: true,
   backgroundPosition: true,
+  backgroundPositionX: true,
+  backgroundPositionY: true,
   backgroundRepeat: true,
   backgroundAttachment: true,
   backgroundClip: { transform: transforms.bgClip },
   bgSize: configs.prop("backgroundSize"),
   bgOrigin: configs.prop("backgroundOrigin"),
   bgPosition: configs.prop("backgroundPosition"),
+  bgPositionX: configs.prop("backgroundPositionX"),
+  bgPositionY: configs.prop("backgroundPositionY"),
   bg: configs.color("background"),
   bgColor: configs.color("backgroundColor"),
   bgPos: configs.prop("backgroundPosition"),
@@ -80,6 +84,14 @@ export type BackgroundProps = {
    */
   backgroundPosition?: Token<CSS.Property.BackgroundPosition | number>
   /**
+   * The CSS `background-position` property.
+   */
+  backgroundPositionX?: Token<CSS.Property.BackgroundPositionX | number>
+  /**
+   * The CSS `background-position` property.
+   */
+  backgroundPositionY?: Token<CSS.Property.BackgroundPositionY | number>
+  /**
    * The CSS `background-image` property.
    */
   bgImage?: Token<CSS.Property.BackgroundImage, "gradients">
@@ -115,4 +127,20 @@ export type BackgroundProps = {
    * The CSS `background-position` property.
    */
   bgPosition?: Token<CSS.Property.BackgroundPosition | number>
+  /**
+   * The CSS `background-position` property.
+   */
+  bgPosX?: Token<CSS.Property.BackgroundPositionX | number>
+  /**
+   * The CSS `background-position` property.
+   */
+  bgPositionX?: Token<CSS.Property.BackgroundPositionX | number>
+  /**
+   * The CSS `background-position` property.
+   */
+  bgPosY?: Token<CSS.Property.BackgroundPositionY | number>
+  /**
+   * The CSS `background-position` property.
+   */
+  bgPositionY?: Token<CSS.Property.BackgroundPositionY | number>
 }

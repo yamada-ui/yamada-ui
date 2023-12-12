@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/core": minor
+"@yamada-ui/core": patch
 ---
 
 add `backfaceVisibility` property.

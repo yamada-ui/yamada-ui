@@ -948,8 +948,8 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       react-focus-lock:
-        specifier: ^2.9.1
-        version: 2.9.1(@types/react@18.2.41)(react@18.2.0)
+        specifier: ^2.9.5
+        version: 2.9.6(@types/react@18.2.41)(react@18.2.0)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -15821,8 +15821,8 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: false
 
-  /focus-lock@0.11.6:
-    resolution: {integrity: sha512-KSuV3ur4gf2KqMNoZx3nXNVhqCkn42GuTYCX4tXPEwf0MjpFQmNMiN6m7dXaUXgIoivL6/65agoUMg4RLS0Vbg==}
+  /focus-lock@1.0.0:
+    resolution: {integrity: sha512-a8Ge6cdKh9za/GZR/qtigTAk7SrGore56EFcoMshClsh7FLk1zwszc/ltuMfKhx56qeuyL/jWQ4J4axou0iJ9w==, tarball: https://registry.npmjs.org/focus-lock/-/focus-lock-1.0.0.tgz}
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.6.2
@@ -21708,11 +21708,11 @@ packages:
       whatwg-fetch: 3.6.2
 
   /react-clientside-effect@1.2.6(react@18.2.0):
-    resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==}
+    resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==, tarball: https://registry.npmjs.org/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz}
     peerDependencies:
       react: ^18.2.0
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.2
       react: 18.2.0
     dev: false
 
@@ -21832,8 +21832,8 @@ packages:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
     dev: false
 
-  /react-focus-lock@2.9.1(@types/react@18.2.41)(react@18.2.0):
-    resolution: {integrity: sha512-pSWOQrUmiKLkffPO6BpMXN7SNKXMsuOakl652IBuALAu1esk+IcpJyM+ALcYzPTTFz1rD0R54aB9A4HuP5t1Wg==}
+  /react-focus-lock@2.9.6(@types/react@18.2.41)(react@18.2.0):
+    resolution: {integrity: sha512-B7gYnCjHNrNYwY2juS71dHbf0+UpXXojt02svxybj8N5bxceAkzPChKEncHuratjUHkIFNCn06k2qj1DRlzTug==, tarball: https://registry.npmjs.org/react-focus-lock/-/react-focus-lock-2.9.6.tgz}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
       react: ^18.2.0
@@ -21841,9 +21841,9 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@babel/runtime': 7.20.7
+      '@babel/runtime': 7.23.2
       '@types/react': 18.2.41
-      focus-lock: 0.11.6
+      focus-lock: 1.0.0
       prop-types: 15.8.1
       react: 18.2.0
       react-clientside-effect: 1.2.6(react@18.2.0)

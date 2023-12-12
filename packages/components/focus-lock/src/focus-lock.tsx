@@ -1,8 +1,10 @@
 import type { FocusableElement } from "@yamada-ui/utils"
-import { getAllFocusable } from "@yamada-ui/utils"
+import { getAllFocusable, interopDefault } from "@yamada-ui/utils"
 import type { FC, ReactNode, RefObject } from "react"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"
+
+const InternalFocusLock = interopDefault(ReactFocusLock)
 
 export type FocusLockProps = {
   /**
@@ -83,7 +85,7 @@ export const FocusLock: FC<FocusLockProps> = ({
   const returnFocus = restoreFocus && !finalFocusRef
 
   return (
-    <ReactFocusLock
+    <InternalFocusLock
       crossFrame={lockFocusAcrossFrames}
       persistentFocus={persistentFocus}
       autoFocus={autoFocus}
@@ -93,6 +95,6 @@ export const FocusLock: FC<FocusLockProps> = ({
       returnFocus={returnFocus}
     >
       {children}
-    </ReactFocusLock>
+    </InternalFocusLock>
   )
 }

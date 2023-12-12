@@ -67,6 +67,11 @@ export type StepperProps = ThemeProps<"Stepper"> &
   UseStepperProps &
   StepperOptions
 
+/**
+ * `Stepper` is a component that displays the progress of a multi-step process.
+ *
+ * @see Docs https://yamada-ui.com/components/navigation/stepper
+ */
 export const Stepper = forwardRef<StepperProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Stepper", props)
   const { className, steps, children, ...computedProps } =

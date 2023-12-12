@@ -4,6 +4,10 @@ import type { FC, ReactNode, RefObject } from "react"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"
 
+const InternalFocusLock: typeof ReactFocusLock =
+  (ReactFocusLock as unknown as { default: typeof ReactFocusLock }).default ??
+  ReactFocusLock
+
 export type FocusLockProps = {
   /**
    * `ref` of the element to receive focus initially.
@@ -83,7 +87,7 @@ export const FocusLock: FC<FocusLockProps> = ({
   const returnFocus = restoreFocus && !finalFocusRef
 
   return (
-    <ReactFocusLock
+    <InternalFocusLock
       crossFrame={lockFocusAcrossFrames}
       persistentFocus={persistentFocus}
       autoFocus={autoFocus}
@@ -93,6 +97,6 @@ export const FocusLock: FC<FocusLockProps> = ({
       returnFocus={returnFocus}
     >
       {children}
-    </ReactFocusLock>
+    </InternalFocusLock>
   )
 }

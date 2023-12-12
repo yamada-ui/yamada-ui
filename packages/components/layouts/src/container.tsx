@@ -21,6 +21,11 @@ export type ContainerProps = HTMLUIProps<"section"> &
   ThemeProps<"Container"> &
   ContainerOptions
 
+/**
+ * `Container` is a component used as a general division element. By default, it renders the `section` element.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/container
+ */
 export const Container = forwardRef<ContainerProps, "section">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Container", props)
   const { className, centerContent, ...rest } = omitThemeProps(mergedProps)

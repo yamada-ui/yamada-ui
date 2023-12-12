@@ -1,5 +1,10 @@
 import { useRef, useEffect, useCallback, useState } from "react"
 
+/**
+ * `useHover` is a custom hook that detects whether the pointer has moved over or away from an element.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-hover
+ */
 export const useHover = <T extends HTMLElement = HTMLDivElement>() => {
   const [hovered, setHovered] = useState(false)
   const ref = useRef<T>(null)

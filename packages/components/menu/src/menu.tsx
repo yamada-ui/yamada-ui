@@ -1,3 +1,8 @@
+/**
+ * `Menu` is a component that displays a common dropdown menu.
+ *
+ * @see Docs https://yamada-ui.com/components/overlay/menu
+ */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { PopoverProps } from "@yamada-ui/popover"

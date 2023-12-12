@@ -23,6 +23,11 @@ export type IconButtonProps = Omit<
 > &
   IconButtonOptions
 
+/**
+ * `IconButton` is a component that displays an icon within a button.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/icon-button
+ */
 export const IconButton = forwardRef<IconButtonProps, "button">(
   ({ icon, isRounded, children, className, ...rest }, ref) => {
     return (

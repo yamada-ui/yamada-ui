@@ -85,6 +85,11 @@ export type SegmentedControlProps = Omit<HTMLUIProps<"div">, "onChange"> &
   ThemeProps<"SegmentedControl"> &
   SegmentedControlOptions
 
+/**
+ * `SegmentedControl` is a component used for allowing users to select one option from multiple choices.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/segmented-control
+ */
 export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(

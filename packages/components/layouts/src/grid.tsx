@@ -43,6 +43,11 @@ type GridOptions = {
 
 export type GridProps = HTMLUIProps<"div"> & GridOptions
 
+/**
+ * `Grid` is a component for managing grid layouts. It also comes with handy style shorthand.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/grid
+ */
 export const Grid = forwardRef<GridProps, "div">(
   (
     {

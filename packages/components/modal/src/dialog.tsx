@@ -79,6 +79,11 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
   errorMessage: `useDialog returned is 'undefined'. Seems you forgot to wrap the components in "<Dialog />" `,
 })
 
+/**
+ * `Dialog` is a component used to confirm or interrupt user actions.
+ *
+ * @see Docs https://yamada-ui.com/components/overlay/dialog
+ */
 export const Dialog = forwardRef<DialogProps, "section">(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Dialog", {

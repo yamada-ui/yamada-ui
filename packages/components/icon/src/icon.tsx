@@ -15,6 +15,11 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
   UIProps &
   IconOptions
 
+/**
+ * `Icon` is a general icon component that can be used in your projects.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/icon
+ */
 export const Icon = forwardRef<IconProps, "svg">(
   (
     { as: element, viewBox, size: fontSize, className, __css, ...rest },

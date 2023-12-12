@@ -31,6 +31,11 @@ export type CardProps = HTMLUIProps<"article"> &
   ThemeProps<"Card"> &
   CardOptions
 
+/**
+ * `Card` is a component that groups and displays related information. By default, it renders a `section` element.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/card
+ */
 export const Card = forwardRef<CardProps, "article">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Card", props)
   const {

@@ -7,6 +7,7 @@ export const layout: Configs = {
   width: configs.sizeTransform("width"),
   inlineSize: configs.sizeTransform("inlineSize"),
   height: configs.size("height"),
+  backfaceVisibility: true,
   blockSize: configs.size("blockSize"),
   boxSize: configs.size(["width", "height"]),
   minWidth: configs.size("minWidth"),
@@ -104,6 +105,10 @@ export type LayoutProps = {
    * The CSS `block-size` property.
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
+  /**
+   * The CSS `block-size` property.
+   */
+  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility>
   /**
    * The CSS `max-height` property.
    */

@@ -339,6 +339,11 @@ export type CheckboxProps<Y extends string | number = string> = Omit<
   UseCheckboxProps<Y> &
   CheckboxOptions
 
+/**
+ * `Checkbox` is a component used for allowing users to select multiple values from multiple options.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/checkbox
+ */
 export const Checkbox = forwardRef(
   <Y extends string | number = string>(
     props: CheckboxProps<Y>,

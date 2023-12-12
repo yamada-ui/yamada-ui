@@ -72,6 +72,11 @@ export type ButtonProps = HTMLUIProps<"button"> &
   ThemeProps<"Button"> &
   ButtonOptions
 
+/**
+ * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/button
+ */
 export const Button = forwardRef<ButtonProps, "button">(
   ({ children, ...props }, customRef) => {
     const group = useButtonGroup()

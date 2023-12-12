@@ -79,6 +79,9 @@ export type UIProviderProps = {
   children: ReactNode
 }
 
+/**
+ * The global provider that must be added to make all Yamada UI components work correctly.
+ */
 export const UIProvider: FC<UIProviderProps> = ({
   theme = defaultTheme,
   config = defaultConfig,

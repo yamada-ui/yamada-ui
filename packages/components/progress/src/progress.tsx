@@ -76,6 +76,11 @@ export type ProgressProps = HTMLUIProps<"div"> &
   ThemeProps<"Progress"> &
   ProgressOptions
 
+/**
+ * `Progress` is a component for visually indicating progress.
+ *
+ * @see Docs https://yamada-ui.com/components/feedback/progress
+ */
 export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Progress", props)
   const {

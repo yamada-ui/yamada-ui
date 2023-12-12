@@ -66,6 +66,11 @@ export const scaleFadeProps = {
   variants,
 }
 
+/**
+ * `ScaleFade` is a component that gradually scales up to reveal or scales down to hide an element.
+ *
+ * @see Docs https://yamada-ui.com/components/transitions/scale-fade
+ */
 export const ScaleFade = forwardRef<ScaleFadeProps, "div">(
   (
     {

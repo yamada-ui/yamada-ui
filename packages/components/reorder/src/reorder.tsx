@@ -53,6 +53,11 @@ const pickDuplicated = (values: (string | number)[]): (string | number)[] =>
       self.indexOf(value) === index && index !== self.lastIndexOf(value),
   )
 
+/**
+ * `Reorder` is a component that allows you to change the order of items using drag and drop.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/reorder
+ */
 export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Reorder", props)

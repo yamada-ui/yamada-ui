@@ -34,6 +34,11 @@ type FlexOptions = {
 
 export type FlexProps = HTMLUIProps<"div"> & FlexOptions
 
+/**
+ * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/flex
+ */
 export const Flex = forwardRef<FlexProps, "div">(
   (
     {
@@ -63,6 +68,11 @@ export const Flex = forwardRef<FlexProps, "div">(
   },
 )
 
+/**
+ * `Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/wrap
+ */
 export const Wrap = forwardRef<FlexProps, "div">((props, ref) => (
   <Flex ref={ref} wrap="wrap" {...props} />
 ))

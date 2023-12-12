@@ -81,6 +81,11 @@ export type AccordionProps = Omit<HTMLUIProps<"div">, "onChange"> &
   ThemeProps<"Accordion"> &
   AccordionOptions
 
+/**
+ * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
+ *
+ * @see Docs https://yamada-ui.com/components/disclosure/accordion
+ */
 export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Accordion", props)
   const {

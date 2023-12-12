@@ -451,6 +451,11 @@ export type EditableProps = Omit<
   UseEditableProps &
   EditableOptions
 
+/**
+ * `Editable` is a component used to obtain inline editable text input.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/editable
+ */
 export const Editable = forwardRef<EditableProps, "div">(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Editable", {

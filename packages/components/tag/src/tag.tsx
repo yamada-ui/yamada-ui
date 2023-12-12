@@ -40,6 +40,11 @@ type TagOptions = {
 
 export type TagProps = HTMLUIProps<"span"> & ThemeProps<"Tag"> & TagOptions
 
+/**
+ * `Tag` is a component used to categorize or organize items using keywords that describe them.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/tag
+ */
 export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Tag", props)
   const {

@@ -4,7 +4,6 @@ import type { Configs } from "./config"
 import { configs } from "./config"
 
 export const interactivity: Configs = {
-  all: true,
   accentColor: configs.color("accentColor"),
   appearance: true,
   cursor: true,
@@ -17,10 +16,6 @@ export const interactivity: Configs = {
 }
 
 export type InteractivityProps = {
-  /**
-   * The CSS `all` property.
-   */
-  all?: Token<CSS.Property.All>
   /**
    * The CSS `accent-color` property.
    */

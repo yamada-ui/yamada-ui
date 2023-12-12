@@ -53,6 +53,7 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "sourcemap": true
   }
 }

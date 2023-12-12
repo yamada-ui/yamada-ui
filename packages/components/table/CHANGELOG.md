@@ -1,5 +1,19 @@
 # @yamada-ui/table
 
+## 0.5.10
+
+### Patch Changes
+
+- [#432](https://github.com/hirotomoyamada/yamada-ui/pull/432) [`6e9fca9`](https://github.com/hirotomoyamada/yamada-ui/commit/6e9fca97fb0ee2f53dca250a3e9adc74db4765ad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed add `className` to `Tr` component.
+
+- Updated dependencies [[`13eb95c`](https://github.com/hirotomoyamada/yamada-ui/commit/13eb95cf198109599d94f782114afc8835d0e42a), [`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/select@0.6.0
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/checkbox@0.5.6
+  - @yamada-ui/icon@0.3.22
+  - @yamada-ui/native-table@0.4.16
+  - @yamada-ui/pagination@0.5.1
+
 ## 0.5.9
 
 ### Patch Changes

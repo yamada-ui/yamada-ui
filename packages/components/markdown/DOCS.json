@@ -11,12 +11,5 @@
       "description": "If provided, this will set the theme for the note."
     }
   },
-  "MarkdownComponent": {},
-  "MarkdownComponentCode": {},
-  "MarkdownComponentHeading": {},
-  "MarkdownComponentLi": {},
-  "MarkdownComponentOrderedList": {},
-  "MarkdownComponentUnorderedList": {},
-  "MarkdownComponentTableCell": {},
-  "MarkdownComponentTableRow": {}
+  "MarkdownComponent": {}
 }

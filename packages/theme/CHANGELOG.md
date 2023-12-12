@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 0.13.2
+
+### Patch Changes
+
+- [`a2507f7`](https://github.com/hirotomoyamada/yamada-ui/commit/a2507f7528b9d15e32bb9ca5bac055fc91b6c7a4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `Checkbox` indeterminate icon color.
+
+- Updated dependencies [[`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/core@0.14.0
+
 ## 0.13.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/select",
-  "version": "0.5.13",
+  "version": "0.6.0",
   "description": "Yamada UI select component",
   "keywords": [
     "yamada",
@@ -51,6 +51,7 @@
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",

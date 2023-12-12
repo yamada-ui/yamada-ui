@@ -26,7 +26,7 @@ Yamada UIは、最先端のWebアプリケーションやウェブサイトの�
 ## コンテンツ
 
 - [リスペクト](#リスペクト)
-- [ドキュメント](https://yamada-ui.vercel.app/ja)
+- [ドキュメント](https://yamada-ui.com/ja)
 - [特徴](#特徴)
 - [インストール](#インストール)
 - [使い方](#使い方)
@@ -41,7 +41,7 @@ Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[MUI](https
 
 ## ドキュメント
 
-最新のバージョンのWebサイトは、https://yamada-ui.vercel.app です。
+最新のバージョンのWebサイトは、https://yamada-ui.com です。
 
 ## 特徴
 

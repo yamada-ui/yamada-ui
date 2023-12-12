@@ -183,6 +183,12 @@
       "required": false,
       "description": "The placement of the popper relative to its reference."
     },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
+    },
     "preventOverflow": {
       "type": "boolean",
       "defaultValue": true,
@@ -416,6 +422,12 @@
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "preventOverflow": {
       "type": "boolean",

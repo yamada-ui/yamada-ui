@@ -106,10 +106,6 @@ export type LayoutProps = {
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
   /**
-   * The CSS `backface-visibility` property.
-   */
-  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility>
-  /**
    * The CSS `max-height` property.
    */
   maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
@@ -197,6 +193,10 @@ export type LayoutProps = {
    * The CSS `visibility` property.
    */
   visibility?: Token<CSS.Property.Visibility>
+  /**
+   * The CSS `backface-visibility` property.
+   */
+  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility>
   /**
    * The CSS `isolation` property.
    */

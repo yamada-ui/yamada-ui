@@ -1,11 +1,11 @@
 'use client'
 
 import {
-  colorModeManager,
+  colorModeCookieStorageManager,
+  themeSchemeCookieStorageManager,
   UIProvider,
   ColorModeScript,
   ThemeSchemeScript,
-  themeSchemeManager,
 } from '@yamada-ui/react'
 import { ReactNode } from 'react'
 import { theme, config } from 'theme'
@@ -30,8 +30,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <UIProvider
           config={config}
           theme={theme}
-          colorModeManager={colorModeManager.cookieStorage}
-          themeSchemeManager={themeSchemeManager.cookieStorage}
+          colorModeManager={colorModeCookieStorageManager}
+          themeSchemeManager={themeSchemeCookieStorageManager}
         >
           {children}
         </UIProvider>

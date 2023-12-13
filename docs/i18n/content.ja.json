@@ -1674,6 +1674,16 @@
     }
   },
   {
+    "title": "コンポーネントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/components/feedback/alert#コンポーネントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "Alert",
+      "lv2": "使い方",
+      "lv3": "コンポーネントをカスタマイズする"
+    }
+  },
+  {
     "title": "CircleProgress",
     "type": "page",
     "description": "`CircleProgress`は、進行状況を円形のプログレスバーで表示するコンポーネントです。",
@@ -9620,77 +9630,77 @@
     "hierarchy": { "lv1": "セマンティックトークン" }
   },
   {
-    "title": "Style props",
+    "title": "Style Props",
     "type": "page",
     "description": "Yamada UIのStyle propsについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。",
     "slug": "/styled-system/style-props",
-    "hierarchy": { "lv1": "Style props" }
+    "hierarchy": { "lv1": "Style Props" }
   },
   {
     "title": "カラーとバックグラウンド",
     "type": "fragment",
     "slug": "/styled-system/style-props#カラーとバックグラウンド",
-    "hierarchy": { "lv1": "Style props", "lv2": "カラーとバックグラウンド" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "カラーとバックグラウンド" }
   },
   {
     "title": "マージンとパディング",
     "type": "fragment",
     "slug": "/styled-system/style-props#マージンとパディング",
-    "hierarchy": { "lv1": "Style props", "lv2": "マージンとパディング" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "マージンとパディング" }
   },
   {
     "title": "タイポグラフィ",
     "type": "fragment",
     "slug": "/styled-system/style-props#タイポグラフィ",
-    "hierarchy": { "lv1": "Style props", "lv2": "タイポグラフィ" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "タイポグラフィ" }
   },
   {
     "title": "レイアウト",
     "type": "fragment",
     "slug": "/styled-system/style-props#レイアウト",
-    "hierarchy": { "lv1": "Style props", "lv2": "レイアウト" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "レイアウト" }
   },
   {
     "title": "ポジション",
     "type": "fragment",
     "slug": "/styled-system/style-props#ポジション",
-    "hierarchy": { "lv1": "Style props", "lv2": "ポジション" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "ポジション" }
   },
   {
     "title": "リスト",
     "type": "fragment",
     "slug": "/styled-system/style-props#リスト",
-    "hierarchy": { "lv1": "Style props", "lv2": "リスト" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "リスト" }
   },
   {
     "title": "ボーダー",
     "type": "fragment",
     "slug": "/styled-system/style-props#ボーダー",
-    "hierarchy": { "lv1": "Style props", "lv2": "ボーダー" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "ボーダー" }
   },
   {
     "title": "エフェクト",
     "type": "fragment",
     "slug": "/styled-system/style-props#エフェクト",
-    "hierarchy": { "lv1": "Style props", "lv2": "エフェクト" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "エフェクト" }
   },
   {
     "title": "フィルター",
     "type": "fragment",
     "slug": "/styled-system/style-props#フィルター",
-    "hierarchy": { "lv1": "Style props", "lv2": "フィルター" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "フィルター" }
   },
   {
     "title": "擬似要素とセレクター",
     "type": "fragment",
     "slug": "/styled-system/style-props#擬似要素とセレクター",
-    "hierarchy": { "lv1": "Style props", "lv2": "擬似要素とセレクター" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "擬似要素とセレクター" }
   },
   {
     "title": "その他",
     "type": "fragment",
     "slug": "/styled-system/style-props#その他",
-    "hierarchy": { "lv1": "Style props", "lv2": "その他" }
+    "hierarchy": { "lv1": "Style Props", "lv2": "その他" }
   },
   {
     "title": "テキストとレイヤースタイル",
@@ -9739,13 +9749,13 @@
     "title": "コンポーネントのスタイル",
     "type": "page",
     "description": "コンポーネントのスタイルの作成やカスタマイズする方法。",
-    "slug": "/styled-system/theming/component-style",
+    "slug": "/styled-system/theming/component-styles",
     "hierarchy": { "lv1": "コンポーネントのスタイル" }
   },
   {
     "title": "基本スタイルと修飾子スタイル",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#基本スタイルと修飾子スタイル",
+    "slug": "/styled-system/theming/component-styles#基本スタイルと修飾子スタイル",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "基本スタイルと修飾子スタイル"
@@ -9754,7 +9764,7 @@
   {
     "title": "単一パーツと複数パーツのコンポーネント",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#単一パーツと複数パーツのコンポーネント",
+    "slug": "/styled-system/theming/component-styles#単一パーツと複数パーツのコンポーネント",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント"
@@ -9763,7 +9773,7 @@
   {
     "title": "単一パーツのコンポーネント",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#単一パーツのコンポーネント",
+    "slug": "/styled-system/theming/component-styles#単一パーツのコンポーネント",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント",
@@ -9773,7 +9783,7 @@
   {
     "title": "複数パーツのコンポーネント",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#複数パーツのコンポーネント",
+    "slug": "/styled-system/theming/component-styles#複数パーツのコンポーネント",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント",
@@ -9783,7 +9793,7 @@
   {
     "title": "単一パーツのコンポーネントのスタイリング",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#単一パーツのコンポーネントのスタイリング",
+    "slug": "/styled-system/theming/component-styles#単一パーツのコンポーネントのスタイリング",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント",
@@ -9793,7 +9803,7 @@
   {
     "title": "複数パーツのコンポーネントのスタイリング",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#複数パーツのコンポーネントのスタイリング",
+    "slug": "/styled-system/theming/component-styles#複数パーツのコンポーネントのスタイリング",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント",
@@ -9803,7 +9813,7 @@
   {
     "title": "独自のコンポーネントを作成する",
     "type": "fragment",
-    "slug": "/styled-system/theming/component-style#独自のコンポーネントを作成する",
+    "slug": "/styled-system/theming/component-styles#独自のコンポーネントを作成する",
     "hierarchy": {
       "lv1": "コンポーネントのスタイル",
       "lv2": "独自のコンポーネントを作成する"
@@ -10378,19 +10388,19 @@
     "title": "テーマを切り替える",
     "type": "page",
     "description": "ユーザーがテーマを切り替える方法。",
-    "slug": "/styled-system/theming/switch-theme",
+    "slug": "/styled-system/theming/switch-themes",
     "hierarchy": { "lv1": "テーマを切り替える" }
   },
   {
     "title": "セットアップ",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#セットアップ",
+    "slug": "/styled-system/theming/switch-themes#セットアップ",
     "hierarchy": { "lv1": "テーマを切り替える", "lv2": "セットアップ" }
   },
   {
     "title": "複数のテーマを用意する",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#複数のテーマを用意する",
+    "slug": "/styled-system/theming/switch-themes#複数のテーマを用意する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
@@ -10400,7 +10410,7 @@
   {
     "title": "ThemeSchemeScriptを追加する",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#themeschemescriptを追加する",
+    "slug": "/styled-system/theming/switch-themes#themeschemescriptを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
@@ -10410,7 +10420,7 @@
   {
     "title": "Create React Appの場合",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#create-react-appの場合",
+    "slug": "/styled-system/theming/switch-themes#create-react-appの場合",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
@@ -10421,7 +10431,7 @@
   {
     "title": "Next.jsの場合",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#nextjsの場合",
+    "slug": "/styled-system/theming/switch-themes#nextjsの場合",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "セットアップ",
@@ -10432,7 +10442,7 @@
   {
     "title": "themeSchemeManagerを追加する",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#themeschememanagerを追加する",
+    "slug": "/styled-system/theming/switch-themes#themeschememanagerを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "themeSchemeManagerを追加する"
@@ -10441,7 +10451,7 @@
   {
     "title": "getServerSidePropsを用意する",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#getserversidepropsを用意する",
+    "slug": "/styled-system/theming/switch-themes#getserversidepropsを用意する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "themeSchemeManagerを追加する",
@@ -10451,7 +10461,7 @@
   {
     "title": "cookieStorageSSRを渡す",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#cookiestoragessrを渡す",
+    "slug": "/styled-system/theming/switch-themes#cookiestoragessrを渡す",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "themeSchemeManagerを追加する",
@@ -10461,7 +10471,7 @@
   {
     "title": "getServerSidePropsを追加する",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#getserversidepropsを追加する",
+    "slug": "/styled-system/theming/switch-themes#getserversidepropsを追加する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "themeSchemeManagerを追加する",
@@ -10471,7 +10481,7 @@
   {
     "title": "テーマを切り替える",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-theme#テーマを切り替える",
+    "slug": "/styled-system/theming/switch-themes#テーマを切り替える",
     "hierarchy": { "lv1": "テーマを切り替える", "lv2": "テーマを切り替える" }
   },
   {

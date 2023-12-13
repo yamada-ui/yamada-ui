@@ -7,6 +7,7 @@ export const layout: Configs = {
   width: configs.sizeTransform("width"),
   inlineSize: configs.sizeTransform("inlineSize"),
   height: configs.size("height"),
+  backfaceVisibility: true,
   blockSize: configs.size("blockSize"),
   boxSize: configs.size(["width", "height"]),
   minWidth: configs.size("minWidth"),
@@ -192,6 +193,10 @@ export type LayoutProps = {
    * The CSS `visibility` property.
    */
   visibility?: Token<CSS.Property.Visibility>
+  /**
+   * The CSS `backface-visibility` property.
+   */
+  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility>
   /**
    * The CSS `isolation` property.
    */

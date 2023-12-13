@@ -8633,13 +8633,13 @@
     }
   },
   {
-    "title": "Passing cookieStorageSSR",
+    "title": "Set cookies for colorModeManager",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#passing-cookiestoragessr",
+    "slug": "/styled-system/color-mode#set-cookies-for-colormodemanager",
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Adding colorModeManager",
-      "lv3": "Passing cookieStorageSSR"
+      "lv3": "Set cookies for colorModeManager"
     }
   },
   {
@@ -9844,13 +9844,13 @@
     }
   },
   {
-    "title": "Passing cookieStorageSSR",
+    "title": "Set cookies for themeSchemeManager",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#passing-cookiestoragessr",
+    "slug": "/styled-system/theming/switch-themes#set-cookies-for-themeschememanager",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
-      "lv3": "Passing cookieStorageSSR"
+      "lv3": "Set cookies for themeSchemeManager"
     }
   },
   {

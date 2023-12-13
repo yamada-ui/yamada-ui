@@ -104,7 +104,7 @@ export default function Document() {
 }
 ```
 
-Depending on the project, you may need to retrieve values from `cookies`. In that case, use `cookieStorageManager`.
+Depending on the project, you may need to retrieve values from `cookies`. In that case, use `createColorModeManager("cookie")`.
 
 ```tsx live=false title=_document.tsx highlight={2,11,12}
 import { Html, Head, Main, NextScript } from "next/document"
@@ -131,13 +131,13 @@ export default function Document() {
 
 ```tsx live=false title=_app.tsx highlight={2,4,8}
 import type { AppProps } from "next/app"
-import { UIProvider, colorModeManager } from "@yamada-ui/react"
+import { UIProvider, createColorModeManager } from "@yamada-ui/react"
 
-const { cookieStorageManager } = colorModeManager
+const colorModeManager = createColorModeManager("cookie")
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UIProvider colorModeManager={cookieStorageManager}>
+    <UIProvider colorModeManager={colorModeManager}>
       <Component {...pageProps} />
     </UIProvider>
   )
@@ -178,20 +178,17 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-### Passing `cookieStorageSSR`
+### Set `cookies` for `colorModeManager`
 
-Pass `cookieStorageSSR` to `colorModeManager` of `UIProvider`.
+Please set `ssr` and `cookies` for `createColorModeManager`.
 
-```tsx live=false title=_app.tsx highlight={2,4,7,8,9,12}
+```tsx live=false title=_app.tsx highlight={2,5,6,9}
 import type { AppProps } from "next/app"
-import { UIProvider, colorModeManager } from "@yamada-ui/react"
-
-const { cookieStorageSSR, localStorage } = colorModeManager
+import { UIProvider, createColorModeManager } from "@yamada-ui/react"
 
 export default function App({ Component, pageProps }: AppProps) {
   const { cookies } = pageProps
-  const colorModeManager =
-    typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
+  const colorModeManager = createColorModeManager("ssr", cookies)
 
   return (
     <UIProvider colorModeManager={colorModeManager}>

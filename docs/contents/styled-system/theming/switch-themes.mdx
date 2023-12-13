@@ -146,7 +146,7 @@ export default function Document() {
 }
 ```
 
-Depending on the project, you may need to retrieve values from `cookies`. In that case, use `cookieStorageManager`.
+Depending on the project, you may need to retrieve values from `cookies`. In that case, use `createThemeSchemeManager("cookie")`.
 
 ```tsx live=false title=_document.tsx highlight={12,13}
 import { Html, Head, Main, NextScript } from "next/document"
@@ -174,17 +174,17 @@ export default function Document() {
 
 ```tsx live=false title=_app.tsx highlight={2,3,5,11,12}
 import type { AppProps } from "next/app"
-import { UIProvider, colorModeManager } from "@yamada-ui/react"
+import { UIProvider, createThemeSchemeManager } from "@yamada-ui/react"
 import { config } from "../theme"
 
-const { cookieStorageManager } = colorModeManager
+const themeSchemeManager = createThemeSchemeManager("cookie")
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <UIProvider
       theme={theme}
       config={config}
-      colorModeManager={cookieStorageManager}
+      themeSchemeManager={themeSchemeManager}
     >
       <Component {...pageProps} />
     </UIProvider>
@@ -222,20 +222,17 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-### Passing `cookieStorageSSR`
+### Set `cookies` for `themeSchemeManager`
 
-Pass `cookieStorageSSR` to `themeSchemeManager` of `UIProvider`.
+Please set `ssr` and `cookies` for `createThemeSchemeManager`.
 
-```tsx live=false title=_app.tsx highlight={2,4,7,8,9,12}
+```tsx live=false title=_app.tsx highlight={2,5,6,9}
 import type { AppProps } from "next/app"
-import { UIProvider, themeSchemeManager } from "@yamada-ui/react"
-
-const { cookieStorageSSR, localStorage } = themeSchemeManager
+import { UIProvider, createThemeSchemeManager } from "@yamada-ui/react"
 
 export default function App({ Component, pageProps }: AppProps) {
   const { cookies } = pageProps
-  const themeSchemeManager =
-    typeof cookies === "string" ? cookieStorageSSR(cookies) : localStorage
+  const themeSchemeManager = createThemeSchemeManager("ssr", cookies)
 
   return (
     <UIProvider themeSchemeManager={themeSchemeManager}>

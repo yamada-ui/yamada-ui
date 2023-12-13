@@ -1,6 +1,6 @@
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
 import { getMemoizedObject as get } from "@yamada-ui/utils"
-import type { Token } from "../css"
+import type { CSS, Token } from "../css"
 import type { Configs, Transform } from "./config"
 
 const transform: Transform = (value, theme, css = {}) => {
@@ -18,6 +18,7 @@ const transform: Transform = (value, theme, css = {}) => {
 }
 
 export const others: Configs = {
+  all: true,
   layerStyle: {
     isProcessResult: true,
     transform: (value, ...rest) => transform(`layerStyles.${value}`, ...rest),
@@ -33,6 +34,10 @@ export const others: Configs = {
 }
 
 export type OthersProps = {
+  /**
+   * The CSS `all` property.
+   */
+  all?: Token<CSS.Property.All>
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */

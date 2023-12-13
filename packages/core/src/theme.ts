@@ -20,12 +20,12 @@ import type {
   ThemeConfig,
 } from "./theme.types"
 
-export type VarToken = {
+type VarToken = {
   isSemantic: boolean
   value: string | number | [string | number, string | number]
 }
 
-type VarTokens = Record<string, VarToken>
+export type VarTokens = Record<string, VarToken>
 
 const primaryTokens = [
   "blurs",

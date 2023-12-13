@@ -10,7 +10,7 @@ export type ThemeSchemeManager = {
   set: (themeScheme: Theme["themeSchemes"]) => void
 }
 
-const createLocalStorage = (storageKey: string): ThemeSchemeManager => ({
+const createLocalStorageManager = (storageKey: string): ThemeSchemeManager => ({
   ssr: false,
   type: "localStorage",
   get: (initThemeScheme = "base") => {
@@ -43,7 +43,7 @@ const parseCookie = (
   return match?.[2] as Theme["themeSchemes"] | undefined
 }
 
-const createCookieStorage = (
+const createCookieStorageManager = (
   key: string,
   cookie?: string,
 ): ThemeSchemeManager => ({
@@ -62,13 +62,11 @@ const createCookieStorage = (
   },
 })
 
-const cookieStorageSSR = (cookie: string) =>
-  createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie)
-
-export const themeSchemeManager = {
-  localStorage: createLocalStorage(THEME_SCHEME_STORAGE_KEY),
-  cookieStorage: createCookieStorage(THEME_SCHEME_STORAGE_KEY),
-  createLocalStorage,
-  cookieStorageSSR,
-  createCookieStorage,
-}
+export const themeSchemeLocalStorageManager = createLocalStorageManager(
+  THEME_SCHEME_STORAGE_KEY,
+)
+export const themeSchemeCookieStorageManager = createCookieStorageManager(
+  THEME_SCHEME_STORAGE_KEY,
+)
+export const themeSchemeSSRManager = (cookie: string) =>
+  createCookieStorageManager(THEME_SCHEME_STORAGE_KEY, cookie)

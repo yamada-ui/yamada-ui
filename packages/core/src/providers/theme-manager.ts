@@ -69,7 +69,10 @@ export const createThemeSchemeManager = (
   switch (type) {
     case "cookie":
     case "ssr":
-      return createCookieStorageManager(THEME_SCHEME_STORAGE_KEY, cookie)
+      return createCookieStorageManager(
+        THEME_SCHEME_STORAGE_KEY,
+        typeof cookie === "string" ? cookie : undefined,
+      )
 
     default:
       return createLocalStorageManager(THEME_SCHEME_STORAGE_KEY)

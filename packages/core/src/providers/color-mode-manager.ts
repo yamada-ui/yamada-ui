@@ -64,7 +64,10 @@ export const createColorModeManager = (
   switch (type) {
     case "cookie":
     case "ssr":
-      return createCookieStorageManager(COLOR_MODE_STORAGE_KEY, cookie)
+      return createCookieStorageManager(
+        COLOR_MODE_STORAGE_KEY,
+        typeof cookie === "string" ? cookie : undefined,
+      )
 
     default:
       return createLocalStorageManager(COLOR_MODE_STORAGE_KEY)

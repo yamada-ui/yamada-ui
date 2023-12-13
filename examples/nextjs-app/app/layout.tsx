@@ -7,7 +7,6 @@ import {
   ThemeSchemeScript,
   themeSchemeManager,
 } from '@yamada-ui/react'
-import { CacheProvider } from '@yamada-ui/nextjs'
 import { ReactNode } from 'react'
 import { theme, config } from 'theme'
 
@@ -28,16 +27,14 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           initialThemeScheme={config.initialThemeScheme}
         />
 
-        <CacheProvider>
-          <UIProvider
-            config={config}
-            theme={theme}
-            colorModeManager={colorModeManager.cookieStorage}
-            themeSchemeManager={themeSchemeManager.cookieStorage}
-          >
-            {children}
-          </UIProvider>
-        </CacheProvider>
+        <UIProvider
+          config={config}
+          theme={theme}
+          colorModeManager={colorModeManager.cookieStorage}
+          themeSchemeManager={themeSchemeManager.cookieStorage}
+        >
+          {children}
+        </UIProvider>
       </body>
     </html>
   )

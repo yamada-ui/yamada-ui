@@ -44,6 +44,9 @@ export const border: Configs = {
   borderBlockEndWidth: true,
   borderBlockEndStyle: true,
   borderBlockEndColor: configs.color("borderBlockEndColor"),
+  borderBlockWidth: true,
+  borderBlockStyle: true,
+  borderBlockColor: configs.color("borderBlockColor"),
   borderRadius: configs.radii("borderRadius"),
   borderTopRightRadius: configs.radii("borderTopRightRadius"),
   borderTopLeftRadius: configs.radii("borderTopLeftRadius"),
@@ -157,6 +160,10 @@ export type BorderProps = {
    */
   borderBottomWidth?: Token<CSS.Property.BorderWidth | number>
   /**
+   * The CSS `border-block-width` property.
+   */
+  borderBlockWidth?: Token<CSS.Property.BorderBlockWidth | number>
+  /**
    * The CSS `border-block-end-width` property.
    */
   borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number>
@@ -197,6 +204,10 @@ export type BorderProps = {
    */
   borderBottomStyle?: Token<CSS.Property.BorderBottomStyle>
   /**
+   * The CSS `border-block-style` property.
+   */
+  borderBlockStyle?: Token<CSS.Property.BorderBlockStyle>
+  /**
    * The CSS `border-block-end-style` property.
    */
   borderBlockEndStyle?: Token<CSS.Property.BorderBlockEndStyle>
@@ -236,6 +247,10 @@ export type BorderProps = {
    * The CSS `border-bottom-color` property.
    */
   borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
+  /**
+   * The CSS `border-block-color` property.
+   */
+  borderBlockColor?: Token<CSS.Property.BorderBlockColor, "colors">
   /**
    * The CSS `border-block-end-color` property.
    */

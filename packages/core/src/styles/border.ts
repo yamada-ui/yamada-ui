@@ -83,6 +83,12 @@ export const border: Configs = {
     "borderEndStartRadius",
     "borderEndEndRadius",
   ]),
+  borderImage: true,
+  borderImageOutset: true,
+  borderImageRepeat: true,
+  borderImageSlice: true,
+  borderImageSource: true,
+  borderImageWidth: true,
 }
 
 Object.assign(border, {
@@ -487,4 +493,28 @@ export type BorderProps = {
    * The CSS `border-block` property.
    */
   borderBlock?: Token<CSS.Property.BorderBlock | number>
+  /**
+   * The CSS `border-image` property.
+   */
+  borderImage?: Token<CSS.Property.BorderImage>
+  /**
+   * The CSS `border-image-outset` property.
+   */
+  borderImageOutset?: Token<CSS.Property.BorderImageOutset>
+  /**
+   * The CSS `border-image-repeat` property.
+   */
+  borderImageRepeat?: Token<CSS.Property.BorderImageRepeat>
+  /**
+   * The CSS `border-image-slice` property.
+   */
+  borderImageSlice?: Token<CSS.Property.BorderImageSlice>
+  /**
+   * The CSS `border-image-source` property.
+   */
+  borderImageSource?: Token<CSS.Property.BorderImageSource>
+  /**
+   * The CSS `border-image-width` property.
+   */
+  borderImageWidth?: Token<CSS.Property.BorderImageWidth>
 }

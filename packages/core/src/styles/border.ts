@@ -89,6 +89,8 @@ export const border: Configs = {
   borderImageSlice: true,
   borderImageSource: true,
   borderImageWidth: true,
+  borderCollapse: true,
+  borderSpacing: true,
 }
 
 Object.assign(border, {
@@ -517,4 +519,12 @@ export type BorderProps = {
    * The CSS `border-image-width` property.
    */
   borderImageWidth?: Token<CSS.Property.BorderImageWidth>
+  /**
+   * The CSS `border-collapse` property.
+   */
+  borderCollapse?: Token<CSS.Property.BorderCollapse>
+  /**
+   * The CSS `border-spacing` property.
+   */
+  borderSpacing?: Token<CSS.Property.BorderSpacing | number>
 }

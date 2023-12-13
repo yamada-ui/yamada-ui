@@ -25,7 +25,7 @@ export type VarToken = {
   value: string | number | [string | number, string | number]
 }
 
-export type VarTokens = Record<string, VarToken>
+type VarTokens = Record<string, VarToken>
 
 const primaryTokens = [
   "blurs",

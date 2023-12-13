@@ -35,6 +35,9 @@ export const border: Configs = {
   borderInlineEndWidth: configs.prop("borderInlineEndWidth"),
   borderInlineEndStyle: configs.prop("borderInlineEndStyle"),
   borderInlineEndColor: configs.color("borderInlineEndColor"),
+  borderInlineWidth: true,
+  borderInlineStyle: true,
+  borderInlineColor: configs.color("borderInlineColor"),
   borderBlock: configs.border("borderBlock"),
   borderBlockStart: configs.border("borderBlockStart"),
   borderBlockStartWidth: true,
@@ -192,6 +195,10 @@ export type BorderProps = {
    */
   borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
   /**
+   * The CSS `border-inline-width` property.
+   */
+  borderInlineWidth?: Token<CSS.Property.BorderInlineWidth | number>
+  /**
    * The CSS `border-top-style` property.
    */
   borderTopStyle?: Token<CSS.Property.BorderTopStyle>
@@ -236,6 +243,10 @@ export type BorderProps = {
    */
   borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
   /**
+   * The CSS `border-inline-style` property.
+   */
+  borderInlineStyle?: Token<CSS.Property.BorderInlineStyle>
+  /**
    * The CSS `border-top-color` property.
    */
   borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
@@ -279,6 +290,10 @@ export type BorderProps = {
    * The CSS `border-inline-end-color` property.
    */
   borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  /**
+   * The CSS `border-inline-color` property.
+   */
+  borderInlineColor?: Token<CSS.Property.BorderInlineColor, "colors">
   /**
    * The CSS `border-right` property.
    */

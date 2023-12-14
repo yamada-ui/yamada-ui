@@ -8720,11 +8720,11 @@
     "hierarchy": { "lv1": "Default Config" }
   },
   {
-    "title": "Config",
+    "title": "Configure",
     "type": "page",
     "description": "The config of Yamada UI is a global setting used in various parts of the system.",
     "slug": "/styled-system/configure",
-    "hierarchy": { "lv1": "Config" }
+    "hierarchy": { "lv1": "Configure" }
   },
   {
     "title": "Global Styles",
@@ -9766,11 +9766,11 @@
     "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoint" }
   },
   {
-    "title": "Theme",
+    "title": "Theming",
     "type": "page",
     "description": "The theme of Yamada UI is customizable and ensures the consistency of the application's design.",
     "slug": "/styled-system/theming",
-    "hierarchy": { "lv1": "Theme" }
+    "hierarchy": { "lv1": "Theming" }
   },
   {
     "title": "Switch Themes",

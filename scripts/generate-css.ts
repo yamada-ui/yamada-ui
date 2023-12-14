@@ -22,7 +22,7 @@ type FuncProp = { prop: CSSProp; func: string }
 
 type Tokens = Record<string, CSSProp[]>
 type ShorthandProps = Partial<Record<CSSProp, string[]>>
-type ExProps = Partial<Record<string, (CSSProp | FuncProp)[]>>
+type TransformProps = Partial<Record<string, (CSSProp | FuncProp)[]>>
 type UIProps = Partial<Record<string, any>>
 
 const list = new ListIt({
@@ -74,13 +74,13 @@ const shorthandProps: ShorthandProps = {
   minWidth: ["minW"],
   minHeight: ["minH"],
   maxWidth: ["maxW"],
-  maxHeight: ["maxHeight"],
+  maxHeight: ["maxH"],
   overscrollBehavior: ["overscroll"],
   overscrollBehaviorX: ["overscrollX"],
   overscrollBehaviorY: ["overscrollY"],
 }
 
-const transformProps: ExProps = {
+const transformProps: TransformProps = {
   px: [],
   fraction: [
     { prop: "width", func: "transforms.px" },

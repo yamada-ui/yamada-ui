@@ -184,7 +184,7 @@ export const getDocumentTabs = (
     if (!parentDocument?.is_tabs) parentDocument = undefined
 
     if (parentDocument) {
-      parentPaths = parentDocument.slug.split("/").slice(2)
+      parentPaths = parentDocument.slug.split("/").slice(1)
       const resolvedDocuments = documents.filter(({ slug }) =>
         new RegExp(`^${parentDocument.slug}($|\\/[^\\/]+$)`).test(slug),
       )

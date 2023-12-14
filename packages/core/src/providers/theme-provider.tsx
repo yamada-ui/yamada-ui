@@ -31,7 +31,9 @@ import type {
 } from "../theme.types"
 import { useColorMode } from "./color-mode-provider"
 import type { ThemeSchemeManager } from "./theme-manager"
-import { themeSchemeLocalStorageManager } from "./theme-manager"
+import { themeSchemeManager } from "./theme-manager"
+
+const { localStorage } = themeSchemeManager
 
 type ThemeProviderOptions = {
   /**
@@ -46,9 +48,9 @@ type ThemeProviderOptions = {
    * Manager to persist a user's theme scheme preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `themeSchemeSSRManager`.
+   * For SSR, choose `themeSchemeManager.ssr`.
    *
-   * @default 'themeSchemeLocalStorageManager'
+   * @default 'themeSchemeManager.localStorage'
    */
   themeSchemeManager?: ThemeSchemeManager
 }
@@ -59,7 +61,7 @@ export type ThemeProviderProps = Omit<EmotionThemeProviderProps, "theme"> &
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme: initialTheme = {},
   config,
-  themeSchemeManager = themeSchemeLocalStorageManager,
+  themeSchemeManager = localStorage,
   children,
 }) => {
   const [themeScheme, setThemeScheme] = useState<UITheme["themeSchemes"]>(

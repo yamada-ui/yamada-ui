@@ -35,6 +35,9 @@ export const border: Configs = {
   borderInlineEndWidth: configs.prop("borderInlineEndWidth"),
   borderInlineEndStyle: configs.prop("borderInlineEndStyle"),
   borderInlineEndColor: configs.color("borderInlineEndColor"),
+  borderInlineWidth: true,
+  borderInlineStyle: true,
+  borderInlineColor: configs.color("borderInlineColor"),
   borderBlock: configs.border("borderBlock"),
   borderBlockStart: configs.border("borderBlockStart"),
   borderBlockStartWidth: true,
@@ -44,6 +47,9 @@ export const border: Configs = {
   borderBlockEndWidth: true,
   borderBlockEndStyle: true,
   borderBlockEndColor: configs.color("borderBlockEndColor"),
+  borderBlockWidth: true,
+  borderBlockStyle: true,
+  borderBlockColor: configs.color("borderBlockColor"),
   borderRadius: configs.radii("borderRadius"),
   borderTopRightRadius: configs.radii("borderTopRightRadius"),
   borderTopLeftRadius: configs.radii("borderTopLeftRadius"),
@@ -77,6 +83,14 @@ export const border: Configs = {
     "borderEndStartRadius",
     "borderEndEndRadius",
   ]),
+  borderImage: true,
+  borderImageOutset: true,
+  borderImageRepeat: true,
+  borderImageSlice: true,
+  borderImageSource: true,
+  borderImageWidth: true,
+  borderCollapse: true,
+  borderSpacing: true,
 }
 
 Object.assign(border, {
@@ -157,6 +171,10 @@ export type BorderProps = {
    */
   borderBottomWidth?: Token<CSS.Property.BorderWidth | number>
   /**
+   * The CSS `border-block-width` property.
+   */
+  borderBlockWidth?: Token<CSS.Property.BorderBlockWidth | number>
+  /**
    * The CSS `border-block-end-width` property.
    */
   borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number>
@@ -185,6 +203,10 @@ export type BorderProps = {
    */
   borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
   /**
+   * The CSS `border-inline-width` property.
+   */
+  borderInlineWidth?: Token<CSS.Property.BorderInlineWidth | number>
+  /**
    * The CSS `border-top-style` property.
    */
   borderTopStyle?: Token<CSS.Property.BorderTopStyle>
@@ -196,6 +218,10 @@ export type BorderProps = {
    * The CSS `border-bottom-style` property.
    */
   borderBottomStyle?: Token<CSS.Property.BorderBottomStyle>
+  /**
+   * The CSS `border-block-style` property.
+   */
+  borderBlockStyle?: Token<CSS.Property.BorderBlockStyle>
   /**
    * The CSS `border-block-end-style` property.
    */
@@ -225,6 +251,10 @@ export type BorderProps = {
    */
   borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
   /**
+   * The CSS `border-inline-style` property.
+   */
+  borderInlineStyle?: Token<CSS.Property.BorderInlineStyle>
+  /**
    * The CSS `border-top-color` property.
    */
   borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
@@ -236,6 +266,10 @@ export type BorderProps = {
    * The CSS `border-bottom-color` property.
    */
   borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
+  /**
+   * The CSS `border-block-color` property.
+   */
+  borderBlockColor?: Token<CSS.Property.BorderBlockColor, "colors">
   /**
    * The CSS `border-block-end-color` property.
    */
@@ -264,6 +298,10 @@ export type BorderProps = {
    * The CSS `border-inline-end-color` property.
    */
   borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  /**
+   * The CSS `border-inline-color` property.
+   */
+  borderInlineColor?: Token<CSS.Property.BorderInlineColor, "colors">
   /**
    * The CSS `border-right` property.
    */
@@ -457,4 +495,36 @@ export type BorderProps = {
    * The CSS `border-block` property.
    */
   borderBlock?: Token<CSS.Property.BorderBlock | number>
+  /**
+   * The CSS `border-image` property.
+   */
+  borderImage?: Token<CSS.Property.BorderImage>
+  /**
+   * The CSS `border-image-outset` property.
+   */
+  borderImageOutset?: Token<CSS.Property.BorderImageOutset>
+  /**
+   * The CSS `border-image-repeat` property.
+   */
+  borderImageRepeat?: Token<CSS.Property.BorderImageRepeat>
+  /**
+   * The CSS `border-image-slice` property.
+   */
+  borderImageSlice?: Token<CSS.Property.BorderImageSlice>
+  /**
+   * The CSS `border-image-source` property.
+   */
+  borderImageSource?: Token<CSS.Property.BorderImageSource>
+  /**
+   * The CSS `border-image-width` property.
+   */
+  borderImageWidth?: Token<CSS.Property.BorderImageWidth>
+  /**
+   * The CSS `border-collapse` property.
+   */
+  borderCollapse?: Token<CSS.Property.BorderCollapse>
+  /**
+   * The CSS `border-spacing` property.
+   */
+  borderSpacing?: Token<CSS.Property.BorderSpacing | number>
 }

@@ -40,6 +40,7 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({
           <LinkIcon />
         </Link>
       ) : null}
+
       {children}
     </Heading>
   )

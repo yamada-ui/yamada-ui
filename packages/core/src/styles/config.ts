@@ -79,13 +79,17 @@ export const transforms = {
 
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
-  fraction: (value: any) => {
-    if (isNumber(value) && value <= 1) {
-      return `${value * 100}%`
-    } else {
+  fraction:
+    (transform?: Transform): Transform =>
+    (value: any, ...rest) => {
+      if (isNumber(value) && value <= 1) {
+        value = `${value * 100}%`
+      }
+
+      if (transform) value = transform(value, ...rest)
+
       return value
-    }
-  },
+    },
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {
@@ -131,7 +135,7 @@ export const configs = {
   shadow: createConfig("shadows"),
   border: createConfig("borders"),
   size: createConfig("sizes", transforms.px),
-  sizeTransform: createConfig("sizes", transforms.fraction),
+  sizeTransform: createConfig("sizes", transforms.fraction(transforms.px)),
   prop: (
     properties: ConfigProps["properties"],
     token?: ThemeToken,
@@ -145,7 +149,7 @@ export const configs = {
         }
       : {
           properties,
-          token,
+          transform,
         },
   propTransform: (
     properties: ConfigProps["properties"],

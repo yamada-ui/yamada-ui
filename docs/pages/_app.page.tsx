@@ -1,8 +1,8 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
   UIProvider,
-  colorModeManager,
-  themeSchemeManager,
+  createColorModeManager,
+  createThemeSchemeManager,
 } from "@yamada-ui/react"
 import type { AppProps } from "next/app"
 import { Inter } from "next/font/google"
@@ -19,6 +19,8 @@ const inter = Inter({
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const { cookies } = pageProps
+  const colorModeManager = createColorModeManager("ssr", cookies)
+  const themeSchemeManager = createThemeSchemeManager("ssr", cookies)
 
   return (
     <>
@@ -32,16 +34,8 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       <UIProvider
         theme={theme}
         config={config}
-        colorModeManager={
-          typeof cookies === "string"
-            ? colorModeManager.cookieStorageSSR(cookies)
-            : colorModeManager.cookieStorage
-        }
-        themeSchemeManager={
-          typeof cookies === "string"
-            ? themeSchemeManager.cookieStorageSSR(cookies)
-            : themeSchemeManager.cookieStorage
-        }
+        colorModeManager={colorModeManager}
+        themeSchemeManager={themeSchemeManager}
       >
         <I18nProvider>
           <Component {...{ ...pageProps, inter }} />

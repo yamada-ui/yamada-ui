@@ -63,7 +63,12 @@ export const PropsCard: FC<PropsCardProps> = ({
       >
         {typeof description !== "undefined" ? (
           <>
-            <Text lineHeight="1.5rem" fontWeight="medium" fontSize="sm">
+            <Text
+              lineHeight="1.5rem"
+              color="muted"
+              fontWeight="medium"
+              fontSize="sm"
+            >
               {t("component.props-card.description")}
             </Text>
 
@@ -73,7 +78,12 @@ export const PropsCard: FC<PropsCardProps> = ({
 
         {typeof type !== "undefined" ? (
           <>
-            <Text lineHeight="1.5rem" fontWeight="medium" fontSize="sm">
+            <Text
+              lineHeight="1.5rem"
+              color="muted"
+              fontWeight="medium"
+              fontSize="sm"
+            >
               {t("component.props-card.type")}
             </Text>
 
@@ -85,7 +95,12 @@ export const PropsCard: FC<PropsCardProps> = ({
 
         {typeof defaultValue !== "undefined" ? (
           <>
-            <Text lineHeight="1.5rem" fontWeight="medium" fontSize="sm">
+            <Text
+              lineHeight="1.5rem"
+              color="muted"
+              fontWeight="medium"
+              fontSize="sm"
+            >
               {t("component.props-card.default")}
             </Text>
 
@@ -97,7 +112,12 @@ export const PropsCard: FC<PropsCardProps> = ({
 
         {typeof docs !== "undefined" ? (
           <>
-            <Text lineHeight="1.5rem" fontWeight="medium" fontSize="sm">
+            <Text
+              lineHeight="1.5rem"
+              color="muted"
+              fontWeight="medium"
+              fontSize="sm"
+            >
               {t("component.props-card.docs")}
             </Text>
 

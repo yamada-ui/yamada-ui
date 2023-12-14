@@ -12,18 +12,21 @@ import {
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import type {
-  ComponentStyle,
   CSSUIObject,
+  ColorModeArray,
+  ResponsiveObject,
   UIStyle,
   UIStyleProps,
-  ResponsiveObject,
-  ColorModeArray,
-  ComponentSizes,
-  ComponentVariants,
-  ComponentMultiVariants,
+} from "../css"
+import { useTheme, useColorMode } from "../providers"
+import { pseudos } from "../styles"
+import type {
   ComponentMultiSizes,
-} from ".."
-import { useTheme, useColorMode, pseudos } from ".."
+  ComponentMultiVariants,
+  ComponentSizes,
+  ComponentStyle,
+  ComponentVariants,
+} from "../theme.types"
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject

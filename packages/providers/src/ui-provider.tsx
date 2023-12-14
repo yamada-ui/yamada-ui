@@ -46,18 +46,18 @@ export type UIProviderProps = {
    * Manager to persist a user's color mode preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `cookieStorageManager`.
+   * For SSR, choose `colorModeSSRManager`.
    *
-   * @default 'localStorageManager'
+   * @default 'colorModeLocalStorageManager'
    */
   colorModeManager?: ColorModeManager
   /**
    * Manager to persist a user's theme scheme preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `cookieStorageManager`.
+   * For SSR, choose `themeSchemeSSRManager`.
    *
-   * @default 'localStorageManager'
+   * @default 'themeSchemeLocalStorageManager'
    */
   themeSchemeManager?: ThemeSchemeManager
   /**

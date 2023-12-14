@@ -11,10 +11,8 @@ import {
 import type { ColorMode } from "../css"
 import type { ThemeConfig } from "../theme.types"
 import type { ColorModeManager } from "./color-mode-manager"
-import { colorModeManager } from "./color-mode-manager"
+import { colorModeLocalStorageManager } from "./color-mode-manager"
 import { getColorModeUtils } from "./color-mode-utils"
-
-const { localStorage } = colorModeManager
 
 type ColorModeContext = {
   forced?: boolean
@@ -34,14 +32,25 @@ export const ColorModeContext = createContext({} as ColorModeContext)
 
 export type ColorModeProviderProps = {
   colorMode?: ColorMode
+  /**
+   * The config of the yamada ui.
+   */
   config?: ThemeConfig
   children?: ReactNode
+  /**
+   * Manager to persist a user's color mode preference.
+   *
+   * Omit if you don't render server-side.
+   * For SSR, choose `colorModeSSRManager`.
+   *
+   * @default 'colorModeLocalStorageManager'
+   */
   colorModeManager?: ColorModeManager
 }
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   colorMode: defaultColorMode,
-  colorModeManager = localStorage,
+  colorModeManager = colorModeLocalStorageManager,
   config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
   children,
 }) => {

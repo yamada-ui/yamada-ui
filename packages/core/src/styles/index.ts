@@ -69,7 +69,7 @@ export const layoutStyle = {
 
 export const layoutStylesProperties: any[] = Object.keys(layoutStyle)
 
-export type StylesProps = LayoutProps &
+export type StyleProps = LayoutProps &
   ColorProps &
   GridProps &
   FlexProps &

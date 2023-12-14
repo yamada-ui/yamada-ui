@@ -2,7 +2,7 @@ import type * as React from "react"
 import type {
   CSSUIProps,
   CSSUIObject,
-  StylesProps,
+  StyleProps,
   CSSObject,
   Interpolation,
   PropsTheme,
@@ -115,7 +115,7 @@ export type UIComponent<Y extends As, M extends object = {}> = Component<
 export type HTMLUIProps<Y extends As> = Omit<
   PropsOf<Y>,
   Y extends "svg"
-    ? "ref" | "children" | keyof StylesProps
-    : "ref" | keyof StylesProps
+    ? "ref" | "children" | keyof StyleProps
+    : "ref" | keyof StyleProps
 > &
   UIProps & { as?: As }

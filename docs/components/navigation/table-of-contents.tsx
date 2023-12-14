@@ -58,7 +58,7 @@ export const TableOfContents = memo(
         <VStack
           pt="lg"
           pb="16"
-          pl="lg"
+          pl="md"
           overflowY="scroll"
           overscrollBehavior="contain"
         >
@@ -76,46 +76,54 @@ export const TableOfContents = memo(
                   key={id}
                   as="a"
                   href={`#${id}`}
-                  userSelect="none"
-                  pl={`calc(${lv - 1} * ${pl})`}
-                  py="sm"
                   outline="0"
-                  borderLeftWidth="1px"
-                  borderLeftColor={isSelected ? `primary.400` : "border"}
-                  data-selected={dataAttr(isSelected)}
-                  _selected={{
-                    color: [`black`, "white"],
-                    bg: [`primary.300`, `primary.300`],
-                  }}
-                  _hover={{
-                    color: isSelected ? undefined : ["black", "white"],
-                  }}
                   _focusVisible={{
                     boxShadow: "inline",
                   }}
                   transitionProperty="colors"
                   transitionDuration="normal"
-                  position="relative"
-                  _before={{
-                    content: "''",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    bg: "white",
-                    opacity: 0.8,
-                  }}
-                  _dark={{
-                    _before: {
-                      bg: "black",
-                      opacity: 0.86,
-                    },
-                  }}
                 >
-                  <TextWithCode position="relative" zIndex="yamcha" isTruncated>
-                    {title}
-                  </TextWithCode>
+                  <Box
+                    data-selected={dataAttr(isSelected)}
+                    py="sm"
+                    pl={`calc(${lv - 1} * ${pl})`}
+                    position="relative"
+                    zIndex="-1"
+                    userSelect="none"
+                    borderLeftWidth="1px"
+                    borderLeftColor={isSelected ? `primary.400` : "border"}
+                    _selected={{
+                      color: [`black`, "white"],
+                      bg: [`primary.300`, `primary.300`],
+                    }}
+                    _hover={{
+                      color: isSelected ? undefined : ["black", "white"],
+                    }}
+                    _before={{
+                      content: "''",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      bg: "white",
+                      opacity: 0.8,
+                    }}
+                    _dark={{
+                      _before: {
+                        bg: "black",
+                        opacity: 0.86,
+                      },
+                    }}
+                  >
+                    <TextWithCode
+                      position="relative"
+                      zIndex="yamcha"
+                      isTruncated
+                    >
+                      {title}
+                    </TextWithCode>
+                  </Box>
                 </ListItem>
               )
             })}

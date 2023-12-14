@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import { keysFormObject, createdDom } from "@yamada-ui/utils"
 
-export type BreakpointQuery = {
+type BreakpointQuery = {
   breakpoint: string
   minW: number | undefined
   maxW: number | undefined

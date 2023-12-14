@@ -53,6 +53,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

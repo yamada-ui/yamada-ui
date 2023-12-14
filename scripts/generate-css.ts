@@ -17,7 +17,7 @@ const SOURCE_URL = "https://developer.mozilla.org"
 const OUT_PATH = "styles.ts"
 
 type CSSProperty = ReturnType<typeof getCSSProperties>[number]
-type CSSProp = keyof CSS.StandardProperties
+type CSSProp = keyof CSS.StandardProperties | keyof CSS.SvgProperties
 type FuncProp = { prop: CSSProp; func: string }
 
 type Tokens = Record<string, CSSProp[]>
@@ -194,7 +194,7 @@ const getCSSTypes = async () => {
     const symbol = type.getSymbol()
     const name = symbol?.getName()
 
-    if (name !== "StandardProperties") continue
+    if (name !== "StandardProperties" && name !== "SvgProperties") continue
 
     for (const property of type.getProperties()) {
       const name = property.getName()

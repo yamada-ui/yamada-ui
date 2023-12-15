@@ -43,7 +43,7 @@ const tokens: Tokens = {
   letterSpacings: [],
   lineHeights: [],
   radii: [],
-  shadows: [],
+  shadows: ["boxShadow"],
   sizes: [
     "width",
     "inlineSize",
@@ -83,6 +83,8 @@ const shorthandProps: ShorthandProps = {
   minHeight: ["minH"],
   maxWidth: ["maxW"],
   maxHeight: ["maxH"],
+  mixBlendMode: ["blendMode"],
+  backgroundBlendMode: ["bgBlendMode"],
   overscrollBehavior: ["overscroll"],
   overscrollBehaviorX: ["overscrollX"],
   overscrollBehaviorY: ["overscrollY"],

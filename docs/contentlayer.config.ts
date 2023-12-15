@@ -158,19 +158,43 @@ export const getTableOfContents = (raw: string, maxLv = Infinity) => {
 
   raw = raw.replace(/```[\s\S]*?```/g, "")
 
-  const contents = [...raw.matchAll(/^(## |### |#### )(.*)\n/gm)]
+  const matches = [...raw.matchAll(/^(## |### |#### )(.*)\n/gm)]
 
-  if (!contents.length) return []
+  if (!matches.length) return []
 
-  return contents
-    .map(([, lv, title]) => {
-      title = title.trim()
-      lv = lv.trim()
+  return matches
+    .map((match, index) => {
+      const nextMatch = matches[index + 1]
+      const title = match[2].trim()
+      const lv = match[1].trim().split("#").length - 1
 
       const id = slugger.slug(title, false)
 
-      return { id, title, lv: lv.split("#").length - 1 }
+      const propMatches = [
+        ...raw
+          .slice(Number(match.index), nextMatch?.index)
+          .matchAll(/<PropsCard\s+[^>]*?name="([^"]+)"/g),
+      ]
+
+      let results = [{ id, title, lv }]
+
+      if (propMatches.length) {
+        const props = propMatches.map((match) => {
+          const title = match[1].trim()
+
+          return {
+            id: `${id.replace("props", "")}-${title.toLowerCase()}`,
+            title,
+            lv: lv + 1,
+          }
+        })
+
+        results = [...results, ...props]
+      }
+
+      return results
     })
+    .flat()
     .filter(({ lv }) => maxLv >= lv)
 }
 

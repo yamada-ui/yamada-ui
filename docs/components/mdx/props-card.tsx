@@ -13,6 +13,7 @@ import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts/i18n-context"
 
 export type PropsCardProps = CardProps & {
+  id: string
   name: string
   type?: string
   required?: boolean
@@ -22,6 +23,7 @@ export type PropsCardProps = CardProps & {
 }
 
 export const PropsCard: FC<PropsCardProps> = ({
+  id,
   name,
   type,
   required,
@@ -32,7 +34,13 @@ export const PropsCard: FC<PropsCardProps> = ({
   const { t } = useI18n()
 
   return (
-    <Card variant="outline" mt="8" position="relative">
+    <Card
+      id={id}
+      css={{ scrollMarginBlock: "6rem" }}
+      variant="outline"
+      mt="8"
+      position="relative"
+    >
       <CardHeader
         position="absolute"
         top="0"

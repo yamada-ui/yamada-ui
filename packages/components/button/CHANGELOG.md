@@ -1,5 +1,16 @@
 # @yamada-ui/button
 
+## 0.4.3
+
+### Patch Changes
+
+- [#467](https://github.com/hirotomoyamada/yamada-ui/pull/467) [`d62917d`](https://github.com/hirotomoyamada/yamada-ui/commit/d62917d0a16ab7455b3f628d10c95804eb240eb9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replace `onClick` with `onPointerDown` on ripple effect.
+
+- Updated dependencies [[`d62917d`](https://github.com/hirotomoyamada/yamada-ui/commit/d62917d0a16ab7455b3f628d10c95804eb240eb9), [`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb)]:
+  - @yamada-ui/ripple@0.1.4
+  - @yamada-ui/core@0.14.2
+  - @yamada-ui/loading@0.5.12
+
 ## 0.4.2
 
 ### Patch Changes

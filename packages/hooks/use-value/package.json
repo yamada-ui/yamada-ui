@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-value",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "description": "Yamada UI useValue custom hook",
   "keywords": [
     "use-value"

@@ -8,26 +8,33 @@ tab: Props
 
 ## Props
 
-### SegmentedControl Props
+### SegmentedControlProps
 
 <PropsCard
+  id="segmentedcontrol-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="segmentedcontrol-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the segmented control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="segmentedcontrol-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the segmented control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="segmentedcontrol-items"
   name="items"
   type="SegmentedControlItem[]"
   description={
@@ -35,57 +42,74 @@ tab: Props
   }
   defaultValue="'[]'"
 />
+
 <PropsCard
+  id="segmentedcontrol-name"
   name="name"
   type="string"
   description={"The HTML `name` attribute used for forms."}
 />
+
 <PropsCard
+  id="segmentedcontrol-onchange"
   name="onChange"
   type="(value: string) => void"
   description={
     "The callback fired when any children radio is checked or unchecked."
   }
 />
+
 <PropsCard
+  id="segmentedcontrol-size"
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the SegmentedControl."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="segmentedcontrol-value"
   name="value"
   type="string"
   description={"The value of the segmented control."}
 />
+
 <PropsCard
+  id="segmentedcontrol-variant"
   name="variant"
   type='"basic" | "rounded"'
   description={"The variant of the SegmentedControl."}
   defaultValue="basic"
 />
 
-### SegmentedControlButton Props
+### SegmentedControlButtonProps
 
 <PropsCard
+  id="segmentedcontrolbutton-value"
   name="value"
   required
   type="string | number"
   description={"The value of the segmented control button."}
 />
+
 <PropsCard
+  id="segmentedcontrolbutton-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the segmented control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="segmentedcontrolbutton-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the segmented control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="segmentedcontrolbutton-onchange"
   name="onChange"
   type="ChangeEventHandler<HTMLInputElement>"
   description={

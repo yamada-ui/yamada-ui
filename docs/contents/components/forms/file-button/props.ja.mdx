@@ -8,26 +8,33 @@ tab: Props
 
 ## Props
 
-### FileButton Props
+### FileButtonProps
 
 <PropsCard
+  id="filebutton-disableripple"
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-errorbordercolor"
   name="errorBorderColor"
   type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 242 more ... | ColorModeArray<...>'
   description={"The border color when the button is invalid."}
 />
+
 <PropsCard
+  id="filebutton-isactive"
   name="isActive"
   type="boolean"
   description={"If `true`, the button is represented as active."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-isdisabled"
   name="isDisabled"
   type="boolean"
   description={
@@ -35,36 +42,48 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-isinvalid"
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-isloading"
   name="isLoading"
   type="boolean"
   description={"If `true`, the loading state of the button is represented."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-isrequired"
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="filebutton-lefticon"
   name="leftIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the left side of the button."}
 />
+
 <PropsCard
+  id="filebutton-loadingicon"
   name="loadingIcon"
   type='type ONLY_FOR_FORMAT =
   | "audio"
@@ -77,7 +96,9 @@ tab: Props
   | "circles"'
   description={"The icon to display when the button is loading."}
 />
+
 <PropsCard
+  id="filebutton-loadingplacement"
   name="loadingPlacement"
   type='"end" | "start"'
   description={
@@ -85,24 +106,32 @@ tab: Props
   }
   defaultValue="'start'"
 />
+
 <PropsCard
+  id="filebutton-loadingtext"
   name="loadingText"
   type="string"
   description={"The text to display when the button is loading."}
 />
+
 <PropsCard
+  id="filebutton-onchange"
   name="onChange"
   type="(files: File[] | undefined) => void"
   description={"Function to be called when a file change event occurs."}
 />
+
 <PropsCard
+  id="filebutton-resetref"
   name="resetRef"
   type="type ONLY_FOR_FORMAT =
   | ((instance: (() => void) | null) => void)
   | MutableRefObject<(() => void) | null>"
   description={"Ref to a reset function."}
 />
+
 <PropsCard
+  id="filebutton-righticon"
   name="rightIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the right side of the button."}

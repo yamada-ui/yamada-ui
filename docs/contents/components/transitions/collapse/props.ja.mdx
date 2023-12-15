@@ -8,53 +8,76 @@ tab: Props
 
 ## Props
 
-### Collapse Props
+### CollapseProps
 
 <PropsCard
+  id="collapse-animationopacity"
   name="animationOpacity"
   type="boolean"
   description={"If `true`, the opacity of the content will be animated."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="collapse-delay"
   name="delay"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `delay` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="collapse-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `duration` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="collapse-endingheight"
   name="endingHeight"
   type="string | number"
   description={"The height you want the content in its expanded state."}
   defaultValue="auto"
 />
-<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+
 <PropsCard
+  id="collapse-enter"
+  name="enter"
+  type="any"
+  description={"Custom `enter`."}
+/>
+
+<PropsCard
+  id="collapse-isopen"
   name="isOpen"
   type="boolean"
   description={"Show the component. triggers when enter or exit states."}
 />
+
 <PropsCard
+  id="collapse-startingheight"
   name="startingHeight"
   type="string | number"
   description={"The height you want the content in its collapsed state."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="collapse-transition"
   name="transition"
   type='Partial<Record<"exit" | "enter", Transition>>'
   description={"Custom `transition` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="collapse-transitionend"
   name="transitionEnd"
   type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
   description={"Custom `transitionEnd` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="collapse-unmountonexit"
   name="unmountOnExit"
   type="boolean"
   description={

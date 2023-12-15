@@ -10,54 +10,65 @@ tab: Props
 
 ## Props
 
-### Breadcrumb Props
+### BreadcrumbProps
 
 <PropsCard
+  id="breadcrumb-gap"
   name="gap"
   type='UIValue<number | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "sm" | "md" | "lg" | "xl" | "2xl" | "1" | "-1" | "2" | "-2" | ... 73 more ... | "auto">'
   description={"The left and right margin applied to the separator."}
   defaultValue="'sm'"
 />
+
 <PropsCard
+  id="breadcrumb-listprops"
   name="listProps"
   type='HTMLUIProps<"ol">'
   description={"Props for ol element."}
 />
+
 <PropsCard
+  id="breadcrumb-separator"
   name="separator"
   type="string | Element"
   description={"The visual separator between each breadcrumb item."}
   defaultValue="'/'"
 />
 
-### BreadcrumbItem Props
+### BreadcrumbItemProps
 
 <PropsCard
+  id="breadcrumbitem-iscurrentpage"
   name="isCurrentPage"
   type="boolean"
   description={"If `true`, change to span element."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="breadcrumbitem-islastchild"
   name="isLastChild"
   type="boolean"
   description={"If `true`, not show separator."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="breadcrumbitem-separator"
   name="separator"
   type="string | Element"
   description={"The visual separator between each breadcrumb item."}
   defaultValue="'/'"
 />
 
-### BreadcrumbLink Props
+### BreadcrumbLinkProps
 
 <PropsCard
+  id="breadcrumblink-iscurrentpage"
   name="isCurrentPage"
   type="boolean"
   description={"If `true`, change to span element."}
   defaultValue="false"
 />
 
-### BreadcrumbSeparator Props
+### BreadcrumbSeparatorProps

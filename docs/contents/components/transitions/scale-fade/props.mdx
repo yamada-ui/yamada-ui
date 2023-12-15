@@ -10,47 +10,68 @@ tab: Props
 
 ## Props
 
-### ScaleFade Props
+### ScaleFadeProps
 
 <PropsCard
+  id="scalefade-delay"
   name="delay"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `delay` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="scalefade-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `duration` definition for `enter` and `exit`."}
 />
-<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+
 <PropsCard
+  id="scalefade-enter"
+  name="enter"
+  type="any"
+  description={"Custom `enter`."}
+/>
+
+<PropsCard
+  id="scalefade-isopen"
   name="isOpen"
   type="boolean"
   description={"Show the component. triggers when enter or exit states."}
 />
+
 <PropsCard
+  id="scalefade-reverse"
   name="reverse"
   type="boolean"
   description={"If `true`, the element will transition back to exit state."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="scalefade-scale"
   name="scale"
   type="number"
   description={"The initial scale of the element."}
   defaultValue="0.95"
 />
+
 <PropsCard
+  id="scalefade-transition"
   name="transition"
   type='Partial<Record<"exit" | "enter", Transition>>'
   description={"Custom `transition` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="scalefade-transitionend"
   name="transitionEnd"
   type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
   description={"Custom `transitionEnd` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="scalefade-unmountonexit"
   name="unmountOnExit"
   type="boolean"
   description={

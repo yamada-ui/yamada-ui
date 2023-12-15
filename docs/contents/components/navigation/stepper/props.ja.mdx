@@ -8,27 +8,34 @@ tab: Props
 
 ## Props
 
-### Stepper Props
+### StepperProps
 
 <PropsCard
+  id="stepper-index"
   name="index"
   required
   type="number"
   description={"The active step index."}
 />
+
 <PropsCard
+  id="stepper-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
+
 <PropsCard
+  id="stepper-orientation"
   name="orientation"
   type='"horizontal" | "vertical"'
   description={"The orientation of the stepper."}
   defaultValue="'horizontal'"
 />
+
 <PropsCard
+  id="stepper-showlastseparator"
   name="showLastSeparator"
   type="boolean"
   description={
@@ -36,56 +43,69 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="stepper-size"
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Stepper."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="stepper-steps"
   name="steps"
   type="Steps"
   description={"If provided, generate step components based on steps."}
 />
+
 <PropsCard
+  id="stepper-variant"
   name="variant"
   type="string"
   description={"The variant of the Stepper."}
 />
 
-### UseSteps Props
+### UseStepsProps
 
-<PropsCard name="count" type="number" />
-<PropsCard name="index" type="number" />
+<PropsCard id="usesteps-count" name="count" type="number" />
 
-### Step Props
+<PropsCard id="usesteps-index" name="index" type="number" />
 
-### StepTitle Props
+### StepProps
 
-### StepDescription Props
+### StepTitleProps
 
-### StepSeparator Props
+### StepDescriptionProps
 
-### StepStatus Props
+### StepSeparatorProps
+
+### StepStatusProps
 
 <PropsCard
+  id="stepstatus-active"
   name="active"
   type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)"
 />
+
 <PropsCard
+  id="stepstatus-complete"
   name="complete"
   type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)"
 />
+
 <PropsCard
+  id="stepstatus-incomplete"
   name="incomplete"
   type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)"
 />
 
-### StepNumber Props
+### StepNumberProps
 
-### StepIcon Props
+### StepIconProps
 
 <PropsCard
+  id="stepicon-size"
   name="size"
   type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
   description={"The CSS `font-size` property."}

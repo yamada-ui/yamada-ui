@@ -8,37 +8,54 @@ tab: Props
 
 ## Props
 
-### SlideFade Props
+### SlideFadeProps
 
 <PropsCard
+  id="slidefade-delay"
   name="delay"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `delay` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="slidefade-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `duration` definition for `enter` and `exit`."}
 />
-<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+
 <PropsCard
+  id="slidefade-enter"
+  name="enter"
+  type="any"
+  description={"Custom `enter`."}
+/>
+
+<PropsCard
+  id="slidefade-isopen"
   name="isOpen"
   type="boolean"
   description={"Show the component. triggers when enter or exit states."}
 />
+
 <PropsCard
+  id="slidefade-offsetx"
   name="offsetX"
   type="UIValue<string | number>"
   description={"The offset on the horizontal or `x` axis."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="slidefade-offsety"
   name="offsetY"
   type="UIValue<string | number>"
   description={"The offset on the vertical or `y` axis."}
   defaultValue="8"
 />
+
 <PropsCard
+  id="slidefade-reverse"
   name="reverse"
   type="boolean"
   description={
@@ -46,17 +63,23 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="slidefade-transition"
   name="transition"
   type='Partial<Record<"exit" | "enter", Transition>>'
   description={"Custom `transition` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="slidefade-transitionend"
   name="transitionEnd"
   type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
   description={"Custom `transitionEnd` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="slidefade-unmountonexit"
   name="unmountOnExit"
   type="boolean"
   description={

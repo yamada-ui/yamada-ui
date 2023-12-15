@@ -8,26 +8,33 @@ tab: Props
 
 ## Props
 
-### Progress Props
+### ProgressProps
 
 <PropsCard
+  id="progress-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
+
 <PropsCard
+  id="progress-filledtrackcolor"
   name="filledTrackColor"
   type='"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 241 more ... | ColorModeArray<...>'
   description={"The CSS `color` property."}
 />
+
 <PropsCard
+  id="progress-hasstripe"
   name="hasStripe"
   type="boolean"
   description={"If `true`, the progress bar will show stripe."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="progress-isanimation"
   name="isAnimation"
   type="boolean"
   description={
@@ -35,7 +42,9 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="progress-isstripeanimation"
   name="isStripeAnimation"
   type="boolean"
   description={
@@ -43,37 +52,49 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="progress-max"
   name="max"
   type="number"
   description={"The maximum value of the progress."}
   defaultValue="100"
 />
+
 <PropsCard
+  id="progress-min"
   name="min"
   type="number"
   description={"The minimum value of the progress."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="progress-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Progress."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="progress-speed"
   name="speed"
   type="string | number"
   description={"The animation speed in seconds."}
   defaultValue="'1.4s'"
 />
+
 <PropsCard
+  id="progress-value"
   name="value"
   type="number"
   description={"The value of the progress."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="progress-variant"
   name="variant"
   type="string"
   description={"The variant of the Progress."}

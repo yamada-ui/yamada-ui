@@ -10,14 +10,17 @@ tab: Props
 
 ## Props
 
-### Loading Props
+### LoadingProps
 
 <PropsCard
+  id="loading-duration"
   name="duration"
   type="string | number"
   description={"The CSS `dur` property."}
 />
+
 <PropsCard
+  id="loading-message"
   name="message"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -27,18 +30,24 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
 />
+
 <PropsCard
+  id="loading-secondarycolor"
   name="secondaryColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The CSS `color` property."}
   defaultValue="'primary'"
 />
+
 <PropsCard
+  id="loading-size"
   name="size"
   type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
   description={"The CSS `font-size` property."}
 />
+
 <PropsCard
+  id="loading-variant"
   name="variant"
   type='type ONLY_FOR_FORMAT =
   | "grid"

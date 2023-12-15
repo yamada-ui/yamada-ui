@@ -10,44 +10,55 @@ tab: Props
 
 ## Props
 
-### Card Props
+### CardProps
 
 <PropsCard
+  id="card-align"
   name="align"
   type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `align-items` property."}
 />
+
 <PropsCard
+  id="card-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
+
 <PropsCard
+  id="card-direction"
   name="direction"
   type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
 />
+
 <PropsCard
+  id="card-justify"
   name="justify"
   type='"center" | "right" | "left" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `justify-content` property."}
 />
+
 <PropsCard
+  id="card-size"
   name="size"
   type='"sm" | "md" | "normal" | "lg"'
   description={"The size of the Card."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="card-variant"
   name="variant"
   type='"elevated" | "outline" | "solid" | "subtle" | "unstyled"'
   description={"The variant of the Card."}
   defaultValue="elevated"
 />
 
-### CardHeader Props
+### CardHeaderProps
 
-### CardBody Props
+### CardBodyProps
 
-### CardFooter Props
+### CardFooterProps

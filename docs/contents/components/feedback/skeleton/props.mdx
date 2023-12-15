@@ -8,19 +8,24 @@ tab: Props
 
 ## Props
 
-### Skeleton Props
+### SkeletonProps
 
 <PropsCard
+  id="skeleton-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="skeleton-endcolor"
   name="endColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The color at the animation end."}
 />
+
 <PropsCard
+  id="skeleton-fadeduration"
   name="fadeDuration"
   type="string | number"
   description={
@@ -28,13 +33,17 @@ tab: Props
   }
   defaultValue="0.4"
 />
+
 <PropsCard
+  id="skeleton-isfitcontent"
   name="isFitContent"
   type="boolean"
   description={"If `true`, the skeleton will take the width of it's children."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="skeleton-isloaded"
   name="isLoaded"
   type="boolean"
   description={
@@ -42,36 +51,47 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="skeleton-size"
   name="size"
   type="string"
   description={"The size of the Skeleton."}
 />
+
 <PropsCard
+  id="skeleton-speed"
   name="speed"
   type="string | number"
   description={"The animation speed in seconds."}
   defaultValue="0.8"
 />
+
 <PropsCard
+  id="skeleton-startcolor"
   name="startColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The color at the animation start."}
 />
+
 <PropsCard
+  id="skeleton-variant"
   name="variant"
   type="string"
   description={"The variant of the Skeleton."}
 />
 
-### SkeletonCircle Props
+### SkeletonCircleProps
 
 <PropsCard
+  id="skeletoncircle-endcolor"
   name="endColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The color at the animation end."}
 />
+
 <PropsCard
+  id="skeletoncircle-fadeduration"
   name="fadeDuration"
   type="string | number"
   description={
@@ -79,13 +99,17 @@ tab: Props
   }
   defaultValue="0.4"
 />
+
 <PropsCard
+  id="skeletoncircle-isfitcontent"
   name="isFitContent"
   type="boolean"
   description={"If `true`, the skeleton will take the width of it's children."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="skeletoncircle-isloaded"
   name="isLoaded"
   type="boolean"
   description={
@@ -93,26 +117,33 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="skeletoncircle-speed"
   name="speed"
   type="string | number"
   description={"The animation speed in seconds."}
   defaultValue="0.8"
 />
+
 <PropsCard
+  id="skeletoncircle-startcolor"
   name="startColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The color at the animation start."}
 />
 
-### SkeletonText Props
+### SkeletonTextProps
 
 <PropsCard
+  id="skeletontext-endcolor"
   name="endColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The color at the animation end."}
 />
+
 <PropsCard
+  id="skeletontext-fadeduration"
   name="fadeDuration"
   type="string | number"
   description={
@@ -120,13 +151,17 @@ tab: Props
   }
   defaultValue="0.4"
 />
+
 <PropsCard
+  id="skeletontext-isfitcontent"
   name="isFitContent"
   type="boolean"
   description={"If `true`, the skeleton will take the width of it's children."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="skeletontext-isloaded"
   name="isLoaded"
   type="boolean"
   description={
@@ -134,18 +169,24 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="skeletontext-speed"
   name="speed"
   type="string | number"
   description={"The animation speed in seconds."}
   defaultValue="0.8"
 />
+
 <PropsCard
+  id="skeletontext-startcolor"
   name="startColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The color at the animation start."}
 />
+
 <PropsCard
+  id="skeletontext-textheight"
   name="textHeight"
   type='UIValue<number | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "normal" | "1" | "2" | "3" | "4" | ... 53 more ... | "9xl">'
   description={"The CSS `height` property."}

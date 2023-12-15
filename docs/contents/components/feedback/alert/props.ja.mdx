@@ -8,31 +8,43 @@ tab: Props
 
 ## Props
 
-### Alert Props
+### AlertProps
 
 <PropsCard
+  id="alert-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
-<PropsCard name="size" type="string" description={"The size of the Alert."} />
+
 <PropsCard
+  id="alert-size"
+  name="size"
+  type="string"
+  description={"The size of the Alert."}
+/>
+
+<PropsCard
+  id="alert-status"
   name="status"
   type='"info" | "success" | "warning" | "error" | "loading"'
   description={"The status of the alert."}
   defaultValue="'info'"
 />
+
 <PropsCard
+  id="alert-variant"
   name="variant"
   type='"basic" | "subtle" | "solid" | "island-accent" | "left-accent" | "top-accent"'
   description={"The variant of the Alert."}
   defaultValue="basic"
 />
 
-### AlertIcon Props
+### AlertIconProps
 
 <PropsCard
+  id="alerticon-variant"
   name="variant"
   type='type ONLY_FOR_FORMAT =
   | "audio"
@@ -44,6 +56,6 @@ tab: Props
   | "circles"'
 />
 
-### AlertTitle Props
+### AlertTitleProps
 
-### AlertDescription Props
+### AlertDescriptionProps

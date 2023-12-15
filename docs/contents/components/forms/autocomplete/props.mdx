@@ -10,26 +10,33 @@ tab: Props
 
 ## Props
 
-### Autocomplete Props
+### AutocompleteProps
 
 <PropsCard
+  id="autocomplete-allowcreate"
   name="allowCreate"
   type="boolean"
   description={"If `true`, enables the creation of autocomplete option."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-allowfree"
   name="allowFree"
   type="boolean"
   description={"If `true`, enables the free input."}
 />
+
 <PropsCard
+  id="autocomplete-animation"
   name="animation"
   type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue="'scale'"
 />
+
 <PropsCard
+  id="autocomplete-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
   description={
@@ -37,7 +44,9 @@ tab: Props
   }
   defaultValue="'clippingParents'"
 />
+
 <PropsCard
+  id="autocomplete-closeonblur"
   name="closeOnBlur"
   type="boolean"
   description={
@@ -45,13 +54,17 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="autocomplete-closeonesc"
   name="closeOnEsc"
   type="boolean"
   description={"If `true`, the popover will close when you hit the `Esc` key."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="autocomplete-closeonselect"
   name="closeOnSelect"
   type="boolean"
   description={
@@ -59,43 +72,59 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="autocomplete-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="autocomplete-containerprops"
   name="containerProps"
   type='Omit<HTMLUIProps<"div">, "children">'
   description={"Props for autocomplete container element."}
 />
+
 <PropsCard
+  id="autocomplete-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
 />
+
 <PropsCard
+  id="autocomplete-defaultvalue"
   name="defaultValue"
   type="string"
   description={"The initial value of the autocomplete."}
 />
+
 <PropsCard
+  id="autocomplete-duration"
   name="duration"
   type='number | Partial<Record<"enter" | "exit", number>>'
   description={"The animation duration."}
 />
+
 <PropsCard
+  id="autocomplete-emptymessage"
   name="emptyMessage"
   type="string"
   description={"The message displayed when the search yields no hits."}
   defaultValue="'No results found'"
 />
+
 <PropsCard
+  id="autocomplete-errorbordercolor"
   name="errorBorderColor"
   type="string"
   description={"The border color when the input is invalid."}
 />
+
 <PropsCard
+  id="autocomplete-eventlisteners"
   name="eventListeners"
   type="type ONLY_FOR_FORMAT =
   | boolean
@@ -105,7 +134,9 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="autocomplete-flip"
   name="flip"
   type="boolean"
   description={
@@ -113,17 +144,23 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="autocomplete-focusbordercolor"
   name="focusBorderColor"
   type="string"
   description={"The border color when the input is focused."}
 />
+
 <PropsCard
+  id="autocomplete-format"
   name="format"
   type="(value: string) => string"
   description={"Function to format text when search input."}
 />
+
 <PropsCard
+  id="autocomplete-gutter"
   name="gutter"
   type="UIValue<number>"
   description={
@@ -131,17 +168,23 @@ tab: Props
   }
   defaultValue="8"
 />
+
 <PropsCard
+  id="autocomplete-iconprops"
   name="iconProps"
   type="AutocompleteIconProps"
   description={"Props for autocomplete icon element."}
 />
+
 <PropsCard
+  id="autocomplete-inputprops"
   name="inputProps"
   type='HTMLUIProps<"input">'
   description={"Props for autocomplete input element."}
 />
+
 <PropsCard
+  id="autocomplete-insertpositionitem"
   name="insertPositionItem"
   type='Union<"first" | "last"> | [string, "first" | "last"]'
   description={
@@ -149,19 +192,25 @@ tab: Props
   }
   defaultValue="'first'"
 />
+
 <PropsCard
+  id="autocomplete-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-isinvalid"
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-islazy"
   name="isLazy"
   type="boolean"
   description={
@@ -169,24 +218,32 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-isrequired"
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-items"
   name="items"
   type="AutocompleteItem[]"
   description={"If provided, generate options based on items."}
 />
+
 <PropsCard
+  id="autocomplete-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
@@ -194,12 +251,16 @@ tab: Props
   }
   defaultValue="'unmount'"
 />
+
 <PropsCard
+  id="autocomplete-listprops"
   name="listProps"
   type='Omit<AutocompleteListProps, "children">'
   description={"Props for autocomplete list element."}
 />
+
 <PropsCard
+  id="autocomplete-matchwidth"
   name="matchWidth"
   type="boolean"
   description={
@@ -207,7 +268,9 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocomplete-modifiers"
   name="modifiers"
   type="Partial<Modifier<string, any>>[]"
   description={
@@ -215,24 +278,32 @@ tab: Props
   }
   docs="https://popper.js.org/docs/v2/modifiers/"
 />
+
 <PropsCard
+  id="autocomplete-offset"
   name="offset"
   type="[number, number]"
   description={
     "The main and cross-axis offset to displace popper element from its reference element."
   }
 />
+
 <PropsCard
+  id="autocomplete-onchange"
   name="onChange"
   type="(value: string) => void"
   description={"The callback invoked when value state changes."}
 />
+
 <PropsCard
+  id="autocomplete-onclose"
   name="onClose"
   type="() => void"
   description={"Callback fired when the popover closes."}
 />
+
 <PropsCard
+  id="autocomplete-oncreate"
   name="onCreate"
   type="(
   newItem: AutocompleteItem,
@@ -240,34 +311,46 @@ tab: Props
 ) => void"
   description={"The callback invoked when autocomplete option created."}
 />
+
 <PropsCard
+  id="autocomplete-onopen"
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
 />
+
 <PropsCard
+  id="autocomplete-onsearch"
   name="onSearch"
   type="(ev: ChangeEvent<HTMLInputElement>) => void"
   description={"The callback invoked when search input."}
 />
+
 <PropsCard
+  id="autocomplete-optionprops"
   name="optionProps"
   type='Omit<AutocompleteOptionProps, "value" | "children">'
   description={"Props for select option element."}
 />
+
 <PropsCard
+  id="autocomplete-placement"
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
   defaultValue="'bottom'"
 />
+
 <PropsCard
+  id="autocomplete-portalprops"
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
   defaultValue="'{ isDisabled: true }'"
 />
+
 <PropsCard
+  id="autocomplete-preventoverflow"
   name="preventOverflow"
   type="boolean"
   description={
@@ -275,81 +358,101 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="autocomplete-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Autocomplete."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="autocomplete-strategy"
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
   defaultValue="'absolute'"
 />
+
 <PropsCard
+  id="autocomplete-value"
   name="value"
   type="string"
   description={"The value of the autocomplete."}
 />
+
 <PropsCard
+  id="autocomplete-variant"
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the Autocomplete."}
   defaultValue="outline"
 />
 
-### AutocompleteOptionGroup Props
+### AutocompleteOptionGroupProps
 
 <PropsCard
+  id="autocompleteoptiongroup-label"
   name="label"
   required
   type="string"
   description={"The label of the autocomplete option group."}
 />
 
-### AutocompleteOption Props
+### AutocompleteOptionProps
 
 <PropsCard
+  id="autocompleteoption-closeonselect"
   name="closeOnSelect"
   type="boolean"
   description={"If `true`, the list element will be closed when selected."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocompleteoption-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The autocomplete option icon to use."}
 />
+
 <PropsCard
+  id="autocompleteoption-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the select option will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocompleteoption-isfocusable"
   name="isFocusable"
   type="boolean"
   description={"If `true`, the select option will be focusable."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="autocompleteoption-value"
   name="value"
   type="string"
   description={"The value of the select option."}
 />
 
-### AutocompleteCreate Props
+### AutocompleteCreateProps
 
 <PropsCard
+  id="autocompletecreate-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The autocomplete create option icon to use."}
 />
 
-### AutocompleteEmpty Props
+### AutocompleteEmptyProps
 
 <PropsCard
+  id="autocompleteempty-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The autocomplete empty option icon to use."}

@@ -8,47 +8,62 @@ tab: Props
 
 ## Props
 
-### Pagination Props
+### PaginationProps
 
 <PropsCard
+  id="pagination-total"
   name="total"
   required
   type="number"
   description={"The total number of pages in pagination."}
 />
+
 <PropsCard
+  id="pagination-boundaries"
   name="boundaries"
   type="UIValue<number>"
   description={"Number of elements visible on the left/right edges."}
   defaultValue="1"
 />
+
 <PropsCard
+  id="pagination-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
+
 <PropsCard
+  id="pagination-component"
   name="component"
   type="FC<PaginationItemProps>"
   description={"The pagination button component to use."}
 />
+
 <PropsCard
+  id="pagination-controlnextprops"
   name="controlNextProps"
   type='HTMLUIProps<"button">'
   description={"Props for next of the control button element."}
 />
+
 <PropsCard
+  id="pagination-controlprevprops"
   name="controlPrevProps"
   type='HTMLUIProps<"button">'
   description={"Props for previous of the control button element."}
 />
+
 <PropsCard
+  id="pagination-controlprops"
   name="controlProps"
   type='HTMLUIProps<"button">'
   description={"Props for control button element."}
 />
+
 <PropsCard
+  id="pagination-defaultpage"
   name="defaultPage"
   type="number"
   description={
@@ -56,50 +71,68 @@ tab: Props
   }
   defaultValue="1"
 />
+
 <PropsCard
+  id="pagination-edgefirstprops"
   name="edgeFirstProps"
   type='HTMLUIProps<"button">'
   description={"Props for first of the edge button element."}
 />
+
 <PropsCard
+  id="pagination-edgelastprops"
   name="edgeLastProps"
   type='HTMLUIProps<"button">'
   description={"Props for last of the edge button element."}
 />
+
 <PropsCard
+  id="pagination-edgeprops"
   name="edgeProps"
   type='HTMLUIProps<"button">'
   description={"Props for edge button element."}
 />
+
 <PropsCard
+  id="pagination-innerprops"
   name="innerProps"
   type='HTMLUIProps<"div">'
   description={"Props for inner element."}
 />
+
 <PropsCard
+  id="pagination-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the pagination all item will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="pagination-itemprops"
   name="itemProps"
   type='HTMLUIProps<"button">'
   description={"Props for button element."}
 />
+
 <PropsCard
+  id="pagination-onchange"
   name="onChange"
   type="(page: number) => void"
   description={"The callback invoked when the page changes."}
 />
+
 <PropsCard
+  id="pagination-page"
   name="page"
   type="number"
   description={
     "The page of the pagination.\nShould be less than `total` and greater than `1`."
   }
 />
+
 <PropsCard
+  id="pagination-siblings"
   name="siblings"
   type="UIValue<number>"
   description={
@@ -107,46 +140,59 @@ tab: Props
   }
   defaultValue="1"
 />
+
 <PropsCard
+  id="pagination-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl"'
   description={"The size of the Pagination."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="pagination-variant"
   name="variant"
   type='"solid" | "outline" | "ghost" | "unstyled"'
   description={"The variant of the Pagination."}
   defaultValue="solid"
 />
+
 <PropsCard
+  id="pagination-withcontrols"
   name="withControls"
   type="UIValue<boolean>"
   description={"If `true`, display the control buttons."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="pagination-withedges"
   name="withEdges"
   type="UIValue<boolean>"
   description={"If `true`, display the edge buttons."}
   defaultValue="false"
 />
 
-### UsePagination Props
+### UsePaginationProps
 
 <PropsCard
+  id="usepagination-total"
   name="total"
   required
   type="number"
   description={"The total number of pages in pagination."}
 />
+
 <PropsCard
+  id="usepagination-boundaries"
   name="boundaries"
   type="UIValue<number>"
   description={"Number of elements visible on the left/right edges."}
   defaultValue="1"
 />
+
 <PropsCard
+  id="usepagination-defaultpage"
   name="defaultPage"
   type="number"
   description={
@@ -154,25 +200,33 @@ tab: Props
   }
   defaultValue="1"
 />
+
 <PropsCard
+  id="usepagination-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the pagination all item will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="usepagination-onchange"
   name="onChange"
   type="(page: number) => void"
   description={"The callback invoked when the page changes."}
 />
+
 <PropsCard
+  id="usepagination-page"
   name="page"
   type="number"
   description={
     "The page of the pagination.\nShould be less than `total` and greater than `1`."
   }
 />
+
 <PropsCard
+  id="usepagination-siblings"
   name="siblings"
   type="UIValue<number>"
   description={

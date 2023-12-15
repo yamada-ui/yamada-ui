@@ -8,9 +8,15 @@ import {
   VStack,
   dataAttr,
   forwardRef,
+  mergeRefs,
+  useMotionValueEvent,
+  useScroll,
   useToken,
+  useUpdateEffect,
 } from "@yamada-ui/react"
-import { memo, useState } from "react"
+import type { RefObject } from "react"
+import { createRef, memo, useRef, useState } from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
 import { List as ListIcon } from "components/media-and-icons"
 import { TextWithCode } from "components/typography"
 import type { DocumentContent } from "contentlayer/generated"
@@ -22,9 +28,19 @@ export type TableOfContentsProps = StackProps & { contents: DocumentContent[] }
 export const TableOfContents = memo(
   forwardRef<TableOfContentsProps, "div">(({ contents, ...rest }, ref) => {
     const [selectedId, setSelectedId] = useState<string>("")
+    const containerRef = useRef<HTMLDivElement>(null)
+    const itemRefs = useRef<Map<string, RefObject<HTMLLIElement>>>(new Map())
     const pl = useToken("spaces", "4")
-
+    const { scrollY } = useScroll()
+    const prevValue = useRef<number>(0)
+    const directionRef = useRef<"up" | "down">("down")
     const { t } = useI18n()
+
+    useMotionValueEvent(scrollY, "change", (value) => {
+      directionRef.current = prevValue.current < value ? "down" : "up"
+
+      prevValue.current = value
+    })
 
     useEventListener(
       "scroll",
@@ -45,9 +61,32 @@ export const TableOfContents = memo(
       { passive: true },
     )
 
+    useUpdateEffect(() => {
+      if (!containerRef.current) return
+
+      const itemRef = itemRefs.current.get(selectedId)
+
+      if (!itemRef?.current) return
+
+      scrollIntoView(itemRef.current, {
+        behavior: (actions) =>
+          actions.forEach(({ el, top }) => {
+            if (directionRef.current === "down") {
+              el.scrollTop = top + 16
+            } else {
+              el.scrollTop = top - 16
+            }
+          }),
+        scrollMode: "if-needed",
+        block: "nearest",
+        inline: "nearest",
+        boundary: containerRef.current,
+      })
+    }, [selectedId])
+
     return (
       <VStack
-        ref={ref}
+        ref={mergeRefs(ref, containerRef)}
         as="nav"
         position="sticky"
         top="4rem"
@@ -70,10 +109,14 @@ export const TableOfContents = memo(
           <List gap="0" fontSize="sm" color="muted" ml="sm">
             {contents.map(({ lv, title, id }) => {
               const isSelected = selectedId == id
+              const ref = createRef<HTMLLIElement>()
+
+              itemRefs.current.set(id, ref)
 
               return (
                 <ListItem
                   key={id}
+                  ref={ref}
                   as="a"
                   href={`#${id}`}
                   outline="0"

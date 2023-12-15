@@ -26,7 +26,6 @@ import {
   PopoverTrigger,
   Spacer,
   Tag,
-  Text,
   VStack,
   forwardRef,
   mergeRefs,
@@ -48,6 +47,7 @@ import {
   Discord,
   Github,
   Hamburger,
+  Logo,
   Moon,
   Sun,
   Translate,
@@ -101,14 +101,7 @@ export const Header = memo(
               _focusVisible={{ boxShadow: "outline" }}
               rounded="md"
             >
-              <Text
-                as="h1"
-                fontSize="2xl"
-                fontWeight="semibold"
-                whiteSpace="nowrap"
-              >
-                Yamada UI
-              </Text>
+              <Logo w={{ base: "12rem", md: "10rem" }} h="auto" />
             </Box>
 
             <Tag

@@ -37,6 +37,9 @@ export const layout: Configs = {
   objectPosition: true,
   visibility: true,
   isolation: true,
+  breakAfter: true,
+  breakBefore: true,
+  breakInside: true,
 }
 
 Object.assign(layout, {
@@ -205,4 +208,16 @@ export type LayoutProps = {
    * The CSS `aspect-ratio` property.
    */
   aspectRatio?: Token<CSS.Property.AspectRatio>
+  /**
+   * The CSS `break-after` property.
+   */
+  breakAfter?: Token<CSS.Property.BreakAfter>
+  /**
+   * The CSS `break-before` property.
+   */
+  breakBefore?: Token<CSS.Property.BreakBefore>
+  /**
+   * The CSS `break-inside` property.
+   */
+  breakInside?: Token<CSS.Property.BreakInside>
 }

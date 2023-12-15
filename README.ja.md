@@ -1,6 +1,9 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" style="padding: 48px 0 24px;"/>
 </p>
+
+<p align="center" style="font-size: 24px; font-weight: 500; margin-bottom: 0px;">Reactアプリのスタイリング、アニメーション</p>
+<p align="center" style="font-size: 24px; font-weight: 500;">そして、柔軟性の<span style="color: #4387f4;">力を解き放つ</span></p>
 
 <p align="center">
   <img alt="NPM Minzip" src="https://img.shields.io/bundlephobia/minzip/@yamada-ui/react"/>

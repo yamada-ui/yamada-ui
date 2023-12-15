@@ -98,7 +98,7 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
     const ref = useMergeRefs(customRef, buttonRef)
-    const { onClick, ...rippleProps } = useRipple(rest)
+    const { onPointerDown, ...rippleProps } = useRipple(rest)
 
     const css: CSSUIObject = useMemo(() => {
       const _focus =
@@ -146,7 +146,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         data__loading={dataAttr(isLoading)}
         __css={css}
         {...rest}
-        onClick={onClick}
+        onPointerDown={onPointerDown}
       >
         {isLoading && loadingPlacement === "start" ? (
           <Loading className="ui-button__loading--start" {...loadingProps} />

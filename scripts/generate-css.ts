@@ -58,8 +58,9 @@ const tokens: Tokens = {
     "maxInlineSize",
     "maxHeight",
     "maxBlockSize",
+    "flexBasis",
   ],
-  spaces: [],
+  spaces: ["gap", "rowGap", "columnGap"],
   transitions: [],
   zIndices: [],
 }
@@ -88,6 +89,7 @@ const shorthandProps: ShorthandProps = {
   overscrollBehavior: ["overscroll"],
   overscrollBehaviorX: ["overscrollX"],
   overscrollBehaviorY: ["overscrollY"],
+  flexDirection: ["flexDir"],
 }
 
 const transformProps: TransformProps = {

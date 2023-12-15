@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.14.2
+
+### Patch Changes
+
+- [#465](https://github.com/hirotomoyamada/yamada-ui/pull/465) [`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify storage manager function.
+
 ## 0.14.1
 
 ### Patch Changes

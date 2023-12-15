@@ -1,5 +1,17 @@
 # @yamada-ui/providers
 
+## 0.9.21
+
+### Patch Changes
+
+- [#465](https://github.com/hirotomoyamada/yamada-ui/pull/465) [`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify storage manager function.
+
+- Updated dependencies [[`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb)]:
+  - @yamada-ui/core@0.14.2
+  - @yamada-ui/notice@0.5.15
+  - @yamada-ui/loading@0.5.12
+  - @yamada-ui/theme@0.13.4
+
 ## 0.9.20
 
 ### Patch Changes

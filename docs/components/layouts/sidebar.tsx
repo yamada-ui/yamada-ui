@@ -18,7 +18,7 @@ export const Sidebar = memo(
         {...rest}
       >
         <VStack as="nav" overflowY="auto" overscrollBehavior="contain">
-          <Tree pt="lg" pb="16" pr="lg" />
+          <Tree pt="lg" pb="16" pr="md" />
         </VStack>
 
         <Box

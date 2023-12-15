@@ -256,7 +256,7 @@ const generateContent = async ({
   // }
 
   Object.entries(doc).map(([title, props]) => {
-    content.push(`\n### ${title} Props\n`)
+    content.push(`\n### ${title}Props\n`)
 
     Object.entries(props).map(
       async ([name, { type, required, description, defaultValue, see }]) => {
@@ -268,7 +268,10 @@ const generateContent = async ({
           description = description.replace(/\n/g, "\\n")
         }
 
-        const props = [`name="${name}"`]
+        const props = [
+          `id="${title.toLowerCase()}-${name.toLowerCase()}"`,
+          `name="${name}"`,
+        ]
 
         if (required) props.push("required")
         if (type !== undefined) props.push(`type='${type}'`)
@@ -278,7 +281,7 @@ const generateContent = async ({
           props.push(`defaultValue="${defaultValue}"`)
         if (see !== undefined) props.push(`docs="${see}"`)
 
-        content.push(`<PropsCard ${props.join("\n")} />`)
+        content.push(`<PropsCard ${props.join("\n")} />\n`)
       },
     )
   })

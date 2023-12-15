@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
   UIProvider,
   createColorModeManager,
@@ -9,7 +10,6 @@ import Head from "next/head"
 import type { FC } from "react"
 import { I18nProvider } from "contexts/i18n-context"
 import { theme, config } from "theme"
-
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin", "latin-ext"],
@@ -41,6 +41,8 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           <Component {...{ ...pageProps, inter }} />
         </I18nProvider>
       </UIProvider>
+
+      <SpeedInsights />
     </>
   )
 }

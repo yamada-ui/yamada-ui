@@ -8,15 +8,18 @@ tab: Props
 
 ## Props
 
-### Drawer Props
+### DrawerProps
 
 <PropsCard
+  id="drawer-isopen"
   name="isOpen"
   required
   type="boolean"
   description={"If `true`, the open will be opened."}
 />
+
 <PropsCard
+  id="drawer-allowpinchzoom"
   name="allowPinchZoom"
   type="boolean"
   description={
@@ -24,7 +27,9 @@ tab: Props
   }
   defaultValue="false."
 />
+
 <PropsCard
+  id="drawer-blockscrollonmount"
   name="blockScrollOnMount"
   type="boolean"
   description={
@@ -32,48 +37,64 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="drawer-closeonesc"
   name="closeOnEsc"
   type="boolean"
   description={"If `true`, the modal will close when the `Esc` key is pressed."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="drawer-closeonoverlay"
   name="closeOnOverlay"
   type="boolean"
   description={"If `true`, the modal will close when the overlay is clicked."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="drawer-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="drawer-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"The animation duration."}
 />
+
 <PropsCard
+  id="drawer-finalfocusref"
   name="finalFocusRef"
   type="RefObject<FocusableElement>"
   description={
     "`ref` of the element to return focus to when `FocusLock` unmounts."
   }
 />
+
 <PropsCard
+  id="drawer-initialfocusref"
   name="initialFocusRef"
   type="RefObject<FocusableElement>"
   description={"`ref` of the element to receive focus initially."}
 />
+
 <PropsCard
+  id="drawer-isfullheight"
   name="isFullHeight"
   type="boolean"
   description={
     "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh)."
   }
 />
+
 <PropsCard
+  id="drawer-lockfocusacrossframes"
   name="lockFocusAcrossFrames"
   type="boolean"
   description={
@@ -81,31 +102,41 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="drawer-onclose"
   name="onClose"
   type="() => void"
   description={"Callback invoked to close the modal."}
 />
+
 <PropsCard
+  id="drawer-onclosecomplete"
   name="onCloseComplete"
   type="() => void"
   description={
     "Callback function to run side effects after the modal has closed."
   }
 />
+
 <PropsCard
+  id="drawer-onesc"
   name="onEsc"
   type="() => void"
   description={
     "Callback fired when the escape key is pressed and focus is within modal."
   }
 />
+
 <PropsCard
+  id="drawer-onoverlayclick"
   name="onOverlayClick"
   type="() => void"
   description={"Callback fired when the overlay is clicked."}
 />
+
 <PropsCard
+  id="drawer-placement"
   name="placement"
   type='UIValue<| "center"
   | "top"
@@ -120,12 +151,16 @@ tab: Props
   description={"The placement of the modal.\n\n\nThe placement of the drawer."}
   defaultValue="'center'"
 />
+
 <PropsCard
+  id="drawer-portalprops"
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
 />
+
 <PropsCard
+  id="drawer-restorefocus"
   name="restoreFocus"
   type="boolean"
   description={
@@ -133,24 +168,32 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="drawer-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl" | "full"'
   description={"The size of the Drawer."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="drawer-variant"
   name="variant"
   type="string"
   description={"The variant of the Drawer."}
 />
+
 <PropsCard
+  id="drawer-withclosebutton"
   name="withCloseButton"
   type="boolean"
   description={"If `true`, display the modal close button."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="drawer-withoverlay"
   name="withOverlay"
   type="boolean"
   description={"If `true`, display the modal overlay."}

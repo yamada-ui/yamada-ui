@@ -75,7 +75,7 @@ This time, we will style a new `Button`.
 
 ```ts title=./theme/components/button.ts
 export const Button: ComponentStyle = {
-  // 基本のスタイル
+  // Styles for the base style.
   baseStyle: {
     lineHeight: 1.2,
     fontWeight: "semibold",
@@ -83,7 +83,7 @@ export const Button: ComponentStyle = {
     transitionDuration: "slower",
   },
 
-  // ビジュアルのスタイル
+  // Styles for the size variations.
   variants: {
     solid: {
       bg: ["gray.500", "gray.200"],
@@ -94,7 +94,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // サイズのスタイル
+  // Styles for the visual style variations.
   sizes: {
     sm: {
       h: 8,
@@ -116,7 +116,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // デフォルトの`variant`や`size`などの値
+  // The default `size` or `variant` values.
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -128,7 +128,7 @@ Next, we will support dynamic `Color Schemes`. To receive `Color Schemes` from t
 
 ```ts title=./theme/components/button.ts highlight={12,13,14,15,16,17,18,19,48}
 export const Button: ComponentStyle = {
-  // 基本のスタイル
+  // Styles for the base style.
   baseStyle: {
     lineHeight: 1.2,
     fontWeight: "semibold",
@@ -136,7 +136,7 @@ export const Button: ComponentStyle = {
     transitionDuration: "slower",
   },
 
-  // ビジュアルのスタイル
+  // Styles for the size variations
   variants: {
     solid: ({ colorScheme: c }) => ({
       bg: [`${c}.500`, `${c}.200`],
@@ -148,7 +148,7 @@ export const Button: ComponentStyle = {
     }),
   },
 
-  // サイズのスタイル
+  // Styles for the visual style variations.
   sizes: {
     sm: {
       h: 8,
@@ -170,7 +170,7 @@ export const Button: ComponentStyle = {
     },
   },
 
-  // デフォルトの`variant`や`size`などの値
+  // The default `size` or `variant` values.
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -218,7 +218,7 @@ Multi-part components are styled for each part tied to a `key`.
 
 ```ts title=./theme/components/list.ts
 export const List: ComponentMultiStyle = {
-  // 基本のスタイル
+  // Styles for the base style.
   baseStyle: {
     container: {},
     item: {
@@ -232,7 +232,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // ビジュアルのスタイル
+  // Styles for the size variations
   variants: {
     solid: {
       item: { bg: ["gray.500", "gray.200"], color: ["white", "gray.800"] },
@@ -243,7 +243,7 @@ export const List: ComponentMultiStyle = {
     unstyled: { item: { rounded: "inherit", lineHeight: "inherit" } },
   },
 
-  // サイズのスタイル
+  // Styles for the visual style variations.
   sizes: {
     sm: {
       container: { gap: "sm" },
@@ -259,7 +259,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // デフォルトの`variant`や`size`などの値
+  // The default `size` or `variant` values.
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -271,7 +271,7 @@ Next, we will support dynamic `Color Schemes`. To receive `Color Schemes` from t
 
 ```ts title=./theme/components/list.ts highlight={18,19,20,21,22,23,47}
 export const List: ComponentMultiStyle = {
-  // 基本のスタイル
+  // Styles for the base style.
   baseStyle: {
     container: {},
     item: {
@@ -285,7 +285,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // ビジュアルのスタイル
+  // Styles for the size variations
   variants: {
     solid: ({ colorScheme: c }) => ({
       item: { bg: [`${c}.500`, `${c}.200`], color: ["white", `${c}.800`] },
@@ -296,7 +296,7 @@ export const List: ComponentMultiStyle = {
     unstyled: { item: { rounded: "inherit", lineHeight: "inherit" } },
   },
 
-  // サイズのスタイル
+  // Styles for the visual style variations.
   sizes: {
     sm: {
       container: { gap: "sm" },
@@ -312,7 +312,7 @@ export const List: ComponentMultiStyle = {
     },
   },
 
-  // デフォルトの`variant`や`size`などの値
+  // The default `size` or `variant` values.
   defaultProps: {
     variant: "solid",
     size: "md",
@@ -345,13 +345,11 @@ First, create the component.
 
 ```tsx live=false
 import { FC } from "react"
-import { ui, HTMLUIProps, ThemeProps } from "@yamada-ui/react"
+import { ui, HTMLUIProps } from "@yamada-ui/react"
 
 type BannerOptions = {}
 
-export type BannerProps = HTMLUIProps<"button"> &
-  ThemeProps<"Banner"> &
-  BannerOptions
+export type BannerProps = HTMLUIProps<"button"> & BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
   return <ui.button {...props} />
@@ -363,19 +361,19 @@ Next, set the `Banner` style in the theme.
 ```ts title=./theme/components/banner.ts
 export const Banner: ComponentStyle = {
   baseStyle: {
-    // 基本のスタイル
+    // Styles for the base style.
   },
 
   variants: {
-    // ビジュアルのスタイル
+    // Styles for the size variations
   },
 
   sizes: {
-    // サイズのスタイル
+    // Styles for the visual style variations.
   },
 
   defaultProps: {
-    // デフォルトの`variant`や`size`などの値
+    // The default `size` or `variant` values.
   },
 }
 ```
@@ -394,7 +392,7 @@ It is recommended to use type completion for the created `variants` and `sizes`.
 
 Finally, call `useComponentStyle` within the component to load the style.
 
-```tsx live=false highlight={2,9,10,12}
+```tsx live=false highlight={5,6,7,13,17,18,20}
 import { FC } from "react"
 import {
   ui,
@@ -420,7 +418,7 @@ export const Banner: FC<BannerProps> = (props) => {
 
 If `Banner` were a multi-part component, you would call `useMultiComponentStyle` within the component, and the style reference would look like this:
 
-```tsx live=false highlight={6,7,15,16,19,20,21,22}
+```tsx live=false highlight={6,17,21,22}
 import { FC } from "react"
 import {
   ui,

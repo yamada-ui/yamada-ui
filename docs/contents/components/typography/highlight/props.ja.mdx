@@ -8,9 +8,10 @@ tab: Props
 
 ## Props
 
-### Highlight Props
+### HighlightProps
 
 <PropsCard
+  id="highlight-query"
   name="query"
   required
   type="string | string[]"
@@ -18,28 +19,38 @@ tab: Props
     "Can be a single string or an array of strings. These are the terms that are highlighted in the text."
   }
 />
+
 <PropsCard
+  id="highlight-align"
   name="align"
   type="UIValue<TextAlign>"
   description={"The CSS `text-align` property."}
 />
+
 <PropsCard
+  id="highlight-casing"
   name="casing"
   type="UIValue<TextTransform>"
   description={"The CSS `text-transform` property."}
 />
+
 <PropsCard
+  id="highlight-decoration"
   name="decoration"
   type='UIValue<number | "blink" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "aliceblue" | "antiquewhite" | "aqua" | "aquamarine" | "azure" | ... 185 more ... | "wavy">'
   description={"The CSS `text-decoration` property."}
 />
+
 <PropsCard
+  id="highlight-isfragment"
   name="isFragment"
   type="boolean"
   description={"If `true`, `Fragment` is used for rendering."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="highlight-markprops"
   name="markProps"
   type="MarkProps"
   description={
@@ -47,16 +58,25 @@ tab: Props
   }
 />
 
-### Mark Props
+### MarkProps
 
 <PropsCard
+  id="mark-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="secondary"
 />
-<PropsCard name="size" type="string" description={"The size of the Mark."} />
+
 <PropsCard
+  id="mark-size"
+  name="size"
+  type="string"
+  description={"The size of the Mark."}
+/>
+
+<PropsCard
+  id="mark-variant"
   name="variant"
   type='"solid" | "subtle" | "outline" | "text-accent" | "unstyled"'
   description={"The variant of the Mark."}

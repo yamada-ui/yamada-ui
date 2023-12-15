@@ -1,10 +1,9 @@
 // import * as DropzoneComponents from '@yamada-ui/dropzone'
-import { Box, Text, useBoolean } from "@yamada-ui/react"
+import { Box, Text } from "@yamada-ui/react"
 import dynamic from "next/dynamic"
 import type { HighlightProps as ReactHighlightProps } from "prism-react-renderer"
 import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
-import { useEffect } from "react"
 import { CopyButton } from "components/forms"
 import { toBoolean } from "utils/assertion"
 
@@ -28,10 +27,6 @@ export type CodeBlockProps = DetailedHTMLProps<
 >
 
 export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
-  const [isMounted, { on }] = useBoolean()
-
-  useEffect(on, [on])
-
   let {
     className,
     title,
@@ -48,10 +43,10 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
 
   const language = className?.replace(/language-/, "") ?? "sh"
   const code = raw?.trim() ?? ""
-  const theme = themes.nightOwl
+  const theme = themes.oneDark
   const isJSXorTSX = language === "jsx" || language === "tsx"
 
-  if (isMounted && isJSXorTSX && live) {
+  if (isJSXorTSX && live) {
     return (
       <EditableCodeBlock {...{ code, language, theme, noInline, functional }} />
     )

@@ -8,15 +8,18 @@ tab: Props
 
 ## Props
 
-### Dialog Props
+### DialogProps
 
 <PropsCard
+  id="dialog-isopen"
   name="isOpen"
   required
   type="boolean"
   description={"If `true`, the open will be opened."}
 />
+
 <PropsCard
+  id="dialog-allowpinchzoom"
   name="allowPinchZoom"
   type="boolean"
   description={
@@ -24,13 +27,17 @@ tab: Props
   }
   defaultValue="false."
 />
+
 <PropsCard
+  id="dialog-animation"
   name="animation"
   type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
   description={"The animation of the tooltip."}
   defaultValue="'scale'"
 />
+
 <PropsCard
+  id="dialog-blockscrollonmount"
   name="blockScrollOnMount"
   type="boolean"
   description={
@@ -38,7 +45,9 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="dialog-cancel"
   name="cancel"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -50,36 +59,48 @@ tab: Props
   | ButtonProps"
   description={"The dialog cancel to use."}
 />
+
 <PropsCard
+  id="dialog-closeonesc"
   name="closeOnEsc"
   type="boolean"
   description={"If `true`, the modal will close when the `Esc` key is pressed."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="dialog-closeonoverlay"
   name="closeOnOverlay"
   type="boolean"
   description={"If `true`, the modal will close when the overlay is clicked."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="dialog-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="dialog-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"The animation duration."}
 />
+
 <PropsCard
+  id="dialog-finalfocusref"
   name="finalFocusRef"
   type="RefObject<FocusableElement>"
   description={
     "`ref` of the element to return focus to when `FocusLock` unmounts."
   }
 />
+
 <PropsCard
+  id="dialog-footer"
   name="footer"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -90,7 +111,9 @@ tab: Props
   | ReactPortal"
   description={"The dialog footer to use."}
 />
+
 <PropsCard
+  id="dialog-header"
   name="header"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -101,12 +124,16 @@ tab: Props
   | ReactPortal"
   description={"The dialog header to use."}
 />
+
 <PropsCard
+  id="dialog-initialfocusref"
   name="initialFocusRef"
   type="RefObject<FocusableElement>"
   description={"`ref` of the element to receive focus initially."}
 />
+
 <PropsCard
+  id="dialog-lockfocusacrossframes"
   name="lockFocusAcrossFrames"
   type="boolean"
   description={
@@ -114,46 +141,62 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="dialog-oncancel"
   name="onCancel"
   type="(onClose: (() => void) | undefined) => void"
   description={"The callback invoked when cancel button clicked."}
 />
+
 <PropsCard
+  id="dialog-onclose"
   name="onClose"
   type="() => void"
   description={"Callback invoked to close the modal."}
 />
+
 <PropsCard
+  id="dialog-onclosecomplete"
   name="onCloseComplete"
   type="() => void"
   description={
     "Callback function to run side effects after the modal has closed."
   }
 />
+
 <PropsCard
+  id="dialog-onesc"
   name="onEsc"
   type="() => void"
   description={
     "Callback fired when the escape key is pressed and focus is within modal."
   }
 />
+
 <PropsCard
+  id="dialog-onother"
   name="onOther"
   type="(onClose: (() => void) | undefined) => void"
   description={"The callback invoked when other button clicked."}
 />
+
 <PropsCard
+  id="dialog-onoverlayclick"
   name="onOverlayClick"
   type="() => void"
   description={"Callback fired when the overlay is clicked."}
 />
+
 <PropsCard
+  id="dialog-onsuccess"
   name="onSuccess"
   type="(onClose: (() => void) | undefined) => void"
   description={"The callback invoked when success button clicked."}
 />
+
 <PropsCard
+  id="dialog-other"
   name="other"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -165,12 +208,16 @@ tab: Props
   | ButtonProps"
   description={"The dialog other to use."}
 />
+
 <PropsCard
+  id="dialog-outside"
   name="outside"
   type='UIValue<number | "px" | (string & {}) | "initial" | "inherit" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "1" | "-1" | "2" | "-2" | ... 72 more ... | "-3.5">'
   description={"The CSS `padding` property."}
 />
+
 <PropsCard
+  id="dialog-placement"
   name="placement"
   type='UIValue<| "center"
   | "top"
@@ -184,12 +231,16 @@ tab: Props
   description={"The placement of the modal."}
   defaultValue="'center'"
 />
+
 <PropsCard
+  id="dialog-portalprops"
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
 />
+
 <PropsCard
+  id="dialog-restorefocus"
   name="restoreFocus"
   type="boolean"
   description={
@@ -197,7 +248,9 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="dialog-scrollbehavior"
   name="scrollBehavior"
   type='"outside" | "inside"'
   description={
@@ -205,13 +258,17 @@ tab: Props
   }
   defaultValue="'inside'"
 />
+
 <PropsCard
+  id="dialog-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full"'
   description={"The size of the Dialog."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="dialog-success"
   name="success"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -223,18 +280,24 @@ tab: Props
   | ButtonProps"
   description={"The dialog success to use."}
 />
+
 <PropsCard
+  id="dialog-variant"
   name="variant"
   type="string"
   description={"The variant of the Dialog."}
 />
+
 <PropsCard
+  id="dialog-withclosebutton"
   name="withCloseButton"
   type="boolean"
   description={"If `true`, display the modal close button."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="dialog-withoverlay"
   name="withOverlay"
   type="boolean"
   description={"If `true`, display the modal overlay."}

@@ -356,13 +356,11 @@ export default extendTheme(customTheme)({ omit: ["components"] })
 
 ```tsx live=false
 import { FC } from "react"
-import { ui, HTMLUIProps, ThemeProps } from "@yamada-ui/react"
+import { ui, HTMLUIProps } from "@yamada-ui/react"
 
 type BannerOptions = {}
 
-export type BannerProps = HTMLUIProps<"button"> &
-  ThemeProps<"Banner"> &
-  BannerOptions
+export type BannerProps = HTMLUIProps<"button"> & BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
   return <ui.button {...props} />
@@ -416,7 +414,7 @@ export default extendTheme(customTheme)({ omit: ["components"] })
 
 最後に、`useComponentStyle`をコンポーネント内で呼び出し、スタイルを読み込みます。
 
-```tsx live=false highlight={2,9,10,12}
+```tsx live=false highlight={5,6,7,13,17,18,20}
 import { FC } from "react"
 import {
   ui,
@@ -442,7 +440,7 @@ export const Banner: FC<BannerProps> = (props) => {
 
 もし、`Banner`が複数パーツのコンポーネントだった場合、`useMultiComponentStyle`をコンポーネント内で呼び出し、スタイルの参照は下記のようになります。
 
-```tsx live=false highlight={6,7,15,16,19,20,21,22}
+```tsx live=false highlight={6,17,21,22}
 import { FC } from "react"
 import {
   ui,

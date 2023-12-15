@@ -8,25 +8,32 @@ tab: Props
 
 ## Props
 
-### ScrollArea Props
+### ScrollAreaProps
 
 <PropsCard
+  id="scrollarea-innerprops"
   name="innerProps"
   type='HTMLUIProps<"div">'
   description={"Props for inner element."}
 />
+
 <PropsCard
+  id="scrollarea-onscrollpositionchange"
   name="onScrollPositionChange"
   type="({ x, y }: { x: number; y: number }) => void"
   description={"Callback function for when the scroll position changes."}
 />
+
 <PropsCard
+  id="scrollarea-scrollhidedelay"
   name="scrollHideDelay"
   type="number"
   description={"Delay in milliseconds before scrollbars are hidden."}
   defaultValue="1000"
 />
+
 <PropsCard
+  id="scrollarea-type"
   name="type"
   type='"always" | "scroll" | "hover" | "never"'
   description={"Scrollbar visibility type."}

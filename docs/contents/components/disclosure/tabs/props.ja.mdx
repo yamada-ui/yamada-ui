@@ -8,42 +8,55 @@ tab: Props
 
 ## Props
 
-### Tabs Props
+### TabsProps
 
 <PropsCard
+  id="tabs-align"
   name="align"
   type='"center" | "start" | "end"'
   description={"The alignment of the tabs."}
 />
+
 <PropsCard
+  id="tabs-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
+
 <PropsCard
+  id="tabs-defaultindex"
   name="defaultIndex"
   type="number"
   description={"The index of the selected tab."}
 />
+
 <PropsCard
+  id="tabs-disableripple"
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing the tab."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="tabs-index"
   name="index"
   type="number"
   description={"The index of the selected tab."}
 />
+
 <PropsCard
+  id="tabs-isfitted"
   name="isFitted"
   type="boolean"
   description={"If `true`, tabs will stretch to width of the tablist."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="tabs-islazy"
   name="isLazy"
   type="boolean"
   description={
@@ -51,7 +64,9 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="tabs-ismanual"
   name="isManual"
   type="boolean"
   description={
@@ -59,7 +74,9 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="tabs-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
@@ -67,57 +84,74 @@ tab: Props
   }
   defaultValue="'unmount'"
 />
+
 <PropsCard
+  id="tabs-onchange"
   name="onChange"
   type="(index: number) => void"
   description={"The callback invoked when the index changes."}
 />
+
 <PropsCard
+  id="tabs-orientation"
   name="orientation"
   type='"horizontal" | "vertical"'
   description={"The orientation of the tab list."}
   defaultValue="'horizontal'"
 />
+
 <PropsCard
+  id="tabs-size"
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Tabs."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="tabs-tablistprops"
   name="tabListProps"
   type="TabListProps"
   description={"Props for tab list component."}
 />
+
 <PropsCard
+  id="tabs-tabpanelsprops"
   name="tabPanelsProps"
   type="TabPanelsProps"
   description={"Props for tab panels components."}
 />
+
 <PropsCard
+  id="tabs-variant"
   name="variant"
   type='"line" | "sticky" | "sticky-subtle" | "sticky-solid" | "rounded" | "rounded-subtle" | "rounded-solid" | "unstyled"'
   description={"The variant of the Tabs."}
   defaultValue="line"
 />
 
-### TabList Props
+### TabListProps
 
-### Tab Props
+### TabProps
 
 <PropsCard
+  id="tab-clickonenter"
   name="clickOnEnter"
   type="boolean"
   description={"Whether or not trigger click on pressing `Enter`."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="tab-clickonspace"
   name="clickOnSpace"
   type="boolean"
   description={"Whether or not trigger click on pressing `Space`."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="tab-isdisabled"
   name="isDisabled"
   type="boolean"
   description={
@@ -125,7 +159,9 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="tab-isfocusable"
   name="isFocusable"
   type="boolean"
   description={
@@ -134,6 +170,6 @@ tab: Props
   defaultValue="false"
 />
 
-### TabPanels Props
+### TabPanelsProps
 
-### TabPanel Props
+### TabPanelProps

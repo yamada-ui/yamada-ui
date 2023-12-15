@@ -18,11 +18,9 @@ Execute one of the following commands in your terminal.
   }}
 />
 
-Yamada UI allows you to use most components and hooks by simply installing `@yamada-ui/react` and `@yamada-ui/nextjs`.
+Yamada UI allows you to use most components and hooks by simply installing `@yamada-ui/react`.
 
-<PackageManagers
-  packageNameOrCommand={["@yamada-ui/react", "@yamada-ui/nextjs"]}
-/>
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
 
 If you want to use tables, calendars, carousels, etc., you need to install them separately.
 
@@ -63,25 +61,52 @@ If you want to use tables, calendars, carousels, etc., you need to install them 
 />
 
 :::note
-To install individual components or hooks for improved performance, please check [here](/getting-started/installation/individual).
+To install individual components or hooks for better performance, please check [here](/getting-started/installation/individual).
 If you want to use only the Yamada UI style system, please check [here](/getting-started/installation/minimal).
 :::
 
-## Add `UIProvider`, `CacheProvider`, and `ColorModeScript`
+## Add `UIProvider`
 
-As of Next.js 13, `server components` are used by default. However, **Yamada UI is a `client component`**.
+After installing Yamada UI, add `UIProvider`.
 
-Pages and components using Yamada UI components need to add `'use client'` to convert them into `client components`.
+```tsx live=false title=layout.tsx highlight={11}
+import { UIProvider } from "@yamada-ui/react"
 
-After installing Yamada UI, add `UIProvider`, `CacheProvider`, and `ColorModeScript`.
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
 
-```tsx live=false title=layout.tsx highlight={16,18,19,21,22}
-"use client"
+:::note
+The [default theme](/styled-system/theming/default-theme) is included within `UIProvider`.
+:::
 
-import { colorModeManager, UIProvider, ColorModeScript } from "@yamada-ui/react"
-import { CacheProvider } from "@yamada-ui/nextjs"
+:::note
+If you want to customize the theme or config, please check [Customize Theme](/styled-system/theming/customize-theme) and [Customize Config](/styled-system/configure/customize-config).
+:::
 
-const { cookieStorageManager } = colorModeManager
+## Add `ColorModeScript`
+
+To make the color mode work properly, you need to add `ColorModeScript` inside the `body`.
+
+This is because the color mode is implemented using `localStorage` or `cookies`, and it needs to synchronize correctly at the time of page loading.
+
+```tsx live=false title=layout.tsx highlight={3,4,15,17}
+import {
+  UIProvider,
+  colorModeCookieStorageManager,
+  ColorModeScript,
+} from "@yamada-ui/react"
 
 export default function RootLayout({
   children,
@@ -93,11 +118,9 @@ export default function RootLayout({
       <body>
         <ColorModeScript type="cookie" nonce="testing" />
 
-        <CacheProvider>
-          <UIProvider colorModeManager={cookieStorageManager}>
-            {children}
-          </UIProvider>
-        </CacheProvider>
+        <UIProvider colorModeManager={colorModeCookieStorageManager}>
+          {children}
+        </UIProvider>
       </body>
     </html>
   )
@@ -105,16 +128,14 @@ export default function RootLayout({
 ```
 
 :::note status=warning
-You need to add `'use client'` at the beginning of the page.
+Please pass the same `initialColorMode` to `props` as in your config. If you have your own config, pass its `initialColorMode`.
 :::
 
 ## Use components
 
-After adding `UIProvider`, call the components within your application.
+After adding `UIProvider`, you can call components within your application.
 
 ```tsx live=false title=page.tsx
-"use client"
-
 import { Button } from "@yamada-ui/react"
 
 export default function Home() {
@@ -123,5 +144,5 @@ export default function Home() {
 ```
 
 :::note status=warning
-You need to add `'use client'` at the beginning of the page.
+You need to add `'use client'` at the top of the page.
 :::

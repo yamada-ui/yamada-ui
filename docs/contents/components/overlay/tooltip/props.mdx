@@ -10,55 +10,72 @@ tab: Props
 
 ## Props
 
-### Tooltip Props
+### TooltipProps
 
 <PropsCard
+  id="tooltip-closedelay"
   name="closeDelay"
   type="number"
   description={"The delay before hiding the tooltip."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="tooltip-closeonclick"
   name="closeOnClick"
   type="boolean"
   description={"If `true`, the tooltip will hide on click."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="tooltip-closeonesc"
   name="closeOnEsc"
   type="boolean"
   description={"If `true`, the tooltip will hide on pressing Esc key."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="tooltip-closeonmousedown"
   name="closeOnMouseDown"
   type="boolean"
   description={"If `true`, the tooltip will hide while the mouse is down."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="tooltip-closeonpointerdown"
   name="closeOnPointerDown"
   type="boolean"
   description={"If `true`, the tooltip will hide while the pointer is down."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="tooltip-closeonscroll"
   name="closeOnScroll"
   type="boolean"
   description={"If `true`, the tooltip will hide on scroll."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="tooltip-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the tooltip will be initially shown."}
 />
+
 <PropsCard
+  id="tooltip-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"The animation duration."}
 />
+
 <PropsCard
+  id="tooltip-gutter"
   name="gutter"
   type="UIValue<number>"
   description={
@@ -66,18 +83,24 @@ tab: Props
   }
   defaultValue="8"
 />
+
 <PropsCard
+  id="tooltip-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the tooltip will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="tooltip-isopen"
   name="isOpen"
   type="boolean"
   description={"If `true`, the tooltip will be shown."}
 />
+
 <PropsCard
+  id="tooltip-label"
   name="label"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -88,7 +111,9 @@ tab: Props
   | ReactPortal"
   description={"The label of the tooltip."}
 />
+
 <PropsCard
+  id="tooltip-modifiers"
   name="modifiers"
   type="Partial<Modifier<string, any>>[]"
   description={
@@ -96,42 +121,56 @@ tab: Props
   }
   docs="https://popper.js.org/docs/v2/modifiers/"
 />
+
 <PropsCard
+  id="tooltip-offset"
   name="offset"
   type="[number, number]"
   description={
     "The main and cross-axis offset to displace popper element from its reference element."
   }
 />
+
 <PropsCard
+  id="tooltip-onclose"
   name="onClose"
   type="() => void"
   description={"Callback to run when the tooltip hides."}
 />
+
 <PropsCard
+  id="tooltip-onopen"
   name="onOpen"
   type="() => void"
   description={"Callback to run when the tooltip shows."}
 />
+
 <PropsCard
+  id="tooltip-opendelay"
   name="openDelay"
   type="number"
   description={"The delay before showing the tooltip."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="tooltip-placement"
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
   defaultValue="'bottom'"
 />
+
 <PropsCard
+  id="tooltip-portalprops"
   name="portalProps"
   type='Pick<PortalProps,
   "appendToParentPortal" | "containerRef">'
   description={"Props for portal component."}
 />
+
 <PropsCard
+  id="tooltip-withportal"
   name="withPortal"
   type="boolean"
   description={

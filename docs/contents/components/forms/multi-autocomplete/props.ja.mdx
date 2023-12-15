@@ -8,26 +8,33 @@ tab: Props
 
 ## Props
 
-### MultiAutocomplete Props
+### MultiAutocompleteProps
 
 <PropsCard
+  id="multiautocomplete-allowcreate"
   name="allowCreate"
   type="boolean"
   description={"If `true`, enables the creation of autocomplete option."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-allowfree"
   name="allowFree"
   type="boolean"
   description={"If `true`, enables the free input."}
 />
+
 <PropsCard
+  id="multiautocomplete-animation"
   name="animation"
   type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue="'scale'"
 />
+
 <PropsCard
+  id="multiautocomplete-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
   description={
@@ -35,12 +42,16 @@ tab: Props
   }
   defaultValue="'clippingParents'"
 />
+
 <PropsCard
+  id="multiautocomplete-cleariconprops"
   name="clearIconProps"
   type="AutocompleteIconProps"
   description={"Props for multi autocomplete clear icon element."}
 />
+
 <PropsCard
+  id="multiautocomplete-closeonblur"
   name="closeOnBlur"
   type="boolean"
   description={
@@ -48,13 +59,17 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-closeonesc"
   name="closeOnEsc"
   type="boolean"
   description={"If `true`, the popover will close when you hit the `Esc` key."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-closeonselect"
   name="closeOnSelect"
   type="boolean"
   description={
@@ -62,12 +77,16 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="multiautocomplete-component"
   name="component"
   type="FC<{
   value: string | number
@@ -77,38 +96,52 @@ tab: Props
 }>"
   description={"The custom display value to use."}
 />
+
 <PropsCard
+  id="multiautocomplete-containerprops"
   name="containerProps"
   type='Omit<HTMLUIProps<"div">, "children">'
   description={"Props for multi autocomplete container element."}
 />
+
 <PropsCard
+  id="multiautocomplete-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
 />
+
 <PropsCard
+  id="multiautocomplete-defaultvalue"
   name="defaultValue"
   type="string[]"
   description={"The initial value of the autocomplete."}
 />
+
 <PropsCard
+  id="multiautocomplete-duration"
   name="duration"
   type='number | Partial<Record<"enter" | "exit", number>>'
   description={"The animation duration."}
 />
+
 <PropsCard
+  id="multiautocomplete-emptymessage"
   name="emptyMessage"
   type="string"
   description={"The message displayed when the search yields no hits."}
   defaultValue="'No results found'"
 />
+
 <PropsCard
+  id="multiautocomplete-errorbordercolor"
   name="errorBorderColor"
   type="string"
   description={"The border color when the input is invalid."}
 />
+
 <PropsCard
+  id="multiautocomplete-eventlisteners"
   name="eventListeners"
   type="type ONLY_FOR_FORMAT =
   | boolean
@@ -118,7 +151,9 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-flip"
   name="flip"
   type="boolean"
   description={
@@ -126,17 +161,23 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-focusbordercolor"
   name="focusBorderColor"
   type="string"
   description={"The border color when the input is focused."}
 />
+
 <PropsCard
+  id="multiautocomplete-format"
   name="format"
   type="(value: string) => string"
   description={"Function to format text when search input."}
 />
+
 <PropsCard
+  id="multiautocomplete-gutter"
   name="gutter"
   type="UIValue<number>"
   description={
@@ -144,17 +185,23 @@ tab: Props
   }
   defaultValue="8"
 />
+
 <PropsCard
+  id="multiautocomplete-iconprops"
   name="iconProps"
   type="AutocompleteIconProps"
   description={"Props for multi autocomplete icon element."}
 />
+
 <PropsCard
+  id="multiautocomplete-inputprops"
   name="inputProps"
   type='HTMLUIProps<"input">'
   description={"Props for multi autocomplete input element."}
 />
+
 <PropsCard
+  id="multiautocomplete-insertpositionitem"
   name="insertPositionItem"
   type='Union<"first" | "last"> | [string, "first" | "last"]'
   description={
@@ -162,25 +209,33 @@ tab: Props
   }
   defaultValue="'first'"
 />
+
 <PropsCard
+  id="multiautocomplete-isclearable"
   name="isClearable"
   type="boolean"
   description={"If `true`, display the select clear icon."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-isinvalid"
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-islazy"
   name="isLazy"
   type="boolean"
   description={
@@ -188,30 +243,40 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-isrequired"
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-items"
   name="items"
   type="AutocompleteItem[]"
   description={"If provided, generate options based on items."}
 />
+
 <PropsCard
+  id="multiautocomplete-keepplaceholder"
   name="keepPlaceholder"
   type="boolean"
   description={"If `true`, keep the placeholder."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
@@ -219,12 +284,16 @@ tab: Props
   }
   defaultValue="'unmount'"
 />
+
 <PropsCard
+  id="multiautocomplete-listprops"
   name="listProps"
   type='Omit<AutocompleteListProps, "children">'
   description={"Props for multi autocomplete list element."}
 />
+
 <PropsCard
+  id="multiautocomplete-matchwidth"
   name="matchWidth"
   type="boolean"
   description={
@@ -232,12 +301,16 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-maxselectedvalues"
   name="maxSelectedValues"
   type="number"
   description={"The maximum selectable value."}
 />
+
 <PropsCard
+  id="multiautocomplete-modifiers"
   name="modifiers"
   type="Partial<Modifier<string, any>>[]"
   description={
@@ -245,14 +318,18 @@ tab: Props
   }
   docs="https://popper.js.org/docs/v2/modifiers/"
 />
+
 <PropsCard
+  id="multiautocomplete-offset"
   name="offset"
   type="[number, number]"
   description={
     "The main and cross-axis offset to displace popper element from its reference element."
   }
 />
+
 <PropsCard
+  id="multiautocomplete-omitselectedvalues"
   name="omitSelectedValues"
   type="boolean"
   description={
@@ -260,17 +337,23 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="multiautocomplete-onchange"
   name="onChange"
   type="(value: string[]) => void"
   description={"The callback invoked when value state changes."}
 />
+
 <PropsCard
+  id="multiautocomplete-onclose"
   name="onClose"
   type="() => void"
   description={"Callback fired when the popover closes."}
 />
+
 <PropsCard
+  id="multiautocomplete-oncreate"
   name="onCreate"
   type="(
   newItem: AutocompleteItem,
@@ -278,34 +361,46 @@ tab: Props
 ) => void"
   description={"The callback invoked when autocomplete option created."}
 />
+
 <PropsCard
+  id="multiautocomplete-onopen"
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
 />
+
 <PropsCard
+  id="multiautocomplete-onsearch"
   name="onSearch"
   type="(ev: ChangeEvent<HTMLInputElement>) => void"
   description={"The callback invoked when search input."}
 />
+
 <PropsCard
+  id="multiautocomplete-optionprops"
   name="optionProps"
   type='Omit<AutocompleteOptionProps, "value" | "children">'
   description={"Props for select option element."}
 />
+
 <PropsCard
+  id="multiautocomplete-placement"
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
   defaultValue="'bottom'"
 />
+
 <PropsCard
+  id="multiautocomplete-portalprops"
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
   defaultValue="'{ isDisabled: true }'"
 />
+
 <PropsCard
+  id="multiautocomplete-preventoverflow"
   name="preventOverflow"
   type="boolean"
   description={
@@ -313,30 +408,40 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="multiautocomplete-separator"
   name="separator"
   type="string"
   description={"The visual separator between each value."}
   defaultValue="','"
 />
+
 <PropsCard
+  id="multiautocomplete-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the MultiAutocomplete."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="multiautocomplete-strategy"
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
   defaultValue="'absolute'"
 />
+
 <PropsCard
+  id="multiautocomplete-value"
   name="value"
   type="string[]"
   description={"The value of the autocomplete."}
 />
+
 <PropsCard
+  id="multiautocomplete-variant"
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the MultiAutocomplete."}

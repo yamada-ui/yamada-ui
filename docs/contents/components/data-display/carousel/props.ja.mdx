@@ -8,26 +8,33 @@ tab: Props
 
 ## Props
 
-### Carousel Props
+### CarouselProps
 
 <PropsCard
+  id="carousel-align"
   name="align"
   type='UIValue<number | "center" | "start" | "end">'
   description={"The alignment of the carousel."}
   defaultValue="'center'"
 />
+
 <PropsCard
+  id="carousel-autoplay"
   name="autoplay"
   type="UIValue<boolean>"
   description={"If `true`, the carousel will be autoplay."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="carousel-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
+
 <PropsCard
+  id="carousel-containscroll"
   name="containScroll"
   type='UIValue<"" | "trimSnaps" | "keepSnaps">'
   description={
@@ -35,40 +42,54 @@ tab: Props
   }
   defaultValue="''"
 />
+
 <PropsCard
+  id="carousel-controlnextprops"
   name="controlNextProps"
   type="IconButtonProps"
   description={"Props for next of the carousel control element."}
 />
+
 <PropsCard
+  id="carousel-controlprevprops"
   name="controlPrevProps"
   type="IconButtonProps"
   description={"Props for previous of the carousel control element."}
 />
+
 <PropsCard
+  id="carousel-controlprops"
   name="controlProps"
   type="IconButtonProps"
   description={"Props for carousel control element."}
 />
+
 <PropsCard
+  id="carousel-defaultindex"
   name="defaultIndex"
   type="number"
   description={"The initial index of the carousel slide."}
   defaultValue="0"
 />
+
 <PropsCard
+  id="carousel-delay"
   name="delay"
   type="UIValue<number>"
   description={"The number for the autoplay interval of the carousel."}
   defaultValue="4000"
 />
+
 <PropsCard
+  id="carousel-dragfree"
   name="dragFree"
   type="UIValue<boolean>"
   description={"If `true`, momentum scrolling will be enabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="carousel-draggable"
   name="draggable"
   type="UIValue<boolean>"
   description={
@@ -76,7 +97,9 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="carousel-includegapinsize"
   name="includeGapInSize"
   type="UIValue<boolean>"
   description={
@@ -84,22 +107,30 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="carousel-index"
   name="index"
   type="number"
   description={"The index of the carousel slide."}
 />
+
 <PropsCard
+  id="carousel-indicatorsprops"
   name="indicatorsProps"
   type="CarouselIndicatorsProps"
   description={"Props for carousel indicators element."}
 />
+
 <PropsCard
+  id="carousel-innerprops"
   name="innerProps"
   type='HTMLUIProps<"div">'
   description={"Props for carousel inner element."}
 />
+
 <PropsCard
+  id="carousel-inviewthreshold"
   name="inViewThreshold"
   type="UIValue<number>"
   description={
@@ -107,7 +138,9 @@ tab: Props
   }
   defaultValue="0"
 />
+
 <PropsCard
+  id="carousel-loop"
   name="loop"
   type="UIValue<boolean>"
   description={
@@ -115,31 +148,41 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="carousel-onchange"
   name="onChange"
   type="(index: number) => void"
   description={"The callback invoked when carousel slide selected."}
 />
+
 <PropsCard
+  id="carousel-onscrollprogress"
   name="onScrollProgress"
   type="(progress: number) => void"
   description={
     "A callback that return the current scroll amount when the carousel is scrolled."
   }
 />
+
 <PropsCard
+  id="carousel-orientation"
   name="orientation"
   type='UIValue<"vertical" | "horizontal">'
   description={"The orientation of the carousel."}
   defaultValue="'horizontal'"
 />
+
 <PropsCard
+  id="carousel-size"
   name="size"
   type='"sm" | "md" | "lg" | "xl"'
   description={"The size of the Carousel."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="carousel-skipsnaps"
   name="skipSnaps"
   type="UIValue<boolean>"
   description={
@@ -147,12 +190,16 @@ tab: Props
   }
   defaultValue="false"
 />
+
 <PropsCard
+  id="carousel-slidesize"
   name="slideSize"
   type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 60 more ... | "9xl">'
   description={"The CSS `width` property."}
 />
+
 <PropsCard
+  id="carousel-slidestoscroll"
   name="slidesToScroll"
   type="UIValue<number>"
   description={
@@ -160,7 +207,9 @@ tab: Props
   }
   defaultValue="1"
 />
+
 <PropsCard
+  id="carousel-speed"
   name="speed"
   type="UIValue<number>"
   description={
@@ -168,71 +217,92 @@ tab: Props
   }
   defaultValue="10"
 />
+
 <PropsCard
+  id="carousel-stopmouseenterautoplay"
   name="stopMouseEnterAutoplay"
   type="UIValue<boolean>"
   description={"If `true`, autoplay will pause when the mouse entries over."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="carousel-variant"
   name="variant"
   type="string"
   description={"The variant of the Carousel."}
 />
+
 <PropsCard
+  id="carousel-withcontrols"
   name="withControls"
   type="UIValue<boolean>"
   description={"If `true`, display the carousel control buttons."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="carousel-withindicators"
   name="withIndicators"
   type="UIValue<boolean>"
   description={"If `true`, display the carousel indicator buttons."}
   defaultValue="true"
 />
 
-### CarouselSlide Props
+### CarouselSlideProps
 
-<PropsCard name="index" type="number" />
+<PropsCard id="carouselslide-index" name="index" type="number" />
+
 <PropsCard
+  id="carouselslide-size"
   name="size"
   type='number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 65 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `width` property."}
 />
 
-### CarouselControl Props
+### CarouselControlProps
 
 <PropsCard
+  id="carouselcontrol-disableripple"
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="carouselcontrol-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to be used in the button."}
 />
+
 <PropsCard
+  id="carouselcontrol-isactive"
   name="isActive"
   type="boolean"
   description={"If `true`, the button is represented as active."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="carouselcontrol-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the button is disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="carouselcontrol-isloading"
   name="isLoading"
   type="boolean"
   description={"If `true`, the loading state of the button is represented."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="carouselcontrol-isrounded"
   name="isRounded"
   type="boolean"
   description={
@@ -241,9 +311,10 @@ tab: Props
   defaultValue="false"
 />
 
-### CarouselIndicators Props
+### CarouselIndicatorsProps
 
 <PropsCard
+  id="carouselindicators-component"
   name="component"
   type="FC<{ index: number; isSelected: boolean }>"
   description={"The custom curousel indicator to use."}

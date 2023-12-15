@@ -2,7 +2,7 @@
   {
     "title": "Yamada UIへ貢献する",
     "type": "page",
-    "description": "このページは現在作成中です。",
+    "description": "私たちは、Yamada UIが誰にとっても楽しく、教育的になるようなコミュニティを目指しています。",
     "slug": "/community/contributing",
     "hierarchy": { "lv1": "Yamada UIへ貢献する" }
   },
@@ -9129,13 +9129,13 @@
     }
   },
   {
-    "title": "cookieStorageSSRを渡す",
+    "title": "colorModeManagerにcookiesを設定する",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#cookiestoragessrを渡す",
+    "slug": "/styled-system/color-mode#colormodemanagerにcookiesを設定する",
     "hierarchy": {
       "lv1": "カラーモード",
       "lv2": "colorModeManagerを追加する",
-      "lv3": "cookieStorageSSRを渡す"
+      "lv3": "colorModeManagerにcookiesを設定する"
     }
   },
   {
@@ -10459,13 +10459,13 @@
     }
   },
   {
-    "title": "cookieStorageSSRを渡す",
+    "title": "themeSchemeManagerにcookiesを設定する",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#cookiestoragessrを渡す",
+    "slug": "/styled-system/theming/switch-themes#themeschememanagerにcookiesを設定する",
     "hierarchy": {
       "lv1": "テーマを切り替える",
       "lv2": "themeSchemeManagerを追加する",
-      "lv3": "cookieStorageSSRを渡す"
+      "lv3": "themeSchemeManagerにcookiesを設定する"
     }
   },
   {

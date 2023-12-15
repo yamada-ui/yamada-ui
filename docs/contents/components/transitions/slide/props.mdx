@@ -10,41 +10,60 @@ tab: Props
 
 ## Props
 
-### Slide Props
+### SlideProps
 
 <PropsCard
+  id="slide-delay"
   name="delay"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `delay` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="slide-duration"
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"Custom `duration` definition for `enter` and `exit`."}
 />
-<PropsCard name="enter" type="any" description={"Custom `enter`."} />
+
 <PropsCard
+  id="slide-enter"
+  name="enter"
+  type="any"
+  description={"Custom `enter`."}
+/>
+
+<PropsCard
+  id="slide-isopen"
   name="isOpen"
   type="boolean"
   description={"Show the component. triggers when enter or exit states."}
 />
+
 <PropsCard
+  id="slide-placement"
   name="placement"
   type='UIValue<"top" | "right" | "bottom" | "left">'
   description={"The placement of the slide."}
   defaultValue="'right'"
 />
+
 <PropsCard
+  id="slide-transition"
   name="transition"
   type='Partial<Record<"exit" | "enter", Transition>>'
   description={"Custom `transition` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="slide-transitionend"
   name="transitionEnd"
   type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
   description={"Custom `transitionEnd` definition for `enter` and `exit`."}
 />
+
 <PropsCard
+  id="slide-unmountonexit"
   name="unmountOnExit"
   type="boolean"
   description={

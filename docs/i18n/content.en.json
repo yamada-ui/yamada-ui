@@ -2,7 +2,7 @@
   {
     "title": "Contributing to Yamada UI",
     "type": "page",
-    "description": "This page is currently under construction.",
+    "description": "We want to create a community where Yamada UI is enjoyable and educational for anyone and everyone.",
     "slug": "/community/contributing",
     "hierarchy": { "lv1": "Contributing to Yamada UI" }
   },
@@ -4529,9 +4529,183 @@
   {
     "title": "RangeSlider",
     "type": "page",
-    "description": "This page is currently being created.",
+    "description": "`RangeSlider` is a component used for users to select a range of related values.",
     "slug": "/components/forms/range-slider",
     "hierarchy": { "lv1": "RangeSlider" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#import",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#usage",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#change-size",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#change-color-scheme",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Set Default Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-default-values",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Default Values"
+    }
+  },
+  {
+    "title": "Change Orientation",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#change-orientation",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Change Orientation"
+    }
+  },
+  {
+    "title": "Reverse Direction",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#reverse-direction",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Reverse Direction"
+    }
+  },
+  {
+    "title": "Set Minimum and Maximum Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-minimum-and-maximum-values",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Values"
+    }
+  },
+  {
+    "title": "Set Step Value",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-step-value",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Step Value"
+    }
+  },
+  {
+    "title": "Set Minimum Range Between Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#set-minimum-range-between-values",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Set Minimum Range Between Values"
+    }
+  },
+  {
+    "title": "Control Externally Only",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#control-externally-only",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Control Externally Only"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#disable",
+    "hierarchy": { "lv1": "RangeSlider", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#make-read-only",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Make Input Invalid",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#make-input-invalid",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Make Input Invalid"
+    }
+  },
+  {
+    "title": "Display Marks",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#display-marks",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Display Marks"
+    }
+  },
+  {
+    "title": "Display Tooltips",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#display-tooltips",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Display Tooltips"
+    }
+  },
+  {
+    "title": "Customize Styling",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#customize-styling",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Customize Styling"
+    }
+  },
+  {
+    "title": "Handle Events for Start and End of Changes",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#handle-events-for-start-and-end-of-changes",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Handle Events for Start and End of Changes"
+    }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/range-slider#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "RangeSlider",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
   },
   {
     "title": "SegmentedControl",
@@ -5343,7 +5517,7 @@
   {
     "title": "Wrap",
     "type": "page",
-    "description": "`Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`",
+    "description": "`Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.",
     "slug": "/components/layouts/wrap",
     "hierarchy": { "lv1": "Wrap" }
   },
@@ -8459,13 +8633,13 @@
     }
   },
   {
-    "title": "Passing cookieStorageSSR",
+    "title": "Set cookies for colorModeManager",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#passing-cookiestoragessr",
+    "slug": "/styled-system/color-mode#set-cookies-for-colormodemanager",
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Adding colorModeManager",
-      "lv3": "Passing cookieStorageSSR"
+      "lv3": "Set cookies for colorModeManager"
     }
   },
   {
@@ -8546,11 +8720,11 @@
     "hierarchy": { "lv1": "Default Config" }
   },
   {
-    "title": "Config",
+    "title": "Configure",
     "type": "page",
     "description": "The config of Yamada UI is a global setting used in various parts of the system.",
     "slug": "/styled-system/configure",
-    "hierarchy": { "lv1": "Config" }
+    "hierarchy": { "lv1": "Configure" }
   },
   {
     "title": "Global Styles",
@@ -9592,11 +9766,11 @@
     "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoint" }
   },
   {
-    "title": "Theme",
+    "title": "Theming",
     "type": "page",
     "description": "The theme of Yamada UI is customizable and ensures the consistency of the application's design.",
     "slug": "/styled-system/theming",
-    "hierarchy": { "lv1": "Theme" }
+    "hierarchy": { "lv1": "Theming" }
   },
   {
     "title": "Switch Themes",
@@ -9670,13 +9844,13 @@
     }
   },
   {
-    "title": "Passing cookieStorageSSR",
+    "title": "Set cookies for themeSchemeManager",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#passing-cookiestoragessr",
+    "slug": "/styled-system/theming/switch-themes#set-cookies-for-themeschememanager",
     "hierarchy": {
       "lv1": "Switch Themes",
       "lv2": "Adding themeSchemeManager",
-      "lv3": "Passing cookieStorageSSR"
+      "lv3": "Set cookies for themeSchemeManager"
     }
   },
   {

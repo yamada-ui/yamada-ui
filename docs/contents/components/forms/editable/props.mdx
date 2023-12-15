@@ -8,36 +8,47 @@ tab: Props
 
 ## Props
 
-### Editable Props
+### EditableProps
 
 <PropsCard
+  id="editable-defaultvalue"
   name="defaultValue"
   type="string"
   description={"The initial value of the Editable in both edit & preview mode."}
 />
+
 <PropsCard
+  id="editable-errorbordercolor"
   name="errorBorderColor"
   type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 242 more ... | ColorModeArray<...>'
   description={"The border color when the input is invalid."}
 />
+
 <PropsCard
+  id="editable-focusbordercolor"
   name="focusBorderColor"
   type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 242 more ... | ColorModeArray<...>'
   description={"The border color when the input is focused."}
 />
+
 <PropsCard
+  id="editable-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="editable-isinvalid"
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="editable-ispreviewfocusable"
   name="isPreviewFocusable"
   type="boolean"
   description={
@@ -45,54 +56,72 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="editable-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="editable-isrequired"
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="editable-oncancel"
   name="onCancel"
   type="(preValue: string) => void"
   description={
     "Callback invoked when user cancels input with the `Esc` key.\nIt provides the last confirmed value as argument."
   }
 />
+
 <PropsCard
+  id="editable-onchange"
   name="onChange"
   type="(value: string) => void"
   description={"A callback invoked when user changes input."}
 />
+
 <PropsCard
+  id="editable-onedit"
   name="onEdit"
   type="() => void"
   description={"A callback invoked once the user enters edit mode."}
 />
+
 <PropsCard
+  id="editable-onsubmit"
   name="onSubmit"
   type="(value: string) => void"
   description={
     "A callback invoked when user confirms value with `enter` key or by blurring input."
   }
 />
+
 <PropsCard
+  id="editable-selectallonfocus"
   name="selectAllOnFocus"
   type="boolean"
   description={"If `true`, the input's text will be highlighted on focus."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="editable-startwitheditview"
   name="startWithEditView"
   type="boolean"
   description={"If `true`, the Editable will start with edit mode by default."}
 />
+
 <PropsCard
+  id="editable-submitonblur"
   name="submitOnBlur"
   type="boolean"
   description={
@@ -100,38 +129,47 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="editable-value"
   name="value"
   type="string"
   description={"The value of the Editable in both edit & preview mode."}
 />
 
-### EditableInput Props
+### EditableInputProps
 
-### EditableTextarea Props
+### EditableTextareaProps
 
-### EditablePreview Props
+### EditablePreviewProps
 
-### UseEditable Props
+### UseEditableProps
 
 <PropsCard
+  id="useeditable-defaultvalue"
   name="defaultValue"
   type="string"
   description={"The initial value of the Editable in both edit & preview mode."}
 />
+
 <PropsCard
+  id="useeditable-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="useeditable-isinvalid"
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="useeditable-ispreviewfocusable"
   name="isPreviewFocusable"
   type="boolean"
   description={
@@ -139,59 +177,79 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="useeditable-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="useeditable-isrequired"
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="useeditable-oncancel"
   name="onCancel"
   type="(preValue: string) => void"
   description={
     "Callback invoked when user cancels input with the `Esc` key.\nIt provides the last confirmed value as argument."
   }
 />
+
 <PropsCard
+  id="useeditable-onchange"
   name="onChange"
   type="(value: string) => void"
   description={"A callback invoked when user changes input."}
 />
+
 <PropsCard
+  id="useeditable-onedit"
   name="onEdit"
   type="() => void"
   description={"A callback invoked once the user enters edit mode."}
 />
+
 <PropsCard
+  id="useeditable-onsubmit"
   name="onSubmit"
   type="(value: string) => void"
   description={
     "A callback invoked when user confirms value with `enter` key or by blurring input."
   }
 />
+
 <PropsCard
+  id="useeditable-placeholder"
   name="placeholder"
   type="string"
   description={"The placeholder text when the value is empty."}
 />
+
 <PropsCard
+  id="useeditable-selectallonfocus"
   name="selectAllOnFocus"
   type="boolean"
   description={"If `true`, the input's text will be highlighted on focus."}
   defaultValue="true"
 />
+
 <PropsCard
+  id="useeditable-startwitheditview"
   name="startWithEditView"
   type="boolean"
   description={"If `true`, the Editable will start with edit mode by default."}
 />
+
 <PropsCard
+  id="useeditable-submitonblur"
   name="submitOnBlur"
   type="boolean"
   description={
@@ -199,7 +257,9 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="useeditable-value"
   name="value"
   type="string"
   description={"The value of the Editable in both edit & preview mode."}

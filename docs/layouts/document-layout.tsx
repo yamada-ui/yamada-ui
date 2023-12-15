@@ -4,13 +4,13 @@ import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
 import { SEO } from "components/media-and-icons"
 import {
-  TableOfContents,
   Pagination,
   Breadcrumb,
   Tabs,
   LinkCards,
   EditPageLink,
   RelatedLinks,
+  TableOfContents,
 } from "components/navigation"
 import { TextWithCodeOrLink } from "components/typography"
 import type { DocumentData, DocumentTypes } from "contentlayer/generated"
@@ -51,7 +51,18 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
         >
           <Sidebar display={{ base: "flex", lg: "none" }} />
 
-          <VStack flex="1" minW="0" gap="0" py={{ base: "lg", md: "normal" }}>
+          <VStack
+            flex="1"
+            minW="0"
+            gap="0"
+            py={{ base: "lg", md: "normal" }}
+            pl={{ base: "md", lg: "0" }}
+            pr={
+              with_table_of_contents && contents.length
+                ? { base: "md", xl: "0" }
+                : undefined
+            }
+          >
             <Breadcrumb />
 
             <Heading as="h1" size="2xl">

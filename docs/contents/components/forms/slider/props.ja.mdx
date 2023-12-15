@@ -8,32 +8,41 @@ tab: Props
 
 ## Props
 
-### Slider Props
+### SliderProps
 
 <PropsCard
+  id="slider-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue="primary"
 />
+
 <PropsCard
+  id="slider-defaultvalue"
   name="defaultValue"
   type="number"
   description={"The initial value of the slider."}
 />
+
 <PropsCard
+  id="slider-filledtrackcolor"
   name="filledTrackColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={
     "The CSS `color` property. Used in `color` of filled track element."
   }
 />
+
 <PropsCard
+  id="slider-filledtrackprops"
   name="filledTrackProps"
   type="SliderFilledTrackProps"
   description={"Props for slider filled track element."}
 />
+
 <PropsCard
+  id="slider-focusthumbonchange"
   name="focusThumbOnChange"
   type="boolean"
   description={
@@ -41,48 +50,64 @@ tab: Props
   }
   defaultValue="true"
 />
+
 <PropsCard
+  id="slider-id"
   name="id"
   type="string"
   description={"The base `id` to use for the slider."}
 />
+
 <PropsCard
+  id="slider-inputprops"
   name="inputProps"
   type='HTMLUIProps<"input">'
   description={"Props for slider input element."}
 />
+
 <PropsCard
+  id="slider-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="slider-isinvalid"
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="slider-isreadonly"
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="slider-isrequired"
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue="false"
 />
+
 <PropsCard
+  id="slider-isreversed"
   name="isReversed"
   type="boolean"
   description={
     "If `true`, the value will be incremented or decremented in reverse."
   }
 />
+
 <PropsCard
+  id="slider-max"
   name="max"
   type="number"
   description={
@@ -90,7 +115,9 @@ tab: Props
   }
   defaultValue="100"
 />
+
 <PropsCard
+  id="slider-min"
   name="min"
   type="number"
   description={
@@ -98,119 +125,151 @@ tab: Props
   }
   defaultValue="0"
 />
+
 <PropsCard
+  id="slider-name"
   name="name"
   type="string"
   description={
     "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
   }
 />
+
 <PropsCard
+  id="slider-onchange"
   name="onChange"
   type="(value: number) => void"
   description={"Function called whenever the slider value changes."}
 />
+
 <PropsCard
+  id="slider-onchangeend"
   name="onChangeEnd"
   type="(value: number) => void"
   description={"Function called when the user is done selecting a new value."}
 />
+
 <PropsCard
+  id="slider-onchangestart"
   name="onChangeStart"
   type="(value: number) => void"
   description={"Function called when the user starts selecting a new value."}
 />
+
 <PropsCard
+  id="slider-orientation"
   name="orientation"
   type='"horizontal" | "vertical"'
   description={"The orientation of the slider."}
   defaultValue="'horizontal'"
 />
+
 <PropsCard
+  id="slider-size"
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Slider."}
   defaultValue="md"
 />
+
 <PropsCard
+  id="slider-step"
   name="step"
   type="number"
   description={"The step in which increments or decrements have to be made."}
   defaultValue="1"
 />
+
 <PropsCard
+  id="slider-thumbcolor"
   name="thumbColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={
     "The CSS `background` property. Used in `background` of thumb element."
   }
 />
+
 <PropsCard
+  id="slider-thumbprops"
   name="thumbProps"
   type="SliderThumbProps"
   description={"Props for slider thumb element."}
 />
+
 <PropsCard
+  id="slider-thumbsize"
   name="thumbSize"
   type='UIValue<number | "px" | "min" | "max" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-max-content" | ... 59 more ... | "min-intrinsic">'
   description={
     "The CSS `box-size` property. Used in `box-size` of thumb element."
   }
 />
+
 <PropsCard
+  id="slider-trackcolor"
   name="trackColor"
   type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 241 more ... | "danger">'
   description={"The CSS `color` property. Used in `color` of track element."}
 />
+
 <PropsCard
+  id="slider-trackprops"
   name="trackProps"
   type="SliderTrackProps"
   description={"Props for slider track element."}
 />
+
 <PropsCard
+  id="slider-tracksize"
   name="trackSize"
   type='UIValue<number | "px" | "min" | "max" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-max-content" | ... 55 more ... | "9xl">'
   description={"The CSS `height` property. Used in `height` of track element."}
 />
+
 <PropsCard
+  id="slider-value"
   name="value"
   type="number"
   description={"The value of the slider."}
 />
+
 <PropsCard
+  id="slider-variant"
   name="variant"
   type="string"
   description={"The variant of the Slider."}
 />
 
-### SliderTrack Props
+### SliderTrackProps
 
 <PropsCard
+  id="slidertrack-filledtrackprops"
   name="filledTrackProps"
   type="SliderFilledTrackProps"
   description={"Props for slider filled track element."}
 />
 
-### SliderFilledTrack Props
+### SliderFilledTrackProps
 
-### SliderThumb Props
+### SliderThumbProps
 
-### SliderMark Props
+### SliderMarkProps
 
-<PropsCard name="value" required type="number" />
+<PropsCard id="slidermark-value" name="value" required type="number" />
 
-### RangeSliderTrack Props
+### RangeSliderTrackProps
 
 <PropsCard
+  id="rangeslidertrack-filledtrackprops"
   name="filledTrackProps"
   type="RangeSliderFilledTrackProps"
   description={"Props for range slider filled track element."}
 />
 
-### RangeSliderFilledTrack Props
+### RangeSliderFilledTrackProps
 
-### RangeSliderThumb Props
+### RangeSliderThumbProps
 
-### RangeSliderMark Props
+### RangeSliderMarkProps
 
-<PropsCard name="value" required type="number" />
+<PropsCard id="rangeslidermark-value" name="value" required type="number" />

@@ -1,6 +1,6 @@
 import { writeFile } from "fs/promises"
 import * as p from "@clack/prompts"
-import type { ThemeToken, Transforms, Union } from "@yamada-ui/react"
+import type { CSSObject, ThemeToken, Transforms, Union } from "@yamada-ui/react"
 import c from "chalk"
 import type * as CSS from "csstype"
 import { glob } from "glob"
@@ -34,7 +34,8 @@ type TransformProps = Partial<
   Record<Transforms, (CSSProperties | UIProperties | TransformProp)[]>
 >
 type UIOptions = {
-  properties?: CSSProperties | CSSProperties[]
+  static?: CSSObject
+  properties?: Union<CSSProperties> | Union<CSSProperties>[]
   transform?: TransformOptions
   type?: string
   description?: string[]
@@ -246,6 +247,14 @@ const uiProps = createUIProps({
   paddingY: { properties: ["paddingTop", "paddingBottom"] },
   boxSize: { properties: ["width", "height"] },
   noOfLines: {
+    static: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
+    },
+    properties: "--ui-line-clamp",
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
   },
@@ -273,7 +282,7 @@ const prettier = async (content: string, options?: Options) => {
 const toCamelCase = (value: string & {}) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
-export const toKebabCase = (value: string & {}) =>
+const toKebabCase = (value: string & {}) =>
   value
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
     .toLowerCase()
@@ -500,7 +509,7 @@ const generateStyles = async (
     const token: ThemeToken | undefined = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transform = transformMap[prop]
-    const config = getConfig(prop, token, transform)
+    const config = getConfig({ properties: prop, token, transform })
     type = computedType(type, token)
     const docs = generateDocs({ properties: name, url, deprecated })
 
@@ -522,7 +531,7 @@ const generateStyles = async (
   })
 
   Object.entries<UIOptions>(uiProps).forEach(
-    ([prop, { properties, transform, type, description }]) => {
+    ([prop, { properties, transform, static: css, type, description }]) => {
       const types = styles
         .filter(({ prop }) =>
           typeof properties === "string"
@@ -533,7 +542,7 @@ const generateStyles = async (
       const token = tokenMap[prop as UIProperties]
       const shorthands = shorthandProps[prop as UIProperties]
       transform ??= transformMap[prop as UIProperties]
-      const config = getConfig(properties, token, transform)
+      const config = getConfig({ properties, token, transform, css })
       type = computedType(type ?? types, token)
       const docs = generateDocs({ properties, description })
 
@@ -603,19 +612,22 @@ const insertTransform = (
   return config
 }
 
-const getConfig = (
-  properties:
-    | CSSProperties
-    | UIProperties
-    | CSSProperties[]
-    | UIProperties[]
-    | undefined,
-  token?: ThemeToken,
+const getConfig = ({
+  properties,
+  token,
+  transform,
+  css,
+}: {
+  properties?:
+    | Union<CSSProperties | UIProperties>
+    | Union<CSSProperties | UIProperties>[]
+  token?: ThemeToken
   transform?:
     | Union<Transforms>
-    | { first: Transforms; second: Union<Transforms> },
-) => {
-  if (!token && !transform) return true
+    | { first: Transforms; second: Union<Transforms> }
+  css?: CSSObject
+}) => {
+  if (!token && !transform && !css) return true
 
   let config: string[] = []
 
@@ -632,6 +644,8 @@ const getConfig = (
   }
 
   if (token) config = [...config, `token: "${token}"`]
+
+  if (css) config = [...config, `static: ${JSON.stringify(css)}`]
 
   if (transform) config = insertTransform(config, token, transform)
 

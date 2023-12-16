@@ -40,7 +40,6 @@ const primaryTokens = [
   "shadows",
   "sizes",
   "spaces",
-  "transitions",
   "zIndices",
 ] as const
 

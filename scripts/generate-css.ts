@@ -28,13 +28,15 @@ type TransformProp = {
   transform: Union<Transforms>
 }
 
-type Tokens = Record<ThemeToken, (CSSProperties | UIProperties)[]>
+type Tokens = Partial<Record<ThemeToken, (CSSProperties | UIProperties)[]>>
 type ShorthandProps = Partial<Record<CSSProperties | UIProperties, string[]>>
 type TransformProps = Partial<
   Record<Transforms, (CSSProperties | UIProperties | TransformProp)[]>
 >
+type UIProps = Partial<Record<string, UIOptions>>
 type UIOptions = {
   static?: CSSObject
+  isProcessResult?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
   transform?: TransformOptions
   type?: string
@@ -42,8 +44,7 @@ type UIOptions = {
 }
 type TransformOptions =
   | Transforms
-  | { first: Transforms; second: Union<Transforms> }
-type UIProps = Partial<Record<string, UIOptions>>
+  | { first: Transforms; second?: Union<Transforms>; args?: string }
 
 const omittedList = new ListIt({
   headerColor: "gray",
@@ -57,7 +58,7 @@ const duplicatedList = new ListIt({
 
 const tokens: Tokens = {
   animations: ["animation"],
-  blurs: [],
+  blurs: ["blur", "backdropBlur"],
   borders: [
     "border",
     "borderTop",
@@ -73,7 +74,6 @@ const tokens: Tokens = {
     "borderBlockStart",
     "borderBlockEnd",
   ],
-  breakpoints: [],
   colors: [
     "color",
     "fill",
@@ -116,7 +116,7 @@ const tokens: Tokens = {
     "borderInlineStartRadius",
     "borderInlineEndRadius",
   ],
-  shadows: ["boxShadow", "textShadow"],
+  shadows: ["boxShadow", "textShadow", "dropShadow", "backdropDropShadow"],
   sizes: [
     "width",
     "inlineSize",
@@ -311,6 +311,7 @@ const transformProps: TransformProps = {
     "columnGap",
     "gridColumnGap",
     "gridRowGap",
+    "flexBasis",
     "scrollMargin",
     "scrollMarginTop",
     "scrollMarginBottom",
@@ -340,6 +341,21 @@ const transformProps: TransformProps = {
     "insetInlineEnd",
     "translateX",
     "translateY",
+    "borderRadius",
+    "borderTopRightRadius",
+    "borderTopLeftRadius",
+    "borderBottomLeftRadius",
+    "borderBottomRightRadius",
+    "borderTopRadius",
+    "borderBottomRadius",
+    "borderRightRadius",
+    "borderLeftRadius",
+    "borderStartStartRadius",
+    "borderStartEndRadius",
+    "borderEndStartRadius",
+    "borderEndEndRadius",
+    "borderInlineStartRadius",
+    "borderInlineEndRadius",
   ],
   fraction: [
     { properties: "width", transform: "px" },
@@ -446,6 +462,124 @@ const uiProps = createUIProps({
       "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.",
     ],
   },
+  filter: {
+    transform: { first: "filter" },
+    type: `CSS.Property.Filter | "auto"`,
+    description: ["The CSS `filter` property."],
+  },
+  blur: {
+    properties: "--ui-blur",
+    transform: { first: "function", args: `"blur"` },
+    description: ["If `filter=auto`, sets the value of `--ui-blur`."],
+  },
+  brightness: {
+    properties: "--ui-brightness",
+    transform: { first: "function", args: `"brightness"` },
+    description: ["If `filter=auto`, sets the value of `--ui-brightness`."],
+  },
+  contrast: {
+    properties: "--ui-contrast",
+    transform: { first: "function", args: `"contrast"` },
+    description: ["If `filter=auto`, sets the value of `--ui-contrast`."],
+  },
+  dropShadow: {
+    properties: "--ui-drop-shadow",
+    transform: { first: "function", args: `"drop-shadow"` },
+    description: ["If `filter=auto`, sets the value of `--ui-drop-shadow`."],
+  },
+  grayscale: {
+    properties: "--ui-grayscale",
+    transform: { first: "function", args: `"grayscale"` },
+    description: ["If `filter=auto`, sets the value of `--ui-grayscale`."],
+  },
+  hueRotate: {
+    properties: "--ui-hue-rotate",
+    transform: { first: "function", args: `"hue-rotate", transforms.deg` },
+    description: ["If `filter=auto`, sets the value of `--ui-hue-rotate`."],
+  },
+  invert: {
+    properties: "--ui-invert",
+    transform: { first: "function", args: `"invert"` },
+    description: ["If `filter=auto`, sets the value of `--ui-invert`."],
+  },
+  saturate: {
+    properties: "--ui-saturate",
+    transform: { first: "function", args: `"saturate"` },
+    description: ["If `filter=auto`, sets the value of `--ui-saturate`."],
+  },
+  sepia: {
+    properties: "--ui-sepia",
+    transform: { first: "function", args: `"sepia"` },
+    description: ["If `filter=auto`, sets the value of `--ui-sepia`."],
+  },
+  backdropFilter: {
+    transform: { first: "filter", args: `"backdrop"` },
+    type: `CSS.Property.BackdropFilter | "auto"`,
+    description: ["The CSS `backdrop-filter` property."],
+  },
+  backdropBlur: {
+    properties: "--ui-backdrop-blur",
+    transform: { first: "function", args: `"blur"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.",
+    ],
+  },
+  backdropBrightness: {
+    properties: "--ui-backdrop-brightness",
+    transform: { first: "function", args: `"brightness"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.",
+    ],
+  },
+  backdropContrast: {
+    properties: "--ui-backdrop-contrast",
+    transform: { first: "function", args: `"contrast"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.",
+    ],
+  },
+  backdropDropShadow: {
+    properties: "--ui-backdrop-drop-shadow",
+    transform: { first: "function", args: `"drop-shadow"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.",
+    ],
+  },
+  backdropGrayscale: {
+    properties: "--ui-backdrop-grayscale",
+    transform: { first: "function", args: `"grayscale"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.",
+    ],
+  },
+  backdropHueRotate: {
+    properties: "--ui-backdrop-hue-rotate",
+    transform: { first: "function", args: `"hue-rotate", transforms.deg` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.",
+    ],
+  },
+  backdropInvert: {
+    properties: "--ui-backdrop-invert",
+    transform: { first: "function", args: `"invert"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.",
+    ],
+  },
+  backdropSaturate: {
+    properties: "--ui-backdrop-saturate",
+    transform: { first: "function", args: `"saturate"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.",
+    ],
+  },
+  backdropSepia: {
+    properties: "--ui-backdrop-sepia",
+    transform: { first: "function", args: `"sepia"` },
+    description: [
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.",
+    ],
+  },
   noOfLines: {
     static: {
       overflow: "hidden",
@@ -462,6 +596,29 @@ const uiProps = createUIProps({
     transform: "isTruncated",
     type: "boolean",
     description: ["If `true`, it clamps truncate a text after one line."],
+  },
+  layerStyle: {
+    transform: { first: "styles", args: `"layerStyles"` },
+    type: `StringLiteral, "layerStyles"`,
+    description: ["Apply layer styles defined in `theme.layerStyles`."],
+  },
+  textStyle: {
+    transform: { first: "styles", args: `"textStyles"` },
+    type: `StringLiteral, "textStyles"`,
+    description: ["Apply text styles defined in `theme.textStyles`."],
+  },
+  apply: {
+    transform: { first: "styles" },
+    description: [
+      "Apply other styles defined in `theme.styles`.",
+      "",
+      "@example",
+      "```jsx",
+      "<Box apply='mdx.h1'>Box</Box>",
+      "```",
+      "",
+      "This will apply styles defined in `theme.styles.mdx.h1`",
+    ],
   },
 })
 
@@ -798,12 +955,15 @@ const generateStyles = async (
 const insertTransform = (
   config: string[],
   token: ThemeToken | undefined,
-  transform:
-    | Union<Transforms>
-    | { first: Transforms; second: Union<Transforms> },
+  transform: Union<TransformOptions>,
 ) => {
-  if (typeof transform !== "string")
-    transform = `${transform.first}(transforms.${transform.second})`
+  if (typeof transform !== "string") {
+    let { first, second, args = "" } = transform
+
+    if (second) args = `transforms.${second}`
+
+    transform = `${first}(${args})`
+  }
 
   if (token) transform = `token("${token}", transforms.${transform})`
 
@@ -822,9 +982,7 @@ const getConfig = ({
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]
   token?: ThemeToken
-  transform?:
-    | Union<Transforms>
-    | { first: Transforms; second: Union<Transforms> }
+  transform?: TransformOptions
   css?: CSSObject
 }) => {
   if (!token && !transform && !css) return true

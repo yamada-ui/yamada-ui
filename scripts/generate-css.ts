@@ -17,7 +17,10 @@ const SOURCE_URL = "https://developer.mozilla.org"
 const OUT_PATH = "styles.ts"
 
 type CSSProperty = ReturnType<typeof getCSSProperties>[number]
-type CSSProp = keyof CSS.StandardProperties | keyof CSS.SvgProperties
+type CSSProp =
+  | keyof CSS.StandardProperties
+  | keyof CSS.SvgProperties
+  | keyof CSS.ObsoleteProperties
 type FuncProp = { prop: CSSProp; func: string }
 
 type Tokens = Record<string, CSSProp[]>
@@ -60,7 +63,14 @@ const tokens: Tokens = {
     "maxBlockSize",
     "flexBasis",
   ],
-  spaces: ["gap", "rowGap", "columnGap"],
+  spaces: [
+    "gap",
+    "rowGap",
+    "columnGap",
+    "gridGap",
+    "gridColumnGap",
+    "gridRowGap",
+  ],
   transitions: [],
   zIndices: [],
 }

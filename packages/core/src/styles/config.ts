@@ -33,7 +33,7 @@ export type ConfigProps = {
 
 export type Configs = Record<string, ConfigProps | true>
 
-export const createTransform =
+export const createTokenTransform =
   ({
     token,
     transform,
@@ -58,13 +58,30 @@ export const createConfig =
   <T extends CSSProperties>(properties: T | T[]): ConfigProps => ({
     token,
     properties,
-    transform: createTransform({
+    transform: createTokenTransform({
       token,
       transform,
     }),
   })
 
+export type Transforms = keyof typeof transforms
+
 export const transforms = {
+  token:
+    (
+      token: ThemeToken,
+      transform?: Transform,
+      compose?: Transform,
+    ): Transform =>
+    (value, theme) => {
+      value = tokenToCSSVar(token, value)(theme)
+
+      let result = transform?.(value, theme) ?? value
+
+      if (compose) result = compose(result, theme)
+
+      return result
+    },
   px: (value: any) => {
     if (value == null) return value
 
@@ -145,7 +162,7 @@ export const configs = {
       ? {
           properties,
           token,
-          transform: createTransform({ token, transform }),
+          transform: transforms.token(token, transform),
         }
       : {
           properties,

@@ -77,6 +77,7 @@ const tokens: Tokens = {
 
 const shorthandProps: ShorthandProps = {
   background: ["bg"],
+  boxShadow: ["shadow"],
   backgroundColor: ["bgColor"],
   backgroundImage: ["bgImage", "bgImg", "bgGradient"],
   backgroundClip: ["bgClip"],

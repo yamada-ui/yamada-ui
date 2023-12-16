@@ -1,13 +1,9 @@
+import type { CSSObject, Interpolation } from "@emotion/react"
 import type * as React from "react"
-import type {
-  CSSUIProps,
-  CSSUIObject,
-  StyleProps,
-  CSSObject,
-  Interpolation,
-  PropsTheme,
-} from ".."
-import type { DOMElements } from "."
+import type { CSSUIObject, CSSUIProps } from "../css"
+import type { StyleProps } from "../styles"
+import type { PropsTheme } from "../theme.types"
+import type { DOMElements } from "./element.types"
 
 export type StyledOptions = {
   shouldForwardProp?: (prop: string) => boolean

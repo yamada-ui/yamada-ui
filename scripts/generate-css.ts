@@ -1,5 +1,6 @@
 import { writeFile } from "fs/promises"
 import * as p from "@clack/prompts"
+import type { ThemeToken, Transforms, Union } from "@yamada-ui/react"
 import c from "chalk"
 import type * as CSS from "csstype"
 import { glob } from "glob"
@@ -17,18 +18,38 @@ const SOURCE_URL = "https://developer.mozilla.org"
 const OUT_PATH = "styles.ts"
 
 type CSSProperty = ReturnType<typeof getCSSProperties>[number]
-type CSSProp =
+type CSSProperties =
   | keyof CSS.StandardProperties
   | keyof CSS.SvgProperties
   | keyof CSS.ObsoleteProperties
-type FuncProp = { prop: CSSProp; func: string }
+type UIProperties = keyof typeof uiProps
+type TransformProp = {
+  properties: CSSProperties | UIProperties
+  transform: Union<Transforms>
+}
 
-type Tokens = Record<string, CSSProp[]>
-type ShorthandProps = Partial<Record<CSSProp, string[]>>
-type TransformProps = Partial<Record<string, (CSSProp | FuncProp)[]>>
-type UIProps = Partial<Record<string, any>>
+type Tokens = Record<ThemeToken, (CSSProperties | UIProperties)[]>
+type ShorthandProps = Partial<Record<CSSProperties | UIProperties, string[]>>
+type TransformProps = Partial<
+  Record<Transforms, (CSSProperties | UIProperties | TransformProp)[]>
+>
+type UIOptions = {
+  properties?: CSSProperties | CSSProperties[]
+  transform?: TransformOptions
+  type?: string
+  description?: string[]
+}
+type TransformOptions =
+  | Transforms
+  | { first: Transforms; second: Union<Transforms> }
+type UIProps = Partial<Record<string, UIOptions>>
 
-const list = new ListIt({
+const omittedList = new ListIt({
+  headerColor: "gray",
+  headerUnderline: true,
+})
+
+const duplicatedList = new ListIt({
   headerColor: "gray",
   headerUnderline: true,
 })
@@ -46,15 +67,16 @@ const tokens: Tokens = {
     "backgroundColor",
     "accentColor",
     "outlineColor",
+    "textDecorationColor",
   ],
-  fontSizes: [],
-  fontWeights: [],
-  fonts: [],
+  fontSizes: ["fontSize"],
+  fontWeights: ["fontWeight"],
+  fonts: ["fontFamily"],
   gradients: ["backgroundImage"],
-  letterSpacings: [],
-  lineHeights: [],
+  letterSpacings: ["letterSpacing"],
+  lineHeights: ["lineHeight"],
   radii: [],
-  shadows: ["boxShadow"],
+  shadows: ["boxShadow", "textShadow"],
   sizes: [
     "width",
     "inlineSize",
@@ -69,9 +91,36 @@ const tokens: Tokens = {
     "maxInlineSize",
     "maxHeight",
     "maxBlockSize",
+    "boxSize",
     "flexBasis",
   ],
   spaces: [
+    "margin",
+    "marginTop",
+    "marginBlockStart",
+    "marginRight",
+    "marginInlineEnd",
+    "marginBottom",
+    "marginBlockEnd",
+    "marginLeft",
+    "marginInlineStart",
+    "marginInline",
+    "marginBlock",
+    "padding",
+    "paddingTop",
+    "paddingBlockStart",
+    "paddingRight",
+    "paddingBottom",
+    "paddingBlockEnd",
+    "paddingLeft",
+    "paddingInlineStart",
+    "paddingInlineEnd",
+    "paddingInline",
+    "paddingBlock",
+    "marginY",
+    "marginX",
+    "paddingY",
+    "paddingX",
     "gap",
     "rowGap",
     "columnGap",
@@ -79,7 +128,9 @@ const tokens: Tokens = {
     "gridColumnGap",
     "gridRowGap",
   ],
-  transitions: [],
+  "transitions.property": [],
+  "transitions.easing": [],
+  "transitions.duration": [],
   zIndices: [],
 }
 
@@ -109,32 +160,101 @@ const shorthandProps: ShorthandProps = {
   overscrollBehaviorX: ["overscrollX"],
   overscrollBehaviorY: ["overscrollY"],
   flexDirection: ["flexDir"],
+  textDecoration: ["textDecor"],
+  margin: ["m"],
+  marginTop: ["mt"],
+  marginRight: ["mr"],
+  marginInlineEnd: ["me", "marginEnd"],
+  marginBottom: ["mb"],
+  marginLeft: ["ml"],
+  marginInlineStart: ["ms", "marginStart"],
+  marginX: ["mx"],
+  marginY: ["my"],
+  padding: ["p"],
+  paddingTop: ["pt"],
+  paddingY: ["py"],
+  paddingX: ["px"],
+  paddingBottom: ["pb"],
+  paddingLeft: ["pl"],
+  paddingInlineStart: ["ps", "paddingStart"],
+  paddingRight: ["pr"],
+  paddingInlineEnd: ["pe", "paddingEnd"],
 }
 
 const transformProps: TransformProps = {
-  px: [],
+  px: [
+    "fontSize",
+    "margin",
+    "marginTop",
+    "marginBlockStart",
+    "marginRight",
+    "marginInlineEnd",
+    "marginBottom",
+    "marginBlockEnd",
+    "marginLeft",
+    "marginInlineStart",
+    "marginInline",
+    "marginBlock",
+    "padding",
+    "paddingTop",
+    "paddingBlockStart",
+    "paddingRight",
+    "paddingBottom",
+    "paddingBlockEnd",
+    "paddingLeft",
+    "paddingInlineStart",
+    "paddingInlineEnd",
+    "paddingInline",
+    "paddingBlock",
+    "marginX",
+    "marginY",
+    "paddingX",
+    "paddingY",
+    "gap",
+    "rowGap",
+    "columnGap",
+    "gridGap",
+    "gridColumnGap",
+    "gridRowGap",
+  ],
   fraction: [
-    { prop: "width", func: "transforms.px" },
-    { prop: "inlineSize", func: "transforms.px" },
-    { prop: "height", func: "transforms.px" },
-    { prop: "backfaceVisibility", func: "transforms.px" },
-    { prop: "blockSize", func: "transforms.px" },
-    { prop: "minWidth", func: "transforms.px" },
-    { prop: "minInlineSize", func: "transforms.px" },
-    { prop: "minHeight", func: "transforms.px" },
-    { prop: "minBlockSize", func: "transforms.px" },
-    { prop: "maxWidth", func: "transforms.px" },
-    { prop: "maxInlineSize", func: "transforms.px" },
-    { prop: "maxHeight", func: "transforms.px" },
-    { prop: "maxBlockSize", func: "transforms.px" },
+    { properties: "width", transform: "px" },
+    { properties: "inlineSize", transform: "px" },
+    { properties: "height", transform: "px" },
+    { properties: "backfaceVisibility", transform: "px" },
+    { properties: "blockSize", transform: "px" },
+    { properties: "minWidth", transform: "px" },
+    { properties: "minInlineSize", transform: "px" },
+    { properties: "minHeight", transform: "px" },
+    { properties: "minBlockSize", transform: "px" },
+    { properties: "maxWidth", transform: "px" },
+    { properties: "maxInlineSize", transform: "px" },
+    { properties: "maxHeight", transform: "px" },
+    { properties: "maxBlockSize", transform: "px" },
+    { properties: "boxSize", transform: "px" },
   ],
   bgClip: ["backgroundClip"],
   gradient: ["backgroundImage"],
 }
 
-const uiProps: UIProps = {
-  boxSize: {},
-}
+const createUIProps = <T extends UIProps>(props: T) => props
+
+const uiProps = createUIProps({
+  marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
+  marginY: { properties: ["marginTop", "marginBottom"] },
+  paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
+  paddingY: { properties: ["paddingTop", "paddingBottom"] },
+  boxSize: { properties: ["width", "height"] },
+  noOfLines: {
+    type: "number",
+    description: ["Used to visually truncate a text after a number of lines."],
+  },
+  isTruncated: {
+    transform: "isTruncated",
+    type: "boolean",
+    description: ["If `true`, it clamps truncate a text after one line."],
+  },
+})
 
 const prettier = async (content: string, options?: Options) => {
   const prettierConfig = await resolveConfig(process.cwd())
@@ -153,21 +273,14 @@ const prettier = async (content: string, options?: Options) => {
 const toCamelCase = (value: string & {}) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
-const createMap = (obj: Partial<Record<string, (CSSProp | FuncProp)[]>>) =>
-  Object.entries(obj).reduce<Record<string, any>>((prev, [key, list]) => {
-    list?.forEach((item) => {
-      if (typeof item === "string") {
-        prev[item] = key
-      } else {
-        prev[item.prop] = { transform: key, func: item.func }
-      }
-    })
+export const toKebabCase = (value: string & {}) =>
+  value
+    .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
+    .toLowerCase()
+    .replace(/^-/, "")
 
-    return prev
-  }, {})
-
-const getDoc = async () => {
-  const res = await fetch(SOURCE_URL + "/docs/Web/CSS")
+const getDoc = async (type: "CSS" | "SVG") => {
+  const res = await fetch(SOURCE_URL + `/docs/Web/${type}`)
   const data = await res.text()
 
   const dom = new JSDOM(data)
@@ -180,8 +293,9 @@ const getCSSProperties = (doc: Document) => {
 
   const item = Array.from(list).find((item) => {
     const summary = item.querySelector("summary")
+    const title = summary?.textContent?.trim()
 
-    return summary?.textContent?.trim() === "Properties"
+    return title === "Properties" || title === "Attributes"
   })
 
   const els = item?.querySelectorAll("li a") as HTMLAnchorElement[] | undefined
@@ -192,15 +306,21 @@ const getCSSProperties = (doc: Document) => {
     .filter(
       ({ textContent }) => textContent && !/^(-moz|-webkit)/.test(textContent),
     )
-    .map((el) => ({
-      name: el.textContent ?? "",
-      prop: toCamelCase(el.textContent ?? "") as CSSProp,
-      url: SOURCE_URL + el.href,
-    }))
+    .map(({ textContent, href }) => {
+      const prop = textContent?.includes("-")
+        ? toCamelCase(textContent ?? "")
+        : textContent ?? ""
+
+      return {
+        name: textContent ?? "",
+        prop: prop as CSSProperties,
+        url: SOURCE_URL + href,
+      }
+    })
 }
 
 const getCSSTypes = async () => {
-  const typeInfo: Record<string, string> = {}
+  const typeInfo: Record<string, { type: string; deprecated: boolean }> = {}
 
   const paths = await glob("node_modules/**/csstype/index.d.ts")
 
@@ -224,22 +344,27 @@ const getCSSTypes = async () => {
     const type = typeChecker.getTypeAtLocation(typeStatement)
     const symbol = type.getSymbol()
     const name = symbol?.getName()
+    const deprecated = name === "ObsoleteProperties"
 
-    if (name !== "StandardProperties" && name !== "SvgProperties") continue
+    if (
+      name !== "StandardProperties" &&
+      name !== "SvgProperties" &&
+      name !== "ObsoleteProperties"
+    )
+      continue
 
     for (const property of type.getProperties()) {
       const name = property.getName()
       const type = typeChecker.getTypeOfSymbolAtLocation(property, sourceFile)
       const nonNullableType = type.getNonNullableType()
       const value = typeChecker.typeToString(nonNullableType)
-
-      typeInfo[name] =
+      const resolvedValue =
         name === "all"
           ? `CSS.Globals`
           : `CSS.Property.${value.replace(/<.*?>$/, "")}`
-    }
 
-    break
+      typeInfo[name] = { type: resolvedValue, deprecated }
+    }
   }
 
   return typeInfo
@@ -267,7 +392,7 @@ const omitProperties = (
       url,
     }))
 
-    const message = list.d(table).toString()
+    const message = omittedList.d(table).toString()
 
     callback?.(message)
   }
@@ -275,30 +400,116 @@ const omitProperties = (
   return omittedProperties
 }
 
-const tokenMap = createMap(tokens)
-const transformMap = createMap(transformProps)
+const tokenMap = Object.entries(tokens).reduce(
+  (prev, [key, list]) => {
+    list.forEach((item) => {
+      prev[item] = key as ThemeToken
+    })
 
-const generateStyles = async (styles: (CSSProperty & { type: string })[]) => {
+    return prev
+  },
+  {} as Record<CSSProperties | UIProperties, ThemeToken>,
+)
+
+const transformMap = Object.entries(transformProps).reduce(
+  (prev, [key, list]) => {
+    list.forEach((item) => {
+      if (typeof item === "string") {
+        prev[item] = key as Transforms
+      } else {
+        const { properties, transform } = item
+        prev[properties] = { first: key as Transforms, second: transform }
+      }
+    })
+
+    return prev
+  },
+  {} as Record<CSSProperties | UIProperties, TransformOptions>,
+)
+
+const computedType = (
+  type: string | string[],
+  token: ThemeToken | undefined,
+) => {
+  let result = ""
+
+  if (typeof type === "string") {
+    result = `Token<${type}>`
+  } else {
+    if (type.length) {
+      result = `Token<${type.join(" | ")}>`
+    } else {
+      result = "Token<StringLiteral>"
+    }
+  }
+
+  if (token) result = result.replace(/>$/, `, "${token}">`)
+
+  return result
+}
+
+const generateDocs = ({
+  properties,
+  url,
+  description = [],
+  deprecated,
+}: {
+  properties: string | string[] | undefined
+  url?: string
+  description?: string[]
+  deprecated?: boolean
+}) => {
+  if (!description.length) {
+    if (!properties) return ""
+
+    if (typeof properties === "string") {
+      properties = `\`${properties}\``
+    } else {
+      properties = properties
+        .map((property) => `\`${toKebabCase(property)}\``)
+        .join(" and ")
+    }
+
+    description = [...description, `The CSS ${properties} property.`]
+
+    if (url) description = [...description, "", `@see Docs ${url}`]
+  }
+
+  if (deprecated) description = [...description, "", `@deprecated`]
+
+  return `/**\n${description.map((row) => `* ${row}`).join("\n")}\n*/`
+}
+
+const generateStyles = async (
+  styles: (CSSProperty & { type: string; deprecated: boolean })[],
+) => {
   let standardStyles: string[] = []
   let shorthandStyles: string[] = []
   let styleProps: string[] = []
+  let pickedStyles: (CSSProperty & { type: string })[] = []
 
-  styles.forEach(({ name, prop, url, type }) => {
-    const token: string | undefined = tokenMap[prop]
+  styles = styles.filter((style) => {
+    const isExists = Object.keys(uiProps).includes(style.prop)
+
+    if (isExists) pickedStyles = [...pickedStyles, style]
+
+    return !isExists
+  })
+
+  styles.forEach(({ name, prop, url, type, deprecated }) => {
+    const token: ThemeToken | undefined = tokenMap[prop]
     const shorthands = shorthandProps[prop]
-    const style = getStyle(prop)
+    const transform = transformMap[prop]
+    const config = getConfig(prop, token, transform)
+    type = computedType(type, token)
+    const docs = generateDocs({ properties: name, url, deprecated })
 
-    type = `Token<${type}${token ? `, "${token}"` : ""}>`
-    standardStyles = [...standardStyles, `${prop}: ${style}`]
-
-    const description = `The CSS \`${name}\` property.`
-    const docs = `/**\n* ${description}\n* \n* @see Docs ${url}\n*/`
-
+    standardStyles = [...standardStyles, `${prop}: ${config}`]
     styleProps = [...styleProps, ...[docs, `${prop}: ${type}`]]
 
     if (shorthands) {
       const shorthandStyle =
-        style === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
+        config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
         shorthandStyles = [
@@ -310,13 +521,48 @@ const generateStyles = async (styles: (CSSProperty & { type: string })[]) => {
     }
   })
 
-  Object.entries(uiProps).forEach(([prop, {}]) => {})
+  Object.entries<UIOptions>(uiProps).forEach(
+    ([prop, { properties, transform, type, description }]) => {
+      const types = styles
+        .filter(({ prop }) =>
+          typeof properties === "string"
+            ? prop === properties
+            : properties?.includes(prop),
+        )
+        .map(({ type }) => type)
+      const token = tokenMap[prop as UIProperties]
+      const shorthands = shorthandProps[prop as UIProperties]
+      transform ??= transformMap[prop as UIProperties]
+      const config = getConfig(properties, token, transform)
+      type = computedType(type ?? types, token)
+      const docs = generateDocs({ properties, description })
+
+      standardStyles = [...standardStyles, `${prop}: ${config}`]
+      styleProps = [...styleProps, ...[docs, `${prop}: ${type}`]]
+
+      if (shorthands) {
+        const shorthandStyle =
+          config === true
+            ? `{ properties: "${prop}" }`
+            : `standardStyles.${prop}`
+
+        shorthands.forEach((shorthandProp) => {
+          shorthandStyles = [
+            ...shorthandStyles,
+            `${shorthandProp}: ${shorthandStyle}`,
+          ]
+          styleProps = [...styleProps, ...[docs, `${shorthandProp}: ${type}`]]
+        })
+      }
+    },
+  )
 
   const content = `
+    import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
     import type { Token } from "../css"
     import type { Configs } from "./config"
-    import { configs, transforms } from "./config"
+    import { transforms } from "./config"
 
     export const standardStyles: Configs = {
       ${standardStyles.join(",\n")}
@@ -336,33 +582,60 @@ const generateStyles = async (styles: (CSSProperty & { type: string })[]) => {
   const data = await prettier(content)
 
   await writeFile(OUT_PATH, data)
+
+  return pickedStyles
 }
 
-const getStyle = (prop: CSSProp) => {
-  const token: string | undefined = tokenMap[prop]
-  const transform: string | { transform: string; func: string } | undefined =
-    transformMap[prop]
+const insertTransform = (
+  config: string[],
+  token: ThemeToken | undefined,
+  transform:
+    | Union<Transforms>
+    | { first: Transforms; second: Union<Transforms> },
+) => {
+  if (typeof transform !== "string")
+    transform = `${transform.first}(transforms.${transform.second})`
 
-  let style: any = true
+  if (token) transform = `token("${token}", transforms.${transform})`
 
-  if (token) {
-    style = `configs.prop("${prop}", "${token}")`
+  config = [...config, `transform: transforms.${transform}`]
+
+  return config
+}
+
+const getConfig = (
+  properties:
+    | CSSProperties
+    | UIProperties
+    | CSSProperties[]
+    | UIProperties[]
+    | undefined,
+  token?: ThemeToken,
+  transform?:
+    | Union<Transforms>
+    | { first: Transforms; second: Union<Transforms> },
+) => {
+  if (!token && !transform) return true
+
+  let config: string[] = []
+
+  if (properties) {
+    if (typeof properties === "string") {
+      const value = `"${properties}"`
+
+      config = [...config, `properties: ${value}`]
+    } else {
+      const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
+
+      config = [...config, `properties: ${value}`]
+    }
   }
 
-  if (transform) {
-    const value = `transforms.${
-      typeof transform === "string"
-        ? transform
-        : `${transform.transform}(${transform.func})`
-    }`
+  if (token) config = [...config, `token: "${token}"`]
 
-    style =
-      typeof style === "string"
-        ? style.replace(/\)$/, `, ${value})`)
-        : `{ transform: ${value} }`
-  }
+  if (transform) config = insertTransform(config, token, transform)
 
-  return style
+  return `{ ${config.join(", ")} }`
 }
 
 const main = async () => {
@@ -381,30 +654,50 @@ const main = async () => {
 
     s.start(`Getting the "MDN Web Docs" document`)
 
-    const doc = await getDoc()
+    const cssDoc = await getDoc("CSS")
+    const svgDoc = await getDoc("SVG")
 
     s.stop(`Got the "MDN Web Docs" document`)
 
-    const cssProperties = getCSSProperties(doc)
+    const cssProperties = getCSSProperties(cssDoc)
+    const svgProperties = getCSSProperties(svgDoc)
+    const exitsProperties = cssProperties.map(({ name }) => name)
+    const resolvedProperties = [
+      ...cssProperties,
+      ...svgProperties.filter(({ name }) => !exitsProperties.includes(name)),
+    ]
+
     const typeProperties = Object.keys(cssTypes)
     const omittedProperties = omitProperties(
-      cssProperties,
+      resolvedProperties,
       typeProperties,
       (message) => {
-        p.note(message, `Omitted properties`)
+        p.note(message, `Omitted properties that are not present in "csstype"`)
       },
     )
 
-    const styles = omittedProperties.map((property) => ({
-      ...property,
-      type: cssTypes[property.prop],
-    }))
+    const styles = omittedProperties.map((property) => {
+      const { type, deprecated } = cssTypes[property.prop] ?? {}
+      return { ...property, type, deprecated }
+    })
 
     s.start(`Writing file "${OUT_PATH}"`)
 
-    await generateStyles(styles)
+    const pickedStyles = await generateStyles(styles)
 
     s.stop(`Wrote file "${OUT_PATH}"`)
+
+    if (pickedStyles.length) {
+      const table = pickedStyles.map(({ name, url }, index) => ({
+        row: index + 1,
+        name,
+        url,
+      }))
+
+      const message = duplicatedList.d(table).toString()
+
+      p.note(message, `Duplicated properties that are present in "UIProps"`)
+    }
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

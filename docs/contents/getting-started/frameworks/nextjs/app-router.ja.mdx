@@ -101,12 +101,8 @@ export default function RootLayout({
 
 理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
-```tsx live=false title=layout.tsx highlight={3,4,15,17}
-import {
-  UIProvider,
-  colorModeCookieStorageManager,
-  ColorModeScript,
-} from "@yamada-ui/react"
+```tsx live=false title=layout.tsx highlight={1,11,13}
+import { UIProvider, colorModeManager, ColorModeScript } from "@yamada-ui/react"
 
 export default function RootLayout({
   children,
@@ -118,7 +114,7 @@ export default function RootLayout({
       <body>
         <ColorModeScript type="cookie" nonce="testing" />
 
-        <UIProvider colorModeManager={colorModeCookieStorageManager}>
+        <UIProvider colorModeManager={{ ...colorModeManager }.cookieStorage}>
           {children}
         </UIProvider>
       </body>
@@ -128,7 +124,7 @@ export default function RootLayout({
 ```
 
 :::note status=warning
-`props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
+`colorModeManager`は、スプレッド構文などでオブジェクトをシャローコピーする必要があります。これは、`react-server-dom-webpack`の不具合の可能性があり、修正されるまでの一時的なアプローチです。
 :::
 
 ## コンポーネントを使用する

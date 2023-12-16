@@ -97,11 +97,15 @@ export const Header = memo(
             <Box
               as={Link}
               href="/"
+              aria-label="Yamada UI"
+              _hover={{ opacity: 0.7 }}
+              transitionProperty="opacity"
+              transitionDuration="slower"
               _focus={{ outline: "none" }}
               _focusVisible={{ boxShadow: "outline" }}
               rounded="md"
             >
-              <Logo w={{ base: "12rem", md: "10rem" }} h="auto" />
+              <Logo w={{ base: "10rem", md: "8rem" }} h="auto" />
             </Box>
 
             <Tag

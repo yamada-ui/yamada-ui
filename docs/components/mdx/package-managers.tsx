@@ -61,7 +61,7 @@ export const PackageManagers: FC<PackageManagersProps> = ({
               color={["whiteAlpha.700", "whiteAlpha.600"]}
               _selected={{
                 color: ["white", "white"],
-                borderColor: [`primary.400`, `primary.300`],
+                borderColor: [`primary.500`, `primary.400`],
               }}
               onClick={() => setSelectedPackageName(name)}
               _focusVisible={{ bg: "whiteAlpha.50" }}

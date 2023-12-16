@@ -1,6 +1,6 @@
 import type { CSSObject } from "@emotion/react"
 import type { Union, Dict } from "@yamada-ui/utils"
-import { isNumber } from "@yamada-ui/utils"
+import { isNumber, getMemoizedObject as get } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
@@ -81,6 +81,25 @@ export const transforms = {
       if (compose) result = compose(result, theme)
 
       return result
+    },
+  styles:
+    (prefix?: string): Transform =>
+    (value, theme, css = {}) => {
+      const resolvedCSS: Dict = {}
+
+      const style = get<Dict>(
+        theme,
+        prefix ? `styles.${prefix}.${value}` : `styles.${value}`,
+        {},
+      )
+
+      for (const prop in style) {
+        const done = prop in css && css[prop] != null
+
+        if (!done) resolvedCSS[prop] = style[prop]
+      }
+
+      return resolvedCSS
     },
   px: (value: any) => {
     if (value == null) return value

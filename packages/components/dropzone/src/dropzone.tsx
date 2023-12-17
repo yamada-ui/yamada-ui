@@ -26,7 +26,7 @@ import {
   cx,
   dataAttr,
   isArray,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import type { FC, ForwardedRef, PropsWithChildren } from "react"
 import { Fragment } from "react"
@@ -123,7 +123,10 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
 
   const disabled = isLoading || rest.disabled || rest.readOnly
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const [formControlProps, containerProps] = splitObject(
+    rest,
+    formControlProperties,
+  )
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject, open } =
     useDropzone({
@@ -170,7 +173,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
       <ui.div
         className={cx("ui-dropzone", className)}
         __css={css}
-        {...rest}
+        {...containerProps}
         {...getRootProps()}
         data-accept={dataAttr(isDragAccept)}
         data-reject={dataAttr(isDragReject)}

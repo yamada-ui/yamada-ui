@@ -563,12 +563,16 @@ export const useRangeSlider = ({
         )
 
       return {
+        "aria-label": "Slider thumb",
         ...pickObject(rest, formControlProperties),
         ...props,
         ref,
         id: getThumbId(i),
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         role: "slider",
+        "aria-valuemin": min,
+        "aria-valuemax": max,
+        "aria-valuenow": value,
         "data-active": dataAttr(
           isDragging && focusThumbOnChange && activeIndex === i,
         ),
@@ -586,6 +590,8 @@ export const useRangeSlider = ({
       }
     },
     [
+      min,
+      max,
       focusThumbOnChange,
       activeIndex,
       getThumbId,

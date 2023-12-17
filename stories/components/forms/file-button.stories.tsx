@@ -31,7 +31,11 @@ export const basic: Story = () => {
     <>
       <FileButton>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        aria-label="Upload file"
+      />
 
       <FileButton>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
@@ -45,7 +49,12 @@ export const withMultiple: Story = () => {
     <>
       <FileButton multiple>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} multiple />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        multiple
+        aria-label="Upload file"
+      />
 
       <FileButton multiple>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
@@ -63,6 +72,7 @@ export const withAccept: Story = () => {
         as={IconButton}
         icon={<Icon icon={faPlus} />}
         accept="image/png,image/jpeg"
+        aria-label="Upload file"
       />
 
       <FileButton accept="image/png,image/jpeg">
@@ -143,7 +153,12 @@ export const isDisabled: Story = () => {
     <>
       <FileButton isDisabled>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isDisabled />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        isDisabled
+        aria-label="Upload file"
+      />
 
       <FileButton isDisabled>
         {({ onClick, isDisabled }) => (
@@ -151,7 +166,11 @@ export const isDisabled: Story = () => {
             onClick={onClick}
             opacity={isDisabled ? 0.4 : 1}
             cursor={isDisabled ? "not-allowed" : "pointer"}
-            _hover={isDisabled ? undefined : { textDecoration: "underline" }}
+            _hover={
+              isDisabled
+                ? { textDecoration: "inherit" }
+                : { textDecoration: "underline" }
+            }
           >
             Upload
           </Link>
@@ -174,14 +193,23 @@ export const isReadonly: Story = () => {
     <>
       <FileButton isReadOnly>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isReadOnly />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        isReadOnly
+        aria-label="Upload file"
+      />
 
       <FileButton isReadOnly>
         {({ onClick, isReadOnly }) => (
           <Link
             onClick={onClick}
             cursor={isReadOnly ? "default" : "pointer"}
-            _hover={isReadOnly ? undefined : { textDecoration: "underline" }}
+            _hover={
+              isReadOnly
+                ? { textDecoration: "inherit" }
+                : { textDecoration: "underline" }
+            }
           >
             Upload
           </Link>
@@ -204,7 +232,12 @@ export const isInvalid: Story = () => {
     <>
       <FileButton isInvalid>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isInvalid />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        isInvalid
+        aria-label="Upload file"
+      />
 
       <FormControl
         isInvalid

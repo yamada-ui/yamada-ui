@@ -96,6 +96,7 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
 
   return (
     <DatePickerIcon
+      aria-label="Clear value"
       className={cx("ui-date-picker__icon--clear", className)}
       __css={styles.clearIcon}
       {...rest}

@@ -882,6 +882,10 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       ({ operation, ...props } = {}) => {
         const isPrev = operation === "prev"
 
+        const ariaLabel = `Go to ${isPrev ? "previous" : "next"} ${
+          type === "date" ? "month" : "year"
+        }`
+
         const isHidden = (() => {
           switch (type) {
             case "year":
@@ -916,6 +920,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
         })()
 
         return {
+          "aria-label": ariaLabel,
           ...props,
           onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
           tabIndex: -1,

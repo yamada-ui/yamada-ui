@@ -135,10 +135,10 @@ const Example = () => {
 
 ## CodeSandbox
 
-- [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
-- [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
-- [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
-- [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
+- [JavaScript](https://codesandbox.io/p/devbox/yamada-ui-javascript-1m1on8)
+- [TypeScript](https://codesandbox.io/p/devbox/yamada-ui-typescript-7xqli9)
+- [Next.js - Pages](https://codesandbox.io/p/devbox/yamada-ui-next-js-pages-6d13de)
+- [Next.js - App](https://codesandbox.io/p/devbox/yamada-ui-next-js-app-3911zu)
 
 ## Contributing
 

@@ -359,7 +359,6 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
-      role: "carousel-slide",
       "data-index": index,
       "data-selected": dataAttr(isSelected),
     }),
@@ -403,7 +402,6 @@ export const useCarouselControl = ({
       ...props,
       ref,
       disabled,
-      role: "carousel-control",
       onClick: handlerAll(props.onClick, onClick),
     }),
     [disabled, onClick],
@@ -433,9 +431,9 @@ export const useCarouselIndicators = () => {
       const isSelected = index === selectedIndex
 
       return {
+        "aria-label": `Go to ${index + 1} slide`,
         ...props,
         key: index,
-        role: "carousel-indicator",
         "data-index": index,
         "data-selected": dataAttr(isSelected),
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, index)),

@@ -631,6 +631,7 @@ export const customPagination: Story = () => {
               icon={<Icon icon={faChevronLeft} />}
               isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
+              aria-label="Go to previous page"
             />
 
             <NumberInput
@@ -640,6 +641,7 @@ export const customPagination: Story = () => {
               max={totalPage}
               value={pageIndex + 1}
               onChange={(_, page) => setPageIndex(page - 1)}
+              aria-label="Change page"
             />
 
             <IconButton
@@ -647,6 +649,7 @@ export const customPagination: Story = () => {
               icon={<Icon icon={faChevronRight} />}
               isDisabled={!getCanNextPage()}
               onClick={nextPage}
+              aria-label="Go to next page"
             />
 
             <Spacer />

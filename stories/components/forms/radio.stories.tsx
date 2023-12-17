@@ -216,7 +216,7 @@ export const customHook: Story = () => {
 
     return (
       <Box as="label">
-        <input {...getInputProps()} />
+        <input {...getInputProps()} aria-label={props.value} />
 
         <Box
           {...getIconProps()}

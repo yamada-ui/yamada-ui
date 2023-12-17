@@ -407,20 +407,30 @@ export const withIcon: Story = () => {
 export const iconButton: Story = () => {
   return (
     <Wrap gap="md">
-      <IconButton colorScheme="primary" icon={<Icon icon={faPlus} />} />
+      <IconButton
+        colorScheme="primary"
+        icon={<Icon icon={faPlus} />}
+        aria-label="Plus"
+      />
 
-      <IconButton colorScheme="secondary" icon={<Icon icon={faMinus} />} />
+      <IconButton
+        colorScheme="secondary"
+        icon={<Icon icon={faMinus} />}
+        aria-label="Minus"
+      />
 
       <IconButton
         colorScheme="warning"
         size="lg"
         icon={<Icon icon={faSun} />}
+        aria-label="Light"
       />
 
       <IconButton
         colorScheme="danger"
         size="lg"
         icon={<Icon icon={faMoon} />}
+        aria-label="Dark"
       />
     </Wrap>
   )
@@ -480,7 +490,7 @@ export const buttonGroup: Story = () => {
     <>
       <ButtonGroup isAttached variant="outline">
         <Button>Button</Button>
-        <IconButton icon={<Icon icon={faPlus} />} />
+        <IconButton icon={<Icon icon={faPlus} />} aria-label="Add" />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">

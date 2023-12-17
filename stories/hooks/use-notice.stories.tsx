@@ -524,7 +524,7 @@ export const useLimit = () => {
   )
 }
 
-export const costomComponent = () => {
+export const customComponent = () => {
   const notice = useNotice()
 
   return (

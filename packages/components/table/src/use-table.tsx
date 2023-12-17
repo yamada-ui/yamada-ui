@@ -103,7 +103,7 @@ export type UseTableOptions<Y extends RowData> = PartialKeys<
   > &
   Omit<PaginationOptions, "getPaginationRowModel" | "onPaginationChange">
 
-type TableProps = HTMLUIProps<"table"> & ThemeProps<"Table">
+type TableProps = Omit<HTMLUIProps<"table">, "columns"> & ThemeProps<"Table">
 
 type HeaderGroupProps<Y extends RowData> =
   | Omit<TrProps, "key">

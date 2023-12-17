@@ -27,7 +27,7 @@ type StackOptions = {
   divider?: ReactElement
 }
 
-export type StackProps = HTMLUIProps<"div"> & StackOptions
+export type StackProps = Omit<HTMLUIProps<"div">, "direction"> & StackOptions
 
 export const Stack = forwardRef<StackProps, "div">(
   (

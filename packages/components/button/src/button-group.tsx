@@ -22,7 +22,7 @@ type ButtonGroupOptions = {
   isDisabled?: boolean
 }
 
-export type ButtonGroupProps = HTMLUIProps<"div"> &
+export type ButtonGroupProps = Omit<HTMLUIProps<"div">, "direction"> &
   ThemeProps<"Button"> &
   ButtonGroupOptions
 

@@ -1,4 +1,4 @@
-import type { CSSUIObject } from ".."
+import type { CSSUIObject } from "./css"
 
 export type Pseudos = typeof pseudos
 

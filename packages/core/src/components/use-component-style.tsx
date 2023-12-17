@@ -19,7 +19,7 @@ import type {
   UIStyleProps,
 } from "../css"
 import { useTheme, useColorMode } from "../providers"
-import { pseudos } from "../styles"
+import { pseudos } from "../pseudos"
 import type {
   ComponentMultiSizes,
   ComponentMultiVariants,

@@ -15,13 +15,13 @@ const list = new ListIt({
   headerUnderline: true,
 })
 
-const SOURCE = "https://developer.mozilla.org"
+const SOURCE_URL = "https://developer.mozilla.org"
 
 const toCamelCase = (value: string & {}) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
 const getDoc = async () => {
-  const res = await fetch(SOURCE + "/docs/Web/CSS")
+  const res = await fetch(SOURCE_URL + "/docs/Web/CSS")
   const data = await res.text()
 
   const dom = new JSDOM(data)
@@ -49,7 +49,7 @@ const getCSSProperties = (doc: Document) => {
     .map((el) => ({
       origin: el.textContent ?? "",
       name: toCamelCase(el.textContent ?? ""),
-      href: SOURCE + el.href,
+      href: SOURCE_URL + el.href,
     }))
 }
 

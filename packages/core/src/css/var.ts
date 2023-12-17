@@ -1,6 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
-import { generateAnimation, generateGradient, pseudos } from "../styles"
+import { generateAnimation, generateGradient } from "../config"
+import { pseudos } from "../pseudos"
 import type { VarTokens } from "../theme"
 import type { CSSMap, StyledTheme } from "../theme.types"
 

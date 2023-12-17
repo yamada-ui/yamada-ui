@@ -1,13 +1,9 @@
+import type { CSSObject, Interpolation } from "@emotion/react"
 import type * as React from "react"
-import type {
-  CSSUIProps,
-  CSSUIObject,
-  StylesProps,
-  CSSObject,
-  Interpolation,
-  PropsTheme,
-} from ".."
-import type { DOMElements } from "."
+import type { CSSUIObject, CSSUIProps } from "../css"
+import type { StyleProps } from "../styles"
+import type { PropsTheme } from "../theme.types"
+import type { DOMElements } from "./element.types"
 
 export type StyledOptions = {
   shouldForwardProp?: (prop: string) => boolean
@@ -115,7 +111,7 @@ export type UIComponent<Y extends As, M extends object = {}> = Component<
 export type HTMLUIProps<Y extends As> = Omit<
   PropsOf<Y>,
   Y extends "svg"
-    ? "ref" | "children" | keyof StylesProps
-    : "ref" | keyof StylesProps
+    ? "ref" | "children" | keyof StyleProps
+    : "ref" | keyof StyleProps
 > &
   UIProps & { as?: As }

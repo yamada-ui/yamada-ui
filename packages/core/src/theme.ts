@@ -40,7 +40,6 @@ const primaryTokens = [
   "shadows",
   "sizes",
   "spaces",
-  "transitions",
   "zIndices",
 ] as const
 
@@ -114,8 +113,8 @@ const createTokens = (
 
   switch (target) {
     case "primary":
-      defaultTokens = [...primaryTokens]
-      semanticTokens = [...primaryTokens, "colorSchemes"]
+      defaultTokens = [...primaryTokens, "transitions"]
+      semanticTokens = [...primaryTokens, "transitions", "colorSchemes"]
 
       break
 

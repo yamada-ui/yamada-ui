@@ -1,10 +1,11 @@
 import type { Dict } from "@yamada-ui/utils"
 import { isArray, isObject, merge, runIfFunc } from "@yamada-ui/utils"
-import type { ConfigProps } from "../styles"
-import { styles, pseudos } from "../styles"
+import type { ConfigProps } from "../config"
+import { pseudos } from "../pseudos"
+import { styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
-import type { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from "./css.types"
+import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 
 const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],
@@ -33,7 +34,7 @@ const expandResponsive = (
   }, {} as Dict)
 
 const expandCSS =
-  (css: CSSUIProps | CSSUIObject) =>
+  (css: Dict) =>
   (theme: StyledTheme): Dict => {
     if (!theme.__breakpoints) return css
 

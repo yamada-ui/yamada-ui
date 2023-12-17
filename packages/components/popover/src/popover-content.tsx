@@ -18,7 +18,7 @@ import { PopoverCloseButton } from "."
 
 export type PopoverContentProps = Omit<
   HTMLUIProps<"section">,
-  keyof Omit<HTMLMotionProps<"section">, "children">
+  keyof Omit<HTMLMotionProps<"section">, "children" | "translate" | "content">
 > &
   Omit<
     HTMLMotionProps<"section">,
@@ -30,6 +30,8 @@ export type PopoverContentProps = Omit<
     | "onAnimationStart"
     | "variants"
     | "transition"
+    | "translate"
+    | "content"
   >
 
 const getPopoverContentProps = (

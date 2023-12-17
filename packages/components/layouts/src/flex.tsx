@@ -32,7 +32,7 @@ type FlexOptions = {
   shrink?: CSSUIObject["flexShrink"]
 }
 
-export type FlexProps = HTMLUIProps<"div"> & FlexOptions
+export type FlexProps = Omit<HTMLUIProps<"div">, "direction"> & FlexOptions
 
 export const Flex = forwardRef<FlexProps, "div">(
   (

@@ -84,7 +84,7 @@ export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
 
 export type UseSelectProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<"div">,
-  "defaultValue" | "onChange"
+  "defaultValue" | "onChange" | "offset"
 > &
   Omit<
     PopoverProps,

@@ -74,7 +74,7 @@ type IndicatorOptions = {
   withBorder?: boolean
 }
 
-export type IndicatorProps = Omit<HTMLUIProps<"div">, "children"> &
+export type IndicatorProps = Omit<HTMLUIProps<"div">, "children" | "offset"> &
   ThemeProps<"Indicator"> &
   IndicatorOptions
 

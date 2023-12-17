@@ -123,7 +123,7 @@ export const customFields: Story = () => {
   )
 }
 
-export const costomPlaceholder: Story = () => {
+export const customPlaceholder: Story = () => {
   return <PinInput placeholder="💩" />
 }
 

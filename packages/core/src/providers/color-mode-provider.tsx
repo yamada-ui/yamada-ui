@@ -11,8 +11,10 @@ import {
 import type { ColorMode } from "../css"
 import type { ThemeConfig } from "../theme.types"
 import type { ColorModeManager } from "./color-mode-manager"
-import { colorModeLocalStorageManager } from "./color-mode-manager"
+import { colorModeManager } from "./color-mode-manager"
 import { getColorModeUtils } from "./color-mode-utils"
+
+const { localStorage } = colorModeManager
 
 type ColorModeContext = {
   forced?: boolean
@@ -41,16 +43,16 @@ export type ColorModeProviderProps = {
    * Manager to persist a user's color mode preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `colorModeSSRManager`.
+   * For SSR, choose `colorModeManager.ssr`.
    *
-   * @default 'colorModeLocalStorageManager'
+   * @default 'colorModeManager.localStorage'
    */
   colorModeManager?: ColorModeManager
 }
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   colorMode: defaultColorMode,
-  colorModeManager = colorModeLocalStorageManager,
+  colorModeManager = localStorage,
   config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
   children,
 }) => {

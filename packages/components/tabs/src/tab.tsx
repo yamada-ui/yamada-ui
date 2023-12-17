@@ -51,7 +51,7 @@ export const Tab = forwardRef<TabProps, "button">(
       clickOnSpace,
       onClick: handlerAll(props.onClick, () => setSelectedIndex(index)),
     })
-    const { onClick, ...rippleProps } = useRipple(rest)
+    const { onPointerDown, ...rippleProps } = useRipple(rest)
 
     const css: CSSUIObject = {
       position: "relative",
@@ -73,7 +73,7 @@ export const Tab = forwardRef<TabProps, "button">(
         type="button"
         tabIndex={isSelected ? 0 : -1}
         aria-selected={ariaAttr(isSelected)}
-        onClick={onClick}
+        onPointerDown={onPointerDown}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}
       >
         {children}

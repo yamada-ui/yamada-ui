@@ -1,5 +1,24 @@
 # @yamada-ui/test
 
+## 0.2.10
+
+### Patch Changes
+
+- Updated dependencies [[`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb)]:
+  - @yamada-ui/providers@0.9.21
+  - @yamada-ui/theme@0.13.4
+
+## 0.2.9
+
+### Patch Changes
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Include source map in package.
+
+- Updated dependencies [[`0a5b293`](https://github.com/hirotomoyamada/yamada-ui/commit/0a5b2937da6547be13c117f5efbadbb2a79eeb16), [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686)]:
+  - @yamada-ui/utils@0.5.0
+  - @yamada-ui/providers@0.9.20
+  - @yamada-ui/theme@0.13.3
+
 ## 0.2.8
 
 ### Patch Changes

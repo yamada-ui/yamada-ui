@@ -332,6 +332,7 @@ export const withCard: Story = () => {
             src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
             w="full"
             rounded="md"
+            alt="ドラゴンボール"
           />
         </CardHeader>
 
@@ -345,7 +346,7 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </CarouselSlide>
 
@@ -355,6 +356,7 @@ export const withCard: Story = () => {
             src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
             w="full"
             rounded="md"
+            alt="ドラゴンボール"
           />
         </CardHeader>
 
@@ -368,7 +370,7 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </CarouselSlide>
 
@@ -378,6 +380,7 @@ export const withCard: Story = () => {
             src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
             w="full"
             rounded="md"
+            alt="ドラゴンボール"
           />
         </CardHeader>
 
@@ -391,7 +394,7 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </CarouselSlide>
 
@@ -401,6 +404,7 @@ export const withCard: Story = () => {
             src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
             w="full"
             rounded="md"
+            alt="ドラゴンボール"
           />
         </CardHeader>
 
@@ -414,7 +418,7 @@ export const withCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </CarouselSlide>
     </Carousel>

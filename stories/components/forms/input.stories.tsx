@@ -56,7 +56,7 @@ export const withVariant: Story = () => {
 export const withHTMLSize: Story = () => {
   return (
     <>
-      <Input htmlSize={4} width="auto" />
+      <Input htmlSize={4} width="auto" aria-label="Input" />
     </>
   )
 }
@@ -156,14 +156,14 @@ export const useElement: Story = () => {
     <>
       <InputGroup>
         <InputLeftElement>
-          <Icon as={FaPhone} color="gray.500" />
+          <Icon as={FaPhone} />
         </InputLeftElement>
         <Input type="tel" placeholder="your phone number" />
       </InputGroup>
 
       <InputGroup>
         <InputLeftElement>
-          <FontAwesomeIcon icon={faEnvelope} color="gray.500" />
+          <FontAwesomeIcon icon={faEnvelope} />
         </InputLeftElement>
         <Input type="email" placeholder="your email address" />
         <InputRightElement>
@@ -273,7 +273,7 @@ export const reactHookForm: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <FontAwesomeIcon icon={faEnvelope} color="gray.500" />
+            <FontAwesomeIcon icon={faEnvelope} />
           </InputLeftElement>
           <Input
             type="email"
@@ -351,7 +351,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <FontAwesomeIcon icon={faEnvelope} color="gray.500" />
+            <FontAwesomeIcon icon={faEnvelope} />
           </InputLeftElement>
           <Input
             type="email"

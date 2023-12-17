@@ -64,23 +64,47 @@ export const withBorderColor: Story = () => {
 }
 
 export const withDefaultValue: Story = () => {
-  return <NumberInput defaultValue={18} />
+  return <NumberInput defaultValue={18} aria-label="Number input" />
 }
 
 export const withMinMax: Story = () => {
-  return <NumberInput defaultValue={18} min={8} max={31} />
+  return (
+    <NumberInput defaultValue={18} min={8} max={31} aria-label="Number input" />
+  )
 }
 
 export const withStep: Story = () => {
-  return <NumberInput defaultValue={15} step={5} min={5} max={30} />
+  return (
+    <NumberInput
+      defaultValue={15}
+      step={5}
+      min={5}
+      max={30}
+      aria-label="Number input"
+    />
+  )
 }
 
 export const withPrecision: Story = () => {
-  return <NumberInput defaultValue={15} precision={2} step={0.2} />
+  return (
+    <NumberInput
+      defaultValue={15}
+      precision={2}
+      step={0.2}
+      aria-label="Number input"
+    />
+  )
 }
 
 export const disabledClampValueOnBlur: Story = () => {
-  return <NumberInput defaultValue={15} max={30} clampValueOnBlur={false} />
+  return (
+    <NumberInput
+      defaultValue={15}
+      max={30}
+      clampValueOnBlur={false}
+      aria-label="Number input"
+    />
+  )
 }
 
 export const disabledKeepWithinRange: Story = () => {
@@ -90,6 +114,7 @@ export const disabledKeepWithinRange: Story = () => {
       max={30}
       keepWithinRange={false}
       clampValueOnBlur={false}
+      aria-label="Number input"
     />
   )
 }
@@ -154,6 +179,7 @@ export const isInvalid: Story = () => {
 export const customStepper: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
       incrementProps={{ px: "xs", children: "+" }}
       decrementProps={{ px: "xs", children: "-" }}
     />
@@ -173,7 +199,7 @@ export const customComponent: Story = () => {
   return (
     <HStack maxW="xs" gap="sm">
       <Button {...getIncrementProps()}>+</Button>
-      <Input {...getInputProps()} />
+      <Input {...getInputProps()} aria-label="Number input" />
       <Button {...getDecrementProps()}>-</Button>
     </HStack>
   )

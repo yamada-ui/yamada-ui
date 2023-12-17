@@ -212,6 +212,7 @@ export const withImage: Story = () => {
           src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
           w="full"
           rounded="md"
+          alt="ドラゴンボール"
         />
       </CardHeader>
 
@@ -225,7 +226,7 @@ export const withImage: Story = () => {
       </CardBody>
 
       <CardFooter>
-        <Button colorScheme="primary">Wikipadia</Button>
+        <Button colorScheme="primary">Wikipedia</Button>
       </CardFooter>
     </Card>
   )
@@ -242,6 +243,7 @@ export const horizonCard: Story = () => {
         src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
         objectFit="cover"
         maxW={{ base: "30%", md: "100%" }}
+        alt="ドラゴンボール"
       />
 
       <VStack gap="0">
@@ -257,7 +259,7 @@ export const horizonCard: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </VStack>
     </Card>
@@ -280,7 +282,7 @@ export const multiCards: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </Card>
 
@@ -297,7 +299,7 @@ export const multiCards: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </Card>
 
@@ -314,7 +316,7 @@ export const multiCards: Story = () => {
         </CardBody>
 
         <CardFooter>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </CardFooter>
       </Card>
     </Grid>

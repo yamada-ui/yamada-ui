@@ -2,6 +2,7 @@ import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { PropGetter } from "@yamada-ui/utils"
 import {
+  ariaAttr,
   createContext,
   cx,
   findChildren,
@@ -56,10 +57,10 @@ type AccordionItemOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionItemProps = Omit<HTMLUIProps<"div">, "children"> &
+export type AccordionItemProps = Omit<HTMLUIProps<"li">, "children"> &
   AccordionItemOptions
 
-export const AccordionItem = forwardRef<AccordionItemProps, "div">(
+export const AccordionItem = forwardRef<AccordionItemProps, "li">(
   ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
     const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
       useAccordionContext()
@@ -141,11 +142,12 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
         ref: mergeRefs(register, ref),
         type: "button",
         disabled: isDisabled,
+        "aria-expanded": ariaAttr(isOpen),
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }),
-      [isDisabled, onClick, onFocus, onKeyDown, register],
+      [isDisabled, isOpen, onClick, onFocus, onKeyDown, register],
     )
 
     const getPanelProps: PropGetter = useCallback(
@@ -179,9 +181,10 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       <AccordionItemProvider
         value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}
       >
-        <ui.div
+        <ui.li
           ref={ref}
           className={cx("ui-accordion__item", className)}
+          aria-expanded={ariaAttr(isOpen)}
           __css={css}
           {...rest}
         >
@@ -191,7 +194,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
           {customAccordionPanel ?? (
             <AccordionPanel>{cloneChildren}</AccordionPanel>
           )}
-        </ui.div>
+        </ui.li>
       </AccordionItemProvider>
     )
   },

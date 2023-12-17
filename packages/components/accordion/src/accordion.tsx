@@ -77,11 +77,11 @@ type AccordionOptions = {
   onChange?: (index: number | number[]) => void
 }
 
-export type AccordionProps = Omit<HTMLUIProps<"div">, "onChange"> &
+export type AccordionProps = Omit<HTMLUIProps<"ul">, "onChange"> &
   ThemeProps<"Accordion"> &
   AccordionOptions
 
-export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
+export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Accordion", props)
   const {
     className,
@@ -142,7 +142,7 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
           styles,
         }}
       >
-        <ui.div
+        <ui.ul
           ref={ref}
           className={cx("ui-accordion", className)}
           __css={css}

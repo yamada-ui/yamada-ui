@@ -5,21 +5,27 @@ import type { CSSProperties, UIProperties } from "."
 const insertTransform = (
   config: string[],
   token: ThemeToken | undefined,
-  transform: Union<TransformOptions>,
+  transform?: Union<TransformOptions>,
 ) => {
-  let result = transform
+  if (transform) {
+    let result = transform
 
-  if (typeof result !== "string") {
-    let { transform, additionalTransform, args = "" } = result
+    if (typeof result !== "string") {
+      let { transform, additionalTransform, args = "" } = result
 
-    if (additionalTransform) args = `transforms.${additionalTransform}`
+      if (additionalTransform) args = `transforms.${additionalTransform}`
 
-    result = `${transform}(${args})`
+      result = `${transform}(${args})`
+    }
+
+    if (token) result = `token("${token}", transforms.${result})`
+
+    config = [...config, `transform: transforms.${result}`]
+  } else if (token) {
+    const result = `token("${token}")`
+
+    config = [...config, `transform: transforms.${result}`]
   }
-
-  if (token) result = `token("${token}", transforms.${result})`
-
-  config = [...config, `transform: transforms.${result}`]
 
   return config
 }
@@ -53,11 +59,9 @@ export const getConfig = ({
     }
   }
 
-  if (token) config = [...config, `token: "${token}"`]
-
   if (css) config = [...config, `static: ${JSON.stringify(css)}`]
 
-  if (transform) config = insertTransform(config, token, transform)
+  if (transform || token) config = insertTransform(config, token, transform)
 
   return `{ ${config.join(", ")} }`
 }

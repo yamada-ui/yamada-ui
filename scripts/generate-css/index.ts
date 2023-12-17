@@ -9,6 +9,7 @@ import {
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
+import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 import type { uiProps } from "./ui-props"
 import { toCamelCase } from "./utils"
@@ -24,6 +25,11 @@ export type CSSProperties =
 export type UIProperties = keyof typeof uiProps
 
 const omittedList = new ListIt({
+  headerColor: "gray",
+  headerUnderline: true,
+})
+
+const excludedList = new ListIt({
   headerColor: "gray",
   headerUnderline: true,
 })
@@ -154,6 +160,35 @@ const omitProperties = (
   return omittedProperties
 }
 
+const excludeProperties = (
+  cssProperties: CSSProperty[],
+  callback?: (message: string) => void,
+) => {
+  let pickedProperties: CSSProperty[] = []
+
+  const excludedProperties = cssProperties.filter((property) => {
+    const isExclude = excludeProps.includes(property.prop)
+
+    if (isExclude) pickedProperties = [...pickedProperties, property]
+
+    return !isExclude
+  })
+
+  if (pickedProperties.length) {
+    const table = pickedProperties.map(({ name, url }, index) => ({
+      row: index + 1,
+      name,
+      url,
+    }))
+
+    const message = excludedList.d(table).toString()
+
+    callback?.(message)
+  }
+
+  return excludedProperties
+}
+
 const main = async () => {
   p.intro(`Generating Yamada UI styles`)
 
@@ -192,7 +227,14 @@ const main = async () => {
       },
     )
 
-    const styles = omittedProperties.map((property) => {
+    const excludedProperties = excludeProperties(
+      omittedProperties,
+      (message) => {
+        p.note(message, `Excluded properties`)
+      },
+    )
+
+    const styles = excludedProperties.map((property) => {
       const { type, deprecated } = cssTypes[property.prop] ?? {}
       return { ...property, type, deprecated }
     })

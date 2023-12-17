@@ -26,7 +26,18 @@ const computedType = (
     }
   }
 
-  if (token) result = result.replace(/>$/, `, "${token}">`)
+  if (token) {
+    let resolvedToken: string = token
+
+    if (resolvedToken === "transitions.property")
+      resolvedToken = "transitionProperty"
+    if (resolvedToken === "transitions.duration")
+      resolvedToken = "transitionDuration"
+    if (resolvedToken === "transitions.easing")
+      resolvedToken = "transitionEasing"
+
+    result = result.replace(/>$/, `, "${resolvedToken}">`)
+  }
 
   return result
 }

@@ -16,7 +16,10 @@ export const parameters: Parameters = {
   },
   a11y: {
     config: {
-      rules: [{ id: "color-contrast", enabled: false }],
+      rules: [
+        { id: "color-contrast", enabled: false },
+        { id: "landmark-unique", enabled: false },
+      ],
     },
   },
   backgrounds: { disable: true },

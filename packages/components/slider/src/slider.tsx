@@ -457,11 +457,15 @@ export const useSlider = ({
       }
 
       return {
+        "aria-label": "Slider thumb",
         ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, thumbRef),
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         role: "slider",
+        "aria-valuemin": min,
+        "aria-valuemax": max,
+        "aria-valuenow": value,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         "aria-orientation": orientation,
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -473,6 +477,9 @@ export const useSlider = ({
       }
     },
     [
+      min,
+      max,
+      value,
       focusThumbOnChange,
       isDragging,
       isInteractive,

@@ -27,7 +27,13 @@ export const AvatarName: FC<AvatarNameProps> = ({
   const css: CSSUIObject = { ...styles.name }
 
   return (
-    <ui.div className="ui-avatar__name" role="img" __css={css} {...rest}>
+    <ui.div
+      className="ui-avatar__name"
+      role="img"
+      aria-label={name}
+      __css={css}
+      {...rest}
+    >
       {name ? format(name) : null}
     </ui.div>
   )

@@ -8,7 +8,7 @@ export const semantics: ThemeSemantics = {
     success: "green.500",
     warning: "orange.500",
     danger: "red.500",
-    link: "sky.500",
+    link: "blue.500",
   },
   colorSchemes: {
     primary: "blue",

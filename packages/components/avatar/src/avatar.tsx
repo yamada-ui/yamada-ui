@@ -58,6 +58,10 @@ type AvatarOptions = {
    * Defining which referrer is sent when fetching the resource.
    */
   referrerPolicy?: HTMLAttributeReferrerPolicy
+  /**
+   * The `HTMLImageElement` property `alt`.
+   */
+  alt?: HTMLUIProps<"img">["alt"]
 }
 
 export type AvatarProps = HTMLUIProps<"span"> &
@@ -73,6 +77,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     srcSet,
     name,
     loading,
+    alt,
     icon,
     ignoreFallback,
     borderRadius = "full",
@@ -111,6 +116,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
       >
         <AvatarImage
           src={src}
+          alt={alt}
           srcSet={srcSet}
           loading={loading}
           borderRadius={borderRadius}
@@ -133,6 +139,7 @@ type AvatarImageProps = ImageProps &
 
 const AvatarImage: FC<AvatarImageProps> = ({
   src,
+  alt,
   srcSet,
   onError,
   onLoad,
@@ -170,7 +177,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
       className="ui-avatar__image"
       src={src}
       srcSet={srcSet}
-      alt={name}
+      alt={alt ?? name}
       loading={loading}
       referrerPolicy={referrerPolicy}
       borderRadius={borderRadius}

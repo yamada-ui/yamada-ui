@@ -2,7 +2,6 @@ import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { PropGetter } from "@yamada-ui/utils"
 import {
-  ariaAttr,
   createContext,
   cx,
   findChildren,
@@ -142,12 +141,11 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
         ref: mergeRefs(register, ref),
         type: "button",
         disabled: isDisabled,
-        "aria-expanded": ariaAttr(isOpen),
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }),
-      [isDisabled, isOpen, onClick, onFocus, onKeyDown, register],
+      [isDisabled, onClick, onFocus, onKeyDown, register],
     )
 
     const getPanelProps: PropGetter = useCallback(
@@ -184,7 +182,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
         <ui.div
           ref={ref}
           className={cx("ui-accordion__item", className)}
-          aria-expanded={ariaAttr(isOpen)}
           __css={css}
           {...rest}
         >

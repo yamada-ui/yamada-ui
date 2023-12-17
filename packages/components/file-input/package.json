@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/file-input",
-  "version": "0.4.18",
+  "version": "0.4.21",
   "description": "Yamada UI file input component",
   "keywords": [
     "yamada",
@@ -67,6 +67,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

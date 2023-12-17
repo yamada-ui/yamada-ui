@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/dropzone",
-  "version": "0.5.8",
+  "version": "0.5.11",
   "description": "Yamada UI dropzone component",
   "keywords": [
     "yamada",
@@ -69,6 +69,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

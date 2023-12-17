@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-window-event",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Yamada UI useWindowEvent custom hook",
   "keywords": [
     "use-window-event"
@@ -52,6 +52,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

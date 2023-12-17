@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/portal",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "Yamada UI portal component",
   "keywords": [
     "yamada",
@@ -65,6 +65,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/carousel",
-  "version": "0.3.26",
+  "version": "0.3.29",
   "description": "Yamada UI carousel component",
   "keywords": [
     "yamada",
@@ -71,6 +71,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

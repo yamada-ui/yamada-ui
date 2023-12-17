@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/core",
-  "version": "0.13.2",
+  "version": "0.14.2",
   "description": "Yamada UI core",
   "keywords": [
     "yamada",
@@ -73,6 +73,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

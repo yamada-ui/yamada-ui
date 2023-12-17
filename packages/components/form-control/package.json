@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/form-control",
-  "version": "0.3.24",
+  "version": "0.3.27",
   "description": "Yamada UI form control component",
   "keywords": [
     "yamada",
@@ -65,6 +65,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

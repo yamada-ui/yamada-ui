@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/theme-tools",
-  "version": "0.2.30",
+  "version": "0.2.33",
   "description": "Yamada UI theme utils",
   "keywords": [
     "yamada",
@@ -53,6 +53,7 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "sourcemap": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/stepper",
-  "version": "0.3.22",
+  "version": "0.3.25",
   "description": "Yamada UI stepper component",
   "keywords": [
     "yamada",
@@ -67,6 +67,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

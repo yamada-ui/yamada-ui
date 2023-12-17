@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/transitions",
-  "version": "0.3.23",
+  "version": "0.3.26",
   "description": "Yamada UI transitions components",
   "keywords": [
     "yamada",
@@ -72,6 +72,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

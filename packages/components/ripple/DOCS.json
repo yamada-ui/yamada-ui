@@ -793,6 +793,6 @@
     "vocab": { "type": "string", "required": false }
   },
   "UseRipple": {
-    "onClick": { "type": "MouseEventHandler<T>", "required": false }
+    "onPointerDown": { "type": "PointerEventHandler<T>", "required": false }
   }
 }

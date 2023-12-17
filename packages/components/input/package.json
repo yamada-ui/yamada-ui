@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/input",
-  "version": "0.4.2",
+  "version": "0.4.5",
   "description": "Yamada UI input component",
   "keywords": [
     "yamada",
@@ -68,6 +68,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

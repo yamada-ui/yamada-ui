@@ -1,5 +1,45 @@
 # @yamada-ui/core
 
+## 0.14.2
+
+### Patch Changes
+
+- [#465](https://github.com/hirotomoyamada/yamada-ui/pull/465) [`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify storage manager function.
+
+## 0.14.1
+
+### Patch Changes
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`019fdc9`](https://github.com/hirotomoyamada/yamada-ui/commit/019fdc9e0efce9f944eb9705b664dcf2c425bb25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed storage managers for `App Router`.
+
+- [#462](https://github.com/hirotomoyamada/yamada-ui/pull/462) [`b2efd19`](https://github.com/hirotomoyamada/yamada-ui/commit/b2efd19c42afb546dcdf97e48fb5847942784113) Thanks [@illionillion](https://github.com/illionillion)! - Updated `border-*` properties.
+
+- [#454](https://github.com/hirotomoyamada/yamada-ui/pull/454) [`cfb3401`](https://github.com/hirotomoyamada/yamada-ui/commit/cfb34018d5fe0242f9312b0b32bea91d4f6721d9) Thanks [@illionillion](https://github.com/illionillion)! - add `backgroundOrigin` and `backgroundPositionX` and `backgroundPositionY` properties.
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`35854a5`](https://github.com/hirotomoyamada/yamada-ui/commit/35854a5da8e43976b8699c0e82f573fff02f8592) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `colorMode` and `themeScheme` managers create function.
+
+- [#451](https://github.com/hirotomoyamada/yamada-ui/pull/451) [`fe6da2a`](https://github.com/hirotomoyamada/yamada-ui/commit/fe6da2ad1c7fb0abc8ebc924a21eeba0b06a7ae0) Thanks [@illionillion](https://github.com/illionillion)! - Added `all` property.
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Include source map in package.
+
+- [#453](https://github.com/hirotomoyamada/yamada-ui/pull/453) [`c34136a`](https://github.com/hirotomoyamada/yamada-ui/commit/c34136a0e74354e67e1371357eace3e668dd3b83) Thanks [@illionillion](https://github.com/illionillion)! - add `backfaceVisibility` property.
+
+- [#464](https://github.com/hirotomoyamada/yamada-ui/pull/464) [`2ab14b0`](https://github.com/hirotomoyamada/yamada-ui/commit/2ab14b0775560f1701f5b2cb4b34ec3f433c9438) Thanks [@illionillion](https://github.com/illionillion)! - add `breakAfter` & `breakBefore` & `breakInside`.
+
+- [#455](https://github.com/hirotomoyamada/yamada-ui/pull/455) [`8692124`](https://github.com/hirotomoyamada/yamada-ui/commit/86921243869ab941df915fe703a15fec43e8dd42) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `interopDefault` function.
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`4dfc51e`](https://github.com/hirotomoyamada/yamada-ui/commit/4dfc51e8fb9c26d6280765935f20129e8edc0638) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Restructured imports and types.
+
+- Updated dependencies [[`0a5b293`](https://github.com/hirotomoyamada/yamada-ui/commit/0a5b2937da6547be13c117f5efbadbb2a79eeb16), [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686)]:
+  - @yamada-ui/utils@0.5.0
+  - @yamada-ui/portal@0.3.10
+
+## 0.14.0
+
+### Minor Changes
+
+- [#442](https://github.com/hirotomoyamada/yamada-ui/pull/442) [`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff) Thanks [@illionillion](https://github.com/illionillion)! - Support `accent-color`.
+
 ## 0.13.2
 
 ### Patch Changes

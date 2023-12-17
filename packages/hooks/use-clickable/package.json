@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-clickable",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Yamada UI useClickable custom hook",
   "keywords": [
     "use-clickable"
@@ -53,6 +53,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

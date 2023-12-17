@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-focus",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Yamada UI useFocus custom hook",
   "keywords": [
     "use-focus"
@@ -53,6 +53,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

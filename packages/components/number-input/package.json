@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/number-input",
-  "version": "0.3.25",
+  "version": "0.3.28",
   "description": "Yamada UI number input component",
   "keywords": [
     "yamada",
@@ -70,6 +70,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/autocomplete",
-  "version": "0.7.4",
+  "version": "0.8.2",
   "description": "Yamada UI autocomplete component",
   "keywords": [
     "yamada",
@@ -75,6 +75,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

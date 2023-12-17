@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/popover",
-  "version": "0.3.28",
+  "version": "0.3.31",
   "description": "Yamada UI popover component",
   "keywords": [
     "yamada",
@@ -72,6 +72,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

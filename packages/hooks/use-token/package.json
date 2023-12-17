@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-token",
-  "version": "0.3.15",
+  "version": "0.3.18",
   "description": "Yamada UI useToken custom hook",
   "keywords": [
     "use-token"
@@ -53,6 +53,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

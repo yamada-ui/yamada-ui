@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/theme",
-  "version": "0.13.1",
+  "version": "0.13.4",
   "description": "Yamada UI default theme",
   "keywords": [
     "yamada",
@@ -50,6 +50,7 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "sourcemap": true
   }
 }

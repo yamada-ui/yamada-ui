@@ -1,6 +1,6 @@
 import { createId, handlerAll } from "@yamada-ui/utils"
 import type React from "react"
-import type { Key, MouseEventHandler } from "react"
+import type { Key, PointerEventHandler } from "react"
 import { useCallback, useState } from "react"
 
 export type RippleOptions = {
@@ -11,7 +11,7 @@ export type RippleOptions = {
 }
 
 export type UseRippleProps<T extends any = HTMLElement> = {
-  onClick?: MouseEventHandler<T>
+  onPointerDown?: PointerEventHandler<T>
 }
 
 export const useRipple = <T extends any = HTMLElement>(
@@ -19,7 +19,7 @@ export const useRipple = <T extends any = HTMLElement>(
 ) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
 
-  const onClick: MouseEventHandler<T> = useCallback((ev) => {
+  const onPointerDown: PointerEventHandler<T> = useCallback((ev) => {
     const trigger = ev.currentTarget as unknown as Element
 
     const size = Math.max(trigger.clientWidth, trigger.clientHeight)
@@ -40,7 +40,11 @@ export const useRipple = <T extends any = HTMLElement>(
     setRipples((prev) => prev.filter((item) => item.key !== key))
   }, [])
 
-  return { ripples, onClick: handlerAll(onClick, props.onClick), onClear }
+  return {
+    ripples,
+    onPointerDown: handlerAll(onPointerDown, props.onPointerDown),
+    onClear,
+  }
 }
 
 export type UseRippleReturn = ReturnType<typeof useRipple>

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/radio",
-  "version": "0.5.5",
+  "version": "0.5.8",
   "description": "Yamada UI radio component",
   "keywords": [
     "yamada",
@@ -69,6 +69,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

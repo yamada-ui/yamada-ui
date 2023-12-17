@@ -34,8 +34,19 @@ export const ColorModeContext = createContext({} as ColorModeContext)
 
 export type ColorModeProviderProps = {
   colorMode?: ColorMode
+  /**
+   * The config of the yamada ui.
+   */
   config?: ThemeConfig
   children?: ReactNode
+  /**
+   * Manager to persist a user's color mode preference.
+   *
+   * Omit if you don't render server-side.
+   * For SSR, choose `colorModeManager.ssr`.
+   *
+   * @default 'colorModeManager.localStorage'
+   */
   colorModeManager?: ColorModeManager
 }
 

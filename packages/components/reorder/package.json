@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/reorder",
-  "version": "0.3.22",
+  "version": "0.3.25",
   "description": "Yamada UI reorder component",
   "keywords": [
     "yamada",
@@ -67,6 +67,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

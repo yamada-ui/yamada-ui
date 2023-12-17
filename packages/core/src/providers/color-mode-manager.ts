@@ -57,13 +57,27 @@ const createCookieStorage = (
   },
 })
 
-const cookieStorageSSR = (cookie: string) =>
-  createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie)
+export const createColorModeManager = (
+  type: "local" | "cookie" | "ssr" = "local",
+  cookie?: string,
+) => {
+  switch (type) {
+    case "cookie":
+    case "ssr":
+      return createCookieStorage(
+        COLOR_MODE_STORAGE_KEY,
+        typeof cookie === "string" ? cookie : undefined,
+      )
+
+    default:
+      return createLocalStorage(COLOR_MODE_STORAGE_KEY)
+  }
+}
 
 export const colorModeManager = {
   localStorage: createLocalStorage(COLOR_MODE_STORAGE_KEY),
   cookieStorage: createCookieStorage(COLOR_MODE_STORAGE_KEY),
+  ssr: (cookie: string) => createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie),
   createLocalStorage,
-  cookieStorageSSR,
   createCookieStorage,
 }

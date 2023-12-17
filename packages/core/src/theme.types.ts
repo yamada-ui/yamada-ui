@@ -234,7 +234,7 @@ export type ThemeConfig = {
      * The locale of the calendar or date picker etc.
      * Check the docs to see the locale of possible modifiers you can pass.
      *
-     * @see Doc https://day.js.org/docs/en/i18n/instance-locale
+     * @see Docs https://day.js.org/docs/en/i18n/instance-locale
      * @default 'en'
      */
     locale?: string
@@ -271,7 +271,7 @@ export type ThemeConfig = {
      * The variants of the notice.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Doc https://www.framer.com/motion/animation/#variants
+     * @see Docs https://www.framer.com/motion/animation/#variants
      */
     variants?: Variants
     /**

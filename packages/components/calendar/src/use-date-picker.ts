@@ -77,7 +77,7 @@ type UseDatePickerBaseProps = Omit<
      * The format used for conversion.
      * Check the docs to see the format of possible modifiers you can pass.
      *
-     * @see Doc https://day.js.org/docs/en/display/format#list-of-localized-formats
+     * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
      * @default 'YYYY/MM/DD'
      */
     inputFormat?: string

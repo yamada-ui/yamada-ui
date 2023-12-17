@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-boolean",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Yamada UI useBoolean custom hook",
   "keywords": [
     "use-boolean"
@@ -49,6 +49,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

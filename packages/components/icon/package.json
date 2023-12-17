@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/icon",
-  "version": "0.3.21",
+  "version": "0.3.24",
   "description": "Yamada UI icon components",
   "keywords": [
     "yamada",
@@ -66,6 +66,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

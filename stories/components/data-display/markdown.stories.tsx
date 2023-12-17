@@ -44,8 +44,8 @@ export const WithNoteComponents: Story = () => {
 }
 
 const NOTE_COMPONENTS = `
-:::note 
-Status is notiong.
+:::note
+Status is noting.
 There is a line break.
 :::
 
@@ -86,16 +86,21 @@ const README = `
   </a>
 </p>
 
+<p align='center'>
+  English | <a href='./README.ja.md'>日本語</a>
+</p>
+
 Yamada UI is a React UI component library that streamlines the development of cutting-edge web applications and websites. This library offers a diverse range of components that can be easily combined to construct complex user interfaces, incorporating various features such as color modes and animations, which are not typically supported by other React UI component libraries.
 
 ## Contents
 
 - [Respect](#respect)
-- [Documentation](#documentation)
+- [Documentation](https://yamada-ui.com)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [CodeSandbox](#codesandbox)
+- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -105,7 +110,7 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 ## Documentation
 
-Currently, the documentation is only available in [Storybook](https://hirotomoyamada.github.io/yamada-ui/). However, Storybook contains usage instructions for each prop of all the components.
+It's the https://yamada-ui.com website for the latest version of Yamada UI.
 
 ## Features
 
@@ -172,7 +177,7 @@ To get started with using the components, please follow the steps below:
 1. Wrap your application with the \`UIProvider\` provided
 
 \`\`\`tsx
-import { UIProvider } from '@yamada-ui/react'
+import { UIProvider } from "@yamada-ui/react"
 
 const App = ({ children }) => {
   return <UIProvider>{children}</UIProvider>
@@ -186,7 +191,7 @@ Yamada UI supports light and dark modes by default
 2. Now you can start using components like so
 
 \`\`\`tsx
-import { Box, Text } from '@yamada-ui/react'
+import { Box, Text } from "@yamada-ui/react"
 
 const Example = () => {
   return (
@@ -207,6 +212,8 @@ const Example = () => {
 ## Contributing
 
 Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
+
+The documentation site for Yamada UI is located in a separate [repository](https://github.com/hirotomoyamada/yamada-docs). If you're interested in contributing to the documentation, please refer to this [contribution guide](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.md).
 
 ## License
 

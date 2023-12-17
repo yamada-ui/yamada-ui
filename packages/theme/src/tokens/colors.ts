@@ -1,11 +1,5 @@
 export type Colors = typeof colors
 
-// Google Color
-// red: #ea4435
-// blue: #4285f4
-// green: #3cc360
-// yellow: #fbbc04
-
 export const colors = {
   transparent: "transparent",
   current: "currentColor",

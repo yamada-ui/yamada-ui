@@ -1,5 +1,52 @@
 # @yamada-ui/autocomplete
 
+## 0.8.2
+
+### Patch Changes
+
+- Updated dependencies [[`c874f8f`](https://github.com/hirotomoyamada/yamada-ui/commit/c874f8f9845dba67d33c6b78721f7d5b1ac266bb)]:
+  - @yamada-ui/core@0.14.2
+  - @yamada-ui/popover@0.3.31
+  - @yamada-ui/form-control@0.3.27
+  - @yamada-ui/icon@0.3.24
+  - @yamada-ui/select@0.6.2
+
+## 0.8.1
+
+### Patch Changes
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Include source map in package.
+
+- Updated dependencies [[`019fdc9`](https://github.com/hirotomoyamada/yamada-ui/commit/019fdc9e0efce9f944eb9705b664dcf2c425bb25), [`b2efd19`](https://github.com/hirotomoyamada/yamada-ui/commit/b2efd19c42afb546dcdf97e48fb5847942784113), [`0a5b293`](https://github.com/hirotomoyamada/yamada-ui/commit/0a5b2937da6547be13c117f5efbadbb2a79eeb16), [`cfb3401`](https://github.com/hirotomoyamada/yamada-ui/commit/cfb34018d5fe0242f9312b0b32bea91d4f6721d9), [`35854a5`](https://github.com/hirotomoyamada/yamada-ui/commit/35854a5da8e43976b8699c0e82f573fff02f8592), [`fe6da2a`](https://github.com/hirotomoyamada/yamada-ui/commit/fe6da2ad1c7fb0abc8ebc924a21eeba0b06a7ae0), [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686), [`c34136a`](https://github.com/hirotomoyamada/yamada-ui/commit/c34136a0e74354e67e1371357eace3e668dd3b83), [`2ab14b0`](https://github.com/hirotomoyamada/yamada-ui/commit/2ab14b0775560f1701f5b2cb4b34ec3f433c9438), [`8692124`](https://github.com/hirotomoyamada/yamada-ui/commit/86921243869ab941df915fe703a15fec43e8dd42), [`4dfc51e`](https://github.com/hirotomoyamada/yamada-ui/commit/4dfc51e8fb9c26d6280765935f20129e8edc0638)]:
+  - @yamada-ui/core@0.14.1
+  - @yamada-ui/utils@0.5.0
+  - @yamada-ui/use-controllable-state@0.4.3
+  - @yamada-ui/form-control@0.3.26
+  - @yamada-ui/use-outside-click@0.2.9
+  - @yamada-ui/use-descendant@0.2.10
+  - @yamada-ui/use-clickable@0.3.9
+  - @yamada-ui/popover@0.3.30
+  - @yamada-ui/portal@0.3.10
+  - @yamada-ui/select@0.6.1
+  - @yamada-ui/icon@0.3.23
+
+## 0.8.0
+
+### Minor Changes
+
+- [#440](https://github.com/hirotomoyamada/yamada-ui/pull/440) [`b7b02d2`](https://github.com/hirotomoyamada/yamada-ui/commit/b7b02d2f799bbce45242ea33a7a99ed50db27a72) Thanks [@teru12012000](https://github.com/teru12012000)! - Added `Portal` component to allow `PopoverContent` transfer.
+
+### Patch Changes
+
+- [#436](https://github.com/hirotomoyamada/yamada-ui/pull/436) [`10445b1`](https://github.com/hirotomoyamada/yamada-ui/commit/10445b1311de039fea6cf89323b2648ade1d754a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that caused the list to display incorrectly when `allowFree` was true.
+
+- Updated dependencies [[`13eb95c`](https://github.com/hirotomoyamada/yamada-ui/commit/13eb95cf198109599d94f782114afc8835d0e42a), [`c853190`](https://github.com/hirotomoyamada/yamada-ui/commit/c853190da3a02ce4d545fb9eeb9f227704dbb2ff)]:
+  - @yamada-ui/select@0.6.0
+  - @yamada-ui/core@0.14.0
+  - @yamada-ui/form-control@0.3.25
+  - @yamada-ui/icon@0.3.22
+  - @yamada-ui/popover@0.3.29
+
 ## 0.7.4
 
 ### Patch Changes

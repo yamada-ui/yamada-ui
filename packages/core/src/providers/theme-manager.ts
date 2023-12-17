@@ -62,13 +62,28 @@ const createCookieStorage = (
   },
 })
 
-const cookieStorageSSR = (cookie: string) =>
-  createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie)
+export const createThemeSchemeManager = (
+  type: "local" | "cookie" | "ssr" = "local",
+  cookie?: string,
+) => {
+  switch (type) {
+    case "cookie":
+    case "ssr":
+      return createCookieStorage(
+        THEME_SCHEME_STORAGE_KEY,
+        typeof cookie === "string" ? cookie : undefined,
+      )
+
+    default:
+      return createLocalStorage(THEME_SCHEME_STORAGE_KEY)
+  }
+}
 
 export const themeSchemeManager = {
   localStorage: createLocalStorage(THEME_SCHEME_STORAGE_KEY),
   cookieStorage: createCookieStorage(THEME_SCHEME_STORAGE_KEY),
+  ssr: (cookie: string) =>
+    createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie),
   createLocalStorage,
-  cookieStorageSSR,
   createCookieStorage,
 }

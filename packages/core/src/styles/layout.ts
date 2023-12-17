@@ -7,6 +7,7 @@ export const layout: Configs = {
   width: configs.sizeTransform("width"),
   inlineSize: configs.sizeTransform("inlineSize"),
   height: configs.size("height"),
+  backfaceVisibility: true,
   blockSize: configs.size("blockSize"),
   boxSize: configs.size(["width", "height"]),
   minWidth: configs.size("minWidth"),
@@ -36,6 +37,9 @@ export const layout: Configs = {
   objectPosition: true,
   visibility: true,
   isolation: true,
+  breakAfter: true,
+  breakBefore: true,
+  breakInside: true,
 }
 
 Object.assign(layout, {
@@ -193,6 +197,10 @@ export type LayoutProps = {
    */
   visibility?: Token<CSS.Property.Visibility>
   /**
+   * The CSS `backface-visibility` property.
+   */
+  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility>
+  /**
    * The CSS `isolation` property.
    */
   isolation?: Token<CSS.Property.Isolation>
@@ -200,4 +208,16 @@ export type LayoutProps = {
    * The CSS `aspect-ratio` property.
    */
   aspectRatio?: Token<CSS.Property.AspectRatio>
+  /**
+   * The CSS `break-after` property.
+   */
+  breakAfter?: Token<CSS.Property.BreakAfter>
+  /**
+   * The CSS `break-before` property.
+   */
+  breakBefore?: Token<CSS.Property.BreakBefore>
+  /**
+   * The CSS `break-inside` property.
+   */
+  breakInside?: Token<CSS.Property.BreakInside>
 }

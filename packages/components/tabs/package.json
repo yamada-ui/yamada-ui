@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/tabs",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "description": "Yamada UI tabs component",
   "keywords": [
     "yamada",
@@ -70,6 +70,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

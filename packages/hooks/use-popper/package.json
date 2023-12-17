@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-popper",
-  "version": "0.4.21",
+  "version": "0.4.24",
   "description": "Yamada UI usePopper custom hook",
   "keywords": [
     "use-popper"
@@ -55,6 +55,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

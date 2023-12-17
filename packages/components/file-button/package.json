@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/file-button",
-  "version": "0.3.27",
+  "version": "0.3.30",
   "description": "Yamada UI file button component",
   "keywords": [
     "yamada",
@@ -67,6 +67,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

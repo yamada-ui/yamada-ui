@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/notice",
-  "version": "0.5.12",
+  "version": "0.5.15",
   "description": "Yamada UI notice component",
   "keywords": [
     "yamada",
@@ -70,6 +70,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

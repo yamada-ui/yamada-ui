@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-media-query",
-  "version": "0.2.33",
+  "version": "0.2.36",
   "description": "Yamada UI useMediaQuery custom hook",
   "keywords": [
     "use-media-query"
@@ -53,6 +53,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

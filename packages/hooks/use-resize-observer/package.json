@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-resize-observer",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Yamada UI useResizeObserver custom hook",
   "keywords": [
     "use-resize-observer"
@@ -52,6 +52,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

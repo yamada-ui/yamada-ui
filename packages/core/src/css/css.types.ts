@@ -1,5 +1,6 @@
 import type * as CSS from "csstype"
-import type { StyleProps, PseudosProps } from "../styles"
+import type { PseudosProps } from "../pseudos"
+import type { StyleProps } from "../styles"
 import type { Theme, StyledTheme } from "../theme.types"
 
 export type * as CSS from "csstype"

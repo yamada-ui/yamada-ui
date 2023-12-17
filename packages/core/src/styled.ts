@@ -20,7 +20,8 @@ import { shouldForwardProp } from "./components"
 import type { CSSUIProps, CSSUIObject } from "./css"
 import { css } from "./css"
 import { useColorMode } from "./providers"
-import { styles, pseudos } from "./styles"
+import { pseudos } from "./pseudos"
+import { styles } from "./styles"
 
 const emotionStyled = interopDefault(createStyled)
 

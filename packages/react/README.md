@@ -1,12 +1,20 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
 </p>
 
 <p align="center">
+  <img alt="NPM Minzip" src="https://img.shields.io/bundlephobia/minzip/@yamada-ui/react"/>
+  <a href="https://www.npmjs.com/package/@yamada-ui/react">
+    <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
+  </a>
+  <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
   <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
-  <img alt="Github Stars" src="https://badgen.net/github/stars/hirotomoyamada/yamada-ui" />
+  <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
+  <a href="https://discord.gg/ubYvRAxFEB">
+    <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
+  </a>
 </p>
 
 Yamada UI is a React UI component library that streamlines the development of cutting-edge web applications and websites. This library offers a diverse range of components that can be easily combined to construct complex user interfaces, incorporating various features such as color modes and animations, which are not typically supported by other React UI component libraries.
@@ -14,10 +22,12 @@ Yamada UI is a React UI component library that streamlines the development of cu
 ## Contents
 
 - [Respect](#respect)
-- [Documentation](#documentation)
+- [Documentation](https://yamada-ui.com)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [CodeSandbox](#codesandbox)
+- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -27,7 +37,7 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 ## Documentation
 
-Currently, the documentation is only available in [Storybook](https://hirotomoyamada.github.io/yamada-ui/). However, Storybook contains usage instructions for each prop of all the components.
+It's the https://yamada-ui.com website for the latest version of Yamada UI.
 
 ## Features
 
@@ -48,20 +58,43 @@ Currently, the documentation is only available in [Storybook](https://hirotomoya
 
 ## Installation
 
+To use Yamada UI components, all you need to install the
+`@yamada-ui/react` package.
+
 ```sh
 $ pnpm add @yamada-ui/react
-```
 
-or
+# or
 
-```sh
 $ yarn add @yamada-ui/react
+
+# or
+
+$ npm install @yamada-ui/react
 ```
 
-or
+`@yamada-ui/table` and `@yamada-ui/calendar`, among others,
+are not included with `@yamada-ui/react`.
+You will need to install them separately.
 
 ```sh
-$ npm install @yamada-ui/react
+# Provide a convenient Table component using `@tanstack/react-table`.
+$ pnpm add @yamada-ui/table
+
+# Provide a convenient Calendar and datePicker, MonthPicker component
+$ pnpm add @yamada-ui/calendar
+
+# Provide a convenient Carousel component using `embla-carousel-react`.
+$ pnpm add @yamada-ui/carousel
+
+# Provide a convenient Dropzone component using `react-dropzone`.
+$ pnpm add @yamada-ui/dropzone
+
+# Provide a convenient Markdown component using `react-markdown` and `react-syntax-highlighter`.
+$ pnpm add @yamada-ui/markdown
+
+# a package for conveniently using `Font Awesome`.
+$ pnpm add @yamada-ui/fontawesome
 ```
 
 ## Usage
@@ -96,11 +129,19 @@ const Example = () => {
 }
 ```
 
-## Contribution
+## CodeSandbox
+
+- [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
+- [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
+- [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
+- [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
+
+## Contributing
 
 Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](https://github.com/hirotomoyamada/yamada-ui/blob/main/CONTRIBUTING.md) to assist you.
 
+The documentation site for Yamada UI is located in a separate [repository](https://github.com/hirotomoyamada/yamada-docs). If you're interested in contributing to the documentation, please refer to this [contribution guide](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.md).
+
 ## License
 
-This package is licensed under the terms of the
-[MIT license](https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE).
+MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)

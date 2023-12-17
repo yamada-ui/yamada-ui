@@ -190,7 +190,7 @@ const excludeProperties = (
 }
 
 const main = async () => {
-  p.intro(`Generating Yamada UI styles`)
+  p.intro(c.magenta(`Generating Yamada UI styles`))
 
   const s = p.spinner()
 

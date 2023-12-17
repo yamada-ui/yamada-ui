@@ -113,8 +113,8 @@ const createTokens = (
 
   switch (target) {
     case "primary":
-      defaultTokens = [...primaryTokens]
-      semanticTokens = [...primaryTokens, "colorSchemes"]
+      defaultTokens = [...primaryTokens, "transitions"]
+      semanticTokens = [...primaryTokens, "transitions", "colorSchemes"]
 
       break
 

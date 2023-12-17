@@ -7,17 +7,19 @@ const insertTransform = (
   token: ThemeToken | undefined,
   transform: Union<TransformOptions>,
 ) => {
-  if (typeof transform !== "string") {
-    let { first, second, args = "" } = transform
+  let result = transform
 
-    if (second) args = `transforms.${second}`
+  if (typeof result !== "string") {
+    let { transform, additionalTransform, args = "" } = result
 
-    transform = `${first}(${args})`
+    if (additionalTransform) args = `transforms.${additionalTransform}`
+
+    result = `${transform}(${args})`
   }
 
-  if (token) transform = `token("${token}", transforms.${transform})`
+  if (token) result = `token("${token}", transforms.${result})`
 
-  config = [...config, `transform: transforms.${transform}`]
+  config = [...config, `transform: transforms.${result}`]
 
   return config
 }

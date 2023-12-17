@@ -96,119 +96,119 @@ export const uiProps = createUIProps({
     ],
   },
   filter: {
-    transform: { first: "filter" },
+    transform: { transform: "filter" },
     type: `CSS.Property.Filter | "auto"`,
     description: ["The CSS `filter` property."],
   },
   blur: {
     properties: "--ui-blur",
-    transform: { first: "function", args: `"blur"` },
+    transform: { transform: "function", args: `"blur"` },
     description: ["If `filter=auto`, sets the value of `--ui-blur`."],
   },
   brightness: {
     properties: "--ui-brightness",
-    transform: { first: "function", args: `"brightness"` },
+    transform: { transform: "function", args: `"brightness"` },
     description: ["If `filter=auto`, sets the value of `--ui-brightness`."],
   },
   contrast: {
     properties: "--ui-contrast",
-    transform: { first: "function", args: `"contrast"` },
+    transform: { transform: "function", args: `"contrast"` },
     description: ["If `filter=auto`, sets the value of `--ui-contrast`."],
   },
   dropShadow: {
     properties: "--ui-drop-shadow",
-    transform: { first: "function", args: `"drop-shadow"` },
+    transform: { transform: "function", args: `"drop-shadow"` },
     description: ["If `filter=auto`, sets the value of `--ui-drop-shadow`."],
   },
   grayscale: {
     properties: "--ui-grayscale",
-    transform: { first: "function", args: `"grayscale"` },
+    transform: { transform: "function", args: `"grayscale"` },
     description: ["If `filter=auto`, sets the value of `--ui-grayscale`."],
   },
   hueRotate: {
     properties: "--ui-hue-rotate",
-    transform: { first: "function", args: `"hue-rotate", transforms.deg` },
+    transform: { transform: "function", args: `"hue-rotate", transforms.deg` },
     description: ["If `filter=auto`, sets the value of `--ui-hue-rotate`."],
   },
   invert: {
     properties: "--ui-invert",
-    transform: { first: "function", args: `"invert"` },
+    transform: { transform: "function", args: `"invert"` },
     description: ["If `filter=auto`, sets the value of `--ui-invert`."],
   },
   saturate: {
     properties: "--ui-saturate",
-    transform: { first: "function", args: `"saturate"` },
+    transform: { transform: "function", args: `"saturate"` },
     description: ["If `filter=auto`, sets the value of `--ui-saturate`."],
   },
   sepia: {
     properties: "--ui-sepia",
-    transform: { first: "function", args: `"sepia"` },
+    transform: { transform: "function", args: `"sepia"` },
     description: ["If `filter=auto`, sets the value of `--ui-sepia`."],
   },
   backdropFilter: {
-    transform: { first: "filter", args: `"backdrop"` },
+    transform: { transform: "filter", args: `"backdrop"` },
     type: `CSS.Property.BackdropFilter | "auto"`,
     description: ["The CSS `backdrop-filter` property."],
   },
   backdropBlur: {
     properties: "--ui-backdrop-blur",
-    transform: { first: "function", args: `"blur"` },
+    transform: { transform: "function", args: `"blur"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.",
     ],
   },
   backdropBrightness: {
     properties: "--ui-backdrop-brightness",
-    transform: { first: "function", args: `"brightness"` },
+    transform: { transform: "function", args: `"brightness"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.",
     ],
   },
   backdropContrast: {
     properties: "--ui-backdrop-contrast",
-    transform: { first: "function", args: `"contrast"` },
+    transform: { transform: "function", args: `"contrast"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.",
     ],
   },
   backdropDropShadow: {
     properties: "--ui-backdrop-drop-shadow",
-    transform: { first: "function", args: `"drop-shadow"` },
+    transform: { transform: "function", args: `"drop-shadow"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.",
     ],
   },
   backdropGrayscale: {
     properties: "--ui-backdrop-grayscale",
-    transform: { first: "function", args: `"grayscale"` },
+    transform: { transform: "function", args: `"grayscale"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.",
     ],
   },
   backdropHueRotate: {
     properties: "--ui-backdrop-hue-rotate",
-    transform: { first: "function", args: `"hue-rotate", transforms.deg` },
+    transform: { transform: "function", args: `"hue-rotate", transforms.deg` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.",
     ],
   },
   backdropInvert: {
     properties: "--ui-backdrop-invert",
-    transform: { first: "function", args: `"invert"` },
+    transform: { transform: "function", args: `"invert"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.",
     ],
   },
   backdropSaturate: {
     properties: "--ui-backdrop-saturate",
-    transform: { first: "function", args: `"saturate"` },
+    transform: { transform: "function", args: `"saturate"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.",
     ],
   },
   backdropSepia: {
     properties: "--ui-backdrop-sepia",
-    transform: { first: "function", args: `"sepia"` },
+    transform: { transform: "function", args: `"sepia"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.",
     ],
@@ -231,17 +231,17 @@ export const uiProps = createUIProps({
     description: ["If `true`, it clamps truncate a text after one line."],
   },
   layerStyle: {
-    transform: { first: "styles", args: `"layerStyles"` },
+    transform: { transform: "styles", args: `"layerStyles"` },
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
   },
   textStyle: {
-    transform: { first: "styles", args: `"textStyles"` },
+    transform: { transform: "styles", args: `"textStyles"` },
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
   },
   apply: {
-    transform: { first: "styles" },
+    transform: { transform: "styles" },
     description: [
       "Apply other styles defined in `theme.styles`.",
       "",

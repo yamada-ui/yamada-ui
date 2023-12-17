@@ -3,7 +3,11 @@ import type { CSSProperties, UIProperties } from "."
 
 export type TransformOptions =
   | Transforms
-  | { first: Transforms; second?: Union<Transforms>; args?: string }
+  | {
+      transform: Transforms
+      additionalTransform?: Union<Transforms>
+      args?: string
+    }
 
 type TransformProp = {
   properties: CSSProperties | UIProperties
@@ -124,7 +128,10 @@ export const transformMap = Object.entries(transformProps).reduce(
         prev[item] = key as Transforms
       } else {
         const { properties, transform } = item
-        prev[properties] = { first: key as Transforms, second: transform }
+        prev[properties] = {
+          transform: key as Transforms,
+          additionalTransform: transform,
+        }
       }
     })
 

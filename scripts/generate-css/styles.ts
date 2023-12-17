@@ -4,6 +4,7 @@ import { getConfig } from "./config"
 import { layoutStylesProperties } from "./layout-props"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap } from "./tokens"
+import type { TransformOptions } from "./transform-props"
 import { transformMap } from "./transform-props"
 import type { UIOptions } from "./ui-props"
 import { uiProps } from "./ui-props"
@@ -12,8 +13,21 @@ import { OUT_PATH, type CSSProperty, type UIProperties } from "."
 
 const computedType = (
   type: string | string[],
-  token: ThemeToken | undefined,
+  token?: ThemeToken,
+  transform?: TransformOptions,
 ) => {
+  const isPx =
+    transform === "px" ||
+    (typeof transform !== "string" &&
+      (transform?.transform === "px" ||
+        transform?.additionalTransform === "px"))
+  const isFraction =
+    transform === "fraction" ||
+    (typeof transform !== "string" &&
+      (transform?.transform === "fraction" ||
+        transform?.additionalTransform === "fraction"))
+  const isNumber = isPx || isFraction
+
   let result = ""
 
   if (typeof type === "string") {
@@ -25,6 +39,8 @@ const computedType = (
       result = "Token<StringLiteral>"
     }
   }
+
+  if (isNumber) result = result.replace(/>$/, ` | number>`)
 
   if (token) {
     let resolvedToken: string = token
@@ -95,7 +111,7 @@ export const generateStyles = async (
     const shorthands = shorthandProps[prop]
     const transform = transformMap[prop]
     const config = getConfig({ properties: prop, token, transform })
-    type = computedType(type, token)
+    type = computedType(type, token, transform)
     const docs = generateDocs({ properties: name, url, deprecated })
 
     standardStyles = [...standardStyles, `${prop}: ${config}`]
@@ -128,7 +144,7 @@ export const generateStyles = async (
       const shorthands = shorthandProps[prop as UIProperties]
       transform ??= transformMap[prop as UIProperties]
       const config = getConfig({ properties, token, transform, css })
-      type = computedType(type ?? types, token)
+      type = computedType(type ?? types, token, transform)
       const docs = generateDocs({ properties, description })
 
       standardStyles = [...standardStyles, `${prop}: ${config}`]

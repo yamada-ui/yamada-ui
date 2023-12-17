@@ -17,6 +17,6 @@ export const semantics: ThemeSemantics = {
     success: "green",
     warning: "orange",
     danger: "red",
-    link: "sky",
+    link: "blue",
   },
 }

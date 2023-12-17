@@ -9,7 +9,6 @@ export const SEO = ({ title, description }: SEOProps) => (
   <NextSeo
     title={title}
     description={description}
-    openGraph={{ title, description }}
-    titleTemplate={CONSTANT.SEO.TITLE_TEMPLATE}
+    {...CONSTANT.SEO.NEXT_SEO_PROPS}
   />
 )

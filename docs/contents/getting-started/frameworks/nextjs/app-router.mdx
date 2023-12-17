@@ -101,12 +101,8 @@ To make the color mode work properly, you need to add `ColorModeScript` inside t
 
 This is because the color mode is implemented using `localStorage` or `cookies`, and it needs to synchronize correctly at the time of page loading.
 
-```tsx live=false title=layout.tsx highlight={3,4,15,17}
-import {
-  UIProvider,
-  colorModeCookieStorageManager,
-  ColorModeScript,
-} from "@yamada-ui/react"
+```tsx live=false title=layout.tsx highlight={1,11,13}
+import { UIProvider, colorModeManager, ColorModeScript } from "@yamada-ui/react"
 
 export default function RootLayout({
   children,
@@ -118,7 +114,7 @@ export default function RootLayout({
       <body>
         <ColorModeScript type="cookie" nonce="testing" />
 
-        <UIProvider colorModeManager={colorModeCookieStorageManager}>
+        <UIProvider colorModeManager={{ ...colorModeManager }.cookieStorage}>
           {children}
         </UIProvider>
       </body>
@@ -128,7 +124,7 @@ export default function RootLayout({
 ```
 
 :::note status=warning
-Please pass the same `initialColorMode` to `props` as in your config. If you have your own config, pass its `initialColorMode`.
+`colorModeManager` requires shallow copying of the object using the spread syntax or similar methods. This may be due to a bug in `react-server-dom-webpack` and is a temporary approach until it is fixed.
 :::
 
 ## Use components

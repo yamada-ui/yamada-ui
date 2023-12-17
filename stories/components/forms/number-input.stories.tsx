@@ -151,7 +151,7 @@ export const isInvalid: Story = () => {
   )
 }
 
-export const costomStepper: Story = () => {
+export const customStepper: Story = () => {
   return (
     <NumberInput
       incrementProps={{ px: "xs", children: "+" }}
@@ -160,7 +160,7 @@ export const costomStepper: Story = () => {
   )
 }
 
-export const costomComponent: Story = () => {
+export const customComponent: Story = () => {
   const { getInputProps, getIncrementProps, getDecrementProps } =
     useNumberInput({
       step: 0.01,

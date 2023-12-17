@@ -111,8 +111,6 @@ export const tokens: Tokens = {
     "gap",
     "rowGap",
     "columnGap",
-    "gridColumnGap",
-    "gridRowGap",
     "scrollMargin",
     "scrollMarginTop",
     "scrollMarginBottom",

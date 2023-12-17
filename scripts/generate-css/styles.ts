@@ -1,6 +1,7 @@
 import { writeFile } from "fs/promises"
 import type { ThemeToken } from "@yamada-ui/react"
 import { getConfig } from "./config"
+import { layoutStylesProperties } from "./layout-props"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap } from "./tokens"
 import { transformMap } from "./transform-props"
@@ -87,7 +88,7 @@ export const generateStyles = async (
     const docs = generateDocs({ properties: name, url, deprecated })
 
     standardStyles = [...standardStyles, `${prop}: ${config}`]
-    styleProps = [...styleProps, ...[docs, `${prop}: ${type}`]]
+    styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
 
     if (shorthands) {
       const shorthandStyle =
@@ -98,7 +99,7 @@ export const generateStyles = async (
           ...shorthandStyles,
           `${shorthandProp}: ${shorthandStyle}`,
         ]
-        styleProps = [...styleProps, ...[docs, `${shorthandProp}: ${type}`]]
+        styleProps = [...styleProps, ...[docs, `${shorthandProp}?: ${type}`]]
       })
     }
   })
@@ -120,7 +121,7 @@ export const generateStyles = async (
       const docs = generateDocs({ properties, description })
 
       standardStyles = [...standardStyles, `${prop}: ${config}`]
-      styleProps = [...styleProps, ...[docs, `${prop}: ${type}`]]
+      styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
 
       if (shorthands) {
         const shorthandStyle =
@@ -133,7 +134,7 @@ export const generateStyles = async (
             ...shorthandStyles,
             `${shorthandProp}: ${shorthandStyle}`,
           ]
-          styleProps = [...styleProps, ...[docs, `${shorthandProp}: ${type}`]]
+          styleProps = [...styleProps, ...[docs, `${shorthandProp}?: ${type}`]]
         })
       }
     },
@@ -142,9 +143,9 @@ export const generateStyles = async (
   const content = `
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
-    import type { Token } from "./css"
     import type { Configs } from "./config"
     import { transforms } from "./config"
+    import type { Token } from "./css"
 
     export const standardStyles: Configs = {
       ${standardStyles.join(",\n")}
@@ -157,6 +158,8 @@ export const generateStyles = async (
     export const styles: Configs = { ...standardStyles, ...shorthandStyles }
 
     export const stylesProperties: any[] = Object.keys(styles)
+
+    export const layoutStylesProperties: any[] = [${layoutStylesProperties}]
 
     export type StyleProps = {
       ${styleProps.join("\n")}

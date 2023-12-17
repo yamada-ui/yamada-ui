@@ -658,7 +658,25 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
           __css={css}
           {...containerProps}
         >
-          <NumberInputField {...getInputProps(rest, ref)} />
+          <NumberInputField
+            {...getInputProps(
+              omitObject(rest, [
+                "keepWithinRange",
+                "clampValueOnBlur",
+                "isDisabled",
+                "isReadOnly",
+                "isRequired",
+                "isInvalid",
+                "allowMouseWheel",
+                "onInvalid",
+                "getAriaValueText",
+                "isValidCharacter",
+                "parse",
+                "format",
+              ]),
+              ref,
+            )}
+          />
 
           {isStepper ? (
             <NumberInputAddon {...addonProps}>

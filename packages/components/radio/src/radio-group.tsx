@@ -62,7 +62,6 @@ export const useRadioGroup = <Y extends string | number = string>({
   id,
   name,
   isNative,
-
   ...props
 }: UseRadioGroupProps<Y>) => {
   id ??= useId()

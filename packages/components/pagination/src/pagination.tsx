@@ -72,7 +72,7 @@ type PaginationOptions = {
 
 export type PaginationProps = Omit<
   HTMLUIProps<"div">,
-  "onChange" | "children"
+  "onChange" | "children" | "page"
 > &
   ThemeProps<"Pagination"> &
   UsePaginationProps &

@@ -129,7 +129,7 @@ type PinInputOptions = {
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
 }
 
-export type PinInputProps = Omit<HTMLUIProps<"div">, "onChange"> &
+export type PinInputProps = Omit<HTMLUIProps<"div">, "onChange" | "mask"> &
   ThemeProps<"PinInput"> &
   FormControlOptions &
   PinInputOptions

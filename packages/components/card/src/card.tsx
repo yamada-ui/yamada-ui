@@ -27,7 +27,7 @@ type CardOptions = {
   align?: CSSUIObject["alignItems"]
 }
 
-export type CardProps = HTMLUIProps<"article"> &
+export type CardProps = Omit<HTMLUIProps<"article">, "direction"> &
   ThemeProps<"Card"> &
   CardOptions
 

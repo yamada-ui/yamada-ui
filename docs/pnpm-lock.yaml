@@ -163,9 +163,6 @@ devDependencies:
   openai:
     specifier: ^4.17.4
     version: 4.20.1
-  ora:
-    specifier: ^7.0.1
-    version: 7.0.1
   plop:
     specifier: ^4.0.0
     version: 4.0.0

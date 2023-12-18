@@ -38,11 +38,11 @@ type Props = Record<
     shorthands?: string[]
     properties: string[]
     token?: string
-    url?: string
+    urls?: string[]
     deprecated?: boolean
   }
 >
-type JSDocs = Record<string, { url?: string; deprecated?: boolean }>
+type JSDocs = Record<string, { urls?: string[]; deprecated?: boolean }>
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
   "packages",
@@ -96,6 +96,14 @@ const isStringObject = (value: string) => /^{|}$/.test(value)
 
 const hasJSDoc = (node: any): node is { jsDoc: JSDoc[] } => "jsDoc" in node
 
+const sortObject = (obj: Record<string, any>) =>
+  Object.keys(obj)
+    .sort()
+    .reduce(
+      (prev, key) => ({ ...prev, [key]: obj[key] }),
+      {} as Record<string, any>,
+    )
+
 const getProps: p.RequiredRunner = (type: Type) => async (p, s) => {
   s.start(`Getting the Yamada UI ${type} props`)
 
@@ -139,7 +147,8 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
           const tag = tagName.getText(sourceFile)
 
           if (tag === "deprecated") data.deprecated = true
-          if (tag === "see") data.url = comment as string
+          if (tag === "see")
+            data.urls = [...(data.urls ?? []), comment as string]
         }),
     )
 
@@ -241,10 +250,10 @@ const parseProps: p.RequiredRunner =
       }
     })
 
-    Object.entries(jsDocs).forEach(([prop, { url, deprecated }]) => {
+    Object.entries(jsDocs).forEach(([prop, { urls, deprecated }]) => {
       if (!props[prop]) return
 
-      props[prop].url = url
+      props[prop].urls = urls
       props[prop].deprecated = deprecated
     })
 
@@ -284,8 +293,10 @@ const generateTable = (props: Props) => (locale: Locale) => {
     ]
   }
 
+  props = sortObject(props)
+
   const rows = Object.entries(props).map(
-    ([prop, { properties, shorthands, token, url }]) => {
+    ([prop, { properties, shorthands, token, urls }]) => {
       let columns: string[] = []
 
       const props = [prop, ...(shorthands ?? [])]
@@ -298,9 +309,11 @@ const generateTable = (props: Props) => (locale: Locale) => {
       columns = [
         ...columns,
         properties
-          .map((property) =>
-            !url ? `\`${property}\`` : `[${property}](${url})`,
-          )
+          .map((property) => {
+            const url = urls?.find((url) => url.endsWith(property))
+
+            return !url ? `\`${property}\`` : `[${property}](${url})`
+          })
           .join(" + "),
       ]
 

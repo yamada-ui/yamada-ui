@@ -7,14 +7,16 @@ import c from "chalk"
 import { config } from "dotenv"
 import matter from "gray-matter"
 import type { GrayMatterFile } from "gray-matter"
+import type { JSDoc, SourceFile, TypeAliasDeclaration } from "typescript"
 import {
   ScriptTarget,
   createSourceFile,
   isIdentifier,
-  isInterfaceDeclaration,
   isObjectLiteralExpression,
   isPropertyAssignment,
+  isPropertySignature,
   isTypeAliasDeclaration,
+  isTypeLiteralNode,
   isVariableStatement,
 } from "typescript"
 import { CONSTANT } from "constant"
@@ -32,8 +34,15 @@ type Locale = (typeof LOCALES)[number]
 type Type = "style" | "pseudo"
 type Props = Record<
   string,
-  { shorthands?: string[]; properties: string[]; token?: string }
+  {
+    shorthands?: string[]
+    properties: string[]
+    token?: string
+    url?: string
+    deprecated?: boolean
+  }
 >
+type JSDocs = Record<string, { url?: string; deprecated?: boolean }>
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
   "packages",
@@ -83,6 +92,10 @@ const CONTENT_FOOTER = {
   ],
 }
 
+const isStringObject = (value: string) => /^{|}$/.test(value)
+
+const hasJSDoc = (node: any): node is { jsDoc: JSDoc[] } => "jsDoc" in node
+
 const getProps: p.RequiredRunner = (type: Type) => async (p, s) => {
   s.start(`Getting the Yamada UI ${type} props`)
 
@@ -103,6 +116,66 @@ const getProps: p.RequiredRunner = (type: Type) => async (p, s) => {
   }
 }
 
+const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
+  const type = node.type
+
+  const props: JSDocs = {}
+
+  if (node.name.escapedText !== "StyleProps") return props
+  if (!isTypeLiteralNode(type)) return props
+
+  type.members.forEach((member) => {
+    if (!isPropertySignature(member)) return
+
+    const data: JSDocs[number] = {}
+
+    const prop = member.name.getText(sourceFile)
+
+    if (!hasJSDoc(member)) return
+
+    member.jsDoc.forEach(
+      ({ tags }) =>
+        tags?.forEach(({ tagName, comment }) => {
+          const tag = tagName.getText(sourceFile)
+
+          if (tag === "deprecated") data.deprecated = true
+          if (tag === "see") data.url = comment as string
+        }),
+    )
+
+    props[prop] = data
+  })
+
+  return props
+}
+
+const getData = (prop: string, value: string) => {
+  if (isStringObject(value)) {
+    value = value.replace(/\s*"transform":.*(?=,|\})/s, "")
+    value = value.replace(/,\s*\n?\}/g, "}")
+
+    const data = JSON.parse(value)
+
+    let { properties, token, isSkip } = data
+
+    if (isSkip) return
+
+    if (properties) {
+      if (isArray(properties)) {
+        properties = properties.map((property) => toKebabCase(property))
+      } else {
+        properties = [toKebabCase(properties)]
+      }
+
+      return { properties, token }
+    } else {
+      return { properties: [toKebabCase(prop)], token }
+    }
+  } else {
+    return { properties: [toKebabCase(prop)] }
+  }
+}
+
 const parseProps: p.RequiredRunner =
   (type: Type, source: string) => async (p, s) => {
     s.start(`Parsing the ${type} props`)
@@ -110,85 +183,69 @@ const parseProps: p.RequiredRunner =
     const targetStatements = ["standardStyles", "shorthandStyles", "pseudos"]
     const sourceFile = createSourceFile("props.ts", source, ScriptTarget.Latest)
 
-    const typeStatements = sourceFile.statements.filter(
-      (statement) =>
-        isInterfaceDeclaration(statement) || isTypeAliasDeclaration(statement),
-    )
-
     const props: Props = {}
+    let jsDocs: JSDocs = {}
 
     sourceFile.forEachChild((node) => {
-      if (!isVariableStatement(node)) return
+      if (isTypeAliasDeclaration(node)) {
+        jsDocs = getJSDocs(node)(sourceFile)
+      }
 
-      const declarations = node.declarationList.declarations
+      if (isVariableStatement(node)) {
+        const declarations = node.declarationList.declarations
 
-      for (const { name, initializer } of declarations) {
-        if (!isIdentifier(name)) continue
+        for (const { name, initializer } of declarations) {
+          if (!isIdentifier(name)) continue
 
-        if (!targetStatements.includes(name.text)) continue
+          if (!targetStatements.includes(name.text)) continue
 
-        const isShorthand = name.text === "shorthandStyles"
+          const isShorthand = name.text === "shorthandStyles"
 
-        if (initializer && isObjectLiteralExpression(initializer)) {
-          initializer.properties.forEach((property) => {
-            if (!isPropertyAssignment(property)) return
+          if (initializer && isObjectLiteralExpression(initializer)) {
+            initializer.properties.forEach((property) => {
+              if (!isPropertyAssignment(property)) return
 
-            const { name, initializer } = property
+              const { name, initializer } = property
 
-            const key = name.getText(sourceFile)
-            let value = initializer.getText(sourceFile)
+              const prop = name.getText(sourceFile)
+              let value = initializer.getText(sourceFile)
 
-            if (type === "style") {
-              value = value.replace(/(\w+):/g, '"$1":')
+              if (type === "style") {
+                value = value.replace(/(\w+):/g, '"$1":')
 
-              if (!isShorthand) {
-                if (/^{|}$/.test(value)) {
-                  value = value.replace(/\s*"transform":.*(?=,|\})/s, "")
-                  value = value.replace(/,\s*\n?\}/g, "}")
+                if (!isShorthand) {
+                  const data = getData(prop, value)
 
-                  const data = JSON.parse(value)
-
-                  let { properties, token, isSkip } = data
-
-                  if (isSkip) return
-
-                  if (properties) {
-                    if (isArray(properties)) {
-                      properties = properties.map((property) =>
-                        toKebabCase(property),
-                      )
-                    } else {
-                      properties = [toKebabCase(properties)]
-                    }
-
-                    props[key] = { properties, token }
-                  } else {
-                    props[key] = { properties: [toKebabCase(key)], token }
-                  }
+                  if (data) props[prop] = merge(props[prop], data)
                 } else {
-                  props[key] = { properties: [toKebabCase(key)] }
+                  if (isStringObject(value)) {
+                    value = JSON.parse(value).properties
+                  } else {
+                    value = value.split(".")[1]
+                  }
+
+                  props[value] = merge(
+                    props[value] ?? {},
+                    { shorthands: [prop] },
+                    true,
+                  )
                 }
               } else {
-                if (/^{|}$/.test(value)) {
-                  value = JSON.parse(value).properties
-                } else {
-                  value = value.split(".")[1]
-                }
+                value = value.replace(/^"|"$/g, "")
 
-                props[value] = merge(
-                  props[value] ?? {},
-                  { shorthands: [key] },
-                  true,
-                )
+                props[prop] = { properties: [value] }
               }
-            } else {
-              value = value.replace(/^"|"$/g, "")
-
-              props[key] = { properties: [value] }
-            }
-          })
+            })
+          }
         }
       }
+    })
+
+    Object.entries(jsDocs).forEach(([prop, { url, deprecated }]) => {
+      if (!props[prop]) return
+
+      props[prop].url = url
+      props[prop].deprecated = deprecated
     })
 
     s.stop(`Parsing the ${type} props`)
@@ -228,7 +285,7 @@ const generateTable = (props: Props) => (locale: Locale) => {
   }
 
   const rows = Object.entries(props).map(
-    ([prop, { properties, shorthands, token }]) => {
+    ([prop, { properties, shorthands, token, url }]) => {
       let columns: string[] = []
 
       const props = [prop, ...(shorthands ?? [])]
@@ -240,7 +297,11 @@ const generateTable = (props: Props) => (locale: Locale) => {
 
       columns = [
         ...columns,
-        properties.map((property) => `\`${property}\``).join(" + "),
+        properties
+          .map((property) =>
+            !url ? `\`${property}\`` : `[${property}](${url})`,
+          )
+          .join(" + "),
       ]
 
       columns = [
@@ -313,6 +374,8 @@ const main = async () => {
 
     p.outro(c.green(`Done in ${duration}s\n`))
   } catch (e) {
+    console.log(e)
+
     s.stop(`An error occurred`, 500)
 
     p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))

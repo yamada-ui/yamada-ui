@@ -1,5 +1,15 @@
 # @yamada-ui/pin-input
 
+## 0.4.10
+
+### Patch Changes
+
+- [#470](https://github.com/hirotomoyamada/yamada-ui/pull/470) [`e8cdbdf`](https://github.com/hirotomoyamada/yamada-ui/commit/e8cdbdf7f03af4c5ea9378e9bd16d0ba809f98d2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed type definition due to automatic generation of CSS properties.
+
+- Updated dependencies [[`0018510`](https://github.com/hirotomoyamada/yamada-ui/commit/00185106e4be9e4922b9e5753b7afd60121e4bc8), [`4817eae`](https://github.com/hirotomoyamada/yamada-ui/commit/4817eaec2177ff22f3625c3237a01c0a8abfb9f1), [`e8cdbdf`](https://github.com/hirotomoyamada/yamada-ui/commit/e8cdbdf7f03af4c5ea9378e9bd16d0ba809f98d2)]:
+  - @yamada-ui/core@0.15.0
+  - @yamada-ui/form-control@0.3.28
+
 ## 0.4.9
 
 ### Patch Changes

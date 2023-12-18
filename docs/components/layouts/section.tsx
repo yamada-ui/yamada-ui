@@ -1,8 +1,8 @@
-import type { CenterProps } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import { VStack, forwardRef } from "@yamada-ui/react"
 import { memo } from "react"
 
-export type SectionProps = CenterProps & {}
+export type SectionProps = StackProps & {}
 
 export const Section = memo(
   forwardRef<SectionProps, "div">(({ ...rest }, ref) => {

@@ -154,6 +154,7 @@ export const generateStyles = async (
         static: css,
         type,
         isProcessResult,
+        isSkip,
         description,
       },
     ]) => {
@@ -172,6 +173,7 @@ export const generateStyles = async (
         token,
         transform,
         isProcessResult,
+        isSkip,
         css,
       })
       type = computedType({ type: type ?? types, token, transform })

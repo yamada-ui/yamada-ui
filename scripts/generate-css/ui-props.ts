@@ -11,6 +11,7 @@ export type UIOptions = {
   transform?: TransformOptions
   type?: string
   description?: string[]
+  isSkip?: boolean
 }
 
 const createUIProps = <T extends UIProps>(props: T) => props
@@ -224,23 +225,27 @@ export const uiProps = createUIProps({
     properties: "--ui-line-clamp",
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
+    isSkip: true,
   },
   isTruncated: {
     transform: "isTruncated",
     type: "boolean",
     description: ["If `true`, it clamps truncate a text after one line."],
+    isSkip: true,
   },
   layerStyle: {
     isProcessResult: true,
     transform: { transform: "styles", args: `"layerStyles"` },
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
+    isSkip: true,
   },
   textStyle: {
     isProcessResult: true,
     transform: { transform: "styles", args: `"textStyles"` },
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
+    isSkip: true,
   },
   apply: {
     isProcessResult: true,
@@ -255,5 +260,6 @@ export const uiProps = createUIProps({
       "",
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
+    isSkip: true,
   },
 })

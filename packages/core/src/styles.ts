@@ -1161,6 +1161,7 @@ export const standardStyles: Configs = {
   },
   noOfLines: {
     properties: "--ui-line-clamp",
+    isSkip: true,
     static: {
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -1169,16 +1170,22 @@ export const standardStyles: Configs = {
       WebkitLineClamp: "var(--ui-line-clamp)",
     },
   },
-  isTruncated: { transform: transforms.isTruncated },
+  isTruncated: { isSkip: true, transform: transforms.isTruncated },
   layerStyle: {
     isProcessResult: true,
+    isSkip: true,
     transform: transforms.styles("layerStyles"),
   },
   textStyle: {
     isProcessResult: true,
+    isSkip: true,
     transform: transforms.styles("textStyles"),
   },
-  apply: { isProcessResult: true, transform: transforms.styles() },
+  apply: {
+    isProcessResult: true,
+    isSkip: true,
+    transform: transforms.styles(),
+  },
 }
 
 export const shorthandStyles: Configs = {

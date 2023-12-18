@@ -4680,6 +4680,9 @@ export type StyleProps = {
   vectorEffect?: Token<CSS.Property.VectorEffect>
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
   marginX?: Token<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
@@ -4687,6 +4690,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
   mx?: Token<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
@@ -4694,6 +4700,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `margin-top` and `margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
    */
   marginY?: Token<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
@@ -4701,6 +4710,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `margin-top` and `margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
    */
   my?: Token<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
@@ -4708,6 +4720,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `padding-inline-start` and `padding-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
   paddingX?: Token<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
@@ -4715,6 +4730,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `padding-inline-start` and `padding-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
   px?: Token<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
@@ -4722,6 +4740,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `padding-top` and `padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
   paddingY?: Token<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
@@ -4729,6 +4750,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `padding-top` and `padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
   py?: Token<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
@@ -4736,6 +4760,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `scroll-margin-left` and `scroll-margin-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
    */
   scrollMarginX?: Token<
     CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
@@ -4743,6 +4770,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `scroll-margin-top` and `scroll-margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
    */
   scrollMarginY?: Token<
     CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
@@ -4750,6 +4780,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `scroll-padding-left` and `scroll-padding-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
    */
   scrollPaddingX?: Token<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
@@ -4757,6 +4790,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `scroll-padding-top` and `scroll-padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
    */
   scrollPaddingY?: Token<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
@@ -4764,22 +4800,37 @@ export type StyleProps = {
   >
   /**
    * The CSS `left` and `right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
    */
   insetX?: Token<CSS.Property.Left | CSS.Property.Right | number, "spaces">
   /**
    * The CSS `top` and `bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
    */
   insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
   /**
    * The CSS `border-top` and `border-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
    */
   borderY?: Token<CSS.Property.BorderBottom | CSS.Property.BorderTop, "borders">
   /**
    * The CSS `border-left` and `border-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
    */
   borderX?: Token<CSS.Property.BorderLeft | CSS.Property.BorderRight, "borders">
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
   borderTopRadius?: Token<
     | CSS.Property.BorderTopLeftRadius
@@ -4789,6 +4840,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
   roundedTop?: Token<
     | CSS.Property.BorderTopLeftRadius
@@ -4798,6 +4852,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
   borderBottomRadius?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -4807,6 +4864,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
   roundedBottom?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -4816,6 +4876,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
   borderRightRadius?: Token<
     | CSS.Property.BorderBottomRightRadius
@@ -4825,6 +4888,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
   roundedRight?: Token<
     | CSS.Property.BorderBottomRightRadius
@@ -4834,6 +4900,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    */
   borderLeftRadius?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -4843,6 +4912,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    */
   roundedLeft?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -4852,6 +4924,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
   borderInlineStartRadius?: Token<
     | CSS.Property.BorderStartEndRadius
@@ -4861,6 +4936,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
   borderStartRadius?: Token<
     | CSS.Property.BorderStartEndRadius
@@ -4870,6 +4948,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
   roundedStart?: Token<
     | CSS.Property.BorderStartEndRadius
@@ -4879,6 +4960,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
   borderInlineEndRadius?: Token<
     | CSS.Property.BorderEndEndRadius
@@ -4888,6 +4972,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
   borderEndRadius?: Token<
     | CSS.Property.BorderEndEndRadius
@@ -4897,6 +4984,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
   roundedEnd?: Token<
     | CSS.Property.BorderEndEndRadius
@@ -4906,6 +4996,9 @@ export type StyleProps = {
   >
   /**
    * The CSS `width` and `height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
   boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
   /**

@@ -1,13 +1,14 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
+import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
-import chalk from "chalk"
+import c from "chalk"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
-import { toKebabCase } from "utils/assertion"
+import { toCamelCase, toKebabCase } from "utils/assertion"
 
 config()
 
@@ -102,7 +103,9 @@ const REPO_REQUEST_PARAMETERS = {
   ref: "main",
 }
 
-const getThemes = async () => {
+const getThemes: p.RequiredRunner = () => async (p, s) => {
+  s.start(`Getting the Yamada UI component themes`)
+
   const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
 
   const themes: Record<string, string> = {}
@@ -126,6 +129,8 @@ const getThemes = async () => {
     )
   }
 
+  s.stop(`Got the Yamada UI component themes`)
+
   return themes
 }
 
@@ -137,7 +142,9 @@ const getDirs = async (path: string) => {
   return dirents
 }
 
-const getPaths = async () => {
+const getPaths: p.RequiredRunner = () => async (p, s) => {
+  s.start(`Getting the component theme paths`)
+
   const categoryDirs = await getDirs(DIST_PATH)
   const componentDirs = await Promise.all(
     categoryDirs.map(
@@ -152,6 +159,8 @@ const getPaths = async () => {
 
       return prev
     }, {})
+
+  s.stop(`Got the component theme paths`)
 
   return paths
 }
@@ -245,44 +254,93 @@ const writeMdxFile = async (path: string, data: Data, content: Content) => {
   await writeFile(path, file)
 }
 
-const generateMdxFiles = (
-  themes: Record<string, string>,
-  paths: Record<string, string>,
-) =>
-  Promise.all(
-    Object.entries(themes).map(async ([name, content]) => {
-      const dirPath = paths[name]
+const generateMdxFiles: p.RequiredRunner =
+  (themes: Record<string, string>, paths: Record<string, string>) =>
+  async (p, s) => {
+    s.start(`Writing files "${DIST_PATH}"`)
 
-      if (!dirPath) return
+    let notPathsList: string[] = []
+    let wroteList: string[] = []
 
-      await Promise.all(
-        LOCALES.map(async (locale) => {
-          const data = await generateData(
-            path.join(dirPath, getMdxFileName("index", locale)),
-            { tab: LOCALE_TAB_MAP[locale] },
-          )
-          const resolvedContent = await generateContent({
-            data,
-            content,
-            locale,
-            paths,
-          })
+    await Promise.all(
+      Object.entries(themes).map(async ([name, content]) => {
+        const dirPath = paths[name]
 
-          const outPath = path.join(dirPath, getMdxFileName("theming", locale))
+        if (!dirPath) {
+          notPathsList = [...notPathsList, toCamelCase(name)]
 
-          await writeMdxFile(outPath, data, resolvedContent)
+          return
+        }
 
-          console.log(chalk.green(`[theming]: Generated ${outPath}`))
-        }),
-      )
-    }),
-  )
+        await Promise.all(
+          LOCALES.map(async (locale) => {
+            const data = await generateData(
+              path.join(dirPath, getMdxFileName("index", locale)),
+              { tab: LOCALE_TAB_MAP[locale] },
+            )
+            const resolvedContent = await generateContent({
+              data,
+              content,
+              locale,
+              paths,
+            })
+
+            const outPath = path.join(
+              dirPath,
+              getMdxFileName("theming", locale),
+            )
+
+            await writeMdxFile(outPath, data, resolvedContent)
+
+            wroteList = [...wroteList, `${toCamelCase(name)} ${outPath}`]
+          }),
+        )
+      }),
+    )
+
+    s.stop(`Wrote files "${DIST_PATH}"`)
+
+    if (notPathsList.length) {
+      const message = notPathsList
+        .map((item) => `- ${item}`)
+        .join("\n")
+        .trim()
+
+      p.note(message, `Not found component theme paths`)
+    }
+
+    if (wroteList.length) {
+      const message = wroteList
+        .map((item) => `- ${item}`)
+        .join("\n")
+        .trim()
+
+      p.note(message, `Generated component themes`)
+    }
+  }
 
 const main = async () => {
-  const themes = await getThemes()
-  const paths = await getPaths()
+  p.intro(c.magenta(`Generating Yamada UI component themes`))
 
-  await generateMdxFiles(themes, paths)
+  const s = p.spinner()
+
+  try {
+    const start = process.hrtime.bigint()
+
+    const themes = await getThemes()(p, s)
+    const paths = await getPaths()(p, s)
+
+    await generateMdxFiles(themes, paths)(p, s)
+
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    p.outro(c.green(`Done in ${duration}s\n`))
+  } catch (e) {
+    s.stop(`An error occurred`, 500)
+
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
+  }
 }
 
 main()

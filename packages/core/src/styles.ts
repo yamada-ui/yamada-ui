@@ -1013,9 +1013,15 @@ export const standardStyles: Configs = {
     },
   },
   isTruncated: { transform: transforms.isTruncated },
-  layerStyle: { transform: transforms.styles("layerStyles") },
-  textStyle: { transform: transforms.styles("textStyles") },
-  apply: { transform: transforms.styles() },
+  layerStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("layerStyles"),
+  },
+  textStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("textStyles"),
+  },
+  apply: { isProcessResult: true, transform: transforms.styles() },
 }
 
 export const shorthandStyles: Configs = {

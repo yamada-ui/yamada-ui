@@ -35,7 +35,7 @@
     "@yamada-ui/fontawesome": "0.3.25",
     "@yamada-ui/markdown": "0.6.3",
     "@yamada-ui/nextjs": "4.1.25",
-    "@yamada-ui/react": "0.9.5",
+    "@yamada-ui/react": "0.9.4",
     "@yamada-ui/table": "0.5.13",
     "contentlayer": "^0.3.4",
     "dayjs": "^1.11.10",

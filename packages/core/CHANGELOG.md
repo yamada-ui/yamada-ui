@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 0.15.1
+
+### Patch Changes
+
+- [`8c2de1b`](https://github.com/hirotomoyamada/yamada-ui/commit/8c2de1b12c7d4efa4817a273da9072803f3c85a7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `isProcessResult` was not added and the style was not applied correctly.
+
+- [`cca4552`](https://github.com/hirotomoyamada/yamada-ui/commit/cca45527a0f8282764c3cf87568df52e1080da46) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected property name in imports.
+
 ## 0.15.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @yamada-ui/carousel
 
+## 0.3.31
+
+### Patch Changes
+
+- [`cca4552`](https://github.com/hirotomoyamada/yamada-ui/commit/cca45527a0f8282764c3cf87568df52e1080da46) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected property name in imports.
+
+- Updated dependencies [[`8c2de1b`](https://github.com/hirotomoyamada/yamada-ui/commit/8c2de1b12c7d4efa4817a273da9072803f3c85a7), [`cca4552`](https://github.com/hirotomoyamada/yamada-ui/commit/cca45527a0f8282764c3cf87568df52e1080da46)]:
+  - @yamada-ui/core@0.15.1
+  - @yamada-ui/button@0.4.5
+  - @yamada-ui/icon@0.3.26
+  - @yamada-ui/use-token@0.3.20
+  - @yamada-ui/use-value@0.2.26
+
 ## 0.3.30
 
 ### Patch Changes

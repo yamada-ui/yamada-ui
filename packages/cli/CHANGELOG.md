@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.9.0
+
+### Minor Changes
+
+- [`559a03c`](https://github.com/hirotomoyamada/yamada-ui/commit/559a03cf2f4e5edfc0d2d312d064e859166762c5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the UI on the command line.
+
 ## 0.8.2
 
 ### Patch Changes

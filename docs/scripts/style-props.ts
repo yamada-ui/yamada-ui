@@ -11,8 +11,10 @@ import {
   ScriptTarget,
   createSourceFile,
   isIdentifier,
+  isInterfaceDeclaration,
   isObjectLiteralExpression,
   isPropertyAssignment,
+  isTypeAliasDeclaration,
   isVariableStatement,
 } from "typescript"
 import { CONSTANT } from "constant"
@@ -108,6 +110,11 @@ const parseProps: p.RequiredRunner =
     const targetStatements = ["standardStyles", "shorthandStyles", "pseudos"]
     const sourceFile = createSourceFile("props.ts", source, ScriptTarget.Latest)
 
+    const typeStatements = sourceFile.statements.filter(
+      (statement) =>
+        isInterfaceDeclaration(statement) || isTypeAliasDeclaration(statement),
+    )
+
     const props: Props = {}
 
     sourceFile.forEachChild((node) => {
@@ -151,7 +158,7 @@ const parseProps: p.RequiredRunner =
                         toKebabCase(property),
                       )
                     } else {
-                      properties = [properties]
+                      properties = [toKebabCase(properties)]
                     }
 
                     props[key] = { properties, token }

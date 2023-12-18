@@ -17,6 +17,7 @@ import {
 import type { RefObject } from "react"
 import { createRef, memo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { ScrollShadow } from "components/data-display"
 import { List as ListIcon } from "components/media-and-icons"
 import { TextWithCode } from "components/typography"
 import type { DocumentContent } from "contentlayer/generated"
@@ -120,6 +121,9 @@ export const TableOfContents = memo(
                   as="a"
                   href={`#${id}`}
                   outline="0"
+                  _hover={{
+                    color: isSelected ? undefined : ["black", "white"],
+                  }}
                   _focusVisible={{
                     boxShadow: "inline",
                   }}
@@ -138,9 +142,6 @@ export const TableOfContents = memo(
                     _selected={{
                       color: [`black`, "white"],
                       bg: [`primary.300`, `primary.300`],
-                    }}
-                    _hover={{
-                      color: isSelected ? undefined : ["black", "white"],
                     }}
                     _before={{
                       content: "''",
@@ -173,32 +174,7 @@ export const TableOfContents = memo(
           </List>
         </VStack>
 
-        <Box
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          zIndex="kurillin"
-          w="full"
-          h="4"
-          bgGradient={[
-            "linear(to-t, rgba(255, 255, 255, 0), white)",
-            "linear(to-t, rgba(0, 0, 0, 0), black)",
-          ]}
-        />
-        <Box
-          position="absolute"
-          bottom="0"
-          left="0"
-          right="0"
-          zIndex="kurillin"
-          w="full"
-          h="4"
-          bgGradient={[
-            "linear(to-b, rgba(255, 255, 255, 0), white)",
-            "linear(to-b, rgba(0, 0, 0, 0), black)",
-          ]}
-        />
+        <ScrollShadow />
       </VStack>
     )
   }),

@@ -29,7 +29,7 @@ tab: Props
 <PropsCard
   id="nativetable-layout"
   name="layout"
-  type='"fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 
@@ -100,7 +100,7 @@ tab: Props
 <PropsCard
   id="tablecaption-placement"
   name="placement"
-  type='"top" | "bottom"'
+  type='"bottom" | "top"'
   description={"The placement of the table caption."}
   defaultValue="'bottom'"
 />

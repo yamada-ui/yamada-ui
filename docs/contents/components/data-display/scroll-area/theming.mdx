@@ -17,6 +17,10 @@ If you want to change the style of the component, please check [here](/styled-sy
 ```ts
 export const ScrollArea: ComponentStyle = {
   baseStyle: {
+    outline: 0,
+    _focusVisible: {
+      boxShadow: "inline",
+    },
     _scrollbar: {
       w: "3",
       h: "3",

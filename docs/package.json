@@ -11,6 +11,7 @@
     "build:profile": "next build --profile",
     "gen:changelog": "tsx scripts/changelog",
     "gen:theme": "tsx scripts/theme-component",
+    "gen:style-props": "tsx scripts/style-props",
     "gen:props": "tsx scripts/component-props",
     "gen:search": "tsx scripts/search-content",
     "gen:content": "contentlayer build --clearCache",
@@ -52,6 +53,7 @@
     "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
+    "@clack/prompts": "^0.7.0",
     "@commitlint/cli": "^18.4.1",
     "@commitlint/config-conventional": "^18.4.0",
     "@octokit/rest": "^20.0.2",
@@ -78,7 +80,6 @@
     "markdown-wasm": "^1.2.0",
     "next-contentlayer": "^0.3.4",
     "openai": "^4.17.4",
-    "ora": "^7.0.1",
     "plop": "^4.0.0",
     "prettier": "^3.0.3",
     "remark-breaks": "^4.0.0",

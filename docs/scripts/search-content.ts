@@ -1,6 +1,7 @@
 import { existsSync } from "fs"
 import { readFile, readdir, writeFile } from "fs/promises"
-import chalk from "chalk"
+import * as p from "@clack/prompts"
+import c from "chalk"
 import { program } from "commander"
 import matter from "gray-matter"
 import toc from "markdown-toc"
@@ -26,7 +27,7 @@ type TableOfContent = {
   lvl: 1 | 2 | 3 | 4
 }
 
-const getPaths = async (path: string = "contents"): Promise<string[]> => {
+const getRecursivePaths = async (path: string) => {
   try {
     const dirents = await readdir(path, { withFileTypes: true })
 
@@ -36,7 +37,7 @@ const getPaths = async (path: string = "contents"): Promise<string[]> => {
           const resolvedPath = `${path}/${dirent.name}`
 
           if (dirent.isDirectory()) {
-            return await getPaths(resolvedPath)
+            return await getRecursivePaths(resolvedPath)
           } else {
             return resolvedPath
           }
@@ -50,31 +51,51 @@ const getPaths = async (path: string = "contents"): Promise<string[]> => {
   }
 }
 
-const getReducePaths = (paths: string[]): Record<string, string[]> => {
-  const resolvedPaths: Record<string, string[]> = {}
+const getPaths: p.RequiredRunner =
+  (path: string = "contents") =>
+  async (p, s): Promise<string[]> => {
+    s.start(`Getting the Yamada UI document paths`)
 
-  paths.forEach((path) => {
-    if (path.endsWith(".ja.mdx")) {
-      resolvedPaths.ja = [...(resolvedPaths.ja ?? []), path]
-    } else {
-      resolvedPaths.en = [...(resolvedPaths.en ?? []), path]
+    const paths = getRecursivePaths(path)
 
-      const notExistLocales = otherLocales.filter((locale) => {
-        const targetPath = path.replace(/\.mdx$/, `.${locale}.mdx`)
+    s.stop(`Got the Yamada UI document paths`)
 
-        return !paths.some((otherLocalePath) => otherLocalePath === targetPath)
-      })
+    return paths
+  }
 
-      if (notExistLocales.length) {
-        notExistLocales.forEach((locale) => {
-          resolvedPaths[locale] = [...(resolvedPaths[locale] ?? []), path]
+const getReducePaths: p.RequiredRunner =
+  (paths: string[]) =>
+  (p, s): Record<string, string[]> => {
+    s.start(`Groping the document paths`)
+
+    const resolvedPaths: Record<string, string[]> = {}
+
+    paths.forEach((path) => {
+      if (path.endsWith(".ja.mdx")) {
+        resolvedPaths.ja = [...(resolvedPaths.ja ?? []), path]
+      } else {
+        resolvedPaths.en = [...(resolvedPaths.en ?? []), path]
+
+        const notExistLocales = otherLocales.filter((locale) => {
+          const targetPath = path.replace(/\.mdx$/, `.${locale}.mdx`)
+
+          return !paths.some(
+            (otherLocalePath) => otherLocalePath === targetPath,
+          )
         })
-      }
-    }
-  })
 
-  return resolvedPaths
-}
+        if (notExistLocales.length) {
+          notExistLocales.forEach((locale) => {
+            resolvedPaths[locale] = [...(resolvedPaths[locale] ?? []), path]
+          })
+        }
+      }
+    })
+
+    s.stop(`Grouped the document paths`)
+
+    return resolvedPaths
+  }
 
 const getSlug = (path: string) => {
   const reg = new RegExp(`(/index)?(.(${otherLocales.join("|")}))?.mdx$`)
@@ -101,13 +122,14 @@ const getIsTab = async (paths: string[], slug: string) => {
 
 const formatTitle = (value: string) => value.replace(/`/g, "")
 
-program.action(async () => {
-  try {
-    const paths = await getPaths()
-    const resolvedPaths = getReducePaths(paths)
+const generateSearchContent: p.RequiredRunner =
+  (paths: Record<string, string[]>) => async (p, s) => {
+    s.start(`Generating table of contents and writing files`)
+
+    let wroteList: string[] = []
 
     await Promise.all(
-      Object.entries(resolvedPaths).map(async ([lang, paths]) => {
+      Object.entries(paths).map(async ([lang, paths]) => {
         const contents = (
           await Promise.all(
             paths.map(async (path) => {
@@ -207,11 +229,40 @@ program.action(async () => {
 
         await writeFile(outPath, data)
 
-        console.log(chalk.green(`[search]: Generated ${outPath}`))
+        wroteList = [...wroteList, outPath]
       }),
     )
+
+    s.stop(`Wrote files`)
+
+    const message = wroteList
+      .map((item) => `- ${item}`)
+      .join("\n")
+      .trim()
+
+    p.note(message, "Generated search contents")
+  }
+
+program.action(async () => {
+  p.intro(c.magenta(`Generating Yamada UI document search content`))
+
+  const s = p.spinner()
+
+  try {
+    const start = process.hrtime.bigint()
+
+    const paths = await getPaths()(p, s)
+    const resolvedPaths = getReducePaths(paths)(p, s)
+    await generateSearchContent(resolvedPaths)(p, s)
+
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    p.outro(c.green(`Done in ${duration}s\n`))
   } catch (e) {
-    console.log(chalk.red(e.message))
+    s.stop(`An error occurred`, 500)
+
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
   }
 })
 

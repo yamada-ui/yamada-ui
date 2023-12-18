@@ -1,6 +1,7 @@
 import type { StackProps } from "@yamada-ui/react"
-import { Box, VStack, forwardRef } from "@yamada-ui/react"
+import { VStack, forwardRef } from "@yamada-ui/react"
 import { memo } from "react"
+import { ScrollShadow } from "components/data-display"
 import { Tree } from "components/navigation"
 
 export type SidebarProps = StackProps
@@ -21,32 +22,7 @@ export const Sidebar = memo(
           <Tree pt="lg" pb="16" pr="md" />
         </VStack>
 
-        <Box
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          zIndex="kurillin"
-          w="full"
-          h="4"
-          bgGradient={[
-            "linear(to-t, rgba(255, 255, 255, 0), white)",
-            "linear(to-t, rgba(0, 0, 0, 0), black)",
-          ]}
-        />
-        <Box
-          position="absolute"
-          bottom="0"
-          left="0"
-          right="0"
-          zIndex="kurillin"
-          w="full"
-          h="4"
-          bgGradient={[
-            "linear(to-b, rgba(255, 255, 255, 0), white)",
-            "linear(to-b, rgba(0, 0, 0, 0), black)",
-          ]}
-        />
+        <ScrollShadow />
       </VStack>
     )
   }),

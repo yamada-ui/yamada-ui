@@ -26,7 +26,6 @@
     "format:check": "prettier --check packages/**/**/src stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",
     "typecheck": "tsc --noEmit",
-    "csscheck": "tsx scripts/check-css",
     "test": "jest",
     "gen:css": "tsx scripts/generate-css",
     "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts",

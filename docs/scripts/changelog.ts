@@ -116,7 +116,7 @@ const generateMdxFiles: p.RequiredRunner =
         .join("\n")
         .trim()
 
-      p.note(message, `Generated component themes`)
+      p.note(message, `Generated changelogs`)
     }
   }
 

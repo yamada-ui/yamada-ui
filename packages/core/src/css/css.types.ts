@@ -1,5 +1,5 @@
 import type * as CSS from "csstype"
-import type { PseudosProps } from "../pseudos"
+import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
 import type { Theme, StyledTheme } from "../theme.types"
 
@@ -70,7 +70,7 @@ export type RecursiveStyles<Y> = {
 }
 
 export type RecursivePseudos<Y> = {
-  [K in keyof CSS.Pseudos | keyof PseudosProps]?: PseudoDefinition<Y> & Y
+  [K in keyof CSS.Pseudos | keyof PseudoProps]?: PseudoDefinition<Y> & Y
 }
 
 export type RecursiveCSSUIObject<Y> = Y &
@@ -78,7 +78,7 @@ export type RecursiveCSSUIObject<Y> = Y &
 
 export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
-export type CSSUIProps = StyleProps & PseudosProps
+export type CSSUIProps = StyleProps & PseudoProps
 
 export type UIStyleProps = {
   theme: StyledTheme

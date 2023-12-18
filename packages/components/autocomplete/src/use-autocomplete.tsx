@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { layoutStylesProperties } from "@yamada-ui/core"
+import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
@@ -376,7 +376,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       "onCreate",
       "onSearch",
     ]),
-    layoutStylesProperties,
+    layoutStyleProperties,
   )
 
   const descendants = useAutocompleteDescendants()
@@ -1322,7 +1322,7 @@ export const useAutocompleteOptionGroup = ({
 
   const isEmpty = !childValues.length
 
-  const computedRest = splitObject(rest, layoutStylesProperties)
+  const computedRest = splitObject(rest, layoutStyleProperties)
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {

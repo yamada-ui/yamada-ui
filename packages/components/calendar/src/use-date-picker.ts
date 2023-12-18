@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import { layoutStylesProperties, useTheme } from "@yamada-ui/core"
+import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
@@ -177,7 +177,7 @@ export const useDatePicker = ({
   const formControlProps = pickObject(rest, formControlProperties)
   const [containerProps, inputProps] = splitObject<Dict, string>(
     omitObject(rest, [...popoverProperties, "id", "value", "onChange"]),
-    layoutStylesProperties,
+    layoutStyleProperties,
   )
 
   const stringToDate = useCallback(

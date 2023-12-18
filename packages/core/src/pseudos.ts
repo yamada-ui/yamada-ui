@@ -200,6 +200,6 @@ export const pseudosProperties = Object.keys(
   pseudos,
 ) as (keyof typeof pseudos)[]
 
-export type PseudosProps = {
+export type PseudoProps = {
   [K in keyof Pseudos]?: CSSUIObject
 }

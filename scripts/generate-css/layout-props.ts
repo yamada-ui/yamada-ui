@@ -142,4 +142,4 @@ export const layoutProps: string[] = [
   "gridArea",
 ]
 
-export const layoutStylesProperties = layoutProps.map((prop) => `"${prop}"`)
+export const layoutStyleProperties = layoutProps.map((prop) => `"${prop}"`)

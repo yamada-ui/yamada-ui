@@ -1,7 +1,7 @@
 import { writeFile } from "fs/promises"
 import type { ThemeToken } from "@yamada-ui/react"
 import { getConfig } from "./config"
-import { layoutStylesProperties } from "./layout-props"
+import { layoutStyleProperties } from "./layout-props"
 import { resolveTypes } from "./resolve-types"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap } from "./tokens"
@@ -214,9 +214,9 @@ export const generateStyles = async (
 
     export const styles: Configs = { ...standardStyles, ...shorthandStyles }
 
-    export const stylesProperties: any[] = Object.keys(styles)
+    export const styleProperties: any[] = Object.keys(styles)
 
-    export const layoutStylesProperties: any[] = [${layoutStylesProperties}]
+    export const layoutStyleProperties: any[] = [${layoutStyleProperties}]
 
     export type StyleProps = {
       ${styleProps.join("\n")}

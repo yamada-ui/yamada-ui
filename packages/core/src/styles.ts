@@ -1115,9 +1115,9 @@ export const shorthandStyles: Configs = {
 
 export const styles: Configs = { ...standardStyles, ...shorthandStyles }
 
-export const stylesProperties: any[] = Object.keys(styles)
+export const styleProperties: any[] = Object.keys(styles)
 
-export const layoutStylesProperties: any[] = [
+export const layoutStyleProperties: any[] = [
   "width",
   "inlineSize",
   "height",

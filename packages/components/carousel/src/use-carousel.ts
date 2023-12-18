@@ -1,6 +1,6 @@
 import type { IconButtonProps } from "@yamada-ui/button"
 import type { CSSUIObject, HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
-import { layoutStylesProperties } from "@yamada-ui/core"
+import { layoutStyleProperties } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
@@ -181,7 +181,7 @@ export const useCarousel = ({
   children,
   ...rest
 }: UseCarouselProps) => {
-  const computedProps = splitObject(rest, layoutStylesProperties)
+  const computedProps = splitObject(rest, layoutStyleProperties)
 
   const [selectedIndex, setSelectedIndex] = useControllableState({
     value: index,

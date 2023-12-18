@@ -1,5 +1,5 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import { layoutStylesProperties, useTheme } from "@yamada-ui/core"
+import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -186,7 +186,7 @@ export const useMonthPicker = ({
       "type",
       "onChangeType",
     ]),
-    layoutStylesProperties,
+    layoutStyleProperties,
   )
 
   const stringToDate = useCallback(

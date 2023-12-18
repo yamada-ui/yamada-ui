@@ -1,7 +1,8 @@
 import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
+import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
-import chalk from "chalk"
+import c from "chalk"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
@@ -79,10 +80,14 @@ const REPO_REQUEST_PARAMETERS = {
   ref: "main",
 }
 
-export const getDocs = async () => {
+export const getDocs: p.RequiredRunner = () => async (p, s) => {
+  s.start(`Getting the Yamada UI docs`)
+
   const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
 
   const docs: Record<string, Doc> = {}
+
+  let notDocsList: string[] = []
 
   if (Array.isArray(data)) {
     await Promise.all(
@@ -142,10 +147,21 @@ export const getDocs = async () => {
             if (Object.keys(doc).length) docs[name] = doc
           }
         } catch (e) {
-          console.log(`[props]: Not found ${name}`)
+          notDocsList = [...notDocsList, name]
         }
       }),
     )
+  }
+
+  s.stop(`Got the Yamada UI docs`)
+
+  if (notDocsList.length) {
+    const message = notDocsList
+      .map((item) => `- ${item}`)
+      .join("\n")
+      .trim()
+
+    p.note(message, `Not found package docs`)
   }
 
   return docs
@@ -159,7 +175,9 @@ const getDirs = async (path: string) => {
   return dirents
 }
 
-const getPaths = async () => {
+const getPaths: p.RequiredRunner = () => async (p, s) => {
+  s.start(`Getting the content paths`)
+
   const categoryDirs = await getDirs(DIST_PATH)
   const componentDirs = await Promise.all(
     categoryDirs.map(
@@ -174,6 +192,8 @@ const getPaths = async () => {
 
       return prev
     }, {})
+
+  s.stop(`Got the content paths`)
 
   return paths
 }
@@ -303,20 +323,32 @@ const writeMdxFile = async (path: string, data: Data, content: Content) => {
   await writeFile(path, file)
 }
 
-const generateMdxFiles = (
-  docs: Record<string, Doc>,
-  paths: Record<string, string>,
-) =>
-  Promise.all(
-    Object.entries(docs).map(async ([name, doc]) => {
-      try {
+const generateMdxFiles: p.RequiredRunner =
+  (docs: Record<string, Doc>, paths: Record<string, string>) =>
+  async (p, s) => {
+    s.start(`Writing files "${DIST_PATH}"`)
+
+    let notPathsList: string[] = []
+    let notPropsList: string[] = []
+    let wroteList: string[] = []
+
+    await Promise.all(
+      Object.entries(docs).map(async ([name, doc]) => {
         const dirPath = paths[name]
 
-        if (!dirPath)
-          throw new Error(`[props]: Resolved path ${toCamelCase(name)}`)
+        if (!dirPath) {
+          notPathsList = [...notPathsList, toCamelCase(name)]
 
-        if (!Object.values(doc).some((content) => Object.keys(content).length))
-          throw new Error(`[props]: No props ${toCamelCase(name)}`)
+          return
+        }
+
+        if (
+          !Object.values(doc).some((content) => Object.keys(content).length)
+        ) {
+          notPropsList = [...notPropsList, toCamelCase(name)]
+
+          return
+        }
 
         await Promise.all(
           LOCALES.map(async (locale) => {
@@ -330,20 +362,64 @@ const generateMdxFiles = (
 
             await writeMdxFile(outPath, data, resolvedContent)
 
-            console.log(chalk.green(`[props]: Generated ${outPath}`))
+            wroteList = [...wroteList, `${toCamelCase(name)} ${outPath}`]
           }),
         )
-      } catch (e) {
-        console.log(chalk.red(e.message))
-      }
-    }),
-  )
+      }),
+    )
+
+    s.stop(`Wrote files "${DIST_PATH}"`)
+
+    if (notPathsList.length) {
+      const message = notPathsList
+        .map((item) => `- ${item}`)
+        .join("\n")
+        .trim()
+
+      p.note(message, `Not found component paths`)
+    }
+
+    if (notPropsList.length) {
+      const message = notPropsList
+        .map((item) => `- ${item}`)
+        .join("\n")
+        .trim()
+
+      p.note(message, `Not found component props`)
+    }
+
+    if (wroteList.length) {
+      const message = wroteList
+        .map((item) => `- ${item}`)
+        .join("\n")
+        .trim()
+
+      p.note(message, `Generated component props`)
+    }
+  }
 
 const main = async () => {
-  const docs = await getDocs()
-  const paths = await getPaths()
+  p.intro(c.magenta(`Generating Yamada UI component props`))
 
-  await generateMdxFiles(docs, paths)
+  const s = p.spinner()
+
+  try {
+    const start = process.hrtime.bigint()
+
+    const docs = await getDocs()(p, s)
+    const paths = await getPaths()(p, s)
+
+    await generateMdxFiles(docs, paths)(p, s)
+
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    p.outro(c.green(`Done in ${duration}s\n`))
+  } catch (e) {
+    s.stop(`An error occurred`, 500)
+
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
+  }
 }
 
 main()

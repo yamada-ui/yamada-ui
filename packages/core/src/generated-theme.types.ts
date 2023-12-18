@@ -283,7 +283,6 @@ export interface GeneratedTheme extends UITheme {
     | "teal"
     | "cyan"
     | "sky"
-    | "link"
     | "blue"
     | "primary"
     | "indigo"

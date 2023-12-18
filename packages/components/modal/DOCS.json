@@ -12,7 +12,7 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
     },
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the tooltip."
@@ -82,12 +82,12 @@
       "description": "Callback fired when the overlay is clicked."
     },
     "outside": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"initial\" | \"inherit\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 72 more ... | \"-3.5\">",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 72 more ... | \"-3.5\">",
       "required": false,
       "description": "The CSS `padding` property."
     },
     "placement": {
-      "type": "UIValue<\n  | \"center\"\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
+      "type": "UIValue<\n  | \"center\"\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'center'",
       "required": false,
       "description": "The placement of the modal."
@@ -164,7 +164,7 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
     },
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the tooltip."
@@ -269,12 +269,12 @@
       "description": "The dialog other to use."
     },
     "outside": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"initial\" | \"inherit\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 72 more ... | \"-3.5\">",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"normal\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 72 more ... | \"-3.5\">",
       "required": false,
       "description": "The CSS `padding` property."
     },
     "placement": {
-      "type": "UIValue<\n  | \"center\"\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
+      "type": "UIValue<\n  | \"center\"\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'center'",
       "required": false,
       "description": "The placement of the modal."
@@ -425,7 +425,7 @@
       "description": "Callback fired when the overlay is clicked."
     },
     "placement": {
-      "type": "UIValue<\n  | \"center\"\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n> &\n  UIValue<\"top\" | \"right\" | \"bottom\" | \"left\">",
+      "type": "UIValue<\n  | \"center\"\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n> &\n  UIValue<\"bottom\" | \"left\" | \"right\" | \"top\">",
       "defaultValue": "'center'",
       "required": false,
       "description": "The placement of the modal.\n\n\nThe placement of the drawer."

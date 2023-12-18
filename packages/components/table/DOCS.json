@@ -74,7 +74,7 @@
       "description": "If `true`, highlight the row when the table row is selected."
     },
     "layout": {
-      "type": "\"fixed\" | \"auto\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
     },
@@ -278,7 +278,7 @@
       "description": "If `true`, highlight the row when the table row is selected."
     },
     "layout": {
-      "type": "\"fixed\" | \"auto\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
     },

@@ -1,5 +1,10 @@
 {
   "Avatar": {
+    "alt": {
+      "type": "string",
+      "required": false,
+      "description": "The `HTMLImageElement` property `alt`."
+    },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,

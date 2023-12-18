@@ -36,7 +36,7 @@
       "description": "If `label` is of type number, the maximum number displayed."
     },
     "placement": {
-      "type": "UIValue<\n  | \"top\"\n  | \"right\"\n  | \"bottom\"\n  | \"left\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
+      "type": "UIValue<\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'top-right'",
       "required": false,
       "description": "The placement of the indicator."

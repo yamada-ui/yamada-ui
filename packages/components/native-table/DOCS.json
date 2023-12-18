@@ -13,7 +13,7 @@
       "description": "If `true`, highlight the row when the table row is hovered."
     },
     "layout": {
-      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | ResponsiveObject<TableLayout | undefined> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
     },
@@ -65,7 +65,7 @@
   },
   "TableCaption": {
     "placement": {
-      "type": "\"top\" | \"bottom\"",
+      "type": "\"bottom\" | \"top\"",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the table caption."

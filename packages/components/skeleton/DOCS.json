@@ -6,7 +6,7 @@
       "description": "The visual color appearance of the component."
     },
     "endColor": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 241 more ... | \"danger\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
       "required": false,
       "description": "The color at the animation end."
     },
@@ -40,7 +40,7 @@
       "description": "The animation speed in seconds."
     },
     "startColor": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 241 more ... | \"danger\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
       "required": false,
       "description": "The color at the animation start."
     },
@@ -52,7 +52,7 @@
   },
   "SkeletonCircle": {
     "endColor": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 241 more ... | \"danger\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
       "required": false,
       "description": "The color at the animation end."
     },
@@ -81,14 +81,14 @@
       "description": "The animation speed in seconds."
     },
     "startColor": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 241 more ... | \"danger\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
       "required": false,
       "description": "The color at the animation start."
     }
   },
   "SkeletonText": {
     "endColor": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 241 more ... | \"danger\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
       "required": false,
       "description": "The color at the animation end."
     },
@@ -117,12 +117,12 @@
       "description": "The animation speed in seconds."
     },
     "startColor": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 241 more ... | \"danger\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
       "required": false,
       "description": "The color at the animation start."
     },
     "textHeight": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"normal\" | \"1\" | \"2\" | \"3\" | \"4\" | ... 53 more ... | \"9xl\">",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"1\" | \"2\" | \"3\" | \"4\" | ... 53 more ... | \"9xl\">",
       "required": false,
       "description": "The CSS `height` property."
     }

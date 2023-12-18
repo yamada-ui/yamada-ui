@@ -1,7 +1,7 @@
 {
   "Markdown": {
     "codeProps": {
-      "type": "{ theme?: \"coy\" | \"dark\" | \"funky\" | \"okaidia\" | \"solarizedlight\" | \"tomorrow\" | \"twilight\" | \"prism\" | \"a11yDark\" | \"atomDark\" | \"base16AteliersulphurpoolLight\" | \"cb\" | \"coldarkCold\" | ... 32 more ... | undefined; }",
+      "type": "{ theme?: \"dark\" | \"coy\" | \"funky\" | \"okaidia\" | \"solarizedlight\" | \"tomorrow\" | \"twilight\" | \"prism\" | \"a11yDark\" | \"atomDark\" | \"base16AteliersulphurpoolLight\" | \"cb\" | \"coldarkCold\" | ... 32 more ... | undefined; }",
       "required": false,
       "description": "If provided, this will set the theme for the code."
     },

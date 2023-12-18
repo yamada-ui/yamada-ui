@@ -1,7 +1,7 @@
 {
   "Popover": {
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -264,7 +264,6 @@
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
-    "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
       "required": false
@@ -885,7 +884,6 @@
     "suppressHydrationWarning": { "type": "boolean", "required": false },
     "tabIndex": { "type": "number", "required": false },
     "title": { "type": "string", "required": false },
-    "translate": { "type": "\"yes\" | \"no\"", "required": false },
     "typeof": { "type": "string", "required": false },
     "unselectable": { "type": "\"on\" | \"off\"", "required": false },
     "vocab": { "type": "string", "required": false }

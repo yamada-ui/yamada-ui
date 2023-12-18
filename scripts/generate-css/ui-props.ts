@@ -231,16 +231,19 @@ export const uiProps = createUIProps({
     description: ["If `true`, it clamps truncate a text after one line."],
   },
   layerStyle: {
+    isProcessResult: true,
     transform: { transform: "styles", args: `"layerStyles"` },
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
   },
   textStyle: {
+    isProcessResult: true,
     transform: { transform: "styles", args: `"textStyles"` },
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
   },
   apply: {
+    isProcessResult: true,
     transform: { transform: "styles" },
     description: [
       "Apply other styles defined in `theme.styles`.",

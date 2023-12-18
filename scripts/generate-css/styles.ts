@@ -146,7 +146,17 @@ export const generateStyles = async (
   })
 
   Object.entries<UIOptions>(uiProps).forEach(
-    ([prop, { properties, transform, static: css, type, description }]) => {
+    ([
+      prop,
+      {
+        properties,
+        transform,
+        static: css,
+        type,
+        isProcessResult,
+        description,
+      },
+    ]) => {
       const types = styles
         .filter(({ prop }) =>
           typeof properties === "string"
@@ -157,7 +167,13 @@ export const generateStyles = async (
       const token = tokenMap[prop as UIProperties]
       const shorthands = shorthandProps[prop as UIProperties]
       transform ??= transformMap[prop as UIProperties]
-      const config = getConfig({ properties, token, transform, css })
+      const config = getConfig({
+        properties,
+        token,
+        transform,
+        isProcessResult,
+        css,
+      })
       type = computedType({ type: type ?? types, token, transform })
       const docs = generateDocs({ properties, description })
 

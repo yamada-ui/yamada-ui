@@ -35,6 +35,7 @@ export const getConfig = ({
   token,
   transform,
   css,
+  isProcessResult,
 }: {
   properties?:
     | Union<CSSProperties | UIProperties>
@@ -42,6 +43,7 @@ export const getConfig = ({
   token?: ThemeToken
   transform?: TransformOptions
   css?: CSSObject
+  isProcessResult?: boolean
 }) => {
   if (!token && !transform && !css) return true
 
@@ -58,6 +60,8 @@ export const getConfig = ({
       config = [...config, `properties: ${value}`]
     }
   }
+
+  if (isProcessResult) config = [...config, `isProcessResult: true`]
 
   if (css) config = [...config, `static: ${JSON.stringify(css)}`]
 

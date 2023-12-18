@@ -204,6 +204,8 @@ export const FileInput = forwardRef<FileInputProps, "input">(
         <ui.input
           ref={mergeRefs(inputRef, ref)}
           type="file"
+          aria-hidden
+          aria-readonly
           tabIndex={-1}
           id={id}
           name={name}
@@ -229,7 +231,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           ref={ref}
           className={cx("ui-file-input", className)}
           py={values?.length && component ? "0.125rem" : undefined}
-          {...omitObject(rest, ["onChange"])}
+          {...omitObject(rest, ["onChange", "aria-readonly"])}
           __css={css}
           tabIndex={0}
           data-placeholder={dataAttr(!values?.length)}

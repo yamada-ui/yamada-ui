@@ -123,7 +123,7 @@ type TooltipOptions = {
   withPortal?: boolean
 }
 
-export type TooltipProps = HTMLUIProps<"div"> &
+export type TooltipProps = Omit<HTMLUIProps<"div">, "offset"> &
   ThemeProps<"Tooltip"> &
   Omit<HTMLMotionProps<"div">, "color" | "style" | "variants" | "transition"> &
   Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &

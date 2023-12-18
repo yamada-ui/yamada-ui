@@ -75,6 +75,7 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
 
   return (
     <AutocompleteIcon
+      aria-label="Clear value"
       className={cx("ui-autocomplete__icon--clear", className)}
       __css={styles.clearIcon}
       {...rest}

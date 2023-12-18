@@ -239,7 +239,6 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getPreviewProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, previewRef),
       hidden: isEditing,
@@ -255,7 +254,6 @@ export const useEditable = (props: UseEditableProps) => {
       onEdit,
       onUpdatePrevValue,
       placeholder,
-      rest,
       value,
     ],
   )

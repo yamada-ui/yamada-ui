@@ -4,7 +4,7 @@ import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  layoutStylesProperties,
+  layoutStyleProperties,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -122,7 +122,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
     rest = useFormControlProps(rest)
 
     const formControlProps = pickObject(rest, formControlProperties)
-    const [layoutProps, selectProps] = splitObject(rest, layoutStylesProperties)
+    const [layoutProps, selectProps] = splitObject(rest, layoutStyleProperties)
 
     let computedChildren: ReactElement[] = []
 

@@ -1,5 +1,25 @@
 # @yamada-ui/input
 
+## 0.4.7
+
+### Patch Changes
+
+- Updated dependencies [[`8c2de1b`](https://github.com/hirotomoyamada/yamada-ui/commit/8c2de1b12c7d4efa4817a273da9072803f3c85a7), [`cca4552`](https://github.com/hirotomoyamada/yamada-ui/commit/cca45527a0f8282764c3cf87568df52e1080da46)]:
+  - @yamada-ui/core@0.15.1
+  - @yamada-ui/file-input@0.4.23
+  - @yamada-ui/form-control@0.3.29
+  - @yamada-ui/use-token@0.3.20
+
+## 0.4.6
+
+### Patch Changes
+
+- Updated dependencies [[`0018510`](https://github.com/hirotomoyamada/yamada-ui/commit/00185106e4be9e4922b9e5753b7afd60121e4bc8), [`bf5d3bf`](https://github.com/hirotomoyamada/yamada-ui/commit/bf5d3bf4cd03b782044340419d73d0efb06a6e26), [`4817eae`](https://github.com/hirotomoyamada/yamada-ui/commit/4817eaec2177ff22f3625c3237a01c0a8abfb9f1), [`e8cdbdf`](https://github.com/hirotomoyamada/yamada-ui/commit/e8cdbdf7f03af4c5ea9378e9bd16d0ba809f98d2)]:
+  - @yamada-ui/core@0.15.0
+  - @yamada-ui/file-input@0.4.22
+  - @yamada-ui/form-control@0.3.28
+  - @yamada-ui/use-token@0.3.19
+
 ## 0.4.5
 
 ### Patch Changes

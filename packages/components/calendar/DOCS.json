@@ -25,7 +25,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "dayProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar day button element."
     },
@@ -72,7 +72,7 @@
       "description": "Define holidays."
     },
     "labelProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar label button element."
     },
@@ -111,7 +111,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "monthProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar month button element."
     },
@@ -164,7 +164,7 @@
       "description": "The size of the Calendar."
     },
     "tableProps": {
-      "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 20 more ... & { ...; }",
+      "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }",
       "required": false,
       "description": "Props for calendar month table element."
     },
@@ -203,7 +203,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "weekdayProps": {
-      "type": "Omit<PropsOf<\"div\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 20 more ... & { ...; }",
+      "type": "Omit<PropsOf<\"div\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }",
       "required": false,
       "description": "Props for calendar weekday element."
     },
@@ -245,7 +245,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "yearProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof LayoutProps | keyof ColorProps | keyof GridProps | keyof FlexProps | keyof ScrollProps | ... 11 more ... | keyof OthersProps> & ... 22 more ... & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar year button element."
     }
@@ -270,7 +270,7 @@
       "description": "The number of months to display."
     },
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -282,7 +282,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 10 more ... | \"sky\"",
+      "type": "(string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 10 more ... | \"sky\"",
       "required": false
     },
     "calendarProps": {
@@ -365,7 +365,7 @@
       "description": "If `true`, outside days will be disabled."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
       "required": false,
       "description": "The animation duration."
     },
@@ -671,7 +671,7 @@
       "description": "If `true`, allows input."
     },
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -683,7 +683,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 10 more ... | \"sky\"",
+      "type": "(string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 10 more ... | \"sky\"",
       "required": false
     },
     "calendarProps": {
@@ -755,7 +755,7 @@
       "description": "The initial value of the calendar."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
       "required": false,
       "description": "The animation duration."
     },

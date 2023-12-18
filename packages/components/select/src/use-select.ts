@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { layoutStylesProperties } from "@yamada-ui/core"
+import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
@@ -84,7 +84,7 @@ export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
 
 export type UseSelectProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<"div">,
-  "defaultValue" | "onChange"
+  "defaultValue" | "onChange" | "offset"
 > &
   Omit<
     PopoverProps,
@@ -161,7 +161,7 @@ export const useSelect = <T extends MaybeValue = string>({
   rest = useFormControlProps(rest)
 
   const formControlProps = pickObject(rest, formControlProperties)
-  const computedProps = splitObject(rest, layoutStylesProperties)
+  const computedProps = splitObject(rest, layoutStyleProperties)
 
   const descendants = useSelectDescendants()
 
@@ -738,7 +738,7 @@ export const useSelectOptionGroup = ({
 
   const isEmpty = !childValues.length
 
-  const computedRest = splitObject(rest, layoutStylesProperties)
+  const computedRest = splitObject(rest, layoutStyleProperties)
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {

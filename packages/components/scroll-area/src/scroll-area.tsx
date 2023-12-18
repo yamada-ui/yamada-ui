@@ -148,6 +148,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-scroll-area", className)}
+      tabIndex={0}
       __css={css}
       {...rest}
       onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}

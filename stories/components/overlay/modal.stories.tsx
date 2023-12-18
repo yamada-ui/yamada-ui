@@ -45,7 +45,7 @@ export const basic: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -71,7 +71,7 @@ export const withDuration: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -143,7 +143,7 @@ export const withSize: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -251,7 +251,7 @@ export const withPlacement: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -323,7 +323,7 @@ export const withAnimation: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -370,7 +370,7 @@ export const nestedModal: Story = () => {
             <Button variant="ghost" onClick={secondControls.onClose}>
               とじる
             </Button>
-            <Button colorScheme="primary">Wikipadia</Button>
+            <Button colorScheme="primary">Wikipedia</Button>
           </ModalFooter>
         </Modal>
       </Modal>
@@ -397,7 +397,7 @@ export const disabledCloseButton: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -425,7 +425,7 @@ export const customCloseButton: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -451,7 +451,7 @@ export const disabledOverlay: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -479,7 +479,7 @@ export const customOverlay: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -549,7 +549,7 @@ export const scrollBehavior: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>
@@ -576,6 +576,7 @@ export const scrollOnMount: Story = () => {
         <Image
           src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
           maxW="sm"
+          alt="ドラゴンボール"
         />
 
         <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
@@ -620,7 +621,7 @@ export const scrollOnMount: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </ModalFooter>
       </Modal>
     </>

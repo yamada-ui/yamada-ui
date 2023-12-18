@@ -50,7 +50,7 @@ export const withStartWithEditView: Story = () => {
   return (
     <Editable startWithEditView defaultValue="オッス！オラ悟空！">
       <EditablePreview />
-      <EditableInput />
+      <EditableInput aria-label="Input character serif" />
     </Editable>
   )
 }
@@ -189,12 +189,24 @@ export const customControl: Story = () => {
 
     return isEditing ? (
       <ButtonGroup size="sm" gap="sm">
-        <IconButton icon={<Icon icon={faCheck} />} {...getSubmitProps()} />
-        <IconButton icon={<Icon icon={faXmark} />} {...getCancelProps()} />
+        <IconButton
+          icon={<Icon icon={faCheck} />}
+          {...getSubmitProps()}
+          aria-label="Submit"
+        />
+        <IconButton
+          icon={<Icon icon={faXmark} />}
+          {...getCancelProps()}
+          aria-label="Cancel"
+        />
       </ButtonGroup>
     ) : (
       <ButtonGroup size="sm" gap="sm">
-        <IconButton icon={<Icon icon={faPen} />} {...getEditProps()} />
+        <IconButton
+          icon={<Icon icon={faPen} />}
+          {...getEditProps()}
+          aria-label="Edit"
+        />
       </ButtonGroup>
     )
   }

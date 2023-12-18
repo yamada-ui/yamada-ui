@@ -73,10 +73,6 @@ describe("<Editable />", () => {
         <EditableInput data-testid="EditableInput" />
       </Editable>,
     )
-    expect(screen.getByText("Some text")).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    )
     expect(screen.getByTestId("EditableInput")).toBeDisabled()
   })
 
@@ -86,10 +82,6 @@ describe("<Editable />", () => {
         <EditablePreview />
         <EditableInput data-testid="EditableInput" />
       </Editable>,
-    )
-    expect(screen.getByText("Some text")).toHaveAttribute(
-      "aria-readonly",
-      "true",
     )
     expect(screen.getByTestId("EditableInput")).toHaveAttribute("readonly")
   })

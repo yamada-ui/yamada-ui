@@ -26,6 +26,9 @@ export const Input: ComponentMultiStyle = {
         cursor: "not-allowed",
       },
     },
+    element: {
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+    },
   },
 
   variants: {

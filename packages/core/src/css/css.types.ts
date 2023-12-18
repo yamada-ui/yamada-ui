@@ -1,5 +1,6 @@
 import type * as CSS from "csstype"
-import type { StylesProps, PseudosProps } from "../styles"
+import type { PseudoProps } from "../pseudos"
+import type { StyleProps } from "../styles"
 import type { Theme, StyledTheme } from "../theme.types"
 
 export type * as CSS from "csstype"
@@ -48,15 +49,15 @@ export type Token<Y, M = unknown> = M extends keyof Theme
 export type StyledProps<Y> = Y | ((theme: StyledTheme) => Y)
 
 export type StyleProperties = CSS.Properties &
-  Omit<StylesProps, keyof CSS.Properties>
+  Omit<StyleProps, keyof CSS.Properties>
 
 type StyleValue<Y extends keyof StyleProperties> = StyledProps<
   UIValue<StyleProperties[Y]>
 >
 
 export type StyleUIValue = {
-  [Y in keyof StyleProperties]?: Y extends keyof StylesProps
-    ? StylesProps[Y] | StyleValue<Y>
+  [Y in keyof StyleProperties]?: Y extends keyof StyleProps
+    ? StyleProps[Y] | StyleValue<Y>
     : StyleValue<Y>
 }
 
@@ -69,7 +70,7 @@ export type RecursiveStyles<Y> = {
 }
 
 export type RecursivePseudos<Y> = {
-  [K in keyof CSS.Pseudos | keyof PseudosProps]?: PseudoDefinition<Y> & Y
+  [K in keyof CSS.Pseudos | keyof PseudoProps]?: PseudoDefinition<Y> & Y
 }
 
 export type RecursiveCSSUIObject<Y> = Y &
@@ -77,7 +78,7 @@ export type RecursiveCSSUIObject<Y> = Y &
 
 export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
 
-export type CSSUIProps = StylesProps & PseudosProps
+export type CSSUIProps = StyleProps & PseudoProps
 
 export type UIStyleProps = {
   theme: StyledTheme

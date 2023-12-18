@@ -77,6 +77,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                 className,
                 colSpan: customColSpan,
                 rowSpan: customRowSpan,
+                "aria-label": ariaLabel,
               } = columnDef as Column<unknown>
               const computedHeaderProps = runIfFunc(headerProps, header) ?? {}
 
@@ -84,6 +85,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
               const resolvedRowSpan = (customRowSpan ?? rowSpan) || 1
 
               const props = {
+                "aria-label": ariaLabel,
                 ...computedHeaderProps,
                 colSpan: resolvedColSpan,
                 rowSpan: resolvedRowSpan,

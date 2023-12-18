@@ -27,7 +27,7 @@ type CardOptions = {
   align?: CSSUIObject["alignItems"]
 }
 
-export type CardProps = HTMLUIProps<"article"> &
+export type CardProps = Omit<HTMLUIProps<"article">, "direction"> &
   ThemeProps<"Card"> &
   CardOptions
 
@@ -57,7 +57,7 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
 
   return (
     <CardProvider value={styles}>
-      <ui.article
+      <ui.div
         ref={ref}
         className={cx("ui-card", className)}
         __css={css}
@@ -81,7 +81,7 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
     }
 
     return (
-      <ui.header
+      <ui.div
         ref={ref}
         className={cx("ui-card__header", className)}
         __css={css}
@@ -105,7 +105,7 @@ export const CardBody = forwardRef<CardBodyProps, "main">(
     }
 
     return (
-      <ui.main
+      <ui.div
         ref={ref}
         className={cx("ui-card__body", className)}
         __css={css}
@@ -129,7 +129,7 @@ export const CardFooter = forwardRef<CardFooterProps, "footer">(
     }
 
     return (
-      <ui.footer
+      <ui.div
         ref={ref}
         className={cx("ui-card__footer", className)}
         __css={css}

@@ -38,7 +38,12 @@ export const withName: Story = () => {
 }
 
 export const withImage: Story = () => {
-  return <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+  return (
+    <Avatar
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      alt="Hirotomo Yamada"
+    />
+  )
 }
 
 export const withBarge: Story = () => {

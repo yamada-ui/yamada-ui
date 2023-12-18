@@ -27,7 +27,7 @@ type StackOptions = {
   divider?: ReactElement
 }
 
-export type StackProps = HTMLUIProps<"div"> & StackOptions
+export type StackProps = Omit<HTMLUIProps<"div">, "direction"> & StackOptions
 
 /**
  * `Stack` is a component that groups elements and provides space between child elements.

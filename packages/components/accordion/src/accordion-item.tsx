@@ -57,10 +57,10 @@ type AccordionItemOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionItemProps = Omit<HTMLUIProps<"div">, "children"> &
+export type AccordionItemProps = Omit<HTMLUIProps<"li">, "children"> &
   AccordionItemOptions
 
-export const AccordionItem = forwardRef<AccordionItemProps, "div">(
+export const AccordionItem = forwardRef<AccordionItemProps, "li">(
   ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
     const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
       useAccordionContext()
@@ -181,7 +181,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       <AccordionItemProvider
         value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}
       >
-        <ui.div
+        <ui.li
           ref={ref}
           className={cx("ui-accordion__item", className)}
           aria-expanded={ariaAttr(isOpen)}
@@ -194,7 +194,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
           {customAccordionPanel ?? (
             <AccordionPanel>{cloneChildren}</AccordionPanel>
           )}
-        </ui.div>
+        </ui.li>
       </AccordionItemProvider>
     )
   },

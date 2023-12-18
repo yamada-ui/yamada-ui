@@ -1,6 +1,6 @@
 import type { IconButtonProps } from "@yamada-ui/button"
 import type { CSSUIObject, HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
-import { layoutStylesProperties } from "@yamada-ui/core"
+import { layoutStyleProperties } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
@@ -181,7 +181,7 @@ export const useCarousel = ({
   children,
   ...rest
 }: UseCarouselProps) => {
-  const computedProps = splitObject(rest, layoutStylesProperties)
+  const computedProps = splitObject(rest, layoutStyleProperties)
 
   const [selectedIndex, setSelectedIndex] = useControllableState({
     value: index,
@@ -359,7 +359,6 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
-      role: "carousel-slide",
       "data-index": index,
       "data-selected": dataAttr(isSelected),
     }),
@@ -403,7 +402,6 @@ export const useCarouselControl = ({
       ...props,
       ref,
       disabled,
-      role: "carousel-control",
       onClick: handlerAll(props.onClick, onClick),
     }),
     [disabled, onClick],
@@ -433,9 +431,9 @@ export const useCarouselIndicators = () => {
       const isSelected = index === selectedIndex
 
       return {
+        "aria-label": `Go to ${index + 1} slide`,
         ...props,
         key: index,
-        role: "carousel-indicator",
         "data-index": index,
         "data-selected": dataAttr(isSelected),
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, index)),

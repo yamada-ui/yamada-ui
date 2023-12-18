@@ -11,7 +11,7 @@ import {
   useComponentStyle,
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
-import { cx } from "@yamada-ui/utils"
+import { cx, omitObject } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useMemo } from "react"
 
@@ -74,7 +74,7 @@ type IndicatorOptions = {
   withBorder?: boolean
 }
 
-export type IndicatorProps = Omit<HTMLUIProps<"div">, "children"> &
+export type IndicatorProps = Omit<HTMLUIProps<"div">, "children" | "offset"> &
   ThemeProps<"Indicator"> &
   IndicatorOptions
 
@@ -187,7 +187,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
           ref={ref}
           className={cx("ui-indicator__inner", className)}
           __css={css}
-          {...rest}
+          {...omitObject(rest, ["withBorder"])}
         >
           {renderLabel}
         </ui.div>

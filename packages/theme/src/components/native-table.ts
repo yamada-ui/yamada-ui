@@ -13,7 +13,6 @@ export const NativeTable: ComponentMultiStyle = {
       borderCollapse: "collapse",
     },
     tr: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
@@ -26,6 +25,7 @@ export const NativeTable: ComponentMultiStyle = {
       fontFamily: "heading",
       fontWeight: "semibold",
       textAlign: "start",
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       textTransform: "uppercase",
       letterSpacing: "wider",
     },

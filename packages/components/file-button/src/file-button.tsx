@@ -91,7 +91,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
       children = (
         <Component
           className={cx("ui-file-button", className)}
-          {...omitObject(rest, ["onChange"])}
+          {...omitObject(rest, ["onChange", "aria-readonly"])}
           onClick={handlerAll(rest.onClick, onClick)}
         >
           {children}
@@ -106,6 +106,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
         <ui.input
           ref={mergeRefs(inputRef, ref)}
           type="file"
+          aria-hidden
           tabIndex={-1}
           id={id}
           name={name}

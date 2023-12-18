@@ -32,7 +32,7 @@ type FlexOptions = {
   shrink?: CSSUIObject["flexShrink"]
 }
 
-export type FlexProps = HTMLUIProps<"div"> & FlexOptions
+export type FlexProps = Omit<HTMLUIProps<"div">, "direction"> & FlexOptions
 
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.

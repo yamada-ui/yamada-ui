@@ -1,7 +1,8 @@
-import { pseudosProperties, stylesProperties } from "../styles"
+import { pseudosProperties } from "../pseudos"
+import { styleProperties } from "../styles"
 
 const UIProps = new Set([
-  ...stylesProperties,
+  ...styleProperties,
   ...pseudosProperties,
   "textStyle",
   "layerStyle",

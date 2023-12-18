@@ -5,6 +5,8 @@ import {
   CardHeader,
   forwardRef,
   Heading,
+  Ripple,
+  useRipple,
 } from "@yamada-ui/react"
 import Link from "next/link"
 import type { ReactNode } from "react"
@@ -28,6 +30,7 @@ export const LinkCard = memo(
       ref,
     ) => {
       const { documentMap } = usePage()
+      const { onPointerDown, ...rippleProps } = useRipple(rest)
 
       if (href.startsWith("/")) {
         const document = documentMap.find(({ slug }) => slug === href)
@@ -54,7 +57,10 @@ export const LinkCard = memo(
           _active={{ bg: ["blackAlpha.200", "whiteAlpha.200"] }}
           transitionProperty="colors"
           transitionDuration="normal"
+          position="relative"
+          overflow="hidden"
           {...rest}
+          onPointerDown={onPointerDown}
         >
           <CardHeader
             as="div"
@@ -76,6 +82,8 @@ export const LinkCard = memo(
               </TextWithCode>
             </CardBody>
           ) : null}
+
+          <Ripple {...rippleProps} />
         </Card>
       )
     },

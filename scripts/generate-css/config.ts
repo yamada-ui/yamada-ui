@@ -61,10 +61,9 @@ export const getConfig = ({
     }
   }
 
+  if (token) config = [...config, `token: "${token}"`]
   if (isProcessResult) config = [...config, `isProcessResult: true`]
-
   if (css) config = [...config, `static: ${JSON.stringify(css)}`]
-
   if (transform || token) config = insertTransform(config, token, transform)
 
   return `{ ${config.join(", ")} }`

@@ -1,8 +1,9 @@
 import { writeFile } from "fs/promises"
 import path from "path"
+import * as p from "@clack/prompts"
 import { bundleNRequire } from "bundle-n-require"
+import c from "chalk"
 import chokidar from "chokidar"
-import ora from "ora"
 import { createThemeTypings } from "./create-theme-typings"
 import { resolveOutputPath, themePath } from "./resolve-output-path"
 
@@ -13,30 +14,41 @@ const generateThemeTypings = async ({
   theme: Record<string, any>
   outFile?: string
 }) => {
-  const spinner = ora("Generating Yamada UI theme typings").start()
+  p.intro(c.magenta(`Generating Yamada UI theme typings`))
+
+  const s = p.spinner()
 
   try {
     const start = process.hrtime.bigint()
 
+    s.start(`Parsing the theme`)
+
     const generatedTheme = await createThemeTypings(theme)
+
+    s.stop(`Parsed the theme`)
+
+    s.start(`Resolving the output path`)
 
     const outPath = await resolveOutputPath(outFile)
 
-    spinner.info()
-    spinner.text = `Write file "${outPath}"...`
+    s.stop(`Resolved the output path`)
+
+    s.start(`Writing file "${outPath}"`)
 
     await writeFile(outPath, generatedTheme, "utf8")
+
+    s.stop(`Wrote file`)
+
+    p.note(outPath, "Output path")
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    spinner.succeed(`Done in ${duration}s\n`)
+    p.outro(c.green(`Done in ${duration}s\n`))
   } catch (e) {
-    spinner.fail("An error occurred\n")
+    s.stop(`An error occurred`, 500)
 
-    if (e instanceof Error) console.error(e.message)
-  } finally {
-    spinner.stop()
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
   }
 }
 

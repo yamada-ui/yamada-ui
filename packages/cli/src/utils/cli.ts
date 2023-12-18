@@ -12,7 +12,7 @@ export const initCLI = async () => {
   welcome({
     title: "Yamada UI CLI",
     tagLine: `by Yamada UI\n${JSON.description}`,
-    bgColor: `#49b657`,
+    bgColor: `#3cc360`,
     color: `#FFFFFF`,
     bold: true,
     clear: false,

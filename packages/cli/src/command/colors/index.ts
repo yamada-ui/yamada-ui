@@ -1,5 +1,6 @@
+import * as p from "@clack/prompts"
+import c from "chalk"
 import { toHex, lighten } from "color2k"
-import ora from "ora"
 import { prettier } from "../../utils"
 
 export const toneColor = (
@@ -20,49 +21,61 @@ const hues = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 type Options = {
   name?: string
   coef?: string
+  out?: boolean
 }
 
-export const actionColors = async (color: string, { name, coef }: Options) => {
-  const spinner = ora("Generating Hue colors").start()
+export const actionColors = async (
+  color: string,
+  { name, coef, out }: Options,
+) => {
+  p.intro(c.magenta(`Generating Hue colors`))
+
+  const s = p.spinner()
 
   try {
     const start = process.hrtime.bigint()
+
+    s.start(`Computing the color`)
 
     const [lCoef, dCoef] = coef?.split(",").map((v) => Number(v.trim())) ?? [
       0.94, 0.86,
     ]
 
-    let result = hues.reduce<Record<string, any>>((prev, hue) => {
+    const contents = hues.reduce<Record<string, any>>((prev, hue) => {
       prev[hue] = toneColor(color, hue, lCoef, dCoef)
 
       return prev
     }, {})
 
-    if (name) {
-      result = { [name]: result }
-    }
+    let result = contents
+
+    if (name) result = { [name]: result }
+
+    let data = await prettier(JSON.stringify(result), { parser: "json" })
+
+    if (name)
+      data = data.replace(/^{/, "").replace(/}\s+$/, "").replace(/\s+}/g, "\n}")
+
+    s.stop(`Computed the color`)
+
+    p.note(
+      Object.entries(contents)
+        .map(
+          ([hue, color]) => `- ${hue.length === 2 ? " " : ""}${hue}: ${color}`,
+        )
+        .join("\n"),
+      "Generated the colors",
+    )
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    spinner.succeed(`Done in ${duration}s\n`)
+    p.outro(c.green(`Done in ${duration}s${!out ? "\n" : ""}`))
 
-    let data = await prettier(JSON.stringify(result), { parser: "json" })
-
-    if (name) {
-      data = data
-        .replace(/^{/, "")
-        .replace(/}\s+$/, "")
-        .replace(/\s+}/g, "\n}")
-        .trim()
-    }
-
-    console.log(data + "\n")
+    if (out) console.log(data.trim(), "\n")
   } catch (e) {
-    spinner.fail("An error occurred")
+    s.stop(`An error occurred`, 500)
 
-    if (e instanceof Error) console.error(e.message)
-  } finally {
-    spinner.stop()
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
   }
 }

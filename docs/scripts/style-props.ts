@@ -271,11 +271,11 @@ const generateProps: p.RequiredRunner =
           `<Box w="full" p="md" bg="warning" color="white">This is Box</Box>`,
           "```",
           ...generateTable(styleProps)(locale),
+          ...CONTENT_FOOTER[locale],
           locale === "ja"
             ? "## 擬似要素とセレクター"
             : "## Pseudo Elements and Selectors",
           ...generateTable(pseudoProps)(locale),
-          ...CONTENT_FOOTER[locale],
         ]
 
         await writeMdxFile(outPath, data, content.join("\n"))

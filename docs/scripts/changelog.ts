@@ -1,7 +1,8 @@
 import { writeFile } from "fs/promises"
 import path from "path"
+import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
-import chalk from "chalk"
+import c from "chalk"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
@@ -32,7 +33,9 @@ const REPO_REQUEST_PARAMETERS = {
   ref: "main",
 }
 
-const getMdxFiles = async () => {
+const getMdxFiles: p.RequiredRunner = () => async (p, s) => {
+  s.start(`Getting the Yamada UI changelogs`)
+
   const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
 
   const mdxFiles: Omit<MdxFile, "version">[] = []
@@ -42,23 +45,17 @@ const getMdxFiles = async () => {
       data.map(async ({ name, path }) => {
         if (name.startsWith("manifest")) return
 
-        try {
-          const res = await octokit.repos.getContent({
-            ...REPO_REQUEST_PARAMETERS,
-            path,
-          })
+        const res = await octokit.repos.getContent({
+          ...REPO_REQUEST_PARAMETERS,
+          path,
+        })
 
-          if ("content" in res.data) {
-            const file = Buffer.from(res.data.content, "base64").toString(
-              "utf-8",
-            )
+        if ("content" in res.data) {
+          const file = Buffer.from(res.data.content, "base64").toString("utf-8")
 
-            const { data, content } = matter(file)
+          const { data, content } = matter(file)
 
-            mdxFiles.push({ name, data, content })
-          }
-        } catch (e) {
-          console.log(`[props]: Not found ${name}`)
+          mdxFiles.push({ name, data, content })
         }
       }),
     )
@@ -83,26 +80,45 @@ const getMdxFiles = async () => {
       return 0
     })
 
+  s.stop(`got the Yamada UI changelogs`)
+
   return resolvedMdxFiles
 }
 
-const generateMdxFiles = (mdxFiles: MdxFile[]) =>
-  Promise.all(
-    mdxFiles.map(async ({ name, data, content }, index) => {
-      const outPath = path.join(DIST_PATH, name)
+const generateMdxFiles: p.RequiredRunner =
+  (mdxFiles: MdxFile[]) => async (p, s) => {
+    s.start(`Writing files "${DIST_PATH}"`)
 
-      data.table_of_contents_max_lv = 2
-      data.order = index + 1
+    let wroteList: string[] = []
 
-      await writeMdxFile(outPath, data, content)
+    await Promise.all(
+      mdxFiles.map(async ({ name, data, content }, index) => {
+        const outPath = path.join(DIST_PATH, name)
 
-      console.log(chalk.green(`[changelog]: Generated ${name}`))
+        data.table_of_contents_max_lv = 2
+        data.order = index + 1
 
-      if (index !== 0) return
+        await writeMdxFile(outPath, data, content)
 
-      await writeMdxIndexFiles(data, content)
-    }),
-  )
+        wroteList = [...wroteList, outPath]
+
+        if (index !== 0) return
+
+        await writeMdxIndexFiles(data, content)
+      }),
+    )
+
+    s.stop(`Wrote files "${DIST_PATH}"`)
+
+    if (wroteList.length) {
+      const message = wroteList
+        .map((item) => `- ${item}`)
+        .join("\n")
+        .trim()
+
+      p.note(message, `Generated component themes`)
+    }
+  }
 
 const writeMdxFile = async (path: string, data: Data, content: Content) => {
   let file = matter.stringify(content, data)
@@ -130,20 +146,31 @@ const writeMdxIndexFiles = async (data: Data, content: Content) => {
         data,
         content,
       )
-
-      console.log(
-        chalk.green(
-          `[changelog]: Generated ${getMdxFileName("index", locale)}`,
-        ),
-      )
     }),
   )
 }
 
 const main = async () => {
-  const mdxFiles = await getMdxFiles()
+  p.intro(c.magenta(`Generating Yamada UI document search content`))
 
-  await generateMdxFiles(mdxFiles)
+  const s = p.spinner()
+
+  try {
+    const start = process.hrtime.bigint()
+
+    const mdxFiles = await getMdxFiles()(p, s)
+
+    await generateMdxFiles(mdxFiles)(p, s)
+
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    p.outro(c.green(`Done in ${duration}s\n`))
+  } catch (e) {
+    s.stop(`An error occurred`, 500)
+
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
+  }
 }
 
 main()

@@ -31,7 +31,7 @@ tab: Props
 <PropsCard
   id="modal-animation"
   name="animation"
-  type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the tooltip."}
   defaultValue="'scale'"
 />
@@ -137,7 +137,7 @@ tab: Props
 <PropsCard
   id="modal-outside"
   name="outside"
-  type='UIValue<number | "px" | (string & {}) | "initial" | "inherit" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "1" | "-1" | "2" | "-2" | ... 72 more ... | "-3.5">'
+  type='UIValue<number | "px" | (string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "normal" | "1" | "-1" | "2" | "-2" | ... 72 more ... | "-3.5">'
   description={"The CSS `padding` property."}
 />
 
@@ -145,10 +145,10 @@ tab: Props
   id="modal-placement"
   name="placement"
   type='UIValue<| "center"
-  | "top"
-  | "right"
   | "bottom"
   | "left"
+  | "right"
+  | "top"
   | "top-left"
   | "top-right"
   | "bottom-left"

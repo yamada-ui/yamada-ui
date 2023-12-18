@@ -21,7 +21,7 @@ tab: Props
 <PropsCard
   id="monthpicker-animation"
   name="animation"
-  type='"top" | "right" | "bottom" | "left" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue="'scale'"
 />
@@ -39,7 +39,7 @@ tab: Props
 <PropsCard
   id="monthpicker-calendarcolorscheme"
   name="calendarColorScheme"
-  type='"link" | (string & {}) | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 10 more ... | "sky"'
+  type='(string & {}) | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 10 more ... | "sky"'
 />
 
 <PropsCard
@@ -143,7 +143,7 @@ tab: Props
 <PropsCard
   id="monthpicker-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type='number | Partial<Record<"exit" | "enter", number>>'
   description={"The animation duration."}
 />
 

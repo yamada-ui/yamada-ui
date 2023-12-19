@@ -9,9 +9,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       _readOnly: { cursor: "auto" },
       _disabled: { cursor: "not-allowed" },
     },
-    active: {
-      transitionProperty: "common",
-      transitionDuration: "normal",
+    cursor: {
       boxShadow: "md",
     },
     button: {
@@ -39,7 +37,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       container: {
         rounded: "lg",
       },
-      active: {
+      cursor: {
         bg: isGray(c)
           ? [`whiteAlpha.700`, `${c}.700`]
           : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
@@ -57,7 +55,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       container: {
         rounded: "full",
       },
-      active: {
+      cursor: {
         bg: isGray(c)
           ? [`whiteAlpha.700`, `${c}.700`]
           : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],

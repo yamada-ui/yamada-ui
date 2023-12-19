@@ -47,9 +47,9 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/use-focus-visible": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
-    "@yamada-ui/use-resize-observer": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*"
   },
   "devDependencies": {

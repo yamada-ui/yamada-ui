@@ -9637,70 +9637,10 @@
     "hierarchy": { "lv1": "Style Props" }
   },
   {
-    "title": "カラーとバックグラウンド",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#カラーとバックグラウンド",
-    "hierarchy": { "lv1": "Style Props", "lv2": "カラーとバックグラウンド" }
-  },
-  {
-    "title": "マージンとパディング",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#マージンとパディング",
-    "hierarchy": { "lv1": "Style Props", "lv2": "マージンとパディング" }
-  },
-  {
-    "title": "タイポグラフィ",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#タイポグラフィ",
-    "hierarchy": { "lv1": "Style Props", "lv2": "タイポグラフィ" }
-  },
-  {
-    "title": "レイアウト",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#レイアウト",
-    "hierarchy": { "lv1": "Style Props", "lv2": "レイアウト" }
-  },
-  {
-    "title": "ポジション",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#ポジション",
-    "hierarchy": { "lv1": "Style Props", "lv2": "ポジション" }
-  },
-  {
-    "title": "リスト",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#リスト",
-    "hierarchy": { "lv1": "Style Props", "lv2": "リスト" }
-  },
-  {
-    "title": "ボーダー",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#ボーダー",
-    "hierarchy": { "lv1": "Style Props", "lv2": "ボーダー" }
-  },
-  {
-    "title": "エフェクト",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#エフェクト",
-    "hierarchy": { "lv1": "Style Props", "lv2": "エフェクト" }
-  },
-  {
-    "title": "フィルター",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#フィルター",
-    "hierarchy": { "lv1": "Style Props", "lv2": "フィルター" }
-  },
-  {
     "title": "擬似要素とセレクター",
     "type": "fragment",
     "slug": "/styled-system/style-props#擬似要素とセレクター",
     "hierarchy": { "lv1": "Style Props", "lv2": "擬似要素とセレクター" }
-  },
-  {
-    "title": "その他",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#その他",
-    "hierarchy": { "lv1": "Style Props", "lv2": "その他" }
   },
   {
     "title": "テキストとレイヤースタイル",

@@ -9104,60 +9104,6 @@
     "hierarchy": { "lv1": "Style Props" }
   },
   {
-    "title": "Color and Background",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#color-and-background",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Color and Background" }
-  },
-  {
-    "title": "Margins and Padding",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#margins-and-padding",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Margins and Padding" }
-  },
-  {
-    "title": "Typography",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#typography",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Typography" }
-  },
-  {
-    "title": "Layout",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#layout",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Layout" }
-  },
-  {
-    "title": "Position",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#position",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Position" }
-  },
-  {
-    "title": "List",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#list",
-    "hierarchy": { "lv1": "Style Props", "lv2": "List" }
-  },
-  {
-    "title": "Border",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#border",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Border" }
-  },
-  {
-    "title": "Effects",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#effects",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Effects" }
-  },
-  {
-    "title": "Filter",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#filter",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Filter" }
-  },
-  {
     "title": "Pseudo Elements and Selectors",
     "type": "fragment",
     "slug": "/styled-system/style-props#pseudo-elements-and-selectors",
@@ -9165,12 +9111,6 @@
       "lv1": "Style Props",
       "lv2": "Pseudo Elements and Selectors"
     }
-  },
-  {
-    "title": "Others",
-    "type": "fragment",
-    "slug": "/styled-system/style-props#others",
-    "hierarchy": { "lv1": "Style Props", "lv2": "Others" }
   },
   {
     "title": "Text and Layer Styles",

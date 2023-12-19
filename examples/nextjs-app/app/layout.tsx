@@ -1,8 +1,8 @@
 'use client'
 
 import {
-  colorModeCookieStorageManager,
-  themeSchemeCookieStorageManager,
+  colorModeManager,
+  themeSchemeManager,
   UIProvider,
   ColorModeScript,
   ThemeSchemeScript,
@@ -30,8 +30,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <UIProvider
           config={config}
           theme={theme}
-          colorModeManager={colorModeCookieStorageManager}
-          themeSchemeManager={themeSchemeCookieStorageManager}
+          colorModeManager={colorModeManager.cookieStorage}
+          themeSchemeManager={themeSchemeManager.cookieStorage}
         >
           {children}
         </UIProvider>

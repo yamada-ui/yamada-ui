@@ -1,5 +1,31 @@
 # @yamada-ui/popover
 
+## 0.3.33
+
+### Patch Changes
+
+- Updated dependencies [[`8c2de1b`](https://github.com/hirotomoyamada/yamada-ui/commit/8c2de1b12c7d4efa4817a273da9072803f3c85a7), [`cca4552`](https://github.com/hirotomoyamada/yamada-ui/commit/cca45527a0f8282764c3cf87568df52e1080da46)]:
+  - @yamada-ui/core@0.15.1
+  - @yamada-ui/close-button@0.4.5
+  - @yamada-ui/motion@0.4.26
+  - @yamada-ui/transitions@0.3.28
+  - @yamada-ui/use-animation@0.4.15
+  - @yamada-ui/use-popper@0.4.26
+
+## 0.3.32
+
+### Patch Changes
+
+- [#470](https://github.com/hirotomoyamada/yamada-ui/pull/470) [`e8cdbdf`](https://github.com/hirotomoyamada/yamada-ui/commit/e8cdbdf7f03af4c5ea9378e9bd16d0ba809f98d2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed type definition due to automatic generation of CSS properties.
+
+- Updated dependencies [[`0018510`](https://github.com/hirotomoyamada/yamada-ui/commit/00185106e4be9e4922b9e5753b7afd60121e4bc8), [`4817eae`](https://github.com/hirotomoyamada/yamada-ui/commit/4817eaec2177ff22f3625c3237a01c0a8abfb9f1), [`e8cdbdf`](https://github.com/hirotomoyamada/yamada-ui/commit/e8cdbdf7f03af4c5ea9378e9bd16d0ba809f98d2)]:
+  - @yamada-ui/core@0.15.0
+  - @yamada-ui/close-button@0.4.4
+  - @yamada-ui/motion@0.4.25
+  - @yamada-ui/transitions@0.3.27
+  - @yamada-ui/use-animation@0.4.14
+  - @yamada-ui/use-popper@0.4.25
+
 ## 0.3.31
 
 ### Patch Changes

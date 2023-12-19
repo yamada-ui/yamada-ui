@@ -33,6 +33,12 @@ export type ConfigProps = {
     | ((theme: StyledTheme) => CSSProperties)
   token?: ThemeToken
   transform?: Transform
+  /**
+   * This is a property for documentation sites.
+   *
+   * @deprecated
+   */
+  isSkip?: boolean
 }
 
 export type Configs = Record<string, ConfigProps | true>

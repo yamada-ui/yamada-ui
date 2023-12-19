@@ -1,7 +1,7 @@
 import { writeFile } from "fs/promises"
 import type { ThemeToken } from "@yamada-ui/react"
 import { getConfig } from "./config"
-import { layoutStylesProperties } from "./layout-props"
+import { layoutStyleProperties } from "./layout-props"
 import { resolveTypes } from "./resolve-types"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap } from "./tokens"
@@ -74,12 +74,12 @@ const computedType = ({
 
 const generateDocs = ({
   properties,
-  url,
+  urls = [],
   description = [],
   deprecated,
 }: {
   properties: string | string[] | undefined
-  url?: string
+  urls?: string[]
   description?: string[]
   deprecated?: boolean
 }) => {
@@ -96,7 +96,12 @@ const generateDocs = ({
 
     description = [...description, `The CSS ${properties} property.`]
 
-    if (url) description = [...description, "", `@see Docs ${url}`]
+    if (urls.length)
+      description = [
+        ...description,
+        "",
+        ...urls.map((url) => `@see Docs ${url}`),
+      ]
   }
 
   if (deprecated) description = [...description, "", `@deprecated`]
@@ -126,7 +131,7 @@ export const generateStyles = async (
     const transform = transformMap[prop]
     const config = getConfig({ properties: prop, token, transform })
     type = computedType({ type, token, transform, prop })
-    const docs = generateDocs({ properties: name, url, deprecated })
+    const docs = generateDocs({ properties: name, urls: [url], deprecated })
 
     standardStyles = [...standardStyles, `${prop}: ${config}`]
     styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
@@ -146,20 +151,40 @@ export const generateStyles = async (
   })
 
   Object.entries<UIOptions>(uiProps).forEach(
-    ([prop, { properties, transform, static: css, type, description }]) => {
-      const types = styles
-        .filter(({ prop }) =>
-          typeof properties === "string"
-            ? prop === properties
-            : properties?.includes(prop),
-        )
-        .map(({ type }) => type)
+    ([
+      prop,
+      {
+        properties,
+        transform,
+        static: css,
+        type,
+        isProcessResult,
+        isSkip,
+        description,
+      },
+    ]) => {
+      const relatedStyles = styles.filter(({ prop }) =>
+        typeof properties === "string"
+          ? prop === properties
+          : properties?.includes(prop),
+      )
+
+      const deprecated = relatedStyles.some(({ deprecated }) => deprecated)
+      const urls = relatedStyles.map(({ url }) => url)
+      const types = relatedStyles.map(({ type }) => type)
       const token = tokenMap[prop as UIProperties]
       const shorthands = shorthandProps[prop as UIProperties]
       transform ??= transformMap[prop as UIProperties]
-      const config = getConfig({ properties, token, transform, css })
+      const config = getConfig({
+        properties,
+        token,
+        transform,
+        isProcessResult,
+        isSkip,
+        css,
+      })
       type = computedType({ type: type ?? types, token, transform })
-      const docs = generateDocs({ properties, description })
+      const docs = generateDocs({ properties, description, urls, deprecated })
 
       standardStyles = [...standardStyles, `${prop}: ${config}`]
       styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
@@ -198,9 +223,9 @@ export const generateStyles = async (
 
     export const styles: Configs = { ...standardStyles, ...shorthandStyles }
 
-    export const stylesProperties: any[] = Object.keys(styles)
+    export const styleProperties: any[] = Object.keys(styles)
 
-    export const layoutStylesProperties: any[] = [${layoutStylesProperties}]
+    export const layoutStyleProperties: any[] = [${layoutStyleProperties}]
 
     export type StyleProps = {
       ${styleProps.join("\n")}

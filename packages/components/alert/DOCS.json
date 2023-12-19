@@ -12,7 +12,7 @@
       "description": "The size of the Alert."
     },
     "status": {
-      "type": "\"info\" | \"success\" | \"warning\" | \"error\" | \"loading\"",
+      "type": "\"warning\" | \"success\" | \"info\" | \"error\" | \"loading\"",
       "defaultValue": "'info'",
       "required": false,
       "description": "The status of the alert."

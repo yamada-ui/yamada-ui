@@ -30,7 +30,12 @@ import type { IconProps } from "@yamada-ui/icon"
 import type { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { PropGetter } from "@yamada-ui/utils"
-import { createContext, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import {
+  ariaAttr,
+  createContext,
+  handlerAll,
+  runIfFunc,
+} from "@yamada-ui/utils"
 import type { CSSProperties } from "react"
 import { useCallback, useMemo } from "react"
 
@@ -57,6 +62,7 @@ export type PropsColumnDef = {
   css?: CSSUIObject
   colSpan?: number
   rowSpan?: number
+  "aria-label"?: string
 }
 
 export type GroupColumnDef<Y extends RowData, M = any> = {
@@ -69,6 +75,10 @@ export type Column<Y extends RowData, M = any> = (
 ) &
   GroupColumnDef<Y, M> &
   PropsColumnDef
+
+export type InternalColumn<Y extends RowData, M = any> = Column<Y, M> & {
+  "aria-hidden"?: boolean
+}
 
 type SelectColumn<Y extends RowData, M = any> = Omit<
   Column<Y, M>,
@@ -570,6 +580,7 @@ const TotalCheckbox = <Y extends RowData>({
   return (
     <Center>
       <Checkbox
+        inputProps={{ "aria-label": "Select all row" }}
         {...{ gap: 0, ...checkboxProps }}
         isChecked={isAllChecked || isChecked}
         {...(!isAllChecked ? { isIndeterminate } : {})}
@@ -593,7 +604,7 @@ export const mergeColumns = <Y extends RowData>({
   withFooterSelect?: boolean
   selectColumnProps?: SelectColumn<Y>
   disabledRowIds?: string[]
-}): Column<Y>[] => [
+}): InternalColumn<Y>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -616,6 +627,7 @@ export const mergeColumns = <Y extends RowData>({
       return (
         <Center>
           <Checkbox
+            inputProps={{ "aria-label": "Select row" }}
             {...{ gap: 0, ...checkboxProps }}
             isChecked={getIsSelected()}
             isDisabled={!getCanSelect()}
@@ -627,6 +639,7 @@ export const mergeColumns = <Y extends RowData>({
         </Center>
       )
     },
+    "aria-hidden": ariaAttr(!withFooterSelect),
     ...selectColumnProps,
     css: { w: "0", ...selectColumnProps?.css },
   },

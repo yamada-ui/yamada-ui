@@ -16,7 +16,7 @@
       "description": "The CSS `text-transform` property."
     },
     "decoration": {
-      "type": "UIValue<number | \"blink\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"aliceblue\" | \"antiquewhite\" | \"aqua\" | \"aquamarine\" | \"azure\" | ... 185 more ... | \"wavy\">",
+      "type": "UIValue<TextDecoration<0 | (string & {})>>",
       "required": false,
       "description": "The CSS `text-decoration` property."
     },

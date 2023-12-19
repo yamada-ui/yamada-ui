@@ -35,6 +35,8 @@ export const getConfig = ({
   token,
   transform,
   css,
+  isProcessResult,
+  isSkip,
 }: {
   properties?:
     | Union<CSSProperties | UIProperties>
@@ -42,6 +44,8 @@ export const getConfig = ({
   token?: ThemeToken
   transform?: TransformOptions
   css?: CSSObject
+  isProcessResult?: boolean
+  isSkip?: boolean
 }) => {
   if (!token && !transform && !css) return true
 
@@ -59,8 +63,10 @@ export const getConfig = ({
     }
   }
 
+  if (token) config = [...config, `token: "${token}"`]
+  if (isProcessResult) config = [...config, `isProcessResult: true`]
+  if (isSkip) config = [...config, `isSkip: true`]
   if (css) config = [...config, `static: ${JSON.stringify(css)}`]
-
   if (transform || token) config = insertTransform(config, token, transform)
 
   return `{ ${config.join(", ")} }`

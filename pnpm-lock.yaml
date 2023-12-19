@@ -1676,9 +1676,6 @@ importers:
       '@yamada-ui/use-focus-visible':
         specifier: workspace:*
         version: link:../../hooks/use-focus-visible
-      '@yamada-ui/use-resize-observer':
-        specifier: workspace:*
-        version: link:../../hooks/use-resize-observer
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

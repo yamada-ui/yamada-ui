@@ -33,7 +33,10 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
     const [styles, mergedProps] = useComponentStyle("CloseButton", props)
     const { className, children, isDisabled, __css, disableRipple, ...rest } =
       omitThemeProps(mergedProps)
-    const { onPointerDown, ...rippleProps } = useRipple(rest)
+    const { onPointerDown, ...rippleProps } = useRipple({
+      ...rest,
+      isDisabled: disableRipple || isDisabled,
+    })
 
     const css: CSSUIObject = {
       position: "relative",

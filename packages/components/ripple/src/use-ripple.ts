@@ -11,30 +11,39 @@ export type RippleOptions = {
 }
 
 export type UseRippleProps<T extends any = HTMLElement> = {
+  disabled?: boolean
+  isDisabled?: boolean
   onPointerDown?: PointerEventHandler<T>
 }
 
-export const useRipple = <T extends any = HTMLElement>(
-  props: UseRippleProps<T>,
-) => {
+export const useRipple = <T extends any = HTMLElement>({
+  disabled,
+  isDisabled,
+  ...rest
+}: UseRippleProps<T>) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
 
-  const onPointerDown: PointerEventHandler<T> = useCallback((ev) => {
-    const trigger = ev.currentTarget as unknown as Element
+  const onPointerDown: PointerEventHandler<T> = useCallback(
+    (ev) => {
+      if (disabled || isDisabled) return setRipples([])
 
-    const size = Math.max(trigger.clientWidth, trigger.clientHeight)
-    const rect = trigger.getBoundingClientRect()
+      const trigger = ev.currentTarget as unknown as Element
 
-    setRipples((prev) => [
-      ...prev,
-      {
-        key: createId(prev.length.toString()),
-        size,
-        x: ev.clientX - rect.x - size / 2,
-        y: ev.clientY - rect.y - size / 2,
-      },
-    ])
-  }, [])
+      const size = Math.max(trigger.clientWidth, trigger.clientHeight)
+      const rect = trigger.getBoundingClientRect()
+
+      setRipples((prev) => [
+        ...prev,
+        {
+          key: createId(prev.length.toString()),
+          size,
+          x: ev.clientX - rect.x - size / 2,
+          y: ev.clientY - rect.y - size / 2,
+        },
+      ])
+    },
+    [disabled, isDisabled],
+  )
 
   const onClear = useCallback((key: Key) => {
     setRipples((prev) => prev.filter((item) => item.key !== key))
@@ -42,7 +51,7 @@ export const useRipple = <T extends any = HTMLElement>(
 
   return {
     ripples,
-    onPointerDown: handlerAll(onPointerDown, props.onPointerDown),
+    onPointerDown: handlerAll(onPointerDown, rest.onPointerDown),
     onClear,
   }
 }

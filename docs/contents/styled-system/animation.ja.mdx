@@ -557,32 +557,6 @@ return (
 )
 ```
 
-#### キーフレーム
-
-スタイルオブジェクトのプロパティに配列を渡すことで、キーフレームを設定することができます。各キーフレームは、アニメーション全体で均等な間隔で配置されます。`transition`に`times`を設定すると間隔をオーバーライドすることができます。
-
-```tsx
-<Center h="md">
-  <Motion
-    animate={{
-      scale: [1, 2, 2, 1, 1],
-      rotate: [0, 0, 180, 180, 0],
-      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-    }}
-    transition={{
-      duration: 2,
-      ease: "easeInOut",
-      times: [0, 0.2, 0.5, 0.8, 1],
-      repeat: Infinity,
-      repeatDelay: 1,
-    }}
-    w="3xs"
-    h="3xs"
-    bg="primary"
-  />
-</Center>
-```
-
 #### `useMotionAnimationFrame`を使う
 
 `useMotionAnimationFrame`は、要素のアニメーションフレームごとに1回コールバックを実行します。コールバックは、**コールバックが最初に呼び出されてからの合計時間**と**最後のアニメーションフレームからの合計時間**を取得することができます。
@@ -634,6 +608,32 @@ return (
     </Box>
   </Center>
 )
+```
+
+#### キーフレーム
+
+スタイルオブジェクトのプロパティに配列を渡すことで、キーフレームを設定することができます。各キーフレームは、アニメーション全体で均等な間隔で配置されます。`transition`に`times`を設定すると間隔をオーバーライドすることができます。
+
+```tsx
+<Center h="md">
+  <Motion
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+    w="3xs"
+    h="3xs"
+    bg="primary"
+  />
+</Center>
 ```
 
 :::note

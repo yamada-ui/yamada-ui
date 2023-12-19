@@ -1,0 +1,51 @@
+---
+title: CloseButton
+description: "`CloseButton`は、基本的にコンポーネントの閉じる機能をトリガーするために使用するコンポーネントです。"
+package_name: "@yamada-ui/close-button"
+with_description: true
+tab: テーマ
+---
+
+## テーマ
+
+`CloseButton`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+`CloseButton`は、[Button](/components/forms/button)のスタイルを継承しています。
+:::
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const CloseButton: ComponentStyle = mergeStyle(Button, {
+  baseStyle: {
+    _hover: {
+      bg: ["blackAlpha.100", "whiteAlpha.100"],
+    },
+    _active: {
+      bg: ["blackAlpha.200", "whiteAlpha.200"],
+    },
+  },
+
+  sizes: {
+    sm: {
+      boxSize: 6,
+      fontSize: "2xs",
+    },
+    md: {
+      boxSize: 8,
+      fontSize: "xs",
+    },
+    lg: {
+      boxSize: 10,
+      fontSize: "md",
+    },
+  },
+
+  defaultProps: {
+    size: "md",
+  },
+})({ omit: ["variants", "sizes", "defaultProps"] })
+```

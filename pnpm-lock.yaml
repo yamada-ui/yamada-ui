@@ -954,7 +954,7 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       react-focus-lock:
-        specifier: ^2.9.1
+        specifier: ^2.9.5
         version: 2.9.6(@types/react@18.2.41)(react@18.2.0)
     devDependencies:
       clean-package:
@@ -21028,7 +21028,7 @@ packages:
       sisteransi: 1.0.5
 
   /prop-types@15.8.1:
-    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==, tarball: https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz}
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1

@@ -33,12 +33,12 @@ export const Portal = ({
   if (isDisabled) return children
 
   return containerRef ? (
-    <ContainerPortal containerRef={containerRef} {...{ children }} />
-  ) : (
-    <DefaultPortal
-      appendToParentPortal={appendToParentPortal}
-      {...{ children }}
+    <ContainerPortal
+      containerRef={containerRef}
+      {...{ appendToParentPortal, children }}
     />
+  ) : (
+    <DefaultPortal {...{ appendToParentPortal, children }} />
   )
 }
 

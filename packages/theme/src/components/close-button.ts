@@ -9,6 +9,9 @@ export const CloseButton: ComponentStyle = mergeStyle(Button, {
     _active: {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
     },
+    _focusVisible: {
+      boxShadow: "outline",
+    },
   },
 
   sizes: {

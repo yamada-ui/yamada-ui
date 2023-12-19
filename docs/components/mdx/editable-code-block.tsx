@@ -269,6 +269,7 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
         sx={{ "& > div": { pt: "0", pb: isMax ? "10" : "6" } }}
         maxH={isOpen ? "full" : "sm"}
         type="never"
+        tabIndex={-1}
       >
         {children}
       </ScrollArea>

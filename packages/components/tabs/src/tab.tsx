@@ -51,7 +51,10 @@ export const Tab = forwardRef<TabProps, "button">(
       clickOnSpace,
       onClick: handlerAll(props.onClick, () => setSelectedIndex(index)),
     })
-    const { onPointerDown, ...rippleProps } = useRipple(rest)
+    const { onPointerDown, ...rippleProps } = useRipple({
+      ...rest,
+      isDisabled: disableRipple || isDisabled,
+    })
 
     const css: CSSUIObject = {
       position: "relative",

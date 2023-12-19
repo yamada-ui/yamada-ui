@@ -20,7 +20,7 @@ export const useRipple = <T extends any = HTMLElement>({
   disabled,
   isDisabled,
   ...rest
-}: UseRippleProps<T>) => {
+}: UseRippleProps<T> = {}) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
 
   const onPointerDown: PointerEventHandler<T> = useCallback(

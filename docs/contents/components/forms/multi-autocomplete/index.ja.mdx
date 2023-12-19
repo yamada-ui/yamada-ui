@@ -96,13 +96,42 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 
 新しい項目の作成を許可する場合は、`allowCreate`を`true`に設定します。
 
-```tsx
-<MultiAutocomplete placeholder="キャラクターを選択" allowCreate>
-  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
-  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
-</MultiAutocomplete>
+```tsx functional=true
+const items: AutocompleteItem[] = [
+  { label: "ベジータ", value: "ベジータ" },
+  {
+    label: "地球人",
+    items: [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+  },
+  {
+    label: "フリーザ軍",
+    items: [
+      { label: "フリーザ", value: "フリーザ" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+  },
+]
+
+return (
+  <MultiAutocomplete
+    placeholder="キャラクターを選択"
+    items={items}
+    allowCreate
+  />
+)
 ```
+
+:::note status=warning
+`MultiAutocomplete`コンポーネントは、内部的に`children`を優先して使用します。`allowCreate`が`true`に設定されている場合、新しい項目を作成する機能が正しく反映されない可能性があります。この機能を利用したい場合は`children`の代わりに`items`を設定して、選択肢のリストを設定する必要があります。
+:::
 
 ### 作成された項目の挿入位置を変更する
 

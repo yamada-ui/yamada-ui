@@ -151,7 +151,11 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
   const [editorCode, setEditorCode] = useState(code)
 
   const transformCode = (code: string) => {
-    if (functional) code = "() => {" + code + "}"
+    if (functional) {
+      code = "() => {" + code + "}"
+    } else {
+      code = "<>" + code + "</>"
+    }
 
     return code
   }

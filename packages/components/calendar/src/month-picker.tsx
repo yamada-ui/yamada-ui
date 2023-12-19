@@ -74,7 +74,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     inputProps,
     iconProps,
     clearIconProps,
-    portalProps = { isDisabled: false },
+    portalProps = { isDisabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
 

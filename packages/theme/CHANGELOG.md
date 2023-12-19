@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 0.13.7
+
+### Patch Changes
+
+- [#489](https://github.com/hirotomoyamada/yamada-ui/pull/489) [`1c6b475`](https://github.com/hirotomoyamada/yamada-ui/commit/1c6b475b3b99f69f55cd5e8959bdf9be316d6292) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `focusVisible` style to `CloseButton`.
+
 ## 0.13.6
 
 ### Patch Changes

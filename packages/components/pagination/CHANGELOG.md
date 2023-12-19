@@ -1,5 +1,14 @@
 # @yamada-ui/pagination
 
+## 0.5.6
+
+### Patch Changes
+
+- [#483](https://github.com/hirotomoyamada/yamada-ui/pull/483) [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Unify disabled state handling.
+
+- Updated dependencies [[`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97), [`26c50c3`](https://github.com/hirotomoyamada/yamada-ui/commit/26c50c38fe09687ad02d95962741f45d1881d14a)]:
+  - @yamada-ui/ripple@0.1.7
+
 ## 0.5.5
 
 ### Patch Changes

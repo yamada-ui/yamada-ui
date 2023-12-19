@@ -1,5 +1,12 @@
 # @yamada-ui/popover
 
+## 0.3.34
+
+### Patch Changes
+
+- Updated dependencies [[`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97)]:
+  - @yamada-ui/close-button@0.4.6
+
 ## 0.3.33
 
 ### Patch Changes

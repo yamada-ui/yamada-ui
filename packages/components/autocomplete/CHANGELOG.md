@@ -1,5 +1,15 @@
 # @yamada-ui/autocomplete
 
+## 0.8.5
+
+### Patch Changes
+
+- [#486](https://github.com/hirotomoyamada/yamada-ui/pull/486) [`b0911e6`](https://github.com/hirotomoyamada/yamada-ui/commit/b0911e62cd082b906c54d3f06d959330445002c9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Disabled `Portal` props by default.
+
+- Updated dependencies []:
+  - @yamada-ui/popover@0.3.34
+  - @yamada-ui/select@0.6.5
+
 ## 0.8.4
 
 ### Patch Changes

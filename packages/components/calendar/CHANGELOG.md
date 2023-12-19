@@ -1,5 +1,17 @@
 # @yamada-ui/calendar
 
+## 0.7.5
+
+### Patch Changes
+
+- [#486](https://github.com/hirotomoyamada/yamada-ui/pull/486) [`b0911e6`](https://github.com/hirotomoyamada/yamada-ui/commit/b0911e62cd082b906c54d3f06d959330445002c9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Disabled `Portal` props by default.
+
+- [#483](https://github.com/hirotomoyamada/yamada-ui/pull/483) [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Unify disabled state handling.
+
+- Updated dependencies [[`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97)]:
+  - @yamada-ui/button@0.4.6
+  - @yamada-ui/popover@0.3.34
+
 ## 0.7.4
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @yamada-ui/ripple
 
+## 0.1.7
+
+### Patch Changes
+
+- [#483](https://github.com/hirotomoyamada/yamada-ui/pull/483) [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Unify disabled state handling.
+
+- [#487](https://github.com/hirotomoyamada/yamada-ui/pull/487) [`26c50c3`](https://github.com/hirotomoyamada/yamada-ui/commit/26c50c38fe09687ad02d95962741f45d1881d14a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Set default props in `useRipple`.
+
 ## 0.1.6
 
 ### Patch Changes

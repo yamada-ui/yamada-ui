@@ -1,5 +1,27 @@
 # @yamada-ui/react
 
+## 0.9.7
+
+### Patch Changes
+
+- Updated dependencies [[`b0911e6`](https://github.com/hirotomoyamada/yamada-ui/commit/b0911e62cd082b906c54d3f06d959330445002c9), [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97), [`1c6b475`](https://github.com/hirotomoyamada/yamada-ui/commit/1c6b475b3b99f69f55cd5e8959bdf9be316d6292), [`26c50c3`](https://github.com/hirotomoyamada/yamada-ui/commit/26c50c38fe09687ad02d95962741f45d1881d14a)]:
+  - @yamada-ui/autocomplete@0.8.5
+  - @yamada-ui/close-button@0.4.6
+  - @yamada-ui/pagination@0.5.6
+  - @yamada-ui/button@0.4.6
+  - @yamada-ui/ripple@0.1.7
+  - @yamada-ui/tabs@0.4.6
+  - @yamada-ui/theme@0.13.7
+  - @yamada-ui/modal@0.5.13
+  - @yamada-ui/notice@0.5.18
+  - @yamada-ui/popover@0.3.34
+  - @yamada-ui/file-button@0.3.33
+  - @yamada-ui/providers@0.9.24
+  - @yamada-ui/theme-tools@0.2.36
+  - @yamada-ui/menu@0.4.8
+  - @yamada-ui/select@0.6.5
+  - @yamada-ui/use-media-query@0.2.39
+
 ## 0.9.6
 
 ### Patch Changes

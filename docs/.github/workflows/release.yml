@@ -20,6 +20,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
+      - name: Update CSS properties
+        run: pnpm gen:css
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
       - name: Update Theme
         run: pnpm gen:theme
         env:

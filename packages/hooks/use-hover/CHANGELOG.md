@@ -1,5 +1,12 @@
 # @yamada-ui/use-hover
 
+## 0.2.9
+
+### Patch Changes
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+
 ## 0.2.8
 
 ### Patch Changes

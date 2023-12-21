@@ -5,11 +5,12 @@ import {
   Button,
   Center,
   Motion,
-  MotionConfig,
   Text,
+  UIProvider,
   useBoolean,
   useScroll,
   useTransform,
+  extendConfig,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Motion>
@@ -48,8 +49,12 @@ export const animatePresence: Story = () => {
 }
 
 export const motionConfig: Story = () => {
+  const config = extendConfig({
+    motion: { config: { transition: { duration: 2 } } },
+  })
+
   return (
-    <MotionConfig transition={{ duration: 2 }}>
+    <UIProvider config={config}>
       <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
         <Motion
           animate={{ x: 100 }}
@@ -61,7 +66,7 @@ export const motionConfig: Story = () => {
           Motion
         </Motion>
       </Center>
-    </MotionConfig>
+    </UIProvider>
   )
 }
 

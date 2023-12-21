@@ -2510,6 +2510,9 @@ importers:
       '@yamada-ui/loading':
         specifier: workspace:*
         version: link:../components/loading
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../components/motion
       '@yamada-ui/notice':
         specifier: workspace:*
         version: link:../components/notice

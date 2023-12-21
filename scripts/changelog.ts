@@ -138,7 +138,7 @@ const generateChangelog = ({
   content = [
     "## Updated",
     ...main,
-    "## Updated dependencies",
+    "## Updated by dependencies",
     ...dependencies,
   ].join("\n")
 

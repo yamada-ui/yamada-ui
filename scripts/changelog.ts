@@ -1,7 +1,15 @@
-import { existsSync, mkdirSync } from "fs"
-import { readFile, writeFile } from "fs/promises"
+import { existsSync } from "fs"
+import { mkdir, readFile, writeFile } from "fs/promises"
+import * as p from "@clack/prompts"
 import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
+import { isArray } from "@yamada-ui/react"
+import c from "chalk"
+import { prettier } from "./utils"
+
+const octokit = new Octokit({
+  auth: "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",
+})
 
 type PullRequests = RestEndpointMethodTypes["pulls"]["list"]["response"]["data"]
 type PullRequest = PullRequests[number]
@@ -14,104 +22,12 @@ export type PullRequestData = {
   version: string | undefined
 }
 
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-const getPullRequestData = ({
-  body: content,
-  merged_at,
-  updated_at,
-  number: id,
-  html_url: url,
-}: PullRequest): PullRequestData | undefined => {
-  if (!content) return
-
-  content ??= ""
-
-  const parts = content.split("# Releases")
-  content = parts[1] || content
-
-  const date = new Date(merged_at ?? updated_at).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
-
-  const match = content.match(/## @yamada-ui\/react\@(?<version>\d.+)/)
-  const version = match?.groups?.version
-
-  if (!version) return
-
-  const sanitized = content
-    .replace(/<(https?:\/\/.+)>/g, (_, group) => {
-      return `[${group}](${group})`
-    })
-    .replace(/-\s+(Updated dependencies(?:\n.+)*]):(?:\n.+)*/gm, (_, group) => {
-      return `- ${group}`
-    })
-    .replace(/-\s+(Updated dependencies) \\\[\]:(?:\n.+)*/gm, (_, group) => {
-      return `- ${group}`
-    })
-
-  const body = [
-    "---",
-    `title: Version ${version}`,
-    `description: Explore the changelog for Yamada UI version ${version}. Learn about the latest features, bug fixes, and improvements.`,
-    `release_url: ${url}`,
-    `release_date: ${date}`,
-    `version: ${version}`,
-    "---",
-    `${sanitized}`,
-  ].join("\n")
-
-  return { id, url, body, date, version }
+const REPO_REQUEST_PARAMETERS = {
+  owner: "hirotomoyamada",
+  repo: "yamada-ui",
 }
 
-const getPrByNumber = async (pull_number: number): Promise<PullRequest> => {
-  const { data } = await octokit.pulls.get({
-    owner: "hirotomoyamada",
-    repo: "yamada-ui",
-    pull_number,
-  })
-
-  return data as PullRequest
-}
-
-const getLatestPr = async (): Promise<PullRequest> => {
-  const { data } = await octokit.pulls.list({
-    state: "closed",
-    owner: "hirotomoyamada",
-    repo: "yamada-ui",
-    base: "main",
-    head: "hirotomoyamada:changeset-release/main",
-    per_page: 1,
-  })
-
-  return data[0] as PullRequest
-}
-
-const getMergedPrs = async (): Promise<PullRequests> => {
-  const { data } = await octokit.pulls.list({
-    state: "all",
-    owner: "hirotomoyamada",
-    repo: "yamada-ui",
-    base: "main",
-    head: "hirotomoyamada:changeset-release/main",
-    per_page: 100,
-  })
-
-  return (data as PullRequests).filter(({ merged_at }) => merged_at)
-}
-
-const writePrFile = async ({
-  version,
-  body,
-}: PullRequestData): Promise<void> => {
-  if (!existsSync(".changelog")) mkdirSync(".changelog")
-
-  return writeFile(`.changelog/v${version}.mdx`, body)
-}
-
-export const manifest = {
+const manifest = {
   path: ".changelog/manifest.json",
 
   async write(data: PullRequestData[]) {
@@ -135,67 +51,212 @@ export const manifest = {
   },
 }
 
-const writeReadme = async (): Promise<void> => {
+const getPullRequests = async () => {
+  if (arg.includes("--latest")) {
+    const { data } = await octokit.pulls.list({
+      ...REPO_REQUEST_PARAMETERS,
+      state: "closed",
+      base: "main",
+      head: "hirotomoyamada:changeset-release/main",
+      per_page: 1,
+    })
+
+    return data[0] as PullRequest
+  } else if (arg.includes("--number")) {
+    const pull_number = +arg.replace("--number=", "")
+
+    const { data } = await octokit.pulls.get({
+      ...REPO_REQUEST_PARAMETERS,
+      pull_number,
+    })
+
+    return data as PullRequest
+  } else {
+    const { data } = await octokit.pulls.list({
+      ...REPO_REQUEST_PARAMETERS,
+      state: "all",
+      base: "main",
+      head: "hirotomoyamada:changeset-release/main",
+      per_page: 100,
+    })
+
+    return (data as PullRequests).filter(({ merged_at }) => merged_at)
+  }
+}
+
+const generateChangelog = ({
+  body: content,
+  merged_at,
+  updated_at,
+  number: id,
+  html_url: url,
+}: PullRequest): PullRequestData | undefined => {
+  if (!content) return
+
+  const parts = content.split("# Releases")
+  content = parts[1] || content
+
+  const date = new Date(merged_at ?? updated_at).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
+  const match = content.match(/## @yamada-ui\/react\@(?<version>\d.+)/)
+  const version = match?.groups?.version
+
+  if (!version) return
+
+  content = content
+    .replace(/\n### /g, "\n#### ")
+    .replace(/\n## /g, "\n### ")
+    .replace(/<(https?:\/\/.+)>/g, (_, value) => `[${value}](${value})`)
+
+  const sections = content
+    .split("\n### ")
+    .slice(1)
+    .map((section) => "### " + section.trim())
+
+  const { main, dependencies } = sections.reduce<{
+    main: string[]
+    dependencies: string[]
+  }>(
+    (prev, section) => {
+      if (/-\s+\[#\d+\]\(.+\)|-\s+\[`[^\]]+`\]\(.+\)/g.test(section)) {
+        prev.main = [...prev.main, section]
+      } else {
+        prev.dependencies = [...prev.dependencies, section]
+      }
+      return prev
+    },
+    {
+      main: [],
+      dependencies: [],
+    },
+  )
+
+  content = [
+    "## Updated",
+    ...main,
+    "## Updated dependencies",
+    ...dependencies,
+  ].join("\n")
+
+  content = content
+    .replace(
+      /-\s*(Updated dependencies.*\s)[\s\S]*?(?=\n\S|\s*$)/g,
+      (_, value) => {
+        return `- ${value}`
+      },
+    )
+    .replace(/-\s*(Updated dependencies).*/g, (substring, value) => {
+      const commits = substring.match(/\[`(\w+)`\]\(([^\)]+)\)/g)
+      const prefix = commits ? `${commits.join(" ")} ` : ``
+
+      return `- ${prefix}${value}.`
+    })
+
+  const body = [
+    "---",
+    `title: Version ${version}`,
+    `description: Explore the changelog for Yamada UI version ${version}. Learn about the latest features, bug fixes, and improvements.`,
+    `release_url: ${url}`,
+    `release_date: ${date}`,
+    `version: ${version}`,
+    "---",
+    `${content}`,
+  ].join("\n")
+
+  return { id, url, body, date, version }
+}
+
+const writeVersionFile = async ({
+  version,
+  body,
+}: PullRequestData): Promise<void> => {
+  if (!existsSync(".changelog")) await mkdir(".changelog")
+
+  body = await prettier(body, { parser: "mdx" })
+
+  return writeFile(`.changelog/v${version}.mdx`, body)
+}
+
+const writeChangelogFile = async (): Promise<void> => {
   const data = await manifest.read()
   const sortedData = data.map(
     ({ date, version }) =>
       `### ${date}: [v${version}](/.changelog/v${version}.mdx)`,
   )
-  const [latest, ...others] = sortedData
+  const [latest, ...rest] = sortedData
 
-  const body = [
+  let body = [
     "# Changelog\n",
     "## Latest Release\n",
     latest,
     "\n## Previous Releases\n",
-    ...others,
+    ...rest,
   ].join("\n")
 
+  body = await prettier(body, { parser: "markdown" })
+
   await writeFile("CHANGELOG.md", body)
-}
-
-const sync = async (): Promise<void> => {
-  const prs = await getMergedPrs()
-  const data = prs.map(getPullRequestData).filter(Boolean) as PullRequestData[]
-
-  await Promise.allSettled([...data.map(writePrFile), manifest.write(data)])
-
-  await writeReadme()
-}
-
-const updateFiles = async (data: PullRequestData): Promise<void> => {
-  await writePrFile(data)
-
-  await manifest.update(data)
-
-  await writeReadme()
-}
-
-const syncByNumber = async (prNumber: number): Promise<void> => {
-  const data = getPullRequestData(await getPrByNumber(prNumber))
-
-  if (data) await updateFiles(data)
-}
-
-const syncLatest = async (): Promise<void> => {
-  const pr = await getLatestPr()
-
-  const data = getPullRequestData(pr)
-
-  if (data) await updateFiles(data)
 }
 
 const arg = process.argv[2] ?? ""
 
 const main = async () => {
-  if (arg.includes("--latest")) {
-    await syncLatest()
-  } else if (arg.includes("--number")) {
-    const prNumber = +arg.replace("--number=", "")
+  p.intro(c.magenta(`Generating the changelog`))
 
-    await syncByNumber(prNumber)
-  } else {
-    await sync()
+  const s = p.spinner()
+
+  try {
+    const start = process.hrtime.bigint()
+
+    s.start(`Getting the pull requests`)
+
+    const pullRequests = await getPullRequests()
+
+    s.stop(`Got the pull requests`)
+
+    s.start(`Generating the version file`)
+
+    if (isArray(pullRequests)) {
+      const data = pullRequests
+        .map(generateChangelog)
+        .filter(Boolean) as PullRequestData[]
+
+      if (!data.length) throw new Error("Nothing to change")
+
+      await Promise.allSettled([
+        ...data.map(writeVersionFile),
+        manifest.write(data),
+      ])
+    } else {
+      const data = generateChangelog(pullRequests)
+
+      if (!data) throw new Error("Nothing to change")
+
+      await writeVersionFile(data)
+
+      await manifest.update(data)
+    }
+
+    s.stop(`Generated the version file`)
+
+    s.start(`Writing the changelog file`)
+
+    await writeChangelogFile()
+
+    s.stop(`Wrote the version file`)
+
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    p.outro(c.green(`Done in ${duration}s\n`))
+  } catch (e) {
+    s.stop(`An error occurred`, 500)
+
+    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
   }
 }
 

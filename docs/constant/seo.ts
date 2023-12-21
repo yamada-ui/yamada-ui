@@ -13,9 +13,9 @@ export const SEO = {
         "Yamada UI: A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
       images: [
         {
-          url: "https://yamada-ui.com/og-image.png",
-          width: 1240,
-          height: 480,
+          url: "https://yamada-ui.com/og.png",
+          width: 1200,
+          height: 630,
           alt: "A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
         },
       ],

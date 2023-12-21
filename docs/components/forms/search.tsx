@@ -121,7 +121,7 @@ const SearchModal: FC<SearchModalProps> = memo(
     )
 
     const hits = useMemo(() => {
-      if (query.length < 2) return []
+      if (query.length < 1) return []
 
       return matchSorter(contents, query, {
         keys: [

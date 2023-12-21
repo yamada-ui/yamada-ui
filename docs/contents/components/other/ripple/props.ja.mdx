@@ -1,0 +1,1332 @@
+---
+title: Ripple
+description: "`Ripple`は、要素に波及効果を付与し、ユーザーがクリックしたかどうかを認識させるコンポーネントです。"
+package_name: "@yamada-ui/ripple"
+with_description: true
+tab: Props
+---
+
+## Props
+
+### RippleProps
+
+<PropsCard
+  id="ripple-onclear"
+  name="onClear"
+  required
+  type="(key: Key) => void"
+/>
+
+<PropsCard id="ripple-ripples" name="ripples" required type="RippleOptions[]" />
+
+<PropsCard id="ripple-about" name="about" type="string" />
+
+<PropsCard id="ripple-accesskey" name="accessKey" type="string" />
+
+<PropsCard
+  id="ripple-aria-activedescendant"
+  name="aria-activedescendant"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-atomic" name="aria-atomic" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-autocomplete"
+  name="aria-autocomplete"
+  type='"list" | "none" | "inline" | "both"'
+/>
+
+<PropsCard
+  id="ripple-aria-braillelabel"
+  name="aria-braillelabel"
+  type="string"
+/>
+
+<PropsCard
+  id="ripple-aria-brailleroledescription"
+  name="aria-brailleroledescription"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-busy" name="aria-busy" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-checked"
+  name="aria-checked"
+  type='boolean | "true" | "false" | "mixed"'
+/>
+
+<PropsCard id="ripple-aria-colcount" name="aria-colcount" type="number" />
+
+<PropsCard id="ripple-aria-colindex" name="aria-colindex" type="number" />
+
+<PropsCard
+  id="ripple-aria-colindextext"
+  name="aria-colindextext"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-colspan" name="aria-colspan" type="number" />
+
+<PropsCard id="ripple-aria-controls" name="aria-controls" type="string" />
+
+<PropsCard
+  id="ripple-aria-current"
+  name="aria-current"
+  type='type ONLY_FOR_FORMAT =
+  | boolean
+  | "time"
+  | "true"
+  | "false"
+  | "step"
+  | "page"
+  | "location"
+  | "date"'
+/>
+
+<PropsCard id="ripple-aria-describedby" name="aria-describedby" type="string" />
+
+<PropsCard id="ripple-aria-description" name="aria-description" type="string" />
+
+<PropsCard id="ripple-aria-details" name="aria-details" type="string" />
+
+<PropsCard id="ripple-aria-disabled" name="aria-disabled" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-dropeffect"
+  name="aria-dropeffect"
+  type='"link" | "none" | "copy" | "execute" | "move" | "popup"'
+/>
+
+<PropsCard
+  id="ripple-aria-errormessage"
+  name="aria-errormessage"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-expanded" name="aria-expanded" type="Booleanish" />
+
+<PropsCard id="ripple-aria-flowto" name="aria-flowto" type="string" />
+
+<PropsCard id="ripple-aria-grabbed" name="aria-grabbed" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-haspopup"
+  name="aria-haspopup"
+  type='type ONLY_FOR_FORMAT =
+  | boolean
+  | "dialog"
+  | "menu"
+  | "true"
+  | "false"
+  | "grid"
+  | "listbox"
+  | "tree"'
+/>
+
+<PropsCard id="ripple-aria-hidden" name="aria-hidden" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-invalid"
+  name="aria-invalid"
+  type='boolean | "true" | "false" | "grammar" | "spelling"'
+/>
+
+<PropsCard
+  id="ripple-aria-keyshortcuts"
+  name="aria-keyshortcuts"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-label" name="aria-label" type="string" />
+
+<PropsCard id="ripple-aria-labelledby" name="aria-labelledby" type="string" />
+
+<PropsCard id="ripple-aria-level" name="aria-level" type="number" />
+
+<PropsCard
+  id="ripple-aria-live"
+  name="aria-live"
+  type='"off" | "assertive" | "polite"'
+/>
+
+<PropsCard id="ripple-aria-modal" name="aria-modal" type="Booleanish" />
+
+<PropsCard id="ripple-aria-multiline" name="aria-multiline" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-multiselectable"
+  name="aria-multiselectable"
+  type="Booleanish"
+/>
+
+<PropsCard
+  id="ripple-aria-orientation"
+  name="aria-orientation"
+  type='"horizontal" | "vertical"'
+/>
+
+<PropsCard id="ripple-aria-owns" name="aria-owns" type="string" />
+
+<PropsCard id="ripple-aria-placeholder" name="aria-placeholder" type="string" />
+
+<PropsCard id="ripple-aria-posinset" name="aria-posinset" type="number" />
+
+<PropsCard
+  id="ripple-aria-pressed"
+  name="aria-pressed"
+  type='boolean | "true" | "false" | "mixed"'
+/>
+
+<PropsCard id="ripple-aria-readonly" name="aria-readonly" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-relevant"
+  name="aria-relevant"
+  type='type ONLY_FOR_FORMAT =
+  | "text"
+  | "all"
+  | "additions"
+  | "additions removals"
+  | "additions text"
+  | "removals"
+  | "removals additions"
+  | "removals text"
+  | "text additions"
+  | "text removals"'
+/>
+
+<PropsCard id="ripple-aria-required" name="aria-required" type="Booleanish" />
+
+<PropsCard
+  id="ripple-aria-roledescription"
+  name="aria-roledescription"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-rowcount" name="aria-rowcount" type="number" />
+
+<PropsCard id="ripple-aria-rowindex" name="aria-rowindex" type="number" />
+
+<PropsCard
+  id="ripple-aria-rowindextext"
+  name="aria-rowindextext"
+  type="string"
+/>
+
+<PropsCard id="ripple-aria-rowspan" name="aria-rowspan" type="number" />
+
+<PropsCard id="ripple-aria-selected" name="aria-selected" type="Booleanish" />
+
+<PropsCard id="ripple-aria-setsize" name="aria-setsize" type="number" />
+
+<PropsCard
+  id="ripple-aria-sort"
+  name="aria-sort"
+  type='"none" | "ascending" | "descending" | "other"'
+/>
+
+<PropsCard id="ripple-aria-valuemax" name="aria-valuemax" type="number" />
+
+<PropsCard id="ripple-aria-valuemin" name="aria-valuemin" type="number" />
+
+<PropsCard id="ripple-aria-valuenow" name="aria-valuenow" type="number" />
+
+<PropsCard id="ripple-aria-valuetext" name="aria-valuetext" type="string" />
+
+<PropsCard
+  id="ripple-as"
+  name="as"
+  type='"symbol" | "object" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | "b" | "base" | "bdi" | "bdo" | "big" | "blockquote" | "body" | "br" | "button" | "canvas" | ... 149 more ... | "view"'
+/>
+
+<PropsCard id="ripple-autocapitalize" name="autoCapitalize" type="string" />
+
+<PropsCard id="ripple-autocorrect" name="autoCorrect" type="string" />
+
+<PropsCard id="ripple-autofocus" name="autoFocus" type="boolean" />
+
+<PropsCard id="ripple-autosave" name="autoSave" type="string" />
+
+<PropsCard id="ripple-classname" name="className" type="string" />
+
+<PropsCard id="ripple-color" name="color" type="string" />
+
+<PropsCard id="ripple-content" name="content" type="string" />
+
+<PropsCard
+  id="ripple-contenteditable"
+  name="contentEditable"
+  type='"inherit" | Booleanish | "plaintext-only"'
+/>
+
+<PropsCard id="ripple-contextmenu" name="contextMenu" type="string" />
+
+<PropsCard
+  id="ripple-dangerouslysetinnerhtml"
+  name="dangerouslySetInnerHTML"
+  type="{ __html: string | TrustedHTML }"
+/>
+
+<PropsCard id="ripple-datatype" name="datatype" type="string" />
+
+<PropsCard id="ripple-defaultchecked" name="defaultChecked" type="boolean" />
+
+<PropsCard
+  id="ripple-defaultvalue"
+  name="defaultValue"
+  type="string | number | readonly string[]"
+/>
+
+<PropsCard id="ripple-dir" name="dir" type="string" />
+
+<PropsCard id="ripple-draggable" name="draggable" type="Booleanish" />
+
+<PropsCard id="ripple-hidden" name="hidden" type="boolean" />
+
+<PropsCard id="ripple-id" name="id" type="string" />
+
+<PropsCard id="ripple-inlist" name="inlist" type="any" />
+
+<PropsCard
+  id="ripple-inputmode"
+  name="inputMode"
+  type='type ONLY_FOR_FORMAT =
+  | "search"
+  | "text"
+  | "none"
+  | "tel"
+  | "url"
+  | "email"
+  | "numeric"
+  | "decimal"'
+/>
+
+<PropsCard id="ripple-is" name="is" type="string" />
+
+<PropsCard
+  id="ripple-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue="false"
+/>
+
+<PropsCard id="ripple-itemid" name="itemID" type="string" />
+
+<PropsCard id="ripple-itemprop" name="itemProp" type="string" />
+
+<PropsCard id="ripple-itemref" name="itemRef" type="string" />
+
+<PropsCard id="ripple-itemscope" name="itemScope" type="boolean" />
+
+<PropsCard id="ripple-itemtype" name="itemType" type="string" />
+
+<PropsCard id="ripple-lang" name="lang" type="string" />
+
+<PropsCard id="ripple-nonce" name="nonce" type="string" />
+
+<PropsCard
+  id="ripple-onabort"
+  name="onAbort"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onabortcapture"
+  name="onAbortCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onanimationend"
+  name="onAnimationEnd"
+  type="AnimationEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onanimationendcapture"
+  name="onAnimationEndCapture"
+  type="AnimationEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onanimationiteration"
+  name="onAnimationIteration"
+  type="AnimationEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onanimationiterationcapture"
+  name="onAnimationIterationCapture"
+  type="AnimationEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onanimationstartcapture"
+  name="onAnimationStartCapture"
+  type="AnimationEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onauxclick"
+  name="onAuxClick"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onauxclickcapture"
+  name="onAuxClickCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onbeforeinput"
+  name="onBeforeInput"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onbeforeinputcapture"
+  name="onBeforeInputCapture"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onblur"
+  name="onBlur"
+  type="FocusEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onblurcapture"
+  name="onBlurCapture"
+  type="FocusEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncanplay"
+  name="onCanPlay"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncanplaycapture"
+  name="onCanPlayCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncanplaythrough"
+  name="onCanPlayThrough"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncanplaythroughcapture"
+  name="onCanPlayThroughCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onchange"
+  name="onChange"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onchangecapture"
+  name="onChangeCapture"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onclick"
+  name="onClick"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onclickcapture"
+  name="onClickCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncompositionend"
+  name="onCompositionEnd"
+  type="CompositionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncompositionendcapture"
+  name="onCompositionEndCapture"
+  type="CompositionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncompositionstart"
+  name="onCompositionStart"
+  type="CompositionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncompositionstartcapture"
+  name="onCompositionStartCapture"
+  type="CompositionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncompositionupdate"
+  name="onCompositionUpdate"
+  type="CompositionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncompositionupdatecapture"
+  name="onCompositionUpdateCapture"
+  type="CompositionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncontextmenu"
+  name="onContextMenu"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncontextmenucapture"
+  name="onContextMenuCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncopy"
+  name="onCopy"
+  type="ClipboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncopycapture"
+  name="onCopyCapture"
+  type="ClipboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncut"
+  name="onCut"
+  type="ClipboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oncutcapture"
+  name="onCutCapture"
+  type="ClipboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondoubleclick"
+  name="onDoubleClick"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondoubleclickcapture"
+  name="onDoubleClickCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragcapture"
+  name="onDragCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragendcapture"
+  name="onDragEndCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragenter"
+  name="onDragEnter"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragentercapture"
+  name="onDragEnterCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragexit"
+  name="onDragExit"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragexitcapture"
+  name="onDragExitCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragleave"
+  name="onDragLeave"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragleavecapture"
+  name="onDragLeaveCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragover"
+  name="onDragOver"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragovercapture"
+  name="onDragOverCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondragstartcapture"
+  name="onDragStartCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondrop"
+  name="onDrop"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondropcapture"
+  name="onDropCapture"
+  type="DragEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondurationchange"
+  name="onDurationChange"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ondurationchangecapture"
+  name="onDurationChangeCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onemptied"
+  name="onEmptied"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onemptiedcapture"
+  name="onEmptiedCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onencrypted"
+  name="onEncrypted"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onencryptedcapture"
+  name="onEncryptedCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onended"
+  name="onEnded"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onendedcapture"
+  name="onEndedCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onerror"
+  name="onError"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onerrorcapture"
+  name="onErrorCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onfocus"
+  name="onFocus"
+  type="FocusEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onfocuscapture"
+  name="onFocusCapture"
+  type="FocusEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ongotpointercapture"
+  name="onGotPointerCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ongotpointercapturecapture"
+  name="onGotPointerCaptureCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oninput"
+  name="onInput"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oninputcapture"
+  name="onInputCapture"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oninvalid"
+  name="onInvalid"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-oninvalidcapture"
+  name="onInvalidCapture"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onkeydown"
+  name="onKeyDown"
+  type="KeyboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onkeydowncapture"
+  name="onKeyDownCapture"
+  type="KeyboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onkeypress"
+  name="onKeyPress"
+  type="KeyboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onkeypresscapture"
+  name="onKeyPressCapture"
+  type="KeyboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onkeyup"
+  name="onKeyUp"
+  type="KeyboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onkeyupcapture"
+  name="onKeyUpCapture"
+  type="KeyboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onload"
+  name="onLoad"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadcapture"
+  name="onLoadCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadeddata"
+  name="onLoadedData"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadeddatacapture"
+  name="onLoadedDataCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadedmetadata"
+  name="onLoadedMetadata"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadedmetadatacapture"
+  name="onLoadedMetadataCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadstart"
+  name="onLoadStart"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onloadstartcapture"
+  name="onLoadStartCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onlostpointercapture"
+  name="onLostPointerCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onlostpointercapturecapture"
+  name="onLostPointerCaptureCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmousedown"
+  name="onMouseDown"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmousedowncapture"
+  name="onMouseDownCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseenter"
+  name="onMouseEnter"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseleave"
+  name="onMouseLeave"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmousemove"
+  name="onMouseMove"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmousemovecapture"
+  name="onMouseMoveCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseout"
+  name="onMouseOut"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseoutcapture"
+  name="onMouseOutCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseover"
+  name="onMouseOver"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseovercapture"
+  name="onMouseOverCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseup"
+  name="onMouseUp"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onmouseupcapture"
+  name="onMouseUpCapture"
+  type="MouseEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpaste"
+  name="onPaste"
+  type="ClipboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpastecapture"
+  name="onPasteCapture"
+  type="ClipboardEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpause"
+  name="onPause"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpausecapture"
+  name="onPauseCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onplay"
+  name="onPlay"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onplaycapture"
+  name="onPlayCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onplaying"
+  name="onPlaying"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onplayingcapture"
+  name="onPlayingCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointercancel"
+  name="onPointerCancel"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointercancelcapture"
+  name="onPointerCancelCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerdown"
+  name="onPointerDown"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerdowncapture"
+  name="onPointerDownCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerenter"
+  name="onPointerEnter"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerentercapture"
+  name="onPointerEnterCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerleave"
+  name="onPointerLeave"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerleavecapture"
+  name="onPointerLeaveCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointermove"
+  name="onPointerMove"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointermovecapture"
+  name="onPointerMoveCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerout"
+  name="onPointerOut"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointeroutcapture"
+  name="onPointerOutCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerover"
+  name="onPointerOver"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerovercapture"
+  name="onPointerOverCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerup"
+  name="onPointerUp"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onpointerupcapture"
+  name="onPointerUpCapture"
+  type="PointerEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onprogress"
+  name="onProgress"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onprogresscapture"
+  name="onProgressCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onratechange"
+  name="onRateChange"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onratechangecapture"
+  name="onRateChangeCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onreset"
+  name="onReset"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onresetcapture"
+  name="onResetCapture"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onresize"
+  name="onResize"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onresizecapture"
+  name="onResizeCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onscroll"
+  name="onScroll"
+  type="UIEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onscrollcapture"
+  name="onScrollCapture"
+  type="UIEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onseeked"
+  name="onSeeked"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onseekedcapture"
+  name="onSeekedCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onseeking"
+  name="onSeeking"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onseekingcapture"
+  name="onSeekingCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onselect"
+  name="onSelect"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onselectcapture"
+  name="onSelectCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onstalled"
+  name="onStalled"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onstalledcapture"
+  name="onStalledCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onsubmit"
+  name="onSubmit"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onsubmitcapture"
+  name="onSubmitCapture"
+  type="FormEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onsuspend"
+  name="onSuspend"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onsuspendcapture"
+  name="onSuspendCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontimeupdate"
+  name="onTimeUpdate"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontimeupdatecapture"
+  name="onTimeUpdateCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchcancel"
+  name="onTouchCancel"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchcancelcapture"
+  name="onTouchCancelCapture"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchend"
+  name="onTouchEnd"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchendcapture"
+  name="onTouchEndCapture"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchmove"
+  name="onTouchMove"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchmovecapture"
+  name="onTouchMoveCapture"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchstart"
+  name="onTouchStart"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontouchstartcapture"
+  name="onTouchStartCapture"
+  type="TouchEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontransitionend"
+  name="onTransitionEnd"
+  type="TransitionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-ontransitionendcapture"
+  name="onTransitionEndCapture"
+  type="TransitionEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onvolumechange"
+  name="onVolumeChange"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onvolumechangecapture"
+  name="onVolumeChangeCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onwaiting"
+  name="onWaiting"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onwaitingcapture"
+  name="onWaitingCapture"
+  type="ReactEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onwheel"
+  name="onWheel"
+  type="WheelEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard
+  id="ripple-onwheelcapture"
+  name="onWheelCapture"
+  type="WheelEventHandler<HTMLSpanElement>"
+/>
+
+<PropsCard id="ripple-placeholder" name="placeholder" type="string" />
+
+<PropsCard id="ripple-prefix" name="prefix" type="string" />
+
+<PropsCard id="ripple-property" name="property" type="string" />
+
+<PropsCard id="ripple-radiogroup" name="radioGroup" type="string" />
+
+<PropsCard id="ripple-rel" name="rel" type="string" />
+
+<PropsCard id="ripple-resource" name="resource" type="string" />
+
+<PropsCard id="ripple-results" name="results" type="number" />
+
+<PropsCard id="ripple-rev" name="rev" type="string" />
+
+<PropsCard id="ripple-role" name="role" type="AriaRole" />
+
+<PropsCard id="ripple-security" name="security" type="string" />
+
+<PropsCard id="ripple-slot" name="slot" type="string" />
+
+<PropsCard id="ripple-spellcheck" name="spellCheck" type="Booleanish" />
+
+<PropsCard
+  id="ripple-suppresscontenteditablewarning"
+  name="suppressContentEditableWarning"
+  type="boolean"
+/>
+
+<PropsCard
+  id="ripple-suppresshydrationwarning"
+  name="suppressHydrationWarning"
+  type="boolean"
+/>
+
+<PropsCard id="ripple-tabindex" name="tabIndex" type="number" />
+
+<PropsCard id="ripple-title" name="title" type="string" />
+
+<PropsCard id="ripple-translate" name="translate" type='"yes" | "no"' />
+
+<PropsCard id="ripple-typeof" name="typeof" type="string" />
+
+<PropsCard id="ripple-unselectable" name="unselectable" type='"on" | "off"' />
+
+<PropsCard id="ripple-vocab" name="vocab" type="string" />
+
+### UseRippleProps
+
+<PropsCard
+  id="useripple-onpointerdown"
+  name="onPointerDown"
+  type="PointerEventHandler<T>"
+/>

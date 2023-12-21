@@ -151,7 +151,11 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
   const [editorCode, setEditorCode] = useState(code)
 
   const transformCode = (code: string) => {
-    if (functional) code = "() => {" + code + "}"
+    if (functional) {
+      code = "() => {" + code + "}"
+    } else {
+      code = "<>" + code + "</>"
+    }
 
     return code
   }
@@ -265,6 +269,7 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
         sx={{ "& > div": { pt: "0", pb: isMax ? "10" : "6" } }}
         maxH={isOpen ? "full" : "sm"}
         type="never"
+        tabIndex={-1}
       >
         {children}
       </ScrollArea>

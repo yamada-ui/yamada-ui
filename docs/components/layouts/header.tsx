@@ -1,4 +1,5 @@
 import type {
+  BoxProps,
   CenterProps,
   DrawerProps,
   IconButtonProps,
@@ -24,6 +25,7 @@ import {
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
+  Ripple,
   Spacer,
   Tag,
   VStack,
@@ -34,6 +36,7 @@ import {
   useColorMode,
   useDisclosure,
   useMotionValueEvent,
+  useRipple,
   useScroll,
   useTheme,
 } from "@yamada-ui/react"
@@ -352,21 +355,9 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             gridTemplateColumns={{ base: "repeat(4, 1fr)" }}
           >
             {colorSchemes.map((colorScheme: string) => (
-              <Box
-                as="button"
-                type="button"
+              <ColorButton
                 key={colorScheme}
-                bg={`${colorScheme}.500`}
-                minW={{ base: "12", md: "10" }}
-                minH={{ base: "12", md: "10" }}
-                rounded="md"
-                boxShadow="inner"
-                outline="0"
-                _hover={{ bg: `${colorScheme}.600` }}
-                _active={{ bg: `${colorScheme}.700` }}
-                _focusVisible={{ shadow: "outline" }}
-                transitionProperty="common"
-                transitionDuration="slower"
+                colorScheme={colorScheme}
                 onClick={() => {
                   changeThemeScheme(colorScheme)
                   onClose()
@@ -381,6 +372,40 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
 )
 
 ThemeSchemeButton.displayName = "ThemeSchemeButton"
+
+type ColorButtonProps = BoxProps & {
+  colorScheme: string
+}
+
+const ColorButton: FC<ColorButtonProps> = memo(({ colorScheme, ...rest }) => {
+  const { onPointerDown, ...rippleProps } = useRipple({})
+
+  return (
+    <Box
+      as="button"
+      type="button"
+      position="relative"
+      overflow="hidden"
+      bg={`${colorScheme}.500`}
+      minW={{ base: "12", md: "10" }}
+      minH={{ base: "12", md: "10" }}
+      rounded="md"
+      boxShadow="inner"
+      outline="0"
+      _hover={{ bg: `${colorScheme}.600` }}
+      _active={{ bg: `${colorScheme}.700` }}
+      _focusVisible={{ shadow: "outline" }}
+      transitionProperty="common"
+      transitionDuration="slower"
+      {...rest}
+      onPointerDown={onPointerDown}
+    >
+      <Ripple {...rippleProps} />
+    </Box>
+  )
+})
+
+ColorButton.displayName = "ColorButton"
 
 type MobileMenuProps = DrawerProps
 

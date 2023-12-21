@@ -11,7 +11,7 @@
     "build:profile": "next build --profile",
     "gen:changelog": "tsx scripts/changelog",
     "gen:theme": "tsx scripts/theme-component",
-    "gen:style-props": "tsx scripts/style-props",
+    "gen:css": "tsx scripts/style-props",
     "gen:props": "tsx scripts/component-props",
     "gen:search": "tsx scripts/search-content",
     "gen:content": "contentlayer build --clearCache",

@@ -557,32 +557,6 @@ return (
 )
 ```
 
-#### Keyframes
-
-By passing an array to the property of the style object, you can set keyframes. Each keyframe is placed at an equal interval throughout the animation. You can override the interval by setting `times` in `transition`.
-
-```tsx
-<Center h="md">
-  <Motion
-    animate={{
-      scale: [1, 2, 2, 1, 1],
-      rotate: [0, 0, 180, 180, 0],
-      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-    }}
-    transition={{
-      duration: 2,
-      ease: "easeInOut",
-      times: [0, 0.2, 0.5, 0.8, 1],
-      repeat: Infinity,
-      repeatDelay: 1,
-    }}
-    w="3xs"
-    h="3xs"
-    bg="primary"
-  />
-</Center>
-```
-
 #### Usage of `useMotionAnimationFrame`
 
 `useMotionAnimationFrame` executes a callback once for each animation frame of the element. The callback can get the **total time since the callback was first called** and the **total time from the last animation frame**.
@@ -634,6 +608,32 @@ return (
     </Box>
   </Center>
 )
+```
+
+#### Keyframes
+
+By passing an array to the property of the style object, you can set keyframes. Each keyframe is placed at an equal interval throughout the animation. You can override the interval by setting `times` in `transition`.
+
+```tsx
+<Center h="md">
+  <Motion
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+    w="3xs"
+    h="3xs"
+    bg="primary"
+  />
+</Center>
 ```
 
 :::note

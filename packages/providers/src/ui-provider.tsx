@@ -10,6 +10,7 @@ import {
   GlobalStyle,
 } from "@yamada-ui/core"
 import { LoadingProvider } from "@yamada-ui/loading"
+import { MotionConfig } from "@yamada-ui/motion"
 import { NoticeProvider } from "@yamada-ui/notice"
 import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 import type { Dict } from "@yamada-ui/utils"
@@ -101,14 +102,16 @@ export const UIProvider: FC<UIProviderProps> = ({
           environment={environment}
           disabled={disableEnvironment}
         >
-          <LoadingProvider {...config.loading}>
-            {!disableResetStyle ? <ResetStyle /> : null}
-            {!disableGlobalStyle ? <GlobalStyle /> : null}
+          <MotionConfig {...config.motion?.config}>
+            <LoadingProvider {...config.loading}>
+              {!disableResetStyle ? <ResetStyle /> : null}
+              {!disableGlobalStyle ? <GlobalStyle /> : null}
 
-            {children}
+              {children}
 
-            <NoticeProvider {...config.notice} />
-          </LoadingProvider>
+              <NoticeProvider {...config.notice} />
+            </LoadingProvider>
+          </MotionConfig>
         </EnvironmentProvider>
       </ColorModeProvider>
     </ThemeProvider>

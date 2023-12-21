@@ -95,7 +95,7 @@ const generateMdxFiles: p.RequiredRunner =
       mdxFiles.map(async ({ name, data, content }, index) => {
         const outPath = path.join(DIST_PATH, name)
 
-        data.table_of_contents_max_lv = 2
+        data.table_of_contents_max_lv = 3
         data.order = index + 1
 
         await writeMdxFile(outPath, data, content)

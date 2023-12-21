@@ -1110,6 +1110,7 @@ export const useYearList = () => {
         yearRefs.current.set(index, createRef<HTMLButtonElement>())
 
         return {
+          isDisabled,
           ref: mergeRefs(ref, yearRefs.current.get(index)),
           ...props,
           tabIndex: isControlled
@@ -1296,6 +1297,7 @@ export const useMonthList = () => {
       monthRefs.current.set(value, createRef<HTMLButtonElement>())
 
       return {
+        isDisabled,
         ref: mergeRefs(ref, monthRefs.current.get(value)),
         ...props,
         tabIndex: isControlled
@@ -1596,6 +1598,7 @@ export const useMonth = () => {
         isSelected,
         isWeekend,
         isOutside,
+        isDisabled,
         style,
         ref: mergeRefs(ref, !isOutside ? dayRefs.current.get(key) : undefined),
         ...props,

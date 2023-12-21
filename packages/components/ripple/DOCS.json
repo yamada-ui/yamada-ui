@@ -793,6 +793,8 @@
     "vocab": { "type": "string", "required": false }
   },
   "UseRipple": {
+    "disabled": { "type": "boolean", "required": false },
+    "isDisabled": { "type": "boolean", "required": false },
     "onPointerDown": { "type": "PointerEventHandler<T>", "required": false }
   }
 }

@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 0.5.1
+
+### Patch Changes
+
+- [#492](https://github.com/hirotomoyamada/yamada-ui/pull/492) [`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced `useIsMounted` hook logic.
+
 ## 0.5.0
 
 ### Minor Changes

@@ -123,7 +123,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
       inputProps,
       iconProps,
       clearIconProps,
-      portalProps = { isDisabled: false },
+      portalProps = { isDisabled: true },
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)

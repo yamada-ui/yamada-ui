@@ -1,5 +1,25 @@
 # @yamada-ui/notice
 
+## 0.5.19
+
+### Patch Changes
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf), [`56c9ed5`](https://github.com/hirotomoyamada/yamada-ui/commit/56c9ed575874b0bdca20aa8634e1d52fee79f218)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/portal@0.3.11
+  - @yamada-ui/alert@0.5.23
+  - @yamada-ui/close-button@0.4.7
+  - @yamada-ui/motion@0.4.27
+  - @yamada-ui/core@0.15.2
+  - @yamada-ui/use-timeout@0.2.9
+
+## 0.5.18
+
+### Patch Changes
+
+- Updated dependencies [[`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97)]:
+  - @yamada-ui/close-button@0.4.6
+
 ## 0.5.17
 
 ### Patch Changes

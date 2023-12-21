@@ -101,9 +101,14 @@ export const Button = forwardRef<ButtonProps, "button">(
       ...rest
     } = omitThemeProps(mergedProps)
 
+    const trulyDisabled = isDisabled || isLoading
+
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
     const ref = useMergeRefs(customRef, buttonRef)
-    const { onPointerDown, ...rippleProps } = useRipple(rest)
+    const { onPointerDown, ...rippleProps } = useRipple({
+      ...rest,
+      isDisabled: disableRipple || trulyDisabled,
+    })
 
     const css: CSSUIObject = useMemo(() => {
       const _focus =
@@ -146,7 +151,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         as={as}
         className={cx("ui-button", className)}
         type={type ?? defaultType}
-        disabled={isDisabled || isLoading}
+        disabled={trulyDisabled}
         data-active={dataAttr(isActive)}
         data__loading={dataAttr(isLoading)}
         __css={css}
@@ -171,10 +176,7 @@ export const Button = forwardRef<ButtonProps, "button">(
           <Loading className="ui-button__loading--end" {...loadingProps} />
         ) : null}
 
-        <Ripple
-          isDisabled={disableRipple || isDisabled || isLoading}
-          {...rippleProps}
-        />
+        <Ripple isDisabled={disableRipple || trulyDisabled} {...rippleProps} />
       </ui.button>
     )
   },

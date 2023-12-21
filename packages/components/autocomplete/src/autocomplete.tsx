@@ -84,7 +84,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       listProps,
       inputProps,
       iconProps,
-      portalProps = { isDisabled: false },
+      portalProps = { isDisabled: true },
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)

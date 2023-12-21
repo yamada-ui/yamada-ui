@@ -78,7 +78,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     inputProps,
     iconProps,
     clearIconProps,
-    portalProps = { isDisabled: false },
+    portalProps = { isDisabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
 

@@ -1,5 +1,24 @@
 # @yamada-ui/ripple
 
+## 0.1.8
+
+### Patch Changes
+
+- [`d20db01`](https://github.com/hirotomoyamada/yamada-ui/commit/d20db01e1a7bb755512ceb52221255ea41530982) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expanded the functionality so that you can freely adjust the style of `Ripple` components.
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/motion@0.4.27
+  - @yamada-ui/core@0.15.2
+
+## 0.1.7
+
+### Patch Changes
+
+- [#483](https://github.com/hirotomoyamada/yamada-ui/pull/483) [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Unify disabled state handling.
+
+- [#487](https://github.com/hirotomoyamada/yamada-ui/pull/487) [`26c50c3`](https://github.com/hirotomoyamada/yamada-ui/commit/26c50c38fe09687ad02d95962741f45d1881d14a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Set default props in `useRipple`.
+
 ## 0.1.6
 
 ### Patch Changes

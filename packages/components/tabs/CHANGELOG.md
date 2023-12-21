@@ -1,5 +1,27 @@
 # @yamada-ui/tabs
 
+## 0.4.7
+
+### Patch Changes
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf), [`d20db01`](https://github.com/hirotomoyamada/yamada-ui/commit/d20db01e1a7bb755512ceb52221255ea41530982)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/ripple@0.1.8
+  - @yamada-ui/core@0.15.2
+  - @yamada-ui/use-clickable@0.3.10
+  - @yamada-ui/use-controllable-state@0.4.4
+  - @yamada-ui/use-descendant@0.2.11
+  - @yamada-ui/use-disclosure@0.4.7
+
+## 0.4.6
+
+### Patch Changes
+
+- [#483](https://github.com/hirotomoyamada/yamada-ui/pull/483) [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Unify disabled state handling.
+
+- Updated dependencies [[`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97), [`26c50c3`](https://github.com/hirotomoyamada/yamada-ui/commit/26c50c38fe09687ad02d95962741f45d1881d14a)]:
+  - @yamada-ui/ripple@0.1.7
+
 ## 0.4.5
 
 ### Patch Changes

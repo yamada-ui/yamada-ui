@@ -1,3 +1,4 @@
+import type { CSSUIObject } from "@yamada-ui/core"
 import { AnimatePresence, Motion, type MotionProps } from "@yamada-ui/motion"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { FC, Key } from "react"
@@ -29,6 +30,11 @@ export const Ripple: FC<RippleProps> = ({
 }) => {
   if (isDisabled) return null
 
+  const css: CSSUIObject = {
+    rounded: "full",
+    zIndex: "kurillin",
+  }
+
   return (
     <>
       {ripples.map(({ key, x, y, size }) => {
@@ -43,19 +49,18 @@ export const Ripple: FC<RippleProps> = ({
               animate={{ transform: "scale(2)", opacity: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration }}
+              bgColor={color}
               style={{
                 position: "absolute",
-                backgroundColor: color,
-                borderRadius: "100%",
                 transformOrigin: "center",
                 pointerEvents: "none",
-                zIndex: 10,
                 left: x,
                 top: y,
                 width: `${size}px`,
                 height: `${size}px`,
                 ...style,
               }}
+              __css={css}
               {...rest}
               onAnimationComplete={handlerAll(onAnimationComplete, () =>
                 onClear(key),

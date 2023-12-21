@@ -80,19 +80,44 @@ export const useUnmountEffect = (callback: () => void) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => () => callback(), [])
 
-export const useIsMounted = () => {
-  const isMounted = React.useRef(false)
+export type UseIsMountedProps = {
+  rerender?: boolean
+  delay?: number
+}
+
+export const useIsMounted = ({
+  rerender = false,
+  delay = 0,
+}: UseIsMountedProps = {}): [() => boolean, boolean] => {
+  const isMountedRef = React.useRef(false)
+  const [isMounted, setIsMounted] = React.useState(false)
 
   useSafeLayoutEffect(() => {
-    isMounted.current = true
+    isMountedRef.current = true
+
+    let timeoutId: any = null
+
+    if (rerender) {
+      if (delay > 0) {
+        timeoutId = setTimeout(() => setIsMounted(true), delay)
+      } else {
+        setIsMounted(true)
+      }
+    }
 
     return () => {
-      isMounted.current = false
-    }
-  }, [])
+      isMountedRef.current = false
 
-  return isMounted
+      if (rerender) setIsMounted(false)
+
+      if (timeoutId) clearTimeout(timeoutId)
+    }
+  }, [delay, rerender])
+
+  return [React.useCallback(() => isMountedRef.current, []), isMounted]
 }
+
+export type UseIsMountedReturn = ReturnType<typeof useIsMounted>
 
 export const getValidChildren = (
   children: React.ReactNode,
@@ -304,7 +329,7 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
   initialState: StateFromFunctionReturningPromise<T> = { loading: false },
 ): AsyncFnReturn<T> => {
   const lastCallId = React.useRef(0)
-  const isMounted = useIsMounted()
+  const [isMounted] = useIsMounted()
   const [state, setState] =
     React.useState<StateFromFunctionReturningPromise<T>>(initialState)
 
@@ -317,13 +342,13 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
 
       return func(...args).then(
         (value) => {
-          if (isMounted.current && callId === lastCallId.current)
+          if (isMounted() && callId === lastCallId.current)
             setState({ value, loading: false })
 
           return value
         },
         (error) => {
-          if (isMounted.current && callId === lastCallId.current)
+          if (isMounted() && callId === lastCallId.current)
             setState({ error, loading: false })
 
           return error

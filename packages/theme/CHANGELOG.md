@@ -1,5 +1,21 @@
 # @yamada-ui/theme
 
+## 0.13.8
+
+### Patch Changes
+
+- [#492](https://github.com/hirotomoyamada/yamada-ui/pull/492) [`7d2dd8a`](https://github.com/hirotomoyamada/yamada-ui/commit/7d2dd8aa51425a49349ebaaff7275bad85cb75d0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the style of `SegmentedControl`.
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/core@0.15.2
+
+## 0.13.7
+
+### Patch Changes
+
+- [#489](https://github.com/hirotomoyamada/yamada-ui/pull/489) [`1c6b475`](https://github.com/hirotomoyamada/yamada-ui/commit/1c6b475b3b99f69f55cd5e8959bdf9be316d6292) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `focusVisible` style to `CloseButton`.
+
 ## 0.13.6
 
 ### Patch Changes

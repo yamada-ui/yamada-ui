@@ -72,6 +72,10 @@ type IndicatorOptions = {
    * @default false
    */
   withBorder?: boolean
+  /**
+   * Props for indicator wrapper element.
+   */
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
 }
 
 export type IndicatorProps = Omit<HTMLUIProps<"div">, "children" | "offset"> &
@@ -138,6 +142,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     showZero = true,
     children,
     isDisabled,
+    containerProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -181,6 +186,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
         position: "relative",
         display: computedInline ? "inline-block" : "block",
       }}
+      {...containerProps}
     >
       {!isDisabled ? (
         <ui.div

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-size",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Yamada UI useSize custom hook",
   "keywords": [
     "use-size"

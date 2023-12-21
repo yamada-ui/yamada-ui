@@ -1,5 +1,33 @@
 # @yamada-ui/calendar
 
+## 0.7.6
+
+### Patch Changes
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf), [`56c9ed5`](https://github.com/hirotomoyamada/yamada-ui/commit/56c9ed575874b0bdca20aa8634e1d52fee79f218)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/portal@0.3.11
+  - @yamada-ui/button@0.4.7
+  - @yamada-ui/form-control@0.3.30
+  - @yamada-ui/icon@0.3.27
+  - @yamada-ui/popover@0.3.35
+  - @yamada-ui/core@0.15.2
+  - @yamada-ui/use-clickable@0.3.10
+  - @yamada-ui/use-controllable-state@0.4.4
+  - @yamada-ui/use-outside-click@0.2.10
+
+## 0.7.5
+
+### Patch Changes
+
+- [#486](https://github.com/hirotomoyamada/yamada-ui/pull/486) [`b0911e6`](https://github.com/hirotomoyamada/yamada-ui/commit/b0911e62cd082b906c54d3f06d959330445002c9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Disabled `Portal` props by default.
+
+- [#483](https://github.com/hirotomoyamada/yamada-ui/pull/483) [`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Unify disabled state handling.
+
+- Updated dependencies [[`b641857`](https://github.com/hirotomoyamada/yamada-ui/commit/b64185748b8302b8d1f8656a4edefd9c3d8d2a97)]:
+  - @yamada-ui/button@0.4.6
+  - @yamada-ui/popover@0.3.34
+
 ## 0.7.4
 
 ### Patch Changes

@@ -61,7 +61,10 @@ export const PaginationItem: FC<PaginationItemProps> = ({
   ...rest
 }) => {
   const styles = usePaginationContext()
-  const { onPointerDown, ...rippleProps } = useRipple(rest)
+  const { onPointerDown, ...rippleProps } = useRipple({
+    ...rest,
+    isDisabled: disableRipple || isDisabled,
+  })
 
   children ??= iconMap[page] ?? page
 

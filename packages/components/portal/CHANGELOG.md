@@ -1,5 +1,14 @@
 # @yamada-ui/portal
 
+## 0.3.11
+
+### Patch Changes
+
+- [`56c9ed5`](https://github.com/hirotomoyamada/yamada-ui/commit/56c9ed575874b0bdca20aa8634e1d52fee79f218) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Optimize `Portal` component prop spreading.
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+
 ## 0.3.10
 
 ### Patch Changes

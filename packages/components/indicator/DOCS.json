@@ -6,6 +6,11 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
+    "containerProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for indicator wrapper element."
+    },
     "inline": {
       "type": "UIValue<boolean>",
       "defaultValue": false,

@@ -1,5 +1,18 @@
 # @yamada-ui/indicator
 
+## 0.4.0
+
+### Minor Changes
+
+- [#494](https://github.com/hirotomoyamada/yamada-ui/pull/494) [`22f831d`](https://github.com/hirotomoyamada/yamada-ui/commit/22f831d5cdf09d57ab259881a37b6b8e0168ca0a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `containerProps` to `Indicator` component.
+
+### Patch Changes
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/core@0.15.2
+  - @yamada-ui/use-value@0.2.27
+
 ## 0.3.26
 
 ### Patch Changes

@@ -89,11 +89,15 @@ export const withCloseButton: Story = () => {
   return (
     <Wrap gap="md" alignItems="flex-start">
       <Tag colorScheme="primary" rounded="full" onClose={() => {}}>
-        Cyan
+        Primary
       </Tag>
 
       <Tag colorScheme="secondary" rounded="full" onClose={() => {}}>
         Secondary
+      </Tag>
+
+      <Tag colorScheme="success" rounded="full" onClose={() => {}}>
+        Success
       </Tag>
 
       <Tag colorScheme="warning" rounded="full" onClose={() => {}}>
@@ -117,7 +121,7 @@ export const withDisabled: Story = () => {
         onClose={() => {}}
         isDisabled
       >
-        Cyan
+        Primary
       </Tag>
 
       <Tag

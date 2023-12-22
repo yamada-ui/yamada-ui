@@ -1,6 +1,6 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
-import type { Variants } from "framer-motion"
+import type { MotionConfigProps, Variants } from "framer-motion"
 import type { FC, ReactNode } from "react"
 import type {
   UIStyle,
@@ -316,6 +316,17 @@ export type ThemeConfig = {
      * The options of the custom loading.
      */
     custom?: LoadingConfigOptions
+  }
+  /**
+   * The config of the `framer-motion`.
+   */
+  motion?: {
+    /**
+     * Set configuration options for `framer-motion`.
+     *
+     * @see Docs https://www.framer.com/motion/motion-config/
+     */
+    config?: Omit<MotionConfigProps, "children">
   }
 }
 

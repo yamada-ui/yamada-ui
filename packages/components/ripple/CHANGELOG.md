@@ -1,5 +1,16 @@
 # @yamada-ui/ripple
 
+## 0.1.8
+
+### Patch Changes
+
+- [`d20db01`](https://github.com/hirotomoyamada/yamada-ui/commit/d20db01e1a7bb755512ceb52221255ea41530982) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expanded the functionality so that you can freely adjust the style of `Ripple` components.
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+  - @yamada-ui/motion@0.4.27
+  - @yamada-ui/core@0.15.2
+
 ## 0.1.7
 
 ### Patch Changes

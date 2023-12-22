@@ -69,7 +69,6 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         run: |
           pnpm changelog:latest
-          pnpm changelog:format
           git add .
           git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
 

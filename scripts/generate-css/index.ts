@@ -9,10 +9,10 @@ import {
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
+import { toCamelCase } from "../utils"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 import type { uiProps } from "./ui-props"
-import { toCamelCase } from "./utils"
 
 const SOURCE_URL = "https://developer.mozilla.org"
 export const OUT_PATH = "packages/core/src/styles.ts"

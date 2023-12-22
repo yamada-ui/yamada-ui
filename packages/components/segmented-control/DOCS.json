@@ -5,6 +5,11 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
+    "defaultValue": {
+      "type": "string",
+      "required": false,
+      "description": "The initial value of the segmented control."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -68,6 +73,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the segmented control will be readonly."
+    },
+    "motionProps": {
+      "type": "MotionProps",
+      "required": false,
+      "description": "Props for motion component."
     },
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",

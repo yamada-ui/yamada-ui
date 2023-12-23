@@ -25,7 +25,7 @@ body:
         - "@yamada-ui/dropzone"
         - "@yamada-ui/markdown"
         - "@yamada-ui/fontawesome"
-        - "@yamada-ui/nextjs"
+        - "@yamada-ui/cli"
     validations:
       required: true
   - type: "input"

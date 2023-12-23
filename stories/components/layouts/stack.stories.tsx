@@ -1,5 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Stack, VStack, HStack, Box, Divider, Center } from "@yamada-ui/react"
+import {
+  Stack,
+  VStack,
+  HStack,
+  Box,
+  Divider,
+  Center,
+  ZStack,
+} from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Stack>
 
@@ -51,6 +59,28 @@ export const horizontal: Story = () => {
         Box
       </Box>
     </HStack>
+  )
+}
+
+export const depth: Story = () => {
+  return (
+    <ZStack>
+      <Box p="md" rounded="4" bg="primary" color="white">
+        Box
+      </Box>
+
+      <Box p="md" rounded="4" bg="secondary" color="white">
+        Box
+      </Box>
+
+      <Box p="md" rounded="4" bg="warning" color="white">
+        Box
+      </Box>
+
+      <Box p="md" rounded="4" bg="danger" color="white">
+        Box
+      </Box>
+    </ZStack>
   )
 }
 

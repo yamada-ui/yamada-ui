@@ -267,7 +267,7 @@ export const uiProps = createUIProps({
   var: {
     isProcessSkip: true,
     transform: "var",
-    type: '{ name: string; token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">, value: any }[]',
+    type: '{ name: string; token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">, value: Token<StringLiteral> }[]',
     hasToken: false,
     description: [
       "Set CSS variables.",

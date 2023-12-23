@@ -266,12 +266,29 @@ export type Transforms = keyof typeof transforms
 
 export const transforms = {
   var: ({ name, token, value }: any, theme: StyledTheme) => {
-    const prefix = theme.__config.var?.prefix ?? "ui"
+    if (isObject(value)) {
+      const resolvedValue = Object.entries(value).reduce<Dict>(
+        (prev, [key, value]) => {
+          prev[key] = { name, token, value }
 
-    value = tokenToCSSVar(token, value)(theme)
-    name = `--${prefix}-${name}`
+          return prev
+        },
+        {},
+      )
 
-    return { [name]: value }
+      return { var: resolvedValue }
+    } else if (isArray(value)) {
+      const resolvedValue = value.map((value) => ({ name, token, value }))
+
+      return { var: resolvedValue }
+    } else {
+      const prefix = theme.__config.var?.prefix ?? "ui"
+
+      value = tokenToCSSVar(token, value)(theme)
+      name = `--${prefix}-${name}`
+
+      return { [name]: value }
+    }
   },
   token:
     (

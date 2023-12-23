@@ -5153,6 +5153,6 @@ export type StyleProps = {
   var?: {
     name: string
     token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
-    value: any
+    value: Token<StringLiteral>
   }[]
 }

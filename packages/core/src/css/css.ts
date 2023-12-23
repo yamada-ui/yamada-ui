@@ -103,7 +103,8 @@ export const getCSS = ({
 
       value = style?.transform?.(value, theme) ?? value
 
-      if (style?.isProcessResult) value = createCSS(value, true)
+      if (style?.isProcessResult || style?.isProcessSkip)
+        value = createCSS(value, true)
 
       if (!isNested && style?.static) {
         const staticStyles = runIfFunc(style.static, theme)

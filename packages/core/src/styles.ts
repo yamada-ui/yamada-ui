@@ -1162,7 +1162,7 @@ export const standardStyles: Configs = {
     properties: "--ui-backdrop-sepia",
     transform: transforms.function("sepia"),
   },
-  noOfLines: {
+  lineClamp: {
     properties: "--ui-line-clamp",
     isSkip: true,
     static: {
@@ -5211,7 +5211,7 @@ export type StyleProps = {
   /**
    * Used to visually truncate a text after a number of lines.
    */
-  noOfLines?: Token<number>
+  lineClamp?: Token<number>
   /**
    * If `true`, it clamps truncate a text after one line.
    */

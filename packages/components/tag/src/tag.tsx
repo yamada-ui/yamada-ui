@@ -85,7 +85,7 @@ const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
   const css = styles.label
 
   return (
-    <ui.span noOfLines={1} __css={css}>
+    <ui.span lineClamp={1} __css={css}>
       {children}
     </ui.span>
   )

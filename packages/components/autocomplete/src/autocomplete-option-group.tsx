@@ -40,7 +40,7 @@ export const AutocompleteOptionGroup = forwardRef<
         <ui.span
           className="ui-autocomplete__item__group-label"
           __css={styles.groupLabel}
-          noOfLines={1}
+          lineClamp={1}
         >
           {label}
         </ui.span>

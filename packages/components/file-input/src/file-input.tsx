@@ -104,7 +104,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       defaultValue,
       component,
       format = defaultFormat,
-      noOfLines = 1,
+      lineClamp = 1,
       separator = ",",
       resetRef,
       ...rest
@@ -149,13 +149,13 @@ export const FileInput = forwardRef<FileInputProps, "input">(
 
     const cloneChildren = useMemo(() => {
       if (!values?.length)
-        return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
+        return <ui.span lineClamp={lineClamp}>{placeholder}</ui.span>
 
       if (children) return children(values)
 
       if (component) {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
               const el = component({ value, index })
 
@@ -171,7 +171,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
         )
       } else {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
               const isLast = values.length === index + 1
 
@@ -185,7 +185,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           </ui.span>
         )
       }
-    }, [children, format, noOfLines, placeholder, separator, component, values])
+    }, [children, format, lineClamp, placeholder, separator, component, values])
 
     const css: CSSUIObject = {
       display: "flex",

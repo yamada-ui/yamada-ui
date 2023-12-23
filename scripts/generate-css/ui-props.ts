@@ -218,7 +218,7 @@ export const uiProps = createUIProps({
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.",
     ],
   },
-  noOfLines: {
+  lineClamp: {
     static: {
       overflow: "hidden",
       textOverflow: "ellipsis",

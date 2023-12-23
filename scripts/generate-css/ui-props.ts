@@ -50,6 +50,8 @@ export const uiProps = createUIProps({
     properties: ["borderEndStartRadius", "borderEndEndRadius"],
   },
   boxSize: { properties: ["width", "height"] },
+  minBoxSize: { properties: ["minWidth", "minHeight"] },
+  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   translateX: {
     properties: "--ui-translate-x",
     description: [

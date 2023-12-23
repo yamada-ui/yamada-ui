@@ -27,6 +27,7 @@ export type Transform = (value: any, theme: StyledTheme, css?: Dict) => any
 export type ConfigProps = {
   static?: CSSObject
   isProcessResult?: boolean
+  isProcessSkip?: boolean
   properties?:
     | CSSProperties
     | CSSProperties[]
@@ -264,6 +265,31 @@ export const keyframes = (...arg: CSSObject[]): Keyframes =>
 export type Transforms = keyof typeof transforms
 
 export const transforms = {
+  var: ({ name, token, value }: any, theme: StyledTheme) => {
+    if (isObject(value)) {
+      const resolvedValue = Object.entries(value).reduce<Dict>(
+        (prev, [key, value]) => {
+          prev[key] = { name, token, value }
+
+          return prev
+        },
+        {},
+      )
+
+      return { var: resolvedValue }
+    } else if (isArray(value)) {
+      const resolvedValue = value.map((value) => ({ name, token, value }))
+
+      return { var: resolvedValue }
+    } else {
+      const prefix = theme.__config.var?.prefix ?? "ui"
+
+      value = tokenToCSSVar(token, value)(theme)
+      name = `--${prefix}-${name}`
+
+      return { [name]: value }
+    }
+  },
   token:
     (
       token: ThemeToken,

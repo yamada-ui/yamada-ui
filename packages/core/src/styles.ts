@@ -3,6 +3,7 @@ import type * as CSS from "csstype"
 import type { Configs } from "./config"
 import { transforms } from "./config"
 import type { Token } from "./css"
+import type { Theme } from "./theme.types"
 
 export const standardStyles: Configs = {
   accentColor: {
@@ -1186,6 +1187,7 @@ export const standardStyles: Configs = {
     isSkip: true,
     transform: transforms.styles(),
   },
+  var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
 }
 
 export const shorthandStyles: Configs = {
@@ -5140,4 +5142,17 @@ export type StyleProps = {
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
   apply?: Token<StringLiteral>
+  /**
+   * Set CSS variables.
+   *
+   * @example
+   * ```jsx
+   * <Box var={[{ name:"space", token: "spaces", value: "md" }] m="calc(var(--ui-space) * 2)">Box</Box>
+   * ```
+   */
+  var?: {
+    name: string
+    token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
+    value: Token<StringLiteral | number>
+  }[]
 }

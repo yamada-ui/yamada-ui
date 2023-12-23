@@ -1,3 +1,9 @@
+/**
+ * This is a temporary definition because it is used in each component.
+ * In the future, We would like to automate this.
+ *
+ * @deprecated
+ */
 export const layoutProps: string[] = [
   "width",
   "inlineSize",

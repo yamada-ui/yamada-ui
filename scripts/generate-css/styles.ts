@@ -1,6 +1,7 @@
 import { writeFile } from "fs/promises"
 import type { ThemeToken } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
+import { checkProps } from "./check"
 import { getConfig } from "./config"
 import { layoutStyleProperties } from "./layout-props"
 import { resolveTypes } from "./resolve-types"
@@ -121,6 +122,8 @@ export const generateStyles = async (
   let shorthandStyles: string[] = []
   let styleProps: string[] = []
   let pickedStyles: (CSSProperty & { type: string })[] = []
+
+  checkProps(styles)
 
   styles = styles.filter((style) => {
     const isExists = Object.keys(uiProps).includes(style.prop)

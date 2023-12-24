@@ -239,7 +239,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
       component,
       separator = ",",
       isTruncated,
-      noOfLines = 1,
+      lineClamp = 1,
       h,
       minH,
       ...rest
@@ -250,11 +250,11 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
 
     const cloneChildren = useMemo(() => {
       if (!label?.length)
-        return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
+        return <ui.span lineClamp={lineClamp}>{placeholder}</ui.span>
 
       if (component) {
         return (
-          <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
+          <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
             {(label as string[]).map((label, index) => {
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
@@ -281,7 +281,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
         )
       } else {
         return (
-          <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
+          <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
             {(label as string[]).map((value, index) => {
               const isLast = label.length === index + 1
 
@@ -298,7 +298,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     }, [
       label,
       isTruncated,
-      noOfLines,
+      lineClamp,
       onChange,
       placeholder,
       separator,

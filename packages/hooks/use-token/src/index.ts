@@ -13,10 +13,10 @@ import {
  */
 export const useToken = <
   Y extends string | number = string,
-  M extends keyof Omit<Theme, "components" | "colorSchemes"> = keyof Omit<
+  M extends keyof Omit<
     Theme,
-    "components" | "colorSchemes"
-  >,
+    "components" | "colorSchemes" | "themeSchemes"
+  > = keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">,
 >(
   name: M,
   path: Theme[M] | number | undefined,

@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 0.9.1
+
+### Patch Changes
+
+- [#526](https://github.com/hirotomoyamada/yamada-ui/pull/526) [`60c7542`](https://github.com/hirotomoyamada/yamada-ui/commit/60c75429b6e8c38964f51394a6186b9c6b646156) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where some types of `colors` and `colorSchemes` were not generated.
+
 ## 0.9.0
 
 ### Minor Changes

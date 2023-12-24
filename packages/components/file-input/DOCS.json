@@ -11,12 +11,12 @@
       "description": "The component that displays uploaded files."
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 240 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | ... 317 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 240 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | ... 317 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is focused."
     },

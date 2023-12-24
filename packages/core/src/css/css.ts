@@ -94,7 +94,7 @@ export const getCSS = ({
 
       if (style === true) style = { properties: key }
 
-      if (isObject(value)) {
+      if (isObject(value) && !style?.isProcessSkip) {
         resolvedCSS[key] = resolvedCSS[key] ?? {}
         resolvedCSS[key] = merge(resolvedCSS[key], createCSS(value, true))
 
@@ -103,9 +103,8 @@ export const getCSS = ({
 
       value = style?.transform?.(value, theme) ?? value
 
-      if (style?.isProcessResult) {
+      if (style?.isProcessResult || style?.isProcessSkip)
         value = createCSS(value, true)
-      }
 
       if (!isNested && style?.static) {
         const staticStyles = runIfFunc(style.static, theme)

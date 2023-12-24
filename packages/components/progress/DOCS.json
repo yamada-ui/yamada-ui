@@ -7,7 +7,7 @@
       "description": "The visual color appearance of the component."
     },
     "filledTrackColor": {
-      "type": "\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 240 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 316 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The CSS `color` property."
     },
@@ -67,7 +67,7 @@
   },
   "CircleProgress": {
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "defaultValue": "'primary'",
       "required": false,
       "description": "The CSS `color` property."
@@ -115,7 +115,7 @@
       "description": "The CSS `width` property."
     },
     "trackColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "defaultValue": "'border'",
       "required": false,
       "description": "The CSS `color` property."

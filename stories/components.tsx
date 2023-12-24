@@ -91,10 +91,10 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
         boxShadow="inner"
       />
       <VStack gap="1">
-        <Text m="0" fontWeight="semibold" noOfLines={1}>
+        <Text m="0" fontWeight="semibold" lineClamp={1}>
           {name.charAt(0).toUpperCase() + name.slice(1)} {hue}
         </Text>
-        <Text m="0" noOfLines={1}>
+        <Text m="0" lineClamp={1}>
           {!isArray(value)
             ? value
             : colorMode === "light"

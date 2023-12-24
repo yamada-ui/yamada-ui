@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/calendar",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "Yamada UI calendar component",
   "keywords": [
     "yamada",
@@ -56,7 +56,7 @@
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/portal": "workspace:*",
-    "dayjs": "^1.11.7"
+    "dayjs": "^1.11.10"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

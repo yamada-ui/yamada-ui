@@ -27,6 +27,7 @@
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",
     "typecheck": "tsc --noEmit",
     "test": "jest",
+    "quality": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
     "gen:css": "tsx scripts/generate-css",
     "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts",
     "gen:component": "plop component && pnpm install",

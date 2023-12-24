@@ -1,6 +1,7 @@
 import { writeFile } from "fs/promises"
 import type { ThemeToken } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
+import { checkProps } from "./check"
 import { getConfig } from "./config"
 import { layoutStyleProperties } from "./layout-props"
 import { resolveTypes } from "./resolve-types"
@@ -13,23 +14,28 @@ import { uiProps } from "./ui-props"
 import { OUT_PATH } from "."
 import type { CSSProperties, CSSProperty, UIProperties } from "."
 
+const addType = (result: string, value: string) =>
+  />$/.test(result) ? result.replace(/>$/, `${value}>`) : result + value
+
 const computedType = ({
   type,
+  hasToken = true,
   token,
   transform,
   prop,
 }: {
   type: string | string[]
+  hasToken?: boolean
   token?: ThemeToken
   transform?: TransformOptions
   prop?: CSSProperties
 }) => {
   const resolveType = prop ? resolveTypes[prop] : undefined
 
-  let result = ""
+  let result = hasToken ? "Token<>" : ""
 
   if (resolveType) {
-    result = `Token<${resolveType}>`
+    result = addType(result, resolveType)
   } else {
     const isPx =
       transform === "px" ||
@@ -44,16 +50,16 @@ const computedType = ({
     const isNumber = isPx || isFraction
 
     if (typeof type === "string") {
-      result = `Token<${type}>`
+      result = addType(result, type)
     } else {
       if (type.length) {
-        result = `Token<${type.join(" | ")}>`
+        result = addType(result, type.join(" | "))
       } else {
-        result = "Token<StringLiteral>"
+        result = addType(result, "StringLiteral")
       }
     }
 
-    if (isNumber) result = result.replace(/>$/, ` | number>`)
+    if (isNumber) result = addType(result, ` | number`)
   }
 
   if (token) {
@@ -66,7 +72,7 @@ const computedType = ({
     if (resolvedToken === "transitions.easing")
       resolvedToken = "transitionEasing"
 
-    result = result.replace(/>$/, `, "${resolvedToken}">`)
+    result = addType(result, `, "${resolvedToken}"`)
   }
 
   return result
@@ -117,6 +123,8 @@ export const generateStyles = async (
   let styleProps: string[] = []
   let pickedStyles: (CSSProperty & { type: string })[] = []
 
+  checkProps(styles)
+
   styles = styles.filter((style) => {
     const isExists = Object.keys(uiProps).includes(style.prop)
 
@@ -158,7 +166,9 @@ export const generateStyles = async (
         transform,
         static: css,
         type,
+        hasToken,
         isProcessResult,
+        isProcessSkip,
         isSkip,
         description,
       },
@@ -180,10 +190,11 @@ export const generateStyles = async (
         token,
         transform,
         isProcessResult,
+        isProcessSkip,
         isSkip,
         css,
       })
-      type = computedType({ type: type ?? types, token, transform })
+      type = computedType({ type: type ?? types, hasToken, token, transform })
       const docs = generateDocs({ properties, description, urls, deprecated })
 
       standardStyles = [...standardStyles, `${prop}: ${config}`]
@@ -212,6 +223,7 @@ export const generateStyles = async (
     import type { Configs } from "./config"
     import { transforms } from "./config"
     import type { Token } from "./css"
+    import type { Theme } from "./theme.types"
 
     export const standardStyles: Configs = {
       ${standardStyles.join(",\n")}

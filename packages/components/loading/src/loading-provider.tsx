@@ -406,7 +406,7 @@ const ScreenComponent = memo(
       >
         <ui.div __css={css}>
           <Loading size="6xl" {...icon} />
-          <Message message={message} noOfLines={3} {...text} />
+          <Message message={message} lineClamp={3} {...text} />
         </ui.div>
       </Motion>
     )
@@ -452,7 +452,7 @@ const PageComponent = memo(
           __css={css}
         >
           <Loading size="6xl" {...icon} />
-          <Message message={message} noOfLines={3} {...text} />
+          <Message message={message} lineClamp={3} {...text} />
         </ui.div>
       </Motion>
     )
@@ -495,7 +495,7 @@ const BackgroundComponent = memo(
         __css={css}
       >
         <Loading size="xl" {...icon} />
-        <Message message={message} fontSize="sm" noOfLines={1} {...text} />
+        <Message message={message} fontSize="sm" lineClamp={1} {...text} />
       </Motion>
     )
   },

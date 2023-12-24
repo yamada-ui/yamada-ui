@@ -1068,6 +1068,13 @@
     }
   },
   {
+    "title": "Stat",
+    "type": "page",
+    "description": "`Stat`は、現在作成を検討しています。",
+    "slug": "/components/data-display/stat",
+    "hierarchy": { "lv1": "Stat" }
+  },
+  {
     "title": "Table",
     "type": "page",
     "description": "`Table`は、列のソートや行の選択やクリックイベント機能を備えたテーブルのコンポーネントです。",
@@ -1684,6 +1691,20 @@
     }
   },
   {
+    "title": "AreaChart",
+    "type": "page",
+    "description": "`AreaChart`は、現在作成を検討しています。",
+    "slug": "/components/feedback/area-chart",
+    "hierarchy": { "lv1": "AreaChart" }
+  },
+  {
+    "title": "BarChart",
+    "type": "page",
+    "description": "`BarChart`は、現在作成を検討しています。",
+    "slug": "/components/feedback/bar-chart",
+    "hierarchy": { "lv1": "BarChart" }
+  },
+  {
     "title": "CircleProgress",
     "type": "page",
     "description": "`CircleProgress`は、進行状況を円形のプログレスバーで表示するコンポーネントです。",
@@ -1758,6 +1779,13 @@
     "description": "`Alert`や`Skeleton`など、ユーザーへの通知やコンテンツの読み込み中にユーザーへ待機を促すコンポーネントが用意されています。",
     "slug": "/components/feedback",
     "hierarchy": { "lv1": "フィードバック" }
+  },
+  {
+    "title": "LineChart",
+    "type": "page",
+    "description": "`LineChart`は、現在作成を検討しています。",
+    "slug": "/components/feedback/line-chart",
+    "hierarchy": { "lv1": "LineChart" }
   },
   {
     "title": "Loading",
@@ -1882,6 +1910,13 @@
       "lv2": "使い方",
       "lv3": "アニメーションを適応する"
     }
+  },
+  {
+    "title": "RadarChart",
+    "type": "page",
+    "description": "`RadarChart`は、現在作成を検討しています。",
+    "slug": "/components/feedback/radar-chart",
+    "hierarchy": { "lv1": "RadarChart" }
   },
   {
     "title": "Skeleton",
@@ -2358,6 +2393,13 @@
       "lv2": "使い方",
       "lv3": "React Hook Formを使う"
     }
+  },
+  {
+    "title": "ColorPicker",
+    "type": "page",
+    "description": "`ColorPicker`は、現在作成を検討しています。",
+    "slug": "/components/forms/color-picker",
+    "hierarchy": { "lv1": "ColorPicker" }
   },
   {
     "title": "DatePicker",
@@ -5005,6 +5047,13 @@
     }
   },
   {
+    "title": "Rating",
+    "type": "page",
+    "description": "`Rating`は、現在作成を検討しています。",
+    "slug": "/components/forms/rating",
+    "hierarchy": { "lv1": "Rating" }
+  },
+  {
     "title": "SegmentedControl",
     "type": "page",
     "description": "`SegmentedControl`は、ユーザーが複数の選択肢の中から1つを選択するための使用されるコンポーネントです。",
@@ -5845,6 +5894,32 @@
     "hierarchy": { "lv1": "レイアウト" }
   },
   {
+    "title": "SimpleGrid",
+    "type": "page",
+    "description": "`SimpleGrid`は、現在作成を検討しています。",
+    "slug": "/components/layouts/simple-grid",
+    "hierarchy": { "lv1": "SimpleGrid" }
+  },
+  {
+    "title": "Spacer",
+    "type": "page",
+    "description": "`Spacer`は、要素間に空間を追加するために使用するコンポーネントです。",
+    "slug": "/components/layouts/spacer",
+    "hierarchy": { "lv1": "Spacer" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/spacer#インポート",
+    "hierarchy": { "lv1": "Spacer", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/spacer#使い方",
+    "hierarchy": { "lv1": "Spacer", "lv2": "使い方" }
+  },
+  {
     "title": "Stack",
     "type": "page",
     "description": "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。",
@@ -6404,6 +6479,13 @@
     "hierarchy": { "lv1": "Pagination", "lv2": "使い方", "lv3": "制御する" }
   },
   {
+    "title": "Spotlight",
+    "type": "page",
+    "description": "`Spotlight`は、現在作成を検討しています。",
+    "slug": "/components/navigation/spotlight",
+    "hierarchy": { "lv1": "Spotlight" }
+  },
+  {
     "title": "Stepper",
     "type": "page",
     "description": "`Stepper`は、複数のステップのプロセスの進行状況を表示するコンポーネントです。",
@@ -6467,6 +6549,256 @@
       "lv2": "使い方",
       "lv3": "インジケーターをカスタマイズする"
     }
+  },
+  {
+    "title": "CloseButton",
+    "type": "page",
+    "description": "`CloseButton`は、基本的にコンポーネントの閉じる機能をトリガーするために使用するコンポーネントです。",
+    "slug": "/components/other/close-button",
+    "hierarchy": { "lv1": "CloseButton" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/other/close-button#インポート",
+    "hierarchy": { "lv1": "CloseButton", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/other/close-button#使い方",
+    "hierarchy": { "lv1": "CloseButton", "lv2": "使い方" }
+  },
+  {
+    "title": "FocusLock",
+    "type": "page",
+    "description": "`FocusLock`は、モーダルやダイアログなどの要素でフォーカスを制限し、フォーカスをその範囲内にロックすることで、アクセシビリティを向上させるコンポーネントです。",
+    "slug": "/components/other/focus-lock",
+    "hierarchy": { "lv1": "FocusLock" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/other/focus-lock#インポート",
+    "hierarchy": { "lv1": "FocusLock", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/other/focus-lock#使い方",
+    "hierarchy": { "lv1": "FocusLock", "lv2": "使い方" }
+  },
+  {
+    "title": "その他",
+    "type": "page",
+    "description": "`Ripple`や`Portal`など、その他の便利なコンポーネントが用意されています。",
+    "slug": "/components/other",
+    "hierarchy": { "lv1": "その他" }
+  },
+  {
+    "title": "Motion",
+    "type": "page",
+    "description": "`Motion`は、`framer-motion`にYamada UIのスタイルシステムを拡張した便利なコンポーネントです。",
+    "slug": "/components/other/motion",
+    "hierarchy": { "lv1": "Motion" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/other/motion#インポート",
+    "hierarchy": { "lv1": "Motion", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/other/motion#使い方",
+    "hierarchy": { "lv1": "Motion", "lv2": "使い方" }
+  },
+  {
+    "title": "AnimatePresenceを使う",
+    "type": "fragment",
+    "slug": "/components/other/motion#animatepresenceを使う",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "AnimatePresenceを使う"
+    }
+  },
+  {
+    "title": "useMotionAnimationFrameを使う",
+    "type": "fragment",
+    "slug": "/components/other/motion#usemotionanimationframeを使う",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "useMotionAnimationFrameを使う"
+    }
+  },
+  {
+    "title": "キーフレーム",
+    "type": "fragment",
+    "slug": "/components/other/motion#キーフレーム",
+    "hierarchy": { "lv1": "Motion", "lv2": "使い方", "lv3": "キーフレーム" }
+  },
+  {
+    "title": "ジェスチャー",
+    "type": "fragment",
+    "slug": "/components/other/motion#ジェスチャー",
+    "hierarchy": { "lv1": "Motion", "lv2": "使い方", "lv3": "ジェスチャー" }
+  },
+  {
+    "title": "ホバー",
+    "type": "fragment",
+    "slug": "/components/other/motion#ホバー",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "ジェスチャー",
+      "lv4": "ホバー"
+    }
+  },
+  {
+    "title": "クリック・タップ",
+    "type": "fragment",
+    "slug": "/components/other/motion#クリック・タップ",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "ジェスチャー",
+      "lv4": "クリック・タップ"
+    }
+  },
+  {
+    "title": "フォーカス",
+    "type": "fragment",
+    "slug": "/components/other/motion#フォーカス",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "ジェスチャー",
+      "lv4": "フォーカス"
+    }
+  },
+  {
+    "title": "ドラッグ",
+    "type": "fragment",
+    "slug": "/components/other/motion#ドラッグ",
+    "hierarchy": { "lv1": "Motion", "lv2": "使い方", "lv3": "ドラッグ" }
+  },
+  {
+    "title": "可能領域を制約する",
+    "type": "fragment",
+    "slug": "/components/other/motion#可能領域を制約する",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "ドラッグ",
+      "lv4": "可能領域を制約する"
+    }
+  },
+  {
+    "title": "弾力と勢い",
+    "type": "fragment",
+    "slug": "/components/other/motion#弾力と勢い",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "ドラッグ",
+      "lv4": "弾力と勢い"
+    }
+  },
+  {
+    "title": "スクロール",
+    "type": "fragment",
+    "slug": "/components/other/motion#スクロール",
+    "hierarchy": { "lv1": "Motion", "lv2": "使い方", "lv3": "スクロール" }
+  },
+  {
+    "title": "useScrollを使う",
+    "type": "fragment",
+    "slug": "/components/other/motion#usescrollを使う",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "スクロール",
+      "lv4": "useScrollを使う"
+    }
+  },
+  {
+    "title": "Portal",
+    "type": "page",
+    "description": "`Portal`は、現在の`DOM`階層の外側に要素をレンダリングするコンポーネントです。",
+    "slug": "/components/other/portal",
+    "hierarchy": { "lv1": "Portal" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/other/portal#インポート",
+    "hierarchy": { "lv1": "Portal", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/other/portal#使い方",
+    "hierarchy": { "lv1": "Portal", "lv2": "使い方" }
+  },
+  {
+    "title": "転送先を変更する",
+    "type": "fragment",
+    "slug": "/components/other/portal#転送先を変更する",
+    "hierarchy": { "lv1": "Portal", "lv2": "使い方", "lv3": "転送先を変更する" }
+  },
+  {
+    "title": "ネストされたポータル",
+    "type": "fragment",
+    "slug": "/components/other/portal#ネストされたポータル",
+    "hierarchy": {
+      "lv1": "Portal",
+      "lv2": "使い方",
+      "lv3": "ネストされたポータル"
+    }
+  },
+  {
+    "title": "ネストしたポータルの転送先を変更する",
+    "type": "fragment",
+    "slug": "/components/other/portal#ネストしたポータルの転送先を変更する",
+    "hierarchy": {
+      "lv1": "Portal",
+      "lv2": "使い方",
+      "lv3": "ネストしたポータルの転送先を変更する"
+    }
+  },
+  {
+    "title": "Ripple",
+    "type": "page",
+    "description": "`Ripple`は、要素に波及効果を付与し、ユーザーがクリックしたかどうかを認識させるコンポーネントです。",
+    "slug": "/components/other/ripple",
+    "hierarchy": { "lv1": "Ripple" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/other/ripple#インポート",
+    "hierarchy": { "lv1": "Ripple", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/other/ripple#使い方",
+    "hierarchy": { "lv1": "Ripple", "lv2": "使い方" }
+  },
+  {
+    "title": "カラーを変更する",
+    "type": "fragment",
+    "slug": "/components/other/ripple#カラーを変更する",
+    "hierarchy": { "lv1": "Ripple", "lv2": "使い方", "lv3": "カラーを変更する" }
+  },
+  {
+    "title": "無効化する",
+    "type": "fragment",
+    "slug": "/components/other/ripple#無効化する",
+    "hierarchy": { "lv1": "Ripple", "lv2": "使い方", "lv3": "無効化する" }
   },
   {
     "title": "Dialog",
@@ -8687,6 +9019,13 @@
     "hierarchy": { "lv1": "useResizeObserver", "lv2": "使い方" }
   },
   {
+    "title": "useSnacks",
+    "type": "page",
+    "description": "`useSnacks`は、現在作成を検討しています。",
+    "slug": "/hooks/use-snacks",
+    "hierarchy": { "lv1": "useSnacks" }
+  },
+  {
     "title": "useTheme",
     "type": "page",
     "description": "`useTheme`は、テーマを取得したりテーマを切り替えるための関数を返すカスタムフックです。",
@@ -8925,17 +9264,6 @@
     }
   },
   {
-    "title": "キーフレーム",
-    "type": "fragment",
-    "slug": "/styled-system/animation#キーフレーム",
-    "hierarchy": {
-      "lv1": "アニメーション",
-      "lv2": "Motion",
-      "lv3": "アニメーション",
-      "lv4": "キーフレーム"
-    }
-  },
-  {
     "title": "useMotionAnimationFrameを使う",
     "type": "fragment",
     "slug": "/styled-system/animation#usemotionanimationframeを使う",
@@ -8944,6 +9272,17 @@
       "lv2": "Motion",
       "lv3": "アニメーション",
       "lv4": "useMotionAnimationFrameを使う"
+    }
+  },
+  {
+    "title": "キーフレーム",
+    "type": "fragment",
+    "slug": "/styled-system/animation#キーフレーム",
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "アニメーション",
+      "lv4": "キーフレーム"
     }
   },
   {

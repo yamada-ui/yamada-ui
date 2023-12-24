@@ -1,11 +1,5 @@
 export const CONTRIBUTORS = [
   {
-    id: 84060430,
-    name: "hirotomoyamada",
-    icon: "https://avatars.githubusercontent.com/u/84060430?v=4",
-    url: "https://github.com/hirotomoyamada",
-  },
-  {
     id: 60034520,
     name: "illionillion",
     icon: "https://avatars.githubusercontent.com/u/60034520?v=4",

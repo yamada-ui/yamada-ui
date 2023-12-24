@@ -5,6 +5,7 @@ import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
 import { config } from "dotenv"
+import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
 config()
@@ -35,8 +36,12 @@ const writeContributors: p.RequiredRunner =
   (contributors: Contributors) => async (p, s) => {
     s.start(`Writing file "${DIST_PATH}"`)
 
+    const coreMembers = CONSTANT.CORE_MEMBERS.map(({ id }) => id)
+
     const resolvedContributors = contributors
-      .filter(({ type }) => type === "User")
+      .filter(
+        ({ login, type }) => type === "User" && !coreMembers.includes(login),
+      )
       .map(({ id, login, avatar_url, html_url }) => ({
         id,
         name: login,

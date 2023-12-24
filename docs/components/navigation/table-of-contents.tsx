@@ -4,7 +4,6 @@ import {
   HStack,
   List,
   ListItem,
-  ScrollArea,
   Text,
   VStack,
   dataAttr,
@@ -96,12 +95,11 @@ export const TableOfContents = memo(
         maxH="calc(100dvh - 4rem)"
         {...rest}
       >
-        <ScrollArea
+        <VStack
           pt="lg"
           pb="16"
           pl="md"
-          type="scroll"
-          overflow="auto"
+          overflowY="scroll"
           overscrollBehavior="contain"
         >
           <HStack gap="sm">
@@ -174,7 +172,7 @@ export const TableOfContents = memo(
               )
             })}
           </List>
-        </ScrollArea>
+        </VStack>
 
         <ScrollShadow />
       </VStack>

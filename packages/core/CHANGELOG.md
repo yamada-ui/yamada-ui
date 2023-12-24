@@ -1,5 +1,28 @@
 # @yamada-ui/core
 
+## 0.15.3
+
+### Patch Changes
+
+- [#511](https://github.com/hirotomoyamada/yamada-ui/pull/511) [`1474fd0`](https://github.com/hirotomoyamada/yamada-ui/commit/1474fd00f3da01077ef766d959f4cbe7562ecd22) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `framer-motion` config support.
+
+- [#526](https://github.com/hirotomoyamada/yamada-ui/pull/526) [`60c7542`](https://github.com/hirotomoyamada/yamada-ui/commit/60c75429b6e8c38964f51394a6186b9c6b646156) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where some types of `colors` and `colorSchemes` were not generated.
+
+- [#523](https://github.com/hirotomoyamada/yamada-ui/pull/523) [`d1c7f17`](https://github.com/hirotomoyamada/yamada-ui/commit/d1c7f170ff0db7ed3a894bbbf57ef2f349df22ba) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added shorthand props.
+
+  - `zIndex`: `z`
+  - `accentColor`: `accent`
+  - `caretColor`: `caret`
+  - `letterSpacing`: `tracking`
+  - `lineHeight`: `leading`
+  - `gap`: `g`
+  - `columnGap`: `gapX`, `gx`
+  - `rowGap`: `gapY` , `gy`
+
+- [#517](https://github.com/hirotomoyamada/yamada-ui/pull/517) [`e091e70`](https://github.com/hirotomoyamada/yamada-ui/commit/e091e707f95ceb008c0d1ef97505515d1e2601a3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `var` to Style props.
+
+- [`41ad25f`](https://github.com/hirotomoyamada/yamada-ui/commit/41ad25ff914818e0926e7814b1b0b41945708fab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replaced `noOfLines` with `lineClamp`.
+
 ## 0.15.2
 
 ### Patch Changes

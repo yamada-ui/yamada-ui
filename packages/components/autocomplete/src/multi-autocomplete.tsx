@@ -94,6 +94,11 @@ export type MultiAutocompleteProps = ThemeProps<"Select"> &
   UseAutocompleteProps<string[]> &
   MultiAutocompleteOptions
 
+/**
+ * `MultiAutocomplete` is a component used to display suggestions based on user text input and to obtain multiple values.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/multi-autocomplete
+ */
 export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(

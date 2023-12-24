@@ -77,6 +77,38 @@
     "hierarchy": { "lv1": "Team and Contributors", "lv2": "Core Team" }
   },
   {
+    "title": "Sponsors",
+    "type": "fragment",
+    "slug": "/community/team#sponsors",
+    "hierarchy": { "lv1": "Team and Contributors", "lv2": "Sponsors" }
+  },
+  {
+    "title": "Organizations",
+    "type": "fragment",
+    "slug": "/community/team#organizations",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Sponsors",
+      "lv3": "Organizations"
+    }
+  },
+  {
+    "title": "Individuals",
+    "type": "fragment",
+    "slug": "/community/team#individuals",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Sponsors",
+      "lv3": "Individuals"
+    }
+  },
+  {
+    "title": "Contributors",
+    "type": "fragment",
+    "slug": "/community/team#contributors",
+    "hierarchy": { "lv1": "Team and Contributors", "lv2": "Contributors" }
+  },
+  {
     "title": "Badge",
     "type": "page",
     "description": "`Badge` is a component that emphasizes the status of an item to make it immediately recognizable.",
@@ -972,6 +1004,13 @@
       "lv2": "Usage",
       "lv3": "Use in a Scrollable Area"
     }
+  },
+  {
+    "title": "Resizable",
+    "type": "page",
+    "description": "We are currently considering the development of `Resizable`.",
+    "slug": "/components/data-display/resizable",
+    "hierarchy": { "lv1": "Resizable" }
   },
   {
     "title": "ScrollArea",
@@ -6292,6 +6331,16 @@
     }
   },
   {
+    "title": "Global Configuration",
+    "type": "fragment",
+    "slug": "/components/other/motion#global-configuration",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Global Configuration"
+    }
+  },
+  {
     "title": "Portal",
     "type": "page",
     "description": "`Portal` is a component that renders elements outside of the current `DOM` hierarchy.",
@@ -8883,6 +8932,16 @@
       "lv2": "Motion",
       "lv3": "Scroll",
       "lv4": "Usage of useScroll"
+    }
+  },
+  {
+    "title": "Global Configuration",
+    "type": "fragment",
+    "slug": "/styled-system/animation#global-configuration",
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Global Configuration"
     }
   },
   {

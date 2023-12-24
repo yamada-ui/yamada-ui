@@ -74,6 +74,30 @@
     "hierarchy": { "lv1": "チームと貢献者", "lv2": "コアチーム" }
   },
   {
+    "title": "スポンサー",
+    "type": "fragment",
+    "slug": "/community/team#スポンサー",
+    "hierarchy": { "lv1": "チームと貢献者", "lv2": "スポンサー" }
+  },
+  {
+    "title": "組織",
+    "type": "fragment",
+    "slug": "/community/team#組織",
+    "hierarchy": { "lv1": "チームと貢献者", "lv2": "スポンサー", "lv3": "組織" }
+  },
+  {
+    "title": "個人",
+    "type": "fragment",
+    "slug": "/community/team#個人",
+    "hierarchy": { "lv1": "チームと貢献者", "lv2": "スポンサー", "lv3": "個人" }
+  },
+  {
+    "title": "貢献者",
+    "type": "fragment",
+    "slug": "/community/team#貢献者",
+    "hierarchy": { "lv1": "チームと貢献者", "lv2": "貢献者" }
+  },
+  {
     "title": "Badge",
     "type": "page",
     "description": "`Badge`は、アイテムのステータスを強調表示して、すぐに認識できるようにするコンポーネントです。",
@@ -1017,6 +1041,13 @@
       "lv2": "使い方",
       "lv3": "スクロール可能な領域で使用する"
     }
+  },
+  {
+    "title": "Resizable",
+    "type": "page",
+    "description": "`Resizable`は、現在作成を検討しています。",
+    "slug": "/components/data-display/resizable",
+    "hierarchy": { "lv1": "Resizable" }
   },
   {
     "title": "ScrollArea",
@@ -6725,6 +6756,16 @@
     }
   },
   {
+    "title": "グローバルなコンフィグ",
+    "type": "fragment",
+    "slug": "/components/other/motion#グローバルなコンフィグ",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "使い方",
+      "lv3": "グローバルなコンフィグ"
+    }
+  },
+  {
     "title": "Portal",
     "type": "page",
     "description": "`Portal`は、現在の`DOM`階層の外側に要素をレンダリングするコンポーネントです。",
@@ -9375,6 +9416,16 @@
       "lv2": "Motion",
       "lv3": "スクロール",
       "lv4": "useScrollを使う"
+    }
+  },
+  {
+    "title": "グローバルなコンフィグ",
+    "type": "fragment",
+    "slug": "/styled-system/animation#グローバルなコンフィグ",
+    "hierarchy": {
+      "lv1": "アニメーション",
+      "lv2": "Motion",
+      "lv3": "グローバルなコンフィグ"
     }
   },
   {

@@ -31,10 +31,10 @@ export const ColorPaletter: FC<ColorPaletterProps> = ({
       <Box bg={color} minW="12" minH="12" rounded="md" boxShadow="inner" />
 
       <VStack gap="1">
-        <Text fontWeight="semibold" noOfLines={1} textTransform="capitalize">
+        <Text fontWeight="semibold" lineClamp={1} textTransform="capitalize">
           {label}
         </Text>
-        <Text noOfLines={1} color="muted">
+        <Text lineClamp={1} color="muted">
           {computedValue}
         </Text>
       </VStack>

@@ -68,10 +68,10 @@ Additionally, by passing child elements, you can match the width and height.
 
 ### Specify Number of Lines
 
-By setting a number to `noOfLines`, you can change the number of lines. The default is set to `3`.
+By setting a number to `lineClamp`, you can change the number of lines. The default is set to `3`.
 
 ```tsx
-<SkeletonText noOfLines={5} />
+<SkeletonText lineClamp={5} />
 ```
 
 ### Change Duration
@@ -109,7 +109,7 @@ return (
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} noOfLines={1} textHeight={6}>
+    <SkeletonText isLoaded={isLoaded} lineClamp={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
@@ -142,7 +142,7 @@ return (
     <SkeletonText
       isLoaded={isLoaded}
       fadeDuration={6}
-      noOfLines={1}
+      lineClamp={1}
       textHeight={6}
     >
       <Text isTruncated>

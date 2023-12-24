@@ -268,7 +268,16 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
         bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div": { pt: "0", pb: isMax ? "10" : "6" } }}
         maxH={isOpen ? "full" : "sm"}
-        type="never"
+        _scrollbarThumb={{
+          bg: "whiteAlpha.600",
+          bgClip: "padding-box",
+          border: "3px solid transparent",
+          rounded: "full",
+          _nativeHover: {
+            bg: "whiteAlpha.800",
+            bgClip: "padding-box",
+          },
+        }}
         tabIndex={-1}
       >
         {children}

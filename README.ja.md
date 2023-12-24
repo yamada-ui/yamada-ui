@@ -32,6 +32,7 @@ Yamada UIは、最先端のWebアプリケーションやウェブサイトの�
 - [使い方](#使い方)
 - [CodeSandbox](#codesandbox)
 - [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [サポートする](#サポートする)
 - [貢献する](#貢献する)
 - [ライセンス](#ライセンス)
 
@@ -128,6 +129,16 @@ const Example = () => {
 - [TypeScript](https://codesandbox.io/p/devbox/yamada-ui-typescript-7xqli9)
 - [Next.js - Pages](https://codesandbox.io/p/devbox/yamada-ui-next-js-pages-6d13de)
 - [Next.js - App](https://codesandbox.io/p/devbox/yamada-ui-next-js-app-3911zu)
+
+## サポートする
+
+ぜひ、このプロジェクトをサポートしてください！ あなたのアイコンや組織のロゴがWebサイトのリンクとともに、こちらに表示されます。ご支援のほど、宜しくお願いいたします。 [[貢献する](https://opencollective.com/yamada-ui/contribute)]
+
+### 組織
+
+### 個人
+
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
 
 ## 貢献する
 

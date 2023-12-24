@@ -74,7 +74,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const [isHovered, setIsHovered] = useState<boolean>(false)
-  const [isScrolling, setisScrolling] = useState<boolean>(false)
+  const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"
   const isNever = type === "never"
 
@@ -107,12 +107,12 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
 
       if (type !== "scroll") return
 
-      if (!isScrolling) setisScrolling(true)
+      if (!isScrolling) setIsScrolling(true)
 
       clearTimeout(scrollTimeout.current)
 
       scrollTimeout.current = setTimeout(
-        () => setisScrolling(false),
+        () => setIsScrolling(false),
         scrollHideDelay,
       )
     },

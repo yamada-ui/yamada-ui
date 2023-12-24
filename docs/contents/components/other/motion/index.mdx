@@ -539,3 +539,31 @@ return (
 :::note
 If you want to know more about scroll animations, please check [here](https://www.framer.com/motion/scroll-animations/).
 :::
+
+### Global Configuration
+
+If you want to apply a common configuration to the `Motion` component across your entire project, set it in the `config` of `UIProvider`.
+
+```tsx live=false
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const customConfig = extendConfig({
+  motion: {
+    config: {
+      transition: { duration: 2 },
+    },
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+If you want to change the configuration, please check [here](/styled-system/configure/customize-config).
+:::

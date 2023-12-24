@@ -539,3 +539,31 @@ return (
 :::note
 スクロールのアニメーションをもっと知りたい場合は、[こちら](https://www.framer.com/motion/scroll-animations/)をご覧ください。
 :::
+
+### グローバルなコンフィグ
+
+プロジェクト全体で`Motion`コンポーネントに共通の設定を付与したい場合は、`UIProvider`の`config`に設定します。
+
+```tsx live=false
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const customConfig = extendConfig({
+  motion: {
+    config: {
+      transition: { duration: 2 },
+    },
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+コンフィグを変更したい場合は、[こちら](/styled-system/configure/customize-config)ををご覧ください。
+:::

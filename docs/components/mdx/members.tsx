@@ -2,9 +2,12 @@ import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
 import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
 import type { FC } from "react"
 import { Github, Twitter } from "components/media-and-icons"
+import { CONSTANT } from "constant"
+import { useI18n } from "contexts/i18n-context"
 
 export type MemberProps = StackProps &
-  Pick<AvatarProps, "name" | "src"> & {
+  Pick<AvatarProps, "name"> & {
+    icon?: string
     description: string
     github?: string
     twitter?: string
@@ -12,7 +15,7 @@ export type MemberProps = StackProps &
 
 export const Member: FC<MemberProps> = ({
   name,
-  src,
+  icon,
   description,
   github,
   twitter,
@@ -20,7 +23,7 @@ export const Member: FC<MemberProps> = ({
 }) => {
   return (
     <HStack alignItems="flex-start" gap="6" {...rest}>
-      <Avatar name={name} size="xl" src={src} />
+      <Avatar name={name} size="xl" src={icon} />
 
       <VStack gap="2">
         <Text fontWeight="semibold">{name}</Text>
@@ -69,15 +72,29 @@ export const Member: FC<MemberProps> = ({
   )
 }
 
-export type MemberContainerProps = GridProps
+export type MembersProps = GridProps
 
-export const MemberContainer: FC<MemberContainerProps> = ({ ...rest }) => {
+export const Members: FC<MembersProps> = ({ ...rest }) => {
+  const { locale } = useI18n()
   return (
     <Grid
       my="6"
       templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(1, 1fr)" }}
       gap="6"
       {...rest}
-    />
+    >
+      {CONSTANT.CORE_MEMBERS.map(
+        ({ id, name, icon, description, github, twitter }) => (
+          <Member
+            key={id}
+            name={name[locale]}
+            icon={icon}
+            description={description[locale]}
+            github={github}
+            twitter={twitter}
+          />
+        ),
+      )}
+    </Grid>
   )
 }

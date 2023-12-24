@@ -14,6 +14,7 @@
     "gen:css": "tsx scripts/style-props",
     "gen:props": "tsx scripts/component-props",
     "gen:search": "tsx scripts/search-content",
+    "gen:contributors": "tsx scripts/contributors",
     "gen:content": "contentlayer build --clearCache",
     "gen:translate": "tsx scripts/translate-content",
     "gen:tokens": "yamada-cli tokens theme/index.ts",

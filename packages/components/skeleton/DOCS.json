@@ -6,7 +6,7 @@
       "description": "The visual color appearance of the component."
     },
     "endColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "required": false,
       "description": "The color at the animation end."
     },
@@ -40,7 +40,7 @@
       "description": "The animation speed in seconds."
     },
     "startColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "required": false,
       "description": "The color at the animation start."
     },
@@ -52,7 +52,7 @@
   },
   "SkeletonCircle": {
     "endColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "required": false,
       "description": "The color at the animation end."
     },
@@ -81,14 +81,14 @@
       "description": "The animation speed in seconds."
     },
     "startColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "required": false,
       "description": "The color at the animation start."
     }
   },
   "SkeletonText": {
     "endColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "required": false,
       "description": "The color at the animation end."
     },
@@ -117,7 +117,7 @@
       "description": "The animation speed in seconds."
     },
     "startColor": {
-      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 239 more ... | \"info\">",
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"secondary.950\">",
       "required": false,
       "description": "The color at the animation start."
     },

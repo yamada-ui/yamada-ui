@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/theme-tools",
-  "version": "0.2.37",
+  "version": "1.0.0",
   "description": "Yamada UI theme utils",
   "keywords": [
     "yamada",
@@ -21,6 +21,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

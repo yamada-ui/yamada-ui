@@ -88,6 +88,11 @@ export type DropzoneProps = Omit<HTMLUIProps<"div">, "onDrop"> &
   FormControlOptions &
   Omit<ReactDropzoneOptions, "accept">
 
+/**
+ * Dropzone is a component used for uploading files via drag and drop.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/dropzone
+ */
 export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Dropzone", props)
   const {

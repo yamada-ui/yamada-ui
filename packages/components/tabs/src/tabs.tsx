@@ -117,6 +117,11 @@ export type TabsProps = Omit<HTMLUIProps<"div">, "onChange"> &
   ThemeProps<"Tabs"> &
   TabsOptions
 
+/**
+ * `Tabs` is a component for switching between different display areas.
+ *
+ * @see Docs https://yamada-ui.com/components/disclosure/tabs
+ */
 export const Tabs = forwardRef<TabsProps, "div">(
   ({ align = "start", ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Tabs", {

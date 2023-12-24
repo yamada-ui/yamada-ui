@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/native-select",
-  "version": "0.5.13",
+  "version": "1.0.0",
   "description": "Yamada UI native select component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

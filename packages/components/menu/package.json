@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/menu",
-  "version": "0.4.9",
+  "version": "1.0.0",
   "description": "Yamada UI menu component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

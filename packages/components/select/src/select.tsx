@@ -76,6 +76,11 @@ export type SelectProps = ThemeProps<"Select"> &
   > &
   SelectOptions
 
+/**
+ * `Select` is a component used for allowing a user to choose one option from a list.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/select
+ */
 export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Select", props)
   let {

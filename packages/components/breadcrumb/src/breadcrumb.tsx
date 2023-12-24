@@ -43,6 +43,11 @@ export type BreadcrumbProps = Omit<HTMLUIProps<"nav">, "gap"> &
   ThemeProps<"Breadcrumb"> &
   BreadcrumbOptions
 
+/**
+ * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
+ *
+ * @see Docs https://yamada-ui.com/components/navigation/breadcrumb
+ */
 export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Breadcrumb", props)
 

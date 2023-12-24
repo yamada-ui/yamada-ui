@@ -1,5 +1,49 @@
 # @yamada-ui/calendar
 
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+### Patch Changes
+
+- Updated dependencies [[`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8)]:
+  - @yamada-ui/use-controllable-state@1.0.0
+  - @yamada-ui/form-control@1.0.0
+  - @yamada-ui/use-outside-click@1.0.0
+  - @yamada-ui/use-clickable@1.0.0
+  - @yamada-ui/popover@1.0.0
+  - @yamada-ui/button@1.0.0
+  - @yamada-ui/portal@1.0.0
+  - @yamada-ui/icon@1.0.0
+  - @yamada-ui/utils@1.0.0
+  - @yamada-ui/core@1.0.0
+
+## 0.7.8
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/button@0.4.9
+  - @yamada-ui/form-control@0.3.32
+  - @yamada-ui/icon@0.3.29
+  - @yamada-ui/popover@0.3.37
+
+## 0.7.7
+
+### Patch Changes
+
+- [#518](https://github.com/hirotomoyamada/yamada-ui/pull/518) [`d4e9cc4`](https://github.com/hirotomoyamada/yamada-ui/commit/d4e9cc4c97c5a2b5a266e70a874106f578acfc8b) Thanks [@nthhm](https://github.com/nthhm)! - update dayjs version to `1.11.10`
+
+- Updated dependencies [[`1474fd0`](https://github.com/hirotomoyamada/yamada-ui/commit/1474fd00f3da01077ef766d959f4cbe7562ecd22), [`60c7542`](https://github.com/hirotomoyamada/yamada-ui/commit/60c75429b6e8c38964f51394a6186b9c6b646156), [`d1c7f17`](https://github.com/hirotomoyamada/yamada-ui/commit/d1c7f170ff0db7ed3a894bbbf57ef2f349df22ba), [`e091e70`](https://github.com/hirotomoyamada/yamada-ui/commit/e091e707f95ceb008c0d1ef97505515d1e2601a3), [`41ad25f`](https://github.com/hirotomoyamada/yamada-ui/commit/41ad25ff914818e0926e7814b1b0b41945708fab)]:
+  - @yamada-ui/core@0.15.3
+  - @yamada-ui/button@0.4.8
+  - @yamada-ui/form-control@0.3.31
+  - @yamada-ui/icon@0.3.28
+  - @yamada-ui/popover@0.3.36
+
 ## 0.7.6
 
 ### Patch Changes

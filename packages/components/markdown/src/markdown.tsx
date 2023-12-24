@@ -60,6 +60,11 @@ export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
   ThemeProps<"Markdown"> &
   MarkdownOptions
 
+/**
+ * `Markdown` is a component that renders text in markdown format.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/markdown
+ */
 export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Markdown", props)
   let {

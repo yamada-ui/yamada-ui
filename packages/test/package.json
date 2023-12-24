@@ -1,12 +1,13 @@
 {
   "name": "@yamada-ui/test",
-  "version": "0.2.14",
+  "version": "1.0.0",
   "description": "Yamada UI test",
   "keywords": [],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",
   "private": true,
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

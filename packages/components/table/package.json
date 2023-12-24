@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "0.5.16",
+  "version": "1.0.0",
   "description": "Yamada UI table component",
   "keywords": [
     "yamada",
@@ -27,6 +27,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

@@ -1,5 +1,41 @@
 # @yamada-ui/pagination
 
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+### Patch Changes
+
+- Updated dependencies [[`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8)]:
+  - @yamada-ui/use-controllable-state@1.0.0
+  - @yamada-ui/ripple@1.0.0
+  - @yamada-ui/icon@1.0.0
+  - @yamada-ui/use-value@1.0.0
+  - @yamada-ui/utils@1.0.0
+  - @yamada-ui/core@1.0.0
+
+## 0.5.9
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/use-value@0.2.29
+  - @yamada-ui/icon@0.3.29
+  - @yamada-ui/ripple@0.1.10
+
+## 0.5.8
+
+### Patch Changes
+
+- Updated dependencies [[`1474fd0`](https://github.com/hirotomoyamada/yamada-ui/commit/1474fd00f3da01077ef766d959f4cbe7562ecd22), [`60c7542`](https://github.com/hirotomoyamada/yamada-ui/commit/60c75429b6e8c38964f51394a6186b9c6b646156), [`d1c7f17`](https://github.com/hirotomoyamada/yamada-ui/commit/d1c7f170ff0db7ed3a894bbbf57ef2f349df22ba), [`e091e70`](https://github.com/hirotomoyamada/yamada-ui/commit/e091e707f95ceb008c0d1ef97505515d1e2601a3), [`41ad25f`](https://github.com/hirotomoyamada/yamada-ui/commit/41ad25ff914818e0926e7814b1b0b41945708fab)]:
+  - @yamada-ui/core@0.15.3
+  - @yamada-ui/icon@0.3.28
+  - @yamada-ui/ripple@0.1.9
+  - @yamada-ui/use-value@0.2.28
+
 ## 0.5.7
 
 ### Patch Changes

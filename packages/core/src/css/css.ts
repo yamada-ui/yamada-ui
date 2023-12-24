@@ -19,18 +19,17 @@ const expandResponsive = (
   value: Dict,
   queries: BreakpointQueries,
 ): Dict =>
-  Object.entries(value).reduce((css, [breakpointKey, breakpointValue]) => {
-    if (breakpointKey === "base") {
-      css[key] = breakpointValue
+  [...queries].reverse().reduce((prev, { breakpoint, maxWQuery }) => {
+    if (breakpoint === "base") {
+      prev[key] = value[breakpoint]
     } else {
-      const query = queries.find(
-        ({ breakpoint }) => breakpoint === breakpointKey,
-      )?.maxWQuery
+      const breakpointValue = value[breakpoint]
 
-      if (query) css[query] = { [key]: breakpointValue }
+      if (breakpointValue && maxWQuery)
+        prev[maxWQuery] = { [key]: breakpointValue }
     }
 
-    return css
+    return prev
   }, {} as Dict)
 
 const expandCSS =

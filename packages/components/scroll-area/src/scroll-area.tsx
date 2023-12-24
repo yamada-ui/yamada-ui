@@ -61,6 +61,11 @@ const hiddenStyles: CSSUIObject = {
   },
 }
 
+/**
+ * `ScrollArea` is a component that displays a customized scrollbar.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/scroll-area
+ */
 export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("ScrollArea", props)
   const {

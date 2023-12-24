@@ -14,6 +14,11 @@ const defaultRect: ObserverRect = {
   right: 0,
 }
 
+/**
+ * `useResizeObserver` is a custom hook that tracks changes in the size and position of an element.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-resize-observer
+ */
 export const useResizeObserver = <T extends HTMLElement = any>() => {
   const id = useRef(0)
   const ref = useRef<T>(null)

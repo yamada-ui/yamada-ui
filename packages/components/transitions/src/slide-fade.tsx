@@ -91,6 +91,11 @@ export const slideFadeProps = {
   variants,
 }
 
+/**
+ * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.
+ *
+ * @see Docs https://yamada-ui.com/components/transitions/slide-fade
+ */
 export const SlideFade = forwardRef<SlideFadeProps, "div">(
   (
     {

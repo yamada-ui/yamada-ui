@@ -1,5 +1,32 @@
 # @yamada-ui/providers
 
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+### Patch Changes
+
+- Updated dependencies [[`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8)]:
+  - @yamada-ui/loading@1.0.0
+  - @yamada-ui/motion@1.0.0
+  - @yamada-ui/notice@1.0.0
+  - @yamada-ui/theme@1.0.0
+  - @yamada-ui/utils@1.0.0
+  - @yamada-ui/core@1.0.0
+
+## 0.9.27
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/loading@0.5.17
+  - @yamada-ui/motion@0.4.29
+  - @yamada-ui/notice@0.5.21
+  - @yamada-ui/theme@0.13.10
+
 ## 0.9.26
 
 ### Patch Changes

@@ -3,6 +3,12 @@ import { useTheme } from "@yamada-ui/core"
 import { createdDom } from "@yamada-ui/utils"
 import { useState, useMemo, useEffect } from "react"
 
+/**
+ * `useBreakpoint` is a custom hook that returns the current breakpoint.
+ * This hook monitors changes in the window size and returns the appropriate value.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-breakpoint
+ */
 export const useBreakpoint = () => {
   const { theme } = useTheme()
 
@@ -64,6 +70,12 @@ export const useBreakpoint = () => {
   return breakpoint as Theme["breakpoints"]
 }
 
+/**
+ * `useBreakpointValue` is a custom hook that returns the value of the current breakpoint from the provided object.
+ * This hook monitors changes in the window size and returns the appropriate value.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-breakpoint-value
+ */
 export const useBreakpointValue = <T extends any>(
   values: ResponsiveObject<T>,
 ): T => {
@@ -83,20 +95,15 @@ export const useBreakpointValue = <T extends any>(
 
   const breakpoint = useBreakpoint()
 
-  const computedBreakpoint = breakpoints.reduce((prev, current) => {
-    if (prev === breakpoint || current === breakpoint) {
-      if (
-        prev === "base" ||
-        (!values.hasOwnProperty(prev) && values.hasOwnProperty(current))
-      ) {
-        return current
-      } else {
-        return prev
-      }
-    } else {
-      return prev
-    }
-  }, "base")
+  const currentIndex = breakpoints.indexOf(breakpoint)
 
-  return values[computedBreakpoint] as T
+  for (let i = currentIndex; i < breakpoints.length; i++) {
+    const nextBreakpoint = breakpoints[i]
+
+    if (values.hasOwnProperty(nextBreakpoint)) {
+      return values[nextBreakpoint] as T
+    }
+  }
+
+  return values.base as T
 }

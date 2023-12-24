@@ -172,6 +172,11 @@ export type CarouselProps = ThemeProps<"Carousel"> &
   > &
   CarouselOptions
 
+/**
+ * `Carousel` is a component that displays multiple elements like a slideshow.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/carousel
+ */
 export const Carousel = forwardRef<CarouselProps, "div">(
   ({ h, height, minH, minHeight, ...props }, ref) => {
     const orientation = useValue(props.orientation)

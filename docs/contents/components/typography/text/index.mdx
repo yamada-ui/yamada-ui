@@ -101,21 +101,21 @@ By passing `as`, you can render it as a different element or component.
 
 ### Truncate Text
 
-If you want to truncate text after a certain number of lines, specify the number of lines with `noOfLines`. If the text exceeds the specified number of lines, an ellipsis will be displayed.
+If you want to truncate text after a certain number of lines, specify the number of lines with `lineClamp`. If the text exceeds the specified number of lines, an ellipsis will be displayed.
 
 ```tsx
 <VStack>
-  <Text fontSize="2xl" noOfLines={3}>
+  <Text fontSize="2xl" lineClamp={3}>
     『ドラゴンボール』（DRAGON
     BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
   </Text>
 
-  <Text fontSize="2xl" noOfLines={2}>
+  <Text fontSize="2xl" lineClamp={2}>
     『ドラゴンボール』（DRAGON
     BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
   </Text>
 
-  <Text fontSize="2xl" noOfLines={1}>
+  <Text fontSize="2xl" lineClamp={1}>
     『ドラゴンボール』（DRAGON
     BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
   </Text>

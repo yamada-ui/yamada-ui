@@ -61,7 +61,7 @@ export const Member: FC<MemberProps> = ({
           ) : null}
         </HStack>
 
-        <Text fontSize="sm" noOfLines={2} color="muted">
+        <Text fontSize="sm" lineClamp={2} color="muted">
           {description}
         </Text>
       </VStack>

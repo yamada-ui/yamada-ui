@@ -1023,6 +1023,13 @@
     }
   },
   {
+    "title": "Stat",
+    "type": "page",
+    "description": "We are currently considering the development of `Stat`.",
+    "slug": "/components/data-display/stat",
+    "hierarchy": { "lv1": "Stat" }
+  },
+  {
     "title": "Table",
     "type": "page",
     "description": "`Table` is a table component equipped with column sorting, row selection, and click event features.",
@@ -1583,6 +1590,20 @@
     }
   },
   {
+    "title": "AreaChart",
+    "type": "page",
+    "description": "We are currently considering the development of `AreaChart`.",
+    "slug": "/components/feedback/area-chart",
+    "hierarchy": { "lv1": "AreaChart" }
+  },
+  {
+    "title": "BarChart",
+    "type": "page",
+    "description": "We are currently considering the development of `BarChart`.",
+    "slug": "/components/feedback/bar-chart",
+    "hierarchy": { "lv1": "BarChart" }
+  },
+  {
     "title": "CircleProgress",
     "type": "page",
     "description": "`CircleProgress` is a component that displays progress in a circular progress bar.",
@@ -1653,6 +1674,13 @@
     "description": "Components such as `Alert` and `Skeleton` are available for notifying users and prompting them to wait while content is loading.",
     "slug": "/components/feedback",
     "hierarchy": { "lv1": "Feedback" }
+  },
+  {
+    "title": "LineChart",
+    "type": "page",
+    "description": "We are currently considering the development of `LineChart`.",
+    "slug": "/components/feedback/line-chart",
+    "hierarchy": { "lv1": "LineChart" }
   },
   {
     "title": "Loading",
@@ -1753,6 +1781,13 @@
     "type": "fragment",
     "slug": "/components/feedback/progress#apply-animation",
     "hierarchy": { "lv1": "Progress", "lv2": "Usage", "lv3": "Apply Animation" }
+  },
+  {
+    "title": "RadarChart",
+    "type": "page",
+    "description": "We are currently considering the development of `RadarChart`.",
+    "slug": "/components/feedback/radar-chart",
+    "hierarchy": { "lv1": "RadarChart" }
   },
   {
     "title": "Skeleton",
@@ -2201,6 +2236,13 @@
       "lv2": "Usage",
       "lv3": "Use React Hook Form"
     }
+  },
+  {
+    "title": "ColorPicker",
+    "type": "page",
+    "description": "We are currently considering the development of `ColorPicker`.",
+    "slug": "/components/forms/color-picker",
+    "hierarchy": { "lv1": "ColorPicker" }
   },
   {
     "title": "DatePicker",
@@ -4708,6 +4750,13 @@
     }
   },
   {
+    "title": "Rating",
+    "type": "page",
+    "description": "We are currently considering the development of `Rating`.",
+    "slug": "/components/forms/rating",
+    "hierarchy": { "lv1": "Rating" }
+  },
+  {
     "title": "SegmentedControl",
     "type": "page",
     "description": "`SegmentedControl` is a component used for allowing users to select one option from multiple choices.",
@@ -5468,6 +5517,32 @@
     "hierarchy": { "lv1": "Layout" }
   },
   {
+    "title": "SimpleGrid",
+    "type": "page",
+    "description": "We are currently considering the development of `SimpleGrid`.",
+    "slug": "/components/layouts/simple-grid",
+    "hierarchy": { "lv1": "SimpleGrid" }
+  },
+  {
+    "title": "Spacer",
+    "type": "page",
+    "description": "`Spacer` is a component used to add space between elements.",
+    "slug": "/components/layouts/spacer",
+    "hierarchy": { "lv1": "Spacer" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/spacer#import",
+    "hierarchy": { "lv1": "Spacer", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/spacer#usage",
+    "hierarchy": { "lv1": "Spacer", "lv2": "Usage" }
+  },
+  {
     "title": "Stack",
     "type": "page",
     "description": "`Stack` is a component that groups elements and provides space between child elements.",
@@ -5975,6 +6050,13 @@
     "hierarchy": { "lv1": "Pagination", "lv2": "Usage", "lv3": "Control" }
   },
   {
+    "title": "Spotlight",
+    "type": "page",
+    "description": "We are currently considering the development of `Spotlight`.",
+    "slug": "/components/navigation/spotlight",
+    "hierarchy": { "lv1": "Spotlight" }
+  },
+  {
     "title": "Stepper",
     "type": "page",
     "description": "`Stepper` is a component that displays the progress of a multi-step process.",
@@ -6034,6 +6116,260 @@
       "lv2": "Usage",
       "lv3": "Customize Indicators"
     }
+  },
+  {
+    "title": "CloseButton",
+    "type": "page",
+    "description": "`CloseButton` is a component used primarily to trigger the close functionality of a component.",
+    "slug": "/components/other/close-button",
+    "hierarchy": { "lv1": "CloseButton" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/other/close-button#import",
+    "hierarchy": { "lv1": "CloseButton", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/other/close-button#usage",
+    "hierarchy": { "lv1": "CloseButton", "lv2": "Usage" }
+  },
+  {
+    "title": "FocusLock",
+    "type": "page",
+    "description": "`FocusLock` is a component that improves accessibility by restricting focus within elements such as modals and dialogs, and locking the focus within that range.",
+    "slug": "/components/other/focus-lock",
+    "hierarchy": { "lv1": "FocusLock" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/other/focus-lock#import",
+    "hierarchy": { "lv1": "FocusLock", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/other/focus-lock#usage",
+    "hierarchy": { "lv1": "FocusLock", "lv2": "Usage" }
+  },
+  {
+    "title": "Other",
+    "type": "page",
+    "description": "Other useful components such as `Ripple` and `Portal` are available.",
+    "slug": "/components/other",
+    "hierarchy": { "lv1": "Other" }
+  },
+  {
+    "title": "Motion",
+    "type": "page",
+    "description": "`Motion` is a convenient component that extends the Yamada UI style system to `framer-motion`.",
+    "slug": "/components/other/motion",
+    "hierarchy": { "lv1": "Motion" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/other/motion#import",
+    "hierarchy": { "lv1": "Motion", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/other/motion#usage",
+    "hierarchy": { "lv1": "Motion", "lv2": "Usage" }
+  },
+  {
+    "title": "Usage of AnimatePresence",
+    "type": "fragment",
+    "slug": "/components/other/motion#usage-of-animatepresence",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Usage of AnimatePresence"
+    }
+  },
+  {
+    "title": "Usage of useMotionAnimationFrame",
+    "type": "fragment",
+    "slug": "/components/other/motion#usage-of-usemotionanimationframe",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Usage of useMotionAnimationFrame"
+    }
+  },
+  {
+    "title": "Keyframes",
+    "type": "fragment",
+    "slug": "/components/other/motion#keyframes",
+    "hierarchy": { "lv1": "Motion", "lv2": "Usage", "lv3": "Keyframes" }
+  },
+  {
+    "title": "Gestures",
+    "type": "fragment",
+    "slug": "/components/other/motion#gestures",
+    "hierarchy": { "lv1": "Motion", "lv2": "Usage", "lv3": "Gestures" }
+  },
+  {
+    "title": "Hover",
+    "type": "fragment",
+    "slug": "/components/other/motion#hover",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Gestures",
+      "lv4": "Hover"
+    }
+  },
+  {
+    "title": "Click/Tap",
+    "type": "fragment",
+    "slug": "/components/other/motion#clicktap",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Gestures",
+      "lv4": "Click/Tap"
+    }
+  },
+  {
+    "title": "Focus",
+    "type": "fragment",
+    "slug": "/components/other/motion#focus",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Gestures",
+      "lv4": "Focus"
+    }
+  },
+  {
+    "title": "Drag",
+    "type": "fragment",
+    "slug": "/components/other/motion#drag",
+    "hierarchy": { "lv1": "Motion", "lv2": "Usage", "lv3": "Drag" }
+  },
+  {
+    "title": "Constraining the Possible Area",
+    "type": "fragment",
+    "slug": "/components/other/motion#constraining-the-possible-area",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Drag",
+      "lv4": "Constraining the Possible Area"
+    }
+  },
+  {
+    "title": "Elasticity and Momentum",
+    "type": "fragment",
+    "slug": "/components/other/motion#elasticity-and-momentum",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Drag",
+      "lv4": "Elasticity and Momentum"
+    }
+  },
+  {
+    "title": "Scroll",
+    "type": "fragment",
+    "slug": "/components/other/motion#scroll",
+    "hierarchy": { "lv1": "Motion", "lv2": "Usage", "lv3": "Scroll" }
+  },
+  {
+    "title": "Usage of useScroll",
+    "type": "fragment",
+    "slug": "/components/other/motion#usage-of-usescroll",
+    "hierarchy": {
+      "lv1": "Motion",
+      "lv2": "Usage",
+      "lv3": "Scroll",
+      "lv4": "Usage of useScroll"
+    }
+  },
+  {
+    "title": "Portal",
+    "type": "page",
+    "description": "`Portal` is a component that renders elements outside of the current `DOM` hierarchy.",
+    "slug": "/components/other/portal",
+    "hierarchy": { "lv1": "Portal" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/other/portal#import",
+    "hierarchy": { "lv1": "Portal", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/other/portal#usage",
+    "hierarchy": { "lv1": "Portal", "lv2": "Usage" }
+  },
+  {
+    "title": "Changing the Destination",
+    "type": "fragment",
+    "slug": "/components/other/portal#changing-the-destination",
+    "hierarchy": {
+      "lv1": "Portal",
+      "lv2": "Usage",
+      "lv3": "Changing the Destination"
+    }
+  },
+  {
+    "title": "Nested Portals",
+    "type": "fragment",
+    "slug": "/components/other/portal#nested-portals",
+    "hierarchy": { "lv1": "Portal", "lv2": "Usage", "lv3": "Nested Portals" }
+  },
+  {
+    "title": "Changing the Destination of Nested Portals",
+    "type": "fragment",
+    "slug": "/components/other/portal#changing-the-destination-of-nested-portals",
+    "hierarchy": {
+      "lv1": "Portal",
+      "lv2": "Usage",
+      "lv3": "Changing the Destination of Nested Portals"
+    }
+  },
+  {
+    "title": "Ripple",
+    "type": "page",
+    "description": "`Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.",
+    "slug": "/components/other/ripple",
+    "hierarchy": { "lv1": "Ripple" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/other/ripple#import",
+    "hierarchy": { "lv1": "Ripple", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/other/ripple#usage",
+    "hierarchy": { "lv1": "Ripple", "lv2": "Usage" }
+  },
+  {
+    "title": "Changing the Color",
+    "type": "fragment",
+    "slug": "/components/other/ripple#changing-the-color",
+    "hierarchy": {
+      "lv1": "Ripple",
+      "lv2": "Usage",
+      "lv3": "Changing the Color"
+    }
+  },
+  {
+    "title": "Disabling",
+    "type": "fragment",
+    "slug": "/components/other/ripple#disabling",
+    "hierarchy": { "lv1": "Ripple", "lv2": "Usage", "lv3": "Disabling" }
   },
   {
     "title": "Dialog",
@@ -8203,6 +8539,13 @@
     "hierarchy": { "lv1": "useResizeObserver", "lv2": "Usage" }
   },
   {
+    "title": "useSnacks",
+    "type": "page",
+    "description": "We are currently considering the development of `useSnacks`.",
+    "slug": "/hooks/use-snacks",
+    "hierarchy": { "lv1": "useSnacks" }
+  },
+  {
     "title": "useTheme",
     "type": "page",
     "description": "`useTheme` is a custom hook that returns a function for retrieving and switching themes.",
@@ -8437,17 +8780,6 @@
     }
   },
   {
-    "title": "Keyframes",
-    "type": "fragment",
-    "slug": "/styled-system/animation#keyframes",
-    "hierarchy": {
-      "lv1": "Animation",
-      "lv2": "Motion",
-      "lv3": "Animation",
-      "lv4": "Keyframes"
-    }
-  },
-  {
     "title": "Usage of useMotionAnimationFrame",
     "type": "fragment",
     "slug": "/styled-system/animation#usage-of-usemotionanimationframe",
@@ -8456,6 +8788,17 @@
       "lv2": "Motion",
       "lv3": "Animation",
       "lv4": "Usage of useMotionAnimationFrame"
+    }
+  },
+  {
+    "title": "Keyframes",
+    "type": "fragment",
+    "slug": "/styled-system/animation#keyframes",
+    "hierarchy": {
+      "lv1": "Animation",
+      "lv2": "Motion",
+      "lv3": "Animation",
+      "lv4": "Keyframes"
     }
   },
   {

@@ -32,6 +32,7 @@ Yamada UI is a React UI component library that streamlines the development of cu
 - [Usage](#usage)
 - [CodeSandbox](#codesandbox)
 - [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [Support](#support)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -139,6 +140,16 @@ const Example = () => {
 - [TypeScript](https://codesandbox.io/p/devbox/yamada-ui-typescript-7xqli9)
 - [Next.js - Pages](https://codesandbox.io/p/devbox/yamada-ui-next-js-pages-6d13de)
 - [Next.js - App](https://codesandbox.io/p/devbox/yamada-ui-next-js-app-3911zu)
+
+## Support
+
+Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
+
+### Organizations
+
+### Individuals
+
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
 
 ## Contributing
 

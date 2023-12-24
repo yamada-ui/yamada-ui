@@ -95,20 +95,15 @@ export const useBreakpointValue = <T extends any>(
 
   const breakpoint = useBreakpoint()
 
-  const computedBreakpoint = breakpoints.reduce((prev, current) => {
-    if (prev === breakpoint || current === breakpoint) {
-      if (
-        prev === "base" ||
-        (!values.hasOwnProperty(prev) && values.hasOwnProperty(current))
-      ) {
-        return current
-      } else {
-        return prev
-      }
-    } else {
-      return prev
-    }
-  }, "base")
+  const currentIndex = breakpoints.indexOf(breakpoint)
 
-  return values[computedBreakpoint] as T
+  for (let i = currentIndex; i < breakpoints.length; i++) {
+    const nextBreakpoint = breakpoints[i]
+
+    if (values.hasOwnProperty(nextBreakpoint)) {
+      return values[nextBreakpoint] as T
+    }
+  }
+
+  return values.base as T
 }

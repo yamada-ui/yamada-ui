@@ -1,5 +1,15 @@
 # @yamada-ui/pagination
 
+## 0.5.9
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/use-value@0.2.29
+  - @yamada-ui/icon@0.3.29
+  - @yamada-ui/ripple@0.1.10
+
 ## 0.5.8
 
 ### Patch Changes

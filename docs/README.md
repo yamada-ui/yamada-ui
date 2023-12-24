@@ -27,6 +27,7 @@ Yamada UI is a React UI component library that streamlines the development of cu
 
 - [Respect](#respect)
 - [Features](#features)
+- [Support](#Support)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -50,6 +51,16 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 - Other features:
   Yamada UI comes with essential loading and notification features that are considered crucial for modern web applications and websites.
   This means you don't have to define them individually yourself.
+
+## Support
+
+Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
+
+### Organizations
+
+### Individuals
+
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
 
 ## Contributing
 

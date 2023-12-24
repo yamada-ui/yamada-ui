@@ -1,5 +1,14 @@
 # @yamada-ui/number-input
 
+## 0.3.33
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/form-control@0.3.32
+  - @yamada-ui/icon@0.3.29
+
 ## 0.3.32
 
 ### Patch Changes

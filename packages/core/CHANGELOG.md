@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 0.15.4
+
+### Patch Changes
+
+- [#530](https://github.com/hirotomoyamada/yamada-ui/pull/530) [`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Optimized breakpoint resolution logic.
+
 ## 0.15.3
 
 ### Patch Changes

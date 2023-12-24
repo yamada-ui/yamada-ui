@@ -1,5 +1,14 @@
 # @yamada-ui/use-breakpoint
 
+## 0.2.29
+
+### Patch Changes
+
+- [#530](https://github.com/hirotomoyamada/yamada-ui/pull/530) [`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Optimized breakpoint resolution logic.
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+
 ## 0.2.28
 
 ### Patch Changes

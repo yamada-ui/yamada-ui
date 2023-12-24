@@ -1,6 +1,8 @@
 ---
 title: CloseButton
-description: "`CloseButton` is a component used primarily to trigger the close functionality of a component."
+description: >-
+  `CloseButton` is a component used primarily to trigger the close functionality
+  of a component.
 package_name: "@yamada-ui/close-button"
 with_description: true
 tab: Theming
@@ -26,6 +28,9 @@ export const CloseButton: ComponentStyle = mergeStyle(Button, {
     },
     _active: {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
+    },
+    _focusVisible: {
+      boxShadow: "outline",
     },
   },
 

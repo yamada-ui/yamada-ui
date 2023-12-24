@@ -36,7 +36,7 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({
         header: t("component.select-package-managers.description"),
         accessorKey: "description",
         cell: ({ getValue }) => (
-          <TextWithCodeOrLink noOfLines={1}>
+          <TextWithCodeOrLink lineClamp={1}>
             {getValue<string>()}
           </TextWithCodeOrLink>
         ),

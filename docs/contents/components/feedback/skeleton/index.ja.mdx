@@ -68,10 +68,10 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "@yamada-ui/react"
 
 ### 行数を指定する
 
-`noOfLines`に数値を設定することで、行数を変更できます。デフォルトは、`3`が設定されています。
+`lineClamp`に数値を設定することで、行数を変更できます。デフォルトは、`3`が設定されています。
 
 ```tsx
-<SkeletonText noOfLines={5} />
+<SkeletonText lineClamp={5} />
 ```
 
 ### 所要時間を変更する
@@ -109,7 +109,7 @@ return (
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} noOfLines={1} textHeight={6}>
+    <SkeletonText isLoaded={isLoaded} lineClamp={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
@@ -142,7 +142,7 @@ return (
     <SkeletonText
       isLoaded={isLoaded}
       fadeDuration={6}
-      noOfLines={1}
+      lineClamp={1}
       textHeight={6}
     >
       <Text isTruncated>

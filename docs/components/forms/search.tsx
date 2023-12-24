@@ -309,7 +309,7 @@ const SearchModal: FC<SearchModalProps> = memo(
                         <Highlight
                           fontSize="xs"
                           color="muted"
-                          noOfLines={1}
+                          lineClamp={1}
                           query={query}
                           markProps={{ variant: "text-accent" }}
                         >
@@ -320,7 +320,7 @@ const SearchModal: FC<SearchModalProps> = memo(
                       <Highlight
                         query={query}
                         markProps={{ variant: "text-accent" }}
-                        noOfLines={1}
+                        lineClamp={1}
                       >
                         {title}
                       </Highlight>

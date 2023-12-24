@@ -68,7 +68,7 @@ export const LinkCard = memo(
             pb={!with_description ? "md" : undefined}
             gap="sm"
           >
-            <Heading size="md" noOfLines={1}>
+            <Heading size="md" lineClamp={1}>
               {title}
             </Heading>
 
@@ -77,7 +77,7 @@ export const LinkCard = memo(
 
           {with_description ? (
             <CardBody as="div" pt="md">
-              <TextWithCode color="muted" noOfLines={3}>
+              <TextWithCode color="muted" lineClamp={3}>
                 {description}
               </TextWithCode>
             </CardBody>

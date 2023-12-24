@@ -16,7 +16,7 @@ import { useTheme } from "@yamada-ui/react"
 ```tsx functional=true
 const { theme } = useTheme()
 
-return <Text noOfLines={3}>{JSON.stringify(theme)}</Text>
+return <Text lineClamp={3}>{JSON.stringify(theme)}</Text>
 ```
 
 :::note

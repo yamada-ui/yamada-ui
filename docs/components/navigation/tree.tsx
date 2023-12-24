@@ -154,7 +154,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           _focusVisible={{ boxShadow: "inline" }}
           onClick={!isOpen ? onToggle : undefined}
         >
-          <Text as="span" noOfLines={1}>
+          <Text as="span" lineClamp={1}>
             {title}
           </Text>
 

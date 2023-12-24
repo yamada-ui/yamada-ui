@@ -96,7 +96,7 @@ const PaginationItem: FC<PaginationItemProps> = ({
           <ChevronIcon transform="rotate(90deg)" fontSize="1.3em" />
         ) : null}
 
-        <Text as="span" noOfLines={1}>
+        <Text as="span" lineClamp={1}>
           {title}
         </Text>
 

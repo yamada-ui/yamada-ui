@@ -1,5 +1,72 @@
 # @yamada-ui/react
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`8406ded`](https://github.com/hirotomoyamada/yamada-ui/commit/8406dedb22127fe0bb564db7b197d90fd2070e3d), [`1918baa`](https://github.com/hirotomoyamada/yamada-ui/commit/1918baa2c62d08a4826e2ab6faf98a271f6bdc58)]:
+  - @yamada-ui/avatar@1.1.1
+  - @yamada-ui/core@1.1.1
+  - @yamada-ui/accordion@1.0.2
+  - @yamada-ui/alert@1.0.2
+  - @yamada-ui/autocomplete@1.0.2
+  - @yamada-ui/badge@1.0.2
+  - @yamada-ui/breadcrumb@1.0.2
+  - @yamada-ui/button@1.0.2
+  - @yamada-ui/card@1.0.2
+  - @yamada-ui/checkbox@1.0.2
+  - @yamada-ui/close-button@1.0.2
+  - @yamada-ui/editable@1.0.2
+  - @yamada-ui/file-button@1.0.2
+  - @yamada-ui/file-input@1.0.2
+  - @yamada-ui/form-control@1.0.2
+  - @yamada-ui/highlight@1.0.2
+  - @yamada-ui/icon@1.0.2
+  - @yamada-ui/image@1.0.2
+  - @yamada-ui/indicator@1.1.1
+  - @yamada-ui/input@1.0.2
+  - @yamada-ui/kbd@1.0.2
+  - @yamada-ui/layouts@1.0.2
+  - @yamada-ui/link@1.0.2
+  - @yamada-ui/list@1.0.2
+  - @yamada-ui/loading@1.0.2
+  - @yamada-ui/menu@1.0.2
+  - @yamada-ui/modal@1.0.2
+  - @yamada-ui/motion@1.0.2
+  - @yamada-ui/native-select@1.0.2
+  - @yamada-ui/native-table@1.0.2
+  - @yamada-ui/notice@1.0.2
+  - @yamada-ui/number-input@1.0.2
+  - @yamada-ui/pagination@1.0.2
+  - @yamada-ui/pin-input@1.0.2
+  - @yamada-ui/popover@1.0.2
+  - @yamada-ui/progress@1.0.2
+  - @yamada-ui/radio@1.0.2
+  - @yamada-ui/reorder@1.0.2
+  - @yamada-ui/ripple@1.0.2
+  - @yamada-ui/scroll-area@1.0.2
+  - @yamada-ui/segmented-control@1.0.2
+  - @yamada-ui/select@1.0.2
+  - @yamada-ui/skeleton@1.0.2
+  - @yamada-ui/slider@1.0.2
+  - @yamada-ui/stepper@1.0.2
+  - @yamada-ui/switch@1.0.2
+  - @yamada-ui/tabs@1.0.2
+  - @yamada-ui/tag@1.0.2
+  - @yamada-ui/textarea@1.0.2
+  - @yamada-ui/tooltip@1.0.2
+  - @yamada-ui/transitions@1.0.2
+  - @yamada-ui/typography@1.0.2
+  - @yamada-ui/use-animation@1.0.2
+  - @yamada-ui/use-breakpoint@1.1.1
+  - @yamada-ui/use-popper@1.0.2
+  - @yamada-ui/use-token@1.0.2
+  - @yamada-ui/use-value@1.0.2
+  - @yamada-ui/providers@1.0.2
+  - @yamada-ui/theme@1.1.1
+  - @yamada-ui/theme-tools@1.0.2
+  - @yamada-ui/use-media-query@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

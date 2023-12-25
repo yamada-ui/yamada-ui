@@ -1,3 +1,3 @@
 import type { CSSProperties } from "."
 
-export const excludeProps: CSSProperties[] = ["transition"]
+export const excludeProps: CSSProperties[] = ["transition", "colorScheme"]

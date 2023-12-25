@@ -103,7 +103,11 @@ export const uiProps = createUIProps({
   filter: {
     transform: { transform: "filter" },
     type: `CSS.Property.Filter | "auto"`,
-    description: ["The CSS `filter` property."],
+    description: [
+      "The CSS `filter` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
+    ],
   },
   blur: {
     properties: "--ui-blur",
@@ -153,7 +157,11 @@ export const uiProps = createUIProps({
   backdropFilter: {
     transform: { transform: "filter", args: `"backdrop"` },
     type: `CSS.Property.BackdropFilter | "auto"`,
-    description: ["The CSS `backdrop-filter` property."],
+    description: [
+      "The CSS `backdrop-filter` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter",
+    ],
   },
   backdropBlur: {
     properties: "--ui-backdrop-blur",
@@ -280,5 +288,14 @@ export const uiProps = createUIProps({
       "```",
     ],
     isSkip: true,
+  },
+  colorMode: {
+    properties: "colorScheme",
+    type: "CSS.Property.ColorScheme",
+    description: [
+      "The CSS `color-scheme` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
+    ],
   },
 })

@@ -5124,6 +5124,8 @@ export type StyleProps = {
   skewY?: Token<StringLiteral>
   /**
    * The CSS `filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
    */
   filter?: Token<CSS.Property.Filter | "auto">
   /**
@@ -5164,6 +5166,8 @@ export type StyleProps = {
   sepia?: Token<StringLiteral>
   /**
    * The CSS `backdrop-filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
    */
   backdropFilter?: Token<CSS.Property.BackdropFilter | "auto">
   /**
@@ -5243,7 +5247,9 @@ export type StyleProps = {
     value: Token<StringLiteral | number>
   }[]
   /**
-   * The CSS `colorScheme` property.
+   * The CSS `color-scheme` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
    */
   colorMode?: Token<CSS.Property.ColorScheme>
 }

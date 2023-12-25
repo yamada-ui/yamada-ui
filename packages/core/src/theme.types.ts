@@ -14,6 +14,8 @@ import type {
 import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
 
+export type BreakpointDirection = "up" | "down"
+
 export type LoadingVariant =
   | "oval"
   | "grid"
@@ -226,6 +228,11 @@ export type ThemeConfig = {
    * @default false
    */
   disableTransitionOnChange?: boolean
+  /**
+   *
+   * @default "down"
+   */
+  breakpoint?: BreakpointDirection
   /**
    * The config of the calendar or date picker etc.
    */

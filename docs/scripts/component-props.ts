@@ -284,9 +284,6 @@ const generateContent = async ({
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }
 
-        if (typeof description === "string") {
-        }
-
         if (typeof defaultValue === "string") {
           description = description.replace(/\n/g, "\\n")
         }
@@ -301,13 +298,15 @@ const generateContent = async ({
         if (type !== undefined) props.push(`type='${type}'`)
 
         if (description !== undefined) {
-          description = description.replace(/\n/g, "\\n")
+          if (typeof description === "string")
+            description = description.replace(/\n/g, "\\n")
 
           props.push(`description={"${description}"}`)
         }
 
         if (defaultValue !== undefined) {
-          defaultValue = defaultValue.replace(/"/g, '\\"')
+          if (typeof defaultValue === "string")
+            defaultValue = defaultValue.replace(/"/g, '\\"')
 
           props.push(`defaultValue={"${defaultValue}"}`)
         }
@@ -369,6 +368,7 @@ const generateMdxFiles: p.RequiredRunner =
               path.join(dirPath, getMdxFileName("index", locale)),
               { tab: LOCALE_TAB_MAP[locale] },
             )
+
             const resolvedContent = await generateContent({ doc, locale })
 
             const outPath = path.join(dirPath, getMdxFileName("props", locale))

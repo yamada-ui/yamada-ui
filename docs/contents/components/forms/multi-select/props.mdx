@@ -19,7 +19,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -27,34 +27,6 @@ tab: Props
   name="clearIconProps"
   type="SelectIconProps"
   description={"Props for select clear icon element."}
-/>
-
-<PropsCard
-  id="multiselect-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiselect-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiselect-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
 />
 
 <PropsCard
@@ -112,28 +84,6 @@ tab: Props
 />
 
 <PropsCard
-  id="multiselect-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiselect-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="multiselect-focusbordercolor"
   name="focusBorderColor"
   type="string"
@@ -147,7 +97,7 @@ tab: Props
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -155,56 +105,6 @@ tab: Props
   name="iconProps"
   type="SelectIconProps"
   description={"Props for select icon element."}
-/>
-
-<PropsCard
-  id="multiselect-isclearable"
-  name="isClearable"
-  type="boolean"
-  description={"If `true`, display the select clear icon."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiselect-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiselect-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiselect-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiselect-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiselect-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -221,7 +121,7 @@ tab: Props
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -229,16 +129,6 @@ tab: Props
   name="listProps"
   type='Omit<SelectListProps, "children">'
   description={"Props for select list element."}
-/>
-
-<PropsCard
-  id="multiselect-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -275,16 +165,6 @@ tab: Props
 />
 
 <PropsCard
-  id="multiselect-omitselectedvalues"
-  name="omitSelectedValues"
-  type="boolean"
-  description={
-    "If `true`, the selected item(s) will be excluded from the list."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
   id="multiselect-onchange"
   name="onChange"
   type="(value: string[]) => void"
@@ -317,7 +197,7 @@ tab: Props
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -325,17 +205,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue="'{ isDisabled: true }'"
-/>
-
-<PropsCard
-  id="multiselect-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'{ isDisabled: true }'"}
 />
 
 <PropsCard
@@ -343,7 +213,7 @@ tab: Props
   name="separator"
   type="string"
   description={"The visual separator between each value."}
-  defaultValue="','"
+  defaultValue={"','"}
 />
 
 <PropsCard
@@ -351,7 +221,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the MultiSelect."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -359,7 +229,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -374,5 +244,5 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the MultiSelect."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />

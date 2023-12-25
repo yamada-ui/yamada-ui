@@ -11,19 +11,11 @@ tab: Props
 ### MonthPickerProps
 
 <PropsCard
-  id="monthpicker-allowinput"
-  name="allowInput"
-  type="boolean"
-  description={"If `true`, allows input."}
-  defaultValue="true"
-/>
-
-<PropsCard
   id="monthpicker-animation"
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
-  defaultValue="'scale'"
+  defaultValue={"'scale'"}
 />
 
 <PropsCard
@@ -33,7 +25,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -69,34 +61,6 @@ tab: Props
 />
 
 <PropsCard
-  id="monthpicker-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="monthpicker-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="monthpicker-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="monthpicker-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
@@ -122,7 +86,7 @@ tab: Props
   name="defaultMonth"
   type="Date"
   description={"The initial month of the calendar."}
-  defaultValue="'new Date()'"
+  defaultValue={"'new Date()'"}
 />
 
 <PropsCard
@@ -130,7 +94,7 @@ tab: Props
   name="defaultType"
   type='"month" | "year"'
   description={"The initial type of the month picker."}
-  defaultValue="'month'"
+  defaultValue={"'month'"}
 />
 
 <PropsCard
@@ -155,28 +119,6 @@ tab: Props
 />
 
 <PropsCard
-  id="monthpicker-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="monthpicker-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="monthpicker-focusbordercolor"
   name="focusBorderColor"
   type="string"
@@ -190,7 +132,7 @@ tab: Props
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -207,7 +149,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'YYYY/MM'"
+  defaultValue={"'YYYY/MM'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -219,63 +161,13 @@ tab: Props
 />
 
 <PropsCard
-  id="monthpicker-isclearable"
-  name="isClearable"
-  type="boolean"
-  description={"If `true`, display the month picker clear icon."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="monthpicker-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="monthpicker-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="monthpicker-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="monthpicker-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="monthpicker-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="monthpicker-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -285,18 +177,8 @@ tab: Props
   description={
     "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
   }
-  defaultValue="'en'"
+  defaultValue={"'en'"}
   docs="https://day.js.org/docs/en/i18n/instance-locale"
-/>
-
-<PropsCard
-  id="monthpicker-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -337,7 +219,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'MM'"
+  defaultValue={"'MM'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -397,7 +279,7 @@ tab: Props
   name="pattern"
   type="RegExp"
   description={"The pattern used to check the <input> element's."}
-  defaultValue="'/[^0-9\-\/]/g'"
+  defaultValue={"'/[^0-9-/]/g'"}
 />
 
 <PropsCard
@@ -405,7 +287,7 @@ tab: Props
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -413,17 +295,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue="'{ isDisabled: true }'"
-/>
-
-<PropsCard
-  id="monthpicker-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'{ isDisabled: true }'"}
 />
 
 <PropsCard
@@ -431,7 +303,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the MonthPicker."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -439,7 +311,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -461,31 +333,7 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the MonthPicker."}
-  defaultValue="outline"
-/>
-
-<PropsCard
-  id="monthpicker-withcontrols"
-  name="withControls"
-  type="boolean"
-  description={"If `true`, display the calendar control buttons."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="monthpicker-withheader"
-  name="withHeader"
-  type="boolean"
-  description={"If `true`, display the calendar header."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="monthpicker-withlabel"
-  name="withLabel"
-  type="boolean"
-  description={"If `true`, display the calendar label button."}
-  defaultValue="true"
+  defaultValue={"outline"}
 />
 
 <PropsCard
@@ -495,6 +343,6 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'YYYY'"
+  defaultValue={"'YYYY'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />

@@ -18,24 +18,6 @@ tab: Props
 />
 
 <PropsCard
-  id="numberinput-allowmousewheel"
-  name="allowMouseWheel"
-  type="boolean"
-  description={"If `true`, the input's value will change based on mouse wheel."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="numberinput-clampvalueonblur"
-  name="clampValueOnBlur"
-  type="boolean"
-  description={
-    "This controls the value update when you blur out of the input.\n- If `true` and the value is greater than `max`, the value will be reset to `max`.\n- Else, the value remains the same."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="numberinput-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
@@ -71,16 +53,6 @@ tab: Props
 />
 
 <PropsCard
-  id="numberinput-focusinputonchange"
-  name="focusInputOnChange"
-  type="boolean"
-  description={
-    "If `true`, the input will be focused as you increment or decrement the value with the stepper."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="numberinput-format"
   name="format"
   type="(value: string | number) => string | number"
@@ -106,38 +78,6 @@ tab: Props
 />
 
 <PropsCard
-  id="numberinput-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="numberinput-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="numberinput-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="numberinput-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="numberinput-isstepper"
   name="isStepper"
   type="boolean"
@@ -151,16 +91,6 @@ tab: Props
   description={
     "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+-.]$/."
   }
-/>
-
-<PropsCard
-  id="numberinput-keepwithinrange"
-  name="keepWithinRange"
-  type="boolean"
-  description={
-    "This controls the value update behavior in general.\n\n- If `true` and you use the stepper or up/down arrow keys,\nthe value will not exceed the `max` or go lower than `min`.\n\n- If `false`, the value will be allowed to go out of range."
-  }
-  defaultValue="true"
 />
 
 <PropsCard
@@ -191,7 +121,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the NumberInput."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -199,28 +129,10 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the NumberInput."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />
 
 ### UseNumberInputProps
-
-<PropsCard
-  id="usenumberinput-allowmousewheel"
-  name="allowMouseWheel"
-  type="boolean"
-  description={"If `true`, the input's value will change based on mouse wheel."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usenumberinput-clampvalueonblur"
-  name="clampValueOnBlur"
-  type="boolean"
-  description={
-    "This controls the value update when you blur out of the input.\n- If `true` and the value is greater than `max`, the value will be reset to `max`.\n- Else, the value remains the same."
-  }
-  defaultValue="true"
-/>
 
 <PropsCard
   id="usenumberinput-defaultvalue"
@@ -232,16 +144,6 @@ tab: Props
 />
 
 <PropsCard id="usenumberinput-disabled" name="disabled" type="boolean" />
-
-<PropsCard
-  id="usenumberinput-focusinputonchange"
-  name="focusInputOnChange"
-  type="boolean"
-  description={
-    "If `true`, the input will be focused as you increment or decrement the value with the stepper."
-  }
-  defaultValue="true"
-/>
 
 <PropsCard
   id="usenumberinput-format"
@@ -278,39 +180,7 @@ tab: Props
   description={
     "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices."
   }
-  defaultValue="'decimal'"
-/>
-
-<PropsCard
-  id="usenumberinput-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usenumberinput-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usenumberinput-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usenumberinput-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
+  defaultValue={"'decimal'"}
 />
 
 <PropsCard
@@ -323,21 +193,11 @@ tab: Props
 />
 
 <PropsCard
-  id="usenumberinput-keepwithinrange"
-  name="keepWithinRange"
-  type="boolean"
-  description={
-    "This controls the value update behavior in general.\n\n- If `true` and you use the stepper or up/down arrow keys,\nthe value will not exceed the `max` or go lower than `min`.\n\n- If `false`, the value will be allowed to go out of range."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="usenumberinput-max"
   name="max"
   type="number"
   description={"The maximum value of the counter"}
-  defaultValue="Number.MAX_SAFE_INTEGER"
+  defaultValue={"Number.MAX_SAFE_INTEGER"}
 />
 
 <PropsCard
@@ -345,7 +205,7 @@ tab: Props
   name="min"
   type="number"
   description={"The minimum value of the counter"}
-  defaultValue="Number.MIN_SAFE_INTEGER"
+  defaultValue={"Number.MIN_SAFE_INTEGER"}
 />
 
 <PropsCard
@@ -401,7 +261,7 @@ tab: Props
   description={
     "The pattern used to check the <input> element's value against on form submission."
   }
-  defaultValue="'[0-9]*(.[0-9]+)?'"
+  defaultValue={"'[0-9]*(.[0-9]+)?'"}
 />
 
 <PropsCard
@@ -420,7 +280,7 @@ tab: Props
   name="step"
   type="number"
   description={"The step used to increment or decrement the value."}
-  defaultValue="1"
+  defaultValue={"1"}
 />
 
 <PropsCard

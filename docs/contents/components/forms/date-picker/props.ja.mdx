@@ -11,29 +11,11 @@ tab: Props
 ### DatePickerProps
 
 <PropsCard
-  id="datepicker-allowinput"
-  name="allowInput"
-  type="boolean"
-  description={"If `true`, allows input."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-allowinputbeyond"
-  name="allowInputBeyond"
-  type="boolean"
-  description={
-    "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="datepicker-amountofmonths"
   name="amountOfMonths"
   type="number"
   description={"The number of months to display."}
-  defaultValue="1"
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -41,7 +23,7 @@ tab: Props
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
-  defaultValue="'scale'"
+  defaultValue={"'scale'"}
 />
 
 <PropsCard
@@ -51,7 +33,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -87,34 +69,6 @@ tab: Props
 />
 
 <PropsCard
-  id="datepicker-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="datepicker-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
@@ -135,7 +89,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'MMMM YYYY'"
+  defaultValue={"'MMMM YYYY'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -151,7 +105,7 @@ tab: Props
   name="defaultMonth"
   type="Date"
   description={"The initial month of the calendar."}
-  defaultValue="'new Date()'"
+  defaultValue={"'new Date()'"}
 />
 
 <PropsCard
@@ -190,18 +144,6 @@ tab: Props
 />
 
 <PropsCard
-  id="datepicker-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="datepicker-excludedate"
   name="excludeDate"
   type="(date: Date) => boolean"
@@ -215,17 +157,7 @@ tab: Props
   name="firstDayOfWeek"
   type='"sunday" | "monday"'
   description={"Define the first day of the week."}
-  defaultValue="'monday'"
-/>
-
-<PropsCard
-  id="datepicker-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'monday'"}
 />
 
 <PropsCard
@@ -242,7 +174,7 @@ tab: Props
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -266,7 +198,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'YYYY/MM/DD'"
+  defaultValue={"'YYYY/MM/DD'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -278,63 +210,13 @@ tab: Props
 />
 
 <PropsCard
-  id="datepicker-isclearable"
-  name="isClearable"
-  type="boolean"
-  description={"If `true`, display the date picker clear icon."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="datepicker-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="datepicker-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="datepicker-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="datepicker-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="datepicker-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -344,18 +226,8 @@ tab: Props
   description={
     "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
   }
-  defaultValue="'en'"
+  defaultValue={"'en'"}
   docs="https://day.js.org/docs/en/i18n/instance-locale"
-/>
-
-<PropsCard
-  id="datepicker-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -403,7 +275,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'MM'"
+  defaultValue={"'MM'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -460,7 +332,7 @@ tab: Props
   name="paginateBy"
   type="number"
   description={"The number of months to paginate."}
-  defaultValue="1"
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -475,7 +347,7 @@ tab: Props
   name="pattern"
   type="RegExp"
   description={"The pattern used to check the <input> element's."}
-  defaultValue="'/[^0-9\-\/]/g'"
+  defaultValue={"'/[^0-9-/]/g'"}
 />
 
 <PropsCard
@@ -483,7 +355,7 @@ tab: Props
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -491,17 +363,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue="'{ isDisabled: true }'"
-/>
-
-<PropsCard
-  id="datepicker-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'{ isDisabled: true }'"}
 />
 
 <PropsCard
@@ -515,7 +377,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the DatePicker."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -523,15 +385,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
-/>
-
-<PropsCard
-  id="datepicker-today"
-  name="today"
-  type="boolean"
-  description={"If `true`, highlight today."}
-  defaultValue="false"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -553,7 +407,7 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the DatePicker."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />
 
 <PropsCard
@@ -563,7 +417,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'dd'"
+  defaultValue={"'dd'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -572,39 +426,7 @@ tab: Props
   name="weekendDays"
   type="number[]"
   description={"Define weekend days."}
-  defaultValue="'[0, 6]'"
-/>
-
-<PropsCard
-  id="datepicker-withcontrols"
-  name="withControls"
-  type="boolean"
-  description={"If `true`, display the calendar control buttons."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-withheader"
-  name="withHeader"
-  type="boolean"
-  description={"If `true`, display the calendar header."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-withlabel"
-  name="withLabel"
-  type="boolean"
-  description={"If `true`, display the calendar label button."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="datepicker-withweekdays"
-  name="withWeekdays"
-  type="boolean"
-  description={"If `true`, display the calendar weekdays."}
-  defaultValue="true"
+  defaultValue={"'[0, 6]'"}
 />
 
 <PropsCard
@@ -614,6 +436,6 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'YYYY'"
+  defaultValue={"'YYYY'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />

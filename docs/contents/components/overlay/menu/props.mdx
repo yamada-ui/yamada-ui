@@ -15,17 +15,7 @@ tab: Props
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
-  defaultValue="'scale'"
-/>
-
-<PropsCard
-  id="menu-autofocus"
-  name="autoFocus"
-  type="boolean"
-  description={
-    "If `true`, focus will be transferred to the first interactive element when the popover opens."
-  }
-  defaultValue="true"
+  defaultValue={"'scale'"}
 />
 
 <PropsCard
@@ -35,7 +25,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -43,35 +33,7 @@ tab: Props
   name="closeDelay"
   type="number"
   description={"The number of delay time to close."}
-  defaultValue="200"
-/>
-
-<PropsCard
-  id="menu-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="menu-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="menu-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -89,35 +51,13 @@ tab: Props
 />
 
 <PropsCard
-  id="menu-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="menu-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="menu-gutter"
   name="gutter"
   type="UIValue<number>"
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -127,16 +67,6 @@ tab: Props
   description={
     "The `ref` of the element that should receive focus when the popover opens."
   }
-/>
-
-<PropsCard
-  id="menu-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -153,17 +83,7 @@ tab: Props
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
-/>
-
-<PropsCard
-  id="menu-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -204,7 +124,7 @@ tab: Props
   name="openDelay"
   type="number"
   description={"The number of delay time to open."}
-  defaultValue="200"
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -212,27 +132,7 @@ tab: Props
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
-/>
-
-<PropsCard
-  id="menu-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="menu-restorefocus"
-  name="restoreFocus"
-  type="boolean"
-  description={
-    "If `true`, focus will be returned to the element that triggers the popover when it closes."
-  }
-  defaultValue="true"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -240,7 +140,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -250,7 +150,7 @@ tab: Props
   description={
     "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
   }
-  defaultValue="'click'"
+  defaultValue={"'click'"}
 />
 
 ### MenuButtonProps
@@ -258,14 +158,6 @@ tab: Props
 ### MenuListProps
 
 ### MenuItemProps
-
-<PropsCard
-  id="menuitem-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={"If `true`, the list element will be closed when selected."}
-  defaultValue="false"
-/>
 
 <PropsCard
   id="menuitem-command"
@@ -283,61 +175,13 @@ tab: Props
   description={"The menu item icon to use."}
 />
 
-<PropsCard
-  id="menuitem-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the menu item will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="menuitem-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={"If `true`, the menu item will be focusable."}
-  defaultValue="false"
-/>
-
 ### MenuOptionItemProps
-
-<PropsCard
-  id="menuoptionitem-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={"If `true`, the list element will be closed when selected."}
-  defaultValue="false"
-/>
 
 <PropsCard
   id="menuoptionitem-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The menu option item icon to use."}
-/>
-
-<PropsCard
-  id="menuoptionitem-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the checkbox or radio will be checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="menuoptionitem-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the menu item will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="menuoptionitem-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={"If `true`, the menu item will be focusable."}
-  defaultValue="false"
 />
 
 ### MenuGroupProps
@@ -379,7 +223,7 @@ tab: Props
   name="type"
   type='"radio" | "checkbox"'
   description={"The type of the menu option group."}
-  defaultValue="'checkbox'"
+  defaultValue={"'checkbox'"}
 />
 
 <PropsCard

@@ -46,38 +46,6 @@ tab: Props
 />
 
 <PropsCard
-  id="fileinput-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="fileinput-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="fileinput-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="fileinput-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="fileinput-onchange"
   name="onChange"
   type="(files: File[] | undefined) => void"
@@ -98,7 +66,7 @@ tab: Props
   name="separator"
   type="string"
   description={"The string to separate uploaded files."}
-  defaultValue="','"
+  defaultValue={"','"}
 />
 
 <PropsCard
@@ -106,7 +74,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the FileInput."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -121,5 +89,5 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the FileInput."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />

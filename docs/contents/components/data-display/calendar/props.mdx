@@ -15,7 +15,7 @@ tab: Props
   name="amountOfMonths"
   type="number"
   description={"The number of months to display."}
-  defaultValue="1"
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -23,7 +23,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="primary"
+  defaultValue={"primary"}
 />
 
 <PropsCard
@@ -40,7 +40,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'MMMM YYYY'"
+  defaultValue={"'MMMM YYYY'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -56,7 +56,7 @@ tab: Props
   name="defaultMonth"
   type="Date"
   description={"The initial month of the calendar."}
-  defaultValue="'new Date()'"
+  defaultValue={"'new Date()'"}
 />
 
 <PropsCard
@@ -94,7 +94,7 @@ tab: Props
   name="firstDayOfWeek"
   type='"sunday" | "monday"'
   description={"Define the first day of the week."}
-  defaultValue="'monday'"
+  defaultValue={"'monday'"}
 />
 
 <PropsCard
@@ -125,7 +125,7 @@ tab: Props
   description={
     "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
   }
-  defaultValue="'en'"
+  defaultValue={"'en'"}
   docs="https://day.js.org/docs/en/i18n/instance-locale"
 />
 
@@ -164,7 +164,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'MM'"
+  defaultValue={"'MM'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -221,7 +221,7 @@ tab: Props
   name="paginateBy"
   type="number"
   description={"The number of months to paginate."}
-  defaultValue="1"
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -251,7 +251,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg" | "full"'
   description={"The size of the Calendar."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -259,14 +259,6 @@ tab: Props
   name="tableProps"
   type='Omit<PropsOf<"table">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }'
   description={"Props for calendar month table element."}
-/>
-
-<PropsCard
-  id="calendar-today"
-  name="today"
-  type="boolean"
-  description={"If `true`, highlight today."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -297,7 +289,7 @@ tab: Props
   name="variant"
   type='"solid" | "subtle" | "unstyled"'
   description={"The variant of the Calendar."}
-  defaultValue="solid"
+  defaultValue={"solid"}
 />
 
 <PropsCard
@@ -307,7 +299,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'dd'"
+  defaultValue={"'dd'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -323,39 +315,7 @@ tab: Props
   name="weekendDays"
   type="number[]"
   description={"Define weekend days."}
-  defaultValue="'[0, 6]'"
-/>
-
-<PropsCard
-  id="calendar-withcontrols"
-  name="withControls"
-  type="boolean"
-  description={"If `true`, display the calendar control buttons."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="calendar-withheader"
-  name="withHeader"
-  type="boolean"
-  description={"If `true`, display the calendar header."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="calendar-withlabel"
-  name="withLabel"
-  type="boolean"
-  description={"If `true`, display the calendar label button."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="calendar-withweekdays"
-  name="withWeekdays"
-  type="boolean"
-  description={"If `true`, display the calendar weekdays."}
-  defaultValue="true"
+  defaultValue={"'[0, 6]'"}
 />
 
 <PropsCard
@@ -365,7 +325,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue="'YYYY'"
+  defaultValue={"'YYYY'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 

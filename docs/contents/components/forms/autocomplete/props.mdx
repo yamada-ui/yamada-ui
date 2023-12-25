@@ -13,14 +13,6 @@ tab: Props
 ### AutocompleteProps
 
 <PropsCard
-  id="autocomplete-allowcreate"
-  name="allowCreate"
-  type="boolean"
-  description={"If `true`, enables the creation of autocomplete option."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="autocomplete-allowfree"
   name="allowFree"
   type="boolean"
@@ -32,7 +24,7 @@ tab: Props
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
-  defaultValue="'scale'"
+  defaultValue={"'scale'"}
 />
 
 <PropsCard
@@ -42,35 +34,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
-/>
-
-<PropsCard
-  id="autocomplete-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="autocomplete-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="autocomplete-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -113,7 +77,7 @@ tab: Props
   name="emptyMessage"
   type="string"
   description={"The message displayed when the search yields no hits."}
-  defaultValue="'No results found'"
+  defaultValue={"'No results found'"}
 />
 
 <PropsCard
@@ -121,28 +85,6 @@ tab: Props
   name="errorBorderColor"
   type="string"
   description={"The border color when the input is invalid."}
-/>
-
-<PropsCard
-  id="autocomplete-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="autocomplete-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
 />
 
 <PropsCard
@@ -166,7 +108,7 @@ tab: Props
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -190,49 +132,7 @@ tab: Props
   description={
     "The position to be inserted when the autocomplete option is created."
   }
-  defaultValue="'first'"
-/>
-
-<PropsCard
-  id="autocomplete-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="autocomplete-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="autocomplete-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="autocomplete-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="autocomplete-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
+  defaultValue={"'first'"}
 />
 
 <PropsCard
@@ -249,7 +149,7 @@ tab: Props
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -257,16 +157,6 @@ tab: Props
   name="listProps"
   type='Omit<AutocompleteListProps, "children">'
   description={"Props for autocomplete list element."}
-/>
-
-<PropsCard
-  id="autocomplete-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -338,7 +228,7 @@ tab: Props
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -346,17 +236,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue="'{ isDisabled: true }'"
-/>
-
-<PropsCard
-  id="autocomplete-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'{ isDisabled: true }'"}
 />
 
 <PropsCard
@@ -364,7 +244,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Autocomplete."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -372,7 +252,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -387,7 +267,7 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the Autocomplete."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />
 
 ### AutocompleteOptionGroupProps
@@ -403,34 +283,10 @@ tab: Props
 ### AutocompleteOptionProps
 
 <PropsCard
-  id="autocompleteoption-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={"If `true`, the list element will be closed when selected."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="autocompleteoption-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The autocomplete option icon to use."}
-/>
-
-<PropsCard
-  id="autocompleteoption-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the select option will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="autocompleteoption-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={"If `true`, the select option will be focusable."}
-  defaultValue="false"
 />
 
 <PropsCard

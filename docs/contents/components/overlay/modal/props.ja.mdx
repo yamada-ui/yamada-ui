@@ -25,7 +25,7 @@ tab: Props
   description={
     "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
   }
-  defaultValue="false."
+  defaultValue={"false."}
 />
 
 <PropsCard
@@ -33,33 +33,7 @@ tab: Props
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the tooltip."}
-  defaultValue="'scale'"
-/>
-
-<PropsCard
-  id="modal-blockscrollonmount"
-  name="blockScrollOnMount"
-  type="boolean"
-  description={
-    "If `true`, scrolling will be disabled on the `body` when the modal opens."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="modal-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the modal will close when the `Esc` key is pressed."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="modal-closeonoverlay"
-  name="closeOnOverlay"
-  type="boolean"
-  description={"If `true`, the modal will close when the overlay is clicked."}
-  defaultValue="true"
+  defaultValue={"'scale'"}
 />
 
 <PropsCard
@@ -90,16 +64,6 @@ tab: Props
   name="initialFocusRef"
   type="RefObject<FocusableElement>"
   description={"`ref` of the element to receive focus initially."}
-/>
-
-<PropsCard
-  id="modal-lockfocusacrossframes"
-  name="lockFocusAcrossFrames"
-  type="boolean"
-  description={
-    "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -154,7 +118,7 @@ tab: Props
   | "bottom-left"
   | "bottom-right">'
   description={"The placement of the modal."}
-  defaultValue="'center'"
+  defaultValue={"'center'"}
 />
 
 <PropsCard
@@ -165,23 +129,13 @@ tab: Props
 />
 
 <PropsCard
-  id="modal-restorefocus"
-  name="restoreFocus"
-  type="boolean"
-  description={
-    "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
   id="modal-scrollbehavior"
   name="scrollBehavior"
   type='"outside" | "inside"'
   description={
     "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport."
   }
-  defaultValue="'inside'"
+  defaultValue={"'inside'"}
 />
 
 <PropsCard
@@ -189,7 +143,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full"'
   description={"The size of the Modal."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -199,41 +153,9 @@ tab: Props
   description={"The variant of the Modal."}
 />
 
-<PropsCard
-  id="modal-withclosebutton"
-  name="withCloseButton"
-  type="boolean"
-  description={"If `true`, display the modal close button."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="modal-withoverlay"
-  name="withOverlay"
-  type="boolean"
-  description={"If `true`, display the modal overlay."}
-  defaultValue="true"
-/>
-
 ### ModalOverlayProps
 
 ### ModalCloseButtonProps
-
-<PropsCard
-  id="modalclosebutton-disableripple"
-  name="disableRipple"
-  type="boolean"
-  description={"If `true`, disable ripple effects when pressing a element."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="modalclosebutton-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the button is disabled."}
-  defaultValue="false"
-/>
 
 ### ModalHeaderProps
 
@@ -245,22 +167,6 @@ tab: Props
 
 ### DialogCloseButtonProps
 
-<PropsCard
-  id="dialogclosebutton-disableripple"
-  name="disableRipple"
-  type="boolean"
-  description={"If `true`, disable ripple effects when pressing a element."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="dialogclosebutton-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the button is disabled."}
-  defaultValue="false"
-/>
-
 ### DialogHeaderProps
 
 ### DialogBodyProps
@@ -270,22 +176,6 @@ tab: Props
 ### DrawerOverlayProps
 
 ### DrawerCloseButtonProps
-
-<PropsCard
-  id="drawerclosebutton-disableripple"
-  name="disableRipple"
-  type="boolean"
-  description={"If `true`, disable ripple effects when pressing a element."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="drawerclosebutton-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the button is disabled."}
-  defaultValue="false"
-/>
 
 ### DrawerHeaderProps
 

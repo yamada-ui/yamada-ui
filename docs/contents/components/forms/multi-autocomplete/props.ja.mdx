@@ -11,14 +11,6 @@ tab: Props
 ### MultiAutocompleteProps
 
 <PropsCard
-  id="multiautocomplete-allowcreate"
-  name="allowCreate"
-  type="boolean"
-  description={"If `true`, enables the creation of autocomplete option."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="multiautocomplete-allowfree"
   name="allowFree"
   type="boolean"
@@ -30,7 +22,7 @@ tab: Props
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
-  defaultValue="'scale'"
+  defaultValue={"'scale'"}
 />
 
 <PropsCard
@@ -40,7 +32,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -48,34 +40,6 @@ tab: Props
   name="clearIconProps"
   type="AutocompleteIconProps"
   description={"Props for multi autocomplete clear icon element."}
-/>
-
-<PropsCard
-  id="multiautocomplete-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiautocomplete-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiautocomplete-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
 />
 
 <PropsCard
@@ -130,7 +94,7 @@ tab: Props
   name="emptyMessage"
   type="string"
   description={"The message displayed when the search yields no hits."}
-  defaultValue="'No results found'"
+  defaultValue={"'No results found'"}
 />
 
 <PropsCard
@@ -138,28 +102,6 @@ tab: Props
   name="errorBorderColor"
   type="string"
   description={"The border color when the input is invalid."}
-/>
-
-<PropsCard
-  id="multiautocomplete-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiautocomplete-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
 />
 
 <PropsCard
@@ -183,7 +125,7 @@ tab: Props
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -207,57 +149,7 @@ tab: Props
   description={
     "The position to be inserted when the autocomplete option is created."
   }
-  defaultValue="'first'"
-/>
-
-<PropsCard
-  id="multiautocomplete-isclearable"
-  name="isClearable"
-  type="boolean"
-  description={"If `true`, display the select clear icon."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="multiautocomplete-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiautocomplete-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiautocomplete-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiautocomplete-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="multiautocomplete-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
+  defaultValue={"'first'"}
 />
 
 <PropsCard
@@ -268,21 +160,13 @@ tab: Props
 />
 
 <PropsCard
-  id="multiautocomplete-keepplaceholder"
-  name="keepPlaceholder"
-  type="boolean"
-  description={"If `true`, keep the placeholder."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="multiautocomplete-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -290,16 +174,6 @@ tab: Props
   name="listProps"
   type='Omit<AutocompleteListProps, "children">'
   description={"Props for multi autocomplete list element."}
-/>
-
-<PropsCard
-  id="multiautocomplete-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -326,16 +200,6 @@ tab: Props
   description={
     "The main and cross-axis offset to displace popper element from its reference element."
   }
-/>
-
-<PropsCard
-  id="multiautocomplete-omitselectedvalues"
-  name="omitSelectedValues"
-  type="boolean"
-  description={
-    "If `true`, the selected item(s) will be excluded from the list."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -388,7 +252,7 @@ tab: Props
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -396,17 +260,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue="'{ isDisabled: true }'"
-/>
-
-<PropsCard
-  id="multiautocomplete-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'{ isDisabled: true }'"}
 />
 
 <PropsCard
@@ -414,7 +268,7 @@ tab: Props
   name="separator"
   type="string"
   description={"The visual separator between each value."}
-  defaultValue="','"
+  defaultValue={"','"}
 />
 
 <PropsCard
@@ -422,7 +276,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the MultiAutocomplete."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -430,7 +284,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -445,5 +299,5 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the MultiAutocomplete."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />

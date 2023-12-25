@@ -17,15 +17,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="primary"
-/>
-
-<PropsCard
-  id="radio-defaultischecked"
-  name="defaultIsChecked"
-  type="boolean"
-  description={"If `true`, the radio will be initially checked."}
-  defaultValue="false"
+  defaultValue={"primary"}
 />
 
 <PropsCard id="radio-iconprops" name="iconProps" type='HTMLUIProps<"span">' />
@@ -41,46 +33,6 @@ tab: Props
   id="radio-inputprops"
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
-/>
-
-<PropsCard
-  id="radio-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the radio will be checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radio-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radio-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radio-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radio-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard id="radio-labelprops" name="labelProps" type='HTMLUIProps<"span">' />
@@ -104,7 +56,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Radio."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -124,58 +76,10 @@ tab: Props
 ### UseRadioProps
 
 <PropsCard
-  id="useradio-defaultischecked"
-  name="defaultIsChecked"
-  type="boolean"
-  description={"If `true`, the radio will be initially checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="useradio-id"
   name="id"
   type="string"
   description={"id assigned to input."}
-/>
-
-<PropsCard
-  id="useradio-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the radio will be checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="useradio-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="useradio-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="useradio-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="useradio-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -230,53 +134,11 @@ tab: Props
 />
 
 <PropsCard
-  id="radiogroup-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radiogroup-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radiogroup-isnative"
-  name="isNative"
-  type="boolean"
-  description={
-    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radiogroup-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="radiogroup-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="radiogroup-items"
   name="items"
   type="RadioItem<Y>[]"
   description={"If provided, generate radios based on items."}
-  defaultValue="'[]'"
+  defaultValue={"'[]'"}
 />
 
 <PropsCard
@@ -339,16 +201,6 @@ tab: Props
   description={
     "The top-level id string that will be applied to the radios.\nThe index of the radio will be appended to this top-level id."
   }
-/>
-
-<PropsCard
-  id="useradiogroup-isnative"
-  name="isNative"
-  type="boolean"
-  description={
-    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
-  }
-  defaultValue="false"
 />
 
 <PropsCard

@@ -231,8 +231,8 @@ export type ThemeConfig = {
   /**
    * The `breakpoint` direction controls the responsive design approach.
    *
-   * - `down`: desktop-first using `max-width`.
    * - `up`: mobile-first using `min-width`.
+   * - `down`: desktop-first using `max-width`.
    *
    * @default "down"
    */

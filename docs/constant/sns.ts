@@ -10,5 +10,5 @@ export const SNS = {
   TWITTER: {
     HIROTOMO_YAMADA: "https://twitter.com/hirotomoyamada",
   },
-  DISCORD: "https://discord.gg/ubYvRAxFEB",
+  DISCORD: "https://discord.gg/H7V5RfEDTR",
 }

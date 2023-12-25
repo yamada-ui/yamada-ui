@@ -9605,6 +9605,15 @@
     }
   },
   {
+    "title": "ブレイクポイントの方向を変更する",
+    "type": "fragment",
+    "slug": "/styled-system/configure/customize-config#ブレイクポイントの方向を変更する",
+    "hierarchy": {
+      "lv1": "コンフィグをカスタマイズする",
+      "lv2": "ブレイクポイントの方向を変更する"
+    }
+  },
+  {
     "title": "デフォルトのコンフィグ",
     "type": "page",
     "description": "Yamada UIのデフォルトのコンフィグ。",

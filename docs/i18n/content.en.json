@@ -9115,6 +9115,15 @@
     }
   },
   {
+    "title": "Changing the Breakpoint Direction",
+    "type": "fragment",
+    "slug": "/styled-system/configure/customize-config#changing-the-breakpoint-direction",
+    "hierarchy": {
+      "lv1": "Customize Config",
+      "lv2": "Changing the Breakpoint Direction"
+    }
+  },
+  {
     "title": "Default Config",
     "type": "page",
     "description": "Default config of Yamada UI.",

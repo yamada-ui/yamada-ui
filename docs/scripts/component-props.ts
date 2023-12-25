@@ -285,6 +285,9 @@ const generateContent = async ({
         }
 
         if (typeof description === "string") {
+        }
+
+        if (typeof defaultValue === "string") {
           description = description.replace(/\n/g, "\\n")
         }
 
@@ -294,11 +297,21 @@ const generateContent = async ({
         ]
 
         if (required) props.push("required")
+
         if (type !== undefined) props.push(`type='${type}'`)
-        if (description !== undefined)
+
+        if (description !== undefined) {
+          description = description.replace(/\n/g, "\\n")
+
           props.push(`description={"${description}"}`)
-        if (defaultValue !== undefined)
-          props.push(`defaultValue="${defaultValue}"`)
+        }
+
+        if (defaultValue !== undefined) {
+          defaultValue = defaultValue.replace(/"/g, '\\"')
+
+          props.push(`defaultValue={"${defaultValue}"}`)
+        }
+
         if (see !== undefined) props.push(`docs="${see}"`)
 
         content.push(`<PropsCard ${props.join("\n")} />\n`)

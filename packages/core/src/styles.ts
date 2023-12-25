@@ -334,7 +334,6 @@ export const standardStyles: Configs = {
     token: "colors",
     transform: transforms.token("colors"),
   },
-  colorScheme: true,
   columnCount: true,
   columnFill: true,
   columnGap: {
@@ -1069,8 +1068,8 @@ export const standardStyles: Configs = {
     token: "sizes",
     transform: transforms.token("sizes", transforms.fraction(transforms.px)),
   },
-  minBoxSize: true,
-  maxBoxSize: true,
+  minBoxSize: { properties: ["minWidth", "minHeight"] },
+  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   translateX: {
     properties: "--ui-translate-x",
     token: "spaces",
@@ -1081,9 +1080,9 @@ export const standardStyles: Configs = {
     token: "spaces",
     transform: transforms.token("spaces", transforms.px),
   },
-  scale: true,
-  scaleX: true,
-  scaleY: true,
+  scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
+  scaleX: { properties: "--ui-scale-x" },
+  scaleY: { properties: "--ui-scale-y" },
   rotate: { properties: "--ui-rotate", transform: transforms.deg },
   skewX: { properties: "--ui-skew-x", transform: transforms.deg },
   skewY: { properties: "--ui-skew-y", transform: transforms.deg },
@@ -1190,6 +1189,7 @@ export const standardStyles: Configs = {
     transform: transforms.styles(),
   },
   var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
+  colorMode: { properties: "colorScheme" },
 }
 
 export const shorthandStyles: Configs = {
@@ -2459,12 +2459,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
    */
   textColor?: Token<CSS.Property.Color, "colors">
-  /**
-   * The CSS `color-scheme` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
-   */
-  colorScheme?: Token<CSS.Property.ColorScheme>
   /**
    * The CSS `column-count` property.
    *
@@ -5130,6 +5124,8 @@ export type StyleProps = {
   skewY?: Token<StringLiteral>
   /**
    * The CSS `filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
    */
   filter?: Token<CSS.Property.Filter | "auto">
   /**
@@ -5170,6 +5166,8 @@ export type StyleProps = {
   sepia?: Token<StringLiteral>
   /**
    * The CSS `backdrop-filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
    */
   backdropFilter?: Token<CSS.Property.BackdropFilter | "auto">
   /**
@@ -5248,4 +5246,10 @@ export type StyleProps = {
     token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
     value: Token<StringLiteral | number>
   }[]
+  /**
+   * The CSS `color-scheme` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+   */
+  colorMode?: Token<CSS.Property.ColorScheme>
 }

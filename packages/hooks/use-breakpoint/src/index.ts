@@ -97,7 +97,7 @@ export const useBreakpointValue = <T extends any>(
 
   const currentIndex = breakpoints.indexOf(breakpoint)
 
-  for (let i = currentIndex; i < breakpoints.length; i++) {
+  for (let i = currentIndex; 0 < i; i--) {
     const nextBreakpoint = breakpoints[i]
 
     if (values.hasOwnProperty(nextBreakpoint)) {

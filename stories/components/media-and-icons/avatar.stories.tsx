@@ -57,6 +57,17 @@ export const withBarge: Story = () => {
   )
 }
 
+export const withPing: Story = () => {
+  return (
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    >
+      <AvatarBadge bg="primary" ping pingColor="primary.400" />
+    </Avatar>
+  )
+}
+
 export const useGroup: Story = () => {
   return (
     <AvatarGroup>

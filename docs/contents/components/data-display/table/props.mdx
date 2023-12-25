@@ -39,7 +39,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="gray"
+  defaultValue={"gray"}
 />
 
 <PropsCard
@@ -101,25 +101,9 @@ tab: Props
 />
 
 <PropsCard
-  id="table-highlightonhover"
-  name="highlightOnHover"
-  type="boolean"
-  description={"If `true`, highlight the row when the table row is hovered."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="table-highlightonselected"
-  name="highlightOnSelected"
-  type="boolean"
-  description={"If `true`, highlight the row when the table row is selected."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="table-layout"
   name="layout"
-  type='"fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 
@@ -159,14 +143,6 @@ tab: Props
 />
 
 <PropsCard
-  id="table-rowsclickselect"
-  name="rowsClickSelect"
-  type="boolean"
-  description={"If `true`, allows selection by clicking on a row."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="table-selectcolumnprops"
   name="selectColumnProps"
   type="false | SelectColumn<Y, any>"
@@ -185,7 +161,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg" | "xl"'
   description={"The size of the Table."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -228,37 +204,5 @@ tab: Props
   name="variant"
   type='"simple" | "striped" | "unstyled"'
   description={"The variant of the Table."}
-  defaultValue="simple"
-/>
-
-<PropsCard
-  id="table-withborder"
-  name="withBorder"
-  type="boolean"
-  description={"If `true`, display the outer border of the table."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="table-withcolumnborders"
-  name="withColumnBorders"
-  type="boolean"
-  description={"If `true`, display line on the columns of the table."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="table-withfooter"
-  name="withFooter"
-  type="boolean"
-  description={"If `true`, display the table footer."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="table-withfooterselect"
-  name="withFooterSelect"
-  type="boolean"
-  description={"If `true`, display the checkbox in table footer."}
-  defaultValue="false"
+  defaultValue={"simple"}
 />

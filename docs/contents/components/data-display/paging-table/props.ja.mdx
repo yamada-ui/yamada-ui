@@ -37,7 +37,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="gray"
+  defaultValue={"gray"}
 />
 
 <PropsCard
@@ -61,7 +61,7 @@ tab: Props
   name="defaultPageIndex"
   type="number"
   description={"The initial page index of the paging table."}
-  defaultValue="0"
+  defaultValue={"0"}
 />
 
 <PropsCard
@@ -69,7 +69,7 @@ tab: Props
   name="defaultPageSize"
   type="number"
   description={"The initial page size of the paging table."}
-  defaultValue="20"
+  defaultValue={"20"}
 />
 
 <PropsCard
@@ -129,25 +129,9 @@ tab: Props
 />
 
 <PropsCard
-  id="pagingtable-highlightonhover"
-  name="highlightOnHover"
-  type="boolean"
-  description={"If `true`, highlight the row when the table row is hovered."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="pagingtable-highlightonselected"
-  name="highlightOnSelected"
-  type="boolean"
-  description={"If `true`, highlight the row when the table row is selected."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="pagingtable-layout"
   name="layout"
-  type='"fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 
@@ -205,7 +189,7 @@ tab: Props
   name="pageSizeList"
   type="number[]"
   description={"The list of the page size."}
-  defaultValue="'[20, 50, 100]'"
+  defaultValue={"'[20, 50, 100]'"}
 />
 
 <PropsCard
@@ -235,14 +219,6 @@ tab: Props
   name="rowProps"
   type="RowProps<Y>"
   description={"Props for table row component."}
-/>
-
-<PropsCard
-  id="pagingtable-rowsclickselect"
-  name="rowsClickSelect"
-  type="boolean"
-  description={"If `true`, allows selection by clicking on a row."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -277,7 +253,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg" | "xl"'
   description={"The size of the PagingTable."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -320,45 +296,5 @@ tab: Props
   name="variant"
   type='"simple" | "striped" | "unstyled"'
   description={"The variant of the PagingTable."}
-  defaultValue="simple"
-/>
-
-<PropsCard
-  id="pagingtable-withborder"
-  name="withBorder"
-  type="boolean"
-  description={"If `true`, display the outer border of the table."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="pagingtable-withcolumnborders"
-  name="withColumnBorders"
-  type="boolean"
-  description={"If `true`, display line on the columns of the table."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="pagingtable-withfooter"
-  name="withFooter"
-  type="boolean"
-  description={"If `true`, display the table footer."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="pagingtable-withfooterselect"
-  name="withFooterSelect"
-  type="boolean"
-  description={"If `true`, display the checkbox in table footer."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="pagingtable-withpagingcontrol"
-  name="withPagingControl"
-  type="boolean"
-  description={"If `true`, display the paging control."}
-  defaultValue="true"
+  defaultValue={"simple"}
 />

@@ -13,16 +13,18 @@ const config: ThemeConfig = {
   initialColorMode: "light",
   disableTransitionOnChange: false,
   var: { prefix: "ui" },
+  breakpoint: "down",
 }
 ```
 
-| プロパティ                  | 説明                                                                                                         | デフォルト         |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------ |
-| `initialThemeScheme`        | [テーマを切り替える](/styled-system/theming/switch-theme)で使用されるテーマの初期値。                        | `base`             |
-| `initialColorMode`          | カラーモードの初期値。`light`, `dark`, `system`を受け入れます。                                              | `light`            |
-| `disableTransitionOnChange` | カラーモードの切り替え時のトランジションなどによる不要な動きを避けるための設定。                             | `false`            |
-| `var`                       | CSSの`カスタムプロパティ`に使用される設定。                                                                  | `{ prefix: 'ui' }` |
-| `date`                      | [Calendar](/components/data-display/calendar)や[DatePicker](/components/forms/date-picker)で使用される設定。 | `undefined`        |
-| `loading`                   | [ローディング](/styled-system/loading)で使用される設定。                                                     | `undefined`        |
-| `notice`                    | [通知](/styled-system/notification)で使用される設定。                                                        | `undefined`        |
-| `motion`                    | [framer-motion](https://www.framer.com/motion/motion-config/)で使用される設定。                              | `undefined`        |
+| プロパティ                  | 説明                                                                                                                                                                                                                       | デフォルト         |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `initialThemeScheme`        | [テーマを切り替える](/styled-system/theming/switch-theme)で使用されるテーマの初期値。                                                                                                                                      | `"base"`           |
+| `initialColorMode`          | カラーモードの初期値。`light`, `dark`, `system`を受け入れます。                                                                                                                                                            | `"light"`          |
+| `disableTransitionOnChange` | カラーモードの切り替え時のトランジションなどによる不要な動きを避けるための設定。                                                                                                                                           | `false`            |
+| `breakpoint`                | レスポンシブデザインで使用されるブレイクポイントの方向を設定。`"up"`の場合は`@media(min-width)`を使ったモバイルファーストになり、`"down"`の場合は`@media(max-width)`を使ったPCファーストのレスポンシブデザインになります。 | `"down"`           |
+| `var`                       | CSSの`カスタムプロパティ`に使用される設定。                                                                                                                                                                                | `{ prefix: "ui" }` |
+| `date`                      | [Calendar](/components/data-display/calendar)や[DatePicker](/components/forms/date-picker)で使用される設定。                                                                                                               | `undefined`        |
+| `loading`                   | [ローディング](/styled-system/loading)で使用される設定。                                                                                                                                                                   | `undefined`        |
+| `notice`                    | [通知](/styled-system/notification)で使用される設定。                                                                                                                                                                      | `undefined`        |
+| `motion`                    | [framer-motion](https://www.framer.com/motion/motion-config/)で使用される設定。                                                                                                                                            | `undefined`        |

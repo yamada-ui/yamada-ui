@@ -15,15 +15,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="primary"
-/>
-
-<PropsCard
-  id="checkbox-defaultischecked"
-  name="defaultIsChecked"
-  type="boolean"
-  description={"If `true`, the checkbox will be initially checked."}
-  defaultValue="false"
+  defaultValue={"primary"}
 />
 
 <PropsCard
@@ -47,54 +39,6 @@ tab: Props
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
   description={"Props for input element."}
-/>
-
-<PropsCard
-  id="checkbox-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the checkbox will be checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkbox-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkbox-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the checkbox will be indeterminate."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkbox-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkbox-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkbox-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -137,7 +81,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Checkbox."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -163,117 +107,13 @@ tab: Props
 
 ### CheckboxIconProps
 
-<PropsCard
-  id="checkboxicon-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the icon will be checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxicon-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxicon-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the icon will be indeterminate."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxicon-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxicon-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxicon-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
 ### UseCheckboxProps
-
-<PropsCard
-  id="usecheckbox-defaultischecked"
-  name="defaultIsChecked"
-  type="boolean"
-  description={"If `true`, the checkbox will be initially checked."}
-  defaultValue="false"
-/>
 
 <PropsCard
   id="usecheckbox-id"
   name="id"
   type="string"
   description={"id assigned to input."}
-/>
-
-<PropsCard
-  id="usecheckbox-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the checkbox will be checked."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usecheckbox-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usecheckbox-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the checkbox will be indeterminate."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usecheckbox-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usecheckbox-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="usecheckbox-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -323,71 +163,29 @@ tab: Props
 <PropsCard
   id="checkboxgroup-align"
   name="align"
-  type='"center" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "end" | "baseline" | "start" | "stretch" | "flex-end" | "flex-start" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='"center" | (string & {}) | "end" | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "baseline" | "start" | "stretch" | "flex-end" | "flex-start" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `align-items` property."}
 />
 
 <PropsCard
   id="checkboxgroup-basis"
   name="basis"
-  type='number | "content" | "px" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "sm" | "md" | "lg" | "xl" | "2xl" | "max" | "min" | ... 61 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='number | "content" | "px" | (string & {}) | "max" | "min" | "initial" | "inherit" | "auto" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | ... 61 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-basis` property."}
 />
 
 <PropsCard
   id="checkboxgroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "row" | "column" | "column-reverse" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"initial" | "inherit" | "row" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="checkboxgroup-grow"
   name="grow"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexGrow> | ColorModeArray<FlexGrow> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexGrow> | ColorModeArray<FlexGrow> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-grow` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxgroup-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxgroup-isnative"
-  name="isNative"
-  type="boolean"
-  description={
-    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxgroup-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="checkboxgroup-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -395,13 +193,13 @@ tab: Props
   name="items"
   type="CheckboxItem<Y>[]"
   description={"If provided, generate checkboxes based on items."}
-  defaultValue="'[]'"
+  defaultValue={"'[]'"}
 />
 
 <PropsCard
   id="checkboxgroup-justify"
   name="justify"
-  type='"center" | "left" | "right" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "end" | "start" | "space-around" | "space-between" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='"center" | "left" | "right" | (string & {}) | "end" | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "start" | "space-around" | "space-between" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `justify-content` property."}
 />
 
@@ -417,7 +215,7 @@ tab: Props
 <PropsCard
   id="checkboxgroup-shrink"
   name="shrink"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexShrink> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | ResponsiveObject<FlexShrink> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-shrink` property."}
 />
 
@@ -431,7 +229,7 @@ tab: Props
 <PropsCard
   id="checkboxgroup-wrap"
   name="wrap"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "wrap" | "nowrap" | "wrap-reverse" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "wrap" | "nowrap" | "wrap-reverse" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-wrap` property."}
 />
 
@@ -442,16 +240,6 @@ tab: Props
   name="defaultValue"
   type="Y[]"
   description={"The initial value of the checkbox group."}
-/>
-
-<PropsCard
-  id="usecheckboxgroup-isnative"
-  name="isNative"
-  type="boolean"
-  description={
-    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
-  }
-  defaultValue="false"
 />
 
 <PropsCard

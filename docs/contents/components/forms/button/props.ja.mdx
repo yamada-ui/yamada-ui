@@ -15,39 +15,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="gray"
-/>
-
-<PropsCard
-  id="button-disableripple"
-  name="disableRipple"
-  type="boolean"
-  description={"If `true`, disable ripple effects when pressing a element."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="button-isactive"
-  name="isActive"
-  type="boolean"
-  description={"If `true`, the button is represented as active."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="button-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the button is disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="button-isloading"
-  name="isLoading"
-  type="boolean"
-  description={"If `true`, the loading state of the button is represented."}
-  defaultValue="false"
+  defaultValue={"gray"}
 />
 
 <PropsCard
@@ -79,7 +47,7 @@ tab: Props
   description={
     "The placement of the loading indicator. Accepts `start` or `end`."
   }
-  defaultValue="'start'"
+  defaultValue={"'start'"}
 />
 
 <PropsCard
@@ -101,7 +69,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Button."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -109,7 +77,7 @@ tab: Props
   name="variant"
   type='"solid" | "outline" | "link" | "ghost" | "unstyled"'
   description={"The variant of the Button."}
-  defaultValue="solid"
+  defaultValue={"solid"}
 />
 
 ### ButtonGroupProps
@@ -119,22 +87,4 @@ tab: Props
   name="direction"
   type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
-/>
-
-<PropsCard
-  id="buttongroup-isattached"
-  name="isAttached"
-  type="boolean"
-  description={
-    "If `true`, the borderRadius of button that are direct children will be altered to look flushed together."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="buttongroup-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, all wrapped button will be disabled."}
-  defaultValue="false"
 />

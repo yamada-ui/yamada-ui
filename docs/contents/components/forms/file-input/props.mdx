@@ -27,14 +27,14 @@ tab: Props
 <PropsCard
   id="fileinput-errorbordercolor"
   name="errorBorderColor"
-  type='"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | ... 317 more ... | ColorModeArray<...>'
+  type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | ColorModeArray<...>'
   description={"The border color when the input is invalid."}
 />
 
 <PropsCard
   id="fileinput-focusbordercolor"
   name="focusBorderColor"
-  type='"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | ... 317 more ... | ColorModeArray<...>'
+  type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | ColorModeArray<...>'
   description={"The border color when the input is focused."}
 />
 
@@ -43,38 +43,6 @@ tab: Props
   name="format"
   type="(value: File, index: number) => string"
   description={"A callback that formats the name of the uploaded file."}
-/>
-
-<PropsCard
-  id="fileinput-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="fileinput-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="fileinput-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="fileinput-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -98,7 +66,7 @@ tab: Props
   name="separator"
   type="string"
   description={"The string to separate uploaded files."}
-  defaultValue="','"
+  defaultValue={"','"}
 />
 
 <PropsCard
@@ -106,7 +74,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the FileInput."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -121,5 +89,5 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the FileInput."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />

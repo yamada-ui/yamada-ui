@@ -41,16 +41,6 @@ tab: Props
 />
 
 <PropsCard
-  id="avatar-ignorefallback"
-  name="ignoreFallback"
-  type="boolean"
-  description={
-    "If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
   id="avatar-loading"
   name="loading"
   type='"eager" | "lazy"'
@@ -78,7 +68,7 @@ tab: Props
   name="size"
   type='"2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"'
   description={"The size of the Avatar."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -114,9 +104,41 @@ tab: Props
 ### AvatarBadgeProps
 
 <PropsCard
+  id="avatarbadge-pingcolor"
+  name="pingColor"
+  type='UIValue<"link" | "border" | BackgroundColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | ... 319 more ... | "secondary.950">'
+  description={"It is used for the color of the ping animation."}
+  defaultValue={'\'["blackAlpha.400", "whiteAlpha.500"]\''}
+/>
+
+<PropsCard
+  id="avatarbadge-pingcount"
+  name="pingCount"
+  type="AnimationIterationCount"
+  description={"It is used for the count of the ping animation."}
+  defaultValue={"infinite"}
+/>
+
+<PropsCard
+  id="avatarbadge-pingduration"
+  name="pingDuration"
+  type="AnimationDirection"
+  description={"It is used for the duration of the ping animation."}
+  defaultValue={"1.4s"}
+/>
+
+<PropsCard
+  id="avatarbadge-pingscale"
+  name="pingScale"
+  type="number"
+  description={"It is used for the scale of the ping animation."}
+  defaultValue={"1.8"}
+/>
+
+<PropsCard
   id="avatarbadge-placement"
   name="placement"
   type='"top-start" | "top-end" | "bottom-start" | "bottom-end"'
   description={"The placement of the badge."}
-  defaultValue="'bottom-end'"
+  defaultValue={"'bottom-end'"}
 />

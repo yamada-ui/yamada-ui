@@ -35,7 +35,25 @@ Pass the generated config to the `config` of `UIProvider` using `extendConfig`.
 ```tsx live=false highlight={3,7}
 import { UIProvider, extendConfig } from "@yamada-ui/react"
 
-const customConfig = extendConfig({ var: { prefix: "hoge" } })
+const customConfig = extendConfig({ var: { prefix: "yamada" } })
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+## Changing the Breakpoint Direction
+
+By default, Yamada UI uses `@media(max-width)` media queries for responsive design. If you prefer to use `@media(min-width)` media queries, change the `breakpoint` to `"up"`.
+
+```tsx live=false highlight={3,7}
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const customConfig = extendConfig({ breakpoint: "up" })
 
 const App = () => {
   return (

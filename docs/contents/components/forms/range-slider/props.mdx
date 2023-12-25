@@ -19,7 +19,7 @@ tab: Props
   description={
     "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together."
   }
-  defaultValue="0"
+  defaultValue={"0"}
 />
 
 <PropsCard
@@ -27,7 +27,7 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
-  defaultValue="primary"
+  defaultValue={"primary"}
 />
 
 <PropsCard
@@ -40,7 +40,7 @@ tab: Props
 <PropsCard
   id="rangeslider-filledtrackcolor"
   name="filledTrackColor"
-  type='UIValue<"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | ... 315 more ... | "secondary.950">'
+  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
   description={
     "The CSS `color` property. Used in `color` of filled track element."
   }
@@ -51,16 +51,6 @@ tab: Props
   name="filledTrackProps"
   type="RangeSliderFilledTrackProps"
   description={"Props for range slider filled track element."}
-/>
-
-<PropsCard
-  id="rangeslider-focusthumbonchange"
-  name="focusThumbOnChange"
-  type="boolean"
-  description={
-    "If `false`, the slider handle will not capture focus when value changes."
-  }
-  defaultValue="true"
 />
 
 <PropsCard
@@ -75,38 +65,6 @@ tab: Props
   name="inputProps"
   type='HTMLUIProps<"input">'
   description={"Props for range slider input element."}
-/>
-
-<PropsCard
-  id="rangeslider-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="rangeslider-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="rangeslider-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="rangeslider-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
 />
 
 <PropsCard
@@ -125,7 +83,7 @@ tab: Props
   description={
     "The maximum allowed value of the slider. Cannot be less than min."
   }
-  defaultValue="100"
+  defaultValue={"100"}
 />
 
 <PropsCard
@@ -135,7 +93,7 @@ tab: Props
   description={
     "The minimum allowed value of the slider. Cannot be greater than max."
   }
-  defaultValue="0"
+  defaultValue={"0"}
 />
 
 <PropsCard
@@ -173,7 +131,7 @@ tab: Props
   name="orientation"
   type='"horizontal" | "vertical"'
   description={"The orientation of the slider."}
-  defaultValue="'horizontal'"
+  defaultValue={"'horizontal'"}
 />
 
 <PropsCard
@@ -181,7 +139,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the RangeSlider."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -189,13 +147,13 @@ tab: Props
   name="step"
   type="number"
   description={"The step in which increments or decrements have to be made."}
-  defaultValue="1"
+  defaultValue={"1"}
 />
 
 <PropsCard
   id="rangeslider-thumbcolor"
   name="thumbColor"
-  type='UIValue<"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | ... 315 more ... | Background<...>>'
+  type='UIValue<"link" | "border" | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 318 more ... | Background<...>>'
   description={
     "The CSS `background` property. Used in `background` of thumb element."
   }
@@ -211,7 +169,7 @@ tab: Props
 <PropsCard
   id="rangeslider-thumbsize"
   name="thumbSize"
-  type='UIValue<number | "px" | "min" | "max" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-max-content" | ... 58 more ... | "min-intrinsic">'
+  type='UIValue<number | "px" | "min" | "max" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-max-content" | ... 59 more ... | "min-intrinsic">'
   description={
     "The CSS `box-size` property. Used in `box-size` of thumb element."
   }
@@ -220,7 +178,7 @@ tab: Props
 <PropsCard
   id="rangeslider-trackcolor"
   name="trackColor"
-  type='UIValue<"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | ... 315 more ... | "secondary.950">'
+  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
   description={"The CSS `color` property. Used in `color` of track element."}
 />
 
@@ -234,7 +192,7 @@ tab: Props
 <PropsCard
   id="rangeslider-tracksize"
   name="trackSize"
-  type='UIValue<number | "px" | "min" | "max" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-max-content" | ... 54 more ... | "9xl">'
+  type='UIValue<number | "px" | "min" | "max" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-max-content" | ... 55 more ... | "9xl">'
   description={"The CSS `height` property. Used in `height` of track element."}
 />
 

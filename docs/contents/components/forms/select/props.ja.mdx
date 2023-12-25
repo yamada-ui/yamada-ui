@@ -17,35 +17,7 @@ tab: Props
   description={
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
-  defaultValue="'clippingParents'"
-/>
-
-<PropsCard
-  id="select-closeonblur"
-  name="closeOnBlur"
-  type="boolean"
-  description={
-    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="select-closeonesc"
-  name="closeOnEsc"
-  type="boolean"
-  description={"If `true`, the popover will close when you hit the `Esc` key."}
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="select-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={
-    "If `true`, the list element will be closed when value is selected."
-  }
-  defaultValue="true"
+  defaultValue={"'clippingParents'"}
 />
 
 <PropsCard
@@ -91,28 +63,6 @@ tab: Props
 />
 
 <PropsCard
-  id="select-eventlisteners"
-  name="eventListeners"
-  type="type ONLY_FOR_FORMAT =
-  | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
-  description={
-    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
-  id="select-flip"
-  name="flip"
-  type="boolean"
-  description={
-    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-  }
-  defaultValue="true"
-/>
-
-<PropsCard
   id="select-focusbordercolor"
   name="focusBorderColor"
   type="string"
@@ -126,7 +76,7 @@ tab: Props
   description={
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
-  defaultValue="8"
+  defaultValue={"8"}
 />
 
 <PropsCard
@@ -137,53 +87,11 @@ tab: Props
 />
 
 <PropsCard
-  id="select-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="select-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="select-islazy"
-  name="isLazy"
-  type="boolean"
-  description={
-    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-  }
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="select-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="select-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="select-items"
   name="items"
   type="SelectItem[]"
   description={"If provided, generate options based on items."}
-  defaultValue="'[]'"
+  defaultValue={"'[]'"}
 />
 
 <PropsCard
@@ -193,7 +101,7 @@ tab: Props
   description={
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
-  defaultValue="'unmount'"
+  defaultValue={"'unmount'"}
 />
 
 <PropsCard
@@ -201,16 +109,6 @@ tab: Props
   name="listProps"
   type='Omit<SelectListProps, "children">'
   description={"Props for select list element."}
-/>
-
-<PropsCard
-  id="select-matchwidth"
-  name="matchWidth"
-  type="boolean"
-  description={
-    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-  }
-  defaultValue="false"
 />
 
 <PropsCard
@@ -268,19 +166,11 @@ tab: Props
 />
 
 <PropsCard
-  id="select-placeholderinoptions"
-  name="placeholderInOptions"
-  type="boolean"
-  description={"If `true`, include placeholders in options."}
-  defaultValue="true"
-/>
-
-<PropsCard
   id="select-placement"
   name="placement"
   type="UIValue<Placement>"
   description={"The placement of the popper relative to its reference."}
-  defaultValue="'bottom'"
+  defaultValue={"'bottom'"}
 />
 
 <PropsCard
@@ -288,17 +178,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue="'{ isDisabled: true }'"
-/>
-
-<PropsCard
-  id="select-preventoverflow"
-  name="preventOverflow"
-  type="boolean"
-  description={
-    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-  }
-  defaultValue="true"
+  defaultValue={"'{ isDisabled: true }'"}
 />
 
 <PropsCard
@@ -306,7 +186,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Select."}
-  defaultValue="md"
+  defaultValue={"md"}
 />
 
 <PropsCard
@@ -314,7 +194,7 @@ tab: Props
   name="strategy"
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
-  defaultValue="'absolute'"
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard
@@ -329,7 +209,7 @@ tab: Props
   name="variant"
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the Select."}
-  defaultValue="outline"
+  defaultValue={"outline"}
 />
 
 ### OptionGroupProps
@@ -345,33 +225,9 @@ tab: Props
 ### OptionProps
 
 <PropsCard
-  id="option-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={"If `true`, the list element will be closed when selected."}
-  defaultValue="false"
-/>
-
-<PropsCard
   id="option-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
-/>
-
-<PropsCard
-  id="option-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the select option will be disabled."}
-  defaultValue="false"
-/>
-
-<PropsCard
-  id="option-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={"If `true`, the select option will be focusable."}
-  defaultValue="false"
 />
 
 <PropsCard

@@ -35,7 +35,25 @@ const App = () => {
 ```tsx live=false highlight={3,7}
 import { UIProvider, extendConfig } from "@yamada-ui/react"
 
-const customConfig = extendConfig({ var: { prefix: "hoge" } })
+const customConfig = extendConfig({ var: { prefix: "yamada" } })
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+## ブレイクポイントの方向を変更する
+
+Yamada UIは、デフォルトで`@media(max-width)`のメディアクエリを用いたレスポンシブデザインを採用しています。もし、`@media(min-width)`のメディアクエリを採用したい場合は、`breakpoint`を`"up"`に変更します。
+
+```tsx live=false highlight={3,7}
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const customConfig = extendConfig({ breakpoint: "up" })
 
 const App = () => {
   return (

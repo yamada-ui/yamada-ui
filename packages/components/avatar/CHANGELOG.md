@@ -1,5 +1,19 @@
 # @yamada-ui/avatar
 
+## 1.1.0
+
+### Minor Changes
+
+- [#524](https://github.com/hirotomoyamada/yamada-ui/pull/524) [`194c9e2`](https://github.com/hirotomoyamada/yamada-ui/commit/194c9e2d37920f9a68ec2e8bd8f5776eb948d777) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added ping animation.
+
+### Patch Changes
+
+- Updated dependencies [[`357213f`](https://github.com/hirotomoyamada/yamada-ui/commit/357213fd487f553813c1e46b4129cb84c6fd3e47), [`9a5768a`](https://github.com/hirotomoyamada/yamada-ui/commit/9a5768a160d252cfe7bb2e533796f7cdcbcf5006)]:
+  - @yamada-ui/core@1.1.0
+  - @yamada-ui/icon@1.0.1
+  - @yamada-ui/image@1.0.1
+  - @yamada-ui/use-animation@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

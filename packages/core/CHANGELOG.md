@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.1.1
+
+### Patch Changes
+
+- [`1918baa`](https://github.com/hirotomoyamada/yamada-ui/commit/1918baa2c62d08a4826e2ab6faf98a271f6bdc58) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted JSDocs of `ThemeConfig`.
+
 ## 1.1.0
 
 ### Minor Changes

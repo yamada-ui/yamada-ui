@@ -20,7 +20,7 @@ jobs:
         run: pnpm build
 
   tests:
-    name: Tests
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

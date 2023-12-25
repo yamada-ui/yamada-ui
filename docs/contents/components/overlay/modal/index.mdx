@@ -123,17 +123,13 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 const placementMap = [
   "center",
   "top",
+  "right",
+  "bottom",
+  "left",
   "top-left",
   "top-right",
-  "right",
-  "right-top",
-  "right-bottom",
-  "bottom",
   "bottom-left",
   "bottom-right",
-  "left",
-  "left-top",
-  "left-bottom",
 ]
 const [placement, setPlacement] = useState("center")
 const { isOpen, onOpen, onClose } = useDisclosure()

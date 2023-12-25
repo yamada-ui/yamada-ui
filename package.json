@@ -35,7 +35,6 @@
     "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
     "changelog": "tsx scripts/changelog",
     "changelog:latest": "tsx scripts/changelog --latest",
-    "changelog:format": "prettier --write .changelog",
     "version:dev": "changeset version --snapshot dev",
     "release": "changeset publish",
     "release:dev": "changeset publish --tag dev",

@@ -25,7 +25,7 @@ runs:
         registry-url: "https://registry.npmjs.org"
         cache: "pnpm"
 
-    - name: Cache dependencies
+    - name: Cache Dependencies
       id: cache-pnpm
       uses: actions/cache@v3
       env:
@@ -35,7 +35,7 @@ runs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-    - name: Install dependencies
+    - name: Install Dependencies
       if: ${{ steps.cache-pnpm.outputs.cache-hit != 'true' }}
       shell: bash
       run: pnpm install

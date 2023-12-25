@@ -40,6 +40,36 @@
       "required": false,
       "description": "If `label` is of type number, the maximum number displayed."
     },
+    "ping": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, make an element scale and fade like a radar ping or ripple of water."
+    },
+    "pingColor": {
+      "type": "UIValue<\"link\" | \"border\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 319 more ... | \"secondary.950\">",
+      "defaultValue": "var(--ui-ping)",
+      "required": false,
+      "description": "It is used for the color of the ping animation."
+    },
+    "pingCount": {
+      "type": "AnimationIterationCount",
+      "defaultValue": "infinite",
+      "required": false,
+      "description": "It is used for the count of the ping animation."
+    },
+    "pingDuration": {
+      "type": "AnimationDirection",
+      "defaultValue": "1.4s",
+      "required": false,
+      "description": "It is used for the duration of the ping animation."
+    },
+    "pingScale": {
+      "type": "number",
+      "defaultValue": "1.8",
+      "required": false,
+      "description": "It is used for the scale of the ping animation."
+    },
     "placement": {
       "type": "UIValue<\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
       "defaultValue": "'top-right'",

@@ -252,8 +252,6 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
       { theme, colorMode, themeScheme, ...args },
     )({ isMulti })
 
-    // console.log(variantStyles)
-
     styles = merge(styles, sizeStyles)
     styles = merge(styles, variantStyles)
 

@@ -7,24 +7,12 @@ runs:
     - name: Launch Turbo remote cache server
       uses: dtinth/setup-github-actions-caching-for-turbo@v1.1.0
 
-    - name: Cache node modules
-      id: cache-npm
-      uses: actions/cache@v3
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-      name: Setup PNPM
+    - name: Setup PNPM
       uses: pnpm/action-setup@v2.4.0
       with:
         version: 8
 
-    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-      name: Setup Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: ".nvmrc"
@@ -37,7 +25,6 @@ runs:
         git config --global user.email "hirotomo.yamada@avap.co.jp"
         git config --global user.name "hirotomoyamada"
 
-    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-      name: Install dependencies
+    - name: Install dependencies
       shell: bash
       run: pnpm install

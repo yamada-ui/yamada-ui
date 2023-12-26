@@ -1,5 +1,23 @@
 # @yamada-ui/use-breakpoint
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`1918baa`](https://github.com/hirotomoyamada/yamada-ui/commit/1918baa2c62d08a4826e2ab6faf98a271f6bdc58)]:
+  - @yamada-ui/core@1.1.1
+
+## 1.1.0
+
+### Minor Changes
+
+- [#536](https://github.com/hirotomoyamada/yamada-ui/pull/536) [`357213f`](https://github.com/hirotomoyamada/yamada-ui/commit/357213fd487f553813c1e46b4129cb84c6fd3e47) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Compatible with mobile-first responsive design.
+
+### Patch Changes
+
+- Updated dependencies [[`357213f`](https://github.com/hirotomoyamada/yamada-ui/commit/357213fd487f553813c1e46b4129cb84c6fd3e47), [`9a5768a`](https://github.com/hirotomoyamada/yamada-ui/commit/9a5768a160d252cfe7bb2e533796f7cdcbcf5006)]:
+  - @yamada-ui/core@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

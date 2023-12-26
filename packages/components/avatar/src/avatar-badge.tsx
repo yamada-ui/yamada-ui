@@ -20,7 +20,7 @@ type AvatarBadgeOptions = {
   /**
    * It is used for the color of the ping animation.
    *
-   * @default '["blackAlpha.400", "whiteAlpha.500"]''
+   * @default '["blackAlpha.400", "whiteAlpha.500"]'
    */
   pingColor?: HTMLUIProps<"div">["backgroundColor"]
   /**

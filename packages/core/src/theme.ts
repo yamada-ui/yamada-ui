@@ -97,7 +97,7 @@ export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
     __config: config,
     __cssVars: { ...defaultCSSVars, ...cssVars },
     __cssMap: cssMap,
-    __breakpoints: analyzeBreakpoints(breakpoints),
+    __breakpoints: analyzeBreakpoints(breakpoints, config?.breakpoint),
   })
 
   return theme

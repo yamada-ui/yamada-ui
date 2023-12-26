@@ -89,6 +89,12 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       })
     : null
 
+  const containarAttribute = getContainerProps()
+  const labelAttribute = getLabelProps(labelProps)
+
+  delete containarAttribute["aria-readonly"]
+  delete labelAttribute["aria-readonly"]
+
   return (
     <ui.label
       ref={ref}
@@ -103,7 +109,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         gap,
         ...styles.container,
       }}
-      {...getContainerProps()}
+      {...containarAttribute}
       {...omitObject(rest, [
         "id",
         "name",
@@ -152,7 +158,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         <ui.span
           className={cx("ui-switch__label", className)}
           __css={{ ...styles.label }}
-          {...getLabelProps(labelProps)}
+          {...labelAttribute}
         >
           {children}
         </ui.span>

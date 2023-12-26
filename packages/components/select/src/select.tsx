@@ -94,7 +94,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     iconProps,
     portalProps = { isDisabled: true },
     children,
-    isReadOnly,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -147,7 +146,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     ...rest
   } = useSelect({
     ...computedProps,
-    isReadOnly,
     placeholder,
     placeholderInOptions,
     defaultValue,

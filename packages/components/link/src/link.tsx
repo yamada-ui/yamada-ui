@@ -18,6 +18,11 @@ type LinkOptions = {
 
 export type LinkProps = HTMLUIProps<"a"> & ThemeProps<"Link"> & LinkOptions
 
+/**
+ * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.
+ *
+ * @see Docs https://yamada-ui.com/components/navigation/link
+ */
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)
   const { className, isExternal, ...rest } = omitThemeProps(mergedProps)

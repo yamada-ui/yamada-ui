@@ -7,7 +7,7 @@ const UIProps = new Set([
   "textStyle",
   "layerStyle",
   "apply",
-  "noOfLines",
+  "lineClamp",
   "focusBorderColor",
   "errorBorderColor",
   "as",

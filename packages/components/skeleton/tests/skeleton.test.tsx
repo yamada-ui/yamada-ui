@@ -23,7 +23,7 @@ describe("<Skeleton />", () => {
           gap={4}
           textHeight={4}
           speed={2}
-          noOfLines={2}
+          lineClamp={2}
         />
       </>,
     )

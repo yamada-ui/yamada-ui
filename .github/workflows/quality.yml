@@ -19,8 +19,8 @@ jobs:
       - name: Build packages
         run: pnpm build
 
-  tests:
-    name: Tests
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,7 +45,7 @@ jobs:
       - name: Run ESLint
         run: pnpm lint
 
-  types:
+  type:
     name: TypeScript
     runs-on: ubuntu-latest
     steps:

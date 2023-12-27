@@ -1,6 +1,7 @@
 import { writeFile } from "fs/promises"
 import type { ThemeToken } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
+import { checkProps } from "./check"
 import { getConfig } from "./config"
 import { layoutStyleProperties } from "./layout-props"
 import { resolveTypes } from "./resolve-types"
@@ -122,6 +123,8 @@ export const generateStyles = async (
   let styleProps: string[] = []
   let pickedStyles: (CSSProperty & { type: string })[] = []
 
+  checkProps(styles)
+
   styles = styles.filter((style) => {
     const isExists = Object.keys(uiProps).includes(style.prop)
 
@@ -134,7 +137,7 @@ export const generateStyles = async (
     const token: ThemeToken | undefined = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transform = transformMap[prop]
-    const config = getConfig({ properties: prop, token, transform })
+    const config = getConfig({ properties: prop, token, transform })()
     type = computedType({ type, token, transform, prop })
     const docs = generateDocs({ properties: name, urls: [url], deprecated })
 
@@ -190,7 +193,7 @@ export const generateStyles = async (
         isProcessSkip,
         isSkip,
         css,
-      })
+      })(true)
       type = computedType({ type: type ?? types, hasToken, token, transform })
       const docs = generateDocs({ properties, description, urls, deprecated })
 

@@ -334,7 +334,6 @@ export const standardStyles: Configs = {
     token: "colors",
     transform: transforms.token("colors"),
   },
-  colorScheme: true,
   columnCount: true,
   columnFill: true,
   columnGap: {
@@ -1069,6 +1068,8 @@ export const standardStyles: Configs = {
     token: "sizes",
     transform: transforms.token("sizes", transforms.fraction(transforms.px)),
   },
+  minBoxSize: { properties: ["minWidth", "minHeight"] },
+  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   translateX: {
     properties: "--ui-translate-x",
     token: "spaces",
@@ -1079,9 +1080,9 @@ export const standardStyles: Configs = {
     token: "spaces",
     transform: transforms.token("spaces", transforms.px),
   },
-  scale: true,
-  scaleX: true,
-  scaleY: true,
+  scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
+  scaleX: { properties: "--ui-scale-x" },
+  scaleY: { properties: "--ui-scale-y" },
   rotate: { properties: "--ui-rotate", transform: transforms.deg },
   skewX: { properties: "--ui-skew-x", transform: transforms.deg },
   skewY: { properties: "--ui-skew-y", transform: transforms.deg },
@@ -1160,7 +1161,7 @@ export const standardStyles: Configs = {
     properties: "--ui-backdrop-sepia",
     transform: transforms.function("sepia"),
   },
-  noOfLines: {
+  lineClamp: {
     properties: "--ui-line-clamp",
     isSkip: true,
     static: {
@@ -1188,9 +1189,11 @@ export const standardStyles: Configs = {
     transform: transforms.styles(),
   },
   var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
+  colorMode: { properties: "colorScheme" },
 }
 
 export const shorthandStyles: Configs = {
+  accent: standardStyles.accentColor,
   bg: standardStyles.background,
   bgAttachment: { properties: "backgroundAttachment" },
   bgBlendMode: { properties: "backgroundBlendMode" },
@@ -1229,11 +1232,18 @@ export const shorthandStyles: Configs = {
   roundedTopLeft: standardStyles.borderTopLeftRadius,
   roundedTopRight: standardStyles.borderTopRightRadius,
   shadow: standardStyles.boxShadow,
+  caret: standardStyles.caretColor,
   textColor: standardStyles.color,
+  gx: standardStyles.columnGap,
+  gapX: standardStyles.columnGap,
   flexDir: { properties: "flexDirection" },
+  text: standardStyles.fontSize,
+  g: standardStyles.gap,
   h: standardStyles.height,
   insetEnd: standardStyles.insetInlineEnd,
   insetStart: standardStyles.insetInlineStart,
+  tracking: standardStyles.letterSpacing,
+  leading: standardStyles.lineHeight,
   listStyleImg: { properties: "listStyleImage" },
   listStylePos: { properties: "listStylePosition" },
   m: standardStyles.margin,
@@ -1263,8 +1273,11 @@ export const shorthandStyles: Configs = {
   pr: standardStyles.paddingRight,
   pt: standardStyles.paddingTop,
   pos: { properties: "position" },
+  gy: standardStyles.rowGap,
+  gapY: standardStyles.rowGap,
   textDecor: { properties: "textDecoration" },
   w: standardStyles.width,
+  z: standardStyles.zIndex,
   mx: standardStyles.marginX,
   my: standardStyles.marginY,
   px: standardStyles.paddingX,
@@ -1434,6 +1447,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
    */
   accentColor?: Token<CSS.Property.AccentColor, "colors">
+  /**
+   * The CSS `accent-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   */
+  accent?: Token<CSS.Property.AccentColor, "colors">
   /**
    * The CSS `align-content` property.
    *
@@ -2405,6 +2424,12 @@ export type StyleProps = {
    */
   caretColor?: Token<CSS.Property.CaretColor, "colors">
   /**
+   * The CSS `caret-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
+   */
+  caret?: Token<CSS.Property.CaretColor, "colors">
+  /**
    * The CSS `clear` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clear
@@ -2435,12 +2460,6 @@ export type StyleProps = {
    */
   textColor?: Token<CSS.Property.Color, "colors">
   /**
-   * The CSS `color-scheme` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
-   */
-  colorScheme?: Token<CSS.Property.ColorScheme>
-  /**
    * The CSS `column-count` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
@@ -2458,6 +2477,18 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
    */
   columnGap?: Token<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * The CSS `column-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   */
+  gx?: Token<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * The CSS `column-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   */
+  gapX?: Token<CSS.Property.ColumnGap | number, "spaces">
   /**
    * The CSS `column-rule` property.
    *
@@ -2711,6 +2742,12 @@ export type StyleProps = {
    */
   fontSize?: Token<CSS.Property.FontSize | number, "fontSizes">
   /**
+   * The CSS `font-size` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
+   */
+  text?: Token<CSS.Property.FontSize | number, "fontSizes">
+  /**
    * The CSS `font-size-adjust` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size-adjust
@@ -2836,6 +2873,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
    */
   gap?: Token<CSS.Property.Gap | number, "spaces">
+  /**
+   * The CSS `gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
+   */
+  g?: Token<CSS.Property.Gap | number, "spaces">
   /**
    * The CSS `grid` property.
    *
@@ -3089,6 +3132,12 @@ export type StyleProps = {
    */
   letterSpacing?: Token<CSS.Property.LetterSpacing, "letterSpacings">
   /**
+   * The CSS `letter-spacing` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+   */
+  tracking?: Token<CSS.Property.LetterSpacing, "letterSpacings">
+  /**
    * The CSS `line-break` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
@@ -3100,6 +3149,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
    */
   lineHeight?: Token<CSS.Property.LineHeight, "lineHeights">
+  /**
+   * The CSS `line-height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+   */
+  leading?: Token<CSS.Property.LineHeight, "lineHeights">
   /**
    * The CSS `line-height-step` property.
    *
@@ -3905,6 +3960,18 @@ export type StyleProps = {
    */
   rowGap?: Token<CSS.Property.RowGap | number, "spaces">
   /**
+   * The CSS `row-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   */
+  gy?: Token<CSS.Property.RowGap | number, "spaces">
+  /**
+   * The CSS `row-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   */
+  gapY?: Token<CSS.Property.RowGap | number, "spaces">
+  /**
    * The CSS `ruby-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-align
@@ -4499,6 +4566,12 @@ export type StyleProps = {
    */
   zIndex?: Token<CSS.Property.ZIndex, "zIndices">
   /**
+   * The CSS `z-index` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
+   */
+  z?: Token<CSS.Property.ZIndex, "zIndices">
+  /**
    * The CSS `zoom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
@@ -5004,6 +5077,20 @@ export type StyleProps = {
    */
   boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
   /**
+   * The CSS `min-width` and `min-height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
+   */
+  minBoxSize?: Token<CSS.Property.MinHeight | CSS.Property.MinWidth>
+  /**
+   * The CSS `max-width` and `max-height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
+   */
+  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth>
+  /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */
   translateX?: Token<StringLiteral | number, "spaces">
@@ -5037,6 +5124,8 @@ export type StyleProps = {
   skewY?: Token<StringLiteral>
   /**
    * The CSS `filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
    */
   filter?: Token<CSS.Property.Filter | "auto">
   /**
@@ -5077,6 +5166,8 @@ export type StyleProps = {
   sepia?: Token<StringLiteral>
   /**
    * The CSS `backdrop-filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
    */
   backdropFilter?: Token<CSS.Property.BackdropFilter | "auto">
   /**
@@ -5118,7 +5209,7 @@ export type StyleProps = {
   /**
    * Used to visually truncate a text after a number of lines.
    */
-  noOfLines?: Token<number>
+  lineClamp?: Token<number>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
@@ -5155,4 +5246,10 @@ export type StyleProps = {
     token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
     value: Token<StringLiteral | number>
   }[]
+  /**
+   * The CSS `color-scheme` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+   */
+  colorMode?: Token<CSS.Property.ColorScheme>
 }

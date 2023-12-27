@@ -29,7 +29,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
         <ui.span
           className="ui-select__item__group-label"
           __css={styles.groupLabel}
-          noOfLines={1}
+          lineClamp={1}
         >
           {label}
         </ui.span>

@@ -89,23 +89,36 @@ const isHue = (value: any) => {
 
 export const extractColorSchemes = (theme: any) => {
   const { colors, semantics } = theme
+  const results: { colorSchemes: string[]; colorSchemeColors: string[] } = {
+    colorSchemes: [],
+    colorSchemeColors: [],
+  }
 
-  if (!isObject(colors)) return []
+  if (!isObject(colors)) return results
 
-  return Object.entries(colors).reduce((array, [key, value]) => {
-    if (!isHue(value)) return array
+  Object.entries(colors).forEach(([key, value]) => {
+    if (!isHue(value)) return
 
-    array.push(key)
+    results.colorSchemes.push(key)
 
-    const [semanticKey] =
-      Object.entries(semantics?.colorSchemes ?? {}).find(
-        ([, relatedKey]) => key === relatedKey,
-      ) ?? []
+    const semanticKeys =
+      Object.entries(semantics?.colorSchemes ?? {})
+        .filter(([, relatedKey]) => key === relatedKey)
+        .map(([key]) => key) ?? []
 
-    if (semanticKey) array.push(semanticKey)
+    if (!semanticKeys.length) return
 
-    return array
-  }, [] as string[])
+    results.colorSchemes.push(...semanticKeys)
+    results.colorSchemeColors.push(
+      ...semanticKeys
+        .map((semanticKey) =>
+          Object.keys(value).map((hue) => `${semanticKey}.${hue}`),
+        )
+        .flat(),
+    )
+  })
+
+  return results
 }
 
 export const extractThemeSchemes = (theme: any) => {
@@ -150,9 +163,9 @@ export const extractKeys = (theme: any, key: string) => {
 }
 
 export const createThemeTypings = async (theme: any) => {
-  const unions = config.reduce(
+  const tokens = config.reduce(
     (
-      obj,
+      prev,
       {
         key,
         maxScanDepth,
@@ -163,10 +176,10 @@ export const createThemeTypings = async (theme: any) => {
     ) => {
       const target = theme[key]
 
-      obj[key] = []
+      prev[key] = []
 
       if (isObject(target) || isArray(target)) {
-        obj[key] = extractPaths(target, maxScanDepth, omitScanKeys)
+        prev[key] = extractPaths(target, maxScanDepth, omitScanKeys)
           .filter(filter)
           .flatMap(flatMap)
       }
@@ -179,26 +192,28 @@ export const createThemeTypings = async (theme: any) => {
           .filter(filter)
           .flatMap(flatMap)
 
-        obj[key].push(...semanticKeys)
+        prev[key].push(...semanticKeys)
       }
 
-      return obj
+      return prev
     },
     {} as Record<string, string[]>,
   )
 
   const textStyles = extractKeys(theme, "styles.textStyles")
   const layerStyles = extractKeys(theme, "styles.layerStyles")
-  const colorSchemes = extractColorSchemes(theme)
+  const { colorSchemes, colorSchemeColors } = extractColorSchemes(theme)
   const themeSchemes = extractThemeSchemes(theme)
   const { transitionProperty, transitionDuration, transitionEasing } =
     extractTransitions(theme)
   const componentTypes = extractComponents(theme)
 
+  tokens.colors = [...tokens.colors, ...colorSchemeColors]
+
   return prettier(
     `import type { UITheme } from './ui-theme.types'\n\nexport interface GeneratedTheme extends UITheme { ${print(
       {
-        ...unions,
+        ...tokens,
         textStyles,
         layerStyles,
         colorSchemes,

@@ -30,47 +30,49 @@ const insertTransform = (
   return config
 }
 
-export const getConfig = ({
-  properties,
-  token,
-  transform,
-  css,
-  isProcessResult,
-  isProcessSkip,
-  isSkip,
-}: {
-  properties?:
-    | Union<CSSProperties | UIProperties>
-    | Union<CSSProperties | UIProperties>[]
-  token?: ThemeToken
-  transform?: TransformOptions
-  css?: CSSObject
-  isProcessResult?: boolean
-  isProcessSkip?: boolean
-  isSkip?: boolean
-}) => {
-  if (!token && !transform && !css) return true
+export const getConfig =
+  ({
+    properties,
+    token,
+    transform,
+    css,
+    isProcessResult,
+    isProcessSkip,
+    isSkip,
+  }: {
+    properties?:
+      | Union<CSSProperties | UIProperties>
+      | Union<CSSProperties | UIProperties>[]
+    token?: ThemeToken
+    transform?: TransformOptions
+    css?: CSSObject
+    isProcessResult?: boolean
+    isProcessSkip?: boolean
+    isSkip?: boolean
+  }) =>
+  (isConfig?: boolean) => {
+    if (!isConfig && !token && !transform && !css) return true
 
-  let config: string[] = []
+    let config: string[] = []
 
-  if (properties) {
-    if (typeof properties === "string") {
-      const value = `"${properties}"`
+    if (properties) {
+      if (typeof properties === "string") {
+        const value = `"${properties}"`
 
-      config = [...config, `properties: ${value}`]
-    } else {
-      const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
+        config = [...config, `properties: ${value}`]
+      } else {
+        const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
 
-      config = [...config, `properties: ${value}`]
+        config = [...config, `properties: ${value}`]
+      }
     }
+
+    if (token) config = [...config, `token: "${token}"`]
+    if (isProcessResult) config = [...config, `isProcessResult: true`]
+    if (isProcessSkip) config = [...config, `isProcessSkip: true`]
+    if (isSkip) config = [...config, `isSkip: true`]
+    if (css) config = [...config, `static: ${JSON.stringify(css)}`]
+    if (transform || token) config = insertTransform(config, token, transform)
+
+    return `{ ${config.join(", ")} }`
   }
-
-  if (token) config = [...config, `token: "${token}"`]
-  if (isProcessResult) config = [...config, `isProcessResult: true`]
-  if (isProcessSkip) config = [...config, `isProcessSkip: true`]
-  if (isSkip) config = [...config, `isSkip: true`]
-  if (css) config = [...config, `static: ${JSON.stringify(css)}`]
-  if (transform || token) config = insertTransform(config, token, transform)
-
-  return `{ ${config.join(", ")} }`
-}

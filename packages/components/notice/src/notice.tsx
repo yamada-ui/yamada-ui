@@ -148,6 +148,11 @@ const createNoticeFunc = (
 
 type CreateNoticeReturn = ReturnType<typeof createNoticeFunc>
 
+/**
+ * `useNotice` is a custom hook that controls the notifications of the application.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-notice
+ */
 export const useNotice = (
   defaultOptions?: UseNoticeOptions,
 ): CreateNoticeReturn => {
@@ -348,12 +353,12 @@ const Notice: FC<NoticeProps> = ({
 
       <ui.div flex="1">
         {title ? (
-          <AlertTitle className="ui-notice__title" noOfLines={1}>
+          <AlertTitle className="ui-notice__title" lineClamp={1}>
             {title}
           </AlertTitle>
         ) : null}
         {description ? (
-          <AlertDescription className="ui-notice__desc" noOfLines={3}>
+          <AlertDescription className="ui-notice__desc" lineClamp={3}>
             {description}
           </AlertDescription>
         ) : null}

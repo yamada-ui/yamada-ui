@@ -53,7 +53,7 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "li">(
           <AutocompleteItemIcon>{icon || <PlusIcon />}</AutocompleteItemIcon>
         ) : null}
         {icon ? (
-          <ui.span style={{ pointerEvents: "none", flex: 1 }} noOfLines={1}>
+          <ui.span style={{ pointerEvents: "none", flex: 1 }} lineClamp={1}>
             {runIfFunc(children, inputValue)}
           </ui.span>
         ) : (

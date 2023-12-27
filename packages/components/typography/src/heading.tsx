@@ -9,6 +9,11 @@ import { cx } from "@yamada-ui/utils"
 
 export type HeadingProps = HTMLUIProps<"h1"> & ThemeProps<"Heading">
 
+/**
+ * `Heading` is a component that represents section headings. By default, it renders an `h1` element.
+ *
+ * @see Docs https://yamada-ui.com/components/typography/heading
+ */
 export const Heading = forwardRef<HeadingProps, "h1">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Heading", props)
   const { className, ...rest } = omitThemeProps(mergedProps)

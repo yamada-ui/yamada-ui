@@ -83,7 +83,7 @@ type MultiSelectOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type MultiSelectProps = ThemeProps<"Select"> &
+export type MultiSelectProps = ThemeProps<"MultiSelect"> &
   Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty"> &
   MultiSelectOptions
 

@@ -131,6 +131,11 @@ export const Stack = forwardRef<StackProps, "div">(
   },
 )
 
+/**
+ * `HStack` is a component that groups elements and provides space between child elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/stack
+ */
 export const HStack = forwardRef<StackProps, "div">(
   ({ className, ...rest }, ref) => (
     <Stack
@@ -143,6 +148,11 @@ export const HStack = forwardRef<StackProps, "div">(
   ),
 )
 
+/**
+ * `VStack` is a component that groups elements and provides space between child elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/stack
+ */
 export const VStack = forwardRef<StackProps, "div">(
   ({ className, ...rest }, ref) => (
     <Stack
@@ -193,6 +203,11 @@ type ZStackOptions = {
 
 export type ZStackProps = Omit<HTMLUIProps<"div">, "direction"> & ZStackOptions
 
+/**
+ * `ZStack` is a component that groups elements and provides space between child elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/stack
+ */
 export const ZStack = forwardRef<ZStackProps, "div">(
   (
     {

@@ -1,7 +1,249 @@
 ---
 title: Rating
-description: "We are currently considering the development of `Rating`."
-label: "Considering"
+description: "`Rating` is a component used to allow users to provide ratings."
+label: "New"
+package_name: "@yamada-ui/rating"
+is_tabs: true
+with_description: true
+tab: Usage
 ---
 
-We are currently considering the creation of `Rating`. Please post your thoughts on this [GitHub issue](https://github.com/hirotomoyamada/yamada-ui/issues/504) to help us prioritize its development.
+## Import
+
+```ts
+import { Rating } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Rating />
+```
+
+### Change Size
+
+```tsx
+<VStack>
+  <Rating size="xs" defaultValue={3} />
+  <Rating size="sm" defaultValue={3} />
+  <Rating size="md" defaultValue={3} />
+  <Rating size="lg" defaultValue={3} />
+  <Rating size="xl" defaultValue={3} />
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx
+<VStack>
+  <Rating colorScheme="purple" defaultValue={3} />
+  <Rating colorScheme="pink" defaultValue={3} />
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, assign a number to `defaultValue`.
+
+```tsx
+<Rating defaultValue={3} />
+```
+
+### Change Number of Items
+
+To change the number of items, assign a number to `items`.
+
+```tsx
+<VStack>
+  <Rating items={4} />
+  <Rating items={5} />
+  <Rating items={6} />
+</VStack>
+```
+
+### Allow Decimals
+
+To allow decimals, assign a number to `fractions`.
+
+For example, to allow `0.25`, set `4`.
+
+```tsx
+<VStack>
+  <Rating fractions={2} defaultValue={1.5} />
+  <Rating fractions={3} defaultValue={2.33} />
+  <Rating fractions={4} defaultValue={3.75} />
+</VStack>
+```
+
+### Change Color
+
+To change the color, assign a string or function to `color`. `color` provides the numerical value of the item.
+
+```tsx functional=true
+const getColor = (value: number) => {
+  switch (value) {
+    case 1:
+      return "red.500"
+
+    case 2:
+      return "orange.500"
+
+    case 3:
+      return "yellow.500"
+
+    case 4:
+      return "green.500"
+
+    case 5:
+      return "blue.500"
+
+    default:
+      return undefined
+  }
+}
+
+return (
+  <VStack>
+    <Rating color="green.500" defaultValue={3} />
+    <Rating color={getColor} defaultValue={3} />
+  </VStack>
+)
+```
+
+### Customize Icons
+
+To customize icons, assign `RectNode` or a function to `emptyIcon` and `filledIcon`. `emptyIcon` and `filledIcon` provide the numerical value of the item.
+
+- `emptyIcon`: Used for unselected icons.
+- `filledIcon`: Used for selected icons.
+
+```tsx functional=true
+const getColor = (value: number) => {
+  switch (value) {
+    case 1:
+      return "red.500"
+
+    case 2:
+      return "orange.500"
+
+    case 3:
+      return "yellow.500"
+
+    case 4:
+      return "green.500"
+
+    case 5:
+      return "blue.500"
+
+    default:
+      return undefined
+  }
+}
+
+const getIcon = (value: number) => {
+  switch (value) {
+    case 1:
+      return <Icon icon={faFaceSadCry} />
+
+    case 2:
+      return <Icon icon={faFaceSadTear} />
+
+    case 3:
+      return <Icon icon={faFaceSmile} />
+
+    case 4:
+      return <Icon icon={faFaceSmileBeam} />
+
+    case 5:
+      return <Icon icon={faFaceGrinStars} />
+
+    default:
+      return null
+  }
+}
+
+return (
+  <VStack>
+    <Rating
+      defaultValue={3}
+      emptyIcon={<Icon icon={faPoo} />}
+      filledIcon={<Icon icon={faPoo} />}
+    />
+
+    <Rating
+      gap="xs"
+      color={getColor}
+      emptyIcon={getIcon}
+      filledIcon={getIcon}
+    />
+  </VStack>
+)
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx
+<VStack>
+  <Rating isDisabled defaultValue={3} />
+
+  <FormControl isDisabled label="How satisfied are you with Yamada UI?">
+    <Rating defaultValue={3} />
+  </FormControl>
+</VStack>
+```
+
+### Make Read-Only
+
+To make read-only, set `isReadOnly` to `true`.
+
+```tsx
+<VStack>
+  <Rating isReadOnly defaultValue={3} />
+
+  <FormControl isReadOnly label="How satisfied are you with Yamada UI?">
+    <Rating defaultValue={3} />
+  </FormControl>
+</VStack>
+```
+
+### Control
+
+```tsx functional=true
+const [value, onChange] = useState<number>(3)
+
+return <Rating value={value} onChange={onChange} />
+```
+
+### Use `React Hook Form`
+
+```tsx functional=true
+type Data = { rating: boolean }
+
+const { control, handleSubmit, watch } = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <FormControl
+      isInvalid={!!errors.rating}
+      label="How satisfied are you with Yamada UI?"
+      errorMessage={errors.rating ? errors.rating.message : undefined}
+    >
+      <Controller
+        name="rating"
+        control={control}
+        render={({ field }) => <Rating {...field} />}
+      />
+    </FormControl>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

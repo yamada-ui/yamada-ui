@@ -2,6 +2,7 @@
 title: Stack
 description: "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。"
 package_name: "@yamada-ui/layouts"
+label: "Updated"
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -10,12 +11,13 @@ tab: 使い方
 ## インポート
 
 ```ts
-import { Stack, VStack, HStack } from "@yamada-ui/react"
+import { Stack, VStack, HStack, ZStack } from "@yamada-ui/react"
 ```
 
 - `Stack`は、子要素を垂直または水平方向にスタックするために使用されます。
 - `VStack`は、子要素を垂直方向にスタックするために使用されます。
 - `HStack`は、子要素を水平方向にスタックするために使用されます。
+- `ZStack`は、子要素を奥行き方向にスタックするために使用されます。
 
 ## 使い方
 
@@ -39,7 +41,7 @@ import { Stack, VStack, HStack } from "@yamada-ui/react"
 </Stack>
 ```
 
-### 垂直方向へスタックさせる
+### 垂直方向・水平方向へスタックさせる
 
 ```tsx
 <VStack>
@@ -61,8 +63,6 @@ import { Stack, VStack, HStack } from "@yamada-ui/react"
 </VStack>
 ```
 
-### 水平方向へスタックさせる
-
 ```tsx
 <HStack>
   <Box p="md" rounded="4" bg="primary" color="white">
@@ -83,7 +83,7 @@ import { Stack, VStack, HStack } from "@yamada-ui/react"
 </HStack>
 ```
 
-### 子要素間に区切り線を設ける
+#### 子要素間に区切り線を設ける
 
 ```tsx
 <VStack divider={<Divider />}>
@@ -105,7 +105,7 @@ import { Stack, VStack, HStack } from "@yamada-ui/react"
 </VStack>
 ```
 
-### `Spacer`を使う
+#### `Spacer`を使う
 
 ```tsx
 <HStack>
@@ -119,4 +119,94 @@ import { Stack, VStack, HStack } from "@yamada-ui/react"
     Box
   </Box>
 </HStack>
+```
+
+### 奥行き方向へスタックさせる
+
+```tsx
+<ZStack>
+  <Box p="md" rounded="4" bg="primary" color="white">
+    Box
+  </Box>
+
+  <Box p="md" rounded="4" bg="secondary" color="white">
+    Box
+  </Box>
+
+  <Box p="md" rounded="4" bg="warning" color="white">
+    Box
+  </Box>
+
+  <Box p="md" rounded="4" bg="danger" color="white">
+    Box
+  </Box>
+</ZStack>
+```
+
+#### 方向を変更する
+
+方向を変更する場合は、`direction`に`top`, `bottom-right`などを設定します。
+
+```tsx
+<VStack>
+  <ZStack direction="top">
+    <Box p="md" rounded="4" bg="primary" color="white">
+      Box
+    </Box>
+
+    <Box p="md" rounded="4" bg="secondary" color="white">
+      Box
+    </Box>
+
+    <Box p="md" rounded="4" bg="warning" color="white">
+      Box
+    </Box>
+
+    <Box p="md" rounded="4" bg="danger" color="white">
+      Box
+    </Box>
+  </ZStack>
+
+  <ZStack direction="bottom-right">
+    <Box p="md" rounded="4" bg="primary" color="white">
+      Box
+    </Box>
+
+    <Box p="md" rounded="4" bg="secondary" color="white">
+      Box
+    </Box>
+
+    <Box p="md" rounded="4" bg="warning" color="white">
+      Box
+    </Box>
+
+    <Box p="md" rounded="4" bg="danger" color="white">
+      Box
+    </Box>
+  </ZStack>
+</VStack>
+```
+
+#### 方向を反転させる
+
+方向を反転させる場合は、`reverse`を`true`にします。
+
+```tsx
+<ZStack reverse>
+  <Box p="md" rounded="4" bg="primary" color="white">
+    Box
+  </Box>
+
+  <Box p="md" rounded="4" bg="secondary" color="white">
+    Box
+  </Box>
+
+  <Box p="md" rounded="4" bg="warning" color="white">
+    Box
+  </Box>
+
+  <Box p="md" rounded="4" bg="danger" color="white">
+    Box
+  </Box>
+</ZStack>
 ```

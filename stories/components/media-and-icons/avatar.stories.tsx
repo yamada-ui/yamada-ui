@@ -110,11 +110,26 @@ export const useGroup: Story = () => {
 export const withGroupMax: Story = () => {
   return (
     <AvatarGroup max={3}>
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
-      <Avatar />
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      />
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      />
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      />
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      />
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      />
     </AvatarGroup>
   )
 }

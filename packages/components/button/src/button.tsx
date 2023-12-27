@@ -10,7 +10,7 @@ import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, useMergeRefs, merge, dataAttr } from "@yamada-ui/utils"
 import type { ElementType, FC, ReactElement } from "react"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
 type ButtonOptions = {
@@ -241,13 +241,13 @@ const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
 }
 
 export const useButtonType = (value?: ElementType) => {
-  const [isButton, setIsButton] = useState(!value)
+  const isButton = useRef(!value)
 
   const ref = useCallback((node: HTMLElement | null) => {
-    if (node) setIsButton(node.tagName === "BUTTON")
+    if (node) isButton.current = node.tagName === "BUTTON"
   }, [])
 
-  const type = isButton ? "button" : undefined
+  const type = isButton.current ? "button" : undefined
 
   return { ref, type } as const
 }

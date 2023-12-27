@@ -70,34 +70,36 @@ describe("<Button/>", () => {
     rerender(<Button isLoading>Hello</Button>)
     expect(button).toHaveAttribute("data__loading", "")
 
-    // isAvtive sets data-avtive=""
+    // isActive sets data-active=""
     rerender(<Button isActive>Hello</Button>)
     expect(button).toHaveAttribute("data-active", "")
   })
 
   it("has the proper type attribute", () => {
     const { getByTestId, rerender } = render(
-      <Button data-testid="btn">Subumit</Button>,
+      <Button data-testid="btn">Submit</Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "button")
 
     rerender(
       <Button data-testid="btn" type="submit">
-        Subumit
+        Submit
       </Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "submit")
 
     rerender(
       <Button data-testid="btn" as="button">
-        Subumit
+        Submit
       </Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type")
+  })
 
-    rerender(
+  it("has no the type", () => {
+    const { getByTestId } = render(
       <Button data-testid="btn" as="span">
-        Subumit
+        Submit
       </Button>,
     )
     expect(getByTestId("btn")).not.toHaveAttribute("type")

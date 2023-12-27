@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/indicator",
-  "version": "0.4.0",
+  "version": "1.1.1",
   "description": "Yamada UI indicator component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -47,7 +48,8 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/use-value": "workspace:*"
+    "@yamada-ui/use-value": "workspace:*",
+    "@yamada-ui/use-animation": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

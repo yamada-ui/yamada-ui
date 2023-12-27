@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/cli",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Generate theme tokens for autocomplete",
   "keywords": [
     "theme",
@@ -23,6 +23,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

@@ -204,3 +204,37 @@ export const useInlineBlock: Story = () => {
     </Indicator>
   )
 }
+
+export const withPing: Story = () => {
+  return (
+    <Wrap gap="md">
+      <Indicator label="new" ping pingScale={1.4}>
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        />
+      </Indicator>
+
+      <Indicator variant="subtle" label="new" ping pingScale={1.4}>
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        />
+      </Indicator>
+
+      <Indicator size="lg" offset={1.5} ping>
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        />
+      </Indicator>
+
+      <Indicator variant="subtle" size="lg" offset={1.5} ping>
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        />
+      </Indicator>
+    </Wrap>
+  )
+}

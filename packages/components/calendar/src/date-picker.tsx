@@ -59,6 +59,11 @@ export type DatePickerProps = Omit<
   DatePickerOptions &
   UseDatePickerProps
 
+/**
+ * `DatePicker` is a component used for users to select a date.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/date-picker
+ */
 export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("DatePicker", props)
   let {

@@ -178,7 +178,7 @@ export const useCustomLoading = () => {
                     isValidElement(message) ? (
                       message
                     ) : (
-                      <Text noOfLines={3}>{message}</Text>
+                      <Text lineClamp={3}>{message}</Text>
                     )
                   ) : null}
                 </VStack>

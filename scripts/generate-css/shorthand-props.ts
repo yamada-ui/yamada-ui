@@ -3,6 +3,11 @@ import type { CSSProperties, UIProperties } from "."
 type ShorthandProps = Partial<Record<CSSProperties | UIProperties, string[]>>
 
 export const shorthandProps: ShorthandProps = {
+  fontSize: ["text"],
+  accentColor: ["accent"],
+  caretColor: ["caret"],
+  letterSpacing: ["tracking"],
+  lineHeight: ["leading"],
   background: ["bg"],
   boxShadow: ["shadow"],
   backgroundColor: ["bgColor"],
@@ -47,7 +52,11 @@ export const shorthandProps: ShorthandProps = {
   paddingInlineStart: ["ps", "paddingStart"],
   paddingRight: ["pr"],
   paddingInlineEnd: ["pe", "paddingEnd"],
+  gap: ["g"],
+  columnGap: ["gx", "gapX"],
+  rowGap: ["gy", "gapY"],
   position: ["pos"],
+  zIndex: ["z"],
   insetInlineStart: ["insetStart"],
   insetInlineEnd: ["insetEnd"],
   listStylePosition: ["listStylePos"],

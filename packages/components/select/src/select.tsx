@@ -76,6 +76,11 @@ export type SelectProps = ThemeProps<"Select"> &
   > &
   SelectOptions
 
+/**
+ * `Select` is a component used for allowing a user to choose one option from a list.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/select
+ */
 export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Select", props)
   let {
@@ -205,7 +210,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
 type SelectFieldProps = HTMLUIProps<"div">
 
 const SelectField = forwardRef<SelectFieldProps, "div">(
-  ({ className, isTruncated = true, noOfLines, h, minH, ...rest }, ref) => {
+  ({ className, isTruncated = true, lineClamp, h, minH, ...rest }, ref) => {
     const { label, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
@@ -224,7 +229,7 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
         __css={css}
         {...rest}
       >
-        <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
+        <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
           {label ?? placeholder}
         </ui.span>
       </ui.div>

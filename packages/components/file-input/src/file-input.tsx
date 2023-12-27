@@ -89,6 +89,11 @@ export type FileInputProps = Omit<HTMLUIProps<"div">, "onChange" | "children"> &
 
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
+/**
+ * `FileInput` is a component used for users to select files.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/file-input
+ */
 export const FileInput = forwardRef<FileInputProps, "input">(
   ({ children, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("FileInput", props)
@@ -104,7 +109,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       defaultValue,
       component,
       format = defaultFormat,
-      noOfLines = 1,
+      lineClamp = 1,
       separator = ",",
       resetRef,
       ...rest
@@ -149,13 +154,13 @@ export const FileInput = forwardRef<FileInputProps, "input">(
 
     const cloneChildren = useMemo(() => {
       if (!values?.length)
-        return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
+        return <ui.span lineClamp={lineClamp}>{placeholder}</ui.span>
 
       if (children) return children(values)
 
       if (component) {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
               const el = component({ value, index })
 
@@ -171,7 +176,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
         )
       } else {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
               const isLast = values.length === index + 1
 
@@ -185,7 +190,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           </ui.span>
         )
       }
-    }, [children, format, noOfLines, placeholder, separator, component, values])
+    }, [children, format, lineClamp, placeholder, separator, component, values])
 
     const css: CSSUIObject = {
       display: "flex",

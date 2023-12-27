@@ -235,6 +235,11 @@ export type RadioProps<Y extends string | number = string> = Omit<
   UseRadioProps<Y> &
   RadioOptions
 
+/**
+ * `Radio` is a component used for allowing users to select one option from multiple choices.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/radio
+ */
 export const Radio = forwardRef(
   <Y extends string | number = string>(
     props: RadioProps<Y>,

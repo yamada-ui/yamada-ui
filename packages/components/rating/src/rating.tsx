@@ -9,9 +9,7 @@ import { cx } from "@yamada-ui/utils"
 import type { UseRatingProps } from "./use-rating"
 import { RatingProvider, useRating } from "./use-rating"
 
-type RatingOptions = {}
-
-export type RatingProps = ThemeProps<"Rating"> & UseRatingProps & RatingOptions
+export type RatingProps = ThemeProps<"Rating"> & UseRatingProps
 
 export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Rating", props)

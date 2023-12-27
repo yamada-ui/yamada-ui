@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
@@ -19,11 +19,14 @@ import type {
   ChangeEvent,
   Dispatch,
   MouseEvent,
+  ReactNode,
   SetStateAction,
   TouchEvent,
 } from "react"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
+import type { RatingGroupProps } from "./rating-group"
 import { RatingGroup } from "./rating-group"
+import type { RatingItemProps } from "./rating-item"
 
 export const getRoundedValue = (value: number, to: number) => {
   const rounded = Math.round(value / to) * to
@@ -32,6 +35,20 @@ export const getRoundedValue = (value: number, to: number) => {
 
   return Number(rounded.toFixed(precision))
 }
+
+type OmittedGroupProps = Omit<RatingGroupProps, "value" | "items" | "children">
+type OmittedItemProps = Omit<
+  RatingItemProps,
+  "value" | "groupValue" | "fractionValue" | "children"
+>
+type OmittedInputProps = Omit<
+  HTMLUIProps<"input">,
+  "value" | "defaultValue" | "checked"
+>
+
+type GroupProps = OmittedGroupProps | ((value: number) => OmittedGroupProps)
+type ItemProps = OmittedItemProps | ((value: number) => OmittedItemProps)
+type InputProps = OmittedInputProps | ((value: number) => OmittedInputProps)
 
 type RatingContext = {
   getGroupProps: RequiredPropGetter<{ value: number }>
@@ -45,7 +62,17 @@ type RatingContext = {
   setValue: Dispatch<SetStateAction<number>>
   setHoveredValue: Dispatch<SetStateAction<number>>
   decimal: number
+  highlightSelectedOnly: boolean
   formControlProps: Dict
+  groupProps: GroupProps | undefined
+  itemProps: ItemProps | undefined
+  inputProps: InputProps | undefined
+  color:
+    | CSSUIProps["color"]
+    | ((value: number) => CSSUIProps["color"])
+    | undefined
+  emptyIcon: ReactNode | ((value: number) => ReactNode) | undefined
+  filledIcon: ReactNode | ((value: number) => ReactNode) | undefined
   styles: Record<string, CSSUIObject>
 }
 
@@ -61,7 +88,7 @@ type UseRatingOptions = {
    */
   id?: string
   /**
-   * The name of the input field in a rating input.
+   * The name of the input element.
    */
   name?: string
   /**
@@ -79,6 +106,10 @@ type UseRatingOptions = {
    */
   onChange?: (value: number) => void
   /**
+   * The callback invoked when hovering over the rating.
+   */
+  onHover?: (value: number) => void
+  /**
    * Number of controls that should be rendered.
    *
    * @default 5
@@ -91,26 +122,59 @@ type UseRatingOptions = {
    */
   fractions?: number
   /**
-   * The callback invoked when hovering over the rating.
+   * If `true`, only the selected icons will be filled.
+   *
+   * @default false
    */
-  onHover?: (value: number) => void
+  highlightSelectedOnly?: boolean
+  /**
+   * The color of the filled icons.
+   */
+  color?: CSSUIProps["color"] | ((value: number) => CSSUIProps["color"])
+  /**
+   * The empty icon for the rating.
+   */
+  emptyIcon?: ReactNode | ((value: number) => ReactNode)
+  /**
+   * The filled icon for the rating.
+   */
+  filledIcon?: ReactNode | ((value: number) => ReactNode)
+  /**
+   * Props for the rating group.
+   */
+  groupProps?: GroupProps
+  /**
+   * Props for the rating item.
+   */
+  itemProps?: ItemProps
+  /**
+   * Props for the input element.
+   */
+  inputProps?: InputProps
 }
 
 export type UseRatingProps = Omit<
   HTMLUIProps<"div">,
-  "id" | "defaultValue" | "onChange"
+  "color" | "id" | "defaultValue" | "onChange"
 > &
   UseRatingOptions &
   FormControlOptions
 
 export const useRating = ({
   name,
+  color,
   value: valueProp,
   defaultValue = 0,
   onChange: onChangeProp,
   items = 5,
   fractions = 1,
+  highlightSelectedOnly = false,
   onHover,
+  groupProps,
+  itemProps,
+  inputProps,
+  emptyIcon,
+  filledIcon,
   ...props
 }: UseRatingProps) => {
   let { id, ...rest } = useFormControlProps(props)
@@ -142,11 +206,13 @@ export const useRating = ({
 
       const hoveredValue = (x - left) / itemWidth
 
-      return clampNumber(
+      const value = clampNumber(
         getRoundedValue(hoveredValue + decimal / 2, decimal),
         decimal,
         resolvedItems,
       )
+
+      return value
     },
     [decimal, resolvedItems],
   )
@@ -264,6 +330,7 @@ export const useRating = ({
     getContainerProps,
     getGroupProps,
     id,
+    color,
     name,
     value,
     roundedValue,
@@ -273,8 +340,14 @@ export const useRating = ({
     setValue,
     setHoveredValue,
     decimal,
+    highlightSelectedOnly,
     formControlProps,
+    groupProps,
+    itemProps,
+    inputProps,
     children,
+    emptyIcon,
+    filledIcon,
   }
 }
 
@@ -296,12 +369,18 @@ export const useRatingItem = ({
     name,
     formControlProps,
     isOutside,
+    highlightSelectedOnly,
     roundedValue,
     resolvedValue,
     setValue,
     setHoveredValue,
   } = useRatingContext()
   const { readOnly, disabled } = formControlProps
+  const isActive = value === resolvedValue
+  const isChecked = value === roundedValue
+  const isFilled = highlightSelectedOnly
+    ? value === resolvedValue
+    : value <= resolvedValue
 
   const onBlur = useCallback(() => {
     setFocused(false)
@@ -340,18 +419,14 @@ export const useRatingItem = ({
 
   const getItemProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const isActive = value === resolvedValue
-      const isFilled = value <= resolvedValue
-      const clipPath = `inset(0 ${
-        isActive ? 100 - fractionValue * 100 : 100
-      }% 0 0)`
+      const zIndex = isActive ? 1 : -1
 
       return {
         ref,
         htmlFor: `${id}-${groupValue}-${value}`,
         ...formControlProps,
         ...props,
-        clipPath: fractionValue !== 1 ? clipPath : undefined,
+        zIndex: fractionValue !== 1 ? zIndex : undefined,
         onClick: handlerAll(onClick, props.onClick),
         "data-active": dataAttr(isActive),
         "data-filled": dataAttr(isFilled),
@@ -364,19 +439,17 @@ export const useRatingItem = ({
       fractionValue,
       groupValue,
       id,
+      isActive,
+      isFilled,
       isFocusVisible,
       isFocused,
       onClick,
-      resolvedValue,
       value,
     ],
   )
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const isActive = value === resolvedValue
-      const checked = value === roundedValue
-
       return {
         ref,
         "aria-label": `${value}`,
@@ -397,7 +470,7 @@ export const useRatingItem = ({
         id: `${id}-${groupValue}-${value}`,
         name,
         value,
-        checked,
+        checked: isChecked,
         onChange: handlerAll(onInputChange, props.onChange),
         onFocus: handlerAll(() => setFocused(true), props.onFocus),
         onBlur: handlerAll(onBlur, props.onBlur),
@@ -406,19 +479,19 @@ export const useRatingItem = ({
           props.onKeyDown,
         ),
         "data-active": dataAttr(isActive),
-        "data-checked": dataAttr(checked),
+        "data-checked": dataAttr(isChecked),
       }
     },
     [
-      name,
       value,
       formControlProps,
-      resolvedValue,
-      roundedValue,
       id,
       groupValue,
+      name,
+      isChecked,
       onInputChange,
       onBlur,
+      isActive,
       onChange,
     ],
   )
@@ -428,6 +501,9 @@ export const useRatingItem = ({
   }, [])
 
   return {
+    isActive,
+    isChecked,
+    isFilled,
     getItemProps,
     getInputProps,
   }

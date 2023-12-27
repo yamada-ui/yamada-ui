@@ -1,5 +1,46 @@
 # @yamada-ui/button
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`1918baa`](https://github.com/hirotomoyamada/yamada-ui/commit/1918baa2c62d08a4826e2ab6faf98a271f6bdc58)]:
+  - @yamada-ui/core@1.1.1
+  - @yamada-ui/loading@1.0.2
+  - @yamada-ui/ripple@1.0.2
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`357213f`](https://github.com/hirotomoyamada/yamada-ui/commit/357213fd487f553813c1e46b4129cb84c6fd3e47), [`9a5768a`](https://github.com/hirotomoyamada/yamada-ui/commit/9a5768a160d252cfe7bb2e533796f7cdcbcf5006)]:
+  - @yamada-ui/core@1.1.0
+  - @yamada-ui/loading@1.0.1
+  - @yamada-ui/ripple@1.0.1
+
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+### Patch Changes
+
+- Updated dependencies [[`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8)]:
+  - @yamada-ui/loading@1.0.0
+  - @yamada-ui/ripple@1.0.0
+  - @yamada-ui/utils@1.0.0
+  - @yamada-ui/core@1.0.0
+
+## 0.4.9
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/loading@0.5.17
+  - @yamada-ui/ripple@0.1.10
+
 ## 0.4.8
 
 ### Patch Changes

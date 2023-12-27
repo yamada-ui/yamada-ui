@@ -90,11 +90,16 @@ type MultiAutocompleteOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type MultiAutocompleteProps = ThemeProps<"Select"> &
+export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
   UseAutocompleteProps<string[]> &
   MultiAutocompleteOptions
 
-export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
+/**
+ * `MultiAutocomplete` is a component used to display suggestions based on user text input and to obtain multiple values.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/multi-autocomplete
+ */
+export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(
       "MultiAutocomplete",
@@ -234,7 +239,7 @@ type MultiAutocompleteFieldProps = HTMLUIProps<"div"> &
     "component" | "separator" | "keepPlaceholder" | "inputProps"
   >
 
-const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
+const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
   (
     {
       className,

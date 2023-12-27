@@ -1,5 +1,63 @@
 # @yamada-ui/select
 
+## 1.0.3
+
+### Patch Changes
+
+- [#552](https://github.com/hirotomoyamada/yamada-ui/pull/552) [`7a9b78a`](https://github.com/hirotomoyamada/yamada-ui/commit/7a9b78af180dbcfa0877d8eda2eff6bb91cfd140) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed to correct `ThemeProps`.
+
+- [#550](https://github.com/hirotomoyamada/yamada-ui/pull/550) [`f1ffc2a`](https://github.com/hirotomoyamada/yamada-ui/commit/f1ffc2a66a610b1527b23e31de1b21664ba43b47) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `placeholder` type.
+
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`1918baa`](https://github.com/hirotomoyamada/yamada-ui/commit/1918baa2c62d08a4826e2ab6faf98a271f6bdc58)]:
+  - @yamada-ui/core@1.1.1
+  - @yamada-ui/form-control@1.0.2
+  - @yamada-ui/icon@1.0.2
+  - @yamada-ui/popover@1.0.2
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`357213f`](https://github.com/hirotomoyamada/yamada-ui/commit/357213fd487f553813c1e46b4129cb84c6fd3e47), [`9a5768a`](https://github.com/hirotomoyamada/yamada-ui/commit/9a5768a160d252cfe7bb2e533796f7cdcbcf5006)]:
+  - @yamada-ui/core@1.1.0
+  - @yamada-ui/form-control@1.0.1
+  - @yamada-ui/icon@1.0.1
+  - @yamada-ui/popover@1.0.1
+
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+### Patch Changes
+
+- Updated dependencies [[`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8)]:
+  - @yamada-ui/use-controllable-state@1.0.0
+  - @yamada-ui/form-control@1.0.0
+  - @yamada-ui/use-outside-click@1.0.0
+  - @yamada-ui/use-descendant@1.0.0
+  - @yamada-ui/use-clickable@1.0.0
+  - @yamada-ui/popover@1.0.0
+  - @yamada-ui/portal@1.0.0
+  - @yamada-ui/icon@1.0.0
+  - @yamada-ui/utils@1.0.0
+  - @yamada-ui/core@1.0.0
+
+## 0.6.8
+
+### Patch Changes
+
+- Updated dependencies [[`dc5b7fd`](https://github.com/hirotomoyamada/yamada-ui/commit/dc5b7fd7f68b1ed4206cf6117afe939a16c4596f)]:
+  - @yamada-ui/core@0.15.4
+  - @yamada-ui/form-control@0.3.32
+  - @yamada-ui/icon@0.3.29
+  - @yamada-ui/popover@0.3.37
+
 ## 0.6.7
 
 ### Patch Changes

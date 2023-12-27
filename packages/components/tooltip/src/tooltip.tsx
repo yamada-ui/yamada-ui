@@ -169,6 +169,11 @@ const getTooltipProps = (
   }
 }
 
+/**
+ * `Tooltip` is a component that displays short information, such as supplementary details for an element.
+ *
+ * @see Docs https://yamada-ui.com/components/overlay/tooltip
+ */
 export const Tooltip = forwardRef<TooltipProps, "div">(
   (
     { closeOnPointerDown, zIndex, portalProps, withPortal = true, ...props },

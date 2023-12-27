@@ -1,4 +1,5 @@
 import type {
+  AnimationStyle,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
@@ -10,6 +11,7 @@ import {
   omitThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
+import { useAnimation } from "@yamada-ui/use-animation"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, omitObject } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
@@ -76,6 +78,36 @@ type IndicatorOptions = {
    * Props for indicator wrapper element.
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
+   * If `true`, make an element scale and fade like a radar ping or ripple of water.
+   *
+   * @default false
+   */
+  ping?: boolean
+  /**
+   * It is used for the color of the ping animation.
+   *
+   * @default "var(--ui-ping)"
+   */
+  pingColor?: HTMLUIProps<"div">["backgroundColor"]
+  /**
+   * It is used for the scale of the ping animation.
+   *
+   * @default 1.8
+   */
+  pingScale?: number
+  /**
+   * It is used for the count of the ping animation.
+   *
+   * @default "infinite"
+   */
+  pingCount?: AnimationStyle["iterationCount"]
+  /**
+   * It is used for the duration of the ping animation.
+   *
+   * @default "1.4s"
+   */
+  pingDuration?: AnimationStyle["direction"]
 }
 
 export type IndicatorProps = Omit<HTMLUIProps<"div">, "children" | "offset"> &
@@ -125,6 +157,11 @@ const getPlacementStyle = (
   return styles
 }
 
+/**
+ * `Indicator` is a component that displays at the corner of elements such as avatars.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/indicator
+ */
 export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Indicator", props)
   let {
@@ -138,8 +175,25 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     children,
     isDisabled,
     containerProps,
+    ping,
+    pingColor = "var(--ui-ping)",
+    pingDuration = "1.4s",
+    pingCount = "infinite",
+    pingScale = 1.8,
     ...rest
   } = omitThemeProps(mergedProps)
+  const animation = useAnimation({
+    keyframes: {
+      "75%, 100%": {
+        transform: `scale(${pingScale})`,
+        opacity: 0,
+      },
+    },
+    fillMode: "forwards",
+    duration: pingDuration,
+    timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+    iterationCount: pingCount,
+  })
 
   const isNumeric = typeof label === "number"
 
@@ -186,11 +240,26 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
       {!isDisabled ? (
         <ui.div
           ref={ref}
-          className={cx("ui-indicator__inner", className)}
+          className={cx("ui-indicator__icon", className)}
           __css={css}
           {...omitObject(rest, ["withBorder"])}
         >
           {renderLabel}
+
+          {ping ? (
+            <ui.div
+              className="ui-indicator__icon__ping"
+              __css={{
+                position: "absolute",
+                boxSize: "full",
+                rounded: "full",
+                opacity: 0.75,
+                zIndex: -1,
+                bg: pingColor,
+              }}
+              animation={animation}
+            />
+          ) : null}
         </ui.div>
       ) : null}
 

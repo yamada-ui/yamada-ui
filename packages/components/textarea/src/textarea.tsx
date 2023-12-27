@@ -34,6 +34,11 @@ export type TextareaProps = Omit<
   TextareaOptions &
   FormControlOptions
 
+/**
+ * `Textarea` is a component used to obtain multi-line text input.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/textarea
+ */
 export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Textarea", props)
   let {

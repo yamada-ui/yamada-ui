@@ -57,13 +57,18 @@ type AutocompleteOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type AutocompleteProps = ThemeProps<"Select"> &
+export type AutocompleteProps = ThemeProps<"Autocomplete"> &
   Omit<
     UseAutocompleteProps<string>,
     "maxSelectedValues" | "omitSelectedValues"
   > &
   AutocompleteOptions
 
+/**
+ * `Autocomplete` is a component used to display suggestions in response to user text input.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/autocomplete
+ */
 export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Autocomplete", props)

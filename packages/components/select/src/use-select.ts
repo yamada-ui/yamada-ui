@@ -103,6 +103,10 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
      */
     name?: string
     /**
+     * The placeholder of the select.
+     */
+    placeholder?: string
+    /**
      * The value of the select.
      */
     value?: T

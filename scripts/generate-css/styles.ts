@@ -137,7 +137,7 @@ export const generateStyles = async (
     const token: ThemeToken | undefined = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transform = transformMap[prop]
-    const config = getConfig({ properties: prop, token, transform })
+    const config = getConfig({ properties: prop, token, transform })()
     type = computedType({ type, token, transform, prop })
     const docs = generateDocs({ properties: name, urls: [url], deprecated })
 
@@ -193,7 +193,7 @@ export const generateStyles = async (
         isProcessSkip,
         isSkip,
         css,
-      })
+      })(true)
       type = computedType({ type: type ?? types, hasToken, token, transform })
       const docs = generateDocs({ properties, description, urls, deprecated })
 

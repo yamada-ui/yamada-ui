@@ -1,5 +1,13 @@
 # @yamada-ui/select
 
+## 1.0.3
+
+### Patch Changes
+
+- [#552](https://github.com/hirotomoyamada/yamada-ui/pull/552) [`7a9b78a`](https://github.com/hirotomoyamada/yamada-ui/commit/7a9b78af180dbcfa0877d8eda2eff6bb91cfd140) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed to correct `ThemeProps`.
+
+- [#550](https://github.com/hirotomoyamada/yamada-ui/pull/550) [`f1ffc2a`](https://github.com/hirotomoyamada/yamada-ui/commit/f1ffc2a66a610b1527b23e31de1b21664ba43b47) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `placeholder` type.
+
 ## 1.0.2
 
 ### Patch Changes

@@ -14,6 +14,7 @@ import {
   handlerAll,
   mergeRefs,
   pickObject,
+  runIfFunc,
 } from "@yamada-ui/utils"
 import type {
   ChangeEvent,
@@ -67,10 +68,6 @@ type RatingContext = {
   groupProps: GroupProps | undefined
   itemProps: ItemProps | undefined
   inputProps: InputProps | undefined
-  color:
-    | CSSUIProps["color"]
-    | ((value: number) => CSSUIProps["color"])
-    | undefined
   emptyIcon: ReactNode | ((value: number) => ReactNode) | undefined
   filledIcon: ReactNode | ((value: number) => ReactNode) | undefined
   styles: Record<string, CSSUIObject>
@@ -321,6 +318,7 @@ export const useRating = ({
         <RatingGroup
           key={value}
           value={value}
+          color={runIfFunc(color, value)}
           items={index === 0 ? resolvedFractions + 1 : resolvedFractions}
         />
       )
@@ -330,7 +328,6 @@ export const useRating = ({
     getContainerProps,
     getGroupProps,
     id,
-    color,
     name,
     value,
     roundedValue,

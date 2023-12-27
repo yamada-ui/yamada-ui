@@ -12,7 +12,7 @@ type RatingGroupOptions = {
 export type RatingGroupProps = HTMLUIProps<"div"> & RatingGroupOptions
 
 export const RatingGroup = forwardRef<RatingGroupProps, "div">(
-  ({ className, value: groupValue, items, ...rest }, ref) => {
+  ({ className, value: groupValue, items, color, ...rest }, ref) => {
     const { styles, decimal, groupProps, getGroupProps } = useRatingContext()
 
     const computedGroupProps = runIfFunc(groupProps, groupValue)
@@ -44,6 +44,7 @@ export const RatingGroup = forwardRef<RatingGroupProps, "div">(
                 groupValue={groupValue}
                 value={value}
                 fractionValue={fractionValue}
+                color={color}
               />
             )
           })}

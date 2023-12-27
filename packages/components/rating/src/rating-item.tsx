@@ -10,10 +10,9 @@ import { useRatingContext, useRatingItem } from "./use-rating"
 export type RatingItemProps = HTMLUIProps<"input"> & UseRatingItemProps
 
 export const RatingItem = forwardRef<RatingItemProps, "input">(
-  ({ className, groupValue, value, fractionValue, ...rest }, ref) => {
+  ({ className, groupValue, value, fractionValue, color, ...rest }, ref) => {
     const {
       styles,
-      color,
       inputProps,
       emptyIcon = <StarIcon />,
       filledIcon = <StarIcon />,
@@ -25,16 +24,13 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
       fractionValue,
     })
 
-    const computedColor = runIfFunc(color, groupValue)
     const computedItemProps = runIfFunc(itemProps, value)
     const computedInputProps = runIfFunc(inputProps, value)
 
-    const customColor = computedColor
+    const customColor = color
       ? {
           _filled: {
-            color: isString(computedColor)
-              ? [computedColor, computedColor]
-              : computedColor,
+            color: isString(color) ? [color, color] : color,
           },
         }
       : {}

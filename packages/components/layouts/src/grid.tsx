@@ -124,6 +124,11 @@ type SimpleGridOptions = {
 
 export type SimpleGridProps = GridProps & SimpleGridOptions
 
+/**
+ * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/simple-grid
+ */
 export const SimpleGrid = forwardRef<SimpleGridProps, "div">(
   ({ minChildWidth, columns, ...rest }, ref) => {
     const { theme } = useTheme()

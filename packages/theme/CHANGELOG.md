@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.1.2
+
+### Patch Changes
+
+- [#547](https://github.com/hirotomoyamada/yamada-ui/pull/547) [`c382711`](https://github.com/hirotomoyamada/yamada-ui/commit/c3827110e32a7528ea5bd7bf84e9dccf7b1abfdc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated fallback background color of `Avatar`.
+
 ## 1.1.1
 
 ### Patch Changes

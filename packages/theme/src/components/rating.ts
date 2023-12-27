@@ -11,10 +11,8 @@ export const Rating: ComponentMultiStyle = {
     item: {
       cursor: "pointer",
       rounded: "sm",
-      color: ["blackAlpha.400", "whiteAlpha.300"],
+      color: ["blackAlpha.300", "whiteAlpha.300"],
       outline: "none",
-      transitionProperty: "color",
-      transitionDuration: "normal",
       _notLast: {
         position: "absolute",
         top: 0,
@@ -33,9 +31,6 @@ export const Rating: ComponentMultiStyle = {
       _filled: {
         color: [`${c}.500`, `${c}.600`],
       },
-      _active: {
-        color: [`${c}.500`, `${c}.600`],
-      },
     },
     icon: {
       fill: "currentColor",
@@ -45,27 +40,27 @@ export const Rating: ComponentMultiStyle = {
   sizes: {
     xs: {
       icon: {
-        boxSize: "3.5",
+        fontSize: "md",
       },
     },
     sm: {
       icon: {
-        boxSize: "4",
+        fontSize: "lg",
       },
     },
     md: {
       icon: {
-        boxSize: "5",
+        fontSize: "xl",
       },
     },
     lg: {
       icon: {
-        boxSize: "6",
+        fontSize: "2xl",
       },
     },
     xl: {
       icon: {
-        boxSize: "7",
+        fontSize: "3xl",
       },
     },
   },

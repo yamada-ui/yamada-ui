@@ -1,5 +1,11 @@
 # @yamada-ui/slider
 
+## 1.0.3
+
+### Patch Changes
+
+- [#552](https://github.com/hirotomoyamada/yamada-ui/pull/552) [`7a9b78a`](https://github.com/hirotomoyamada/yamada-ui/commit/7a9b78af180dbcfa0877d8eda2eff6bb91cfd140) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed to correct `ThemeProps`.
+
 ## 1.0.2
 
 ### Patch Changes

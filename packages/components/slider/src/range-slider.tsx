@@ -692,7 +692,7 @@ export type RangeSliderProps = Omit<
   HTMLUIProps<"div">,
   keyof UseRangeSliderProps
 > &
-  ThemeProps<"Slider"> &
+  ThemeProps<"RangeSlider"> &
   UseRangeSliderProps &
   RangeSliderOptions
 

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-pan-event",
-  "version": "0.2.10",
+  "version": "1.0.0",
   "description": "Yamada UI usePanEvent custom hook",
   "keywords": [
     "use-pan-event"
@@ -15,6 +15,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",

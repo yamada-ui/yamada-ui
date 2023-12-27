@@ -87,6 +87,11 @@ export type MultiSelectProps = ThemeProps<"Select"> &
   Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty"> &
   MultiSelectOptions
 
+/**
+ * `MultiSelect` is a component used for allowing users to select multiple values from a list of options.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/multi-select
+ */
 export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("MultiSelect", props)
   let {

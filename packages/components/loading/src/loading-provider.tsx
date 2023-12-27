@@ -503,6 +503,11 @@ const BackgroundComponent = memo(
 
 BackgroundComponent.displayName = "BackgroundComponent"
 
+/**
+ * `useLoading` is a custom hook for controlling the loading of the application.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-loading
+ */
 export const useLoading = (): LoadingContext => {
   const { screen, page, background, custom } = useContext(LoadingContext)
 

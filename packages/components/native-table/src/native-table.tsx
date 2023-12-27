@@ -44,6 +44,11 @@ export type NativeTableProps = HTMLUIProps<"table"> &
   ThemeProps<"Table"> &
   NativeTableOptions
 
+/**
+ * `NativeTable` is a component for efficiently organizing and displaying data.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/native-table
+ */
 export const NativeTable = forwardRef<NativeTableProps, "table">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("NativeTable", props)

@@ -80,6 +80,11 @@ export const slideProps = {
   variants,
 }
 
+/**
+ * `Slide` is a component that shows or hides an element from the corners of the page.
+ *
+ * @see Docs https://yamada-ui.com/components/transitions/slide
+ */
 export const Slide = forwardRef<SlideProps, "div">(
   (
     {

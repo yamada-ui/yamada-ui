@@ -303,6 +303,7 @@ export const useRating = ({
       return {
         ref,
         ...props,
+        tabIndex: -1,
         "data-active": dataAttr(isActive),
       }
     },
@@ -373,6 +374,8 @@ export const useRatingItem = ({
     setHoveredValue,
   } = useRatingContext()
   const { readOnly, disabled } = formControlProps
+  const [isFocused, setFocused] = useState<boolean>(false)
+  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const isActive = value === resolvedValue
   const isChecked = value === roundedValue
   const isFilled = highlightSelectedOnly
@@ -410,9 +413,6 @@ export const useRatingItem = ({
 
     onChange(value)
   }, [disabled, onChange, readOnly, value])
-
-  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
-  const [isFocused, setFocused] = useState<boolean>(false)
 
   const getItemProps: PropGetter = useCallback(
     (props = {}, ref = null) => {

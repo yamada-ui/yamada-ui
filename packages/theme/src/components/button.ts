@@ -11,6 +11,7 @@ import {
 
 export const Button: ComponentStyle = {
   baseStyle: {
+    cursor: "pointer",
     rounded: "md",
     fontWeight: "semibold",
     transitionProperty: "common",

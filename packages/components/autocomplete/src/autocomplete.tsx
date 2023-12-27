@@ -57,7 +57,7 @@ type AutocompleteOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type AutocompleteProps = ThemeProps<"Select"> &
+export type AutocompleteProps = ThemeProps<"Autocomplete"> &
   Omit<
     UseAutocompleteProps<string>,
     "maxSelectedValues" | "omitSelectedValues"

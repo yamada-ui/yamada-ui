@@ -152,10 +152,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     isEmpty,
   })
 
-  const containarAttribute = getContainerProps(containerProps)
-
-  delete containarAttribute["aria-readonly"]
-
   h ??= height
   minH ??= minHeight
 
@@ -175,7 +171,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
           <ui.div
             className={cx("ui-select", className)}
             __css={css}
-            {...containarAttribute}
+            {...getContainerProps(containerProps)}
           >
             <ui.div
               className="ui-select__inner"
@@ -220,8 +216,6 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
       alignItems: "center",
       ...styles.field,
     }
-
-    delete rest["aria-readonly"]
 
     return (
       <ui.div

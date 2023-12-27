@@ -40,8 +40,6 @@ export const SelectIcon = forwardRef<SelectIconProps, "div">(
       }),
     )
 
-    delete rest["aria-readonly"]
-
     return (
       <ui.div
         ref={ref}

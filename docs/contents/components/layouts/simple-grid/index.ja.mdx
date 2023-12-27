@@ -1,7 +1,45 @@
 ---
 title: SimpleGrid
-description: "`SimpleGrid`は、現在作成を検討しています。"
-label: "Considering"
+description: "`SimpleGrid`は、`Grid`をより使いやすくシンプルにしたコンポーネントです。"
+label: "New"
+package_name: "@yamada-ui/layouts"
+is_tabs: true
+with_description: true
+tab: 使い方
 ---
 
-現在、`SimpleGrid`の作成を検討しています。この[GitHubのイシュー](https://github.com/hirotomoyamada/yamada-ui/issues/503)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+## インポート
+
+```ts
+import { SimpleGrid, GridItem } from "@yamada-ui/react"
+```
+
+## 使い方
+
+:::note
+`SimpleGrid`は、内部的に[Grid](/components/layouts/grid)を使用しており、`Grid`を簡素化したコンポーネントです。
+:::
+
+```tsx
+<SimpleGrid w="full" columns={{ base: 2, md: 1 }} gap="md">
+  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
+  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+</SimpleGrid>
+```
+
+### 子要素の最小幅を設定する
+
+子要素の最小幅を設定する場合は、`minChildWidth`に横幅を設定します。
+
+例えば、`120px`を指定した場合、CSSプロパティの`gridTemplateColumns`は、`repeat(auto-fit, minmax(120px, 1fr))`になります。
+
+```tsx
+<SimpleGrid w="full" minChildWidth={{ base: "3xs", lg: 100 }} gap="md">
+  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
+  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+</SimpleGrid>
+```

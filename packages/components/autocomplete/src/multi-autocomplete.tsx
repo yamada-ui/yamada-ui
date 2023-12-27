@@ -90,7 +90,7 @@ type MultiAutocompleteOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type MultiAutocompleteProps = ThemeProps<"Select"> &
+export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
   UseAutocompleteProps<string[]> &
   MultiAutocompleteOptions
 

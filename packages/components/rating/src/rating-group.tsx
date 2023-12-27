@@ -1,6 +1,6 @@
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import { cx, runIfFunc } from "@yamada-ui/utils"
 import { RatingItem } from "./rating-item"
 import { getRoundedValue, useRatingContext } from "./use-rating"
 
@@ -13,7 +13,9 @@ export type RatingGroupProps = HTMLUIProps<"div"> & RatingGroupOptions
 
 export const RatingGroup = forwardRef<RatingGroupProps, "div">(
   ({ className, value: groupValue, items, ...rest }, ref) => {
-    const { styles, decimal, getGroupProps } = useRatingContext()
+    const { styles, decimal, groupProps, getGroupProps } = useRatingContext()
+
+    const computedGroupProps = runIfFunc(groupProps, groupValue)
 
     const css: CSSUIObject = { ...styles.group }
 
@@ -21,7 +23,10 @@ export const RatingGroup = forwardRef<RatingGroupProps, "div">(
       <ui.div
         className={cx("ui-rating__group", className)}
         __css={css}
-        {...getGroupProps({ value: groupValue, ...rest }, ref)}
+        {...getGroupProps(
+          { value: groupValue, ...computedGroupProps, ...rest },
+          ref,
+        )}
       >
         {Array(items)
           .fill(0)

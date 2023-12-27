@@ -28,7 +28,7 @@ export const basic: Story = () => {
         helperMessage="21% more than last month"
       />
 
-      <Stat number="1,993,818">
+      <Stat>
         <StatLabel>Total Page Views</StatLabel>
         <StatNumber>1,993,818</StatNumber>
         <StatHelperMessage>
@@ -89,7 +89,7 @@ export const withDecrease: Story = () => {
         helperMessage="21% more than last month"
       />
 
-      <Stat number="1,993,818">
+      <Stat>
         <StatLabel>Total Page Views</StatLabel>
         <StatNumber>1,993,818</StatNumber>
         <StatHelperMessage>

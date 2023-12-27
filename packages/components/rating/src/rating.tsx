@@ -11,6 +11,11 @@ import { RatingProvider, useRating } from "./use-rating"
 
 export type RatingProps = ThemeProps<"Rating"> & UseRatingProps
 
+/**
+ * `Rating` is a component used to allow users to provide ratings.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/rating
+ */
 export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Rating", props)
   const { className, ...computedProps } = omitThemeProps(mergedProps)

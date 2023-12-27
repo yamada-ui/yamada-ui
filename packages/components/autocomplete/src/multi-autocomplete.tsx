@@ -99,7 +99,7 @@ export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
  *
  * @see Docs https://yamada-ui.com/components/forms/multi-autocomplete
  */
-export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
+export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(
       "MultiAutocomplete",
@@ -239,7 +239,7 @@ type MultiAutocompleteFieldProps = HTMLUIProps<"div"> &
     "component" | "separator" | "keepPlaceholder" | "inputProps"
   >
 
-const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
+const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
   (
     {
       className,

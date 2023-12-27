@@ -239,7 +239,6 @@ export const reactHookForm: Story = () => {
         <Controller
           name="rating"
           control={control}
-          rules={{ max: { value: 50, message: "The maximum value is 50." } }}
           render={({ field }) => <Rating {...field} />}
         />
       </FormControl>

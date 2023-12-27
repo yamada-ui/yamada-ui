@@ -41,7 +41,7 @@ type NativeTableOptions = {
 }
 
 export type NativeTableProps = HTMLUIProps<"table"> &
-  ThemeProps<"Table"> &
+  ThemeProps<"NativeTable"> &
   NativeTableOptions
 
 /**

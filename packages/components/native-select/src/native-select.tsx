@@ -91,7 +91,7 @@ type NativeSelectOptions = {
 }
 
 export type NativeSelectProps = Omit<HTMLUIProps<"select">, "size"> &
-  ThemeProps<"Select"> &
+  ThemeProps<"NativeSelect"> &
   NativeSelectOptions &
   FormControlOptions
 

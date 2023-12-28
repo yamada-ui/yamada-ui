@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.1.3
+
+### Patch Changes
+
+- [#555](https://github.com/hirotomoyamada/yamada-ui/pull/555) [`60163b6`](https://github.com/hirotomoyamada/yamada-ui/commit/60163b6b1d13a904754e207da3c0840a8e265e3e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `cursor: pointer` to `Button` component style.
+
 ## 1.1.2
 
 ### Patch Changes

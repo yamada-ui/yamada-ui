@@ -60,7 +60,7 @@ import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
 import packageJSON from "package.json"
 
-const version = `v${packageJSON.dependencies["@yamada-ui/react"]}`
+const version = `v${packageJSON.dependencies["@yamada-ui/react"].split("-")[0]}`
 
 export type HeaderProps = CenterProps & {}
 

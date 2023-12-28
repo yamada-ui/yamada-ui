@@ -99,7 +99,6 @@
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
-    "color": { "type": "string", "required": false },
     "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
@@ -771,7 +770,6 @@
       "type": "WheelEventHandler<HTMLSpanElement>",
       "required": false
     },
-    "placeholder": { "type": "string", "required": false },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },

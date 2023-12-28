@@ -868,7 +868,6 @@
       "type": "WheelEventHandler<HTMLElement>",
       "required": false
     },
-    "placeholder": { "type": "string", "required": false },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },

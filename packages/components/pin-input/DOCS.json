@@ -71,6 +71,12 @@
       "required": false,
       "description": "If `true`, the pin input component signals to its fields that they should."
     },
+    "placeholder": {
+      "type": "string",
+      "defaultValue": "'○'",
+      "required": false,
+      "description": "The placeholder for the pin input."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",

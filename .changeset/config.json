@@ -12,5 +12,8 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
+  "snapshot": {
+    "useCalculatedVersion": true
+  },
   "ignore": ["create-react-app", "nextjs-app", "nextjs-pages"]
 }

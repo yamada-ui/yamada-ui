@@ -5,12 +5,12 @@ export const SegmentedControl: ComponentMultiStyle = {
   baseStyle: {
     container: {
       p: "1",
-      bg: ["blackAlpha.50", "whiteAlpha.50"],
+      bg: ["blackAlpha.100", "whiteAlpha.50"],
       _readOnly: { cursor: "auto" },
       _disabled: { cursor: "not-allowed" },
     },
     cursor: {
-      boxShadow: "md",
+      boxShadow: ["md", "dark-md"],
     },
     button: {
       transitionProperty: "common",
@@ -39,7 +39,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       },
       cursor: {
         bg: isGray(c)
-          ? [`whiteAlpha.700`, `${c}.700`]
+          ? [`whiteAlpha.800`, `${c}.700`]
           : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "md",
@@ -57,7 +57,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       },
       cursor: {
         bg: isGray(c)
-          ? [`whiteAlpha.700`, `${c}.700`]
+          ? [`whiteAlpha.800`, `${c}.700`]
           : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "full",

@@ -49,6 +49,7 @@ import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
 import { Skeleton } from "./skeleton"
 import { Slider } from "./slider"
+import { Stat } from "./stat"
 import { Stepper } from "./stepper"
 import { Switch } from "./switch"
 import { Table } from "./table"
@@ -109,6 +110,7 @@ export default {
   NativeTable,
   Skeleton,
   Slider,
+  Stat,
   Stepper,
   Switch,
   Table,

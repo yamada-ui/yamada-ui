@@ -5691,6 +5691,16 @@
     "hierarchy": { "lv1": "Avatar", "lv2": "Usage", "lv3": "Add a Badge" }
   },
   {
+    "title": "Highlight the Badge",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/avatar#highlight-the-badge",
+    "hierarchy": {
+      "lv1": "Avatar",
+      "lv2": "Usage",
+      "lv3": "Highlight the Badge"
+    }
+  },
+  {
     "title": "Style the Badge",
     "type": "fragment",
     "slug": "/components/media-and-icons/avatar#style-the-badge",
@@ -5874,6 +5884,12 @@
     "type": "fragment",
     "slug": "/components/media-and-icons/indicator#show-border",
     "hierarchy": { "lv1": "Indicator", "lv2": "Usage", "lv3": "Show Border" }
+  },
+  {
+    "title": "Highlighting",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/indicator#highlighting",
+    "hierarchy": { "lv1": "Indicator", "lv2": "Usage", "lv3": "Highlighting" }
   },
   {
     "title": "Hide Indicator",

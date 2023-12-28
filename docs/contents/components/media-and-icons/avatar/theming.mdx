@@ -10,7 +10,7 @@ tab: Theming
 
 ## Theming
 
-The `Avatar` is a [multi part component](/styled-system/theming/component-style#multi-part-components).
+The `Avatar` is a [single part component](/styled-system/theming/component-style#single-part-components).
 
 :::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
@@ -21,7 +21,9 @@ export const Avatar: ComponentMultiStyle = {
   baseStyle: {
     group: {},
     container: ({ theme: t, colorMode: m, name: string }) => {
-      const bg = string ? randomColor({ string }) : "blackAlpha.600"
+      const bg = string
+        ? randomColor({ string })
+        : mode("gray.200", "gray.500")(m)
 
       return {
         bg,

@@ -33,10 +33,46 @@ tab: Props
 />
 
 <PropsCard
+  id="tabs-disableripple"
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing the tab."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="tabs-index"
   name="index"
   type="number"
   description={"The index of the selected tab."}
+/>
+
+<PropsCard
+  id="tabs-isfitted"
+  name="isFitted"
+  type="boolean"
+  description={"If `true`, tabs will stretch to width of the tablist."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tabs-islazy"
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, rendering of the tab panel's will be deferred until it is selected."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tabs-ismanual"
+  name="isManual"
+  type="boolean"
+  description={
+    "If `true`, the tabs will be manually activated and　display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -97,6 +133,42 @@ tab: Props
 ### TabListProps
 
 ### TabProps
+
+<PropsCard
+  id="tab-clickonenter"
+  name="clickOnEnter"
+  type="boolean"
+  description={"Whether or not trigger click on pressing `Enter`."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-clickonspace"
+  name="clickOnSpace"
+  type="boolean"
+  description={"Whether or not trigger click on pressing `Space`."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={
+    "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tab-isfocusable"
+  name="isFocusable"
+  type="boolean"
+  description={
+    "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+  }
+  defaultValue={"false"}
+/>
 
 ### TabPanelsProps
 

@@ -21,6 +21,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkbox-defaultischecked"
+  name="defaultIsChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkbox-iconprops"
   name="iconProps"
   type='Omit<HTMLUIProps<"span">, "children"> & {
@@ -41,6 +49,54 @@ tab: Props
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
   description={"Props for input element."}
+/>
+
+<PropsCard
+  id="checkbox-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -109,13 +165,117 @@ tab: Props
 
 ### CheckboxIconProps
 
+<PropsCard
+  id="checkboxicon-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the icon will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the icon will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
 ### UseCheckboxProps
+
+<PropsCard
+  id="usecheckbox-defaultischecked"
+  name="defaultIsChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
 
 <PropsCard
   id="usecheckbox-id"
   name="id"
   type="string"
   description={"id assigned to input."}
+/>
+
+<PropsCard
+  id="usecheckbox-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -191,6 +351,48 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxgroup-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isnative"
+  name="isNative"
+  type="boolean"
+  description={
+    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxgroup-items"
   name="items"
   type="CheckboxItem<Y>[]"
@@ -242,6 +444,16 @@ tab: Props
   name="defaultValue"
   type="Y[]"
   description={"The initial value of the checkbox group."}
+/>
+
+<PropsCard
+  id="usecheckboxgroup-isnative"
+  name="isNative"
+  type="boolean"
+  description={
+    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard

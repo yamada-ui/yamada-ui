@@ -101,6 +101,14 @@ tab: Props
 />
 
 <PropsCard
+  id="pagination-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the pagination all item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="pagination-itemprops"
   name="itemProps"
   type='HTMLUIProps<"button">'
@@ -149,6 +157,22 @@ tab: Props
   defaultValue={"solid"}
 />
 
+<PropsCard
+  id="pagination-withcontrols"
+  name="withControls"
+  type="UIValue<boolean>"
+  description={"If `true`, display the control buttons."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="pagination-withedges"
+  name="withEdges"
+  type="UIValue<boolean>"
+  description={"If `true`, display the edge buttons."}
+  defaultValue={"false"}
+/>
+
 ### UsePaginationProps
 
 <PropsCard
@@ -175,6 +199,14 @@ tab: Props
     "The initial page of the pagination.\nShould be less than `total` and greater than `1`."
   }
   defaultValue={"1"}
+/>
+
+<PropsCard
+  id="usepagination-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the pagination all item will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard

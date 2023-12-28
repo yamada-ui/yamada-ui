@@ -37,6 +37,16 @@ tab: Props
 />
 
 <PropsCard
+  id="dialog-blockscrollonmount"
+  name="blockScrollOnMount"
+  type="boolean"
+  description={
+    "If `true`, scrolling will be disabled on the `body` when the modal opens."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="dialog-cancel"
   name="cancel"
   type="type ONLY_FOR_FORMAT =
@@ -48,6 +58,22 @@ tab: Props
   | ReactPortal
   | ButtonProps"
   description={"The dialog cancel to use."}
+/>
+
+<PropsCard
+  id="dialog-closeonesc"
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the modal will close when the `Esc` key is pressed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="dialog-closeonoverlay"
+  name="closeOnOverlay"
+  type="boolean"
+  description={"If `true`, the modal will close when the overlay is clicked."}
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -104,6 +130,16 @@ tab: Props
   name="initialFocusRef"
   type="RefObject<FocusableElement>"
   description={"`ref` of the element to receive focus initially."}
+/>
+
+<PropsCard
+  id="dialog-lockfocusacrossframes"
+  name="lockFocusAcrossFrames"
+  type="boolean"
+  description={
+    "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -204,6 +240,16 @@ tab: Props
 />
 
 <PropsCard
+  id="dialog-restorefocus"
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="dialog-scrollbehavior"
   name="scrollBehavior"
   type='"outside" | "inside"'
@@ -240,4 +286,20 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Dialog."}
+/>
+
+<PropsCard
+  id="dialog-withclosebutton"
+  name="withCloseButton"
+  type="boolean"
+  description={"If `true`, display the modal close button."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="dialog-withoverlay"
+  name="withOverlay"
+  type="boolean"
+  description={"If `true`, display the modal overlay."}
+  defaultValue={"true"}
 />

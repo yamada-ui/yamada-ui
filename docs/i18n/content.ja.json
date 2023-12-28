@@ -6072,6 +6072,16 @@
     "hierarchy": { "lv1": "Avatar", "lv2": "使い方", "lv3": "バッジをつける" }
   },
   {
+    "title": "バッジをハイライトする",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/avatar#バッジをハイライトする",
+    "hierarchy": {
+      "lv1": "Avatar",
+      "lv2": "使い方",
+      "lv3": "バッジをハイライトする"
+    }
+  },
+  {
     "title": "バッジをスタイリングする",
     "type": "fragment",
     "slug": "/components/media-and-icons/avatar#バッジをスタイリングする",
@@ -6286,6 +6296,16 @@
       "lv1": "Indicator",
       "lv2": "使い方",
       "lv3": "境界線を表示する"
+    }
+  },
+  {
+    "title": "ハイライトする",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/indicator#ハイライトする",
+    "hierarchy": {
+      "lv1": "Indicator",
+      "lv2": "使い方",
+      "lv3": "ハイライトする"
     }
   },
   {

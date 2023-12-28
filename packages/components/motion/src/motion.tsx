@@ -4,11 +4,12 @@ import { cx } from "@yamada-ui/utils"
 import type { HTMLMotionProps } from "framer-motion"
 import { motion } from "framer-motion"
 import type { ReactHTML } from "react"
+import type { MotionAs } from "./motion.types"
 
 type UIProps = "children" | "color"
 
 type MotionOptions = {
-  as?: keyof typeof motion
+  as?: MotionAs
 }
 
 export type MotionProps<Y extends keyof ReactHTML = "div"> = OmitProps<

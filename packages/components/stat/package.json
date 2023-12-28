@@ -1,16 +1,14 @@
 {
-  "name": "@yamada-ui/button",
-  "version": "1.0.3",
-  "description": "Yamada UI button components",
+  "name": "@yamada-ui/stat",
+  "version": "1.0.0",
+  "description": "Yamada UI stat component",
   "keywords": [
     "yamada",
     "yamada ui",
     "react",
     "emotion",
     "component",
-    "button",
-    "icon-button",
-    "button-group",
+    "stepper",
     "ui",
     "uikit",
     "styled",
@@ -32,7 +30,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
-    "directory": "packages/components/button"
+    "directory": "packages/components/stat"
   },
   "bugs": {
     "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
@@ -50,8 +48,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/loading": "workspace:*",
-    "@yamada-ui/ripple": "workspace:*"
+    "@yamada-ui/icon": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",
@@ -67,10 +64,6 @@
     "format": [
       "cjs",
       "esm"
-    ],
-    "banner": {
-      "js": "\"use client\""
-    },
-    "sourcemap": true
+    ]
   }
 }

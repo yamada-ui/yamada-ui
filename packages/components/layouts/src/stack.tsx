@@ -1,8 +1,22 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
-import { getValidChildren, cx, replaceObject } from "@yamada-ui/utils"
-import type { ReactElement } from "react"
-import { cloneElement, Fragment, useMemo } from "react"
+import {
+  getValidChildren,
+  cx,
+  replaceObject,
+  mergeRefs,
+} from "@yamada-ui/utils"
+import type { ReactElement, RefObject } from "react"
+import {
+  cloneElement,
+  createRef,
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 
 type StackOptions = {
   /**
@@ -117,10 +131,233 @@ export const Stack = forwardRef<StackProps, "div">(
   },
 )
 
-export const HStack = forwardRef<StackProps, "div">((props, ref) => (
-  <Stack ref={ref} direction="row" align="center" {...props} />
-))
+/**
+ * `HStack` is a component that groups elements and provides space between child elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/stack
+ */
+export const HStack = forwardRef<StackProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Stack
+      ref={ref}
+      className={cx("ui-stack--horizontal", className)}
+      direction="row"
+      align="center"
+      {...rest}
+    />
+  ),
+)
 
-export const VStack = forwardRef<StackProps, "div">((props, ref) => (
-  <Stack ref={ref} direction="column" align="stretch" w="100%" {...props} />
-))
+/**
+ * `VStack` is a component that groups elements and provides space between child elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/stack
+ */
+export const VStack = forwardRef<StackProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Stack
+      ref={ref}
+      className={cx("ui-stack--vertical", className)}
+      direction="column"
+      align="stretch"
+      w="100%"
+      {...rest}
+    />
+  ),
+)
+
+type ZStackOptions = {
+  /**
+   * If set the stack will start from the given index.
+   *
+   * @default 0
+   */
+  startIndex?: number
+  /**
+   * Stack in the specified direction.
+   *
+   * @default "bottom"
+   */
+  direction?:
+    | "top"
+    | "right"
+    | "bottom"
+    | "left"
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right"
+  /**
+   * If `true`, reverse direction.
+   *
+   * @default false
+   */
+  reverse?: boolean
+  /**
+   * If `true`, calculate the `width` and `height` of the element and assign container.
+   *
+   * @default true
+   */
+  fit?: boolean
+}
+
+export type ZStackProps = Omit<HTMLUIProps<"div">, "direction"> & ZStackOptions
+
+/**
+ * `ZStack` is a component that groups elements and provides space between child elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/stack
+ */
+export const ZStack = forwardRef<ZStackProps, "div">(
+  (
+    {
+      className,
+      direction = "bottom",
+      startIndex = 0,
+      gap = "md",
+      reverse = false,
+      fit = true,
+      children,
+      ...rest
+    },
+    ref,
+  ) => {
+    const refMap = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
+    const [rect, setRect] = useState<{ width: number; height: number }>({
+      width: 0,
+      height: 0,
+    })
+
+    const boxSize: CSSUIObject = {
+      minWidth: `${rect.width}px`,
+      minHeight: `${rect.height}px`,
+    }
+
+    const css: CSSUIObject = {
+      position: "relative",
+      overflow: "hidden",
+      var: [{ name: "space", token: "spaces", value: gap }],
+      ...(fit ? boxSize : {}),
+    }
+
+    const vertical = useCallback(
+      (space: string) => {
+        if (direction.includes("top")) {
+          return { [!reverse ? "bottom" : "top"]: space }
+        } else if (direction.includes("bottom")) {
+          return { [!reverse ? "top" : "bottom"]: space }
+        } else {
+          return { [!reverse ? "top" : "bottom"]: 0 }
+        }
+      },
+      [direction, reverse],
+    )
+
+    const horizontal = useCallback(
+      (space: string) => {
+        if (direction.includes("left")) {
+          return { [!reverse ? "right" : "left"]: space }
+        } else if (direction.includes("right")) {
+          return { [!reverse ? "left" : "right"]: space }
+        } else {
+          return { [!reverse ? "left" : "right"]: 0 }
+        }
+      },
+      [direction, reverse],
+    )
+
+    const cloneChildren = useMemo(() => {
+      const validChildren = getValidChildren(children) as (ReactElement & {
+        ref: RefObject<any>
+      })[]
+
+      const clonedChildren = validChildren.map((child, index) => {
+        const ref = createRef<HTMLDivElement>()
+
+        refMap.current.set(index, ref)
+
+        const key = child.key ?? index
+
+        const zIndex = startIndex + index
+        const space = `calc(var(--ui-space) * ${index})`
+
+        let css: CSSUIObject = {}
+
+        css = {
+          ...css,
+          position: "absolute",
+          zIndex,
+        }
+
+        css = { ...css, ...vertical(space) }
+        css = { ...css, ...horizontal(space) }
+
+        const props = {
+          ...child.props,
+          ref: mergeRefs(child.ref, ref),
+          __css: css,
+        }
+
+        const clonedChild = cloneElement(child, props)
+
+        return <Fragment key={key}>{clonedChild}</Fragment>
+      })
+
+      return clonedChildren
+    }, [children, startIndex, vertical, horizontal])
+
+    useEffect(() => {
+      if (!fit) return
+
+      let isNegativeLeft = direction.includes("left")
+      let isNegativeTop = direction.includes("top")
+      let width = 0
+      let height = 0
+
+      if (reverse) {
+        isNegativeLeft = !isNegativeLeft
+        isNegativeTop = !isNegativeTop
+      }
+
+      for (const ref of refMap.current.values()) {
+        if (!ref.current) continue
+
+        let { offsetParent, offsetWidth, offsetHeight, offsetTop, offsetLeft } =
+          ref.current
+
+        if (isNegativeLeft) {
+          offsetLeft =
+            (offsetParent as HTMLDivElement).offsetWidth -
+            offsetLeft -
+            offsetWidth
+        }
+
+        if (isNegativeTop) {
+          offsetTop =
+            (offsetParent as HTMLDivElement).offsetHeight -
+            offsetTop -
+            offsetHeight
+        }
+
+        offsetWidth += offsetLeft
+        offsetHeight += offsetTop
+
+        if (offsetWidth > width) width = offsetWidth
+        if (offsetHeight > height) height = offsetHeight
+      }
+
+      setRect({ width, height })
+    }, [cloneChildren, direction, reverse, fit])
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-stack--depth", className)}
+        __css={css}
+        {...rest}
+      >
+        {cloneChildren}
+      </ui.div>
+    )
+  },
+)

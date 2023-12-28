@@ -1,5 +1,11 @@
 # @yamada-ui/button
 
+## 1.0.3
+
+### Patch Changes
+
+- [#555](https://github.com/hirotomoyamada/yamada-ui/pull/555) [`60163b6`](https://github.com/hirotomoyamada/yamada-ui/commit/60163b6b1d13a904754e207da3c0840a8e265e3e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the state was updated excessively in the ref of the `Button` component.
+
 ## 1.0.2
 
 ### Patch Changes

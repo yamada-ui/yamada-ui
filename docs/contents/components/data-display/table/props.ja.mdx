@@ -99,6 +99,22 @@ tab: Props
 />
 
 <PropsCard
+  id="table-highlightonhover"
+  name="highlightOnHover"
+  type="boolean"
+  description={"If `true`, highlight the row when the table row is hovered."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="table-highlightonselected"
+  name="highlightOnSelected"
+  type="boolean"
+  description={"If `true`, highlight the row when the table row is selected."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="table-layout"
   name="layout"
   type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | ResponsiveObject<TableLayout> | ColorModeArray<TableLayout> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
@@ -138,6 +154,14 @@ tab: Props
   name="rowProps"
   type="RowProps<Y>"
   description={"Props for table row component."}
+/>
+
+<PropsCard
+  id="table-rowsclickselect"
+  name="rowsClickSelect"
+  type="boolean"
+  description={"If `true`, allows selection by clicking on a row."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -203,4 +227,36 @@ tab: Props
   type='"simple" | "striped" | "unstyled"'
   description={"The variant of the Table."}
   defaultValue={"simple"}
+/>
+
+<PropsCard
+  id="table-withborder"
+  name="withBorder"
+  type="boolean"
+  description={"If `true`, display the outer border of the table."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="table-withcolumnborders"
+  name="withColumnBorders"
+  type="boolean"
+  description={"If `true`, display line on the columns of the table."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="table-withfooter"
+  name="withFooter"
+  type="boolean"
+  description={"If `true`, display the table footer."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="table-withfooterselect"
+  name="withFooterSelect"
+  type="boolean"
+  description={"If `true`, display the checkbox in table footer."}
+  defaultValue={"false"}
 />

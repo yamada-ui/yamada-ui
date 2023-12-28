@@ -26,6 +26,34 @@ tab: Props
 />
 
 <PropsCard
+  id="progress-hasstripe"
+  name="hasStripe"
+  type="boolean"
+  description={"If `true`, the progress bar will show stripe."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="progress-isanimation"
+  name="isAnimation"
+  type="boolean"
+  description={
+    "If `true`, the progress will be indeterminate and the `value` prop will be ignored."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="progress-isstripeanimation"
+  name="isStripeAnimation"
+  type="boolean"
+  description={
+    "If `true`, and hasStripe is `true`, the stripes will be animated."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="progress-max"
   name="max"
   type="number"

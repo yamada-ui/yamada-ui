@@ -19,6 +19,16 @@ tab: Props
 />
 
 <PropsCard
+  id="popover-autofocus"
+  name="autoFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be transferred to the first interactive element when the popover opens."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="popover-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
@@ -37,6 +47,32 @@ tab: Props
 />
 
 <PropsCard
+  id="popover-closeonblur"
+  name="closeOnBlur"
+  type="boolean"
+  description={
+    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="popover-closeonbutton"
+  name="closeOnButton"
+  type="boolean"
+  description={"If `true`, display the popover close button."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="popover-closeonesc"
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the popover will close when you hit the `Esc` key."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="popover-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
@@ -48,6 +84,28 @@ tab: Props
   name="duration"
   type='number | Partial<Record<"exit" | "enter", number>>'
   description={"The animation duration."}
+/>
+
+<PropsCard
+  id="popover-eventlisteners"
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="popover-flip"
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -70,6 +128,16 @@ tab: Props
 />
 
 <PropsCard
+  id="popover-islazy"
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="popover-isopen"
   name="isOpen"
   type="boolean"
@@ -84,6 +152,16 @@ tab: Props
     "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
+/>
+
+<PropsCard
+  id="popover-matchwidth"
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -136,6 +214,26 @@ tab: Props
 />
 
 <PropsCard
+  id="popover-preventoverflow"
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="popover-restorefocus"
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be returned to the element that triggers the popover when it closes."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="popover-strategy"
   name="strategy"
   type='"fixed" | "absolute"'
@@ -154,6 +252,22 @@ tab: Props
 />
 
 ### PopoverCloseButtonProps
+
+<PropsCard
+  id="popoverclosebutton-disableripple"
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="popoverclosebutton-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the button is disabled."}
+  defaultValue={"false"}
+/>
 
 ### PopoverContentProps
 

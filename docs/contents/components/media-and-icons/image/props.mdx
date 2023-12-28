@@ -48,6 +48,16 @@ tab: Props
 />
 
 <PropsCard
+  id="image-ignorefallback"
+  name="ignoreFallback"
+  type="boolean"
+  description={
+    "If `true`, opt out of the `fallbackSrc` logic and use as `img`."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="image-loading"
   name="loading"
   type='"eager" | "lazy"'
@@ -107,6 +117,16 @@ tab: Props
   description={
     "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
   }
+/>
+
+<PropsCard
+  id="useimage-ignorefallback"
+  name="ignoreFallback"
+  type="boolean"
+  description={
+    "If `true`, opt out of the `fallbackSrc` logic and use as `img`."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard

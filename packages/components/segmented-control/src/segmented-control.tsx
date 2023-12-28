@@ -262,7 +262,6 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     }, [])
 
     const css: CSSUIObject = {
-      position: "relative",
       display: "inline-flex",
       alignItems: "center",
       ...styles.container,
@@ -397,10 +396,10 @@ export const SegmentedControlButton = forwardRef<
         {...rest}
       >
         <ui.input {...getInputProps(props, mergeRefs(register, ref))} />
-        <ui.span>{children}</ui.span>
         {isSelected && isMounted ? (
           <SegmentedControlCursor {...motionProps} />
         ) : null}
+        <ui.span zIndex="1">{children}</ui.span>
       </ui.label>
     )
   },
@@ -419,7 +418,6 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
 
   const css: CSSUIObject = {
     position: "absolute",
-    zIndex: "-10",
     w: "full",
     h: "full",
     ...styles.cursor,

@@ -143,19 +143,19 @@ const getColor = (value: number) => {
 const getIcon = (value: number) => {
   switch (value) {
     case 1:
-      return <Icon icon={faFaceSadCry} />
+      return <FontAwesomeIcon icon={faFaceSadCry} />
 
     case 2:
-      return <Icon icon={faFaceSadTear} />
+      return <FontAwesomeIcon icon={faFaceSadTear} />
 
     case 3:
-      return <Icon icon={faFaceSmile} />
+      return <FontAwesomeIcon icon={faFaceSmile} />
 
     case 4:
-      return <Icon icon={faFaceSmileBeam} />
+      return <FontAwesomeIcon icon={faFaceSmileBeam} />
 
     case 5:
-      return <Icon icon={faFaceGrinStars} />
+      return <FontAwesomeIcon icon={faFaceGrinStars} />
 
     default:
       return null
@@ -166,8 +166,8 @@ return (
   <VStack>
     <Rating
       defaultValue={3}
-      emptyIcon={<Icon icon={faPoo} />}
-      filledIcon={<Icon icon={faPoo} />}
+      emptyIcon={<FontAwesomeIcon icon={faPoo} />}
+      filledIcon={<FontAwesomeIcon icon={faPoo} />}
     />
 
     <Rating

@@ -1,0 +1,58 @@
+name: Next
+
+on:
+  push:
+    paths:
+      - ".storybook/**"
+      - ".changeset/**"
+      - "packages/**"
+      - "stories/**"
+    branches:
+      - "v*"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Check Changes Storybook
+        id: storybook
+        run: |
+          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -e '^\.storybook/' -e '^stories/' && echo true || echo false)" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Create @next Release
+        run: |
+          pnpm version:next
+          pnpm release:next
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Storybook
+        if: steps.storybook.outputs.changed == 'true'
+        run: pnpm build:storybook
+
+      - name: Update Storybook
+        if: steps.storybook.outputs.changed == 'true'
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          branch: gh-pages
+          folder: storybook-static
+          clean: true
+          clean-exclude: .nojekyll

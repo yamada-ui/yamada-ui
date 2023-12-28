@@ -1,0 +1,75 @@
+{
+  "Stat": {
+    "centerContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, container will center its children regardless of their width."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "helperMessage": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The stat helper message to use."
+    },
+    "helperMessageProps": {
+      "type": "StatHelperMessageProps",
+      "required": false,
+      "description": "Props for stat helper message component."
+    },
+    "icon": {
+      "type": "\"increase\" | \"decrease\"",
+      "required": false,
+      "description": "The stat icon to use."
+    },
+    "iconProps": {
+      "type": "Omit<StatIconProps, \"type\">",
+      "required": false,
+      "description": "Props for stat icon component."
+    },
+    "label": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The stat label to use."
+    },
+    "labelProps": {
+      "type": "StatLabelProps",
+      "required": false,
+      "description": "Props for stat label component."
+    },
+    "number": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The stat number to use."
+    },
+    "numberProps": {
+      "type": "StatNumberProps",
+      "required": false,
+      "description": "Props for stat number component."
+    },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Stat."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Stat."
+    }
+  },
+  "StatLabel": {},
+  "StatNumber": {},
+  "StatHelperMessage": {},
+  "StatIcon": {
+    "size": {
+      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
+      "required": false,
+      "description": "The CSS `font-size` property."
+    }
+  }
+}

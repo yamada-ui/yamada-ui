@@ -1,223 +1,223 @@
 {
   "Motion": {
     "about": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"about\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"about\"]>",
       "required": false
     },
     "accessKey": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"accessKey\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"accessKey\"]>",
       "required": false
     },
     "aria-activedescendant": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-activedescendant\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-activedescendant\"]>",
       "required": false
     },
     "aria-atomic": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-atomic\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-atomic\"]>",
       "required": false
     },
     "aria-autocomplete": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-autocomplete\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-autocomplete\"]>",
       "required": false
     },
     "aria-braillelabel": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-braillelabel\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-braillelabel\"]>",
       "required": false
     },
     "aria-brailleroledescription": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-brailleroledescription\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"aria-brailleroledescription\"]\n>",
       "required": false
     },
     "aria-busy": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-busy\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-busy\"]>",
       "required": false
     },
     "aria-checked": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-checked\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-checked\"]>",
       "required": false
     },
     "aria-colcount": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colcount\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-colcount\"]>",
       "required": false
     },
     "aria-colindex": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colindex\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-colindex\"]>",
       "required": false
     },
     "aria-colindextext": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colindextext\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-colindextext\"]>",
       "required": false
     },
     "aria-colspan": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-colspan\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-colspan\"]>",
       "required": false
     },
     "aria-controls": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-controls\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-controls\"]>",
       "required": false
     },
     "aria-current": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-current\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-current\"]>",
       "required": false
     },
     "aria-describedby": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-describedby\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-describedby\"]>",
       "required": false
     },
     "aria-description": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-description\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-description\"]>",
       "required": false
     },
     "aria-details": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-details\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-details\"]>",
       "required": false
     },
     "aria-disabled": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-disabled\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-disabled\"]>",
       "required": false
     },
     "aria-dropeffect": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-dropeffect\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-dropeffect\"]>",
       "required": false
     },
     "aria-errormessage": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-errormessage\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-errormessage\"]>",
       "required": false
     },
     "aria-expanded": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-expanded\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-expanded\"]>",
       "required": false
     },
     "aria-flowto": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-flowto\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-flowto\"]>",
       "required": false
     },
     "aria-grabbed": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-grabbed\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-grabbed\"]>",
       "required": false
     },
     "aria-haspopup": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-haspopup\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-haspopup\"]>",
       "required": false
     },
     "aria-hidden": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-hidden\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-hidden\"]>",
       "required": false
     },
     "aria-invalid": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-invalid\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-invalid\"]>",
       "required": false
     },
     "aria-keyshortcuts": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-keyshortcuts\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-keyshortcuts\"]>",
       "required": false
     },
     "aria-label": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-label\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-label\"]>",
       "required": false
     },
     "aria-labelledby": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-labelledby\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-labelledby\"]>",
       "required": false
     },
     "aria-level": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-level\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-level\"]>",
       "required": false
     },
     "aria-live": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-live\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-live\"]>",
       "required": false
     },
     "aria-modal": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-modal\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-modal\"]>",
       "required": false
     },
     "aria-multiline": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-multiline\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-multiline\"]>",
       "required": false
     },
     "aria-multiselectable": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-multiselectable\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-multiselectable\"]>",
       "required": false
     },
     "aria-orientation": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-orientation\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-orientation\"]>",
       "required": false
     },
     "aria-owns": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-owns\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-owns\"]>",
       "required": false
     },
     "aria-placeholder": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-placeholder\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-placeholder\"]>",
       "required": false
     },
     "aria-posinset": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-posinset\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-posinset\"]>",
       "required": false
     },
     "aria-pressed": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-pressed\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-pressed\"]>",
       "required": false
     },
     "aria-readonly": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-readonly\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-readonly\"]>",
       "required": false
     },
     "aria-relevant": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-relevant\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-relevant\"]>",
       "required": false
     },
     "aria-required": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-required\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-required\"]>",
       "required": false
     },
     "aria-roledescription": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-roledescription\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-roledescription\"]>",
       "required": false
     },
     "aria-rowcount": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowcount\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-rowcount\"]>",
       "required": false
     },
     "aria-rowindex": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowindex\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-rowindex\"]>",
       "required": false
     },
     "aria-rowindextext": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowindextext\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-rowindextext\"]>",
       "required": false
     },
     "aria-rowspan": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-rowspan\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-rowspan\"]>",
       "required": false
     },
     "aria-selected": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-selected\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-selected\"]>",
       "required": false
     },
     "aria-setsize": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-setsize\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-setsize\"]>",
       "required": false
     },
     "aria-sort": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-sort\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-sort\"]>",
       "required": false
     },
     "aria-valuemax": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuemax\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-valuemax\"]>",
       "required": false
     },
     "aria-valuemin": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuemin\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-valuemin\"]>",
       "required": false
     },
     "aria-valuenow": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuenow\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-valuenow\"]>",
       "required": false
     },
     "aria-valuetext": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"aria-valuetext\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"aria-valuetext\"]>",
       "required": false
     },
     "as": {
@@ -225,823 +225,815 @@
       "required": false
     },
     "autoCapitalize": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoCapitalize\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"autoCapitalize\"]>",
       "required": false
     },
     "autoCorrect": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoCorrect\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"autoCorrect\"]>",
       "required": false
     },
     "autoFocus": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoFocus\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"autoFocus\"]>",
       "required": false
     },
     "autoSave": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"autoSave\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"autoSave\"]>",
       "required": false
     },
     "className": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"className\"]\n>",
-      "required": false
-    },
-    "color": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"color\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"className\"]>",
       "required": false
     },
     "content": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"content\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"content\"]>",
       "required": false
     },
     "contentEditable": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"contentEditable\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"contentEditable\"]>",
       "required": false
     },
     "contextMenu": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"contextMenu\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"contextMenu\"]>",
       "required": false
     },
     "dangerouslySetInnerHTML": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"dangerouslySetInnerHTML\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"dangerouslySetInnerHTML\"]\n>",
       "required": false
     },
     "datatype": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"datatype\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"datatype\"]>",
       "required": false
     },
     "defaultChecked": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"defaultChecked\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"defaultChecked\"]>",
       "required": false
     },
     "defaultValue": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"defaultValue\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"defaultValue\"]>",
       "required": false
     },
     "dir": {
-      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"dir\"]>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"dir\"]>",
       "required": false
     },
     "draggable": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"draggable\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"draggable\"]>",
       "required": false
     },
     "hidden": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"hidden\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"hidden\"]>",
       "required": false
     },
     "id": {
-      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"id\"]>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"id\"]>",
       "required": false
     },
     "inlist": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"inlist\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"inlist\"]>",
       "required": false
     },
     "inputMode": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"inputMode\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"inputMode\"]>",
       "required": false
     },
     "is": {
-      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"is\"]>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"is\"]>",
       "required": false
     },
     "itemID": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemID\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"itemID\"]>",
       "required": false
     },
     "itemProp": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemProp\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"itemProp\"]>",
       "required": false
     },
     "itemRef": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemRef\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"itemRef\"]>",
       "required": false
     },
     "itemScope": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemScope\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"itemScope\"]>",
       "required": false
     },
     "itemType": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"itemType\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"itemType\"]>",
       "required": false
     },
     "lang": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"lang\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"lang\"]>",
       "required": false
     },
     "nonce": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"nonce\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"nonce\"]>",
       "required": false
     },
     "onAbort": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAbort\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAbort\"]>",
       "required": false
     },
     "onAbortCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAbortCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAbortCapture\"]>",
       "required": false
     },
     "onAnimationEnd": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationEnd\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAnimationEnd\"]>",
       "required": false
     },
     "onAnimationEndCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationEndCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAnimationEndCapture\"]>",
       "required": false
     },
     "onAnimationIteration": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationIteration\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAnimationIteration\"]>",
       "required": false
     },
     "onAnimationIterationCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationIterationCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onAnimationIterationCapture\"]\n>",
       "required": false
     },
     "onAnimationStartCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAnimationStartCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onAnimationStartCapture\"]\n>",
       "required": false
     },
     "onAuxClick": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAuxClick\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAuxClick\"]>",
       "required": false
     },
     "onAuxClickCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onAuxClickCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onAuxClickCapture\"]>",
       "required": false
     },
     "onBeforeInput": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBeforeInput\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onBeforeInput\"]>",
       "required": false
     },
     "onBeforeInputCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBeforeInputCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onBeforeInputCapture\"]>",
       "required": false
     },
     "onBlur": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBlur\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onBlur\"]>",
       "required": false
     },
     "onBlurCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onBlurCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onBlurCapture\"]>",
       "required": false
     },
     "onCanPlay": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlay\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCanPlay\"]>",
       "required": false
     },
     "onCanPlayCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlayCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCanPlayCapture\"]>",
       "required": false
     },
     "onCanPlayThrough": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlayThrough\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCanPlayThrough\"]>",
       "required": false
     },
     "onCanPlayThroughCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCanPlayThroughCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onCanPlayThroughCapture\"]\n>",
       "required": false
     },
     "onChange": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onChange\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onChange\"]>",
       "required": false
     },
     "onChangeCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onChangeCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onChangeCapture\"]>",
       "required": false
     },
     "onClick": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onClick\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onClick\"]>",
       "required": false
     },
     "onClickCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onClickCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onClickCapture\"]>",
       "required": false
     },
     "onCompositionEnd": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionEnd\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCompositionEnd\"]>",
       "required": false
     },
     "onCompositionEndCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionEndCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onCompositionEndCapture\"]\n>",
       "required": false
     },
     "onCompositionStart": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionStart\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCompositionStart\"]>",
       "required": false
     },
     "onCompositionStartCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionStartCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onCompositionStartCapture\"]\n>",
       "required": false
     },
     "onCompositionUpdate": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionUpdate\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCompositionUpdate\"]>",
       "required": false
     },
     "onCompositionUpdateCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCompositionUpdateCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onCompositionUpdateCapture\"]\n>",
       "required": false
     },
     "onContextMenu": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onContextMenu\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onContextMenu\"]>",
       "required": false
     },
     "onContextMenuCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onContextMenuCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onContextMenuCapture\"]>",
       "required": false
     },
     "onCopy": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCopy\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCopy\"]>",
       "required": false
     },
     "onCopyCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCopyCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCopyCapture\"]>",
       "required": false
     },
     "onCut": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCut\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCut\"]>",
       "required": false
     },
     "onCutCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onCutCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onCutCapture\"]>",
       "required": false
     },
     "onDoubleClick": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDoubleClick\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDoubleClick\"]>",
       "required": false
     },
     "onDoubleClickCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDoubleClickCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDoubleClickCapture\"]>",
       "required": false
     },
     "onDragCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragCapture\"]>",
       "required": false
     },
     "onDragEndCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragEndCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragEndCapture\"]>",
       "required": false
     },
     "onDragEnter": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragEnter\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragEnter\"]>",
       "required": false
     },
     "onDragEnterCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragEnterCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragEnterCapture\"]>",
       "required": false
     },
     "onDragExit": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragExit\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragExit\"]>",
       "required": false
     },
     "onDragExitCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragExitCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragExitCapture\"]>",
       "required": false
     },
     "onDragLeave": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragLeave\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragLeave\"]>",
       "required": false
     },
     "onDragLeaveCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragLeaveCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragLeaveCapture\"]>",
       "required": false
     },
     "onDragOver": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragOver\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragOver\"]>",
       "required": false
     },
     "onDragOverCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragOverCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragOverCapture\"]>",
       "required": false
     },
     "onDragStartCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDragStartCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDragStartCapture\"]>",
       "required": false
     },
     "onDrop": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDrop\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDrop\"]>",
       "required": false
     },
     "onDropCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDropCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDropCapture\"]>",
       "required": false
     },
     "onDurationChange": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDurationChange\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onDurationChange\"]>",
       "required": false
     },
     "onDurationChangeCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onDurationChangeCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onDurationChangeCapture\"]\n>",
       "required": false
     },
     "onEmptied": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEmptied\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onEmptied\"]>",
       "required": false
     },
     "onEmptiedCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEmptiedCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onEmptiedCapture\"]>",
       "required": false
     },
     "onEncrypted": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEncrypted\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onEncrypted\"]>",
       "required": false
     },
     "onEncryptedCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEncryptedCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onEncryptedCapture\"]>",
       "required": false
     },
     "onEnded": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEnded\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onEnded\"]>",
       "required": false
     },
     "onEndedCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onEndedCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onEndedCapture\"]>",
       "required": false
     },
     "onError": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onError\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onError\"]>",
       "required": false
     },
     "onErrorCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onErrorCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onErrorCapture\"]>",
       "required": false
     },
     "onFocus": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onFocus\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onFocus\"]>",
       "required": false
     },
     "onFocusCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onFocusCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onFocusCapture\"]>",
       "required": false
     },
     "onGotPointerCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onGotPointerCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onGotPointerCapture\"]>",
       "required": false
     },
     "onGotPointerCaptureCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onGotPointerCaptureCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onGotPointerCaptureCapture\"]\n>",
       "required": false
     },
     "onInput": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInput\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onInput\"]>",
       "required": false
     },
     "onInputCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInputCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onInputCapture\"]>",
       "required": false
     },
     "onInvalid": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInvalid\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onInvalid\"]>",
       "required": false
     },
     "onInvalidCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onInvalidCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onInvalidCapture\"]>",
       "required": false
     },
     "onKeyDown": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyDown\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onKeyDown\"]>",
       "required": false
     },
     "onKeyDownCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyDownCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onKeyDownCapture\"]>",
       "required": false
     },
     "onKeyPress": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyPress\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onKeyPress\"]>",
       "required": false
     },
     "onKeyPressCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyPressCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onKeyPressCapture\"]>",
       "required": false
     },
     "onKeyUp": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyUp\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onKeyUp\"]>",
       "required": false
     },
     "onKeyUpCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onKeyUpCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onKeyUpCapture\"]>",
       "required": false
     },
     "onLoad": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoad\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoad\"]>",
       "required": false
     },
     "onLoadCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoadCapture\"]>",
       "required": false
     },
     "onLoadedData": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedData\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoadedData\"]>",
       "required": false
     },
     "onLoadedDataCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedDataCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoadedDataCapture\"]>",
       "required": false
     },
     "onLoadedMetadata": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedMetadata\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoadedMetadata\"]>",
       "required": false
     },
     "onLoadedMetadataCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadedMetadataCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onLoadedMetadataCapture\"]\n>",
       "required": false
     },
     "onLoadStart": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadStart\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoadStart\"]>",
       "required": false
     },
     "onLoadStartCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLoadStartCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLoadStartCapture\"]>",
       "required": false
     },
     "onLostPointerCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLostPointerCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onLostPointerCapture\"]>",
       "required": false
     },
     "onLostPointerCaptureCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onLostPointerCaptureCapture\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"onLostPointerCaptureCapture\"]\n>",
       "required": false
     },
     "onMouseDown": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseDown\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseDown\"]>",
       "required": false
     },
     "onMouseDownCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseDownCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseDownCapture\"]>",
       "required": false
     },
     "onMouseEnter": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseEnter\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseEnter\"]>",
       "required": false
     },
     "onMouseLeave": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseLeave\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseLeave\"]>",
       "required": false
     },
     "onMouseMove": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseMove\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseMove\"]>",
       "required": false
     },
     "onMouseMoveCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseMoveCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseMoveCapture\"]>",
       "required": false
     },
     "onMouseOut": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOut\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseOut\"]>",
       "required": false
     },
     "onMouseOutCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOutCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseOutCapture\"]>",
       "required": false
     },
     "onMouseOver": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOver\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseOver\"]>",
       "required": false
     },
     "onMouseOverCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseOverCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseOverCapture\"]>",
       "required": false
     },
     "onMouseUp": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseUp\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseUp\"]>",
       "required": false
     },
     "onMouseUpCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onMouseUpCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onMouseUpCapture\"]>",
       "required": false
     },
     "onPaste": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPaste\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPaste\"]>",
       "required": false
     },
     "onPasteCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPasteCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPasteCapture\"]>",
       "required": false
     },
     "onPause": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPause\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPause\"]>",
       "required": false
     },
     "onPauseCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPauseCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPauseCapture\"]>",
       "required": false
     },
     "onPlay": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlay\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPlay\"]>",
       "required": false
     },
     "onPlayCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlayCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPlayCapture\"]>",
       "required": false
     },
     "onPlaying": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlaying\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPlaying\"]>",
       "required": false
     },
     "onPlayingCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPlayingCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPlayingCapture\"]>",
       "required": false
     },
     "onPointerCancel": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerCancel\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerCancel\"]>",
       "required": false
     },
     "onPointerCancelCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerCancelCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerCancelCapture\"]>",
       "required": false
     },
     "onPointerDown": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerDown\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerDown\"]>",
       "required": false
     },
     "onPointerDownCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerDownCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerDownCapture\"]>",
       "required": false
     },
     "onPointerEnter": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerEnter\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerEnter\"]>",
       "required": false
     },
     "onPointerEnterCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerEnterCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerEnterCapture\"]>",
       "required": false
     },
     "onPointerLeave": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerLeave\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerLeave\"]>",
       "required": false
     },
     "onPointerLeaveCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerLeaveCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerLeaveCapture\"]>",
       "required": false
     },
     "onPointerMove": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerMove\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerMove\"]>",
       "required": false
     },
     "onPointerMoveCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerMoveCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerMoveCapture\"]>",
       "required": false
     },
     "onPointerOut": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOut\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerOut\"]>",
       "required": false
     },
     "onPointerOutCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOutCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerOutCapture\"]>",
       "required": false
     },
     "onPointerOver": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOver\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerOver\"]>",
       "required": false
     },
     "onPointerOverCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerOverCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerOverCapture\"]>",
       "required": false
     },
     "onPointerUp": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerUp\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerUp\"]>",
       "required": false
     },
     "onPointerUpCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onPointerUpCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerUpCapture\"]>",
       "required": false
     },
     "onProgress": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onProgress\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onProgress\"]>",
       "required": false
     },
     "onProgressCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onProgressCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onProgressCapture\"]>",
       "required": false
     },
     "onRateChange": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onRateChange\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onRateChange\"]>",
       "required": false
     },
     "onRateChangeCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onRateChangeCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onRateChangeCapture\"]>",
       "required": false
     },
     "onReset": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onReset\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onReset\"]>",
       "required": false
     },
     "onResetCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onResetCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onResetCapture\"]>",
       "required": false
     },
     "onResize": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onResize\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onResize\"]>",
       "required": false
     },
     "onResizeCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onResizeCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onResizeCapture\"]>",
       "required": false
     },
     "onScroll": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onScroll\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onScroll\"]>",
       "required": false
     },
     "onScrollCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onScrollCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onScrollCapture\"]>",
       "required": false
     },
     "onSeeked": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeeked\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSeeked\"]>",
       "required": false
     },
     "onSeekedCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeekedCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSeekedCapture\"]>",
       "required": false
     },
     "onSeeking": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeeking\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSeeking\"]>",
       "required": false
     },
     "onSeekingCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSeekingCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSeekingCapture\"]>",
       "required": false
     },
     "onSelect": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSelect\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSelect\"]>",
       "required": false
     },
     "onSelectCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSelectCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSelectCapture\"]>",
       "required": false
     },
     "onStalled": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onStalled\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onStalled\"]>",
       "required": false
     },
     "onStalledCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onStalledCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onStalledCapture\"]>",
       "required": false
     },
     "onSubmit": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSubmit\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSubmit\"]>",
       "required": false
     },
     "onSubmitCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSubmitCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSubmitCapture\"]>",
       "required": false
     },
     "onSuspend": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSuspend\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSuspend\"]>",
       "required": false
     },
     "onSuspendCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onSuspendCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onSuspendCapture\"]>",
       "required": false
     },
     "onTimeUpdate": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTimeUpdate\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTimeUpdate\"]>",
       "required": false
     },
     "onTimeUpdateCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTimeUpdateCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTimeUpdateCapture\"]>",
       "required": false
     },
     "onTouchCancel": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchCancel\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchCancel\"]>",
       "required": false
     },
     "onTouchCancelCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchCancelCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchCancelCapture\"]>",
       "required": false
     },
     "onTouchEnd": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchEnd\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchEnd\"]>",
       "required": false
     },
     "onTouchEndCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchEndCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchEndCapture\"]>",
       "required": false
     },
     "onTouchMove": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchMove\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchMove\"]>",
       "required": false
     },
     "onTouchMoveCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchMoveCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchMoveCapture\"]>",
       "required": false
     },
     "onTouchStart": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchStart\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchStart\"]>",
       "required": false
     },
     "onTouchStartCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTouchStartCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTouchStartCapture\"]>",
       "required": false
     },
     "onTransitionEnd": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTransitionEnd\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTransitionEnd\"]>",
       "required": false
     },
     "onTransitionEndCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onTransitionEndCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onTransitionEndCapture\"]>",
       "required": false
     },
     "onVolumeChange": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onVolumeChange\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onVolumeChange\"]>",
       "required": false
     },
     "onVolumeChangeCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onVolumeChangeCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onVolumeChangeCapture\"]>",
       "required": false
     },
     "onWaiting": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWaiting\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onWaiting\"]>",
       "required": false
     },
     "onWaitingCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWaitingCapture\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onWaitingCapture\"]>",
       "required": false
     },
     "onWheel": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWheel\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onWheel\"]>",
       "required": false
     },
     "onWheelCapture": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWheelCapture\"]\n>",
-      "required": false
-    },
-    "placeholder": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"placeholder\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"onWheelCapture\"]>",
       "required": false
     },
     "prefix": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"prefix\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"prefix\"]>",
       "required": false
     },
     "property": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"property\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"property\"]>",
       "required": false
     },
     "radioGroup": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"radioGroup\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"radioGroup\"]>",
       "required": false
     },
     "rel": {
-      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"rel\"]>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"rel\"]>",
       "required": false
     },
     "resource": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"resource\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"resource\"]>",
       "required": false
     },
     "results": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"results\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"results\"]>",
       "required": false
     },
     "rev": {
-      "type": "NonNullable<UnwrapFactoryAttributes<ReactHTML[Y]>[\"rev\"]>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"rev\"]>",
       "required": false
     },
     "role": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"role\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"role\"]>",
       "required": false
     },
     "security": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"security\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"security\"]>",
       "required": false
     },
     "slot": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"slot\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"slot\"]>",
       "required": false
     },
     "spellCheck": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"spellCheck\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"spellCheck\"]>",
       "required": false
     },
     "suppressContentEditableWarning": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"suppressContentEditableWarning\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"suppressContentEditableWarning\"]\n>",
       "required": false
     },
     "suppressHydrationWarning": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"suppressHydrationWarning\"]\n>",
+      "type": "NonNullable<\n  HTMLMotionProps<Y>[\"suppressHydrationWarning\"]\n>",
       "required": false
     },
     "tabIndex": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"tabIndex\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"tabIndex\"]>",
       "required": false
     },
     "title": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"title\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"title\"]>",
       "required": false
     },
     "translate": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"translate\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"translate\"]>",
       "required": false
     },
     "typeof": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"typeof\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"typeof\"]>",
       "required": false
     },
     "unselectable": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"unselectable\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"unselectable\"]>",
       "required": false
     },
     "vocab": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"vocab\"]\n>",
+      "type": "NonNullable<HTMLMotionProps<Y>[\"vocab\"]>",
       "required": false
     }
   }

@@ -24,11 +24,11 @@ export const RatingGroup = forwardRef<RatingGroupProps, "div">(
     return (
       <Motion
         className={cx("ui-rating__group", className)}
-        whileTap={{ y: -4 }}
-        {...(getGroupProps({ value: groupValue }, ref) as MotionProps<"div">)}
-        {...rest}
-        {...computedGroupProps}
         __css={css}
+        {...getGroupProps(
+          { value: groupValue, ...computedGroupProps, ...rest },
+          ref,
+        )}
       >
         {Array(items)
           .fill(0)

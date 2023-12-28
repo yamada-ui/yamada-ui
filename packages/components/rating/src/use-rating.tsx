@@ -4,9 +4,10 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
+import type { RequiredMotionPropGetter } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { Dict, PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
+import type { Dict, PropGetter } from "@yamada-ui/utils"
 import {
   clampNumber,
   createContext,
@@ -52,7 +53,7 @@ type ItemProps = OmittedItemProps | ((value: number) => OmittedItemProps)
 type InputProps = OmittedInputProps | ((value: number) => OmittedInputProps)
 
 type RatingContext = {
-  getGroupProps: RequiredPropGetter<{ value: number }>
+  getGroupProps: RequiredMotionPropGetter<{ value: number }>
   id: string
   name: string
   value: number
@@ -294,7 +295,7 @@ export const useRating = ({
     ],
   )
 
-  const getGroupProps: RequiredPropGetter<{
+  const getGroupProps: RequiredMotionPropGetter<{
     value: number
   }> = useCallback(
     ({ value, ...props }, ref = null) => {
@@ -302,12 +303,13 @@ export const useRating = ({
 
       return {
         ref,
+        whileTap: !disabled && !readOnly ? { y: -4 } : undefined,
         ...props,
         tabIndex: -1,
         "data-active": dataAttr(isActive),
       }
     },
-    [hoveredValue, readOnly],
+    [disabled, hoveredValue, readOnly],
   )
 
   const children = Array(resolvedItems)

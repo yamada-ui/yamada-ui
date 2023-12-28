@@ -221,7 +221,12 @@ return <Rating value={value} onChange={onChange} />
 ```tsx functional=true
 type Data = { rating: boolean }
 
-const { control, handleSubmit, watch } = useForm<Data>()
+const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<Data>()
 
 const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 

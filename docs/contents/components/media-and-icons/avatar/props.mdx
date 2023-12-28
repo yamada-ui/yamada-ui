@@ -41,6 +41,16 @@ tab: Props
 />
 
 <PropsCard
+  id="avatar-ignorefallback"
+  name="ignoreFallback"
+  type="boolean"
+  description={
+    "If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="avatar-loading"
   name="loading"
   type='"eager" | "lazy"'
@@ -102,6 +112,16 @@ tab: Props
 />
 
 ### AvatarBadgeProps
+
+<PropsCard
+  id="avatarbadge-ping"
+  name="ping"
+  type="boolean"
+  description={
+    "If `true`, make an element scale and fade like a radar ping or ripple of water."
+  }
+  defaultValue={"false"}
+/>
 
 <PropsCard
   id="avatarbadge-pingcolor"

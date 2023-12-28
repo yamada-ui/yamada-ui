@@ -28,6 +28,22 @@ tab: Props
 />
 
 <PropsCard
+  id="indicator-inline"
+  name="inline"
+  type="UIValue<boolean>"
+  description={"If `true`, set the indicator as an inline element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="indicator-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the indicator will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="indicator-label"
   name="label"
   type="type ONLY_FOR_FORMAT =
@@ -56,6 +72,16 @@ tab: Props
   type="number"
   description={"If `label` is of type number, the maximum number displayed."}
   defaultValue={"99"}
+/>
+
+<PropsCard
+  id="indicator-ping"
+  name="ping"
+  type="boolean"
+  description={
+    "If `true`, make an element scale and fade like a radar ping or ripple of water."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -106,6 +132,14 @@ tab: Props
 />
 
 <PropsCard
+  id="indicator-showzero"
+  name="showZero"
+  type="boolean"
+  description={"If `true`, display 0."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="indicator-size"
   name="size"
   type='"sm" | "md" | "lg"'
@@ -119,4 +153,12 @@ tab: Props
   type='"solid" | "subtle"'
   description={"The variant of the Indicator."}
   defaultValue={"solid"}
+/>
+
+<PropsCard
+  id="indicator-withborder"
+  name="withBorder"
+  type="boolean"
+  description={"If `true`, display the border of the indicator."}
+  defaultValue={"false"}
 />

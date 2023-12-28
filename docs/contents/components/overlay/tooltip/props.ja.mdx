@@ -19,6 +19,46 @@ tab: Props
 />
 
 <PropsCard
+  id="tooltip-closeonclick"
+  name="closeOnClick"
+  type="boolean"
+  description={"If `true`, the tooltip will hide on click."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tooltip-closeonesc"
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the tooltip will hide on pressing Esc key."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tooltip-closeonmousedown"
+  name="closeOnMouseDown"
+  type="boolean"
+  description={"If `true`, the tooltip will hide while the mouse is down."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tooltip-closeonpointerdown"
+  name="closeOnPointerDown"
+  type="boolean"
+  description={"If `true`, the tooltip will hide while the pointer is down."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tooltip-closeonscroll"
+  name="closeOnScroll"
+  type="boolean"
+  description={"If `true`, the tooltip will hide on scroll."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="tooltip-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
@@ -40,6 +80,14 @@ tab: Props
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
   defaultValue={"8"}
+/>
+
+<PropsCard
+  id="tooltip-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the tooltip will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard

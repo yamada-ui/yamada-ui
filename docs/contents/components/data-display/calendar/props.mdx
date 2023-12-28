@@ -262,6 +262,14 @@ tab: Props
 />
 
 <PropsCard
+  id="calendar-today"
+  name="today"
+  type="boolean"
+  description={"If `true`, highlight today."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="calendar-type"
   name="type"
   type='"date" | "month" | "year"'
@@ -316,6 +324,38 @@ tab: Props
   type="number[]"
   description={"Define weekend days."}
   defaultValue={"'[0, 6]'"}
+/>
+
+<PropsCard
+  id="calendar-withcontrols"
+  name="withControls"
+  type="boolean"
+  description={"If `true`, display the calendar control buttons."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="calendar-withheader"
+  name="withHeader"
+  type="boolean"
+  description={"If `true`, display the calendar header."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="calendar-withlabel"
+  name="withLabel"
+  type="boolean"
+  description={"If `true`, display the calendar label button."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="calendar-withweekdays"
+  name="withWeekdays"
+  type="boolean"
+  description={"If `true`, display the calendar weekdays."}
+  defaultValue={"true"}
 />
 
 <PropsCard

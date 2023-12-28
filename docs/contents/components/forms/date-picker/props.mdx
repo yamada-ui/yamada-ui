@@ -11,6 +11,24 @@ tab: Props
 ### DatePickerProps
 
 <PropsCard
+  id="datepicker-allowinput"
+  name="allowInput"
+  type="boolean"
+  description={"If `true`, allows input."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-allowinputbeyond"
+  name="allowInputBeyond"
+  type="boolean"
+  description={
+    "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="datepicker-amountofmonths"
   name="amountOfMonths"
   type="number"
@@ -66,6 +84,34 @@ tab: Props
   name="clearIconProps"
   type="DatePickerIconProps"
   description={"Props for date picker clear icon element."}
+/>
+
+<PropsCard
+  id="datepicker-closeonblur"
+  name="closeOnBlur"
+  type="boolean"
+  description={
+    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-closeonesc"
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the popover will close when you hit the `Esc` key."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-closeonselect"
+  name="closeOnSelect"
+  type="boolean"
+  description={
+    "If `true`, the list element will be closed when value is selected."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -144,6 +190,18 @@ tab: Props
 />
 
 <PropsCard
+  id="datepicker-eventlisteners"
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="datepicker-excludedate"
   name="excludeDate"
   type="(date: Date) => boolean"
@@ -158,6 +216,16 @@ tab: Props
   type='"sunday" | "monday"'
   description={"Define the first day of the week."}
   defaultValue={"'monday'"}
+/>
+
+<PropsCard
+  id="datepicker-flip"
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -210,6 +278,56 @@ tab: Props
 />
 
 <PropsCard
+  id="datepicker-isclearable"
+  name="isClearable"
+  type="boolean"
+  description={"If `true`, display the date picker clear icon."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="datepicker-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="datepicker-islazy"
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="datepicker-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="datepicker-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="datepicker-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
@@ -228,6 +346,16 @@ tab: Props
   }
   defaultValue={"'en'"}
   docs="https://day.js.org/docs/en/i18n/instance-locale"
+/>
+
+<PropsCard
+  id="datepicker-matchwidth"
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -367,6 +495,16 @@ tab: Props
 />
 
 <PropsCard
+  id="datepicker-preventoverflow"
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="datepicker-selectmonthwith"
   name="selectMonthWith"
   type='"value" | "month"'
@@ -386,6 +524,14 @@ tab: Props
   type='"fixed" | "absolute"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
+/>
+
+<PropsCard
+  id="datepicker-today"
+  name="today"
+  type="boolean"
+  description={"If `true`, highlight today."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -427,6 +573,38 @@ tab: Props
   type="number[]"
   description={"Define weekend days."}
   defaultValue={"'[0, 6]'"}
+/>
+
+<PropsCard
+  id="datepicker-withcontrols"
+  name="withControls"
+  type="boolean"
+  description={"If `true`, display the calendar control buttons."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-withheader"
+  name="withHeader"
+  type="boolean"
+  description={"If `true`, display the calendar header."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-withlabel"
+  name="withLabel"
+  type="boolean"
+  description={"If `true`, display the calendar label button."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="datepicker-withweekdays"
+  name="withWeekdays"
+  type="boolean"
+  description={"If `true`, display the calendar weekdays."}
+  defaultValue={"true"}
 />
 
 <PropsCard

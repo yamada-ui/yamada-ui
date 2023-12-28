@@ -55,6 +55,16 @@ tab: Props
 />
 
 <PropsCard
+  id="slidefade-reverse"
+  name="reverse"
+  type="boolean"
+  description={
+    "If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="slidefade-transition"
   name="transition"
   type='Partial<Record<"exit" | "enter", Transition>>'

@@ -19,6 +19,14 @@ tab: Props
 />
 
 <PropsCard
+  id="carousel-autoplay"
+  name="autoplay"
+  type="UIValue<boolean>"
+  description={"If `true`, the carousel will be autoplay."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="carousel-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
@@ -73,6 +81,34 @@ tab: Props
 />
 
 <PropsCard
+  id="carousel-dragfree"
+  name="dragFree"
+  type="UIValue<boolean>"
+  description={"If `true`, momentum scrolling will be enabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="carousel-draggable"
+  name="draggable"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, carousel can be scrolled with mouse and touch interactions."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="carousel-includegapinsize"
+  name="includeGapInSize"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, gap will be treated as part of the carousel slide size."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="carousel-index"
   name="index"
   type="number"
@@ -101,6 +137,16 @@ tab: Props
     "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
   }
   defaultValue={"0"}
+/>
+
+<PropsCard
+  id="carousel-loop"
+  name="loop"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -136,6 +182,16 @@ tab: Props
 />
 
 <PropsCard
+  id="carousel-skipsnaps"
+  name="skipSnaps"
+  type="UIValue<boolean>"
+  description={
+    "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="carousel-slidesize"
   name="slideSize"
   type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 60 more ... | "9xl">'
@@ -163,10 +219,34 @@ tab: Props
 />
 
 <PropsCard
+  id="carousel-stopmouseenterautoplay"
+  name="stopMouseEnterAutoplay"
+  type="UIValue<boolean>"
+  description={"If `true`, autoplay will pause when the mouse entries over."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="carousel-variant"
   name="variant"
   type="string"
   description={"The variant of the Carousel."}
+/>
+
+<PropsCard
+  id="carousel-withcontrols"
+  name="withControls"
+  type="UIValue<boolean>"
+  description={"If `true`, display the carousel control buttons."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="carousel-withindicators"
+  name="withIndicators"
+  type="UIValue<boolean>"
+  description={"If `true`, display the carousel indicator buttons."}
+  defaultValue={"true"}
 />
 
 ### CarouselSlideProps
@@ -183,10 +263,52 @@ tab: Props
 ### CarouselControlProps
 
 <PropsCard
+  id="carouselcontrol-disableripple"
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="carouselcontrol-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to be used in the button."}
+/>
+
+<PropsCard
+  id="carouselcontrol-isactive"
+  name="isActive"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="carouselcontrol-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the button is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="carouselcontrol-isloading"
+  name="isLoading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="carouselcontrol-isrounded"
+  name="isRounded"
+  type="boolean"
+  description={
+    "If `true`, the button will be perfectly round. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
 />
 
 ### CarouselIndicatorsProps

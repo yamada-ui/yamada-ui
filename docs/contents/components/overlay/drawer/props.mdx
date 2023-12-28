@@ -29,6 +29,32 @@ tab: Props
 />
 
 <PropsCard
+  id="drawer-blockscrollonmount"
+  name="blockScrollOnMount"
+  type="boolean"
+  description={
+    "If `true`, scrolling will be disabled on the `body` when the modal opens."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="drawer-closeonesc"
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the modal will close when the `Esc` key is pressed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="drawer-closeonoverlay"
+  name="closeOnOverlay"
+  type="boolean"
+  description={"If `true`, the modal will close when the overlay is clicked."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="drawer-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
@@ -65,6 +91,16 @@ tab: Props
   description={
     "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh)."
   }
+/>
+
+<PropsCard
+  id="drawer-lockfocusacrossframes"
+  name="lockFocusAcrossFrames"
+  type="boolean"
+  description={
+    "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -124,6 +160,16 @@ tab: Props
 />
 
 <PropsCard
+  id="drawer-restorefocus"
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="drawer-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl" | "full"'
@@ -136,4 +182,20 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Drawer."}
+/>
+
+<PropsCard
+  id="drawer-withclosebutton"
+  name="withCloseButton"
+  type="boolean"
+  description={"If `true`, display the modal close button."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="drawer-withoverlay"
+  name="withOverlay"
+  type="boolean"
+  description={"If `true`, display the modal overlay."}
+  defaultValue={"true"}
 />

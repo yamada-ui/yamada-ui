@@ -12,6 +12,16 @@ tab: Props
 ### FocusLockProps
 
 <PropsCard
+  id="focuslock-autofocus"
+  name="autoFocus"
+  type="boolean"
+  description={
+    "If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="focuslock-contentref"
   name="contentRef"
   type="RefObject<HTMLElement>"
@@ -32,4 +42,42 @@ tab: Props
   name="initialFocusRef"
   type="RefObject<FocusableElement>"
   description={"`ref` of the element to receive focus initially."}
+/>
+
+<PropsCard
+  id="focuslock-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, focus trapping will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="focuslock-lockfocusacrossframes"
+  name="lockFocusAcrossFrames"
+  type="boolean"
+  description={
+    "Enables aggressive focus capturing within iframes.\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`:  allows focus to move outside of iframe."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="focuslock-persistentfocus"
+  name="persistentFocus"
+  type="boolean"
+  description={
+    "If `true`, disables text selections inside, and outside focus lock."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="focuslock-restorefocus"
+  name="restoreFocus"
+  type="boolean"
+  description={
+    "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts."
+  }
+  defaultValue={"false"}
 />

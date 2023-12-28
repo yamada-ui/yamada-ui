@@ -42,6 +42,16 @@ tab: Props
 />
 
 <PropsCard
+  id="slider-focusthumbonchange"
+  name="focusThumbOnChange"
+  type="boolean"
+  description={
+    "If `false`, the slider handle will not capture focus when value changes."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="slider-id"
   name="id"
   type="string"
@@ -53,6 +63,38 @@ tab: Props
   name="inputProps"
   type='HTMLUIProps<"input">'
   description={"Props for slider input element."}
+/>
+
+<PropsCard
+  id="slider-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="slider-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="slider-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="slider-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

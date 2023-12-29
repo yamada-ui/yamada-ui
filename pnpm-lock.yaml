@@ -597,6 +597,9 @@ importers:
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
       '@yamada-ui/popover':
         specifier: workspace:*
         version: link:../popover
@@ -1261,6 +1264,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
       '@yamada-ui/popover':
         specifier: workspace:*
         version: link:../popover
@@ -1735,6 +1741,9 @@ importers:
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
       '@yamada-ui/popover':
         specifier: workspace:*
         version: link:../popover
@@ -4333,6 +4342,11 @@ packages:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==, tarball: https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz}
     engines: {node: '>=8'}
 
+  /ansi-regex@6.0.1:
+    resolution: {integrity: sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==, tarball: https://registry.npmjs.org/ansi-regex/-/ansi-regex-6.0.1.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
   /ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-3.2.1.tgz}
     engines: {node: '>=4'}
@@ -4348,6 +4362,11 @@ packages:
   /ansi-styles@5.2.0:
     resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz}
     engines: {node: '>=10'}
+
+  /ansi-styles@6.2.1:
+    resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-6.2.1.tgz}
+    engines: {node: '>=12'}
+    dev: false
 
   /aria-query@5.1.3:
     resolution: {integrity: sha512-R5iJ5lkuHybztUfuOAznmboyjWq8O6sqNqtK7CLOqdydi54VNbORp49mb14KbWgG1QD3JFO9hJdZ+y4KutfdOQ==, tarball: https://registry.npmjs.org/aria-query/-/aria-query-5.1.3.tgz}
@@ -4515,6 +4534,10 @@ packages:
 
   /electron-to-chromium@1.4.616:
     resolution: {integrity: sha512-1n7zWYh8eS0L9Uy+GskE0lkBUNK83cXTVJI0pU3mGprFsbfSdAc15VTFbo+A+Bq4pwstmL30AVcEU3Fo463lNg==, tarball: https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.616.tgz}
+
+  /emoji-regex@10.3.0:
+    resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.3.0.tgz}
+    dev: false
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz}
@@ -4746,6 +4769,18 @@ packages:
   /is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==, tarball: https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz}
     engines: {node: '>=8'}
+
+  /is-fullwidth-code-point@4.0.0:
+    resolution: {integrity: sha512-O4L094N2/dZ7xqVdrXhh9r1KODPJpFms8B5sGdJLPy664AgvXsreZUyCQQNItZRDlYug4xStLjNp/sz3HvBowQ==, tarball: https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-4.0.0.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
+  /is-fullwidth-code-point@5.0.0:
+    resolution: {integrity: sha512-OVa3u9kkBbw7b8Xw5F9P+D/T9X+Z4+JruYVNapTjPYZYUznQ5YfWeFkOj606XYYW8yugTfC8Pj0hYqvi4ryAhA==, tarball: https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-5.0.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      get-east-asian-width: registry.npmjs.org/get-east-asian-width@1.2.0
+    dev: false
 
   /is-map@2.0.2:
     resolution: {integrity: sha512-cOZFQQozTha1f4MxLFzlgKYPTyj26picdZTx82hbc/Xf4K/tZOOXSCkMvU4pKioRXGDLJRn0GM7Upe7kR721yg==, tarball: https://registry.npmjs.org/is-map/-/is-map-2.0.2.tgz}
@@ -5047,11 +5082,27 @@ packages:
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
 
+  /string-width@7.0.0:
+    resolution: {integrity: sha512-GPQHj7row82Hjo9hKZieKcHIhaAIKOJvFSIZXuCU9OASVZrMNUaZuz++SPVrBjnLsnk4k+z9f2EIypgxf2vNFw==, tarball: https://registry.npmjs.org/string-width/-/string-width-7.0.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      emoji-regex: 10.3.0
+      get-east-asian-width: registry.npmjs.org/get-east-asian-width@1.2.0
+      strip-ansi: 7.1.0
+    dev: false
+
   /strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==, tarball: https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz}
     engines: {node: '>=8'}
     dependencies:
       ansi-regex: 5.0.1
+
+  /strip-ansi@7.1.0:
+    resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==, tarball: https://registry.npmjs.org/strip-ansi/-/strip-ansi-7.1.0.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      ansi-regex: 6.0.1
+    dev: false
 
   /stylis@4.2.0:
     resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==, tarball: https://registry.npmjs.org/stylis/-/stylis-4.2.0.tgz}
@@ -8372,7 +8423,7 @@ packages:
       jest-worker: registry.npmjs.org/jest-worker@29.7.0
       slash: registry.npmjs.org/slash@3.0.0
       string-length: registry.npmjs.org/string-length@4.0.2
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      strip-ansi: 6.0.1
       v8-to-istanbul: registry.npmjs.org/v8-to-istanbul@9.2.0
     transitivePeerDependencies:
       - supports-color
@@ -13757,7 +13808,7 @@ packages:
     engines: {node: '>=18'}
     dependencies:
       slice-ansi: registry.npmjs.org/slice-ansi@5.0.0
-      string-width: registry.npmjs.org/string-width@7.0.0
+      string-width: 7.0.0
     dev: false
 
   registry.npmjs.org/cli-welcome@2.2.2:
@@ -13787,8 +13838,8 @@ packages:
     name: cliui
     version: 6.0.0
     dependencies:
-      string-width: registry.npmjs.org/string-width@4.2.3
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
       wrap-ansi: registry.npmjs.org/wrap-ansi@6.2.0
     dev: false
 
@@ -13797,8 +13848,8 @@ packages:
     name: cliui
     version: 7.0.4
     dependencies:
-      string-width: registry.npmjs.org/string-width@4.2.3
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
       wrap-ansi: registry.npmjs.org/wrap-ansi@7.0.0
 
   registry.npmjs.org/cliui@8.0.1:
@@ -18390,8 +18441,8 @@ packages:
       ora: registry.npmjs.org/ora@5.4.1
       run-async: registry.npmjs.org/run-async@3.0.0
       rxjs: registry.npmjs.org/rxjs@7.8.1
-      string-width: registry.npmjs.org/string-width@4.2.3
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
       wrap-ansi: registry.npmjs.org/wrap-ansi@6.2.0
     dev: false
 
@@ -18605,22 +18656,6 @@ packages:
     name: is-fullwidth-code-point
     version: 3.0.0
     engines: {node: '>=8'}
-
-  registry.npmjs.org/is-fullwidth-code-point@4.0.0:
-    resolution: {integrity: sha512-O4L094N2/dZ7xqVdrXhh9r1KODPJpFms8B5sGdJLPy664AgvXsreZUyCQQNItZRDlYug4xStLjNp/sz3HvBowQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-4.0.0.tgz}
-    name: is-fullwidth-code-point
-    version: 4.0.0
-    engines: {node: '>=12'}
-    dev: false
-
-  registry.npmjs.org/is-fullwidth-code-point@5.0.0:
-    resolution: {integrity: sha512-OVa3u9kkBbw7b8Xw5F9P+D/T9X+Z4+JruYVNapTjPYZYUznQ5YfWeFkOj606XYYW8yugTfC8Pj0hYqvi4ryAhA==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-5.0.0.tgz}
-    name: is-fullwidth-code-point
-    version: 5.0.0
-    engines: {node: '>=18'}
-    dependencies:
-      get-east-asian-width: registry.npmjs.org/get-east-asian-width@1.2.0
-    dev: false
 
   registry.npmjs.org/is-generator-fn@2.1.0:
     resolution: {integrity: sha512-cTIB4yPYL/Grw0EaSzASzg6bBy9gqCofvWN8okThAYIxKJZC+udlRAmGbM0XLeniEJSs8uEgHPGuHSe1XsOLSQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/is-generator-fn/-/is-generator-fn-2.1.0.tgz}
@@ -20911,7 +20946,7 @@ packages:
       ansi-escapes: registry.npmjs.org/ansi-escapes@6.2.0
       cli-cursor: registry.npmjs.org/cli-cursor@4.0.0
       slice-ansi: registry.npmjs.org/slice-ansi@7.1.0
-      strip-ansi: registry.npmjs.org/strip-ansi@7.1.0
+      strip-ansi: 7.1.0
       wrap-ansi: registry.npmjs.org/wrap-ansi@9.0.0
     dev: false
 
@@ -25011,7 +25046,7 @@ packages:
       dom-converter: registry.npmjs.org/dom-converter@0.2.0
       htmlparser2: registry.npmjs.org/htmlparser2@6.1.0
       lodash: registry.npmjs.org/lodash@4.17.21
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      strip-ansi: 6.0.1
 
   registry.npmjs.org/require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz}
@@ -25702,8 +25737,8 @@ packages:
     version: 5.0.0
     engines: {node: '>=12'}
     dependencies:
-      ansi-styles: registry.npmjs.org/ansi-styles@6.2.1
-      is-fullwidth-code-point: registry.npmjs.org/is-fullwidth-code-point@4.0.0
+      ansi-styles: 6.2.1
+      is-fullwidth-code-point: 4.0.0
     dev: false
 
   registry.npmjs.org/slice-ansi@7.1.0:
@@ -25712,8 +25747,8 @@ packages:
     version: 7.1.0
     engines: {node: '>=18'}
     dependencies:
-      ansi-styles: registry.npmjs.org/ansi-styles@6.2.1
-      is-fullwidth-code-point: registry.npmjs.org/is-fullwidth-code-point@5.0.0
+      ansi-styles: 6.2.1
+      is-fullwidth-code-point: 5.0.0
     dev: false
 
   registry.npmjs.org/smartwrap@2.0.2:
@@ -26069,7 +26104,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       char-regex: registry.npmjs.org/char-regex@1.0.2
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      strip-ansi: 6.0.1
 
   registry.npmjs.org/string-length@5.0.1:
     resolution: {integrity: sha512-9Ep08KAMUn0OadnVaBuRdE2l615CQ508kr0XMadjClfYpdCyvrbFp6Taebo8yyxokQ4viUd/xPPUA4FGgUa0ow==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/string-length/-/string-length-5.0.1.tgz}
@@ -26113,7 +26148,7 @@ packages:
     dependencies:
       emoji-regex: registry.npmjs.org/emoji-regex@10.3.0
       get-east-asian-width: registry.npmjs.org/get-east-asian-width@1.2.0
-      strip-ansi: registry.npmjs.org/strip-ansi@7.1.0
+      strip-ansi: 7.1.0
     dev: false
 
   registry.npmjs.org/string.prototype.matchall@4.0.10:
@@ -28403,9 +28438,9 @@ packages:
     version: 6.2.0
     engines: {node: '>=8'}
     dependencies:
-      ansi-styles: registry.npmjs.org/ansi-styles@4.3.0
-      string-width: registry.npmjs.org/string-width@4.2.3
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      ansi-styles: 4.3.0
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
     dev: false
 
   registry.npmjs.org/wrap-ansi@7.0.0:
@@ -28414,9 +28449,9 @@ packages:
     version: 7.0.0
     engines: {node: '>=10'}
     dependencies:
-      ansi-styles: registry.npmjs.org/ansi-styles@4.3.0
-      string-width: registry.npmjs.org/string-width@4.2.3
-      strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
+      ansi-styles: 4.3.0
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
 
   registry.npmjs.org/wrap-ansi@8.1.0:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-8.1.0.tgz}
@@ -28434,9 +28469,9 @@ packages:
     version: 9.0.0
     engines: {node: '>=18'}
     dependencies:
-      ansi-styles: registry.npmjs.org/ansi-styles@6.2.1
-      string-width: registry.npmjs.org/string-width@7.0.0
-      strip-ansi: registry.npmjs.org/strip-ansi@7.1.0
+      ansi-styles: 6.2.1
+      string-width: 7.0.0
+      strip-ansi: 7.1.0
     dev: false
 
   registry.npmjs.org/wrappy@1.0.2:
@@ -28652,7 +28687,7 @@ packages:
       require-directory: registry.npmjs.org/require-directory@2.1.1
       require-main-filename: registry.npmjs.org/require-main-filename@2.0.0
       set-blocking: registry.npmjs.org/set-blocking@2.0.0
-      string-width: registry.npmjs.org/string-width@4.2.3
+      string-width: 4.2.3
       which-module: registry.npmjs.org/which-module@2.0.1
       y18n: registry.npmjs.org/y18n@4.0.3
       yargs-parser: registry.npmjs.org/yargs-parser@18.1.3
@@ -28668,7 +28703,7 @@ packages:
       escalade: registry.npmjs.org/escalade@3.1.1
       get-caller-file: registry.npmjs.org/get-caller-file@2.0.5
       require-directory: registry.npmjs.org/require-directory@2.1.1
-      string-width: registry.npmjs.org/string-width@4.2.3
+      string-width: 4.2.3
       y18n: registry.npmjs.org/y18n@5.0.8
       yargs-parser: registry.npmjs.org/yargs-parser@20.2.9
 

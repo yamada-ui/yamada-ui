@@ -263,7 +263,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   }
 }
 
-export const formControlProperties: any[] = [
+export const formControlBaseProperties = [
   "disabled",
   "required",
   "readOnly",
@@ -278,7 +278,30 @@ export const formControlProperties: any[] = [
   "_focus",
   "_invalid",
   "_focusVisible",
-]
+] as const
+
+export const formControlProperties =
+  formControlBaseProperties as unknown as any[]
+
+export const getFormControlProperties = ({
+  omit = [],
+  pick = [],
+}: {
+  omit?: (typeof formControlBaseProperties)[number][]
+  pick?: (typeof formControlBaseProperties)[number][]
+}) => {
+  let result = formControlProperties
+
+  if (pick.length) {
+    result = result.filter((property) => pick.includes(property))
+  }
+
+  if (omit.length) {
+    result = result.filter((property) => !omit.includes(property))
+  }
+
+  return result
+}
 
 type LabelOptions = {
   requiredIndicator?: ReactNode

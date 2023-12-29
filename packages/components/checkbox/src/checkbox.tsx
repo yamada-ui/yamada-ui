@@ -10,6 +10,7 @@ import {
   useFormControl,
   useFormControlProps,
   formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import type { SVGMotionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
@@ -188,7 +189,10 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...pickObject(
+        rest,
+        getFormControlProperties({ omit: ["aria-readonly"] }),
+      ),
       ...props,
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === "LABEL")
@@ -288,7 +292,10 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const getLabelProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...pickObject(
+        rest,
+        getFormControlProperties({ omit: ["aria-readonly"] }),
+      ),
       ...props,
       ref,
       "data-checked": dataAttr(checked),

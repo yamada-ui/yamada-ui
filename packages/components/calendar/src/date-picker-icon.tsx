@@ -8,7 +8,7 @@ import type { FC, HTMLAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { useDatePickerContext } from "./use-date-picker"
 
-export type DatePickerIconProps = HTMLUIProps<"div">
+export type DatePickerIconProps = Omit<HTMLUIProps<"div">, "clear">
 
 export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
   ({ className, children, __css, ...rest }, ref) => {

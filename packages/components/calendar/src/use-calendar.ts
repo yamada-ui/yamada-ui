@@ -1,7 +1,10 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  UIPropGetter,
+  RequiredUIPropGetter,
+} from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   isArray,
@@ -652,7 +655,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     }
   }, [type])
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...omitObject(rest, [
         "value",
@@ -869,7 +872,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     ],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}) => ({
       ...props,
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
@@ -877,76 +880,78 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     [onKeyDown],
   )
 
-  const getControlProps: RequiredPropGetter<{ operation: "prev" | "next" }> =
-    useCallback(
-      ({ operation, ...props } = {}) => {
-        const isPrev = operation === "prev"
+  const getControlProps: RequiredUIPropGetter<
+    "button",
+    { operation: "prev" | "next" }
+  > = useCallback(
+    ({ operation, ...props }) => {
+      const isPrev = operation === "prev"
 
-        const ariaLabel = `Go to ${isPrev ? "previous" : "next"} ${
-          type === "date" ? "month" : "year"
-        }`
+      const ariaLabel = `Go to ${isPrev ? "previous" : "next"} ${
+        type === "date" ? "month" : "year"
+      }`
 
-        const isHidden = (() => {
-          switch (type) {
-            case "year":
-              if (isPrev) {
-                return rangeYears[0] <= minYear
-              } else {
-                return maxYear <= rangeYears[rangeYears.length - 1]
-              }
+      const isHidden = (() => {
+        switch (type) {
+          case "year":
+            if (isPrev) {
+              return rangeYears[0] <= minYear
+            } else {
+              return maxYear <= rangeYears[rangeYears.length - 1]
+            }
 
-            case "month":
-              if (isPrev) {
-                return year <= minYear
-              } else {
-                return maxYear <= year
-              }
+          case "month":
+            if (isPrev) {
+              return year <= minYear
+            } else {
+              return maxYear <= year
+            }
 
-            default:
-              if (typeof index !== "number") return
+          default:
+            if (typeof index !== "number") return
 
-              if (isPrev) {
-                return (
-                  index !== 0 ||
-                  !isMonthInRange({ date: prevMonth, minDate, maxDate })
-                )
-              } else {
-                return (
-                  index + 1 !== amountOfMonths ||
-                  !isMonthInRange({ date: nextMonth, minDate, maxDate })
-                )
-              }
-          }
-        })()
-
-        return {
-          "aria-label": ariaLabel,
-          ...props,
-          onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
-          tabIndex: -1,
-          "data-hidden": dataAttr(isHidden),
-          "data-disabled": dataAttr(isHidden),
-          "aria-disabled": ariaAttr(isHidden),
+            if (isPrev) {
+              return (
+                index !== 0 ||
+                !isMonthInRange({ date: prevMonth, minDate, maxDate })
+              )
+            } else {
+              return (
+                index + 1 !== amountOfMonths ||
+                !isMonthInRange({ date: nextMonth, minDate, maxDate })
+              )
+            }
         }
-      },
-      [
-        amountOfMonths,
-        index,
-        maxDate,
-        maxYear,
-        minDate,
-        minYear,
-        nextMonth,
-        onNext,
-        onPrev,
-        prevMonth,
-        rangeYears,
-        type,
-        year,
-      ],
-    )
+      })()
 
-  const getLabelProps: PropGetter = useCallback(
+      return {
+        "aria-label": ariaLabel,
+        ...props,
+        onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
+        tabIndex: -1,
+        "data-hidden": dataAttr(isHidden),
+        "data-disabled": dataAttr(isHidden),
+        "aria-disabled": ariaAttr(isHidden),
+      }
+    },
+    [
+      amountOfMonths,
+      index,
+      maxDate,
+      maxYear,
+      minDate,
+      minYear,
+      nextMonth,
+      onNext,
+      onPrev,
+      prevMonth,
+      rangeYears,
+      type,
+      year,
+    ],
+  )
+
+  const getLabelProps: UIPropGetter<"button"> = useCallback(
     (props = {}) => {
       return {
         pointerEvents: type !== "year" ? "auto" : "none",
@@ -1086,7 +1091,7 @@ export const useYearList = () => {
     yearRefs.current.clear()
   })
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
       ...props,
@@ -1095,50 +1100,52 @@ export const useYearList = () => {
     [onKeyDown],
   )
 
-  const getButtonProps: RequiredPropGetter<{ value: number; index: number }> =
-    useCallback(
-      ({ value, index, ...props } = {}, ref = null) => {
-        const isControlled = typeof beforeInternalYear.current === "number"
-        const isSelected =
-          (selectMonthWith === "month"
-            ? year
-            : !isMulti
-              ? selectedValue?.getFullYear()
-              : selectedValue[0]?.getFullYear()) === value
-        const isDisabled = value < minYear || value > maxYear
+  const getButtonProps: RequiredUIPropGetter<
+    "button",
+    { value: number; index: number }
+  > = useCallback(
+    ({ value, index, ...props }, ref = null) => {
+      const isControlled = typeof beforeInternalYear.current === "number"
+      const isSelected =
+        (selectMonthWith === "month"
+          ? year
+          : !isMulti
+            ? selectedValue?.getFullYear()
+            : selectedValue[0]?.getFullYear()) === value
+      const isDisabled = value < minYear || value > maxYear
 
-        yearRefs.current.set(index, createRef<HTMLButtonElement>())
+      yearRefs.current.set(index, createRef<HTMLButtonElement>())
 
-        return {
-          isDisabled,
-          ref: mergeRefs(ref, yearRefs.current.get(index)),
-          ...props,
-          tabIndex: isControlled
-            ? -1
-            : !rangeYears.includes(year) && rangeYears[0] === value
+      return {
+        isDisabled,
+        ref: mergeRefs(ref, yearRefs.current.get(index)),
+        ...props,
+        tabIndex: isControlled
+          ? -1
+          : !rangeYears.includes(year) && rangeYears[0] === value
+            ? 0
+            : isSelected
               ? 0
-              : isSelected
-                ? 0
-                : -1,
-          "data-selected": dataAttr(isSelected),
-          "data-value": value ?? "",
-          "data-disabled": dataAttr(isDisabled),
-          "aria-disabled": ariaAttr(isDisabled),
-          onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
-        }
-      },
-      [
-        isMulti,
-        maxYear,
-        minYear,
-        onClick,
-        rangeYears,
-        selectMonthWith,
-        selectedValue,
-        year,
-        yearRefs,
-      ],
-    )
+              : -1,
+        "data-selected": dataAttr(isSelected),
+        "data-value": value ?? "",
+        "data-disabled": dataAttr(isDisabled),
+        "aria-disabled": ariaAttr(isDisabled),
+        onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
+      }
+    },
+    [
+      isMulti,
+      maxYear,
+      minYear,
+      onClick,
+      rangeYears,
+      selectMonthWith,
+      selectedValue,
+      year,
+      yearRefs,
+    ],
+  )
 
   return { rangeYears, getContainerProps, getButtonProps }
 }
@@ -1264,7 +1271,7 @@ export const useMonthList = () => {
     monthRefs.current.clear()
   })
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}) => ({
       ...props,
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
@@ -1272,60 +1279,61 @@ export const useMonthList = () => {
     [onKeyDown],
   )
 
-  const getButtonProps: RequiredPropGetter<{ value: number }> = useCallback(
-    ({ value, ...props } = {}, ref = null) => {
-      const isControlled = typeof beforeYear.current === "number"
-      const isSelectedYear =
-        (selectMonthWith === "month"
-          ? month.getFullYear()
-          : !isMulti
-            ? selectedValue?.getFullYear()
-            : selectedValue[0]?.getFullYear()) === year
-      const isSelected =
-        isSelectedYear &&
-        (selectMonthWith === "month"
-          ? month.getMonth()
-          : !isMulti
-            ? selectedValue?.getMonth()
-            : selectedValue[0]?.getMonth()) === value
-      const isDisabled = !isMonthInRange({
-        date: new Date(year, value),
-        minDate,
-        maxDate,
-      })
+  const getButtonProps: RequiredUIPropGetter<"button", { value: number }> =
+    useCallback(
+      ({ value, ...props }, ref = null) => {
+        const isControlled = typeof beforeYear.current === "number"
+        const isSelectedYear =
+          (selectMonthWith === "month"
+            ? month.getFullYear()
+            : !isMulti
+              ? selectedValue?.getFullYear()
+              : selectedValue[0]?.getFullYear()) === year
+        const isSelected =
+          isSelectedYear &&
+          (selectMonthWith === "month"
+            ? month.getMonth()
+            : !isMulti
+              ? selectedValue?.getMonth()
+              : selectedValue[0]?.getMonth()) === value
+        const isDisabled = !isMonthInRange({
+          date: new Date(year, value),
+          minDate,
+          maxDate,
+        })
 
-      monthRefs.current.set(value, createRef<HTMLButtonElement>())
+        monthRefs.current.set(value, createRef<HTMLButtonElement>())
 
-      return {
-        isDisabled,
-        ref: mergeRefs(ref, monthRefs.current.get(value)),
-        ...props,
-        tabIndex: isControlled
-          ? -1
-          : !isSelectedYear && value === 0
-            ? 0
-            : isSelected
+        return {
+          isDisabled,
+          ref: mergeRefs(ref, monthRefs.current.get(value)),
+          ...props,
+          tabIndex: isControlled
+            ? -1
+            : !isSelectedYear && value === 0
               ? 0
-              : -1,
-        "data-selected": dataAttr(isSelected),
-        "data-disabled": dataAttr(isDisabled),
-        "data-value": value ?? "",
-        "aria-disabled": ariaAttr(isDisabled),
-        onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
-      }
-    },
-    [
-      isMulti,
-      maxDate,
-      minDate,
-      month,
-      monthRefs,
-      onClick,
-      selectMonthWith,
-      selectedValue,
-      year,
-    ],
-  )
+              : isSelected
+                ? 0
+                : -1,
+          "data-selected": dataAttr(isSelected),
+          "data-disabled": dataAttr(isDisabled),
+          "data-value": value ?? "",
+          "aria-disabled": ariaAttr(isDisabled),
+          onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
+        }
+      },
+      [
+        isMulti,
+        maxDate,
+        minDate,
+        month,
+        monthRefs,
+        onClick,
+        selectMonthWith,
+        selectedValue,
+        year,
+      ],
+    )
 
   return { rangeMonths, getContainerProps, getButtonProps }
 }
@@ -1550,7 +1558,7 @@ export const useMonth = () => {
     dayRefs.current.clear()
   })
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}) => ({
       ...props,
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
@@ -1558,11 +1566,12 @@ export const useMonth = () => {
     [onKeyDown],
   )
 
-  const getButtonProps: RequiredPropGetter<
+  const getButtonProps: RequiredUIPropGetter<
+    "button",
     { value: Date; month: Date; index: number },
     { isSelected: boolean; isWeekend: boolean; isOutside: boolean }
   > = useCallback(
-    ({ value, month, index, ...props } = {}, ref = null) => {
+    ({ value, month, index, ...props }, ref = null) => {
       const isControlled = beforeMonth.current instanceof Date
       const isHoliday = holidays.some((holiday) => isSameDate(holiday, value))
       const isOutside = !isSameMonth(month, value)

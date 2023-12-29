@@ -1,4 +1,9 @@
-import type { HTMLUIProps, ThemeProps, ComponentArgs } from "@yamada-ui/core"
+import type {
+  HTMLUIProps,
+  ThemeProps,
+  ComponentArgs,
+  UIPropGetter,
+} from "@yamada-ui/core"
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -9,7 +14,6 @@ import {
 import type { SVGMotionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   omitObject,
@@ -182,7 +186,7 @@ export const useCheckbox = <Y extends string | number = string>(
       setIsChecked(inputRef.current.checked)
   }, [inputRef.current])
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -201,7 +205,7 @@ export const useCheckbox = <Y extends string | number = string>(
     [checked, isLabel, rest],
   )
 
-  const getIconProps: PropGetter = useCallback(
+  const getIconProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -233,7 +237,7 @@ export const useCheckbox = <Y extends string | number = string>(
     ],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -282,7 +286,7 @@ export const useCheckbox = <Y extends string | number = string>(
     ],
   )
 
-  const getLabelProps: PropGetter = useCallback(
+  const getLabelProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,

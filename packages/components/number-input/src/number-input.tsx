@@ -21,7 +21,7 @@ import type { UseCounterProps } from "@yamada-ui/use-counter"
 import { useCounter } from "@yamada-ui/use-counter"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import { useInterval } from "@yamada-ui/use-interval"
-import type { PropGetter } from "@yamada-ui/utils"
+import type { DOMAttributes, PropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -427,50 +427,65 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const getIncrementProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const disabled = props.disabled || (keepWithinRange && isMax)
+      const trulyDisabled = disabled || (keepWithinRange && isMax)
 
       return {
         required,
         readOnly,
-        disabled,
+        disabled: trulyDisabled,
         ...pickObject(rest, formControlProperties),
         ...props,
+        style: {
+          ...props.style,
+          cursor: readOnly ? "not-allowed" : props.style?.cursor,
+        },
         ref: mergeRefs(ref, incrementRef),
         role: "button",
         tabIndex: -1,
-        cursor: readOnly ? "not-allowed" : props.cursor,
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
-          if (ev.button === 0 && !disabled) eventUp(ev)
+          if (ev.button === 0 && !trulyDisabled) eventUp(ev)
         }),
         onPointerLeave: handlerAll(props.onPointerLeave, stop),
         onPointerUp: handlerAll(props.onPointerUp, stop),
       }
     },
-    [keepWithinRange, isMax, required, readOnly, rest, stop, eventUp],
+    [keepWithinRange, isMax, disabled, required, readOnly, rest, stop, eventUp],
   )
 
   const getDecrementProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const disabled = props.disabled || (keepWithinRange && isMin)
+      const trulyDisabled = disabled || (keepWithinRange && isMin)
 
       return {
         required,
         readOnly,
-        disabled,
+        disabled: trulyDisabled,
         ...pickObject(rest, formControlProperties),
         ...props,
+        style: {
+          ...props.style,
+          cursor: readOnly ? "not-allowed" : props.style?.cursor,
+        },
         ref: mergeRefs(ref, decrementRef),
         role: "button",
         tabIndex: -1,
-        cursor: readOnly ? "not-allowed" : props.cursor,
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
-          if (ev.button === 0 && !disabled) eventDown(ev)
+          if (ev.button === 0 && !trulyDisabled) eventDown(ev)
         }),
         onPointerLeave: handlerAll(props.onPointerLeave, stop),
         onPointerUp: handlerAll(props.onPointerUp, stop),
       }
     },
-    [keepWithinRange, isMin, required, readOnly, rest, stop, eventDown],
+    [
+      keepWithinRange,
+      isMin,
+      disabled,
+      required,
+      readOnly,
+      rest,
+      stop,
+      eventDown,
+    ],
   )
 
   return {
@@ -678,7 +693,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
                 "isValidCharacter",
                 "parse",
                 "format",
-              ]),
+              ]) as DOMAttributes<HTMLElement>,
               ref,
             )}
           />
@@ -775,7 +790,7 @@ const NumberIncrementStepper = forwardRef<NumberIncrementStepperProps, "div">(
     return (
       <Stepper
         className={cx("ui-number-input__stepper--up", className)}
-        {...getIncrementProps(rest, ref)}
+        {...getIncrementProps(rest as DOMAttributes<HTMLElement>, ref)}
         __css={css}
       >
         {children ?? <ChevronIcon __css={{ transform: "rotate(180deg)" }} />}
@@ -795,7 +810,7 @@ const NumberDecrementStepper = forwardRef<NumberDecrementStepperProps, "div">(
     return (
       <Stepper
         className={cx("ui-number-input__stepper--down", className)}
-        {...getDecrementProps(rest, ref)}
+        {...getDecrementProps(rest as DOMAttributes<HTMLElement>, ref)}
         __css={css}
       >
         {children ?? <ChevronIcon />}

@@ -1,4 +1,9 @@
-import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  HTMLUIProps,
+  ThemeProps,
+  UIPropGetter,
+  RequiredUIPropGetter,
+} from "@yamada-ui/core"
 import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
 import {
   formControlProperties,
@@ -8,7 +13,7 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { PropGetter, RequiredPropGetter, Dict } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import {
   isActiveElement,
   useUpdateEffect,
@@ -368,7 +373,7 @@ export const useMonthPicker = ({
     enabled: closeOnBlur,
   })
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -395,7 +400,7 @@ export const useMonthPicker = ({
     [duration, isOpen, onClose, onOpen, placement, rest],
   )
 
-  const getFieldProps: PropGetter = useCallback(
+  const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
@@ -417,7 +422,7 @@ export const useMonthPicker = ({
     [allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter = useCallback(
     (props = {}) => {
       const style: CSSProperties = {
         ...props.style,
@@ -505,14 +510,15 @@ export const useMonthPicker = ({
     ],
   )
 
-  const getIconProps: RequiredPropGetter<{ clear: boolean }> = useCallback(
-    ({ clear, ...props } = {}) => ({
-      ...props,
-      ...formControlProps,
-      onClick: handlerAll(props.onClick, clear ? onClear : undefined),
-    }),
-    [formControlProps, onClear],
-  )
+  const getIconProps: RequiredUIPropGetter<"div", { clear: boolean }> =
+    useCallback(
+      ({ clear, ...props }) => ({
+        ...props,
+        ...formControlProps,
+        onClick: handlerAll(props.onClick, clear ? onClear : undefined),
+      }),
+      [formControlProps, onClear],
+    )
 
   return {
     value,

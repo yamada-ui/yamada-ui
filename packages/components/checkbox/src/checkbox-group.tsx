@@ -1,10 +1,9 @@
-import type { ComponentArgs, ThemeProps } from "@yamada-ui/core"
+import type { ComponentArgs, ThemeProps, UIPropGetter } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
 import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { PropGetter, DOMAttributes } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -80,22 +79,18 @@ export const useCheckboxGroup = <Y extends string | number = string>({
     [value, setValue],
   )
 
-  const getCheckboxProps: PropGetter<
-    DOMAttributes<HTMLInputElement> & { isChecked?: boolean },
-    Omit<DOMAttributes<HTMLInputElement>, "onChange"> & {
-      onChange: (ev: ChangeEvent<HTMLInputElement> | Y) => void
-    }
-  > = useCallback(
-    (props = {}, ref = null) => ({
-      ...props,
-      ref,
-      [isNative ? "checked" : "isChecked"]: value.some(
-        (val) => String(props.value) === String(val),
-      ),
-      onChange,
-    }),
-    [onChange, isNative, value],
-  )
+  const getCheckboxProps: UIPropGetter<"input", { value?: Y }, { value?: Y }> =
+    useCallback(
+      (props, ref = null) => ({
+        ...props,
+        ref,
+        [isNative ? "checked" : "isChecked"]: value.some(
+          (val) => String(props?.value) === String(val),
+        ),
+        onChange,
+      }),
+      [onChange, isNative, value],
+    )
 
   return { value, setValue, onChange, getCheckboxProps }
 }

@@ -1,13 +1,18 @@
-import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  HTMLUIProps,
+  UIPropGetter,
+} from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { RequiredMotionPropGetter } from "@yamada-ui/motion"
+import type { RequiredMotionUIPropGetter } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { Dict, PropGetter } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import {
   clampNumber,
   createContext,
@@ -53,7 +58,7 @@ type ItemProps = OmittedItemProps | ((value: number) => OmittedItemProps)
 type InputProps = OmittedInputProps | ((value: number) => OmittedInputProps)
 
 type RatingContext = {
-  getGroupProps: RequiredMotionPropGetter<{ value: number }>
+  getGroupProps: RequiredMotionUIPropGetter<"div", { value: number }>
   id: string
   name: string
   value: number
@@ -260,7 +265,7 @@ export const useRating = ({
     [disabled, getHoveredValue, hoveredValue, readOnly, onHover],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
       ...rest,
@@ -295,9 +300,12 @@ export const useRating = ({
     ],
   )
 
-  const getGroupProps: RequiredMotionPropGetter<{
-    value: number
-  }> = useCallback(
+  const getGroupProps: RequiredMotionUIPropGetter<
+    "div",
+    {
+      value: number
+    }
+  > = useCallback(
     ({ value, ...props }, ref = null) => {
       const isActive = !readOnly && Math.ceil(hoveredValue) === value
 
@@ -416,7 +424,7 @@ export const useRatingItem = ({
     onChange(value)
   }, [disabled, onChange, readOnly, value])
 
-  const getItemProps: PropGetter = useCallback(
+  const getItemProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const zIndex = isActive ? 1 : -1
 
@@ -447,7 +455,7 @@ export const useRatingItem = ({
     ],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       return {
         ref,

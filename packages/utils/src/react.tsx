@@ -4,7 +4,8 @@ import { isNumber, isString } from "."
 
 type DOMElement = Element & HTMLOrSVGElement
 
-export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
+export type DOMAttributes<Y = DOMElement> = React.HTMLAttributes<Y> &
+  React.AriaAttributes &
   React.DOMAttributes<Y> & {
     id?: string
     role?: React.AriaRole

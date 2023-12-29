@@ -1,5 +1,11 @@
 # @yamada-ui/form-control
 
+## 1.0.3
+
+### Patch Changes
+
+- [#545](https://github.com/hirotomoyamada/yamada-ui/pull/545) [`b686c2a`](https://github.com/hirotomoyamada/yamada-ui/commit/b686c2a768cde5de1f31289a637c1fe68696052f) Thanks [@teru12012000](https://github.com/teru12012000)! - Added `getFormControlProperties` function.
+
 ## 1.0.2
 
 ### Patch Changes

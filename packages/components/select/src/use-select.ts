@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  formControlProperties,
+  getFormControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import type { PopoverProps } from "@yamada-ui/popover"
@@ -164,7 +164,10 @@ export const useSelect = <T extends MaybeValue = string>({
 }: UseSelectProps<T>) => {
   rest = useFormControlProps(rest)
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
   const computedProps = splitObject(rest, layoutStyleProperties)
 
   const descendants = useSelectDescendants()
@@ -601,6 +604,7 @@ export const useSelect = <T extends MaybeValue = string>({
         "value",
         "defaultValue",
         "onChange",
+        "aria-readonly",
       ]),
       ...props,
       "data-active": dataAttr(isOpen),

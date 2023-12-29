@@ -47,10 +47,9 @@ describe("<Checkbox />", () => {
         Yes
       </Checkbox>,
     )
-    expect(screen.getByTestId("Checkbox")).toHaveAttribute(
-      "aria-readonly",
-      "true",
-    )
+    expect(
+      screen.getByTestId("Checkbox").querySelector("input"),
+    ).toHaveAttribute("aria-readonly", "true")
   })
 
   test("should be invalid", () => {

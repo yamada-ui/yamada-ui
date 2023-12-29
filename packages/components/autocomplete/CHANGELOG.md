@@ -1,5 +1,13 @@
 # @yamada-ui/autocomplete
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`b686c2a`](https://github.com/hirotomoyamada/yamada-ui/commit/b686c2a768cde5de1f31289a637c1fe68696052f), [`acdaddc`](https://github.com/hirotomoyamada/yamada-ui/commit/acdaddcf2dd6f6bde866e78e6545e2705dac6e9c)]:
+  - @yamada-ui/form-control@1.0.3
+  - @yamada-ui/select@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes

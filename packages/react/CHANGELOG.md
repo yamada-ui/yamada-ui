@@ -1,5 +1,31 @@
 # @yamada-ui/react
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`b686c2a`](https://github.com/hirotomoyamada/yamada-ui/commit/b686c2a768cde5de1f31289a637c1fe68696052f), [`e488f91`](https://github.com/hirotomoyamada/yamada-ui/commit/e488f91d6facc819748f78df5b9574cc8f830ada), [`acdaddc`](https://github.com/hirotomoyamada/yamada-ui/commit/acdaddcf2dd6f6bde866e78e6545e2705dac6e9c), [`e488f91`](https://github.com/hirotomoyamada/yamada-ui/commit/e488f91d6facc819748f78df5b9574cc8f830ada)]:
+  - @yamada-ui/form-control@1.0.3
+  - @yamada-ui/theme@1.1.4
+  - @yamada-ui/select@1.0.4
+  - @yamada-ui/switch@1.0.3
+  - @yamada-ui/checkbox@1.0.3
+  - @yamada-ui/segmented-control@1.0.3
+  - @yamada-ui/autocomplete@1.0.4
+  - @yamada-ui/editable@1.0.3
+  - @yamada-ui/file-button@1.0.4
+  - @yamada-ui/file-input@1.0.3
+  - @yamada-ui/input@1.0.3
+  - @yamada-ui/native-select@1.0.4
+  - @yamada-ui/number-input@1.0.3
+  - @yamada-ui/pin-input@1.0.3
+  - @yamada-ui/radio@1.0.3
+  - @yamada-ui/slider@1.0.4
+  - @yamada-ui/textarea@1.0.3
+  - @yamada-ui/providers@1.0.5
+  - @yamada-ui/theme-tools@1.0.5
+  - @yamada-ui/use-media-query@1.0.5
+
 ## 1.0.4
 
 ### Patch Changes

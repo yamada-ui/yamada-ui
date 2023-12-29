@@ -65,6 +65,11 @@
       "required": false,
       "description": "A callback invoked when user confirms value with `enter` key or by blurring input."
     },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder text when the value is empty."
+    },
     "selectAllOnFocus": {
       "type": "boolean",
       "defaultValue": true,

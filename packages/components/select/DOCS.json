@@ -171,6 +171,11 @@
       "required": false,
       "description": "Props for select option element."
     },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder of the select."
+    },
     "placeholderInOptions": {
       "type": "boolean",
       "defaultValue": true,
@@ -416,6 +421,11 @@
       "type": "Omit<OptionProps, \"children\" | \"value\">",
       "required": false,
       "description": "Props for select option element."
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder of the select."
     },
     "placement": {
       "type": "UIValue<Placement>",

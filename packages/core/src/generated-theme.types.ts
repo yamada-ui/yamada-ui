@@ -838,7 +838,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | "xl" | (string & {})
       variants: "simple" | "striped" | "unstyled" | (string & {})
     }
-    Slider: { sizes: "sm" | "md" | "lg" | (string & {}); variants: string & {} }
+    Slider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
     Stepper: {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}

@@ -964,10 +964,6 @@
       "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"onWheelCapture\"]\n>",
       "required": false
     },
-    "placeholder": {
-      "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"placeholder\"]\n>",
-      "required": false
-    },
     "prefix": {
       "type": "NonNullable<\n  UnwrapFactoryAttributes<ReactHTML[Y]>[\"prefix\"]\n>",
       "required": false

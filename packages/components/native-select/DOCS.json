@@ -55,6 +55,11 @@
       "required": false,
       "description": "If provided, generate options based on items."
     },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder for select."
+    },
     "placeholderInOptions": {
       "type": "boolean",
       "defaultValue": true,

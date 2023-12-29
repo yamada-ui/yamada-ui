@@ -1,5 +1,11 @@
 # @yamada-ui/segmented-control
 
+## 1.0.3
+
+### Patch Changes
+
+- [#561](https://github.com/hirotomoyamada/yamada-ui/pull/561) [`e488f91`](https://github.com/hirotomoyamada/yamada-ui/commit/e488f91d6facc819748f78df5b9574cc8f830ada) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted cursor element `zIndex`.
+
 ## 1.0.2
 
 ### Patch Changes

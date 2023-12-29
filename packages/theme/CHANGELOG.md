@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.1.4
+
+### Patch Changes
+
+- [#561](https://github.com/hirotomoyamada/yamada-ui/pull/561) [`e488f91`](https://github.com/hirotomoyamada/yamada-ui/commit/e488f91d6facc819748f78df5b9574cc8f830ada) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `SegmentedControl` styles.
+
 ## 1.1.3
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @yamada-ui/table
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`acdaddc`](https://github.com/hirotomoyamada/yamada-ui/commit/acdaddcf2dd6f6bde866e78e6545e2705dac6e9c)]:
+  - @yamada-ui/select@1.0.4
+  - @yamada-ui/checkbox@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes

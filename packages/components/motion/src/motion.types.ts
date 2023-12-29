@@ -95,18 +95,18 @@ export type WithTransitionProps<Y extends object> = Omit<Y, "transition"> &
     isOpen?: boolean
   }
 
-export type MotionPropGetter<
-  Y = undefined,
-  M extends keyof ReactHTML = "div",
+export type MotionUIPropGetter<
+  Y extends keyof ReactHTML = "div",
+  M = undefined,
 > = (
-  props?: Merge<MotionProps<M>, Y>,
+  props?: Merge<MotionProps<Y>, M>,
   ref?: Ref<any>,
-) => MotionProps<M> & RefAttributes<any>
+) => MotionProps<Y> & RefAttributes<any>
 
-export type RequiredMotionPropGetter<
-  Y = undefined,
-  M extends keyof ReactHTML = "div",
+export type RequiredMotionUIPropGetter<
+  Y extends keyof ReactHTML = "div",
+  M = undefined,
 > = (
-  props: Merge<MotionProps<M>, Y>,
+  props: Merge<MotionProps<Y>, M>,
   ref?: Ref<any>,
-) => MotionProps<M> & RefAttributes<any>
+) => MotionProps<Y> & RefAttributes<any>

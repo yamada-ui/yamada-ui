@@ -24,12 +24,16 @@ import {
 } from "@tanstack/react-table"
 import type { CheckboxProps } from "@yamada-ui/checkbox"
 import { Checkbox } from "@yamada-ui/checkbox"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  UIPropGetter,
+} from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -480,7 +484,7 @@ export const useTable = <Y extends RowData>({
       : {}),
   })
 
-  const getTableProps: PropGetter = useCallback(
+  const getTableProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
       ...props,

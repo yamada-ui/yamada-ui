@@ -5,7 +5,11 @@
  */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
-import type { MotionTransitionProperties } from "@yamada-ui/motion"
+import type {
+  MotionUIPropGetter,
+  MotionProps,
+  MotionTransitionProperties,
+} from "@yamada-ui/motion"
 import { useAnimationObserver } from "@yamada-ui/use-animation"
 import type { LazyMode } from "@yamada-ui/use-disclosure"
 import { useDisclosure, useLazyDisclosure } from "@yamada-ui/use-disclosure"
@@ -25,7 +29,7 @@ import {
   mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { FC, PropsWithChildren, RefObject } from "react"
+import type { FC, PropsWithChildren, RefAttributes, RefObject } from "react"
 import { useCallback, useEffect, useRef } from "react"
 
 export const popoverProperties: any[] = [
@@ -161,7 +165,7 @@ type PopoverContext = Pick<
   getTriggerProps: PropGetter
   getAnchorProps: PropGetter
   getPopperProps: PropGetter
-  getPopoverProps: PropGetter
+  getPopoverProps: MotionUIPropGetter
   styles: Record<string, CSSUIObject>
 }
 
@@ -250,9 +254,9 @@ export const Popover: FC<PopoverProps> = (props) => {
     isSelected: present,
   })
 
-  const getPopoverProps: PropGetter = useCallback(
+  const getPopoverProps: MotionUIPropGetter = useCallback(
     (props = {}, ref = null) => {
-      const popoverProps: DOMAttributes = {
+      const popoverProps: MotionProps<"div"> & RefAttributes<any> = {
         ...props,
         style: {
           ...props.style,
@@ -311,7 +315,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   const getTriggerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const triggerProps: DOMAttributes = {
+      const triggerProps: RefAttributes<any> & DOMAttributes = {
         ...props,
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
       }

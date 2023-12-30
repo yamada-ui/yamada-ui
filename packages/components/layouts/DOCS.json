@@ -85,6 +85,58 @@
       "description": "The CSS `grid-template-rows` property."
     }
   },
+  "SimpleGrid": {
+    "area": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridArea> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-area` property."
+    },
+    "autoColumns": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ResponsiveObject<GridAutoColumns<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-auto-columns` property."
+    },
+    "autoFlow": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | ResponsiveObject<GridAutoFlow> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-auto-flow` property."
+    },
+    "autoRows": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ResponsiveObject<GridAutoRows<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-auto-rows` property."
+    },
+    "column": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridColumn> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-column` property."
+    },
+    "minChildWidth": {
+      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 61 more ... | \"min-intrinsic\">",
+      "required": false,
+      "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length."
+    },
+    "row": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridRow> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-row` property."
+    },
+    "templateAreas": {
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | ResponsiveObject<GridTemplateAreas> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `grid-template-areas` property."
+    },
+    "templateColumns": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | ResponsiveObject<GridTemplateColumns<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIVa...",
+      "required": false,
+      "description": "The CSS `grid-template-columns` property."
+    },
+    "templateRows": {
+      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | ResponsiveObject<GridTemplateRows<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "required": false,
+      "description": "The CSS `grid-template-rows` property."
+    }
+  },
   "GridItem": {
     "area": {
       "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | ResponsiveObject<GridArea> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
@@ -155,6 +207,32 @@
       "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | ResponsiveObject<FlexWrap> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
+    }
+  },
+  "ZStack": {
+    "direction": {
+      "type": "type ONLY_FOR_FORMAT =\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"",
+      "defaultValue": "bottom",
+      "required": false,
+      "description": "Stack in the specified direction."
+    },
+    "fit": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, calculate the `width` and `height` of the element and assign container."
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, reverse direction."
+    },
+    "startIndex": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "If set the stack will start from the given index."
     }
   },
   "Spacer": {},

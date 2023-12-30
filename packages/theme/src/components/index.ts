@@ -44,12 +44,14 @@ import { Popover } from "./popover"
 import { Progress } from "./progress"
 import { Radio } from "./radio"
 import { RangeSlider } from "./range-slider"
+import { Rating } from "./rating"
 import { Reorder } from "./reorder"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
 import { Skeleton } from "./skeleton"
 import { Slider } from "./slider"
+import { Stat } from "./stat"
 import { Stepper } from "./stepper"
 import { Switch } from "./switch"
 import { Table } from "./table"
@@ -104,6 +106,7 @@ export default {
   Progress,
   Radio,
   RangeSlider,
+  Rating,
   Reorder,
   ScrollArea,
   SegmentedControl,
@@ -111,6 +114,7 @@ export default {
   NativeTable,
   Skeleton,
   Slider,
+  Stat,
   Stepper,
   Switch,
   Table,

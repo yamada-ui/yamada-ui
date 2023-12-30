@@ -49,6 +49,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",

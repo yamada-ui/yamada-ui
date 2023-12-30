@@ -1,15 +1,16 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
+import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Dict, PropGetter, Union, DOMAttributes } from "@yamada-ui/utils"
+import type { Dict, Union, DOMAttributes } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -1083,7 +1084,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     [duration, isOpen, onClose, onOpen, placement, rest],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -1096,7 +1097,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
-  const getFieldProps: PropGetter = useCallback(
+  const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       tabIndex: -1,
@@ -1174,7 +1175,7 @@ export const useAutocompleteInput = () => {
     if (isAllSelected && inputRef.current) inputRef.current.blur()
   }, [isAllSelected])
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(inputRef, ref),
       ...formControlProps,
@@ -1268,7 +1269,7 @@ export const useAutocompleteList = () => {
     if (!isOpen) beforeFocusedIndex.current = -1
   }, [isOpen])
 
-  const getListProps: PropGetter = useCallback(
+  const getListProps: MotionUIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
@@ -1324,7 +1325,7 @@ export const useAutocompleteOptionGroup = ({
 
   const computedRest = splitObject(rest, layoutStyleProperties)
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -1350,7 +1351,7 @@ export const useAutocompleteOptionGroup = ({
     [computedRest, isEmpty, label],
   )
 
-  const getGroupProps: PropGetter = useCallback(
+  const getGroupProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       ...props,
@@ -1499,7 +1500,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     if (isSelected) onChangeLabel(computedProps.value ?? "", false)
   }, [computedProps, isSelected, onChangeLabel])
 
-  const getOptionProps: PropGetter = useCallback(
+  const getOptionProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -1558,7 +1559,7 @@ export type UseAutocompleteOptionReturn = ReturnType<
 export const useAutocompleteCreate = () => {
   const { isHit, onCreate } = useAutocompleteContext()
 
-  const getCreateProps: PropGetter = useCallback(
+  const getCreateProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -1594,7 +1595,7 @@ export type UseAutocompleteCreateReturn = ReturnType<
 export const useAutocompleteEmpty = () => {
   const { isHit, isEmpty } = useAutocompleteContext()
 
-  const getEmptyProps: PropGetter = useCallback(
+  const getEmptyProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",

@@ -1,10 +1,10 @@
-import type { ComponentArgs, ThemeProps } from "@yamada-ui/core"
+import type { ComponentArgs, ThemeProps, UIPropGetter } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
 import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { PropGetter, DOMAttributes } from "@yamada-ui/utils"
+import type { DOMAttributes, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -116,22 +116,18 @@ export const useRadioGroup = <Y extends string | number = string>({
     [],
   )
 
-  const getRadioProps: PropGetter<
-    DOMAttributes<HTMLInputElement> & { isChecked?: boolean },
-    Omit<DOMAttributes<HTMLInputElement>, "onChange"> & {
-      onChange: (ev: ChangeEvent<HTMLInputElement> | Y) => void
-    }
-  > = useCallback(
-    (props = {}, ref = null) => ({
-      ...props,
-      ref,
-      name,
-      [isNative ? "checked" : "isChecked"]:
-        value != null ? props.value === value : undefined,
-      onChange,
-    }),
-    [name, value, onChange, isNative],
-  )
+  const getRadioProps: UIPropGetter<"input", { value?: Y }, { value?: Y }> =
+    useCallback(
+      (props = {}, ref = null) => ({
+        ...props,
+        ref,
+        name,
+        [isNative ? "checked" : "isChecked"]:
+          value != null ? props.value === value : undefined,
+        onChange,
+      }),
+      [name, value, onChange, isNative],
+    )
 
   return {
     name,
@@ -169,14 +165,14 @@ type RadioGroupContext = ThemeProps<"Radio"> &
     ) => void
   }
 
-const [RadioGroupProvider, useRadioGroupContenxt] = createContext<
+const [RadioGroupProvider, useRadioGroupContext] = createContext<
   RadioGroupContext | undefined
 >({
   strict: false,
   name: "RadioGroupContext",
 })
 
-export { useRadioGroupContenxt }
+export { useRadioGroupContext }
 
 export const RadioGroup = forwardRef(
   <Y extends string | number = string>(
@@ -228,7 +224,6 @@ export const RadioGroup = forwardRef(
         <Flex
           ref={ref}
           className={cx("ui-radio-group", className)}
-          direction={direction}
           gap={gap ?? (direction === "row" ? "1rem" : undefined)}
           {...getContainerProps(
             omitObject(props, [
@@ -237,8 +232,9 @@ export const RadioGroup = forwardRef(
               "isDisabled",
               "isRequired",
               "isReadOnly",
-            ]),
+            ]) as DOMAttributes<HTMLElement>,
           )}
+          direction={direction}
         >
           {children ?? computedChildren}
         </Flex>

@@ -40,7 +40,11 @@ const onKeyboard = (ev: KeyboardEvent) => {
 const onPointer = (ev: PointerEvent | MouseEvent) => {
   modality = "pointer"
 
-  if (ev.type === "mousedown" || ev.type === "pointerdown") {
+  if (
+    ev.type === "mousedown" ||
+    ev.type === "pointerdown" ||
+    ev.type === "pointerup"
+  ) {
     hasEventBeforeFocus = true
 
     const target = ev.composedPath ? ev.composedPath()[0] : ev.target

@@ -1,5 +1,5 @@
 import type { Dict } from "@yamada-ui/utils"
-import { keysFormObject, createdDom } from "@yamada-ui/utils"
+import { keysFormObject, getPx } from "@yamada-ui/utils"
 import type { BreakpointDirection } from "../theme.types"
 
 type BreakpointQuery = {
@@ -75,34 +75,14 @@ const transformBreakpoints = (
   breakpoints: Dict,
   direction: BreakpointDirection,
 ): Dict => {
-  const isBrowser = createdDom()
-  let fontSize = 16
-
-  if (isBrowser) {
-    const style = window.getComputedStyle(document.documentElement)
-
-    fontSize = parseFloat(style.fontSize)
-  }
-
   return Object.fromEntries(
     Object.entries(breakpoints)
-      .map(([name, value]) => {
-        if (value.includes("px")) {
-          value = parseFloat(value)
-
-          return [name, value]
-        } else {
-          value = parseFloat(value)
-          value = value * fontSize
-
-          return [name, value]
-        }
-      })
+      .map(([name, value]) => [name, getPx(value)] as const)
       .sort((a, b) => {
         if (direction === "down") {
-          return (b[1] ?? 0) - (a[1] ?? 0)
+          return b[1] - a[1]
         } else {
-          return (a[1] ?? 0) - (b[1] ?? 0)
+          return a[1] - b[1]
         }
       }),
   )

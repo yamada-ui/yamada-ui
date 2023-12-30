@@ -37,3 +37,15 @@ export const isUnit = (value: any): boolean =>
   /[0-9].*[px|rem|em|%|vw|vh]$/.test(value)
 
 export const cast = <T>(value: any) => value as T
+
+export const toCamelCase = (value: string & {}) =>
+  value
+    .toLowerCase()
+    .replace(/-(.)/g, (_, group1) => group1.toUpperCase())
+    .replace(/^(.)/, (_, group1) => group1.toUpperCase())
+
+export const toKebabCase = (value: string & {}) =>
+  value
+    .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
+    .toLowerCase()
+    .replace(/^-/, "")

@@ -1,32 +1,24 @@
 import * as React from "react"
+import type { Merge } from "."
 import { isNumber, isString } from "."
 
 type DOMElement = Element & HTMLOrSVGElement
 
-type DataAttributes = {
-  [dataAttr: string]: any
-}
-
-export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
-  React.DOMAttributes<Y> &
-  DataAttributes & {
+export type DOMAttributes<Y = DOMElement> = React.HTMLAttributes<Y> &
+  React.AriaAttributes &
+  React.DOMAttributes<Y> & {
     id?: string
     role?: React.AriaRole
     tabIndex?: number
     style?: React.CSSProperties
   }
 
-type Merge<Y, M> = M extends Record<string, unknown> ? Y : Omit<Y, keyof M> & M
-
-export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+export type PropGetter<Y = undefined, M = DOMAttributes> = (
   props?: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
-export type RequiredPropGetter<
-  Y = Record<string, unknown>,
-  M = DOMAttributes,
-> = (
+export type RequiredPropGetter<Y = undefined, M = DOMAttributes> = (
   props: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>

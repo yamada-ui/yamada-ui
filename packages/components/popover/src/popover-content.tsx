@@ -1,6 +1,6 @@
-import type { HTMLUIProps, CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
-import type { HTMLMotionProps } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { motion } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import type { DOMAttributes } from "@yamada-ui/utils"
@@ -16,23 +16,7 @@ import { usePopover } from "./popover"
 import type { PopoverProps } from "."
 import { PopoverCloseButton } from "."
 
-export type PopoverContentProps = Omit<
-  HTMLUIProps<"section">,
-  keyof Omit<HTMLMotionProps<"section">, "children" | "translate" | "content">
-> &
-  Omit<
-    HTMLMotionProps<"section">,
-    | "color"
-    | "style"
-    | "onDrag"
-    | "onDragEnd"
-    | "onDragStart"
-    | "onAnimationStart"
-    | "variants"
-    | "transition"
-    | "translate"
-    | "content"
-  >
+export type PopoverContentProps = MotionProps<"section">
 
 const getPopoverContentProps = (
   animation: PopoverProps["animation"] = "scale",

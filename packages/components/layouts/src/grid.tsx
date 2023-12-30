@@ -1,7 +1,12 @@
-import type { HTMLUIProps, CSSUIObject, Token } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { replaceObject } from "@yamada-ui/utils"
-
+import type {
+  HTMLUIProps,
+  CSSUIObject,
+  Token,
+  StyledTheme,
+} from "@yamada-ui/core"
+import { ui, forwardRef, useTheme, transforms } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
+import { replaceObject, getMemoizedObject as get } from "@yamada-ui/utils"
 type GridOptions = {
   /**
    * The CSS `grid-template-columns` property.
@@ -84,6 +89,52 @@ export const Grid = forwardRef<GridProps, "div">(
     }
 
     return <ui.div ref={ref} __css={css} {...rest} />
+  },
+)
+
+const transformColumns =
+  (columns: Token<number> | undefined, minWidth?: GridProps["minWidth"]) =>
+  (theme: StyledTheme<Dict>) => {
+    if (minWidth) {
+      return replaceObject(minWidth, (value) => {
+        value = get(theme, `sizes.${value}`, transforms.px(value))
+
+        return value != null
+          ? `repeat(auto-fit, minmax(${value}, 1fr))`
+          : undefined
+      }) as CSSUIObject["gridTemplateColumns"]
+    } else {
+      return replaceObject(columns, (value) =>
+        value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,
+      ) as CSSUIObject["gridTemplateColumns"]
+    }
+  }
+
+type SimpleGridOptions = {
+  /**
+   * The width at which child elements will break into columns.
+   * Pass a number for pixel values or a string for any other valid CSS length.
+   */
+  minChildWidth?: GridProps["minWidth"]
+  /**
+   * The number of columns.
+   */
+  columns?: Token<number>
+}
+
+export type SimpleGridProps = GridProps & SimpleGridOptions
+
+/**
+ * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/simple-grid
+ */
+export const SimpleGrid = forwardRef<SimpleGridProps, "div">(
+  ({ minChildWidth, columns, ...rest }, ref) => {
+    const { theme } = useTheme()
+    let templateColumns = transformColumns(columns, minChildWidth)(theme)
+
+    return <Grid ref={ref} templateColumns={templateColumns} {...rest} />
   },
 )
 

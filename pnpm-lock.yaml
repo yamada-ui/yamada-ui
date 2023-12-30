@@ -854,6 +854,37 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/color-picker:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/portal':
+        specifier: workspace:*
+        version: link:../portal
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/use-outside-click':
+        specifier: workspace:*
+        version: link:../../hooks/use-outside-click
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/dropzone:
     dependencies:
       '@yamada-ui/core':
@@ -2577,6 +2608,9 @@ importers:
       '@yamada-ui/close-button':
         specifier: workspace:*
         version: link:../components/close-button
+      '@yamada-ui/color-picker':
+        specifier: workspace:*
+        version: link:../components/color-picker
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core

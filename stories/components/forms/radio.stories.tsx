@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { RadioItem, UseRadioGroupReturn } from "@yamada-ui/react"
 import {
+  ui,
   FormControl,
   Radio,
   RadioGroup,
@@ -216,7 +217,7 @@ export const customHook: Story = () => {
 
     return (
       <Box as="label">
-        <input {...getInputProps()} aria-label={props.value} />
+        <ui.input {...getInputProps()} aria-label={props.value} />
 
         <Box
           {...getIconProps()}

@@ -132,6 +132,7 @@ export const pseudos = {
    * The CSS `:-webkit-autofill` pseudo-class.
    */
   _autofill: "&:-webkit-autofill",
+  _filled: "&[data-filled]",
   _outside: "&[data-outside]",
   _weekend: "&[data-weekend]",
   _holiday: "&[data-holiday]",

@@ -3,6 +3,8 @@ import type {
   HTMLUIProps,
   ThemeProps,
   CSSUIProps,
+  UIPropGetter,
+  RequiredUIPropGetter,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -19,7 +21,6 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
-import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -313,7 +314,7 @@ export const useSlider = ({
     if (eventSource === "keyboard") onChangeEnd(value)
   }, [value, onChangeEnd])
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const { width: w, height: h } = thumbSize ?? { width: 0, height: 0 }
 
@@ -340,7 +341,7 @@ export const useSlider = ({
     [isVertical, rest, thumbSize],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -356,7 +357,7 @@ export const useSlider = ({
     [disabled, id, name, readOnly, required, rest, value],
   )
 
-  const getTrackProps: PropGetter = useCallback(
+  const getTrackProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
@@ -384,7 +385,7 @@ export const useSlider = ({
     [isVertical, rest],
   )
 
-  const getFilledTrackProps: PropGetter = useCallback(
+  const getFilledTrackProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = Math.abs(isReversed ? 100 - thumbPercent : thumbPercent)
 
@@ -416,32 +417,33 @@ export const useSlider = ({
     [isReversed, isVertical, rest, thumbPercent],
   )
 
-  const getMarkProps: RequiredPropGetter<{ value: number }> = useCallback(
-    (props = {}, ref = null) => {
-      let n = valueToPercent(props.value, min, max)
-      n = isReversed ? 100 - n : n
+  const getMarkProps: RequiredUIPropGetter<"div", { value: number }> =
+    useCallback(
+      (props, ref = null) => {
+        let n = valueToPercent(props.value, min, max)
+        n = isReversed ? 100 - n : n
 
-      const style: CSSProperties = {
-        ...props.style,
-        position: "absolute",
-        pointerEvents: "none",
-        ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
-      }
+        const style: CSSProperties = {
+          ...props.style,
+          position: "absolute",
+          pointerEvents: "none",
+          ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
+        }
 
-      return {
-        ...pickObject(rest, formControlProperties),
-        ...props,
-        ref,
-        "aria-hidden": true,
-        "data-invalid": dataAttr(props.value < min || max < props.value),
-        "data-highlighted": dataAttr(props.value <= value),
-        style,
-      }
-    },
-    [isReversed, isVertical, max, min, rest, value],
-  )
+        return {
+          ...pickObject(rest, formControlProperties),
+          ...props,
+          ref,
+          "aria-hidden": true,
+          "data-invalid": dataAttr(props.value < min || max < props.value),
+          "data-highlighted": dataAttr(props.value <= value),
+          style,
+        }
+      },
+      [isReversed, isVertical, max, min, rest, value],
+    )
 
-  const getThumbProps: PropGetter = useCallback(
+  const getThumbProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
       const { width: w, height: h } = thumbSize ?? { width: 0, height: 0 }

@@ -1,0 +1,124 @@
+{
+  "Rating": {
+    "color": {
+      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\"> | ((value: number) => UIValue<...> | undefined)",
+      "required": false,
+      "description": "The color of the filled icons."
+    },
+    "colorScheme": {
+      "defaultValue": "yellow",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultValue": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The initial value of the rating."
+    },
+    "emptyIcon": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal\n  | ((value: number) => ReactNode)",
+      "required": false,
+      "description": "The empty icon for the rating."
+    },
+    "filledIcon": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal\n  | ((value: number) => ReactNode)",
+      "required": false,
+      "description": "The filled icon for the rating."
+    },
+    "fractions": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Number of fractions each item can be divided into,"
+    },
+    "groupProps": {
+      "type": "GroupProps",
+      "required": false,
+      "description": "Props for the rating group."
+    },
+    "highlightSelectedOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, only the selected icons will be filled."
+    },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "The top-level id string that will be applied to the rating.\nThe index of the rating item will be appended to this top-level id."
+    },
+    "inputProps": {
+      "type": "InputProps",
+      "required": false,
+      "description": "Props for the input element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "itemProps": {
+      "type": "ItemProps",
+      "required": false,
+      "description": "Props for the rating item."
+    },
+    "items": {
+      "type": "number",
+      "defaultValue": "5",
+      "required": false,
+      "description": "Number of controls that should be rendered."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name of the input element."
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "The callback invoked when value state changes."
+    },
+    "onHover": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "The callback invoked when hovering over the rating."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+      "required": false,
+      "description": "The size of the Rating."
+    },
+    "value": {
+      "type": "number",
+      "required": false,
+      "description": "The value of the rating."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Rating."
+    }
+  }
+}

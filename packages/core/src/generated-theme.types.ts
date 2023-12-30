@@ -822,6 +822,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
     }
+    Rating: {
+      sizes: "xs" | "sm" | "md" | "lg" | "xl" | (string & {})
+      variants: string & {}
+    }
     Reorder: {
       sizes: "sm" | "md" | "normal" | "lg" | (string & {})
       variants: "elevated" | "outline" | "unstyled" | (string & {})

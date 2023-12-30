@@ -10,6 +10,8 @@ import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
 import { CloseButton } from "./close-button"
+import { ColorInput } from "./color-input"
+import { ColorPicker } from "./color-picker"
 import { Container } from "./container"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
@@ -57,7 +59,6 @@ import { Textarea } from "./textarea"
 import { Tooltip } from "./tooltip"
 
 export default {
-  Indicator,
   Accordion,
   Alert,
   Autocomplete,
@@ -70,6 +71,8 @@ export default {
   Carousel,
   Checkbox,
   CloseButton,
+  ColorInput,
+  ColorPicker,
   Container,
   DatePicker,
   Dialog,
@@ -80,6 +83,7 @@ export default {
   FileInput,
   FormControl,
   Heading,
+  Indicator,
   Input,
   Kbd,
   Link,

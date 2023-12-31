@@ -1,5 +1,11 @@
 # @yamada-ui/autocomplete
 
+## 1.0.6
+
+### Patch Changes
+
+- [#568](https://github.com/hirotomoyamada/yamada-ui/pull/568) [`8982016`](https://github.com/hirotomoyamada/yamada-ui/commit/898201635e7ed689c742685a2638c223e9fcb3ca) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unused `@yamada-ui/select` module.
+
 ## 1.0.5
 
 ### Patch Changes

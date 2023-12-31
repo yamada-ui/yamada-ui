@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`a9376bb`](https://github.com/hirotomoyamada/yamada-ui/commit/a9376bb80aec66898cdc431a63ce2a2a3d406e80), [`8982016`](https://github.com/hirotomoyamada/yamada-ui/commit/898201635e7ed689c742685a2638c223e9fcb3ca)]:
+  - @yamada-ui/modal@1.0.5
+  - @yamada-ui/autocomplete@1.0.6
+
 ## 1.1.0
 
 ### Minor Changes

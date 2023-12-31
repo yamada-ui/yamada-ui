@@ -21,9 +21,10 @@ If you want to change the style of the component, please check [here](/styled-sy
 ```ts
 export const Drawer: ComponentMultiStyle = mergeMultiStyle(Modal, {
   baseStyle: {
-    container: ({ isFullHeight }) => ({
-      ...(isFullHeight ? { height: "100dvh" } : {}),
+    container: ({ isFullHeight, placement }) => ({
+      ...(isFullHeight ? { height: "100dvh", rounded: "0" } : {}),
       w: "auto",
+      [`rounded${toCamelCase(placement)}`]: 0,
     }),
     body: {
       overflow: "auto",

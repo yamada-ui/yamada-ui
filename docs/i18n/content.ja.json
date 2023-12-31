@@ -1101,9 +1101,51 @@
   {
     "title": "Stat",
     "type": "page",
-    "description": "`Stat`は、現在作成を検討しています。",
+    "description": "`Stat`は、数値やデータをボックス内に表示するために使用されます。",
     "slug": "/components/data-display/stat",
     "hierarchy": { "lv1": "Stat" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/stat#インポート",
+    "hierarchy": { "lv1": "Stat", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/stat#使い方",
+    "hierarchy": { "lv1": "Stat", "lv2": "使い方" }
+  },
+  {
+    "title": "カラースキームを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/stat#カラースキームを変更する",
+    "hierarchy": {
+      "lv1": "Stat",
+      "lv2": "使い方",
+      "lv3": "カラースキームを変更する"
+    }
+  },
+  {
+    "title": "コンテンツを中央寄せにする",
+    "type": "fragment",
+    "slug": "/components/data-display/stat#コンテンツを中央寄せにする",
+    "hierarchy": {
+      "lv1": "Stat",
+      "lv2": "使い方",
+      "lv3": "コンテンツを中央寄せにする"
+    }
+  },
+  {
+    "title": "減少のアイコンを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/stat#減少のアイコンを表示する",
+    "hierarchy": {
+      "lv1": "Stat",
+      "lv2": "使い方",
+      "lv3": "減少のアイコンを表示する"
+    }
   },
   {
     "title": "Table",
@@ -5080,9 +5122,111 @@
   {
     "title": "Rating",
     "type": "page",
-    "description": "`Rating`は、現在作成を検討しています。",
+    "description": "`Rating`は、ユーザーが評価を行うために使用させるコンポーネントです。",
     "slug": "/components/forms/rating",
     "hierarchy": { "lv1": "Rating" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/forms/rating#インポート",
+    "hierarchy": { "lv1": "Rating", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/forms/rating#使い方",
+    "hierarchy": { "lv1": "Rating", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#サイズを変更する",
+    "hierarchy": { "lv1": "Rating", "lv2": "使い方", "lv3": "サイズを変更する" }
+  },
+  {
+    "title": "カラースキームを変更する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#カラースキームを変更する",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "使い方",
+      "lv3": "カラースキームを変更する"
+    }
+  },
+  {
+    "title": "デフォルトの値を設定する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#デフォルトの値を設定する",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "使い方",
+      "lv3": "デフォルトの値を設定する"
+    }
+  },
+  {
+    "title": "アイテム数を変更する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#アイテム数を変更する",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "使い方",
+      "lv3": "アイテム数を変更する"
+    }
+  },
+  {
+    "title": "小数点を許容する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#小数点を許容する",
+    "hierarchy": { "lv1": "Rating", "lv2": "使い方", "lv3": "小数点を許容する" }
+  },
+  {
+    "title": "色を変更する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#色を変更する",
+    "hierarchy": { "lv1": "Rating", "lv2": "使い方", "lv3": "色を変更する" }
+  },
+  {
+    "title": "アイコンをカスタマイズする",
+    "type": "fragment",
+    "slug": "/components/forms/rating#アイコンをカスタマイズする",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "使い方",
+      "lv3": "アイコンをカスタマイズする"
+    }
+  },
+  {
+    "title": "無効化する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#無効化する",
+    "hierarchy": { "lv1": "Rating", "lv2": "使い方", "lv3": "無効化する" }
+  },
+  {
+    "title": "読み取り専用にする",
+    "type": "fragment",
+    "slug": "/components/forms/rating#読み取り専用にする",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    }
+  },
+  {
+    "title": "制御する",
+    "type": "fragment",
+    "slug": "/components/forms/rating#制御する",
+    "hierarchy": { "lv1": "Rating", "lv2": "使い方", "lv3": "制御する" }
+  },
+  {
+    "title": "React Hook Formを使う",
+    "type": "fragment",
+    "slug": "/components/forms/rating#react-hook-formを使う",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "使い方",
+      "lv3": "React Hook Formを使う"
+    }
   },
   {
     "title": "SegmentedControl",
@@ -5927,9 +6071,31 @@
   {
     "title": "SimpleGrid",
     "type": "page",
-    "description": "`SimpleGrid`は、現在作成を検討しています。",
+    "description": "`SimpleGrid`は、`Grid`をより使いやすくシンプルにしたコンポーネントです。",
     "slug": "/components/layouts/simple-grid",
     "hierarchy": { "lv1": "SimpleGrid" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/layouts/simple-grid#インポート",
+    "hierarchy": { "lv1": "SimpleGrid", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/layouts/simple-grid#使い方",
+    "hierarchy": { "lv1": "SimpleGrid", "lv2": "使い方" }
+  },
+  {
+    "title": "子要素の最小幅を設定する",
+    "type": "fragment",
+    "slug": "/components/layouts/simple-grid#子要素の最小幅を設定する",
+    "hierarchy": {
+      "lv1": "SimpleGrid",
+      "lv2": "使い方",
+      "lv3": "子要素の最小幅を設定する"
+    }
   },
   {
     "title": "Spacer",
@@ -5970,23 +6136,13 @@
     "hierarchy": { "lv1": "Stack", "lv2": "使い方" }
   },
   {
-    "title": "垂直方向へスタックさせる",
+    "title": "垂直方向・水平方向へスタックさせる",
     "type": "fragment",
-    "slug": "/components/layouts/stack#垂直方向へスタックさせる",
+    "slug": "/components/layouts/stack#垂直方向・水平方向へスタックさせる",
     "hierarchy": {
       "lv1": "Stack",
       "lv2": "使い方",
-      "lv3": "垂直方向へスタックさせる"
-    }
-  },
-  {
-    "title": "水平方向へスタックさせる",
-    "type": "fragment",
-    "slug": "/components/layouts/stack#水平方向へスタックさせる",
-    "hierarchy": {
-      "lv1": "Stack",
-      "lv2": "使い方",
-      "lv3": "水平方向へスタックさせる"
+      "lv3": "垂直方向・水平方向へスタックさせる"
     }
   },
   {
@@ -5996,14 +6152,52 @@
     "hierarchy": {
       "lv1": "Stack",
       "lv2": "使い方",
-      "lv3": "子要素間に区切り線を設ける"
+      "lv3": "垂直方向・水平方向へスタックさせる",
+      "lv4": "子要素間に区切り線を設ける"
     }
   },
   {
     "title": "Spacerを使う",
     "type": "fragment",
     "slug": "/components/layouts/stack#spacerを使う",
-    "hierarchy": { "lv1": "Stack", "lv2": "使い方", "lv3": "Spacerを使う" }
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "使い方",
+      "lv3": "垂直方向・水平方向へスタックさせる",
+      "lv4": "Spacerを使う"
+    }
+  },
+  {
+    "title": "奥行き方向へスタックさせる",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#奥行き方向へスタックさせる",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "使い方",
+      "lv3": "奥行き方向へスタックさせる"
+    }
+  },
+  {
+    "title": "方向を変更する",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#方向を変更する",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "使い方",
+      "lv3": "奥行き方向へスタックさせる",
+      "lv4": "方向を変更する"
+    }
+  },
+  {
+    "title": "方向を反転させる",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#方向を反転させる",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "使い方",
+      "lv3": "奥行き方向へスタックさせる",
+      "lv4": "方向を反転させる"
+    }
   },
   {
     "title": "Wrap",

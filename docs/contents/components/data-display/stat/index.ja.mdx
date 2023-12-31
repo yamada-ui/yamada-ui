@@ -1,7 +1,115 @@
 ---
 title: Stat
-description: "`Stat`は、現在作成を検討しています。"
-label: "Considering"
+description: "`Stat`は、数値やデータをボックス内に表示するために使用されます。"
+label: "New"
+package_name: "@yamada-ui/stat"
+is_tabs: true
+with_description: true
+tab: Usage
 ---
 
-現在、`Stat`の作成を検討しています。この[GitHubのイシュー](https://github.com/hirotomoyamada/yamada-ui/issues/505)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+## インポート
+
+```ts
+import {
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelperMessage,
+  StatIcon,
+} from "@yamada-ui/react"
+```
+
+- `Stat`: 数値やデータを制御するラッパーコンポーネントです。
+- `StatLabel`: 数値やデータのラベルを表示するコンポーネントです。
+- `StatNumber`: 数値やデータを表示するコンポーネントです。
+- `StatHelperMessage`: 数値やデータの補足を表示するコンポーネントです。
+- `StatIcon`: 数値やデータの状況を表示するアイコンのコンポーネントです。
+
+:::note
+`StatLabel`, `StatNumber`, `StatHelperMessage`と`StatIcon`は、省略することができます。
+:::
+
+## 使い方
+
+```tsx
+<Stat
+  label="Total Page Views"
+  number="1,993,818"
+  icon="increase"
+  helperMessage="21% more than last month"
+/>
+```
+
+または、`StatLabel`や`StatNumber`などを省略しない場合は、このように記述します。
+
+```tsx
+<Stat>
+  <StatLabel>Total Page Views</StatLabel>
+  <StatNumber>1,993,818</StatNumber>
+  <StatHelperMessage>
+    <StatIcon type="increase" />
+    21% more than last month
+  </StatHelperMessage>
+</Stat>
+```
+
+### カラースキームを変更する
+
+```tsx
+<Wrap gap="md">
+  <Stat
+    colorScheme="secondary"
+    label="Total Page Views"
+    number="1,993,818"
+    icon="increase"
+    helperMessage="21% more than last month"
+  />
+
+  <Stat
+    colorScheme="green"
+    label="Total Page Views"
+    number="1,993,818"
+    icon="increase"
+    helperMessage="21% more than last month"
+  />
+</Wrap>
+```
+
+### コンテンツを中央寄せにする
+
+コンテンツを中央寄せにする場合は、`centerContent`を`true`に設定します。
+
+```tsx
+<Stat
+  label="Downloads"
+  number="18K"
+  icon="increase"
+  helperMessage="From August 1 to August 18"
+  centerContent
+/>
+```
+
+### 減少のアイコンを表示する
+
+減少のアイコンを表示するには、`StatIcon`の`type`に`decrease`を設定します。
+
+```tsx
+<Wrap gap="md">
+  <Stat
+    label="Total Page Views"
+    number="1,993,818"
+    icon="decrease"
+    helperMessage="21% more than last month"
+  />
+
+  <Stat>
+    <StatLabel>Total Page Views</StatLabel>
+    <StatNumber>1,993,818</StatNumber>
+    <StatHelperMessage>
+      <StatIcon type="decrease" />
+      21% more than last month
+    </StatHelperMessage>
+  </Stat>
+</Wrap>
+```

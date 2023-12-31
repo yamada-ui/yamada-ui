@@ -84,7 +84,7 @@ tab: Props
 <PropsCard
   id="menu-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type='number | Partial<Record<"exit" | "enter", number>>'
   description={"The animation duration."}
 />
 
@@ -257,6 +257,1314 @@ tab: Props
 
 ### MenuListProps
 
+<PropsCard id="menulist-about" name="about" type="string" />
+
+<PropsCard id="menulist-accesskey" name="accessKey" type="string" />
+
+<PropsCard
+  id="menulist-aria-activedescendant"
+  name="aria-activedescendant"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-atomic" name="aria-atomic" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-autocomplete"
+  name="aria-autocomplete"
+  type='"list" | "none" | "inline" | "both"'
+/>
+
+<PropsCard
+  id="menulist-aria-braillelabel"
+  name="aria-braillelabel"
+  type="string"
+/>
+
+<PropsCard
+  id="menulist-aria-brailleroledescription"
+  name="aria-brailleroledescription"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-busy" name="aria-busy" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-checked"
+  name="aria-checked"
+  type='boolean | "true" | "false" | "mixed"'
+/>
+
+<PropsCard id="menulist-aria-colcount" name="aria-colcount" type="number" />
+
+<PropsCard id="menulist-aria-colindex" name="aria-colindex" type="number" />
+
+<PropsCard
+  id="menulist-aria-colindextext"
+  name="aria-colindextext"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-colspan" name="aria-colspan" type="number" />
+
+<PropsCard id="menulist-aria-controls" name="aria-controls" type="string" />
+
+<PropsCard
+  id="menulist-aria-current"
+  name="aria-current"
+  type='type ONLY_FOR_FORMAT =
+  | boolean
+  | "time"
+  | "page"
+  | "true"
+  | "false"
+  | "step"
+  | "location"
+  | "date"'
+/>
+
+<PropsCard
+  id="menulist-aria-describedby"
+  name="aria-describedby"
+  type="string"
+/>
+
+<PropsCard
+  id="menulist-aria-description"
+  name="aria-description"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-details" name="aria-details" type="string" />
+
+<PropsCard id="menulist-aria-disabled" name="aria-disabled" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-dropeffect"
+  name="aria-dropeffect"
+  type='"link" | "none" | "copy" | "execute" | "move" | "popup"'
+/>
+
+<PropsCard
+  id="menulist-aria-errormessage"
+  name="aria-errormessage"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-expanded" name="aria-expanded" type="Booleanish" />
+
+<PropsCard id="menulist-aria-flowto" name="aria-flowto" type="string" />
+
+<PropsCard id="menulist-aria-grabbed" name="aria-grabbed" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-haspopup"
+  name="aria-haspopup"
+  type='type ONLY_FOR_FORMAT =
+  | boolean
+  | "dialog"
+  | "menu"
+  | "grid"
+  | "true"
+  | "false"
+  | "listbox"
+  | "tree"'
+/>
+
+<PropsCard id="menulist-aria-hidden" name="aria-hidden" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-invalid"
+  name="aria-invalid"
+  type='boolean | "true" | "false" | "grammar" | "spelling"'
+/>
+
+<PropsCard
+  id="menulist-aria-keyshortcuts"
+  name="aria-keyshortcuts"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-label" name="aria-label" type="string" />
+
+<PropsCard id="menulist-aria-labelledby" name="aria-labelledby" type="string" />
+
+<PropsCard id="menulist-aria-level" name="aria-level" type="number" />
+
+<PropsCard
+  id="menulist-aria-live"
+  name="aria-live"
+  type='"off" | "assertive" | "polite"'
+/>
+
+<PropsCard id="menulist-aria-modal" name="aria-modal" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-multiline"
+  name="aria-multiline"
+  type="Booleanish"
+/>
+
+<PropsCard
+  id="menulist-aria-multiselectable"
+  name="aria-multiselectable"
+  type="Booleanish"
+/>
+
+<PropsCard
+  id="menulist-aria-orientation"
+  name="aria-orientation"
+  type='"horizontal" | "vertical"'
+/>
+
+<PropsCard id="menulist-aria-owns" name="aria-owns" type="string" />
+
+<PropsCard
+  id="menulist-aria-placeholder"
+  name="aria-placeholder"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-posinset" name="aria-posinset" type="number" />
+
+<PropsCard
+  id="menulist-aria-pressed"
+  name="aria-pressed"
+  type='boolean | "true" | "false" | "mixed"'
+/>
+
+<PropsCard id="menulist-aria-readonly" name="aria-readonly" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-relevant"
+  name="aria-relevant"
+  type='type ONLY_FOR_FORMAT =
+  | "text"
+  | "all"
+  | "additions"
+  | "additions removals"
+  | "additions text"
+  | "removals"
+  | "removals additions"
+  | "removals text"
+  | "text additions"
+  | "text removals"'
+/>
+
+<PropsCard id="menulist-aria-required" name="aria-required" type="Booleanish" />
+
+<PropsCard
+  id="menulist-aria-roledescription"
+  name="aria-roledescription"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-rowcount" name="aria-rowcount" type="number" />
+
+<PropsCard id="menulist-aria-rowindex" name="aria-rowindex" type="number" />
+
+<PropsCard
+  id="menulist-aria-rowindextext"
+  name="aria-rowindextext"
+  type="string"
+/>
+
+<PropsCard id="menulist-aria-rowspan" name="aria-rowspan" type="number" />
+
+<PropsCard id="menulist-aria-selected" name="aria-selected" type="Booleanish" />
+
+<PropsCard id="menulist-aria-setsize" name="aria-setsize" type="number" />
+
+<PropsCard
+  id="menulist-aria-sort"
+  name="aria-sort"
+  type='"none" | "ascending" | "descending" | "other"'
+/>
+
+<PropsCard id="menulist-aria-valuemax" name="aria-valuemax" type="number" />
+
+<PropsCard id="menulist-aria-valuemin" name="aria-valuemin" type="number" />
+
+<PropsCard id="menulist-aria-valuenow" name="aria-valuenow" type="number" />
+
+<PropsCard id="menulist-aria-valuetext" name="aria-valuetext" type="string" />
+
+<PropsCard
+  id="menulist-as"
+  name="as"
+  type='"symbol" | "object" | "base" | "link" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | "b" | "bdi" | "bdo" | "big" | "blockquote" | "body" | "br" | "button" | ... 149 more ... | "view"'
+/>
+
+<PropsCard id="menulist-autocapitalize" name="autoCapitalize" type="string" />
+
+<PropsCard id="menulist-autocorrect" name="autoCorrect" type="string" />
+
+<PropsCard id="menulist-autofocus" name="autoFocus" type="boolean" />
+
+<PropsCard id="menulist-autosave" name="autoSave" type="string" />
+
+<PropsCard id="menulist-classname" name="className" type="string" />
+
+<PropsCard id="menulist-content" name="content" type="string" />
+
+<PropsCard
+  id="menulist-contenteditable"
+  name="contentEditable"
+  type='"inherit" | Booleanish | "plaintext-only"'
+/>
+
+<PropsCard id="menulist-contextmenu" name="contextMenu" type="string" />
+
+<PropsCard
+  id="menulist-dangerouslysetinnerhtml"
+  name="dangerouslySetInnerHTML"
+  type="{ __html: string | TrustedHTML }"
+/>
+
+<PropsCard id="menulist-datatype" name="datatype" type="string" />
+
+<PropsCard id="menulist-defaultchecked" name="defaultChecked" type="boolean" />
+
+<PropsCard
+  id="menulist-defaultvalue"
+  name="defaultValue"
+  type="string | number | readonly string[]"
+/>
+
+<PropsCard id="menulist-dir" name="dir" type="string" />
+
+<PropsCard id="menulist-draggable" name="draggable" type="Booleanish" />
+
+<PropsCard id="menulist-hidden" name="hidden" type="boolean" />
+
+<PropsCard id="menulist-id" name="id" type="string" />
+
+<PropsCard id="menulist-inlist" name="inlist" type="any" />
+
+<PropsCard
+  id="menulist-inputmode"
+  name="inputMode"
+  type='type ONLY_FOR_FORMAT =
+  | "search"
+  | "text"
+  | "none"
+  | "tel"
+  | "url"
+  | "email"
+  | "numeric"
+  | "decimal"'
+/>
+
+<PropsCard id="menulist-is" name="is" type="string" />
+
+<PropsCard id="menulist-itemid" name="itemID" type="string" />
+
+<PropsCard id="menulist-itemprop" name="itemProp" type="string" />
+
+<PropsCard id="menulist-itemref" name="itemRef" type="string" />
+
+<PropsCard id="menulist-itemscope" name="itemScope" type="boolean" />
+
+<PropsCard id="menulist-itemtype" name="itemType" type="string" />
+
+<PropsCard id="menulist-lang" name="lang" type="string" />
+
+<PropsCard id="menulist-nonce" name="nonce" type="string" />
+
+<PropsCard
+  id="menulist-onabort"
+  name="onAbort"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onabortcapture"
+  name="onAbortCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onanimationend"
+  name="onAnimationEnd"
+  type="AnimationEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onanimationendcapture"
+  name="onAnimationEndCapture"
+  type="AnimationEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onanimationiteration"
+  name="onAnimationIteration"
+  type="AnimationEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onanimationiterationcapture"
+  name="onAnimationIterationCapture"
+  type="AnimationEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onanimationstartcapture"
+  name="onAnimationStartCapture"
+  type="AnimationEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onauxclick"
+  name="onAuxClick"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onauxclickcapture"
+  name="onAuxClickCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onbeforeinput"
+  name="onBeforeInput"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onbeforeinputcapture"
+  name="onBeforeInputCapture"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onblur"
+  name="onBlur"
+  type="FocusEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onblurcapture"
+  name="onBlurCapture"
+  type="FocusEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncanplay"
+  name="onCanPlay"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncanplaycapture"
+  name="onCanPlayCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncanplaythrough"
+  name="onCanPlayThrough"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncanplaythroughcapture"
+  name="onCanPlayThroughCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onchange"
+  name="onChange"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onchangecapture"
+  name="onChangeCapture"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onclick"
+  name="onClick"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onclickcapture"
+  name="onClickCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncompositionend"
+  name="onCompositionEnd"
+  type="CompositionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncompositionendcapture"
+  name="onCompositionEndCapture"
+  type="CompositionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncompositionstart"
+  name="onCompositionStart"
+  type="CompositionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncompositionstartcapture"
+  name="onCompositionStartCapture"
+  type="CompositionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncompositionupdate"
+  name="onCompositionUpdate"
+  type="CompositionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncompositionupdatecapture"
+  name="onCompositionUpdateCapture"
+  type="CompositionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncontextmenu"
+  name="onContextMenu"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncontextmenucapture"
+  name="onContextMenuCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncopy"
+  name="onCopy"
+  type="ClipboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncopycapture"
+  name="onCopyCapture"
+  type="ClipboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncut"
+  name="onCut"
+  type="ClipboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oncutcapture"
+  name="onCutCapture"
+  type="ClipboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondoubleclick"
+  name="onDoubleClick"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondoubleclickcapture"
+  name="onDoubleClickCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragcapture"
+  name="onDragCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragendcapture"
+  name="onDragEndCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragenter"
+  name="onDragEnter"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragentercapture"
+  name="onDragEnterCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragexit"
+  name="onDragExit"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragexitcapture"
+  name="onDragExitCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragleave"
+  name="onDragLeave"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragleavecapture"
+  name="onDragLeaveCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragover"
+  name="onDragOver"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragovercapture"
+  name="onDragOverCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondragstartcapture"
+  name="onDragStartCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondrop"
+  name="onDrop"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondropcapture"
+  name="onDropCapture"
+  type="DragEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondurationchange"
+  name="onDurationChange"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ondurationchangecapture"
+  name="onDurationChangeCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onemptied"
+  name="onEmptied"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onemptiedcapture"
+  name="onEmptiedCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onencrypted"
+  name="onEncrypted"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onencryptedcapture"
+  name="onEncryptedCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onended"
+  name="onEnded"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onendedcapture"
+  name="onEndedCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onerror"
+  name="onError"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onerrorcapture"
+  name="onErrorCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onfocus"
+  name="onFocus"
+  type="FocusEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onfocuscapture"
+  name="onFocusCapture"
+  type="FocusEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ongotpointercapture"
+  name="onGotPointerCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ongotpointercapturecapture"
+  name="onGotPointerCaptureCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oninput"
+  name="onInput"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oninputcapture"
+  name="onInputCapture"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oninvalid"
+  name="onInvalid"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-oninvalidcapture"
+  name="onInvalidCapture"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onkeydown"
+  name="onKeyDown"
+  type="KeyboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onkeydowncapture"
+  name="onKeyDownCapture"
+  type="KeyboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onkeypress"
+  name="onKeyPress"
+  type="KeyboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onkeypresscapture"
+  name="onKeyPressCapture"
+  type="KeyboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onkeyup"
+  name="onKeyUp"
+  type="KeyboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onkeyupcapture"
+  name="onKeyUpCapture"
+  type="KeyboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onload"
+  name="onLoad"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadcapture"
+  name="onLoadCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadeddata"
+  name="onLoadedData"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadeddatacapture"
+  name="onLoadedDataCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadedmetadata"
+  name="onLoadedMetadata"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadedmetadatacapture"
+  name="onLoadedMetadataCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadstart"
+  name="onLoadStart"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onloadstartcapture"
+  name="onLoadStartCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onlostpointercapture"
+  name="onLostPointerCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onlostpointercapturecapture"
+  name="onLostPointerCaptureCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmousedown"
+  name="onMouseDown"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmousedowncapture"
+  name="onMouseDownCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseenter"
+  name="onMouseEnter"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseleave"
+  name="onMouseLeave"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmousemove"
+  name="onMouseMove"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmousemovecapture"
+  name="onMouseMoveCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseout"
+  name="onMouseOut"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseoutcapture"
+  name="onMouseOutCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseover"
+  name="onMouseOver"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseovercapture"
+  name="onMouseOverCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseup"
+  name="onMouseUp"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onmouseupcapture"
+  name="onMouseUpCapture"
+  type="MouseEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpaste"
+  name="onPaste"
+  type="ClipboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpastecapture"
+  name="onPasteCapture"
+  type="ClipboardEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpause"
+  name="onPause"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpausecapture"
+  name="onPauseCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onplay"
+  name="onPlay"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onplaycapture"
+  name="onPlayCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onplaying"
+  name="onPlaying"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onplayingcapture"
+  name="onPlayingCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointercancel"
+  name="onPointerCancel"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointercancelcapture"
+  name="onPointerCancelCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerdown"
+  name="onPointerDown"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerdowncapture"
+  name="onPointerDownCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerenter"
+  name="onPointerEnter"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerentercapture"
+  name="onPointerEnterCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerleave"
+  name="onPointerLeave"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerleavecapture"
+  name="onPointerLeaveCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointermove"
+  name="onPointerMove"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointermovecapture"
+  name="onPointerMoveCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerout"
+  name="onPointerOut"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointeroutcapture"
+  name="onPointerOutCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerover"
+  name="onPointerOver"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerovercapture"
+  name="onPointerOverCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerup"
+  name="onPointerUp"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onpointerupcapture"
+  name="onPointerUpCapture"
+  type="PointerEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onprogress"
+  name="onProgress"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onprogresscapture"
+  name="onProgressCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onratechange"
+  name="onRateChange"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onratechangecapture"
+  name="onRateChangeCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onreset"
+  name="onReset"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onresetcapture"
+  name="onResetCapture"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onresize"
+  name="onResize"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onresizecapture"
+  name="onResizeCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onscroll"
+  name="onScroll"
+  type="UIEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onscrollcapture"
+  name="onScrollCapture"
+  type="UIEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onseeked"
+  name="onSeeked"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onseekedcapture"
+  name="onSeekedCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onseeking"
+  name="onSeeking"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onseekingcapture"
+  name="onSeekingCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onselect"
+  name="onSelect"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onselectcapture"
+  name="onSelectCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onstalled"
+  name="onStalled"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onstalledcapture"
+  name="onStalledCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onsubmit"
+  name="onSubmit"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onsubmitcapture"
+  name="onSubmitCapture"
+  type="FormEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onsuspend"
+  name="onSuspend"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onsuspendcapture"
+  name="onSuspendCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontimeupdate"
+  name="onTimeUpdate"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontimeupdatecapture"
+  name="onTimeUpdateCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchcancel"
+  name="onTouchCancel"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchcancelcapture"
+  name="onTouchCancelCapture"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchend"
+  name="onTouchEnd"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchendcapture"
+  name="onTouchEndCapture"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchmove"
+  name="onTouchMove"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchmovecapture"
+  name="onTouchMoveCapture"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchstart"
+  name="onTouchStart"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontouchstartcapture"
+  name="onTouchStartCapture"
+  type="TouchEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontransitionend"
+  name="onTransitionEnd"
+  type="TransitionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-ontransitionendcapture"
+  name="onTransitionEndCapture"
+  type="TransitionEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onvolumechange"
+  name="onVolumeChange"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onvolumechangecapture"
+  name="onVolumeChangeCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onwaiting"
+  name="onWaiting"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onwaitingcapture"
+  name="onWaitingCapture"
+  type="ReactEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onwheel"
+  name="onWheel"
+  type="WheelEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard
+  id="menulist-onwheelcapture"
+  name="onWheelCapture"
+  type="WheelEventHandler<HTMLUListElement>"
+/>
+
+<PropsCard id="menulist-prefix" name="prefix" type="string" />
+
+<PropsCard id="menulist-property" name="property" type="string" />
+
+<PropsCard id="menulist-radiogroup" name="radioGroup" type="string" />
+
+<PropsCard id="menulist-rel" name="rel" type="string" />
+
+<PropsCard id="menulist-resource" name="resource" type="string" />
+
+<PropsCard id="menulist-results" name="results" type="number" />
+
+<PropsCard id="menulist-rev" name="rev" type="string" />
+
+<PropsCard id="menulist-role" name="role" type="AriaRole" />
+
+<PropsCard id="menulist-security" name="security" type="string" />
+
+<PropsCard id="menulist-slot" name="slot" type="string" />
+
+<PropsCard id="menulist-spellcheck" name="spellCheck" type="Booleanish" />
+
+<PropsCard
+  id="menulist-suppresscontenteditablewarning"
+  name="suppressContentEditableWarning"
+  type="boolean"
+/>
+
+<PropsCard
+  id="menulist-suppresshydrationwarning"
+  name="suppressHydrationWarning"
+  type="boolean"
+/>
+
+<PropsCard id="menulist-tabindex" name="tabIndex" type="number" />
+
+<PropsCard id="menulist-title" name="title" type="string" />
+
+<PropsCard id="menulist-translate" name="translate" type='"yes" | "no"' />
+
+<PropsCard id="menulist-typeof" name="typeof" type="string" />
+
+<PropsCard id="menulist-unselectable" name="unselectable" type='"on" | "off"' />
+
+<PropsCard id="menulist-vocab" name="vocab" type="string" />
+
 ### MenuItemProps
 
 <PropsCard
@@ -377,7 +1685,7 @@ tab: Props
 <PropsCard
   id="menuoptiongroup-type"
   name="type"
-  type='"radio" | "checkbox"'
+  type='"checkbox" | "radio"'
   description={"The type of the menu option group."}
   defaultValue={"'checkbox'"}
 />
